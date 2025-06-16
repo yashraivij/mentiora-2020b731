@@ -117,31 +117,51 @@ const Practice = () => {
     };
 
     const subjectTerms = commonTerms[subjectId as keyof typeof commonTerms] || [];
-    const textLower = text.toLowerCase();
+    const textLower = text.toLowerCase().replace(/[^\w\s]/g, ' '); // Remove punctuation for better matching
     
-    // More accurate term matching - check if the term or its variations exist in the text
     return subjectTerms.filter(term => {
       const termLower = term.toLowerCase();
-      // Check for exact matches or partial matches (but not just single letters)
+      // More flexible matching
       return textLower.includes(termLower) || 
-             textLower.includes(termLower.replace(' ', '')) || // handles "activesite" vs "active site"
-             (termLower.includes(' ') && termLower.split(' ').every(word => textLower.includes(word)));
+             textLower.includes(termLower.replace(' ', '')) || // "activesite" vs "active site"
+             textLower.includes(termLower.replace(' ', '-')) || // "active-site"
+             // Check if all words of a multi-word term are present (but not necessarily together)
+             (termLower.includes(' ') && 
+              termLower.split(' ').every(word => 
+                textLower.split(/\s+/).some(textWord => 
+                  textWord.includes(word) || word.includes(textWord)
+                )
+              ));
     });
   };
 
   const calculateKeyTermScore = (modelTerms: string[], userTerms: string[]): number => {
     if (modelTerms.length === 0) return 70;
     
-    // More lenient matching - if user has the key terms, give them credit
+    // Enhanced matching for credit
     const matchedTerms = modelTerms.filter(modelTerm => 
       userTerms.some(userTerm => {
-        const modelLower = modelTerm.toLowerCase();
-        const userLower = userTerm.toLowerCase();
+        const modelLower = modelTerm.toLowerCase().replace(/[^\w\s]/g, ' ');
+        const userLower = userTerm.toLowerCase().replace(/[^\w\s]/g, ' ');
+        
+        // Multiple matching strategies
         return modelLower === userLower || 
                modelLower.includes(userLower) || 
                userLower.includes(modelLower) ||
-               // Handle compound terms like "active site"
-               (modelLower.includes(' ') && modelLower.split(' ').every(word => userLower.includes(word)));
+               // Handle compound terms more flexibly
+               (modelLower.includes(' ') && 
+                modelLower.split(' ').every(word => 
+                  userLower.split(/\s+/).some(userWord => 
+                    userWord.includes(word) || word.includes(userWord) ||
+                    // Handle partial matches for longer words
+                    (word.length > 4 && userWord.length > 4 && 
+                     (word.includes(userWord.slice(0, -1)) || userWord.includes(word.slice(0, -1))))
+                  )
+                )) ||
+               // Handle variations like "site" vs "sites", "enzyme" vs "enzymes"
+               (Math.abs(modelLower.length - userLower.length) <= 2 && 
+                (modelLower.startsWith(userLower.slice(0, -1)) || 
+                 userLower.startsWith(modelLower.slice(0, -1))));
       })
     );
     
@@ -240,33 +260,53 @@ const Practice = () => {
     userTerms: string[]
   ): string => {
     // Improved logic to only suggest terms that are actually missing
-    const answerLower = answer.toLowerCase();
+    const answerLower = answer.toLowerCase().replace(/[^\w\s]/g, ' ');
     const actuallyMissedTerms = modelTerms.filter(term => {
-      const termLower = term.toLowerCase();
-      return !answerLower.includes(termLower) && 
-             !answerLower.includes(termLower.replace(' ', '')) &&
-             !(termLower.includes(' ') && termLower.split(' ').every(word => answerLower.includes(word)));
+      const termLower = term.toLowerCase().replace(/[^\w\s]/g, ' ');
+      
+      // Comprehensive checking - only consider a term "missed" if it's truly not there
+      const isPresent = answerLower.includes(termLower) || 
+                       answerLower.includes(termLower.replace(' ', '')) ||
+                       answerLower.includes(termLower.replace(' ', '-')) ||
+                       // Check if all parts of multi-word terms are present
+                       (termLower.includes(' ') && 
+                        termLower.split(' ').every(word => 
+                          answerLower.split(/\s+/).some(answerWord => 
+                            answerWord.includes(word) || word.includes(answerWord) ||
+                            // Handle plurals and variations
+                            (Math.abs(word.length - answerWord.length) <= 2 && 
+                             (word.startsWith(answerWord.slice(0, -1)) || 
+                              answerWord.startsWith(word.slice(0, -1))))
+                          )
+                        )) ||
+                       // Check for synonyms or related terms
+                       (term === 'active site' && (answerLower.includes('binding site') || answerLower.includes('catalytic site'))) ||
+                       (term === 'substrate' && answerLower.includes('reactant')) ||
+                       (term === 'catalyst' && (answerLower.includes('speed up') || answerLower.includes('accelerate'))) ||
+                       (term === 'concentration gradient' && (answerLower.includes('concentration difference') || answerLower.includes('gradient')));
+      
+      return !isPresent;
     });
     
     if (score >= 85) {
       return `Excellent answer! You demonstrated strong understanding of the key concepts. ${
-        actuallyMissedTerms.length > 0 ? `Consider including: ${actuallyMissedTerms.slice(0, 2).join(', ')} for even more precision.` : 'Your answer covers all the essential points well.'
+        actuallyMissedTerms.length > 0 ? `To make it even better, consider being more explicit about: ${actuallyMissedTerms.slice(0, 2).join(', ')}.` : 'Your answer covers all the essential points comprehensively.'
       }`;
     } else if (score >= 70) {
-      return `Good answer with solid understanding. To improve: ${
-        actuallyMissedTerms.length > 0 ? `Include key terms like: ${actuallyMissedTerms.slice(0, 3).join(', ')}. ` : ''
-      }Provide more specific examples and clearer explanations.`;
+      return `Good answer with solid understanding. ${
+        actuallyMissedTerms.length > 0 ? `To improve further, make sure to explicitly mention: ${actuallyMissedTerms.slice(0, 2).join(', ')}. ` : ''
+      }Consider adding more specific examples and clearer explanations of the mechanisms involved.`;
     } else if (score >= 50) {
-      return `Partial understanding shown. Your answer needs: ${
-        actuallyMissedTerms.length > 0 ? `Essential terms: ${actuallyMissedTerms.slice(0, 3).join(', ')}. ` : ''
-      }More detailed explanations and better structure. Focus on the specific question being asked.`;
+      return `Partial understanding shown. Your answer would benefit from: ${
+        actuallyMissedTerms.length > 0 ? `Key scientific terms: ${actuallyMissedTerms.slice(0, 3).join(', ')}. ` : ''
+      }More detailed explanations of the underlying processes and clearer structure.`;
     } else if (score >= 25) {
-      return `Limited understanding demonstrated. Your answer lacks key scientific concepts and terminology. ${
-        actuallyMissedTerms.length > 0 ? `Must include: ${actuallyMissedTerms.slice(0, 4).join(', ')}. ` : ''
-      }Review the topic thoroughly and practice explaining concepts clearly.`;
+      return `Limited understanding demonstrated. ${
+        actuallyMissedTerms.length > 0 ? `Essential terms missing: ${actuallyMissedTerms.slice(0, 4).join(', ')}. ` : ''
+      }Focus on understanding the fundamental concepts and using precise scientific vocabulary.`;
     } else {
       return `Answer shows minimal understanding. ${
-        answer.trim() ? 'Review the topic content and focus on key scientific principles, terminology, and clear explanations.' : 'No answer provided - you must attempt to answer to receive marks.'
+        answer.trim() ? 'Review the topic thoroughly and focus on key scientific principles, accurate terminology, and clear explanations of processes.' : 'No answer provided - you must attempt to answer to receive marks.'
       }`;
     }
   };
