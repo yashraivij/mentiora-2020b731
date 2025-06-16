@@ -72,16 +72,19 @@ const Practice = () => {
     const structureScore = calculateStructureScore(answer, question.marks);
     const accuracyScore = calculateAccuracyScore(question, answer, subjectId!);
     
-    // Weight the scores appropriately
-    const finalScore = Math.round(
+    // Weight the scores appropriately and convert to marks
+    const percentageScore = Math.round(
       (keyTermScore * 0.3) +
       (conceptualScore * 0.4) +
       (structureScore * 0.15) +
       (accuracyScore * 0.15)
     );
     
+    // Convert percentage to actual marks out of total
+    const marksAwarded = Math.round((percentageScore / 100) * question.marks);
+    
     // Generate detailed feedback based on performance
-    const feedback = generateDetailedFeedback(question, answer, finalScore, keyTerms, userKeyTerms);
+    const feedback = generateDetailedFeedback(question, answer, percentageScore, keyTerms, userKeyTerms);
     
     return {
       modelAnswer: question.modelAnswer,
@@ -262,13 +265,13 @@ const Practice = () => {
     try {
       const feedback = await simulateAIMarking(currentQuestion, userAnswer);
       
-      // Calculate score based on the enhanced marking logic
-      const score = await calculateEnhancedScore(currentQuestion, userAnswer);
+      // Calculate marks awarded out of total marks
+      const marksAwarded = await calculateMarksAwarded(currentQuestion, userAnswer);
       
       const attempt: QuestionAttempt = {
         questionId: currentQuestion.id,
         userAnswer,
-        score,
+        score: marksAwarded,
         feedback
       };
       
@@ -282,7 +285,7 @@ const Practice = () => {
     }
   };
 
-  const calculateEnhancedScore = async (question: Question, answer: string): Promise<number> => {
+  const calculateMarksAwarded = async (question: Question, answer: string): Promise<number> => {
     if (!answer.trim()) return 0;
 
     const keyTerms = extractKeyTerms(question.modelAnswer, subjectId!);
@@ -293,12 +296,15 @@ const Practice = () => {
     const structureScore = calculateStructureScore(answer, question.marks);
     const accuracyScore = calculateAccuracyScore(question, answer, subjectId!);
     
-    return Math.round(
+    const percentageScore = Math.round(
       (keyTermScore * 0.3) +
       (conceptualScore * 0.4) +
       (structureScore * 0.15) +
       (accuracyScore * 0.15)
     );
+    
+    // Convert percentage to actual marks out of total
+    return Math.round((percentageScore / 100) * question.marks);
   };
 
   const handleNextQuestion = () => {
@@ -312,7 +318,9 @@ const Practice = () => {
   };
 
   const finishSession = () => {
-    const averageScore = attempts.reduce((sum, a) => sum + a.score, 0) / attempts.length;
+    const totalMarks = attempts.reduce((sum, a) => sum + currentQuestion.marks, 0);
+    const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
+    const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
     
     // Save progress
     const progressKey = `mentiora_progress_${user?.id}`;
@@ -325,7 +333,7 @@ const Practice = () => {
     if (topicProgressIndex >= 0) {
       existingProgress[topicProgressIndex].attempts += 1;
       existingProgress[topicProgressIndex].averageScore = Math.round(
-        (existingProgress[topicProgressIndex].averageScore + averageScore) / 2
+        (existingProgress[topicProgressIndex].averageScore + averagePercentage) / 2
       );
       existingProgress[topicProgressIndex].lastAttempt = new Date();
     } else {
@@ -333,7 +341,7 @@ const Practice = () => {
         subjectId,
         topicId,
         attempts: 1,
-        averageScore: Math.round(averageScore),
+        averageScore: Math.round(averagePercentage),
         lastAttempt: new Date()
       });
     }
@@ -341,7 +349,7 @@ const Practice = () => {
     localStorage.setItem(progressKey, JSON.stringify(existingProgress));
     
     // Handle weak topics
-    if (averageScore < 85) {
+    if (averagePercentage < 85) {
       const weakTopicsKey = `mentiora_weak_topics_${user?.id}`;
       const weakTopics = JSON.parse(localStorage.getItem(weakTopicsKey) || '[]');
       if (!weakTopics.includes(topicId)) {
@@ -360,7 +368,9 @@ const Practice = () => {
   };
 
   if (sessionComplete) {
-    const averageScore = attempts.reduce((sum, a) => sum + a.score, 0) / attempts.length;
+    const totalMarks = attempts.reduce((sum, a) => sum + currentQuestion.marks, 0);
+    const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
+    const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
     
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
@@ -375,9 +385,9 @@ const Practice = () => {
           <CardContent className="text-center space-y-4">
             <div>
               <div className="text-4xl font-bold text-green-600 mb-2">
-                {Math.round(averageScore)}%
+                {marksEarned}/{totalMarks}
               </div>
-              <p className="text-slate-600">Average Score</p>
+              <p className="text-slate-600">Total Marks</p>
             </div>
             
             <div className="space-y-2">
@@ -387,8 +397,8 @@ const Practice = () => {
               </div>
               <div className="flex justify-between">
                 <span>Performance:</span>
-                <Badge className={averageScore >= 85 ? "bg-green-500" : averageScore >= 60 ? "bg-yellow-500" : "bg-red-500"}>
-                  {averageScore >= 85 ? "Excellent" : averageScore >= 60 ? "Good" : "Needs Work"}
+                <Badge className={averagePercentage >= 85 ? "bg-green-500" : averagePercentage >= 60 ? "bg-yellow-500" : "bg-red-500"}>
+                  {averagePercentage >= 85 ? "Excellent" : averagePercentage >= 60 ? "Good" : "Needs Work"}
                 </Badge>
               </div>
             </div>
@@ -501,10 +511,11 @@ const Practice = () => {
                   </CardTitle>
                   <div className="flex items-center space-x-2">
                     <span className="text-2xl font-bold text-green-600">
-                      {currentAttempt.score}%
+                      {currentAttempt.score}/{currentQuestion.marks}
                     </span>
-                    <Badge className={currentAttempt.score >= 85 ? "bg-green-500" : currentAttempt.score >= 60 ? "bg-yellow-500" : "bg-red-500"}>
-                      {currentAttempt.score >= 85 ? "Excellent" : currentAttempt.score >= 60 ? "Good" : "Needs Work"}
+                    <span className="text-sm text-slate-600">marks</span>
+                    <Badge className={currentAttempt.score >= currentQuestion.marks * 0.85 ? "bg-green-500" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "bg-yellow-500" : "bg-red-500"}>
+                      {currentAttempt.score >= currentQuestion.marks * 0.85 ? "Excellent" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "Good" : "Needs Work"}
                     </Badge>
                   </div>
                 </CardHeader>
