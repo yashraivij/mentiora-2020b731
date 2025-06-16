@@ -117,20 +117,32 @@ const Practice = () => {
     };
 
     const subjectTerms = commonTerms[subjectId as keyof typeof commonTerms] || [];
-    const words = text.toLowerCase().split(/\s+/);
+    const textLower = text.toLowerCase();
     
-    return subjectTerms.filter(term => 
-      words.some(word => word.includes(term) || term.includes(word))
-    );
+    // More accurate term matching - check if the term or its variations exist in the text
+    return subjectTerms.filter(term => {
+      const termLower = term.toLowerCase();
+      // Check for exact matches or partial matches (but not just single letters)
+      return textLower.includes(termLower) || 
+             textLower.includes(termLower.replace(' ', '')) || // handles "activesite" vs "active site"
+             (termLower.includes(' ') && termLower.split(' ').every(word => textLower.includes(word)));
+    });
   };
 
   const calculateKeyTermScore = (modelTerms: string[], userTerms: string[]): number => {
     if (modelTerms.length === 0) return 70;
     
-    const matchedTerms = modelTerms.filter(term => 
-      userTerms.some(userTerm => 
-        userTerm.includes(term) || term.includes(userTerm)
-      )
+    // More lenient matching - if user has the key terms, give them credit
+    const matchedTerms = modelTerms.filter(modelTerm => 
+      userTerms.some(userTerm => {
+        const modelLower = modelTerm.toLowerCase();
+        const userLower = userTerm.toLowerCase();
+        return modelLower === userLower || 
+               modelLower.includes(userLower) || 
+               userLower.includes(modelLower) ||
+               // Handle compound terms like "active site"
+               (modelLower.includes(' ') && modelLower.split(' ').every(word => userLower.includes(word)));
+      })
     );
     
     return Math.min((matchedTerms.length / modelTerms.length) * 100, 100);
@@ -227,25 +239,30 @@ const Practice = () => {
     modelTerms: string[], 
     userTerms: string[]
   ): string => {
-    const missedTerms = modelTerms.filter(term => 
-      !userTerms.some(userTerm => userTerm.includes(term) || term.includes(userTerm))
-    );
+    // Improved logic to only suggest terms that are actually missing
+    const answerLower = answer.toLowerCase();
+    const actuallyMissedTerms = modelTerms.filter(term => {
+      const termLower = term.toLowerCase();
+      return !answerLower.includes(termLower) && 
+             !answerLower.includes(termLower.replace(' ', '')) &&
+             !(termLower.includes(' ') && termLower.split(' ').every(word => answerLower.includes(word)));
+    });
     
     if (score >= 85) {
       return `Excellent answer! You demonstrated strong understanding of the key concepts. ${
-        missedTerms.length > 0 ? `Consider including: ${missedTerms.slice(0, 2).join(', ')} for even more precision.` : ''
+        actuallyMissedTerms.length > 0 ? `Consider including: ${actuallyMissedTerms.slice(0, 2).join(', ')} for even more precision.` : 'Your answer covers all the essential points well.'
       }`;
     } else if (score >= 70) {
       return `Good answer with solid understanding. To improve: ${
-        missedTerms.length > 0 ? `Include key terms like: ${missedTerms.slice(0, 3).join(', ')}. ` : ''
+        actuallyMissedTerms.length > 0 ? `Include key terms like: ${actuallyMissedTerms.slice(0, 3).join(', ')}. ` : ''
       }Provide more specific examples and clearer explanations.`;
     } else if (score >= 50) {
       return `Partial understanding shown. Your answer needs: ${
-        missedTerms.length > 0 ? `Essential terms: ${missedTerms.slice(0, 3).join(', ')}. ` : ''
+        actuallyMissedTerms.length > 0 ? `Essential terms: ${actuallyMissedTerms.slice(0, 3).join(', ')}. ` : ''
       }More detailed explanations and better structure. Focus on the specific question being asked.`;
     } else if (score >= 25) {
       return `Limited understanding demonstrated. Your answer lacks key scientific concepts and terminology. ${
-        missedTerms.length > 0 ? `Must include: ${missedTerms.slice(0, 4).join(', ')}. ` : ''
+        actuallyMissedTerms.length > 0 ? `Must include: ${actuallyMissedTerms.slice(0, 4).join(', ')}. ` : ''
       }Review the topic thoroughly and practice explaining concepts clearly.`;
     } else {
       return `Answer shows minimal understanding. ${
