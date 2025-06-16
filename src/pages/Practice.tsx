@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -50,35 +49,206 @@ const Practice = () => {
     // Simulate AI processing time
     await new Promise(resolve => setTimeout(resolve, 1500));
     
-    // Simple scoring logic based on keywords and length
-    const keywords = question.modelAnswer.toLowerCase().split(' ');
-    const userWords = answer.toLowerCase().split(' ');
-    const matchedKeywords = keywords.filter(keyword => 
-      userWords.some(word => word.includes(keyword) || keyword.includes(word))
-    );
-    
-    const keywordScore = Math.min((matchedKeywords.length / keywords.length) * 100, 100);
-    const lengthScore = Math.min((answer.length / question.modelAnswer.length) * 100, 100);
-    const finalScore = Math.round((keywordScore * 0.7 + lengthScore * 0.3));
-    
-    // Generate feedback based on score
-    let whyThisGetsMark = question.markingCriteria.breakdown.join('\n');
-    let whyYoursDidnt = "";
-    
-    if (finalScore < 50) {
-      whyYoursDidnt = "Your answer lacked key scientific terminology and detailed explanations required for full marks.";
-    } else if (finalScore < 85) {
-      whyYoursDidnt = "Your answer included some correct points but missed some key details or used imprecise language.";
-    } else {
-      whyYoursDidnt = "Good answer! Minor improvements could include more specific examples or clearer explanations.";
+    if (!answer.trim()) {
+      return {
+        modelAnswer: question.modelAnswer,
+        whyThisGetsMark: question.markingCriteria.breakdown.join('\n'),
+        whyYoursDidnt: "No answer provided - cannot award any marks.",
+        specLink: question.specReference
+      };
     }
 
+    // Enhanced marking logic based on key concepts and scientific accuracy
+    const modelWords = question.modelAnswer.toLowerCase().split(/\s+/);
+    const userWords = answer.toLowerCase().split(/\s+/);
+    
+    // Extract key scientific terms and concepts from model answer
+    const keyTerms = extractKeyTerms(question.modelAnswer, subjectId!);
+    const userKeyTerms = extractKeyTerms(answer, subjectId!);
+    
+    // Calculate different scoring components
+    const keyTermScore = calculateKeyTermScore(keyTerms, userKeyTerms);
+    const conceptualScore = calculateConceptualScore(question, answer, subjectId!);
+    const structureScore = calculateStructureScore(answer, question.marks);
+    const accuracyScore = calculateAccuracyScore(question, answer, subjectId!);
+    
+    // Weight the scores appropriately
+    const finalScore = Math.round(
+      (keyTermScore * 0.3) +
+      (conceptualScore * 0.4) +
+      (structureScore * 0.15) +
+      (accuracyScore * 0.15)
+    );
+    
+    // Generate detailed feedback based on performance
+    const feedback = generateDetailedFeedback(question, answer, finalScore, keyTerms, userKeyTerms);
+    
     return {
       modelAnswer: question.modelAnswer,
-      whyThisGetsMark,
-      whyYoursDidnt,
+      whyThisGetsMark: question.markingCriteria.breakdown.join('\n'),
+      whyYoursDidnt: feedback,
       specLink: question.specReference
     };
+  };
+
+  const extractKeyTerms = (text: string, subjectId: string): string[] => {
+    const commonTerms = {
+      biology: [
+        'osmosis', 'diffusion', 'enzyme', 'catalyst', 'active site', 'substrate',
+        'mitochondria', 'nucleus', 'membrane', 'cell wall', 'photosynthesis',
+        'respiration', 'glucose', 'oxygen', 'carbon dioxide', 'water potential',
+        'concentration gradient', 'partially permeable', 'energy', 'ATP',
+        'antibody', 'antigen', 'phagocyte', 'lymphocyte', 'pathogen'
+      ],
+      chemistry: [
+        'atom', 'proton', 'neutron', 'electron', 'nucleus', 'shell', 'orbital',
+        'ionic', 'covalent', 'metallic', 'bond', 'molecule', 'compound',
+        'element', 'periodic table', 'mass number', 'atomic number',
+        'electrostatic', 'melting point', 'boiling point', 'relative formula mass'
+      ],
+      maths: [
+        'fraction', 'decimal', 'percentage', 'ratio', 'proportion', 'equation',
+        'solve', 'simplify', 'multiply', 'divide', 'area', 'perimeter',
+        'probability', 'outcome', 'formula', 'substitute', 'rearrange'
+      ]
+    };
+
+    const subjectTerms = commonTerms[subjectId as keyof typeof commonTerms] || [];
+    const words = text.toLowerCase().split(/\s+/);
+    
+    return subjectTerms.filter(term => 
+      words.some(word => word.includes(term) || term.includes(word))
+    );
+  };
+
+  const calculateKeyTermScore = (modelTerms: string[], userTerms: string[]): number => {
+    if (modelTerms.length === 0) return 70;
+    
+    const matchedTerms = modelTerms.filter(term => 
+      userTerms.some(userTerm => 
+        userTerm.includes(term) || term.includes(userTerm)
+      )
+    );
+    
+    return Math.min((matchedTerms.length / modelTerms.length) * 100, 100);
+  };
+
+  const calculateConceptualScore = (question: Question, answer: string, subjectId: string): number => {
+    const answerLower = answer.toLowerCase();
+    
+    // Subject-specific conceptual checking
+    if (subjectId === 'biology') {
+      if (question.question.toLowerCase().includes('osmosis')) {
+        const hasWaterMovement = answerLower.includes('water') && (answerLower.includes('move') || answerLower.includes('transport'));
+        const hasMembrane = answerLower.includes('membrane') || answerLower.includes('permeable');
+        const hasConcentration = answerLower.includes('concentration') || answerLower.includes('potential');
+        
+        return (hasWaterMovement ? 30 : 0) + (hasMembrane ? 35 : 0) + (hasConcentration ? 35 : 0);
+      }
+      
+      if (question.question.toLowerCase().includes('enzyme')) {
+        const hasCatalyst = answerLower.includes('catalyst') || answerLower.includes('speed');
+        const hasActiveSite = answerLower.includes('active site') || answerLower.includes('specific');
+        const hasSubstrate = answerLower.includes('substrate');
+        
+        return (hasCatalyst ? 40 : 0) + (hasActiveSite ? 30 : 0) + (hasSubstrate ? 30 : 0);
+      }
+    }
+    
+    if (subjectId === 'chemistry') {
+      if (question.question.toLowerCase().includes('ionic')) {
+        const hasElectrons = answerLower.includes('electron') || answerLower.includes('charge');
+        const hasAttraction = answerLower.includes('attraction') || answerLower.includes('electrostatic');
+        const hasIons = answerLower.includes('ion') || answerLower.includes('positive') || answerLower.includes('negative');
+        
+        return (hasElectrons ? 35 : 0) + (hasAttraction ? 35 : 0) + (hasIons ? 30 : 0);
+      }
+    }
+    
+    if (subjectId === 'maths') {
+      if (question.question.toLowerCase().includes('solve')) {
+        const hasMethod = answerLower.includes('=') || answerLower.includes('equation');
+        const hasSteps = answer.split('\n').length > 1 || answer.includes(',');
+        
+        return (hasMethod ? 60 : 0) + (hasSteps ? 40 : 0);
+      }
+    }
+    
+    // General conceptual understanding (fallback)
+    const answerLength = answer.split(' ').length;
+    if (answerLength < 5) return 20;
+    if (answerLength < 15) return 50;
+    return 70;
+  };
+
+  const calculateStructureScore = (answer: string, maxMarks: number): number => {
+    const sentences = answer.split(/[.!?]+/).filter(s => s.trim().length > 0);
+    const expectedSentences = Math.max(maxMarks, 2);
+    
+    if (sentences.length === 0) return 0;
+    if (sentences.length >= expectedSentences) return 100;
+    
+    return (sentences.length / expectedSentences) * 100;
+  };
+
+  const calculateAccuracyScore = (question: Question, answer: string, subjectId: string): number => {
+    const answerLower = answer.toLowerCase();
+    
+    // Check for common misconceptions or errors
+    const commonErrors = {
+      biology: ['plants breathe', 'oxygen goes in', 'carbon dioxide comes out during photosynthesis'],
+      chemistry: ['atoms can be split in chemical reactions', 'ionic bonds are weak'],
+      maths: ['probability can be greater than 1', 'divide by zero']
+    };
+    
+    const subjectErrors = commonErrors[subjectId as keyof typeof commonErrors] || [];
+    const hasErrors = subjectErrors.some(error => answerLower.includes(error.toLowerCase()));
+    
+    if (hasErrors) return 20;
+    
+    // Check if answer is relevant to the question
+    const questionWords = question.question.toLowerCase().split(' ');
+    const relevantWords = questionWords.filter(word => 
+      word.length > 3 && answerLower.includes(word)
+    );
+    
+    const relevanceScore = Math.min((relevantWords.length / Math.max(questionWords.length * 0.3, 1)) * 100, 100);
+    
+    return Math.max(relevanceScore, 60); // Minimum 60% if no major errors
+  };
+
+  const generateDetailedFeedback = (
+    question: Question, 
+    answer: string, 
+    score: number, 
+    modelTerms: string[], 
+    userTerms: string[]
+  ): string => {
+    const missedTerms = modelTerms.filter(term => 
+      !userTerms.some(userTerm => userTerm.includes(term) || term.includes(userTerm))
+    );
+    
+    if (score >= 85) {
+      return `Excellent answer! You demonstrated strong understanding of the key concepts. ${
+        missedTerms.length > 0 ? `Consider including: ${missedTerms.slice(0, 2).join(', ')} for even more precision.` : ''
+      }`;
+    } else if (score >= 70) {
+      return `Good answer with solid understanding. To improve: ${
+        missedTerms.length > 0 ? `Include key terms like: ${missedTerms.slice(0, 3).join(', ')}. ` : ''
+      }Provide more specific examples and clearer explanations.`;
+    } else if (score >= 50) {
+      return `Partial understanding shown. Your answer needs: ${
+        missedTerms.length > 0 ? `Essential terms: ${missedTerms.slice(0, 3).join(', ')}. ` : ''
+      }More detailed explanations and better structure. Focus on the specific question being asked.`;
+    } else if (score >= 25) {
+      return `Limited understanding demonstrated. Your answer lacks key scientific concepts and terminology. ${
+        missedTerms.length > 0 ? `Must include: ${missedTerms.slice(0, 4).join(', ')}. ` : ''
+      }Review the topic thoroughly and practice explaining concepts clearly.`;
+    } else {
+      return `Answer shows minimal understanding. ${
+        answer.trim() ? 'Review the topic content and focus on key scientific principles, terminology, and clear explanations.' : 'No answer provided - you must attempt to answer to receive marks.'
+      }`;
+    }
   };
 
   const handleSubmitAnswer = async () => {
@@ -92,10 +262,8 @@ const Practice = () => {
     try {
       const feedback = await simulateAIMarking(currentQuestion, userAnswer);
       
-      // Calculate score based on answer quality
-      const score = Math.max(20, Math.min(100, 
-        Math.round((userAnswer.length / currentQuestion.modelAnswer.length) * 85)
-      ));
+      // Calculate score based on the enhanced marking logic
+      const score = await calculateEnhancedScore(currentQuestion, userAnswer);
       
       const attempt: QuestionAttempt = {
         questionId: currentQuestion.id,
@@ -112,6 +280,25 @@ const Practice = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const calculateEnhancedScore = async (question: Question, answer: string): Promise<number> => {
+    if (!answer.trim()) return 0;
+
+    const keyTerms = extractKeyTerms(question.modelAnswer, subjectId!);
+    const userKeyTerms = extractKeyTerms(answer, subjectId!);
+    
+    const keyTermScore = calculateKeyTermScore(keyTerms, userKeyTerms);
+    const conceptualScore = calculateConceptualScore(question, answer, subjectId!);
+    const structureScore = calculateStructureScore(answer, question.marks);
+    const accuracyScore = calculateAccuracyScore(question, answer, subjectId!);
+    
+    return Math.round(
+      (keyTermScore * 0.3) +
+      (conceptualScore * 0.4) +
+      (structureScore * 0.15) +
+      (accuracyScore * 0.15)
+    );
   };
 
   const handleNextQuestion = () => {
