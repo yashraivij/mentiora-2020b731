@@ -318,7 +318,7 @@ const Practice = () => {
   };
 
   const finishSession = () => {
-    const totalMarks = attempts.reduce((sum, a) => sum + currentQuestion.marks, 0);
+    const totalMarks = questions.reduce((sum, q) => sum + q.marks, 0);
     const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
     const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
     
@@ -368,7 +368,7 @@ const Practice = () => {
   };
 
   if (sessionComplete) {
-    const totalMarks = attempts.reduce((sum, a) => sum + currentQuestion.marks, 0);
+    const totalMarks = questions.reduce((sum, q) => sum + q.marks, 0);
     const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
     const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
     
