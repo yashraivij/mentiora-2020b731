@@ -156,17 +156,22 @@ const Dashboard = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-3">
                 {weakTopics.map((topicId) => {
-                  const topic = curriculum
-                    .flatMap(s => s.topics)
-                    .find(t => t.id === topicId);
-                  if (!topic) return null;
+                  const subject = curriculum.find(s => 
+                    s.topics.some(t => t.id === topicId)
+                  );
+                  const topic = subject?.topics.find(t => t.id === topicId);
+                  if (!topic || !subject) return null;
                   
                   return (
-                    <Badge key={topicId} variant="destructive">
-                      {topic.name}
-                    </Badge>
+                    <div key={topicId} className="flex items-center space-x-2">
+                      <div className={`w-3 h-3 rounded-full ${subject.color}`}></div>
+                      <Badge variant="destructive" className="flex items-center space-x-1">
+                        <span className="text-xs text-red-100">{subject.name}:</span>
+                        <span>{topic.name}</span>
+                      </Badge>
+                    </div>
                   );
                 })}
               </div>
