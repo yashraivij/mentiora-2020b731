@@ -1,16 +1,16 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
-import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin } from "lucide-react";
+import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { ProgressCard } from "@/components/dashboard/ProgressCard";
 import { SubjectCard } from "@/components/dashboard/SubjectCard";
 import { WeakTopicsSection } from "@/components/dashboard/WeakTopicsSection";
 import { AOBreakdown } from "@/components/dashboard/AOBreakdown";
+import { PremiumAnalyticsCard } from "@/components/dashboard/PremiumAnalyticsCard";
 
 interface UserProgress {
   subjectId: string;
@@ -29,7 +29,6 @@ const Dashboard = () => {
   const [sortBy, setSortBy] = useState<'alphabetical' | 'weakest' | 'progress'>('progress');
 
   useEffect(() => {
-    // Load user progress from localStorage
     const savedProgress = localStorage.getItem(`mentiora_progress_${user?.id}`);
     const savedWeakTopics = localStorage.getItem(`mentiora_weak_topics_${user?.id}`);
     const savedPinnedSubjects = localStorage.getItem(`mentiora_pinned_subjects_${user?.id}`);
@@ -81,11 +80,9 @@ const Dashboard = () => {
     const isPinnedA = pinnedSubjects.includes(a.id);
     const isPinnedB = pinnedSubjects.includes(b.id);
     
-    // Pinned subjects always come first
     if (isPinnedA && !isPinnedB) return -1;
     if (!isPinnedA && isPinnedB) return 1;
     
-    // Then sort by selected criteria
     switch (sortBy) {
       case 'alphabetical':
         return a.name.localeCompare(b.name);
@@ -121,24 +118,36 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white border-b border-slate-100 sticky top-0 z-50 backdrop-blur-xl bg-white/80">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
+      {/* Premium Header with Glassmorphism */}
+      <header className="bg-white/80 backdrop-blur-xl border-b border-slate-200/50 sticky top-0 z-50 shadow-lg shadow-slate-900/5">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-slate-900 rounded-xl"></div>
-                <h1 className="text-2xl font-semibold text-slate-900">Mentiora</h1>
+                <div className="w-10 h-10 bg-gradient-to-br from-slate-900 to-slate-700 rounded-2xl flex items-center justify-center shadow-lg">
+                  <Sparkles className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+                    Mentiora
+                  </h1>
+                  <div className="flex items-center space-x-2">
+                    <Crown className="h-3 w-3 text-amber-500" />
+                    <span className="text-xs font-medium text-slate-500">Premium</span>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              <Button variant="ghost" onClick={() => navigate('/analytics')} className="text-slate-600 hover:text-slate-900">
+              <Button variant="ghost" onClick={() => navigate('/analytics')} className="text-slate-600 hover:text-slate-900 hover:bg-slate-100/80">
                 <BarChart3 className="h-4 w-4 mr-2" />
                 Analytics
               </Button>
-              <div className="flex items-center space-x-2 px-3 py-2 bg-slate-50 rounded-xl">
-                <User className="h-4 w-4 text-slate-500" />
+              <div className="flex items-center space-x-2 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-2xl border border-slate-200/50 shadow-sm">
+                <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                  <User className="h-3 w-3 text-white" />
+                </div>
                 <span className="text-sm font-medium text-slate-700">{user?.name}</span>
               </div>
               <Button variant="ghost" onClick={handleLogout} className="text-slate-600 hover:text-slate-900">
@@ -149,32 +158,39 @@ const Dashboard = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-6 max-w-7xl">
-        {/* Welcome Section - More Compact */}
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold text-slate-900 mb-1">
-            Good morning, {user?.name}
-          </h2>
-          <p className="text-slate-600">Ready to continue your GCSE revision journey?</p>
+      <div className="container mx-auto px-6 py-8 max-w-7xl">
+        {/* Premium Welcome Section */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-3xl font-bold text-slate-900 mb-2">
+                Good morning, {user?.name}
+              </h2>
+              <p className="text-slate-600 text-lg">Ready to elevate your GCSE revision journey?</p>
+            </div>
+            <div className="hidden md:flex items-center space-x-3 px-4 py-2 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-2xl border border-emerald-200/50">
+              <Zap className="h-4 w-4 text-emerald-600" />
+              <span className="text-sm font-medium text-emerald-700">AI-Powered Insights</span>
+            </div>
+          </div>
         </div>
 
-        {/* Subjects Section - Moved to Top */}
-        <div className="mb-6">
-          {/* Subject Controls */}
-          <div className="flex items-center justify-between mb-4">
+        {/* Subjects Section */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-4">
-              <h3 className="text-xl font-semibold text-slate-900">Your Subjects</h3>
-              <Badge variant="outline" className="text-slate-500 border-slate-200">
+              <h3 className="text-2xl font-bold text-slate-900">Your Subjects</h3>
+              <Badge variant="outline" className="text-slate-500 border-slate-300 bg-white/50">
                 {curriculum.length} subjects
               </Badge>
             </div>
-            <div className="flex items-center space-x-2">
-              <div className="flex items-center space-x-1 bg-slate-50 rounded-xl p-1">
+            <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-1 bg-white/80 backdrop-blur-sm rounded-2xl p-1.5 border border-slate-200/50 shadow-sm">
                 <Button
                   variant={sortBy === 'progress' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setSortBy('progress')}
-                  className={sortBy === 'progress' ? 'bg-white shadow-sm' : 'text-slate-600'}
+                  className={sortBy === 'progress' ? 'bg-slate-900 text-white shadow-md' : 'text-slate-600 hover:bg-slate-100'}
                 >
                   Progress
                 </Button>
@@ -182,7 +198,7 @@ const Dashboard = () => {
                   variant={sortBy === 'weakest' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setSortBy('weakest')}
-                  className={sortBy === 'weakest' ? 'bg-white shadow-sm' : 'text-slate-600'}
+                  className={sortBy === 'weakest' ? 'bg-slate-900 text-white shadow-md' : 'text-slate-600 hover:bg-slate-100'}
                 >
                   Weakest
                 </Button>
@@ -190,7 +206,7 @@ const Dashboard = () => {
                   variant={sortBy === 'alphabetical' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setSortBy('alphabetical')}
-                  className={sortBy === 'alphabetical' ? 'bg-white shadow-sm' : 'text-slate-600'}
+                  className={sortBy === 'alphabetical' ? 'bg-slate-900 text-white shadow-md' : 'text-slate-600 hover:bg-slate-100'}
                 >
                   A-Z
                 </Button>
@@ -198,8 +214,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Subjects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {sortedSubjects.map((subject) => (
               <SubjectCard
                 key={subject.id}
@@ -214,15 +229,15 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Progress Overview Cards - More Compact */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        {/* Premium Progress Overview */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <ProgressCard
             title="Overall Progress"
             value={`${getOverallProgress()}%`}
             subtitle="Average across subjects"
             progress={getOverallProgress()}
             icon={TrendingUp}
-            color="bg-slate-900"
+            color="bg-gradient-to-br from-slate-900 to-slate-700"
             trend={userProgress.length > 0 ? 5 : 0}
           />
           
@@ -231,7 +246,7 @@ const Dashboard = () => {
             value={getMasteredTopics()}
             subtitle="85%+ average score"
             icon={Trophy}
-            color="bg-emerald-500"
+            color="bg-gradient-to-br from-emerald-500 to-emerald-600"
           />
           
           <ProgressCard
@@ -239,7 +254,7 @@ const Dashboard = () => {
             value={userProgress.reduce((sum, p) => sum + p.attempts, 0)}
             subtitle="Questions completed"
             icon={BookOpen}
-            color="bg-blue-500"
+            color="bg-gradient-to-br from-blue-500 to-blue-600"
           />
           
           <ProgressCard
@@ -247,12 +262,12 @@ const Dashboard = () => {
             value={`${getStudyStreak()} days`}
             subtitle="Keep it up!"
             icon={Flame}
-            color="bg-orange-500"
+            color="bg-gradient-to-br from-orange-500 to-red-500"
           />
         </div>
 
-        {/* Analytics Section - More Compact */}
-        <div className="grid lg:grid-cols-3 gap-4">
+        {/* Premium Analytics Section */}
+        <div className="grid lg:grid-cols-3 gap-6 mb-8">
           <div className="lg:col-span-1">
             <AOBreakdown userProgress={userProgress} />
           </div>
@@ -262,6 +277,75 @@ const Dashboard = () => {
               userProgress={userProgress}
               onPractice={handlePractice}
             />
+          </div>
+        </div>
+
+        {/* Premium Locked Analytics */}
+        <div className="space-y-6">
+          <div className="flex items-center space-x-3 mb-6">
+            <Crown className="h-6 w-6 text-amber-500" />
+            <h3 className="text-2xl font-bold text-slate-900">Premium Analytics</h3>
+            <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0">
+              Pro Feature
+            </Badge>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <PremiumAnalyticsCard
+              title="Learning Retention"
+              description="Track how well you retain information over time with spaced repetition analysis"
+              icon={Brain}
+              gradient="from-purple-500 to-indigo-600"
+              comingSoon={false}
+            />
+            
+            <PremiumAnalyticsCard
+              title="Optimal Study Times"
+              description="AI-powered recommendations for when you learn most effectively"
+              icon={Clock}
+              gradient="from-blue-500 to-cyan-500"
+              comingSoon={false}
+            />
+            
+            <PremiumAnalyticsCard
+              title="Predictive Performance"
+              description="Forecast your exam performance based on current learning patterns"
+              icon={LineChart}
+              gradient="from-emerald-500 to-teal-600"
+              comingSoon={false}
+            />
+            
+            <PremiumAnalyticsCard
+              title="Learning Velocity"
+              description="Measure and optimize your knowledge acquisition speed"
+              icon={Zap}
+              gradient="from-orange-500 to-red-500"
+              comingSoon={false}
+            />
+            
+            <PremiumAnalyticsCard
+              title="Concept Mapping"
+              description="Visualize connections between topics and identify knowledge gaps"
+              icon={Target}
+              gradient="from-pink-500 to-rose-600"
+              comingSoon={false}
+            />
+            
+            <PremiumAnalyticsCard
+              title="Stress Indicators"
+              description="Monitor learning stress levels and receive wellness recommendations"
+              icon={Sparkles}
+              gradient="from-violet-500 to-purple-600"
+              comingSoon={true}
+            />
+          </div>
+
+          <div className="text-center py-8">
+            <Button className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white border-0 px-8 py-3 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+              <Crown className="h-5 w-5 mr-2" />
+              Upgrade to Premium
+            </Button>
+            <p className="text-slate-500 mt-3 text-sm">Unlock advanced analytics and AI-powered insights</p>
           </div>
         </div>
       </div>
