@@ -58,33 +58,9 @@ const Practice = () => {
       };
     }
 
-    // Enhanced marking logic based on key concepts and scientific accuracy
-    const modelWords = question.modelAnswer.toLowerCase().split(/\s+/);
-    const userWords = answer.toLowerCase().split(/\s+/);
-    
-    // Extract key scientific terms and concepts from model answer
-    const keyTerms = extractKeyTerms(question.modelAnswer, subjectId!);
-    const userKeyTerms = extractKeyTerms(answer, subjectId!);
-    
-    // Calculate different scoring components
-    const keyTermScore = calculateKeyTermScore(keyTerms, userKeyTerms);
-    const conceptualScore = calculateConceptualScore(question, answer, subjectId!);
-    const structureScore = calculateStructureScore(answer, question.marks);
-    const accuracyScore = calculateAccuracyScore(question, answer, subjectId!);
-    
-    // Weight the scores appropriately and convert to marks
-    const percentageScore = Math.round(
-      (keyTermScore * 0.3) +
-      (conceptualScore * 0.4) +
-      (structureScore * 0.15) +
-      (accuracyScore * 0.15)
-    );
-    
-    // Convert percentage to actual marks out of total
-    const marksAwarded = Math.round((percentageScore / 100) * question.marks);
-    
-    // Generate detailed feedback based on performance
-    const feedback = generateDetailedFeedback(question, answer, percentageScore, keyTerms, userKeyTerms);
+    // More accurate teacher-like marking
+    const marksAwarded = await calculateMarksAwarded(question, answer);
+    const feedback = generateTeacherFeedback(question, answer, marksAwarded);
     
     return {
       modelAnswer: question.modelAnswer,
@@ -94,221 +70,209 @@ const Practice = () => {
     };
   };
 
-  const extractKeyTerms = (text: string, subjectId: string): string[] => {
-    const commonTerms = {
-      biology: [
-        'osmosis', 'diffusion', 'enzyme', 'catalyst', 'active site', 'substrate',
-        'mitochondria', 'nucleus', 'membrane', 'cell wall', 'photosynthesis',
-        'respiration', 'glucose', 'oxygen', 'carbon dioxide', 'water potential',
-        'concentration gradient', 'partially permeable', 'energy', 'ATP',
-        'antibody', 'antigen', 'phagocyte', 'lymphocyte', 'pathogen'
-      ],
-      chemistry: [
-        'atom', 'proton', 'neutron', 'electron', 'nucleus', 'shell', 'orbital',
-        'ionic', 'covalent', 'metallic', 'bond', 'molecule', 'compound',
-        'element', 'periodic table', 'mass number', 'atomic number',
-        'electrostatic', 'melting point', 'boiling point', 'relative formula mass'
-      ],
-      maths: [
-        'fraction', 'decimal', 'percentage', 'ratio', 'proportion', 'equation',
-        'solve', 'simplify', 'multiply', 'divide', 'area', 'perimeter',
-        'probability', 'outcome', 'formula', 'substitute', 'rearrange'
-      ]
-    };
+  const calculateMarksAwarded = async (question: Question, answer: string): Promise<number> => {
+    if (!answer.trim()) return 0;
 
-    const subjectTerms = commonTerms[subjectId as keyof typeof commonTerms] || [];
-    const textLower = text.toLowerCase().replace(/[^\w\s]/g, ' '); // Remove punctuation for better matching
-    
-    return subjectTerms.filter(term => {
-      const termLower = term.toLowerCase();
-      // More flexible matching
-      return textLower.includes(termLower) || 
-             textLower.includes(termLower.replace(' ', '')) || // "activesite" vs "active site"
-             textLower.includes(termLower.replace(' ', '-')) || // "active-site"
-             // Check if all words of a multi-word term are present (but not necessarily together)
-             (termLower.includes(' ') && 
-              termLower.split(' ').every(word => 
-                textLower.split(/\s+/).some(textWord => 
-                  textWord.includes(word) || word.includes(textWord)
-                )
-              ));
-    });
-  };
-
-  const calculateKeyTermScore = (modelTerms: string[], userTerms: string[]): number => {
-    if (modelTerms.length === 0) return 70;
-    
-    // Enhanced matching for credit
-    const matchedTerms = modelTerms.filter(modelTerm => 
-      userTerms.some(userTerm => {
-        const modelLower = modelTerm.toLowerCase().replace(/[^\w\s]/g, ' ');
-        const userLower = userTerm.toLowerCase().replace(/[^\w\s]/g, ' ');
-        
-        // Multiple matching strategies
-        return modelLower === userLower || 
-               modelLower.includes(userLower) || 
-               userLower.includes(modelLower) ||
-               // Handle compound terms more flexibly
-               (modelLower.includes(' ') && 
-                modelLower.split(' ').every(word => 
-                  userLower.split(/\s+/).some(userWord => 
-                    userWord.includes(word) || word.includes(userWord) ||
-                    // Handle partial matches for longer words
-                    (word.length > 4 && userWord.length > 4 && 
-                     (word.includes(userWord.slice(0, -1)) || userWord.includes(word.slice(0, -1))))
-                  )
-                )) ||
-               // Handle variations like "site" vs "sites", "enzyme" vs "enzymes"
-               (Math.abs(modelLower.length - userLower.length) <= 2 && 
-                (modelLower.startsWith(userLower.slice(0, -1)) || 
-                 userLower.startsWith(modelLower.slice(0, -1))));
-      })
-    );
-    
-    return Math.min((matchedTerms.length / modelTerms.length) * 100, 100);
-  };
-
-  const calculateConceptualScore = (question: Question, answer: string, subjectId: string): number => {
     const answerLower = answer.toLowerCase();
+    const modelLower = question.modelAnswer.toLowerCase();
     
-    // Subject-specific conceptual checking
-    if (subjectId === 'biology') {
-      if (question.question.toLowerCase().includes('osmosis')) {
-        const hasWaterMovement = answerLower.includes('water') && (answerLower.includes('move') || answerLower.includes('transport'));
-        const hasMembrane = answerLower.includes('membrane') || answerLower.includes('permeable');
-        const hasConcentration = answerLower.includes('concentration') || answerLower.includes('potential');
-        
-        return (hasWaterMovement ? 30 : 0) + (hasMembrane ? 35 : 0) + (hasConcentration ? 35 : 0);
-      }
-      
-      if (question.question.toLowerCase().includes('enzyme')) {
-        const hasCatalyst = answerLower.includes('catalyst') || answerLower.includes('speed');
-        const hasActiveSite = answerLower.includes('active site') || answerLower.includes('specific');
-        const hasSubstrate = answerLower.includes('substrate');
-        
-        return (hasCatalyst ? 40 : 0) + (hasActiveSite ? 30 : 0) + (hasSubstrate ? 30 : 0);
+    // Extract key marking points from the marking criteria
+    const markingPoints = question.markingCriteria.breakdown;
+    let totalMarksAwarded = 0;
+    
+    // Check each marking point individually
+    for (const point of markingPoints) {
+      const pointMarks = checkMarkingPoint(point, answer, question, subjectId!);
+      totalMarksAwarded += pointMarks;
+    }
+    
+    // Ensure we don't exceed the maximum marks for the question
+    const finalMarks = Math.min(totalMarksAwarded, question.marks);
+    
+    // Give some credit for partial understanding even if specific points are missed
+    if (finalMarks === 0 && answer.length > 20) {
+      // Check for general relevance and effort
+      const relevanceScore = calculateRelevanceScore(question, answer);
+      if (relevanceScore > 0.3) {
+        return Math.min(1, question.marks); // Give at least 1 mark for relevant attempt
       }
     }
     
-    if (subjectId === 'chemistry') {
-      if (question.question.toLowerCase().includes('ionic')) {
-        const hasElectrons = answerLower.includes('electron') || answerLower.includes('charge');
-        const hasAttraction = answerLower.includes('attraction') || answerLower.includes('electrostatic');
-        const hasIons = answerLower.includes('ion') || answerLower.includes('positive') || answerLower.includes('negative');
-        
-        return (hasElectrons ? 35 : 0) + (hasAttraction ? 35 : 0) + (hasIons ? 30 : 0);
-      }
-    }
-    
-    if (subjectId === 'maths') {
-      if (question.question.toLowerCase().includes('solve')) {
-        const hasMethod = answerLower.includes('=') || answerLower.includes('equation');
-        const hasSteps = answer.split('\n').length > 1 || answer.includes(',');
-        
-        return (hasMethod ? 60 : 0) + (hasSteps ? 40 : 0);
-      }
-    }
-    
-    // General conceptual understanding (fallback)
-    const answerLength = answer.split(' ').length;
-    if (answerLength < 5) return 20;
-    if (answerLength < 15) return 50;
-    return 70;
+    return Math.max(0, finalMarks);
   };
 
-  const calculateStructureScore = (answer: string, maxMarks: number): number => {
-    const sentences = answer.split(/[.!?]+/).filter(s => s.trim().length > 0);
-    const expectedSentences = Math.max(maxMarks, 2);
-    
-    if (sentences.length === 0) return 0;
-    if (sentences.length >= expectedSentences) return 100;
-    
-    return (sentences.length / expectedSentences) * 100;
-  };
-
-  const calculateAccuracyScore = (question: Question, answer: string, subjectId: string): number => {
+  const checkMarkingPoint = (markingPoint: string, answer: string, question: Question, subjectId: string): number => {
     const answerLower = answer.toLowerCase();
+    const pointLower = markingPoint.toLowerCase();
     
-    // Check for common misconceptions or errors
-    const commonErrors = {
-      biology: ['plants breathe', 'oxygen goes in', 'carbon dioxide comes out during photosynthesis'],
-      chemistry: ['atoms can be split in chemical reactions', 'ionic bonds are weak'],
-      maths: ['probability can be greater than 1', 'divide by zero']
+    // Extract key concepts from the marking point
+    const keyWords = extractKeyWordsFromPoint(pointLower, subjectId);
+    const marksPerPoint = question.marks / question.markingCriteria.breakdown.length;
+    
+    let pointScore = 0;
+    
+    // Check if the answer contains the key concepts from this marking point
+    for (const keyWord of keyWords) {
+      if (checkConceptPresent(keyWord, answerLower, subjectId)) {
+        pointScore += marksPerPoint / keyWords.length;
+      }
+    }
+    
+    // Bonus for exact or very close matches
+    if (answerLower.includes(pointLower.substring(0, Math.min(pointLower.length, 20)))) {
+      pointScore = marksPerPoint; // Full marks for this point
+    }
+    
+    return Math.min(pointScore, marksPerPoint);
+  };
+
+  const extractKeyWordsFromPoint = (point: string, subjectId: string): string[] => {
+    // Remove common words and extract meaningful terms
+    const commonWords = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'is', 'are', 'was', 'were', 'has', 'have', 'had', 'will', 'would', 'could', 'should', 'may', 'might', 'can', 'must', 'this', 'that', 'these', 'those'];
+    
+    const words = point.replace(/[^\w\s]/g, ' ').split(/\s+/)
+      .filter(word => word.length > 2 && !commonWords.includes(word));
+    
+    // Subject-specific important terms that should be weighted more heavily
+    const importantTerms = {
+      biology: ['osmosis', 'diffusion', 'enzyme', 'active site', 'substrate', 'catalyst', 'membrane', 'concentration', 'gradient', 'water potential', 'photosynthesis', 'respiration', 'mitochondria', 'chloroplast', 'glucose', 'oxygen', 'carbon dioxide', 'energy', 'atp'],
+      chemistry: ['atom', 'molecule', 'ion', 'electron', 'proton', 'neutron', 'bond', 'ionic', 'covalent', 'metallic', 'compound', 'element', 'reaction', 'oxidation', 'reduction', 'acid', 'base', 'ph', 'catalyst'],
+      maths: ['equation', 'formula', 'solve', 'calculate', 'fraction', 'decimal', 'percentage', 'ratio', 'proportion', 'area', 'volume', 'perimeter', 'probability', 'graph', 'function']
     };
     
-    const subjectErrors = commonErrors[subjectId as keyof typeof commonErrors] || [];
-    const hasErrors = subjectErrors.some(error => answerLower.includes(error.toLowerCase()));
+    const subjectTerms = importantTerms[subjectId as keyof typeof importantTerms] || [];
     
-    if (hasErrors) return 20;
+    // Prioritize subject-specific terms
+    const prioritizedWords = words.filter(word => subjectTerms.includes(word));
+    const otherWords = words.filter(word => !subjectTerms.includes(word));
     
-    // Check if answer is relevant to the question
-    const questionWords = question.question.toLowerCase().split(' ');
-    const relevantWords = questionWords.filter(word => 
-      word.length > 3 && answerLower.includes(word)
-    );
-    
-    const relevanceScore = Math.min((relevantWords.length / Math.max(questionWords.length * 0.3, 1)) * 100, 100);
-    
-    return Math.max(relevanceScore, 60); // Minimum 60% if no major errors
+    return [...prioritizedWords, ...otherWords.slice(0, 3)]; // Take up to 3 other words
   };
 
-  const generateDetailedFeedback = (
-    question: Question, 
-    answer: string, 
-    score: number, 
-    modelTerms: string[], 
-    userTerms: string[]
-  ): string => {
-    // Improved logic to only suggest terms that are actually missing
-    const answerLower = answer.toLowerCase().replace(/[^\w\s]/g, ' ');
-    const actuallyMissedTerms = modelTerms.filter(term => {
-      const termLower = term.toLowerCase().replace(/[^\w\s]/g, ' ');
-      
-      // Comprehensive checking - only consider a term "missed" if it's truly not there
-      const isPresent = answerLower.includes(termLower) || 
-                       answerLower.includes(termLower.replace(' ', '')) ||
-                       answerLower.includes(termLower.replace(' ', '-')) ||
-                       // Check if all parts of multi-word terms are present
-                       (termLower.includes(' ') && 
-                        termLower.split(' ').every(word => 
-                          answerLower.split(/\s+/).some(answerWord => 
-                            answerWord.includes(word) || word.includes(answerWord) ||
-                            // Handle plurals and variations
-                            (Math.abs(word.length - answerWord.length) <= 2 && 
-                             (word.startsWith(answerWord.slice(0, -1)) || 
-                              answerWord.startsWith(word.slice(0, -1))))
-                          )
-                        )) ||
-                       // Check for synonyms or related terms
-                       (term === 'active site' && (answerLower.includes('binding site') || answerLower.includes('catalytic site'))) ||
-                       (term === 'substrate' && answerLower.includes('reactant')) ||
-                       (term === 'catalyst' && (answerLower.includes('speed up') || answerLower.includes('accelerate'))) ||
-                       (term === 'concentration gradient' && (answerLower.includes('concentration difference') || answerLower.includes('gradient')));
-      
-      return !isPresent;
-    });
+  const checkConceptPresent = (concept: string, answer: string, subjectId: string): boolean => {
+    // Direct match
+    if (answer.includes(concept)) return true;
     
-    if (score >= 85) {
-      return `Excellent answer! You demonstrated strong understanding of the key concepts. ${
-        actuallyMissedTerms.length > 0 ? `To make it even better, consider being more explicit about: ${actuallyMissedTerms.slice(0, 2).join(', ')}.` : 'Your answer covers all the essential points comprehensively.'
-      }`;
-    } else if (score >= 70) {
-      return `Good answer with solid understanding. ${
-        actuallyMissedTerms.length > 0 ? `To improve further, make sure to explicitly mention: ${actuallyMissedTerms.slice(0, 2).join(', ')}. ` : ''
-      }Consider adding more specific examples and clearer explanations of the mechanisms involved.`;
-    } else if (score >= 50) {
-      return `Partial understanding shown. Your answer would benefit from: ${
-        actuallyMissedTerms.length > 0 ? `Key scientific terms: ${actuallyMissedTerms.slice(0, 3).join(', ')}. ` : ''
-      }More detailed explanations of the underlying processes and clearer structure.`;
-    } else if (score >= 25) {
-      return `Limited understanding demonstrated. ${
-        actuallyMissedTerms.length > 0 ? `Essential terms missing: ${actuallyMissedTerms.slice(0, 4).join(', ')}. ` : ''
-      }Focus on understanding the fundamental concepts and using precise scientific vocabulary.`;
+    // Check for variations and synonyms
+    const synonyms = {
+      'osmosis': ['water movement', 'water transport', 'movement of water'],
+      'diffusion': ['movement', 'transport', 'spread'],
+      'enzyme': ['catalyst', 'protein catalyst', 'biological catalyst'],
+      'active site': ['binding site', 'catalytic site', 'enzyme site'],
+      'substrate': ['reactant', 'molecule that binds'],
+      'concentration gradient': ['concentration difference', 'gradient', 'difference in concentration'],
+      'photosynthesis': ['light reaction', 'carbon fixation', 'glucose production'],
+      'respiration': ['glucose breakdown', 'energy release', 'oxygen use'],
+      'ionic bond': ['electrostatic attraction', 'electron transfer', 'charged particles'],
+      'covalent bond': ['electron sharing', 'shared electrons', 'molecular bond'],
+      'equation': ['formula', 'mathematical expression', 'equals'],
+      'solve': ['find', 'calculate', 'work out', 'determine']
+    };
+    
+    const conceptSynonyms = synonyms[concept as keyof typeof synonyms] || [];
+    
+    for (const synonym of conceptSynonyms) {
+      if (answer.includes(synonym)) return true;
+    }
+    
+    // Check for partial matches (for longer terms)
+    if (concept.length > 6) {
+      const conceptWords = concept.split(' ');
+      if (conceptWords.length > 1) {
+        // For multi-word concepts, check if all words are present (not necessarily together)
+        return conceptWords.every(word => word.length > 2 && answer.includes(word));
+      } else {
+        // For single long words, check for partial matches
+        return answer.includes(concept.substring(0, concept.length - 2));
+      }
+    }
+    
+    return false;
+  };
+
+  const calculateRelevanceScore = (question: Question, answer: string): number => {
+    const questionWords = question.question.toLowerCase().split(/\s+/)
+      .filter(word => word.length > 3);
+    const answerWords = answer.toLowerCase().split(/\s+/);
+    
+    let matches = 0;
+    for (const qWord of questionWords) {
+      if (answerWords.some(aWord => aWord.includes(qWord) || qWord.includes(aWord))) {
+        matches++;
+      }
+    }
+    
+    return matches / Math.max(questionWords.length, 1);
+  };
+
+  const generateTeacherFeedback = (question: Question, answer: string, marksAwarded: number): string => {
+    const percentage = (marksAwarded / question.marks) * 100;
+    const answerLower = answer.toLowerCase();
+    
+    // Analyze what the student got right
+    const correctPoints = [];
+    const missedPoints = [];
+    
+    for (const point of question.markingCriteria.breakdown) {
+      const keyWords = extractKeyWordsFromPoint(point.toLowerCase(), subjectId!);
+      let pointCovered = false;
+      
+      for (const keyWord of keyWords) {
+        if (checkConceptPresent(keyWord, answerLower, subjectId!)) {
+          pointCovered = true;
+          break;
+        }
+      }
+      
+      if (pointCovered) {
+        correctPoints.push(point);
+      } else {
+        missedPoints.push(point);
+      }
+    }
+    
+    let feedback = "";
+    
+    if (percentage >= 90) {
+      feedback = `Excellent answer! You demonstrated comprehensive understanding. `;
+      if (correctPoints.length > 0) {
+        feedback += `You correctly covered: ${correctPoints.slice(0, 2).join('; ')}. `;
+      }
+      if (missedPoints.length > 0) {
+        feedback += `For perfection, also mention: ${missedPoints[0]}.`;
+      } else {
+        feedback += `Your answer is thorough and accurate.`;
+      }
+    } else if (percentage >= 75) {
+      feedback = `Good answer showing solid understanding. `;
+      if (correctPoints.length > 0) {
+        feedback += `You correctly identified: ${correctPoints.slice(0, 2).join('; ')}. `;
+      }
+      if (missedPoints.length > 0) {
+        feedback += `To improve further, include: ${missedPoints.slice(0, 2).join('; ')}.`;
+      }
+    } else if (percentage >= 50) {
+      feedback = `Reasonable attempt with some correct understanding. `;
+      if (correctPoints.length > 0) {
+        feedback += `You got credit for: ${correctPoints.join('; ')}. `;
+      }
+      if (missedPoints.length > 0) {
+        feedback += `Missing key points: ${missedPoints.slice(0, 3).join('; ')}.`;
+      }
+    } else if (percentage >= 25) {
+      feedback = `Limited understanding shown. `;
+      if (correctPoints.length > 0) {
+        feedback += `Some credit given for: ${correctPoints.join('; ')}. `;
+      }
+      feedback += `Need to focus on: ${missedPoints.slice(0, 3).join('; ')}.`;
+    } else if (percentage > 0) {
+      feedback = `Minimal marks awarded for attempting the question. `;
+      feedback += `Review the key concepts: ${missedPoints.slice(0, 3).join('; ')}.`;
     } else {
-      return `Answer shows minimal understanding. ${
-        answer.trim() ? 'Review the topic thoroughly and focus on key scientific principles, accurate terminology, and clear explanations of processes.' : 'No answer provided - you must attempt to answer to receive marks.'
-      }`;
+      feedback = `No marks awarded. The answer doesn't address the key points: ${missedPoints.slice(0, 3).join('; ')}.`;
     }
+    
+    return feedback;
   };
 
   const handleSubmitAnswer = async () => {
@@ -340,28 +304,6 @@ const Practice = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const calculateMarksAwarded = async (question: Question, answer: string): Promise<number> => {
-    if (!answer.trim()) return 0;
-
-    const keyTerms = extractKeyTerms(question.modelAnswer, subjectId!);
-    const userKeyTerms = extractKeyTerms(answer, subjectId!);
-    
-    const keyTermScore = calculateKeyTermScore(keyTerms, userKeyTerms);
-    const conceptualScore = calculateConceptualScore(question, answer, subjectId!);
-    const structureScore = calculateStructureScore(answer, question.marks);
-    const accuracyScore = calculateAccuracyScore(question, answer, subjectId!);
-    
-    const percentageScore = Math.round(
-      (keyTermScore * 0.3) +
-      (conceptualScore * 0.4) +
-      (structureScore * 0.15) +
-      (accuracyScore * 0.15)
-    );
-    
-    // Convert percentage to actual marks out of total
-    return Math.round((percentageScore / 100) * question.marks);
   };
 
   const handleNextQuestion = () => {
