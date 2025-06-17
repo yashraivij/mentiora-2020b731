@@ -1,13 +1,15 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
-import { BarChart3, BookOpen, TrendingUp, User, LogOut } from "lucide-react";
+import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy } from "lucide-react";
 import { useState, useEffect } from "react";
+import { ProgressCard } from "@/components/dashboard/ProgressCard";
+import { SubjectCard } from "@/components/dashboard/SubjectCard";
+import { WeakTopicsSection } from "@/components/dashboard/WeakTopicsSection";
+import { AOBreakdown } from "@/components/dashboard/AOBreakdown";
 
 interface UserProgress {
   subjectId: string;
@@ -51,33 +53,48 @@ const Dashboard = () => {
     return Math.round(totalScore / userProgress.length);
   };
 
+  const getStudyStreak = () => {
+    // Calculate study streak based on practice sessions
+    return Math.min(userProgress.length, 7); // Cap at 7 for demo
+  };
+
   const handleLogout = () => {
     logout();
     navigate('/');
   };
 
+  const handlePractice = (subjectId: string, topicId?: string) => {
+    if (topicId) {
+      navigate(`/practice/${subjectId}/${topicId}`);
+    } else {
+      navigate(`/subject/${subjectId}`);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-4 py-4">
+      <header className="bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200/50 sticky top-0 z-50">
+        <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg"></div>
-                <h1 className="text-2xl font-bold text-slate-900">Mentiora</h1>
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg"></div>
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+                  Mentiora
+                </h1>
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <Button variant="outline" onClick={() => navigate('/analytics')}>
+              <Button variant="outline" onClick={() => navigate('/analytics')} className="border-slate-200 hover:bg-slate-50">
                 <BarChart3 className="h-4 w-4 mr-2" />
                 Analytics
               </Button>
-              <div className="flex items-center space-x-2">
-                <User className="h-4 w-4" />
-                <span className="text-sm text-slate-600">{user?.name}</span>
+              <div className="flex items-center space-x-2 px-3 py-2 bg-slate-50 rounded-lg">
+                <User className="h-4 w-4 text-slate-600" />
+                <span className="text-sm font-medium text-slate-700">{user?.name}</span>
               </div>
-              <Button variant="outline" onClick={handleLogout}>
+              <Button variant="outline" onClick={handleLogout} className="border-slate-200 hover:bg-slate-50">
                 <LogOut className="h-4 w-4 mr-2" />
                 Logout
               </Button>
@@ -86,152 +103,113 @@ const Dashboard = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-6 py-8 max-w-7xl">
         {/* Welcome Section */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-slate-900 mb-2">
-            Welcome back, {user?.name}!
+            Good morning, {user?.name} 👋
           </h2>
-          <p className="text-slate-600">Ready to continue your GCSE revision journey?</p>
+          <p className="text-lg text-slate-600">Ready to crush your GCSE revision today?</p>
         </div>
 
-        {/* Progress Overview */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <TrendingUp className="h-5 w-5 mr-2 text-green-600" />
-                Overall Progress
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-green-600 mb-2">
-                {getOverallProgress()}%
-              </div>
-              <Progress value={getOverallProgress()} className="mb-2" />
-              <p className="text-sm text-slate-600">Average across all subjects</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <BookOpen className="h-5 w-5 mr-2 text-blue-600" />
-                Topics Mastered
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-blue-600 mb-2">
-                {getMasteredTopics()}
-              </div>
-              <p className="text-sm text-slate-600">
-                Topics with 85%+ average score
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <BarChart3 className="h-5 w-5 mr-2 text-purple-600" />
-                Practice Sessions
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-purple-600 mb-2">
-                {userProgress.reduce((sum, p) => sum + p.attempts, 0)}
-              </div>
-              <p className="text-sm text-slate-600">Total questions attempted</p>
-            </CardContent>
-          </Card>
+        {/* Progress Overview Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <ProgressCard
+            title="Overall Progress"
+            value={`${getOverallProgress()}%`}
+            subtitle="Average across all subjects"
+            progress={getOverallProgress()}
+            icon={TrendingUp}
+            color="bg-green-500"
+            trend={userProgress.length > 0 ? 5 : 0}
+          />
+          
+          <ProgressCard
+            title="Topics Mastered"
+            value={getMasteredTopics()}
+            subtitle="85%+ average score"
+            icon={Trophy}
+            color="bg-blue-500"
+          />
+          
+          <ProgressCard
+            title="Practice Sessions"
+            value={userProgress.reduce((sum, p) => sum + p.attempts, 0)}
+            subtitle="Questions attempted"
+            icon={BookOpen}
+            color="bg-purple-500"
+          />
+          
+          <ProgressCard
+            title="Study Streak"
+            value={`${getStudyStreak()} days`}
+            subtitle="Keep it up!"
+            icon={Flame}
+            color="bg-orange-500"
+          />
         </div>
 
-        {/* Weak Topics Section */}
-        {weakTopics.length > 0 && (
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle className="text-red-600">Topics to Focus On</CardTitle>
-              <CardDescription>
-                These topics need more practice based on your recent performance
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-wrap gap-3">
-                {weakTopics.map((topicId) => {
-                  const subject = curriculum.find(s => 
-                    s.topics.some(t => t.id === topicId)
-                  );
-                  const topic = subject?.topics.find(t => t.id === topicId);
-                  if (!topic || !subject) return null;
-                  
-                  return (
-                    <div key={topicId} className="flex items-center space-x-2">
-                      <div className={`w-3 h-3 rounded-full ${subject.color}`}></div>
-                      <Badge variant="destructive" className="flex items-center space-x-1">
-                        <span className="text-xs text-red-100">{subject.name}:</span>
-                        <span>{topic.name}</span>
-                      </Badge>
-                    </div>
-                  );
-                })}
-              </div>
-            </CardContent>
-          </Card>
-        )}
+        <div className="grid lg:grid-cols-3 gap-8 mb-8">
+          {/* Assessment Objectives */}
+          <div className="lg:col-span-1">
+            <AOBreakdown userProgress={userProgress} />
+          </div>
+
+          {/* Weak Topics */}
+          <div className="lg:col-span-2">
+            <WeakTopicsSection 
+              weakTopics={weakTopics}
+              userProgress={userProgress}
+              onPractice={handlePractice}
+            />
+          </div>
+        </div>
 
         {/* Subjects Grid */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {curriculum.map((subject) => (
-            <Card key={subject.id} className="hover:shadow-lg transition-shadow cursor-pointer">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="flex items-center">
-                    <div className={`w-4 h-4 rounded-full ${subject.color} mr-2`}></div>
-                    {subject.name}
-                  </CardTitle>
-                  <Badge variant="outline">
-                    {subject.topics.length} topics
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {subject.topics.slice(0, 3).map((topic) => {
-                    const progress = getTopicProgress(subject.id, topic.id);
-                    return (
-                      <div key={topic.id} className="flex justify-between items-center">
-                        <span className="text-sm text-slate-600">{topic.name}</span>
-                        <div className="flex items-center space-x-2">
-                          {progress.attempts > 0 && (
-                            <span className="text-xs text-slate-500">
-                              {progress.averageScore}%
-                            </span>
-                          )}
-                          <div className={`w-2 h-2 rounded-full ${
-                            progress.averageScore >= 85 ? 'bg-green-500' :
-                            progress.averageScore >= 60 ? 'bg-yellow-500' :
-                            progress.attempts > 0 ? 'bg-red-500' : 'bg-slate-300'
-                          }`}></div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                  {subject.topics.length > 3 && (
-                    <p className="text-xs text-slate-500">
-                      +{subject.topics.length - 3} more topics
-                    </p>
-                  )}
-                </div>
-                <Button 
-                  className="w-full mt-4" 
-                  onClick={() => navigate(`/subject/${subject.id}`)}
-                >
-                  Start Practicing
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-2xl font-bold text-slate-900">Your Subjects</h3>
+            <Badge variant="outline" className="text-slate-600">
+              {curriculum.length} subjects available
+            </Badge>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {curriculum.map((subject) => (
+              <SubjectCard
+                key={subject.id}
+                subject={subject}
+                progress={userProgress}
+                onStartPractice={handlePractice}
+              />
+            ))}
+          </div>
         </div>
+
+        {/* Quick Stats */}
+        <Card className="border-0 bg-gradient-to-r from-blue-50 to-purple-50">
+          <CardContent className="p-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              <div>
+                <div className="text-2xl font-bold text-blue-600">{curriculum.length}</div>
+                <p className="text-sm text-slate-600">Subjects</p>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-purple-600">
+                  {curriculum.reduce((sum, s) => sum + s.topics.length, 0)}
+                </div>
+                <p className="text-sm text-slate-600">Total Topics</p>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-green-600">{getMasteredTopics()}</div>
+                <p className="text-sm text-slate-600">Mastered</p>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-orange-600">{weakTopics.length}</div>
+                <p className="text-sm text-slate-600">Need Practice</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
