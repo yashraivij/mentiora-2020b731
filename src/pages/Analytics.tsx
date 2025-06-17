@@ -1,284 +1,314 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BarChart3, TrendingUp, Target, Award, BookOpen, Clock, Zap, Trophy, ArrowUp, ArrowDown } from "lucide-react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { curriculum } from "@/data/curriculum";
+import { ArrowLeft, TrendingUp, AlertTriangle, Target, Calendar } from "lucide-react";
+import { useState, useEffect } from "react";
+
+interface AnalyticsData {
+  subjectId: string;
+  topicId: string;
+  attempts: number;
+  averageScore: number;
+  lastAttempt: Date;
+}
 
 const Analytics = () => {
-  // Sample data for charts
-  const performanceData = [
-    { date: 'Mon', score: 78, questions: 12 },
-    { date: 'Tue', score: 82, questions: 15 },
-    { date: 'Wed', score: 85, questions: 18 },
-    { date: 'Thu', score: 79, questions: 14 },
-    { date: 'Fri', score: 88, questions: 20 },
-    { date: 'Sat', score: 92, questions: 16 },
-    { date: 'Sun', score: 87, questions: 13 }
-  ];
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const [analyticsData, setAnalyticsData] = useState<AnalyticsData[]>([]);
+  const [weakTopics, setWeakTopics] = useState<string[]>([]);
 
-  const subjectData = [
-    { subject: 'Biology', score: 85, color: '#10b981' },
-    { subject: 'Chemistry', score: 78, color: '#8b5cf6' },
-    { subject: 'Mathematics', score: 92, color: '#3b82f6' }
-  ];
+  useEffect(() => {
+    if (user?.id) {
+      const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
+      const savedWeakTopics = localStorage.getItem(`mentiora_weak_topics_${user.id}`);
+      
+      if (savedProgress) {
+        setAnalyticsData(JSON.parse(savedProgress));
+      }
+      if (savedWeakTopics) {
+        setWeakTopics(JSON.parse(savedWeakTopics));
+      }
+    }
+  }, [user?.id]);
 
-  const topicStrengths = [
-    { topic: 'Cell Biology', mastery: 94, trend: 'up' },
-    { topic: 'Algebra', mastery: 89, trend: 'up' },
-    { topic: 'Atomic Structure', mastery: 82, trend: 'stable' },
-    { topic: 'Genetics', mastery: 76, trend: 'down' }
-  ];
+  const getTopicName = (topicId: string) => {
+    const topic = curriculum
+      .flatMap(s => s.topics)
+      .find(t => t.id === topicId);
+    return topic?.name || 'Unknown Topic';
+  };
 
-  const achievements = [
-    { title: '7-Day Streak', icon: Trophy, unlocked: true, description: 'Practice every day for a week' },
-    { title: 'Perfect Score', icon: Target, unlocked: true, description: 'Score 100% on any test' },
-    { title: 'Quick Learner', icon: Zap, unlocked: false, description: 'Complete 50 questions in one day' },
-    { title: 'Subject Master', icon: Award, unlocked: false, description: 'Score 90%+ in all subjects' }
-  ];
+  const getSubjectName = (subjectId: string) => {
+    const subject = curriculum.find(s => s.id === subjectId);
+    return subject?.name || 'Unknown Subject';
+  };
+
+  const getMasteredTopics = () => {
+    return analyticsData.filter(d => d.averageScore >= 85);
+  };
+
+  const getWeakTopicData = () => {
+    return weakTopics.map(topicId => {
+      const data = analyticsData.find(d => d.topicId === topicId);
+      return {
+        topicId,
+        data: data || { subjectId: '', topicId, attempts: 0, averageScore: 0, lastAttempt: new Date() }
+      };
+    });
+  };
+
+  const getAOBreakdown = () => {
+    // Simulate AO analysis based on performance
+    const totalAttempts = analyticsData.reduce((sum, d) => sum + d.attempts, 0);
+    const averageScore = analyticsData.length > 0 ? 
+      analyticsData.reduce((sum, d) => sum + d.averageScore, 0) / analyticsData.length : 0;
+
+    return {
+      ao1: Math.max(60, averageScore - 10), // Knowledge
+      ao2: Math.max(50, averageScore - 5),  // Application
+      ao3: Math.max(40, averageScore - 15)  // Analysis
+    };
+  };
+
+  const aoBreakdown = getAOBreakdown();
+  const masteredTopics = getMasteredTopics();
+  const weakTopicData = getWeakTopicData();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
-      <div className="container mx-auto px-6 py-8 max-w-7xl">
-        {/* Header Section */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg">
-              <BarChart3 className="h-6 w-6 text-white" />
-            </div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-              Performance Analytics
-            </h1>
+    <div className="min-h-screen bg-slate-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center space-x-4">
+            <Button variant="outline" onClick={() => navigate('/dashboard')}>
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Dashboard
+            </Button>
+            <h1 className="text-2xl font-bold text-slate-900">Performance Analytics</h1>
           </div>
-          <p className="text-slate-600 text-lg">Track your progress and identify areas for improvement</p>
         </div>
+      </header>
 
-        {/* Key Metrics Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="relative overflow-hidden border-0 shadow-lg bg-gradient-to-br from-blue-50 to-blue-100/50 hover:shadow-xl transition-all duration-300">
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium text-blue-700">Overall Score</CardTitle>
-                <TrendingUp className="h-5 w-5 text-blue-600" />
-              </div>
+      <div className="container mx-auto px-4 py-8">
+        {/* Overview Cards */}
+        <div className="grid md:grid-cols-4 gap-6 mb-8">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center text-green-600">
+                <Target className="h-5 w-5 mr-2" />
+                Mastered Topics
+              </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-blue-900 mb-1">85.3%</div>
-              <div className="flex items-center gap-1 text-sm">
-                <ArrowUp className="h-4 w-4 text-green-600" />
-                <span className="text-green-700 font-medium">+5.2%</span>
-                <span className="text-slate-600">vs last week</span>
+              <div className="text-3xl font-bold text-green-600">
+                {masteredTopics.length}
               </div>
-            </CardContent>
-            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-200 to-blue-300 rounded-full -mr-10 -mt-10 opacity-20"></div>
-          </Card>
-
-          <Card className="relative overflow-hidden border-0 shadow-lg bg-gradient-to-br from-green-50 to-green-100/50 hover:shadow-xl transition-all duration-300">
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium text-green-700">Questions Completed</CardTitle>
-                <BookOpen className="h-5 w-5 text-green-600" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-green-900 mb-1">247</div>
-              <div className="flex items-center gap-1 text-sm">
-                <ArrowUp className="h-4 w-4 text-green-600" />
-                <span className="text-green-700 font-medium">32</span>
-                <span className="text-slate-600">this week</span>
-              </div>
-            </CardContent>
-            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-green-200 to-green-300 rounded-full -mr-10 -mt-10 opacity-20"></div>
-          </Card>
-
-          <Card className="relative overflow-hidden border-0 shadow-lg bg-gradient-to-br from-purple-50 to-purple-100/50 hover:shadow-xl transition-all duration-300">
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium text-purple-700">Study Time</CardTitle>
-                <Clock className="h-5 w-5 text-purple-600" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-purple-900 mb-1">12.5h</div>
-              <div className="flex items-center gap-1 text-sm">
-                <ArrowUp className="h-4 w-4 text-green-600" />
-                <span className="text-green-700 font-medium">2.3h</span>
-                <span className="text-slate-600">this week</span>
-              </div>
-            </CardContent>
-            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-200 to-purple-300 rounded-full -mr-10 -mt-10 opacity-20"></div>
-          </Card>
-
-          <Card className="relative overflow-hidden border-0 shadow-lg bg-gradient-to-br from-amber-50 to-amber-100/50 hover:shadow-xl transition-all duration-300">
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium text-amber-700">Current Streak</CardTitle>
-                <Zap className="h-5 w-5 text-amber-600" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-amber-900 mb-1">7 days</div>
-              <div className="flex items-center gap-1 text-sm">
-                <span className="text-amber-700 font-medium">Personal best!</span>
-              </div>
-            </CardContent>
-            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-amber-200 to-amber-300 rounded-full -mr-10 -mt-10 opacity-20"></div>
-          </Card>
-        </div>
-
-        {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* Performance Trend */}
-          <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardHeader className="pb-6">
-              <CardTitle className="text-xl font-semibold text-slate-900">Performance Trend</CardTitle>
-              <CardDescription className="text-slate-600">Your daily scores over the past week</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={performanceData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                  <XAxis dataKey="date" stroke="#64748b" fontSize={12} />
-                  <YAxis stroke="#64748b" fontSize={12} />
-                  <Tooltip 
-                    contentStyle={{
-                      backgroundColor: 'white',
-                      border: 'none',
-                      borderRadius: '12px',
-                      boxShadow: '0 10px 40px rgba(0,0,0,0.1)'
-                    }}
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="score" 
-                    stroke="url(#gradient)" 
-                    strokeWidth={3}
-                    dot={{ fill: '#3b82f6', strokeWidth: 2, r: 5 }}
-                    activeDot={{ r: 7, fill: '#1d4ed8' }}
-                  />
-                  <defs>
-                    <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stopColor="#3b82f6" />
-                      <stop offset="100%" stopColor="#8b5cf6" />
-                    </linearGradient>
-                  </defs>
-                </LineChart>
-              </ResponsiveContainer>
+              <p className="text-sm text-slate-600">85%+ average score</p>
             </CardContent>
           </Card>
 
-          {/* Subject Performance */}
-          <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardHeader className="pb-6">
-              <CardTitle className="text-xl font-semibold text-slate-900">Subject Performance</CardTitle>
-              <CardDescription className="text-slate-600">Average scores by subject</CardDescription>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center text-red-600">
+                <AlertTriangle className="h-5 w-5 mr-2" />
+                Weak Topics
+              </CardTitle>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={subjectData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                  <XAxis dataKey="subject" stroke="#64748b" fontSize={12} />
-                  <YAxis stroke="#64748b" fontSize={12} />
-                  <Tooltip 
-                    contentStyle={{
-                      backgroundColor: 'white',
-                      border: 'none',
-                      borderRadius: '12px',
-                      boxShadow: '0 10px 40px rgba(0,0,0,0.1)'
-                    }}
-                  />
-                  <Bar dataKey="score" radius={[8, 8, 0, 0]}>
-                    {subjectData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
+              <div className="text-3xl font-bold text-red-600">
+                {weakTopics.length}
+              </div>
+              <p className="text-sm text-slate-600">Need more practice</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center text-blue-600">
+                <TrendingUp className="h-5 w-5 mr-2" />
+                Total Attempts
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-blue-600">
+                {analyticsData.reduce((sum, d) => sum + d.attempts, 0)}
+              </div>
+              <p className="text-sm text-slate-600">Questions practiced</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center text-purple-600">
+                <Calendar className="h-5 w-5 mr-2" />
+                Active Days
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-purple-600">
+                {analyticsData.length > 0 ? Math.ceil(analyticsData.length / 2) : 0}
+              </div>
+              <p className="text-sm text-slate-600">Days with practice</p>
             </CardContent>
           </Card>
         </div>
 
-        {/* Bottom Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Topic Strengths */}
-          <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardHeader className="pb-6">
-              <CardTitle className="text-xl font-semibold text-slate-900">Topic Mastery</CardTitle>
-              <CardDescription className="text-slate-600">Your strongest and weakest areas</CardDescription>
+        <div className="grid lg:grid-cols-2 gap-8">
+          {/* Assessment Objectives Breakdown */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Assessment Objectives Performance</CardTitle>
+              <CardDescription>
+                Your performance across different skill areas
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              {topicStrengths.map((topic, index) => (
-                <div key={index} className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium text-slate-900">{topic.topic}</span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-slate-700">{topic.mastery}%</span>
-                      {topic.trend === 'up' && <ArrowUp className="h-4 w-4 text-green-600" />}
-                      {topic.trend === 'down' && <ArrowDown className="h-4 w-4 text-red-600" />}
-                    </div>
-                  </div>
-                  <Progress 
-                    value={topic.mastery} 
-                    className="h-3 bg-slate-100"
-                    style={{
-                      background: `linear-gradient(to right, ${topic.mastery >= 90 ? '#10b981' : topic.mastery >= 70 ? '#3b82f6' : '#f59e0b'} 0%, ${topic.mastery >= 90 ? '#10b981' : topic.mastery >= 70 ? '#3b82f6' : '#f59e0b'} ${topic.mastery}%, #f1f5f9 ${topic.mastery}%)`
-                    }}
-                  />
+              <div>
+                <div className="flex justify-between mb-2">
+                  <span className="text-sm font-medium">AO1 - Knowledge & Understanding</span>
+                  <span className="text-sm font-medium">{Math.round(aoBreakdown.ao1)}%</span>
                 </div>
-              ))}
+                <Progress value={aoBreakdown.ao1} className="mb-2" />
+                <p className="text-xs text-slate-600">
+                  Recalling facts, terminology, and concepts
+                </p>
+              </div>
+
+              <div>
+                <div className="flex justify-between mb-2">
+                  <span className="text-sm font-medium">AO2 - Application</span>
+                  <span className="text-sm font-medium">{Math.round(aoBreakdown.ao2)}%</span>
+                </div>
+                <Progress value={aoBreakdown.ao2} className="mb-2" />
+                <p className="text-xs text-slate-600">
+                  Applying knowledge to familiar and unfamiliar situations
+                </p>
+              </div>
+
+              <div>
+                <div className="flex justify-between mb-2">
+                  <span className="text-sm font-medium">AO3 - Analysis & Evaluation</span>
+                  <span className="text-sm font-medium">{Math.round(aoBreakdown.ao3)}%</span>
+                </div>
+                <Progress value={aoBreakdown.ao3} className="mb-2" />
+                <p className="text-xs text-slate-600">
+                  Analyzing and evaluating information to make judgments
+                </p>
+              </div>
             </CardContent>
           </Card>
 
-          {/* Achievements */}
-          <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardHeader className="pb-6">
-              <CardTitle className="text-xl font-semibold text-slate-900">Achievements</CardTitle>
-              <CardDescription className="text-slate-600">Unlock badges by reaching milestones</CardDescription>
+          {/* Weak Topics Focus */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-red-600">Topics Requiring Attention</CardTitle>
+              <CardDescription>
+                Focus your revision on these areas for maximum improvement
+              </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              {achievements.map((achievement, index) => (
-                <div key={index} className={`p-4 rounded-xl border-2 transition-all duration-300 ${
-                  achievement.unlocked 
-                    ? 'bg-gradient-to-r from-green-50 to-emerald-50 border-green-200 shadow-sm' 
-                    : 'bg-slate-50 border-slate-200'
-                }`}>
-                  <div className="flex items-center gap-4">
-                    <div className={`p-3 rounded-xl ${
-                      achievement.unlocked 
-                        ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg' 
-                        : 'bg-slate-200 text-slate-500'
-                    }`}>
-                      <achievement.icon className="h-5 w-5" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <h4 className="font-semibold text-slate-900">{achievement.title}</h4>
-                        {achievement.unlocked && (
-                          <Badge className="bg-green-100 text-green-800 border-green-200">
-                            Unlocked
-                          </Badge>
+            <CardContent>
+              {weakTopicData.length > 0 ? (
+                <div className="space-y-4">
+                  {weakTopicData.slice(0, 5).map(({ topicId, data }) => (
+                    <div key={topicId} className="flex items-center justify-between p-3 bg-red-50 rounded-lg border border-red-200">
+                      <div>
+                        <h4 className="font-medium text-slate-900">
+                          {getTopicName(topicId)}
+                        </h4>
+                        <p className="text-sm text-slate-600">
+                          {getSubjectName(data.subjectId)}
+                        </p>
+                        {data.attempts > 0 && (
+                          <p className="text-xs text-slate-500">
+                            {data.attempts} attempts • {data.averageScore}% average
+                          </p>
                         )}
                       </div>
-                      <p className="text-sm text-slate-600">{achievement.description}</p>
+                      <Button 
+                        size="sm" 
+                        onClick={() => navigate(`/practice/${data.subjectId}/${topicId}`)}
+                      >
+                        Practice
+                      </Button>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              ) : (
+                <div className="text-center py-8">
+                  <Target className="h-12 w-12 text-slate-400 mx-auto mb-4" />
+                  <p className="text-slate-600">
+                    No weak topics identified yet. Start practicing to get personalized insights!
+                  </p>
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>
 
-        {/* Action Button */}
-        <div className="mt-12 text-center">
-          <Button 
-            size="lg" 
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 px-8 py-3 text-lg"
-          >
-            Continue Practicing
-            <ArrowUp className="ml-2 h-5 w-5" />
-          </Button>
-        </div>
+        {/* Subject Performance Breakdown */}
+        <Card className="mt-8">
+          <CardHeader>
+            <CardTitle>Subject Performance Overview</CardTitle>
+            <CardDescription>
+              Your progress across all subjects and topics
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-6">
+              {curriculum.map((subject) => {
+                const subjectData = analyticsData.filter(d => d.subjectId === subject.id);
+                const subjectScore = subjectData.length > 0 ? 
+                  subjectData.reduce((sum, d) => sum + d.averageScore, 0) / subjectData.length : 0;
+                const topicsAttempted = subjectData.length;
+                const topicsMastered = subjectData.filter(d => d.averageScore >= 85).length;
+
+                return (
+                  <div key={subject.id} className="border rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-3">
+                        <div className={`w-4 h-4 rounded-full ${subject.color}`}></div>
+                        <h3 className="text-lg font-semibold">{subject.name}</h3>
+                      </div>
+                      <div className="flex items-center space-x-4">
+                        <Badge variant="outline">
+                          {topicsAttempted}/{subject.topics.length} topics
+                        </Badge>
+                        <span className="text-lg font-bold">
+                          {Math.round(subjectScore)}%
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <Progress value={subjectScore} className="mb-4" />
+                    
+                    <div className="grid md:grid-cols-3 gap-4 text-sm">
+                      <div>
+                        <span className="text-slate-600">Topics Attempted:</span>
+                        <span className="font-medium ml-2">{topicsAttempted}</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-600">Topics Mastered:</span>
+                        <span className="font-medium ml-2 text-green-600">{topicsMastered}</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-600">Total Attempts:</span>
+                        <span className="font-medium ml-2">
+                          {subjectData.reduce((sum, d) => sum + d.attempts, 0)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
