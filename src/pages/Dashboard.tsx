@@ -149,17 +149,73 @@ const Dashboard = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8 max-w-7xl">
-        {/* Welcome Section */}
-        <div className="mb-8">
-          <h2 className="text-3xl font-semibold text-slate-900 mb-2">
+      <div className="container mx-auto px-6 py-6 max-w-7xl">
+        {/* Welcome Section - More Compact */}
+        <div className="mb-6">
+          <h2 className="text-2xl font-semibold text-slate-900 mb-1">
             Good morning, {user?.name}
           </h2>
-          <p className="text-lg text-slate-600">Ready to continue your GCSE revision journey?</p>
+          <p className="text-slate-600">Ready to continue your GCSE revision journey?</p>
         </div>
 
-        {/* Progress Overview Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {/* Subjects Section - Moved to Top */}
+        <div className="mb-6">
+          {/* Subject Controls */}
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center space-x-4">
+              <h3 className="text-xl font-semibold text-slate-900">Your Subjects</h3>
+              <Badge variant="outline" className="text-slate-500 border-slate-200">
+                {curriculum.length} subjects
+              </Badge>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1 bg-slate-50 rounded-xl p-1">
+                <Button
+                  variant={sortBy === 'progress' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setSortBy('progress')}
+                  className={sortBy === 'progress' ? 'bg-white shadow-sm' : 'text-slate-600'}
+                >
+                  Progress
+                </Button>
+                <Button
+                  variant={sortBy === 'weakest' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setSortBy('weakest')}
+                  className={sortBy === 'weakest' ? 'bg-white shadow-sm' : 'text-slate-600'}
+                >
+                  Weakest
+                </Button>
+                <Button
+                  variant={sortBy === 'alphabetical' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setSortBy('alphabetical')}
+                  className={sortBy === 'alphabetical' ? 'bg-white shadow-sm' : 'text-slate-600'}
+                >
+                  A-Z
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Subjects Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-6">
+            {sortedSubjects.map((subject) => (
+              <SubjectCard
+                key={subject.id}
+                subject={subject}
+                progress={userProgress}
+                onStartPractice={handlePractice}
+                onTogglePin={togglePinSubject}
+                isPinned={pinnedSubjects.includes(subject.id)}
+                lastActivity={getLastActivity(subject.id)}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Progress Overview Cards - More Compact */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <ProgressCard
             title="Overall Progress"
             value={`${getOverallProgress()}%`}
@@ -195,8 +251,8 @@ const Dashboard = () => {
           />
         </div>
 
-        {/* Analytics Section */}
-        <div className="grid lg:grid-cols-3 gap-6 mb-8">
+        {/* Analytics Section - More Compact */}
+        <div className="grid lg:grid-cols-3 gap-4">
           <div className="lg:col-span-1">
             <AOBreakdown userProgress={userProgress} />
           </div>
@@ -207,59 +263,6 @@ const Dashboard = () => {
               onPractice={handlePractice}
             />
           </div>
-        </div>
-
-        {/* Subject Controls */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center space-x-4">
-            <h3 className="text-2xl font-semibold text-slate-900">Your Subjects</h3>
-            <Badge variant="outline" className="text-slate-500 border-slate-200">
-              {curriculum.length} subjects
-            </Badge>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="flex items-center space-x-1 bg-slate-50 rounded-xl p-1">
-              <Button
-                variant={sortBy === 'progress' ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => setSortBy('progress')}
-                className={sortBy === 'progress' ? 'bg-white shadow-sm' : 'text-slate-600'}
-              >
-                Progress
-              </Button>
-              <Button
-                variant={sortBy === 'weakest' ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => setSortBy('weakest')}
-                className={sortBy === 'weakest' ? 'bg-white shadow-sm' : 'text-slate-600'}
-              >
-                Weakest
-              </Button>
-              <Button
-                variant={sortBy === 'alphabetical' ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => setSortBy('alphabetical')}
-                className={sortBy === 'alphabetical' ? 'bg-white shadow-sm' : 'text-slate-600'}
-              >
-                A-Z
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Subjects Grid - Premium Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-8">
-          {sortedSubjects.map((subject) => (
-            <SubjectCard
-              key={subject.id}
-              subject={subject}
-              progress={userProgress}
-              onStartPractice={handlePractice}
-              onTogglePin={togglePinSubject}
-              isPinned={pinnedSubjects.includes(subject.id)}
-              lastActivity={getLastActivity(subject.id)}
-            />
-          ))}
         </div>
       </div>
     </div>
