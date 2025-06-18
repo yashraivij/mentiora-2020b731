@@ -1,4 +1,6 @@
-import { Subject } from "@/types";
+import { Subject, Question } from "@/types";
+
+export { Question };
 
 export const curriculum: Subject[] = [
   {
@@ -61,6 +63,79 @@ export const curriculum: Subject[] = [
             options: ["Nucleus", "Mitochondria", "Ribosome", "Chloroplast"],
             correct: 1,
             explanation: "Mitochondria produce energy through respiration."
+          },
+          {
+            id: "bio1_2",
+            question: "Which organelle controls what enters and leaves the cell?",
+            options: ["Cell wall", "Cell membrane", "Nucleus", "Vacuole"],
+            correct: 1,
+            explanation: "The cell membrane is selectively permeable and controls the movement of substances in and out of the cell."
+          },
+          {
+            id: "bio1_3",
+            question: "What is the function of ribosomes?",
+            options: ["DNA storage", "Protein synthesis", "Energy production", "Waste removal"],
+            correct: 1,
+            explanation: "Ribosomes are the sites of protein synthesis where amino acids are assembled into proteins."
+          },
+          {
+            id: "bio1_4",
+            question: "Which organelle is only found in plant cells?",
+            options: ["Mitochondria", "Nucleus", "Chloroplast", "Ribosome"],
+            correct: 2,
+            explanation: "Chloroplasts contain chlorophyll and are responsible for photosynthesis, found only in plant cells."
+          },
+          {
+            id: "bio1_5",
+            question: "What is the function of the nucleus?",
+            options: ["Photosynthesis", "Controls cell activities", "Protein synthesis", "Energy production"],
+            correct: 1,
+            explanation: "The nucleus contains DNA and controls all cellular activities and reproduction."
+          },
+          {
+            id: "bio1_6",
+            question: "What is the difference between plant and animal cells?",
+            options: [
+              "Plant cells have cell walls and chloroplasts",
+              "Animal cells are larger",
+              "Plant cells don't have nuclei",
+              "Animal cells have more organelles"
+            ],
+            correct: 0,
+            explanation: "Plant cells have rigid cell walls and chloroplasts for photosynthesis, which animal cells lack."
+          },
+          {
+            id: "bio1_7",
+            question: "What is the function of the vacuole in plant cells?",
+            options: ["Protein synthesis", "Support and storage", "Photosynthesis", "DNA storage"],
+            correct: 1,
+            explanation: "The large vacuole in plant cells provides structural support and stores water and dissolved substances."
+          },
+          {
+            id: "bio1_8",
+            question: "Which type of microscope can show living cells?",
+            options: ["Electron microscope", "Light microscope", "X-ray microscope", "Laser microscope"],
+            correct: 1,
+            explanation: "Light microscopes can observe living cells, while electron microscopes require dead, prepared specimens."
+          },
+          {
+            id: "bio1_9",
+            question: "What is cytoplasm?",
+            options: [
+              "The cell's outer boundary",
+              "Jelly-like substance inside the cell",
+              "The cell's control center",
+              "Energy-producing organelle"
+            ],
+            correct: 1,
+            explanation: "Cytoplasm is the jelly-like substance that fills the cell and contains dissolved nutrients and organelles."
+          },
+          {
+            id: "bio1_10",
+            question: "What magnification do you need to see most cells clearly?",
+            options: ["×10", "×100", "×400", "×1000"],
+            correct: 2,
+            explanation: "Most cells are clearly visible at ×400 magnification, which provides sufficient detail without too much distortion."
           }
         ]
       },
@@ -75,12 +150,95 @@ export const curriculum: Subject[] = [
             options: ["Organ", "Tissue", "Cell", "Organism"],
             correct: 2,
             explanation: "Cells are the basic units of life."
+          },
+          {
+            id: "bio2_2",
+            question: "What is a tissue?",
+            options: [
+              "A single cell",
+              "A group of similar cells working together",
+              "A complete organism",
+              "An organ system"
+            ],
+            correct: 1,
+            explanation: "A tissue is a group of similar cells that work together to perform a specific function."
+          },
+          {
+            id: "bio2_3",
+            question: "What is an organ?",
+            options: [
+              "A single cell",
+              "A group of tissues working together",
+              "A group of organisms",
+              "A type of cell"
+            ],
+            correct: 1,
+            explanation: "An organ is made up of different tissues working together to perform a specific function."
+          },
+          {
+            id: "bio2_4",
+            question: "What is an organ system?",
+            options: [
+              "A single organ",
+              "A group of organs working together",
+              "A type of tissue",
+              "A single cell"
+            ],
+            correct: 1,
+            explanation: "An organ system consists of different organs working together to perform complex functions."
+          },
+          {
+            id: "bio2_5",
+            question: "Which is the correct order of biological organization?",
+            options: [
+              "Cell → Tissue → Organ → Organ System → Organism",
+              "Tissue → Cell → Organ → Organism → Organ System",
+              "Organ → Tissue → Cell → Organ System → Organism",
+              "Cell → Organ → Tissue → Organ System → Organism"
+            ],
+            correct: 0,
+            explanation: "The correct hierarchy is: Cell → Tissue → Organ → Organ System → Organism."
+          },
+          {
+            id: "bio2_6",
+            question: "What type of tissue covers body surfaces?",
+            options: ["Muscle tissue", "Nerve tissue", "Epithelial tissue", "Connective tissue"],
+            correct: 2,
+            explanation: "Epithelial tissue forms protective layers covering body surfaces and lining internal organs."
+          },
+          {
+            id: "bio2_7",
+            question: "What is the function of muscle tissue?",
+            options: ["Protection", "Movement", "Communication", "Support"],
+            correct: 1,
+            explanation: "Muscle tissue contracts to produce movement in the body."
+          },
+          {
+            id: "bio2_8",
+            question: "Which organ system includes the heart?",
+            options: ["Respiratory system", "Digestive system", "Circulatory system", "Nervous system"],
+            correct: 2,
+            explanation: "The heart is the main organ of the circulatory (cardiovascular) system."
+          },
+          {
+            id: "bio2_9",
+            question: "What connects muscle to bone?",
+            options: ["Ligaments", "Tendons", "Cartilage", "Joints"],
+            correct: 1,
+            explanation: "Tendons are strong connective tissues that attach muscles to bones."
+          },
+          {
+            id: "bio2_10",
+            question: "Which system removes waste from the body?",
+            options: ["Digestive system", "Excretory system", "Respiratory system", "All of the above"],
+            correct: 3,
+            explanation: "Multiple systems remove waste: digestive (solid waste), excretory (liquid waste), and respiratory (gaseous waste)."
           }
         ]
       },
       {
-        id: "infection-immunity",
-        name: "Infection and Immunity",
+        id: "infection-response",
+        name: "Infection and Response",
         description: "Pathogens and the immune system",
         questions: [
           {
@@ -89,6 +247,99 @@ export const curriculum: Subject[] = [
             options: ["Bacteria", "Virus", "Protoctist", "Fungus"],
             correct: 2,
             explanation: "Malaria is caused by a protoctist called Plasmodium."
+          },
+          {
+            id: "bio3_2",
+            question: "What is a pathogen?",
+            options: [
+              "A disease-causing microorganism",
+              "A type of medicine",
+              "A healthy cell",
+              "An immune system cell"
+            ],
+            correct: 0,
+            explanation: "A pathogen is any microorganism that causes disease in its host."
+          },
+          {
+            id: "bio3_3",
+            question: "Which type of pathogen causes AIDS?",
+            options: ["Bacteria", "Virus", "Fungus", "Protoctist"],
+            correct: 1,
+            explanation: "AIDS is caused by HIV (Human Immunodeficiency Virus)."
+          },
+          {
+            id: "bio3_4",
+            question: "What is the body's first line of defense against pathogens?",
+            options: ["White blood cells", "Antibodies", "Skin and mucus", "Vaccines"],
+            correct: 2,
+            explanation: "The skin acts as a physical barrier, while mucus traps pathogens before they enter the body."
+          },
+          {
+            id: "bio3_5",
+            question: "What do white blood cells do?",
+            options: [
+              "Carry oxygen",
+              "Fight infections",
+              "Help blood clot",
+              "Digest food"
+            ],
+            correct: 1,
+            explanation: "White blood cells are part of the immune system and fight infections by destroying pathogens."
+          },
+          {
+            id: "bio3_6",
+            question: "What are antibodies?",
+            options: [
+              "Types of pathogens",
+              "Proteins that fight specific pathogens",
+              "Types of blood cells",
+              "Medicines"
+            ],
+            correct: 1,
+            explanation: "Antibodies are proteins produced by white blood cells that bind to and neutralize specific pathogens."
+          },
+          {
+            id: "bio3_7",
+            question: "How do vaccines work?",
+            options: [
+              "They kill all pathogens",
+              "They strengthen the immune system with dead/weakened pathogens",
+              "They replace white blood cells",
+              "They create antibiotics"
+            ],
+            correct: 1,
+            explanation: "Vaccines contain dead or weakened pathogens that trigger the immune system to produce antibodies and memory cells."
+          },
+          {
+            id: "bio3_8",
+            question: "What is the difference between bacteria and viruses?",
+            options: [
+              "Bacteria are smaller than viruses",
+              "Viruses are living cells, bacteria are not",
+              "Bacteria are living cells, viruses need host cells to reproduce",
+              "There is no difference"
+            ],
+            correct: 2,
+            explanation: "Bacteria are independent living cells, while viruses are not cells and can only reproduce inside host cells."
+          },
+          {
+            id: "bio3_9",
+            question: "What type of drug kills bacteria?",
+            options: ["Antivirals", "Antibiotics", "Painkillers", "Vaccines"],
+            correct: 1,
+            explanation: "Antibiotics kill bacteria or stop their growth, but they don't work against viruses."
+          },
+          {
+            id: "bio3_10",
+            question: "How is HIV transmitted?",
+            options: [
+              "Through air",
+              "Through blood and body fluids",
+              "Through casual contact",
+              "Through food and water"
+            ],
+            correct: 1,
+            explanation: "HIV is transmitted through blood, unprotected sexual contact, and from mother to child during pregnancy or breastfeeding."
           }
         ]
       },
