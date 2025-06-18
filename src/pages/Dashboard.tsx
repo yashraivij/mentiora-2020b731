@@ -126,8 +126,7 @@ const Dashboard = () => {
 
   const handleNotifyClick = () => {
     setIsNotifyClicked(true);
-    // Reset the animation state after 2 seconds
-    setTimeout(() => setIsNotifyClicked(false), 2000);
+    // Removed the timeout - button stays green permanently
     // Removed the email redirect
   };
 
