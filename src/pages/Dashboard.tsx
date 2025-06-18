@@ -117,6 +117,12 @@ const Dashboard = () => {
     }
   };
 
+  const getFirstName = () => {
+    if (!user?.name) return 'there';
+    const firstName = user.name.split(' ')[0];
+    return firstName;
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
       {/* Premium Header with Glassmorphism */}
@@ -148,7 +154,7 @@ const Dashboard = () => {
                 <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
                   <User className="h-3 w-3 text-white" />
                 </div>
-                <span className="text-sm font-medium text-slate-700">{user?.name}</span>
+                <span className="text-sm font-medium text-slate-700">{getFirstName()}</span>
               </div>
               <Button variant="ghost" onClick={handleLogout} className="text-slate-600 hover:text-slate-900">
                 <LogOut className="h-4 w-4" />
@@ -164,7 +170,7 @@ const Dashboard = () => {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-2">
-                Good morning, {user?.name}
+                Good morning, {getFirstName()}
               </h2>
               <p className="text-slate-600 text-lg">Ready to elevate your GCSE revision journey?</p>
             </div>
