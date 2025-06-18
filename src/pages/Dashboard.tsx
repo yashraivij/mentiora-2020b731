@@ -11,6 +11,7 @@ import { SubjectCard } from "@/components/dashboard/SubjectCard";
 import { WeakTopicsSection } from "@/components/dashboard/WeakTopicsSection";
 import { AOBreakdown } from "@/components/dashboard/AOBreakdown";
 import { PremiumAnalyticsCard } from "@/components/dashboard/PremiumAnalyticsCard";
+import { supabase } from "@/integrations/supabase/client";
 
 interface UserProgress {
   subjectId: string;
@@ -30,20 +31,92 @@ const Dashboard = () => {
   const [isNotifyClicked, setIsNotifyClicked] = useState(false);
 
   useEffect(() => {
-    const savedProgress = localStorage.getItem(`mentiora_progress_${user?.id}`);
-    const savedWeakTopics = localStorage.getItem(`mentiora_weak_topics_${user?.id}`);
-    const savedPinnedSubjects = localStorage.getItem(`mentiora_pinned_subjects_${user?.id}`);
-    
-    if (savedProgress) {
-      setUserProgress(JSON.parse(savedProgress));
-    }
-    if (savedWeakTopics) {
-      setWeakTopics(JSON.parse(savedWeakTopics));
-    }
-    if (savedPinnedSubjects) {
-      setPinnedSubjects(JSON.parse(savedPinnedSubjects));
-    }
+    const loadUserData = async () => {
+      if (!user?.id) return;
+
+      // Load progress from localStorage
+      const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
+      if (savedProgress) {
+        const progress = JSON.parse(savedProgress);
+        setUserProgress(progress);
+        
+        // Calculate and save weak topics to database
+        const weak = progress.filter((p: UserProgress) => p.averageScore < 70).map((p: UserProgress) => p.topicId);
+        await saveWeakTopicsToDatabase(weak);
+        setWeakTopics(weak);
+      }
+
+      // Load weak topics from database
+      await loadWeakTopicsFromDatabase();
+
+      // Load pinned subjects from localStorage
+      const savedPinnedSubjects = localStorage.getItem(`mentiora_pinned_subjects_${user.id}`);
+      if (savedPinnedSubjects) {
+        setPinnedSubjects(JSON.parse(savedPinnedSubjects));
+      }
+    };
+
+    loadUserData();
   }, [user?.id]);
+
+  const loadWeakTopicsFromDatabase = async () => {
+    if (!user?.id) return;
+
+    try {
+      const { data, error } = await supabase
+        .from('weak_topics')
+        .select('topics')
+        .eq('user_id', user.id)
+        .single();
+
+      if (error && error.code !== 'PGRST116') {
+        console.error('Error loading weak topics:', error);
+        return;
+      }
+
+      if (data?.topics) {
+        setWeakTopics(data.topics);
+      }
+    } catch (error) {
+      console.error('Error loading weak topics:', error);
+    }
+  };
+
+  const saveWeakTopicsToDatabase = async (topics: string[]) => {
+    if (!user?.id) return;
+
+    try {
+      const { error } = await supabase
+        .from('weak_topics')
+        .upsert(
+          {
+            user_id: user.id,
+            topics: topics,
+            updated_at: new Date().toISOString()
+          },
+          {
+            onConflict: 'user_id'
+          }
+        );
+
+      if (error) {
+        console.error('Error saving weak topics:', error);
+      }
+    } catch (error) {
+      console.error('Error saving weak topics:', error);
+    }
+  };
+
+  // Update weak topics whenever progress changes
+  useEffect(() => {
+    if (!user?.id || userProgress.length === 0) return;
+
+    const weak = userProgress.filter(p => p.averageScore < 70).map(p => p.topicId);
+    if (JSON.stringify(weak) !== JSON.stringify(weakTopics)) {
+      setWeakTopics(weak);
+      saveWeakTopicsToDatabase(weak);
+    }
+  }, [userProgress, user?.id]);
 
   const getTopicProgress = (subjectId: string, topicId: string) => {
     const progress = userProgress.find(p => p.subjectId === subjectId && p.topicId === topicId);
@@ -126,8 +199,6 @@ const Dashboard = () => {
 
   const handleNotifyClick = () => {
     setIsNotifyClicked(true);
-    // Removed the timeout - button stays green permanently
-    // Removed the email redirect
   };
 
   return (
