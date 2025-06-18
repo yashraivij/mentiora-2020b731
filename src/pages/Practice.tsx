@@ -23,6 +23,16 @@ interface QuestionAttempt {
   };
 }
 
+// Fisher-Yates shuffle algorithm to randomize questions
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 const Practice = () => {
   const { subjectId, topicId } = useParams();
   const navigate = useNavigate();
@@ -34,17 +44,22 @@ const Practice = () => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [sessionComplete, setSessionComplete] = useState(false);
+  const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
 
   const subject = curriculum.find(s => s.id === subjectId);
   const topic = subject?.topics.find(t => t.id === topicId);
-  const questions = topic?.questions || [];
-  const currentQuestion = questions[currentQuestionIndex];
+  const currentQuestion = shuffledQuestions[currentQuestionIndex];
 
   useEffect(() => {
     if (!subject || !topic) {
       navigate('/dashboard');
+      return;
     }
-  }, [subject, topic, navigate]);
+    
+    // Shuffle questions when component mounts or topic changes
+    const shuffled = shuffleArray(topic.questions || []);
+    setShuffledQuestions(shuffled);
+  }, [subject, topic, navigate, topicId]);
 
   const markAnswerWithAI = async (question: Question, answer: string) => {
     try {
@@ -132,7 +147,7 @@ const Practice = () => {
   };
 
   const handleNextQuestion = () => {
-    if (currentQuestionIndex < questions.length - 1) {
+    if (currentQuestionIndex < shuffledQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setUserAnswer("");
       setShowFeedback(false);
@@ -142,7 +157,7 @@ const Practice = () => {
   };
 
   const finishSession = () => {
-    const totalMarks = questions.reduce((sum, q) => sum + q.marks, 0);
+    const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
     const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
     const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
     
@@ -192,7 +207,7 @@ const Practice = () => {
   };
 
   if (sessionComplete) {
-    const totalMarks = questions.reduce((sum, q) => sum + q.marks, 0);
+    const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
     const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
     const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
     
@@ -274,9 +289,9 @@ const Practice = () => {
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-slate-600">
-                Question {currentQuestionIndex + 1} of {questions.length}
+                Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
               </span>
-              <Progress value={((currentQuestionIndex + 1) / questions.length) * 100} className="w-24" />
+              <Progress value={((currentQuestionIndex + 1) / shuffledQuestions.length) * 100} className="w-24" />
             </div>
           </div>
         </div>
@@ -386,7 +401,7 @@ const Practice = () => {
                   </div>
 
                   <Button onClick={handleNextQuestion} className="w-full">
-                    {currentQuestionIndex < questions.length - 1 ? "Next Question" : "Finish Session"}
+                    {currentQuestionIndex < shuffledQuestions.length - 1 ? "Next Question" : "Finish Session"}
                   </Button>
                 </CardContent>
               </Card>
