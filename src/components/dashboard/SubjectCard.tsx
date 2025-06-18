@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -23,26 +22,6 @@ interface SubjectCardProps {
   isPinned?: boolean;
   lastActivity?: Date | null;
 }
-
-const getSubjectEmoji = (subjectName: string) => {
-  const name = subjectName.toLowerCase();
-  if (name.includes('math') || name.includes('maths')) return '🔢';
-  if (name.includes('english')) return '📚';
-  if (name.includes('science') || name.includes('biology') || name.includes('chemistry') || name.includes('physics')) return '🔬';
-  if (name.includes('history')) return '🏛️';
-  if (name.includes('geography')) return '🌍';
-  if (name.includes('art')) return '🎨';
-  if (name.includes('music')) return '🎵';
-  if (name.includes('pe') || name.includes('physical education')) return '⚽';
-  if (name.includes('french') || name.includes('spanish') || name.includes('german') || name.includes('language')) return '🌐';
-  if (name.includes('computer') || name.includes('ict') || name.includes('computing')) return '💻';
-  if (name.includes('business')) return '💼';
-  if (name.includes('economics')) return '📈';
-  if (name.includes('psychology')) return '🧠';
-  if (name.includes('religious') || name.includes('rs')) return '⛪';
-  if (name.includes('design') || name.includes('technology') || name.includes('dt')) return '🛠️';
-  return '📖'; // Default emoji for other subjects
-};
 
 export const SubjectCard = ({ 
   subject, 
@@ -89,10 +68,10 @@ export const SubjectCard = ({
       className="group relative overflow-hidden border-0 bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer rounded-3xl"
       onClick={() => onStartPractice(subject.id)}
     >
-      {/* Background Gradient */}
+      {/* Premium Background Gradient */}
       <div className={`absolute inset-0 ${subject.color} opacity-5 group-hover:opacity-10 transition-opacity duration-500`} />
 
-      {/* Pin Button */}
+      {/* Pin Button with Premium Styling */}
       {onTogglePin && (
         <Button
           variant="ghost"
@@ -114,7 +93,7 @@ export const SubjectCard = ({
       <CardHeader className="pb-4 relative z-10">
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-4">
-            <div className="text-2xl">{getSubjectEmoji(subject.name)}</div>
+            <div className={`w-4 h-4 rounded-full ${subject.color} shadow-lg group-hover:scale-125 transition-transform duration-300`}></div>
             <div>
               <CardTitle className="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors leading-tight">
                 {subject.name}
@@ -190,7 +169,7 @@ export const SubjectCard = ({
         </div>
       </CardContent>
 
-      {/* Border Glow */}
+      {/* Premium Border Glow */}
       <div className={`absolute inset-0 rounded-3xl ${subject.color} p-[1px] opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none`}>
         <div className="w-full h-full bg-white rounded-3xl" />
       </div>
