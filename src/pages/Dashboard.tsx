@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -131,8 +132,12 @@ const Dashboard = () => {
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-slate-900 to-slate-700 rounded-2xl flex items-center justify-center shadow-lg">
-                  <Sparkles className="h-5 w-5 text-white" />
+                <div className="w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg">
+                  <img 
+                    src="/lovable-uploads/99dd490e-1b20-4181-b127-6915d3c47932.png" 
+                    alt="Mentiora Logo" 
+                    className="w-8 h-8"
+                  />
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
