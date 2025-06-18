@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -28,6 +27,7 @@ const Dashboard = () => {
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
   const [pinnedSubjects, setPinnedSubjects] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<'alphabetical' | 'weakest' | 'progress'>('progress');
+  const [isNotifyClicked, setIsNotifyClicked] = useState(false);
 
   useEffect(() => {
     const savedProgress = localStorage.getItem(`mentiora_progress_${user?.id}`);
@@ -122,6 +122,13 @@ const Dashboard = () => {
     if (!user?.name) return 'there';
     const firstName = user.name.split(' ')[0];
     return firstName;
+  };
+
+  const handleNotifyClick = () => {
+    setIsNotifyClicked(true);
+    // Reset the animation state after 2 seconds
+    setTimeout(() => setIsNotifyClicked(false), 2000);
+    window.open('mailto:feedback@mentiora.com', '_blank');
   };
 
   return (
@@ -364,11 +371,17 @@ const Dashboard = () => {
               </p>
               <Button 
                 variant="outline" 
-                className="bg-white/80 backdrop-blur-sm border-violet-200 text-violet-700 hover:bg-violet-50 hover:border-violet-300 px-6 py-2 rounded-xl transition-all duration-300"
-                onClick={() => window.open('mailto:feedback@mentiora.com', '_blank')}
+                className={`
+                  px-6 py-2 rounded-xl transition-all duration-300 transform
+                  ${isNotifyClicked 
+                    ? 'bg-emerald-100 border-emerald-300 text-emerald-700 scale-105 shadow-lg' 
+                    : 'bg-white/80 backdrop-blur-sm border-violet-200 text-violet-700 hover:bg-violet-50 hover:border-violet-300'
+                  }
+                `}
+                onClick={handleNotifyClick}
               >
-                <Bell className="h-4 w-4 mr-2" />
-                Notify Me When Ready
+                {isNotifyClicked ? <CheckCircle className="h-4 w-4 mr-2" /> : <Bell className="h-4 w-4 mr-2" />}
+                {isNotifyClicked ? 'We\'ll Notify You!' : 'Notify Me When Ready'}
               </Button>
             </div>
           </div>
