@@ -128,7 +128,7 @@ const Dashboard = () => {
     setIsNotifyClicked(true);
     // Reset the animation state after 2 seconds
     setTimeout(() => setIsNotifyClicked(false), 2000);
-    window.open('mailto:feedback@mentiora.com', '_blank');
+    // Removed the email redirect
   };
 
   return (
