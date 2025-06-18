@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -352,11 +351,25 @@ const Dashboard = () => {
           </div>
 
           <div className="text-center py-8">
-            <Button className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white border-0 px-8 py-3 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-              <Crown className="h-5 w-5 mr-2" />
-              Upgrade to Premium
-            </Button>
-            <p className="text-slate-500 mt-3 text-sm">Unlock advanced analytics and AI-powered insights</p>
+            <div className="space-y-4">
+              <div className="flex items-center justify-center space-x-2">
+                <Sparkles className="h-6 w-6 text-violet-500" />
+                <h4 className="text-xl font-bold text-slate-900">Advanced Analytics Coming Soon</h4>
+                <Sparkles className="h-6 w-6 text-violet-500" />
+              </div>
+              <p className="text-slate-600 max-w-md mx-auto">
+                We're working hard to bring you powerful AI-driven insights to supercharge your GCSE revision. 
+                Stay tuned for updates!
+              </p>
+              <Button 
+                variant="outline" 
+                className="bg-white/80 backdrop-blur-sm border-violet-200 text-violet-700 hover:bg-violet-50 hover:border-violet-300 px-6 py-2 rounded-xl transition-all duration-300"
+                onClick={() => window.open('mailto:feedback@mentiora.com', '_blank')}
+              >
+                <Bell className="h-4 w-4 mr-2" />
+                Notify Me When Ready
+              </Button>
+            </div>
           </div>
         </div>
       </div>
