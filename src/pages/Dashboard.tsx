@@ -74,8 +74,8 @@ const Dashboard = () => {
         return;
       }
 
-      if (data?.topics) {
-        setWeakTopics(data.topics);
+      if (data?.topics && Array.isArray(data.topics)) {
+        setWeakTopics(data.topics as string[]);
       }
     } catch (error) {
       console.error('Error loading weak topics:', error);
