@@ -307,7 +307,7 @@ const Dashboard = () => {
               description="Track how well you retain information over time with spaced repetition analysis"
               icon={Brain}
               gradient="from-purple-500 to-indigo-600"
-              comingSoon={false}
+              comingSoon={true}
             />
             
             <PremiumAnalyticsCard
@@ -315,7 +315,7 @@ const Dashboard = () => {
               description="AI-powered recommendations for when you learn most effectively"
               icon={Clock}
               gradient="from-blue-500 to-cyan-500"
-              comingSoon={false}
+              comingSoon={true}
             />
             
             <PremiumAnalyticsCard
@@ -323,7 +323,7 @@ const Dashboard = () => {
               description="Forecast your exam performance based on current learning patterns"
               icon={LineChart}
               gradient="from-emerald-500 to-teal-600"
-              comingSoon={false}
+              comingSoon={true}
             />
             
             <PremiumAnalyticsCard
@@ -331,7 +331,7 @@ const Dashboard = () => {
               description="Measure and optimize your knowledge acquisition speed"
               icon={Zap}
               gradient="from-orange-500 to-red-500"
-              comingSoon={false}
+              comingSoon={true}
             />
             
             <PremiumAnalyticsCard
@@ -339,7 +339,7 @@ const Dashboard = () => {
               description="Visualize connections between topics and identify knowledge gaps"
               icon={Target}
               gradient="from-pink-500 to-rose-600"
-              comingSoon={false}
+              comingSoon={true}
             />
             
             <PremiumAnalyticsCard
