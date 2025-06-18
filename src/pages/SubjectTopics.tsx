@@ -158,9 +158,12 @@ const SubjectTopics = () => {
                     </div>
                   )}
                   <Button 
-                    className="w-full" 
+                    className={`w-full font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
+                      isMastered 
+                        ? 'bg-gradient-to-r from-slate-400 to-slate-500 hover:from-slate-500 hover:to-slate-600 text-white' 
+                        : 'bg-gradient-to-r from-emerald-400 to-cyan-500 hover:from-emerald-500 hover:to-cyan-600 text-white'
+                    }`}
                     onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
-                    variant={isMastered ? "outline" : "default"}
                   >
                     {isNew ? 'Start Practice' : 
                      isMastered ? 'Review' : 
