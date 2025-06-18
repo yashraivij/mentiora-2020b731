@@ -255,7 +255,7 @@ const Dashboard = () => {
             progress={getOverallProgress()}
             icon={TrendingUp}
             color="bg-gradient-to-br from-slate-900 to-slate-700"
-            trend={userProgress.length > 0 ? 5 : 0}
+            trend={userProgress.length > 0 ? 5 : undefined}
           />
           
           <ProgressCard
