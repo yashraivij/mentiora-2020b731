@@ -9,6 +9,7 @@ import { curriculum, Question } from "@/data/curriculum";
 import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 interface QuestionAttempt {
   questionId: string;
@@ -45,234 +46,48 @@ const Practice = () => {
     }
   }, [subject, topic, navigate]);
 
-  const simulateAIMarking = async (question: Question, answer: string) => {
-    // Simulate AI processing time
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    if (!answer.trim()) {
+  const markAnswerWithAI = async (question: Question, answer: string) => {
+    try {
+      console.log('Calling AI marking function with:', { 
+        question: question.question, 
+        answer: answer.substring(0, 100) + '...' 
+      });
+
+      const { data, error } = await supabase.functions.invoke('mark-answer', {
+        body: {
+          question: question.question,
+          userAnswer: answer,
+          modelAnswer: question.modelAnswer,
+          markingCriteria: question.markingCriteria,
+          totalMarks: question.marks,
+          subjectId: subjectId
+        }
+      });
+
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw error;
+      }
+
+      console.log('AI marking result:', data);
+
       return {
-        modelAnswer: question.modelAnswer,
-        whyThisGetsMark: question.markingCriteria.breakdown.join('\n'),
-        whyYoursDidnt: "No answer provided - cannot award any marks.",
-        specLink: question.specReference
+        marksAwarded: data.marksAwarded || 0,
+        feedback: data.feedback || "No feedback available",
+        assessment: data.assessment || "Needs Review"
+      };
+
+    } catch (error) {
+      console.error('Error calling AI marking function:', error);
+      toast.error("Failed to mark answer with AI. Please try again.");
+      
+      // Fallback to basic marking
+      return {
+        marksAwarded: answer.trim() ? Math.round(question.marks * 0.5) : 0,
+        feedback: "AI marking temporarily unavailable. Answer has been given partial credit.",
+        assessment: "Needs Review"
       };
     }
-
-    // More accurate teacher-like marking
-    const marksAwarded = await calculateMarksAwarded(question, answer);
-    const feedback = generateTeacherFeedback(question, answer, marksAwarded);
-    
-    return {
-      modelAnswer: question.modelAnswer,
-      whyThisGetsMark: question.markingCriteria.breakdown.join('\n'),
-      whyYoursDidnt: feedback,
-      specLink: question.specReference
-    };
-  };
-
-  const calculateMarksAwarded = async (question: Question, answer: string): Promise<number> => {
-    if (!answer.trim()) return 0;
-
-    const answerLower = answer.toLowerCase();
-    const modelLower = question.modelAnswer.toLowerCase();
-    
-    // Extract key marking points from the marking criteria
-    const markingPoints = question.markingCriteria.breakdown;
-    let totalMarksAwarded = 0;
-    
-    // Check each marking point individually
-    for (const point of markingPoints) {
-      const pointMarks = checkMarkingPoint(point, answer, question, subjectId!);
-      totalMarksAwarded += pointMarks;
-    }
-    
-    // Ensure we don't exceed the maximum marks for the question
-    const finalMarks = Math.min(totalMarksAwarded, question.marks);
-    
-    // Give some credit for partial understanding even if specific points are missed
-    if (finalMarks === 0 && answer.length > 20) {
-      // Check for general relevance and effort
-      const relevanceScore = calculateRelevanceScore(question, answer);
-      if (relevanceScore > 0.3) {
-        return Math.min(1, question.marks); // Give at least 1 mark for relevant attempt
-      }
-    }
-    
-    return Math.max(0, finalMarks);
-  };
-
-  const checkMarkingPoint = (markingPoint: string, answer: string, question: Question, subjectId: string): number => {
-    const answerLower = answer.toLowerCase();
-    const pointLower = markingPoint.toLowerCase();
-    
-    // Extract key concepts from the marking point
-    const keyWords = extractKeyWordsFromPoint(pointLower, subjectId);
-    const marksPerPoint = question.marks / question.markingCriteria.breakdown.length;
-    
-    let pointScore = 0;
-    
-    // Check if the answer contains the key concepts from this marking point
-    for (const keyWord of keyWords) {
-      if (checkConceptPresent(keyWord, answerLower, subjectId)) {
-        pointScore += marksPerPoint / keyWords.length;
-      }
-    }
-    
-    // Bonus for exact or very close matches
-    if (answerLower.includes(pointLower.substring(0, Math.min(pointLower.length, 20)))) {
-      pointScore = marksPerPoint; // Full marks for this point
-    }
-    
-    return Math.min(pointScore, marksPerPoint);
-  };
-
-  const extractKeyWordsFromPoint = (point: string, subjectId: string): string[] => {
-    // Remove common words and extract meaningful terms
-    const commonWords = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'is', 'are', 'was', 'were', 'has', 'have', 'had', 'will', 'would', 'could', 'should', 'may', 'might', 'can', 'must', 'this', 'that', 'these', 'those'];
-    
-    const words = point.replace(/[^\w\s]/g, ' ').split(/\s+/)
-      .filter(word => word.length > 2 && !commonWords.includes(word));
-    
-    // Subject-specific important terms that should be weighted more heavily
-    const importantTerms = {
-      biology: ['osmosis', 'diffusion', 'enzyme', 'active site', 'substrate', 'catalyst', 'membrane', 'concentration', 'gradient', 'water potential', 'photosynthesis', 'respiration', 'mitochondria', 'chloroplast', 'glucose', 'oxygen', 'carbon dioxide', 'energy', 'atp'],
-      chemistry: ['atom', 'molecule', 'ion', 'electron', 'proton', 'neutron', 'bond', 'ionic', 'covalent', 'metallic', 'compound', 'element', 'reaction', 'oxidation', 'reduction', 'acid', 'base', 'ph', 'catalyst'],
-      maths: ['equation', 'formula', 'solve', 'calculate', 'fraction', 'decimal', 'percentage', 'ratio', 'proportion', 'area', 'volume', 'perimeter', 'probability', 'graph', 'function']
-    };
-    
-    const subjectTerms = importantTerms[subjectId as keyof typeof importantTerms] || [];
-    
-    // Prioritize subject-specific terms
-    const prioritizedWords = words.filter(word => subjectTerms.includes(word));
-    const otherWords = words.filter(word => !subjectTerms.includes(word));
-    
-    return [...prioritizedWords, ...otherWords.slice(0, 3)]; // Take up to 3 other words
-  };
-
-  const checkConceptPresent = (concept: string, answer: string, subjectId: string): boolean => {
-    // Direct match
-    if (answer.includes(concept)) return true;
-    
-    // Check for variations and synonyms
-    const synonyms = {
-      'osmosis': ['water movement', 'water transport', 'movement of water'],
-      'diffusion': ['movement', 'transport', 'spread'],
-      'enzyme': ['catalyst', 'protein catalyst', 'biological catalyst'],
-      'active site': ['binding site', 'catalytic site', 'enzyme site'],
-      'substrate': ['reactant', 'molecule that binds'],
-      'concentration gradient': ['concentration difference', 'gradient', 'difference in concentration'],
-      'photosynthesis': ['light reaction', 'carbon fixation', 'glucose production'],
-      'respiration': ['glucose breakdown', 'energy release', 'oxygen use'],
-      'ionic bond': ['electrostatic attraction', 'electron transfer', 'charged particles'],
-      'covalent bond': ['electron sharing', 'shared electrons', 'molecular bond'],
-      'equation': ['formula', 'mathematical expression', 'equals'],
-      'solve': ['find', 'calculate', 'work out', 'determine']
-    };
-    
-    const conceptSynonyms = synonyms[concept as keyof typeof synonyms] || [];
-    
-    for (const synonym of conceptSynonyms) {
-      if (answer.includes(synonym)) return true;
-    }
-    
-    // Check for partial matches (for longer terms)
-    if (concept.length > 6) {
-      const conceptWords = concept.split(' ');
-      if (conceptWords.length > 1) {
-        // For multi-word concepts, check if all words are present (not necessarily together)
-        return conceptWords.every(word => word.length > 2 && answer.includes(word));
-      } else {
-        // For single long words, check for partial matches
-        return answer.includes(concept.substring(0, concept.length - 2));
-      }
-    }
-    
-    return false;
-  };
-
-  const calculateRelevanceScore = (question: Question, answer: string): number => {
-    const questionWords = question.question.toLowerCase().split(/\s+/)
-      .filter(word => word.length > 3);
-    const answerWords = answer.toLowerCase().split(/\s+/);
-    
-    let matches = 0;
-    for (const qWord of questionWords) {
-      if (answerWords.some(aWord => aWord.includes(qWord) || qWord.includes(aWord))) {
-        matches++;
-      }
-    }
-    
-    return matches / Math.max(questionWords.length, 1);
-  };
-
-  const generateTeacherFeedback = (question: Question, answer: string, marksAwarded: number): string => {
-    const percentage = (marksAwarded / question.marks) * 100;
-    const answerLower = answer.toLowerCase();
-    
-    // Analyze what the student got right
-    const correctPoints = [];
-    const missedPoints = [];
-    
-    for (const point of question.markingCriteria.breakdown) {
-      const keyWords = extractKeyWordsFromPoint(point.toLowerCase(), subjectId!);
-      let pointCovered = false;
-      
-      for (const keyWord of keyWords) {
-        if (checkConceptPresent(keyWord, answerLower, subjectId!)) {
-          pointCovered = true;
-          break;
-        }
-      }
-      
-      if (pointCovered) {
-        correctPoints.push(point);
-      } else {
-        missedPoints.push(point);
-      }
-    }
-    
-    let feedback = "";
-    
-    if (percentage >= 90) {
-      feedback = `Excellent answer! You demonstrated comprehensive understanding. `;
-      if (correctPoints.length > 0) {
-        feedback += `You correctly covered: ${correctPoints.slice(0, 2).join('; ')}. `;
-      }
-      if (missedPoints.length > 0) {
-        feedback += `For perfection, also mention: ${missedPoints[0]}.`;
-      } else {
-        feedback += `Your answer is thorough and accurate.`;
-      }
-    } else if (percentage >= 75) {
-      feedback = `Good answer showing solid understanding. `;
-      if (correctPoints.length > 0) {
-        feedback += `You correctly identified: ${correctPoints.slice(0, 2).join('; ')}. `;
-      }
-      if (missedPoints.length > 0) {
-        feedback += `To improve further, include: ${missedPoints.slice(0, 2).join('; ')}.`;
-      }
-    } else if (percentage >= 50) {
-      feedback = `Reasonable attempt with some correct understanding. `;
-      if (correctPoints.length > 0) {
-        feedback += `You got credit for: ${correctPoints.join('; ')}. `;
-      }
-      if (missedPoints.length > 0) {
-        feedback += `Missing key points: ${missedPoints.slice(0, 3).join('; ')}.`;
-      }
-    } else if (percentage >= 25) {
-      feedback = `Limited understanding shown. `;
-      if (correctPoints.length > 0) {
-        feedback += `Some credit given for: ${correctPoints.join('; ')}. `;
-      }
-      feedback += `Need to focus on: ${missedPoints.slice(0, 3).join('; ')}.`;
-    } else if (percentage > 0) {
-      feedback = `Minimal marks awarded for attempting the question. `;
-      feedback += `Review the key concepts: ${missedPoints.slice(0, 3).join('; ')}.`;
-    } else {
-      feedback = `No marks awarded. The answer doesn't address the key points: ${missedPoints.slice(0, 3).join('; ')}.`;
-    }
-    
-    return feedback;
   };
 
   const handleSubmitAnswer = async () => {
@@ -284,22 +99,32 @@ const Practice = () => {
     setIsSubmitting(true);
     
     try {
-      const feedback = await simulateAIMarking(currentQuestion, userAnswer);
+      console.log('Starting to mark answer...');
       
-      // Calculate marks awarded out of total marks
-      const marksAwarded = await calculateMarksAwarded(currentQuestion, userAnswer);
+      const markingResult = await markAnswerWithAI(currentQuestion, userAnswer);
       
+      const feedback = {
+        modelAnswer: currentQuestion.modelAnswer,
+        whyThisGetsMark: currentQuestion.markingCriteria.breakdown.join('\n'),
+        whyYoursDidnt: markingResult.feedback,
+        specLink: currentQuestion.specReference
+      };
+
       const attempt: QuestionAttempt = {
         questionId: currentQuestion.id,
         userAnswer,
-        score: marksAwarded,
+        score: markingResult.marksAwarded,
         feedback
       };
       
       setAttempts([...attempts, attempt]);
       setShowFeedback(true);
       
+      // Show success toast with score
+      toast.success(`Answer marked! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks`);
+      
     } catch (error) {
+      console.error('Error marking answer:', error);
       toast.error("Error processing your answer. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -493,7 +318,7 @@ const Practice = () => {
                       disabled={isSubmitting || !userAnswer.trim()}
                       className="w-full"
                     >
-                      {isSubmitting ? "Marking..." : "Submit Answer"}
+                      {isSubmitting ? "AI is marking your answer..." : "Submit Answer"}
                     </Button>
                   )}
                 </div>
@@ -506,7 +331,7 @@ const Practice = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <CheckCircle className="h-5 w-5 mr-2 text-green-600" />
-                    Examiner Feedback
+                    AI Teacher Feedback
                   </CardTitle>
                   <div className="flex items-center space-x-2">
                     <span className="text-2xl font-bold text-green-600">
@@ -543,11 +368,11 @@ const Practice = () => {
                     </div>
                   </div>
 
-                  {/* Why Yours Didn't */}
+                  {/* AI Feedback */}
                   <div>
                     <h4 className="font-semibold text-slate-900 mb-2 flex items-center">
                       <Lightbulb className="h-4 w-4 mr-2" />
-                      How to Improve
+                      AI Teacher Feedback
                     </h4>
                     <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
                       <p className="text-slate-700">{currentAttempt.feedback.whyYoursDidnt}</p>
