@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -158,14 +159,23 @@ export const SubjectCard = ({
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-2 border-t border-slate-100">
+        <div className="flex items-center justify-between pt-4">
           <div className="flex items-center space-x-2">
             <Sparkles className="h-3 w-3 text-slate-400" />
             <span className="text-xs text-slate-500 font-medium">
               {subject.topics.length} topics available
             </span>
           </div>
-          <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-slate-600 group-hover:translate-x-1 transition-all duration-300" />
+          <Button 
+            className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+            onClick={(e) => {
+              e.stopPropagation();
+              onStartPractice(subject.id);
+            }}
+          >
+            Start Practice
+            <ArrowRight className="h-4 w-4 ml-2" />
+          </Button>
         </div>
       </CardContent>
 
