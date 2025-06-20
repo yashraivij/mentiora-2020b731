@@ -1,13 +1,9 @@
-
 export interface Question {
   id: string;
   question: string;
-  marks: number;
   modelAnswer: string;
+  marks: number;
   markingCriteria: {
-    ao1: number;
-    ao2: number;
-    ao3: number;
     breakdown: string[];
   };
   specReference: string;
@@ -16,1957 +12,652 @@ export interface Question {
 export interface Topic {
   id: string;
   name: string;
+  description: string;
   questions: Question[];
 }
 
 export interface Subject {
   id: string;
   name: string;
-  color: string;
+  icon: string;
   topics: Topic[];
 }
 
 export const curriculum: Subject[] = [
   {
-    id: 'biology',
-    name: 'Biology',
-    color: 'bg-green-500',
+    id: "biology",
+    name: "Biology",
+    icon: "Microscope",
     topics: [
       {
-        id: 'b1-cell-biology',
-        name: 'B1 Cell Biology',
+        id: "cell-biology",
+        name: "Cell Biology",
+        description: "Structure and function of cells, organelles, and cellular processes",
         questions: [
           {
-            id: 'b1-q1',
-            question: 'Describe how the structure of a root hair cell helps it absorb water efficiently. (3 marks)',
-            marks: 3,
-            modelAnswer: 'The root hair cell has a large surface area due to its elongated projection, which increases the rate of water absorption. The cell wall is thin, providing a short diffusion pathway for water molecules. The cell contains many mitochondria to provide energy for active transport of mineral ions.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States large surface area',
-                'AO2 (1): Explains link between structure and function',
-                'AO3 (1): Links mitochondria to energy for active transport'
-              ]
-            },
-            specReference: 'AQA Biology B1.1'
-          },
-          {
-            id: 'b1-q2',
-            question: 'Explain the process of osmosis and give an example of where it occurs in plants. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Osmosis is the movement of water molecules from a region of high water potential to a region of low water potential through a partially permeable membrane. Water moves down its concentration gradient without requiring energy (passive process). In plants, osmosis occurs when water moves from the soil into root hair cells, as the soil has higher water potential than the cell contents.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Definition of osmosis',
-                'AO1 (1): States it is a passive process',
-                'AO2 (1): Application to plants',
-                'AO2 (1): Explains direction of water movement'
-              ]
-            },
-            specReference: 'AQA Biology B1.2'
-          },
-          {
-            id: 'b1-q3',
-            question: 'Compare the structure and function of prokaryotic and eukaryotic cells. (6 marks)',
+            id: "cell-1",
+            question: "Describe the structure and function of mitochondria in eukaryotic cells.",
+            modelAnswer: "Mitochondria are double-membrane organelles with an outer smooth membrane and an inner folded membrane forming cristae. The inner membrane contains the electron transport chain and ATP synthase. The matrix contains enzymes for the Krebs cycle. Their primary function is aerobic respiration, producing ATP through oxidative phosphorylation. They also contain their own DNA and ribosomes, supporting the endosymbiotic theory.",
             marks: 6,
-            modelAnswer: 'Prokaryotic cells have no nucleus, with genetic material freely floating in the cytoplasm, while eukaryotic cells have a membrane-bound nucleus containing DNA. Prokaryotic cells lack membrane-bound organelles, whereas eukaryotic cells contain organelles like mitochondria, endoplasmic reticulum, and Golgi apparatus. Both cell types have ribosomes, but prokaryotic ribosomes are smaller (70S) compared to eukaryotic ribosomes (80S). Prokaryotic cells are typically smaller and simpler in structure, while eukaryotic cells are larger and more complex.',
             markingCriteria: {
-              ao1: 3,
-              ao2: 2,
-              ao3: 1,
               breakdown: [
-                'AO1 (1): States prokaryotes have no nucleus',
-                'AO1 (1): States eukaryotes have membrane-bound organelles',
-                'AO1 (1): Mentions ribosomes in both',
-                'AO2 (1): Compares ribosome sizes',
-                'AO2 (1): Compares cell complexity',
-                'AO3 (1): Links structure to function'
+                "1 mark: Double membrane structure",
+                "1 mark: Inner membrane folded into cristae",
+                "1 mark: Matrix contains Krebs cycle enzymes",
+                "1 mark: Site of aerobic respiration",
+                "1 mark: ATP production via oxidative phosphorylation",
+                "1 mark: Contains own DNA and ribosomes"
               ]
             },
-            specReference: 'AQA Biology B1.3'
+            specReference: "3.2.1"
           },
           {
-            id: 'b1-q4',
-            question: 'Describe the process of active transport and explain why energy is required. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Active transport is the movement of substances from a region of low concentration to a region of high concentration against the concentration gradient. This process requires energy in the form of ATP because substances are being moved against their natural tendency to diffuse. Carrier proteins in the cell membrane change shape when ATP is used, allowing specific substances to be transported across the membrane.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States movement against concentration gradient',
-                'AO1 (1): States ATP is required',
-                'AO2 (1): Explains why energy is needed',
-                'AO2 (1): Describes role of carrier proteins'
-              ]
-            },
-            specReference: 'AQA Biology B1.4'
-          },
-          {
-            id: 'b1-q5',
-            question: 'Explain how the structure of a leaf cell is adapted for photosynthesis. (5 marks)',
+            id: "cell-2",
+            question: "Explain the process of osmosis and its importance in plant cells.",
+            modelAnswer: "Osmosis is the movement of water molecules from a region of higher water potential to a region of lower water potential through a partially permeable membrane. In plant cells, osmosis maintains turgor pressure, keeping cells rigid and plants upright. When water enters by osmosis, the cell becomes turgid. Water loss causes plasmolysis. This process is crucial for support, transport, and maintaining cell shape.",
             marks: 5,
-            modelAnswer: 'Leaf cells contain numerous chloroplasts containing chlorophyll to absorb light energy. The chloroplasts are mainly located in the palisade layer near the upper surface to receive maximum light. The cell has a large vacuole to maintain cell shape and structure. Stomata in the lower epidermis allow gas exchange for carbon dioxide entry and oxygen exit. The thin cell wall allows easy diffusion of gases.',
             markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 1,
               breakdown: [
-                'AO1 (1): States presence of chloroplasts with chlorophyll',
-                'AO1 (1): Mentions stomata for gas exchange',
-                'AO2 (1): Explains positioning of chloroplasts',
-                'AO2 (1): Links thin cell wall to gas diffusion',
-                'AO3 (1): Links structure to photosynthesis function'
+                "1 mark: Definition of osmosis",
+                "1 mark: Movement down water potential gradient",
+                "1 mark: Through partially permeable membrane",
+                "1 mark: Maintains turgor pressure in plants",
+                "1 mark: Importance for support and structure"
               ]
             },
-            specReference: 'AQA Biology B1.5'
-          },
-          {
-            id: 'b1-q6',
-            question: 'Describe the differences between animal and plant cells. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Plant cells have a rigid cell wall made of cellulose, while animal cells only have a flexible cell membrane. Plant cells contain chloroplasts for photosynthesis, which animal cells lack. Plant cells have a large permanent vacuole, whereas animal cells may have small temporary vacuoles. Both cell types have a nucleus, cytoplasm, and mitochondria.',
-            markingCriteria: {
-              ao1: 3,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States plant cells have cell wall',
-                'AO1 (1): States plant cells have chloroplasts',
-                'AO1 (1): States plant cells have large vacuole',
-                'AO2 (1): Compares structures between cell types'
-              ]
-            },
-            specReference: 'AQA Biology B1.6'
-          },
-          {
-            id: 'b1-q7',
-            question: 'Explain how substances move in and out of cells by diffusion. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Diffusion is the movement of particles from an area of high concentration to an area of low concentration. This movement occurs down the concentration gradient and does not require energy (passive process). Examples include oxygen diffusing into cells and carbon dioxide diffusing out of cells.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States movement from high to low concentration',
-                'AO2 (1): States it is a passive process',
-                'AO3 (1): Gives relevant example'
-              ]
-            },
-            specReference: 'AQA Biology B1.7'
-          },
-          {
-            id: 'b1-q8',
-            question: 'Describe the structure and function of mitochondria. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Mitochondria are oval-shaped organelles with a double membrane. The inner membrane is folded to form cristae, which increase the surface area for respiration. Mitochondria are the site of aerobic respiration where glucose is broken down to release energy in the form of ATP.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): Describes double membrane structure',
-                'AO2 (1): Explains cristae increase surface area',
-                'AO3 (1): Links to aerobic respiration function'
-              ]
-            },
-            specReference: 'AQA Biology B1.8'
-          },
-          {
-            id: 'b1-q9',
-            question: 'Explain why cells need to be small in size. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Small cells have a large surface area to volume ratio, which allows efficient exchange of materials across the cell membrane. As cell size increases, the volume increases faster than surface area, making it difficult for substances to reach the center of the cell quickly. Small cells can obtain nutrients and remove waste products more efficiently. Large cells would struggle to maintain adequate concentration gradients.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States surface area to volume ratio concept',
-                'AO2 (1): Explains relationship between size and efficiency',
-                'AO2 (1): Explains difficulty in large cells',
-                'AO3 (1): Links to survival needs'
-              ]
-            },
-            specReference: 'AQA Biology B1.9'
-          },
-          {
-            id: 'b1-q10',
-            question: 'Describe how you would use a microscope to observe plant cells. (5 marks)',
-            marks: 5,
-            modelAnswer: 'Place a thin section of plant tissue (such as onion epidermis) on a clean slide. Add a drop of water and place a coverslip carefully to avoid air bubbles. Start with the lowest power objective lens and use the coarse focus to get a rough image. Switch to higher magnification and use fine focus for clear detail. Ensure adequate lighting and adjust if necessary.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States use of thin tissue section',
-                'AO1 (1): Mentions use of coverslip',
-                'AO2 (1): Describes focusing procedure',
-                'AO2 (1): Mentions starting with low power',
-                'AO3 (1): Explains importance of avoiding air bubbles'
-              ]
-            },
-            specReference: 'AQA Biology B1.10'
+            specReference: "3.2.2"
           }
         ]
       },
       {
-        id: 'b2-organisation',
-        name: 'B2 Organisation',
+        id: "genetics",
+        name: "Genetics",
+        description: "Inheritance, DNA structure, and genetic variation",
         questions: [
           {
-            id: 'b2-q1',
-            question: 'Describe the function of enzymes and explain why they are important in biological processes. (5 marks)',
-            marks: 5,
-            modelAnswer: 'Enzymes are biological catalysts that speed up chemical reactions by lowering the activation energy required. They have specific active sites that are complementary to their substrate molecules. Enzymes are important because they allow metabolic reactions to occur at body temperature and at a rate fast enough to sustain life. Without enzymes, reactions would be too slow to maintain cellular processes.',
+            id: "genetics-1",
+            question: "Describe the structure of DNA and explain how it relates to its function.",
+            modelAnswer: "DNA is a double helix composed of two antiparallel polynucleotide strands. Each strand consists of nucleotides containing a phosphate group, deoxyribose sugar, and one of four bases (A, T, G, C). Bases pair specifically: A with T (2 hydrogen bonds) and G with C (3 hydrogen bonds). The double helix structure allows for semi-conservative replication, while base pairing ensures accurate copying. The sequence of bases codes for genetic information.",
+            marks: 8,
             markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 1,
               breakdown: [
-                'AO1 (1): States enzymes are catalysts',
-                'AO1 (1): Mentions active site and substrate',
-                'AO2 (1): Explains lowering activation energy',
-                'AO2 (1): Links to body temperature',
-                'AO3 (1): Evaluates importance for life processes'
+                "1 mark: Double helix structure",
+                "1 mark: Two antiparallel strands",
+                "1 mark: Nucleotide components",
+                "1 mark: Four bases A, T, G, C",
+                "1 mark: Complementary base pairing",
+                "1 mark: Hydrogen bonding (A-T: 2, G-C: 3)",
+                "1 mark: Enables semi-conservative replication",
+                "1 mark: Base sequence codes for information"
               ]
             },
-            specReference: 'AQA Biology B2.1'
-          },
-          {
-            id: 'b2-q2',
-            question: 'Explain the lock and key model of enzyme action. (4 marks)',
-            marks: 4,
-            modelAnswer: 'The enzyme has a specific active site with a complementary shape to the substrate molecule. The substrate fits into the active site like a key fits into a lock. When the substrate binds to the active site, an enzyme-substrate complex is formed. The enzyme then catalyzes the reaction and releases the product, remaining unchanged for reuse.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States complementary shapes',
-                'AO1 (1): Mentions enzyme-substrate complex',
-                'AO2 (1): Explains lock and key analogy',
-                'AO2 (1): States enzyme remains unchanged'
-              ]
-            },
-            specReference: 'AQA Biology B2.2'
-          },
-          {
-            id: 'b2-q3',
-            question: 'Describe how temperature affects enzyme activity. (4 marks)',
-            marks: 4,
-            modelAnswer: 'As temperature increases, enzyme activity initially increases because molecules have more kinetic energy and collide more frequently. At the optimum temperature, enzyme activity is at its maximum. Beyond the optimum temperature, the enzyme begins to denature as hydrogen bonds break, causing the active site to change shape. At very high temperatures, the enzyme is completely denatured and activity stops.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States activity increases then decreases',
-                'AO2 (1): Explains increased kinetic energy',
-                'AO2 (1): Explains denaturation process',
-                'AO3 (1): Links shape change to loss of function'
-              ]
-            },
-            specReference: 'AQA Biology B2.3'
-          },
-          {
-            id: 'b2-q4',
-            question: 'Explain how pH affects enzyme activity. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Each enzyme has an optimum pH at which it works best. Changes in pH can alter the shape of the active site by affecting the bonds that maintain the enzyme structure. If the pH is too high or too low, the enzyme may denature and lose its catalytic activity.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States enzymes have optimum pH',
-                'AO2 (1): Explains pH affects enzyme shape',
-                'AO3 (1): Links shape change to loss of activity'
-              ]
-            },
-            specReference: 'AQA Biology B2.4'
-          },
-          {
-            id: 'b2-q5',
-            question: 'Describe the structure and function of the digestive system. (6 marks)',
-            marks: 6,
-            modelAnswer: 'The digestive system consists of the alimentary canal and associated organs. The mouth mechanically breaks down food and begins starch digestion with amylase. The stomach produces acid and pepsin to digest proteins. The small intestine completes digestion with enzymes from the pancreas and absorbs nutrients. The large intestine absorbs water and forms feces. The liver produces bile to emulsify fats.',
-            markingCriteria: {
-              ao1: 3,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): Lists main organs',
-                'AO1 (1): States stomach digests proteins',
-                'AO1 (1): States small intestine absorbs nutrients',
-                'AO2 (1): Explains mechanical and chemical digestion',
-                'AO2 (1): Explains role of bile',
-                'AO3 (1): Links structure to function'
-              ]
-            },
-            specReference: 'AQA Biology B2.5'
-          },
-          {
-            id: 'b2-q6',
-            question: 'Explain how the small intestine is adapted for absorption. (5 marks)',
-            marks: 5,
-            modelAnswer: 'The small intestine has villi and microvilli which greatly increase the surface area for absorption. The wall is thin (one cell thick) providing a short diffusion pathway. Each villus contains a rich blood supply to maintain concentration gradients. The villi also contain lacteal vessels for fat absorption. The epithelial cells have many mitochondria to provide energy for active transport.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States presence of villi/microvilli',
-                'AO1 (1): States thin wall',
-                'AO2 (1): Explains increased surface area',
-                'AO2 (1): Explains blood supply role',
-                'AO3 (1): Links adaptations to function'
-              ]
-            },
-            specReference: 'AQA Biology B2.6'
-          },
-          {
-            id: 'b2-q7',
-            question: 'Describe the process of digestion of carbohydrates. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Carbohydrate digestion begins in the mouth where amylase breaks down starch into maltose. In the small intestine, pancreatic amylase continues to break down starch. Maltase, sucrase, and lactase enzymes on the intestinal wall break down disaccharides into monosaccharides. The resulting glucose, fructose, and galactose are absorbed into the bloodstream.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States amylase breaks down starch',
-                'AO1 (1): Names specific enzymes',
-                'AO2 (1): Explains sequential breakdown process',
-                'AO2 (1): States final products are absorbed'
-              ]
-            },
-            specReference: 'AQA Biology B2.7'
-          },
-          {
-            id: 'b2-q8',
-            question: 'Explain how food is moved through the digestive system. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Food moves through the digestive system by peristalsis, which involves rhythmic contractions of the smooth muscle in the gut wall. These wave-like contractions push the food along the alimentary canal. The process is involuntary and controlled by the nervous system.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): Names peristalsis',
-                'AO2 (1): Describes muscle contractions',
-                'AO3 (1): States it is involuntary'
-              ]
-            },
-            specReference: 'AQA Biology B2.8'
-          },
-          {
-            id: 'b2-q9',
-            question: 'Describe the role of bile in digestion. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Bile is produced by the liver and stored in the gall bladder. It emulsifies fats, breaking large fat droplets into smaller ones to increase surface area. This allows lipase enzymes to work more efficiently in digesting fats into fatty acids and glycerol.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States bile produced by liver',
-                'AO2 (1): Explains emulsification process',
-                'AO3 (1): Links to improved enzyme action'
-              ]
-            },
-            specReference: 'AQA Biology B2.9'
-          },
-          {
-            id: 'b2-q10',
-            question: 'Explain why the stomach produces hydrochloric acid. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Hydrochloric acid creates an acidic environment with a pH of about 2. This acid kills harmful bacteria in food, preventing food poisoning. The acidic conditions provide the optimum pH for pepsin enzyme to digest proteins effectively. The acid also helps to denature proteins, making them easier to digest.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States stomach produces HCl',
-                'AO2 (1): Explains kills bacteria',
-                'AO2 (1): States optimum pH for pepsin',
-                'AO3 (1): Links to protein digestion'
-              ]
-            },
-            specReference: 'AQA Biology B2.10'
-          }
-        ]
-      },
-      {
-        id: 'b3-infection-response',
-        name: 'B3 Infection and Response',
-        questions: [
-          {
-            id: 'b3-q1',
-            question: 'Explain how white blood cells help defend the body against pathogens. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Phagocytes engulf and digest pathogens through phagocytosis, destroying them with enzymes. Lymphocytes produce specific antibodies that bind to antigens on pathogens, marking them for destruction. Some lymphocytes become memory cells, providing long-term immunity by remembering specific pathogens for faster response in future infections.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States phagocytes engulf pathogens',
-                'AO1 (1): States lymphocytes produce antibodies',
-                'AO2 (1): Explains phagocytosis process',
-                'AO2 (1): Explains memory cell function'
-              ]
-            },
-            specReference: 'AQA Biology B3.1'
-          },
-          {
-            id: 'b3-q2',
-            question: 'Describe how the body prevents pathogens from entering. (4 marks)',
-            marks: 4,
-            modelAnswer: 'The skin acts as a physical barrier preventing pathogen entry. The respiratory system produces mucus to trap pathogens, and cilia move the mucus upward. The digestive system produces hydrochloric acid in the stomach which kills many pathogens. Tears and saliva contain enzymes like lysozyme that break down bacterial cell walls.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States skin as barrier',
-                'AO1 (1): States stomach acid kills pathogens',
-                'AO2 (1): Explains mucus and cilia action',
-                'AO2 (1): Explains enzyme action in tears/saliva'
-              ]
-            },
-            specReference: 'AQA Biology B3.2'
-          },
-          {
-            id: 'b3-q3',
-            question: 'Explain the difference between active and passive immunity. (5 marks)',
-            marks: 5,
-            modelAnswer: 'Active immunity occurs when the immune system produces its own antibodies in response to a pathogen or vaccine. This provides long-lasting protection because memory cells are formed. Passive immunity involves receiving ready-made antibodies from another source, such as from mother to baby through breast milk. Passive immunity provides immediate but temporary protection as no memory cells are produced.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States active immunity involves own antibody production',
-                'AO1 (1): States passive immunity involves receiving antibodies',
-                'AO2 (1): Explains memory cell formation in active immunity',
-                'AO2 (1): Explains temporary nature of passive immunity',
-                'AO3 (1): Compares duration of protection'
-              ]
-            },
-            specReference: 'AQA Biology B3.3'
-          },
-          {
-            id: 'b3-q4',
-            question: 'Describe how vaccination works. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Vaccination involves introducing dead or weakened pathogens (or their antigens) into the body. This stimulates white blood cells to produce specific antibodies without causing the disease. Memory cells are formed during this primary response. If the real pathogen enters the body later, memory cells quickly produce antibodies, providing rapid protection.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States vaccine contains dead/weakened pathogens',
-                'AO1 (1): States antibodies are produced',
-                'AO2 (1): Explains memory cell formation',
-                'AO2 (1): Explains rapid secondary response'
-              ]
-            },
-            specReference: 'AQA Biology B3.4'
-          },
-          {
-            id: 'b3-q5',
-            question: 'Explain how antibiotics work and why they are ineffective against viruses. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Antibiotics work by interfering with bacterial cell processes, such as cell wall formation or protein synthesis. They target structures or processes that are specific to bacteria. Antibiotics are ineffective against viruses because viruses do not have their own cellular processes - they use the host cell\'s machinery to reproduce. Viruses lack cell walls and other bacterial structures that antibiotics target.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States antibiotics target bacterial processes',
-                'AO2 (1): Explains specific bacterial targets',
-                'AO2 (1): Explains viruses use host machinery',
-                'AO3 (1): Links differences to antibiotic effectiveness'
-              ]
-            },
-            specReference: 'AQA Biology B3.5'
-          },
-          {
-            id: 'b3-q6',
-            question: 'Describe what happens during an inflammatory response. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Blood vessels near the infected area dilate, increasing blood flow and causing redness and heat. Blood vessel walls become more permeable, allowing plasma and white blood cells to move into tissues, causing swelling. White blood cells move to the infected area to fight pathogens and begin healing.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States blood vessels dilate',
-                'AO2 (1): Explains increased permeability and swelling',
-                'AO2 (1): Explains white blood cell movement'
-              ]
-            },
-            specReference: 'AQA Biology B3.6'
-          },
-          {
-            id: 'b3-q7',
-            question: 'Explain how pathogens cause disease. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Pathogens cause disease by reproducing rapidly inside the body, competing with normal cells for nutrients. Some bacteria produce toxins that damage cells and tissues directly. Viruses take over cellular machinery to reproduce, often killing the host cell in the process. The immune response to pathogens can also cause symptoms like fever and inflammation.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States pathogens reproduce rapidly',
-                'AO1 (1): States some produce toxins',
-                'AO2 (1): Explains competition for resources',
-                'AO2 (1): Explains viral cellular damage'
-              ]
-            },
-            specReference: 'AQA Biology B3.7'
-          },
-          {
-            id: 'b3-q8',
-            question: 'Describe the role of memory cells in immunity. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Memory cells are formed during the primary immune response when B-lymphocytes encounter a specific antigen. They remain in the blood for many years, providing immunological memory. Upon re-exposure to the same pathogen, memory cells rapidly divide and produce antibodies, resulting in a faster and stronger secondary immune response.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States memory cells formed during primary response',
-                'AO2 (1): Explains long-term persistence',
-                'AO3 (1): Links to faster secondary response'
-              ]
-            },
-            specReference: 'AQA Biology B3.8'
-          },
-          {
-            id: 'b3-q9',
-            question: 'Explain why some people are more susceptible to infections than others. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Age affects immune system strength - very young and elderly people have weaker immune responses. Malnutrition can reduce the production of white blood cells and antibodies. Stress and lack of sleep can suppress immune function. Some people have genetic conditions that affect their immune system, making them more vulnerable to infections.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States age affects immunity',
-                'AO1 (1): States malnutrition affects immunity',
-                'AO2 (1): Explains reduced white blood cell production',
-                'AO2 (1): Explains lifestyle factors'
-              ]
-            },
-            specReference: 'AQA Biology B3.9'
-          },
-          {
-            id: 'b3-q10',
-            question: 'Describe how herd immunity protects populations. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Herd immunity occurs when a large percentage of a population is immune to a disease through vaccination or previous infection. This reduces the number of susceptible individuals, making it difficult for pathogens to spread. Even unvaccinated individuals are protected because the disease cannot spread easily through the population. The threshold for herd immunity varies depending on how contagious the disease is.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States large percentage immune',
-                'AO2 (1): Explains reduced disease spread',
-                'AO2 (1): Explains protection of unvaccinated',
-                'AO3 (1): Links to population protection'
-              ]
-            },
-            specReference: 'AQA Biology B3.10'
+            specReference: "3.4.1"
           }
         ]
       }
     ]
   },
   {
-    id: 'maths',
-    name: 'Maths',
-    color: 'bg-blue-500',
+    id: "chemistry",
+    name: "Chemistry",
+    icon: "TestTube",
     topics: [
       {
-        id: 'm1-number',
-        name: 'Number',
+        id: "atomic-structure",
+        name: "Atomic Structure",
+        description: "Atoms, electrons, and the periodic table",
         questions: [
           {
-            id: 'm1-q1',
-            question: 'Calculate 3/4 × 2/5 and express your answer as a fraction in its simplest form. (2 marks)',
-            marks: 2,
-            modelAnswer: '3/4 × 2/5 = (3×2)/(4×5) = 6/20 = 3/10',
+            id: "atomic-1",
+            question: "Describe the structure of an atom and explain how electrons are arranged in energy levels.",
+            modelAnswer: "An atom consists of a nucleus containing protons and neutrons, surrounded by electrons in energy levels (shells). The nucleus is positively charged due to protons, while electrons are negatively charged. Electrons occupy specific energy levels: the first shell holds up to 2 electrons, the second up to 8, and the third up to 18. Electrons fill lower energy levels first. The number of protons determines the element's identity.",
+            marks: 6,
             markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
               breakdown: [
-                'AO1 (1): Correct multiplication of fractions',
-                'AO2 (1): Simplifies to lowest terms'
+                "1 mark: Nucleus contains protons and neutrons",
+                "1 mark: Electrons in energy levels/shells",
+                "1 mark: Nucleus is positively charged",
+                "1 mark: Electron shell capacities (2, 8, 18)",
+                "1 mark: Electrons fill lower levels first",
+                "1 mark: Proton number determines element"
               ]
             },
-            specReference: 'AQA Maths N1.1'
-          },
-          {
-            id: 'm1-q2',
-            question: 'A shop increases all prices by 15%. If a jacket originally cost £80, what is the new price? (3 marks)',
-            marks: 3,
-            modelAnswer: 'Increase = 15% of £80 = 0.15 × 80 = £12. New price = £80 + £12 = £92',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Converts percentage to decimal',
-                'AO2 (1): Calculates percentage increase',
-                'AO2 (1): Adds to original price'
-              ]
-            },
-            specReference: 'AQA Maths N1.2'
-          },
-          {
-            id: 'm1-q3',
-            question: 'Work out 2.4 ÷ 0.6. (2 marks)',
-            marks: 2,
-            modelAnswer: '2.4 ÷ 0.6 = 24 ÷ 6 = 4',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Converts to equivalent division',
-                'AO2 (1): Correct answer of 4'
-              ]
-            },
-            specReference: 'AQA Maths N1.3'
-          },
-          {
-            id: 'm1-q4',
-            question: 'Round 47.638 to 2 decimal places. (1 mark)',
-            marks: 1,
-            modelAnswer: '47.64',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct rounding to 47.64'
-              ]
-            },
-            specReference: 'AQA Maths N1.4'
-          },
-          {
-            id: 'm1-q5',
-            question: 'Express 0.35 as a percentage. (1 mark)',
-            marks: 1,
-            modelAnswer: '35%',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct conversion to 35%'
-              ]
-            },
-            specReference: 'AQA Maths N1.5'
-          },
-          {
-            id: 'm1-q6',
-            question: 'Calculate 5/8 + 1/4. Give your answer as a fraction in its simplest form. (3 marks)',
-            marks: 3,
-            modelAnswer: '1/4 = 2/8, so 5/8 + 2/8 = 7/8',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Converts to common denominator',
-                'AO2 (1): Adds fractions correctly',
-                'AO2 (1): Answer in simplest form'
-              ]
-            },
-            specReference: 'AQA Maths N1.6'
-          },
-          {
-            id: 'm1-q7',
-            question: 'A number is decreased by 20% to give 240. What was the original number? (3 marks)',
-            marks: 3,
-            modelAnswer: 'If decreased by 20%, then 80% remains. 80% = 240, so 1% = 240 ÷ 80 = 3. Original number = 100% = 3 × 100 = 300',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Recognizes 80% remains',
-                'AO2 (1): Sets up correct calculation',
-                'AO2 (1): Correct answer of 300'
-              ]
-            },
-            specReference: 'AQA Maths N1.7'
-          },
-          {
-            id: 'm1-q8',
-            question: 'Write 3/5 as a decimal. (1 mark)',
-            marks: 1,
-            modelAnswer: '0.6',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct conversion to 0.6'
-              ]
-            },
-            specReference: 'AQA Maths N1.8'
-          },
-          {
-            id: 'm1-q9',
-            question: 'Calculate 15% of £240. (2 marks)',
-            marks: 2,
-            modelAnswer: '15% = 15/100 = 0.15. 0.15 × £240 = £36',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Converts percentage to decimal',
-                'AO2 (1): Correct calculation giving £36'
-              ]
-            },
-            specReference: 'AQA Maths N1.9'
-          },
-          {
-            id: 'm1-q10',
-            question: 'Put these numbers in order from smallest to largest: 0.3, 1/4, 30%, 0.25. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Converting all to decimals: 0.3, 0.25, 0.3, 0.25. Order: 1/4, 0.25, 0.3, 30%',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Converts to common form',
-                'AO2 (1): Correct order: 1/4, 0.25, 0.3, 30%'
-              ]
-            },
-            specReference: 'AQA Maths N1.10'
+            specReference: "2.1.1"
           }
         ]
       },
       {
-        id: 'm2-algebra',
-        name: 'Algebra',
+        id: "bonding",
+        name: "Chemical Bonding",
+        description: "Ionic, covalent, and metallic bonding",
         questions: [
           {
-            id: 'm2-q1',
-            question: 'Solve the equation 3x + 7 = 22. (2 marks)',
-            marks: 2,
-            modelAnswer: '3x + 7 = 22, 3x = 22 - 7, 3x = 15, x = 5',
+            id: "bonding-1",
+            question: "Explain the formation of ionic bonds and describe the properties of ionic compounds.",
+            modelAnswer: "Ionic bonds form when electrons are transferred from metal atoms to non-metal atoms. Metals lose electrons to form positive cations, while non-metals gain electrons to form negative anions. The electrostatic attraction between oppositely charged ions forms the ionic bond. Ionic compounds have high melting and boiling points, conduct electricity when molten or dissolved, are often soluble in water, and form crystalline structures.",
+            marks: 7,
             markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
               breakdown: [
-                'AO1 (1): Correct rearrangement',
-                'AO2 (1): Correct solution x = 5'
+                "1 mark: Electron transfer from metal to non-metal",
+                "1 mark: Formation of cations and anions",
+                "1 mark: Electrostatic attraction forms bond",
+                "1 mark: High melting/boiling points",
+                "1 mark: Conduct when molten/dissolved",
+                "1 mark: Often water soluble",
+                "1 mark: Crystalline structure"
               ]
             },
-            specReference: 'AQA Maths A1.1'
-          },
-          {
-            id: 'm2-q2',
-            question: 'Expand 3(x + 4). (1 mark)',
-            marks: 1,
-            modelAnswer: '3x + 12',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct expansion to 3x + 12'
-              ]
-            },
-            specReference: 'AQA Maths A1.2'
-          },
-          {
-            id: 'm2-q3',
-            question: 'Simplify 5x + 3x - 2x. (1 mark)',
-            marks: 1,
-            modelAnswer: '6x',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct simplification to 6x'
-              ]
-            },
-            specReference: 'AQA Maths A1.3'
-          },
-          {
-            id: 'm2-q4',
-            question: 'Factorise x² + 5x + 6. (2 marks)',
-            marks: 2,
-            modelAnswer: '(x + 2)(x + 3)',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Identifies factors of 6 that add to 5',
-                'AO2 (1): Correct factorisation (x + 2)(x + 3)'
-              ]
-            },
-            specReference: 'AQA Maths A1.4'
-          },
-          {
-            id: 'm2-q5',
-            question: 'Solve 2x - 5 = x + 3. (3 marks)',
-            marks: 3,
-            modelAnswer: '2x - 5 = x + 3, 2x - x = 3 + 5, x = 8',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Collects x terms on one side',
-                'AO2 (1): Collects numbers on other side',
-                'AO2 (1): Correct solution x = 8'
-              ]
-            },
-            specReference: 'AQA Maths A1.5'
-          },
-          {
-            id: 'm2-q6',
-            question: 'Expand and simplify (x + 3)(x + 2). (2 marks)',
-            marks: 2,
-            modelAnswer: 'x² + 2x + 3x + 6 = x² + 5x + 6',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct expansion',
-                'AO2 (1): Correct simplification to x² + 5x + 6'
-              ]
-            },
-            specReference: 'AQA Maths A1.6'
-          },
-          {
-            id: 'm2-q7',
-            question: 'Make x the subject of y = 3x + 2. (2 marks)',
-            marks: 2,
-            modelAnswer: 'y = 3x + 2, y - 2 = 3x, x = (y - 2)/3',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct rearrangement steps',
-                'AO2 (1): Correct final form x = (y - 2)/3'
-              ]
-            },
-            specReference: 'AQA Maths A1.7'
-          },
-          {
-            id: 'm2-q8',
-            question: 'Solve x/3 + 2 = 7. (2 marks)',
-            marks: 2,
-            modelAnswer: 'x/3 + 2 = 7, x/3 = 5, x = 15',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Subtracts 2 from both sides',
-                'AO2 (1): Multiplies by 3 to get x = 15'
-              ]
-            },
-            specReference: 'AQA Maths A1.8'
-          },
-          {
-            id: 'm2-q9',
-            question: 'Simplify 4x² × 3x. (1 mark)',
-            marks: 1,
-            modelAnswer: '12x³',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct simplification to 12x³'
-              ]
-            },
-            specReference: 'AQA Maths A1.9'
-          },
-          {
-            id: 'm2-q10',
-            question: 'Expand 2x(3x - 4). (2 marks)',
-            marks: 2,
-            modelAnswer: '6x² - 8x',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Multiplies each term',
-                'AO2 (1): Correct expansion 6x² - 8x'
-              ]
-            },
-            specReference: 'AQA Maths A1.10'
-          }
-        ]
-      },
-      {
-        id: 'm3-ratio-proportion',
-        name: 'Ratio, Proportion and Rates of Change',
-        questions: [
-          {
-            id: 'm3-q1',
-            question: 'Share £240 in the ratio 3:2:7. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Total parts = 3 + 2 + 7 = 12 parts. Each part = £240 ÷ 12 = £20. Shares are: 3 × £20 = £60, 2 × £20 = £40, 7 × £20 = £140',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Finds total number of parts',
-                'AO2 (1): Calculates value of one part',
-                'AO2 (1): Calculates all three shares correctly'
-              ]
-            },
-            specReference: 'AQA Maths R1.1'
-          },
-          {
-            id: 'm3-q2',
-            question: 'The ratio of boys to girls in a class is 3:5. If there are 15 girls, how many boys are there? (2 marks)',
-            marks: 2,
-            modelAnswer: 'If 5 parts = 15 girls, then 1 part = 3 girls. Boys = 3 parts = 3 × 3 = 9',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Finds value of one part',
-                'AO2 (1): Calculates number of boys = 9'
-              ]
-            },
-            specReference: 'AQA Maths R1.2'
-          },
-          {
-            id: 'm3-q3',
-            question: 'A recipe for 4 people uses 200g flour. How much flour is needed for 6 people? (2 marks)',
-            marks: 2,
-            modelAnswer: 'For 1 person: 200g ÷ 4 = 50g. For 6 people: 50g × 6 = 300g',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Calculates for 1 person',
-                'AO2 (1): Scales up for 6 people'
-              ]
-            },
-            specReference: 'AQA Maths R1.3'
-          },
-          {
-            id: 'm3-q4',
-            question: 'Express the ratio 15:20 in its simplest form. (1 mark)',
-            marks: 1,
-            modelAnswer: '3:4',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Divides by HCF of 5 to get 3:4'
-              ]
-            },
-            specReference: 'AQA Maths R1.4'
-          },
-          {
-            id: 'm3-q5',
-            question: 'A car travels 150 miles in 3 hours. What is its average speed? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Speed = Distance ÷ Time = 150 ÷ 3 = 50 mph',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula',
-                'AO2 (1): Correct calculation = 50 mph'
-              ]
-            },
-            specReference: 'AQA Maths R1.5'
-          },
-          {
-            id: 'm3-q6',
-            question: 'Convert 2.5 hours to hours and minutes. (2 marks)',
-            marks: 2,
-            modelAnswer: '0.5 hours = 0.5 × 60 = 30 minutes. So 2.5 hours = 2 hours 30 minutes',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Converts decimal to minutes',
-                'AO2 (1): Correct answer 2 hours 30 minutes'
-              ]
-            },
-            specReference: 'AQA Maths R1.6'
-          },
-          {
-            id: 'm3-q7',
-            question: 'If 5 pencils cost £3, how much do 8 pencils cost? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Cost per pencil = £3 ÷ 5 = £0.60. Cost of 8 pencils = £0.60 × 8 = £4.80',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Finds unit cost',
-                'AO2 (1): Calculates cost for 8 pencils'
-              ]
-            },
-            specReference: 'AQA Maths R1.7'
-          },
-          {
-            id: 'm3-q8',
-            question: 'Express 45 minutes as a fraction of 2 hours in its simplest form. (3 marks)',
-            marks: 3,
-            modelAnswer: '2 hours = 120 minutes. Fraction = 45/120. Simplifying: 45/120 = 3/8',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): Converts to same units',
-                'AO2 (1): Forms fraction 45/120',
-                'AO3 (1): Simplifies to 3/8'
-              ]
-            },
-            specReference: 'AQA Maths R1.8'
-          },
-          {
-            id: 'm3-q9',
-            question: 'A map has a scale of 1:25000. On the map, a road is 8 cm long. What is the actual length of the road in km? (3 marks)',
-            marks: 3,
-            modelAnswer: 'Actual length = 8 × 25000 = 200000 cm = 2000 m = 2 km',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): Uses scale correctly',
-                'AO2 (1): Calculates in cm',
-                'AO3 (1): Converts to km'
-              ]
-            },
-            specReference: 'AQA Maths R1.9'
-          },
-          {
-            id: 'm3-q10',
-            question: 'The exchange rate is £1 = €1.20. How much is €90 in pounds? (2 marks)',
-            marks: 2,
-            modelAnswer: 'If £1 = €1.20, then €90 = £90 ÷ 1.20 = £75',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Sets up correct calculation',
-                'AO2 (1): Correct answer £75'
-              ]
-            },
-            specReference: 'AQA Maths R1.10'
-          }
-        ]
-      },
-      {
-        id: 'm4-geometry-measures',
-        name: 'Geometry and Measures',
-        questions: [
-          {
-            id: 'm4-q1',
-            question: 'Calculate the area of a circle with radius 6 cm. Use π = 3.14. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Area = πr² = 3.14 × 6² = 3.14 × 36 = 113.04 cm²',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula πr²',
-                'AO2 (1): Correct substitution and calculation'
-              ]
-            },
-            specReference: 'AQA Maths G1.1'
-          },
-          {
-            id: 'm4-q2',
-            question: 'Find the perimeter of a rectangle with length 8 cm and width 5 cm. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Perimeter = 2(length + width) = 2(8 + 5) = 2 × 13 = 26 cm',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula',
-                'AO2 (1): Correct calculation = 26 cm'
-              ]
-            },
-            specReference: 'AQA Maths G1.2'
-          },
-          {
-            id: 'm4-q3',
-            question: 'Calculate the area of a triangle with base 10 cm and height 6 cm. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Area = ½ × base × height = ½ × 10 × 6 = 30 cm²',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula',
-                'AO2 (1): Correct calculation = 30 cm²'
-              ]
-            },
-            specReference: 'AQA Maths G1.3'
-          },
-          {
-            id: 'm4-q4',
-            question: 'Find the volume of a cuboid with dimensions 4 cm × 3 cm × 5 cm. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Volume = length × width × height = 4 × 3 × 5 = 60 cm³',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula',
-                'AO2 (1): Correct calculation = 60 cm³'
-              ]
-            },
-            specReference: 'AQA Maths G1.4'
-          },
-          {
-            id: 'm4-q5',
-            question: 'Convert 2.5 metres to centimetres. (1 mark)',
-            marks: 1,
-            modelAnswer: '250 cm',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct conversion = 250 cm'
-              ]
-            },
-            specReference: 'AQA Maths G1.5'
-          },
-          {
-            id: 'm4-q6',
-            question: 'Find the circumference of a circle with diameter 14 cm. Use π = 22/7. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Circumference = πd = 22/7 × 14 = 22 × 2 = 44 cm',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula πd',
-                'AO2 (1): Correct calculation = 44 cm'
-              ]
-            },
-            specReference: 'AQA Maths G1.6'
-          },
-          {
-            id: 'm4-q7',
-            question: 'Calculate the area of a parallelogram with base 12 cm and height 8 cm. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Area = base × height = 12 × 8 = 96 cm²',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula',
-                'AO2 (1): Correct calculation = 96 cm²'
-              ]
-            },
-            specReference: 'AQA Maths G1.7'
-          },
-          {
-            id: 'm4-q8',
-            question: 'Find the surface area of a cube with edge length 4 cm. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Surface area = 6 × edge² = 6 × 4² = 6 × 16 = 96 cm²',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Recognizes 6 faces',
-                'AO2 (1): Correct calculation = 96 cm²'
-              ]
-            },
-            specReference: 'AQA Maths G1.8'
-          },
-          {
-            id: 'm4-q9',
-            question: 'Convert 3 hours 45 minutes to decimal hours. (2 marks)',
-            marks: 2,
-            modelAnswer: '45 minutes = 45/60 = 0.75 hours. So 3 hours 45 minutes = 3.75 hours',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Converts minutes to decimal',
-                'AO2 (1): Correct answer = 3.75 hours'
-              ]
-            },
-            specReference: 'AQA Maths G1.9'
-          },
-          {
-            id: 'm4-q10',
-            question: 'Find the area of a trapezium with parallel sides 8 cm and 12 cm, and height 5 cm. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Area = ½(a + b)h = ½(8 + 12) × 5 = ½ × 20 × 5 = 50 cm²',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula',
-                'AO2 (1): Correct calculation = 50 cm²'
-              ]
-            },
-            specReference: 'AQA Maths G1.10'
-          }
-        ]
-      },
-      {
-        id: 'm5-probability',
-        name: 'Probability',
-        questions: [
-          {
-            id: 'm5-q1',
-            question: 'A bag contains 5 red balls and 3 blue balls. What is the probability of picking a red ball? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Total balls = 5 + 3 = 8. Probability = Number of red balls / Total balls = 5/8',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Identifies total number of outcomes',
-                'AO2 (1): Calculates probability as 5/8'
-              ]
-            },
-            specReference: 'AQA Maths P1.1'
-          },
-          {
-            id: 'm5-q2',
-            question: 'A fair dice is rolled. What is the probability of getting an even number? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Even numbers: 2, 4, 6 (3 outcomes). Total outcomes = 6. Probability = 3/6 = 1/2',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Identifies even numbers',
-                'AO2 (1): Calculates probability as 1/2'
-              ]
-            },
-            specReference: 'AQA Maths P1.2'
-          },
-          {
-            id: 'm5-q3',
-            question: 'A spinner has 4 equal sections: red, blue, green, yellow. What is the probability it does NOT land on red? (2 marks)',
-            marks: 2,
-            modelAnswer: 'P(red) = 1/4. P(not red) = 1 - 1/4 = 3/4',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Finds P(red) = 1/4',
-                'AO2 (1): Uses complement rule to get 3/4'
-              ]
-            },
-            specReference: 'AQA Maths P1.3'
-          },
-          {
-            id: 'm5-q4',
-            question: 'Two coins are flipped. What is the probability of getting two heads? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Outcomes: HH, HT, TH, TT. P(two heads) = 1/4',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Lists all outcomes',
-                'AO2 (1): Identifies probability = 1/4'
-              ]
-            },
-            specReference: 'AQA Maths P1.4'
-          },
-          {
-            id: 'm5-q5',
-            question: 'A bag contains 10 balls: 4 red, 3 blue, 3 green. Find the probability of picking a blue or green ball. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Blue or green balls = 3 + 3 = 6. Probability = 6/10 = 3/5',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Adds blue and green balls',
-                'AO2 (1): Calculates probability = 3/5'
-              ]
-            },
-            specReference: 'AQA Maths P1.5'
-          },
-          {
-            id: 'm5-q6',
-            question: 'A letter is chosen at random from the word MATHEMATICS. What is the probability it is the letter M? (2 marks)',
-            marks: 2,
-            modelAnswer: 'MATHEMATICS has 11 letters with 2 Ms. Probability = 2/11',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Counts total letters and Ms',
-                'AO2 (1): Calculates probability = 2/11'
-              ]
-            },
-            specReference: 'AQA Maths P1.6'
-          },
-          {
-            id: 'm5-q7',
-            question: 'The probability of rain tomorrow is 0.3. What is the probability it will NOT rain? (1 mark)',
-            marks: 1,
-            modelAnswer: '0.7',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses complement: 1 - 0.3 = 0.7'
-              ]
-            },
-            specReference: 'AQA Maths P1.7'
-          },
-          {
-            id: 'm5-q8',
-            question: 'A card is drawn from a standard pack of 52 cards. What is the probability it is a King? (2 marks)',
-            marks: 2,
-            modelAnswer: 'There are 4 Kings in 52 cards. Probability = 4/52 = 1/13',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Identifies 4 Kings',
-                'AO2 (1): Simplifies to 1/13'
-              ]
-            },
-            specReference: 'AQA Maths P1.8'
-          },
-          {
-            id: 'm5-q9',
-            question: 'A bag contains coloured counters in the ratio red:blue:green = 2:3:5. If a counter is picked at random, what is the probability it is blue? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Total ratio parts = 2 + 3 + 5 = 10. P(blue) = 3/10',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Finds total ratio parts',
-                'AO2 (1): Calculates probability = 3/10'
-              ]
-            },
-            specReference: 'AQA Maths P1.9'
-          },
-          {
-            id: 'm5-q10',
-            question: 'Two dice are rolled. What is the probability the sum is 7? (3 marks)',
-            marks: 3,
-            modelAnswer: 'Ways to get 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) = 6 ways. Total outcomes = 36. Probability = 6/36 = 1/6',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): Lists ways to get sum of 7',
-                'AO2 (1): Identifies total outcomes = 36',
-                'AO3 (1): Calculates probability = 1/6'
-              ]
-            },
-            specReference: 'AQA Maths P1.10'
+            specReference: "2.2.1"
           }
         ]
       }
     ]
   },
   {
-    id: 'chemistry',
-    name: 'Chemistry',
-    color: 'bg-purple-500',
+    id: "physics",
+    name: "Physics",
+    icon: "Atom",
     topics: [
       {
-        id: 'c1-atomic-structure',
-        name: 'C1 Atomic Structure',
+        id: "mechanics",
+        name: "Mechanics",
+        description: "Forces, motion, and energy",
         questions: [
           {
-            id: 'c1-q1',
-            question: 'Describe the structure of an atom and explain where the mass is concentrated. (4 marks)',
-            marks: 4,
-            modelAnswer: 'An atom consists of a small, dense nucleus containing protons and neutrons, surrounded by electrons in energy levels or shells. The nucleus is positively charged due to protons, while electrons are negatively charged. Almost all the mass of the atom is concentrated in the nucleus because protons and neutrons are much more massive than electrons.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States nucleus contains protons and neutrons',
-                'AO1 (1): States electrons are in shells around nucleus',
-                'AO2 (1): Explains charges of particles',
-                'AO2 (1): Explains why mass is concentrated in nucleus'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.1'
-          },
-          {
-            id: 'c1-q2',
-            question: 'An atom has 11 protons, 12 neutrons and 11 electrons. What is its mass number and atomic number? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Atomic number = number of protons = 11. Mass number = protons + neutrons = 11 + 12 = 23',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States atomic number = 11',
-                'AO2 (1): Calculates mass number = 23'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.2'
-          },
-          {
-            id: 'c1-q3',
-            question: 'Explain what isotopes are and give an example. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Isotopes are atoms of the same element with the same number of protons but different numbers of neutrons. They have the same atomic number but different mass numbers. Example: Carbon-12 and Carbon-14 are isotopes of carbon.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States same protons, different neutrons',
-                'AO2 (1): Explains same atomic number, different mass numbers',
-                'AO3 (1): Gives correct example'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.3'
-          },
-          {
-            id: 'c1-q4',
-            question: 'Describe how electrons are arranged in atoms. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Electrons are arranged in energy levels or shells around the nucleus. The first shell can hold up to 2 electrons, the second shell can hold up to 8 electrons, and the third shell can hold up to 8 electrons. Electrons fill the innermost shell first before moving to the next shell.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States electrons in shells/energy levels',
-                'AO1 (1): States shell capacities (2, 8, 8)',
-                'AO2 (1): Explains filling order'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.4'
-          },
-          {
-            id: 'c1-q5',
-            question: 'Explain why atoms are neutral overall. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Atoms are neutral because they have equal numbers of protons and electrons. Protons have a positive charge and electrons have a negative charge, so they cancel each other out.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States equal numbers of protons and electrons',
-                'AO2 (1): Explains charges cancel out'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.5'
-          },
-          {
-            id: 'c1-q6',
-            question: 'What is the electronic configuration of sodium (atomic number 11)? (2 marks)',
-            marks: 2,
-            modelAnswer: '2,8,1',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Identifies 11 electrons to arrange',
-                'AO2 (1): Correct arrangement 2,8,1'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.6'
-          },
-          {
-            id: 'c1-q7',
-            question: 'Explain why the relative atomic mass of chlorine is 35.5. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Chlorine exists as two isotopes: Cl-35 and Cl-37. The relative atomic mass is the average mass of all isotopes taking into account their relative abundance. Cl-35 is more abundant than Cl-37, giving an average of 35.5.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States chlorine has isotopes',
-                'AO2 (1): Explains relative atomic mass is an average',
-                'AO3 (1): Links abundance to the 35.5 value'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.7'
-          },
-          {
-            id: 'c1-q8',
-            question: 'Describe the development of atomic theory by Rutherford. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Rutherford conducted the gold foil experiment where alpha particles were fired at thin gold foil. Most particles passed straight through, some were deflected at large angles, and a few bounced back. This showed that atoms have a small, dense, positively charged nucleus at the center, with mostly empty space around it.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Describes the gold foil experiment',
-                'AO1 (1): States observations of alpha particles',
-                'AO2 (1): Explains conclusion about nucleus',
-                'AO2 (1): Explains atoms are mostly empty space'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.8'
-          },
-          {
-            id: 'c1-q9',
-            question: 'Explain why atoms of different elements have different properties. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Different elements have different numbers of protons, giving them different atomic numbers. This means they have different numbers of electrons, which determines their chemical properties. The arrangement of electrons in shells affects how atoms bond and react.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States different numbers of protons',
-                'AO2 (1): Links to different electron numbers',
-                'AO3 (1): Links electron arrangement to properties'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.9'
-          },
-          {
-            id: 'c1-q10',
-            question: 'Calculate the number of neutrons in an atom of potassium-39. (Atomic number of potassium = 19) (2 marks)',
-            marks: 2,
-            modelAnswer: 'Mass number = 39, Atomic number = 19. Number of neutrons = Mass number - Atomic number = 39 - 19 = 20',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula',
-                'AO2 (1): Correct calculation = 20 neutrons'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.10'
-          }
-        ]
-      },
-      {
-        id: 'c2-bonding-structure',
-        name: 'C2 Bonding and Structure',
-        questions: [
-          {
-            id: 'c2-q1',
-            question: 'Explain why sodium chloride has a high melting point. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Sodium chloride has ionic bonding between Na⁺ and Cl⁻ ions. These electrostatic forces of attraction between oppositely charged ions are very strong. A lot of energy is needed to overcome these strong ionic bonds, resulting in a high melting point.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States ionic bonding present',
-                'AO2 (1): Explains strong electrostatic forces',
-                'AO3 (1): Links bond strength to high melting point'
-              ]
-            },
-            specReference: 'AQA Chemistry C2.1'
-          },
-          {
-            id: 'c2-q2',
-            question: 'Describe how ionic bonds are formed. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Metal atoms lose electrons to form positive ions (cations). Non-metal atoms gain electrons to form negative ions (anions). The transfer of electrons allows both atoms to achieve full outer shells. Electrostatic attraction between oppositely charged ions forms the ionic bond.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States metals lose electrons',
-                'AO1 (1): States non-metals gain electrons',
-                'AO2 (1): Explains full outer shell achievement',
-                'AO2 (1): Explains electrostatic attraction'
-              ]
-            },
-            specReference: 'AQA Chemistry C2.2'
-          },
-          {
-            id: 'c2-q3',
-            question: 'Explain how covalent bonds are formed. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Covalent bonds are formed when atoms share pairs of electrons. This usually occurs between non-metal atoms. The shared electrons allow both atoms to achieve full outer electron shells, making them more stable.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States electrons are shared',
-                'AO2 (1): States occurs between non-metals',
-                'AO3 (1): Explains stability through full shells'
-              ]
-            },
-            specReference: 'AQA Chemistry C2.3'
-          },
-          {
-            id: 'c2-q4',
-            question: 'Compare the properties of ionic and covalent compounds. (6 marks)',
+            id: "mechanics-1",
+            question: "State Newton's three laws of motion and give an example of each.",
+            modelAnswer: "First Law: An object at rest stays at rest, and an object in motion stays in motion at constant velocity, unless acted upon by an unbalanced force. Example: A book on a table remains stationary. Second Law: The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass (F = ma). Example: Pushing a car requires more force than pushing a bicycle. Third Law: For every action, there is an equal and opposite reaction. Example: When walking, you push back on the ground, and the ground pushes forward on you.",
             marks: 6,
-            modelAnswer: 'Ionic compounds have high melting and boiling points due to strong electrostatic forces, while covalent compounds generally have lower melting and boiling points due to weaker intermolecular forces. Ionic compounds conduct electricity when molten or dissolved because ions are free to move, but covalent compounds do not conduct electricity as they have no free charges. Ionic compounds are often soluble in water, while many covalent compounds are not.',
             markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 2,
               breakdown: [
-                'AO1 (1): States melting point differences',
-                'AO1 (1): States electrical conductivity differences',
-                'AO2 (1): Explains ionic conductivity',
-                'AO2 (1): Explains covalent non-conductivity',
-                'AO3 (1): Links to bond strength',
-                'AO3 (1): Explains solubility differences'
+                "1 mark: First law statement",
+                "1 mark: Example of first law",
+                "1 mark: Second law statement (F = ma)",
+                "1 mark: Example of second law",
+                "1 mark: Third law statement",
+                "1 mark: Example of third law"
               ]
             },
-            specReference: 'AQA Chemistry C2.4'
-          },
-          {
-            id: 'c2-q5',
-            question: 'Describe the structure of diamond and explain its properties. (5 marks)',
-            marks: 5,
-            modelAnswer: 'Diamond has a giant covalent structure where each carbon atom is bonded to four other carbon atoms in a tetrahedral arrangement. All bonds are strong covalent bonds. This makes diamond very hard and gives it a high melting point. Diamond does not conduct electricity because all electrons are involved in bonding and cannot move freely.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States giant covalent structure',
-                'AO1 (1): States 4 bonds per carbon atom',
-                'AO2 (1): Explains hardness',
-                'AO2 (1): Explains electrical properties',
-                'AO3 (1): Links structure to properties'
-              ]
-            },
-            specReference: 'AQA Chemistry C2.5'
-          },
-          {
-            id: 'c2-q6',
-            question: 'Explain why graphite can conduct electricity but diamond cannot. (4 marks)',
-            marks: 4,
-            modelAnswer: 'In graphite, each carbon atom is bonded to only three other carbon atoms, leaving one electron free to move. These delocalized electrons can carry electric current. In diamond, each carbon atom is bonded to four other carbon atoms, so all electrons are involved in bonding and cannot move freely.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States graphite has 3 bonds per carbon',
-                'AO1 (1): States diamond has 4 bonds per carbon',
-                'AO2 (1): Explains delocalized electrons in graphite',
-                'AO2 (1): Explains all electrons bonded in diamond'
-              ]
-            },
-            specReference: 'AQA Chemistry C2.6'
-          },
-          {
-            id: 'c2-q7',
-            question: 'Describe the bonding in metals and explain their properties. (5 marks)',
-            marks: 5,
-            modelAnswer: 'Metals have metallic bonding where positive metal ions are held together by a sea of delocalized electrons. The electrons are free to move throughout the structure. This explains why metals conduct electricity and heat well. The strong metallic bonds make metals malleable and ductile, as layers can slide over each other without breaking bonds.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): Describes sea of electrons',
-                'AO1 (1): States electrons are delocalized',
-                'AO2 (1): Explains electrical conductivity',
-                'AO2 (1): Explains malleability',
-                'AO3 (1): Links structure to properties'
-              ]
-            },
-            specReference: 'AQA Chemistry C2.7'
-          },
-          {
-            id: 'c2-q8',
-            question: 'Explain what is meant by a polymer and give an example. (3 marks)',
-            marks: 3,
-            modelAnswer: 'A polymer is a large molecule made up of many repeating units called monomers joined together by covalent bonds. The process of joining monomers is called polymerization. Example: polyethene is made from ethene monomers.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States polymer made of repeating units',
-                'AO2 (1): Mentions monomers and polymerization',
-                'AO3 (1): Gives correct example'
-              ]
-            },
-            specReference: 'AQA Chemistry C2.8'
-          },
-          {
-            id: 'c2-q9',
-            question: 'Describe the structure and properties of simple molecular compounds. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Simple molecular compounds consist of small molecules held together by covalent bonds within molecules and weak intermolecular forces between molecules. They have low melting and boiling points because little energy is needed to overcome the weak intermolecular forces. They do not conduct electricity because they have no free electrons or ions.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States covalent bonds within molecules',
-                'AO1 (1): States weak forces between molecules',
-                'AO2 (1): Explains low melting/boiling points',
-                'AO2 (1): Explains non-conductivity'
-              ]
-            },
-            specReference: 'AQA Chemistry C2.9'
-          },
-          {
-            id: 'c2-q10',
-            question: 'Explain why ionic compounds conduct electricity when molten but not when solid. (3 marks)',
-            marks: 3,
-            modelAnswer: 'In solid ionic compounds, the ions are held in fixed positions in the crystal lattice and cannot move. When molten, the ionic bonds are broken and the ions become free to move. Moving ions can carry electric current, so molten ionic compounds conduct electricity.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States ions fixed in solid',
-                'AO2 (1): States ions free when molten',
-                'AO3 (1): Links moving ions to conductivity'
-              ]
-            },
-            specReference: 'AQA Chemistry C2.10'
+            specReference: "4.1.1"
           }
         ]
       },
       {
-        id: 'c3-quantitative-chemistry',
-        name: 'C3 Quantitative Chemistry',
+        id: "waves",
+        name: "Waves",
+        description: "Wave properties, sound, and electromagnetic radiation",
         questions: [
           {
-            id: 'c3-q1',
-            question: 'Calculate the relative formula mass of calcium carbonate (CaCO₃). [Ar: Ca = 40, C = 12, O = 16] (2 marks)',
-            marks: 2,
-            modelAnswer: 'Mr of CaCO₃ = 40 + 12 + (3 × 16) = 40 + 12 + 48 = 100',
+            id: "waves-1",
+            question: "Describe the properties of waves and explain the difference between transverse and longitudinal waves.",
+            modelAnswer: "Waves transfer energy without transferring matter. Key properties include wavelength (distance between two consecutive points in phase), frequency (number of waves per second), amplitude (maximum displacement from rest position), and period (time for one complete wave). Transverse waves have oscillations perpendicular to the direction of energy transfer (e.g., light waves). Longitudinal waves have oscillations parallel to the direction of energy transfer (e.g., sound waves).",
+            marks: 6,
             markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
               breakdown: [
-                'AO1 (1): Identifies atoms in formula',
-                'AO2 (1): Correct calculation = 100'
+                "1 mark: Waves transfer energy not matter",
+                "1 mark: Wavelength definition",
+                "1 mark: Frequency and amplitude definitions",
+                "1 mark: Transverse waves - perpendicular oscillations",
+                "1 mark: Longitudinal waves - parallel oscillations",
+                "1 mark: Examples of each type"
               ]
             },
-            specReference: 'AQA Chemistry C3.1'
-          },
+            specReference: "4.3.1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "mathematics",
+    name: "Mathematics",
+    icon: "Calculator",
+    topics: [
+      {
+        id: "algebra",
+        name: "Algebra",
+        description: "Equations, inequalities, and algebraic manipulation",
+        questions: [
           {
-            id: 'c3-q2',
-            question: 'How many moles are in 88g of carbon dioxide (CO₂)? [Ar: C = 12, O = 16] (3 marks)',
-            marks: 3,
-            modelAnswer: 'Mr of CO₂ = 12 + (2 × 16) = 44. Number of moles = mass ÷ Mr = 88 ÷ 44 = 2 moles',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Calculates Mr of CO₂ = 44',
-                'AO2 (1): Uses correct formula',
-                'AO2 (1): Correct answer = 2 moles'
-              ]
-            },
-            specReference: 'AQA Chemistry C3.2'
-          },
-          {
-            id: 'c3-q3',
-            question: 'What mass of oxygen is needed to react completely with 24g of magnesium? Mg + ½O₂ → MgO [Ar: Mg = 24, O = 16] (4 marks)',
+            id: "algebra-1",
+            question: "Solve the quadratic equation 2x² + 7x - 15 = 0 using the quadratic formula.",
+            modelAnswer: "Using the quadratic formula: x = (-b ± √(b² - 4ac)) / 2a. Here a = 2, b = 7, c = -15. x = (-7 ± √(49 - 4(2)(-15))) / 2(2) = (-7 ± √(49 + 120)) / 4 = (-7 ± √169) / 4 = (-7 ± 13) / 4. Therefore x = 6/4 = 1.5 or x = -20/4 = -5.",
             marks: 4,
-            modelAnswer: 'Moles of Mg = 24 ÷ 24 = 1 mole. From equation: 1 mole Mg reacts with 0.5 moles O₂. Mr of O₂ = 32. Mass of O₂ = 0.5 × 32 = 16g',
             markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 1,
               breakdown: [
-                'AO1 (1): Calculates moles of Mg',
-                'AO2 (1): Uses molar ratio from equation',
-                'AO2 (1): Calculates mass of O₂',
-                'AO3 (1): Correct final answer = 16g'
+                "1 mark: Correct identification of a, b, c values",
+                "1 mark: Correct substitution into quadratic formula",
+                "1 mark: Correct calculation of discriminant (169)",
+                "1 mark: Both solutions x = 1.5 and x = -5"
               ]
             },
-            specReference: 'AQA Chemistry C3.3'
-          },
+            specReference: "A1.2"
+          }
+        ]
+      },
+      {
+        id: "geometry",
+        name: "Geometry",
+        description: "Shapes, angles, and geometric relationships",
+        questions: [
           {
-            id: 'c3-q4',
-            question: 'Calculate the percentage by mass of carbon in methane (CH₄). [Ar: C = 12, H = 1] (3 marks)',
+            id: "geometry-1",
+            question: "Calculate the area of a triangle with sides 5 cm, 12 cm, and 13 cm.",
+            modelAnswer: "First, check if it's a right triangle: 5² + 12² = 25 + 144 = 169 = 13². Yes, it's a right triangle. For a right triangle, Area = ½ × base × height = ½ × 5 × 12 = 30 cm². Alternatively, using Heron's formula: s = (5+12+13)/2 = 15, Area = √(15×10×3×2) = √900 = 30 cm².",
             marks: 3,
-            modelAnswer: 'Mr of CH₄ = 12 + (4 × 1) = 16. Mass of carbon = 12. Percentage = (12 ÷ 16) × 100 = 75%',
             markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
               breakdown: [
-                'AO1 (1): Calculates Mr of CH₄',
-                'AO2 (1): Uses percentage formula',
-                'AO3 (1): Correct answer = 75%'
+                "1 mark: Recognizing it's a right triangle (5² + 12² = 13²)",
+                "1 mark: Using correct area formula",
+                "1 mark: Final answer 30 cm²"
               ]
             },
-            specReference: 'AQA Chemistry C3.4'
-          },
+            specReference: "G2.1"
+          }
+        ]
+      },
+      {
+        id: "trigonometry",
+        name: "Trigonometry",
+        description: "Sine, cosine, tangent, and their applications",
+        questions: [
           {
-            id: 'c3-q5',
-            question: 'What volume of hydrogen gas is produced when 0.1 moles of zinc react with hydrochloric acid? Zn + 2HCl → ZnCl₂ + H₂ [1 mole of gas occupies 24 dm³ at room temperature] (3 marks)',
+            id: "trig-1",
+            question: "In a right-angled triangle, the hypotenuse is 10 cm and one angle is 30°. Calculate the lengths of the other two sides.",
+            modelAnswer: "Using trigonometric ratios: For the side opposite to 30°: sin(30°) = opposite/hypotenuse, so opposite = 10 × sin(30°) = 10 × 0.5 = 5 cm. For the side adjacent to 30°: cos(30°) = adjacent/hypotenuse, so adjacent = 10 × cos(30°) = 10 × (√3/2) = 5√3 ≈ 8.66 cm.",
+            marks: 4,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Using sin(30°) = 0.5",
+                "1 mark: Opposite side = 5 cm",
+                "1 mark: Using cos(30°) = √3/2",
+                "1 mark: Adjacent side = 5√3 or 8.66 cm"
+              ]
+            },
+            specReference: "T1.1"
+          }
+        ]
+      },
+      {
+        id: "statistics",
+        name: "Statistics",
+        description: "Data handling, probability, and statistical analysis",
+        questions: [
+          {
+            id: "stats-1",
+            question: "A survey of 40 students recorded their heights in cm. The results are: 150, 152, 155, 158, 160, 162, 165, 168, 170, 172. Calculate the mean height.",
+            modelAnswer: "Mean = (150 + 152 + 155 + 158 + 160 + 162 + 165 + 168 + 170 + 172) ÷ 10 = 1612 ÷ 10 = 161.2 cm",
             marks: 3,
-            modelAnswer: 'From equation: 1 mole Zn produces 1 mole H₂. So 0.1 moles Zn produces 0.1 moles H₂. Volume = 0.1 × 24 = 2.4 dm³',
             markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
               breakdown: [
-                'AO1 (1): Uses molar ratio from equation',
-                'AO2 (1): Calculates moles of H₂',
-                'AO3 (1): Converts to volume = 2.4 dm³'
+                "1 mark: Adding all values correctly (1612)",
+                "1 mark: Dividing by the correct number of values (10)",
+                "1 mark: Final answer 161.2 cm"
               ]
             },
-            specReference: 'AQA Chemistry C3.5'
+            specReference: "S1.1"
           },
           {
-            id: 'c3-q6',
-            question: 'Calculate the empirical formula of a compound containing 40% carbon, 6.7% hydrogen, and 53.3% oxygen by mass. [Ar: C = 12, H = 1, O = 16] (5 marks)',
+            id: "stats-2",
+            question: "Find the median of the following data set: 12, 8, 15, 20, 6, 18, 10, 14, 16",
+            modelAnswer: "First arrange in order: 6, 8, 10, 12, 14, 15, 16, 18, 20. There are 9 values, so the median is the 5th value = 14",
+            marks: 2,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Arranging data in ascending order",
+                "1 mark: Identifying the middle value as 14"
+              ]
+            },
+            specReference: "S1.2"
+          },
+          {
+            id: "stats-3",
+            question: "A dice is rolled 60 times. The number 6 appears 12 times. Calculate the relative frequency of rolling a 6.",
+            modelAnswer: "Relative frequency = Number of times event occurs ÷ Total number of trials = 12 ÷ 60 = 0.2 or 1/5 or 20%",
+            marks: 2,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Using the formula frequency ÷ total",
+                "1 mark: Correct answer 0.2, 1/5, or 20%"
+              ]
+            },
+            specReference: "S2.1"
+          },
+          {
+            id: "stats-4",
+            question: "Calculate the range and interquartile range for the data: 5, 8, 12, 15, 18, 22, 25, 28, 30",
+            modelAnswer: "Range = 30 - 5 = 25. For IQR: Q1 = 8, Q3 = 25. IQR = Q3 - Q1 = 25 - 8 = 17",
+            marks: 4,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Range = highest - lowest value",
+                "1 mark: Range = 25",
+                "1 mark: Finding Q1 = 8 and Q3 = 25",
+                "1 mark: IQR = 17"
+              ]
+            },
+            specReference: "S1.3"
+          },
+          {
+            id: "stats-5",
+            question: "A bag contains 3 red balls, 5 blue balls, and 2 green balls. What is the probability of drawing a blue ball?",
+            modelAnswer: "Total balls = 3 + 5 + 2 = 10. Number of blue balls = 5. Probability = 5/10 = 1/2 = 0.5",
+            marks: 2,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Finding total number of balls (10)",
+                "1 mark: Probability = 5/10 = 1/2 = 0.5"
+              ]
+            },
+            specReference: "S2.2"
+          },
+          {
+            id: "stats-6",
+            question: "Draw a frequency table for the following data showing the number of pets owned by 20 families: 0, 1, 2, 1, 0, 3, 1, 2, 0, 1, 2, 0, 1, 3, 2, 1, 0, 2, 1, 0",
+            modelAnswer: "Pets | Frequency\n0    | 6\n1    | 7\n2    | 5\n3    | 2\nTotal: 20",
+            marks: 3,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Correct table structure with pets and frequency columns",
+                "1 mark: All frequencies correct (0:6, 1:7, 2:5, 3:2)",
+                "1 mark: Total adds to 20"
+              ]
+            },
+            specReference: "S1.4"
+          },
+          {
+            id: "stats-7",
+            question: "Calculate the mode and range for this data set: 7, 9, 12, 7, 15, 9, 7, 18, 12",
+            modelAnswer: "Mode = 7 (appears 3 times, most frequent). Range = 18 - 7 = 11",
+            marks: 3,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Identifying that 7 appears most frequently",
+                "1 mark: Mode = 7",
+                "1 mark: Range = 11"
+              ]
+            },
+            specReference: "S1.5"
+          },
+          {
+            id: "stats-8",
+            question: "A coin is flipped 3 times. List all possible outcomes and find the probability of getting exactly 2 heads.",
+            modelAnswer: "Outcomes: HHH, HHT, HTH, HTT, THH, THT, TTH, TTT (8 total). Exactly 2 heads: HHT, HTH, THH (3 outcomes). Probability = 3/8",
+            marks: 4,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Listing all 8 possible outcomes",
+                "1 mark: Identifying outcomes with exactly 2 heads",
+                "1 mark: Counting 3 favorable outcomes",
+                "1 mark: Probability = 3/8"
+              ]
+            },
+            specReference: "S2.3"
+          },
+          {
+            id: "stats-9",
+            question: "The heights of 15 students are recorded. Calculate the mean from this frequency table:\nHeight (cm) | Frequency\n150-154     | 3\n155-159     | 5\n160-164     | 4\n165-169     | 3",
+            modelAnswer: "Midpoints: 152, 157, 162, 167. Sum = (152×3) + (157×5) + (162×4) + (167×3) = 456 + 785 + 648 + 501 = 2390. Mean = 2390 ÷ 15 = 159.3 cm",
+            marks: 4,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Finding midpoints of each class",
+                "1 mark: Multiplying midpoints by frequencies",
+                "1 mark: Finding sum of (midpoint × frequency) = 2390",
+                "1 mark: Mean = 159.3 cm"
+              ]
+            },
+            specReference: "S1.6"
+          },
+          {
+            id: "stats-10",
+            question: "Two events A and B are independent. P(A) = 0.3 and P(B) = 0.4. Calculate P(A and B).",
+            modelAnswer: "For independent events: P(A and B) = P(A) × P(B) = 0.3 × 0.4 = 0.12",
+            marks: 2,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Using the multiplication rule for independent events",
+                "1 mark: Correct answer 0.12"
+              ]
+            },
+            specReference: "S2.4"
+          },
+          {
+            id: "stats-11",
+            question: "A survey asked 100 people about their favorite sport. 45 chose football, 30 chose tennis, and 25 chose basketball. Draw a pie chart to represent this data.",
+            modelAnswer: "Football: (45/100) × 360° = 162°. Tennis: (30/100) × 360° = 108°. Basketball: (25/100) × 360° = 90°. Total = 360°",
+            marks: 4,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Understanding that angles must total 360°",
+                "1 mark: Football angle = 162°",
+                "1 mark: Tennis angle = 108°",
+                "1 mark: Basketball angle = 90°"
+              ]
+            },
+            specReference: "S1.7"
+          },
+          {
+            id: "stats-12",
+            question: "Calculate the standard deviation for the data set: 2, 4, 6, 8, 10",
+            modelAnswer: "Mean = 6. Deviations squared: (2-6)²=16, (4-6)²=4, (6-6)²=0, (8-6)²=4, (10-6)²=16. Sum = 40. Variance = 40/5 = 8. Standard deviation = √8 = 2.83",
             marks: 5,
-            modelAnswer: 'C: 40 ÷ 12 = 3.33; H: 6.7 ÷ 1 = 6.7; O: 53.3 ÷ 16 = 3.33. Divide by smallest: C: 3.33 ÷ 3.33 = 1; H: 6.7 ÷ 3.33 = 2; O: 3.33 ÷ 3.33 = 1. Empirical formula = CH₂O',
             markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 1,
               breakdown: [
-                'AO1 (1): Converts percentages to moles',
-                'AO1 (1): Divides by smallest number',
-                'AO2 (1): Shows working clearly',
-                'AO2 (1): Gets simple whole number ratio',
-                'AO3 (1): Correct empirical formula CH₂O'
+                "1 mark: Finding mean = 6",
+                "1 mark: Calculating deviations from mean",
+                "1 mark: Squaring deviations and summing = 40",
+                "1 mark: Finding variance = 8",
+                "1 mark: Standard deviation = 2.83"
               ]
             },
-            specReference: 'AQA Chemistry C3.6'
+            specReference: "S1.8"
           },
           {
-            id: 'c3-q7',
-            question: 'What is the concentration in g/dm³ of a solution made by dissolving 20g of sodium chloride in 500 cm³ of water? (2 marks)',
+            id: "stats-13",
+            question: "A normal distribution has mean 100 and standard deviation 15. What percentage of values lie within one standard deviation of the mean?",
+            modelAnswer: "Within one standard deviation means between 85 and 115. In a normal distribution, approximately 68% of values lie within one standard deviation of the mean.",
             marks: 2,
-            modelAnswer: 'Volume = 500 cm³ = 0.5 dm³. Concentration = mass ÷ volume = 20 ÷ 0.5 = 40 g/dm³',
             markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
               breakdown: [
-                'AO1 (1): Converts volume to dm³',
-                'AO2 (1): Calculates concentration = 40 g/dm³'
+                "1 mark: Identifying the range 85 to 115",
+                "1 mark: Stating 68% (or approximately 68%)"
               ]
             },
-            specReference: 'AQA Chemistry C3.7'
+            specReference: "S3.1"
           },
           {
-            id: 'c3-q8',
-            question: 'Calculate the atom economy for the production of hydrogen in the reaction: Zn + 2HCl → ZnCl₂ + H₂ [Ar: Zn = 65, H = 1, Cl = 35.5] (4 marks)',
+            id: "stats-14",
+            question: "Calculate the correlation coefficient for the following data pairs: (1,2), (2,4), (3,6), (4,8), (5,10)",
+            modelAnswer: "This shows perfect positive correlation as y = 2x exactly. The correlation coefficient r = 1 (perfect positive correlation).",
+            marks: 3,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Recognizing the linear relationship y = 2x",
+                "1 mark: Understanding this represents perfect correlation",
+                "1 mark: r = 1"
+              ]
+            },
+            specReference: "S3.2"
+          },
+          {
+            id: "stats-15",
+            question: "A box plot shows Q1 = 20, Q2 = 25, Q3 = 35, minimum = 15, maximum = 45. Identify any outliers using the 1.5 × IQR rule.",
+            modelAnswer: "IQR = Q3 - Q1 = 35 - 20 = 15. Lower boundary = Q1 - 1.5×IQR = 20 - 22.5 = -2.5. Upper boundary = Q3 + 1.5×IQR = 35 + 22.5 = 57.5. Since min = 15 > -2.5 and max = 45 < 57.5, there are no outliers.",
             marks: 4,
-            modelAnswer: 'Mr of desired product (H₂) = 2. Mr of all products = 136 + 2 = 138. Atom economy = (2 ÷ 138) × 100 = 1.45%',
             markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 1,
               breakdown: [
-                'AO1 (1): Identifies desired product',
-                'AO2 (1): Calculates Mr of products',
-                'AO2 (1): Uses atom economy formula',
-                'AO3 (1): Correct answer = 1.45%'
+                "1 mark: Calculating IQR = 15",
+                "1 mark: Finding lower boundary = -2.5",
+                "1 mark: Finding upper boundary = 57.5",
+                "1 mark: Concluding no outliers"
               ]
             },
-            specReference: 'AQA Chemistry C3.8'
+            specReference: "S1.9"
           },
           {
-            id: 'c3-q9',
-            question: 'A reaction has a theoretical yield of 50g but only produces 40g of product. What is the percentage yield? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Percentage yield = (actual yield ÷ theoretical yield) × 100 = (40 ÷ 50) × 100 = 80%',
+            id: "stats-16",
+            question: "A spinner has 4 equal sections colored red, blue, green, and yellow. What is the probability of spinning red OR blue?",
+            modelAnswer: "P(red) = 1/4, P(blue) = 1/4. Since these are mutually exclusive events: P(red OR blue) = P(red) + P(blue) = 1/4 + 1/4 = 2/4 = 1/2",
+            marks: 3,
             markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
               breakdown: [
-                'AO1 (1): Uses correct formula',
-                'AO2 (1): Correct calculation = 80%'
+                "1 mark: P(red) = 1/4 and P(blue) = 1/4",
+                "1 mark: Using addition rule for mutually exclusive events",
+                "1 mark: Final answer 1/2"
               ]
             },
-            specReference: 'AQA Chemistry C3.9'
+            specReference: "S2.5"
           },
           {
-            id: 'c3-q10',
-            question: 'How many molecules are in 0.5 moles of water? [Avogadro constant = 6.02 × 10²³ mol⁻¹] (2 marks)',
-            marks: 2,
-            modelAnswer: 'Number of molecules = moles × Avogadro constant = 0.5 × 6.02 × 10²³ = 3.01 × 10²³',
+            id: "stats-17",
+            question: "From a sample of 200 people, 120 have brown eyes. Construct a 95% confidence interval for the proportion of people with brown eyes in the population.",
+            modelAnswer: "Sample proportion p̂ = 120/200 = 0.6. For 95% CI, z = 1.96. Standard error = √(0.6×0.4/200) = 0.0346. CI = 0.6 ± 1.96×0.0346 = 0.6 ± 0.068 = (0.532, 0.668)",
+            marks: 5,
             markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
               breakdown: [
-                'AO1 (1): Uses correct relationship',
-                'AO2 (1): Correct calculation = 3.01 × 10²³'
+                "1 mark: Sample proportion = 0.6",
+                "1 mark: Using z = 1.96 for 95% confidence",
+                "1 mark: Calculating standard error",
+                "1 mark: Applying confidence interval formula",
+                "1 mark: Final interval (0.532, 0.668)"
               ]
             },
-            specReference: 'AQA Chemistry C3.10'
+            specReference: "S3.3"
+          },
+          {
+            id: "stats-18",
+            question: "Calculate the expected value and variance for a discrete random variable X with the probability distribution: P(X=1)=0.2, P(X=2)=0.3, P(X=3)=0.5",
+            modelAnswer: "E(X) = 1×0.2 + 2×0.3 + 3×0.5 = 0.2 + 0.6 + 1.5 = 2.3. E(X²) = 1²×0.2 + 2²×0.3 + 3²×0.5 = 0.2 + 1.2 + 4.5 = 5.9. Var(X) = E(X²) - [E(X)]² = 5.9 - 2.3² = 5.9 - 5.29 = 0.61",
+            marks: 5,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: E(X) = Σ x·P(x)",
+                "1 mark: E(X) = 2.3",
+                "1 mark: E(X²) = 5.9",
+                "1 mark: Using Var(X) = E(X²) - [E(X)]²",
+                "1 mark: Var(X) = 0.61"
+              ]
+            },
+            specReference: "S3.4"
+          },
+          {
+            id: "stats-19",
+            question: "A hypothesis test is conducted with H₀: μ = 50 and H₁: μ ≠ 50. The test statistic is z = 2.1. Using α = 0.05, make a decision about the null hypothesis.",
+            modelAnswer: "For a two-tailed test with α = 0.05, critical values are ±1.96. Since |2.1| > 1.96, the test statistic falls in the rejection region. Therefore, reject H₀ at the 5% significance level.",
+            marks: 4,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Identifying this as a two-tailed test",
+                "1 mark: Critical values = ±1.96",
+                "1 mark: Comparing |2.1| > 1.96",
+                "1 mark: Decision to reject H₀"
+              ]
+            },
+            specReference: "S3.5"
+          },
+          {
+            id: "stats-20",
+            question: "A scatter diagram shows a strong negative correlation between two variables. The regression line has equation y = -2x + 10. Predict the value of y when x = 6.",
+            modelAnswer: "Using the regression equation y = -2x + 10. When x = 6: y = -2(6) + 10 = -12 + 10 = -2",
+            marks: 2,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Substituting x = 6 into the equation",
+                "1 mark: Correct answer y = -2"
+              ]
+            },
+            specReference: "S3.6"
+          },
+          {
+            id: "stats-21",
+            question: "A fair six-sided die is rolled twice. Calculate the probability that the sum of the two rolls is 7.",
+            modelAnswer: "Favorable outcomes for sum = 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) = 6 outcomes. Total possible outcomes = 6 × 6 = 36. Probability = 6/36 = 1/6",
+            marks: 3,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Identifying all favorable outcomes (6 outcomes)",
+                "1 mark: Total possible outcomes = 36",
+                "1 mark: Probability = 1/6"
+              ]
+            },
+            specReference: "S2.6"
+          },
+          {
+            id: "stats-22",
+            question: "A binomial distribution has n = 10 and p = 0.3. Calculate P(X = 3).",
+            modelAnswer: "P(X = 3) = C(10,3) × (0.3)³ × (0.7)⁷ = 120 × 0.027 × 0.0824 = 120 × 0.002225 = 0.267",
+            marks: 4,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Using binomial probability formula",
+                "1 mark: C(10,3) = 120",
+                "1 mark: (0.3)³ × (0.7)⁷ = 0.002225",
+                "1 mark: Final answer 0.267"
+              ]
+            },
+            specReference: "S3.7"
+          },
+          {
+            id: "stats-23",
+            question: "Calculate the cumulative frequency for the following data: Score 0-9: 5 people, 10-19: 8 people, 20-29: 12 people, 30-39: 6 people, 40-49: 4 people",
+            modelAnswer: "Cumulative frequencies: 0-9: 5, 0-19: 5+8=13, 0-29: 13+12=25, 0-39: 25+6=31, 0-49: 31+4=35",
+            marks: 3,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Understanding cumulative frequency concept",
+                "1 mark: Correct running totals for each class",
+                "1 mark: Final cumulative frequency = 35"
+              ]
+            },
+            specReference: "S1.10"
+          },
+          {
+            id: "stats-24",
+            question: "A Poisson distribution has mean λ = 4. Calculate P(X = 2).",
+            modelAnswer: "P(X = 2) = (e^(-4) × 4²) / 2! = (0.0183 × 16) / 2 = 0.293 / 2 = 0.1465",
+            marks: 3,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Using Poisson probability formula",
+                "1 mark: Calculating e^(-4) × 4² = 0.293",
+                "1 mark: Final answer 0.1465"
+              ]
+            },
+            specReference: "S3.8"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "english",
+    name: "English Literature",
+    icon: "BookOpen",
+    topics: [
+      {
+        id: "shakespeare",
+        name: "Shakespeare",
+        description: "Analysis of Shakespeare's plays and sonnets",
+        questions: [
+          {
+            id: "shakespeare-1",
+            question: "Analyze the theme of ambition in Macbeth, focusing on how it leads to the protagonist's downfall.",
+            modelAnswer: "Ambition is the central theme driving Macbeth's tragic downfall. Initially a noble warrior, Macbeth's 'vaulting ambition' is awakened by the witches' prophecies and Lady Macbeth's manipulation. His ambition transforms from honorable service to ruthless pursuit of power. The murder of Duncan marks his moral corruption, leading to paranoia, further murders, and isolation. Shakespeare presents ambition as destructive when unchecked by moral constraints, ultimately consuming Macbeth and leading to his death.",
+            marks: 8,
+            markingCriteria: {
+              breakdown: [
+                "1 mark: Identification of ambition as central theme",
+                "1 mark: Reference to 'vaulting ambition'",
+                "1 mark: Role of witches and Lady Macbeth",
+                "1 mark: Duncan's murder as turning point",
+                "1 mark: Consequences - paranoia and further murders",
+                "1 mark: Moral corruption and isolation",
+                "1 mark: Shakespeare's message about unchecked ambition",
+                "1 mark: Link to tragic downfall and death"
+              ]
+            },
+            specReference: "L1.1"
           }
         ]
       }
