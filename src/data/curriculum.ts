@@ -1,26 +1,15 @@
-import { Question } from "../types";
 
-type Subject = "Physics" | "Chemistry" | "Mathematics";
+import { Subject } from "../types";
 
-type Curriculum = {
-  [subject in Subject]: {
-    name: string;
-    examBoard: string;
-    topics: {
-      [topic: string]: {
-        name: string;
-        questions: Question[];
-      };
-    };
-  };
-};
-
-export const curriculum: Curriculum = {
-  "Physics": {
+export const curriculum: Subject[] = [
+  {
+    id: "Physics",
     name: "Physics",
     examBoard: "AQA",
-    topics: {
-      "Motion": {
+    color: "bg-blue-500",
+    topics: [
+      {
+        id: "Motion",
         name: "Motion",
         questions: [
           {
@@ -46,7 +35,8 @@ export const curriculum: Curriculum = {
           }
         ]
       },
-      "Energy": {
+      {
+        id: "Energy",
         name: "Energy",
         questions: [
           {
@@ -77,13 +67,16 @@ export const curriculum: Curriculum = {
           }
         ]
       }
-    }
+    ]
   },
-  "Chemistry": {
+  {
+    id: "Chemistry",
     name: "Chemistry",
     examBoard: "AQA",
-    topics: {
-      "Atomic Structure": {
+    color: "bg-green-500",
+    topics: [
+      {
+        id: "Atomic Structure",
         name: "Atomic Structure",
         questions: [
           {
@@ -114,7 +107,8 @@ export const curriculum: Curriculum = {
           }
         ]
       },
-      "Chemical Reactions": {
+      {
+        id: "Chemical Reactions",
         name: "Chemical Reactions",
         questions: [
           {
@@ -150,13 +144,16 @@ export const curriculum: Curriculum = {
           }
         ]
       }
-    }
+    ]
   },
-  "Mathematics": {
+  {
+    id: "Mathematics",
     name: "Mathematics",
     examBoard: "AQA",
-    topics: {
-      "Algebra": {
+    color: "bg-purple-500",
+    topics: [
+      {
+        id: "Algebra",
         name: "Algebra",
         questions: [
           {
@@ -187,7 +184,8 @@ export const curriculum: Curriculum = {
           }
         ]
       },
-      "Geometry": {
+      {
+        id: "Geometry",
         name: "Geometry",
         questions: [
           {
@@ -218,7 +216,8 @@ export const curriculum: Curriculum = {
           }
         ]
       },
-      "Statistics": {
+      {
+        id: "Statistics",
         name: "Statistics",
         questions: [
           {
@@ -391,6 +390,6 @@ export const curriculum: Curriculum = {
           }
         ]
       }
-    }
+    ]
   }
-};
+];
