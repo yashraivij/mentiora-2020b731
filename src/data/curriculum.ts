@@ -1,15 +1,26 @@
+import { Question } from "../types";
 
-import { Subject } from "../types";
+type Subject = "Physics" | "Chemistry" | "Mathematics";
 
-export const curriculum: Subject[] = [
-  {
-    id: "Physics",
+type Curriculum = {
+  [subject in Subject]: {
+    name: string;
+    examBoard: string;
+    topics: {
+      [topic: string]: {
+        name: string;
+        questions: Question[];
+      };
+    };
+  };
+};
+
+export const curriculum: Curriculum = {
+  "Physics": {
     name: "Physics",
     examBoard: "AQA",
-    color: "bg-blue-500",
-    topics: [
-      {
-        id: "Motion",
+    topics: {
+      "Motion": {
         name: "Motion",
         questions: [
           {
@@ -35,8 +46,7 @@ export const curriculum: Subject[] = [
           }
         ]
       },
-      {
-        id: "Energy",
+      "Energy": {
         name: "Energy",
         questions: [
           {
@@ -67,16 +77,13 @@ export const curriculum: Subject[] = [
           }
         ]
       }
-    ]
+    }
   },
-  {
-    id: "Chemistry",
+  "Chemistry": {
     name: "Chemistry",
     examBoard: "AQA",
-    color: "bg-green-500",
-    topics: [
-      {
-        id: "Atomic Structure",
+    topics: {
+      "Atomic Structure": {
         name: "Atomic Structure",
         questions: [
           {
@@ -107,8 +114,7 @@ export const curriculum: Subject[] = [
           }
         ]
       },
-      {
-        id: "Chemical Reactions",
+      "Chemical Reactions": {
         name: "Chemical Reactions",
         questions: [
           {
@@ -144,16 +150,13 @@ export const curriculum: Subject[] = [
           }
         ]
       }
-    ]
+    }
   },
-  {
-    id: "Mathematics",
+  "Mathematics": {
     name: "Mathematics",
     examBoard: "AQA",
-    color: "bg-purple-500",
-    topics: [
-      {
-        id: "Algebra",
+    topics: {
+      "Algebra": {
         name: "Algebra",
         questions: [
           {
@@ -184,8 +187,7 @@ export const curriculum: Subject[] = [
           }
         ]
       },
-      {
-        id: "Geometry",
+      "Geometry": {
         name: "Geometry",
         questions: [
           {
@@ -216,8 +218,7 @@ export const curriculum: Subject[] = [
           }
         ]
       },
-      {
-        id: "Statistics",
+      "Statistics": {
         name: "Statistics",
         questions: [
           {
@@ -390,6 +391,6 @@ export const curriculum: Subject[] = [
           }
         ]
       }
-    ]
+    }
   }
-];
+};
