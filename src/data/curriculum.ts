@@ -1,15 +1,16 @@
 export interface Question {
   id: string;
-  question: string;
+  questionText: string;
   marks: number;
   modelAnswer: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+  topic: string;
   markingCriteria: {
     ao1: number;
     ao2: number;
     ao3: number;
     breakdown: string[];
   };
-  specReference: string;
 }
 
 export interface Topic {
@@ -27,2086 +28,2019 @@ export interface Subject {
 
 export const curriculum: Subject[] = [
   {
-    id: 'biology',
-    name: 'Biology',
-    color: 'bg-green-500',
+    id: "maths",
+    name: "Mathematics",
+    color: "bg-blue-500",
     topics: [
       {
-        id: 'b1-cell-biology',
-        name: 'B1 Cell Biology',
+        id: "algebra",
+        name: "Algebra",
         questions: [
           {
-            id: 'b1-q1',
-            question: 'Describe how the structure of a root hair cell helps it absorb water efficiently. (3 marks)',
-            marks: 3,
-            modelAnswer: 'The root hair cell has a large surface area due to its elongated projection, which increases the rate of water absorption. The cell wall is thin, providing a short diffusion pathway for water molecules. The cell contains many mitochondria to provide energy for active transport of mineral ions.',
+            id: "alg_1",
+            questionText: "Solve the equation 3x + 7 = 22",
+            marks: 2,
+            modelAnswer: "3x + 7 = 22\n3x = 22 - 7\n3x = 15\nx = 5",
+            difficulty: "easy",
+            topic: "algebra",
             markingCriteria: {
               ao1: 1,
               ao2: 1,
-              ao3: 1,
+              ao3: 0,
               breakdown: [
-                'AO1 (1): States large surface area',
-                'AO2 (1): Explains link between structure and function',
-                'AO3 (1): Links mitochondria to energy for active transport'
+                "Subtract 7 from both sides (1 mark)",
+                "Divide by 3 to find x = 5 (1 mark)"
               ]
-            },
-            specReference: 'AQA Biology B1.1'
+            }
           },
           {
-            id: 'b1-q2',
-            question: 'Explain the process of osmosis and give an example of where it occurs in plants. (4 marks)',
+            id: "alg_2",
+            questionText: "Expand and simplify (x + 3)(x - 2)",
+            marks: 3,
+            modelAnswer: "(x + 3)(x - 2) = x² - 2x + 3x - 6 = x² + x - 6",
+            difficulty: "medium",
+            topic: "algebra",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Multiply each term correctly (2 marks)",
+                "Simplify to final answer (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "alg_3",
+            questionText: "Solve the quadratic equation x² - 5x + 6 = 0",
+            marks: 3,
+            modelAnswer: "x² - 5x + 6 = 0\n(x - 2)(x - 3) = 0\nTherefore x = 2 or x = 3",
+            difficulty: "medium",
+            topic: "algebra",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Factorize correctly (2 marks)",
+                "State both solutions (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "alg_4",
+            questionText: "Make x the subject of the formula y = 3x - 2",
+            marks: 2,
+            modelAnswer: "y = 3x - 2\ny + 2 = 3x\nx = (y + 2)/3",
+            difficulty: "easy",
+            topic: "algebra",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Add 2 to both sides (1 mark)",
+                "Divide by 3 (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "alg_5",
+            questionText: "Simplify 2x² + 3x - x² + 5x",
+            marks: 2,
+            modelAnswer: "2x² + 3x - x² + 5x = x² + 8x",
+            difficulty: "easy",
+            topic: "algebra",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Collect like terms for x² (1 mark)",
+                "Collect like terms for x (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "alg_6",
+            questionText: "Solve the simultaneous equations: 2x + y = 7 and x - y = 2",
             marks: 4,
-            modelAnswer: 'Osmosis is the movement of water molecules from a region of high water potential to a region of low water potential through a partially permeable membrane. Water moves down its concentration gradient without requiring energy (passive process). In plants, osmosis occurs when water moves from the soil into root hair cells, as the soil has higher water potential than the cell contents.',
+            modelAnswer: "2x + y = 7 ... (1)\nx - y = 2 ... (2)\nAdding equations: 3x = 9, so x = 3\nSubstituting into (2): 3 - y = 2, so y = 1",
+            difficulty: "medium",
+            topic: "algebra",
             markingCriteria: {
               ao1: 2,
               ao2: 2,
               ao3: 0,
               breakdown: [
-                'AO1 (1): Definition of osmosis',
-                'AO1 (1): States it is a passive process',
-                'AO2 (1): Application to plants',
-                'AO2 (1): Explains direction of water movement'
+                "Add equations to eliminate y (1 mark)",
+                "Find x = 3 (1 mark)",
+                "Substitute to find y = 1 (2 marks)"
               ]
-            },
-            specReference: 'AQA Biology B1.2'
+            }
           },
           {
-            id: 'b1-q3',
-            question: 'Compare the structure and function of prokaryotic and eukaryotic cells. (6 marks)',
-            marks: 6,
-            modelAnswer: 'Prokaryotic cells have no nucleus, with genetic material freely floating in the cytoplasm, while eukaryotic cells have a membrane-bound nucleus containing DNA. Prokaryotic cells lack membrane-bound organelles, whereas eukaryotic cells contain organelles like mitochondria, endoplasmic reticulum, and Golgi apparatus. Both cell types have ribosomes, but prokaryotic ribosomes are smaller (70S) compared to eukaryotic ribosomes (80S). Prokaryotic cells are typically smaller and simpler in structure, while eukaryotic cells are larger and more complex.',
-            markingCriteria: {
-              ao1: 3,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States prokaryotes have no nucleus',
-                'AO1 (1): States eukaryotes have membrane-bound organelles',
-                'AO1 (1): Mentions ribosomes in both',
-                'AO2 (1): Compares ribosome sizes',
-                'AO2 (1): Compares cell complexity',
-                'AO3 (1): Links structure to function'
-              ]
-            },
-            specReference: 'AQA Biology B1.3'
-          },
-          {
-            id: 'b1-q4',
-            question: 'Describe the process of active transport and explain why energy is required. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Active transport is the movement of substances from a region of low concentration to a region of high concentration against the concentration gradient. This process requires energy in the form of ATP because substances are being moved against their natural tendency to diffuse. Carrier proteins in the cell membrane change shape when ATP is used, allowing specific substances to be transported across the membrane.',
+            id: "alg_7",
+            questionText: "Express x² - 6x + 5 in the form (x - a)² - b",
+            marks: 3,
+            modelAnswer: "x² - 6x + 5 = (x - 3)² - 9 + 5 = (x - 3)² - 4",
+            difficulty: "hard",
+            topic: "algebra",
             markingCriteria: {
               ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States movement against concentration gradient',
-                'AO1 (1): States ATP is required',
-                'AO2 (1): Explains why energy is needed',
-                'AO2 (1): Describes role of carrier proteins'
-              ]
-            },
-            specReference: 'AQA Biology B1.4'
-          },
-          {
-            id: 'b1-q5',
-            question: 'Explain how the structure of a leaf cell is adapted for photosynthesis. (5 marks)',
-            marks: 5,
-            modelAnswer: 'Leaf cells contain numerous chloroplasts containing chlorophyll to absorb light energy. The chloroplasts are mainly located in the palisade layer near the upper surface to receive maximum light. The cell has a large vacuole to maintain cell shape and structure. Stomata in the lower epidermis allow gas exchange for carbon dioxide entry and oxygen exit. The thin cell wall allows easy diffusion of gases.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States presence of chloroplasts with chlorophyll',
-                'AO1 (1): Mentions stomata for gas exchange',
-                'AO2 (1): Explains positioning of chloroplasts',
-                'AO2 (1): Links thin cell wall to gas diffusion',
-                'AO3 (1): Links structure to photosynthesis function'
-              ]
-            },
-            specReference: 'AQA Biology B1.5'
-          },
-          {
-            id: 'b1-q6',
-            question: 'Describe the differences between animal and plant cells. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Plant cells have a rigid cell wall made of cellulose, while animal cells only have a flexible cell membrane. Plant cells contain chloroplasts for photosynthesis, which animal cells lack. Plant cells have a large permanent vacuole, whereas animal cells may have small temporary vacuoles. Both cell types have a nucleus, cytoplasm, and mitochondria.',
-            markingCriteria: {
-              ao1: 3,
               ao2: 1,
               ao3: 0,
               breakdown: [
-                'AO1 (1): States plant cells have cell wall',
-                'AO1 (1): States plant cells have chloroplasts',
-                'AO1 (1): States plant cells have large vacuole',
-                'AO2 (1): Compares structures between cell types'
+                "Complete the square correctly (2 marks)",
+                "Simplify to final form (1 mark)"
               ]
-            },
-            specReference: 'AQA Biology B1.6'
+            }
           },
           {
-            id: 'b1-q7',
-            question: 'Explain how substances move in and out of cells by diffusion. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Diffusion is the movement of particles from an area of high concentration to an area of low concentration. This movement occurs down the concentration gradient and does not require energy (passive process). Examples include oxygen diffusing into cells and carbon dioxide diffusing out of cells.',
+            id: "alg_8",
+            questionText: "Find the value of x when 2^x = 16",
+            marks: 2,
+            modelAnswer: "2^x = 16\n2^x = 2^4\nTherefore x = 4",
+            difficulty: "medium",
+            topic: "algebra",
             markingCriteria: {
               ao1: 1,
               ao2: 1,
-              ao3: 1,
+              ao3: 0,
               breakdown: [
-                'AO1 (1): States movement from high to low concentration',
-                'AO2 (1): States it is a passive process',
-                'AO3 (1): Gives relevant example'
+                "Express 16 as a power of 2 (1 mark)",
+                "Equate powers to find x = 4 (1 mark)"
               ]
-            },
-            specReference: 'AQA Biology B1.7'
+            }
           },
           {
-            id: 'b1-q8',
-            question: 'Describe the structure and function of mitochondria. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Mitochondria are oval-shaped organelles with a double membrane. The inner membrane is folded to form cristae, which increase the surface area for respiration. Mitochondria are the site of aerobic respiration where glucose is broken down to release energy in the form of ATP.',
+            id: "alg_9",
+            questionText: "Solve the inequality 3x - 5 > 7",
+            marks: 2,
+            modelAnswer: "3x - 5 > 7\n3x > 12\nx > 4",
+            difficulty: "easy",
+            topic: "algebra",
             markingCriteria: {
               ao1: 1,
               ao2: 1,
-              ao3: 1,
+              ao3: 0,
               breakdown: [
-                'AO1 (1): Describes double membrane structure',
-                'AO2 (1): Explains cristae increase surface area',
-                'AO3 (1): Links to aerobic respiration function'
+                "Add 5 to both sides (1 mark)",
+                "Divide by 3 (1 mark)"
               ]
-            },
-            specReference: 'AQA Biology B1.8'
+            }
           },
           {
-            id: 'b1-q9',
-            question: 'Explain why cells need to be small in size. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Small cells have a large surface area to volume ratio, which allows efficient exchange of materials across the cell membrane. As cell size increases, the volume increases faster than surface area, making it difficult for substances to reach the center of the cell quickly. Small cells can obtain nutrients and remove waste products more efficiently. Large cells would struggle to maintain adequate concentration gradients.',
+            id: "alg_10",
+            questionText: "Factorize completely 6x² - 9x",
+            marks: 2,
+            modelAnswer: "6x² - 9x = 3x(2x - 3)",
+            difficulty: "medium",
+            topic: "algebra",
             markingCriteria: {
               ao1: 1,
-              ao2: 2,
-              ao3: 1,
+              ao2: 1,
+              ao3: 0,
               breakdown: [
-                'AO1 (1): States surface area to volume ratio concept',
-                'AO2 (1): Explains relationship between size and efficiency',
-                'AO2 (1): Explains difficulty in large cells',
-                'AO3 (1): Links to survival needs'
+                "Take out common factor 3x (1 mark)",
+                "Write in factorized form (1 mark)"
               ]
-            },
-            specReference: 'AQA Biology B1.9'
-          },
-          {
-            id: 'b1-q10',
-            question: 'Describe how you would use a microscope to observe plant cells. (5 marks)',
-            marks: 5,
-            modelAnswer: 'Place a thin section of plant tissue (such as onion epidermis) on a clean slide. Add a drop of water and place a coverslip carefully to avoid air bubbles. Start with the lowest power objective lens and use the coarse focus to get a rough image. Switch to higher magnification and use fine focus for clear detail. Ensure adequate lighting and adjust if necessary.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States use of thin tissue section',
-                'AO1 (1): Mentions use of coverslip',
-                'AO2 (1): Describes focusing procedure',
-                'AO2 (1): Mentions starting with low power',
-                'AO3 (1): Explains importance of avoiding air bubbles'
-              ]
-            },
-            specReference: 'AQA Biology B1.10'
+            }
           }
         ]
       },
       {
-        id: 'b2-organisation',
-        name: 'B2 Organisation',
+        id: "geometry",
+        name: "Geometry",
         questions: [
           {
-            id: 'b2-q1',
-            question: 'Describe the function of enzymes and explain why they are important in biological processes. (5 marks)',
-            marks: 5,
-            modelAnswer: 'Enzymes are biological catalysts that speed up chemical reactions by lowering the activation energy required. They have specific active sites that are complementary to their substrate molecules. Enzymes are important because they allow metabolic reactions to occur at body temperature and at a rate fast enough to sustain life. Without enzymes, reactions would be too slow to maintain cellular processes.',
+            id: "geo_1",
+            questionText: "Calculate the area of a triangle with base 8cm and height 6cm",
+            marks: 2,
+            modelAnswer: "Area = ½ × base × height = ½ × 8 × 6 = 24 cm²",
+            difficulty: "easy",
+            topic: "geometry",
             markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 1,
+              ao1: 1,
+              ao2: 1,
+              ao3: 0,
               breakdown: [
-                'AO1 (1): States enzymes are catalysts',
-                'AO1 (1): Mentions active site and substrate',
-                'AO2 (1): Explains lowering activation energy',
-                'AO2 (1): Links to body temperature',
-                'AO3 (1): Evaluates importance for life processes'
+                "Use correct formula (1 mark)",
+                "Calculate correctly with units (1 mark)"
               ]
-            },
-            specReference: 'AQA Biology B2.1'
+            }
           },
           {
-            id: 'b2-q2',
-            question: 'Explain the lock and key model of enzyme action. (4 marks)',
-            marks: 4,
-            modelAnswer: 'The enzyme has a specific active site with a complementary shape to the substrate molecule. The substrate fits into the active site like a key fits into a lock. When the substrate binds to the active site, an enzyme-substrate complex is formed. The enzyme then catalyzes the reaction and releases the product, remaining unchanged for reuse.',
+            id: "geo_2",
+            questionText: "Find the circumference of a circle with radius 5cm (use π = 3.14)",
+            marks: 2,
+            modelAnswer: "Circumference = 2πr = 2 × 3.14 × 5 = 31.4 cm",
+            difficulty: "easy",
+            topic: "geometry",
             markingCriteria: {
-              ao1: 2,
+              ao1: 1,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Use correct formula C = 2πr (1 mark)",
+                "Calculate correctly (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "geo_3",
+            questionText: "Calculate the volume of a cuboid with dimensions 4cm × 3cm × 2cm",
+            marks: 2,
+            modelAnswer: "Volume = length × width × height = 4 × 3 × 2 = 24 cm³",
+            difficulty: "easy",
+            topic: "geometry",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Use correct formula (1 mark)",
+                "Calculate with correct units (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "geo_4",
+            questionText: "Find the area of a circle with diameter 10cm (use π = 3.14)",
+            marks: 3,
+            modelAnswer: "Radius = 10 ÷ 2 = 5cm\nArea = πr² = 3.14 × 5² = 3.14 × 25 = 78.5 cm²",
+            difficulty: "medium",
+            topic: "geometry",
+            markingCriteria: {
+              ao1: 1,
               ao2: 2,
               ao3: 0,
               breakdown: [
-                'AO1 (1): States complementary shapes',
-                'AO1 (1): Mentions enzyme-substrate complex',
-                'AO2 (1): Explains lock and key analogy',
-                'AO2 (1): States enzyme remains unchanged'
+                "Find radius from diameter (1 mark)",
+                "Use correct formula and calculate (2 marks)"
               ]
-            },
-            specReference: 'AQA Biology B2.2'
+            }
           },
           {
-            id: 'b2-q3',
-            question: 'Describe how temperature affects enzyme activity. (4 marks)',
-            marks: 4,
-            modelAnswer: 'As temperature increases, enzyme activity initially increases because molecules have more kinetic energy and collide more frequently. At the optimum temperature, enzyme activity is at its maximum. Beyond the optimum temperature, the enzyme begins to denature as hydrogen bonds break, causing the active site to change shape. At very high temperatures, the enzyme is completely denatured and activity stops.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States activity increases then decreases',
-                'AO2 (1): Explains increased kinetic energy',
-                'AO2 (1): Explains denaturation process',
-                'AO3 (1): Links shape change to loss of function'
-              ]
-            },
-            specReference: 'AQA Biology B2.3'
-          },
-          {
-            id: 'b2-q4',
-            question: 'Explain how pH affects enzyme activity. (3 marks)',
+            id: "geo_5",
+            questionText: "Calculate the surface area of a cube with side length 4cm",
             marks: 3,
-            modelAnswer: 'Each enzyme has an optimum pH at which it works best. Changes in pH can alter the shape of the active site by affecting the bonds that maintain the enzyme structure. If the pH is too high or too low, the enzyme may denature and lose its catalytic activity.',
+            modelAnswer: "Surface area = 6 × (side length)² = 6 × 4² = 6 × 16 = 96 cm²",
+            difficulty: "medium",
+            topic: "geometry",
             markingCriteria: {
               ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States enzymes have optimum pH',
-                'AO2 (1): Explains pH affects enzyme shape',
-                'AO3 (1): Links shape change to loss of activity'
-              ]
-            },
-            specReference: 'AQA Biology B2.4'
-          },
-          {
-            id: 'b2-q5',
-            question: 'Describe the structure and function of the digestive system. (6 marks)',
-            marks: 6,
-            modelAnswer: 'The digestive system consists of the alimentary canal and associated organs. The mouth mechanically breaks down food and begins starch digestion with amylase. The stomach produces acid and pepsin to digest proteins. The small intestine completes digestion with enzymes from the pancreas and absorbs nutrients. The large intestine absorbs water and forms feces. The liver produces bile to emulsify fats.',
-            markingCriteria: {
-              ao1: 3,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): Lists main organs',
-                'AO1 (1): States stomach digests proteins',
-                'AO1 (1): States small intestine absorbs nutrients',
-                'AO2 (1): Explains mechanical and chemical digestion',
-                'AO2 (1): Explains role of bile',
-                'AO3 (1): Links structure to function'
-              ]
-            },
-            specReference: 'AQA Biology B2.5'
-          },
-          {
-            id: 'b2-q6',
-            question: 'Explain how the small intestine is adapted for absorption. (5 marks)',
-            marks: 5,
-            modelAnswer: 'The small intestine has villi and microvilli which greatly increase the surface area for absorption. The wall is thin (one cell thick) providing a short diffusion pathway. Each villus contains a rich blood supply to maintain concentration gradients. The villi also contain lacteal vessels for fat absorption. The epithelial cells have many mitochondria to provide energy for active transport.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States presence of villi/microvilli',
-                'AO1 (1): States thin wall',
-                'AO2 (1): Explains increased surface area',
-                'AO2 (1): Explains blood supply role',
-                'AO3 (1): Links adaptations to function'
-              ]
-            },
-            specReference: 'AQA Biology B2.6'
-          },
-          {
-            id: 'b2-q7',
-            question: 'Describe the process of digestion of carbohydrates. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Carbohydrate digestion begins in the mouth where amylase breaks down starch into maltose. In the small intestine, pancreatic amylase continues to break down starch. Maltase, sucrase, and lactase enzymes on the intestinal wall break down disaccharides into monosaccharides. The resulting glucose, fructose, and galactose are absorbed into the bloodstream.',
-            markingCriteria: {
-              ao1: 2,
               ao2: 2,
               ao3: 0,
               breakdown: [
-                'AO1 (1): States amylase breaks down starch',
-                'AO1 (1): Names specific enzymes',
-                'AO2 (1): Explains sequential breakdown process',
-                'AO2 (1): States final products are absorbed'
+                "Recognize 6 faces (1 mark)",
+                "Calculate area of each face and multiply by 6 (2 marks)"
               ]
-            },
-            specReference: 'AQA Biology B2.7'
+            }
           },
           {
-            id: 'b2-q8',
-            question: 'Explain how food is moved through the digestive system. (3 marks)',
+            id: "geo_6",
+            questionText: "Find the length of the hypotenuse in a right-angled triangle with sides 3cm and 4cm",
             marks: 3,
-            modelAnswer: 'Food moves through the digestive system by peristalsis, which involves rhythmic contractions of the smooth muscle in the gut wall. These wave-like contractions push the food along the alimentary canal. The process is involuntary and controlled by the nervous system.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): Names peristalsis',
-                'AO2 (1): Describes muscle contractions',
-                'AO3 (1): States it is involuntary'
-              ]
-            },
-            specReference: 'AQA Biology B2.8'
-          },
-          {
-            id: 'b2-q9',
-            question: 'Describe the role of bile in digestion. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Bile is produced by the liver and stored in the gall bladder. It emulsifies fats, breaking large fat droplets into smaller ones to increase surface area. This allows lipase enzymes to work more efficiently in digesting fats into fatty acids and glycerol.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States bile produced by liver',
-                'AO2 (1): Explains emulsification process',
-                'AO3 (1): Links to improved enzyme action'
-              ]
-            },
-            specReference: 'AQA Biology B2.9'
-          },
-          {
-            id: 'b2-q10',
-            question: 'Explain why the stomach produces hydrochloric acid. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Hydrochloric acid creates an acidic environment with a pH of about 2. This acid kills harmful bacteria in food, preventing food poisoning. The acidic conditions provide the optimum pH for pepsin enzyme to digest proteins effectively. The acid also helps to denature proteins, making them easier to digest.',
+            modelAnswer: "Using Pythagoras' theorem: c² = a² + b²\nc² = 3² + 4² = 9 + 16 = 25\nc = √25 = 5cm",
+            difficulty: "medium",
+            topic: "geometry",
             markingCriteria: {
               ao1: 1,
               ao2: 2,
-              ao3: 1,
+              ao3: 0,
               breakdown: [
-                'AO1 (1): States stomach produces HCl',
-                'AO2 (1): Explains kills bacteria',
-                'AO2 (1): States optimum pH for pepsin',
-                'AO3 (1): Links to protein digestion'
+                "State Pythagoras' theorem (1 mark)",
+                "Substitute and calculate correctly (2 marks)"
               ]
-            },
-            specReference: 'AQA Biology B2.10'
+            }
+          },
+          {
+            id: "geo_7",
+            questionText: "Calculate the area of a trapezium with parallel sides 6cm and 10cm, and height 4cm",
+            marks: 3,
+            modelAnswer: "Area = ½ × (sum of parallel sides) × height\nArea = ½ × (6 + 10) × 4 = ½ × 16 × 4 = 32 cm²",
+            difficulty: "medium",
+            topic: "geometry",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Use correct trapezium formula (1 mark)",
+                "Substitute and calculate correctly (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "geo_8",
+            questionText: "Find the volume of a cylinder with radius 3cm and height 8cm (use π = 3.14)",
+            marks: 3,
+            modelAnswer: "Volume = πr²h = 3.14 × 3² × 8 = 3.14 × 9 × 8 = 226.08 cm³",
+            difficulty: "medium",
+            topic: "geometry",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Use correct formula V = πr²h (1 mark)",
+                "Substitute and calculate correctly (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "geo_9",
+            questionText: "Calculate the perimeter of a rectangle with length 12cm and width 8cm",
+            marks: 2,
+            modelAnswer: "Perimeter = 2 × (length + width) = 2 × (12 + 8) = 2 × 20 = 40cm",
+            difficulty: "easy",
+            topic: "geometry",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Use correct formula (1 mark)",
+                "Calculate correctly (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "geo_10",
+            questionText: "Find the area of a parallelogram with base 9cm and height 5cm",
+            marks: 2,
+            modelAnswer: "Area = base × height = 9 × 5 = 45 cm²",
+            difficulty: "easy",
+            topic: "geometry",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Use correct formula (1 mark)",
+                "Calculate with units (1 mark)"
+              ]
+            }
           }
         ]
       },
       {
-        id: 'b3-infection-response',
-        name: 'B3 Infection and Response',
+        id: "statistics",
+        name: "Statistics",
         questions: [
           {
-            id: 'b3-q1',
-            question: 'Explain how white blood cells help defend the body against pathogens. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Phagocytes engulf and digest pathogens through phagocytosis, destroying them with enzymes. Lymphocytes produce specific antibodies that bind to antigens on pathogens, marking them for destruction. Some lymphocytes become memory cells, providing long-term immunity by remembering specific pathogens for faster response in future infections.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States phagocytes engulf pathogens',
-                'AO1 (1): States lymphocytes produce antibodies',
-                'AO2 (1): Explains phagocytosis process',
-                'AO2 (1): Explains memory cell function'
-              ]
-            },
-            specReference: 'AQA Biology B3.1'
-          },
-          {
-            id: 'b3-q2',
-            question: 'Describe how the body prevents pathogens from entering. (4 marks)',
-            marks: 4,
-            modelAnswer: 'The skin acts as a physical barrier preventing pathogen entry. The respiratory system produces mucus to trap pathogens, and cilia move the mucus upward. The digestive system produces hydrochloric acid in the stomach which kills many pathogens. Tears and saliva contain enzymes like lysozyme that break down bacterial cell walls.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States skin as barrier',
-                'AO1 (1): States stomach acid kills pathogens',
-                'AO2 (1): Explains mucus and cilia action',
-                'AO2 (1): Explains enzyme action in tears/saliva'
-              ]
-            },
-            specReference: 'AQA Biology B3.2'
-          },
-          {
-            id: 'b3-q3',
-            question: 'Explain the difference between active and passive immunity. (5 marks)',
-            marks: 5,
-            modelAnswer: 'Active immunity occurs when the immune system produces its own antibodies in response to a pathogen or vaccine. This provides long-lasting protection because memory cells are formed. Passive immunity involves receiving ready-made antibodies from another source, such as from mother to baby through breast milk. Passive immunity provides immediate but temporary protection as no memory cells are produced.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States active immunity involves own antibody production',
-                'AO1 (1): States passive immunity involves receiving antibodies',
-                'AO2 (1): Explains memory cell formation in active immunity',
-                'AO2 (1): Explains temporary nature of passive immunity',
-                'AO3 (1): Compares duration of protection'
-              ]
-            },
-            specReference: 'AQA Biology B3.3'
-          },
-          {
-            id: 'b3-q4',
-            question: 'Describe how vaccination works. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Vaccination involves introducing dead or weakened pathogens (or their antigens) into the body. This stimulates white blood cells to produce specific antibodies without causing the disease. Memory cells are formed during this primary response. If the real pathogen enters the body later, memory cells quickly produce antibodies, providing rapid protection.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States vaccine contains dead/weakened pathogens',
-                'AO1 (1): States antibodies are produced',
-                'AO2 (1): Explains memory cell formation',
-                'AO2 (1): Explains rapid secondary response'
-              ]
-            },
-            specReference: 'AQA Biology B3.4'
-          },
-          {
-            id: 'b3-q5',
-            question: 'Explain how antibiotics work and why they are ineffective against viruses. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Antibiotics work by interfering with bacterial cell processes, such as cell wall formation or protein synthesis. They target structures or processes that are specific to bacteria. Antibiotics are ineffective against viruses because viruses do not have their own cellular processes - they use the host cell\'s machinery to reproduce. Viruses lack cell walls and other bacterial structures that antibiotics target.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States antibiotics target bacterial processes',
-                'AO2 (1): Explains specific bacterial targets',
-                'AO2 (1): Explains viruses use host machinery',
-                'AO3 (1): Links differences to antibiotic effectiveness'
-              ]
-            },
-            specReference: 'AQA Biology B3.5'
-          },
-          {
-            id: 'b3-q6',
-            question: 'Describe what happens during an inflammatory response. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Blood vessels near the infected area dilate, increasing blood flow and causing redness and heat. Blood vessel walls become more permeable, allowing plasma and white blood cells to move into tissues, causing swelling. White blood cells move to the infected area to fight pathogens and begin healing.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States blood vessels dilate',
-                'AO2 (1): Explains increased permeability and swelling',
-                'AO2 (1): Explains white blood cell movement'
-              ]
-            },
-            specReference: 'AQA Biology B3.6'
-          },
-          {
-            id: 'b3-q7',
-            question: 'Explain how pathogens cause disease. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Pathogens cause disease by reproducing rapidly inside the body, competing with normal cells for nutrients. Some bacteria produce toxins that damage cells and tissues directly. Viruses take over cellular machinery to reproduce, often killing the host cell in the process. The immune response to pathogens can also cause symptoms like fever and inflammation.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States pathogens reproduce rapidly',
-                'AO1 (1): States some produce toxins',
-                'AO2 (1): Explains competition for resources',
-                'AO2 (1): Explains viral cellular damage'
-              ]
-            },
-            specReference: 'AQA Biology B3.7'
-          },
-          {
-            id: 'b3-q8',
-            question: 'Describe the role of memory cells in immunity. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Memory cells are formed during the primary immune response when B-lymphocytes encounter a specific antigen. They remain in the blood for many years, providing immunological memory. Upon re-exposure to the same pathogen, memory cells rapidly divide and produce antibodies, resulting in a faster and stronger secondary immune response.',
+            id: "stat_1",
+            questionText: "Find the mean of the following data set: 4, 7, 9, 12, 8",
+            marks: 2,
+            modelAnswer: "Mean = (4 + 7 + 9 + 12 + 8) ÷ 5 = 40 ÷ 5 = 8",
+            difficulty: "easy",
+            topic: "statistics",
             markingCriteria: {
               ao1: 1,
               ao2: 1,
-              ao3: 1,
+              ao3: 0,
               breakdown: [
-                'AO1 (1): States memory cells formed during primary response',
-                'AO2 (1): Explains long-term persistence',
-                'AO3 (1): Links to faster secondary response'
+                "Add all values correctly (1 mark)",
+                "Divide by number of values (1 mark)"
               ]
-            },
-            specReference: 'AQA Biology B3.8'
+            }
           },
           {
-            id: 'b3-q9',
-            question: 'Explain why some people are more susceptible to infections than others. (4 marks)',
+            id: "stat_2",
+            questionText: "Find the median of: 3, 8, 5, 12, 9, 6, 11",
+            marks: 2,
+            modelAnswer: "Arrange in order: 3, 5, 6, 8, 9, 11, 12\nMedian = 8 (middle value)",
+            difficulty: "easy",
+            topic: "statistics",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Arrange data in order (1 mark)",
+                "Identify middle value (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "stat_3",
+            questionText: "Find the mode of: 2, 5, 3, 5, 8, 5, 9, 3",
+            marks: 1,
+            modelAnswer: "Mode = 5 (appears 3 times, most frequent)",
+            difficulty: "easy",
+            topic: "statistics",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 0,
+              ao3: 0,
+              breakdown: [
+                "Identify most frequent value (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "stat_4",
+            questionText: "Calculate the range of: 15, 8, 23, 12, 19, 6, 21",
+            marks: 2,
+            modelAnswer: "Highest value = 23, Lowest value = 6\nRange = 23 - 6 = 17",
+            difficulty: "easy",
+            topic: "statistics",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Identify highest and lowest values (1 mark)",
+                "Calculate difference (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "stat_5",
+            questionText: "A dice is rolled 60 times. Calculate the expected frequency of rolling a 3.",
+            marks: 2,
+            modelAnswer: "Probability of rolling a 3 = 1/6\nExpected frequency = 60 × 1/6 = 10",
+            difficulty: "medium",
+            topic: "statistics",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "State probability as 1/6 (1 mark)",
+                "Calculate 60 × 1/6 = 10 (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "stat_6",
+            questionText: "Draw a frequency table for the following data: A, B, A, C, B, A, B, C, A, B",
+            marks: 3,
+            modelAnswer: "Letter | Frequency\nA      | 4\nB      | 4\nC      | 2",
+            difficulty: "medium",
+            topic: "statistics",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Set up table with correct headings (1 mark)",
+                "Count frequencies correctly (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "stat_7",
+            questionText: "Calculate the probability of drawing a red card from a standard deck of 52 cards.",
+            marks: 2,
+            modelAnswer: "Number of red cards = 26\nProbability = 26/52 = 1/2 = 0.5",
+            difficulty: "medium",
+            topic: "statistics",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Identify 26 red cards (1 mark)",
+                "Calculate probability as 1/2 (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "stat_8",
+            questionText: "Find the mean from this frequency table: Score: 1(freq 3), 2(freq 5), 3(freq 2)",
+            marks: 3,
+            modelAnswer: "Total = (1×3) + (2×5) + (3×2) = 3 + 10 + 6 = 19\nNumber of values = 3 + 5 + 2 = 10\nMean = 19 ÷ 10 = 1.9",
+            difficulty: "medium",
+            topic: "statistics",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Calculate total of (value × frequency) (2 marks)",
+                "Divide by total frequency (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "stat_9",
+            questionText: "Two coins are flipped. What is the probability of getting exactly one head?",
+            marks: 3,
+            modelAnswer: "Possible outcomes: HH, HT, TH, TT\nOutcomes with exactly one head: HT, TH\nProbability = 2/4 = 1/2",
+            difficulty: "medium",
+            topic: "statistics",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "List all possible outcomes (1 mark)",
+                "Identify favorable outcomes and calculate probability (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "stat_10",
+            questionText: "Interpret this data: In a survey of 100 people, 60 preferred tea, 30 preferred coffee, 10 had no preference. Create a pie chart showing the angles.",
             marks: 4,
-            modelAnswer: 'Age affects immune system strength - very young and elderly people have weaker immune responses. Malnutrition can reduce the production of white blood cells and antibodies. Stress and lack of sleep can suppress immune function. Some people have genetic conditions that affect their immune system, making them more vulnerable to infections.',
+            modelAnswer: "Tea: (60/100) × 360° = 216°\nCoffee: (30/100) × 360° = 108°\nNo preference: (10/100) × 360° = 36°\nTotal check: 216° + 108° + 36° = 360°",
+            difficulty: "hard",
+            topic: "statistics",
             markingCriteria: {
               ao1: 2,
               ao2: 2,
               ao3: 0,
               breakdown: [
-                'AO1 (1): States age affects immunity',
-                'AO1 (1): States malnutrition affects immunity',
-                'AO2 (1): Explains reduced white blood cell production',
-                'AO2 (1): Explains lifestyle factors'
+                "Calculate angle for tea (1 mark)",
+                "Calculate angles for coffee and no preference (2 marks)",
+                "Check total equals 360° (1 mark)"
               ]
-            },
-            specReference: 'AQA Biology B3.9'
-          },
-          {
-            id: 'b3-q10',
-            question: 'Describe how herd immunity protects populations. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Herd immunity occurs when a large percentage of a population is immune to a disease through vaccination or previous infection. This reduces the number of susceptible individuals, making it difficult for pathogens to spread. Even unvaccinated individuals are protected because the disease cannot spread easily through the population. The threshold for herd immunity varies depending on how contagious the disease is.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States large percentage immune',
-                'AO2 (1): Explains reduced disease spread',
-                'AO2 (1): Explains protection of unvaccinated',
-                'AO3 (1): Links to population protection'
-              ]
-            },
-            specReference: 'AQA Biology B3.10'
+            }
           }
         ]
       }
     ]
   },
   {
-    id: 'maths',
-    name: 'Mathematics',
-    color: 'bg-blue-500',
+    id: "biology",
+    name: "Biology",
+    color: "bg-green-500",
     topics: [
       {
-        id: 'm1-number',
-        name: 'Number',
+        id: "cell_biology",
+        name: "Cell Biology",
         questions: [
           {
-            id: 'm1-q1',
-            question: 'Calculate 3/4 × 2/5 and express your answer as a fraction in its simplest form. (2 marks)',
-            marks: 2,
-            modelAnswer: '3/4 × 2/5 = (3×2)/(4×5) = 6/20 = 3/10',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct multiplication of fractions',
-                'AO2 (1): Simplifies to lowest terms'
-              ]
-            },
-            specReference: 'AQA Maths N1.1'
-          },
-          {
-            id: 'm1-q2',
-            question: 'A shop increases all prices by 15%. If a jacket originally cost £80, what is the new price? (3 marks)',
-            marks: 3,
-            modelAnswer: 'Increase = 15% of £80 = 0.15 × 80 = £12. New price = £80 + £12 = £92',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Converts percentage to decimal',
-                'AO2 (1): Calculates percentage increase',
-                'AO2 (1): Adds to original price'
-              ]
-            },
-            specReference: 'AQA Maths N1.2'
-          },
-          {
-            id: 'm1-q3',
-            question: 'Work out 2.4 ÷ 0.6. (2 marks)',
-            marks: 2,
-            modelAnswer: '2.4 ÷ 0.6 = 24 ÷ 6 = 4',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Converts to equivalent division',
-                'AO2 (1): Correct answer of 4'
-              ]
-            },
-            specReference: 'AQA Maths N1.3'
-          },
-          {
-            id: 'm1-q4',
-            question: 'Round 47.638 to 2 decimal places. (1 mark)',
-            marks: 1,
-            modelAnswer: '47.64',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct rounding to 47.64'
-              ]
-            },
-            specReference: 'AQA Maths N1.4'
-          },
-          {
-            id: 'm1-q5',
-            question: 'Express 0.35 as a percentage. (1 mark)',
-            marks: 1,
-            modelAnswer: '35%',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct conversion to 35%'
-              ]
-            },
-            specReference: 'AQA Maths N1.5'
-          },
-          {
-            id: 'm1-q6',
-            question: 'Calculate 5/8 + 1/4. Give your answer as a fraction in its simplest form. (3 marks)',
-            marks: 3,
-            modelAnswer: '1/4 = 2/8, so 5/8 + 2/8 = 7/8',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Converts to common denominator',
-                'AO2 (1): Adds fractions correctly',
-                'AO2 (1): Answer in simplest form'
-              ]
-            },
-            specReference: 'AQA Maths N1.6'
-          },
-          {
-            id: 'm1-q7',
-            question: 'A number is decreased by 20% to give 240. What was the original number? (3 marks)',
-            marks: 3,
-            modelAnswer: 'If decreased by 20%, then 80% remains. 80% = 240, so 1% = 240 ÷ 80 = 3. Original number = 100% = 3 × 100 = 300',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Recognizes 80% remains',
-                'AO2 (1): Sets up correct calculation',
-                'AO2 (1): Correct answer of 300'
-              ]
-            },
-            specReference: 'AQA Maths N1.7'
-          },
-          {
-            id: 'm1-q8',
-            question: 'Write 3/5 as a decimal. (1 mark)',
-            marks: 1,
-            modelAnswer: '0.6',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct conversion to 0.6'
-              ]
-            },
-            specReference: 'AQA Maths N1.8'
-          },
-          {
-            id: 'm1-q9',
-            question: 'Calculate 15% of £240. (2 marks)',
-            marks: 2,
-            modelAnswer: '15% = 15/100 = 0.15. 0.15 × £240 = £36',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Converts percentage to decimal',
-                'AO2 (1): Correct calculation giving £36'
-              ]
-            },
-            specReference: 'AQA Maths N1.9'
-          },
-          {
-            id: 'm1-q10',
-            question: 'Put these numbers in order from smallest to largest: 0.3, 1/4, 30%, 0.25. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Converting all to decimals: 0.3, 0.25, 0.3, 0.25. Order: 1/4, 0.25, 0.3, 30%',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Converts to common form',
-                'AO2 (1): Correct order: 1/4, 0.25, 0.3, 30%'
-              ]
-            },
-            specReference: 'AQA Maths N1.10'
-          }
-        ]
-      },
-      {
-        id: 'm2-algebra',
-        name: 'Algebra',
-        questions: [
-          {
-            id: 'm2-q1',
-            question: 'Solve the equation 3x + 7 = 22. (2 marks)',
-            marks: 2,
-            modelAnswer: '3x + 7 = 22, 3x = 22 - 7, 3x = 15, x = 5',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct rearrangement',
-                'AO2 (1): Correct solution x = 5'
-              ]
-            },
-            specReference: 'AQA Maths A1.1'
-          },
-          {
-            id: 'm2-q2',
-            question: 'Expand 3(x + 4). (1 mark)',
-            marks: 1,
-            modelAnswer: '3x + 12',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct expansion to 3x + 12'
-              ]
-            },
-            specReference: 'AQA Maths A1.2'
-          },
-          {
-            id: 'm2-q3',
-            question: 'Simplify 5x + 3x - 2x. (1 mark)',
-            marks: 1,
-            modelAnswer: '6x',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct simplification to 6x'
-              ]
-            },
-            specReference: 'AQA Maths A1.3'
-          },
-          {
-            id: 'm2-q4',
-            question: 'Factorise x² + 5x + 6. (2 marks)',
-            marks: 2,
-            modelAnswer: '(x + 2)(x + 3)',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Identifies factors of 6 that add to 5',
-                'AO2 (1): Correct factorisation (x + 2)(x + 3)'
-              ]
-            },
-            specReference: 'AQA Maths A1.4'
-          },
-          {
-            id: 'm2-q5',
-            question: 'Solve 2x - 5 = x + 3. (3 marks)',
-            marks: 3,
-            modelAnswer: '2x - 5 = x + 3, 2x - x = 3 + 5, x = 8',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Collects x terms on one side',
-                'AO2 (1): Collects numbers on other side',
-                'AO2 (1): Correct solution x = 8'
-              ]
-            },
-            specReference: 'AQA Maths A1.5'
-          },
-          {
-            id: 'm2-q6',
-            question: 'Expand and simplify (x + 3)(x + 2). (2 marks)',
-            marks: 2,
-            modelAnswer: 'x² + 2x + 3x + 6 = x² + 5x + 6',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct expansion',
-                'AO2 (1): Correct simplification to x² + 5x + 6'
-              ]
-            },
-            specReference: 'AQA Maths A1.6'
-          },
-          {
-            id: 'm2-q7',
-            question: 'Make x the subject of y = 3x + 2. (2 marks)',
-            marks: 2,
-            modelAnswer: 'y = 3x + 2, y - 2 = 3x, x = (y - 2)/3',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct rearrangement steps',
-                'AO2 (1): Correct final form x = (y - 2)/3'
-              ]
-            },
-            specReference: 'AQA Maths A1.7'
-          },
-          {
-            id: 'm2-q8',
-            question: 'Solve x/3 + 2 = 7. (2 marks)',
-            marks: 2,
-            modelAnswer: 'x/3 + 2 = 7, x/3 = 5, x = 15',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Subtracts 2 from both sides',
-                'AO2 (1): Multiplies by 3 to get x = 15'
-              ]
-            },
-            specReference: 'AQA Maths A1.8'
-          },
-          {
-            id: 'm2-q9',
-            question: 'Simplify 4x² × 3x. (1 mark)',
-            marks: 1,
-            modelAnswer: '12x³',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct simplification to 12x³'
-              ]
-            },
-            specReference: 'AQA Maths A1.9'
-          },
-          {
-            id: 'm2-q10',
-            question: 'Expand 2x(3x - 4). (2 marks)',
-            marks: 2,
-            modelAnswer: '6x² - 8x',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Multiplies each term',
-                'AO2 (1): Correct expansion 6x² - 8x'
-              ]
-            },
-            specReference: 'AQA Maths A1.10'
-          }
-        ]
-      },
-      {
-        id: 'm3-ratio-proportion',
-        name: 'Ratio, Proportion and Rates of Change',
-        questions: [
-          {
-            id: 'm3-q1',
-            question: 'Share £240 in the ratio 3:2:7. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Total parts = 3 + 2 + 7 = 12 parts. Each part = £240 ÷ 12 = £20. Shares are: 3 × £20 = £60, 2 × £20 = £40, 7 × £20 = £140',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Finds total number of parts',
-                'AO2 (1): Calculates value of one part',
-                'AO2 (1): Calculates all three shares correctly'
-              ]
-            },
-            specReference: 'AQA Maths R1.1'
-          },
-          {
-            id: 'm3-q2',
-            question: 'The ratio of boys to girls in a class is 3:5. If there are 15 girls, how many boys are there? (2 marks)',
-            marks: 2,
-            modelAnswer: 'If 5 parts = 15 girls, then 1 part = 3 girls. Boys = 3 parts = 3 × 3 = 9',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Finds value of one part',
-                'AO2 (1): Calculates number of boys = 9'
-              ]
-            },
-            specReference: 'AQA Maths R1.2'
-          },
-          {
-            id: 'm3-q3',
-            question: 'A recipe for 4 people uses 200g flour. How much flour is needed for 6 people? (2 marks)',
-            marks: 2,
-            modelAnswer: 'For 1 person: 200g ÷ 4 = 50g. For 6 people: 50g × 6 = 300g',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Calculates for 1 person',
-                'AO2 (1): Scales up for 6 people'
-              ]
-            },
-            specReference: 'AQA Maths R1.3'
-          },
-          {
-            id: 'm3-q4',
-            question: 'Express the ratio 15:20 in its simplest form. (1 mark)',
-            marks: 1,
-            modelAnswer: '3:4',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Divides by HCF of 5 to get 3:4'
-              ]
-            },
-            specReference: 'AQA Maths R1.4'
-          },
-          {
-            id: 'm3-q5',
-            question: 'A car travels 150 miles in 3 hours. What is its average speed? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Speed = Distance ÷ Time = 150 ÷ 3 = 50 mph',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula',
-                'AO2 (1): Correct calculation = 50 mph'
-              ]
-            },
-            specReference: 'AQA Maths R1.5'
-          },
-          {
-            id: 'm3-q6',
-            question: 'Convert 2.5 hours to hours and minutes. (2 marks)',
-            marks: 2,
-            modelAnswer: '0.5 hours = 0.5 × 60 = 30 minutes. So 2.5 hours = 2 hours 30 minutes',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Converts decimal to minutes',
-                'AO2 (1): Correct answer 2 hours 30 minutes'
-              ]
-            },
-            specReference: 'AQA Maths R1.6'
-          },
-          {
-            id: 'm3-q7',
-            question: 'If 5 pencils cost £3, how much do 8 pencils cost? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Cost per pencil = £3 ÷ 5 = £0.60. Cost of 8 pencils = £0.60 × 8 = £4.80',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Finds unit cost',
-                'AO2 (1): Calculates cost for 8 pencils'
-              ]
-            },
-            specReference: 'AQA Maths R1.7'
-          },
-          {
-            id: 'm3-q8',
-            question: 'Express 45 minutes as a fraction of 2 hours in its simplest form. (3 marks)',
-            marks: 3,
-            modelAnswer: '2 hours = 120 minutes. Fraction = 45/120. Simplifying: 45/120 = 3/8',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): Converts to same units',
-                'AO2 (1): Forms fraction 45/120',
-                'AO3 (1): Simplifies to 3/8'
-              ]
-            },
-            specReference: 'AQA Maths R1.8'
-          },
-          {
-            id: 'm3-q9',
-            question: 'A map has a scale of 1:25000. On the map, a road is 8 cm long. What is the actual length of the road in km? (3 marks)',
-            marks: 3,
-            modelAnswer: 'Actual length = 8 × 25000 = 200000 cm = 2000 m = 2 km',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): Uses scale correctly',
-                'AO2 (1): Calculates in cm',
-                'AO3 (1): Converts to km'
-              ]
-            },
-            specReference: 'AQA Maths R1.9'
-          },
-          {
-            id: 'm3-q10',
-            question: 'The exchange rate is £1 = €1.20. How much is €90 in pounds? (2 marks)',
-            marks: 2,
-            modelAnswer: 'If £1 = €1.20, then €90 = £90 ÷ 1.20 = £75',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Sets up correct calculation',
-                'AO2 (1): Correct answer £75'
-              ]
-            },
-            specReference: 'AQA Maths R1.10'
-          }
-        ]
-      },
-      {
-        id: 'm4-geometry-measures',
-        name: 'Geometry and Measures',
-        questions: [
-          {
-            id: 'm4-q1',
-            question: 'Calculate the area of a circle with radius 6 cm. Use π = 3.14. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Area = πr² = 3.14 × 6² = 3.14 × 36 = 113.04 cm²',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula πr²',
-                'AO2 (1): Correct substitution and calculation'
-              ]
-            },
-            specReference: 'AQA Maths G1.1'
-          },
-          {
-            id: 'm4-q2',
-            question: 'Find the perimeter of a rectangle with length 8 cm and width 5 cm. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Perimeter = 2(length + width) = 2(8 + 5) = 2 × 13 = 26 cm',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula',
-                'AO2 (1): Correct calculation = 26 cm'
-              ]
-            },
-            specReference: 'AQA Maths G1.2'
-          },
-          {
-            id: 'm4-q3',
-            question: 'Calculate the area of a triangle with base 10 cm and height 6 cm. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Area = ½ × base × height = ½ × 10 × 6 = 30 cm²',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula',
-                'AO2 (1): Correct calculation = 30 cm²'
-              ]
-            },
-            specReference: 'AQA Maths G1.3'
-          },
-          {
-            id: 'm4-q4',
-            question: 'Find the volume of a cuboid with dimensions 4 cm × 3 cm × 5 cm. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Volume = length × width × height = 4 × 3 × 5 = 60 cm³',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula',
-                'AO2 (1): Correct calculation = 60 cm³'
-              ]
-            },
-            specReference: 'AQA Maths G1.4'
-          },
-          {
-            id: 'm4-q5',
-            question: 'Convert 2.5 metres to centimetres. (1 mark)',
-            marks: 1,
-            modelAnswer: '250 cm',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Correct conversion = 250 cm'
-              ]
-            },
-            specReference: 'AQA Maths G1.5'
-          },
-          {
-            id: 'm4-q6',
-            question: 'Find the circumference of a circle with diameter 14 cm. Use π = 22/7. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Circumference = πd = 22/7 × 14 = 22 × 2 = 44 cm',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula πd',
-                'AO2 (1): Correct calculation = 44 cm'
-              ]
-            },
-            specReference: 'AQA Maths G1.6'
-          },
-          {
-            id: 'm4-q7',
-            question: 'Calculate the area of a parallelogram with base 12 cm and height 8 cm. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Area = base × height = 12 × 8 = 96 cm²',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula',
-                'AO2 (1): Correct calculation = 96 cm²'
-              ]
-            },
-            specReference: 'AQA Maths G1.7'
-          },
-          {
-            id: 'm4-q8',
-            question: 'Find the surface area of a cube with edge length 4 cm. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Surface area = 6 × edge² = 6 × 4² = 6 × 16 = 96 cm²',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Recognizes 6 faces',
-                'AO2 (1): Correct calculation = 96 cm²'
-              ]
-            },
-            specReference: 'AQA Maths G1.8'
-          },
-          {
-            id: 'm4-q9',
-            question: 'Convert 3 hours 45 minutes to decimal hours. (2 marks)',
-            marks: 2,
-            modelAnswer: '45 minutes = 45/60 = 0.75 hours. So 3 hours 45 minutes = 3.75 hours',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Converts minutes to decimal',
-                'AO2 (1): Correct answer = 3.75 hours'
-              ]
-            },
-            specReference: 'AQA Maths G1.9'
-          },
-          {
-            id: 'm4-q10',
-            question: 'Find the area of a trapezium with parallel sides 8 cm and 12 cm, and height 5 cm. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Area = ½(a + b)h = ½(8 + 12) × 5 = ½ × 20 × 5 = 50 cm²',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula',
-                'AO2 (1): Correct calculation = 50 cm²'
-              ]
-            },
-            specReference: 'AQA Maths G1.10'
-          }
-        ]
-      },
-      {
-        id: 'm5-probability',
-        name: 'Probability',
-        questions: [
-          {
-            id: 'm5-q1',
-            question: 'A bag contains 5 red balls and 3 blue balls. What is the probability of picking a red ball? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Total balls = 5 + 3 = 8. Probability = Number of red balls / Total balls = 5/8',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Identifies total number of outcomes',
-                'AO2 (1): Calculates probability as 5/8'
-              ]
-            },
-            specReference: 'AQA Maths P1.1'
-          },
-          {
-            id: 'm5-q2',
-            question: 'A fair dice is rolled. What is the probability of getting an even number? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Even numbers: 2, 4, 6 (3 outcomes). Total outcomes = 6. Probability = 3/6 = 1/2',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Identifies even numbers',
-                'AO2 (1): Calculates probability as 1/2'
-              ]
-            },
-            specReference: 'AQA Maths P1.2'
-          },
-          {
-            id: 'm5-q3',
-            question: 'A spinner has 4 equal sections: red, blue, green, yellow. What is the probability it does NOT land on red? (2 marks)',
-            marks: 2,
-            modelAnswer: 'P(red) = 1/4. P(not red) = 1 - 1/4 = 3/4',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Finds P(red) = 1/4',
-                'AO2 (1): Uses complement rule to get 3/4'
-              ]
-            },
-            specReference: 'AQA Maths P1.3'
-          },
-          {
-            id: 'm5-q4',
-            question: 'Two coins are flipped. What is the probability of getting two heads? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Outcomes: HH, HT, TH, TT. P(two heads) = 1/4',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Lists all outcomes',
-                'AO2 (1): Identifies probability = 1/4'
-              ]
-            },
-            specReference: 'AQA Maths P1.4'
-          },
-          {
-            id: 'm5-q5',
-            question: 'A bag contains 10 balls: 4 red, 3 blue, 3 green. Find the probability of picking a blue or green ball. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Blue or green balls = 3 + 3 = 6. Probability = 6/10 = 3/5',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Adds blue and green balls',
-                'AO2 (1): Calculates probability = 3/5'
-              ]
-            },
-            specReference: 'AQA Maths P1.5'
-          },
-          {
-            id: 'm5-q6',
-            question: 'A letter is chosen at random from the word MATHEMATICS. What is the probability it is the letter M? (2 marks)',
-            marks: 2,
-            modelAnswer: 'MATHEMATICS has 11 letters with 2 Ms. Probability = 2/11',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Counts total letters and Ms',
-                'AO2 (1): Calculates probability = 2/11'
-              ]
-            },
-            specReference: 'AQA Maths P1.6'
-          },
-          {
-            id: 'm5-q7',
-            question: 'The probability of rain tomorrow is 0.3. What is the probability it will NOT rain? (1 mark)',
-            marks: 1,
-            modelAnswer: '0.7',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 0,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses complement: 1 - 0.3 = 0.7'
-              ]
-            },
-            specReference: 'AQA Maths P1.7'
-          },
-          {
-            id: 'm5-q8',
-            question: 'A card is drawn from a standard pack of 52 cards. What is the probability it is a King? (2 marks)',
-            marks: 2,
-            modelAnswer: 'There are 4 Kings in 52 cards. Probability = 4/52 = 1/13',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Identifies 4 Kings',
-                'AO2 (1): Simplifies to 1/13'
-              ]
-            },
-            specReference: 'AQA Maths P1.8'
-          },
-          {
-            id: 'm5-q9',
-            question: 'A bag contains coloured counters in the ratio red:blue:green = 2:3:5. If a counter is picked at random, what is the probability it is blue? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Total ratio parts = 2 + 3 + 5 = 10. P(blue) = 3/10',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Finds total ratio parts',
-                'AO2 (1): Calculates probability = 3/10'
-              ]
-            },
-            specReference: 'AQA Maths P1.9'
-          },
-          {
-            id: 'm5-q10',
-            question: 'Two dice are rolled. What is the probability the sum is 7? (3 marks)',
-            marks: 3,
-            modelAnswer: 'Ways to get 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) = 6 ways. Total outcomes = 36. Probability = 6/36 = 1/6',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): Lists ways to get sum of 7',
-                'AO2 (1): Identifies total outcomes = 36',
-                'AO3 (1): Calculates probability = 1/6'
-              ]
-            },
-            specReference: 'AQA Maths P1.10'
-          }
-        ]
-      },
-      {
-        id: 'statistics',
-        name: 'Statistics',
-        questions: [
-          {
-            id: 'stats_1',
-            question: 'A bag contains 5 red balls, 3 blue balls, and 2 green balls. A ball is selected at random. What is the probability that the ball is not red?',
-            marks: 2,
-            modelAnswer: 'There are 10 balls in total (5 + 3 + 2 = 10). Number of balls that are not red = 3 + 2 = 5. Probability = Number of favorable outcomes / Total number of outcomes = 5/10 = 1/2.',
-            markingCriteria: {
-              breakdown: [
-                'Calculate total number of balls (1 mark)',
-                'Calculate probability correctly as 5/10 = 1/2 (1 mark)'
-              ]
-            },
-            specReference: 'AQA Stats S1.1'
-          },
-          {
-            id: 'stats_2',
-            question: 'The heights of students in a class are: 160, 165, 170, 155, 175, 168, 162 cm. Find the median height.',
-            marks: 2,
-            modelAnswer: 'First, arrange the heights in ascending order: 155, 160, 162, 165, 168, 170, 175. Since there are 7 values (odd number), the median is the middle value, which is the 4th value. Therefore, the median height is 165 cm.',
-            markingCriteria: {
-              breakdown: [
-                'Arrange data in ascending order (1 mark)',
-                'Identify median as middle value = 165 cm (1 mark)'
-              ]
-            },
-            specReference: 'AQA Stats S1.2'
-          },
-          {
-            id: 'stats_3',
-            question: 'A fair six-sided die is rolled twice. Calculate the probability of getting a sum of 7.',
-            marks: 3,
-            modelAnswer: 'Ways to get sum of 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) = 6 ways. Total possible outcomes when rolling two dice = 6 × 6 = 36. Probability = 6/36 = 1/6.',
-            markingCriteria: {
-              breakdown: [
-                'List all ways to get sum of 7 (1 mark)',
-                'Calculate total possible outcomes = 36 (1 mark)',
-                'Calculate probability = 6/36 = 1/6 (1 mark)'
-              ]
-            },
-            specReference: 'AQA Stats S1.3'
-          },
-          {
-            id: 'stats_4',
-            question: 'The mean of 5 numbers is 12. If one number is removed, the mean of the remaining 4 numbers is 10. Find the value of the removed number.',
-            marks: 3,
-            modelAnswer: 'Sum of 5 numbers = mean × number of values = 12 × 5 = 60. Sum of remaining 4 numbers = 10 × 4 = 40. Therefore, the removed number = 60 - 40 = 20.',
-            markingCriteria: {
-              breakdown: [
-                'Calculate sum of 5 numbers = 60 (1 mark)',
-                'Calculate sum of 4 numbers = 40 (1 mark)',
-                'Find removed number = 20 (1 mark)'
-              ]
-            },
-            specReference: 'AQA Stats S1.4'
-          },
-          {
-            id: 'stats_5',
-            question: 'Two events A and B are mutually exclusive. If P(A) = 0.3 and P(B) = 0.4, calculate P(A ∪ B).',
-            marks: 2,
-            modelAnswer: 'Since A and B are mutually exclusive, they cannot occur at the same time, so P(A ∩ B) = 0. For mutually exclusive events: P(A ∪ B) = P(A) + P(B) = 0.3 + 0.4 = 0.7.',
-            markingCriteria: {
-              breakdown: [
-                'Recognize that P(A ∩ B) = 0 for mutually exclusive events (1 mark)',
-                'Calculate P(A ∪ B) = P(A) + P(B) = 0.7 (1 mark)'
-              ]
-            },
-            specReference: 'AQA Stats S1.5'
-          },
-          {
-            id: 'stats_6',
-            question: 'A survey shows that 60% of students like pizza, 40% like burgers, and 25% like both. What percentage of students like neither pizza nor burgers?',
+            id: "bio_cell_1",
+            questionText: "Describe the structure and function of the cell membrane.",
             marks: 4,
-            modelAnswer: 'Using the inclusion-exclusion principle: Students who like pizza only = 60% - 25% = 35%. Students who like burgers only = 40% - 25% = 15%. Students who like both = 25%. Students who like at least one = 35% + 15% + 25% = 75%. Therefore, students who like neither = 100% - 75% = 25%.',
-            markingCriteria: {
-              breakdown: [
-                'Calculate students who like pizza only = 35% (1 mark)',
-                'Calculate students who like burgers only = 15% (1 mark)',
-                'Calculate students who like at least one = 75% (1 mark)',
-                'Calculate students who like neither = 25% (1 mark)'
-              ]
-            },
-            specReference: 'AQA Stats S1.6'
-          },
-          {
-            id: 'stats_7',
-            question: 'The range of a data set is 24 and the smallest value is 8. Find the largest value in the data set.',
-            marks: 2,
-            modelAnswer: 'Range = Largest value - Smallest value. Given: Range = 24 and Smallest value = 8. Therefore: 24 = Largest value - 8. Largest value = 24 + 8 = 32.',
-            markingCriteria: {
-              breakdown: [
-                'Use formula: Range = Largest - Smallest (1 mark)',
-                'Calculate largest value = 32 (1 mark)'
-              ]
-            },
-            specReference: 'AQA Stats S1.7'
-          },
-          {
-            id: 'stats_8',
-            question: 'A spinner has 4 equal sections colored red, blue, green, and yellow. Find the probability of getting red on the first spin AND blue on the second spin.',
-            marks: 3,
-            modelAnswer: 'Probability of getting red on first spin = 1/4. Probability of getting blue on second spin = 1/4. Since the spins are independent events: P(red AND blue) = P(red) × P(blue) = 1/4 × 1/4 = 1/16.',
-            markingCriteria: {
-              breakdown: [
-                'Calculate P(red) = 1/4 (1 mark)',
-                'Calculate P(blue) = 1/4 (1 mark)',
-                'Use multiplication rule for independent events = 1/16 (1 mark)'
-              ]
-            },
-            specReference: 'AQA Stats S1.8'
-          },
-          {
-            id: 'stats_9',
-            question: 'A box plot shows the following values: Q1 = 10, Q2 (median) = 15, Q3 = 20. Calculate the interquartile range (IQR).',
-            marks: 2,
-            modelAnswer: 'The interquartile range (IQR) is the difference between the third quartile and the first quartile. IQR = Q3 - Q1 = 20 - 10 = 10.',
-            markingCriteria: {
-              breakdown: [
-                'State formula: IQR = Q3 - Q1 (1 mark)',
-                'Calculate IQR = 20 - 10 = 10 (1 mark)'
-              ]
-            },
-            specReference: 'AQA Stats S1.9'
-          },
-          {
-            id: 'stats_10',
-            question: 'The frequency table shows test scores: Score 60-69 (frequency 5), 70-79 (frequency 8), 80-89 (frequency 12), 90-99 (frequency 3). Which is the modal class and what is the total frequency?',
-            marks: 2,
-            modelAnswer: 'The modal class is the class interval with the highest frequency. Comparing frequencies: 60-69 has 5, 70-79 has 8, 80-89 has 12, 90-99 has 3. The highest frequency is 12, so the modal class is 80-89. Total frequency = 5 + 8 + 12 + 3 = 28.',
-            markingCriteria: {
-              breakdown: [
-                'Identify modal class as 80-89 (1 mark)',
-                'Calculate total frequency = 28 (1 mark)'
-              ]
-            },
-            specReference: 'AQA Stats S1.10'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'chemistry',
-    name: 'Chemistry',
-    color: 'bg-purple-500',
-    topics: [
-      {
-        id: 'c1-atomic-structure',
-        name: 'C1 Atomic Structure',
-        questions: [
-          {
-            id: 'c1-q1',
-            question: 'Describe the structure of an atom and explain where the mass is concentrated. (4 marks)',
-            marks: 4,
-            modelAnswer: 'An atom consists of a small, dense nucleus containing protons and neutrons, surrounded by electrons in energy levels or shells. The nucleus is positively charged due to protons, while electrons are negatively charged. Almost all the mass of the atom is concentrated in the nucleus because protons and neutrons are much more massive than electrons.',
+            modelAnswer: "The cell membrane is a phospholipid bilayer with embedded proteins. It controls what enters and leaves the cell through selective permeability. Phospholipids have hydrophilic heads facing outward and hydrophobic tails facing inward, creating a barrier to water-soluble substances.",
+            difficulty: "medium",
+            topic: "cell_biology",
             markingCriteria: {
               ao1: 2,
               ao2: 2,
               ao3: 0,
               breakdown: [
-                'AO1 (1): States nucleus contains protons and neutrons',
-                'AO1 (1): States electrons are in shells around nucleus',
-                'AO2 (1): Explains charges of particles',
-                'AO2 (1): Explains why mass is concentrated in nucleus'
+                "Describe phospholipid bilayer structure (2 marks)",
+                "Explain selective permeability function (2 marks)"
               ]
-            },
-            specReference: 'AQA Chemistry C1.1'
+            }
           },
           {
-            id: 'c1-q2',
-            question: 'An atom has 11 protons, 12 neutrons and 11 electrons. What is its mass number and atomic number? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Atomic number = number of protons = 11. Mass number = protons + neutrons = 11 + 12 = 23',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States atomic number = 11',
-                'AO2 (1): Calculates mass number = 23'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.2'
-          },
-          {
-            id: 'c1-q3',
-            question: 'Explain what isotopes are and give an example. (3 marks)',
+            id: "bio_cell_2",
+            questionText: "Compare plant and animal cells, highlighting three key differences.",
             marks: 3,
-            modelAnswer: 'Isotopes are atoms of the same element with the same number of protons but different numbers of neutrons. They have the same atomic number but different mass numbers. Example: Carbon-12 and Carbon-14 are isotopes of carbon.',
+            modelAnswer: "Plant cells have: 1) Cell wall made of cellulose for structural support, 2) Chloroplasts containing chlorophyll for photosynthesis, 3) Large permanent vacuole for storage and support. Animal cells lack these structures.",
+            difficulty: "easy",
+            topic: "cell_biology",
             markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States same protons, different neutrons',
-                'AO2 (1): Explains same atomic number, different mass numbers',
-                'AO3 (1): Gives correct example'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.3'
-          },
-          {
-            id: 'c1-q4',
-            question: 'Describe how electrons are arranged in atoms. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Electrons are arranged in energy levels or shells around the nucleus. The first shell can hold up to 2 electrons, the second shell can hold up to 8 electrons, and the third shell can hold up to 8 electrons. Electrons fill the innermost shell first before moving to the next shell.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 1,
+              ao1: 3,
+              ao2: 0,
               ao3: 0,
               breakdown: [
-                'AO1 (1): States electrons in shells/energy levels',
-                'AO1 (1): States shell capacities (2, 8, 8)',
-                'AO2 (1): Explains filling order'
+                "Cell wall difference (1 mark)",
+                "Chloroplasts difference (1 mark)",
+                "Vacuole difference (1 mark)"
               ]
-            },
-            specReference: 'AQA Chemistry C1.4'
+            }
           },
           {
-            id: 'c1-q5',
-            question: 'Explain why atoms are neutral overall. (2 marks)',
-            marks: 2,
-            modelAnswer: 'Atoms are neutral because they have equal numbers of protons and electrons. Protons have a positive charge and electrons have a negative charge, so they cancel each other out.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States equal numbers of protons and electrons',
-                'AO2 (1): Explains charges cancel out'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.5'
-          },
-          {
-            id: 'c1-q6',
-            question: 'What is the electronic configuration of sodium (atomic number 11)? (2 marks)',
-            marks: 2,
-            modelAnswer: '2,8,1',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Identifies 11 electrons to arrange',
-                'AO2 (1): Correct arrangement 2,8,1'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.6'
-          },
-          {
-            id: 'c1-q7',
-            question: 'Explain why the relative atomic mass of chlorine is 35.5. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Chlorine exists as two isotopes: Cl-35 and Cl-37. The relative atomic mass is the average mass of all isotopes taking into account their relative abundance. Cl-35 is more abundant than Cl-37, giving an average of 35.5.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States chlorine has isotopes',
-                'AO2 (1): Explains relative atomic mass is an average',
-                'AO3 (1): Links abundance to the 35.5 value'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.7'
-          },
-          {
-            id: 'c1-q8',
-            question: 'Describe the development of atomic theory by Rutherford. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Rutherford conducted the gold foil experiment where alpha particles were fired at thin gold foil. Most particles passed straight through, some were deflected at large angles, and a few bounced back. This showed that atoms have a small, dense, positively charged nucleus at the center, with mostly empty space around it.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Describes the gold foil experiment',
-                'AO1 (1): States observations of alpha particles',
-                'AO2 (1): Explains conclusion about nucleus',
-                'AO2 (1): Explains atoms are mostly empty space'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.8'
-          },
-          {
-            id: 'c1-q9',
-            question: 'Explain why atoms of different elements have different properties. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Different elements have different numbers of protons, giving them different atomic numbers. This means they have different numbers of electrons, which determines their chemical properties. The arrangement of electrons in shells affects how atoms bond and react.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States different numbers of protons',
-                'AO2 (1): Links to different electron numbers',
-                'AO3 (1): Links electron arrangement to properties'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.9'
-          },
-          {
-            id: 'c1-q10',
-            question: 'Calculate the number of neutrons in an atom of potassium-39. (Atomic number of potassium = 19) (2 marks)',
-            marks: 2,
-            modelAnswer: 'Mass number = 39, Atomic number = 19. Number of neutrons = Mass number - Atomic number = 39 - 19 = 20',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Uses correct formula',
-                'AO2 (1): Correct calculation = 20 neutrons'
-              ]
-            },
-            specReference: 'AQA Chemistry C1.10'
-          }
-        ]
-      },
-      {
-        id: 'c2-bonding-structure',
-        name: 'C2 Bonding and Structure',
-        questions: [
-          {
-            id: 'c2-q1',
-            question: 'Explain why sodium chloride has a high melting point. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Sodium chloride has ionic bonding between Na⁺ and Cl⁻ ions. These electrostatic forces of attraction between oppositely charged ions are very strong. A lot of energy is needed to overcome these strong ionic bonds, resulting in a high melting point.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States ionic bonding present',
-                'AO2 (1): Explains strong electrostatic forces',
-                'AO3 (1): Links bond strength to high melting point'
-              ]
-            },
-            specReference: 'AQA Chemistry C2.1'
-          },
-          {
-            id: 'c2-q2',
-            question: 'Describe how ionic bonds are formed. (4 marks)',
-            marks: 4,
-            modelAnswer: 'Metal atoms lose electrons to form positive ions (cations). Non-metal atoms gain electrons to form negative ions (anions). The transfer of electrons allows both atoms to achieve full outer shells. Electrostatic attraction between oppositely charged ions forms the ionic bond.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): States metals lose electrons',
-                'AO1 (1): States non-metals gain electrons',
-                'AO2 (1): Explains full outer shell achievement',
-                'AO2 (1): Explains electrostatic attraction'
-              ]
-            },
-            specReference: 'AQA Chemistry C2.2'
-          },
-          {
-            id: 'c2-q3',
-            question: 'Explain how covalent bonds are formed. (3 marks)',
-            marks: 3,
-            modelAnswer: 'Covalent bonds are formed when atoms share pairs of electrons. This usually occurs between non-metal atoms. The shared electrons allow both atoms to achieve full outer electron shells, making them more stable.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States electrons are shared',
-                'AO2 (1): States occurs between non-metals',
-                'AO3 (1): Explains stability through full shells'
-              ]
-            },
-            specReference: 'AQA Chemistry C2.3'
-          },
-          {
-            id: 'c2-q4',
-            question: 'Compare the properties of ionic and covalent compounds. (6 marks)',
-            marks: 6,
-            modelAnswer: 'Ionic compounds have high melting and boiling points due to strong electrostatic forces, while covalent compounds generally have lower melting and boiling points due to weaker intermolecular forces. Ionic compounds conduct electricity when molten or dissolved because ions are free to move, but covalent compounds do not conduct electricity as they have no free charges. Ionic compounds are often soluble in water, while many covalent compounds are not.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 2,
-              breakdown: [
-                'AO1 (1): States melting point differences',
-                'AO1 (1): States electrical conductivity differences',
-                'AO2 (1): Explains ionic conductivity',
-                'AO2 (1): Explains covalent non-conductivity',
-                'AO3 (1): Links to bond strength',
-                'AO3 (1): Explains solubility differences'
-              ]
-            },
-            specReference: 'AQA Chemistry C2.4'
-          },
-          {
-            id: 'c2-q5',
-            question: 'Describe the structure of diamond and explain its properties. (5 marks)',
+            id: "bio_cell_3",
+            questionText: "Explain the process of mitosis and its importance.",
             marks: 5,
-            modelAnswer: 'Diamond has a giant covalent structure where each carbon atom is bonded to four other carbon atoms in a tetrahedral arrangement. All bonds are strong covalent bonds. This makes diamond very hard and gives it a high melting point. Diamond does not conduct electricity because all electrons are involved in bonding and cannot move freely.',
+            modelAnswer: "Mitosis produces two genetically identical diploid cells from one parent cell. Stages: prophase (chromosomes condense), metaphase (chromosomes align), anaphase (chromatids separate), telophase (nuclei reform). Important for growth, repair, and asexual reproduction.",
+            difficulty: "hard",
+            topic: "cell_biology",
             markingCriteria: {
-              ao1: 2,
-              ao2: 2,
+              ao1: 3,
+              ao2: 1,
               ao3: 1,
               breakdown: [
-                'AO1 (1): States giant covalent structure',
-                'AO1 (1): States 4 bonds per carbon atom',
-                'AO2 (1): Explains hardness',
-                'AO2 (1): Explains electrical properties',
-                'AO3 (1): Links structure to properties'
+                "Describe the four stages (3 marks)",
+                "State outcome of identical cells (1 mark)",
+                "Explain importance (1 mark)"
               ]
-            },
-            specReference: 'AQA Chemistry C2.5'
+            }
           },
           {
-            id: 'c2-q6',
-            question: 'Explain why graphite can conduct electricity but diamond cannot. (4 marks)',
+            id: "bio_cell_4",
+            questionText: "Describe the structure and function of mitochondria.",
+            marks: 3,
+            modelAnswer: "Mitochondria have a double membrane with inner membrane folded into cristae. They are the site of aerobic respiration, producing ATP (cellular energy). Often called the 'powerhouse of the cell'.",
+            difficulty: "medium",
+            topic: "cell_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Describe double membrane and cristae (2 marks)",
+                "State function in respiration/ATP production (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_cell_5",
+            questionText: "Explain how substances move across cell membranes by diffusion.",
             marks: 4,
-            modelAnswer: 'In graphite, each carbon atom is bonded to only three other carbon atoms, leaving one electron free to move. These delocalized electrons can carry electric current. In diamond, each carbon atom is bonded to four other carbon atoms, so all electrons are involved in bonding and cannot move freely.',
+            modelAnswer: "Diffusion is the passive movement of particles from high to low concentration down a concentration gradient. No energy required. Small molecules like oxygen and carbon dioxide can diffuse directly through the phospholipid bilayer.",
+            difficulty: "medium",
+            topic: "cell_biology",
             markingCriteria: {
               ao1: 2,
               ao2: 2,
               ao3: 0,
               breakdown: [
-                'AO1 (1): States graphite has 3 bonds per carbon',
-                'AO1 (1): States diamond has 4 bonds per carbon',
-                'AO2 (1): Explains delocalized electrons in graphite',
-                'AO2 (1): Explains all electrons bonded in diamond'
+                "Define diffusion and concentration gradient (2 marks)",
+                "State it's passive/no energy needed (1 mark)",
+                "Give examples of molecules (1 mark)"
               ]
-            },
-            specReference: 'AQA Chemistry C2.6'
+            }
           },
           {
-            id: 'c2-q7',
-            question: 'Describe the bonding in metals and explain their properties. (5 marks)',
-            marks: 5,
-            modelAnswer: 'Metals have metallic bonding where positive metal ions are held together by a sea of delocalized electrons. The electrons are free to move throughout the structure. This explains why metals conduct electricity and heat well. The strong metallic bonds make metals malleable and ductile, as layers can slide over each other without breaking bonds.',
-            markingCriteria: {
-              ao1: 2,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): Describes sea of electrons',
-                'AO1 (1): States electrons are delocalized',
-                'AO2 (1): Explains electrical conductivity',
-                'AO2 (1): Explains malleability',
-                'AO3 (1): Links structure to properties'
-              ]
-            },
-            specReference: 'AQA Chemistry C2.7'
-          },
-          {
-            id: 'c2-q8',
-            question: 'Explain what is meant by a polymer and give an example. (3 marks)',
-            marks: 3,
-            modelAnswer: 'A polymer is a large molecule made up of many repeating units called monomers joined together by covalent bonds. The process of joining monomers is called polymerization. Example: polyethene is made from ethene monomers.',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): States polymer made of repeating units',
-                'AO2 (1): Mentions monomers and polymerization',
-                'AO3 (1): Gives correct example'
-              ]
-            },
-            specReference: 'AQA Chemistry C2.8'
-          },
-          {
-            id: 'c2-q9',
-            question: 'Describe the structure and properties of simple molecular compounds. (4 marks)',
+            id: "bio_cell_6",
+            questionText: "Describe the process of osmosis in plant cells.",
             marks: 4,
-            modelAnswer: 'Simple molecular compounds consist of small molecules held together by covalent bonds within molecules and weak intermolecular forces between molecules. They have low melting and boiling points because little energy is needed to overcome the weak intermolecular forces. They do not conduct electricity because they have no free electrons or ions.',
+            modelAnswer: "Osmosis is the movement of water across a semi-permeable membrane from high to low water potential. In plant cells, water enters by osmosis making the cell turgid (swollen), which provides structural support. Cell wall prevents bursting.",
+            difficulty: "medium",
+            topic: "cell_biology",
             markingCriteria: {
               ao1: 2,
               ao2: 2,
               ao3: 0,
               breakdown: [
-                'AO1 (1): States covalent bonds within molecules',
-                'AO1 (1): States weak forces between molecules',
-                'AO2 (1): Explains low melting/boiling points',
-                'AO2 (1): Explains non-conductivity'
+                "Define osmosis (2 marks)",
+                "Explain turgidity and structural support (2 marks)"
               ]
-            },
-            specReference: 'AQA Chemistry C2.9'
+            }
           },
           {
-            id: 'c2-q10',
-            question: 'Explain why ionic compounds conduct electricity when molten but not when solid. (3 marks)',
-            marks: 3,
-            modelAnswer: 'In solid ionic compounds, the ions are held in fixed positions in the crystal lattice and cannot move. When molten, the ionic bonds are broken and the ions become free to move. Moving ions can carry electric current, so molten ionic compounds conduct electricity.',
+            id: "bio_cell_7",
+            questionText: "Explain the role of enzymes in cellular processes.",
+            marks: 4,
+            modelAnswer: "Enzymes are biological catalysts that speed up chemical reactions by lowering activation energy. They have specific active sites that bind to substrates. Essential for metabolism, DNA replication, and protein synthesis in cells.",
+            difficulty: "medium",
+            topic: "cell_biology",
             markingCriteria: {
-              ao1: 1,
+              ao1: 2,
               ao2: 1,
               ao3: 1,
               breakdown: [
-                'AO1 (1): States ions fixed in solid',
-                'AO2 (1): States ions free when molten',
-                'AO3 (1): Links moving ions to conductivity'
+                "Define enzymes as catalysts (1 mark)",
+                "Explain active site and substrate binding (2 marks)",
+                "Give examples of cellular processes (1 mark)"
               ]
-            },
-            specReference: 'AQA Chemistry C2.10'
+            }
+          },
+          {
+            id: "bio_cell_8",
+            questionText: "Describe the structure and function of ribosomes.",
+            marks: 3,
+            modelAnswer: "Ribosomes are small organelles made of RNA and protein. They can be free in cytoplasm or attached to rough ER. Function is protein synthesis by translating mRNA into polypeptide chains.",
+            difficulty: "medium",
+            topic: "cell_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Describe structure (RNA and protein) (1 mark)",
+                "State locations (free/attached to ER) (1 mark)",
+                "Explain protein synthesis function (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_cell_9",
+            questionText: "Explain active transport and give an example.",
+            marks: 3,
+            modelAnswer: "Active transport moves substances against concentration gradient using energy (ATP). Requires carrier proteins. Example: uptake of mineral ions by plant roots from soil where ion concentration is lower than in root cells.",
+            difficulty: "medium",
+            topic: "cell_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Define active transport (against gradient, needs energy) (2 marks)",
+                "Give appropriate example (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_cell_10",
+            questionText: "Describe the cell cycle and explain when DNA replication occurs.",
+            marks: 4,
+            modelAnswer: "Cell cycle consists of interphase (G1, S, G2) and mitosis (M phase). DNA replication occurs during S phase of interphase. This ensures each daughter cell receives identical genetic information during cell division.",
+            difficulty: "hard",
+            topic: "cell_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 1,
+              breakdown: [
+                "Identify phases of cell cycle (2 marks)",
+                "State DNA replication occurs in S phase (1 mark)",
+                "Explain importance for daughter cells (1 mark)"
+              ]
+            }
           }
         ]
       },
       {
-        id: 'c3-quantitative-chemistry',
-        name: 'C3 Quantitative Chemistry',
+        id: "human_biology",
+        name: "Human Biology",
         questions: [
           {
-            id: 'c3-q1',
-            question: 'Calculate the relative formula mass of calcium carbonate (CaCO₃). [Ar: Ca = 40, C = 12, O = 16] (2 marks)',
-            marks: 2,
-            modelAnswer: 'Mr of CaCO₃ = 40 + 12 + (3 × 16) = 40 + 12 + 48 = 100',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Identifies atoms in formula',
-                'AO2 (1): Correct calculation = 100'
-              ]
-            },
-            specReference: 'AQA Chemistry C3.1'
-          },
-          {
-            id: 'c3-q2',
-            question: 'How many moles are in 88g of carbon dioxide (CO₂)? [Ar: C = 12, O = 16] (3 marks)',
-            marks: 3,
-            modelAnswer: 'Mr of CO₂ = 12 + (2 × 16) = 44. Number of moles = mass ÷ Mr = 88 ÷ 44 = 2 moles',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Calculates Mr of CO₂ = 44',
-                'AO2 (1): Uses correct formula',
-                'AO2 (1): Correct answer = 2 moles'
-              ]
-            },
-            specReference: 'AQA Chemistry C3.2'
-          },
-          {
-            id: 'c3-q3',
-            question: 'What mass of oxygen is needed to react completely with 24g of magnesium? Mg + ½O₂ → MgO [Ar: Mg = 24, O = 16] (4 marks)',
-            marks: 4,
-            modelAnswer: 'Moles of Mg = 24 ÷ 24 = 1 mole. From equation: 1 mole Mg reacts with 0.5 moles O₂. Mr of O₂ = 32. Mass of O₂ = 0.5 × 32 = 16g',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 2,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): Calculates moles of Mg',
-                'AO2 (1): Uses molar ratio from equation',
-                'AO2 (1): Calculates mass of O₂',
-                'AO3 (1): Correct final answer = 16g'
-              ]
-            },
-            specReference: 'AQA Chemistry C3.3'
-          },
-          {
-            id: 'c3-q4',
-            question: 'Calculate the percentage by mass of carbon in methane (CH₄). [Ar: C = 12, H = 1] (3 marks)',
-            marks: 3,
-            modelAnswer: 'Mr of CH₄ = 12 + (4 × 1) = 16. Mass of carbon = 12. Percentage = (12 ÷ 16) × 100 = 75%',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): Calculates Mr of CH₄',
-                'AO2 (1): Uses percentage formula',
-                'AO3 (1): Correct answer = 75%'
-              ]
-            },
-            specReference: 'AQA Chemistry C3.4'
-          },
-          {
-            id: 'c3-q5',
-            question: 'What volume of hydrogen gas is produced when 0.1 moles of zinc react with hydrochloric acid? Zn + 2HCl → ZnCl₂ + H₂ [1 mole of gas occupies 24 dm³ at room temperature] (3 marks)',
-            marks: 3,
-            modelAnswer: 'From equation: 1 mole Zn produces 1 mole H₂. So 0.1 moles Zn produces 0.1 moles H₂. Volume = 0.1 × 24 = 2.4 dm³',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 1,
-              breakdown: [
-                'AO1 (1): Uses molar ratio from equation',
-                'AO2 (1): Calculates moles of H₂',
-                'AO3 (1): Converts to volume = 2.4 dm³'
-              ]
-            },
-            specReference: 'AQA Chemistry C3.5'
-          },
-          {
-            id: 'c3-q6',
-            question: 'Calculate the empirical formula of a compound containing 40% carbon, 6.7% hydrogen, and 53.3% oxygen by mass. [Ar: C = 12, H = 1, O = 16] (5 marks)',
+            id: "bio_human_1",
+            questionText: "Describe the structure and function of the human heart.",
             marks: 5,
-            modelAnswer: 'C: 40 ÷ 12 = 3.33; H: 6.7 ÷ 1 = 6.7; O: 53.3 ÷ 16 = 3.33. Divide by smallest: C: 3.33 ÷ 3.33 = 1; H: 6.7 ÷ 3.33 = 2; O: 3.33 ÷ 3.33 = 1. Empirical formula = CH₂O',
+            modelAnswer: "The heart has four chambers: two atria (receive blood) and two ventricles (pump blood). Right side pumps deoxygenated blood to lungs, left side pumps oxygenated blood to body. Valves prevent backflow. Cardiac muscle contracts rhythmically.",
+            difficulty: "medium",
+            topic: "human_biology",
+            markingCriteria: {
+              ao1: 3,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Identify four chambers and their functions (2 marks)",
+                "Explain double circulation (2 marks)",
+                "Mention valves and cardiac muscle (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_human_2",
+            questionText: "Explain how the lungs are adapted for gas exchange.",
+            marks: 4,
+            modelAnswer: "Alveoli provide large surface area for gas exchange. Thin walls (one cell thick) allow rapid diffusion. Rich blood supply maintains concentration gradients. Moist surfaces dissolve gases for diffusion.",
+            difficulty: "medium",
+            topic: "human_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Large surface area from alveoli (1 mark)",
+                "Thin walls for rapid diffusion (1 mark)",
+                "Rich blood supply and moist surfaces (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_human_3",
+            questionText: "Describe the process of digestion in the small intestine.",
+            marks: 4,
+            modelAnswer: "Pancreatic enzymes break down proteins, carbohydrates, and fats. Bile from liver emulsifies fats. Intestinal enzymes complete digestion. Villi absorb digested nutrients into bloodstream through their large surface area.",
+            difficulty: "medium",
+            topic: "human_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Describe enzyme action (2 marks)",
+                "Explain absorption by villi (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_human_4",
+            questionText: "Explain how the kidney filters blood and produces urine.",
+            marks: 5,
+            modelAnswer: "Blood enters glomerulus under high pressure. Small molecules filter into Bowman's capsule. Useful substances (glucose, some water, salts) are reabsorbed in tubules. Waste products (urea) remain to form urine.",
+            difficulty: "hard",
+            topic: "human_biology",
+            markingCriteria: {
+              ao1: 3,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Describe filtration at glomerulus (2 marks)",
+                "Explain selective reabsorption (2 marks)",
+                "Identify waste products in urine (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_human_5",
+            questionText: "Describe the components of blood and their functions.",
+            marks: 4,
+            modelAnswer: "Red blood cells carry oxygen using hemoglobin. White blood cells fight infection through phagocytosis and antibody production. Platelets help blood clotting. Plasma transports dissolved substances around the body.",
+            difficulty: "medium",
+            topic: "human_biology",
+            markingCriteria: {
+              ao1: 4,
+              ao2: 0,
+              ao3: 0,
+              breakdown: [
+                "Red blood cells and oxygen transport (1 mark)",
+                "White blood cells and immunity (1 mark)",
+                "Platelets and clotting (1 mark)",
+                "Plasma and transport (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_human_6",
+            questionText: "Explain how the nervous system coordinates responses to stimuli.",
+            marks: 4,
+            modelAnswer: "Receptors detect stimuli and send electrical impulses along sensory neurons to CNS. Brain/spinal cord processes information. Motor neurons carry impulses to effectors (muscles/glands) which produce responses.",
+            difficulty: "medium",
+            topic: "human_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Stimulus detection by receptors (1 mark)",
+                "Processing by CNS (1 mark)",
+                "Response by effectors (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_human_7",
+            questionText: "Describe the menstrual cycle and the role of hormones.",
+            marks: 5,
+            modelAnswer: "28-day cycle controlled by hormones. FSH stimulates egg development and estrogen production. LH triggers ovulation. Estrogen and progesterone prepare uterus lining. If no fertilization, hormone levels drop causing menstruation.",
+            difficulty: "hard",
+            topic: "human_biology",
+            markingCriteria: {
+              ao1: 3,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Identify key hormones (FSH, LH, estrogen, progesterone) (2 marks)",
+                "Explain ovulation and uterus preparation (2 marks)",
+                "Link hormone drop to menstruation (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_human_8",
+            questionText: "Explain how the body maintains constant body temperature.",
+            marks: 4,
+            modelAnswer: "Hypothalamus detects temperature changes. When hot: sweating increases heat loss, blood vessels dilate (vasodilation). When cold: shivering generates heat, blood vessels constrict (vasoconstriction), hair stands up.",
+            difficulty: "medium",
+            topic: "human_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Identify hypothalamus as control center (1 mark)",
+                "Explain responses to overheating (1 mark)",
+                "Explain responses to cooling (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_human_9",
+            questionText: "Describe the immune system's response to pathogens.",
+            marks: 4,
+            modelAnswer: "White blood cells detect foreign antigens on pathogens. Phagocytes engulf and destroy pathogens. Lymphocytes produce specific antibodies that bind to antigens. Memory cells provide immunity against future infections.",
+            difficulty: "medium",
+            topic: "human_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Describe phagocytosis (1 mark)",
+                "Explain antibody production (2 marks)",
+                "Mention memory cells and immunity (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_human_10",
+            questionText: "Explain the effects of smoking on the respiratory system.",
+            marks: 4,
+            modelAnswer: "Tar damages cilia, reducing their ability to remove mucus and bacteria. Nicotine is addictive and increases heart rate. Carbon monoxide reduces oxygen-carrying capacity of blood. Increases risk of lung cancer, emphysema, and heart disease.",
+            difficulty: "medium",
+            topic: "human_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 1,
+              breakdown: [
+                "Explain effects of tar and nicotine (2 marks)",
+                "Describe carbon monoxide effects (1 mark)",
+                "Link to diseases (1 mark)"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        id: "plant_biology",
+        name: "Plant Biology",
+        questions: [
+          {
+            id: "bio_plant_1",
+            questionText: "Describe the process of photosynthesis and write the word equation.",
+            marks: 4,
+            modelAnswer: "Photosynthesis converts light energy into chemical energy in glucose. Occurs in chloroplasts using chlorophyll. Word equation: Carbon dioxide + Water → Glucose + Oxygen (in the presence of light and chlorophyll).",
+            difficulty: "medium",
+            topic: "plant_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Define photosynthesis process (1 mark)",
+                "Mention chloroplasts and chlorophyll (1 mark)",
+                "Write correct word equation (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_plant_2",
+            questionText: "Explain how leaves are adapted for photosynthesis.",
+            marks: 4,
+            modelAnswer: "Large surface area to absorb maximum light. Thin structure allows light penetration. Chloroplasts in palisade cells contain chlorophyll. Stomata allow gas exchange. Veins transport water and remove glucose.",
+            difficulty: "medium",
+            topic: "plant_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Large surface area and thin structure (1 mark)",
+                "Chloroplasts and chlorophyll (1 mark)",
+                "Stomata for gas exchange and veins for transport (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_plant_3",
+            questionText: "Describe how water moves through a plant from roots to leaves.",
+            marks: 4,
+            modelAnswer: "Water enters root hair cells by osmosis. Moves through root cortex to xylem vessels. Transported up stem in xylem by transpiration pull. Water evaporates from leaf surfaces through stomata (transpiration).",
+            difficulty: "medium",
+            topic: "plant_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Water uptake by root hairs (1 mark)",
+                "Transport in xylem vessels (1 mark)",
+                "Transpiration from leaves (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_plant_4",
+            questionText: "Explain the factors that affect the rate of photosynthesis.",
+            marks: 4,
+            modelAnswer: "Light intensity: more light increases rate until saturation. Temperature: higher temperature increases rate until enzymes denature. Carbon dioxide concentration: higher CO₂ increases rate until other factors limit.",
+            difficulty: "medium",
+            topic: "plant_biology",
+            markingCriteria: {
+              ao1: 3,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Explain light intensity effect (1 mark)",
+                "Explain temperature effect (2 marks)",
+                "Explain CO₂ concentration effect (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_plant_5",
+            questionText: "Describe the structure and function of xylem and phloem.",
+            marks: 4,
+            modelAnswer: "Xylem: dead cells forming tubes, transport water and minerals upward, strengthened with lignin. Phloem: living cells (sieve tubes), transport glucose and amino acids in both directions, supported by companion cells.",
+            difficulty: "medium",
+            topic: "plant_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Describe xylem structure and function (2 marks)",
+                "Describe phloem structure and function (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_plant_6",
+            questionText: "Explain how plants respond to light (phototropism).",
+            marks: 3,
+            modelAnswer: "Plant shoots grow toward light source. Auxin hormone accumulates on shaded side of shoot. This causes cells on shaded side to elongate more, bending shoot toward light.",
+            difficulty: "medium",
+            topic: "plant_biology",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Define phototropism (1 mark)",
+                "Explain auxin distribution and cell elongation (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_plant_7",
+            questionText: "Describe the process of seed germination.",
+            marks: 4,
+            modelAnswer: "Seed absorbs water and swells. Enzymes become active and break down stored food (starch to glucose). Radicle (root) emerges first, then plumule (shoot). Cotyledons provide food until leaves develop for photosynthesis.",
+            difficulty: "medium",
+            topic: "plant_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Water absorption and enzyme activation (1 mark)",
+                "Emergence of radicle and plumule (2 marks)",
+                "Role of cotyledons (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_plant_8",
+            questionText: "Explain the importance of mineral ions for plant growth.",
+            marks: 3,
+            modelAnswer: "Nitrates needed for amino acid and protein synthesis. Phosphates required for DNA, RNA, and ATP. Potassium essential for enzyme activation and water regulation. Deficiency causes poor growth and yellowing leaves.",
+            difficulty: "medium",
+            topic: "plant_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Identify roles of nitrates and phosphates (2 marks)",
+                "Explain deficiency symptoms (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_plant_9",
+            questionText: "Describe how stomata control gas exchange and water loss.",
+            marks: 4,
+            modelAnswer: "Stomata are pores surrounded by guard cells. When guard cells absorb water, they become turgid and stomata open for gas exchange. When water is lost, guard cells become flaccid and stomata close to reduce water loss.",
+            difficulty: "medium",
+            topic: "plant_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Describe stomata and guard cell structure (1 mark)",
+                "Explain opening mechanism (1 mark)",
+                "Explain closing mechanism (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_plant_10",
+            questionText: "Compare sexual and asexual reproduction in plants.",
+            marks: 4,
+            modelAnswer: "Sexual reproduction involves flowers, pollination, and seed formation, producing genetic variation. Asexual reproduction (vegetative propagation) produces genetically identical offspring through runners, bulbs, or fragmentation. Faster but no variation.",
+            difficulty: "medium",
+            topic: "plant_biology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Describe sexual reproduction and variation (2 marks)",
+                "Describe asexual reproduction methods (2 marks)"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        id: "bioenergetics",
+        name: "Bioenergetics",
+        questions: [
+          {
+            id: "bio_bioenerget_1",
+            questionText: "Explain the process of photosynthesis and write the balanced chemical equation.",
+            marks: 4,
+            modelAnswer: "Photosynthesis is the process by which plants convert light energy into chemical energy. The balanced equation is: 6CO₂ + 6H₂O + light energy → C₆H₁₂O₆ + 6O₂. This occurs in chloroplasts using chlorophyll to capture light energy.",
+            difficulty: "medium",
+            topic: "bioenergetics",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 1,
+              breakdown: [
+                "Define photosynthesis (1 mark)",
+                "Write correct balanced equation (2 marks)",
+                "Mention chloroplasts and chlorophyll (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_bioenerget_2",
+            questionText: "Compare aerobic and anaerobic respiration in terms of oxygen requirement, location, and energy yield.",
+            marks: 4,
+            modelAnswer: "Aerobic respiration requires oxygen, occurs in mitochondria, and yields 38 ATP molecules per glucose. Anaerobic respiration occurs without oxygen, happens in cytoplasm, and yields only 2 ATP molecules per glucose.",
+            difficulty: "medium",
+            topic: "bioenergetics",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Oxygen requirement difference (1 mark)",
+                "Location difference (1 mark)",
+                "Energy yield comparison (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_bioenerget_3",
+            questionText: "Describe the role of ATP in cellular processes and explain its structure.",
+            marks: 3,
+            modelAnswer: "ATP (adenosine triphosphate) is the universal energy currency of cells. It consists of adenine base, ribose sugar, and three phosphate groups. Energy is released when the terminal phosphate bond is broken, forming ADP.",
+            difficulty: "medium",
+            topic: "bioenergetics",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Define ATP as energy currency (1 mark)",
+                "Describe structure components (1 mark)",
+                "Explain energy release mechanism (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_bioenerget_4",
+            questionText: "Explain the light-dependent and light-independent reactions of photosynthesis.",
+            marks: 5,
+            modelAnswer: "Light-dependent reactions occur in thylakoids, where chlorophyll absorbs light energy to split water molecules, releasing oxygen and producing ATP and NADPH. Light-independent reactions (Calvin cycle) occur in stroma, using CO₂, ATP, and NADPH to produce glucose.",
+            difficulty: "hard",
+            topic: "bioenergetics",
+            markingCriteria: {
+              ao1: 3,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Location of light-dependent reactions (1 mark)",
+                "Products of light-dependent reactions (2 marks)",
+                "Location and process of Calvin cycle (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_bioenerget_5",
+            questionText: "Describe the process of glycolysis and its importance in cellular respiration.",
+            marks: 4,
+            modelAnswer: "Glycolysis is the breakdown of glucose into two pyruvate molecules in the cytoplasm. It produces 2 ATP molecules and 2 NADH molecules without requiring oxygen. It's the first stage of both aerobic and anaerobic respiration.",
+            difficulty: "medium",
+            topic: "bioenergetics",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 1,
+              breakdown: [
+                "Define glycolysis process (1 mark)",
+                "Location and products (2 marks)",
+                "Role in respiration pathways (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_bioenerget_6",
+            questionText: "Explain how environmental factors affect the rate of photosynthesis.",
+            marks: 4,
+            modelAnswer: "Light intensity, CO₂ concentration, and temperature are limiting factors. Increased light intensity increases rate until saturation. Higher CO₂ concentration increases rate until other factors become limiting. Optimal temperature increases rate, but too high denatures enzymes.",
+            difficulty: "medium",
+            topic: "bioenergetics",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Identify three limiting factors (1 mark)",
+                "Explain effect of light intensity (1 mark)",
+                "Explain effect of CO₂ and temperature (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_bioenerget_7",
+            questionText: "Compare the energy yield from respiration of glucose versus fatty acids.",
+            marks: 3,
+            modelAnswer: "Glucose yields approximately 38 ATP molecules through complete aerobic respiration. Fatty acids yield significantly more ATP per molecule due to more C-H bonds. For example, palmitic acid yields about 129 ATP molecules.",
+            difficulty: "hard",
+            topic: "bioenergetics",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "State glucose ATP yield (1 mark)",
+                "Compare fatty acid yield (1 mark)",
+                "Explain reason for difference (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_bioenerget_8",
+            questionText: "Describe the role of enzymes in metabolic pathways and energy transfer.",
+            marks: 4,
+            modelAnswer: "Enzymes are biological catalysts that lower activation energy for metabolic reactions. They facilitate energy transfer by breaking and forming chemical bonds. They are specific to substrates and can be regulated to control metabolic pathways.",
+            difficulty: "medium",
+            topic: "bioenergetics",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 1,
+              breakdown: [
+                "Define enzyme function (1 mark)",
+                "Explain activation energy lowering (1 mark)",
+                "Describe specificity and regulation (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_bioenerget_9",
+            questionText: "Explain the chemiosmotic theory and its role in ATP synthesis.",
+            marks: 5,
+            modelAnswer: "The chemiosmotic theory explains ATP synthesis through the electrochemical gradient of protons across membranes. Electron transport creates a proton gradient, and ATP synthase uses the flow of protons back through the membrane to drive ATP synthesis.",
+            difficulty: "hard",
+            topic: "bioenergetics",
             markingCriteria: {
               ao1: 2,
               ao2: 2,
               ao3: 1,
               breakdown: [
-                'AO1 (1): Converts percentages to moles',
-                'AO1 (1): Divides by smallest number',
-                'AO2 (1): Shows working clearly',
-                'AO2 (1): Gets simple whole number ratio',
-                'AO3 (1): Correct empirical formula CH₂O'
+                "Define chemiosmotic theory (1 mark)",
+                "Explain proton gradient formation (2 marks)",
+                "Describe ATP synthase mechanism (2 marks)"
               ]
-            },
-            specReference: 'AQA Chemistry C3.6'
+            }
           },
           {
-            id: 'c3-q7',
-            question: 'What is the concentration in g/dm³ of a solution made by dissolving 20g of sodium chloride in 500 cm³ of water? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Volume = 500 cm³ = 0.5 dm³. Concentration = mass ÷ volume = 20 ÷ 0.5 = 40 g/dm³',
-            markingCriteria: {
-              ao1: 1,
-              ao2: 1,
-              ao3: 0,
-              breakdown: [
-                'AO1 (1): Converts volume to dm³',
-                'AO2 (1): Calculates concentration = 40 g/dm³'
-              ]
-            },
-            specReference: 'AQA Chemistry C3.7'
-          },
-          {
-            id: 'c3-q8',
-            question: 'Calculate the atom economy for the production of hydrogen in the reaction: Zn + 2HCl → ZnCl₂ + H₂ [Ar: Zn = 65, H = 1, Cl = 35.5] (4 marks)',
+            id: "bio_bioenerget_10",
+            questionText: "Analyze the efficiency of energy transfer in food chains and explain energy losses.",
             marks: 4,
-            modelAnswer: 'Mr of desired product (H₂) = 2. Mr of all products = 136 + 2 = 138. Atom economy = (2 ÷ 138) × 100 = 1.45%',
+            modelAnswer: "Energy transfer efficiency between trophic levels is typically 10%. Energy is lost through respiration, movement, heat production, and incomplete consumption. This explains why food chains rarely exceed 4-5 trophic levels.",
+            difficulty: "medium",
+            topic: "bioenergetics",
             markingCriteria: {
               ao1: 1,
               ao2: 2,
               ao3: 1,
               breakdown: [
-                'AO1 (1): Identifies desired product',
-                'AO2 (1): Calculates Mr of products',
-                'AO2 (1): Uses atom economy formula',
-                'AO3 (1): Correct answer = 1.45%'
+                "State 10% efficiency rule (1 mark)",
+                "Identify sources of energy loss (2 marks)",
+                "Link to food chain length (1 mark)"
               ]
-            },
-            specReference: 'AQA Chemistry C3.8'
+            }
+          }
+        ]
+      },
+      {
+        id: "homeostasis_response",
+        name: "Homeostasis and Response",
+        questions: [
+          {
+            id: "bio_homeo_1",
+            questionText: "Explain the principle of negative feedback in homeostasis with reference to blood glucose regulation.",
+            marks: 5,
+            modelAnswer: "Negative feedback maintains homeostasis by reversing changes. When blood glucose rises, pancreas releases insulin, causing cells to absorb glucose and liver to store it as glycogen. When glucose falls, glucagon is released, promoting glycogen breakdown to glucose.",
+            difficulty: "medium",
+            topic: "homeostasis_response",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 1,
+              breakdown: [
+                "Define negative feedback principle (1 mark)",
+                "Explain insulin response to high glucose (2 marks)",
+                "Explain glucagon response to low glucose (2 marks)"
+              ]
+            }
           },
           {
-            id: 'c3-q9',
-            question: 'A reaction has a theoretical yield of 50g but only produces 40g of product. What is the percentage yield? (2 marks)',
-            marks: 2,
-            modelAnswer: 'Percentage yield = (actual yield ÷ theoretical yield) × 100 = (40 ÷ 50) × 100 = 80%',
+            id: "bio_homeo_2",
+            questionText: "Describe the structure and function of a motor neuron.",
+            marks: 4,
+            modelAnswer: "Motor neurons have a cell body containing nucleus and organelles, dendrites that receive signals, a long axon covered by myelin sheath for rapid conduction, and axon terminals that release neurotransmitters at synapses with muscle fibers.",
+            difficulty: "medium",
+            topic: "homeostasis_response",
             markingCriteria: {
-              ao1: 1,
+              ao1: 3,
               ao2: 1,
               ao3: 0,
               breakdown: [
-                'AO1 (1): Uses correct formula',
-                'AO2 (1): Correct calculation = 80%'
+                "Identify cell body and nucleus (1 mark)",
+                "Describe axon and myelin sheath (2 marks)",
+                "Explain axon terminals and neurotransmitters (1 mark)"
               ]
-            },
-            specReference: 'AQA Chemistry C3.9'
+            }
           },
           {
-            id: 'c3-q10',
-            question: 'How many molecules are in 0.5 moles of water? [Avogadro constant = 6.02 × 10²³ mol⁻¹] (2 marks)',
-            marks: 2,
-            modelAnswer: 'Number of molecules = moles × Avogadro constant = 0.5 × 6.02 × 10²³ = 3.01 × 10²³',
+            id: "bio_homeo_3",
+            questionText: "Explain how the kidney regulates water balance through the action of ADH.",
+            marks: 4,
+            modelAnswer: "When blood water content is low, hypothalamus detects this and pituitary gland releases ADH. ADH increases permeability of collecting ducts in kidneys, allowing more water reabsorption and producing concentrated urine.",
+            difficulty: "medium",
+            topic: "homeostasis_response",
             markingCriteria: {
-              ao1: 1,
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Identify detection by hypothalamus (1 mark)",
+                "Explain ADH release from pituitary (1 mark)",
+                "Describe effect on collecting ducts (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_homeo_4",
+            questionText: "Compare the sympathetic and parasympathetic nervous systems.",
+            marks: 4,
+            modelAnswer: "Sympathetic nervous system prepares body for 'fight or flight' responses, increasing heart rate, dilating pupils, and inhibiting digestion. Parasympathetic system promotes 'rest and digest', decreasing heart rate, constricting pupils, and stimulating digestion.",
+            difficulty: "medium",
+            topic: "homeostasis_response",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Define sympathetic function (1 mark)",
+                "Give sympathetic examples (1 mark)",
+                "Define parasympathetic function and examples (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_homeo_5",
+            questionText: "Describe the process of synaptic transmission.",
+            marks: 5,
+            modelAnswer: "Action potential reaches axon terminal, causing calcium channels to open. Calcium influx triggers vesicles containing neurotransmitters to fuse with membrane. Neurotransmitters cross synaptic cleft and bind to receptors on postsynaptic membrane, potentially generating new action potential.",
+            difficulty: "hard",
+            topic: "homeostasis_response",
+            markingCriteria: {
+              ao1: 3,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Action potential arrives at terminal (1 mark)",
+                "Calcium influx and vesicle fusion (2 marks)",
+                "Neurotransmitter release and binding (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_homeo_6",
+            questionText: "Explain how the eye responds to changes in light intensity.",
+            marks: 4,
+            modelAnswer: "In bright light, circular muscles in iris contract and radial muscles relax, making pupil smaller to reduce light entry. In dim light, radial muscles contract and circular muscles relax, making pupil larger to allow more light entry.",
+            difficulty: "medium",
+            topic: "homeostasis_response",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Describe bright light response (2 marks)",
+                "Describe dim light response (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_homeo_7",
+            questionText: "Describe the role of the hypothalamus in temperature regulation.",
+            marks: 4,
+            modelAnswer: "Hypothalamus acts as the body's thermostat, detecting temperature changes through thermoreceptors. When too hot, it triggers sweating, vasodilation, and behavioral responses. When too cold, it triggers shivering, vasoconstriction, and hair raising.",
+            difficulty: "medium",
+            topic: "homeostasis_response",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Identify hypothalamus as thermostat (1 mark)",
+                "Describe responses to overheating (1 mark)",
+                "Describe responses to cooling (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_homeo_8",
+            questionText: "Explain the reflex arc and its importance in rapid responses.",
+            marks: 4,
+            modelAnswer: "Reflex arc is the pathway for automatic responses: stimulus → sensory neuron → spinal cord → motor neuron → effector. It bypasses the brain for rapid response to potentially harmful stimuli, protecting the body from damage.",
+            difficulty: "medium",
+            topic: "homeostasis_response",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 1,
+              breakdown: [
+                "Describe reflex arc pathway (2 marks)",
+                "Explain brain bypass (1 mark)",
+                "State protective function (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_homeo_9",
+            questionText: "Compare hormonal and nervous control systems in the body.",
+            marks: 5,
+            modelAnswer: "Nervous system uses electrical impulses for rapid, short-term, localized responses via neurons. Hormonal system uses chemical messengers (hormones) for slower, longer-lasting, widespread responses via bloodstream. Both work together to coordinate body functions.",
+            difficulty: "medium",
+            topic: "homeostasis_response",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 1,
+              breakdown: [
+                "Describe nervous system characteristics (2 marks)",
+                "Describe hormonal system characteristics (2 marks)",
+                "State they work together (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_homeo_10",
+            questionText: "Explain how plant hormones coordinate responses to environmental stimuli.",
+            marks: 4,
+            modelAnswer: "Plant hormones like auxins coordinate tropisms. Auxins accumulate on shaded side of shoots, causing unequal growth and bending toward light (phototropism). In roots, auxins inhibit growth on lower side, causing downward growth (gravitropism).",
+            difficulty: "medium",
+            topic: "homeostasis_response",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Define plant hormones and tropisms (1 mark)",
+                "Explain phototropism mechanism (2 marks)",
+                "Explain gravitropism in roots (1 mark)"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        id: "inheritance_variation_evolution",
+        name: "Inheritance, Variation and Evolution",
+        questions: [
+          {
+            id: "bio_inherit_1",
+            questionText: "Explain the difference between genotype and phenotype with examples.",
+            marks: 3,
+            modelAnswer: "Genotype is the genetic makeup of an organism (e.g., BB, Bb, bb for eye color). Phenotype is the observable characteristics resulting from genotype and environment interaction (e.g., brown eyes, blue eyes).",
+            difficulty: "easy",
+            topic: "inheritance_variation_evolution",
+            markingCriteria: {
+              ao1: 2,
               ao2: 1,
               ao3: 0,
               breakdown: [
-                'AO1 (1): Uses correct relationship',
-                'AO2 (1): Correct calculation = 3.01 × 10²³'
+                "Define genotype (1 mark)",
+                "Define phenotype (1 mark)",
+                "Provide appropriate examples (1 mark)"
               ]
-            },
-            specReference: 'AQA Chemistry C3.10'
+            }
+          },
+          {
+            id: "bio_inherit_2",
+            questionText: "Using a genetic diagram, show the inheritance of a recessive trait through two heterozygous parents.",
+            marks: 4,
+            modelAnswer: "Parents: Aa × Aa. Gametes: A, a from each parent. Offspring: AA (1), Aa (2), aa (1). Genotype ratio 1:2:1. If 'a' is recessive trait, phenotype ratio is 3:1 (dominant:recessive).",
+            difficulty: "medium",
+            topic: "inheritance_variation_evolution",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 2,
+              ao3: 1,
+              breakdown: [
+                "Set up cross correctly (1 mark)",
+                "Show all offspring genotypes (2 marks)",
+                "State correct ratios (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_inherit_3",
+            questionText: "Explain how natural selection leads to evolution.",
+            marks: 5,
+            modelAnswer: "Natural selection occurs when individuals with advantageous traits survive and reproduce more successfully. Over time, beneficial alleles become more frequent in the population while disadvantageous ones decrease, leading to evolutionary change.",
+            difficulty: "medium",
+            topic: "inheritance_variation_evolution",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 1,
+              breakdown: [
+                "Define natural selection (2 marks)",
+                "Explain differential survival and reproduction (2 marks)",
+                "Link to evolutionary change (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_inherit_4",
+            questionText: "Describe the structure of DNA and explain its importance in heredity.",
+            marks: 5,
+            modelAnswer: "DNA is a double helix with two antiparallel strands held together by hydrogen bonds between complementary base pairs (A-T, G-C). Each strand has a sugar-phosphate backbone. DNA carries genetic information in the sequence of bases, which is passed from parents to offspring.",
+            difficulty: "medium",
+            topic: "inheritance_variation_evolution",
+            markingCriteria: {
+              ao1: 3,
+              ao2: 1,
+              ao3: 1,
+              breakdown: [
+                "Describe double helix structure (2 marks)",
+                "Explain base pairing and backbone (1 mark)",
+                "Link structure to heredity function (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_inherit_5",
+            questionText: "Explain the causes of genetic variation in organisms.",
+            marks: 4,
+            modelAnswer: "Genetic variation arises from sexual reproduction (independent assortment and crossing over during meiosis), mutations (changes in DNA sequence), and random fertilization. Environmental factors can also influence gene expression.",
+            difficulty: "medium",
+            topic: "inheritance_variation_evolution",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Explain sexual reproduction contribution (2 marks)",
+                "Describe mutations (1 mark)",
+                "Mention environmental influence (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_inherit_6",
+            questionText: "Compare sexual and asexual reproduction in terms of genetic diversity.",
+            marks: 4,
+            modelAnswer: "Sexual reproduction produces genetic diversity through meiosis and fertilization, creating offspring that differ from parents. Asexual reproduction produces genetically identical clones with no genetic diversity, except for occasional mutations.",
+            difficulty: "medium",
+            topic: "inheritance_variation_evolution",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Explain sexual reproduction diversity (2 marks)",
+                "Explain asexual reproduction uniformity (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_inherit_7",
+            questionText: "Describe the process of speciation and give an example.",
+            marks: 4,
+            modelAnswer: "Speciation occurs when populations become reproductively isolated and accumulate genetic differences over time until they can no longer interbreed. Example: Darwin's finches evolved different beak shapes on isolated islands based on available food sources.",
+            difficulty: "hard",
+            topic: "inheritance_variation_evolution",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 1,
+              breakdown: [
+                "Define speciation process (2 marks)",
+                "Provide appropriate example (1 mark)",
+                "Link example to process (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_inherit_8",
+            questionText: "Explain how selective breeding differs from natural selection.",
+            marks: 3,
+            modelAnswer: "Selective breeding involves humans choosing which organisms reproduce based on desired traits, while natural selection involves environmental pressures determining which organisms survive and reproduce. Both result in changes to allele frequencies over time.",
+            difficulty: "medium",
+            topic: "inheritance_variation_evolution",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "Define selective breeding (1 mark)",
+                "Define natural selection (1 mark)",
+                "Compare the two processes (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_inherit_9",
+            questionText: "Describe the evidence for evolution from fossils, anatomy, and DNA.",
+            marks: 5,
+            modelAnswer: "Fossil evidence shows progression of species over time. Anatomical evidence includes homologous structures showing common ancestry and vestigial organs. DNA evidence shows genetic similarities between related species, with closer relationships having more similar DNA sequences.",
+            difficulty: "medium",
+            topic: "inheritance_variation_evolution",
+            markingCriteria: {
+              ao1: 3,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Explain fossil evidence (1 mark)",
+                "Describe anatomical evidence (2 marks)",
+                "Explain DNA evidence (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_inherit_10",
+            questionText: "Explain the role of mutations in evolution and give examples of beneficial mutations.",
+            marks: 4,
+            modelAnswer: "Mutations provide raw material for evolution by creating new alleles. Most are neutral or harmful, but beneficial mutations increase survival or reproduction. Examples include antibiotic resistance in bacteria and sickle cell trait providing malaria resistance.",
+            difficulty: "medium",
+            topic: "inheritance_variation_evolution",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 1,
+              breakdown: [
+                "Explain mutations as evolutionary material (2 marks)",
+                "Provide beneficial mutation examples (1 mark)",
+                "Link examples to survival advantage (1 mark)"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        id: "ecology",
+        name: "Ecology",
+        questions: [
+          {
+            id: "bio_ecology_1",
+            questionText: "Define ecosystem and describe the main components of an ecosystem.",
+            marks: 4,
+            modelAnswer: "An ecosystem is a community of organisms interacting with each other and their physical environment. Main components include biotic factors (living organisms like producers, consumers, decomposers) and abiotic factors (non-living elements like temperature, light, water, soil).",
+            difficulty: "easy",
+            topic: "ecology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Define ecosystem (1 mark)",
+                "Identify biotic components (1 mark)",
+                "Identify abiotic components (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_ecology_2",
+            questionText: "Explain the carbon cycle and its importance in ecosystems.",
+            marks: 5,
+            modelAnswer: "Carbon cycle involves carbon movement between atmosphere, organisms, and environment. Plants remove CO₂ via photosynthesis, animals return it via respiration. Decomposition, combustion, and ocean exchange also transfer carbon. It's vital for maintaining atmospheric CO₂ levels and climate regulation.",
+            difficulty: "medium",
+            topic: "ecology",
+            markingCriteria: {
+              ao1: 3,
+              ao2: 1,
+              ao3: 1,
+              breakdown: [
+                "Describe carbon removal by plants (1 mark)",
+                "Describe carbon release processes (2 marks)",
+                "Explain importance for climate (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_ecology_3",
+            questionText: "Describe predator-prey relationships and their effect on population sizes.",
+            marks: 4,
+            modelAnswer: "Predator-prey relationships show cyclical population changes. When prey increases, more food supports predator growth. As predators increase, they reduce prey population. Reduced prey leads to predator decline, allowing prey recovery. This creates oscillating population cycles.",
+            difficulty: "medium",
+            topic: "ecology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Explain initial prey increase effect (1 mark)",
+                "Describe predator increase and prey decline (1 mark)",
+                "Explain cyclical nature (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_ecology_4",
+            questionText: "Explain how human activities affect biodiversity and suggest conservation methods.",
+            marks: 5,
+            modelAnswer: "Human activities reduce biodiversity through deforestation, pollution, habitat destruction, and climate change. Conservation methods include protected areas, breeding programs, sustainable resource use, habitat restoration, and international cooperation through treaties.",
+            difficulty: "medium",
+            topic: "ecology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 1,
+              breakdown: [
+                "Identify human threats to biodiversity (2 marks)",
+                "Suggest conservation methods (2 marks)",
+                "Evaluate effectiveness (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_ecology_5",
+            questionText: "Describe the nitrogen cycle and explain its importance for plant growth.",
+            marks: 5,
+            modelAnswer: "Nitrogen cycle converts atmospheric N₂ into usable forms. Nitrogen fixation by bacteria converts N₂ to ammonia. Nitrification converts ammonia to nitrites then nitrates. Plants absorb nitrates for protein synthesis. Denitrification returns N₂ to atmosphere, completing the cycle.",
+            difficulty: "hard",
+            topic: "ecology",
+            markingCriteria: {
+              ao1: 3,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Describe nitrogen fixation (1 mark)",
+                "Explain nitrification process (2 marks)",
+                "Link to plant protein synthesis and denitrification (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_ecology_6",
+            questionText: "Compare the advantages and disadvantages of different sampling methods in ecology.",
+            marks: 4,
+            modelAnswer: "Quadrats are good for plants and slow animals but may miss mobile species. Transects show distribution patterns but may not represent whole area. Mark-recapture works for mobile animals but requires identification and assumes no migration.",
+            difficulty: "medium",
+            topic: "ecology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Describe quadrat advantages/disadvantages (1 mark)",
+                "Explain transect method pros/cons (1 mark)",
+                "Discuss mark-recapture limitations (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_ecology_7",
+            questionText: "Explain the concept of ecological succession with an example.",
+            marks: 4,
+            modelAnswer: "Ecological succession is the gradual change in species composition over time in an ecosystem. Primary succession occurs on bare rock, starting with lichens, then mosses, grasses, shrubs, and finally trees. Each stage modifies conditions for the next.",
+            difficulty: "medium",
+            topic: "ecology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 1,
+              breakdown: [
+                "Define ecological succession (1 mark)",
+                "Provide example sequence (2 marks)",
+                "Explain stage modifications (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_ecology_8",
+            questionText: "Describe the impact of acid rain on ecosystems.",
+            marks: 4,
+            modelAnswer: "Acid rain lowers soil and water pH, affecting plant growth and aquatic life. It leaches nutrients from soil, damages tree leaves, and makes water bodies too acidic for fish and other organisms. It also affects food chains by reducing primary producers.",
+            difficulty: "medium",
+            topic: "ecology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Explain pH effects on soil and water (2 marks)",
+                "Describe effects on plants and animals (1 mark)",
+                "Link to food chain impacts (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_ecology_9",
+            questionText: "Explain the greenhouse effect and its role in global warming.",
+            marks: 4,
+            modelAnswer: "Greenhouse effect occurs when greenhouse gases (CO₂, methane, water vapor) trap heat in Earth's atmosphere. Solar radiation enters, but infrared radiation is absorbed and re-emitted by these gases. Enhanced greenhouse effect from human activities causes global warming.",
+            difficulty: "medium",
+            topic: "ecology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Define greenhouse effect (1 mark)",
+                "Identify greenhouse gases (1 mark)",
+                "Link human activities to global warming (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_ecology_10",
+            questionText: "Describe adaptation strategies of organisms in extreme environments.",
+            marks: 4,
+            modelAnswer: "Desert organisms conserve water through thick waxy cuticles, water storage tissues, and concentrated urine. Arctic organisms have thick insulation, counter-current heat exchange, and antifreeze proteins. Deep-sea organisms have pressure-resistant proteins and bioluminescence.",
+            difficulty: "medium",
+            topic: "ecology",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Describe desert adaptations (1 mark)",
+                "Explain Arctic adaptations (1 mark)",
+                "Describe deep-sea adaptations (2 marks)"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        id: "key_ideas",
+        name: "Key Ideas",
+        questions: [
+          {
+            id: "bio_key_1",
+            questionText: "Explain the cell theory and its significance in biology.",
+            marks: 4,
+            modelAnswer: "Cell theory states that: (1) all living things are made of cells, (2) cells are the basic unit of life, and (3) all cells come from pre-existing cells. This theory unified biology by providing a fundamental framework for understanding life at the cellular level.",
+            difficulty: "easy",
+            topic: "key_ideas",
+            markingCriteria: {
+              ao1: 3,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "State three principles of cell theory (3 marks)",
+                "Explain significance for biology (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_key_2",
+            questionText: "Compare prokaryotic and eukaryotic cells, giving examples of each.",
+            marks: 5,
+            modelAnswer: "Prokaryotic cells lack a nucleus and membrane-bound organelles (e.g., bacteria, archaea). Eukaryotic cells have a nucleus and organelles like mitochondria, ER, and Golgi apparatus (e.g., plant, animal, fungal cells). Prokaryotes have genetic material freely in cytoplasm.",
+            difficulty: "medium",
+            topic: "key_ideas",
+            markingCriteria: {
+              ao1: 3,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Define prokaryotic cells with examples (2 marks)",
+                "Define eukaryotic cells with examples (2 marks)",
+                "Compare genetic material organization (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_key_3",
+            questionText: "Explain the importance of enzymes in biological systems and factors affecting their activity.",
+            marks: 5,
+            modelAnswer: "Enzymes are biological catalysts that speed up reactions by lowering activation energy. They're essential for metabolism, DNA replication, and cellular processes. Activity is affected by temperature, pH, enzyme concentration, substrate concentration, and presence of inhibitors or cofactors.",
+            difficulty: "medium",
+            topic: "key_ideas",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 1,
+              breakdown: [
+                "Define enzyme function and importance (2 marks)",
+                "List factors affecting activity (2 marks)",
+                "Explain how factors affect activity (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_key_4",
+            questionText: "Describe the hierarchy of biological organization from molecules to ecosystems.",
+            marks: 4,
+            modelAnswer: "Biological organization follows: molecules → organelles → cells → tissues → organs → organ systems → organisms → populations → communities → ecosystems → biosphere. Each level has emergent properties not present at lower levels.",
+            difficulty: "easy",
+            topic: "key_ideas",
+            markingCriteria: {
+              ao1: 3,
+              ao2: 1,
+              ao3: 0,
+              breakdown: [
+                "List organizational levels in correct order (3 marks)",
+                "Mention emergent properties (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_key_5",
+            questionText: "Explain the relationship between structure and function in biological systems with examples.",
+            marks: 4,
+            modelAnswer: "Structure determines function in biology. Examples: red blood cells are biconcave for maximum surface area and flexibility; enzyme active sites are specifically shaped for substrates; bird wing bones are hollow for lightness while maintaining strength.",
+            difficulty: "medium",
+            topic: "key_ideas",
+            markingCriteria: {
+              ao1: 1,
+              ao2: 2,
+              ao3: 1,
+              breakdown: [
+                "State structure-function relationship (1 mark)",
+                "Provide appropriate examples (2 marks)",
+                "Link examples to principle (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_key_6",
+            questionText: "Describe the scientific method and its application in biological research.",
+            marks: 4,
+            modelAnswer: "Scientific method involves: observation, hypothesis formation, prediction, experimentation with controls, data analysis, and conclusion drawing. In biology, it's used to test theories about living systems, requiring careful experimental design to account for biological variables.",
+            difficulty: "medium",
+            topic: "key_ideas",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 1,
+              breakdown: [
+                "List steps of scientific method (2 marks)",
+                "Explain application to biology (1 mark)",
+                "Mention experimental controls (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_key_7",
+            questionText: "Explain the concept of homeostasis and why it's important for living organisms.",
+            marks: 4,
+            modelAnswer: "Homeostasis is the maintenance of stable internal conditions despite external changes. It's crucial because enzymes and cellular processes require specific conditions (temperature, pH, water balance) to function optimally. Failure of homeostasis can lead to disease or death.",
+            difficulty: "medium",
+            topic: "key_ideas",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 1,
+              ao3: 1,
+              breakdown: [
+                "Define homeostasis (1 mark)",
+                "Explain importance for enzyme function (2 marks)",
+                "Link to health consequences (1 mark)"
+              ]
+            }
+          },
+          {
+            id: "bio_key_8",
+            questionText: "Describe the role of water in biological systems.",
+            marks: 4,
+            modelAnswer: "Water is essential for life as a solvent for biochemical reactions, transport medium in organisms, temperature regulator through high specific heat capacity, and structural component maintaining cell shape. Its polarity enables hydrogen bonding, crucial for protein and DNA structure.",
+            difficulty: "medium",
+            topic: "key_ideas",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Identify water as solvent and transport medium (1 mark)",
+                "Explain temperature regulation role (1 mark)",
+                "Describe structural and chemical roles (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_key_9",
+            questionText: "Explain the importance of surface area to volume ratio in biological systems.",
+            marks: 4,
+            modelAnswer: "Surface area to volume ratio determines efficiency of exchange processes. Small cells have high ratios enabling rapid diffusion of nutrients and waste. Large organisms have specialized structures (gills, lungs, villi) to increase surface area for efficient exchange.",
+            difficulty: "medium",
+            topic: "key_ideas",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 0,
+              breakdown: [
+                "Define surface area to volume concept (1 mark)",
+                "Explain relationship to cell size (1 mark)",
+                "Give examples of specialized structures (2 marks)"
+              ]
+            }
+          },
+          {
+            id: "bio_key_10",
+            questionText: "Describe the unity and diversity of life, explaining how organisms are both similar and different.",
+            marks: 5,
+            modelAnswer: "All life shows unity through shared features: cellular organization, genetic code (DNA/RNA), metabolism, homeostasis, and evolution. Diversity arises through adaptation to different environments, resulting in varied structures, functions, and behaviors while maintaining underlying biological principles.",
+            difficulty: "medium",
+            topic: "key_ideas",
+            markingCriteria: {
+              ao1: 2,
+              ao2: 2,
+              ao3: 1,
+              breakdown: [
+                "Identify unifying features of life (2 marks)",
+                "Explain sources of diversity (2 marks)",
+                "Link unity and diversity concepts (1 mark)"
+              ]
+            }
           }
         ]
       }
