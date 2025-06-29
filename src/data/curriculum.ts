@@ -1427,77 +1427,143 @@ export const curriculum: Subject[] = [
         ]
       },
       {
-        name: "Statistics",
+        id: 'statistics',
+        name: 'Statistics',
         questions: [
           {
-            id: "stats_1",
-            question: "A bag contains 5 red balls, 3 blue balls, and 2 green balls. A ball is selected at random. What is the probability that the ball is not red?",
-            options: ["1/2", "3/10", "1/5", "2/5"],
-            correct: 0,
-            explanation: "There are 10 balls total. 5 are red, so 5 are not red. P(not red) = 5/10 = 1/2"
+            id: 'stats_1',
+            question: 'A bag contains 5 red balls, 3 blue balls, and 2 green balls. A ball is selected at random. What is the probability that the ball is not red?',
+            marks: 2,
+            modelAnswer: 'There are 10 balls in total (5 + 3 + 2 = 10). Number of balls that are not red = 3 + 2 = 5. Probability = Number of favorable outcomes / Total number of outcomes = 5/10 = 1/2.',
+            markingCriteria: {
+              breakdown: [
+                'Calculate total number of balls (1 mark)',
+                'Calculate probability correctly as 5/10 = 1/2 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Stats S1.1'
           },
           {
-            id: "stats_2", 
-            question: "The heights of students in a class are: 160, 165, 170, 155, 175, 168, 162. What is the median height?",
-            options: ["162 cm", "165 cm", "168 cm", "170 cm"],
-            correct: 1,
-            explanation: "First arrange in order: 155, 160, 162, 165, 168, 170, 175. The median is the middle value = 165 cm"
+            id: 'stats_2',
+            question: 'The heights of students in a class are: 160, 165, 170, 155, 175, 168, 162 cm. Find the median height.',
+            marks: 2,
+            modelAnswer: 'First, arrange the heights in ascending order: 155, 160, 162, 165, 168, 170, 175. Since there are 7 values (odd number), the median is the middle value, which is the 4th value. Therefore, the median height is 165 cm.',
+            markingCriteria: {
+              breakdown: [
+                'Arrange data in ascending order (1 mark)',
+                'Identify median as middle value = 165 cm (1 mark)'
+              ]
+            },
+            specReference: 'AQA Stats S1.2'
           },
           {
-            id: "stats_3",
-            question: "A fair six-sided die is rolled twice. What is the probability of getting a sum of 7?",
-            options: ["1/6", "1/12", "5/36", "7/36"],
-            correct: 0,
-            explanation: "Ways to get sum 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) = 6 ways. Total outcomes = 36. P = 6/36 = 1/6"
+            id: 'stats_3',
+            question: 'A fair six-sided die is rolled twice. Calculate the probability of getting a sum of 7.',
+            marks: 3,
+            modelAnswer: 'Ways to get sum of 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) = 6 ways. Total possible outcomes when rolling two dice = 6 × 6 = 36. Probability = 6/36 = 1/6.',
+            markingCriteria: {
+              breakdown: [
+                'List all ways to get sum of 7 (1 mark)',
+                'Calculate total possible outcomes = 36 (1 mark)',
+                'Calculate probability = 6/36 = 1/6 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Stats S1.3'
           },
           {
-            id: "stats_4",
-            question: "The mean of 5 numbers is 12. If one number is removed, the mean of the remaining 4 numbers is 10. What was the removed number?",
-            options: ["15", "18", "20", "22"],
-            correct: 2,
-            explanation: "Sum of 5 numbers = 5 × 12 = 60. Sum of 4 numbers = 4 × 10 = 40. Removed number = 60 - 40 = 20"
+            id: 'stats_4',
+            question: 'The mean of 5 numbers is 12. If one number is removed, the mean of the remaining 4 numbers is 10. Find the value of the removed number.',
+            marks: 3,
+            modelAnswer: 'Sum of 5 numbers = mean × number of values = 12 × 5 = 60. Sum of remaining 4 numbers = 10 × 4 = 40. Therefore, the removed number = 60 - 40 = 20.',
+            markingCriteria: {
+              breakdown: [
+                'Calculate sum of 5 numbers = 60 (1 mark)',
+                'Calculate sum of 4 numbers = 40 (1 mark)',
+                'Find removed number = 20 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Stats S1.4'
           },
           {
-            id: "stats_5",
-            question: "In a frequency table, the modal class has a frequency of 15 and represents ages 20-25. What can we say about this data?",
-            options: ["Most people are exactly 22.5 years old", "15 people are aged between 20 and 25", "The mode is 15", "More people are in the 20-25 age group than any other group"],
-            correct: 3,
-            explanation: "The modal class is the group with the highest frequency, so more people are in the 20-25 age group than any other group"
+            id: 'stats_5',
+            question: 'Two events A and B are mutually exclusive. If P(A) = 0.3 and P(B) = 0.4, calculate P(A ∪ B).',
+            marks: 2,
+            modelAnswer: 'Since A and B are mutually exclusive, they cannot occur at the same time, so P(A ∩ B) = 0. For mutually exclusive events: P(A ∪ B) = P(A) + P(B) = 0.3 + 0.4 = 0.7.',
+            markingCriteria: {
+              breakdown: [
+                'Recognize that P(A ∩ B) = 0 for mutually exclusive events (1 mark)',
+                'Calculate P(A ∪ B) = P(A) + P(B) = 0.7 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Stats S1.5'
           },
           {
-            id: "stats_6",
-            question: "Two events A and B are mutually exclusive. If P(A) = 0.3 and P(B) = 0.4, what is P(A or B)?",
-            options: ["0.12", "0.58", "0.7", "1.0"],
-            correct: 2,
-            explanation: "For mutually exclusive events: P(A or B) = P(A) + P(B) = 0.3 + 0.4 = 0.7"
+            id: 'stats_6',
+            question: 'A survey shows that 60% of students like pizza, 40% like burgers, and 25% like both. What percentage of students like neither pizza nor burgers?',
+            marks: 4,
+            modelAnswer: 'Using the inclusion-exclusion principle: Students who like pizza only = 60% - 25% = 35%. Students who like burgers only = 40% - 25% = 15%. Students who like both = 25%. Students who like at least one = 35% + 15% + 25% = 75%. Therefore, students who like neither = 100% - 75% = 25%.',
+            markingCriteria: {
+              breakdown: [
+                'Calculate students who like pizza only = 35% (1 mark)',
+                'Calculate students who like burgers only = 15% (1 mark)',
+                'Calculate students who like at least one = 75% (1 mark)',
+                'Calculate students who like neither = 25% (1 mark)'
+              ]
+            },
+            specReference: 'AQA Stats S1.6'
           },
           {
-            id: "stats_7",
-            question: "A survey shows that 60% of students like pizza and 40% like burgers. If 25% like both, what percentage like neither?",
-            options: ["15%", "25%", "35%", "75%"],
-            correct: 1,
-            explanation: "Using Venn diagrams: Like pizza only = 35%, Like burgers only = 15%, Like both = 25%. Like neither = 100% - 35% - 15% - 25% = 25%"
+            id: 'stats_7',
+            question: 'The range of a data set is 24 and the smallest value is 8. Find the largest value in the data set.',
+            marks: 2,
+            modelAnswer: 'Range = Largest value - Smallest value. Given: Range = 24 and Smallest value = 8. Therefore: 24 = Largest value - 8. Largest value = 24 + 8 = 32.',
+            markingCriteria: {
+              breakdown: [
+                'Use formula: Range = Largest - Smallest (1 mark)',
+                'Calculate largest value = 32 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Stats S1.7'
           },
           {
-            id: "stats_8",
-            question: "The range of a data set is 24 and the smallest value is 8. What is the largest value?",
-            options: ["16", "24", "32", "192"],
-            correct: 2,
-            explanation: "Range = Largest value - Smallest value. So 24 = Largest value - 8. Therefore Largest value = 32"
+            id: 'stats_8',
+            question: 'A spinner has 4 equal sections colored red, blue, green, and yellow. Find the probability of getting red on the first spin AND blue on the second spin.',
+            marks: 3,
+            modelAnswer: 'Probability of getting red on first spin = 1/4. Probability of getting blue on second spin = 1/4. Since the spins are independent events: P(red AND blue) = P(red) × P(blue) = 1/4 × 1/4 = 1/16.',
+            markingCriteria: {
+              breakdown: [
+                'Calculate P(red) = 1/4 (1 mark)',
+                'Calculate P(blue) = 1/4 (1 mark)',
+                'Use multiplication rule for independent events = 1/16 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Stats S1.8'
           },
           {
-            id: "stats_9",
-            question: "A spinner has 4 equal sections colored red, blue, green, and yellow. What is the probability of getting red on the first spin AND blue on the second spin?",
-            options: ["1/2", "1/4", "1/8", "1/16"],
-            correct: 3,
-            explanation: "P(red on first) = 1/4, P(blue on second) = 1/4. For independent events: P(red AND blue) = 1/4 × 1/4 = 1/16"
+            id: 'stats_9',
+            question: 'A box plot shows the following values: Q1 = 10, Q2 (median) = 15, Q3 = 20. Calculate the interquartile range (IQR).',
+            marks: 2,
+            modelAnswer: 'The interquartile range (IQR) is the difference between the third quartile and the first quartile. IQR = Q3 - Q1 = 20 - 10 = 10.',
+            markingCriteria: {
+              breakdown: [
+                'State formula: IQR = Q3 - Q1 (1 mark)',
+                'Calculate IQR = 20 - 10 = 10 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Stats S1.9'
           },
           {
-            id: "stats_10",
-            question: "A box plot shows Q1 = 10, Q2 = 15, Q3 = 20. What is the interquartile range (IQR)?",
-            options: ["5", "10", "15", "20"],
-            correct: 1,
-            explanation: "IQR = Q3 - Q1 = 20 - 10 = 10"
+            id: 'stats_10',
+            question: 'The frequency table shows test scores: Score 60-69 (frequency 5), 70-79 (frequency 8), 80-89 (frequency 12), 90-99 (frequency 3). Which is the modal class and what is the total frequency?',
+            marks: 2,
+            modelAnswer: 'The modal class is the class interval with the highest frequency. Comparing frequencies: 60-69 has 5, 70-79 has 8, 80-89 has 12, 90-99 has 3. The highest frequency is 12, so the modal class is 80-89. Total frequency = 5 + 8 + 12 + 3 = 28.',
+            markingCriteria: {
+              breakdown: [
+                'Identify modal class as 80-89 (1 mark)',
+                'Calculate total frequency = 28 (1 mark)'
+              ]
+            },
+            specReference: 'AQA Stats S1.10'
           }
         ]
       }
