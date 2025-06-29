@@ -18,8 +18,7 @@ interface WeakTopicsSectionProps {
 
 export const WeakTopicsSection = ({ weakTopics, userProgress, onPractice }: WeakTopicsSectionProps) => {
   const getTopicInfo = (topicId: string) => {
-    const curriculumArray = Object.values(curriculum);
-    for (const subject of curriculumArray) {
+    for (const subject of curriculum) {
       const topic = subject.topics.find(t => t.id === topicId);
       if (topic) {
         return { subject, topic };
