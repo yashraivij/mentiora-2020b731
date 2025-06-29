@@ -1,4 +1,3 @@
-
 export interface Question {
   id: string;
   question: string;
@@ -595,7 +594,7 @@ export const curriculum: Subject[] = [
   },
   {
     id: 'maths',
-    name: 'Maths',
+    name: 'Mathematics',
     color: 'bg-blue-500',
     topics: [
       {
@@ -1424,6 +1423,81 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'AQA Maths P1.10'
+          }
+        ]
+      },
+      {
+        name: "Statistics",
+        questions: [
+          {
+            id: "stats_1",
+            question: "A bag contains 5 red balls, 3 blue balls, and 2 green balls. A ball is selected at random. What is the probability that the ball is not red?",
+            options: ["1/2", "3/10", "1/5", "2/5"],
+            correct: 0,
+            explanation: "There are 10 balls total. 5 are red, so 5 are not red. P(not red) = 5/10 = 1/2"
+          },
+          {
+            id: "stats_2", 
+            question: "The heights of students in a class are: 160, 165, 170, 155, 175, 168, 162. What is the median height?",
+            options: ["162 cm", "165 cm", "168 cm", "170 cm"],
+            correct: 1,
+            explanation: "First arrange in order: 155, 160, 162, 165, 168, 170, 175. The median is the middle value = 165 cm"
+          },
+          {
+            id: "stats_3",
+            question: "A fair six-sided die is rolled twice. What is the probability of getting a sum of 7?",
+            options: ["1/6", "1/12", "5/36", "7/36"],
+            correct: 0,
+            explanation: "Ways to get sum 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) = 6 ways. Total outcomes = 36. P = 6/36 = 1/6"
+          },
+          {
+            id: "stats_4",
+            question: "The mean of 5 numbers is 12. If one number is removed, the mean of the remaining 4 numbers is 10. What was the removed number?",
+            options: ["15", "18", "20", "22"],
+            correct: 2,
+            explanation: "Sum of 5 numbers = 5 × 12 = 60. Sum of 4 numbers = 4 × 10 = 40. Removed number = 60 - 40 = 20"
+          },
+          {
+            id: "stats_5",
+            question: "In a frequency table, the modal class has a frequency of 15 and represents ages 20-25. What can we say about this data?",
+            options: ["Most people are exactly 22.5 years old", "15 people are aged between 20 and 25", "The mode is 15", "More people are in the 20-25 age group than any other group"],
+            correct: 3,
+            explanation: "The modal class is the group with the highest frequency, so more people are in the 20-25 age group than any other group"
+          },
+          {
+            id: "stats_6",
+            question: "Two events A and B are mutually exclusive. If P(A) = 0.3 and P(B) = 0.4, what is P(A or B)?",
+            options: ["0.12", "0.58", "0.7", "1.0"],
+            correct: 2,
+            explanation: "For mutually exclusive events: P(A or B) = P(A) + P(B) = 0.3 + 0.4 = 0.7"
+          },
+          {
+            id: "stats_7",
+            question: "A survey shows that 60% of students like pizza and 40% like burgers. If 25% like both, what percentage like neither?",
+            options: ["15%", "25%", "35%", "75%"],
+            correct: 1,
+            explanation: "Using Venn diagrams: Like pizza only = 35%, Like burgers only = 15%, Like both = 25%. Like neither = 100% - 35% - 15% - 25% = 25%"
+          },
+          {
+            id: "stats_8",
+            question: "The range of a data set is 24 and the smallest value is 8. What is the largest value?",
+            options: ["16", "24", "32", "192"],
+            correct: 2,
+            explanation: "Range = Largest value - Smallest value. So 24 = Largest value - 8. Therefore Largest value = 32"
+          },
+          {
+            id: "stats_9",
+            question: "A spinner has 4 equal sections colored red, blue, green, and yellow. What is the probability of getting red on the first spin AND blue on the second spin?",
+            options: ["1/2", "1/4", "1/8", "1/16"],
+            correct: 3,
+            explanation: "P(red on first) = 1/4, P(blue on second) = 1/4. For independent events: P(red AND blue) = 1/4 × 1/4 = 1/16"
+          },
+          {
+            id: "stats_10",
+            question: "A box plot shows Q1 = 10, Q2 = 15, Q3 = 20. What is the interquartile range (IQR)?",
+            options: ["5", "10", "15", "20"],
+            correct: 1,
+            explanation: "IQR = Q3 - Q1 = 20 - 10 = 10"
           }
         ]
       }
