@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -150,7 +151,8 @@ const Dashboard = () => {
     return new Date(lastAttempt);
   };
 
-  const sortedSubjects = [...curriculum].sort((a, b) => {
+  const curriculumArray = Object.values(curriculum);
+  const sortedSubjects = [...curriculumArray].sort((a, b) => {
     const isPinnedA = pinnedSubjects.includes(a.id);
     const isPinnedB = pinnedSubjects.includes(b.id);
     
@@ -269,7 +271,7 @@ const Dashboard = () => {
             <div className="flex items-center space-x-4">
               <h3 className="text-2xl font-bold text-slate-900">Your Subjects</h3>
               <Badge variant="outline" className="text-slate-500 border-slate-300 bg-white/50">
-                {curriculum.length} subjects
+                {curriculumArray.length} subjects
               </Badge>
             </div>
             <div className="flex items-center space-x-3">

@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -46,7 +47,7 @@ const Practice = () => {
   const [sessionComplete, setSessionComplete] = useState(false);
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
 
-  const subject = curriculum.find(s => s.id === subjectId);
+  const subject = curriculum[subjectId as string];
   const topic = subject?.topics.find(t => t.id === topicId);
   const currentQuestion = shuffledQuestions[currentQuestionIndex];
 
@@ -64,13 +65,13 @@ const Practice = () => {
   const markAnswerWithAI = async (question: Question, answer: string) => {
     try {
       console.log('Calling AI marking function with:', { 
-        question: question.question, 
+        question: question.questionText, 
         answer: answer.substring(0, 100) + '...' 
       });
 
       const { data, error } = await supabase.functions.invoke('mark-answer', {
         body: {
-          question: question.question,
+          question: question.questionText,
           userAnswer: answer,
           modelAnswer: question.modelAnswer,
           markingCriteria: question.markingCriteria,
@@ -310,7 +311,7 @@ const Practice = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-900 mb-6 leading-relaxed">
-                  {currentQuestion.question}
+                  {currentQuestion.questionText}
                 </p>
                 
                 <div className="space-y-4">
