@@ -119,10 +119,10 @@ const Practice = () => {
       const markingResult = await markAnswerWithAI(currentQuestion, userAnswer);
       
       const feedback = {
-        modelAnswer: currentQuestion.modelAnswer,
+        modelAnswer: currentQuestion.modelAnswer || currentQuestion.explanation || "No model answer available",
         whyThisGetsMark: currentQuestion.markingCriteria.breakdown.join('\n'),
         whyYoursDidnt: markingResult.feedback,
-        specLink: currentQuestion.specReference
+        specLink: currentQuestion.specReference || "No specification reference available"
       };
 
       const attempt: QuestionAttempt = {
@@ -218,7 +218,7 @@ const Practice = () => {
             <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
             <CardTitle>Session Complete!</CardTitle>
             <CardDescription>
-              {topic?.name} - {subject?.name}
+              {topic?.title} - {subject?.name}
             </CardDescription>
           </CardHeader>
           <CardContent className="text-center space-y-4">
@@ -283,7 +283,7 @@ const Practice = () => {
                 Back
               </Button>
               <div>
-                <h1 className="text-xl font-bold text-slate-900">{topic?.name}</h1>
+                <h1 className="text-xl font-bold text-slate-900">{topic?.title}</h1>
                 <p className="text-sm text-slate-600">{subject?.name}</p>
               </div>
             </div>
