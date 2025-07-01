@@ -73,22 +73,22 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
         {/* Premium Header */}
-        <header className="flex justify-between items-center mb-32">
-          <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-lg flex items-center justify-center">
-              <Sparkles className="h-6 w-6 text-white" />
+        <header className="flex flex-col sm:flex-row justify-between items-center mb-16 lg:mb-32 gap-4">
+          <div className="flex items-center space-x-3 lg:space-x-4">
+            <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-lg flex items-center justify-center">
+              <Sparkles className="h-5 w-5 lg:h-6 lg:w-6 text-white" />
             </div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+            <h1 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
               Mentiora
             </h1>
           </div>
-          <div className="space-x-4">
+          <div className="flex flex-col sm:flex-row gap-3 lg:space-x-4 lg:gap-0">
             {user ? (
               <Button 
                 onClick={() => navigate('/dashboard')} 
-                className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 px-8 py-3 h-auto shadow-lg"
+                className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 px-6 lg:px-8 py-2.5 lg:py-3 h-auto shadow-lg text-sm lg:text-base"
               >
                 Dashboard
               </Button>
@@ -97,13 +97,13 @@ const Index = () => {
                 <Button 
                   variant="ghost" 
                   onClick={() => navigate('/login')} 
-                  className="text-gray-600 hover:text-gray-900 px-6 py-3 h-auto"
+                  className="text-gray-600 hover:text-gray-900 px-4 lg:px-6 py-2.5 lg:py-3 h-auto text-sm lg:text-base order-2 sm:order-1"
                 >
                   Sign In
                 </Button>
                 <Button 
                   onClick={() => navigate('/register')} 
-                  className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 px-8 py-3 h-auto shadow-lg"
+                  className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 px-6 lg:px-8 py-2.5 lg:py-3 h-auto shadow-lg text-sm lg:text-base order-1 sm:order-2"
                 >
                   Get Started
                 </Button>
@@ -113,12 +113,12 @@ const Index = () => {
         </header>
 
         {/* Premium Hero Section */}
-        <div className="text-center mb-32 max-w-5xl mx-auto">
-          <div className="inline-flex items-center px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-blue-700 text-sm font-medium mb-8">
-            <Sparkles className="h-4 w-4 mr-2" />
+        <div className="text-center mb-20 lg:mb-32 max-w-5xl mx-auto">
+          <div className="inline-flex items-center px-3 lg:px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-blue-700 text-xs lg:text-sm font-medium mb-6 lg:mb-8">
+            <Sparkles className="h-3 w-3 lg:h-4 lg:w-4 mr-2" />
             Trusted by 10,000+ GCSE Students
           </div>
-          <h2 className="text-7xl font-bold mb-8 leading-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 lg:mb-8 leading-tight">
             <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
               Excellence in
             </span>
@@ -127,96 +127,96 @@ const Index = () => {
               GCSE Mastery
             </span>
           </h2>
-          <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed font-light">
+          <p className="text-lg lg:text-xl text-gray-600 mb-8 lg:mb-12 max-w-3xl mx-auto leading-relaxed font-light px-4">
             Transform your revision with AI-powered personalized learning. Join thousands of students who've already elevated their grades with our premium GCSE preparation platform.
           </p>
           <Button 
             size="lg" 
             onClick={() => navigate('/register')} 
-            className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-lg px-12 py-6 h-auto shadow-xl hover:shadow-2xl transition-all duration-300"
+            className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-base lg:text-lg px-8 lg:px-12 py-4 lg:py-6 h-auto shadow-xl hover:shadow-2xl transition-all duration-300 w-full sm:w-auto"
           >
             Start Your Success Journey
-            <ArrowRight className="ml-3 h-6 w-6" />
+            <ArrowRight className="ml-2 lg:ml-3 h-5 w-5 lg:h-6 lg:w-6" />
           </Button>
         </div>
 
         {/* Premium Features Grid */}
-        <div className="grid md:grid-cols-4 gap-8 mb-32 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-20 lg:mb-32 max-w-6xl mx-auto">
           {features.map((feature, index) => (
-            <div key={index} className="text-center group">
-              <div className="w-20 h-20 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:shadow-lg transition-all duration-300">
-                <feature.icon className="h-10 w-10 text-blue-600" />
+            <div key={index} className="text-center group p-4">
+              <div className="w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl lg:rounded-3xl flex items-center justify-center mx-auto mb-6 lg:mb-8 group-hover:shadow-lg transition-all duration-300">
+                <feature.icon className="h-8 w-8 lg:h-10 lg:w-10 text-blue-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>
-              <p className="text-gray-600 leading-relaxed font-light">{feature.description}</p>
+              <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-3 lg:mb-4">{feature.title}</h3>
+              <p className="text-gray-600 leading-relaxed font-light text-sm lg:text-base">{feature.description}</p>
             </div>
           ))}
         </div>
 
         {/* Premium How It Works Section */}
-        <div className="mb-32 bg-gradient-to-r from-gray-50 to-blue-50 rounded-3xl p-16">
-          <div className="text-center mb-20">
-            <h3 className="text-5xl font-bold text-gray-900 mb-6">How Excellence Unfolds</h3>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
+        <div className="mb-20 lg:mb-32 bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl lg:rounded-3xl p-8 lg:p-16">
+          <div className="text-center mb-12 lg:mb-20">
+            <h3 className="text-3xl lg:text-5xl font-bold text-gray-900 mb-4 lg:mb-6">How Excellence Unfolds</h3>
+            <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto font-light px-4">
               Experience the seamless journey from practice to mastery in three refined steps
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-16 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16 max-w-6xl mx-auto">
             {howItWorksSteps.map((step, index) => (
               <div key={index} className="text-center relative">
                 {index < howItWorksSteps.length - 1 && (
-                  <div className="hidden md:block absolute top-10 left-1/2 w-full h-px bg-gradient-to-r from-blue-200 to-indigo-200 transform translate-x-10"></div>
+                  <div className="hidden lg:block absolute top-10 left-1/2 w-full h-px bg-gradient-to-r from-blue-200 to-indigo-200 transform translate-x-10"></div>
                 )}
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-full flex items-center justify-center mx-auto mb-8 relative z-10 shadow-lg">
-                  <step.icon className="h-10 w-10 text-white" />
+                <div className="w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-full flex items-center justify-center mx-auto mb-6 lg:mb-8 relative z-10 shadow-lg">
+                  <step.icon className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
                 </div>
-                <h4 className="text-2xl font-bold text-gray-900 mb-6">{step.title}</h4>
-                <p className="text-gray-600 leading-relaxed font-light text-lg">{step.description}</p>
+                <h4 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4 lg:mb-6">{step.title}</h4>
+                <p className="text-gray-600 leading-relaxed font-light text-base lg:text-lg px-2">{step.description}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Premium Pricing Section */}
-        <div className="mb-32">
-          <div className="text-center mb-16">
-            <h3 className="text-5xl font-bold text-gray-900 mb-6">Investment in Excellence</h3>
-            <p className="text-xl text-gray-600 font-light">Begin your journey to academic success today</p>
+        <div className="mb-20 lg:mb-32">
+          <div className="text-center mb-12 lg:mb-16">
+            <h3 className="text-3xl lg:text-5xl font-bold text-gray-900 mb-4 lg:mb-6">Investment in Excellence</h3>
+            <p className="text-lg lg:text-xl text-gray-600 font-light">Begin your journey to academic success today</p>
           </div>
-          <div className="max-w-md mx-auto">
+          <div className="max-w-md mx-auto px-4">
             <Card className="border-2 border-blue-200 relative overflow-hidden shadow-2xl">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-6 py-3 rounded-full text-sm font-bold shadow-lg">
+                <span className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-4 lg:px-6 py-2 lg:py-3 rounded-full text-xs lg:text-sm font-bold shadow-lg">
                   Perfect to Start
                 </span>
               </div>
               <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 pointer-events-none"></div>
-              <CardHeader className="text-center pt-12 relative z-10">
-                <CardTitle className="text-3xl font-light">Free Access</CardTitle>
-                <div className="text-6xl font-bold bg-gradient-to-r from-blue-600 to-indigo-700 bg-clip-text text-transparent mb-4">£0</div>
-                <CardDescription className="text-lg">Everything you need to begin</CardDescription>
+              <CardHeader className="text-center pt-10 lg:pt-12 relative z-10 px-4 lg:px-6">
+                <CardTitle className="text-2xl lg:text-3xl font-light">Free Access</CardTitle>
+                <div className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-blue-600 to-indigo-700 bg-clip-text text-transparent mb-3 lg:mb-4">£0</div>
+                <CardDescription className="text-base lg:text-lg">Everything you need to begin</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6 relative z-10">
-                <div className="space-y-4">
+              <CardContent className="space-y-4 lg:space-y-6 relative z-10 px-4 lg:px-6">
+                <div className="space-y-3 lg:space-y-4">
                   <div className="flex items-center">
-                    <CheckCircle className="h-6 w-6 text-emerald-500 mr-4" />
-                    <span className="text-lg">50 premium practice questions monthly</span>
+                    <CheckCircle className="h-5 w-5 lg:h-6 lg:w-6 text-emerald-500 mr-3 lg:mr-4 flex-shrink-0" />
+                    <span className="text-base lg:text-lg">50 premium practice questions monthly</span>
                   </div>
                   <div className="flex items-center">
-                    <CheckCircle className="h-6 w-6 text-emerald-500 mr-4" />
-                    <span className="text-lg">Advanced AI-powered feedback</span>
+                    <CheckCircle className="h-5 w-5 lg:h-6 lg:w-6 text-emerald-500 mr-3 lg:mr-4 flex-shrink-0" />
+                    <span className="text-base lg:text-lg">Advanced AI-powered feedback</span>
                   </div>
                   <div className="flex items-center">
-                    <CheckCircle className="h-6 w-6 text-emerald-500 mr-4" />
-                    <span className="text-lg">Comprehensive progress tracking</span>
+                    <CheckCircle className="h-5 w-5 lg:h-6 lg:w-6 text-emerald-500 mr-3 lg:mr-4 flex-shrink-0" />
+                    <span className="text-base lg:text-lg">Comprehensive progress tracking</span>
                   </div>
                   <div className="flex items-center">
-                    <CheckCircle className="h-6 w-6 text-emerald-500 mr-4" />
-                    <span className="text-lg">Complete GCSE subject coverage</span>
+                    <CheckCircle className="h-5 w-5 lg:h-6 lg:w-6 text-emerald-500 mr-3 lg:mr-4 flex-shrink-0" />
+                    <span className="text-base lg:text-lg">Complete GCSE subject coverage</span>
                   </div>
                 </div>
                 <Button 
-                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 mt-8 py-4 text-lg shadow-lg"
+                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 mt-6 lg:mt-8 py-3 lg:py-4 text-base lg:text-lg shadow-lg"
                   onClick={() => navigate('/register')}
                 >
                   Begin Your Journey
@@ -227,24 +227,24 @@ const Index = () => {
         </div>
 
         {/* Premium Reviews Section */}
-        <div className="mb-32">
-          <div className="text-center mb-20">
-            <h3 className="text-5xl font-bold text-gray-900 mb-6">Success Stories</h3>
-            <p className="text-xl text-gray-600 font-light">From our community of high-achieving students</p>
+        <div className="mb-20 lg:mb-32">
+          <div className="text-center mb-12 lg:mb-20">
+            <h3 className="text-3xl lg:text-5xl font-bold text-gray-900 mb-4 lg:mb-6">Success Stories</h3>
+            <p className="text-lg lg:text-xl text-gray-600 font-light">From our community of high-achieving students</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
             {reviews.map((review, index) => (
-              <Card key={index} className="p-8 border-0 shadow-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl transition-all duration-300">
+              <Card key={index} className="p-6 lg:p-8 border-0 shadow-xl bg-gradient-to-br from-white to-gray-50 hover:shadow-2xl transition-all duration-300">
                 <CardContent className="p-0">
-                  <div className="flex mb-6">
+                  <div className="flex mb-4 lg:mb-6">
                     {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} className="h-6 w-6 text-amber-400 fill-current" />
+                      <Star key={i} className="h-5 w-5 lg:h-6 lg:w-6 text-amber-400 fill-current" />
                     ))}
                   </div>
-                  <p className="text-gray-700 mb-8 leading-relaxed text-lg font-light italic">"{review.content}"</p>
+                  <p className="text-gray-700 mb-6 lg:mb-8 leading-relaxed text-base lg:text-lg font-light italic">"{review.content}"</p>
                   <div>
-                    <div className="font-bold text-gray-900 text-lg">{review.name}</div>
-                    <div className="text-gray-500">{review.grade}</div>
+                    <div className="font-bold text-gray-900 text-base lg:text-lg">{review.name}</div>
+                    <div className="text-gray-500 text-sm lg:text-base">{review.grade}</div>
                   </div>
                 </CardContent>
               </Card>
@@ -253,19 +253,19 @@ const Index = () => {
         </div>
 
         {/* Premium CTA Section */}
-        <div className="bg-gradient-to-r from-gray-900 via-blue-900 to-indigo-900 rounded-3xl p-16 text-center text-white max-w-5xl mx-auto shadow-2xl">
+        <div className="bg-gradient-to-r from-gray-900 via-blue-900 to-indigo-900 rounded-2xl lg:rounded-3xl p-8 lg:p-16 text-center text-white max-w-5xl mx-auto shadow-2xl">
           <div className="max-w-3xl mx-auto">
-            <h3 className="text-5xl font-bold mb-8 leading-tight">Ready to Achieve Excellence?</h3>
-            <p className="text-xl text-blue-100 mb-12 font-light leading-relaxed">
+            <h3 className="text-3xl lg:text-5xl font-bold mb-6 lg:mb-8 leading-tight">Ready to Achieve Excellence?</h3>
+            <p className="text-lg lg:text-xl text-blue-100 mb-8 lg:mb-12 font-light leading-relaxed px-4">
               Join the elite community of students who've transformed their academic journey with our premium AI-powered revision platform.
             </p>
             <Button 
               size="lg" 
               onClick={() => navigate('/register')} 
-              className="bg-white text-gray-900 hover:bg-gray-100 text-lg px-12 py-6 h-auto shadow-xl hover:shadow-2xl transition-all duration-300 font-semibold"
+              className="bg-white text-gray-900 hover:bg-gray-100 text-base lg:text-lg px-8 lg:px-12 py-4 lg:py-6 h-auto shadow-xl hover:shadow-2xl transition-all duration-300 font-semibold w-full sm:w-auto"
             >
               Begin Your Success Story
-              <ArrowRight className="ml-3 h-6 w-6" />
+              <ArrowRight className="ml-2 lg:ml-3 h-5 w-5 lg:h-6 lg:w-6" />
             </Button>
           </div>
         </div>
