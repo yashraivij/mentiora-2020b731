@@ -12,46 +12,46 @@ const Index = () => {
   const features = [
     {
       icon: BookOpen,
-      title: "Exam-Style Questions",
-      description: "Practice with realistic AQA GCSE questions across Biology, Maths, and Chemistry"
+      title: "Exam Questions",
+      description: "Practice with AQA GCSE questions"
     },
     {
       icon: CheckCircle,
-      title: "AI-Powered Marking",
-      description: "Get detailed feedback with model answers and Assessment Objective breakdowns"
+      title: "AI Marking",
+      description: "Get instant detailed feedback"
     },
     {
       icon: BarChart3,
-      title: "Performance Analytics",
-      description: "Track your progress and identify weak topics with comprehensive dashboards"
+      title: "Track Progress",
+      description: "Monitor your improvement"
     },
     {
       icon: Users,
-      title: "Personalized Learning",
-      description: "Adaptive revision focused on your individual needs and learning gaps"
+      title: "Personalized",
+      description: "Tailored to your needs"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-white">
+      <div className="container mx-auto px-6 py-8">
         {/* Header */}
-        <header className="flex justify-between items-center mb-16">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg"></div>
-            <h1 className="text-2xl font-bold text-slate-900">Mentiora</h1>
+        <header className="flex justify-between items-center mb-20">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-blue-600 rounded-xl"></div>
+            <h1 className="text-2xl font-semibold text-gray-900">Mentiora</h1>
           </div>
-          <div className="space-x-4">
+          <div className="space-x-3">
             {user ? (
-              <Button onClick={() => navigate('/dashboard')} className="bg-blue-600 hover:bg-blue-700">
-                Go to Dashboard
+              <Button onClick={() => navigate('/dashboard')} className="bg-blue-600 hover:bg-blue-700 px-6">
+                Dashboard
               </Button>
             ) : (
               <>
-                <Button variant="outline" onClick={() => navigate('/login')}>
+                <Button variant="ghost" onClick={() => navigate('/login')} className="text-gray-600">
                   Login
                 </Button>
-                <Button onClick={() => navigate('/register')} className="bg-blue-600 hover:bg-blue-700">
+                <Button onClick={() => navigate('/register')} className="bg-blue-600 hover:bg-blue-700 px-6">
                   Get Started
                 </Button>
               </>
@@ -60,80 +60,76 @@ const Index = () => {
         </header>
 
         {/* Hero Section */}
-        <div className="text-center mb-20">
-          <h2 className="text-5xl font-bold text-slate-900 mb-6">
-            Master Your <span className="text-blue-600">GCSE Revision</span>
+        <div className="text-center mb-24 max-w-4xl mx-auto">
+          <h2 className="text-6xl font-bold text-gray-900 mb-8 leading-tight">
+            Master Your
+            <br />
+            <span className="text-blue-600">GCSE Revision</span>
           </h2>
-          <p className="text-xl text-slate-600 mb-8 max-w-3xl mx-auto">
-            Personalized exam practice for AQA GCSE students. Get instant feedback, 
-            track your progress, and focus on what matters most.
+          <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+            Personalized exam practice for AQA GCSE students with instant AI feedback and progress tracking.
           </p>
-          <div className="flex justify-center space-x-4">
-            <Button size="lg" onClick={() => navigate('/register')} className="bg-blue-600 hover:bg-blue-700">
-              Start Revising Now
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            <Button size="lg" variant="outline" onClick={() => navigate('/login')}>
-              Already have an account?
-            </Button>
-          </div>
+          <Button 
+            size="lg" 
+            onClick={() => navigate('/register')} 
+            className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-4 h-auto"
+          >
+            Start Revising Now
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+        <div className="grid md:grid-cols-4 gap-8 mb-24 max-w-5xl mx-auto">
           {features.map((feature, index) => (
-            <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <feature.icon className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-                <CardTitle className="text-lg">{feature.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>{feature.description}</CardDescription>
-              </CardContent>
-            </Card>
+            <div key={index} className="text-center">
+              <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <feature.icon className="h-8 w-8 text-blue-600" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">{feature.title}</h3>
+              <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+            </div>
           ))}
         </div>
 
         {/* Subject Preview */}
-        <div className="text-center mb-16">
-          <h3 className="text-3xl font-bold text-slate-900 mb-8">
+        <div className="text-center mb-24">
+          <h3 className="text-4xl font-bold text-gray-900 mb-12">
             Complete AQA GCSE Coverage
           </h3>
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <Card className="bg-green-50 border-green-200">
-              <CardHeader>
-                <CardTitle className="text-green-700">Biology</CardTitle>
-                <CardDescription>
-                  Cell Biology, Organisation, Infection & Response, Bioenergetics, and more
-                </CardDescription>
-              </CardHeader>
-            </Card>
-            <Card className="bg-blue-50 border-blue-200">
-              <CardHeader>
-                <CardTitle className="text-blue-700">Mathematics</CardTitle>
-                <CardDescription>
-                  Number, Algebra, Geometry, Probability, Statistics, and more
-                </CardDescription>
-              </CardHeader>
-            </Card>
-            <Card className="bg-purple-50 border-purple-200">
-              <CardHeader>
-                <CardTitle className="text-purple-700">Chemistry</CardTitle>
-                <CardDescription>
-                  Atomic Structure, Bonding, Quantitative Chemistry, and more
-                </CardDescription>
-              </CardHeader>
-            </Card>
+            <div className="bg-green-50 rounded-2xl p-8 border border-green-100">
+              <h4 className="text-2xl font-semibold text-green-700 mb-4">Biology</h4>
+              <p className="text-green-600">
+                Cell Biology, Organisation, Infection & Response, Bioenergetics
+              </p>
+            </div>
+            <div className="bg-blue-50 rounded-2xl p-8 border border-blue-100">
+              <h4 className="text-2xl font-semibold text-blue-700 mb-4">Mathematics</h4>
+              <p className="text-blue-600">
+                Number, Algebra, Geometry, Probability, Statistics
+              </p>
+            </div>
+            <div className="bg-purple-50 rounded-2xl p-8 border border-purple-100">
+              <h4 className="text-2xl font-semibold text-purple-700 mb-4">Chemistry</h4>
+              <p className="text-purple-600">
+                Atomic Structure, Bonding, Quantitative Chemistry
+              </p>
+            </div>
           </div>
         </div>
 
         {/* CTA Section */}
-        <div className="bg-slate-900 rounded-2xl p-12 text-center text-white">
-          <h3 className="text-3xl font-bold mb-4">Ready to excel in your GCSEs?</h3>
-          <p className="text-xl text-slate-300 mb-8">
-            Join thousands of students already improving their grades with Mentiora
+        <div className="bg-gray-900 rounded-3xl p-12 text-center text-white max-w-4xl mx-auto">
+          <h3 className="text-4xl font-bold mb-6">Ready to excel in your GCSEs?</h3>
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+            Join students already improving their grades with personalized AI-powered revision.
           </p>
-          <Button size="lg" onClick={() => navigate('/register')} className="bg-blue-600 hover:bg-blue-700">
+          <Button 
+            size="lg" 
+            onClick={() => navigate('/register')} 
+            className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-4 h-auto"
+          >
             Start Your Free Trial
           </Button>
         </div>
