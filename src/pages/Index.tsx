@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, CheckCircle, BarChart3, Users, ArrowRight } from "lucide-react";
+import { BookOpen, CheckCircle, BarChart3, Users, ArrowRight, Star, Play, Target, Trophy } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -29,6 +29,45 @@ const Index = () => {
       icon: Users,
       title: "Personalized",
       description: "Tailored to your needs"
+    }
+  ];
+
+  const howItWorksSteps = [
+    {
+      icon: Play,
+      title: "Start Practicing",
+      description: "Choose your subject and begin with practice questions tailored to your level"
+    },
+    {
+      icon: Target,
+      title: "Get Instant Feedback",
+      description: "Our AI analyzes your answers and provides detailed explanations and improvements"
+    },
+    {
+      icon: Trophy,
+      title: "Track Your Progress",
+      description: "Monitor your improvement and identify areas that need more attention"
+    }
+  ];
+
+  const reviews = [
+    {
+      name: "Sarah M.",
+      grade: "Year 11 Student",
+      content: "Mentiora helped me improve my Biology grades from C to A*. The AI feedback is incredibly detailed and helped me understand my mistakes.",
+      rating: 5
+    },
+    {
+      name: "James K.",
+      grade: "Year 10 Student", 
+      content: "The personalized practice questions are brilliant. It feels like having a tutor available 24/7. My confidence in Maths has grown so much!",
+      rating: 5
+    },
+    {
+      name: "Emma L.",
+      grade: "Year 11 Student",
+      content: "I love how it tracks my progress. I can see exactly which topics I need to work on. Got an A in my Chemistry mock exam!",
+      rating: 5
     }
   ];
 
@@ -74,7 +113,7 @@ const Index = () => {
             onClick={() => navigate('/register')} 
             className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-4 h-auto"
           >
-            Start Revising Now
+            Start Revising Now - Free
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
@@ -90,6 +129,143 @@ const Index = () => {
               <p className="text-gray-600 leading-relaxed">{feature.description}</p>
             </div>
           ))}
+        </div>
+
+        {/* How It Works Section */}
+        <div className="mb-24">
+          <div className="text-center mb-16">
+            <h3 className="text-4xl font-bold text-gray-900 mb-4">How It Works</h3>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Get started in three simple steps and begin improving your grades today
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+            {howItWorksSteps.map((step, index) => (
+              <div key={index} className="text-center relative">
+                {index < howItWorksSteps.length - 1 && (
+                  <div className="hidden md:block absolute top-8 left-1/2 w-full h-0.5 bg-gray-200 transform translate-x-8"></div>
+                )}
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 relative z-10">
+                  <step.icon className="h-8 w-8 text-white" />
+                </div>
+                <h4 className="text-xl font-semibold text-gray-900 mb-4">{step.title}</h4>
+                <p className="text-gray-600 leading-relaxed">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Pricing Section */}
+        <div className="mb-24 bg-gray-50 rounded-3xl p-16">
+          <div className="text-center mb-12">
+            <h3 className="text-4xl font-bold text-gray-900 mb-4">Simple, Transparent Pricing</h3>
+            <p className="text-xl text-gray-600">Start for free, upgrade when you're ready</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <Card className="border-2 border-blue-200 relative">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium">
+                  Most Popular
+                </span>
+              </div>
+              <CardHeader className="text-center pt-8">
+                <CardTitle className="text-2xl">Free</CardTitle>
+                <div className="text-4xl font-bold text-blue-600 mb-2">£0</div>
+                <CardDescription>Perfect to get started</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                    <span>50 practice questions per month</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                    <span>AI-powered feedback</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                    <span>Progress tracking</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                    <span>All GCSE subjects</span>
+                  </div>
+                </div>
+                <Button 
+                  className="w-full bg-blue-600 hover:bg-blue-700 mt-6"
+                  onClick={() => navigate('/register')}
+                >
+                  Get Started Free
+                </Button>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader className="text-center">
+                <CardTitle className="text-2xl">Premium</CardTitle>
+                <div className="text-4xl font-bold text-gray-900 mb-2">£9.99</div>
+                <CardDescription>per month</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                    <span>Unlimited practice questions</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                    <span>Advanced AI feedback</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                    <span>Detailed analytics</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                    <span>Exam predictions</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                    <span>Priority support</span>
+                  </div>
+                </div>
+                <Button 
+                  variant="outline" 
+                  className="w-full mt-6"
+                  onClick={() => navigate('/register')}
+                >
+                  Coming Soon
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Reviews Section */}
+        <div className="mb-24">
+          <div className="text-center mb-16">
+            <h3 className="text-4xl font-bold text-gray-900 mb-4">What Students Say</h3>
+            <p className="text-xl text-gray-600">Join thousands of students already improving their grades</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {reviews.map((review, index) => (
+              <Card key={index} className="p-6">
+                <CardContent className="p-0">
+                  <div className="flex mb-4">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-gray-700 mb-6 leading-relaxed">"{review.content}"</p>
+                  <div>
+                    <div className="font-semibold text-gray-900">{review.name}</div>
+                    <div className="text-sm text-gray-500">{review.grade}</div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
 
         {/* Subject Preview */}
