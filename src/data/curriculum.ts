@@ -1,16 +1,17 @@
+import { type Curriculum, type Question } from "@/types/curriculum";
 
-import { Curriculum, Question } from "@/types/curriculum";
-
-export { Question } from "@/types/curriculum";
+export type { Question } from "@/types/curriculum";
 
 export const curriculum: Curriculum = [
   {
     id: "Physics",
-    name: "Physics", 
+    name: "Physics",
+    color: "bg-blue-500",
     topics: [
       {
         id: "energy-transfers",
         title: "Energy Transfers",
+        name: "Energy Transfers",
         questions: [
           {
             id: "energy_1",
@@ -45,8 +46,9 @@ export const curriculum: Curriculum = [
         ]
       },
       {
-        id: "forces-basics",
+        id: "forces-basics", 
         title: "Forces Basics",
+        name: "Forces Basics",
         questions: [
           {
             id: "forces_1",
@@ -70,10 +72,12 @@ export const curriculum: Curriculum = [
   {
     id: "Chemistry",
     name: "Chemistry",
+    color: "bg-green-500",
     topics: [
       {
         id: "atoms",
-        title: "Atoms and Elements",
+        title: "Atoms and Elements", 
+        name: "Atoms and Elements",
         questions: [
           {
             id: "chem_1",
@@ -96,11 +100,13 @@ export const curriculum: Curriculum = [
   },
   {
     id: "Biology",
-    name: "Biology",
+    name: "Biology", 
+    color: "bg-purple-500",
     topics: [
       {
         id: "cells",
         title: "Cells and Microscopy",
+        name: "Cells and Microscopy",
         questions: [
           {
             id: "bio_1",
@@ -122,6 +128,7 @@ export const curriculum: Curriculum = [
       {
         id: "organs",
         title: "Organs and Organ Systems",
+        name: "Organs and Organ Systems", 
         questions: [
           {
             id: "bio_2",
@@ -143,6 +150,7 @@ export const curriculum: Curriculum = [
       {
         id: "photosynthesis",
         title: "Photosynthesis",
+        name: "Photosynthesis",
         questions: [
           {
             id: "photo_1",
@@ -324,6 +332,7 @@ export const curriculum: Curriculum = [
       {
         id: "homeostasis",
         title: "Homeostasis",
+        name: "Homeostasis",
         questions: [
           {
             id: "homeo_1",
@@ -350,6 +359,7 @@ export const curriculum: Curriculum = [
       {
         id: "genetics",
         title: "Genetics and Evolution",
+        name: "Genetics and Evolution",
         questions: [
           {
             id: "inherit_1",

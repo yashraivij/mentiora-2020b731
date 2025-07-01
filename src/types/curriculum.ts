@@ -22,12 +22,14 @@ export interface Question {
 export interface Topic {
   id: string;
   title: string;
+  name: string;
   questions: Question[];
 }
 
 export interface Subject {
   id: string;
   name: string;
+  color: string;
   topics: Topic[];
 }
 
