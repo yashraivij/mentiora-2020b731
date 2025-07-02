@@ -1,812 +1,411 @@
-export const curriculum = {
-  web_dev: {
-    title: "Web Development",
+
+export interface Question {
+  id: string;
+  question: string;
+  marks: number;
+  modelAnswer: string;
+  markingCriteria: {
+    breakdown: string[];
+  };
+  specReference: string;
+}
+
+export interface Topic {
+  id: string;
+  name: string;
+  description?: string;
+  questions: Question[];
+}
+
+export interface Subject {
+  id: string;
+  name: string;
+  description: string;
+  color: string;
+  topics: Topic[];
+}
+
+export const curriculum: Subject[] = [
+  {
+    id: "web_dev",
+    name: "Web Development",
     description: "Learn to build websites and web applications.",
+    color: "bg-blue-500",
     topics: [
       {
         id: "html",
-        title: "HTML",
+        name: "HTML",
         description: "Learn the structure of web pages.",
+        questions: []
       },
       {
         id: "css",
-        title: "CSS",
+        name: "CSS",
         description: "Learn to style web pages.",
+        questions: []
       },
       {
         id: "javascript",
-        title: "JavaScript",
+        name: "JavaScript",
         description: "Learn to make web pages interactive.",
+        questions: []
       },
       {
         id: "react",
-        title: "React",
+        name: "React",
         description: "Learn to build user interfaces with React.",
+        questions: []
       },
       {
         id: "node",
-        title: "Node.js",
+        name: "Node.js",
         description: "Learn to build server-side applications with Node.js.",
+        questions: []
       },
       {
         id: "mongodb",
-        title: "MongoDB",
+        name: "MongoDB",
         description: "Learn to store data in a MongoDB database.",
-      },
-    ],
+        questions: []
+      }
+    ]
   },
-  data_science: {
-    title: "Data Science",
+  {
+    id: "data_science",
+    name: "Data Science",
     description: "Learn to analyze data and make predictions.",
+    color: "bg-green-500",
     topics: [
       {
         id: "python",
-        title: "Python",
+        name: "Python",
         description: "Learn the basics of Python programming.",
+        questions: []
       },
       {
         id: "numpy",
-        title: "NumPy",
+        name: "NumPy",
         description: "Learn to work with arrays using NumPy.",
+        questions: []
       },
       {
         id: "pandas",
-        title: "Pandas",
+        name: "Pandas",
         description: "Learn to work with data using Pandas.",
+        questions: []
       },
       {
         id: "matplotlib",
-        title: "Matplotlib",
+        name: "Matplotlib",
         description: "Learn to visualize data using Matplotlib.",
+        questions: []
       },
       {
         id: "machine_learning",
-        title: "Machine Learning",
+        name: "Machine Learning",
         description: "Learn the basics of machine learning.",
-      },
-    ],
+        questions: []
+      }
+    ]
   },
-  mobile_dev: {
-    title: "Mobile Development",
+  {
+    id: "mobile_dev",
+    name: "Mobile Development",
     description: "Learn to build mobile applications.",
+    color: "bg-purple-500",
     topics: [
       {
         id: "java",
-        title: "Java",
+        name: "Java",
         description: "Learn the basics of Java programming.",
+        questions: []
       },
       {
         id: "kotlin",
-        title: "Kotlin",
+        name: "Kotlin",
         description: "Learn the basics of Kotlin programming.",
+        questions: []
       },
       {
         id: "android_studio",
-        title: "Android Studio",
+        name: "Android Studio",
         description: "Learn to build Android applications with Android Studio.",
+        questions: []
       },
       {
         id: "swift",
-        title: "Swift",
+        name: "Swift",
         description: "Learn the basics of Swift programming.",
+        questions: []
       },
       {
         id: "xcode",
-        title: "Xcode",
+        name: "Xcode",
         description: "Learn to build iOS applications with Xcode.",
-      },
-    ],
+        questions: []
+      }
+    ]
   },
-  game_dev: {
-    title: "Game Development",
+  {
+    id: "game_dev",
+    name: "Game Development",
     description: "Learn to build video games.",
+    color: "bg-red-500",
     topics: [
       {
         id: "csharp",
-        title: "C#",
+        name: "C#",
         description: "Learn the basics of C# programming.",
+        questions: []
       },
       {
         id: "unity",
-        title: "Unity",
+        name: "Unity",
         description: "Learn to build games with Unity.",
+        questions: []
       },
       {
         id: "unreal_engine",
-        title: "Unreal Engine",
+        name: "Unreal Engine",
         description: "Learn to build games with Unreal Engine.",
+        questions: []
       },
       {
         id: "game_design",
-        title: "Game Design",
+        name: "Game Design",
         description: "Learn the principles of game design.",
-      },
-    ],
+        questions: []
+      }
+    ]
   },
-  cybersecurity: {
-    title: "Cybersecurity",
+  {
+    id: "cybersecurity",
+    name: "Cybersecurity",
     description: "Learn to protect computer systems and networks.",
+    color: "bg-orange-500",
     topics: [
       {
         id: "networking",
-        title: "Networking",
+        name: "Networking",
         description: "Learn the basics of computer networking.",
+        questions: []
       },
       {
         id: "security_fundamentals",
-        title: "Security Fundamentals",
+        name: "Security Fundamentals",
         description: "Learn the fundamentals of computer security.",
+        questions: []
       },
       {
         id: "ethical_hacking",
-        title: "Ethical Hacking",
+        name: "Ethical Hacking",
         description: "Learn to hack systems ethically to find vulnerabilities.",
+        questions: []
       },
       {
         id: "cryptography",
-        title: "Cryptography",
+        name: "Cryptography",
         description: "Learn the basics of cryptography.",
-      },
-    ],
+        questions: []
+      }
+    ]
   },
-  cloud_computing: {
-    title: "Cloud Computing",
+  {
+    id: "cloud_computing",
+    name: "Cloud Computing",
     description: "Learn about cloud computing and its services.",
+    color: "bg-cyan-500",
     topics: [
       {
         id: "aws",
-        title: "Amazon Web Services (AWS)",
+        name: "Amazon Web Services (AWS)",
         description: "Learn about AWS cloud services.",
+        questions: []
       },
       {
         id: "azure",
-        title: "Microsoft Azure",
+        name: "Microsoft Azure",
         description: "Learn about Microsoft Azure cloud services.",
+        questions: []
       },
       {
         id: "google_cloud",
-        title: "Google Cloud Platform (GCP)",
+        name: "Google Cloud Platform (GCP)",
         description: "Learn about Google Cloud Platform services.",
+        questions: []
       },
       {
         id: "devops",
-        title: "DevOps",
+        name: "DevOps",
         description: "Learn about DevOps practices and tools.",
-      },
-    ],
+        questions: []
+      }
+    ]
   },
-  artificial_intelligence: {
-    title: "Artificial Intelligence",
+  {
+    id: "artificial_intelligence",
+    name: "Artificial Intelligence",
     description: "Learn the fundamentals of AI and machine learning.",
+    color: "bg-indigo-500",
     topics: [
       {
         id: "machine_learning",
-        title: "Machine Learning",
+        name: "Machine Learning",
         description: "Learn the basics of machine learning algorithms.",
+        questions: []
       },
       {
         id: "deep_learning",
-        title: "Deep Learning",
+        name: "Deep Learning",
         description: "Learn about neural networks and deep learning techniques.",
+        questions: []
       },
       {
         id: "natural_language_processing",
-        title: "Natural Language Processing (NLP)",
+        name: "Natural Language Processing (NLP)",
         description: "Learn to process and understand human language.",
+        questions: []
       },
       {
         id: "computer_vision",
-        title: "Computer Vision",
+        name: "Computer Vision",
         description: "Learn to enable computers to 'see' and interpret images.",
+        questions: []
       },
       {
         id: "ai_ethics",
-        title: "AI Ethics",
+        name: "AI Ethics",
         description: "Explore the ethical considerations of artificial intelligence.",
-      },
-    ],
+        questions: []
+      }
+    ]
   },
-  blockchain_technology: {
-    title: "Blockchain Technology",
-    description: "Learn about blockchain, cryptocurrencies, and decentralized applications.",
-    topics: [
-      {
-        id: "blockchain_fundamentals",
-        title: "Blockchain Fundamentals",
-        description: "Understand the basics of blockchain technology.",
-      },
-      {
-        id: "cryptocurrencies",
-        title: "Cryptocurrencies",
-        description: "Learn about Bitcoin, Ethereum, and other cryptocurrencies.",
-      },
-      {
-        id: "smart_contracts",
-        title: "Smart Contracts",
-        description: "Learn to write and deploy smart contracts.",
-      },
-      {
-        id: "decentralized_applications",
-        title: "Decentralized Applications (DApps)",
-        description: "Learn to build decentralized applications.",
-      },
-    ],
-  },
-  project_management: {
-    title: "Project Management",
-    description: "Learn the principles and practices of project management.",
-    topics: [
-      {
-        id: "project_planning",
-        title: "Project Planning",
-        description: "Learn to plan and define project goals and scope.",
-      },
-      {
-        id: "risk_management",
-        title: "Risk Management",
-        description: "Learn to identify and mitigate project risks.",
-      },
-      {
-        id: "agile_methodologies",
-        title: "Agile Methodologies",
-        description: "Learn about Agile project management frameworks.",
-      },
-      {
-        id: "leadership_skills",
-        title: "Leadership Skills",
-        description: "Develop leadership skills for project management.",
-      },
-    ],
-  },
-  ux_ui_design: {
-    title: "UX/UI Design",
-    description: "Learn the principles of user experience and user interface design.",
-    topics: [
-      {
-        id: "user_research",
-        title: "User Research",
-        description: "Learn to conduct user research and gather insights.",
-      },
-      {
-        id: "wireframing_prototyping",
-        title: "Wireframing and Prototyping",
-        description: "Learn to create wireframes and prototypes.",
-      },
-      {
-        id: "ui_design_principles",
-        title: "UI Design Principles",
-        description: "Learn the principles of user interface design.",
-      },
-      {
-        id: "usability_testing",
-        title: "Usability Testing",
-        description: "Learn to conduct usability testing and gather feedback.",
-      },
-    ],
-  },
-  graphic_design: {
-    title: "Graphic Design",
-    description: "Learn the fundamentals of graphic design and visual communication.",
-    topics: [
-      {
-        id: "design_principles",
-        title: "Design Principles",
-        description: "Learn the core principles of graphic design.",
-      },
-      {
-        id: "typography",
-        title: "Typography",
-        description: "Learn the art and technique of typography.",
-      },
-      {
-        id: "color_theory",
-        title: "Color Theory",
-        description: "Learn the principles of color theory and application.",
-      },
-      {
-        id: "adobe_photoshop",
-        title: "Adobe Photoshop",
-        description: "Learn to use Adobe Photoshop for graphic design.",
-      },
-      {
-        id: "adobe_illustrator",
-        title: "Adobe Illustrator",
-        description: "Learn to use Adobe Illustrator for vector graphics.",
-      },
-    ],
-  },
-  digital_marketing: {
-    title: "Digital Marketing",
-    description: "Learn the strategies and techniques of digital marketing.",
-    topics: [
-      {
-        id: "seo",
-        title: "Search Engine Optimization (SEO)",
-        description: "Learn to optimize websites for search engines.",
-      },
-      {
-        id: "social_media_marketing",
-        title: "Social Media Marketing",
-        description: "Learn to market products and services on social media.",
-      },
-      {
-        id: "email_marketing",
-        title: "Email Marketing",
-        description: "Learn to create and manage email marketing campaigns.",
-      },
-      {
-        id: "content_marketing",
-        title: "Content Marketing",
-        description: "Learn to create and distribute valuable content.",
-      },
-      {
-        id: "pay_per_click_advertising",
-        title: "Pay-Per-Click (PPC) Advertising",
-        description: "Learn to run PPC advertising campaigns.",
-      },
-    ],
-  },
-  business_analytics: {
-    title: "Business Analytics",
-    description: "Learn to analyze business data and make informed decisions.",
-    topics: [
-      {
-        id: "data_analysis",
-        title: "Data Analysis",
-        description: "Learn to analyze data using various techniques.",
-      },
-      {
-        id: "data_visualization",
-        title: "Data Visualization",
-        description: "Learn to visualize data using charts and graphs.",
-      },
-      {
-        id: "statistical_analysis",
-        title: "Statistical Analysis",
-        description: "Learn to perform statistical analysis on data.",
-      },
-      {
-        id: "business_intelligence",
-        title: "Business Intelligence (BI)",
-        description: "Learn about business intelligence tools and techniques.",
-      },
-    ],
-  },
-  finance: {
-    title: "Finance",
-    description: "Learn the fundamentals of finance and investment.",
-    topics: [
-      {
-        id: "financial_accounting",
-        title: "Financial Accounting",
-        description: "Learn the principles of financial accounting.",
-      },
-      {
-        id: "investment_management",
-        title: "Investment Management",
-        description: "Learn to manage investments and build portfolios.",
-      },
-      {
-        id: "corporate_finance",
-        title: "Corporate Finance",
-        description: "Learn about corporate finance and financial strategy.",
-      },
-      {
-        id: "financial_modeling",
-        title: "Financial Modeling",
-        description: "Learn to build financial models and forecasts.",
-      },
-    ],
-  },
-  leadership: {
-    title: "Leadership",
-    description: "Develop essential leadership skills and strategies.",
-    topics: [
-      {
-        id: "leadership_theories",
-        title: "Leadership Theories",
-        description: "Explore different leadership theories and styles.",
-      },
-      {
-        id: "team_building",
-        title: "Team Building",
-        description: "Learn to build and manage effective teams.",
-      },
-      {
-        id: "communication_skills",
-        title: "Communication Skills",
-        description: "Improve your communication skills for leadership.",
-      },
-      {
-        id: "conflict_resolution",
-        title: "Conflict Resolution",
-        description: "Learn to resolve conflicts and manage difficult situations.",
-      },
-      {
-        id: "emotional_intelligence",
-        title: "Emotional Intelligence",
-        description: "Develop emotional intelligence for effective leadership.",
-      },
-    ],
-  },
-  personal_development: {
-    title: "Personal Development",
-    description: "Enhance your personal and professional growth.",
-    topics: [
-      {
-        id: "time_management",
-        title: "Time Management",
-        description: "Learn to manage your time effectively.",
-      },
-      {
-        id: "goal_setting",
-        title: "Goal Setting",
-        description: "Learn to set and achieve your goals.",
-      },
-      {
-        id: "stress_management",
-        title: "Stress Management",
-        description: "Learn to manage stress and improve well-being.",
-      },
-      {
-        id: "self_confidence",
-        title: "Self-Confidence",
-        description: "Build self-confidence and overcome self-doubt.",
-      },
-      {
-        id: "public_speaking",
-        title: "Public Speaking",
-        description: "Improve your public speaking skills.",
-      },
-    ],
-  },
-  entrepreneurship: {
-    title: "Entrepreneurship",
-    description: "Learn to start and grow your own business.",
-    topics: [
-      {
-        id: "business_planning",
-        title: "Business Planning",
-        description: "Learn to create a business plan.",
-      },
-      {
-        id: "market_research",
-        title: "Market Research",
-        description: "Learn to conduct market research.",
-      },
-      {
-        id: "startup_funding",
-        title: "Startup Funding",
-        description: "Learn about startup funding options.",
-      },
-      {
-        id: "marketing_strategy",
-        title: "Marketing Strategy",
-        description: "Develop a marketing strategy for your business.",
-      },
-      {
-        id: "sales_techniques",
-        title: "Sales Techniques",
-        description: "Learn effective sales techniques.",
-      },
-    ],
-  },
-  communication_skills: {
-    title: "Communication Skills",
-    description: "Improve your communication skills for personal and professional success.",
-    topics: [
-      {
-        id: "verbal_communication",
-        title: "Verbal Communication",
-        description: "Enhance your verbal communication skills.",
-      },
-      {
-        id: "nonverbal_communication",
-        title: "Nonverbal Communication",
-        description: "Understand nonverbal cues and body language.",
-      },
-      {
-        id: "active_listening",
-        title: "Active Listening",
-        description: "Learn to listen actively and empathetically.",
-      },
-      {
-        id: "presentation_skills",
-        title: "Presentation Skills",
-        description: "Improve your presentation skills.",
-      },
-      {
-        id: "interpersonal_communication",
-        title: "Interpersonal Communication",
-        description: "Enhance your interpersonal communication skills.",
-      },
-    ],
-  },
-  mathematics: {
-    title: "Mathematics",
+  {
+    id: "mathematics",
+    name: "Mathematics",
     description: "Fundamental mathematical concepts and applications",
+    color: "bg-slate-500",
     topics: [
       {
         id: "algebra",
-        title: "Algebra",
+        name: "Algebra",
         description: "Basic algebraic principles and equation solving",
+        questions: [
+          {
+            id: "alg_001",
+            question: "Solve for x: 2x + 5 = 13",
+            marks: 2,
+            modelAnswer: "x = 4",
+            markingCriteria: {
+              breakdown: [
+                "Subtract 5 from both sides: 2x = 8 (1 mark)",
+                "Divide both sides by 2: x = 4 (1 mark)"
+              ]
+            },
+            specReference: "A1.2"
+          }
+        ]
       },
       {
         id: "calculus",
-        title: "Calculus",
+        name: "Calculus",
         description: "Differential and integral calculus",
+        questions: []
       },
       {
         id: "geometry",
-        title: "Geometry",
+        name: "Geometry",
         description: "Euclidean and analytic geometry",
+        questions: []
       },
       {
         id: "linear-algebra",
-        title: "Linear Algebra",
+        name: "Linear Algebra",
         description: "Vectors, matrices, and linear transformations",
+        questions: []
       },
       {
         id: "discrete-mathematics",
-        title: "Discrete Mathematics",
+        name: "Discrete Mathematics",
         description: "Logic, sets, and combinatorics",
+        questions: []
       },
       {
         id: "quadratic-equations",
-        title: "Quadratic Equations",
+        name: "Quadratic Equations",
         description: "Solving quadratic equations using various methods",
+        questions: []
       },
       {
         id: "functions-graphs",
-        title: "Functions and Graphs",
+        name: "Functions and Graphs",
         description: "Understanding functions and their graphical representations",
+        questions: []
       },
       {
         id: "trigonometry",
-        title: "Trigonometry",
+        name: "Trigonometry",
         description: "Trigonometric ratios and their applications",
+        questions: []
       },
       {
         id: "statistics-probability",
-        title: "Statistics and Probability",
+        name: "Statistics and Probability",
         description: "Data analysis and probability calculations",
-      },
-    ],
+        questions: []
+      }
+    ]
   },
-  science: {
-    title: "Science",
+  {
+    id: "science",
+    name: "Science",
     description: "General science knowledge",
+    color: "bg-emerald-500",
     topics: [
       {
         id: "biology",
-        title: "Biology",
+        name: "Biology",
         description: "The study of living organisms",
+        questions: []
       },
       {
         id: "chemistry",
-        title: "Chemistry",
+        name: "Chemistry",
         description: "The study of matter and its properties",
+        questions: []
       },
       {
         id: "physics",
-        title: "Physics",
+        name: "Physics",
         description: "The study of the fundamental laws of nature",
-      },
-    ],
+        questions: []
+      }
+    ]
   },
-  history: {
-    title: "History",
+  {
+    id: "history",
+    name: "History",
     description: "World history",
+    color: "bg-amber-500",
     topics: [
       {
         id: "ancient-history",
-        title: "Ancient History",
+        name: "Ancient History",
         description: "The history of the ancient world",
+        questions: []
       },
       {
         id: "medieval-history",
-        title: "Medieval History",
+        name: "Medieval History",
         description: "The history of the medieval period",
+        questions: []
       },
       {
         id: "modern-history",
-        title: "Modern History",
+        name: "Modern History",
         description: "The history of the modern era",
-      },
-    ],
-  },
-  geography: {
-    title: "Geography",
-    description: "World geography",
-    topics: [
-      {
-        id: "physical-geography",
-        title: "Physical Geography",
-        description: "The study of the Earth's physical features",
-      },
-      {
-        id: "human-geography",
-        title: "Human Geography",
-        description: "The study of human populations and cultures",
-      },
-      {
-        id: "economic-geography",
-        title: "Economic Geography",
-        description: "The study of economic activities and development",
-      },
-    ],
-  },
-  economics: {
-    title: "Economics",
-    description: "Basic economic principles",
-    topics: [
-      {
-        id: "microeconomics",
-        title: "Microeconomics",
-        description: "The study of individual economic behavior",
-      },
-      {
-        id: "macroeconomics",
-        title: "Macroeconomics",
-        description: "The study of the economy as a whole",
-      },
-      {
-        id: "international-economics",
-        title: "International Economics",
-        description: "The study of international trade and finance",
-      },
-    ],
-  },
-  political_science: {
-    title: "Political Science",
-    description: "The study of politics and government",
-    topics: [
-      {
-        id: "political-theory",
-        title: "Political Theory",
-        description: "The study of political ideas and ideologies",
-      },
-      {
-        id: "comparative-politics",
-        title: "Comparative Politics",
-        description: "The study of different political systems",
-      },
-      {
-        id: "international-relations",
-        title: "International Relations",
-        description: "The study of relations between countries",
-      },
-    ],
-  },
-  sociology: {
-    title: "Sociology",
-    description: "The study of society and social behavior",
-    topics: [
-      {
-        id: "social-theory",
-        title: "Social Theory",
-        description: "The study of sociological theories",
-      },
-      {
-        id: "social-inequality",
-        title: "Social Inequality",
-        description: "The study of social inequality and stratification",
-      },
-      {
-        id: "social-change",
-        title: "Social Change",
-        description: "The study of social change and development",
-      },
-    ],
-  },
-  psychology: {
-    title: "Psychology",
-    description: "The study of the human mind and behavior",
-    topics: [
-      {
-        id: "cognitive-psychology",
-        title: "Cognitive Psychology",
-        description: "The study of cognitive processes",
-      },
-      {
-        id: "developmental-psychology",
-        title: "Developmental Psychology",
-        description: "The study of human development across the lifespan",
-      },
-      {
-        id: "social-psychology",
-        title: "Social Psychology",
-        description: "The study of social behavior and attitudes",
-      },
-    ],
-  },
-  philosophy: {
-    title: "Philosophy",
-    description: "The study of fundamental questions about existence, knowledge, and values",
-    topics: [
-      {
-        id: "ethics",
-        title: "Ethics",
-        description: "The study of moral principles and values",
-      },
-      {
-        id: "metaphysics",
-        title: "Metaphysics",
-        description: "The study of the nature of reality",
-      },
-      {
-        id: "epistemology",
-        title: "Epistemology",
-        description: "The study of knowledge and belief",
-      },
-    ],
-  },
-  literature: {
-    title: "Literature",
-    description: "The study of literary works and their cultural context",
-    topics: [
-      {
-        id: "poetry",
-        title: "Poetry",
-        description: "The study of poetry and poetic techniques",
-      },
-      {
-        id: "drama",
-        title: "Drama",
-        description: "The study of dramatic works and performance",
-      },
-      {
-        id: "fiction",
-        title: "Fiction",
-        description: "The study of fictional narratives",
-      },
-    ],
-  },
-  art_history: {
-    title: "Art History",
-    description: "The study of the history of art and visual culture",
-    topics: [
-      {
-        id: "ancient-art",
-        title: "Ancient Art",
-        description: "The art of the ancient world",
-      },
-      {
-        id: "medieval-art",
-        title: "Medieval Art",
-        description: "The art of the medieval period",
-      },
-      {
-        id: "modern-art",
-        title: "Modern Art",
-        description: "The art of the modern era",
-      },
-    ],
-  },
-  music_theory: {
-    title: "Music Theory",
-    description: "The study of the principles and structure of music",
-    topics: [
-      {
-        id: "harmony",
-        title: "Harmony",
-        description: "The study of chords and chord progressions",
-      },
-      {
-        id: "melody",
-        title: "Melody",
-        description: "The study of melodic construction and phrasing",
-      },
-      {
-        id: "rhythm",
-        title: "Rhythm",
-        description: "The study of rhythmic patterns and structures",
-      },
-    ],
-  },
-  physics: {
-    title: "Physics",
-    description: "Fundamental principles governing the universe",
-    topics: [],
-  },
-};
+        questions: []
+      }
+    ]
+  }
+];
