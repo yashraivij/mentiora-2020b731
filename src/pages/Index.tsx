@@ -54,10 +54,10 @@ const Index = () => {
   ];
 
   const stats = [
-    { number: "50,000+", label: "Students Excelling" },
-    { number: "98.4%", label: "Grade Improvement" },
-    { number: "4.2x", label: "Faster Learning" },
-    { number: "24/7", label: "AI Support" }
+    { number: "1000+", label: "Practice Questions" },
+    { number: "3", label: "Core Subjects" },
+    { number: "< 3 sec", label: "AI Response Time" },
+    { number: "100%", label: "Free Access" }
   ];
 
   return (
@@ -110,7 +110,7 @@ const Index = () => {
         <div className="text-center mb-20 lg:mb-32 max-w-4xl mx-auto">
           <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-full text-indigo-700 text-sm font-semibold mb-8 shadow-sm">
             <Sparkles className="h-4 w-4 mr-2 text-indigo-500" />
-            Join 15,000+ Students Achieving Their Dream Grades
+            Revolutionary AI-Powered GCSE Revision Platform
           </div>
           <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-8 leading-tight tracking-tight">
             <span className="text-slate-900">Transform Your</span>
