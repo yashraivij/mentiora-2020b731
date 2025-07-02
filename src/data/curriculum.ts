@@ -1,6 +1,5 @@
-import { StaticImageData } from "next/image";
 
-interface Question {
+export interface Question {
   id: string;
   question: string;
   answer: string;
@@ -8,46 +7,28 @@ interface Question {
   difficulty: "easy" | "medium" | "hard";
 }
 
-interface Topic {
+export interface Topic {
   id: string;
-  title: string;
-  description: string;
-  image?: StaticImageData;
+  name: string;
   questions: Question[];
 }
 
-interface Subject {
-  title: string;
-  description: string;
-  image?: StaticImageData;
+export interface Subject {
+  id: string;
+  name: string;
+  color: string;
   topics: Topic[];
 }
 
-interface Curriculum {
-  web_dev: Subject;
-  data_science: Subject;
-  mobile_dev: Subject;
-  devops: Subject;
-  cybersecurity: Subject;
-  machine_learning: Subject;
-  blockchain: Subject;
-  game_dev: Subject;
-  ui_ux_design: Subject;
-  cloud_computing: Subject;
-  biology: Subject;
-  chemistry: Subject;
-  physics: Subject;
-}
-
-export const curriculum: Curriculum = {
-  web_dev: {
-    title: "Web Development",
-    description: "Learn to build websites and web applications",
+export const curriculum: Subject[] = [
+  {
+    id: "web_dev",
+    name: "Web Development",
+    color: "bg-blue-500",
     topics: [
       {
         id: "html",
-        title: "HTML",
-        description: "Learn the structure of web pages",
+        name: "HTML",
         questions: [
           {
             id: "html_1",
@@ -71,14 +52,14 @@ export const curriculum: Curriculum = {
       },
     ],
   },
-  data_science: {
-    title: "Data Science",
-    description: "Learn to analyze data and make predictions",
+  {
+    id: "data_science",
+    name: "Data Science",
+    color: "bg-green-500",
     topics: [
       {
         id: "python",
-        title: "Python",
-        description: "Learn the basics of Python programming",
+        name: "Python",
         questions: [
           {
             id: "python_1",
@@ -102,14 +83,14 @@ export const curriculum: Curriculum = {
       },
     ],
   },
-  mobile_dev: {
-    title: "Mobile Development",
-    description: "Learn to build mobile applications for iOS and Android",
+  {
+    id: "mobile_dev",
+    name: "Mobile Development",
+    color: "bg-purple-500",
     topics: [
       {
         id: "react_native",
-        title: "React Native",
-        description: "Learn to build mobile apps with React Native",
+        name: "React Native",
         questions: [
           {
             id: "react_native_1",
@@ -133,14 +114,14 @@ export const curriculum: Curriculum = {
       },
     ],
   },
-  devops: {
-    title: "DevOps",
-    description: "Learn to automate the software development process",
+  {
+    id: "devops",
+    name: "DevOps",
+    color: "bg-orange-500",
     topics: [
       {
         id: "docker",
-        title: "Docker",
-        description: "Learn to containerize applications with Docker",
+        name: "Docker",
         questions: [
           {
             id: "docker_1",
@@ -164,14 +145,14 @@ export const curriculum: Curriculum = {
       },
     ],
   },
-  cybersecurity: {
-    title: "Cybersecurity",
-    description: "Learn to protect computer systems and networks from cyber threats",
+  {
+    id: "cybersecurity",
+    name: "Cybersecurity",
+    color: "bg-red-500",
     topics: [
       {
         id: "network_security",
-        title: "Network Security",
-        description: "Learn to secure computer networks",
+        name: "Network Security",
         questions: [
           {
             id: "network_security_1",
@@ -195,14 +176,14 @@ export const curriculum: Curriculum = {
       },
     ],
   },
-  machine_learning: {
-    title: "Machine Learning",
-    description: "Learn to build machine learning models",
+  {
+    id: "machine_learning",
+    name: "Machine Learning",
+    color: "bg-indigo-500",
     topics: [
       {
         id: "supervised_learning",
-        title: "Supervised Learning",
-        description: "Learn to build supervised learning models",
+        name: "Supervised Learning",
         questions: [
           {
             id: "supervised_learning_1",
@@ -226,14 +207,14 @@ export const curriculum: Curriculum = {
       },
     ],
   },
-  blockchain: {
-    title: "Blockchain",
-    description: "Learn about blockchain technology and its applications",
+  {
+    id: "blockchain",
+    name: "Blockchain",
+    color: "bg-yellow-500",
     topics: [
       {
         id: "cryptocurrency",
-        title: "Cryptocurrency",
-        description: "Learn about cryptocurrency and its applications",
+        name: "Cryptocurrency",
         questions: [
           {
             id: "cryptocurrency_1",
@@ -257,14 +238,14 @@ export const curriculum: Curriculum = {
       },
     ],
   },
-  game_dev: {
-    title: "Game Development",
-    description: "Learn to develop video games",
+  {
+    id: "game_dev",
+    name: "Game Development",
+    color: "bg-pink-500",
     topics: [
       {
         id: "unity",
-        title: "Unity",
-        description: "Learn to develop games with Unity",
+        name: "Unity",
         questions: [
           {
             id: "unity_1",
@@ -288,14 +269,14 @@ export const curriculum: Curriculum = {
       },
     ],
   },
-  ui_ux_design: {
-    title: "UI/UX Design",
-    description: "Learn to design user interfaces and user experiences",
+  {
+    id: "ui_ux_design",
+    name: "UI/UX Design",
+    color: "bg-teal-500",
     topics: [
       {
         id: "user_interface",
-        title: "User Interface",
-        description: "Learn to design user interfaces",
+        name: "User Interface",
         questions: [
           {
             id: "user_interface_1",
@@ -319,14 +300,14 @@ export const curriculum: Curriculum = {
       },
     ],
   },
-  cloud_computing: {
-    title: "Cloud Computing",
-    description: "Learn about cloud computing and its applications",
+  {
+    id: "cloud_computing",
+    name: "Cloud Computing",
+    color: "bg-cyan-500",
     topics: [
       {
         id: "aws",
-        title: "AWS",
-        description: "Learn about Amazon Web Services",
+        name: "AWS",
         questions: [
           {
             id: "aws_1",
@@ -350,14 +331,14 @@ export const curriculum: Curriculum = {
       },
     ],
   },
-  biology: {
-    title: "Biology",
-    description: "Study of living organisms and their interactions",
+  {
+    id: "biology",
+    name: "Biology",
+    color: "bg-green-600",
     topics: [
       {
         id: "cells",
-        title: "Cells",
-        description: "The basic unit of life",
+        name: "Cells",
         questions: [
           {
             id: "cell_1",
@@ -381,8 +362,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "genetics",
-        title: "Genetics",
-        description: "The study of heredity and variation",
+        name: "Genetics",
         questions: [
           {
             id: "genetics_1",
@@ -406,8 +386,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "evolution",
-        title: "Evolution",
-        description: "The process of change in the characteristics of a species over several generations",
+        name: "Evolution",
         questions: [
           {
             id: "evolution_1",
@@ -431,8 +410,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "bioenergetics",
-        title: "Bioenergetics",
-        description: "Study of energy flow and transformation in living organisms",
+        name: "Bioenergetics",
         questions: [
           {
             id: "bio_energy_1",
@@ -469,8 +447,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "homeostasis_response",
-        title: "Homeostasis and Response",
-        description: "How organisms maintain internal balance and respond to stimuli",
+        name: "Homeostasis and Response",
         questions: [
           {
             id: "homeo_1",
@@ -512,9 +489,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "inheritance_variation_evolution",
-        title: "Inheritance, Variation, Evolution",
-        description:
-          "Genetic inheritance, variation within species, and evolutionary processes",
+        name: "Inheritance, Variation, Evolution",
         questions: [
           {
             id: "inherit_1",
@@ -557,8 +532,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "ecology",
-        title: "Ecology",
-        description: "Study of organisms and their interactions with the environment",
+        name: "Ecology",
         questions: [
           {
             id: "eco_1",
@@ -600,8 +574,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "biology_key_ideas",
-        title: "Key Ideas",
-        description: "Fundamental concepts and principles in biology",
+        name: "Key Ideas",
         questions: [
           {
             id: "bio_key_1",
@@ -639,15 +612,14 @@ export const curriculum: Curriculum = {
       },
     ],
   },
-
-  chemistry: {
-    title: "Chemistry",
-    description: "Study of matter, its properties, and reactions",
+  {
+    id: "chemistry",
+    name: "Chemistry",
+    color: "bg-blue-600",
     topics: [
       {
         id: "atoms",
-        title: "Atoms",
-        description: "The basic building blocks of matter",
+        name: "Atoms",
         questions: [
           {
             id: "atom_1",
@@ -671,8 +643,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "chemical_reactions",
-        title: "Chemical Reactions",
-        description: "Processes that involve the rearrangement of atoms and molecules",
+        name: "Chemical Reactions",
         questions: [
           {
             id: "reaction_1",
@@ -696,8 +667,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "acids_and_bases",
-        title: "Acids and Bases",
-        description: "Substances that have distinct properties and reactions",
+        name: "Acids and Bases",
         questions: [
           {
             id: "acid_base_1",
@@ -721,8 +691,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "chemical_changes",
-        title: "Chemical Changes",
-        description: "Types of chemical reactions and their characteristics",
+        name: "Chemical Changes",
         questions: [
           {
             id: "chem_change_1",
@@ -765,8 +734,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "energy_changes",
-        title: "Energy Changes",
-        description: "Energy transfers in chemical reactions",
+        name: "Energy Changes",
         questions: [
           {
             id: "energy_1",
@@ -808,8 +776,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "rate_extent_chemical_change",
-        title: "The Rate and Extent of Chemical Change",
-        description: "Factors affecting reaction rates and chemical equilibrium",
+        name: "The Rate and Extent of Chemical Change",
         questions: [
           {
             id: "rate_1",
@@ -851,8 +818,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "organic_chemistry",
-        title: "Organic Chemistry",
-        description: "Study of carbon-based compounds and their reactions",
+        name: "Organic Chemistry",
         questions: [
           {
             id: "organic_1",
@@ -884,8 +850,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "chemical_analysis",
-        title: "Chemical Analysis",
-        description: "Methods for identifying and quantifying chemical substances",
+        name: "Chemical Analysis",
         questions: [
           {
             id: "analysis_1",
@@ -922,8 +887,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "chemistry_atmosphere",
-        title: "Chemistry of the Atmosphere",
-        description: "Composition and reactions in Earth's atmosphere",
+        name: "Chemistry of the Atmosphere",
         questions: [
           {
             id: "atmos_1",
@@ -961,8 +925,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "using_resources",
-        title: "Using Resources",
-        description: "Sustainable use of Earth's resources and recycling",
+        name: "Using Resources",
         questions: [
           {
             id: "resources_1",
@@ -1004,8 +967,7 @@ export const curriculum: Curriculum = {
       },
       {
         id: "chemistry_key_ideas",
-        title: "Key Ideas",
-        description: "Fundamental concepts and principles in chemistry",
+        name: "Key Ideas",
         questions: [
           {
             id: "chem_key_1",
@@ -1047,15 +1009,14 @@ export const curriculum: Curriculum = {
       },
     ],
   },
-
-  physics: {
-    title: "Physics",
-    description: "Study of matter, energy, and their interactions",
+  {
+    id: "physics",
+    name: "Physics",
+    color: "bg-purple-600",
     topics: [
       {
         id: "mechanics",
-        title: "Mechanics",
-        description: "Motion, forces, and energy",
+        name: "Mechanics",
         questions: [
           {
             id: "mech_1",
@@ -1080,4 +1041,4 @@ export const curriculum: Curriculum = {
       },
     ],
   },
-};
+];
