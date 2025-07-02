@@ -589,193 +589,86 @@ export const curriculum: Subject[] = [
             specReference: 'AQA Biology B3.10'
           }
         ]
-      },
-     {
-  id: 'b4-bioenergetics',
-  name: 'B4 Bioenergetics',
-  questions: [
+      }{
+  "id": "b4-bioenergetics",
+  "name": "B4 Bioenergetics",
+  "questions": [
     {
-      id: 'b4-q1',
-      question: 'Describe the role of ATP in cellular processes. (3 marks)',
-      marks: 3,
-      modelAnswer: 'ATP (Adenosine Triphosphate) is a molecule that provides energy for various cellular processes. It is produced during cellular respiration and is broken down to release energy, which is then used to drive other reactions. ATP is often referred to as the \'energy currency\' of the cell.',
-      markingCriteria: {
-        ao1: 2,
-        ao2: 1,
-        ao3: 0,
-        breakdown: [
-          'AO1 (1): Definition of ATP',
-          'AO1 (1): Role of ATP in cellular processes',
-          'AO2 (1): Explanation of ATP as energy currency'
+      "id": "b4-q1",
+      "question": "Describe the role of ATP in cellular processes. (3 marks)",
+      "marks": 3,
+      "modelAnswer": "ATP (Adenosine Triphosphate) is a molecule that provides energy for various cellular processes. It is produced during cellular respiration and is broken down to release energy, which is then used to drive other reactions. ATP is often referred to as the 'energy currency' of the cell.",
+      "markingCriteria": {
+        "ao1": 2,
+        "ao2": 1,
+        "ao3": 0,
+        "breakdown": [
+          "AO1 (1): Definition of ATP",
+          "AO1 (1): Role of ATP in cellular processes",
+          "AO2 (1): Explanation of ATP as energy currency"
         ]
       },
-      specReference: 'AQA Biology B4.1'
+      "specReference": "AQA Biology B4.1"
     },
     {
-      id: 'b4-q2',
-      question: 'Explain the overall process of photosynthesis, including the reactants and products. (4 marks)',
-      marks: 4,
-      modelAnswer: 'Photosynthesis is the process by which green plants and some other organisms use sunlight to synthesize foods with the help of chlorophyll. It converts light energy into chemical energy. The reactants are carbon dioxide and water, and the products are glucose (food) and oxygen. The overall equation is $6CO_2 + 6H_2O \\xrightarrow{light \\ energy} C_6H_{12}O_6 + 6O_2$.',
-      markingCriteria: {
-        ao1: 2,
-        ao2: 2,
-        ao3: 0,
-        breakdown: [
-          'AO1 (1): Defines photosynthesis as converting light to chemical energy.',
-          'AO1 (1): Lists correct reactants and products.',
-          'AO2 (1): Mentions chlorophyll.',
-          'AO2 (1): Provides or implies the overall balanced equation.'
+      "id": "b4-q2",
+      "question": "Explain the difference between aerobic and anaerobic respiration. (4 marks)",
+      "marks": 4,
+      "modelAnswer": "Aerobic respiration occurs in the presence of oxygen and produces a large amount of ATP (36-38 molecules) per glucose molecule. Anaerobic respiration occurs in the absence of oxygen and produces a small amount of ATP (2 molecules) per glucose molecule. Aerobic respiration takes place in the mitochondria, while anaerobic respiration takes place in the cytoplasm.",
+      "markingCriteria": {
+        "ao1": 2,
+        "ao2": 2,
+        "ao3": 0,
+        "breakdown": [
+          "AO1 (1): Definition of aerobic respiration",
+          "AO1 (1): Definition of anaerobic respiration",
+          "AO2 (1): Comparison of ATP yield",
+          "AO2 (1): Comparison of location"
         ]
       },
-      specReference: 'AQA Biology B4.2'
+      "specReference": "AQA Biology B4.2"
     },
     {
-      id: 'b4-q3',
-      question: 'Describe the inverse relationship between light intensity and the rate of photosynthesis. (3 marks)',
-      marks: 3,
-      modelAnswer: 'As light intensity increases, the rate of photosynthesis generally increases up to a certain point (saturation point) because more light energy is available to drive the reaction. However, beyond this point, other factors like carbon dioxide concentration or temperature become limiting, and further increases in light intensity will not increase the rate of photosynthesis. Conversely, if light intensity decreases, the rate of photosynthesis will also decrease.',
-      markingCriteria: {
-        ao1: 1,
-        ao2: 1,
-        ao3: 1,
-        breakdown: [
-          'AO1 (1): States direct relationship up to a point.',
-          'AO2 (1): Explains why rate increases (more energy for reactions).',
-          'AO3 (1): Mentions limiting factors or saturation point.'
+      "id": "b4-q3",
+      "question": "Describe the structure of a mitochondrion and explain its role in cellular respiration. (5 marks)",
+      "marks": 5,
+      "modelAnswer": "A mitochondrion has a double membrane structure, with the inner membrane folded into cristae. The mitochondrion is the site of aerobic respiration, where glucose is broken down to produce ATP. The cristae increase the surface area for cellular respiration, allowing for more efficient energy production.",
+      "markingCriteria": {
+        "ao1": 2,
+        "ao2": 2,
+        "ao3": 1,
+        "breakdown": [
+          "AO1 (1): Description of mitochondrion structure",
+          "AO1 (1): Role of mitochondrion in cellular respiration",
+          "AO2 (1): Explanation of cristae",
+          "AO2 (1): Link between structure and function",
+          "AO3 (1): Importance of mitochondria in energy production"
         ]
       },
-      specReference: 'AQA Biology B4.3'
+      "specReference": "AQA Biology B4.3"
     },
     {
-      id: 'b4-q4',
-      question: 'Explain why carbon dioxide concentration is a limiting factor for photosynthesis. (4 marks)',
-      marks: 4,
-      modelAnswer: 'Carbon dioxide is a reactant in photosynthesis, providing the carbon atoms needed to produce glucose. If carbon dioxide concentration is too low, even with optimal light and temperature, the rate of photosynthesis will be limited because there aren\'t enough raw materials. Increasing the carbon dioxide concentration will directly increase the rate of photosynthesis until another factor becomes limiting.',
-      markingCriteria: {
-        ao1: 2,
-        ao2: 2,
-        ao3: 0,
-        breakdown: [
-          'AO1 (1): States CO2 is a reactant.',
-          'AO1 (1): States it provides carbon for glucose.',
-          'AO2 (1): Explains low CO2 restricts glucose production.',
-          'AO2 (1): Mentions it becomes limiting when other factors are optimal.'
+      "id": "b4-q4",
+      "question": "Explain the process of glycolysis and its importance in cellular respiration. (4 marks)",
+      "marks": 4,
+      "modelAnswer": "Glycolysis is the first stage of cellular respiration, where glucose is broken down into pyruvate, producing a small amount of ATP and NADH. Glycolysis occurs in the cytoplasm and is an anaerobic process. It is important because it provides energy for the cell and produces pyruvate, which can be further broken down in the mitochondria.",
+      "markingCriteria": {
+        "ao1": 2,
+        "ao2": 2,
+        "ao3": 0,
+        "breakdown": [
+          "AO1 (1): Definition of glycolysis",
+          "AO1 (1): Products of glycolysis",
+          "AO2 (1): Importance of glycolysis in energy production",
+          "AO2 (1): Link to further breakdown of pyruvate"
         ]
       },
-      specReference: 'AQA Biology B4.4'
+      "specReference": "AQA Biology B4.4"
     },
-    {
-      id: 'b4-q5',
-      question: 'Describe the process of aerobic respiration, including its word equation. (5 marks)',
-      marks: 5,
-      modelAnswer: 'Aerobic respiration is the process of releasing energy from glucose in the presence of oxygen. It occurs primarily in the mitochondria of cells. Glucose is completely broken down to release a large amount of energy, producing carbon dioxide and water as waste products. The word equation is Glucose + Oxygen $\\rightarrow$ Carbon dioxide + Water (+ Energy).',
-      markingCriteria: {
-        ao1: 2,
-        ao2: 2,
-        ao3: 1,
-        breakdown: [
-          'AO1 (1): States energy release from glucose and oxygen.',
-          'AO1 (1): States products are CO2 and water.',
-          'AO2 (1): Mentions mitochondria as the site.',
-          'AO2 (1): Explains complete breakdown and large energy release.',
-          'AO3 (1): Provides the correct word equation.'
-        ]
-      },
-      specReference: 'AQA Biology B4.5'
-    },
-    {
-      id: 'b4-q6',
-      question: 'Compare aerobic and anaerobic respiration in terms of oxygen requirement and energy yield. (4 marks)',
-      marks: 4,
-      modelAnswer: 'Aerobic respiration requires oxygen, whereas anaerobic respiration occurs in the absence of oxygen. Aerobic respiration produces a much larger amount of ATP (energy) per molecule of glucose because glucose is completely broken down. Anaerobic respiration, in contrast, produces far less ATP because glucose is incompletely broken down (e.g., to lactic acid in animals or ethanol and carbon dioxide in yeast).',
-      markingCriteria: {
-        ao1: 2,
-        ao2: 2,
-        ao3: 0,
-        breakdown: [
-          'AO1 (1): Compares oxygen requirement.',
-          'AO1 (1): Compares energy yield (more vs. less ATP).',
-          'AO2 (1): Explains complete vs. incomplete breakdown.',
-          'AO2 (1): Mentions specific products of anaerobic respiration.'
-        ]
-      },
-      specReference: 'AQA Biology B4.6'
-    },
-    {
-      id: 'b4-q7',
-      question: 'Describe the practical investigation to show that yeast respires anaerobically. (6 marks)',
-      marks: 6,
-      modelAnswer: 'Set up a boiling tube containing glucose solution and yeast. Place a layer of oil on top to prevent oxygen from entering and ensure anaerobic conditions. Connect a delivery tube from the boiling tube to another test tube containing limewater. Incubate the setup at a suitable warm temperature (e.g., 25-30°C). As yeast respires anaerobically, it produces carbon dioxide, which will bubble through the limewater, turning it cloudy, indicating CO2 production.',
-      markingCriteria: {
-        ao1: 3,
-        ao2: 2,
-        ao3: 1,
-        breakdown: [
-          'AO1 (1): Mentions glucose and yeast setup.',
-          'AO1 (1): Mentions oil layer for anaerobic conditions.',
-          'AO1 (1): Mentions limewater for CO2 detection.',
-          'AO2 (1): Explains incubation at warm temperature.',
-          'AO2 (1): Explains limewater turning cloudy indicates CO2.',
-          'AO3 (1): Links observations to anaerobic respiration.'
-        ]
-      },
-      specReference: 'AQA Biology B4.7'
-    },
-    {
-      id: 'b4-q8',
-      question: 'Explain what happens to lactic acid produced during anaerobic respiration in humans. (3 marks)',
-      marks: 3,
-      modelAnswer: 'During strenuous exercise, when oxygen supply is insufficient, muscles respire anaerobically, producing lactic acid. Lactic acid builds up in muscles, causing fatigue and an oxygen debt. After exercise, lactic acid is transported by the blood to the liver, where it is converted back into glucose or broken down with oxygen to carbon dioxide and water.',
-      markingCriteria: {
-        ao1: 1,
-        ao2: 1,
-        ao3: 1,
-        breakdown: [
-          'AO1 (1): States lactic acid produced in muscles during anaerobic respiration.',
-          'AO2 (1): Explains transport to liver and conversion back to glucose/breakdown.',
-          'AO3 (1): Links to oxygen debt or fatigue.'
-        ]
-      },
-      specReference: 'AQA Biology B4.8'
-    },
-    {
-      id: 'b4-q9',
-      question: 'Describe how light intensity can be measured and controlled in an experiment investigating photosynthesis. (4 marks)',
-      marks: 4,
-      modelAnswer: 'Light intensity can be measured using a light meter. To control it, a light source can be placed at varying distances from the plant, ensuring that only light intensity changes. The inverse square law ($I \\propto 1/d^2$) can be used to calculate relative light intensity. A heat shield (e.g., a beaker of water) should be placed between the light source and the plant to prevent temperature changes from affecting the results.',
-      markingCriteria: {
-        ao1: 2,
-        ao2: 2,
-        ao3: 0,
-        breakdown: [
-          'AO1 (1): Mentions light meter.',
-          'AO1 (1): Mentions varying distance from light source.',
-          'AO2 (1): Explains use of inverse square law or heat shield.',
-          'AO2 (1): Explains control for extraneous variables.'
-        ]
-      },
-      specReference: 'AQA Biology B4.9'
-    },
-    {
-      id: 'b4-q10',
-      question: 'Explain the concept of an "oxygen debt" after intense exercise. (4 marks)',
-      marks: 4,
-      modelAnswer: 'An oxygen debt is the amount of extra oxygen needed after exercise to remove the accumulated lactic acid and replenish oxygen stores in the body. During intense exercise, muscles switch to anaerobic respiration, producing lactic acid. This lactic acid needs to be oxidized (broken down using oxygen) or converted back to glucose in the liver. The increased breathing rate and heart rate after exercise are mechanisms to repay this oxygen debt.',
-      markingCriteria: {
-        ao1: 1,
-        ao2: 2,
-        ao3: 1,
-        breakdown: [
-          'AO1 (1): Defines oxygen debt as extra oxygen needed post-exercise.',
-          'AO2 (1): Explains need to break down lactic acid.',
-          'AO2 (1): Mentions replenishing oxygen stores.',
-          'AO3 (1): Links to increased breathing/heart rate after exercise.'
-        ]
-      },
-      specReference: 'AQA Biology B4.10'
-    }
-  ]
-}
+
+      
+    ]
+  },
   {
     id: 'maths',
     name: 'Mathematics',
