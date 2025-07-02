@@ -589,7 +589,8 @@ export const curriculum: Subject[] = [
             specReference: 'AQA Biology B3.10'
           }
         ]
-      }{
+      },
+      {
   "id": "b4-bioenergetics",
   "name": "B4 Bioenergetics",
   "questions": [
