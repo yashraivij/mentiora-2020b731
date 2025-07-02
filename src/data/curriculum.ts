@@ -775,8 +775,8 @@ export const curriculum: Subject[] = [
       specReference: 'AQA Biology B4.10'
     }
   ]
-},
-  
+}
+  {
     id: 'maths',
     name: 'Mathematics',
     color: 'bg-blue-500',
