@@ -8,6 +8,16 @@ import { Progress } from "@/components/ui/progress";
 import { curriculum, Question, Topic, Subject } from "@/data/curriculum";
 import { CheckCircle, XCircle, Clock, ArrowRight } from "lucide-react";
 
+// Fisher-Yates shuffle algorithm to randomize array
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 const Practice = () => {
   const { subjectId, topicId } = useParams();
   const navigate = useNavigate();
@@ -16,10 +26,18 @@ const Practice = () => {
   const [showResults, setShowResults] = useState(false);
   const [timeSpent, setTimeSpent] = useState(0);
   const [startTime] = useState(Date.now());
+  const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
 
   // Find the current subject and topic
   const subject = curriculum.find((s: Subject) => s.id === subjectId);
   const topic = subject?.topics.find((t: Topic) => t.id === topicId);
+
+  // Shuffle questions when component loads
+  useEffect(() => {
+    if (topic?.questions) {
+      setShuffledQuestions(shuffleArray(topic.questions));
+    }
+  }, [topic]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,15 +62,16 @@ const Practice = () => {
     );
   }
 
-  const currentQuestion = topic.questions[currentQuestionIndex];
-  const progress = ((currentQuestionIndex + 1) / topic.questions.length) * 100;
+  // Use shuffled questions instead of original order
+  const currentQuestion = shuffledQuestions[currentQuestionIndex];
+  const progress = ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100;
 
   const handleAnswer = (answer: string) => {
     const newAnswers = [...userAnswers];
     newAnswers[currentQuestionIndex] = answer;
     setUserAnswers(newAnswers);
 
-    if (currentQuestionIndex < topic.questions.length - 1) {
+    if (currentQuestionIndex < shuffledQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       setShowResults(true);
@@ -61,7 +80,7 @@ const Practice = () => {
 
   const calculateScore = () => {
     let correct = 0;
-    topic.questions.forEach((question: Question, index: number) => {
+    shuffledQuestions.forEach((question: Question, index: number) => {
       if (userAnswers[index] === question.answer) {
         correct++;
       }
@@ -75,9 +94,22 @@ const Practice = () => {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
+  // Don't render anything until questions are shuffled
+  if (shuffledQuestions.length === 0) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <Card>
+          <CardContent className="p-8 text-center">
+            <p>Loading questions...</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   if (showResults) {
     const score = calculateScore();
-    const percentage = Math.round((score / topic.questions.length) * 100);
+    const percentage = Math.round((score / shuffledQuestions.length) * 100);
 
     return (
       <div className="container mx-auto px-4 py-8">
@@ -94,7 +126,7 @@ const Practice = () => {
                 {percentage}%
               </div>
               <div className="text-xl">
-                {score} out of {topic.questions.length} correct
+                {score} out of {shuffledQuestions.length} correct
               </div>
               <div className="flex items-center justify-center gap-2 text-muted-foreground">
                 <Clock className="h-4 w-4" />
@@ -103,7 +135,7 @@ const Practice = () => {
             </div>
 
             <div className="space-y-4">
-              {topic.questions.map((question: Question, index: number) => {
+              {shuffledQuestions.map((question: Question, index: number) => {
                 const userAnswer = userAnswers[index];
                 const isCorrect = userAnswer === question.answer;
                 
@@ -146,6 +178,8 @@ const Practice = () => {
                   setCurrentQuestionIndex(0);
                   setUserAnswers([]);
                   setShowResults(false);
+                  // Shuffle questions again for new practice session
+                  setShuffledQuestions(shuffleArray(topic.questions));
                 }}
                 className="flex-1"
               >
@@ -179,7 +213,7 @@ const Practice = () => {
               {formatTime(timeSpent)}
             </div>
             <Badge variant="outline">
-              Question {currentQuestionIndex + 1} of {topic.questions.length}
+              Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
             </Badge>
           </div>
         </div>
