@@ -589,7 +589,84 @@ export const curriculum: Subject[] = [
             specReference: 'AQA Biology B3.10'
           }
         ]
-      }
+      }{
+  "id": "b4-bioenergetics",
+  "name": "B4 Bioenergetics",
+  "questions": [
+    {
+      "id": "b4-q1",
+      "question": "Describe the role of ATP in cellular processes. (3 marks)",
+      "marks": 3,
+      "modelAnswer": "ATP (Adenosine Triphosphate) is a molecule that provides energy for various cellular processes. It is produced during cellular respiration and is broken down to release energy, which is then used to drive other reactions. ATP is often referred to as the 'energy currency' of the cell.",
+      "markingCriteria": {
+        "ao1": 2,
+        "ao2": 1,
+        "ao3": 0,
+        "breakdown": [
+          "AO1 (1): Definition of ATP",
+          "AO1 (1): Role of ATP in cellular processes",
+          "AO2 (1): Explanation of ATP as energy currency"
+        ]
+      },
+      "specReference": "AQA Biology B4.1"
+    },
+    {
+      "id": "b4-q2",
+      "question": "Explain the difference between aerobic and anaerobic respiration. (4 marks)",
+      "marks": 4,
+      "modelAnswer": "Aerobic respiration occurs in the presence of oxygen and produces a large amount of ATP (36-38 molecules) per glucose molecule. Anaerobic respiration occurs in the absence of oxygen and produces a small amount of ATP (2 molecules) per glucose molecule. Aerobic respiration takes place in the mitochondria, while anaerobic respiration takes place in the cytoplasm.",
+      "markingCriteria": {
+        "ao1": 2,
+        "ao2": 2,
+        "ao3": 0,
+        "breakdown": [
+          "AO1 (1): Definition of aerobic respiration",
+          "AO1 (1): Definition of anaerobic respiration",
+          "AO2 (1): Comparison of ATP yield",
+          "AO2 (1): Comparison of location"
+        ]
+      },
+      "specReference": "AQA Biology B4.2"
+    },
+    {
+      "id": "b4-q3",
+      "question": "Describe the structure of a mitochondrion and explain its role in cellular respiration. (5 marks)",
+      "marks": 5,
+      "modelAnswer": "A mitochondrion has a double membrane structure, with the inner membrane folded into cristae. The mitochondrion is the site of aerobic respiration, where glucose is broken down to produce ATP. The cristae increase the surface area for cellular respiration, allowing for more efficient energy production.",
+      "markingCriteria": {
+        "ao1": 2,
+        "ao2": 2,
+        "ao3": 1,
+        "breakdown": [
+          "AO1 (1): Description of mitochondrion structure",
+          "AO1 (1): Role of mitochondrion in cellular respiration",
+          "AO2 (1): Explanation of cristae",
+          "AO2 (1): Link between structure and function",
+          "AO3 (1): Importance of mitochondria in energy production"
+        ]
+      },
+      "specReference": "AQA Biology B4.3"
+    },
+    {
+      "id": "b4-q4",
+      "question": "Explain the process of glycolysis and its importance in cellular respiration. (4 marks)",
+      "marks": 4,
+      "modelAnswer": "Glycolysis is the first stage of cellular respiration, where glucose is broken down into pyruvate, producing a small amount of ATP and NADH. Glycolysis occurs in the cytoplasm and is an anaerobic process. It is important because it provides energy for the cell and produces pyruvate, which can be further broken down in the mitochondria.",
+      "markingCriteria": {
+        "ao1": 2,
+        "ao2": 2,
+        "ao3": 0,
+        "breakdown": [
+          "AO1 (1): Definition of glycolysis",
+          "AO1 (1): Products of glycolysis",
+          "AO2 (1): Importance of glycolysis in energy production",
+          "AO2 (1): Link to further breakdown of pyruvate"
+        ]
+      },
+      "specReference": "AQA Biology B4.4"
+    },
+
+      
     ]
   },
   {
