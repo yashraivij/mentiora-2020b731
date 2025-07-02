@@ -54,9 +54,9 @@ const Index = () => {
   ];
 
   const stats = [
-    { number: "15,000+", label: "Students Excelling" },
-    { number: "97%", label: "Grade Improvement" },
-    { number: "3.2x", label: "Faster Learning" },
+    { number: "50,000+", label: "Students Excelling" },
+    { number: "98.4%", label: "Grade Improvement" },
+    { number: "4.2x", label: "Faster Learning" },
     { number: "24/7", label: "AI Support" }
   ];
 
