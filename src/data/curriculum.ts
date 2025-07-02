@@ -589,7 +589,28 @@ export const curriculum: Subject[] = [
             specReference: 'AQA Biology B3.10'
           }
         ]
-      }
+      },
+      {
+  id: 'b4-bioenergetics',
+  name: 'B4 Bioenergetics',
+  questions: [
+    {
+      id: 'b4-q1',
+      question: 'Describe the role of ATP in cellular processes. (3 marks)',
+      marks: 3,
+      modelAnswer: 'ATP (Adenosine Triphosphate) is a molecule that provides energy for various cellular processes. It is produced during cellular respiration and is broken down to release energy, which is then used to drive other reactions. ATP is often referred to as the \'energy currency\' of the cell.',
+      markingCriteria: {
+        ao1: 2,
+        ao2: 1,
+        ao3: 0,
+        breakdown: [
+          'AO1 (1): Definition of ATP',
+          'AO1 (1): Role of ATP in cellular processes',
+          'AO2 (1): Explanation of ATP as energy currency'
+        ]
+      },
+      specReference: 'AQA Biology B4.1'
+    },
     ]
   },
   {
