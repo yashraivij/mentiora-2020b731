@@ -45,15 +45,21 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg"></div>
-            <h1 className="text-2xl font-bold text-slate-900">Mentiora</h1>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50/30 flex items-center justify-center p-4">
+      <Card className="w-full max-w-md shadow-xl border-0">
+        <CardHeader className="text-center pb-8">
+          <div className="flex items-center justify-center space-x-3 mb-6">
+            <div className="w-10 h-10 flex items-center justify-center">
+              <img 
+                src="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png" 
+                alt="Mentiora Logo" 
+                className="w-8 h-8 object-contain"
+              />
+            </div>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Mentiora</h1>
           </div>
-          <CardTitle>Create Account</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-2xl">Create Account</CardTitle>
+          <CardDescription className="text-base">
             Start your personalized GCSE revision journey
           </CardDescription>
         </CardHeader>
@@ -68,6 +74,7 @@ const Register = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
+                className="h-11"
               />
             </div>
             <div className="space-y-2">
@@ -79,6 +86,7 @@ const Register = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                className="h-11"
               />
             </div>
             <div className="space-y-2">
@@ -90,6 +98,7 @@ const Register = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                className="h-11"
               />
             </div>
             <div className="space-y-2">
@@ -101,20 +110,21 @@ const Register = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
+                className="h-11"
               />
             </div>
             <Button 
               type="submit" 
-              className="w-full bg-blue-600 hover:bg-blue-700" 
+              className="w-full h-11 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200" 
               disabled={isLoading}
             >
               {isLoading ? "Creating Account..." : "Create Account"}
             </Button>
           </form>
-          <div className="mt-4 text-center">
+          <div className="mt-6 text-center">
             <p className="text-sm text-slate-600">
               Already have an account?{" "}
-              <Link to="/login" className="text-blue-600 hover:underline">
+              <Link to="/login" className="text-indigo-600 hover:text-purple-600 font-medium hover:underline">
                 Sign in here
               </Link>
             </p>
