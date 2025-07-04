@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Brain, Zap, Target, Award, ArrowRight, Star, Sparkles, Trophy } from "lucide-react";
+import { Brain, Zap, Target, Award, ArrowRight, Star, Sparkles, Trophy, Play, BookOpen, BarChart3 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -13,22 +13,48 @@ const Index = () => {
     {
       icon: Brain,
       title: "AI-Powered Insights",
-      description: "Advanced algorithms analyze your performance and deliver personalized learning pathways"
+      description: "Advanced algorithms analyze your performance and deliver personalized learning pathways",
+      gradient: "from-blue-500 to-cyan-500",
+      bgGradient: "from-blue-50 to-cyan-50"
     },
     {
       icon: Zap,
       title: "Instant Expert Feedback",
-      description: "Get detailed explanations and improvement strategies within seconds of answering"
+      description: "Get detailed explanations and improvement strategies within seconds of answering",
+      gradient: "from-purple-500 to-pink-500",
+      bgGradient: "from-purple-50 to-pink-50"
     },
     {
       icon: Target,
       title: "Exam-Perfect Questions",
-      description: "Practice with authentic AQA GCSE questions vetted by top examiners and teachers"
+      description: "Practice with authentic AQA GCSE questions vetted by top examiners and teachers",
+      gradient: "from-emerald-500 to-teal-500",
+      bgGradient: "from-emerald-50 to-teal-50"
     },
     {
       icon: Award,
       title: "Grade Prediction Engine",
-      description: "Sophisticated analytics predict your exam performance and guide you to A* success"
+      description: "Sophisticated analytics predict your exam performance and guide you to A* success",
+      gradient: "from-orange-500 to-red-500",
+      bgGradient: "from-orange-50 to-red-50"
+    }
+  ];
+
+  const howItWorks = [
+    {
+      icon: Play,
+      title: "Start Practicing",
+      description: "Choose your subject and begin with AI-curated questions tailored to your level"
+    },
+    {
+      icon: BookOpen,
+      title: "Get Instant Feedback",
+      description: "Receive detailed explanations and personalized tips for every answer you submit"
+    },
+    {
+      icon: BarChart3,
+      title: "Track Your Progress",
+      description: "Watch your performance improve with detailed analytics and grade predictions"
     }
   ];
 
@@ -54,10 +80,10 @@ const Index = () => {
   ];
 
   const stats = [
-    { number: "1000+", label: "Expert-Curated Questions" },
-    { number: "< 2 sec", label: "AI Response Time" },
+    { number: "1000+", label: "Practice Questions" },
+    { number: "< 3 sec", label: "AI Response Time" },
     { number: "3", label: "Core GCSE Subjects" },
-    { number: "100%", label: "Free Forever" }
+    { number: "100%", label: "Free Access" }
   ];
 
   return (
@@ -127,7 +153,7 @@ const Index = () => {
             size="lg"
             className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-10 py-4 text-xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 rounded-2xl"
           >
-            Start Your Journey to A*
+            Get Your A* Now - 100% Free
             <ArrowRight className="ml-3 h-6 w-6" />
           </Button>
         </div>
@@ -142,6 +168,25 @@ const Index = () => {
           ))}
         </div>
 
+        {/* How It Works */}
+        <div className="mb-20 lg:mb-24">
+          <div className="text-center mb-16">
+            <h3 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6 tracking-tight">How It Works</h3>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">Get started in three simple steps and watch your grades soar</p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {howItWorks.map((step, index) => (
+              <div key={index} className="text-center">
+                <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-3xl flex items-center justify-center mb-6 shadow-lg mx-auto">
+                  <step.icon className="h-10 w-10 text-white" />
+                </div>
+                <div className="text-xl font-bold text-slate-900 mb-4">{step.title}</div>
+                <p className="text-slate-600 text-lg leading-relaxed">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Premium Features */}
         <div className="mb-20 lg:mb-24">
           <div className="text-center mb-16">
@@ -150,9 +195,9 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {features.map((feature, index) => (
-              <Card key={index} className="p-8 border-2 border-slate-200 shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-br from-white to-slate-50/50 hover:border-indigo-300 group rounded-2xl">
+              <Card key={index} className={`p-8 border-2 border-slate-200 shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-br ${feature.bgGradient} hover:border-indigo-300 group rounded-2xl`}>
                 <CardContent className="p-0">
-                  <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <div className={`w-16 h-16 bg-gradient-to-br ${feature.gradient} rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                     <feature.icon className="h-8 w-8 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-4">{feature.title}</h3>
@@ -202,7 +247,7 @@ const Index = () => {
               size="lg"
               className="bg-white text-slate-900 hover:bg-slate-100 px-10 py-4 text-xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 rounded-2xl"
             >
-              Claim Your Free Access
+              Unlock Your Potential - Start Free
               <Trophy className="ml-3 h-6 w-6" />
             </Button>
           </div>
