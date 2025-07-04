@@ -3,106 +3,76 @@ export interface Subject {
   id: string;
   name: string;
   color: string;
-  topics: Topic[];
+  topics: {
+    id: string;
+    name: string;
+  }[];
 }
 
-export interface Topic {
-  id: string;
-  name: string;
-  questions: Question[];
-}
-
-export interface Question {
-  id: string;
-  question: string;
-  type: 'multiple-choice' | 'short-answer' | 'essay';
-  options?: string[];
-  correctAnswer?: string | number;
-  explanation?: string;
-  difficulty: 'easy' | 'medium' | 'hard';
-  marks: number;
-}
-
-export const subjects: Subject[] = [
+export const curriculum: Subject[] = [
   {
-    id: 'mathematics',
-    name: 'Mathematics',
-    color: 'bg-blue-500',
+    id: "mathematics",
+    name: "Mathematics",
+    color: "bg-blue-500",
     topics: [
-      {
-        id: 'algebra',
-        name: 'Algebra',
-        questions: [
-          {
-            id: 'alg1',
-            question: 'Solve for x: 2x + 5 = 13',
-            type: 'short-answer',
-            correctAnswer: '4',
-            explanation: 'Subtract 5 from both sides: 2x = 8, then divide by 2: x = 4',
-            difficulty: 'easy',
-            marks: 2
-          }
-        ]
-      },
-      {
-        id: 'geometry',
-        name: 'Geometry',
-        questions: [
-          {
-            id: 'geo1',
-            question: 'What is the area of a circle with radius 5cm?',
-            type: 'multiple-choice',
-            options: ['25π cm²', '10π cm²', '5π cm²', '15π cm²'],
-            correctAnswer: 0,
-            explanation: 'Area = πr² = π × 5² = 25π cm²',
-            difficulty: 'medium',
-            marks: 3
-          }
-        ]
-      }
+      { id: "algebra", name: "Algebra" },
+      { id: "geometry", name: "Geometry" },
+      { id: "statistics", name: "Statistics" },
+      { id: "probability", name: "Probability" },
+      { id: "trigonometry", name: "Trigonometry" },
+      { id: "calculus", name: "Calculus" }
     ]
   },
   {
-    id: 'english',
-    name: 'English Language',
-    color: 'bg-green-500',
+    id: "english",
+    name: "English Language",
+    color: "bg-emerald-500",
     topics: [
-      {
-        id: 'comprehension',
-        name: 'Reading Comprehension',
-        questions: [
-          {
-            id: 'comp1',
-            question: 'Read the passage and identify the main theme.',
-            type: 'essay',
-            explanation: 'Look for recurring ideas and the central message the author conveys.',
-            difficulty: 'medium',
-            marks: 6
-          }
-        ]
-      }
+      { id: "reading-comprehension", name: "Reading Comprehension" },
+      { id: "creative-writing", name: "Creative Writing" },
+      { id: "grammar", name: "Grammar" },
+      { id: "poetry-analysis", name: "Poetry Analysis" },
+      { id: "essay-writing", name: "Essay Writing" },
+      { id: "speech-language", name: "Speech & Language" }
     ]
   },
   {
-    id: 'science',
-    name: 'Combined Science',
-    color: 'bg-purple-500',
+    id: "science",
+    name: "Science",
+    color: "bg-purple-500",
     topics: [
-      {
-        id: 'biology',
-        name: 'Biology',
-        questions: [
-          {
-            id: 'bio1',
-            question: 'What is photosynthesis?',
-            type: 'short-answer',
-            correctAnswer: 'The process by which plants make food using sunlight, carbon dioxide, and water',
-            explanation: 'Photosynthesis converts light energy into chemical energy stored in glucose.',
-            difficulty: 'easy',
-            marks: 4
-          }
-        ]
-      }
+      { id: "biology", name: "Biology" },
+      { id: "chemistry", name: "Chemistry" },
+      { id: "physics", name: "Physics" },
+      { id: "earth-science", name: "Earth Science" },
+      { id: "environmental-science", name: "Environmental Science" },
+      { id: "scientific-method", name: "Scientific Method" }
+    ]
+  },
+  {
+    id: "history",
+    name: "History",
+    color: "bg-amber-500",
+    topics: [
+      { id: "world-wars", name: "World Wars" },
+      { id: "british-history", name: "British History" },
+      { id: "ancient-civilizations", name: "Ancient Civilizations" },
+      { id: "industrial-revolution", name: "Industrial Revolution" },
+      { id: "cold-war", name: "Cold War" },
+      { id: "modern-history", name: "Modern History" }
+    ]
+  },
+  {
+    id: "geography",
+    name: "Geography",
+    color: "bg-teal-500",
+    topics: [
+      { id: "physical-geography", name: "Physical Geography" },
+      { id: "human-geography", name: "Human Geography" },
+      { id: "climate-change", name: "Climate Change" },
+      { id: "natural-disasters", name: "Natural Disasters" },
+      { id: "urbanization", name: "Urbanization" },
+      { id: "economic-geography", name: "Economic Geography" }
     ]
   }
 ];
