@@ -37,11 +37,7 @@ const Login = () => {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <img 
-              src="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png" 
-              alt="Mentiora Logo" 
-              className="w-10 h-10 object-contain"
-            />
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg"></div>
             <h1 className="text-2xl font-bold text-slate-900">Mentiora</h1>
           </div>
           <CardTitle>Welcome Back</CardTitle>
