@@ -11,6 +11,16 @@ export interface Subject {
   topics: Topic[];
 }
 
+export interface Question {
+  id: string;
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+  topic: string;
+}
+
 export const subjects: Subject[] = [
   {
     id: "mathematics",
@@ -59,6 +69,8 @@ export const subjects: Subject[] = [
     ]
   }
 ];
+
+export const curriculum = subjects;
 
 export const examBoards = [
   "AQA",
