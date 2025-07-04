@@ -45,7 +45,7 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50/30 flex items-center justify-center p-4">
       <Card className="w-full max-w-md shadow-xl border-0">
         <CardHeader className="text-center pb-8">
           <div className="flex items-center justify-center space-x-3 mb-6">
@@ -56,7 +56,7 @@ const Register = () => {
                 className="w-8 h-8 object-contain"
               />
             </div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Mentiora</h1>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Mentiora</h1>
           </div>
           <CardTitle className="text-2xl">Create Account</CardTitle>
           <CardDescription className="text-base">
@@ -115,7 +115,7 @@ const Register = () => {
             </div>
             <Button 
               type="submit" 
-              className="w-full h-11 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200" 
+              className="w-full h-11 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200" 
               disabled={isLoading}
             >
               {isLoading ? "Creating Account..." : "Create Account"}
@@ -124,7 +124,7 @@ const Register = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-slate-600">
               Already have an account?{" "}
-              <Link to="/login" className="text-blue-600 hover:text-indigo-600 font-medium hover:underline">
+              <Link to="/login" className="text-indigo-600 hover:text-purple-600 font-medium hover:underline">
                 Sign in here
               </Link>
             </p>
