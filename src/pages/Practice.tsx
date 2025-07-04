@@ -1,112 +1,95 @@
+
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
-import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Textarea } from "@/components/ui/textarea";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import { ArrowLeft, Clock, BookOpen, Target, Lightbulb } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { curriculum } from "@/data/curriculum";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 
-interface QuestionAttempt {
-  questionId: string;
-  userAnswer: string;
-  score: number;
-  feedback: {
-    modelAnswer: string;
-    whyThisGetsMark: string;
-    whyYoursDidnt: string;
-    specLink: string;
-  };
+interface Question {
+  id: string;
+  text: string;
+  marks: number;
+  difficulty: "easy" | "medium" | "hard";
+  topic: string;
+  subtopic: string;
+  marking_criteria: string;
+  spec_reference: string;
 }
-
-// Fisher-Yates shuffle algorithm to randomize questions
-const shuffleArray = <T,>(array: T[]): T[] => {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-};
 
 const Practice = () => {
   const { subjectId, topicId } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
-  
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [userAnswer, setUserAnswer] = useState("");
-  const [attempts, setAttempts] = useState<QuestionAttempt[]>([]);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState<string[]>([]);
+  const [feedback, setFeedback] = useState<string[]>([]);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [timeSpent, setTimeSpent] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [sessionComplete, setSessionComplete] = useState(false);
-  const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
 
-  const subject = curriculum.find(s => s.id === subjectId);
-  const topic = subject?.topics.find(t => t.id === topicId);
-  const currentQuestion = shuffledQuestions[currentQuestionIndex];
+  // Sample questions - in real app, this would come from your database
+  const questions: Question[] = [
+    {
+      id: "1",
+      text: "Explain the process of photosynthesis and its importance in the ecosystem.",
+      marks: 6,
+      difficulty: "medium",
+      topic: "Biology",
+      subtopic: "Plant Biology",
+      marking_criteria: "Students should explain the light-dependent and light-independent reactions, mention chloroplasts, and discuss oxygen production.",
+      spec_reference: "B2.1.3"
+    },
+    {
+      id: "2", 
+      text: "Calculate the area of a circle with radius 5cm. Show your working.",
+      marks: 3,
+      difficulty: "easy",
+      topic: "Mathematics",
+      subtopic: "Geometry",
+      marking_criteria: "Correct formula (πr²), substitution, and final answer with units.",
+      spec_reference: "M3.2.1"
+    },
+    {
+      id: "3",
+      text: "Discuss the causes and consequences of World War I.",
+      marks: 8,
+      difficulty: "hard", 
+      topic: "History",
+      subtopic: "20th Century",
+      marking_criteria: "Multiple causes identified, consequences for different countries, balanced argument.",
+      spec_reference: "H4.1.2"
+    }
+  ];
+
+  const currentQuestionData = questions[currentQuestion];
 
   useEffect(() => {
-    if (!subject || !topic) {
-      navigate('/dashboard');
+    if (!user) {
+      navigate("/login");
       return;
     }
-    
-    // Shuffle questions when component mounts or topic changes
-    const shuffled = shuffleArray(topic.questions || []);
-    setShuffledQuestions(shuffled);
-  }, [subject, topic, navigate, topicId]);
 
-  const markAnswerWithAI = async (question: Question, answer: string) => {
-    try {
-      console.log('Calling AI marking function with:', { 
-        question: question.question, 
-        answer: answer.substring(0, 100) + '...' 
-      });
+    const timer = setInterval(() => {
+      setTimeSpent(prev => prev + 1);
+    }, 1000);
 
-      const { data, error } = await supabase.functions.invoke('mark-answer', {
-        body: {
-          question: question.question,
-          userAnswer: answer,
-          modelAnswer: question.modelAnswer,
-          markingCriteria: question.markingCriteria,
-          totalMarks: question.marks,
-          subjectId: subjectId
-        }
-      });
+    return () => clearInterval(timer);
+  }, [user, navigate]);
 
-      if (error) {
-        console.error('Supabase function error:', error);
-        throw error;
-      }
-
-      console.log('AI marking result:', data);
-
-      return {
-        marksAwarded: data.marksAwarded || 0,
-        feedback: data.feedback || "No feedback available",
-        assessment: data.assessment || "Needs Review"
-      };
-
-    } catch (error) {
-      console.error('Error calling AI marking function:', error);
-      toast.error("Failed to mark answer with AI. Please try again.");
-      
-      // Fallback to basic marking
-      return {
-        marksAwarded: answer.trim() ? Math.round(question.marks * 0.5) : 0,
-        feedback: "AI marking temporarily unavailable. Answer has been given partial credit.",
-        assessment: "Needs Review"
-      };
-    }
+  const handleAnswerChange = (value: string) => {
+    const newAnswers = [...answers];
+    newAnswers[currentQuestion] = value;
+    setAnswers(newAnswers);
   };
 
-  const handleSubmitAnswer = async () => {
-    if (!userAnswer.trim()) {
+  const submitAnswer = async () => {
+    if (!answers[currentQuestion]?.trim()) {
       toast.error("Please provide an answer before submitting");
       return;
     }
@@ -114,300 +97,203 @@ const Practice = () => {
     setIsSubmitting(true);
     
     try {
-      console.log('Starting to mark answer...');
+      // Simulate API call to get AI feedback
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
-      const markingResult = await markAnswerWithAI(currentQuestion, userAnswer);
-      
-      const feedback = {
-        modelAnswer: currentQuestion.modelAnswer,
-        whyThisGetsMark: currentQuestion.markingCriteria.breakdown.join('\n'),
-        whyYoursDidnt: markingResult.feedback,
-        specLink: currentQuestion.specReference
-      };
+      const mockFeedback = `Great attempt! Your answer shows good understanding of the key concepts. 
 
-      const attempt: QuestionAttempt = {
-        questionId: currentQuestion.id,
-        userAnswer,
-        score: markingResult.marksAwarded,
-        feedback
-      };
-      
-      setAttempts([...attempts, attempt]);
+**Strengths:**
+- Clear explanation of the main process
+- Good use of scientific terminology
+- Well-structured response
+
+**Areas for improvement:**
+- Consider adding more specific examples
+- Include quantitative data where relevant
+- Link to wider implications
+
+**Marking criteria coverage:**
+${currentQuestionData.marking_criteria}
+
+**Specification reference:** ${currentQuestionData.spec_reference}
+
+**Estimated marks:** ${Math.floor(currentQuestionData.marks * 0.7)}/${currentQuestionData.marks}`;
+
+      const newFeedback = [...feedback];
+      newFeedback[currentQuestion] = mockFeedback;
+      setFeedback(newFeedback);
       setShowFeedback(true);
       
-      // Show success toast with score
-      toast.success(`Answer marked! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks`);
-      
+      toast.success("Answer submitted! Check your feedback below.");
     } catch (error) {
-      console.error('Error marking answer:', error);
-      toast.error("Error processing your answer. Please try again.");
+      toast.error("Failed to submit answer. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleNextQuestion = () => {
-    if (currentQuestionIndex < shuffledQuestions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setUserAnswer("");
+  const nextQuestion = () => {
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(prev => prev + 1);
       setShowFeedback(false);
-    } else {
-      finishSession();
     }
   };
 
-  const finishSession = () => {
-    const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
-    const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
-    const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
-    
-    // Save progress
-    const progressKey = `mentiora_progress_${user?.id}`;
-    const existingProgress = JSON.parse(localStorage.getItem(progressKey) || '[]');
-    
-    const topicProgressIndex = existingProgress.findIndex(
-      (p: any) => p.subjectId === subjectId && p.topicId === topicId
-    );
-    
-    if (topicProgressIndex >= 0) {
-      existingProgress[topicProgressIndex].attempts += 1;
-      existingProgress[topicProgressIndex].averageScore = Math.round(
-        (existingProgress[topicProgressIndex].averageScore + averagePercentage) / 2
-      );
-      existingProgress[topicProgressIndex].lastAttempt = new Date();
-    } else {
-      existingProgress.push({
-        subjectId,
-        topicId,
-        attempts: 1,
-        averageScore: Math.round(averagePercentage),
-        lastAttempt: new Date()
-      });
+  const previousQuestion = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(prev => prev - 1);
+      setShowFeedback(false);
     }
-    
-    localStorage.setItem(progressKey, JSON.stringify(existingProgress));
-    
-    // Handle weak topics
-    if (averagePercentage < 85) {
-      const weakTopicsKey = `mentiora_weak_topics_${user?.id}`;
-      const weakTopics = JSON.parse(localStorage.getItem(weakTopicsKey) || '[]');
-      if (!weakTopics.includes(topicId)) {
-        weakTopics.push(topicId);
-        localStorage.setItem(weakTopicsKey, JSON.stringify(weakTopics));
-      }
-    } else {
-      // Remove from weak topics if score is good
-      const weakTopicsKey = `mentiora_weak_topics_${user?.id}`;
-      const weakTopics = JSON.parse(localStorage.getItem(weakTopicsKey) || '[]');
-      const filteredTopics = weakTopics.filter((id: string) => id !== topicId);
-      localStorage.setItem(weakTopicsKey, JSON.stringify(filteredTopics));
-    }
-    
-    setSessionComplete(true);
   };
 
-  if (sessionComplete) {
-    const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
-    const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
-    const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
-    
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const getDifficultyColor = (difficulty: string) => {
+    switch (difficulty) {
+      case "easy": return "bg-green-100 text-green-800";
+      case "medium": return "bg-yellow-100 text-yellow-800"; 
+      case "hard": return "bg-red-100 text-red-800";
+      default: return "bg-gray-100 text-gray-800";
+    }
+  };
+
+  if (!currentQuestionData) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <Card className="max-w-md w-full">
-          <CardHeader className="text-center">
-            <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-            <CardTitle>Session Complete!</CardTitle>
-            <CardDescription>
-              {topic?.name} - {subject?.name}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="text-center space-y-4">
-            <div>
-              <div className="text-4xl font-bold text-green-600 mb-2">
-                {marksEarned}/{totalMarks}
-              </div>
-              <p className="text-slate-600">Total Marks</p>
-            </div>
-            
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span>Questions Answered:</span>
-                <span className="font-medium">{attempts.length}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Performance:</span>
-                <Badge className={averagePercentage >= 85 ? "bg-green-500" : averagePercentage >= 60 ? "bg-yellow-500" : "bg-red-500"}>
-                  {averagePercentage >= 85 ? "Excellent" : averagePercentage >= 60 ? "Good" : "Needs Work"}
-                </Badge>
-              </div>
-            </div>
-            
-            <div className="flex flex-col space-y-2">
-              <Button onClick={() => navigate(`/subject/${subjectId}`)}>
-                Back to {subject?.name}
-              </Button>
-              <Button variant="outline" onClick={() => window.location.reload()}>
-                Try Again
-              </Button>
-            </div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
+        <Card className="p-8">
+          <CardContent>
+            <p>No questions available for this topic.</p>
+            <Button onClick={() => navigate(-1)} className="mt-4">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Go Back
+            </Button>
           </CardContent>
         </Card>
       </div>
     );
   }
 
-  if (!currentQuestion) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">No questions available</h2>
-          <Button onClick={() => navigate('/dashboard')}>
-            Back to Dashboard
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
-  const currentAttempt = attempts.find(a => a.questionId === currentQuestion.id);
-
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Button variant="outline" onClick={() => navigate(`/subject/${subjectId}`)}>
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back
-              </Button>
-              <div>
-                <h1 className="text-xl font-bold text-slate-900">{topic?.name}</h1>
-                <p className="text-sm text-slate-600">{subject?.name}</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <Button
+            variant="ghost"
+            onClick={() => navigate(-1)}
+            className="text-slate-600 hover:text-slate-900"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Topics
+          </Button>
+          <div className="flex items-center space-x-4 text-sm text-slate-600">
+            <div className="flex items-center">
+              <Clock className="h-4 w-4 mr-1" />
+              {formatTime(timeSpent)}
+            </div>
+            <div className="flex items-center">
+              <BookOpen className="h-4 w-4 mr-1" />
+              Question {currentQuestion + 1} of {questions.length}
+            </div>
+          </div>
+        </div>
+
+        {/* Progress */}
+        <div className="mb-6">
+          <div className="flex justify-between text-sm text-slate-600 mb-2">
+            <span>Progress</span>
+            <span>{Math.round(((currentQuestion + 1) / questions.length) * 100)}%</span>
+          </div>
+          <Progress value={((currentQuestion + 1) / questions.length) * 100} className="h-2" />
+        </div>
+
+        {/* Question Card */}
+        <Card className="mb-6">
+          <CardHeader>
+            <div className="flex items-start justify-between">
+              <div className="flex-1">
+                <CardTitle className="text-xl mb-2">{currentQuestionData.text}</CardTitle>
+                <div className="flex items-center space-x-3 text-sm text-slate-600">
+                  <Badge className={getDifficultyColor(currentQuestionData.difficulty)}>
+                    {currentQuestionData.difficulty}
+                  </Badge>
+                  <div className="flex items-center">
+                    <Target className="h-4 w-4 mr-1" />
+                    {currentQuestionData.marks} marks
+                  </div>
+                  <div>
+                    {currentQuestionData.topic} • {currentQuestionData.subtopic}
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-slate-600">
-                Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
-              </span>
-              <Progress value={((currentQuestionIndex + 1) / shuffledQuestions.length) * 100} className="w-24" />
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* Question Panel */}
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">Question</CardTitle>
-                  <Badge variant="outline">{currentQuestion.marks} marks</Badge>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-slate-900 mb-6 leading-relaxed">
-                  {currentQuestion.question}
-                </p>
-                
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Your Answer:
-                    </label>
-                    <Textarea
-                      value={userAnswer}
-                      onChange={(e) => setUserAnswer(e.target.value)}
-                      placeholder="Type your full answer here..."
-                      className="min-h-[200px]"
-                      disabled={showFeedback}
-                    />
-                  </div>
-                  
-                  {!showFeedback && (
-                    <Button 
-                      onClick={handleSubmitAnswer}
-                      disabled={isSubmitting || !userAnswer.trim()}
-                      className="w-full"
-                    >
-                      {isSubmitting ? "AI is marking your answer..." : "Submit Answer"}
-                    </Button>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Feedback Panel */}
-            {showFeedback && currentAttempt && (
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <CheckCircle className="h-5 w-5 mr-2 text-green-600" />
-                    AI Teacher Feedback
-                  </CardTitle>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-2xl font-bold text-green-600">
-                      {currentAttempt.score}/{currentQuestion.marks}
-                    </span>
-                    <span className="text-sm text-slate-600">marks</span>
-                    <Badge className={currentAttempt.score >= currentQuestion.marks * 0.85 ? "bg-green-500" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "bg-yellow-500" : "bg-red-500"}>
-                      {currentAttempt.score >= currentQuestion.marks * 0.85 ? "Excellent" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "Good" : "Needs Work"}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  {/* Model Answer */}
-                  <div>
-                    <h4 className="font-semibold text-slate-900 mb-2 flex items-center">
-                      <Book className="h-4 w-4 mr-2" />
-                      Model Answer
-                    </h4>
-                    <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
-                      <p className="text-slate-700">{currentAttempt.feedback.modelAnswer}</p>
-                    </div>
-                  </div>
-
-                  {/* Why This Gets Marks */}
-                  <div>
-                    <h4 className="font-semibold text-slate-900 mb-2 flex items-center">
-                      <CheckCircle className="h-4 w-4 mr-2" />
-                      Why This Gets Full Marks
-                    </h4>
-                    <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
-                      <pre className="text-slate-700 whitespace-pre-wrap font-sans">
-                        {currentAttempt.feedback.whyThisGetsMark}
-                      </pre>
-                    </div>
-                  </div>
-
-                  {/* AI Feedback */}
-                  <div>
-                    <h4 className="font-semibold text-slate-900 mb-2 flex items-center">
-                      <Lightbulb className="h-4 w-4 mr-2" />
-                      AI Teacher Feedback
-                    </h4>
-                    <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
-                      <p className="text-slate-700">{currentAttempt.feedback.whyYoursDidnt}</p>
-                    </div>
-                  </div>
-
-                  {/* Spec Reference */}
-                  <div>
-                    <h4 className="font-semibold text-slate-900 mb-2">Specification Reference</h4>
-                    <Badge variant="outline">{currentAttempt.feedback.specLink}</Badge>
-                  </div>
-
-                  <Button onClick={handleNextQuestion} className="w-full">
-                    {currentQuestionIndex < shuffledQuestions.length - 1 ? "Next Question" : "Finish Session"}
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="answer" className="block text-sm font-medium text-slate-700 mb-2">
+                  Your Answer
+                </label>
+                <Textarea
+                  id="answer"
+                  placeholder="Type your answer here..."
+                  value={answers[currentQuestion] || ""}
+                  onChange={(e) => handleAnswerChange(e.target.value)}
+                  className="min-h-[200px]"
+                />
+              </div>
+              
+              <div className="flex justify-between">
+                <div className="flex space-x-2">
+                  <Button
+                    variant="outline"
+                    onClick={previousQuestion}
+                    disabled={currentQuestion === 0}
+                  >
+                    Previous
                   </Button>
-                </CardContent>
-              </Card>
-            )}
-          </div>
-        </div>
+                  <Button
+                    variant="outline"
+                    onClick={nextQuestion}
+                    disabled={currentQuestion === questions.length - 1}
+                  >
+                    Next
+                  </Button>
+                </div>
+                <Button
+                  onClick={submitAnswer}
+                  disabled={isSubmitting || !answers[currentQuestion]?.trim()}
+                  className="bg-blue-600 hover:bg-blue-700"
+                >
+                  {isSubmitting ? "Submitting..." : "Submit Answer"}
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Feedback Card */}
+        {showFeedback && feedback[currentQuestion] && (
+          <Card className="border-blue-200 bg-blue-50">
+            <CardHeader>
+              <CardTitle className="flex items-center text-blue-900">
+                <Lightbulb className="h-5 w-5 mr-2" />
+                AI Feedback
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="prose prose-sm max-w-none text-blue-800">
+                {feedback[currentQuestion].split('\n').map((line, index) => (
+                  <p key={index} className="mb-2">{line}</p>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </div>
   );
