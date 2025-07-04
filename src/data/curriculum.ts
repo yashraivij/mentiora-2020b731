@@ -21,9 +21,6 @@ export interface Question {
   explanation?: string;
   difficulty: 'easy' | 'medium' | 'hard';
   marks: number;
-  modelAnswer?: string;
-  markingCriteria?: string;
-  specReference?: string;
 }
 
 export const subjects: Subject[] = [
@@ -43,10 +40,7 @@ export const subjects: Subject[] = [
             correctAnswer: '4',
             explanation: 'Subtract 5 from both sides: 2x = 8, then divide by 2: x = 4',
             difficulty: 'easy',
-            marks: 2,
-            modelAnswer: 'x = 4',
-            markingCriteria: 'Correct answer: 2 marks, Working shown: 1 mark',
-            specReference: 'A1.2'
+            marks: 2
           }
         ]
       },
@@ -62,10 +56,7 @@ export const subjects: Subject[] = [
             correctAnswer: 0,
             explanation: 'Area = πr² = π × 5² = 25π cm²',
             difficulty: 'medium',
-            marks: 3,
-            modelAnswer: '25π cm²',
-            markingCriteria: 'Correct formula and answer: 3 marks',
-            specReference: 'G2.1'
+            marks: 3
           }
         ]
       }
@@ -86,10 +77,7 @@ export const subjects: Subject[] = [
             type: 'essay',
             explanation: 'Look for recurring ideas and the central message the author conveys.',
             difficulty: 'medium',
-            marks: 6,
-            modelAnswer: 'Analyze the text for key themes and provide textual evidence',
-            markingCriteria: 'Clear identification of theme with evidence: 6 marks',
-            specReference: 'R1.3'
+            marks: 6
           }
         ]
       }
@@ -111,16 +99,10 @@ export const subjects: Subject[] = [
             correctAnswer: 'The process by which plants make food using sunlight, carbon dioxide, and water',
             explanation: 'Photosynthesis converts light energy into chemical energy stored in glucose.',
             difficulty: 'easy',
-            marks: 4,
-            modelAnswer: 'Photosynthesis is the process where plants use sunlight, CO2, and water to produce glucose and oxygen',
-            markingCriteria: 'Complete definition with all components: 4 marks',
-            specReference: 'B3.1'
+            marks: 4
           }
         ]
       }
     ]
   }
 ];
-
-// For backward compatibility
-export const curriculum = subjects;
