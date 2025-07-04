@@ -153,7 +153,7 @@ const Index = () => {
             size="lg"
             className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-10 py-4 text-xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 rounded-2xl"
           >
-            Get Your A* Now - 100% Free
+            Personalise My Revision
             <ArrowRight className="ml-3 h-6 w-6" />
           </Button>
         </div>
@@ -247,7 +247,7 @@ const Index = () => {
               size="lg"
               className="bg-white text-slate-900 hover:bg-slate-100 px-10 py-4 text-xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 rounded-2xl"
             >
-              Unlock Your Potential - Start Free
+              Personalise My Revision
               <Trophy className="ml-3 h-6 w-6" />
             </Button>
           </div>
