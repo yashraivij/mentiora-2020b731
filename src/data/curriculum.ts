@@ -7,9 +7,9 @@ export interface Topic {
 
 export interface Question {
   id: string;
-  question: string;
-  options?: string[];
-  correctAnswer: string;
+  text: string;
+  options: string[];
+  correctAnswer: number;
   explanation: string;
   difficulty: 'easy' | 'medium' | 'hard';
   marks: number;
@@ -22,57 +22,128 @@ export interface Subject {
   topics: Topic[];
 }
 
-export const subjects: Subject[] = [
+export const curriculum: Subject[] = [
+  {
+    id: 'biology',
+    name: 'Biology',
+    color: 'bg-emerald-500',
+    topics: [
+      {
+        id: 'cell-biology',
+        name: 'Cell Biology',
+        questions: [
+          {
+            id: 'cell-1',
+            text: 'What is the function of mitochondria in a cell?',
+            options: [
+              'Protein synthesis',
+              'Energy production',
+              'DNA storage',
+              'Waste removal'
+            ],
+            correctAnswer: 1,
+            explanation: 'Mitochondria are the powerhouses of the cell, responsible for producing ATP through cellular respiration.',
+            difficulty: 'medium',
+            marks: 2
+          }
+        ]
+      },
+      {
+        id: 'genetics',
+        name: 'Genetics',
+        questions: [
+          {
+            id: 'genetics-1',
+            text: 'What does DNA stand for?',
+            options: [
+              'Deoxyribonucleic Acid',
+              'Deoxyribose Nucleic Acid',
+              'Dynamic Nuclear Acid',
+              'Digestive Nucleic Acid'
+            ],
+            correctAnswer: 0,
+            explanation: 'DNA stands for Deoxyribonucleic Acid, which contains genetic instructions.',
+            difficulty: 'easy',
+            marks: 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'chemistry',
+    name: 'Chemistry',
+    color: 'bg-blue-500',
+    topics: [
+      {
+        id: 'atomic-structure',
+        name: 'Atomic Structure',
+        questions: [
+          {
+            id: 'atomic-1',
+            text: 'What is the charge of a proton?',
+            options: [
+              'Negative',
+              'Positive',
+              'Neutral',
+              'Variable'
+            ],
+            correctAnswer: 1,
+            explanation: 'Protons have a positive charge, while electrons have a negative charge and neutrons are neutral.',
+            difficulty: 'easy',
+            marks: 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'physics',
+    name: 'Physics',
+    color: 'bg-purple-500',
+    topics: [
+      {
+        id: 'forces',
+        name: 'Forces and Motion',
+        questions: [
+          {
+            id: 'forces-1',
+            text: 'What is Newton\'s first law of motion?',
+            options: [
+              'F = ma',
+              'An object at rest stays at rest unless acted upon by a force',
+              'For every action there is an equal and opposite reaction',
+              'Energy cannot be created or destroyed'
+            ],
+            correctAnswer: 1,
+            explanation: 'Newton\'s first law states that an object will remain at rest or in uniform motion unless acted upon by an external force.',
+            difficulty: 'medium',
+            marks: 2
+          }
+        ]
+      }
+    ]
+  },
   {
     id: 'mathematics',
     name: 'Mathematics',
-    color: 'bg-blue-500',
+    color: 'bg-red-500',
     topics: [
       {
         id: 'algebra',
         name: 'Algebra',
         questions: [
           {
-            id: 'alg-1',
-            question: 'Solve for x: 2x + 5 = 13',
-            correctAnswer: 'x = 4',
-            explanation: 'Subtract 5 from both sides: 2x = 8, then divide by 2: x = 4',
-            difficulty: 'easy',
-            marks: 2
-          },
-          {
-            id: 'alg-2',
-            question: 'Expand and simplify: (x + 3)(x - 2)',
-            correctAnswer: 'x² + x - 6',
-            explanation: 'Use FOIL method: x² - 2x + 3x - 6 = x² + x - 6',
-            difficulty: 'medium',
-            marks: 3
-          }
-        ]
-      },
-      {
-        id: 'geometry',
-        name: 'Geometry',
-        questions: [
-          {
-            id: 'geo-1',
-            question: 'What is the area of a circle with radius 5cm?',
-            correctAnswer: '25π cm² or approximately 78.54 cm²',
-            explanation: 'Area = πr² = π × 5² = 25π cm²',
-            difficulty: 'easy',
-            marks: 2
-          }
-        ]
-      },
-      {
-        id: 'statistics',
-        name: 'Statistics',
-        questions: [
-          {
-            id: 'stat-1',
-            question: 'Find the mean of: 4, 7, 9, 12, 8',
-            correctAnswer: '8',
-            explanation: 'Mean = (4 + 7 + 9 + 12 + 8) ÷ 5 = 40 ÷ 5 = 8',
+            id: 'algebra-1',
+            text: 'Solve for x: 2x + 5 = 13',
+            options: [
+              'x = 4',
+              'x = 6',
+              'x = 8',
+              'x = 9'
+            ],
+            correctAnswer: 0,
+            explanation: '2x + 5 = 13, so 2x = 8, therefore x = 4.',
             difficulty: 'easy',
             marks: 2
           }
@@ -82,84 +153,53 @@ export const subjects: Subject[] = [
   },
   {
     id: 'english',
-    name: 'English Language',
-    color: 'bg-green-500',
+    name: 'English Literature',
+    color: 'bg-amber-500',
     topics: [
       {
-        id: 'grammar',
-        name: 'Grammar',
+        id: 'shakespeare',
+        name: 'Shakespeare',
         questions: [
           {
-            id: 'gram-1',
-            question: 'Identify the type of sentence: "What a beautiful day!"',
-            options: ['Declarative', 'Interrogative', 'Imperative', 'Exclamatory'],
-            correctAnswer: 'Exclamatory',
-            explanation: 'This sentence expresses strong emotion and ends with an exclamation mark.',
+            id: 'shakespeare-1',
+            text: 'Who wrote "Romeo and Juliet"?',
+            options: [
+              'Charles Dickens',
+              'William Shakespeare',
+              'Jane Austen',
+              'George Orwell'
+            ],
+            correctAnswer: 1,
+            explanation: 'William Shakespeare wrote the tragic play "Romeo and Juliet" in the early part of his career.',
             difficulty: 'easy',
             marks: 1
-          }
-        ]
-      },
-      {
-        id: 'literature',
-        name: 'Literature',
-        questions: [
-          {
-            id: 'lit-1',
-            question: 'What is a metaphor?',
-            correctAnswer: 'A figure of speech that compares two unlike things without using "like" or "as"',
-            explanation: 'A metaphor directly states that one thing is another, creating an implicit comparison.',
-            difficulty: 'medium',
-            marks: 2
           }
         ]
       }
     ]
   },
   {
-    id: 'science',
-    name: 'Science',
-    color: 'bg-purple-500',
+    id: 'history',
+    name: 'History',
+    color: 'bg-orange-500',
     topics: [
       {
-        id: 'biology',
-        name: 'Biology',
+        id: 'world-war-2',
+        name: 'World War 2',
         questions: [
           {
-            id: 'bio-1',
-            question: 'What is photosynthesis?',
-            correctAnswer: 'The process by which plants make their own food using sunlight, carbon dioxide, and water',
-            explanation: 'Photosynthesis converts light energy into chemical energy, producing glucose and oxygen.',
-            difficulty: 'medium',
-            marks: 3
-          }
-        ]
-      },
-      {
-        id: 'chemistry',
-        name: 'Chemistry',
-        questions: [
-          {
-            id: 'chem-1',
-            question: 'What is the chemical symbol for water?',
-            correctAnswer: 'H₂O',
-            explanation: 'Water consists of two hydrogen atoms and one oxygen atom.',
+            id: 'ww2-1',
+            text: 'In which year did World War 2 end?',
+            options: [
+              '1944',
+              '1945',
+              '1946',
+              '1947'
+            ],
+            correctAnswer: 1,
+            explanation: 'World War 2 ended in 1945 with the surrender of Japan in September.',
             difficulty: 'easy',
             marks: 1
-          }
-        ]
-      },
-      {
-        id: 'physics',
-        name: 'Physics',
-        questions: [
-          {
-            id: 'phys-1',
-            question: 'What is the formula for calculating speed?',
-            correctAnswer: 'Speed = Distance ÷ Time',
-            explanation: 'Speed is calculated by dividing the distance traveled by the time taken.',
-            difficulty: 'easy',
-            marks: 2
           }
         ]
       }
