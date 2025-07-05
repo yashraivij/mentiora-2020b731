@@ -57,7 +57,7 @@ const Practice = () => {
     }
     
     // Shuffle questions when component mounts or topic changes
-    const shuffled = shuffleArray(topic.questions || []);
+    const shuffled = shuffleArray(topic.questions);
     setShuffledQuestions(shuffled);
   }, [subject, topic, navigate, topicId]);
 
