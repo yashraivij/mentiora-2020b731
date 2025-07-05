@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, CheckCircle, BarChart3, Users, ArrowRight, Star, Sparkles, Quote, Target, Trophy, Zap, Brain, Award } from "lucide-react";
@@ -19,7 +18,7 @@ const Index = () => {
     },
     {
       icon: Brain,
-      title: "AI Feedback",
+      title: "AI Feedback", 
       description: "Revolutionary AI that understands your learning style",
       color: "from-purple-500 to-pink-500",
       bgColor: "from-purple-50 to-pink-50"
@@ -43,30 +42,22 @@ const Index = () => {
   const howItWorks = [
     {
       step: "01",
-      title: "Take Your Assessment",
-      description: "Start with our intelligent assessment to identify your current knowledge level and learning gaps",
-      icon: Brain,
+      title: "Get Your Personal Study Plan",
+      description: "Receive a customized learning path designed specifically for your strengths and weaknesses",
+      icon: Target,
       color: "from-blue-500 to-purple-600",
       accent: "text-blue-600"
     },
     {
-      step: "02", 
-      title: "Get Your Personal Study Plan",
-      description: "Receive a customized learning path designed specifically for your strengths and weaknesses",
-      icon: Target,
+      step: "02",
+      title: "Answer Real Exam Questions",
+      description: "Work through authentic GCSE questions and receive instant feedback based on actual AQA mark schemes, showing exactly how many marks you'd earn in the real exam",
+      icon: Zap,
       color: "from-purple-500 to-pink-600",
       accent: "text-purple-600"
     },
     {
       step: "03",
-      title: "Answer Real Exam Questions",
-      description: "Work through authentic GCSE questions and receive instant feedback based on actual AQA mark schemes, showing exactly how many marks you'd earn in the real exam",
-      icon: Zap,
-      color: "from-pink-500 to-red-600", 
-      accent: "text-pink-600"
-    },
-    {
-      step: "04",
       title: "Achieve Your Target Grade",
       description: "Watch your confidence and grades soar as you master each topic with precision and clarity",
       icon: Award,
@@ -118,7 +109,7 @@ const Index = () => {
       description: "Average improvement"
     },
     { 
-      number: "AI+", 
+      number: "AI", 
       label: "Smart Marking", 
       color: "text-purple-600", 
       bg: "bg-gradient-to-br from-purple-100 to-purple-200",
@@ -187,15 +178,15 @@ const Index = () => {
           </div>
           
           <h2 className="text-5xl lg:text-6xl font-bold mb-8 leading-tight tracking-tight">
-            <span className="text-gray-900">Master Your</span>
+            <span className="text-gray-900">GCSE Grades</span>
             <br />
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Dream Grades
+              That Open Doors
             </span>
           </h2>
           
           <p className="text-lg text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Revolutionary AI-powered revision that adapts to your unique learning style. Join the students who are transforming their academic future.
+            Our AI tutor creates personalised revision for every major GCSE exam board
           </p>
           
           <Button 
@@ -256,10 +247,10 @@ const Index = () => {
         <div className="mb-24">
           <div className="text-center mb-16">
             <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 tracking-tight">How It Works</h3>
-            <p className="text-lg text-gray-600">Your path to academic excellence in 4 simple steps</p>
+            <p className="text-lg text-gray-600">Your path to academic excellence in 3 simple steps</p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {howItWorks.map((step, index) => (
               <Card key={index} className="p-8 border-0 shadow-lg hover:shadow-2xl transition-all duration-500 bg-white rounded-2xl group hover:-translate-y-1 relative overflow-hidden">
                 <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${step.color}`} />
