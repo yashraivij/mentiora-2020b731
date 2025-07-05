@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, CheckCircle, BarChart3, Users, ArrowRight, Star, Sparkles, Quote, Target, Trophy, Zap, Brain, Award } from "lucide-react";
@@ -42,8 +43,8 @@ const Index = () => {
   const howItWorks = [
     {
       step: "01",
-      title: "Get Your Personal Study Plan",
-      description: "Receive a customized learning path designed specifically for your strengths and weaknesses",
+      title: "Choose Your Subject & Topic",
+      description: "Pick your AQA GCSE subject and the exact topic you want to master.",
       icon: Target,
       color: "from-blue-500 to-purple-600",
       accent: "text-blue-600"
@@ -51,15 +52,15 @@ const Index = () => {
     {
       step: "02",
       title: "Answer Real Exam Questions",
-      description: "Work through authentic GCSE questions and receive instant feedback based on actual AQA mark schemes, showing exactly how many marks you'd earn in the real exam",
+      description: "Get exam-style questions that match your spec and practice just like the real thing.",
       icon: Zap,
       color: "from-purple-500 to-pink-600",
       accent: "text-purple-600"
     },
     {
       step: "03",
-      title: "Achieve Your Target Grade",
-      description: "Watch your confidence and grades soar as you master each topic with precision and clarity",
+      title: "Get Instant Marking & Feedback",
+      description: "See exactly what the examiner wants, where you lost marks, and how to improve.",
       icon: Award,
       color: "from-emerald-500 to-cyan-600",
       accent: "text-emerald-600"
@@ -154,15 +155,25 @@ const Index = () => {
                   variant="ghost" 
                   size="lg"
                   onClick={() => navigate('/login')} 
-                  className="text-gray-600 hover:text-gray-900 hover:bg-gray-50 font-semibold px-6 py-2.5 rounded-xl transition-all duration-300"
+                  className="text-gray-600 hover:text-gray-900 hover:bg-gray-50 font-semibold px-6 py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2"
                 >
+                  <img 
+                    src="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png" 
+                    alt="Mentiora Logo" 
+                    className="w-4 h-4 object-contain"
+                  />
                   Sign In
                 </Button>
                 <Button 
                   size="lg"
                   onClick={() => navigate('/register')} 
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
                 >
+                  <img 
+                    src="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png" 
+                    alt="Mentiora Logo" 
+                    className="w-4 h-4 object-contain"
+                  />
                   Start Free
                 </Button>
               </>
