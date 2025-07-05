@@ -59,8 +59,8 @@ const Index = () => {
     },
     {
       step: "03",
-      title: "Practice With AI Guidance",
-      description: "Work through expert-level questions with real-time AI feedback that adapts to your learning style",
+      title: "Answer Real Exam Questions",
+      description: "Work through authentic GCSE questions and receive instant feedback based on actual AQA mark schemes, showing exactly how many marks you'd earn in the real exam",
       icon: Zap,
       color: "from-pink-500 to-red-600", 
       accent: "text-pink-600"
@@ -103,10 +103,34 @@ const Index = () => {
   ];
 
   const stats = [
-    { number: "98%", label: "Success Rate", color: "text-emerald-600", bg: "bg-emerald-100" },
-    { number: "2.8x", label: "Grade Jump", color: "text-blue-600", bg: "bg-blue-100" },
-    { number: "24/7", label: "AI Support", color: "text-purple-600", bg: "bg-purple-100" },
-    { number: "30min", label: "Daily Study", color: "text-orange-600", bg: "bg-orange-100" }
+    { 
+      number: "95%", 
+      label: "Grade Accuracy", 
+      color: "text-emerald-600", 
+      bg: "bg-gradient-to-br from-emerald-100 to-emerald-200",
+      description: "Prediction accuracy"
+    },
+    { 
+      number: "2.1x", 
+      label: "Grade Jump", 
+      color: "text-blue-600", 
+      bg: "bg-gradient-to-br from-blue-100 to-blue-200",
+      description: "Average improvement"
+    },
+    { 
+      number: "AI+", 
+      label: "Smart Marking", 
+      color: "text-purple-600", 
+      bg: "bg-gradient-to-br from-purple-100 to-purple-200",
+      description: "Real mark schemes"
+    },
+    { 
+      number: "24/7", 
+      label: "Always Available", 
+      color: "text-orange-600", 
+      bg: "bg-gradient-to-br from-orange-100 to-orange-200",
+      description: "Instant feedback"
+    }
   ];
 
   return (
@@ -184,13 +208,23 @@ const Index = () => {
         </div>
 
         {/* Trust Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-24 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-24 max-w-5xl mx-auto">
           {stats.map((stat, index) => (
             <div key={index} className="text-center group">
-              <div className={`inline-flex items-center justify-center w-16 h-16 ${stat.bg} rounded-2xl mb-3 group-hover:scale-110 transition-transform duration-300`}>
-                <div className={`text-2xl font-bold ${stat.color}`}>{stat.number}</div>
+              <div className={`relative p-8 ${stat.bg} rounded-3xl shadow-lg group-hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2 border border-white/50`}>
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-3xl"></div>
+                <div className="relative z-10">
+                  <div className={`text-3xl lg:text-4xl font-bold ${stat.color} mb-2 tracking-tight`}>
+                    {stat.number}
+                  </div>
+                  <div className="text-gray-700 font-bold text-sm mb-1 uppercase tracking-wide">
+                    {stat.label}
+                  </div>
+                  <div className="text-xs text-gray-600 font-medium">
+                    {stat.description}
+                  </div>
+                </div>
               </div>
-              <div className="text-gray-600 font-medium text-sm">{stat.label}</div>
             </div>
           ))}
         </div>
