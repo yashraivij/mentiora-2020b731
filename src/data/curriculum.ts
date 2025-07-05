@@ -7,12 +7,15 @@ export interface Topic {
 
 export interface Question {
   id: string;
-  text: string;
+  question: string;
   options: string[];
   correctAnswer: number;
   explanation: string;
   difficulty: 'easy' | 'medium' | 'hard';
   marks: number;
+  modelAnswer: string;
+  markingCriteria: string;
+  specReference: string;
 }
 
 export interface Subject {
@@ -34,7 +37,7 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'cell-1',
-            text: 'What is the function of mitochondria in a cell?',
+            question: 'What is the function of mitochondria in a cell?',
             options: [
               'Protein synthesis',
               'Energy production',
@@ -44,7 +47,10 @@ export const curriculum: Subject[] = [
             correctAnswer: 1,
             explanation: 'Mitochondria are the powerhouses of the cell, responsible for producing ATP through cellular respiration.',
             difficulty: 'medium',
-            marks: 2
+            marks: 2,
+            modelAnswer: 'Mitochondria are responsible for energy production in cells through cellular respiration, producing ATP.',
+            markingCriteria: 'Must mention energy production and ATP synthesis',
+            specReference: 'B1.1.2'
           }
         ]
       },
@@ -54,7 +60,7 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'genetics-1',
-            text: 'What does DNA stand for?',
+            question: 'What does DNA stand for?',
             options: [
               'Deoxyribonucleic Acid',
               'Deoxyribose Nucleic Acid',
@@ -64,7 +70,10 @@ export const curriculum: Subject[] = [
             correctAnswer: 0,
             explanation: 'DNA stands for Deoxyribonucleic Acid, which contains genetic instructions.',
             difficulty: 'easy',
-            marks: 1
+            marks: 1,
+            modelAnswer: 'DNA stands for Deoxyribonucleic Acid.',
+            markingCriteria: 'Full correct expansion required',
+            specReference: 'B1.2.1'
           }
         ]
       }
@@ -81,7 +90,7 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'atomic-1',
-            text: 'What is the charge of a proton?',
+            question: 'What is the charge of a proton?',
             options: [
               'Negative',
               'Positive',
@@ -91,7 +100,10 @@ export const curriculum: Subject[] = [
             correctAnswer: 1,
             explanation: 'Protons have a positive charge, while electrons have a negative charge and neutrons are neutral.',
             difficulty: 'easy',
-            marks: 1
+            marks: 1,
+            modelAnswer: 'Protons have a positive charge.',
+            markingCriteria: 'Must state positive charge clearly',
+            specReference: 'C1.1.1'
           }
         ]
       }
@@ -108,7 +120,7 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'forces-1',
-            text: 'What is Newton\'s first law of motion?',
+            question: 'What is Newton\'s first law of motion?',
             options: [
               'F = ma',
               'An object at rest stays at rest unless acted upon by a force',
@@ -118,7 +130,10 @@ export const curriculum: Subject[] = [
             correctAnswer: 1,
             explanation: 'Newton\'s first law states that an object will remain at rest or in uniform motion unless acted upon by an external force.',
             difficulty: 'medium',
-            marks: 2
+            marks: 2,
+            modelAnswer: 'An object at rest stays at rest and an object in motion stays in motion unless acted upon by an external force.',
+            markingCriteria: 'Must mention both rest and motion states',
+            specReference: 'P1.1.1'
           }
         ]
       }
@@ -135,7 +150,7 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'algebra-1',
-            text: 'Solve for x: 2x + 5 = 13',
+            question: 'Solve for x: 2x + 5 = 13',
             options: [
               'x = 4',
               'x = 6',
@@ -145,7 +160,10 @@ export const curriculum: Subject[] = [
             correctAnswer: 0,
             explanation: '2x + 5 = 13, so 2x = 8, therefore x = 4.',
             difficulty: 'easy',
-            marks: 2
+            marks: 2,
+            modelAnswer: 'x = 4',
+            markingCriteria: 'Correct final answer with working shown',
+            specReference: 'M1.1.1'
           }
         ]
       }
@@ -162,7 +180,7 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'shakespeare-1',
-            text: 'Who wrote "Romeo and Juliet"?',
+            question: 'Who wrote "Romeo and Juliet"?',
             options: [
               'Charles Dickens',
               'William Shakespeare',
@@ -172,7 +190,10 @@ export const curriculum: Subject[] = [
             correctAnswer: 1,
             explanation: 'William Shakespeare wrote the tragic play "Romeo and Juliet" in the early part of his career.',
             difficulty: 'easy',
-            marks: 1
+            marks: 1,
+            modelAnswer: 'William Shakespeare',
+            markingCriteria: 'Full name required',
+            specReference: 'E1.1.1'
           }
         ]
       }
@@ -189,7 +210,7 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'ww2-1',
-            text: 'In which year did World War 2 end?',
+            question: 'In which year did World War 2 end?',
             options: [
               '1944',
               '1945',
@@ -199,7 +220,10 @@ export const curriculum: Subject[] = [
             correctAnswer: 1,
             explanation: 'World War 2 ended in 1945 with the surrender of Japan in September.',
             difficulty: 'easy',
-            marks: 1
+            marks: 1,
+            modelAnswer: '1945',
+            markingCriteria: 'Correct year required',
+            specReference: 'H1.1.1'
           }
         ]
       }
