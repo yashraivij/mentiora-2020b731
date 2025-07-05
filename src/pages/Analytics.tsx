@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -47,6 +46,21 @@ const Analytics = () => {
   const getSubjectName = (subjectId: string) => {
     const subject = curriculum.find(s => s.id === subjectId);
     return subject?.name || 'Unknown Subject';
+  };
+
+  const getSubjectColor = (subjectId: string) => {
+    const colors = [
+      'bg-blue-500',
+      'bg-green-500',
+      'bg-purple-500',
+      'bg-red-500', 
+      'bg-yellow-500',
+      'bg-indigo-500',
+      'bg-pink-500',
+      'bg-teal-500'
+    ];
+    const index = subjectId.length % colors.length;
+    return colors[index];
   };
 
   const getMasteredTopics = () => {
@@ -272,7 +286,7 @@ const Analytics = () => {
                   <div key={subject.id} className="border rounded-lg p-4">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center space-x-3">
-                        <div className={`w-4 h-4 rounded-full ${subject.color}`}></div>
+                        <div className={`w-4 h-4 rounded-full ${getSubjectColor(subject.id)}`}></div>
                         <h3 className="text-lg font-semibold">{subject.name}</h3>
                       </div>
                       <div className="flex items-center space-x-4">

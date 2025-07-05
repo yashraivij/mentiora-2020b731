@@ -31,6 +31,22 @@ export const WeakTopicsSection = ({ weakTopics, userProgress, onPractice }: Weak
     return userProgress.find(p => p.topicId === topicId);
   };
 
+  const getSubjectColor = (subjectId: string) => {
+    // Return a color based on subject ID
+    const colors = [
+      'bg-blue-500',
+      'bg-green-500',
+      'bg-purple-500',
+      'bg-red-500',
+      'bg-yellow-500',
+      'bg-indigo-500',
+      'bg-pink-500',
+      'bg-teal-500'
+    ];
+    const index = subjectId.length % colors.length;
+    return colors[index];
+  };
+
   if (weakTopics.length === 0) {
     return (
       <Card className="border-0 bg-gradient-to-br from-green-50 to-emerald-50">
@@ -67,7 +83,7 @@ export const WeakTopicsSection = ({ weakTopics, userProgress, onPractice }: Weak
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
                     <div className="flex items-center space-x-2 mb-1">
-                      <div className={`w-2 h-2 rounded-full ${info.subject.color}`}></div>
+                      <div className={`w-2 h-2 rounded-full ${getSubjectColor(info.subject.id)}`}></div>
                       <h4 className="font-medium text-slate-900">{info.topic.name}</h4>
                       <Badge variant="outline" className="text-xs">{info.subject.name}</Badge>
                     </div>

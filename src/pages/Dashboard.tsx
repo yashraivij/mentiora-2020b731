@@ -150,6 +150,22 @@ const Dashboard = () => {
     return new Date(lastAttempt);
   };
 
+  const getSubjectColor = (subjectId: string) => {
+    // Return a color based on subject ID
+    const colors = [
+      'bg-blue-500',
+      'bg-green-500', 
+      'bg-purple-500',
+      'bg-red-500',
+      'bg-yellow-500',
+      'bg-indigo-500',
+      'bg-pink-500',
+      'bg-teal-500'
+    ];
+    const index = subjectId.length % colors.length;
+    return colors[index];
+  };
+
   const sortedSubjects = [...curriculum].sort((a, b) => {
     const isPinnedA = pinnedSubjects.includes(a.id);
     const isPinnedB = pinnedSubjects.includes(b.id);
@@ -306,7 +322,10 @@ const Dashboard = () => {
             {sortedSubjects.map((subject) => (
               <SubjectCard
                 key={subject.id}
-                subject={subject}
+                subject={{
+                  ...subject,
+                  color: getSubjectColor(subject.id)
+                }}
                 progress={userProgress}
                 onStartPractice={handlePractice}
                 onTogglePin={togglePinSubject}

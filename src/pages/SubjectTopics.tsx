@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -35,6 +34,22 @@ const SubjectTopics = () => {
     }
   }, [user?.id, subjectId]);
 
+  const getSubjectColor = (subjectId: string | undefined) => {
+    if (!subjectId) return 'bg-slate-500';
+    const colors = [
+      'bg-blue-500',
+      'bg-green-500',
+      'bg-purple-500', 
+      'bg-red-500',
+      'bg-yellow-500',
+      'bg-indigo-500',
+      'bg-pink-500',
+      'bg-teal-500'
+    ];
+    const index = subjectId.length % colors.length;
+    return colors[index];
+  };
+
   if (!subject) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -64,7 +79,7 @@ const SubjectTopics = () => {
               Back
             </Button>
             <div className="flex items-center space-x-2">
-              <div className={`w-6 h-6 rounded-full ${subject.color}`}></div>
+              <div className={`w-6 h-6 rounded-full ${getSubjectColor(subject.id)}`}></div>
               <h1 className="text-2xl font-bold text-slate-900">{subject.name}</h1>
             </div>
           </div>
