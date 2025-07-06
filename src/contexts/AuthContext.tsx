@@ -1,11 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
-interface User {
-  id: string;
-  email: string;
-  name: string;
-}
+import { supabase } from '@/integrations/supabase/client';
+import { User, Session } from '@supabase/supabase-js';
 
 interface AuthContextType {
   user: User | null;
@@ -27,35 +23,47 @@ export const useAuth = () => {
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check for existing user session
-    const savedUser = localStorage.getItem('mentiora_user');
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-    setIsLoading(false);
+    // Set up auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        console.log('Auth state changed:', event, session?.user?.email);
+        setSession(session);
+        setUser(session?.user ?? null);
+        setIsLoading(false);
+      }
+    );
+
+    // Check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log('Initial session:', session?.user?.email);
+      setSession(session);
+      setUser(session?.user ?? null);
+      setIsLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Mock authentication - in real app, this would be an API call
-      if (email && password.length >= 6) {
-        const userData = {
-          id: Math.random().toString(36).substr(2, 9),
-          email,
-          name: email.split('@')[0]
-        };
-        setUser(userData);
-        localStorage.setItem('mentiora_user', JSON.stringify(userData));
-        return true;
+      console.log('Attempting to sign in:', email);
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        console.error('Login error:', error.message);
+        return false;
       }
-      return false;
+
+      console.log('Login successful:', data.user?.email);
+      return true;
     } catch (error) {
       console.error('Login error:', error);
       return false;
@@ -67,20 +75,29 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const register = async (name: string, email: string, password: string): Promise<boolean> => {
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log('Attempting to sign up:', email, 'with name:', name);
+      const redirectUrl = `${window.location.origin}/dashboard`;
       
-      if (name && email && password.length >= 6) {
-        const userData = {
-          id: Math.random().toString(36).substr(2, 9),
-          email,
-          name
-        };
-        setUser(userData);
-        localStorage.setItem('mentiora_user', JSON.stringify(userData));
-        return true;
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: redirectUrl,
+          data: {
+            full_name: name,
+            name: name
+          }
+        }
+      });
+
+      if (error) {
+        console.error('Register error:', error.message);
+        return false;
       }
-      return false;
+
+      console.log('Registration successful:', data.user?.email);
+      console.log('User should now appear in Supabase profiles table');
+      return true;
     } catch (error) {
       console.error('Register error:', error);
       return false;
@@ -89,9 +106,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('mentiora_user');
+  const logout = async () => {
+    console.log('Signing out user:', user?.email);
+    await supabase.auth.signOut();
   };
 
   return (
