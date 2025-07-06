@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -13,15 +13,8 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { register, isLoading, user } = useAuth();
+  const { register, isLoading } = useAuth();
   const navigate = useNavigate();
-
-  // Redirect if already logged in
-  useEffect(() => {
-    if (user) {
-      navigate("/dashboard");
-    }
-  }, [user, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,19 +34,13 @@ const Register = () => {
       return;
     }
 
-    const { error } = await register(name, email, password);
+    const success = await register(name, email, password);
     
-    if (error) {
-      if (error.message?.includes('User already registered')) {
-        toast.error("An account with this email already exists");
-      } else if (error.message?.includes('Password should be at least')) {
-        toast.error("Password should be at least 6 characters");
-      } else {
-        toast.error(error.message || "Registration failed. Please try again.");
-      }
+    if (success) {
+      toast.success("Welcome to Mentiora!");
+      navigate("/dashboard");
     } else {
-      toast.success("Account created successfully! Please check your email to confirm your account.");
-      // Don't auto-navigate - user needs to confirm email first
+      toast.error("Registration failed. Please try again.");
     }
   };
 
@@ -87,7 +74,6 @@ const Register = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                disabled={isLoading}
               />
             </div>
             <div className="space-y-2">
@@ -99,7 +85,6 @@ const Register = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                disabled={isLoading}
               />
             </div>
             <div className="space-y-2">
@@ -111,7 +96,6 @@ const Register = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                disabled={isLoading}
               />
             </div>
             <div className="space-y-2">
@@ -123,7 +107,6 @@ const Register = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
-                disabled={isLoading}
               />
             </div>
             <Button 

@@ -852,19 +852,7 @@ export type Database = {
       }
     }
     Views: {
-      user_login_info: {
-        Row: {
-          auth_created: string | null
-          confirmed_at: string | null
-          email: string | null
-          email_confirmed_at: string | null
-          full_name: string | null
-          id: string | null
-          last_sign_in_at: string | null
-          profile_created: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       calculate_exam_duration: {
