@@ -11,8 +11,15 @@ import { toast } from "sonner";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, isLoading } = useAuth();
+  const { login, isLoading, user } = useAuth();
   const navigate = useNavigate();
+
+  // Redirect if already logged in
+  React.useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,13 +29,19 @@ const Login = () => {
       return;
     }
 
-    const success = await login(email, password);
+    const { error } = await login(email, password);
     
-    if (success) {
+    if (error) {
+      if (error.message?.includes('Invalid login credentials')) {
+        toast.error("Invalid email or password");
+      } else if (error.message?.includes('Email not confirmed')) {
+        toast.error("Please check your email and confirm your account");
+      } else {
+        toast.error(error.message || "Login failed. Please try again.");
+      }
+    } else {
       toast.success("Welcome back to Mentiora!");
       navigate("/dashboard");
-    } else {
-      toast.error("Invalid email or password");
     }
   };
 
@@ -62,6 +75,7 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                disabled={isLoading}
               />
             </div>
             <div className="space-y-2">
@@ -73,6 +87,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                disabled={isLoading}
               />
             </div>
             <Button 

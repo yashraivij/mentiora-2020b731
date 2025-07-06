@@ -1,17 +1,14 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
-interface User {
-  id: string;
-  email: string;
-  name: string;
-}
+import { User, Session } from '@supabase/supabase-js';
+import { supabase } from '@/integrations/supabase/client';
 
 interface AuthContextType {
   user: User | null;
-  login: (email: string, password: string) => Promise<boolean>;
-  register: (name: string, email: string, password: string) => Promise<boolean>;
-  logout: () => void;
+  session: Session | null;
+  login: (email: string, password: string) => Promise<{ error: any }>;
+  register: (name: string, email: string, password: string) => Promise<{ error: any }>;
+  logout: () => Promise<void>;
   isLoading: boolean;
 }
 
@@ -27,76 +24,110 @@ export const useAuth = () => {
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check for existing user session
-    const savedUser = localStorage.getItem('mentiora_user');
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-    setIsLoading(false);
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        console.log('Auth state changed:', event, session?.user?.email);
+        setSession(session);
+        setUser(session?.user ?? null);
+        setIsLoading(false);
+      }
+    );
+
+    // THEN check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log('Initial session check:', session?.user?.email);
+      setSession(session);
+      setUser(session?.user ?? null);
+      setIsLoading(false);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
-  const login = async (email: string, password: string): Promise<boolean> => {
+  const login = async (email: string, password: string) => {
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
       
-      // Mock authentication - in real app, this would be an API call
-      if (email && password.length >= 6) {
-        const userData = {
-          id: Math.random().toString(36).substr(2, 9),
-          email,
-          name: email.split('@')[0]
-        };
-        setUser(userData);
-        localStorage.setItem('mentiora_user', JSON.stringify(userData));
-        return true;
+      if (error) {
+        console.error('Login error:', error);
+        return { error };
       }
-      return false;
+      
+      return { error: null };
     } catch (error) {
       console.error('Login error:', error);
-      return false;
+      return { error };
     } finally {
       setIsLoading(false);
     }
   };
 
-  const register = async (name: string, email: string, password: string): Promise<boolean> => {
+  const register = async (name: string, email: string, password: string) => {
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const redirectUrl = `${window.location.origin}/dashboard`;
       
-      if (name && email && password.length >= 6) {
-        const userData = {
-          id: Math.random().toString(36).substr(2, 9),
-          email,
-          name
-        };
-        setUser(userData);
-        localStorage.setItem('mentiora_user', JSON.stringify(userData));
-        return true;
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: redirectUrl,
+          data: {
+            full_name: name,
+          }
+        }
+      });
+      
+      if (error) {
+        console.error('Registration error:', error);
+        return { error };
       }
-      return false;
+      
+      return { error: null };
     } catch (error) {
-      console.error('Register error:', error);
-      return false;
+      console.error('Registration error:', error);
+      return { error };
     } finally {
       setIsLoading(false);
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('mentiora_user');
+  const logout = async () => {
+    setIsLoading(true);
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        console.error('Logout error:', error);
+      }
+      // Clear any localStorage data
+      const keys = Object.keys(localStorage);
+      keys.forEach(key => {
+        if (key.startsWith('mentiora_')) {
+          localStorage.removeItem(key);
+        }
+      });
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <AuthContext.Provider value={{
       user,
+      session,
       login,
       register,
       logout,
