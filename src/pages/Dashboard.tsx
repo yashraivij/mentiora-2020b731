@@ -208,9 +208,21 @@ const Dashboard = () => {
   };
 
   const getFirstName = () => {
-    if (!user?.name) return 'there';
-    const firstName = user.name.split(' ')[0];
-    return firstName;
+    if (!user) return 'there';
+    
+    // Try to get name from user_metadata first (from registration)
+    const fullName = user.user_metadata?.full_name || user.user_metadata?.name;
+    if (fullName) {
+      const firstName = fullName.split(' ')[0];
+      return firstName;
+    }
+    
+    // Fallback to email if no name is available
+    if (user.email) {
+      return user.email.split('@')[0];
+    }
+    
+    return 'there';
   };
 
   const handleNotifyClick = () => {
