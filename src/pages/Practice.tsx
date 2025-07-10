@@ -7,6 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
 import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -286,21 +287,21 @@ const Practice = () => {
     const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
     
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <Card className="max-w-md w-full">
           <CardHeader className="text-center">
-            <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-            <CardTitle>Session Complete!</CardTitle>
-            <CardDescription>
+            <CheckCircle className="h-16 w-16 text-green-500 dark:text-green-400 mx-auto mb-4" />
+            <CardTitle className="text-foreground">Session Complete!</CardTitle>
+            <CardDescription className="text-muted-foreground">
               {topic?.name} - {subject?.name}
             </CardDescription>
           </CardHeader>
           <CardContent className="text-center space-y-4">
             <div>
-              <div className="text-4xl font-bold text-green-600 mb-2">
+              <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">
                 {marksEarned}/{totalMarks}
               </div>
-              <p className="text-slate-600">Total Marks</p>
+              <p className="text-muted-foreground">Total Marks</p>
             </div>
             
             <div className="space-y-2">
@@ -346,9 +347,9 @@ const Practice = () => {
   const currentAttempt = attempts.find(a => a.questionId === currentQuestion.id);
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-card shadow-sm border-b border-border">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -357,12 +358,13 @@ const Practice = () => {
                 Back
               </Button>
               <div>
-                <h1 className="text-xl font-bold text-slate-900">{topic?.name}</h1>
-                <p className="text-sm text-slate-600">{subject?.name}</p>
+                <h1 className="text-xl font-bold text-foreground">{topic?.name}</h1>
+                <p className="text-sm text-muted-foreground">{subject?.name}</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <span className="text-sm text-slate-600">
+              <ThemeToggle />
+              <span className="text-sm text-muted-foreground">
                 Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
               </span>
               <Progress value={((currentQuestionIndex + 1) / shuffledQuestions.length) * 100} className="w-24" />
@@ -375,10 +377,10 @@ const Practice = () => {
         <div className="max-w-4xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Question Panel */}
-            <Card>
+            <Card className="bg-card/80 backdrop-blur-sm border border-border">
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">Question</CardTitle>
+                  <CardTitle className="text-lg text-foreground">Question</CardTitle>
                   <div className="flex items-center gap-2">
                     <Badge variant="outline">{currentQuestion.marks} marks</Badge>
                     {currentQuestion.calculatorGuidance && (
@@ -386,8 +388,8 @@ const Practice = () => {
                         variant={currentQuestion.calculatorGuidance === 'calc-recommended' ? 'default' : 'secondary'}
                         className={`text-xs ${
                           currentQuestion.calculatorGuidance === 'calc-recommended' 
-                            ? 'bg-green-100 text-green-800 border-green-300' 
-                            : 'bg-blue-100 text-blue-800 border-blue-300'
+                            ? 'bg-green-100 text-green-800 border-green-300 dark:bg-green-950/30 dark:text-green-300 dark:border-green-800/30' 
+                            : 'bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-950/30 dark:text-blue-300 dark:border-blue-800/30'
                         }`}
                       >
                         {currentQuestion.calculatorGuidance === 'calc-recommended' ? '🟩 Calc recommended' : '🟦 Non-calc friendly'}
@@ -397,13 +399,13 @@ const Practice = () => {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-slate-900 mb-6 leading-relaxed">
+                <p className="text-foreground mb-6 leading-relaxed">
                   {currentQuestion.question}
                 </p>
                 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                    <label className="block text-sm font-medium text-foreground mb-2">
                       Your Answer:
                     </label>
                     <Textarea
@@ -430,17 +432,17 @@ const Practice = () => {
 
             {/* Feedback Panel */}
             {showFeedback && currentAttempt && (
-              <Card>
+              <Card className="bg-card/80 backdrop-blur-sm border border-border">
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <CheckCircle className="h-5 w-5 mr-2 text-green-600" />
+                  <CardTitle className="flex items-center text-foreground">
+                    <CheckCircle className="h-5 w-5 mr-2 text-green-600 dark:text-green-400" />
                     AI Teacher Feedback
                   </CardTitle>
                   <div className="flex items-center space-x-2">
-                    <span className="text-2xl font-bold text-green-600">
+                    <span className="text-2xl font-bold text-green-600 dark:text-green-400">
                       {currentAttempt.score}/{currentQuestion.marks}
                     </span>
-                    <span className="text-sm text-slate-600">marks</span>
+                    <span className="text-sm text-muted-foreground">marks</span>
                     <Badge className={currentAttempt.score >= currentQuestion.marks * 0.85 ? "bg-green-500" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "bg-yellow-500" : "bg-red-500"}>
                       {currentAttempt.score >= currentQuestion.marks * 0.85 ? "Excellent" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "Good" : "Needs Work"}
                     </Badge>
@@ -449,23 +451,23 @@ const Practice = () => {
                 <CardContent className="space-y-6">
                   {/* Model Answer */}
                   <div>
-                    <h4 className="font-semibold text-slate-900 mb-2 flex items-center">
+                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
                       <Book className="h-4 w-4 mr-2" />
                       Model Answer
                     </h4>
-                    <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
-                      <p className="text-slate-700">{currentAttempt.feedback.modelAnswer}</p>
+                    <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border-l-4 border-green-500">
+                      <p className="text-foreground">{currentAttempt.feedback.modelAnswer}</p>
                     </div>
                   </div>
 
                   {/* Why This Gets Marks */}
                   <div>
-                    <h4 className="font-semibold text-slate-900 mb-2 flex items-center">
+                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
                       <CheckCircle className="h-4 w-4 mr-2" />
                       Why This Gets Full Marks
                     </h4>
-                    <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
-                      <pre className="text-slate-700 whitespace-pre-wrap font-sans">
+                    <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500">
+                      <pre className="text-foreground whitespace-pre-wrap font-sans">
                         {currentAttempt.feedback.whyThisGetsMark}
                       </pre>
                     </div>
@@ -473,18 +475,18 @@ const Practice = () => {
 
                   {/* AI Feedback */}
                   <div>
-                    <h4 className="font-semibold text-slate-900 mb-2 flex items-center">
+                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
                       <Lightbulb className="h-4 w-4 mr-2" />
                       AI Teacher Feedback
                     </h4>
-                    <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
-                      <p className="text-slate-700">{currentAttempt.feedback.whyYoursDidnt}</p>
+                    <div className="bg-yellow-50 dark:bg-yellow-950/20 p-4 rounded-lg border-l-4 border-yellow-500">
+                      <p className="text-foreground">{currentAttempt.feedback.whyYoursDidnt}</p>
                     </div>
                   </div>
 
                   {/* Spec Reference */}
                   <div>
-                    <h4 className="font-semibold text-slate-900 mb-2">Specification Reference</h4>
+                    <h4 className="font-semibold text-foreground mb-2">Specification Reference</h4>
                     <Badge variant="outline">{currentAttempt.feedback.specLink}</Badge>
                   </div>
 
