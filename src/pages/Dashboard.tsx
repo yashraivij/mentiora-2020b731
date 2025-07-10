@@ -12,6 +12,7 @@ import { SubjectCard } from "@/components/dashboard/SubjectCard";
 import { WeakTopicsSection } from "@/components/dashboard/WeakTopicsSection";
 import { AOBreakdown } from "@/components/dashboard/AOBreakdown";
 import { PremiumAnalyticsCard } from "@/components/dashboard/PremiumAnalyticsCard";
+import { GoalsSection } from "@/components/dashboard/GoalsSection";
 import { supabase } from "@/integrations/supabase/client";
 
 interface UserProgress {
@@ -389,8 +390,9 @@ const Dashboard = () => {
 
         {/* Premium Analytics Section */}
         <div className="grid lg:grid-cols-3 gap-6 mb-8">
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 space-y-6">
             <AOBreakdown userProgress={userProgress} />
+            <GoalsSection />
           </div>
           <div className="lg:col-span-2">
             <WeakTopicsSection 
