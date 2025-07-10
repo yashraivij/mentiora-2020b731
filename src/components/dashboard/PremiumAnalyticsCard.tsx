@@ -20,12 +20,12 @@ export const PremiumAnalyticsCard = ({
   comingSoon = false 
 }: PremiumAnalyticsCardProps) => {
   return (
-    <Card className="group relative overflow-hidden border-0 bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 rounded-3xl">
+    <Card className="group relative overflow-hidden border-0 bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 rounded-3xl">
       {/* Premium Gradient Overlay */}
       <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-500`} />
       
       {/* Lock Overlay */}
-      <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-3xl">
+      <div className="absolute inset-0 bg-background/60 dark:bg-card/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-3xl">
         <div className="text-center space-y-3">
           <div className={`w-16 h-16 bg-gradient-to-br ${gradient} rounded-2xl flex items-center justify-center mx-auto shadow-lg`}>
             <Lock className="h-8 w-8 text-white" />
@@ -52,22 +52,22 @@ export const PremiumAnalyticsCard = ({
 
       <CardContent className="relative z-10 group-hover:blur-sm transition-all duration-300">
         <div className="space-y-3">
-          <CardTitle className="text-lg font-bold text-slate-900 leading-tight">
+          <CardTitle className="text-lg font-bold text-foreground leading-tight">
             {title}
           </CardTitle>
-          <p className="text-sm text-slate-600 leading-relaxed">
+          <p className="text-sm text-muted-foreground leading-relaxed">
             {description}
           </p>
           
           {/* Mock Data Visualization */}
           <div className="mt-6 space-y-2">
-            <div className="flex justify-between text-xs text-slate-500">
+            <div className="flex justify-between text-xs text-muted-foreground">
               <span>This Week</span>
               <span className={`font-semibold bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>
                 {comingSoon ? 'Coming Soon' : '+24%'}
               </span>
             </div>
-            <div className="relative h-2 bg-slate-100 rounded-full overflow-hidden">
+            <div className="relative h-2 bg-muted/30 rounded-full overflow-hidden">
               <div 
                 className={`absolute inset-y-0 left-0 bg-gradient-to-r ${gradient} rounded-full transition-all duration-1000`}
                 style={{ width: comingSoon ? '0%' : '76%' }}
@@ -79,7 +79,7 @@ export const PremiumAnalyticsCard = ({
 
       {/* Premium Border Glow */}
       <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${gradient} p-[1px] opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none`}>
-        <div className="w-full h-full bg-white rounded-3xl" />
+        <div className="w-full h-full bg-card rounded-3xl" />
       </div>
     </Card>
   );
