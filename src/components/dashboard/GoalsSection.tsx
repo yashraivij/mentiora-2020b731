@@ -1,243 +1,222 @@
-import React, { useState, useEffect } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
-import { supabase } from '@/integrations/supabase/client';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Progress } from '@/components/ui/progress';
-import { Plus, Target, Clock, Play, Pause, Square } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Clock, Target, Plus, Calendar, CheckCircle, Trophy, Trash2, Edit } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
-interface StudySession {
+interface Goal {
   id: string;
-  target_minutes: number;
-  elapsed_minutes: number;
+  goal_type: string;
+  target_value: number;
+  current_value: number;
+  start_date: string;
+  end_date: string | null;
   is_active: boolean;
-  created_at: string;
 }
 
-const STUDY_TIME_OPTIONS = [
-  { value: 15, label: '15 minutes' },
-  { value: 30, label: '30 minutes' },
-  { value: 45, label: '45 minutes' },
-  { value: 60, label: '1 hour' },
-  { value: 90, label: '1.5 hours' },
-  { value: 120, label: '2 hours' },
+const PRESET_TIMES = [
+  { value: 15, label: "15 minutes" },
+  { value: 30, label: "30 minutes" },
+  { value: 45, label: "45 minutes" },
+  { value: 60, label: "1 hour" },
+  { value: 90, label: "1.5 hours" },
+  { value: 120, label: "2 hours" }
 ];
 
-export default function GoalsSection() {
+export function GoalsSection() {
   const { user } = useAuth();
-  const { toast } = useToast();
-  const [sessions, setSessions] = useState<StudySession[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedMinutes, setSelectedMinutes] = useState<number>(15);
-  const [activeSession, setActiveSession] = useState<StudySession | null>(null);
-  const [timeRemaining, setTimeRemaining] = useState<number>(0);
-  const [isRunning, setIsRunning] = useState(false);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
+  const [goals, setGoals] = useState<Goal[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedDuration, setSelectedDuration] = useState<string>("");
+  const [todayStudyTime, setTodayStudyTime] = useState(0);
 
   useEffect(() => {
-    if (user) {
-      fetchSessions();
+    if (user?.id) {
+      loadGoals();
+      loadTodayStudyTime();
     }
-  }, [user]);
+  }, [user?.id]);
 
-  const fetchSessions = async () => {
+  const loadGoals = async () => {
+    if (!user?.id) return;
+
     try {
-      const today = new Date().toISOString().split('T')[0];
       const { data, error } = await supabase
         .from('user_goals')
         .select('*')
-        .eq('user_id', user?.id)
-        .eq('goal_type', 'study_session')
-        .gte('created_at', today)
-        .order('created_at', { ascending: false });
+        .eq('user_id', user.id)
+        .eq('is_active', true)
+        .eq('goal_type', 'daily_study_time');
 
-      if (error) throw error;
-      
-      const sessionData = data?.map(goal => ({
-        id: goal.id,
-        target_minutes: goal.target_value,
-        elapsed_minutes: goal.current_value,
-        is_active: goal.is_active,
-        created_at: goal.created_at,
-      })) || [];
-      
-      setSessions(sessionData);
-      
-      // Check if there's an active session
-      const active = sessionData.find(s => s.is_active);
-      if (active) {
-        setActiveSession(active);
-        setTimeRemaining(Math.max(0, (active.target_minutes - active.elapsed_minutes) * 60));
+      if (error) {
+        console.error('Error loading goals:', error);
+        return;
       }
+
+      setGoals(data || []);
     } catch (error) {
-      console.error('Error fetching sessions:', error);
+      console.error('Error loading goals:', error);
     }
   };
 
-  const startStudySession = async () => {
-    if (!user) return;
+  const loadTodayStudyTime = async () => {
+    if (!user?.id) return;
 
     try {
+      const today = new Date().toISOString().split('T')[0];
+      
       const { data, error } = await supabase
+        .from('study_sessions')
+        .select('duration_minutes')
+        .eq('user_id', user.id)
+        .gte('started_at', `${today}T00:00:00`)
+        .lt('started_at', `${today}T23:59:59`)
+        .not('duration_minutes', 'is', null);
+
+      if (error) {
+        console.error('Error loading study time:', error);
+        return;
+      }
+
+      const totalMinutes = data?.reduce((sum, session) => sum + (session.duration_minutes || 0), 0) || 0;
+      setTodayStudyTime(totalMinutes);
+    } catch (error) {
+      console.error('Error loading study time:', error);
+    }
+  };
+
+  const createGoal = async () => {
+    if (!user?.id || !selectedDuration) return;
+
+    setLoading(true);
+    try {
+      const targetMinutes = parseInt(selectedDuration);
+      const today = new Date().toISOString().split('T')[0];
+
+      const { error } = await supabase
         .from('user_goals')
-        .insert([{
+        .insert({
           user_id: user.id,
-          goal_type: 'study_session',
-          target_value: selectedMinutes,
+          goal_type: 'daily_study_time',
+          target_value: targetMinutes,
           current_value: 0,
-          is_active: true,
-        }])
-        .select()
-        .single();
-
-      if (error) throw error;
-
-      const newSession = {
-        id: data.id,
-        target_minutes: selectedMinutes,
-        elapsed_minutes: 0,
-        is_active: true,
-        created_at: data.created_at,
-      };
-
-      setActiveSession(newSession);
-      setTimeRemaining(selectedMinutes * 60);
-      setIsRunning(true);
-      setIsOpen(false);
-      
-      toast({ title: `Study session started for ${selectedMinutes} minutes!` });
-      fetchSessions();
-    } catch (error) {
-      console.error('Error starting session:', error);
-      toast({ title: 'Error starting study session', variant: 'destructive' });
-    }
-  };
-
-  useEffect(() => {
-    if (isRunning && timeRemaining > 0) {
-      const id = setInterval(() => {
-        setTimeRemaining(prev => {
-          if (prev <= 1) {
-            setIsRunning(false);
-            completeSession();
-            return 0;
-          }
-          return prev - 1;
+          start_date: today,
+          is_active: true
         });
-      }, 1000);
-      setIntervalId(id);
-      return () => clearInterval(id);
-    } else if (intervalId) {
-      clearInterval(intervalId);
-      setIntervalId(null);
-    }
-  }, [isRunning, timeRemaining]);
 
-  const completeSession = async () => {
-    if (!activeSession) return;
-    
-    try {
-      await supabase
-        .from('user_goals')
-        .update({ 
-          is_active: false,
-          current_value: activeSession.target_minutes 
-        })
-        .eq('id', activeSession.id);
-      
-      setActiveSession(null);
-      setTimeRemaining(0);
-      toast({ title: 'Study session completed! Great job!' });
-      fetchSessions();
+      if (error) {
+        console.error('Error creating goal:', error);
+        toast.error('Failed to create goal');
+        return;
+      }
+
+      toast.success('Study goal created successfully!');
+      setIsDialogOpen(false);
+      setSelectedDuration("");
+      loadGoals();
     } catch (error) {
-      console.error('Error completing session:', error);
+      console.error('Error creating goal:', error);
+      toast.error('Failed to create goal');
+    } finally {
+      setLoading(false);
     }
   };
 
-  const pauseSession = () => {
-    setIsRunning(false);
-  };
+  const deleteGoal = async (goalId: string) => {
+    if (!user?.id) return;
 
-  const resumeSession = () => {
-    setIsRunning(true);
-  };
-
-  const stopSession = async () => {
-    if (!activeSession) return;
-    
     try {
-      const elapsedMinutes = Math.floor((activeSession.target_minutes * 60 - timeRemaining) / 60);
-      await supabase
+      const { error } = await supabase
         .from('user_goals')
-        .update({ 
-          is_active: false,
-          current_value: elapsedMinutes 
-        })
-        .eq('id', activeSession.id);
-      
-      setActiveSession(null);
-      setTimeRemaining(0);
-      setIsRunning(false);
-      toast({ title: 'Study session stopped' });
-      fetchSessions();
+        .update({ is_active: false })
+        .eq('id', goalId)
+        .eq('user_id', user.id);
+
+      if (error) {
+        console.error('Error deleting goal:', error);
+        toast.error('Failed to delete goal');
+        return;
+      }
+
+      toast.success('Goal deleted successfully');
+      loadGoals();
     } catch (error) {
-      console.error('Error stopping session:', error);
+      console.error('Error deleting goal:', error);
+      toast.error('Failed to delete goal');
     }
   };
 
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  const getProgressPercentage = (goal: Goal) => {
+    return Math.min((todayStudyTime / goal.target_value) * 100, 100);
   };
 
-  const getTodayMinutes = () => {
-    return sessions
-      .filter(s => !s.is_active)
-      .reduce((total, s) => total + s.elapsed_minutes, 0);
+  const formatTime = (minutes: number) => {
+    if (minutes < 60) {
+      return `${minutes}m`;
+    }
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    return remainingMinutes > 0 ? `${hours}h ${remainingMinutes}m` : `${hours}h`;
+  };
+
+  const isGoalCompleted = (goal: Goal) => {
+    return todayStudyTime >= goal.target_value;
   };
 
   return (
-    <div className="mb-8">
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center space-x-3">
-          <div className="p-2 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl">
-            <Clock className="h-6 w-6 text-primary" />
+    <Card className="bg-card/80 backdrop-blur-sm border-border shadow-lg hover:shadow-xl transition-all duration-300">
+      <CardHeader className="pb-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center shadow-lg">
+              <Target className="h-5 w-5 text-white" />
+            </div>
+            <div>
+              <CardTitle className="text-xl text-foreground">Daily Study Goals</CardTitle>
+              <CardDescription className="text-muted-foreground">
+                Set and track your daily revision targets
+              </CardDescription>
+            </div>
           </div>
-          <div>
-            <h3 className="text-2xl font-bold text-foreground">Study Timer</h3>
-            <p className="text-muted-foreground">Set study goals and track your time</p>
-          </div>
-        </div>
-        
-        {!activeSession && (
-          <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
-              <Button className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg">
+              <Button size="sm" className="bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white border-0 shadow-md">
                 <Plus className="h-4 w-4 mr-2" />
-                Start Study Session
+                Add Goal
               </Button>
             </DialogTrigger>
             <DialogContent className="bg-card border-border">
               <DialogHeader>
-                <DialogTitle className="text-foreground">
-                  Start Study Session
-                </DialogTitle>
+                <DialogTitle className="text-foreground">Create Study Goal</DialogTitle>
+                <DialogDescription className="text-muted-foreground">
+                  Set a daily study time target to stay motivated and track your progress.
+                </DialogDescription>
               </DialogHeader>
-              <div className="space-y-4">
+              
+              <div className="space-y-4 pt-4">
                 <div>
-                  <label className="text-foreground text-sm font-medium">Choose study duration:</label>
-                  <Select value={selectedMinutes.toString()} onValueChange={(value) => setSelectedMinutes(parseInt(value))}>
-                    <SelectTrigger className="bg-background border-border mt-2">
-                      <SelectValue />
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Daily Study Time Target
+                  </label>
+                  <Select value={selectedDuration} onValueChange={setSelectedDuration}>
+                    <SelectTrigger className="bg-background border-border text-foreground">
+                      <SelectValue placeholder="Choose study duration" />
                     </SelectTrigger>
                     <SelectContent className="bg-card border-border">
-                      {STUDY_TIME_OPTIONS.map(option => (
-                        <SelectItem key={option.value} value={option.value.toString()} className="text-foreground">
-                          {option.label}
+                      {PRESET_TIMES.map((time) => (
+                        <SelectItem key={time.value} value={time.value.toString()} className="text-foreground hover:bg-accent">
+                          <div className="flex items-center space-x-2">
+                            <Clock className="h-4 w-4 text-muted-foreground" />
+                            <span>{time.label}</span>
+                          </div>
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -245,124 +224,107 @@ export default function GoalsSection() {
                 </div>
                 
                 <div className="flex justify-end space-x-2 pt-4">
-                  <Button type="button" variant="outline" onClick={() => setIsOpen(false)}>
+                  <Button variant="outline" onClick={() => setIsDialogOpen(false)} className="border-border text-muted-foreground">
                     Cancel
                   </Button>
-                  <Button onClick={startStudySession} className="bg-primary hover:bg-primary/90">
-                    Start Timer
+                  <Button 
+                    onClick={createGoal} 
+                    disabled={!selectedDuration || loading}
+                    className="bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white border-0"
+                  >
+                    {loading ? "Creating..." : "Create Goal"}
                   </Button>
                 </div>
               </div>
             </DialogContent>
           </Dialog>
-        )}
-      </div>
-
-      <div className="space-y-6">
-        {/* Active Timer */}
-        {activeSession && (
-          <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-            <CardContent className="p-6">
-              <div className="text-center">
-                <div className="text-6xl font-bold text-primary mb-4">
-                  {formatTime(timeRemaining)}
-                </div>
-                <p className="text-muted-foreground mb-6">
-                  {activeSession.target_minutes} minute study session
-                </p>
-                <div className="flex justify-center space-x-4">
-                  {isRunning ? (
-                    <Button onClick={pauseSession} variant="outline" size="lg">
-                      <Pause className="h-5 w-5 mr-2" />
-                      Pause
-                    </Button>
-                  ) : (
-                    <Button onClick={resumeSession} className="bg-primary hover:bg-primary/90" size="lg">
-                      <Play className="h-5 w-5 mr-2" />
-                      Resume
-                    </Button>
-                  )}
-                  <Button onClick={stopSession} variant="destructive" size="lg">
-                    <Square className="h-5 w-5 mr-2" />
-                    Stop
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Today's Progress */}
-        <Card className="bg-card/80 backdrop-blur-sm border-border">
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2 text-foreground">
-              <Clock className="h-5 w-5" />
-              <span>Today's Study Time</span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold text-primary mb-2">
-              {getTodayMinutes()} minutes
+        </div>
+      </CardHeader>
+      
+      <CardContent className="space-y-4">
+        {goals.length === 0 ? (
+          <div className="text-center py-8">
+            <div className="w-16 h-16 rounded-3xl bg-gradient-to-br from-muted/30 to-muted/20 flex items-center justify-center mx-auto mb-4">
+              <Target className="h-8 w-8 text-muted-foreground" />
             </div>
-            <p className="text-muted-foreground">
-              {sessions.filter(s => !s.is_active).length} sessions completed
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* Recent Sessions */}
-        {sessions.length > 0 && (
-          <Card className="bg-card/80 backdrop-blur-sm border-border">
-            <CardHeader>
-              <CardTitle className="text-foreground">Recent Sessions</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {sessions.slice(0, 5).map((session) => (
-                  <div key={session.id} className="flex items-center justify-between p-3 bg-muted/20 rounded-lg">
+            <p className="text-muted-foreground text-sm mb-4">No study goals set yet</p>
+            <p className="text-xs text-muted-foreground/80">Create your first goal to start tracking your daily study progress</p>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {goals.map((goal) => {
+              const progress = getProgressPercentage(goal);
+              const completed = isGoalCompleted(goal);
+              
+              return (
+                <div key={goal.id} className="p-4 rounded-2xl bg-background/50 dark:bg-card/30 border border-border/50 hover:bg-background/80 dark:hover:bg-card/50 transition-all duration-200">
+                  <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center space-x-3">
-                      <Clock className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-sm text-foreground">
-                        {session.target_minutes} min session
-                      </span>
+                      <div className={`w-8 h-8 rounded-xl flex items-center justify-center shadow-sm ${
+                        completed 
+                          ? 'bg-gradient-to-br from-emerald-500 to-green-600' 
+                          : 'bg-gradient-to-br from-blue-500 to-cyan-600'
+                      }`}>
+                        {completed ? (
+                          <CheckCircle className="h-4 w-4 text-white" />
+                        ) : (
+                          <Clock className="h-4 w-4 text-white" />
+                        )}
+                      </div>
+                      <div>
+                        <div className="flex items-center space-x-2">
+                          <span className="font-medium text-foreground">
+                            {formatTime(goal.target_value)} daily
+                          </span>
+                          {completed && (
+                            <Badge className="bg-gradient-to-r from-emerald-500 to-green-600 text-white border-0 text-xs px-2 py-0.5">
+                              <Trophy className="h-3 w-3 mr-1" />
+                              Completed
+                            </Badge>
+                          )}
+                        </div>
+                        <span className="text-sm text-muted-foreground">
+                          {formatTime(todayStudyTime)} / {formatTime(goal.target_value)}
+                        </span>
+                      </div>
                     </div>
-                    <div className="text-sm text-muted-foreground">
-                      {session.is_active ? (
-                        <span className="text-primary font-medium">Active</span>
-                      ) : (
-                        <span>{session.elapsed_minutes} min completed</span>
-                      )}
+                    
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm font-medium text-foreground">
+                        {Math.round(progress)}%
+                      </span>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        onClick={() => deleteGoal(goal.id)}
+                        className="h-8 w-8 p-0 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </Button>
                     </div>
                   </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+                  
+                  <Progress 
+                    value={progress} 
+                    className="h-2 bg-muted/50"
+                  />
+                </div>
+              );
+            })}
+          </div>
         )}
-
-        {/* Empty State */}
-        {sessions.length === 0 && !activeSession && (
-          <Card className="bg-card/60 backdrop-blur-sm border-border">
-            <CardContent className="p-8 text-center">
-              <div className="p-4 bg-muted/30 rounded-2xl w-fit mx-auto mb-4">
-                <Clock className="h-8 w-8 text-muted-foreground" />
-              </div>
-              <h4 className="text-lg font-semibold text-foreground mb-2">No Study Sessions Yet</h4>
-              <p className="text-muted-foreground mb-4">
-                Start your first study session to track your progress!
-              </p>
-              <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                <DialogTrigger asChild>
-                  <Button className="bg-gradient-to-r from-primary to-primary/80">
-                    <Plus className="h-4 w-4 mr-2" />
-                    Start Your First Session
-                  </Button>
-                </DialogTrigger>
-              </Dialog>
-            </CardContent>
-          </Card>
+        
+        {todayStudyTime > 0 && (
+          <div className="mt-4 p-3 rounded-2xl bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-200/50 dark:border-blue-800/30">
+            <div className="flex items-center space-x-2">
+              <Calendar className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+              <span className="text-sm font-medium text-blue-700 dark:text-blue-300">
+                Today's Study Time: {formatTime(todayStudyTime)}
+              </span>
+            </div>
+          </div>
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
