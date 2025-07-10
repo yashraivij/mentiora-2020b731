@@ -658,12 +658,12 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'm6-q5',
-            question: 'A survey of 20 students found their favorite colors: Red(5), Blue(8), Green(4), Yellow(3). Draw a bar chart.',
+            question: 'A survey of 20 students found their favorite colors: Red(5), Blue(8), Green(4), Yellow(3). What is the most popular color and what percentage of students chose it?',
             marks: 3,
             difficulty: 'medium',
-            modelAnswer: 'Bar chart with x-axis showing colors, y-axis showing frequency, bars at heights 5, 8, 4, 3',
+            modelAnswer: 'Most popular color is Blue with 8 students. Percentage = (8/20) × 100% = 40%',
             markingCriteria: {
-              breakdown: ['Correct axes labels (1 mark)', 'Correct bar heights (1 mark)', 'Clear presentation (1 mark)']
+              breakdown: ['Identifying Blue as most popular (1 mark)', 'Correct calculation of percentage (1 mark)', 'Final answer 40% (1 mark)']
             },
             specReference: 'M6.5'
           },
@@ -680,12 +680,12 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'm6-q7',
-            question: 'Draw a pie chart for data: A(60°), B(120°), C(90°), D(90°)',
+            question: 'Given data for a pie chart: A(60°), B(120°), C(90°), D(90°). Which category represents the largest proportion and what percentage of the total does it represent?',
             marks: 2,
             difficulty: 'medium',
-            modelAnswer: 'Pie chart with sectors of 60°, 120°, 90°, 90° labeled A, B, C, D respectively',
+            modelAnswer: 'Category B represents the largest proportion with 120°. Percentage = (120°/360°) × 100% = 33.3%',
             markingCriteria: {
-              breakdown: ['Correct sector angles (1 mark)', 'Clear labels (1 mark)']
+              breakdown: ['Identifying B as largest category (1 mark)', 'Correct percentage calculation 33.3% (1 mark)']
             },
             specReference: 'M6.7'
           },
@@ -1863,12 +1863,12 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'c2-q8',
-            question: 'Draw the dot and cross diagram for water (H₂O).',
+            question: 'Describe the bonding in water (H₂O) including the number of electrons involved.',
             marks: 2,
             difficulty: 'medium',
-            modelAnswer: 'Diagram showing oxygen with 6 outer electrons (crosses) and two hydrogens each sharing one electron (dots) with oxygen.',
+            modelAnswer: 'Water has covalent bonding. Oxygen has 6 outer electrons and shares 2 electrons (one with each hydrogen atom) to form two covalent bonds.',
             markingCriteria: {
-              breakdown: ['Correct representation of oxygen electrons (1 mark)', 'Correct sharing with hydrogen atoms (1 mark)']
+              breakdown: ['Identifies covalent bonding (1 mark)', 'Correct description of electron sharing (1 mark)']
             },
             specReference: 'C2.8'
           },
@@ -2189,12 +2189,12 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'c5-q6',
-            question: 'Draw an energy profile diagram for an exothermic reaction.',
+            question: 'Describe the energy changes in an exothermic reaction, including activation energy.',
             marks: 3,
             difficulty: 'medium',
-            modelAnswer: 'Diagram showing reactants at higher energy level than products, with activation energy barrier and overall energy decrease.',
+            modelAnswer: 'In an exothermic reaction, reactants have higher energy than products. Energy must be supplied to overcome the activation energy barrier, then more energy is released when products form, resulting in an overall energy decrease.',
             markingCriteria: {
-              breakdown: ['Reactants higher than products (1 mark)', 'Activation energy barrier shown (1 mark)', 'Overall energy decrease indicated (1 mark)']
+              breakdown: ['Reactants have higher energy than products (1 mark)', 'Activation energy barrier must be overcome (1 mark)', 'Overall energy is released/decreased (1 mark)']
             },
             specReference: 'C5.6'
           },
@@ -2399,12 +2399,12 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'c7-q4',
-            question: 'Write the molecular formula and draw the structure of propane.',
+            question: 'Write the molecular formula of propane and describe its structure.',
             marks: 2,
             difficulty: 'medium',
-            modelAnswer: 'C₃H₈. Structure: H-C-C-C-H with all carbons having 4 bonds (H atoms completing the structure).',
+            modelAnswer: 'Molecular formula: C₃H₈. Structure: 3 carbon atoms bonded in a chain, with each carbon bonded to hydrogen atoms (first and last carbons have 3 hydrogens, middle carbon has 2 hydrogens).',
             markingCriteria: {
-              breakdown: ['Correct molecular formula C₃H₈ (1 mark)', 'Correct structural formula (1 mark)']
+              breakdown: ['Correct molecular formula C₃H₈ (1 mark)', 'Correct structural description (1 mark)']
             },
             specReference: 'C7.4'
           },
