@@ -9,6 +9,7 @@ export interface Question {
     breakdown: string[];
   };
   specReference: string;
+  calculatorGuidance?: 'calc-recommended' | 'non-calc-friendly';
 }
 
 export interface Topic {
@@ -41,7 +42,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct multiplication method (1 mark)', 'Correct answer 8.88 (1 mark)']
             },
-            specReference: 'M1.1'
+            specReference: 'M1.1',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm1-q2',
@@ -52,7 +54,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Converting to fraction 45/100 (1 mark)', 'Simplifying to 9/20 (1 mark)']
             },
-            specReference: 'M1.2'
+            specReference: 'M1.2',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm1-q3',
@@ -63,7 +66,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Finding factors correctly (1 mark)', 'Identifying HCF as 12 (1 mark)']
             },
-            specReference: 'M1.3'
+            specReference: 'M1.3',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm1-q4',
@@ -74,7 +78,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct evaluation of powers (1 mark)', 'Correct final calculation = 13 (1 mark)']
             },
-            specReference: 'M1.4'
+            specReference: 'M1.4',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm1-q5',
@@ -85,7 +90,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct rounding to 45.68 (1 mark)']
             },
-            specReference: 'M1.5'
+            specReference: 'M1.5',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm1-q6',
@@ -96,7 +102,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct conversion to 0.375 (1 mark)']
             },
-            specReference: 'M1.6'
+            specReference: 'M1.6',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm1-q7',
@@ -107,7 +114,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct method shown (1 mark)', 'Correct answer 36 (1 mark)']
             },
-            specReference: 'M1.7'
+            specReference: 'M1.7',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm1-q8',
@@ -118,7 +126,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Finding multiples correctly (1 mark)', 'Identifying LCM as 36 (1 mark)']
             },
-            specReference: 'M1.8'
+            specReference: 'M1.8',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm1-q9',
@@ -129,7 +138,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct answer 21 (1 mark)']
             },
-            specReference: 'M1.9'
+            specReference: 'M1.9',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm1-q10',
@@ -140,7 +150,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Systematic division by prime numbers (1 mark)', 'Complete factorization (1 mark)', 'Correct expression as 5³ (1 mark)']
             },
-            specReference: 'M1.10'
+            specReference: 'M1.10',
+            calculatorGuidance: 'non-calc-friendly'
           }
         ]
       },
@@ -157,7 +168,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct simplification to 4x (1 mark)']
             },
-            specReference: 'M2.1'
+            specReference: 'M2.1',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm2-q2',
@@ -168,7 +180,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct rearrangement (1 mark)', 'Correct solution x = 4 (1 mark)']
             },
-            specReference: 'M2.2'
+            specReference: 'M2.2',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm2-q3',
@@ -179,7 +192,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct expansion method (1 mark)', 'Correct final answer x² + 5x + 6 (1 mark)']
             },
-            specReference: 'M2.3'
+            specReference: 'M2.3',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm2-q4',
@@ -190,7 +204,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Finding correct factors (1 mark)', 'Correct factorization (x + 3)(x + 4) (1 mark)']
             },
-            specReference: 'M2.4'
+            specReference: 'M2.4',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm2-q5',
@@ -201,7 +216,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct rearrangement (1 mark)', 'Correct solution x = 12 (1 mark)']
             },
-            specReference: 'M2.5'
+            specReference: 'M2.5',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm2-q6',
@@ -212,7 +228,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct simplification to 6ab (1 mark)']
             },
-            specReference: 'M2.6'
+            specReference: 'M2.6',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm2-q7',
@@ -223,7 +240,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct substitution and calculation y = 7 (1 mark)']
             },
-            specReference: 'M2.7'
+            specReference: 'M2.7',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm2-q8',
@@ -234,7 +252,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct expansion to 6x - 15 (1 mark)']
             },
-            specReference: 'M2.8'
+            specReference: 'M2.8',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm2-q9',
@@ -245,7 +264,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct rearrangement (1 mark)', 'Both solutions x = 3 and x = -3 (1 mark)']
             },
-            specReference: 'M2.9'
+            specReference: 'M2.9',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm2-q10',
@@ -256,7 +276,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct rearrangement steps (1 mark)', 'Correct final answer x = (y + 2)/3 (1 mark)']
             },
-            specReference: 'M2.10'
+            specReference: 'M2.10',
+            calculatorGuidance: 'non-calc-friendly'
           }
         ]
       },
@@ -273,7 +294,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct simplification to 3:4 (1 mark)']
             },
-            specReference: 'M3.1'
+            specReference: 'M3.1',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm3-q2',
@@ -284,7 +306,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Finding cost of 1 pen (1 mark)', 'Correct final answer £7.50 (1 mark)']
             },
-            specReference: 'M3.2'
+            specReference: 'M3.2',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm3-q3',
@@ -295,7 +318,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Finding total parts (1 mark)', 'Finding value of each part (1 mark)', 'All three shares correct (1 mark)']
             },
-            specReference: 'M3.3'
+            specReference: 'M3.3',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm3-q4',
@@ -306,7 +330,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct proportion method (1 mark)', 'Correct answer 300g (1 mark)']
             },
-            specReference: 'M3.4'
+            specReference: 'M3.4',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm3-q5',
@@ -317,7 +342,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Finding the increase (1 mark)', 'Correct percentage calculation 20% (1 mark)']
             },
-            specReference: 'M3.5'
+            specReference: 'M3.5',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm3-q6',
@@ -328,7 +354,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct conversion factor (1 mark)', 'Correct answer 9 km/h (1 mark)']
             },
-            specReference: 'M3.6'
+            specReference: 'M3.6',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm3-q7',
@@ -339,7 +366,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct answer 3 (1 mark)']
             },
-            specReference: 'M3.7'
+            specReference: 'M3.7',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm3-q8',
@@ -350,7 +378,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct formula used (1 mark)', 'Correct answer 50 mph (1 mark)']
             },
-            specReference: 'M3.8'
+            specReference: 'M3.8',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm3-q9',
@@ -361,7 +390,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct decimal 0.35 (1 mark)', 'Correct simplified fraction 7/20 (1 mark)']
             },
-            specReference: 'M3.9'
+            specReference: 'M3.9',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm3-q10',
@@ -372,7 +402,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Setting up proportion correctly (1 mark)', 'Finding constant k = 3 (1 mark)', 'Correct answer y = 21 (1 mark)']
             },
-            specReference: 'M3.10'
+            specReference: 'M3.10',
+            calculatorGuidance: 'calc-recommended'
           }
         ]
       },
@@ -389,7 +420,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct calculation 40 cm² (1 mark)']
             },
-            specReference: 'M4.1'
+            specReference: 'M4.1',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm4-q2',
@@ -400,7 +432,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct calculation 12 cm (1 mark)']
             },
-            specReference: 'M4.2'
+            specReference: 'M4.2',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm4-q3',
@@ -411,7 +444,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct formula πr² (1 mark)', 'Correct calculation 113.04 cm² (1 mark)']
             },
-            specReference: 'M4.3'
+            specReference: 'M4.3',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm4-q4',
@@ -422,7 +456,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct calculation 64 cm³ (1 mark)']
             },
-            specReference: 'M4.4'
+            specReference: 'M4.4',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm4-q5',
@@ -433,7 +468,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct formula πd (1 mark)', 'Correct calculation 31.4 cm (1 mark)']
             },
-            specReference: 'M4.5'
+            specReference: 'M4.5',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm4-q6',
@@ -444,7 +480,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct formula ½bh (1 mark)', 'Correct calculation 24 cm² (1 mark)']
             },
-            specReference: 'M4.6'
+            specReference: 'M4.6',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm4-q7',
@@ -455,7 +492,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct formula 6s² (1 mark)', 'Correct calculation 54 cm² (1 mark)']
             },
-            specReference: 'M4.7'
+            specReference: 'M4.7',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm4-q8',
@@ -466,7 +504,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct use of Pythagoras theorem (1 mark)', 'Correct answer 5 cm (1 mark)']
             },
-            specReference: 'M4.8'
+            specReference: 'M4.8',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm4-q9',
@@ -477,7 +516,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct formula πr²h (1 mark)', 'Correct substitution (1 mark)', 'Correct calculation 62.8 cm³ (1 mark)']
             },
-            specReference: 'M4.9'
+            specReference: 'M4.9',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm4-q10',
@@ -488,7 +528,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct formula base × height (1 mark)', 'Correct calculation 28 cm² (1 mark)']
             },
-            specReference: 'M4.10'
+            specReference: 'M4.10',
+            calculatorGuidance: 'non-calc-friendly'
           }
         ]
       },
@@ -505,7 +546,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct answer 1/6 (1 mark)']
             },
-            specReference: 'M5.1'
+            specReference: 'M5.1',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm5-q2',
@@ -516,7 +558,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Finding total number of balls (1 mark)', 'Correct probability 5/8 (1 mark)']
             },
-            specReference: 'M5.2'
+            specReference: 'M5.2',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm5-q3',
@@ -527,7 +570,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Listing all outcomes correctly (1 mark)', 'Correct probability 1/4 (1 mark)']
             },
-            specReference: 'M5.3'
+            specReference: 'M5.3',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm5-q4',
@@ -538,7 +582,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Understanding complementary probability (1 mark)', 'Correct answer 5/6 (1 mark)']
             },
-            specReference: 'M5.4'
+            specReference: 'M5.4',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm5-q5',
@@ -549,7 +594,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Finding individual probabilities (1 mark)', 'Correct addition to get 1/2 (1 mark)']
             },
-            specReference: 'M5.5'
+            specReference: 'M5.5',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm5-q6',
@@ -560,7 +606,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct answer 1/13 (1 mark)']
             },
-            specReference: 'M5.6'
+            specReference: 'M5.6',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm5-q7',
@@ -571,7 +618,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Identifying all ways to get sum 7 (1 mark)', 'Finding total outcomes 36 (1 mark)', 'Correct probability 1/6 (1 mark)']
             },
-            specReference: 'M5.7'
+            specReference: 'M5.7',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm5-q8',
@@ -582,7 +630,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Listing all 8 outcomes (1 mark)', 'Identifying outcomes with exactly 2 heads (1 mark)', 'Correct probability 3/8 (1 mark)']
             },
-            specReference: 'M5.8'
+            specReference: 'M5.8',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm5-q9',
@@ -593,7 +642,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct answer 3/5 (1 mark)']
             },
-            specReference: 'M5.9'
+            specReference: 'M5.9',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm5-q10',
@@ -604,7 +654,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Finding probability of first red marble (1 mark)', 'Finding conditional probability of second red (1 mark)', 'Correct final answer 1/11 (1 mark)']
             },
-            specReference: 'M5.10'
+            specReference: 'M5.10',
+            calculatorGuidance: 'non-calc-friendly'
           }
         ]
       },
@@ -621,7 +672,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct sum of numbers (1 mark)', 'Correct mean calculation = 5 (1 mark)']
             },
-            specReference: 'M6.1'
+            specReference: 'M6.1',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm6-q2',
@@ -632,7 +684,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Arranging in order (1 mark)', 'Correct median = 9 (1 mark)']
             },
-            specReference: 'M6.2'
+            specReference: 'M6.2',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm6-q3',
@@ -643,7 +696,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct mode = 2 (1 mark)']
             },
-            specReference: 'M6.3'
+            specReference: 'M6.3',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm6-q4',
@@ -654,7 +708,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct range = 19 (1 mark)']
             },
-            specReference: 'M6.4'
+            specReference: 'M6.4',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm6-q5',
@@ -665,7 +720,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Identifying Blue as most popular (1 mark)', 'Correct calculation of percentage (1 mark)', 'Final answer 40% (1 mark)']
             },
-            specReference: 'M6.5'
+            specReference: 'M6.5',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm6-q6',
@@ -676,7 +732,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Correct calculation of total (1 mark)', 'Finding total frequency (1 mark)', 'Correct mean (1 mark)']
             },
-            specReference: 'M6.6'
+            specReference: 'M6.6',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm6-q7',
@@ -687,7 +744,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Identifying B as largest category (1 mark)', 'Correct percentage calculation 33.3% (1 mark)']
             },
-            specReference: 'M6.7'
+            specReference: 'M6.7',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm6-q8',
@@ -698,7 +756,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Finding median position (1 mark)', 'Identifying correct group (1 mark)', 'Reasonable estimate (1 mark)']
             },
-            specReference: 'M6.8'
+            specReference: 'M6.8',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm6-q9',
@@ -709,7 +768,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Finding Q1 correctly (1 mark)', 'Finding Q3 correctly (1 mark)', 'Correct IQR = 13 (1 mark)']
             },
-            specReference: 'M6.9'
+            specReference: 'M6.9',
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm6-q10',
@@ -720,7 +780,8 @@ export const curriculum: Subject[] = [
             markingCriteria: {
               breakdown: ['Identifying positive correlation (1 mark)', 'Correct interpretation (1 mark)']
             },
-            specReference: 'M6.10'
+            specReference: 'M6.10',
+            calculatorGuidance: 'non-calc-friendly'
           }
         ]
       }

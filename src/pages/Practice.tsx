@@ -379,7 +379,21 @@ const Practice = () => {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-lg">Question</CardTitle>
-                  <Badge variant="outline">{currentQuestion.marks} marks</Badge>
+                  <div className="flex items-center gap-2">
+                    <Badge variant="outline">{currentQuestion.marks} marks</Badge>
+                    {currentQuestion.calculatorGuidance && (
+                      <Badge 
+                        variant={currentQuestion.calculatorGuidance === 'calc-recommended' ? 'default' : 'secondary'}
+                        className={`text-xs ${
+                          currentQuestion.calculatorGuidance === 'calc-recommended' 
+                            ? 'bg-green-100 text-green-800 border-green-300' 
+                            : 'bg-blue-100 text-blue-800 border-blue-300'
+                        }`}
+                      >
+                        {currentQuestion.calculatorGuidance === 'calc-recommended' ? '🟩 Calc recommended' : '🟦 Non-calc friendly'}
+                      </Badge>
+                    )}
+                  </div>
                 </div>
               </CardHeader>
               <CardContent>
