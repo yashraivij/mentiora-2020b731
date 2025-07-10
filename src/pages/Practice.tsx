@@ -50,16 +50,87 @@ const Practice = () => {
   const topic = subject?.topics.find(t => t.id === topicId);
   const currentQuestion = shuffledQuestions[currentQuestionIndex];
 
+  // Save session state to localStorage
+  const saveSessionState = () => {
+    if (!user?.id || !subjectId || !topicId) return;
+    
+    const sessionState = {
+      currentQuestionIndex,
+      userAnswer,
+      attempts,
+      showFeedback,
+      shuffledQuestions: shuffledQuestions.map(q => q.id), // Only save question IDs
+      lastSaved: new Date().toISOString()
+    };
+    
+    const sessionKey = `mentiora_session_${user.id}_${subjectId}_${topicId}`;
+    localStorage.setItem(sessionKey, JSON.stringify(sessionState));
+  };
+
+  // Load session state from localStorage
+  const loadSessionState = () => {
+    if (!user?.id || !subjectId || !topicId || !topic) return false;
+    
+    const sessionKey = `mentiora_session_${user.id}_${subjectId}_${topicId}`;
+    const savedState = localStorage.getItem(sessionKey);
+    
+    if (savedState) {
+      try {
+        const state = JSON.parse(savedState);
+        
+        // Restore shuffled questions order
+        const restoredQuestions = state.shuffledQuestions
+          .map((id: string) => topic.questions?.find(q => q.id === id))
+          .filter((q: Question | undefined): q is Question => q !== undefined);
+        
+        if (restoredQuestions.length > 0) {
+          setShuffledQuestions(restoredQuestions);
+          setCurrentQuestionIndex(state.currentQuestionIndex || 0);
+          setUserAnswer(state.userAnswer || "");
+          setAttempts(state.attempts || []);
+          setShowFeedback(state.showFeedback || false);
+          
+          toast.success("Previous session restored! Continuing from where you left off.");
+          return true;
+        }
+      } catch (error) {
+        console.error('Error loading session state:', error);
+      }
+    }
+    
+    return false;
+  };
+
+  // Clear session state
+  const clearSessionState = () => {
+    if (!user?.id || !subjectId || !topicId) return;
+    
+    const sessionKey = `mentiora_session_${user.id}_${subjectId}_${topicId}`;
+    localStorage.removeItem(sessionKey);
+  };
+
   useEffect(() => {
     if (!subject || !topic) {
       navigate('/dashboard');
       return;
     }
     
-    // Shuffle questions when component mounts or topic changes
-    const shuffled = shuffleArray(topic.questions || []);
-    setShuffledQuestions(shuffled);
-  }, [subject, topic, navigate, topicId]);
+    // Try to load existing session first
+    const sessionRestored = loadSessionState();
+    
+    // Only shuffle questions if no session was restored
+    if (!sessionRestored) {
+      const shuffled = shuffleArray(topic.questions || []);
+      setShuffledQuestions(shuffled);
+    }
+  }, [subject, topic, navigate, topicId, user?.id]);
+
+  // Save state whenever important values change
+  useEffect(() => {
+    if (shuffledQuestions.length > 0) {
+      saveSessionState();
+    }
+  }, [currentQuestionIndex, userAnswer, attempts, showFeedback, shuffledQuestions]);
 
   const markAnswerWithAI = async (question: Question, answer: string) => {
     try {
@@ -160,6 +231,9 @@ const Practice = () => {
     const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
     const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
     const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
+    
+    // Clear the current session state since it's completed
+    clearSessionState();
     
     // Save progress
     const progressKey = `mentiora_progress_${user?.id}`;
