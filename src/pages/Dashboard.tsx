@@ -464,11 +464,11 @@ const Dashboard = () => {
           <div className="text-center py-8">
             <div className="space-y-4">
               <div className="flex items-center justify-center space-x-2">
-                <Sparkles className="h-6 w-6 text-violet-500" />
-                <h4 className="text-xl font-bold text-slate-900">Advanced Analytics Coming Soon</h4>
-                <Sparkles className="h-6 w-6 text-violet-500" />
+                <Sparkles className="h-6 w-6 text-violet-500 dark:text-violet-400" />
+                <h4 className="text-xl font-bold text-foreground">Advanced Analytics Coming Soon</h4>
+                <Sparkles className="h-6 w-6 text-violet-500 dark:text-violet-400" />
               </div>
-              <p className="text-slate-600 max-w-md mx-auto">
+              <p className="text-muted-foreground max-w-md mx-auto">
                 We're working hard to bring you powerful AI-driven insights to supercharge your GCSE revision. 
                 Stay tuned for updates!
               </p>
