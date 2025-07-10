@@ -148,7 +148,7 @@ export function GoalsSection() {
         .from('study_sessions')
         .insert({
           user_id: user.id,
-          mode: 'timer',
+          mode: 'chat',
           started_at: new Date().toISOString()
         })
         .select()
