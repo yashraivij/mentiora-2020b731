@@ -77,9 +77,9 @@ export const SubjectCard = ({
         <Button
           variant="ghost"
           size="sm"
-          className={`absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl backdrop-blur-sm ${
+          className={`absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl backdrop-blur-sm dark:hidden ${
             isPinned 
-              ? 'opacity-100 text-amber-500 bg-amber-50/80 hover:bg-amber-100/80 dark:bg-amber-950/30 dark:hover:bg-amber-900/40' 
+              ? 'opacity-100 text-amber-500 bg-amber-50/80 hover:bg-amber-100/80' 
               : 'text-muted-foreground bg-background/50 hover:bg-background/80'
           }`}
           onClick={(e) => {
