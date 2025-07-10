@@ -50,19 +50,27 @@ ${markingCriteria.breakdown.join('\n')}
 
 TOTAL MARKS: ${totalMarks}${formulaSheetNote}
 
+CRITICAL MARKING INSTRUCTIONS:
+- ONLY comment on what the student actually wrote - do not assume working that isn't shown
+- If the student gives just a final answer with no working, only assess the accuracy of that answer
+- Do NOT mention "calculation mistakes" or "working out" unless the student actually showed calculations
+- Be consistent: if working is required for full marks, deduct appropriately but explain this clearly
+- If a correct final answer deserves full marks without working, award full marks
+- Always check your feedback against what the student ACTUALLY wrote, not what you think they might have done
+
 IMPORTANT: Always check your feedback against the CORRECT ANSWER above. Make sure you don't contradict what's shown in the correct answer.
 
 Give feedback that:
 1. MARKS_AWARDED: A number from 0 to ${totalMarks}
-2. FEEDBACK: Use simple, friendly language. Start with what they did well, then explain what they missed. Give specific tips on how to improve. Talk like you're having a conversation with the student - use "you" and "your" and be encouraging!
+2. FEEDBACK: Use simple, friendly language. Only comment on what the student actually showed. If they got the right answer but showed no working, say so clearly. If working was required and missing, explain this. Be specific about what you can see in their response.
 3. ASSESSMENT: A simple comment like "Great job!", "Good effort!", "Keep trying!", or "Almost there!"
 
-Be encouraging and helpful. If a student shows understanding but uses different words, give them credit. Focus on the main ideas rather than exact wording. Make sure your feedback matches the correct answer provided.
+Be encouraging and helpful. If a student shows understanding but uses different words, give them credit. Focus on the main ideas rather than exact wording. Make sure your feedback matches the correct answer provided and what the student actually wrote.
 
 Respond in this exact JSON format:
 {
   "marksAwarded": [number],
-  "feedback": "[friendly, conversational feedback]",
+  "feedback": "[friendly, conversational feedback based only on what was actually written]",
   "assessment": "[encouraging assessment]"
 }`;
 
