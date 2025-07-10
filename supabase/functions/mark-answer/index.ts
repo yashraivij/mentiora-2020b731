@@ -35,7 +35,7 @@ serve(async (req) => {
     const needsFormulaSheet = isMath && formulaKeywords.some(keyword => questionText.includes(keyword.toLowerCase()));
     
     const formulaSheetNote = needsFormulaSheet ? 
-      '\n\nIMPORTANT: If this question involves formulas, make sure to mention in your feedback that students can find help using the AQA GCSE Maths formula sheet at this link: https://cdn.sanity.io/files/p28bar15/green/a79c9e8a3e53e261503e3de0214b0a777cfdf90f.pdf?_gl=1*1vv2iqx*_gcl_au*OTI0MTUxMDMuMTc0ODQ5MjY4OQ. (opens in new tab). Include this as a helpful tip in your feedback.' : '';
+      '\n\nIMPORTANT: If this question involves formulas, include this clickable link in your feedback: <a href="https://cdn.sanity.io/files/p28bar15/green/a79c9e8a3e53e261503e3de0214b0a777cfdf90f.pdf?_gl=1*1vv2iqx*_gcl_au*OTI0MTUxMDMuMTc0ODQ5MjY4OQ." target="_blank" rel="noopener noreferrer" style="color: #3b82f6; text-decoration: underline;">AQA GCSE Maths Formula Sheet</a> for help with formulas. Make sure to include this exact HTML link in your feedback text.' : '';
 
     const prompt = `You are a friendly teacher helping a student learn ${subjectId}. Your job is to give helpful, encouraging feedback that's easy to understand.
 
