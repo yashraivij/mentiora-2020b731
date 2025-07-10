@@ -171,7 +171,7 @@ const SubjectTopics = () => {
                         <span className="font-medium">{progress.averageScore}%</span>
                       </div>
                       <Progress value={progress.averageScore} className="mb-2" />
-                      <p className="text-xs text-slate-600">
+                      <p className="text-xs text-muted-foreground">
                         {progress.attempts} attempt{progress.attempts !== 1 ? 's' : ''}
                       </p>
                     </div>
@@ -179,7 +179,7 @@ const SubjectTopics = () => {
                   <Button 
                     className={`w-full font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
                       isMastered 
-                        ? 'bg-gradient-to-r from-slate-400 to-slate-500 hover:from-slate-500 hover:to-slate-600 text-white' 
+                        ? 'bg-gradient-to-r from-muted to-muted-foreground hover:from-muted-foreground hover:to-foreground text-white' 
                         : 'bg-gradient-to-r from-emerald-400 to-cyan-500 hover:from-emerald-500 hover:to-cyan-600 text-white'
                     }`}
                     onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}

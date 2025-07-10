@@ -231,9 +231,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10">
       {/* Premium Header with Glassmorphism */}
-      <header className="bg-card/80 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-lg shadow-foreground/5">
+      <header className="bg-card/90 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-lg shadow-black/5 dark:shadow-black/20">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
@@ -258,17 +258,17 @@ const Dashboard = () => {
             </div>
             <div className="flex items-center space-x-3">
               <ThemeToggle />
-              <Button variant="ghost" onClick={() => navigate('/analytics')} className="text-muted-foreground hover:text-foreground hover:bg-accent">
+              <Button variant="ghost" onClick={() => navigate('/analytics')} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
                 <BarChart3 className="h-4 w-4 mr-2" />
                 Analytics
               </Button>
-              <div className="flex items-center space-x-2 px-4 py-2 bg-card/60 backdrop-blur-sm rounded-2xl border border-border shadow-sm">
-                <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                  <User className="h-3 w-3 text-white" />
+              <div className="flex items-center space-x-2 px-4 py-2 bg-background/60 dark:bg-card/60 backdrop-blur-sm rounded-2xl border border-border shadow-sm">
+                <div className="w-6 h-6 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
+                  <User className="h-3 w-3 text-primary-foreground" />
                 </div>
-                <span className="text-sm font-medium text-card-foreground">{getFirstName()}</span>
+                <span className="text-sm font-medium text-foreground">{getFirstName()}</span>
               </div>
-              <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground hover:text-foreground">
+              <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
                 <LogOut className="h-4 w-4" />
               </Button>
             </div>
@@ -286,7 +286,7 @@ const Dashboard = () => {
               </h2>
               <p className="text-muted-foreground text-lg">Ready to elevate your GCSE revision journey?</p>
             </div>
-            <div className="hidden md:flex items-center space-x-3 px-4 py-2 bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-950/20 dark:to-blue-950/20 rounded-2xl border border-emerald-200/50 dark:border-emerald-800/50">
+            <div className="hidden md:flex items-center space-x-3 px-4 py-2 bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-950/30 dark:to-blue-950/30 rounded-2xl border border-emerald-200/50 dark:border-emerald-800/30">
               <Zap className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
               <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">AI-Powered Insights</span>
             </div>
@@ -303,12 +303,12 @@ const Dashboard = () => {
               </Badge>
             </div>
             <div className="flex items-center space-x-3">
-              <div className="flex items-center space-x-1 bg-card/80 backdrop-blur-sm rounded-2xl p-1.5 border border-border shadow-sm">
+              <div className="flex items-center space-x-1 bg-background/80 dark:bg-card/80 backdrop-blur-sm rounded-2xl p-1.5 border border-border shadow-sm">
                 <Button
                   variant={sortBy === 'progress' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setSortBy('progress')}
-                  className={sortBy === 'progress' ? 'bg-primary text-primary-foreground shadow-md' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'}
+                  className={sortBy === 'progress' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors'}
                 >
                   Progress
                 </Button>
@@ -316,7 +316,7 @@ const Dashboard = () => {
                   variant={sortBy === 'weakest' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setSortBy('weakest')}
-                  className={sortBy === 'weakest' ? 'bg-primary text-primary-foreground shadow-md' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'}
+                  className={sortBy === 'weakest' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors'}
                 >
                   Weakest
                 </Button>
@@ -324,7 +324,7 @@ const Dashboard = () => {
                   variant={sortBy === 'alphabetical' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setSortBy('alphabetical')}
-                  className={sortBy === 'alphabetical' ? 'bg-primary text-primary-foreground shadow-md' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'}
+                  className={sortBy === 'alphabetical' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors'}
                 >
                   A-Z
                 </Button>
@@ -358,7 +358,7 @@ const Dashboard = () => {
             subtitle="Average across subjects"
             progress={getOverallProgress()}
             icon={TrendingUp}
-            color="bg-gradient-to-br from-primary to-primary/80"
+            color="bg-gradient-to-br from-primary via-primary/90 to-primary/80"
             trend={userProgress.length > 0 ? 5 : undefined}
           />
           

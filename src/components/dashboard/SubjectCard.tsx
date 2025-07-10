@@ -42,15 +42,15 @@ export const SubjectCard = ({
   const totalAttempted = subjectProgress.length;
 
   const getScoreColor = (score: number) => {
-    if (score >= 85) return 'text-emerald-600';
-    if (score >= 70) return 'text-yellow-600';
-    return 'text-red-500';
+    if (score >= 85) return 'text-emerald-600 dark:text-emerald-400';
+    if (score >= 70) return 'text-yellow-600 dark:text-yellow-400';
+    return 'text-red-500 dark:text-red-400';
   };
 
   const getScoreBg = (score: number) => {
-    if (score >= 85) return 'bg-gradient-to-r from-emerald-50 to-emerald-100 border-emerald-200';
-    if (score >= 70) return 'bg-gradient-to-r from-yellow-50 to-yellow-100 border-yellow-200';
-    return 'bg-gradient-to-r from-red-50 to-red-100 border-red-200';
+    if (score >= 85) return 'bg-gradient-to-r from-emerald-50 to-emerald-100 border-emerald-200 dark:from-emerald-950/30 dark:to-emerald-900/30 dark:border-emerald-800/30';
+    if (score >= 70) return 'bg-gradient-to-r from-yellow-50 to-yellow-100 border-yellow-200 dark:from-yellow-950/30 dark:to-yellow-900/30 dark:border-yellow-800/30';
+    return 'bg-gradient-to-r from-red-50 to-red-100 border-red-200 dark:from-red-950/30 dark:to-red-900/30 dark:border-red-800/30';
   };
 
   const formatLastActivity = (date: Date | null) => {
@@ -66,7 +66,7 @@ export const SubjectCard = ({
 
   return (
     <Card 
-      className="group relative overflow-hidden border-0 bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer rounded-3xl"
+      className="group relative overflow-hidden border-0 bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer rounded-3xl"
       onClick={() => onStartPractice(subject.id)}
     >
       {/* Premium Background Gradient */}
@@ -79,8 +79,8 @@ export const SubjectCard = ({
           size="sm"
           className={`absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl backdrop-blur-sm ${
             isPinned 
-              ? 'opacity-100 text-amber-500 bg-amber-50/80 hover:bg-amber-100/80' 
-              : 'text-slate-400 bg-white/50 hover:bg-white/80'
+              ? 'opacity-100 text-amber-500 bg-amber-50/80 hover:bg-amber-100/80 dark:bg-amber-950/30 dark:hover:bg-amber-900/40' 
+              : 'text-muted-foreground bg-background/50 hover:bg-background/80'
           }`}
           onClick={(e) => {
             e.stopPropagation();
@@ -96,17 +96,17 @@ export const SubjectCard = ({
           <div className="flex items-center space-x-4">
             <div className={`w-4 h-4 rounded-full ${subject.color} shadow-lg group-hover:scale-125 transition-transform duration-300`}></div>
             <div>
-              <CardTitle className="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors leading-tight">
+              <CardTitle className="text-xl font-bold text-foreground group-hover:text-muted-foreground transition-colors leading-tight">
                 {subject.name}
               </CardTitle>
               <div className="flex items-center space-x-3 mt-2">
-                <span className="text-sm font-semibold text-slate-600">{averageScore}% accuracy</span>
+                <span className="text-sm font-semibold text-muted-foreground">{averageScore}% accuracy</span>
                 {totalAttempted > 0 && (
                   <>
-                    <span className="text-slate-300">•</span>
+                    <span className="text-border">•</span>
                     <div className="flex items-center space-x-1">
-                      <Calendar className="h-3 w-3 text-slate-400" />
-                      <span className="text-xs text-slate-500 font-medium">{formatLastActivity(lastActivity)}</span>
+                      <Calendar className="h-3 w-3 text-muted-foreground" />
+                      <span className="text-xs text-muted-foreground font-medium">{formatLastActivity(lastActivity)}</span>
                     </div>
                   </>
                 )}
@@ -125,44 +125,44 @@ export const SubjectCard = ({
         <div className="space-y-3">
           <Progress 
             value={averageScore} 
-            className="h-3 bg-slate-100 rounded-full shadow-inner" 
+            className="h-3 bg-muted/50 rounded-full shadow-inner" 
           />
-          <div className="flex justify-between text-xs text-slate-400">
+          <div className="flex justify-between text-xs text-muted-foreground">
             <span>0%</span>
             <span>100%</span>
           </div>
         </div>
         
         <div className="grid grid-cols-3 gap-4">
-          <div className="text-center space-y-2 p-3 rounded-2xl bg-emerald-50/50 border border-emerald-100">
+          <div className="text-center space-y-2 p-3 rounded-2xl bg-emerald-50/50 border border-emerald-100 dark:bg-emerald-950/20 dark:border-emerald-800/30">
             <div className="flex items-center justify-center">
-              <CheckCircle className="h-4 w-4 text-emerald-500 mr-1" />
-              <span className="text-lg font-bold text-emerald-600">{masteredTopics}</span>
+              <CheckCircle className="h-4 w-4 text-emerald-500 dark:text-emerald-400 mr-1" />
+              <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{masteredTopics}</span>
             </div>
-            <p className="text-xs text-emerald-600 font-medium">Mastered</p>
+            <p className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">Mastered</p>
           </div>
           
-          <div className="text-center space-y-2 p-3 rounded-2xl bg-red-50/50 border border-red-100">
+          <div className="text-center space-y-2 p-3 rounded-2xl bg-red-50/50 border border-red-100 dark:bg-red-950/20 dark:border-red-800/30">
             <div className="flex items-center justify-center">
-              <AlertCircle className="h-4 w-4 text-red-500 mr-1" />
-              <span className="text-lg font-bold text-red-600">{weakTopics}</span>
+              <AlertCircle className="h-4 w-4 text-red-500 dark:text-red-400 mr-1" />
+              <span className="text-lg font-bold text-red-600 dark:text-red-400">{weakTopics}</span>
             </div>
-            <p className="text-xs text-red-600 font-medium">Weak</p>
+            <p className="text-xs text-red-600 dark:text-red-400 font-medium">Weak</p>
           </div>
           
-          <div className="text-center space-y-2 p-3 rounded-2xl bg-slate-50/50 border border-slate-200">
+          <div className="text-center space-y-2 p-3 rounded-2xl bg-muted/20 border border-border">
             <div className="flex items-center justify-center">
-              <Circle className="h-4 w-4 text-slate-400 mr-1" />
-              <span className="text-lg font-bold text-slate-600">{subject.topics.length - totalAttempted}</span>
+              <Circle className="h-4 w-4 text-muted-foreground mr-1" />
+              <span className="text-lg font-bold text-muted-foreground">{subject.topics.length - totalAttempted}</span>
             </div>
-            <p className="text-xs text-slate-600 font-medium">Untested</p>
+            <p className="text-xs text-muted-foreground font-medium">Untested</p>
           </div>
         </div>
 
         <div className="flex items-center justify-between pt-4">
           <div className="flex items-center space-x-2">
-            <Sparkles className="h-3 w-3 text-slate-400" />
-            <span className="text-xs text-slate-500 font-medium">
+            <Sparkles className="h-3 w-3 text-muted-foreground" />
+            <span className="text-xs text-muted-foreground font-medium">
               {subject.topics.length} topics available
             </span>
           </div>
@@ -181,7 +181,7 @@ export const SubjectCard = ({
 
       {/* Premium Border Glow */}
       <div className={`absolute inset-0 rounded-3xl ${subject.color} p-[1px] opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none`}>
-        <div className="w-full h-full bg-white rounded-3xl" />
+        <div className="w-full h-full bg-card rounded-3xl" />
       </div>
     </Card>
   );
