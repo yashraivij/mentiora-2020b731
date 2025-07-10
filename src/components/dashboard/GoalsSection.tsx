@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Clock, Target, Plus, Calendar, CheckCircle, Trophy, Trash2, Edit } from "lucide-react";
+import { Clock, Target, Plus, Calendar, CheckCircle, Trophy, Trash2, Play, Pause, Square } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -36,6 +36,13 @@ export function GoalsSection() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedDuration, setSelectedDuration] = useState<string>("");
   const [todayStudyTime, setTodayStudyTime] = useState(0);
+  
+  // Timer states
+  const [timeRemaining, setTimeRemaining] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (user?.id) {
@@ -43,6 +50,43 @@ export function GoalsSection() {
       loadTodayStudyTime();
     }
   }, [user?.id]);
+
+  // Timer cleanup
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
+  // Timer effect
+  useEffect(() => {
+    if (isTimerRunning && !isPaused && timeRemaining > 0) {
+      intervalRef.current = setInterval(() => {
+        setTimeRemaining((prev) => {
+          if (prev <= 1) {
+            setIsTimerRunning(false);
+            setIsPaused(false);
+            completeSession();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    } else {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isTimerRunning, isPaused, timeRemaining]);
 
   const loadGoals = async () => {
     if (!user?.id) return;
@@ -92,41 +136,114 @@ export function GoalsSection() {
     }
   };
 
-  const createGoal = async () => {
+  const startTimer = async () => {
     if (!user?.id || !selectedDuration) return;
 
     setLoading(true);
     try {
-      const targetMinutes = parseInt(selectedDuration);
-      const today = new Date().toISOString().split('T')[0];
-
-      const { error } = await supabase
-        .from('user_goals')
+      const durationMinutes = parseInt(selectedDuration);
+      
+      // Create a study session
+      const { data: sessionData, error: sessionError } = await supabase
+        .from('study_sessions')
         .insert({
           user_id: user.id,
-          goal_type: 'daily_study_time',
-          target_value: targetMinutes,
-          current_value: 0,
-          start_date: today,
-          is_active: true
-        });
+          mode: 'timer',
+          started_at: new Date().toISOString()
+        })
+        .select()
+        .single();
 
-      if (error) {
-        console.error('Error creating goal:', error);
-        toast.error('Failed to create goal');
+      if (sessionError) {
+        console.error('Error creating session:', sessionError);
+        toast.error('Failed to start timer');
         return;
       }
 
-      toast.success('Study goal created successfully!');
+      setCurrentSessionId(sessionData.id);
+      setTimeRemaining(durationMinutes * 60); // Convert to seconds
+      setIsTimerRunning(true);
+      setIsPaused(false);
       setIsDialogOpen(false);
       setSelectedDuration("");
-      loadGoals();
+      
+      toast.success(`Timer started for ${durationMinutes} minutes!`);
     } catch (error) {
-      console.error('Error creating goal:', error);
-      toast.error('Failed to create goal');
+      console.error('Error starting timer:', error);
+      toast.error('Failed to start timer');
     } finally {
       setLoading(false);
     }
+  };
+
+  const pauseTimer = () => {
+    setIsPaused(true);
+    toast.info('Timer paused');
+  };
+
+  const resumeTimer = () => {
+    setIsPaused(false);
+    toast.info('Timer resumed');
+  };
+
+  const stopTimer = async () => {
+    if (!currentSessionId || !user?.id) return;
+
+    try {
+      const durationMinutes = Math.ceil((parseInt(selectedDuration || "0") * 60 - timeRemaining) / 60);
+      
+      await supabase
+        .from('study_sessions')
+        .update({
+          ended_at: new Date().toISOString(),
+          duration_minutes: durationMinutes
+        })
+        .eq('id', currentSessionId);
+
+      setIsTimerRunning(false);
+      setIsPaused(false);
+      setTimeRemaining(0);
+      setCurrentSessionId(null);
+      
+      loadTodayStudyTime();
+      toast.info('Timer stopped');
+    } catch (error) {
+      console.error('Error stopping timer:', error);
+      toast.error('Failed to stop timer');
+    }
+  };
+
+  const completeSession = async () => {
+    if (!currentSessionId || !user?.id) return;
+
+    try {
+      const durationMinutes = parseInt(selectedDuration || "0");
+      
+      await supabase
+        .from('study_sessions')
+        .update({
+          ended_at: new Date().toISOString(),
+          duration_minutes: durationMinutes
+        })
+        .eq('id', currentSessionId);
+
+      setCurrentSessionId(null);
+      loadTodayStudyTime();
+      toast.success('Study session completed! 🎉');
+    } catch (error) {
+      console.error('Error completing session:', error);
+    }
+  };
+
+  const formatTimerDisplay = (seconds: number) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    
+    if (hours > 0) {
+      return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+    return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
   const deleteGoal = async (goalId: string) => {
@@ -228,11 +345,11 @@ export function GoalsSection() {
                     Cancel
                   </Button>
                   <Button 
-                    onClick={createGoal} 
+                    onClick={startTimer} 
                     disabled={!selectedDuration || loading}
                     className="bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white border-0"
                   >
-                    {loading ? "Creating..." : "Create Goal"}
+                    {loading ? "Starting..." : "Start Timer"}
                   </Button>
                 </div>
               </div>
@@ -314,6 +431,52 @@ export function GoalsSection() {
           </div>
         )}
         
+        {/* Timer Display */}
+        {isTimerRunning && (
+          <div className="mt-4 p-6 rounded-2xl bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30 border border-emerald-200/50 dark:border-emerald-800/30">
+            <div className="text-center space-y-4">
+              <div className="text-4xl font-bold text-emerald-700 dark:text-emerald-300 font-mono">
+                {formatTimerDisplay(timeRemaining)}
+              </div>
+              <div className="flex justify-center space-x-3">
+                {!isPaused ? (
+                  <Button 
+                    onClick={pauseTimer}
+                    variant="outline"
+                    size="sm"
+                    className="border-emerald-300 text-emerald-700 hover:bg-emerald-100 dark:border-emerald-700 dark:text-emerald-300 dark:hover:bg-emerald-900/30"
+                  >
+                    <Pause className="h-4 w-4 mr-2" />
+                    Pause
+                  </Button>
+                ) : (
+                  <Button 
+                    onClick={resumeTimer}
+                    variant="outline"
+                    size="sm"
+                    className="border-emerald-300 text-emerald-700 hover:bg-emerald-100 dark:border-emerald-700 dark:text-emerald-300 dark:hover:bg-emerald-900/30"
+                  >
+                    <Play className="h-4 w-4 mr-2" />
+                    Resume
+                  </Button>
+                )}
+                <Button 
+                  onClick={stopTimer}
+                  variant="outline"
+                  size="sm"
+                  className="border-red-300 text-red-700 hover:bg-red-100 dark:border-red-700 dark:text-red-300 dark:hover:bg-red-900/30"
+                >
+                  <Square className="h-4 w-4 mr-2" />
+                  Stop
+                </Button>
+              </div>
+              <div className="text-sm text-emerald-600 dark:text-emerald-400">
+                {isPaused ? 'Timer Paused' : 'Study Session Active'}
+              </div>
+            </div>
+          </div>
+        )}
+
         {todayStudyTime > 0 && (
           <div className="mt-4 p-3 rounded-2xl bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-200/50 dark:border-blue-800/30">
             <div className="flex items-center space-x-2">
