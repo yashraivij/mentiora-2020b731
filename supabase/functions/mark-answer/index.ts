@@ -27,6 +27,16 @@ serve(async (req) => {
       );
     }
 
+    // Check if this is a math question that might need the formula sheet
+    const isMath = subjectId.toLowerCase().includes('math') || subjectId.toLowerCase().includes('m1') || subjectId.toLowerCase().includes('m2') || subjectId.toLowerCase().includes('m3') || subjectId.toLowerCase().includes('m4') || subjectId.toLowerCase().includes('m5') || subjectId.toLowerCase().includes('m6');
+    const formulaKeywords = ['trapezium', 'trapezoid', 'prism', 'volume', 'circle', 'circumference', 'radius', 'diameter', 'π', 'pi', 'quadratic', 'ax²', 'ax2', 'pythagoras', 'hypotenuse', 'right triangle', 'sin', 'cos', 'tan', 'sine rule', 'cosine rule', 'trigonometry', 'compound interest', 'probability', 'P(A', 'P(B'];
+    
+    const questionText = `${question} ${modelAnswer}`.toLowerCase();
+    const needsFormulaSheet = isMath && formulaKeywords.some(keyword => questionText.includes(keyword.toLowerCase()));
+    
+    const formulaSheetNote = needsFormulaSheet ? 
+      '\n\nIMPORTANT: If this question involves formulas, make sure to mention in your feedback that students can find help using the AQA GCSE Maths formula sheet at this link: https://cdn.sanity.io/files/p28bar15/green/a79c9e8a3e53e261503e3de0214b0a777cfdf90f.pdf?_gl=1*1vv2iqx*_gcl_au*OTI0MTUxMDMuMTc0ODQ5MjY4OQ. (opens in new tab). Include this as a helpful tip in your feedback.' : '';
+
     const prompt = `You are a friendly teacher helping a student learn ${subjectId}. Your job is to give helpful, encouraging feedback that's easy to understand.
 
 QUESTION: ${question}
@@ -38,7 +48,7 @@ CORRECT ANSWER: ${modelAnswer}
 WHAT TO LOOK FOR:
 ${markingCriteria.breakdown.join('\n')}
 
-TOTAL MARKS: ${totalMarks}
+TOTAL MARKS: ${totalMarks}${formulaSheetNote}
 
 IMPORTANT: Always check your feedback against the CORRECT ANSWER above. Make sure you don't contradict what's shown in the correct answer.
 
