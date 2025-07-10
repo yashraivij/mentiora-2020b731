@@ -40,12 +40,14 @@ ${markingCriteria.breakdown.join('\n')}
 
 TOTAL MARKS AVAILABLE: ${totalMarks}
 
+CRITICAL: When providing feedback, you MUST carefully reference the MODEL ANSWER above. Do NOT contradict what is stated in the model answer. If the model answer contains specific terms, concepts, or examples, acknowledge them accurately in your feedback.
+
 Please provide:
 1. MARKS_AWARDED: A number from 0 to ${totalMarks}
-2. FEEDBACK: Detailed feedback explaining what the student got right, what they missed, and how to improve
+2. FEEDBACK: Detailed feedback explaining what the student got right, what they missed, and how to improve. ALWAYS cross-reference your feedback with the model answer to ensure accuracy.
 3. ASSESSMENT: Brief overall assessment (e.g., "Excellent", "Good", "Needs Work", "Poor")
 
-Be fair and accurate. Give credit for correct understanding even if wording differs from the model answer. Look for key concepts and scientific accuracy rather than exact word matches.
+Be fair and accurate. Give credit for correct understanding even if wording differs from the model answer. Look for key concepts and scientific accuracy rather than exact word matches. ENSURE your feedback is consistent with the provided model answer.
 
 Respond in this exact JSON format:
 {
