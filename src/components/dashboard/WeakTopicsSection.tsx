@@ -49,13 +49,13 @@ export const WeakTopicsSection = ({ weakTopics, userProgress, onPractice }: Weak
 
   if (weakTopics.length === 0) {
     return (
-      <Card className="border-0 bg-gradient-to-br from-green-50 to-emerald-50">
+      <Card className="border-0 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30">
         <CardContent className="p-6 text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <CheckCircle className="h-8 w-8 text-green-600" />
+          <div className="w-16 h-16 bg-green-100 dark:bg-green-900/40 rounded-full flex items-center justify-center mx-auto mb-4">
+            <CheckCircle className="h-8 w-8 text-green-600 dark:text-green-400" />
           </div>
-          <h3 className="text-lg font-semibold text-slate-900 mb-2">Great Progress!</h3>
-          <p className="text-slate-600">No weak topics identified. Keep practicing to maintain your streak!</p>
+          <h3 className="text-lg font-semibold text-foreground mb-2">Great Progress!</h3>
+          <p className="text-muted-foreground">No weak topics identified. Keep practicing to maintain your streak!</p>
         </CardContent>
       </Card>
     );
