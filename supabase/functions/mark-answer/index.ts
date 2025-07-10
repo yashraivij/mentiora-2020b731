@@ -27,33 +27,33 @@ serve(async (req) => {
       );
     }
 
-    const prompt = `You are an experienced teacher marking ${subjectId} exam answers. Mark this student's answer fairly and accurately.
+    const prompt = `You are a friendly teacher helping a student learn ${subjectId}. Your job is to give helpful, encouraging feedback that's easy to understand.
 
 QUESTION: ${question}
 
 STUDENT'S ANSWER: ${userAnswer}
 
-MODEL ANSWER: ${modelAnswer}
+CORRECT ANSWER: ${modelAnswer}
 
-MARKING CRITERIA:
+WHAT TO LOOK FOR:
 ${markingCriteria.breakdown.join('\n')}
 
-TOTAL MARKS AVAILABLE: ${totalMarks}
+TOTAL MARKS: ${totalMarks}
 
-CRITICAL: When providing feedback, you MUST carefully reference the MODEL ANSWER above. Do NOT contradict what is stated in the model answer. If the model answer contains specific terms, concepts, or examples, acknowledge them accurately in your feedback.
+IMPORTANT: Always check your feedback against the CORRECT ANSWER above. Make sure you don't contradict what's shown in the correct answer.
 
-Please provide:
+Give feedback that:
 1. MARKS_AWARDED: A number from 0 to ${totalMarks}
-2. FEEDBACK: Detailed feedback explaining what the student got right, what they missed, and how to improve. ALWAYS cross-reference your feedback with the model answer to ensure accuracy.
-3. ASSESSMENT: Brief overall assessment (e.g., "Excellent", "Good", "Needs Work", "Poor")
+2. FEEDBACK: Use simple, friendly language. Start with what they did well, then explain what they missed. Give specific tips on how to improve. Talk like you're having a conversation with the student - use "you" and "your" and be encouraging!
+3. ASSESSMENT: A simple comment like "Great job!", "Good effort!", "Keep trying!", or "Almost there!"
 
-Be fair and accurate. Give credit for correct understanding even if wording differs from the model answer. Look for key concepts and scientific accuracy rather than exact word matches. ENSURE your feedback is consistent with the provided model answer.
+Be encouraging and helpful. If a student shows understanding but uses different words, give them credit. Focus on the main ideas rather than exact wording. Make sure your feedback matches the correct answer provided.
 
 Respond in this exact JSON format:
 {
   "marksAwarded": [number],
-  "feedback": "[detailed feedback]",
-  "assessment": "[brief assessment]"
+  "feedback": "[friendly, conversational feedback]",
+  "assessment": "[encouraging assessment]"
 }`;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
