@@ -5,6 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum } from "@/data/curriculum";
 import { ArrowLeft, BookOpen, Clock, TrendingUp } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -69,19 +70,22 @@ const SubjectTopics = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-card shadow-sm border-b border-border">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center space-x-4">
-            <Button variant="outline" onClick={() => navigate('/dashboard')}>
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back
-            </Button>
-            <div className="flex items-center space-x-2">
-              <div className={`w-6 h-6 rounded-full ${getSubjectColor(subject.id)}`}></div>
-              <h1 className="text-2xl font-bold text-slate-900">{subject.name}</h1>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Button variant="outline" onClick={() => navigate('/dashboard')}>
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back
+              </Button>
+              <div className="flex items-center space-x-2">
+                <div className={`w-6 h-6 rounded-full ${getSubjectColor(subject.id)}`}></div>
+                <h1 className="text-2xl font-bold text-foreground">{subject.name}</h1>
+              </div>
             </div>
+            <ThemeToggle />
           </div>
         </div>
       </header>
