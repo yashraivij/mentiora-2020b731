@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Clock, Target, Plus, Calendar, CheckCircle, Trophy, Trash2, Edit } from "lucide-react";
+import { Clock, Target, Plus, Calendar, CheckCircle, Trophy, Trash2, Play, Pause, Square } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -36,6 +36,9 @@ export function GoalsSection() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedDuration, setSelectedDuration] = useState<string>("");
   const [todayStudyTime, setTodayStudyTime] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const [timerSeconds, setTimerSeconds] = useState(0);
+  const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
 
   useEffect(() => {
     if (user?.id) {
@@ -43,6 +46,16 @@ export function GoalsSection() {
       loadTodayStudyTime();
     }
   }, [user?.id]);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isTimerRunning) {
+      interval = setInterval(() => {
+        setTimerSeconds(prev => prev + 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isTimerRunning]);
 
   const loadGoals = async () => {
     if (!user?.id) return;
@@ -117,7 +130,7 @@ export function GoalsSection() {
         return;
       }
 
-      toast.success('Study goal created successfully!');
+      toast.success('Study goal created successfully! Click Start Timer to begin studying.');
       setIsDialogOpen(false);
       setSelectedDuration("");
       loadGoals();
@@ -126,6 +139,72 @@ export function GoalsSection() {
       toast.error('Failed to create goal');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const startTimer = async () => {
+    if (!user?.id) return;
+
+    try {
+      const { data, error } = await supabase
+        .from('study_sessions')
+        .insert({
+          user_id: user.id,
+          mode: 'revision',
+          started_at: new Date().toISOString()
+        })
+        .select()
+        .single();
+
+      if (error) {
+        console.error('Error starting session:', error);
+        toast.error('Failed to start study session');
+        return;
+      }
+
+      setCurrentSessionId(data.id);
+      setIsTimerRunning(true);
+      setTimerSeconds(0);
+      toast.success('Study timer started!');
+    } catch (error) {
+      console.error('Error starting timer:', error);
+      toast.error('Failed to start timer');
+    }
+  };
+
+  const pauseTimer = () => {
+    setIsTimerRunning(false);
+    toast.info('Timer paused');
+  };
+
+  const stopTimer = async () => {
+    if (!user?.id || !currentSessionId) return;
+
+    try {
+      const durationMinutes = Math.floor(timerSeconds / 60);
+      
+      const { error } = await supabase
+        .from('study_sessions')
+        .update({
+          ended_at: new Date().toISOString(),
+          duration_minutes: durationMinutes
+        })
+        .eq('id', currentSessionId);
+
+      if (error) {
+        console.error('Error stopping session:', error);
+        toast.error('Failed to stop study session');
+        return;
+      }
+
+      setIsTimerRunning(false);
+      setTimerSeconds(0);
+      setCurrentSessionId(null);
+      loadTodayStudyTime();
+      toast.success(`Study session completed! You studied for ${durationMinutes} minutes.`);
+    } catch (error) {
+      console.error('Error stopping timer:', error);
+      toast.error('Failed to stop timer');
     }
   };
 
@@ -164,6 +243,17 @@ export function GoalsSection() {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
     return remainingMinutes > 0 ? `${hours}h ${remainingMinutes}m` : `${hours}h`;
+  };
+
+  const formatTimerDisplay = (seconds: number) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    
+    if (hours > 0) {
+      return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+    return `${minutes}:${secs.toString().padStart(2, '0')}`;
   };
 
   const isGoalCompleted = (goal: Goal) => {
@@ -314,6 +404,67 @@ export function GoalsSection() {
           </div>
         )}
         
+        {/* Study Timer Section */}
+        <div className="mt-4 p-4 rounded-2xl bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 border border-green-200/50 dark:border-green-800/30">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <Clock className="h-5 w-5 text-green-600 dark:text-green-400" />
+              <div>
+                <span className="text-sm font-medium text-green-700 dark:text-green-300">
+                  Study Timer
+                </span>
+                <div className="text-2xl font-mono font-bold text-green-800 dark:text-green-200">
+                  {formatTimerDisplay(timerSeconds)}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              {!isTimerRunning && !currentSessionId ? (
+                <Button 
+                  onClick={startTimer}
+                  className="bg-green-600 hover:bg-green-700 text-white"
+                  size="sm"
+                >
+                  <Play className="h-4 w-4 mr-1" />
+                  Start
+                </Button>
+              ) : (
+                <>
+                  {isTimerRunning ? (
+                    <Button 
+                      onClick={pauseTimer}
+                      variant="outline"
+                      className="border-amber-500 text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/20"
+                      size="sm"
+                    >
+                      <Pause className="h-4 w-4 mr-1" />
+                      Pause
+                    </Button>
+                  ) : (
+                    <Button 
+                      onClick={() => setIsTimerRunning(true)}
+                      className="bg-green-600 hover:bg-green-700 text-white"
+                      size="sm"
+                    >
+                      <Play className="h-4 w-4 mr-1" />
+                      Resume
+                    </Button>
+                  )}
+                  <Button 
+                    onClick={stopTimer}
+                    variant="outline"
+                    className="border-red-500 text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20"
+                    size="sm"
+                  >
+                    <Square className="h-4 w-4 mr-1" />
+                    Stop
+                  </Button>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+
         {todayStudyTime > 0 && (
           <div className="mt-4 p-3 rounded-2xl bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-200/50 dark:border-blue-800/30">
             <div className="flex items-center space-x-2">
