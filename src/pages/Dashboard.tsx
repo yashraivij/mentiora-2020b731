@@ -231,9 +231,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+    <div className="min-h-screen bg-background">
       {/* Premium Header with Glassmorphism */}
-      <header className="bg-background/80 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-lg shadow-foreground/5">
+      <header className="bg-card/80 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-lg shadow-foreground/5">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
@@ -246,29 +246,29 @@ const Dashboard = () => {
                   />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+                  <h1 className="text-2xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
                     Mentiora
                   </h1>
                   <div className="flex items-center space-x-2">
                     <Crown className="h-3 w-3 text-amber-500" />
-                    <span className="text-xs font-medium text-slate-500">Premium</span>
+                    <span className="text-xs font-medium text-muted-foreground">Premium</span>
                   </div>
                 </div>
               </div>
             </div>
             <div className="flex items-center space-x-3">
               <ThemeToggle />
-              <Button variant="ghost" onClick={() => navigate('/analytics')} className="text-slate-600 hover:text-slate-900 hover:bg-slate-100/80">
+              <Button variant="ghost" onClick={() => navigate('/analytics')} className="text-muted-foreground hover:text-foreground hover:bg-accent">
                 <BarChart3 className="h-4 w-4 mr-2" />
                 Analytics
               </Button>
-              <div className="flex items-center space-x-2 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-2xl border border-slate-200/50 shadow-sm">
+              <div className="flex items-center space-x-2 px-4 py-2 bg-card/60 backdrop-blur-sm rounded-2xl border border-border shadow-sm">
                 <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
                   <User className="h-3 w-3 text-white" />
                 </div>
-                <span className="text-sm font-medium text-slate-700">{getFirstName()}</span>
+                <span className="text-sm font-medium text-card-foreground">{getFirstName()}</span>
               </div>
-              <Button variant="ghost" onClick={handleLogout} className="text-slate-600 hover:text-slate-900">
+              <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground hover:text-foreground">
                 <LogOut className="h-4 w-4" />
               </Button>
             </div>
@@ -281,14 +281,14 @@ const Dashboard = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-3xl font-bold text-slate-900 mb-2">
+              <h2 className="text-3xl font-bold text-foreground mb-2">
                 Good morning, {getFirstName()}
               </h2>
-              <p className="text-slate-600 text-lg">Ready to elevate your GCSE revision journey?</p>
+              <p className="text-muted-foreground text-lg">Ready to elevate your GCSE revision journey?</p>
             </div>
-            <div className="hidden md:flex items-center space-x-3 px-4 py-2 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-2xl border border-emerald-200/50">
-              <Zap className="h-4 w-4 text-emerald-600" />
-              <span className="text-sm font-medium text-emerald-700">AI-Powered Insights</span>
+            <div className="hidden md:flex items-center space-x-3 px-4 py-2 bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-950/20 dark:to-blue-950/20 rounded-2xl border border-emerald-200/50 dark:border-emerald-800/50">
+              <Zap className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+              <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">AI-Powered Insights</span>
             </div>
           </div>
         </div>
@@ -297,18 +297,18 @@ const Dashboard = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-4">
-              <h3 className="text-2xl font-bold text-slate-900">Your Subjects</h3>
-              <Badge variant="outline" className="text-slate-500 border-slate-300 bg-white/50">
+              <h3 className="text-2xl font-bold text-foreground">Your Subjects</h3>
+              <Badge variant="outline" className="text-muted-foreground border-border bg-card/50">
                 {curriculum.length} subjects
               </Badge>
             </div>
             <div className="flex items-center space-x-3">
-              <div className="flex items-center space-x-1 bg-white/80 backdrop-blur-sm rounded-2xl p-1.5 border border-slate-200/50 shadow-sm">
+              <div className="flex items-center space-x-1 bg-card/80 backdrop-blur-sm rounded-2xl p-1.5 border border-border shadow-sm">
                 <Button
                   variant={sortBy === 'progress' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setSortBy('progress')}
-                  className={sortBy === 'progress' ? 'bg-slate-900 text-white shadow-md' : 'text-slate-600 hover:bg-slate-100'}
+                  className={sortBy === 'progress' ? 'bg-primary text-primary-foreground shadow-md' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'}
                 >
                   Progress
                 </Button>
@@ -316,7 +316,7 @@ const Dashboard = () => {
                   variant={sortBy === 'weakest' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setSortBy('weakest')}
-                  className={sortBy === 'weakest' ? 'bg-slate-900 text-white shadow-md' : 'text-slate-600 hover:bg-slate-100'}
+                  className={sortBy === 'weakest' ? 'bg-primary text-primary-foreground shadow-md' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'}
                 >
                   Weakest
                 </Button>
@@ -324,7 +324,7 @@ const Dashboard = () => {
                   variant={sortBy === 'alphabetical' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setSortBy('alphabetical')}
-                  className={sortBy === 'alphabetical' ? 'bg-slate-900 text-white shadow-md' : 'text-slate-600 hover:bg-slate-100'}
+                  className={sortBy === 'alphabetical' ? 'bg-primary text-primary-foreground shadow-md' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'}
                 >
                   A-Z
                 </Button>
@@ -358,7 +358,7 @@ const Dashboard = () => {
             subtitle="Average across subjects"
             progress={getOverallProgress()}
             icon={TrendingUp}
-            color="bg-gradient-to-br from-slate-900 to-slate-700"
+            color="bg-gradient-to-br from-primary to-primary/80"
             trend={userProgress.length > 0 ? 5 : undefined}
           />
           
@@ -405,7 +405,7 @@ const Dashboard = () => {
         <div className="space-y-6">
           <div className="flex items-center space-x-3 mb-6">
             <Crown className="h-6 w-6 text-amber-500" />
-            <h3 className="text-2xl font-bold text-slate-900">Premium Analytics</h3>
+            <h3 className="text-2xl font-bold text-foreground">Premium Analytics</h3>
             <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0">
               Pro Feature
             </Badge>
