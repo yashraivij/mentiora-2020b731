@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb } from "lucide-react";
+import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb, HelpCircle, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -46,6 +46,7 @@ const Practice = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [sessionComplete, setSessionComplete] = useState(false);
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
+  const [showHint, setShowHint] = useState(false);
 
   const subject = curriculum.find(s => s.id === subjectId);
   const topic = subject?.topics.find(t => t.id === topicId);
@@ -223,9 +224,99 @@ const Practice = () => {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setUserAnswer("");
       setShowFeedback(false);
+      setShowHint(false);
     } else {
       finishSession();
     }
+  };
+
+  const generateHint = (question: Question) => {
+    const questionText = question.question.toLowerCase();
+    const modelAnswer = question.modelAnswer.toLowerCase();
+    
+    // Biology hints
+    if (subjectId === 'biology') {
+      if (questionText.includes('osmosis')) {
+        return "Think about how water moves across a membrane from high to low concentration.";
+      }
+      if (questionText.includes('photosynthesis')) {
+        return "Remember the equation involves carbon dioxide, water, light energy, and produces glucose and oxygen.";
+      }
+      if (questionText.includes('enzyme')) {
+        return "Consider the lock and key model - enzymes are specific to their substrates.";
+      }
+      if (questionText.includes('mitosis')) {
+        return "Think about cell division that produces identical diploid cells for growth and repair.";
+      }
+      if (questionText.includes('respiration')) {
+        return "Consider whether oxygen is present (aerobic) or absent (anaerobic) and the energy release process.";
+      }
+    }
+    
+    // Mathematics hints
+    if (subjectId === 'mathematics') {
+      if (questionText.includes('factorize') || questionText.includes('factorise')) {
+        if (questionText.includes('x²') && questionText.includes('7x') && questionText.includes('12')) {
+          return "Look for two numbers that add to 7 and multiply to 12.";
+        }
+        return "Find two numbers that multiply to give the constant term and add to give the coefficient of x.";
+      }
+      if (questionText.includes('expand')) {
+        return "Use FOIL method or multiply each term in the first bracket by each term in the second bracket.";
+      }
+      if (questionText.includes('solve') && questionText.includes('x')) {
+        return "Isolate x by performing the same operation on both sides of the equation.";
+      }
+      if (questionText.includes('percentage')) {
+        return "Remember: percentage = (part/whole) × 100, or use the percentage formula.";
+      }
+      if (questionText.includes('area') && questionText.includes('circle')) {
+        return "Use the formula A = πr², where r is the radius.";
+      }
+      if (questionText.includes('circumference')) {
+        return "Use the formula C = πd or C = 2πr, where d is diameter and r is radius.";
+      }
+    }
+    
+    // Chemistry hints
+    if (subjectId === 'chemistry') {
+      if (questionText.includes('periodic table')) {
+        return "Consider the arrangement by atomic number and the patterns in groups and periods.";
+      }
+      if (questionText.includes('ionic') || questionText.includes('covalent')) {
+        return "Think about whether electrons are transferred (ionic) or shared (covalent).";
+      }
+      if (questionText.includes('balance') && questionText.includes('equation')) {
+        return "Start with the most complex molecule and balance atoms one element at a time.";
+      }
+    }
+    
+    // Physics hints
+    if (subjectId === 'physics') {
+      if (questionText.includes('force') || questionText.includes('newton')) {
+        return "Remember F = ma, and consider the direction of forces.";
+      }
+      if (questionText.includes('energy')) {
+        return "Think about conservation of energy and the different types: kinetic, potential, thermal.";
+      }
+      if (questionText.includes('wave')) {
+        return "Consider the relationship between wavelength, frequency, and wave speed: v = fλ.";
+      }
+    }
+    
+    // Generic hints based on question type
+    if (questionText.includes('calculate') || questionText.includes('find')) {
+      return "Identify what information you're given and what formula or method you need to use.";
+    }
+    if (questionText.includes('explain') || questionText.includes('describe')) {
+      return "Structure your answer with clear points and use scientific terminology appropriately.";
+    }
+    if (questionText.includes('compare')) {
+      return "Identify similarities and differences, and explain the reasons for these.";
+    }
+    
+    // Fallback hint
+    return "Break down the question into smaller parts and think about what key concepts are being tested.";
   };
 
   const finishSession = () => {
@@ -418,13 +509,49 @@ const Practice = () => {
                   </div>
                   
                   {!showFeedback && (
-                    <Button 
-                      onClick={handleSubmitAnswer}
-                      disabled={isSubmitting || !userAnswer.trim()}
-                      className="w-full"
-                    >
-                      {isSubmitting ? "AI is marking your answer..." : "Submit Answer"}
-                    </Button>
+                    <div className="space-y-3">
+                      <div className="flex gap-2">
+                        <Button 
+                          onClick={handleSubmitAnswer}
+                          disabled={isSubmitting || !userAnswer.trim()}
+                          className="flex-1"
+                        >
+                          {isSubmitting ? "AI is marking your answer..." : "Submit Answer"}
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          onClick={() => setShowHint(!showHint)}
+                          className="px-4"
+                        >
+                          <HelpCircle className="h-4 w-4 mr-2" />
+                          {showHint ? "Hide Hint" : "Hint"}
+                        </Button>
+                      </div>
+                      
+                      {showHint && (
+                        <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500 border border-blue-200 dark:border-blue-800">
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <h4 className="font-medium text-blue-800 dark:text-blue-300 mb-2 flex items-center">
+                                <Lightbulb className="h-4 w-4 mr-2" />
+                                Hint
+                              </h4>
+                              <p className="text-blue-700 dark:text-blue-200 text-sm leading-relaxed">
+                                {generateHint(currentQuestion)}
+                              </p>
+                            </div>
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              onClick={() => setShowHint(false)}
+                              className="ml-2 h-8 w-8 p-0 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200"
+                            >
+                              <X className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   )}
                 </div>
               </CardContent>
