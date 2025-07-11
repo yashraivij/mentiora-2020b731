@@ -26,6 +26,476 @@ export interface Subject {
 
 export const curriculum: Subject[] = [
   {
+    id: 'geography',
+    name: 'Geography',
+    topics: [
+      {
+        id: 'g1-natural-hazards',
+        name: 'Natural Hazards',
+        questions: [
+          {
+            id: 'g1-q1',
+            question: 'Define what is meant by the term "natural hazard".',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A natural hazard is a natural process or event that poses a threat to human life and property.',
+            markingCriteria: {
+              breakdown: ['Reference to natural process/event (1 mark)', 'Reference to threat to people/property (1 mark)']
+            },
+            specReference: '3.1.1.1 - Natural hazards'
+          },
+          {
+            id: 'g1-q2',
+            question: 'Identify two types of natural hazard.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Any two from: geological hazards (earthquakes, volcanoes), meteorological hazards (tropical storms, droughts), hydrological hazards (floods).',
+            markingCriteria: {
+              breakdown: ['First correct type identified (1 mark)', 'Second correct type identified (1 mark)']
+            },
+            specReference: '3.1.1.1 - Types of natural hazard'
+          },
+          {
+            id: 'g1-q3',
+            question: 'Explain how population density affects hazard risk.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Higher population density increases hazard risk because more people are exposed to the hazard. Dense populations mean more buildings and infrastructure that can be damaged. Dense areas may have inadequate emergency services. However, dense areas may have better early warning systems and disaster preparedness.',
+            markingCriteria: {
+              breakdown: ['Recognition that higher density = higher risk (1 mark)', 'More people exposed to hazard (1 mark)', 'More infrastructure at risk (1 mark)', 'Reference to emergency services or preparedness (1 mark)']
+            },
+            specReference: '3.1.1.1 - Factors affecting hazard risk'
+          },
+          {
+            id: 'g1-q4',
+            question: 'State three factors that affect hazard risk.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Any three from: population density, level of development, preparedness/education, early warning systems, infrastructure quality, distance from hazard source.',
+            markingCriteria: {
+              breakdown: ['First factor correctly stated (1 mark)', 'Second factor correctly stated (1 mark)', 'Third factor correctly stated (1 mark)']
+            },
+            specReference: '3.1.1.1 - Factors affecting hazard risk'
+          },
+          {
+            id: 'g1-q5',
+            question: 'Explain how level of development affects a country\'s ability to cope with natural hazards.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'More developed countries have better infrastructure that can withstand hazards (earthquake-resistant buildings). They have more resources for emergency services, rescue equipment, and medical facilities. Better education and early warning systems reduce casualties. They can afford better monitoring and prediction technology. Recovery is faster due to insurance systems and economic resources. Less developed countries have weaker buildings, fewer resources for emergency response, limited healthcare, and slower recovery times.',
+            markingCriteria: {
+              breakdown: ['Better infrastructure in developed countries (1 mark)', 'More resources for emergency response (1 mark)', 'Better education/warning systems (1 mark)', 'Faster recovery due to economic resources (1 mark)', 'Contrast with developing countries (1 mark)', 'Specific example or elaboration (1 mark)']
+            },
+            specReference: '3.1.1.1 - Factors affecting hazard risk'
+          },
+          {
+            id: 'g1-q6',
+            question: 'Suggest why some natural hazards pose a greater risk than others.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Frequency - more frequent hazards pose greater risk. Magnitude - stronger hazards cause more damage. Predictability - unpredictable hazards are more dangerous. Location - hazards in populated areas pose greater risk.',
+            markingCriteria: {
+              breakdown: ['Reference to frequency of hazard (1 mark)', 'Reference to magnitude/strength (1 mark)', 'Reference to predictability (1 mark)', 'Reference to location/population exposure (1 mark)']
+            },
+            specReference: '3.1.1.1 - Natural hazards risk factors'
+          },
+          {
+            id: 'g1-q7',
+            question: 'Outline the difference between a natural hazard and a natural disaster.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A natural hazard is the potential threat, while a natural disaster occurs when a hazard actually impacts people and causes damage.',
+            markingCriteria: {
+              breakdown: ['Natural hazard is potential threat (1 mark)', 'Natural disaster is when hazard impacts people/causes damage (1 mark)']
+            },
+            specReference: '3.1.1.1 - Natural hazards'
+          },
+          {
+            id: 'g1-q8',
+            question: 'Explain why hazard risk is increasing in some parts of the world.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Population growth means more people exposed to hazards. Urbanization concentrates people in hazard-prone areas. Climate change may increase frequency/intensity of some hazards. Development in marginal areas increases exposure.',
+            markingCriteria: {
+              breakdown: ['Population growth increasing exposure (1 mark)', 'Urbanization concentrating risk (1 mark)', 'Climate change effects (1 mark)', 'Development in marginal areas (1 mark)']
+            },
+            specReference: '3.1.1.1 - Factors affecting hazard risk'
+          },
+          {
+            id: 'g1-q9',
+            question: 'Define the term "hazard risk".',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'The probability or chance of a hazard occurring and causing harm.',
+            markingCriteria: {
+              breakdown: ['Reference to probability/chance and harm (1 mark)']
+            },
+            specReference: '3.1.1.1 - Natural hazards'
+          },
+          {
+            id: 'g1-q10',
+            question: 'Assess the relative importance of different factors that affect hazard risk.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Population density is crucial as it determines exposure levels - more people means higher potential casualties. Level of development is equally important as it affects building quality, emergency response, and recovery capacity. Early warning systems can significantly reduce risk by allowing evacuation. However, the type and magnitude of hazard also matters - some hazards are inherently more dangerous regardless of other factors. The relative importance depends on the specific location and hazard type.',
+            markingCriteria: {
+              breakdown: ['Discussion of population density (2 marks)', 'Discussion of development level (2 marks)', 'Discussion of preparedness/warning systems (2 marks)', 'Evaluation of relative importance (1 mark)', 'Clear conclusion (1 mark)']
+            },
+            specReference: '3.1.1.1 - Factors affecting hazard risk'
+          }
+        ]
+      },
+      {
+        id: 'g2-tectonic-hazards',
+        name: 'Tectonic Hazards',
+        questions: [
+          {
+            id: 'g2-q1',
+            question: 'Outline the plate tectonics theory.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'The Earth\'s crust is divided into large pieces called tectonic plates. These plates move slowly on the semi-molten mantle below. Plate movement causes earthquakes and volcanoes at plate boundaries.',
+            markingCriteria: {
+              breakdown: ['Earth\'s crust divided into plates (1 mark)', 'Plates move on mantle (1 mark)', 'Movement causes earthquakes/volcanoes (1 mark)']
+            },
+            specReference: '3.1.1.2 - Plate tectonics theory'
+          },
+          {
+            id: 'g2-q2',
+            question: 'Describe the global distribution of earthquakes.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Earthquakes occur mainly along plate boundaries. Major concentrations around the Pacific Ring of Fire including Japan, California, and Chile. Also along the mid-Atlantic ridge and through the Mediterranean and Turkey.',
+            markingCriteria: {
+              breakdown: ['Occur along plate boundaries (1 mark)', 'Pacific Ring of Fire mentioned with examples (1 mark)', 'Other locations e.g. Atlantic ridge, Mediterranean (1 mark)']
+            },
+            specReference: '3.1.1.2 - Global distribution of earthquakes'
+          },
+          {
+            id: 'g2-q3',
+            question: 'Explain what happens at a constructive plate margin.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Two plates move apart from each other. Magma rises from the mantle to fill the gap. New oceanic crust is formed as magma cools. Gentle volcanic activity occurs and shallow earthquakes.',
+            markingCriteria: {
+              breakdown: ['Plates move apart (1 mark)', 'Magma rises from mantle (1 mark)', 'New crust formed (1 mark)', 'Volcanic activity and earthquakes mentioned (1 mark)']
+            },
+            specReference: '3.1.1.2 - Physical processes at constructive margins'
+          },
+          {
+            id: 'g2-q4',
+            question: 'Describe what happens at a destructive plate margin.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Two plates move towards each other. Denser oceanic plate subducts beneath continental plate. Friction causes earthquakes. Subducted plate melts creating magma which rises to form volcanoes.',
+            markingCriteria: {
+              breakdown: ['Plates move towards each other (1 mark)', 'Oceanic plate subducts (1 mark)', 'Friction causes earthquakes (1 mark)', 'Melting creates magma and volcanoes (1 mark)']
+            },
+            specReference: '3.1.1.2 - Physical processes at destructive margins'
+          },
+          {
+            id: 'g2-q5',
+            question: 'Compare the primary and secondary effects of earthquakes using a named example.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Using Haiti 2010 earthquake: Primary effects occur immediately - 230,000 deaths, buildings collapsed including Presidential Palace, roads and airports damaged. Secondary effects occur later - disease outbreaks due to lack of clean water, economic problems from destroyed infrastructure, homelessness lasting years.',
+            markingCriteria: {
+              breakdown: ['Named example used (1 mark)', 'Primary effects - immediate deaths/damage (2 marks)', 'Secondary effects - longer term impacts (2 marks)', 'Clear comparison between primary and secondary (1 mark)']
+            },
+            specReference: '3.1.1.2 - Effects of tectonic hazards'
+          },
+          {
+            id: 'g2-q6',
+            question: 'Explain why people continue to live in areas at risk from volcanic eruptions.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Fertile soils around volcanoes excellent for farming. Geothermal energy provides cheap electricity. Tourism brings income. Many eruptions are infrequent so risk seems low. Cost of moving may be too high. Family and cultural ties to the area.',
+            markingCriteria: {
+              breakdown: ['Fertile soils for agriculture (1 mark)', 'Geothermal energy benefits (1 mark)', 'Tourism income (1 mark)', 'Infrequent eruptions/low perceived risk (1 mark)', 'Economic or social ties (1 mark)', 'Development of explanation (1 mark)']
+            },
+            specReference: '3.1.1.2 - Reasons for living in hazard areas'
+          },
+          {
+            id: 'g2-q7',
+            question: 'Describe the difference between immediate and long-term responses to tectonic hazards.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Immediate responses occur within hours/days - search and rescue, emergency medical aid, temporary shelter, emergency food and water. Long-term responses take months/years - rebuilding infrastructure, economic recovery programs, improved building codes.',
+            markingCriteria: {
+              breakdown: ['Immediate responses - hours/days timeframe (1 mark)', 'Examples of immediate responses (1 mark)', 'Long-term responses - months/years timeframe (1 mark)', 'Examples of long-term responses (1 mark)']
+            },
+            specReference: '3.1.1.2 - Responses to tectonic hazards'
+          },
+          {
+            id: 'g2-q8',
+            question: 'Explain how monitoring can reduce the risks from volcanic eruptions.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Seismometers detect earthquakes that occur before eruptions. Gas monitoring detects changes in gas emissions. Ground deformation shows magma movement. Temperature monitoring detects heat changes. Early warning allows evacuation.',
+            markingCriteria: {
+              breakdown: ['Seismic monitoring (1 mark)', 'Gas monitoring (1 mark)', 'Ground deformation or temperature monitoring (1 mark)', 'Early warning enables evacuation (1 mark)']
+            },
+            specReference: '3.1.1.2 - Monitoring and prediction'
+          },
+          {
+            id: 'g2-q9',
+            question: 'Outline what happens at a conservative plate margin.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Two plates slide past each other in opposite directions. Plates get stuck due to friction then suddenly move. This sudden movement causes earthquakes. No volcanic activity occurs.',
+            markingCriteria: {
+              breakdown: ['Plates slide past each other (1 mark)', 'Friction causes plates to stick then move (1 mark)', 'Earthquakes but no volcanoes (1 mark)']
+            },
+            specReference: '3.1.1.2 - Physical processes at conservative margins'
+          },
+          {
+            id: 'g2-q10',
+            question: 'Evaluate the effectiveness of different methods used to reduce the risks from earthquakes.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Building design is highly effective - earthquake-resistant buildings can prevent collapse and save lives, as seen in Japan vs Haiti. Early warning systems are somewhat effective but earthquakes are hard to predict accurately. Education and drills are very effective and low cost - Japan\'s regular drills save many lives. Land use planning is effective by avoiding building on fault lines. However, in developing countries, cost is a major barrier to implementing these methods effectively.',
+            markingCriteria: {
+              breakdown: ['Discussion of building design effectiveness (2 marks)', 'Discussion of early warning systems (2 marks)', 'Discussion of education/preparedness (2 marks)', 'Evaluation of relative effectiveness or limitations (1 mark)', 'Reference to examples or case studies (1 mark)']
+            },
+            specReference: '3.1.1.2 - Management of tectonic hazards'
+          }
+        ]
+      },
+      {
+        id: 'g3-weather-hazards',
+        name: 'Weather Hazards',
+        questions: [
+          {
+            id: 'g3-q1',
+            question: 'Describe the general atmospheric circulation model.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Hot air rises at the equator creating low pressure. Air moves towards poles at high altitude then sinks at 30°N/S creating high pressure. Surface winds blow from high to low pressure. This creates three cells: Hadley (0-30°), Ferrel (30-60°), and Polar (60-90°).',
+            markingCriteria: {
+              breakdown: ['Hot air rises at equator (1 mark)', 'Air sinks at 30° creating high pressure (1 mark)', 'Surface winds from high to low pressure (1 mark)', 'Three circulation cells identified (1 mark)']
+            },
+            specReference: '3.1.1.3 - General atmospheric circulation'
+          },
+          {
+            id: 'g3-q2',
+            question: 'Explain the global distribution of tropical storms.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Tropical storms occur between 5° and 30° latitude north and south of the equator. They form over warm oceans (above 26.5°C). Common areas include Atlantic (hurricanes), Pacific (typhoons), and Indian Ocean (cyclones). They do not form at the equator due to lack of Coriolis effect.',
+            markingCriteria: {
+              breakdown: ['Between 5° and 30° latitude (1 mark)', 'Over warm oceans above 26.5°C (1 mark)', 'Named regions/ocean basins (1 mark)', 'Not at equator due to Coriolis effect (1 mark)']
+            },
+            specReference: '3.1.1.3 - Global distribution of tropical storms'
+          },
+          {
+            id: 'g3-q3',
+            question: 'Describe the sequence of formation and development of tropical storms.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Warm ocean water (above 26.5°C) evaporates rapidly. Rising air creates an area of low pressure. More air is drawn in and spins due to Coriolis effect. As air rises it cools and condenses releasing latent heat. This provides more energy causing air to rise faster. Eye wall forms with calm eye in center.',
+            markingCriteria: {
+              breakdown: ['Warm ocean water evaporates (1 mark)', 'Low pressure area forms (1 mark)', 'Air drawn in and spins (Coriolis) (1 mark)', 'Condensation releases latent heat (1 mark)', 'Positive feedback provides more energy (1 mark)', 'Eye and eye wall formation (1 mark)']
+            },
+            specReference: '3.1.1.3 - Formation and development of tropical storms'
+          },
+          {
+            id: 'g3-q4',
+            question: 'Describe the structure and features of a tropical storm.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Eye in the center is calm with clear skies and very low pressure. Eye wall surrounds the eye with strongest winds and heaviest rainfall. Spiral bands of cloud extend outward with decreasing wind speed. Whole system can be 500km in diameter.',
+            markingCriteria: {
+              breakdown: ['Eye - calm center with low pressure (1 mark)', 'Eye wall - strongest winds and rain (1 mark)', 'Spiral bands extending outward (1 mark)', 'Large diameter/scale mentioned (1 mark)']
+            },
+            specReference: '3.1.1.3 - Structure of tropical storms'
+          },
+          {
+            id: 'g3-q5',
+            question: 'Using a named example, explain the primary and secondary effects of a tropical storm.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Hurricane Katrina 2005: Primary effects - 1,836 deaths, storm surge flooded 80% of New Orleans, winds up to 280 km/h destroyed buildings. Secondary effects - disease spread due to contaminated water, economic losses of $125 billion, 1 million people displaced, long-term unemployment.',
+            markingCriteria: {
+              breakdown: ['Named example used (1 mark)', 'Primary effects - immediate impacts like deaths/flooding (2 marks)', 'Secondary effects - longer term impacts like disease/displacement (2 marks)', 'Specific details/statistics (1 mark)']
+            },
+            specReference: '3.1.1.3 - Effects of tropical storms'
+          },
+          {
+            id: 'g3-q6',
+            question: 'Explain how climate change might affect tropical storms.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Warmer oceans provide more energy for storm formation. Storms may become more intense with higher wind speeds. Sea level rise increases storm surge damage. Storm tracks may change affecting different areas.',
+            markingCriteria: {
+              breakdown: ['Warmer oceans provide more energy (1 mark)', 'More intense storms/higher wind speeds (1 mark)', 'Sea level rise increases surge damage (1 mark)', 'Changing storm tracks (1 mark)']
+            },
+            specReference: '3.1.1.3 - Climate change and tropical storms'
+          },
+          {
+            id: 'g3-q7',
+            question: 'Describe the types of weather hazards experienced in the UK.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Flooding from heavy rainfall or coastal storms. Droughts during extended dry periods. Strong winds and storms. Snow and ice causing transport disruption. Heatwaves during summer months.',
+            markingCriteria: {
+              breakdown: ['Flooding (1 mark)', 'Droughts (1 mark)', 'Strong winds/storms (1 mark)', 'Snow/ice or heatwaves (1 mark)']
+            },
+            specReference: '3.1.1.3 - UK weather hazards'
+          },
+          {
+            id: 'g3-q8',
+            question: 'Using a recent UK extreme weather event, explain its social, economic and environmental impacts.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Storm Desmond 2015 in Cumbria: Social impacts - 43,000 homes without power, communities isolated by flooding, stress and trauma. Economic impacts - £1.3 billion insurance claims, businesses closed, tourism affected. Environmental impacts - rivers polluted, farmland flooded, soil erosion.',
+            markingCriteria: {
+              breakdown: ['Named recent UK event (1 mark)', 'Social impacts e.g. displacement, communities affected (2 marks)', 'Economic impacts e.g. costs, business disruption (2 marks)', 'Environmental impacts e.g. pollution, erosion (1 mark)']
+            },
+            specReference: '3.1.1.3 - Extreme weather in UK'
+          },
+          {
+            id: 'g3-q9',
+            question: 'Explain how monitoring and prediction can reduce the effects of tropical storms.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Satellite imagery tracks storm development and movement. Computer models predict storm path and intensity. Early warning systems allow people to evacuate. Weather stations monitor local conditions to update forecasts.',
+            markingCriteria: {
+              breakdown: ['Satellite monitoring (1 mark)', 'Computer modeling for prediction (1 mark)', 'Early warning enables evacuation (1 mark)', 'Weather stations for local monitoring (1 mark)']
+            },
+            specReference: '3.1.1.3 - Monitoring and prediction'
+          },
+          {
+            id: 'g3-q10',
+            question: 'Assess the evidence that weather is becoming more extreme in the UK.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Evidence for: Recent severe flooding events like 2007, 2013-14, 2015-16 winters were record-breaking. Temperature records broken more frequently - 2019 had hottest July day. Increased insurance claims for weather damage. However, limited evidence: Weather records only go back 150 years. Natural variation makes trends hard to identify. Some extreme events have always occurred in UK climate. Overall, there is growing evidence but longer-term data needed for certainty.',
+            markingCriteria: {
+              breakdown: ['Evidence supporting increased extremes (2 marks)', 'Specific examples of recent events (2 marks)', 'Limitations of evidence/counterarguments (2 marks)', 'Balanced assessment/conclusion (2 marks)']
+            },
+            specReference: '3.1.1.3 - Evidence of extreme weather in UK'
+          }
+        ]
+      },
+      {
+        id: 'g4-climate-change',
+        name: 'Climate Change',
+        questions: [
+          {
+            id: 'g4-q1',
+            question: 'Outline the evidence for climate change from the Quaternary period to present.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Ice core data shows CO2 levels and temperature changes. Tree rings indicate past climate conditions. Historical records document temperature and weather patterns. Glacial evidence shows ice age cycles.',
+            markingCriteria: {
+              breakdown: ['Ice core data (1 mark)', 'Tree rings (1 mark)', 'Historical records (1 mark)', 'Glacial evidence (1 mark)']
+            },
+            specReference: '3.1.1.4 - Evidence for climate change'
+          },
+          {
+            id: 'g4-q2',
+            question: 'Explain the natural causes of climate change.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Orbital changes (Milankovitch cycles) affect distance from sun and solar radiation received. Volcanic activity releases ash and gases that can block sunlight and cool climate. Solar output varies in cycles affecting energy reaching Earth. These natural factors operated over long timescales before human influence.',
+            markingCriteria: {
+              breakdown: ['Orbital changes/Milankovitch cycles (2 marks)', 'Volcanic activity blocking sunlight (2 marks)', 'Solar output variations (1 mark)', 'Long timescales/before human influence (1 mark)']
+            },
+            specReference: '3.1.1.4 - Natural causes of climate change'
+          },
+          {
+            id: 'g4-q3',
+            question: 'Describe the human causes of climate change.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Burning fossil fuels releases CO2 and other greenhouse gases. Deforestation reduces trees that absorb CO2. Agriculture produces methane from livestock and rice farming. Industry releases various greenhouse gases.',
+            markingCriteria: {
+              breakdown: ['Fossil fuel burning releases CO2 (1 mark)', 'Deforestation reduces CO2 absorption (1 mark)', 'Agriculture produces methane (1 mark)', 'Industrial emissions (1 mark)']
+            },
+            specReference: '3.1.1.4 - Human causes of climate change'
+          },
+          {
+            id: 'g4-q4',
+            question: 'Outline the effects of climate change on people.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Sea level rise threatens coastal communities. Changing rainfall patterns affect water supply and agriculture. Extreme weather events increase. Health impacts from heat and disease. Migration as areas become uninhabitable.',
+            markingCriteria: {
+              breakdown: ['Sea level rise affecting coasts (1 mark)', 'Water/agriculture impacts (1 mark)', 'Extreme weather increases (1 mark)', 'Health or migration impacts (1 mark)']
+            },
+            specReference: '3.1.1.4 - Effects on people'
+          },
+          {
+            id: 'g4-q5',
+            question: 'Describe the effects of climate change on the environment.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Ice caps and glaciers melting causing sea level rise. Arctic ice retreat affecting polar bears and other wildlife. Coral bleaching due to warmer seas. Changes in species distribution as habitats shift.',
+            markingCriteria: {
+              breakdown: ['Ice caps/glaciers melting (1 mark)', 'Arctic ice retreat affecting wildlife (1 mark)', 'Coral bleaching (1 mark)', 'Species distribution changes (1 mark)']
+            },
+            specReference: '3.1.1.4 - Effects on environment'
+          },
+          {
+            id: 'g4-q6',
+            question: 'Explain mitigation strategies for managing climate change.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Alternative energy production like wind and solar reduces fossil fuel use. Carbon capture technology stores CO2 underground. Tree planting absorbs CO2 from atmosphere. International agreements like Paris Climate Accord coordinate global action to reduce emissions.',
+            markingCriteria: {
+              breakdown: ['Alternative energy reduces fossil fuel use (2 marks)', 'Carbon capture stores CO2 (1 mark)', 'Tree planting absorbs CO2 (1 mark)', 'International agreements coordinate action (2 marks)']
+            },
+            specReference: '3.1.1.4 - Mitigation strategies'
+          },
+          {
+            id: 'g4-q7',
+            question: 'Describe adaptation strategies for managing climate change.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Changes in agricultural systems like drought-resistant crops. Managing water supply through reservoirs and desalination. Reducing risk from sea level rise with flood barriers. Building design adapted to cope with temperature changes.',
+            markingCriteria: {
+              breakdown: ['Agricultural changes/drought-resistant crops (1 mark)', 'Water supply management (1 mark)', 'Flood barriers for sea level rise (1 mark)', 'Building design adaptations (1 mark)']
+            },
+            specReference: '3.1.1.4 - Adaptation strategies'
+          },
+          {
+            id: 'g4-q8',
+            question: 'Explain the difference between mitigation and adaptation strategies for climate change.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Mitigation aims to reduce the causes of climate change by cutting greenhouse gas emissions. Adaptation involves responding to climate change that is already happening by adjusting human systems to cope with the effects.',
+            markingCriteria: {
+              breakdown: ['Mitigation reduces causes/emissions (2 marks)', 'Adaptation responds to existing changes (2 marks)']
+            },
+            specReference: '3.1.1.4 - Managing climate change'
+          },
+          {
+            id: 'g4-q9',
+            question: 'Assess the importance of international agreements in managing climate change.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'International agreements like the Paris Accord are essential because climate change is a global problem requiring coordinated action. They set emission targets and provide framework for cooperation. However, agreements are often not legally binding and countries may not meet targets. Success depends on political will and economic priorities.',
+            markingCriteria: {
+              breakdown: ['Recognition that climate change needs global cooperation (1 mark)', 'Agreements set targets/provide framework (2 marks)', 'Limitations - not binding/targets missed (2 marks)', 'Success depends on political/economic factors (1 mark)']
+            },
+            specReference: '3.1.1.4 - International agreements'
+          },
+          {
+            id: 'g4-q10',
+            question: 'Evaluate the relative effectiveness of mitigation versus adaptation strategies for managing climate change.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Mitigation is essential for long-term solution as it addresses root causes by reducing emissions. Renewable energy and international agreements can have global impact. However, mitigation takes time to show results and requires major economic changes. Adaptation is necessary now as some climate change is already locked in. Flood defenses and crop changes can provide immediate protection. However, adaptation only responds to problems rather than solving them. Both strategies are needed - mitigation for long-term solution, adaptation for immediate protection.',
+            markingCriteria: {
+              breakdown: ['Discussion of mitigation effectiveness/importance (2 marks)', 'Limitations of mitigation approach (1 mark)', 'Discussion of adaptation benefits (2 marks)', 'Limitations of adaptation approach (1 mark)', 'Evaluation of relative importance/need for both (2 marks)']
+            },
+            specReference: '3.1.1.4 - Managing climate change'
+          }
+        ]
+      }
+    ]
+  },
+  {
     id: 'maths',
     name: 'Mathematics',
     topics: [
