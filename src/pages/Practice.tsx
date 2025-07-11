@@ -24,6 +24,23 @@ interface QuestionAttempt {
   };
 }
 
+// Filter out questions that require diagrams or visual interpretation
+const filterNonDiagramQuestions = (questions: Question[]): Question[] => {
+  const diagramKeywords = [
+    'diagram', 'chart', 'graph', 'scatter', 'plot', 'histogram', 'bar chart',
+    'pie chart', 'line graph', 'draw', 'sketch', 'show on', 'using the diagram',
+    'from the diagram', 'in the diagram', 'on the graph', 'from the graph',
+    'in the chart', 'from the chart', 'interpret the', 'read from',
+    'using the scatter', 'scatter diagram', 'box plot', 'stem and leaf',
+    'frequency polygon', 'cumulative frequency', 'pictogram'
+  ];
+  
+  return questions.filter(question => {
+    const questionText = question.question.toLowerCase();
+    return !diagramKeywords.some(keyword => questionText.includes(keyword));
+  });
+};
+
 // Fisher-Yates shuffle algorithm to randomize questions
 const shuffleArray = <T,>(array: T[]): T[] => {
   const shuffled = [...array];
@@ -80,13 +97,14 @@ const Practice = () => {
       try {
         const state = JSON.parse(savedState);
         
-        // Restore shuffled questions order
+        // Restore shuffled questions order and filter out diagram questions
         const restoredQuestions = state.shuffledQuestions
           .map((id: string) => topic.questions?.find(q => q.id === id))
           .filter((q: Question | undefined): q is Question => q !== undefined);
+        const filteredRestoredQuestions = filterNonDiagramQuestions(restoredQuestions);
         
-        if (restoredQuestions.length > 0) {
-          setShuffledQuestions(restoredQuestions);
+        if (filteredRestoredQuestions.length > 0) {
+          setShuffledQuestions(filteredRestoredQuestions);
           setCurrentQuestionIndex(state.currentQuestionIndex || 0);
           setUserAnswer(state.userAnswer || "");
           setAttempts(state.attempts || []);
@@ -122,7 +140,8 @@ const Practice = () => {
     
     // Only shuffle questions if no session was restored
     if (!sessionRestored) {
-      const shuffled = shuffleArray(topic.questions || []);
+      const filteredQuestions = filterNonDiagramQuestions(topic.questions || []);
+      const shuffled = shuffleArray(filteredQuestions);
       setShuffledQuestions(shuffled);
     }
   }, [subject, topic, navigate, topicId, user?.id]);
