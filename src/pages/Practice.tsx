@@ -252,77 +252,157 @@ const Practice = () => {
   const generateHint = (question: Question) => {
     const questionText = question.question.toLowerCase();
     const modelAnswer = question.modelAnswer.toLowerCase();
+    const markingCriteria = question.markingCriteria.breakdown.join(' ').toLowerCase();
     
-    // Generate specific hints based on question content and keywords
+    // Generate specific hints based on question content and model answer keywords
     const generateSpecificHint = () => {
       
-      // Geography-specific hints
+      // Use model answer keywords to provide content hints
+      const getKeywordsFromAnswer = () => {
+        const keywords = [];
+        
+        // Extract key scientific terms from model answer
+        if (modelAnswer.includes('tectonic plates') || modelAnswer.includes('plate boundary')) {
+          keywords.push('plate tectonics theory');
+        }
+        if (modelAnswer.includes('convection currents')) {
+          keywords.push('convection currents in the mantle');
+        }
+        if (modelAnswer.includes('primary effects')) {
+          keywords.push('immediate impacts like building collapse, deaths');
+        }
+        if (modelAnswer.includes('secondary effects')) {
+          keywords.push('later consequences like disease, unemployment');
+        }
+        if (modelAnswer.includes('immediate response')) {
+          keywords.push('rescue operations, emergency aid');
+        }
+        if (modelAnswer.includes('long-term response')) {
+          keywords.push('rebuilding, prevention measures');
+        }
+        if (modelAnswer.includes('monitoring')) {
+          keywords.push('seismometers, GPS, satellite monitoring');
+        }
+        if (modelAnswer.includes('prediction')) {
+          keywords.push('early warning systems');
+        }
+        if (modelAnswer.includes('protection')) {
+          keywords.push('earthquake-resistant buildings');
+        }
+        if (modelAnswer.includes('planning')) {
+          keywords.push('evacuation routes, emergency drills');
+        }
+        
+        return keywords;
+      };
+      
+      // Geography-specific hints based on model answers
       if (subjectId === 'geography') {
+        const answerKeywords = getKeywordsFromAnswer();
+        
         // Natural Hazards
         if (questionText.includes('natural hazard')) {
           if (questionText.includes('definition') || questionText.includes('what is')) {
-            return "Define natural hazards as naturally occurring events that pose threats to people and property. Consider geological, meteorological, and biological hazards.";
+            return "Your answer should mention 'naturally occurring events' and 'threat to people and property'. Include examples like earthquakes, volcanoes, or tropical storms.";
           }
           if (questionText.includes('factor') && questionText.includes('risk')) {
-            return "Think about vulnerability (how susceptible people are), hazard frequency/magnitude, capacity to cope, and level of development.";
+            if (modelAnswer.includes('vulnerability')) {
+              return "Key factors to mention: vulnerability (how exposed people are), hazard magnitude/frequency, population density, and level of development/wealth.";
+            }
+            return "Think about what makes some areas more at risk - consider population, development level, frequency of hazards, and ability to cope.";
           }
-          return "Consider the relationship between natural events and human activities. Think about vulnerability, exposure, and adaptive capacity.";
         }
         
         // Tectonic Hazards
         if (questionText.includes('plate') && (questionText.includes('margin') || questionText.includes('boundary'))) {
-          return "Describe constructive (divergent), destructive (convergent), and conservative (transform) plate margins. Explain the processes at each type.";
+          if (modelAnswer.includes('constructive')) {
+            return "Include all three types: constructive (plates move apart, new crust forms), destructive (plates collide, subduction), conservative (plates slide past).";
+          }
+          return "Describe the three plate margin types and what happens at each - think about plate movement direction and geological processes.";
         }
+        
         if (questionText.includes('earthquake') || questionText.includes('volcanic')) {
           if (questionText.includes('distribution')) {
-            return "Focus on the Ring of Fire around the Pacific, mid-ocean ridges, and collision zones. Link to plate tectonics theory.";
+            if (modelAnswer.includes('ring of fire') || modelAnswer.includes('pacific')) {
+              return "Mention the Ring of Fire around the Pacific Ocean, mid-Atlantic ridge, and areas where plates meet. Link to plate boundaries.";
+            }
+            return "Focus on patterns - where do most earthquakes/volcanoes occur? Think about plate boundaries and specific regions.";
           }
+          
           if (questionText.includes('effect') || questionText.includes('impact')) {
-            return "Distinguish between primary effects (immediate) and secondary effects (follow-on). Consider social, economic, and environmental impacts.";
+            if (modelAnswer.includes('primary') && modelAnswer.includes('secondary')) {
+              return "Separate primary effects (immediate: building collapse, deaths, infrastructure damage) from secondary effects (later: disease, unemployment, economic impact).";
+            }
+            return "Think about immediate impacts versus longer-term consequences. Consider social, economic, and environmental effects.";
           }
+          
           if (questionText.includes('response')) {
-            return "Separate immediate responses (rescue, emergency aid) from long-term responses (rebuilding, prevention). Consider how wealth affects responses.";
+            if (modelAnswer.includes('immediate') && modelAnswer.includes('long-term')) {
+              return "Split into immediate responses (rescue, emergency aid, medical care) and long-term responses (rebuilding, new building codes, monitoring systems).";
+            }
+            return "Consider what happens straight after the disaster versus months/years later. Think about emergency help and longer-term recovery.";
           }
+          
           if (questionText.includes('management') || questionText.includes('reduce')) {
-            return "Consider the 4 P's: Prediction (monitoring), Protection (building design), Preparation (education, drills), and Planning (evacuation routes).";
+            if (answerKeywords.length > 0) {
+              return `Key management strategies include: ${answerKeywords.slice(0, 3).join(', ')}. Use the 4 P's framework if relevant.`;
+            }
+            return "Think about the 4 P's: Prediction (monitoring), Protection (building design), Preparation (education), Planning (evacuation routes).";
           }
         }
         
         // Weather Hazards
         if (questionText.includes('tropical storm') || questionText.includes('hurricane') || questionText.includes('cyclone')) {
           if (questionText.includes('formation') || questionText.includes('develop')) {
-            return "Think about warm ocean water (27°C+), low wind shear, sufficient distance from equator for Coriolis effect, and atmospheric instability.";
+            if (modelAnswer.includes('27') || modelAnswer.includes('temperature')) {
+              return "Essential conditions: warm ocean water (27°C+), low wind shear, distance from equator for Coriolis effect, atmospheric instability.";
+            }
+            return "Think about ocean temperature requirements, wind conditions, location relative to equator, and atmospheric conditions needed.";
           }
+          
           if (questionText.includes('structure')) {
-            return "Describe the eye (calm center), eye wall (strongest winds), and spiral rain bands. Explain air circulation patterns.";
-          }
-          if (questionText.includes('distribution')) {
-            return "Focus on tropical regions between 5-30° latitude, avoiding the equator. Consider seasonal patterns and ocean temperature requirements.";
+            if (modelAnswer.includes('eye') && modelAnswer.includes('wall')) {
+              return "Describe the eye (calm center with descending air), eye wall (strongest winds and heaviest rain), and spiral rain bands extending outwards.";
+            }
+            return "Think about the central calm area, the area of strongest winds around it, and the spiral structure extending outwards.";
           }
         }
+        
         if (questionText.includes('atmospheric circulation')) {
-          return "Explain the three-cell model: Hadley cells (0-30°), Ferrel cells (30-60°), and Polar cells (60-90°). Include pressure belts and winds.";
-        }
-        if (questionText.includes('uk') && questionText.includes('weather')) {
-          return "Consider the UK's maritime climate, depressions from the Atlantic, and how climate change might increase extreme events like flooding and heatwaves.";
+          if (modelAnswer.includes('hadley') || modelAnswer.includes('ferrel')) {
+            return "Explain the three-cell model: Hadley cells (0-30°, hot air rises at equator), Ferrel cells (30-60°), Polar cells (60-90°, cold air sinks).";
+          }
+          return "Think about how hot air rises at the equator and cold air sinks at the poles, creating circulation cells and pressure belts.";
         }
         
         // Climate Change
         if (questionText.includes('climate change')) {
           if (questionText.includes('evidence')) {
-            return "Use data from ice cores, tree rings, historical records, and temperature measurements. Show trends from the Quaternary period to present.";
+            if (modelAnswer.includes('ice core') || modelAnswer.includes('tree ring')) {
+              return "Use evidence like ice cores (trapped air bubbles), tree rings (growth patterns), historical records, and modern temperature measurements.";
+            }
+            return "Think about different types of evidence - from ice, trees, historical documents, and modern measurements showing temperature changes.";
           }
+          
           if (questionText.includes('cause')) {
-            return "Separate natural causes (solar output, orbital changes, volcanic activity) from human causes (fossil fuels, deforestation, agriculture).";
+            if (modelAnswer.includes('natural') && modelAnswer.includes('human')) {
+              return "Separate natural causes (solar output changes, volcanic eruptions, orbital cycles) from human causes (burning fossil fuels, deforestation, agriculture).";
+            }
+            return "Consider both natural factors and human activities that affect greenhouse gas concentrations and global temperatures.";
           }
-          if (questionText.includes('effect') || questionText.includes('impact')) {
-            return "Consider environmental effects (sea level rise, ice melt) and human effects (agriculture, water supply, migration, health).";
-          }
+          
           if (questionText.includes('mitigation')) {
-            return "Focus on reducing causes: renewable energy, carbon capture, international agreements like Paris Agreement, reducing emissions.";
+            if (modelAnswer.includes('renewable') || modelAnswer.includes('carbon capture')) {
+              return "Focus on reducing causes: renewable energy sources, carbon capture technology, international agreements, reducing fossil fuel use.";
+            }
+            return "Think about ways to reduce greenhouse gas emissions and prevent further climate change.";
           }
+          
           if (questionText.includes('adaptation')) {
-            return "Focus on responding to change: flood defenses, drought-resistant crops, water management, changing agricultural practices.";
+            if (modelAnswer.includes('flood defense') || modelAnswer.includes('crop')) {
+              return "Focus on adjusting to change: flood defenses for sea level rise, drought-resistant crops, water management, changed farming practices.";
+            }
+            return "Think about how humans can adjust to cope with climate change effects rather than preventing them.";
           }
         }
       }
