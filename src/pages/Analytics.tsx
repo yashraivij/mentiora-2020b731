@@ -95,16 +95,16 @@ const Analytics = () => {
   const weakTopicData = getWeakTopicData();
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-card shadow-sm border-b border-border">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center space-x-4">
             <Button variant="outline" onClick={() => navigate('/dashboard')}>
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Dashboard
             </Button>
-            <h1 className="text-2xl font-bold text-slate-900">Performance Analytics</h1>
+            <h1 className="text-2xl font-bold text-foreground">Performance Analytics</h1>
           </div>
         </div>
       </header>
@@ -123,7 +123,7 @@ const Analytics = () => {
               <div className="text-3xl font-bold text-green-600">
                 {masteredTopics.length}
               </div>
-              <p className="text-sm text-slate-600">85%+ average score</p>
+              <p className="text-sm text-muted-foreground">85%+ average score</p>
             </CardContent>
           </Card>
 
@@ -138,7 +138,7 @@ const Analytics = () => {
               <div className="text-3xl font-bold text-red-600">
                 {weakTopics.length}
               </div>
-              <p className="text-sm text-slate-600">Need more practice</p>
+              <p className="text-sm text-muted-foreground">Need more practice</p>
             </CardContent>
           </Card>
 
@@ -153,7 +153,7 @@ const Analytics = () => {
               <div className="text-3xl font-bold text-blue-600">
                 {analyticsData.reduce((sum, d) => sum + d.attempts, 0)}
               </div>
-              <p className="text-sm text-slate-600">Questions practiced</p>
+              <p className="text-sm text-muted-foreground">Questions practiced</p>
             </CardContent>
           </Card>
 
@@ -168,7 +168,7 @@ const Analytics = () => {
               <div className="text-3xl font-bold text-purple-600">
                 {analyticsData.length > 0 ? Math.ceil(analyticsData.length / 2) : 0}
               </div>
-              <p className="text-sm text-slate-600">Days with practice</p>
+              <p className="text-sm text-muted-foreground">Days with practice</p>
             </CardContent>
           </Card>
         </div>
@@ -189,7 +189,7 @@ const Analytics = () => {
                   <span className="text-sm font-medium">{Math.round(aoBreakdown.ao1)}%</span>
                 </div>
                 <Progress value={aoBreakdown.ao1} className="mb-2" />
-                <p className="text-xs text-slate-600">
+                <p className="text-xs text-muted-foreground">
                   Recalling facts, terminology, and concepts
                 </p>
               </div>
@@ -200,7 +200,7 @@ const Analytics = () => {
                   <span className="text-sm font-medium">{Math.round(aoBreakdown.ao2)}%</span>
                 </div>
                 <Progress value={aoBreakdown.ao2} className="mb-2" />
-                <p className="text-xs text-slate-600">
+                <p className="text-xs text-muted-foreground">
                   Applying knowledge to familiar and unfamiliar situations
                 </p>
               </div>
@@ -211,7 +211,7 @@ const Analytics = () => {
                   <span className="text-sm font-medium">{Math.round(aoBreakdown.ao3)}%</span>
                 </div>
                 <Progress value={aoBreakdown.ao3} className="mb-2" />
-                <p className="text-xs text-slate-600">
+                <p className="text-xs text-muted-foreground">
                   Analyzing and evaluating information to make judgments
                 </p>
               </div>
@@ -229,21 +229,21 @@ const Analytics = () => {
             <CardContent>
               {weakTopicData.length > 0 ? (
                 <div className="space-y-4">
-                  {weakTopicData.slice(0, 5).map(({ topicId, data }) => (
-                    <div key={topicId} className="flex items-center justify-between p-3 bg-red-50 rounded-lg border border-red-200">
-                      <div>
-                        <h4 className="font-medium text-slate-900">
-                          {getTopicName(topicId)}
-                        </h4>
-                        <p className="text-sm text-slate-600">
-                          {getSubjectName(data.subjectId)}
-                        </p>
-                        {data.attempts > 0 && (
-                          <p className="text-xs text-slate-500">
-                            {data.attempts} attempts • {data.averageScore}% average
-                          </p>
-                        )}
-                      </div>
+                   {weakTopicData.slice(0, 5).map(({ topicId, data }) => (
+                     <div key={topicId} className="flex items-center justify-between p-3 bg-destructive/5 rounded-lg border border-destructive/20">
+                       <div>
+                         <h4 className="font-medium text-foreground">
+                           {getTopicName(topicId)}
+                         </h4>
+                         <p className="text-sm text-muted-foreground">
+                           {getSubjectName(data.subjectId)}
+                         </p>
+                         {data.attempts > 0 && (
+                           <p className="text-xs text-muted-foreground/80">
+                             {data.attempts} attempts • {data.averageScore}% average
+                           </p>
+                         )}
+                       </div>
                       <Button 
                         size="sm" 
                         onClick={() => navigate(`/practice/${data.subjectId}/${topicId}`)}
@@ -254,12 +254,12 @@ const Analytics = () => {
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-8">
-                  <Target className="h-12 w-12 text-slate-400 mx-auto mb-4" />
-                  <p className="text-slate-600">
-                    No weak topics identified yet. Start practicing to get personalized insights!
-                  </p>
-                </div>
+                 <div className="text-center py-8">
+                   <Target className="h-12 w-12 text-muted-foreground/50 mx-auto mb-4" />
+                   <p className="text-muted-foreground">
+                     No weak topics identified yet. Start practicing to get personalized insights!
+                   </p>
+                 </div>
               )}
             </CardContent>
           </Card>
@@ -282,13 +282,13 @@ const Analytics = () => {
                 const topicsAttempted = subjectData.length;
                 const topicsMastered = subjectData.filter(d => d.averageScore >= 85).length;
 
-                return (
-                  <div key={subject.id} className="border rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center space-x-3">
-                        <div className={`w-4 h-4 rounded-full ${getSubjectColor(subject.id)}`}></div>
-                        <h3 className="text-lg font-semibold">{subject.name}</h3>
-                      </div>
+                 return (
+                   <div key={subject.id} className="border border-border rounded-lg p-4 bg-card">
+                     <div className="flex items-center justify-between mb-4">
+                       <div className="flex items-center space-x-3">
+                         <div className={`w-4 h-4 rounded-full ${getSubjectColor(subject.id)}`}></div>
+                         <h3 className="text-lg font-semibold text-foreground">{subject.name}</h3>
+                       </div>
                       <div className="flex items-center space-x-4">
                         <Badge variant="outline">
                           {topicsAttempted}/{subject.topics.length} topics
@@ -301,22 +301,22 @@ const Analytics = () => {
                     
                     <Progress value={subjectScore} className="mb-4" />
                     
-                    <div className="grid md:grid-cols-3 gap-4 text-sm">
-                      <div>
-                        <span className="text-slate-600">Topics Attempted:</span>
-                        <span className="font-medium ml-2">{topicsAttempted}</span>
-                      </div>
-                      <div>
-                        <span className="text-slate-600">Topics Mastered:</span>
-                        <span className="font-medium ml-2 text-green-600">{topicsMastered}</span>
-                      </div>
-                      <div>
-                        <span className="text-slate-600">Total Attempts:</span>
-                        <span className="font-medium ml-2">
-                          {subjectData.reduce((sum, d) => sum + d.attempts, 0)}
-                        </span>
-                      </div>
-                    </div>
+                     <div className="grid md:grid-cols-3 gap-4 text-sm">
+                       <div>
+                         <span className="text-muted-foreground">Topics Attempted:</span>
+                         <span className="font-medium ml-2 text-foreground">{topicsAttempted}</span>
+                       </div>
+                       <div>
+                         <span className="text-muted-foreground">Topics Mastered:</span>
+                         <span className="font-medium ml-2 text-green-600">{topicsMastered}</span>
+                       </div>
+                       <div>
+                         <span className="text-muted-foreground">Total Attempts:</span>
+                         <span className="font-medium ml-2 text-foreground">
+                           {subjectData.reduce((sum, d) => sum + d.attempts, 0)}
+                         </span>
+                       </div>
+                     </div>
                   </div>
                 );
               })}
