@@ -579,10 +579,10 @@ export function GoalsSection() {
               const completed = isGoalCompleted(goal);
               
               return (
-                <div key={goal.id} className="p-4 rounded-2xl bg-background/50 dark:bg-card/30 border border-border/50 hover:bg-background/80 dark:hover:bg-card/50 transition-all duration-200">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center space-x-3">
-                      <div className={`w-8 h-8 rounded-xl flex items-center justify-center shadow-sm ${
+                <div key={goal.id} className="p-4 rounded-2xl bg-background/50 dark:bg-card/30 border border-border/50 hover:bg-background/80 dark:hover:bg-card/50 transition-all duration-200 w-full">
+                  <div className="flex items-start justify-between mb-3 w-full">
+                    <div className="flex items-center space-x-3 flex-1 min-w-0">
+                      <div className={`w-8 h-8 rounded-xl flex items-center justify-center shadow-sm flex-shrink-0 ${
                         completed 
                           ? 'bg-gradient-to-br from-emerald-500 to-green-600' 
                           : 'bg-gradient-to-br from-blue-500 to-cyan-600'
@@ -595,8 +595,8 @@ export function GoalsSection() {
                           <Clock className="h-4 w-4 text-white" />
                         )}
                       </div>
-                      <div>
-                        <div className="flex items-center space-x-2">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center space-x-2 flex-wrap">
                           <span className="font-medium text-foreground">
                             {goal.goal_type === 'daily_study_time' 
                               ? `${formatTime(goal.target_value)} daily`
@@ -615,7 +615,7 @@ export function GoalsSection() {
                             </Badge>
                           )}
                         </div>
-                        <span className="text-sm text-muted-foreground">
+                        <span className="text-sm text-muted-foreground block truncate">
                           {goal.goal_type === 'daily_study_time' 
                             ? `${formatTime(todayStudyTime)} / ${formatTime(goal.target_value)}`
                             : `${dailyTopicMastery[(goal.metadata || {}).subject_id || ''] || 0} / ${goal.target_value} topics mastered`
@@ -624,15 +624,15 @@ export function GoalsSection() {
                       </div>
                     </div>
                     
-                    <div className="flex items-center space-x-2">
-                      <span className="text-sm font-medium text-foreground">
+                    <div className="flex items-center space-x-2 flex-shrink-0 ml-3">
+                      <span className="text-sm font-medium text-foreground whitespace-nowrap">
                         {Math.round(progress)}%
                       </span>
                       <Button 
                         variant="ghost" 
                         size="sm" 
                         onClick={() => deleteGoal(goal.id)}
-                        className="h-8 w-8 p-0 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                        className="h-8 w-8 p-0 text-muted-foreground hover:text-destructive hover:bg-destructive/10 flex-shrink-0"
                       >
                         <Trash2 className="h-3 w-3" />
                       </Button>
