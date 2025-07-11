@@ -45,9 +45,9 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4 text-slate-900">
+      <Card className="w-full max-w-md bg-white border border-slate-200 shadow-lg">
+        <CardHeader className="text-center bg-white">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
               <img 
@@ -58,15 +58,15 @@ const Register = () => {
             </div>
             <h1 className="text-2xl font-bold text-slate-900">Mentiora</h1>
           </div>
-          <CardTitle>Create Account</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-slate-900">Create Account</CardTitle>
+          <CardDescription className="text-slate-600">
             Start your personalized GCSE revision journey
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="bg-white">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Full Name</Label>
+              <Label htmlFor="name" className="text-slate-700">Full Name</Label>
               <Input
                 id="name"
                 type="text"
@@ -74,10 +74,11 @@ const Register = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
+                className="bg-white border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-slate-700">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -85,10 +86,11 @@ const Register = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                className="bg-white border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-slate-700">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -96,10 +98,11 @@ const Register = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                className="bg-white border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <Label htmlFor="confirmPassword" className="text-slate-700">Confirm Password</Label>
               <Input
                 id="confirmPassword"
                 type="password"
@@ -107,11 +110,12 @@ const Register = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
+                className="bg-white border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
             <Button 
               type="submit" 
-              className="w-full bg-blue-600 hover:bg-blue-700" 
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white" 
               disabled={isLoading}
             >
               {isLoading ? "Creating Account..." : "Create Account"}
