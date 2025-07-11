@@ -233,90 +233,202 @@ const Practice = () => {
   const generateHint = (question: Question) => {
     const questionText = question.question.toLowerCase();
     const modelAnswer = question.modelAnswer.toLowerCase();
+    const markingCriteria = question.markingCriteria.breakdown.join(' ').toLowerCase();
     
-    // Biology hints
+    // Extract key terms from model answer for more specific hints
+    const extractKeyTerms = (text: string) => {
+      // Remove common words and extract meaningful terms
+      const commonWords = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'this', 'that', 'these', 'those', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'can', 'must'];
+      return text.split(' ').filter(word => word.length > 3 && !commonWords.includes(word));
+    };
+    
+    const modelKeyTerms = extractKeyTerms(modelAnswer);
+    const criteriaKeyTerms = extractKeyTerms(markingCriteria);
+    
+    // Biology-specific hints
     if (subjectId === 'biology') {
-      if (questionText.includes('osmosis')) {
-        return "Think about how water moves across a membrane from high to low concentration.";
+      // Osmosis and water movement
+      if (questionText.includes('osmosis') || modelAnswer.includes('osmosis')) {
+        return "Focus on water movement from high to low concentration across a partially permeable membrane.";
       }
-      if (questionText.includes('photosynthesis')) {
-        return "Remember the equation involves carbon dioxide, water, light energy, and produces glucose and oxygen.";
+      
+      // Photosynthesis
+      if (questionText.includes('photosynthesis') || modelAnswer.includes('photosynthesis')) {
+        if (modelAnswer.includes('equation') || modelAnswer.includes('formula')) {
+          return "Remember the word equation: carbon dioxide + water → glucose + oxygen (with light energy and chlorophyll).";
+        }
+        return "Consider the inputs (CO₂, water, light), outputs (glucose, oxygen), and where it occurs (chloroplasts).";
       }
-      if (questionText.includes('enzyme')) {
-        return "Consider the lock and key model - enzymes are specific to their substrates.";
+      
+      // Enzymes
+      if (questionText.includes('enzyme') || modelAnswer.includes('enzyme')) {
+        if (modelAnswer.includes('temperature') || modelAnswer.includes('denature')) {
+          return "Think about how temperature affects enzyme shape and activity - what happens at high temperatures?";
+        }
+        if (modelAnswer.includes('active site') || modelAnswer.includes('substrate')) {
+          return "Consider the lock and key model - enzymes are specific to their substrates via the active site.";
+        }
+        return "Think about enzyme specificity, active sites, and factors that affect enzyme activity.";
       }
-      if (questionText.includes('mitosis')) {
-        return "Think about cell division that produces identical diploid cells for growth and repair.";
+      
+      // Cell division
+      if (questionText.includes('mitosis') || modelAnswer.includes('mitosis')) {
+        return "Think about cell division that produces two identical diploid cells for growth and repair.";
       }
-      if (questionText.includes('respiration')) {
-        return "Consider whether oxygen is present (aerobic) or absent (anaerobic) and the energy release process.";
+      if (questionText.includes('meiosis') || modelAnswer.includes('meiosis')) {
+        return "Consider cell division that produces four genetically different haploid gametes.";
+      }
+      
+      // Respiration
+      if (questionText.includes('respiration') || modelAnswer.includes('respiration')) {
+        if (modelAnswer.includes('aerobic')) {
+          return "Consider aerobic respiration: glucose + oxygen → carbon dioxide + water + ATP.";
+        }
+        if (modelAnswer.includes('anaerobic')) {
+          return "Think about anaerobic respiration - what happens when there's no oxygen available?";
+        }
+        return "Consider whether oxygen is present and the energy release process in cells.";
+      }
+      
+      // Homeostasis
+      if (questionText.includes('homeostasis') || modelAnswer.includes('homeostasis')) {
+        return "Think about maintaining constant internal conditions - negative feedback mechanisms.";
+      }
+      
+      // Inheritance
+      if (questionText.includes('genetic') || questionText.includes('inherit') || modelAnswer.includes('allele')) {
+        return "Consider dominant and recessive alleles, and how they're passed from parents to offspring.";
       }
     }
     
-    // Mathematics hints
+    // Mathematics-specific hints
     if (subjectId === 'mathematics') {
+      // Factorization
       if (questionText.includes('factorize') || questionText.includes('factorise')) {
-        if (questionText.includes('x²') && questionText.includes('7x') && questionText.includes('12')) {
-          return "Look for two numbers that add to 7 and multiply to 12.";
+        // Extract coefficients from the question
+        const coeffMatch = questionText.match(/x²\s*[+-]\s*(\d+)x\s*[+-]\s*(\d+)/);
+        if (coeffMatch) {
+          const [, bCoeff, cCoeff] = coeffMatch;
+          return `Find two numbers that multiply to ${cCoeff} and add to ${bCoeff}.`;
         }
         return "Find two numbers that multiply to give the constant term and add to give the coefficient of x.";
       }
-      if (questionText.includes('expand')) {
-        return "Use FOIL method or multiply each term in the first bracket by each term in the second bracket.";
-      }
+      
+      // Solving equations
       if (questionText.includes('solve') && questionText.includes('x')) {
-        return "Isolate x by performing the same operation on both sides of the equation.";
+        if (modelAnswer.includes('=')) {
+          return "Isolate x by performing the same operation on both sides of the equation.";
+        }
+        return "Get all x terms on one side and all numbers on the other side.";
       }
-      if (questionText.includes('percentage')) {
-        return "Remember: percentage = (part/whole) × 100, or use the percentage formula.";
+      
+      // Percentage calculations
+      if (questionText.includes('percentage') || questionText.includes('%')) {
+        if (questionText.includes('increase') || questionText.includes('decrease')) {
+          return "Use percentage change = (new value - original value) / original value × 100.";
+        }
+        return "Remember: percentage = (part/whole) × 100.";
       }
-      if (questionText.includes('area') && questionText.includes('circle')) {
-        return "Use the formula A = πr², where r is the radius.";
+      
+      // Circle geometry
+      if (questionText.includes('circle')) {
+        if (questionText.includes('area')) {
+          return "Use the formula A = πr², where r is the radius.";
+        }
+        if (questionText.includes('circumference') || questionText.includes('perimeter')) {
+          return "Use the formula C = πd or C = 2πr, where d is diameter and r is radius.";
+        }
       }
-      if (questionText.includes('circumference')) {
-        return "Use the formula C = πd or C = 2πr, where d is diameter and r is radius.";
+      
+      // Trigonometry
+      if (questionText.includes('sin') || questionText.includes('cos') || questionText.includes('tan')) {
+        return "Remember SOH CAH TOA: Sin = Opposite/Hypotenuse, Cos = Adjacent/Hypotenuse, Tan = Opposite/Adjacent.";
       }
     }
     
-    // Chemistry hints
+    // Chemistry-specific hints
     if (subjectId === 'chemistry') {
-      if (questionText.includes('periodic table')) {
-        return "Consider the arrangement by atomic number and the patterns in groups and periods.";
+      // Periodic table
+      if (questionText.includes('periodic') || modelAnswer.includes('group') || modelAnswer.includes('period')) {
+        return "Consider the arrangement by atomic number and patterns in groups (vertical) and periods (horizontal).";
       }
-      if (questionText.includes('ionic') || questionText.includes('covalent')) {
-        return "Think about whether electrons are transferred (ionic) or shared (covalent).";
+      
+      // Bonding
+      if (questionText.includes('ionic') || modelAnswer.includes('ionic')) {
+        return "Think about electron transfer between metals and non-metals forming charged ions.";
       }
-      if (questionText.includes('balance') && questionText.includes('equation')) {
+      if (questionText.includes('covalent') || modelAnswer.includes('covalent')) {
+        return "Consider electron sharing between non-metal atoms to form molecules.";
+      }
+      
+      // Chemical equations
+      if (questionText.includes('balance') || questionText.includes('equation')) {
         return "Start with the most complex molecule and balance atoms one element at a time.";
       }
+      
+      // Acids and bases
+      if (questionText.includes('acid') || questionText.includes('alkali') || modelAnswer.includes('ph')) {
+        return "Think about hydrogen ions (H⁺) in acids and hydroxide ions (OH⁻) in alkalis.";
+      }
     }
     
-    // Physics hints
+    // Physics-specific hints
     if (subjectId === 'physics') {
-      if (questionText.includes('force') || questionText.includes('newton')) {
-        return "Remember F = ma, and consider the direction of forces.";
+      // Forces and motion
+      if (questionText.includes('force') || modelAnswer.includes('newton')) {
+        if (modelAnswer.includes('acceleration')) {
+          return "Use Newton's second law: Force = mass × acceleration (F = ma).";
+        }
+        return "Consider the size and direction of forces, and whether they're balanced or unbalanced.";
       }
-      if (questionText.includes('energy')) {
-        return "Think about conservation of energy and the different types: kinetic, potential, thermal.";
+      
+      // Energy
+      if (questionText.includes('energy') || modelAnswer.includes('energy')) {
+        if (modelAnswer.includes('kinetic')) {
+          return "Think about kinetic energy = ½mv² - energy due to motion.";
+        }
+        if (modelAnswer.includes('potential')) {
+          return "Consider gravitational potential energy = mgh - energy due to position.";
+        }
+        return "Think about energy conservation and transfers between kinetic, potential, and thermal energy.";
       }
-      if (questionText.includes('wave')) {
-        return "Consider the relationship between wavelength, frequency, and wave speed: v = fλ.";
+      
+      // Waves
+      if (questionText.includes('wave') || modelAnswer.includes('frequency')) {
+        return "Consider the wave equation: wave speed = frequency × wavelength (v = fλ).";
+      }
+      
+      // Electricity
+      if (questionText.includes('current') || questionText.includes('voltage') || modelAnswer.includes('ohm')) {
+        return "Remember Ohm's law: Voltage = Current × Resistance (V = IR).";
       }
     }
     
-    // Generic hints based on question type
+    // Question type-based hints using model answer analysis
     if (questionText.includes('calculate') || questionText.includes('find')) {
-      return "Identify what information you're given and what formula or method you need to use.";
-    }
-    if (questionText.includes('explain') || questionText.includes('describe')) {
-      return "Structure your answer with clear points and use scientific terminology appropriately.";
-    }
-    if (questionText.includes('compare')) {
-      return "Identify similarities and differences, and explain the reasons for these.";
+      if (modelKeyTerms.length > 0) {
+        return `Look for the key concept: ${modelKeyTerms[0]}. Identify what values you're given and what formula applies.`;
+      }
+      return "Identify the given values and determine which formula or method to use.";
     }
     
-    // Fallback hint
-    return "Break down the question into smaller parts and think about what key concepts are being tested.";
+    if (questionText.includes('explain') || questionText.includes('describe')) {
+      if (criteriaKeyTerms.length > 0) {
+        return `Make sure to mention: ${criteriaKeyTerms.slice(0, 2).join(' and ')}. Use clear scientific terminology.`;
+      }
+      return "Structure your answer with clear points and use appropriate scientific terminology.";
+    }
+    
+    if (questionText.includes('compare') || questionText.includes('difference')) {
+      return "Identify similarities and differences, explaining the scientific reasons for each.";
+    }
+    
+    // Fallback with specific guidance based on marking criteria
+    if (criteriaKeyTerms.length > 0) {
+      return `Consider the key concept: ${criteriaKeyTerms[0]}. Think about what the question is specifically testing.`;
+    }
+    
+    return "Break down the question systematically and identify the key scientific concepts being tested.";
   };
 
   const finishSession = () => {
