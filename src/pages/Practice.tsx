@@ -234,135 +234,173 @@ const Practice = () => {
     const questionText = question.question.toLowerCase();
     const modelAnswer = question.modelAnswer.toLowerCase();
     
-    // Analyze the main focus of the question by looking at key command words and topics
-    const getQuestionFocus = () => {
-      // Limiting factors
-      if (questionText.includes('limiting factor')) {
-        return 'limiting_factors';
-      }
-      
-      // Specific biology processes
-      if (questionText.includes('osmosis') && !questionText.includes('photosynthesis')) {
-        return 'osmosis';
-      }
-      if (questionText.includes('photosynthesis') && !questionText.includes('respiration') && !questionText.includes('limiting')) {
-        return 'photosynthesis';
-      }
-      if (questionText.includes('respiration') && !questionText.includes('photosynthesis')) {
-        return 'respiration';
-      }
-      if (questionText.includes('enzyme') && !questionText.includes('photosynthesis')) {
-        return 'enzymes';
-      }
-      
-      // Cell biology
-      if (questionText.includes('mitosis') || questionText.includes('cell division')) {
-        return 'mitosis';
-      }
-      if (questionText.includes('meiosis')) {
-        return 'meiosis';
-      }
-      if (questionText.includes('cell membrane') || questionText.includes('cell wall')) {
-        return 'cell_structure';
-      }
-      
-      // Genetics
-      if (questionText.includes('allele') || questionText.includes('genetic') || questionText.includes('inheritance')) {
-        return 'genetics';
-      }
-      if (questionText.includes('mutation')) {
-        return 'mutation';
-      }
-      
-      // Ecology
-      if (questionText.includes('ecosystem') || questionText.includes('food chain') || questionText.includes('food web')) {
-        return 'ecology';
-      }
-      if (questionText.includes('competition') && questionText.includes('organism')) {
-        return 'competition';
-      }
-      
-      // Homeostasis
-      if (questionText.includes('homeostasis') || questionText.includes('temperature regulation') || questionText.includes('blood sugar')) {
-        return 'homeostasis';
-      }
-      
-      // Evolution
-      if (questionText.includes('evolution') || questionText.includes('natural selection')) {
-        return 'evolution';
-      }
-      
-      return 'general';
+    // Extract key content words from the question for more specific matching
+    const extractKeyContent = (text: string) => {
+      // Look for specific scientific terms and concepts
+      const scientificTerms = text.match(/\b(photosynthesis|respiration|osmosis|enzyme|mitosis|meiosis|limiting factor|homeostasis|evolution|natural selection|allele|gene|chromosome|dna|rna|protein|carbohydrate|lipid|ionic|covalent|metallic|acid|alkali|base|salt|oxidation|reduction|alkane|alkene|polymer|hydrocarbon|functional group|isomer|catalyst|equilibrium|rate|concentration|temperature|pressure|ph|titration|electrolysis|displacement|combustion|force|energy|power|work|momentum|wave|frequency|wavelength|current|voltage|resistance|magnetic|electromagnetic|radioactive|atomic|nuclear|electron|proton|neutron|periodic|group|period|metal|non-metal|transition)\b/g);
+      return scientificTerms || [];
     };
     
-    const questionFocus = getQuestionFocus();
+    const questionKeyTerms = extractKeyContent(questionText);
+    const answerKeyTerms = extractKeyContent(modelAnswer);
+    const allKeyTerms = [...new Set([...questionKeyTerms, ...answerKeyTerms])];
     
-    // Biology-specific hints based on question focus
-    if (subjectId === 'biology') {
-      switch (questionFocus) {
-        case 'limiting_factors':
-          return "Think about what factors can slow down or stop a biological process. Consider light intensity, temperature, and CO₂ concentration for photosynthesis. Explain how the slowest factor controls the overall rate.";
-          
-        case 'osmosis':
-          return "Focus on water movement from high to low water concentration across a partially permeable membrane. Think about what happens to cells in different solutions.";
-          
-        case 'photosynthesis':
-          return "6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂ (with light energy and chlorophyll). Consider where it happens, what's needed, and what's produced.";
-          
-        case 'respiration':
-          return "Aerobic: glucose + oxygen → CO₂ + water + ATP. Anaerobic: glucose → lactic acid + ATP (animals) or ethanol + CO₂ + ATP (plants/yeast).";
-          
-        case 'enzymes':
-          return "Think about the lock and key model, active sites, and how temperature and pH affect enzyme shape and activity. Consider what happens when enzymes denature.";
-          
-        case 'mitosis':
-          return "Cell division producing two identical diploid cells for growth and repair. Think about the stages: prophase, metaphase, anaphase, telophase.";
-          
-        case 'meiosis':
-          return "Cell division producing four genetically different haploid gametes for reproduction. Consider crossing over and independent assortment.";
-          
-        case 'genetics':
-          return "Think about dominant and recessive alleles, homozygous vs heterozygous, and how traits are inherited from parents to offspring.";
-          
-        case 'homeostasis':
-          return "Maintaining constant internal conditions through negative feedback. Think about receptors detecting changes, processing centers, and effectors responding.";
-          
-        case 'evolution':
-          return "Consider variation, inheritance, selection pressure, and time. Think about how advantageous traits become more common in populations.";
-          
-        case 'ecology':
-          return "Think about energy flow through trophic levels, nutrient cycling, and how organisms interact with each other and their environment.";
-          
-        case 'competition':
-          return "Consider what organisms compete for (food, space, mates, light) and how this affects population sizes and distribution.";
-          
-        default:
-          // Fallback for general biology questions
-          if (questionText.includes('explain')) {
-            return "Structure your answer clearly. Define key terms, explain the process step by step, and give examples where relevant.";
-          }
-          if (questionText.includes('compare')) {
-            return "Identify similarities and differences. Use a table or clear points to contrast the features being compared.";
-          }
-          return "Read the question carefully and identify the key biological concept being tested. Use appropriate scientific terminology.";
+    // Chemistry-specific hints (expanded for organic chemistry)
+    if (subjectId === 'chemistry') {
+      // Organic Chemistry specific hints
+      if (questionText.includes('alkane') || allKeyTerms.includes('alkane')) {
+        return "Alkanes are saturated hydrocarbons with single C-C bonds. General formula CₙH₂ₙ₊₂. Think about their properties and how they burn.";
+      }
+      
+      if (questionText.includes('alkene') || allKeyTerms.includes('alkene')) {
+        return "Alkenes are unsaturated hydrocarbons with C=C double bonds. General formula CₙH₂ₙ. They can undergo addition reactions.";
+      }
+      
+      if (questionText.includes('polymer') || questionText.includes('polymerisation') || allKeyTerms.includes('polymer')) {
+        return "Polymerisation joins many small molecules (monomers) to make large molecules (polymers). Think about addition polymerisation of alkenes.";
+      }
+      
+      if (questionText.includes('hydrocarbon') || allKeyTerms.includes('hydrocarbon')) {
+        return "Hydrocarbons contain only carbon and hydrogen atoms. Consider if they're saturated (alkanes) or unsaturated (alkenes).";
+      }
+      
+      if (questionText.includes('functional group') || allKeyTerms.includes('functional group')) {
+        return "Functional groups determine the chemical properties of organic molecules. Think about -OH (alcohol), -COOH (carboxylic acid), C=C (alkene).";
+      }
+      
+      if (questionText.includes('isomer') || allKeyTerms.includes('isomer')) {
+        return "Isomers have the same molecular formula but different structural arrangements. Think about how atoms can be arranged differently.";
+      }
+      
+      if (questionText.includes('combustion') || questionText.includes('burn') || allKeyTerms.includes('combustion')) {
+        return "Complete combustion: hydrocarbon + oxygen → carbon dioxide + water. Incomplete combustion produces carbon monoxide or carbon.";
+      }
+      
+      // General chemistry concepts
+      if (questionText.includes('acid') || questionText.includes('alkali') || allKeyTerms.includes('acid') || allKeyTerms.includes('alkali')) {
+        if (questionText.includes('ph') || questionText.includes('indicator')) {
+          return "Acids have pH < 7, alkalis have pH > 7. Think about H⁺ ions in acids and OH⁻ ions in alkalis. Consider which indicator to use.";
+        }
+        if (questionText.includes('react') || questionText.includes('neutralisation')) {
+          return "Acid + alkali → salt + water. Think about the ions involved: H⁺ + OH⁻ → H₂O.";
+        }
+        return "Acids release H⁺ ions in solution, alkalis release OH⁻ ions. Think about their properties and reactions.";
+      }
+      
+      if (questionText.includes('ionic') || allKeyTerms.includes('ionic')) {
+        if (questionText.includes('bond') || questionText.includes('bonding')) {
+          return "Ionic bonding involves electron transfer from metal to non-metal, forming charged ions. Opposite charges attract.";
+        }
+        if (questionText.includes('compound') || questionText.includes('formula')) {
+          return "Ionic compounds form when metals lose electrons and non-metals gain electrons. Think about charges balancing out.";
+        }
+        return "Ionic substances involve metal and non-metal ions held together by electrostatic attraction.";
+      }
+      
+      if (questionText.includes('covalent') || allKeyTerms.includes('covalent')) {
+        return "Covalent bonding involves electron sharing between non-metal atoms to achieve full outer shells. Think about how many electrons each atom needs.";
+      }
+      
+      if (questionText.includes('electrolysis') || allKeyTerms.includes('electrolysis')) {
+        return "Electrolysis uses electricity to break down ionic compounds. Positive ions go to cathode (negative electrode), negative ions go to anode (positive electrode).";
+      }
+      
+      if (questionText.includes('oxidation') || questionText.includes('reduction') || allKeyTerms.includes('oxidation') || allKeyTerms.includes('reduction')) {
+        return "Oxidation is loss of electrons (or gain of oxygen). Reduction is gain of electrons (or loss of oxygen). OIL RIG: Oxidation Is Loss, Reduction Is Gain.";
+      }
+      
+      if (questionText.includes('rate') || questionText.includes('catalyst') || allKeyTerms.includes('catalyst')) {
+        return "Reaction rate depends on temperature, concentration, surface area, and catalysts. Catalysts speed up reactions without being used up.";
+      }
+      
+      if (questionText.includes('equilibrium') || allKeyTerms.includes('equilibrium')) {
+        return "At equilibrium, forward and reverse reaction rates are equal. Think about factors that shift equilibrium position.";
+      }
+      
+      if (questionText.includes('titration') || allKeyTerms.includes('titration')) {
+        return "Titration finds unknown concentration using a known concentration. Think about the equivalence point and suitable indicators.";
+      }
+      
+      if (questionText.includes('periodic') || questionText.includes('group') || questionText.includes('period')) {
+        return "Periodic table is arranged by atomic number. Groups (vertical) have similar properties, periods (horizontal) show trends.";
+      }
+      
+      if (questionText.includes('metal') || allKeyTerms.includes('metal')) {
+        if (questionText.includes('extract') || questionText.includes('ore')) {
+          return "Metal extraction depends on reactivity. Carbon reduction for less reactive metals, electrolysis for more reactive ones.";
+        }
+        return "Metals lose electrons to form positive ions. They conduct electricity and heat, and are malleable and ductile.";
       }
     }
     
-    // Mathematics-specific detailed hints
+    // Biology-specific hints (keeping the improved version)
+    if (subjectId === 'biology') {
+      if (questionText.includes('limiting factor') || allKeyTerms.includes('limiting factor')) {
+        return "Think about what factors can slow down or stop a biological process. Consider light intensity, temperature, and CO₂ concentration for photosynthesis. Explain how the slowest factor controls the overall rate.";
+      }
+      
+      if (questionText.includes('osmosis') || allKeyTerms.includes('osmosis')) {
+        return "Focus on water movement from high to low water concentration across a partially permeable membrane. Think about what happens to cells in different solutions.";
+      }
+      
+      if (questionText.includes('photosynthesis') || allKeyTerms.includes('photosynthesis')) {
+        if (questionText.includes('equation') || questionText.includes('word equation')) {
+          return "6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂ (with light energy and chlorophyll). Word equation: carbon dioxide + water → glucose + oxygen.";
+        }
+        if (questionText.includes('factor') || questionText.includes('affect')) {
+          return "Think about limiting factors: light intensity, CO₂ concentration, and temperature. How does each one affect the rate?";
+        }
+        return "Consider where it happens (chloroplasts), what's needed (CO₂, water, light), and what's produced (glucose, oxygen).";
+      }
+      
+      if (questionText.includes('respiration') || allKeyTerms.includes('respiration')) {
+        if (questionText.includes('aerobic')) {
+          return "Aerobic respiration: glucose + oxygen → carbon dioxide + water + ATP. Happens in mitochondria, releases lots of energy.";
+        }
+        if (questionText.includes('anaerobic')) {
+          return "Anaerobic respiration: glucose → lactic acid + ATP (animals) or glucose → ethanol + CO₂ + ATP (plants/yeast). Less energy released.";
+        }
+        return "Think about whether oxygen is available. Aerobic produces more ATP than anaerobic respiration.";
+      }
+      
+      if (questionText.includes('enzyme') || allKeyTerms.includes('enzyme')) {
+        if (questionText.includes('temperature') || questionText.includes('denature')) {
+          return "Higher temperature increases enzyme activity until the optimum. Above this, enzymes denature (change shape) and stop working.";
+        }
+        if (questionText.includes('ph')) {
+          return "Each enzyme has an optimum pH. Too high or low pH denatures the enzyme by changing its shape.";
+        }
+        return "Think about the lock and key model: enzymes are specific to their substrate via the active site. Consider factors affecting activity.";
+      }
+      
+      if (questionText.includes('mitosis') || allKeyTerms.includes('mitosis')) {
+        return "Mitosis produces two identical diploid cells for growth and repair. Think about chromosome behavior and the stages.";
+      }
+      
+      if (questionText.includes('meiosis') || allKeyTerms.includes('meiosis')) {
+        return "Meiosis produces four genetically different haploid gametes for reproduction. Consider crossing over and independent assortment.";
+      }
+      
+      if (questionText.includes('homeostasis') || allKeyTerms.includes('homeostasis')) {
+        return "Maintaining constant internal conditions through negative feedback. Think about receptors detecting changes, control centers, and effectors responding.";
+      }
+      
+      if (questionText.includes('evolution') || questionText.includes('natural selection') || allKeyTerms.includes('evolution')) {
+        return "Natural selection requires variation, inheritance, selection pressure, and time. Advantageous traits become more common in populations.";
+      }
+    }
+    
+    // Mathematics-specific hints
     if (subjectId === 'mathematics') {
-      // Algebra - Expanding brackets
       if (questionText.includes('expand') || questionText.includes('multiply out')) {
         return "Use FOIL method: multiply First terms, Outside terms, Inside terms, then Last terms. Then collect like terms together.";
       }
       
-      // Algebra - Factorizing
       if (questionText.includes('factorize') || questionText.includes('factorise')) {
-        // Look for quadratic patterns
         const quadraticMatch = questionText.match(/x²\s*[+-]\s*(\d+)x\s*[+-]\s*(\d+)/);
         if (quadraticMatch) {
           const bCoeff = questionText.match(/x²\s*[+-]\s*(\d+)x/)?.[1];
           const cCoeff = questionText.match(/[+-]\s*(\d+)(?!\s*x)/)?.[1];
-          
           if (bCoeff && cCoeff) {
             return `Find two numbers that multiply to ${cCoeff} and add to ${bCoeff}. Write as (x + ?)(x + ?).`;
           }
@@ -370,94 +408,86 @@ const Practice = () => {
         return "Look for common factors first, then find two numbers that multiply to give the constant term and add to give the coefficient of x.";
       }
       
-      // Algebra - Solving equations
       if (questionText.includes('solve') && questionText.includes('x')) {
         return "Keep the equation balanced: whatever you do to one side, do to the other. Get all x terms on one side and numbers on the other.";
       }
       
-      // Algebra - Substitution
-      if (questionText.includes('substitute') || questionText.includes('when')) {
-        return "Replace each variable with its given value, then calculate step by step. Remember to follow BIDMAS/BODMAS order.";
-      }
-      
-      // Algebra - Simplifying expressions
-      if (questionText.includes('simplify')) {
-        return "Collect like terms together. Add/subtract coefficients of the same variables (e.g., 3x + 2x = 5x).";
-      }
-      
-      // Percentage calculations
       if (questionText.includes('percentage') || questionText.includes('%')) {
         if (questionText.includes('increase') || questionText.includes('decrease')) {
           return "Percentage change = (new value - original value) ÷ original value × 100. Or use multipliers (e.g., +15% means ×1.15).";
         }
         return "To find a percentage of an amount: (percentage ÷ 100) × amount. E.g., 15% of 80 = 0.15 × 80.";
       }
-      
-      // Geometry
-      if (questionText.includes('area')) {
-        if (questionText.includes('triangle')) {
-          return "Area of triangle = ½ × base × height. Make sure you identify the correct base and perpendicular height.";
-        }
-        if (questionText.includes('circle')) {
-          return "Area of circle = πr². Remember r is the radius (half the diameter).";
-        }
-        return "Identify the shape and use the correct area formula. Break complex shapes into simpler parts.";
-      }
-      
-      if (questionText.includes('circumference') || questionText.includes('perimeter')) {
-        if (questionText.includes('circle')) {
-          return "Circumference = πd or 2πr. Remember d = diameter, r = radius.";
-        }
-        return "Perimeter = sum of all side lengths. For rectangles: 2(length + width).";
-      }
-      
-      // Trigonometry
-      if (questionText.includes('sin') || questionText.includes('cos') || questionText.includes('tan')) {
-        return "Use SOH CAH TOA: Sin = Opposite/Hypotenuse, Cos = Adjacent/Hypotenuse, Tan = Opposite/Adjacent. Label the triangle sides first.";
-      }
-    }
-    
-    // Chemistry-specific hints
-    if (subjectId === 'chemistry') {
-      if (questionText.includes('balance') || questionText.includes('equation')) {
-        return "Balance atoms one element at a time. Start with the most complex molecule. Same number of each type of atom on both sides.";
-      }
-      if (questionText.includes('ionic')) {
-        return "Metal loses electrons to become positive ion, non-metal gains electrons to become negative ion. Opposite charges attract.";
-      }
-      if (questionText.includes('covalent')) {
-        return "Non-metal atoms share electrons to complete their outer shells. Think about how many electrons each atom needs.";
-      }
     }
     
     // Physics-specific hints
     if (subjectId === 'physics') {
-      if (questionText.includes('force')) {
-        return "F = ma. Consider direction of forces. Balanced forces = no acceleration. Unbalanced forces = acceleration.";
+      if (questionText.includes('force') || allKeyTerms.includes('force')) {
+        return "F = ma. Consider direction and size of forces. Balanced forces = no acceleration. Unbalanced forces = acceleration.";
       }
-      if (questionText.includes('energy')) {
-        return "Energy is conserved. KE = ½mv², GPE = mgh. Think about energy transfers between kinetic, potential, and thermal.";
+      
+      if (questionText.includes('energy') || allKeyTerms.includes('energy')) {
+        if (questionText.includes('kinetic')) {
+          return "Kinetic energy = ½mv². Energy due to motion. Think about how mass and velocity affect it.";
+        }
+        if (questionText.includes('potential')) {
+          return "Gravitational potential energy = mgh. Energy due to position. Think about height and mass.";
+        }
+        return "Energy is conserved. Think about transfers between kinetic, potential, thermal, and other forms.";
       }
-      if (questionText.includes('wave')) {
+      
+      if (questionText.includes('wave') || allKeyTerms.includes('wave')) {
         return "Wave speed = frequency × wavelength (v = fλ). Think about the relationship between these three quantities.";
       }
     }
     
-    // General question type hints
-    if (questionText.includes('calculate') || questionText.includes('find')) {
-      return "Identify the given values, what you need to find, and which formula applies. Show your working step by step.";
+    // Analyze question command words for more specific hints
+    if (questionText.includes('explain')) {
+      if (allKeyTerms.length > 0) {
+        return `Give a clear explanation of ${allKeyTerms[0]}. Use scientific terminology and explain the underlying principles step by step.`;
+      }
+      return "Structure your explanation clearly. Define key terms, explain the process step by step, and give scientific reasons for what happens.";
     }
     
-    if (questionText.includes('explain') || questionText.includes('describe')) {
-      return "Use clear scientific language. Give reasons for your statements. Structure your answer with logical, numbered points.";
+    if (questionText.includes('describe')) {
+      if (allKeyTerms.length > 0) {
+        return `Describe the key features and characteristics of ${allKeyTerms[0]}. Focus on what happens and the main points.`;
+      }
+      return "Give a detailed account of what happens. Focus on the main features and characteristics, using appropriate scientific vocabulary.";
     }
     
     if (questionText.includes('compare') || questionText.includes('contrast')) {
-      return "State similarities and differences clearly. Explain the scientific reasons behind each point you make.";
+      if (allKeyTerms.length > 1) {
+        return `Compare ${allKeyTerms[0]} and ${allKeyTerms[1]}. State clear similarities and differences, explaining the reasons for each.`;
+      }
+      return "Identify and explain similarities and differences. Use a clear structure and give scientific reasons for each point.";
     }
     
-    // Fallback hint
-    return "Read the question carefully and identify the key concept being tested. Think about what knowledge and skills you need to demonstrate.";
+    if (questionText.includes('calculate') || questionText.includes('find')) {
+      if (allKeyTerms.length > 0) {
+        return `Identify the values given, determine what formula relates to ${allKeyTerms[0]}, then calculate step by step showing your working.`;
+      }
+      return "Identify given values, determine the appropriate formula or method, then work through the calculation step by step.";
+    }
+    
+    if (questionText.includes('evaluate') || questionText.includes('assess')) {
+      return "Weigh up the evidence and arguments. Consider advantages and disadvantages, then reach a balanced conclusion with justification.";
+    }
+    
+    if (questionText.includes('suggest') || questionText.includes('predict')) {
+      if (allKeyTerms.length > 0) {
+        return `Use your knowledge of ${allKeyTerms[0]} to make a reasoned suggestion. Explain your reasoning using scientific principles.`;
+      }
+      return "Use scientific knowledge and principles to make a logical suggestion. Explain your reasoning clearly.";
+    }
+    
+    // If we have key terms but no specific match, use them in the hint
+    if (allKeyTerms.length > 0) {
+      return `Focus on the key concept of ${allKeyTerms[0]}. Think about its properties, processes, and how it relates to the question being asked.`;
+    }
+    
+    // Final fallback - but this should rarely be used now
+    return "Identify the specific scientific concept being tested. Consider what knowledge you need to demonstrate and structure your answer clearly.";
   };
 
   const finishSession = () => {
