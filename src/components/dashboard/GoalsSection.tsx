@@ -604,11 +604,19 @@ export function GoalsSection() {
                             }
                           </span>
                           {goal.goal_type === 'daily_topic_mastery' && (
-                            <Badge variant="outline" className="text-xs px-2 py-0.5">
-                              {goal.metadata?.subject_name || 'Subject'}
-                            </Badge>
+                            <div className="flex items-center space-x-2">
+                              <Badge variant="outline" className="text-xs px-2 py-0.5">
+                                {goal.metadata?.subject_name || 'Subject'}
+                              </Badge>
+                              {completed && (
+                                <Badge className="bg-gradient-to-r from-emerald-500 to-green-600 text-white border-0 text-xs px-2 py-0.5">
+                                  <Trophy className="h-3 w-3 mr-1" />
+                                  Completed
+                                </Badge>
+                              )}
+                            </div>
                           )}
-                          {completed && (
+                          {goal.goal_type === 'daily_study_time' && completed && (
                             <Badge className="bg-gradient-to-r from-emerald-500 to-green-600 text-white border-0 text-xs px-2 py-0.5">
                               <Trophy className="h-3 w-3 mr-1" />
                               Completed
