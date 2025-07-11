@@ -234,14 +234,125 @@ const Practice = () => {
     const questionText = question.question.toLowerCase();
     const modelAnswer = question.modelAnswer.toLowerCase();
     
+    // Analyze the main focus of the question by looking at key command words and topics
+    const getQuestionFocus = () => {
+      // Limiting factors
+      if (questionText.includes('limiting factor')) {
+        return 'limiting_factors';
+      }
+      
+      // Specific biology processes
+      if (questionText.includes('osmosis') && !questionText.includes('photosynthesis')) {
+        return 'osmosis';
+      }
+      if (questionText.includes('photosynthesis') && !questionText.includes('respiration') && !questionText.includes('limiting')) {
+        return 'photosynthesis';
+      }
+      if (questionText.includes('respiration') && !questionText.includes('photosynthesis')) {
+        return 'respiration';
+      }
+      if (questionText.includes('enzyme') && !questionText.includes('photosynthesis')) {
+        return 'enzymes';
+      }
+      
+      // Cell biology
+      if (questionText.includes('mitosis') || questionText.includes('cell division')) {
+        return 'mitosis';
+      }
+      if (questionText.includes('meiosis')) {
+        return 'meiosis';
+      }
+      if (questionText.includes('cell membrane') || questionText.includes('cell wall')) {
+        return 'cell_structure';
+      }
+      
+      // Genetics
+      if (questionText.includes('allele') || questionText.includes('genetic') || questionText.includes('inheritance')) {
+        return 'genetics';
+      }
+      if (questionText.includes('mutation')) {
+        return 'mutation';
+      }
+      
+      // Ecology
+      if (questionText.includes('ecosystem') || questionText.includes('food chain') || questionText.includes('food web')) {
+        return 'ecology';
+      }
+      if (questionText.includes('competition') && questionText.includes('organism')) {
+        return 'competition';
+      }
+      
+      // Homeostasis
+      if (questionText.includes('homeostasis') || questionText.includes('temperature regulation') || questionText.includes('blood sugar')) {
+        return 'homeostasis';
+      }
+      
+      // Evolution
+      if (questionText.includes('evolution') || questionText.includes('natural selection')) {
+        return 'evolution';
+      }
+      
+      return 'general';
+    };
+    
+    const questionFocus = getQuestionFocus();
+    
+    // Biology-specific hints based on question focus
+    if (subjectId === 'biology') {
+      switch (questionFocus) {
+        case 'limiting_factors':
+          return "Think about what factors can slow down or stop a biological process. Consider light intensity, temperature, and CO₂ concentration for photosynthesis. Explain how the slowest factor controls the overall rate.";
+          
+        case 'osmosis':
+          return "Focus on water movement from high to low water concentration across a partially permeable membrane. Think about what happens to cells in different solutions.";
+          
+        case 'photosynthesis':
+          return "6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂ (with light energy and chlorophyll). Consider where it happens, what's needed, and what's produced.";
+          
+        case 'respiration':
+          return "Aerobic: glucose + oxygen → CO₂ + water + ATP. Anaerobic: glucose → lactic acid + ATP (animals) or ethanol + CO₂ + ATP (plants/yeast).";
+          
+        case 'enzymes':
+          return "Think about the lock and key model, active sites, and how temperature and pH affect enzyme shape and activity. Consider what happens when enzymes denature.";
+          
+        case 'mitosis':
+          return "Cell division producing two identical diploid cells for growth and repair. Think about the stages: prophase, metaphase, anaphase, telophase.";
+          
+        case 'meiosis':
+          return "Cell division producing four genetically different haploid gametes for reproduction. Consider crossing over and independent assortment.";
+          
+        case 'genetics':
+          return "Think about dominant and recessive alleles, homozygous vs heterozygous, and how traits are inherited from parents to offspring.";
+          
+        case 'homeostasis':
+          return "Maintaining constant internal conditions through negative feedback. Think about receptors detecting changes, processing centers, and effectors responding.";
+          
+        case 'evolution':
+          return "Consider variation, inheritance, selection pressure, and time. Think about how advantageous traits become more common in populations.";
+          
+        case 'ecology':
+          return "Think about energy flow through trophic levels, nutrient cycling, and how organisms interact with each other and their environment.";
+          
+        case 'competition':
+          return "Consider what organisms compete for (food, space, mates, light) and how this affects population sizes and distribution.";
+          
+        default:
+          // Fallback for general biology questions
+          if (questionText.includes('explain')) {
+            return "Structure your answer clearly. Define key terms, explain the process step by step, and give examples where relevant.";
+          }
+          if (questionText.includes('compare')) {
+            return "Identify similarities and differences. Use a table or clear points to contrast the features being compared.";
+          }
+          return "Read the question carefully and identify the key biological concept being tested. Use appropriate scientific terminology.";
+      }
+    }
+    
     // Mathematics-specific detailed hints
     if (subjectId === 'mathematics') {
       // Algebra - Expanding brackets
       if (questionText.includes('expand') || questionText.includes('multiply out')) {
-        if (questionText.includes('(') && questionText.includes(')')) {
-          return "Use FOIL method: multiply First terms, Outside terms, Inside terms, then Last terms. Then collect like terms.";
-        }
-        return "Multiply each term in the first bracket by each term in the second bracket, then simplify.";
+        return "Use FOIL method: multiply First terms, Outside terms, Inside terms, then Last terms. Then collect like terms together.";
       }
       
       // Algebra - Factorizing
@@ -249,66 +360,29 @@ const Practice = () => {
         // Look for quadratic patterns
         const quadraticMatch = questionText.match(/x²\s*[+-]\s*(\d+)x\s*[+-]\s*(\d+)/);
         if (quadraticMatch) {
-          const bCoeff = questionText.includes('+') ? 
-            questionText.match(/x²\s*\+\s*(\d+)x/)?.[1] : 
-            questionText.match(/x²\s*-\s*(\d+)x/)?.[1];
+          const bCoeff = questionText.match(/x²\s*[+-]\s*(\d+)x/)?.[1];
           const cCoeff = questionText.match(/[+-]\s*(\d+)(?!\s*x)/)?.[1];
           
           if (bCoeff && cCoeff) {
             return `Find two numbers that multiply to ${cCoeff} and add to ${bCoeff}. Write as (x + ?)(x + ?).`;
           }
         }
-        
-        // Common factor
-        if (modelAnswer.includes('common factor') || questionText.includes('common factor')) {
-          return "Look for the highest common factor of all terms and take it outside the brackets.";
-        }
-        
         return "Look for common factors first, then find two numbers that multiply to give the constant term and add to give the coefficient of x.";
       }
       
       // Algebra - Solving equations
-      if (questionText.includes('solve') && (questionText.includes('x') || questionText.includes('equation'))) {
-        if (questionText.includes('=')) {
-          return "Keep the equation balanced: whatever you do to one side, do to the other. Get all x terms on one side and numbers on the other.";
-        }
-        return "Isolate the variable by using inverse operations. Work backwards from the order of operations.";
+      if (questionText.includes('solve') && questionText.includes('x')) {
+        return "Keep the equation balanced: whatever you do to one side, do to the other. Get all x terms on one side and numbers on the other.";
       }
       
       // Algebra - Substitution
       if (questionText.includes('substitute') || questionText.includes('when')) {
-        return "Replace each variable with its given value, then calculate step by step. Remember to follow BIDMAS/BODMAS.";
-      }
-      
-      // Algebra - Rearranging formulas
-      if (questionText.includes('rearrange') || questionText.includes('make') && questionText.includes('subject')) {
-        return "Treat the variable you want as the unknown in an equation. Use inverse operations to isolate it.";
+        return "Replace each variable with its given value, then calculate step by step. Remember to follow BIDMAS/BODMAS order.";
       }
       
       // Algebra - Simplifying expressions
       if (questionText.includes('simplify')) {
-        if (questionText.includes('x') || questionText.includes('terms')) {
-          return "Collect like terms together. Add/subtract coefficients of the same variables (e.g., 3x + 2x = 5x).";
-        }
-        return "Combine like terms and apply the rules of indices where applicable.";
-      }
-      
-      // Inequalities
-      if (questionText.includes('inequality') || questionText.includes('<') || questionText.includes('>')) {
-        return "Solve like a normal equation, but remember: if you multiply or divide by a negative number, flip the inequality sign.";
-      }
-      
-      // Simultaneous equations
-      if (questionText.includes('simultaneous') || (questionText.includes('equation') && questionText.includes('two'))) {
-        return "Use elimination method: make coefficients of one variable the same, then subtract equations to eliminate it.";
-      }
-      
-      // Sequences
-      if (questionText.includes('sequence') || questionText.includes('pattern')) {
-        if (questionText.includes('nth term') || questionText.includes('formula')) {
-          return "Find the common difference (linear) or ratio (geometric). For linear: nth term = first term + (n-1) × common difference.";
-        }
-        return "Look for the pattern between consecutive terms. Is it adding/subtracting the same amount, or multiplying/dividing?";
+        return "Collect like terms together. Add/subtract coefficients of the same variables (e.g., 3x + 2x = 5x).";
       }
       
       // Percentage calculations
@@ -316,32 +390,21 @@ const Practice = () => {
         if (questionText.includes('increase') || questionText.includes('decrease')) {
           return "Percentage change = (new value - original value) ÷ original value × 100. Or use multipliers (e.g., +15% means ×1.15).";
         }
-        if (questionText.includes('of')) {
-          return "To find a percentage of an amount: (percentage ÷ 100) × amount. E.g., 15% of 80 = 0.15 × 80.";
-        }
-        return "Percentage = (part ÷ whole) × 100. Set up the fraction first, then multiply by 100.";
+        return "To find a percentage of an amount: (percentage ÷ 100) × amount. E.g., 15% of 80 = 0.15 × 80.";
       }
       
-      // Ratios and proportions
-      if (questionText.includes('ratio') || questionText.includes('proportion')) {
-        return "Write the ratio in its simplest form by dividing by the highest common factor. Use equivalent ratios to find missing values.";
-      }
-      
-      // Geometry - Areas and perimeters
+      // Geometry
       if (questionText.includes('area')) {
         if (questionText.includes('triangle')) {
           return "Area of triangle = ½ × base × height. Make sure you identify the correct base and perpendicular height.";
         }
         if (questionText.includes('circle')) {
-          return "Area of circle = πr². Don't forget r is the radius (half the diameter).";
-        }
-        if (questionText.includes('rectangle') || questionText.includes('square')) {
-          return "Area of rectangle = length × width. For a square, length = width.";
+          return "Area of circle = πr². Remember r is the radius (half the diameter).";
         }
         return "Identify the shape and use the correct area formula. Break complex shapes into simpler parts.";
       }
       
-      if (questionText.includes('perimeter') || questionText.includes('circumference')) {
+      if (questionText.includes('circumference') || questionText.includes('perimeter')) {
         if (questionText.includes('circle')) {
           return "Circumference = πd or 2πr. Remember d = diameter, r = radius.";
         }
@@ -350,72 +413,51 @@ const Practice = () => {
       
       // Trigonometry
       if (questionText.includes('sin') || questionText.includes('cos') || questionText.includes('tan')) {
-        return "Use SOH CAH TOA: Sin = Opposite/Hypotenuse, Cos = Adjacent/Hypotenuse, Tan = Opposite/Adjacent. Label the triangle first.";
-      }
-      
-      // Pythagoras
-      if (questionText.includes('pythagoras') || (questionText.includes('triangle') && questionText.includes('right'))) {
-        return "Pythagoras: a² + b² = c² where c is the hypotenuse (longest side opposite the right angle).";
-      }
-    }
-    
-    // Biology-specific hints
-    if (subjectId === 'biology') {
-      if (questionText.includes('osmosis') || modelAnswer.includes('osmosis')) {
-        return "Focus on water movement from high to low water concentration across a partially permeable membrane.";
-      }
-      if (questionText.includes('photosynthesis') || modelAnswer.includes('photosynthesis')) {
-        return "6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂ (with light energy and chlorophyll). Think about inputs, outputs, and where it occurs.";
-      }
-      if (questionText.includes('enzyme') || modelAnswer.includes('enzyme')) {
-        return "Consider the lock and key model, active site specificity, and factors affecting enzyme activity (temperature, pH).";
-      }
-      if (questionText.includes('respiration') || modelAnswer.includes('respiration')) {
-        return "Aerobic: glucose + oxygen → CO₂ + water + ATP. Anaerobic: glucose → lactic acid + ATP (animals) or ethanol + CO₂ + ATP (plants).";
+        return "Use SOH CAH TOA: Sin = Opposite/Hypotenuse, Cos = Adjacent/Hypotenuse, Tan = Opposite/Adjacent. Label the triangle sides first.";
       }
     }
     
     // Chemistry-specific hints
     if (subjectId === 'chemistry') {
       if (questionText.includes('balance') || questionText.includes('equation')) {
-        return "Balance atoms one element at a time. Start with the most complex molecule. Remember: same number of each type of atom on both sides.";
+        return "Balance atoms one element at a time. Start with the most complex molecule. Same number of each type of atom on both sides.";
       }
-      if (questionText.includes('ionic') || modelAnswer.includes('ionic')) {
+      if (questionText.includes('ionic')) {
         return "Metal loses electrons to become positive ion, non-metal gains electrons to become negative ion. Opposite charges attract.";
       }
-      if (questionText.includes('covalent') || modelAnswer.includes('covalent')) {
+      if (questionText.includes('covalent')) {
         return "Non-metal atoms share electrons to complete their outer shells. Think about how many electrons each atom needs.";
       }
     }
     
     // Physics-specific hints
     if (subjectId === 'physics') {
-      if (questionText.includes('force') || modelAnswer.includes('force')) {
+      if (questionText.includes('force')) {
         return "F = ma. Consider direction of forces. Balanced forces = no acceleration. Unbalanced forces = acceleration.";
       }
-      if (questionText.includes('energy') || modelAnswer.includes('energy')) {
-        return "Energy is conserved. KE = ½mv², GPE = mgh. Energy transfers: kinetic ↔ potential ↔ thermal.";
+      if (questionText.includes('energy')) {
+        return "Energy is conserved. KE = ½mv², GPE = mgh. Think about energy transfers between kinetic, potential, and thermal.";
       }
-      if (questionText.includes('wave') || modelAnswer.includes('wave')) {
+      if (questionText.includes('wave')) {
         return "Wave speed = frequency × wavelength (v = fλ). Think about the relationship between these three quantities.";
       }
     }
     
     // General question type hints
     if (questionText.includes('calculate') || questionText.includes('find')) {
-      return "Identify given values, what you need to find, and which formula applies. Show your working step by step.";
+      return "Identify the given values, what you need to find, and which formula applies. Show your working step by step.";
     }
     
     if (questionText.includes('explain') || questionText.includes('describe')) {
-      return "Use clear scientific language. Give reasons for your statements. Structure your answer with logical points.";
+      return "Use clear scientific language. Give reasons for your statements. Structure your answer with logical, numbered points.";
     }
     
-    if (questionText.includes('compare') || questionText.includes('difference')) {
-      return "State similarities and differences clearly. Explain the scientific reasons behind each point.";
+    if (questionText.includes('compare') || questionText.includes('contrast')) {
+      return "State similarities and differences clearly. Explain the scientific reasons behind each point you make.";
     }
     
     // Fallback hint
-    return "Read the question carefully. Identify key terms and what type of problem this is. Think about which method or formula applies.";
+    return "Read the question carefully and identify the key concept being tested. Think about what knowledge and skills you need to demonstrate.";
   };
 
   const finishSession = () => {
