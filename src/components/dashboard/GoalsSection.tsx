@@ -20,10 +20,7 @@ interface Goal {
   start_date: string;
   end_date: string | null;
   is_active: boolean;
-  metadata?: {
-    subject_id?: string;
-    subject_name?: string;
-  };
+  metadata?: any;
 }
 
 const PRESET_TIMES = [
@@ -386,7 +383,8 @@ export function GoalsSection() {
     if (goal.goal_type === 'daily_study_time') {
       return Math.min((todayStudyTime / goal.target_value) * 100, 100);
     } else if (goal.goal_type === 'daily_topic_mastery') {
-      const subjectId = goal.metadata?.subject_id;
+      const metadata = goal.metadata || {};
+      const subjectId = metadata.subject_id;
       const currentMastery = subjectId ? (dailyTopicMastery[subjectId] || 0) : 0;
       return Math.min((currentMastery / goal.target_value) * 100, 100);
     }
@@ -406,7 +404,8 @@ export function GoalsSection() {
     if (goal.goal_type === 'daily_study_time') {
       return todayStudyTime >= goal.target_value;
     } else if (goal.goal_type === 'daily_topic_mastery') {
-      const subjectId = goal.metadata?.subject_id;
+      const metadata = goal.metadata || {};
+      const subjectId = metadata.subject_id;
       const currentMastery = subjectId ? (dailyTopicMastery[subjectId] || 0) : 0;
       return currentMastery >= goal.target_value;
     }
@@ -619,7 +618,7 @@ export function GoalsSection() {
                         <span className="text-sm text-muted-foreground">
                           {goal.goal_type === 'daily_study_time' 
                             ? `${formatTime(todayStudyTime)} / ${formatTime(goal.target_value)}`
-                            : `${dailyTopicMastery[goal.metadata?.subject_id || ''] || 0} / ${goal.target_value} topics mastered`
+                            : `${dailyTopicMastery[(goal.metadata || {}).subject_id || ''] || 0} / ${goal.target_value} topics mastered`
                           }
                         </span>
                       </div>

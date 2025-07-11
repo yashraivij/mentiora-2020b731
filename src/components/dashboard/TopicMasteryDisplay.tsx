@@ -82,7 +82,7 @@ export function TopicMasteryDisplay() {
 
       // Create progress for each goal
       const progress: MasteryProgress[] = goals.map(goal => {
-        const metadata = goal.metadata || {};
+        const metadata = (goal.metadata as Record<string, any>) || {};
         const subjectId = metadata.subject_id || '';
         const masteredTopics = masteredBySubject[subjectId] || [];
         

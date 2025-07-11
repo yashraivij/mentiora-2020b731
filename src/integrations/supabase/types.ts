@@ -794,6 +794,7 @@ export type Database = {
           goal_type: string
           id: string
           is_active: boolean | null
+          metadata: Json | null
           start_date: string
           target_value: number
           updated_at: string | null
@@ -806,6 +807,7 @@ export type Database = {
           goal_type: string
           id?: string
           is_active?: boolean | null
+          metadata?: Json | null
           start_date?: string
           target_value: number
           updated_at?: string | null
@@ -818,6 +820,7 @@ export type Database = {
           goal_type?: string
           id?: string
           is_active?: boolean | null
+          metadata?: Json | null
           start_date?: string
           target_value?: number
           updated_at?: string | null
