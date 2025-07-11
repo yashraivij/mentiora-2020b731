@@ -5,10 +5,12 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Clock, Target, Plus, Calendar, CheckCircle, Trophy, Trash2, Play, Pause, Square } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Clock, Target, Plus, Calendar, CheckCircle, Trophy, Trash2, Play, Pause, Square, BookOpen, Brain } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { curriculum } from "@/data/curriculum";
 
 interface Goal {
   id: string;
@@ -18,6 +20,10 @@ interface Goal {
   start_date: string;
   end_date: string | null;
   is_active: boolean;
+  metadata?: {
+    subject_id?: string;
+    subject_name?: string;
+  };
 }
 
 const PRESET_TIMES = [
@@ -35,7 +41,11 @@ export function GoalsSection() {
   const [loading, setLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedDuration, setSelectedDuration] = useState<string>("");
+  const [selectedGoalType, setSelectedGoalType] = useState<"daily_study_time" | "daily_topic_mastery">("daily_study_time");
+  const [selectedSubject, setSelectedSubject] = useState<string>("");
+  const [topicTarget, setTopicTarget] = useState<string>("");
   const [todayStudyTime, setTodayStudyTime] = useState(0);
+  const [dailyTopicMastery, setDailyTopicMastery] = useState<Record<string, number>>({});
   
   // Timer states
   const [timeRemaining, setTimeRemaining] = useState(0);
@@ -48,6 +58,7 @@ export function GoalsSection() {
     if (user?.id) {
       loadGoals();
       loadTodayStudyTime();
+      loadTodayTopicMastery();
     }
   }, [user?.id]);
 
@@ -97,7 +108,7 @@ export function GoalsSection() {
         .select('*')
         .eq('user_id', user.id)
         .eq('is_active', true)
-        .eq('goal_type', 'daily_study_time');
+        .in('goal_type', ['daily_study_time', 'daily_topic_mastery']);
 
       if (error) {
         console.error('Error loading goals:', error);
@@ -133,6 +144,105 @@ export function GoalsSection() {
       setTodayStudyTime(totalMinutes);
     } catch (error) {
       console.error('Error loading study time:', error);
+    }
+  };
+
+  const loadTodayTopicMastery = async () => {
+    if (!user?.id) return;
+
+    try {
+      const today = new Date().toISOString().split('T')[0];
+      
+      const { data, error } = await supabase
+        .from('daily_topic_mastery')
+        .select('subject_id')
+        .eq('user_id', user.id)
+        .eq('date', today)
+        .gte('score', 85);
+
+      if (error) {
+        console.error('Error loading topic mastery:', error);
+        return;
+      }
+
+      const masteryCount: Record<string, number> = {};
+      data?.forEach(record => {
+        masteryCount[record.subject_id] = (masteryCount[record.subject_id] || 0) + 1;
+      });
+      
+      setDailyTopicMastery(masteryCount);
+    } catch (error) {
+      console.error('Error loading topic mastery:', error);
+    }
+  };
+
+  const createGoal = async () => {
+    if (!user?.id) return;
+
+    if (selectedGoalType === "daily_study_time" && !selectedDuration) {
+      toast.error('Please select a study time target');
+      return;
+    }
+
+    if (selectedGoalType === "daily_topic_mastery" && (!selectedSubject || !topicTarget)) {
+      toast.error('Please select a subject and topic target');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      let goalData;
+      
+      if (selectedGoalType === "daily_study_time") {
+        goalData = {
+          user_id: user.id,
+          goal_type: 'daily_study_time',
+          target_value: parseInt(selectedDuration),
+          current_value: 0,
+          start_date: new Date().toISOString().split('T')[0],
+          is_active: true
+        };
+      } else {
+        const subject = curriculum.find(s => s.id === selectedSubject);
+        goalData = {
+          user_id: user.id,
+          goal_type: 'daily_topic_mastery',
+          target_value: parseInt(topicTarget),
+          current_value: 0,
+          start_date: new Date().toISOString().split('T')[0],
+          is_active: true,
+          metadata: {
+            subject_id: selectedSubject,
+            subject_name: subject?.name || selectedSubject
+          }
+        };
+      }
+
+      const { error } = await supabase
+        .from('user_goals')
+        .insert(goalData);
+
+      if (error) {
+        console.error('Error creating goal:', error);
+        toast.error('Failed to create goal');
+        return;
+      }
+
+      setIsDialogOpen(false);
+      setSelectedDuration("");
+      setSelectedSubject("");
+      setTopicTarget("");
+      setSelectedGoalType("daily_study_time");
+      loadGoals();
+      loadTodayStudyTime();
+      loadTodayTopicMastery();
+      
+      toast.success('Goal created successfully!');
+    } catch (error) {
+      console.error('Error creating goal:', error);
+      toast.error('Failed to create goal');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -206,6 +316,7 @@ export function GoalsSection() {
       setCurrentSessionId(null);
       
       loadTodayStudyTime();
+      loadTodayTopicMastery();
       toast.info('Timer stopped');
     } catch (error) {
       console.error('Error stopping timer:', error);
@@ -229,6 +340,7 @@ export function GoalsSection() {
 
       setCurrentSessionId(null);
       loadTodayStudyTime();
+      loadTodayTopicMastery();
       toast.success('Study session completed! 🎉');
     } catch (error) {
       console.error('Error completing session:', error);
@@ -271,7 +383,14 @@ export function GoalsSection() {
   };
 
   const getProgressPercentage = (goal: Goal) => {
-    return Math.min((todayStudyTime / goal.target_value) * 100, 100);
+    if (goal.goal_type === 'daily_study_time') {
+      return Math.min((todayStudyTime / goal.target_value) * 100, 100);
+    } else if (goal.goal_type === 'daily_topic_mastery') {
+      const subjectId = goal.metadata?.subject_id;
+      const currentMastery = subjectId ? (dailyTopicMastery[subjectId] || 0) : 0;
+      return Math.min((currentMastery / goal.target_value) * 100, 100);
+    }
+    return 0;
   };
 
   const formatTime = (minutes: number) => {
@@ -284,7 +403,14 @@ export function GoalsSection() {
   };
 
   const isGoalCompleted = (goal: Goal) => {
-    return todayStudyTime >= goal.target_value;
+    if (goal.goal_type === 'daily_study_time') {
+      return todayStudyTime >= goal.target_value;
+    } else if (goal.goal_type === 'daily_topic_mastery') {
+      const subjectId = goal.metadata?.subject_id;
+      const currentMastery = subjectId ? (dailyTopicMastery[subjectId] || 0) : 0;
+      return currentMastery >= goal.target_value;
+    }
+    return false;
   };
 
   return (
@@ -314,43 +440,123 @@ export function GoalsSection() {
               <DialogHeader>
                 <DialogTitle className="text-foreground">Create Study Goal</DialogTitle>
                 <DialogDescription className="text-muted-foreground">
-                  Set a daily study time target to stay motivated and track your progress.
+                  Set daily targets to stay motivated and track your progress.
                 </DialogDescription>
               </DialogHeader>
               
               <div className="space-y-4 pt-4">
                 <div>
                   <label className="text-sm font-medium text-foreground mb-2 block">
-                    Daily Study Time Target
+                    Goal Type
                   </label>
-                  <Select value={selectedDuration} onValueChange={setSelectedDuration}>
+                  <Select value={selectedGoalType} onValueChange={(value: "daily_study_time" | "daily_topic_mastery") => setSelectedGoalType(value)}>
                     <SelectTrigger className="bg-background border-border text-foreground">
-                      <SelectValue placeholder="Choose study duration" />
+                      <SelectValue placeholder="Choose goal type" />
                     </SelectTrigger>
                     <SelectContent className="bg-card border-border">
-                      {PRESET_TIMES.map((time) => (
-                        <SelectItem key={time.value} value={time.value.toString()} className="text-foreground hover:bg-accent">
-                          <div className="flex items-center space-x-2">
-                            <Clock className="h-4 w-4 text-muted-foreground" />
-                            <span>{time.label}</span>
-                          </div>
-                        </SelectItem>
-                      ))}
+                      <SelectItem value="daily_study_time" className="text-foreground hover:bg-accent">
+                        <div className="flex items-center space-x-2">
+                          <Clock className="h-4 w-4 text-muted-foreground" />
+                          <span>Daily Study Time</span>
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="daily_topic_mastery" className="text-foreground hover:bg-accent">
+                        <div className="flex items-center space-x-2">
+                          <Brain className="h-4 w-4 text-muted-foreground" />
+                          <span>Daily Topic Mastery</span>
+                        </div>
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
+
+                {selectedGoalType === "daily_study_time" && (
+                  <div>
+                    <label className="text-sm font-medium text-foreground mb-2 block">
+                      Daily Study Time Target
+                    </label>
+                    <Select value={selectedDuration} onValueChange={setSelectedDuration}>
+                      <SelectTrigger className="bg-background border-border text-foreground">
+                        <SelectValue placeholder="Choose study duration" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-card border-border">
+                        {PRESET_TIMES.map((time) => (
+                          <SelectItem key={time.value} value={time.value.toString()} className="text-foreground hover:bg-accent">
+                            <div className="flex items-center space-x-2">
+                              <Clock className="h-4 w-4 text-muted-foreground" />
+                              <span>{time.label}</span>
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
+
+                {selectedGoalType === "daily_topic_mastery" && (
+                  <>
+                    <div>
+                      <label className="text-sm font-medium text-foreground mb-2 block">
+                        Subject
+                      </label>
+                      <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+                        <SelectTrigger className="bg-background border-border text-foreground">
+                          <SelectValue placeholder="Choose subject" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-card border-border">
+                          {curriculum.map((subject) => (
+                            <SelectItem key={subject.id} value={subject.id} className="text-foreground hover:bg-accent">
+                              <div className="flex items-center space-x-2">
+                                <BookOpen className="h-4 w-4 text-muted-foreground" />
+                                <span>{subject.name}</span>
+                              </div>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div>
+                      <label className="text-sm font-medium text-foreground mb-2 block">
+                        Topics to Master Today
+                      </label>
+                      <Input
+                        type="number"
+                        min="1"
+                        max="10"
+                        value={topicTarget}
+                        onChange={(e) => setTopicTarget(e.target.value)}
+                        placeholder="e.g. 3"
+                        className="bg-background border-border text-foreground"
+                      />
+                      <p className="text-xs text-muted-foreground mt-1">
+                        A topic is mastered when you score 85%+ on it
+                      </p>
+                    </div>
+                  </>
+                )}
                 
                 <div className="flex justify-end space-x-2 pt-4">
                   <Button variant="outline" onClick={() => setIsDialogOpen(false)} className="border-border text-muted-foreground">
                     Cancel
                   </Button>
-                  <Button 
-                    onClick={startTimer} 
-                    disabled={!selectedDuration || loading}
-                    className="bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white border-0"
-                  >
-                    {loading ? "Starting..." : "Start Timer"}
-                  </Button>
+                  {selectedGoalType === "daily_study_time" ? (
+                    <Button 
+                      onClick={startTimer} 
+                      disabled={!selectedDuration || loading}
+                      className="bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white border-0"
+                    >
+                      {loading ? "Starting..." : "Start Timer"}
+                    </Button>
+                  ) : (
+                    <Button 
+                      onClick={createGoal} 
+                      disabled={!selectedSubject || !topicTarget || loading}
+                      className="bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white border-0"
+                    >
+                      {loading ? "Creating..." : "Create Goal"}
+                    </Button>
+                  )}
                 </div>
               </div>
             </DialogContent>
@@ -384,6 +590,8 @@ export function GoalsSection() {
                       }`}>
                         {completed ? (
                           <CheckCircle className="h-4 w-4 text-white" />
+                        ) : goal.goal_type === 'daily_topic_mastery' ? (
+                          <Brain className="h-4 w-4 text-white" />
                         ) : (
                           <Clock className="h-4 w-4 text-white" />
                         )}
@@ -391,8 +599,16 @@ export function GoalsSection() {
                       <div>
                         <div className="flex items-center space-x-2">
                           <span className="font-medium text-foreground">
-                            {formatTime(goal.target_value)} daily
+                            {goal.goal_type === 'daily_study_time' 
+                              ? `${formatTime(goal.target_value)} daily`
+                              : `${goal.target_value} topics daily`
+                            }
                           </span>
+                          {goal.goal_type === 'daily_topic_mastery' && (
+                            <Badge variant="outline" className="text-xs px-2 py-0.5">
+                              {goal.metadata?.subject_name || 'Subject'}
+                            </Badge>
+                          )}
                           {completed && (
                             <Badge className="bg-gradient-to-r from-emerald-500 to-green-600 text-white border-0 text-xs px-2 py-0.5">
                               <Trophy className="h-3 w-3 mr-1" />
@@ -401,7 +617,10 @@ export function GoalsSection() {
                           )}
                         </div>
                         <span className="text-sm text-muted-foreground">
-                          {formatTime(todayStudyTime)} / {formatTime(goal.target_value)}
+                          {goal.goal_type === 'daily_study_time' 
+                            ? `${formatTime(todayStudyTime)} / ${formatTime(goal.target_value)}`
+                            : `${dailyTopicMastery[goal.metadata?.subject_id || ''] || 0} / ${goal.target_value} topics mastered`
+                          }
                         </span>
                       </div>
                     </div>

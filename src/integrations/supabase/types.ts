@@ -85,6 +85,36 @@ export type Database = {
           },
         ]
       }
+      daily_topic_mastery: {
+        Row: {
+          created_at: string
+          date: string
+          id: string
+          score: number
+          subject_id: string
+          topic_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          date?: string
+          id?: string
+          score: number
+          subject_id: string
+          topic_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          id?: string
+          score?: number
+          subject_id?: string
+          topic_id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       daily_usage: {
         Row: {
           activities_count: number

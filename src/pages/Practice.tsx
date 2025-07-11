@@ -460,7 +460,7 @@ const Practice = () => {
     return "Read the question carefully and identify the key concept being tested. Think about what knowledge and skills you need to demonstrate.";
   };
 
-  const finishSession = () => {
+  const finishSession = async () => {
     const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
     const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
     const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
@@ -508,6 +508,33 @@ const Practice = () => {
       const weakTopics = JSON.parse(localStorage.getItem(weakTopicsKey) || '[]');
       const filteredTopics = weakTopics.filter((id: string) => id !== topicId);
       localStorage.setItem(weakTopicsKey, JSON.stringify(filteredTopics));
+      
+      // Track topic mastery (85%+ score)
+      if (user?.id && subjectId && topicId) {
+        try {
+          await supabase
+            .from('daily_topic_mastery')
+            .upsert(
+              {
+                user_id: user.id,
+                subject_id: subjectId,
+                topic_id: topicId,
+                score: averagePercentage,
+                date: new Date().toISOString().split('T')[0]
+              },
+              {
+                onConflict: 'user_id,subject_id,topic_id,date'
+              }
+            );
+          
+          // Show celebratory toast for mastery
+          toast.success(`🎉 Topic mastered! Great work on ${topic?.name}!`, {
+            duration: 3000,
+          });
+        } catch (error) {
+          console.error('Error tracking topic mastery:', error);
+        }
+      }
     }
     
     setSessionComplete(true);
