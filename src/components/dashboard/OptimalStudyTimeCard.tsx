@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Clock, TrendingUp, Zap } from "lucide-react";
+import { Clock, TrendingUp, Zap, Sparkles, Crown, Brain } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -145,19 +145,39 @@ export const OptimalStudyTimeCard = () => {
 
   if (loading) {
     return (
-      <Card className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10" />
+      <Card className="relative overflow-hidden border-0 shadow-2xl bg-gradient-to-br from-violet-600/20 via-purple-600/20 to-fuchsia-600/20 backdrop-blur-xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 via-purple-500/10 to-fuchsia-500/10" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-cyan-400/20 to-blue-500/20 rounded-full blur-2xl" />
         <CardHeader className="relative">
-          <div className="flex items-center gap-2">
-            <Clock className="h-5 w-5 text-purple-600" />
-            <CardTitle className="text-lg">Optimal Study Time</CardTitle>
-            <Badge variant="secondary" className="text-xs">Premium</Badge>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg">
+                <Brain className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <CardTitle className="text-lg font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
+                  AI Study Optimizer
+                </CardTitle>
+                <p className="text-xs text-muted-foreground">Premium Intelligence</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-1">
+              <Crown className="h-4 w-4 text-amber-500" />
+              <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 shadow-md">
+                Pro
+              </Badge>
+            </div>
           </div>
         </CardHeader>
         <CardContent className="relative">
-          <div className="animate-pulse">
-            <div className="h-4 bg-muted rounded w-3/4 mb-2"></div>
-            <div className="h-3 bg-muted rounded w-1/2"></div>
+          <div className="animate-pulse space-y-3">
+            <div className="h-4 bg-gradient-to-r from-violet-400/30 to-purple-400/30 rounded-lg w-3/4"></div>
+            <div className="h-3 bg-gradient-to-r from-purple-400/20 to-fuchsia-400/20 rounded-lg w-1/2"></div>
+            <div className="flex gap-2">
+              <div className="h-6 w-12 bg-gradient-to-r from-emerald-400/30 to-cyan-400/30 rounded-full"></div>
+              <div className="h-6 w-16 bg-gradient-to-r from-pink-400/30 to-rose-400/30 rounded-full"></div>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -166,23 +186,42 @@ export const OptimalStudyTimeCard = () => {
 
   if (!hasEnoughData) {
     return (
-      <Card className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10" />
+      <Card className="relative overflow-hidden border-0 shadow-2xl bg-gradient-to-br from-slate-600/20 via-gray-600/20 to-zinc-600/20 backdrop-blur-xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-500/10 via-gray-500/10 to-zinc-500/10" />
+        <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-br from-blue-400/15 to-indigo-500/15 rounded-full blur-2xl" />
+        <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-purple-400/15 to-pink-500/15 rounded-full blur-xl" />
         <CardHeader className="relative">
-          <div className="flex items-center gap-2">
-            <Clock className="h-5 w-5 text-purple-600" />
-            <CardTitle className="text-lg">Optimal Study Time</CardTitle>
-            <Badge variant="secondary" className="text-xs">Premium</Badge>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-gradient-to-br from-gray-500 to-slate-600 shadow-lg">
+                <Brain className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <CardTitle className="text-lg font-bold bg-gradient-to-r from-gray-600 via-slate-600 to-zinc-600 bg-clip-text text-transparent">
+                  AI Study Optimizer
+                </CardTitle>
+                <p className="text-xs text-muted-foreground">Premium Intelligence</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-1">
+              <Crown className="h-4 w-4 text-amber-500" />
+              <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 shadow-md">
+                Pro
+              </Badge>
+            </div>
           </div>
         </CardHeader>
         <CardContent className="relative">
-          <div className="text-center py-4">
-            <TrendingUp className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
-            <p className="text-sm text-muted-foreground mb-1">
-              Not enough data yet
+          <div className="text-center py-6">
+            <div className="relative">
+              <TrendingUp className="h-12 w-12 text-muted-foreground mx-auto mb-3 opacity-60" />
+              <Sparkles className="h-4 w-4 text-amber-400 absolute -top-1 -right-2 animate-pulse" />
+            </div>
+            <p className="text-sm font-medium text-muted-foreground mb-2">
+              Analyzing your learning patterns...
             </p>
-            <p className="text-xs text-muted-foreground">
-              Complete more practice sessions to unlock AI-powered study time recommendations
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Complete more practice sessions to unlock personalized AI recommendations for your optimal study times
             </p>
           </div>
         </CardContent>
@@ -191,41 +230,80 @@ export const OptimalStudyTimeCard = () => {
   }
 
   return (
-    <Card className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10" />
+    <Card className="relative overflow-hidden border-0 shadow-2xl bg-gradient-to-br from-emerald-600/20 via-teal-600/20 to-cyan-600/20 backdrop-blur-xl">
+      <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-teal-500/10 to-cyan-500/10" />
+      <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-yellow-400/20 to-orange-500/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-green-400/20 to-emerald-500/20 rounded-full blur-2xl" />
+      <div className="absolute top-1/2 left-1/2 w-20 h-20 bg-gradient-to-br from-cyan-400/15 to-blue-500/15 rounded-full blur-xl transform -translate-x-1/2 -translate-y-1/2" />
+      
       <CardHeader className="relative">
-        <div className="flex items-center gap-2">
-          <Clock className="h-5 w-5 text-purple-600" />
-          <CardTitle className="text-lg">Optimal Study Time</CardTitle>
-          <Badge variant="secondary" className="text-xs">Premium</Badge>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg">
+              <Brain className="h-5 w-5 text-white" />
+            </div>
+            <div>
+              <CardTitle className="text-lg font-bold bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">
+                AI Study Optimizer
+              </CardTitle>
+              <p className="text-xs text-muted-foreground">Premium Intelligence</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-1">
+            <Crown className="h-4 w-4 text-amber-500" />
+            <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 shadow-md">
+              Pro
+            </Badge>
+          </div>
         </div>
       </CardHeader>
+      
       <CardContent className="relative">
-        <div className="space-y-3">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">{getTimeEmoji(analysis?.timeRange || "")}</span>
-            <div>
-              <p className="font-medium">
-                You learn best between {analysis?.timeRange}
+        <div className="space-y-4">
+          <div className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-white/80 to-white/60 dark:from-gray-800/80 dark:to-gray-800/60 backdrop-blur-sm border border-white/20 shadow-lg">
+            <div className="text-3xl p-2 rounded-lg bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30">
+              {getTimeEmoji(analysis?.timeRange || "")}
+            </div>
+            <div className="flex-1">
+              <p className="font-bold text-lg bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">
+                Peak Learning: {analysis?.timeRange}
               </p>
-              <p className="text-sm text-muted-foreground">
-                {analysis?.accuracy}% average accuracy • {analysis?.sessionCount} sessions
-              </p>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+                  <span>{analysis?.accuracy}% accuracy</span>
+                </div>
+                <span>•</span>
+                <span>{analysis?.sessionCount} sessions analyzed</span>
+              </div>
             </div>
           </div>
           
           {analysis && analysis.improvement > 5 && (
-            <div className="flex items-center gap-2 bg-green-50 dark:bg-green-950/20 rounded-lg p-2">
-              <Zap className="h-4 w-4 text-green-600" />
-              <span className="text-sm text-green-700 dark:text-green-400">
-                You're {analysis.improvement}% more accurate during this time!
-              </span>
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30 border border-emerald-200/50 dark:border-emerald-800/30">
+              <div className="p-2 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 shadow-md">
+                <Zap className="h-4 w-4 text-white" />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-emerald-700 dark:text-emerald-300">
+                  ⚡ {analysis.improvement}% Performance Boost
+                </p>
+                <p className="text-xs text-emerald-600 dark:text-emerald-400">
+                  You're significantly more accurate during this time!
+                </p>
+              </div>
             </div>
           )}
           
-          <p className="text-xs text-muted-foreground">
-            💡 Try scheduling your revision sessions around this time for optimal learning
-          </p>
+          <div className="p-3 rounded-lg bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-950/20 dark:to-blue-950/20 border border-cyan-200/50 dark:border-cyan-800/30">
+            <div className="flex items-center gap-2 mb-1">
+              <Sparkles className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
+              <span className="text-sm font-medium text-cyan-700 dark:text-cyan-300">AI Recommendation</span>
+            </div>
+            <p className="text-xs text-cyan-600 dark:text-cyan-400 leading-relaxed">
+              Schedule your most challenging revision sessions during {analysis?.timeRange} to maximize learning efficiency and retention.
+            </p>
+          </div>
         </div>
       </CardContent>
     </Card>
