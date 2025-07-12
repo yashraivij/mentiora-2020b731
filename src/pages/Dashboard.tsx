@@ -15,6 +15,7 @@ import { PremiumAnalyticsCard } from "@/components/dashboard/PremiumAnalyticsCar
 import { GoalsSection } from "@/components/dashboard/GoalsSection";
 import { TopicMasteryDisplay } from "@/components/dashboard/TopicMasteryDisplay";
 import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
+import { OptimalStudyTimeCard } from "@/components/dashboard/OptimalStudyTimeCard";
 import { supabase } from "@/integrations/supabase/client";
 
 interface UserProgress {
@@ -428,13 +429,7 @@ const Dashboard = () => {
               comingSoon={true}
             />
             
-            <PremiumAnalyticsCard
-              title="Optimal Study Times"
-              description="AI-powered recommendations for when you learn most effectively"
-              icon={Clock}
-              gradient="from-blue-500 to-cyan-500"
-              comingSoon={true}
-            />
+            <OptimalStudyTimeCard />
             
             <PremiumAnalyticsCard
               title="Predictive Performance"
