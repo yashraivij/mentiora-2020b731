@@ -7,6 +7,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
 import { ArrowLeft, TrendingUp, AlertTriangle, Target, Calendar } from "lucide-react";
 import { useState, useEffect } from "react";
+import { AOBreakdown } from "@/components/dashboard/AOBreakdown";
 
 interface AnalyticsData {
   subjectId: string;
@@ -77,20 +78,6 @@ const Analytics = () => {
     });
   };
 
-  const getAOBreakdown = () => {
-    // Simulate AO analysis based on performance
-    const totalAttempts = analyticsData.reduce((sum, d) => sum + d.attempts, 0);
-    const averageScore = analyticsData.length > 0 ? 
-      analyticsData.reduce((sum, d) => sum + d.averageScore, 0) / analyticsData.length : 0;
-
-    return {
-      ao1: Math.max(60, averageScore - 10), // Knowledge
-      ao2: Math.max(50, averageScore - 5),  // Application
-      ao3: Math.max(40, averageScore - 15)  // Analysis
-    };
-  };
-
-  const aoBreakdown = getAOBreakdown();
   const masteredTopics = getMasteredTopics();
   const weakTopicData = getWeakTopicData();
 
@@ -175,48 +162,7 @@ const Analytics = () => {
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Assessment Objectives Breakdown */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Assessment Objectives Performance</CardTitle>
-              <CardDescription>
-                Your performance across different skill areas
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div>
-                <div className="flex justify-between mb-2">
-                  <span className="text-sm font-medium">AO1 - Knowledge & Understanding</span>
-                  <span className="text-sm font-medium">{Math.round(aoBreakdown.ao1)}%</span>
-                </div>
-                <Progress value={aoBreakdown.ao1} className="mb-2" />
-                <p className="text-xs text-muted-foreground">
-                  Recalling facts, terminology, and concepts
-                </p>
-              </div>
-
-              <div>
-                <div className="flex justify-between mb-2">
-                  <span className="text-sm font-medium">AO2 - Application</span>
-                  <span className="text-sm font-medium">{Math.round(aoBreakdown.ao2)}%</span>
-                </div>
-                <Progress value={aoBreakdown.ao2} className="mb-2" />
-                <p className="text-xs text-muted-foreground">
-                  Applying knowledge to familiar and unfamiliar situations
-                </p>
-              </div>
-
-              <div>
-                <div className="flex justify-between mb-2">
-                  <span className="text-sm font-medium">AO3 - Analysis & Evaluation</span>
-                  <span className="text-sm font-medium">{Math.round(aoBreakdown.ao3)}%</span>
-                </div>
-                <Progress value={aoBreakdown.ao3} className="mb-2" />
-                <p className="text-xs text-muted-foreground">
-                  Analyzing and evaluating information to make judgments
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+          <AOBreakdown userProgress={analyticsData} />
 
           {/* Weak Topics Focus */}
           <Card>
