@@ -14,6 +14,7 @@ import { AOBreakdown } from "@/components/dashboard/AOBreakdown";
 import { PremiumAnalyticsCard } from "@/components/dashboard/PremiumAnalyticsCard";
 import { GoalsSection } from "@/components/dashboard/GoalsSection";
 import { TopicMasteryDisplay } from "@/components/dashboard/TopicMasteryDisplay";
+import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
 import { supabase } from "@/integrations/supabase/client";
 
 interface UserProgress {
@@ -294,6 +295,9 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+
+        {/* Predicted Grades Graph */}
+        <PredictedGradesGraph userProgress={userProgress} />
 
         {/* Subjects Section */}
         <div className="mb-8">
