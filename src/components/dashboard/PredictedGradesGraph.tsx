@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, Sparkles, Trophy, Star, Zap, BarChart3, Target, TrendingDown, Activity } from "lucide-react";
+import { TrendingUp, Sparkles, Trophy, Star, Zap } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
 
 interface UserProgress {
@@ -66,42 +66,14 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     return "🎯";
   };
 
-  const getConfidenceLevel = (percentage: number, attempts: number) => {
-    if (attempts < 5) return "Low";
-    if (attempts < 15) return "Medium";
-    if (attempts < 30) return "High";
-    return "Very High";
-  };
-
-  const getConfidenceColor = (confidence: string) => {
-    switch (confidence) {
-      case "Very High": return "text-emerald-600";
-      case "High": return "text-green-600";
-      case "Medium": return "text-yellow-600";
-      default: return "text-orange-600";
-    }
-  };
-
-  const getTrendIndicator = (grade: number, avgGrade: number) => {
-    if (grade > avgGrade + 1) return { icon: TrendingUp, color: "text-emerald-500", label: "Above Average" };
-    if (grade < avgGrade - 1) return { icon: TrendingDown, color: "text-red-500", label: "Below Average" };
-    return { icon: Activity, color: "text-blue-500", label: "On Track" };
-  };
-
   const getSubjectsWithPredictions = () => {
     return curriculum.map(subject => {
-      const subjectProgress = userProgress.filter(p => p.subjectId === subject.id);
       const percentage = getSubjectProgress(subject.id);
       const grade = getPredictedGrade(percentage);
-      const totalAttempts = subjectProgress.reduce((sum, p) => sum + p.attempts, 0);
-      const confidence = getConfidenceLevel(percentage, totalAttempts);
-      
       return {
         ...subject,
         percentage,
         grade,
-        totalAttempts,
-        confidence,
         hasData: userProgress.some(p => p.subjectId === subject.id)
       };
     }).filter(subject => subject.hasData);
@@ -109,18 +81,13 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
 
   const subjects = getSubjectsWithPredictions();
   const averageGrade = subjects.length > 0 ? 
-    subjects.reduce((sum, s) => sum + s.grade, 0) / subjects.length : 0;
+    Math.round(subjects.reduce((sum, s) => sum + s.grade, 0) / subjects.length) : 0;
 
   const getEncouragingMessage = () => {
-    const highPerformers = subjects.filter(s => s.grade >= 7).length;
-    const totalSubjects = subjects.length;
-    
-    if (highPerformers / totalSubjects >= 0.7) return "🏆 Exceptional Performance - Elite Student Trajectory";
-    if (averageGrade >= 7) return "🔥 Outstanding Academic Excellence - Top Tier Performance";
-    if (averageGrade >= 6) return "⭐ Strong Academic Foundation - Above Average Results";
-    if (averageGrade >= 5) return "🚀 Solid Progress - Building Towards Success";
-    if (averageGrade >= 4) return "💪 Development Phase - Consistent Improvement Needed";
-    return "🎯 Foundation Building - Strategic Focus Required";
+    if (averageGrade >= 7) return "🔥 Outstanding! You're on track for top grades!";
+    if (averageGrade >= 5) return "🚀 Great progress! Keep pushing for those higher grades!";
+    if (averageGrade >= 4) return "💪 You're building momentum! Every question counts!";
+    return "🌟 You're getting started! Every step forward matters!";
   };
 
   if (subjects.length === 0) {
@@ -151,276 +118,151 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
   }
 
   return (
-    <Card className="mb-8 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:from-slate-900 dark:via-slate-800 dark:to-blue-950/20 border border-slate-200/60 dark:border-slate-700/60 shadow-2xl shadow-slate-900/5 dark:shadow-black/20 backdrop-blur-sm">
+    <Card className="mb-8 bg-gradient-to-br from-background via-purple-50/5 to-pink-50/5 dark:from-background dark:via-purple-950/10 dark:to-pink-950/10 border border-purple-200/20 dark:border-purple-800/20 shadow-2xl shadow-purple-500/5">
       <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
-          <div className="space-y-3">
-            <div className="flex items-center space-x-3">
-              <BarChart3 className="h-7 w-7 text-blue-600 dark:text-blue-400" />
-              <CardTitle className="text-3xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-200 bg-clip-text text-transparent">
-                GCSE Grade Predictions
-              </CardTitle>
-            </div>
-            <div className="space-y-1">
-              <p className="text-lg font-semibold text-slate-700 dark:text-slate-300">{getEncouragingMessage()}</p>
-              <div className="flex items-center space-x-4 text-sm text-slate-600 dark:text-slate-400">
-                <span>Advanced ML Analytics</span>
-                <span>•</span>
-                <span>Live Performance Tracking</span>
-                <span>•</span>
-                <span className="font-medium">Avg: {averageGrade.toFixed(1)} Grade</span>
-              </div>
-            </div>
+          <div>
+            <CardTitle className="text-2xl font-bold text-foreground mb-2">
+              Predicted GCSE Grades
+            </CardTitle>
+            <p className="text-muted-foreground">{getEncouragingMessage()}</p>
+            <p className="text-xs text-muted-foreground mt-1">Every question you answer sharpens your prediction</p>
           </div>
-          <div className="flex flex-col items-end space-y-3">
-            <div className="flex items-center space-x-2 px-4 py-2.5 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-indigo-600/10 rounded-2xl border border-blue-200/30 dark:border-blue-800/30">
-              <Sparkles className="h-5 w-5 text-blue-600 dark:text-blue-400 animate-pulse" />
-              <span className="text-sm font-bold bg-gradient-to-r from-blue-700 to-purple-700 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">Premium Analytics</span>
-            </div>
-            <div className="flex items-center space-x-2 text-xs text-slate-500 dark:text-slate-400">
-              <Target className="h-4 w-4" />
-              <span>Precision: 94.2%</span>
+          <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-amber-500/10 rounded-full border border-purple-500/20">
+              <Sparkles className="h-5 w-5 text-purple-500 animate-pulse" />
+              <span className="text-sm font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">AI Powered</span>
             </div>
           </div>
         </div>
       </CardHeader>
       
       <CardContent>
-        {/* Professional Analytics Dashboard */}
-        <div className="relative bg-gradient-to-br from-slate-50/50 to-white/80 dark:from-slate-800/50 dark:to-slate-900/80 rounded-2xl p-6 backdrop-blur-sm">
-          
-          {/* Statistical Overview Header */}
-          <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-200/60 dark:border-slate-700/60">
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">Live Analysis</span>
+        {/* Bar Chart Graph */}
+        <div className="relative">
+          {/* Y-axis labels (grades) */}
+          <div className="absolute left-0 top-0 h-80 flex flex-col justify-between items-end pr-4 text-xs text-muted-foreground">
+            {[9, 8, 7, 6, 5, 4, 3, 2, 1].map(grade => (
+              <div key={grade} className="h-8 flex items-center">
+                Grade {grade}
               </div>
-              <Badge variant="outline" className="bg-slate-100/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border-slate-300/50 dark:border-slate-600/50">
-                {subjects.length} Subjects Tracked
-              </Badge>
-            </div>
-            <div className="text-right">
-              <div className="text-2xl font-bold text-slate-900 dark:text-white">{averageGrade.toFixed(1)}</div>
-              <div className="text-xs text-slate-500 dark:text-slate-400">Average Grade</div>
-            </div>
+            ))}
           </div>
-
-          {/* Enhanced Bar Chart */}
-          <div className="relative">
-            {/* Y-axis with enhanced styling */}
-            <div className="absolute left-0 top-0 h-96 flex flex-col justify-between items-end pr-6 text-sm font-medium text-slate-600 dark:text-slate-400">
-              {[9, 8, 7, 6, 5, 4, 3, 2, 1].map(grade => (
-                <div key={grade} className="h-10 flex items-center">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-slate-400">Grade</span>
-                    <span className="font-bold text-slate-700 dark:text-slate-300">{grade}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+          
+          {/* Main graph area */}
+          <div className="ml-16 pl-4 border-l border-b border-border/30 h-80 relative">
+            {/* Horizontal grid lines */}
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(grade => (
+              <div 
+                key={grade} 
+                className="absolute w-full border-t border-border/10" 
+                style={{ bottom: `${((grade - 1) / 8) * 100}%` }}
+              />
+            ))}
             
-            {/* Main chart area with professional grid */}
-            <div className="ml-20 pl-6 border-l-2 border-b-2 border-slate-300/40 dark:border-slate-600/40 h-96 relative bg-gradient-to-t from-slate-50/30 to-transparent dark:from-slate-800/30 rounded-br-xl">
-              
-              {/* Enhanced grid lines */}
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(grade => (
-                <div 
-                  key={grade} 
-                  className="absolute w-full border-t border-slate-200/30 dark:border-slate-700/30" 
-                  style={{ bottom: `${((grade - 1) / 8) * 100}%` }}
-                />
-              ))}
-              
-              {/* Performance Bars with Advanced Analytics */}
-              <div className="h-full flex justify-center gap-6 px-6 relative">
-                {subjects.map((subject, index) => {
-                  const trend = getTrendIndicator(subject.grade, averageGrade);
-                  const TrendIcon = trend.icon;
-                  
-                  return (
-                    <div key={subject.id} className="flex flex-col items-center group relative">
-                      
-                      {/* Advanced Analytics Popup */}
-                      <div className="absolute -top-32 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:-translate-y-4 z-20">
-                        <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border border-slate-200/60 dark:border-slate-700/60 rounded-2xl px-5 py-4 shadow-2xl shadow-slate-900/10 dark:shadow-black/30">
-                          <div className="space-y-3">
-                            <div className="flex items-center justify-between">
-                              <span className="font-bold text-slate-900 dark:text-white">{subject.name}</span>
-                              <div className={`flex items-center space-x-1 ${trend.color}`}>
-                                <TrendIcon className="h-4 w-4" />
-                                <span className="text-xs font-medium">{trend.label}</span>
-                              </div>
-                            </div>
-                            <div className="grid grid-cols-2 gap-3 text-sm">
-                              <div>
-                                <div className="text-2xl font-bold text-slate-900 dark:text-white">{subject.grade}</div>
-                                <div className="text-xs text-slate-500 dark:text-slate-400">Predicted Grade</div>
-                              </div>
-                              <div>
-                                <div className="font-semibold text-blue-600 dark:text-blue-400">{subject.percentage}%</div>
-                                <div className="text-xs text-slate-500 dark:text-slate-400">Accuracy</div>
-                              </div>
-                            </div>
-                            <div className="pt-2 border-t border-slate-200/50 dark:border-slate-700/50">
-                              <div className="flex justify-between text-xs">
-                                <span className="text-slate-600 dark:text-slate-400">Confidence:</span>
-                                <span className={`font-semibold ${getConfidenceColor(subject.confidence)}`}>
-                                  {subject.confidence}
-                                </span>
-                              </div>
-                              <div className="flex justify-between text-xs mt-1">
-                                <span className="text-slate-600 dark:text-slate-400">Attempts:</span>
-                                <span className="font-semibold text-slate-700 dark:text-slate-300">{subject.totalAttempts}</span>
-                              </div>
-                            </div>
-                          </div>
+            {/* Bars Container */}
+            <div className="h-full flex justify-center gap-4 px-4 relative">
+              {subjects.map((subject, index) => (
+                <div key={subject.id} className="flex flex-col items-center group relative">
+                  {/* Floating grade & emoji */}
+                  <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-y-2 z-10">
+                    <div className="bg-card/90 backdrop-blur-sm border border-border/50 rounded-xl px-3 py-2 shadow-lg">
+                      <div className="text-center">
+                        <div className="text-lg font-bold">{getGradeEmoji(subject.grade)}</div>
+                        <div className={`text-2xl font-bold ${getGradeColorClass(subject.grade)}`}>
+                          {subject.grade}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {subject.percentage}%
                         </div>
                       </div>
-                  
-                      
-                      {/* Premium Grade Bar */}
-                      <div 
-                        className="w-16 md:w-24 rounded-t-2xl absolute bottom-0 overflow-hidden shadow-2xl group-hover:shadow-blue-500/20 dark:group-hover:shadow-blue-400/20 transition-all duration-700 group-hover:scale-110 group-hover:-translate-y-2 border-t-4 border-white/20"
-                        style={{ 
-                          height: `${((subject.grade - 1) / 8) * 384}px`,
-                          background: getGradeColor(subject.grade),
-                          minHeight: "16px",
-                          filter: "drop-shadow(0 12px 35px rgba(0, 0, 0, 0.15))"
-                        }}
-                      >
-                        {/* Advanced shine effects */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent transform -skew-x-12 group-hover:animate-pulse"></div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-white/20"></div>
-                        
-                        {/* Grade indicator overlay */}
-                        <div className="absolute top-3 left-1/2 transform -translate-x-1/2">
-                          <div className="bg-white/20 backdrop-blur-sm rounded-full w-8 h-8 flex items-center justify-center">
-                            <span className="text-white font-bold text-sm">{subject.grade}</span>
-                          </div>
-                        </div>
-                        
-                        {/* Premium effects for high grades */}
-                        {subject.grade >= 8 && (
-                          <>
-                            <div className="absolute top-2 right-2">
-                              <Star className="h-5 w-5 text-yellow-200 animate-pulse" />
-                            </div>
-                            <div className="absolute top-6 left-2">
-                              <Trophy className="h-4 w-4 text-yellow-300/80 animate-bounce" />
-                            </div>
-                          </>
-                        )}
-                        
-                        {/* Lightning for grade 9 */}
-                        {subject.grade === 9 && (
-                          <div className="absolute top-12 right-3">
-                            <Zap className="h-4 w-4 text-yellow-200 animate-ping" />
-                          </div>
-                        )}
-                        
-                        {/* Confidence indicator */}
-                        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
-                          <div className={`w-1 h-1 rounded-full ${
-                            subject.confidence === 'Very High' ? 'bg-emerald-300' :
-                            subject.confidence === 'High' ? 'bg-green-300' :
-                            subject.confidence === 'Medium' ? 'bg-yellow-300' : 'bg-orange-300'
-                          } animate-pulse`}></div>
-                        </div>
-                      </div>
-                      
-                       {/* Subject Labels */}
-                       <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-center">
-                         <div className="text-sm font-bold text-slate-800 dark:text-slate-200 truncate max-w-24">
-                           {subject.name}
-                         </div>
-                       </div>
                     </div>
-                  )
-                })}
-              </div>
+                  </div>
+                  
+                   {/* Animated bar */}
+                  <div 
+                    className="w-14 md:w-20 rounded-t-xl absolute bottom-0 overflow-hidden shadow-2xl group-hover:shadow-purple-500/30 transition-all duration-700 group-hover:scale-110 group-hover:-translate-y-1"
+                    style={{ 
+                      height: `${((subject.grade - 1) / 8) * 320}px`,
+                      background: getGradeColor(subject.grade),
+                      minHeight: "12px",
+                      filter: "drop-shadow(0 8px 25px rgba(168, 85, 247, 0.15))"
+                    }}
+                  >
+                    {/* Enhanced shine effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 group-hover:animate-pulse"></div>
+                    
+                    {/* Premium glow effect */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-white/10 opacity-50"></div>
+                    
+                    {/* Sparkle effect for high grades */}
+                    {subject.grade >= 7 && (
+                      <div className="absolute top-2 right-2">
+                        <Star className="h-4 w-4 text-white/90 animate-pulse" />
+                      </div>
+                    )}
+                    
+                    {/* Lightning effect for grade 9 */}
+                    {subject.grade === 9 && (
+                      <div className="absolute top-3 left-2">
+                        <Zap className="h-4 w-4 text-yellow-200 animate-bounce" />
+                      </div>
+                    )}
+                    
+                    {/* Premium particles for grade 9 */}
+                    {subject.grade === 9 && (
+                      <>
+                        <div className="absolute top-1 left-3 w-1 h-1 bg-white/60 rounded-full animate-ping"></div>
+                        <div className="absolute top-4 right-4 w-1 h-1 bg-yellow-300/60 rounded-full animate-ping" style={{ animationDelay: '0.5s' }}></div>
+                      </>
+                    )}
+                  </div>
+                  
+                  {/* Subject name */}
+                  <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-center">
+                    <div className="text-xs font-medium text-foreground truncate max-w-20">
+                      {subject.name}
+                    </div>
+                    <div className={`text-sm font-bold ${getGradeColorClass(subject.grade)} group-hover:scale-110 transition-transform duration-300`}>
+                      {subject.grade}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
-
-        {/* Premium Analytics Legend */}
-        <div className="mt-8 pt-6 border-t border-slate-200/60 dark:border-slate-700/60">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            {/* Grade Legend */}
-            <div>
-              <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">Grade Classifications</h4>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-3 group">
-                  <div className="w-6 h-6 rounded-lg shadow-md" style={{ background: "linear-gradient(135deg, #a855f7, #ec4899, #f59e0b)" }}></div>
-                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">Grade 9</span>
-                  <span className="text-purple-500 text-base">🏆</span>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">Elite Performance</span>
-                </div>
-                <div className="flex items-center space-x-3 group">
-                  <div className="w-6 h-6 rounded-lg shadow-md" style={{ background: "linear-gradient(135deg, #10b981, #06b6d4, #3b82f6)" }}></div>
-                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">Grade 8</span>
-                  <span className="text-emerald-500 text-base">💎</span>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">Excellent</span>
-                </div>
-                <div className="flex items-center space-x-3 group">
-                  <div className="w-6 h-6 rounded-lg shadow-md" style={{ background: "linear-gradient(135deg, #22c55e, #84cc16, #eab308)" }}></div>
-                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">Grade 7</span>
-                  <span className="text-green-500 text-base">🌟</span>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">Very Good</span>
-                </div>
-                <div className="flex items-center space-x-3 group">
-                  <div className="w-6 h-6 rounded-lg shadow-md" style={{ background: "linear-gradient(135deg, #fbbf24, #fb923c, #f472b6)" }}></div>
-                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors">Grades 5-6</span>
-                  <span className="text-yellow-500 text-base">⭐</span>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">Good</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Confidence Indicators */}
-            <div>
-              <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">Confidence Levels</h4>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-emerald-500 rounded-full"></div>
-                    <span className="text-sm text-slate-700 dark:text-slate-300">Very High</span>
-                  </div>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">30+ attempts</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <span className="text-sm text-slate-700 dark:text-slate-300">High</span>
-                  </div>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">15-29 attempts</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    <span className="text-sm text-slate-700 dark:text-slate-300">Medium</span>
-                  </div>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">5-14 attempts</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                    <span className="text-sm text-slate-700 dark:text-slate-300">Low</span>
-                  </div>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">&lt;5 attempts</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Premium Footer */}
-          <div className="mt-6 pt-4 border-t border-slate-200/40 dark:border-slate-700/40 text-center">
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Powered by advanced machine learning algorithms • Real-time performance analysis • 94.2% prediction accuracy
-            </p>
           </div>
         </div>
-      </div>
+
+        {/* Premium Legend with enhanced gradients */}
+        <div className="mt-10 pt-8 border-t border-gradient-to-r from-purple-200/20 via-pink-200/20 to-amber-200/20">
+          <div className="flex items-center justify-center flex-wrap gap-8 text-sm">
+            <div className="flex items-center space-x-3 group">
+              <div className="w-6 h-6 rounded-full shadow-lg" style={{ background: "linear-gradient(135deg, #a855f7, #ec4899, #f59e0b)" }}></div>
+              <span className="text-foreground font-semibold group-hover:text-purple-600 transition-colors">Grade 9</span>
+              <span className="text-purple-500 text-lg">🏆</span>
+            </div>
+            <div className="flex items-center space-x-3 group">
+              <div className="w-6 h-6 rounded-full shadow-lg" style={{ background: "linear-gradient(135deg, #10b981, #06b6d4, #3b82f6)" }}></div>
+              <span className="text-foreground font-semibold group-hover:text-emerald-600 transition-colors">Grade 8</span>
+              <span className="text-emerald-500 text-lg">💎</span>
+            </div>
+            <div className="flex items-center space-x-3 group">
+              <div className="w-6 h-6 rounded-full shadow-lg" style={{ background: "linear-gradient(135deg, #22c55e, #84cc16, #eab308)" }}></div>
+              <span className="text-foreground font-semibold group-hover:text-green-600 transition-colors">Grade 7</span>
+              <span className="text-green-500 text-lg">🌟</span>
+            </div>
+            <div className="flex items-center space-x-3 group">
+              <div className="w-6 h-6 rounded-full shadow-lg" style={{ background: "linear-gradient(135deg, #fbbf24, #fb923c, #f472b6)" }}></div>
+              <span className="text-foreground font-semibold group-hover:text-yellow-600 transition-colors">Grades 5-6</span>
+              <span className="text-yellow-500 text-lg">⭐</span>
+            </div>
+            <div className="flex items-center space-x-3 group">
+              <div className="w-6 h-6 rounded-full shadow-lg" style={{ background: "linear-gradient(135deg, #dc2626, #b91c1c, #ef4444)" }}></div>
+              <span className="text-foreground font-semibold group-hover:text-red-600 transition-colors">Grades 1-4</span>
+              <span className="text-red-500 text-lg">🎯</span>
+            </div>
+          </div>
+        </div>
       </CardContent>
     </Card>
   );
