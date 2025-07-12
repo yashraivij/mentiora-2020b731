@@ -134,24 +134,29 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
 
   if (subjects.length === 0) {
     return (
-      <Card className="mb-8 bg-gradient-to-br from-background via-background to-muted/5 border-border/50 shadow-lg">
-        <CardHeader className="pb-4">
+      <Card className="mb-8 relative overflow-hidden border-0 shadow-2xl bg-gradient-to-br from-indigo-600/20 via-purple-600/20 to-pink-600/20 backdrop-blur-xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-cyan-400/20 to-blue-500/20 rounded-full blur-2xl" />
+        <CardHeader className="pb-4 relative">
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-2xl font-bold text-foreground mb-2">
+              <CardTitle className="text-2xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
                 Predicted GCSE Grades
               </CardTitle>
               <p className="text-muted-foreground">Start practicing to see your grade predictions!</p>
             </div>
-            <div className="flex items-center space-x-2 px-3 py-1.5 bg-primary/10 rounded-full">
-              <Sparkles className="h-4 w-4 text-primary" />
-              <span className="text-xs font-medium text-primary">AI Powered</span>
+            <div className="flex items-center space-x-2 px-3 py-1.5 bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-full border border-amber-200/50 dark:border-amber-800/30">
+              <Sparkles className="h-4 w-4 text-amber-600 dark:text-amber-400 animate-pulse" />
+              <span className="text-xs font-medium text-amber-700 dark:text-amber-300">AI Powered</span>
             </div>
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="relative">
           <div className="text-center py-8">
-            <Trophy className="h-12 w-12 text-muted-foreground/50 mx-auto mb-4" />
+            <div className="p-4 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900/30 dark:to-purple-900/30 mx-auto w-fit mb-4">
+              <Trophy className="h-12 w-12 text-indigo-600 dark:text-indigo-400" />
+            </div>
             <p className="text-muted-foreground">Complete some practice questions to see your predictions</p>
           </div>
         </CardContent>
@@ -160,19 +165,24 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
   }
 
   return (
-    <Card className="mb-8 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:from-slate-900 dark:via-slate-800 dark:to-blue-950/20 border border-slate-200/60 dark:border-slate-700/60 shadow-2xl shadow-slate-900/5 dark:shadow-black/20 backdrop-blur-sm">
-      <CardHeader className="pb-4">
+    <Card className="mb-8 relative overflow-hidden border-0 shadow-2xl bg-gradient-to-br from-indigo-600/20 via-purple-600/20 to-pink-600/20 backdrop-blur-xl">
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10" />
+      <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-cyan-400/20 to-blue-500/20 rounded-full blur-2xl" />
+      <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-gradient-to-br from-pink-400/15 to-rose-500/15 rounded-full blur-xl" />
+      
+      <CardHeader className="pb-4 relative">
         <div className="flex items-center justify-between">
           <div className="space-y-3">
             <div className="flex items-center space-x-3">
-              <BarChart3 className="h-7 w-7 text-blue-600 dark:text-blue-400" />
-              <CardTitle className="text-3xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-200 bg-clip-text text-transparent">
+              <BarChart3 className="h-7 w-7 text-indigo-600 dark:text-indigo-400" />
+              <CardTitle className="text-3xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                 GCSE Grade Predictions
               </CardTitle>
             </div>
             <div className="space-y-1">
-              <p className="text-lg font-semibold text-slate-700 dark:text-slate-300">{getEncouragingMessage()}</p>
-              <div className="flex items-center space-x-4 text-sm text-slate-600 dark:text-slate-400">
+              <p className="text-lg font-semibold bg-gradient-to-r from-slate-700 to-slate-600 dark:from-slate-300 dark:to-slate-400 bg-clip-text text-transparent">{getEncouragingMessage()}</p>
+              <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                 <span>Advanced ML Analytics</span>
                 <span>•</span>
                 <span>Live Performance Tracking</span>
@@ -182,11 +192,11 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
             </div>
           </div>
           <div className="flex flex-col items-end space-y-3">
-            <div className="flex items-center space-x-2 px-4 py-2.5 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-indigo-600/10 rounded-2xl border border-blue-200/30 dark:border-blue-800/30">
-              <Sparkles className="h-5 w-5 text-blue-600 dark:text-blue-400 animate-pulse" />
-              <span className="text-sm font-bold bg-gradient-to-r from-blue-700 to-purple-700 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">Premium Analytics</span>
+            <div className="flex items-center space-x-2 px-4 py-2.5 bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-2xl border border-amber-200/50 dark:border-amber-800/30">
+              <Sparkles className="h-5 w-5 text-amber-600 dark:text-amber-400 animate-pulse" />
+              <span className="text-sm font-bold text-amber-700 dark:text-amber-300">Premium Analytics</span>
             </div>
-            <div className="flex items-center space-x-2 text-xs text-slate-500 dark:text-slate-400">
+            <div className="flex items-center space-x-2 text-xs text-muted-foreground">
               <Target className="h-4 w-4" />
               <span>Precision: 94.2%</span>
             </div>
