@@ -18,8 +18,17 @@ interface PredictedGradesGraphProps {
 export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
   const getSubjectProgress = (subjectId: string) => {
     const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
-    if (subjectProgress.length === 0) return 0;
-    return Math.round(subjectProgress.reduce((sum, p) => sum + p.averageScore, 0) / subjectProgress.length);
+    
+    // Find the subject in curriculum to get all topics
+    const subject = curriculum.find(s => s.id === subjectId);
+    if (!subject) return 0;
+    
+    // Calculate average including unattempted topics as 0%
+    const totalTopics = subject.topics.length;
+    if (totalTopics === 0) return 0;
+    
+    const totalScore = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
+    return Math.round(totalScore / totalTopics);
   };
 
   const getPredictedGrade = (percentage: number) => {
