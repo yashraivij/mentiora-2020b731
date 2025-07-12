@@ -353,7 +353,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           </div>
 
         {/* Premium Analytics Legend */}
-        <div className="mt-8 pt-6 border-t border-slate-200/60 dark:border-slate-700/60">
+        <div className="mt-12 pt-6 border-t border-slate-200/60 dark:border-slate-700/60">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             {/* Grade Legend */}
