@@ -214,7 +214,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                     <div className="text-xs font-medium text-foreground truncate max-w-20">
                       {subject.name}
                     </div>
-                    <div className={`text-lg font-bold ${getGradeColorClass(subject.grade)} group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`text-sm font-bold ${getGradeColorClass(subject.grade)} group-hover:scale-110 transition-transform duration-300`}>
                       {subject.grade}
                     </div>
                   </div>
