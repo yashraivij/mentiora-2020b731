@@ -330,7 +330,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                       </div>
                       
                        {/* Subject Labels */}
-                       <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-center">
+                       <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-center">
                          <div className="text-sm font-bold text-slate-800 dark:text-slate-200 truncate max-w-24">
                            {subject.name}
                          </div>
