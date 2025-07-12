@@ -186,18 +186,20 @@ export const OptimalStudyTimeCard = () => {
 
   if (!hasEnoughData) {
     return (
-      <Card className="relative overflow-hidden border-0 shadow-2xl bg-gradient-to-br from-slate-600/20 via-gray-600/20 to-zinc-600/20 backdrop-blur-xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-500/10 via-gray-500/10 to-zinc-500/10" />
-        <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-br from-blue-400/15 to-indigo-500/15 rounded-full blur-2xl" />
-        <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-purple-400/15 to-pink-500/15 rounded-full blur-xl" />
+      <Card className="relative overflow-hidden border-0 shadow-2xl bg-gradient-to-br from-indigo-600/20 via-purple-600/20 to-pink-600/20 backdrop-blur-xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-cyan-400/20 to-blue-500/20 rounded-full blur-2xl" />
+        <div className="absolute top-1/3 right-1/3 w-16 h-16 bg-gradient-to-br from-pink-400/15 to-rose-500/15 rounded-full blur-xl" />
+        
         <CardHeader className="relative">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-gradient-to-br from-gray-500 to-slate-600 shadow-lg">
+              <div className="p-2.5 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg">
                 <Brain className="h-5 w-5 text-white" />
               </div>
               <div>
-                <CardTitle className="text-lg font-bold bg-gradient-to-r from-gray-600 via-slate-600 to-zinc-600 bg-clip-text text-transparent">
+                <CardTitle className="text-lg font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                   AI Study Optimizer
                 </CardTitle>
                 <p className="text-xs text-muted-foreground">Premium Intelligence</p>
@@ -211,18 +213,37 @@ export const OptimalStudyTimeCard = () => {
             </div>
           </div>
         </CardHeader>
+        
         <CardContent className="relative">
           <div className="text-center py-6">
-            <div className="relative">
-              <TrendingUp className="h-12 w-12 text-muted-foreground mx-auto mb-3 opacity-60" />
-              <Sparkles className="h-4 w-4 text-amber-400 absolute -top-1 -right-2 animate-pulse" />
+            <div className="relative mb-4">
+              <div className="p-4 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900/30 dark:to-purple-900/30 mx-auto w-fit">
+                <TrendingUp className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
+              </div>
+              <Sparkles className="h-4 w-4 text-amber-400 absolute -top-1 -right-4 animate-pulse" />
+              <div className="absolute -bottom-1 -left-2 w-3 h-3 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full animate-bounce" />
             </div>
-            <p className="text-sm font-medium text-muted-foreground mb-2">
-              Analyzing your learning patterns...
-            </p>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              Complete more practice sessions to unlock personalized AI recommendations for your optimal study times
-            </p>
+            
+            <div className="space-y-3">
+              <div className="p-3 rounded-lg bg-gradient-to-r from-white/80 to-white/60 dark:from-gray-800/80 dark:to-gray-800/60 backdrop-blur-sm border border-white/20 shadow-lg">
+                <p className="text-sm font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-1">
+                  🧠 AI Learning Analysis in Progress
+                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Complete more practice sessions to unlock personalized study time recommendations
+                </p>
+              </div>
+              
+              <div className="p-3 rounded-lg bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-950/20 dark:to-purple-950/20 border border-violet-200/50 dark:border-violet-800/30">
+                <div className="flex items-center gap-2 mb-1">
+                  <Clock className="h-4 w-4 text-violet-600 dark:text-violet-400" />
+                  <span className="text-sm font-medium text-violet-700 dark:text-violet-300">Coming Soon</span>
+                </div>
+                <p className="text-xs text-violet-600 dark:text-violet-400 leading-relaxed">
+                  Discover your peak learning hours with advanced AI pattern recognition
+                </p>
+              </div>
+            </div>
           </div>
         </CardContent>
       </Card>
