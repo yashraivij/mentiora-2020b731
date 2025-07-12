@@ -331,7 +331,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                       
                       {/* Subject Labels with Analytics */}
                       <div className="absolute -bottom-14 left-1/2 transform -translate-x-1/2 text-center">
-                        <div className="text-sm font-bold text-slate-800 dark:text-slate-200 truncate max-w-24 mb-1">
+                        <div className="text-sm font-bold text-slate-800 dark:text-slate-200 truncate max-w-24 mb-0.5">
                           {subject.name}
                         </div>
                         <div className="flex items-center justify-center space-x-2">
