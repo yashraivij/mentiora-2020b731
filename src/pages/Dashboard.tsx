@@ -14,6 +14,7 @@ import { AOBreakdown } from "@/components/dashboard/AOBreakdown";
 import { PremiumAnalyticsCard } from "@/components/dashboard/PremiumAnalyticsCard";
 import { GoalsSection } from "@/components/dashboard/GoalsSection";
 import { TopicMasteryDisplay } from "@/components/dashboard/TopicMasteryDisplay";
+import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
 import { supabase } from "@/integrations/supabase/client";
 
 interface UserProgress {
@@ -293,6 +294,11 @@ const Dashboard = () => {
               <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">AI-Powered Insights</span>
             </div>
           </div>
+        </div>
+
+        {/* Predicted Grades Graph */}
+        <div className="mb-8">
+          <PredictedGradesGraph userProgress={userProgress} />
         </div>
 
         {/* Subjects Section */}
