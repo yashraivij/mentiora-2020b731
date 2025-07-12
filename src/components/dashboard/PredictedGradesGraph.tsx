@@ -329,22 +329,12 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                         </div>
                       </div>
                       
-                      {/* Subject Labels with Analytics */}
-                      <div className="absolute -bottom-14 left-1/2 transform -translate-x-1/2 text-center">
-                        <div className="text-sm font-bold text-slate-800 dark:text-slate-200 truncate max-w-24 mb-1">
-                          {subject.name}
-                        </div>
-                        <div className="flex items-center justify-center space-x-2">
-                          <div className={`text-lg font-bold ${getGradeColorClass(subject.grade)} group-hover:scale-125 transition-transform duration-300`}>
-                            {subject.grade}
-                          </div>
-                          <div className={`w-2 h-2 rounded-full ${
-                            subject.confidence === 'Very High' ? 'bg-emerald-500' :
-                            subject.confidence === 'High' ? 'bg-green-500' :
-                            subject.confidence === 'Medium' ? 'bg-yellow-500' : 'bg-orange-500'
-                          }`}></div>
-                        </div>
-                      </div>
+                       {/* Subject Labels */}
+                       <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-center">
+                         <div className="text-sm font-bold text-slate-800 dark:text-slate-200 truncate max-w-24">
+                           {subject.name}
+                         </div>
+                       </div>
                     </div>
                   )
                 })}
