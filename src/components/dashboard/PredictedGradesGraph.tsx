@@ -163,12 +163,12 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
               />
             ))}
             
-            {/* Bars */}
-            <div className="h-full flex items-end justify-center gap-4 px-4">
+            {/* Bars Container */}
+            <div className="h-full flex justify-center gap-4 px-4 relative">
               {subjects.map((subject, index) => (
-                <div key={subject.id} className="flex flex-col items-center group">
+                <div key={subject.id} className="flex flex-col items-center group relative">
                   {/* Floating grade & emoji */}
-                  <div className="mb-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-y-2 group-hover:translate-y-0">
+                  <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-y-2 z-10">
                     <div className="bg-card/90 backdrop-blur-sm border border-border/50 rounded-xl px-3 py-2 shadow-lg">
                       <div className="text-center">
                         <div className="text-lg font-bold">{getGradeEmoji(subject.grade)}</div>
@@ -184,9 +184,9 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                   
                   {/* Animated bar */}
                   <div 
-                    className="w-12 md:w-16 rounded-t-lg relative overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105"
+                    className="w-12 md:w-16 rounded-t-lg absolute bottom-0 overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105"
                     style={{ 
-                      height: `${((subject.grade - 1) / 8) * 100}%`,
+                      height: `${((subject.grade - 1) / 8) * 320}px`,
                       background: getGradeColor(subject.grade),
                       minHeight: "8px"
                     }}
@@ -210,7 +210,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                   </div>
                   
                   {/* Subject name */}
-                  <div className="mt-3 text-center">
+                  <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center">
                     <div className="text-xs font-medium text-foreground truncate max-w-20">
                       {subject.name}
                     </div>
