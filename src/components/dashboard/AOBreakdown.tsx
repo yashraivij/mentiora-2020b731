@@ -7,18 +7,30 @@ import { Brain, Target, TrendingUp } from "lucide-react";
 interface AOBreakdownProps {
   userProgress: Array<{
     averageScore: number;
+    attempts: number;
   }>;
 }
 
 export const AOBreakdown = ({ userProgress }: AOBreakdownProps) => {
+  // Create a deterministic "random" function based on user data
+  const createSeededRandom = (seed: number) => {
+    return ((seed * 9301 + 49297) % 233280) / 233280;
+  };
+
   const getAOBreakdown = () => {
     const averageScore = userProgress.length > 0 ? 
       userProgress.reduce((sum, d) => sum + d.averageScore, 0) / userProgress.length : 0;
 
+    // Create seed from user progress data for consistent "randomness"
+    const seed = userProgress.reduce((sum, p) => sum + p.attempts + p.averageScore, 0) || 1;
+    const random1 = createSeededRandom(seed);
+    const random2 = createSeededRandom(seed + 1);
+    const random3 = createSeededRandom(seed + 2);
+
     return {
-      ao1: Math.max(40, Math.min(100, averageScore + (Math.random() - 0.5) * 20)),
-      ao2: Math.max(30, Math.min(100, averageScore - 5 + (Math.random() - 0.5) * 15)),
-      ao3: Math.max(25, Math.min(100, averageScore - 15 + (Math.random() - 0.5) * 25))
+      ao1: Math.max(40, Math.min(100, averageScore + (random1 - 0.5) * 20)),
+      ao2: Math.max(30, Math.min(100, averageScore - 5 + (random2 - 0.5) * 15)),
+      ao3: Math.max(25, Math.min(100, averageScore - 15 + (random3 - 0.5) * 25))
     };
   };
 
