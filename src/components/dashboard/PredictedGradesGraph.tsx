@@ -35,27 +35,27 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
   };
 
   const getGradeColor = (grade: number) => {
-    if (grade === 9) return "linear-gradient(135deg, #10b981, #34d399)"; // Emerald gradient
-    if (grade === 8) return "linear-gradient(135deg, #059669, #10b981)"; // Green gradient
-    if (grade === 7) return "linear-gradient(135deg, #16a34a, #22c55e)"; // Lime gradient
-    if (grade === 6) return "linear-gradient(135deg, #eab308, #fbbf24)"; // Yellow gradient
-    if (grade === 5) return "linear-gradient(135deg, #f59e0b, #fbbf24)"; // Amber gradient
-    if (grade === 4) return "linear-gradient(135deg, #ea580c, #fb923c)"; // Orange gradient
-    if (grade === 3) return "linear-gradient(135deg, #dc2626, #ef4444)"; // Red gradient
-    if (grade === 2) return "linear-gradient(135deg, #b91c1c, #dc2626)"; // Dark red gradient
-    return "linear-gradient(135deg, #991b1b, #b91c1c)"; // Darkest red gradient
+    if (grade === 9) return "linear-gradient(135deg, #a855f7, #ec4899, #f59e0b)"; // Premium purple-pink-amber
+    if (grade === 8) return "linear-gradient(135deg, #10b981, #06b6d4, #3b82f6)"; // Emerald-cyan-blue
+    if (grade === 7) return "linear-gradient(135deg, #22c55e, #84cc16, #eab308)"; // Green-lime-yellow
+    if (grade === 6) return "linear-gradient(135deg, #fbbf24, #fb923c, #f472b6)"; // Yellow-orange-pink
+    if (grade === 5) return "linear-gradient(135deg, #fb923c, #ef4444, #f97316)"; // Orange-red-orange
+    if (grade === 4) return "linear-gradient(135deg, #f97316, #dc2626, #ea580c)"; // Orange-red-orange
+    if (grade === 3) return "linear-gradient(135deg, #dc2626, #b91c1c, #ef4444)"; // Red gradient
+    if (grade === 2) return "linear-gradient(135deg, #b91c1c, #991b1b, #dc2626)"; // Dark red gradient
+    return "linear-gradient(135deg, #991b1b, #7f1d1d, #b91c1c)"; // Darkest red gradient
   };
 
   const getGradeColorClass = (grade: number) => {
-    if (grade === 9) return "text-emerald-500";
-    if (grade === 8) return "text-green-500";
-    if (grade === 7) return "text-lime-500";
+    if (grade === 9) return "text-purple-500";
+    if (grade === 8) return "text-emerald-500";
+    if (grade === 7) return "text-green-500";
     if (grade === 6) return "text-yellow-500";
-    if (grade === 5) return "text-amber-500";
-    if (grade === 4) return "text-orange-500";
-    if (grade === 3) return "text-red-500";
-    if (grade === 2) return "text-red-600";
-    return "text-red-700";
+    if (grade === 5) return "text-orange-500";
+    if (grade === 4) return "text-red-500";
+    if (grade === 3) return "text-red-600";
+    if (grade === 2) return "text-red-700";
+    return "text-red-800";
   };
 
   const getGradeEmoji = (grade: number) => {
@@ -118,7 +118,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
   }
 
   return (
-    <Card className="mb-8 bg-gradient-to-br from-background via-background to-muted/5 border-border/50 shadow-lg">
+    <Card className="mb-8 bg-gradient-to-br from-background via-purple-50/5 to-pink-50/5 dark:from-background dark:via-purple-950/10 dark:to-pink-950/10 border border-purple-200/20 dark:border-purple-800/20 shadow-2xl shadow-purple-500/5">
       <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <div>
@@ -129,13 +129,10 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
             <p className="text-xs text-muted-foreground mt-1">Every question you answer sharpens your prediction</p>
           </div>
           <div className="flex items-center space-x-3">
-            <div className="flex items-center space-x-2 px-3 py-1.5 bg-primary/10 rounded-full">
-              <Sparkles className="h-4 w-4 text-primary" />
-              <span className="text-xs font-medium text-primary">AI Powered</span>
+            <div className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-amber-500/10 rounded-full border border-purple-500/20">
+              <Sparkles className="h-5 w-5 text-purple-500 animate-pulse" />
+              <span className="text-sm font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">AI Powered</span>
             </div>
-            <Badge variant="outline" className="bg-card/50">
-              Avg Grade {averageGrade}
-            </Badge>
           </div>
         </div>
       </CardHeader>
@@ -182,30 +179,42 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                     </div>
                   </div>
                   
-                  {/* Animated bar */}
+                   {/* Animated bar */}
                   <div 
-                    className="w-12 md:w-16 rounded-t-lg absolute bottom-0 overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105"
+                    className="w-14 md:w-20 rounded-t-xl absolute bottom-0 overflow-hidden shadow-2xl group-hover:shadow-purple-500/30 transition-all duration-700 group-hover:scale-110 group-hover:-translate-y-1"
                     style={{ 
                       height: `${((subject.grade - 1) / 8) * 320}px`,
                       background: getGradeColor(subject.grade),
-                      minHeight: "8px"
+                      minHeight: "12px",
+                      filter: "drop-shadow(0 8px 25px rgba(168, 85, 247, 0.15))"
                     }}
                   >
-                    {/* Shine effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 group-hover:animate-pulse"></div>
+                    {/* Enhanced shine effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 group-hover:animate-pulse"></div>
+                    
+                    {/* Premium glow effect */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-white/10 opacity-50"></div>
                     
                     {/* Sparkle effect for high grades */}
                     {subject.grade >= 7 && (
-                      <div className="absolute top-1 right-1">
-                        <Star className="h-3 w-3 text-white/80 animate-pulse" />
+                      <div className="absolute top-2 right-2">
+                        <Star className="h-4 w-4 text-white/90 animate-pulse" />
                       </div>
                     )}
                     
                     {/* Lightning effect for grade 9 */}
                     {subject.grade === 9 && (
-                      <div className="absolute top-2 left-1">
-                        <Zap className="h-3 w-3 text-yellow-200 animate-bounce" />
+                      <div className="absolute top-3 left-2">
+                        <Zap className="h-4 w-4 text-yellow-200 animate-bounce" />
                       </div>
+                    )}
+                    
+                    {/* Premium particles for grade 9 */}
+                    {subject.grade === 9 && (
+                      <>
+                        <div className="absolute top-1 left-3 w-1 h-1 bg-white/60 rounded-full animate-ping"></div>
+                        <div className="absolute top-4 right-4 w-1 h-1 bg-yellow-300/60 rounded-full animate-ping" style={{ animationDelay: '0.5s' }}></div>
+                      </>
                     )}
                   </div>
                   
@@ -224,33 +233,33 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           </div>
         </div>
 
-        {/* Enhanced Legend with gradients */}
-        <div className="mt-8 pt-6 border-t border-border/30">
-          <div className="flex items-center justify-center flex-wrap gap-6 text-xs">
-            <div className="flex items-center space-x-2">
-              <div className="w-4 h-4 rounded-full" style={{ background: "linear-gradient(135deg, #10b981, #34d399)" }}></div>
-              <span className="text-muted-foreground font-medium">Grades 8-9</span>
-              <span className="text-emerald-500">🏆</span>
+        {/* Premium Legend with enhanced gradients */}
+        <div className="mt-10 pt-8 border-t border-gradient-to-r from-purple-200/20 via-pink-200/20 to-amber-200/20">
+          <div className="flex items-center justify-center flex-wrap gap-8 text-sm">
+            <div className="flex items-center space-x-3 group">
+              <div className="w-6 h-6 rounded-full shadow-lg" style={{ background: "linear-gradient(135deg, #a855f7, #ec4899, #f59e0b)" }}></div>
+              <span className="text-foreground font-semibold group-hover:text-purple-600 transition-colors">Grade 9</span>
+              <span className="text-purple-500 text-lg">🏆</span>
             </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-4 h-4 rounded-full" style={{ background: "linear-gradient(135deg, #16a34a, #22c55e)" }}></div>
-              <span className="text-muted-foreground font-medium">Grade 7</span>
-              <span className="text-lime-500">🌟</span>
+            <div className="flex items-center space-x-3 group">
+              <div className="w-6 h-6 rounded-full shadow-lg" style={{ background: "linear-gradient(135deg, #10b981, #06b6d4, #3b82f6)" }}></div>
+              <span className="text-foreground font-semibold group-hover:text-emerald-600 transition-colors">Grade 8</span>
+              <span className="text-emerald-500 text-lg">💎</span>
             </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-4 h-4 rounded-full" style={{ background: "linear-gradient(135deg, #eab308, #fbbf24)" }}></div>
-              <span className="text-muted-foreground font-medium">Grades 5-6</span>
-              <span className="text-yellow-500">⭐</span>
+            <div className="flex items-center space-x-3 group">
+              <div className="w-6 h-6 rounded-full shadow-lg" style={{ background: "linear-gradient(135deg, #22c55e, #84cc16, #eab308)" }}></div>
+              <span className="text-foreground font-semibold group-hover:text-green-600 transition-colors">Grade 7</span>
+              <span className="text-green-500 text-lg">🌟</span>
             </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-4 h-4 rounded-full" style={{ background: "linear-gradient(135deg, #ea580c, #fb923c)" }}></div>
-              <span className="text-muted-foreground font-medium">Grade 4</span>
-              <span className="text-orange-500">💪</span>
+            <div className="flex items-center space-x-3 group">
+              <div className="w-6 h-6 rounded-full shadow-lg" style={{ background: "linear-gradient(135deg, #fbbf24, #fb923c, #f472b6)" }}></div>
+              <span className="text-foreground font-semibold group-hover:text-yellow-600 transition-colors">Grades 5-6</span>
+              <span className="text-yellow-500 text-lg">⭐</span>
             </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-4 h-4 rounded-full" style={{ background: "linear-gradient(135deg, #dc2626, #ef4444)" }}></div>
-              <span className="text-muted-foreground font-medium">Grades 1-3</span>
-              <span className="text-red-500">🎯</span>
+            <div className="flex items-center space-x-3 group">
+              <div className="w-6 h-6 rounded-full shadow-lg" style={{ background: "linear-gradient(135deg, #dc2626, #b91c1c, #ef4444)" }}></div>
+              <span className="text-foreground font-semibold group-hover:text-red-600 transition-colors">Grades 1-4</span>
+              <span className="text-red-500 text-lg">🎯</span>
             </div>
           </div>
         </div>
