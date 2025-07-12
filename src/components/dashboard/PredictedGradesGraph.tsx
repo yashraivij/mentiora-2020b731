@@ -330,7 +330,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                       </div>
                       
                       {/* Subject Labels with Analytics */}
-                      <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 text-center">
+                      <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-center">
                         <div className="text-sm font-bold text-slate-800 dark:text-slate-200 truncate max-w-24 mb-1">
                           {subject.name}
                         </div>
