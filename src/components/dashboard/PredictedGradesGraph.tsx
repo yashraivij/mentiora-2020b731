@@ -186,7 +186,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                   <div 
                     className="w-12 md:w-16 rounded-t-lg relative overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105"
                     style={{ 
-                      height: `${(subject.grade / 9) * 100}%`,
+                      height: `${((subject.grade - 1) / 8) * 100}%`,
                       background: getGradeColor(subject.grade),
                       minHeight: "8px"
                     }}
