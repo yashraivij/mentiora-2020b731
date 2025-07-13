@@ -88,64 +88,117 @@ const PredictedQuestions = () => {
         return;
       }
 
-      console.log('Fetching completed predicted exams for user:', user.id);
+      console.log('🔍 Fetching ALL predicted exam completions for user:', user.id);
 
-      // Get ALL completions for the user - no limit to ensure we get all subjects
+      // Get ALL completions with no filters to ensure we don't miss anything
       const { data, error } = await supabase
         .from('predicted_exam_completions')
-        .select('subject_id, grade, percentage, completed_at, questions, answers, time_taken_seconds')
+        .select('*') // Get ALL columns to see what data exists
         .eq('user_id', user.id)
         .order('completed_at', { ascending: false });
 
       if (error) {
-        console.error('Database error:', error);
+        console.error('❌ Database error:', error);
         setLoading(false);
         return;
       }
 
-      console.log('Fetched predicted exam completions:', data?.length || 0, 'records');
-      console.log('Raw subject IDs from database:', [...new Set(data?.map(d => d.subject_id) || [])]);
-      console.log('Curriculum subject IDs:', curriculum.map(s => s.id));
+      console.log('📊 FULL RAW DATA from database:', data);
+      console.log('🔢 Total records found:', data?.length || 0);
+      
+      if (data && data.length > 0) {
+        console.log('📋 All subject IDs in database:', [...new Set(data.map(d => d.subject_id))]);
+        console.log('📚 Curriculum subject IDs:', curriculum.map(s => s.id));
+        
+        // Log each completion with details
+        data.forEach((completion, index) => {
+          console.log(`📝 Completion ${index + 1}:`, {
+            subject_id: completion.subject_id,
+            grade: completion.grade,
+            percentage: completion.percentage,
+            completed_at: completion.completed_at
+          });
+        });
+      }
 
-      // Map potential subject ID variations to curriculum IDs 
-      // The curriculum uses different IDs than what might be stored in database
-      const subjectIdMapping: {[key: string]: string} = {
-        'mathematics': 'maths',  // Database "mathematics" -> Curriculum "maths" 
-        'math': 'maths',
-        'maths': 'maths',        // Database "maths" -> Curriculum "maths"
-        'chemistry': 'chemistry',
-        'biology': 'biology', 
-        'physics': 'physics',
-        'english-language': 'english-language',
-        'english-literature': 'english-literature',
-        'history': 'history',
-        'geography': 'geography',
-        'computer-science': 'computer-science',
-        'psychology': 'psychology'
+      // Create a comprehensive mapping for ALL possible subject variations
+      const createSubjectMapping = () => {
+        const mapping: {[key: string]: string} = {};
+        
+        // For each curriculum subject, add ALL possible variations
+        curriculum.forEach(subject => {
+          const id = subject.id;
+          mapping[id] = id; // Exact match
+          mapping[id.toLowerCase()] = id; // Lowercase
+          mapping[id.toUpperCase()] = id; // Uppercase
+          mapping[id.replace('-', '')] = id; // No hyphens
+          mapping[id.replace('-', '_')] = id; // Underscores instead of hyphens
+          
+          // Special cases
+          if (id === 'maths') {
+            mapping['mathematics'] = id;
+            mapping['math'] = id;
+            mapping['Math'] = id;
+            mapping['Mathematics'] = id;
+            mapping['MATHS'] = id;
+            mapping['MATHEMATICS'] = id;
+          }
+          if (id === 'english-language') {
+            mapping['english_language'] = id;
+            mapping['englishlanguage'] = id;
+            mapping['English Language'] = id;
+            mapping['english language'] = id;
+          }
+          if (id === 'english-literature') {
+            mapping['english_literature'] = id;
+            mapping['englishliterature'] = id;
+            mapping['English Literature'] = id;
+            mapping['english literature'] = id;
+          }
+          if (id === 'computer-science') {
+            mapping['computer_science'] = id;
+            mapping['computerscience'] = id;
+            mapping['Computer Science'] = id;
+            mapping['computer science'] = id;
+          }
+        });
+        
+        console.log('🗺️ Subject ID mapping created:', mapping);
+        return mapping;
       };
 
-      // Group by subject, keeping the LATEST completion for each subject
+      const subjectMapping = createSubjectMapping();
+
+      // Process completions with aggressive mapping
       const completions: {[key: string]: any} = {};
       data?.forEach(completion => {
-        // Map the database subject_id to curriculum subject_id
-        const mappedSubjectId = subjectIdMapping[completion.subject_id] || completion.subject_id;
+        const rawSubjectId = completion.subject_id;
+        const mappedSubjectId = subjectMapping[rawSubjectId] || rawSubjectId;
         
-        console.log(`Mapping: ${completion.subject_id} -> ${mappedSubjectId}`);
+        console.log(`🔄 Mapping: "${rawSubjectId}" -> "${mappedSubjectId}"`);
         
-        const currentCompletion = completions[mappedSubjectId];
-        if (!currentCompletion || new Date(completion.completed_at) > new Date(currentCompletion.completed_at)) {
-          completions[mappedSubjectId] = {
-            ...completion,
-            subject_id: mappedSubjectId // Use the mapped subject ID
-          };
+        // Check if this mapped subject exists in curriculum
+        const curriculumSubject = curriculum.find(s => s.id === mappedSubjectId);
+        if (curriculumSubject) {
+          const currentCompletion = completions[mappedSubjectId];
+          if (!currentCompletion || new Date(completion.completed_at) > new Date(currentCompletion.completed_at)) {
+            completions[mappedSubjectId] = {
+              ...completion,
+              subject_id: mappedSubjectId // Use the mapped subject ID
+            };
+            console.log(`✅ Added completion for ${mappedSubjectId}:`, completion.grade, completion.percentage + '%');
+          }
+        } else {
+          console.warn(`⚠️ Subject "${mappedSubjectId}" not found in curriculum`);
         }
       });
 
-      console.log('Final grouped completions by subject:', Object.keys(completions));
-      console.log('Completion details:', completions);
+      console.log('🎯 Final processed completions:', Object.keys(completions));
+      console.log('📈 Completion details:', completions);
+      
       setCompletedExams(completions);
     } catch (error) {
-      console.error('Error fetching completed exams:', error);
+      console.error('💥 Error fetching completed exams:', error);
     } finally {
       setLoading(false);
     }
