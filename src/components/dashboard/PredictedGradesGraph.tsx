@@ -47,6 +47,27 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     fetchPredictedExamCompletions();
   }, [user]);
 
+  // Track subjects that have data to keep them on the graph
+  useEffect(() => {
+    const subjectsWithData = new Set<string>();
+    
+    // Add subjects with practice data
+    userProgress.forEach(p => {
+      if (p.attempts > 0) {
+        subjectsWithData.add(p.subjectId);
+      }
+    });
+    
+    // Add subjects with exam completions
+    predictedExamCompletions.forEach(completion => {
+      subjectsWithData.add(completion.subject_id);
+    });
+    
+    if (subjectsWithData.size > 0) {
+      setSubjectsEverShown(prev => new Set([...prev, ...subjectsWithData]));
+    }
+  }, [userProgress, predictedExamCompletions]);
+
   const getSubjectProgress = (subjectId: string) => {
     const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
     
@@ -89,10 +110,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
       return null;
     }
     
-    // Track this subject as shown if it has data
-    if (hasCurrentData) {
-      setSubjectsEverShown(prev => new Set([...prev, subjectId]));
-    }
     
     // If only exam completion, use that grade
     if (!hasPracticeData && recentExamCompletion) {
