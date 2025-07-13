@@ -21,6 +21,7 @@ interface PredictedGradesGraphProps {
 export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
   const { user } = useAuth();
   const [predictedExamCompletions, setPredictedExamCompletions] = useState<any[]>([]);
+  const [subjectsEverShown, setSubjectsEverShown] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const fetchPredictedExamCompletions = async () => {
@@ -76,10 +77,21 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
       .filter(completion => completion.subject_id === subjectId)
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
     
-    // If no practice data and no exam completion, don't show subject
+    // Check if subject has any current data
     const hasPracticeData = userProgress.some(p => p.subjectId === subjectId);
-    if (!hasPracticeData && !recentExamCompletion) {
+    const hasCurrentData = hasPracticeData || recentExamCompletion;
+    
+    // If subject was ever shown, keep it on the graph even if data is temporarily unavailable
+    const wasEverShown = subjectsEverShown.has(subjectId);
+    
+    // If no current data and was never shown before, don't show subject
+    if (!hasCurrentData && !wasEverShown) {
       return null;
+    }
+    
+    // Track this subject as shown if it has data
+    if (hasCurrentData) {
+      setSubjectsEverShown(prev => new Set([...prev, subjectId]));
     }
     
     // If only exam completion, use that grade
@@ -124,6 +136,17 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         confidence: getConfidenceLevel(combinedPercentage, totalAttempts),
         totalAttempts,
         source: 'combined'
+      };
+    }
+    
+    // If subject was shown before but has no current data, show placeholder with grade 1
+    if (wasEverShown && !hasCurrentData) {
+      return {
+        grade: 1,
+        percentage: 10,
+        confidence: 'Low',
+        totalAttempts: 0,
+        source: 'placeholder'
       };
     }
     
@@ -269,11 +292,13 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
   }
 
   return (
-    <Card className="mb-8 relative overflow-hidden border-0 shadow-2xl bg-gradient-to-br from-indigo-600/20 via-purple-600/20 to-pink-600/20 backdrop-blur-xl">
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10" />
-      <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-cyan-400/20 to-blue-500/20 rounded-full blur-2xl" />
-      <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-gradient-to-br from-pink-400/15 to-rose-500/15 rounded-full blur-xl" />
+    <Card className="mb-8 relative overflow-hidden border-0 shadow-2xl bg-gradient-to-br from-slate-50/80 via-white/90 to-indigo-50/80 dark:from-slate-900/80 dark:via-slate-800/90 dark:to-indigo-950/80 backdrop-blur-xl ring-1 ring-white/20">
+      {/* Premium background effects */}
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-purple-500/5 to-pink-500/5" />
+      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-amber-400/10 to-orange-500/15 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute bottom-0 left-0 w-36 h-36 bg-gradient-to-tr from-cyan-400/10 to-blue-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-1/3 right-1/4 w-28 h-28 bg-gradient-to-br from-pink-400/8 to-rose-500/12 rounded-full blur-xl animate-pulse" style={{ animationDelay: '4s' }} />
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent" />
       
       <CardHeader className="pb-4 relative">
         <div className="flex items-center justify-between">
