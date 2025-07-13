@@ -13,6 +13,9 @@ import Dashboard from "./pages/Dashboard";
 import SubjectTopics from "./pages/SubjectTopics";
 import Practice from "./pages/Practice";
 import Analytics from "./pages/Analytics";
+import PredictedQuestions from "./pages/PredictedQuestions";
+import PredictedExam from "./pages/PredictedExam";
+import PredictedResults from "./pages/PredictedResults";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -48,6 +51,21 @@ const App = () => (
             <Route path="/analytics" element={
               <ProtectedRoute>
                 <Analytics />
+              </ProtectedRoute>
+            } />
+            <Route path="/predicted-questions" element={
+              <ProtectedRoute>
+                <PredictedQuestions />
+              </ProtectedRoute>
+            } />
+            <Route path="/predicted-exam/:subjectId" element={
+              <ProtectedRoute>
+                <PredictedExam />
+              </ProtectedRoute>
+            } />
+            <Route path="/predicted-results/:subjectId" element={
+              <ProtectedRoute>
+                <PredictedResults />
               </ProtectedRoute>
             } />
             <Route path="*" element={<NotFound />} />
