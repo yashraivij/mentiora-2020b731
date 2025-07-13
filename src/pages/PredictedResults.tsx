@@ -408,50 +408,97 @@ const PredictedResults = () => {
                   </div>
                 </div>
 
-                {/* AI Teacher Feedback - Practice Questions Format */}
-                <div className="bg-gradient-to-br from-primary/5 to-background border border-primary/20 rounded-xl p-6 space-y-4">
-                  <div className="flex justify-between items-start">
-                    <h3 className="text-lg font-bold text-foreground">AI Teacher Feedback</h3>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-primary">
-                        {result.marksAwarded}/{result.question.marks}
-                      </div>
-                      <div className="text-sm text-muted-foreground">marks</div>
-                      <div className="text-sm font-medium text-primary mt-1">
-                        {result.grade}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">Model Answer</h4>
-                    <div className="bg-muted/50 rounded-lg p-3">
-                      <p className="text-sm leading-relaxed">{result.modelAnswer}</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">Why This Gets Full Marks</h4>
-                    <div className="space-y-1">
-                      {result.markingPoints?.map((point, index) => (
-                        <div key={index} className="flex items-start space-x-2">
-                          <span className="text-primary font-medium text-sm">•</span>
-                          <p className="text-sm">{point}</p>
+                {/* Premium AI Teacher Feedback */}
+                <div className="relative overflow-hidden bg-gradient-to-br from-violet-50 via-blue-50 to-indigo-50 dark:from-violet-950/20 dark:via-blue-950/20 dark:to-indigo-950/20 border-2 border-gradient-to-r from-violet-200 to-blue-200 dark:from-violet-800 dark:to-blue-800 rounded-2xl shadow-xl shadow-violet-100/50 dark:shadow-violet-900/20">
+                  {/* Premium background pattern */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-transparent to-blue-500/5 pointer-events-none"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-amber-200/30 to-transparent rounded-full blur-2xl"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-emerald-200/30 to-transparent rounded-full blur-2xl"></div>
+                  
+                  <div className="relative p-8 space-y-6">
+                    <div className="flex justify-between items-start">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-12 h-12 bg-gradient-to-br from-violet-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                          <span className="text-white font-bold text-lg">AI</span>
                         </div>
-                      ))}
+                        <div>
+                          <h3 className="text-xl font-bold bg-gradient-to-r from-violet-600 to-blue-600 bg-clip-text text-transparent">AI Teacher Feedback</h3>
+                          <p className="text-sm text-muted-foreground">Premium Analysis & Marking</p>
+                        </div>
+                      </div>
+                      <div className="text-right bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-white/20">
+                        <div className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                          {result.marksAwarded}/{result.question.marks}
+                        </div>
+                        <div className="text-xs text-muted-foreground font-medium">marks awarded</div>
+                        <div className={`text-sm font-bold mt-2 px-3 py-1 rounded-full ${
+                          result.grade === 'Excellent' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300' :
+                          result.grade === 'Very Good' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300' :
+                          result.grade === 'Good' ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300' :
+                          result.grade === 'Satisfactory' ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300' :
+                          'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300'
+                        }`}>
+                          {result.grade}
+                        </div>
+                      </div>
                     </div>
-                  </div>
 
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">AI Teacher Feedback</h4>
-                    <p className="text-sm leading-relaxed">{result.teacherFeedback}</p>
-                  </div>
+                    <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-xl p-5 border border-emerald-200/50 dark:border-emerald-800/50 shadow-sm">
+                      <h4 className="font-bold text-emerald-800 dark:text-emerald-200 mb-3 flex items-center">
+                        <span className="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-white text-xs font-bold">✓</span>
+                        </span>
+                        Model Answer
+                      </h4>
+                      <div className="bg-white/70 dark:bg-gray-900/70 rounded-lg p-4 backdrop-blur-sm border border-emerald-100 dark:border-emerald-900/50">
+                        <p className="text-sm leading-relaxed text-emerald-900 dark:text-emerald-100">{result.modelAnswer}</p>
+                      </div>
+                    </div>
 
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">Specification Reference</h4>
-                    <p className="text-sm font-medium text-muted-foreground">
-                      {result.specificationPoint}
-                    </p>
+                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 rounded-xl p-5 border border-blue-200/50 dark:border-blue-800/50 shadow-sm">
+                      <h4 className="font-bold text-blue-800 dark:text-blue-200 mb-3 flex items-center">
+                        <span className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-white text-xs font-bold">🎯</span>
+                        </span>
+                        Why This Gets Full Marks
+                      </h4>
+                      <div className="space-y-3">
+                        {result.markingPoints?.map((point, index) => (
+                          <div key={index} className="flex items-start space-x-3 bg-white/70 dark:bg-gray-900/70 rounded-lg p-3 backdrop-blur-sm border border-blue-100 dark:border-blue-900/50">
+                            <span className="w-6 h-6 bg-gradient-to-br from-blue-500 to-indigo-500 text-white text-xs font-bold rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              {index + 1}
+                            </span>
+                            <p className="text-sm text-blue-900 dark:text-blue-100 font-medium">{point}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-purple-50 to-violet-50 dark:from-purple-950/30 dark:to-violet-950/30 rounded-xl p-5 border border-purple-200/50 dark:border-purple-800/50 shadow-sm">
+                      <h4 className="font-bold text-purple-800 dark:text-purple-200 mb-3 flex items-center">
+                        <span className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-white text-xs font-bold">💬</span>
+                        </span>
+                        AI Teacher Feedback
+                      </h4>
+                      <div className="bg-white/70 dark:bg-gray-900/70 rounded-lg p-4 backdrop-blur-sm border border-purple-100 dark:border-purple-900/50">
+                        <p className="text-sm leading-relaxed text-purple-900 dark:text-purple-100 font-medium">{result.teacherFeedback}</p>
+                      </div>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 rounded-xl p-5 border border-amber-200/50 dark:border-amber-800/50 shadow-sm">
+                      <h4 className="font-bold text-amber-800 dark:text-amber-200 mb-3 flex items-center">
+                        <span className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-white text-xs font-bold">📋</span>
+                        </span>
+                        Specification Reference
+                      </h4>
+                      <div className="bg-white/70 dark:bg-gray-900/70 rounded-lg p-4 backdrop-blur-sm border border-amber-100 dark:border-amber-900/50">
+                        <p className="text-sm font-bold text-amber-900 dark:text-amber-100">
+                          {result.specificationPoint}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </CardContent>
