@@ -237,7 +237,7 @@ export const OptimalStudyTimeCard = () => {
               <div className="p-3 rounded-lg bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-950/20 dark:to-purple-950/20 border border-violet-200/50 dark:border-violet-800/30">
                 <div className="flex items-center gap-2 mb-1">
                   <Clock className="h-4 w-4 text-violet-600 dark:text-violet-400" />
-                  <span className="text-sm font-medium text-violet-700 dark:text-violet-300">Coming Soon</span>
+                  <span className="text-sm font-medium text-violet-700 dark:text-violet-300">Smart Insights</span>
                 </div>
                 <p className="text-xs text-violet-600 dark:text-violet-400 leading-relaxed">
                   Discover your peak learning hours with advanced AI pattern recognition
