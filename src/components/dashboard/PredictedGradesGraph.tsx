@@ -29,14 +29,17 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
       try {
         const { data, error } = await supabase
           .from('predicted_exam_completions')
-          .select('*')
+          .select('subject_id, grade, percentage, created_at')
           .eq('user_id', user.id)
-          .order('created_at', { ascending: false });
+          .order('created_at', { ascending: false })
+          .limit(50);
         
         if (error) throw error;
         setPredictedExamCompletions(data || []);
       } catch (error) {
         console.error('Error fetching predicted exam completions:', error);
+        // Set empty array on error so subjects can still show based on practice data
+        setPredictedExamCompletions([]);
       }
     };
 
