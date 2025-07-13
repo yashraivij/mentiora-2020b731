@@ -369,18 +369,6 @@ const PredictedResults = () => {
                       </Badge>
                     )}
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <Badge variant={result.marksAwarded === result.question.marks ? "default" : result.marksAwarded > 0 ? "secondary" : "destructive"}>
-                      {result.marksAwarded}/{result.question.marks} marks
-                    </Badge>
-                    {result.marksAwarded === result.question.marks ? (
-                      <CheckCircle className="h-5 w-5 text-green-600" />
-                    ) : result.marksAwarded > 0 ? (
-                      <Target className="h-5 w-5 text-amber-600" />
-                    ) : (
-                      <XCircle className="h-5 w-5 text-red-600" />
-                    )}
-                  </div>
                 </div>
               </CardHeader>
               
@@ -399,113 +387,77 @@ const PredictedResults = () => {
                   </div>
                 )}
                 
-                <div>
-                  <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                    <span className="mr-2">✅</span>
-                    Model Full Marks Answer:
-                  </h4>
-                  <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-                    <p className="text-sm text-green-800 dark:text-green-200 leading-relaxed">{result.modelAnswer}</p>
-                  </div>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                    <span className="mr-2">🎯</span>
-                    Why It Gets Marks — Assessment Objectives:
-                  </h4>
-                  <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-                    <div className="space-y-2">
-                      {result.aoBreakdown?.map((ao, index) => (
-                        <div key={index} className="flex items-start space-x-2">
-                          <span className="text-blue-600 dark:text-blue-400 font-medium text-sm">•</span>
-                          <p className="text-sm text-blue-800 dark:text-blue-200">{ao}</p>
+                {/* AI Teacher Feedback Section - Match Practice Questions Format */}
+                <div className="bg-gradient-to-br from-primary/5 to-background border border-primary/20 rounded-lg p-6">
+                  <div className="space-y-4">
+                    {/* Header with marks */}
+                    <div className="flex items-center justify-between border-b border-border pb-3">
+                      <h3 className="text-lg font-semibold text-primary">AI Teacher Feedback</h3>
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-foreground">
+                          {result.marksAwarded}/{result.question.marks}
                         </div>
-                      )) || (
-                        <p className="text-sm text-blue-800 dark:text-blue-200">Assessment objectives breakdown not available.</p>
-                      )}
+                        <div className="text-sm text-muted-foreground">marks</div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                    <span className="mr-2">❌</span>
-                    Why Your Answer Lost Marks:
-                  </h4>
-                  <div className="bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
-                    <div className="space-y-2">
-                      {result.missedPoints?.map((point, index) => (
-                        <div key={index} className="flex items-start space-x-2">
-                          <span className="text-red-600 dark:text-red-400 font-medium text-sm">•</span>
-                          <p className="text-sm text-red-800 dark:text-red-200">{point}</p>
-                        </div>
-                      )) || (
-                        <p className="text-sm text-red-800 dark:text-red-200">No specific areas for improvement identified.</p>
-                      )}
+                    
+                    {/* Grade */}
+                    <div className="text-lg font-semibold text-foreground">
+                      {result.marksAwarded === result.question.marks ? "Excellent" :
+                       result.marksAwarded >= result.question.marks * 0.8 ? "Very Good" :
+                       result.marksAwarded >= result.question.marks * 0.6 ? "Good" :
+                       result.marksAwarded >= result.question.marks * 0.4 ? "Satisfactory" : "Needs Improvement"}
                     </div>
-                  </div>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                    <span className="mr-2">🔗</span>
-                    Specification Point Covered:
-                  </h4>
-                  <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
-                    <p className="text-sm text-purple-800 dark:text-purple-200 font-medium">
-                      {result.specificationPoint}
-                    </p>
-                  </div>
-                </div>
-                
-                <div>
-                  <h4 className="font-semibold text-foreground mb-3">Teacher Feedback:</h4>
-                  <div className={`rounded-lg p-4 border ${
-                    result.marksAwarded === result.question.marks 
-                      ? 'bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800'
-                      : result.marksAwarded > 0 
-                        ? 'bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800'
-                        : 'bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800'
-                  }`}>
-                    <div className="space-y-3">
-                      <p className={`font-semibold text-sm ${
-                        result.marksAwarded === result.question.marks 
-                          ? 'text-green-800 dark:text-green-200'
-                          : result.marksAwarded > 0 
-                            ? 'text-amber-800 dark:text-amber-200'
-                            : 'text-red-800 dark:text-red-200'
-                      }`}>
-                        {result.feedback?.summary || "No feedback available"}
-                      </p>
-                      
-                      {result.feedback?.strengths && result.feedback.strengths.length > 0 && (
-                        <div>
-                          <p className="text-xs font-medium text-muted-foreground mb-1">Strengths:</p>
-                          <ul className="text-xs space-y-1">
-                            {result.feedback.strengths.map((strength, index) => (
-                              <li key={index} className="flex items-start space-x-1">
-                                <span className="text-green-600">✓</span>
-                                <span>{strength}</span>
-                              </li>
-                            ))}
-                          </ul>
+                    
+                    {/* Model Answer */}
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-foreground">Model Answer</h4>
+                      <div className="bg-background/50 p-4 rounded-lg border">
+                        <p className="text-sm text-foreground leading-relaxed">{result.modelAnswer}</p>
+                      </div>
+                    </div>
+                    
+                    {/* Why This Gets Full Marks */}
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-foreground">Why This Gets Full Marks</h4>
+                      <div className="bg-background/50 p-4 rounded-lg border">
+                        <div className="space-y-1 text-sm text-foreground">
+                          {result.aoBreakdown?.map((ao, index) => {
+                            // Parse the AO breakdown to show in the practice questions format
+                            const parts = ao.split(" - ");
+                            const marks = parts[0]?.split(":")[1]?.trim() || "1 mark";
+                            const description = parts[1] || parts[0]?.split(":")[1]?.trim() || ao;
+                            return (
+                              <div key={index}>{description} ({marks})</div>
+                            );
+                          }) || <div>Complete answer addressing all key points (1 mark)</div>}
                         </div>
-                      )}
-                      
-                      {result.feedback?.nextSteps && result.feedback.nextSteps.length > 0 && (
-                        <div>
-                          <p className="text-xs font-medium text-muted-foreground mb-1">Next Steps:</p>
-                          <ul className="text-xs space-y-1">
-                            {result.feedback.nextSteps.map((step, index) => (
-                              <li key={index} className="flex items-start space-x-1">
-                                <span className="text-blue-600">→</span>
-                                <span>{step}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
+                      </div>
+                    </div>
+                    
+                    {/* AI Teacher Feedback */}
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-foreground">AI Teacher Feedback</h4>
+                      <div className="bg-background/50 p-4 rounded-lg border">
+                        <p className="text-sm text-foreground leading-relaxed">
+                          {result.marksAwarded === result.question.marks 
+                            ? `Excellent job! You clearly explained all the key concepts and your answer demonstrates strong understanding of the topic. Each point you made aligns well with the correct answer. Keep up the great work!`
+                            : result.marksAwarded >= result.question.marks * 0.7
+                            ? `Good work! You've shown solid understanding and included most key points. To improve further, focus on ${result.missedPoints?.slice(0, 2).join(" and ").toLowerCase() || "adding more detail"}.`
+                            : result.marksAwarded > 0
+                            ? `You're on the right track and have shown some understanding. To improve, focus on ${result.missedPoints?.slice(0, 2).join(" and ").toLowerCase() || "using more scientific terminology"}. Try to include more detailed explanations and specific examples.`
+                            : `This question needs more work. Make sure you ${result.missedPoints?.slice(0, 2).join(" and ").toLowerCase() || "provide a detailed answer"}. Focus on using scientific terminology and explaining your reasoning clearly.`
+                          }
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Specification Reference */}
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-foreground">Specification Reference</h4>
+                      <div className="bg-background/50 p-4 rounded-lg border">
+                        <p className="text-sm text-muted-foreground">{result.specificationPoint}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
