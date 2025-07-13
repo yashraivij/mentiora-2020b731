@@ -20,63 +20,24 @@ const PredictedQuestions = () => {
     fetchCompletedExams();
   }, []);
 
-  // Aggressive refresh when page becomes visible - ensures buttons appear after completing exams
+  // Refetch completed exams when the page becomes visible again
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (!document.hidden) {
-        console.log('Page became visible - refreshing completed exams');
         fetchCompletedExams();
       }
     };
 
     const handleFocus = () => {
-      console.log('Window focused - refreshing completed exams');
-      fetchCompletedExams();
-    };
-
-    const handlePageShow = () => {
-      console.log('Page shown - refreshing completed exams');
       fetchCompletedExams();
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('focus', handleFocus);
-    window.addEventListener('pageshow', handlePageShow);
 
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('focus', handleFocus);
-      window.removeEventListener('pageshow', handlePageShow);
-    };
-  }, []);
-
-  // Auto-refresh every 5 seconds to catch new completions immediately
-  useEffect(() => {
-    const interval = setInterval(() => {
-      console.log('🔄 Auto-refresh: checking for new exam completions');
-      fetchCompletedExams();
-    }, 5000); // Check every 5 seconds
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // Also refresh when user comes back to the page
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      console.log('🚪 User leaving page');
-    };
-
-    const handleLoad = () => {
-      console.log('🔄 Page loaded - fetching completions');
-      fetchCompletedExams();
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    window.addEventListener('load', handleLoad);
-
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-      window.removeEventListener('load', handleLoad);
     };
   }, []);
 
@@ -88,117 +49,31 @@ const PredictedQuestions = () => {
         return;
       }
 
-      console.log('🔍 Fetching ALL predicted exam completions for user:', user.id);
-
-      // Get ALL completions with no filters to ensure we don't miss anything
+      // Optimized query - only get what we need and limit results
       const { data, error } = await supabase
         .from('predicted_exam_completions')
-        .select('*') // Get ALL columns to see what data exists
+        .select('subject_id, grade, percentage, completed_at, questions, answers, time_taken_seconds')
         .eq('user_id', user.id)
-        .order('completed_at', { ascending: false });
+        .order('completed_at', { ascending: false })
+        .limit(10); // Only get recent completions
 
       if (error) {
-        console.error('❌ Database error:', error);
+        console.error('Database error:', error);
         setLoading(false);
         return;
       }
 
-      console.log('📊 FULL RAW DATA from database:', data);
-      console.log('🔢 Total records found:', data?.length || 0);
-      
-      if (data && data.length > 0) {
-        console.log('📋 All subject IDs in database:', [...new Set(data.map(d => d.subject_id))]);
-        console.log('📚 Curriculum subject IDs:', curriculum.map(s => s.id));
-        
-        // Log each completion with details
-        data.forEach((completion, index) => {
-          console.log(`📝 Completion ${index + 1}:`, {
-            subject_id: completion.subject_id,
-            grade: completion.grade,
-            percentage: completion.percentage,
-            completed_at: completion.completed_at
-          });
-        });
-      }
-
-      // Create a comprehensive mapping for ALL possible subject variations
-      const createSubjectMapping = () => {
-        const mapping: {[key: string]: string} = {};
-        
-        // For each curriculum subject, add ALL possible variations
-        curriculum.forEach(subject => {
-          const id = subject.id;
-          mapping[id] = id; // Exact match
-          mapping[id.toLowerCase()] = id; // Lowercase
-          mapping[id.toUpperCase()] = id; // Uppercase
-          mapping[id.replace('-', '')] = id; // No hyphens
-          mapping[id.replace('-', '_')] = id; // Underscores instead of hyphens
-          
-          // Special cases
-          if (id === 'maths') {
-            mapping['mathematics'] = id;
-            mapping['math'] = id;
-            mapping['Math'] = id;
-            mapping['Mathematics'] = id;
-            mapping['MATHS'] = id;
-            mapping['MATHEMATICS'] = id;
-          }
-          if (id === 'english-language') {
-            mapping['english_language'] = id;
-            mapping['englishlanguage'] = id;
-            mapping['English Language'] = id;
-            mapping['english language'] = id;
-          }
-          if (id === 'english-literature') {
-            mapping['english_literature'] = id;
-            mapping['englishliterature'] = id;
-            mapping['English Literature'] = id;
-            mapping['english literature'] = id;
-          }
-          if (id === 'computer-science') {
-            mapping['computer_science'] = id;
-            mapping['computerscience'] = id;
-            mapping['Computer Science'] = id;
-            mapping['computer science'] = id;
-          }
-        });
-        
-        console.log('🗺️ Subject ID mapping created:', mapping);
-        return mapping;
-      };
-
-      const subjectMapping = createSubjectMapping();
-
-      // Process completions with aggressive mapping
+      // Group by subject, keeping the latest completion for each
       const completions: {[key: string]: any} = {};
       data?.forEach(completion => {
-        const rawSubjectId = completion.subject_id;
-        const mappedSubjectId = subjectMapping[rawSubjectId] || rawSubjectId;
-        
-        console.log(`🔄 Mapping: "${rawSubjectId}" -> "${mappedSubjectId}"`);
-        
-        // Check if this mapped subject exists in curriculum
-        const curriculumSubject = curriculum.find(s => s.id === mappedSubjectId);
-        if (curriculumSubject) {
-          const currentCompletion = completions[mappedSubjectId];
-          if (!currentCompletion || new Date(completion.completed_at) > new Date(currentCompletion.completed_at)) {
-            completions[mappedSubjectId] = {
-              ...completion,
-              subject_id: mappedSubjectId // Use the mapped subject ID
-            };
-            console.log(`✅ Added completion for ${mappedSubjectId}:`, completion.grade, completion.percentage + '%');
-          }
-        } else {
-          console.warn(`⚠️ Subject "${mappedSubjectId}" not found in curriculum`);
+        if (!completions[completion.subject_id]) {
+          completions[completion.subject_id] = completion;
         }
       });
 
-      console.log('🎯 Final processed completions:', Object.keys(completions));
-      console.log('📈 Completion details:', completions);
-      
       setCompletedExams(completions);
     } catch (error) {
-      console.error('💥 Error fetching completed exams:', error);
+      console.error('Error fetching completed exams:', error);
     } finally {
       setLoading(false);
     }
@@ -213,7 +88,7 @@ const PredictedQuestions = () => {
       chemistry: "from-green-500 to-emerald-600",
       biology: "from-emerald-500 to-green-600", 
       physics: "from-blue-500 to-indigo-600",
-      maths: "from-purple-500 to-indigo-600",  // Updated to use "maths"
+      mathematics: "from-purple-500 to-indigo-600",
       "english-language": "from-rose-500 to-pink-600",
       "english-literature": "from-pink-500 to-rose-600",
       history: "from-amber-500 to-orange-600",
@@ -229,7 +104,7 @@ const PredictedQuestions = () => {
       chemistry: "1h 45min",
       biology: "1h 45min",
       physics: "1h 45min", 
-      maths: "1h 30min",  // Updated to use "maths"
+      mathematics: "1h 30min",
       "english-language": "1h 45min",
       "english-literature": "1h 45min",
       history: "1h 15min",
