@@ -64,7 +64,7 @@ const SubjectTopics = () => {
         if (error) {
           console.error('Error loading completed exams:', error);
         } else {
-          console.log('Found completed exams:', data?.length || 0);
+          console.log('Found completed exams for', subjectId, ':', data?.length || 0);
           setCompletedExams(data || []);
         }
       } catch (error) {
@@ -73,6 +73,27 @@ const SubjectTopics = () => {
     };
 
     loadCompletedExams();
+    
+    // Also reload when page becomes visible or focused
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        console.log('Page became visible, reloading completed exams for', subjectId);
+        loadCompletedExams();
+      }
+    };
+
+    const handleFocus = () => {
+      console.log('Window focused, reloading completed exams for', subjectId);
+      loadCompletedExams();
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', handleFocus);
+    };
   }, [user?.id, subjectId]);
 
   const getSubjectColor = (subjectId: string | undefined) => {
