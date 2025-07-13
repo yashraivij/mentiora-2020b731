@@ -335,15 +335,15 @@ const PredictedResults = () => {
         <Card className="max-w-md w-full">
           <CardHeader className="text-center">
             <Clock className="h-16 w-16 text-blue-500 mx-auto mb-4 animate-pulse" />
-            <CardTitle className="text-foreground">Marking Your Exam</CardTitle>
+            <CardTitle className="text-foreground">Marking Your Predicted 2026 Exam</CardTitle>
             <CardDescription className="text-muted-foreground">
-              Using the same AI marking system as Practice Questions...
+              AI is analyzing your answers with premium marking intelligence...
             </CardDescription>
           </CardHeader>
           <CardContent className="text-center space-y-4">
             <div className="space-y-2">
               <div className="text-lg font-medium text-foreground">
-                AI is analyzing each answer with AQA mark schemes
+                Applying AQA mark schemes with advanced AI analysis
               </div>
               <Progress value={100} className="w-full animate-pulse" />
             </div>
@@ -353,10 +353,26 @@ const PredictedResults = () => {
     );
   }
 
-  // Calculate total marks
+  // Calculate total marks and grade
   const totalMarks = questions.reduce((sum: number, q: ExamQuestion) => sum + q.marks, 0);
   const achievedMarks = attempts.reduce((sum: number, attempt: QuestionAttempt) => sum + attempt.score, 0);
   const percentage = totalMarks > 0 ? Math.round((achievedMarks / totalMarks) * 100) : 0;
+
+  // Calculate GCSE grade based on percentage
+  const getGCSEGrade = (percentage: number): string => {
+    if (percentage >= 90) return "9";
+    if (percentage >= 80) return "8";
+    if (percentage >= 70) return "7";
+    if (percentage >= 60) return "6";
+    if (percentage >= 50) return "5";
+    if (percentage >= 40) return "4";
+    if (percentage >= 30) return "3";
+    if (percentage >= 20) return "2";
+    if (percentage >= 10) return "1";
+    return "U";
+  };
+
+  const grade = getGCSEGrade(percentage);
 
   return (
     <div className="min-h-screen bg-background">
@@ -395,12 +411,29 @@ const PredictedResults = () => {
 
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto space-y-8">
+          {/* Grade Display Banner */}
+          <Card className="bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white border-0">
+            <CardContent className="py-8">
+              <div className="text-center space-y-4">
+                <div className="text-6xl font-bold">
+                  Grade {grade}
+                </div>
+                <div className="text-xl">
+                  {achievedMarks}/{totalMarks} marks ({percentage}%)
+                </div>
+                <div className="text-lg opacity-90">
+                  {subject?.name} Predicted 2026 Exam
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Results Summary */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Crown className="h-5 w-5 text-yellow-500" />
-                Exam Results Summary
+                Detailed Results Breakdown
               </CardTitle>
             </CardHeader>
             <CardContent>

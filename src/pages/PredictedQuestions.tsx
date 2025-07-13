@@ -23,15 +23,24 @@ const PredictedQuestions = () => {
   const fetchCompletedExams = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+      if (!user) {
+        setLoading(false);
+        return;
+      }
 
+      // Optimized query - only get what we need and limit results
       const { data, error } = await supabase
         .from('predicted_exam_completions')
-        .select('*')
+        .select('subject_id, grade, percentage, completed_at, questions, answers, time_taken_seconds')
         .eq('user_id', user.id)
-        .order('completed_at', { ascending: false });
+        .order('completed_at', { ascending: false })
+        .limit(10); // Only get recent completions
 
-      if (error) throw error;
+      if (error) {
+        console.error('Database error:', error);
+        setLoading(false);
+        return;
+      }
 
       // Group by subject, keeping the latest completion for each
       const completions: {[key: string]: any} = {};
@@ -159,8 +168,8 @@ const PredictedQuestions = () => {
         {/* Subject Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {curriculum.map((subject) => {
-            const completion = completedExams[subject.id];
-            const isCompleted = !!completion;
+            const completion = loading ? null : completedExams[subject.id];
+            const isCompleted = !loading && !!completion;
             
             return (
               <Card 
