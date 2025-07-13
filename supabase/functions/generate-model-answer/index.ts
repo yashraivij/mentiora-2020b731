@@ -31,10 +31,13 @@ CRITICAL REQUIREMENTS:
 4. Structure the answer clearly and logically
 5. Include specific facts, figures, equations, or examples as needed
 6. Match the mark allocation (${marks} marks total)
+7. Write in PLAIN TEXT only - NO LaTeX formatting, NO mathematical symbols like \\( \\), \\[ \\], or \\frac{}{}
+8. Use simple fractions like 9/20 instead of complex formatting
+9. Write equations and mathematical expressions in simple text format
 
 SUBJECT CONTEXT: ${subjectId}
 
-Write as if you are the student giving the perfect answer. Do not explain what to include - just give the actual answer content.`;
+Write as if you are the student giving the perfect answer. Do not explain what to include - just give the actual answer content. Keep all mathematical notation simple and readable.`;
 
     const userPrompt = `Question: ${question}
 
