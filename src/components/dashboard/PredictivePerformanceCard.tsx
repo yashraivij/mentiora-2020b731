@@ -3,6 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Lock, Crown, LineChart, Star, Trophy } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
+import { useEffect, useState } from "react";
 
 interface UserProgress {
   subjectId: string;
@@ -17,6 +20,30 @@ interface PredictivePerformanceCardProps {
 }
 
 export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanceCardProps) => {
+  const { user } = useAuth();
+  const [predictedExamCompletions, setPredictedExamCompletions] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchPredictedExamCompletions = async () => {
+      if (!user) return;
+      
+      try {
+        const { data, error } = await supabase
+          .from('predicted_exam_completions')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('created_at', { ascending: false });
+        
+        if (error) throw error;
+        setPredictedExamCompletions(data || []);
+      } catch (error) {
+        console.error('Error fetching predicted exam completions:', error);
+      }
+    };
+
+    fetchPredictedExamCompletions();
+  }, [user]);
+
   const getSubjectProgress = (subjectId: string) => {
     const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
     
@@ -30,6 +57,68 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
     
     const totalScore = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
     return Math.round(totalScore / totalTopics);
+  };
+
+  const getPredictedGradeNumber = (gradeString: string): number => {
+    if (gradeString === 'U') return 0;
+    return parseInt(gradeString) || 0;
+  };
+
+  const getConfidenceLevel = (percentage: number, attempts: number) => {
+    if (attempts < 5) return "Low";
+    if (attempts < 15) return "Medium";
+    if (attempts < 30) return "High";
+    return "Very High";
+  };
+
+  const calculateCombinedGrade = (subjectId: string) => {
+    // Get practice progress
+    const practicePercentage = getSubjectProgress(subjectId);
+    const practiceGrade = getPredictedGrade(practicePercentage);
+    
+    // Get most recent predicted exam completion for this subject
+    const recentExamCompletion = predictedExamCompletions
+      .filter(completion => completion.subject_id === subjectId)
+      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
+    
+    // If no practice data and no exam completion, don't show subject
+    const hasPracticeData = userProgress.some(p => p.subjectId === subjectId);
+    if (!hasPracticeData && !recentExamCompletion) {
+      return null;
+    }
+    
+    // If only exam completion, use that grade
+    if (!hasPracticeData && recentExamCompletion) {
+      return {
+        grade: Math.max(1, getPredictedGradeNumber(recentExamCompletion.grade)),
+        percentage: recentExamCompletion.percentage
+      };
+    }
+    
+    // If only practice data, use that
+    if (hasPracticeData && !recentExamCompletion) {
+      return {
+        grade: practiceGrade,
+        percentage: practicePercentage
+      };
+    }
+    
+    // If both exist, combine with weighted average (predicted exam has more weight - 70%)
+    if (hasPracticeData && recentExamCompletion) {
+      const examGrade = getPredictedGradeNumber(recentExamCompletion.grade);
+      const examWeight = 0.7;
+      const practiceWeight = 0.3;
+      
+      const combinedGrade = Math.round((examGrade * examWeight) + (practiceGrade * practiceWeight));
+      const combinedPercentage = Math.round((recentExamCompletion.percentage * examWeight) + (practicePercentage * practiceWeight));
+      
+      return {
+        grade: Math.max(1, combinedGrade), // Ensure at least grade 1
+        percentage: combinedPercentage
+      };
+    }
+    
+    return null;
   };
 
   const getPredictedGrade = (percentage: number) => {
@@ -58,16 +147,19 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
 
   const getSubjectsWithPredictions = () => {
     return curriculum.map(subject => {
-      const percentage = getSubjectProgress(subject.id);
-      const grade = getPredictedGrade(percentage);
+      const combinedResult = calculateCombinedGrade(subject.id);
+      
+      if (!combinedResult) {
+        return null;
+      }
       
       return {
         ...subject,
-        percentage,
-        grade,
-        hasData: userProgress.some(p => p.subjectId === subject.id)
+        percentage: combinedResult.percentage,
+        grade: combinedResult.grade,
+        hasData: true
       };
-    }).filter(subject => subject.hasData).slice(0, 5); // Show top 5 subjects
+    }).filter(subject => subject !== null).slice(0, 5); // Show top 5 subjects
   };
 
   const subjects = getSubjectsWithPredictions();
