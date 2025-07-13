@@ -53,6 +53,7 @@ const SubjectTopics = () => {
       if (!user?.id || !subjectId) return;
       
       try {
+        console.log('Loading completed exams for subject:', subjectId, 'user:', user.id);
         const { data, error } = await supabase
           .from('predicted_exam_completions')
           .select('id, subject_id, percentage, grade, completed_at, achieved_marks, total_marks')
@@ -63,6 +64,7 @@ const SubjectTopics = () => {
         if (error) {
           console.error('Error loading completed exams:', error);
         } else {
+          console.log('Found completed exams:', data?.length || 0);
           setCompletedExams(data || []);
         }
       } catch (error) {
