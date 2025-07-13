@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Crown, Star, Sparkles, Target, Clock, BookOpen } from "lucide-react";
+import { Crown, Star, Sparkles, Target, Clock, BookOpen, Zap, Trophy, Rocket } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { CountdownTimer } from "./CountdownTimer";
 
@@ -14,101 +14,135 @@ export const PredictedQuestionsSection = () => {
 
   return (
     <div className="mb-8 space-y-6">
-      {/* Countdown Timer */}
-      <CountdownTimer />
-      
-      {/* Main Predicted Questions Card */}
-      <Card className="relative overflow-hidden border-primary/20 bg-gradient-to-br from-primary/5 via-background to-primary/5 shadow-lg">
-        {/* Premium Sparkle Effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent opacity-50" />
-        <div className="absolute top-4 right-4">
-          <Crown className="h-6 w-6 text-amber-500" />
+      {/* Main Premium Feature Card */}
+      <div className="relative overflow-hidden rounded-3xl">
+        {/* Animated Background Gradients */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 opacity-90" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 opacity-80 animate-pulse" />
+        <div className="absolute inset-0 bg-gradient-to-bl from-indigo-600 via-purple-500 to-pink-500 opacity-70" />
+        
+        {/* Floating Sparkles */}
+        <div className="absolute top-4 left-4 animate-bounce">
+          <Sparkles className="h-6 w-6 text-yellow-300" />
+        </div>
+        <div className="absolute top-8 right-8 animate-pulse">
+          <Crown className="h-8 w-8 text-yellow-400" />
+        </div>
+        <div className="absolute bottom-8 left-8 animate-bounce delay-300">
+          <Trophy className="h-6 w-6 text-yellow-300" />
         </div>
         
-        <CardHeader className="relative">
-          <div className="flex items-center space-x-3">
-            <div className="p-3 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl border border-primary/20">
-              <Target className="h-6 w-6 text-primary" />
+        <div className="relative backdrop-blur-sm bg-white/10 border border-white/20 shadow-2xl">
+          <CardHeader className="pb-6">
+            <div className="flex items-start justify-between">
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <div className="p-3 bg-gradient-to-br from-yellow-400/30 to-orange-400/30 rounded-2xl border border-yellow-400/30 backdrop-blur-sm">
+                    <Rocket className="h-8 w-8 text-white" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-3xl font-bold text-white mb-2">
+                      Predicted 2026 Questions
+                    </CardTitle>
+                    <CardDescription className="text-white/90 text-lg">
+                      Premium AI-powered exam simulation
+                    </CardDescription>
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-3">
+                  <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold px-3 py-1 hover:from-yellow-300 hover:to-orange-300">
+                    <Crown className="h-3 w-3 mr-1" />
+                    PREMIUM EXCLUSIVE
+                  </Badge>
+                  <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
+                    <Zap className="h-3 w-3 mr-1" />
+                    Weekly Updates
+                  </Badge>
+                </div>
+              </div>
+              
+              {/* Compact Countdown Timer */}
+              <div className="hidden md:block">
+                <CountdownTimer />
+              </div>
             </div>
-            <div>
-              <CardTitle className="text-2xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-                Predicted 2026 Questions
-              </CardTitle>
-              <CardDescription className="text-base">
-                Premium exam simulation with real GCSE structure
-              </CardDescription>
-            </div>
-          </div>
+          </CardHeader>
           
-          <div className="flex items-center space-x-2 mt-4">
-            <Badge variant="secondary" className="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800">
-              <Sparkles className="h-3 w-3 mr-1" />
-              Premium Feature
-            </Badge>
-            <Badge variant="outline" className="text-muted-foreground">
-              <Star className="h-3 w-3 mr-1" />
-              Weekly Updates
-            </Badge>
-          </div>
-        </CardHeader>
-        
-        <CardContent className="relative">
-          <div className="space-y-6">
-            {/* Feature Highlights */}
+          <CardContent className="space-y-6">
+            {/* Mobile Countdown */}
+            <div className="md:hidden">
+              <CountdownTimer />
+            </div>
+            
+            {/* Premium Features Grid */}
             <div className="grid md:grid-cols-3 gap-4">
-              <div className="flex items-center space-x-3 p-4 bg-background/60 dark:bg-card/60 backdrop-blur-sm rounded-xl border border-border">
-                <Clock className="h-5 w-5 text-primary" />
-                <div>
-                  <p className="font-semibold text-sm">Real Exam Timer</p>
-                  <p className="text-xs text-muted-foreground">Authentic time pressure</p>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 hover:bg-white/20 transition-all duration-300">
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-gradient-to-br from-blue-400/30 to-cyan-400/30 rounded-xl">
+                    <Clock className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-white text-sm">Real Exam Timer</p>
+                    <p className="text-white/80 text-xs">Authentic pressure simulation</p>
+                  </div>
                 </div>
               </div>
               
-              <div className="flex items-center space-x-3 p-4 bg-background/60 dark:bg-card/60 backdrop-blur-sm rounded-xl border border-border">
-                <BookOpen className="h-5 w-5 text-primary" />
-                <div>
-                  <p className="font-semibold text-sm">AQA Structure</p>
-                  <p className="text-xs text-muted-foreground">Exact paper format</p>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 hover:bg-white/20 transition-all duration-300">
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-gradient-to-br from-green-400/30 to-emerald-400/30 rounded-xl">
+                    <BookOpen className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-white text-sm">AQA Structure</p>
+                    <p className="text-white/80 text-xs">Exact 2026 format</p>
+                  </div>
                 </div>
               </div>
               
-              <div className="flex items-center space-x-3 p-4 bg-background/60 dark:bg-card/60 backdrop-blur-sm rounded-xl border border-border">
-                <Target className="h-5 w-5 text-primary" />
-                <div>
-                  <p className="font-semibold text-sm">Expert Marking</p>
-                  <p className="text-xs text-muted-foreground">Detailed AO feedback</p>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 hover:bg-white/20 transition-all duration-300">
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-gradient-to-br from-purple-400/30 to-pink-400/30 rounded-xl">
+                    <Target className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-white text-sm">AI Marking</p>
+                    <p className="text-white/80 text-xs">Instant expert feedback</p>
+                  </div>
                 </div>
               </div>
             </div>
             
             {/* Weekly Update Notice */}
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border border-blue-200/50 dark:border-blue-800/30 rounded-xl p-4">
+            <div className="bg-gradient-to-r from-white/15 to-white/10 border border-white/30 rounded-2xl p-4 backdrop-blur-sm">
               <div className="flex items-center space-x-3">
-                <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                  <Sparkles className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                <div className="p-2 bg-gradient-to-br from-yellow-400/30 to-orange-400/30 rounded-xl">
+                  <Sparkles className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-blue-800 dark:text-blue-200 text-sm">
-                    New practice paper every week
+                  <p className="font-bold text-white text-sm">
+                    Fresh practice papers every week
                   </p>
-                  <p className="text-blue-600 dark:text-blue-400 text-xs">
-                    Aligned with the latest trends and past paper patterns
+                  <p className="text-white/90 text-xs">
+                    AI-generated content aligned with 2026 exam trends
                   </p>
                 </div>
               </div>
             </div>
             
-            {/* CTA Button */}
+            {/* Premium CTA Button */}
             <Button 
               onClick={handleStartPredicted}
-              className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 text-primary-foreground font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-[1.02]"
+              className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-4 px-8 rounded-2xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300 text-lg"
             >
-              <Crown className="h-4 w-4 mr-2" />
-              Start Predicted Exam Practice
+              <Crown className="h-5 w-5 mr-3" />
+              Start Premium Exam Practice
+              <Sparkles className="h-5 w-5 ml-3" />
             </Button>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </div>
+      </div>
     </div>
   );
 };

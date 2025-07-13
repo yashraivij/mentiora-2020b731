@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Clock, Calendar } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Sparkles } from "lucide-react";
 
 interface TimeLeft {
   days: number;
@@ -38,56 +37,58 @@ export const CountdownTimer = () => {
   }, []);
 
   return (
-    <Card className="border-amber-200/50 dark:border-amber-800/30 bg-gradient-to-br from-amber-50/50 to-orange-50/50 dark:from-amber-950/20 dark:to-orange-950/20 shadow-lg">
-      <CardContent className="p-6">
-        <div className="flex items-center space-x-3 mb-4">
-          <div className="p-2 bg-amber-100 dark:bg-amber-900/30 rounded-xl">
-            <Calendar className="h-5 w-5 text-amber-600 dark:text-amber-400" />
-          </div>
-          <div>
-            <h3 className="text-lg font-bold text-foreground">GCSE 2026 Countdown</h3>
-            <p className="text-sm text-muted-foreground">Until your first exam</p>
-          </div>
+    <div className="relative">
+      {/* Animated Background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 rounded-2xl opacity-20 animate-pulse" />
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-2xl opacity-30 blur-xl" />
+      
+      <div className="relative bg-gradient-to-br from-slate-900/90 via-purple-900/90 to-slate-900/90 backdrop-blur-xl border border-purple-500/30 rounded-2xl p-4 text-white shadow-2xl">
+        <div className="flex items-center justify-center space-x-2 mb-3">
+          <Sparkles className="h-4 w-4 text-yellow-400 animate-pulse" />
+          <span className="text-sm font-bold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+            GCSE 2026 COUNTDOWN
+          </span>
+          <Sparkles className="h-4 w-4 text-yellow-400 animate-pulse" />
         </div>
         
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-4 gap-2">
           <div className="text-center">
-            <div className="bg-gradient-to-b from-amber-100 to-amber-200 dark:from-amber-900/40 dark:to-amber-800/40 rounded-xl p-3 border border-amber-200/50 dark:border-amber-700/50">
-              <div className="text-2xl font-bold text-amber-800 dark:text-amber-200">
+            <div className="bg-gradient-to-b from-purple-400/20 to-purple-600/20 rounded-xl p-2 border border-purple-400/30 backdrop-blur-sm">
+              <div className="text-lg font-bold text-white">
                 {timeLeft.days}
               </div>
-              <div className="text-xs text-amber-600 dark:text-amber-400 font-medium">Days</div>
+              <div className="text-xs text-purple-200 font-medium">Days</div>
             </div>
           </div>
           
           <div className="text-center">
-            <div className="bg-gradient-to-b from-amber-100 to-amber-200 dark:from-amber-900/40 dark:to-amber-800/40 rounded-xl p-3 border border-amber-200/50 dark:border-amber-700/50">
-              <div className="text-2xl font-bold text-amber-800 dark:text-amber-200">
+            <div className="bg-gradient-to-b from-pink-400/20 to-pink-600/20 rounded-xl p-2 border border-pink-400/30 backdrop-blur-sm">
+              <div className="text-lg font-bold text-white">
                 {timeLeft.hours}
               </div>
-              <div className="text-xs text-amber-600 dark:text-amber-400 font-medium">Hours</div>
+              <div className="text-xs text-pink-200 font-medium">Hours</div>
             </div>
           </div>
           
           <div className="text-center">
-            <div className="bg-gradient-to-b from-amber-100 to-amber-200 dark:from-amber-900/40 dark:to-amber-800/40 rounded-xl p-3 border border-amber-200/50 dark:border-amber-700/50">
-              <div className="text-2xl font-bold text-amber-800 dark:text-amber-200">
+            <div className="bg-gradient-to-b from-blue-400/20 to-blue-600/20 rounded-xl p-2 border border-blue-400/30 backdrop-blur-sm">
+              <div className="text-lg font-bold text-white">
                 {timeLeft.minutes}
               </div>
-              <div className="text-xs text-amber-600 dark:text-amber-400 font-medium">Minutes</div>
+              <div className="text-xs text-blue-200 font-medium">Mins</div>
             </div>
           </div>
           
           <div className="text-center">
-            <div className="bg-gradient-to-b from-amber-100 to-amber-200 dark:from-amber-900/40 dark:to-amber-800/40 rounded-xl p-3 border border-amber-200/50 dark:border-amber-700/50">
-              <div className="text-2xl font-bold text-amber-800 dark:text-amber-200">
+            <div className="bg-gradient-to-b from-green-400/20 to-green-600/20 rounded-xl p-2 border border-green-400/30 backdrop-blur-sm">
+              <div className="text-lg font-bold text-white">
                 {timeLeft.seconds}
               </div>
-              <div className="text-xs text-amber-600 dark:text-amber-400 font-medium">Seconds</div>
+              <div className="text-xs text-green-200 font-medium">Secs</div>
             </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
