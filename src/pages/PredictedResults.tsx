@@ -72,7 +72,7 @@ const PredictedResults = () => {
         body: {
           question: question.text || question.question,
           userAnswer: answer,
-          modelAnswer: question.modelAnswer || generateModelAnswer(question.text || question.question || ''),
+          modelAnswer: question.modelAnswer || await generateModelAnswer(question.text || question.question || '', question.marks),
           markingCriteria: question.markingCriteria || generateMarkingCriteria(question.text || question.question || ''),
           totalMarks: question.marks,
           subjectId: subjectId
@@ -183,7 +183,34 @@ const PredictedResults = () => {
     return `${subject.charAt(0).toUpperCase() + subject.slice(1)} Specification`;
   };
 
-  const generateModelAnswer = (questionText: string): string => {
+  const generateModelAnswer = async (questionText: string, marks: number): Promise<string> => {
+    try {
+      console.log('Generating AI model answer for question:', questionText.substring(0, 100) + '...');
+
+      const { data, error } = await supabase.functions.invoke('generate-model-answer', {
+        body: {
+          question: questionText,
+          subjectId: subjectId,
+          marks: marks
+        }
+      });
+
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw error;
+      }
+
+      console.log('AI model answer generated successfully');
+      return data.modelAnswer || generateFallbackModelAnswer(questionText);
+
+    } catch (error) {
+      console.error('Error generating AI model answer:', error);
+      // Fallback to improved static model answer
+      return generateFallbackModelAnswer(questionText);
+    }
+  };
+
+  const generateFallbackModelAnswer = (questionText: string): string => {
     const question = questionText.toLowerCase();
     
     // Generate specific model answers based on question content
@@ -219,8 +246,11 @@ const PredictedResults = () => {
         try {
           const markingResult = await markAnswerWithAI(question, answer.answer);
           
+          // Generate AI model answer for this specific question
+          const aiModelAnswer = await generateModelAnswer(question.text || question.question || '', question.marks);
+          
           const feedback = {
-            modelAnswer: question.modelAnswer || generateModelAnswer(question.text || question.question || ''),
+            modelAnswer: aiModelAnswer,
             whyThisGetsMark: generateMarkingCriteria(question.text || question.question || ''),
             whyYoursDidnt: markingResult.feedback,
             specLink: question.specReference || generateSpecReference(question.text || question.question || '', subjectId || '')
@@ -237,13 +267,15 @@ const PredictedResults = () => {
         } catch (error) {
           console.error('Error marking question:', error);
           
-          // Fallback attempt
+          // Fallback attempt with AI model answer
+          const aiModelAnswer = await generateModelAnswer(question.text || question.question || '', question.marks);
+          
           const attempt: QuestionAttempt = {
             questionId: question.id,
             userAnswer: answer.answer,
             score: 0,
             feedback: {
-              modelAnswer: generateModelAnswer(question.text || question.question || ''),
+              modelAnswer: aiModelAnswer,
               whyThisGetsMark: generateMarkingCriteria(question.text || question.question || ''),
               whyYoursDidnt: "Unable to mark this answer automatically. Please review with your teacher.",
               specLink: generateSpecReference(question.text || question.question || '', subjectId || '')
