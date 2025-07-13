@@ -49,13 +49,14 @@ const PredictedQuestions = () => {
         return;
       }
 
-      // Optimized query - only get what we need and limit results
+      console.log('Fetching completed predicted exams for user:', user.id);
+
+      // Get ALL completions for the user - no limit to ensure we get all subjects
       const { data, error } = await supabase
         .from('predicted_exam_completions')
         .select('subject_id, grade, percentage, completed_at, questions, answers, time_taken_seconds')
         .eq('user_id', user.id)
-        .order('completed_at', { ascending: false })
-        .limit(10); // Only get recent completions
+        .order('completed_at', { ascending: false });
 
       if (error) {
         console.error('Database error:', error);
@@ -63,14 +64,19 @@ const PredictedQuestions = () => {
         return;
       }
 
-      // Group by subject, keeping the latest completion for each
+      console.log('Fetched predicted exam completions:', data?.length || 0, 'records');
+      console.log('Subjects found:', [...new Set(data?.map(d => d.subject_id) || [])]);
+
+      // Group by subject, keeping the LATEST completion for each subject
       const completions: {[key: string]: any} = {};
       data?.forEach(completion => {
-        if (!completions[completion.subject_id]) {
+        const currentCompletion = completions[completion.subject_id];
+        if (!currentCompletion || new Date(completion.completed_at) > new Date(currentCompletion.completed_at)) {
           completions[completion.subject_id] = completion;
         }
       });
 
+      console.log('Grouped completions:', Object.keys(completions));
       setCompletedExams(completions);
     } catch (error) {
       console.error('Error fetching completed exams:', error);
