@@ -80,19 +80,6 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
     <Card className="group relative overflow-hidden border-0 bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 rounded-3xl">
       {/* Premium Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-600 opacity-5 group-hover:opacity-10 transition-opacity duration-500" />
-      
-      {/* Lock Overlay for non-premium users */}
-      <div className="absolute inset-0 bg-background/60 dark:bg-card/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-3xl">
-        <div className="text-center space-y-3">
-          <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
-            <Lock className="h-8 w-8 text-white" />
-          </div>
-          <Button className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:shadow-lg text-white border-0 px-6 py-2 rounded-xl font-semibold transition-all duration-300">
-            <Crown className="h-4 w-4 mr-2" />
-            Unlock
-          </Button>
-        </div>
-      </div>
 
       <CardHeader className="pb-4 relative z-10">
         <div className="flex items-center justify-between">
@@ -102,7 +89,7 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
         </div>
       </CardHeader>
 
-      <CardContent className="relative z-10 group-hover:blur-sm transition-all duration-300">
+      <CardContent className="relative z-10 transition-all duration-300">
         <div className="space-y-3">
           <CardTitle className="text-lg font-bold text-foreground leading-tight">
             Predictive Performance
