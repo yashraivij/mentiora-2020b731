@@ -20,36 +20,24 @@ const PredictedQuestions = () => {
     fetchCompletedExams();
   }, []);
 
-  // Refetch completed exams when the page becomes visible again or component mounts
+  // Refetch completed exams when the page becomes visible again
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (!document.hidden) {
-        console.log('Page became visible, refetching completed exams...');
         fetchCompletedExams();
       }
     };
 
     const handleFocus = () => {
-      console.log('Window focused, refetching completed exams...');
       fetchCompletedExams();
-    };
-
-    // Also refetch when navigating back to this page
-    const handlePageShow = (event: PageTransitionEvent) => {
-      if (event.persisted) {
-        console.log('Page restored from cache, refetching completed exams...');
-        fetchCompletedExams();
-      }
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('focus', handleFocus);
-    window.addEventListener('pageshow', handlePageShow);
 
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('focus', handleFocus);
-      window.removeEventListener('pageshow', handlePageShow);
     };
   }, []);
 
@@ -61,23 +49,19 @@ const PredictedQuestions = () => {
         return;
       }
 
-      console.log('Fetching completed predicted exams for user:', user.id);
-      
-      // Get ALL completions, not just recent ones, to ensure we catch everything
+      // Optimized query - only get what we need and limit results
       const { data, error } = await supabase
         .from('predicted_exam_completions')
-        .select('subject_id, grade, percentage, completed_at, questions, answers, time_taken_seconds, id')
+        .select('subject_id, grade, percentage, completed_at, questions, answers, time_taken_seconds')
         .eq('user_id', user.id)
-        .order('completed_at', { ascending: false });
+        .order('completed_at', { ascending: false })
+        .limit(10); // Only get recent completions
 
       if (error) {
         console.error('Database error:', error);
         setLoading(false);
         return;
       }
-
-      console.log('Fetched predicted exam completions:', data?.length || 0, 'records');
-      console.log('Subjects found:', data?.map(d => d.subject_id).filter((s, i, arr) => arr.indexOf(s) === i));
 
       // Group by subject, keeping the latest completion for each
       const completions: {[key: string]: any} = {};
@@ -87,7 +71,6 @@ const PredictedQuestions = () => {
         }
       });
 
-      console.log('Grouped completions:', Object.keys(completions));
       setCompletedExams(completions);
     } catch (error) {
       console.error('Error fetching completed exams:', error);

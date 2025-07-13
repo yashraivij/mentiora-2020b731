@@ -38,7 +38,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
-      console.log('Fetching predicted exam data for user:', user.id);
       const { data, error } = await supabase
         .from('predicted_exam_completions')
         .select('subject_id, grade, percentage, achieved_marks, total_marks, completed_at')
@@ -50,12 +49,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         return;
       }
 
-      console.log('Raw predicted exam data:', data?.length || 0, 'records');
-      console.log('Subject breakdown:', data?.reduce((acc, item) => {
-        acc[item.subject_id] = (acc[item.subject_id] || 0) + 1;
-        return acc;
-      }, {} as Record<string, number>));
-
       // Group by subject, keeping the latest completion for each
       const latestCompletions: {[key: string]: PredictedExamData} = {};
       data?.forEach(completion => {
@@ -64,7 +57,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         }
       });
 
-      console.log('Latest completions by subject:', Object.keys(latestCompletions));
       setPredictedExamData(Object.values(latestCompletions));
     } catch (error) {
       console.error('Error fetching predicted exam data:', error);
