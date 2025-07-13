@@ -374,86 +374,143 @@ const PredictedResults = () => {
 
   const grade = getGCSEGrade(percentage);
 
+  // Save exam completion to database
+  const saveExamCompletion = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const examData = {
+        user_id: user.id,
+        subject_id: subjectId || '',
+        exam_date: new Date().toISOString().split('T')[0],
+        total_marks: totalMarks,
+        achieved_marks: achievedMarks,
+        percentage: percentage,
+        grade: grade,
+        time_taken_seconds: timeElapsed || 0,
+        questions: JSON.parse(JSON.stringify(questions)),
+        answers: JSON.parse(JSON.stringify(answers)),
+        results: JSON.parse(JSON.stringify(attempts))
+      };
+
+      const { error } = await supabase
+        .from('predicted_exam_completions')
+        .insert(examData);
+
+      if (error) {
+        console.error('Error saving exam completion:', error);
+      } else {
+        console.log('Exam completion saved successfully');
+      }
+    } catch (error) {
+      console.error('Error in saveExamCompletion:', error);
+    }
+  };
+
+  // Save completion when attempts are ready (only if not review mode)
+  useEffect(() => {
+    if (attempts.length > 0 && !isReview) {
+      saveExamCompletion();
+    }
+  }, [attempts]);
+
+  const handleRetryIncorrect = () => {
+    // Get only the questions that were answered incorrectly
+    const incorrectQuestions = questions.filter((q: ExamQuestion, index: number) => {
+      const attempt = attempts.find(a => a.questionId === q.id);
+      return attempt && attempt.score < q.marks;
+    });
+
+    if (incorrectQuestions.length === 0) {
+      toast.success("Congratulations! You got all questions correct!");
+      return;
+    }
+
+    // Navigate to a new exam with only incorrect questions
+    navigate(`/predicted-exam/${subjectId}`, { 
+      state: { 
+        retryQuestions: incorrectQuestions,
+        isRetry: true
+      } 
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-card shadow-sm border-b border-border">
-        <div className="container mx-auto px-4 py-4">
+      {/* Clean Header */}
+      <header className="bg-white dark:bg-card border-b border-border">
+        <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Button variant="outline" onClick={() => navigate('/predicted-questions')}>
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back
-              </Button>
-              <div>
-                <h1 className="text-xl font-bold text-foreground">
-                  {subject?.name} - Predicted Exam Results
-                </h1>
-                <p className="text-sm text-muted-foreground">
-                  Marked using the same AI system as Practice Questions
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-4">
-              <ThemeToggle />
-              <div className="text-right">
-                <div className="text-2xl font-bold text-foreground">
-                  {achievedMarks}/{totalMarks}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  {percentage}%
-                </div>
-              </div>
-            </div>
+            <Button variant="ghost" onClick={() => navigate('/predicted-questions')} className="text-muted-foreground hover:text-foreground">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Predicted Questions
+            </Button>
+            <ThemeToggle />
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto space-y-8">
-          {/* Grade Display Banner */}
-          <Card className="bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white border-0">
-            <CardContent className="py-8">
-              <div className="text-center space-y-4">
-                <div className="text-6xl font-bold">
-                  Grade {grade}
-                </div>
-                <div className="text-xl">
-                  {achievedMarks}/{totalMarks} marks ({percentage}%)
-                </div>
-                <div className="text-lg opacity-90">
-                  {subject?.name} Predicted 2026 Exam
-                </div>
+      <div className="container mx-auto px-6 py-8 max-w-4xl">
+        {/* Clean Results Header */}
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full mb-4">
+            <CheckCircle className="h-10 w-10 text-white" />
+          </div>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Great Job!</h1>
+          <p className="text-lg text-muted-foreground mb-4">You've completed your {subject?.name} predicted exam</p>
+          
+          {/* Score Summary */}
+          <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-6 mb-6">
+            <div className="flex items-center justify-center space-x-8">
+              <div className="text-center">
+                <div className="text-4xl font-bold text-primary">{percentage}%</div>
+                <div className="text-sm text-muted-foreground">Overall Score</div>
               </div>
-            </CardContent>
-          </Card>
+              <div className="text-center">
+                <div className="text-4xl font-bold text-primary">Grade {grade}</div>
+                <div className="text-sm text-muted-foreground">GCSE Grade</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold text-primary">{achievedMarks}/{totalMarks}</div>
+                <div className="text-sm text-muted-foreground">Marks Achieved</div>
+              </div>
+            </div>
+          </div>
 
-          {/* Results Summary */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Crown className="h-5 w-5 text-yellow-500" />
-                Detailed Results Breakdown
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-foreground">{achievedMarks}</div>
-                  <div className="text-sm text-muted-foreground">Marks Achieved</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-foreground">{totalMarks}</div>
-                  <div className="text-sm text-muted-foreground">Total Marks</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-foreground">{percentage}%</div>
-                  <div className="text-sm text-muted-foreground">Percentage</div>
-                </div>
-              </div>
-              <Progress value={percentage} className="mt-4" />
-            </CardContent>
-          </Card>
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
+            <Button 
+              size="lg"
+              className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3"
+              onClick={() => {
+                // Scroll to detailed results section
+                document.getElementById('detailed-results')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              <BookOpen className="h-5 w-5 mr-2" />
+              Review Marking
+            </Button>
+            
+            <Button 
+              size="lg"
+              variant="outline"
+              className="flex-1 border-primary text-primary hover:bg-primary/5 font-semibold py-3"
+              onClick={handleRetryIncorrect}
+            >
+              <RotateCcw className="h-5 w-5 mr-2" />
+              Retry Incorrect
+            </Button>
+          </div>
+        </div>
+
+        {/* Detailed Results Section */}
+        <div id="detailed-results" className="space-y-6">
+          {/* Question by Question Review */}
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-foreground mb-2">📝 Detailed Review & Feedback</h2>
+            <p className="text-muted-foreground">Review your answers with AI marking and model solutions</p>
+          </div>
 
           {/* Question by Question Feedback */}
           {attempts.map((attempt, index) => (
@@ -566,27 +623,31 @@ const PredictedResults = () => {
           ))}
 
           {/* Action Buttons */}
-          <div className="flex justify-center space-x-6 mt-12">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mt-12 max-w-2xl mx-auto">
             <Button 
-              onClick={() => navigate(`/predicted-exam/${subjectId}`)}
-              className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700"
+              onClick={handleRetryIncorrect}
+              className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 font-semibold"
+              size="lg"
             >
               <RotateCcw className="h-5 w-5 mr-2" />
-              Retake This Exam
+              Retry Incorrect Questions Only
+            </Button>
+            <Button 
+              onClick={() => navigate(`/predicted-exam/${subjectId}`)}
+              variant="outline"
+              className="border-primary text-primary hover:bg-primary/5 font-semibold"
+              size="lg"
+            >
+              <BookOpen className="h-5 w-5 mr-2" />
+              Retake Full Exam
             </Button>
             <Button 
               onClick={() => navigate('/predicted-questions')}
-              className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700"
-            >
-              <BookOpen className="h-5 w-5 mr-2" />
-              Try Another Subject
-            </Button>
-            <Button 
-              onClick={() => navigate('/dashboard')} 
-              variant="outline"
+              variant="ghost"
+              className="text-muted-foreground hover:text-foreground"
             >
               <Target className="h-5 w-5 mr-2" />
-              Back to Dashboard
+              Back to Subjects
             </Button>
           </div>
         </div>
