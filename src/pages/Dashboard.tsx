@@ -15,6 +15,7 @@ import { PremiumAnalyticsCard } from "@/components/dashboard/PremiumAnalyticsCar
 import { GoalsSection } from "@/components/dashboard/GoalsSection";
 import { TopicMasteryDisplay } from "@/components/dashboard/TopicMasteryDisplay";
 import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
+import { PredictivePerformanceCard } from "@/components/dashboard/PredictivePerformanceCard";
 import { OptimalStudyTimeCard } from "@/components/dashboard/OptimalStudyTimeCard";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -431,13 +432,7 @@ const Dashboard = () => {
             
             <OptimalStudyTimeCard />
             
-            <PremiumAnalyticsCard
-              title="Predictive Performance"
-              description="Forecast your exam performance based on current learning patterns"
-              icon={LineChart}
-              gradient="from-emerald-500 to-teal-600"
-              comingSoon={true}
-            />
+            <PredictivePerformanceCard userProgress={userProgress} />
             
             <PremiumAnalyticsCard
               title="Learning Velocity"
