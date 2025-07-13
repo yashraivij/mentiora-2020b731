@@ -225,6 +225,54 @@ const PredictedResults = () => {
     return "This answer should demonstrate clear understanding of the key concepts, apply relevant knowledge to the specific context, and use appropriate scientific terminology.";
   };
   
+  // Save exam completion to database
+  const saveExamCompletion = async (markedAttempts: QuestionAttempt[]) => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        console.log('No user found, skipping database save');
+        return;
+      }
+
+      // Calculate results
+      const totalMarks = questions.reduce((sum: number, q: ExamQuestion) => sum + q.marks, 0);
+      const achievedMarks = markedAttempts.reduce((sum: number, attempt: QuestionAttempt) => sum + attempt.score, 0);
+      const percentage = totalMarks > 0 ? Math.round((achievedMarks / totalMarks) * 100) : 0;
+      const grade = getGCSEGrade(percentage);
+
+      const examCompletion = {
+        user_id: user.id,
+        subject_id: subjectId,
+        exam_date: new Date().toISOString().split('T')[0],
+        total_marks: totalMarks,
+        achieved_marks: achievedMarks,
+        percentage: percentage,
+        grade: grade,
+        time_taken_seconds: timeElapsed || 0,
+        questions: questions as any,
+        answers: answers as any,
+        results: markedAttempts as any
+      };
+
+      console.log('Saving exam completion to database:', examCompletion);
+
+      const { error } = await supabase
+        .from('predicted_exam_completions')
+        .insert(examCompletion);
+
+      if (error) {
+        console.error('Database error saving exam completion:', error);
+        toast.error("Failed to save exam results to database");
+      } else {
+        console.log('Exam completion saved successfully');
+        toast.success("Exam results saved successfully!");
+      }
+    } catch (error) {
+      console.error('Error saving exam completion:', error);
+      toast.error("Failed to save exam results");
+    }
+  };
+
   // Mark all answers using same system as Practice.tsx - OPTIMIZED for speed
   const markAllAnswers = async () => {
     console.log('Starting to mark all answers in parallel...');
@@ -312,6 +360,12 @@ const PredictedResults = () => {
       
       console.log('All answers marked in parallel, setting results...', markedAttempts);
       setAttempts(markedAttempts);
+      
+      // Save to database (only if not reviewing existing completion)
+      if (!isReview) {
+        await saveExamCompletion(markedAttempts);
+      }
+      
       toast.success("Exam marked successfully!");
       
     } catch (error) {
