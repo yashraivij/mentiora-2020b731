@@ -50,14 +50,34 @@ const PredictedQuestions = () => {
     };
   }, []);
 
-  // Auto-refresh every 10 seconds to catch new completions
+  // Auto-refresh every 5 seconds to catch new completions immediately
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log('Auto-refresh: checking for new exam completions');
+      console.log('🔄 Auto-refresh: checking for new exam completions');
       fetchCompletedExams();
-    }, 10000);
+    }, 5000); // Check every 5 seconds
 
     return () => clearInterval(interval);
+  }, []);
+
+  // Also refresh when user comes back to the page
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      console.log('🚪 User leaving page');
+    };
+
+    const handleLoad = () => {
+      console.log('🔄 Page loaded - fetching completions');
+      fetchCompletedExams();
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('load', handleLoad);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('load', handleLoad);
+    };
   }, []);
 
   const fetchCompletedExams = async () => {
