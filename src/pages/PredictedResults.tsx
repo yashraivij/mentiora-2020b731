@@ -43,7 +43,7 @@ const PredictedResults = () => {
     return null;
   }
 
-  // Generate marking and feedback for each question - improved marking system with AO breakdown
+  // Generate marking and feedback for each question - improved marking system with proper mark allocation
   const generateMarking = (question: ExamQuestion, answer: ExamAnswer) => {
     const studentAnswer = answer.answer.toLowerCase().trim();
     
@@ -52,7 +52,7 @@ const PredictedResults = () => {
         marksAwarded: 0, 
         feedback: "No answer provided", 
         modelAnswer: generateModelAnswer(question),
-        aoBreakdown: [],
+        markBreakdown: [`No response given (0 marks)`],
         missedPoints: ["No response given"],
         specificationPoint: getSpecificationPoint(question)
       };
@@ -61,68 +61,132 @@ const PredictedResults = () => {
     // Analyze student answer quality
     const wordCount = studentAnswer.split(/\s+/).length;
     const hasScientificTerms = /\b(energy|force|momentum|reaction|element|cell|gene|equation|graph|data|temperature|pressure|volume|density|mass|weight|velocity|acceleration|current|voltage|resistance|atom|molecule|compound|mixture|solution|acid|base|alkali|salt|oxidation|reduction|catalyst|enzyme|mitosis|meiosis|photosynthesis|respiration|ecosystem|biodiversity|evolution|inheritance|variation|homeostasis|reflex|hormone|nervous|circulatory|digestive|respiratory|excretory|reproductive|skeletal|muscular|hypothesis|theory|experiment|variable|control|method|conclusion|analysis|evaluation|calculate|explain|describe|compare|discuss)\b/gi.test(studentAnswer);
-    const hasDetailedExplanation = wordCount >= 20;
+    const hasDetailedExplanation = wordCount >= 15;
     const hasExamples = /\b(example|such as|for instance|like|including)\b/gi.test(studentAnswer);
     const hasStructure = /\b(firstly|secondly|finally|because|therefore|however|furthermore|in conclusion)\b/gi.test(studentAnswer);
     const hasCalculations = /\b(\d+|\+|\-|\*|\/|=|formula|equation)\b/gi.test(studentAnswer);
     
-    // Assessment Objectives breakdown
-    const aoBreakdown = [];
+    // Mark breakdown based on question marks
+    const markBreakdown = [];
     let marksAwarded = 0;
     const missedPoints = [];
     
-    // AO1: Knowledge and Understanding (40% of marks)
-    const ao1Marks = Math.ceil(question.marks * 0.4);
-    let ao1Awarded = 0;
-    if (hasScientificTerms) {
-      ao1Awarded = Math.min(ao1Marks, Math.ceil(ao1Marks * 0.8));
-      aoBreakdown.push(`AO1: ${ao1Awarded}/${ao1Marks} marks - Key terminology identified`);
+    // Distribute marks based on question value
+    if (question.marks === 1) {
+      if (hasScientificTerms || hasDetailedExplanation) {
+        marksAwarded = 1;
+        markBreakdown.push("Key point identified (1 mark)");
+      } else {
+        markBreakdown.push("Missing key scientific terminology (0 marks)");
+        missedPoints.push("Key scientific terms not used");
+      }
+    } else if (question.marks === 2) {
+      if (hasScientificTerms) {
+        marksAwarded += 1;
+        markBreakdown.push("Key terminology used (1 mark)");
+      } else {
+        missedPoints.push("Missing key scientific terminology");
+      }
+      
+      if (hasDetailedExplanation) {
+        marksAwarded += 1;
+        markBreakdown.push("Clear explanation provided (1 mark)");
+      } else {
+        missedPoints.push("Lacks detailed explanation");
+      }
+    } else if (question.marks === 3) {
+      if (hasScientificTerms) {
+        marksAwarded += 1;
+        markBreakdown.push("Key terminology identified (1 mark)");
+      } else {
+        missedPoints.push("Missing key scientific terminology");
+      }
+      
+      if (hasDetailedExplanation) {
+        marksAwarded += 1;
+        markBreakdown.push("Detailed explanation given (1 mark)");
+      } else {
+        missedPoints.push("Insufficient explanation");
+      }
+      
+      if (hasExamples || hasCalculations) {
+        marksAwarded += 1;
+        markBreakdown.push("Examples or calculations included (1 mark)");
+      } else {
+        missedPoints.push("No examples or calculations provided");
+      }
+    } else if (question.marks === 4) {
+      if (hasScientificTerms) {
+        marksAwarded += 1;
+        markBreakdown.push("Key terminology identified (1 mark)");
+      } else {
+        missedPoints.push("Missing key scientific terminology");
+      }
+      
+      if (hasDetailedExplanation) {
+        marksAwarded += 1;
+        markBreakdown.push("Detailed explanation provided (1 mark)");
+      } else {
+        missedPoints.push("Lacks detailed explanation");
+      }
+      
+      if (hasExamples || hasCalculations) {
+        marksAwarded += 1;
+        markBreakdown.push("Examples or calculations included (1 mark)");
+      } else {
+        missedPoints.push("No specific examples given");
+      }
+      
+      if (hasStructure && wordCount >= 25) {
+        marksAwarded += 1;
+        markBreakdown.push("Well-structured response with evaluation (1 mark)");
+      } else {
+        missedPoints.push("Poor structure or limited evaluation");
+      }
     } else {
-      aoBreakdown.push(`AO1: 0/${ao1Marks} marks - Missing key scientific terminology`);
-      missedPoints.push("Key scientific terms not used");
+      // For higher mark questions, distribute proportionally
+      const termMarks = Math.ceil(question.marks * 0.3);
+      const explanationMarks = Math.ceil(question.marks * 0.4);
+      const exampleMarks = Math.floor(question.marks * 0.2);
+      const structureMarks = question.marks - termMarks - explanationMarks - exampleMarks;
+      
+      if (hasScientificTerms) {
+        marksAwarded += termMarks;
+        markBreakdown.push(`Key terminology identified (${termMarks} mark${termMarks > 1 ? 's' : ''})`);
+      } else {
+        missedPoints.push("Missing key scientific terminology");
+      }
+      
+      if (hasDetailedExplanation) {
+        marksAwarded += explanationMarks;
+        markBreakdown.push(`Detailed explanation provided (${explanationMarks} mark${explanationMarks > 1 ? 's' : ''})`);
+      } else {
+        missedPoints.push("Lacks detailed explanation");
+      }
+      
+      if (hasExamples || hasCalculations) {
+        marksAwarded += exampleMarks;
+        markBreakdown.push(`Examples or calculations included (${exampleMarks} mark${exampleMarks > 1 ? 's' : ''})`);
+      } else {
+        missedPoints.push("No specific examples given");
+      }
+      
+      if (hasStructure && wordCount >= 30) {
+        marksAwarded += structureMarks;
+        markBreakdown.push(`Well-structured response (${structureMarks} mark${structureMarks > 1 ? 's' : ''})`);
+      } else {
+        missedPoints.push("Poor structure or evaluation");
+      }
     }
-    marksAwarded += ao1Awarded;
     
-    // AO2: Application and Analysis (40% of marks)
-    const ao2Marks = Math.ceil(question.marks * 0.4);
-    let ao2Awarded = 0;
-    if (hasDetailedExplanation && (hasExamples || hasCalculations)) {
-      ao2Awarded = Math.min(ao2Marks, Math.ceil(ao2Marks * 0.9));
-      aoBreakdown.push(`AO2: ${ao2Awarded}/${ao2Marks} marks - Good application and explanation`);
-    } else if (hasDetailedExplanation) {
-      ao2Awarded = Math.ceil(ao2Marks * 0.6);
-      aoBreakdown.push(`AO2: ${ao2Awarded}/${ao2Marks} marks - Explanation present but lacks examples/calculations`);
-      missedPoints.push("Missing specific examples or calculations");
-    } else {
-      aoBreakdown.push(`AO2: 0/${ao2Marks} marks - Insufficient explanation and application`);
-      missedPoints.push("Lacks detailed explanation", "No application of knowledge shown");
-    }
-    marksAwarded += ao2Awarded;
-    
-    // AO3: Analysis and Evaluation (20% of marks)
-    const ao3Marks = Math.floor(question.marks * 0.2) || 1;
-    let ao3Awarded = 0;
-    if (hasStructure && wordCount >= 30) {
-      ao3Awarded = ao3Marks;
-      aoBreakdown.push(`AO3: ${ao3Awarded}/${ao3Marks} marks - Well-structured response with evaluation`);
-    } else if (hasStructure) {
-      ao3Awarded = Math.ceil(ao3Marks * 0.5);
-      aoBreakdown.push(`AO3: ${ao3Awarded}/${ao3Marks} marks - Some structure but limited evaluation`);
-      missedPoints.push("Limited analysis and evaluation");
-    } else {
-      aoBreakdown.push(`AO3: 0/${ao3Marks} marks - Poor structure and no evaluation`);
-      missedPoints.push("No logical structure or connectives used", "No evaluation or analysis");
-    }
-    marksAwarded += ao3Awarded;
-    
-    // Cap at maximum marks
+    // Ensure we don't exceed maximum marks
     marksAwarded = Math.min(marksAwarded, question.marks);
     
-    const feedback = generateTeacherFeedback(question, studentAnswer, marksAwarded, aoBreakdown, missedPoints);
+    const feedback = generateTeacherFeedback(question, studentAnswer, marksAwarded, markBreakdown, missedPoints);
     const modelAnswer = generateModelAnswer(question);
     const specificationPoint = getSpecificationPoint(question);
     
-    return { marksAwarded, feedback, modelAnswer, aoBreakdown, missedPoints, specificationPoint };
+    return { marksAwarded, feedback, modelAnswer, markBreakdown, missedPoints, specificationPoint };
   };
 
   const generateTeacherFeedback = (question: ExamQuestion, answer: string, marks: number, aoBreakdown: string[], missedPoints: string[]) => {
@@ -199,7 +263,7 @@ const PredictedResults = () => {
       marksAwarded: 0, 
       feedback: { summary: "No answer provided", strengths: [], improvements: ["No response given"], nextSteps: [] }, 
       modelAnswer: generateModelAnswer(q),
-      aoBreakdown: [],
+      markBreakdown: [`No response given (0 marks)`],
       missedPoints: ["No answer provided"],
       specificationPoint: getSpecificationPoint(q)
     };
@@ -387,22 +451,29 @@ const PredictedResults = () => {
                   </div>
                 )}
                 
-                {/* AI Teacher Feedback Section - Match Practice Questions Format */}
-                <div className="bg-gradient-to-br from-primary/5 to-background border border-primary/20 rounded-lg p-6">
-                  <div className="space-y-4">
-                    {/* Header with marks */}
-                    <div className="flex items-center justify-between border-b border-border pb-3">
-                      <h3 className="text-lg font-semibold text-primary">AI Teacher Feedback</h3>
+                {/* AI Teacher Feedback Section - Premium Design Matching Practice Questions */}
+                <div className="bg-gradient-to-br from-emerald-50 via-blue-50 to-purple-50 dark:from-emerald-950/20 dark:via-blue-950/20 dark:to-purple-950/20 border-2 border-gradient-to-r from-emerald-200 to-blue-200 dark:from-emerald-800 dark:to-blue-800 rounded-xl p-6 shadow-lg">
+                  <div className="space-y-6">
+                    {/* Header with marks - Premium styling */}
+                    <div className="flex items-center justify-between border-b-2 border-gradient-to-r from-emerald-300 to-blue-300 dark:from-emerald-700 dark:to-blue-700 pb-4">
+                      <h3 className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 dark:from-emerald-400 dark:to-blue-400 bg-clip-text text-transparent">
+                        AI Teacher Feedback
+                      </h3>
                       <div className="text-right">
-                        <div className="text-2xl font-bold text-foreground">
+                        <div className="text-3xl font-black bg-gradient-to-r from-emerald-600 to-blue-600 dark:from-emerald-400 dark:to-blue-400 bg-clip-text text-transparent">
                           {result.marksAwarded}/{result.question.marks}
                         </div>
-                        <div className="text-sm text-muted-foreground">marks</div>
+                        <div className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">marks</div>
                       </div>
                     </div>
                     
-                    {/* Grade */}
-                    <div className="text-lg font-semibold text-foreground">
+                    {/* Grade with color coding */}
+                    <div className={`text-xl font-bold ${
+                      result.marksAwarded === result.question.marks ? "text-emerald-600 dark:text-emerald-400" :
+                      result.marksAwarded >= result.question.marks * 0.8 ? "text-blue-600 dark:text-blue-400" :
+                      result.marksAwarded >= result.question.marks * 0.6 ? "text-purple-600 dark:text-purple-400" :
+                      result.marksAwarded >= result.question.marks * 0.4 ? "text-amber-600 dark:text-amber-400" : "text-red-600 dark:text-red-400"
+                    }`}>
                       {result.marksAwarded === result.question.marks ? "Excellent" :
                        result.marksAwarded >= result.question.marks * 0.8 ? "Very Good" :
                        result.marksAwarded >= result.question.marks * 0.6 ? "Good" :
@@ -410,36 +481,33 @@ const PredictedResults = () => {
                     </div>
                     
                     {/* Model Answer */}
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-foreground">Model Answer</h4>
-                      <div className="bg-background/50 p-4 rounded-lg border">
-                        <p className="text-sm text-foreground leading-relaxed">{result.modelAnswer}</p>
+                    <div className="space-y-3">
+                      <h4 className="font-bold text-lg text-slate-800 dark:text-slate-200">Model Answer</h4>
+                      <div className="bg-white/80 dark:bg-slate-900/80 p-5 rounded-lg border-2 border-emerald-200 dark:border-emerald-800 shadow-inner">
+                        <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium">{result.modelAnswer}</p>
                       </div>
                     </div>
                     
                     {/* Why This Gets Full Marks */}
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-foreground">Why This Gets Full Marks</h4>
-                      <div className="bg-background/50 p-4 rounded-lg border">
-                        <div className="space-y-1 text-sm text-foreground">
-                          {result.aoBreakdown?.map((ao, index) => {
-                            // Parse the AO breakdown to show in the practice questions format
-                            const parts = ao.split(" - ");
-                            const marks = parts[0]?.split(":")[1]?.trim() || "1 mark";
-                            const description = parts[1] || parts[0]?.split(":")[1]?.trim() || ao;
-                            return (
-                              <div key={index}>{description} ({marks})</div>
-                            );
-                          }) || <div>Complete answer addressing all key points (1 mark)</div>}
+                    <div className="space-y-3">
+                      <h4 className="font-bold text-lg text-slate-800 dark:text-slate-200">Why This Gets Full Marks</h4>
+                      <div className="bg-white/80 dark:bg-slate-900/80 p-5 rounded-lg border-2 border-blue-200 dark:border-blue-800 shadow-inner">
+                        <div className="space-y-2 text-sm text-slate-700 dark:text-slate-300 font-medium">
+                          {result.markBreakdown?.map((mark, index) => (
+                            <div key={index} className="flex items-start space-x-2">
+                              <span className="text-emerald-500 dark:text-emerald-400">•</span>
+                              <span>{mark}</span>
+                            </div>
+                          )) || <div className="flex items-start space-x-2"><span className="text-emerald-500">•</span><span>Complete answer addressing all key points (1 mark)</span></div>}
                         </div>
                       </div>
                     </div>
                     
                     {/* AI Teacher Feedback */}
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-foreground">AI Teacher Feedback</h4>
-                      <div className="bg-background/50 p-4 rounded-lg border">
-                        <p className="text-sm text-foreground leading-relaxed">
+                    <div className="space-y-3">
+                      <h4 className="font-bold text-lg text-slate-800 dark:text-slate-200">AI Teacher Feedback</h4>
+                      <div className="bg-white/80 dark:bg-slate-900/80 p-5 rounded-lg border-2 border-purple-200 dark:border-purple-800 shadow-inner">
+                        <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
                           {result.marksAwarded === result.question.marks 
                             ? `Excellent job! You clearly explained all the key concepts and your answer demonstrates strong understanding of the topic. Each point you made aligns well with the correct answer. Keep up the great work!`
                             : result.marksAwarded >= result.question.marks * 0.7
@@ -453,10 +521,10 @@ const PredictedResults = () => {
                     </div>
                     
                     {/* Specification Reference */}
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-foreground">Specification Reference</h4>
-                      <div className="bg-background/50 p-4 rounded-lg border">
-                        <p className="text-sm text-muted-foreground">{result.specificationPoint}</p>
+                    <div className="space-y-3">
+                      <h4 className="font-bold text-lg text-slate-800 dark:text-slate-200">Specification Reference</h4>
+                      <div className="bg-white/80 dark:bg-slate-900/80 p-5 rounded-lg border-2 border-amber-200 dark:border-amber-800 shadow-inner">
+                        <p className="text-sm text-amber-700 dark:text-amber-300 font-semibold">{result.specificationPoint}</p>
                       </div>
                     </div>
                   </div>
