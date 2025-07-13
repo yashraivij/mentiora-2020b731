@@ -20,25 +20,44 @@ const PredictedQuestions = () => {
     fetchCompletedExams();
   }, []);
 
-  // Refetch completed exams when the page becomes visible again
+  // Aggressive refresh when page becomes visible - ensures buttons appear after completing exams
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (!document.hidden) {
+        console.log('Page became visible - refreshing completed exams');
         fetchCompletedExams();
       }
     };
 
     const handleFocus = () => {
+      console.log('Window focused - refreshing completed exams');
+      fetchCompletedExams();
+    };
+
+    const handlePageShow = () => {
+      console.log('Page shown - refreshing completed exams');
       fetchCompletedExams();
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('focus', handleFocus);
+    window.addEventListener('pageshow', handlePageShow);
 
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('focus', handleFocus);
+      window.removeEventListener('pageshow', handlePageShow);
     };
+  }, []);
+
+  // Auto-refresh every 10 seconds to catch new completions
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log('Auto-refresh: checking for new exam completions');
+      fetchCompletedExams();
+    }, 10000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const fetchCompletedExams = async () => {
