@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Lock, Crown, LineChart, Star, Trophy } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
 
 interface UserProgress {
   subjectId: string;
@@ -12,11 +14,56 @@ interface UserProgress {
   lastAttempt: Date;
 }
 
+interface PredictedExamData {
+  subject_id: string;
+  grade: string;
+  percentage: number;
+  achieved_marks: number;
+  total_marks: number;
+  completed_at: string;
+}
+
 interface PredictivePerformanceCardProps {
   userProgress: UserProgress[];
 }
 
 export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanceCardProps) => {
+  const [predictedExamData, setPredictedExamData] = useState<PredictedExamData[]>([]);
+
+  useEffect(() => {
+    fetchPredictedExamData();
+  }, []);
+
+  const fetchPredictedExamData = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from('predicted_exam_completions')
+        .select('subject_id, grade, percentage, achieved_marks, total_marks, completed_at')
+        .eq('user_id', user.id)
+        .order('completed_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching predicted exam data:', error);
+        return;
+      }
+
+      // Group by subject, keeping the latest completion for each
+      const latestCompletions: {[key: string]: PredictedExamData} = {};
+      data?.forEach(completion => {
+        if (!latestCompletions[completion.subject_id]) {
+          latestCompletions[completion.subject_id] = completion;
+        }
+      });
+
+      setPredictedExamData(Object.values(latestCompletions));
+    } catch (error) {
+      console.error('Error fetching predicted exam data:', error);
+    }
+  };
+
   const getSubjectProgress = (subjectId: string) => {
     const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
     
@@ -30,6 +77,39 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
     
     const totalScore = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
     return Math.round(totalScore / totalTopics);
+  };
+
+  const getEnhancedSubjectGrade = (subjectId: string) => {
+    // Get practice questions performance
+    const practicePercentage = getSubjectProgress(subjectId);
+    const practiceAttempts = userProgress.filter(p => p.subjectId === subjectId)
+      .reduce((sum, p) => sum + p.attempts, 0);
+    
+    // Get predicted 2026 exam performance
+    const examData = predictedExamData.find(exam => exam.subject_id === subjectId);
+    const examPercentage = examData?.percentage || 0;
+    
+    // Calculate combined grade with weighted approach
+    let combinedPercentage = 0;
+    
+    if (practiceAttempts > 0 && examData) {
+      // Both practice and exam data available - weighted combination
+      // Recent exam data gets 60% weight, practice gets 40%
+      combinedPercentage = Math.round((examPercentage * 0.6) + (practicePercentage * 0.4));
+    } else if (examData) {
+      // Only exam data available
+      combinedPercentage = examPercentage;
+    } else if (practiceAttempts > 0) {
+      // Only practice data available
+      combinedPercentage = practicePercentage;
+    }
+    
+    return {
+      percentage: combinedPercentage,
+      grade: getPredictedGrade(combinedPercentage),
+      hasExamData: !!examData,
+      hasPracticeData: practiceAttempts > 0
+    };
   };
 
   const getPredictedGrade = (percentage: number) => {
@@ -58,14 +138,15 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
 
   const getSubjectsWithPredictions = () => {
     return curriculum.map(subject => {
-      const percentage = getSubjectProgress(subject.id);
-      const grade = getPredictedGrade(percentage);
+      const enhancedData = getEnhancedSubjectGrade(subject.id);
       
       return {
         ...subject,
-        percentage,
-        grade,
-        hasData: userProgress.some(p => p.subjectId === subject.id)
+        percentage: enhancedData.percentage,
+        grade: enhancedData.grade,
+        hasData: enhancedData.hasPracticeData || enhancedData.hasExamData,
+        hasExamData: enhancedData.hasExamData,
+        hasPracticeData: enhancedData.hasPracticeData
       };
     }).filter(subject => subject.hasData).slice(0, 5); // Show top 5 subjects
   };
@@ -127,13 +208,31 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
                       <span className="text-xs font-bold text-foreground">{subject.grade}</span>
                       {subject.grade >= 8 && <Star className="h-3 w-3 text-yellow-500" />}
                       {subject.grade === 9 && <Trophy className="h-3 w-3 text-amber-500" />}
+                      <div className="flex items-center ml-1 space-x-0.5">
+                        {subject.hasExamData && (
+                          <div className="w-1.5 h-1.5 bg-purple-500 rounded-full" title="2026 Exam Data" />
+                        )}
+                        {subject.hasPracticeData && (
+                          <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" title="Practice Data" />
+                        )}
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
               
-              <div className="text-xs text-muted-foreground text-center pt-2 border-t border-muted/20">
-                {subjects.length > 3 ? `+${subjects.length - 3} more subjects` : 'All subjects shown'}
+              <div className="text-xs text-muted-foreground text-center pt-2 border-t border-muted/20 space-y-1">
+                <div>{subjects.length > 3 ? `+${subjects.length - 3} more subjects` : 'All subjects shown'}</div>
+                <div className="flex items-center justify-center space-x-3 mt-1">
+                  <div className="flex items-center space-x-1">
+                    <div className="w-1.5 h-1.5 bg-purple-500 rounded-full" />
+                    <span className="text-xs">2026 Exam</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
+                    <span className="text-xs">Practice</span>
+                  </div>
+                </div>
               </div>
             </div>
           ) : (

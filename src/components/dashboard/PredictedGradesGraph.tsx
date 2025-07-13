@@ -2,6 +2,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, Sparkles, Trophy, Star, Zap, BarChart3, Target, TrendingDown, Activity } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
 
 interface UserProgress {
   subjectId: string;
@@ -11,11 +13,56 @@ interface UserProgress {
   lastAttempt: Date;
 }
 
+interface PredictedExamData {
+  subject_id: string;
+  grade: string;
+  percentage: number;
+  achieved_marks: number;
+  total_marks: number;
+  completed_at: string;
+}
+
 interface PredictedGradesGraphProps {
   userProgress: UserProgress[];
 }
 
 export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
+  const [predictedExamData, setPredictedExamData] = useState<PredictedExamData[]>([]);
+
+  useEffect(() => {
+    fetchPredictedExamData();
+  }, []);
+
+  const fetchPredictedExamData = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from('predicted_exam_completions')
+        .select('subject_id, grade, percentage, achieved_marks, total_marks, completed_at')
+        .eq('user_id', user.id)
+        .order('completed_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching predicted exam data:', error);
+        return;
+      }
+
+      // Group by subject, keeping the latest completion for each
+      const latestCompletions: {[key: string]: PredictedExamData} = {};
+      data?.forEach(completion => {
+        if (!latestCompletions[completion.subject_id]) {
+          latestCompletions[completion.subject_id] = completion;
+        }
+      });
+
+      setPredictedExamData(Object.values(latestCompletions));
+    } catch (error) {
+      console.error('Error fetching predicted exam data:', error);
+    }
+  };
+
   const getSubjectProgress = (subjectId: string) => {
     const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
     
@@ -31,6 +78,45 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     return Math.round(totalScore / totalTopics);
   };
 
+  const getEnhancedSubjectGrade = (subjectId: string) => {
+    // Get practice questions performance
+    const practicePercentage = getSubjectProgress(subjectId);
+    const practiceAttempts = userProgress.filter(p => p.subjectId === subjectId)
+      .reduce((sum, p) => sum + p.attempts, 0);
+    
+    // Get predicted 2026 exam performance
+    const examData = predictedExamData.find(exam => exam.subject_id === subjectId);
+    const examPercentage = examData?.percentage || 0;
+    
+    // Calculate combined grade with weighted approach
+    let combinedPercentage = 0;
+    let confidence = "Low";
+    
+    if (practiceAttempts > 0 && examData) {
+      // Both practice and exam data available - weighted combination
+      // Recent exam data gets 60% weight, practice gets 40%
+      combinedPercentage = Math.round((examPercentage * 0.6) + (practicePercentage * 0.4));
+      confidence = getConfidenceLevel(combinedPercentage, practiceAttempts + 10); // Boost confidence for exam completion
+    } else if (examData) {
+      // Only exam data available
+      combinedPercentage = examPercentage;
+      confidence = "High"; // Exam data is reliable
+    } else if (practiceAttempts > 0) {
+      // Only practice data available
+      combinedPercentage = practicePercentage;
+      confidence = getConfidenceLevel(practicePercentage, practiceAttempts);
+    }
+    
+    return {
+      percentage: combinedPercentage,
+      grade: getPredictedGrade(combinedPercentage),
+      confidence,
+      hasExamData: !!examData,
+      hasPracticeData: practiceAttempts > 0,
+      totalAttempts: practiceAttempts + (examData ? 1 : 0)
+    };
+  };
+
   const getPredictedGrade = (percentage: number) => {
     if (percentage >= 85) return 9;
     if (percentage >= 75) return 8;
@@ -41,6 +127,13 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     if (percentage >= 25) return 3;
     if (percentage >= 15) return 2;
     return 1;
+  };
+
+  const getConfidenceLevel = (percentage: number, attempts: number) => {
+    if (attempts < 5) return "Low";
+    if (attempts < 15) return "Medium";
+    if (attempts < 30) return "High";
+    return "Very High";
   };
 
   const getGradeColor = (grade: number) => {
@@ -67,21 +160,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     return "text-red-800";
   };
 
-  const getGradeEmoji = (grade: number) => {
-    if (grade >= 8) return "🏆";
-    if (grade === 7) return "🌟";
-    if (grade >= 5) return "⭐";
-    if (grade === 4) return "💪";
-    return "🎯";
-  };
-
-  const getConfidenceLevel = (percentage: number, attempts: number) => {
-    if (attempts < 5) return "Low";
-    if (attempts < 15) return "Medium";
-    if (attempts < 30) return "High";
-    return "Very High";
-  };
-
   const getConfidenceColor = (confidence: string) => {
     switch (confidence) {
       case "Very High": return "text-emerald-600";
@@ -99,19 +177,17 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
 
   const getSubjectsWithPredictions = () => {
     return curriculum.map(subject => {
-      const subjectProgress = userProgress.filter(p => p.subjectId === subject.id);
-      const percentage = getSubjectProgress(subject.id);
-      const grade = getPredictedGrade(percentage);
-      const totalAttempts = subjectProgress.reduce((sum, p) => sum + p.attempts, 0);
-      const confidence = getConfidenceLevel(percentage, totalAttempts);
+      const enhancedData = getEnhancedSubjectGrade(subject.id);
       
       return {
         ...subject,
-        percentage,
-        grade,
-        totalAttempts,
-        confidence,
-        hasData: userProgress.some(p => p.subjectId === subject.id)
+        percentage: enhancedData.percentage,
+        grade: enhancedData.grade,
+        totalAttempts: enhancedData.totalAttempts,
+        confidence: enhancedData.confidence,
+        hasData: enhancedData.hasPracticeData || enhancedData.hasExamData,
+        hasExamData: enhancedData.hasExamData,
+        hasPracticeData: enhancedData.hasPracticeData
       };
     }).filter(subject => subject.hasData);
   };
@@ -289,9 +365,25 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                                 </span>
                               </div>
                               <div className="flex justify-between text-xs mt-1">
-                                <span className="text-slate-600 dark:text-slate-400">Attempts:</span>
-                                <span className="font-semibold text-slate-700 dark:text-slate-300">{subject.totalAttempts}</span>
+                                <span className="text-slate-600 dark:text-slate-400">Data Sources:</span>
+                                <div className="flex items-center space-x-1">
+                                  {subject.hasExamData && (
+                                    <Badge className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs px-1.5 py-0.5">
+                                      2026 Exam
+                                    </Badge>
+                                  )}
+                                  {subject.hasPracticeData && (
+                                    <Badge className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-1.5 py-0.5">
+                                      Practice
+                                    </Badge>
+                                  )}
+                                </div>
                               </div>
+                              {subject.hasExamData && subject.hasPracticeData && (
+                                <div className="text-xs text-green-600 dark:text-green-400 mt-1 text-center font-medium">
+                                  Enhanced Accuracy (60% Exam + 40% Practice)
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>
