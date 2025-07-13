@@ -166,7 +166,7 @@ const PredictedQuestions = () => {
               <Card 
                 key={subject.id} 
                 className="group cursor-pointer relative overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
-                onClick={() => handleSubjectSelect(subject.id)}
+                onClick={() => !isCompleted && handleSubjectSelect(subject.id)}
               >
                 {/* Card Background Gradient */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${getSubjectColor(subject.id)} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
@@ -196,62 +196,89 @@ const PredictedQuestions = () => {
                     {isCompleted ? `Last Grade: ${completion.grade} (${completion.percentage}%)` : 'Full predicted paper practice'}
                   </CardDescription>
                 </CardHeader>
-              
-              <CardContent className="relative pt-0">
-                <div className="space-y-4">
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm border border-white/20">
-                      <div className="p-1.5 bg-gradient-to-br from-blue-400/30 to-cyan-400/30 rounded-lg">
-                        <Clock className="h-4 w-4 text-white" />
+                
+                <CardContent className="relative pt-0">
+                  <div className="space-y-4">
+                    <div className="space-y-3">
+                      <div className="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm border border-white/20">
+                        <div className="p-1.5 bg-gradient-to-br from-blue-400/30 to-cyan-400/30 rounded-lg">
+                          <Clock className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-white text-sm font-medium">Duration: {getExamDuration(subject.id)}</p>
+                          <p className="text-white/70 text-xs">Real exam timing</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-white text-sm font-medium">Duration: {getExamDuration(subject.id)}</p>
-                        <p className="text-white/70 text-xs">Real exam timing</p>
+                      
+                      <div className="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm border border-white/20">
+                        <div className="p-1.5 bg-gradient-to-br from-green-400/30 to-emerald-400/30 rounded-lg">
+                          <Target className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-white text-sm font-medium">{subject.topics.length} topics covered</p>
+                          <p className="text-white/70 text-xs">Full specification</p>
+                        </div>
                       </div>
                     </div>
                     
-                    <div className="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm border border-white/20">
-                      <div className="p-1.5 bg-gradient-to-br from-green-400/30 to-emerald-400/30 rounded-lg">
-                        <Target className="h-4 w-4 text-white" />
+                    {isCompleted && (
+                      <div className="bg-white/15 backdrop-blur-sm border border-white/30 rounded-xl p-3 mb-3">
+                        <div className="flex items-center justify-between text-white text-sm">
+                          <span>Questions refresh:</span>
+                          <span className="font-bold">Next week</span>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-white text-sm font-medium">{subject.topics.length} topics covered</p>
-                        <p className="text-white/70 text-xs">Full specification</p>
-                      </div>
+                    )}
+                    
+                    <div className="space-y-2">
+                      {isCompleted ? (
+                        <>
+                          <Button 
+                            className="w-full bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 hover:from-blue-300 hover:via-purple-300 hover:to-indigo-300 text-white font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate(`/predicted-results/${subject.id}`, { 
+                                state: { 
+                                  questions: completion.questions, 
+                                  answers: completion.answers,
+                                  timeElapsed: completion.time_taken_seconds,
+                                  isReview: true,
+                                  completion: completion
+                                } 
+                              });
+                            }}
+                          >
+                            <BookOpen className="h-4 w-4 mr-2" />
+                            Review Marking
+                            <Target className="h-4 w-4 ml-2" />
+                          </Button>
+                          <Button 
+                            className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleSubjectSelect(subject.id);
+                            }}
+                          >
+                            <RotateCcw className="h-4 w-4 mr-2" />
+                            Retake Exam
+                            <Sparkles className="h-4 w-4 ml-2" />
+                          </Button>
+                        </>
+                      ) : (
+                        <Button 
+                          className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleSubjectSelect(subject.id);
+                          }}
+                        >
+                          <Crown className="h-4 w-4 mr-2" />
+                          Start Premium Exam
+                          <Sparkles className="h-4 w-4 ml-2" />
+                        </Button>
+                      )}
                     </div>
                   </div>
-                  
-                  {isCompleted && (
-                    <div className="bg-white/15 backdrop-blur-sm border border-white/30 rounded-xl p-3 mb-3">
-                      <div className="flex items-center justify-between text-white text-sm">
-                        <span>Questions refresh:</span>
-                        <span className="font-bold">Next week</span>
-                      </div>
-                    </div>
-                  )}
-                  
-                  <Button 
-                    className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform group-hover:scale-[1.02] transition-all duration-300"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleSubjectSelect(subject.id);
-                    }}
-                  >
-                    {isCompleted ? (
-                      <>
-                        <RotateCcw className="h-4 w-4 mr-2" />
-                        Retake Exam
-                        <Sparkles className="h-4 w-4 ml-2" />
-                      </>
-                    ) : (
-                      <>
-                        <Crown className="h-4 w-4 mr-2" />
-                        Start Premium Exam
-                        <Sparkles className="h-4 w-4 ml-2" />
-                      </>
-                    )}
-                  </Button>
-                </div>
                 </CardContent>
               </Card>
             );

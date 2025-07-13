@@ -29,7 +29,7 @@ const PredictedResults = () => {
   const location = useLocation();
   const { toast } = useToast();
   
-  const { questions, answers, timeElapsed } = location.state || {};
+  const { questions, answers, timeElapsed, isReview, completion } = location.state || {};
   
   if (!questions || !answers) {
     navigate('/predicted-questions');
@@ -133,8 +133,10 @@ const PredictedResults = () => {
   const grade = getGrade(percentage);
   const timeFormatted = Math.floor(timeElapsed / 60) + ":" + (timeElapsed % 60).toString().padStart(2, '0');
 
-  // Save exam completion to database
+  // Save exam completion to database (only for new completions)
   useEffect(() => {
+    if (isReview) return; // Don't save if this is a review
+
     const saveExamCompletion = async () => {
       try {
         const { data: { user } } = await supabase.auth.getUser();
@@ -177,7 +179,7 @@ const PredictedResults = () => {
     if (questions && answers && subject) {
       saveExamCompletion();
     }
-  }, [questions, answers, subject, subjectId, totalMarks, achievedMarks, percentage, grade.grade, timeElapsed, results, toast]);
+  }, [questions, answers, subject, subjectId, totalMarks, achievedMarks, percentage, grade.grade, timeElapsed, results, toast, isReview]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10">
@@ -201,7 +203,17 @@ const PredictedResults = () => {
               <Crown className="h-8 w-8 text-amber-500" />
               <div>
                 <CardTitle className="text-2xl font-bold">{subject.name} Exam Results</CardTitle>
-                <CardDescription>AQA GCSE Predicted Paper</CardDescription>
+                <CardDescription className="flex items-center space-x-2">
+                  <span>AQA GCSE Predicted Paper</span>
+                  {isReview && (
+                    <>
+                      <span>•</span>
+                      <Badge variant="secondary" className="text-xs">
+                        Completed: {new Date(completion?.completed_at).toLocaleDateString()}
+                      </Badge>
+                    </>
+                  )}
+                </CardDescription>
               </div>
             </div>
           </CardHeader>
