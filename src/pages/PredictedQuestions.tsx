@@ -84,18 +84,44 @@ const PredictedQuestions = () => {
       }
 
       console.log('Fetched predicted exam completions:', data?.length || 0, 'records');
-      console.log('Subjects found:', [...new Set(data?.map(d => d.subject_id) || [])]);
+      console.log('Raw subject IDs from database:', [...new Set(data?.map(d => d.subject_id) || [])]);
+      console.log('Curriculum subject IDs:', curriculum.map(s => s.id));
+
+      // Map potential subject ID variations to curriculum IDs
+      const subjectIdMapping: {[key: string]: string} = {
+        'maths': 'mathematics',
+        'math': 'mathematics', 
+        'mathematics': 'mathematics',
+        'chemistry': 'chemistry',
+        'biology': 'biology',
+        'physics': 'physics',
+        'english-language': 'english-language',
+        'english-literature': 'english-literature',
+        'history': 'history',
+        'geography': 'geography',
+        'computer-science': 'computer-science',
+        'psychology': 'psychology'
+      };
 
       // Group by subject, keeping the LATEST completion for each subject
       const completions: {[key: string]: any} = {};
       data?.forEach(completion => {
-        const currentCompletion = completions[completion.subject_id];
+        // Map the database subject_id to curriculum subject_id
+        const mappedSubjectId = subjectIdMapping[completion.subject_id] || completion.subject_id;
+        
+        console.log(`Mapping: ${completion.subject_id} -> ${mappedSubjectId}`);
+        
+        const currentCompletion = completions[mappedSubjectId];
         if (!currentCompletion || new Date(completion.completed_at) > new Date(currentCompletion.completed_at)) {
-          completions[completion.subject_id] = completion;
+          completions[mappedSubjectId] = {
+            ...completion,
+            subject_id: mappedSubjectId // Use the mapped subject ID
+          };
         }
       });
 
-      console.log('Grouped completions:', Object.keys(completions));
+      console.log('Final grouped completions by subject:', Object.keys(completions));
+      console.log('Completion details:', completions);
       setCompletedExams(completions);
     } catch (error) {
       console.error('Error fetching completed exams:', error);
