@@ -21,7 +21,7 @@ interface PredictedGradesGraphProps {
 export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
   const { user } = useAuth();
   const [predictedExamCompletions, setPredictedExamCompletions] = useState<any[]>([]);
-  const [subjectsEverShown, setSubjectsEverShown] = useState<Set<string>>(new Set());
+  
 
   useEffect(() => {
     const fetchPredictedExamCompletions = async () => {
@@ -47,26 +47,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     fetchPredictedExamCompletions();
   }, [user]);
 
-  // Track subjects that have data to keep them on the graph
-  useEffect(() => {
-    const subjectsWithData = new Set<string>();
-    
-    // Add subjects with practice data
-    userProgress.forEach(p => {
-      if (p.attempts > 0) {
-        subjectsWithData.add(p.subjectId);
-      }
-    });
-    
-    // Add subjects with exam completions
-    predictedExamCompletions.forEach(completion => {
-      subjectsWithData.add(completion.subject_id);
-    });
-    
-    if (subjectsWithData.size > 0) {
-      setSubjectsEverShown(prev => new Set([...prev, ...subjectsWithData]));
-    }
-  }, [userProgress, predictedExamCompletions]);
 
   const getSubjectProgress = (subjectId: string) => {
     const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
@@ -102,14 +82,10 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     const hasPracticeData = userProgress.some(p => p.subjectId === subjectId);
     const hasCurrentData = hasPracticeData || recentExamCompletion;
     
-    // If subject was ever shown, keep it on the graph even if data is temporarily unavailable
-    const wasEverShown = subjectsEverShown.has(subjectId);
-    
-    // If no current data and was never shown before, don't show subject
-    if (!hasCurrentData && !wasEverShown) {
+    // If no current data, don't show subject
+    if (!hasCurrentData) {
       return null;
     }
-    
     
     // If only exam completion, use that grade
     if (!hasPracticeData && recentExamCompletion) {
@@ -153,17 +129,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         confidence: getConfidenceLevel(combinedPercentage, totalAttempts),
         totalAttempts,
         source: 'combined'
-      };
-    }
-    
-    // If subject was shown before but has no current data, show placeholder with grade 1
-    if (wasEverShown && !hasCurrentData) {
-      return {
-        grade: 1,
-        percentage: 10,
-        confidence: 'Low',
-        totalAttempts: 0,
-        source: 'placeholder'
       };
     }
     
