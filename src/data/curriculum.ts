@@ -26,6 +26,958 @@ export interface Subject {
 
 export const curriculum: Subject[] = [
   {
+    id: 'physics',
+    name: 'Physics',
+    topics: [
+      {
+        id: 'p1-energy',
+        name: 'Energy',
+        questions: [
+          {
+            id: 'p1-q1',
+            question: 'State the principle of conservation of energy.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Energy cannot be created or destroyed, only transferred from one store to another.',
+            markingCriteria: {
+              breakdown: ['Energy cannot be created or destroyed (1 mark)', 'Only transferred from one store to another (1 mark)']
+            },
+            specReference: '4.1.1.1 - Energy stores and systems'
+          },
+          {
+            id: 'p1-q2',
+            question: 'List four different energy stores.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Any four from: kinetic, gravitational potential, elastic potential, thermal, chemical, magnetic, electrostatic, nuclear.',
+            markingCriteria: {
+              breakdown: ['First energy store (1 mark)', 'Second energy store (1 mark)', 'Third energy store (1 mark)', 'Fourth energy store (1 mark)']
+            },
+            specReference: '4.1.1.1 - Energy stores and systems'
+          },
+          {
+            id: 'p1-q3',
+            question: 'Calculate the kinetic energy of a 1200 kg car travelling at 25 m/s.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'KE = ½mv² = ½ × 1200 × 25² = ½ × 1200 × 625 = 375,000 J or 375 kJ',
+            markingCriteria: {
+              breakdown: ['Correct formula KE = ½mv² (1 mark)', 'Correct substitution of values (1 mark)', 'Correct final answer with units (1 mark)']
+            },
+            specReference: '4.1.1.2 - Kinetic energy',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'p1-q4',
+            question: 'Explain what is meant by efficiency and state the equation for calculating efficiency.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Efficiency is the ratio of useful energy output to total energy input. Efficiency = useful energy output / total energy input',
+            markingCriteria: {
+              breakdown: ['Definition of efficiency as ratio (1 mark)', 'Reference to useful energy output (1 mark)', 'Correct equation (1 mark)']
+            },
+            specReference: '4.1.1.7 - Efficiency'
+          },
+          {
+            id: 'p1-q5',
+            question: 'A motor transfers 240 J of electrical energy but only 180 J is transferred as useful kinetic energy. Calculate the efficiency of the motor.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Efficiency = useful energy output / total energy input = 180 / 240 = 0.75 or 75%',
+            markingCriteria: {
+              breakdown: ['Correct formula used (1 mark)', 'Correct substitution (1 mark)', 'Correct final answer (1 mark)']
+            },
+            specReference: '4.1.1.7 - Efficiency',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'p1-q6',
+            question: 'Describe three methods of reducing unwanted energy transfers in mechanical systems.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Lubrication reduces friction between moving parts. Thermal insulation reduces heat loss. Using low resistance wires reduces electrical heating.',
+            markingCriteria: {
+              breakdown: ['Lubrication to reduce friction (1 mark)', 'Thermal insulation (1 mark)', 'Low resistance components (1 mark)']
+            },
+            specReference: '4.1.1.6 - Reducing unwanted energy transfers'
+          },
+          {
+            id: 'p1-q7',
+            question: 'Calculate the gravitational potential energy of a 60 kg person standing on a 15 m high platform. (g = 9.8 m/s²)',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'GPE = mgh = 60 × 9.8 × 15 = 8820 J',
+            markingCriteria: {
+              breakdown: ['Correct formula GPE = mgh (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: '4.1.1.2 - Gravitational potential energy',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'p1-q8',
+            question: 'Explain the difference between renewable and non-renewable energy resources, giving two examples of each.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Renewable resources can be replenished naturally (wind, solar). Non-renewable resources are finite and will run out (coal, oil).',
+            markingCriteria: {
+              breakdown: ['Definition of renewable (1 mark)', 'Two renewable examples (1 mark)', 'Definition of non-renewable (1 mark)', 'Two non-renewable examples (1 mark)']
+            },
+            specReference: '4.1.1.8 - National and global energy resources'
+          },
+          {
+            id: 'p1-q9',
+            question: 'Define specific heat capacity and state its units.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Specific heat capacity is the energy required to raise the temperature of 1 kg of a substance by 1°C. Units: J/kg°C',
+            markingCriteria: {
+              breakdown: ['Correct definition (1 mark)', 'Correct units J/kg°C (1 mark)']
+            },
+            specReference: '4.1.1.4 - Specific heat capacity'
+          },
+          {
+            id: 'p1-q10',
+            question: 'A 2 kg block of aluminum has a specific heat capacity of 900 J/kg°C. Calculate the energy needed to heat it from 20°C to 80°C.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Energy = mcΔT = 2 × 900 × (80-20) = 2 × 900 × 60 = 108,000 J or 108 kJ',
+            markingCriteria: {
+              breakdown: ['Correct formula E = mcΔT (1 mark)', 'Correct calculation of temperature change (1 mark)', 'Correct final answer with units (1 mark)']
+            },
+            specReference: '4.1.1.4 - Specific heat capacity',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      },
+      {
+        id: 'p2-electricity',
+        name: 'Electricity',
+        questions: [
+          {
+            id: 'p2-q1',
+            question: 'State Ohm\'s law and give the equation that represents it.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The current through a conductor is directly proportional to the potential difference across it, provided temperature remains constant. V = IR',
+            markingCriteria: {
+              breakdown: ['Statement of Ohm\'s law (1 mark)', 'Correct equation V = IR (1 mark)']
+            },
+            specReference: '4.2.1.1 - Current, potential difference and resistance'
+          },
+          {
+            id: 'p2-q2',
+            question: 'Calculate the current flowing through a 12 Ω resistor when a potential difference of 6 V is applied across it.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'I = V/R = 6/12 = 0.5 A',
+            markingCriteria: {
+              breakdown: ['Correct rearrangement of Ohm\'s law (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: '4.2.1.1 - Current, potential difference and resistance',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'p2-q3',
+            question: 'Describe the difference between series and parallel circuits in terms of current and potential difference.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'In series circuits: current is the same at all points, potential difference is shared between components. In parallel circuits: current is shared between branches, potential difference is the same across each branch.',
+            markingCriteria: {
+              breakdown: ['Series - current same throughout (1 mark)', 'Series - voltage shared (1 mark)', 'Parallel - current shared (1 mark)', 'Parallel - voltage same across branches (1 mark)']
+            },
+            specReference: '4.2.1.2 - Series and parallel circuits'
+          },
+          {
+            id: 'p2-q4',
+            question: 'Calculate the total resistance of three resistors of 4 Ω, 6 Ω and 12 Ω connected in series.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'In series: R_total = R₁ + R₂ + R₃ = 4 + 6 + 12 = 22 Ω',
+            markingCriteria: {
+              breakdown: ['Correct formula for series resistance (1 mark)', 'Correct calculation and answer (1 mark)']
+            },
+            specReference: '4.2.1.2 - Series and parallel circuits',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'p2-q5',
+            question: 'Explain why the potential difference across each component in a parallel circuit is the same.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Each component in parallel is connected directly to the power supply. All components have the same two connection points. Therefore they all experience the same potential difference as the power supply.',
+            markingCriteria: {
+              breakdown: ['Components connected directly to supply (1 mark)', 'Same connection points (1 mark)', 'Same potential difference as supply (1 mark)']
+            },
+            specReference: '4.2.1.2 - Series and parallel circuits'
+          },
+          {
+            id: 'p2-q6',
+            question: 'State the equation for electrical power and calculate the power dissipated by a 5 A current flowing through a 8 Ω resistor.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'P = I²R. Power = 5² × 8 = 25 × 8 = 200 W',
+            markingCriteria: {
+              breakdown: ['Correct power equation (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: '4.2.1.5 - Power, energy transfer and appliances',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'p2-q7',
+            question: 'Explain the difference between alternating current (AC) and direct current (DC).',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'DC flows in one direction only and has constant value. AC changes direction regularly and varies in magnitude.',
+            markingCriteria: {
+              breakdown: ['DC flows in one direction (1 mark)', 'DC has constant value (1 mark)', 'AC changes direction and magnitude (1 mark)']
+            },
+            specReference: '4.2.1.3 - Domestic uses and safety'
+          },
+          {
+            id: 'p2-q8',
+            question: 'Describe the function of the National Grid and explain why transformers are essential.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'National Grid distributes electricity from power stations to consumers. Transformers step up voltage for transmission to reduce energy losses. They step down voltage for safe domestic use.',
+            markingCriteria: {
+              breakdown: ['National Grid distributes electricity (1 mark)', 'Step-up transformers reduce losses (1 mark)', 'High voltage for transmission (1 mark)', 'Step-down for domestic safety (1 mark)']
+            },
+            specReference: '4.2.1.6 - The National Grid'
+          },
+          {
+            id: 'p2-q9',
+            question: 'Explain how static electricity is produced and give one example of its use.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Static electricity is produced when electrons are transferred between materials by friction. This creates a build-up of charge. Example: paint spraying, photocopying, or dust removal.',
+            markingCriteria: {
+              breakdown: ['Electron transfer by friction (1 mark)', 'Build-up of charge (1 mark)', 'Valid example (1 mark)']
+            },
+            specReference: '4.2.1.7 - Static electricity'
+          },
+          {
+            id: 'p2-q10',
+            question: 'Calculate the energy transferred when a 2400 W kettle operates for 5 minutes.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Energy = Power × time = 2400 × 300 = 720,000 J or 720 kJ',
+            markingCriteria: {
+              breakdown: ['Correct formula E = Pt (1 mark)', 'Correct time conversion to seconds (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: '4.2.1.5 - Power, energy transfer and appliances',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      },
+      {
+        id: 'p3-particle-model',
+        name: 'Particle model of matter',
+        questions: [
+          {
+            id: 'p3-q1',
+            question: 'Describe the arrangement and motion of particles in solids, liquids and gases.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Solids: particles close together in regular arrangement, vibrate about fixed positions. Liquids: particles close together but irregular arrangement, move around each other. Gases: particles far apart with random arrangement, move rapidly in all directions.',
+            markingCriteria: {
+              breakdown: ['Solid arrangement and motion (2 marks)', 'Liquid arrangement and motion (2 marks)', 'Gas arrangement and motion (2 marks)']
+            },
+            specReference: '4.3.1.1 - Particle model and states of matter'
+          },
+          {
+            id: 'p3-q2',
+            question: 'State the equation for density and calculate the density of a material with mass 150 g and volume 50 cm³.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Density = mass/volume. Density = 150/50 = 3.0 g/cm³',
+            markingCriteria: {
+              breakdown: ['Correct equation (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: '4.3.1.2 - Density',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'p3-q3',
+            question: 'Explain what happens to the mass and volume when a substance changes state.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Mass remains constant during state changes due to conservation of mass. Volume typically increases when melting or evaporating as particles move further apart.',
+            markingCriteria: {
+              breakdown: ['Mass remains constant (1 mark)', 'Reference to conservation of mass (1 mark)', 'Volume changes due to particle spacing (1 mark)']
+            },
+            specReference: '4.3.1.3 - Changes of state'
+          },
+          {
+            id: 'p3-q4',
+            question: 'Define internal energy and explain what happens to internal energy during melting.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Internal energy is the total kinetic and potential energy of particles in a system. During melting, internal energy increases as energy is used to break bonds between particles, but temperature remains constant.',
+            markingCriteria: {
+              breakdown: ['Definition of internal energy (1 mark)', 'Reference to kinetic and potential energy (1 mark)', 'Internal energy increases during melting (1 mark)', 'Temperature constant during melting (1 mark)']
+            },
+            specReference: '4.3.1.4 - Internal energy'
+          },
+          {
+            id: 'p3-q5',
+            question: 'State what is meant by specific latent heat and give its units.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Specific latent heat is the energy required to change the state of 1 kg of a substance without changing its temperature. Units: J/kg',
+            markingCriteria: {
+              breakdown: ['Correct definition (1 mark)', 'Correct units J/kg (1 mark)']
+            },
+            specReference: '4.3.1.5 - Specific latent heat'
+          },
+          {
+            id: 'p3-q6',
+            question: 'Calculate the energy required to melt 2 kg of ice. (Specific latent heat of fusion = 334,000 J/kg)',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Energy = mass × specific latent heat = 2 × 334,000 = 668,000 J',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Correct calculation and units (1 mark)']
+            },
+            specReference: '4.3.1.5 - Specific latent heat',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'p3-q7',
+            question: 'Explain how the motion of gas particles creates pressure.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Gas particles move rapidly and randomly. They collide with container walls. These collisions exert forces on the walls creating pressure.',
+            markingCriteria: {
+              breakdown: ['Particles move rapidly/randomly (1 mark)', 'Collide with container walls (1 mark)', 'Collisions create pressure (1 mark)']
+            },
+            specReference: '4.3.1.6 - Particle motion in gases'
+          },
+          {
+            id: 'p3-q8',
+            question: 'State the relationship between pressure and volume for a fixed mass of gas at constant temperature.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Pressure is inversely proportional to volume. As volume increases, pressure decreases (Boyle\'s Law).',
+            markingCriteria: {
+              breakdown: ['Inversely proportional relationship (1 mark)', 'Reference to Boyle\'s Law or P₁V₁ = P₂V₂ (1 mark)']
+            },
+            specReference: '4.3.1.7 - Pressure and volume relationship'
+          },
+          {
+            id: 'p3-q9',
+            question: 'Explain why heating a gas at constant volume increases its pressure.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Heating increases the kinetic energy of gas particles. Particles move faster and collide with walls more frequently and with greater force. This increases pressure.',
+            markingCriteria: {
+              breakdown: ['Heating increases kinetic energy (1 mark)', 'Particles move faster (1 mark)', 'More frequent/forceful collisions increase pressure (1 mark)']
+            },
+            specReference: '4.3.1.6 - Particle motion in gases'
+          },
+          {
+            id: 'p3-q10',
+            question: 'A gas has pressure 2000 Pa and volume 0.5 m³. Calculate the new pressure when the volume is compressed to 0.2 m³ at constant temperature.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'P₁V₁ = P₂V₂, so P₂ = P₁V₁/V₂ = 2000 × 0.5/0.2 = 5000 Pa',
+            markingCriteria: {
+              breakdown: ['Correct use of Boyle\'s Law (1 mark)', 'Correct rearrangement and substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: '4.3.1.7 - Pressure and volume relationship',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      },
+      {
+        id: 'p4-atomic-structure',
+        name: 'Atomic structure',
+        questions: [
+          {
+            id: 'p4-q1',
+            question: 'Describe the structure of an atom including the relative masses and charges of protons, neutrons and electrons.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Atoms have a small dense nucleus containing protons (mass 1, charge +1) and neutrons (mass 1, charge 0). Electrons (mass 1/1840, charge -1) orbit the nucleus in shells.',
+            markingCriteria: {
+              breakdown: ['Nucleus contains protons and neutrons (1 mark)', 'Proton: mass 1, charge +1 (1 mark)', 'Neutron: mass 1, charge 0 (1 mark)', 'Electron: very small mass, charge -1 (1 mark)', 'Electrons in shells around nucleus (1 mark)', 'Small dense nucleus (1 mark)']
+            },
+            specReference: '4.4.1.1 - Structure of atom'
+          },
+          {
+            id: 'p4-q2',
+            question: 'Define isotopes and explain why they have the same chemical properties.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Isotopes are atoms of the same element with the same number of protons but different numbers of neutrons. They have the same chemical properties because they have the same number of electrons.',
+            markingCriteria: {
+              breakdown: ['Same element, same protons, different neutrons (1 mark)', 'Definition of isotopes (1 mark)', 'Same chemical properties due to same electrons (1 mark)']
+            },
+            specReference: '4.4.1.1 - Isotopes'
+          },
+          {
+            id: 'p4-q3',
+            question: 'Describe how the model of the atom has changed from Dalton\'s model to the modern nuclear model.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Dalton: atoms as solid spheres. Thomson: plum pudding model with electrons in positive sphere. Rutherford: nuclear model with dense nucleus and electrons around it. Bohr: electrons in fixed energy levels. Modern: electron clouds and quantum mechanics.',
+            markingCriteria: {
+              breakdown: ['Dalton - solid spheres (1 mark)', 'Thomson - plum pudding (1 mark)', 'Rutherford - nuclear model (1 mark)', 'Bohr - energy levels (1 mark)', 'Modern developments (1 mark)', 'Chronological development shown (1 mark)']
+            },
+            specReference: '4.4.1.2 - Development of atomic model'
+          },
+          {
+            id: 'p4-q4',
+            question: 'Name the three main types of ionizing radiation and state their relative penetrating powers.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Alpha radiation - least penetrating, stopped by paper. Beta radiation - medium penetrating, stopped by aluminum. Gamma radiation - most penetrating, reduced by lead.',
+            markingCriteria: {
+              breakdown: ['Alpha - least penetrating/paper (1 mark)', 'Beta - medium penetrating/aluminum (1 mark)', 'Gamma - most penetrating/lead (1 mark)']
+            },
+            specReference: '4.4.1.3 - Types of radiation'
+          },
+          {
+            id: 'p4-q5',
+            question: 'Complete the nuclear equation for alpha decay: ²³⁸U → ? + ⁴He',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: '²³⁸U → ²³⁴Th + ⁴He',
+            markingCriteria: {
+              breakdown: ['Correct mass number 234 (1 mark)', 'Correct atomic number/element Th (1 mark)']
+            },
+            specReference: '4.4.1.5 - Nuclear equations'
+          },
+          {
+            id: 'p4-q6',
+            question: 'Define half-life and calculate how long it takes for a sample with half-life 8 days to decay to 1/8 of its original activity.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Half-life is the time taken for half the radioactive nuclei to decay. 1 → 1/2 → 1/4 → 1/8 takes 3 half-lives. Time = 3 × 8 = 24 days.',
+            markingCriteria: {
+              breakdown: ['Definition of half-life (1 mark)', 'Recognition of 3 half-lives needed (1 mark)', 'Correct calculation method (1 mark)', 'Correct answer 24 days (1 mark)']
+            },
+            specReference: '4.4.1.6 - Half-life',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'p4-q7',
+            question: 'Give two uses and two dangers of radioactivity.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Uses: medical treatment/diagnosis, carbon dating, nuclear power, sterilization. Dangers: cancer, radiation sickness, genetic damage, contamination.',
+            markingCriteria: {
+              breakdown: ['First use (1 mark)', 'Second use (1 mark)', 'First danger (1 mark)', 'Second danger (1 mark)']
+            },
+            specReference: '4.4.1.7 - Uses and dangers of radiation'
+          },
+          {
+            id: 'p4-q8',
+            question: 'Explain what is meant by background radiation and give three sources.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Background radiation is ionizing radiation present in the environment at all times. Sources include cosmic rays, radon gas, rocks and soil, nuclear weapons testing, nuclear accidents.',
+            markingCriteria: {
+              breakdown: ['Definition of background radiation (1 mark)', 'First source (1 mark)', 'Second source (1 mark)', 'Third source (1 mark)']
+            },
+            specReference: '4.4.1.8 - Background radiation'
+          },
+          {
+            id: 'p4-q9',
+            question: 'Describe the process of nuclear fission and explain how it is used in nuclear power stations.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Nuclear fission involves splitting large nuclei (uranium-235) by neutron bombardment. This releases energy, more neutrons, and smaller nuclei. Chain reaction occurs as neutrons split more nuclei. In power stations, controlled chain reaction heats water to produce steam that drives turbines.',
+            markingCriteria: {
+              breakdown: ['Splitting large nuclei (1 mark)', 'Neutron bombardment (1 mark)', 'Chain reaction described (1 mark)', 'Energy release (1 mark)', 'Use in power stations (1 mark)']
+            },
+            specReference: '4.4.1.9 - Nuclear fission'
+          },
+          {
+            id: 'p4-q10',
+            question: 'Explain the difference between nuclear fission and nuclear fusion.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Fission splits large nuclei into smaller ones, requires neutron bombardment, used in current power stations. Fusion joins small nuclei to form larger ones, requires very high temperatures, occurs in stars.',
+            markingCriteria: {
+              breakdown: ['Fission splits large nuclei (1 mark)', 'Fusion joins small nuclei (1 mark)', 'Different conditions required (1 mark)', 'Different applications (1 mark)']
+            },
+            specReference: '4.4.1.9 - Nuclear fission and fusion'
+          }
+        ]
+      },
+      {
+        id: 'p5-forces',
+        name: 'Forces',
+        questions: [
+          {
+            id: 'p5-q1',
+            question: 'Explain the difference between scalar and vector quantities, giving two examples of each.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Scalar quantities have magnitude only (mass, energy, speed, distance). Vector quantities have both magnitude and direction (force, velocity, displacement, acceleration).',
+            markingCriteria: {
+              breakdown: ['Scalar - magnitude only (1 mark)', 'Vector - magnitude and direction (1 mark)', 'Two scalar examples (1 mark)', 'Two vector examples (1 mark)']
+            },
+            specReference: '4.5.1.1 - Scalar and vector quantities'
+          },
+          {
+            id: 'p5-q2',
+            question: 'State Newton\'s first law of motion.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'An object will remain at rest or continue moving at constant velocity unless acted upon by a resultant force.',
+            markingCriteria: {
+              breakdown: ['Object at rest or constant velocity (1 mark)', 'Unless acted upon by resultant force (1 mark)']
+            },
+            specReference: '4.5.1.13 - Newton\'s laws'
+          },
+          {
+            id: 'p5-q3',
+            question: 'Calculate the weight of a 75 kg person on Earth where g = 9.8 m/s².',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Weight = mg = 75 × 9.8 = 735 N',
+            markingCriteria: {
+              breakdown: ['Correct formula W = mg (1 mark)', 'Correct calculation and units (1 mark)']
+            },
+            specReference: '4.5.1.3 - Weight, mass and gravity',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'p5-q4',
+            question: 'State Hooke\'s Law and give the equation that represents it.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The extension of a spring is directly proportional to the applied force, provided the elastic limit is not exceeded. F = kx',
+            markingCriteria: {
+              breakdown: ['Statement of proportionality (1 mark)', 'Correct equation F = kx (1 mark)']
+            },
+            specReference: '4.5.1.6 - Force and elasticity'
+          },
+          {
+            id: 'p5-q5',
+            question: 'A spring extends by 5 cm when a force of 10 N is applied. Calculate the spring constant.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'k = F/x = 10/0.05 = 200 N/m',
+            markingCriteria: {
+              breakdown: ['Correct rearrangement k = F/x (1 mark)', 'Conversion to meters (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: '4.5.1.6 - Force and elasticity',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'p5-q6',
+            question: 'Define the moment of a force and state the equation for calculating moments.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Moment is the turning effect of a force about a pivot. Moment = force × perpendicular distance from pivot',
+            markingCriteria: {
+              breakdown: ['Definition as turning effect (1 mark)', 'Correct equation (1 mark)']
+            },
+            specReference: '4.5.1.7 - Moments'
+          },
+          {
+            id: 'p5-q7',
+            question: 'Explain how pressure in liquids varies with depth.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Pressure increases with depth because there is more liquid above pressing down. The weight of liquid above creates the pressure. Pressure = height × density × gravity.',
+            markingCriteria: {
+              breakdown: ['Pressure increases with depth (1 mark)', 'Due to weight of liquid above (1 mark)', 'Reference to formula or proportionality (1 mark)']
+            },
+            specReference: '4.5.1.8 - Pressure in fluids'
+          },
+          {
+            id: 'p5-q8',
+            question: 'State the equation for calculating speed and use it to find the speed of a car that travels 240 km in 3 hours.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Speed = distance/time = 240/3 = 80 km/h',
+            markingCriteria: {
+              breakdown: ['Correct equation (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: '4.5.1.10 - Distance and displacement',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'p5-q9',
+            question: 'Define momentum and state the equation for calculating it.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Momentum is the product of an object\'s mass and velocity. Momentum = mass × velocity',
+            markingCriteria: {
+              breakdown: ['Definition involving mass and velocity (1 mark)', 'Correct equation p = mv (1 mark)']
+            },
+            specReference: '4.5.1.15 - Momentum'
+          },
+          {
+            id: 'p5-q10',
+            question: 'Calculate the momentum of a 1200 kg car travelling at 15 m/s.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Momentum = mv = 1200 × 15 = 18,000 kg⋅m/s',
+            markingCriteria: {
+              breakdown: ['Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: '4.5.1.15 - Momentum',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      },
+      {
+        id: 'p6-waves',
+        name: 'Waves',
+        questions: [
+          {
+            id: 'p6-q1',
+            question: 'Describe the difference between transverse and longitudinal waves, giving one example of each.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Transverse waves have oscillations perpendicular to the direction of energy transfer (light waves, water waves). Longitudinal waves have oscillations parallel to the direction of energy transfer (sound waves).',
+            markingCriteria: {
+              breakdown: ['Transverse - perpendicular oscillations (1 mark)', 'Longitudinal - parallel oscillations (1 mark)', 'Example of transverse wave (1 mark)', 'Example of longitudinal wave (1 mark)']
+            },
+            specReference: '4.6.1.1 - Types of waves'
+          },
+          {
+            id: 'p6-q2',
+            question: 'Define amplitude, frequency and wavelength for a wave.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Amplitude is the maximum displacement from the rest position. Frequency is the number of waves passing a point per second. Wavelength is the distance between two consecutive identical points on a wave.',
+            markingCriteria: {
+              breakdown: ['Amplitude definition (1 mark)', 'Frequency definition (1 mark)', 'Wavelength definition (1 mark)']
+            },
+            specReference: '4.6.1.2 - Properties of waves'
+          },
+          {
+            id: 'p6-q3',
+            question: 'State the wave equation and use it to calculate the speed of a wave with frequency 50 Hz and wavelength 6.8 m.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Wave speed = frequency × wavelength. v = 50 × 6.8 = 340 m/s',
+            markingCriteria: {
+              breakdown: ['Correct equation v = fλ (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: '4.6.1.3 - Wave speed',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'p6-q4',
+            question: 'Explain what happens when waves are reflected at a boundary.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'When waves hit a boundary, they bounce back. The angle of incidence equals the angle of reflection. The frequency and wavelength remain the same.',
+            markingCriteria: {
+              breakdown: ['Waves bounce back (1 mark)', 'Angle of incidence = angle of reflection (1 mark)', 'Frequency and wavelength unchanged (1 mark)']
+            },
+            specReference: '4.6.1.4 - Reflection and refraction'
+          },
+          {
+            id: 'p6-q5',
+            question: 'Describe what happens when waves are refracted and explain why this occurs.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Refraction is the bending of waves when they enter a different medium. It occurs because waves travel at different speeds in different media. Frequency remains constant but wavelength changes.',
+            markingCriteria: {
+              breakdown: ['Bending when entering different medium (1 mark)', 'Due to different wave speeds (1 mark)', 'Frequency constant (1 mark)', 'Wavelength changes (1 mark)']
+            },
+            specReference: '4.6.1.4 - Reflection and refraction'
+          },
+          {
+            id: 'p6-q6',
+            question: 'Explain how sound waves are produced and how they travel through air.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Sound waves are produced by vibrating objects. These create alternating compressions and rarefactions in the air. Sound travels as longitudinal pressure waves through the air particles.',
+            markingCriteria: {
+              breakdown: ['Produced by vibrating objects (1 mark)', 'Compressions and rarefactions (1 mark)', 'Longitudinal waves (1 mark)', 'Travel through air particles (1 mark)']
+            },
+            specReference: '4.6.1.5 - Sound waves'
+          },
+          {
+            id: 'p6-q7',
+            question: 'State two uses of ultrasound and explain why ultrasound is suitable for these applications.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Medical imaging and sonar. Ultrasound can penetrate soft tissues but reflects from boundaries between different materials. It is non-ionizing so safe for medical use.',
+            markingCriteria: {
+              breakdown: ['Two correct uses (1 mark)', 'Penetrates tissues (1 mark)', 'Reflects from boundaries (1 mark)', 'Non-ionizing/safe (1 mark)']
+            },
+            specReference: '4.6.1.7 - Ultrasound uses'
+          },
+          {
+            id: 'p6-q8',
+            question: 'List the electromagnetic waves in order of increasing frequency.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Radio waves, microwaves, infrared, visible light, ultraviolet, X-rays, gamma rays.',
+            markingCriteria: {
+              breakdown: ['Correct order given (4 marks for all correct, 3 marks for 1-2 errors, 2 marks for 3-4 errors, 1 mark for 5+ errors)']
+            },
+            specReference: '4.6.1.9 - Electromagnetic spectrum'
+          },
+          {
+            id: 'p6-q9',
+            question: 'Give one use and one danger of X-rays.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Use: medical imaging, security scanning. Danger: ionizing radiation can cause cancer or cell damage.',
+            markingCriteria: {
+              breakdown: ['Correct use (1 mark)', 'Correct danger (1 mark)']
+            },
+            specReference: '4.6.1.10 - Uses and dangers of EM waves'
+          },
+          {
+            id: 'p6-q10',
+            question: 'Explain how a converging lens forms an image and state what happens to parallel rays of light.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'A converging lens refracts light rays toward the principal axis. Parallel rays of light converge at the focal point. The lens can form real or virtual images depending on object position.',
+            markingCriteria: {
+              breakdown: ['Refracts light toward principal axis (1 mark)', 'Parallel rays converge at focal point (1 mark)', 'Can form real or virtual images (1 mark)']
+            },
+            specReference: '4.6.1.11 - Lenses'
+          }
+        ]
+      },
+      {
+        id: 'p7-magnetism',
+        name: 'Magnetism and electromagnetism',
+        questions: [
+          {
+            id: 'p7-q1',
+            question: 'Describe the difference between permanent and induced magnets.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Permanent magnets produce their own magnetic field and keep their magnetism. Induced magnets become magnetic only when placed in a magnetic field and lose their magnetism when removed.',
+            markingCriteria: {
+              breakdown: ['Permanent magnets produce own field (1 mark)', 'Keep their magnetism (1 mark)', 'Induced magnets only magnetic in field (1 mark)']
+            },
+            specReference: '4.7.1.1 - Permanent and induced magnets'
+          },
+          {
+            id: 'p7-q2',
+            question: 'Describe the magnetic field around a bar magnet and explain how to show this field pattern.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Field lines emerge from north pole and enter south pole. Field is strongest at the poles. Can be shown using iron filings or a plotting compass to trace field lines.',
+            markingCriteria: {
+              breakdown: ['Field lines from north to south (1 mark)', 'Strongest at poles (1 mark)', 'Iron filings method (1 mark)', 'Plotting compass method (1 mark)']
+            },
+            specReference: '4.7.1.2 - Magnetic fields'
+          },
+          {
+            id: 'p7-q3',
+            question: 'Explain what is meant by the motor effect and state the factors that affect the force.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Motor effect is the force experienced by a current-carrying conductor in a magnetic field. Force depends on magnetic field strength, current size, and length of conductor in the field.',
+            markingCriteria: {
+              breakdown: ['Force on current-carrying conductor (1 mark)', 'In magnetic field (1 mark)', 'Depends on field strength (1 mark)', 'Depends on current and length (1 mark)']
+            },
+            specReference: '4.7.1.3 - Motor effect'
+          },
+          {
+            id: 'p7-q4',
+            question: 'State Fleming\'s left-hand rule and explain what each finger represents.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Thumb represents force (motion), first finger represents magnetic field, middle finger represents current direction. Used to find direction of force on current-carrying conductor.',
+            markingCriteria: {
+              breakdown: ['Thumb = force/motion (1 mark)', 'First finger = magnetic field (1 mark)', 'Middle finger = current (1 mark)']
+            },
+            specReference: '4.7.1.3 - Fleming\'s left-hand rule'
+          },
+          {
+            id: 'p7-q5',
+            question: 'Explain how a simple electric motor works.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Current flows through a coil in a magnetic field. Motor effect creates forces on opposite sides of coil in opposite directions. This creates a turning moment. Commutator reverses current every half turn to keep motor rotating.',
+            markingCriteria: {
+              breakdown: ['Current in coil in magnetic field (1 mark)', 'Forces in opposite directions (1 mark)', 'Creates turning moment (1 mark)', 'Commutator reverses current (1 mark)', 'Keeps motor rotating (1 mark)']
+            },
+            specReference: '4.7.1.4 - Electric motors'
+          },
+          {
+            id: 'p7-q6',
+            question: 'Define electromagnetic induction and state two ways to induce an EMF.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Electromagnetic induction is the generation of EMF when there is relative motion between a conductor and magnetic field. Induced by moving conductor in field or changing magnetic field through stationary conductor.',
+            markingCriteria: {
+              breakdown: ['Definition of electromagnetic induction (1 mark)', 'Moving conductor in field (1 mark)', 'Changing field through conductor (1 mark)']
+            },
+            specReference: '4.7.1.5 - Electromagnetic induction'
+          },
+          {
+            id: 'p7-q7',
+            question: 'Explain how a simple AC generator works.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Coil rotates in magnetic field. As coil cuts through field lines, EMF is induced. Direction of induced EMF changes as coil rotates, producing alternating current.',
+            markingCriteria: {
+              breakdown: ['Coil rotates in magnetic field (1 mark)', 'Cuts through field lines (1 mark)', 'EMF induced (1 mark)', 'Direction changes producing AC (1 mark)']
+            },
+            specReference: '4.7.1.6 - AC generators'
+          },
+          {
+            id: 'p7-q8',
+            question: 'Describe how a transformer works and state the transformer equation.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Alternating current in primary coil creates changing magnetic field. This induces EMF in secondary coil. Vp/Vs = Np/Ns (voltage ratio equals turns ratio).',
+            markingCriteria: {
+              breakdown: ['AC in primary creates changing field (1 mark)', 'Induces EMF in secondary (1 mark)', 'Correct transformer equation (1 mark)', 'Voltage ratio = turns ratio (1 mark)']
+            },
+            specReference: '4.7.1.7 - Transformers'
+          },
+          {
+            id: 'p7-q9',
+            question: 'A transformer has 100 turns on the primary coil and 500 turns on the secondary coil. If the input voltage is 12 V, calculate the output voltage.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Vs = Vp × Ns/Np = 12 × 500/100 = 12 × 5 = 60 V',
+            markingCriteria: {
+              breakdown: ['Correct rearrangement of transformer equation (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: '4.7.1.7 - Transformers',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'p7-q10',
+            question: 'Explain why transformers are used in the National Grid system.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Step-up transformers increase voltage for transmission to reduce current and power losses. Step-down transformers reduce voltage for safe domestic use. High voltage transmission is more efficient.',
+            markingCriteria: {
+              breakdown: ['Step-up increases voltage (1 mark)', 'Reduces current and power losses (1 mark)', 'Step-down for domestic safety (1 mark)', 'High voltage more efficient (1 mark)']
+            },
+            specReference: '4.7.1.8 - Transformers in National Grid'
+          }
+        ]
+      },
+      {
+        id: 'p8-space-physics',
+        name: 'Space physics',
+        questions: [
+          {
+            id: 'p8-q1',
+            question: 'Describe the structure of the solar system.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'The solar system consists of the Sun at the center, eight planets in orbit, with moons orbiting some planets. Also includes asteroids, comets, and dwarf planets.',
+            markingCriteria: {
+              breakdown: ['Sun at center (1 mark)', 'Eight planets in orbit (1 mark)', 'Moons orbit planets (1 mark)', 'Other objects like asteroids/comets (1 mark)']
+            },
+            specReference: '4.8.1.1 - Solar system'
+          },
+          {
+            id: 'p8-q2',
+            question: 'Explain what keeps planets in orbit around the Sun.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Gravitational force between Sun and planet provides centripetal force. This force acts toward the center keeping planet in circular orbit. Balance between gravitational force and orbital motion.',
+            markingCriteria: {
+              breakdown: ['Gravitational force (1 mark)', 'Provides centripetal force (1 mark)', 'Keeps planet in orbit (1 mark)']
+            },
+            specReference: '4.8.1.2 - Orbits'
+          },
+          {
+            id: 'p8-q3',
+            question: 'Describe the life cycle of a star similar in mass to our Sun.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Nebula contracts under gravity forming protostar. Nuclear fusion begins making it a main sequence star. When hydrogen runs out, star expands to become red giant. Outer layers drift away leaving white dwarf which eventually cools.',
+            markingCriteria: {
+              breakdown: ['Nebula contracts (1 mark)', 'Protostar forms (1 mark)', 'Main sequence star (1 mark)', 'Red giant phase (1 mark)', 'White dwarf formed (1 mark)', 'Eventually cools (1 mark)']
+            },
+            specReference: '4.8.1.3 - Life cycle of stars'
+          },
+          {
+            id: 'p8-q4',
+            question: 'Explain what red-shift is and what it tells us about distant galaxies.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Red-shift is the increase in wavelength of light from distant galaxies. It occurs because galaxies are moving away from us. The more distant the galaxy, the greater the red-shift, showing universe is expanding.',
+            markingCriteria: {
+              breakdown: ['Increase in wavelength (1 mark)', 'Due to galaxies moving away (1 mark)', 'Greater distance = greater red-shift (1 mark)', 'Shows universe expanding (1 mark)']
+            },
+            specReference: '4.8.1.4 - Red-shift'
+          },
+          {
+            id: 'p8-q5',
+            question: 'State the main evidence for the Big Bang theory.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Red-shift of distant galaxies shows universe is expanding. Cosmic microwave background radiation detected throughout universe. Observed abundance of light elements matches Big Bang predictions.',
+            markingCriteria: {
+              breakdown: ['Red-shift/expanding universe (1 mark)', 'Cosmic microwave background (1 mark)', 'Light element abundance (1 mark)']
+            },
+            specReference: '4.8.1.5 - Big Bang theory'
+          },
+          {
+            id: 'p8-q6',
+            question: 'Explain why more massive stars have shorter lifetimes than less massive stars.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'More massive stars have higher core temperatures and pressures. Nuclear fusion occurs much faster. They burn through their fuel supply more quickly.',
+            markingCriteria: {
+              breakdown: ['Higher temperatures and pressures (1 mark)', 'Faster nuclear fusion (1 mark)', 'Burn fuel more quickly (1 mark)']
+            },
+            specReference: '4.8.1.3 - Life cycle of stars'
+          },
+          {
+            id: 'p8-q7',
+            question: 'Describe what happens when a very massive star reaches the end of its life.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Very massive stars explode as supernovas. The core may collapse to form a neutron star or black hole. The explosion spreads heavy elements throughout space.',
+            markingCriteria: {
+              breakdown: ['Explodes as supernova (1 mark)', 'Core collapses (1 mark)', 'Forms neutron star or black hole (1 mark)', 'Spreads heavy elements (1 mark)']
+            },
+            specReference: '4.8.1.3 - Life cycle of stars'
+          },
+          {
+            id: 'p8-q8',
+            question: 'Explain how nuclear fusion in stars produces the energy that makes them shine.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Hydrogen nuclei fuse together under extreme temperature and pressure in the star\'s core. This forms helium nuclei and releases enormous amounts of energy. Energy travels to surface and is radiated as light.',
+            markingCriteria: {
+              breakdown: ['Hydrogen nuclei fuse (1 mark)', 'Extreme conditions in core (1 mark)', 'Forms helium and releases energy (1 mark)', 'Energy radiated as light (1 mark)']
+            },
+            specReference: '4.8.1.3 - Nuclear fusion in stars'
+          },
+          {
+            id: 'p8-q9',
+            question: 'Describe the evidence that suggests the universe is expanding.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Red-shift observed in light from distant galaxies. The further away a galaxy is, the greater its red-shift. This suggests all galaxies are moving away from us.',
+            markingCriteria: {
+              breakdown: ['Red-shift in distant galaxies (1 mark)', 'Further = greater red-shift (1 mark)', 'Galaxies moving away (1 mark)']
+            },
+            specReference: '4.8.1.4 - Expanding universe'
+          },
+          {
+            id: 'p8-q10',
+            question: 'Explain why scientists believe that all matter in the universe was once concentrated in a very small space.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'If the universe is expanding now, working backwards suggests it was smaller in the past. Cosmic microwave background radiation is evidence of the hot, dense early universe. Mathematical models support this.',
+            markingCriteria: {
+              breakdown: ['Expansion suggests smaller past (1 mark)', 'CMB evidence of hot dense start (1 mark)', 'Mathematical models support this (1 mark)']
+            },
+            specReference: '4.8.1.5 - Big Bang theory'
+          }
+        ]
+      }
+    ]
+  },
+  {
     id: 'geography',
     name: 'Geography',
     topics: [
