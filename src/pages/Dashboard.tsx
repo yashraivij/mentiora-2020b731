@@ -17,6 +17,7 @@ import { TopicMasteryDisplay } from "@/components/dashboard/TopicMasteryDisplay"
 import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
 import { PredictivePerformanceCard } from "@/components/dashboard/PredictivePerformanceCard";
 import { OptimalStudyTimeCard } from "@/components/dashboard/OptimalStudyTimeCard";
+import { PredictedQuestionsSection } from "@/components/dashboard/PredictedQuestionsSection";
 import { supabase } from "@/integrations/supabase/client";
 
 interface UserProgress {
@@ -298,6 +299,9 @@ const Dashboard = () => {
           </div>
         </div>
 
+        {/* Predicted 2026 Questions Section */}
+        <PredictedQuestionsSection />
+
         {/* Predicted Grades Graph */}
         <PredictedGradesGraph userProgress={userProgress} />
 
@@ -409,86 +413,6 @@ const Dashboard = () => {
               onPractice={handlePractice}
             />
           </div>
-        </div>
-
-        {/* Predicted 2026 Questions Section */}
-        <div className="mb-8">
-          <div className="flex items-center space-x-3 mb-6">
-            <Crown className="h-6 w-6 text-amber-500" />
-            <h3 className="text-2xl font-bold text-foreground">Predicted 2026 Questions</h3>
-            <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0">
-              Premium
-            </Badge>
-          </div>
-          
-          <Card 
-            className="group cursor-pointer border-2 border-amber-200/50 dark:border-amber-800/30 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/20 overflow-hidden"
-            onClick={() => navigate('/predicted-questions')}
-          >
-            <div className="h-2 bg-gradient-to-r from-amber-500 to-orange-500" />
-            <CardHeader className="pb-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
-                    <Crown className="h-8 w-8 text-white" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-2xl text-amber-700 dark:text-amber-300 group-hover:text-amber-600 dark:group-hover:text-amber-200 transition-colors">
-                      Full-Length Predicted Papers
-                    </CardTitle>
-                    <CardDescription className="text-amber-600 dark:text-amber-400 mt-1 text-base">
-                      Experience realistic 2026 GCSE exam conditions
-                    </CardDescription>
-                  </div>
-                </div>
-                <div className="flex flex-col items-end space-y-2">
-                  <Badge className="bg-gradient-to-r from-green-500 to-green-600 text-white border-0">
-                    New Papers Weekly
-                  </Badge>
-                  <Badge variant="outline" className="text-amber-700 dark:text-amber-300 border-amber-300 dark:border-amber-700">
-                    {curriculum.length} Subjects
-                  </Badge>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-6">
-                    <div className="flex items-center space-x-2 text-sm text-amber-600 dark:text-amber-400">
-                      <Clock className="h-4 w-4" />
-                      <span>1hr 45min per paper</span>
-                    </div>
-                    <div className="flex items-center space-x-2 text-sm text-amber-600 dark:text-amber-400">
-                      <Target className="h-4 w-4" />
-                      <span>Full AQA format</span>
-                    </div>
-                    <div className="flex items-center space-x-2 text-sm text-amber-600 dark:text-amber-400">
-                      <Brain className="h-4 w-4" />
-                      <span>AI marking & feedback</span>
-                    </div>
-                  </div>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 hover:bg-amber-200 dark:hover:bg-amber-900/50 group-hover:bg-amber-500 group-hover:text-white transition-all"
-                  >
-                    Start Practice
-                  </Button>
-                </div>
-                
-                <div className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-xl p-4 border border-amber-200/30 dark:border-amber-800/30">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-amber-700 dark:text-amber-300">Next GCSE Exam</span>
-                    <span className="text-xs text-amber-600 dark:text-amber-400">Thursday, May 7th 2026</span>
-                  </div>
-                  <div className="text-2xl font-bold text-amber-700 dark:text-amber-300">
-                    {Math.ceil((new Date('2026-05-07').getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))} days remaining
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
 
         {/* Premium Locked Analytics */}
