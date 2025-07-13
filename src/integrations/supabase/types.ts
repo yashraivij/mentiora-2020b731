@@ -521,6 +521,60 @@ export type Database = {
         }
         Relationships: []
       }
+      predicted_exam_completions: {
+        Row: {
+          achieved_marks: number
+          answers: Json
+          completed_at: string
+          created_at: string
+          exam_date: string
+          grade: string
+          id: string
+          percentage: number
+          questions: Json
+          results: Json
+          subject_id: string
+          time_taken_seconds: number
+          total_marks: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          achieved_marks: number
+          answers: Json
+          completed_at?: string
+          created_at?: string
+          exam_date?: string
+          grade: string
+          id?: string
+          percentage: number
+          questions: Json
+          results: Json
+          subject_id: string
+          time_taken_seconds: number
+          total_marks: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          achieved_marks?: number
+          answers?: Json
+          completed_at?: string
+          created_at?: string
+          exam_date?: string
+          grade?: string
+          id?: string
+          percentage?: number
+          questions?: Json
+          results?: Json
+          subject_id?: string
+          time_taken_seconds?: number
+          total_marks?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
