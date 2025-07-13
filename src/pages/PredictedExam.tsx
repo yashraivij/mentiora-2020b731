@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -27,7 +27,6 @@ const PredictedExam = () => {
   const { subjectId } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const location = useLocation();
   
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTimeUp, setIsTimeUp] = useState(false);
@@ -43,20 +42,8 @@ const PredictedExam = () => {
     return null;
   }
 
-  // Check if this is a retry scenario
-  const { retryQuestions, isRetry } = location.state || {};
-
-  // Generate exam questions from subject topics or use retry questions
+  // Generate exam questions from subject topics
   const generateExamQuestions = (): ExamQuestion[] => {
-    // If retry mode, use the provided retry questions
-    if (isRetry && retryQuestions) {
-      return retryQuestions.map((q: any, index: number) => ({
-        ...q,
-        questionNumber: index + 1
-      }));
-    }
-
-    // Otherwise generate fresh questions
     const questions: ExamQuestion[] = [];
     let questionNumber = 1;
     

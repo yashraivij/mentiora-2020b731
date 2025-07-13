@@ -20,27 +20,6 @@ const PredictedQuestions = () => {
     fetchCompletedExams();
   }, []);
 
-  // Refetch completed exams when the page becomes visible again
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (!document.hidden) {
-        fetchCompletedExams();
-      }
-    };
-
-    const handleFocus = () => {
-      fetchCompletedExams();
-    };
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('focus', handleFocus);
-
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('focus', handleFocus);
-    };
-  }, []);
-
   const fetchCompletedExams = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
