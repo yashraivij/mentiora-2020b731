@@ -273,33 +273,48 @@ const PredictedResults = () => {
   }, [questions, answers, subject, subjectId, totalMarks, achievedMarks, percentage, grade.grade, timeElapsed, results, toast, isReview]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10">
-      <header className="bg-card/90 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-lg">
+    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-blue-50 to-indigo-50 dark:from-violet-950 dark:via-blue-950 dark:to-indigo-950">
+      <header className="bg-gradient-to-r from-violet-600/90 via-blue-600/90 to-indigo-600/90 backdrop-blur-xl border-b border-white/20 sticky top-0 z-50 shadow-2xl shadow-violet-500/20">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <Button variant="ghost" onClick={() => navigate('/predicted-questions')} className="text-muted-foreground hover:text-foreground">
+            <Button 
+              variant="ghost" 
+              onClick={() => navigate('/predicted-questions')} 
+              className="text-white/90 hover:text-white hover:bg-white/20 transition-all duration-300"
+            >
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Predicted Questions
             </Button>
-            <ThemeToggle />
+            <div className="bg-white/20 backdrop-blur-sm rounded-full p-1">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </header>
 
       <div className="container mx-auto px-6 py-8 max-w-6xl">
-        {/* Results Header */}
-        <Card className="mb-8 border-primary/20 bg-gradient-to-br from-primary/5 to-background">
-          <CardHeader>
-            <div className="flex items-center space-x-3">
-              <Crown className="h-8 w-8 text-amber-500" />
+        {/* Premium Results Header */}
+        <Card className="mb-8 border-0 bg-gradient-to-br from-white via-violet-50 to-blue-50 dark:from-gray-900 dark:via-violet-950/50 dark:to-blue-950/50 shadow-2xl shadow-violet-500/10 overflow-hidden relative">
+          {/* Decorative background elements */}
+          <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-transparent to-blue-500/5"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-amber-200/20 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-emerald-200/20 to-transparent rounded-full blur-3xl"></div>
+          
+          <CardHeader className="relative z-10 pb-6">
+            <div className="flex items-center space-x-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-amber-400 via-orange-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-xl shadow-amber-500/30">
+                <Crown className="h-8 w-8 text-white" />
+              </div>
               <div>
-                <CardTitle className="text-2xl font-bold">{subject.name} Exam Results</CardTitle>
-                <CardDescription className="flex items-center space-x-2">
-                  <span>AQA GCSE Predicted Paper</span>
+                <CardTitle className="text-3xl font-bold bg-gradient-to-r from-violet-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                  {subject.name} Exam Results
+                </CardTitle>
+                <CardDescription className="flex items-center space-x-2 text-lg">
+                  <span className="bg-gradient-to-r from-violet-600 to-blue-600 bg-clip-text text-transparent font-semibold">AQA GCSE Predicted Paper</span>
                   {isReview && (
                     <>
-                      <span>•</span>
-                      <Badge variant="secondary" className="text-xs">
+                      <span className="text-muted-foreground">•</span>
+                      <Badge variant="secondary" className="bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 border-emerald-200">
                         Completed: {new Date(completion?.completed_at).toLocaleDateString()}
                       </Badge>
                     </>
@@ -309,104 +324,152 @@ const PredictedResults = () => {
             </div>
           </CardHeader>
           
-          <CardContent>
+          <CardContent className="relative z-10 pt-0">
             <div className="grid md:grid-cols-4 gap-6">
-              <div className="text-center">
-                <div className={`text-4xl font-bold ${grade.color} mb-2`}>
-                  Grade {grade.grade}
+              <div className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-2xl p-6 border border-emerald-200/50 dark:border-emerald-800/50 shadow-lg">
+                <div className="flex items-center space-x-3 mb-3">
+                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <Target className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-emerald-700 dark:text-emerald-300">Final Score</p>
+                    <p className="text-2xl font-bold text-emerald-800 dark:text-emerald-200">{achievedMarks}/{totalMarks}</p>
+                  </div>
                 </div>
-                <p className="text-sm text-muted-foreground">Predicted Grade</p>
+                <Progress value={percentage} className="h-3 bg-emerald-100 dark:bg-emerald-900/30">
+                  <div className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transition-all duration-500"></div>
+                </Progress>
               </div>
-              
-              <div className="text-center">
-                <div className="text-4xl font-bold text-foreground mb-2">
-                  {percentage}%
+
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 rounded-2xl p-6 border border-blue-200/50 dark:border-blue-800/50 shadow-lg">
+                <div className="flex items-center space-x-3 mb-3">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <span className="text-2xl font-bold text-white">{grade.grade}</span>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-blue-700 dark:text-blue-300">Predicted Grade</p>
+                    <p className="text-lg font-bold text-blue-800 dark:text-blue-200">{percentage}%</p>
+                  </div>
                 </div>
-                <p className="text-sm text-muted-foreground">Overall Score</p>
               </div>
-              
-              <div className="text-center">
-                <div className="text-4xl font-bold text-foreground mb-2">
-                  {achievedMarks}/{totalMarks}
+
+              <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 rounded-2xl p-6 border border-amber-200/50 dark:border-amber-800/50 shadow-lg">
+                <div className="flex items-center space-x-3 mb-3">
+                  <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <Clock className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-amber-700 dark:text-amber-300">Time Taken</p>
+                    <p className="text-lg font-bold text-amber-800 dark:text-amber-200">{timeFormatted}</p>
+                  </div>
                 </div>
-                <p className="text-sm text-muted-foreground">Marks Achieved</p>
               </div>
-              
-              <div className="text-center">
-                <div className="text-4xl font-bold text-foreground mb-2">
-                  {timeFormatted}
+
+              <div className="bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/30 dark:to-violet-950/30 rounded-2xl p-6 border border-purple-200/50 dark:border-purple-800/50 shadow-lg">
+                <div className="flex items-center space-x-3 mb-3">
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-violet-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <BookOpen className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-purple-700 dark:text-purple-300">Questions</p>
+                    <p className="text-lg font-bold text-purple-800 dark:text-purple-200">{questions.length} Total</p>
+                  </div>
                 </div>
-                <p className="text-sm text-muted-foreground">Time Taken</p>
               </div>
-            </div>
-            
-            <div className="mt-6">
-              <div className="flex justify-between text-sm text-muted-foreground mb-2">
-                <span>Progress</span>
-                <span>{achievedMarks}/{totalMarks} marks</span>
-              </div>
-              <Progress value={percentage} className="h-3" />
             </div>
           </CardContent>
         </Card>
 
-        {/* Question by Question Results */}
-        <div className="space-y-6">
-          <h3 className="text-xl font-bold text-foreground">Detailed Marking & Feedback</h3>
+        {/* Premium Question by Question Results */}
+        <div className="space-y-8">
+          <div className="text-center">
+            <h3 className="text-3xl font-bold bg-gradient-to-r from-violet-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">
+              Detailed Marking & Expert Feedback
+            </h3>
+            <p className="text-lg text-muted-foreground">Premium AI analysis for every question</p>
+          </div>
           
           {results.map((result, index) => (
-            <Card key={result.question.id} className="overflow-hidden">
-              <CardHeader className="bg-muted/30">
+            <Card key={result.question.id} className="overflow-hidden border-0 shadow-2xl shadow-violet-500/10 bg-gradient-to-br from-white via-gray-50 to-violet-50/30 dark:from-gray-900 dark:via-gray-800 dark:to-violet-950/30 relative">
+              {/* Decorative gradient border */}
+              <div className="absolute inset-0 bg-gradient-to-r from-violet-500 via-blue-500 to-indigo-500 rounded-xl opacity-20 blur-sm"></div>
+              <div className="absolute inset-0.5 bg-gradient-to-br from-white via-gray-50 to-violet-50/50 dark:from-gray-900 dark:via-gray-800 dark:to-violet-950/50 rounded-xl"></div>
+              
+              <CardHeader className="relative bg-gradient-to-r from-violet-50 via-blue-50 to-indigo-50 dark:from-violet-950/20 dark:via-blue-950/20 dark:to-indigo-950/20 border-b border-gradient-to-r from-violet-200 to-blue-200 dark:from-violet-800 dark:to-blue-800">
                 <div className="flex justify-between items-start">
-                  <div>
-                    <CardTitle className="text-lg">
-                      Question {result.question.questionNumber}
-                    </CardTitle>
-                    {result.question.section && (
-                      <Badge variant="outline" className="mt-2">
-                        Section {result.question.section}
-                      </Badge>
-                    )}
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-violet-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                      <span className="text-white font-bold text-lg">{result.question.questionNumber}</span>
+                    </div>
+                    <div>
+                      <CardTitle className="text-xl bg-gradient-to-r from-violet-600 to-blue-600 bg-clip-text text-transparent">
+                        Question {result.question.questionNumber}
+                      </CardTitle>
+                      {result.question.section && (
+                        <Badge variant="outline" className="mt-2 border-violet-300 text-violet-700 bg-violet-100/50">
+                          Section {result.question.section}
+                        </Badge>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <Badge variant={result.marksAwarded === result.question.marks ? "default" : result.marksAwarded > 0 ? "secondary" : "destructive"}>
+                  <div className="flex items-center space-x-3">
+                    <Badge 
+                      variant={result.marksAwarded === result.question.marks ? "default" : result.marksAwarded > 0 ? "secondary" : "destructive"}
+                      className={`text-lg font-bold px-4 py-2 ${
+                        result.marksAwarded === result.question.marks 
+                          ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg' 
+                          : result.marksAwarded > 0 
+                            ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg' 
+                            : 'bg-gradient-to-r from-red-500 to-pink-500 text-white shadow-lg'
+                      }`}
+                    >
                       {result.marksAwarded}/{result.question.marks} marks
                     </Badge>
                     {result.marksAwarded === result.question.marks ? (
-                      <CheckCircle className="h-5 w-5 text-green-600" />
+                      <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center shadow-lg">
+                        <CheckCircle className="h-6 w-6 text-white" />
+                      </div>
                     ) : result.marksAwarded > 0 ? (
-                      <Target className="h-5 w-5 text-amber-600" />
+                      <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center shadow-lg">
+                        <Target className="h-6 w-6 text-white" />
+                      </div>
                     ) : (
-                      <XCircle className="h-5 w-5 text-red-600" />
+                      <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-pink-600 rounded-full flex items-center justify-center shadow-lg">
+                        <XCircle className="h-6 w-6 text-white" />
+                      </div>
                     )}
                   </div>
                 </div>
               </CardHeader>
               
-              <CardContent className="space-y-6">
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Question:</h4>
-                  <p className="text-muted-foreground whitespace-pre-wrap">{result.question.text}</p>
+              <CardContent className="relative space-y-6 p-8">
+                <div className="bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-800 dark:to-slate-800 rounded-xl p-5 border border-gray-200/50 dark:border-gray-700/50">
+                  <h4 className="font-bold text-gray-700 dark:text-gray-200 mb-3 flex items-center">
+                    <span className="w-6 h-6 bg-gray-500 rounded-full flex items-center justify-center mr-3">
+                      <span className="text-white text-xs font-bold">❓</span>
+                    </span>
+                    Question
+                  </h4>
+                  <div className="bg-white/70 dark:bg-gray-900/70 rounded-lg p-4 backdrop-blur-sm border border-gray-100 dark:border-gray-800/50">
+                    <p className="whitespace-pre-wrap text-gray-800 dark:text-gray-200 leading-relaxed">{result.question.text}</p>
+                  </div>
                 </div>
                 
                 {result.answer && (
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">Your Answer:</h4>
-                    <div className="bg-muted/50 rounded-lg p-3">
-                      <p className="text-sm whitespace-pre-wrap">{result.answer.answer}</p>
+                  <div className="bg-gradient-to-r from-slate-50 to-gray-50 dark:from-slate-800 dark:to-gray-800 rounded-xl p-5 border border-slate-200/50 dark:border-slate-700/50">
+                    <h4 className="font-bold text-slate-700 dark:text-slate-200 mb-3 flex items-center">
+                      <span className="w-6 h-6 bg-slate-500 rounded-full flex items-center justify-center mr-3">
+                        <span className="text-white text-xs font-bold">✍️</span>
+                      </span>
+                      Your Answer
+                    </h4>
+                    <div className="bg-white/70 dark:bg-gray-900/70 rounded-lg p-4 backdrop-blur-sm border border-slate-100 dark:border-slate-800/50">
+                      <p className="text-sm whitespace-pre-wrap text-slate-800 dark:text-slate-200 leading-relaxed">{result.answer.answer}</p>
                     </div>
                   </div>
                 )}
-                
-                <div>
-                  <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                    <span className="mr-2">✅</span>
-                    Model Full Marks Answer:
-                  </h4>
-                  <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-                    <p className="text-sm text-green-800 dark:text-green-200 leading-relaxed">{result.modelAnswer}</p>
-                  </div>
-                </div>
+
+                {/* Premium AI Teacher Feedback */}
 
                 {/* Premium AI Teacher Feedback */}
                 <div className="relative overflow-hidden bg-gradient-to-br from-violet-50 via-blue-50 to-indigo-50 dark:from-violet-950/20 dark:via-blue-950/20 dark:to-indigo-950/20 border-2 border-gradient-to-r from-violet-200 to-blue-200 dark:from-violet-800 dark:to-blue-800 rounded-2xl shadow-xl shadow-violet-100/50 dark:shadow-violet-900/20">
@@ -506,18 +569,29 @@ const PredictedResults = () => {
           ))}
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex justify-center space-x-4 mt-8">
-          <Button variant="outline" onClick={() => navigate(`/predicted-exam/${subjectId}`)}>
-            <RotateCcw className="h-4 w-4 mr-2" />
+        {/* Premium Action Buttons */}
+        <div className="flex justify-center space-x-6 mt-12">
+          <Button 
+            variant="outline" 
+            onClick={() => navigate(`/predicted-exam/${subjectId}`)}
+            className="bg-gradient-to-r from-violet-50 to-blue-50 border-violet-300 text-violet-700 hover:from-violet-100 hover:to-blue-100 hover:border-violet-400 transition-all duration-300 shadow-lg hover:shadow-xl px-8 py-3"
+          >
+            <RotateCcw className="h-5 w-5 mr-2" />
             Retake This Exam
           </Button>
-          <Button variant="outline" onClick={() => navigate('/predicted-questions')}>
-            <BookOpen className="h-4 w-4 mr-2" />
+          <Button 
+            variant="outline" 
+            onClick={() => navigate('/predicted-questions')}
+            className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-300 text-blue-700 hover:from-blue-100 hover:to-indigo-100 hover:border-blue-400 transition-all duration-300 shadow-lg hover:shadow-xl px-8 py-3"
+          >
+            <BookOpen className="h-5 w-5 mr-2" />
             Try Another Subject
           </Button>
-          <Button onClick={() => navigate('/dashboard')} className="bg-gradient-to-r from-primary to-primary/90">
-            <Target className="h-4 w-4 mr-2" />
+          <Button 
+            onClick={() => navigate('/dashboard')} 
+            className="bg-gradient-to-r from-violet-600 via-blue-600 to-indigo-600 hover:from-violet-700 hover:via-blue-700 hover:to-indigo-700 text-white shadow-2xl hover:shadow-violet-500/25 transition-all duration-300 px-8 py-3"
+          >
+            <Target className="h-5 w-5 mr-2" />
             Back to Dashboard
           </Button>
         </div>
