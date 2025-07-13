@@ -46,7 +46,7 @@ STUDENT'S ANSWER: ${userAnswer}
 CORRECT ANSWER: ${modelAnswer}
 
 WHAT TO LOOK FOR:
-${typeof markingCriteria === 'string' ? markingCriteria : markingCriteria.breakdown ? markingCriteria.breakdown.join('\n') : markingCriteria}
+${markingCriteria.breakdown.join('\n')}
 
 TOTAL MARKS: ${totalMarks}${formulaSheetNote}
 
