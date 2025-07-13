@@ -69,25 +69,25 @@ const PredictedQuestions = () => {
       </div>
       
       {/* Header */}
-      <header className="relative z-10 bg-white/10 backdrop-blur-xl border-b border-white/20 sticky top-0 shadow-2xl">
+      <header className="relative z-10 bg-gradient-to-r from-slate-900/90 to-slate-800/90 backdrop-blur-xl border-b border-slate-700/50 sticky top-0 shadow-2xl">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <Button 
                 variant="ghost" 
                 onClick={() => navigate('/dashboard')} 
-                className="text-white/80 hover:text-white hover:bg-white/10 backdrop-blur-sm"
+                className="text-slate-200 hover:text-white hover:bg-slate-700/50 backdrop-blur-sm"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back to Dashboard
               </Button>
               <div className="flex items-center space-x-3">
                 <div className="p-2 bg-gradient-to-br from-yellow-400/30 to-orange-400/30 rounded-xl border border-yellow-400/30 backdrop-blur-sm">
-                  <Crown className="h-6 w-6 text-white" />
+                  <Crown className="h-6 w-6 text-yellow-200" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-white">Predicted 2026 Questions</h1>
-                  <p className="text-sm text-white/90">Premium exam simulation</p>
+                  <h1 className="text-xl font-bold text-slate-100">Predicted 2026 Questions</h1>
+                  <p className="text-sm text-slate-300">Premium exam simulation</p>
                 </div>
               </div>
             </div>
@@ -104,15 +104,15 @@ const PredictedQuestions = () => {
               <Crown className="h-3 w-3 mr-1" />
               PREMIUM EXCLUSIVE
             </Badge>
-            <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
+            <Badge className="bg-gradient-to-r from-slate-700/80 to-slate-600/80 text-slate-200 border-slate-500/50 backdrop-blur-sm">
               <Zap className="h-3 w-3 mr-1" />
               Weekly Updates
             </Badge>
           </div>
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-4xl font-bold text-slate-100 mb-4">
             Select Your Subject
           </h2>
-          <p className="text-white/90 text-lg max-w-2xl mx-auto">
+          <p className="text-slate-300 text-lg max-w-2xl mx-auto">
             Choose a subject to start your full-length predicted exam practice. 
             Each paper follows the exact AQA format with real exam timing.
           </p>
@@ -123,25 +123,25 @@ const PredictedQuestions = () => {
           {curriculum.map((subject) => (
             <Card 
               key={subject.id} 
-              className="group cursor-pointer relative overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+              className="group cursor-pointer relative overflow-hidden bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-sm border border-slate-600/50 hover:border-slate-500/70 hover:bg-gradient-to-br hover:from-slate-700/90 hover:to-slate-800/90 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
               onClick={() => handleSubjectSelect(subject.id)}
             >
               {/* Card Background Gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${getSubjectColor(subject.id)} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
+              <div className={`absolute inset-0 bg-gradient-to-br ${getSubjectColor(subject.id)} opacity-15 group-hover:opacity-25 transition-opacity duration-300`} />
               
               <CardHeader className="relative pb-4">
                 <div className="flex items-center justify-between">
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${getSubjectColor(subject.id)} flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 border border-white/20`}>
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${getSubjectColor(subject.id)} flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 border border-slate-600/30`}>
                     <BookOpen className="h-7 w-7 text-white" />
                   </div>
-                  <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm text-xs">
+                  <Badge className="bg-gradient-to-r from-slate-700/80 to-slate-600/80 text-slate-200 border-slate-500/50 backdrop-blur-sm text-xs">
                     AQA GCSE
                   </Badge>
                 </div>
-                <CardTitle className="text-xl font-bold text-white group-hover:text-yellow-200 transition-colors mt-3">
+                <CardTitle className="text-xl font-bold text-slate-100 group-hover:text-yellow-200 transition-colors mt-3">
                   {subject.name}
                 </CardTitle>
-                <CardDescription className="text-white/80 text-sm">
+                <CardDescription className="text-slate-300 text-sm">
                   Full predicted paper practice
                 </CardDescription>
               </CardHeader>
@@ -149,23 +149,23 @@ const PredictedQuestions = () => {
               <CardContent className="relative pt-0">
                 <div className="space-y-4">
                   <div className="space-y-3">
-                    <div className="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm border border-white/20">
+                    <div className="flex items-center space-x-3 bg-gradient-to-r from-slate-700/60 to-slate-600/60 rounded-xl p-3 backdrop-blur-sm border border-slate-500/30">
                       <div className="p-1.5 bg-gradient-to-br from-blue-400/30 to-cyan-400/30 rounded-lg">
-                        <Clock className="h-4 w-4 text-white" />
+                        <Clock className="h-4 w-4 text-cyan-200" />
                       </div>
                       <div>
-                        <p className="text-white text-sm font-medium">Duration: {getExamDuration(subject.id)}</p>
-                        <p className="text-white/70 text-xs">Real exam timing</p>
+                        <p className="text-slate-100 text-sm font-medium">Duration: {getExamDuration(subject.id)}</p>
+                        <p className="text-slate-300 text-xs">Real exam timing</p>
                       </div>
                     </div>
                     
-                    <div className="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm border border-white/20">
+                    <div className="flex items-center space-x-3 bg-gradient-to-r from-slate-700/60 to-slate-600/60 rounded-xl p-3 backdrop-blur-sm border border-slate-500/30">
                       <div className="p-1.5 bg-gradient-to-br from-green-400/30 to-emerald-400/30 rounded-lg">
-                        <Target className="h-4 w-4 text-white" />
+                        <Target className="h-4 w-4 text-emerald-200" />
                       </div>
                       <div>
-                        <p className="text-white text-sm font-medium">{subject.topics.length} topics covered</p>
-                        <p className="text-white/70 text-xs">Full specification</p>
+                        <p className="text-slate-100 text-sm font-medium">{subject.topics.length} topics covered</p>
+                        <p className="text-slate-300 text-xs">Full specification</p>
                       </div>
                     </div>
                   </div>
