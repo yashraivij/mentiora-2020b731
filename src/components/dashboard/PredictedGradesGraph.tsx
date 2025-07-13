@@ -504,7 +504,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                       </div>
                       
                       {/* Subject Labels with Perfect Centering */}
-                      <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 text-center min-w-max">
+                      <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center min-w-max">
                         <div className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-2 leading-tight whitespace-nowrap">
                           {subject.name}
                         </div>
@@ -517,11 +517,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                             subject.confidence === 'High' ? 'bg-green-500 shadow-green-500/50' :
                             subject.confidence === 'Medium' ? 'bg-yellow-500 shadow-yellow-500/50' : 'bg-orange-500 shadow-orange-500/50'
                           } shadow-lg animate-pulse`}></div>
-                        </div>
-                        
-                        {/* Premium Enhancement: Subject performance indicator */}
-                        <div className="mt-1 text-xs text-slate-500 dark:text-slate-400 font-medium">
-                          {subject.percentage}% • {subject.confidence}
                         </div>
                       </div>
                     </div>
