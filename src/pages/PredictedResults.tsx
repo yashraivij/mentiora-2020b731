@@ -36,6 +36,7 @@ interface QuestionAttempt {
     whyThisGetsMark: string;
     whyYoursDidnt: string;
     specLink: string;
+    fullMarks?: boolean;
   };
 }
 
@@ -73,7 +74,7 @@ const PredictedResults = () => {
           question: question.text || question.question,
           userAnswer: answer,
           modelAnswer: modelAnswer,
-          markingCriteria: question.markingCriteria || generateMarkingCriteria(question.text || question.question || ''),
+          markingCriteria: question.markingCriteria || generateMarkingCriteria(question.text || question.question || '', question.marks),
           totalMarks: question.marks,
           subjectId: subjectId
         }
@@ -104,45 +105,37 @@ const PredictedResults = () => {
     }
   };
 
-  const generateMarkingCriteria = (questionText: string): string => {
+  const generateMarkingCriteria = (questionText: string, marks: number): string => {
     const question = questionText.toLowerCase();
     
-    // Subject-specific marking criteria with AO breakdown
-    if (subjectId === 'chemistry') {
-      if (question.includes('balance') && question.includes('equation')) {
-        return "AO1 (Knowledge): Recall correct chemical formulae and symbols (1 mark)\nAO2 (Application): Apply balancing rules to achieve correct coefficients (1 mark)\nAO2 (Application): Include state symbols where specified (1 mark)";
-      }
-      if (question.includes('calculate') && question.includes('mole')) {
-        return "AO1 (Knowledge): Recall formula: moles = mass ÷ Mr (1 mark)\nAO2 (Application): Correctly substitute given values (1 mark)\nAO3 (Analysis): Complete calculation with correct units and significant figures (1 mark)";
-      }
-      if (question.includes('ph') || question.includes('acid')) {
-        return "AO1 (Knowledge): Define pH scale and its relationship to H+ concentration (1 mark)\nAO2 (Application): Identify correct pH value for given scenario (1 mark)\nAO3 (Analysis): Explain significance of pH value in context (1 mark)";
-      }
-      return "AO1 (Knowledge): Demonstrate understanding of chemical concepts and principles (2 marks)\nAO2 (Application): Apply knowledge correctly to the specific context (2 marks)\nAO3 (Analysis): Use appropriate scientific terminology and show clear reasoning (1 mark)";
+    // Generate marking criteria based on actual question marks
+    if (marks === 1) {
+      return "AO1 (Knowledge): Demonstrate understanding of key concept (1 mark)";
     }
     
-    if (subjectId === 'physics') {
-      if (question.includes('calculate') && (question.includes('force') || question.includes('energy') || question.includes('power'))) {
-        return "AO1 (Knowledge): Select and state correct formula (1 mark)\nAO2 (Application): Substitute values correctly with appropriate units (1 mark)\nAO3 (Analysis): Complete calculation with correct final answer and units (1 mark)";
-      }
-      if (question.includes('wave') || question.includes('frequency')) {
-        return "AO1 (Knowledge): Demonstrate understanding of wave properties and relationships (1 mark)\nAO2 (Application): Correctly apply wave equation v = fλ (1 mark)\nAO3 (Analysis): Link calculation to physical meaning in given context (1 mark)";
-      }
-      return "AO1 (Knowledge): Recall physics principles and laws (2 marks)\nAO2 (Application): Apply mathematical relationships correctly (2 marks)\nAO3 (Analysis): Present answer with correct units and appropriate significant figures (1 mark)";
+    if (marks === 2) {
+      return "AO1 (Knowledge): Demonstrate understanding of key concept (1 mark)\nAO2 (Application): Apply knowledge correctly to context (1 mark)";
     }
     
-    if (subjectId === 'biology') {
-      if (question.includes('enzyme') || question.includes('protein')) {
-        return "AO1 (Knowledge): Describe structure of enzymes including active site (1 mark)\nAO2 (Application): Explain lock and key/induced fit mechanism (1 mark)\nAO3 (Analysis): Analyse factors affecting enzyme activity with examples (1 mark)";
-      }
-      if (question.includes('photosynthesis') || question.includes('respiration')) {
-        return "AO1 (Knowledge): State correct word or symbol equation (1 mark)\nAO2 (Application): Identify location and cellular structures involved (1 mark)\nAO3 (Analysis): Explain limiting factors and their effects on rate (1 mark)";
-      }
-      return "AO1 (Knowledge): Demonstrate understanding of biological concepts (2 marks)\nAO2 (Application): Apply knowledge to specific biological context (2 marks)\nAO3 (Analysis): Use scientific terminology and evaluate information (1 mark)";
+    if (marks === 3) {
+      return "AO1 (Knowledge): Demonstrate understanding of key concepts (1 mark)\nAO2 (Application): Apply knowledge correctly to context (1 mark)\nAO3 (Analysis): Use appropriate terminology and show clear reasoning (1 mark)";
     }
     
-    // Default marking criteria with AO breakdown
-    return "AO1 (Knowledge): Demonstrate clear understanding of key concepts (2 marks)\nAO2 (Application): Apply knowledge correctly to the specific question context (2 marks)\nAO3 (Analysis): Use appropriate terminology and show clear reasoning (1 mark)";
+    if (marks === 4) {
+      return "AO1 (Knowledge): Demonstrate comprehensive understanding (1 mark)\nAO2 (Application): Apply knowledge correctly to specific context (1 mark)\nAO2 (Application): Provide relevant examples or evidence (1 mark)\nAO3 (Analysis): Use appropriate terminology and clear reasoning (1 mark)";
+    }
+    
+    if (marks === 5) {
+      return "AO1 (Knowledge): Demonstrate comprehensive understanding (2 marks)\nAO2 (Application): Apply knowledge correctly to specific context (2 marks)\nAO3 (Analysis): Use appropriate terminology and show clear reasoning (1 mark)";
+    }
+    
+    if (marks === 6) {
+      return "AO1 (Knowledge): Demonstrate comprehensive understanding (2 marks)\nAO2 (Application): Apply knowledge correctly to specific context (2 marks)\nAO3 (Analysis): Use appropriate terminology and detailed reasoning (1 mark)\nAO3 (Evaluation): Show clear analysis and evaluation of information (1 mark)";
+    }
+    
+    // Default for other marks
+    const aoMarks = Math.ceil(marks / 3);
+    return `AO1 (Knowledge): Demonstrate understanding of key concepts (${aoMarks} marks)\nAO2 (Application): Apply knowledge correctly to context (${aoMarks} marks)\nAO3 (Analysis): Use appropriate terminology and reasoning (${marks - (aoMarks * 2)} marks)`;
   };
 
   const generateSpecReference = (questionText: string, subject: string): string => {
@@ -250,11 +243,17 @@ const PredictedResults = () => {
             const aiModelAnswer = await generateModelAnswer(question.text || question.question || '', question.marks);
             const markingResult = await markAnswerWithAI(question, answer.answer, aiModelAnswer);
             
+            // Determine if full marks were achieved
+            const fullMarks = markingResult.marksAwarded === question.marks;
+            
             const feedback = {
               modelAnswer: aiModelAnswer,
-              whyThisGetsMark: generateMarkingCriteria(question.text || question.question || ''),
-              whyYoursDidnt: markingResult.feedback,
-              specLink: question.specReference || generateSpecReference(question.text || question.question || '', subjectId || '')
+              whyThisGetsMark: generateMarkingCriteria(question.text || question.question || '', question.marks),
+              whyYoursDidnt: fullMarks 
+                ? `Excellent work! Your answer demonstrates strong understanding and addresses all key points effectively. You've shown good use of subject terminology and clear reasoning.`
+                : markingResult.feedback,
+              specLink: question.specReference || generateSpecReference(question.text || question.question || '', subjectId || ''),
+              fullMarks: fullMarks
             };
 
             const attempt: QuestionAttempt = {
@@ -279,7 +278,7 @@ const PredictedResults = () => {
               score: 0,
               feedback: {
                 modelAnswer: aiModelAnswer,
-                whyThisGetsMark: generateMarkingCriteria(question.text || question.question || ''),
+                whyThisGetsMark: generateMarkingCriteria(question.text || question.question || '', question.marks),
                 whyYoursDidnt: "Unable to mark this answer automatically. Please review with your teacher.",
                 specLink: generateSpecReference(question.text || question.question || '', subjectId || '')
               }
@@ -298,7 +297,7 @@ const PredictedResults = () => {
             score: 0,
             feedback: {
               modelAnswer: aiModelAnswer,
-              whyThisGetsMark: generateMarkingCriteria(question.text || question.question || ''),
+              whyThisGetsMark: generateMarkingCriteria(question.text || question.question || '', question.marks),
               whyYoursDidnt: "No answer provided.",
               specLink: generateSpecReference(question.text || question.question || '', subjectId || '')
             }
@@ -495,13 +494,26 @@ const PredictedResults = () => {
                   </div>
                 </div>
 
-                {/* AI Feedback */}
+                {/* AI Feedback - Conditional based on performance */}
                 <div>
                   <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                    <Lightbulb className="h-4 w-4 mr-2 text-yellow-600" />
-                    ❌ Why Your Answer Didn't Get Full Marks
+                    {attempt.feedback.fullMarks ? (
+                      <>
+                        <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
+                        ✅ Teacher Feedback - Well Done!
+                      </>
+                    ) : (
+                      <>
+                        <Lightbulb className="h-4 w-4 mr-2 text-yellow-600" />
+                        ❌ Why Your Answer Didn't Get Full Marks
+                      </>
+                    )}
                   </h4>
-                  <div className="bg-yellow-50 dark:bg-yellow-950/20 p-4 rounded-lg border-l-4 border-yellow-500">
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    attempt.feedback.fullMarks 
+                      ? 'bg-green-50 dark:bg-green-950/20 border-green-500' 
+                      : 'bg-yellow-50 dark:bg-yellow-950/20 border-yellow-500'
+                  }`}>
                     <p className="text-foreground">{attempt.feedback.whyYoursDidnt}</p>
                   </div>
                 </div>
