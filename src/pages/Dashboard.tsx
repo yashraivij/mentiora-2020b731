@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
-import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Timer, Rocket } from "lucide-react";
+import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useState, useEffect } from "react";
 import { ProgressCard } from "@/components/dashboard/ProgressCard";
@@ -17,6 +17,7 @@ import { TopicMasteryDisplay } from "@/components/dashboard/TopicMasteryDisplay"
 import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
 import { PredictivePerformanceCard } from "@/components/dashboard/PredictivePerformanceCard";
 import { OptimalStudyTimeCard } from "@/components/dashboard/OptimalStudyTimeCard";
+import { PredictedQuestionsSection } from "@/components/dashboard/PredictedQuestionsSection";
 import { supabase } from "@/integrations/supabase/client";
 
 interface UserProgress {
@@ -35,11 +36,6 @@ const Dashboard = () => {
   const [pinnedSubjects, setPinnedSubjects] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<'alphabetical' | 'weakest' | 'progress'>('progress');
   const [isNotifyClicked, setIsNotifyClicked] = useState(false);
-  const [timeUntilExam, setTimeUntilExam] = useState<{
-    days: number;
-    hours: number;
-    minutes: number;
-  }>({ days: 0, hours: 0, minutes: 0 });
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -69,27 +65,6 @@ const Dashboard = () => {
 
     loadUserData();
   }, [user?.id]);
-
-  useEffect(() => {
-    const calculateTimeUntilExam = () => {
-      const examDate = new Date('2026-05-07T09:00:00'); // Thursday May 7th, 2026, 9 AM
-      const now = new Date();
-      const difference = examDate.getTime() - now.getTime();
-
-      if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-
-        setTimeUntilExam({ days, hours, minutes });
-      }
-    };
-
-    calculateTimeUntilExam();
-    const interval = setInterval(calculateTimeUntilExam, 60000); // Update every minute
-
-    return () => clearInterval(interval);
-  }, []);
 
   const loadWeakTopicsFromDatabase = async () => {
     if (!user?.id) return;
@@ -308,66 +283,6 @@ const Dashboard = () => {
       </header>
 
       <div className="container mx-auto px-6 py-8 max-w-7xl">
-        {/* GCSE 2026 Countdown & Predicted Questions */}
-        <div className="mb-8">
-          <Card className="bg-gradient-to-r from-primary/5 via-primary/10 to-accent/5 dark:from-primary/10 dark:via-primary/20 dark:to-accent/10 border-primary/20 shadow-xl overflow-hidden">
-            <CardContent className="p-6">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-                {/* Countdown Timer */}
-                <div className="flex-1">
-                  <div className="flex items-center space-x-3 mb-4">
-                    <Calendar className="h-6 w-6 text-primary" />
-                    <h3 className="text-2xl font-bold text-foreground">GCSE 2026 Countdown</h3>
-                  </div>
-                  <p className="text-muted-foreground mb-4">First exam: Thursday, May 7th, 2026</p>
-                  <div className="grid grid-cols-3 gap-4 max-w-sm">
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-primary mb-1">{timeUntilExam.days}</div>
-                      <div className="text-sm text-muted-foreground">Days</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-primary mb-1">{timeUntilExam.hours}</div>
-                      <div className="text-sm text-muted-foreground">Hours</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-primary mb-1">{timeUntilExam.minutes}</div>
-                      <div className="text-sm text-muted-foreground">Minutes</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Predicted Questions CTA */}
-                <div className="flex-1 text-center lg:text-right">
-                  <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 p-6 rounded-2xl border border-amber-200/50 dark:border-amber-800/30">
-                    <div className="flex items-center justify-center lg:justify-end space-x-2 mb-3">
-                      <Crown className="h-5 w-5 text-amber-500" />
-                      <h4 className="text-xl font-bold text-amber-800 dark:text-amber-200">
-                        Predicted 2026 Questions
-                      </h4>
-                    </div>
-                    <p className="text-amber-700 dark:text-amber-300 text-sm mb-4">
-                      Premium revision tool that mimics the real GCSE 2026 exam experience
-                    </p>
-                    <Button 
-                      onClick={() => navigate('/predicted-questions')}
-                      className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white border-0 shadow-lg"
-                    >
-                      <Rocket className="h-4 w-4 mr-2" />
-                      Start Practice Exam
-                    </Button>
-                    <div className="flex items-center justify-center lg:justify-end space-x-2 mt-3">
-                      <Star className="h-4 w-4 text-amber-500" />
-                      <span className="text-xs text-amber-600 dark:text-amber-400">
-                        New practice paper every week
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
         {/* Premium Welcome Section */}
         <div className="mb-8">
           <div className="flex items-center justify-between">
@@ -383,6 +298,9 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+
+        {/* Predicted 2026 Questions Section */}
+        <PredictedQuestionsSection />
 
         {/* Predicted Grades Graph */}
         <PredictedGradesGraph userProgress={userProgress} />

@@ -3,63 +3,129 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
+import { ArrowLeft, BookOpen, Clock, Crown, Target, Sparkles, Rocket, Zap, CheckCircle, RotateCcw } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
-import { ArrowLeft, BookOpen, Crown, Clock, Calendar, Zap, Target, Star } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const PredictedQuestions = () => {
   const navigate = useNavigate();
-  const [timeUntilExam, setTimeUntilExam] = useState<{
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  }>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const { toast } = useToast();
+  const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
+  const [completedExams, setCompletedExams] = useState<{[key: string]: any}>({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const calculateTimeUntilExam = () => {
-      const examDate = new Date('2026-05-07T09:00:00'); // Thursday May 7th, 2026, 9 AM
-      const now = new Date();
-      const difference = examDate.getTime() - now.getTime();
-
-      if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        setTimeUntilExam({ days, hours, minutes, seconds });
-      }
-    };
-
-    calculateTimeUntilExam();
-    const interval = setInterval(calculateTimeUntilExam, 1000);
-
-    return () => clearInterval(interval);
+    fetchCompletedExams();
   }, []);
 
-  const handleSubjectClick = (subjectId: string) => {
+  const fetchCompletedExams = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from('predicted_exam_completions')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('completed_at', { ascending: false });
+
+      if (error) throw error;
+
+      // Group by subject, keeping the latest completion for each
+      const completions: {[key: string]: any} = {};
+      data?.forEach(completion => {
+        if (!completions[completion.subject_id]) {
+          completions[completion.subject_id] = completion;
+        }
+      });
+
+      setCompletedExams(completions);
+    } catch (error) {
+      console.error('Error fetching completed exams:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubjectSelect = (subjectId: string) => {
     navigate(`/predicted-exam/${subjectId}`);
   };
 
+  const getSubjectColor = (subjectId: string) => {
+    const colors = {
+      chemistry: "from-green-500 to-emerald-600",
+      biology: "from-emerald-500 to-green-600", 
+      physics: "from-blue-500 to-indigo-600",
+      mathematics: "from-purple-500 to-indigo-600",
+      "english-language": "from-rose-500 to-pink-600",
+      "english-literature": "from-pink-500 to-rose-600",
+      history: "from-amber-500 to-orange-600",
+      geography: "from-teal-500 to-cyan-600",
+      "computer-science": "from-slate-500 to-gray-600",
+      psychology: "from-violet-500 to-purple-600"
+    };
+    return colors[subjectId as keyof typeof colors] || "from-gray-500 to-slate-600";
+  };
+
+  const getExamDuration = (subjectId: string) => {
+    const durations = {
+      chemistry: "1h 45min",
+      biology: "1h 45min",
+      physics: "1h 45min", 
+      mathematics: "1h 30min",
+      "english-language": "1h 45min",
+      "english-literature": "1h 45min",
+      history: "1h 15min",
+      geography: "1h 30min",
+      "computer-science": "1h 30min",
+      psychology: "1h 45min"
+    };
+    return durations[subjectId as keyof typeof durations] || "1h 30min";
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10">
-      {/* Premium Header */}
-      <header className="bg-card/90 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-lg shadow-black/5 dark:shadow-black/20">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Animated Background Gradients */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 opacity-20" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 opacity-15 animate-pulse" />
+      <div className="absolute inset-0 bg-gradient-to-bl from-indigo-600 via-purple-500 to-pink-500 opacity-10" />
+      
+      {/* Floating Sparkles */}
+      <div className="absolute top-20 left-10 animate-bounce">
+        <Sparkles className="h-8 w-8 text-yellow-300/60" />
+      </div>
+      <div className="absolute top-40 right-20 animate-pulse">
+        <Crown className="h-10 w-10 text-yellow-400/70" />
+      </div>
+      <div className="absolute bottom-40 left-20 animate-bounce delay-300">
+        <Rocket className="h-8 w-8 text-yellow-300/60" />
+      </div>
+      <div className="absolute top-60 right-40 animate-pulse delay-500">
+        <Zap className="h-6 w-6 text-yellow-400/50" />
+      </div>
+      
+      {/* Header */}
+      <header className="relative z-10 bg-white/10 backdrop-blur-xl border-b border-white/20 sticky top-0 shadow-2xl">
         <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
-              <Button variant="outline" onClick={() => navigate('/dashboard')} className="hover:bg-accent/80 transition-colors">
+              <Button 
+                variant="ghost" 
+                onClick={() => navigate('/dashboard')} 
+                className="text-white/80 hover:text-white hover:bg-white/10 backdrop-blur-sm"
+              >
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Dashboard
+                Back to Dashboard
               </Button>
-              <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-                  Predicted 2026 Questions
-                </h1>
-                <div className="flex items-center space-x-2">
-                  <Crown className="h-3 w-3 text-amber-500" />
-                  <span className="text-xs font-medium text-muted-foreground">Premium Feature</span>
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-gradient-to-br from-yellow-400/30 to-orange-400/30 rounded-xl border border-yellow-400/30 backdrop-blur-sm">
+                  <Crown className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-xl font-bold text-white">Predicted 2026 Questions</h1>
+                  <p className="text-sm text-white/90">Premium exam simulation</p>
                 </div>
               </div>
             </div>
@@ -68,186 +134,155 @@ const PredictedQuestions = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8 max-w-7xl">
-        {/* Countdown Timer */}
-        <div className="mb-8">
-          <Card className="bg-gradient-to-r from-primary/5 via-primary/10 to-accent/5 dark:from-primary/10 dark:via-primary/20 dark:to-accent/10 border-primary/20 shadow-lg">
-            <CardHeader className="text-center">
-              <div className="flex items-center justify-center space-x-2 mb-2">
-                <Calendar className="h-5 w-5 text-primary" />
-                <CardTitle className="text-2xl text-foreground">GCSE 2026 Countdown</CardTitle>
-              </div>
-              <CardDescription className="text-muted-foreground">
-                First exam: Thursday, May 7th, 2026
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-4 gap-4 max-w-lg mx-auto">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-1">{timeUntilExam.days}</div>
-                  <div className="text-sm text-muted-foreground">Days</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-1">{timeUntilExam.hours}</div>
-                  <div className="text-sm text-muted-foreground">Hours</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-1">{timeUntilExam.minutes}</div>
-                  <div className="text-sm text-muted-foreground">Minutes</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-1">{timeUntilExam.seconds}</div>
-                  <div className="text-sm text-muted-foreground">Seconds</div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Premium Features Banner */}
-        <div className="mb-8">
-          <Card className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 border-amber-200/50 dark:border-amber-800/30">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-amber-800 dark:text-amber-200 mb-2">
-                    🎯 New practice paper every week — aligned with the latest trends and past paper patterns.
-                  </h3>
-                  <p className="text-amber-700 dark:text-amber-300 text-sm">
-                    Full-length, exam-format papers that mimic the real GCSE 2026 experience across all subjects.
-                  </p>
-                </div>
-                <div className="flex items-center space-x-2 ml-4">
-                  <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0">
-                    Premium
-                  </Badge>
-                  <Crown className="h-5 w-5 text-amber-500" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Subject Selection */}
-        <div className="mb-8">
-          <div className="flex items-center space-x-4 mb-6">
-            <h2 className="text-2xl font-bold text-foreground">Select Your Subject</h2>
-            <Badge variant="outline" className="text-muted-foreground border-border bg-card/50">
-              {curriculum.length} subjects available
+      <div className="relative z-10 container mx-auto px-6 py-8 max-w-6xl">
+        {/* Header Section */}
+        <div className="text-center mb-8">
+          <div className="flex items-center justify-center space-x-3 mb-4">
+            <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold px-3 py-1 hover:from-yellow-300 hover:to-orange-300">
+              <Crown className="h-3 w-3 mr-1" />
+              PREMIUM EXCLUSIVE
+            </Badge>
+            <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
+              <Zap className="h-3 w-3 mr-1" />
+              Weekly Updates
             </Badge>
           </div>
+          <h2 className="text-4xl font-bold text-white mb-4">
+            Select Your Subject
+          </h2>
+          <p className="text-white/90 text-lg max-w-2xl mx-auto">
+            Choose a subject to start your full-length predicted exam practice. 
+            Each paper follows the exact AQA format with real exam timing.
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {curriculum.map((subject) => (
+        {/* Subject Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {curriculum.map((subject) => {
+            const completion = completedExams[subject.id];
+            const isCompleted = !!completion;
+            
+            return (
               <Card 
                 key={subject.id} 
-                className="group cursor-pointer transition-all duration-200 hover:shadow-xl hover:scale-[1.02] bg-card/80 backdrop-blur-sm border-border hover:border-primary/30"
-                onClick={() => handleSubjectClick(subject.id)}
+                className="group cursor-pointer relative overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+                onClick={() => !isCompleted && handleSubjectSelect(subject.id)}
               >
-                <CardHeader className="pb-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg">
-                      <BookOpen className="h-6 w-6 text-primary-foreground" />
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Star className="h-4 w-4 text-amber-500" />
-                      <span className="text-sm text-muted-foreground">New Paper</span>
+                {/* Card Background Gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${getSubjectColor(subject.id)} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
+                
+                {/* Completion Badge */}
+                {isCompleted && (
+                  <div className="absolute top-4 right-4 z-10">
+                    <div className="bg-green-500 text-white rounded-full p-2 shadow-xl">
+                      <CheckCircle className="h-4 w-4" />
                     </div>
                   </div>
-                  <CardTitle className="text-xl text-foreground group-hover:text-primary transition-colors">
+                )}
+                
+                <CardHeader className="relative pb-4">
+                  <div className="flex items-center justify-between">
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${getSubjectColor(subject.id)} flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 border border-white/20`}>
+                      <BookOpen className="h-7 w-7 text-white" />
+                    </div>
+                    <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm text-xs">
+                      AQA GCSE
+                    </Badge>
+                  </div>
+                  <CardTitle className="text-xl font-bold text-white group-hover:text-yellow-200 transition-colors mt-3">
                     {subject.name}
                   </CardTitle>
-                  <CardDescription className="text-muted-foreground">
-                    Full AQA format exam paper
+                  <CardDescription className="text-white/80 text-sm">
+                    {isCompleted ? `Last Grade: ${completion.grade} (${completion.percentage}%)` : 'Full predicted paper practice'}
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="space-y-3">
-                    {/* Paper Details */}
-                    <div className="flex items-center justify-between text-sm">
-                      <div className="flex items-center space-x-2">
-                        <Clock className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-muted-foreground">1hr 45min</span>
+                
+                <CardContent className="relative pt-0">
+                  <div className="space-y-4">
+                    <div className="space-y-3">
+                      <div className="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm border border-white/20">
+                        <div className="p-1.5 bg-gradient-to-br from-blue-400/30 to-cyan-400/30 rounded-lg">
+                          <Clock className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-white text-sm font-medium">Duration: {getExamDuration(subject.id)}</p>
+                          <p className="text-white/70 text-xs">Real exam timing</p>
+                        </div>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <Target className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-muted-foreground">Full marks</span>
+                      
+                      <div className="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm border border-white/20">
+                        <div className="p-1.5 bg-gradient-to-br from-green-400/30 to-emerald-400/30 rounded-lg">
+                          <Target className="h-4 w-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-white text-sm font-medium">{subject.topics.length} topics covered</p>
+                          <p className="text-white/70 text-xs">Full specification</p>
+                        </div>
                       </div>
                     </div>
-
-                    {/* Features */}
+                    
+                    {isCompleted && (
+                      <div className="bg-white/15 backdrop-blur-sm border border-white/30 rounded-xl p-3 mb-3">
+                        <div className="flex items-center justify-between text-white text-sm">
+                          <span>Questions refresh:</span>
+                          <span className="font-bold">Next week</span>
+                        </div>
+                      </div>
+                    )}
+                    
                     <div className="space-y-2">
-                      <div className="flex items-center space-x-2 text-xs text-muted-foreground">
-                        <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                        <span>Real exam format</span>
-                      </div>
-                      <div className="flex items-center space-x-2 text-xs text-muted-foreground">
-                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                        <span>AI-powered marking</span>
-                      </div>
-                      <div className="flex items-center space-x-2 text-xs text-muted-foreground">
-                        <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
-                        <span>Detailed feedback</span>
-                      </div>
+                      {isCompleted ? (
+                        <>
+                          <Button 
+                            className="w-full bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 hover:from-blue-300 hover:via-purple-300 hover:to-indigo-300 text-white font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate(`/predicted-results/${subject.id}`, { 
+                                state: { 
+                                  questions: completion.questions, 
+                                  answers: completion.answers,
+                                  timeElapsed: completion.time_taken_seconds,
+                                  isReview: true,
+                                  completion: completion
+                                } 
+                              });
+                            }}
+                          >
+                            <BookOpen className="h-4 w-4 mr-2" />
+                            Review Marking
+                            <Target className="h-4 w-4 ml-2" />
+                          </Button>
+                          <Button 
+                            className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleSubjectSelect(subject.id);
+                            }}
+                          >
+                            <RotateCcw className="h-4 w-4 mr-2" />
+                            Retake Exam
+                            <Sparkles className="h-4 w-4 ml-2" />
+                          </Button>
+                        </>
+                      ) : (
+                        <Button 
+                          className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleSubjectSelect(subject.id);
+                          }}
+                        >
+                          <Crown className="h-4 w-4 mr-2" />
+                          Start Premium Exam
+                          <Sparkles className="h-4 w-4 ml-2" />
+                        </Button>
+                      )}
                     </div>
-
-                    <Button 
-                      className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
-                      variant="outline"
-                    >
-                      <Zap className="h-4 w-4 mr-2" />
-                      Start Exam
-                    </Button>
                   </div>
                 </CardContent>
               </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Premium Analytics Preview */}
-        <div className="grid md:grid-cols-3 gap-6">
-          <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-            <CardHeader>
-              <CardTitle className="text-lg text-foreground flex items-center">
-                <Target className="h-5 w-5 mr-2 text-primary" />
-                Performance Tracking
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground text-sm">
-                Track your progress across all predicted papers with detailed analytics and grade predictions.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-br from-green-500/5 to-emerald-500/10 border-green-200/50 dark:border-emerald-800/30">
-            <CardHeader>
-              <CardTitle className="text-lg text-foreground flex items-center">
-                <BookOpen className="h-5 w-5 mr-2 text-green-600" />
-                Exam Conditions
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground text-sm">
-                Practice under real exam conditions with proper timing and question formats.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-br from-amber-500/5 to-orange-500/10 border-amber-200/50 dark:border-amber-800/30">
-            <CardHeader>
-              <CardTitle className="text-lg text-foreground flex items-center">
-                <Crown className="h-5 w-5 mr-2 text-amber-500" />
-                Premium Insights
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground text-sm">
-                Get detailed marking breakdowns and personalized feedback from our AI teacher.
-              </p>
-            </CardContent>
-          </Card>
+            );
+          })}
         </div>
       </div>
     </div>
