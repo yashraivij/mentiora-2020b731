@@ -273,16 +273,16 @@ const PredictedResults = () => {
   }, [questions, answers, subject, subjectId, totalMarks, achievedMarks, percentage, grade.grade, timeElapsed, results, toast, isReview]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Fixed Premium Header */}
-      <header className="bg-slate-800/95 backdrop-blur-xl border-b border-white/10 sticky top-0 shadow-2xl z-50">
+    <div className="min-h-screen bg-gradient-to-br from-violet-100 via-blue-100 to-indigo-100 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900">
+      {/* Premium Header - Theme Responsive */}
+      <header className="bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl border-b border-border sticky top-0 shadow-2xl z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <Button 
                 variant="ghost" 
                 onClick={() => navigate('/predicted-questions')} 
-                className="text-white/80 hover:text-white hover:bg-white/10"
+                className="text-muted-foreground hover:text-foreground hover:bg-muted/80"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back to Predicted Questions
@@ -292,12 +292,12 @@ const PredictedResults = () => {
                   <Crown className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-white">Exam Results & Analysis</h1>
-                  <p className="text-sm text-white/80">Premium AI marking & feedback</p>
+                  <h1 className="text-xl font-bold text-foreground">Exam Results & Analysis</h1>
+                  <p className="text-sm text-muted-foreground">Premium AI marking & feedback</p>
                 </div>
               </div>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-full p-1">
+            <div className="bg-muted/50 backdrop-blur-sm rounded-full p-1">
               <ThemeToggle />
             </div>
           </div>
@@ -305,26 +305,26 @@ const PredictedResults = () => {
       </header>
 
       <div className="container mx-auto px-6 py-8 max-w-6xl">
-        {/* Premium Results Header */}
-        <Card className="mb-8 border-0 bg-slate-800/90 backdrop-blur-sm border border-white/10 shadow-2xl overflow-hidden">
-          {/* Fixed Card Background Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/20 via-blue-600/20 to-purple-600/20" />
+        {/* Premium Results Header - Theme Responsive */}
+        <Card className="mb-8 border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border border-border shadow-2xl overflow-hidden">
+          {/* Theme Responsive Card Background Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-blue-500/10 to-purple-500/10 dark:from-emerald-600/20 dark:via-blue-600/20 dark:to-purple-600/20" />
           
           <CardHeader className="relative z-10 pb-6">
             <div className="flex items-center space-x-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-2xl border border-white/20">
+              <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-2xl border border-border">
                 <Crown className="h-8 w-8 text-white" />
               </div>
               <div>
-                <CardTitle className="text-3xl font-bold text-white">
+                <CardTitle className="text-3xl font-bold text-foreground">
                   {subject.name} Exam Results
                 </CardTitle>
-                <CardDescription className="flex items-center space-x-2 text-lg text-white/80">
+                <CardDescription className="flex items-center space-x-2 text-lg text-muted-foreground">
                   <span className="font-semibold">AQA GCSE Predicted Paper</span>
                   {isReview && (
                     <>
                       <span>•</span>
-                      <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-500/30">
+                      <Badge className="bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border-emerald-500/30">
                         Completed: {new Date(completion?.completed_at).toLocaleDateString()}
                       </Badge>
                     </>
@@ -336,53 +336,53 @@ const PredictedResults = () => {
           
           <CardContent className="relative z-10 pt-0">
             <div className="grid md:grid-cols-4 gap-6">
-              <div className="bg-slate-700/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-slate-700/70 transition-all duration-300">
+              <div className="bg-muted/50 dark:bg-slate-700/50 backdrop-blur-sm border border-border rounded-2xl p-6 hover:bg-muted/70 dark:hover:bg-slate-700/70 transition-all duration-300">
                 <div className="flex items-center space-x-3 mb-3">
                   <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg">
                     <Target className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-white/70">Final Score</p>
-                    <p className="text-2xl font-bold text-white">{achievedMarks}/{totalMarks}</p>
+                    <p className="text-sm font-medium text-muted-foreground">Final Score</p>
+                    <p className="text-2xl font-bold text-foreground">{achievedMarks}/{totalMarks}</p>
                   </div>
                 </div>
-                <Progress value={percentage} className="h-3 bg-slate-600/50">
+                <Progress value={percentage} className="h-3 bg-muted dark:bg-slate-600/50">
                   <div className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transition-all duration-500"></div>
                 </Progress>
               </div>
 
-              <div className="bg-slate-700/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-slate-700/70 transition-all duration-300">
+              <div className="bg-muted/50 dark:bg-slate-700/50 backdrop-blur-sm border border-border rounded-2xl p-6 hover:bg-muted/70 dark:hover:bg-slate-700/70 transition-all duration-300">
                 <div className="flex items-center space-x-3 mb-3">
                   <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
                     <span className="text-2xl font-bold text-white">{grade.grade}</span>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-white/70">Predicted Grade</p>
-                    <p className="text-lg font-bold text-white">{percentage}%</p>
+                    <p className="text-sm font-medium text-muted-foreground">Predicted Grade</p>
+                    <p className="text-lg font-bold text-foreground">{percentage}%</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-slate-700/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-slate-700/70 transition-all duration-300">
+              <div className="bg-muted/50 dark:bg-slate-700/50 backdrop-blur-sm border border-border rounded-2xl p-6 hover:bg-muted/70 dark:hover:bg-slate-700/70 transition-all duration-300">
                 <div className="flex items-center space-x-3 mb-3">
                   <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
                     <Clock className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-white/70">Time Taken</p>
-                    <p className="text-lg font-bold text-white">{timeFormatted}</p>
+                    <p className="text-sm font-medium text-muted-foreground">Time Taken</p>
+                    <p className="text-lg font-bold text-foreground">{timeFormatted}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-slate-700/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-slate-700/70 transition-all duration-300">
+              <div className="bg-muted/50 dark:bg-slate-700/50 backdrop-blur-sm border border-border rounded-2xl p-6 hover:bg-muted/70 dark:hover:bg-slate-700/70 transition-all duration-300">
                 <div className="flex items-center space-x-3 mb-3">
                   <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-violet-600 rounded-xl flex items-center justify-center shadow-lg">
                     <BookOpen className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-white/70">Questions</p>
-                    <p className="text-lg font-bold text-white">{questions.length} Total</p>
+                    <p className="text-sm font-medium text-muted-foreground">Questions</p>
+                    <p className="text-lg font-bold text-foreground">{questions.length} Total</p>
                   </div>
                 </div>
               </div>
@@ -390,7 +390,7 @@ const PredictedResults = () => {
           </CardContent>
         </Card>
 
-        {/* Premium Question by Question Results */}
+        {/* Premium Question by Question Results - Theme Responsive */}
         <div className="space-y-8">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-3 mb-4">
@@ -398,31 +398,32 @@ const PredictedResults = () => {
                 <Crown className="h-3 w-3 mr-1" />
                 PREMIUM ANALYSIS
               </Badge>
-              <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
+              <Badge className="bg-muted/80 text-foreground border-border backdrop-blur-sm">
                 <Target className="h-3 w-3 mr-1" />
                 AI Powered
               </Badge>
             </div>
-            <h3 className="text-4xl font-bold text-white mb-2">
+            <h3 className="text-4xl font-bold text-foreground mb-2">
               Detailed Marking & Expert Feedback
             </h3>
-            <p className="text-white/90 text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Premium AI analysis for every question with personalized feedback and improvement suggestions
             </p>
           </div>
           
+          
           {results.map((result, index) => (
-            <Card key={result.question.id} className="overflow-hidden bg-slate-800/90 backdrop-blur-sm border border-white/10 hover:bg-slate-800/95 transition-all duration-300 shadow-2xl relative">
-              {/* Fixed Card Background Gradient */}
+            <Card key={result.question.id} className="overflow-hidden bg-card/90 backdrop-blur-sm border border-border hover:bg-card/95 transition-all duration-300 shadow-2xl relative">
+              {/* Theme Responsive Card Background Gradient */}
               <div className={`absolute inset-0 bg-gradient-to-br ${
                 result.marksAwarded === result.question.marks 
-                  ? 'from-emerald-600/20 to-teal-700/20' 
+                  ? 'from-emerald-500/10 to-teal-600/10 dark:from-emerald-600/20 dark:to-teal-700/20' 
                   : result.marksAwarded > 0 
-                    ? 'from-amber-600/20 to-orange-700/20' 
-                    : 'from-red-600/20 to-pink-700/20'
+                    ? 'from-amber-500/10 to-orange-600/10 dark:from-amber-600/20 dark:to-orange-700/20' 
+                    : 'from-red-500/10 to-pink-600/10 dark:from-red-600/20 dark:to-pink-700/20'
               }`} />
               
-              <CardHeader className="relative bg-slate-700/50 backdrop-blur-sm border-b border-white/10">
+              <CardHeader className="relative bg-muted/30 dark:bg-slate-700/50 backdrop-blur-sm border-b border-border">
                 <div className="flex justify-between items-start">
                   <div className="flex items-center space-x-4">
                     <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${
@@ -431,15 +432,15 @@ const PredictedResults = () => {
                         : result.marksAwarded > 0 
                           ? 'from-amber-500 to-orange-600' 
                           : 'from-red-500 to-pink-600'
-                    } flex items-center justify-center shadow-2xl border border-white/20`}>
+                    } flex items-center justify-center shadow-2xl border border-border`}>
                       <span className="text-white font-bold text-lg">{result.question.questionNumber}</span>
                     </div>
                     <div>
-                      <CardTitle className="text-xl font-bold text-white">
+                      <CardTitle className="text-xl font-bold text-foreground">
                         Question {result.question.questionNumber}
                       </CardTitle>
                       {result.question.section && (
-                        <Badge className="mt-2 bg-slate-600/50 text-white border-white/20 backdrop-blur-sm text-xs">
+                        <Badge className="mt-2 bg-muted/50 text-foreground border-border backdrop-blur-sm text-xs">
                           Section {result.question.section}
                         </Badge>
                       )}
@@ -477,79 +478,79 @@ const PredictedResults = () => {
               </CardHeader>
               
               <CardContent className="relative space-y-6 p-8">
-                <div className="bg-slate-700/50 backdrop-blur-sm border border-white/10 rounded-xl p-5">
-                  <h4 className="font-bold text-white mb-3 flex items-center">
+                <div className="bg-muted/50 dark:bg-slate-700/50 backdrop-blur-sm border border-border rounded-xl p-5">
+                  <h4 className="font-bold text-foreground mb-3 flex items-center">
                     <div className="p-1.5 bg-blue-500/30 rounded-lg mr-3">
                       <BookOpen className="h-4 w-4 text-white" />
                     </div>
                     Question
                   </h4>
-                  <div className="bg-slate-600/50 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                    <p className="whitespace-pre-wrap text-white/90 leading-relaxed">{result.question.text}</p>
+                  <div className="bg-muted/80 dark:bg-slate-600/50 backdrop-blur-sm rounded-lg p-4 border border-border">
+                    <p className="whitespace-pre-wrap text-foreground leading-relaxed">{result.question.text}</p>
                   </div>
                 </div>
                 
                 {result.answer && (
-                  <div className="bg-slate-700/50 backdrop-blur-sm border border-white/10 rounded-xl p-5">
-                    <h4 className="font-bold text-white mb-3 flex items-center">
+                  <div className="bg-muted/50 dark:bg-slate-700/50 backdrop-blur-sm border border-border rounded-xl p-5">
+                    <h4 className="font-bold text-foreground mb-3 flex items-center">
                       <div className="p-1.5 bg-purple-500/30 rounded-lg mr-3">
                         <Target className="h-4 w-4 text-white" />
                       </div>
                       Your Answer
                     </h4>
-                    <div className="bg-slate-600/50 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                      <p className="text-sm whitespace-pre-wrap text-white/90 leading-relaxed">{result.answer.answer}</p>
+                    <div className="bg-muted/80 dark:bg-slate-600/50 backdrop-blur-sm rounded-lg p-4 border border-border">
+                      <p className="text-sm whitespace-pre-wrap text-foreground leading-relaxed">{result.answer.answer}</p>
                     </div>
                   </div>
                 )}
 
-                {/* Fixed Premium AI Teacher Feedback */}
+                {/* Theme Responsive Premium AI Teacher Feedback */}
 
                 {/* Premium AI Teacher Feedback */}
-                <div className="bg-slate-700/80 backdrop-blur-sm border border-white/20 rounded-2xl shadow-2xl overflow-hidden">
-                  {/* Fixed Premium background */}
-                  <div className="bg-gradient-to-br from-yellow-600/20 to-orange-600/20 p-8 space-y-6">
+                <div className="bg-card/80 dark:bg-slate-700/80 backdrop-blur-sm border border-border rounded-2xl shadow-2xl overflow-hidden">
+                  {/* Theme Responsive Premium background */}
+                  <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 dark:from-yellow-600/20 dark:to-orange-600/20 p-8 space-y-6">
                     <div className="flex justify-between items-start">
                       <div className="flex items-center space-x-3">
                         <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
                           <Crown className="h-6 w-6 text-white" />
                         </div>
                         <div>
-                          <h3 className="text-xl font-bold text-white">AI Teacher Feedback</h3>
-                          <p className="text-sm text-white/70">Premium Analysis & Marking</p>
+                          <h3 className="text-xl font-bold text-foreground">AI Teacher Feedback</h3>
+                          <p className="text-sm text-muted-foreground">Premium Analysis & Marking</p>
                         </div>
                       </div>
-                      <div className="text-right bg-slate-600/50 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-white/20">
-                        <div className="text-3xl font-bold text-white">
+                      <div className="text-right bg-muted/50 dark:bg-slate-600/50 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-border">
+                        <div className="text-3xl font-bold text-foreground">
                           {result.marksAwarded}/{result.question.marks}
                         </div>
-                        <div className="text-xs text-white/70 font-medium">marks awarded</div>
+                        <div className="text-xs text-muted-foreground font-medium">marks awarded</div>
                         <div className={`text-sm font-bold mt-2 px-3 py-1 rounded-full ${
-                          result.grade === 'Excellent' ? 'bg-emerald-500/30 text-emerald-200 border border-emerald-500/50' :
-                          result.grade === 'Very Good' ? 'bg-blue-500/30 text-blue-200 border border-blue-500/50' :
-                          result.grade === 'Good' ? 'bg-amber-500/30 text-amber-200 border border-amber-500/50' :
-                          result.grade === 'Satisfactory' ? 'bg-orange-500/30 text-orange-200 border border-orange-500/50' :
-                          'bg-red-500/30 text-red-200 border border-red-500/50'
+                          result.grade === 'Excellent' ? 'bg-emerald-500/30 text-emerald-600 dark:text-emerald-200 border border-emerald-500/50' :
+                          result.grade === 'Very Good' ? 'bg-blue-500/30 text-blue-600 dark:text-blue-200 border border-blue-500/50' :
+                          result.grade === 'Good' ? 'bg-amber-500/30 text-amber-600 dark:text-amber-200 border border-amber-500/50' :
+                          result.grade === 'Satisfactory' ? 'bg-orange-500/30 text-orange-600 dark:text-orange-200 border border-orange-500/50' :
+                          'bg-red-500/30 text-red-600 dark:text-red-200 border border-red-500/50'
                         }`}>
                           {result.grade}
                         </div>
                       </div>
                     </div>
 
-                    <div className="bg-slate-600/50 backdrop-blur-sm border border-white/20 rounded-xl p-5">
-                      <h4 className="font-bold text-white mb-3 flex items-center">
+                    <div className="bg-muted/50 dark:bg-slate-600/50 backdrop-blur-sm border border-border rounded-xl p-5">
+                      <h4 className="font-bold text-foreground mb-3 flex items-center">
                         <div className="p-1.5 bg-emerald-500/30 rounded-lg mr-3">
                           <CheckCircle className="h-4 w-4 text-white" />
                         </div>
                         Model Answer
                       </h4>
-                      <div className="bg-slate-500/50 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                        <p className="text-sm leading-relaxed text-white/90">{result.modelAnswer}</p>
+                      <div className="bg-muted/80 dark:bg-slate-500/50 backdrop-blur-sm rounded-lg p-4 border border-border">
+                        <p className="text-sm leading-relaxed text-foreground">{result.modelAnswer}</p>
                       </div>
                     </div>
 
-                    <div className="bg-slate-600/50 backdrop-blur-sm border border-white/20 rounded-xl p-5">
-                      <h4 className="font-bold text-white mb-3 flex items-center">
+                    <div className="bg-muted/50 dark:bg-slate-600/50 backdrop-blur-sm border border-border rounded-xl p-5">
+                      <h4 className="font-bold text-foreground mb-3 flex items-center">
                         <div className="p-1.5 bg-blue-500/30 rounded-lg mr-3">
                           <Target className="h-4 w-4 text-white" />
                         </div>
@@ -557,37 +558,37 @@ const PredictedResults = () => {
                       </h4>
                       <div className="space-y-3">
                         {result.markingPoints?.map((point, index) => (
-                          <div key={index} className="flex items-start space-x-3 bg-slate-500/50 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+                          <div key={index} className="flex items-start space-x-3 bg-muted/80 dark:bg-slate-500/50 backdrop-blur-sm rounded-lg p-3 border border-border">
                             <span className="w-6 h-6 bg-gradient-to-br from-blue-500 to-indigo-500 text-white text-xs font-bold rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                               {index + 1}
                             </span>
-                            <p className="text-sm text-white/90 font-medium">{point}</p>
+                            <p className="text-sm text-foreground font-medium">{point}</p>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    <div className="bg-slate-600/50 backdrop-blur-sm border border-white/20 rounded-xl p-5">
-                      <h4 className="font-bold text-white mb-3 flex items-center">
+                    <div className="bg-muted/50 dark:bg-slate-600/50 backdrop-blur-sm border border-border rounded-xl p-5">
+                      <h4 className="font-bold text-foreground mb-3 flex items-center">
                         <div className="p-1.5 bg-purple-500/30 rounded-lg mr-3">
                           <Crown className="h-4 w-4 text-white" />
                         </div>
                         AI Teacher Feedback
                       </h4>
-                      <div className="bg-slate-500/50 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                        <p className="text-sm leading-relaxed text-white/90 font-medium">{result.teacherFeedback}</p>
+                      <div className="bg-muted/80 dark:bg-slate-500/50 backdrop-blur-sm rounded-lg p-4 border border-border">
+                        <p className="text-sm leading-relaxed text-foreground font-medium">{result.teacherFeedback}</p>
                       </div>
                     </div>
 
-                    <div className="bg-slate-600/50 backdrop-blur-sm border border-white/20 rounded-xl p-5">
-                      <h4 className="font-bold text-white mb-3 flex items-center">
+                    <div className="bg-muted/50 dark:bg-slate-600/50 backdrop-blur-sm border border-border rounded-xl p-5">
+                      <h4 className="font-bold text-foreground mb-3 flex items-center">
                         <div className="p-1.5 bg-amber-500/30 rounded-lg mr-3">
                           <BookOpen className="h-4 w-4 text-white" />
                         </div>
                         Specification Reference
                       </h4>
-                      <div className="bg-slate-500/50 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                        <p className="text-sm font-bold text-white/90">
+                      <div className="bg-muted/80 dark:bg-slate-500/50 backdrop-blur-sm rounded-lg p-4 border border-border">
+                        <p className="text-sm font-bold text-foreground">
                           {result.specificationPoint}
                         </p>
                       </div>
@@ -600,7 +601,7 @@ const PredictedResults = () => {
           ))}
         </div>
 
-        {/* Fixed Premium Action Buttons */}
+        {/* Theme Responsive Premium Action Buttons */}
         <div className="flex justify-center space-x-6 mt-12">
           <Button 
             onClick={() => navigate(`/predicted-exam/${subjectId}`)}
