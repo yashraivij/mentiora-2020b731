@@ -273,18 +273,49 @@ const PredictedResults = () => {
   }, [questions, answers, subject, subjectId, totalMarks, achievedMarks, percentage, grade.grade, timeElapsed, results, toast, isReview]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-blue-50 to-indigo-50 dark:from-violet-950 dark:via-blue-950 dark:to-indigo-950">
-      <header className="bg-gradient-to-r from-violet-600/90 via-blue-600/90 to-indigo-600/90 backdrop-blur-xl border-b border-white/20 sticky top-0 z-50 shadow-2xl shadow-violet-500/20">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Animated Background Gradients - Same as PredictedQuestions */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 opacity-20" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 opacity-15 animate-pulse" />
+      <div className="absolute inset-0 bg-gradient-to-bl from-indigo-600 via-purple-500 to-pink-500 opacity-10" />
+      
+      {/* Floating Sparkles */}
+      <div className="absolute top-20 left-10 animate-bounce">
+        <Crown className="h-8 w-8 text-yellow-300/60" />
+      </div>
+      <div className="absolute top-40 right-20 animate-pulse">
+        <Target className="h-10 w-10 text-yellow-400/70" />
+      </div>
+      <div className="absolute bottom-40 left-20 animate-bounce delay-300">
+        <CheckCircle className="h-8 w-8 text-emerald-300/60" />
+      </div>
+      <div className="absolute top-60 right-40 animate-pulse delay-500">
+        <BookOpen className="h-6 w-6 text-blue-400/50" />
+      </div>
+
+      {/* Premium Header */}
+      <header className="relative z-10 bg-white/10 backdrop-blur-xl border-b border-white/20 sticky top-0 shadow-2xl">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <Button 
-              variant="ghost" 
-              onClick={() => navigate('/predicted-questions')} 
-              className="text-white/90 hover:text-white hover:bg-white/20 transition-all duration-300"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Predicted Questions
-            </Button>
+            <div className="flex items-center space-x-4">
+              <Button 
+                variant="ghost" 
+                onClick={() => navigate('/predicted-questions')} 
+                className="text-white/80 hover:text-white hover:bg-white/10 backdrop-blur-sm"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back to Predicted Questions
+              </Button>
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-gradient-to-br from-yellow-400/30 to-orange-400/30 rounded-xl border border-yellow-400/30 backdrop-blur-sm">
+                  <Crown className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-xl font-bold text-white">Exam Results & Analysis</h1>
+                  <p className="text-sm text-white/90">Premium AI marking & feedback</p>
+                </div>
+              </div>
+            </div>
             <div className="bg-white/20 backdrop-blur-sm rounded-full p-1">
               <ThemeToggle />
             </div>
@@ -292,29 +323,27 @@ const PredictedResults = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8 max-w-6xl">
+      <div className="relative z-10 container mx-auto px-6 py-8 max-w-6xl">
         {/* Premium Results Header */}
-        <Card className="mb-8 border-0 bg-gradient-to-br from-white via-violet-50 to-blue-50 dark:from-gray-900 dark:via-violet-950/50 dark:to-blue-950/50 shadow-2xl shadow-violet-500/10 overflow-hidden relative">
-          {/* Decorative background elements */}
-          <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-transparent to-blue-500/5"></div>
-          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-amber-200/20 to-transparent rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-emerald-200/20 to-transparent rounded-full blur-3xl"></div>
+        <Card className="mb-8 border-0 bg-white/10 backdrop-blur-sm border border-white/20 shadow-2xl overflow-hidden relative">
+          {/* Card Background Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 via-blue-500 to-purple-500 opacity-20" />
           
           <CardHeader className="relative z-10 pb-6">
             <div className="flex items-center space-x-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-amber-400 via-orange-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-xl shadow-amber-500/30">
+              <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-2xl border border-white/20">
                 <Crown className="h-8 w-8 text-white" />
               </div>
               <div>
-                <CardTitle className="text-3xl font-bold bg-gradient-to-r from-violet-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                <CardTitle className="text-3xl font-bold text-white">
                   {subject.name} Exam Results
                 </CardTitle>
-                <CardDescription className="flex items-center space-x-2 text-lg">
-                  <span className="bg-gradient-to-r from-violet-600 to-blue-600 bg-clip-text text-transparent font-semibold">AQA GCSE Predicted Paper</span>
+                <CardDescription className="flex items-center space-x-2 text-lg text-white/90">
+                  <span className="font-semibold">AQA GCSE Predicted Paper</span>
                   {isReview && (
                     <>
-                      <span className="text-muted-foreground">•</span>
-                      <Badge variant="secondary" className="bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 border-emerald-200">
+                      <span>•</span>
+                      <Badge className="bg-gradient-to-r from-emerald-400 to-teal-400 text-black border-white/30">
                         Completed: {new Date(completion?.completed_at).toLocaleDateString()}
                       </Badge>
                     </>
@@ -326,53 +355,53 @@ const PredictedResults = () => {
           
           <CardContent className="relative z-10 pt-0">
             <div className="grid md:grid-cols-4 gap-6">
-              <div className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-2xl p-6 border border-emerald-200/50 dark:border-emerald-800/50 shadow-lg">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 group hover:bg-white/20 transition-all duration-300">
                 <div className="flex items-center space-x-3 mb-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                     <Target className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-emerald-700 dark:text-emerald-300">Final Score</p>
-                    <p className="text-2xl font-bold text-emerald-800 dark:text-emerald-200">{achievedMarks}/{totalMarks}</p>
+                    <p className="text-sm font-medium text-white/80">Final Score</p>
+                    <p className="text-2xl font-bold text-white">{achievedMarks}/{totalMarks}</p>
                   </div>
                 </div>
-                <Progress value={percentage} className="h-3 bg-emerald-100 dark:bg-emerald-900/30">
-                  <div className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transition-all duration-500"></div>
+                <Progress value={percentage} className="h-3 bg-white/20">
+                  <div className="h-full bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full transition-all duration-500"></div>
                 </Progress>
               </div>
 
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 rounded-2xl p-6 border border-blue-200/50 dark:border-blue-800/50 shadow-lg">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 group hover:bg-white/20 transition-all duration-300">
                 <div className="flex items-center space-x-3 mb-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                     <span className="text-2xl font-bold text-white">{grade.grade}</span>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-blue-700 dark:text-blue-300">Predicted Grade</p>
-                    <p className="text-lg font-bold text-blue-800 dark:text-blue-200">{percentage}%</p>
+                    <p className="text-sm font-medium text-white/80">Predicted Grade</p>
+                    <p className="text-lg font-bold text-white">{percentage}%</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 rounded-2xl p-6 border border-amber-200/50 dark:border-amber-800/50 shadow-lg">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 group hover:bg-white/20 transition-all duration-300">
                 <div className="flex items-center space-x-3 mb-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                     <Clock className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-amber-700 dark:text-amber-300">Time Taken</p>
-                    <p className="text-lg font-bold text-amber-800 dark:text-amber-200">{timeFormatted}</p>
+                    <p className="text-sm font-medium text-white/80">Time Taken</p>
+                    <p className="text-lg font-bold text-white">{timeFormatted}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/30 dark:to-violet-950/30 rounded-2xl p-6 border border-purple-200/50 dark:border-purple-800/50 shadow-lg">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 group hover:bg-white/20 transition-all duration-300">
                 <div className="flex items-center space-x-3 mb-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-violet-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-violet-500 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                     <BookOpen className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-purple-700 dark:text-purple-300">Questions</p>
-                    <p className="text-lg font-bold text-purple-800 dark:text-purple-200">{questions.length} Total</p>
+                    <p className="text-sm font-medium text-white/80">Questions</p>
+                    <p className="text-lg font-bold text-white">{questions.length} Total</p>
                   </div>
                 </div>
               </div>
@@ -383,30 +412,53 @@ const PredictedResults = () => {
         {/* Premium Question by Question Results */}
         <div className="space-y-8">
           <div className="text-center">
-            <h3 className="text-3xl font-bold bg-gradient-to-r from-violet-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">
+            <div className="flex items-center justify-center space-x-3 mb-4">
+              <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold px-3 py-1 hover:from-yellow-300 hover:to-orange-300">
+                <Crown className="h-3 w-3 mr-1" />
+                PREMIUM ANALYSIS
+              </Badge>
+              <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
+                <Target className="h-3 w-3 mr-1" />
+                AI Powered
+              </Badge>
+            </div>
+            <h3 className="text-4xl font-bold text-white mb-2">
               Detailed Marking & Expert Feedback
             </h3>
-            <p className="text-lg text-muted-foreground">Premium AI analysis for every question</p>
+            <p className="text-white/90 text-lg max-w-2xl mx-auto">
+              Premium AI analysis for every question with personalized feedback and improvement suggestions
+            </p>
           </div>
           
           {results.map((result, index) => (
-            <Card key={result.question.id} className="overflow-hidden border-0 shadow-2xl shadow-violet-500/10 bg-gradient-to-br from-white via-gray-50 to-violet-50/30 dark:from-gray-900 dark:via-gray-800 dark:to-violet-950/30 relative">
-              {/* Decorative gradient border */}
-              <div className="absolute inset-0 bg-gradient-to-r from-violet-500 via-blue-500 to-indigo-500 rounded-xl opacity-20 blur-sm"></div>
-              <div className="absolute inset-0.5 bg-gradient-to-br from-white via-gray-50 to-violet-50/50 dark:from-gray-900 dark:via-gray-800 dark:to-violet-950/50 rounded-xl"></div>
+            <Card key={result.question.id} className="group overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl relative">
+              {/* Card Background Gradient */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${
+                result.marksAwarded === result.question.marks 
+                  ? 'from-emerald-500 to-teal-600' 
+                  : result.marksAwarded > 0 
+                    ? 'from-amber-500 to-orange-600' 
+                    : 'from-red-500 to-pink-600'
+              } opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
               
-              <CardHeader className="relative bg-gradient-to-r from-violet-50 via-blue-50 to-indigo-50 dark:from-violet-950/20 dark:via-blue-950/20 dark:to-indigo-950/20 border-b border-gradient-to-r from-violet-200 to-blue-200 dark:from-violet-800 dark:to-blue-800">
+              <CardHeader className="relative bg-white/10 backdrop-blur-sm border-b border-white/20">
                 <div className="flex justify-between items-start">
                   <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-violet-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${
+                      result.marksAwarded === result.question.marks 
+                        ? 'from-emerald-500 to-teal-600' 
+                        : result.marksAwarded > 0 
+                          ? 'from-amber-500 to-orange-600' 
+                          : 'from-red-500 to-pink-600'
+                    } flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 border border-white/20`}>
                       <span className="text-white font-bold text-lg">{result.question.questionNumber}</span>
                     </div>
                     <div>
-                      <CardTitle className="text-xl bg-gradient-to-r from-violet-600 to-blue-600 bg-clip-text text-transparent">
+                      <CardTitle className="text-xl font-bold text-white group-hover:text-yellow-200 transition-colors">
                         Question {result.question.questionNumber}
                       </CardTitle>
                       {result.question.section && (
-                        <Badge variant="outline" className="mt-2 border-violet-300 text-violet-700 bg-violet-100/50">
+                        <Badge className="mt-2 bg-white/20 text-white border-white/30 backdrop-blur-sm text-xs">
                           Section {result.question.section}
                         </Badge>
                       )}
@@ -414,57 +466,58 @@ const PredictedResults = () => {
                   </div>
                   <div className="flex items-center space-x-3">
                     <Badge 
-                      variant={result.marksAwarded === result.question.marks ? "default" : result.marksAwarded > 0 ? "secondary" : "destructive"}
                       className={`text-lg font-bold px-4 py-2 ${
                         result.marksAwarded === result.question.marks 
-                          ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg' 
+                          ? 'bg-gradient-to-r from-emerald-400 to-teal-400 text-black shadow-lg' 
                           : result.marksAwarded > 0 
-                            ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg' 
-                            : 'bg-gradient-to-r from-red-500 to-pink-500 text-white shadow-lg'
+                            ? 'bg-gradient-to-r from-amber-400 to-orange-400 text-black shadow-lg' 
+                            : 'bg-gradient-to-r from-red-400 to-pink-400 text-white shadow-lg'
                       }`}
                     >
                       {result.marksAwarded}/{result.question.marks} marks
                     </Badge>
-                    {result.marksAwarded === result.question.marks ? (
-                      <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center shadow-lg">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center shadow-lg ${
+                      result.marksAwarded === result.question.marks 
+                        ? 'bg-gradient-to-br from-emerald-500 to-teal-600' 
+                        : result.marksAwarded > 0 
+                          ? 'bg-gradient-to-br from-amber-500 to-orange-600' 
+                          : 'bg-gradient-to-br from-red-500 to-pink-600'
+                    }`}>
+                      {result.marksAwarded === result.question.marks ? (
                         <CheckCircle className="h-6 w-6 text-white" />
-                      </div>
-                    ) : result.marksAwarded > 0 ? (
-                      <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center shadow-lg">
+                      ) : result.marksAwarded > 0 ? (
                         <Target className="h-6 w-6 text-white" />
-                      </div>
-                    ) : (
-                      <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-pink-600 rounded-full flex items-center justify-center shadow-lg">
+                      ) : (
                         <XCircle className="h-6 w-6 text-white" />
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 </div>
               </CardHeader>
               
               <CardContent className="relative space-y-6 p-8">
-                <div className="bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-800 dark:to-slate-800 rounded-xl p-5 border border-gray-200/50 dark:border-gray-700/50">
-                  <h4 className="font-bold text-gray-700 dark:text-gray-200 mb-3 flex items-center">
-                    <span className="w-6 h-6 bg-gray-500 rounded-full flex items-center justify-center mr-3">
-                      <span className="text-white text-xs font-bold">❓</span>
-                    </span>
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-5">
+                  <h4 className="font-bold text-white mb-3 flex items-center">
+                    <div className="p-1.5 bg-gradient-to-br from-blue-400/30 to-cyan-400/30 rounded-lg mr-3">
+                      <BookOpen className="h-4 w-4 text-white" />
+                    </div>
                     Question
                   </h4>
-                  <div className="bg-white/70 dark:bg-gray-900/70 rounded-lg p-4 backdrop-blur-sm border border-gray-100 dark:border-gray-800/50">
-                    <p className="whitespace-pre-wrap text-gray-800 dark:text-gray-200 leading-relaxed">{result.question.text}</p>
+                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                    <p className="whitespace-pre-wrap text-white/90 leading-relaxed">{result.question.text}</p>
                   </div>
                 </div>
                 
                 {result.answer && (
-                  <div className="bg-gradient-to-r from-slate-50 to-gray-50 dark:from-slate-800 dark:to-gray-800 rounded-xl p-5 border border-slate-200/50 dark:border-slate-700/50">
-                    <h4 className="font-bold text-slate-700 dark:text-slate-200 mb-3 flex items-center">
-                      <span className="w-6 h-6 bg-slate-500 rounded-full flex items-center justify-center mr-3">
-                        <span className="text-white text-xs font-bold">✍️</span>
-                      </span>
+                  <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-5">
+                    <h4 className="font-bold text-white mb-3 flex items-center">
+                      <div className="p-1.5 bg-gradient-to-br from-purple-400/30 to-violet-400/30 rounded-lg mr-3">
+                        <Target className="h-4 w-4 text-white" />
+                      </div>
                       Your Answer
                     </h4>
-                    <div className="bg-white/70 dark:bg-gray-900/70 rounded-lg p-4 backdrop-blur-sm border border-slate-100 dark:border-slate-800/50">
-                      <p className="text-sm whitespace-pre-wrap text-slate-800 dark:text-slate-200 leading-relaxed">{result.answer.answer}</p>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                      <p className="text-sm whitespace-pre-wrap text-white/90 leading-relaxed">{result.answer.answer}</p>
                     </div>
                   </div>
                 )}
@@ -472,98 +525,99 @@ const PredictedResults = () => {
                 {/* Premium AI Teacher Feedback */}
 
                 {/* Premium AI Teacher Feedback */}
-                <div className="relative overflow-hidden bg-gradient-to-br from-violet-50 via-blue-50 to-indigo-50 dark:from-violet-950/20 dark:via-blue-950/20 dark:to-indigo-950/20 border-2 border-gradient-to-r from-violet-200 to-blue-200 dark:from-violet-800 dark:to-blue-800 rounded-2xl shadow-xl shadow-violet-100/50 dark:shadow-violet-900/20">
+                <div className="relative overflow-hidden bg-white/15 backdrop-blur-sm border border-white/30 rounded-2xl shadow-2xl">
                   {/* Premium background pattern */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-transparent to-blue-500/5 pointer-events-none"></div>
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-amber-200/30 to-transparent rounded-full blur-2xl"></div>
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-emerald-200/30 to-transparent rounded-full blur-2xl"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 via-transparent to-orange-500/10 pointer-events-none"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-yellow-200/20 to-transparent rounded-full blur-2xl"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-orange-200/20 to-transparent rounded-full blur-2xl"></div>
                   
                   <div className="relative p-8 space-y-6">
                     <div className="flex justify-between items-start">
                       <div className="flex items-center space-x-3">
-                        <div className="w-12 h-12 bg-gradient-to-br from-violet-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-                          <span className="text-white font-bold text-lg">AI</span>
+                        <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+                          <Crown className="h-6 w-6 text-white" />
                         </div>
                         <div>
-                          <h3 className="text-xl font-bold bg-gradient-to-r from-violet-600 to-blue-600 bg-clip-text text-transparent">AI Teacher Feedback</h3>
-                          <p className="text-sm text-muted-foreground">Premium Analysis & Marking</p>
+                          <h3 className="text-xl font-bold text-white">AI Teacher Feedback</h3>
+                          <p className="text-sm text-white/80">Premium Analysis & Marking</p>
                         </div>
                       </div>
-                      <div className="text-right bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-white/20">
-                        <div className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                      <div className="text-right bg-white/20 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-white/30">
+                        <div className="text-3xl font-bold text-white">
                           {result.marksAwarded}/{result.question.marks}
                         </div>
-                        <div className="text-xs text-muted-foreground font-medium">marks awarded</div>
+                        <div className="text-xs text-white/80 font-medium">marks awarded</div>
                         <div className={`text-sm font-bold mt-2 px-3 py-1 rounded-full ${
-                          result.grade === 'Excellent' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300' :
-                          result.grade === 'Very Good' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300' :
-                          result.grade === 'Good' ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300' :
-                          result.grade === 'Satisfactory' ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300' :
-                          'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300'
+                          result.grade === 'Excellent' ? 'bg-emerald-400/30 text-emerald-100 border border-emerald-400/50' :
+                          result.grade === 'Very Good' ? 'bg-blue-400/30 text-blue-100 border border-blue-400/50' :
+                          result.grade === 'Good' ? 'bg-amber-400/30 text-amber-100 border border-amber-400/50' :
+                          result.grade === 'Satisfactory' ? 'bg-orange-400/30 text-orange-100 border border-orange-400/50' :
+                          'bg-red-400/30 text-red-100 border border-red-400/50'
                         }`}>
                           {result.grade}
                         </div>
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-xl p-5 border border-emerald-200/50 dark:border-emerald-800/50 shadow-sm">
-                      <h4 className="font-bold text-emerald-800 dark:text-emerald-200 mb-3 flex items-center">
-                        <span className="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center mr-3">
-                          <span className="text-white text-xs font-bold">✓</span>
-                        </span>
+                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-5">
+                      <h4 className="font-bold text-white mb-3 flex items-center">
+                        <div className="p-1.5 bg-gradient-to-br from-emerald-400/30 to-teal-400/30 rounded-lg mr-3">
+                          <CheckCircle className="h-4 w-4 text-white" />
+                        </div>
                         Model Answer
                       </h4>
-                      <div className="bg-white/70 dark:bg-gray-900/70 rounded-lg p-4 backdrop-blur-sm border border-emerald-100 dark:border-emerald-900/50">
-                        <p className="text-sm leading-relaxed text-emerald-900 dark:text-emerald-100">{result.modelAnswer}</p>
+                      <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                        <p className="text-sm leading-relaxed text-white/90">{result.modelAnswer}</p>
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 rounded-xl p-5 border border-blue-200/50 dark:border-blue-800/50 shadow-sm">
-                      <h4 className="font-bold text-blue-800 dark:text-blue-200 mb-3 flex items-center">
-                        <span className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-3">
-                          <span className="text-white text-xs font-bold">🎯</span>
-                        </span>
+                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-5">
+                      <h4 className="font-bold text-white mb-3 flex items-center">
+                        <div className="p-1.5 bg-gradient-to-br from-blue-400/30 to-indigo-400/30 rounded-lg mr-3">
+                          <Target className="h-4 w-4 text-white" />
+                        </div>
                         Why This Gets Full Marks
                       </h4>
                       <div className="space-y-3">
                         {result.markingPoints?.map((point, index) => (
-                          <div key={index} className="flex items-start space-x-3 bg-white/70 dark:bg-gray-900/70 rounded-lg p-3 backdrop-blur-sm border border-blue-100 dark:border-blue-900/50">
-                            <span className="w-6 h-6 bg-gradient-to-br from-blue-500 to-indigo-500 text-white text-xs font-bold rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <div key={index} className="flex items-start space-x-3 bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+                            <span className="w-6 h-6 bg-gradient-to-br from-blue-400 to-indigo-400 text-white text-xs font-bold rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                               {index + 1}
                             </span>
-                            <p className="text-sm text-blue-900 dark:text-blue-100 font-medium">{point}</p>
+                            <p className="text-sm text-white/90 font-medium">{point}</p>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-r from-purple-50 to-violet-50 dark:from-purple-950/30 dark:to-violet-950/30 rounded-xl p-5 border border-purple-200/50 dark:border-purple-800/50 shadow-sm">
-                      <h4 className="font-bold text-purple-800 dark:text-purple-200 mb-3 flex items-center">
-                        <span className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center mr-3">
-                          <span className="text-white text-xs font-bold">💬</span>
-                        </span>
+                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-5">
+                      <h4 className="font-bold text-white mb-3 flex items-center">
+                        <div className="p-1.5 bg-gradient-to-br from-purple-400/30 to-violet-400/30 rounded-lg mr-3">
+                          <Crown className="h-4 w-4 text-white" />
+                        </div>
                         AI Teacher Feedback
                       </h4>
-                      <div className="bg-white/70 dark:bg-gray-900/70 rounded-lg p-4 backdrop-blur-sm border border-purple-100 dark:border-purple-900/50">
-                        <p className="text-sm leading-relaxed text-purple-900 dark:text-purple-100 font-medium">{result.teacherFeedback}</p>
+                      <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                        <p className="text-sm leading-relaxed text-white/90 font-medium">{result.teacherFeedback}</p>
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 rounded-xl p-5 border border-amber-200/50 dark:border-amber-800/50 shadow-sm">
-                      <h4 className="font-bold text-amber-800 dark:text-amber-200 mb-3 flex items-center">
-                        <span className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center mr-3">
-                          <span className="text-white text-xs font-bold">📋</span>
-                        </span>
+                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-5">
+                      <h4 className="font-bold text-white mb-3 flex items-center">
+                        <div className="p-1.5 bg-gradient-to-br from-amber-400/30 to-orange-400/30 rounded-lg mr-3">
+                          <BookOpen className="h-4 w-4 text-white" />
+                        </div>
                         Specification Reference
                       </h4>
-                      <div className="bg-white/70 dark:bg-gray-900/70 rounded-lg p-4 backdrop-blur-sm border border-amber-100 dark:border-amber-900/50">
-                        <p className="text-sm font-bold text-amber-900 dark:text-amber-100">
+                      <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                        <p className="text-sm font-bold text-white/90">
                           {result.specificationPoint}
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
+
               </CardContent>
             </Card>
           ))}
@@ -572,27 +626,26 @@ const PredictedResults = () => {
         {/* Premium Action Buttons */}
         <div className="flex justify-center space-x-6 mt-12">
           <Button 
-            variant="outline" 
             onClick={() => navigate(`/predicted-exam/${subjectId}`)}
-            className="bg-gradient-to-r from-violet-50 to-blue-50 border-violet-300 text-violet-700 hover:from-violet-100 hover:to-blue-100 hover:border-violet-400 transition-all duration-300 shadow-lg hover:shadow-xl px-8 py-3"
+            className="bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 hover:from-blue-300 hover:via-purple-300 hover:to-indigo-300 text-white font-bold py-3 px-8 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
           >
             <RotateCcw className="h-5 w-5 mr-2" />
             Retake This Exam
           </Button>
           <Button 
-            variant="outline" 
             onClick={() => navigate('/predicted-questions')}
-            className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-300 text-blue-700 hover:from-blue-100 hover:to-indigo-100 hover:border-blue-400 transition-all duration-300 shadow-lg hover:shadow-xl px-8 py-3"
+            className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:from-emerald-300 hover:via-teal-300 hover:to-cyan-300 text-white font-bold py-3 px-8 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
           >
             <BookOpen className="h-5 w-5 mr-2" />
             Try Another Subject
           </Button>
           <Button 
             onClick={() => navigate('/dashboard')} 
-            className="bg-gradient-to-r from-violet-600 via-blue-600 to-indigo-600 hover:from-violet-700 hover:via-blue-700 hover:to-indigo-700 text-white shadow-2xl hover:shadow-violet-500/25 transition-all duration-300 px-8 py-3"
+            className="bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-8 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
           >
             <Target className="h-5 w-5 mr-2" />
             Back to Dashboard
+            <Crown className="h-5 w-5 ml-2" />
           </Button>
         </div>
       </div>
