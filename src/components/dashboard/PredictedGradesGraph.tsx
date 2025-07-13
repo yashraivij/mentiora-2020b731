@@ -63,12 +63,15 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
       currentSubjectsWithData.add(completion.subject_id);
     });
     
-    // Always update to include any new subjects found
+    // Only update if there are actually new subjects to add
     setSubjectsEverShown(prev => {
-      const combined = new Set([...prev, ...currentSubjectsWithData]);
-      return combined;
+      const newSubjects = Array.from(currentSubjectsWithData).filter(id => !prev.has(id));
+      if (newSubjects.length > 0) {
+        return new Set([...prev, ...newSubjects]);
+      }
+      return prev; // Return the same reference if no changes
     });
-  }, [userProgress, predictedExamCompletions]); // Track actual arrays, not just lengths
+  }, [JSON.stringify(userProgress.map(p => ({ subjectId: p.subjectId, attempts: p.attempts }))), JSON.stringify(predictedExamCompletions.map(c => c.subject_id))]); // Only track relevant data changes
 
 
   const getSubjectProgress = (subjectId: string) => {
