@@ -356,13 +356,19 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
               ))}
               
               {/* Performance Bars with Advanced Analytics */}
-              <div className="h-full flex items-end justify-between px-4 relative" style={{ gap: `${Math.max(8, (100 - subjects.length * 16) / subjects.length)}px` }}>
+              <div className="h-full flex items-end px-6 relative" style={{ 
+                display: 'grid',
+                gridTemplateColumns: `repeat(${subjects.length}, 1fr)`,
+                gap: '12px',
+                paddingLeft: '1rem',
+                paddingRight: '1rem'
+              }}>
                 {subjects.map((subject, index) => {
                   const trend = getTrendIndicator(subject.grade, averageGrade);
                   const TrendIcon = trend.icon;
                   
                   return (
-                    <div key={subject.id} className="flex flex-col items-center group relative">
+                    <div key={subject.id} className="flex flex-col items-center group relative justify-self-center">
                       
                       {/* Advanced Analytics Popup */}
                       <div className="absolute -top-32 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:-translate-y-4 z-20">
@@ -404,7 +410,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                       
                       {/* Premium Grade Bar */}
                       <div 
-                        className="w-16 md:w-24 rounded-t-2xl absolute bottom-0 overflow-hidden shadow-2xl group-hover:shadow-blue-500/20 dark:group-hover:shadow-blue-400/20 transition-all duration-700 group-hover:scale-110 group-hover:-translate-y-2 border-t-4 border-white/20"
+                        className="w-16 md:w-20 lg:w-24 rounded-t-2xl absolute bottom-0 overflow-hidden shadow-2xl group-hover:shadow-blue-500/20 dark:group-hover:shadow-blue-400/20 transition-all duration-700 group-hover:scale-110 group-hover:-translate-y-2 border-t-4 border-white/20"
                         style={{ 
                           height: `${(subject.grade / 9) * 384}px`,
                           background: getGradeColor(subject.grade),
@@ -453,8 +459,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                       </div>
                       
                       {/* Subject Labels with Analytics */}
-                      <div className="absolute -bottom-14 left-1/2 transform -translate-x-1/2 text-center">
-                        <div className="text-sm font-bold text-slate-800 dark:text-slate-200 truncate max-w-24 mb-0.5">
+                      <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center w-full">
+                        <div className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-1 leading-tight px-1">
                           {subject.name}
                         </div>
                         <div className="flex items-center justify-center space-x-2">
