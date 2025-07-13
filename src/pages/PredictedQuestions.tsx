@@ -1,15 +1,53 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, BookOpen, Clock, Crown, Target, Sparkles, Rocket, Zap } from "lucide-react";
+import { ArrowLeft, BookOpen, Clock, Crown, Target, Sparkles, Rocket, Zap, CheckCircle, RotateCcw } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const PredictedQuestions = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
+  const [completedExams, setCompletedExams] = useState<{[key: string]: any}>({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchCompletedExams();
+  }, []);
+
+  const fetchCompletedExams = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from('predicted_exam_completions')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('completed_at', { ascending: false });
+
+      if (error) throw error;
+
+      // Group by subject, keeping the latest completion for each
+      const completions: {[key: string]: any} = {};
+      data?.forEach(completion => {
+        if (!completions[completion.subject_id]) {
+          completions[completion.subject_id] = completion;
+        }
+      });
+
+      setCompletedExams(completions);
+    } catch (error) {
+      console.error('Error fetching completed exams:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubjectSelect = (subjectId: string) => {
     navigate(`/predicted-exam/${subjectId}`);
@@ -120,31 +158,44 @@ const PredictedQuestions = () => {
 
         {/* Subject Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {curriculum.map((subject) => (
-            <Card 
-              key={subject.id} 
-              className="group cursor-pointer relative overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
-              onClick={() => handleSubjectSelect(subject.id)}
-            >
-              {/* Card Background Gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${getSubjectColor(subject.id)} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
-              
-              <CardHeader className="relative pb-4">
-                <div className="flex items-center justify-between">
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${getSubjectColor(subject.id)} flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 border border-white/20`}>
-                    <BookOpen className="h-7 w-7 text-white" />
+          {curriculum.map((subject) => {
+            const completion = completedExams[subject.id];
+            const isCompleted = !!completion;
+            
+            return (
+              <Card 
+                key={subject.id} 
+                className="group cursor-pointer relative overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+                onClick={() => handleSubjectSelect(subject.id)}
+              >
+                {/* Card Background Gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${getSubjectColor(subject.id)} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
+                
+                {/* Completion Badge */}
+                {isCompleted && (
+                  <div className="absolute top-4 right-4 z-10">
+                    <div className="bg-green-500 text-white rounded-full p-2 shadow-xl">
+                      <CheckCircle className="h-4 w-4" />
+                    </div>
                   </div>
-                  <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm text-xs">
-                    AQA GCSE
-                  </Badge>
-                </div>
-                <CardTitle className="text-xl font-bold text-white group-hover:text-yellow-200 transition-colors mt-3">
-                  {subject.name}
-                </CardTitle>
-                <CardDescription className="text-white/80 text-sm">
-                  Full predicted paper practice
-                </CardDescription>
-              </CardHeader>
+                )}
+                
+                <CardHeader className="relative pb-4">
+                  <div className="flex items-center justify-between">
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${getSubjectColor(subject.id)} flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 border border-white/20`}>
+                      <BookOpen className="h-7 w-7 text-white" />
+                    </div>
+                    <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm text-xs">
+                      AQA GCSE
+                    </Badge>
+                  </div>
+                  <CardTitle className="text-xl font-bold text-white group-hover:text-yellow-200 transition-colors mt-3">
+                    {subject.name}
+                  </CardTitle>
+                  <CardDescription className="text-white/80 text-sm">
+                    {isCompleted ? `Last Grade: ${completion.grade} (${completion.percentage}%)` : 'Full predicted paper practice'}
+                  </CardDescription>
+                </CardHeader>
               
               <CardContent className="relative pt-0">
                 <div className="space-y-4">
@@ -170,6 +221,15 @@ const PredictedQuestions = () => {
                     </div>
                   </div>
                   
+                  {isCompleted && (
+                    <div className="bg-white/15 backdrop-blur-sm border border-white/30 rounded-xl p-3 mb-3">
+                      <div className="flex items-center justify-between text-white text-sm">
+                        <span>Questions refresh:</span>
+                        <span className="font-bold">Next week</span>
+                      </div>
+                    </div>
+                  )}
+                  
                   <Button 
                     className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform group-hover:scale-[1.02] transition-all duration-300"
                     onClick={(e) => {
@@ -177,14 +237,25 @@ const PredictedQuestions = () => {
                       handleSubjectSelect(subject.id);
                     }}
                   >
-                    <Crown className="h-4 w-4 mr-2" />
-                    Start Premium Exam
-                    <Sparkles className="h-4 w-4 ml-2" />
+                    {isCompleted ? (
+                      <>
+                        <RotateCcw className="h-4 w-4 mr-2" />
+                        Retake Exam
+                        <Sparkles className="h-4 w-4 ml-2" />
+                      </>
+                    ) : (
+                      <>
+                        <Crown className="h-4 w-4 mr-2" />
+                        Start Premium Exam
+                        <Sparkles className="h-4 w-4 ml-2" />
+                      </>
+                    )}
                   </Button>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </div>
