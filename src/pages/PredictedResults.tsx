@@ -139,33 +139,137 @@ const PredictedResults = () => {
   };
 
   const generateModelAnswer = (question: ExamQuestion) => {
-    // Generate specific model answers based on question content
-    const questionLower = question.text.toLowerCase();
+    // Generate specific model answers based on actual question content
+    const questionText = question.text;
+    const questionLower = questionText.toLowerCase();
     
+    // Math/Calculation Questions
+    if (questionLower.includes('calculate') || questionLower.includes('work out') || questionLower.includes('%') || questionLower.includes('percent')) {
+      // Handle percentage calculations
+      const percentMatch = questionText.match(/(\d+)%\s*of\s*(\d+)/i);
+      if (percentMatch) {
+        const percentage = parseInt(percentMatch[1]);
+        const number = parseInt(percentMatch[2]);
+        const result = (percentage / 100) * number;
+        return `To calculate ${percentage}% of ${number}:\n\nStep 1: Convert percentage to decimal: ${percentage}% = ${percentage}/100 = ${percentage/100}\n\nStep 2: Multiply by the number: ${percentage/100} × ${number} = ${result}\n\nTherefore, ${percentage}% of ${number} = ${result}`;
+      }
+      
+      // Handle other calculations
+      const addMatch = questionText.match(/(\d+)\s*\+\s*(\d+)/);
+      if (addMatch) {
+        const num1 = parseInt(addMatch[1]);
+        const num2 = parseInt(addMatch[2]);
+        return `${num1} + ${num2} = ${num1 + num2}`;
+      }
+      
+      const subtractMatch = questionText.match(/(\d+)\s*-\s*(\d+)/);
+      if (subtractMatch) {
+        const num1 = parseInt(subtractMatch[1]);
+        const num2 = parseInt(subtractMatch[2]);
+        return `${num1} - ${num2} = ${num1 - num2}`;
+      }
+      
+      const multiplyMatch = questionText.match(/(\d+)\s*×\s*(\d+)|(\d+)\s*\*\s*(\d+)/);
+      if (multiplyMatch) {
+        const num1 = parseInt(multiplyMatch[1] || multiplyMatch[3]);
+        const num2 = parseInt(multiplyMatch[2] || multiplyMatch[4]);
+        return `${num1} × ${num2} = ${num1 * num2}`;
+      }
+      
+      const divideMatch = questionText.match(/(\d+)\s*÷\s*(\d+)|(\d+)\s*\/\s*(\d+)/);
+      if (divideMatch) {
+        const num1 = parseInt(divideMatch[1] || divideMatch[3]);
+        const num2 = parseInt(divideMatch[2] || divideMatch[4]);
+        return `${num1} ÷ ${num2} = ${num1 / num2}`;
+      }
+    }
+    
+    // Science Questions - Specific topic-based answers
     if (questionLower.includes('photosynthesis')) {
-      return "Photosynthesis is the process by which green plants make glucose from carbon dioxide and water using light energy. The word equation is: carbon dioxide + water → glucose + oxygen. This occurs in the chloroplasts, specifically in the chlorophyll. Light energy is absorbed by chlorophyll and converted to chemical energy. The glucose produced is used for respiration and to make other substances like cellulose and starch. Oxygen is released as a waste product, which is essential for other living organisms.";
-    } else if (questionLower.includes('respiration')) {
-      return "Respiration is the process that releases energy from glucose in all living cells. The word equation is: glucose + oxygen → carbon dioxide + water (+ energy). This occurs in the mitochondria of cells. The energy released is used for movement, keeping warm, and building larger molecules from smaller ones. Respiration happens continuously in all living organisms, both plants and animals.";
-    } else if (questionLower.includes('energy transfer') || questionLower.includes('energy transformation')) {
-      return "Energy cannot be created or destroyed, only transferred from one form to another (conservation of energy). Examples include: chemical energy in food → kinetic energy in muscles → heat energy; electrical energy → light energy + heat energy in a bulb; gravitational potential energy → kinetic energy when falling. Energy transfers are often inefficient, with some energy always being transferred to the surroundings as heat.";
-    } else if (questionLower.includes('atomic structure') || questionLower.includes('atom')) {
-      return "An atom consists of a nucleus containing protons (positive charge) and neutrons (no charge), surrounded by electrons (negative charge) in shells. The atomic number equals the number of protons, which determines the element. In a neutral atom, the number of electrons equals the number of protons. The mass number equals protons + neutrons. Electrons are arranged in shells around the nucleus, with the innermost shell holding up to 2 electrons and the next shells holding up to 8.";
-    } else if (questionLower.includes('forces') || questionLower.includes('newton')) {
-      return "Forces are pushes or pulls that can change an object's motion, shape, or direction. Forces are measured in Newtons (N). Balanced forces result in no change in motion, while unbalanced forces cause acceleration. Examples include gravitational force (weight), friction, air resistance, and applied forces. Newton's First Law states that objects continue in their state of motion unless acted upon by an unbalanced force.";
-    } else if (questionLower.includes('calculate') || questionLower.includes('work out')) {
-      return "To solve this calculation: 1) Identify the known values and what needs to be found. 2) Write down the relevant formula/equation. 3) Substitute the known values. 4) Perform the calculation step by step. 5) Include the correct unit in the final answer. 6) Check if the answer is reasonable. Show all working clearly for full marks.";
-    } else if (questionLower.includes('experiment') || questionLower.includes('investigation')) {
-      return "A well-designed experiment should: identify the independent variable (what you change), dependent variable (what you measure), and control variables (what you keep the same). Use appropriate equipment and methods to ensure accuracy. Take repeat readings to identify anomalies and calculate means. Consider safety precautions. Draw valid conclusions based on results and evaluate the method's reliability and validity.";
-    } else if (questionLower.includes('cell') && questionLower.includes('biology')) {
-      return "Plant and animal cells have similarities and differences. Both contain: nucleus (controls cell activities), cytoplasm (where chemical reactions occur), cell membrane (controls what enters/exits), and mitochondria (for respiration). Plant cells additionally have: cell wall (provides support), chloroplasts (for photosynthesis), and a large vacuole (maintains structure). Specialized cells are adapted for specific functions.";
-    } else if (questionLower.includes('chemical reaction') || questionLower.includes('reaction')) {
-      return "In a chemical reaction, reactants are converted into products. Word equations show: reactants → products. Chemical reactions involve breaking bonds in reactants and forming new bonds in products. Evidence includes: temperature change, color change, gas production, or precipitate formation. The law of conservation of mass states that mass is neither created nor destroyed in chemical reactions.";
-    } else if (questionLower.includes('climate change') || questionLower.includes('global warming')) {
-      return "Climate change refers to long-term changes in global temperatures and weather patterns. Human activities, particularly burning fossil fuels, increase greenhouse gas concentrations in the atmosphere. This enhances the greenhouse effect, trapping more heat energy. Consequences include rising sea levels, extreme weather events, and ecosystem disruption. Mitigation strategies include renewable energy, carbon capture, and international cooperation through agreements like the Paris Climate Accord.";
-    } else if (questionLower.includes('ecosystem') || questionLower.includes('food chain')) {
-      return "An ecosystem consists of all living organisms (biotic factors) and non-living components (abiotic factors) in an area, interacting as a system. Food chains show energy transfer: producer → primary consumer → secondary consumer → tertiary consumer. Energy is lost at each level (only 10% passes on), limiting chain length. Decomposers recycle nutrients. Biodiversity ensures ecosystem stability and provides services like pollination, water purification, and climate regulation.";
+      if (questionLower.includes('equation') || questionLower.includes('word equation')) {
+        return "Carbon dioxide + Water → Glucose + Oxygen\n\n(In the presence of light energy and chlorophyll)\n\n6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂";
+      } else if (questionLower.includes('where') || questionLower.includes('location')) {
+        return "Photosynthesis occurs in the chloroplasts of plant cells, specifically in the chlorophyll molecules within the chloroplasts.";
+      } else {
+        return "Photosynthesis is the process by which green plants make glucose from carbon dioxide and water using light energy. The word equation is: carbon dioxide + water → glucose + oxygen. This occurs in the chloroplasts, specifically in the chlorophyll. Light energy is absorbed by chlorophyll and converted to chemical energy. The glucose produced is used for respiration and to make other substances like cellulose and starch. Oxygen is released as a waste product, which is essential for other living organisms.";
+      }
+    }
+    
+    if (questionLower.includes('respiration')) {
+      if (questionLower.includes('equation') || questionLower.includes('word equation')) {
+        return "Glucose + Oxygen → Carbon dioxide + Water + Energy\n\nC₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ATP";
+      } else if (questionLower.includes('where') || questionLower.includes('location')) {
+        return "Respiration occurs in the mitochondria of all living cells.";
+      } else {
+        return "Respiration is the process that releases energy from glucose in all living cells. The word equation is: glucose + oxygen → carbon dioxide + water (+ energy). This occurs in the mitochondria of cells. The energy released is used for movement, keeping warm, and building larger molecules from smaller ones. Respiration happens continuously in all living organisms, both plants and animals.";
+      }
+    }
+    
+    if (questionLower.includes('cell membrane') || questionLower.includes('cell wall')) {
+      if (questionLower.includes('function')) {
+        return "Cell membrane: Controls what enters and exits the cell (selectively permeable).\nCell wall: Provides structural support and protection (found only in plant cells, made of cellulose).";
+      }
+    }
+    
+    if (questionLower.includes('mitochondria')) {
+      return "Mitochondria are the site of respiration in cells. They release energy from glucose through aerobic respiration. Often called the 'powerhouse of the cell' because they produce ATP (energy currency).";
+    }
+    
+    if (questionLower.includes('chloroplast')) {
+      return "Chloroplasts are found only in plant cells and contain chlorophyll. They are the site of photosynthesis, where light energy is captured and used to make glucose from carbon dioxide and water.";
+    }
+    
+    // Geography Questions
+    if (questionLower.includes('erosion')) {
+      return "Erosion is the wearing away and transport of rock, soil, or sediment by natural agents such as water, wind, ice, or gravity. For example, river erosion creates V-shaped valleys through hydraulic action and abrasion. Coastal erosion forms cliffs and wave-cut platforms through wave action.";
+    }
+    
+    if (questionLower.includes('weathering')) {
+      return "Weathering is the breakdown of rocks in situ (in place) without transportation. Physical weathering includes freeze-thaw action where water freezes in cracks, expands, and breaks the rock. Chemical weathering includes acid rain dissolving limestone through carbonation.";
+    }
+    
+    if (questionLower.includes('river')) {
+      if (questionLower.includes('meander')) {
+        return "Rivers form meanders through erosion on the outer bend (where water flows fastest) and deposition on the inner bend (where water flows slowest). Over time, this creates the characteristic curved shape of meandering rivers.";
+      } else if (questionLower.includes('waterfall')) {
+        return "Waterfalls form when rivers flow over bands of hard and soft rock. The soft rock erodes faster, creating a step. Continued erosion by hydraulic action and abrasion deepens the plunge pool and causes the waterfall to retreat upstream.";
+      }
+    }
+    
+    // History Questions
+    if (questionLower.includes('world war') || questionLower.includes('ww1') || questionLower.includes('ww2')) {
+      if (questionLower.includes('cause')) {
+        return "World War 1 causes: Long-term tensions from imperialism, alliance system (Triple Alliance vs Triple Entente), arms race, and nationalism. Immediate trigger was assassination of Archduke Franz Ferdinand in Sarajevo, June 1914.";
+      }
+    }
+    
+    // English Literature
+    if (questionLower.includes('metaphor')) {
+      return "A metaphor is a figure of speech that directly compares two unlike things without using 'like' or 'as'. For example: 'Life is a journey' - life is being compared to a journey to suggest it has stages, challenges, and destinations.";
+    }
+    
+    if (questionLower.includes('simile')) {
+      return "A simile is a figure of speech that compares two unlike things using 'like' or 'as'. For example: 'She was as brave as a lion' - comparing someone's bravery to that of a lion.";
+    }
+    
+    // Physics
+    if (questionLower.includes('speed') && (questionLower.includes('calculate') || questionLower.includes('formula'))) {
+      return "Speed = Distance ÷ Time\n\nFor example, if a car travels 100 meters in 20 seconds:\nSpeed = 100m ÷ 20s = 5 m/s";
+    }
+    
+    if (questionLower.includes('force') && questionLower.includes('calculate')) {
+      return "Force = Mass × Acceleration (F = ma)\n\nForce is measured in Newtons (N), mass in kilograms (kg), acceleration in meters per second squared (m/s²).";
+    }
+    
+    // Generic fallback that still tries to be specific
+    if (questionLower.includes('explain')) {
+      return `A complete explanation for this ${question.marks}-mark question should include: clear definitions of key terms, step-by-step reasoning, specific examples or evidence, and a logical conclusion that directly answers what was asked.`;
+    } else if (questionLower.includes('describe')) {
+      return `A thorough description should include: accurate observations, specific details, appropriate scientific/subject terminology, and clear communication of the main features or characteristics being asked about.`;
+    } else if (questionLower.includes('evaluate') || questionLower.includes('assess')) {
+      return `An evaluation should include: balanced arguments showing both strengths and weaknesses, specific evidence and examples, consideration of different perspectives, and a reasoned judgment or conclusion.`;
     } else {
-      return `For this ${question.marks}-mark question, a complete answer should include: relevant scientific terminology, clear explanations of key concepts, specific examples to support points, and logical structure. Address all parts of the question systematically, using appropriate command words (describe/explain/evaluate). Include quantitative data where relevant and ensure scientific accuracy throughout.`;
+      return `For this ${question.marks}-mark question, ensure your answer: directly addresses what is being asked, uses appropriate subject terminology, provides specific examples or evidence, shows clear understanding of key concepts, and is well-structured with logical flow.`;
     }
   };
 
