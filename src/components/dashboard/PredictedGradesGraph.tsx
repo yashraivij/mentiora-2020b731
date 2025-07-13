@@ -504,7 +504,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                       </div>
                       
                       {/* Subject Labels with Perfect Centering */}
-                      <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-center min-w-max">
+                      <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center min-w-max">
                         <div className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-2 leading-tight whitespace-nowrap">
                           {subject.name}
                         </div>
