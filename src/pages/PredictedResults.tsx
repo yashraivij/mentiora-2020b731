@@ -43,7 +43,7 @@ const PredictedResults = () => {
     return null;
   }
 
-  // Generate marking and feedback for each question - improved marking system with AO breakdown
+  // Generate marking and feedback for each question - practice questions format
   const generateMarking = (question: ExamQuestion, answer: ExamAnswer) => {
     const studentAnswer = answer.answer.toLowerCase().trim();
     
@@ -52,96 +52,90 @@ const PredictedResults = () => {
         marksAwarded: 0, 
         feedback: "No answer provided", 
         modelAnswer: generateModelAnswer(question),
-        aoBreakdown: [],
-        missedPoints: ["No response given"],
-        specificationPoint: getSpecificationPoint(question)
+        markingPoints: [],
+        teacherFeedback: "No answer was provided for this question. Make sure to attempt all questions in the exam.",
+        specificationPoint: getSpecificationPoint(question),
+        grade: "Needs Improvement"
       };
     }
     
-    // Analyze student answer quality
+    // Simple marking based on content quality and question marks
     const wordCount = studentAnswer.split(/\s+/).length;
     const hasScientificTerms = /\b(energy|force|momentum|reaction|element|cell|gene|equation|graph|data|temperature|pressure|volume|density|mass|weight|velocity|acceleration|current|voltage|resistance|atom|molecule|compound|mixture|solution|acid|base|alkali|salt|oxidation|reduction|catalyst|enzyme|mitosis|meiosis|photosynthesis|respiration|ecosystem|biodiversity|evolution|inheritance|variation|homeostasis|reflex|hormone|nervous|circulatory|digestive|respiratory|excretory|reproductive|skeletal|muscular|hypothesis|theory|experiment|variable|control|method|conclusion|analysis|evaluation|calculate|explain|describe|compare|discuss)\b/gi.test(studentAnswer);
-    const hasDetailedExplanation = wordCount >= 20;
+    const hasDetailedExplanation = wordCount >= 15;
     const hasExamples = /\b(example|such as|for instance|like|including)\b/gi.test(studentAnswer);
     const hasStructure = /\b(firstly|secondly|finally|because|therefore|however|furthermore|in conclusion)\b/gi.test(studentAnswer);
-    const hasCalculations = /\b(\d+|\+|\-|\*|\/|=|formula|equation)\b/gi.test(studentAnswer);
     
-    // Assessment Objectives breakdown
-    const aoBreakdown = [];
+    // Generate marking points based on question marks
+    const markingPoints = generateMarkingPoints(question, hasScientificTerms, hasDetailedExplanation, hasExamples, hasStructure);
+    
+    // Calculate marks awarded based on content quality
     let marksAwarded = 0;
-    const missedPoints = [];
-    
-    // AO1: Knowledge and Understanding (40% of marks)
-    const ao1Marks = Math.ceil(question.marks * 0.4);
-    let ao1Awarded = 0;
-    if (hasScientificTerms) {
-      ao1Awarded = Math.min(ao1Marks, Math.ceil(ao1Marks * 0.8));
-      aoBreakdown.push(`AO1: ${ao1Awarded}/${ao1Marks} marks - Key terminology identified`);
-    } else {
-      aoBreakdown.push(`AO1: 0/${ao1Marks} marks - Missing key scientific terminology`);
-      missedPoints.push("Key scientific terms not used");
-    }
-    marksAwarded += ao1Awarded;
-    
-    // AO2: Application and Analysis (40% of marks)
-    const ao2Marks = Math.ceil(question.marks * 0.4);
-    let ao2Awarded = 0;
-    if (hasDetailedExplanation && (hasExamples || hasCalculations)) {
-      ao2Awarded = Math.min(ao2Marks, Math.ceil(ao2Marks * 0.9));
-      aoBreakdown.push(`AO2: ${ao2Awarded}/${ao2Marks} marks - Good application and explanation`);
-    } else if (hasDetailedExplanation) {
-      ao2Awarded = Math.ceil(ao2Marks * 0.6);
-      aoBreakdown.push(`AO2: ${ao2Awarded}/${ao2Marks} marks - Explanation present but lacks examples/calculations`);
-      missedPoints.push("Missing specific examples or calculations");
-    } else {
-      aoBreakdown.push(`AO2: 0/${ao2Marks} marks - Insufficient explanation and application`);
-      missedPoints.push("Lacks detailed explanation", "No application of knowledge shown");
-    }
-    marksAwarded += ao2Awarded;
-    
-    // AO3: Analysis and Evaluation (20% of marks)
-    const ao3Marks = Math.floor(question.marks * 0.2) || 1;
-    let ao3Awarded = 0;
-    if (hasStructure && wordCount >= 30) {
-      ao3Awarded = ao3Marks;
-      aoBreakdown.push(`AO3: ${ao3Awarded}/${ao3Marks} marks - Well-structured response with evaluation`);
-    } else if (hasStructure) {
-      ao3Awarded = Math.ceil(ao3Marks * 0.5);
-      aoBreakdown.push(`AO3: ${ao3Awarded}/${ao3Marks} marks - Some structure but limited evaluation`);
-      missedPoints.push("Limited analysis and evaluation");
-    } else {
-      aoBreakdown.push(`AO3: 0/${ao3Marks} marks - Poor structure and no evaluation`);
-      missedPoints.push("No logical structure or connectives used", "No evaluation or analysis");
-    }
-    marksAwarded += ao3Awarded;
+    if (hasScientificTerms) marksAwarded += 1;
+    if (hasDetailedExplanation) marksAwarded += Math.ceil(question.marks * 0.6);
+    if (hasExamples || hasStructure) marksAwarded += Math.floor(question.marks * 0.3);
     
     // Cap at maximum marks
     marksAwarded = Math.min(marksAwarded, question.marks);
     
-    const feedback = generateTeacherFeedback(question, studentAnswer, marksAwarded, aoBreakdown, missedPoints);
+    const grade = getPerformanceGrade(marksAwarded, question.marks);
+    const teacherFeedback = generateConversationalFeedback(question, marksAwarded, hasScientificTerms, hasDetailedExplanation, hasExamples);
     const modelAnswer = generateModelAnswer(question);
     const specificationPoint = getSpecificationPoint(question);
     
-    return { marksAwarded, feedback, modelAnswer, aoBreakdown, missedPoints, specificationPoint };
+    return { marksAwarded, feedback: teacherFeedback, modelAnswer, markingPoints, teacherFeedback, specificationPoint, grade };
   };
 
-  const generateTeacherFeedback = (question: ExamQuestion, answer: string, marks: number, aoBreakdown: string[], missedPoints: string[]) => {
-    const percentage = (marks / question.marks) * 100;
+  const generateMarkingPoints = (question: ExamQuestion, hasTerms: boolean, hasExplanation: boolean, hasExamples: boolean, hasStructure: boolean) => {
+    const points = [];
+    const marks = question.marks;
     
-    let feedbackLevel = "";
-    if (percentage >= 90) feedbackLevel = "Excellent work!";
-    else if (percentage >= 70) feedbackLevel = "Good answer with room for improvement.";
-    else if (percentage >= 50) feedbackLevel = "Satisfactory but needs development.";
-    else feedbackLevel = "Significant improvement needed.";
+    if (marks === 1) {
+      points.push("Correct identification of key concept (1 mark)");
+    } else if (marks === 2) {
+      points.push("Key terminology and concept understanding (1 mark)");
+      points.push("Clear explanation or example (1 mark)");
+    } else if (marks === 3) {
+      points.push("Identification of key concepts (1 mark)");
+      points.push("Detailed explanation with examples (1 mark)");
+      points.push("Application or evaluation (1 mark)");
+    } else if (marks === 4) {
+      points.push("Comprehensive knowledge of topic (1 mark)");
+      points.push("Clear explanations with examples (1 mark)");
+      points.push("Application to context (1 mark)");
+      points.push("Evaluation or comparison (1 mark)");
+    } else if (marks >= 5) {
+      points.push("Comprehensive knowledge and understanding (2 marks)");
+      points.push("Detailed explanations with relevant examples (2 marks)");
+      points.push("Application and evaluation (1 mark)");
+    }
     
-    return {
-      summary: feedbackLevel,
-      strengths: aoBreakdown.filter(ao => !ao.includes("0/")).map(ao => ao.split(" - ")[1]).filter(Boolean),
-      improvements: missedPoints,
-      nextSteps: percentage >= 70 ? 
-        ["Add more specific examples", "Include numerical data where relevant", "Use more precise scientific terminology"] :
-        ["Focus on key terminology", "Develop explanations with examples", "Structure answers clearly with connectives"]
-    };
+    return points;
+  };
+
+  const getPerformanceGrade = (achieved: number, total: number) => {
+    const percentage = (achieved / total) * 100;
+    if (percentage >= 90) return "Excellent";
+    if (percentage >= 70) return "Very Good";
+    if (percentage >= 50) return "Good";
+    if (percentage >= 30) return "Satisfactory";
+    return "Needs Improvement";
+  };
+
+  const generateConversationalFeedback = (question: ExamQuestion, marksAwarded: number, hasTerms: boolean, hasExplanation: boolean, hasExamples: boolean) => {
+    const percentage = (marksAwarded / question.marks) * 100;
+    
+    if (percentage >= 90) {
+      return `Excellent work! You clearly understood the question and provided a comprehensive answer with good use of scientific terminology. Your explanation was detailed and well-structured. Keep up the fantastic work!`;
+    } else if (percentage >= 70) {
+      return `Good job! You demonstrated solid understanding of the topic and included relevant details. ${hasTerms ? 'Your use of scientific terminology was appropriate.' : 'Try to include more specific scientific terms next time.'} ${hasExplanation ? 'Your explanation was clear.' : 'Consider expanding your explanation with more detail.'} Well done overall!`;
+    } else if (percentage >= 50) {
+      return `You're on the right track! You showed some understanding of the topic. ${hasTerms ? 'Good use of some key terms.' : 'Include more specific scientific vocabulary to strengthen your answer.'} ${hasExplanation ? 'Your explanation had some good points.' : 'Try to develop your explanations more fully.'} Keep practicing and you'll improve!`;
+    } else if (percentage >= 30) {
+      return `You've made a start, but there's room for improvement. Focus on using the correct scientific terminology and developing your explanations more fully. ${hasExamples ? 'Including examples was good.' : 'Try adding specific examples to support your points.'} Don't give up - keep working at it!`;
+    } else {
+      return `This answer needs more development. Make sure you understand the key concepts and can explain them clearly using appropriate scientific terminology. Practice writing longer, more detailed responses and don't be afraid to include examples. You can do better with more practice!`;
+    }
   };
 
   const generateModelAnswer = (question: ExamQuestion) => {
@@ -166,6 +160,10 @@ const PredictedResults = () => {
       return "Plant and animal cells have similarities and differences. Both contain: nucleus (controls cell activities), cytoplasm (where chemical reactions occur), cell membrane (controls what enters/exits), and mitochondria (for respiration). Plant cells additionally have: cell wall (provides support), chloroplasts (for photosynthesis), and a large vacuole (maintains structure). Specialized cells are adapted for specific functions.";
     } else if (questionLower.includes('chemical reaction') || questionLower.includes('reaction')) {
       return "In a chemical reaction, reactants are converted into products. Word equations show: reactants → products. Chemical reactions involve breaking bonds in reactants and forming new bonds in products. Evidence includes: temperature change, color change, gas production, or precipitate formation. The law of conservation of mass states that mass is neither created nor destroyed in chemical reactions.";
+    } else if (questionLower.includes('climate change') || questionLower.includes('global warming')) {
+      return "Climate change refers to long-term changes in global temperatures and weather patterns. Human activities, particularly burning fossil fuels, increase greenhouse gas concentrations in the atmosphere. This enhances the greenhouse effect, trapping more heat energy. Consequences include rising sea levels, extreme weather events, and ecosystem disruption. Mitigation strategies include renewable energy, carbon capture, and international cooperation through agreements like the Paris Climate Accord.";
+    } else if (questionLower.includes('ecosystem') || questionLower.includes('food chain')) {
+      return "An ecosystem consists of all living organisms (biotic factors) and non-living components (abiotic factors) in an area, interacting as a system. Food chains show energy transfer: producer → primary consumer → secondary consumer → tertiary consumer. Energy is lost at each level (only 10% passes on), limiting chain length. Decomposers recycle nutrients. Biodiversity ensures ecosystem stability and provides services like pollination, water purification, and climate regulation.";
     } else {
       return `For this ${question.marks}-mark question, a complete answer should include: relevant scientific terminology, clear explanations of key concepts, specific examples to support points, and logical structure. Address all parts of the question systematically, using appropriate command words (describe/explain/evaluate). Include quantitative data where relevant and ensure scientific accuracy throughout.`;
     }
@@ -197,11 +195,12 @@ const PredictedResults = () => {
     const answer = answers.find((a: ExamAnswer) => a.questionId === q.id);
     const marking = answer ? generateMarking(q, answer) : { 
       marksAwarded: 0, 
-      feedback: { summary: "No answer provided", strengths: [], improvements: ["No response given"], nextSteps: [] }, 
+      feedback: "No answer provided", 
       modelAnswer: generateModelAnswer(q),
-      aoBreakdown: [],
-      missedPoints: ["No answer provided"],
-      specificationPoint: getSpecificationPoint(q)
+      markingPoints: [],
+      teacherFeedback: "No answer was provided for this question.",
+      specificationPoint: getSpecificationPoint(q),
+      grade: "Needs Improvement"
     };
     return { question: q, answer, ...marking };
   });
@@ -409,104 +408,50 @@ const PredictedResults = () => {
                   </div>
                 </div>
 
-                <div>
-                  <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                    <span className="mr-2">🎯</span>
-                    Why It Gets Marks — Assessment Objectives:
-                  </h4>
-                  <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-                    <div className="space-y-2">
-                      {result.aoBreakdown?.map((ao, index) => (
-                        <div key={index} className="flex items-start space-x-2">
-                          <span className="text-blue-600 dark:text-blue-400 font-medium text-sm">•</span>
-                          <p className="text-sm text-blue-800 dark:text-blue-200">{ao}</p>
-                        </div>
-                      )) || (
-                        <p className="text-sm text-blue-800 dark:text-blue-200">Assessment objectives breakdown not available.</p>
-                      )}
+                {/* AI Teacher Feedback - Practice Questions Format */}
+                <div className="bg-gradient-to-br from-primary/5 to-background border border-primary/20 rounded-xl p-6 space-y-4">
+                  <div className="flex justify-between items-start">
+                    <h3 className="text-lg font-bold text-foreground">AI Teacher Feedback</h3>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-primary">
+                        {result.marksAwarded}/{result.question.marks}
+                      </div>
+                      <div className="text-sm text-muted-foreground">marks</div>
+                      <div className="text-sm font-medium text-primary mt-1">
+                        {result.grade}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div>
-                  <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                    <span className="mr-2">❌</span>
-                    Why Your Answer Lost Marks:
-                  </h4>
-                  <div className="bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
-                    <div className="space-y-2">
-                      {result.missedPoints?.map((point, index) => (
-                        <div key={index} className="flex items-start space-x-2">
-                          <span className="text-red-600 dark:text-red-400 font-medium text-sm">•</span>
-                          <p className="text-sm text-red-800 dark:text-red-200">{point}</p>
-                        </div>
-                      )) || (
-                        <p className="text-sm text-red-800 dark:text-red-200">No specific areas for improvement identified.</p>
-                      )}
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">Model Answer</h4>
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <p className="text-sm leading-relaxed">{result.modelAnswer}</p>
                     </div>
                   </div>
-                </div>
 
-                <div>
-                  <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                    <span className="mr-2">🔗</span>
-                    Specification Point Covered:
-                  </h4>
-                  <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
-                    <p className="text-sm text-purple-800 dark:text-purple-200 font-medium">
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">Why This Gets Full Marks</h4>
+                    <div className="space-y-1">
+                      {result.markingPoints?.map((point, index) => (
+                        <div key={index} className="flex items-start space-x-2">
+                          <span className="text-primary font-medium text-sm">•</span>
+                          <p className="text-sm">{point}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">AI Teacher Feedback</h4>
+                    <p className="text-sm leading-relaxed">{result.teacherFeedback}</p>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">Specification Reference</h4>
+                    <p className="text-sm font-medium text-muted-foreground">
                       {result.specificationPoint}
                     </p>
-                  </div>
-                </div>
-                
-                <div>
-                  <h4 className="font-semibold text-foreground mb-3">Teacher Feedback:</h4>
-                  <div className={`rounded-lg p-4 border ${
-                    result.marksAwarded === result.question.marks 
-                      ? 'bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800'
-                      : result.marksAwarded > 0 
-                        ? 'bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800'
-                        : 'bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800'
-                  }`}>
-                    <div className="space-y-3">
-                      <p className={`font-semibold text-sm ${
-                        result.marksAwarded === result.question.marks 
-                          ? 'text-green-800 dark:text-green-200'
-                          : result.marksAwarded > 0 
-                            ? 'text-amber-800 dark:text-amber-200'
-                            : 'text-red-800 dark:text-red-200'
-                      }`}>
-                        {result.feedback?.summary || "No feedback available"}
-                      </p>
-                      
-                      {result.feedback?.strengths && result.feedback.strengths.length > 0 && (
-                        <div>
-                          <p className="text-xs font-medium text-muted-foreground mb-1">Strengths:</p>
-                          <ul className="text-xs space-y-1">
-                            {result.feedback.strengths.map((strength, index) => (
-                              <li key={index} className="flex items-start space-x-1">
-                                <span className="text-green-600">✓</span>
-                                <span>{strength}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                      
-                      {result.feedback?.nextSteps && result.feedback.nextSteps.length > 0 && (
-                        <div>
-                          <p className="text-xs font-medium text-muted-foreground mb-1">Next Steps:</p>
-                          <ul className="text-xs space-y-1">
-                            {result.feedback.nextSteps.map((step, index) => (
-                              <li key={index} className="flex items-start space-x-1">
-                                <span className="text-blue-600">→</span>
-                                <span>{step}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
                   </div>
                 </div>
               </CardContent>
