@@ -60,8 +60,8 @@ const PredictedResults = () => {
     return null;
   }
 
-  // Use exact same AI marking system as Practice.tsx
-  const markAnswerWithAI = async (question: ExamQuestion, answer: string) => {
+  // Use exact same AI marking system as Practice.tsx - OPTIMIZED
+  const markAnswerWithAI = async (question: ExamQuestion, answer: string, modelAnswer: string) => {
     try {
       console.log('Calling AI marking function with:', { 
         question: question.text || question.question, 
@@ -72,7 +72,7 @@ const PredictedResults = () => {
         body: {
           question: question.text || question.question,
           userAnswer: answer,
-          modelAnswer: question.modelAnswer || await generateModelAnswer(question.text || question.question || '', question.marks),
+          modelAnswer: modelAnswer,
           markingCriteria: question.markingCriteria || generateMarkingCriteria(question.text || question.question || ''),
           totalMarks: question.marks,
           subjectId: subjectId
@@ -94,7 +94,6 @@ const PredictedResults = () => {
 
     } catch (error) {
       console.error('Error calling AI marking function:', error);
-      toast.error("Failed to mark answer with AI. Please try again.");
       
       // Fallback to basic marking
       return {
@@ -233,25 +232,23 @@ const PredictedResults = () => {
     return "This answer should demonstrate clear understanding of the key concepts, apply relevant knowledge to the specific context, and use appropriate scientific terminology.";
   };
   
-  // Mark all answers using same system as Practice.tsx
+  // Mark all answers using same system as Practice.tsx - OPTIMIZED for speed
   const markAllAnswers = async () => {
-    console.log('Starting to mark all answers...');
+    console.log('Starting to mark all answers in parallel...');
     setIsMarking(true);
-    const markedAttempts: QuestionAttempt[] = [];
     
     try {
-      for (let i = 0; i < questions.length; i++) {
-        const question = questions[i];
+      // Process all questions in parallel for much faster marking
+      const markingPromises = questions.map(async (question: ExamQuestion, index: number) => {
         const answer = answers.find((a: ExamAnswer) => a.questionId === question.id);
         
-        console.log(`Processing question ${i + 1}/${questions.length}:`, question.text?.substring(0, 50) + '...');
+        console.log(`Processing question ${index + 1}/${questions.length}:`, question.text?.substring(0, 50) + '...');
         
         if (answer) {
           try {
-            const markingResult = await markAnswerWithAI(question, answer.answer);
-            
-            // Generate AI model answer for this specific question
+            // Generate model answer first, then use it for marking in parallel
             const aiModelAnswer = await generateModelAnswer(question.text || question.question || '', question.marks);
+            const markingResult = await markAnswerWithAI(question, answer.answer, aiModelAnswer);
             
             const feedback = {
               modelAnswer: aiModelAnswer,
@@ -267,8 +264,9 @@ const PredictedResults = () => {
               feedback
             };
             
-            markedAttempts.push(attempt);
-            console.log(`Question ${i + 1} marked with score: ${markingResult.marksAwarded}/${question.marks}`);
+            console.log(`Question ${index + 1} marked with score: ${markingResult.marksAwarded}/${question.marks}`);
+            return attempt;
+            
           } catch (error) {
             console.error('Error marking question:', error);
             
@@ -287,10 +285,10 @@ const PredictedResults = () => {
               }
             };
             
-            markedAttempts.push(attempt);
+            return attempt;
           }
         } else {
-          console.log(`No answer found for question ${i + 1}`);
+          console.log(`No answer found for question ${index + 1}`);
           // Create empty attempt for unanswered questions
           const aiModelAnswer = await generateModelAnswer(question.text || question.question || '', question.marks);
           
@@ -306,12 +304,16 @@ const PredictedResults = () => {
             }
           };
           
-          markedAttempts.push(attempt);
+          return attempt;
         }
-      }
+      });
       
-      console.log('All answers marked, setting results...', markedAttempts);
+      // Wait for all questions to be marked in parallel
+      const markedAttempts = await Promise.all(markingPromises);
+      
+      console.log('All answers marked in parallel, setting results...', markedAttempts);
       setAttempts(markedAttempts);
+      toast.success("Exam marked successfully!");
       
     } catch (error) {
       console.error('Error in markAllAnswers:', error);
