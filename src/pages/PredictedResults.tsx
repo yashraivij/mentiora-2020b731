@@ -374,6 +374,53 @@ const PredictedResults = () => {
 
   const grade = getGCSEGrade(percentage);
 
+  // Save exam completion to database when results are calculated
+  useEffect(() => {
+    const saveExamCompletion = async () => {
+      if (attempts.length > 0 && !isReview) { // Only save if not a review session
+        try {
+          const { data: { user } } = await supabase.auth.getUser();
+          if (!user) return;
+
+          console.log('💾 Saving exam completion to database:', {
+            subject_id: subjectId,
+            grade,
+            percentage,
+            achieved_marks: achievedMarks,
+            total_marks: totalMarks
+          });
+
+          const { error } = await supabase
+            .from('predicted_exam_completions')
+            .insert({
+              user_id: user.id,
+              subject_id: subjectId || 'unknown',
+              exam_date: new Date().toISOString().split('T')[0],
+              total_marks: totalMarks,
+              achieved_marks: achievedMarks,
+              percentage: percentage,
+              grade: grade,
+              time_taken_seconds: timeElapsed || 0,
+              questions: JSON.parse(JSON.stringify(questions)),
+              answers: JSON.parse(JSON.stringify(answers)),
+              results: JSON.parse(JSON.stringify(attempts))
+            });
+
+          if (error) {
+            console.error('❌ Error saving exam completion:', error);
+          } else {
+            console.log('✅ Exam completion saved successfully!');
+            toast.success("Exam results saved!");
+          }
+        } catch (error) {
+          console.error('❌ Error in saveExamCompletion:', error);
+        }
+      }
+    };
+
+    saveExamCompletion();
+  }, [attempts, subjectId, grade, percentage, achievedMarks, totalMarks, isReview, questions, answers, timeElapsed]);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
