@@ -479,12 +479,10 @@ const PredictedResults = () => {
               
               <CardContent className="relative space-y-6 p-8">
                 <div className="bg-muted/50 dark:bg-slate-700/50 backdrop-blur-sm border border-border rounded-xl p-5">
-                  <h4 className="font-bold text-foreground mb-3 flex items-center">
-                    <div className="p-1.5 bg-blue-500/30 rounded-lg mr-3">
-                      <BookOpen className="h-4 w-4 text-white" />
-                    </div>
-                    Question
-                  </h4>
+                    <h4 className="font-bold text-foreground mb-3 flex items-center">
+                      <BookOpen className="h-5 w-5 text-blue-500 mr-3" />
+                      Question
+                    </h4>
                   <div className="bg-muted/80 dark:bg-slate-600/50 backdrop-blur-sm rounded-lg p-4 border border-border">
                     <p className="whitespace-pre-wrap text-foreground leading-relaxed">{result.question.text}</p>
                   </div>
@@ -492,12 +490,10 @@ const PredictedResults = () => {
                 
                 {result.answer && (
                   <div className="bg-muted/50 dark:bg-slate-700/50 backdrop-blur-sm border border-border rounded-xl p-5">
-                    <h4 className="font-bold text-foreground mb-3 flex items-center">
-                      <div className="p-1.5 bg-purple-500/30 rounded-lg mr-3">
-                        <Target className="h-4 w-4 text-white" />
-                      </div>
-                      Your Answer
-                    </h4>
+                      <h4 className="font-bold text-foreground mb-3 flex items-center">
+                        <Target className="h-5 w-5 text-purple-500 mr-3" />
+                        Your Answer
+                      </h4>
                     <div className="bg-muted/80 dark:bg-slate-600/50 backdrop-blur-sm rounded-lg p-4 border border-border">
                       <p className="text-sm whitespace-pre-wrap text-foreground leading-relaxed">{result.answer.answer}</p>
                     </div>
@@ -538,24 +534,20 @@ const PredictedResults = () => {
                     </div>
 
                     <div className="bg-muted/50 dark:bg-slate-600/50 backdrop-blur-sm border border-border rounded-xl p-5">
-                      <h4 className="font-bold text-foreground mb-3 flex items-center">
-                        <div className="p-1.5 bg-emerald-500/30 rounded-lg mr-3">
-                          <CheckCircle className="h-4 w-4 text-white" />
-                        </div>
-                        Model Answer
-                      </h4>
+                        <h4 className="font-bold text-foreground mb-3 flex items-center">
+                          <CheckCircle className="h-5 w-5 text-emerald-500 mr-3" />
+                          Model Answer
+                        </h4>
                       <div className="bg-muted/80 dark:bg-slate-500/50 backdrop-blur-sm rounded-lg p-4 border border-border">
                         <p className="text-sm leading-relaxed text-foreground">{result.modelAnswer}</p>
                       </div>
                     </div>
 
                     <div className="bg-muted/50 dark:bg-slate-600/50 backdrop-blur-sm border border-border rounded-xl p-5">
-                      <h4 className="font-bold text-foreground mb-3 flex items-center">
-                        <div className="p-1.5 bg-blue-500/30 rounded-lg mr-3">
-                          <Target className="h-4 w-4 text-white" />
-                        </div>
-                        Why This Gets Full Marks
-                      </h4>
+                        <h4 className="font-bold text-foreground mb-3 flex items-center">
+                          <Target className="h-5 w-5 text-blue-500 mr-3" />
+                          Why This Gets Full Marks
+                        </h4>
                       <div className="space-y-3">
                         {result.markingPoints?.map((point, index) => (
                           <div key={index} className="flex items-start space-x-3 bg-muted/80 dark:bg-slate-500/50 backdrop-blur-sm rounded-lg p-3 border border-border">
@@ -569,12 +561,10 @@ const PredictedResults = () => {
                     </div>
 
                     <div className="bg-muted/50 dark:bg-slate-600/50 backdrop-blur-sm border border-border rounded-xl p-5">
-                      <h4 className="font-bold text-foreground mb-3 flex items-center">
-                        <div className="p-1.5 bg-purple-500/30 rounded-lg mr-3">
-                          <Crown className="h-4 w-4 text-white" />
-                        </div>
-                        AI Teacher Feedback
-                      </h4>
+                        <h4 className="font-bold text-foreground mb-3 flex items-center">
+                          <Crown className="h-5 w-5 text-yellow-500 mr-3" />
+                          AI Teacher Feedback
+                        </h4>
                       <div className="bg-muted/80 dark:bg-slate-500/50 backdrop-blur-sm rounded-lg p-4 border border-border">
                         <p className="text-sm leading-relaxed text-foreground font-medium">{result.teacherFeedback}</p>
                       </div>
@@ -582,9 +572,7 @@ const PredictedResults = () => {
 
                     <div className="bg-muted/50 dark:bg-slate-600/50 backdrop-blur-sm border border-border rounded-xl p-5">
                       <h4 className="font-bold text-foreground mb-3 flex items-center">
-                        <div className="p-1.5 bg-amber-500/30 rounded-lg mr-3">
-                          <BookOpen className="h-4 w-4 text-white" />
-                        </div>
+                        <BookOpen className="h-5 w-5 text-amber-500 mr-3" />
                         Specification Reference
                       </h4>
                       <div className="bg-muted/80 dark:bg-slate-500/50 backdrop-blur-sm rounded-lg p-4 border border-border">
