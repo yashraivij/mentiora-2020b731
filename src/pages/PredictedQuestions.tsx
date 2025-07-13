@@ -87,13 +87,14 @@ const PredictedQuestions = () => {
       console.log('Raw subject IDs from database:', [...new Set(data?.map(d => d.subject_id) || [])]);
       console.log('Curriculum subject IDs:', curriculum.map(s => s.id));
 
-      // Map potential subject ID variations to curriculum IDs
+      // Map potential subject ID variations to curriculum IDs 
+      // The curriculum uses different IDs than what might be stored in database
       const subjectIdMapping: {[key: string]: string} = {
-        'maths': 'mathematics',
-        'math': 'mathematics', 
-        'mathematics': 'mathematics',
+        'mathematics': 'maths',  // Database "mathematics" -> Curriculum "maths" 
+        'math': 'maths',
+        'maths': 'maths',        // Database "maths" -> Curriculum "maths"
         'chemistry': 'chemistry',
-        'biology': 'biology',
+        'biology': 'biology', 
         'physics': 'physics',
         'english-language': 'english-language',
         'english-literature': 'english-literature',
@@ -139,7 +140,7 @@ const PredictedQuestions = () => {
       chemistry: "from-green-500 to-emerald-600",
       biology: "from-emerald-500 to-green-600", 
       physics: "from-blue-500 to-indigo-600",
-      mathematics: "from-purple-500 to-indigo-600",
+      maths: "from-purple-500 to-indigo-600",  // Updated to use "maths"
       "english-language": "from-rose-500 to-pink-600",
       "english-literature": "from-pink-500 to-rose-600",
       history: "from-amber-500 to-orange-600",
@@ -155,7 +156,7 @@ const PredictedQuestions = () => {
       chemistry: "1h 45min",
       biology: "1h 45min",
       physics: "1h 45min", 
-      mathematics: "1h 30min",
+      maths: "1h 30min",  // Updated to use "maths"
       "english-language": "1h 45min",
       "english-literature": "1h 45min",
       history: "1h 15min",
