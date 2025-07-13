@@ -235,49 +235,73 @@ const PredictedResults = () => {
   
   // Mark all answers using same system as Practice.tsx
   const markAllAnswers = async () => {
+    console.log('Starting to mark all answers...');
     setIsMarking(true);
     const markedAttempts: QuestionAttempt[] = [];
     
-    for (let i = 0; i < questions.length; i++) {
-      const question = questions[i];
-      const answer = answers.find((a: ExamAnswer) => a.questionId === question.id);
-      
-      if (answer) {
-        try {
-          const markingResult = await markAnswerWithAI(question, answer.answer);
-          
-          // Generate AI model answer for this specific question
-          const aiModelAnswer = await generateModelAnswer(question.text || question.question || '', question.marks);
-          
-          const feedback = {
-            modelAnswer: aiModelAnswer,
-            whyThisGetsMark: generateMarkingCriteria(question.text || question.question || ''),
-            whyYoursDidnt: markingResult.feedback,
-            specLink: question.specReference || generateSpecReference(question.text || question.question || '', subjectId || '')
-          };
+    try {
+      for (let i = 0; i < questions.length; i++) {
+        const question = questions[i];
+        const answer = answers.find((a: ExamAnswer) => a.questionId === question.id);
+        
+        console.log(`Processing question ${i + 1}/${questions.length}:`, question.text?.substring(0, 50) + '...');
+        
+        if (answer) {
+          try {
+            const markingResult = await markAnswerWithAI(question, answer.answer);
+            
+            // Generate AI model answer for this specific question
+            const aiModelAnswer = await generateModelAnswer(question.text || question.question || '', question.marks);
+            
+            const feedback = {
+              modelAnswer: aiModelAnswer,
+              whyThisGetsMark: generateMarkingCriteria(question.text || question.question || ''),
+              whyYoursDidnt: markingResult.feedback,
+              specLink: question.specReference || generateSpecReference(question.text || question.question || '', subjectId || '')
+            };
 
-          const attempt: QuestionAttempt = {
-            questionId: question.id,
-            userAnswer: answer.answer,
-            score: markingResult.marksAwarded,
-            feedback
-          };
-          
-          markedAttempts.push(attempt);
-        } catch (error) {
-          console.error('Error marking question:', error);
-          
-          // Fallback attempt with AI model answer
+            const attempt: QuestionAttempt = {
+              questionId: question.id,
+              userAnswer: answer.answer,
+              score: markingResult.marksAwarded,
+              feedback
+            };
+            
+            markedAttempts.push(attempt);
+            console.log(`Question ${i + 1} marked with score: ${markingResult.marksAwarded}/${question.marks}`);
+          } catch (error) {
+            console.error('Error marking question:', error);
+            
+            // Fallback attempt with AI model answer
+            const aiModelAnswer = await generateModelAnswer(question.text || question.question || '', question.marks);
+            
+            const attempt: QuestionAttempt = {
+              questionId: question.id,
+              userAnswer: answer.answer,
+              score: 0,
+              feedback: {
+                modelAnswer: aiModelAnswer,
+                whyThisGetsMark: generateMarkingCriteria(question.text || question.question || ''),
+                whyYoursDidnt: "Unable to mark this answer automatically. Please review with your teacher.",
+                specLink: generateSpecReference(question.text || question.question || '', subjectId || '')
+              }
+            };
+            
+            markedAttempts.push(attempt);
+          }
+        } else {
+          console.log(`No answer found for question ${i + 1}`);
+          // Create empty attempt for unanswered questions
           const aiModelAnswer = await generateModelAnswer(question.text || question.question || '', question.marks);
           
           const attempt: QuestionAttempt = {
             questionId: question.id,
-            userAnswer: answer.answer,
+            userAnswer: '',
             score: 0,
             feedback: {
               modelAnswer: aiModelAnswer,
               whyThisGetsMark: generateMarkingCriteria(question.text || question.question || ''),
-              whyYoursDidnt: "Unable to mark this answer automatically. Please review with your teacher.",
+              whyYoursDidnt: "No answer provided.",
               specLink: generateSpecReference(question.text || question.question || '', subjectId || '')
             }
           };
@@ -285,15 +309,24 @@ const PredictedResults = () => {
           markedAttempts.push(attempt);
         }
       }
+      
+      console.log('All answers marked, setting results...', markedAttempts);
+      setAttempts(markedAttempts);
+      
+    } catch (error) {
+      console.error('Error in markAllAnswers:', error);
+      toast.error("Failed to mark exam. Please try refreshing the page.");
+    } finally {
+      setIsMarking(false);
+      console.log('Marking completed, isMarking set to false');
     }
-    
-    setAttempts(markedAttempts);
-    setIsMarking(false);
   };
   
   useEffect(() => {
-    markAllAnswers();
-  }, []);
+    if (questions && answers) {
+      markAllAnswers();
+    }
+  }, [questions, answers]);
 
   if (isMarking) {
     return (
