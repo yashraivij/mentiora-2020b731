@@ -116,7 +116,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         .reduce((sum, p) => sum + p.attempts, 0) + 1; // +1 for exam attempt
       
       return {
-        grade: Math.max(1, combinedGrade), // Ensure at least grade 1
+        grade: Math.max(0, combinedGrade), // Allow grade 0 (U)
         percentage: combinedPercentage,
         confidence: getConfidenceLevel(combinedPercentage, totalAttempts),
         totalAttempts,
@@ -136,7 +136,12 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     if (percentage >= 35) return 4;
     if (percentage >= 25) return 3;
     if (percentage >= 15) return 2;
-    return 1;
+    if (percentage >= 5) return 1;
+    return 0; // This will be displayed as "U"
+  };
+
+  const displayGrade = (grade: number): string => {
+    return grade === 0 ? "U" : grade.toString();
   };
 
   const getGradeColor = (grade: number) => {
@@ -325,8 +330,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           <div className="relative">
             {/* Y-axis with enhanced styling */}
             <div className="absolute left-0 top-0 h-96 flex flex-col justify-between items-end pr-6 text-sm font-medium text-slate-600 dark:text-slate-400">
-              {[9, 8, 7, 6, 5, 4, 3, 2, 1].map(grade => (
-                <div key={grade} className="h-10 flex items-center">
+              {[9, 8, 7, 6, 5, 4, 3, 2, 1, 'U'].map(grade => (
+                <div key={grade} className="h-9 flex items-center">
                   <div className="flex items-center space-x-2">
                     <span className="text-slate-400">Grade</span>
                     <span className="font-bold text-slate-700 dark:text-slate-300">{grade}</span>
@@ -339,16 +344,16 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
             <div className="ml-20 pl-6 border-l-2 border-b-2 border-slate-300/40 dark:border-slate-600/40 h-96 relative bg-gradient-to-t from-slate-50/30 to-transparent dark:from-slate-800/30 rounded-br-xl">
               
               {/* Enhanced grid lines */}
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(grade => (
+              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(grade => (
                 <div 
                   key={grade} 
                   className="absolute w-full border-t border-slate-200/30 dark:border-slate-700/30" 
-                  style={{ bottom: `${((grade - 1) / 8) * 100}%` }}
+                  style={{ bottom: `${(grade / 9) * 100}%` }}
                 />
               ))}
               
               {/* Performance Bars with Advanced Analytics */}
-              <div className="h-full flex justify-center gap-6 px-6 relative">
+              <div className="h-full flex items-end justify-between px-4 relative" style={{ gap: `${Math.max(8, (100 - subjects.length * 16) / subjects.length)}px` }}>
                 {subjects.map((subject, index) => {
                   const trend = getTrendIndicator(subject.grade, averageGrade);
                   const TrendIcon = trend.icon;
@@ -367,11 +372,11 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                                 <span className="text-xs font-medium">{trend.label}</span>
                               </div>
                             </div>
-                            <div className="grid grid-cols-2 gap-3 text-sm">
-                              <div>
-                                <div className="text-2xl font-bold text-slate-900 dark:text-white">{subject.grade}</div>
-                                <div className="text-xs text-slate-500 dark:text-slate-400">Predicted Grade</div>
-                              </div>
+                             <div className="grid grid-cols-2 gap-3 text-sm">
+                               <div>
+                                 <div className="text-2xl font-bold text-slate-900 dark:text-white">{displayGrade(subject.grade)}</div>
+                                 <div className="text-xs text-slate-500 dark:text-slate-400">Predicted Grade</div>
+                               </div>
                               <div>
                                 <div className="font-semibold text-blue-600 dark:text-blue-400">{subject.percentage}%</div>
                                 <div className="text-xs text-slate-500 dark:text-slate-400">Accuracy</div>
@@ -398,9 +403,9 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                       <div 
                         className="w-16 md:w-24 rounded-t-2xl absolute bottom-0 overflow-hidden shadow-2xl group-hover:shadow-blue-500/20 dark:group-hover:shadow-blue-400/20 transition-all duration-700 group-hover:scale-110 group-hover:-translate-y-2 border-t-4 border-white/20"
                         style={{ 
-                          height: `${((subject.grade - 1) / 8) * 384}px`,
+                          height: `${(subject.grade / 9) * 384}px`,
                           background: getGradeColor(subject.grade),
-                          minHeight: "16px",
+                          minHeight: subject.grade === 0 ? "8px" : "16px",
                           filter: "drop-shadow(0 12px 35px rgba(0, 0, 0, 0.15))"
                         }}
                       >
@@ -411,7 +416,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                         {/* Grade indicator overlay */}
                         <div className="absolute top-3 left-1/2 transform -translate-x-1/2">
                           <div className="bg-white/20 backdrop-blur-sm rounded-full w-8 h-8 flex items-center justify-center">
-                            <span className="text-white font-bold text-sm">{subject.grade}</span>
+                            <span className="text-white font-bold text-sm">{displayGrade(subject.grade)}</span>
                           </div>
                         </div>
                         
@@ -451,7 +456,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                         </div>
                         <div className="flex items-center justify-center space-x-2">
                           <div className={`text-lg font-bold ${getGradeColorClass(subject.grade)} group-hover:scale-125 transition-transform duration-300`}>
-                            {subject.grade}
+                            {displayGrade(subject.grade)}
                           </div>
                           <div className={`w-2 h-2 rounded-full ${
                             subject.confidence === 'Very High' ? 'bg-emerald-500' :
