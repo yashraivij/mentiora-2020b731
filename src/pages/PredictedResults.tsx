@@ -225,6 +225,20 @@ const PredictedResults = () => {
     return "This answer should demonstrate clear understanding of the key concepts, apply relevant knowledge to the specific context, and use appropriate scientific terminology.";
   };
   
+  // Calculate GCSE grade based on percentage
+  const getGCSEGrade = (percentage: number): string => {
+    if (percentage >= 90) return "9";
+    if (percentage >= 80) return "8";
+    if (percentage >= 70) return "7";
+    if (percentage >= 60) return "6";
+    if (percentage >= 50) return "5";
+    if (percentage >= 40) return "4";
+    if (percentage >= 30) return "3";
+    if (percentage >= 20) return "2";
+    if (percentage >= 10) return "1";
+    return "U";
+  };
+
   // Save exam completion to database
   const saveExamCompletion = async (markedAttempts: QuestionAttempt[]) => {
     try {
@@ -412,19 +426,6 @@ const PredictedResults = () => {
   const achievedMarks = attempts.reduce((sum: number, attempt: QuestionAttempt) => sum + attempt.score, 0);
   const percentage = totalMarks > 0 ? Math.round((achievedMarks / totalMarks) * 100) : 0;
 
-  // Calculate GCSE grade based on percentage
-  const getGCSEGrade = (percentage: number): string => {
-    if (percentage >= 90) return "9";
-    if (percentage >= 80) return "8";
-    if (percentage >= 70) return "7";
-    if (percentage >= 60) return "6";
-    if (percentage >= 50) return "5";
-    if (percentage >= 40) return "4";
-    if (percentage >= 30) return "3";
-    if (percentage >= 20) return "2";
-    if (percentage >= 10) return "1";
-    return "U";
-  };
 
   const grade = getGCSEGrade(percentage);
 
