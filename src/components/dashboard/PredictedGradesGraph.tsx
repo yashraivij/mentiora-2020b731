@@ -21,7 +21,7 @@ interface PredictedGradesGraphProps {
 export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
   const { user } = useAuth();
   const [predictedExamCompletions, setPredictedExamCompletions] = useState<any[]>([]);
-  
+  const [subjectsEverShown, setSubjectsEverShown] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const fetchPredictedExamCompletions = async () => {
@@ -46,6 +46,32 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
 
     fetchPredictedExamCompletions();
   }, [user]);
+
+  // Track subjects that should persist using a stable mechanism
+  useEffect(() => {
+    const currentSubjectsWithData = new Set<string>();
+    
+    // Add subjects with practice data
+    userProgress.forEach(p => {
+      if (p.attempts > 0) {
+        currentSubjectsWithData.add(p.subjectId);
+      }
+    });
+    
+    // Add subjects with exam completions
+    predictedExamCompletions.forEach(completion => {
+      currentSubjectsWithData.add(completion.subject_id);
+    });
+    
+    // Only update if there are new subjects to track
+    setSubjectsEverShown(prev => {
+      const newSubjects = Array.from(currentSubjectsWithData).filter(id => !prev.has(id));
+      if (newSubjects.length > 0) {
+        return new Set([...prev, ...newSubjects]);
+      }
+      return prev;
+    });
+  }, [userProgress.length, predictedExamCompletions.length]); // Use lengths to avoid array reference issues
 
 
   const getSubjectProgress = (subjectId: string) => {
@@ -81,10 +107,22 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     // Check if subject has any current data
     const hasPracticeData = userProgress.some(p => p.subjectId === subjectId);
     const hasCurrentData = hasPracticeData || recentExamCompletion;
+    const wasEverShown = subjectsEverShown.has(subjectId);
     
-    // If no current data, don't show subject
-    if (!hasCurrentData) {
+    // If no current data and was never shown before, don't show subject
+    if (!hasCurrentData && !wasEverShown) {
       return null;
+    }
+    
+    // If subject was shown before but has no current data, show placeholder
+    if (wasEverShown && !hasCurrentData) {
+      return {
+        grade: 1,
+        percentage: 15,
+        confidence: 'Low',
+        totalAttempts: 0,
+        source: 'placeholder'
+      };
     }
     
     // If only exam completion, use that grade
@@ -465,9 +503,9 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                         </div>
                       </div>
                       
-                      {/* Subject Labels with Analytics */}
-                      <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center w-full">
-                        <div className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-1 leading-tight px-1">
+                      {/* Subject Labels with Perfect Centering */}
+                      <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 text-center min-w-max">
+                        <div className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-2 leading-tight whitespace-nowrap">
                           {subject.name}
                         </div>
                         <div className="flex items-center justify-center space-x-2">
@@ -475,10 +513,15 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                             {displayGrade(subject.grade)}
                           </div>
                           <div className={`w-2 h-2 rounded-full ${
-                            subject.confidence === 'Very High' ? 'bg-emerald-500' :
-                            subject.confidence === 'High' ? 'bg-green-500' :
-                            subject.confidence === 'Medium' ? 'bg-yellow-500' : 'bg-orange-500'
-                          }`}></div>
+                            subject.confidence === 'Very High' ? 'bg-emerald-500 shadow-emerald-500/50' :
+                            subject.confidence === 'High' ? 'bg-green-500 shadow-green-500/50' :
+                            subject.confidence === 'Medium' ? 'bg-yellow-500 shadow-yellow-500/50' : 'bg-orange-500 shadow-orange-500/50'
+                          } shadow-lg animate-pulse`}></div>
+                        </div>
+                        
+                        {/* Premium Enhancement: Subject performance indicator */}
+                        <div className="mt-1 text-xs text-slate-500 dark:text-slate-400 font-medium">
+                          {subject.percentage}% • {subject.confidence}
                         </div>
                       </div>
                     </div>
