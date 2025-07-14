@@ -4,7 +4,7 @@ import { TrendingUp, Sparkles, Trophy, Star, Zap, BarChart3, Target, TrendingDow
 import { curriculum } from "@/data/curriculum";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 interface UserProgress {
   subjectId: string;
@@ -244,7 +244,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     return { icon: Activity, color: "text-blue-500", label: "On Track" };
   };
 
-  const getSubjectsWithPredictions = () => {
+  // Memoize the subjects calculation to prevent unnecessary recalculations
+  const subjects = useMemo(() => {
     return curriculum.map(subject => {
       const combinedResult = calculateCombinedGrade(subject.id);
       
@@ -261,11 +262,17 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         hasData: true
       };
     }).filter(subject => subject !== null);
-  };
+  }, [
+    // Only recalculate when these specific values change
+    JSON.stringify(userProgress.map(p => ({ subjectId: p.subjectId, attempts: p.attempts, averageScore: p.averageScore }))),
+    JSON.stringify(predictedExamCompletions.map(c => ({ subject_id: c.subject_id, grade: c.grade, percentage: c.percentage, created_at: c.created_at }))),
+    JSON.stringify(Array.from(subjectsEverShown))
+  ]);
 
-  const subjects = getSubjectsWithPredictions();
-  const averageGrade = subjects.length > 0 ? 
-    subjects.reduce((sum, s) => sum + s.grade, 0) / subjects.length : 0;
+  const averageGrade = useMemo(() => {
+    return subjects.length > 0 ? 
+      subjects.reduce((sum, s) => sum + s.grade, 0) / subjects.length : 0;
+  }, [subjects]);
 
   const getEncouragingMessage = () => {
     const highPerformers = subjects.filter(s => s.grade >= 7).length;
