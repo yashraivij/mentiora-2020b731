@@ -17,6 +17,7 @@ import { TopicMasteryDisplay } from "@/components/dashboard/TopicMasteryDisplay"
 
 import { PredictivePerformanceCard } from "@/components/dashboard/PredictivePerformanceCard";
 import { OptimalStudyTimeCard } from "@/components/dashboard/OptimalStudyTimeCard";
+import { OptimalLearningTimeCard } from "@/components/dashboard/OptimalLearningTimeCard";
 import { PredictedQuestionsSection } from "@/components/dashboard/PredictedQuestionsSection";
 import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
 import { supabase } from "@/integrations/supabase/client";
@@ -298,6 +299,13 @@ const Dashboard = () => {
 
         {/* Predicted GCSE Grades Section */}
         <PredictedGradesGraph userProgress={userProgress} />
+
+        {/* Optimal Learning Time - Premium Feature */}
+        <div className="mb-8">
+          <div className="max-w-md">
+            <OptimalLearningTimeCard />
+          </div>
+        </div>
 
         {/* Predicted 2026 Questions Section */}
         <PredictedQuestionsSection />
