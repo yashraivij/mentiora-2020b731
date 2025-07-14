@@ -102,11 +102,11 @@ const Index = () => {
       description: "AI marking precision"
     },
     { 
-      number: "5+ Years", 
-      label: "AI Development", 
+      number: "Instant", 
+      label: "Results", 
       color: "text-blue-600", 
       bg: "bg-gradient-to-br from-blue-50 to-blue-100",
-      description: "Research & training"
+      description: "Real-time analysis"
     },
     { 
       number: "100%", 
