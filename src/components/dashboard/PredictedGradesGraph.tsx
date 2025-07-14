@@ -529,15 +529,85 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
             </div>
           </TooltipProvider>
         ) : (
-          <div className="text-center py-12">
-            <div className="w-16 h-16 bg-gradient-to-br from-muted/30 to-muted/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <TrendingUp className="h-8 w-8 text-muted-foreground" />
+          <div className="text-center py-16 relative">
+            {/* Premium background effects */}
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/10 to-emerald-500/10 rounded-3xl" />
+            <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-pink-400/20 to-rose-500/20 rounded-full blur-2xl animate-bounce" />
+            <div className="absolute top-1/3 left-1/4 w-24 h-24 bg-gradient-to-br from-cyan-400/15 to-blue-500/15 rounded-full blur-xl" />
+            
+            {/* Floating elements */}
+            <div className="absolute top-8 right-12 w-3 h-3 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full animate-pulse opacity-80" />
+            <div className="absolute bottom-12 left-16 w-2 h-2 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full animate-bounce opacity-60" />
+            <div className="absolute top-16 left-12 w-2.5 h-2.5 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full animate-ping opacity-70" />
+            
+            <div className="relative z-10">
+              {/* Premium icon container */}
+              <div className="relative mx-auto mb-8 w-fit">
+                <div className="w-24 h-24 bg-gradient-to-br from-violet-500 via-purple-600 to-indigo-600 rounded-3xl flex items-center justify-center mx-auto shadow-2xl shadow-purple-500/25 animate-pulse">
+                  <TrendingUp className="h-12 w-12 text-white drop-shadow-lg" />
+                </div>
+                <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full border-4 border-background animate-bounce shadow-lg">
+                  <Sparkles className="h-4 w-4 text-white m-auto mt-1" />
+                </div>
+                <div className="absolute -bottom-1 -left-1 w-6 h-6 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full border-2 border-background animate-pulse shadow-md">
+                  <Crown className="h-3 w-3 text-white m-auto mt-1" />
+                </div>
+              </div>
+              
+              {/* Premium content */}
+              <div className="space-y-6 max-w-lg mx-auto">
+                <div className="space-y-3">
+                  <h3 className="text-3xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 bg-clip-text text-transparent">
+                    ✨ Start Revising to Unlock Predictions
+                  </h3>
+                  <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Complete practice questions or take predicted papers to see your <span className="font-semibold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">AI-powered grade forecasts</span>
+                  </p>
+                </div>
+                
+                {/* Premium features showcase */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-purple-900/30 dark:to-indigo-900/30 border border-purple-200/60 dark:border-purple-800/40 shadow-lg">
+                    <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center mb-3 shadow-lg">
+                      <Target className="h-5 w-5 text-white" />
+                    </div>
+                    <h4 className="font-bold text-purple-800 dark:text-purple-200 mb-1">Real-time Tracking</h4>
+                    <p className="text-xs text-purple-600 dark:text-purple-300">Watch your grades improve live</p>
+                  </div>
+                  
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 border border-emerald-200/60 dark:border-emerald-800/40 shadow-lg">
+                    <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center mb-3 shadow-lg">
+                      <Zap className="h-5 w-5 text-white" />
+                    </div>
+                    <h4 className="font-bold text-emerald-800 dark:text-emerald-200 mb-1">AI Predictions</h4>
+                    <p className="text-xs text-emerald-600 dark:text-emerald-300">Smart grade forecasting</p>
+                  </div>
+                  
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 border border-amber-200/60 dark:border-amber-800/40 shadow-lg">
+                    <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center mb-3 shadow-lg">
+                      <Trophy className="h-5 w-5 text-white" />
+                    </div>
+                    <h4 className="font-bold text-amber-800 dark:text-amber-200 mb-1">Achievement Goals</h4>
+                    <p className="text-xs text-amber-600 dark:text-amber-300">Track your progress to grade 9</p>
+                  </div>
+                </div>
+                
+                {/* Call to action */}
+                <div className="flex flex-col items-center space-y-4 mt-8">
+                  <Badge className="bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 text-white border-0 px-6 py-2 text-sm font-bold shadow-xl shadow-purple-500/25 animate-pulse">
+                    <Sparkles className="h-4 w-4 mr-2 animate-spin" />
+                    🚀 AI predictions available after first activity
+                  </Badge>
+                  
+                  <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                    <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    <span>Premium insights unlock automatically</span>
+                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h3 className="text-lg font-medium text-foreground mb-2">Start Revising to Unlock Predictions</h3>
-            <p className="text-muted-foreground mb-4">Complete practice questions or take predicted papers to see your grade forecasts</p>
-            <Badge variant="outline" className="text-muted-foreground">
-              AI predictions available after first activity
-            </Badge>
           </div>
         )}
       </CardContent>
