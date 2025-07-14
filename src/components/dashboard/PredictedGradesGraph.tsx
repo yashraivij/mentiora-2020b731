@@ -561,7 +561,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                 </div>
                 
                 {/* Premium features showcase */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 px-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
                   <div className="p-4 rounded-2xl bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-purple-900/30 dark:to-indigo-900/30 border border-purple-200/60 dark:border-purple-800/40 shadow-lg">
                     <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center mb-3 shadow-lg">
                       <Target className="h-5 w-5 text-white" />
