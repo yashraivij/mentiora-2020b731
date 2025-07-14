@@ -389,7 +389,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         {gradesData.some(g => g.finalGrade !== '–') ? (
           <div className="space-y-6">
             {/* Premium Grade bars */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 overflow-visible">
               {gradesData.map((grade, index) => (
                 <div key={grade.subjectId} className="group relative transform transition-all duration-300 hover:scale-105">
                   <div className="relative">
@@ -468,10 +468,10 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                     </div>
 
                     {/* Premium Tooltip */}
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 px-4 py-3 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white text-xs rounded-2xl shadow-2xl border border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 z-50 w-80 max-w-[90vw] pointer-events-none backdrop-blur-sm">
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 px-4 py-3 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white text-xs rounded-2xl shadow-2xl border border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 z-[9999] min-w-[280px] max-w-[400px] pointer-events-none backdrop-blur-sm whitespace-normal break-words">
                       <div className="text-center space-y-2">
                         <div className="font-semibold text-amber-300">🤖 AI Insight</div>
-                        <div className="text-gray-200 leading-relaxed">
+                        <div className="text-gray-200 leading-relaxed text-left">
                           {getTooltipText(grade)}
                         </div>
                         {grade.isGrade7Plus && (
