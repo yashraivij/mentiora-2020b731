@@ -803,18 +803,18 @@ const Practice = () => {
                   <CardTitle className="text-lg text-foreground">Question</CardTitle>
                   <div className="flex items-center gap-2">
                     <Badge variant="outline">{currentQuestion.marks} marks</Badge>
-                    {currentQuestion.calculatorGuidance && (
-                      <Badge 
-                        variant={currentQuestion.calculatorGuidance === 'calc-recommended' ? 'default' : 'secondary'}
-                        className={`text-xs ${
-                          currentQuestion.calculatorGuidance === 'calc-recommended' 
-                            ? 'bg-green-100 text-green-800 border-green-300 dark:bg-green-950/30 dark:text-green-300 dark:border-green-800/30' 
-                            : 'bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-950/30 dark:text-blue-300 dark:border-blue-800/30'
-                        }`}
-                      >
-                        {currentQuestion.calculatorGuidance === 'calc-recommended' ? '🟩 Calc recommended' : '🟦 Non-calc friendly'}
-                      </Badge>
-                    )}
+                     {currentQuestion.calculatorGuidance && (
+                       <Badge 
+                         variant={currentQuestion.calculatorGuidance === 'calc-recommended' ? 'default' : 'secondary'}
+                         className={`text-xs ${
+                           currentQuestion.calculatorGuidance === 'calc-recommended' 
+                             ? 'bg-green-100 text-green-800 border-green-300 dark:bg-green-950/30 dark:text-green-300 dark:border-green-800/30' 
+                             : 'bg-red-100 text-red-800 border-red-300 dark:bg-red-950/30 dark:text-red-300 dark:border-red-800/30'
+                         }`}
+                       >
+                         {currentQuestion.calculatorGuidance === 'calc-recommended' ? '🟩 Calculator recommended' : '🚫 No calculator'}
+                       </Badge>
+                     )}
                   </div>
                 </div>
               </CardHeader>

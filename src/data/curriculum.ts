@@ -1465,7 +1465,7 @@ export const curriculum: Subject[] = [
               breakdown: ['Correct multiplication method (1 mark)', 'Correct answer 8.88 (1 mark)']
             },
             specReference: 'M1.1',
-            calculatorGuidance: 'calc-recommended'
+            calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm1-q2',
