@@ -63,7 +63,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     if (percentage >= 40) return '4';
     if (percentage >= 30) return '3';
     if (percentage >= 20) return '2';
-    if (percentage >= 10) return '1';
     return 'U';
   };
 
@@ -95,9 +94,9 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         };
 
         const getPredictedGradeNumber = (gradeString: string): number => {
-          if (gradeString === 'U') return 1; // Give grade 1 instead of 0 for U grades
+          if (gradeString === 'U') return 0; // U grade is treated as 0 for calculations
           const parsed = parseInt(gradeString);
-          return isNaN(parsed) ? 1 : Math.max(1, parsed); // Ensure minimum grade 1 and handle NaN
+          return isNaN(parsed) ? 0 : Math.max(0, parsed); // Ensure minimum grade 0 and handle NaN
         };
 
         const calculateCombinedGrade = (subjectId: string) => {
@@ -118,8 +117,9 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           
           // If only exam completion, use that grade
           if (!hasPracticeData && recentExamCompletion) {
+            const examGradeNumber = getPredictedGradeNumber(recentExamCompletion.grade);
             return {
-              grade: Math.max(1, getPredictedGradeNumber(recentExamCompletion.grade)),
+              grade: examGradeNumber === 0 ? 'U' : examGradeNumber.toString(),
               percentage: recentExamCompletion.percentage,
               examGrade: recentExamCompletion.grade,
               practiceScore: 0
@@ -128,9 +128,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           
           // If only practice data, use that
           if (hasPracticeData && !recentExamCompletion) {
-            const practiceGradeNum = parseInt(practiceGrade);
             return {
-              grade: isNaN(practiceGradeNum) ? 1 : Math.max(1, practiceGradeNum),
+              grade: practiceGrade,
               percentage: practicePercentage,
               examGrade: null,
               practiceScore: practicePercentage
@@ -140,8 +139,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           // If both exist, combine with weighted average (predicted exam has more weight - 70%)
           if (hasPracticeData && recentExamCompletion) {
             const examGrade = getPredictedGradeNumber(recentExamCompletion.grade);
-            const practiceGradeNum = parseInt(practiceGrade);
-            const validPracticeGrade = isNaN(practiceGradeNum) ? 1 : practiceGradeNum;
+            const practiceGradeNum = practiceGrade === 'U' ? 0 : parseInt(practiceGrade);
+            const validPracticeGrade = isNaN(practiceGradeNum) ? 0 : practiceGradeNum;
             const examWeight = 0.7;
             const practiceWeight = 0.3;
             
@@ -149,7 +148,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
             const combinedPercentage = Math.round((recentExamCompletion.percentage * examWeight) + (practicePercentage * practiceWeight));
             
             return {
-              grade: Math.max(1, isNaN(combinedGrade) ? 1 : combinedGrade), // Ensure at least grade 1 and handle NaN
+              grade: combinedGrade === 0 ? 'U' : combinedGrade.toString(),
               percentage: isNaN(combinedPercentage) ? 0 : combinedPercentage,
               examGrade: recentExamCompletion.grade,
               practiceScore: practicePercentage
@@ -210,11 +209,11 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
             subjectName,
             practiceScore: combinedResult.practiceScore,
             examGrade: combinedResult.examGrade,
-            finalGrade: isNaN(combinedResult.grade) ? '1' : combinedResult.grade.toString(),
+            finalGrade: combinedResult.grade || 'U',
             finalPercentage: isNaN(combinedResult.percentage) ? 0 : combinedResult.percentage,
             confidence,
             practiceCount,
-            isGrade7Plus: !isNaN(combinedResult.grade) && combinedResult.grade >= 7
+            isGrade7Plus: combinedResult.grade !== 'U' && !isNaN(parseInt(combinedResult.grade)) && parseInt(combinedResult.grade) >= 7
           } as GradeData;
         });
 
@@ -270,6 +269,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
 
   const getGradeColor = (grade: string) => {
     if (grade === '–') return 'text-muted-foreground';
+    if (grade === 'U') return 'text-black dark:text-white font-medium';
     const gradeNum = parseInt(grade);
     if (isNaN(gradeNum)) return 'text-foreground font-medium';
     if (gradeNum >= 9) return 'text-black dark:text-white font-extrabold drop-shadow-lg';
@@ -293,19 +293,22 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
       return "Start revising to unlock your prediction";
     }
 
-    let text = `You're currently `;
+    let text = '';
     if (grade.practiceScore > 0 && grade.examGrade) {
-      text += `averaging ${grade.practiceScore}% across your ${grade.subjectName} quizzes and scored a Grade ${grade.examGrade} in your predicted paper. That puts you on track for a Grade ${grade.finalGrade} in the real exam.`;
+      text = `You scored an average of ${grade.practiceScore}% across your ${grade.subjectName} quizzes and achieved a Grade ${grade.examGrade} in your predicted paper. This puts you on track for a Grade ${grade.finalGrade} in the real exam.`;
     } else if (grade.practiceScore > 0) {
-      text += `averaging ${grade.practiceScore}% across your ${grade.subjectName} quizzes. That puts you on track for a Grade ${grade.finalGrade} in the real exam.`;
+      text = `You scored an average of ${grade.practiceScore}% across your ${grade.subjectName} quizzes. This puts you on track for a Grade ${grade.finalGrade} in the real exam.`;
     } else if (grade.examGrade) {
-      text += `scored a Grade ${grade.examGrade} in your ${grade.subjectName} predicted paper. That puts you on track for a Grade ${grade.finalGrade} in the real exam.`;
+      text = `You scored a Grade ${grade.examGrade} in your ${grade.subjectName} predicted paper. This puts you on track for a Grade ${grade.finalGrade} in the real exam.`;
     }
 
-    const nextGrade = parseInt(grade.finalGrade) + 1;
-    if (nextGrade <= 9) {
-      const nextGradePercentage = gradeToPercentage(nextGrade.toString());
-      text += ` To hit a Grade ${nextGrade}, aim for ${nextGradePercentage}%+ across all topics.`;
+    // Only show next grade advice for numeric grades (not U)
+    if (grade.finalGrade !== 'U' && !isNaN(parseInt(grade.finalGrade))) {
+      const nextGrade = parseInt(grade.finalGrade) + 1;
+      if (nextGrade <= 9) {
+        const nextGradePercentage = gradeToPercentage(nextGrade.toString());
+        text += ` To hit a Grade ${nextGrade}, aim for ${nextGradePercentage}%+ across all topics.`;
+      }
     }
 
     return text;
