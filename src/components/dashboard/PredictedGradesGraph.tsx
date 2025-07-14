@@ -469,12 +469,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                         {/* Premium Subject name */}
                         <div className="mt-4 text-center">
                           <div className="text-sm font-bold text-foreground truncate mb-2">{grade.subjectName}</div>
-                          <Badge 
-                            variant="outline" 
-                            className={`text-xs font-semibold ${getConfidenceColor(grade.confidence)} border-0 shadow-sm`}
-                          >
-                            ✨ {grade.confidence} confidence
-                          </Badge>
                           {grade.isGrade7Plus && (
                             <div className="mt-2">
                               <Badge className="bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse">
