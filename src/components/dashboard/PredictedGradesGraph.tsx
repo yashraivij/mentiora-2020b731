@@ -95,7 +95,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
 
         const getPredictedGradeNumber = (gradeString: string): number => {
           if (gradeString === 'U') return 1; // Give grade 1 instead of 0 for U grades
-          return Math.max(1, parseInt(gradeString) || 1); // Ensure minimum grade 1
+          const parsed = parseInt(gradeString);
+          return isNaN(parsed) ? 1 : Math.max(1, parsed); // Ensure minimum grade 1 and handle NaN
         };
 
         const calculateCombinedGrade = (subjectId: string) => {
@@ -126,8 +127,9 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           
           // If only practice data, use that
           if (hasPracticeData && !recentExamCompletion) {
+            const practiceGradeNum = parseInt(practiceGrade);
             return {
-              grade: parseInt(practiceGrade) || 1,
+              grade: isNaN(practiceGradeNum) ? 1 : Math.max(1, practiceGradeNum),
               percentage: practicePercentage,
               examGrade: null,
               practiceScore: practicePercentage
@@ -137,15 +139,17 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           // If both exist, combine with weighted average (predicted exam has more weight - 70%)
           if (hasPracticeData && recentExamCompletion) {
             const examGrade = getPredictedGradeNumber(recentExamCompletion.grade);
+            const practiceGradeNum = parseInt(practiceGrade);
+            const validPracticeGrade = isNaN(practiceGradeNum) ? 1 : practiceGradeNum;
             const examWeight = 0.7;
             const practiceWeight = 0.3;
             
-            const combinedGrade = Math.round((examGrade * examWeight) + (parseInt(practiceGrade) * practiceWeight));
+            const combinedGrade = Math.round((examGrade * examWeight) + (validPracticeGrade * practiceWeight));
             const combinedPercentage = Math.round((recentExamCompletion.percentage * examWeight) + (practicePercentage * practiceWeight));
             
             return {
-              grade: Math.max(1, combinedGrade), // Ensure at least grade 1
-              percentage: combinedPercentage,
+              grade: Math.max(1, isNaN(combinedGrade) ? 1 : combinedGrade), // Ensure at least grade 1 and handle NaN
+              percentage: isNaN(combinedPercentage) ? 0 : combinedPercentage,
               examGrade: recentExamCompletion.grade,
               practiceScore: practicePercentage
             };
@@ -205,11 +209,11 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
             subjectName,
             practiceScore: combinedResult.practiceScore,
             examGrade: combinedResult.examGrade,
-            finalGrade: combinedResult.grade.toString(),
-            finalPercentage: combinedResult.percentage,
+            finalGrade: isNaN(combinedResult.grade) ? '1' : combinedResult.grade.toString(),
+            finalPercentage: isNaN(combinedResult.percentage) ? 0 : combinedResult.percentage,
             confidence,
             practiceCount,
-            isGrade7Plus: combinedResult.grade >= 7
+            isGrade7Plus: !isNaN(combinedResult.grade) && combinedResult.grade >= 7
           } as GradeData;
         });
 
@@ -266,11 +270,12 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
   const getGradeColor = (grade: string) => {
     if (grade === '–') return 'text-muted-foreground';
     const gradeNum = parseInt(grade);
-    if (gradeNum >= 9) return 'text-white font-extrabold drop-shadow-lg';
-    if (gradeNum >= 8) return 'text-white font-bold drop-shadow-md';
-    if (gradeNum >= 7) return 'text-white font-bold drop-shadow-md';
-    if (gradeNum >= 5) return 'text-white font-semibold drop-shadow-sm';
-    return 'text-white font-medium';
+    if (isNaN(gradeNum)) return 'text-foreground font-medium';
+    if (gradeNum >= 9) return 'text-black font-extrabold drop-shadow-lg';
+    if (gradeNum >= 8) return 'text-black font-bold drop-shadow-md';
+    if (gradeNum >= 7) return 'text-black font-bold drop-shadow-md';
+    if (gradeNum >= 5) return 'text-black font-semibold drop-shadow-sm';
+    return 'text-black font-medium';
   };
 
   const getConfidenceColor = (confidence: string) => {
@@ -305,8 +310,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     return text;
   };
 
-  const averageGrade = gradesData.filter(g => g.finalGrade !== '–').length > 0 
-    ? Math.round(gradesData.filter(g => g.finalGrade !== '–').reduce((sum, g) => sum + parseInt(g.finalGrade), 0) / gradesData.filter(g => g.finalGrade !== '–').length)
+  const averageGrade = gradesData.filter(g => g.finalGrade !== '–' && !isNaN(parseInt(g.finalGrade))).length > 0 
+    ? Math.round(gradesData.filter(g => g.finalGrade !== '–' && !isNaN(parseInt(g.finalGrade))).reduce((sum, g) => sum + parseInt(g.finalGrade), 0) / gradesData.filter(g => g.finalGrade !== '–' && !isNaN(parseInt(g.finalGrade))).length)
     : 0;
 
   const grade7PlusCount = gradesData.filter(g => g.isGrade7Plus).length;
