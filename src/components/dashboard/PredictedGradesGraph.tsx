@@ -468,7 +468,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                     </div>
 
                     {/* Premium Tooltip */}
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 px-4 py-3 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white text-xs rounded-2xl shadow-2xl border border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 z-30 w-72 pointer-events-none backdrop-blur-sm">
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 px-4 py-3 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white text-xs rounded-2xl shadow-2xl border border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 z-50 w-80 max-w-[90vw] pointer-events-none backdrop-blur-sm">
                       <div className="text-center space-y-2">
                         <div className="font-semibold text-amber-300">🤖 AI Insight</div>
                         <div className="text-gray-200 leading-relaxed">
