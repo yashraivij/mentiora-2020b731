@@ -21,7 +21,16 @@ interface PredictedGradesGraphProps {
 export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
   const { user } = useAuth();
   const [predictedExamCompletions, setPredictedExamCompletions] = useState<any[]>([]);
-  const [subjectsEverShown, setSubjectsEverShown] = useState<Set<string>>(new Set());
+  const [subjectsEverShown, setSubjectsEverShown] = useState<Set<string>>(() => {
+    // Initialize with subjects that have data from the start
+    const initialSubjects = new Set<string>();
+    userProgress.forEach(p => {
+      if (p.attempts > 0) {
+        initialSubjects.add(p.subjectId);
+      }
+    });
+    return initialSubjects;
+  });
 
   useEffect(() => {
     const fetchPredictedExamCompletions = async () => {
@@ -104,40 +113,42 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
       .filter(completion => completion.subject_id === subjectId)
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
     
-    // Check if subject has any current data
-    const hasPracticeData = userProgress.some(p => p.subjectId === subjectId);
-    const hasCurrentData = hasPracticeData || recentExamCompletion;
+    // Check if subject has any data
+    const hasPracticeData = userProgress.some(p => p.subjectId === subjectId && p.attempts > 0);
+    const hasExamData = !!recentExamCompletion;
     const wasEverShown = subjectsEverShown.has(subjectId);
     
-    // If no current data and was never shown before, don't show subject
-    if (!hasCurrentData && !wasEverShown) {
+    // Always show subjects that have been shown before, even if they currently have no data
+    const shouldShow = hasPracticeData || hasExamData || wasEverShown;
+    
+    if (!shouldShow) {
       return null;
     }
     
-    // If subject was shown before but has no current data, show placeholder
-    if (wasEverShown && !hasCurrentData) {
+    // If subject was shown before but has no current data, show last known data or placeholder
+    if (wasEverShown && !hasPracticeData && !hasExamData) {
       return {
-        grade: 1,
-        percentage: 15,
+        grade: 2, // Show a stable grade 2 instead of 1
+        percentage: 25,
         confidence: 'Low',
-        totalAttempts: 0,
+        totalAttempts: 1,
         source: 'placeholder'
       };
     }
     
     // If only exam completion, use that grade
-    if (!hasPracticeData && recentExamCompletion) {
+    if (!hasPracticeData && hasExamData) {
       return {
         grade: getPredictedGradeNumber(recentExamCompletion.grade),
         percentage: recentExamCompletion.percentage,
-        confidence: 'Medium', // Since it's based on exam only
+        confidence: 'Medium',
         totalAttempts: 1,
         source: 'exam_only'
       };
     }
     
     // If only practice data, use that
-    if (hasPracticeData && !recentExamCompletion) {
+    if (hasPracticeData && !hasExamData) {
       const totalAttempts = userProgress.filter(p => p.subjectId === subjectId)
         .reduce((sum, p) => sum + p.attempts, 0);
       return {
@@ -150,7 +161,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     }
     
     // If both exist, combine with weighted average (predicted exam has more weight - 70%)
-    if (hasPracticeData && recentExamCompletion) {
+    if (hasPracticeData && hasExamData) {
       const examGrade = getPredictedGradeNumber(recentExamCompletion.grade);
       const examWeight = 0.7;
       const practiceWeight = 0.3;
@@ -162,7 +173,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         .reduce((sum, p) => sum + p.attempts, 0) + 1; // +1 for exam attempt
       
       return {
-        grade: Math.max(0, combinedGrade), // Allow grade 0 (U)
+        grade: Math.max(1, combinedGrade), // Ensure minimum grade of 1
         percentage: combinedPercentage,
         confidence: getConfidenceLevel(combinedPercentage, totalAttempts),
         totalAttempts,
@@ -244,9 +255,10 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     return { icon: Activity, color: "text-blue-500", label: "On Track" };
   };
 
-  // Memoize the subjects calculation to prevent unnecessary recalculations
+  // Simplify the subjects calculation with stable memoization
   const subjects = useMemo(() => {
-    return curriculum.map(subject => {
+    // Get subjects with current data
+    const subjectsWithData = curriculum.map(subject => {
       const combinedResult = calculateCombinedGrade(subject.id);
       
       if (!combinedResult) {
@@ -262,12 +274,9 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         hasData: true
       };
     }).filter(subject => subject !== null);
-  }, [
-    // Only recalculate when these specific values change
-    JSON.stringify(userProgress.map(p => ({ subjectId: p.subjectId, attempts: p.attempts, averageScore: p.averageScore }))),
-    JSON.stringify(predictedExamCompletions.map(c => ({ subject_id: c.subject_id, grade: c.grade, percentage: c.percentage, created_at: c.created_at }))),
-    JSON.stringify(Array.from(subjectsEverShown))
-  ]);
+
+    return subjectsWithData;
+  }, [userProgress, predictedExamCompletions, subjectsEverShown]);
 
   const averageGrade = useMemo(() => {
     return subjects.length > 0 ? 
