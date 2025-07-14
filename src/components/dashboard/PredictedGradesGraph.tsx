@@ -154,25 +154,43 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           return null;
         };
 
-        // Get all unique subject IDs from curriculum AND predicted exam completions
+        // Get all subjects from curriculum
         const curriculumSubjectIds = curriculum.map(s => s.id);
         const progressSubjectIds = [...new Set(userProgress.map((p: any) => p.subjectId))];
         const examSubjectIds = [...new Set((predictedExamData || []).map(exam => exam.subject_id))];
         
-        const allSubjectIds = [...new Set([...curriculumSubjectIds, ...progressSubjectIds, ...examSubjectIds])];
+        // Include all curriculum subjects plus any additional subjects from progress/exams
+        const additionalSubjects = [...progressSubjectIds, ...examSubjectIds].filter(id => !curriculumSubjectIds.includes(id));
+        const allSubjectIds = [...curriculumSubjectIds, ...additionalSubjects];
 
-        // Process all subjects, including those not in curriculum
+        // Process all subjects - show all curriculum subjects even without data
         const gradePromises = allSubjectIds.map(async (subjectId) => {
           const combinedResult = calculateCombinedGrade(subjectId);
           
-          if (!combinedResult) {
-            return null;
-          }
-
           // Find subject in curriculum or create a basic subject info
           const curriculumSubject = curriculum.find(s => s.id === subjectId);
           const subjectName = curriculumSubject?.name || 
             subjectId.charAt(0).toUpperCase() + subjectId.slice(1);
+
+          // If no data, return empty state for curriculum subjects
+          if (!combinedResult) {
+            // Only show curriculum subjects without data, skip non-curriculum subjects
+            if (!curriculumSubject) {
+              return null;
+            }
+            
+            return {
+              subjectId: subjectId,
+              subjectName,
+              practiceScore: 0,
+              examGrade: null,
+              finalGrade: '–',
+              finalPercentage: 0,
+              confidence: 'low' as const,
+              practiceCount: 0,
+              isGrade7Plus: false
+            } as GradeData;
+          }
 
           // Calculate confidence based on practice attempts
           const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
