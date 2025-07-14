@@ -93,6 +93,37 @@ const Index = () => {
     }
   ];
 
+  const trustStats = [
+    { 
+      number: "15,000+", 
+      label: "Students Helped", 
+      color: "text-blue-600", 
+      bg: "bg-gradient-to-br from-blue-50 to-blue-100",
+      description: "Active learners this year"
+    },
+    { 
+      number: "94%", 
+      label: "Grade Predictions", 
+      color: "text-emerald-600", 
+      bg: "bg-gradient-to-br from-emerald-50 to-emerald-100",
+      description: "Accuracy rate achieved"
+    },
+    { 
+      number: "2.3x", 
+      label: "Faster Results", 
+      color: "text-purple-600", 
+      bg: "bg-gradient-to-br from-purple-50 to-purple-100",
+      description: "vs traditional methods"
+    },
+    { 
+      number: "97%", 
+      label: "Would Recommend", 
+      color: "text-orange-600", 
+      bg: "bg-gradient-to-br from-orange-50 to-orange-100",
+      description: "Student satisfaction"
+    }
+  ];
+
   const stats = [
     { 
       number: "95%", 
@@ -236,6 +267,33 @@ const Index = () => {
             Start Your Journey Free
             <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
           </Button>
+        </div>
+
+        {/* Trust Stats - Before the Fold */}
+        <div className="mb-24">
+          <div className="text-center mb-12">
+            <p className="text-lg text-gray-500 font-medium mb-8">Trusted by students across the UK</p>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {trustStats.map((stat, index) => (
+              <div key={index} className="text-center group">
+                <div className={`relative p-8 lg:p-10 ${stat.bg} rounded-3xl shadow-lg group-hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2 border border-white/50`}>
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent rounded-3xl"></div>
+                  <div className="relative z-10">
+                    <div className={`text-3xl lg:text-4xl font-bold ${stat.color} mb-3 tracking-tight`}>
+                      {stat.number}
+                    </div>
+                    <div className="text-gray-700 font-bold text-sm mb-2 uppercase tracking-wide">
+                      {stat.label}
+                    </div>
+                    <div className="text-xs text-gray-600 font-medium">
+                      {stat.description}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Premium Features - Main Focus */}
