@@ -267,36 +267,25 @@ const Index = () => {
             Start Your Journey Free
             <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
           </Button>
-        </div>
-
-        {/* Trust Stats - Before the Fold */}
-        <div className="mb-24">
-          <div className="text-center mb-12">
-            <p className="text-lg text-gray-500 font-medium mb-8">Trusted by students across the UK</p>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            {trustStats.map((stat, index) => (
-              <div key={index} className="text-center group">
-                <div className={`relative p-8 lg:p-10 ${stat.bg} rounded-3xl shadow-lg group-hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2 border border-white/50`}>
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent rounded-3xl"></div>
-                  <div className="relative z-10">
-                    <div className={`text-3xl lg:text-4xl font-bold ${stat.color} mb-3 tracking-tight`}>
-                      {stat.number}
-                    </div>
-                    <div className="text-gray-700 font-bold text-sm mb-2 uppercase tracking-wide">
-                      {stat.label}
-                    </div>
-                    <div className="text-xs text-gray-600 font-medium">
-                      {stat.description}
-                    </div>
+          
+          {/* Trust Stats Strip */}
+          <div className="mt-16 pt-8 border-t border-gray-100">
+            <p className="text-sm text-gray-500 font-medium mb-6 text-center">Trusted by students across the UK</p>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
+              {trustStats.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className={`text-2xl lg:text-3xl font-bold ${stat.color} mb-1 tracking-tight`}>
+                    {stat.number}
+                  </div>
+                  <div className="text-gray-700 font-semibold text-xs uppercase tracking-wide">
+                    {stat.label}
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Premium Features - Main Focus */}
         <div className="mb-32">
           <div className="text-center mb-20">
             <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-violet-100 to-purple-100 border border-violet-200 rounded-full text-violet-700 text-sm font-bold mb-8">
