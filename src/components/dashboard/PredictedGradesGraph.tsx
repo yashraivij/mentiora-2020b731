@@ -349,52 +349,103 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
   }
 
   return (
-    <Card className="glass-effect mb-8 relative border-2 border-gradient-to-r from-purple-500/20 via-blue-500/20 to-emerald-500/20 overflow-visible">
-      {/* Premium background decorations */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-emerald-500/5" />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-400/10 via-purple-500/10 to-transparent rounded-full blur-3xl animate-pulse" />
-      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-br from-emerald-500/10 via-blue-500/10 to-transparent rounded-full blur-2xl" />
+    <Card className="glass-effect mb-8 relative border-2 bg-gradient-to-br from-background via-background/95 to-primary/5 overflow-hidden shadow-2xl">
+      {/* Ultra-premium animated background layers */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/8 to-emerald-500/10 animate-pulse" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-amber-400/5 via-transparent to-purple-500/8" />
       
-      {/* Floating elements for premium feel */}
-      <div className="absolute top-4 right-4 w-2 h-2 bg-amber-400 rounded-full animate-ping opacity-75" />
-      <div className="absolute top-8 right-12 w-1 h-1 bg-emerald-400 rounded-full animate-pulse" />
-      <div className="absolute top-12 right-8 w-1.5 h-1.5 bg-purple-400 rounded-full animate-bounce" />
+      {/* Premium floating orbs with different animations */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-amber-400/15 via-purple-500/12 to-transparent rounded-full blur-[100px] animate-pulse" />
+      <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-gradient-to-tr from-emerald-500/12 via-blue-500/10 to-transparent rounded-full blur-[80px] animate-bounce" style={{ animationDuration: '4s' }} />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-r from-transparent via-white/2 to-transparent rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '3s' }} />
       
-      <CardHeader className="relative">
+      {/* Animated sparkle effects */}
+      <div className="absolute top-6 right-8 w-3 h-3 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full animate-ping opacity-80" style={{ animationDelay: '0s' }} />
+      <div className="absolute top-12 right-16 w-2 h-2 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full animate-ping opacity-60" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-20 right-12 w-1.5 h-1.5 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full animate-ping opacity-70" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-16 right-4 w-1 h-1 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full animate-ping opacity-50" style={{ animationDelay: '0.5s' }} />
+      
+      {/* Floating geometric shapes */}
+      <div className="absolute top-8 left-8 w-4 h-4 border-2 border-amber-400/30 rotate-45 animate-spin" style={{ animationDuration: '8s' }} />
+      <div className="absolute bottom-8 right-8 w-3 h-3 bg-emerald-400/20 rounded-full animate-bounce" style={{ animationDelay: '1s' }} />
+      
+      <CardHeader className="relative z-10 pb-6">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="relative">
-              <div className="w-12 h-12 bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-amber-500/25 animate-pulse">
-                <TrendingUp className="h-6 w-6 text-white drop-shadow-lg" />
+          <div className="flex items-center space-x-5">
+            <div className="relative group">
+              {/* Main icon with enhanced glow */}
+              <div className="w-16 h-16 bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 rounded-3xl flex items-center justify-center shadow-2xl shadow-amber-500/40 transform group-hover:scale-110 transition-all duration-300 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent animate-pulse" />
+                <TrendingUp className="h-8 w-8 text-white drop-shadow-2xl relative z-10" />
               </div>
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-400 rounded-full border-2 border-background animate-bounce">
-                <Sparkles className="h-2 w-2 text-white m-auto mt-0.5" />
+              
+              {/* Enhanced floating badge */}
+              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full border-3 border-background shadow-lg animate-bounce flex items-center justify-center" style={{ animationDelay: '0.5s' }}>
+                <Sparkles className="h-3 w-3 text-white drop-shadow-sm" />
               </div>
+              
+              {/* Pulsing ring effect */}
+              <div className="absolute inset-0 rounded-3xl border-2 border-amber-400/30 animate-ping" style={{ animationDuration: '2s' }} />
             </div>
-            <div>
-              <CardTitle className="text-3xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 bg-clip-text text-transparent flex items-center space-x-3">
-                <span>Predicted GCSE Grades</span>
-                <Crown className="h-6 w-6 text-amber-500 animate-pulse" />
-                <Badge className="bg-gradient-to-r from-amber-400 to-orange-500 text-white text-xs px-2 py-1 font-bold animate-bounce">
-                  PREMIUM
+            
+            <div className="space-y-2">
+              <CardTitle className="text-4xl font-black bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 bg-clip-text text-transparent flex items-center space-x-4 group">
+                <span className="tracking-tight">Predicted GCSE Grades</span>
+                <Crown className="h-7 w-7 text-amber-500 animate-pulse drop-shadow-lg group-hover:animate-bounce transition-all duration-300" />
+                <Badge className="bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 text-white text-sm px-3 py-1.5 font-black animate-pulse shadow-lg hover:shadow-xl transition-all duration-300 border-0">
+                  ✨ PREMIUM
                 </Badge>
               </CardTitle>
-              <p className="text-sm text-muted-foreground mt-1 font-medium">🚀 AI-powered predictions • Real-time updates</p>
+              <div className="flex items-center space-x-4">
+                <p className="text-base text-muted-foreground font-semibold bg-gradient-to-r from-muted-foreground/80 to-muted-foreground bg-clip-text">
+                  🚀 AI-powered predictions • 📊 Real-time analytics • 🎯 Performance insights
+                </p>
+              </div>
             </div>
           </div>
+          
+          {/* Enhanced stats section */}
           <div className="flex items-center space-x-6">
             {averageGrade > 0 && (
-              <div className="text-center p-3 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl border border-purple-500/20">
-                <div className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">{averageGrade.toFixed(1)}</div>
-                <div className="text-xs text-muted-foreground font-semibold">Avg Grade</div>
+              <div className="relative group">
+                <div className="text-center p-4 bg-gradient-to-br from-purple-500/15 via-purple-500/10 to-blue-500/15 rounded-3xl border-2 border-purple-500/20 shadow-xl backdrop-blur-sm transform group-hover:scale-105 transition-all duration-300">
+                  <div className="text-4xl font-black bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent drop-shadow-sm">
+                    {averageGrade.toFixed(1)}
+                  </div>
+                  <div className="text-sm text-muted-foreground font-bold tracking-wide">AVG GRADE</div>
+                </div>
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
               </div>
             )}
+            
             {grade7PlusCount > 0 && (
-              <Badge className="bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-600 text-white border-0 px-4 py-2 text-sm font-bold shadow-lg shadow-emerald-500/25 animate-pulse">
-                <Trophy className="h-4 w-4 mr-2 animate-bounce" />
-                {grade7PlusCount} Grade 7+ 🎉
-              </Badge>
+              <div className="relative group">
+                <Badge className="bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-600 text-white border-0 px-6 py-3 text-base font-black shadow-2xl shadow-emerald-500/30 animate-pulse transform group-hover:scale-110 transition-all duration-300 rounded-2xl">
+                  <Trophy className="h-5 w-5 mr-3 animate-bounce drop-shadow-lg" />
+                  {grade7PlusCount} Grade 7+ 🎉
+                </Badge>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-500/30 to-teal-500/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+              </div>
             )}
+          </div>
+        </div>
+        
+        {/* Motivational progress indicator */}
+        <div className="mt-6 p-4 bg-gradient-to-r from-background/50 to-primary/5 rounded-2xl border border-primary/10 backdrop-blur-sm">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-bold text-muted-foreground flex items-center">
+              <Target className="h-4 w-4 mr-2 text-primary" />
+              Your Progress Journey
+            </span>
+            <span className="text-sm font-bold text-primary">
+              {gradesWithData.length > 0 ? `${Math.round((gradesWithData.length / curriculum.length) * 100)}% Subjects Active` : 'Start Your Journey'}
+            </span>
+          </div>
+          <div className="w-full bg-secondary/50 rounded-full h-3 overflow-hidden">
+            <div 
+              className="h-full bg-gradient-to-r from-emerald-400 via-blue-500 to-purple-600 rounded-full transition-all duration-1000 ease-out shadow-lg"
+              style={{ width: `${gradesWithData.length > 0 ? (gradesWithData.length / curriculum.length) * 100 : 0}%` }}
+            />
           </div>
         </div>
       </CardHeader>
