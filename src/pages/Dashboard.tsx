@@ -18,6 +18,7 @@ import { TopicMasteryDisplay } from "@/components/dashboard/TopicMasteryDisplay"
 import { PredictivePerformanceCard } from "@/components/dashboard/PredictivePerformanceCard";
 import { OptimalStudyTimeCard } from "@/components/dashboard/OptimalStudyTimeCard";
 import { PredictedQuestionsSection } from "@/components/dashboard/PredictedQuestionsSection";
+import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
 import { supabase } from "@/integrations/supabase/client";
 
 interface UserProgress {
@@ -298,6 +299,9 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+
+        {/* Predicted GCSE Grades Section */}
+        <PredictedGradesGraph userProgress={userProgress} />
 
         {/* Predicted 2026 Questions Section */}
         <PredictedQuestionsSection />
