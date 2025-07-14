@@ -71,23 +71,64 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
       if (!user?.id) return;
 
       try {
-        // Get exam scores from database
-        const { data: examData } = await supabase
+        // Get exam scores from predicted_exam_completions table
+        const { data: predictedExamData } = await supabase
           .from('predicted_exam_completions')
           .select('subject_id, grade, percentage, created_at')
           .eq('user_id', user.id);
 
-        console.log('🔍 Exam data fetched:', examData);
+        // Get exam scores from exams table
+        const { data: examData } = await supabase
+          .from('exams')
+          .select('subject_id, score, total_marks, created_at, status')
+          .eq('user_id', user.id)
+          .neq('status', 'in_progress');
+
+        // Get quiz data
+        const { data: quizData } = await supabase
+          .from('quizzes')
+          .select('subject_id, score, created_at, completed')
+          .eq('user_id', user.id)
+          .eq('completed', true);
+
+        console.log('🔍 Predicted exam data:', predictedExamData);
+        console.log('🔍 Regular exam data:', examData);
+        console.log('🔍 Quiz data:', quizData);
         console.log('🔍 User progress:', userProgress);
 
-        // Get all unique subject IDs from curriculum, user progress, and exam data
+        // Combine all exam data and convert to consistent format
+        const allExamData = [
+          ...(predictedExamData || []).map(exam => ({
+            subject_id: exam.subject_id,
+            grade: exam.grade,
+            percentage: exam.percentage,
+            created_at: exam.created_at,
+            source: 'predicted'
+          })),
+          ...(examData || []).map(exam => ({
+            subject_id: exam.subject_id,
+            grade: exam.score ? percentageToGrade((exam.score / exam.total_marks) * 100) : null,
+            percentage: exam.score ? (exam.score / exam.total_marks) * 100 : 0,
+            created_at: exam.created_at,
+            source: 'exam'
+          })),
+          ...(quizData || []).map(quiz => ({
+            subject_id: quiz.subject_id,
+            grade: quiz.score ? percentageToGrade(quiz.score) : null,
+            percentage: quiz.score || 0,
+            created_at: quiz.created_at,
+            source: 'quiz'
+          }))
+        ];
+
+        // Get all unique subject IDs from all sources
         const curriculumSubjectIds = curriculum.map(s => s.id);
         const progressSubjectIds = [...new Set(userProgress.map((p: any) => p.subjectId))];
-        const examSubjectIds = [...new Set(examData?.map(exam => exam.subject_id) || [])];
+        const examSubjectIds = [...new Set(allExamData.map(exam => exam.subject_id))];
         
         console.log('🔍 Curriculum subjects:', curriculumSubjectIds);
         console.log('🔍 Progress subjects:', progressSubjectIds);
-        console.log('🔍 Exam subjects:', examSubjectIds);
+        console.log('🔍 All exam subjects:', examSubjectIds);
         
         const allSubjectIds = [...new Set([...curriculumSubjectIds, ...progressSubjectIds, ...examSubjectIds])];
         console.log('🔍 All combined subjects:', allSubjectIds);
@@ -101,17 +142,16 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           // Calculate practice score for this subject
           const subjectProgress = userProgress.filter((p: any) => p.subjectId === subjectId);
           
-          // Get all topics for this subject and calculate average including unattempted as 0%
-          const totalTopics = curriculumSubject?.topics.length || 1;
           const attemptedTopicsScore = subjectProgress.reduce((sum: number, p: any) => sum + p.averageScore, 0);
           const practiceScore = subjectProgress.length > 0 ? Math.round(attemptedTopicsScore / subjectProgress.length) : 0;
 
-          // Get latest exam grade for this subject
-          const latestExam = examData?.filter(exam => exam.subject_id === subjectId)
-            .sort((a, b) => new Date(b.created_at || '').getTime() - new Date(a.created_at || '').getTime())[0];
+          // Get latest exam grade for this subject from all sources
+          const subjectExams = allExamData.filter(exam => exam.subject_id === subjectId)
+            .sort((a, b) => new Date(b.created_at || '').getTime() - new Date(a.created_at || '').getTime());
 
+          const latestExam = subjectExams[0];
           const examGrade = latestExam?.grade || null;
-          const examPercentage = examGrade ? gradeToPercentage(examGrade) : 0;
+          const examPercentage = latestExam?.percentage || 0;
 
           // Calculate final score using the specified formula
           let finalPercentage: number;
@@ -153,9 +193,9 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         const grades = await Promise.all(gradePromises);
         console.log('🔍 All grades before filtering:', grades);
         
-        // Show ALL subjects that have any data - don't filter out subjects with grade "–"
+        // Show ALL subjects that have any data - practice OR exam data
         const gradesWithData = grades.filter(grade => 
-          grade.practiceScore > 0 || grade.examGrade !== null
+          grade.practiceScore > 0 || grade.examGrade !== null || grade.finalPercentage > 0
         );
         
         console.log('🔍 Final grades after filtering:', gradesWithData);
