@@ -95,32 +95,32 @@ const Index = () => {
 
   const trustStats = [
     { 
-      number: "15,000+", 
-      label: "Students Helped", 
-      color: "text-blue-600", 
-      bg: "bg-gradient-to-br from-blue-50 to-blue-100",
-      description: "Active learners this year"
-    },
-    { 
-      number: "94%", 
-      label: "Grade Predictions", 
+      number: "99.2%", 
+      label: "Mark Accuracy", 
       color: "text-emerald-600", 
       bg: "bg-gradient-to-br from-emerald-50 to-emerald-100",
-      description: "Accuracy rate achieved"
+      description: "AI marking precision"
     },
     { 
-      number: "2.3x", 
-      label: "Faster Results", 
+      number: "5+ Years", 
+      label: "AI Development", 
+      color: "text-blue-600", 
+      bg: "bg-gradient-to-br from-blue-50 to-blue-100",
+      description: "Research & training"
+    },
+    { 
+      number: "100%", 
+      label: "AQA Coverage", 
       color: "text-purple-600", 
       bg: "bg-gradient-to-br from-purple-50 to-purple-100",
-      description: "vs traditional methods"
+      description: "Complete curriculum"
     },
     { 
-      number: "97%", 
-      label: "Would Recommend", 
+      number: "24/7", 
+      label: "Always Available", 
       color: "text-orange-600", 
       bg: "bg-gradient-to-br from-orange-50 to-orange-100",
-      description: "Student satisfaction"
+      description: "Instant feedback"
     }
   ];
 
@@ -349,26 +349,6 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Social Proof - Minimal */}
-        <div className="mb-32">
-          <div className="text-center mb-16">
-            <h3 className="text-4xl font-bold text-gray-900 mb-8 tracking-tight">
-              Trusted by <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Thousands</span>
-            </h3>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className={`text-4xl lg:text-5xl font-bold ${stat.color} mb-2 tracking-tight`}>
-                    {stat.number}
-                  </div>
-                  <div className="text-gray-700 font-semibold text-base uppercase tracking-wide">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
 
         {/* Final CTA */}
         <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-violet-600 rounded-3xl p-16 text-center text-white max-w-4xl mx-auto shadow-2xl relative overflow-hidden">
