@@ -94,8 +94,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         };
 
         const getPredictedGradeNumber = (gradeString: string): number => {
-          if (gradeString === 'U') return 0;
-          return parseInt(gradeString) || 0;
+          if (gradeString === 'U') return 1; // Give grade 1 instead of 0 for U grades
+          return Math.max(1, parseInt(gradeString) || 1); // Ensure minimum grade 1
         };
 
         const calculateCombinedGrade = (subjectId: string) => {
