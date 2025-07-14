@@ -15,7 +15,6 @@ import { PremiumAnalyticsCard } from "@/components/dashboard/PremiumAnalyticsCar
 import { GoalsSection } from "@/components/dashboard/GoalsSection";
 import { TopicMasteryDisplay } from "@/components/dashboard/TopicMasteryDisplay";
 
-import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
 import { PredictivePerformanceCard } from "@/components/dashboard/PredictivePerformanceCard";
 import { OptimalStudyTimeCard } from "@/components/dashboard/OptimalStudyTimeCard";
 import { PredictedQuestionsSection } from "@/components/dashboard/PredictedQuestionsSection";
@@ -300,9 +299,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Premium Predicted Grades Graph */}
-        <PredictedGradesGraph userProgress={userProgress} />
-
+        {/* Predicted 2026 Questions Section */}
         <PredictedQuestionsSection />
 
 
