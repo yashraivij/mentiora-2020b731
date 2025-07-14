@@ -89,8 +89,9 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
     
     // If only exam completion, use that grade
     if (!hasPracticeData && recentExamCompletion) {
+      const gradeNumber = getPredictedGradeNumber(recentExamCompletion.grade);
       return {
-        grade: Math.max(1, getPredictedGradeNumber(recentExamCompletion.grade)),
+        grade: gradeNumber,
         percentage: recentExamCompletion.percentage
       };
     }
@@ -113,7 +114,7 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
       const combinedPercentage = Math.round((recentExamCompletion.percentage * examWeight) + (practicePercentage * practiceWeight));
       
       return {
-        grade: Math.max(1, combinedGrade), // Ensure at least grade 1
+        grade: combinedGrade, // Allow grade 0 for U
         percentage: combinedPercentage
       };
     }
@@ -130,7 +131,7 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
     if (percentage >= 35) return 4;
     if (percentage >= 25) return 3;
     if (percentage >= 15) return 2;
-    return 1;
+    return 0; // Return 0 for U grade
   };
 
   const getGradeColor = (grade: number) => {
@@ -216,7 +217,7 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
                       </div>
                     </div>
                     <div className="flex items-center gap-1">
-                      <span className="text-xs font-bold text-foreground">{subject.grade}</span>
+                      <span className="text-xs font-bold text-foreground">{subject.grade === 0 ? 'U' : subject.grade}</span>
                       {subject.grade >= 8 && <Star className="h-3 w-3 text-yellow-500" />}
                       {subject.grade === 9 && <Trophy className="h-3 w-3 text-amber-500" />}
                     </div>
