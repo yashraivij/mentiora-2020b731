@@ -71,134 +71,121 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
       if (!user?.id) return;
 
       try {
-        // Get exam scores from predicted_exam_completions table
+        // Get predicted exam completions (same as PredictivePerformanceCard)
         const { data: predictedExamData } = await supabase
           .from('predicted_exam_completions')
           .select('subject_id, grade, percentage, created_at')
           .eq('user_id', user.id);
 
-        // Get exam scores from exams table
-        const { data: examData } = await supabase
-          .from('exams')
-          .select('subject_id, score, total_marks, created_at, status')
-          .eq('user_id', user.id)
-          .neq('status', 'in_progress');
-
-        // Get quiz data
-        const { data: quizData } = await supabase
-          .from('quizzes')
-          .select('subject_id, score, created_at, completed')
-          .eq('user_id', user.id)
-          .eq('completed', true);
-
-        console.log('🔍 Predicted exam data:', predictedExamData);
-        console.log('🔍 Regular exam data:', examData);
-        console.log('🔍 Quiz data:', quizData);
-        console.log('🔍 User progress:', userProgress);
-
-        // Combine all exam data and convert to consistent format
-        const allExamData = [
-          ...(predictedExamData || []).map(exam => ({
-            subject_id: exam.subject_id,
-            grade: exam.grade,
-            percentage: exam.percentage,
-            created_at: exam.created_at,
-            source: 'predicted'
-          })),
-          ...(examData || []).map(exam => ({
-            subject_id: exam.subject_id,
-            grade: exam.score ? percentageToGrade((exam.score / exam.total_marks) * 100) : null,
-            percentage: exam.score ? (exam.score / exam.total_marks) * 100 : 0,
-            created_at: exam.created_at,
-            source: 'exam'
-          })),
-          ...(quizData || []).map(quiz => ({
-            subject_id: quiz.subject_id,
-            grade: quiz.score ? percentageToGrade(quiz.score) : null,
-            percentage: quiz.score || 0,
-            created_at: quiz.created_at,
-            source: 'quiz'
-          }))
-        ];
-
-        // Get all unique subject IDs from all sources
-        const curriculumSubjectIds = curriculum.map(s => s.id);
-        const progressSubjectIds = [...new Set(userProgress.map((p: any) => p.subjectId))];
-        const examSubjectIds = [...new Set(allExamData.map(exam => exam.subject_id))];
-        
-        console.log('🔍 Curriculum subjects:', curriculumSubjectIds);
-        console.log('🔍 Progress subjects:', progressSubjectIds);
-        console.log('🔍 All exam subjects:', examSubjectIds);
-        
-        const allSubjectIds = [...new Set([...curriculumSubjectIds, ...progressSubjectIds, ...examSubjectIds])];
-        console.log('🔍 All combined subjects:', allSubjectIds);
-
-        const gradePromises = allSubjectIds.map(async (subjectId) => {
-          // Find subject in curriculum or create a basic subject info
-          const curriculumSubject = curriculum.find(s => s.id === subjectId);
-          const subjectName = curriculumSubject?.name || 
-            subjectId.charAt(0).toUpperCase() + subjectId.slice(1);
-
-          // Calculate practice score for this subject
-          const subjectProgress = userProgress.filter((p: any) => p.subjectId === subjectId);
+        // Helper functions (same as PredictivePerformanceCard)
+        const getSubjectProgress = (subjectId: string) => {
+          const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
           
-          const attemptedTopicsScore = subjectProgress.reduce((sum: number, p: any) => sum + p.averageScore, 0);
-          const practiceScore = subjectProgress.length > 0 ? Math.round(attemptedTopicsScore / subjectProgress.length) : 0;
+          // Find the subject in curriculum to get all topics
+          const subject = curriculum.find(s => s.id === subjectId);
+          if (!subject) return 0;
+          
+          // Calculate average including unattempted topics as 0%
+          const totalTopics = subject.topics.length;
+          if (totalTopics === 0) return 0;
+          
+          const totalScore = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
+          return Math.round(totalScore / totalTopics);
+        };
 
-          // Get latest exam grade for this subject from all sources
-          const subjectExams = allExamData.filter(exam => exam.subject_id === subjectId)
-            .sort((a, b) => new Date(b.created_at || '').getTime() - new Date(a.created_at || '').getTime());
+        const getPredictedGradeNumber = (gradeString: string): number => {
+          if (gradeString === 'U') return 0;
+          return parseInt(gradeString) || 0;
+        };
 
-          const latestExam = subjectExams[0];
-          const examGrade = latestExam?.grade || null;
-          const examPercentage = latestExam?.percentage || 0;
+        const calculateCombinedGrade = (subjectId: string) => {
+          // Get practice progress
+          const practicePercentage = getSubjectProgress(subjectId);
+          const practiceGrade = percentageToGrade(practicePercentage);
+          
+          // Get most recent predicted exam completion for this subject
+          const recentExamCompletion = (predictedExamData || [])
+            .filter(completion => completion.subject_id === subjectId)
+            .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
+          
+          // If no practice data and no exam completion, don't show subject
+          const hasPracticeData = userProgress.some(p => p.subjectId === subjectId);
+          if (!hasPracticeData && !recentExamCompletion) {
+            return null;
+          }
+          
+          // If only exam completion, use that grade
+          if (!hasPracticeData && recentExamCompletion) {
+            return {
+              grade: Math.max(1, getPredictedGradeNumber(recentExamCompletion.grade)),
+              percentage: recentExamCompletion.percentage,
+              examGrade: recentExamCompletion.grade,
+              practiceScore: 0
+            };
+          }
+          
+          // If only practice data, use that
+          if (hasPracticeData && !recentExamCompletion) {
+            return {
+              grade: parseInt(practiceGrade) || 1,
+              percentage: practicePercentage,
+              examGrade: null,
+              practiceScore: practicePercentage
+            };
+          }
+          
+          // If both exist, combine with weighted average (predicted exam has more weight - 70%)
+          if (hasPracticeData && recentExamCompletion) {
+            const examGrade = getPredictedGradeNumber(recentExamCompletion.grade);
+            const examWeight = 0.7;
+            const practiceWeight = 0.3;
+            
+            const combinedGrade = Math.round((examGrade * examWeight) + (parseInt(practiceGrade) * practiceWeight));
+            const combinedPercentage = Math.round((recentExamCompletion.percentage * examWeight) + (practicePercentage * practiceWeight));
+            
+            return {
+              grade: Math.max(1, combinedGrade), // Ensure at least grade 1
+              percentage: combinedPercentage,
+              examGrade: recentExamCompletion.grade,
+              practiceScore: practicePercentage
+            };
+          }
+          
+          return null;
+        };
 
-          // Calculate final score using the specified formula
-          let finalPercentage: number;
-          if (!examGrade && practiceScore === 0) {
-            finalPercentage = 0;
-          } else if (!examGrade) {
-            finalPercentage = practiceScore;
-          } else if (practiceScore === 0) {
-            finalPercentage = examPercentage;
-          } else {
-            finalPercentage = Math.round((practiceScore + examPercentage) / 2);
+        // Use the same logic as PredictivePerformanceCard
+        const gradePromises = curriculum.map(async (subject) => {
+          const combinedResult = calculateCombinedGrade(subject.id);
+          
+          if (!combinedResult) {
+            return null;
           }
 
-          const finalGrade = finalPercentage === 0 ? '–' : percentageToGrade(finalPercentage);
-
           // Calculate confidence based on practice attempts
-          const practiceCount = subjectProgress.reduce((sum: number, p: any) => sum + p.attempts, 0);
+          const subjectProgress = userProgress.filter(p => p.subjectId === subject.id);
+          const practiceCount = subjectProgress.reduce((sum, p) => sum + p.attempts, 0);
           let confidence: 'high' | 'medium' | 'low';
           if (practiceCount >= 20) confidence = 'high';
           else if (practiceCount >= 10) confidence = 'medium';
           else confidence = 'low';
 
-          const gradeData = {
-            subjectId,
-            subjectName,
-            practiceScore,
-            examGrade,
-            finalGrade,
-            finalPercentage,
+          return {
+            subjectId: subject.id,
+            subjectName: subject.name,
+            practiceScore: combinedResult.practiceScore,
+            examGrade: combinedResult.examGrade,
+            finalGrade: combinedResult.grade.toString(),
+            finalPercentage: combinedResult.percentage,
             confidence,
             practiceCount,
-            isGrade7Plus: finalPercentage >= 70
+            isGrade7Plus: combinedResult.grade >= 7
           } as GradeData;
-
-          console.log(`🔍 Grade data for ${subjectId}:`, gradeData);
-          return gradeData;
         });
 
         const grades = await Promise.all(gradePromises);
-        console.log('🔍 All grades before filtering:', grades);
+        const gradesWithData = grades.filter(grade => grade !== null);
         
-        // Show ALL subjects that have any data - practice OR exam data
-        const gradesWithData = grades.filter(grade => 
-          grade.practiceScore > 0 || grade.examGrade !== null || grade.finalPercentage > 0
-        );
-        
-        console.log('🔍 Final grades after filtering:', gradesWithData);
         setGradesData(gradesWithData);
       } catch (error) {
         console.error('Error calculating predicted grades:', error);
