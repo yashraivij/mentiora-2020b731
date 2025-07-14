@@ -265,10 +265,6 @@ const Dashboard = () => {
             </div>
             <div className="flex items-center space-x-3">
               <ThemeToggle />
-              <Button variant="ghost" onClick={() => navigate('/analytics')} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
-                <BarChart3 className="h-4 w-4 mr-2" />
-                Analytics
-              </Button>
               <div className="flex items-center space-x-2 px-4 py-2 bg-background/60 dark:bg-card/60 backdrop-blur-sm rounded-2xl border border-border shadow-sm">
                 <div className="w-6 h-6 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
                   <User className="h-3 w-3 text-primary-foreground" />
