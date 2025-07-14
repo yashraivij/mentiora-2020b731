@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
-import { TrendingUp, Info, Star, AlertCircle } from "lucide-react";
+import { TrendingUp, Info, Star, AlertCircle, Sparkles, Target, Brain } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -42,8 +42,13 @@ interface SubjectGradeData {
   predictedGrade: string;
   confidence: 'high' | 'medium' | 'low';
   practiceAttempts: number;
-  color: string;
-  gradient: string;
+  totalTopics: number;
+  style: {
+    color: string;
+    glow: string;
+    bgGradient: string;
+    ring: string;
+  };
 }
 
 // GCSE Grade to Percentage Mapping
@@ -77,16 +82,56 @@ const percentageToGrade = (percentage: number): string => {
   return 'U';
 };
 
-// Subject colors and gradients
+// Premium subject colors and gradients - using semantic tokens
 const subjectStyles = {
-  physics: { color: 'from-blue-400 to-blue-600', glow: 'shadow-blue-400/20' },
-  chemistry: { color: 'from-green-400 to-green-600', glow: 'shadow-green-400/20' },
-  biology: { color: 'from-emerald-400 to-emerald-600', glow: 'shadow-emerald-400/20' },
-  mathematics: { color: 'from-purple-400 to-purple-600', glow: 'shadow-purple-400/20' },
-  english: { color: 'from-rose-400 to-rose-600', glow: 'shadow-rose-400/20' },
-  history: { color: 'from-amber-400 to-amber-600', glow: 'shadow-amber-400/20' },
-  geography: { color: 'from-teal-400 to-teal-600', glow: 'shadow-teal-400/20' },
-  default: { color: 'from-slate-400 to-slate-600', glow: 'shadow-slate-400/20' },
+  physics: { 
+    color: 'from-blue-500/90 to-blue-600/90', 
+    glow: 'shadow-blue-500/30',
+    bgGradient: 'bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-900/40',
+    ring: 'ring-blue-200 dark:ring-blue-800',
+  },
+  chemistry: { 
+    color: 'from-emerald-500/90 to-emerald-600/90', 
+    glow: 'shadow-emerald-500/30',
+    bgGradient: 'bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-950/30 dark:to-emerald-900/40',
+    ring: 'ring-emerald-200 dark:ring-emerald-800',
+  },
+  biology: { 
+    color: 'from-green-500/90 to-green-600/90', 
+    glow: 'shadow-green-500/30',
+    bgGradient: 'bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950/30 dark:to-green-900/40',
+    ring: 'ring-green-200 dark:ring-green-800',
+  },
+  mathematics: { 
+    color: 'from-purple-500/90 to-purple-600/90', 
+    glow: 'shadow-purple-500/30',
+    bgGradient: 'bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/30 dark:to-purple-900/40',
+    ring: 'ring-purple-200 dark:ring-purple-800',
+  },
+  english: { 
+    color: 'from-rose-500/90 to-rose-600/90', 
+    glow: 'shadow-rose-500/30',
+    bgGradient: 'bg-gradient-to-br from-rose-50 to-rose-100 dark:from-rose-950/30 dark:to-rose-900/40',
+    ring: 'ring-rose-200 dark:ring-rose-800',
+  },
+  history: { 
+    color: 'from-amber-500/90 to-amber-600/90', 
+    glow: 'shadow-amber-500/30',
+    bgGradient: 'bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-950/30 dark:to-amber-900/40',
+    ring: 'ring-amber-200 dark:ring-amber-800',
+  },
+  geography: { 
+    color: 'from-teal-500/90 to-teal-600/90', 
+    glow: 'shadow-teal-500/30',
+    bgGradient: 'bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-950/30 dark:to-teal-900/40',
+    ring: 'ring-teal-200 dark:ring-teal-800',
+  },
+  default: { 
+    color: 'from-slate-500/90 to-slate-600/90', 
+    glow: 'shadow-slate-500/30',
+    bgGradient: 'bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950/30 dark:to-slate-900/40',
+    ring: 'ring-slate-200 dark:ring-slate-800',
+  },
 };
 
 export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
@@ -176,18 +221,18 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         predictedGrade: percentageToGrade(finalScore),
         confidence,
         practiceAttempts: attemptedTopics,
-        color: style.color,
-        gradient: style.glow,
+        totalTopics,
+        style,
       };
     }).filter(data => data.finalScore > 0 || data.practiceAttempts > 0); // Only show subjects with some data
   }, [userProgress, examCompletions]);
 
   const getConfidenceColor = (confidence: string) => {
     switch (confidence) {
-      case 'high': return 'text-emerald-600 bg-emerald-50 border-emerald-200';
-      case 'medium': return 'text-amber-600 bg-amber-50 border-amber-200';
-      case 'low': return 'text-red-600 bg-red-50 border-red-200';
-      default: return 'text-slate-600 bg-slate-50 border-slate-200';
+      case 'high': return 'text-emerald-700 bg-emerald-100/70 border-emerald-300/50 dark:text-emerald-300 dark:bg-emerald-900/30 dark:border-emerald-700/50';
+      case 'medium': return 'text-amber-700 bg-amber-100/70 border-amber-300/50 dark:text-amber-300 dark:bg-amber-900/30 dark:border-amber-700/50';
+      case 'low': return 'text-red-700 bg-red-100/70 border-red-300/50 dark:text-red-300 dark:bg-red-900/30 dark:border-red-700/50';
+      default: return 'text-muted-foreground bg-muted/50 border-border';
     }
   };
 
@@ -258,124 +303,192 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
 
   return (
     <TooltipProvider>
-      <Card className="mb-8 bg-gradient-to-br from-card to-card/80 border-border/50 shadow-lg">
-        <CardHeader>
+      <Card className="mb-8 bg-gradient-to-br from-background via-background to-muted/10 border-border/50 shadow-xl shadow-black/5 dark:shadow-black/20 backdrop-blur-sm">
+        <CardHeader className="pb-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-primary/10 rounded-xl flex items-center justify-center">
-                <TrendingUp className="h-4 w-4 text-primary" />
+            <div className="flex items-center space-x-4">
+              <div className="relative">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-2xl flex items-center justify-center shadow-lg shadow-primary/25">
+                  <Brain className="h-6 w-6 text-primary-foreground" />
+                </div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-amber-400 to-amber-500 rounded-full flex items-center justify-center">
+                  <Sparkles className="h-2.5 w-2.5 text-white" />
+                </div>
               </div>
               <div>
-                <CardTitle className="text-xl font-bold">Predicted GCSE Grades</CardTitle>
-                <p className="text-sm text-muted-foreground">Based on practice performance and exam scores</p>
+                <CardTitle className="text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
+                  Predicted GCSE Grades
+                </CardTitle>
+                <p className="text-muted-foreground">AI-powered predictions based on your performance</p>
               </div>
             </div>
-            <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20">
-              AI Prediction
-            </Badge>
+            <div className="flex items-center space-x-2">
+              <Badge className="bg-gradient-to-r from-primary/10 to-primary/5 text-primary border-primary/30 shadow-sm">
+                <Target className="h-3 w-3 mr-1" />
+                Real-time Analysis
+              </Badge>
+            </div>
           </div>
         </CardHeader>
         
-        <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+        <CardContent className="pt-0">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
             {gradeData.map((subject) => (
               <Tooltip key={subject.subjectId}>
                 <TooltipTrigger asChild>
                   <div className="group cursor-pointer">
                     <div className="relative">
-                      {/* Grade Bar */}
-                      <div 
-                        className={`
-                          relative h-32 rounded-2xl bg-gradient-to-b ${subject.color} 
-                          shadow-lg ${subject.gradient} transition-all duration-300 
-                          group-hover:scale-105 group-hover:shadow-xl overflow-hidden
-                          ${parseInt(subject.predictedGrade) >= 7 ? 'ring-2 ring-amber-400/50' : ''}
-                        `}
-                      >
-                        {/* Success glow for grade 7+ */}
-                        {parseInt(subject.predictedGrade) >= 7 && (
-                          <div className="absolute inset-0 bg-gradient-to-t from-amber-400/20 to-transparent" />
-                        )}
-                        
-                        {/* Grade display */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="text-center text-white">
-                            <div className="text-3xl font-bold mb-1 drop-shadow-lg">
+                      {/* Premium Grade Bar */}
+                      <div className="relative">
+                        <div 
+                          className={`
+                            relative h-36 rounded-3xl overflow-hidden transition-all duration-500 
+                            group-hover:scale-105 group-hover:shadow-2xl 
+                            ${subject.style.bgGradient}
+                            border border-border/50 shadow-lg ${subject.style.glow}
+                            ${parseInt(subject.predictedGrade) >= 7 ? `ring-2 ${subject.style.ring}/50 shadow-amber-400/20` : ''}
+                          `}
+                        >
+                          {/* Animated background gradient */}
+                          <div 
+                            className={`absolute inset-0 bg-gradient-to-b ${subject.style.color} opacity-90`}
+                          />
+                          
+                          {/* Success celebration for grade 7+ */}
+                          {parseInt(subject.predictedGrade) >= 7 && (
+                            <>
+                              <div className="absolute inset-0 bg-gradient-to-t from-amber-400/30 via-transparent to-transparent" />
+                              <div className="absolute top-2 right-2">
+                                <div className="w-6 h-6 bg-amber-400/90 rounded-full flex items-center justify-center backdrop-blur-sm">
+                                  <Star className="h-3 w-3 text-white fill-white" />
+                                </div>
+                              </div>
+                            </>
+                          )}
+                          
+                          {/* Grade display */}
+                          <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+                            <div className="text-4xl font-black mb-2 drop-shadow-xl tracking-tight">
                               {subject.finalScore > 0 ? subject.predictedGrade : '–'}
                             </div>
-                            {parseInt(subject.predictedGrade) >= 7 && (
-                              <Star className="h-4 w-4 mx-auto text-amber-300" />
+                            {subject.finalScore > 0 && (
+                              <div className="text-xs font-medium opacity-90 bg-black/20 px-2 py-1 rounded-full backdrop-blur-sm">
+                                {subject.finalScore.toFixed(0)}%
+                              </div>
                             )}
                           </div>
-                        </div>
 
-                        {/* Height indicator based on percentage */}
-                        <div 
-                          className="absolute bottom-0 left-0 right-0 bg-white/20 transition-all duration-500"
-                          style={{ height: `${Math.max(subject.finalScore, 10)}%` }}
-                        />
+                          {/* Animated height indicator */}
+                          <div 
+                            className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white/30 to-transparent transition-all duration-700 ease-out"
+                            style={{ height: `${Math.max(subject.finalScore * 0.8, 15)}%` }}
+                          />
+                          
+                          {/* Subtle animation dots for premium feel */}
+                          <div className="absolute top-3 left-3 w-1.5 h-1.5 bg-white/40 rounded-full animate-pulse" />
+                          <div className="absolute top-5 left-5 w-1 h-1 bg-white/30 rounded-full animate-pulse delay-100" />
+                        </div>
                       </div>
 
-                      {/* Subject name */}
-                      <div className="mt-3 text-center">
-                        <p className="font-medium text-sm text-foreground truncate">
+                      {/* Premium subject info */}
+                      <div className="mt-4 text-center space-y-2">
+                        <h4 className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors">
                           {subject.subjectName}
-                        </p>
+                        </h4>
                         
-                        {/* Confidence indicator */}
-                        <Badge 
-                          variant="outline" 
-                          className={`mt-1 text-xs ${getConfidenceColor(subject.confidence)}`}
-                        >
-                          {subject.confidence} confidence
-                        </Badge>
+                        {/* Progress and confidence indicators */}
+                        <div className="flex items-center justify-center space-x-2">
+                          <Badge 
+                            variant="outline" 
+                            className={`text-xs px-2 py-1 ${getConfidenceColor(subject.confidence)} backdrop-blur-sm`}
+                          >
+                            {subject.confidence} confidence
+                          </Badge>
+                        </div>
+                        
+                        {/* Topic coverage */}
+                        <div className="flex items-center justify-center space-x-1 text-xs text-muted-foreground">
+                          <span>{subject.practiceAttempts}/{subject.totalTopics} topics</span>
+                          {subject.practiceAttempts === subject.totalTopics && (
+                            <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </TooltipTrigger>
                 
-                <TooltipContent side="top" className="max-w-sm p-4">
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-base">{subject.subjectName}</h4>
+                <TooltipContent side="top" className="max-w-md p-5 bg-card/95 backdrop-blur-xl border-border/50 shadow-2xl">
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <h4 className="font-bold text-base">{subject.subjectName}</h4>
+                      {parseInt(subject.predictedGrade) >= 7 && (
+                        <div className="flex items-center space-x-1 text-amber-500">
+                          <Star className="h-3 w-3 fill-current" />
+                          <span className="text-xs font-medium">Strong Performer</span>
+                        </div>
+                      )}
+                    </div>
                     
                     {subject.finalScore > 0 ? (
                       <>
-                        <div className="space-y-1 text-sm">
-                          <p>
-                            <span className="font-medium">Practice Average:</span> {subject.practiceScore.toFixed(1)}%
-                            {subject.examGrade && (
-                              <>
-                                <br />
-                                <span className="font-medium">Latest Exam:</span> Grade {subject.examGrade} ({subject.examPercentage}%)
-                              </>
-                            )}
-                          </p>
-                          <p>
-                            <span className="font-medium">Predicted Grade:</span> Grade {subject.predictedGrade} ({subject.finalScore.toFixed(1)}%)
-                          </p>
+                        <div className="grid grid-cols-2 gap-3 text-sm">
+                          <div className="space-y-1">
+                            <p className="text-muted-foreground text-xs">Practice Score</p>
+                            <p className="font-semibold">{subject.practiceScore.toFixed(1)}%</p>
+                          </div>
+                          {subject.examGrade && (
+                            <div className="space-y-1">
+                              <p className="text-muted-foreground text-xs">Latest Exam</p>
+                              <p className="font-semibold">Grade {subject.examGrade}</p>
+                            </div>
+                          )}
+                          <div className="space-y-1">
+                            <p className="text-muted-foreground text-xs">Predicted Grade</p>
+                            <p className="font-bold text-primary">Grade {subject.predictedGrade}</p>
+                          </div>
+                          <div className="space-y-1">
+                            <p className="text-muted-foreground text-xs">Coverage</p>
+                            <p className="font-semibold">{subject.practiceAttempts}/{subject.totalTopics} topics</p>
+                          </div>
                         </div>
                         
-                        <div className="pt-2 border-t border-border">
-                          <p className="text-xs text-muted-foreground">
-                            {subject.confidence === 'high' 
-                              ? "Strong prediction based on comprehensive data."
-                              : subject.confidence === 'medium'
-                              ? "Good prediction - complete more topics for higher confidence."
-                              : "Early prediction - more practice needed for accuracy."
-                            }
-                          </p>
+                        <div className="pt-3 border-t border-border/50 space-y-2">
+                          <div className="text-xs">
+                            <p className="text-muted-foreground">
+                              {subject.examGrade && subject.practiceAttempts > 0
+                                ? `You're averaging ${subject.practiceScore.toFixed(0)}% across ${subject.subjectName} quizzes and scored a Grade ${subject.examGrade} in your predicted paper. That puts you on track for a Grade ${subject.predictedGrade} in the real exam.`
+                                : subject.examGrade
+                                ? `Based on your Grade ${subject.examGrade} predicted paper performance.`
+                                : `Based on ${subject.practiceScore.toFixed(0)}% average across practice questions.`
+                              }
+                            </p>
+                          </div>
                           
                           {parseInt(subject.predictedGrade) < 7 && (
-                            <p className="text-xs text-primary mt-1">
-                              💡 To hit Grade {getNextGradeTarget(subject.predictedGrade)}, aim for {getTargetPercentage(getNextGradeTarget(subject.predictedGrade))}%+ across all topics.
-                            </p>
+                            <div className="bg-primary/5 border border-primary/20 rounded-lg p-2">
+                              <p className="text-xs text-primary font-medium">
+                                🎯 To hit Grade {getNextGradeTarget(subject.predictedGrade)}, aim for {getTargetPercentage(getNextGradeTarget(subject.predictedGrade))}%+ across all topics.
+                              </p>
+                            </div>
+                          )}
+                          
+                          {parseInt(subject.predictedGrade) >= 8 && (
+                            <div className="bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200/50 dark:border-emerald-800/50 rounded-lg p-2">
+                              <p className="text-xs text-emerald-700 dark:text-emerald-300 font-medium">
+                                🌟 Excellent work! You're on track for a top grade.
+                              </p>
+                            </div>
                           )}
                         </div>
                       </>
                     ) : (
-                      <p className="text-sm text-muted-foreground">
-                        Start practicing topics to see your predicted grade.
-                      </p>
+                      <div className="text-center py-2">
+                        <AlertCircle className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                        <p className="text-sm text-muted-foreground">
+                          Start practicing topics to unlock your grade prediction.
+                        </p>
+                      </div>
                     )}
                   </div>
                 </TooltipContent>
@@ -383,20 +496,26 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
             ))}
           </div>
 
-          {/* Legend */}
-          <div className="flex items-center justify-center mt-6 space-x-6 text-xs text-muted-foreground">
-            <div className="flex items-center space-x-1">
-              <Info className="h-3 w-3" />
-              <span>Hover for details</span>
+          {/* Premium Legend */}
+          <div className="mt-8 pt-6 border-t border-border/50">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground">
+              <div className="flex items-center space-x-2 bg-muted/30 px-3 py-2 rounded-full">
+                <Info className="h-3 w-3" />
+                <span>Hover bars for detailed insights</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-amber-50 dark:bg-amber-950/30 text-amber-600 dark:text-amber-400 px-3 py-2 rounded-full border border-amber-200/50 dark:border-amber-800/50">
+                <Star className="h-3 w-3 fill-current" />
+                <span>Grade 7+ Excellence</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-primary/5 text-primary px-3 py-2 rounded-full border border-primary/20">
+                <Brain className="h-3 w-3" />
+                <span>AI-Powered Predictions</span>
+              </div>
             </div>
-            <div className="flex items-center space-x-1">
-              <Star className="h-3 w-3 text-amber-400" />
-              <span>Grade 7+ target</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-blue-400 rounded-sm" />
-              <span>Combined practice + exam scores</span>
-            </div>
+            <p className="text-center text-xs text-muted-foreground mt-3 max-w-2xl mx-auto leading-relaxed">
+              Grades calculated using intelligent weighting of practice questions and predicted exam performance. 
+              Complete more topics to increase prediction confidence.
+            </p>
           </div>
         </CardContent>
       </Card>

@@ -300,7 +300,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Predicted Grades Graph */}
+        {/* Premium Predicted Grades Graph */}
         <PredictedGradesGraph userProgress={userProgress} />
 
         <PredictedQuestionsSection />
