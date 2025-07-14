@@ -271,11 +271,11 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     if (grade === '–') return 'text-muted-foreground';
     const gradeNum = parseInt(grade);
     if (isNaN(gradeNum)) return 'text-foreground font-medium';
-    if (gradeNum >= 9) return 'text-black font-extrabold drop-shadow-lg';
-    if (gradeNum >= 8) return 'text-black font-bold drop-shadow-md';
-    if (gradeNum >= 7) return 'text-black font-bold drop-shadow-md';
-    if (gradeNum >= 5) return 'text-black font-semibold drop-shadow-sm';
-    return 'text-black font-medium';
+    if (gradeNum >= 9) return 'text-white dark:text-black font-extrabold drop-shadow-lg';
+    if (gradeNum >= 8) return 'text-white dark:text-black font-bold drop-shadow-md';
+    if (gradeNum >= 7) return 'text-white dark:text-black font-bold drop-shadow-md';
+    if (gradeNum >= 5) return 'text-white dark:text-black font-semibold drop-shadow-sm';
+    return 'text-white dark:text-gray-900 font-medium';
   };
 
   const getConfidenceColor = (confidence: string) => {
