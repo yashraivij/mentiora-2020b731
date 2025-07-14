@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { TrendingUp, Crown, Target, Sparkles, Trophy, Zap } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
@@ -335,7 +336,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
   }
 
   return (
-    <Card className="glass-effect mb-8 relative overflow-hidden border-2 border-gradient-to-r from-purple-500/20 via-blue-500/20 to-emerald-500/20">
+    <Card className="glass-effect mb-8 relative border-2 border-gradient-to-r from-purple-500/20 via-blue-500/20 to-emerald-500/20 overflow-visible">
       {/* Premium background decorations */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-emerald-500/5" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-400/10 via-purple-500/10 to-transparent rounded-full blur-3xl animate-pulse" />
@@ -387,101 +388,107 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
 
       <CardContent className="relative">
         {gradesData.some(g => g.finalGrade !== '–') ? (
-          <div className="space-y-6">
-            {/* Premium Grade bars */}
+          <TooltipProvider>
+            <div className="space-y-6">
+              {/* Premium Grade bars */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 overflow-visible">
               {gradesData.map((grade, index) => (
-                <div key={grade.subjectId} className="group relative transform transition-all duration-300 hover:scale-105">
-                  <div className="relative">
-                    {/* Premium Bar with enhanced effects */}
-                    <div className={`relative h-40 bg-gradient-to-t from-gray-100/30 to-gray-50/20 dark:from-gray-800/30 dark:to-gray-700/20 rounded-3xl overflow-hidden border-2 border-white/20 backdrop-blur-sm shadow-xl ${getSubjectShadow(index)} group-hover:shadow-2xl transition-all duration-500`}>
-                      {grade.finalGrade !== '–' && (
-                        <>
-                          {/* Main gradient bar */}
-                          <div 
-                            className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t ${getSubjectColor(index)} rounded-3xl transition-all duration-1000 ease-out animate-in slide-in-from-bottom-4`}
-                            style={{ 
-                              height: `${Math.max(grade.finalPercentage * 0.85, 20)}%`,
-                              filter: grade.isGrade7Plus ? 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.6))' : 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))'
-                            }}
-                          />
-                          
-                          {/* Premium glow overlay */}
-                          <div 
-                            className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white/20 to-transparent rounded-3xl opacity-60`}
-                            style={{ height: `${Math.max(grade.finalPercentage * 0.85, 20)}%` }}
-                          />
-                          
-                          {/* Animated shimmer effect */}
-                          <div 
-                            className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-3xl animate-pulse"
-                            style={{ height: `${Math.max(grade.finalPercentage * 0.85, 20)}%` }}
-                          />
-                        </>
-                      )}
-                      
-                      {/* Enhanced Grade number */}
-                      <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110`}>
-                        {grade.finalGrade}
-                      </div>
-
-                      {/* Premium celebration effects for grade 7+ */}
-                      {grade.isGrade7Plus && (
-                        <>
-                          <div className="absolute top-3 right-3 animate-bounce">
-                            <Sparkles className="h-5 w-5 text-yellow-400 drop-shadow-lg" />
-                          </div>
-                          <div className="absolute top-2 left-2 animate-pulse">
-                            <Crown className="h-4 w-4 text-amber-400" />
-                          </div>
-                          {/* Grade 9 special effect */}
-                          {parseInt(grade.finalGrade) === 9 && (
-                            <div className="absolute inset-0 bg-gradient-to-t from-amber-400/20 to-yellow-300/20 rounded-3xl animate-pulse" />
+                <Tooltip key={grade.subjectId}>
+                  <TooltipTrigger asChild>
+                    <div className="group relative transform transition-all duration-300 hover:scale-105 cursor-pointer">
+                      <div className="relative">
+                        {/* Premium Bar with enhanced effects */}
+                        <div className={`relative h-40 bg-gradient-to-t from-gray-100/30 to-gray-50/20 dark:from-gray-800/30 dark:to-gray-700/20 rounded-3xl overflow-hidden border-2 border-white/20 backdrop-blur-sm shadow-xl ${getSubjectShadow(index)} group-hover:shadow-2xl transition-all duration-500`}>
+                          {grade.finalGrade !== '–' && (
+                            <>
+                              {/* Main gradient bar */}
+                              <div 
+                                className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t ${getSubjectColor(index)} rounded-3xl transition-all duration-1000 ease-out animate-in slide-in-from-bottom-4`}
+                                style={{ 
+                                  height: `${Math.max(grade.finalPercentage * 0.85, 20)}%`,
+                                  filter: grade.isGrade7Plus ? 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.6))' : 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))'
+                                }}
+                              />
+                              
+                              {/* Premium glow overlay */}
+                              <div 
+                                className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white/20 to-transparent rounded-3xl opacity-60`}
+                                style={{ height: `${Math.max(grade.finalPercentage * 0.85, 20)}%` }}
+                              />
+                              
+                              {/* Animated shimmer effect */}
+                              <div 
+                                className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-3xl animate-pulse"
+                                style={{ height: `${Math.max(grade.finalPercentage * 0.85, 20)}%` }}
+                              />
+                            </>
                           )}
-                        </>
-                      )}
-                      
-                      {/* Premium percentage indicator */}
-                      {grade.finalGrade !== '–' && (
-                        <div className="absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1">
-                          <span className="text-xs font-bold text-white">{grade.finalPercentage}%</span>
-                        </div>
-                      )}
-                    </div>
+                          
+                          {/* Enhanced Grade number */}
+                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110`}>
+                            {grade.finalGrade}
+                          </div>
 
-                    {/* Premium Subject name */}
-                    <div className="mt-4 text-center">
-                      <div className="text-sm font-bold text-foreground truncate mb-2">{grade.subjectName}</div>
-                      <Badge 
-                        variant="outline" 
-                        className={`text-xs font-semibold ${getConfidenceColor(grade.confidence)} border-0 shadow-sm`}
-                      >
-                        ✨ {grade.confidence} confidence
-                      </Badge>
-                      {grade.isGrade7Plus && (
-                        <div className="mt-2">
-                          <Badge className="bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse">
-                            🎯 Target Hit!
+                          {/* Premium celebration effects for grade 7+ */}
+                          {grade.isGrade7Plus && (
+                            <>
+                              <div className="absolute top-3 right-3 animate-bounce">
+                                <Sparkles className="h-5 w-5 text-yellow-400 drop-shadow-lg" />
+                              </div>
+                              <div className="absolute top-2 left-2 animate-pulse">
+                                <Crown className="h-4 w-4 text-amber-400" />
+                              </div>
+                              {/* Grade 9 special effect */}
+                              {parseInt(grade.finalGrade) === 9 && (
+                                <div className="absolute inset-0 bg-gradient-to-t from-amber-400/20 to-yellow-300/20 rounded-3xl animate-pulse" />
+                              )}
+                            </>
+                          )}
+                          
+                          {/* Premium percentage indicator */}
+                          {grade.finalGrade !== '–' && (
+                            <div className="absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1">
+                              <span className="text-xs font-bold text-white">{grade.finalPercentage}%</span>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Premium Subject name */}
+                        <div className="mt-4 text-center">
+                          <div className="text-sm font-bold text-foreground truncate mb-2">{grade.subjectName}</div>
+                          <Badge 
+                            variant="outline" 
+                            className={`text-xs font-semibold ${getConfidenceColor(grade.confidence)} border-0 shadow-sm`}
+                          >
+                            ✨ {grade.confidence} confidence
                           </Badge>
+                          {grade.isGrade7Plus && (
+                            <div className="mt-2">
+                              <Badge className="bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse">
+                                🎯 Target Hit!
+                              </Badge>
+                            </div>
+                          )}
                         </div>
+                      </div>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent 
+                    side="top" 
+                    align="center"
+                    className="max-w-80 w-auto p-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white text-xs rounded-2xl shadow-2xl border border-white/10 backdrop-blur-sm"
+                  >
+                    <div className="space-y-2">
+                      <div className="font-semibold text-amber-300 text-center">🤖 AI Insight</div>
+                      <div className="text-gray-200 leading-relaxed">
+                        {getTooltipText(grade)}
+                      </div>
+                      {grade.isGrade7Plus && (
+                        <div className="text-emerald-300 font-semibold text-center">🎉 Excellent work! Keep it up!</div>
                       )}
                     </div>
-
-                    {/* Premium Tooltip */}
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 px-4 py-3 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white text-xs rounded-2xl shadow-2xl border border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 z-[9999] min-w-[280px] max-w-[400px] pointer-events-none backdrop-blur-sm whitespace-normal break-words">
-                      <div className="text-center space-y-2">
-                        <div className="font-semibold text-amber-300">🤖 AI Insight</div>
-                        <div className="text-gray-200 leading-relaxed text-left">
-                          {getTooltipText(grade)}
-                        </div>
-                        {grade.isGrade7Plus && (
-                          <div className="text-emerald-300 font-semibold">🎉 Excellent work! Keep it up!</div>
-                        )}
-                      </div>
-                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-6 border-transparent border-t-gray-800"></div>
-                    </div>
-                  </div>
-                </div>
+                  </TooltipContent>
+                </Tooltip>
               ))}
             </div>
 
@@ -506,7 +513,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                 </span>
               </div>
             </div>
-          </div>
+            </div>
+          </TooltipProvider>
         ) : (
           <div className="text-center py-12">
             <div className="w-16 h-16 bg-gradient-to-br from-muted/30 to-muted/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
