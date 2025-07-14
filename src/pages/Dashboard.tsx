@@ -302,9 +302,7 @@ const Dashboard = () => {
 
         {/* Optimal Learning Time - Premium Feature */}
         <div className="mb-8">
-          <div className="max-w-md">
-            <OptimalLearningTimeCard />
-          </div>
+          <OptimalLearningTimeCard />
         </div>
 
         {/* Predicted 2026 Questions Section */}
