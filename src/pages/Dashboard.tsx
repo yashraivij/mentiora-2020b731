@@ -14,7 +14,7 @@ import { AOBreakdown } from "@/components/dashboard/AOBreakdown";
 import { PremiumAnalyticsCard } from "@/components/dashboard/PremiumAnalyticsCard";
 import { GoalsSection } from "@/components/dashboard/GoalsSection";
 import { TopicMasteryDisplay } from "@/components/dashboard/TopicMasteryDisplay";
-import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
+
 import { PredictivePerformanceCard } from "@/components/dashboard/PredictivePerformanceCard";
 import { OptimalStudyTimeCard } from "@/components/dashboard/OptimalStudyTimeCard";
 import { PredictedQuestionsSection } from "@/components/dashboard/PredictedQuestionsSection";
@@ -302,8 +302,6 @@ const Dashboard = () => {
         {/* Predicted 2026 Questions Section */}
         <PredictedQuestionsSection />
 
-        {/* Predicted Grades Graph */}
-        <PredictedGradesGraph userProgress={userProgress} />
 
         {/* Subjects Section */}
         <div className="mb-8">
