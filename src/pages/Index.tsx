@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, CheckCircle, BarChart3, Users, ArrowRight, Star, Sparkles, Quote, Target, Trophy, Zap, Brain, Award } from "lucide-react";
+import { BookOpen, CheckCircle, BarChart3, Users, ArrowRight, Star, Sparkles, Quote, Target, Trophy, Zap, Brain, Award, Calendar, TrendingUp, Clock, Crown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -124,6 +124,45 @@ const Index = () => {
     }
   ];
 
+  const premiumFeatures = [
+    {
+      icon: Calendar,
+      title: "2026 Predicted Exam Papers",
+      description: "Access weekly refreshed predicted exam papers built from our advanced AI analysis of past papers and mark schemes",
+      badge: "Updated Weekly",
+      color: "from-violet-600 to-purple-600",
+      bgColor: "from-violet-50 to-purple-50",
+      premium: true
+    },
+    {
+      icon: TrendingUp,
+      title: "Grade Prediction Graph",
+      description: "Real-time grade predictions with confidence intervals based on your performance data and learning trajectory",
+      badge: "AI-Powered",
+      color: "from-emerald-600 to-teal-600",
+      bgColor: "from-emerald-50 to-teal-50",
+      premium: true
+    },
+    {
+      icon: Clock,
+      title: "AI Study Time Optimizer",
+      description: "Intelligent scheduling that maximizes your learning efficiency by analyzing your peak performance hours",
+      badge: "Smart Planning",
+      color: "from-blue-600 to-cyan-600",
+      bgColor: "from-blue-50 to-cyan-50",
+      premium: true
+    },
+    {
+      icon: Trophy,
+      title: "Daily Goals + Retention Tracking",
+      description: "Personalized daily targets with spaced repetition algorithms to ensure long-term knowledge retention",
+      badge: "Proven Method",
+      color: "from-amber-600 to-orange-600",
+      bgColor: "from-amber-50 to-orange-50",
+      premium: true
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       <div className="container mx-auto px-6 lg:px-8 py-6">
@@ -220,22 +259,71 @@ const Index = () => {
           ))}
         </div>
 
-        {/* Why Students Choose Us */}
-        <div className="mb-24">
+        {/* Premium Features - Primary Focus */}
+        <div className="mb-24 relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-violet-500/5 via-purple-500/5 to-pink-500/5 rounded-3xl"></div>
+          <div className="relative z-10 p-8 lg:p-12">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-violet-100 to-purple-100 border border-violet-200 rounded-full text-violet-700 text-sm font-semibold mb-6">
+                <Crown className="h-4 w-4 mr-2 text-violet-600" />
+                Premium Features
+              </div>
+              <h3 className="text-3xl lg:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
+                Unlock Your Full <span className="bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">Academic Potential</span>
+              </h3>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Access cutting-edge AI technology that gives you the unfair advantage every top student needs
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              {premiumFeatures.map((feature, index) => (
+                <Card key={index} className="group relative overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-700 bg-white rounded-3xl hover:-translate-y-3">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
+                  <div className="absolute top-4 right-4 z-20">
+                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r ${feature.color} text-white shadow-lg`}>
+                      {feature.badge}
+                    </span>
+                  </div>
+                  <CardContent className="p-8 relative z-10">
+                    <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-xl`}>
+                      <feature.icon className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-gray-800">{feature.title}</h3>
+                    <p className="text-gray-600 leading-relaxed text-base">{feature.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            
+            <div className="text-center mt-16">
+              <Button 
+                onClick={() => navigate('/register')} 
+                className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-violet-500/25 transition-all duration-300 rounded-2xl group"
+              >
+                Get Premium Access
+                <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Core Technology - Differentiated Design */}
+        <div className="mb-24 bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-8 lg:p-12 border border-gray-200">
           <div className="text-center mb-16">
-            <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 tracking-tight">Why This Platform is Like No Other</h3>
-            <p className="text-lg text-gray-600">Revolutionary technology that no other platform can match</p>
+            <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 tracking-tight">Revolutionary AI Technology</h3>
+            <p className="text-lg text-gray-600">The core innovations that power your success</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {features.map((feature, index) => (
-              <Card key={index} className="p-6 border-0 shadow-lg hover:shadow-2xl transition-all duration-500 bg-white rounded-2xl group hover:-translate-y-2 relative overflow-hidden">
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+              <Card key={index} className="p-6 border border-gray-200 shadow-md hover:shadow-xl transition-all duration-500 bg-white rounded-xl group hover:-translate-y-1 relative overflow-hidden">
+                <div className={`absolute inset-0 bg-gradient-to-br ${feature.bgColor} opacity-0 group-hover:opacity-50 transition-opacity duration-500`} />
                 <CardContent className="p-0 text-center relative z-10">
-                  <div className={`w-14 h-14 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                    <feature.icon className="h-6 w-6 text-white" />
+                  <div className={`w-12 h-12 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-105 transition-transform duration-300 shadow-md`}>
+                    <feature.icon className="h-5 w-5 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3">{feature.title}</h3>
+                  <h3 className="text-base font-bold text-gray-900 mb-2">{feature.title}</h3>
                   <p className="text-gray-600 leading-relaxed text-sm">{feature.description}</p>
                 </CardContent>
               </Card>
@@ -243,31 +331,32 @@ const Index = () => {
           </div>
         </div>
 
-        {/* How It Works */}
-        <div className="mb-24">
+        {/* How It Works - Clean Process Flow */}
+        <div className="mb-24 bg-white">
           <div className="text-center mb-16">
-            <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 tracking-tight">How It Works</h3>
-            <p className="text-lg text-gray-600">Your path to academic excellence in 3 simple steps</p>
+            <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 tracking-tight">Simple 3-Step Process</h3>
+            <p className="text-lg text-gray-600">Get started in minutes, see results in days</p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {howItWorks.map((step, index) => (
-              <Card key={index} className="p-8 border-0 shadow-lg hover:shadow-2xl transition-all duration-500 bg-white rounded-2xl group hover:-translate-y-1 relative overflow-hidden">
-                <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${step.color}`} />
-                <CardContent className="p-0">
-                  <div className="flex items-start space-x-6">
-                    <div className={`flex-shrink-0 w-16 h-16 bg-gradient-to-r ${step.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                      <step.icon className="h-7 w-7 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <div className={`text-xs font-bold ${step.accent} mb-2 tracking-wider uppercase`}>Step {step.step}</div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{step.description}</p>
-                    </div>
+          <div className="max-w-4xl mx-auto">
+            <div className="flex flex-col lg:flex-row items-center justify-between relative">
+              {/* Connection line for desktop */}
+              <div className="hidden lg:block absolute top-8 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-200 via-purple-200 to-emerald-200 z-0"></div>
+              
+              {howItWorks.map((step, index) => (
+                <div key={index} className="flex flex-col items-center text-center relative z-10 mb-12 lg:mb-0 lg:flex-1">
+                  <div className={`w-16 h-16 bg-gradient-to-r ${step.color} rounded-full flex items-center justify-center shadow-xl mb-6 relative`}>
+                    <div className="absolute inset-0 bg-white/20 rounded-full"></div>
+                    <step.icon className="h-7 w-7 text-white relative z-10" />
                   </div>
-                </CardContent>
-              </Card>
-            ))}
+                  <div className={`text-xs font-bold ${step.accent} mb-2 tracking-wider uppercase bg-gray-100 px-3 py-1 rounded-full`}>
+                    Step {step.step}
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 max-w-xs">{step.title}</h3>
+                  <p className="text-gray-600 leading-relaxed max-w-xs">{step.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
