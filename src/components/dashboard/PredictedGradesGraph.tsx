@@ -71,23 +71,11 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
       if (!user?.id) return;
 
       try {
-        // Get ALL exam data from multiple sources
+        // Get predicted exam completions (same as PredictivePerformanceCard)
         const { data: predictedExamData } = await supabase
           .from('predicted_exam_completions')
           .select('subject_id, grade, percentage, created_at')
           .eq('user_id', user.id);
-
-        const { data: examData } = await supabase
-          .from('exams')
-          .select('subject_id, score, total_marks, created_at, status')
-          .eq('user_id', user.id)
-          .neq('status', 'in_progress');
-
-        const { data: quizData } = await supabase
-          .from('quizzes')
-          .select('subject_id, score, created_at, completed')
-          .eq('user_id', user.id)
-          .eq('completed', true);
 
         // Helper functions (same as PredictivePerformanceCard)
         const getSubjectProgress = (subjectId: string) => {
@@ -115,34 +103,9 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           const practicePercentage = getSubjectProgress(subjectId);
           const practiceGrade = percentageToGrade(practicePercentage);
           
-          // Combine ALL exam data sources into one array
-          const allExamData = [
-            ...(predictedExamData || []).map(exam => ({
-              subject_id: exam.subject_id,
-              grade: exam.grade,
-              percentage: exam.percentage,
-              created_at: exam.created_at,
-              source: 'predicted'
-            })),
-            ...(examData || []).map(exam => ({
-              subject_id: exam.subject_id,
-              grade: exam.score ? percentageToGrade((exam.score / exam.total_marks) * 100) : null,
-              percentage: exam.score ? (exam.score / exam.total_marks) * 100 : 0,
-              created_at: exam.created_at,
-              source: 'exam'
-            })),
-            ...(quizData || []).map(quiz => ({
-              subject_id: quiz.subject_id,
-              grade: quiz.score ? percentageToGrade(quiz.score) : null,
-              percentage: quiz.score || 0,
-              created_at: quiz.created_at,
-              source: 'quiz'
-            }))
-          ];
-
-          // Get most recent exam for this subject from ALL sources
-          const recentExamCompletion = allExamData
-            .filter(exam => exam.subject_id === subjectId)
+          // Get most recent predicted exam completion for this subject
+          const recentExamCompletion = (predictedExamData || [])
+            .filter(completion => completion.subject_id === subjectId)
             .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
           
           // If no practice data and no exam completion, don't show subject
@@ -191,20 +154,12 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           return null;
         };
 
-        // Get all unique subject IDs from ALL sources
+        // Get all unique subject IDs from curriculum AND predicted exam completions
         const curriculumSubjectIds = curriculum.map(s => s.id);
         const progressSubjectIds = [...new Set(userProgress.map((p: any) => p.subjectId))];
-        const predictedExamSubjectIds = [...new Set((predictedExamData || []).map(exam => exam.subject_id))];
-        const examSubjectIds = [...new Set((examData || []).map(exam => exam.subject_id))];
-        const quizSubjectIds = [...new Set((quizData || []).map(quiz => quiz.subject_id))];
+        const examSubjectIds = [...new Set((predictedExamData || []).map(exam => exam.subject_id))];
         
-        const allSubjectIds = [...new Set([
-          ...curriculumSubjectIds, 
-          ...progressSubjectIds, 
-          ...predictedExamSubjectIds, 
-          ...examSubjectIds, 
-          ...quizSubjectIds
-        ])];
+        const allSubjectIds = [...new Set([...curriculumSubjectIds, ...progressSubjectIds, ...examSubjectIds])];
 
         // Process all subjects, including those not in curriculum
         const gradePromises = allSubjectIds.map(async (subjectId) => {
