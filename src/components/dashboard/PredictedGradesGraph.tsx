@@ -21,16 +21,7 @@ interface PredictedGradesGraphProps {
 export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
   const { user } = useAuth();
   const [predictedExamCompletions, setPredictedExamCompletions] = useState<any[]>([]);
-  const [subjectsEverShown, setSubjectsEverShown] = useState<Set<string>>(() => {
-    // Initialize with subjects that have data from the start
-    const initialSubjects = new Set<string>();
-    userProgress.forEach(p => {
-      if (p.attempts > 0) {
-        initialSubjects.add(p.subjectId);
-      }
-    });
-    return initialSubjects;
-  });
+  const [stableGrades, setStableGrades] = useState<{[key: string]: any}>({});
 
   useEffect(() => {
     const fetchPredictedExamCompletions = async () => {
@@ -48,7 +39,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         setPredictedExamCompletions(data || []);
       } catch (error) {
         console.error('Error fetching predicted exam completions:', error);
-        // Set empty array on error so subjects can still show based on practice data
         setPredictedExamCompletions([]);
       }
     };
@@ -56,31 +46,83 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     fetchPredictedExamCompletions();
   }, [user]);
 
-  // Track subjects that should persist using a stable mechanism
+  // Calculate and store stable grades that don't change on re-renders
   useEffect(() => {
-    const currentSubjectsWithData = new Set<string>();
+    const newStableGrades: {[key: string]: any} = {};
     
-    // Add subjects with practice data
-    userProgress.forEach(p => {
-      if (p.attempts > 0) {
-        currentSubjectsWithData.add(p.subjectId);
+    curriculum.forEach(subject => {
+      const subjectId = subject.id;
+      
+      // Get practice progress
+      const practicePercentage = getSubjectProgress(subjectId);
+      const practiceGrade = getPredictedGrade(practicePercentage);
+      
+      // Get most recent predicted exam completion for this subject
+      const recentExamCompletion = predictedExamCompletions
+        .filter(completion => completion.subject_id === subjectId)
+        .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
+      
+      // Check if subject has any data
+      const hasPracticeData = userProgress.some(p => p.subjectId === subjectId && p.attempts > 0);
+      const hasExamData = !!recentExamCompletion;
+      
+      // Only include subjects that have actual data
+      if (hasPracticeData || hasExamData) {
+        if (hasExamData && hasPracticeData) {
+          // Combine both data sources with weighted average
+          const examGrade = getPredictedGradeNumber(recentExamCompletion.grade);
+          const examWeight = 0.7;
+          const practiceWeight = 0.3;
+          
+          const combinedGrade = Math.round((examGrade * examWeight) + (practiceGrade * practiceWeight));
+          const combinedPercentage = Math.round((recentExamCompletion.percentage * examWeight) + (practicePercentage * practiceWeight));
+          
+          const totalAttempts = userProgress.filter(p => p.subjectId === subjectId)
+            .reduce((sum, p) => sum + p.attempts, 0) + 1;
+          
+          newStableGrades[subjectId] = {
+            ...subject,
+            grade: Math.max(1, combinedGrade),
+            percentage: combinedPercentage,
+            confidence: getConfidenceLevel(combinedPercentage, totalAttempts),
+            totalAttempts,
+            source: 'combined'
+          };
+        } else if (hasExamData) {
+          // Only exam data available
+          newStableGrades[subjectId] = {
+            ...subject,
+            grade: getPredictedGradeNumber(recentExamCompletion.grade),
+            percentage: recentExamCompletion.percentage,
+            confidence: 'Medium',
+            totalAttempts: 1,
+            source: 'exam_only'
+          };
+        } else {
+          // Only practice data available
+          const totalAttempts = userProgress.filter(p => p.subjectId === subjectId)
+            .reduce((sum, p) => sum + p.attempts, 0);
+          
+          newStableGrades[subjectId] = {
+            ...subject,
+            grade: practiceGrade,
+            percentage: practicePercentage,
+            confidence: getConfidenceLevel(practicePercentage, totalAttempts),
+            totalAttempts,
+            source: 'practice_only'
+          };
+        }
       }
     });
+
+    // Only update if there are meaningful changes
+    const hasChanges = Object.keys(newStableGrades).length > 0 && 
+      JSON.stringify(newStableGrades) !== JSON.stringify(stableGrades);
     
-    // Add subjects with exam completions
-    predictedExamCompletions.forEach(completion => {
-      currentSubjectsWithData.add(completion.subject_id);
-    });
-    
-    // Only update if there are actually new subjects to add
-    setSubjectsEverShown(prev => {
-      const newSubjects = Array.from(currentSubjectsWithData).filter(id => !prev.has(id));
-      if (newSubjects.length > 0) {
-        return new Set([...prev, ...newSubjects]);
-      }
-      return prev; // Return the same reference if no changes
-    });
-  }, [JSON.stringify(userProgress.map(p => ({ subjectId: p.subjectId, attempts: p.attempts }))), JSON.stringify(predictedExamCompletions.map(c => c.subject_id))]); // Only track relevant data changes
+    if (hasChanges) {
+      setStableGrades(prev => ({ ...prev, ...newStableGrades }));
+    }
+  }, [userProgress.length, predictedExamCompletions.length]); // Only trigger on data count changes, not content changes
 
 
   const getSubjectProgress = (subjectId: string) => {
@@ -103,87 +145,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     return parseInt(gradeString) || 0;
   };
 
-  const calculateCombinedGrade = (subjectId: string) => {
-    // Get practice progress
-    const practicePercentage = getSubjectProgress(subjectId);
-    const practiceGrade = getPredictedGrade(practicePercentage);
-    
-    // Get most recent predicted exam completion for this subject
-    const recentExamCompletion = predictedExamCompletions
-      .filter(completion => completion.subject_id === subjectId)
-      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
-    
-    // Check if subject has any data
-    const hasPracticeData = userProgress.some(p => p.subjectId === subjectId && p.attempts > 0);
-    const hasExamData = !!recentExamCompletion;
-    const wasEverShown = subjectsEverShown.has(subjectId);
-    
-    // Always show subjects that have been shown before, even if they currently have no data
-    const shouldShow = hasPracticeData || hasExamData || wasEverShown;
-    
-    if (!shouldShow) {
-      return null;
-    }
-    
-    // If subject was shown before but has no current data, show last known data or placeholder
-    if (wasEverShown && !hasPracticeData && !hasExamData) {
-      return {
-        grade: 2, // Show a stable grade 2 instead of 1
-        percentage: 25,
-        confidence: 'Low',
-        totalAttempts: 1,
-        source: 'placeholder'
-      };
-    }
-    
-    // If only exam completion, use that grade
-    if (!hasPracticeData && hasExamData) {
-      return {
-        grade: getPredictedGradeNumber(recentExamCompletion.grade),
-        percentage: recentExamCompletion.percentage,
-        confidence: 'Medium',
-        totalAttempts: 1,
-        source: 'exam_only'
-      };
-    }
-    
-    // If only practice data, use that
-    if (hasPracticeData && !hasExamData) {
-      const totalAttempts = userProgress.filter(p => p.subjectId === subjectId)
-        .reduce((sum, p) => sum + p.attempts, 0);
-      return {
-        grade: practiceGrade,
-        percentage: practicePercentage,
-        confidence: getConfidenceLevel(practicePercentage, totalAttempts),
-        totalAttempts,
-        source: 'practice_only'
-      };
-    }
-    
-    // If both exist, combine with weighted average (predicted exam has more weight - 70%)
-    if (hasPracticeData && hasExamData) {
-      const examGrade = getPredictedGradeNumber(recentExamCompletion.grade);
-      const examWeight = 0.7;
-      const practiceWeight = 0.3;
-      
-      const combinedGrade = Math.round((examGrade * examWeight) + (practiceGrade * practiceWeight));
-      const combinedPercentage = Math.round((recentExamCompletion.percentage * examWeight) + (practicePercentage * practiceWeight));
-      
-      const totalAttempts = userProgress.filter(p => p.subjectId === subjectId)
-        .reduce((sum, p) => sum + p.attempts, 0) + 1; // +1 for exam attempt
-      
-      return {
-        grade: Math.max(1, combinedGrade), // Ensure minimum grade of 1
-        percentage: combinedPercentage,
-        confidence: getConfidenceLevel(combinedPercentage, totalAttempts),
-        totalAttempts,
-        source: 'combined'
-      };
-    }
-    
-    return null;
-  };
-
   const getPredictedGrade = (percentage: number) => {
     if (percentage >= 85) return 9;
     if (percentage >= 75) return 8;
@@ -196,6 +157,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     if (percentage >= 5) return 1;
     return 0; // This will be displayed as "U"
   };
+
 
   const displayGrade = (grade: number): string => {
     return grade === 0 ? "U" : grade.toString();
@@ -225,14 +187,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     return "text-red-800";
   };
 
-  const getGradeEmoji = (grade: number) => {
-    if (grade >= 8) return "🏆";
-    if (grade === 7) return "🌟";
-    if (grade >= 5) return "⭐";
-    if (grade === 4) return "💪";
-    return "🎯";
-  };
-
   const getConfidenceLevel = (percentage: number, attempts: number) => {
     if (attempts < 5) return "Low";
     if (attempts < 15) return "Medium";
@@ -255,28 +209,10 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     return { icon: Activity, color: "text-blue-500", label: "On Track" };
   };
 
-  // Simplify the subjects calculation with stable memoization
+  // Use stable grades from state instead of calculating on every render
   const subjects = useMemo(() => {
-    // Get subjects with current data
-    const subjectsWithData = curriculum.map(subject => {
-      const combinedResult = calculateCombinedGrade(subject.id);
-      
-      if (!combinedResult) {
-        return null;
-      }
-      
-      return {
-        ...subject,
-        percentage: combinedResult.percentage,
-        grade: combinedResult.grade,
-        totalAttempts: combinedResult.totalAttempts,
-        confidence: combinedResult.confidence,
-        hasData: true
-      };
-    }).filter(subject => subject !== null);
-
-    return subjectsWithData;
-  }, [userProgress, predictedExamCompletions, subjectsEverShown]);
+    return Object.values(stableGrades);
+  }, [stableGrades]);
 
   const averageGrade = useMemo(() => {
     return subjects.length > 0 ? 
