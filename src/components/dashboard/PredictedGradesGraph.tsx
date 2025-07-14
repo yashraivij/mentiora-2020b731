@@ -77,17 +77,29 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           .select('subject_id, grade, percentage, created_at')
           .eq('user_id', user.id);
 
-        const gradePromises = curriculum.map(async (subject) => {
+        // Get all unique subject IDs from curriculum, user progress, and exam data
+        const curriculumSubjectIds = curriculum.map(s => s.id);
+        const progressSubjectIds = [...new Set(userProgress.map((p: any) => p.subjectId))];
+        const examSubjectIds = [...new Set(examData?.map(exam => exam.subject_id) || [])];
+        
+        const allSubjectIds = [...new Set([...curriculumSubjectIds, ...progressSubjectIds, ...examSubjectIds])];
+
+        const gradePromises = allSubjectIds.map(async (subjectId) => {
+          // Find subject in curriculum or create a basic subject info
+          const curriculumSubject = curriculum.find(s => s.id === subjectId);
+          const subjectName = curriculumSubject?.name || 
+            subjectId.charAt(0).toUpperCase() + subjectId.slice(1);
+
           // Calculate practice score for this subject
-          const subjectProgress = userProgress.filter((p: any) => p.subjectId === subject.id);
+          const subjectProgress = userProgress.filter((p: any) => p.subjectId === subjectId);
           
           // Get all topics for this subject and calculate average including unattempted as 0%
-          const totalTopics = subject.topics.length;
+          const totalTopics = curriculumSubject?.topics.length || 1;
           const attemptedTopicsScore = subjectProgress.reduce((sum: number, p: any) => sum + p.averageScore, 0);
-          const practiceScore = totalTopics > 0 ? Math.round(attemptedTopicsScore / totalTopics) : 0;
+          const practiceScore = subjectProgress.length > 0 ? Math.round(attemptedTopicsScore / subjectProgress.length) : 0;
 
           // Get latest exam grade for this subject
-          const latestExam = examData?.filter(exam => exam.subject_id === subject.id)
+          const latestExam = examData?.filter(exam => exam.subject_id === subjectId)
             .sort((a, b) => new Date(b.created_at || '').getTime() - new Date(a.created_at || '').getTime())[0];
 
           const examGrade = latestExam?.grade || null;
@@ -115,8 +127,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           else confidence = 'low';
 
           return {
-            subjectId: subject.id,
-            subjectName: subject.name,
+            subjectId,
+            subjectName,
             practiceScore,
             examGrade,
             finalGrade,
@@ -128,7 +140,11 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         });
 
         const grades = await Promise.all(gradePromises);
-        setGradesData(grades);
+        // Filter out subjects with no data at all
+        const gradesWithData = grades.filter(grade => 
+          grade.finalPercentage > 0 || grade.practiceScore > 0 || grade.examGrade !== null
+        );
+        setGradesData(gradesWithData);
       } catch (error) {
         console.error('Error calculating predicted grades:', error);
       } finally {
