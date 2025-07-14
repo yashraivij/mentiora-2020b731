@@ -154,16 +154,28 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           return null;
         };
 
-        // Use the same logic as PredictivePerformanceCard
-        const gradePromises = curriculum.map(async (subject) => {
-          const combinedResult = calculateCombinedGrade(subject.id);
+        // Get all unique subject IDs from curriculum AND predicted exam completions
+        const curriculumSubjectIds = curriculum.map(s => s.id);
+        const progressSubjectIds = [...new Set(userProgress.map((p: any) => p.subjectId))];
+        const examSubjectIds = [...new Set((predictedExamData || []).map(exam => exam.subject_id))];
+        
+        const allSubjectIds = [...new Set([...curriculumSubjectIds, ...progressSubjectIds, ...examSubjectIds])];
+
+        // Process all subjects, including those not in curriculum
+        const gradePromises = allSubjectIds.map(async (subjectId) => {
+          const combinedResult = calculateCombinedGrade(subjectId);
           
           if (!combinedResult) {
             return null;
           }
 
+          // Find subject in curriculum or create a basic subject info
+          const curriculumSubject = curriculum.find(s => s.id === subjectId);
+          const subjectName = curriculumSubject?.name || 
+            subjectId.charAt(0).toUpperCase() + subjectId.slice(1);
+
           // Calculate confidence based on practice attempts
-          const subjectProgress = userProgress.filter(p => p.subjectId === subject.id);
+          const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
           const practiceCount = subjectProgress.reduce((sum, p) => sum + p.attempts, 0);
           let confidence: 'high' | 'medium' | 'low';
           if (practiceCount >= 20) confidence = 'high';
@@ -171,8 +183,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           else confidence = 'low';
 
           return {
-            subjectId: subject.id,
-            subjectName: subject.name,
+            subjectId: subjectId,
+            subjectName,
             practiceScore: combinedResult.practiceScore,
             examGrade: combinedResult.examGrade,
             finalGrade: combinedResult.grade.toString(),
