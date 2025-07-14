@@ -77,12 +77,20 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           .select('subject_id, grade, percentage, created_at')
           .eq('user_id', user.id);
 
+        console.log('🔍 Exam data fetched:', examData);
+        console.log('🔍 User progress:', userProgress);
+
         // Get all unique subject IDs from curriculum, user progress, and exam data
         const curriculumSubjectIds = curriculum.map(s => s.id);
         const progressSubjectIds = [...new Set(userProgress.map((p: any) => p.subjectId))];
         const examSubjectIds = [...new Set(examData?.map(exam => exam.subject_id) || [])];
         
+        console.log('🔍 Curriculum subjects:', curriculumSubjectIds);
+        console.log('🔍 Progress subjects:', progressSubjectIds);
+        console.log('🔍 Exam subjects:', examSubjectIds);
+        
         const allSubjectIds = [...new Set([...curriculumSubjectIds, ...progressSubjectIds, ...examSubjectIds])];
+        console.log('🔍 All combined subjects:', allSubjectIds);
 
         const gradePromises = allSubjectIds.map(async (subjectId) => {
           // Find subject in curriculum or create a basic subject info
@@ -126,7 +134,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           else if (practiceCount >= 10) confidence = 'medium';
           else confidence = 'low';
 
-          return {
+          const gradeData = {
             subjectId,
             subjectName,
             practiceScore,
@@ -137,13 +145,20 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
             practiceCount,
             isGrade7Plus: finalPercentage >= 70
           } as GradeData;
+
+          console.log(`🔍 Grade data for ${subjectId}:`, gradeData);
+          return gradeData;
         });
 
         const grades = await Promise.all(gradePromises);
-        // Filter out subjects with no data at all
+        console.log('🔍 All grades before filtering:', grades);
+        
+        // Show ALL subjects that have any data - don't filter out subjects with grade "–"
         const gradesWithData = grades.filter(grade => 
-          grade.finalPercentage > 0 || grade.practiceScore > 0 || grade.examGrade !== null
+          grade.practiceScore > 0 || grade.examGrade !== null
         );
+        
+        console.log('🔍 Final grades after filtering:', gradesWithData);
         setGradesData(gradesWithData);
       } catch (error) {
         console.error('Error calculating predicted grades:', error);
