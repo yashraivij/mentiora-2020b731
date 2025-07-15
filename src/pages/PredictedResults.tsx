@@ -565,7 +565,11 @@ const PredictedResults = () => {
                     ✅ Model Answer
                   </h4>
                   <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border-l-4 border-green-500">
-                    <p className="text-foreground">{attempt.feedback.modelAnswer}</p>
+                    <div className="text-foreground space-y-2">
+                      {attempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).map((sentence, index) => (
+                        <p key={index} className="leading-relaxed">{sentence.trim()}{index < attempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).length - 1 ? '.' : ''}</p>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
