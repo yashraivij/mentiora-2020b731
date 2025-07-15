@@ -51,6 +51,9 @@ ${typeof markingCriteria === 'string' ? markingCriteria : markingCriteria.breakd
 TOTAL MARKS: ${totalMarks}${formulaSheetNote}
 
 CRITICAL MARKING INSTRUCTIONS:
+- ACCEPT EQUIVALENT ANSWERS: If the student's answer is mathematically correct but uses different units (e.g., N/cm vs N/m, cm vs m, kg vs g), calculate if the values are equivalent and award full marks if correct
+- UNIT CONVERSIONS: Automatically check for common unit conversions (1 m = 100 cm, 1 kg = 1000 g, etc.) and accept correct answers in any reasonable unit
+- ALTERNATIVE FORMS: Accept answers in different but equivalent forms (fractions vs decimals, scientific notation, rearranged equations)
 - ONLY comment on what the student actually wrote - do not assume working that isn't shown
 - If the student gives just a final answer with no working, only assess the accuracy of that answer
 - Do NOT mention "calculation mistakes" or "working out" unless the student actually showed calculations
