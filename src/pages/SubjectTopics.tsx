@@ -69,6 +69,19 @@ const SubjectTopics = () => {
     return progress || { attempts: 0, averageScore: 0, lastAttempt: new Date() };
   };
 
+  const getPhysicsTopicYear = (topicName: string) => {
+    const year10Topics = ['Energy', 'Electricity', 'Particle Model of Matter', 'Atomic Structure'];
+    const year11Topics = ['Forces', 'Waves', 'Magnetism and Electromagnetism', 'Space Physics'];
+    
+    if (year10Topics.some(y10Topic => topicName.toLowerCase().includes(y10Topic.toLowerCase()))) {
+      return 'Year 10';
+    }
+    if (year11Topics.some(y11Topic => topicName.toLowerCase().includes(y11Topic.toLowerCase()))) {
+      return 'Year 11';
+    }
+    return null;
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -136,17 +149,27 @@ const SubjectTopics = () => {
 
         {/* Topics Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {subject.topics.map((topic) => {
+        {subject.topics.map((topic) => {
             const progress = getTopicProgress(topic.id);
             const isNew = progress.attempts === 0;
             const isMastered = progress.averageScore >= 85;
             const needsWork = progress.attempts > 0 && progress.averageScore < 60;
+            const topicYear = subjectId === 'physics' ? getPhysicsTopicYear(topic.name) : null;
 
             return (
               <Card key={topic.id} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="flex items-start justify-between">
-                    <CardTitle className="text-lg leading-tight">{topic.name}</CardTitle>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <CardTitle className="text-lg leading-tight">{topic.name}</CardTitle>
+                        {topicYear && (
+                          <Badge variant="secondary" className="text-xs">
+                            {topicYear}
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
                     <div className="flex flex-col items-end space-y-1">
                       {isNew && (
                         <Badge variant="outline">New</Badge>
