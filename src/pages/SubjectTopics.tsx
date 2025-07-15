@@ -164,7 +164,13 @@ const SubjectTopics = () => {
                       <div className="flex items-center gap-2 mb-1">
                         <CardTitle className="text-lg leading-tight">{topic.name}</CardTitle>
                         {topicYear && (
-                          <Badge variant="secondary" className="text-xs">
+                          <Badge 
+                            className={`text-xs ${
+                              topicYear === 'Year 10' 
+                                ? 'bg-blue-500 text-white hover:bg-blue-600' 
+                                : 'bg-purple-500 text-white hover:bg-purple-600'
+                            }`}
+                          >
                             {topicYear}
                           </Badge>
                         )}
