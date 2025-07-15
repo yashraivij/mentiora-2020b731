@@ -1457,122 +1457,62 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'm1-q1',
-            question: 'Calculate 3.7 × 2.4 without using a calculator.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: '3.7 × 2.4 = 8.88',
+            question: 'Work out (3.2 × 10⁷) ÷ (4 × 10⁻³). Give your answer in standard form.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '(3.2 × 10⁷) ÷ (4 × 10⁻³) = (3.2 ÷ 4) × (10⁷ ÷ 10⁻³) = 0.8 × 10¹⁰ = 8 × 10⁹',
             markingCriteria: {
-              breakdown: ['Correct multiplication method (1 mark)', 'Correct answer 8.88 (1 mark)']
+              breakdown: ['Divide numbers: 3.2 ÷ 4 = 0.8 (1 mark)', 'Subtract indices: 7 - (-3) = 10 (1 mark)', 'Convert to standard form: 8 × 10⁹ (1 mark)']
             },
-            specReference: 'M1.1',
-            calculatorGuidance: 'non-calc-friendly'
+            specReference: '1.1.2h - Standard form calculations',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm1-q2',
-            question: 'Express 0.45 as a fraction in its simplest form.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: '0.45 = 45/100 = 9/20',
+            question: 'Simplify √(50) - √(18) + √(32), giving your answer in the form a√(2) where a is an integer.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: '√(50) = 5√(2), √(18) = 3√(2), √(32) = 4√(2). Therefore 5√(2) - 3√(2) + 4√(2) = 6√(2)',
             markingCriteria: {
-              breakdown: ['Converting to fraction 45/100 (1 mark)', 'Simplifying to 9/20 (1 mark)']
+              breakdown: ['Simplify √(50) = 5√(2) (1 mark)', 'Simplify √(18) = 3√(2) and √(32) = 4√(2) (1 mark)', 'Combine like surds correctly (1 mark)', 'Final answer 6√(2) (1 mark)']
             },
-            specReference: 'M1.2',
+            specReference: '1.1.2e - Surds',
             calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm1-q3',
-            question: 'Find the HCF of 24 and 36.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Factors of 24: 1, 2, 3, 4, 6, 8, 12, 24. Factors of 36: 1, 2, 3, 4, 6, 9, 12, 18, 36. HCF = 12',
+            question: 'Express 0.4̅6̅ (0.464646...) as a fraction in its simplest form.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Let x = 0.464646... Then 100x = 46.464646... Subtracting: 99x = 46, so x = 46/99',
             markingCriteria: {
-              breakdown: ['Finding factors correctly (1 mark)', 'Identifying HCF as 12 (1 mark)']
+              breakdown: ['Set up equation with x = 0.464646... (1 mark)', 'Multiply by 100 (1 mark)', 'Subtract to get 99x = 46 (1 mark)', 'Final fraction 46/99 (1 mark)']
             },
-            specReference: 'M1.3',
+            specReference: '1.1.1g - Converting recurring decimals',
             calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm1-q4',
-            question: 'Calculate 2³ + 3² - 4¹',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: '2³ + 3² - 4¹ = 8 + 9 - 4 = 13',
+            question: 'The mass of a proton is 1.67 × 10⁻²⁷ kg. Calculate the mass of 3.6 × 10²³ protons. Give your answer in standard form.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Mass = (1.67 × 10⁻²⁷) × (3.6 × 10²³) = (1.67 × 3.6) × (10⁻²⁷ × 10²³) = 6.012 × 10⁻⁴ kg',
             markingCriteria: {
-              breakdown: ['Correct evaluation of powers (1 mark)', 'Correct final calculation = 13 (1 mark)']
+              breakdown: ['Multiply numbers: 1.67 × 3.6 = 6.012 (1 mark)', 'Add indices: -27 + 23 = -4 (1 mark)', 'Final answer in standard form (1 mark)']
             },
-            specReference: 'M1.4',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm1-q5',
-            question: 'Round 45.678 to 2 decimal places.',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: '45.68',
-            markingCriteria: {
-              breakdown: ['Correct rounding to 45.68 (1 mark)']
-            },
-            specReference: 'M1.5',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm1-q6',
-            question: 'Express 3/8 as a decimal.',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: '0.375',
-            markingCriteria: {
-              breakdown: ['Correct conversion to 0.375 (1 mark)']
-            },
-            specReference: 'M1.6',
+            specReference: '1.1.2h - Standard form calculations',
             calculatorGuidance: 'calc-recommended'
           },
           {
-            id: 'm1-q7',
-            question: 'Calculate 15% of 240.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: '15% of 240 = 0.15 × 240 = 36',
-            markingCriteria: {
-              breakdown: ['Correct method shown (1 mark)', 'Correct answer 36 (1 mark)']
-            },
-            specReference: 'M1.7',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm1-q8',
-            question: 'Find the LCM of 12 and 18.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Multiples of 12: 12, 24, 36, 48... Multiples of 18: 18, 36, 54... LCM = 36',
-            markingCriteria: {
-              breakdown: ['Finding multiples correctly (1 mark)', 'Identifying LCM as 36 (1 mark)']
-            },
-            specReference: 'M1.8',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm1-q9',
-            question: 'Calculate (-3) × (-7)',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: '(-3) × (-7) = 21',
-            markingCriteria: {
-              breakdown: ['Correct answer 21 (1 mark)']
-            },
-            specReference: 'M1.9',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm1-q10',
-            question: 'Express 125 as a product of prime factors.',
+            id: 'm1-q5',
+            question: 'Calculate 2⁴ × 2⁻⁷ × 2³, giving your answer as a fraction.',
             marks: 3,
             difficulty: 'medium',
-            modelAnswer: '125 = 5³ = 5 × 5 × 5',
+            modelAnswer: '2⁴ × 2⁻⁷ × 2³ = 2⁴⁻⁷⁺³ = 2⁰ = 1',
             markingCriteria: {
-              breakdown: ['Systematic division by prime numbers (1 mark)', 'Complete factorization (1 mark)', 'Correct expression as 5³ (1 mark)']
+              breakdown: ['Add indices: 4 + (-7) + 3 = 0 (1 mark)', 'Recognize 2⁰ = 1 (1 mark)', 'Final answer 1 (1 mark)']
             },
-            specReference: 'M1.10',
+            specReference: '1.1.2c - Index laws',
             calculatorGuidance: 'non-calc-friendly'
           }
         ]
@@ -1583,123 +1523,63 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'm2-q1',
-            question: 'Simplify 3x + 2x - x',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: '3x + 2x - x = 4x',
+            question: 'Solve the quadratic equation x² - 5x - 14 = 0 by factorization.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'x² - 5x - 14 = (x - 7)(x + 2) = 0. Therefore x = 7 or x = -2',
             markingCriteria: {
-              breakdown: ['Correct simplification to 4x (1 mark)']
+              breakdown: ['Factor to (x - 7)(x + 2) (1 mark)', 'Set each factor to zero (1 mark)', 'Both solutions x = 7 and x = -2 (1 mark)']
             },
-            specReference: 'M2.1',
+            specReference: '2.1.2c - Solving quadratic equations',
             calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm2-q2',
-            question: 'Solve 2x + 5 = 13',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: '2x + 5 = 13, 2x = 8, x = 4',
+            question: 'Expand and simplify (2x + 3)² - (x - 1)(x + 4)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: '(2x + 3)² = 4x² + 12x + 9. (x - 1)(x + 4) = x² + 3x - 4. Therefore 4x² + 12x + 9 - x² - 3x + 4 = 3x² + 9x + 13',
             markingCriteria: {
-              breakdown: ['Correct rearrangement (1 mark)', 'Correct solution x = 4 (1 mark)']
+              breakdown: ['Expand (2x + 3)² correctly (1 mark)', 'Expand (x - 1)(x + 4) correctly (1 mark)', 'Subtract expressions correctly (1 mark)', 'Simplify to 3x² + 9x + 13 (1 mark)']
             },
-            specReference: 'M2.2',
+            specReference: '2.1.1b - Expanding and simplifying',
             calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm2-q3',
-            question: 'Expand (x + 3)(x + 2)',
-            marks: 2,
+            question: 'Solve the simultaneous equations: 3x + 2y = 16 and x - y = 1',
+            marks: 4,
             difficulty: 'medium',
-            modelAnswer: '(x + 3)(x + 2) = x² + 2x + 3x + 6 = x² + 5x + 6',
+            modelAnswer: 'From equation 2: x = y + 1. Substitute into equation 1: 3(y + 1) + 2y = 16. 5y + 3 = 16, so y = 2.6. Then x = 3.6',
             markingCriteria: {
-              breakdown: ['Correct expansion method (1 mark)', 'Correct final answer x² + 5x + 6 (1 mark)']
+              breakdown: ['Rearrange one equation for x or y (1 mark)', 'Substitute correctly (1 mark)', 'Solve for one variable (1 mark)', 'Find both solutions x = 3.6, y = 2.6 (1 mark)']
             },
-            specReference: 'M2.3',
-            calculatorGuidance: 'non-calc-friendly'
+            specReference: '2.1.2b - Simultaneous equations',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm2-q4',
-            question: 'Factorize x² + 7x + 12',
-            marks: 2,
+            question: 'Make h the subject of the formula: A = ½(a + b)h',
+            marks: 3,
             difficulty: 'medium',
-            modelAnswer: 'x² + 7x + 12 = (x + 3)(x + 4)',
+            modelAnswer: 'A = ½(a + b)h. Multiply both sides by 2: 2A = (a + b)h. Divide by (a + b): h = 2A/(a + b)',
             markingCriteria: {
-              breakdown: ['Finding correct factors (1 mark)', 'Correct factorization (x + 3)(x + 4) (1 mark)']
+              breakdown: ['Multiply both sides by 2 (1 mark)', 'Divide by (a + b) (1 mark)', 'Final answer h = 2A/(a + b) (1 mark)']
             },
-            specReference: 'M2.4',
+            specReference: '2.1.1e - Changing the subject',
             calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm2-q5',
-            question: 'Solve 3x - 7 = 2x + 5',
-            marks: 2,
+            question: 'The nth term of a sequence is 3n² - 2n + 1. Find the first three terms and the 10th term.',
+            marks: 4,
             difficulty: 'medium',
-            modelAnswer: '3x - 7 = 2x + 5, 3x - 2x = 5 + 7, x = 12',
+            modelAnswer: 'n = 1: 3(1)² - 2(1) + 1 = 2. n = 2: 3(4) - 4 + 1 = 9. n = 3: 3(9) - 6 + 1 = 22. n = 10: 3(100) - 20 + 1 = 281',
             markingCriteria: {
-              breakdown: ['Correct rearrangement (1 mark)', 'Correct solution x = 12 (1 mark)']
+              breakdown: ['First term = 2 (1 mark)', 'Second and third terms = 9, 22 (1 mark)', 'Substitute n = 10 correctly (1 mark)', '10th term = 281 (1 mark)']
             },
-            specReference: 'M2.5',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm2-q6',
-            question: 'Simplify 2a × 3b',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: '2a × 3b = 6ab',
-            markingCriteria: {
-              breakdown: ['Correct simplification to 6ab (1 mark)']
-            },
-            specReference: 'M2.6',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm2-q7',
-            question: 'Find the value of y when x = 3 in the equation y = 2x + 1',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: 'y = 2(3) + 1 = 6 + 1 = 7',
-            markingCriteria: {
-              breakdown: ['Correct substitution and calculation y = 7 (1 mark)']
-            },
-            specReference: 'M2.7',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm2-q8',
-            question: 'Expand 3(2x - 5)',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: '3(2x - 5) = 6x - 15',
-            markingCriteria: {
-              breakdown: ['Correct expansion to 6x - 15 (1 mark)']
-            },
-            specReference: 'M2.8',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm2-q9',
-            question: 'Solve x² - 9 = 0',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'x² - 9 = 0, x² = 9, x = ±3',
-            markingCriteria: {
-              breakdown: ['Correct rearrangement (1 mark)', 'Both solutions x = 3 and x = -3 (1 mark)']
-            },
-            specReference: 'M2.9',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm2-q10',
-            question: 'Make x the subject of y = 3x - 2',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'y = 3x - 2, y + 2 = 3x, x = (y + 2)/3',
-            markingCriteria: {
-              breakdown: ['Correct rearrangement steps (1 mark)', 'Correct final answer x = (y + 2)/3 (1 mark)']
-            },
-            specReference: 'M2.10',
-            calculatorGuidance: 'non-calc-friendly'
+            specReference: '2.1.1f - Sequences',
+            calculatorGuidance: 'calc-recommended'
           }
         ]
       },
@@ -1709,122 +1589,62 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'm3-q1',
-            question: 'Express the ratio 15:20 in its simplest form.',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: '15:20 = 3:4',
+            question: 'The population of a town increases by 3% each year. If the population was 45,000 in 2020, calculate the population in 2023.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Population in 2023 = 45,000 × (1.03)³ = 45,000 × 1.092727 = 49,173',
             markingCriteria: {
-              breakdown: ['Correct simplification to 3:4 (1 mark)']
+              breakdown: ['Use compound interest formula with 1.03 (1 mark)', 'Calculate (1.03)³ = 1.092727 (1 mark)', 'Final answer 49,173 (1 mark)']
             },
-            specReference: 'M3.1',
-            calculatorGuidance: 'non-calc-friendly'
+            specReference: '1.2.2b - Compound percentage change',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm3-q2',
-            question: 'If 3 pens cost £4.50, how much do 5 pens cost?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: '3 pens cost £4.50, so 1 pen costs £1.50. Therefore 5 pens cost £7.50',
+            question: 'y is inversely proportional to x². When x = 4, y = 3. Find the value of y when x = 6.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'y = k/x² where k is constant. When x = 4, y = 3: 3 = k/16, so k = 48. When x = 6: y = 48/36 = 4/3',
             markingCriteria: {
-              breakdown: ['Finding cost of 1 pen (1 mark)', 'Correct final answer £7.50 (1 mark)']
+              breakdown: ['Write y = k/x² (1 mark)', 'Find k using given values: k = 48 (1 mark)', 'Substitute x = 6 into equation (1 mark)', 'Final answer y = 4/3 (1 mark)']
             },
-            specReference: 'M3.2',
+            specReference: '1.2.1c - Inverse proportion',
             calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm3-q3',
-            question: 'Share £240 in the ratio 2:3:5',
-            marks: 3,
+            question: 'Convert 72 km/h to m/s.',
+            marks: 2,
             difficulty: 'medium',
-            modelAnswer: 'Total parts = 2 + 3 + 5 = 10. Each part = £240 ÷ 10 = £24. Shares are £48, £72, £120',
+            modelAnswer: '72 km/h = 72 × 1000 ÷ 3600 = 72000 ÷ 3600 = 20 m/s',
             markingCriteria: {
-              breakdown: ['Finding total parts (1 mark)', 'Finding value of each part (1 mark)', 'All three shares correct (1 mark)']
+              breakdown: ['Convert km to m and h to s (1 mark)', 'Correct calculation: 20 m/s (1 mark)']
             },
-            specReference: 'M3.3',
-            calculatorGuidance: 'non-calc-friendly'
+            specReference: '1.2.3a - Unit conversions',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm3-q4',
-            question: 'A recipe for 4 people uses 200g flour. How much flour is needed for 6 people?',
-            marks: 2,
+            question: 'A map has a scale of 1:25000. The actual distance between two towns is 7.5 km. Calculate the distance on the map in centimeters.',
+            marks: 3,
             difficulty: 'medium',
-            modelAnswer: '4 people need 200g, so 1 person needs 50g. 6 people need 6 × 50g = 300g',
+            modelAnswer: 'Actual distance = 7.5 km = 750,000 cm. Map distance = 750,000 ÷ 25,000 = 30 cm',
             markingCriteria: {
-              breakdown: ['Correct proportion method (1 mark)', 'Correct answer 300g (1 mark)']
+              breakdown: ['Convert 7.5 km to cm: 750,000 cm (1 mark)', 'Apply scale factor (1 mark)', 'Final answer: 30 cm (1 mark)']
             },
-            specReference: 'M3.4',
-            calculatorGuidance: 'non-calc-friendly'
+            specReference: '1.2.3b - Scale and maps',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm3-q5',
-            question: 'Calculate the percentage increase from 80 to 96.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Increase = 96 - 80 = 16. Percentage increase = (16/80) × 100% = 20%',
-            markingCriteria: {
-              breakdown: ['Finding the increase (1 mark)', 'Correct percentage calculation 20% (1 mark)']
-            },
-            specReference: 'M3.5',
-            calculatorGuidance: 'calc-recommended'
-          },
-          {
-            id: 'm3-q6',
-            question: 'Convert 2.5 m/s to km/h.',
-            marks: 2,
+            question: 'A car depreciates by 18% each year. After how many years will its value be less than half its original value?',
+            marks: 4,
             difficulty: 'hard',
-            modelAnswer: '2.5 m/s = 2.5 × 3.6 km/h = 9 km/h',
+            modelAnswer: 'Value after n years = V₀ × (0.82)ⁿ. For half value: (0.82)ⁿ < 0.5. Using logarithms: n > log(0.5)/log(0.82) = 3.52. Therefore after 4 years.',
             markingCriteria: {
-              breakdown: ['Correct conversion factor (1 mark)', 'Correct answer 9 km/h (1 mark)']
+              breakdown: ['Set up inequality (0.82)ⁿ < 0.5 (1 mark)', 'Use logarithms correctly (1 mark)', 'Calculate n > 3.52 (1 mark)', 'Conclude 4 years (1 mark)']
             },
-            specReference: 'M3.6',
-            calculatorGuidance: 'calc-recommended'
-          },
-          {
-            id: 'm3-q7',
-            question: 'Find the rate of change of y with respect to x if y = 3x + 2.',
-            marks: 1,
-            difficulty: 'medium',
-            modelAnswer: 'Rate of change = gradient = 3',
-            markingCriteria: {
-              breakdown: ['Correct answer 3 (1 mark)']
-            },
-            specReference: 'M3.7',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm3-q8',
-            question: 'A car travels 150 miles in 3 hours. What is its average speed?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Average speed = distance ÷ time = 150 ÷ 3 = 50 mph',
-            markingCriteria: {
-              breakdown: ['Correct formula used (1 mark)', 'Correct answer 50 mph (1 mark)']
-            },
-            specReference: 'M3.8',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm3-q9',
-            question: 'Express 35% as a decimal and as a fraction.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: '35% = 0.35 = 35/100 = 7/20',
-            markingCriteria: {
-              breakdown: ['Correct decimal 0.35 (1 mark)', 'Correct simplified fraction 7/20 (1 mark)']
-            },
-            specReference: 'M3.9',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm3-q10',
-            question: 'If y is directly proportional to x and y = 12 when x = 4, find y when x = 7.',
-            marks: 3,
-            difficulty: 'hard',
-            modelAnswer: 'y ∝ x, so y = kx. When x = 4, y = 12, so k = 3. When x = 7, y = 3 × 7 = 21',
-            markingCriteria: {
-              breakdown: ['Setting up proportion correctly (1 mark)', 'Finding constant k = 3 (1 mark)', 'Correct answer y = 21 (1 mark)']
-            },
-            specReference: 'M3.10',
+            specReference: '1.2.2b - Exponential functions',
             calculatorGuidance: 'calc-recommended'
           }
         ]
@@ -1835,122 +1655,62 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'm4-q1',
-            question: 'Calculate the area of a rectangle with length 8 cm and width 5 cm.',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: 'Area = length × width = 8 × 5 = 40 cm²',
+            question: 'In a right-angled triangle, one angle is 35°. A side adjacent to this angle is 8 cm and the side opposite to this angle is h cm. Calculate the value of h.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'tan(35°) = opposite/adjacent = h/8. Therefore h = 8 × tan(35°) = 8 × 0.7002 = 5.60 cm (3 sf)',
             markingCriteria: {
-              breakdown: ['Correct calculation 40 cm² (1 mark)']
+              breakdown: ['Identify correct trigonometric ratio: tan(35°) (1 mark)', 'Set up equation: h = 8 × tan(35°) (1 mark)', 'Calculate: h = 5.60 cm (1 mark)']
             },
-            specReference: 'M4.1',
-            calculatorGuidance: 'non-calc-friendly'
+            specReference: '3.2.1a - Trigonometry in right-angled triangles',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm4-q2',
-            question: 'Find the perimeter of a triangle with sides 3 cm, 4 cm, and 5 cm.',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: 'Perimeter = 3 + 4 + 5 = 12 cm',
+            question: 'A triangle has vertices at A(2, 3), B(6, 1), and C(4, 7). Calculate the length of side AB using Pythagoras\' theorem.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'AB = √[(6-2)² + (1-3)²] = √[4² + (-2)²] = √[16 + 4] = √20 = 2√5 ≈ 4.47 units',
             markingCriteria: {
-              breakdown: ['Correct calculation 12 cm (1 mark)']
+              breakdown: ['Find differences: (6-2) = 4, (1-3) = -2 (1 mark)', 'Apply distance formula: √[16 + 4] (1 mark)', 'Simplify: 2√5 or 4.47 units (1 mark)']
             },
-            specReference: 'M4.2',
-            calculatorGuidance: 'non-calc-friendly'
+            specReference: '3.1.1c - Pythagoras theorem',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm4-q3',
-            question: 'Calculate the area of a circle with radius 6 cm. Use π = 3.14.',
-            marks: 2,
+            question: 'A sector of a circle has radius 12 cm and central angle 150°. Calculate the area of the sector.',
+            marks: 3,
             difficulty: 'medium',
-            modelAnswer: 'Area = πr² = 3.14 × 6² = 3.14 × 36 = 113.04 cm²',
+            modelAnswer: 'Area of sector = (θ/360°) × πr² = (150°/360°) × π × 12² = (5/12) × 144π = 60π = 188.5 cm² (3 sf)',
             markingCriteria: {
-              breakdown: ['Correct formula πr² (1 mark)', 'Correct calculation 113.04 cm² (1 mark)']
+              breakdown: ['Use sector area formula (1 mark)', 'Substitute values correctly: (150/360) × π × 144 (1 mark)', 'Calculate: 60π = 188.5 cm² (1 mark)']
             },
-            specReference: 'M4.3',
+            specReference: '3.1.3b - Area of sectors',
             calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm4-q4',
-            question: 'Find the volume of a cube with side length 4 cm.',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: 'Volume = side³ = 4³ = 64 cm³',
+            question: 'A cone has base radius 9 cm and slant height 15 cm. Calculate the total surface area of the cone.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Base area = π × 9² = 81π. Curved surface area = π × 9 × 15 = 135π. Total surface area = 81π + 135π = 216π = 678.6 cm² (4 sf)',
             markingCriteria: {
-              breakdown: ['Correct calculation 64 cm³ (1 mark)']
+              breakdown: ['Calculate base area: 81π (1 mark)', 'Calculate curved surface area: 135π (1 mark)', 'Add areas: 216π (1 mark)', 'Final answer: 678.6 cm² (1 mark)']
             },
-            specReference: 'M4.4',
-            calculatorGuidance: 'non-calc-friendly'
+            specReference: '3.1.4c - Surface area of cones',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm4-q5',
-            question: 'Calculate the circumference of a circle with diameter 10 cm. Use π = 3.14.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Circumference = πd = 3.14 × 10 = 31.4 cm',
-            markingCriteria: {
-              breakdown: ['Correct formula πd (1 mark)', 'Correct calculation 31.4 cm (1 mark)']
-            },
-            specReference: 'M4.5',
-            calculatorGuidance: 'calc-recommended'
-          },
-          {
-            id: 'm4-q6',
-            question: 'Find the area of a triangle with base 6 cm and height 8 cm.',
+            question: 'Triangle ABC is transformed by a translation with vector (3, -2) to give triangle A\'B\'C\'. Point A has coordinates (1, 4). What are the coordinates of A\'?',
             marks: 2,
             difficulty: 'easy',
-            modelAnswer: 'Area = ½ × base × height = ½ × 6 × 8 = 24 cm²',
+            modelAnswer: 'A\' = A + translation vector = (1, 4) + (3, -2) = (4, 2)',
             markingCriteria: {
-              breakdown: ['Correct formula ½bh (1 mark)', 'Correct calculation 24 cm² (1 mark)']
+              breakdown: ['Add translation vector components (1 mark)', 'Correct coordinates A\'(4, 2) (1 mark)']
             },
-            specReference: 'M4.6',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm4-q7',
-            question: 'Calculate the surface area of a cube with side length 3 cm.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Surface area = 6 × side² = 6 × 3² = 6 × 9 = 54 cm²',
-            markingCriteria: {
-              breakdown: ['Correct formula 6s² (1 mark)', 'Correct calculation 54 cm² (1 mark)']
-            },
-            specReference: 'M4.7',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm4-q8',
-            question: 'Find the length of the hypotenuse in a right triangle with sides 3 cm and 4 cm.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Using Pythagoras: c² = 3² + 4² = 9 + 16 = 25, so c = 5 cm',
-            markingCriteria: {
-              breakdown: ['Correct use of Pythagoras theorem (1 mark)', 'Correct answer 5 cm (1 mark)']
-            },
-            specReference: 'M4.8',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm4-q9',
-            question: 'Calculate the volume of a cylinder with radius 2 cm and height 5 cm. Use π = 3.14.',
-            marks: 3,
-            difficulty: 'hard',
-            modelAnswer: 'Volume = πr²h = 3.14 × 2² × 5 = 3.14 × 4 × 5 = 62.8 cm³',
-            markingCriteria: {
-              breakdown: ['Correct formula πr²h (1 mark)', 'Correct substitution (1 mark)', 'Correct calculation 62.8 cm³ (1 mark)']
-            },
-            specReference: 'M4.9',
-            calculatorGuidance: 'calc-recommended'
-          },
-          {
-            id: 'm4-q10',
-            question: 'Find the area of a parallelogram with base 7 cm and perpendicular height 4 cm.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Area = base × height = 7 × 4 = 28 cm²',
-            markingCriteria: {
-              breakdown: ['Correct formula base × height (1 mark)', 'Correct calculation 28 cm² (1 mark)']
-            },
-            specReference: 'M4.10',
+            specReference: '3.2.2a - Translations',
             calculatorGuidance: 'non-calc-friendly'
           }
         ]
@@ -1961,123 +1721,63 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'm5-q1',
-            question: 'What is the probability of rolling a 6 on a fair six-sided die?',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: 'Probability = 1/6',
+            question: 'A bag contains 5 red, 3 blue, and 2 green balls. Two balls are drawn without replacement. Calculate the probability that both balls are red.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'P(first red) = 5/10 = 1/2. P(second red | first red) = 4/9. P(both red) = (1/2) × (4/9) = 4/18 = 2/9',
             markingCriteria: {
-              breakdown: ['Correct answer 1/6 (1 mark)']
+              breakdown: ['P(first red) = 5/10 (1 mark)', 'P(second red | first red) = 4/9 (1 mark)', 'P(both red) = 2/9 (1 mark)']
             },
-            specReference: 'M5.1',
+            specReference: '4.1.2b - Conditional probability',
             calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm5-q2',
-            question: 'A bag contains 5 red balls and 3 blue balls. What is the probability of picking a red ball?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Total balls = 5 + 3 = 8. Probability = 5/8',
+            question: 'The probability that it rains on any day is 0.3. Calculate the probability that it rains on exactly 2 days out of 4 consecutive days.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'This is binomial: P(X = 2) = C(4,2) × (0.3)² × (0.7)² = 6 × 0.09 × 0.49 = 0.2646',
             markingCriteria: {
-              breakdown: ['Finding total number of balls (1 mark)', 'Correct probability 5/8 (1 mark)']
+              breakdown: ['Recognize binomial distribution (1 mark)', 'Calculate C(4,2) = 6 (1 mark)', 'Calculate (0.3)² × (0.7)² = 0.0441 (1 mark)', 'Final answer: 0.2646 (1 mark)']
             },
-            specReference: 'M5.2',
-            calculatorGuidance: 'non-calc-friendly'
+            specReference: '4.1.3a - Binomial probability',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm5-q3',
-            question: 'Two coins are flipped. What is the probability of getting two heads?',
-            marks: 2,
+            question: 'A spinner has 4 equal sections numbered 1, 2, 3, 4. The spinner is spun three times. Calculate the probability of getting at least one 4.',
+            marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'Possible outcomes: HH, HT, TH, TT. Probability of HH = 1/4',
+            modelAnswer: 'P(at least one 4) = 1 - P(no 4s) = 1 - (3/4)³ = 1 - 27/64 = 37/64',
             markingCriteria: {
-              breakdown: ['Listing all outcomes correctly (1 mark)', 'Correct probability 1/4 (1 mark)']
+              breakdown: ['Use complement: 1 - P(no 4s) (1 mark)', 'P(no 4 on one spin) = 3/4 (1 mark)', 'P(no 4s in three spins) = (3/4)³ = 27/64 (1 mark)', 'Final answer: 37/64 (1 mark)']
             },
-            specReference: 'M5.3',
+            specReference: '4.1.1c - Independent events',
             calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm5-q4',
-            question: 'What is the probability of NOT rolling a 3 on a fair six-sided die?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Probability of rolling a 3 = 1/6. Probability of NOT rolling a 3 = 1 - 1/6 = 5/6',
+            question: 'A biased coin has P(Heads) = 0.6. The coin is tossed until a head appears. Calculate the probability that the first head appears on the 3rd toss.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'For first head on 3rd toss: P(TTH) = P(T) × P(T) × P(H) = 0.4 × 0.4 × 0.6 = 0.096',
             markingCriteria: {
-              breakdown: ['Understanding complementary probability (1 mark)', 'Correct answer 5/6 (1 mark)']
+              breakdown: ['Identify sequence: TTH (1 mark)', 'P(T) = 0.4 for each tail (1 mark)', 'Calculate: 0.4 × 0.4 × 0.6 = 0.096 (1 mark)']
             },
-            specReference: 'M5.4',
-            calculatorGuidance: 'non-calc-friendly'
+            specReference: '4.1.1c - Independent events',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm5-q5',
-            question: 'A spinner has 4 equal sections colored red, blue, green, and yellow. What is the probability of landing on red or blue?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'P(red) = 1/4, P(blue) = 1/4. P(red or blue) = 1/4 + 1/4 = 2/4 = 1/2',
-            markingCriteria: {
-              breakdown: ['Finding individual probabilities (1 mark)', 'Correct addition to get 1/2 (1 mark)']
-            },
-            specReference: 'M5.5',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm5-q6',
-            question: 'From a standard deck of 52 cards, what is the probability of drawing a king?',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: 'There are 4 kings in 52 cards. Probability = 4/52 = 1/13',
-            markingCriteria: {
-              breakdown: ['Correct answer 1/13 (1 mark)']
-            },
-            specReference: 'M5.6',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm5-q7',
-            question: 'Two dice are rolled. What is the probability that the sum is 7?',
-            marks: 3,
+            question: 'A factory produces bolts. 95% are good quality and 5% are defective. A quality control inspector tests bolts until finding 2 defective ones. What is the probability that exactly 20 bolts need to be tested?',
+            marks: 5,
             difficulty: 'hard',
-            modelAnswer: 'Ways to get sum 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) = 6 ways. Total outcomes = 36. Probability = 6/36 = 1/6',
+            modelAnswer: 'This follows negative binomial distribution. P(20th bolt is 2nd defective) = C(19,1) × (0.05)² × (0.95)¹⁸ = 19 × 0.0025 × 0.3972 = 0.0188',
             markingCriteria: {
-              breakdown: ['Identifying all ways to get sum 7 (1 mark)', 'Finding total outcomes 36 (1 mark)', 'Correct probability 1/6 (1 mark)']
+              breakdown: ['Recognize negative binomial pattern (1 mark)', 'Identify: need C(19,1) ways for 1st defective in first 19 (1 mark)', 'Calculate C(19,1) = 19 (1 mark)', 'Calculate (0.05)² × (0.95)¹⁸ (1 mark)', 'Final answer: 0.0188 (1 mark)']
             },
-            specReference: 'M5.7',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm5-q8',
-            question: 'A fair coin is flipped 3 times. What is the probability of getting exactly 2 heads?',
-            marks: 3,
-            difficulty: 'hard',
-            modelAnswer: 'All outcomes: HHH, HHT, HTH, HTT, THH, THT, TTH, TTT. Exactly 2 heads: HHT, HTH, THH. Probability = 3/8',
-            markingCriteria: {
-              breakdown: ['Listing all 8 outcomes (1 mark)', 'Identifying outcomes with exactly 2 heads (1 mark)', 'Correct probability 3/8 (1 mark)']
-            },
-            specReference: 'M5.8',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm5-q9',
-            question: 'In a class of 30 students, 18 like math and 12 like science. If these are the only two subjects, what is the probability a randomly selected student likes math?',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: 'Probability = 18/30 = 3/5',
-            markingCriteria: {
-              breakdown: ['Correct answer 3/5 (1 mark)']
-            },
-            specReference: 'M5.9',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm5-q10',
-            question: 'A box contains 4 red, 6 blue, and 2 green marbles. Two marbles are drawn without replacement. What is the probability both are red?',
-            marks: 3,
-            difficulty: 'hard',
-            modelAnswer: 'Total marbles = 12. P(first red) = 4/12. P(second red | first red) = 3/11. P(both red) = (4/12) × (3/11) = 12/132 = 1/11',
-            markingCriteria: {
-              breakdown: ['Finding probability of first red marble (1 mark)', 'Finding conditional probability of second red (1 mark)', 'Correct final answer 1/11 (1 mark)']
-            },
-            specReference: 'M5.10',
-            calculatorGuidance: 'non-calc-friendly'
+            specReference: '4.1.3b - Negative binomial',
+            calculatorGuidance: 'calc-recommended'
           }
         ]
       },
@@ -2087,123 +1787,63 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'm6-q1',
-            question: 'Find the mean of the following numbers: 3, 7, 2, 8, 5',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Mean = (3 + 7 + 2 + 8 + 5) ÷ 5 = 25 ÷ 5 = 5',
+            question: 'The times (in minutes) for 50 students to complete a test are summarized: 10-15 (8 students), 15-20 (12 students), 20-25 (18 students), 25-30 (8 students), 30-35 (4 students). Calculate an estimate for the mean time.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Midpoints: 12.5, 17.5, 22.5, 27.5, 32.5. Sum = 12.5×8 + 17.5×12 + 22.5×18 + 27.5×8 + 32.5×4 = 1050. Mean = 1050 ÷ 50 = 21 minutes',
             markingCriteria: {
-              breakdown: ['Correct sum of numbers (1 mark)', 'Correct mean calculation = 5 (1 mark)']
+              breakdown: ['Find midpoints of each class (1 mark)', 'Multiply midpoints by frequencies (1 mark)', 'Sum all products: 1050 (1 mark)', 'Divide by total frequency: 21 minutes (1 mark)']
             },
-            specReference: 'M6.1',
-            calculatorGuidance: 'non-calc-friendly'
+            specReference: '4.2.1b - Mean from grouped data',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm6-q2',
-            question: 'Find the median of: 12, 8, 15, 3, 9, 7, 11',
-            marks: 2,
+            question: 'A survey of 100 people found the following about pets: 60 have a dog, 45 have a cat, 25 have both a dog and a cat. Draw a Venn diagram and find the probability that a randomly selected person has exactly one type of pet.',
+            marks: 5,
             difficulty: 'medium',
-            modelAnswer: 'Arranged in order: 3, 7, 8, 9, 11, 12, 15. Median = 9 (middle value)',
+            modelAnswer: 'Only dog: 60 - 25 = 35. Only cat: 45 - 25 = 20. Both: 25. Neither: 100 - 35 - 20 - 25 = 20. P(exactly one) = (35 + 20)/100 = 55/100 = 0.55',
             markingCriteria: {
-              breakdown: ['Arranging in order (1 mark)', 'Correct median = 9 (1 mark)']
+              breakdown: ['Calculate only dog: 35 (1 mark)', 'Calculate only cat: 20 (1 mark)', 'Calculate neither: 20 (1 mark)', 'Draw correct Venn diagram (1 mark)', 'P(exactly one) = 0.55 (1 mark)']
             },
-            specReference: 'M6.2',
+            specReference: '4.2.2a - Venn diagrams',
             calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm6-q3',
-            question: 'Find the mode of: 2, 3, 2, 5, 7, 2, 8, 3',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: 'Mode = 2 (appears 3 times, most frequent)',
+            question: 'The table shows the number of goals scored by a football team in 20 matches: Goals: 0(3), 1(7), 2(6), 3(3), 4(1). Calculate the standard deviation.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Mean = (0×3 + 1×7 + 2×6 + 3×3 + 4×1) ÷ 20 = 32 ÷ 20 = 1.6. Variance = Σfx² ÷ n - mean² = 66/20 - 1.6² = 3.3 - 2.56 = 0.74. Standard deviation = √0.74 = 0.86',
             markingCriteria: {
-              breakdown: ['Correct mode = 2 (1 mark)']
+              breakdown: ['Calculate mean = 1.6 (1 mark)', 'Calculate Σfx² = 66 (1 mark)', 'Calculate variance = 0.74 (1 mark)', 'Calculate standard deviation = √0.74 (1 mark)', 'Final answer: 0.86 (1 mark)']
             },
-            specReference: 'M6.3',
-            calculatorGuidance: 'non-calc-friendly'
+            specReference: '4.2.1c - Standard deviation',
+            calculatorGuidance: 'calc-recommended'
           },
           {
             id: 'm6-q4',
-            question: 'Find the range of: 15, 8, 23, 4, 19, 12',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: 'Range = highest - lowest = 23 - 4 = 19',
+            question: 'The cumulative frequency graph shows the distribution of heights (in cm) of 80 students. The quartiles are: Q₁ = 158 cm, Q₂ = 165 cm, Q₃ = 172 cm. Calculate the interquartile range and explain what this tells us about the data.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'IQR = Q₃ - Q₁ = 172 - 158 = 14 cm. This tells us that the middle 50% of students have heights spanning a range of 14 cm, indicating moderate spread in the central portion of the data.',
             markingCriteria: {
-              breakdown: ['Correct range = 19 (1 mark)']
+              breakdown: ['Calculate IQR = 14 cm (1 mark)', 'Explain IQR represents middle 50% (1 mark)', 'Reference to spread/variability (1 mark)', 'Appropriate interpretation for this context (1 mark)']
             },
-            specReference: 'M6.4',
+            specReference: '4.2.1d - Quartiles and interquartile range',
             calculatorGuidance: 'non-calc-friendly'
           },
           {
             id: 'm6-q5',
-            question: 'A survey of 20 students found their favorite colors: Red(5), Blue(8), Green(4), Yellow(3). What is the most popular color and what percentage of students chose it?',
-            marks: 3,
+            question: 'A scatter graph shows the relationship between hours of study per week (x) and test scores (y). The correlation coefficient is r = 0.85. The regression line is y = 3.2x + 42. Predict the test score for a student who studies 15 hours per week and comment on the reliability.',
+            marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'Most popular color is Blue with 8 students. Percentage = (8/20) × 100% = 40%',
+            modelAnswer: 'Predicted score = 3.2 × 15 + 42 = 48 + 42 = 90. The correlation coefficient r = 0.85 shows strong positive correlation, so this prediction is quite reliable, though individual variation may still occur.',
             markingCriteria: {
-              breakdown: ['Identifying Blue as most popular (1 mark)', 'Correct calculation of percentage (1 mark)', 'Final answer 40% (1 mark)']
+              breakdown: ['Substitute into regression equation (1 mark)', 'Calculate predicted score = 90 (1 mark)', 'Reference to strong correlation (r = 0.85) (1 mark)', 'Comment on reliability with appropriate qualification (1 mark)']
             },
-            specReference: 'M6.5',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm6-q6',
-            question: 'Calculate the mean from this frequency table: Score: 1(3), 2(5), 3(2), 4(1)',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Total = (1×3) + (2×5) + (3×2) + (4×1) = 3 + 10 + 6 + 4 = 23. Mean = 23 ÷ 11 = 2.09',
-            markingCriteria: {
-              breakdown: ['Correct calculation of total (1 mark)', 'Finding total frequency (1 mark)', 'Correct mean (1 mark)']
-            },
-            specReference: 'M6.6',
+            specReference: '4.2.2c - Correlation and regression',
             calculatorGuidance: 'calc-recommended'
-          },
-          {
-            id: 'm6-q7',
-            question: 'Given data for a pie chart: A(60°), B(120°), C(90°), D(90°). Which category represents the largest proportion and what percentage of the total does it represent?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Category B represents the largest proportion with 120°. Percentage = (120°/360°) × 100% = 33.3%',
-            markingCriteria: {
-              breakdown: ['Identifying B as largest category (1 mark)', 'Correct percentage calculation 33.3% (1 mark)']
-            },
-            specReference: 'M6.7',
-            calculatorGuidance: 'calc-recommended'
-          },
-          {
-            id: 'm6-q8',
-            question: 'Find the median from grouped data: 0-9(4), 10-19(7), 20-29(5), 30-39(2)',
-            marks: 3,
-            difficulty: 'hard',
-            modelAnswer: 'Total frequency = 18. Median position = 9th and 10th values. Both in 10-19 group. Median ≈ 14.5',
-            markingCriteria: {
-              breakdown: ['Finding median position (1 mark)', 'Identifying correct group (1 mark)', 'Reasonable estimate (1 mark)']
-            },
-            specReference: 'M6.8',
-            calculatorGuidance: 'calc-recommended'
-          },
-          {
-            id: 'm6-q9',
-            question: 'Calculate the interquartile range for: 2, 5, 7, 9, 12, 15, 18, 20, 25',
-            marks: 3,
-            difficulty: 'hard',
-            modelAnswer: 'Q1 = 6 (median of lower half), Q3 = 19 (median of upper half). IQR = Q3 - Q1 = 19 - 6 = 13',
-            markingCriteria: {
-              breakdown: ['Finding Q1 correctly (1 mark)', 'Finding Q3 correctly (1 mark)', 'Correct IQR = 13 (1 mark)']
-            },
-            specReference: 'M6.9',
-            calculatorGuidance: 'non-calc-friendly'
-          },
-          {
-            id: 'm6-q10',
-            question: 'Interpret this scatter diagram: Does it show positive, negative, or no correlation between hours studied and test scores?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Positive correlation - as hours studied increases, test scores tend to increase',
-            markingCriteria: {
-              breakdown: ['Identifying positive correlation (1 mark)', 'Correct interpretation (1 mark)']
-            },
-            specReference: 'M6.10',
-            calculatorGuidance: 'non-calc-friendly'
           }
         ]
       }
