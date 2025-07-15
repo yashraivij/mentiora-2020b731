@@ -91,6 +91,11 @@ const SubjectTopics = () => {
     return ['Year 10', 'Year 11'];
   };
 
+  const getGeographyTopicYear = (topicName: string) => {
+    // All geography topics are Year 10 only
+    return 'Year 10';
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -165,6 +170,7 @@ const SubjectTopics = () => {
             const needsWork = progress.attempts > 0 && progress.averageScore < 60;
             const topicYear = subjectId === 'physics' ? getPhysicsTopicYear(topic.name) : null;
             const mathsYears = subjectId === 'maths' ? getMathsTopicYears(topic.name) : null;
+            const geographyYear = subjectId === 'geography' ? getGeographyTopicYear(topic.name) : null;
 
             return (
               <Card key={topic.id} className="hover:shadow-lg transition-shadow">
@@ -196,6 +202,13 @@ const SubjectTopics = () => {
                              {year}
                            </Badge>
                          ))}
+                         {geographyYear && (
+                           <Badge 
+                             className="text-xs bg-blue-500 text-white hover:bg-blue-600"
+                           >
+                             {geographyYear}
+                           </Badge>
+                         )}
                        </div>
                     </div>
                     <div className="flex flex-col items-end space-y-1">
