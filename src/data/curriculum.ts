@@ -1514,6 +1514,66 @@ export const curriculum: Subject[] = [
             },
             specReference: '1.1.2c - Index laws',
             calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'm1-q6',
+            question: 'The length of a rectangle is measured as 8.7 cm to the nearest 0.1 cm. The width is measured as 5.2 cm to the nearest 0.1 cm. Calculate the maximum possible area of the rectangle.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Maximum length = 8.75 cm, Maximum width = 5.25 cm. Maximum area = 8.75 × 5.25 = 45.9375 cm²',
+            markingCriteria: {
+              breakdown: ['Maximum length = 8.75 cm (1 mark)', 'Maximum width = 5.25 cm (1 mark)', 'Multiply for maximum area (1 mark)', 'Correct calculation: 45.9375 cm² (1 mark)']
+            },
+            specReference: '1.1.1f - Upper and lower bounds',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm1-q7',
+            question: 'Work out the HCF and LCM of 84 and 126. Show your working using prime factorization.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: '84 = 2² × 3 × 7, 126 = 2 × 3² × 7. HCF = 2 × 3 × 7 = 42. LCM = 2² × 3² × 7 = 252',
+            markingCriteria: {
+              breakdown: ['Prime factorization of 84 (1 mark)', 'Prime factorization of 126 (1 mark)', 'HCF = 42 using common factors (1 mark)', 'LCM = 252 using all factors (1 mark)', 'Clear working shown (1 mark)']
+            },
+            specReference: '1.1.1d - HCF and LCM',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'm1-q8',
+            question: 'Calculate (3⁻² × 3⁴) ÷ (3⁻¹ × 3³). Give your answer as a fraction.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '(3⁻² × 3⁴) ÷ (3⁻¹ × 3³) = 3⁻²⁺⁴ ÷ 3⁻¹⁺³ = 3² ÷ 3² = 3⁰ = 1',
+            markingCriteria: {
+              breakdown: ['Simplify numerator: 3² (1 mark)', 'Simplify denominator: 3² (1 mark)', 'Final answer: 1 (1 mark)']
+            },
+            specReference: '1.1.2c - Index laws',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'm1-q9',
+            question: 'The population of a city increases by 2.5% each year. If the population is 450,000 after 3 years of growth, calculate the original population.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'After 3 years, population = original × (1.025)³. So 450,000 = original × 1.0769. Original population = 450,000 ÷ 1.0769 = 417,832',
+            markingCriteria: {
+              breakdown: ['Set up equation with growth factor 1.025 (1 mark)', 'Recognize (1.025)³ = 1.0769 (1 mark)', 'Rearrange: original = 450,000 ÷ 1.0769 (1 mark)', 'Correct answer: 417,832 (1 mark)']
+            },
+            specReference: '1.2.2b - Compound percentage change',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm1-q10',
+            question: 'Three numbers are in the ratio 2:5:8. The sum of the smallest and largest numbers is 60. Find all three numbers.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Let the numbers be 2x, 5x, and 8x. Then 2x + 8x = 60, so 10x = 60, x = 6. The numbers are 12, 30, and 48.',
+            markingCriteria: {
+              breakdown: ['Express numbers as 2x, 5x, 8x (1 mark)', 'Set up equation: 2x + 8x = 60 (1 mark)', 'Solve: x = 6 (1 mark)', 'Find all numbers: 12, 30, 48 (1 mark)']
+            },
+            specReference: '1.2.1a - Ratio problems',
+            calculatorGuidance: 'non-calc-friendly'
           }
         ]
       },
@@ -1579,6 +1639,66 @@ export const curriculum: Subject[] = [
               breakdown: ['First term = 2 (1 mark)', 'Second and third terms = 9, 22 (1 mark)', 'Substitute n = 10 correctly (1 mark)', '10th term = 281 (1 mark)']
             },
             specReference: '2.1.1f - Sequences',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm2-q6',
+            question: 'Solve the quadratic equation 2x² + 7x - 4 = 0 using the quadratic formula.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'x = (-7 ± √(49 + 32))/4 = (-7 ± √81)/4 = (-7 ± 9)/4. So x = 1/2 or x = -4',
+            markingCriteria: {
+              breakdown: ['Substitute into formula: x = (-7 ± √(7² - 4×2×(-4)))/4 (1 mark)', 'Calculate discriminant: 49 + 32 = 81 (1 mark)', 'Find √81 = 9 (1 mark)', 'Both solutions: x = 1/2 and x = -4 (1 mark)']
+            },
+            specReference: '2.1.2c - Quadratic formula',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm2-q7',
+            question: 'Solve the simultaneous equations: 2x + 3y = 11 and 5x - 2y = 4 using elimination.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Multiply first by 2 and second by 3: 4x + 6y = 22 and 15x - 6y = 12. Add: 19x = 34, so x = 34/19. Substitute: y = 9/19',
+            markingCriteria: {
+              breakdown: ['Eliminate y by multiplying equations appropriately (1 mark)', 'Add equations to get 19x = 34 (1 mark)', 'Solve for x = 34/19 (1 mark)', 'Find y = 9/19 by substitution (1 mark)']
+            },
+            specReference: '2.1.2b - Elimination method',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm2-q8',
+            question: 'Factorize completely: 3x³ - 12x² + 12x',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '3x³ - 12x² + 12x = 3x(x² - 4x + 4) = 3x(x - 2)²',
+            markingCriteria: {
+              breakdown: ['Take out common factor 3x (1 mark)', 'Factorize x² - 4x + 4 (1 mark)', 'Final answer 3x(x - 2)² (1 mark)']
+            },
+            specReference: '2.1.1c - Factorizing',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'm2-q9',
+            question: 'Solve the inequality 3(2x - 1) < 2x + 11 and represent your answer on a number line.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '6x - 3 < 2x + 11, so 4x < 14, therefore x < 3.5. Number line shows open circle at 3.5 with arrow pointing left.',
+            markingCriteria: {
+              breakdown: ['Expand: 6x - 3 < 2x + 11 (1 mark)', 'Solve: x < 3.5 (1 mark)', 'Correct representation on number line (1 mark)']
+            },
+            specReference: '2.1.2d - Linear inequalities',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'm2-q10',
+            question: 'Given that f(x) = x² - 4x + 1, find f(3) and solve f(x) = 0.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'f(3) = 9 - 12 + 1 = -2. For f(x) = 0: x² - 4x + 1 = 0. Using quadratic formula: x = (4 ± √12)/2 = 2 ± √3',
+            markingCriteria: {
+              breakdown: ['Calculate f(3) = -2 (1 mark)', 'Set up equation x² - 4x + 1 = 0 (1 mark)', 'Use quadratic formula (1 mark)', 'Calculate discriminant: 16 - 4 = 12 (1 mark)', 'Final answer: x = 2 ± √3 (1 mark)']
+            },
+            specReference: '2.1.2c - Functions and quadratic equations',
             calculatorGuidance: 'calc-recommended'
           }
         ]
@@ -1646,6 +1766,66 @@ export const curriculum: Subject[] = [
             },
             specReference: '1.2.2b - Exponential functions',
             calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm3-q6',
+            question: 'A machine produces 240 items per hour. If the machine runs for 7.5 hours, how many items are produced? If 15 items are defective, what percentage are good quality?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Total items = 240 × 7.5 = 1800 items. Good items = 1800 - 15 = 1785. Percentage good = (1785/1800) × 100% = 99.17%',
+            markingCriteria: {
+              breakdown: ['Calculate total items: 1800 (1 mark)', 'Calculate good items: 1785 (1 mark)', 'Set up percentage calculation (1 mark)', 'Final answer: 99.17% (1 mark)']
+            },
+            specReference: '1.2.3a - Rate calculations',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm3-q7',
+            question: 'The cost of fuel increases from £1.20 per litre to £1.38 per litre. Calculate the percentage increase.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Increase = £1.38 - £1.20 = £0.18. Percentage increase = (0.18/1.20) × 100% = 15%',
+            markingCriteria: {
+              breakdown: ['Calculate increase: £0.18 (1 mark)', 'Set up percentage formula (1 mark)', 'Final answer: 15% (1 mark)']
+            },
+            specReference: '1.2.2a - Percentage change',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm3-q8',
+            question: 'Three quantities A, B, and C are in the ratio 3:4:5. If A + C = 96, find the values of A, B, and C.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Let A = 3x, B = 4x, C = 5x. Then 3x + 5x = 96, so 8x = 96, x = 12. Therefore A = 36, B = 48, C = 60.',
+            markingCriteria: {
+              breakdown: ['Express in terms of x: A = 3x, B = 4x, C = 5x (1 mark)', 'Set up equation: 3x + 5x = 96 (1 mark)', 'Solve: x = 12 (1 mark)', 'Find all values: A = 36, B = 48, C = 60 (1 mark)']
+            },
+            specReference: '1.2.1a - Ratio problems',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'm3-q9',
+            question: 'y varies directly as the square of x. When x = 4, y = 48. Find the value of y when x = 6.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'y = kx² where k is constant. When x = 4, y = 48: 48 = k × 16, so k = 3. When x = 6: y = 3 × 36 = 108',
+            markingCriteria: {
+              breakdown: ['Write y = kx² (1 mark)', 'Find k = 3 using given values (1 mark)', 'Calculate y = 108 when x = 6 (1 mark)']
+            },
+            specReference: '1.2.1b - Direct proportion',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm3-q10',
+            question: 'A recipe for 8 people uses 450g of flour. How much flour is needed for 12 people? If flour costs £1.20 per kg, what is the cost of flour for 12 people?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'For 12 people: (450 × 12) ÷ 8 = 675g = 0.675kg. Cost = 0.675 × £1.20 = £0.81',
+            markingCriteria: {
+              breakdown: ['Calculate flour for 12 people: 675g (1 mark)', 'Convert to kg: 0.675kg (1 mark)', 'Calculate cost (1 mark)', 'Final answer: £0.81 (1 mark)']
+            },
+            specReference: '1.2.1a - Proportion and unit costs',
+            calculatorGuidance: 'calc-recommended'
           }
         ]
       },
@@ -1712,6 +1892,66 @@ export const curriculum: Subject[] = [
             },
             specReference: '3.2.2a - Translations',
             calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'm4-q6',
+            question: 'Calculate the volume of a cylinder with radius 4 cm and height 10 cm. Use π = 3.14.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Volume = πr²h = 3.14 × 4² × 10 = 3.14 × 16 × 10 = 502.4 cm³',
+            markingCriteria: {
+              breakdown: ['Use formula V = πr²h (1 mark)', 'Substitute values correctly (1 mark)', 'Calculate: 502.4 cm³ (1 mark)']
+            },
+            specReference: '3.1.4a - Volume of cylinders',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm4-q7',
+            question: 'In a right-angled triangle, the hypotenuse is 13 cm and one side is 5 cm. Calculate the length of the third side.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Using Pythagoras: a² + b² = c². So 5² + b² = 13², 25 + b² = 169, b² = 144, b = 12 cm',
+            markingCriteria: {
+              breakdown: ['Apply Pythagoras theorem correctly (1 mark)', 'Set up: 25 + b² = 169 (1 mark)', 'Solve: b = 12 cm (1 mark)']
+            },
+            specReference: '3.1.1c - Pythagoras theorem',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm4-q8',
+            question: 'A regular hexagon has side length 6 cm. Calculate the perimeter and the area of one triangular section when divided from the center.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Perimeter = 6 × 6 = 36 cm. Each triangle has base 6 cm and height = 6 × sin(60°) = 6 × (√3/2) = 3√3 cm. Area of one triangle = ½ × 6 × 3√3 = 9√3 cm²',
+            markingCriteria: {
+              breakdown: ['Calculate perimeter: 36 cm (1 mark)', 'Find height of triangle: 3√3 cm (1 mark)', 'Use triangle area formula (1 mark)', 'Calculate area: 9√3 cm² (1 mark)']
+            },
+            specReference: '3.1.2a - Regular polygons',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm4-q9',
+            question: 'Triangle PQR is rotated 90° clockwise about the origin. If P is at (2, 5), what are the coordinates of P\' after the rotation?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'For 90° clockwise rotation about origin: (x, y) → (y, -x). So P(2, 5) → P\'(5, -2)',
+            markingCriteria: {
+              breakdown: ['Apply rotation rule: (x, y) → (y, -x) (1 mark)', 'Correct coordinates P\'(5, -2) (1 mark)']
+            },
+            specReference: '3.2.2c - Rotations',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'm4-q10',
+            question: 'A trapezium has parallel sides of lengths 8 cm and 12 cm, with a perpendicular height of 6 cm. Calculate its area. If this trapezium is the cross-section of a prism with length 15 cm, find the volume.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Area of trapezium = ½(a + b)h = ½(8 + 12) × 6 = ½ × 20 × 6 = 60 cm². Volume = area × length = 60 × 15 = 900 cm³',
+            markingCriteria: {
+              breakdown: ['Use trapezium area formula (1 mark)', 'Calculate area: 60 cm² (1 mark)', 'Apply volume formula (1 mark)', 'Calculate volume: 900 cm³ (1 mark)']
+            },
+            specReference: '3.1.1b - Area of trapezium and prism volume',
+            calculatorGuidance: 'calc-recommended'
           }
         ]
       },
@@ -1778,6 +2018,66 @@ export const curriculum: Subject[] = [
             },
             specReference: '4.1.3b - Negative binomial',
             calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm5-q6',
+            question: 'A fair six-sided die is rolled twice. Calculate the probability that the sum of the two rolls is 8.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Possible ways to get sum 8: (2,6), (3,5), (4,4), (5,3), (6,2) = 5 ways. Total outcomes = 36. Probability = 5/36',
+            markingCriteria: {
+              breakdown: ['Identify all ways to get sum 8: 5 ways (1 mark)', 'Total possible outcomes: 36 (1 mark)', 'Probability = 5/36 (1 mark)']
+            },
+            specReference: '4.1.1a - Probability of combined events',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'm5-q7',
+            question: 'Box A contains 3 red and 2 blue balls. Box B contains 1 red and 4 blue balls. A box is chosen at random and then a ball is drawn. Calculate the probability of drawing a red ball.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'P(red) = P(Box A) × P(red|Box A) + P(Box B) × P(red|Box B) = (1/2) × (3/5) + (1/2) × (1/5) = 3/10 + 1/10 = 4/10 = 2/5',
+            markingCriteria: {
+              breakdown: ['P(red|Box A) = 3/5 and P(red|Box B) = 1/5 (1 mark)', 'Use law of total probability (1 mark)', 'Calculate each branch correctly (1 mark)', 'Final answer: 2/5 (1 mark)']
+            },
+            specReference: '4.1.2c - Law of total probability',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'm5-q8',
+            question: 'In a game, the probability of winning is 0.4. If the game is played 6 times, calculate the probability of winning exactly 3 games.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Using binomial: P(X = 3) = C(6,3) × (0.4)³ × (0.6)³ = 20 × 0.064 × 0.216 = 0.2765',
+            markingCriteria: {
+              breakdown: ['Recognize binomial distribution (1 mark)', 'Calculate C(6,3) = 20 (1 mark)', 'Calculate (0.4)³ × (0.6)³ (1 mark)', 'Final answer: 0.2765 (1 mark)']
+            },
+            specReference: '4.1.3a - Binomial probability',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm5-q9',
+            question: 'A bag contains counters numbered 1 to 10. Three counters are drawn without replacement. What is the probability that all three numbers are even?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Even numbers: 2, 4, 6, 8, 10 (5 even, 5 odd). P(all even) = (5/10) × (4/9) × (3/8) = 60/720 = 1/12',
+            markingCriteria: {
+              breakdown: ['Identify 5 even numbers out of 10 (1 mark)', 'P(first even) = 5/10 (1 mark)', 'P(second even|first even) = 4/9, P(third even|first two even) = 3/8 (1 mark)', 'Final answer: 1/12 (1 mark)']
+            },
+            specReference: '4.1.2b - Conditional probability without replacement',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'm5-q10',
+            question: 'Events A and B are independent. P(A) = 0.6 and P(B) = 0.4. Calculate P(A ∩ B), P(A ∪ B), and P(A\' ∩ B\').',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'P(A ∩ B) = P(A) × P(B) = 0.6 × 0.4 = 0.24. P(A ∪ B) = P(A) + P(B) - P(A ∩ B) = 0.6 + 0.4 - 0.24 = 0.76. P(A\') = 0.4, P(B\') = 0.6, so P(A\' ∩ B\') = 0.4 × 0.6 = 0.24',
+            markingCriteria: {
+              breakdown: ['Calculate P(A ∩ B) = 0.24 using independence (1 mark)', 'Use addition rule for P(A ∪ B) = 0.76 (1 mark)', 'Find P(A\') = 0.4 and P(B\') = 0.6 (1 mark)', 'Calculate P(A\' ∩ B\') = 0.24 (1 mark)', 'Show all working clearly (1 mark)']
+            },
+            specReference: '4.1.1c - Independent events and set operations',
+            calculatorGuidance: 'calc-recommended'
           }
         ]
       },
@@ -1843,6 +2143,66 @@ export const curriculum: Subject[] = [
               breakdown: ['Substitute into regression equation (1 mark)', 'Calculate predicted score = 90 (1 mark)', 'Reference to strong correlation (r = 0.85) (1 mark)', 'Comment on reliability with appropriate qualification (1 mark)']
             },
             specReference: '4.2.2c - Correlation and regression',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm6-q6',
+            question: 'The heights of 20 students (in cm) are: 158, 162, 165, 167, 159, 168, 170, 163, 166, 164, 169, 161, 160, 171, 167, 165, 168, 162, 166, 164. Find the median and interquartile range.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Ordered data: 158, 159, 160, 161, 162, 162, 163, 164, 164, 165, 165, 166, 166, 167, 167, 168, 168, 169, 170, 171. Median = (165 + 165)/2 = 165 cm. Q1 = 162.5 cm, Q3 = 167.5 cm. IQR = 167.5 - 162.5 = 5 cm',
+            markingCriteria: {
+              breakdown: ['Order data correctly (1 mark)', 'Find median = 165 cm (1 mark)', 'Find Q1 and Q3 correctly (1 mark)', 'Calculate IQR = 5 cm (1 mark)']
+            },
+            specReference: '4.2.1d - Median and quartiles',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'm6-q7',
+            question: 'A histogram shows the distribution of weights (kg) of 100 people. The class 60-65 has frequency density 4.2 and the class 65-70 has frequency density 6.8. Calculate the frequencies for these two classes.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Class width = 5 kg for both classes. Frequency = frequency density × class width. For 60-65: frequency = 4.2 × 5 = 21. For 65-70: frequency = 6.8 × 5 = 34',
+            markingCriteria: {
+              breakdown: ['Identify class width = 5 (1 mark)', 'Use formula: frequency = frequency density × class width (1 mark)', 'Calculate both frequencies: 21 and 34 (1 mark)']
+            },
+            specReference: '4.2.1a - Histograms',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm6-q8',
+            question: 'A cumulative frequency graph shows that the median speed of cars is 52 mph and the upper quartile is 58 mph. If 80 cars were observed, estimate how many cars were traveling faster than 55 mph.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'At 55 mph (between median and upper quartile), estimate about 70% of cars are below this speed. So about 30% are above 55 mph. Number of cars = 30% of 80 = 24 cars',
+            markingCriteria: {
+              breakdown: ['Estimate position of 55 mph on cumulative frequency curve (1 mark)', 'Estimate 70% of cars below 55 mph (1 mark)', 'Calculate 30% of 80 = 24 cars (1 mark)']
+            },
+            specReference: '4.2.1c - Cumulative frequency',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm6-q9',
+            question: 'Two dice are rolled 120 times. The expected frequency for getting a sum of 7 is 20. The observed frequency is 27. Calculate the chi-squared statistic for this outcome.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'χ² = Σ[(Observed - Expected)²/Expected] = (27 - 20)²/20 = 49/20 = 2.45',
+            markingCriteria: {
+              breakdown: ['Use chi-squared formula (1 mark)', 'Calculate (27 - 20)² = 49 (1 mark)', 'Final answer: χ² = 2.45 (1 mark)']
+            },
+            specReference: '4.2.3a - Chi-squared test',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'm6-q10',
+            question: 'A box plot shows the following information for test scores: Minimum = 32, Q1 = 48, Median = 62, Q3 = 74, Maximum = 88. Identify any outliers using the 1.5 × IQR rule and describe the skewness of the distribution.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'IQR = 74 - 48 = 26. Lower fence = 48 - 1.5×26 = 9, Upper fence = 74 + 1.5×26 = 113. No outliers (all values between 9 and 113). Distribution is negatively skewed as median (62) is closer to Q3 (74) than to Q1 (48).',
+            markingCriteria: {
+              breakdown: ['Calculate IQR = 26 (1 mark)', 'Calculate fences: 9 and 113 (1 mark)', 'Identify no outliers (1 mark)', 'Describe negative skew correctly (1 mark)']
+            },
+            specReference: '4.2.1e - Box plots and distribution shape',
             calculatorGuidance: 'calc-recommended'
           }
         ]
