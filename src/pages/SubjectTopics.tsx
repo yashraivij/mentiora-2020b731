@@ -82,6 +82,15 @@ const SubjectTopics = () => {
     return null;
   };
 
+  const getMathsTopicYears = (topicName: string) => {
+    // Number is only Year 10
+    if (topicName.toLowerCase().includes('number')) {
+      return ['Year 10'];
+    }
+    // All other maths topics are both Year 10 and Year 11
+    return ['Year 10', 'Year 11'];
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -155,26 +164,39 @@ const SubjectTopics = () => {
             const isMastered = progress.averageScore >= 85;
             const needsWork = progress.attempts > 0 && progress.averageScore < 60;
             const topicYear = subjectId === 'physics' ? getPhysicsTopicYear(topic.name) : null;
+            const mathsYears = subjectId === 'maths' ? getMathsTopicYears(topic.name) : null;
 
             return (
               <Card key={topic.id} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <CardTitle className="text-lg leading-tight">{topic.name}</CardTitle>
-                        {topicYear && (
-                          <Badge 
-                            className={`text-xs ${
-                              topicYear === 'Year 10' 
-                                ? 'bg-blue-500 text-white hover:bg-blue-600' 
-                                : 'bg-purple-500 text-white hover:bg-purple-600'
-                            }`}
-                          >
-                            {topicYear}
-                          </Badge>
-                        )}
-                      </div>
+                       <div className="flex items-center gap-2 mb-1">
+                         <CardTitle className="text-lg leading-tight">{topic.name}</CardTitle>
+                         {topicYear && (
+                           <Badge 
+                             className={`text-xs ${
+                               topicYear === 'Year 10' 
+                                 ? 'bg-blue-500 text-white hover:bg-blue-600' 
+                                 : 'bg-purple-500 text-white hover:bg-purple-600'
+                             }`}
+                           >
+                             {topicYear}
+                           </Badge>
+                         )}
+                         {mathsYears && mathsYears.map((year, index) => (
+                           <Badge 
+                             key={index}
+                             className={`text-xs ${
+                               year === 'Year 10' 
+                                 ? 'bg-blue-500 text-white hover:bg-blue-600' 
+                                 : 'bg-purple-500 text-white hover:bg-purple-600'
+                             }`}
+                           >
+                             {year}
+                           </Badge>
+                         ))}
+                       </div>
                     </div>
                     <div className="flex flex-col items-end space-y-1">
                       {isNew && (
