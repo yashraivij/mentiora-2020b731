@@ -2604,6 +2604,232 @@ export const curriculum: Subject[] = [
             specReference: '3.2.3 - Resource focus areas'
           }
         ]
+      },
+      {
+        id: 'geography-paper-2',
+        name: 'Geography Paper 2 - Urban Issues and Challenges, The Changing Economic World, Resource Management',
+        questions: [
+          {
+            id: 'gp2-q1',
+            question: 'Describe the global pattern of urbanisation.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Urbanisation is highest in HICs (over 80% urban) and rising rapidly in LICs and NEEs. Most urbanisation growth is in Asia and Africa. Megacities are increasing, particularly in developing countries. Rural-urban migration is the main driver in LICs/NEEs.',
+            markingCriteria: {
+              breakdown: ['HICs have high urbanisation rates (1 mark)', 'Rapid growth in LICs/NEEs (1 mark)', 'Asia and Africa leading growth (1 mark)', 'Reference to megacities or migration (1 mark)']
+            },
+            specReference: '3.2.1.1 - Global urbanisation patterns'
+          },
+          {
+            id: 'gp2-q2',
+            question: 'Explain the push and pull factors that cause rural-urban migration.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Push factors: unemployment, crop failure, natural disasters, lack of services, mechanisation of farming. Pull factors: job opportunities, better education and healthcare, higher wages, improved living standards, family connections.',
+            markingCriteria: {
+              breakdown: ['Push factors - economic reasons (2 marks)', 'Push factors - social/environmental (1 mark)', 'Pull factors - economic opportunities (2 marks)', 'Pull factors - social improvements (1 mark)']
+            },
+            specReference: '3.2.1.1 - Push-pull migration factors'
+          },
+          {
+            id: 'gp2-q3',
+            question: 'Define the term "megacity" and explain the factors causing their growth.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'A megacity has over 10 million people. Growth caused by rural-urban migration, natural increase (high birth rates), economic opportunities, and agglomeration effects. Most growth is in LICs and NEEs where urbanisation is rapid.',
+            markingCriteria: {
+              breakdown: ['Definition: over 10 million people (1 mark)', 'Rural-urban migration (1 mark)', 'Natural increase factors (1 mark)', 'Economic opportunities/agglomeration (1 mark)']
+            },
+            specReference: '3.2.1.1 - Megacity growth'
+          },
+          {
+            id: 'gp2-q4',
+            question: 'Using a case study of a city in an LIC or NEE, explain the opportunities that urban growth creates.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Mumbai, India: Economic opportunities include jobs in manufacturing, services, and informal sector. Social opportunities include better access to education, healthcare, and clean water. Cultural opportunities through diversity and entertainment. Infrastructure development improves transport and communications.',
+            markingCriteria: {
+              breakdown: ['Named LIC/NEE city (1 mark)', 'Economic opportunities with examples (2 marks)', 'Social opportunities with examples (2 marks)', 'Infrastructure or cultural opportunities (1 mark)']
+            },
+            specReference: '3.2.1.1 - Urban opportunities in LICs/NEEs'
+          },
+          {
+            id: 'gp2-q5',
+            question: 'Using a case study of a city in an LIC or NEE, explain the challenges that urban growth creates.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Lagos, Nigeria: Housing challenges include slums like Makoko with poor quality housing and overcrowding. Infrastructure challenges include inadequate water supply, poor sanitation, and unreliable electricity. Transport problems with traffic congestion and limited public transport. Environmental issues include pollution and waste management problems. Social challenges include crime, unemployment, and inequality.',
+            markingCriteria: {
+              breakdown: ['Named LIC/NEE city (1 mark)', 'Housing challenges with examples (2 marks)', 'Infrastructure challenges (2 marks)', 'Environmental challenges (1 mark)', 'Social/economic challenges (2 marks)']
+            },
+            specReference: '3.2.1.1 - Urban challenges in LICs/NEEs'
+          },
+          {
+            id: 'gp2-q6',
+            question: 'Using a case study of a UK city, explain how urban change has created opportunities and challenges.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'London: Opportunities include regeneration projects like Olympic Park creating jobs and housing, cultural diversity, and financial services growth. Challenges include housing affordability, gentrification displacing communities, air pollution, and pressure on infrastructure. Income inequality has increased despite economic growth.',
+            markingCriteria: {
+              breakdown: ['Named UK city (1 mark)', 'Regeneration opportunities with examples (2 marks)', 'Economic opportunities (1 mark)', 'Housing challenges (2 marks)', 'Environmental or social challenges (2 marks)']
+            },
+            specReference: '3.2.1.1 - UK urban change'
+          },
+          {
+            id: 'gp2-q7',
+            question: 'Explain how cities can achieve sustainable urban living in terms of water and energy conservation.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Water conservation: rainwater harvesting, greywater recycling, efficient appliances, leak detection systems. Energy conservation: renewable energy sources, energy-efficient buildings, LED lighting, smart grids, public transport to reduce car use.',
+            markingCriteria: {
+              breakdown: ['Water conservation strategies (3 marks)', 'Energy conservation strategies (3 marks)']
+            },
+            specReference: '3.2.1.1 - Sustainable urban living'
+          },
+          {
+            id: 'gp2-q8',
+            question: 'Describe strategies for sustainable waste management and creating green space in cities.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Waste management: recycling schemes, composting, waste-to-energy plants, reducing single-use plastics. Green space: parks and gardens, green roofs and walls, urban forests, allotments for food production.',
+            markingCriteria: {
+              breakdown: ['Waste management strategies (2 marks)', 'Green space creation strategies (2 marks)']
+            },
+            specReference: '3.2.1.1 - Sustainable urban living'
+          },
+          {
+            id: 'gp2-q9',
+            question: 'Evaluate different urban transport strategies for reducing traffic congestion.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Public transport improvements reduce car use but require major investment. Congestion charging like London reduces traffic but may be unpopular. Park and ride schemes help but need good transport links. Cycling infrastructure promotes sustainable transport but needs cultural change. Integrated transport planning most effective.',
+            markingCriteria: {
+              breakdown: ['Public transport strategies (2 marks)', 'Road pricing/charging schemes (2 marks)', 'Alternative transport modes (1 mark)', 'Evaluation of effectiveness (1 mark)']
+            },
+            specReference: '3.2.1.1 - Urban transport strategies'
+          },
+          {
+            id: 'gp2-q10',
+            question: 'Compare different measures of development and explain why GDP alone is not sufficient.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'GDP measures total economic output but ignores income distribution and quality of life. HDI combines GDP with health (life expectancy) and education (literacy) for broader measure. Other indicators include infant mortality, access to clean water, and gender equality. No single measure captures all aspects of development.',
+            markingCriteria: {
+              breakdown: ['GDP definition and limitations (2 marks)', 'HDI components and advantages (2 marks)', 'Other development indicators (1 mark)', 'Conclusion about multiple measures needed (1 mark)']
+            },
+            specReference: '3.2.2.1 - Development measures'
+          },
+          {
+            id: 'gp2-q11',
+            question: 'Explain the Demographic Transition Model and how it links to uneven development.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'DTM shows population change through 5 stages. Stage 1: high birth and death rates. Stage 2: death rates fall, population grows rapidly. Stage 3: birth rates fall. Stage 4: low birth and death rates. Stage 5: birth rates below death rates. HICs are in stages 4-5, LICs in stages 2-3, creating different development challenges.',
+            markingCriteria: {
+              breakdown: ['DTM stages described (3 marks)', 'Link to development levels (2 marks)', 'Explanation of uneven development (1 mark)']
+            },
+            specReference: '3.2.2.1 - Demographic Transition Model'
+          },
+          {
+            id: 'gp2-q12',
+            question: 'Evaluate different strategies to reduce the development gap.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Aid can provide immediate relief but may create dependency. Trade and investment create jobs but profits may leave the country. Fair trade guarantees better prices for farmers but only helps small numbers. Tourism brings income but can damage environment and culture. Debt relief frees up resources but may not reach the poor. Successful development requires combination of strategies and good governance.',
+            markingCriteria: {
+              breakdown: ['Aid strategies and evaluation (2 marks)', 'Trade and investment analysis (2 marks)', 'Tourism or fair trade evaluation (2 marks)', 'Overall assessment and conclusion (2 marks)']
+            },
+            specReference: '3.2.2.1 - Reducing development gap'
+          },
+          {
+            id: 'gp2-q13',
+            question: 'Using a case study of rapid development in one LIC or NEE, explain the role of industry, aid, and improvements in quality of life.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'China: Industrial development through manufacturing exports created millions of jobs and foreign investment. Special Economic Zones attracted international companies. Aid was less important than trade and investment. Quality of life improved through higher incomes, better education, and healthcare. However, environmental pollution and inequality increased.',
+            markingCriteria: {
+              breakdown: ['Named LIC/NEE case study (1 mark)', 'Industrial development role (3 marks)', 'Aid contribution (1 mark)', 'Quality of life improvements (2 marks)', 'Recognition of problems/challenges (1 mark)']
+            },
+            specReference: '3.2.2.1 - LIC/NEE development case study'
+          },
+          {
+            id: 'gp2-q14',
+            question: 'Explain how the UK economy has changed from manufacturing to a post-industrial economy.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Deindustrialisation saw decline of manufacturing industries like steel, shipbuilding, and textiles due to global competition and mechanisation. Service sector growth includes finance, retail, education, and healthcare. Quaternary sector development includes research, ICT, and knowledge-based industries. Government policy promoted service sector growth.',
+            markingCriteria: {
+              breakdown: ['Deindustrialisation process and causes (2 marks)', 'Service sector growth examples (2 marks)', 'Quaternary sector development (1 mark)', 'Government role or impact (1 mark)']
+            },
+            specReference: '3.2.2.2 - UK economic change'
+          },
+          {
+            id: 'gp2-q15',
+            question: 'Describe the development of science parks and their impact on the UK economy.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Science parks locate near universities to access research and skilled graduates. They focus on high-tech industries like biotechnology, IT, and pharmaceuticals. Benefits include job creation, innovation, and export earnings. Examples include Cambridge Science Park and Edinburgh Technopole.',
+            markingCriteria: {
+              breakdown: ['Location and university links (1 mark)', 'High-tech industry focus (1 mark)', 'Economic benefits (1 mark)', 'Named example (1 mark)']
+            },
+            specReference: '3.2.2.2 - Science parks'
+          },
+          {
+            id: 'gp2-q16',
+            question: 'Explain improvements in UK transport infrastructure and their economic impact.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'High-speed rail like HS2 reduces journey times and improves connectivity. Motorway upgrades and smart motorways improve freight movement. Airport expansion increases international connections. These improvements attract business investment, reduce transport costs, and promote economic growth.',
+            markingCriteria: {
+              breakdown: ['Transport improvements described (2 marks)', 'Economic benefits explained (2 marks)']
+            },
+            specReference: '3.2.2.2 - UK transport developments'
+          },
+          {
+            id: 'gp2-q17',
+            question: 'Explain the North-South divide in the UK and strategies to reduce regional inequalities.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'North-South divide shows higher unemployment, lower wages, and fewer opportunities in northern regions. London and Southeast dominate economically. Government strategies include regional development agencies, enterprise zones, transport investment like Northern Powerhouse, and moving government departments to northern cities.',
+            markingCriteria: {
+              breakdown: ['Description of North-South divide (2 marks)', 'Evidence of inequalities (1 mark)', 'Government strategies to reduce inequalities (3 marks)']
+            },
+            specReference: '3.2.2.2 - Regional inequalities'
+          },
+          {
+            id: 'gp2-q18',
+            question: 'Describe the UK\'s global economic and political links.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Economic links include trade relationships, foreign investment, and multinational companies. Political links through international organisations like UN, NATO, and Commonwealth. Historical links through former empire. Cultural links through language, education, and media.',
+            markingCriteria: {
+              breakdown: ['Economic links described (2 marks)', 'Political links described (1 mark)', 'Cultural or historical links (1 mark)']
+            },
+            specReference: '3.2.2.2 - UK global links'
+          },
+          {
+            id: 'gp2-q19',
+            question: 'Explain the significance of resource management and describe global inequalities in food, water, and energy.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Resource management is vital for economic development, human welfare, and environmental sustainability. Global inequalities exist with HICs consuming far more resources per capita than LICs. Food insecurity affects sub-Saharan Africa and parts of Asia. Water stress affects arid regions and areas with growing populations. Energy poverty affects over 1 billion people without electricity.',
+            markingCriteria: {
+              breakdown: ['Significance of resource management (2 marks)', 'Global food inequalities (1 mark)', 'Global water inequalities (1 mark)', 'Global energy inequalities (1 mark)', 'Regional examples (1 mark)']
+            },
+            specReference: '3.2.3 - Resource management significance'
+          },
+          {
+            id: 'gp2-q20',
+            question: 'Describe the UK\'s changing demand for food and explain the growth of agribusiness.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'UK food demand has changed to include more exotic foods, organic produce, and seasonal availability year-round. Agribusiness has grown through large-scale farming, use of technology, and integration from farm to supermarket. This increases efficiency but may affect small farmers and local food systems.',
+            markingCriteria: {
+              breakdown: ['Changing food demand patterns (3 marks)', 'Agribusiness characteristics and growth (3 marks)']
+            },
+            specReference: '3.2.3 - UK food demand'
+          }
+        ]
       }
     ]
   },
