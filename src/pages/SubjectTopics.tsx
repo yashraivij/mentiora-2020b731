@@ -206,13 +206,17 @@ const SubjectTopics = () => {
                              {year}
                            </Badge>
                          ))}
-                         {geographyYear && (
-                           <Badge 
-                             className="text-xs bg-blue-500 text-white hover:bg-blue-600"
-                           >
-                             {geographyYear}
-                           </Badge>
-                         )}
+                          {geographyYear && (
+                            <Badge 
+                              className={`text-xs ${
+                                geographyYear === 'Year 10' 
+                                  ? 'bg-blue-500 text-white hover:bg-blue-600' 
+                                  : 'bg-purple-500 text-white hover:bg-purple-600'
+                              }`}
+                            >
+                              {geographyYear}
+                            </Badge>
+                          )}
                        </div>
                     </div>
                     <div className="flex flex-col items-end space-y-1">
