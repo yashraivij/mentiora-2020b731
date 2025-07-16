@@ -2604,13 +2604,19 @@ export const curriculum: Subject[] = [
             specReference: '3.2.3 - Resource focus areas'
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    id: 'geography-paper-2',
+    name: 'Geography Paper 2 (2026 Predicted Exam)',
+    topics: [
       {
-        id: 'geography-paper-2',
-        name: 'Geography Paper 2 - Urban Issues and Challenges, The Changing Economic World, Resource Management',
+        id: 'urban-issues-challenges',
+        name: 'Urban Issues and Challenges',
         questions: [
           {
-            id: 'gp2-q1',
+            id: 'urban-q1',
             question: 'Describe the global pattern of urbanisation.',
             marks: 4,
             difficulty: 'medium',
@@ -2621,7 +2627,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.1.1 - Global urbanisation patterns'
           },
           {
-            id: 'gp2-q2',
+            id: 'urban-q2',
             question: 'Explain the push and pull factors that cause rural-urban migration.',
             marks: 6,
             difficulty: 'medium',
@@ -2632,7 +2638,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.1.1 - Push-pull migration factors'
           },
           {
-            id: 'gp2-q3',
+            id: 'urban-q3',
             question: 'Define the term "megacity" and explain the factors causing their growth.',
             marks: 4,
             difficulty: 'medium',
@@ -2643,7 +2649,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.1.1 - Megacity growth'
           },
           {
-            id: 'gp2-q4',
+            id: 'urban-q4',
             question: 'Using a case study of a city in an LIC or NEE, explain the opportunities that urban growth creates.',
             marks: 6,
             difficulty: 'medium',
@@ -2654,7 +2660,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.1.1 - Urban opportunities in LICs/NEEs'
           },
           {
-            id: 'gp2-q5',
+            id: 'urban-q5',
             question: 'Using a case study of a city in an LIC or NEE, explain the challenges that urban growth creates.',
             marks: 8,
             difficulty: 'hard',
@@ -2665,7 +2671,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.1.1 - Urban challenges in LICs/NEEs'
           },
           {
-            id: 'gp2-q6',
+            id: 'urban-q6',
             question: 'Using a case study of a UK city, explain how urban change has created opportunities and challenges.',
             marks: 8,
             difficulty: 'hard',
@@ -2676,7 +2682,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.1.1 - UK urban change'
           },
           {
-            id: 'gp2-q7',
+            id: 'urban-q7',
             question: 'Explain how cities can achieve sustainable urban living in terms of water and energy conservation.',
             marks: 6,
             difficulty: 'medium',
@@ -2685,31 +2691,15 @@ export const curriculum: Subject[] = [
               breakdown: ['Water conservation strategies (3 marks)', 'Energy conservation strategies (3 marks)']
             },
             specReference: '3.2.1.1 - Sustainable urban living'
-          },
+          }
+        ]
+      },
+      {
+        id: 'changing-economic-world',
+        name: 'The Changing Economic World',
+        questions: [
           {
-            id: 'gp2-q8',
-            question: 'Describe strategies for sustainable waste management and creating green space in cities.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Waste management: recycling schemes, composting, waste-to-energy plants, reducing single-use plastics. Green space: parks and gardens, green roofs and walls, urban forests, allotments for food production.',
-            markingCriteria: {
-              breakdown: ['Waste management strategies (2 marks)', 'Green space creation strategies (2 marks)']
-            },
-            specReference: '3.2.1.1 - Sustainable urban living'
-          },
-          {
-            id: 'gp2-q9',
-            question: 'Evaluate different urban transport strategies for reducing traffic congestion.',
-            marks: 6,
-            difficulty: 'hard',
-            modelAnswer: 'Public transport improvements reduce car use but require major investment. Congestion charging like London reduces traffic but may be unpopular. Park and ride schemes help but need good transport links. Cycling infrastructure promotes sustainable transport but needs cultural change. Integrated transport planning most effective.',
-            markingCriteria: {
-              breakdown: ['Public transport strategies (2 marks)', 'Road pricing/charging schemes (2 marks)', 'Alternative transport modes (1 mark)', 'Evaluation of effectiveness (1 mark)']
-            },
-            specReference: '3.2.1.1 - Urban transport strategies'
-          },
-          {
-            id: 'gp2-q10',
+            id: 'econ-q1',
             question: 'Compare different measures of development and explain why GDP alone is not sufficient.',
             marks: 6,
             difficulty: 'medium',
@@ -2720,7 +2710,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.2.1 - Development measures'
           },
           {
-            id: 'gp2-q11',
+            id: 'econ-q2',
             question: 'Explain the Demographic Transition Model and how it links to uneven development.',
             marks: 6,
             difficulty: 'medium',
@@ -2731,7 +2721,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.2.1 - Demographic Transition Model'
           },
           {
-            id: 'gp2-q12',
+            id: 'econ-q3',
             question: 'Evaluate different strategies to reduce the development gap.',
             marks: 8,
             difficulty: 'hard',
@@ -2742,7 +2732,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.2.1 - Reducing development gap'
           },
           {
-            id: 'gp2-q13',
+            id: 'econ-q4',
             question: 'Using a case study of rapid development in one LIC or NEE, explain the role of industry, aid, and improvements in quality of life.',
             marks: 8,
             difficulty: 'hard',
@@ -2753,7 +2743,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.2.1 - LIC/NEE development case study'
           },
           {
-            id: 'gp2-q14',
+            id: 'econ-q5',
             question: 'Explain how the UK economy has changed from manufacturing to a post-industrial economy.',
             marks: 6,
             difficulty: 'medium',
@@ -2764,29 +2754,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.2.2 - UK economic change'
           },
           {
-            id: 'gp2-q15',
-            question: 'Describe the development of science parks and their impact on the UK economy.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Science parks locate near universities to access research and skilled graduates. They focus on high-tech industries like biotechnology, IT, and pharmaceuticals. Benefits include job creation, innovation, and export earnings. Examples include Cambridge Science Park and Edinburgh Technopole.',
-            markingCriteria: {
-              breakdown: ['Location and university links (1 mark)', 'High-tech industry focus (1 mark)', 'Economic benefits (1 mark)', 'Named example (1 mark)']
-            },
-            specReference: '3.2.2.2 - Science parks'
-          },
-          {
-            id: 'gp2-q16',
-            question: 'Explain improvements in UK transport infrastructure and their economic impact.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'High-speed rail like HS2 reduces journey times and improves connectivity. Motorway upgrades and smart motorways improve freight movement. Airport expansion increases international connections. These improvements attract business investment, reduce transport costs, and promote economic growth.',
-            markingCriteria: {
-              breakdown: ['Transport improvements described (2 marks)', 'Economic benefits explained (2 marks)']
-            },
-            specReference: '3.2.2.2 - UK transport developments'
-          },
-          {
-            id: 'gp2-q17',
+            id: 'econ-q6',
             question: 'Explain the North-South divide in the UK and strategies to reduce regional inequalities.',
             marks: 6,
             difficulty: 'medium',
@@ -2795,20 +2763,15 @@ export const curriculum: Subject[] = [
               breakdown: ['Description of North-South divide (2 marks)', 'Evidence of inequalities (1 mark)', 'Government strategies to reduce inequalities (3 marks)']
             },
             specReference: '3.2.2.2 - Regional inequalities'
-          },
+          }
+        ]
+      },
+      {
+        id: 'resource-management',
+        name: 'Resource Management',
+        questions: [
           {
-            id: 'gp2-q18',
-            question: 'Describe the UK\'s global economic and political links.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Economic links include trade relationships, foreign investment, and multinational companies. Political links through international organisations like UN, NATO, and Commonwealth. Historical links through former empire. Cultural links through language, education, and media.',
-            markingCriteria: {
-              breakdown: ['Economic links described (2 marks)', 'Political links described (1 mark)', 'Cultural or historical links (1 mark)']
-            },
-            specReference: '3.2.2.2 - UK global links'
-          },
-          {
-            id: 'gp2-q19',
+            id: 'resource-q1',
             question: 'Explain the significance of resource management and describe global inequalities in food, water, and energy.',
             marks: 6,
             difficulty: 'medium',
@@ -2819,7 +2782,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.3 - Resource management significance'
           },
           {
-            id: 'gp2-q20',
+            id: 'resource-q2',
             question: 'Describe the UK\'s changing demand for food and explain the growth of agribusiness.',
             marks: 6,
             difficulty: 'medium',
@@ -2828,6 +2791,50 @@ export const curriculum: Subject[] = [
               breakdown: ['Changing food demand patterns (3 marks)', 'Agribusiness characteristics and growth (3 marks)']
             },
             specReference: '3.2.3 - UK food demand'
+          },
+          {
+            id: 'resource-q3',
+            question: 'Explain the concept of food miles and evaluate its environmental impact.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Food miles measure distance food travels from production to consumption. Long food miles increase carbon emissions from transport, contributing to climate change. However, local production may be less efficient and more environmentally damaging than importing from suitable climates. The total environmental impact depends on production methods not just distance.',
+            markingCriteria: {
+              breakdown: ['Definition of food miles (1 mark)', 'Environmental impact of transport (1 mark)', 'Limitations of food miles concept (1 mark)', 'Evaluation of overall impact (1 mark)']
+            },
+            specReference: '3.2.3 - UK food security and food miles'
+          },
+          {
+            id: 'resource-q4',
+            question: 'Describe the UK\'s water resources and explain patterns of demand and supply.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'UK water supply comes mainly from surface water (reservoirs, rivers) and groundwater (aquifers). Supply is highest in north and west where precipitation is greater. Demand is highest in south and east where population and economic activity are concentrated. This creates a supply-demand imbalance requiring water transfers.',
+            markingCriteria: {
+              breakdown: ['Sources of UK water supply (2 marks)', 'Regional patterns of supply (2 marks)', 'Regional patterns of demand (2 marks)']
+            },
+            specReference: '3.2.3 - UK water resources and demand'
+          },
+          {
+            id: 'resource-q5',
+            question: 'Describe the UK\'s energy mix and explain how it has changed over time.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The UK energy mix has shifted from coal dominance to natural gas, with increasing renewable energy. Coal use has declined dramatically due to environmental concerns and economics. Nuclear power provides steady baseload electricity. Renewable sources like wind and solar are growing rapidly. The trend is toward decarbonization to meet climate targets.',
+            markingCriteria: {
+              breakdown: ['Historical energy mix changes (2 marks)', 'Current energy sources (2 marks)', 'Trends toward renewables/decarbonization (2 marks)']
+            },
+            specReference: '3.2.3 - UK energy mix and changes'
+          },
+          {
+            id: 'resource-q6',
+            question: 'Evaluate strategies for achieving global food security.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Increasing production through improved seeds, irrigation, and technology. Reducing waste through better storage and distribution systems. Improving access through fair trade and poverty reduction. Sustainable farming practices to protect long-term productivity. International cooperation to share knowledge and resources.',
+            markingCriteria: {
+              breakdown: ['Production increase strategies (2 marks)', 'Waste reduction approaches (1 mark)', 'Improving access and distribution (2 marks)', 'Sustainability considerations (1 mark)']
+            },
+            specReference: '3.2.3 - Resource focus areas'
           }
         ]
       }
