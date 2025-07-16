@@ -2608,8 +2608,8 @@ export const curriculum: Subject[] = [
     ]
   },
   {
-    id: 'geography-paper-2',
-    name: 'Geography Paper 2 (2026 Predicted Exam)',
+    id: 'geography',
+    name: 'Geography Paper 2',
     topics: [
       {
         id: 'urban-issues-challenges',
@@ -2793,6 +2793,28 @@ export const curriculum: Subject[] = [
             specReference: '3.2.3 - UK food demand'
           },
           {
+            id: 'resource-q2-water',
+            question: 'Describe the UK\'s water resources and explain patterns of demand and supply.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'UK water supply comes mainly from surface water (reservoirs, rivers) and groundwater (aquifers). Supply is highest in north and west where precipitation is greater. Demand is highest in south and east where population and economic activity are concentrated. This creates a supply-demand imbalance requiring water transfers.',
+            markingCriteria: {
+              breakdown: ['Sources of UK water supply (2 marks)', 'Regional patterns of supply (2 marks)', 'Regional patterns of demand (2 marks)']
+            },
+            specReference: '3.2.3 - UK water resources and demand'
+          },
+          {
+            id: 'resource-q2-energy',
+            question: 'Describe the UK\'s energy mix and explain how it has changed over time.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The UK energy mix has shifted from coal dominance to natural gas, with increasing renewable energy. Coal use has declined dramatically due to environmental concerns and economics. Nuclear power provides steady baseload electricity. Renewable sources like wind and solar are growing rapidly. The trend is toward decarbonization to meet climate targets.',
+            markingCriteria: {
+              breakdown: ['Historical energy mix changes (2 marks)', 'Current energy sources (2 marks)', 'Trends toward renewables/decarbonization (2 marks)']
+            },
+            specReference: '3.2.3 - UK energy mix and changes'
+          },
+          {
             id: 'resource-q3',
             question: 'Explain the concept of food miles and evaluate its environmental impact.',
             marks: 4,
@@ -2804,35 +2826,57 @@ export const curriculum: Subject[] = [
             specReference: '3.2.3 - UK food security and food miles'
           },
           {
+            id: 'resource-q3-water',
+            question: 'Explain issues affecting water quality in the UK and how they are managed.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Water quality issues include pollution from agriculture (fertilizers, pesticides), industrial discharge, and urban runoff. Management involves water treatment plants, pollution controls, monitoring systems, and regulation by environmental agencies. Investment in infrastructure ensures clean water supply meets health standards.',
+            markingCriteria: {
+              breakdown: ['Pollution sources affecting water quality (2 marks)', 'Management strategies and regulation (2 marks)']
+            },
+            specReference: '3.2.3 - UK water quality and management'
+          },
+          {
+            id: 'resource-q3-energy',
+            question: 'Evaluate the environmental issues associated with different energy sources in the UK.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Fossil fuels cause air pollution and greenhouse gas emissions but provide reliable energy. Nuclear power has low carbon emissions but creates radioactive waste storage problems. Renewable energy has minimal environmental impact during operation but requires large areas and can affect wildlife. The challenge is balancing environmental protection with energy security.',
+            markingCriteria: {
+              breakdown: ['Fossil fuel environmental impacts (1 mark)', 'Nuclear power impacts (1 mark)', 'Renewable energy impacts (1 mark)', 'Evaluation of balance needed (1 mark)']
+            },
+            specReference: '3.2.3 - UK energy environmental issues'
+          },
+          {
             id: 'resource-q4',
-            question: 'Describe the UK\'s water resources and explain patterns of demand and supply.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'UK water supply comes mainly from surface water (reservoirs, rivers) and groundwater (aquifers). Supply is highest in north and west where precipitation is greater. Demand is highest in south and east where population and economic activity are concentrated. This creates a supply-demand imbalance requiring water transfers.',
-            markingCriteria: {
-              breakdown: ['Sources of UK water supply (2 marks)', 'Regional patterns of supply (2 marks)', 'Regional patterns of demand (2 marks)']
-            },
-            specReference: '3.2.3 - UK water resources and demand'
-          },
-          {
-            id: 'resource-q5',
-            question: 'Describe the UK\'s energy mix and explain how it has changed over time.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'The UK energy mix has shifted from coal dominance to natural gas, with increasing renewable energy. Coal use has declined dramatically due to environmental concerns and economics. Nuclear power provides steady baseload electricity. Renewable sources like wind and solar are growing rapidly. The trend is toward decarbonization to meet climate targets.',
-            markingCriteria: {
-              breakdown: ['Historical energy mix changes (2 marks)', 'Current energy sources (2 marks)', 'Trends toward renewables/decarbonization (2 marks)']
-            },
-            specReference: '3.2.3 - UK energy mix and changes'
-          },
-          {
-            id: 'resource-q6',
             question: 'Evaluate strategies for achieving global food security.',
             marks: 6,
             difficulty: 'medium',
             modelAnswer: 'Increasing production through improved seeds, irrigation, and technology. Reducing waste through better storage and distribution systems. Improving access through fair trade and poverty reduction. Sustainable farming practices to protect long-term productivity. International cooperation to share knowledge and resources.',
             markingCriteria: {
               breakdown: ['Production increase strategies (2 marks)', 'Waste reduction approaches (1 mark)', 'Improving access and distribution (2 marks)', 'Sustainability considerations (1 mark)']
+            },
+            specReference: '3.2.3 - Resource focus areas'
+          },
+          {
+            id: 'resource-q4-water',
+            question: 'Describe strategies for managing water scarcity and improving water security globally.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Supply-side strategies: Desalination, water recycling, reservoir construction, groundwater extraction. Demand-side strategies: Water conservation, efficient irrigation, reducing industrial consumption. Technology solutions: Smart water systems, leak detection, treatment improvements. International cooperation for shared water resources.',
+            markingCriteria: {
+              breakdown: ['Supply-side management strategies (2 marks)', 'Demand-side management strategies (2 marks)', 'Technology and international cooperation (2 marks)']
+            },
+            specReference: '3.2.3 - Resource focus areas'
+          },
+          {
+            id: 'resource-q4-energy',
+            question: 'Evaluate different strategies for achieving global energy security and sustainability.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Renewable energy development provides long-term sustainability but requires major investment and storage solutions. Energy efficiency reduces demand but needs behavioral change and technology updates. Diversifying energy sources improves security but may increase costs. International cooperation can share resources and technology but creates dependencies. Nuclear power offers low-carbon baseload but has safety and waste concerns.',
+            markingCriteria: {
+              breakdown: ['Renewable energy strategies (2 marks)', 'Efficiency and conservation approaches (2 marks)', 'Energy security and international cooperation (2 marks)']
             },
             specReference: '3.2.3 - Resource focus areas'
           }
