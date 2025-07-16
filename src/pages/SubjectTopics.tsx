@@ -92,7 +92,11 @@ const SubjectTopics = () => {
   };
 
   const getGeographyTopicYear = (topicName: string) => {
-    // All geography topics are Year 10 only
+    // Glacial and River landscapes are Year 11
+    if (topicName.toLowerCase().includes('glacial') || topicName.toLowerCase().includes('river')) {
+      return 'Year 11';
+    }
+    // All other geography topics are Year 10
     return 'Year 10';
   };
 
