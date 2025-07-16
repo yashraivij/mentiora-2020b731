@@ -2608,7 +2608,7 @@ export const curriculum: Subject[] = [
     ]
   },
   {
-    id: 'geography',
+    id: 'geography-paper-2',
     name: 'Geography Paper 2',
     topics: [
       {

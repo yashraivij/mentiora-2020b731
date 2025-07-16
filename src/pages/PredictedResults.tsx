@@ -256,7 +256,7 @@ const PredictedResults = () => {
 
       const examCompletion = {
         user_id: user.id,
-        subject_id: subjectId,
+        subject_id: subjectId === 'geography-paper-2' ? 'geography' : subjectId,
         exam_date: new Date().toISOString().split('T')[0],
         total_marks: totalMarks,
         achieved_marks: achievedMarks,
