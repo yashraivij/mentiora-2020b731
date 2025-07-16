@@ -238,6 +238,13 @@ const Dashboard = () => {
     setIsNotifyClicked(true);
   };
 
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good morning';
+    if (hour < 18) return 'Good afternoon';
+    return 'Good evening';
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10">
       {/* Premium Header with Glassmorphism */}
@@ -286,7 +293,7 @@ const Dashboard = () => {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-3xl font-bold text-foreground mb-2">
-                Good morning, {getFirstName()}
+                {getGreeting()}, {getFirstName()}
               </h2>
               <p className="text-muted-foreground text-lg">Ready to elevate your GCSE revision journey?</p>
             </div>
