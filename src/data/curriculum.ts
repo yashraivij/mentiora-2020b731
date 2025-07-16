@@ -2256,6 +2256,354 @@ export const curriculum: Subject[] = [
             specReference: '3.1.3.4 - Tourism management case study'
           }
         ]
+      },
+      {
+        id: 'g8-urban-issues-challenges',
+        name: 'Urban Issues and Challenges',
+        questions: [
+          {
+            id: 'g8-q1',
+            question: 'Define the term "urbanisation" and outline the global pattern of urbanisation.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Urbanisation is the increase in the proportion of people living in urban areas compared to rural areas. Globally, urbanisation is happening fastest in LICs and NEEs, particularly in Asia and Africa. HICs have already experienced most of their urbanisation.',
+            markingCriteria: {
+              breakdown: ['Definition of urbanisation (2 marks)', 'Global pattern - fastest in LICs/NEEs (1 mark)', 'Regional examples or HIC comparison (1 mark)']
+            },
+            specReference: '3.2.1 - Global pattern and trends of urbanisation'
+          },
+          {
+            id: 'g8-q2',
+            question: 'Explain the push and pull factors that lead to rural-urban migration.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Push factors include lack of job opportunities in rural areas, poor healthcare and education services, natural disasters, and agricultural problems. Pull factors include better employment prospects in cities, higher wages, better healthcare and education, entertainment and social opportunities.',
+            markingCriteria: {
+              breakdown: ['Push factors - rural problems (3 marks)', 'Pull factors - urban opportunities (3 marks)']
+            },
+            specReference: '3.2.1 - Push-pull migration and natural increase'
+          },
+          {
+            id: 'g8-q3',
+            question: 'Describe the characteristics and global distribution of megacities.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Megacities are urban areas with populations over 10 million people. Most are located in LICs and NEEs, particularly in Asia (Tokyo, Delhi, Shanghai). Many are coastal locations due to trade advantages. Growth is rapid due to rural-urban migration and natural increase.',
+            markingCriteria: {
+              breakdown: ['Definition - over 10 million (1 mark)', 'Distribution - mainly LICs/NEEs (1 mark)', 'Regional concentration in Asia (1 mark)', 'Coastal locations or growth reasons (1 mark)']
+            },
+            specReference: '3.2.1 - Growth of megacities'
+          },
+          {
+            id: 'g8-q4',
+            question: 'Using a case study of a major city in a LIC or NEE, explain the opportunities created by urban growth.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Mumbai, India: Economic opportunities include jobs in Bollywood film industry, financial services in business district, manufacturing in industrial areas. Social opportunities include better healthcare facilities, improved education access, cultural and entertainment venues.',
+            markingCriteria: {
+              breakdown: ['Named city in LIC/NEE (1 mark)', 'Economic opportunities with examples (3 marks)', 'Social opportunities with examples (2 marks)']
+            },
+            specReference: '3.2.1 - Urban opportunities and challenges in LICs/NEEs'
+          },
+          {
+            id: 'g8-q5',
+            question: 'Using the same or a different case study, explain the challenges created by urban growth in LICs or NEEs.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Mumbai, India: Challenges include squatter settlements like Dharavi lacking basic services, traffic congestion and air pollution, unemployment and underemployment, water supply shortages, waste management problems, crime and social tensions, pressure on healthcare and education services.',
+            markingCriteria: {
+              breakdown: ['Named city (1 mark)', 'Housing challenges/squatter settlements (2 marks)', 'Environmental challenges (2 marks)', 'Economic/social challenges (2 marks)', 'Clear explanation and development (1 mark)']
+            },
+            specReference: '3.2.1 - Urban opportunities and challenges in LICs/NEEs'
+          },
+          {
+            id: 'g8-q6',
+            question: 'Using a case study of a major UK city, explain how urban change has created opportunities.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'London: Opportunities include regeneration projects like Olympic Park creating jobs, cultural quarter development, improved transport links, new housing developments, university expansion, financial services growth in Canary Wharf.',
+            markingCriteria: {
+              breakdown: ['Named UK city (1 mark)', 'Regeneration opportunities (2 marks)', 'Economic opportunities (2 marks)', 'Social/cultural opportunities (1 mark)']
+            },
+            specReference: '3.2.1 - Urban change in UK cities'
+          },
+          {
+            id: 'g8-q7',
+            question: 'Using the same or a different UK city case study, explain the challenges created by urban change.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'London: Challenges include gentrification displacing local communities, increased house prices and cost of living, social inequality between rich and poor areas, traffic congestion, cultural identity loss in changing neighborhoods.',
+            markingCriteria: {
+              breakdown: ['Named UK city (1 mark)', 'Social challenges like gentrification (2 marks)', 'Economic challenges (2 marks)', 'Environmental or cultural challenges (1 mark)']
+            },
+            specReference: '3.2.1 - Urban change in UK cities'
+          },
+          {
+            id: 'g8-q8',
+            question: 'Explain strategies for sustainable urban living in terms of water and energy conservation.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Water conservation: rainwater harvesting, grey water recycling, water-efficient appliances, permeable surfaces to reduce runoff. Energy conservation: renewable energy sources, energy-efficient buildings, smart grids, combined heat and power systems.',
+            markingCriteria: {
+              breakdown: ['Water conservation strategies (3 marks)', 'Energy conservation strategies (3 marks)']
+            },
+            specReference: '3.2.1 - Sustainable urban living'
+          },
+          {
+            id: 'g8-q9',
+            question: 'Describe strategies for creating sustainable urban living through waste management and green space.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Waste management: recycling programs, composting organic waste, waste-to-energy plants, reducing packaging. Green space: urban parks, green roofs and walls, tree planting, allotments and community gardens.',
+            markingCriteria: {
+              breakdown: ['Waste management strategies (2 marks)', 'Green space strategies (2 marks)']
+            },
+            specReference: '3.2.1 - Sustainable urban living'
+          },
+          {
+            id: 'g8-q10',
+            question: 'Evaluate different urban transport strategies for reducing traffic congestion.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Public transport improvements like bus rapid transit and underground systems are effective at moving large numbers efficiently but require major investment. Congestion charging like London\'s scheme reduces traffic but may impact low-income groups. Cycling infrastructure encourages sustainable transport but needs cultural change. Park and ride schemes reduce city center traffic but require suburban space. Integrated transport policies combining multiple strategies tend to be most effective.',
+            markingCriteria: {
+              breakdown: ['Public transport strategies (2 marks)', 'Road pricing/congestion charging (2 marks)', 'Sustainable transport promotion (2 marks)', 'Evaluation of effectiveness/limitations (2 marks)']
+            },
+            specReference: '3.2.1 - Urban transport strategies'
+          }
+        ]
+      },
+      {
+        id: 'g9-changing-economic-world',
+        name: 'The Changing Economic World',
+        questions: [
+          {
+            id: 'g9-q1',
+            question: 'Compare different measures of development including GNI per capita and HDI.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'GNI per capita measures average income but doesn\'t show distribution of wealth or quality of life. HDI combines income, life expectancy, and education to give broader picture of development. Literacy rates show education levels but not quality. Life expectancy reflects healthcare and living standards but can be affected by disease outbreaks.',
+            markingCriteria: {
+              breakdown: ['GNI per capita strengths/limitations (2 marks)', 'HDI strengths/limitations (2 marks)', 'Other measures compared (2 marks)']
+            },
+            specReference: '3.2.2 - Development measures'
+          },
+          {
+            id: 'g9-q2',
+            question: 'Describe the Demographic Transition Model and explain how it relates to development.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Stage 1: High birth and death rates, stable population. Stage 2: Death rate falls, birth rate remains high, population grows rapidly. Stage 3: Birth rate falls, population growth slows. Stage 4: Low birth and death rates, stable population. As countries develop, they move through stages due to improved healthcare, education, and economic opportunities.',
+            markingCriteria: {
+              breakdown: ['Description of DTM stages (4 marks)', 'Link to development process (2 marks)']
+            },
+            specReference: '3.2.2 - Demographic Transition Model and uneven development'
+          },
+          {
+            id: 'g9-q3',
+            question: 'Explain strategies used to reduce the development gap between countries.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Aid provides emergency relief and development funding but can create dependency. Tourism brings foreign currency and jobs but may exploit local communities. Fair trade ensures better prices for producers but only affects small percentage of trade. Investment and industrial development create jobs but may have environmental costs.',
+            markingCriteria: {
+              breakdown: ['Aid strategies (2 marks)', 'Tourism strategies (2 marks)', 'Trade/investment strategies (2 marks)']
+            },
+            specReference: '3.2.2 - Strategies to reduce development gap'
+          },
+          {
+            id: 'g9-q4',
+            question: 'Using a case study of rapid development in one LIC or NEE, explain the role of industry in development.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'China: Manufacturing industries attracted foreign investment, created millions of jobs, and generated export income. Special Economic Zones like Shenzhen encouraged rapid industrial growth. However, industrial development caused pollution and poor working conditions in factories.',
+            markingCriteria: {
+              breakdown: ['Named LIC/NEE case study (1 mark)', 'Role of industry in creating jobs/income (3 marks)', 'Impact on development (2 marks)']
+            },
+            specReference: '3.2.2 - Case study rapid development'
+          },
+          {
+            id: 'g9-q5',
+            question: 'Explain how aid and international investment have contributed to development in your case study country.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'China: Foreign direct investment from multinational companies brought modern technology and management expertise. World Bank aid funded infrastructure projects like roads and dams. However, aid sometimes came with conditions, and investment led to environmental problems and exploitation of workers.',
+            markingCriteria: {
+              breakdown: ['Role of international investment (3 marks)', 'Role of aid (2 marks)', 'Evaluation of impacts positive/negative (1 mark)']
+            },
+            specReference: '3.2.2 - Case study rapid development'
+          },
+          {
+            id: 'g9-q6',
+            question: 'Describe the changes in the UK\'s economy since 1945, including the move to a post-industrial economy.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Manufacturing industries declined due to globalization and competition. Service industries grew including finance, retail, and tourism. Science and technology parks developed around universities. Government policy encouraged financial services and creative industries. Deindustrialization led to unemployment in traditional industrial areas.',
+            markingCriteria: {
+              breakdown: ['Decline of manufacturing (2 marks)', 'Growth of service industries (2 marks)', 'Development of science/technology sectors (2 marks)']
+            },
+            specReference: '3.2.2 - Economic change in the UK'
+          },
+          {
+            id: 'g9-q7',
+            question: 'Explain the development of science parks and their impact on the UK economy.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Science parks located near universities provide research facilities and business support for high-tech companies. Cambridge Science Park has attracted biotechnology and software companies. They create high-skilled jobs and encourage innovation, but may increase regional inequalities.',
+            markingCriteria: {
+              breakdown: ['Description of science parks (1 mark)', 'Location near universities (1 mark)', 'Economic benefits (1 mark)', 'Example or evaluation (1 mark)']
+            },
+            specReference: '3.2.2 - Science parks, transport'
+          },
+          {
+            id: 'g9-q8',
+            question: 'Describe regional inequalities in the UK and explain the North-South divide.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The North-South divide shows higher incomes, employment, and life expectancy in the South, particularly London and South East. Northern regions have higher unemployment, poverty, and health problems. This results from deindustrialization affecting northern manufacturing areas while service industries concentrated in the South.',
+            markingCriteria: {
+              breakdown: ['Description of North-South differences (3 marks)', 'Causes - deindustrialization/service concentration (3 marks)']
+            },
+            specReference: '3.2.2 - Regional inequalities and North-South divide'
+          },
+          {
+            id: 'g9-q9',
+            question: 'Explain the UK\'s links with the global economy.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Trade links: Imports of raw materials and consumer goods, exports of services and manufactured goods. Financial links: London as global financial center, foreign investment in UK companies. Political links: Membership of international organizations, trade agreements and partnerships.',
+            markingCriteria: {
+              breakdown: ['Trade relationships (1 mark)', 'Financial sector role (1 mark)', 'Investment flows (1 mark)', 'Political/institutional links (1 mark)']
+            },
+            specReference: '3.2.2 - UK global economic and political links'
+          },
+          {
+            id: 'g9-q10',
+            question: 'Evaluate the impacts of economic change on different regions of the UK.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Economic changes have benefited London and South East through growth of financial services and high-tech industries, leading to higher incomes and employment. However, traditional manufacturing areas in North and Midlands suffered job losses and economic decline. Government attempts to rebalance economy have had limited success. London\'s success may be pulling investment away from other regions, widening inequalities.',
+            markingCriteria: {
+              breakdown: ['Economic links - trade and investment (3 marks)', 'Political links - international organizations (2 marks)', 'Cultural or other links (1 mark)']
+            },
+            specReference: '3.2.2 - UK global economic and political links'
+          }
+        ]
+      },
+      {
+        id: 'g10-resource-management',
+        name: 'Resource Management',
+        questions: [
+          {
+            id: 'g10-q1',
+            question: 'Explain the significance of resource management and describe global inequalities in food, water, and energy.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Resource management is vital for economic development, human welfare, and environmental sustainability. Global inequalities exist with HICs consuming far more resources per capita than LICs. Food security problems mainly affect sub-Saharan Africa and parts of Asia. Water stress affects arid regions and areas with growing populations. Energy poverty affects over 1 billion people without electricity.',
+            markingCriteria: {
+              breakdown: ['Significance of resource management (2 marks)', 'Global inequalities in food (1 mark)', 'Global inequalities in water (1 mark)', 'Global inequalities in energy (1 mark)', 'Regional examples (1 mark)']
+            },
+            specReference: '3.2.3 - Significance and global inequalities'
+          },
+          {
+            id: 'g10-q2',
+            question: 'Describe the UK\'s changing demand for food and explain the growth of agribusiness.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'UK food demand has changed to include more exotic foods, organic produce, and seasonal availability year-round. Agribusiness has grown through large-scale farming, use of technology, and integration from farm to supermarket. This increases efficiency but may affect small farmers and local food systems.',
+            markingCriteria: {
+              breakdown: ['Changing food demand patterns (3 marks)', 'Agribusiness characteristics and growth (3 marks)']
+            },
+            specReference: '3.2.3 - UK demand and provision of food'
+          },
+          {
+            id: 'g10-q3',
+            question: 'Explain the concept of food miles and evaluate its environmental impact.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Food miles measure distance food travels from production to consumption. Long food miles increase carbon emissions from transport, contributing to climate change. However, local production may be less efficient and more environmentally damaging than importing from suitable climates. The total environmental impact depends on production methods not just distance.',
+            markingCriteria: {
+              breakdown: ['Definition of food miles (1 mark)', 'Environmental impact of transport (1 mark)', 'Limitations of food miles concept (1 mark)', 'Evaluation of overall impact (1 mark)']
+            },
+            specReference: '3.2.3 - UK food security and food miles'
+          },
+          {
+            id: 'g10-q4',
+            question: 'Describe the UK\'s water resources and explain patterns of demand and supply.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'UK water supply comes mainly from surface water (reservoirs, rivers) and groundwater (aquifers). Supply is highest in north and west where precipitation is greater. Demand is highest in south and east where population and economic activity are concentrated. This creates a supply-demand imbalance requiring water transfers.',
+            markingCriteria: {
+              breakdown: ['Sources of UK water supply (2 marks)', 'Regional patterns of supply (2 marks)', 'Regional patterns of demand (2 marks)']
+            },
+            specReference: '3.2.3 - UK water resources and demand'
+          },
+          {
+            id: 'g10-q5',
+            question: 'Explain issues affecting water quality in the UK and how they are managed.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Water quality issues include pollution from agriculture (fertilizers, pesticides), industrial discharge, and urban runoff. Management involves water treatment plants, pollution controls, monitoring systems, and regulation by environmental agencies. Investment in infrastructure ensures clean water supply meets health standards.',
+            markingCriteria: {
+              breakdown: ['Pollution sources affecting water quality (2 marks)', 'Management strategies and regulation (2 marks)']
+            },
+            specReference: '3.2.3 - UK water quality and management'
+          },
+          {
+            id: 'g10-q6',
+            question: 'Describe the UK\'s energy mix and explain how it has changed over time.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The UK energy mix has shifted from coal dominance to natural gas, with increasing renewable energy. Coal use has declined dramatically due to environmental concerns and economics. Nuclear power provides steady baseload electricity. Renewable sources like wind and solar are growing rapidly. The trend is toward decarbonization to meet climate targets.',
+            markingCriteria: {
+              breakdown: ['Historical energy mix changes (2 marks)', 'Current energy sources (2 marks)', 'Trends toward renewables/decarbonization (2 marks)']
+            },
+            specReference: '3.2.3 - UK energy mix and changes'
+          },
+          {
+            id: 'g10-q7',
+            question: 'Evaluate the environmental issues associated with different energy sources in the UK.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Fossil fuels cause air pollution and greenhouse gas emissions but provide reliable energy. Nuclear power has low carbon emissions but creates radioactive waste storage problems. Renewable energy has minimal environmental impact during operation but requires large areas and can affect wildlife. The challenge is balancing environmental protection with energy security.',
+            markingCriteria: {
+              breakdown: ['Fossil fuel environmental impacts (2 marks)', 'Nuclear power impacts (2 marks)', 'Renewable energy impacts and evaluation (2 marks)']
+            },
+            specReference: '3.2.3 - UK energy environmental issues'
+          },
+          {
+            id: 'g10-q8',
+            question: 'Explain strategies for achieving global food security.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Increasing production through improved seeds, irrigation, and technology. Reducing waste through better storage and distribution systems. Improving access through fair trade and poverty reduction. Sustainable farming practices to protect long-term productivity. International cooperation to share knowledge and resources.',
+            markingCriteria: {
+              breakdown: ['Production increase strategies (2 marks)', 'Waste reduction approaches (1 mark)', 'Improving access and distribution (2 marks)', 'Sustainability considerations (1 mark)']
+            },
+            specReference: '3.2.3 - Resource focus areas'
+          },
+          {
+            id: 'g10-q9',
+            question: 'Describe strategies for managing water scarcity and improving water security globally.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Supply-side strategies: Desalination, water recycling, reservoir construction, groundwater extraction. Demand-side strategies: Water conservation, efficient irrigation, reducing industrial consumption. Technology solutions: Smart water systems, leak detection, treatment improvements. International cooperation for shared water resources.',
+            markingCriteria: {
+              breakdown: ['Supply-side management strategies (2 marks)', 'Demand-side management strategies (2 marks)', 'Technology and international cooperation (2 marks)']
+            },
+            specReference: '3.2.3 - Resource focus areas'
+          },
+          {
+            id: 'g10-q10',
+            question: 'Evaluate different strategies for achieving global energy security and sustainability.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Renewable energy development provides long-term sustainability but requires major investment and storage solutions. Energy efficiency reduces demand but needs behavioral change and technology updates. Diversifying energy sources improves security but may increase costs. International cooperation can share resources and technology but creates dependencies. Nuclear power offers low-carbon baseload but has safety and waste concerns. The optimal strategy combines multiple approaches tailored to local conditions.',
+            markingCriteria: {
+              breakdown: ['Renewable energy strategies (2 marks)', 'Efficiency and conservation approaches (2 marks)', 'Energy security considerations (2 marks)', 'Evaluation and balanced conclusion (2 marks)']
+            },
+            specReference: '3.2.3 - Resource focus areas'
+          }
+        ]
       }
     ]
   },
@@ -3950,332 +4298,6 @@ export const curriculum: Subject[] = [
               breakdown: ['Ensures reliable and valid results (1 mark)', 'Involves hypothesis and controlled experiments (1 mark)', 'Includes peer review (1 mark)', 'Allows knowledge to be tested and built upon (1 mark)']
             },
             specReference: 'B8.10'
-          }
-        ]
-      },
-      {
-        id: 'g8-urban-issues-challenges',
-        name: 'Urban Issues and Challenges',
-        questions: [
-          {
-            id: 'g8-q1',
-            question: 'Define the term "urbanisation" and outline the global pattern of urbanisation.',
-            marks: 4,
-            difficulty: 'easy',
-            modelAnswer: 'Urbanisation is the increase in the proportion of people living in urban areas compared to rural areas. Globally, urbanisation is happening fastest in LICs and NEEs, particularly in Asia and Africa. HICs have already experienced most of their urbanisation.',
-            markingCriteria: {
-              breakdown: ['Definition of urbanisation (2 marks)', 'Global pattern - fastest in LICs/NEEs (1 mark)', 'Regional examples or HIC comparison (1 mark)']
-            },
-            specReference: '3.2.1 - Global pattern and trends of urbanisation'
-          },
-          {
-            id: 'g8-q2',
-            question: 'Explain the push and pull factors that lead to rural-urban migration.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Push factors include lack of job opportunities in rural areas, poor healthcare and education services, natural disasters, and agricultural problems. Pull factors include better employment prospects in cities, higher wages, better healthcare and education, entertainment and social opportunities.',
-            markingCriteria: {
-              breakdown: ['Push factors - rural problems (3 marks)', 'Pull factors - urban opportunities (3 marks)']
-            },
-            specReference: '3.2.1 - Push-pull migration and natural increase'
-          },
-          {
-            id: 'g8-q3',
-            question: 'Describe the characteristics and global distribution of megacities.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Megacities are urban areas with populations over 10 million people. Most are located in LICs and NEEs, particularly in Asia (Tokyo, Delhi, Shanghai). Many are coastal locations due to trade advantages. Growth is rapid due to rural-urban migration and natural increase.',
-            markingCriteria: {
-              breakdown: ['Definition - over 10 million (1 mark)', 'Distribution - mainly LICs/NEEs (1 mark)', 'Regional concentration in Asia (1 mark)', 'Coastal locations or growth reasons (1 mark)']
-            },
-            specReference: '3.2.1 - Growth of megacities'
-          },
-          {
-            id: 'g8-q4',
-            question: 'Using a case study of a major city in a LIC or NEE, explain the opportunities created by urban growth.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Mumbai, India: Economic opportunities include jobs in Bollywood film industry, financial services in business district, manufacturing in industrial areas. Social opportunities include better healthcare facilities, improved education access, cultural and entertainment venues.',
-            markingCriteria: {
-              breakdown: ['Named city in LIC/NEE (1 mark)', 'Economic opportunities with examples (3 marks)', 'Social opportunities with examples (2 marks)']
-            },
-            specReference: '3.2.1 - Urban opportunities and challenges in LICs/NEEs'
-          },
-          {
-            id: 'g8-q5',
-            question: 'Using the same or a different case study, explain the challenges created by urban growth in LICs or NEEs.',
-            marks: 8,
-            difficulty: 'hard',
-            modelAnswer: 'Mumbai, India: Challenges include squatter settlements like Dharavi lacking basic services, traffic congestion and air pollution, unemployment and underemployment, water supply shortages, waste management problems, crime and social tensions, pressure on healthcare and education services.',
-            markingCriteria: {
-              breakdown: ['Named city (1 mark)', 'Housing challenges/squatter settlements (2 marks)', 'Environmental challenges (2 marks)', 'Economic/social challenges (2 marks)', 'Clear explanation and development (1 mark)']
-            },
-            specReference: '3.2.1 - Urban opportunities and challenges in LICs/NEEs'
-          },
-          {
-            id: 'g8-q6',
-            question: 'Using a case study of a major UK city, explain how urban change has created opportunities.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'London: Opportunities include regeneration projects like Olympic Park creating jobs, cultural quarter development, improved transport links, new housing developments, university expansion, financial services growth in Canary Wharf.',
-            markingCriteria: {
-              breakdown: ['Named UK city (1 mark)', 'Regeneration opportunities (2 marks)', 'Economic opportunities (2 marks)', 'Social/cultural opportunities (1 mark)']
-            },
-            specReference: '3.2.1 - Urban change in UK cities'
-          },
-          {
-            id: 'g8-q7',
-            question: 'Using the same or a different UK city case study, explain the challenges created by urban change.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'London: Challenges include gentrification displacing local communities, increased house prices and cost of living, social inequality between rich and poor areas, traffic congestion, cultural identity loss in changing neighborhoods.',
-            markingCriteria: {
-              breakdown: ['Named UK city (1 mark)', 'Social challenges like gentrification (2 marks)', 'Economic challenges (2 marks)', 'Environmental or cultural challenges (1 mark)']
-            },
-            specReference: '3.2.1 - Urban change in UK cities'
-          },
-          {
-            id: 'g8-q8',
-            question: 'Explain strategies for sustainable urban living in terms of water and energy conservation.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Water conservation: rainwater harvesting, grey water recycling, water-efficient appliances, permeable surfaces to reduce runoff. Energy conservation: renewable energy sources, energy-efficient buildings, smart grids, combined heat and power systems.',
-            markingCriteria: {
-              breakdown: ['Water conservation strategies (3 marks)', 'Energy conservation strategies (3 marks)']
-            },
-            specReference: '3.2.1 - Sustainable urban living'
-          },
-          {
-            id: 'g8-q9',
-            question: 'Describe strategies for creating sustainable urban living through waste management and green space.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Waste management: recycling programs, composting organic waste, waste-to-energy plants, reducing packaging. Green space: urban parks, green roofs and walls, tree planting, allotments and community gardens.',
-            markingCriteria: {
-              breakdown: ['Waste management strategies (2 marks)', 'Green space strategies (2 marks)']
-            },
-            specReference: '3.2.1 - Sustainable urban living'
-          },
-          {
-            id: 'g8-q10',
-            question: 'Evaluate different urban transport strategies for reducing traffic congestion.',
-            marks: 8,
-            difficulty: 'hard',
-            modelAnswer: 'Public transport improvements like bus rapid transit and underground systems are effective at moving large numbers efficiently but require major investment. Congestion charging like London\'s scheme reduces traffic but may impact low-income groups. Cycling infrastructure encourages sustainable transport but needs cultural change. Park and ride schemes reduce city center traffic but require suburban space. Integrated transport policies combining multiple strategies tend to be most effective.',
-            markingCriteria: {
-              breakdown: ['Public transport strategies (2 marks)', 'Road pricing/congestion charging (2 marks)', 'Sustainable transport promotion (2 marks)', 'Evaluation of effectiveness/limitations (2 marks)']
-            },
-            specReference: '3.2.1 - Urban transport strategies'
-          }
-        ]
-      },
-      {
-        id: 'g9-changing-economic-world',
-        name: 'The Changing Economic World',
-        questions: [
-          {
-            id: 'g9-q1',
-            question: 'Compare different measures of development including GNI per capita and HDI.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'GNI per capita measures average income but doesn\'t show distribution of wealth or quality of life. HDI combines income, life expectancy, and education to give broader picture of development. Literacy rates show education levels but not quality. Life expectancy reflects healthcare and living standards but can be affected by disease outbreaks.',
-            markingCriteria: {
-              breakdown: ['GNI per capita strengths/limitations (2 marks)', 'HDI strengths/limitations (2 marks)', 'Other measures compared (2 marks)']
-            },
-            specReference: '3.2.2 - Development measures'
-          },
-          {
-            id: 'g9-q2',
-            question: 'Describe the Demographic Transition Model and explain how it relates to development.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Stage 1: High birth and death rates, stable population. Stage 2: Death rate falls, birth rate remains high, population grows rapidly. Stage 3: Birth rate falls, population growth slows. Stage 4: Low birth and death rates, stable population. As countries develop, they move through stages due to improved healthcare, education, and economic opportunities.',
-            markingCriteria: {
-              breakdown: ['Description of DTM stages (4 marks)', 'Link to development process (2 marks)']
-            },
-            specReference: '3.2.2 - Demographic Transition Model and uneven development'
-          },
-          {
-            id: 'g9-q3',
-            question: 'Explain strategies used to reduce the development gap between countries.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Aid provides emergency relief and development funding but can create dependency. Tourism brings foreign currency and jobs but may exploit local communities. Fair trade ensures better prices for producers but only affects small percentage of trade. Investment and industrial development create jobs but may have environmental costs.',
-            markingCriteria: {
-              breakdown: ['Aid strategies (2 marks)', 'Tourism strategies (2 marks)', 'Trade/investment strategies (2 marks)']
-            },
-            specReference: '3.2.2 - Strategies to reduce development gap'
-          },
-          {
-            id: 'g9-q4',
-            question: 'Using a case study of rapid development in one LIC or NEE, explain the role of industry in development.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'China: Manufacturing industries attracted foreign investment, created millions of jobs, and generated export income. Special Economic Zones like Shenzhen encouraged rapid industrial growth. However, industrial development caused pollution and poor working conditions in factories.',
-            markingCriteria: {
-              breakdown: ['Named LIC/NEE case study (1 mark)', 'Role of industry in creating jobs/income (3 marks)', 'Impact on development (2 marks)']
-            },
-            specReference: '3.2.2 - Case study rapid development'
-          },
-          {
-            id: 'g9-q5',
-            question: 'Explain how aid and international investment have contributed to development in your case study country.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'China: Foreign direct investment from multinational companies brought modern technology and management expertise. World Bank aid funded infrastructure projects like roads and dams. However, aid sometimes came with conditions, and investment led to environmental problems and exploitation of workers.',
-            markingCriteria: {
-              breakdown: ['Role of international investment (3 marks)', 'Role of aid (2 marks)', 'Evaluation of impacts positive/negative (1 mark)']
-            },
-            specReference: '3.2.2 - Case study rapid development'
-          },
-          {
-            id: 'g9-q6',
-            question: 'Describe the changes in the UK\'s economy since 1945, including the move to a post-industrial economy.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Manufacturing industries declined due to globalization and competition. Service industries grew including finance, retail, and tourism. Science and technology parks developed around universities. Government policy encouraged financial services and creative industries. Deindustrialization led to unemployment in traditional industrial areas.',
-            markingCriteria: {
-              breakdown: ['Decline of manufacturing (2 marks)', 'Growth of service industries (2 marks)', 'Development of science/technology sectors (2 marks)']
-            },
-            specReference: '3.2.2 - Economic change in the UK'
-          },
-          {
-            id: 'g9-q7',
-            question: 'Explain the development of science parks and their impact on the UK economy.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Science parks located near universities provide research facilities and business support for high-tech companies. Cambridge Science Park has attracted biotechnology and software companies. They create high-skilled jobs and encourage innovation, but may increase regional inequalities.',
-            markingCriteria: {
-              breakdown: ['Description of science parks (1 mark)', 'Location near universities (1 mark)', 'Economic benefits (1 mark)', 'Example or evaluation (1 mark)']
-            },
-            specReference: '3.2.2 - Science parks, transport'
-          },
-          {
-            id: 'g9-q8',
-            question: 'Describe regional inequalities in the UK and explain the North-South divide.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'The North-South divide shows higher incomes, employment, and life expectancy in the South, particularly London and South East. Northern regions have higher unemployment, poverty, and health problems. This results from deindustrialization affecting northern manufacturing areas while service industries concentrated in the South.',
-            markingCriteria: {
-              breakdown: ['Description of North-South differences (3 marks)', 'Causes - deindustrialization/service concentration (3 marks)']
-            },
-            specReference: '3.2.2 - Regional inequalities and North-South divide'
-          },
-          {
-            id: 'g9-q9',
-            question: 'Explain the UK\'s global economic and political links.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Economic links include trade with EU, USA, and Commonwealth countries, foreign investment in UK businesses, UK investment abroad. Political links include NATO membership, UN Security Council, G7, and post-Brexit relationships. Cultural links through language, media, and migration maintain global connections.',
-            markingCriteria: {
-              breakdown: ['Economic links - trade and investment (3 marks)', 'Political links - international organizations (2 marks)', 'Cultural or other links (1 mark)']
-            },
-            specReference: '3.2.2 - UK global economic and political links'
-          }
-        ]
-      },
-      {
-        id: 'g10-resource-management',
-        name: 'Resource Management',
-        questions: [
-          {
-            id: 'g10-q1',
-            question: 'Explain the significance of resource management and describe global inequalities in food, water, and energy.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Resource management is vital for economic development, human welfare, and environmental sustainability. Global inequalities exist with HICs consuming far more resources per capita than LICs. Food security problems mainly affect sub-Saharan Africa and parts of Asia. Water stress affects arid regions and areas with growing populations. Energy poverty affects over 1 billion people without electricity.',
-            markingCriteria: {
-              breakdown: ['Significance of resource management (2 marks)', 'Global inequalities in food (1 mark)', 'Global inequalities in water (1 mark)', 'Global inequalities in energy (1 mark)', 'Regional examples (1 mark)']
-            },
-            specReference: '3.2.3 - Significance and global inequalities'
-          },
-          {
-            id: 'g10-q2',
-            question: 'Describe the UK\'s changing demand for food and explain the growth of agribusiness.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'UK food demand has changed to include more exotic foods, organic produce, and seasonal availability year-round. Agribusiness has grown through large-scale farming, use of technology, and integration from farm to supermarket. This increases efficiency but may affect small farmers and local food systems.',
-            markingCriteria: {
-              breakdown: ['Changing food demand patterns (2 marks)', 'Growth of agribusiness (2 marks)', 'Technology and scale changes (2 marks)']
-            },
-            specReference: '3.2.3 - UK demand and provision of food'
-          },
-          {
-            id: 'g10-q3',
-            question: 'Explain the concept of food miles and evaluate their environmental impact.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Food miles measure the distance food travels from production to consumption. Long food miles increase carbon emissions from transport. However, local production may be less efficient, and some regions have comparative advantages for certain crops. Seasonal eating and local sourcing can reduce environmental impact.',
-            markingCriteria: {
-              breakdown: ['Definition of food miles (1 mark)', 'Environmental impact - carbon emissions (1 mark)', 'Evaluation - efficiency considerations (1 mark)', 'Solutions mentioned (1 mark)']
-            },
-            specReference: '3.2.3 - UK demand and provision of food'
-          },
-          {
-            id: 'g10-q4',
-            question: 'Describe the UK\'s water resources and explain patterns of demand and supply.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'UK water supply mainly from rainfall, rivers, and reservoirs, with most water in north and west. Demand is highest in southeast where population is concentrated. Water transfers like from Wales to England help balance supply and demand. Climate change may increase demand and reduce supply in some areas.',
-            markingCriteria: {
-              breakdown: ['Sources of UK water supply (2 marks)', 'Geographic patterns of demand/supply (2 marks)', 'Water transfers or climate change impacts (2 marks)']
-            },
-            specReference: '3.2.3 - UK water resources'
-          },
-          {
-            id: 'g10-q5',
-            question: 'Explain the issues of water quality and the management of water supply in the UK.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Water quality issues include agricultural pollution from fertilizers, urban runoff, and industrial contamination. Management involves water treatment plants, reservoir construction, water transfers between regions, and demand management through pricing and education.',
-            markingCriteria: {
-              breakdown: ['Water quality issues (2 marks)', 'Management strategies (2 marks)']
-            },
-            specReference: '3.2.3 - UK water resources'
-          },
-          {
-            id: 'g10-q6',
-            question: 'Describe the UK\'s energy mix and explain the environmental issues associated with energy production.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'UK energy mix includes natural gas, renewable sources (wind, solar), nuclear power, and declining coal use. Environmental issues include carbon emissions from fossil fuels contributing to climate change, nuclear waste disposal problems, visual impact of wind farms, and habitat disruption from hydroelectric schemes.',
-            markingCriteria: {
-              breakdown: ['Description of energy mix (3 marks)', 'Environmental issues from different sources (3 marks)']
-            },
-            specReference: '3.2.3 - UK energy mix and environmental issues'
-          },
-          {
-            id: 'g10-q7',
-            question: 'For food, water, OR energy, explain the global patterns of insecurity and their causes.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'FOOD: Food insecurity mainly affects sub-Saharan Africa and parts of Asia due to poverty, conflict, climate change, and poor infrastructure. OR WATER: Water insecurity affects arid regions, densely populated areas, and places with pollution or poor infrastructure. OR ENERGY: Energy poverty affects rural areas in LICs lacking electricity grid connections and unable to afford modern energy sources.',
-            markingCriteria: {
-              breakdown: ['Clear choice of resource (1 mark)', 'Global patterns described (2 marks)', 'Causes explained (3 marks)']
-            },
-            specReference: '3.2.3 - Resource focus areas'
-          },
-          {
-            id: 'g10-q8',
-            question: 'For your chosen resource, explain the strategies used to increase supply and manage demand.',
-            marks: 8,
-            difficulty: 'hard',
-            modelAnswer: 'FOOD: Supply strategies include agricultural intensification, new crop varieties, irrigation expansion, and land conversion. Demand management through reducing waste, changing diets, and population policies. OR WATER: Supply through desalination, water recycling, reservoir construction. Demand management through pricing, efficiency measures, and education. OR ENERGY: Supply through renewable energy development, fossil fuel extraction, nuclear power. Demand management through efficiency improvements, smart grids, and behavioral change.',
-            markingCriteria: {
-              breakdown: ['Resource specified (1 mark)', 'Supply strategies (3 marks)', 'Demand management strategies (3 marks)', 'Evaluation or examples (1 mark)']
-            },
-            specReference: '3.2.3 - Resource focus areas'
-          },
-          {
-            id: 'g10-q9',
-            question: 'For your chosen resource, evaluate the sustainability of different management approaches.',
-            marks: 8,
-            difficulty: 'hard',
-            modelAnswer: 'FOOD: Intensive agriculture increases yields but may degrade soils and use excess chemicals. Organic farming is more sustainable but lower yields. GM crops may increase production sustainably. OR WATER: Desalination provides reliable supply but uses lots of energy. Water recycling is sustainable but requires investment. Conservation is most sustainable approach. OR ENERGY: Renewable energy is sustainable but intermittent. Nuclear provides reliable low-carbon energy but waste issues. Fossil fuels are unsustainable due to climate change.',
-            markingCriteria: {
-              breakdown: ['Resource specified (1 mark)', 'Different approaches discussed (4 marks)', 'Evaluation of sustainability (2 marks)', 'Clear conclusion or comparison (1 mark)']
-            },
-            specReference: '3.2.3 - Resource focus areas'
           }
         ]
       }
