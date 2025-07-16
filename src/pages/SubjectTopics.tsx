@@ -96,6 +96,10 @@ const SubjectTopics = () => {
     if (topicName.toLowerCase().includes('glacial') || topicName.toLowerCase().includes('river')) {
       return 'Year 11';
     }
+    // Paper 2: Challenges in the Human Environment is Year 11
+    if (topicName.toLowerCase().includes('paper 2') || topicName.toLowerCase().includes('human environment')) {
+      return 'Year 11';
+    }
     // All other geography topics are Year 10
     return 'Year 10';
   };
