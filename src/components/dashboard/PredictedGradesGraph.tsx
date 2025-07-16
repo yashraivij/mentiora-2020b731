@@ -158,8 +158,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           return null;
         };
 
-        // Get all subjects from curriculum
-        const curriculumSubjectIds = curriculum.map(s => s.id);
+        // Get all subjects from curriculum (excluding geography-paper-2)
+        const curriculumSubjectIds = curriculum.filter(s => s.id !== 'geography-paper-2').map(s => s.id);
         const progressSubjectIds = [...new Set(userProgress.map((p: any) => p.subjectId))];
         const examSubjectIds = [...new Set((predictedExamData || []).map(exam => exam.subject_id))];
         
