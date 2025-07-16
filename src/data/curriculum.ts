@@ -1727,34 +1727,34 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'g7-q5',
-            question: 'Explain the causes of desertification in hot desert margins.',
+            question: 'For either hot deserts OR cold environments, explain the main environmental threats or challenges facing your chosen environment.',
             marks: 6,
             difficulty: 'medium',
-            modelAnswer: 'Climate change reducing rainfall and increasing temperatures.\n\nOvergrazing by livestock removing vegetation cover.\n\nOver-cultivation exhausting soil nutrients.\n\nDeforestation for fuelwood removing stabilizing vegetation.\n\nPopulation growth increasing pressure on marginal lands.\n\nPoor irrigation leading to soil salinization.',
+            modelAnswer: 'HOT DESERTS: Desertification causes include climate change reducing rainfall, overgrazing by livestock removing vegetation, over-cultivation exhausting soils, deforestation for fuelwood, population growth increasing pressure on marginal lands, poor irrigation leading to salinization.\n\nOR\n\nCOLD ENVIRONMENTS: Threats include oil spills devastating fragile ecosystems, mining disrupting permafrost and releasing greenhouse gases, increased human activity disturbing wildlife migration, climate change accelerated by fossil fuel extraction.',
             markingCriteria: {
-              breakdown: ['Climate change impacts (1 mark)', 'Overgrazing effects (1 mark)', 'Over-cultivation (1 mark)', 'Deforestation (1 mark)', 'Population pressure (1 mark)', 'Poor agricultural practices (1 mark)']
+              breakdown: ['Clear choice of environment (1 mark)', 'Climate/temperature impacts (1 mark)', 'Human activity impacts (1 mark)', 'Land use impacts (1 mark)', 'Population/development pressure (1 mark)', 'Long-term environmental consequences (1 mark)']
             },
-            specReference: '3.1.2.3 - Desertification causes'
+            specReference: '3.1.2.3 - Environmental threats'
           },
           {
             id: 'g7-q6',
-            question: 'Describe strategies to reduce desertification.',
+            question: 'For either hot deserts OR cold environments, describe strategies that can be used to manage environmental challenges.',
             marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'Tree planting and afforestation to stabilize soils.\n\nImproved irrigation techniques to prevent salinization.\n\nSoil management including terracing and crop rotation.\n\nAppropriate technology like drought-resistant crops.',
+            modelAnswer: 'HOT DESERTS: Tree planting and afforestation to stabilize soils, improved irrigation techniques to prevent salinization, soil management including terracing and crop rotation, appropriate technology like drought-resistant crops.\n\nOR\n\nCOLD ENVIRONMENTS: Appropriate technology that minimizes environmental impact, government regulations to control development, international agreements for conservation, environmental impact assessments before projects.',
             markingCriteria: {
-              breakdown: ['Tree planting/afforestation (1 mark)', 'Water management techniques (1 mark)', 'Soil conservation methods (1 mark)', 'Appropriate technology (1 mark)']
+              breakdown: ['Conservation/restoration strategies (1 mark)', 'Technology-based solutions (1 mark)', 'Management/regulatory approaches (1 mark)', 'Long-term sustainability measures (1 mark)']
             },
-            specReference: '3.1.2.3 - Desertification strategies'
+            specReference: '3.1.2.3 - Management strategies'
           },
           {
             id: 'g7-q7',
-            question: 'For cold environments, explain the threats from economic development.',
+            question: 'For either hot deserts OR cold environments, explain the threats from economic development.',
             marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'Oil spills can devastate fragile ecosystems that take decades to recover.\n\nMining disrupts permafrost and releases greenhouse gases.\n\nIncreased human activity disturbs wildlife migration patterns.\n\nClimate change accelerated by fossil fuel extraction.',
+            modelAnswer: 'HOT DESERTS: Mining and resource extraction disrupting ecosystems, increased water demand for agriculture and industry, tourism pressure on fragile landscapes, infrastructure development fragmenting habitats.\n\nOR\n\nCOLD ENVIRONMENTS: Oil spills devastating fragile ecosystems that take decades to recover, mining disrupting permafrost and releasing greenhouse gases, increased human activity disturbing wildlife migration patterns, climate change accelerated by fossil fuel extraction.',
             markingCriteria: {
-              breakdown: ['Pollution threats (oil spills, etc.) (1 mark)', 'Habitat disruption (1 mark)', 'Wildlife disturbance (1 mark)', 'Climate change acceleration (1 mark)']
+              breakdown: ['Resource extraction impacts (1 mark)', 'Habitat/ecosystem disruption (1 mark)', 'Wildlife/biodiversity threats (1 mark)', 'Long-term environmental consequences (1 mark)']
             },
             specReference: '3.1.2.3 - Economic development threats'
           },
