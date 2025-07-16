@@ -1444,6 +1444,818 @@ export const curriculum: Subject[] = [
             specReference: '3.1.1.4 - Managing climate change'
           }
         ]
+      },
+      {
+        id: 'g5-ecosystems',
+        name: 'Ecosystems',
+        questions: [
+          {
+            id: 'g5-q1',
+            question: 'Define the terms "biotic" and "abiotic" components of an ecosystem.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Biotic components are the living parts of an ecosystem (plants, animals, microorganisms).\n\nAbiotic components are the non-living parts of an ecosystem (climate, soil, water, sunlight).',
+            markingCriteria: {
+              breakdown: ['Biotic = living components (1 mark)', 'Abiotic = non-living components (1 mark)']
+            },
+            specReference: '3.1.2.1 - Ecosystems'
+          },
+          {
+            id: 'g5-q2',
+            question: 'Explain the roles of producers, primary consumers, and decomposers in a food chain.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Producers (plants) make their own food through photosynthesis and form the base of food chains.\n\nPrimary consumers (herbivores) eat producers and convert plant energy into animal energy.\n\nDecomposers (bacteria, fungi) break down dead organisms and waste, returning nutrients to the soil for producers to use again.',
+            markingCriteria: {
+              breakdown: ['Producers make food through photosynthesis (2 marks)', 'Primary consumers eat producers (2 marks)', 'Decomposers break down dead matter and recycle nutrients (2 marks)']
+            },
+            specReference: '3.1.2.1 - Food chains and webs'
+          },
+          {
+            id: 'g5-q3',
+            question: 'Describe the process of nutrient cycling in ecosystems.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Nutrients cycle between biotic and abiotic components.\n\nPlants absorb nutrients from soil through roots.\n\nAnimals obtain nutrients by eating plants or other animals.\n\nWhen organisms die, decomposers break them down, returning nutrients to the soil.',
+            markingCriteria: {
+              breakdown: ['Nutrients cycle between living and non-living (1 mark)', 'Plants absorb from soil (1 mark)', 'Animals get nutrients from food (1 mark)', 'Decomposers return nutrients to soil (1 mark)']
+            },
+            specReference: '3.1.2.1 - Nutrient cycling'
+          },
+          {
+            id: 'g5-q4',
+            question: 'Explain how a change in one component of an ecosystem can affect other components.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Ecosystems are interdependent - all components are connected.\n\nRemoving a predator leads to increase in prey numbers, which increases pressure on food sources.\n\nClimate change affects plant growth, which impacts all animals in food chains.\n\nSoil degradation reduces plant growth, affecting entire food webs.',
+            markingCriteria: {
+              breakdown: ['Recognition of interdependence (1 mark)', 'Example of predator-prey relationship (1 mark)', 'Example of climate impact (1 mark)', 'Example of soil/habitat impact (1 mark)']
+            },
+            specReference: '3.1.2.1 - Ecosystem balance'
+          },
+          {
+            id: 'g5-q5',
+            question: 'Describe the global distribution of large-scale ecosystems (biomes).',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Tropical rainforests near the equator in hot, wet climates.\n\nDeserts in subtropical high-pressure zones (30°N and S).\n\nTemperate forests in mid-latitudes with moderate climates.\n\nTundra in Arctic regions with very cold climates.',
+            markingCriteria: {
+              breakdown: ['Tropical rainforests near equator (1 mark)', 'Deserts at 30°N/S (1 mark)', 'Temperate forests in mid-latitudes (1 mark)', 'Tundra in Arctic regions (1 mark)']
+            },
+            specReference: '3.1.2.1 - Global distribution of ecosystems'
+          },
+          {
+            id: 'g5-q6',
+            question: 'Using a named UK ecosystem, explain the roles of producers, consumers, and decomposers.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'In a UK woodland ecosystem:\n\nProducers include oak trees, hazel shrubs, and ferns that photosynthesize.\n\nPrimary consumers include deer, rabbits, and caterpillars that eat plants.\n\nSecondary consumers include foxes and birds that eat herbivores.\n\nDecomposers include bacteria and fungi that break down leaf litter and dead animals.',
+            markingCriteria: {
+              breakdown: ['Named UK ecosystem (1 mark)', 'Examples of producers (2 marks)', 'Examples of consumers at different levels (2 marks)', 'Examples of decomposers (1 mark)']
+            },
+            specReference: '3.1.2.1 - UK ecosystem example'
+          },
+          {
+            id: 'g5-q7',
+            question: 'Explain what is meant by interdependence in ecosystems.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Interdependence means all components of an ecosystem depend on each other.\n\nChanges to one component affect other components.\n\nFor example, plants depend on soil nutrients, animals depend on plants for food, and decomposers depend on dead organisms.',
+            markingCriteria: {
+              breakdown: ['All components depend on each other (1 mark)', 'Changes affect other components (1 mark)', 'Example of interdependence (1 mark)']
+            },
+            specReference: '3.1.2.1 - Interdependence'
+          },
+          {
+            id: 'g5-q8',
+            question: 'Describe the characteristics that determine the distribution of different ecosystems.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Climate (temperature and precipitation) is the main factor.\n\nSoil type and depth affect plant growth.\n\nRelief and altitude influence temperature and drainage.\n\nHuman activities can modify or destroy natural ecosystems.',
+            markingCriteria: {
+              breakdown: ['Climate factors (temperature/precipitation) (1 mark)', 'Soil characteristics (1 mark)', 'Relief/altitude effects (1 mark)', 'Human impact (1 mark)']
+            },
+            specReference: '3.1.2.1 - Ecosystem distribution factors'
+          },
+          {
+            id: 'g5-q9',
+            question: 'Explain how energy flows through an ecosystem.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Energy enters ecosystems through photosynthesis by producers.\n\nEnergy flows through food chains from producers to consumers.\n\nEnergy is lost at each trophic level through respiration and heat.\n\nDecomposers release remaining energy when breaking down dead matter.',
+            markingCriteria: {
+              breakdown: ['Energy enters through photosynthesis (1 mark)', 'Flows through food chains (1 mark)', 'Energy lost at each level (1 mark)', 'Decomposers release remaining energy (1 mark)']
+            },
+            specReference: '3.1.2.1 - Energy flow'
+          },
+          {
+            id: 'g5-q10',
+            question: 'Assess the importance of maintaining ecosystem balance.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Ecosystem balance maintains biodiversity and prevents species extinction.\n\nIt ensures sustainable resource supply for humans (food, medicines, materials).\n\nBalanced ecosystems provide services like water purification and climate regulation.\n\nHowever, some human activities may require ecosystem modification for development.\n\nThe challenge is balancing conservation with human needs.',
+            markingCriteria: {
+              breakdown: ['Maintains biodiversity (1 mark)', 'Provides resources for humans (1 mark)', 'Ecosystem services (1 mark)', 'Recognition of development needs (1 mark)', 'Evaluation of balance needed (2 marks)']
+            },
+            specReference: '3.1.2.1 - Ecosystem balance importance'
+          }
+        ]
+      },
+      {
+        id: 'g6-tropical-rainforests',
+        name: 'Tropical Rainforests',
+        questions: [
+          {
+            id: 'g6-q1',
+            question: 'Describe the physical characteristics of tropical rainforests.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'High temperatures (25-30°C) with little seasonal variation.\n\nHigh rainfall (over 2000mm annually) with no dry season.\n\nFour distinct layers: emergent, canopy, understory, and forest floor.\n\nPoor soils due to rapid nutrient cycling and heavy leaching.',
+            markingCriteria: {
+              breakdown: ['High temperatures with little variation (1 mark)', 'High rainfall/no dry season (1 mark)', 'Four vegetation layers (1 mark)', 'Poor soils/rapid nutrient cycling (1 mark)']
+            },
+            specReference: '3.1.2.2 - Tropical rainforest characteristics'
+          },
+          {
+            id: 'g6-q2',
+            question: 'Explain how plants have adapted to life in tropical rainforests.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Tall trees with emergent layer to reach sunlight above canopy.\n\nButtress roots provide stability in shallow soils.\n\nDrip tips on leaves allow rapid water runoff to prevent fungal growth.\n\nLianas climb other plants to reach light without investing energy in thick trunks.\n\nEpiphytes grow on other plants to access light in canopy.',
+            markingCriteria: {
+              breakdown: ['Tall trees/emergent layer (1 mark)', 'Buttress roots for stability (1 mark)', 'Drip tips for water runoff (1 mark)', 'Lianas for climbing (1 mark)', 'Epiphytes for canopy access (1 mark)', 'Clear explanation (1 mark)']
+            },
+            specReference: '3.1.2.2 - Plant adaptations'
+          },
+          {
+            id: 'g6-q3',
+            question: 'Describe how animals have adapted to tropical rainforest conditions.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Many animals are arboreal (tree-dwelling) to access food in canopy.\n\nBright colors for communication in dense vegetation.\n\nStrong limbs and grasping hands/tails for climbing.\n\nNocturnal behavior to avoid daytime heat and competition.',
+            markingCriteria: {
+              breakdown: ['Arboreal lifestyle (1 mark)', 'Bright colors for communication (1 mark)', 'Physical adaptations for climbing (1 mark)', 'Nocturnal behavior (1 mark)']
+            },
+            specReference: '3.1.2.2 - Animal adaptations'
+          },
+          {
+            id: 'g6-q4',
+            question: 'Explain the interdependence between climate, water, soils, plants, animals, and people in tropical rainforests.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Hot, wet climate supports rapid plant growth and high biodiversity.\n\nTrees create their own microclimate through transpiration, maintaining humidity.\n\nRapid decay in warm, moist conditions creates nutrient-poor soils.\n\nPlants and animals have complex relationships (pollination, seed dispersal).\n\nIndigenous people depend on forest for food, shelter, and medicines.',
+            markingCriteria: {
+              breakdown: ['Climate supports plant growth (1 mark)', 'Trees create microclimate (1 mark)', 'Warm conditions affect soil (1 mark)', 'Plant-animal relationships (1 mark)', 'Human dependence on forest (1 mark)', 'Recognition of interdependence (1 mark)']
+            },
+            specReference: '3.1.2.2 - Interdependence'
+          },
+          {
+            id: 'g6-q5',
+            question: 'Describe the main causes of deforestation in tropical rainforests.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Commercial agriculture (palm oil, soya, cattle ranching) for global markets.\n\nSubsistence farming by local populations clearing land for crops.\n\nLogging for valuable hardwood timber exports.\n\nMining for minerals and metals.\n\nRoad building for transport and development access.\n\nPopulation growth increasing pressure on land.',
+            markingCriteria: {
+              breakdown: ['Commercial agriculture (1 mark)', 'Subsistence farming (1 mark)', 'Logging for timber (1 mark)', 'Mining activities (1 mark)', 'Infrastructure development (1 mark)', 'Population pressure (1 mark)']
+            },
+            specReference: '3.1.2.2 - Causes of deforestation'
+          },
+          {
+            id: 'g6-q6',
+            question: 'Using a case study, explain the causes and impacts of deforestation.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Amazon Rainforest, Brazil:\n\nCauses: Cattle ranching (80% of cleared land), soya farming for export, illegal logging, mining, road construction.\n\nEnvironmental impacts: Climate change through CO2 release, soil erosion, loss of biodiversity, disruption of water cycle.\n\nEconomic impacts: Short-term economic gains but long-term loss of resources, tourism decline.\n\nSocial impacts: Indigenous peoples lose traditional lands and lifestyles.',
+            markingCriteria: {
+              breakdown: ['Named case study (1 mark)', 'Causes - agriculture/ranching (2 marks)', 'Environmental impacts (2 marks)', 'Economic impacts (2 marks)', 'Social impacts (1 mark)']
+            },
+            specReference: '3.1.2.2 - Deforestation case study'
+          },
+          {
+            id: 'g6-q7',
+            question: 'Describe sustainable management strategies for tropical rainforests.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Selective logging instead of clear-cutting to maintain forest structure.\n\nReplanting programs to restore cleared areas.\n\nConservation areas and national parks to protect biodiversity.\n\nEcotourism providing income without destroying forest.\n\nEducation programs for local communities about conservation.\n\nInternational agreements and debt reduction schemes.',
+            markingCriteria: {
+              breakdown: ['Selective logging (1 mark)', 'Replanting programs (1 mark)', 'Conservation areas (1 mark)', 'Ecotourism (1 mark)', 'Education programs (1 mark)', 'International agreements (1 mark)']
+            },
+            specReference: '3.1.2.2 - Sustainable management'
+          },
+          {
+            id: 'g6-q8',
+            question: 'Explain the global importance of tropical rainforest biodiversity.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Contains over 50% of world\'s species despite covering only 6% of land surface.\n\nSource of medicines - many pharmaceuticals derived from rainforest plants.\n\nGenetic diversity important for crop development and disease resistance.\n\nEcosystem services like climate regulation and oxygen production.',
+            markingCriteria: {
+              breakdown: ['High species diversity statistics (1 mark)', 'Source of medicines (1 mark)', 'Genetic diversity importance (1 mark)', 'Ecosystem services (1 mark)']
+            },
+            specReference: '3.1.2.2 - Biodiversity issues'
+          },
+          {
+            id: 'g6-q9',
+            question: 'Assess the effectiveness of different strategies to reduce tropical rainforest deforestation.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Legal protection through national parks is effective where enforced but requires government commitment.\n\nEcotourism provides sustainable income but limited to accessible areas.\n\nInternational agreements like REDD+ show promise but depend on global cooperation.\n\nDebt-for-nature swaps effective but only for heavily indebted countries.\n\nEducation and community involvement essential for long-term success.\n\nEffectiveness ultimately depends on balancing conservation with economic development needs.',
+            markingCriteria: {
+              breakdown: ['Legal protection effectiveness (2 marks)', 'Ecotourism benefits and limitations (2 marks)', 'International approaches (2 marks)', 'Community involvement importance (1 mark)', 'Overall evaluation (1 mark)']
+            },
+            specReference: '3.1.2.2 - Management strategy evaluation'
+          },
+          {
+            id: 'g6-q10',
+            question: 'Explain how deforestation contributes to climate change.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Trees store carbon in their biomass - when cut down, this carbon is released as CO2.\n\nBurning cleared forest releases additional CO2 into atmosphere.\n\nReduced photosynthesis means less CO2 absorbed from atmosphere.\n\nSoil carbon also released when forest floor is disturbed.',
+            markingCriteria: {
+              breakdown: ['Carbon release from cut trees (1 mark)', 'CO2 from burning (1 mark)', 'Reduced CO2 absorption (1 mark)', 'Soil carbon release (1 mark)']
+            },
+            specReference: '3.1.2.2 - Climate change impacts'
+          }
+        ]
+      },
+      {
+        id: 'g7-hot-deserts-cold-environments',
+        name: 'Hot Deserts/Cold Environments',
+        questions: [
+          {
+            id: 'g7-q1',
+            question: 'Choose either hot deserts OR cold environments. Describe the physical characteristics of your chosen environment.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'HOT DESERTS: Very low rainfall (under 250mm annually), high daytime temperatures (above 40°C), large diurnal temperature range, sparse vegetation, sandy or rocky surfaces.\n\nOR\n\nCOLD ENVIRONMENTS: Very low temperatures (below -10°C annually), short growing season, permafrost in tundra, limited precipitation often as snow, specialized vegetation adapted to cold.',
+            markingCriteria: {
+              breakdown: ['Clear choice of environment (1 mark)', 'Temperature characteristics (1 mark)', 'Precipitation characteristics (1 mark)', 'Other physical features (1 mark)']
+            },
+            specReference: '3.1.2.3 - Physical characteristics'
+          },
+          {
+            id: 'g7-q2',
+            question: 'For either hot deserts OR cold environments, explain how organisms have adapted to survive.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'HOT DESERTS: Cacti store water in thick stems and have waxy coatings to reduce water loss. Animals like camels store fat in humps and can survive without water. Many animals are nocturnal to avoid heat.\n\nOR\n\nCOLD ENVIRONMENTS: Arctic foxes have thick fur and small ears to conserve heat. Polar bears have layers of fat for insulation. Plants grow low to ground to avoid wind.',
+            markingCriteria: {
+              breakdown: ['Plant adaptations with examples (2 marks)', 'Animal adaptations with examples (2 marks)', 'Behavioral adaptations (1 mark)', 'Clear explanation of how adaptations help survival (1 mark)']
+            },
+            specReference: '3.1.2.3 - Organism adaptations'
+          },
+          {
+            id: 'g7-q3',
+            question: 'Using a case study of either a hot desert OR cold environment, describe the development opportunities.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'HOT DESERT (e.g., Sahara): Solar energy potential, mineral extraction (oil, gas), agriculture with irrigation, tourism to unique landscapes.\n\nOR\n\nCOLD ENVIRONMENT (e.g., Alaska): Oil and gas extraction, mining (gold, copper), fishing, tourism, renewable energy (wind).',
+            markingCriteria: {
+              breakdown: ['Named case study (1 mark)', 'Energy/mineral opportunities (1 mark)', 'Agriculture/fishing opportunities (1 mark)', 'Tourism/other opportunities (1 mark)']
+            },
+            specReference: '3.1.2.3 - Development opportunities'
+          },
+          {
+            id: 'g7-q4',
+            question: 'For either hot deserts OR cold environments, explain the development challenges.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'HOT DESERTS: Extreme temperatures make working conditions difficult, water supply challenges, remote locations increase costs, infrastructure difficult to build and maintain.\n\nOR\n\nCOLD ENVIRONMENTS: Extreme cold and permafrost, inaccessibility and remoteness, short construction seasons, high costs of transport and labor.',
+            markingCriteria: {
+              breakdown: ['Temperature challenges (1 mark)', 'Access/location challenges (1 mark)', 'Infrastructure challenges (1 mark)', 'Cost implications (1 mark)']
+            },
+            specReference: '3.1.2.3 - Development challenges'
+          },
+          {
+            id: 'g7-q5',
+            question: 'Explain the causes of desertification in hot desert margins.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Climate change reducing rainfall and increasing temperatures.\n\nOvergrazing by livestock removing vegetation cover.\n\nOver-cultivation exhausting soil nutrients.\n\nDeforestation for fuelwood removing stabilizing vegetation.\n\nPopulation growth increasing pressure on marginal lands.\n\nPoor irrigation leading to soil salinization.',
+            markingCriteria: {
+              breakdown: ['Climate change impacts (1 mark)', 'Overgrazing effects (1 mark)', 'Over-cultivation (1 mark)', 'Deforestation (1 mark)', 'Population pressure (1 mark)', 'Poor agricultural practices (1 mark)']
+            },
+            specReference: '3.1.2.3 - Desertification causes'
+          },
+          {
+            id: 'g7-q6',
+            question: 'Describe strategies to reduce desertification.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Tree planting and afforestation to stabilize soils.\n\nImproved irrigation techniques to prevent salinization.\n\nSoil management including terracing and crop rotation.\n\nAppropriate technology like drought-resistant crops.',
+            markingCriteria: {
+              breakdown: ['Tree planting/afforestation (1 mark)', 'Water management techniques (1 mark)', 'Soil conservation methods (1 mark)', 'Appropriate technology (1 mark)']
+            },
+            specReference: '3.1.2.3 - Desertification strategies'
+          },
+          {
+            id: 'g7-q7',
+            question: 'For cold environments, explain the threats from economic development.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Oil spills can devastate fragile ecosystems that take decades to recover.\n\nMining disrupts permafrost and releases greenhouse gases.\n\nIncreased human activity disturbs wildlife migration patterns.\n\nClimate change accelerated by fossil fuel extraction.',
+            markingCriteria: {
+              breakdown: ['Pollution threats (oil spills, etc.) (1 mark)', 'Habitat disruption (1 mark)', 'Wildlife disturbance (1 mark)', 'Climate change acceleration (1 mark)']
+            },
+            specReference: '3.1.2.3 - Economic development threats'
+          },
+          {
+            id: 'g7-q8',
+            question: 'Assess the value of wilderness areas in extreme environments.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Wilderness areas preserve unique ecosystems and biodiversity that cannot survive elsewhere.\n\nThey provide important scientific research opportunities for climate change studies.\n\nCultural value for indigenous peoples who depend on traditional ways of life.\n\nTourism value generating income while preserving environment.\n\nHowever, protection may limit economic development opportunities for local communities.',
+            markingCriteria: {
+              breakdown: ['Biodiversity conservation (1 mark)', 'Scientific research value (1 mark)', 'Cultural significance (1 mark)', 'Economic value (tourism) (1 mark)', 'Recognition of development limitations (1 mark)', 'Overall assessment (1 mark)']
+            },
+            specReference: '3.1.2.3 - Value of wilderness'
+          },
+          {
+            id: 'g7-q9',
+            question: 'Describe strategies for sustainable development in extreme environments.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Use of appropriate technology that minimizes environmental impact.\n\nGovernment regulations to control development and protect sensitive areas.\n\nInternational agreements for conservation of global wilderness areas.\n\nInvolvement of conservation groups in monitoring and protection.\n\nCommunity involvement ensuring local people benefit from development.\n\nEnvironmental impact assessments before major projects.',
+            markingCriteria: {
+              breakdown: ['Appropriate technology (1 mark)', 'Government regulation (1 mark)', 'International cooperation (1 mark)', 'Conservation group involvement (1 mark)', 'Community participation (1 mark)', 'Environmental assessment (1 mark)']
+            },
+            specReference: '3.1.2.3 - Sustainable development strategies'
+          },
+          {
+            id: 'g7-q10',
+            question: 'Compare the challenges of living and working in hot deserts versus cold environments.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Both environments have extreme temperatures that create health and safety challenges.\n\nWater supply is critical in hot deserts, while heating and shelter are priorities in cold environments.\n\nBoth are remote and inaccessible, increasing costs and difficulty of transport.\n\nDeserts face challenges from sand and heat affecting equipment, while cold environments face permafrost and ice problems.\n\nBoth require specialized technology and clothing for human survival.\n\nCold environments have seasonal variations affecting work, while deserts have more consistent conditions.',
+            markingCriteria: {
+              breakdown: ['Temperature challenges in both (2 marks)', 'Different resource priorities (water vs heat) (2 marks)', 'Access and transport similarities (1 mark)', 'Different environmental hazards (2 marks)', 'Overall comparison (1 mark)']
+            },
+            specReference: '3.1.2.3 - Comparative challenges'
+          }
+        ]
+      },
+      {
+        id: 'g8-uk-physical-landscapes',
+        name: 'UK Physical Landscapes Overview',
+        questions: [
+          {
+            id: 'g8-q1',
+            question: 'Describe the main upland areas of the UK.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Scottish Highlands in northern Scotland with high mountains and rugged terrain.\n\nLake District in northwest England with rounded hills and lakes.\n\nPennines running north-south through northern England.\n\nWelsh Mountains in Wales including Snowdonia.',
+            markingCriteria: {
+              breakdown: ['Scottish Highlands identified (1 mark)', 'Lake District mentioned (1 mark)', 'Pennines identified (1 mark)', 'Welsh mountains/Snowdonia (1 mark)']
+            },
+            specReference: '3.1.3.1 - UK physical landscape overview'
+          },
+          {
+            id: 'g8-q2',
+            question: 'Identify the main lowland areas of the UK.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'East Anglia in eastern England with flat, fertile plains.\n\nSouth East England including the Thames Valley.\n\nMidlands plains in central England.',
+            markingCriteria: {
+              breakdown: ['East Anglia identified (1 mark)', 'South East England/Thames Valley (1 mark)', 'Midlands mentioned (1 mark)']
+            },
+            specReference: '3.1.3.1 - UK physical landscape overview'
+          },
+          {
+            id: 'g8-q3',
+            question: 'Name the main river systems of the UK.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'River Thames flowing through London to the North Sea.\n\nRiver Severn, the longest UK river, flowing through Wales and England.\n\nRiver Trent in the Midlands.\n\nRiver Clyde in Scotland.',
+            markingCriteria: {
+              breakdown: ['River Thames identified (1 mark)', 'River Severn as longest UK river (1 mark)', 'River Trent mentioned (1 mark)', 'River Clyde or other Scottish river (1 mark)']
+            },
+            specReference: '3.1.3.1 - UK river systems'
+          },
+          {
+            id: 'g8-q4',
+            question: 'Explain how geology influences UK landscapes.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Hard rocks like granite form upland areas that resist erosion.\n\nSoft rocks like clay create lowland areas that erode more easily.\n\nSedimentary rocks create distinctive layered landscapes.\n\nGeological structure affects drainage patterns and river development.',
+            markingCriteria: {
+              breakdown: ['Hard rocks form uplands (1 mark)', 'Soft rocks form lowlands (1 mark)', 'Sedimentary rock characteristics (1 mark)', 'Impact on drainage/rivers (1 mark)']
+            },
+            specReference: '3.1.3.1 - Geological influences'
+          },
+          {
+            id: 'g8-q5',
+            question: 'Describe how past ice ages have shaped UK landscapes.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Glacial erosion carved out deep valleys and lake basins in upland areas.\n\nGlacial deposition created fertile plains in lowland areas.\n\nU-shaped valleys formed by glacial erosion contrast with V-shaped river valleys.\n\nGlacial features like moraines and drumlins still visible today.',
+            markingCriteria: {
+              breakdown: ['Glacial erosion creating valleys/lakes (1 mark)', 'Glacial deposition in lowlands (1 mark)', 'U-shaped vs V-shaped valleys (1 mark)', 'Glacial features remaining (1 mark)']
+            },
+            specReference: '3.1.3.1 - Ice age impacts'
+          },
+          {
+            id: 'g8-q6',
+            question: 'Explain the distribution of different rock types across the UK.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Older, harder rocks in north and west (Scotland, Wales, Cornwall).\n\nYounger, softer rocks in south and east (chalk, clay, limestone).\n\nIgneous rocks like granite in Scottish Highlands.\n\nSedimentary rocks like limestone in Pennines and chalk in South Downs.',
+            markingCriteria: {
+              breakdown: ['Older rocks in north/west (1 mark)', 'Younger rocks in south/east (1 mark)', 'Igneous rock examples and locations (1 mark)', 'Sedimentary rock examples and locations (1 mark)']
+            },
+            specReference: '3.1.3.1 - Rock type distribution'
+          },
+          {
+            id: 'g8-q7',
+            question: 'Describe the major escarpments found in the UK.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'The Cotswold Hills formed by limestone creating steep scarps.\n\nThe South Downs chalk escarpment in southern England.\n\nThe North York Moors escarpment in northern England.',
+            markingCriteria: {
+              breakdown: ['Cotswolds limestone escarpment (1 mark)', 'South Downs chalk escarpment (1 mark)', 'North York Moors or other escarpment (1 mark)']
+            },
+            specReference: '3.1.3.1 - UK escarpments'
+          },
+          {
+            id: 'g8-q8',
+            question: 'Explain how human activities have modified UK landscapes.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Agriculture has created field patterns and removed natural vegetation.\n\nUrbanization has completely transformed natural landscapes.\n\nQuarrying and mining have created artificial landforms.\n\nForestry has replaced natural woodland with planted forests.',
+            markingCriteria: {
+              breakdown: ['Agricultural modification (1 mark)', 'Urban development impact (1 mark)', 'Extractive industry effects (1 mark)', 'Forestry changes (1 mark)']
+            },
+            specReference: '3.1.3.1 - Human landscape modification'
+          },
+          {
+            id: 'g8-q9',
+            question: 'Compare the characteristics of highland and lowland areas in the UK.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Highland areas have steep slopes and rocky terrain, while lowlands are flat with gentle gradients.\n\nHighlands are made of harder, older rocks; lowlands of softer, younger rocks.\n\nHighlands have sparse population and extensive farming; lowlands are densely populated with intensive agriculture.\n\nHighlands are wetter and colder; lowlands are drier and warmer.',
+            markingCriteria: {
+              breakdown: ['Relief differences (slopes/terrain) (2 marks)', 'Geological differences (1 mark)', 'Population and land use differences (2 marks)', 'Climate differences (1 mark)']
+            },
+            specReference: '3.1.3.1 - Highland vs lowland comparison'
+          },
+          {
+            id: 'g8-q10',
+            question: 'Assess the relative importance of geological and climatic factors in shaping UK landscapes.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Geology provides the foundation - hard rocks create uplands, soft rocks create lowlands.\n\nClimate drives erosion processes - rainfall and temperature affect weathering rates.\n\nPast climates (ice ages) carved major landscape features that geology couldn\'t prevent.\n\nCurrent climate continues to shape landscapes through river erosion and coastal processes.\n\nGeology determines resistance to erosion, but climate provides the energy for landscape change.\n\nBoth factors work together - neither alone can explain UK landscape diversity.',
+            markingCriteria: {
+              breakdown: ['Geological control on major landforms (2 marks)', 'Climate driving erosion processes (2 marks)', 'Past climate impacts (ice ages) (2 marks)', 'Interaction between factors (1 mark)', 'Overall evaluation (1 mark)']
+            },
+            specReference: '3.1.3.1 - Geological vs climatic factors'
+          }
+        ]
+      },
+      {
+        id: 'g9-coastal-landscapes',
+        name: 'Coastal Landscapes in the UK',
+        questions: [
+          {
+            id: 'g9-q1',
+            question: 'Distinguish between constructive and destructive waves.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Constructive waves have low height, long wavelength, and low frequency (6-8 per minute).\n\nThey have strong swash and weak backwash, depositing sediment.\n\nDestructive waves are high, steep, and frequent (10-14 per minute).\n\nThey have weak swash but strong backwash, eroding the coast.',
+            markingCriteria: {
+              breakdown: ['Constructive wave characteristics (height, frequency) (1 mark)', 'Constructive wave action (strong swash, deposition) (1 mark)', 'Destructive wave characteristics (1 mark)', 'Destructive wave action (erosion) (1 mark)']
+            },
+            specReference: '3.1.3.2 - Wave types and characteristics'
+          },
+          {
+            id: 'g9-q2',
+            question: 'Explain the process of hydraulic action in coastal erosion.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Waves crash against rock faces, forcing air into cracks and joints.\n\nCompressed air creates intense pressure within the rock.\n\nWhen waves retreat, pressure is suddenly released, causing rock to shatter.',
+            markingCriteria: {
+              breakdown: ['Waves force air into cracks (1 mark)', 'Air compression creates pressure (1 mark)', 'Pressure release causes rock to break (1 mark)']
+            },
+            specReference: '3.1.3.2 - Coastal erosion processes'
+          },
+          {
+            id: 'g9-q3',
+            question: 'Describe the formation of headlands and bays.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Coastlines with alternating hard and soft rocks are eroded at different rates.\n\nSoft rocks erode faster, forming bays with beaches.\n\nHard rocks resist erosion, forming headlands that jut out into the sea.\n\nWave refraction concentrates erosion on headlands and reduces it in bays.',
+            markingCriteria: {
+              breakdown: ['Alternating hard and soft rocks (1 mark)', 'Soft rocks erode faster forming bays (1 mark)', 'Hard rocks resist erosion forming headlands (1 mark)', 'Wave refraction effects (1 mark)']
+            },
+            specReference: '3.1.3.2 - Erosional landforms'
+          },
+          {
+            id: 'g9-q4',
+            question: 'Explain the sequence of formation of caves, arches, and stacks.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Wave attack concentrates on headlands due to wave refraction.\n\nHydraulic action and abrasion exploit weaknesses like joints and faults.\n\nContinued erosion enlarges weaknesses to form caves.\n\nWaves attack cave from both sides until they meet, forming an arch.\n\nWeathering and erosion weaken the arch roof until it collapses, leaving a stack.\n\nFurther erosion may reduce the stack to a stump.',
+            markingCriteria: {
+              breakdown: ['Wave attack on headlands (1 mark)', 'Exploitation of weaknesses (1 mark)', 'Cave formation (1 mark)', 'Arch formation (1 mark)', 'Stack formation (1 mark)', 'Complete sequence understanding (1 mark)']
+            },
+            specReference: '3.1.3.2 - Coastal erosion sequence'
+          },
+          {
+            id: 'g9-q5',
+            question: 'Describe how spits are formed.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Longshore drift transports sediment along the coast.\n\nWhere the coastline changes direction, sediment continues in original direction.\n\nDeposition occurs in deeper water, building up a ridge of sediment.\n\nWind and waves may curve the spit end, forming a recurved tip.',
+            markingCriteria: {
+              breakdown: ['Longshore drift transport (1 mark)', 'Continued transport past coastline change (1 mark)', 'Deposition in deeper water (1 mark)', 'Recurved tip formation (1 mark)']
+            },
+            specReference: '3.1.3.2 - Depositional landforms'
+          },
+          {
+            id: 'g9-q6',
+            question: 'Using a named UK coastal area, describe the erosional and depositional landforms present.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Dorset Coast (Jurassic Coast):\n\nErosional features: Old Harry Rocks (chalk stacks), Durdle Door (limestone arch), Lulworth Cove (bay in soft rocks).\n\nDepositional features: Chesil Beach (tombolo), Studland Bay beach, sand dunes.\n\nVaried geology creates diverse landforms along this coastline.',
+            markingCriteria: {
+              breakdown: ['Named UK coastal area (1 mark)', 'Erosional landforms with examples (2 marks)', 'Depositional landforms with examples (2 marks)', 'Link to geological variety (1 mark)']
+            },
+            specReference: '3.1.3.2 - UK coastal case study'
+          },
+          {
+            id: 'g9-q7',
+            question: 'Explain how geology influences coastal landform development.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Rock type affects resistance to erosion - hard rocks form cliffs, soft rocks form bays.\n\nRock structure (joints, faults, bedding) creates weaknesses for erosion to exploit.\n\nDip of rock layers affects cliff profiles and stability.\n\nAlternating rock types create complex coastlines with headlands and bays.',
+            markingCriteria: {
+              breakdown: ['Rock resistance differences (1 mark)', 'Rock structure weaknesses (1 mark)', 'Rock dip effects (1 mark)', 'Alternating geology effects (1 mark)']
+            },
+            specReference: '3.1.3.2 - Geological influence on coasts'
+          },
+          {
+            id: 'g9-q8',
+            question: 'Compare hard and soft engineering coastal management strategies.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Hard engineering: Sea walls, groynes, rock armor - expensive but provide strong protection, may cause problems elsewhere.\n\nSoft engineering: Beach nourishment, dune restoration, managed retreat - cheaper, more sustainable, work with natural processes.\n\nHard engineering fights against nature; soft engineering works with it.',
+            markingCriteria: {
+              breakdown: ['Hard engineering examples (2 marks)', 'Soft engineering examples (2 marks)', 'Comparison of approaches (1 mark)', 'Evaluation of effectiveness (1 mark)']
+            },
+            specReference: '3.1.3.2 - Coastal management strategies'
+          },
+          {
+            id: 'g9-q9',
+            question: 'Using a named example, evaluate the success of a coastal management scheme.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Thames Estuary Coastal Management:\n\nStrategy: Combination of Thames Barrier (hard engineering) and managed retreat in some areas.\n\nSuccess: Thames Barrier has successfully prevented flooding of London multiple times since 1982.\n\nSoft engineering upstream has restored natural flood plains.\n\nHowever, rising sea levels may make current defenses inadequate.\n\nHigh costs and need for regular upgrades.\n\nOverall successful but requires ongoing investment and adaptation.',
+            markingCriteria: {
+              breakdown: ['Named coastal management example (1 mark)', 'Description of management strategies used (2 marks)', 'Evidence of success (2 marks)', 'Limitations or problems (2 marks)', 'Overall evaluation (1 mark)']
+            },
+            specReference: '3.1.3.2 - Coastal management case study'
+          },
+          {
+            id: 'g9-q10',
+            question: 'Assess the advantages and disadvantages of managed retreat as a coastal management strategy.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Advantages: Cost-effective long-term solution, creates natural coastal habitats, absorbs wave energy, adapts to sea level rise.\n\nDisadvantages: Loss of existing land use and property, compensation costs, public opposition, may not be suitable for high-value areas.\n\nEffectiveness depends on local circumstances and community acceptance.',
+            markingCriteria: {
+              breakdown: ['Economic advantages (1 mark)', 'Environmental advantages (1 mark)', 'Economic disadvantages (1 mark)', 'Social disadvantages (1 mark)', 'Context-dependent evaluation (2 marks)']
+            },
+            specReference: '3.1.3.2 - Managed retreat evaluation'
+          }
+        ]
+      },
+      {
+        id: 'g10-river-landscapes',
+        name: 'River Landscapes in the UK',
+        questions: [
+          {
+            id: 'g10-q1',
+            question: 'Describe the typical long profile of a river from source to mouth.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Steep gradient in upper course with rapid elevation change.\n\nGradual decrease in gradient through middle course.\n\nVery gentle gradient in lower course approaching base level.\n\nOverall concave profile due to erosion of weakest points.',
+            markingCriteria: {
+              breakdown: ['Steep upper course gradient (1 mark)', 'Decreasing gradient downstream (1 mark)', 'Gentle lower course gradient (1 mark)', 'Concave overall shape (1 mark)']
+            },
+            specReference: '3.1.3.3 - River profiles'
+          },
+          {
+            id: 'g10-q2',
+            question: 'Explain the four processes of river erosion.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Hydraulic action: Force of moving water removes loose material.\n\nAbrasion: Rocks carried by river scrape against bed and banks.\n\nAttrition: Rocks carried by river collide and break into smaller pieces.\n\nSolution: Chemical weathering dissolves soluble rocks like limestone.',
+            markingCriteria: {
+              breakdown: ['Hydraulic action described (1 mark)', 'Abrasion described (1 mark)', 'Attrition described (1 mark)', 'Solution described (1 mark)']
+            },
+            specReference: '3.1.3.3 - Fluvial erosion processes'
+          },
+          {
+            id: 'g10-q3',
+            question: 'Describe the formation of waterfalls and gorges.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'River flows over alternating hard and soft rocks.\n\nSoft rock erodes faster, creating a step in the river bed.\n\nWater falls over the hard rock, creating a waterfall.\n\nHydraulic action at the base creates a plunge pool.\n\nUndercutting causes hard rock to collapse.\n\nWaterfall retreats upstream, leaving a steep-sided gorge.',
+            markingCriteria: {
+              breakdown: ['Alternating hard/soft rocks (1 mark)', 'Differential erosion creates step (1 mark)', 'Plunge pool formation (1 mark)', 'Undercutting process (1 mark)', 'Retreat and collapse (1 mark)', 'Gorge formation (1 mark)']
+            },
+            specReference: '3.1.3.3 - Waterfall formation'
+          },
+          {
+            id: 'g10-q4',
+            question: 'Explain how meanders and oxbow lakes are formed.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'River flows faster on outside of bends due to deeper water.\n\nFaster flow erodes outside bank, creating river cliff.\n\nSlower flow on inside deposits sediment, forming slip-off slope.\n\nLateral erosion gradually increases meander size.\n\nEventually, river cuts through narrow neck during flood.\n\nOld meander loop is abandoned, forming oxbow lake.',
+            markingCriteria: {
+              breakdown: ['Faster flow on outside of bend (1 mark)', 'Erosion creates river cliff (1 mark)', 'Deposition on inside creates slip-off slope (1 mark)', 'Meander migration (1 mark)', 'Neck cutting during flood (1 mark)', 'Oxbow lake formation (1 mark)']
+            },
+            specReference: '3.1.3.3 - Meander formation'
+          },
+          {
+            id: 'g10-q5',
+            question: 'Describe how floodplains and levees are formed.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'During floods, river overflows its banks onto surrounding land.\n\nRiver velocity decreases rapidly outside the channel.\n\nCoarse sediment deposits first, building up natural levees beside channel.\n\nFiner sediment settles across wider area, creating flat floodplain.',
+            markingCriteria: {
+              breakdown: ['River overflows during floods (1 mark)', 'Velocity decreases outside channel (1 mark)', 'Coarse sediment forms levees (1 mark)', 'Fine sediment creates floodplain (1 mark)']
+            },
+            specReference: '3.1.3.3 - Floodplain formation'
+          },
+          {
+            id: 'g10-q6',
+            question: 'Using a named UK river valley, describe the landforms present.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'River Tees, North England:\n\nUpper course: High Force waterfall, V-shaped valley, interlocking spurs.\n\nMiddle course: Meanders developing, wider valley floor.\n\nLower course: Extensive floodplain, Tees Barrage, estuary with mudflats.\n\nShows typical river landform sequence from source to mouth.',
+            markingCriteria: {
+              breakdown: ['Named UK river valley (1 mark)', 'Upper course landforms (2 marks)', 'Middle course landforms (1 mark)', 'Lower course landforms (2 marks)']
+            },
+            specReference: '3.1.3.3 - UK river valley case study'
+          },
+          {
+            id: 'g10-q7',
+            question: 'Explain the factors that increase flood risk.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Relief: Steep slopes increase surface runoff speed.\n\nGeology: Impermeable rocks prevent infiltration, increasing runoff.\n\nPrecipitation: Heavy or prolonged rainfall exceeds soil capacity.\n\nLand use: Urbanization creates impermeable surfaces; deforestation reduces interception.',
+            markingCriteria: {
+              breakdown: ['Relief factors (steep slopes) (1 mark)', 'Geological factors (permeability) (1 mark)', 'Precipitation intensity/duration (2 marks)', 'Land use changes (urbanization/deforestation) (2 marks)']
+            },
+            specReference: '3.1.3.3 - Flood risk factors'
+          },
+          {
+            id: 'g10-q8',
+            question: 'Interpret a hydrograph to explain the relationship between precipitation and river discharge.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Lag time shows delay between peak rainfall and peak discharge.\n\nSteep rising limb indicates rapid runoff (urban areas, steep slopes).\n\nGentle falling limb shows slow return to base flow.\n\nPeak discharge may exceed normal flow many times during storms.',
+            markingCriteria: {
+              breakdown: ['Lag time identified and explained (1 mark)', 'Rising limb characteristics (1 mark)', 'Falling limb characteristics (1 mark)', 'Peak discharge relationship (1 mark)']
+            },
+            specReference: '3.1.3.3 - Hydrograph interpretation'
+          },
+          {
+            id: 'g10-q9',
+            question: 'Compare hard and soft engineering flood management strategies.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Hard engineering: Dams, embankments, flood barriers - expensive but effective protection, may transfer problem downstream.\n\nSoft engineering: Afforestation, wetland restoration, flood warnings - cheaper, sustainable, work with natural processes.\n\nHard engineering provides immediate protection; soft engineering offers long-term solutions.',
+            markingCriteria: {
+              breakdown: ['Hard engineering examples and characteristics (2 marks)', 'Soft engineering examples and characteristics (2 marks)', 'Comparison of approaches (1 mark)', 'Evaluation of effectiveness (1 mark)']
+            },
+            specReference: '3.1.3.3 - Flood management strategies'
+          },
+          {
+            id: 'g10-q10',
+            question: 'Using a named example, evaluate the effectiveness of a UK flood management scheme.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Banbury Flood Alleviation Scheme, River Cherwell:\n\nCombination of hard engineering (flood walls, culverts) and soft engineering (upstream storage, natural floodplain).\n\nSuccessfully protected town center from 2007 and 2014 floods.\n\nCost £18 million but prevented much greater damage costs.\n\nSome areas still at risk, requiring ongoing monitoring.\n\nCommunity generally supportive due to reduced anxiety.\n\nOverall successful multi-method approach.',
+            markingCriteria: {
+              breakdown: ['Named UK flood management scheme (1 mark)', 'Description of management methods used (2 marks)', 'Evidence of success (2 marks)', 'Limitations or ongoing issues (2 marks)', 'Overall evaluation (1 mark)']
+            },
+            specReference: '3.1.3.3 - Flood management case study'
+          }
+        ]
+      },
+      {
+        id: 'g11-glacial-landscapes',
+        name: 'Glacial Landscapes in the UK',
+        questions: [
+          {
+            id: 'g11-q1',
+            question: 'Describe the extent of ice cover in the UK during the last ice age.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Ice covered most of Scotland, northern England down to the Midlands.\n\nWales was largely covered by ice sheets and valley glaciers.\n\nSouthern England remained ice-free but was affected by periglacial conditions.',
+            markingCriteria: {
+              breakdown: ['Scotland and northern England covered (1 mark)', 'Wales ice coverage (1 mark)', 'Southern England ice-free (1 mark)']
+            },
+            specReference: '3.1.3.4 - Ice age extent'
+          },
+          {
+            id: 'g11-q2',
+            question: 'Explain the process of glacial erosion through plucking.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Glacier freezes to rock surface, particularly in joints and cracks.\n\nAs glacier moves forward, it pulls away loose rock fragments.\n\nProcess is most effective where rock is already weakened by freeze-thaw weathering.',
+            markingCriteria: {
+              breakdown: ['Glacier freezes to rock (1 mark)', 'Movement pulls rock away (1 mark)', 'Most effective on weakened rock (1 mark)']
+            },
+            specReference: '3.1.3.4 - Glacial erosion processes'
+          },
+          {
+            id: 'g11-q3',
+            question: 'Describe the formation of a corrie (cirque).',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Snow accumulates in mountain hollows, particularly north-facing slopes.\n\nSnow compacts to form névé, then glacial ice.\n\nGlacier rotates, eroding hollow deeper through abrasion and plucking.\n\nFreeze-thaw weathering steepens back wall.\n\nWhen glacier melts, deep, armchair-shaped hollow remains, often with a tarn (lake).',
+            markingCriteria: {
+              breakdown: ['Snow accumulation in hollow (1 mark)', 'Ice formation and rotation (1 mark)', 'Erosion deepening hollow (1 mark)', 'Freeze-thaw on back wall (1 mark)', 'Final corrie shape with possible tarn (1 mark)']
+            },
+            specReference: '3.1.3.4 - Corrie formation'
+          },
+          {
+            id: 'g11-q4',
+            question: 'Explain how arêtes and pyramidal peaks are formed.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Multiple corries erode into mountain sides from different directions.\n\nWhen two corries erode back-to-back, a sharp knife-edge ridge (arête) forms between them.\n\nWhen three or more corries erode a mountain, a pyramidal peak forms at the center.\n\nContinued erosion sharpens these features over time.',
+            markingCriteria: {
+              breakdown: ['Multiple corries eroding mountain (1 mark)', 'Arête formation between two corries (1 mark)', 'Pyramidal peak from three+ corries (1 mark)', 'Continued sharpening (1 mark)']
+            },
+            specReference: '3.1.3.4 - Arête and pyramidal peak formation'
+          },
+          {
+            id: 'g11-q5',
+            question: 'Describe the characteristics of a glacial trough (U-shaped valley).',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Wide, flat floor contrasting with steep valley sides.\n\nU-shaped cross-profile very different from V-shaped river valleys.\n\nHanging valleys where tributaries enter high above main valley floor.\n\nOften contains ribbon lakes and waterfalls.',
+            markingCriteria: {
+              breakdown: ['Wide flat floor and steep sides (1 mark)', 'U-shaped profile (1 mark)', 'Hanging valleys present (1 mark)', 'Ribbon lakes/waterfalls (1 mark)']
+            },
+            specReference: '3.1.3.4 - Glacial trough characteristics'
+          },
+          {
+            id: 'g11-q6',
+            question: 'Explain how moraines are formed and describe the different types.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Moraines form from rock debris transported and deposited by glaciers.\n\nLateral moraines: Debris from valley sides carried along glacier edges.\n\nMedial moraines: Form where two lateral moraines join when glaciers merge.\n\nTerminal moraines: Debris deposited at glacier snout marks maximum advance.\n\nGround moraine: Material dragged beneath glacier creates till plains.',
+            markingCriteria: {
+              breakdown: ['Definition of moraine formation (1 mark)', 'Lateral moraine formation (1 mark)', 'Medial moraine formation (1 mark)', 'Terminal moraine formation (1 mark)', 'Ground moraine formation (1 mark)', 'Clear understanding of process (1 mark)']
+            },
+            specReference: '3.1.3.4 - Moraine formation and types'
+          },
+          {
+            id: 'g11-q7',
+            question: 'Using a named UK upland glaciated area, describe the landforms present.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Lake District, Cumbria:\n\nErosional features: Helvellyn and Scafell Pike (pyramidal peaks), Striding Edge (arête), Red Tarn and Grisedale Tarn (corrie tarns).\n\nDepositional features: Drumlins near Keswick, terminal moraines in valleys.\n\nU-shaped valleys like Great Langdale and Borrowdale.\n\nRibbon lakes including Windermere and Coniston Water.',
+            markingCriteria: {
+              breakdown: ['Named UK glaciated upland (1 mark)', 'Erosional landforms with examples (2 marks)', 'Depositional landforms with examples (1 mark)', 'Valley characteristics (1 mark)', 'Lake features (1 mark)']
+            },
+            specReference: '3.1.3.4 - UK glaciated upland case study'
+          },
+          {
+            id: 'g11-q8',
+            question: 'Describe the main economic activities in UK glaciated uplands.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Tourism: Hiking, climbing, scenic tourism bringing visitor income.\n\nFarming: Sheep farming on rough grazing land, some dairy farming in valleys.\n\nQuarrying: Slate and other stone extraction.\n\nForestry: Commercial timber production on slopes.',
+            markingCriteria: {
+              breakdown: ['Tourism activities and income (1 mark)', 'Agricultural activities (1 mark)', 'Quarrying/mining (1 mark)', 'Forestry activities (1 mark)']
+            },
+            specReference: '3.1.3.4 - Economic activities'
+          },
+          {
+            id: 'g11-q9',
+            question: 'Explain the conflicts between different land uses in glaciated uplands.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Tourism vs. farming: Visitors damage stone walls, leave gates open, disturb livestock.\n\nTourism vs. environment: Footpath erosion, litter, disturbance to wildlife.\n\nQuarrying vs. tourism: Noise, dust, and visual pollution affect scenic value.\n\nForestry vs. farming: Coniferous plantations reduce grazing land.\n\nConservation vs. development: Protecting landscapes limits economic opportunities.',
+            markingCriteria: {
+              breakdown: ['Tourism-farming conflicts (1 mark)', 'Tourism-environment conflicts (1 mark)', 'Quarrying-tourism conflicts (1 mark)', 'Forestry-farming conflicts (1 mark)', 'Conservation-development tensions (1 mark)', 'Understanding of multiple conflicts (1 mark)']
+            },
+            specReference: '3.1.3.4 - Land use conflicts'
+          },
+          {
+            id: 'g11-q10',
+            question: 'Using a named example, evaluate strategies used to manage tourism in glaciated uplands.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Lake District National Park tourism management:\n\nSuccessful strategies: Footpath maintenance prevents erosion, park-and-ride reduces traffic congestion, zoning separates quiet and busy areas.\n\nEducation programs raise visitor awareness of conservation needs.\n\nLimited success: Honeypot sites still overcrowded in peak season, parking problems persist.\n\nOngoing challenges: Balancing economic benefits with environmental protection.\n\nOverall: Management strategies partially successful but require continuous adaptation.',
+            markingCriteria: {
+              breakdown: ['Named tourism area in glaciated uplands (1 mark)', 'Successful management strategies with examples (3 marks)', 'Limitations or ongoing problems (2 marks)', 'Overall evaluation of effectiveness (2 marks)']
+            },
+            specReference: '3.1.3.4 - Tourism management case study'
+          }
+        ]
       }
     ]
   },
