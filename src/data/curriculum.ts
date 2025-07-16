@@ -3954,8 +3954,8 @@ export const curriculum: Subject[] = [
         ]
       },
       {
-        id: 'g8-paper2-human-environment',
-        name: 'Paper 2: Challenges in the Human Environment',
+        id: 'g8-urban-issues-challenges',
+        name: 'Urban Issues and Challenges',
         questions: [
           {
             id: 'g8-q1',
@@ -4066,9 +4066,15 @@ export const curriculum: Subject[] = [
               breakdown: ['Public transport strategies (2 marks)', 'Road pricing/congestion charging (2 marks)', 'Sustainable transport promotion (2 marks)', 'Evaluation of effectiveness/limitations (2 marks)']
             },
             specReference: '3.2.1 - Urban transport strategies'
-          },
+          }
+        ]
+      },
+      {
+        id: 'g9-changing-economic-world',
+        name: 'The Changing Economic World',
+        questions: [
           {
-            id: 'g8-q11',
+            id: 'g9-q1',
             question: 'Compare different measures of development including GNI per capita and HDI.',
             marks: 6,
             difficulty: 'medium',
@@ -4079,7 +4085,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.2 - Development measures'
           },
           {
-            id: 'g8-q12',
+            id: 'g9-q2',
             question: 'Describe the Demographic Transition Model and explain how it relates to development.',
             marks: 6,
             difficulty: 'medium',
@@ -4090,7 +4096,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.2 - Demographic Transition Model and uneven development'
           },
           {
-            id: 'g8-q13',
+            id: 'g9-q3',
             question: 'Explain strategies used to reduce the development gap between countries.',
             marks: 6,
             difficulty: 'medium',
@@ -4101,7 +4107,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.2 - Strategies to reduce development gap'
           },
           {
-            id: 'g8-q14',
+            id: 'g9-q4',
             question: 'Using a case study of rapid development in one LIC or NEE, explain the role of industry in development.',
             marks: 6,
             difficulty: 'medium',
@@ -4112,7 +4118,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.2 - Case study rapid development'
           },
           {
-            id: 'g8-q15',
+            id: 'g9-q5',
             question: 'Explain how aid and international investment have contributed to development in your case study country.',
             marks: 6,
             difficulty: 'medium',
@@ -4123,7 +4129,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.2 - Case study rapid development'
           },
           {
-            id: 'g8-q16',
+            id: 'g9-q6',
             question: 'Describe the changes in the UK\'s economy since 1945, including the move to a post-industrial economy.',
             marks: 6,
             difficulty: 'medium',
@@ -4134,7 +4140,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.2 - Economic change in the UK'
           },
           {
-            id: 'g8-q17',
+            id: 'g9-q7',
             question: 'Explain the development of science parks and their impact on the UK economy.',
             marks: 4,
             difficulty: 'medium',
@@ -4145,7 +4151,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.2 - Science parks, transport'
           },
           {
-            id: 'g8-q18',
+            id: 'g9-q8',
             question: 'Describe regional inequalities in the UK and explain the North-South divide.',
             marks: 6,
             difficulty: 'medium',
@@ -4156,7 +4162,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.2 - Regional inequalities and North-South divide'
           },
           {
-            id: 'g8-q19',
+            id: 'g9-q9',
             question: 'Explain the UK\'s global economic and political links.',
             marks: 6,
             difficulty: 'medium',
@@ -4165,9 +4171,15 @@ export const curriculum: Subject[] = [
               breakdown: ['Economic links - trade and investment (3 marks)', 'Political links - international organizations (2 marks)', 'Cultural or other links (1 mark)']
             },
             specReference: '3.2.2 - UK global economic and political links'
-          },
+          }
+        ]
+      },
+      {
+        id: 'g10-resource-management',
+        name: 'Resource Management',
+        questions: [
           {
-            id: 'g8-q20',
+            id: 'g10-q1',
             question: 'Explain the significance of resource management and describe global inequalities in food, water, and energy.',
             marks: 6,
             difficulty: 'medium',
@@ -4178,7 +4190,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.3 - Significance and global inequalities'
           },
           {
-            id: 'g8-q21',
+            id: 'g10-q2',
             question: 'Describe the UK\'s changing demand for food and explain the growth of agribusiness.',
             marks: 6,
             difficulty: 'medium',
@@ -4189,7 +4201,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.3 - UK demand and provision of food'
           },
           {
-            id: 'g8-q22',
+            id: 'g10-q3',
             question: 'Explain the concept of food miles and evaluate their environmental impact.',
             marks: 4,
             difficulty: 'medium',
@@ -4200,7 +4212,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.3 - UK demand and provision of food'
           },
           {
-            id: 'g8-q23',
+            id: 'g10-q4',
             question: 'Describe the UK\'s water resources and explain patterns of demand and supply.',
             marks: 6,
             difficulty: 'medium',
@@ -4211,7 +4223,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.3 - UK water resources'
           },
           {
-            id: 'g8-q24',
+            id: 'g10-q5',
             question: 'Explain the issues of water quality and the management of water supply in the UK.',
             marks: 4,
             difficulty: 'medium',
@@ -4222,7 +4234,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.3 - UK water resources'
           },
           {
-            id: 'g8-q25',
+            id: 'g10-q6',
             question: 'Describe the UK\'s energy mix and explain the environmental issues associated with energy production.',
             marks: 6,
             difficulty: 'medium',
@@ -4233,7 +4245,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.3 - UK energy mix and environmental issues'
           },
           {
-            id: 'g8-q26',
+            id: 'g10-q7',
             question: 'For food, water, OR energy, explain the global patterns of insecurity and their causes.',
             marks: 6,
             difficulty: 'medium',
@@ -4244,7 +4256,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.3 - Resource focus areas'
           },
           {
-            id: 'g8-q27',
+            id: 'g10-q8',
             question: 'For your chosen resource, explain the strategies used to increase supply and manage demand.',
             marks: 8,
             difficulty: 'hard',
@@ -4255,7 +4267,7 @@ export const curriculum: Subject[] = [
             specReference: '3.2.3 - Resource focus areas'
           },
           {
-            id: 'g8-q28',
+            id: 'g10-q9',
             question: 'For your chosen resource, evaluate the sustainability of different management approaches.',
             marks: 8,
             difficulty: 'hard',
