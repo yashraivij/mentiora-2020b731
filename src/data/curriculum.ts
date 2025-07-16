@@ -2604,122 +2604,6 @@ export const curriculum: Subject[] = [
             specReference: '3.2.3 - Resource focus areas'
           }
         ]
-      },
-      {
-        id: 'b7-ecology',
-        name: 'Ecology',
-        questions: [
-          {
-            id: 'b7-q1',
-            question: 'Define the term "ecosystem".',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'An ecosystem is the interaction of living organisms with each other and their physical environment.',
-            markingCriteria: {
-              breakdown: ['Interaction of living organisms (1 mark)', 'With each other and physical environment (1 mark)']
-            },
-            specReference: 'B7.1'
-          },
-          {
-            id: 'b7-q2',
-            question: 'Explain what is meant by a food chain.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'A food chain shows the transfer of energy from one organism to another through feeding relationships.',
-            markingCriteria: {
-              breakdown: ['Transfer of energy (1 mark)', 'Through feeding relationships (1 mark)']
-            },
-            specReference: 'B7.2'
-          },
-          {
-            id: 'b7-q3',
-            question: 'Name the different trophic levels in a food chain.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Producer, primary consumer, secondary consumer, tertiary consumer',
-            markingCriteria: {
-              breakdown: ['Producer (1 mark)', 'Primary consumer (1 mark)', 'Secondary consumer (1 mark)', 'Tertiary consumer (1 mark)']
-            },
-            specReference: 'B7.3'
-          },
-          {
-            id: 'b7-q4',
-            question: 'Explain why energy transfer between trophic levels is inefficient.',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'Energy is lost as heat through respiration, some parts of organisms are not eaten, some food is not digested and is egested, and energy is used for movement and other life processes.',
-            markingCriteria: {
-              breakdown: ['Energy lost as heat through respiration (1 mark)', 'Some parts not eaten (1 mark)', 'Some food not digested (1 mark)', 'Energy used for movement/life processes (1 mark)']
-            },
-            specReference: 'B7.4'
-          },
-          {
-            id: 'b7-q5',
-            question: 'What is the role of decomposers in an ecosystem?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Decomposers break down dead organisms and waste products, returning nutrients to the soil, and recycling materials in the ecosystem.',
-            markingCriteria: {
-              breakdown: ['Break down dead organisms and waste (1 mark)', 'Return nutrients to soil (1 mark)', 'Recycle materials in ecosystem (1 mark)']
-            },
-            specReference: 'B7.5'
-          },
-          {
-            id: 'b7-q6',
-            question: 'Describe the carbon cycle.',
-            marks: 5,
-            difficulty: 'hard',
-            modelAnswer: 'Plants absorb CO2 from atmosphere during photosynthesis. Animals eat plants and release CO2 through respiration. Decomposers break down dead organisms releasing CO2. Burning fossil fuels releases CO2. Ocean dissolution and release of CO2.',
-            markingCriteria: {
-              breakdown: ['Plants absorb CO2 in photosynthesis (1 mark)', 'Animals release CO2 through respiration (1 mark)', 'Decomposers release CO2 (1 mark)', 'Burning fossil fuels releases CO2 (1 mark)', 'Ocean processes (1 mark)']
-            },
-            specReference: 'B7.6'
-          },
-          {
-            id: 'b7-q7',
-            question: 'Explain how human activities affect biodiversity.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Deforestation destroys habitats. Pollution kills organisms. Overfishing reduces fish populations. Climate change alters ecosystems and species distribution.',
-            markingCriteria: {
-              breakdown: ['Deforestation destroys habitats (1 mark)', 'Pollution kills organisms (1 mark)', 'Overfishing reduces populations (1 mark)', 'Climate change alters ecosystems (1 mark)']
-            },
-            specReference: 'B7.7'
-          },
-          {
-            id: 'b7-q8',
-            question: 'What is meant by biological control?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Biological control is using living organisms to control pest populations instead of using chemical pesticides.',
-            markingCriteria: {
-              breakdown: ['Using living organisms (1 mark)', 'To control pest populations (1 mark)', 'Instead of chemical pesticides (1 mark)']
-            },
-            specReference: 'B7.8'
-          },
-          {
-            id: 'b7-q9',
-            question: 'Describe methods used to estimate population size.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Quadrats are used to sample small areas and estimate population density. Mark-recapture method involves marking individuals, releasing them, then recapturing to estimate total population. Random sampling ensures representative results.',
-            markingCriteria: {
-              breakdown: ['Quadrats sample small areas (1 mark)', 'Mark-recapture method (1 mark)', 'Marking and recapturing individuals (1 mark)', 'Random sampling for representative results (1 mark)']
-            },
-            specReference: 'B7.9'
-          },
-          {
-            id: 'b7-q10',
-            question: 'Explain the greenhouse effect and its consequences.',
-            marks: 5,
-            difficulty: 'hard',
-            modelAnswer: 'Greenhouse gases in the atmosphere trap heat from the sun. This causes global warming and climate change. Consequences include melting ice caps, rising sea levels, changing weather patterns, and species extinction.',
-            markingCriteria: {
-              breakdown: ['Greenhouse gases trap heat (1 mark)', 'Causes global warming (1 mark)', 'Melting ice caps/rising sea levels (1 mark)', 'Changing weather patterns (1 mark)', 'Species extinction (1 mark)']
-            },
-            specReference: 'B7.10'
-          }
-        ]
       }
     ]
   },
@@ -4182,6 +4066,122 @@ export const curriculum: Subject[] = [
               breakdown: ['Gene cut out using enzymes (1 mark)', 'Gene inserted into another organism (1 mark)', 'Modified organism produces desired protein (1 mark)', 'Clear understanding of process (1 mark)']
             },
             specReference: 'B6.10'
+          }
+        ]
+      },
+      {
+        id: 'b7-ecology',
+        name: 'Ecology',
+        questions: [
+          {
+            id: 'b7-q1',
+            question: 'Define the term "ecosystem".',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'An ecosystem is the interaction of living organisms with each other and their physical environment.',
+            markingCriteria: {
+              breakdown: ['Interaction of living organisms (1 mark)', 'With each other and physical environment (1 mark)']
+            },
+            specReference: 'B7.1'
+          },
+          {
+            id: 'b7-q2',
+            question: 'Explain what is meant by a food chain.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A food chain shows the transfer of energy from one organism to another through feeding relationships.',
+            markingCriteria: {
+              breakdown: ['Transfer of energy (1 mark)', 'Through feeding relationships (1 mark)']
+            },
+            specReference: 'B7.2'
+          },
+          {
+            id: 'b7-q3',
+            question: 'Name the different trophic levels in a food chain.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Producer, primary consumer, secondary consumer, tertiary consumer',
+            markingCriteria: {
+              breakdown: ['Producer (1 mark)', 'Primary consumer (1 mark)', 'Secondary consumer (1 mark)', 'Tertiary consumer (1 mark)']
+            },
+            specReference: 'B7.3'
+          },
+          {
+            id: 'b7-q4',
+            question: 'Explain why energy transfer between trophic levels is inefficient.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Energy is lost as heat through respiration, some parts of organisms are not eaten, some food is not digested and is egested, and energy is used for movement and other life processes.',
+            markingCriteria: {
+              breakdown: ['Energy lost as heat through respiration (1 mark)', 'Some parts not eaten (1 mark)', 'Some food not digested (1 mark)', 'Energy used for movement/life processes (1 mark)']
+            },
+            specReference: 'B7.4'
+          },
+          {
+            id: 'b7-q5',
+            question: 'What is the role of decomposers in an ecosystem?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Decomposers break down dead organisms and waste products, returning nutrients to the soil, and recycling materials in the ecosystem.',
+            markingCriteria: {
+              breakdown: ['Break down dead organisms and waste (1 mark)', 'Return nutrients to soil (1 mark)', 'Recycle materials in ecosystem (1 mark)']
+            },
+            specReference: 'B7.5'
+          },
+          {
+            id: 'b7-q6',
+            question: 'Describe the carbon cycle.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Plants absorb CO2 from atmosphere during photosynthesis. Animals eat plants and release CO2 through respiration. Decomposers break down dead organisms releasing CO2. Burning fossil fuels releases CO2. Ocean dissolution and release of CO2.',
+            markingCriteria: {
+              breakdown: ['Plants absorb CO2 in photosynthesis (1 mark)', 'Animals release CO2 through respiration (1 mark)', 'Decomposers release CO2 (1 mark)', 'Burning fossil fuels releases CO2 (1 mark)', 'Ocean processes (1 mark)']
+            },
+            specReference: 'B7.6'
+          },
+          {
+            id: 'b7-q7',
+            question: 'Explain how human activities affect biodiversity.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Deforestation destroys habitats. Pollution kills organisms. Overfishing reduces fish populations. Climate change alters ecosystems and species distribution.',
+            markingCriteria: {
+              breakdown: ['Deforestation destroys habitats (1 mark)', 'Pollution kills organisms (1 mark)', 'Overfishing reduces populations (1 mark)', 'Climate change alters ecosystems (1 mark)']
+            },
+            specReference: 'B7.7'
+          },
+          {
+            id: 'b7-q8',
+            question: 'What is meant by biological control?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Biological control is using living organisms to control pest populations instead of using chemical pesticides.',
+            markingCriteria: {
+              breakdown: ['Using living organisms (1 mark)', 'To control pest populations (1 mark)', 'Instead of chemical pesticides (1 mark)']
+            },
+            specReference: 'B7.8'
+          },
+          {
+            id: 'b7-q9',
+            question: 'Describe methods used to estimate population size.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Quadrats are used to sample small areas and estimate population density. Mark-recapture method involves marking individuals, releasing them, then recapturing to estimate total population. Random sampling ensures representative results.',
+            markingCriteria: {
+              breakdown: ['Quadrats sample small areas (1 mark)', 'Mark-recapture method (1 mark)', 'Marking and recapturing individuals (1 mark)', 'Random sampling for representative results (1 mark)']
+            },
+            specReference: 'B7.9'
+          },
+          {
+            id: 'b7-q10',
+            question: 'Explain the greenhouse effect and its consequences.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Greenhouse gases in the atmosphere trap heat from the sun. This causes global warming and climate change. Consequences include melting ice caps, rising sea levels, changing weather patterns, and species extinction.',
+            markingCriteria: {
+              breakdown: ['Greenhouse gases trap heat (1 mark)', 'Causes global warming (1 mark)', 'Melting ice caps/rising sea levels (1 mark)', 'Changing weather patterns (1 mark)', 'Species extinction (1 mark)']
+            },
+            specReference: 'B7.10'
           }
         ]
       },
