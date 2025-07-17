@@ -47,7 +47,7 @@ const PredictedResults = () => {
   const [attempts, setAttempts] = useState<QuestionAttempt[]>([]);
   const [isMarking, setIsMarking] = useState(true);
   
-  const { questions, answers, timeElapsed, isReview, completion } = location.state || {};
+  const { questions, answers, timeElapsed, isReview, completion, totalMarks } = location.state || {};
   
   if (!questions || !answers) {
     navigate('/predicted-questions');
@@ -248,17 +248,17 @@ const PredictedResults = () => {
         return;
       }
 
-      // Calculate results
-      const totalMarks = questions.reduce((sum: number, q: ExamQuestion) => sum + q.marks, 0);
+      // Calculate results - use passed totalMarks for English Literature (60) or calculate for other subjects
+      const examTotalMarks = totalMarks || questions.reduce((sum: number, q: ExamQuestion) => sum + q.marks, 0);
       const achievedMarks = markedAttempts.reduce((sum: number, attempt: QuestionAttempt) => sum + attempt.score, 0);
-      const percentage = totalMarks > 0 ? Math.round((achievedMarks / totalMarks) * 100) : 0;
+      const percentage = examTotalMarks > 0 ? Math.round((achievedMarks / examTotalMarks) * 100) : 0;
       const grade = getGCSEGrade(percentage);
 
       const examCompletion = {
         user_id: user.id,
         subject_id: subjectId === 'geography-paper-2' ? 'geography' : subjectId,
         exam_date: new Date().toISOString().split('T')[0],
-        total_marks: totalMarks,
+        total_marks: examTotalMarks,
         achieved_marks: achievedMarks,
         percentage: percentage,
         grade: grade,
@@ -421,10 +421,10 @@ const PredictedResults = () => {
     );
   }
 
-  // Calculate total marks and grade
-  const totalMarks = questions.reduce((sum: number, q: ExamQuestion) => sum + q.marks, 0);
+  // Calculate total marks and grade - use passed totalMarks for English Literature (60) or calculate for other subjects
+  const examTotalMarks = totalMarks || questions.reduce((sum: number, q: ExamQuestion) => sum + q.marks, 0);
   const achievedMarks = attempts.reduce((sum: number, attempt: QuestionAttempt) => sum + attempt.score, 0);
-  const percentage = totalMarks > 0 ? Math.round((achievedMarks / totalMarks) * 100) : 0;
+  const percentage = examTotalMarks > 0 ? Math.round((achievedMarks / examTotalMarks) * 100) : 0;
 
 
   const grade = getGCSEGrade(percentage);
@@ -453,7 +453,7 @@ const PredictedResults = () => {
               <ThemeToggle />
               <div className="text-right">
                 <div className="text-2xl font-bold text-foreground">
-                  {achievedMarks}/{totalMarks}
+                  {achievedMarks}/{examTotalMarks}
                 </div>
                 <div className="text-sm text-muted-foreground">
                   {percentage}%
@@ -474,7 +474,7 @@ const PredictedResults = () => {
                   Grade {grade}
                 </div>
                 <div className="text-xl">
-                  {achievedMarks}/{totalMarks} marks ({percentage}%)
+                  {achievedMarks}/{examTotalMarks} marks ({percentage}%)
                 </div>
                 <div className="text-lg opacity-90">
                   {subject?.name} Predicted 2026 Exam
@@ -498,7 +498,7 @@ const PredictedResults = () => {
                   <div className="text-sm text-muted-foreground">Marks Achieved</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-foreground">{totalMarks}</div>
+                  <div className="text-3xl font-bold text-foreground">{examTotalMarks}</div>
                   <div className="text-sm text-muted-foreground">Total Marks</div>
                 </div>
                 <div className="text-center">

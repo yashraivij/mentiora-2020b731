@@ -540,6 +540,19 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
                   {formatTime(timeLeft)}
                 </span>
               </div>
+              {subjectId === 'english-literature' && (
+                <Button
+                  onClick={handleSubmit}
+                  className="bg-gradient-to-r from-primary to-primary/90"
+                  disabled={
+                    !(answers.some(a => examQuestions.find(q => q.id === a.questionId)?.section === 'A') && 
+                      answers.some(a => examQuestions.find(q => q.id === a.questionId)?.section === 'B'))
+                  }
+                >
+                  <Target className="h-4 w-4 mr-2" />
+                  Submit for Marking
+                </Button>
+              )}
               <ThemeToggle />
             </div>
           </div>
@@ -635,16 +648,11 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
                     Previous
                   </Button>
                   
-                  {currentQuestion === examQuestions.length - 1 ? (
+                  {currentQuestion === examQuestions.length - 1 && subjectId !== 'english-literature' ? (
                     <Button
                       onClick={handleSubmit}
                       className="bg-gradient-to-r from-primary to-primary/90"
-                      disabled={
-                        subjectId === 'english-literature' 
-                          ? !(answers.some(a => examQuestions.find(q => q.id === a.questionId)?.section === 'A') && 
-                              answers.some(a => examQuestions.find(q => q.id === a.questionId)?.section === 'B'))
-                          : answers.length < examQuestions.length
-                      }
+                      disabled={answers.length < examQuestions.length}
                     >
                       <Target className="h-4 w-4 mr-2" />
                       Submit for Marking
