@@ -228,7 +228,20 @@ And kill him in the shell.`
       'sign-of-four': `"As I listened to the words and realized what they meant, a great shadow seemed to pass from my soul. I do not know how this Agra treasure has weighed down upon me. There was the treasure, half of it was mine by right. Yet I could never bring myself to use it, never bring myself even to tell her of it, because it was gained by such cruel deeds. What was the use of wealth to me? My heart was heavy with sorrow, and how could gold lighten it? If, instead, I could win her, if I could feel that she loved me, if I could take her to my arms and feel that head upon my shoulder, then I could let the treasure sink into the Thames rather than be a barrier between us. Thank God it is not so now. Thank God!" said he, clasping her to him. "It is settled then?"
 "Quite settled, Mary. But you must not fear for me. You must not worry yourself on my account. All will be well."
 "But the treasure, John?"
-"Hang the treasure! It has cost two human lives already. It shall cost no more."`
+"Hang the treasure! It has cost two human lives already. It shall cost no more."`,
+      'jane-eyre': `"I am no bird; and no net ensnares me: I am a free human being with an independent will, which I now exert to leave you."
+He gazed at me in amazement—perhaps they had never seen that expression of unyielding resolution.
+"But I have your promise," said he: "you said you would stay and be my friend."
+"Conditions change—and so do people."
+"But you promised."
+"I'm sorry. Events have released me from my promise."
+"What events?"
+I was silent.
+"You will not tell me?"
+"I cannot."
+"Is it because of what you have learned?"
+I was still silent. I am not naturally a deceitful person, but I thought it better to hold my peace.`,
+      'frankenstein': `"I had worked hard for nearly two years, for the sole purpose of infusing life into an inanimate body. For this I had deprived myself of rest and health. I had desired it with an ardour that far exceeded moderation; but now that I had finished, the beauty of the dream vanished, and breathless horror and disgust filled my heart. Unable to endure the aspect of the being I had created, I rushed out of the room and continued a long time traversing my bed-chamber, unable to compose my mind to sleep. At length lassitude succeeded to the tumult I had before endured, and I threw myself on the bed in my clothes, endeavouring to seek a few moments of forgetfulness. But it was in vain; I slept, indeed, but I was disturbed by the wildest dreams."`
     };
     return extracts[novelId as keyof typeof extracts] || '';
   };
@@ -239,7 +252,9 @@ And kill him in the shell.`
       'christmas-carol': { author: 'Dickens', theme: 'redemption and social responsibility' },
       'great-expectations': { author: 'Dickens', theme: 'social class and moral growth' },
       'pride-and-prejudice': { author: 'Austen', theme: 'love and social expectations' },
-      'sign-of-four': { author: 'Doyle', theme: 'justice and loyalty' }
+      'sign-of-four': { author: 'Doyle', theme: 'justice and loyalty' },
+      'jane-eyre': { author: 'Brontë', theme: 'independence and equality' },
+      'frankenstein': { author: 'Shelley', theme: 'scientific ambition and responsibility' }
     };
     return details[novelId as keyof typeof details] || { author: '', theme: '' };
   };
@@ -257,7 +272,7 @@ And kill him in the shell.`
       
       // Section B: 19th Century novels
       const novels = subject.topics.filter(topic => 
-        ['jekyll-and-hyde', 'christmas-carol', 'great-expectations', 'pride-and-prejudice', 'sign-of-four'].includes(topic.id)
+        ['jekyll-and-hyde', 'christmas-carol', 'great-expectations', 'pride-and-prejudice', 'sign-of-four', 'jane-eyre', 'frankenstein'].includes(topic.id)
       );
       
       // Generate Shakespeare questions (Section A)
