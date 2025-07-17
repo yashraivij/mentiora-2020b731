@@ -2572,34 +2572,34 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'g10-q8',
-            question: 'Explain strategies for achieving global food security.',
+            question: 'Choose ONE resource you have studied (food, water, or energy). Explain strategies for achieving global security of this resource.',
             marks: 6,
             difficulty: 'medium',
-            modelAnswer: 'Increasing production through improved seeds, irrigation, and technology. Reducing waste through better storage and distribution systems. Improving access through fair trade and poverty reduction. Sustainable farming practices to protect long-term productivity. International cooperation to share knowledge and resources.',
+            modelAnswer: 'FOOD: Increasing production through improved seeds, irrigation, and technology. Reducing waste through better storage and distribution systems. Improving access through fair trade and poverty reduction. Sustainable farming practices to protect long-term productivity. OR WATER: Supply-side strategies include desalination, water recycling, reservoir construction. Demand-side strategies include conservation, efficient irrigation, reducing industrial consumption. Technology solutions and international cooperation for shared resources. OR ENERGY: Renewable energy development, energy efficiency measures, diversifying energy sources, international cooperation for technology sharing. Nuclear power and storage solutions for security and sustainability.',
             markingCriteria: {
-              breakdown: ['Production increase strategies (2 marks)', 'Waste reduction approaches (1 mark)', 'Improving access and distribution (2 marks)', 'Sustainability considerations (1 mark)']
+              breakdown: ['Supply-side strategies for chosen resource (2 marks)', 'Demand-side or efficiency strategies (2 marks)', 'Technology and international cooperation (2 marks)']
             },
             specReference: '3.2.3 - Resource focus areas'
           },
           {
             id: 'g10-q9',
-            question: 'Describe strategies for managing water scarcity and improving water security globally.',
+            question: 'Choose ONE resource you have studied (food, water, or energy). Describe strategies for managing scarcity and improving security of this resource globally.',
             marks: 6,
             difficulty: 'medium',
-            modelAnswer: 'Supply-side strategies: Desalination, water recycling, reservoir construction, groundwater extraction. Demand-side strategies: Water conservation, efficient irrigation, reducing industrial consumption. Technology solutions: Smart water systems, leak detection, treatment improvements. International cooperation for shared water resources.',
+            modelAnswer: 'FOOD: Increasing production through improved seeds, irrigation, and technology. Reducing waste through better storage and distribution systems. Improving access through fair trade and poverty reduction. Sustainable farming practices. OR WATER: Supply-side strategies include desalination, water recycling, reservoir construction, groundwater extraction. Demand-side strategies include water conservation, efficient irrigation, reducing industrial consumption. Technology solutions and international cooperation. OR ENERGY: Renewable energy development, energy efficiency measures, diversifying energy sources to improve security. International cooperation for technology sharing and resource access.',
             markingCriteria: {
-              breakdown: ['Supply-side management strategies (2 marks)', 'Demand-side management strategies (2 marks)', 'Technology and international cooperation (2 marks)']
+              breakdown: ['Supply-side management strategies for chosen resource (2 marks)', 'Demand-side management strategies (2 marks)', 'Technology and international cooperation approaches (2 marks)']
             },
             specReference: '3.2.3 - Resource focus areas'
           },
           {
             id: 'g10-q10',
-            question: 'Evaluate different strategies for achieving global energy security and sustainability.',
+            question: 'Choose ONE resource you have studied (food, water, or energy). Evaluate different strategies for achieving global security and sustainability of this resource.',
             marks: 8,
             difficulty: 'hard',
-            modelAnswer: 'Renewable energy development provides long-term sustainability but requires major investment and storage solutions. Energy efficiency reduces demand but needs behavioral change and technology updates. Diversifying energy sources improves security but may increase costs. International cooperation can share resources and technology but creates dependencies. Nuclear power offers low-carbon baseload but has safety and waste concerns. The optimal strategy combines multiple approaches tailored to local conditions.',
+            modelAnswer: 'FOOD: Sustainable farming provides long-term security but requires investment and training. Reducing waste improves efficiency but needs infrastructure changes. Fair trade improves access but may increase costs. International cooperation shares knowledge but creates dependencies. Technology increases production but may have environmental impacts. OR WATER: Desalination provides reliable supply but requires high energy input. Conservation reduces demand but needs behavioral change. International cooperation for shared resources but creates political dependencies. Technology solutions improve efficiency but require investment. OR ENERGY: Renewable energy provides sustainability but requires storage solutions and investment. Energy efficiency reduces demand but needs behavioral and technology changes. Diversification improves security but increases complexity. International cooperation shares resources but creates dependencies.',
             markingCriteria: {
-              breakdown: ['Renewable energy strategies (2 marks)', 'Efficiency and conservation approaches (2 marks)', 'Energy security considerations (2 marks)', 'Evaluation and balanced conclusion (2 marks)']
+              breakdown: ['Strategy advantages for chosen resource (2 marks)', 'Strategy limitations and challenges (2 marks)', 'Security considerations and evaluation (2 marks)', 'Balanced conclusion on optimal approaches (2 marks)']
             },
             specReference: '3.2.3 - Resource focus areas'
           }
