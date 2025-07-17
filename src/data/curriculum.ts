@@ -1195,34 +1195,111 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'merchant-q1',
-            question: 'How does Shakespeare present Shylock in The Merchant of Venice?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse Shylock\'s motivations, treatment by other characters, and complex characterisation. Must consider Elizabethan attitudes and modern interpretations.',
+            question: 'How does Shylock\'s speech "Hath not a Jew eyes?" reveal his humanity?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The speech shows Shylock\'s pain and humanity by listing physical similarities between Jews and Christians. It reveals his desire for revenge stems from years of mistreatment and discrimination.',
             markingCriteria: {
-              breakdown: ['Clear character analysis (AO1)', 'Analysis of characterisation methods (AO2)', 'Understanding of social context (AO3)', 'Accurate written expression (AO4)']
+              breakdown: ['Reference to physical similarities (1 mark)', 'Shows pain/humanity (1 mark)', 'Link to revenge motivation (1 mark)', 'Reference to discrimination (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'merchant-q2',
-            question: 'How does Shakespeare explore the theme of justice versus mercy in The Merchant of Venice?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine the trial scene, different characters\' concepts of justice, and Portia\'s mercy speech. Must analyse dramatic techniques and moral themes.',
+            question: 'What does Portia\'s disguise as a lawyer reveal about her character?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Portia\'s disguise shows her intelligence, resourcefulness, and determination to save Antonio. It demonstrates her ability to navigate male-dominated legal world through wit and knowledge.',
             markingCriteria: {
-              breakdown: ['Sustained thematic analysis (AO1)', 'Analysis of dramatic and linguistic techniques (AO2)', 'Legal and moral context (AO3)', 'Technical accuracy (AO4)']
+              breakdown: ['Shows intelligence/resourcefulness (1 mark)', 'Determination to save Antonio (1 mark)', 'Navigating male-dominated world (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'merchant-q3',
-            question: 'Analyse how Shakespeare presents the casket scenes in The Merchant of Venice.',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine the three suitors, symbolic significance of metals, and dramatic function. Must consider themes of appearance versus reality.',
+            question: 'How does the casket test reflect the theme of appearance versus reality?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The gold and silver caskets appear valuable but contain worthless items. The lead casket appears worthless but contains Portia\'s portrait. This reflects how things are not always what they seem.',
             markingCriteria: {
-              breakdown: ['Clear scene analysis (AO1)', 'Analysis of symbolism and structure (AO2)', 'Understanding of dramatic conventions (AO3)', 'Fluent expression (AO4)']
+              breakdown: ['Gold/silver appear valuable but aren\'t (2 marks)', 'Lead appears worthless but valuable (2 marks)', 'Link to appearance vs reality theme (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'merchant-q4',
+            question: 'What role does money play in Antonio and Bassanio\'s friendship?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Antonio lends money to Bassanio without interest, showing true friendship. However, this creates the debt that leads to the bond with Shylock and Antonio\'s near-death.',
+            markingCriteria: {
+              breakdown: ['Antonio lends without interest (1 mark)', 'Shows true friendship (1 mark)', 'Creates debt problem (1 mark)', 'Leads to dangerous bond (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'merchant-q5',
+            question: 'How does Jessica\'s elopement affect Shylock?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Jessica\'s elopement devastates Shylock both emotionally and financially. He loses his daughter and his money, which increases his bitterness and desire for revenge against Antonio.',
+            markingCriteria: {
+              breakdown: ['Emotional devastation (1 mark)', 'Financial loss (1 mark)', 'Increases bitterness/revenge (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'merchant-q6',
+            question: 'What does the ring plot reveal about love and trust?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The ring plot tests the loyalty between spouses versus friends. It shows how Portia tests Bassanio\'s priorities and ultimately strengthens their relationship through forgiveness.',
+            markingCriteria: {
+              breakdown: ['Tests loyalty spouses vs friends (1 mark)', 'Portia tests Bassanio\'s priorities (1 mark)', 'Strengthens relationship (1 mark)', 'Through forgiveness (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'merchant-q7',
+            question: 'How does Venice as a setting influence the play\'s themes?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Venice represents a multicultural trading center where different religions and cultures meet. The city\'s laws and commerce drive the plot, while religious tensions reflect contemporary prejudices.',
+            markingCriteria: {
+              breakdown: ['Multicultural trading center (2 marks)', 'Laws and commerce drive plot (2 marks)', 'Religious tensions and prejudices (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'merchant-q8',
+            question: 'What is the significance of mercy in the trial scene?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Portia\'s "quality of mercy" speech emphasizes Christian forgiveness over Old Testament justice. However, the Christians show little mercy to Shylock, revealing their hypocrisy.',
+            markingCriteria: {
+              breakdown: ['Portia\'s mercy speech (1 mark)', 'Christian forgiveness vs justice (1 mark)', 'Christians lack mercy to Shylock (1 mark)', 'Reveals hypocrisy (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'merchant-q9',
+            question: 'How does Launcelot Gobbo provide comic relief in the play?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Launcelot provides comic relief through his wordplay, confused identity with his father, and his decision to leave Shylock\'s service. His humor lightens the play\'s serious themes.',
+            markingCriteria: {
+              breakdown: ['Wordplay and humor (1 mark)', 'Confused identity with father (1 mark)', 'Lightens serious themes (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'merchant-q10',
+            question: 'What does the play suggest about justice versus revenge?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Shylock seeks revenge through the law, believing it\'s justice for his mistreatment. The trial shows how justice can be manipulated, and ultimately neither true justice nor mercy is achieved.',
+            markingCriteria: {
+              breakdown: ['Shylock seeks revenge through law (2 marks)', 'Believes it\'s justice for mistreatment (1 mark)', 'Justice can be manipulated (2 marks)', 'Neither justice nor mercy achieved (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           }
@@ -1234,34 +1311,111 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'much-ado-q1',
-            question: 'How does Shakespeare present the relationship between Beatrice and Benedick in Much Ado About Nothing?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse their wit battles, the gulling scenes, and their eventual union. Must examine comedy techniques and character development.',
+            question: 'How do Beatrice and Benedick\'s "merry war" of words reveal their characters?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Their witty exchanges show both characters are intelligent, proud, and defensive about love. Their verbal sparring masks deeper feelings and reveals their well-matched personalities.',
             markingCriteria: {
-              breakdown: ['Clear relationship analysis (AO1)', 'Analysis of comic techniques (AO2)', 'Understanding of Elizabethan context (AO3)', 'Accurate written communication (AO4)']
+              breakdown: ['Shows intelligence and wit (1 mark)', 'Pride and defensiveness (1 mark)', 'Masks deeper feelings (1 mark)', 'Well-matched personalities (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'much-ado-q2',
-            question: 'How does Shakespeare explore the theme of deception in Much Ado About Nothing?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine benevolent and malevolent deception, appearance versus reality, and the consequences of false accusations. Must analyse dramatic irony.',
+            question: 'What role does gossip and eavesdropping play in the plot?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Eavesdropping drives both main plots: the trick to make Beatrice and Benedick fall in love, and Don John\'s deception about Hero. It shows how easily people can be manipulated by what they hear.',
             markingCriteria: {
-              breakdown: ['Sustained thematic focus (AO1)', 'Analysis of dramatic techniques (AO2)', 'Social context understanding (AO3)', 'Technical accuracy (AO4)']
+              breakdown: ['Drives Beatrice/Benedick plot (2 marks)', 'Don John\'s deception plot (2 marks)', 'Shows manipulation through hearing (2 marks)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'much-ado-q3',
-            question: 'Analyse how Shakespeare presents Don John as a villain in Much Ado About Nothing.',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine his motivations, methods, and dramatic function. Must consider comedy villain conventions and his contrast with other characters.',
+            question: 'How does Hero\'s supposed death affect the other characters?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Hero\'s supposed death devastates her father Leonato and shocks Claudio into guilt. Beatrice demands Benedick prove his love by challenging Claudio, testing their new relationship.',
             markingCriteria: {
-              breakdown: ['Clear character analysis (AO1)', 'Analysis of villain conventions (AO2)', 'Understanding of dramatic context (AO3)', 'Fluent expression (AO4)']
+              breakdown: ['Devastates Leonato (1 mark)', 'Claudio feels guilt (1 mark)', 'Tests Beatrice and Benedick (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'much-ado-q4',
+            question: 'What does Don John represent as a character type?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Don John is the "bastard villain" who resents his illegitimate status and social position. He represents jealousy, malcontent, and the threat to social harmony in comedy.',
+            markingCriteria: {
+              breakdown: ['Bastard villain type (1 mark)', 'Resents illegitimate status (1 mark)', 'Represents jealousy/malcontent (1 mark)', 'Threat to social harmony (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'much-ado-q5',
+            question: 'How does the theme of appearance versus reality feature in the play?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Characters constantly misinterpret what they see and hear. Hero appears unchaste but is innocent. Beatrice and Benedick appear to hate each other but fall in love. Nothing is as it first appears.',
+            markingCriteria: {
+              breakdown: ['Characters misinterpret evidence (2 marks)', 'Hero appears unchaste but innocent (2 marks)', 'Beatrice/Benedick appear to hate but love (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'much-ado-q6',
+            question: 'What is the significance of honor in the play?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Honor, particularly female chastity, is crucial to Elizabethan society. Hero\'s accused loss of honor threatens her family\'s reputation and shows the vulnerability of women\'s reputations.',
+            markingCriteria: {
+              breakdown: ['Female chastity and honor (1 mark)', 'Threatens family reputation (1 mark)', 'Vulnerability of women\'s reputations (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'much-ado-q7',
+            question: 'How does Dogberry provide comic relief?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Dogberry uses malapropisms (wrong words) for humor and represents the bumbling but well-meaning authority figure. Ironically, his incompetence leads to uncovering the truth about Don John\'s plot.',
+            markingCriteria: {
+              breakdown: ['Uses malapropisms (1 mark)', 'Bumbling authority figure (1 mark)', 'Incompetence leads to truth (1 mark)', 'Comic irony (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'much-ado-q8',
+            question: 'What does the masked ball scene reveal about identity and deception?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The masks allow characters to hide their true identities and speak more freely. It shows how easily people can be deceived and how masks can both conceal and reveal truth.',
+            markingCriteria: {
+              breakdown: ['Masks hide true identities (1 mark)', 'Allows freer speech (1 mark)', 'Shows ease of deception (1 mark)', 'Masks conceal and reveal (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'much-ado-q9',
+            question: 'How does the play end with restoration of harmony?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Hero is revealed to be alive and innocent, Claudio is forgiven, and Beatrice and Benedick admit their love. The comic ending restores social order and celebrates love and marriage.',
+            markingCriteria: {
+              breakdown: ['Hero revealed alive and innocent (1 mark)', 'Couples united in love (1 mark)', 'Social order restored (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'much-ado-q10',
+            question: 'What does the play suggest about the power of language?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Words can both create and destroy relationships. Beatrice and Benedick fight with words but also fall in love through overheard words. False words about Hero nearly destroy her, while true words restore her.',
+            markingCriteria: {
+              breakdown: ['Words create and destroy relationships (2 marks)', 'Beatrice/Benedick fight and love through words (2 marks)', 'False vs true words about Hero (2 marks)']
             },
             specReference: 'AQA English Literature 8702'
           }
@@ -1273,34 +1427,111 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'caesar-q1',
-            question: 'How does Shakespeare present Brutus in Julius Caesar?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse Brutus as a tragic hero, his internal conflict, and his noble motivations. Must examine his relationship with Caesar and the conspiracy.',
+            question: 'How does Brutus justify joining the conspiracy against Caesar?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Brutus believes Caesar will become a tyrant if crowned king. He claims to love Caesar but loves Rome more, arguing that Caesar\'s death is necessary for the greater good of the republic.',
             markingCriteria: {
-              breakdown: ['Clear character analysis (AO1)', 'Analysis of tragic hero conventions (AO2)', 'Understanding of Roman context (AO3)', 'Accurate written expression (AO4)']
+              breakdown: ['Caesar will become tyrant (1 mark)', 'Loves Caesar but loves Rome more (1 mark)', 'Greater good of republic (1 mark)', 'Necessary for Rome\'s future (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'caesar-q2',
-            question: 'How does Shakespeare explore the theme of loyalty in Julius Caesar?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine conflicting loyalties, betrayal, and the consequences of divided allegiance. Must analyse character motivations and dramatic techniques.',
+            question: 'What does Caesar\'s reaction to the soothsayer\'s warning reveal about his character?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Caesar dismisses the soothsayer as a "dreamer," showing his arrogance and refusal to heed warnings. This reveals his hubris and belief that he is above fate and superstition.',
             markingCriteria: {
-              breakdown: ['Sustained thematic analysis (AO1)', 'Analysis of dramatic methods (AO2)', 'Political context understanding (AO3)', 'Technical accuracy (AO4)']
+              breakdown: ['Dismisses as "dreamer" (1 mark)', 'Shows arrogance (1 mark)', 'Believes above fate/superstition (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'caesar-q3',
-            question: 'Analyse how Shakespeare creates tension in the assassination scene in Julius Caesar.',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine dramatic devices, staging, irony, and audience response. Must consider the build-up to the scene and its consequences.',
+            question: 'How does Cassius manipulate Brutus into joining the conspiracy?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Cassius appeals to Brutus\'s honor and love of Rome. He uses flattery, forged letters supposedly from citizens, and reminds Brutus of his ancestor who founded the republic. He plays on Brutus\'s fears about Caesar\'s ambition.',
             markingCriteria: {
-              breakdown: ['Clear scene analysis (AO1)', 'Analysis of dramatic techniques (AO2)', 'Understanding of theatrical context (AO3)', 'Fluent expression (AO4)']
+              breakdown: ['Appeals to honor and love of Rome (2 marks)', 'Uses flattery and forged letters (2 marks)', 'References ancestor/plays on fears (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'caesar-q4',
+            question: 'What is the significance of the storm in Act 1?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'The storm reflects the political upheaval in Rome and foreshadows the chaos that will follow Caesar\'s assassination. It creates an ominous atmosphere and suggests divine displeasure.',
+            markingCriteria: {
+              breakdown: ['Reflects political upheaval (1 mark)', 'Foreshadows chaos after assassination (1 mark)', 'Creates ominous atmosphere (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'caesar-q5',
+            question: 'How does Antony use rhetoric in his funeral speech?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Antony repeatedly calls Brutus "honorable" with increasing irony. He shows Caesar\'s wounds and will to the crowd, uses emotional appeal, and gradually turns the crowd against the conspirators through skilled manipulation.',
+            markingCriteria: {
+              breakdown: ['Repeated "honorable" with irony (2 marks)', 'Shows wounds and will (2 marks)', 'Emotional appeal and manipulation (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'caesar-q6',
+            question: 'What does Portia\'s relationship with Brutus reveal about both characters?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Portia shows intelligence and devotion by demanding to know Brutus\'s secrets. Brutus\'s reluctance to tell her shows his protective nature but also his isolation in bearing the conspiracy\'s burden.',
+            markingCriteria: {
+              breakdown: ['Portia shows intelligence/devotion (1 mark)', 'Demands to know secrets (1 mark)', 'Brutus protective but isolated (1 mark)', 'Bears conspiracy burden alone (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'caesar-q7',
+            question: 'How does the theme of fate versus free will appear in the play?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Characters debate whether Caesar\'s death is fated or chosen. The soothsayer and omens suggest fate, but the conspirators believe they choose their actions. Caesar\'s ghost suggests his death was destined.',
+            markingCriteria: {
+              breakdown: ['Debate over fate vs choice (2 marks)', 'Omens suggest fate (2 marks)', 'Caesar\'s ghost implies destiny (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'caesar-q8',
+            question: 'What role does Calpurnia play in the assassination scene?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Calpurnia has prophetic dreams and begs Caesar not to go to the Senate. She represents the voice of caution and feminine intuition, but Caesar ignores her warnings due to his pride.',
+            markingCriteria: {
+              breakdown: ['Has prophetic dreams (1 mark)', 'Represents caution/intuition (1 mark)', 'Caesar ignores due to pride (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'caesar-q9',
+            question: 'How does the mob\'s behavior change throughout the play?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The crowd initially supports Caesar, then accepts Brutus\'s explanation for the assassination, but Antony\'s speech turns them violently against the conspirators. They become destructive and irrational.',
+            markingCriteria: {
+              breakdown: ['Initially supports Caesar (1 mark)', 'Accepts Brutus\'s explanation (1 mark)', 'Antony turns them against conspirators (1 mark)', 'Becomes destructive/irrational (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'caesar-q10',
+            question: 'What does the play suggest about political ambition and power?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Political ambition corrupts both Caesar and his enemies. The desire for power leads to betrayal, civil war, and destruction. The play shows how noble intentions can lead to terrible consequences.',
+            markingCriteria: {
+              breakdown: ['Ambition corrupts Caesar and enemies (2 marks)', 'Leads to betrayal and civil war (2 marks)', 'Noble intentions, terrible consequences (2 marks)']
             },
             specReference: 'AQA English Literature 8702'
           }
