@@ -30,72 +30,284 @@ export const curriculum: Subject[] = [
     name: 'English Literature',
     topics: [
       {
-        id: 'nineteenth-century-novels',
-        name: 'Nineteenth-Century Novels',
+        id: 'jekyll-and-hyde',
+        name: 'Jekyll and Hyde – Robert Louis Stevenson',
         questions: [
           {
-            id: 'lit-nov-q1',
-            question: 'How is fear presented in one of your studied nineteenth-century novels?',
+            id: 'jekyll-q1',
+            question: 'How does Stevenson present the character of Mr Hyde in Jekyll and Hyde?',
             marks: 30,
             difficulty: 'hard',
-            modelAnswer: 'Students should choose from Jekyll and Hyde, A Christmas Carol, Great Expectations, Jane Eyre, Frankenstein, Pride and Prejudice, or The Sign of Four. Analysis should include specific examples, language techniques, and contextual understanding of fear in the Victorian era.',
+            modelAnswer: 'Students should analyse Hyde\'s physical description, actions, and symbolic significance. Must include analysis of language techniques, Victorian fears about human nature, and the novella\'s structure.',
             markingCriteria: {
-              breakdown: ['Clear argument and structure (AO1)', 'Analysis of language, form and structure (AO2)', 'Understanding of context (AO3)', 'Range of vocabulary and sentence structures (AO4)']
+              breakdown: ['Clear argument with textual evidence (AO1)', 'Analysis of language and structure (AO2)', 'Understanding of Victorian context (AO3)', 'Accurate written expression (AO4)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
-            id: 'lit-nov-q2',
-            question: 'How does your chosen author present the theme of social class in your studied novel?',
+            id: 'jekyll-q2',
+            question: 'How is the theme of duality explored in Jekyll and Hyde?',
             marks: 30,
             difficulty: 'hard',
-            modelAnswer: 'Students should analyse how social class is portrayed through character interactions, setting, and narrative voice. Must include specific textual evidence and show understanding of Victorian social hierarchies.',
+            modelAnswer: 'Students should examine the dual nature of Jekyll/Hyde, London setting, and Victorian society. Must analyse Stevenson\'s use of symbolism, narrative structure, and Gothic elements.',
             markingCriteria: {
-              breakdown: ['Clear thesis and argument (AO1)', 'Detailed analysis of writer\'s methods (AO2)', 'Understanding of historical context (AO3)', 'Accurate written expression (AO4)']
+              breakdown: ['Sustained thematic analysis (AO1)', 'Analysis of literary techniques (AO2)', 'Contextual understanding (AO3)', 'Technical accuracy (AO4)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
-            id: 'lit-nov-q3',
-            question: 'Analyse how your chosen author creates sympathy for a particular character in your studied novel.',
+            id: 'jekyll-q3',
+            question: 'Analyse how Stevenson creates an atmosphere of mystery in Jekyll and Hyde.',
             marks: 30,
             difficulty: 'hard',
-            modelAnswer: 'Students should examine character development, narrative perspective, and literary techniques used to evoke reader sympathy. Must include close textual analysis and consider authorial intent.',
+            modelAnswer: 'Students should examine narrative perspective, setting descriptions, and gradual revelation of truth. Must consider Gothic conventions and Victorian anxieties.',
             markingCriteria: {
-              breakdown: ['Sustained interpretation (AO1)', 'Analysis of language and structure (AO2)', 'Contextual understanding (AO3)', 'Technical accuracy (AO4)']
-            },
-            specReference: 'AQA English Literature 8702'
-          },
-          {
-            id: 'lit-nov-q4',
-            question: 'How is the theme of good versus evil explored in your studied nineteenth-century novel?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse moral conflicts, character motivations, and symbolic representations of good and evil. Must demonstrate understanding of Victorian moral values and literary conventions.',
-            markingCriteria: {
-              breakdown: ['Clear analytical approach (AO1)', 'Detailed examination of literary techniques (AO2)', 'Understanding of moral context (AO3)', 'Fluent expression (AO4)']
-            },
-            specReference: 'AQA English Literature 8702'
-          },
-          {
-            id: 'lit-nov-q5',
-            question: 'Examine how your chosen author presents relationships between men and women in your studied novel.',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse gender roles, power dynamics, and romantic relationships within their chosen text. Must show understanding of Victorian attitudes towards gender and marriage.',
-            markingCriteria: {
-              breakdown: ['Coherent argument (AO1)', 'Analysis of characterisation and dialogue (AO2)', 'Understanding of social context (AO3)', 'Accurate spelling and grammar (AO4)']
+              breakdown: ['Clear interpretation (AO1)', 'Analysis of atmosphere and mood (AO2)', 'Understanding of genre conventions (AO3)', 'Fluent expression (AO4)']
             },
             specReference: 'AQA English Literature 8702'
           }
         ]
       },
       {
-        id: 'shakespeare-plays',
-        name: 'Shakespeare Plays',
+        id: 'christmas-carol',
+        name: 'A Christmas Carol – Charles Dickens',
         questions: [
           {
-            id: 'lit-shakes-q1',
+            id: 'carol-q1',
+            question: 'How does Dickens present Scrooge\'s transformation in A Christmas Carol?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should trace Scrooge\'s character development through the five staves, analysing language, dialogue, and actions. Must consider Dickens\' social message and Victorian context.',
+            markingCriteria: {
+              breakdown: ['Clear tracking of character change (AO1)', 'Analysis of characterisation techniques (AO2)', 'Understanding of social context (AO3)', 'Accurate written communication (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'carol-q2',
+            question: 'How does Dickens use the three spirits to convey his message in A Christmas Carol?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse each spirit\'s appearance, function, and the scenes they show Scrooge. Must consider allegorical elements and Dickens\' social criticism.',
+            markingCriteria: {
+              breakdown: ['Clear analysis of spirits\' roles (AO1)', 'Analysis of symbolic techniques (AO2)', 'Understanding of social message (AO3)', 'Technical accuracy (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'carol-q3',
+            question: 'Examine how Dickens presents the theme of social responsibility in A Christmas Carol.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse characters\' attitudes to poverty, Dickens\' critique of Victorian society, and the novella\'s moral message. Must include contextual understanding.',
+            markingCriteria: {
+              breakdown: ['Sustained thematic focus (AO1)', 'Analysis of Dickens\' methods (AO2)', 'Victorian social context (AO3)', 'Fluent expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          }
+        ]
+      },
+      {
+        id: 'great-expectations',
+        name: 'Great Expectations – Charles Dickens',
+        questions: [
+          {
+            id: 'expectations-q1',
+            question: 'How does Dickens present Pip\'s relationship with Joe in Great Expectations?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse the evolution of their relationship, examining Pip\'s changing attitudes and Joe\'s consistent character. Must consider class themes and moral development.',
+            markingCriteria: {
+              breakdown: ['Clear relationship analysis (AO1)', 'Analysis of characterisation (AO2)', 'Understanding of class context (AO3)', 'Accurate written expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'expectations-q2',
+            question: 'How is the theme of social class explored in Great Expectations?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine Pip\'s social mobility, different class representations, and Dickens\' critique of Victorian society. Must analyse character interactions and settings.',
+            markingCriteria: {
+              breakdown: ['Sustained thematic analysis (AO1)', 'Analysis of literary techniques (AO2)', 'Victorian social context (AO3)', 'Technical accuracy (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'expectations-q3',
+            question: 'Analyse how Dickens presents Miss Havisham in Great Expectations.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine her appearance, behaviour, motivation, and symbolic significance. Must consider Gothic elements and themes of revenge and obsession.',
+            markingCriteria: {
+              breakdown: ['Clear character analysis (AO1)', 'Analysis of characterisation techniques (AO2)', 'Understanding of Gothic conventions (AO3)', 'Fluent expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          }
+        ]
+      },
+      {
+        id: 'jane-eyre',
+        name: 'Jane Eyre – Charlotte Brontë',
+        questions: [
+          {
+            id: 'jane-q1',
+            question: 'How does Brontë present Jane as an independent character in Jane Eyre?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse Jane\'s defiance, moral principles, and refusal to compromise her values. Must consider Victorian expectations of women and narrative techniques.',
+            markingCriteria: {
+              breakdown: ['Clear character analysis (AO1)', 'Analysis of characterisation methods (AO2)', 'Understanding of gender context (AO3)', 'Accurate written communication (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'jane-q2',
+            question: 'How does Brontë use setting to reflect Jane\'s emotional state in Jane Eyre?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine key locations (Gateshead, Lowood, Thornfield, Moor House) and their symbolic significance. Must analyse pathetic fallacy and Gothic elements.',
+            markingCriteria: {
+              breakdown: ['Clear setting analysis (AO1)', 'Analysis of symbolic techniques (AO2)', 'Understanding of Gothic context (AO3)', 'Technical accuracy (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'jane-q3',
+            question: 'Examine how Brontë presents the theme of love in Jane Eyre.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse different types of love, particularly Jane and Rochester\'s relationship. Must consider Victorian attitudes and Jane\'s moral independence.',
+            markingCriteria: {
+              breakdown: ['Sustained thematic focus (AO1)', 'Analysis of relationship development (AO2)', 'Victorian context understanding (AO3)', 'Fluent expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          }
+        ]
+      },
+      {
+        id: 'frankenstein',
+        name: 'Frankenstein (1831) – Mary Shelley',
+        questions: [
+          {
+            id: 'frank-q1',
+            question: 'How does Shelley present the creature in Frankenstein?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse the creature\'s development, appearance, intelligence, and moral complexity. Must consider Romantic ideals and Gothic conventions.',
+            markingCriteria: {
+              breakdown: ['Clear character analysis (AO1)', 'Analysis of characterisation techniques (AO2)', 'Understanding of Romantic context (AO3)', 'Accurate written expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'frank-q2',
+            question: 'How is the theme of responsibility explored in Frankenstein?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine Victor\'s abandonment of his creation, consequences of unchecked ambition, and moral obligations. Must consider scientific and parental responsibility.',
+            markingCriteria: {
+              breakdown: ['Sustained thematic analysis (AO1)', 'Analysis of moral themes (AO2)', 'Scientific revolution context (AO3)', 'Technical accuracy (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'frank-q3',
+            question: 'Analyse how Shelley creates sympathy for different characters in Frankenstein.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine narrative perspective, character motivations, and moral ambiguity. Must consider the complex relationship between Victor and his creature.',
+            markingCriteria: {
+              breakdown: ['Clear interpretation (AO1)', 'Analysis of narrative techniques (AO2)', 'Understanding of moral complexity (AO3)', 'Fluent expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          }
+        ]
+      },
+      {
+        id: 'pride-and-prejudice',
+        name: 'Pride and Prejudice – Jane Austen',
+        questions: [
+          {
+            id: 'pride-q1',
+            question: 'How does Austen present Elizabeth Bennet in Pride and Prejudice?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse Elizabeth\'s wit, independence, and character development. Must consider Regency social expectations and Austen\'s narrative techniques.',
+            markingCriteria: {
+              breakdown: ['Clear character analysis (AO1)', 'Analysis of characterisation methods (AO2)', 'Understanding of social context (AO3)', 'Accurate written communication (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'pride-q2',
+            question: 'How does Austen explore the theme of marriage in Pride and Prejudice?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine different marriage examples, motivations, and Austen\'s social commentary. Must consider economic and social factors in Regency society.',
+            markingCriteria: {
+              breakdown: ['Sustained thematic focus (AO1)', 'Analysis of social themes (AO2)', 'Regency context understanding (AO3)', 'Technical accuracy (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'pride-q3',
+            question: 'Analyse how Austen uses irony in Pride and Prejudice.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine dramatic irony, verbal irony, and situational irony. Must consider Austen\'s narrative voice and social satire.',
+            markingCriteria: {
+              breakdown: ['Clear analysis of irony (AO1)', 'Analysis of literary techniques (AO2)', 'Understanding of satire (AO3)', 'Fluent expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          }
+        ]
+      },
+      {
+        id: 'sign-of-four',
+        name: 'The Sign of Four – Sir Arthur Conan Doyle',
+        questions: [
+          {
+            id: 'sign-q1',
+            question: 'How does Doyle present Sherlock Holmes in The Sign of Four?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse Holmes\' methods, personality, and relationship with Watson. Must consider Victorian attitudes to science and detection.',
+            markingCriteria: {
+              breakdown: ['Clear character analysis (AO1)', 'Analysis of characterisation techniques (AO2)', 'Understanding of Victorian context (AO3)', 'Accurate written expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'sign-q2',
+            question: 'How does Doyle create mystery and suspense in The Sign of Four?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine narrative structure, clues, red herrings, and pacing. Must consider detective fiction conventions and reader engagement.',
+            markingCriteria: {
+              breakdown: ['Clear analysis of mystery elements (AO1)', 'Analysis of structural techniques (AO2)', 'Understanding of genre conventions (AO3)', 'Technical accuracy (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'sign-q3',
+            question: 'Examine how Doyle presents the theme of empire in The Sign of Four.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse colonial elements, attitudes to India, and imperial consequences. Must consider Victorian imperial ideology and its critique.',
+            markingCriteria: {
+              breakdown: ['Sustained thematic analysis (AO1)', 'Analysis of imperial themes (AO2)', 'Colonial context understanding (AO3)', 'Fluent expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          }
+        ]
+      },
+      {
+        id: 'macbeth',
+        name: 'Macbeth',
+        questions: [
+          {
+            id: 'macbeth-q1',
             question: 'How does Shakespeare present Lady Macbeth as a powerful character in Macbeth?',
             marks: 30,
             difficulty: 'hard',
@@ -106,46 +318,219 @@ export const curriculum: Subject[] = [
             specReference: 'AQA English Literature 8702'
           },
           {
-            id: 'lit-shakes-q2',
-            question: 'How does Shakespeare present the theme of love in your studied play?',
+            id: 'macbeth-q2',
+            question: 'How does Shakespeare present the theme of ambition in Macbeth?',
             marks: 30,
             difficulty: 'hard',
-            modelAnswer: 'Students should choose from Macbeth, Romeo and Juliet, The Tempest, The Merchant of Venice, Much Ado About Nothing, or Julius Caesar. Analysis should examine different types of love and Shakespeare\'s dramatic techniques.',
+            modelAnswer: 'Students should examine Macbeth\'s desire for power, the consequences of unchecked ambition, and other characters\' ambitions. Must analyse dramatic and linguistic techniques.',
             markingCriteria: {
-              breakdown: ['Sustained focus on theme (AO1)', 'Analysis of language and dramatic methods (AO2)', 'Contextual understanding (AO3)', 'Technical accuracy (AO4)']
+              breakdown: ['Sustained thematic focus (AO1)', 'Analysis of language and dramatic methods (AO2)', 'Jacobean context understanding (AO3)', 'Technical accuracy (AO4)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
-            id: 'lit-shakes-q3',
-            question: 'Analyse how Shakespeare creates tension in a key scene from your studied play.',
+            id: 'macbeth-q3',
+            question: 'Analyse how Shakespeare uses supernatural elements in Macbeth.',
             marks: 30,
             difficulty: 'hard',
-            modelAnswer: 'Students should select a specific scene and analyse dramatic devices, staging, dialogue, and audience impact. Must demonstrate understanding of theatrical conventions.',
+            modelAnswer: 'Students should examine the witches, apparitions, and ghostly visions. Must consider their dramatic function and Jacobean beliefs about the supernatural.',
             markingCriteria: {
-              breakdown: ['Clear focus on dramatic tension (AO1)', 'Detailed analysis of dramatic techniques (AO2)', 'Understanding of theatrical context (AO3)', 'Fluent expression (AO4)']
+              breakdown: ['Clear analysis of supernatural elements (AO1)', 'Analysis of dramatic and linguistic techniques (AO2)', 'Understanding of contemporary beliefs (AO3)', 'Fluent expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          }
+        ]
+      },
+      {
+        id: 'romeo-and-juliet',
+        name: 'Romeo and Juliet',
+        questions: [
+          {
+            id: 'romeo-q1',
+            question: 'How does Shakespeare present the relationship between Romeo and Juliet?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse their first meeting, development of love, and tragic ending. Must examine language, imagery, and dramatic techniques.',
+            markingCriteria: {
+              breakdown: ['Clear relationship analysis (AO1)', 'Analysis of dramatic techniques (AO2)', 'Understanding of Elizabethan context (AO3)', 'Accurate written expression (AO4)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
-            id: 'lit-shakes-q4',
-            question: 'How does Shakespeare present the theme of betrayal in your studied play?',
+            id: 'romeo-q2',
+            question: 'How does Shakespeare present the theme of conflict in Romeo and Juliet?',
             marks: 30,
             difficulty: 'hard',
-            modelAnswer: 'Students should examine instances of betrayal, character motivations, and consequences. Must include analysis of dramatic irony and audience response.',
+            modelAnswer: 'Students should examine family feud, generational conflict, and love versus hate. Must analyse dramatic devices and character interactions.',
             markingCriteria: {
-              breakdown: ['Coherent thematic analysis (AO1)', 'Analysis of characterisation and plot (AO2)', 'Historical and social context (AO3)', 'Accurate written expression (AO4)']
+              breakdown: ['Sustained thematic analysis (AO1)', 'Analysis of dramatic methods (AO2)', 'Social context understanding (AO3)', 'Technical accuracy (AO4)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
-            id: 'lit-shakes-q5',
-            question: 'Examine how Shakespeare uses supernatural elements in your studied play.',
+            id: 'romeo-q3',
+            question: 'Analyse how Shakespeare creates tension in the balcony scene in Romeo and Juliet.',
             marks: 30,
             difficulty: 'hard',
-            modelAnswer: 'Students should analyse supernatural characters, prophecies, or magical elements and their dramatic function. Must show understanding of Elizabethan/Jacobean beliefs.',
+            modelAnswer: 'Students should examine staging, dialogue, dramatic irony, and audience response. Must consider theatrical conventions and romantic conventions.',
             markingCriteria: {
-              breakdown: ['Clear analytical approach (AO1)', 'Analysis of dramatic and linguistic techniques (AO2)', 'Understanding of contemporary beliefs (AO3)', 'Technical accuracy (AO4)']
+              breakdown: ['Clear scene analysis (AO1)', 'Analysis of dramatic techniques (AO2)', 'Understanding of theatrical context (AO3)', 'Fluent expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          }
+        ]
+      },
+      {
+        id: 'the-tempest',
+        name: 'The Tempest',
+        questions: [
+          {
+            id: 'tempest-q1',
+            question: 'How does Shakespeare present Prospero in The Tempest?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse Prospero\'s use of magic, his role as father and ruler, and his eventual forgiveness. Must examine power themes and dramatic techniques.',
+            markingCriteria: {
+              breakdown: ['Clear character analysis (AO1)', 'Analysis of dramatic methods (AO2)', 'Understanding of Jacobean context (AO3)', 'Accurate written communication (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'tempest-q2',
+            question: 'How does Shakespeare explore the theme of power in The Tempest?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine different types of power, abuse of power, and the restoration of rightful authority. Must analyse character relationships and dramatic structure.',
+            markingCriteria: {
+              breakdown: ['Sustained thematic focus (AO1)', 'Analysis of power dynamics (AO2)', 'Political context understanding (AO3)', 'Technical accuracy (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'tempest-q3',
+            question: 'Analyse how Shakespeare presents the relationship between Prospero and Ariel in The Tempest.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine master-servant dynamics, Ariel\'s desire for freedom, and their mutual dependence. Must consider colonial themes and magical elements.',
+            markingCriteria: {
+              breakdown: ['Clear relationship analysis (AO1)', 'Analysis of characterisation techniques (AO2)', 'Understanding of colonial context (AO3)', 'Fluent expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          }
+        ]
+      },
+      {
+        id: 'merchant-of-venice',
+        name: 'The Merchant of Venice',
+        questions: [
+          {
+            id: 'merchant-q1',
+            question: 'How does Shakespeare present Shylock in The Merchant of Venice?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse Shylock\'s motivations, treatment by other characters, and complex characterisation. Must consider Elizabethan attitudes and modern interpretations.',
+            markingCriteria: {
+              breakdown: ['Clear character analysis (AO1)', 'Analysis of characterisation methods (AO2)', 'Understanding of social context (AO3)', 'Accurate written expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'merchant-q2',
+            question: 'How does Shakespeare explore the theme of justice versus mercy in The Merchant of Venice?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine the trial scene, different characters\' concepts of justice, and Portia\'s mercy speech. Must analyse dramatic techniques and moral themes.',
+            markingCriteria: {
+              breakdown: ['Sustained thematic analysis (AO1)', 'Analysis of dramatic and linguistic techniques (AO2)', 'Legal and moral context (AO3)', 'Technical accuracy (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'merchant-q3',
+            question: 'Analyse how Shakespeare presents the casket scenes in The Merchant of Venice.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine the three suitors, symbolic significance of metals, and dramatic function. Must consider themes of appearance versus reality.',
+            markingCriteria: {
+              breakdown: ['Clear scene analysis (AO1)', 'Analysis of symbolism and structure (AO2)', 'Understanding of dramatic conventions (AO3)', 'Fluent expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          }
+        ]
+      },
+      {
+        id: 'much-ado-about-nothing',
+        name: 'Much Ado About Nothing',
+        questions: [
+          {
+            id: 'much-ado-q1',
+            question: 'How does Shakespeare present the relationship between Beatrice and Benedick in Much Ado About Nothing?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse their wit battles, the gulling scenes, and their eventual union. Must examine comedy techniques and character development.',
+            markingCriteria: {
+              breakdown: ['Clear relationship analysis (AO1)', 'Analysis of comic techniques (AO2)', 'Understanding of Elizabethan context (AO3)', 'Accurate written communication (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'much-ado-q2',
+            question: 'How does Shakespeare explore the theme of deception in Much Ado About Nothing?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine benevolent and malevolent deception, appearance versus reality, and the consequences of false accusations. Must analyse dramatic irony.',
+            markingCriteria: {
+              breakdown: ['Sustained thematic focus (AO1)', 'Analysis of dramatic techniques (AO2)', 'Social context understanding (AO3)', 'Technical accuracy (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'much-ado-q3',
+            question: 'Analyse how Shakespeare presents Don John as a villain in Much Ado About Nothing.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine his motivations, methods, and dramatic function. Must consider comedy villain conventions and his contrast with other characters.',
+            markingCriteria: {
+              breakdown: ['Clear character analysis (AO1)', 'Analysis of villain conventions (AO2)', 'Understanding of dramatic context (AO3)', 'Fluent expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          }
+        ]
+      },
+      {
+        id: 'julius-caesar',
+        name: 'Julius Caesar',
+        questions: [
+          {
+            id: 'caesar-q1',
+            question: 'How does Shakespeare present Brutus in Julius Caesar?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse Brutus as a tragic hero, his internal conflict, and his noble motivations. Must examine his relationship with Caesar and the conspiracy.',
+            markingCriteria: {
+              breakdown: ['Clear character analysis (AO1)', 'Analysis of tragic hero conventions (AO2)', 'Understanding of Roman context (AO3)', 'Accurate written expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'caesar-q2',
+            question: 'How does Shakespeare explore the theme of loyalty in Julius Caesar?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine conflicting loyalties, betrayal, and the consequences of divided allegiance. Must analyse character motivations and dramatic techniques.',
+            markingCriteria: {
+              breakdown: ['Sustained thematic analysis (AO1)', 'Analysis of dramatic methods (AO2)', 'Political context understanding (AO3)', 'Technical accuracy (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'caesar-q3',
+            question: 'Analyse how Shakespeare creates tension in the assassination scene in Julius Caesar.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine dramatic devices, staging, irony, and audience response. Must consider the build-up to the scene and its consequences.',
+            markingCriteria: {
+              breakdown: ['Clear scene analysis (AO1)', 'Analysis of dramatic techniques (AO2)', 'Understanding of theatrical context (AO3)', 'Fluent expression (AO4)']
             },
             specReference: 'AQA English Literature 8702'
           }
