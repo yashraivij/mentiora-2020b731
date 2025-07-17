@@ -26,6 +26,264 @@ export interface Subject {
 
 export const curriculum: Subject[] = [
   {
+    id: 'history',
+    name: 'History',
+    topics: [
+      {
+        id: 'america-1840-1895',
+        name: 'AA: America, 1840–1895 – Expansion and consolidation',
+        questions: [
+          {
+            id: 'america-1840-q1',
+            question: 'What were the main reasons for westward expansion in America between 1840-1895?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Economic opportunities like gold rushes and farming land, population pressure in the East, and the concept of Manifest Destiny drove westward expansion.',
+            markingCriteria: {
+              breakdown: ['Economic opportunities mentioned (1 mark)', 'Population pressure (1 mark)', 'Manifest Destiny concept (1 mark)', 'Specific examples given (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1840-q2',
+            question: 'How did the transcontinental railroad affect American expansion?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The railroad connected East and West coasts, enabling faster travel and trade. It facilitated settlement of the Great Plains and contributed to the decline of Native American tribes.',
+            markingCriteria: {
+              breakdown: ['Connected coasts (1 mark)', 'Faster travel/trade (1 mark)', 'Settlement facilitation (2 marks)', 'Impact on Native Americans (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          }
+        ]
+      },
+      {
+        id: 'germany-1890-1945',
+        name: 'AB: Germany, 1890–1945 – Democracy and dictatorship',
+        questions: [
+          {
+            id: 'germany-q1',
+            question: 'What problems faced the Weimar Republic in its early years?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'The Weimar Republic faced hyperinflation, political instability, the Treaty of Versailles burden, and opposition from both left and right-wing groups.',
+            markingCriteria: {
+              breakdown: ['Hyperinflation mentioned (1 mark)', 'Political instability (1 mark)', 'Treaty of Versailles (1 mark)', 'Opposition groups (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'germany-q2',
+            question: 'How did Hitler consolidate power after becoming Chancellor in 1933?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Hitler used the Reichstag Fire to gain emergency powers, passed the Enabling Act, eliminated trade unions, and removed political opposition through violence and intimidation.',
+            markingCriteria: {
+              breakdown: ['Reichstag Fire (1 mark)', 'Enabling Act (2 marks)', 'Eliminated unions (1 mark)', 'Removed opposition (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          }
+        ]
+      },
+      {
+        id: 'russia-1894-1945',
+        name: 'AC: Russia, 1894–1945 – Tsardom and communism',
+        questions: [
+          {
+            id: 'russia-q1',
+            question: 'What were the main causes of the 1905 Revolution in Russia?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Military defeat in the Russo-Japanese War, Bloody Sunday massacre, economic hardship, and demands for political reform led to the 1905 Revolution.',
+            markingCriteria: {
+              breakdown: ['Russo-Japanese War (1 mark)', 'Bloody Sunday (1 mark)', 'Economic hardship (1 mark)', 'Political demands (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'russia-q2',
+            question: 'How did Lenin consolidate Bolshevik power after the October Revolution?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Lenin signed the Treaty of Brest-Litovsk to end Russian involvement in WWI, used the Cheka to eliminate opposition, and implemented War Communism.',
+            markingCriteria: {
+              breakdown: ['Treaty of Brest-Litovsk (2 marks)', 'Cheka usage (2 marks)', 'War Communism (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          }
+        ]
+      },
+      {
+        id: 'america-1920-1973',
+        name: 'AD: America, 1920–1973 – Opportunity and inequality',
+        questions: [
+          {
+            id: 'america-1920-q1',
+            question: 'What were the main features of the economic boom in 1920s America?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Mass production, consumer goods availability, stock market speculation, and hire purchase schemes characterized the 1920s economic boom.',
+            markingCriteria: {
+              breakdown: ['Mass production (1 mark)', 'Consumer goods (1 mark)', 'Stock market (1 mark)', 'Hire purchase (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1920-q2',
+            question: 'How did the New Deal help Americans during the Great Depression?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The New Deal created jobs through public works programs, provided financial relief, reformed banking, and established social security systems.',
+            markingCriteria: {
+              breakdown: ['Job creation programs (2 marks)', 'Financial relief (1 mark)', 'Banking reform (1 mark)', 'Social security (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          }
+        ]
+      },
+      {
+        id: 'conflict-tension-ww1',
+        name: 'BA: Conflict and tension: The First World War, 1894–1918',
+        questions: [
+          {
+            id: 'ww1-q1',
+            question: 'What were the main causes of tension between European powers before 1914?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Imperial rivalry, alliance system, arms race, and nationalism in the Balkans created tensions between European powers before WWI.',
+            markingCriteria: {
+              breakdown: ['Imperial rivalry (1 mark)', 'Alliance system (1 mark)', 'Arms race (1 mark)', 'Balkan nationalism (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'ww1-q2',
+            question: 'How did trench warfare develop on the Western Front?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'After the failure of the Schlieffen Plan, both sides dug trenches for protection. This created a stalemate with no man\'s land between opposing forces.',
+            markingCriteria: {
+              breakdown: ['Schlieffen Plan failure (2 marks)', 'Defensive trenches (2 marks)', 'Stalemate creation (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          }
+        ]
+      },
+      {
+        id: 'conflict-tension-interwar',
+        name: 'BB: Conflict and tension: The inter-war years, 1918–1939',
+        questions: [
+          {
+            id: 'interwar-q1',
+            question: 'What were the main terms of the Treaty of Versailles?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Germany lost territory, had military restrictions imposed, accepted war guilt, and had to pay reparations to the Allied powers.',
+            markingCriteria: {
+              breakdown: ['Territory losses (1 mark)', 'Military restrictions (1 mark)', 'War guilt clause (1 mark)', 'Reparations (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'interwar-q2',
+            question: 'Why did the League of Nations fail to prevent aggression in the 1930s?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The League lacked enforcement power, major powers like USA and USSR were not members, and economic sanctions proved ineffective against aggressors.',
+            markingCriteria: {
+              breakdown: ['Lack of enforcement (2 marks)', 'Missing major powers (2 marks)', 'Ineffective sanctions (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          }
+        ]
+      },
+      {
+        id: 'conflict-tension-east-west',
+        name: 'BC: Conflict and tension between East and West, 1945–1972',
+        questions: [
+          {
+            id: 'east-west-q1',
+            question: 'What were the main disagreements between the USA and USSR at the end of WWII?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Disagreements over Eastern Europe\'s future, Germany\'s division, nuclear weapons, and different ideological systems created tension between the superpowers.',
+            markingCriteria: {
+              breakdown: ['Eastern Europe disputes (1 mark)', 'Germany division (1 mark)', 'Nuclear weapons (1 mark)', 'Ideological differences (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'east-west-q2',
+            question: 'How did the Berlin Crisis of 1961 increase Cold War tensions?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The construction of the Berlin Wall divided the city, created a propaganda victory for the West, and demonstrated the failure of communist East Germany.',
+            markingCriteria: {
+              breakdown: ['Berlin Wall construction (2 marks)', 'Propaganda impact (2 marks)', 'Communist failure shown (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          }
+        ]
+      },
+      {
+        id: 'conflict-tension-asia',
+        name: 'BD: Conflict and tension in Asia, 1950–1975',
+        questions: [
+          {
+            id: 'asia-q1',
+            question: 'What were the main causes of the Korean War?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Division of Korea after WWII, competing ideologies, North Korean invasion of the South, and Cold War tensions led to the Korean War.',
+            markingCriteria: {
+              breakdown: ['Korea division (1 mark)', 'Ideological competition (1 mark)', 'North invasion (1 mark)', 'Cold War context (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'asia-q2',
+            question: 'How did the Vietnam War affect American society?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The war created massive protests, divided American society, led to the draft system criticism, and changed public trust in government.',
+            markingCriteria: {
+              breakdown: ['Protest movements (2 marks)', 'Social division (2 marks)', 'Government trust issues (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          }
+        ]
+      },
+      {
+        id: 'conflict-tension-gulf',
+        name: 'BE: Conflict and tension in the Gulf and Afghanistan, 1990–2009',
+        questions: [
+          {
+            id: 'gulf-q1',
+            question: 'What were the main causes of the Gulf War in 1991?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Iraq\'s invasion of Kuwait, threats to oil supplies, violation of international law, and UN Security Council resolutions led to the Gulf War.',
+            markingCriteria: {
+              breakdown: ['Kuwait invasion (1 mark)', 'Oil supply threats (1 mark)', 'International law violation (1 mark)', 'UN resolutions (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'gulf-q2',
+            question: 'How did the September 11 attacks change US foreign policy?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The attacks led to the War on Terror, invasions of Afghanistan and Iraq, increased homeland security, and the Bush Doctrine of preemptive strikes.',
+            markingCriteria: {
+              breakdown: ['War on Terror (1 mark)', 'Afghanistan/Iraq invasions (2 marks)', 'Homeland security (1 mark)', 'Bush Doctrine (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          }
+        ]
+      }
+    ]
+  },
+  {
     id: 'english-literature',
     name: 'English Literature',
     topics: [
