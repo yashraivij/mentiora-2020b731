@@ -35,34 +35,111 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'jekyll-q1',
-            question: 'How does Stevenson present the character of Mr Hyde in Jekyll and Hyde?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse Hyde\'s physical description, actions, and symbolic significance. Must include analysis of language techniques, Victorian fears about human nature, and the novella\'s structure.',
+            question: 'What is Mr Hyde\'s first appearance like in the novella?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Hyde tramples over a young girl in the street, showing his callous nature. He is described as giving a strong feeling of deformity despite being physically normal.',
             markingCriteria: {
-              breakdown: ['Clear argument with textual evidence (AO1)', 'Analysis of language and structure (AO2)', 'Understanding of Victorian context (AO3)', 'Accurate written expression (AO4)']
+              breakdown: ['Reference to trampling incident (1 mark)', 'Description of deformity/appearance (1 mark)', 'Evidence from text (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'jekyll-q2',
-            question: 'How is the theme of duality explored in Jekyll and Hyde?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine the dual nature of Jekyll/Hyde, London setting, and Victorian society. Must analyse Stevenson\'s use of symbolism, narrative structure, and Gothic elements.',
+            question: 'How does Jekyll describe his feelings when he transforms into Hyde?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Jekyll feels younger, lighter, and more vigorous. He experiences a sense of freedom and describes feeling "wicked" but also pleasantly liberated from moral constraints.',
             markingCriteria: {
-              breakdown: ['Sustained thematic analysis (AO1)', 'Analysis of literary techniques (AO2)', 'Contextual understanding (AO3)', 'Technical accuracy (AO4)']
+              breakdown: ['Reference to feeling younger/lighter (1 mark)', 'Sense of freedom mentioned (1 mark)', 'Reference to wickedness (1 mark)', 'Use of quotations (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'jekyll-q3',
-            question: 'Analyse how Stevenson creates an atmosphere of mystery in Jekyll and Hyde.',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine narrative perspective, setting descriptions, and gradual revelation of truth. Must consider Gothic conventions and Victorian anxieties.',
+            question: 'Why does Utterson become suspicious about Jekyll\'s will?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The will leaves everything to Hyde, who Utterson has never met. The unusual clause about Jekyll\'s "disappearance" rather than death makes Utterson worried.',
             markingCriteria: {
-              breakdown: ['Clear interpretation (AO1)', 'Analysis of atmosphere and mood (AO2)', 'Understanding of genre conventions (AO3)', 'Fluent expression (AO4)']
+              breakdown: ['Will leaves everything to Hyde (1 mark)', 'Reference to disappearance clause (1 mark)', 'Utterson\'s concern mentioned (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'jekyll-q4',
+            question: 'What does the setting of London contribute to the novella\'s atmosphere?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'London is presented as foggy and dark, creating a Gothic atmosphere. The contrast between respectable areas and Soho reflects the duality theme. The fog symbolizes moral confusion and hidden secrets.',
+            markingCriteria: {
+              breakdown: ['Description of fog/darkness (2 marks)', 'Contrast between areas mentioned (2 marks)', 'Link to themes/symbolism (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'jekyll-q5',
+            question: 'How does Stevenson present the character of Dr Lanyon?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Lanyon is presented as a rational, scientific man who represents conventional Victorian values. His horror at Jekyll\'s transformation shows the conflict between science and morality.',
+            markingCriteria: {
+              breakdown: ['Reference to rational/scientific nature (1 mark)', 'Represents conventional values (1 mark)', 'Horror at transformation (1 mark)', 'Science vs morality conflict (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'jekyll-q6',
+            question: 'What is the significance of the laboratory door in the novella?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'The door symbolizes the barrier between Jekyll\'s respectable public life and his secret, immoral activities as Hyde. It represents hidden secrets and dual identity.',
+            markingCriteria: {
+              breakdown: ['Symbolizes barrier/secrecy (1 mark)', 'Link to dual identity (1 mark)', 'Reference to public vs private (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'jekyll-q7',
+            question: 'How does the theme of reputation feature in Jekyll and Hyde?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Victorian gentlemen prioritize reputation above all else. Jekyll creates Hyde to protect his reputation while indulging in immoral acts. The fear of scandal drives much of the plot and character motivation.',
+            markingCriteria: {
+              breakdown: ['Victorian importance of reputation (2 marks)', 'Jekyll\'s motivation to protect reputation (2 marks)', 'Impact on plot development (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'jekyll-q8',
+            question: 'What does Hyde represent in Victorian society?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Hyde represents the primitive, animalistic side of human nature that Victorian society tried to suppress. He embodies the fears about evolution and the beast within civilized man.',
+            markingCriteria: {
+              breakdown: ['Primitive/animalistic nature (1 mark)', 'What Victorian society suppressed (1 mark)', 'Link to evolution fears (1 mark)', 'Beast within civilized man (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'jekyll-q9',
+            question: 'How does Stevenson use the narrative structure to create mystery?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The story is told through multiple perspectives, withholding Jekyll\'s confession until the end. Different narrators provide limited viewpoints, building suspense and mystery about Hyde\'s true identity.',
+            markingCriteria: {
+              breakdown: ['Multiple perspectives mentioned (2 marks)', 'Jekyll\'s confession at the end (2 marks)', 'Limited viewpoints create suspense (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'jekyll-q10',
+            question: 'What is the significance of Jekyll\'s final confession?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The confession reveals the truth about the dual identity and Jekyll\'s loss of control over his transformations. It shows his moral deterioration and the triumph of evil over good.',
+            markingCriteria: {
+              breakdown: ['Reveals truth about dual identity (1 mark)', 'Loss of control over transformations (1 mark)', 'Moral deterioration (1 mark)', 'Triumph of evil (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           }
@@ -74,34 +151,111 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'carol-q1',
-            question: 'How does Dickens present Scrooge\'s transformation in A Christmas Carol?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should trace Scrooge\'s character development through the five staves, analysing language, dialogue, and actions. Must consider Dickens\' social message and Victorian context.',
+            question: 'How is Scrooge presented at the beginning of the novella?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Scrooge is described as a "squeezing, wrenching, grasping" old sinner. He is cold, miserly, and shows no kindness to anyone, including his nephew and Bob Cratchit.',
             markingCriteria: {
-              breakdown: ['Clear tracking of character change (AO1)', 'Analysis of characterisation techniques (AO2)', 'Understanding of social context (AO3)', 'Accurate written communication (AO4)']
+              breakdown: ['Reference to descriptive language (1 mark)', 'Mention of coldness/miserly nature (1 mark)', 'Examples of unkindness (1 mark)', 'Use of quotations (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'carol-q2',
-            question: 'How does Dickens use the three spirits to convey his message in A Christmas Carol?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse each spirit\'s appearance, function, and the scenes they show Scrooge. Must consider allegorical elements and Dickens\' social criticism.',
+            question: 'What does the Ghost of Christmas Past show Scrooge?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The ghost shows Scrooge his lonely childhood, his time at Fezziwig\'s, and his broken engagement to Belle. These scenes reveal how Scrooge became bitter and alone.',
             markingCriteria: {
-              breakdown: ['Clear analysis of spirits\' roles (AO1)', 'Analysis of symbolic techniques (AO2)', 'Understanding of social message (AO3)', 'Technical accuracy (AO4)']
+              breakdown: ['Reference to childhood scenes (1 mark)', 'Mention of Fezziwig or Belle (1 mark)', 'Link to character development (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'carol-q3',
-            question: 'Examine how Dickens presents the theme of social responsibility in A Christmas Carol.',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse characters\' attitudes to poverty, Dickens\' critique of Victorian society, and the novella\'s moral message. Must include contextual understanding.',
+            question: 'How does Dickens present the Cratchit family?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The Cratchits are presented as poor but happy and loving. Despite their poverty, they show gratitude and kindness. Tiny Tim represents innocence and the effects of social neglect on the vulnerable.',
             markingCriteria: {
-              breakdown: ['Sustained thematic focus (AO1)', 'Analysis of Dickens\' methods (AO2)', 'Victorian social context (AO3)', 'Fluent expression (AO4)']
+              breakdown: ['Reference to poverty (1 mark)', 'Mention of happiness/love (1 mark)', 'Gratitude and kindness (1 mark)', 'Tiny Tim\'s significance (2 marks)', 'Social message (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'carol-q4',
+            question: 'What is the significance of the chains worn by Marley\'s ghost?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'The chains represent the burden of Marley\'s selfish and greedy life. Each link was forged through his lack of charity and social responsibility during his lifetime.',
+            markingCriteria: {
+              breakdown: ['Chains represent burden of selfish life (1 mark)', 'Link to greed/selfishness (1 mark)', 'Lack of charity mentioned (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'carol-q5',
+            question: 'How does the Ghost of Christmas Present teach Scrooge about poverty?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The ghost shows Scrooge the struggles of the poor, including the Cratchits. He reveals how the poor make the best of their situations and shows Scrooge\'s responsibility to help others.',
+            markingCriteria: {
+              breakdown: ['Shows struggles of the poor (1 mark)', 'Reference to Cratchit family (1 mark)', 'Poor making the best of situations (1 mark)', 'Scrooge\'s responsibility mentioned (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'carol-q6',
+            question: 'What does Ignorance and Want represent in the novella?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Ignorance and Want are allegorical figures representing the social problems of Victorian society. They show the consequences of neglecting education and poverty, warning of social doom.',
+            markingCriteria: {
+              breakdown: ['Allegorical figures (1 mark)', 'Represent social problems (1 mark)', 'Link to education and poverty (1 mark)', 'Warning of consequences (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'carol-q7',
+            question: 'How does Scrooge change by the end of the novella?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Scrooge becomes generous, kind, and socially responsible. He raises Bob\'s salary, helps Tiny Tim, and embraces his family. His transformation is complete and genuine.',
+            markingCriteria: {
+              breakdown: ['Becomes generous/kind (2 marks)', 'Specific examples of change (2 marks)', 'Genuine transformation noted (1 mark)', 'Social responsibility (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'carol-q8',
+            question: 'What is the role of Fred, Scrooge\'s nephew, in the story?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Fred represents the Christmas spirit of joy, generosity, and family love. He persistently invites Scrooge to Christmas dinner, showing forgiveness and kindness despite rejection.',
+            markingCriteria: {
+              breakdown: ['Represents Christmas spirit (1 mark)', 'Shows persistence and kindness (1 mark)', 'Example of forgiveness (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'carol-q9',
+            question: 'How does Dickens use the setting of Victorian London?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'London is presented as divided between rich and poor areas. The cold, dark streets reflect Scrooge\'s character, while Christmas warmth in homes shows love and community that Scrooge lacks.',
+            markingCriteria: {
+              breakdown: ['Division between rich and poor (2 marks)', 'Cold/dark reflecting character (2 marks)', 'Contrast with Christmas warmth (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'carol-q10',
+            question: 'What is Dickens\' message about social responsibility in A Christmas Carol?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Dickens argues that the wealthy have a duty to help the poor. Scrooge\'s transformation shows how individual change can impact society. Everyone should be their "brother\'s keeper."',
+            markingCriteria: {
+              breakdown: ['Wealthy duty to help poor (1 mark)', 'Individual change impacts society (1 mark)', 'Reference to "brother\'s keeper" (1 mark)', 'Dickens\' social message (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           }
@@ -113,34 +267,111 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'expectations-q1',
-            question: 'How does Dickens present Pip\'s relationship with Joe in Great Expectations?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse the evolution of their relationship, examining Pip\'s changing attitudes and Joe\'s consistent character. Must consider class themes and moral development.',
+            question: 'How does Pip feel about his background at the beginning of the novel?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Pip is initially content with his humble background and loves Joe. He is grateful for Joe\'s kindness and doesn\'t feel ashamed of being a blacksmith\'s apprentice.',
             markingCriteria: {
-              breakdown: ['Clear relationship analysis (AO1)', 'Analysis of characterisation (AO2)', 'Understanding of class context (AO3)', 'Accurate written expression (AO4)']
+              breakdown: ['Content with humble background (1 mark)', 'Love for Joe mentioned (1 mark)', 'Not ashamed initially (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'expectations-q2',
-            question: 'How is the theme of social class explored in Great Expectations?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine Pip\'s social mobility, different class representations, and Dickens\' critique of Victorian society. Must analyse character interactions and settings.',
+            question: 'What effect does meeting Estella have on Pip?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Estella makes Pip feel ashamed of his appearance and background. She calls him "common" and criticizes his hands and boots, making him desire to become a gentleman.',
             markingCriteria: {
-              breakdown: ['Sustained thematic analysis (AO1)', 'Analysis of literary techniques (AO2)', 'Victorian social context (AO3)', 'Technical accuracy (AO4)']
+              breakdown: ['Makes Pip feel ashamed (1 mark)', 'Reference to "common" comment (1 mark)', 'Criticizes appearance (1 mark)', 'Desire to become gentleman (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'expectations-q3',
-            question: 'Analyse how Dickens presents Miss Havisham in Great Expectations.',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine her appearance, behaviour, motivation, and symbolic significance. Must consider Gothic elements and themes of revenge and obsession.',
+            question: 'How does Dickens present Miss Havisham\'s appearance?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Miss Havisham wears a yellowed wedding dress and one shoe. Her appearance is described as withered and corpse-like, with clocks stopped at twenty minutes to nine, symbolizing her frozen life.',
             markingCriteria: {
-              breakdown: ['Clear character analysis (AO1)', 'Analysis of characterisation techniques (AO2)', 'Understanding of Gothic conventions (AO3)', 'Fluent expression (AO4)']
+              breakdown: ['Wedding dress described (1 mark)', 'Yellowed/decayed appearance (1 mark)', 'One shoe detail (1 mark)', 'Corpse-like description (1 mark)', 'Stopped clocks (1 mark)', 'Symbolism mentioned (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'expectations-q4',
+            question: 'What role does Magwitch play in Pip\'s story?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Magwitch is the convict Pip helps as a child who later becomes his secret benefactor. He funds Pip\'s education and lifestyle, revealing that Pip\'s expectations come from a criminal, not Miss Havisham.',
+            markingCriteria: {
+              breakdown: ['Convict Pip helped (1 mark)', 'Secret benefactor (1 mark)', 'Funds Pip\'s lifestyle (1 mark)', 'Revelation about expectations (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'expectations-q5',
+            question: 'How does Pip\'s attitude toward Joe change throughout the novel?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Initially loving, Pip becomes ashamed of Joe when he gains social aspirations. He treats Joe coldly and feels embarrassed by his visit to London. Eventually, Pip realizes Joe\'s true worth and feels deep remorse.',
+            markingCriteria: {
+              breakdown: ['Initially loving relationship (1 mark)', 'Becomes ashamed (1 mark)', 'Cold treatment (1 mark)', 'Embarrassment in London (1 mark)', 'Realizes Joe\'s worth (1 mark)', 'Shows remorse (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'expectations-q6',
+            question: 'What does Satis House represent in the novel?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Satis House represents decay and the corruption of wealth. The house is frozen in time like Miss Havisham, symbolizing how the past can destroy the present and future.',
+            markingCriteria: {
+              breakdown: ['Represents decay/corruption (1 mark)', 'Frozen in time (1 mark)', 'Past destroying present/future (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'expectations-q7',
+            question: 'How does Dickens explore the theme of social class in the novel?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Dickens shows that true worth comes from character, not wealth or birth. Pip learns that Joe and Biddy are better people than the wealthy characters he initially admires. Social mobility can corrupt moral values.',
+            markingCriteria: {
+              breakdown: ['True worth from character (2 marks)', 'Joe and Biddy better than wealthy (2 marks)', 'Social mobility corrupts (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'expectations-q8',
+            question: 'What is the significance of the forge in Great Expectations?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The forge represents honest labor, simplicity, and moral values. It contrasts with the corruption of wealth and shows where Pip was truly happy before his "great expectations."',
+            markingCriteria: {
+              breakdown: ['Represents honest labor (1 mark)', 'Simplicity and moral values (1 mark)', 'Contrasts with corruption (1 mark)', 'Where Pip was happy (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'expectations-q9',
+            question: 'How does Pip\'s character develop by the end of the novel?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Pip becomes humble, grateful, and morally mature. He learns to value true friendship and love over social status. He works hard and pays his debts, showing genuine character growth.',
+            markingCriteria: {
+              breakdown: ['Becomes humble and grateful (1 mark)', 'Values friendship over status (1 mark)', 'Works hard (1 mark)', 'Character growth shown (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'expectations-q10',
+            question: 'What message does Dickens convey about wealth and happiness?',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'Dickens suggests that wealth does not bring happiness and can corrupt moral character. True contentment comes from love, honest work, and genuine relationships rather than social status.',
+            markingCriteria: {
+              breakdown: ['Wealth doesn\'t bring happiness (1 mark)', 'Can corrupt character (1 mark)', 'True contentment from love/work/relationships (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           }
@@ -152,34 +383,111 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'jane-q1',
-            question: 'How does Brontë present Jane as an independent character in Jane Eyre?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse Jane\'s defiance, moral principles, and refusal to compromise her values. Must consider Victorian expectations of women and narrative techniques.',
+            question: 'How is Jane treated at Gateshead Hall?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Jane is treated cruelly by her aunt Mrs Reed and her cousins. She is excluded from family activities, called wicked, and locked in the red room as punishment.',
             markingCriteria: {
-              breakdown: ['Clear character analysis (AO1)', 'Analysis of characterisation methods (AO2)', 'Understanding of gender context (AO3)', 'Accurate written communication (AO4)']
+              breakdown: ['Treated cruelly by family (1 mark)', 'Excluded from activities (1 mark)', 'Red room punishment (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'jane-q2',
-            question: 'How does Brontë use setting to reflect Jane\'s emotional state in Jane Eyre?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine key locations (Gateshead, Lowood, Thornfield, Moor House) and their symbolic significance. Must analyse pathetic fallacy and Gothic elements.',
+            question: 'What does Jane learn at Lowood School?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Jane receives an education and learns to be independent. She develops her character through hardship and forms a friendship with Helen Burns who teaches her about forgiveness and patience.',
             markingCriteria: {
-              breakdown: ['Clear setting analysis (AO1)', 'Analysis of symbolic techniques (AO2)', 'Understanding of Gothic context (AO3)', 'Technical accuracy (AO4)']
+              breakdown: ['Receives education (1 mark)', 'Learns independence (1 mark)', 'Friendship with Helen Burns (1 mark)', 'Learns forgiveness/patience (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'jane-q3',
-            question: 'Examine how Brontë presents the theme of love in Jane Eyre.',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse different types of love, particularly Jane and Rochester\'s relationship. Must consider Victorian attitudes and Jane\'s moral independence.',
+            question: 'How does Jane show her independence when she first meets Rochester?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Jane speaks to Rochester as an equal, not showing the deference expected from a governess. She is honest and direct in her responses, refusing to be intimidated by his higher social status.',
             markingCriteria: {
-              breakdown: ['Sustained thematic focus (AO1)', 'Analysis of relationship development (AO2)', 'Victorian context understanding (AO3)', 'Fluent expression (AO4)']
+              breakdown: ['Speaks as an equal (1 mark)', 'No deference expected (1 mark)', 'Honest and direct (1 mark)', 'Not intimidated by status (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'jane-q4',
+            question: 'What is the significance of the fire at Thornfield?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The fire reveals Bertha\'s presence and danger. Jane saves Rochester, showing her courage and love. The incident foreshadows the later revelation about Rochester\'s wife and creates Gothic atmosphere.',
+            markingCriteria: {
+              breakdown: ['Reveals Bertha\'s presence (1 mark)', 'Jane shows courage (1 mark)', 'Demonstrates love (1 mark)', 'Foreshadows revelation (1 mark)', 'Gothic atmosphere (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'jane-q5',
+            question: 'Why does Jane refuse to become Rochester\'s mistress?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Jane refuses because of her moral principles and self-respect. She believes she would lose her independence and dignity. She insists on equality in their relationship.',
+            markingCriteria: {
+              breakdown: ['Moral principles mentioned (1 mark)', 'Self-respect (1 mark)', 'Would lose independence (1 mark)', 'Insists on equality (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'jane-q6',
+            question: 'How does Brontë present Bertha Mason in the novel?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Bertha is presented as violent, animalistic, and mad. She represents everything Jane is not - uncontrolled passion and loss of reason. She symbolizes the "madwoman in the attic" and Victorian fears about female sexuality.',
+            markingCriteria: {
+              breakdown: ['Violent and animalistic (1 mark)', 'Represents uncontrolled passion (1 mark)', 'Contrast to Jane (1 mark)', 'Loss of reason (1 mark)', 'Victorian fears (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'jane-q7',
+            question: 'What does St John Rivers represent in Jane\'s journey?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'St John represents religious duty without love. He offers Jane security and purpose but would suppress her passionate nature. He shows Jane what she would become without love and warmth.',
+            markingCriteria: {
+              breakdown: ['Religious duty without love (1 mark)', 'Offers security but suppresses passion (1 mark)', 'Shows life without love (1 mark)', 'Contrast to Rochester (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'jane-q8',
+            question: 'How does the red room scene affect Jane?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The red room terrifies Jane and makes her see visions. It represents her feeling of being trapped and powerless. The experience strengthens her determination to never be imprisoned again.',
+            markingCriteria: {
+              breakdown: ['Terrifies Jane/causes visions (1 mark)', 'Represents being trapped (1 mark)', 'Strengthens determination (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'jane-q9',
+            question: 'How does Jane change by the end of the novel?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Jane gains financial independence through her inheritance, giving her equality with Rochester. She returns to him by choice, not necessity. She has grown from a powerless child to an independent woman who can marry as an equal.',
+            markingCriteria: {
+              breakdown: ['Gains financial independence (2 marks)', 'Equality with Rochester (1 mark)', 'Returns by choice (1 mark)', 'Growth from powerless to independent (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'jane-q10',
+            question: 'What does the novel suggest about women\'s roles in Victorian society?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'The novel challenges Victorian expectations by presenting Jane as independent and equal. It suggests women should have moral and intellectual equality with men, not just be dependent wives or governesses.',
+            markingCriteria: {
+              breakdown: ['Challenges Victorian expectations (1 mark)', 'Jane as independent and equal (1 mark)', 'Moral and intellectual equality (1 mark)', 'More than dependent wives (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           }
@@ -191,34 +499,111 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'frank-q1',
-            question: 'How does Shelley present the creature in Frankenstein?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse the creature\'s development, appearance, intelligence, and moral complexity. Must consider Romantic ideals and Gothic conventions.',
+            question: 'What motivates Victor Frankenstein to create life?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Victor is motivated by scientific ambition and the desire to overcome death. He wants to discover the secret of life and become famous for his scientific achievement.',
             markingCriteria: {
-              breakdown: ['Clear character analysis (AO1)', 'Analysis of characterisation techniques (AO2)', 'Understanding of Romantic context (AO3)', 'Accurate written expression (AO4)']
+              breakdown: ['Scientific ambition (1 mark)', 'Desire to overcome death (1 mark)', 'Discover secret of life (1 mark)', 'Fame/achievement (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'frank-q2',
-            question: 'How is the theme of responsibility explored in Frankenstein?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine Victor\'s abandonment of his creation, consequences of unchecked ambition, and moral obligations. Must consider scientific and parental responsibility.',
+            question: 'How does the creature learn about human society?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The creature learns by observing the De Lacey family through their cottage window. He also learns to read through books like Paradise Lost, which shape his understanding of good and evil.',
             markingCriteria: {
-              breakdown: ['Sustained thematic analysis (AO1)', 'Analysis of moral themes (AO2)', 'Scientific revolution context (AO3)', 'Technical accuracy (AO4)']
+              breakdown: ['Observes De Lacey family (1 mark)', 'Learns through window watching (1 mark)', 'Reads books like Paradise Lost (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'frank-q3',
-            question: 'Analyse how Shelley creates sympathy for different characters in Frankenstein.',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine narrative perspective, character motivations, and moral ambiguity. Must consider the complex relationship between Victor and his creature.',
+            question: 'Why does the creature kill William?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The creature kills William out of revenge against Victor. When William reveals he is a Frankenstein, the creature realizes he can hurt Victor by destroying what he loves.',
             markingCriteria: {
-              breakdown: ['Clear interpretation (AO1)', 'Analysis of narrative techniques (AO2)', 'Understanding of moral complexity (AO3)', 'Fluent expression (AO4)']
+              breakdown: ['Revenge against Victor (1 mark)', 'William reveals surname (1 mark)', 'Creature realizes connection (1 mark)', 'Wants to hurt what Victor loves (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'frank-q4',
+            question: 'How does Victor react when he first sees his completed creation?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Victor is horrified and disgusted by his creation\'s appearance. He immediately abandons the creature and flees, showing his lack of responsibility as a creator.',
+            markingCriteria: {
+              breakdown: ['Horrified and disgusted (1 mark)', 'Abandons the creature (1 mark)', 'Flees/shows irresponsibility (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'frank-q5',
+            question: 'What does the creature demand from Victor?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The creature demands that Victor create a female companion for him. He argues he has the right to happiness and companionship, and threatens to make Victor\'s life miserable if refused.',
+            markingCriteria: {
+              breakdown: ['Demands female companion (1 mark)', 'Right to happiness (1 mark)', 'Need for companionship (1 mark)', 'Threatens Victor (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'frank-q6',
+            question: 'How does Shelley explore the theme of isolation in the novel?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Both Victor and the creature experience isolation. Victor isolates himself through his obsessive work, while the creature is rejected by society due to his appearance. Their isolation leads to destructive behavior and tragedy.',
+            markingCriteria: {
+              breakdown: ['Victor\'s self-isolation (2 marks)', 'Creature\'s social rejection (2 marks)', 'Leads to destructive behavior (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'frank-q7',
+            question: 'What role does nature play in the novel?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Nature provides comfort and healing for Victor when he is troubled. The sublime landscapes reflect Romantic ideals and contrast with the unnatural act of creating life artificially.',
+            markingCriteria: {
+              breakdown: ['Provides comfort/healing (1 mark)', 'Reflects Romantic ideals (1 mark)', 'Sublime landscapes (1 mark)', 'Contrasts with artificial creation (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'frank-q8',
+            question: 'How does the creature compare himself to Adam and Satan?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The creature sees himself as Adam because he is the first of his kind, but also like Satan because he is rejected and becomes evil. Unlike Adam, he has no Eve and no loving creator, making him more like the fallen angel.',
+            markingCriteria: {
+              breakdown: ['Comparison to Adam - first of kind (2 marks)', 'Comparison to Satan - rejected/evil (2 marks)', 'Differences noted - no Eve/loving creator (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'frank-q9',
+            question: 'What happens to Victor at the end of the novel?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Victor dies pursuing the creature in the Arctic. He tells his story to Walton as a warning about the dangers of unchecked ambition and scientific pursuit.',
+            markingCriteria: {
+              breakdown: ['Dies in Arctic pursuit (1 mark)', 'Tells story to Walton (1 mark)', 'Warning about ambition (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'frank-q10',
+            question: 'What does the novel suggest about scientific responsibility?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'The novel warns that scientific progress without moral consideration is dangerous. Victor fails to consider the consequences of his actions or take responsibility for his creation, leading to tragedy.',
+            markingCriteria: {
+              breakdown: ['Scientific progress without morality dangerous (1 mark)', 'Victor fails to consider consequences (1 mark)', 'Doesn\'t take responsibility (1 mark)', 'Leads to tragedy (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           }
