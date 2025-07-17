@@ -615,34 +615,111 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'pride-q1',
-            question: 'How does Austen present Elizabeth Bennet in Pride and Prejudice?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse Elizabeth\'s wit, independence, and character development. Must consider Regency social expectations and Austen\'s narrative techniques.',
+            question: 'What is Elizabeth\'s first impression of Mr Darcy?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Elizabeth thinks Darcy is proud, arrogant, and disagreeable. She overhears him saying she is "tolerable" but "not handsome enough to tempt" him at the ball.',
             markingCriteria: {
-              breakdown: ['Clear character analysis (AO1)', 'Analysis of characterisation methods (AO2)', 'Understanding of social context (AO3)', 'Accurate written communication (AO4)']
+              breakdown: ['Thinks he is proud/arrogant (1 mark)', 'Finds him disagreeable (1 mark)', 'Reference to "tolerable" comment (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'pride-q2',
-            question: 'How does Austen explore the theme of marriage in Pride and Prejudice?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine different marriage examples, motivations, and Austen\'s social commentary. Must consider economic and social factors in Regency society.',
+            question: 'How does Austen present different types of marriage in the novel?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Austen shows marriage for love (Elizabeth and Darcy), convenience (Charlotte and Collins), passion (Lydia and Wickham), and financial security (marriages sought by Mrs Bennet). Each type has different consequences.',
             markingCriteria: {
-              breakdown: ['Sustained thematic focus (AO1)', 'Analysis of social themes (AO2)', 'Regency context understanding (AO3)', 'Technical accuracy (AO4)']
+              breakdown: ['Marriage for love - Elizabeth/Darcy (1 mark)', 'Convenience - Charlotte/Collins (1 mark)', 'Passion - Lydia/Wickham (1 mark)', 'Financial security (1 mark)', 'Different consequences (2 marks)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'pride-q3',
-            question: 'Analyse how Austen uses irony in Pride and Prejudice.',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine dramatic irony, verbal irony, and situational irony. Must consider Austen\'s narrative voice and social satire.',
+            question: 'Why does Charlotte Lucas marry Mr Collins?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Charlotte marries Collins for security and social position. At 27, she feels she has few other options for marriage and values practical considerations over love.',
             markingCriteria: {
-              breakdown: ['Clear analysis of irony (AO1)', 'Analysis of literary techniques (AO2)', 'Understanding of satire (AO3)', 'Fluent expression (AO4)']
+              breakdown: ['For security and position (1 mark)', 'Age consideration - 27 (1 mark)', 'Few other options (1 mark)', 'Values practical over love (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'pride-q4',
+            question: 'How does Wickham deceive Elizabeth?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Wickham lies about his relationship with Darcy, claiming Darcy ruined his life and denied him a living. He presents himself as charming and wronged, appealing to Elizabeth\'s prejudice against Darcy.',
+            markingCriteria: {
+              breakdown: ['Lies about relationship with Darcy (1 mark)', 'Claims Darcy ruined his life (1 mark)', 'Presents himself as charming/wronged (1 mark)', 'Appeals to Elizabeth\'s prejudice (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'pride-q5',
+            question: 'What does Darcy reveal in his letter to Elizabeth?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Darcy explains his actions regarding Wickham\'s true character and his reasons for separating Bingley from Jane. He reveals Wickham attempted to elope with his sister Georgiana for her fortune.',
+            markingCriteria: {
+              breakdown: ['Explains Wickham\'s true character (2 marks)', 'Reasons for separating Bingley/Jane (2 marks)', 'Wickham\'s attempt with Georgiana (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'pride-q6',
+            question: 'How does Elizabeth change throughout the novel?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Elizabeth learns to overcome her prejudice and quick judgments. She realizes her mistakes about Darcy and Wickham, develops greater self-awareness, and learns to value substance over surface charm.',
+            markingCriteria: {
+              breakdown: ['Overcomes prejudice (2 marks)', 'Realizes mistakes about characters (2 marks)', 'Develops self-awareness/values substance (2 marks)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'pride-q7',
+            question: 'What role does Lady Catherine de Bourgh play in the novel?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Lady Catherine represents aristocratic arrogance and interference. Her attempt to prevent Elizabeth from marrying Darcy actually encourages their union by revealing Elizabeth\'s feelings to Darcy.',
+            markingCriteria: {
+              breakdown: ['Represents aristocratic arrogance (1 mark)', 'Interferes in relationships (1 mark)', 'Attempts to prevent marriage (1 mark)', 'Actually encourages union (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'pride-q8',
+            question: 'How does Austen use irony in the novel\'s opening?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The famous opening "It is a truth universally acknowledged..." is ironic because it\'s actually women seeking husbands, not men seeking wives, that drives the plot.',
+            markingCriteria: {
+              breakdown: ['Famous opening quoted (1 mark)', 'Actually women seeking husbands (1 mark)', 'Not men seeking wives (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'pride-q9',
+            question: 'What does Pemberley represent in the novel?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Pemberley represents Darcy\'s true character - well-ordered, beautiful, and tasteful. Elizabeth\'s admiration of the estate reflects her growing appreciation of Darcy\'s real nature.',
+            markingCriteria: {
+              breakdown: ['Represents Darcy\'s true character (1 mark)', 'Well-ordered/beautiful/tasteful (1 mark)', 'Elizabeth\'s admiration (1 mark)', 'Growing appreciation of Darcy (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'pride-q10',
+            question: 'How does Austen criticize social class in the novel?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Austen shows that worth comes from character, not birth or wealth. She satirizes social pretensions through characters like Mr Collins and Lady Catherine, while showing genuine merit in characters regardless of rank.',
+            markingCriteria: {
+              breakdown: ['Worth from character not birth/wealth (2 marks)', 'Satirizes social pretensions (2 marks)', 'Shows merit regardless of rank (2 marks)']
             },
             specReference: 'AQA English Literature 8702'
           }
@@ -654,34 +731,111 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'sign-q1',
-            question: 'How does Doyle present Sherlock Holmes in The Sign of Four?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse Holmes\' methods, personality, and relationship with Watson. Must consider Victorian attitudes to science and detection.',
+            question: 'What method does Holmes use to solve cases?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Holmes uses observation and logical deduction. He notices small details that others miss and draws logical conclusions from them, applying scientific methods to detection.',
             markingCriteria: {
-              breakdown: ['Clear character analysis (AO1)', 'Analysis of characterisation techniques (AO2)', 'Understanding of Victorian context (AO3)', 'Accurate written expression (AO4)']
+              breakdown: ['Uses observation (1 mark)', 'Logical deduction (1 mark)', 'Notices small details (1 mark)', 'Scientific methods (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'sign-q2',
-            question: 'How does Doyle create mystery and suspense in The Sign of Four?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine narrative structure, clues, red herrings, and pacing. Must consider detective fiction conventions and reader engagement.',
+            question: 'How does Holmes deduce information about Watson\'s brother from his watch?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Holmes deduces that Watson\'s brother was careless, often drunk, and eventually died from alcoholism. He bases this on scratches around the keyhole, pawnbroker marks, and the watch\'s condition.',
             markingCriteria: {
-              breakdown: ['Clear analysis of mystery elements (AO1)', 'Analysis of structural techniques (AO2)', 'Understanding of genre conventions (AO3)', 'Technical accuracy (AO4)']
+              breakdown: ['Brother was careless (1 mark)', 'Often drunk (1 mark)', 'Died from alcoholism (1 mark)', 'Scratches around keyhole (1 mark)', 'Pawnbroker marks (1 mark)', 'Watch condition (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'sign-q3',
-            question: 'Examine how Doyle presents the theme of empire in The Sign of Four.',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse colonial elements, attitudes to India, and imperial consequences. Must consider Victorian imperial ideology and its critique.',
+            question: 'Who asks Holmes to solve the mystery of the treasure?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Mary Morstan asks Holmes to solve the mystery. She has been receiving pearls annually and receives a letter asking her to meet about the Agra treasure.',
             markingCriteria: {
-              breakdown: ['Sustained thematic analysis (AO1)', 'Analysis of imperial themes (AO2)', 'Colonial context understanding (AO3)', 'Fluent expression (AO4)']
+              breakdown: ['Mary Morstan asks Holmes (1 mark)', 'Receiving pearls annually (1 mark)', 'Letter about Agra treasure (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'sign-q4',
+            question: 'What is the significance of the wooden leg and Tonga?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The wooden leg belongs to Jonathan Small, one of the criminals. Tonga is his Andaman Islander companion who helps him commit murders using poisoned darts.',
+            markingCriteria: {
+              breakdown: ['Wooden leg belongs to Jonathan Small (1 mark)', 'Small is a criminal (1 mark)', 'Tonga is Andaman Islander (1 mark)', 'Uses poisoned darts (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'sign-q5',
+            question: 'How does the story of the Agra treasure begin?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The treasure originates during the Indian Mutiny when four men - Small, Mahomet Singh, Abdullah Khan, and Dost Akbar - steal treasure from a merchant. They bury it and swear an oath of loyalty.',
+            markingCriteria: {
+              breakdown: ['Originates during Indian Mutiny (1 mark)', 'Four men involved (2 marks)', 'Steal from merchant (1 mark)', 'Bury the treasure (1 mark)', 'Swear oath of loyalty (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'sign-q6',
+            question: 'What role does Watson play in the investigation?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Watson acts as Holmes\' assistant and narrator. He provides medical expertise, follows leads, and offers emotional support. He also develops romantic feelings for Mary Morstan.',
+            markingCriteria: {
+              breakdown: ['Acts as assistant/narrator (1 mark)', 'Provides medical expertise (1 mark)', 'Follows leads/offers support (1 mark)', 'Romantic feelings for Mary (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'sign-q7',
+            question: 'How does Doyle present Victorian attitudes to empire in the novel?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The novel reflects Victorian imperial attitudes through the Indian setting, colonial characters, and assumptions about racial superiority. The treasure represents the wealth extracted from colonies.',
+            markingCriteria: {
+              breakdown: ['Reflects imperial attitudes (2 marks)', 'Indian setting/colonial characters (2 marks)', 'Assumptions about racial superiority (1 mark)', 'Treasure represents colonial wealth (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'sign-q8',
+            question: 'What happens to the Agra treasure at the end?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Jonathan Small throws the treasure into the Thames during the boat chase. The treasure is lost forever, ensuring that no one can benefit from it.',
+            markingCriteria: {
+              breakdown: ['Small throws treasure in Thames (1 mark)', 'During boat chase (1 mark)', 'Lost forever (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'sign-q9',
+            question: 'How does Doyle create suspense during the boat chase?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Doyle uses fast-paced action, the danger of Tonga\'s poisoned darts, the race against time, and detailed descriptions of the Thames chase to build tension and excitement.',
+            markingCriteria: {
+              breakdown: ['Fast-paced action (1 mark)', 'Danger of poisoned darts (1 mark)', 'Race against time (1 mark)', 'Detailed Thames descriptions (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'sign-q10',
+            question: 'What does the novel suggest about justice and revenge?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'The novel explores the cycle of injustice and revenge. Small seeks revenge for his treatment, but his actions lead to more violence. True justice comes through legal processes, not personal vengeance.',
+            markingCriteria: {
+              breakdown: ['Explores cycle of injustice/revenge (1 mark)', 'Small seeks revenge (1 mark)', 'Actions lead to more violence (1 mark)', 'True justice through legal processes (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           }
@@ -693,34 +847,111 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'macbeth-q1',
-            question: 'How does Shakespeare present Lady Macbeth as a powerful character in Macbeth?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse Lady Macbeth\'s manipulation techniques, her influence over Macbeth, and her eventual decline. Must include analysis of soliloquies, imagery, and dramatic techniques.',
+            question: 'What do the witches prophesy to Macbeth?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The witches prophesy that Macbeth will become Thane of Cawdor and then King of Scotland. They also tell Banquo his sons will be kings.',
             markingCriteria: {
-              breakdown: ['Clear interpretation with evidence (AO1)', 'Analysis of dramatic techniques (AO2)', 'Understanding of Jacobean context (AO3)', 'Accurate written communication (AO4)']
+              breakdown: ['Thane of Cawdor (1 mark)', 'King of Scotland (1 mark)', 'Banquo\'s sons will be kings (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'macbeth-q2',
-            question: 'How does Shakespeare present the theme of ambition in Macbeth?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine Macbeth\'s desire for power, the consequences of unchecked ambition, and other characters\' ambitions. Must analyse dramatic and linguistic techniques.',
+            question: 'How does Lady Macbeth persuade Macbeth to kill Duncan?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Lady Macbeth questions Macbeth\'s manhood, calls him a coward, and uses emotional manipulation. She also provides practical plans for the murder and promises to take charge.',
             markingCriteria: {
-              breakdown: ['Sustained thematic focus (AO1)', 'Analysis of language and dramatic methods (AO2)', 'Jacobean context understanding (AO3)', 'Technical accuracy (AO4)']
+              breakdown: ['Questions his manhood (2 marks)', 'Calls him coward (1 mark)', 'Emotional manipulation (1 mark)', 'Provides practical plans (1 mark)', 'Promises to take charge (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'macbeth-q3',
-            question: 'Analyse how Shakespeare uses supernatural elements in Macbeth.',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine the witches, apparitions, and ghostly visions. Must consider their dramatic function and Jacobean beliefs about the supernatural.',
+            question: 'What does Macbeth see before he murders Duncan?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Macbeth sees a bloody dagger floating in the air, pointing toward Duncan\'s chamber. This hallucination reflects his guilt and the evil nature of his intended act.',
             markingCriteria: {
-              breakdown: ['Clear analysis of supernatural elements (AO1)', 'Analysis of dramatic and linguistic techniques (AO2)', 'Understanding of contemporary beliefs (AO3)', 'Fluent expression (AO4)']
+              breakdown: ['Sees bloody dagger (1 mark)', 'Floating in air (1 mark)', 'Points to Duncan\'s chamber (1 mark)', 'Reflects guilt/evil (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'macbeth-q4',
+            question: 'How does Macbeth change after becoming king?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Macbeth becomes paranoid, ruthless, and tyrannical. He orders more murders to secure his power, loses his humanity, and becomes increasingly isolated from others.',
+            markingCriteria: {
+              breakdown: ['Becomes paranoid (1 mark)', 'Ruthless and tyrannical (2 marks)', 'Orders more murders (1 mark)', 'Loses humanity (1 mark)', 'Becomes isolated (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'macbeth-q5',
+            question: 'What role do the apparitions play in the story?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The apparitions give Macbeth false confidence through misleading prophecies. They tell him no man born of woman can harm him and he won\'t be defeated until Birnam Wood moves.',
+            markingCriteria: {
+              breakdown: ['Give false confidence (1 mark)', 'Misleading prophecies (1 mark)', 'No man born of woman (1 mark)', 'Birnam Wood moves (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'macbeth-q6',
+            question: 'How does Lady Macbeth\'s character change throughout the play?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Lady Macbeth starts as strong and manipulative but gradually becomes guilt-ridden and mentally unstable. She sleepwalks, tries to wash imaginary bloodstains, and eventually dies.',
+            markingCriteria: {
+              breakdown: ['Starts strong and manipulative (2 marks)', 'Becomes guilt-ridden (1 mark)', 'Mentally unstable (1 mark)', 'Sleepwalks/bloodstains (1 mark)', 'Eventually dies (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'macbeth-q7',
+            question: 'What is the significance of sleep in the play?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Sleep represents peace, innocence, and natural order. Macbeth "murders sleep" when he kills Duncan, and his insomnia reflects his guilt and loss of peace.',
+            markingCriteria: {
+              breakdown: ['Represents peace/innocence (1 mark)', 'Natural order (1 mark)', '"Murders sleep" phrase (1 mark)', 'Insomnia reflects guilt (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'macbeth-q8',
+            question: 'How does Shakespeare present the theme of guilt in Macbeth?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Guilt is shown through hallucinations, sleeplessness, and psychological breakdown. Both Macbeth and Lady Macbeth are tormented by their crimes, leading to madness and death.',
+            markingCriteria: {
+              breakdown: ['Shown through hallucinations (2 marks)', 'Sleeplessness (1 mark)', 'Psychological breakdown (1 mark)', 'Tormented by crimes (1 mark)', 'Leads to madness/death (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'macbeth-q9',
+            question: 'What does Banquo represent in the play?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Banquo represents loyalty, honor, and the path Macbeth could have taken. His ghost symbolizes Macbeth\'s guilt and the consequences of betraying friendship.',
+            markingCriteria: {
+              breakdown: ['Represents loyalty/honor (1 mark)', 'Path Macbeth could have taken (1 mark)', 'Ghost symbolizes guilt (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'macbeth-q10',
+            question: 'How does the play end and what does this suggest about evil?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Macbeth is killed by Macduff and Malcolm becomes king, restoring rightful order. This suggests that evil ultimately destroys itself and natural order will be restored.',
+            markingCriteria: {
+              breakdown: ['Macbeth killed by Macduff (1 mark)', 'Malcolm becomes king (1 mark)', 'Restores rightful order (1 mark)', 'Evil destroys itself (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           }
@@ -732,34 +963,111 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'romeo-q1',
-            question: 'How does Shakespeare present the relationship between Romeo and Juliet?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse their first meeting, development of love, and tragic ending. Must examine language, imagery, and dramatic techniques.',
+            question: 'How do Romeo and Juliet first meet?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Romeo and Juliet meet at the Capulet party. They share a sonnet in their dialogue, kiss twice, and fall instantly in love without knowing each other\'s identities.',
             markingCriteria: {
-              breakdown: ['Clear relationship analysis (AO1)', 'Analysis of dramatic techniques (AO2)', 'Understanding of Elizabethan context (AO3)', 'Accurate written expression (AO4)']
+              breakdown: ['Meet at Capulet party (1 mark)', 'Share sonnet dialogue (1 mark)', 'Kiss twice (1 mark)', 'Don\'t know identities (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'romeo-q2',
-            question: 'How does Shakespeare present the theme of conflict in Romeo and Juliet?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine family feud, generational conflict, and love versus hate. Must analyse dramatic devices and character interactions.',
+            question: 'What causes the fight between Mercutio and Tybalt?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Tybalt wants to fight Romeo for attending the Capulet party. When Romeo refuses to fight, Mercutio draws his sword to defend Romeo\'s honor. Romeo tries to stop them but accidentally causes Mercutio\'s death.',
             markingCriteria: {
-              breakdown: ['Sustained thematic analysis (AO1)', 'Analysis of dramatic methods (AO2)', 'Social context understanding (AO3)', 'Technical accuracy (AO4)']
+              breakdown: ['Tybalt wants to fight Romeo (2 marks)', 'Romeo refuses to fight (1 mark)', 'Mercutio defends Romeo\'s honor (2 marks)', 'Romeo accidentally causes death (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'romeo-q3',
-            question: 'Analyse how Shakespeare creates tension in the balcony scene in Romeo and Juliet.',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine staging, dialogue, dramatic irony, and audience response. Must consider theatrical conventions and romantic conventions.',
+            question: 'Why does Juliet agree to marry Romeo so quickly?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Juliet believes in love at first sight and feels Romeo is different from other men. She values his sincerity and sees marriage as the only honorable way to be together.',
             markingCriteria: {
-              breakdown: ['Clear scene analysis (AO1)', 'Analysis of dramatic techniques (AO2)', 'Understanding of theatrical context (AO3)', 'Fluent expression (AO4)']
+              breakdown: ['Love at first sight (1 mark)', 'Romeo is different/sincere (1 mark)', 'Marriage as honorable way (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'romeo-q4',
+            question: 'How does the Nurse help Romeo and Juliet?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The Nurse arranges their secret marriage by carrying messages between them. She helps Juliet meet Romeo and later brings news of Tybalt\'s death and Romeo\'s banishment.',
+            markingCriteria: {
+              breakdown: ['Arranges secret marriage (1 mark)', 'Carries messages (1 mark)', 'Helps them meet (1 mark)', 'Brings news of banishment (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'romeo-q5',
+            question: 'What is Friar Lawrence\'s plan to help Juliet avoid marrying Paris?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Friar Lawrence gives Juliet a potion that makes her appear dead. She will be placed in the family tomb, then wake up and escape with Romeo to Mantua when he returns.',
+            markingCriteria: {
+              breakdown: ['Gives Juliet potion (2 marks)', 'Makes her appear dead (1 mark)', 'Placed in tomb (1 mark)', 'Wake up and escape (1 mark)', 'Go to Mantua with Romeo (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'romeo-q6',
+            question: 'Why doesn\'t Romeo receive Friar Lawrence\'s message?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Friar John is quarantined due to plague fears and cannot deliver the letter. Romeo never learns about the plan, so he believes Juliet is really dead.',
+            markingCriteria: {
+              breakdown: ['Friar John quarantined (1 mark)', 'Plague fears (1 mark)', 'Romeo believes Juliet dead (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'romeo-q7',
+            question: 'How does Shakespeare present the theme of fate in the play?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The lovers are described as "star-crossed," suggesting destiny controls them. Coincidences and missed timing drive the tragedy, implying fate determines their doom.',
+            markingCriteria: {
+              breakdown: ['"Star-crossed" lovers (2 marks)', 'Destiny controls them (1 mark)', 'Coincidences and timing (2 marks)', 'Fate determines doom (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'romeo-q8',
+            question: 'What role does the family feud play in the tragedy?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The feud forces Romeo and Juliet to marry secretly, creates the conflict that leads to deaths, and prevents them from seeking family help when problems arise.',
+            markingCriteria: {
+              breakdown: ['Forces secret marriage (1 mark)', 'Creates deadly conflict (1 mark)', 'Prevents seeking help (1 mark)', 'Direct cause of tragedy (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'romeo-q9',
+            question: 'How do both lovers die?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Romeo drinks poison believing Juliet is dead. When Juliet wakes and finds Romeo dead, she stabs herself with his dagger rather than live without him.',
+            markingCriteria: {
+              breakdown: ['Romeo drinks poison (1 mark)', 'Believes Juliet dead (1 mark)', 'Juliet wakes finds Romeo dead (1 mark)', 'Stabs herself with dagger (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'romeo-q10',
+            question: 'What does the play suggest about young love?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Young love is presented as intense, passionate, and genuine but also impulsive and dangerous. The play shows both its beauty and its potential for destruction.',
+            markingCriteria: {
+              breakdown: ['Intense and passionate (1 mark)', 'Genuine but impulsive (1 mark)', 'Dangerous consequences (1 mark)', 'Both beauty and destruction (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           }
@@ -771,34 +1079,111 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'tempest-q1',
-            question: 'How does Shakespeare present Prospero in The Tempest?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should analyse Prospero\'s use of magic, his role as father and ruler, and his eventual forgiveness. Must examine power themes and dramatic techniques.',
+            question: 'Why has Prospero been living on the island?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Prospero was the Duke of Milan but his brother Antonio usurped his position with help from Alonso. Prospero and Miranda were set adrift at sea and washed up on the island.',
             markingCriteria: {
-              breakdown: ['Clear character analysis (AO1)', 'Analysis of dramatic methods (AO2)', 'Understanding of Jacobean context (AO3)', 'Accurate written communication (AO4)']
+              breakdown: ['Was Duke of Milan (1 mark)', 'Antonio usurped position (1 mark)', 'Alonso helped (1 mark)', 'Set adrift/washed up (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'tempest-q2',
-            question: 'How does Shakespeare explore the theme of power in The Tempest?',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine different types of power, abuse of power, and the restoration of rightful authority. Must analyse character relationships and dramatic structure.',
+            question: 'How does Prospero control Ariel?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Prospero freed Ariel from a tree where the witch Sycorax had trapped him. In return, Ariel serves Prospero and will be freed when his service is complete.',
             markingCriteria: {
-              breakdown: ['Sustained thematic focus (AO1)', 'Analysis of power dynamics (AO2)', 'Political context understanding (AO3)', 'Technical accuracy (AO4)']
+              breakdown: ['Freed Ariel from tree (1 mark)', 'Sycorax had trapped him (1 mark)', 'Serves until freedom granted (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           },
           {
             id: 'tempest-q3',
-            question: 'Analyse how Shakespeare presents the relationship between Prospero and Ariel in The Tempest.',
-            marks: 30,
-            difficulty: 'hard',
-            modelAnswer: 'Students should examine master-servant dynamics, Ariel\'s desire for freedom, and their mutual dependence. Must consider colonial themes and magical elements.',
+            question: 'What is Caliban\'s relationship with Prospero?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Caliban is Prospero\'s reluctant slave. Prospero initially treated him kindly and taught him language, but Caliban attempted to rape Miranda, leading to his enslavement and resentment.',
             markingCriteria: {
-              breakdown: ['Clear relationship analysis (AO1)', 'Analysis of characterisation techniques (AO2)', 'Understanding of colonial context (AO3)', 'Fluent expression (AO4)']
+              breakdown: ['Reluctant slave (1 mark)', 'Initially treated kindly (1 mark)', 'Taught him language (1 mark)', 'Attempted to rape Miranda (2 marks)', 'Led to enslavement/resentment (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'tempest-q4',
+            question: 'How does Ferdinand prove his love for Miranda?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Ferdinand willingly performs hard labor carrying logs to prove his devotion to Miranda. He accepts Prospero\'s test patiently and declares his love genuine despite the hardship.',
+            markingCriteria: {
+              breakdown: ['Performs hard labor (1 mark)', 'Carrying logs (1 mark)', 'Accepts test patiently (1 mark)', 'Declares genuine love (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'tempest-q5',
+            question: 'What does Prospero do with his magic books at the end?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Prospero drowns his magic books in the sea and breaks his staff. He renounces magic to return to the human world and reclaim his dukedom.',
+            markingCriteria: {
+              breakdown: ['Drowns magic books (1 mark)', 'Breaks his staff (1 mark)', 'Renounces magic to return (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'tempest-q6',
+            question: 'How does Shakespeare explore the theme of forgiveness in the play?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Prospero forgives his enemies despite having the power to destroy them. He chooses mercy over revenge, showing that forgiveness is nobler than vengeance and leads to reconciliation.',
+            markingCriteria: {
+              breakdown: ['Prospero forgives enemies (2 marks)', 'Has power to destroy (1 mark)', 'Chooses mercy over revenge (1 mark)', 'Forgiveness nobler than vengeance (1 mark)', 'Leads to reconciliation (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'tempest-q7',
+            question: 'What role does magic play in the resolution of the play?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Magic allows Prospero to orchestrate events, bring his enemies to the island, and test their characters. Once justice is achieved and forgiveness granted, magic is no longer needed.',
+            markingCriteria: {
+              breakdown: ['Orchestrates events (1 mark)', 'Brings enemies to island (1 mark)', 'Tests their characters (1 mark)', 'No longer needed after forgiveness (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'tempest-q8',
+            question: 'How does Miranda react to seeing other humans?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Miranda is amazed and delighted, calling them a "brave new world" with such people in it. Having only known her father and Caliban, she finds other humans wonderful.',
+            markingCriteria: {
+              breakdown: ['Amazed and delighted (1 mark)', '"Brave new world" quote (1 mark)', 'Finds other humans wonderful (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'tempest-q9',
+            question: 'What does the tempest at the beginning symbolize?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'The tempest symbolizes chaos, disruption of natural order, and divine retribution. It brings Prospero\'s enemies to face justice and represents the upheaval needed for resolution.',
+            markingCriteria: {
+              breakdown: ['Symbolizes chaos/disruption (1 mark)', 'Divine retribution (1 mark)', 'Brings enemies to justice (1 mark)', 'Upheaval needed for resolution (1 mark)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'tempest-q10',
+            question: 'How does the play end for all the characters?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Prospero forgives his enemies and regains his dukedom. Ferdinand and Miranda are engaged. Ariel is freed. Antonio and Sebastian are forgiven but unrepentant. All prepare to return to Italy.',
+            markingCriteria: {
+              breakdown: ['Prospero forgives/regains dukedom (1 mark)', 'Ferdinand and Miranda engaged (1 mark)', 'Ariel freed (1 mark)', 'Antonio/Sebastian forgiven but unrepentant (2 marks)', 'Return to Italy (1 mark)']
             },
             specReference: 'AQA English Literature 8702'
           }
