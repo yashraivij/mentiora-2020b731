@@ -54,6 +54,94 @@ export const curriculum: Subject[] = [
               breakdown: ['Connected coasts (1 mark)', 'Faster travel/trade (1 mark)', 'Settlement facilitation (2 marks)', 'Impact on Native Americans (2 marks)']
             },
             specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1840-q3',
+            question: 'What impact did the California Gold Rush have on American society?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The Gold Rush attracted hundreds of thousands of people to California, led to rapid population growth, created mining towns, and increased diversity as people came from around the world.',
+            markingCriteria: {
+              breakdown: ['Mass migration mentioned (1 mark)', 'Population growth (1 mark)', 'Mining towns created (1 mark)', 'Increased diversity (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1840-q4',
+            question: 'How did the Homestead Act of 1862 encourage settlement?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The Act offered 160 acres of free land to settlers who would farm it for five years. This encouraged thousands of families to move west and establish farms.',
+            markingCriteria: {
+              breakdown: ['160 acres of free land (1 mark)', 'Five year farming requirement (1 mark)', 'Encouraged western migration (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1840-q5',
+            question: 'What were the main problems faced by Native Americans during westward expansion?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Native Americans lost their traditional lands, faced military conflicts with settlers and the US Army, experienced cultural destruction, and were forced onto reservations.',
+            markingCriteria: {
+              breakdown: ['Loss of traditional lands (2 marks)', 'Military conflicts (1 mark)', 'Cultural destruction (1 mark)', 'Forced onto reservations (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1840-q6',
+            question: 'How did cattle ranching develop in the American West?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Cattle ranching grew due to demand for beef in eastern cities, the development of cattle drives like the Chisholm Trail, and the arrival of railroads to transport cattle.',
+            markingCriteria: {
+              breakdown: ['Eastern demand for beef (1 mark)', 'Cattle drives/trails (1 mark)', 'Railroad transportation (1 mark)', 'Economic development (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1840-q7',
+            question: 'What was the significance of the Battle of Little Bighorn?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'The battle was a major victory for Native Americans led by Sitting Bull and Crazy Horse, resulting in Custer\'s defeat and death, but led to increased military action against tribes.',
+            markingCriteria: {
+              breakdown: ['Native American victory (1 mark)', 'Custer\'s defeat mentioned (1 mark)', 'Increased military action resulted (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1840-q8',
+            question: 'How did the discovery of silver and gold affect western mining towns?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Mining discoveries led to boom towns that grew rapidly, attracted diverse populations, but often became ghost towns when resources were exhausted.',
+            markingCriteria: {
+              breakdown: ['Boom towns created (1 mark)', 'Rapid growth (1 mark)', 'Diverse populations (1 mark)', 'Ghost towns when exhausted (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1840-q9',
+            question: 'What role did women play in westward expansion?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Women worked as homesteaders, teachers, and in businesses. They faced hardships on the frontier, had more independence than in the East, and some gained property rights and voting rights in western territories.',
+            markingCriteria: {
+              breakdown: ['Various occupations (2 marks)', 'Frontier hardships (1 mark)', 'Greater independence (1 mark)', 'Property/voting rights (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1840-q10',
+            question: 'How did the closing of the frontier in 1890 mark the end of westward expansion?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'The census declared no clear frontier line remained, most western land was settled or claimed, and America had expanded from coast to coast, marking the end of the expansion era.',
+            markingCriteria: {
+              breakdown: ['Census declaration (1 mark)', 'Most land settled (1 mark)', 'Coast to coast expansion (1 mark)', 'End of expansion era (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
           }
         ]
       },
@@ -80,6 +168,94 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Hitler used the Reichstag Fire to gain emergency powers, passed the Enabling Act, eliminated trade unions, and removed political opposition through violence and intimidation.',
             markingCriteria: {
               breakdown: ['Reichstag Fire (1 mark)', 'Enabling Act (2 marks)', 'Eliminated unions (1 mark)', 'Removed opposition (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'germany-q3',
+            question: 'What were the main features of Kaiser Wilhelm II\'s rule before 1914?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Wilhelm II practiced personal rule, dismissed Bismarck, pursued Weltpolitik (world policy), built up the German navy, and increased tensions with other European powers.',
+            markingCriteria: {
+              breakdown: ['Personal rule mentioned (1 mark)', 'Dismissed Bismarck (1 mark)', 'Weltpolitik policy (1 mark)', 'Naval buildup (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'germany-q4',
+            question: 'How did World War I affect German society?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The war caused food shortages, economic hardship, loss of morale, increased casualties, and ultimately led to revolution and the Kaiser\'s abdication in 1918.',
+            markingCriteria: {
+              breakdown: ['Food shortages (1 mark)', 'Economic hardship (1 mark)', 'Loss of morale (1 mark)', 'High casualties (1 mark)', 'Revolution and abdication (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'germany-q5',
+            question: 'What was the impact of the Treaty of Versailles on Germany?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Germany lost territory, had military restrictions imposed, accepted war guilt, and faced massive reparations payments that damaged the economy.',
+            markingCriteria: {
+              breakdown: ['Territory losses (1 mark)', 'Military restrictions (1 mark)', 'War guilt clause (1 mark)', 'Reparations impact (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'germany-q6',
+            question: 'How did the Golden Age (1924-1929) improve conditions in Germany?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'American loans stabilized the economy, industrial production increased, unemployment fell, and there was cultural renaissance in art, literature, and cinema.',
+            markingCriteria: {
+              breakdown: ['American loans (1 mark)', 'Industrial growth (1 mark)', 'Reduced unemployment (1 mark)', 'Cultural improvements (2 marks)', 'Economic stability (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'germany-q7',
+            question: 'What was the impact of the Great Depression on Germany?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Mass unemployment reached 6 million, American loans were withdrawn, businesses collapsed, and extremist parties like the Nazis gained support.',
+            markingCriteria: {
+              breakdown: ['Mass unemployment (1 mark)', 'American loans withdrawn (1 mark)', 'Business failures (1 mark)', 'Extremist party growth (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'germany-q8',
+            question: 'How did Nazi propaganda help Hitler gain power?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Propaganda blamed Germany\'s problems on enemies, promised simple solutions, used rallies and speeches, exploited economic fears, and targeted specific groups with tailored messages.',
+            markingCriteria: {
+              breakdown: ['Blamed enemies for problems (1 mark)', 'Simple solutions offered (1 mark)', 'Rallies and speeches (1 mark)', 'Exploited economic fears (1 mark)', 'Targeted messaging (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'germany-q9',
+            question: 'What were the main features of Nazi control in Germany after 1933?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The Nazis established a one-party state, used the Gestapo for surveillance, controlled education and media, and eliminated opposition through violence.',
+            markingCriteria: {
+              breakdown: ['One-party state (1 mark)', 'Gestapo surveillance (1 mark)', 'Controlled education/media (1 mark)', 'Eliminated opposition (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'germany-q10',
+            question: 'How did Nazi policies affect different groups in German society?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Women were encouraged to focus on family roles, Jews faced persecution and discrimination, workers had controlled unions but some benefits, while youth were indoctrinated through Hitler Youth.',
+            markingCriteria: {
+              breakdown: ['Women\'s roles (1 mark)', 'Jewish persecution (2 marks)', 'Worker policies (1 mark)', 'Youth indoctrination (2 marks)']
             },
             specReference: 'AQA GCSE History 8145'
           }
@@ -110,6 +286,94 @@ export const curriculum: Subject[] = [
               breakdown: ['Treaty of Brest-Litovsk (2 marks)', 'Cheka usage (2 marks)', 'War Communism (2 marks)']
             },
             specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'russia-q3',
+            question: 'What were the main problems facing Tsar Nicholas II in 1894?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Russia was economically backward, had limited industrialization, faced social unrest, and lacked political reform compared to other European powers.',
+            markingCriteria: {
+              breakdown: ['Economic backwardness (1 mark)', 'Limited industry (1 mark)', 'Social unrest (1 mark)', 'Lack of political reform (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'russia-q4',
+            question: 'How did Stolypin\'s reforms attempt to modernize Russia?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Stolypin introduced land reforms allowing peasants to own individual plots, encouraged agricultural modernization, and tried to create a class of prosperous farmers to support the Tsar.',
+            markingCriteria: {
+              breakdown: ['Land ownership reforms (2 marks)', 'Agricultural modernization (1 mark)', 'Creating prosperous farmer class (2 marks)', 'Support for Tsar (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'russia-q5',
+            question: 'What impact did World War I have on Russian society?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The war caused massive casualties, economic collapse, food shortages, and loss of confidence in Tsar Nicholas II\'s leadership.',
+            markingCriteria: {
+              breakdown: ['Massive casualties (1 mark)', 'Economic collapse (1 mark)', 'Food shortages (1 mark)', 'Loss of confidence in Tsar (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'russia-q6',
+            question: 'Why did the Provisional Government fail in 1917?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The Provisional Government continued the unpopular war, failed to address land reform, couldn\'t solve economic problems, and faced competition from the Petrograd Soviet.',
+            markingCriteria: {
+              breakdown: ['Continued unpopular war (2 marks)', 'Failed land reform (1 mark)', 'Economic problems unsolved (1 mark)', 'Dual power with Soviet (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'russia-q7',
+            question: 'What were the main features of War Communism?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'War Communism included nationalization of industry, requisitioning of grain from peasants, abolition of private trade, and state control of the economy.',
+            markingCriteria: {
+              breakdown: ['Nationalized industry (1 mark)', 'Grain requisitioning (1 mark)', 'Abolished private trade (1 mark)', 'State economic control (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'russia-q8',
+            question: 'How did the New Economic Policy (NEP) differ from War Communism?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The NEP allowed some private trade, replaced grain requisitioning with a tax, permitted small businesses, while keeping state control of major industries and banks.',
+            markingCriteria: {
+              breakdown: ['Allowed private trade (1 mark)', 'Tax instead of requisitioning (2 marks)', 'Small businesses permitted (1 mark)', 'State kept major industry (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'russia-q9',
+            question: 'How did Stalin gain power after Lenin\'s death?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Stalin used his position as General Secretary to build support, outmaneuvered rivals like Trotsky, and gradually eliminated opposition within the Communist Party.',
+            markingCriteria: {
+              breakdown: ['Used General Secretary position (1 mark)', 'Built party support (1 mark)', 'Outmaneuvered Trotsky (1 mark)', 'Eliminated opposition (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'russia-q10',
+            question: 'What were the main features of Stalin\'s Five Year Plans?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The plans focused on rapid industrialization, emphasized heavy industry, set production targets, used forced labor, and aimed to transform Russia from agricultural to industrial economy.',
+            markingCriteria: {
+              breakdown: ['Rapid industrialization (1 mark)', 'Heavy industry focus (1 mark)', 'Production targets (1 mark)', 'Forced labor (1 mark)', 'Agricultural to industrial transformation (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
           }
         ]
       },
@@ -136,6 +400,94 @@ export const curriculum: Subject[] = [
             modelAnswer: 'The New Deal created jobs through public works programs, provided financial relief, reformed banking, and established social security systems.',
             markingCriteria: {
               breakdown: ['Job creation programs (2 marks)', 'Financial relief (1 mark)', 'Banking reform (1 mark)', 'Social security (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1920-q3',
+            question: 'What was the impact of Prohibition in 1920s America?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Prohibition led to the rise of organized crime, illegal speakeasies, widespread law-breaking, and ultimately proved unenforceable.',
+            markingCriteria: {
+              breakdown: ['Rise of organized crime (1 mark)', 'Illegal speakeasies (1 mark)', 'Widespread law-breaking (1 mark)', 'Proved unenforceable (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1920-q4',
+            question: 'How did the Red Scare affect American society?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The Red Scare led to arrests and deportations of suspected communists, restrictions on immigration, fear of foreign influences, and violations of civil liberties.',
+            markingCriteria: {
+              breakdown: ['Arrests and deportations (2 marks)', 'Immigration restrictions (1 mark)', 'Fear of foreign influences (1 mark)', 'Civil liberties violations (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1920-q5',
+            question: 'What caused the Wall Street Crash of 1929?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Over-speculation in stocks, buying on margin, overproduction in industry, and lack of regulation in financial markets caused the crash.',
+            markingCriteria: {
+              breakdown: ['Over-speculation (1 mark)', 'Buying on margin (1 mark)', 'Overproduction (1 mark)', 'Lack of regulation (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1920-q6',
+            question: 'How did World War II affect the American economy?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The war ended the Great Depression, created full employment, increased industrial production, boosted government spending, and established America as a global economic power.',
+            markingCriteria: {
+              breakdown: ['Ended Great Depression (1 mark)', 'Full employment (1 mark)', 'Increased production (1 mark)', 'Government spending (1 mark)', 'Global economic power (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1920-q7',
+            question: 'What were the main features of the Civil Rights Movement in the 1950s-60s?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The movement used peaceful protests, legal challenges, boycotts, and civil disobedience to challenge segregation and achieve voting rights.',
+            markingCriteria: {
+              breakdown: ['Peaceful protests (1 mark)', 'Legal challenges (1 mark)', 'Boycotts (1 mark)', 'Civil disobedience (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1920-q8',
+            question: 'How did the role of women change during World War II?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Women entered industrial work in large numbers, gained economic independence, challenged traditional gender roles, but faced pressure to return to domestic roles after the war.',
+            markingCriteria: {
+              breakdown: ['Entered industrial work (2 marks)', 'Economic independence (1 mark)', 'Challenged gender roles (1 mark)', 'Post-war pressure (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1920-q9',
+            question: 'What was the significance of the Montgomery Bus Boycott?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The boycott successfully ended bus segregation in Montgomery, established Martin Luther King Jr. as a leader, and demonstrated the power of non-violent protest.',
+            markingCriteria: {
+              breakdown: ['Ended bus segregation (1 mark)', 'Established MLK leadership (1 mark)', 'Demonstrated non-violent protest (1 mark)', 'Success significance (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'america-1920-q10',
+            question: 'How did the Vietnam War divide American society?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The war created generational conflict, anti-war protests, draft resistance, loss of trust in government, and divisions between hawks and doves.',
+            markingCriteria: {
+              breakdown: ['Generational conflict (1 mark)', 'Anti-war protests (1 mark)', 'Draft resistance (1 mark)', 'Lost trust in government (1 mark)', 'Hawks vs doves division (2 marks)']
             },
             specReference: 'AQA GCSE History 8145'
           }
@@ -166,6 +518,94 @@ export const curriculum: Subject[] = [
               breakdown: ['Schlieffen Plan failure (2 marks)', 'Defensive trenches (2 marks)', 'Stalemate creation (2 marks)']
             },
             specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'ww1-q3',
+            question: 'What role did the alliance system play in causing World War I?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The Triple Alliance (Germany, Austria-Hungary, Italy) and Triple Entente (Britain, France, Russia) meant that a local conflict could escalate into a world war.',
+            markingCriteria: {
+              breakdown: ['Triple Alliance identified (1 mark)', 'Triple Entente identified (1 mark)', 'Local conflict escalation (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'ww1-q4',
+            question: 'How did the assassination of Archduke Franz Ferdinand lead to war?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The assassination by a Serbian nationalist led Austria-Hungary to declare war on Serbia. Russia supported Serbia, Germany supported Austria, and the alliance system drew in other powers.',
+            markingCriteria: {
+              breakdown: ['Serbian nationalist assassination (1 mark)', 'Austria declared war on Serbia (1 mark)', 'Russian support for Serbia (1 mark)', 'German support for Austria (1 mark)', 'Alliance system activation (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'ww1-q5',
+            question: 'What was the significance of the Battle of the Somme?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The battle demonstrated the failure of tactics against modern weapons, resulted in massive casualties with little territorial gain, and showed the futility of frontal attacks.',
+            markingCriteria: {
+              breakdown: ['Tactical failures shown (1 mark)', 'Massive casualties (1 mark)', 'Little territorial gain (1 mark)', 'Futility of frontal attacks (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'ww1-q6',
+            question: 'How did new technology change warfare during WWI?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Machine guns made frontal attacks deadly, poison gas was used for the first time, tanks were developed to break trench lines, and aircraft evolved from reconnaissance to combat roles.',
+            markingCriteria: {
+              breakdown: ['Machine gun impact (1 mark)', 'Poison gas introduction (1 mark)', 'Tank development (2 marks)', 'Aircraft evolution (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'ww1-q7',
+            question: 'What impact did the war have on the home front in Britain?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Rationing was introduced, women entered the workforce in large numbers, propaganda was used to maintain morale, and civilian areas faced air raids.',
+            markingCriteria: {
+              breakdown: ['Rationing introduced (1 mark)', 'Women in workforce (1 mark)', 'Propaganda usage (1 mark)', 'Air raids on civilians (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'ww1-q8',
+            question: 'Why did America enter the war in 1917?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'German submarine warfare threatened American ships, the Zimmermann Telegram revealed German plans against America, economic ties to Britain, and Wilson\'s desire to make the world "safe for democracy."',
+            markingCriteria: {
+              breakdown: ['German submarine warfare (2 marks)', 'Zimmermann Telegram (1 mark)', 'Economic ties to Britain (1 mark)', 'Democratic ideals (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'ww1-q9',
+            question: 'What were the main terms of the Armistice in November 1918?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Germany had to withdraw from occupied territories, surrender weapons and equipment, hand over its fleet, and accept Allied occupation of German territory.',
+            markingCriteria: {
+              breakdown: ['Withdraw from occupied territories (1 mark)', 'Surrender weapons (1 mark)', 'Hand over fleet (1 mark)', 'Allied occupation (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'ww1-q10',
+            question: 'How did the war contribute to the collapse of empires?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The war weakened the Ottoman, Austrian, German, and Russian empires through military defeats, economic strain, internal revolutions, and the principle of national self-determination.',
+            markingCriteria: {
+              breakdown: ['Empire weakening (1 mark)', 'Military defeats (1 mark)', 'Economic strain (1 mark)', 'Internal revolutions (1 mark)', 'National self-determination (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
           }
         ]
       },
@@ -192,6 +632,94 @@ export const curriculum: Subject[] = [
             modelAnswer: 'The League lacked enforcement power, major powers like USA and USSR were not members, and economic sanctions proved ineffective against aggressors.',
             markingCriteria: {
               breakdown: ['Lack of enforcement (2 marks)', 'Missing major powers (2 marks)', 'Ineffective sanctions (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'interwar-q3',
+            question: 'How did the Great Depression affect international relations?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The Depression led to economic nationalism, reduced international cooperation, weakened democratic governments, and helped extremist parties gain power.',
+            markingCriteria: {
+              breakdown: ['Economic nationalism (1 mark)', 'Reduced cooperation (1 mark)', 'Weakened democracies (1 mark)', 'Extremist parties rise (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'interwar-q4',
+            question: 'What was the policy of appeasement and why was it followed?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Appeasement meant giving in to aggressive demands to avoid war. It was followed due to fear of another world war, belief that Versailles was too harsh, and hope that Hitler could be satisfied.',
+            markingCriteria: {
+              breakdown: ['Definition of appeasement (1 mark)', 'Fear of war (1 mark)', 'Versailles too harsh (2 marks)', 'Hope to satisfy Hitler (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'interwar-q5',
+            question: 'How did the Japanese invasion of Manchuria test the League of Nations?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Japan invaded Manchuria in 1931, the League condemned the action but took no effective military action, Japan left the League, showing the organization\'s weakness.',
+            markingCriteria: {
+              breakdown: ['1931 invasion (1 mark)', 'League condemnation (1 mark)', 'No military action (1 mark)', 'Japan left League (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'interwar-q6',
+            question: 'What was the significance of the Munich Agreement of 1938?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The Munich Agreement gave Hitler the Sudetenland without consulting Czechoslovakia, represented the height of appeasement, and encouraged Hitler to make further demands.',
+            markingCriteria: {
+              breakdown: ['Gave Hitler Sudetenland (1 mark)', 'Without Czech consultation (1 mark)', 'Height of appeasement (2 marks)', 'Encouraged further demands (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'interwar-q7',
+            question: 'How did the Spanish Civil War affect international relations?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The Spanish Civil War served as a testing ground for new weapons, revealed the weakness of non-intervention policies, and strengthened the Rome-Berlin Axis.',
+            markingCriteria: {
+              breakdown: ['Testing ground for weapons (1 mark)', 'Non-intervention weakness (1 mark)', 'Strengthened Rome-Berlin Axis (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'interwar-q8',
+            question: 'Why did the Nazi-Soviet Pact surprise the world in 1939?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The pact was surprising because Nazi Germany and Communist Soviet Union were ideological enemies, Hitler had previously attacked communism, and it seemed to contradict their fundamental beliefs.',
+            markingCriteria: {
+              breakdown: ['Ideological enemies (2 marks)', 'Hitler attacked communism (1 mark)', 'Contradicted beliefs (1 mark)', 'World surprise (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'interwar-q9',
+            question: 'What were the main causes of the Abyssinian Crisis?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Italy invaded Abyssinia for empire building, to distract from domestic problems, for economic resources, and to restore national pride after previous defeats.',
+            markingCriteria: {
+              breakdown: ['Empire building (1 mark)', 'Domestic distraction (1 mark)', 'Economic resources (1 mark)', 'National pride (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'interwar-q10',
+            question: 'How did the failure of collective security lead to World War II?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The failure to stop aggression in Manchuria, Abyssinia, and the Rhineland encouraged further aggression, weakened the League of Nations, and showed that peaceful methods could not maintain peace.',
+            markingCriteria: {
+              breakdown: ['Failed to stop early aggression (2 marks)', 'Encouraged further aggression (1 mark)', 'Weakened League (1 mark)', 'Peaceful methods failed (2 marks)']
             },
             specReference: 'AQA GCSE History 8145'
           }
@@ -222,6 +750,94 @@ export const curriculum: Subject[] = [
               breakdown: ['Berlin Wall construction (2 marks)', 'Propaganda impact (2 marks)', 'Communist failure shown (2 marks)']
             },
             specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'east-west-q3',
+            question: 'What was the significance of the Truman Doctrine?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The Truman Doctrine committed America to containing communism worldwide, marked the start of the Cold War, and established the principle of supporting free peoples against communist threats.',
+            markingCriteria: {
+              breakdown: ['Containment commitment (1 mark)', 'Start of Cold War (1 mark)', 'Supporting free peoples (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'east-west-q4',
+            question: 'How did the Marshall Plan help rebuild Europe?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The Marshall Plan provided economic aid to rebuild Western Europe, created markets for American goods, strengthened anti-communist governments, and helped prevent Soviet expansion.',
+            markingCriteria: {
+              breakdown: ['Economic aid provided (2 marks)', 'Created American markets (1 mark)', 'Strengthened anti-communist governments (2 marks)', 'Prevented Soviet expansion (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'east-west-q5',
+            question: 'What caused the Berlin Blockade of 1948-49?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Stalin blocked access to West Berlin in response to currency reform in western zones, to force the Allies out of Berlin, and to protest against the creation of West Germany.',
+            markingCriteria: {
+              breakdown: ['Currency reform response (1 mark)', 'Force Allies out (1 mark)', 'Protest West Germany creation (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'east-west-q6',
+            question: 'How did the formation of NATO change the Cold War?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'NATO created a military alliance against Soviet expansion, formalized Western unity, led to the creation of the Warsaw Pact, and divided Europe into two armed camps.',
+            markingCriteria: {
+              breakdown: ['Military alliance against USSR (2 marks)', 'Formalized Western unity (1 mark)', 'Led to Warsaw Pact (1 mark)', 'Divided Europe (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'east-west-q7',
+            question: 'What was the impact of the Hungarian Uprising of 1956?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'The uprising showed Soviet willingness to use force to maintain control, demonstrated the limits of Western support for liberation, and revealed the weakness of the United Nations.',
+            markingCriteria: {
+              breakdown: ['Soviet use of force (1 mark)', 'Limits of Western support (1 mark)', 'UN weakness shown (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'east-west-q8',
+            question: 'How did the Cuban Missile Crisis bring the world close to nuclear war?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Soviet missiles in Cuba threatened the US, Kennedy imposed a naval blockade, both superpowers prepared for nuclear war, and only secret negotiations prevented conflict.',
+            markingCriteria: {
+              breakdown: ['Soviet missiles in Cuba (1 mark)', 'Naval blockade (1 mark)', 'Nuclear war preparation (2 marks)', 'Secret negotiations (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'east-west-q9',
+            question: 'What was détente and why did it develop in the 1960s-70s?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Détente was the relaxation of Cold War tensions, developed due to the nuclear arms race costs, mutual recognition of spheres of influence, and the need for cooperation.',
+            markingCriteria: {
+              breakdown: ['Relaxation of tensions (1 mark)', 'Arms race costs (1 mark)', 'Mutual recognition (1 mark)', 'Need for cooperation (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'east-west-q10',
+            question: 'How did the Prague Spring of 1968 affect East-West relations?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The Prague Spring attempted liberal reforms in Czechoslovakia, was crushed by Soviet invasion, damaged Soviet relations with Western communist parties, and strengthened NATO resolve.',
+            markingCriteria: {
+              breakdown: ['Liberal reforms attempted (1 mark)', 'Soviet invasion (1 mark)', 'Damaged Western communist relations (2 marks)', 'Strengthened NATO (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
           }
         ]
       },
@@ -250,6 +866,94 @@ export const curriculum: Subject[] = [
               breakdown: ['Protest movements (2 marks)', 'Social division (2 marks)', 'Government trust issues (2 marks)']
             },
             specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'asia-q3',
+            question: 'Why did America become involved in Vietnam?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'America feared communist expansion in Southeast Asia, followed the domino theory, wanted to support South Vietnam, and maintain credibility.',
+            markingCriteria: {
+              breakdown: ['Fear of communist expansion (1 mark)', 'Domino theory (1 mark)', 'Support South Vietnam (1 mark)', 'Maintain credibility (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'asia-q4',
+            question: 'What was the significance of the Tet Offensive?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The Tet Offensive showed Viet Cong strength, turned American public opinion against the war, demonstrated that victory was not imminent, and led to Johnson\'s decision not to seek re-election.',
+            markingCriteria: {
+              breakdown: ['Showed Viet Cong strength (2 marks)', 'Turned public opinion (2 marks)', 'Johnson decision impact (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'asia-q5',
+            question: 'How did guerrilla warfare tactics affect the Vietnam conflict?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Guerrilla tactics allowed smaller forces to fight effectively, made it difficult to identify enemies, negated American technological advantages, and frustrated conventional military strategies.',
+            markingCriteria: {
+              breakdown: ['Effective small force fighting (1 mark)', 'Difficult enemy identification (1 mark)', 'Negated tech advantages (1 mark)', 'Frustrated strategies (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'asia-q6',
+            question: 'What role did China play in the Korean War?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'China entered the war when UN forces approached its border, sent hundreds of thousands of troops, pushed UN forces back, and prevented total North Korean defeat.',
+            markingCriteria: {
+              breakdown: ['Entered when border threatened (2 marks)', 'Sent massive troops (2 marks)', 'Prevented NK defeat (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'asia-q7',
+            question: 'Why was General MacArthur dismissed during the Korean War?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'MacArthur wanted to attack China directly, disagreed with Truman\'s limited war policy, made unauthorized statements, and threatened to escalate the conflict.',
+            markingCriteria: {
+              breakdown: ['Wanted to attack China (1 mark)', 'Disagreed with limited war (1 mark)', 'Unauthorized statements (1 mark)', 'Threatened escalation (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'asia-q8',
+            question: 'What was the outcome of the Korean War?',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'The war ended in stalemate with an armistice, Korea remained divided at the 38th parallel, millions of casualties occurred, and no peace treaty was signed.',
+            markingCriteria: {
+              breakdown: ['Stalemate and armistice (2 marks)', 'Remained divided (2 marks)', 'Heavy casualties (1 mark)', 'No peace treaty (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'asia-q9',
+            question: 'How did the My Lai Massacre affect American public opinion?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The massacre shocked the American public, increased anti-war sentiment, raised questions about military conduct, and damaged America\'s moral authority.',
+            markingCriteria: {
+              breakdown: ['Shocked American public (1 mark)', 'Increased anti-war sentiment (1 mark)', 'Questions about conduct (1 mark)', 'Damaged moral authority (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'asia-q10',
+            question: 'What was Nixon\'s policy of Vietnamization?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Vietnamization involved training South Vietnamese forces to take over fighting, gradually withdrawing American troops, maintaining support through bombing, and seeking peace negotiations.',
+            markingCriteria: {
+              breakdown: ['Training South Vietnamese (2 marks)', 'Gradual withdrawal (2 marks)', 'Bombing support (1 mark)', 'Peace negotiations (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
           }
         ]
       },
@@ -276,6 +980,94 @@ export const curriculum: Subject[] = [
             modelAnswer: 'The attacks led to the War on Terror, invasions of Afghanistan and Iraq, increased homeland security, and the Bush Doctrine of preemptive strikes.',
             markingCriteria: {
               breakdown: ['War on Terror (1 mark)', 'Afghanistan/Iraq invasions (2 marks)', 'Homeland security (1 mark)', 'Bush Doctrine (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'gulf-q3',
+            question: 'Why did the US invade Afghanistan in 2001?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'The Taliban regime harbored Al-Qaeda terrorists, refused to hand over Osama bin Laden, supported international terrorism, and threatened global security.',
+            markingCriteria: {
+              breakdown: ['Harbored Al-Qaeda (1 mark)', 'Refused bin Laden handover (1 mark)', 'Supported terrorism (1 mark)', 'Global security threat (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'gulf-q4',
+            question: 'What were the consequences of the 2003 Iraq invasion?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The invasion removed Saddam Hussein, led to sectarian violence, destabilized the region, created refugee crisis, and damaged international relations.',
+            markingCriteria: {
+              breakdown: ['Removed Saddam (1 mark)', 'Sectarian violence (2 marks)', 'Regional instability (2 marks)', 'International damage (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'gulf-q5',
+            question: 'How did oil influence Western policy in the Gulf region?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Oil resources made the Gulf strategically important, drove Western intervention, influenced alliance choices, and shaped economic relationships.',
+            markingCriteria: {
+              breakdown: ['Strategic importance (1 mark)', 'Drove intervention (1 mark)', 'Influenced alliances (1 mark)', 'Shaped economics (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'gulf-q6',
+            question: 'What role did the UN play in the Gulf conflicts?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The UN authorized force against Iraq in 1991, imposed sanctions, conducted weapons inspections, but was divided over the 2003 invasion.',
+            markingCriteria: {
+              breakdown: ['Authorized 1991 force (2 marks)', 'Imposed sanctions (1 mark)', 'Weapons inspections (1 mark)', 'Divided over 2003 (2 marks)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'gulf-q7',
+            question: 'How did media coverage affect public opinion during these conflicts?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Live TV coverage brought warfare into homes, shaped public perception, influenced government policy, and created the "CNN effect" on decision-making.',
+            markingCriteria: {
+              breakdown: ['Live TV coverage (1 mark)', 'Shaped perception (1 mark)', 'Influenced policy (1 mark)', 'CNN effect (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'gulf-q8',
+            question: 'What challenges did coalition forces face in Iraq and Afghanistan?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Forces faced insurgency attacks, improvised explosive devices, cultural barriers, nation-building difficulties, and unclear exit strategies.',
+            markingCriteria: {
+              breakdown: ['Insurgency attacks (1 mark)', 'IEDs (1 mark)', 'Cultural barriers (1 mark)', 'Nation-building issues (2 marks)', 'Unclear exit strategies (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'gulf-q9',
+            question: 'How did the conflicts affect international alliances?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The conflicts strained NATO relationships, created new coalitions, tested UN authority, and changed diplomatic relationships globally.',
+            markingCriteria: {
+              breakdown: ['Strained NATO (1 mark)', 'New coalitions (1 mark)', 'Tested UN authority (1 mark)', 'Changed diplomacy (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'gulf-q10',
+            question: 'What was the long-term impact of the War on Terror?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The War on Terror increased security measures, changed civil liberties, influenced foreign policy globally, and created ongoing regional instability.',
+            markingCriteria: {
+              breakdown: ['Increased security measures (1 mark)', 'Changed civil liberties (2 marks)', 'Global foreign policy influence (2 marks)', 'Regional instability (1 mark)']
             },
             specReference: 'AQA GCSE History 8145'
           }
