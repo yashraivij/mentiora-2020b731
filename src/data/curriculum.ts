@@ -2506,69 +2506,69 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'g10-q2',
-            question: 'Describe the UK\'s changing demand for food and explain the growth of agribusiness.',
+            question: 'Choose ONE resource you have studied (food, water, or energy). Describe the UK\'s changing demand for this resource and explain how its provision has developed.',
             marks: 6,
             difficulty: 'medium',
-            modelAnswer: 'UK food demand has changed to include more exotic foods, organic produce, and seasonal availability year-round. Agribusiness has grown through large-scale farming, use of technology, and integration from farm to supermarket. This increases efficiency but may affect small farmers and local food systems.',
+            modelAnswer: 'FOOD: UK food demand has changed to include more exotic foods, organic produce, and seasonal availability year-round. Agribusiness has grown through large-scale farming, use of technology, and integration from farm to supermarket. OR WATER: UK water demand has increased due to population growth and lifestyle changes. Provision involves reservoirs, treatment plants, and distribution networks, with increasing focus on efficiency and leak reduction. OR ENERGY: UK energy demand has shifted toward electricity and cleaner sources. Provision has evolved from coal dominance to gas, nuclear, and renewables, with smart grids and storage solutions.',
             markingCriteria: {
-              breakdown: ['Changing food demand patterns (3 marks)', 'Agribusiness characteristics and growth (3 marks)']
+              breakdown: ['Changing demand patterns for chosen resource (3 marks)', 'Development of provision/industry for chosen resource (3 marks)']
             },
-            specReference: '3.2.3 - UK demand and provision of food'
+            specReference: '3.2.3 - UK demand and provision of resources'
           },
           {
             id: 'g10-q3',
-            question: 'Explain the concept of food miles and evaluate its environmental impact.',
+            question: 'Choose ONE resource you have studied (food, water, or energy). Explain a key concept related to this resource and evaluate its environmental impact.',
             marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'Food miles measure distance food travels from production to consumption. Long food miles increase carbon emissions from transport, contributing to climate change. However, local production may be less efficient and more environmentally damaging than importing from suitable climates. The total environmental impact depends on production methods not just distance.',
+            modelAnswer: 'FOOD: Food miles measure distance food travels from production to consumption. Long food miles increase carbon emissions from transport, contributing to climate change. However, local production may be less efficient than importing from suitable climates. OR WATER: Water footprint measures total water used in production. Large water footprints can stress local water supplies and ecosystems. However, virtual water trade can efficiently allocate water resources globally. OR ENERGY: Carbon footprint measures greenhouse gas emissions from energy use. High carbon footprints contribute to climate change. However, lifecycle analysis shows some low-carbon sources have other environmental impacts.',
             markingCriteria: {
-              breakdown: ['Definition of food miles (1 mark)', 'Environmental impact of transport (1 mark)', 'Limitations of food miles concept (1 mark)', 'Evaluation of overall impact (1 mark)']
+              breakdown: ['Definition of key concept for chosen resource (1 mark)', 'Environmental impact explanation (1 mark)', 'Limitations or complexities (1 mark)', 'Evaluation of overall impact (1 mark)']
             },
-            specReference: '3.2.3 - UK food security and food miles'
+            specReference: '3.2.3 - Resource environmental concepts'
           },
           {
             id: 'g10-q4',
-            question: 'Describe the UK\'s water resources and explain patterns of demand and supply.',
+            question: 'Choose ONE resource you have studied (food, water, or energy). Describe the UK\'s sources of this resource and explain patterns of demand and supply.',
             marks: 6,
             difficulty: 'medium',
-            modelAnswer: 'UK water supply comes mainly from surface water (reservoirs, rivers) and groundwater (aquifers). Supply is highest in north and west where precipitation is greater. Demand is highest in south and east where population and economic activity are concentrated. This creates a supply-demand imbalance requiring water transfers.',
+            modelAnswer: 'FOOD: UK food sources include domestic production (agriculture, livestock) and imports from EU and global markets. Supply varies seasonally and regionally. Demand is highest in urban areas and for processed foods. OR WATER: UK water sources include surface water (reservoirs, rivers) and groundwater (aquifers). Supply is highest in north and west. Demand is highest in south and east, creating supply-demand imbalance. OR ENERGY: UK energy sources include domestic production (North Sea oil/gas, renewables) and imports. Supply from renewables varies with weather. Demand is highest in winter and in industrial/urban areas.',
             markingCriteria: {
-              breakdown: ['Sources of UK water supply (2 marks)', 'Regional patterns of supply (2 marks)', 'Regional patterns of demand (2 marks)']
+              breakdown: ['Sources of chosen resource (2 marks)', 'Regional patterns of supply (2 marks)', 'Regional patterns of demand (2 marks)']
             },
-            specReference: '3.2.3 - UK water resources and demand'
+            specReference: '3.2.3 - UK resource patterns'
           },
           {
             id: 'g10-q5',
-            question: 'Explain issues affecting water quality in the UK and how they are managed.',
+            question: 'Choose ONE resource you have studied (food, water, or energy). Explain key issues affecting this resource in the UK and how they are managed.',
             marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'Water quality issues include pollution from agriculture (fertilizers, pesticides), industrial discharge, and urban runoff. Management involves water treatment plants, pollution controls, monitoring systems, and regulation by environmental agencies. Investment in infrastructure ensures clean water supply meets health standards.',
+            modelAnswer: 'FOOD: Issues include food security, health concerns, and environmental impact of agriculture. Management involves food standards agencies, sustainable farming practices, and import diversification. OR WATER: Issues include pollution, regional imbalances, and increasing demand. Management involves water treatment, pollution controls, regulation by environmental agencies, and demand management. OR ENERGY: Issues include climate change, energy security, and intermittency of renewables. Management involves diversification, storage solutions, efficiency measures, and international cooperation.',
             markingCriteria: {
-              breakdown: ['Pollution sources affecting water quality (2 marks)', 'Management strategies and regulation (2 marks)']
+              breakdown: ['Key issues affecting chosen resource (2 marks)', 'Management strategies and approaches (2 marks)']
             },
-            specReference: '3.2.3 - UK water quality and management'
+            specReference: '3.2.3 - UK resource management'
           },
           {
             id: 'g10-q6',
-            question: 'Describe the UK\'s energy mix and explain how it has changed over time.',
+            question: 'Choose ONE resource you have studied (food, water, or energy). Describe how the UK\'s approach to this resource has changed over time.',
             marks: 6,
             difficulty: 'medium',
-            modelAnswer: 'The UK energy mix has shifted from coal dominance to natural gas, with increasing renewable energy. Coal use has declined dramatically due to environmental concerns and economics. Nuclear power provides steady baseload electricity. Renewable sources like wind and solar are growing rapidly. The trend is toward decarbonization to meet climate targets.',
+            modelAnswer: 'FOOD: Shift from local, seasonal production to global, year-round availability. Growth of supermarkets and processed foods. Increasing focus on organic, sustainable, and health-conscious choices. OR WATER: Evolution from local sources to regional supply systems. Development of treatment technology and quality standards. Increasing focus on conservation and efficiency due to demand pressures. OR ENERGY: Transition from coal dominance to natural gas, nuclear, and renewables. Decline of domestic fossil fuel production. Growing emphasis on decarbonization and sustainability to meet climate targets.',
             markingCriteria: {
-              breakdown: ['Historical energy mix changes (2 marks)', 'Current energy sources (2 marks)', 'Trends toward renewables/decarbonization (2 marks)']
+              breakdown: ['Historical changes in approach (2 marks)', 'Recent developments and trends (2 marks)', 'Future direction or sustainability focus (2 marks)']
             },
-            specReference: '3.2.3 - UK energy mix and changes'
+            specReference: '3.2.3 - UK resource evolution'
           },
           {
             id: 'g10-q7',
-            question: 'Evaluate the environmental issues associated with different energy sources in the UK.',
+            question: 'Choose ONE resource you have studied (food, water, or energy). Evaluate the environmental and sustainability issues associated with this resource in the UK.',
             marks: 6,
             difficulty: 'hard',
-            modelAnswer: 'Fossil fuels cause air pollution and greenhouse gas emissions but provide reliable energy. Nuclear power has low carbon emissions but creates radioactive waste storage problems. Renewable energy has minimal environmental impact during operation but requires large areas and can affect wildlife. The challenge is balancing environmental protection with energy security.',
+            modelAnswer: 'FOOD: Intensive agriculture causes soil degradation and biodiversity loss but increases productivity. Food transport creates carbon emissions but enables food security. Packaging reduces waste but creates pollution. Balance needed between productivity and sustainability. OR WATER: Over-extraction threatens ecosystems but meets human needs. Treatment creates clean water but uses energy and chemicals. Infrastructure development affects landscapes but ensures supply security. OR ENERGY: Fossil fuels provide reliable energy but cause climate change. Nuclear offers low-carbon power but creates waste concerns. Renewables are clean but require land use and have intermittency issues.',
             markingCriteria: {
-              breakdown: ['Fossil fuel environmental impacts (2 marks)', 'Nuclear power impacts (2 marks)', 'Renewable energy impacts and evaluation (2 marks)']
+              breakdown: ['Environmental impacts of chosen resource (2 marks)', 'Sustainability challenges (2 marks)', 'Evaluation and balanced assessment (2 marks)']
             },
-            specReference: '3.2.3 - UK energy environmental issues'
+            specReference: '3.2.3 - Resource sustainability'
           },
           {
             id: 'g10-q8',
