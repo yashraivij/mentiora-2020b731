@@ -405,19 +405,9 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
   };
 
   const handleSubmit = () => {
+    // For English Literature, allow submission at any time
     if (subjectId === 'english-literature') {
-      // For English Literature, check if one question from each section is answered
-      const sectionAAnswered = answers.some(a => examQuestions.find(q => q.id === a.questionId)?.section === 'A');
-      const sectionBAnswered = answers.some(a => examQuestions.find(q => q.id === a.questionId)?.section === 'B');
-      
-      if (!sectionAAnswered || !sectionBAnswered) {
-        toast({
-          title: "Incomplete Exam",
-          description: "Please answer one question from Section A (Shakespeare) and one from Section B (19th Century Novel).",
-          variant: "destructive"
-        });
-        return;
-      }
+      // No validation required - allow submission even with no answers
     } else {
       // For other subjects, require all questions to be answered
       if (answers.length < examQuestions.length) {
@@ -437,7 +427,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         answers: answers,
         timeElapsed: getExamDuration() * 60 - timeLeft,
         totalMarks: getTotalMarks()
-      }
+      } 
     });
   };
 
@@ -544,10 +534,6 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
                 <Button
                   onClick={handleSubmit}
                   className="bg-gradient-to-r from-primary to-primary/90"
-                  disabled={
-                    !(answers.some(a => examQuestions.find(q => q.id === a.questionId)?.section === 'A') && 
-                      answers.some(a => examQuestions.find(q => q.id === a.questionId)?.section === 'B'))
-                  }
                 >
                   <Target className="h-4 w-4 mr-2" />
                   Submit for Marking
