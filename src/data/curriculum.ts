@@ -26,6 +26,134 @@ export interface Subject {
 
 export const curriculum: Subject[] = [
   {
+    id: 'english-literature',
+    name: 'English Literature',
+    topics: [
+      {
+        id: 'nineteenth-century-novels',
+        name: 'Nineteenth-Century Novels',
+        questions: [
+          {
+            id: 'lit-nov-q1',
+            question: 'How is fear presented in one of your studied nineteenth-century novels?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should choose from Jekyll and Hyde, A Christmas Carol, Great Expectations, Jane Eyre, Frankenstein, Pride and Prejudice, or The Sign of Four. Analysis should include specific examples, language techniques, and contextual understanding of fear in the Victorian era.',
+            markingCriteria: {
+              breakdown: ['Clear argument and structure (AO1)', 'Analysis of language, form and structure (AO2)', 'Understanding of context (AO3)', 'Range of vocabulary and sentence structures (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'lit-nov-q2',
+            question: 'How does your chosen author present the theme of social class in your studied novel?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse how social class is portrayed through character interactions, setting, and narrative voice. Must include specific textual evidence and show understanding of Victorian social hierarchies.',
+            markingCriteria: {
+              breakdown: ['Clear thesis and argument (AO1)', 'Detailed analysis of writer\'s methods (AO2)', 'Understanding of historical context (AO3)', 'Accurate written expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'lit-nov-q3',
+            question: 'Analyse how your chosen author creates sympathy for a particular character in your studied novel.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine character development, narrative perspective, and literary techniques used to evoke reader sympathy. Must include close textual analysis and consider authorial intent.',
+            markingCriteria: {
+              breakdown: ['Sustained interpretation (AO1)', 'Analysis of language and structure (AO2)', 'Contextual understanding (AO3)', 'Technical accuracy (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'lit-nov-q4',
+            question: 'How is the theme of good versus evil explored in your studied nineteenth-century novel?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse moral conflicts, character motivations, and symbolic representations of good and evil. Must demonstrate understanding of Victorian moral values and literary conventions.',
+            markingCriteria: {
+              breakdown: ['Clear analytical approach (AO1)', 'Detailed examination of literary techniques (AO2)', 'Understanding of moral context (AO3)', 'Fluent expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'lit-nov-q5',
+            question: 'Examine how your chosen author presents relationships between men and women in your studied novel.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse gender roles, power dynamics, and romantic relationships within their chosen text. Must show understanding of Victorian attitudes towards gender and marriage.',
+            markingCriteria: {
+              breakdown: ['Coherent argument (AO1)', 'Analysis of characterisation and dialogue (AO2)', 'Understanding of social context (AO3)', 'Accurate spelling and grammar (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          }
+        ]
+      },
+      {
+        id: 'shakespeare-plays',
+        name: 'Shakespeare Plays',
+        questions: [
+          {
+            id: 'lit-shakes-q1',
+            question: 'How does Shakespeare present Lady Macbeth as a powerful character in Macbeth?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse Lady Macbeth\'s manipulation techniques, her influence over Macbeth, and her eventual decline. Must include analysis of soliloquies, imagery, and dramatic techniques.',
+            markingCriteria: {
+              breakdown: ['Clear interpretation with evidence (AO1)', 'Analysis of dramatic techniques (AO2)', 'Understanding of Jacobean context (AO3)', 'Accurate written communication (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'lit-shakes-q2',
+            question: 'How does Shakespeare present the theme of love in your studied play?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should choose from Macbeth, Romeo and Juliet, The Tempest, The Merchant of Venice, Much Ado About Nothing, or Julius Caesar. Analysis should examine different types of love and Shakespeare\'s dramatic techniques.',
+            markingCriteria: {
+              breakdown: ['Sustained focus on theme (AO1)', 'Analysis of language and dramatic methods (AO2)', 'Contextual understanding (AO3)', 'Technical accuracy (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'lit-shakes-q3',
+            question: 'Analyse how Shakespeare creates tension in a key scene from your studied play.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should select a specific scene and analyse dramatic devices, staging, dialogue, and audience impact. Must demonstrate understanding of theatrical conventions.',
+            markingCriteria: {
+              breakdown: ['Clear focus on dramatic tension (AO1)', 'Detailed analysis of dramatic techniques (AO2)', 'Understanding of theatrical context (AO3)', 'Fluent expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'lit-shakes-q4',
+            question: 'How does Shakespeare present the theme of betrayal in your studied play?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should examine instances of betrayal, character motivations, and consequences. Must include analysis of dramatic irony and audience response.',
+            markingCriteria: {
+              breakdown: ['Coherent thematic analysis (AO1)', 'Analysis of characterisation and plot (AO2)', 'Historical and social context (AO3)', 'Accurate written expression (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          },
+          {
+            id: 'lit-shakes-q5',
+            question: 'Examine how Shakespeare uses supernatural elements in your studied play.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyse supernatural characters, prophecies, or magical elements and their dramatic function. Must show understanding of Elizabethan/Jacobean beliefs.',
+            markingCriteria: {
+              breakdown: ['Clear analytical approach (AO1)', 'Analysis of dramatic and linguistic techniques (AO2)', 'Understanding of contemporary beliefs (AO3)', 'Technical accuracy (AO4)']
+            },
+            specReference: 'AQA English Literature 8702'
+          }
+        ]
+      }
+    ]
+  },
+  {
     id: 'physics',
     name: 'Physics',
     topics: [
