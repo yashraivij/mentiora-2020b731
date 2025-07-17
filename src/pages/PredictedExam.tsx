@@ -126,7 +126,7 @@ ARIEL: Ay, my commander. When I presented Ceres,
 I thought to have told thee of it, but I feared
 Lest I might anger thee.
 PROSPERO: Say again, where didst thou leave these varlets?`,
-      'the-merchant-of-venice': `SHYLOCK: Hath not a Jew eyes? Hath not a Jew hands,
+      'merchant-of-venice': `SHYLOCK: Hath not a Jew eyes? Hath not a Jew hands,
 organs, dimensions, senses, affections, passions;
 fed with the same food, hurt with the same weapons,
 subject to the same diseases, healed by the same means,
@@ -212,7 +212,7 @@ And kill him in the shell.`
       'macbeth': 'ambition and its consequences',
       'romeo-and-juliet': 'love and conflict',
       'the-tempest': 'power and forgiveness',
-      'the-merchant-of-venice': 'prejudice and mercy',
+      'merchant-of-venice': 'prejudice and mercy',
       'much-ado-about-nothing': 'love and deception',
       'julius-caesar': 'honor and betrayal'
     };
@@ -252,7 +252,7 @@ And kill him in the shell.`
     if (subjectId === 'english-literature') {
       // Section A: Shakespeare plays
       const shakespearePlays = subject.topics.filter(topic => 
-        ['macbeth', 'romeo-and-juliet', 'the-tempest', 'the-merchant-of-venice', 'much-ado-about-nothing', 'julius-caesar'].includes(topic.id)
+        ['macbeth', 'romeo-and-juliet', 'the-tempest', 'merchant-of-venice', 'much-ado-about-nothing', 'julius-caesar'].includes(topic.id)
       );
       
       // Section B: 19th Century novels
