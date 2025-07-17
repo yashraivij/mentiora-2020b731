@@ -342,6 +342,13 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     return durations[subjectId as keyof typeof durations] || 90;
   };
 
+  const getTotalMarks = () => {
+    if (subjectId === 'english-literature') {
+      return 60; // Two questions at 30 marks each
+    }
+    return examQuestions.reduce((total, q) => total + q.marks, 0);
+  };
+
   useEffect(() => {
     if (examStarted && timeLeft > 0) {
       const timer = setInterval(() => {
@@ -428,8 +435,9 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       state: { 
         questions: examQuestions, 
         answers: answers,
-        timeElapsed: getExamDuration() * 60 - timeLeft
-      } 
+        timeElapsed: getExamDuration() * 60 - timeLeft,
+        totalMarks: getTotalMarks()
+      }
     });
   };
 
@@ -485,7 +493,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
                     <li>• <strong>Section B:</strong> Choose ONE 19th Century novel question to answer</li>
                     <li>• Answer TWO questions in total (one from each section)</li>
                     <li>• You have {getExamDuration()} minutes to complete this paper</li>
-                    <li>• Each question is worth 30 marks</li>
+                    <li>• Each question is worth 30 marks (Total: 60 marks)</li>
                   </ul>
                 ) : (
                   <ul className="text-sm text-amber-700 dark:text-amber-300 space-y-1">
