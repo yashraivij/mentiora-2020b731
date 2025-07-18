@@ -7341,6 +7341,768 @@ export const curriculum: Subject[] = [
     ]
   },
   {
+    id: 'maths-edexcel',
+    name: 'Mathematics (Edexcel)',
+    topics: [
+      {
+        id: 'me1-number',
+        name: 'Number',
+        questions: [
+          {
+            id: 'me1-q1',
+            question: 'Work out (4.8 × 10⁶) ÷ (1.2 × 10⁻²). Give your answer in standard form.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '(4.8 × 10⁶) ÷ (1.2 × 10⁻²) = (4.8 ÷ 1.2) × (10⁶ ÷ 10⁻²) = 4 × 10⁸',
+            markingCriteria: {
+              breakdown: ['Divide numbers: 4.8 ÷ 1.2 = 4 (1 mark)', 'Subtract indices: 6 - (-2) = 8 (1 mark)', 'Final answer in standard form: 4 × 10⁸ (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Standard form calculations',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me1-q2',
+            question: 'Simplify √(75) + √(12) - √(27), giving your answer in the form a√(3) where a is an integer.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: '√(75) = 5√(3), √(12) = 2√(3), √(27) = 3√(3). Therefore 5√(3) + 2√(3) - 3√(3) = 4√(3)',
+            markingCriteria: {
+              breakdown: ['Simplify √(75) = 5√(3) (1 mark)', 'Simplify √(12) = 2√(3) and √(27) = 3√(3) (1 mark)', 'Combine like surds correctly (1 mark)', 'Final answer 4√(3) (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Surds',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me1-q3',
+            question: 'Express 0.3̅7̅ (0.373737...) as a fraction in its simplest form.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Let x = 0.373737... Then 100x = 37.373737... Subtracting: 99x = 37, so x = 37/99',
+            markingCriteria: {
+              breakdown: ['Set up equation with x = 0.373737... (1 mark)', 'Multiply by 100 (1 mark)', 'Subtract to get 99x = 37 (1 mark)', 'Final fraction 37/99 (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Converting recurring decimals',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me1-q4',
+            question: 'The speed of light is 3 × 10⁸ m/s. Calculate how far light travels in 2.5 × 10⁻³ seconds. Give your answer in standard form.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Distance = speed × time = (3 × 10⁸) × (2.5 × 10⁻³) = (3 × 2.5) × (10⁸ × 10⁻³) = 7.5 × 10⁵ m',
+            markingCriteria: {
+              breakdown: ['Multiply numbers: 3 × 2.5 = 7.5 (1 mark)', 'Add indices: 8 + (-3) = 5 (1 mark)', 'Final answer in standard form (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Standard form calculations',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me1-q5',
+            question: 'Calculate 3⁵ × 3⁻² ÷ 3², giving your answer as a fraction.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '3⁵ × 3⁻² ÷ 3² = 3⁵⁻²⁻² = 3¹ = 3',
+            markingCriteria: {
+              breakdown: ['Apply index laws: 5 + (-2) - 2 = 1 (1 mark)', 'Recognize 3¹ = 3 (1 mark)', 'Final answer 3 (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Index laws',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me1-q6',
+            question: 'The height of a door is measured as 2.1 m to the nearest 0.1 m. The width is measured as 0.9 m to the nearest 0.1 m. Calculate the minimum possible area of the door.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Minimum height = 2.05 m, Minimum width = 0.85 m. Minimum area = 2.05 × 0.85 = 1.7425 m²',
+            markingCriteria: {
+              breakdown: ['Minimum height = 2.05 m (1 mark)', 'Minimum width = 0.85 m (1 mark)', 'Multiply for minimum area (1 mark)', 'Correct calculation: 1.7425 m² (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Upper and lower bounds',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me1-q7',
+            question: 'Work out the HCF and LCM of 72 and 108. Show your working using prime factorization.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: '72 = 2³ × 3², 108 = 2² × 3³. HCF = 2² × 3² = 36. LCM = 2³ × 3³ = 216',
+            markingCriteria: {
+              breakdown: ['Prime factorization of 72 (1 mark)', 'Prime factorization of 108 (1 mark)', 'HCF = 36 using common factors (1 mark)', 'LCM = 216 using all factors (1 mark)', 'Clear working shown (1 mark)']
+            },
+            specReference: 'Edexcel 1F - HCF and LCM',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me1-q8',
+            question: 'Calculate (4⁻¹ × 4³) ÷ (4⁻² × 4⁴). Give your answer as a fraction.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '(4⁻¹ × 4³) ÷ (4⁻² × 4⁴) = 4⁻¹⁺³ ÷ 4⁻²⁺⁴ = 4² ÷ 4² = 4⁰ = 1',
+            markingCriteria: {
+              breakdown: ['Simplify numerator: 4² (1 mark)', 'Simplify denominator: 4² (1 mark)', 'Final answer: 1 (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Index laws',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me1-q9',
+            question: 'The value of a car decreases by 15% each year. If the car is worth £8500 after 2 years of depreciation, calculate its original value.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'After 2 years, value = original × (0.85)². So £8500 = original × 0.7225. Original value = £8500 ÷ 0.7225 = £11,765',
+            markingCriteria: {
+              breakdown: ['Set up equation with decay factor 0.85 (1 mark)', 'Recognize (0.85)² = 0.7225 (1 mark)', 'Rearrange: original = 8500 ÷ 0.7225 (1 mark)', 'Correct answer: £11,765 (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Compound percentage change',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me1-q10',
+            question: 'Four numbers are in the ratio 3:4:5:6. The sum of the smallest and largest numbers is 54. Find all four numbers.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Let the numbers be 3x, 4x, 5x, and 6x. Then 3x + 6x = 54, so 9x = 54, x = 6. The numbers are 18, 24, 30, and 36.',
+            markingCriteria: {
+              breakdown: ['Express numbers as 3x, 4x, 5x, 6x (1 mark)', 'Set up equation: 3x + 6x = 54 (1 mark)', 'Solve: x = 6 (1 mark)', 'Find all numbers: 18, 24, 30, 36 (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Ratio problems',
+            calculatorGuidance: 'non-calc-friendly'
+          }
+        ]
+      },
+      {
+        id: 'me2-algebra',
+        name: 'Algebra',
+        questions: [
+          {
+            id: 'me2-q1',
+            question: 'Solve the quadratic equation x² - 6x - 16 = 0 by factorization.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'x² - 6x - 16 = (x - 8)(x + 2) = 0. Therefore x = 8 or x = -2',
+            markingCriteria: {
+              breakdown: ['Factor to (x - 8)(x + 2) (1 mark)', 'Set each factor to zero (1 mark)', 'Both solutions x = 8 and x = -2 (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Solving quadratic equations',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me2-q2',
+            question: 'Expand and simplify (3x - 2)² + (x + 1)(x - 3)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: '(3x - 2)² = 9x² - 12x + 4. (x + 1)(x - 3) = x² - 2x - 3. Therefore 9x² - 12x + 4 + x² - 2x - 3 = 10x² - 14x + 1',
+            markingCriteria: {
+              breakdown: ['Expand (3x - 2)² correctly (1 mark)', 'Expand (x + 1)(x - 3) correctly (1 mark)', 'Add expressions correctly (1 mark)', 'Simplify to 10x² - 14x + 1 (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Expanding and simplifying',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me2-q3',
+            question: 'Solve the simultaneous equations: 4x + 3y = 22 and 2x - y = 4',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'From equation 2: y = 2x - 4. Substitute into equation 1: 4x + 3(2x - 4) = 22. 10x - 12 = 22, so x = 3.4. Then y = 2.8',
+            markingCriteria: {
+              breakdown: ['Rearrange one equation for x or y (1 mark)', 'Substitute correctly (1 mark)', 'Solve for one variable (1 mark)', 'Find both solutions x = 3.4, y = 2.8 (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Simultaneous equations',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me2-q4',
+            question: 'Make r the subject of the formula: V = ⅓πr²h',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'V = ⅓πr²h. Multiply both sides by 3: 3V = πr²h. Divide by πh: 3V/πh = r². Take square root: r = √(3V/πh)',
+            markingCriteria: {
+              breakdown: ['Multiply both sides by 3 (1 mark)', 'Divide by πh (1 mark)', 'Take square root: r = √(3V/πh) (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Changing the subject',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me2-q5',
+            question: 'The nth term of a sequence is 2n² + 3n - 1. Find the first four terms and the 8th term.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'n = 1: 2(1) + 3(1) - 1 = 4. n = 2: 2(4) + 6 - 1 = 13. n = 3: 2(9) + 9 - 1 = 26. n = 4: 2(16) + 12 - 1 = 43. n = 8: 2(64) + 24 - 1 = 151',
+            markingCriteria: {
+              breakdown: ['First four terms = 4, 13, 26, 43 (2 marks)', 'Substitute n = 8 correctly (1 mark)', '8th term = 151 (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Sequences',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me2-q6',
+            question: 'Solve the quadratic equation 3x² + 5x - 2 = 0 using the quadratic formula.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'x = (-5 ± √(25 + 24))/6 = (-5 ± √49)/6 = (-5 ± 7)/6. So x = ⅓ or x = -2',
+            markingCriteria: {
+              breakdown: ['Substitute into formula: x = (-5 ± √(5² - 4×3×(-2)))/6 (1 mark)', 'Calculate discriminant: 25 + 24 = 49 (1 mark)', 'Find √49 = 7 (1 mark)', 'Both solutions: x = ⅓ and x = -2 (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Quadratic formula',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me2-q7',
+            question: 'Solve the simultaneous equations: 3x + 4y = 18 and 5x - 2y = 8 using elimination.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Multiply first by 1 and second by 2: 3x + 4y = 18 and 10x - 4y = 16. Add: 13x = 34, so x = 34/13. Substitute: y = 24/13',
+            markingCriteria: {
+              breakdown: ['Eliminate y by multiplying equations appropriately (1 mark)', 'Add equations to get 13x = 34 (1 mark)', 'Solve for x = 34/13 (1 mark)', 'Find y = 24/13 by substitution (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Elimination method',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me2-q8',
+            question: 'Factorize completely: 2x³ - 8x² + 8x',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '2x³ - 8x² + 8x = 2x(x² - 4x + 4) = 2x(x - 2)²',
+            markingCriteria: {
+              breakdown: ['Take out common factor 2x (1 mark)', 'Factorize x² - 4x + 4 (1 mark)', 'Final answer 2x(x - 2)² (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Factorizing',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me2-q9',
+            question: 'Solve the inequality 4(x + 2) ≥ 3x + 10 and represent your answer on a number line.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: '4x + 8 ≥ 3x + 10, so x ≥ 2. Number line shows closed circle at 2 with arrow pointing right.',
+            markingCriteria: {
+              breakdown: ['Expand: 4x + 8 ≥ 3x + 10 (1 mark)', 'Solve: x ≥ 2 (1 mark)', 'Correct representation on number line (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Linear inequalities',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me2-q10',
+            question: 'Given that g(x) = x² - 3x + 2, find g(4) and solve g(x) = 0.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'g(4) = 16 - 12 + 2 = 6. For g(x) = 0: x² - 3x + 2 = 0. Factorizing: (x - 1)(x - 2) = 0. So x = 1 or x = 2',
+            markingCriteria: {
+              breakdown: ['Calculate g(4) = 6 (1 mark)', 'Set up equation x² - 3x + 2 = 0 (1 mark)', 'Factorize to (x - 1)(x - 2) (1 mark)', 'Find x = 1 (1 mark)', 'Find x = 2 (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Functions and quadratic equations',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      },
+      {
+        id: 'me3-ratio',
+        name: 'Ratio, proportion and rates of change',
+        questions: [
+          {
+            id: 'me3-q1',
+            question: 'The population of a city increases by 4% each year. If the population was 250,000 in 2021, calculate the population in 2024.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Population in 2024 = 250,000 × (1.04)³ = 250,000 × 1.124864 = 281,216',
+            markingCriteria: {
+              breakdown: ['Use compound interest formula with 1.04 (1 mark)', 'Calculate (1.04)³ = 1.124864 (1 mark)', 'Final answer 281,216 (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Compound percentage change',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me3-q2',
+            question: 'y is inversely proportional to x³. When x = 2, y = 4. Find the value of y when x = 4.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'y = k/x³ where k is constant. When x = 2, y = 4: 4 = k/8, so k = 32. When x = 4: y = 32/64 = 1/2',
+            markingCriteria: {
+              breakdown: ['Write y = k/x³ (1 mark)', 'Find k using given values: k = 32 (1 mark)', 'Substitute x = 4 into equation (1 mark)', 'Final answer y = 1/2 (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Inverse proportion',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me3-q3',
+            question: 'Convert 54 km/h to m/s.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: '54 km/h = 54 × 1000 ÷ 3600 = 54000 ÷ 3600 = 15 m/s',
+            markingCriteria: {
+              breakdown: ['Convert km to m and h to s (1 mark)', 'Correct calculation: 15 m/s (1 mark)']
+            },
+            specReference: 'Edexcel 1F - Unit conversions',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me3-q4',
+            question: 'A map has a scale of 1:50000. The actual distance between two landmarks is 12 km. Calculate the distance on the map in centimeters.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Actual distance = 12 km = 1,200,000 cm. Map distance = 1,200,000 ÷ 50,000 = 24 cm',
+            markingCriteria: {
+              breakdown: ['Convert 12 km to cm: 1,200,000 cm (1 mark)', 'Apply scale factor (1 mark)', 'Final answer: 24 cm (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Scale and maps',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me3-q5',
+            question: 'A laptop computer depreciates by 20% each year. After how many years will its value be less than 40% of its original value?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Value after n years = V₀ × (0.8)ⁿ. For 40% value: (0.8)ⁿ < 0.4. Using logarithms: n > log(0.4)/log(0.8) = 4.11. Therefore after 5 years.',
+            markingCriteria: {
+              breakdown: ['Set up inequality (0.8)ⁿ < 0.4 (1 mark)', 'Use logarithms correctly (1 mark)', 'Calculate n > 4.11 (1 mark)', 'Conclude 5 years (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Exponential functions',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me3-q6',
+            question: 'A printer produces 180 pages per hour. If the printer runs for 6.5 hours, how many pages are produced? If 25 pages are damaged, what percentage are in good condition?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Total pages = 180 × 6.5 = 1170 pages. Good pages = 1170 - 25 = 1145. Percentage good = (1145/1170) × 100% = 97.86%',
+            markingCriteria: {
+              breakdown: ['Calculate total pages: 1170 (1 mark)', 'Calculate good pages: 1145 (1 mark)', 'Set up percentage calculation (1 mark)', 'Final answer: 97.86% (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Rate calculations',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me3-q7',
+            question: 'The price of petrol increases from £1.35 per litre to £1.49 per litre. Calculate the percentage increase.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Increase = £1.49 - £1.35 = £0.14. Percentage increase = (0.14/1.35) × 100% = 10.37%',
+            markingCriteria: {
+              breakdown: ['Calculate increase: £0.14 (1 mark)', 'Set up percentage formula (1 mark)', 'Final answer: 10.37% (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Percentage change',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me3-q8',
+            question: 'Four quantities P, Q, R, and S are in the ratio 2:3:5:8. If P + R = 84, find the values of P, Q, R, and S.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Let P = 2x, Q = 3x, R = 5x, S = 8x. Then 2x + 5x = 84, so 7x = 84, x = 12. Therefore P = 24, Q = 36, R = 60, S = 96.',
+            markingCriteria: {
+              breakdown: ['Express in terms of x: P = 2x, Q = 3x, R = 5x, S = 8x (1 mark)', 'Set up equation: 2x + 5x = 84 (1 mark)', 'Solve: x = 12 (1 mark)', 'Find all values: P = 24, Q = 36, R = 60, S = 96 (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Ratio problems',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me3-q9',
+            question: 'y varies directly as the cube of x. When x = 2, y = 24. Find the value of y when x = 3.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'y = kx³ where k is constant. When x = 2, y = 24: 24 = k × 8, so k = 3. When x = 3: y = 3 × 27 = 81',
+            markingCriteria: {
+              breakdown: ['Write y = kx³ (1 mark)', 'Find k = 3 using given values (1 mark)', 'Calculate y = 81 when x = 3 (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Direct proportion',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me3-q10',
+            question: 'A recipe for 6 people uses 350g of rice. How much rice is needed for 15 people? If rice costs £2.80 per kg, what is the cost of rice for 15 people?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'For 15 people: (350 × 15) ÷ 6 = 875g = 0.875kg. Cost = 0.875 × £2.80 = £2.45',
+            markingCriteria: {
+              breakdown: ['Calculate rice for 15 people: 875g (1 mark)', 'Convert to kg: 0.875kg (1 mark)', 'Calculate cost (1 mark)', 'Final answer: £2.45 (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Proportion and unit costs',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      },
+      {
+        id: 'me4-geometry',
+        name: 'Geometry and measures',
+        questions: [
+          {
+            id: 'me4-q1',
+            question: 'In a right-angled triangle, one angle is 42°. A side adjacent to this angle is 12 cm and the side opposite to this angle is k cm. Calculate the value of k.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'tan(42°) = opposite/adjacent = k/12. Therefore k = 12 × tan(42°) = 12 × 0.9004 = 10.80 cm (3 sf)',
+            markingCriteria: {
+              breakdown: ['Identify correct trigonometric ratio: tan(42°) (1 mark)', 'Set up equation: k = 12 × tan(42°) (1 mark)', 'Calculate: k = 10.80 cm (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Trigonometry in right-angled triangles',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me4-q2',
+            question: 'A triangle has vertices at P(1, 2), Q(5, 6), and R(3, 8). Calculate the length of side PQ using the distance formula.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'PQ = √[(5-1)² + (6-2)²] = √[4² + 4²] = √[16 + 16] = √32 = 4√2 ≈ 5.66 units',
+            markingCriteria: {
+              breakdown: ['Find differences: (5-1) = 4, (6-2) = 4 (1 mark)', 'Apply distance formula: √[16 + 16] (1 mark)', 'Simplify: 4√2 or 5.66 units (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Distance formula',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me4-q3',
+            question: 'A sector of a circle has radius 8 cm and central angle 120°. Calculate the arc length of the sector.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Arc length = (θ/360°) × 2πr = (120°/360°) × 2π × 8 = (1/3) × 16π = 16π/3 = 16.76 cm (3 sf)',
+            markingCriteria: {
+              breakdown: ['Use arc length formula (1 mark)', 'Substitute values correctly: (120/360) × 2π × 8 (1 mark)', 'Calculate: 16π/3 = 16.76 cm (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Arc length',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me4-q4',
+            question: 'A sphere has radius 6 cm. Calculate the volume and surface area of the sphere.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Volume = (4/3)πr³ = (4/3)π × 6³ = (4/3)π × 216 = 288π = 904.8 cm³. Surface area = 4πr² = 4π × 36 = 144π = 452.4 cm²',
+            markingCriteria: {
+              breakdown: ['Calculate volume: 288π cm³ (1 mark)', 'Calculate surface area: 144π cm² (1 mark)', 'Volume = 904.8 cm³ (1 mark)', 'Surface area = 452.4 cm² (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Volume and surface area of spheres',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me4-q5',
+            question: 'Triangle DEF is transformed by a translation with vector (-2, 4) to give triangle D\'E\'F\'. Point D has coordinates (3, -1). What are the coordinates of D\'?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'D\' = D + translation vector = (3, -1) + (-2, 4) = (1, 3)',
+            markingCriteria: {
+              breakdown: ['Add translation vector components (1 mark)', 'Correct coordinates D\'(1, 3) (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Translations',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me4-q6',
+            question: 'Calculate the volume of a cone with base radius 5 cm and height 12 cm. Use π = 3.14.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Volume = (1/3)πr²h = (1/3) × 3.14 × 5² × 12 = (1/3) × 3.14 × 25 × 12 = 314 cm³',
+            markingCriteria: {
+              breakdown: ['Use formula V = (1/3)πr²h (1 mark)', 'Substitute values correctly (1 mark)', 'Calculate: 314 cm³ (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Volume of cones',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me4-q7',
+            question: 'In a right-angled triangle, the hypotenuse is 17 cm and one side is 8 cm. Calculate the length of the third side.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Using Pythagoras: a² + b² = c². So 8² + b² = 17², 64 + b² = 289, b² = 225, b = 15 cm',
+            markingCriteria: {
+              breakdown: ['Apply Pythagoras theorem correctly (1 mark)', 'Set up: 64 + b² = 289 (1 mark)', 'Solve: b = 15 cm (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Pythagoras theorem',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me4-q8',
+            question: 'A regular octagon has side length 4 cm. Calculate the perimeter and explain how to find the area using the apothem method.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Perimeter = 8 × 4 = 32 cm. For area: divide octagon into 8 triangles from center. Each triangle has base 4 cm and height equal to apothem. Area = (1/2) × perimeter × apothem = (1/2) × 32 × apothem = 16 × apothem.',
+            markingCriteria: {
+              breakdown: ['Calculate perimeter: 32 cm (1 mark)', 'Explain division into triangles (1 mark)', 'Use apothem formula (1 mark)', 'Area = 16 × apothem (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Regular polygons',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me4-q9',
+            question: 'Triangle ABC is reflected in the line y = x. If A is at (4, 1), what are the coordinates of A\' after the reflection?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'For reflection in y = x: (x, y) → (y, x). So A(4, 1) → A\'(1, 4)',
+            markingCriteria: {
+              breakdown: ['Apply reflection rule: (x, y) → (y, x) (1 mark)', 'Correct coordinates A\'(1, 4) (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Reflections',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me4-q10',
+            question: 'A parallelogram has sides of lengths 9 cm and 12 cm, with an included angle of 65°. Calculate its area. If this parallelogram is the base of a prism with height 8 cm, find the volume.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Area of parallelogram = ab sin(θ) = 9 × 12 × sin(65°) = 108 × 0.9063 = 97.88 cm². Volume = area × height = 97.88 × 8 = 783.04 cm³',
+            markingCriteria: {
+              breakdown: ['Use parallelogram area formula (1 mark)', 'Calculate area: 97.88 cm² (1 mark)', 'Apply volume formula (1 mark)', 'Calculate volume: 783.04 cm³ (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Area of parallelogram and prism volume',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      },
+      {
+        id: 'me5-probability',
+        name: 'Probability',
+        questions: [
+          {
+            id: 'me5-q1',
+            question: 'A box contains 6 red, 4 blue, and 3 yellow balls. Two balls are drawn without replacement. Calculate the probability that both balls are blue.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'P(first blue) = 4/13. P(second blue | first blue) = 3/12 = 1/4. P(both blue) = (4/13) × (1/4) = 4/52 = 1/13',
+            markingCriteria: {
+              breakdown: ['P(first blue) = 4/13 (1 mark)', 'P(second blue | first blue) = 3/12 (1 mark)', 'P(both blue) = 1/13 (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Conditional probability',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me5-q2',
+            question: 'The probability that a student passes a test is 0.7. Calculate the probability that exactly 3 out of 5 students pass the test.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'This is binomial: P(X = 3) = C(5,3) × (0.7)³ × (0.3)² = 10 × 0.343 × 0.09 = 0.3087',
+            markingCriteria: {
+              breakdown: ['Recognize binomial distribution (1 mark)', 'Calculate C(5,3) = 10 (1 mark)', 'Calculate (0.7)³ × (0.3)² = 0.03087 (1 mark)', 'Final answer: 0.3087 (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Binomial probability',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me5-q3',
+            question: 'A fair eight-sided die (numbered 1-8) is rolled twice. Calculate the probability of getting at least one 6.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'P(at least one 6) = 1 - P(no 6s) = 1 - (7/8)² = 1 - 49/64 = 15/64',
+            markingCriteria: {
+              breakdown: ['Use complement: 1 - P(no 6s) (1 mark)', 'P(no 6 on one roll) = 7/8 (1 mark)', 'P(no 6s in two rolls) = (7/8)² = 49/64 (1 mark)', 'Final answer: 15/64 (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Independent events',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me5-q4',
+            question: 'A biased coin has P(Heads) = 0.65. The coin is tossed until a tail appears. Calculate the probability that the first tail appears on the 4th toss.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'For first tail on 4th toss: P(HHHT) = P(H) × P(H) × P(H) × P(T) = 0.65 × 0.65 × 0.65 × 0.35 = 0.0962',
+            markingCriteria: {
+              breakdown: ['Identify sequence: HHHT (1 mark)', 'P(H) = 0.65, P(T) = 0.35 (1 mark)', 'Calculate: (0.65)³ × 0.35 = 0.0962 (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Independent events',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me5-q5',
+            question: 'A quality control process finds that 2% of items produced are defective. In a batch of 200 items, what is the probability that exactly 3 items are defective?',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'This follows binomial distribution with n = 200, p = 0.02. P(X = 3) = C(200,3) × (0.02)³ × (0.98)¹⁹⁷ = 1,313,400 × 0.000008 × 0.0183 = 0.1927',
+            markingCriteria: {
+              breakdown: ['Recognize binomial with n = 200, p = 0.02 (1 mark)', 'Calculate C(200,3) = 1,313,400 (1 mark)', 'Calculate (0.02)³ = 0.000008 (1 mark)', 'Calculate (0.98)¹⁹⁷ ≈ 0.0183 (1 mark)', 'Final answer: 0.1927 (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Binomial probability',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me5-q6',
+            question: 'Two fair six-sided dice are rolled. Calculate the probability that the product of the two numbers is 12.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Possible ways to get product 12: (2,6), (3,4), (4,3), (6,2) = 4 ways. Total outcomes = 36. Probability = 4/36 = 1/9',
+            markingCriteria: {
+              breakdown: ['Identify all ways to get product 12: 4 ways (1 mark)', 'Total possible outcomes: 36 (1 mark)', 'Probability = 1/9 (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Probability of combined events',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me5-q7',
+            question: 'Bag X contains 4 red and 3 green balls. Bag Y contains 2 red and 5 green balls. A bag is chosen at random and then a ball is drawn. Calculate the probability of drawing a green ball.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'P(green) = P(Bag X) × P(green|Bag X) + P(Bag Y) × P(green|Bag Y) = (1/2) × (3/7) + (1/2) × (5/7) = 3/14 + 5/14 = 8/14 = 4/7',
+            markingCriteria: {
+              breakdown: ['P(green|Bag X) = 3/7 and P(green|Bag Y) = 5/7 (1 mark)', 'Use law of total probability (1 mark)', 'Calculate each branch correctly (1 mark)', 'Final answer: 4/7 (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Law of total probability',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me5-q8',
+            question: 'In a game, the probability of scoring is 0.3. If the game is played 8 times, calculate the probability of scoring exactly 2 times.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Using binomial: P(X = 2) = C(8,2) × (0.3)² × (0.7)⁶ = 28 × 0.09 × 0.1176 = 0.2965',
+            markingCriteria: {
+              breakdown: ['Recognize binomial distribution (1 mark)', 'Calculate C(8,2) = 28 (1 mark)', 'Calculate (0.3)² × (0.7)⁶ (1 mark)', 'Final answer: 0.2965 (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Binomial probability',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me5-q9',
+            question: 'A deck contains cards numbered 1 to 12. Four cards are drawn without replacement. What is the probability that all four numbers are odd?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Odd numbers: 1, 3, 5, 7, 9, 11 (6 odd, 6 even). P(all odd) = (6/12) × (5/11) × (4/10) × (3/9) = 360/11880 = 1/33',
+            markingCriteria: {
+              breakdown: ['Identify 6 odd numbers out of 12 (1 mark)', 'P(first odd) = 6/12 = 1/2 (1 mark)', 'Calculate remaining probabilities: 5/11, 4/10, 3/9 (1 mark)', 'Final answer: 1/33 (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Conditional probability without replacement',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me5-q10',
+            question: 'Events C and D are independent. P(C) = 0.5 and P(D) = 0.3. Calculate P(C ∩ D), P(C ∪ D), and P(C\' ∩ D\').',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'P(C ∩ D) = P(C) × P(D) = 0.5 × 0.3 = 0.15. P(C ∪ D) = P(C) + P(D) - P(C ∩ D) = 0.5 + 0.3 - 0.15 = 0.65. P(C\') = 0.5, P(D\') = 0.7, so P(C\' ∩ D\') = 0.5 × 0.7 = 0.35',
+            markingCriteria: {
+              breakdown: ['Calculate P(C ∩ D) = 0.15 using independence (1 mark)', 'Use addition rule for P(C ∪ D) = 0.65 (1 mark)', 'Find P(C\') = 0.5 and P(D\') = 0.7 (1 mark)', 'Calculate P(C\' ∩ D\') = 0.35 (1 mark)', 'Show all working clearly (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Independent events and set operations',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      },
+      {
+        id: 'me6-statistics',
+        name: 'Statistics',
+        questions: [
+          {
+            id: 'me6-q1',
+            question: 'The masses (in kg) of 10 students are: 58, 62, 55, 67, 61, 59, 64, 60, 63, 56. Calculate the mean, median, and range.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Mean = (58+62+55+67+61+59+64+60+63+56)/10 = 605/10 = 60.5 kg. Ordered: 55, 56, 58, 59, 60, 61, 62, 63, 64, 67. Median = (60+61)/2 = 60.5 kg. Range = 67-55 = 12 kg.',
+            markingCriteria: {
+              breakdown: ['Calculate mean: 60.5 kg (1 mark)', 'Order data and find median: 60.5 kg (1 mark)', 'Calculate range: 12 kg (1 mark)', 'All answers correct with units (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Measures of central tendency',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me6-q2',
+            question: 'A frequency table shows: Score: 1(3), 2(5), 3(8), 4(4), 5(2). Calculate the mean and modal score.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Total frequency = 3+5+8+4+2 = 22. Sum = 1×3 + 2×5 + 3×8 + 4×4 + 5×2 = 3+10+24+16+10 = 63. Mean = 63/22 = 2.86. Mode = 3 (highest frequency = 8)',
+            markingCriteria: {
+              breakdown: ['Calculate total and sum correctly (1 mark)', 'Mean = 63/22 = 2.86 (1 mark)', 'Mode = 3 (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Frequency tables and averages',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me6-q3',
+            question: 'Draw a cumulative frequency curve for the data: Height (cm): 150-160(12), 160-170(18), 170-180(25), 180-190(15), 190-200(8). Use it to estimate the median and interquartile range.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Total frequency = 78. Cumulative frequencies: 150(0), 160(12), 170(30), 180(55), 190(70), 200(78). Median at 39th value ≈ 173 cm. Q1 at 19.5th value ≈ 167 cm. Q3 at 58.5th value ≈ 181 cm. IQR = 181-167 = 14 cm.',
+            markingCriteria: {
+              breakdown: ['Calculate cumulative frequencies correctly (1 mark)', 'Plot cumulative frequency curve (1 mark)', 'Estimate median ≈ 173 cm (1 mark)', 'Estimate Q1 and Q3 (1 mark)', 'Calculate IQR = 14 cm (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Cumulative frequency',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me6-q4',
+            question: 'The heights of 15 plants are: 12, 15, 18, 14, 16, 19, 13, 17, 20, 14, 16, 18, 15, 17, 16 cm. Calculate the standard deviation.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Mean = 240/15 = 16 cm. Variance = Σ(x-mean)²/n = [(12-16)²+(15-16)²+...+(16-16)²]/15 = 58/15 = 3.867. Standard deviation = √3.867 = 1.97 cm',
+            markingCriteria: {
+              breakdown: ['Calculate mean = 16 cm (1 mark)', 'Calculate deviations and squares (1 mark)', 'Calculate variance = 3.867 (1 mark)', 'Standard deviation = 1.97 cm (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Standard deviation',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me6-q5',
+            question: 'A scatter graph shows a strong positive correlation between study time (hours) and test score (%). The line of best fit is y = 8x + 25. Interpret the gradient and y-intercept in context.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Gradient = 8: For each additional hour of study, the test score increases by 8 percentage points on average. Y-intercept = 25: A student who studies for 0 hours would be expected to score 25% on the test.',
+            markingCriteria: {
+              breakdown: ['Interpret gradient correctly in context (2 marks)', 'Interpret y-intercept correctly in context (2 marks)']
+            },
+            specReference: 'Edexcel 2H - Correlation and regression',
+            calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me6-q6',
+            question: 'A histogram shows class intervals and frequencies. Class 20-30 has frequency density 2.4 and class width 10. Class 30-40 has frequency 18. Calculate the frequency for 20-30 and frequency density for 30-40.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Frequency = frequency density × class width. For 20-30: frequency = 2.4 × 10 = 24. For 30-40: frequency density = frequency ÷ class width = 18 ÷ 10 = 1.8',
+            markingCriteria: {
+              breakdown: ['Use formula: frequency = frequency density × class width (1 mark)', 'Calculate frequency for 20-30: 24 (1 mark)', 'Calculate frequency density for 30-40: 1.8 (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Histograms',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me6-q7',
+            question: 'Two groups of students take the same test. Group A: mean = 72, standard deviation = 8, n = 25. Group B: mean = 68, standard deviation = 12, n = 30. Compare the performance of the two groups.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Group A has higher mean (72 vs 68), showing better average performance. Group A has lower standard deviation (8 vs 12), showing more consistent performance. Group A students are more tightly clustered around their mean, while Group B shows more variation in scores.',
+            markingCriteria: {
+              breakdown: ['Compare means correctly (1 mark)', 'Compare standard deviations correctly (1 mark)', 'Interpret consistency/variation (1 mark)', 'Draw overall conclusion about performance (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Comparing distributions',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me6-q8',
+            question: 'In a survey of 200 people about their favorite color, the results were: Red(45), Blue(62), Green(38), Yellow(28), Other(27). Draw a pie chart to represent this data.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Total = 200. Angles: Red = (45/200) × 360° = 81°, Blue = (62/200) × 360° = 111.6°, Green = (38/200) × 360° = 68.4°, Yellow = (28/200) × 360° = 50.4°, Other = (27/200) × 360° = 48.6°',
+            markingCriteria: {
+              breakdown: ['Calculate angles using (frequency/total) × 360° (1 mark)', 'All angles calculated correctly (2 marks)', 'Draw pie chart with labels (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Pie charts',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me6-q9',
+            question: 'A sample of 50 light bulbs has a mean lifetime of 1200 hours. Calculate a 95% confidence interval for the population mean, given that the population standard deviation is 150 hours.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Standard error = σ/√n = 150/√50 = 21.21. For 95% confidence, z = 1.96. Margin of error = 1.96 × 21.21 = 41.57. Confidence interval = 1200 ± 41.57 = (1158.43, 1241.57) hours',
+            markingCriteria: {
+              breakdown: ['Calculate standard error: 21.21 (1 mark)', 'Use correct z-value: 1.96 (1 mark)', 'Calculate margin of error: 41.57 (1 mark)', 'Give confidence interval: (1158.43, 1241.57) (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Confidence intervals',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me6-q10',
+            question: 'A chi-squared test is performed to test if a dice is fair. The observed frequencies for faces 1-6 are: 8, 12, 15, 9, 11, 5. The expected frequency for each face is 10. Calculate the chi-squared test statistic.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'χ² = Σ[(Observed - Expected)²/Expected] = [(8-10)²/10] + [(12-10)²/10] + [(15-10)²/10] + [(9-10)²/10] + [(11-10)²/10] + [(5-10)²/10] = 0.4 + 0.4 + 2.5 + 0.1 + 0.1 + 2.5 = 6.0',
+            markingCriteria: {
+              breakdown: ['Use chi-squared formula correctly (1 mark)', 'Calculate each term: 0.4, 0.4, 2.5, 0.1, 0.1, 2.5 (2 marks)', 'Sum to get χ² = 6.0 (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Chi-squared test',
+            calculatorGuidance: 'calc-recommended'
+          }
+        ]
+      }
+    ]
+  },
+  {
     id: 'biology',
     name: 'Biology',
     topics: [
