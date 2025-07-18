@@ -161,7 +161,7 @@ const PredictedQuestions = () => {
           </h2>
           <p className="text-white/90 text-lg max-w-2xl mx-auto">
             Choose a subject to start your full-length predicted exam practice. 
-            Each paper follows the exact AQA format with real exam timing.
+            Each paper follows the official exam board format with real exam timing.
           </p>
         </div>
 
