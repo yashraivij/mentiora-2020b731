@@ -1099,6 +1099,70 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return questions;
     }
     
+    // Special format for English Language
+    if (subjectId === 'english-language') {
+      // Section A: Textual Variations and Representations (40 marks)
+      questions.push({
+        id: 'english-lang-section-a',
+        questionNumber: 1,
+        text: `Study Texts A and B below.
+
+Text A: Extract from 1887 travel journal
+"We ascended the path slowly, hemmed in by gnarled trees and heavy mist. The locals regarded us with a cautious curiosity, their weathered faces betraying neither welcome nor hostility. Our lodging was modest but bore the marks of sincere hospitality."
+
+Text B: Modern online hotel review (2024)
+"The path up to the hotel was a bit steep, but the views were totally worth it! Locals were super friendly and helpful - they even gave us directions when we got lost. Our room was small but clean and comfy."
+
+Analyse how language is used in Texts A and B to present the writer's experiences of travel.
+
+In your response, you should:
+• explore language levels such as lexis, grammar, graphology, and pragmatics
+• compare how representation and identity are constructed in each text
+• refer to context (audience, purpose, genre, mode, time)
+
+[40 marks]`,
+        marks: 40,
+        section: 'A'
+      });
+
+      // Section B: Children's Language Development (60 marks)
+      questions.push({
+        id: 'english-lang-section-b1',
+        questionNumber: 2,
+        text: `Study the transcript below of a 3-year-old child speaking to their parent while playing with toy animals.
+
+Parent: "What's the cow doing?"
+Child: "Cow go moo moo! I make him jump."
+Parent: "Yes, the cow says moo. Can you make him walk?"
+Child: "Look! Cow jump high! Now cow running fast fast!"
+Parent: "That's right, the cow is running fast."
+Child: "My cow. Him tired now. Cow sleep."
+
+Discuss what this transcript shows about the child's language development.
+
+In your answer, refer to:
+• grammatical development
+• theories of language acquisition (e.g. Skinner, Chomsky, Piaget)
+• how the child uses language for different purposes
+
+[30 marks]`,
+        marks: 30,
+        section: 'B'
+      });
+
+      questions.push({
+        id: 'english-lang-section-b2',
+        questionNumber: 3,
+        text: `Discuss the role of interaction with caregivers in children's early language development. Refer to relevant research and theories.
+
+[30 marks]`,
+        marks: 30,
+        section: 'B'
+      });
+
+      return questions;
+    }
+
     // Special format for Religious Studies
     if (subjectId === 'religious-studies') {
       // Generate questions for all 6 religions (students choose 2)
@@ -1152,6 +1216,9 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
   };
 
   const getTotalMarks = () => {
+    if (subjectId === 'english-language') {
+      return 100; // Section A: 40 marks + Section B: 60 marks
+    }
     if (subjectId === 'english-literature') {
       return 60; // Two questions at 30 marks each
     }

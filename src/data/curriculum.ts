@@ -26,6 +26,364 @@ export interface Subject {
 
 export const curriculum: Subject[] = [
   {
+    id: 'english-language',
+    name: 'English Language',
+    topics: [
+      {
+        id: 'textual-variations-representations',
+        name: 'Textual Variations and Representations',
+        questions: [
+          {
+            id: 'tvr-q1',
+            question: 'Compare how language is used to represent authority in these two texts from different time periods.',
+            marks: 40,
+            difficulty: 'hard',
+            modelAnswer: 'Text A uses formal, hierarchical language with passive constructions like "it was decreed" and archaic terms such as "henceforth" to establish institutional authority. The lexical choices include Latin-derived words and complex syntax showing education and power. Text B employs direct commands and personal pronouns to create immediacy and relatability while maintaining authority through confident assertions.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of language features in Text A (8-10 marks)',
+                'Analysis of language features in Text B (8-10 marks)', 
+                'Comparison between texts (8-10 marks)',
+                'Reference to context and purpose (8-10 marks)',
+                'Use of linguistic terminology (4-6 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q2',
+            question: 'Analyse how graphological features are used differently in these two promotional texts.',
+            marks: 40,
+            difficulty: 'hard',
+            modelAnswer: 'Text A utilises traditional typographical hierarchy with serif fonts and justified text blocks to convey reliability and establishment. The spacing and formal layout suggest permanence. Text B employs dynamic typography with varying font sizes, colours, and white space to create visual impact and urgency, reflecting modern marketing techniques.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of graphological features in Text A (8-10 marks)',
+                'Analysis of graphological features in Text B (8-10 marks)',
+                'Comparison of visual impact (8-10 marks)', 
+                'Discussion of audience and purpose (8-10 marks)',
+                'Technical accuracy (4-6 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q3',
+            question: 'Compare how identity is constructed through language in these two personal narratives.',
+            marks: 40,
+            difficulty: 'hard',
+            modelAnswer: 'Text A constructs identity through formal register and third-person narration, creating distance and objectivity. The writer uses abstract nouns and complex sentences to present themselves as educated and reflective. Text B uses colloquial language, contractions, and first-person immediacy to create an authentic, relatable persona.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of identity construction in Text A (8-10 marks)',
+                'Analysis of identity construction in Text B (8-10 marks)',
+                'Comparison of linguistic choices (8-10 marks)',
+                'Discussion of social context (8-10 marks)', 
+                'Quality of expression (4-6 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q4',
+            question: 'Analyse how pragmatic meaning is created differently in these two political speeches.',
+            marks: 40,
+            difficulty: 'hard',
+            modelAnswer: 'Text A employs implied meanings through metaphor and allusion, requiring audience interpretation and creating inclusive communities of understanding. The speaker uses hedging and conditional language to avoid direct confrontation. Text B uses explicit statements and declaratives to create clear positioning, with minimal ambiguity.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of pragmatic features in Text A (8-10 marks)',
+                'Analysis of pragmatic features in Text B (8-10 marks)',
+                'Comparison of implied meanings (8-10 marks)',
+                'Discussion of audience response (8-10 marks)',
+                'Linguistic accuracy (4-6 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q5',
+            question: 'Compare how gender is represented through language in these two magazine articles.',
+            marks: 40,
+            difficulty: 'hard',
+            modelAnswer: 'Text A perpetuates traditional gender roles through lexical choices like "nurturing" and "gentle," using adjectives that emphasise appearance and emotion. The syntax often places women as objects rather than agents. Text B challenges stereotypes through assertive language and technical vocabulary, positioning women as experts and decision-makers.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of gender representation in Text A (8-10 marks)',
+                'Analysis of gender representation in Text B (8-10 marks)',
+                'Comparison of linguistic strategies (8-10 marks)',
+                'Discussion of social implications (8-10 marks)',
+                'Critical evaluation (4-6 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q6',
+            question: 'Analyse how mode affects language choices in these two travel texts.',
+            marks: 40,
+            difficulty: 'hard',
+            modelAnswer: 'Text A (written mode) allows for complex sentence structures, detailed descriptions, and careful word selection with time for revision. The permanence of writing enables nuanced vocabulary choices. Text B (spoken mode) shows features like false starts, fillers, and more informal register, with immediate audience interaction affecting language choices.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of written mode features (8-10 marks)',
+                'Analysis of spoken mode features (8-10 marks)',
+                'Comparison of constraints and opportunities (8-10 marks)',
+                'Discussion of audience adaptation (8-10 marks)',
+                'Technical understanding (4-6 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q7',
+            question: 'Compare how persuasive techniques are employed in these two charity appeal texts.',
+            marks: 40,
+            difficulty: 'hard',
+            modelAnswer: 'Text A uses emotive language and personal pronouns to create emotional connection, with statistics providing credibility. The structure builds from problem to solution. Text B employs direct address and imperative mood to create urgency, using visual elements to support the verbal message and create immediate impact.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of persuasive features in Text A (8-10 marks)',
+                'Analysis of persuasive features in Text B (8-10 marks)',
+                'Comparison of effectiveness (8-10 marks)',
+                'Discussion of audience targeting (8-10 marks)',
+                'Quality of analysis (4-6 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q8',
+            question: 'Analyse how power relationships are established through language in these two workplace texts.',
+            marks: 40,
+            difficulty: 'hard',
+            modelAnswer: 'Text A establishes hierarchy through formal titles, passive voice removing agency, and complex bureaucratic language that excludes non-experts. Text B uses inclusive pronouns and collaborative language to flatten hierarchy, though certain lexical choices still maintain professional boundaries.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of power markers in Text A (8-10 marks)',
+                'Analysis of power markers in Text B (8-10 marks)',
+                'Comparison of hierarchical structures (8-10 marks)',
+                'Discussion of workplace dynamics (8-10 marks)',
+                'Sophisticated analysis (4-6 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q9',
+            question: 'Compare how regional identity is constructed in these two dialect texts.',
+            marks: 40,
+            difficulty: 'hard',
+            modelAnswer: 'Text A uses phonological representations of accent through spelling modifications and includes regionalisms that mark geographical identity. The syntax may show non-standard features reflecting local patterns. Text B standardises language but includes cultural references and place-specific vocabulary to maintain regional connection.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of dialect features in Text A (8-10 marks)',
+                'Analysis of regional markers in Text B (8-10 marks)',
+                'Comparison of identity construction (8-10 marks)',
+                'Discussion of social attitudes (8-10 marks)',
+                'Linguistic sensitivity (4-6 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q10',
+            question: 'Analyse how technological change has affected language use in these two communication texts.',
+            marks: 40,
+            difficulty: 'hard',
+            modelAnswer: 'Text A (traditional letter) employs formal conventions, complete sentences, and conventional spelling due to physical constraints and social expectations. Text B (digital message) shows compression techniques, abbreviations, and emoji use, reflecting speed and informal context of digital communication.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of traditional communication features (8-10 marks)',
+                'Analysis of digital communication features (8-10 marks)',
+                'Comparison of technological influence (8-10 marks)',
+                'Discussion of social change (8-10 marks)',
+                'Evaluative commentary (4-6 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          }
+        ]
+      },
+      {
+        id: 'childrens-language-development',
+        name: 'Children\'s Language Development',
+        questions: [
+          {
+            id: 'cld-q1',
+            question: 'Analyse this transcript of a 2-year-old child talking about their toys. What does it reveal about their phonological development?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The transcript shows typical phonological processes including cluster reduction where "truck" becomes "tuck" and final consonant deletion where "cat" becomes "ca." The child demonstrates consonant substitution, replacing difficult sounds with easier ones. This aligns with normal developmental patterns described by research.',
+            markingCriteria: {
+              breakdown: [
+                'Identification of phonological features (6-8 marks)',
+                'Reference to developmental theories (6-8 marks)',
+                'Analysis of patterns (6-8 marks)',
+                'Application to transcript (6-8 marks)',
+                'Technical accuracy (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q2',
+            question: 'Using the transcript provided, analyse how this 18-month-old child is developing their understanding of grammar.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The child shows telegraphic speech with two-word combinations following basic word order patterns. They demonstrate understanding of semantic relations like agent-action ("daddy go") and possession ("my teddy"). This reflects Chomsky\'s ideas about innate grammar acquisition.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of grammatical features (6-8 marks)',
+                'Reference to language acquisition theories (6-8 marks)',
+                'Discussion of semantic development (6-8 marks)',
+                'Use of transcript evidence (6-8 marks)',
+                'Quality of expression (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q3',
+            question: 'Analyse how caregivers\' speech patterns in this transcript support the child\'s language development.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The caregiver uses child-directed speech with higher pitch, slower tempo, and exaggerated intonation. They provide expansions of the child\'s utterances and offer positive reinforcement, supporting Vygotsky\'s zone of proximal development theory and Bruner\'s scaffolding concept.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of caregiver speech features (6-8 marks)',
+                'Reference to support theories (6-8 marks)',
+                'Discussion of interaction patterns (6-8 marks)',
+                'Evidence from transcript (6-8 marks)',
+                'Critical evaluation (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q4',
+            question: 'Using the writing sample provided, analyse how this 5-year-old is developing their understanding of spelling patterns.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The child demonstrates phonetic spelling strategies, representing sounds they hear with logical letter choices. Errors like "sed" for "said" show application of phonic rules. The child is moving from pre-communicative to semi-phonetic spelling stage, showing growing phonological awareness.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of spelling strategies (6-8 marks)',
+                'Reference to developmental stages (6-8 marks)',
+                'Discussion of phonological awareness (6-8 marks)',
+                'Use of writing sample evidence (6-8 marks)',
+                'Theoretical understanding (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q5',
+            question: 'Analyse how this 3-year-old uses language for different functions in the playground transcript.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The child demonstrates Halliday\'s language functions including regulatory ("stop that"), interactional ("play with me"), and representational language. They use language to control others, maintain relationships, and describe their world, showing sophisticated pragmatic development.',
+            markingCriteria: {
+              breakdown: [
+                'Identification of language functions (6-8 marks)',
+                'Reference to Halliday\'s functions (6-8 marks)',
+                'Analysis of pragmatic development (6-8 marks)',
+                'Evidence from transcript (6-8 marks)',
+                'Contextual understanding (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q6',
+            question: 'Discuss the role of interaction in children\'s early vocabulary development, referring to relevant theories.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Social interaction is crucial for vocabulary acquisition through joint attention, labelling activities, and contextual learning. Vygotsky emphasises social construction of knowledge while Bruner\'s LASS theory shows how caregivers facilitate language learning through structured interactions and scaffolding.',
+            markingCriteria: {
+              breakdown: [
+                'Discussion of interaction importance (6-8 marks)',
+                'Reference to relevant theories (6-8 marks)',
+                'Analysis of learning mechanisms (6-8 marks)',
+                'Examples and evidence (6-8 marks)',
+                'Critical evaluation (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q7',
+            question: 'Analyse how nature versus nurture influences are evident in this transcript of siblings learning language.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'The transcript may show universal patterns supporting nativist theories (Chomsky\'s LAD), such as similar error types. However, environmental differences in input and feedback demonstrate behaviorist influences (Skinner). The interaction suggests both innate capacity and learned behaviours contribute to acquisition.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of innate factors (6-8 marks)',
+                'Analysis of environmental factors (6-8 marks)',
+                'Reference to key theories (6-8 marks)',
+                'Use of transcript evidence (6-8 marks)',
+                'Balanced evaluation (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q8',
+            question: 'Using the transcript provided, analyse how this 4-year-old child is developing their narrative skills.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'The child demonstrates emerging story structure with beginning, middle, and end, though may show non-linear sequencing. They use past tense markers and temporal connectives. The narrative shows developing theory of mind as they consider character motivations and audience needs.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of narrative structure (6-8 marks)',
+                'Discussion of linguistic features (6-8 marks)',
+                'Reference to cognitive development (6-8 marks)',
+                'Evidence from transcript (6-8 marks)',
+                'Sophisticated analysis (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q9',
+            question: 'Analyse how bilingual language development is evident in this transcript of a child switching between languages.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'The transcript demonstrates code-switching as a sophisticated linguistic strategy, not confusion. The child shows metalinguistic awareness by choosing appropriate languages for different contexts and audiences. This supports additive bilingualism theories rather than deficit models.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of code-switching patterns (6-8 marks)',
+                'Discussion of bilingual development (6-8 marks)',
+                'Reference to bilingual theories (6-8 marks)',
+                'Use of transcript evidence (6-8 marks)',
+                'Cultural sensitivity (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q10',
+            question: 'Evaluate the claim that children\'s language development follows predictable stages, using transcript evidence.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'While certain patterns appear universal (one-word to two-word stages), individual variation is significant. The transcript may show typical features for the age but also unique developments. Research suggests broad stages exist but with considerable flexibility and individual differences.',
+            markingCriteria: {
+              breakdown: [
+                'Evaluation of stage theories (6-8 marks)',
+                'Discussion of individual variation (6-8 marks)',
+                'Reference to research evidence (6-8 marks)',
+                'Analysis of transcript data (6-8 marks)',
+                'Justified conclusion (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          }
+        ]
+      }
+    ]
+  },
+  {
     id: 'religious-studies',
     name: 'Religious Studies',
     topics: [
