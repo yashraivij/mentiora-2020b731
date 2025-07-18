@@ -42,6 +42,39 @@ const PredictedExam = () => {
     return null;
   }
 
+
+  // Function to determine tier based on question difficulty and content
+  const getTierLabel = (question: ExamQuestion): string => {
+    // Get the original question data to check difficulty
+    let difficulty = 'easy';
+    let marks = question.marks;
+    
+    // Try to find the original question in curriculum to get difficulty
+    for (const topic of subject.topics) {
+      const originalQ = topic.questions.find(q => q.question === question.text);
+      if (originalQ) {
+        difficulty = originalQ.difficulty;
+        break;
+      }
+    }
+    
+    // Determine tier based on difficulty, marks, and content
+    const isHigherTier = 
+      difficulty === 'hard' || 
+      marks >= 6 || 
+      question.text.toLowerCase().includes('evaluate') ||
+      question.text.toLowerCase().includes('analyse') ||
+      question.text.toLowerCase().includes('compare and contrast') ||
+      question.text.toLowerCase().includes('justify') ||
+      question.text.toLowerCase().includes('assess') ||
+      question.text.toLowerCase().includes('to what extent') ||
+      question.text.toLowerCase().includes('discuss') ||
+      (question.text.toLowerCase().includes('explain') && marks >= 4) ||
+      (question.text.toLowerCase().includes('describe') && marks >= 5);
+    
+    return isHigherTier ? '[Higher Tier]' : '[Foundation Tier]';
+  };
+
   // Helper functions for English Literature exam format
   const getShakespeareExtract = (playId: string): string => {
     const extracts = {
@@ -1502,9 +1535,14 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
               <CardHeader>
                 <div className="flex justify-between items-start">
                   <div>
-                    <CardTitle className="text-xl">
-                      Question {examQuestions[currentQuestion].questionNumber}
-                    </CardTitle>
+                    <div className="flex items-center gap-2 mb-1">
+                      <CardTitle className="text-xl">
+                        Question {examQuestions[currentQuestion].questionNumber}
+                      </CardTitle>
+                      <Badge variant={getTierLabel(examQuestions[currentQuestion]).includes('Higher') ? "destructive" : "secondary"} className="text-xs">
+                        {getTierLabel(examQuestions[currentQuestion])}
+                      </Badge>
+                    </div>
                     {examQuestions[currentQuestion].section && (
                       <Badge variant="outline" className="mt-2">
                         Section {examQuestions[currentQuestion].section}
