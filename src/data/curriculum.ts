@@ -8112,34 +8112,34 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'b1-q1',
-            question: 'Name the three main parts of a plant cell that are not found in animal cells.',
-            marks: 3,
+            question: 'What is the function of the ribosomes in a cell?',
+            marks: 1,
             difficulty: 'easy',
-            modelAnswer: 'Cell wall, chloroplasts, and permanent vacuole',
+            modelAnswer: 'Protein synthesis',
             markingCriteria: {
-              breakdown: ['Cell wall (1 mark)', 'Chloroplasts (1 mark)', 'Permanent vacuole (1 mark)']
+              breakdown: ['Protein synthesis (1 mark)']
             },
             specReference: 'B1.1'
           },
           {
             id: 'b1-q2',
-            question: 'Explain the function of mitochondria in cells.',
+            question: 'Name two adaptations of a sperm cell.',
             marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Mitochondria are the site of cellular respiration, where glucose is broken down to release energy (ATP) for cellular processes.',
+            difficulty: 'medium',
+            modelAnswer: 'Long tail for swimming and many mitochondria for energy',
             markingCriteria: {
-              breakdown: ['Site of cellular respiration (1 mark)', 'Releases energy/ATP (1 mark)']
+              breakdown: ['Long tail for swimming (1 mark)', 'Many mitochondria for energy (1 mark)']
             },
             specReference: 'B1.2'
           },
           {
             id: 'b1-q3',
-            question: 'Describe the process of diffusion.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Diffusion is the net movement of particles from an area of high concentration to an area of low concentration down a concentration gradient. It is a passive process that does not require energy.',
+            question: 'Describe the stages of the cell cycle and explain why cell division is important for organisms.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Cell cycle stages: G1 (growth), S (DNA synthesis), G2 (growth and preparation), M (mitosis and cytokinesis). Importance: growth of organism, repair of damaged tissues, replacement of worn-out cells, asexual reproduction in some organisms.',
             markingCriteria: {
-              breakdown: ['Movement from high to low concentration (1 mark)', 'Down concentration gradient (1 mark)', 'Passive process/no energy required (1 mark)']
+              breakdown: ['G1 phase - growth (1 mark)', 'S phase - DNA synthesis (1 mark)', 'G2 phase - preparation for division (1 mark)', 'M phase - mitosis and cytokinesis (1 mark)', 'Importance: growth/repair/replacement (1 mark)', 'Asexual reproduction (1 mark)']
             },
             specReference: 'B1.3'
           },
@@ -8228,34 +8228,34 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'b2-q1',
-            question: 'Define the term "tissue".',
-            marks: 2,
+            question: 'Name the enzyme that breaks down proteins.',
+            marks: 1,
             difficulty: 'easy',
-            modelAnswer: 'A tissue is a group of similar cells that work together to perform a specific function.',
+            modelAnswer: 'Protease',
             markingCriteria: {
-              breakdown: ['Group of similar cells (1 mark)', 'Work together for specific function (1 mark)']
+              breakdown: ['Protease (1 mark)']
             },
             specReference: 'B2.1'
           },
           {
             id: 'b2-q2',
-            question: 'Name the four main types of tissue in animals.',
-            marks: 4,
+            question: 'What is the role of bile in digestion?',
+            marks: 2,
             difficulty: 'medium',
-            modelAnswer: 'Epithelial tissue, connective tissue, muscle tissue, and nervous tissue',
+            modelAnswer: 'Bile neutralises stomach acid and emulsifies fats to increase surface area for lipase enzymes.',
             markingCriteria: {
-              breakdown: ['Epithelial tissue (1 mark)', 'Connective tissue (1 mark)', 'Muscle tissue (1 mark)', 'Nervous tissue (1 mark)']
+              breakdown: ['Neutralises stomach acid (1 mark)', 'Emulsifies fats/increases surface area (1 mark)']
             },
             specReference: 'B2.2'
           },
           {
             id: 'b2-q3',
-            question: 'Explain the function of the heart in the circulatory system.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'The heart pumps blood around the body, delivering oxygen and nutrients to cells and removing waste products.',
+            question: 'Describe how enzymes work, including the effect of temperature and pH.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Enzymes are biological catalysts with active sites complementary to substrate shape. They lower activation energy for reactions. Temperature increases enzyme activity until optimum, then denaturing occurs. pH affects enzyme shape - too high or low denatures the active site. Each enzyme has specific optimum temperature and pH.',
             markingCriteria: {
-              breakdown: ['Pumps blood around body (1 mark)', 'Delivers oxygen/nutrients and removes waste (1 mark)']
+              breakdown: ['Enzymes are biological catalysts (1 mark)', 'Active site complementary to substrate (1 mark)', 'Lower activation energy (1 mark)', 'Temperature increases activity to optimum then denatures (1 mark)', 'pH affects shape/active site (1 mark)', 'Each enzyme has specific optimum (1 mark)']
             },
             specReference: 'B2.3'
           },
