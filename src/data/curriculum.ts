@@ -8108,88 +8108,11 @@ export const curriculum: Subject[] = [
     topics: [
       {
         id: 'b1-cell-biology',
-        name: 'Cell biology',
+        name: '📍Cell Biology',
         questions: [
           {
             id: 'b1-q1',
-            question: 'Name the three structures found in plant cells but not in animal cells.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Cell wall, chloroplasts, and permanent vacuole',
-            markingCriteria: {
-              breakdown: ['Cell wall (1 mark)', 'Chloroplasts (1 mark)', 'Permanent vacuole (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Cell structure'
-          },
-          {
-            id: 'b1-q2',
-            question: 'Explain the function of mitochondria in cells.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Mitochondria are the site of cellular respiration, where glucose is broken down to release energy (ATP) for cellular processes.',
-            markingCriteria: {
-              breakdown: ['Site of cellular respiration (1 mark)', 'Releases energy/ATP (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Cell structure'
-          },
-          {
-            id: 'b1-q3',
-            question: 'A student observes onion cells under a microscope. Calculate the magnification if the actual size of a cell is 0.05 mm and the image size is 5 mm.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Magnification = Image size ÷ Actual size = 5 mm ÷ 0.05 mm = ×100',
-            markingCriteria: {
-              breakdown: ['Correct formula: magnification = image size ÷ actual size (1 mark)', 'Correct calculation: ×100 (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Required Practical 1'
-          },
-          {
-            id: 'b1-q4',
-            question: 'Compare the processes of diffusion and osmosis.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Diffusion is the net movement of particles from high to low concentration. Osmosis is specifically the movement of water molecules through a partially permeable membrane from high to low water potential. Both are passive processes requiring no energy.',
-            markingCriteria: {
-              breakdown: ['Diffusion: movement from high to low concentration (1 mark)', 'Osmosis: movement of water molecules (1 mark)', 'Through partially permeable membrane (1 mark)', 'Both are passive processes (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Transport in cells'
-          },
-          {
-            id: 'b1-q5',
-            question: 'Describe and explain how you would investigate the effect of surface area on diffusion using agar cubes. Include the independent variable, dependent variable, and control variables.',
-            marks: 6,
-            difficulty: 'hard',
-            modelAnswer: 'Cut agar cubes of different sizes (1cm³, 2cm³, 3cm³) - this is the independent variable. Place in acid solution and time how long for complete color change - this is the dependent variable. Control variables include: same concentration of acid, same temperature, same type of agar. Smaller cubes have higher surface area to volume ratio so diffusion occurs faster. Results should show inverse relationship between cube size and diffusion rate.',
-            markingCriteria: {
-              breakdown: ['Independent variable: cube size/surface area (1 mark)', 'Dependent variable: time for color change (1 mark)', 'Control variables: concentration, temperature, agar type (1 mark)', 'Method: cut cubes, place in acid, time color change (1 mark)', 'Explanation: smaller cubes have higher SA:V ratio (1 mark)', 'Conclusion: inverse relationship between size and diffusion rate (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Required Practical 2'
-          },
-          {
-            id: 'b1-q6',
-            question: 'Explain what happens to plant cells when placed in pure water.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Water enters the cell by osmosis, the cell becomes turgid (swollen), and the cell wall prevents the cell from bursting.',
-            markingCriteria: {
-              breakdown: ['Water enters by osmosis (1 mark)', 'Cell becomes turgid (1 mark)', 'Cell wall prevents bursting (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Transport in cells'
-          },
-          {
-            id: 'b1-q7',
-            question: 'State two factors that affect the rate of diffusion.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Temperature and concentration gradient',
-            markingCriteria: {
-              breakdown: ['Temperature (1 mark)', 'Concentration gradient (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Transport in cells'
-          },
-          {
-            id: 'b1-q8',
-            question: 'Describe the function of ribosomes.',
+            question: 'What is the function of the ribosomes in a cell? (1 mark)',
             marks: 1,
             difficulty: 'easy',
             modelAnswer: 'Site of protein synthesis',
@@ -8199,740 +8122,192 @@ export const curriculum: Subject[] = [
             specReference: 'AQA GCSE Biology 8461 - Cell structure'
           },
           {
-            id: 'b1-q9',
-            question: 'A student prepared microscope slides of plant cells to observe mitosis. Explain why the root tip was used rather than leaves.',
+            id: 'b1-q2',
+            question: 'Describe the difference between prokaryotic and eukaryotic cells. (2 marks)',
             marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Root tips contain rapidly dividing cells where mitosis is actively occurring, whereas leaf cells are mostly mature and not dividing.',
+            difficulty: 'easy',
+            modelAnswer: 'Prokaryotic cells have no nucleus and genetic material is free in cytoplasm. Eukaryotic cells have a nucleus containing genetic material.',
             markingCriteria: {
-              breakdown: ['Root tips have rapidly dividing cells (1 mark)', 'Leaf cells are mature/not dividing (1 mark)']
+              breakdown: ['Prokaryotic: no nucleus/genetic material free in cytoplasm (1 mark)', 'Eukaryotic: nucleus containing genetic material (1 mark)']
             },
-            specReference: 'AQA GCSE Biology 8461 - Required Practical 3'
+            specReference: 'AQA GCSE Biology 8461 - Cell structure'
           },
           {
-            id: 'b1-q10',
-            question: 'Explain why active transport is important in root hair cells.',
+            id: 'b1-q3',
+            question: 'Name two adaptations of a sperm cell. (2 marks)',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Long tail for swimming and many mitochondria for energy',
+            markingCriteria: {
+              breakdown: ['Any two: long tail, many mitochondria, streamlined head, acrosome (2 marks)']
+            },
+            specReference: 'AQA GCSE Biology 8461 - Specialised cells'
+          },
+          {
+            id: 'b1-q4',
+            question: 'Give one advantage and one disadvantage of using a light microscope instead of an electron microscope. (2 marks)',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Advantage: Can observe living specimens. Disadvantage: Lower magnification/resolution.',
+            markingCriteria: {
+              breakdown: ['Advantage: living specimens/cheaper/portable (1 mark)', 'Disadvantage: lower magnification/resolution (1 mark)']
+            },
+            specReference: 'AQA GCSE Biology 8461 - Microscopy'
+          },
+          {
+            id: 'b1-q5',
+            question: 'Explain how the structure of a root hair cell helps it absorb water efficiently. (3 marks)',
             marks: 3,
             difficulty: 'medium',
-            modelAnswer: 'Active transport allows root hair cells to absorb mineral ions from soil even when the concentration of minerals in the soil is lower than inside the cell. This requires energy from respiration.',
+            modelAnswer: 'Long projection increases surface area for absorption. Thin cell wall allows easy water entry. Many mitochondria provide energy for active transport of minerals.',
             markingCriteria: {
-              breakdown: ['Absorbs minerals against concentration gradient (1 mark)', 'When soil concentration is lower than cell (1 mark)', 'Requires energy from respiration (1 mark)']
+              breakdown: ['Long projection increases surface area (1 mark)', 'Thin cell wall for easy entry (1 mark)', 'Many mitochondria for active transport (1 mark)']
             },
-            specReference: 'AQA GCSE Biology 8461 - Transport in cells'
+            specReference: 'AQA GCSE Biology 8461 - Specialised cells'
+          },
+          {
+            id: 'b1-q6',
+            question: 'Compare and contrast the processes of mitosis and binary fission.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Both processes result in identical copies of genetic material. Mitosis occurs in eukaryotic cells with spindle fibers moving chromosomes, while binary fission occurs in prokaryotic cells where DNA simply replicates and the cell splits. Mitosis produces two diploid cells, binary fission produces two identical bacterial cells. Both are used for growth and reproduction.',
+            markingCriteria: {
+              breakdown: ['Both produce identical genetic copies (1 mark)', 'Mitosis in eukaryotes, binary fission in prokaryotes (1 mark)', 'Mitosis uses spindle fibers and chromosomes (1 mark)', 'Binary fission involves DNA replication and cell splitting (1 mark)', 'Both used for growth/reproduction (1 mark)', 'Clear comparison made throughout (1 mark)']
+            },
+            specReference: 'AQA GCSE Biology 8461 - Cell division'
           }
         ]
       },
       {
         id: 'b2-organisation',
-        name: 'Organisation',
+        name: '📍Organisation',
         questions: [
           {
             id: 'b2-q1',
-            question: 'Define the term "tissue".',
+            question: 'Name the enzyme that breaks down proteins. (1 mark)',
             marks: 1,
             difficulty: 'easy',
-            modelAnswer: 'A group of similar cells that work together to perform a specific function.',
+            modelAnswer: 'Protease',
             markingCriteria: {
-              breakdown: ['Group of similar cells with specific function (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Organisation'
-          },
-          {
-            id: 'b2-q2',
-            question: 'Name the four chambers of the heart.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Left atrium, right atrium, left ventricle, right ventricle',
-            markingCriteria: {
-              breakdown: ['Two atria named correctly (1 mark)', 'Two ventricles named correctly (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Circulatory system'
-          },
-          {
-            id: 'b2-q3',
-            question: 'Explain how the structure of the small intestine is adapted for absorption.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Villi and microvilli increase surface area for absorption. Thin walls (one cell thick) allow efficient diffusion. Rich blood supply maintains concentration gradients. Long length provides more time for absorption.',
-            markingCriteria: {
-              breakdown: ['Villi/microvilli increase surface area (1 mark)', 'Thin walls for efficient diffusion (1 mark)', 'Rich blood supply maintains gradients (1 mark)', 'Long length provides more time (1 mark)']
+              breakdown: ['Protease (1 mark)']
             },
             specReference: 'AQA GCSE Biology 8461 - Digestive system'
           },
           {
-            id: 'b2-q4',
-            question: 'Compare the structure and function of arteries and veins.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Arteries have thick muscular walls to withstand high pressure and carry blood away from the heart. Veins have thin walls with valves to prevent backflow and carry blood back to the heart at low pressure.',
-            markingCriteria: {
-              breakdown: ['Arteries have thick muscular walls (1 mark)', 'Arteries carry blood away from heart (1 mark)', 'Veins have thin walls with valves (1 mark)', 'Veins carry blood to heart (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Circulatory system'
-          },
-          {
-            id: 'b2-q5',
-            question: 'A student investigated the action of the enzyme amylase on starch using the table below:\n\nTime (minutes) | Result with iodine\n0 | Blue-black\n2 | Blue-black\n4 | Brown\n6 | Yellow\n8 | Yellow\n\nExplain these results and suggest why iodine was used.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Iodine tests for starch - blue-black indicates starch present. As time progresses, amylase breaks down starch into maltose. Brown and yellow colors show starch is being digested. After 6 minutes, all starch has been converted to maltose.',
-            markingCriteria: {
-              breakdown: ['Iodine tests for starch/blue-black shows starch present (1 mark)', 'Amylase breaks down starch into maltose (1 mark)', 'Color change shows starch being digested (1 mark)', 'Complete breakdown after 6 minutes (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Required Practical 4'
-          },
-          {
-            id: 'b2-q6',
-            question: 'Describe and explain how you would investigate the effect of pH on the activity of amylase enzyme. Your answer should include the independent variable, dependent variable, control variables, and expected results.',
-            marks: 6,
-            difficulty: 'hard',
-            modelAnswer: 'Independent variable: pH (using buffer solutions pH 2-10). Dependent variable: time taken for starch to be completely digested (iodine test turns yellow). Control variables: temperature (use water bath), enzyme concentration, starch concentration, volume of solutions. Method: Mix amylase with buffer, add starch, test with iodine every 30 seconds until no starch remains. Expected results: Optimum pH around 7-8 gives fastest reaction, very low or high pH denatures enzyme so reaction is very slow or stops.',
-            markingCriteria: {
-              breakdown: ['Independent variable: pH correctly identified (1 mark)', 'Dependent variable: time for complete digestion (1 mark)', 'Control variables: temperature, concentrations, volumes (1 mark)', 'Method includes buffer solutions and iodine testing (1 mark)', 'Expected results: optimum pH around 7-8 (1 mark)', 'Explanation: extreme pH denatures enzyme (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Required Practical 5'
-          },
-          {
-            id: 'b2-q7',
-            question: 'Explain the function of red blood cells and how they are adapted for this function.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Red blood cells transport oxygen. They are adapted by containing hemoglobin which binds to oxygen, having no nucleus to maximize space for hemoglobin, and being biconcave shape to increase surface area.',
-            markingCriteria: {
-              breakdown: ['Function: transport oxygen (1 mark)', 'Contain hemoglobin which binds oxygen (1 mark)', 'No nucleus maximizes space OR biconcave increases surface area (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Blood'
-          },
-          {
-            id: 'b2-q8',
-            question: 'Describe how the heart pumps blood around the body.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'The atria fill with blood and contract, pushing blood into the ventricles. The ventricles then contract with greater force, pushing blood out through the arteries. Valves prevent backflow of blood. The right side pumps deoxygenated blood to lungs, left side pumps oxygenated blood to body.',
-            markingCriteria: {
-              breakdown: ['Atria contract pushing blood to ventricles (1 mark)', 'Ventricles contract pushing blood to arteries (1 mark)', 'Valves prevent backflow (1 mark)', 'Right side to lungs, left side to body (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Circulatory system'
-          },
-          {
-            id: 'b2-q9',
-            question: 'State the function of white blood cells.',
-            marks: 1,
+            id: 'b2-q2',
+            question: 'What is the role of bile in digestion? (2 marks)',
+            marks: 2,
             difficulty: 'easy',
-            modelAnswer: 'Defend the body against pathogens',
+            modelAnswer: 'Bile emulsifies fats, breaking them into smaller droplets to increase surface area for lipase enzyme action.',
             markingCriteria: {
-              breakdown: ['Defend against pathogens/disease (1 mark)']
+              breakdown: ['Emulsifies fats (1 mark)', 'Increases surface area for enzyme action (1 mark)']
             },
-            specReference: 'AQA GCSE Biology 8461 - Blood'
+            specReference: 'AQA GCSE Biology 8461 - Digestive system'
           },
           {
-            id: 'b2-q10',
-            question: 'Evaluate the use of stents and statins in treating cardiovascular disease. Your answer should include advantages and disadvantages of each treatment.',
+            id: 'b2-q3',
+            question: 'Describe how the lungs are adapted for gas exchange. (4 marks)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Millions of alveoli provide large surface area. Walls are one cell thick for short diffusion pathway. Rich blood supply maintains concentration gradients. Moist lining allows gases to dissolve.',
+            markingCriteria: {
+              breakdown: ['Large surface area from alveoli (1 mark)', 'Thin walls/short diffusion pathway (1 mark)', 'Rich blood supply maintains gradients (1 mark)', 'Moist lining dissolves gases (1 mark)']
+            },
+            specReference: 'AQA GCSE Biology 8461 - Gas exchange'
+          },
+          {
+            id: 'b2-q4',
+            question: 'Explain how the structure of the heart and circulatory system is related to its function.',
             marks: 6,
             difficulty: 'hard',
-            modelAnswer: 'Stents: Advantages - keep arteries open allowing blood flow, quick procedure, immediate effect. Disadvantages - risk of infection, blood clots may form on stent, expensive. Statins: Advantages - reduce cholesterol production, reduce risk of heart disease, relatively safe. Disadvantages - must be taken long-term, side effects like muscle pain, may not work for everyone. Both treatments address different aspects of cardiovascular disease.',
+            modelAnswer: 'Heart has four chambers to separate oxygenated and deoxygenated blood. Muscular walls contract to pump blood. Valves prevent backflow. Arteries have thick muscular walls to withstand high pressure. Veins have valves and thin walls as blood returns at low pressure. Capillaries have thin walls for efficient exchange of materials.',
             markingCriteria: {
-              breakdown: ['Stent advantages: keep arteries open, quick procedure (1 mark)', 'Stent disadvantages: infection risk, blood clots (1 mark)', 'Statin advantages: reduce cholesterol, reduce heart disease risk (1 mark)', 'Statin disadvantages: long-term use, side effects (1 mark)', 'Recognition that treatments address different aspects (1 mark)', 'Clear evaluation comparing both treatments (1 mark)']
+              breakdown: ['Four chambers separate oxygenated/deoxygenated blood (1 mark)', 'Muscular walls contract to pump blood (1 mark)', 'Valves prevent backflow (1 mark)', 'Arteries: thick walls for high pressure (1 mark)', 'Veins: valves and thin walls for low pressure (1 mark)', 'Capillaries: thin walls for exchange (1 mark)']
             },
-            specReference: 'AQA GCSE Biology 8461 - Cardiovascular disease'
+            specReference: 'AQA GCSE Biology 8461 - Circulatory system'
           }
         ]
       },
       {
         id: 'b3-infection-response',
-        name: 'Infection and response',
+        name: '📍Infection and Response',
         questions: [
           {
             id: 'b3-q1',
-            question: 'What is a pathogen?',
+            question: 'Name a disease caused by a bacterium. (1 mark)',
             marks: 1,
             difficulty: 'easy',
-            modelAnswer: 'A microorganism that causes disease',
+            modelAnswer: 'Tuberculosis (or pneumonia, food poisoning)',
             markingCriteria: {
-              breakdown: ['Microorganism that causes disease (1 mark)']
+              breakdown: ['Any bacterial disease: tuberculosis, pneumonia, food poisoning, etc. (1 mark)']
             },
-            specReference: 'AQA GCSE Biology 8461 - Infection and response'
+            specReference: 'AQA GCSE Biology 8461 - Disease'
           },
           {
             id: 'b3-q2',
-            question: 'Name four types of pathogens.',
+            question: 'How do viruses make us feel ill? (2 marks)',
             marks: 2,
             difficulty: 'easy',
-            modelAnswer: 'Bacteria, viruses, fungi, and protists',
+            modelAnswer: 'Viruses reproduce inside host cells, damaging or destroying them. This cell damage causes symptoms of illness.',
             markingCriteria: {
-              breakdown: ['Any two correct: bacteria, viruses, fungi, protists (2 marks)']
+              breakdown: ['Viruses reproduce inside host cells (1 mark)', 'Cell damage causes symptoms (1 mark)']
             },
-            specReference: 'AQA GCSE Biology 8461 - Infection and response'
+            specReference: 'AQA GCSE Biology 8461 - Disease'
           },
           {
             id: 'b3-q3',
-            question: 'Describe how white blood cells defend the body against pathogens.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Phagocytes engulf and digest pathogens. Lymphocytes produce antibodies specific to antigens on pathogens. Memory cells provide rapid response to repeat infections. Some white blood cells produce antitoxins to neutralize bacterial toxins.',
-            markingCriteria: {
-              breakdown: ['Phagocytes engulf and digest pathogens (1 mark)', 'Lymphocytes produce specific antibodies (1 mark)', 'Memory cells provide rapid response (1 mark)', 'Antitoxins neutralize toxins (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Infection and response'
-          },
-          {
-            id: 'b3-q4',
-            question: 'Explain how vaccination provides protection against disease.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Vaccination introduces dead or inactive pathogens. White blood cells recognize antigens and produce antibodies. Memory cells are formed. If the same pathogen enters later, memory cells quickly produce antibodies for rapid immune response.',
-            markingCriteria: {
-              breakdown: ['Introduction of dead/inactive pathogens (1 mark)', 'White blood cells produce antibodies (1 mark)', 'Memory cells formed (1 mark)', 'Rapid response on re-infection (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Infection and response'
-          },
-          {
-            id: 'b3-q5',
-            question: 'Give three ways pathogens can be transmitted.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Direct contact, airborne droplets, and contaminated food or water',
-            markingCriteria: {
-              breakdown: ['Direct contact (1 mark)', 'Airborne droplets (1 mark)', 'Contaminated food/water (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Infection and response'
-          },
-          {
-            id: 'b3-q6',
-            question: 'Explain why antibiotics cannot treat viral infections.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Antibiotics kill bacteria by targeting bacterial cell structures. Viruses reproduce inside host cells and do not have the same structures as bacteria.',
-            markingCriteria: {
-              breakdown: ['Antibiotics target bacterial structures (1 mark)', 'Viruses reproduce inside host cells/lack bacterial structures (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Infection and response'
-          },
-          {
-            id: 'b3-q7',
-            question: 'Describe the body\'s first line of defense against pathogens.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Skin acts as a physical barrier preventing pathogen entry. Stomach acid kills pathogens in food. Tears and saliva contain enzymes that destroy bacteria. Mucus in airways traps pathogens which are then removed by cilia.',
-            markingCriteria: {
-              breakdown: ['Skin as physical barrier (1 mark)', 'Stomach acid kills pathogens (1 mark)', 'Tears/saliva contain enzymes (1 mark)', 'Mucus traps pathogens (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Infection and response'
-          },
-          {
-            id: 'b3-q8',
-            question: 'Antibiotic-resistant bacteria are becoming more common. Explain how antibiotic resistance develops and suggest how the spread of antibiotic resistance can be reduced.',
+            question: 'Compare the ways in which the body defends itself against pathogens.',
             marks: 6,
             difficulty: 'hard',
-            modelAnswer: 'Random mutations in bacteria may make them resistant to antibiotics. When antibiotics are used, non-resistant bacteria die but resistant bacteria survive and reproduce. Overuse and incorrect use of antibiotics increases selection pressure. To reduce spread: complete antibiotic courses, only use when prescribed by doctors, develop new antibiotics, improve hygiene in hospitals.',
+            modelAnswer: 'Physical barriers: skin prevents entry, stomach acid kills pathogens, mucus traps pathogens. Immune system: white blood cells engulf pathogens through phagocytosis, lymphocytes produce specific antibodies, memory cells provide rapid response to repeat infections. Both work together - barriers prevent entry while immune system deals with pathogens that get through.',
             markingCriteria: {
-              breakdown: ['Random mutations create resistant bacteria (1 mark)', 'Selection pressure kills non-resistant bacteria (1 mark)', 'Resistant bacteria survive and reproduce (1 mark)', 'Overuse/incorrect use increases resistance (1 mark)', 'Prevention: complete courses, only when prescribed (1 mark)', 'Prevention: develop new antibiotics, improve hygiene (1 mark)']
+              breakdown: ['Physical barriers: skin, stomach acid, mucus (1 mark)', 'Phagocytosis by white blood cells (1 mark)', 'Lymphocytes produce specific antibodies (1 mark)', 'Memory cells provide rapid response (1 mark)', 'Recognition that both work together (1 mark)', 'Clear comparison of different defense mechanisms (1 mark)']
             },
-            specReference: 'AQA GCSE Biology 8461 - Infection and response'
-          },
-          {
-            id: 'b3-q9',
-            question: 'State the difference between communicable and non-communicable diseases.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Communicable diseases can be transmitted between organisms. Non-communicable diseases cannot be transmitted.',
-            markingCriteria: {
-              breakdown: ['Communicable diseases can be transmitted (1 mark)', 'Non-communicable diseases cannot be transmitted (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Health and disease'
-          },
-          {
-            id: 'b3-q10',
-            question: 'Explain the stages of drug testing before new medicines are approved for human use.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Pre-clinical testing on cells and tissues in laboratory. Animal testing to check safety and effectiveness. Phase 1 trials test safety in healthy volunteers. Phase 2 and 3 trials test effectiveness and dosage in patients with the condition.',
-            markingCriteria: {
-              breakdown: ['Pre-clinical testing on cells/tissues (1 mark)', 'Animal testing for safety/effectiveness (1 mark)', 'Phase 1: safety in healthy volunteers (1 mark)', 'Phase 2/3: effectiveness and dosage in patients (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Drug development'
+            specReference: 'AQA GCSE Biology 8461 - Immune system'
           }
         ]
       },
       {
         id: 'b4-bioenergetics',
-        name: 'Bioenergetics',
+        name: '📍Bioenergetics',
         questions: [
           {
             id: 'b4-q1',
-            question: 'Write the word equation for photosynthesis.',
-            marks: 2,
+            question: 'Write the word equation for photosynthesis. (1 mark)',
+            marks: 1,
             difficulty: 'easy',
             modelAnswer: 'Carbon dioxide + Water → Glucose + Oxygen',
             markingCriteria: {
-              breakdown: ['Correct reactants: carbon dioxide and water (1 mark)', 'Correct products: glucose and oxygen (1 mark)']
+              breakdown: ['Carbon dioxide + Water → Glucose + Oxygen (1 mark)']
             },
             specReference: 'AQA GCSE Biology 8461 - Photosynthesis'
           },
           {
             id: 'b4-q2',
-            question: 'Name three factors that can limit the rate of photosynthesis.',
-            marks: 3,
+            question: 'Give two factors that affect the rate of photosynthesis. (2 marks)',
+            marks: 2,
             difficulty: 'easy',
-            modelAnswer: 'Light intensity, carbon dioxide concentration, and temperature',
+            modelAnswer: 'Light intensity and carbon dioxide concentration',
             markingCriteria: {
-              breakdown: ['Light intensity (1 mark)', 'Carbon dioxide concentration (1 mark)', 'Temperature (1 mark)']
+              breakdown: ['Any two: light intensity, CO2 concentration, temperature (2 marks)']
             },
             specReference: 'AQA GCSE Biology 8461 - Photosynthesis'
           },
           {
             id: 'b4-q3',
-            question: 'A student investigated the effect of light intensity on the rate of photosynthesis using pondweed. The graph shows the results:\n\n[THIS IS GRAPH: Rate of photosynthesis vs Light intensity showing curve that levels off]\n\nExplain the shape of this graph.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Initially, as light intensity increases, rate of photosynthesis increases because light is the limiting factor. The curve levels off because another factor becomes limiting (temperature or CO2 concentration). Further increases in light intensity do not increase the rate.',
-            markingCriteria: {
-              breakdown: ['Rate increases with light intensity initially (1 mark)', 'Light is the limiting factor at low intensities (1 mark)', 'Curve levels off when another factor becomes limiting (1 mark)', 'Another factor is temperature or CO2 concentration (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Required Practical 6'
-          },
-          {
-            id: 'b4-q4',
-            question: 'Write the word equation for aerobic respiration.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Glucose + Oxygen → Carbon dioxide + Water + Energy',
-            markingCriteria: {
-              breakdown: ['Correct reactants: glucose and oxygen (1 mark)', 'Correct products: carbon dioxide, water, energy (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Respiration'
-          },
-          {
-            id: 'b4-q5',
-            question: 'Compare aerobic and anaerobic respiration.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Aerobic respiration uses oxygen and produces carbon dioxide, water, and lots of ATP (38 molecules per glucose). Anaerobic respiration occurs without oxygen, produces less ATP (2 molecules per glucose), and forms lactic acid in animals or ethanol in plants.',
-            markingCriteria: {
-              breakdown: ['Aerobic uses oxygen, anaerobic does not (1 mark)', 'Aerobic produces more ATP than anaerobic (1 mark)', 'Aerobic products: CO2, water, energy (1 mark)', 'Anaerobic products: lactic acid/ethanol (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Respiration'
-          },
-          {
-            id: 'b4-q6',
-            question: 'Where does photosynthesis occur in plant cells?',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: 'Chloroplasts',
-            markingCriteria: {
-              breakdown: ['Chloroplasts (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Photosynthesis'
-          },
-          {
-            id: 'b4-q7',
-            question: 'Explain what happens during anaerobic respiration in muscle cells during exercise.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Glucose is broken down without oxygen to produce lactic acid and a small amount of energy. This occurs during vigorous exercise when oxygen supply is insufficient. Lactic acid causes muscle fatigue.',
-            markingCriteria: {
-              breakdown: ['Glucose broken down without oxygen (1 mark)', 'Produces lactic acid and energy (1 mark)', 'Occurs when oxygen supply insufficient (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Respiration'
-          },
-          {
-            id: 'b4-q8',
-            question: 'Describe and explain an investigation to show that carbon dioxide is needed for photosynthesis. Your answer should include the method, expected results, and explanation.',
+            question: 'Compare aerobic and anaerobic respiration in humans.',
             marks: 6,
             difficulty: 'hard',
-            modelAnswer: 'Method: Use two identical plants, place one in air with CO2 and one in CO2-free air (using soda lime). Keep other factors constant (light, temperature). After several hours, test leaves for starch using iodine. Expected results: Plant in normal air shows blue-black color with iodine (starch present). Plant in CO2-free air shows brown/yellow color (no starch). Explanation: CO2 is needed as a raw material for photosynthesis to produce glucose, which is converted to starch for storage.',
+            modelAnswer: 'Aerobic respiration uses oxygen while anaerobic does not. Aerobic produces 38 ATP molecules per glucose, anaerobic only produces 2 ATP. Aerobic produces carbon dioxide and water, anaerobic produces lactic acid. Aerobic occurs in mitochondria, anaerobic in cytoplasm. Both break down glucose to release energy for cellular processes.',
             markingCriteria: {
-              breakdown: ['Method: two plants, one with CO2, one without (1 mark)', 'Control other variables: light, temperature (1 mark)', 'Test for starch using iodine (1 mark)', 'Expected results: starch in normal air, no starch without CO2 (1 mark)', 'Blue-black shows starch present, brown/yellow shows absent (1 mark)', 'Explanation: CO2 needed as raw material for glucose production (1 mark)']
+              breakdown: ['Aerobic uses oxygen, anaerobic does not (1 mark)', 'Aerobic produces much more ATP (38 vs 2) (1 mark)', 'Different products: CO2 + water vs lactic acid (1 mark)', 'Different locations: mitochondria vs cytoplasm (1 mark)', 'Both break down glucose for energy (1 mark)', 'Clear comparison throughout answer (1 mark)']
             },
-            specReference: 'AQA GCSE Biology 8461 - Required Practical 7'
-          },
-          {
-            id: 'b4-q9',
-            question: 'State four uses of glucose produced in photosynthesis.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Respiration for energy, converted to starch for storage, making cellulose for cell walls, making amino acids for proteins',
-            markingCriteria: {
-              breakdown: ['Any two correct uses: respiration, starch storage, cellulose, amino acids (2 marks)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Photosynthesis'
-          },
-          {
-            id: 'b4-q10',
-            question: 'Explain how temperature affects the rate of photosynthesis.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'As temperature increases, rate of photosynthesis increases because enzymes work faster. However, if temperature gets too high, enzymes denature and the rate decreases rapidly.',
-            markingCriteria: {
-              breakdown: ['Rate increases as temperature increases (1 mark)', 'Due to enzymes working faster (1 mark)', 'High temperatures denature enzymes/rate decreases (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Photosynthesis'
+            specReference: 'AQA GCSE Biology 8461 - Respiration'
           }
         ]
-      },
-      {
-        id: 'b5-homeostasis',
-        name: 'Homeostasis and response',
-        questions: [
-          {
-            id: 'b5-q1',
-            question: 'What is homeostasis?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Homeostasis is the maintenance of a constant internal environment despite changes in external conditions.',
-            markingCriteria: {
-              breakdown: ['Maintenance of constant internal environment (1 mark)', 'Despite external changes (1 mark)']
-            },
-            specReference: 'B5.1'
-          },
-          {
-            id: 'b5-q2',
-            question: 'Name three conditions in the body that need to be controlled.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Body temperature, blood glucose concentration, and water content',
-            markingCriteria: {
-              breakdown: ['Body temperature (1 mark)', 'Blood glucose concentration (1 mark)', 'Water content (1 mark)']
-            },
-            specReference: 'B5.2'
-          },
-          {
-            id: 'b5-q3',
-            question: 'Describe the structure of the nervous system.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'The nervous system consists of the central nervous system (brain and spinal cord) and the peripheral nervous system (all other nerves).',
-            markingCriteria: {
-              breakdown: ['Central nervous system (1 mark)', 'Brain and spinal cord (1 mark)', 'Peripheral nervous system/other nerves (1 mark)']
-            },
-            specReference: 'B5.3'
-          },
-          {
-            id: 'b5-q4',
-            question: 'Explain what happens in a reflex action.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'A stimulus is detected by a receptor. An impulse travels along a sensory neuron to the spinal cord. A relay neuron connects to a motor neuron. The motor neuron carries the impulse to an effector (muscle) which responds.',
-            markingCriteria: {
-              breakdown: ['Stimulus detected by receptor (1 mark)', 'Sensory neuron to spinal cord (1 mark)', 'Relay neuron connects to motor neuron (1 mark)', 'Motor neuron to effector/response (1 mark)']
-            },
-            specReference: 'B5.4'
-          },
-          {
-            id: 'b5-q5',
-            question: 'What is the function of insulin in the body?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Insulin is a hormone produced by the pancreas that causes liver and muscle cells to take up glucose from the blood, lowering blood glucose concentration.',
-            markingCriteria: {
-              breakdown: ['Hormone produced by pancreas (1 mark)', 'Causes cells to take up glucose (1 mark)', 'Lowers blood glucose concentration (1 mark)']
-            },
-            specReference: 'B5.5'
-          },
-          {
-            id: 'b5-q6',
-            question: 'Describe how body temperature is controlled when it gets too hot.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Sweating increases to cool the body through evaporation. Blood vessels near the skin surface dilate (vasodilation) to increase heat loss. Metabolic rate decreases. Hair follicles relax so hairs lie flat.',
-            markingCriteria: {
-              breakdown: ['Increased sweating/evaporation (1 mark)', 'Vasodilation increases heat loss (1 mark)', 'Decreased metabolic rate (1 mark)', 'Hairs lie flat (1 mark)']
-            },
-            specReference: 'B5.6'
-          },
-          {
-            id: 'b5-q7',
-            question: 'What is Type 1 diabetes?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Type 1 diabetes is a condition where the pancreas does not produce enough insulin, resulting in high blood glucose levels that cannot be controlled naturally.',
-            markingCriteria: {
-              breakdown: ['Pancreas does not produce enough insulin (1 mark)', 'High blood glucose levels (1 mark)', 'Cannot be controlled naturally (1 mark)']
-            },
-            specReference: 'B5.7'
-          },
-          {
-            id: 'b5-q8',
-            question: 'Name the parts of the eye and their functions.',
-            marks: 6,
-            difficulty: 'hard',
-            modelAnswer: 'Cornea - refracts light. Iris - controls amount of light entering. Lens - focuses light on retina. Retina - contains light-sensitive cells. Optic nerve - carries impulses to brain. Pupil - allows light to enter.',
-            markingCriteria: {
-              breakdown: ['Cornea refracts light (1 mark)', 'Iris controls light entry (1 mark)', 'Lens focuses light (1 mark)', 'Retina has light-sensitive cells (1 mark)', 'Optic nerve carries impulses (1 mark)', 'Pupil allows light entry (1 mark)']
-            },
-            specReference: 'B5.8'
-          },
-          {
-            id: 'b5-q9',
-            question: 'Explain how the kidneys control water content in the body.',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'The kidneys filter blood and reabsorb useful substances. ADH hormone controls water reabsorption. When dehydrated, more ADH is released, causing more water reabsorption and concentrated urine. When hydrated, less ADH is released, producing dilute urine.',
-            markingCriteria: {
-              breakdown: ['Kidneys filter blood (1 mark)', 'ADH controls water reabsorption (1 mark)', 'Dehydration increases ADH/concentrated urine (1 mark)', 'Hydration decreases ADH/dilute urine (1 mark)']
-            },
-            specReference: 'B5.9'
-          },
-          {
-            id: 'b5-q10',
-            question: 'Describe the differences between hormonal and nervous responses.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Nervous responses are fast, short-lived, and travel as electrical impulses along neurons. Hormonal responses are slower, longer-lasting, and travel as chemicals in the bloodstream.',
-            markingCriteria: {
-              breakdown: ['Nervous responses are fast (1 mark)', 'Nervous responses are short-lived (1 mark)', 'Hormonal responses are slower (1 mark)', 'Hormonal responses are longer-lasting (1 mark)']
-            },
-            specReference: 'B5.10'
-          }
-        ]
-      },
-      {
-        id: 'b6-inheritance',
-        name: 'Inheritance, variation and evolution',
-        questions: [
-          {
-            id: 'b6-q1',
-            question: 'What is DNA?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'DNA is the genetic material that contains coded information for making proteins and determining inherited characteristics.',
-            markingCriteria: {
-              breakdown: ['Genetic material (1 mark)', 'Contains coded information for proteins/characteristics (1 mark)']
-            },
-            specReference: 'B6.1'
-          },
-          {
-            id: 'b6-q2',
-            question: 'Define the terms "gene" and "allele".',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'A gene is a section of DNA that codes for a specific protein. An allele is a different version of the same gene.',
-            markingCriteria: {
-              breakdown: ['Gene is DNA section coding for protein (1 mark)', 'Allele is different version of gene (1 mark)']
-            },
-            specReference: 'B6.2'
-          },
-          {
-            id: 'b6-q3',
-            question: 'Explain the difference between dominant and recessive alleles.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Dominant alleles are expressed when present (only one copy needed). Recessive alleles are only expressed when two copies are present.',
-            markingCriteria: {
-              breakdown: ['Dominant expressed with one copy (1 mark)', 'Recessive needs two copies (1 mark)']
-            },
-            specReference: 'B6.3'
-          },
-          {
-            id: 'b6-q4',
-            question: 'What is meant by genotype and phenotype?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Genotype is the genetic makeup (alleles present). Phenotype is the observable characteristics expressed.',
-            markingCriteria: {
-              breakdown: ['Genotype is genetic makeup/alleles (1 mark)', 'Phenotype is observable characteristics (1 mark)']
-            },
-            specReference: 'B6.4'
-          },
-          {
-            id: 'b6-q5',
-            question: 'Explain what causes variation in organisms.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Variation is caused by genetic factors (inherited from parents through DNA) and environmental factors (such as diet, exercise, climate). Most characteristics are influenced by both genetic and environmental factors.',
-            markingCriteria: {
-              breakdown: ['Genetic factors from parents (1 mark)', 'Environmental factors (1 mark)', 'Examples of environmental factors (1 mark)', 'Most characteristics influenced by both (1 mark)']
-            },
-            specReference: 'B6.5'
-          },
-          {
-            id: 'b6-q6',
-            question: 'Describe the process of natural selection.',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'Individuals in a population show variation. There is competition for resources. Those with advantageous characteristics are more likely to survive and reproduce. They pass on their advantageous alleles to offspring.',
-            markingCriteria: {
-              breakdown: ['Variation in population (1 mark)', 'Competition for resources (1 mark)', 'Advantageous characteristics aid survival (1 mark)', 'Advantageous alleles passed to offspring (1 mark)']
-            },
-            specReference: 'B6.6'
-          },
-          {
-            id: 'b6-q7',
-            question: 'What is evolution?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Evolution is the gradual change in the characteristics of a species over many generations.',
-            markingCriteria: {
-              breakdown: ['Gradual change in characteristics (1 mark)', 'Over many generations (1 mark)']
-            },
-            specReference: 'B6.7'
-          },
-          {
-            id: 'b6-q8',
-            question: 'Explain how mutations can lead to evolution.',
-            marks: 3,
-            difficulty: 'hard',
-            modelAnswer: 'Mutations create new alleles. If a mutation gives an advantage, natural selection will favor it. Over time, the advantageous allele becomes more common in the population.',
-            markingCriteria: {
-              breakdown: ['Mutations create new alleles (1 mark)', 'Advantageous mutations favored by selection (1 mark)', 'Advantageous alleles become more common (1 mark)']
-            },
-            specReference: 'B6.8'
-          },
-          {
-            id: 'b6-q9',
-            question: 'What is selective breeding?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Selective breeding is when humans choose organisms with desired characteristics to breed together to produce offspring with those characteristics.',
-            markingCriteria: {
-              breakdown: ['Humans choose organisms (1 mark)', 'Based on desired characteristics (1 mark)', 'To produce offspring with those characteristics (1 mark)']
-            },
-            specReference: 'B6.9'
-          },
-          {
-            id: 'b6-q10',
-            question: 'Describe how genetic engineering works.',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'Genetic engineering involves cutting out a gene from one organism using enzymes. The gene is inserted into the DNA of another organism. The modified organism can then produce the desired protein.',
-            markingCriteria: {
-              breakdown: ['Gene cut out using enzymes (1 mark)', 'Gene inserted into another organism (1 mark)', 'Modified organism produces desired protein (1 mark)', 'Clear understanding of process (1 mark)']
-            },
-            specReference: 'B6.10'
-          }
-        ]
-      },
-      {
-        id: 'b7-ecology',
-        name: 'Ecology',
-        questions: [
-          {
-            id: 'b7-q1',
-            question: 'Define the term "ecosystem".',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: 'The interaction of living organisms with each other and their physical environment.',
-            markingCriteria: {
-              breakdown: ['Interaction of living organisms with each other and environment (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Ecology'
-          },
-          {
-            id: 'b7-q2',
-            question: 'Explain what is meant by a food chain.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'A food chain shows the transfer of energy from one organism to another through feeding relationships.',
-            markingCriteria: {
-              breakdown: ['Transfer of energy (1 mark)', 'Through feeding relationships (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Ecology'
-          },
-          {
-            id: 'b7-q3',
-            question: 'A student used quadrats to estimate the population of daisies in a field. Describe the method the student should use.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Place quadrats at random coordinates using random number generator. Count number of daisies in each quadrat. Calculate mean number per quadrat. Multiply by total number of quadrats that would fit in the field.',
-            markingCriteria: {
-              breakdown: ['Random placement of quadrats (1 mark)', 'Count organisms in each quadrat (1 mark)', 'Calculate mean per quadrat (1 mark)', 'Scale up to whole area (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Required Practical 9'
-          },
-          {
-            id: 'b7-q4',
-            question: 'Explain why energy transfer between trophic levels is inefficient.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Energy is lost as heat through respiration, some parts of organisms are not eaten (bones, roots), some food is not digested and is egested, and energy is used for movement and other life processes.',
-            markingCriteria: {
-              breakdown: ['Energy lost as heat through respiration (1 mark)', 'Some parts not eaten (1 mark)', 'Some food not digested/egested (1 mark)', 'Energy used for movement/life processes (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Energy transfers'
-          },
-          {
-            id: 'b7-q5',
-            question: 'What is the role of decomposers in an ecosystem?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Decomposers break down dead organisms and waste products, returning nutrients to the soil for reuse by plants.',
-            markingCriteria: {
-              breakdown: ['Break down dead organisms and waste (1 mark)', 'Return nutrients to soil for reuse (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Ecology'
-          },
-          {
-            id: 'b7-q6',
-            question: 'Describe the water cycle and explain its importance to ecosystems.',
-            marks: 5,
-            difficulty: 'medium',
-            modelAnswer: 'Water evaporates from oceans, lakes, and rivers forming water vapor. Plants transpire releasing water vapor. Water vapor condenses to form clouds. Precipitation (rain/snow) returns water to Earth. Water flows in rivers back to sea. Important because all living organisms need water for survival.',
-            markingCriteria: {
-              breakdown: ['Evaporation from water bodies (1 mark)', 'Transpiration from plants (1 mark)', 'Condensation forming clouds (1 mark)', 'Precipitation returns water to Earth (1 mark)', 'All organisms need water for survival (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Material cycling'
-          },
-          {
-            id: 'b7-q7',
-            question: 'Human activities affect the environment. Evaluate the impact of deforestation on biodiversity and suggest how negative effects could be reduced.',
-            marks: 6,
-            difficulty: 'hard',
-            modelAnswer: 'Deforestation destroys habitats leading to loss of species and reduced biodiversity. Removes trees that absorb CO2, contributing to climate change. Reduces oxygen production. Soil erosion increases without tree roots. Can reduce negative effects by: sustainable forestry practices, replanting trees, protecting important habitats, using alternative materials to reduce demand for wood.',
-            markingCriteria: {
-              breakdown: ['Destroys habitats/reduces biodiversity (1 mark)', 'Removes CO2 absorption/increases climate change (1 mark)', 'Causes soil erosion (1 mark)', 'Sustainable forestry practices (1 mark)', 'Replanting trees/reforestation (1 mark)', 'Protecting important habitats (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Human impact'
-          },
-          {
-            id: 'b7-q8',
-            question: 'Explain what is meant by biological control.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Using living organisms to control pest populations instead of using chemical pesticides.',
-            markingCriteria: {
-              breakdown: ['Using living organisms (1 mark)', 'To control pests instead of chemicals (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Biodiversity'
-          },
-          {
-            id: 'b7-q9',
-            question: 'A student investigated the effect of temperature on the distribution of organisms using a transect across a pond. Explain how the student could use a transect to collect reliable data.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Lay tape measure across pond from shallow to deep water. Place quadrats at regular intervals along transect. Record organisms and measure temperature at each quadrat position. Repeat transect in different areas of pond for reliability.',
-            markingCriteria: {
-              breakdown: ['Lay transect line across environmental gradient (1 mark)', 'Place quadrats at regular intervals (1 mark)', 'Record organisms and measure abiotic factor (1 mark)', 'Repeat for reliability (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Required Practical 10'
-          },
-          {
-            id: 'b7-q10',
-            question: 'State two greenhouse gases and explain how human activities increase their concentration in the atmosphere.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Carbon dioxide - increased by burning fossil fuels and deforestation. Methane - increased by cattle farming and rice production.',
-            markingCriteria: {
-              breakdown: ['Carbon dioxide named (1 mark)', 'CO2 increased by fossil fuels/deforestation (1 mark)', 'Methane named (1 mark)', 'Methane increased by farming/agriculture (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Human impact'
-          }
-        ]
-      },
-      {
-        id: 'b8-required-practicals',
-        name: 'Required Practicals and Key Skills',
-        questions: [
-          {
-            id: 'b8-q1',
-            question: 'A student prepared a slide of onion cells and observed them under a microscope. The actual length of one cell was 0.1 mm and the observed length was 15 mm. Calculate the magnification.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Magnification = Image size ÷ Actual size = 15 mm ÷ 0.1 mm = ×150',
-            markingCriteria: {
-              breakdown: ['Correct formula stated or implied (1 mark)', 'Correct calculation: ×150 (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Required Practical 1: Microscopy'
-          },
+      }
+    ]
+  },
           {
             id: 'b8-q2',
             question: 'Describe the relationship between structure and function in biological systems.',
