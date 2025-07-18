@@ -173,8 +173,13 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           
           // Find subject in curriculum or create a basic subject info
           const curriculumSubject = curriculum.find(s => s.id === subjectId);
-          const subjectName = curriculumSubject?.name || 
+          let subjectName = curriculumSubject?.name || 
             subjectId.charAt(0).toUpperCase() + subjectId.slice(1);
+          
+          // Add (AQA) to all subjects except Mathematics Edexcel
+          if (subjectId !== 'maths-edexcel' && !subjectName.includes('Edexcel')) {
+            subjectName = `${subjectName} (AQA)`;
+          }
 
           // If no data, return empty state for curriculum subjects
           if (!combinedResult) {
