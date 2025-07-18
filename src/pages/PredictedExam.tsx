@@ -1262,17 +1262,21 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
 
   const getExamDuration = () => {
     const durations = {
-      chemistry: 105, // 1h 45min
-      biology: 105,
-      physics: 105,
-      mathematics: 90, // 1h 30min
-      "english-language": 105,
-      "english-literature": 105,
-      history: 75, // 1h 15min
-      "religious-studies": 105, // 1h 45min
-      geography: 90,
-      "computer-science": 90,
-      psychology: 105
+      chemistry: 135, // 2h 15min
+      biology: 135, // 2h 15min  
+      physics: 135, // 2h 15min
+      mathematics: 120, // 2h
+      "english-language": 135, // 2h 15min
+      "english-literature": 150, // 2h 30min
+      history: 135, // 2h 15min
+      "religious-studies": 120, // 2h
+      business: 105, // 1h 45min
+      french: 120, // 2h
+      spanish: 120, // 2h
+      german: 120, // 2h
+      geography: 120, // 2h
+      "computer-science": 120, // 2h
+      psychology: 135 // 2h 15min
     };
     return durations[subjectId as keyof typeof durations] || 90;
   };
