@@ -21,6 +21,7 @@ import { OptimalStudyTimeCard } from "@/components/dashboard/OptimalStudyTimeCar
 import { OptimalLearningTimeCard } from "@/components/dashboard/OptimalLearningTimeCard";
 import { PredictedQuestionsSection } from "@/components/dashboard/PredictedQuestionsSection";
 import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
+import { DashboardStressMonitor } from "@/components/dashboard/DashboardStressMonitor";
 import { supabase } from "@/integrations/supabase/client";
 import { StressTracker } from "@/lib/stressTracker";
 
@@ -321,6 +322,12 @@ const Dashboard = () => {
         {/* Predicted 2026 Questions Section */}
         <PredictedQuestionsSection />
 
+        {/* Premium Stress Monitor - Prominently displayed */}
+        <DashboardStressMonitor 
+          userId={user?.id} 
+          userProgress={userProgress}
+          onSubjectClick={handlePractice}
+        />
 
         {/* Subjects Section */}
         <div className="mb-8">
