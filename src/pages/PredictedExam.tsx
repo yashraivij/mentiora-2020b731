@@ -264,15 +264,35 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     const sources = {
       'america-1840-1895': {
         utility: `Source A: From a newspaper report in 1876 about the treatment of Native Americans:\n\n"The Indian Agency reports that food supplies to the reservation have been cut by half this winter. Many families are going hungry, and the promised blankets and warm clothing have not arrived. The government agent states that funds are limited, but local traders continue to profit from sales of inferior goods at inflated prices to the tribes."`,
-        analysis: `Source A: A photograph showing a group of soldiers in a trench, 1915\nSource B: Extract from a soldier's diary, 1916: "The rats here are particularly repulsive, they are so fat – the kind we call corpse-rats. They have shocking, evil, naked faces, and it is nauseating to see their long, nude tails."`
+        analysis: `Source A: A government report from 1869: "The treatment of Native American tribes has been inconsistent with our national values of justice and fairness."\nSource B: Extract from a settler's diary, 1871: "The Indians have been forced from their traditional hunting grounds and many are now dependent on government rations which are often delayed or insufficient."`
       },
       'germany-1890-1945': {
         utility: `Source A: From a Nazi propaganda poster, 1936:\n\n"Work and Bread! The Führer has given work to 6 million unemployed Germans. German workers, you were unemployed under the old system - now you have work and purpose under National Socialism. Support the Party that delivered on its promises!"`,
         analysis: `Source A: A photograph of unemployed Germans queuing for food, 1932\nSource B: Nazi employment statistics, 1933-1936: "Unemployment reduced from 6 million to 2.5 million through public works programs, rearmament, and labor conscription."`
       },
+      'russia-1894-1945': {
+        utility: `Source A: From a factory worker's account of Bloody Sunday, 1905:\n\n"We marched peacefully to petition the Tsar for better working conditions and an eight-hour day. We carried icons and sang hymns, believing the Little Father would listen to our grievances. Instead, his soldiers opened fire on unarmed men, women and children."`,
+        analysis: `Source A: A photograph of workers demonstrating in Petrograd, February 1917\nSource B: Extract from a Bolshevik proclamation, 1917: "The Provisional Government has failed to end the war or solve the land question. Only the Soviets represent the true will of the workers and peasants."`
+      },
+      'america-1920-1973': {
+        utility: `Source A: From a newspaper headline, October 1929:\n\n"WALL STREET CRASHES - Millions of shares dumped as panic selling grips New York. Banking houses report unprecedented losses. Wealthy investors seen jumping from windows. The American dream turns to nightmare."`,
+        analysis: `Source A: A photograph of unemployed men queuing for food, 1932\nSource B: Extract from President Roosevelt's radio address, 1933: "The only thing we have to fear is fear itself. The New Deal will provide relief, recovery and reform for the American people."`
+      },
       'conflict-tension-ww1': {
         analysis: `Source A: A photograph showing soldiers in trenches on the Western Front, 1917\nSource B: Extract from a British soldier's letter home, 1916: "The conditions here are beyond description. We live like rats in these trenches, surrounded by mud, disease and death. The constant shelling never stops and many of my friends are no longer with us."`,
         followup: `Source B: Extract from a British general's report, 1917: "Morale remains high among the troops despite difficult conditions. The men show great courage and determination in the face of enemy action."`
+      },
+      'conflict-tension-interwar': {
+        analysis: `Source A: A photograph of German crowds cheering Hitler's entry into Austria, 1938\nSource B: Extract from the Munich Agreement, 1938: "Germany, the United Kingdom, France and Italy agree that the Sudetenland shall be evacuated by the Czech army and occupied by German troops."`
+      },
+      'conflict-tension-east-west': {
+        analysis: `Source A: A photograph of Soviet missiles being unloaded in Cuba, October 1962\nSource B: Extract from President Kennedy's television address, October 1962: "This Government, as promised, has maintained the closest surveillance of the Soviet military buildup on the island of Cuba. We will not permit offensive weapons to remain there."`
+      },
+      'conflict-tension-asia': {
+        analysis: `Source A: A photograph of UN forces crossing into North Korea, 1950\nSource B: Extract from a Chinese government statement, 1950: "The American invasion of Korea threatens the security of China. We cannot stand idly by while imperialist forces approach our border."`
+      },
+      'conflict-tension-gulf': {
+        analysis: `Source A: A photograph of Kuwaiti oil wells burning, 1991\nSource B: Extract from UN Resolution 678, 1990: "Iraq must comply with Resolution 660 and withdraw immediately from Kuwait. Member states are authorized to use all necessary means to restore international peace and security."`
       }
     };
     return sources[topicId as keyof typeof sources]?.[questionType as keyof typeof sources['america-1840-1895']] || '';
@@ -322,8 +342,28 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
   };
 
   const getHistoryFollowupQuestion = (topicId: string): string => {
-    const source = getHistorySource(topicId, 'followup');
-    return `${source}\n\nStudy Source B. Suggest one way this source could be followed up to find out more about conditions in the trenches.\n\nExplain how this would help your enquiry.\n\n[4 marks]`;
+    let source = getHistorySource(topicId, 'followup');
+    
+    // If no specific followup source, create a generic one based on the topic
+    if (!source) {
+      const followupSources = {
+        'conflict-tension-interwar': `Source B: Extract from a British diplomat's report, 1938: "Hitler's promises at Munich appear to have satisfied the German people, but intelligence suggests military preparations continue in secret."`,
+        'conflict-tension-east-west': `Source B: Extract from a Soviet government statement, 1962: "The weapons in Cuba are purely defensive and pose no threat to any peaceful nation. The USSR has the right to assist its allies."`,
+        'conflict-tension-asia': `Source B: Extract from a UN report, 1951: "Civilian casualties in Korea continue to mount as fighting spreads across the peninsula. Refugee camps are overcrowded and supplies are running low."`,
+        'conflict-tension-gulf': `Source B: Extract from President Bush's diary, 1991: "The coalition forces are performing magnificently. Saddam must be shown that aggression will not be tolerated in the new world order."`
+      };
+      source = followupSources[topicId as keyof typeof followupSources] || source;
+    }
+    
+    const followupTopics = {
+      'conflict-tension-ww1': 'conditions in the trenches',
+      'conflict-tension-interwar': 'the effectiveness of appeasement',
+      'conflict-tension-east-west': 'the Cuban Missile Crisis',
+      'conflict-tension-asia': 'the impact of the Korean War',
+      'conflict-tension-gulf': 'international reactions to the Gulf War'
+    };
+    
+    return `${source}\n\nStudy Source B. Suggest one way this source could be followed up to find out more about ${followupTopics[topicId as keyof typeof followupTopics]}.\n\nExplain how this would help your enquiry.\n\n[4 marks]`;
   };
 
   const getHistoryAccountQuestion = (topicId: string): string => {
