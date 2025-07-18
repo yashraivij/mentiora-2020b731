@@ -22,6 +22,7 @@ interface SubjectCardProps {
   onTogglePin?: (subjectId: string) => void;
   isPinned?: boolean;
   lastActivity?: Date | null;
+  comingSoon?: boolean;
 }
 
 export const SubjectCard = ({ 
@@ -30,7 +31,8 @@ export const SubjectCard = ({
   onStartPractice, 
   onTogglePin, 
   isPinned = false, 
-  lastActivity 
+  lastActivity,
+  comingSoon = false 
 }: SubjectCardProps) => {
   const subjectProgress = progress.filter(p => p.subjectId === subject.id);
   const averageScore = subjectProgress.length > 0 
@@ -67,7 +69,7 @@ export const SubjectCard = ({
   return (
     <Card 
       className="group relative overflow-hidden border-0 bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer rounded-3xl"
-      onClick={() => onStartPractice(subject.id)}
+      onClick={() => !comingSoon && onStartPractice(subject.id)}
     >
       {/* Premium Background Gradient */}
       <div className={`absolute inset-0 ${subject.color} opacity-5 group-hover:opacity-10 transition-opacity duration-500`} />
@@ -166,16 +168,22 @@ export const SubjectCard = ({
               {subject.topics.length} topics available
             </span>
           </div>
-          <Button 
-            className="bg-gradient-to-r from-emerald-400 to-cyan-500 hover:from-emerald-500 hover:to-cyan-600 text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-            onClick={(e) => {
-              e.stopPropagation();
-              onStartPractice(subject.id);
-            }}
-          >
-            Start Practice
-            <ArrowRight className="h-4 w-4 ml-2" />
-          </Button>
+          {comingSoon ? (
+            <Badge variant="secondary" className="px-4 py-2 bg-gradient-to-r from-muted to-muted/80 text-muted-foreground border border-border">
+              Coming Soon
+            </Badge>
+          ) : (
+            <Button 
+              className="bg-gradient-to-r from-emerald-400 to-cyan-500 hover:from-emerald-500 hover:to-cyan-600 text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              onClick={(e) => {
+                e.stopPropagation();
+                onStartPractice(subject.id);
+              }}
+            >
+              Start Practice
+              <ArrowRight className="h-4 w-4 ml-2" />
+            </Button>
+          )}
         </div>
       </CardContent>
 

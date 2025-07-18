@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
@@ -38,6 +39,7 @@ const Dashboard = () => {
   const [pinnedSubjects, setPinnedSubjects] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<'alphabetical' | 'weakest' | 'progress'>('progress');
   const [isNotifyClicked, setIsNotifyClicked] = useState(false);
+  const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -355,21 +357,59 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {sortedSubjects.map((subject) => (
-              <SubjectCard
-                key={subject.id}
-                subject={{
-                  ...subject,
-                  color: getSubjectColor(subject.id)
-                }}
-                progress={userProgress}
-                onStartPractice={handlePractice}
-                onTogglePin={togglePinSubject}
-                isPinned={pinnedSubjects.includes(subject.id)}
-                lastActivity={getLastActivity(subject.id)}
-              />
+          {/* Exam Board Tabs */}
+          <Tabs value={selectedExamBoard} onValueChange={setSelectedExamBoard} className="mb-6">
+            <TabsList className="grid w-full grid-cols-5 max-w-md">
+              <TabsTrigger value="aqa">AQA</TabsTrigger>
+              <TabsTrigger value="edexcel">Edexcel</TabsTrigger>
+              <TabsTrigger value="ccea">CCEA</TabsTrigger>
+              <TabsTrigger value="ocr">OCR</TabsTrigger>
+              <TabsTrigger value="wjec">WJEC</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="aqa" className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {sortedSubjects.map((subject) => (
+                  <SubjectCard
+                    key={subject.id}
+                    subject={{
+                      ...subject,
+                      color: getSubjectColor(subject.id)
+                    }}
+                    progress={userProgress}
+                    onStartPractice={handlePractice}
+                    onTogglePin={togglePinSubject}
+                    isPinned={pinnedSubjects.includes(subject.id)}
+                    lastActivity={getLastActivity(subject.id)}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+
+            {['edexcel', 'ccea', 'ocr', 'wjec'].map((examBoard) => (
+              <TabsContent key={examBoard} value={examBoard} className="mt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {sortedSubjects.map((subject) => (
+                    <SubjectCard
+                      key={subject.id}
+                      subject={{
+                        ...subject,
+                        color: getSubjectColor(subject.id)
+                      }}
+                      progress={[]}
+                      onStartPractice={() => {}}
+                      onTogglePin={() => {}}
+                      isPinned={false}
+                      lastActivity={null}
+                      comingSoon={true}
+                    />
+                  ))}
+                </div>
+              </TabsContent>
             ))}
+          </Tabs>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" style={{ display: 'none' }}>
           </div>
         </div>
 
