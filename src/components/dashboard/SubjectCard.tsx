@@ -68,14 +68,33 @@ export const SubjectCard = ({
 
   return (
     <Card 
-      className="group relative overflow-hidden border-0 bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer rounded-3xl"
+      className={`group relative overflow-hidden border-0 backdrop-blur-sm shadow-lg transition-all duration-500 rounded-3xl ${
+        comingSoon 
+          ? 'bg-muted/30 cursor-not-allowed opacity-60' 
+          : 'bg-card/80 hover:shadow-2xl cursor-pointer'
+      }`}
       onClick={() => !comingSoon && onStartPractice(subject.id)}
     >
       {/* Premium Background Gradient */}
-      <div className={`absolute inset-0 ${subject.color} opacity-5 group-hover:opacity-10 transition-opacity duration-500`} />
+      <div className={`absolute inset-0 ${subject.color} ${comingSoon ? 'opacity-2' : 'opacity-5 group-hover:opacity-10'} transition-opacity duration-500`} />
+
+      {/* Coming Soon Overlay */}
+      {comingSoon && (
+        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm z-20 flex items-center justify-center">
+          <div className="text-center space-y-3">
+            <div className="w-8 h-8 mx-auto animate-pulse">
+              <div className="w-full h-full bg-gradient-to-r from-primary/20 to-primary/40 rounded-full animate-pulse"></div>
+            </div>
+            <div className="space-y-1">
+              <p className="text-lg font-bold text-foreground">Coming Soon</p>
+              <p className="text-sm text-muted-foreground">This exam board will be available soon</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Pin Button with Premium Styling */}
-      {onTogglePin && (
+      {onTogglePin && !comingSoon && (
         <Button
           variant="ghost"
           size="sm"
@@ -96,14 +115,20 @@ export const SubjectCard = ({
       <CardHeader className="pb-4 relative z-10">
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-4">
-            <div className={`w-4 h-4 rounded-full ${subject.color} shadow-lg group-hover:scale-125 transition-transform duration-300`}></div>
+            <div className={`w-4 h-4 rounded-full ${subject.color} shadow-lg ${!comingSoon && 'group-hover:scale-125'} transition-transform duration-300`}></div>
             <div>
-              <CardTitle className="text-xl font-bold text-foreground group-hover:text-muted-foreground transition-colors leading-tight">
+              <CardTitle className={`text-xl font-bold leading-tight ${
+                comingSoon 
+                  ? 'text-muted-foreground' 
+                  : 'text-foreground group-hover:text-muted-foreground'
+              } transition-colors`}>
                 {subject.name}
               </CardTitle>
               <div className="flex items-center space-x-3 mt-2">
-                <span className="text-sm font-semibold text-muted-foreground">{averageScore}% accuracy</span>
-                {totalAttempted > 0 && (
+                <span className={`text-sm font-semibold ${comingSoon ? 'text-muted-foreground' : 'text-muted-foreground'}`}>
+                  {comingSoon ? '--% accuracy' : `${averageScore}% accuracy`}
+                </span>
+                {totalAttempted > 0 && !comingSoon && (
                   <>
                     <span className="text-border">•</span>
                     <div className="flex items-center space-x-1">
@@ -115,9 +140,17 @@ export const SubjectCard = ({
               </div>
             </div>
           </div>
-          <div className={`px-4 py-2 rounded-2xl border shadow-sm ${getScoreBg(averageScore)}`}>
-            <span className={`text-sm font-bold ${getScoreColor(averageScore)}`}>
-              {averageScore}%
+          <div className={`px-4 py-2 rounded-2xl border shadow-sm ${
+            comingSoon 
+              ? 'bg-muted/50 border-muted' 
+              : getScoreBg(averageScore)
+          }`}>
+            <span className={`text-sm font-bold ${
+              comingSoon 
+                ? 'text-muted-foreground' 
+                : getScoreColor(averageScore)
+            }`}>
+              {comingSoon ? '--' : `${averageScore}%`}
             </span>
           </div>
         </div>
@@ -126,8 +159,8 @@ export const SubjectCard = ({
       <CardContent className="space-y-6 relative z-10">
         <div className="space-y-3">
           <Progress 
-            value={averageScore} 
-            className="h-3 bg-muted/50 rounded-full shadow-inner" 
+            value={comingSoon ? 0 : averageScore} 
+            className={`h-3 rounded-full shadow-inner ${comingSoon ? 'bg-muted/30' : 'bg-muted/50'}`} 
           />
           <div className="flex justify-between text-xs text-muted-foreground">
             <span>0%</span>
@@ -136,26 +169,64 @@ export const SubjectCard = ({
         </div>
         
         <div className="grid grid-cols-3 gap-4">
-          <div className="text-center space-y-2 p-3 rounded-2xl bg-emerald-50/50 border border-emerald-100 dark:bg-emerald-950/20 dark:border-emerald-800/30">
+          <div className={`text-center space-y-2 p-3 rounded-2xl border ${
+            comingSoon 
+              ? 'bg-muted/20 border-muted' 
+              : 'bg-emerald-50/50 border-emerald-100 dark:bg-emerald-950/20 dark:border-emerald-800/30'
+          }`}>
             <div className="flex items-center justify-center">
-              <CheckCircle className="h-4 w-4 text-emerald-500 dark:text-emerald-400 mr-1" />
-              <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{masteredTopics}</span>
+              <CheckCircle className={`h-4 w-4 mr-1 ${
+                comingSoon 
+                  ? 'text-muted-foreground' 
+                  : 'text-emerald-500 dark:text-emerald-400'
+              }`} />
+              <span className={`text-lg font-bold ${
+                comingSoon 
+                  ? 'text-muted-foreground' 
+                  : 'text-emerald-600 dark:text-emerald-400'
+              }`}>
+                {comingSoon ? '--' : masteredTopics}
+              </span>
             </div>
-            <p className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">Mastered</p>
+            <p className={`text-xs font-medium ${
+              comingSoon 
+                ? 'text-muted-foreground' 
+                : 'text-emerald-600 dark:text-emerald-400'
+            }`}>Mastered</p>
           </div>
           
-          <div className="text-center space-y-2 p-3 rounded-2xl bg-red-50/50 border border-red-100 dark:bg-red-950/20 dark:border-red-800/30">
+          <div className={`text-center space-y-2 p-3 rounded-2xl border ${
+            comingSoon 
+              ? 'bg-muted/20 border-muted' 
+              : 'bg-red-50/50 border-red-100 dark:bg-red-950/20 dark:border-red-800/30'
+          }`}>
             <div className="flex items-center justify-center">
-              <AlertCircle className="h-4 w-4 text-red-500 dark:text-red-400 mr-1" />
-              <span className="text-lg font-bold text-red-600 dark:text-red-400">{weakTopics}</span>
+              <AlertCircle className={`h-4 w-4 mr-1 ${
+                comingSoon 
+                  ? 'text-muted-foreground' 
+                  : 'text-red-500 dark:text-red-400'
+              }`} />
+              <span className={`text-lg font-bold ${
+                comingSoon 
+                  ? 'text-muted-foreground' 
+                  : 'text-red-600 dark:text-red-400'
+              }`}>
+                {comingSoon ? '--' : weakTopics}
+              </span>
             </div>
-            <p className="text-xs text-red-600 dark:text-red-400 font-medium">Weak</p>
+            <p className={`text-xs font-medium ${
+              comingSoon 
+                ? 'text-muted-foreground' 
+                : 'text-red-600 dark:text-red-400'
+            }`}>Weak</p>
           </div>
           
           <div className="text-center space-y-2 p-3 rounded-2xl bg-muted/20 border border-border">
             <div className="flex items-center justify-center">
               <Circle className="h-4 w-4 text-muted-foreground mr-1" />
-              <span className="text-lg font-bold text-muted-foreground">{subject.topics.length - totalAttempted}</span>
+              <span className="text-lg font-bold text-muted-foreground">
+                {comingSoon ? '--' : subject.topics.length - totalAttempted}
+              </span>
             </div>
             <p className="text-xs text-muted-foreground font-medium">Untested</p>
           </div>
@@ -169,7 +240,7 @@ export const SubjectCard = ({
             </span>
           </div>
           {comingSoon ? (
-            <Badge variant="secondary" className="px-4 py-2 bg-gradient-to-r from-muted to-muted/80 text-muted-foreground border border-border">
+            <Badge variant="secondary" className="px-4 py-2 bg-muted/50 text-muted-foreground border border-muted">
               Coming Soon
             </Badge>
           ) : (
@@ -188,9 +259,11 @@ export const SubjectCard = ({
       </CardContent>
 
       {/* Premium Border Glow */}
-      <div className={`absolute inset-0 rounded-3xl ${subject.color} p-[1px] opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none`}>
-        <div className="w-full h-full bg-card rounded-3xl" />
-      </div>
+      {!comingSoon && (
+        <div className={`absolute inset-0 rounded-3xl ${subject.color} p-[1px] opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none`}>
+          <div className="w-full h-full bg-card rounded-3xl" />
+        </div>
+      )}
     </Card>
   );
 };
