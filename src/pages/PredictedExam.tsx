@@ -409,170 +409,6 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     return topicId ? topicMap[topicId as keyof typeof topicMap] : null;
   };
 
-  // Generate exam questions from subject topics
-  const generateExamQuestions = (): ExamQuestion[] => {
-    const questions: ExamQuestion[] = [];
-    
-    // Special handling for English Literature premium exam format
-    if (subjectId === 'english-literature') {
-      // Section A: Shakespeare plays
-      const shakespearePlays = subject.topics.filter(topic => 
-        ['macbeth', 'romeo-and-juliet', 'the-tempest', 'merchant-of-venice', 'much-ado-about-nothing', 'julius-caesar'].includes(topic.id)
-      );
-      
-      // Section B: 19th Century novels
-      const novels = subject.topics.filter(topic => 
-        ['jekyll-and-hyde', 'christmas-carol', 'great-expectations', 'pride-and-prejudice', 'sign-of-four', 'jane-eyre', 'frankenstein'].includes(topic.id)
-      );
-      
-      // Generate Shakespeare questions (Section A)
-      shakespearePlays.forEach((topic) => {
-        const extractText = getShakespeareExtract(topic.id);
-        const theme = getShakespeareTheme(topic.id);
-        questions.push({
-          id: `shakespeare-${topic.id}`,
-          questionNumber: questions.length + 1,
-          text: `${extractText}\n\nStarting with this extract, explore how Shakespeare presents ${theme}.\n\nWrite about:\n• how Shakespeare presents ${theme} in this extract\n• how Shakespeare presents ${theme} in the play as a whole\n\n[30 marks]`,
-          marks: 30,
-          section: 'A'
-        });
-      });
-      
-      // Generate 19th Century novel questions (Section B)
-      novels.forEach((topic) => {
-        const extractText = getNovelExtract(topic.id);
-        const { author, theme } = getNovelDetails(topic.id);
-        questions.push({
-          id: `novel-${topic.id}`,
-          questionNumber: questions.length + 1,
-          text: `${extractText}\n\nStarting with this extract, explore how ${author} presents ${theme}.\n\nWrite about:\n• how ${author} presents ${theme} in this extract\n• how ${author} presents ${theme} in the novel as a whole\n\n[30 marks]`,
-          marks: 30,
-          section: 'B'
-        });
-      });
-      
-      return questions;
-    }
-    
-    // Special format for History
-    if (subjectId === 'history') {
-      // Section A: Period Studies (choose one)
-      const periodStudies = subject.topics.filter(topic => 
-        ['america-1840-1895', 'germany-1890-1945', 'russia-1894-1945', 'america-1920-1973'].includes(topic.id)
-      );
-      
-      // Section B: Wider World Depth Studies (choose one)
-      const depthStudies = subject.topics.filter(topic => 
-        ['conflict-tension-ww1', 'conflict-tension-interwar', 'conflict-tension-east-west', 'conflict-tension-asia', 'conflict-tension-gulf'].includes(topic.id)
-      );
-      
-      // Generate Section A questions
-      periodStudies.forEach((topic) => {
-        // Source Utility question (8 marks)
-        questions.push({
-          id: `period-utility-${topic.id}`,
-          questionNumber: questions.length + 1,
-          text: getHistorySourceQuestion(topic.id, 'utility'),
-          marks: 8,
-          section: 'A'
-        });
-        
-        // Narrative Account question (8 marks)
-        questions.push({
-          id: `period-narrative-${topic.id}`,
-          questionNumber: questions.length + 1,
-          text: getHistoryNarrativeQuestion(topic.id),
-          marks: 8,
-          section: 'A'
-        });
-        
-        // Importance/Consequence question (8 marks)
-        questions.push({
-          id: `period-importance-${topic.id}`,
-          questionNumber: questions.length + 1,
-          text: getHistoryImportanceQuestion(topic.id),
-          marks: 8,
-          section: 'A'
-        });
-      });
-      
-      // Generate Section B questions
-      depthStudies.forEach((topic) => {
-        // Source Analysis question (8 marks)
-        questions.push({
-          id: `depth-analysis-${topic.id}`,
-          questionNumber: questions.length + 1,
-          text: getHistorySourceAnalysisQuestion(topic.id),
-          marks: 8,
-          section: 'B'
-        });
-        
-        // Follow-up Inquiry question (4 marks)
-        questions.push({
-          id: `depth-followup-${topic.id}`,
-          questionNumber: questions.length + 1,
-          text: getHistoryFollowupQuestion(topic.id),
-          marks: 4,
-          section: 'B'
-        });
-        
-        // Write an Account question (8 marks)
-        questions.push({
-          id: `depth-account-${topic.id}`,
-          questionNumber: questions.length + 1,
-          text: getHistoryAccountQuestion(topic.id),
-          marks: 8,
-          section: 'B'
-        });
-        
-        // Extended Essay question (12 marks)
-        questions.push({
-          id: `depth-essay-${topic.id}`,
-          questionNumber: questions.length + 1,
-          text: getHistoryEssayQuestion(topic.id),
-          marks: 12,
-          section: 'B'
-        });
-      });
-      
-      return questions;
-    }
-    
-    // Special format for Religious Studies
-    if (subjectId === 'religious-studies') {
-      // Generate questions for all 6 religions (students choose 2)
-      const religions = ['buddhism', 'christianity', 'catholic-christianity', 'hinduism', 'islam', 'judaism', 'sikhism'];
-      
-      religions.forEach((religionId) => {
-        const religionQuestions = getReligiousStudiesQuestions(religionId);
-        questions.push(...religionQuestions);
-      });
-      
-      return questions;
-    }
-    
-    // Standard exam format for other subjects
-    let questionNumber = 1;
-    subject.topics.forEach((topic, topicIndex) => {
-      // Take 2-3 questions from each topic for a full paper
-      const topicQuestions = topic.questions.slice(0, 3);
-      
-      topicQuestions.forEach((q, qIndex) => {
-        questions.push({
-          id: `${topicIndex}-${qIndex}`,
-          questionNumber: questionNumber++,
-          text: q.question,
-          marks: q.marks || 2,
-          section: topicIndex < Math.ceil(subject.topics.length / 2) ? 'A' : 'B'
-        });
-      });
-    });
-    
-    return questions.slice(0, 20); // Limit to 20 questions for exam length
-  };
-
-  const [examQuestions] = useState<ExamQuestion[]>(generateExamQuestions());
-
   // Helper functions for Religious Studies exam format
   const getReligiousStudiesQuestions = (religionId: string): ExamQuestion[] => {
     const questions: ExamQuestion[] = [];
@@ -825,6 +661,170 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
 
     return questions;
   };
+
+  // Generate exam questions from subject topics
+  const generateExamQuestions = (): ExamQuestion[] => {
+    const questions: ExamQuestion[] = [];
+    
+    // Special handling for English Literature premium exam format
+    if (subjectId === 'english-literature') {
+      // Section A: Shakespeare plays
+      const shakespearePlays = subject.topics.filter(topic => 
+        ['macbeth', 'romeo-and-juliet', 'the-tempest', 'merchant-of-venice', 'much-ado-about-nothing', 'julius-caesar'].includes(topic.id)
+      );
+      
+      // Section B: 19th Century novels
+      const novels = subject.topics.filter(topic => 
+        ['jekyll-and-hyde', 'christmas-carol', 'great-expectations', 'pride-and-prejudice', 'sign-of-four', 'jane-eyre', 'frankenstein'].includes(topic.id)
+      );
+      
+      // Generate Shakespeare questions (Section A)
+      shakespearePlays.forEach((topic) => {
+        const extractText = getShakespeareExtract(topic.id);
+        const theme = getShakespeareTheme(topic.id);
+        questions.push({
+          id: `shakespeare-${topic.id}`,
+          questionNumber: questions.length + 1,
+          text: `${extractText}\n\nStarting with this extract, explore how Shakespeare presents ${theme}.\n\nWrite about:\n• how Shakespeare presents ${theme} in this extract\n• how Shakespeare presents ${theme} in the play as a whole\n\n[30 marks]`,
+          marks: 30,
+          section: 'A'
+        });
+      });
+      
+      // Generate 19th Century novel questions (Section B)
+      novels.forEach((topic) => {
+        const extractText = getNovelExtract(topic.id);
+        const { author, theme } = getNovelDetails(topic.id);
+        questions.push({
+          id: `novel-${topic.id}`,
+          questionNumber: questions.length + 1,
+          text: `${extractText}\n\nStarting with this extract, explore how ${author} presents ${theme}.\n\nWrite about:\n• how ${author} presents ${theme} in this extract\n• how ${author} presents ${theme} in the novel as a whole\n\n[30 marks]`,
+          marks: 30,
+          section: 'B'
+        });
+      });
+      
+      return questions;
+    }
+    
+    // Special format for History
+    if (subjectId === 'history') {
+      // Section A: Period Studies (choose one)
+      const periodStudies = subject.topics.filter(topic => 
+        ['america-1840-1895', 'germany-1890-1945', 'russia-1894-1945', 'america-1920-1973'].includes(topic.id)
+      );
+      
+      // Section B: Wider World Depth Studies (choose one)
+      const depthStudies = subject.topics.filter(topic => 
+        ['conflict-tension-ww1', 'conflict-tension-interwar', 'conflict-tension-east-west', 'conflict-tension-asia', 'conflict-tension-gulf'].includes(topic.id)
+      );
+      
+      // Generate Section A questions
+      periodStudies.forEach((topic) => {
+        // Source Utility question (8 marks)
+        questions.push({
+          id: `period-utility-${topic.id}`,
+          questionNumber: questions.length + 1,
+          text: getHistorySourceQuestion(topic.id, 'utility'),
+          marks: 8,
+          section: 'A'
+        });
+        
+        // Narrative Account question (8 marks)
+        questions.push({
+          id: `period-narrative-${topic.id}`,
+          questionNumber: questions.length + 1,
+          text: getHistoryNarrativeQuestion(topic.id),
+          marks: 8,
+          section: 'A'
+        });
+        
+        // Importance/Consequence question (8 marks)
+        questions.push({
+          id: `period-importance-${topic.id}`,
+          questionNumber: questions.length + 1,
+          text: getHistoryImportanceQuestion(topic.id),
+          marks: 8,
+          section: 'A'
+        });
+      });
+      
+      // Generate Section B questions
+      depthStudies.forEach((topic) => {
+        // Source Analysis question (8 marks)
+        questions.push({
+          id: `depth-analysis-${topic.id}`,
+          questionNumber: questions.length + 1,
+          text: getHistorySourceAnalysisQuestion(topic.id),
+          marks: 8,
+          section: 'B'
+        });
+        
+        // Follow-up Inquiry question (4 marks)
+        questions.push({
+          id: `depth-followup-${topic.id}`,
+          questionNumber: questions.length + 1,
+          text: getHistoryFollowupQuestion(topic.id),
+          marks: 4,
+          section: 'B'
+        });
+        
+        // Write an Account question (8 marks)
+        questions.push({
+          id: `depth-account-${topic.id}`,
+          questionNumber: questions.length + 1,
+          text: getHistoryAccountQuestion(topic.id),
+          marks: 8,
+          section: 'B'
+        });
+        
+        // Extended Essay question (12 marks)
+        questions.push({
+          id: `depth-essay-${topic.id}`,
+          questionNumber: questions.length + 1,
+          text: getHistoryEssayQuestion(topic.id),
+          marks: 12,
+          section: 'B'
+        });
+      });
+      
+      return questions;
+    }
+    
+    // Special format for Religious Studies
+    if (subjectId === 'religious-studies') {
+      // Generate questions for all 6 religions (students choose 2)
+      const religions = ['buddhism', 'christianity', 'catholic-christianity', 'hinduism', 'islam', 'judaism', 'sikhism'];
+      
+      religions.forEach((religionId) => {
+        const religionQuestions = getReligiousStudiesQuestions(religionId);
+        questions.push(...religionQuestions);
+      });
+      
+      return questions;
+    }
+    
+    // Standard exam format for other subjects
+    let questionNumber = 1;
+    subject.topics.forEach((topic, topicIndex) => {
+      // Take 2-3 questions from each topic for a full paper
+      const topicQuestions = topic.questions.slice(0, 3);
+      
+      topicQuestions.forEach((q, qIndex) => {
+        questions.push({
+          id: `${topicIndex}-${qIndex}`,
+          questionNumber: questionNumber++,
+          text: q.question,
+          marks: q.marks || 2,
+          section: topicIndex < Math.ceil(subject.topics.length / 2) ? 'A' : 'B'
+        });
+      });
+    });
+    
+    return questions.slice(0, 20); // Limit to 20 questions for exam length
+  };
+
+  const [examQuestions] = useState<ExamQuestion[]>(generateExamQuestions());
 
   const getExamDuration = () => {
     const durations = {
