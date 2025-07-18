@@ -398,6 +398,14 @@ const Dashboard = () => {
                       // Hide maths-edexcel from other tabs, show other subjects as coming soon
                       return subject.id !== 'maths-edexcel';
                     })
+                    .sort((a, b) => {
+                      // In edexcel tab, put maths-edexcel first
+                      if (examBoard === 'edexcel') {
+                        if (a.id === 'maths-edexcel') return -1;
+                        if (b.id === 'maths-edexcel') return 1;
+                      }
+                      return 0;
+                    })
                     .map((subject) => (
                     <SubjectCard
                       key={subject.id}
