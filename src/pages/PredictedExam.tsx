@@ -538,6 +538,19 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return questions;
     }
     
+    // Special format for Religious Studies
+    if (subjectId === 'religious-studies') {
+      // Generate questions for all 6 religions (students choose 2)
+      const religions = ['buddhism', 'christianity', 'catholic-christianity', 'hinduism', 'islam', 'judaism', 'sikhism'];
+      
+      religions.forEach((religionId) => {
+        const religionQuestions = getReligiousStudiesQuestions(religionId);
+        questions.push(...religionQuestions);
+      });
+      
+      return questions;
+    }
+    
     // Standard exam format for other subjects
     let questionNumber = 1;
     subject.topics.forEach((topic, topicIndex) => {
@@ -560,6 +573,259 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
 
   const [examQuestions] = useState<ExamQuestion[]>(generateExamQuestions());
 
+  // Helper functions for Religious Studies exam format
+  const getReligiousStudiesQuestions = (religionId: string): ExamQuestion[] => {
+    const questions: ExamQuestion[] = [];
+    const religions = {
+      buddhism: {
+        name: 'Buddhism',
+        questions: [
+          {
+            id: `${religionId}-q1`,
+            questionNumber: 1,
+            text: 'Outline three Buddhist teachings about the Three Jewels (Buddha, Dharma, Sangha).',
+            marks: 3,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q2`,
+            questionNumber: 2,
+            text: 'Describe two ways Buddhists might use meditation in their daily practice.',
+            marks: 4,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3`,
+            questionNumber: 3,
+            text: 'Explain two Buddhist teachings about karma and rebirth.',
+            marks: 5,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q4`,
+            questionNumber: 4,
+            text: '"The Four Noble Truths are the most important Buddhist teachings."\n\nEvaluate this statement. In your answer you should:\n• refer to Buddhist teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
+            marks: 12,
+            religion: religionId
+          }
+        ]
+      },
+      christianity: {
+        name: 'Christianity',
+        questions: [
+          {
+            id: `${religionId}-q1`,
+            questionNumber: 1,
+            text: 'Outline three Christian beliefs about the Trinity.',
+            marks: 3,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q2`,
+            questionNumber: 2,
+            text: 'Describe two ways Christians might worship in church.',
+            marks: 4,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3`,
+            questionNumber: 3,
+            text: 'Explain two Christian teachings about salvation.',
+            marks: 5,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q4`,
+            questionNumber: 4,
+            text: '"Jesus\' death on the cross is the most important Christian belief."\n\nEvaluate this statement. In your answer you should:\n• refer to Christian teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
+            marks: 12,
+            religion: religionId
+          }
+        ]
+      },
+      'catholic-christianity': {
+        name: 'Catholic Christianity',
+        questions: [
+          {
+            id: `${religionId}-q1`,
+            questionNumber: 1,
+            text: 'Outline three Catholic beliefs about the sacraments.',
+            marks: 3,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q2`,
+            questionNumber: 2,
+            text: 'Describe two features of Catholic Mass.',
+            marks: 4,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3`,
+            questionNumber: 3,
+            text: 'Explain two Catholic teachings about the Pope\'s authority.',
+            marks: 5,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q4`,
+            questionNumber: 4,
+            text: '"The Eucharist is the most important Catholic sacrament."\n\nEvaluate this statement. In your answer you should:\n• refer to Catholic teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
+            marks: 12,
+            religion: religionId
+          }
+        ]
+      },
+      hinduism: {
+        name: 'Hinduism',
+        questions: [
+          {
+            id: `${religionId}-q1`,
+            questionNumber: 1,
+            text: 'Outline three Hindu beliefs about dharma.',
+            marks: 3,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q2`,
+            questionNumber: 2,
+            text: 'Describe two ways Hindus might celebrate Diwali.',
+            marks: 4,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3`,
+            questionNumber: 3,
+            text: 'Explain two Hindu teachings about the cycle of samsara.',
+            marks: 5,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q4`,
+            questionNumber: 4,
+            text: '"Moksha is the ultimate goal for all Hindus."\n\nEvaluate this statement. In your answer you should:\n• refer to Hindu teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
+            marks: 12,
+            religion: religionId
+          }
+        ]
+      },
+      islam: {
+        name: 'Islam',
+        questions: [
+          {
+            id: `${religionId}-q1`,
+            questionNumber: 1,
+            text: 'Outline three of the Five Pillars of Islam.',
+            marks: 3,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q2`,
+            questionNumber: 2,
+            text: 'Describe two ways Muslims observe Ramadan.',
+            marks: 4,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3`,
+            questionNumber: 3,
+            text: 'Explain two Muslim teachings about the importance of the Quran.',
+            marks: 5,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q4`,
+            questionNumber: 4,
+            text: '"The Hajj pilgrimage is the most important duty for Muslims."\n\nEvaluate this statement. In your answer you should:\n• refer to Islamic teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
+            marks: 12,
+            religion: religionId
+          }
+        ]
+      },
+      judaism: {
+        name: 'Judaism',
+        questions: [
+          {
+            id: `${religionId}-q1`,
+            questionNumber: 1,
+            text: 'Outline three Jewish beliefs about the covenant with God.',
+            marks: 3,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q2`,
+            questionNumber: 2,
+            text: 'Describe two features of Sabbath observance.',
+            marks: 4,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3`,
+            questionNumber: 3,
+            text: 'Explain two Jewish teachings about the importance of the Torah.',
+            marks: 5,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q4`,
+            questionNumber: 4,
+            text: '"The synagogue is the most important place for Jewish worship."\n\nEvaluate this statement. In your answer you should:\n• refer to Jewish teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
+            marks: 12,
+            religion: religionId
+          }
+        ]
+      },
+      sikhism: {
+        name: 'Sikhism',
+        questions: [
+          {
+            id: `${religionId}-q1`,
+            questionNumber: 1,
+            text: 'Outline three Sikh beliefs about the nature of God.',
+            marks: 3,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q2`,
+            questionNumber: 2,
+            text: 'Describe two features of worship in the gurdwara.',
+            marks: 4,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3`,
+            questionNumber: 3,
+            text: 'Explain two Sikh teachings about the importance of the Guru Granth Sahib.',
+            marks: 5,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q4`,
+            questionNumber: 4,
+            text: '"The Five Ks are the most important way for Sikhs to show their faith."\n\nEvaluate this statement. In your answer you should:\n• refer to Sikh teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
+            marks: 12,
+            religion: religionId
+          }
+        ]
+      }
+    };
+
+    const religion = religions[religionId as keyof typeof religions];
+    if (religion) {
+      religion.questions.forEach((q, index) => {
+        questions.push({
+          id: q.id,
+          questionNumber: q.questionNumber,
+          text: q.text,
+          marks: q.marks,
+          section: religionId
+        });
+      });
+    }
+
+    return questions;
+  };
+
   const getExamDuration = () => {
     const durations = {
       chemistry: 105, // 1h 45min
@@ -569,6 +835,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       "english-language": 105,
       "english-literature": 105,
       history: 75, // 1h 15min
+      "religious-studies": 105, // 1h 45min
       geography: 90,
       "computer-science": 90,
       psychology: 105
@@ -582,6 +849,9 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     }
     if (subjectId === 'history') {
       return 56; // History Paper 1 out of 56 marks
+    }
+    if (subjectId === 'religious-studies') {
+      return 102; // 96 marks + 6 SPaG marks
     }
     return examQuestions.reduce((total, q) => total + q.marks, 0);
   };
@@ -642,8 +912,8 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
   };
 
   const handleSubmit = () => {
-    // For English Literature and History, allow submission at any time
-    if (subjectId === 'english-literature' || subjectId === 'history') {
+    // For English Literature, History, and Religious Studies, allow submission at any time
+    if (subjectId === 'english-literature' || subjectId === 'history' || subjectId === 'religious-studies') {
       // No validation required - allow submission even with no answers
     } else {
       // For other subjects, require all questions to be answered
@@ -691,7 +961,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
               <div className="flex items-center justify-center space-x-3 mb-4">
                 <Crown className="h-8 w-8 text-amber-500" />
                 <div>
-                  <CardTitle className="text-2xl font-bold">{subjectId === 'history' ? 'History Paper 1' : `${subject.name} Predicted Exam`}</CardTitle>
+                  <CardTitle className="text-2xl font-bold">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : `${subject.name} Predicted Exam`}</CardTitle>
                   <CardDescription>AQA GCSE • {getExamDuration()} minutes</CardDescription>
                 </div>
               </div>
@@ -730,6 +1000,14 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
                     <li>• You have {getExamDuration()} minutes to complete this paper</li>
                     <li>• Questions range from 4-12 marks each</li>
                   </ul>
+                ) : subjectId === 'religious-studies' ? (
+                  <ul className="text-sm text-amber-700 dark:text-amber-300 space-y-1">
+                    <li>• <strong>Choose TWO religions</strong> from Buddhism, Christianity, Catholic Christianity, Hinduism, Islam, Judaism, or Sikhism</li>
+                    <li>• Answer all questions for your chosen religions only</li>
+                    <li>• Each religion has two 5-part question sets (1+2+4+5+12 marks each)</li>
+                    <li>• Total: 96 marks + 6 marks for spelling, punctuation and grammar</li>
+                    <li>• You have {getExamDuration()} minutes to complete this paper</li>
+                  </ul>
                 ) : (
                   <ul className="text-sm text-amber-700 dark:text-amber-300 space-y-1">
                     <li>• Answer all questions in the spaces provided</li>
@@ -763,7 +1041,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
             <div className="flex items-center space-x-4">
               <Crown className="h-6 w-6 text-amber-500" />
               <div>
-                <h1 className="text-lg font-bold text-foreground">{subjectId === 'history' ? 'History Paper 1' : `${subject.name} Predicted Exam`}</h1>
+                <h1 className="text-lg font-bold text-foreground">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : `${subject.name} Predicted Exam`}</h1>
                 <p className="text-sm text-muted-foreground">Question {currentQuestion + 1} of {examQuestions.length}</p>
               </div>
             </div>
@@ -775,7 +1053,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
                   {formatTime(timeLeft)}
                 </span>
               </div>
-              {(subjectId === 'english-literature' || subjectId === 'history') && (
+              {(subjectId === 'english-literature' || subjectId === 'history' || subjectId === 'religious-studies') && (
                 <Button
                   onClick={handleSubmit}
                   className="bg-gradient-to-r from-primary to-primary/90"

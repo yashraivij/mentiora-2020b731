@@ -26,6 +26,208 @@ export interface Subject {
 
 export const curriculum: Subject[] = [
   {
+    id: 'religious-studies',
+    name: 'Religious Studies',
+    topics: [
+      {
+        id: 'buddhism',
+        name: 'Buddhism',
+        questions: [
+          {
+            id: 'buddhism-q1',
+            question: 'Give one example of the Four Noble Truths.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'The First Noble Truth is Dukkha (suffering exists) or The Second Noble Truth is Samudaya (craving is the cause of suffering) or The Third Noble Truth is Nirodha (suffering can end) or The Fourth Noble Truth is Magga (the Eightfold Path leads to the end of suffering).',
+            markingCriteria: {
+              breakdown: ['Correct identification of any one of the Four Noble Truths (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'buddhism-q2',
+            question: 'Give two Buddhist beliefs about karma.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Karma is the law of cause and effect from actions. Good actions lead to good consequences and bad actions lead to bad consequences.',
+            markingCriteria: {
+              breakdown: ['One correct belief about karma (1 mark)', 'Second correct belief about karma (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          }
+        ]
+      },
+      {
+        id: 'christianity',
+        name: 'Christianity',
+        questions: [
+          {
+            id: 'christianity-q1',
+            question: 'Give one example of Christian worship.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Prayer or Mass/Eucharist or Singing hymns or Bible reading.',
+            markingCriteria: {
+              breakdown: ['Correct example of Christian worship (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'christianity-q2',
+            question: 'Give two Christian beliefs about Jesus.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Jesus is the Son of God. Jesus died to save humanity from sin.',
+            markingCriteria: {
+              breakdown: ['One correct belief about Jesus (1 mark)', 'Second correct belief about Jesus (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          }
+        ]
+      },
+      {
+        id: 'catholic-christianity',
+        name: 'Catholic Christianity',
+        questions: [
+          {
+            id: 'catholic-q1',
+            question: 'Give one example of a Catholic sacrament.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Baptism or Confirmation or Eucharist or Marriage or Holy Orders or Anointing of the Sick or Reconciliation.',
+            markingCriteria: {
+              breakdown: ['Correct example of Catholic sacrament (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'catholic-q2',
+            question: 'Give two Catholic beliefs about the Pope.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The Pope is the successor of St Peter. The Pope has authority over the Catholic Church worldwide.',
+            markingCriteria: {
+              breakdown: ['One correct belief about the Pope (1 mark)', 'Second correct belief about the Pope (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          }
+        ]
+      },
+      {
+        id: 'hinduism',
+        name: 'Hinduism',
+        questions: [
+          {
+            id: 'hinduism-q1',
+            question: 'Give one example of a Hindu festival.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Diwali or Holi or Dussehra or Navaratri.',
+            markingCriteria: {
+              breakdown: ['Correct example of Hindu festival (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'hinduism-q2',
+            question: 'Give two Hindu beliefs about dharma.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Dharma is religious duty or righteous living. Following dharma leads to good karma.',
+            markingCriteria: {
+              breakdown: ['One correct belief about dharma (1 mark)', 'Second correct belief about dharma (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          }
+        ]
+      },
+      {
+        id: 'islam',
+        name: 'Islam',
+        questions: [
+          {
+            id: 'islam-q1',
+            question: 'Give one example of the Five Pillars of Islam.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Shahada (declaration of faith) or Salah (prayer) or Zakah (charity) or Sawm (fasting during Ramadan) or Hajj (pilgrimage to Mecca).',
+            markingCriteria: {
+              breakdown: ['Correct example of one of the Five Pillars (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'islam-q2',
+            question: 'Give two Muslim beliefs about the Quran.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The Quran is the direct word of Allah. The Quran was revealed to the Prophet Muhammad.',
+            markingCriteria: {
+              breakdown: ['One correct belief about the Quran (1 mark)', 'Second correct belief about the Quran (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          }
+        ]
+      },
+      {
+        id: 'judaism',
+        name: 'Judaism',
+        questions: [
+          {
+            id: 'judaism-q1',
+            question: 'Give one example of a Jewish festival.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Passover or Rosh Hashanah or Yom Kippur or Sukkot.',
+            markingCriteria: {
+              breakdown: ['Correct example of Jewish festival (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'judaism-q2',
+            question: 'Give two Jewish beliefs about the Torah.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The Torah contains God\'s law for the Jewish people. The Torah was given to Moses at Mount Sinai.',
+            markingCriteria: {
+              breakdown: ['One correct belief about the Torah (1 mark)', 'Second correct belief about the Torah (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          }
+        ]
+      },
+      {
+        id: 'sikhism',
+        name: 'Sikhism',
+        questions: [
+          {
+            id: 'sikhism-q1',
+            question: 'Give one example of Sikh worship.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Prayer (simran) or Gurdwara worship or Reading from Guru Granth Sahib or Singing hymns (kirtan).',
+            markingCriteria: {
+              breakdown: ['Correct example of Sikh worship (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'sikhism-q2',
+            question: 'Give two Sikh beliefs about the Guru Granth Sahib.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The Guru Granth Sahib is the living Guru. The Guru Granth Sahib contains the teachings of the Sikh Gurus.',
+            markingCriteria: {
+              breakdown: ['One correct belief about Guru Granth Sahib (1 mark)', 'Second correct belief about Guru Granth Sahib (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          }
+        ]
+      }
+    ]
+  },
+  {
     id: 'history',
     name: 'History',
     topics: [
