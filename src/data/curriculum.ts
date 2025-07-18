@@ -260,10 +260,10 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'cld-q4',
-            question: 'Using the writing sample provided, analyse how this 5-year-old is developing their understanding of spelling patterns.\n\nWriting Sample:\n"Mi cat is blak and wite. She liks to pla with her bal. Yestrda she ran up the tre and got stuk. Dad had to get a lader to help her down. She was veri frynd but then she was ok."',
+            question: 'Analyse how this 5-year-old child uses different sentence structures in their storytelling.\n\nExtract from child\'s story:\n"My cat is black and white. She likes to play with her ball. Yesterday she ran up the tree and got stuck. Dad had to get a ladder to help her down. She was very frightened but then she was okay. Now she stays away from tall trees."',
             marks: 30,
             difficulty: 'medium',
-            modelAnswer: 'The child demonstrates phonetic spelling strategies, representing sounds they hear with logical letter choices. Errors like "yestrda" for "yesterday" and "frynd" for "frightened" show application of sound-letter correspondence rules. The child uses conventional spelling for high-frequency words like "cat", "she", "up" while applying phonetic strategies for complex words, indicating semi-phonetic spelling development.',
+            modelAnswer: 'The child demonstrates sophisticated sentence structures including complex sentences with subordinate clauses ("She was very frightened but then she was okay"). They use temporal markers ("Yesterday", "Now") showing understanding of narrative sequencing. The child employs past tense consistently and uses varied sentence lengths, indicating advanced syntactic development for their age.',
             markingCriteria: {
               breakdown: [
                 'Analysis of spelling strategies (6-8 marks)',
