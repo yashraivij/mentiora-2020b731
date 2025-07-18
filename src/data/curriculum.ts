@@ -8200,6 +8200,28 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'b1-q9',
+            question: 'A student investigated the effect of temperature on enzyme activity. Describe what a graph showing enzyme activity (y-axis) against temperature (x-axis) would look like and explain the shape.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The graph would show activity increasing gradually from low temperatures, reaching a peak at the optimum temperature (around 37°C for human enzymes), then dropping sharply to zero at higher temperatures. The initial increase is due to increased kinetic energy and more enzyme-substrate collisions. The sharp decrease after the optimum is due to enzyme denaturation where the active site changes shape permanently.',
+            markingCriteria: {
+              breakdown: ['Gradual increase at low temperatures (1 mark)', 'Peak at optimum temperature (1 mark)', 'Sharp decrease at high temperatures (1 mark)', 'Explanation of increased collisions (1 mark)', 'Explanation of denaturation (1 mark)', 'Reference to active site shape change (1 mark)']
+            },
+            specReference: 'B1.9'
+          },
+          {
+            id: 'b1-q10',
+            question: 'Describe the trend you would expect to see in a graph showing the rate of photosynthesis against light intensity, and explain why this trend occurs.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The graph would show the rate of photosynthesis increasing linearly at first, then levelling off to become constant at high light intensities. At low light intensities, light is the limiting factor so increasing light increases the rate. At high intensities, other factors like CO2 concentration or temperature become limiting, so further increases in light have no effect.',
+            markingCriteria: {
+              breakdown: ['Linear increase initially (1 mark)', 'Levels off at high intensities (1 mark)', 'Light is limiting factor at low intensities (1 mark)', 'Other factors become limiting at high intensities (1 mark)']
+            },
+            specReference: 'B1.10'
+          },
+          {
+            id: 'b1-q9',
             question: 'Explain what happens to plant cells when placed in pure water.',
             marks: 3,
             difficulty: 'medium',
@@ -8335,6 +8357,28 @@ export const curriculum: Subject[] = [
               breakdown: ['Large surface area from alveoli (1 mark)', 'Walls one cell thick (1 mark)', 'Rich blood supply maintains gradients (1 mark)', 'Moist lining dissolves gases (1 mark)']
             },
             specReference: 'B2.10'
+          },
+          {
+            id: 'b2-q11',
+            question: 'A student measured heart rate during different levels of exercise. Describe what a graph showing heart rate (y-axis) against exercise intensity (x-axis) would show and explain why.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The graph would show heart rate increasing steadily as exercise intensity increases, starting from resting heart rate and rising to maximum heart rate during intense exercise. Heart rate increases because muscles need more oxygen and glucose during exercise. The heart pumps faster to deliver more blood containing oxygen and nutrients to working muscles, and to remove waste products like carbon dioxide more quickly.',
+            markingCriteria: {
+              breakdown: ['Heart rate increases with exercise intensity (1 mark)', 'Starts from resting rate (1 mark)', 'Reaches maximum during intense exercise (1 mark)', 'Muscles need more oxygen and glucose (1 mark)', 'Heart pumps faster to deliver blood (1 mark)', 'Removes waste products more quickly (1 mark)']
+            },
+            specReference: 'B2.11'
+          },
+          {
+            id: 'b2-q12',
+            question: 'Explain what a graph showing the breakdown of starch by amylase over time would look like and why.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The graph would show starch concentration decreasing over time while glucose concentration increases. Initially the rate of breakdown is rapid, then slows down as substrate becomes limited. The graph would level off when all starch is converted or when the enzyme becomes saturated.',
+            markingCriteria: {
+              breakdown: ['Starch decreases over time (1 mark)', 'Glucose increases over time (1 mark)', 'Initial rapid rate then slowing (1 mark)', 'Levels off due to substrate limitation or saturation (1 mark)']
+            },
+            specReference: 'B2.12'
           }
         ]
       },
@@ -8451,6 +8495,17 @@ export const curriculum: Subject[] = [
               breakdown: ['Laboratory testing on cells/tissues (1 mark)', 'Animal testing for safety/effectiveness (1 mark)', 'Human clinical trials (1 mark)', 'Test safety, dosage, and effectiveness (1 mark)']
             },
             specReference: 'B3.10'
+          },
+          {
+            id: 'b3-q11',
+            question: 'Describe what a graph showing antibody concentration in the blood over time during primary and secondary immune responses would look like.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'During primary response, antibody concentration rises slowly after initial infection, peaks at a low level, then decreases. During secondary response (upon re-exposure), antibody concentration rises much more rapidly, reaches a much higher peak, and remains elevated for longer. The secondary response shows the effect of memory cells producing antibodies faster and in greater quantities.',
+            markingCriteria: {
+              breakdown: ['Primary response - slow initial rise (1 mark)', 'Primary response - low peak then decrease (1 mark)', 'Secondary response - rapid rise (1 mark)', 'Secondary response - higher peak (1 mark)', 'Secondary response - remains elevated longer (1 mark)', 'Memory cells explanation (1 mark)']
+            },
+            specReference: 'B3.11'
           }
         ]
       },
@@ -8567,6 +8622,28 @@ export const curriculum: Subject[] = [
               breakdown: ['Broad and flat for light absorption (1 mark)', 'Chloroplasts contain chlorophyll (1 mark)', 'Stomata for gas exchange (1 mark)', 'Veins for transport (1 mark)', 'Thin for light penetration (1 mark)']
             },
             specReference: 'B4.10'
+          },
+          {
+            id: 'b4-q11',
+            question: 'A student investigated the effect of light intensity on the rate of photosynthesis by counting oxygen bubbles. Describe what the results would show on a graph and explain the pattern.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The graph would show the rate of photosynthesis (oxygen production) increasing linearly with light intensity initially, then levelling off at higher intensities. At low light intensities, light is the limiting factor so increasing light increases the rate proportionally. At high intensities, other factors like CO2 concentration or temperature become limiting, so further increases in light intensity have no effect on the rate.',
+            markingCriteria: {
+              breakdown: ['Linear increase initially (1 mark)', 'Levels off at high intensities (1 mark)', 'Light is limiting factor at low intensities (1 mark)', 'Proportional increase when light limiting (1 mark)', 'Other factors become limiting at high intensities (1 mark)', 'No effect when other factors limiting (1 mark)']
+            },
+            specReference: 'B4.11'
+          },
+          {
+            id: 'b4-q12',
+            question: 'Describe how you would expect oxygen production during photosynthesis to change over a 24-hour period and explain why.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Oxygen production would be zero during darkness (night), start increasing at dawn, peak during midday when light intensity is highest, then decrease through the afternoon and stop at dusk. This pattern occurs because photosynthesis requires light energy, so oxygen production directly follows the availability of light throughout the day.',
+            markingCriteria: {
+              breakdown: ['Zero production during darkness (1 mark)', 'Increases from dawn, peaks at midday (1 mark)', 'Decreases through afternoon, stops at dusk (1 mark)', 'Pattern follows light availability (1 mark)']
+            },
+            specReference: 'B4.12'
           }
         ]
       },
