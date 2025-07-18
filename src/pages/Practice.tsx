@@ -819,9 +819,90 @@ const Practice = () => {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-foreground mb-6 leading-relaxed">
-                  {currentQuestion.question}
-                </p>
+                {/* Question Text with Extract/Transcript Formatting */}
+                {(() => {
+                  const questionText = currentQuestion.question;
+                  
+                  // Check for transcript or extract sections
+                  const transcriptMatch = questionText.match(/(.*?)(Transcript:|Extract:|Text A:|Text B:)(.*)/s);
+                  
+                  if (transcriptMatch) {
+                    const [, beforeText, markerText, afterText] = transcriptMatch;
+                    
+                    // Split the after text to separate the actual transcript/extract from any following text
+                    const parts = afterText.split(/\n(?=[A-Z][^:]*:)/);
+                    const extractContent = parts[0];
+                    const remainingText = parts.slice(1).join('\n');
+                    
+                    return (
+                      <div className="space-y-4">
+                        {beforeText.trim() && (
+                          <p className="text-foreground leading-relaxed">
+                            {beforeText.trim()}
+                          </p>
+                        )}
+                        
+                        {/* Extract/Transcript Display */}
+                        <div className="bg-muted/50 p-4 rounded-lg border-l-4 border-primary">
+                          <h4 className="font-semibold text-foreground mb-3 flex items-center">
+                            <Book className="h-4 w-4 mr-2" />
+                            {markerText.replace(':', '')}
+                          </h4>
+                          <div className="text-foreground font-mono text-sm leading-relaxed whitespace-pre-line bg-background/80 p-3 rounded">
+                            {extractContent.trim()}
+                          </div>
+                        </div>
+                        
+                        {remainingText.trim() && (
+                          <p className="text-foreground leading-relaxed">
+                            {remainingText.trim()}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  }
+                  
+                  // For questions with embedded texts (Text A: / Text B: format)
+                  const textSections = questionText.split(/(Text [A-Z]:)/);
+                  if (textSections.length > 1) {
+                    return (
+                      <div className="space-y-4">
+                        {textSections.map((section, index) => {
+                          if (section.match(/Text [A-Z]:/)) {
+                            const nextSection = textSections[index + 1];
+                            if (nextSection) {
+                              return (
+                                <div key={index} className="bg-muted/50 p-4 rounded-lg border-l-4 border-primary">
+                                  <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                                    <Book className="h-4 w-4 mr-2" />
+                                    {section}
+                                  </h4>
+                                  <div className="text-foreground italic bg-background/80 p-3 rounded">
+                                    "{nextSection.trim()}"
+                                  </div>
+                                </div>
+                              );
+                            }
+                          } else if (index === 0 || !textSections[index - 1]?.match(/Text [A-Z]:/)) {
+                            return (
+                              <p key={index} className="text-foreground leading-relaxed">
+                                {section.trim()}
+                              </p>
+                            );
+                          }
+                          return null;
+                        })}
+                      </div>
+                    );
+                  }
+                  
+                  // Default rendering for simple questions
+                  return (
+                    <p className="text-foreground mb-6 leading-relaxed">
+                      {questionText}
+                    </p>
+                  );
+                })()}
                 
                 <div className="space-y-4">
                   <div>
