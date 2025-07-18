@@ -1316,8 +1316,8 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
   };
 
   const handleSubmit = () => {
-    // For English Literature, History, and Religious Studies, allow submission at any time
-    if (subjectId === 'english-literature' || subjectId === 'history' || subjectId === 'religious-studies') {
+    // For English Literature, English Language, History, and Religious Studies, allow submission at any time
+    if (subjectId === 'english-literature' || subjectId === 'english-language' || subjectId === 'history' || subjectId === 'religious-studies') {
       // No validation required - allow submission even with no answers
     } else {
       // For other subjects, require all questions to be answered
@@ -1457,7 +1457,7 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
                   {formatTime(timeLeft)}
                 </span>
               </div>
-              {(subjectId === 'english-literature' || subjectId === 'history' || subjectId === 'religious-studies') && (
+              {(subjectId === 'english-literature' || subjectId === 'english-language' || subjectId === 'history' || subjectId === 'religious-studies') && (
                 <Button
                   onClick={handleSubmit}
                   className="bg-gradient-to-r from-primary to-primary/90"
@@ -1568,7 +1568,7 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
                     Previous
                   </Button>
                   
-                  {currentQuestion === examQuestions.length - 1 && subjectId !== 'english-literature' && subjectId !== 'history' ? (
+                  {currentQuestion === examQuestions.length - 1 && subjectId !== 'english-literature' && subjectId !== 'english-language' && subjectId !== 'history' ? (
                     <Button
                       onClick={handleSubmit}
                       className="bg-gradient-to-r from-primary to-primary/90"

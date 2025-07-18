@@ -171,17 +171,32 @@ export const curriculum: Subject[] = [
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
-            id: 'tvr-q10',
-            question: 'Evaluate the claim that "Standard English is superior to regional dialects." Consider different perspectives on this issue.',
-            marks: 12,
-            difficulty: 'hard',
-            modelAnswer: 'Supporters might argue Standard English enables clear communication across regions and social groups, providing access to education and employment opportunities. It represents linguistic unity and is internationally recognized. However, this view reflects linguistic prejudice rather than objective superiority. All dialects are linguistically valid systems with consistent rules and rich expressive capabilities. Regional dialects preserve cultural heritage and community identity. The prestige of Standard English results from social and political power, not inherent linguistic quality. A balanced view recognizes Standard English\'s practical advantages while valuing dialectal diversity and rejecting deficit models of non-standard varieties.',
+            id: 'tvr-q11',
+            question: 'Compare how these two texts use punctuation to create different effects:\n\nText A: "The results were clear. Undeniable. Final."\nText B: "The results were clear, undeniable, and final."',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Text A uses short sentences and full stops to create dramatic pauses and emphasis, building tension through fragmented delivery. Each word gains weight through isolation. Text B uses commas in a list structure, creating smooth flow and matter-of-fact presentation. The coordinating conjunction "and" provides closure and completeness, making the statement feel more measured and less dramatic than Text A\'s staccato effect.',
             markingCriteria: {
               breakdown: [
-                'Arguments supporting Standard English (3 marks)',
-                'Arguments challenging the superiority claim (3 marks)',
-                'Discussion of linguistic prejudice and social factors (3 marks)',
-                'Balanced evaluation and personal position (3 marks)'
+                'Analysis of punctuation in Text A (3 marks)',
+                'Analysis of punctuation in Text B (3 marks)',
+                'Comparison of different effects (2 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q12',
+            question: 'Analyse how the following text creates meaning through its structure and organization:\n\n"First, consider the evidence. Then, examine the implications. Finally, reach your conclusion. This systematic approach ensures thorough analysis."',
+            marks: 10,
+            difficulty: 'hard',
+            modelAnswer: 'The text uses temporal sequencing with "First," "Then," and "Finally" to create logical progression and guide reader thinking. The parallel structure of imperative verbs ("consider," "examine," "reach") establishes authority and clear instruction. The final sentence provides meta-commentary, explicitly stating the purpose and benefits of the structure. This creates a sense of expertise and reliability, positioning the writer as knowledgeable and the method as trustworthy.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of temporal sequencing and connectives (3 marks)',
+                'Discussion of parallel structure and imperatives (3 marks)',
+                'Analysis of meta-commentary function (2 marks)',
+                'Overall effect on reader and writer authority (2 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
