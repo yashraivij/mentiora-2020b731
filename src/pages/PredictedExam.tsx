@@ -1101,49 +1101,70 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     
     // Special format for English Language
     if (subjectId === 'english-language') {
-      // Section A: Textual Variations and Representations (40 marks)
+      // Section A: Textual Variations and Representations (70 marks total)
+      
+      // Question 1: Analyse Text A (25 marks)
       questions.push({
-        id: 'english-lang-section-a',
+        id: 'english-lang-q1',
         questionNumber: 1,
-        text: `Study Texts A and B below.
+        text: `Text A is an online article from BBC News, published in March 2019.
 
-Text A: Extract from 1887 travel journal
-"We ascended the path slowly, hemmed in by gnarled trees and heavy mist. The locals regarded us with a cautious curiosity, their weathered faces betraying neither welcome nor hostility. Our lodging was modest but bore the marks of sincere hospitality."
+Text A:
+"Climate activists have blocked roads across London today, causing widespread disruption to commuters. The protesters, mostly young people, say they are fighting for their future. 'We can't just sit back and watch our planet die,' said Emma, 19, who has been protesting since 6am. Police estimate that over 500 people have joined the demonstrations, with some gluing themselves to government buildings. The Metropolitan Police have made 87 arrests so far."
 
-Text B: Modern online hotel review (2024)
-"The path up to the hotel was a bit steep, but the views were totally worth it! Locals were super friendly and helpful - they even gave us directions when we got lost. Our room was small but clean and comfy."
+Analyse how Text A uses language to create meanings and representations.
 
-Analyse how language is used in Texts A and B to present the writer's experiences of travel.
-
-In your response, you should:
-• explore language levels such as lexis, grammar, graphology, and pragmatics
-• compare how representation and identity are constructed in each text
-• refer to context (audience, purpose, genre, mode, time)
-
-[40 marks]`,
-        marks: 40,
+[25 marks]`,
+        marks: 25,
         section: 'A'
       });
 
-      // Section B: Children's Language Development (60 marks)
+      // Question 2: Analyse Text B (25 marks)
       questions.push({
-        id: 'english-lang-section-b1',
+        id: 'english-lang-q2',
         questionNumber: 2,
-        text: `Study the transcript below of a 3-year-old child speaking to their parent while playing with toy animals.
+        text: `Text B is a magazine article from The Bystander, published in April 1928.
 
-Parent: "What's the cow doing?"
-Child: "Cow go moo moo! I make him jump."
-Parent: "Yes, the cow says moo. Can you make him walk?"
-Child: "Look! Cow jump high! Now cow running fast fast!"
-Parent: "That's right, the cow is running fast."
-Child: "My cow. Him tired now. Cow sleep."
+Text B:
+"The modern girl of today presents a most fascinating study. Gone are the days when a lady's place was solely in the drawing-room, occupied with her needlework and watercolours. She now ventures forth into the world of commerce and industry, her bobbed hair defying the conventions of her mother's generation. Yet one cannot help but wonder whether this newfound freedom comes at too great a cost to the gentler qualities which have long been the ornament of womanhood."
 
-Discuss what this transcript shows about the child's language development.
+Analyse how Text B uses language to create meanings and representations.
 
-In your answer, refer to:
-• grammatical development
-• theories of language acquisition (e.g. Skinner, Chomsky, Piaget)
-• how the child uses language for different purposes
+[25 marks]`,
+        marks: 25,
+        section: 'A'
+      });
+
+      // Question 3: Compare both texts (20 marks)
+      questions.push({
+        id: 'english-lang-q3',
+        questionNumber: 3,
+        text: `Explore the similarities and differences in the ways that Text A and Text B use language.
+
+[20 marks]`,
+        marks: 20,
+        section: 'A'
+      });
+
+      // Section B: Children's Language Development (30 marks)
+      // Question 4 OR 5 - students choose one
+      questions.push({
+        id: 'english-lang-q4',
+        questionNumber: 4,
+        text: `Data Set 1: Transcript of a 4-year-old child, Jake, talking to his mother while looking at a picture book.
+
+Mother: "What can you see in this picture?"
+Jake: "There's a big dog and... and a little cat."
+Mother: "That's right. What are they doing?"
+Jake: "The dog is chasing the cat up a tree. The cat looks scared!"
+Mother: "How do you think the cat feels?"
+Jake: "Frightened! I don't like it when dogs chase cats. It's not nice."
+Mother: "Why do you think that?"
+Jake: "Because... because cats are smaller and they can't run as fast. The dog should be gentle."
+
+'Children's language development depends on their experiences of the world around them.'
+
+Referring to Data Set 1 in detail, and to relevant ideas from language study, evaluate this view of children's language development.
 
 [30 marks]`,
         marks: 30,
@@ -1151,9 +1172,17 @@ In your answer, refer to:
       });
 
       questions.push({
-        id: 'english-lang-section-b2',
-        questionNumber: 3,
-        text: `Discuss the role of interaction with caregivers in children's early language development. Refer to relevant research and theories.
+        id: 'english-lang-q5',
+        questionNumber: 5,
+        text: `Data Set 2: Examples of creative writing by children aged 6-7.
+
+Child A (age 6): "The dragon was big and red. He lived in a cave. One day a prince came to fight him but the dragon said please don't hurt me I am lonely. So they became friends."
+
+Child B (age 7): "Once upon a time there was a magical unicorn who could fly to the moon. She had rainbow hair and sparkly wings. Every night she would dance with the stars and sing beautiful songs that made flowers grow."
+
+'Being creative is an essential part of learning to write.'
+
+Referring to Data Set 2 in detail, and to relevant ideas from language study, evaluate this view of children's language development.
 
 [30 marks]`,
         marks: 30,
