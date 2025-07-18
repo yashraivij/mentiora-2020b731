@@ -369,7 +369,7 @@ const Dashboard = () => {
 
             <TabsContent value="aqa" className="mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {sortedSubjects.map((subject) => (
+                {sortedSubjects.filter(subject => subject.id !== 'maths-edexcel').map((subject) => (
                   <SubjectCard
                     key={subject.id}
                     subject={{
@@ -389,19 +389,28 @@ const Dashboard = () => {
             {['edexcel', 'ccea', 'ocr', 'wjec'].map((examBoard) => (
               <TabsContent key={examBoard} value={examBoard} className="mt-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {sortedSubjects.map((subject) => (
+                  {sortedSubjects
+                    .filter((subject) => {
+                      // Show maths-edexcel only in edexcel tab
+                      if (subject.id === 'maths-edexcel') {
+                        return examBoard === 'edexcel';
+                      }
+                      // Hide maths-edexcel from other tabs, show other subjects as coming soon
+                      return subject.id !== 'maths-edexcel';
+                    })
+                    .map((subject) => (
                     <SubjectCard
                       key={subject.id}
                       subject={{
                         ...subject,
                         color: getSubjectColor(subject.id)
                       }}
-                      progress={[]}
-                      onStartPractice={() => {}}
-                      onTogglePin={() => {}}
-                      isPinned={false}
-                      lastActivity={null}
-                      comingSoon={true}
+                      progress={subject.id === 'maths-edexcel' && examBoard === 'edexcel' ? userProgress : []}
+                      onStartPractice={subject.id === 'maths-edexcel' && examBoard === 'edexcel' ? handlePractice : () => {}}
+                      onTogglePin={subject.id === 'maths-edexcel' && examBoard === 'edexcel' ? togglePinSubject : () => {}}
+                      isPinned={subject.id === 'maths-edexcel' && examBoard === 'edexcel' ? pinnedSubjects.includes(subject.id) : false}
+                      lastActivity={subject.id === 'maths-edexcel' && examBoard === 'edexcel' ? getLastActivity(subject.id) : null}
+                      comingSoon={!(subject.id === 'maths-edexcel' && examBoard === 'edexcel')}
                     />
                   ))}
                 </div>
