@@ -54,6 +54,94 @@ export const curriculum: Subject[] = [
               breakdown: ['One correct belief about karma (1 mark)', 'Second correct belief about karma (1 mark)']
             },
             specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'buddhism-q3',
+            question: 'Outline three features of Buddhist meditation.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Mindfulness meditation focuses on being aware of the present moment. Loving-kindness meditation develops compassion for all beings. Concentration meditation develops mental focus and calm.',
+            markingCriteria: {
+              breakdown: ['One feature correctly outlined (1 mark)', 'Second feature correctly outlined (1 mark)', 'Third feature correctly outlined (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'buddhism-q4',
+            question: 'Explain two ways Buddhists might practice the Eightfold Path.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Right Speech involves speaking truthfully and avoiding harmful words. Buddhists practice this by not lying, gossiping or using harsh language. Right Livelihood means earning money in ethical ways. Buddhists avoid jobs that harm others like selling weapons or alcohol.',
+            markingCriteria: {
+              breakdown: ['One way identified and explained (2 marks)', 'Second way identified and explained (2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'buddhism-q5',
+            question: 'Explain two Buddhist teachings about the nature of existence.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'The Three Marks of Existence teach that all life involves suffering (dukkha), everything is impermanent (anicca), and there is no fixed self (anatta). These teachings help Buddhists understand reality and work towards enlightenment. The concept of dependent origination shows that everything arises due to causes and conditions.',
+            markingCriteria: {
+              breakdown: ['One teaching clearly explained with development (2-3 marks)', 'Second teaching clearly explained with development (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'buddhism-q6',
+            question: 'How might Buddhist festivals influence the life of a Buddhist?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Vesak celebrates the birth, enlightenment and death of Buddha, reminding Buddhists of his teachings. During Vesak, Buddhists might visit temples, make offerings and practice extra meditation, strengthening their faith and commitment to the Buddhist path.',
+            markingCriteria: {
+              breakdown: ['Identification of festival and its significance (2 marks)', 'Explanation of influence on Buddhist life (2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'buddhism-q7',
+            question: 'What are the different views about whether Buddhists should be vegetarian?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Some Buddhists believe vegetarianism follows the First Precept not to harm living beings. However, others argue Buddha allowed meat eating if the animal was not killed specifically for you. Theravada Buddhists may be less strict while many Mahayana Buddhists practice vegetarianism.',
+            markingCriteria: {
+              breakdown: ['One viewpoint explained (2 marks)', 'Contrasting viewpoint explained (2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'buddhism-q8',
+            question: 'Explain two ways Buddhist teachings might influence someone\'s attitude to wealth.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'The teaching on attachment suggests that craving for wealth causes suffering. This might lead Buddhists to live simply and not pursue excessive material possessions. The Middle Way teaches avoiding extremes of luxury and poverty. This could encourage Buddhists to have enough for their needs but share excess wealth through dana (generosity).',
+            markingCriteria: {
+              breakdown: ['One influence clearly explained with reference to teachings (2-3 marks)', 'Second influence clearly explained with reference to teachings (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'buddhism-q9',
+            question: 'How do Buddhist scriptures guide the lives of Buddhists today?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The Tripitaka contains the Buddha\'s teachings which provide guidance on ethics, meditation and wisdom. The Vinaya rules guide monastic communities in their daily conduct. The Suttas contain teachings that help lay Buddhists understand how to live according to Buddhist principles in modern society.',
+            markingCriteria: {
+              breakdown: ['Reference to Buddhist scriptures (1-2 marks)', 'Explanation of guidance provided (2-3 marks)', 'Application to modern Buddhist life (1-2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'buddhism-q10',
+            question: 'How far do you agree that meditation is the most important Buddhist practice? Give reasons for your answer, showing you have thought about different points of view.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Meditation is central to Buddhism as it leads to enlightenment and understanding of Buddhist truths. However, following the Five Precepts and practicing generosity are also essential for ethical living. Some might argue the Eightfold Path as a whole is most important as it includes meditation alongside other practices.',
+            markingCriteria: {
+              breakdown: ['Arguments supporting the statement (3-4 marks)', 'Arguments against the statement (3-4 marks)', 'Reference to Buddhist teachings (2-3 marks)', 'Justified conclusion (1-2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
           }
         ]
       },
@@ -80,6 +168,94 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Jesus is the Son of God. Jesus died to save humanity from sin.',
             markingCriteria: {
               breakdown: ['One correct belief about Jesus (1 mark)', 'Second correct belief about Jesus (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'christianity-q3',
+            question: 'Outline three Christian beliefs about the Trinity.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'God the Father is the creator of the universe. God the Son is Jesus Christ who became human. God the Holy Spirit is God\'s presence in the world today.',
+            markingCriteria: {
+              breakdown: ['One belief about Trinity correctly outlined (1 mark)', 'Second belief correctly outlined (1 mark)', 'Third belief correctly outlined (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'christianity-q4',
+            question: 'Explain two ways Christians might celebrate Easter.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Christians attend special church services on Easter Sunday to celebrate Jesus\' resurrection. Many churches hold sunrise services to remember that Jesus rose early in the morning. Christians also share Easter meals with family to celebrate new life in Christ.',
+            markingCriteria: {
+              breakdown: ['One way identified and explained (2 marks)', 'Second way identified and explained (2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'christianity-q5',
+            question: 'Explain two Christian teachings about salvation.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Christians believe salvation comes through faith in Jesus Christ who died for human sins. This is God\'s grace freely given, not earned through good works. Christians also believe salvation leads to eternal life with God after death, giving hope and purpose to believers.',
+            markingCriteria: {
+              breakdown: ['One teaching clearly explained with development (2-3 marks)', 'Second teaching clearly explained with development (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'christianity-q6',
+            question: 'How might the Bible influence a Christian\'s daily life?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Christians read the Bible daily for guidance and spiritual growth. The Ten Commandments provide moral rules for living. Jesus\' teachings in the Gospels give examples of how to love God and neighbor in practical ways.',
+            markingCriteria: {
+              breakdown: ['Reference to biblical influence (1-2 marks)', 'Specific examples of daily impact (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'christianity-q7',
+            question: 'What are different Christian views about the role of women in the church?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Some Christians believe women should have equal roles including ordination as priests based on Galatians 3:28 teaching equality. However, other Christians believe biblical passages like 1 Timothy 2:12 restrict women from teaching men, so they cannot be ordained as priests.',
+            markingCriteria: {
+              breakdown: ['One viewpoint explained with reference (2 marks)', 'Contrasting viewpoint explained with reference (2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'christianity-q8',
+            question: 'Explain two ways Christian beliefs about stewardship might influence attitudes to the environment.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'The belief that God created the world and gave humans responsibility to care for it leads Christians to protect the environment through recycling and conservation. The belief that Earth belongs to God, not humans, might influence Christians to live sustainably and avoid exploitation of natural resources.',
+            markingCriteria: {
+              breakdown: ['One influence clearly explained with reference to stewardship (2-3 marks)', 'Second influence clearly explained with reference to stewardship (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'christianity-q9',
+            question: 'How do different Christian denominations approach worship differently?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Catholic worship is highly liturgical with set prayers and rituals centered on the Mass. Protestant worship varies but often emphasizes Bible preaching and personal prayer. Orthodox worship uses icons and ancient traditions while Pentecostal worship includes speaking in tongues and spiritual gifts.',
+            markingCriteria: {
+              breakdown: ['Reference to different denominations (1-2 marks)', 'Explanation of worship differences (3-4 marks)', 'Specific examples given (1-2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'christianity-q10',
+            question: 'How far do you agree that the crucifixion is the most important Christian belief? Give reasons for your answer, showing you have thought about different points of view.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'The crucifixion is central as it provides salvation from sin and demonstrates God\'s love. However, the resurrection is equally important as it proves Jesus\' divine nature and offers hope of eternal life. Some might argue the incarnation is most important as without it, neither crucifixion nor resurrection would be possible.',
+            markingCriteria: {
+              breakdown: ['Arguments supporting the statement (3-4 marks)', 'Arguments against the statement (3-4 marks)', 'Reference to Christian teachings (2-3 marks)', 'Justified conclusion (1-2 marks)']
             },
             specReference: 'AQA GCSE Religious Studies 8062'
           }
@@ -110,6 +286,94 @@ export const curriculum: Subject[] = [
               breakdown: ['One correct belief about the Pope (1 mark)', 'Second correct belief about the Pope (1 mark)']
             },
             specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'catholic-q3',
+            question: 'Outline three features of Catholic Mass.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The Liturgy of the Word includes Bible readings. The Liturgy of the Eucharist consecrates bread and wine. The priest acts in persona Christi (in the person of Christ).',
+            markingCriteria: {
+              breakdown: ['One feature correctly outlined (1 mark)', 'Second feature correctly outlined (1 mark)', 'Third feature correctly outlined (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'catholic-q4',
+            question: 'Explain two ways Catholics might prepare for receiving the Eucharist.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Catholics fast for at least one hour before receiving communion to show respect for the sacred meal. They also examine their conscience and go to confession if they have committed serious sins, ensuring they are in a state of grace.',
+            markingCriteria: {
+              breakdown: ['One way identified and explained (2 marks)', 'Second way identified and explained (2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'catholic-q5',
+            question: 'Explain two Catholic teachings about papal authority.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Papal infallibility teaches that when the Pope speaks ex cathedra on matters of faith and morals, he cannot err because he is guided by the Holy Spirit. Papal supremacy means the Pope has ultimate authority over the universal Church as the successor of St Peter.',
+            markingCriteria: {
+              breakdown: ['One teaching clearly explained with development (2-3 marks)', 'Second teaching clearly explained with development (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'catholic-q6',
+            question: 'How might Catholic social teaching influence a person\'s life?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The preferential option for the poor might lead Catholics to volunteer at homeless shelters or donate to charity. The principle of human dignity could influence Catholics to campaign for workers\' rights and fair wages.',
+            markingCriteria: {
+              breakdown: ['Reference to social teaching (1-2 marks)', 'Explanation of practical influence (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'catholic-q7',
+            question: 'What are different Catholic views about artificial contraception?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Official Catholic teaching prohibits artificial contraception as stated in Humanae Vitae, believing it separates the unitive and procreative aspects of marriage. However, some Catholics disagree and believe responsible family planning using contraception can be morally acceptable.',
+            markingCriteria: {
+              breakdown: ['Official teaching explained (2 marks)', 'Alternative viewpoint explained (2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'catholic-q8',
+            question: 'Explain two ways Catholic beliefs about Mary might influence devotional practices.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'The belief in Mary as Mother of God leads Catholics to pray the Rosary, meditating on mysteries of salvation while seeking her intercession. The belief in Mary\'s Immaculate Conception encourages Catholics to celebrate her feast days and visit Marian shrines for pilgrimage.',
+            markingCriteria: {
+              breakdown: ['One influence clearly explained with reference to Marian beliefs (2-3 marks)', 'Second influence clearly explained with reference to Marian beliefs (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'catholic-q9',
+            question: 'How do Catholic beliefs about purgatory affect funeral practices?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Catholics believe purgatory is a state of purification before heaven, so they pray for the dead and have Masses said for departed souls. All Souls\' Day is dedicated to remembering the faithful departed. Indulgences may be gained for souls in purgatory.',
+            markingCriteria: {
+              breakdown: ['Reference to purgatory belief (1-2 marks)', 'Explanation of funeral practices (3-4 marks)', 'Specific examples given (1-2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'catholic-q10',
+            question: 'How far do you agree that the Eucharist is the most important Catholic sacrament? Give reasons for your answer, showing you have thought about different points of view.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'The Eucharist is central to Catholic worship as the real presence of Christ and source of grace. However, Baptism is also essential as it initiates people into the Church and removes original sin. Some might argue all seven sacraments are equally important as channels of God\'s grace.',
+            markingCriteria: {
+              breakdown: ['Arguments supporting the statement (3-4 marks)', 'Arguments against the statement (3-4 marks)', 'Reference to Catholic teachings (2-3 marks)', 'Justified conclusion (1-2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
           }
         ]
       },
@@ -136,6 +400,94 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Dharma is religious duty or righteous living. Following dharma leads to good karma.',
             markingCriteria: {
               breakdown: ['One correct belief about dharma (1 mark)', 'Second correct belief about dharma (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'hinduism-q3',
+            question: 'Outline three Hindu beliefs about the caste system.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The four main varnas are Brahmins (priests), Kshatriyas (warriors), Vaishyas (merchants), and Shudras (laborers). Caste is determined by birth and karma from previous lives. Each caste has specific duties and responsibilities.',
+            markingCriteria: {
+              breakdown: ['One belief correctly outlined (1 mark)', 'Second belief correctly outlined (1 mark)', 'Third belief correctly outlined (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'hinduism-q4',
+            question: 'Explain two ways Hindus might worship in the home.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Many Hindus have a home shrine with images of deities where they perform daily puja with offerings of flowers, food and incense. Hindu families might also chant mantras together, especially during festivals or special occasions.',
+            markingCriteria: {
+              breakdown: ['One way identified and explained (2 marks)', 'Second way identified and explained (2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'hinduism-q5',
+            question: 'Explain two Hindu teachings about ahimsa (non-violence).',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Ahimsa teaches that all life is sacred and should not be harmed, leading many Hindus to follow vegetarian diets. The principle extends beyond physical violence to include thoughts and words, encouraging Hindus to practice compassion and avoid causing mental or emotional harm to others.',
+            markingCriteria: {
+              breakdown: ['One teaching clearly explained with development (2-3 marks)', 'Second teaching clearly explained with development (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'hinduism-q6',
+            question: 'How might Hindu scriptures influence daily life?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The Bhagavad Gita teaches about duty and devotion, guiding Hindus in making moral choices. The Vedas contain prayers and rituals that structure Hindu worship and ceremonies throughout life.',
+            markingCriteria: {
+              breakdown: ['Reference to Hindu scriptures (1-2 marks)', 'Explanation of influence on daily life (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'hinduism-q7',
+            question: 'What are different Hindu views about the role of women?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Traditional Hindu texts honor women as mothers and wives but may restrict their roles outside the home. However, modern Hindu movements emphasize gender equality and women\'s rights to education and careers, seeing this as consistent with Hindu values.',
+            markingCriteria: {
+              breakdown: ['Traditional viewpoint explained (2 marks)', 'Modern/alternative viewpoint explained (2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'hinduism-q8',
+            question: 'Explain two ways Hindu beliefs about karma might influence ethical behavior.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'The belief that actions have consequences in this life and future lives encourages Hindus to act ethically to improve their karma. The understanding that suffering may result from past karma can lead to acceptance of difficulties while motivating compassionate action to help others.',
+            markingCriteria: {
+              breakdown: ['One influence clearly explained with reference to karma (2-3 marks)', 'Second influence clearly explained with reference to karma (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'hinduism-q9',
+            question: 'How do different Hindu traditions approach the concept of God?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Vaishnavism focuses on Vishnu as the supreme deity with avatars like Krishna and Rama. Shaivism centers on Shiva as creator, preserver and destroyer. Shaktism emphasizes the divine feminine power through goddess worship.',
+            markingCriteria: {
+              breakdown: ['Reference to different traditions (1-2 marks)', 'Explanation of approaches to God (3-4 marks)', 'Specific examples given (1-2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'hinduism-q10',
+            question: 'How far do you agree that moksha is the ultimate goal for all Hindus? Give reasons for your answer, showing you have thought about different points of view.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Moksha represents liberation from samsara and is considered the highest spiritual achievement in Hindu tradition. However, many Hindus focus on dharma (righteous living) and karma in this life rather than liberation. Some emphasize devotion to God over liberation itself.',
+            markingCriteria: {
+              breakdown: ['Arguments supporting the statement (3-4 marks)', 'Arguments against the statement (3-4 marks)', 'Reference to Hindu teachings (2-3 marks)', 'Justified conclusion (1-2 marks)']
             },
             specReference: 'AQA GCSE Religious Studies 8062'
           }
@@ -166,6 +518,94 @@ export const curriculum: Subject[] = [
               breakdown: ['One correct belief about the Quran (1 mark)', 'Second correct belief about the Quran (1 mark)']
             },
             specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'islam-q3',
+            question: 'Outline three features of Muslim prayer (Salah).',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Muslims pray five times a day at set times. They face Mecca (qibla) during prayer. Ritual washing (wudu) is performed before prayer.',
+            markingCriteria: {
+              breakdown: ['One feature correctly outlined (1 mark)', 'Second feature correctly outlined (1 mark)', 'Third feature correctly outlined (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'islam-q4',
+            question: 'Explain two ways Muslims might observe Ramadan.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Muslims fast from dawn to sunset, abstaining from food, drink and other physical needs to develop self-discipline and empathy. They read extra portions of the Quran and attend special evening prayers (Tarawih) at the mosque.',
+            markingCriteria: {
+              breakdown: ['One way identified and explained (2 marks)', 'Second way identified and explained (2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'islam-q5',
+            question: 'Explain two Islamic teachings about the oneness of Allah (Tawhid).',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Tawhid teaches that Allah is unique and indivisible, rejecting any form of polytheism or association of partners with Allah. This belief emphasizes Allah\'s absolute sovereignty and unity, making shirk (associating partners with Allah) the greatest sin in Islam.',
+            markingCriteria: {
+              breakdown: ['One teaching clearly explained with development (2-3 marks)', 'Second teaching clearly explained with development (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'islam-q6',
+            question: 'How might Islamic teachings about zakah influence a Muslim\'s life?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Zakah requires Muslims to give 2.5% of their wealth to help the poor, encouraging social responsibility and reducing inequality. It purifies wealth and reminds Muslims that their possessions are a trust from Allah.',
+            markingCriteria: {
+              breakdown: ['Reference to zakah teachings (1-2 marks)', 'Explanation of practical influence (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'islam-q7',
+            question: 'What are different Muslim views about the role of women in Islam?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Traditional interpretations emphasize women\'s roles as mothers and wives with modest dress requirements. Progressive Muslims argue for gender equality in education, work and leadership, believing Islam grants equal spiritual status to men and women.',
+            markingCriteria: {
+              breakdown: ['Traditional viewpoint explained (2 marks)', 'Progressive viewpoint explained (2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'islam-q8',
+            question: 'Explain two ways Islamic beliefs about jihad might influence Muslim behavior.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'The greater jihad (internal struggle against sin) encourages Muslims to develop self-discipline and moral character through prayer and good deeds. The lesser jihad (struggle for justice) might motivate Muslims to work for social justice and defend the oppressed.',
+            markingCriteria: {
+              breakdown: ['One influence clearly explained with reference to jihad (2-3 marks)', 'Second influence clearly explained with reference to jihad (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'islam-q9',
+            question: 'How do Sunni and Shia Muslims differ in their beliefs and practices?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Sunni Muslims follow the succession of the four Rightly-Guided Caliphs while Shia Muslims believe Ali should have been the first leader. Shia Muslims have Imams as spiritual leaders and practice temporary marriage, while Sunnis do not.',
+            markingCriteria: {
+              breakdown: ['Reference to different branches (1-2 marks)', 'Explanation of belief differences (2-3 marks)', 'Explanation of practice differences (1-2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'islam-q10',
+            question: 'How far do you agree that the Hajj pilgrimage is the most important duty for Muslims? Give reasons for your answer, showing you have thought about different points of view.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Hajj is a once-in-a-lifetime obligation that unites the global Muslim community and represents spiritual purification. However, daily prayers (Salah) might be more important as they are performed five times daily. Some argue the Shahada is most important as it represents the foundation of Islamic faith.',
+            markingCriteria: {
+              breakdown: ['Arguments supporting the statement (3-4 marks)', 'Arguments against the statement (3-4 marks)', 'Reference to Islamic teachings (2-3 marks)', 'Justified conclusion (1-2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
           }
         ]
       },
@@ -194,6 +634,94 @@ export const curriculum: Subject[] = [
               breakdown: ['One correct belief about the Torah (1 mark)', 'Second correct belief about the Torah (1 mark)']
             },
             specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'judaism-q3',
+            question: 'Outline three features of Shabbat observance.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Shabbat begins at sunset on Friday with lighting candles. Jews attend synagogue services. Work is forbidden during Shabbat.',
+            markingCriteria: {
+              breakdown: ['One feature correctly outlined (1 mark)', 'Second feature correctly outlined (1 mark)', 'Third feature correctly outlined (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'judaism-q4',
+            question: 'Explain two ways Jews might celebrate Passover.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Jews hold a Seder meal retelling the Exodus story with symbolic foods like matzah and bitter herbs. They remove all leavened products from their homes for eight days to remember the unleavened bread eaten during the Exodus.',
+            markingCriteria: {
+              breakdown: ['One way identified and explained (2 marks)', 'Second way identified and explained (2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'judaism-q5',
+            question: 'Explain two Jewish teachings about the covenant with God.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'The covenant with Abraham established Jews as God\'s chosen people with the promise of the Promised Land. The covenant includes following God\'s commandments in return for God\'s protection and blessing.',
+            markingCriteria: {
+              breakdown: ['One teaching clearly explained with development (2-3 marks)', 'Second teaching clearly explained with development (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'judaism-q6',
+            question: 'How might Jewish dietary laws (kashrut) influence daily life?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Observant Jews separate meat and dairy products, requiring separate sets of dishes and utensils. They only eat kosher meat from permitted animals slaughtered according to Jewish law.',
+            markingCriteria: {
+              breakdown: ['Reference to kashrut laws (1-2 marks)', 'Explanation of practical influence (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'judaism-q7',
+            question: 'What are different Jewish views about the role of women in worship?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Orthodox Judaism maintains traditional gender roles with men and women sitting separately in synagogue and women not counting toward a minyan. Reform and Conservative Judaism allow women equal participation including ordination as rabbis.',
+            markingCriteria: {
+              breakdown: ['Orthodox viewpoint explained (2 marks)', 'Progressive viewpoint explained (2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'judaism-q8',
+            question: 'Explain two ways Jewish beliefs about tikkun olam might influence social action.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Tikkun olam (repairing the world) encourages Jews to work for social justice and help those in need through charity and volunteering. The concept motivates environmental activism as Jews believe they have responsibility to care for God\'s creation.',
+            markingCriteria: {
+              breakdown: ['One influence clearly explained with reference to tikkun olam (2-3 marks)', 'Second influence clearly explained with reference to tikkun olam (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'judaism-q9',
+            question: 'How do different Jewish movements approach religious observance?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Orthodox Judaism maintains strict adherence to halakha (Jewish law) and traditional practices. Conservative Judaism allows some adaptation while preserving core traditions. Reform Judaism emphasizes ethical teachings over ritual observance.',
+            markingCriteria: {
+              breakdown: ['Reference to different movements (1-2 marks)', 'Explanation of observance differences (3-4 marks)', 'Specific examples given (1-2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'judaism-q10',
+            question: 'How far do you agree that the synagogue is the most important place for Jewish worship? Give reasons for your answer, showing you have thought about different points of view.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'The synagogue provides community worship, Torah study and social gathering that strengthens Jewish identity. However, the home is equally important for Shabbat observance, kosher meals and family religious education. Some argue the Temple in Jerusalem was most important before its destruction.',
+            markingCriteria: {
+              breakdown: ['Arguments supporting the statement (3-4 marks)', 'Arguments against the statement (3-4 marks)', 'Reference to Jewish teachings (2-3 marks)', 'Justified conclusion (1-2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
           }
         ]
       },
@@ -220,6 +748,94 @@ export const curriculum: Subject[] = [
             modelAnswer: 'The Guru Granth Sahib is the living Guru. The Guru Granth Sahib contains the teachings of the Sikh Gurus.',
             markingCriteria: {
               breakdown: ['One correct belief about Guru Granth Sahib (1 mark)', 'Second correct belief about Guru Granth Sahib (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'sikhism-q3',
+            question: 'Outline three of the Five Ks worn by Sikhs.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Kesh (uncut hair), Kara (steel bracelet), Kirpan (ceremonial sword), Kachera (special underwear), Kangha (wooden comb).',
+            markingCriteria: {
+              breakdown: ['First K correctly outlined (1 mark)', 'Second K correctly outlined (1 mark)', 'Third K correctly outlined (1 mark)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'sikhism-q4',
+            question: 'Explain two ways Sikhs might serve in the gurdwara.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Sikhs prepare and serve free meals (langar) to all visitors regardless of background, demonstrating equality and seva (service). They take turns reading from the Guru Granth Sahib and leading prayers during worship services.',
+            markingCriteria: {
+              breakdown: ['One way identified and explained (2 marks)', 'Second way identified and explained (2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'sikhism-q5',
+            question: 'Explain two Sikh teachings about the nature of God.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Sikhs believe in one God (Ik Onkar) who is eternal, without form and present everywhere. God is both transcendent (beyond the world) and immanent (present in creation), accessible through devotion and meditation.',
+            markingCriteria: {
+              breakdown: ['One teaching clearly explained with development (2-3 marks)', 'Second teaching clearly explained with development (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'sikhism-q6',
+            question: 'How might Sikh beliefs about equality influence daily life?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Sikhs reject caste distinctions and treat all people equally regardless of social background. The practice of langar (free community meals) demonstrates this equality in action.',
+            markingCriteria: {
+              breakdown: ['Reference to equality beliefs (1-2 marks)', 'Explanation of practical influence (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'sikhism-q7',
+            question: 'What are different Sikh views about wearing the Five Ks?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Khalsa Sikhs believe wearing all Five Ks is essential for showing commitment to Sikh identity and values. However, some Sikhs choose to follow Sikh teachings without wearing all the symbols, focusing more on inner spirituality.',
+            markingCriteria: {
+              breakdown: ['Traditional/Khalsa viewpoint explained (2 marks)', 'Alternative viewpoint explained (2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'sikhism-q8',
+            question: 'Explain two ways Sikh beliefs about seva might influence charitable work.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Seva (selfless service) encourages Sikhs to volunteer in their communities without expecting reward, seeing service as worship of God. The principle motivates Sikhs to help during disasters and crises, providing food, shelter and medical aid to those in need.',
+            markingCriteria: {
+              breakdown: ['One influence clearly explained with reference to seva (2-3 marks)', 'Second influence clearly explained with reference to seva (2-3 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'sikhism-q9',
+            question: 'How do the teachings of different Sikh Gurus guide modern Sikh life?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Guru Nanak taught about one God and equality, forming the foundation of Sikh beliefs. Guru Gobind Singh created the Khalsa and Five Ks, establishing Sikh identity. Their teachings guide daily prayer, service and standing up for justice.',
+            markingCriteria: {
+              breakdown: ['Reference to different Gurus (1-2 marks)', 'Explanation of teachings (2-3 marks)', 'Application to modern life (1-2 marks)']
+            },
+            specReference: 'AQA GCSE Religious Studies 8062'
+          },
+          {
+            id: 'sikhism-q10',
+            question: 'How far do you agree that the Five Ks are the most important way for Sikhs to show their faith? Give reasons for your answer, showing you have thought about different points of view.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'The Five Ks provide visible identity and commitment to Sikh values, connecting modern Sikhs to Guru Gobind Singh\'s teachings. However, seva (service) and meditation might be more important as they develop spiritual character. Some argue following the Guru\'s teachings is more important than external symbols.',
+            markingCriteria: {
+              breakdown: ['Arguments supporting the statement (3-4 marks)', 'Arguments against the statement (3-4 marks)', 'Reference to Sikh teachings (2-3 marks)', 'Justified conclusion (1-2 marks)']
             },
             specReference: 'AQA GCSE Religious Studies 8062'
           }
