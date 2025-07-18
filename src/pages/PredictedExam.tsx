@@ -348,6 +348,27 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     return `${essays[topicId as keyof typeof essays]}\n\n[12 marks]`;
   };
 
+  // Helper function to get topic from History question ID and assign colors
+  const getHistoryTopicInfo = (questionId: string): { name: string; color: string } | null => {
+    if (subjectId !== 'history') return null;
+    
+    const topicMap = {
+      'america-1840-1895': { name: 'America 1840-1895', color: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' },
+      'germany-1890-1945': { name: 'Germany 1890-1945', color: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' },
+      'russia-1894-1945': { name: 'Russia 1894-1945', color: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200' },
+      'america-1920-1973': { name: 'America 1920-1973', color: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' },
+      'conflict-tension-ww1': { name: 'WWI 1894-1918', color: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200' },
+      'conflict-tension-interwar': { name: 'Inter-war 1918-1939', color: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' },
+      'conflict-tension-east-west': { name: 'East-West 1945-1972', color: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200' },
+      'conflict-tension-asia': { name: 'Asia 1950-1975', color: 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200' },
+      'conflict-tension-gulf': { name: 'Gulf 1990-2009', color: 'bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200' }
+    };
+    
+    // Extract topic ID from question ID
+    const topicId = Object.keys(topicMap).find(topic => questionId.includes(topic));
+    return topicId ? topicMap[topicId as keyof typeof topicMap] : null;
+  };
+
   // Generate exam questions from subject topics
   const generateExamQuestions = (): ExamQuestion[] => {
     const questions: ExamQuestion[] = [];
@@ -780,9 +801,16 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
                       </Badge>
                     )}
                   </div>
-                  <Badge variant="secondary">
-                    {examQuestions[currentQuestion].marks} {examQuestions[currentQuestion].marks === 1 ? 'mark' : 'marks'}
-                  </Badge>
+                  <div className="flex flex-col items-end gap-2">
+                    {getHistoryTopicInfo(examQuestions[currentQuestion].id) && (
+                      <Badge className={`${getHistoryTopicInfo(examQuestions[currentQuestion].id)?.color} text-xs font-medium`}>
+                        {getHistoryTopicInfo(examQuestions[currentQuestion].id)?.name}
+                      </Badge>
+                    )}
+                    <Badge variant="secondary">
+                      {examQuestions[currentQuestion].marks} {examQuestions[currentQuestion].marks === 1 ? 'mark' : 'marks'}
+                    </Badge>
+                  </div>
                 </div>
               </CardHeader>
               
