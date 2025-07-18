@@ -8397,15 +8397,15 @@ export const curriculum: Subject[] = [
             specReference: 'B8.9'
           },
           {
-            id: 'b8-q10',
-            question: 'Describe the importance of scientific methodology in biology.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Scientific methodology ensures reliable and valid results. It involves hypothesis formation, controlled experiments, and peer review. This allows scientific knowledge to be tested and built upon by others.',
+            id: 'b4-q4',
+            question: 'What is anaerobic respiration? (2 marks)',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Respiration without oxygen that produces less energy and lactic acid in animals.',
             markingCriteria: {
-              breakdown: ['Ensures reliable and valid results (1 mark)', 'Involves hypothesis and controlled experiments (1 mark)', 'Includes peer review (1 mark)', 'Allows knowledge to be tested and built upon (1 mark)']
+              breakdown: ['Respiration without oxygen (1 mark)', 'Produces less energy/lactic acid (1 mark)']
             },
-            specReference: 'B8.10'
+            specReference: 'AQA GCSE Biology 8461 - Respiration'
           }
         ]
       }
