@@ -22,42 +22,49 @@ export const DashboardStressMonitor = ({
   userProgress, 
   onSubjectClick 
 }: DashboardStressMonitorProps) => {
-  if (!userId || userProgress.length === 0) return null;
+  // Always show the component, even without data
 
   // Get stress levels for all subjects with progress
-  const subjectsWithProgress = userProgress.reduce((acc, progress) => {
+  const subjectsWithProgress = userProgress?.reduce((acc, progress) => {
     if (!acc.includes(progress.subjectId)) {
       acc.push(progress.subjectId);
     }
     return acc;
-  }, [] as string[]);
+  }, [] as string[]) || [];
 
-  const subjectStressLevels = subjectsWithProgress.map(subjectId => {
-    const stressLevel = StressTracker.getStressLevel(userId, subjectId);
-    const subject = curriculum.find(s => s.id === subjectId);
-    return {
-      subjectId,
-      subjectName: subject?.name || subjectId,
-      stressLevel,
-      category: StressTracker.getStressLevelCategory(stressLevel)
-    };
-  }).filter(s => s.stressLevel > 0); // Only show subjects with stress data
+  const subjectStressLevels = userId && subjectsWithProgress.length > 0 
+    ? subjectsWithProgress.map(subjectId => {
+        const stressLevel = StressTracker.getStressLevel(userId, subjectId);
+        const subject = curriculum.find(s => s.id === subjectId);
+        return {
+          subjectId,
+          subjectName: subject?.name || subjectId,
+          stressLevel,
+          category: StressTracker.getStressLevelCategory(stressLevel)
+        };
+      }).filter(s => s.stressLevel > 0) // Only show subjects with stress data
+    : [];
 
-  if (subjectStressLevels.length === 0) return null;
+  const hasStressData = subjectStressLevels.length > 0;
 
-  // Find the most stressed subject
-  const mostStressedSubject = subjectStressLevels.reduce((max, subject) => 
-    subject.stressLevel > max.stressLevel ? subject : max
-  );
+  // Find the most stressed subject (only if we have data)
+  const mostStressedSubject = hasStressData 
+    ? subjectStressLevels.reduce((max, subject) => 
+        subject.stressLevel > max.stressLevel ? subject : max
+      )
+    : null;
 
-  // Count subjects by stress level
-  const stressCounts = {
+  // Count subjects by stress level (only if we have data)
+  const stressCounts = hasStressData ? {
     low: subjectStressLevels.filter(s => s.category === 'low').length,
     medium: subjectStressLevels.filter(s => s.category === 'medium').length,
     high: subjectStressLevels.filter(s => s.category === 'high').length
-  };
+  } : { low: 0, medium: 0, high: 0 };
 
   const getOverallMessage = () => {
+    if (!hasStressData) {
+      return "Start practicing to begin tracking your stress levels and emotional wellness across subjects.";
+    }
     if (stressCounts.high > 0) {
       return `You have ${stressCounts.high} subject${stressCounts.high > 1 ? 's' : ''} showing high stress. Consider taking a break or switching to easier topics.`;
     }
@@ -68,6 +75,7 @@ export const DashboardStressMonitor = ({
   };
 
   const getOverallColor = () => {
+    if (!hasStressData) return 'green'; // Default to calm/positive for new users
     if (stressCounts.high > 0) return 'red';
     if (stressCounts.medium > 0) return 'amber';
     return 'green';
@@ -149,13 +157,15 @@ export const DashboardStressMonitor = ({
           )}>
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center space-x-2">
-                {stressCounts.high > 0 ? (
+                {!hasStressData ? (
+                  <Brain className={cn("h-5 w-5", colors.icon)} />
+                ) : stressCounts.high > 0 ? (
                   <AlertTriangle className={cn("h-5 w-5", colors.icon)} />
                 ) : (
                   <CheckCircle className={cn("h-5 w-5", colors.icon)} />
                 )}
                 <h3 className={cn("font-semibold", colors.text)}>
-                  Overall Wellness
+                  {!hasStressData ? "Wellness Tracking" : "Overall Wellness"}
                 </h3>
               </div>
               <div className="flex items-center space-x-2">
@@ -170,36 +180,47 @@ export const DashboardStressMonitor = ({
             </p>
 
             {/* Stress Level Summary */}
-            <div className="grid grid-cols-3 gap-3">
-              <div className="text-center space-y-1">
-                <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">
-                  {stressCounts.low}
+            {hasStressData ? (
+              <div className="grid grid-cols-3 gap-3">
+                <div className="text-center space-y-1">
+                  <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">
+                    {stressCounts.low}
+                  </div>
+                  <div className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                    Low Stress
+                  </div>
                 </div>
-                <div className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
-                  Low Stress
+                <div className="text-center space-y-1">
+                  <div className="text-lg font-bold text-amber-600 dark:text-amber-400">
+                    {stressCounts.medium}
+                  </div>
+                  <div className="text-xs text-amber-600 dark:text-amber-400 font-medium">
+                    Medium Stress
+                  </div>
+                </div>
+                <div className="text-center space-y-1">
+                  <div className="text-lg font-bold text-red-600 dark:text-red-400">
+                    {stressCounts.high}
+                  </div>
+                  <div className="text-xs text-red-600 dark:text-red-400 font-medium">
+                    High Stress
+                  </div>
                 </div>
               </div>
-              <div className="text-center space-y-1">
-                <div className="text-lg font-bold text-amber-600 dark:text-amber-400">
-                  {stressCounts.medium}
+            ) : (
+              <div className="text-center py-4">
+                <div className={cn("text-lg font-semibold mb-2", colors.text)}>
+                  Ready to track your wellness journey?
                 </div>
-                <div className="text-xs text-amber-600 dark:text-amber-400 font-medium">
-                  Medium Stress
-                </div>
+                <p className={cn("text-sm opacity-75", colors.text)}>
+                  Complete some practice questions to see personalized stress insights
+                </p>
               </div>
-              <div className="text-center space-y-1">
-                <div className="text-lg font-bold text-red-600 dark:text-red-400">
-                  {stressCounts.high}
-                </div>
-                <div className="text-xs text-red-600 dark:text-red-400 font-medium">
-                  High Stress
-                </div>
-              </div>
-            </div>
+            )}
           </div>
 
           {/* Most Stressed Subject (if any high stress) */}
-          {mostStressedSubject.stressLevel > 60 && (
+          {mostStressedSubject && mostStressedSubject.stressLevel > 60 && (
             <div className="p-4 rounded-2xl bg-background/30 backdrop-blur-sm border border-background/40">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
@@ -234,7 +255,7 @@ export const DashboardStressMonitor = ({
           )}
 
           {/* Recommendation */}
-          {stressCounts.high > 0 && (
+          {hasStressData && stressCounts.high > 0 && (
             <div className="p-3 rounded-xl bg-background/40 backdrop-blur-sm border border-background/40">
               <p className={cn("text-xs font-medium", colors.text)}>
                 💡 <strong>Tip:</strong> Take a 10-minute break, then try some easier practice questions to rebuild confidence.
