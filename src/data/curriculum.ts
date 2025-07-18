@@ -328,7 +328,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'cld-q8',
-            question: 'Using the transcript provided, analyse how this 4-year-old child is developing their narrative skills.',
+            question: 'Analyse how a 4-year-old child typically develops their narrative skills. What features would you expect to see in their storytelling?',
             marks: 30,
             difficulty: 'hard',
             modelAnswer: 'The child demonstrates emerging story structure with beginning, middle, and end, though may show non-linear sequencing. They use past tense markers and temporal connectives. The narrative shows developing theory of mind as they consider character motivations and audience needs.',
