@@ -35,170 +35,153 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'tvr-q1',
-            question: 'Compare how language is used to represent authority in these two texts from different time periods.',
-            marks: 40,
-            difficulty: 'hard',
-            modelAnswer: 'Text A uses formal, hierarchical language with passive constructions like "it was decreed" and archaic terms such as "henceforth" to establish institutional authority. The lexical choices include Latin-derived words and complex syntax showing education and power. Text B employs direct commands and personal pronouns to create immediacy and relatability while maintaining authority through confident assertions.',
+            question: 'What is meant by the term "graphology" in language analysis?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Graphology refers to the visual aspects of language, including typography, layout, font choices, spacing, colour, and other design elements that contribute to meaning in written texts.',
             markingCriteria: {
               breakdown: [
-                'Analysis of language features in Text A (8-10 marks)',
-                'Analysis of language features in Text B (8-10 marks)', 
-                'Comparison between texts (8-10 marks)',
-                'Reference to context and purpose (8-10 marks)',
-                'Use of linguistic terminology (4-6 marks)'
+                'Clear definition of graphology (1 mark)',
+                'Reference to visual elements or design features (1 mark)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q2',
-            question: 'Analyse how graphological features are used differently in these two promotional texts.',
-            marks: 40,
-            difficulty: 'hard',
-            modelAnswer: 'Text A utilises traditional typographical hierarchy with serif fonts and justified text blocks to convey reliability and establishment. The spacing and formal layout suggest permanence. Text B employs dynamic typography with varying font sizes, colours, and white space to create visual impact and urgency, reflecting modern marketing techniques.',
+            question: 'Identify two features that distinguish formal written language from informal spoken language.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Formal written language typically uses complete sentences and standard grammar, while informal spoken language often includes incomplete sentences and non-standard constructions. Formal written language employs precise vocabulary and technical terms, whereas informal spoken language uses colloquialisms and contractions.',
             markingCriteria: {
               breakdown: [
-                'Analysis of graphological features in Text A (8-10 marks)',
-                'Analysis of graphological features in Text B (8-10 marks)',
-                'Comparison of visual impact (8-10 marks)', 
-                'Discussion of audience and purpose (8-10 marks)',
-                'Technical accuracy (4-6 marks)'
+                'First feature correctly identified and explained (2 marks)',
+                'Second feature correctly identified and explained (2 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q3',
-            question: 'Compare how identity is constructed through language in these two personal narratives.',
-            marks: 40,
-            difficulty: 'hard',
-            modelAnswer: 'Text A constructs identity through formal register and third-person narration, creating distance and objectivity. The writer uses abstract nouns and complex sentences to present themselves as educated and reflective. Text B uses colloquial language, contractions, and first-person immediacy to create an authentic, relatable persona.',
+            question: 'Explain how context affects language choices in different social situations.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Context significantly influences language choices through factors like audience, purpose, and setting. In formal contexts like job interviews, speakers use standard English, avoid slang, and employ respectful titles. In informal contexts with friends, speakers use casual vocabulary, contractions, and may include regional dialect features. The relationship between participants also affects register - equal relationships allow informal language while hierarchical relationships often require more formal approaches.',
             markingCriteria: {
               breakdown: [
-                'Analysis of identity construction in Text A (8-10 marks)',
-                'Analysis of identity construction in Text B (8-10 marks)',
-                'Comparison of linguistic choices (8-10 marks)',
-                'Discussion of social context (8-10 marks)', 
-                'Quality of expression (4-6 marks)'
+                'Explanation of context factors (2 marks)',
+                'Example of formal context language choices (2 marks)',
+                'Example of informal context language choices (2 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q4',
-            question: 'Analyse how pragmatic meaning is created differently in these two political speeches.',
-            marks: 40,
-            difficulty: 'hard',
-            modelAnswer: 'Text A employs implied meanings through metaphor and allusion, requiring audience interpretation and creating inclusive communities of understanding. The speaker uses hedging and conditional language to avoid direct confrontation. Text B uses explicit statements and declaratives to create clear positioning, with minimal ambiguity.',
+            question: 'Analyse how personal pronouns create different effects in texts.\n\nText A: "One must consider the implications carefully."\nText B: "You need to think about what this means for you."',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Text A uses the formal pronoun "one" which creates distance and objectivity, suggesting academic or official discourse. This impersonal approach implies universal applicability but may seem detached. Text B uses direct address with "you" which creates intimacy and personal connection, making the reader feel directly involved. The repetition of "you" emphasizes personal responsibility and creates a conversational, engaging tone that draws the reader in.',
             markingCriteria: {
               breakdown: [
-                'Analysis of pragmatic features in Text A (8-10 marks)',
-                'Analysis of pragmatic features in Text B (8-10 marks)',
-                'Comparison of implied meanings (8-10 marks)',
-                'Discussion of audience response (8-10 marks)',
-                'Linguistic accuracy (4-6 marks)'
+                'Analysis of "one" and its effects (2 marks)',
+                'Analysis of "you" and its effects (2 marks)',
+                'Comparison of different effects created (2 marks)',
+                'Reference to tone and audience relationship (2 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q5',
-            question: 'Compare how gender is represented through language in these two magazine articles.',
-            marks: 40,
-            difficulty: 'hard',
-            modelAnswer: 'Text A perpetuates traditional gender roles through lexical choices like "nurturing" and "gentle," using adjectives that emphasise appearance and emotion. The syntax often places women as objects rather than agents. Text B challenges stereotypes through assertive language and technical vocabulary, positioning women as experts and decision-makers.',
+            question: 'How do different text types use language to achieve their purposes? Compare a news report and an advertisement.',
+            marks: 10,
+            difficulty: 'medium',
+            modelAnswer: 'News reports use objective language with third-person narration and factual statements to inform readers. They employ formal register, passive voice for objectivity, and temporal markers to establish credibility. Headlines use brief, attention-grabbing language. Advertisements use persuasive language with emotive adjectives, imperatives, and direct address to influence consumer behaviour. They employ rhetorical questions, superlatives, and branded language to create desire and encourage action. Both adapt their language to achieve their distinct purposes.',
             markingCriteria: {
               breakdown: [
-                'Analysis of gender representation in Text A (8-10 marks)',
-                'Analysis of gender representation in Text B (8-10 marks)',
-                'Comparison of linguistic strategies (8-10 marks)',
-                'Discussion of social implications (8-10 marks)',
-                'Critical evaluation (4-6 marks)'
+                'Analysis of news report language features (3 marks)',
+                'Analysis of advertisement language features (3 marks)',
+                'Explanation of how features achieve purposes (2 marks)',
+                'Comparison between the text types (2 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q6',
-            question: 'Analyse how mode affects language choices in these two travel texts.',
-            marks: 40,
-            difficulty: 'hard',
-            modelAnswer: 'Text A (written mode) allows for complex sentence structures, detailed descriptions, and careful word selection with time for revision. The permanence of writing enables nuanced vocabulary choices. Text B (spoken mode) shows features like false starts, fillers, and more informal register, with immediate audience interaction affecting language choices.',
+            question: 'Analyse how the following sentence creates meaning through word choice:\n\n"The magnificent Victorian mansion dominated the quaint village street."',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The adjective "magnificent" creates positive connotations of grandeur and beauty, elevating the status of the building. "Victorian" provides historical context and suggests traditional architectural values. "Mansion" implies wealth and high social status compared to a simple "house." The verb "dominated" suggests power and control, indicating the building\'s imposing presence. "Quaint" creates contrast by presenting the village as charming but small-scale, emphasizing the mansion\'s prominence through juxtaposition.',
             markingCriteria: {
               breakdown: [
-                'Analysis of written mode features (8-10 marks)',
-                'Analysis of spoken mode features (8-10 marks)',
-                'Comparison of constraints and opportunities (8-10 marks)',
-                'Discussion of audience adaptation (8-10 marks)',
-                'Technical understanding (4-6 marks)'
+                'Analysis of adjectives and their connotations (2 marks)',
+                'Analysis of verb choice and effect (2 marks)',
+                'Discussion of contrast and juxtaposition (2 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q7',
-            question: 'Compare how persuasive techniques are employed in these two charity appeal texts.',
-            marks: 40,
-            difficulty: 'hard',
-            modelAnswer: 'Text A uses emotive language and personal pronouns to create emotional connection, with statistics providing credibility. The structure builds from problem to solution. Text B employs direct address and imperative mood to create urgency, using visual elements to support the verbal message and create immediate impact.',
+            question: 'Explain how dialect and accent differ, and discuss why both are important in representing identity.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Dialect refers to vocabulary, grammar, and language structure variations in different regions or social groups, while accent refers to pronunciation patterns. Dialect includes different words for the same concept and varied sentence structures. Both represent cultural identity and social belonging, connecting speakers to their communities and backgrounds. They can indicate education level, social class, and regional origin, though this can lead to linguistic prejudice. Understanding both helps recognize the rich diversity of English and challenges prescriptivist attitudes about "correct" language.',
             markingCriteria: {
               breakdown: [
-                'Analysis of persuasive features in Text A (8-10 marks)',
-                'Analysis of persuasive features in Text B (8-10 marks)',
-                'Comparison of effectiveness (8-10 marks)',
-                'Discussion of audience targeting (8-10 marks)',
-                'Quality of analysis (4-6 marks)'
+                'Clear distinction between dialect and accent (2 marks)',
+                'Examples of dialect features (2 marks)',
+                'Discussion of identity representation (2 marks)',
+                'Reference to social attitudes or prejudice (2 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q8',
-            question: 'Analyse how power relationships are established through language in these two workplace texts.',
-            marks: 40,
+            question: 'How does technology influence modern language use? Discuss three specific changes.',
+            marks: 9,
             difficulty: 'hard',
-            modelAnswer: 'Text A establishes hierarchy through formal titles, passive voice removing agency, and complex bureaucratic language that excludes non-experts. Text B uses inclusive pronouns and collaborative language to flatten hierarchy, though certain lexical choices still maintain professional boundaries.',
+            modelAnswer: 'Technology has introduced abbreviations and acronyms like "LOL" and "ASAP" to speed communication, creating new lexical items that cross into spoken language. Emoji and symbols now supplement or replace words, adding emotional context and creating visual meaning systems. Character limits on platforms like Twitter have led to compression techniques, removing articles and using unconventional spelling. These changes reflect efficiency needs and new social communication contexts, though they sometimes create generational divides in language understanding.',
             markingCriteria: {
               breakdown: [
-                'Analysis of power markers in Text A (8-10 marks)',
-                'Analysis of power markers in Text B (8-10 marks)',
-                'Comparison of hierarchical structures (8-10 marks)',
-                'Discussion of workplace dynamics (8-10 marks)',
-                'Sophisticated analysis (4-6 marks)'
+                'First technological influence explained (3 marks)',
+                'Second technological influence explained (3 marks)',
+                'Third technological influence explained (3 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q9',
-            question: 'Compare how regional identity is constructed in these two dialect texts.',
-            marks: 40,
+            question: 'Analyse how power relationships are shown through language choices in this workplace exchange:\n\nManager: "I need you to complete this by Friday."\nEmployee: "Would it be possible to have until Monday? I\'ve got several other priorities."',
+            marks: 10,
             difficulty: 'hard',
-            modelAnswer: 'Text A uses phonological representations of accent through spelling modifications and includes regionalisms that mark geographical identity. The syntax may show non-standard features reflecting local patterns. Text B standardises language but includes cultural references and place-specific vocabulary to maintain regional connection.',
+            modelAnswer: 'The manager uses direct language with the declarative "I need" and imperative structure, asserting authority through confident, unqualified statements. The specific deadline shows control over timing and expectations. The employee uses tentative language with "Would it be possible" - a polite interrogative that acknowledges the manager\'s power to grant or refuse. The explanation "I\'ve got several other priorities" justifies the request professionally while showing respect for hierarchy. The contrast demonstrates how power dynamics shape linguistic choices in professional contexts.',
             markingCriteria: {
               breakdown: [
-                'Analysis of dialect features in Text A (8-10 marks)',
-                'Analysis of regional markers in Text B (8-10 marks)',
-                'Comparison of identity construction (8-10 marks)',
-                'Discussion of social attitudes (8-10 marks)',
-                'Linguistic sensitivity (4-6 marks)'
+                'Analysis of manager\'s authoritative language (3 marks)',
+                'Analysis of employee\'s deferential language (3 marks)',
+                'Discussion of power dynamics shown (2 marks)',
+                'Reference to professional context (2 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q10',
-            question: 'Analyse how technological change has affected language use in these two communication texts.',
-            marks: 40,
+            question: 'Evaluate the claim that "Standard English is superior to regional dialects." Consider different perspectives on this issue.',
+            marks: 12,
             difficulty: 'hard',
-            modelAnswer: 'Text A (traditional letter) employs formal conventions, complete sentences, and conventional spelling due to physical constraints and social expectations. Text B (digital message) shows compression techniques, abbreviations, and emoji use, reflecting speed and informal context of digital communication.',
+            modelAnswer: 'Supporters might argue Standard English enables clear communication across regions and social groups, providing access to education and employment opportunities. It represents linguistic unity and is internationally recognized. However, this view reflects linguistic prejudice rather than objective superiority. All dialects are linguistically valid systems with consistent rules and rich expressive capabilities. Regional dialects preserve cultural heritage and community identity. The prestige of Standard English results from social and political power, not inherent linguistic quality. A balanced view recognizes Standard English\'s practical advantages while valuing dialectal diversity and rejecting deficit models of non-standard varieties.',
             markingCriteria: {
               breakdown: [
-                'Analysis of traditional communication features (8-10 marks)',
-                'Analysis of digital communication features (8-10 marks)',
-                'Comparison of technological influence (8-10 marks)',
-                'Discussion of social change (8-10 marks)',
-                'Evaluative commentary (4-6 marks)'
+                'Arguments supporting Standard English (3 marks)',
+                'Arguments challenging the superiority claim (3 marks)',
+                'Discussion of linguistic prejudice and social factors (3 marks)',
+                'Balanced evaluation and personal position (3 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
