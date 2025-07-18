@@ -1316,20 +1316,7 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
   };
 
   const handleSubmit = () => {
-    // For English Literature, English Language, History, and Religious Studies, allow submission at any time
-    if (subjectId === 'english-literature' || subjectId === 'english-language' || subjectId === 'history' || subjectId === 'religious-studies') {
-      // No validation required - allow submission even with no answers
-    } else {
-      // For other subjects, require all questions to be answered
-      if (answers.length < examQuestions.length) {
-        toast({
-          title: "Incomplete Exam",
-          description: "Please answer all questions before submitting.",
-          variant: "destructive"
-        });
-        return;
-      }
-    }
+    // Allow submission at any time for all subjects - no validation required
     
     setIsSubmitted(true);
     navigate(`/predicted-results/${subjectId}`, { 
@@ -1457,15 +1444,13 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
                   {formatTime(timeLeft)}
                 </span>
               </div>
-              {(subjectId === 'english-literature' || subjectId === 'english-language' || subjectId === 'history' || subjectId === 'religious-studies') && (
-                <Button
-                  onClick={handleSubmit}
-                  className="bg-gradient-to-r from-primary to-primary/90"
-                >
-                  <Target className="h-4 w-4 mr-2" />
-                  Submit for Marking
-                </Button>
-              )}
+              <Button
+                onClick={handleSubmit}
+                className="bg-gradient-to-r from-primary to-primary/90"
+              >
+                <Target className="h-4 w-4 mr-2" />
+                Submit for Marking
+              </Button>
               <ThemeToggle />
             </div>
           </div>
@@ -1568,11 +1553,10 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
                     Previous
                   </Button>
                   
-                  {currentQuestion === examQuestions.length - 1 && subjectId !== 'english-literature' && subjectId !== 'english-language' && subjectId !== 'history' ? (
+                  {currentQuestion === examQuestions.length - 1 ? (
                     <Button
                       onClick={handleSubmit}
                       className="bg-gradient-to-r from-primary to-primary/90"
-                      disabled={answers.length < examQuestions.length}
                     >
                       <Target className="h-4 w-4 mr-2" />
                       Submit for Marking
