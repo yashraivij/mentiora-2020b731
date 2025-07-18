@@ -259,6 +259,95 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     return details[novelId as keyof typeof details] || { author: '', theme: '' };
   };
 
+  // History helper functions for generating exam questions with sources
+  const getHistorySource = (topicId: string, questionType: string): string => {
+    const sources = {
+      'america-1840-1895': {
+        utility: `Source A: From a newspaper report in 1876 about the treatment of Native Americans:\n\n"The Indian Agency reports that food supplies to the reservation have been cut by half this winter. Many families are going hungry, and the promised blankets and warm clothing have not arrived. The government agent states that funds are limited, but local traders continue to profit from sales of inferior goods at inflated prices to the tribes."`,
+        analysis: `Source A: A photograph showing a group of soldiers in a trench, 1915\nSource B: Extract from a soldier's diary, 1916: "The rats here are particularly repulsive, they are so fat – the kind we call corpse-rats. They have shocking, evil, naked faces, and it is nauseating to see their long, nude tails."`
+      },
+      'germany-1890-1945': {
+        utility: `Source A: From a Nazi propaganda poster, 1936:\n\n"Work and Bread! The Führer has given work to 6 million unemployed Germans. German workers, you were unemployed under the old system - now you have work and purpose under National Socialism. Support the Party that delivered on its promises!"`,
+        analysis: `Source A: A photograph of unemployed Germans queuing for food, 1932\nSource B: Nazi employment statistics, 1933-1936: "Unemployment reduced from 6 million to 2.5 million through public works programs, rearmament, and labor conscription."`
+      },
+      'conflict-tension-ww1': {
+        analysis: `Source A: A photograph showing soldiers in trenches on the Western Front, 1917\nSource B: Extract from a British soldier's letter home, 1916: "The conditions here are beyond description. We live like rats in these trenches, surrounded by mud, disease and death. The constant shelling never stops and many of my friends are no longer with us."`,
+        followup: `Source B: Extract from a British general's report, 1917: "Morale remains high among the troops despite difficult conditions. The men show great courage and determination in the face of enemy action."`
+      }
+    };
+    return sources[topicId as keyof typeof sources]?.[questionType as keyof typeof sources['america-1840-1895']] || '';
+  };
+
+  const getHistorySourceQuestion = (topicId: string, type: string): string => {
+    const source = getHistorySource(topicId, type);
+    const topics = {
+      'america-1840-1895': 'the treatment of Native Americans in the 1850s',
+      'germany-1890-1945': 'Nazi economic policies in the 1930s',
+      'russia-1894-1945': 'living conditions in revolutionary Russia',
+      'america-1920-1973': 'the impact of the Great Depression'
+    };
+    return `${source}\n\nStudy Source A. How useful is Source A for an enquiry into ${topics[topicId as keyof typeof topics]}?\n\nExplain your answer using Source A and your own knowledge.\n\n[8 marks]`;
+  };
+
+  const getHistoryNarrativeQuestion = (topicId: string): string => {
+    const narratives = {
+      'america-1840-1895': 'Write a narrative account of the events of the California Gold Rush and its impact on westward expansion.',
+      'germany-1890-1945': 'Write a narrative account of the events of the Munich Putsch in 1923.',
+      'russia-1894-1945': 'Write a narrative account of the events of Bloody Sunday in 1905.',
+      'america-1920-1973': 'Write a narrative account of the Wall Street Crash and its immediate aftermath in 1929.'
+    };
+    return `${narratives[topicId as keyof typeof narratives]}\n\nYou could include:\n• Key events and their sequence\n• Important individuals involved\n• The impact and consequences\n\n[8 marks]`;
+  };
+
+  const getHistoryImportanceQuestion = (topicId: string): string => {
+    const importance = {
+      'america-1840-1895': 'Explain the importance of the Transcontinental Railroad in the development of the American West.',
+      'germany-1890-1945': 'Explain the importance of the Enabling Act of 1933 in Hitler\'s consolidation of power.',
+      'russia-1894-1945': 'Explain the importance of War Communism in Bolshevik control of Russia.',
+      'america-1920-1973': 'Explain the importance of the New Deal in helping the USA recover from the Great Depression.'
+    };
+    return `${importance[topicId as keyof typeof importance]}\n\nYou could include:\n• The immediate effects\n• The longer-term consequences\n• Links to other events or developments\n\n[8 marks]`;
+  };
+
+  const getHistorySourceAnalysisQuestion = (topicId: string): string => {
+    const source = getHistorySource(topicId, 'analysis');
+    const topics = {
+      'conflict-tension-ww1': 'the experience of soldiers in the trenches during the First World War',
+      'conflict-tension-interwar': 'the rise of fascism in Europe during the 1930s',
+      'conflict-tension-east-west': 'tensions between the USA and USSR during the Cold War',
+      'conflict-tension-asia': 'the impact of the Korean War on civilians',
+      'conflict-tension-gulf': 'international reactions to the invasion of Kuwait in 1990'
+    };
+    return `${source}\n\nHow useful are Sources A and B for an enquiry into ${topics[topicId as keyof typeof topics]}?\n\nExplain your answer using Sources A and B and your own knowledge.\n\n[8 marks]`;
+  };
+
+  const getHistoryFollowupQuestion = (topicId: string): string => {
+    const source = getHistorySource(topicId, 'followup');
+    return `${source}\n\nStudy Source B. Suggest one way this source could be followed up to find out more about conditions in the trenches.\n\nExplain how this would help your enquiry.\n\n[4 marks]`;
+  };
+
+  const getHistoryAccountQuestion = (topicId: string): string => {
+    const accounts = {
+      'conflict-tension-ww1': 'Write an account of how the assassination of Archduke Franz Ferdinand led to the outbreak of World War One.',
+      'conflict-tension-interwar': 'Write an account of how the Munich Conference of 1938 failed to prevent war.',
+      'conflict-tension-east-west': 'Write an account of how the Cuban Missile Crisis developed in October 1962.',
+      'conflict-tension-asia': 'Write an account of how the Korean War began in 1950.',
+      'conflict-tension-gulf': 'Write an account of how the Gulf War developed in 1991.'
+    };
+    return `${accounts[topicId as keyof typeof accounts]}\n\nYou could include:\n• The key events and their sequence\n• The main individuals and countries involved\n• How the situation escalated\n\n[8 marks]`;
+  };
+
+  const getHistoryEssayQuestion = (topicId: string): string => {
+    const essays = {
+      'conflict-tension-ww1': '\'The failure of the Schlieffen Plan was the main reason Germany lost the First World War.\'\n\nHow far do you agree with this statement?\n\nExplain your answer.',
+      'conflict-tension-interwar': '\'The Treaty of Versailles was the main cause of the Second World War.\'\n\nHow far do you agree with this statement?\n\nExplain your answer.',
+      'conflict-tension-east-west': '\'The Korean War was the most significant conflict during the Cold War between 1945 and 1972.\'\n\nHow far do you agree with this statement?\n\nExplain your answer.',
+      'conflict-tension-asia': '\'The Korean War was the most significant conflict in Asia between 1950 and 1975.\'\n\nHow far do you agree with this statement?\n\nExplain your answer.',
+      'conflict-tension-gulf': '\'Economic factors were the main cause of conflict in the Gulf region between 1990 and 2009.\'\n\nHow far do you agree with this statement?\n\nExplain your answer.'
+    };
+    return `${essays[topicId as keyof typeof essays]}\n\n[12 marks]`;
+  };
+
   // Generate exam questions from subject topics
   const generateExamQuestions = (): ExamQuestion[] => {
     const questions: ExamQuestion[] = [];
@@ -297,6 +386,90 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
           questionNumber: questions.length + 1,
           text: `${extractText}\n\nStarting with this extract, explore how ${author} presents ${theme}.\n\nWrite about:\n• how ${author} presents ${theme} in this extract\n• how ${author} presents ${theme} in the novel as a whole\n\n[30 marks]`,
           marks: 30,
+          section: 'B'
+        });
+      });
+      
+      return questions;
+    }
+    
+    // Special format for History
+    if (subjectId === 'history') {
+      // Section A: Period Studies (choose one)
+      const periodStudies = subject.topics.filter(topic => 
+        ['america-1840-1895', 'germany-1890-1945', 'russia-1894-1945', 'america-1920-1973'].includes(topic.id)
+      );
+      
+      // Section B: Wider World Depth Studies (choose one)
+      const depthStudies = subject.topics.filter(topic => 
+        ['conflict-tension-ww1', 'conflict-tension-interwar', 'conflict-tension-east-west', 'conflict-tension-asia', 'conflict-tension-gulf'].includes(topic.id)
+      );
+      
+      // Generate Section A questions
+      periodStudies.forEach((topic) => {
+        // Source Utility question (8 marks)
+        questions.push({
+          id: `period-utility-${topic.id}`,
+          questionNumber: questions.length + 1,
+          text: getHistorySourceQuestion(topic.id, 'utility'),
+          marks: 8,
+          section: 'A'
+        });
+        
+        // Narrative Account question (8 marks)
+        questions.push({
+          id: `period-narrative-${topic.id}`,
+          questionNumber: questions.length + 1,
+          text: getHistoryNarrativeQuestion(topic.id),
+          marks: 8,
+          section: 'A'
+        });
+        
+        // Importance/Consequence question (8 marks)
+        questions.push({
+          id: `period-importance-${topic.id}`,
+          questionNumber: questions.length + 1,
+          text: getHistoryImportanceQuestion(topic.id),
+          marks: 8,
+          section: 'A'
+        });
+      });
+      
+      // Generate Section B questions
+      depthStudies.forEach((topic) => {
+        // Source Analysis question (8 marks)
+        questions.push({
+          id: `depth-analysis-${topic.id}`,
+          questionNumber: questions.length + 1,
+          text: getHistorySourceAnalysisQuestion(topic.id),
+          marks: 8,
+          section: 'B'
+        });
+        
+        // Follow-up Inquiry question (4 marks)
+        questions.push({
+          id: `depth-followup-${topic.id}`,
+          questionNumber: questions.length + 1,
+          text: getHistoryFollowupQuestion(topic.id),
+          marks: 4,
+          section: 'B'
+        });
+        
+        // Write an Account question (8 marks)
+        questions.push({
+          id: `depth-account-${topic.id}`,
+          questionNumber: questions.length + 1,
+          text: getHistoryAccountQuestion(topic.id),
+          marks: 8,
+          section: 'B'
+        });
+        
+        // Extended Essay question (12 marks)
+        questions.push({
+          id: `depth-essay-${topic.id}`,
+          questionNumber: questions.length + 1,
+          text: getHistoryEssayQuestion(topic.id),
+          marks: 12,
           section: 'B'
         });
       });
@@ -405,8 +578,8 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
   };
 
   const handleSubmit = () => {
-    // For English Literature, allow submission at any time
-    if (subjectId === 'english-literature') {
+    // For English Literature and History, allow submission at any time
+    if (subjectId === 'english-literature' || subjectId === 'history') {
       // No validation required - allow submission even with no answers
     } else {
       // For other subjects, require all questions to be answered
@@ -454,7 +627,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
               <div className="flex items-center justify-center space-x-3 mb-4">
                 <Crown className="h-8 w-8 text-amber-500" />
                 <div>
-                  <CardTitle className="text-2xl font-bold">{subject.name} Predicted Exam</CardTitle>
+                  <CardTitle className="text-2xl font-bold">{subjectId === 'history' ? 'History Paper 1' : `${subject.name} Predicted Exam`}</CardTitle>
                   <CardDescription>AQA GCSE • {getExamDuration()} minutes</CardDescription>
                 </div>
               </div>
@@ -484,6 +657,14 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
                     <li>• Answer TWO questions in total (one from each section)</li>
                     <li>• You have {getExamDuration()} minutes to complete this paper</li>
                     <li>• Each question is worth 30 marks (Total: 60 marks)</li>
+                  </ul>
+                ) : subjectId === 'history' ? (
+                  <ul className="text-sm text-amber-700 dark:text-amber-300 space-y-1">
+                    <li>• <strong>Section A:</strong> Choose ONE Period Studies topic (America, Germany, Russia, or America 1920-1973)</li>
+                    <li>• <strong>Section B:</strong> Choose ONE Wider World Depth Study (WWI, Inter-War, Cold War, Asia, or Gulf)</li>
+                    <li>• Answer questions from your chosen topics only</li>
+                    <li>• You have {getExamDuration()} minutes to complete this paper</li>
+                    <li>• Questions range from 4-12 marks each</li>
                   </ul>
                 ) : (
                   <ul className="text-sm text-amber-700 dark:text-amber-300 space-y-1">
@@ -518,7 +699,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
             <div className="flex items-center space-x-4">
               <Crown className="h-6 w-6 text-amber-500" />
               <div>
-                <h1 className="text-lg font-bold text-foreground">{subject.name} Predicted Exam</h1>
+                <h1 className="text-lg font-bold text-foreground">{subjectId === 'history' ? 'History Paper 1' : `${subject.name} Predicted Exam`}</h1>
                 <p className="text-sm text-muted-foreground">Question {currentQuestion + 1} of {examQuestions.length}</p>
               </div>
             </div>
@@ -530,7 +711,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
                   {formatTime(timeLeft)}
                 </span>
               </div>
-              {subjectId === 'english-literature' && (
+              {(subjectId === 'english-literature' || subjectId === 'history') && (
                 <Button
                   onClick={handleSubmit}
                   className="bg-gradient-to-r from-primary to-primary/90"
@@ -634,7 +815,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
                     Previous
                   </Button>
                   
-                  {currentQuestion === examQuestions.length - 1 && subjectId !== 'english-literature' ? (
+                  {currentQuestion === examQuestions.length - 1 && subjectId !== 'english-literature' && subjectId !== 'history' ? (
                     <Button
                       onClick={handleSubmit}
                       className="bg-gradient-to-r from-primary to-primary/90"
