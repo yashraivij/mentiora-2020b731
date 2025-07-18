@@ -8384,28 +8384,7 @@ export const curriculum: Subject[] = [
               breakdown: ['Organisms depend on each other (1 mark)', 'Changes affect other species (1 mark)', 'Creates stability through relationships (1 mark)', 'Species loss disrupts ecosystems (1 mark)']
             },
             specReference: 'B8.8'
-          },
-          {
-            id: 'b8-q9',
-            question: 'Explain the concept of limiting factors in biology.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'A limiting factor is something that prevents further growth or development. It is the factor in shortest supply. Examples include light for photosynthesis or food for population growth.',
-            markingCriteria: {
-              breakdown: ['Prevents further growth/development (1 mark)', 'Factor in shortest supply (1 mark)', 'Examples given (1 mark)']
-            },
-            specReference: 'B8.9'
-          },
-          {
-            id: 'b4-q4',
-            question: 'What is anaerobic respiration? (2 marks)',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Respiration without oxygen that produces less energy and lactic acid in animals.',
-            markingCriteria: {
-              breakdown: ['Respiration without oxygen (1 mark)', 'Produces less energy/lactic acid (1 mark)']
-            },
-            specReference: 'AQA GCSE Biology 8461 - Respiration'
+            specReference: 'AQA GCSE Biology 8461 - Ecology'
           }
         ]
       }
