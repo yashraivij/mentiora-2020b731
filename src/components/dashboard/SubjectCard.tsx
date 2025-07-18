@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { CheckCircle, AlertCircle, Circle, Pin, Calendar, ArrowRight, Sparkles } from "lucide-react";
+import { StressIndicator } from "./StressIndicator";
+import { StressTracker } from "@/lib/stressTracker";
 
 interface SubjectCardProps {
   subject: {
@@ -23,6 +25,7 @@ interface SubjectCardProps {
   isPinned?: boolean;
   lastActivity?: Date | null;
   comingSoon?: boolean;
+  userId?: string;
 }
 
 export const SubjectCard = ({ 
@@ -32,7 +35,8 @@ export const SubjectCard = ({
   onTogglePin, 
   isPinned = false, 
   lastActivity,
-  comingSoon = false 
+  comingSoon = false,
+  userId 
 }: SubjectCardProps) => {
   const subjectProgress = progress.filter(p => p.subjectId === subject.id);
   const averageScore = subjectProgress.length > 0 
@@ -42,6 +46,9 @@ export const SubjectCard = ({
   const masteredTopics = subjectProgress.filter(p => p.averageScore >= 85).length;
   const weakTopics = subjectProgress.filter(p => p.averageScore < 70).length;
   const totalAttempted = subjectProgress.length;
+
+  // Calculate stress level for premium feature
+  const stressLevel = userId ? StressTracker.getSubjectStress(userId, subject.id) : 0;
 
   const getScoreColor = (score: number) => {
     if (score >= 85) return 'text-emerald-600 dark:text-emerald-400';
@@ -231,6 +238,16 @@ export const SubjectCard = ({
             <p className="text-xs text-muted-foreground font-medium">Untested</p>
           </div>
         </div>
+
+        {/* Premium Stress Indicator */}
+        {userId && !comingSoon && totalAttempted > 0 && (
+          <div className="mt-6">
+            <StressIndicator 
+              stressLevel={stressLevel} 
+              subjectId={subject.id}
+            />
+          </div>
+        )}
 
         <div className="flex items-center justify-between pt-4">
           <div className="flex items-center space-x-2">
