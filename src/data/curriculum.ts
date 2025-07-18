@@ -10328,5 +10328,564 @@ export const curriculum: Subject[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'business',
+    name: 'Business',
+    topics: [
+      {
+        id: 'business-real-world',
+        name: 'Business in the real world',
+        questions: [
+          {
+            id: 'brw-q1',
+            question: 'Which of the following is NOT a characteristic of an entrepreneur?\na) Risk-taking\nb) Innovation\nc) Risk-averse\nd) Organised',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'c) Risk-averse',
+            markingCriteria: {
+              breakdown: ['Correct identification of risk-averse as NOT being a characteristic of entrepreneurs (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'brw-q2',
+            question: 'State two reasons why someone might want to start their own business.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'To be their own boss and have flexibility in working hours.',
+            markingCriteria: {
+              breakdown: ['First valid reason (1 mark)', 'Second valid reason (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'brw-q3',
+            question: 'Define what is meant by "opportunity cost" in business.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Opportunity cost is the value of the next best alternative that is given up when making a choice.',
+            markingCriteria: {
+              breakdown: ['Reference to next best alternative (1 mark)', 'Reference to giving up/sacrificing something (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'brw-q4',
+            question: 'Identify two advantages of operating as a private limited company (Ltd) compared to a sole trader.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Limited liability protection means shareholders are only liable up to their investment amount. Easier access to finance through selling shares to investors.',
+            markingCriteria: {
+              breakdown: ['First advantage correctly identified and explained (2 marks)', 'Second advantage correctly identified and explained (2 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'brw-q5',
+            question: 'Which business sector would Amazon\'s online retail operations belong to?\na) Primary\nb) Secondary\nc) Tertiary\nd) Quaternary',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'c) Tertiary',
+            markingCriteria: {
+              breakdown: ['Correct identification of tertiary sector for service provision (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'brw-q6',
+            question: 'Explain why a business might choose to expand through franchising rather than opening new company-owned stores.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Franchising allows rapid expansion with reduced capital investment since franchisees provide the funding for new outlets. This reduces financial risk for the franchisor while still generating revenue through franchise fees and royalties. Franchisees are often more motivated to succeed as they own their business, leading to better customer service and local market knowledge.',
+            markingCriteria: {
+              breakdown: ['Reduced capital investment/financial risk (2 marks)', 'Revenue generation through fees/royalties (2 marks)', 'Motivated franchisees/local knowledge (2 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'brw-q7',
+            question: 'State what is meant by "fixed costs" and give one example.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Fixed costs are costs that do not change with the level of output. For example, rent.',
+            markingCriteria: {
+              breakdown: ['Definition of fixed costs as not changing with output (2 marks)', 'Valid example such as rent, insurance, salaries (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'brw-q8',
+            question: 'Analyse the potential benefits and drawbacks for a small online clothing retailer of expanding internationally.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Benefits include access to larger markets, increasing potential customer base and revenue. Spreading risk across multiple markets reduces dependence on the domestic economy. Economies of scale from larger production volumes can reduce per-unit costs. However, drawbacks include increased complexity in logistics and supply chains, requiring investment in international shipping and returns processes. Cultural differences may require product adaptation and different marketing approaches, increasing costs. Exchange rate fluctuations create financial uncertainty and currency risk that could affect profitability.',
+            markingCriteria: {
+              breakdown: ['Benefits: larger markets/revenue (3 marks)', 'Benefits: risk spreading/economies of scale (3 marks)', 'Drawbacks: complexity/logistics costs (3 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'brw-q9',
+            question: 'Identify three stakeholders of a business and explain one objective each stakeholder might have.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Shareholders want maximum return on their investment through dividends and share price growth. Employees want job security and good working conditions with fair pay. Customers want quality products at reasonable prices with good customer service.',
+            markingCriteria: {
+              breakdown: ['Three stakeholders correctly identified (3 marks)', 'Three objectives correctly explained (3 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'brw-q10',
+            question: 'Evaluate the importance of business planning for a new technology start-up compared to an established retail chain.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'For a technology start-up, business planning is crucial as it operates in a highly uncertain environment with limited track record. Detailed planning helps identify potential risks, secure investor funding, and establish clear objectives in a rapidly changing market. Start-ups need comprehensive financial forecasting to manage cash flow during development phases when revenue may be minimal. However, they must remain flexible as technology markets evolve quickly. For established retail chains, business planning is important but less critical for survival as they have proven business models, established customer bases, and predictable revenue streams. Their planning focuses more on optimization and growth rather than basic viability. Both benefit from planning, but start-ups face greater consequences from poor planning due to limited resources and higher failure rates.',
+            markingCriteria: {
+              breakdown: ['Analysis of start-up planning needs (4 marks)', 'Analysis of established business planning needs (4 marks)', 'Comparative evaluation and justified conclusion (4 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          }
+        ]
+      },
+      {
+        id: 'influences-on-business',
+        name: 'Influences on business',
+        questions: [
+          {
+            id: 'iob-q1',
+            question: 'Which of the following is an example of how technology has influenced business?\na) Increased corporation tax\nb) E-commerce growth\nc) Minimum wage increases\nd) Environmental regulations',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'b) E-commerce growth',
+            markingCriteria: {
+              breakdown: ['Correct identification of e-commerce as a technological influence (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'iob-q2',
+            question: 'State two ways that rising interest rates might affect a business.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Higher borrowing costs for business loans and reduced consumer spending due to higher mortgage payments.',
+            markingCriteria: {
+              breakdown: ['First valid effect identified (1 mark)', 'Second valid effect identified (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'iob-q3',
+            question: 'Define what is meant by "globalisation" in business.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Globalisation is the increasing interconnectedness of economies worldwide, allowing businesses to operate across international borders more easily.',
+            markingCriteria: {
+              breakdown: ['Reference to interconnectedness/integration (1 mark)', 'Reference to international/worldwide operations (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'iob-q4',
+            question: 'Explain how environmental legislation might affect a manufacturing business\'s operations.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Environmental legislation may require businesses to invest in cleaner production methods and waste management systems, increasing operational costs. Companies must ensure compliance with emissions standards and pollution controls, potentially requiring expensive equipment upgrades.',
+            markingCriteria: {
+              breakdown: ['Investment in cleaner methods/waste management (2 marks)', 'Compliance costs/equipment upgrades (2 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'iob-q5',
+            question: 'Which legislation protects employees from discrimination in the workplace?\na) Health and Safety at Work Act\nb) Equality Act\nc) Trade Descriptions Act\nd) Minimum Wage Act',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'b) Equality Act',
+            markingCriteria: {
+              breakdown: ['Correct identification of Equality Act (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'iob-q6',
+            question: 'Explain how exchange rate changes might benefit a UK business that exports products to Europe.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'If the pound weakens against the euro, UK products become cheaper for European customers, potentially increasing demand and sales volume. This price competitiveness can help UK businesses gain market share against European competitors. Higher sales volumes can lead to economies of scale, reducing per-unit production costs and improving profit margins.',
+            markingCriteria: {
+              breakdown: ['Weaker pound makes exports cheaper (2 marks)', 'Increased demand/market share (2 marks)', 'Economies of scale/improved margins (2 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'iob-q7',
+            question: 'State one benefit and one drawback of globalisation for UK businesses.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Benefit: Access to larger international markets increases potential revenue. Drawback: Increased competition from foreign businesses.',
+            markingCriteria: {
+              breakdown: ['Valid benefit identified and explained (2 marks)', 'Valid drawback identified and explained (2 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'iob-q8',
+            question: 'Analyse how economic uncertainty might affect business decision-making in a retail company.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Economic uncertainty makes businesses more cautious about major investments, as future returns become unpredictable. Retail companies may delay expansion plans or new store openings to conserve cash. They might focus on short-term planning rather than long-term strategies, making it difficult to secure optimal supplier contracts or lease agreements. Consumer spending patterns become less predictable, making inventory management challenging and potentially leading to either stockouts or excess stock. Businesses may increase cash reserves rather than investing in growth, limiting innovation and competitiveness.',
+            markingCriteria: {
+              breakdown: ['Impact on investment decisions (3 marks)', 'Effects on planning and operations (3 marks)', 'Consumer behavior and inventory implications (3 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'iob-q9',
+            question: 'Explain how digital communication technology has changed the way businesses interact with customers.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Social media platforms allow businesses to engage directly with customers in real-time, building relationships and responding to queries quickly. Email marketing enables targeted, personalized communication at low cost. Online chat systems and mobile apps provide instant customer support, improving satisfaction and loyalty.',
+            markingCriteria: {
+              breakdown: ['Social media engagement/real-time interaction (2 marks)', 'Email marketing/personalization (2 marks)', 'Instant support/mobile technology (2 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'iob-q10',
+            question: 'Evaluate whether ethical considerations or profit maximization should be the primary focus for businesses operating in developing countries.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Ethical considerations should be prioritized as they ensure sustainable long-term operations and protect vulnerable populations. Businesses operating ethically build stronger relationships with local communities, governments, and international stakeholders, reducing reputational risks. Fair wages and working conditions improve employee motivation and productivity. However, profit maximization enables business growth, job creation, and economic development in developing countries. Sustainable profits allow continued investment and expansion of operations. The optimal approach balances both - ethical operations that generate sustainable profits while contributing positively to local development. Short-term profit maximization at the expense of ethics often leads to long-term business failure through boycotts, regulatory action, and damaged reputation.',
+            markingCriteria: {
+              breakdown: ['Arguments for ethical considerations (4 marks)', 'Arguments for profit maximization (4 marks)', 'Balanced evaluation and justified conclusion (4 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          }
+        ]
+      },
+      {
+        id: 'business-operations',
+        name: 'Business operations',
+        questions: [
+          {
+            id: 'bo-q1',
+            question: 'Which production method would be most suitable for manufacturing cars?\na) Job production\nb) Batch production\nc) Flow production\nd) Lean production',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'c) Flow production',
+            markingCriteria: {
+              breakdown: ['Correct identification of flow production for mass manufacturing (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'bo-q2',
+            question: 'State two advantages of Just In Time (JIT) production.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Reduced storage costs and lower risk of stock becoming obsolete.',
+            markingCriteria: {
+              breakdown: ['First valid advantage (1 mark)', 'Second valid advantage (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'bo-q3',
+            question: 'Define what is meant by "Total Quality Management" (TQM).',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'TQM is a management approach that involves all employees in continuously improving quality throughout all business processes.',
+            markingCriteria: {
+              breakdown: ['Reference to all employees being involved (1 mark)', 'Reference to continuous improvement of quality (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'bo-q4',
+            question: 'Explain two ways that poor quality products can affect a business.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Increased costs from returns, refunds, and warranty claims reduce profitability. Damaged reputation leads to loss of customer trust and reduced future sales.',
+            markingCriteria: {
+              breakdown: ['First impact explained with detail (2 marks)', 'Second impact explained with detail (2 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'bo-q5',
+            question: 'Which of the following is NOT a factor in supplier selection?\na) Price\nb) Reliability\nc) Market share\nd) Quality',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'c) Market share',
+            markingCriteria: {
+              breakdown: ['Correct identification that market share is not a supplier selection factor (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'bo-q6',
+            question: 'Explain how effective customer service can benefit an online retail business.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Effective customer service builds customer loyalty, encouraging repeat purchases and reducing customer acquisition costs. Positive customer experiences lead to word-of-mouth recommendations and positive online reviews, attracting new customers at low cost. Quick resolution of problems prevents negative reviews and maintains brand reputation in competitive online markets.',
+            markingCriteria: {
+              breakdown: ['Customer loyalty and repeat business (2 marks)', 'Word-of-mouth and positive reviews (2 marks)', 'Problem resolution and reputation protection (2 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'bo-q7',
+            question: 'Compare job production with flow production, giving one advantage of each.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Job production allows customization to meet specific customer requirements. Flow production achieves economies of scale through high-volume, standardized manufacturing.',
+            markingCriteria: {
+              breakdown: ['Job production advantage correctly explained (2 marks)', 'Flow production advantage correctly explained (2 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'bo-q8',
+            question: 'Analyse the benefits and drawbacks of implementing lean production methods in a food manufacturing business.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Benefits include reduced waste of ingredients and packaging materials, lowering costs and improving environmental impact. Lean methods minimize storage requirements for perishable goods, reducing spoilage and associated costs. Streamlined processes improve efficiency and can reduce production time. However, drawbacks include vulnerability to supply chain disruptions, particularly problematic for businesses dependent on fresh ingredients. Reduced inventory buffers mean any supplier delays can halt production. Implementation requires significant staff training and cultural change, involving substantial upfront costs and potential resistance from employees.',
+            markingCriteria: {
+              breakdown: ['Benefits: waste reduction and efficiency (3 marks)', 'Benefits: reduced storage and spoilage (3 marks)', 'Drawbacks: supply chain vulnerability and implementation costs (3 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'bo-q9',
+            question: 'Explain the importance of logistics in supply chain management for an e-commerce business.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Efficient logistics ensure fast delivery times, meeting customer expectations for quick service and improving satisfaction. Effective logistics reduce shipping costs through optimized routes and carrier selection, improving profit margins. Reliable logistics prevent stockouts and delivery delays that could damage customer relationships and brand reputation.',
+            markingCriteria: {
+              breakdown: ['Fast delivery and customer satisfaction (2 marks)', 'Cost optimization and profit margins (2 marks)', 'Reliability and reputation protection (2 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'bo-q10',
+            question: 'Evaluate whether a small craft brewery should prioritize quality control or cost minimization in its operations.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Quality control should be prioritized for a craft brewery as it operates in a market where product differentiation and brand reputation are crucial. High-quality products justify premium pricing and build customer loyalty in a competitive market dominated by large commercial breweries. Poor quality could quickly destroy the business reputation and customer base. Craft beer consumers are typically quality-conscious and willing to pay higher prices for superior products. However, cost minimization enables competitive pricing and higher profit margins, allowing investment in marketing and expansion. Excessive costs could price the brewery out of the market. The optimal approach prioritizes quality while maintaining cost efficiency - investing in quality ingredients and brewing processes while optimizing operational efficiency. Quality should not be compromised for short-term cost savings as this risks long-term business viability.',
+            markingCriteria: {
+              breakdown: ['Arguments for quality control priority (4 marks)', 'Arguments for cost minimization (4 marks)', 'Balanced evaluation with justified conclusion (4 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          }
+        ]
+      },
+      {
+        id: 'human-resources',
+        name: 'Human resources',
+        questions: [
+          {
+            id: 'hr-q1',
+            question: 'Which of the following is a financial method of motivation?\na) Job rotation\nb) Commission\nc) Training opportunities\nd) Delegation of responsibility',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'b) Commission',
+            markingCriteria: {
+              breakdown: ['Correct identification of commission as financial motivation (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'hr-q2',
+            question: 'State two advantages of internal recruitment compared to external recruitment.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Lower recruitment costs and existing employee knowledge of company culture.',
+            markingCriteria: {
+              breakdown: ['First valid advantage (1 mark)', 'Second valid advantage (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'hr-q3',
+            question: 'Define what is meant by "span of control" in organizational structure.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Span of control is the number of employees directly supervised by one manager.',
+            markingCriteria: {
+              breakdown: ['Reference to number of employees (1 mark)', 'Reference to direct supervision by one manager (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'hr-q4',
+            question: 'Explain two benefits of providing induction training for new employees.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Reduces employee anxiety and helps them settle into their role quickly, improving early productivity. Ensures new employees understand company policies and procedures, reducing mistakes and potential legal issues.',
+            markingCriteria: {
+              breakdown: ['First benefit explained with development (2 marks)', 'Second benefit explained with development (2 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'hr-q5',
+            question: 'Which organizational structure has fewer management layers?\na) Tall structure\nb) Flat structure\nc) Matrix structure\nd) Functional structure',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'b) Flat structure',
+            markingCriteria: {
+              breakdown: ['Correct identification of flat structure (1 mark)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'hr-q6',
+            question: 'Explain how effective motivation can improve business performance.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Motivated employees are more productive, completing tasks efficiently and to higher standards, improving output quality. Higher motivation reduces employee turnover, saving recruitment and training costs while maintaining experienced staff. Motivated employees provide better customer service, enhancing customer satisfaction and potentially increasing sales and repeat business.',
+            markingCriteria: {
+              breakdown: ['Increased productivity and quality (2 marks)', 'Reduced turnover and cost savings (2 marks)', 'Improved customer service and sales (2 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'hr-q7',
+            question: 'Compare part-time and zero-hour contracts, stating one advantage of each for employers.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Part-time contracts provide predictable staffing levels for regular business needs. Zero-hour contracts offer maximum flexibility to match staffing to demand fluctuations.',
+            markingCriteria: {
+              breakdown: ['Part-time advantage correctly explained (2 marks)', 'Zero-hour advantage correctly explained (2 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'hr-q8',
+            question: 'Analyse the advantages and disadvantages of having a flat organizational structure for a technology start-up.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Advantages include faster decision-making as fewer management layers reduce bureaucracy, enabling quick responses to market changes crucial for start-ups. Improved communication flows more easily between levels, fostering innovation and collaboration. Lower management costs as fewer supervisory roles are needed, important for cash-constrained start-ups. However, disadvantages include managers having wider spans of control, potentially reducing supervision quality and support for employees. Limited promotional opportunities may demotivate ambitious staff seeking career progression. Heavy workload on senior managers who must handle more direct reports alongside strategic responsibilities.',
+            markingCriteria: {
+              breakdown: ['Advantages: faster decisions and communication (3 marks)', 'Advantages: lower costs and efficiency (3 marks)', 'Disadvantages: supervision issues and workload (3 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'hr-q9',
+            question: 'Explain the difference between on-the-job and off-the-job training, giving one example of each.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'On-the-job training occurs in the workplace while employees perform their normal duties, such as job shadowing experienced colleagues. Off-the-job training takes place away from the normal work environment, such as attending external courses or workshops. On-the-job training is directly relevant to specific job requirements, while off-the-job training can provide broader skills and qualifications.',
+            markingCriteria: {
+              breakdown: ['On-the-job definition and example (3 marks)', 'Off-the-job definition and example (3 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          },
+          {
+            id: 'hr-q10',
+            question: 'Evaluate whether financial or non-financial motivation methods are more effective for retaining skilled employees in a competitive technology sector.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Financial motivation is crucial in technology sectors where skills command high market rates and competitors actively recruit talented employees. Competitive salaries, bonuses, and stock options help retain valuable staff and signal company appreciation of their contribution. Financial rewards provide tangible recognition and enable employees to improve their lifestyle. However, non-financial motivation can be equally important for long-term retention. Opportunities for career development, interesting projects, and work-life balance often matter more to skilled professionals than salary alone. Autonomy, recognition, and challenging work create job satisfaction that purely financial incentives cannot provide. The most effective approach combines both - competitive financial packages to meet market expectations alongside non-financial benefits that create emotional attachment to the company. Technology professionals often prioritize learning opportunities and innovative work environments over marginal salary differences.',
+            markingCriteria: {
+              breakdown: ['Arguments for financial motivation effectiveness (4 marks)', 'Arguments for non-financial motivation effectiveness (4 marks)', 'Balanced evaluation with justified conclusion (4 marks)']
+            },
+            specReference: 'AQA Business 8132'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'business-predicted-2026',
+    name: 'Business Predicted 2026 Exam',
+    topics: [
+      {
+        id: 'predicted-business-exam',
+        name: 'GCSE Business Predicted Paper 2026',
+        questions: [
+          {
+            id: 'pred-bus-q1',
+            question: 'Which of the following is the primary purpose of a business plan?\na) To impress potential investors\nb) To comply with legal requirements\nc) To provide a roadmap for business operations\nd) To increase employee motivation',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'c) To provide a roadmap for business operations',
+            markingCriteria: {
+              breakdown: ['Correct identification of business plan purpose (1 mark)']
+            },
+            specReference: 'Section A - Multiple Choice'
+          },
+          {
+            id: 'pred-bus-q2',
+            question: 'State two factors that might influence the location of a new restaurant.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Proximity to target customers and availability of parking.',
+            markingCriteria: {
+              breakdown: ['First valid factor (1 mark)', 'Second valid factor (1 mark)']
+            },
+            specReference: 'Section A - Short Answer'
+          },
+          {
+            id: 'pred-bus-q3',
+            question: 'Calculate the break-even point for TechStart Ltd using the following information:\nFixed costs: £50,000\nVariable cost per unit: £15\nSelling price per unit: £25',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Contribution per unit = £25 - £15 = £10\nBreak-even point = Fixed costs ÷ Contribution per unit = £50,000 ÷ £10 = 5,000 units',
+            markingCriteria: {
+              breakdown: ['Correct calculation of contribution per unit (1 mark)', 'Correct formula application (1 mark)', 'Correct final answer of 5,000 units (1 mark)']
+            },
+            specReference: 'Section A - Calculation'
+          },
+          {
+            id: 'pred-bus-q4',
+            question: 'GreenClean Ltd is a small cleaning products manufacturer that has been operating as a sole trader for 5 years. The owner, Sarah, is considering changing to a private limited company (Ltd) structure.\n\nExplain two advantages for Sarah of changing from a sole trader to a private limited company.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Limited liability protection means Sarah would only be liable for business debts up to the amount she has invested in shares, protecting her personal assets like her house and savings from business creditors. This reduces personal financial risk significantly. The company structure would make it easier to raise additional capital for expansion by selling shares to investors, providing access to larger amounts of funding than typically available to sole traders through bank loans alone.',
+            markingCriteria: {
+              breakdown: ['Limited liability advantage fully explained (3 marks)', 'Easier access to capital advantage fully explained (3 marks)']
+            },
+            specReference: 'Section B - Case Study'
+          },
+          {
+            id: 'pred-bus-q5',
+            question: 'EcoFashion is an online clothing retailer that specializes in sustainable fashion. The company has experienced rapid growth but faces increasing competition from both established fashion retailers entering the sustainable market and new eco-friendly start-ups.\n\nAnalyse how globalisation might affect EcoFashion\'s competitive position.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Globalisation creates opportunities for EcoFashion to access international markets, potentially reaching environmentally conscious consumers worldwide and significantly expanding their customer base beyond the UK market. This could lead to increased revenue and economies of scale from higher production volumes. However, globalisation also intensifies competition as EcoFashion faces rivals from around the world, including established international brands with greater resources and lower-cost competitors from developing countries. Supply chain benefits include access to sustainable materials and ethical manufacturers globally, but this also creates complexity in managing international suppliers and ensuring ethical standards across different countries. Exchange rate fluctuations could affect profitability when trading internationally, while cultural differences may require adaptation of marketing strategies and product offerings for different markets.',
+            markingCriteria: {
+              breakdown: ['Market expansion opportunities and benefits (3 marks)', 'Increased competition and challenges (3 marks)', 'Supply chain and operational considerations (3 marks)']
+            },
+            specReference: 'Section B - Case Study Analysis'
+          },
+          {
+            id: 'pred-bus-q6',
+            question: 'FoodieDelivery is a meal delivery service that connects local restaurants with customers through a mobile app. The company uses a commission-based model, taking 20% of each order value. During the COVID-19 pandemic, the business experienced massive growth, but now faces challenges as customers return to dining out.\n\nThe management team is considering two strategies:\n\nStrategy 1: Reduce commission rates to 15% to attract more restaurants and increase order volume\nStrategy 2: Expand into grocery delivery services to diversify revenue streams\n\nEvaluate which strategy would be most suitable for FoodieDelivery\'s long-term success.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Strategy 1 offers immediate benefits by making FoodieDelivery more attractive to restaurants struggling with high commission costs. Lower rates could increase restaurant participation, expand food options for customers, and potentially increase order volumes if more competitive pricing is passed to consumers. This strategy addresses current market challenges directly and could improve relationships with restaurant partners. However, reduced commission rates would significantly impact profit margins, requiring substantial volume increases to maintain revenue levels. The strategy doesn\'t address fundamental market changes as dining-out behavior normalizes.\n\nStrategy 2 provides long-term diversification benefits, reducing dependence on restaurant partnerships and tapping into the growing online grocery market. Grocery delivery offers recurring revenue opportunities and different customer usage patterns that could complement meal delivery services. This strategy positions FoodieDelivery for sustainable growth beyond pandemic-driven demand.\n\nHowever, grocery delivery requires different logistics, supplier relationships, and potentially significant technology investments. Competition in grocery delivery is intense with established players like major supermarkets.\n\nStrategy 2 appears more suitable for long-term success as it creates a more resilient business model less vulnerable to single market fluctuations, though it requires careful implementation and adequate investment resources.',
+            markingCriteria: {
+              breakdown: ['Analysis of Strategy 1 benefits and drawbacks (4 marks)', 'Analysis of Strategy 2 benefits and drawbacks (4 marks)', 'Comparative evaluation with justified recommendation (4 marks)']
+            },
+            specReference: 'Section C - Extended Case Study'
+          },
+          {
+            id: 'pred-bus-q7',
+            question: 'TechInnovate is a software development company that has grown from 10 to 50 employees in two years. The CEO is concerned about maintaining company culture and effective communication as the business expands.\n\nAnalyse the benefits and drawbacks of implementing a flat organizational structure for TechInnovate.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Benefits include faster decision-making as fewer management layers enable quick responses to client needs and market changes, crucial in the fast-paced technology sector. Improved communication flow between employees and senior management fosters innovation and collaborative problem-solving essential for software development. Lower management costs allow resources to be invested in technology and talent rather than supervisory roles. Employees gain greater autonomy and responsibility, often leading to higher job satisfaction and motivation among skilled developers.\n\nHowever, drawbacks include wider spans of control for managers, potentially reducing the quality of supervision and support for individual employees. As the company has grown rapidly, managers may become overwhelmed with direct reports, affecting their ability to provide guidance and career development. Limited promotional opportunities could demotivate ambitious employees seeking career progression. Coordination difficulties may emerge as the company grows further without clear hierarchical structure to manage complex projects involving multiple teams.',
+            markingCriteria: {
+              breakdown: ['Benefits analysis with business context (4-5 marks)', 'Drawbacks analysis with business context (4-5 marks)']
+            },
+            specReference: 'Section C - Case Study Analysis'
+          }
+        ]
+      }
+    ]
   }
 ];
