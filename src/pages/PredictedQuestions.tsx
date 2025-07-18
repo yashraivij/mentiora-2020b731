@@ -199,7 +199,7 @@ const PredictedQuestions = () => {
                     </Badge>
                   </div>
                   <CardTitle className="text-xl font-bold text-white group-hover:text-yellow-200 transition-colors mt-3">
-                    {subject.name}{subject.id !== 'geography' ? ' Paper 1' : ''}
+                    {subject.name} {subject.id === 'geography' ? 'Paper 2' : 'Paper 1'}
                   </CardTitle>
                   <CardDescription className="text-white/80 text-sm">
                     {isCompleted ? `Last Grade: ${completion.grade} (${completion.percentage}%)` : 'Full predicted paper practice'}
