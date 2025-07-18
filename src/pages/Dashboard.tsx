@@ -22,7 +22,6 @@ import { OptimalLearningTimeCard } from "@/components/dashboard/OptimalLearningT
 import { PredictedQuestionsSection } from "@/components/dashboard/PredictedQuestionsSection";
 import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
 import { supabase } from "@/integrations/supabase/client";
-import { StressTracker } from "@/lib/stressTracker";
 
 interface UserProgress {
   subjectId: string;
@@ -45,9 +44,6 @@ const Dashboard = () => {
   useEffect(() => {
     const loadUserData = async () => {
       if (!user?.id) return;
-
-      // Apply stress decay on each dashboard load
-      StressTracker.applyStressDecay(user.id);
 
       // Load progress from localStorage
       const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
@@ -385,7 +381,6 @@ const Dashboard = () => {
                     onTogglePin={togglePinSubject}
                     isPinned={pinnedSubjects.includes(subject.id)}
                     lastActivity={getLastActivity(subject.id)}
-                    userId={user?.id}
                   />
                 ))}
               </div>
@@ -424,7 +419,6 @@ const Dashboard = () => {
                       isPinned={subject.id === 'maths-edexcel' && examBoard === 'edexcel' ? pinnedSubjects.includes(subject.id) : false}
                       lastActivity={subject.id === 'maths-edexcel' && examBoard === 'edexcel' ? getLastActivity(subject.id) : null}
                       comingSoon={!(subject.id === 'maths-edexcel' && examBoard === 'edexcel')}
-                      userId={user?.id}
                     />
                   ))}
                 </div>
