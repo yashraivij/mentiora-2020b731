@@ -7572,12 +7572,12 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'me2-q9',
-            question: 'Solve the inequality 4(x + 2) ≥ 3x + 10 and represent your answer on a number line.',
+            question: 'Solve the inequality 4(x + 2) ≥ 3x + 10 and write your answer using inequality notation.',
             marks: 3,
             difficulty: 'medium',
-            modelAnswer: '4x + 8 ≥ 3x + 10, so x ≥ 2. Number line shows closed circle at 2 with arrow pointing right.',
+            modelAnswer: '4x + 8 ≥ 3x + 10, so x ≥ 2. Answer: x ≥ 2',
             markingCriteria: {
-              breakdown: ['Expand: 4x + 8 ≥ 3x + 10 (1 mark)', 'Solve: x ≥ 2 (1 mark)', 'Correct representation on number line (1 mark)']
+              breakdown: ['Expand: 4x + 8 ≥ 3x + 10 (1 mark)', 'Solve: x ≥ 2 (1 mark)', 'Correct inequality notation (1 mark)']
             },
             specReference: 'Edexcel 2H - Linear inequalities',
             calculatorGuidance: 'non-calc-friendly'
@@ -8004,12 +8004,12 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'me6-q3',
-            question: 'Draw a cumulative frequency curve for the data: Height (cm): 150-160(12), 160-170(18), 170-180(25), 180-190(15), 190-200(8). Use it to estimate the median and interquartile range.',
+            question: 'For the data: Height (cm): 150-160(12), 160-170(18), 170-180(25), 180-190(15), 190-200(8). Calculate the cumulative frequencies and estimate the median and interquartile range.',
             marks: 5,
             difficulty: 'hard',
             modelAnswer: 'Total frequency = 78. Cumulative frequencies: 150(0), 160(12), 170(30), 180(55), 190(70), 200(78). Median at 39th value ≈ 173 cm. Q1 at 19.5th value ≈ 167 cm. Q3 at 58.5th value ≈ 181 cm. IQR = 181-167 = 14 cm.',
             markingCriteria: {
-              breakdown: ['Calculate cumulative frequencies correctly (1 mark)', 'Plot cumulative frequency curve (1 mark)', 'Estimate median ≈ 173 cm (1 mark)', 'Estimate Q1 and Q3 (1 mark)', 'Calculate IQR = 14 cm (1 mark)']
+              breakdown: ['Calculate cumulative frequencies correctly (1 mark)', 'Calculate position of median (1 mark)', 'Estimate median ≈ 173 cm (1 mark)', 'Estimate Q1 and Q3 (1 mark)', 'Calculate IQR = 14 cm (1 mark)']
             },
             specReference: 'Edexcel 2H - Cumulative frequency',
             calculatorGuidance: 'calc-recommended'
@@ -8064,12 +8064,12 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'me6-q8',
-            question: 'In a survey of 200 people about their favorite color, the results were: Red(45), Blue(62), Green(38), Yellow(28), Other(27). Draw a pie chart to represent this data.',
+            question: 'In a survey of 200 people about their favorite color, the results were: Red(45), Blue(62), Green(38), Yellow(28), Other(27). Calculate the angle for each sector in a pie chart.',
             marks: 4,
             difficulty: 'medium',
             modelAnswer: 'Total = 200. Angles: Red = (45/200) × 360° = 81°, Blue = (62/200) × 360° = 111.6°, Green = (38/200) × 360° = 68.4°, Yellow = (28/200) × 360° = 50.4°, Other = (27/200) × 360° = 48.6°',
             markingCriteria: {
-              breakdown: ['Calculate angles using (frequency/total) × 360° (1 mark)', 'All angles calculated correctly (2 marks)', 'Draw pie chart with labels (1 mark)']
+              breakdown: ['Calculate angles using (frequency/total) × 360° (1 mark)', 'Red angle = 81° (1 mark)', 'Blue angle = 111.6° (1 mark)', 'All other angles correct (1 mark)']
             },
             specReference: 'Edexcel 1H - Pie charts',
             calculatorGuidance: 'calc-recommended'
