@@ -1159,7 +1159,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return 56; // History Paper 1 out of 56 marks
     }
     if (subjectId === 'religious-studies') {
-      return 102; // 96 marks + 6 SPaG marks
+      return 96; // 96 marks total
     }
     return examQuestions.reduce((total, q) => total + q.marks, 0);
   };
