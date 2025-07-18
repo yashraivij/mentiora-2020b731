@@ -416,31 +416,75 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       buddhism: {
         name: 'Buddhism',
         questions: [
+          // Question Set 1
           {
-            id: `${religionId}-q1`,
+            id: `${religionId}-q1a`,
             questionNumber: 1,
-            text: 'Outline three Buddhist teachings about the Three Jewels (Buddha, Dharma, Sangha).',
-            marks: 3,
+            text: 'Give one example of the Four Noble Truths.',
+            marks: 1,
             religion: religionId
           },
           {
-            id: `${religionId}-q2`,
+            id: `${religionId}-q2a`,
             questionNumber: 2,
-            text: 'Describe two ways Buddhists might use meditation in their daily practice.',
+            text: 'Give two Buddhist beliefs about karma.',
+            marks: 2,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3a`,
+            questionNumber: 3,
+            text: 'Explain two ways Buddhists might practice meditation.',
             marks: 4,
             religion: religionId
           },
           {
-            id: `${religionId}-q3`,
-            questionNumber: 3,
-            text: 'Explain two Buddhist teachings about karma and rebirth.',
+            id: `${religionId}-q4a`,
+            questionNumber: 4,
+            text: 'Explain two Buddhist teachings about the Three Jewels (Buddha, Dharma, Sangha).',
             marks: 5,
             religion: religionId
           },
           {
-            id: `${religionId}-q4`,
-            questionNumber: 4,
+            id: `${religionId}-q5a`,
+            questionNumber: 5,
             text: '"The Four Noble Truths are the most important Buddhist teachings."\n\nEvaluate this statement. In your answer you should:\n• refer to Buddhist teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
+            marks: 12,
+            religion: religionId
+          },
+          // Question Set 2
+          {
+            id: `${religionId}-q1b`,
+            questionNumber: 6,
+            text: 'Give one example of Buddhist worship.',
+            marks: 1,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q2b`,
+            questionNumber: 7,
+            text: 'Give two features of the Eightfold Path.',
+            marks: 2,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3b`,
+            questionNumber: 8,
+            text: 'Explain two ways Buddhist festivals might influence a Buddhist\'s life.',
+            marks: 4,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q4b`,
+            questionNumber: 9,
+            text: 'Explain two Buddhist teachings about suffering (dukkha).',
+            marks: 5,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q5b`,
+            questionNumber: 10,
+            text: '"Meditation is the most important Buddhist practice."\n\nEvaluate this statement. In your answer you should:\n• refer to Buddhist teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
             marks: 12,
             religion: religionId
           }
@@ -449,31 +493,75 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       christianity: {
         name: 'Christianity',
         questions: [
+          // Question Set 1
           {
-            id: `${religionId}-q1`,
+            id: `${religionId}-q1a`,
             questionNumber: 1,
-            text: 'Outline three Christian beliefs about the Trinity.',
-            marks: 3,
+            text: 'Give one example of Christian worship.',
+            marks: 1,
             religion: religionId
           },
           {
-            id: `${religionId}-q2`,
+            id: `${religionId}-q2a`,
             questionNumber: 2,
-            text: 'Describe two ways Christians might worship in church.',
+            text: 'Give two Christian beliefs about Jesus.',
+            marks: 2,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3a`,
+            questionNumber: 3,
+            text: 'Explain two ways Christians might celebrate Easter.',
             marks: 4,
             religion: religionId
           },
           {
-            id: `${religionId}-q3`,
-            questionNumber: 3,
-            text: 'Explain two Christian teachings about salvation.',
+            id: `${religionId}-q4a`,
+            questionNumber: 4,
+            text: 'Explain two Christian beliefs about the Trinity.',
             marks: 5,
             religion: religionId
           },
           {
-            id: `${religionId}-q4`,
-            questionNumber: 4,
+            id: `${religionId}-q5a`,
+            questionNumber: 5,
             text: '"Jesus\' death on the cross is the most important Christian belief."\n\nEvaluate this statement. In your answer you should:\n• refer to Christian teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
+            marks: 12,
+            religion: religionId
+          },
+          // Question Set 2
+          {
+            id: `${religionId}-q1b`,
+            questionNumber: 6,
+            text: 'Give one example of a Christian festival.',
+            marks: 1,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q2b`,
+            questionNumber: 7,
+            text: 'Give two Christian teachings about salvation.',
+            marks: 2,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3b`,
+            questionNumber: 8,
+            text: 'Explain two ways the Bible might influence a Christian\'s daily life.',
+            marks: 4,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q4b`,
+            questionNumber: 9,
+            text: 'Explain two Christian beliefs about life after death.',
+            marks: 5,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q5b`,
+            questionNumber: 10,
+            text: '"The resurrection is the most important Christian belief."\n\nEvaluate this statement. In your answer you should:\n• refer to Christian teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
             marks: 12,
             religion: religionId
           }
@@ -482,31 +570,75 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       'catholic-christianity': {
         name: 'Catholic Christianity',
         questions: [
+          // Question Set 1
           {
-            id: `${religionId}-q1`,
+            id: `${religionId}-q1a`,
             questionNumber: 1,
-            text: 'Outline three Catholic beliefs about the sacraments.',
-            marks: 3,
+            text: 'Give one example of a Catholic sacrament.',
+            marks: 1,
             religion: religionId
           },
           {
-            id: `${religionId}-q2`,
+            id: `${religionId}-q2a`,
             questionNumber: 2,
-            text: 'Describe two features of Catholic Mass.',
+            text: 'Give two Catholic beliefs about the Pope.',
+            marks: 2,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3a`,
+            questionNumber: 3,
+            text: 'Explain two ways Catholics might prepare for receiving the Eucharist.',
             marks: 4,
             religion: religionId
           },
           {
-            id: `${religionId}-q3`,
-            questionNumber: 3,
-            text: 'Explain two Catholic teachings about the Pope\'s authority.',
+            id: `${religionId}-q4a`,
+            questionNumber: 4,
+            text: 'Explain two Catholic teachings about papal authority.',
             marks: 5,
             religion: religionId
           },
           {
-            id: `${religionId}-q4`,
-            questionNumber: 4,
+            id: `${religionId}-q5a`,
+            questionNumber: 5,
             text: '"The Eucharist is the most important Catholic sacrament."\n\nEvaluate this statement. In your answer you should:\n• refer to Catholic teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
+            marks: 12,
+            religion: religionId
+          },
+          // Question Set 2
+          {
+            id: `${religionId}-q1b`,
+            questionNumber: 6,
+            text: 'Give one feature of Catholic Mass.',
+            marks: 1,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q2b`,
+            questionNumber: 7,
+            text: 'Give two Catholic beliefs about Mary.',
+            marks: 2,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3b`,
+            questionNumber: 8,
+            text: 'Explain two ways Catholic social teaching might influence a person\'s life.',
+            marks: 4,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q4b`,
+            questionNumber: 9,
+            text: 'Explain two Catholic beliefs about purgatory.',
+            marks: 5,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q5b`,
+            questionNumber: 10,
+            text: '"The Pope has too much authority in the Catholic Church."\n\nEvaluate this statement. In your answer you should:\n• refer to Catholic teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
             marks: 12,
             religion: religionId
           }
@@ -515,31 +647,75 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       hinduism: {
         name: 'Hinduism',
         questions: [
+          // Question Set 1
           {
-            id: `${religionId}-q1`,
+            id: `${religionId}-q1a`,
             questionNumber: 1,
-            text: 'Outline three Hindu beliefs about dharma.',
-            marks: 3,
+            text: 'Give one example of a Hindu festival.',
+            marks: 1,
             religion: religionId
           },
           {
-            id: `${religionId}-q2`,
+            id: `${religionId}-q2a`,
             questionNumber: 2,
-            text: 'Describe two ways Hindus might celebrate Diwali.',
+            text: 'Give two Hindu beliefs about dharma.',
+            marks: 2,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3a`,
+            questionNumber: 3,
+            text: 'Explain two ways Hindus might worship in the home.',
             marks: 4,
             religion: religionId
           },
           {
-            id: `${religionId}-q3`,
-            questionNumber: 3,
-            text: 'Explain two Hindu teachings about the cycle of samsara.',
+            id: `${religionId}-q4a`,
+            questionNumber: 4,
+            text: 'Explain two Hindu teachings about ahimsa (non-violence).',
             marks: 5,
             religion: religionId
           },
           {
-            id: `${religionId}-q4`,
-            questionNumber: 4,
+            id: `${religionId}-q5a`,
+            questionNumber: 5,
             text: '"Moksha is the ultimate goal for all Hindus."\n\nEvaluate this statement. In your answer you should:\n• refer to Hindu teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
+            marks: 12,
+            religion: religionId
+          },
+          // Question Set 2
+          {
+            id: `${religionId}-q1b`,
+            questionNumber: 6,
+            text: 'Give one example of Hindu worship.',
+            marks: 1,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q2b`,
+            questionNumber: 7,
+            text: 'Give two Hindu beliefs about karma.',
+            marks: 2,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3b`,
+            questionNumber: 8,
+            text: 'Explain two ways Hindu scriptures might influence daily life.',
+            marks: 4,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q4b`,
+            questionNumber: 9,
+            text: 'Explain two Hindu beliefs about the caste system.',
+            marks: 5,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q5b`,
+            questionNumber: 10,
+            text: '"The caste system is no longer relevant to modern Hinduism."\n\nEvaluate this statement. In your answer you should:\n• refer to Hindu teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
             marks: 12,
             religion: religionId
           }
@@ -548,31 +724,75 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       islam: {
         name: 'Islam',
         questions: [
+          // Question Set 1
           {
-            id: `${religionId}-q1`,
+            id: `${religionId}-q1a`,
             questionNumber: 1,
-            text: 'Outline three of the Five Pillars of Islam.',
-            marks: 3,
+            text: 'Give one example of the Five Pillars of Islam.',
+            marks: 1,
             religion: religionId
           },
           {
-            id: `${religionId}-q2`,
+            id: `${religionId}-q2a`,
             questionNumber: 2,
-            text: 'Describe two ways Muslims observe Ramadan.',
+            text: 'Give two Muslim beliefs about the Quran.',
+            marks: 2,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3a`,
+            questionNumber: 3,
+            text: 'Explain two ways Muslims might observe Ramadan.',
             marks: 4,
             religion: religionId
           },
           {
-            id: `${religionId}-q3`,
-            questionNumber: 3,
-            text: 'Explain two Muslim teachings about the importance of the Quran.',
+            id: `${religionId}-q4a`,
+            questionNumber: 4,
+            text: 'Explain two Islamic teachings about the oneness of Allah (Tawhid).',
             marks: 5,
             religion: religionId
           },
           {
-            id: `${religionId}-q4`,
-            questionNumber: 4,
+            id: `${religionId}-q5a`,
+            questionNumber: 5,
             text: '"The Hajj pilgrimage is the most important duty for Muslims."\n\nEvaluate this statement. In your answer you should:\n• refer to Islamic teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
+            marks: 12,
+            religion: religionId
+          },
+          // Question Set 2
+          {
+            id: `${religionId}-q1b`,
+            questionNumber: 6,
+            text: 'Give one feature of Muslim prayer (Salah).',
+            marks: 1,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q2b`,
+            questionNumber: 7,
+            text: 'Give two Islamic teachings about zakah.',
+            marks: 2,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3b`,
+            questionNumber: 8,
+            text: 'Explain two ways Islamic teachings about jihad might influence Muslim behavior.',
+            marks: 4,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q4b`,
+            questionNumber: 9,
+            text: 'Explain two ways Sunni and Shia Muslims differ in their beliefs.',
+            marks: 5,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q5b`,
+            questionNumber: 10,
+            text: '"Prayer (Salah) is the most important of the Five Pillars."\n\nEvaluate this statement. In your answer you should:\n• refer to Islamic teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
             marks: 12,
             religion: religionId
           }
@@ -581,31 +801,75 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       judaism: {
         name: 'Judaism',
         questions: [
+          // Question Set 1
           {
-            id: `${religionId}-q1`,
+            id: `${religionId}-q1a`,
             questionNumber: 1,
-            text: 'Outline three Jewish beliefs about the covenant with God.',
-            marks: 3,
+            text: 'Give one example of a Jewish festival.',
+            marks: 1,
             religion: religionId
           },
           {
-            id: `${religionId}-q2`,
+            id: `${religionId}-q2a`,
             questionNumber: 2,
-            text: 'Describe two features of Sabbath observance.',
+            text: 'Give two Jewish beliefs about the Torah.',
+            marks: 2,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3a`,
+            questionNumber: 3,
+            text: 'Explain two ways Jews might celebrate Passover.',
             marks: 4,
             religion: religionId
           },
           {
-            id: `${religionId}-q3`,
-            questionNumber: 3,
-            text: 'Explain two Jewish teachings about the importance of the Torah.',
+            id: `${religionId}-q4a`,
+            questionNumber: 4,
+            text: 'Explain two Jewish teachings about the covenant with God.',
             marks: 5,
             religion: religionId
           },
           {
-            id: `${religionId}-q4`,
-            questionNumber: 4,
+            id: `${religionId}-q5a`,
+            questionNumber: 5,
             text: '"The synagogue is the most important place for Jewish worship."\n\nEvaluate this statement. In your answer you should:\n• refer to Jewish teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
+            marks: 12,
+            religion: religionId
+          },
+          // Question Set 2
+          {
+            id: `${religionId}-q1b`,
+            questionNumber: 6,
+            text: 'Give one feature of Shabbat observance.',
+            marks: 1,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q2b`,
+            questionNumber: 7,
+            text: 'Give two Jewish beliefs about the Messiah.',
+            marks: 2,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3b`,
+            questionNumber: 8,
+            text: 'Explain two ways Jewish dietary laws (kashrut) might influence daily life.',
+            marks: 4,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q4b`,
+            questionNumber: 9,
+            text: 'Explain two Jewish teachings about tikkun olam (repairing the world).',
+            marks: 5,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q5b`,
+            questionNumber: 10,
+            text: '"Orthodox Judaism is the only authentic form of Judaism."\n\nEvaluate this statement. In your answer you should:\n• refer to Jewish teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
             marks: 12,
             religion: religionId
           }
@@ -614,31 +878,75 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       sikhism: {
         name: 'Sikhism',
         questions: [
+          // Question Set 1
           {
-            id: `${religionId}-q1`,
+            id: `${religionId}-q1a`,
             questionNumber: 1,
-            text: 'Outline three Sikh beliefs about the nature of God.',
-            marks: 3,
+            text: 'Give one example of Sikh worship.',
+            marks: 1,
             religion: religionId
           },
           {
-            id: `${religionId}-q2`,
+            id: `${religionId}-q2a`,
             questionNumber: 2,
-            text: 'Describe two features of worship in the gurdwara.',
+            text: 'Give two Sikh beliefs about the Guru Granth Sahib.',
+            marks: 2,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3a`,
+            questionNumber: 3,
+            text: 'Explain two ways Sikhs might serve in the gurdwara.',
             marks: 4,
             religion: religionId
           },
           {
-            id: `${religionId}-q3`,
-            questionNumber: 3,
-            text: 'Explain two Sikh teachings about the importance of the Guru Granth Sahib.',
+            id: `${religionId}-q4a`,
+            questionNumber: 4,
+            text: 'Explain two Sikh teachings about the nature of God.',
             marks: 5,
             religion: religionId
           },
           {
-            id: `${religionId}-q4`,
-            questionNumber: 4,
+            id: `${religionId}-q5a`,
+            questionNumber: 5,
             text: '"The Five Ks are the most important way for Sikhs to show their faith."\n\nEvaluate this statement. In your answer you should:\n• refer to Sikh teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
+            marks: 12,
+            religion: religionId
+          },
+          // Question Set 2
+          {
+            id: `${religionId}-q1b`,
+            questionNumber: 6,
+            text: 'Give one of the Five Ks worn by Sikhs.',
+            marks: 1,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q2b`,
+            questionNumber: 7,
+            text: 'Give two Sikh beliefs about equality.',
+            marks: 2,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q3b`,
+            questionNumber: 8,
+            text: 'Explain two ways Sikh beliefs about seva might influence charitable work.',
+            marks: 4,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q4b`,
+            questionNumber: 9,
+            text: 'Explain two ways the teachings of different Sikh Gurus guide modern Sikh life.',
+            marks: 5,
+            religion: religionId
+          },
+          {
+            id: `${religionId}-q5b`,
+            questionNumber: 10,
+            text: '"Seva (service) is more important than wearing the Five Ks."\n\nEvaluate this statement. In your answer you should:\n• refer to Sikh teachings\n• give reasoned arguments to support this view\n• give reasoned arguments to support a different point of view\n• reach a justified conclusion.',
             marks: 12,
             religion: religionId
           }
