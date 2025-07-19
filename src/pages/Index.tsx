@@ -242,27 +242,28 @@ const Index = () => {
 
         {/* Hero Section */}
         <div className="text-center mb-32 max-w-5xl mx-auto">
-          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-100 rounded-full text-blue-700 text-sm font-semibold mb-8 animate-fade-in hover:scale-105 transition-transform duration-300">
+          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-100 rounded-full text-blue-700 text-sm font-semibold mb-8 opacity-0 animate-fade-in hover:scale-105 transition-transform duration-300" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
             <Sparkles className="h-4 w-4 mr-2 text-blue-600 animate-pulse" />
             The Future of GCSE Revision
           </div>
           
-          <h2 className="text-6xl lg:text-7xl font-bold mb-8 leading-tight tracking-tight animate-fade-in">
-            <span className="text-gray-900">GCSE Grades</span>
+          <h2 className="text-6xl lg:text-7xl font-bold mb-8 leading-tight tracking-tight opacity-0 animate-fade-in" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
+            <span className="text-gray-900 inline-block opacity-0 animate-fade-in" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>GCSE Grades</span>
             <br />
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent inline-block opacity-0 animate-fade-in" style={{ animationDelay: '1.2s', animationFillMode: 'forwards' }}>
               That Open Doors
             </span>
           </h2>
           
-          <p className="text-xl text-gray-600 mb-16 max-w-3xl mx-auto leading-relaxed animate-fade-in">
+          <p className="text-xl text-gray-600 mb-16 max-w-3xl mx-auto leading-relaxed opacity-0 animate-fade-in" style={{ animationDelay: '1.6s', animationFillMode: 'forwards' }}>
             Our AI tutor creates personalised revision for every major GCSE exam board with 
             <span className="font-semibold text-purple-600 hover:text-purple-800 transition-colors duration-300"> 2026 predicted exam papers updated weekly</span>
           </p>
           
           <Button 
             onClick={() => navigate('/register')} 
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 rounded-2xl group hover:scale-105 animate-fade-in"
+            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 rounded-2xl group hover:scale-105 opacity-0 animate-fade-in" 
+            style={{ animationDelay: '2.0s', animationFillMode: 'forwards' }}
           >
             Start Your Journey Free
             <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
