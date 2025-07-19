@@ -673,6 +673,18 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
+      {/* Feedback Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <Button
+          data-feedback-fish
+          variant="outline"
+          size="sm"
+          className="bg-background/80 backdrop-blur-sm border shadow-lg hover:shadow-xl transition-all duration-200"
+        >
+          💬 Feedback
+        </Button>
+      </div>
     </div>
   );
 };
