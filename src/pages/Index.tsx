@@ -198,13 +198,13 @@ const Index = () => {
     <div className="min-h-screen bg-white">
       <div className="container mx-auto px-6 lg:px-8 py-6">
         {/* Header */}
-        <header className="flex flex-col sm:flex-row justify-between items-center mb-20 lg:mb-24">
-          <div className="flex items-center space-x-4">
+        <header className="flex flex-col sm:flex-row justify-between items-center mb-20 lg:mb-24 animate-fade-in">
+          <div className="flex items-center space-x-4 hover-scale">
             <div className="w-12 h-12 flex items-center justify-center">
               <img 
                 src="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png" 
                 alt="Mentiora Logo" 
-                className="w-10 h-10 object-contain"
+                className="w-10 h-10 object-contain transition-transform duration-300 hover:rotate-12"
               />
             </div>
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Mentiora</h1>
@@ -214,7 +214,7 @@ const Index = () => {
               <Button 
                 onClick={() => navigate('/dashboard')} 
                 size="lg"
-                className="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-8 py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-8 py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 Dashboard
               </Button>
@@ -224,14 +224,14 @@ const Index = () => {
                   variant="ghost" 
                   size="lg"
                   onClick={() => navigate('/login')} 
-                  className="text-gray-600 hover:text-gray-900 hover:bg-gray-50 font-semibold px-8 py-3 rounded-2xl transition-all duration-300"
+                  className="text-gray-600 hover:text-gray-900 hover:bg-gray-50 font-semibold px-8 py-3 rounded-2xl transition-all duration-300 hover:scale-105"
                 >
                   Sign In
                 </Button>
                 <Button 
                   size="lg"
                   onClick={() => navigate('/register')} 
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-8 py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-8 py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                 >
                   Start Free
                 </Button>
@@ -242,12 +242,12 @@ const Index = () => {
 
         {/* Hero Section */}
         <div className="text-center mb-32 max-w-5xl mx-auto">
-          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-100 rounded-full text-blue-700 text-sm font-semibold mb-8">
-            <Sparkles className="h-4 w-4 mr-2 text-blue-600" />
+          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-100 rounded-full text-blue-700 text-sm font-semibold mb-8 animate-fade-in hover:scale-105 transition-transform duration-300">
+            <Sparkles className="h-4 w-4 mr-2 text-blue-600 animate-pulse" />
             The Future of GCSE Revision
           </div>
           
-          <h2 className="text-6xl lg:text-7xl font-bold mb-8 leading-tight tracking-tight">
+          <h2 className="text-6xl lg:text-7xl font-bold mb-8 leading-tight tracking-tight animate-fade-in">
             <span className="text-gray-900">GCSE Grades</span>
             <br />
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
@@ -255,26 +255,26 @@ const Index = () => {
             </span>
           </h2>
           
-          <p className="text-xl text-gray-600 mb-16 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 mb-16 max-w-3xl mx-auto leading-relaxed animate-fade-in">
             Our AI tutor creates personalised revision for every major GCSE exam board with 
-            <span className="font-semibold text-purple-600"> 2026 predicted exam papers updated weekly</span>
+            <span className="font-semibold text-purple-600 hover:text-purple-800 transition-colors duration-300"> 2026 predicted exam papers updated weekly</span>
           </p>
           
           <Button 
             onClick={() => navigate('/register')} 
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 rounded-2xl group"
+            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 rounded-2xl group hover:scale-105 animate-fade-in"
           >
             Start Your Journey Free
             <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
           </Button>
           
           {/* Trust Stats Strip */}
-          <div className="mt-16 pt-8 border-t border-gray-100">
+          <div className="mt-16 pt-8 border-t border-gray-100 animate-fade-in">
             <p className="text-sm text-gray-500 font-medium mb-6 text-center">Trusted by students across the UK</p>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
               {trustStats.map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className={`text-2xl lg:text-3xl font-bold ${stat.color} mb-1 tracking-tight`}>
+                <div key={index} className="text-center hover-scale group">
+                  <div className={`text-2xl lg:text-3xl font-bold ${stat.color} mb-1 tracking-tight group-hover:scale-110 transition-transform duration-300`}>
                     {stat.number}
                   </div>
                   <div className="text-gray-700 font-semibold text-xs uppercase tracking-wide">
@@ -287,9 +287,9 @@ const Index = () => {
         </div>
 
         <div className="mb-32">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-violet-100 to-purple-100 border border-violet-200 rounded-full text-violet-700 text-sm font-bold mb-8">
-              <Crown className="h-5 w-5 mr-2 text-violet-600" />
+          <div className="text-center mb-20 animate-fade-in">
+            <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-violet-100 to-purple-100 border border-violet-200 rounded-full text-violet-700 text-sm font-bold mb-8 hover:scale-105 transition-transform duration-300">
+              <Crown className="h-5 w-5 mr-2 text-violet-600 animate-pulse" />
               Premium Features
             </div>
             <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
@@ -299,17 +299,17 @@ const Index = () => {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {premiumFeatures.map((feature, index) => (
-              <Card key={index} className="group relative overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-700 bg-white rounded-3xl hover:-translate-y-2 p-0">
+              <Card key={index} className="group relative overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-700 bg-white rounded-3xl hover:-translate-y-2 p-0 animate-fade-in">
                 <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-10 group-hover:opacity-20 transition-opacity duration-700`} />
                 <CardContent className="p-10 relative z-10">
                   <div className="flex items-start space-x-6">
-                    <div className={`flex-shrink-0 w-20 h-20 bg-gradient-to-r ${feature.color} rounded-3xl flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`flex-shrink-0 w-20 h-20 bg-gradient-to-r ${feature.color} rounded-3xl flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 group-hover:rotate-6`}>
                       <feature.icon className="h-10 w-10 text-white" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-4">
-                        <h3 className="text-2xl font-bold text-gray-900">{feature.title}</h3>
-                        <span className={`px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r ${feature.color} text-white shadow-lg`}>
+                        <h3 className="text-2xl font-bold text-gray-900 group-hover:text-purple-700 transition-colors duration-300">{feature.title}</h3>
+                        <span className={`px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r ${feature.color} text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                           {feature.badge}
                         </span>
                       </div>
@@ -324,7 +324,7 @@ const Index = () => {
 
         {/* How It Works - Simplified */}
         <div className="mb-32">
-          <div className="text-center mb-20">
+          <div className="text-center mb-20 animate-fade-in">
             <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
               Simple. <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Effective.</span> Proven.
             </h3>
@@ -334,14 +334,14 @@ const Index = () => {
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {howItWorks.map((step, index) => (
-                <div key={index} className="text-center group">
-                  <div className={`w-24 h-24 bg-gradient-to-r ${step.color} rounded-full flex items-center justify-center shadow-2xl mb-8 mx-auto group-hover:scale-110 transition-transform duration-300`}>
+                <div key={index} className="text-center group animate-fade-in">
+                  <div className={`w-24 h-24 bg-gradient-to-r ${step.color} rounded-full flex items-center justify-center shadow-2xl mb-8 mx-auto group-hover:scale-110 transition-transform duration-300 group-hover:rotate-12`}>
                     <step.icon className="h-12 w-12 text-white" />
                   </div>
-                  <div className={`text-sm font-bold ${step.accent} mb-4 tracking-wider uppercase`}>
+                  <div className={`text-sm font-bold ${step.accent} mb-4 tracking-wider uppercase group-hover:scale-105 transition-transform duration-300`}>
                     Step {step.step}
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{step.title}</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-purple-700 transition-colors duration-300">{step.title}</h3>
                   <p className="text-gray-600 leading-relaxed text-lg">{step.description}</p>
                 </div>
               ))}
@@ -351,7 +351,7 @@ const Index = () => {
 
 
         {/* Final CTA */}
-        <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-violet-600 rounded-3xl p-16 text-center text-white max-w-4xl mx-auto shadow-2xl relative overflow-hidden">
+        <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-violet-600 rounded-3xl p-16 text-center text-white max-w-4xl mx-auto shadow-2xl relative overflow-hidden animate-fade-in hover:scale-105 transition-transform duration-300">
           <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 rounded-3xl" />
           <div className="relative z-10">
             <h3 className="text-4xl lg:text-5xl font-bold mb-8 tracking-tight">Ready to Transform Your Grades?</h3>
@@ -360,7 +360,7 @@ const Index = () => {
             </p>
             <Button 
               onClick={() => navigate('/register')} 
-              className="bg-white text-gray-900 hover:bg-gray-100 px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-white/25 transition-all duration-300 rounded-2xl group"
+              className="bg-white text-gray-900 hover:bg-gray-100 px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-white/25 transition-all duration-300 rounded-2xl group hover:scale-105"
             >
               Start Free Today
               <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
