@@ -195,7 +195,7 @@ const PredictedQuestions = () => {
                       <BookOpen className="h-7 w-7 text-white" />
                     </div>
                     <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm text-xs">
-                      AQA GCSE
+                      {subject.id === 'mathematics' ? 'Edexcel GCSE' : 'AQA GCSE'}
                     </Badge>
                   </div>
                   <CardTitle className="text-xl font-bold text-white group-hover:text-yellow-200 transition-colors mt-3">
