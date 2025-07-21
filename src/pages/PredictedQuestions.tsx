@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BookOpen, Clock, Crown, Target, Sparkles, Rocket, Zap, CheckCircle, RotateCcw } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
@@ -15,6 +16,7 @@ const PredictedQuestions = () => {
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [completedExams, setCompletedExams] = useState<{[key: string]: any}>({});
   const [loading, setLoading] = useState(true);
+  const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
 
   useEffect(() => {
     fetchCompletedExams();
@@ -94,6 +96,139 @@ const PredictedQuestions = () => {
     return durations[subjectId as keyof typeof durations] || "1h 30min";
   };
 
+  const getBadgeText = (subjectId: string) => {
+    if (subjectId === 'maths-edexcel' || subjectId === 'business-edexcel-igcse' || subjectId === 'edexcel-english-language') {
+      return 'Edexcel GCSE';
+    }
+    return 'AQA GCSE';
+  };
+
+  const renderSubjectCard = (subject: any) => {
+    const completion = loading ? null : completedExams[subject.id];
+    const isCompleted = !loading && !!completion;
+    
+    return (
+      <Card 
+        key={subject.id} 
+        className="group cursor-pointer relative overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+        onClick={() => !isCompleted && handleSubjectSelect(subject.id)}
+      >
+        {/* Card Background Gradient */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${getSubjectColor(subject.id)} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
+        
+        {/* Completion Badge */}
+        {isCompleted && (
+          <div className="absolute top-4 right-4 z-10">
+            <div className="bg-green-500 text-white rounded-full p-2 shadow-xl">
+              <CheckCircle className="h-4 w-4" />
+            </div>
+          </div>
+        )}
+        
+        <CardHeader className="relative pb-4">
+          <div className="flex items-center justify-between">
+            <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${getSubjectColor(subject.id)} flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 border border-white/20`}>
+              <BookOpen className="h-7 w-7 text-white" />
+            </div>
+            <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm text-xs">
+              {getBadgeText(subject.id)}
+            </Badge>
+          </div>
+          <CardTitle className="text-xl font-bold text-white group-hover:text-yellow-200 transition-colors mt-3">
+            {subject.id === 'geography' ? 'Geography Paper 1' : subject.id === 'geography-paper-2' ? 'Geography Paper 2' : subject.id === 'business-edexcel-igcse' ? 'Business Paper 1: Small Businesses' : `${subject.name} Paper 1`}
+          </CardTitle>
+          <CardDescription className="text-white/80 text-sm">
+            {isCompleted ? `Last Grade: ${completion.grade} (${completion.percentage}%)` : 'Full predicted paper practice'}
+          </CardDescription>
+        </CardHeader>
+        
+        <CardContent className="relative pt-0">
+          <div className="space-y-4">
+            <div className="space-y-3">
+              <div className="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm border border-white/20">
+                <div className="p-1.5 bg-gradient-to-br from-blue-400/30 to-cyan-400/30 rounded-lg">
+                  <Clock className="h-4 w-4 text-white" />
+                </div>
+                <div>
+                  <p className="text-white text-sm font-medium">Duration: {getExamDuration(subject.id)}</p>
+                  <p className="text-white/70 text-xs">Real exam timing</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm border border-white/20">
+                <div className="p-1.5 bg-gradient-to-br from-green-400/30 to-emerald-400/30 rounded-lg">
+                  <Target className="h-4 w-4 text-white" />
+                </div>
+                <div>
+                  <p className="text-white text-sm font-medium">{subject.topics.length} topics covered</p>
+                  <p className="text-white/70 text-xs">Full specification</p>
+                </div>
+              </div>
+            </div>
+            
+            {isCompleted && (
+              <div className="bg-white/15 backdrop-blur-sm border border-white/30 rounded-xl p-3 mb-3">
+                <div className="flex items-center justify-between text-white text-sm">
+                  <span>Questions refresh:</span>
+                  <span className="font-bold">Next week</span>
+                </div>
+              </div>
+            )}
+            
+            <div className="space-y-2">
+              {isCompleted ? (
+                <>
+                  <Button 
+                    className="w-full bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 hover:from-blue-300 hover:via-purple-300 hover:to-indigo-300 text-white font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/predicted-results/${subject.id}`, { 
+                        state: { 
+                          questions: completion.questions, 
+                          answers: completion.answers,
+                          timeElapsed: completion.time_taken_seconds,
+                          isReview: true,
+                          completion: completion
+                        } 
+                      });
+                    }}
+                  >
+                    <BookOpen className="h-4 w-4 mr-2" />
+                    Review Marking
+                    <Target className="h-4 w-4 ml-2" />
+                  </Button>
+                  <Button 
+                    className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleSubjectSelect(subject.id);
+                    }}
+                  >
+                    <RotateCcw className="h-4 w-4 mr-2" />
+                    Retake Exam
+                    <Sparkles className="h-4 w-4 ml-2" />
+                  </Button>
+                </>
+              ) : (
+                <Button 
+                  className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSubjectSelect(subject.id);
+                  }}
+                >
+                  <Crown className="h-4 w-4 mr-2" />
+                  Start Premium Exam
+                  <Sparkles className="h-4 w-4 ml-2" />
+                </Button>
+              )}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  };
+
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Animated Background Gradients */}
@@ -165,134 +300,94 @@ const PredictedQuestions = () => {
           </p>
         </div>
 
-        {/* Subject Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {curriculum.map((subject) => {
-            const completion = loading ? null : completedExams[subject.id];
-            const isCompleted = !loading && !!completion;
-            
-            return (
-              <Card 
-                key={subject.id} 
-                className="group cursor-pointer relative overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
-                onClick={() => !isCompleted && handleSubjectSelect(subject.id)}
-              >
-                {/* Card Background Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${getSubjectColor(subject.id)} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
-                
-                {/* Completion Badge */}
-                {isCompleted && (
-                  <div className="absolute top-4 right-4 z-10">
-                    <div className="bg-green-500 text-white rounded-full p-2 shadow-xl">
-                      <CheckCircle className="h-4 w-4" />
-                    </div>
-                  </div>
-                )}
-                
-                <CardHeader className="relative pb-4">
-                  <div className="flex items-center justify-between">
-                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${getSubjectColor(subject.id)} flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 border border-white/20`}>
-                      <BookOpen className="h-7 w-7 text-white" />
-                    </div>
-                    <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm text-xs">
-                      {(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'mathematics') ? 'Edexcel GCSE' : 'AQA GCSE'}
-                    </Badge>
-                  </div>
-                  <CardTitle className="text-xl font-bold text-white group-hover:text-yellow-200 transition-colors mt-3">
-                    {subject.id === 'geography' ? 'Geography Paper 1' : subject.id === 'geography-paper-2' ? 'Geography Paper 2' : subject.id === 'business-edexcel-igcse' ? 'Business Paper 1: Small Businesses' : `${subject.name} Paper 1`}
-                  </CardTitle>
-                  <CardDescription className="text-white/80 text-sm">
-                    {isCompleted ? `Last Grade: ${completion.grade} (${completion.percentage}%)` : 'Full predicted paper practice'}
-                  </CardDescription>
-                </CardHeader>
-                
-                <CardContent className="relative pt-0">
-                  <div className="space-y-4">
-                    <div className="space-y-3">
-                      <div className="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm border border-white/20">
-                        <div className="p-1.5 bg-gradient-to-br from-blue-400/30 to-cyan-400/30 rounded-lg">
-                          <Clock className="h-4 w-4 text-white" />
-                        </div>
-                        <div>
-                          <p className="text-white text-sm font-medium">Duration: {getExamDuration(subject.id)}</p>
-                          <p className="text-white/70 text-xs">Real exam timing</p>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm border border-white/20">
-                        <div className="p-1.5 bg-gradient-to-br from-green-400/30 to-emerald-400/30 rounded-lg">
-                          <Target className="h-4 w-4 text-white" />
-                        </div>
-                        <div>
-                          <p className="text-white text-sm font-medium">{subject.topics.length} topics covered</p>
-                          <p className="text-white/70 text-xs">Full specification</p>
-                        </div>
-                      </div>
-                    </div>
+        {/* Exam Board Tabs */}
+        <Tabs value={selectedExamBoard} onValueChange={setSelectedExamBoard} className="mb-6">
+          <TabsList className="grid w-full grid-cols-5 max-w-md mx-auto bg-white/10 backdrop-blur-sm border border-white/20">
+            <TabsTrigger value="aqa" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">AQA</TabsTrigger>
+            <TabsTrigger value="edexcel" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">Edexcel</TabsTrigger>
+            <TabsTrigger value="ccea" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">CCEA</TabsTrigger>
+            <TabsTrigger value="ocr" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">OCR</TabsTrigger>
+            <TabsTrigger value="wjec" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">WJEC</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="aqa" className="mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {curriculum
+                .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'edexcel-english-language')
+                .map((subject) => renderSubjectCard(subject))}
+            </div>
+          </TabsContent>
+
+          {['edexcel', 'ccea', 'ocr', 'wjec'].map((examBoard) => (
+            <TabsContent key={examBoard} value={examBoard} className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {curriculum
+                  .filter((subject) => {
+                    // Show maths-edexcel, business-edexcel-igcse, and edexcel-english-language only in edexcel tab
+                    if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') {
+                      return examBoard === 'edexcel';
+                    }
+                    // For other exam boards, show all other subjects as coming soon
+                    return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'edexcel-english-language';
+                  })
+                  .sort((a, b) => {
+                    // In edexcel tab, put maths-edexcel first, then business-edexcel-igcse, then edexcel-english-language
+                    if (examBoard === 'edexcel') {
+                      if (a.id === 'maths-edexcel') return -1;
+                      if (b.id === 'maths-edexcel') return 1;
+                      if (a.id === 'business-edexcel-igcse') return -1;
+                      if (b.id === 'business-edexcel-igcse') return 1;
+                      if (a.id === 'edexcel-english-language') return -1;
+                      if (b.id === 'edexcel-english-language') return 1;
+                    }
+                    return 0;
+                  })
+                  .map((subject) => {
+                    // For non-Edexcel tabs, show subjects as coming soon if they're not actually available
+                    const isAvailable = examBoard === 'edexcel' && 
+                      (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language');
                     
-                    {isCompleted && (
-                      <div className="bg-white/15 backdrop-blur-sm border border-white/30 rounded-xl p-3 mb-3">
-                        <div className="flex items-center justify-between text-white text-sm">
-                          <span>Questions refresh:</span>
-                          <span className="font-bold">Next week</span>
-                        </div>
-                      </div>
-                    )}
-                    
-                    <div className="space-y-2">
-                      {isCompleted ? (
-                        <>
-                          <Button 
-                            className="w-full bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 hover:from-blue-300 hover:via-purple-300 hover:to-indigo-300 text-white font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              navigate(`/predicted-results/${subject.id}`, { 
-                                state: { 
-                                  questions: completion.questions, 
-                                  answers: completion.answers,
-                                  timeElapsed: completion.time_taken_seconds,
-                                  isReview: true,
-                                  completion: completion
-                                } 
-                              });
-                            }}
-                          >
-                            <BookOpen className="h-4 w-4 mr-2" />
-                            Review Marking
-                            <Target className="h-4 w-4 ml-2" />
-                          </Button>
-                          <Button 
-                            className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleSubjectSelect(subject.id);
-                            }}
-                          >
-                            <RotateCcw className="h-4 w-4 mr-2" />
-                            Retake Exam
-                            <Sparkles className="h-4 w-4 ml-2" />
-                          </Button>
-                        </>
-                      ) : (
-                        <Button 
-                          className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleSubjectSelect(subject.id);
-                          }}
+                    if (!isAvailable && examBoard !== 'edexcel') {
+                      return (
+                        <Card 
+                          key={subject.id} 
+                          className="group relative overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 opacity-60"
                         >
-                          <Crown className="h-4 w-4 mr-2" />
-                          Start Premium Exam
-                          <Sparkles className="h-4 w-4 ml-2" />
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+                          <div className={`absolute inset-0 bg-gradient-to-br ${getSubjectColor(subject.id)} opacity-20`} />
+                          <CardHeader className="relative pb-4">
+                            <div className="flex items-center justify-between">
+                              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${getSubjectColor(subject.id)} flex items-center justify-center shadow-2xl border border-white/20`}>
+                                <BookOpen className="h-7 w-7 text-white" />
+                              </div>
+                              <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm text-xs">
+                                Coming Soon
+                              </Badge>
+                            </div>
+                            <CardTitle className="text-xl font-bold text-white mt-3">
+                              {subject.name} Paper 1
+                            </CardTitle>
+                            <CardDescription className="text-white/80 text-sm">
+                              Available soon for {examBoard.toUpperCase()}
+                            </CardDescription>
+                          </CardHeader>
+                          <CardContent className="relative pt-0">
+                            <Button 
+                              disabled
+                              className="w-full bg-white/10 text-white/50 font-bold py-3 px-6 rounded-xl cursor-not-allowed"
+                            >
+                              Coming Soon
+                            </Button>
+                          </CardContent>
+                        </Card>
+                      );
+                    }
+                    
+                    return renderSubjectCard(subject);
+                  })}
+              </div>
+            </TabsContent>
+          ))}
+        </Tabs>
       </div>
     </div>
   );
