@@ -380,7 +380,7 @@ const Dashboard = () => {
 
             <TabsContent value="aqa" className="mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {sortedSubjects.filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse').map((subject) => (
+                {sortedSubjects.filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'edexcel-english-language').map((subject) => (
                   <SubjectCard
                     key={subject.id}
                     subject={{

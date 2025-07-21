@@ -11389,7 +11389,7 @@ export const curriculum: Subject[] = [
   // ===== EDEXCEL SUBJECTS =====
   {
     id: 'edexcel-english-language',
-    name: 'Edexcel GCSE English Language',
+    name: 'English Language (Edexcel)',
     topics: [
       {
         id: 'component1-fiction-imaginative',
