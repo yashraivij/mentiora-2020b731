@@ -429,7 +429,7 @@ const Dashboard = () => {
                          if (subject.id === 'maths-edexcel') {
                            modifiedSubject = { ...subject, name: 'Mathematics' };
                          } else if (subject.id === 'business-edexcel-igcse') {
-                           modifiedSubject = { ...subject, name: 'Business' };
+                           modifiedSubject = { ...subject, name: 'IGCSE Business' };
                          } else if (subject.id === 'edexcel-english-language') {
                            modifiedSubject = { ...subject, name: 'English Language' };
                          }
