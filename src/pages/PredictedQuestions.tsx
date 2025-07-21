@@ -106,11 +106,11 @@ const PredictedQuestions = () => {
   const getSubjectDisplayName = (subject: any, examBoard?: string) => {
     let name = subject.name;
     
-    // Remove brackets from Edexcel subjects
+    // Remove brackets from Edexcel subjects and update Business to IGCSE Business
     if (subject.id === 'maths-edexcel') {
       name = 'Mathematics';
     } else if (subject.id === 'business-edexcel-igcse') {
-      name = 'Business';
+      name = 'IGCSE Business';
     } else if (subject.id === 'edexcel-english-language') {
       name = 'English Language';
     }
@@ -126,7 +126,7 @@ const PredictedQuestions = () => {
     } else if (subject.id === 'geography-paper-2') {
       return 'Geography Paper 2';
     } else if (subject.id === 'business-edexcel-igcse') {
-      return 'Business Paper 1: Small Businesses';
+      return 'IGCSE Business Paper 1: Small Businesses';
     } else {
       return `${name} Paper 1`;
     }
@@ -356,6 +356,12 @@ const PredictedQuestions = () => {
                     if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') {
                       return examBoard === 'edexcel';
                     }
+                    
+                    // For edexcel tab, exclude subjects that have AQA GCSE badge
+                    if (examBoard === 'edexcel') {
+                      return false; // Don't show AQA GCSE subjects in Edexcel tab
+                    }
+                    
                     // For other exam boards, show all other subjects as coming soon
                     return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'edexcel-english-language';
                   })
