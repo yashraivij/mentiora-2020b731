@@ -126,7 +126,7 @@ const PredictedQuestions = () => {
     } else if (subject.id === 'geography-paper-2') {
       return 'Geography Paper 2';
     } else if (subject.id === 'business-edexcel-igcse') {
-      return 'IGCSE Business Paper 1: Small Businesses';
+      return 'IGCSE Business Paper 1';
     } else {
       return `${name} Paper 1`;
     }
