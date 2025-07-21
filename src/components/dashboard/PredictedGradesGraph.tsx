@@ -167,9 +167,14 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         const additionalSubjects = [...progressSubjectIds, ...examSubjectIds].filter(id => !curriculumSubjectIds.includes(id));
         const allSubjectIds = [...curriculumSubjectIds, ...additionalSubjects];
 
-        // Process all subjects - show all curriculum subjects even without data
+        // Process only subjects that have data
         const gradePromises = allSubjectIds.map(async (subjectId) => {
           const combinedResult = calculateCombinedGrade(subjectId);
+          
+          // Skip subjects without any data
+          if (!combinedResult) {
+            return null;
+          }
           
           // Find subject in curriculum or create a basic subject info
           const curriculumSubject = curriculum.find(s => s.id === subjectId);
@@ -179,26 +184,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           // Add (AQA) to all subjects except Mathematics Edexcel
           if (subjectId !== 'maths-edexcel' && !subjectName.includes('Edexcel')) {
             subjectName = `${subjectName} (AQA)`;
-          }
-
-          // If no data, return empty state for curriculum subjects
-          if (!combinedResult) {
-            // Only show curriculum subjects without data, skip non-curriculum subjects
-            if (!curriculumSubject) {
-              return null;
-            }
-            
-            return {
-              subjectId: subjectId,
-              subjectName,
-              practiceScore: 0,
-              examGrade: null,
-              finalGrade: '–',
-              finalPercentage: 0,
-              confidence: 'low' as const,
-              practiceCount: 0,
-              isGrade7Plus: false
-            } as GradeData;
           }
 
           // Calculate confidence based on practice attempts
