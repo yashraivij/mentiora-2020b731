@@ -435,22 +435,23 @@ const Dashboard = () => {
                          }
                        }
                        
-                       return (
-                       <SubjectCard
-                         key={subject.id}
-                         subject={{
-                           ...modifiedSubject,
-                           color: getSubjectColor(subject.id)
-                         }}
-                       progress={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? userProgress : []}
-                       onStartPractice={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? handlePractice : () => {}}
-                       onTogglePin={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? togglePinSubject : () => {}}
-                       isPinned={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? pinnedSubjects.includes(subject.id) : false}
-                       lastActivity={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? getLastActivity(subject.id) : null}
-                       comingSoon={!((subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel')}
-                      userId={user?.id}
-                    />
-                  ))}
+                        return (
+                        <SubjectCard
+                          key={subject.id}
+                          subject={{
+                            ...modifiedSubject,
+                            color: getSubjectColor(subject.id)
+                          }}
+                        progress={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? userProgress : []}
+                        onStartPractice={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? handlePractice : () => {}}
+                        onTogglePin={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? togglePinSubject : () => {}}
+                        isPinned={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? pinnedSubjects.includes(subject.id) : false}
+                        lastActivity={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? getLastActivity(subject.id) : null}
+                        comingSoon={!((subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel')}
+                       userId={user?.id}
+                     />
+                        );
+                      })}
                 </div>
               </TabsContent>
             ))}
