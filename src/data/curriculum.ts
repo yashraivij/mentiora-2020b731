@@ -8103,6 +8103,592 @@ export const curriculum: Subject[] = [
     ]
   },
   {
+    id: 'business-edexcel-igcse',
+    name: 'Business (Edexcel IGCSE)',
+    topics: [
+      {
+        id: 'business-activity-influences',
+        name: 'Business activity and influences on business',
+        questions: [
+          {
+            id: 'bai-q1',
+            question: 'Explain why a business might change its objectives from survival to profit maximization.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'A business may change from survival to profit maximization once it has established itself in the market and overcome initial challenges. During the survival phase, the business focuses on covering costs and staying operational. Once stable, it can shift focus to generating higher profits to reward owners, fund expansion, or invest in new products.',
+            markingCriteria: {
+              breakdown: ['Explanation of survival objective (1 mark)', 'Explanation of profit maximization (1 mark)', 'Reason for change - market establishment (1 mark)', 'Benefits of profit maximization (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 1.1 - Business objectives'
+          },
+          {
+            id: 'bai-q2',
+            question: 'Compare the advantages and disadvantages of being a sole trader versus a limited company.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Sole traders have complete control and keep all profits, but face unlimited liability and limited access to finance. Limited companies have limited liability protection and better access to capital through share sales, but face corporation tax, more regulations, and potential loss of control when selling shares to investors.',
+            markingCriteria: {
+              breakdown: ['Sole trader advantages (1 mark)', 'Sole trader disadvantages (1 mark)', 'Limited company advantages (2 marks)', 'Limited company disadvantages (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 1.2 - Types of organisations'
+          },
+          {
+            id: 'bai-q3',
+            question: 'Explain how the internet has changed business location decisions.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'The internet allows businesses to operate remotely and reach global customers without being physically close to them. Online retailers can locate in cheaper areas rather than expensive high streets. Businesses can also access suppliers worldwide and communicate with stakeholders regardless of location, making proximity to customers and suppliers less important.',
+            markingCriteria: {
+              breakdown: ['Remote operation capability (1 mark)', 'Global customer reach (1 mark)', 'Access to cheaper locations (1 mark)', 'Reduced importance of proximity (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 1.4 - Location decisions'
+          },
+          {
+            id: 'bai-q4',
+            question: 'Analyze the impact of exchange rate changes on a UK business that imports raw materials from Europe.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'If the pound weakens against the euro, import costs increase as more pounds are needed to buy the same amount of euros. This raises production costs and may force the business to increase prices, potentially reducing competitiveness. However, if the business also exports, a weak pound makes UK goods cheaper abroad, potentially increasing export sales. The business might hedge against currency fluctuations or find domestic suppliers to reduce exposure.',
+            markingCriteria: {
+              breakdown: ['Effect of weak pound on import costs (2 marks)', 'Impact on production costs and pricing (2 marks)', 'Effect on competitiveness (2 marks)', 'Potential benefits for exports or mitigation strategies (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 1.5 - Global business'
+          },
+          {
+            id: 'bai-q5',
+            question: 'Explain how government infrastructure spending can help businesses.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Infrastructure spending improves transport networks, making it easier and cheaper for businesses to move goods and for workers to reach workplaces. Better digital infrastructure like broadband enables businesses to operate more efficiently online. Improved utilities and facilities reduce business operating costs and can attract investment to the area.',
+            markingCriteria: {
+              breakdown: ['Transport network improvements (1 mark)', 'Digital infrastructure benefits (1 mark)', 'Reduced operating costs (1 mark)', 'Investment attraction (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 1.6 - Government and business'
+          },
+          {
+            id: 'bai-q6',
+            question: 'Assess how technological change can be both an opportunity and a threat for businesses.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Technology creates opportunities by enabling new products, improving efficiency through automation, and opening new markets through e-commerce. It can reduce costs and improve customer service. However, it also threatens businesses that fail to adapt, as competitors may gain advantages. Technology requires significant investment, may make existing products obsolete, and can lead to job losses, creating workforce challenges.',
+            markingCriteria: {
+              breakdown: ['Opportunities: new products/markets (2 marks)', 'Opportunities: efficiency/cost reduction (2 marks)', 'Threats: competitive disadvantage (2 marks)', 'Threats: investment costs/obsolescence (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 1.7 - External factors'
+          },
+          {
+            id: 'bai-q7',
+            question: 'Explain why cash flow problems are a common reason for business failure.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Cash flow problems occur when businesses cannot meet immediate payment obligations despite potentially being profitable on paper. This happens when customers pay slowly while suppliers demand immediate payment, or when businesses invest too heavily in stock. Without sufficient cash, businesses cannot pay wages, rent, or suppliers, leading to operational difficulties and potential bankruptcy even if the business is fundamentally viable.',
+            markingCriteria: {
+              breakdown: ['Definition of cash flow problems (1 mark)', 'Timing mismatch explanation (2 marks)', 'Impact on business operations (2 marks)', 'Link to business failure (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 1.8 - Success and failure'
+          },
+          {
+            id: 'bai-q8',
+            question: 'Compare the benefits and drawbacks of a franchise business model.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Franchises benefit from established brand recognition, proven business models, and ongoing support from the franchisor, reducing risks of failure. However, franchisees pay ongoing royalties, have limited control over business decisions, and must follow strict operational guidelines. They also face potential conflicts with the franchisor and may be restricted in innovation or expansion.',
+            markingCriteria: {
+              breakdown: ['Benefits: brand recognition and support (2 marks)', 'Benefits: reduced risk (1 mark)', 'Drawbacks: royalties and restrictions (2 marks)', 'Drawbacks: limited control (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 1.2 - Types of organisations'
+          },
+          {
+            id: 'bai-q9',
+            question: 'Explain how globalisation has affected multinational companies.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Globalisation has enabled multinationals to access new markets worldwide, increasing revenue potential and spreading risks across different economies. They can source materials and labor from cheaper locations, reducing costs. However, they face increased competition from global rivals, must navigate different regulations and cultures, and are exposed to political and economic instability in various countries.',
+            markingCriteria: {
+              breakdown: ['Access to new markets (1 mark)', 'Cost reduction opportunities (1 mark)', 'Risk spreading (1 mark)', 'Increased competition (1 mark)', 'Regulatory and cultural challenges (1 mark)', 'Political/economic risks (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 1.5 - Global business'
+          },
+          {
+            id: 'bai-q10',
+            question: 'Analyze how changes in interest rates affect business decision-making.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Rising interest rates increase borrowing costs, making investment in expansion or new equipment more expensive, potentially delaying growth plans. Businesses with existing loans face higher repayments, reducing cash flow. However, rising rates may indicate economic confidence and increased demand. Falling rates make borrowing cheaper, encouraging investment and expansion, but may signal economic weakness and reduced consumer spending.',
+            markingCriteria: {
+              breakdown: ['Impact of rising rates on borrowing costs (2 marks)', 'Effect on existing debt and cash flow (2 marks)', 'Impact of falling rates on investment (2 marks)', 'Economic context and implications (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 1.6 - Government and business'
+          }
+        ]
+      },
+      {
+        id: 'people-in-business',
+        name: 'People in Business',
+        questions: [
+          {
+            id: 'pib-q1',
+            question: 'Explain why effective communication is important in business.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Effective communication ensures clear understanding of tasks and objectives, reducing errors and improving productivity. It enables coordination between departments and builds good relationships with customers and suppliers. Poor communication can lead to mistakes, delays, and conflict within the organization.',
+            markingCriteria: {
+              breakdown: ['Clear understanding of tasks (1 mark)', 'Coordination between departments (1 mark)', 'Customer/supplier relationships (1 mark)', 'Consequences of poor communication (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 2.1 - Communication'
+          },
+          {
+            id: 'pib-q2',
+            question: 'Compare the advantages of internal and external recruitment.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Internal recruitment is cheaper, faster, and provides career progression for existing employees who already know the company culture. However, it limits the pool of candidates and may create gaps in other positions. External recruitment brings fresh ideas and new skills but is more expensive and time-consuming, requiring longer induction periods.',
+            markingCriteria: {
+              breakdown: ['Internal advantages: cost and speed (1 mark)', 'Internal advantages: career progression (1 mark)', 'Internal disadvantages: limited pool (1 mark)', 'External advantages: fresh ideas (1 mark)', 'External disadvantages: cost and time (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 2.2 - Recruitment'
+          },
+          {
+            id: 'pib-q3',
+            question: 'Explain the benefits of training for both employees and the business.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'For employees, training develops new skills, increases job satisfaction, and improves career prospects. For the business, trained employees are more productive, make fewer mistakes, and provide better customer service. Training also reduces staff turnover and helps the business adapt to new technologies and market changes.',
+            markingCriteria: {
+              breakdown: ['Employee benefits: skills and satisfaction (2 marks)', 'Employee benefits: career prospects (1 mark)', 'Business benefits: productivity and quality (2 marks)', 'Business benefits: retention and adaptation (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 2.3 - Training'
+          },
+          {
+            id: 'pib-q4',
+            question: 'Assess how Maslow\'s hierarchy of needs can be used to motivate employees.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Maslow\'s hierarchy suggests employees are motivated by different needs at different times. Basic needs (physiological and safety) are met through fair wages and job security. Social needs require team-building and good working relationships. Esteem needs are satisfied through recognition and status. Self-actualization involves challenging work and personal growth opportunities. However, the theory assumes all people have the same needs progression, which may not apply universally.',
+            markingCriteria: {
+              breakdown: ['Basic needs explanation and application (2 marks)', 'Social needs explanation and application (2 marks)', 'Higher needs explanation and application (2 marks)', 'Limitations of the theory (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 2.4 - Motivation and rewards'
+          },
+          {
+            id: 'pib-q5',
+            question: 'Compare flat and tall organizational structures.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Flat structures have few management layers, enabling faster communication and decision-making, with wider spans of control giving employees more responsibility. However, managers may become overloaded and career progression is limited. Tall structures provide clear career paths and close supervision but communication is slower and more bureaucratic, potentially demotivating employees.',
+            markingCriteria: {
+              breakdown: ['Flat structure advantages: speed and responsibility (2 marks)', 'Flat structure disadvantages: overload and progression (2 marks)', 'Tall structure advantages and disadvantages (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 2.5 - Organisation structure'
+          },
+          {
+            id: 'pib-q6',
+            question: 'Explain how technology has changed workplace communication.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Technology enables instant communication through email, video calls, and messaging apps, allowing remote working and faster decision-making. It facilitates document sharing and collaboration across different locations. However, it can reduce face-to-face interaction and may create information overload.',
+            markingCriteria: {
+              breakdown: ['Instant communication capabilities (1 mark)', 'Remote working enablement (1 mark)', 'Document sharing and collaboration (1 mark)', 'Potential drawbacks (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 2.1 - Communication'
+          },
+          {
+            id: 'pib-q7',
+            question: 'Analyze the importance of equal opportunities in recruitment.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Equal opportunities ensure businesses recruit the best candidates regardless of gender, race, or age, improving the quality of the workforce. It helps create diverse teams that bring different perspectives and ideas. Legal compliance prevents discrimination lawsuits and reputational damage. However, positive discrimination may be seen as unfair and could create workplace tensions.',
+            markingCriteria: {
+              breakdown: ['Best candidate selection (1 mark)', 'Diversity benefits (2 marks)', 'Legal compliance (1 mark)', 'Potential challenges (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 2.2 - Recruitment'
+          },
+          {
+            id: 'pib-q8',
+            question: 'Explain the difference between on-the-job and off-the-job training.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'On-the-job training takes place in the workplace using actual equipment and processes, making it practical and cost-effective. Off-the-job training occurs away from work, often at training centers or colleges, providing broader knowledge but potentially lacking workplace context.',
+            markingCriteria: {
+              breakdown: ['On-the-job definition and location (1 mark)', 'On-the-job advantages (1 mark)', 'Off-the-job definition and location (1 mark)', 'Off-the-job characteristics (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 2.3 - Training'
+          },
+          {
+            id: 'pib-q9',
+            question: 'Assess the effectiveness of financial rewards in motivating employees.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Financial rewards like bonuses and pay rises can effectively motivate employees by meeting basic needs and providing recognition for good performance. Performance-related pay links effort to reward, encouraging productivity. However, financial motivation may be short-term, and non-financial factors like job satisfaction and recognition can be equally important. Over-reliance on financial rewards may create unhealthy competition and reduce teamwork.',
+            markingCriteria: {
+              breakdown: ['Benefits of financial rewards (2 marks)', 'Performance-related pay advantages (2 marks)', 'Limitations of financial motivation (2 marks)', 'Non-financial factors importance (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 2.4 - Motivation and rewards'
+          },
+          {
+            id: 'pib-q10',
+            question: 'Explain how span of control affects management effectiveness.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'A narrow span of control allows close supervision and detailed guidance, ensuring high quality work and quick problem-solving. However, it can be costly and may demotivate experienced employees. A wide span of control reduces costs and empowers employees but may lead to overloaded managers and inconsistent standards. The optimal span depends on employee experience and task complexity.',
+            markingCriteria: {
+              breakdown: ['Narrow span advantages (2 marks)', 'Narrow span disadvantages (1 mark)', 'Wide span advantages and disadvantages (2 marks)', 'Factors affecting optimal span (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 2.5 - Organisation structure'
+          }
+        ]
+      },
+      {
+        id: 'business-finance',
+        name: 'Business Finance',
+        questions: [
+          {
+            id: 'bf-q1',
+            question: 'Explain why cash flow is more important than profit for business survival.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Cash flow represents actual money available to pay immediate expenses like wages, rent, and suppliers. A business can be profitable on paper but still fail if it cannot pay bills when due. Profit includes sales made on credit that may not be collected for months, while cash flow shows real liquidity. Businesses need cash to operate day-to-day, even if they are ultimately profitable.',
+            markingCriteria: {
+              breakdown: ['Definition of cash flow vs profit (2 marks)', 'Importance for immediate expenses (2 marks)', 'Credit sales timing issue (1 mark)', 'Link to business survival (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 3.2 - Cash flow'
+          },
+          {
+            id: 'bf-q2',
+            question: 'Compare bank loans and overdrafts as sources of finance.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Bank loans provide large amounts of money for specific purposes over fixed periods with regular repayments and lower interest rates. They require detailed applications and often security. Overdrafts offer flexible short-term finance up to an agreed limit, with interest only on amounts used, but have higher interest rates and can be withdrawn by the bank at short notice.',
+            markingCriteria: {
+              breakdown: ['Loan characteristics: amount and repayment (2 marks)', 'Loan advantages: lower rates (1 mark)', 'Overdraft characteristics: flexibility (2 marks)', 'Overdraft disadvantages: higher rates/withdrawal (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 3.1 - Sources of finance'
+          },
+          {
+            id: 'bf-q3',
+            question: 'Calculate the break-even point in units. Fixed costs = £15,000, Variable cost per unit = £8, Selling price per unit = £12.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Contribution per unit = Selling price - Variable cost = £12 - £8 = £4. Break-even point = Fixed costs ÷ Contribution per unit = £15,000 ÷ £4 = 3,750 units.',
+            markingCriteria: {
+              breakdown: ['Calculate contribution per unit = £4 (1 mark)', 'Use break-even formula correctly (1 mark)', 'Correct answer: 3,750 units (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 3.3 - Costs and break-even'
+          },
+          {
+            id: 'bf-q4',
+            question: 'Explain the advantages and disadvantages of using retained profit to finance expansion.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Retained profit requires no interest payments or loss of ownership, making it the cheapest source of finance. It provides flexibility and independence in decision-making. However, using retained profit may reduce dividend payments to shareholders, potentially causing dissatisfaction. It also represents an opportunity cost as the money could have been invested elsewhere for higher returns.',
+            markingCriteria: {
+              breakdown: ['Advantages: no interest/ownership loss (2 marks)', 'Advantages: flexibility (1 mark)', 'Disadvantages: shareholder expectations (2 marks)', 'Disadvantages: opportunity cost (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 3.1 - Sources of finance'
+          },
+          {
+            id: 'bf-q5',
+            question: 'Calculate the gross profit margin. Sales revenue = £240,000, Cost of goods sold = £144,000.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Gross profit = Sales revenue - Cost of goods sold = £240,000 - £144,000 = £96,000. Gross profit margin = (Gross profit ÷ Sales revenue) × 100 = (£96,000 ÷ £240,000) × 100 = 40%.',
+            markingCriteria: {
+              breakdown: ['Calculate gross profit = £96,000 (1 mark)', 'Use correct formula for margin (1 mark)', 'Correct answer: 40% (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 3.5 - Accounts analysis'
+          },
+          {
+            id: 'bf-q6',
+            question: 'Analyze how a business could improve its cash flow position.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'A business could improve cash flow by reducing credit periods offered to customers, offering early payment discounts, and chasing overdue debts more aggressively. Negotiating longer payment terms with suppliers delays cash outflows. Reducing stock levels releases tied-up cash, and leasing rather than buying assets preserves cash. However, these strategies may affect customer relationships and operational efficiency.',
+            markingCriteria: {
+              breakdown: ['Improve cash inflows: reduce credit terms/discounts (2 marks)', 'Delay cash outflows: supplier terms (2 marks)', 'Release tied-up cash: stock/leasing (2 marks)', 'Potential drawbacks and limitations (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 3.2 - Cash flow'
+          },
+          {
+            id: 'bf-q7',
+            question: 'Explain why break-even analysis is useful for business planning.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Break-even analysis shows the minimum sales needed to cover all costs, helping businesses set realistic sales targets and pricing strategies. It enables margin of safety calculations, showing how much sales can fall before losses occur. The analysis helps evaluate the impact of cost or price changes and supports decision-making about product viability and expansion plans.',
+            markingCriteria: {
+              breakdown: ['Minimum sales identification (1 mark)', 'Pricing and target setting (1 mark)', 'Margin of safety calculation (2 marks)', 'Impact evaluation and decision support (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 3.3 - Costs and break-even'
+          },
+          {
+            id: 'bf-q8',
+            question: 'Compare current and non-current assets, giving examples of each.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Current assets are short-term assets that can be converted to cash within one year, such as stock, debtors, and cash. Non-current assets are long-term assets held for more than one year to generate revenue, such as buildings, machinery, and vehicles.',
+            markingCriteria: {
+              breakdown: ['Current assets definition and timeframe (1 mark)', 'Examples of current assets (1 mark)', 'Non-current assets definition and purpose (1 mark)', 'Examples of non-current assets (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 3.4 - Financial documents'
+          },
+          {
+            id: 'bf-q9',
+            question: 'Assess the advantages and disadvantages of crowdfunding as a source of finance.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Crowdfunding provides access to large amounts of money without losing ownership or paying interest, while also serving as market research to validate product demand. It creates publicity and builds a customer base before launch. However, campaigns require significant time and marketing effort, with no guarantee of success. Failed campaigns may damage reputation, and successful ones may reveal business ideas to competitors.',
+            markingCriteria: {
+              breakdown: ['Advantages: access to finance without ownership loss (2 marks)', 'Advantages: market validation and publicity (2 marks)', 'Disadvantages: time and effort required (2 marks)', 'Disadvantages: failure risks and competition (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 3.1 - Sources of finance'
+          },
+          {
+            id: 'bf-q10',
+            question: 'Explain how return on capital employed (ROCE) helps evaluate business performance.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'ROCE measures how efficiently a business uses its capital to generate profits, calculated as (profit before interest and tax ÷ capital employed) × 100. A higher ROCE indicates better performance and efficient use of resources. It enables comparison with previous years, other businesses, and alternative investments. However, ROCE may be distorted by asset age and valuation methods.',
+            markingCriteria: {
+              breakdown: ['ROCE definition and formula (2 marks)', 'Interpretation of results (1 mark)', 'Comparison capabilities (2 marks)', 'Limitations of ROCE (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 3.5 - Accounts analysis'
+          }
+        ]
+      },
+      {
+        id: 'marketing',
+        name: 'Marketing',
+        questions: [
+          {
+            id: 'm-q1',
+            question: 'Explain why market research is important before launching a new product.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Market research identifies customer needs and preferences, ensuring the product meets market demand and reducing the risk of failure. It reveals market size and growth potential, helping businesses assess viability. Research also identifies competitors and their strategies, enabling better positioning. Understanding customer behavior helps set appropriate prices and promotional strategies.',
+            markingCriteria: {
+              breakdown: ['Identify customer needs (1 mark)', 'Reduce risk of failure (1 mark)', 'Market size and potential (2 marks)', 'Competitor analysis (1 mark)', 'Pricing and promotion insights (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 4.1 - Market research'
+          },
+          {
+            id: 'm-q2',
+            question: 'Compare primary and secondary market research methods.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Primary research involves collecting new data directly from consumers through surveys, focus groups, or observations. It provides specific, up-to-date information but is expensive and time-consuming. Secondary research uses existing data from government statistics, industry reports, or competitor websites. It is cheaper and faster but may be outdated or not specifically relevant to the business\'s needs.',
+            markingCriteria: {
+              breakdown: ['Primary research definition and methods (2 marks)', 'Primary research advantages and disadvantages (2 marks)', 'Secondary research definition and advantages/disadvantages (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 4.1 - Market research'
+          },
+          {
+            id: 'm-q3',
+            question: 'Explain the difference between mass marketing and niche marketing.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Mass marketing targets the whole market with a single product and marketing strategy, aiming for large sales volumes and low costs per unit. Niche marketing focuses on a specific segment with specialized products, typically achieving higher profit margins but lower sales volumes.',
+            markingCriteria: {
+              breakdown: ['Mass marketing definition and characteristics (2 marks)', 'Niche marketing definition and characteristics (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 4.2 - The market'
+          },
+          {
+            id: 'm-q4',
+            question: 'Analyze how a business might use market segmentation to improve its marketing effectiveness.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Market segmentation divides customers into groups with similar characteristics, enabling targeted marketing strategies. Age segmentation allows different messages for teenagers versus adults. Geographic segmentation enables local advertising and product adaptation. Income segmentation helps set appropriate price points. This targeting improves marketing effectiveness by delivering relevant messages, reducing waste, and increasing customer response rates.',
+            markingCriteria: {
+              breakdown: ['Definition and purpose of segmentation (2 marks)', 'Examples of segmentation types (2 marks)', 'Benefits of targeted marketing (2 marks)', 'Impact on effectiveness and response rates (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 4.2 - The market'
+          },
+          {
+            id: 'm-q5',
+            question: 'Explain the stages of the product life cycle and their implications for marketing strategy.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Introduction stage requires heavy promotion to build awareness, often with high prices to recover development costs. Growth stage sees expanding distribution and competitive pricing as sales accelerate. Maturity stage needs differentiation and cost control as competition intensifies. Decline stage may require price cuts or product withdrawal. Each stage demands different marketing mix strategies to maximize profitability.',
+            markingCriteria: {
+              breakdown: ['Introduction stage characteristics and strategy (2 marks)', 'Growth stage characteristics and strategy (2 marks)', 'Maturity stage characteristics and strategy (2 marks)', 'Decline stage characteristics and strategy (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 4.3 - Marketing mix'
+          },
+          {
+            id: 'm-q6',
+            question: 'Compare penetration pricing and price skimming strategies.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Penetration pricing sets low initial prices to gain market share quickly and discourage competitors. It builds customer loyalty but may create low-profit perception. Price skimming starts with high prices for early adopters, then gradually reduces them. It maximizes revenue from willing customers but may attract competitors and limit market growth.',
+            markingCriteria: {
+              breakdown: ['Penetration pricing definition and aims (2 marks)', 'Penetration pricing advantages and disadvantages (2 marks)', 'Price skimming definition and process (1 mark)', 'Price skimming advantages and disadvantages (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 4.3 - Marketing mix'
+          },
+          {
+            id: 'm-q7',
+            question: 'Assess the advantages and disadvantages of selling through e-commerce versus traditional retail.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'E-commerce offers lower overhead costs, 24/7 availability, and global reach without geographical constraints. Customers can easily compare prices and products. However, it lacks personal service, customers cannot physically examine products, and delivery costs and times may deter purchases. Traditional retail provides immediate gratification, personal service, and sensory experience but has higher costs and limited operating hours.',
+            markingCriteria: {
+              breakdown: ['E-commerce advantages: costs and accessibility (2 marks)', 'E-commerce disadvantages: service and delivery (2 marks)', 'Traditional retail advantages: immediacy and experience (2 marks)', 'Traditional retail disadvantages: costs and constraints (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 4.3 - Marketing mix'
+          },
+          {
+            id: 'm-q8',
+            question: 'Explain how branding can add value to a product.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Branding creates emotional connections and customer loyalty, allowing higher prices than unbranded alternatives. Strong brands provide quality assurance and reduce perceived risk for customers. They enable easier product launches and extensions, as customers trust the brand name. Branding also creates differentiation in competitive markets.',
+            markingCriteria: {
+              breakdown: ['Emotional connection and loyalty (2 marks)', 'Quality assurance and risk reduction (2 marks)', 'Product extension benefits (1 mark)', 'Differentiation advantages (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 4.3 - Marketing mix'
+          },
+          {
+            id: 'm-q9',
+            question: 'Analyze how digital marketing has changed promotional strategies.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Digital marketing enables precise targeting based on demographics and behavior, improving efficiency and reducing waste. Social media creates two-way communication and viral potential. Real-time analytics allow immediate campaign adjustments. Costs are often lower than traditional media. However, digital overload may reduce message impact, and technical skills are required. Privacy concerns and ad-blocking also create challenges.',
+            markingCriteria: {
+              breakdown: ['Targeting precision and efficiency (2 marks)', 'Social media and communication benefits (2 marks)', 'Analytics and cost advantages (2 marks)', 'Challenges and limitations (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 4.3 - Marketing mix'
+          },
+          {
+            id: 'm-q10',
+            question: 'Explain how businesses can use special offers effectively in their promotional mix.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Special offers can boost short-term sales, clear excess stock, and attract new customers to try products. Price discounts encourage bulk purchases, while loyalty schemes retain customers. However, frequent discounting may damage brand image and reduce profit margins. Customers may delay purchases waiting for offers, and competitors may respond with their own promotions.',
+            markingCriteria: {
+              breakdown: ['Benefits: sales boost and customer attraction (2 marks)', 'Benefits: stock clearance and loyalty (2 marks)', 'Drawbacks: brand image and margins (1 mark)', 'Drawbacks: customer behavior and competition (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 4.3 - Marketing mix'
+          }
+        ]
+      },
+      {
+        id: 'business-operations',
+        name: 'Business Operations',
+        questions: [
+          {
+            id: 'bo-q1',
+            question: 'Explain how economies of scale can benefit a growing business.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'As businesses grow, they can spread fixed costs over more units, reducing average costs. Bulk purchasing power enables better deals with suppliers, lowering material costs. Specialization of labor improves efficiency and productivity. Large businesses can also access cheaper finance and invest in more efficient technology and equipment.',
+            markingCriteria: {
+              breakdown: ['Fixed cost spreading (1 mark)', 'Bulk purchasing advantages (2 marks)', 'Labor specialization benefits (1 mark)', 'Finance and technology access (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 5.1 - Economies of scale'
+          },
+          {
+            id: 'bo-q2',
+            question: 'Compare job production, batch production, and flow production methods.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Job production creates unique, customized products one at a time, offering flexibility but with high costs and skilled labor requirements. Batch production makes groups of identical products, balancing customization with efficiency but creating stock-holding costs. Flow production continuously manufactures standardized products, achieving low unit costs and high output but lacking flexibility and requiring high initial investment.',
+            markingCriteria: {
+              breakdown: ['Job production characteristics and benefits/costs (3 marks)', 'Batch production characteristics and benefits/costs (3 marks)', 'Flow production characteristics and benefits/costs (3 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 5.2 - Production'
+          },
+          {
+            id: 'bo-q3',
+            question: 'Explain the concept of lean production and its benefits.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Lean production eliminates waste in all forms, including overproduction, waiting times, unnecessary transport, and defects. Just-in-time delivery reduces storage costs and stock obsolescence. Continuous improvement (Kaizen) involves all employees in efficiency improvements. Benefits include reduced costs, improved quality, faster response to customer demands, and higher productivity.',
+            markingCriteria: {
+              breakdown: ['Waste elimination definition (1 mark)', 'Just-in-time benefits (2 marks)', 'Kaizen concept (1 mark)', 'Overall benefits (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 5.2 - Production'
+          },
+          {
+            id: 'bo-q4',
+            question: 'Analyze the impact of automation on business operations.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Automation increases speed and consistency of production, reducing human error and improving quality. It enables 24/7 operation and reduces long-term labor costs. However, initial investment is high, and technical failures can halt production. Job losses may create industrial relations problems and reduce flexibility for customized production. Maintenance costs and technical expertise requirements also increase.',
+            markingCriteria: {
+              breakdown: ['Benefits: speed, consistency, and operation (2 marks)', 'Benefits: quality and cost reduction (2 marks)', 'Drawbacks: investment and technical risks (2 marks)', 'Drawbacks: employment and flexibility issues (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 5.2 - Production'
+          },
+          {
+            id: 'bo-q5',
+            question: 'Explain the difference between labor-intensive and capital-intensive production.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Labor-intensive production relies heavily on human workers, with relatively low machinery use, making it flexible but potentially inconsistent. Capital-intensive production uses significant machinery and equipment with fewer workers, achieving consistency and speed but requiring high investment.',
+            markingCriteria: {
+              breakdown: ['Labor-intensive definition and characteristics (2 marks)', 'Capital-intensive definition and characteristics (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 5.3 - Factors of production'
+          },
+          {
+            id: 'bo-q6',
+            question: 'Assess how a business can improve productivity.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Productivity can be improved through employee training to develop skills and efficiency, better machinery and technology to speed operations, and improved workplace organization to eliminate bottlenecks. Motivation techniques like performance-related pay can increase effort. However, investment costs may be high, and pushing productivity too hard may reduce quality or employee morale, potentially causing long-term problems.',
+            markingCriteria: {
+              breakdown: ['Training and skill development (2 marks)', 'Technology and machinery improvements (2 marks)', 'Organization and motivation methods (2 marks)', 'Potential costs and risks (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 5.2 - Production'
+          },
+          {
+            id: 'bo-q7',
+            question: 'Explain how quality control differs from total quality management (TQM).',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Quality control involves checking products at specific stages to identify and remove defects, focusing on detection after problems occur. TQM involves all employees in preventing defects throughout the production process, emphasizing prevention rather than detection. TQM creates a quality culture where everyone is responsible for quality, while quality control relies on specific inspection staff.',
+            markingCriteria: {
+              breakdown: ['Quality control definition and focus (2 marks)', 'TQM definition and approach (2 marks)', 'Key differences in responsibility and timing (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 5.4 - Quality'
+          },
+          {
+            id: 'bo-q8',
+            question: 'Analyze the advantages and disadvantages of just-in-time (JIT) production.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'JIT reduces storage costs and minimizes stock obsolescence, freeing up cash flow and warehouse space. It encourages supplier partnerships and quick response to demand changes. However, JIT increases vulnerability to supply disruptions and requires reliable suppliers. Any delays can halt production, and bulk purchase discounts are lost. The system also requires excellent communication and coordination.',
+            markingCriteria: {
+              breakdown: ['Advantages: cost reduction and cash flow (2 marks)', 'Advantages: flexibility and partnerships (2 marks)', 'Disadvantages: supply vulnerability (2 marks)', 'Disadvantages: coordination and discount loss (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 5.2 - Production'
+          },
+          {
+            id: 'bo-q9',
+            question: 'Explain what causes diseconomies of scale and their impact on businesses.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Diseconomies occur when businesses become too large, causing communication problems across multiple layers of management. Coordination becomes difficult, leading to inefficiency and slower decision-making. Employee motivation may decline in large, impersonal organizations. These factors increase average costs per unit despite the larger scale of operation.',
+            markingCriteria: {
+              breakdown: ['Communication problems (2 marks)', 'Coordination difficulties (2 marks)', 'Motivation issues and cost impact (2 marks)']
+            },
+            specReference: 'Edexcel IGCSE Business 5.1 - Economies of scale'
+          },
+          {
+            id: 'bo-q10',
+            question: 'Assess the role of enterprise as a factor of production.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Enterprise involves combining land, labor, and capital to create goods and services, with entrepreneurs taking risks to organize production. Entrepreneurs identify opportunities, make key decisions, and bear financial risks. They drive innovation and economic growth by creating new businesses and jobs. However, entrepreneurial failure can result in significant personal and financial losses.',
+            markingCriteria: {
+              breakdown: ['Definition and role of enterprise (2 marks)', 'Risk-taking and decision-making (2 marks)', 'Innovation and economic benefits (1 mark)', 'Potential for failure (1 mark)']
+            },
+            specReference: 'Edexcel IGCSE Business 5.3 - Factors of production'
+          }
+        ]
+      }
+    ]
+  },
+  {
     id: 'biology',
     name: 'Biology',
     topics: [
