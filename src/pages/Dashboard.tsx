@@ -422,13 +422,26 @@ const Dashboard = () => {
                        }
                        return 0;
                      })
-                    .map((subject) => (
-                    <SubjectCard
-                      key={subject.id}
-                      subject={{
-                        ...subject,
-                        color: getSubjectColor(subject.id)
-                      }}
+                     .map((subject) => {
+                       // Modify subject name for Edexcel subjects to remove brackets
+                       let modifiedSubject = { ...subject };
+                       if (examBoard === 'edexcel') {
+                         if (subject.id === 'maths-edexcel') {
+                           modifiedSubject = { ...subject, name: 'Mathematics' };
+                         } else if (subject.id === 'business-edexcel-igcse') {
+                           modifiedSubject = { ...subject, name: 'Business' };
+                         } else if (subject.id === 'edexcel-english-language') {
+                           modifiedSubject = { ...subject, name: 'English Language' };
+                         }
+                       }
+                       
+                       return (
+                       <SubjectCard
+                         key={subject.id}
+                         subject={{
+                           ...modifiedSubject,
+                           color: getSubjectColor(subject.id)
+                         }}
                        progress={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? userProgress : []}
                        onStartPractice={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? handlePractice : () => {}}
                        onTogglePin={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? togglePinSubject : () => {}}

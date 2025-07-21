@@ -103,7 +103,36 @@ const PredictedQuestions = () => {
     return 'AQA GCSE';
   };
 
-  const renderSubjectCard = (subject: any) => {
+  const getSubjectDisplayName = (subject: any, examBoard?: string) => {
+    let name = subject.name;
+    
+    // Remove brackets from Edexcel subjects
+    if (subject.id === 'maths-edexcel') {
+      name = 'Mathematics';
+    } else if (subject.id === 'business-edexcel-igcse') {
+      name = 'Business';
+    } else if (subject.id === 'edexcel-english-language') {
+      name = 'English Language';
+    }
+    
+    // For coming soon cards in CCEA, OCR, WJEC - remove Paper 1
+    if (examBoard && ['ccea', 'ocr', 'wjec'].includes(examBoard)) {
+      return name;
+    }
+    
+    // Add Paper 1 for other subjects
+    if (subject.id === 'geography') {
+      return 'Geography Paper 1';
+    } else if (subject.id === 'geography-paper-2') {
+      return 'Geography Paper 2';
+    } else if (subject.id === 'business-edexcel-igcse') {
+      return 'Business Paper 1: Small Businesses';
+    } else {
+      return `${name} Paper 1`;
+    }
+  };
+
+  const renderSubjectCard = (subject: any, examBoard?: string) => {
     const completion = loading ? null : completedExams[subject.id];
     const isCompleted = !loading && !!completion;
     
@@ -135,7 +164,7 @@ const PredictedQuestions = () => {
             </Badge>
           </div>
           <CardTitle className="text-xl font-bold text-white group-hover:text-yellow-200 transition-colors mt-3">
-            {subject.id === 'geography' ? 'Geography Paper 1' : subject.id === 'geography-paper-2' ? 'Geography Paper 2' : subject.id === 'business-edexcel-igcse' ? 'Business Paper 1: Small Businesses' : `${subject.name} Paper 1`}
+            {getSubjectDisplayName(subject, examBoard)}
           </CardTitle>
           <CardDescription className="text-white/80 text-sm">
             {isCompleted ? `Last Grade: ${completion.grade} (${completion.percentage}%)` : 'Full predicted paper practice'}
@@ -364,7 +393,7 @@ const PredictedQuestions = () => {
                               </Badge>
                             </div>
                             <CardTitle className="text-xl font-bold text-white mt-3">
-                              {subject.name} Paper 1
+                              {getSubjectDisplayName(subject, examBoard)}
                             </CardTitle>
                             <CardDescription className="text-white/80 text-sm">
                               Available soon for {examBoard.toUpperCase()}
