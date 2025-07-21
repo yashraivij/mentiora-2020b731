@@ -11384,5 +11384,169 @@ export const curriculum: Subject[] = [
         ]
       }
     ]
+  },
+  
+  // ===== EDEXCEL SUBJECTS =====
+  {
+    id: 'edexcel-english-language',
+    name: 'Edexcel GCSE English Language',
+    topics: [
+      {
+        id: 'component1-fiction-imaginative',
+        name: 'Component 1: Fiction and Imaginative Writing',
+        questions: [
+          {
+            id: 'edexcel-eng-q1',
+            question: 'Read the extract below from "Great Expectations" by Charles Dickens (1861):\n\n"My sister, Mrs Joe Gargery, was more than twenty years older than I, and had established a great reputation with herself and the neighbours because she had brought me up \'by hand\'. Having at that time to find out for myself what the expression meant, and knowing her to have a hard and heavy hand, and to be much in the habit of laying it upon her husband as well as upon me, I supposed that Joe Gargery and I were both brought up by hand."\n\nFind a word or phrase from lines 1-2 that shows Mrs Joe was proud of raising the narrator.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: '"established a great reputation with herself"',
+            markingCriteria: {
+              breakdown: [
+                'Accept: "established a great reputation with herself" or "great reputation" (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          },
+          {
+            id: 'edexcel-eng-q2',
+            question: 'Read this extract from "Jane Eyre" by Charlotte Brontë (1847):\n\n"There was no possibility of taking a walk that day. We had been wandering, indeed, in the leafless shrubbery an hour in the morning; but since dinner (Mrs. Reed, when there was no company, dined at one o\'clock) the cold winter wind had brought with it clouds so sombre, and a rain so penetrating, that further out-door exercise was now out of the question."\n\nGive two things that show the weather was unpleasant.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The cold winter wind and penetrating rain show the weather was unpleasant.',
+            markingCriteria: {
+              breakdown: [
+                'One weather feature identified (1 mark)',
+                'Second weather feature identified (1 mark)',
+                'Accept: cold winter wind, penetrating rain, sombre clouds'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          },
+          {
+            id: 'edexcel-eng-q3',
+            question: 'Read this extract from "The Strange Case of Dr Jekyll and Mr Hyde" by Robert Louis Stevenson (1886):\n\n"Mr. Utterson the lawyer was a man of a rugged countenance that was never lighted by a smile; cold, scanty and embarrassed in discourse; backward in sentiment; lean, long, dusty, dreary. And yet somehow lovable. At friendly meetings, and when the wine was to his taste, something eminently human beaconed from his eye; something indeed which never found its way into his talk, but which spoke not only in these silent symbols, but more often and loudly in the acts of his life."\n\nHow does the writer use language and structure to show Mr Utterson\'s character?',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Stevenson uses a series of adjectives "cold, scanty and embarrassed" to create a cumulative effect, building up an image of Utterson as socially awkward. The alliteration in "lean, long, dusty, dreary" emphasizes his unappealing physical appearance through harsh sounds. However, the contrasting phrase "And yet somehow lovable" acts as a turning point, using the conjunction "yet" to introduce contradiction. The metaphor "something eminently human beaconed from his eye" suggests warmth beneath the surface, with "beaconed" implying guidance and hope. The structure moves from negative external description to positive internal qualities, reflecting the duality theme of the novel.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of adjectives and their effect (2 marks)',
+                'Discussion of alliteration or sound devices (2 marks)',
+                'Analysis of contrast/contradiction (2 marks)',
+                'Comment on metaphor and its effect (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          },
+          {
+            id: 'edexcel-eng-q4',
+            question: 'Read this extract from "Wuthering Heights" by Emily Brontë (1847):\n\n"Wuthering Heights is the name of Mr. Heathcliff\'s dwelling. \'Wuthering\' being a significant provincial adjective, descriptive of the atmospheric tumult to which its station is exposed in stormy weather. Pure, bracing, ventilation they get up there at all times, indeed: one may guess the power of the north wind blowing over the edge, by the excessive slant of a few stunted firs at the end of the house; and by a range of gaunt thorns all stretching their limbs one way, as if craving alms of the sun."\n\nEvaluate how successfully the writer creates a sense of wildness and isolation.',
+            marks: 20,
+            difficulty: 'hard',
+            modelAnswer: 'Brontë successfully creates wildness through her choice of vocabulary and imagery. The word "tumult" suggests chaos and violence, while "wuthering" itself implies harsh weather conditions. The personification of thorns "craving alms of the sun" effectively suggests desperation and need, creating sympathy while emphasizing the harsh environment. The "excessive slant" of trees provides concrete evidence of the wind\'s power, making the description believable. The isolation is conveyed through the remote "station" and the focus on natural forces rather than human presence. However, some readers might argue the descriptive language becomes overly elaborate, potentially distancing readers from the immediate sense of place. Overall, the combination of specific detail and figurative language successfully establishes the Gothic atmosphere central to the novel.',
+            markingCriteria: {
+              breakdown: [
+                'Evaluation of language choices (5 marks)',
+                'Analysis of imagery and literary devices (5 marks)',
+                'Assessment of overall effectiveness (5 marks)',
+                'Personal response with justification (3 marks)',
+                'Quality of expression (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          },
+          {
+            id: 'edexcel-eng-q5',
+            question: 'Section B Writing Task - Choice 1:\n\nWrite about a time when you encountered something unexpected or mysterious.\n\nYou should aim to write approximately 450-600 words.',
+            marks: 40,
+            difficulty: 'medium',
+            modelAnswer: 'This is a creative writing task. Students should demonstrate:\n- Engaging narrative voice and perspective\n- Vivid descriptive language and imagery\n- Effective structure with clear beginning, development and conclusion\n- Varied sentence structures and vocabulary\n- Accurate spelling, punctuation and grammar\n- Successful creation of atmosphere and mood\n- Original and imaginative content linked to the theme',
+            markingCriteria: {
+              breakdown: [
+                'Content and organisation (24 marks): Ideas, structure, narrative voice',
+                'Technical accuracy (16 marks): Spelling, punctuation, grammar, vocabulary'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          },
+          {
+            id: 'edexcel-eng-q6',
+            question: 'Section B Writing Task - Choice 2:\n\nWrite about a place that holds special meaning for you.\n\nYou should aim to write approximately 450-600 words.',
+            marks: 40,
+            difficulty: 'medium',
+            modelAnswer: 'This is a creative writing task. Students should demonstrate:\n- Personal and engaging writing style\n- Effective use of descriptive techniques\n- Clear sense of place and atmosphere\n- Reflection on significance and meaning\n- Varied sentence types and sophisticated vocabulary\n- Accurate technical skills throughout\n- Sustained and developed ideas\n- Appropriate tone and register',
+            markingCriteria: {
+              breakdown: [
+                'Content and organisation (24 marks): Ideas, structure, descriptive writing',
+                'Technical accuracy (16 marks): Spelling, punctuation, grammar, vocabulary'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          },
+          {
+            id: 'edexcel-eng-q7',
+            question: 'Read this extract from "Frankenstein" by Mary Shelley (1818):\n\n"It was on a dreary night of November that I beheld the accomplishment of my toils. With an anxiety that almost amounted to agony, I collected the instruments of life around me, that I might infuse a spark of being into the lifeless thing that lay before me. It was already one in the morning; the rain pattered dismally against the panes, and my candle was nearly burnt out, when, by the glimmer of the half-extinguished light, I saw the dull yellow eye of the creature open; it breathed hard, and a convulsive motion agitated its limbs."\n\nFind a word or phrase that shows Victor Frankenstein was nervous.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: '"anxiety that almost amounted to agony"',
+            markingCriteria: {
+              breakdown: [
+                'Accept: "anxiety", "anxiety that almost amounted to agony", "agony" (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          },
+          {
+            id: 'edexcel-eng-q8',
+            question: 'Read this extract from "The Picture of Dorian Gray" by Oscar Wilde (1890):\n\n"The studio was filled with the rich odour of roses, and when the strong spring breeze stirred, amidst the massed array of perfumed blossoms, it brought with it the heavy scent of the lilac, or the more delicate perfume of the pink-flowering thorn. From the corner of the divan of Persian saddle-bags on which he was lying, smoking, as was his custom, innumerable cigarettes, Lord Henry Wotton could just catch the gleam of the honey-sweet and honey-coloured blossoms of a laburnum, whose tremulous branches seemed hardly able to bear the burden of a beauty so flamelike as theirs."\n\nGive two things that show the studio was luxurious.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The Persian saddle-bags divan and the rich variety of expensive flowers show the studio was luxurious.',
+            markingCriteria: {
+              breakdown: [
+                'One luxury feature identified (1 mark)',
+                'Second luxury feature identified (1 mark)',
+                'Accept: Persian saddle-bags, rich odour of roses, variety of flowers, expensive furnishings'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          },
+          {
+            id: 'edexcel-eng-q9',
+            question: 'Read this extract from "Pride and Prejudice" by Jane Austen (1813):\n\n"Elizabeth\'s astonishment was beyond expression. She stared, coloured, and remained silent. This he considered sufficient encouragement; and the avowal of all that he felt, and had long felt for her, immediately followed. He spoke well; but there were feelings besides those of the heart to be detailed; and he was not more eloquent on the subject of tenderness than of pride. His sense of her inferiority—of its being a degradation—of the family obstacles which had always opposed to inclination, were dwelt upon with a warmth which seemed due to the consequence he was wounding, but was very unlikely to recommend his suit."\n\nHow does the writer use language and structure to show the tension in this scene?',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Austen creates tension through Elizabeth\'s physical reactions described in the short, staccato phrases "stared, coloured, and remained silent" which mirror her shock and discomfort. The semicolon after "He spoke well" creates a pause before the crucial "but", introducing the contrast that undermines Darcy\'s proposal. The list structure "of her inferiority—of its being a degradation—of the family obstacles" builds up the insults systematically, with the repeated "of" creating a relentless rhythm. The ironic contrast between "warmth" and "wounding" highlights Darcy\'s insensitive delivery, while the final phrase "very unlikely to recommend his suit" provides authorial commentary that builds dramatic tension.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of Elizabeth\'s reactions and their effect (2 marks)',
+                'Discussion of sentence structure and punctuation (2 marks)',
+                'Analysis of list structure and repetition (2 marks)',
+                'Comment on irony and authorial voice (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          },
+          {
+            id: 'edexcel-eng-q10',
+            question: 'Read this extract from "The Turn of the Screw" by Henry James (1898):\n\n"What arrested me on the spot—and with a shock much greater than any vision had allowed for—was the sense that my imagination had, in a flash, turned real. He did stand there!—but high up, beyond the lawn and at the very top of the tower to which, on that first morning, little Flora had conducted me. This tower was one of a pair—square, incongruous, crenellated structures that were distinguished, for some reason, though I could see little difference, as the new and the old. They flanked opposite ends of the house and were probably architectural absurdities, redeemed in a measure indeed by not being wholly disengaged from a height and a degree of prettiness."\n\nEvaluate how successfully the writer creates a sense of fear and supernatural atmosphere.',
+            marks: 20,
+            difficulty: 'hard',
+            modelAnswer: 'James successfully creates fear through the narrator\'s fragmented, breathless syntax which mirrors psychological disturbance. The exclamation "He did stand there!" combined with the dash creates urgency and shock, while the phrase "turned real" blurs the boundary between imagination and reality, central to supernatural horror. The detailed architectural description creates Gothic atmosphere with "crenellated structures" and "architectural absurdities" suggesting something wrong or unnatural. However, the lengthy, analytical description might reduce immediate fear for some readers, as the academic tone distances us from raw terror. The positioning "high up" and "at the very top" creates a sense of threat and dominance, while the reference to Flora adds vulnerability. The deliberately ambiguous narrative voice makes readers question the reliability of what they\'re told, enhancing the unsettling atmosphere typical of psychological horror.',
+            markingCriteria: {
+              breakdown: [
+                'Evaluation of language techniques (5 marks)',
+                'Analysis of structure and syntax (5 marks)',
+                'Assessment of supernatural elements (5 marks)',
+                'Personal response with justification (3 marks)',
+                'Quality of expression (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          }
+        ]
+      }
+    ]
   }
 ];
