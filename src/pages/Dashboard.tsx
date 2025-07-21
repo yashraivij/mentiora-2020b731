@@ -380,7 +380,7 @@ const Dashboard = () => {
 
             <TabsContent value="aqa" className="mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {sortedSubjects.filter(subject => subject.id !== 'maths-edexcel').map((subject) => (
+                {sortedSubjects.filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse').map((subject) => (
                   <SubjectCard
                     key={subject.id}
                     subject={{
@@ -403,18 +403,20 @@ const Dashboard = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {sortedSubjects
                     .filter((subject) => {
-                      // Show maths-edexcel only in edexcel tab
-                      if (subject.id === 'maths-edexcel') {
+                      // Show maths-edexcel and business-edexcel-igcse only in edexcel tab
+                      if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse') {
                         return examBoard === 'edexcel';
                       }
-                      // Hide maths-edexcel from other tabs, show other subjects as coming soon
-                      return subject.id !== 'maths-edexcel';
+                      // Hide edexcel subjects from other tabs, show other subjects as coming soon
+                      return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse';
                     })
                     .sort((a, b) => {
-                      // In edexcel tab, put maths-edexcel first
+                      // In edexcel tab, put maths-edexcel first, then business-edexcel-igcse
                       if (examBoard === 'edexcel') {
                         if (a.id === 'maths-edexcel') return -1;
                         if (b.id === 'maths-edexcel') return 1;
+                        if (a.id === 'business-edexcel-igcse') return -1;
+                        if (b.id === 'business-edexcel-igcse') return 1;
                       }
                       return 0;
                     })
@@ -425,12 +427,12 @@ const Dashboard = () => {
                         ...subject,
                         color: getSubjectColor(subject.id)
                       }}
-                      progress={subject.id === 'maths-edexcel' && examBoard === 'edexcel' ? userProgress : []}
-                      onStartPractice={subject.id === 'maths-edexcel' && examBoard === 'edexcel' ? handlePractice : () => {}}
-                      onTogglePin={subject.id === 'maths-edexcel' && examBoard === 'edexcel' ? togglePinSubject : () => {}}
-                      isPinned={subject.id === 'maths-edexcel' && examBoard === 'edexcel' ? pinnedSubjects.includes(subject.id) : false}
-                      lastActivity={subject.id === 'maths-edexcel' && examBoard === 'edexcel' ? getLastActivity(subject.id) : null}
-                      comingSoon={!(subject.id === 'maths-edexcel' && examBoard === 'edexcel')}
+                      progress={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse') && examBoard === 'edexcel' ? userProgress : []}
+                      onStartPractice={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse') && examBoard === 'edexcel' ? handlePractice : () => {}}
+                      onTogglePin={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse') && examBoard === 'edexcel' ? togglePinSubject : () => {}}
+                      isPinned={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse') && examBoard === 'edexcel' ? pinnedSubjects.includes(subject.id) : false}
+                      lastActivity={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse') && examBoard === 'edexcel' ? getLastActivity(subject.id) : null}
+                      comingSoon={!((subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse') && examBoard === 'edexcel')}
                       userId={user?.id}
                     />
                   ))}

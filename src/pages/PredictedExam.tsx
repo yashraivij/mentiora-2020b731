@@ -45,6 +45,11 @@ const PredictedExam = () => {
 
   // Function to determine tier based on question difficulty and content
   const getTierLabel = (question: ExamQuestion): string => {
+    // Skip tier labeling for certain subjects that don't use foundation/higher tier system
+    if (subjectId === 'english-literature' || subjectId === 'history' || subjectId === 'religious-studies' || subjectId === 'business-edexcel-igcse') {
+      return '';
+    }
+    
     // Get the original question data to check difficulty
     let difficulty = 'easy';
     let marks = question.marks;

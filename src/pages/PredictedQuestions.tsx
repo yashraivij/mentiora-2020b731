@@ -195,11 +195,11 @@ const PredictedQuestions = () => {
                       <BookOpen className="h-7 w-7 text-white" />
                     </div>
                     <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm text-xs">
-                      {(subject.id === 'maths-edexcel' || subject.id === 'mathematics') ? 'Edexcel GCSE' : 'AQA GCSE'}
+                      {(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'mathematics') ? 'Edexcel GCSE' : 'AQA GCSE'}
                     </Badge>
                   </div>
                   <CardTitle className="text-xl font-bold text-white group-hover:text-yellow-200 transition-colors mt-3">
-                    {subject.id === 'geography' ? 'Geography Paper 1' : subject.id === 'geography-paper-2' ? 'Geography Paper 2' : `${subject.name} Paper 1`}
+                    {subject.id === 'geography' ? 'Geography Paper 1' : subject.id === 'geography-paper-2' ? 'Geography Paper 2' : subject.id === 'business-edexcel-igcse' ? 'Business Paper 1: Small Businesses' : `${subject.name} Paper 1`}
                   </CardTitle>
                   <CardDescription className="text-white/80 text-sm">
                     {isCompleted ? `Last Grade: ${completion.grade} (${completion.percentage}%)` : 'Full predicted paper practice'}
