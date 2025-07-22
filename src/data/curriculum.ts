@@ -426,56 +426,6 @@ export const curriculum: Subject[] = [
         ]
       },
       {
-        id: 'states-matter-mixtures',
-        name: 'States of Matter and Mixtures',
-        questions: [
-          {
-            id: 'smm-q1',
-            question: 'Describe the particle arrangement and movement in solids, liquids and gases. (Foundation)',
-            marks: 6,
-            difficulty: 'easy',
-            modelAnswer: 'Solids: particles closely packed in regular arrangement, vibrate about fixed positions. Liquids: particles close together but irregular arrangement, can move past each other. Gases: particles far apart with no regular arrangement, move rapidly in all directions.',
-            markingCriteria: {
-              breakdown: [
-                'Solid particle description (2 marks)',
-                'Liquid particle description (2 marks)',
-                'Gas particle description (2 marks)'
-              ]
-            },
-            specReference: 'Edexcel Chemistry Paper 1'
-          },
-          {
-            id: 'smm-q2',
-            question: 'Explain why pure substances have sharp melting points while mixtures have melting point ranges. (Higher)',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Pure substances contain only one type of particle, so all particles have the same intermolecular forces and melt at the same temperature. Mixtures contain different substances with different melting points, so they melt over a range of temperatures as each component melts separately.',
-            markingCriteria: {
-              breakdown: [
-                'Explanation for pure substances (2 marks)',
-                'Explanation for mixtures (2 marks)'
-              ]
-            },
-            specReference: 'Edexcel Chemistry Paper 1'
-          },
-          {
-            id: 'smm-q3',
-            question: 'Describe how paper chromatography can be used to separate and identify the components in black ink. (Foundation)',
-            marks: 6,
-            difficulty: 'easy',
-            modelAnswer: 'Place drop of ink on chromatography paper near bottom. Stand paper in shallow solvent. Solvent moves up paper carrying ink components at different rates. Different components travel different distances creating separate spots. Compare Rf values with known substances for identification.',
-            markingCriteria: {
-              breakdown: [
-                'Method description (3 marks)',
-                'Separation principle (2 marks)',
-                'Identification process (1 mark)'
-              ]
-            },
-            specReference: 'Edexcel Chemistry Paper 1'
-          }
-        ]
-      },
-      {
         id: 'chemical-changes',
         name: 'Chemical Changes',
         questions: [
