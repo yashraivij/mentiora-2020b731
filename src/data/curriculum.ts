@@ -31,7 +31,7 @@ export const curriculum: Subject[] = [
     topics: [
       {
         id: 'key-concepts-chemistry',
-        name: 'Topic 1 - Key Concepts in Chemistry',
+        name: 'Key Concepts in Chemistry',
         questions: [
           {
             id: 'kcc-q1',
@@ -187,7 +187,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: 'states-matter-mixtures',
-        name: 'Topic 2 - States of Matter and Mixtures',
+        name: 'States of Matter and Mixtures',
         questions: [
           {
             id: 'smm-q1',
@@ -237,7 +237,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: 'chemical-changes',
-        name: 'Topic 3 - Chemical Changes',
+        name: 'Chemical Changes',
         questions: [
           {
             id: 'cc-q1',
@@ -286,7 +286,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: 'extracting-metals-equilibria',
-        name: 'Topic 4 - Extracting Metals and Equilibria',
+        name: 'Extracting Metals and Equilibria',
         questions: [
           {
             id: 'eme-q1',
@@ -335,7 +335,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: 'separate-chemistry-higher',
-        name: 'Topic 5 - Separate Chemistry 1 (Higher Tier Only)',
+        name: 'Separate Chemistry 1 (Higher Tier Only)',
         questions: [
           {
             id: 'sch-q1',
