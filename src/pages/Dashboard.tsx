@@ -403,37 +403,41 @@ const Dashboard = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {sortedSubjects
                     .filter((subject) => {
-                      // Show maths-edexcel, business-edexcel-igcse, and edexcel-english-language only in edexcel tab
-                      if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') {
+                      // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, and edexcel-english-language only in edexcel tab
+                      if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'edexcel-english-language') {
                         return examBoard === 'edexcel';
                       }
                       // Hide edexcel subjects from other tabs, show other subjects as coming soon
-                      return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'edexcel-english-language';
+                      return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'edexcel-english-language';
                     })
-                     .sort((a, b) => {
-                       // In edexcel tab, put maths-edexcel first, then business-edexcel-igcse, then edexcel-english-language
-                       if (examBoard === 'edexcel') {
-                         if (a.id === 'maths-edexcel') return -1;
-                         if (b.id === 'maths-edexcel') return 1;
-                         if (a.id === 'business-edexcel-igcse') return -1;
-                         if (b.id === 'business-edexcel-igcse') return 1;
-                         if (a.id === 'edexcel-english-language') return -1;
-                         if (b.id === 'edexcel-english-language') return 1;
-                       }
-                       return 0;
-                     })
+                      .sort((a, b) => {
+                        // In edexcel tab, put maths-edexcel first, then business-edexcel-igcse, then chemistry-edexcel, then edexcel-english-language
+                        if (examBoard === 'edexcel') {
+                          if (a.id === 'maths-edexcel') return -1;
+                          if (b.id === 'maths-edexcel') return 1;
+                          if (a.id === 'business-edexcel-igcse') return -1;
+                          if (b.id === 'business-edexcel-igcse') return 1;
+                          if (a.id === 'chemistry-edexcel') return -1;
+                          if (b.id === 'chemistry-edexcel') return 1;
+                          if (a.id === 'edexcel-english-language') return -1;
+                          if (b.id === 'edexcel-english-language') return 1;
+                        }
+                        return 0;
+                      })
                      .map((subject) => {
                        // Modify subject name for Edexcel subjects to remove brackets
                        let modifiedSubject = { ...subject };
-                       if (examBoard === 'edexcel') {
-                         if (subject.id === 'maths-edexcel') {
-                           modifiedSubject = { ...subject, name: 'Mathematics' };
-                         } else if (subject.id === 'business-edexcel-igcse') {
-                           modifiedSubject = { ...subject, name: 'IGCSE Business' };
-                         } else if (subject.id === 'edexcel-english-language') {
-                           modifiedSubject = { ...subject, name: 'English Language' };
-                         }
-                       }
+                        if (examBoard === 'edexcel') {
+                          if (subject.id === 'maths-edexcel') {
+                            modifiedSubject = { ...subject, name: 'Mathematics' };
+                          } else if (subject.id === 'business-edexcel-igcse') {
+                            modifiedSubject = { ...subject, name: 'IGCSE Business' };
+                          } else if (subject.id === 'chemistry-edexcel') {
+                            modifiedSubject = { ...subject, name: 'Chemistry' };
+                          } else if (subject.id === 'edexcel-english-language') {
+                            modifiedSubject = { ...subject, name: 'English Language' };
+                          }
+                        }
                        
                         return (
                         <SubjectCard
@@ -442,12 +446,12 @@ const Dashboard = () => {
                             ...modifiedSubject,
                             color: getSubjectColor(subject.id)
                           }}
-                        progress={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? userProgress : []}
-                        onStartPractice={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? handlePractice : () => {}}
-                        onTogglePin={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? togglePinSubject : () => {}}
-                        isPinned={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? pinnedSubjects.includes(subject.id) : false}
-                        lastActivity={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? getLastActivity(subject.id) : null}
-                        comingSoon={!((subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel')}
+                         progress={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? userProgress : []}
+                         onStartPractice={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? handlePractice : () => {}}
+                         onTogglePin={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? togglePinSubject : () => {}}
+                         isPinned={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? pinnedSubjects.includes(subject.id) : false}
+                         lastActivity={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel' ? getLastActivity(subject.id) : null}
+                         comingSoon={!((subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'edexcel-english-language') && examBoard === 'edexcel')}
                        userId={user?.id}
                      />
                         );

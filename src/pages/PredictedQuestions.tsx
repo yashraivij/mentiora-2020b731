@@ -67,6 +67,7 @@ const PredictedQuestions = () => {
   const getSubjectColor = (subjectId: string) => {
     const colors = {
       chemistry: "from-green-500 to-emerald-600",
+      "chemistry-edexcel": "from-green-500 to-emerald-600",
       biology: "from-emerald-500 to-green-600", 
       physics: "from-blue-500 to-indigo-600",
       mathematics: "from-purple-500 to-indigo-600",
@@ -83,6 +84,7 @@ const PredictedQuestions = () => {
   const getExamDuration = (subjectId: string) => {
     const durations = {
       chemistry: "1h 45min",
+      "chemistry-edexcel": "1h 45min",
       biology: "1h 45min",
       physics: "1h 45min", 
       mathematics: "1h 30min",
@@ -97,7 +99,7 @@ const PredictedQuestions = () => {
   };
 
   const getBadgeText = (subjectId: string) => {
-    if (subjectId === 'maths-edexcel' || subjectId === 'business-edexcel-igcse' || subjectId === 'edexcel-english-language') {
+    if (subjectId === 'maths-edexcel' || subjectId === 'business-edexcel-igcse' || subjectId === 'chemistry-edexcel' || subjectId === 'edexcel-english-language') {
       return 'Edexcel GCSE';
     }
     return 'AQA GCSE';
@@ -111,6 +113,8 @@ const PredictedQuestions = () => {
       name = 'Mathematics';
     } else if (subject.id === 'business-edexcel-igcse') {
       name = 'IGCSE Business';
+    } else if (subject.id === 'chemistry-edexcel') {
+      name = 'Chemistry';
     } else if (subject.id === 'edexcel-english-language') {
       name = 'English Language';
     }
@@ -350,37 +354,39 @@ const PredictedQuestions = () => {
           {['edexcel', 'ccea', 'ocr', 'wjec'].map((examBoard) => (
             <TabsContent key={examBoard} value={examBoard} className="mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {curriculum
-                  .filter((subject) => {
-                    // Show maths-edexcel, business-edexcel-igcse, and edexcel-english-language only in edexcel tab
-                    if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language') {
-                      return examBoard === 'edexcel';
-                    }
-                    
-                    // For edexcel tab, exclude subjects that have AQA GCSE badge
-                    if (examBoard === 'edexcel') {
-                      return false; // Don't show AQA GCSE subjects in Edexcel tab
-                    }
-                    
-                    // For other exam boards, show all other subjects as coming soon
-                    return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'edexcel-english-language';
-                  })
-                  .sort((a, b) => {
-                    // In edexcel tab, put maths-edexcel first, then business-edexcel-igcse, then edexcel-english-language
-                    if (examBoard === 'edexcel') {
-                      if (a.id === 'maths-edexcel') return -1;
-                      if (b.id === 'maths-edexcel') return 1;
-                      if (a.id === 'business-edexcel-igcse') return -1;
-                      if (b.id === 'business-edexcel-igcse') return 1;
-                      if (a.id === 'edexcel-english-language') return -1;
-                      if (b.id === 'edexcel-english-language') return 1;
-                    }
-                    return 0;
-                  })
-                  .map((subject) => {
-                    // For non-Edexcel tabs, show subjects as coming soon if they're not actually available
-                    const isAvailable = examBoard === 'edexcel' && 
-                      (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'edexcel-english-language');
+                 {curriculum
+                   .filter((subject) => {
+                     // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, and edexcel-english-language only in edexcel tab
+                     if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'edexcel-english-language') {
+                       return examBoard === 'edexcel';
+                     }
+                     
+                     // For edexcel tab, exclude subjects that have AQA GCSE badge
+                     if (examBoard === 'edexcel') {
+                       return false; // Don't show AQA GCSE subjects in Edexcel tab
+                     }
+                     
+                     // For other exam boards, show all other subjects as coming soon
+                     return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'edexcel-english-language';
+                   })
+                   .sort((a, b) => {
+                     // In edexcel tab, put maths-edexcel first, then business-edexcel-igcse, then chemistry-edexcel, then edexcel-english-language
+                     if (examBoard === 'edexcel') {
+                       if (a.id === 'maths-edexcel') return -1;
+                       if (b.id === 'maths-edexcel') return 1;
+                       if (a.id === 'business-edexcel-igcse') return -1;
+                       if (b.id === 'business-edexcel-igcse') return 1;
+                       if (a.id === 'chemistry-edexcel') return -1;
+                       if (b.id === 'chemistry-edexcel') return 1;
+                       if (a.id === 'edexcel-english-language') return -1;
+                       if (b.id === 'edexcel-english-language') return 1;
+                     }
+                     return 0;
+                   })
+                   .map((subject) => {
+                     // For non-Edexcel tabs, show subjects as coming soon if they're not actually available
+                     const isAvailable = examBoard === 'edexcel' && 
+                       (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'edexcel-english-language');
                     
                     if (!isAvailable && examBoard !== 'edexcel') {
                       return (

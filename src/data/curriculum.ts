@@ -26,6 +26,168 @@ export interface Subject {
 
 export const curriculum: Subject[] = [
   {
+    id: 'chemistry-edexcel',
+    name: 'Chemistry (Edexcel)',
+    topics: [
+      {
+        id: 'key-concepts-chemistry',
+        name: 'Topic 1 - Key Concepts in Chemistry',
+        questions: [
+          {
+            id: 'kcc-q1',
+            question: 'Describe the structure of an atom according to the Dalton model. How does this differ from our modern understanding? (Foundation)',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Dalton\'s model described atoms as solid, indivisible spheres that could not be broken down further. All atoms of the same element were identical. Modern understanding shows atoms contain subatomic particles: protons and neutrons in the nucleus, with electrons orbiting around it. Atoms are mostly empty space, unlike Dalton\'s solid sphere model.',
+            markingCriteria: {
+              breakdown: [
+                'Description of Dalton model (2 marks)',
+                'Description of modern atomic structure (2 marks)',
+                'Clear comparison between models (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'kcc-q2',
+            question: 'An atom has 17 protons, 18 neutrons and 17 electrons. What is its atomic number and mass number? Name this element. (Foundation)',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Atomic number = 17 (number of protons). Mass number = 35 (protons + neutrons = 17 + 18). This element is chlorine (Cl).',
+            markingCriteria: {
+              breakdown: [
+                'Correct atomic number (1 mark)',
+                'Correct mass number (1 mark)',
+                'Correct element name (1 mark)',
+                'Clear working shown (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'kcc-q3',
+            question: 'Draw dot-and-cross diagrams for sodium chloride (NaCl) formation, showing the transfer of electrons. (Higher)',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Sodium atom (2.8.1) loses its outer electron to become Na⁺ ion (2.8). Chlorine atom (2.8.7) gains this electron to become Cl⁻ ion (2.8.8). The oppositely charged ions attract electrostatically to form ionic bond. Diagram should show electron shells and electron transfer clearly.',
+            markingCriteria: {
+              breakdown: [
+                'Correct electron configuration for Na (2 marks)',
+                'Correct electron configuration for Cl (2 marks)',
+                'Clear showing of electron transfer (2 marks)',
+                'Correct ion charges (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'kcc-q4',
+            question: 'Calculate the relative formula mass (RFM) of calcium carbonate, CaCO₃. (Ca=40, C=12, O=16) (Foundation)',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'RFM of CaCO₃ = (1 × 40) + (1 × 12) + (3 × 16) = 40 + 12 + 48 = 100',
+            markingCriteria: {
+              breakdown: [
+                'Correct identification of atoms in formula (1 mark)',
+                'Correct calculation setup (1 mark)',
+                'Correct final answer (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'kcc-q5',
+            question: 'Explain why diamond has a high melting point while methane has a low melting point, referring to their structures. (Higher)',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Diamond has a giant covalent structure where each carbon atom is bonded to four others by strong covalent bonds throughout the structure. Breaking the structure requires breaking many strong covalent bonds, so high energy is needed. Methane has a simple molecular structure with weak intermolecular forces between molecules. Only weak forces need to be overcome, requiring little energy.',
+            markingCriteria: {
+              breakdown: [
+                'Description of diamond structure (2 marks)',
+                'Description of methane structure (2 marks)',
+                'Link between structure and properties (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'kcc-q6',
+            question: 'A compound contains 32.4% sodium, 22.6% sulfur and 45.1% oxygen by mass. Calculate its empirical formula. (Na=23, S=32, O=16) (Higher)',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Na: 32.4/23 = 1.41, S: 22.6/32 = 0.71, O: 45.1/16 = 2.82. Divide by smallest (0.71): Na = 2, S = 1, O = 4. Empirical formula is Na₂SO₄.',
+            markingCriteria: {
+              breakdown: [
+                'Convert percentages to moles (2 marks)',
+                'Divide by smallest number of moles (2 marks)',
+                'Correct empirical formula (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'kcc-q7',
+            question: 'Describe the electron arrangement in atoms of the first 20 elements and explain the pattern. (Foundation)',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Electrons occupy shells around the nucleus. First shell holds maximum 2 electrons, second and third shells hold maximum 8 electrons each. Elements fill shells in order: H (1), He (2), Li (2.1), up to Ca (2.8.8.2). The pattern follows the rule that lower energy shells fill first.',
+            markingCriteria: {
+              breakdown: [
+                'Correct shell capacities (2 marks)',
+                'Examples of electron arrangements (3 marks)',
+                'Explanation of filling pattern (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'kcc-q8',
+            question: 'Compare metallic bonding with ionic bonding, giving one example of each. (Higher)',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Metallic bonding involves delocalized electrons in a "sea" around metal cations, allowing electron movement (e.g., copper). Ionic bonding involves transfer of electrons from metal to non-metal, creating oppositely charged ions held by electrostatic attraction (e.g., sodium chloride). Metallic bonding allows conductivity; ionic compounds conduct only when molten/dissolved.',
+            markingCriteria: {
+              breakdown: [
+                'Description of metallic bonding with example (3 marks)',
+                'Description of ionic bonding with example (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'kcc-q9',
+            question: 'Calculate the number of moles in 44g of carbon dioxide, CO₂. (C=12, O=16) (Foundation)',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'RFM of CO₂ = 12 + (2 × 16) = 44. Number of moles = mass/RFM = 44/44 = 1 mole.',
+            markingCriteria: {
+              breakdown: [
+                'Correct RFM calculation (2 marks)',
+                'Correct moles formula (1 mark)',
+                'Correct final answer (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'kcc-q10',
+            question: 'Explain why graphite conducts electricity but diamond does not, despite both being forms of carbon. (Higher)',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Both are giant covalent structures, but graphite has delocalized electrons between layers that can move freely, allowing electrical conduction. Diamond has all electrons localized in covalent bonds with no free electrons to carry charge. The layer structure in graphite allows electron mobility, while diamond\'s 3D network locks all electrons in bonds.',
+            markingCriteria: {
+              breakdown: [
+                'Explanation of graphite structure and conduction (3 marks)',
+                'Explanation of diamond structure and non-conduction (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          }
+        ]
+      }
+    ]
+  },
+  {
     id: 'english-language',
     name: 'English Language',
     topics: [
