@@ -184,6 +184,204 @@ export const curriculum: Subject[] = [
             specReference: 'Edexcel Chemistry Paper 1'
           }
         ]
+      },
+      {
+        id: 'states-matter-mixtures',
+        name: 'Topic 2 - States of Matter and Mixtures',
+        questions: [
+          {
+            id: 'smm-q1',
+            question: 'Describe the particle arrangement and movement in solids, liquids and gases. (Foundation)',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Solids: particles closely packed in regular arrangement, vibrate about fixed positions. Liquids: particles close together but irregular arrangement, can move past each other. Gases: particles far apart with no regular arrangement, move rapidly in all directions.',
+            markingCriteria: {
+              breakdown: [
+                'Solid particle description (2 marks)',
+                'Liquid particle description (2 marks)',
+                'Gas particle description (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'smm-q2',
+            question: 'Explain why pure substances have sharp melting points while mixtures have melting point ranges. (Higher)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Pure substances contain only one type of particle, so all particles have the same intermolecular forces and melt at the same temperature. Mixtures contain different substances with different melting points, so they melt over a range of temperatures as each component melts separately.',
+            markingCriteria: {
+              breakdown: [
+                'Explanation for pure substances (2 marks)',
+                'Explanation for mixtures (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'smm-q3',
+            question: 'Describe how paper chromatography can be used to separate and identify the components in black ink. (Foundation)',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Place drop of ink on chromatography paper near bottom. Stand paper in shallow solvent. Solvent moves up paper carrying ink components at different rates. Different components travel different distances creating separate spots. Compare Rf values with known substances for identification.',
+            markingCriteria: {
+              breakdown: [
+                'Method description (3 marks)',
+                'Separation principle (2 marks)',
+                'Identification process (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          }
+        ]
+      },
+      {
+        id: 'chemical-changes',
+        name: 'Topic 3 - Chemical Changes',
+        questions: [
+          {
+            id: 'cc-q1',
+            question: 'Explain the difference between a strong acid and a concentrated acid. (Higher)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Strong acid completely ionizes in water (releases all H⁺ ions), e.g., HCl. Concentrated acid has a high amount of acid dissolved in small amount of water. An acid can be strong but dilute, or weak but concentrated.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of strong acid (2 marks)',
+                'Definition of concentrated acid (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'cc-q2',
+            question: 'Complete the word equation: Copper oxide + Sulfuric acid → ? + ? (Foundation)',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Copper oxide + Sulfuric acid → Copper sulfate + Water',
+            markingCriteria: {
+              breakdown: [
+                'Correct salt name (1 mark)',
+                'Water identified (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'cc-q3',
+            question: 'During electrolysis of copper sulfate solution using copper electrodes, explain what happens at each electrode. (Higher)',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'At cathode (negative): Cu²⁺ + 2e⁻ → Cu (copper deposited). At anode (positive): Cu → Cu²⁺ + 2e⁻ (copper dissolves). Overall effect: copper transfers from anode to cathode, purifying the copper.',
+            markingCriteria: {
+              breakdown: [
+                'Cathode reaction (2 marks)',
+                'Anode reaction (2 marks)',
+                'Overall process explanation (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          }
+        ]
+      },
+      {
+        id: 'extracting-metals-equilibria',
+        name: 'Topic 4 - Extracting Metals and Equilibria',
+        questions: [
+          {
+            id: 'eme-q1',
+            question: 'Place these metals in order of reactivity: copper, zinc, iron, magnesium. Explain your reasoning. (Foundation)',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Order (most to least reactive): Magnesium, zinc, iron, copper. This is based on their reactions with water, acids, and displacement reactions. More reactive metals displace less reactive ones from their compounds.',
+            markingCriteria: {
+              breakdown: [
+                'Correct order (2 marks)',
+                'Explanation of reactivity series (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'eme-q2',
+            question: 'Explain why aluminum is extracted by electrolysis rather than heating with carbon. (Higher)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Aluminum is more reactive than carbon, so carbon cannot reduce aluminum oxide. Aluminum oxide has very strong ionic bonds requiring high energy to break. Electrolysis provides enough energy to decompose aluminum oxide into aluminum and oxygen.',
+            markingCriteria: {
+              breakdown: [
+                'Reactivity comparison (2 marks)',
+                'Energy requirements explanation (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'eme-q3',
+            question: 'In the Haber process, explain how increasing pressure affects the equilibrium position and why. (Higher)',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'N₂ + 3H₂ ⇌ 2NH₃. Left side has 4 gas molecules, right side has 2. Increasing pressure favors the side with fewer gas molecules (Le Chatelier\'s principle). Equilibrium shifts right, producing more ammonia. This maximizes efficiency of ammonia production.',
+            markingCriteria: {
+              breakdown: [
+                'Identification of molecule numbers (2 marks)',
+                'Application of Le Chatelier\'s principle (2 marks)',
+                'Effect on ammonia production (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          }
+        ]
+      },
+      {
+        id: 'separate-chemistry-higher',
+        name: 'Topic 5 - Separate Chemistry 1 (Higher Tier Only)',
+        questions: [
+          {
+            id: 'sch-q1',
+            question: 'Explain why transition metals make good catalysts, giving one example. (Higher)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Transition metals can form multiple oxidation states, allowing them to provide alternative reaction pathways with lower activation energy. They can form temporary bonds with reactants. Example: Iron in Haber process catalyzes formation of ammonia.',
+            markingCriteria: {
+              breakdown: [
+                'Explanation of catalytic properties (2 marks)',
+                'Suitable example with context (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'sch-q2',
+            question: 'Calculate the atom economy for producing ammonia in the Haber process: N₂ + 3H₂ → 2NH₃ (N=14, H=1) (Higher)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'RFM of reactants: N₂ = 28, 3H₂ = 6, total = 34. RFM of desired product: 2NH₃ = 2(14+3) = 34. Atom economy = (34/34) × 100 = 100%',
+            markingCriteria: {
+              breakdown: [
+                'Correct RFM calculations (2 marks)',
+                'Correct atom economy formula application (1 mark)',
+                'Correct final answer (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'sch-q3',
+            question: 'A fuel cell uses hydrogen and oxygen. Write the half equations and overall equation for this reaction. (Higher)',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'At anode: H₂ → 2H⁺ + 2e⁻. At cathode: O₂ + 4H⁺ + 4e⁻ → 2H₂O. Overall: 2H₂ + O₂ → 2H₂O. Electrons flow from anode to cathode through external circuit.',
+            markingCriteria: {
+              breakdown: [
+                'Correct anode half equation (2 marks)',
+                'Correct cathode half equation (2 marks)',
+                'Correct overall equation (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          }
+        ]
       }
     ]
   },
