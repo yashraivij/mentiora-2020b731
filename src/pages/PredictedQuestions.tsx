@@ -345,9 +345,9 @@ const PredictedQuestions = () => {
 
           <TabsContent value="aqa" className="mt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {curriculum
-                .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'edexcel-english-language')
-                .map((subject) => renderSubjectCard(subject))}
+               {curriculum
+                 .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'edexcel-english-language')
+                 .map((subject) => renderSubjectCard(subject))}
             </div>
           </TabsContent>
 

@@ -182,6 +182,246 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'kcc-q11',
+            question: 'Calculate the percentage composition of oxygen in calcium hydroxide, Ca(OH)₂. (Ca=40, O=16, H=1) (Foundation)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'RFM of Ca(OH)₂ = 40 + 2(16+1) = 40 + 34 = 74. Mass of oxygen = 2 × 16 = 32. Percentage of oxygen = (32/74) × 100 = 43.2%',
+            markingCriteria: {
+              breakdown: [
+                'Correct RFM calculation (2 marks)',
+                'Correct mass of oxygen (1 mark)',
+                'Correct percentage calculation (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'kcc-q12',
+            question: 'Describe how the periodic table is arranged and explain the patterns in Group 1 metals. (Foundation)',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Periodic table arranged by atomic number in periods (rows) and groups (columns). Group 1 metals (Li, Na, K) have one electron in outer shell. As you go down the group: atoms get larger, reactivity increases, melting points decrease. This is because outer electron is further from nucleus so more easily lost.',
+            markingCriteria: {
+              breakdown: [
+                'Description of periodic table arrangement (2 marks)',
+                'Group 1 electron configuration (2 marks)',
+                'Trends down the group (2 marks)',
+                'Explanation of trends (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'kcc-q13',
+            question: 'Draw the structure of water (H₂O) showing covalent bonding. Explain why water molecules are polar. (Higher)',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Water has bent/angular shape with oxygen in center bonded to two hydrogens. Oxygen is more electronegative than hydrogen, so electrons in covalent bonds are pulled toward oxygen. This creates partial negative charge on oxygen and partial positive charges on hydrogens, making the molecule polar.',
+            markingCriteria: {
+              breakdown: [
+                'Correct structure drawing (2 marks)',
+                'Explanation of electronegativity difference (2 marks)',
+                'Explanation of polar nature (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'kcc-q14',
+            question: 'A sample contains 2.0 moles of carbon dioxide. Calculate the mass of this sample. (C=12, O=16) (Foundation)',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'RFM of CO₂ = 12 + (2 × 16) = 44. Mass = moles × RFM = 2.0 × 44 = 88g',
+            markingCriteria: {
+              breakdown: [
+                'Correct RFM calculation (1 mark)',
+                'Correct formula use (1 mark)',
+                'Correct final answer (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'kcc-q15',
+            question: 'Explain the difference between isotopes and give an example showing atomic structure. (Higher)',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Isotopes are atoms of the same element with same number of protons but different numbers of neutrons. Example: Carbon-12 has 6 protons, 6 neutrons, 6 electrons. Carbon-14 has 6 protons, 8 neutrons, 6 electrons. Same atomic number (6) but different mass numbers (12 and 14).',
+            markingCriteria: {
+              breakdown: [
+                'Definition of isotopes (2 marks)',
+                'Suitable example given (2 marks)',
+                'Correct atomic structure details (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'kcc-q16',
+            question: 'Compare the properties of ionic and covalent compounds. Give one example of each. (Foundation)',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Ionic compounds: high melting/boiling points, conduct when molten/dissolved, often soluble in water, brittle. Example: sodium chloride. Covalent compounds: low melting/boiling points, do not conduct electricity, often insoluble in water, soft. Example: methane. Differences due to different bonding types.',
+            markingCriteria: {
+              breakdown: [
+                'Ionic compound properties with example (4 marks)',
+                'Covalent compound properties with example (4 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          }
+        ]
+      },
+      {
+        id: 'states-matter-mixtures',
+        name: 'States of Matter and Mixtures',
+        questions: [
+          {
+            id: 'smm-q1',
+            question: 'Describe the particle arrangement and movement in solids, liquids and gases. (Foundation)',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Solids: particles closely packed in regular arrangement, vibrate about fixed positions. Liquids: particles close together but irregular arrangement, can move past each other. Gases: particles far apart with no regular arrangement, move rapidly in all directions.',
+            markingCriteria: {
+              breakdown: [
+                'Solid particle description (2 marks)',
+                'Liquid particle description (2 marks)',
+                'Gas particle description (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'smm-q2',
+            question: 'Explain why pure substances have sharp melting points while mixtures have melting point ranges. (Higher)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Pure substances contain only one type of particle, so all particles have the same intermolecular forces and melt at the same temperature. Mixtures contain different substances with different melting points, so they melt over a range of temperatures as each component melts separately.',
+            markingCriteria: {
+              breakdown: [
+                'Explanation for pure substances (2 marks)',
+                'Explanation for mixtures (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'smm-q3',
+            question: 'Describe how paper chromatography can be used to separate and identify the components in black ink. (Foundation)',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Place drop of ink on chromatography paper near bottom. Stand paper in shallow solvent. Solvent moves up paper carrying ink components at different rates. Different components travel different distances creating separate spots. Compare Rf values with known substances for identification.',
+            markingCriteria: {
+              breakdown: [
+                'Method description (3 marks)',
+                'Separation principle (2 marks)',
+                'Identification process (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'smm-q4',
+            question: 'Calculate the Rf value for a substance that travels 6cm when the solvent front travels 10cm. (Foundation)',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Rf = distance moved by substance / distance moved by solvent = 6/10 = 0.6',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct calculation (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'smm-q5',
+            question: 'Explain how fractional distillation separates crude oil into fractions. (Higher)',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Crude oil heated and vaporized. Vapor rises up fractionating column which is cooler at top. Different hydrocarbons have different boiling points. Those with lower boiling points reach higher up column before condensing. Fractions collected at different heights.',
+            markingCriteria: {
+              breakdown: [
+                'Description of heating process (2 marks)',
+                'Explanation of temperature gradient (2 marks)',
+                'Collection of different fractions (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'smm-q6',
+            question: 'Describe the process of crystallization to obtain pure salt from salt solution. (Foundation)',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Heat salt solution gently to evaporate water. Stop heating when crystals start to form. Allow solution to cool slowly. Filter to collect crystals. Wash crystals with distilled water and dry.',
+            markingCriteria: {
+              breakdown: [
+                'Evaporation process (2 marks)',
+                'Crystal formation and collection (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'smm-q7',
+            question: 'Explain why sublimation occurs and give an example. (Higher)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Sublimation is when a solid changes directly to gas without melting. Occurs when intermolecular forces are weak enough that particles can escape directly from solid state when given enough energy. Example: dry ice (solid carbon dioxide) sublimes at room temperature.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of sublimation (2 marks)',
+                'Suitable example with explanation (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'smm-q8',
+            question: 'Describe how to separate sand, salt and water from a mixture. (Foundation)',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'First filter to separate sand (insoluble) from salt water solution. Sand remains on filter paper. Then crystallize salt solution by evaporation to separate salt from water. Heat gently until crystals form, then cool and filter to collect pure salt.',
+            markingCriteria: {
+              breakdown: [
+                'Filtration to separate sand (2 marks)',
+                'Crystallization to separate salt (2 marks)',
+                'Correct order of processes (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'smm-q9',
+            question: 'Explain why water purification is important in chemical analysis. (Higher)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Pure water is needed as a solvent to avoid contamination of results. Impurities in water could react with test substances giving false results. Pure water has known properties (pH 7, specific boiling point) needed for accurate measurements. Impure water could interfere with chemical tests.',
+            markingCriteria: {
+              breakdown: [
+                'Prevention of contamination (2 marks)',
+                'Need for known properties (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'smm-q10',
+            question: 'Compare simple distillation with fractional distillation, stating when each is used. (Higher)',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Simple distillation separates liquid from dissolved solid or liquids with very different boiling points. Uses single distillation. Fractional distillation separates liquids with similar boiling points using fractionating column for multiple distillations. Simple used for water from salt; fractional used for separating crude oil fractions.',
+            markingCriteria: {
+              breakdown: [
+                'Simple distillation description and use (3 marks)',
+                'Fractional distillation description and use (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
           }
         ]
       },
@@ -281,6 +521,111 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'cc-q4',
+            question: 'Write the balanced equation for the neutralization of hydrochloric acid with sodium hydroxide. (Foundation)',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'HCl + NaOH → NaCl + H₂O',
+            markingCriteria: {
+              breakdown: [
+                'Correct reactants (1 mark)',
+                'Correct products (1 mark)',
+                'Balanced equation (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'cc-q5',
+            question: 'Describe the test for hydrogen gas and explain the result. (Foundation)',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Hold lit splint near gas sample. Hydrogen burns with a \'pop\' sound. This happens because hydrogen burns rapidly in oxygen from air.',
+            markingCriteria: {
+              breakdown: [
+                'Correct test method (1 mark)',
+                'Correct result described (1 mark)',
+                'Explanation of reaction (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'cc-q6',
+            question: 'Explain how pH changes when an acid is gradually added to an alkali. (Higher)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Initially pH is high (alkali). As acid is added, pH gradually decreases. At neutralization point, pH = 7. Further acid addition causes pH to drop below 7 (acidic). The change is gradual then rapid around pH 7.',
+            markingCriteria: {
+              breakdown: [
+                'Initial high pH (1 mark)',
+                'Gradual decrease (1 mark)',
+                'Neutralization at pH 7 (1 mark)',
+                'Further decrease below 7 (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'cc-q7',
+            question: 'Define oxidation and reduction in terms of electron transfer. Give an example. (Higher)',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Oxidation is loss of electrons. Reduction is gain of electrons. Example: Mg + CuSO₄ → MgSO₄ + Cu. Magnesium loses electrons (oxidized), copper ions gain electrons (reduced). Remember: OIL RIG (Oxidation Is Loss, Reduction Is Gain).',
+            markingCriteria: {
+              breakdown: [
+                'Definition of oxidation (2 marks)',
+                'Definition of reduction (2 marks)',
+                'Suitable example with explanation (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'cc-q8',
+            question: 'Describe how to prepare copper sulfate crystals from copper oxide and sulfuric acid. (Foundation)',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Add excess copper oxide to warm sulfuric acid. Stir until no more dissolves. Filter to remove excess copper oxide. Heat filtrate gently to concentrate. Cool slowly to form crystals. Filter and dry crystals.',
+            markingCriteria: {
+              breakdown: [
+                'Neutralization reaction (2 marks)',
+                'Filtration of excess (2 marks)',
+                'Crystallization process (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'cc-q9',
+            question: 'Explain why during electrolysis, cations move to the cathode and anions move to the anode. (Higher)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Cations are positively charged ions. Cathode is negative electrode. Opposite charges attract, so cations move to cathode. Anions are negatively charged ions. Anode is positive electrode. Opposite charges attract, so anions move to anode.',
+            markingCriteria: {
+              breakdown: [
+                'Cation movement explanation (2 marks)',
+                'Anion movement explanation (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'cc-q10',
+            question: 'Describe the test for carbon dioxide gas and explain why this result occurs. (Foundation)',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Bubble gas through limewater (calcium hydroxide solution). Limewater turns milky/cloudy. This happens because CO₂ reacts with calcium hydroxide to form insoluble calcium carbonate: Ca(OH)₂ + CO₂ → CaCO₃ + H₂O',
+            markingCriteria: {
+              breakdown: [
+                'Correct test method (1 mark)',
+                'Correct result (1 mark)',
+                'Chemical explanation (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
           }
         ]
       },
@@ -327,6 +672,108 @@ export const curriculum: Subject[] = [
                 'Identification of molecule numbers (2 marks)',
                 'Application of Le Chatelier\'s principle (2 marks)',
                 'Effect on ammonia production (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'eme-q4',
+            question: 'Write a word equation for the extraction of iron from iron oxide using carbon. (Foundation)',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Iron oxide + Carbon → Iron + Carbon dioxide',
+            markingCriteria: {
+              breakdown: [
+                'Correct reactants (1 mark)',
+                'Correct products (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'eme-q5',
+            question: 'Explain why recycling metals is important for the environment and economy. (Foundation)',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Environmental: Reduces mining damage, saves energy (recycling uses less energy than extraction), reduces waste in landfills. Economic: Cheaper than extracting from ores, creates jobs in recycling industry, conserves finite metal ores for future generations.',
+            markingCriteria: {
+              breakdown: [
+                'Environmental benefits (3 marks)',
+                'Economic benefits (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'eme-q6',
+            question: 'Describe what happens in a displacement reaction between zinc and copper sulfate solution. (Foundation)',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Zinc is more reactive than copper. Zinc displaces copper from copper sulfate. Blue solution turns colorless. Brown copper metal forms. Word equation: Zinc + Copper sulfate → Zinc sulfate + Copper',
+            markingCriteria: {
+              breakdown: [
+                'Reactivity explanation (1 mark)',
+                'Observations (2 marks)',
+                'Word equation (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'eme-q7',
+            question: 'Explain how increasing temperature affects the Haber process equilibrium and industrial conditions. (Higher)',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Forward reaction is exothermic (releases heat). Increasing temperature favors endothermic direction (backward reaction). This reduces ammonia yield. However, higher temperature increases reaction rate. Industry uses compromise temperature (450°C) to balance yield and rate.',
+            markingCriteria: {
+              breakdown: [
+                'Identification of exothermic reaction (2 marks)',
+                'Effect on equilibrium position (2 marks)',
+                'Industrial compromise explanation (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'eme-q8',
+            question: 'Compare biological methods of metal extraction with traditional methods. (Higher)',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Biological methods: Use bacteria or plants, environmentally friendly, low energy, slow process. Traditional methods: High temperature furnaces, faster, high energy consumption, pollution. Phytoextraction uses plants; bioleaching uses bacteria. Biological methods better for low-grade ores.',
+            markingCriteria: {
+              breakdown: [
+                'Biological methods description (3 marks)',
+                'Traditional methods comparison (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'eme-q9',
+            question: 'Describe what dynamic equilibrium means in a reversible reaction. (Higher)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Dynamic equilibrium means forward and backward reactions occur at equal rates. Concentrations of reactants and products remain constant. Reactions continue but no overall change is observed. System appears static but is actually dynamic.',
+            markingCriteria: {
+              breakdown: [
+                'Equal reaction rates (2 marks)',
+                'Constant concentrations (1 mark)',
+                'Continuing reactions (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'eme-q10',
+            question: 'Explain the importance of iron as a catalyst in the Haber process. (Higher)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Iron provides alternative reaction pathway with lower activation energy. Speeds up both forward and backward reactions equally. Does not affect equilibrium position, only rate of reaching equilibrium. Allows industrial process to be economically viable.',
+            markingCriteria: {
+              breakdown: [
+                'Lower activation energy (2 marks)',
+                'Effect on reaction rate (1 mark)',
+                'No effect on equilibrium position (1 mark)'
               ]
             },
             specReference: 'Edexcel Chemistry Paper 1'
@@ -377,6 +824,107 @@ export const curriculum: Subject[] = [
                 'Correct anode half equation (2 marks)',
                 'Correct cathode half equation (2 marks)',
                 'Correct overall equation (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'sch-q4',
+            question: 'Calculate the percentage yield if 50g of product is obtained when 80g was theoretically possible. (Higher)',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Percentage yield = (actual yield / theoretical yield) × 100 = (50/80) × 100 = 62.5%',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct substitution (1 mark)',
+                'Correct final answer (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'sch-q5',
+            question: 'Describe the properties of transition metals that make them useful in industry. (Higher)',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'High melting and boiling points make them suitable for high-temperature processes. Form colored compounds useful in paints and ceramics. Good catalysts due to variable oxidation states. High density makes them suitable for construction. Malleable and ductile for shaping.',
+            markingCriteria: {
+              breakdown: [
+                'Physical properties (3 marks)',
+                'Chemical properties (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'sch-q6',
+            question: 'Explain how electroplating works and why it is used. (Higher)',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Object to be plated is cathode, coating metal is anode. Electric current passes through electrolyte solution of coating metal ions. Metal ions move to cathode and deposit as thin layer. Used to prevent corrosion, improve appearance, or add specific properties.',
+            markingCriteria: {
+              breakdown: [
+                'Process description (3 marks)',
+                'Uses and benefits (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'sch-q7',
+            question: 'Calculate the volume of hydrogen gas produced at r.t.p. when 2 moles of HCl react with excess magnesium. (Higher)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Mg + 2HCl → MgCl₂ + H₂. 2 moles HCl produce 1 mole H₂. At r.t.p., 1 mole of gas = 24 dm³. Volume = 1 × 24 = 24 dm³',
+            markingCriteria: {
+              breakdown: [
+                'Balanced equation (1 mark)',
+                'Mole ratio calculation (2 marks)',
+                'Volume calculation (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'sch-q8',
+            question: 'Compare the advantages and disadvantages of hydrogen fuel cells. (Higher)',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Advantages: Only product is water (clean), high efficiency, renewable if hydrogen from electrolysis, quiet operation. Disadvantages: Hydrogen storage problems, expensive to produce, infrastructure not developed, potential safety issues with hydrogen gas.',
+            markingCriteria: {
+              breakdown: [
+                'Advantages listed and explained (3 marks)',
+                'Disadvantages listed and explained (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'sch-q9',
+            question: 'Explain why sacrificial protection works to prevent rusting of iron. (Higher)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'More reactive metal (like zinc) is attached to iron. The more reactive metal is oxidized instead of iron. Zinc loses electrons more easily than iron. Iron is protected because it does not lose electrons while zinc is present.',
+            markingCriteria: {
+              breakdown: [
+                'More reactive metal concept (2 marks)',
+                'Electron transfer explanation (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Chemistry Paper 1'
+          },
+          {
+            id: 'sch-q10',
+            question: 'Calculate the concentration in mol/dm³ of a solution containing 20g of NaOH in 500cm³ of solution. (Na=23, O=16, H=1) (Higher)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'RFM of NaOH = 23 + 16 + 1 = 40. Moles = 20/40 = 0.5. Volume = 500/1000 = 0.5 dm³. Concentration = 0.5/0.5 = 1.0 mol/dm³',
+            markingCriteria: {
+              breakdown: [
+                'Correct moles calculation (2 marks)',
+                'Volume conversion (1 mark)',
+                'Concentration calculation (1 mark)'
               ]
             },
             specReference: 'Edexcel Chemistry Paper 1'
