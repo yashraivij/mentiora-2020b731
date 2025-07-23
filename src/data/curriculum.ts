@@ -26,6 +26,652 @@ export interface Subject {
 
 export const curriculum: Subject[] = [
   {
+    id: 'physics-edexcel',
+    name: 'Physics (Edexcel)',
+    topics: [
+      {
+        id: 'key-concepts-physics',
+        name: 'Key Concepts of Physics',
+        questions: [
+          {
+            id: 'kcp-q1',
+            question: 'State the seven SI base units and their symbols.',
+            marks: 7,
+            difficulty: 'easy',
+            modelAnswer: 'The seven SI base units are: metre (m) for length, kilogram (kg) for mass, second (s) for time, ampere (A) for electric current, kelvin (K) for temperature, mole (mol) for amount of substance, and candela (cd) for luminous intensity.',
+            markingCriteria: {
+              breakdown: [
+                'Correct identification of all seven base units (7 marks - 1 mark each)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (1.1)'
+          },
+          {
+            id: 'kcp-q2',
+            question: 'Convert 2.5 km to metres and express the answer in standard form.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '2.5 km = 2.5 × 1000 m = 2500 m = 2.5 × 10³ m',
+            markingCriteria: {
+              breakdown: [
+                'Correct conversion (1 mark)',
+                'Correct standard form (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (1.2-1.3)'
+          },
+          {
+            id: 'kcp-q3',
+            question: 'Round 0.008567 to 3 significant figures.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: '0.00857',
+            markingCriteria: {
+              breakdown: [
+                'Correct rounding to 3 significant figures (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (1.4)'
+          }
+        ]
+      },
+      {
+        id: 'motion-forces',
+        name: 'Motion & Forces',
+        questions: [
+          {
+            id: 'mf-q1',
+            question: 'Explain the difference between a scalar and a vector quantity. Give two examples of each.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Scalar quantities have magnitude only, no direction. Examples: speed, distance, mass, energy. Vector quantities have both magnitude and direction. Examples: velocity, displacement, force, acceleration.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of scalar (1 mark)',
+                'Two examples of scalars (2 marks)',
+                'Definition of vector (1 mark)',
+                'Two examples of vectors (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (2.1-2.5)'
+          },
+          {
+            id: 'mf-q2',
+            question: 'A car travels 120 m in 8.0 s. Calculate its average speed.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Speed = distance ÷ time = 120 m ÷ 8.0 s = 15 m/s',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct substitution (1 mark)',
+                'Correct answer with units (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (2.6)'
+          },
+          {
+            id: 'mf-q3',
+            question: 'A cyclist accelerates from 2.0 m/s to 8.0 m/s in 3.0 s. Calculate the acceleration.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Acceleration = change in velocity ÷ time = (8.0 - 2.0) ÷ 3.0 = 6.0 ÷ 3.0 = 2.0 m/s²',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct calculation of change in velocity (1 mark)',
+                'Correct final answer with units (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (2.8)'
+          },
+          {
+            id: 'mf-q4',
+            question: 'State Newton\'s First Law of Motion and explain what it means.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Newton\'s First Law states that an object at rest stays at rest, and an object in motion continues to move at constant velocity, unless acted upon by a resultant force. This means objects naturally resist changes to their motion.',
+            markingCriteria: {
+              breakdown: [
+                'Correct statement of the law (2 marks)',
+                'Explanation of meaning (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (2.14)'
+          },
+          {
+            id: 'mf-q5',
+            question: 'Calculate the weight of a 65 kg person on Earth. (g = 9.8 m/s²)',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Weight = mass × gravitational field strength = 65 kg × 9.8 m/s² = 637 N',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct substitution (1 mark)',
+                'Correct answer with units (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (2.16-2.18)'
+          },
+          {
+            id: 'mf-q6',
+            question: 'A force of 200 N acts on an object of mass 25 kg. Calculate the acceleration produced.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Force = mass × acceleration, so acceleration = Force ÷ mass = 200 N ÷ 25 kg = 8.0 m/s²',
+            markingCriteria: {
+              breakdown: [
+                'Correct rearrangement of F = ma (1 mark)',
+                'Correct substitution (1 mark)',
+                'Correct answer with units (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (2.15)'
+          },
+          {
+            id: 'mf-q7',
+            question: 'Calculate the momentum of a 1200 kg car travelling at 15 m/s.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Momentum = mass × velocity = 1200 kg × 15 m/s = 18,000 kg·m/s',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct substitution (1 mark)',
+                'Correct answer with units (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (2.24)'
+          },
+          {
+            id: 'mf-q8',
+            question: 'Explain what happens to stopping distance as speed increases and why this is important for road safety.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Stopping distance increases significantly with speed. It consists of thinking distance (increases proportionally with speed) and braking distance (increases with the square of speed). This means doubling speed roughly quadruples stopping distance, making high-speed collisions much more dangerous.',
+            markingCriteria: {
+              breakdown: [
+                'Identification of stopping distance components (2 marks)',
+                'Relationship with speed (2 marks)',
+                'Road safety implications (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (2.28-2.31)'
+          }
+        ]
+      },
+      {
+        id: 'conservation-energy',
+        name: 'Conservation of Energy',
+        questions: [
+          {
+            id: 'ce-q1',
+            question: 'Calculate the gravitational potential energy of a 2.0 kg object lifted 5.0 m above the ground. (g = 9.8 m/s²)',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'GPE = mass × gravitational field strength × height = 2.0 kg × 9.8 m/s² × 5.0 m = 98 J',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct substitution (1 mark)',
+                'Correct answer with units (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (3.1)'
+          },
+          {
+            id: 'ce-q2',
+            question: 'Calculate the kinetic energy of a 800 kg car travelling at 20 m/s.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'KE = ½ × mass × velocity² = ½ × 800 kg × (20 m/s)² = ½ × 800 × 400 = 160,000 J',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct substitution (1 mark)',
+                'Correct answer with units (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (3.2)'
+          },
+          {
+            id: 'ce-q3',
+            question: 'State the principle of conservation of energy and give an example.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Energy cannot be created or destroyed, only transferred from one form to another. Total energy in a closed system remains constant. Example: A falling ball converts gravitational potential energy to kinetic energy.',
+            markingCriteria: {
+              breakdown: [
+                'Correct statement of conservation principle (2 marks)',
+                'Suitable example (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (3.4, 3.6)'
+          },
+          {
+            id: 'ce-q4',
+            question: 'Calculate the efficiency of a motor that uses 2000 J of electrical energy to produce 1600 J of useful mechanical energy.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Efficiency = (useful energy output ÷ total energy input) × 100% = (1600 ÷ 2000) × 100% = 80%',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct substitution (1 mark)',
+                'Correct answer as percentage (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (3.11)'
+          },
+          {
+            id: 'ce-q5',
+            question: 'Explain why energy is described as being "dissipated" rather than "lost" and give two ways to reduce unwanted energy transfers.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Energy is "dissipated" because it spreads to the surroundings as heat, but is not destroyed - total energy is conserved. Ways to reduce unwanted transfers: lubrication to reduce friction, insulation to reduce heat loss.',
+            markingCriteria: {
+              breakdown: [
+                'Explanation of dissipation (3 marks)',
+                'Two methods to reduce unwanted transfers (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (3.7-3.9)'
+          },
+          {
+            id: 'ce-q6',
+            question: 'Compare renewable and non-renewable energy resources, giving two examples of each.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Renewable resources can be replenished naturally and won\'t run out (examples: wind, solar). Non-renewable resources are finite and will eventually be used up (examples: coal, oil). Renewable sources are generally cleaner but can be less reliable.',
+            markingCriteria: {
+              breakdown: [
+                'Definition and examples of renewable (3 marks)',
+                'Definition and examples of non-renewable (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (3.13-3.14)'
+          }
+        ]
+      },
+      {
+        id: 'waves',
+        name: 'Waves',
+        questions: [
+          {
+            id: 'w-q1',
+            question: 'Explain what waves transfer and give two examples of waves.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Waves transfer energy and information without transferring matter. Examples: sound waves, light waves, water waves, radio waves.',
+            markingCriteria: {
+              breakdown: [
+                'Correct statement of what waves transfer (2 marks)',
+                'Two suitable examples (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (4.1-4.2)'
+          },
+          {
+            id: 'w-q2',
+            question: 'Define the terms frequency, wavelength, and amplitude.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Frequency is the number of waves passing a point per second, measured in hertz (Hz). Wavelength is the distance between two consecutive identical points on a wave (e.g., crest to crest). Amplitude is the maximum displacement from the rest position.',
+            markingCriteria: {
+              breakdown: [
+                'Correct definition of frequency (2 marks)',
+                'Correct definition of wavelength (2 marks)',
+                'Correct definition of amplitude (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (4.3-4.4)'
+          },
+          {
+            id: 'w-q3',
+            question: 'Explain the difference between longitudinal and transverse waves, giving one example of each.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Transverse waves have oscillations perpendicular to the direction of energy transfer (example: light waves). Longitudinal waves have oscillations parallel to the direction of energy transfer (example: sound waves).',
+            markingCriteria: {
+              breakdown: [
+                'Definition of transverse waves with example (3 marks)',
+                'Definition of longitudinal waves with example (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (4.5)'
+          },
+          {
+            id: 'w-q4',
+            question: 'A wave has a frequency of 50 Hz and a wavelength of 4.0 m. Calculate its speed.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Wave speed = frequency × wavelength = 50 Hz × 4.0 m = 200 m/s',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct substitution (1 mark)',
+                'Correct answer with units (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (4.6)'
+          },
+          {
+            id: 'w-q5',
+            question: 'Describe what happens when waves meet boundaries between different materials.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'At boundaries, waves can be reflected (bounced back), refracted (change direction when entering new medium), transmitted (pass through), or absorbed (energy taken in by material). The amount of each depends on the materials and wave properties.',
+            markingCriteria: {
+              breakdown: [
+                'Reflection described (2 marks)',
+                'Refraction described (2 marks)',
+                'Transmission described (2 marks)',
+                'Absorption described (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (4.9-4.11)'
+          },
+          {
+            id: 'w-q6',
+            question: 'Explain how ultrasound is used in medical imaging.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Ultrasound waves (above 20 kHz) are sent into the body. They reflect off internal structures at different rates depending on density. The reflected waves are detected and used to build an image. It\'s safe as it\'s non-ionizing radiation.',
+            markingCriteria: {
+              breakdown: [
+                'Description of ultrasound frequency (1 mark)',
+                'Explanation of reflection process (3 marks)',
+                'Safety aspect mentioned (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (4.13-4.15)'
+          }
+        ]
+      },
+      {
+        id: 'light-electromagnetic-spectrum',
+        name: 'Light & The Electromagnetic Spectrum',
+        questions: [
+          {
+            id: 'les-q1',
+            question: 'State the law of reflection and draw a diagram showing incident ray, reflected ray, and normal.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'The law of reflection states that the angle of incidence equals the angle of reflection. Both angles are measured from the normal (perpendicular line to the surface). Diagram should show incident ray, reflected ray, normal, and equal angles clearly marked.',
+            markingCriteria: {
+              breakdown: [
+                'Correct statement of law (2 marks)',
+                'Correct diagram with labels (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (5.1)'
+          },
+          {
+            id: 'les-q2',
+            question: 'List the electromagnetic spectrum in order of increasing frequency.',
+            marks: 7,
+            difficulty: 'easy',
+            modelAnswer: 'Radio waves, microwaves, infrared, visible light, ultraviolet, X-rays, gamma rays',
+            markingCriteria: {
+              breakdown: [
+                'Correct order of all seven types (7 marks - 1 mark each)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (5.10-5.11)'
+          },
+          {
+            id: 'les-q3',
+            question: 'Explain why all electromagnetic waves have the same speed in a vacuum but different speeds in materials.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'In a vacuum, all EM waves travel at the speed of light (3.0 × 10⁸ m/s) because there are no particles to interact with. In materials, waves interact with atoms differently depending on frequency, causing different amounts of slowing down.',
+            markingCriteria: {
+              breakdown: [
+                'Speed in vacuum stated (2 marks)',
+                'Explanation for vacuum (2 marks)',
+                'Explanation for materials (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (5.13-5.14)'
+          },
+          {
+            id: 'les-q4',
+            question: 'Describe three uses of microwaves and explain one potential hazard.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Uses: cooking food (heating water molecules), mobile phone communication, satellite communication. Hazard: internal heating of body tissues can cause burns or damage.',
+            markingCriteria: {
+              breakdown: [
+                'Three correct uses (3 marks)',
+                'One hazard explained (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (5.21-5.22)'
+          },
+          {
+            id: 'les-q5',
+            question: 'Explain how thermal radiation affects Earth\'s temperature balance.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Earth receives energy from the Sun as electromagnetic radiation. For stable temperature, energy radiated by Earth must equal energy received. Greenhouse gases absorb some outgoing infrared radiation, warming the atmosphere. Changes in this balance affect global temperature.',
+            markingCriteria: {
+              breakdown: [
+                'Energy input from Sun (2 marks)',
+                'Energy balance concept (2 marks)',
+                'Role of greenhouse gases (2 marks)',
+                'Effect on global temperature (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (5.16-5.18)'
+          },
+          {
+            id: 'les-q6',
+            question: 'Compare the hazards and uses of X-rays and gamma rays.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Both are ionizing radiation that can damage cells and cause cancer. X-rays: used for medical imaging, airport security, lower energy. Gamma rays: used for sterilizing equipment, cancer treatment, higher energy and more penetrating.',
+            markingCriteria: {
+              breakdown: [
+                'Common hazards (2 marks)',
+                'X-ray uses (3 marks)',
+                'Gamma ray uses (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (5.21-5.22)'
+          }
+        ]
+      },
+      {
+        id: 'radioactivity',
+        name: 'Radioactivity',
+        questions: [
+          {
+            id: 'r-q1',
+            question: 'Describe the structure of an atom, including the relative sizes and locations of its components.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'An atom has a tiny, dense nucleus containing protons and neutrons, surrounded by electrons in orbit. The nucleus is about 10,000 times smaller than the atom but contains nearly all the mass. Electrons occupy the space around the nucleus.',
+            markingCriteria: {
+              breakdown: [
+                'Nucleus composition (2 marks)',
+                'Electron location (2 marks)',
+                'Relative sizes mentioned (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (6.1-6.4)'
+          },
+          {
+            id: 'r-q2',
+            question: 'Complete this nuclear equation: ²³⁸U → ²³⁴Th + ___',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '⁴He (alpha particle) or ⁴α',
+            markingCriteria: {
+              breakdown: [
+                'Correct mass number (1 mark)',
+                'Correct atomic number/particle identification (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (6.20-6.22)'
+          },
+          {
+            id: 'r-q3',
+            question: 'Compare alpha, beta, and gamma radiation in terms of their nature, penetrating power, and ionizing ability.',
+            marks: 9,
+            difficulty: 'medium',
+            modelAnswer: 'Alpha: helium nucleus, stopped by paper, highly ionizing. Beta: electron, stopped by aluminum, moderately ionizing. Gamma: electromagnetic wave, needs lead to stop, weakly ionizing.',
+            markingCriteria: {
+              breakdown: [
+                'Alpha nature, penetration, ionization (3 marks)',
+                'Beta nature, penetration, ionization (3 marks)',
+                'Gamma nature, penetration, ionization (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (6.15-6.16)'
+          },
+          {
+            id: 'r-q4',
+            question: 'Define half-life and calculate how much of a 80g sample of radioactive material remains after 3 half-lives.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Half-life is the time taken for half the nuclei in a sample to decay. After 1 half-life: 40g remains. After 2 half-lives: 20g remains. After 3 half-lives: 10g remains.',
+            markingCriteria: {
+              breakdown: [
+                'Correct definition of half-life (2 marks)',
+                'Correct calculation showing steps (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (6.25-6.27)'
+          },
+          {
+            id: 'r-q5',
+            question: 'Explain three safety precautions that should be taken when handling radioactive materials.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Use tongs or remote handling to minimize exposure time. Store in lead-lined containers to provide shielding. Maintain distance from source. Monitor exposure with badges. Wash hands after handling.',
+            markingCriteria: {
+              breakdown: [
+                'Three safety precautions correctly explained (6 marks - 2 marks each)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (6.29-6.32)'
+          },
+          {
+            id: 'r-q6',
+            question: 'Describe how radioactive tracers are used in medicine and explain why they have short half-lives.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Radioactive tracers are injected or ingested and their path through the body is tracked using detectors. They concentrate in specific organs, allowing imaging. Short half-lives ensure the radiation exposure is minimized after the procedure is complete.',
+            markingCriteria: {
+              breakdown: [
+                'Description of tracer use (3 marks)',
+                'Explanation of short half-life benefit (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (6.28)'
+          }
+        ]
+      },
+      {
+        id: 'astronomy',
+        name: 'Astronomy',
+        questions: [
+          {
+            id: 'a-q1',
+            question: 'Explain why your weight would be different on the Moon compared to Earth.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Weight = mass × gravitational field strength. Mass stays the same, but the Moon has weaker gravity (about 1/6 of Earth\'s) due to its smaller mass, so weight would be about 1/6 of Earth weight.',
+            markingCriteria: {
+              breakdown: [
+                'Weight formula (1 mark)',
+                'Mass stays constant (1 mark)',
+                'Moon has weaker gravity (1 mark)',
+                'Quantitative comparison (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (7.1)'
+          },
+          {
+            id: 'a-q2',
+            question: 'List the eight planets in order from the Sun.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune',
+            markingCriteria: {
+              breakdown: [
+                'All eight planets in correct order (4 marks - deduct 0.5 marks for each error)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (7.2-7.3)'
+          },
+          {
+            id: 'a-q3',
+            question: 'Explain how gravity keeps planets in orbit around the Sun.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Gravity provides the centripetal force needed for circular motion. It constantly pulls the planet toward the Sun, changing the direction of velocity but not the speed. This creates stable orbital motion where gravity balances the planet\'s tendency to move in a straight line.',
+            markingCriteria: {
+              breakdown: [
+                'Gravity as centripetal force (2 marks)',
+                'Changes direction not speed (2 marks)',
+                'Balance of forces for stable orbit (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (7.5-7.7)'
+          },
+          {
+            id: 'a-q4',
+            question: 'Describe the evidence that supports the Big Bang theory.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Red-shift of distant galaxies shows the universe is expanding. Cosmic microwave background radiation is detected uniformly across the sky, consistent with an early hot, dense state. The abundance of light elements matches Big Bang predictions.',
+            markingCriteria: {
+              breakdown: [
+                'Red-shift evidence (2 marks)',
+                'Cosmic microwave background (2 marks)',
+                'Light element abundance (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (7.9-7.15)'
+          },
+          {
+            id: 'a-q5',
+            question: 'Describe the life cycle of a star similar to our Sun.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Nebula (gas and dust cloud) → gravitational collapse → main sequence star (hydrogen fusion) → red giant (helium fusion, outer layers expand) → white dwarf (core remains after outer layers ejected) → eventual cooling.',
+            markingCriteria: {
+              breakdown: [
+                'Nebula stage (2 marks)',
+                'Main sequence stage (2 marks)',
+                'Red giant stage (2 marks)',
+                'White dwarf stage (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (7.16-7.17)'
+          },
+          {
+            id: 'a-q6',
+            question: 'Explain the advantages of space telescopes over ground-based telescopes.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Space telescopes avoid atmospheric interference, allowing clearer images. They can detect all wavelengths of electromagnetic radiation that would be absorbed by Earth\'s atmosphere. No light pollution or weather problems affect observations.',
+            markingCriteria: {
+              breakdown: [
+                'No atmospheric interference (2 marks)',
+                'Access to all EM wavelengths (2 marks)',
+                'No light pollution/weather issues (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (7.19)'
+          }
+        ]
+      }
+    ]
+  },
+  {
     id: 'chemistry-edexcel',
     name: 'Chemistry (Edexcel)',
     topics: [
