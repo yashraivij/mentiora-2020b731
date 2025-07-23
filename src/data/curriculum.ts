@@ -12901,7 +12901,7 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'edexcel-eng-q1',
-            question: 'Section A: Reading [40 marks]\n\nRead the following extract from a novel carefully and answer the questions that follow.\n\nExtract (from The Woman in Black by Susan Hill):\nI stood absolutely helpless in the middle of the rising water, my arms stretched out, my mouth open in horror. Then I ran. I ran as I had never run before, staggering, slipping, panting, my heart pounding, and still that dreadful sound, the moaning of the child, pursued me.\n\nThe mist was swirling more thickly than ever, and I could see nothing, nothing at all of what lay ahead. I ran blindly. The cry rang out again and again, as it grew fainter and fainter. Then, as suddenly as it had come, the sound died away.\n\nI stopped, gasping for breath, and then began to walk slowly forward, my head down. I was lost in the marshes, in the cold, clammy silence. I began to pray aloud, the first time since childhood that I had done such a thing.\n\nQuestion 1: List four things that happen in the extract.\n(You do not need to use full sentences.)',
+            question: 'Section A: Reading [40 marks]\n\nRead the following extract from a novel carefully and answer the questions that follow.\n\nExtract (from The Woman in Black by Susan Hill):\nI stood absolutely helpless in the middle of the rising water, my arms stretched out, my mouth open in horror. Then I ran. I ran as I had never run before, staggering, slipping, panting, my heart pounding, and still that dreadful sound, the moaning of the child, pursued me.\n\nThe mist was swirling more thickly than ever, and I could see nothing, nothing at all of what lay ahead. I ran blindly. The cry rang out again and again, as it grew fainter and fainter. Then, as suddenly as it had come, the sound died away.\n\nI stopped, gasping for breath, and then began to walk slowly forward, my head down. I was lost in the marshes, in the cold, clammy silence. I began to pray aloud, the first time since childhood that I had done such a thing.\n\n1. List four things that happen in the extract.\n[4 marks]\n(You do not need to use full sentences.)',
             marks: 4,
             difficulty: 'easy',
             modelAnswer: 'Any four from: narrator stands helpless in rising water, narrator runs, narrator hears moaning/crying of child, mist swirls thickly, narrator cannot see ahead, cry grows fainter, sound dies away, narrator stops gasping for breath, narrator walks slowly forward, narrator feels lost in marshes, narrator begins to pray aloud.',
@@ -12914,7 +12914,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'edexcel-eng-q2',
-            question: 'Question 2: How does the writer use language to describe the narrator\'s fear?\nRefer to words, phrases, and language techniques.',
+            question: '2. How does the writer use language to describe the narrator\'s fear?\n[6 marks]\nRefer to words, phrases, and language techniques.',
             marks: 6,
             difficulty: 'medium',
             modelAnswer: 'The writer uses powerful physical imagery to show fear through "my arms stretched out, my mouth open in horror" which creates a visual picture of shock and helplessness. The verb choices "staggering, slipping, panting" show the physical effects of terror, with the repetition emphasizing the chaotic nature of panic. The metaphor of the sound that "pursued me" personifies the cry, making it seem threatening and inescapable. The alliteration in "cold, clammy" creates an uncomfortable atmosphere that reflects the narrator\'s emotional state.',
@@ -12930,7 +12930,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'edexcel-eng-q3',
-            question: 'Question 3: How does the writer create tension in the extract?\nYou should write about:\n• what happens in the extract\n• how the writer uses structure\n• how the writer engages the reader',
+            question: '3. How does the writer create tension in the extract?\n[15 marks]\nYou should write about:\n\n• what happens in the extract\n• how the writer uses structure\n• how the writer engages the reader',
             marks: 15,
             difficulty: 'medium',
             modelAnswer: 'The writer creates tension through a combination of dramatic events, structural techniques, and engaging language. The narrative follows a pattern of escalating fear - from helplessness to panic to exhaustion - which builds tension systematically. The use of short, sharp sentences like "Then I ran" creates urgency and mirrors the narrator\'s breathless state. The writer uses sensory deprivation effectively - the narrator "could see nothing, nothing at all" - which increases vulnerability and reader anxiety. The mysterious "moaning of the child" provides an unexplained threat that haunts the narrator and reader alike. Structurally, the extract moves from action to reflection, with the prayer at the end suggesting desperation. The writer engages readers through vivid physical descriptions and by placing them in the narrator\'s confused, frightened perspective.',
@@ -12946,7 +12946,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'edexcel-eng-q4',
-            question: 'Question 4: In this extract, the narrator faces fear and uncertainty.\nCompare how fear is presented in this extract and in another fiction extract you have studied.',
+            question: '4. In this extract, the narrator faces fear and uncertainty.\nCompare how fear is presented in this extract and in another fiction extract you have studied.\n[15 marks]',
             marks: 15,
             difficulty: 'hard',
             modelAnswer: 'Both extracts present fear through physical and psychological responses, but use different techniques to create this effect. In The Woman in Black, fear is presented through frantic physical action - running, staggering, panting - which shows fear as something that overwhelms rational thought. The fear comes from an external, supernatural threat (the child\'s cry) that the narrator cannot understand or control. Similarly, in [comparison text], fear is also presented through [physical responses/psychological impact], but here the fear stems from [different source - internal conflict/known danger/social pressure]. Both writers use sensory details to immerse readers in the fear experience, but while Hill uses auditory imagery (the "moaning" and "cry"), [comparison writer] focuses more on [visual/tactile/other sensory details]. Structurally, both extracts build tension through [similar/different structural techniques], though Hill\'s use of short sentences creates more immediate panic compared to [comparison text\'s approach]. Both texts ultimately show fear as a dehumanizing force that reduces characters to basic survival instincts.',
@@ -12962,13 +12962,27 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'edexcel-eng-q5',
-            question: 'Section B: Imaginative Writing [24 marks]\nChoose ONE of the following writing tasks. You are advised to spend 45 minutes on this section.\n\nEITHER\nQuestion 5: Write the opening to a story with the title "The Sound in the Fog".\n(You may use ideas from the extract, but do not copy it.)\n\nOR\nQuestion 6: Describe a time when you felt lost or uncertain.',
+            question: 'Section B: Imaginative Writing [24 marks]\nChoose ONE of the following writing tasks. You are advised to spend 45 minutes on this section.\n\nEITHER\n5. Write the opening to a story with the title "The Sound in the Fog".\n(You may use ideas from the extract, but do not copy it.)',
             marks: 24,
             difficulty: 'medium',
             modelAnswer: 'This is a creative writing task. Students should demonstrate:\n\nContent and Organisation (15 marks):\n- Clear, engaging opening that hooks the reader\n- Well-developed ideas with effective description\n- Coherent structure with logical progression\n- Appropriate tone and style for the task\n- Original and imaginative content\n- Effective use of literary techniques\n\nTechnical Accuracy (9 marks):\n- Accurate spelling throughout\n- Correct punctuation including speech marks if dialogue used\n- Varied sentence structures for effect\n- Wide range of vocabulary\n- Accurate grammar and sentence construction\n- Effective paragraphing',
             markingCriteria: {
               breakdown: [
                 'Content and Organisation (15 marks): Ideas, structure, style, originality',
+                'Technical Accuracy (9 marks): Spelling, punctuation, grammar, vocabulary'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          },
+          {
+            id: 'edexcel-eng-q6',
+            question: 'OR\n6. Describe a time when you felt lost or uncertain.',
+            marks: 24,
+            difficulty: 'medium',
+            modelAnswer: 'This is a creative writing task. Students should demonstrate:\n\nContent and Organisation (15 marks):\n- Clear, engaging opening that draws the reader in\n- Well-developed ideas with vivid description\n- Coherent structure with logical progression\n- Appropriate tone and style for descriptive writing\n- Personal reflection and emotional depth\n- Effective use of literary techniques\n\nTechnical Accuracy (9 marks):\n- Accurate spelling throughout\n- Correct punctuation\n- Varied sentence structures for effect\n- Wide range of vocabulary\n- Accurate grammar and sentence construction\n- Effective paragraphing',
+            markingCriteria: {
+              breakdown: [
+                'Content and Organisation (15 marks): Ideas, structure, style, personal voice',
                 'Technical Accuracy (9 marks): Spelling, punctuation, grammar, vocabulary'
               ]
             },
