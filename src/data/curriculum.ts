@@ -35,7 +35,7 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'kcc-q1',
-            question: 'Describe the structure of an atom according to the Dalton model. How does this differ from our modern understanding? (Foundation)',
+            question: 'Describe the structure of an atom according to the Dalton model. How does this differ from our modern understanding?',
             marks: 6,
             difficulty: 'easy',
             modelAnswer: 'Dalton\'s model described atoms as solid, indivisible spheres that could not be broken down further. All atoms of the same element were identical. Modern understanding shows atoms contain subatomic particles: protons and neutrons in the nucleus, with electrons orbiting around it. Atoms are mostly empty space, unlike Dalton\'s solid sphere model.',
@@ -50,7 +50,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'kcc-q2',
-            question: 'An atom has 17 protons, 18 neutrons and 17 electrons. What is its atomic number and mass number? Name this element. (Foundation)',
+            question: 'An atom has 17 protons, 18 neutrons and 17 electrons. What is its atomic number and mass number? Name this element.',
             marks: 4,
             difficulty: 'easy',
             modelAnswer: 'Atomic number = 17 (number of protons). Mass number = 35 (protons + neutrons = 17 + 18). This element is chlorine (Cl).',
@@ -66,7 +66,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'kcc-q3',
-            question: 'Draw dot-and-cross diagrams for sodium chloride (NaCl) formation, showing the transfer of electrons. (Higher)',
+            question: 'Draw dot-and-cross diagrams for sodium chloride (NaCl) formation, showing the transfer of electrons.',
             marks: 8,
             difficulty: 'medium',
             modelAnswer: 'Sodium atom (2.8.1) loses its outer electron to become Na⁺ ion (2.8). Chlorine atom (2.8.7) gains this electron to become Cl⁻ ion (2.8.8). The oppositely charged ions attract electrostatically to form ionic bond. Diagram should show electron shells and electron transfer clearly.',
@@ -82,7 +82,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'kcc-q4',
-            question: 'Calculate the relative formula mass (RFM) of calcium carbonate, CaCO₃. (Ca=40, C=12, O=16) (Foundation)',
+            question: 'Calculate the relative formula mass (RFM) of calcium carbonate, CaCO₃. (Ca=40, C=12, O=16)',
             marks: 3,
             difficulty: 'easy',
             modelAnswer: 'RFM of CaCO₃ = (1 × 40) + (1 × 12) + (3 × 16) = 40 + 12 + 48 = 100',
@@ -97,7 +97,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'kcc-q5',
-            question: 'Explain why diamond has a high melting point while methane has a low melting point, referring to their structures. (Higher)',
+            question: 'Explain why diamond has a high melting point while methane has a low melting point, referring to their structures.',
             marks: 6,
             difficulty: 'hard',
             modelAnswer: 'Diamond has a giant covalent structure where each carbon atom is bonded to four others by strong covalent bonds throughout the structure. Breaking the structure requires breaking many strong covalent bonds, so high energy is needed. Methane has a simple molecular structure with weak intermolecular forces between molecules. Only weak forces need to be overcome, requiring little energy.',
@@ -112,7 +112,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'kcc-q6',
-            question: 'A compound contains 32.4% sodium, 22.6% sulfur and 45.1% oxygen by mass. Calculate its empirical formula. (Na=23, S=32, O=16) (Higher)',
+            question: 'A compound contains 32.4% sodium, 22.6% sulfur and 45.1% oxygen by mass. Calculate its empirical formula. (Na=23, S=32, O=16)',
             marks: 5,
             difficulty: 'hard',
             modelAnswer: 'Na: 32.4/23 = 1.41, S: 22.6/32 = 0.71, O: 45.1/16 = 2.82. Divide by smallest (0.71): Na = 2, S = 1, O = 4. Empirical formula is Na₂SO₄.',
@@ -127,7 +127,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'kcc-q7',
-            question: 'Describe the electron arrangement in atoms of the first 20 elements and explain the pattern. (Foundation)',
+            question: 'Describe the electron arrangement in atoms of the first 20 elements and explain the pattern.',
             marks: 8,
             difficulty: 'medium',
             modelAnswer: 'Electrons occupy shells around the nucleus. First shell holds maximum 2 electrons, second and third shells hold maximum 8 electrons each. Elements fill shells in order: H (1), He (2), Li (2.1), up to Ca (2.8.8.2). The pattern follows the rule that lower energy shells fill first.',
@@ -142,7 +142,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'kcc-q8',
-            question: 'Compare metallic bonding with ionic bonding, giving one example of each. (Higher)',
+            question: 'Compare metallic bonding with ionic bonding, giving one example of each.',
             marks: 6,
             difficulty: 'medium',
             modelAnswer: 'Metallic bonding involves delocalized electrons in a "sea" around metal cations, allowing electron movement (e.g., copper). Ionic bonding involves transfer of electrons from metal to non-metal, creating oppositely charged ions held by electrostatic attraction (e.g., sodium chloride). Metallic bonding allows conductivity; ionic compounds conduct only when molten/dissolved.',
@@ -156,7 +156,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'kcc-q9',
-            question: 'Calculate the number of moles in 44g of carbon dioxide, CO₂. (C=12, O=16) (Foundation)',
+            question: 'Calculate the number of moles in 44g of carbon dioxide, CO₂. (C=12, O=16)',
             marks: 4,
             difficulty: 'easy',
             modelAnswer: 'RFM of CO₂ = 12 + (2 × 16) = 44. Number of moles = mass/RFM = 44/44 = 1 mole.',
@@ -171,7 +171,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'kcc-q10',
-            question: 'Explain why graphite conducts electricity but diamond does not, despite both being forms of carbon. (Higher)',
+            question: 'Explain why graphite conducts electricity but diamond does not, despite both being forms of carbon.',
             marks: 6,
             difficulty: 'hard',
             modelAnswer: 'Both are giant covalent structures, but graphite has delocalized electrons between layers that can move freely, allowing electrical conduction. Diamond has all electrons localized in covalent bonds with no free electrons to carry charge. The layer structure in graphite allows electron mobility, while diamond\'s 3D network locks all electrons in bonds.',
@@ -185,7 +185,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'kcc-q11',
-            question: 'Calculate the percentage composition of oxygen in calcium hydroxide, Ca(OH)₂. (Ca=40, O=16, H=1) (Foundation)',
+            question: 'Calculate the percentage composition of oxygen in calcium hydroxide, Ca(OH)₂. (Ca=40, O=16, H=1)',
             marks: 4,
             difficulty: 'medium',
             modelAnswer: 'RFM of Ca(OH)₂ = 40 + 2(16+1) = 40 + 34 = 74. Mass of oxygen = 2 × 16 = 32. Percentage of oxygen = (32/74) × 100 = 43.2%',
@@ -200,7 +200,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'kcc-q12',
-            question: 'Describe how the periodic table is arranged and explain the patterns in Group 1 metals. (Foundation)',
+            question: 'Describe how the periodic table is arranged and explain the patterns in Group 1 metals.',
             marks: 8,
             difficulty: 'medium',
             modelAnswer: 'Periodic table arranged by atomic number in periods (rows) and groups (columns). Group 1 metals (Li, Na, K) have one electron in outer shell. As you go down the group: atoms get larger, reactivity increases, melting points decrease. This is because outer electron is further from nucleus so more easily lost.',
@@ -216,7 +216,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'kcc-q13',
-            question: 'Draw the structure of water (H₂O) showing covalent bonding. Explain why water molecules are polar. (Higher)',
+            question: 'Draw the structure of water (H₂O) showing covalent bonding. Explain why water molecules are polar.',
             marks: 6,
             difficulty: 'medium',
             modelAnswer: 'Water has bent/angular shape with oxygen in center bonded to two hydrogens. Oxygen is more electronegative than hydrogen, so electrons in covalent bonds are pulled toward oxygen. This creates partial negative charge on oxygen and partial positive charges on hydrogens, making the molecule polar.',
@@ -231,7 +231,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'kcc-q14',
-            question: 'A sample contains 2.0 moles of carbon dioxide. Calculate the mass of this sample. (C=12, O=16) (Foundation)',
+            question: 'A sample contains 2.0 moles of carbon dioxide. Calculate the mass of this sample. (C=12, O=16)',
             marks: 3,
             difficulty: 'easy',
             modelAnswer: 'RFM of CO₂ = 12 + (2 × 16) = 44. Mass = moles × RFM = 2.0 × 44 = 88g',
@@ -246,7 +246,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'kcc-q15',
-            question: 'Explain the difference between isotopes and give an example showing atomic structure. (Higher)',
+            question: 'Explain the difference between isotopes and give an example showing atomic structure.',
             marks: 6,
             difficulty: 'medium',
             modelAnswer: 'Isotopes are atoms of the same element with same number of protons but different numbers of neutrons. Example: Carbon-12 has 6 protons, 6 neutrons, 6 electrons. Carbon-14 has 6 protons, 8 neutrons, 6 electrons. Same atomic number (6) but different mass numbers (12 and 14).',
@@ -261,7 +261,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'kcc-q16',
-            question: 'Compare the properties of ionic and covalent compounds. Give one example of each. (Foundation)',
+            question: 'Compare the properties of ionic and covalent compounds. Give one example of each.',
             marks: 8,
             difficulty: 'medium',
             modelAnswer: 'Ionic compounds: high melting/boiling points, conduct when molten/dissolved, often soluble in water, brittle. Example: sodium chloride. Covalent compounds: low melting/boiling points, do not conduct electricity, often insoluble in water, soft. Example: methane. Differences due to different bonding types.',
@@ -281,7 +281,7 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'smm-q1',
-            question: 'Describe the particle arrangement and movement in solids, liquids and gases. (Foundation)',
+            question: 'Describe the particle arrangement and movement in solids, liquids and gases.',
             marks: 6,
             difficulty: 'easy',
             modelAnswer: 'Solids: particles closely packed in regular arrangement, vibrate about fixed positions. Liquids: particles close together but irregular arrangement, can move past each other. Gases: particles far apart with no regular arrangement, move rapidly in all directions.',
@@ -296,7 +296,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'smm-q2',
-            question: 'Explain why pure substances have sharp melting points while mixtures have melting point ranges. (Higher)',
+            question: 'Explain why pure substances have sharp melting points while mixtures have melting point ranges.',
             marks: 4,
             difficulty: 'medium',
             modelAnswer: 'Pure substances contain only one type of particle, so all particles have the same intermolecular forces and melt at the same temperature. Mixtures contain different substances with different melting points, so they melt over a range of temperatures as each component melts separately.',
@@ -310,7 +310,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'smm-q3',
-            question: 'Describe how paper chromatography can be used to separate and identify the components in black ink. (Foundation)',
+            question: 'Describe how paper chromatography can be used to separate and identify the components in black ink.',
             marks: 6,
             difficulty: 'easy',
             modelAnswer: 'Place drop of ink on chromatography paper near bottom. Stand paper in shallow solvent. Solvent moves up paper carrying ink components at different rates. Different components travel different distances creating separate spots. Compare Rf values with known substances for identification.',
@@ -325,7 +325,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'smm-q4',
-            question: 'Calculate the Rf value for a substance that travels 6cm when the solvent front travels 10cm. (Foundation)',
+            question: 'Calculate the Rf value for a substance that travels 6cm when the solvent front travels 10cm.',
             marks: 2,
             difficulty: 'easy',
             modelAnswer: 'Rf = distance moved by substance / distance moved by solvent = 6/10 = 0.6',
@@ -339,7 +339,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'smm-q5',
-            question: 'Explain how fractional distillation separates crude oil into fractions. (Higher)',
+            question: 'Explain how fractional distillation separates crude oil into fractions.',
             marks: 6,
             difficulty: 'medium',
             modelAnswer: 'Crude oil heated and vaporized. Vapor rises up fractionating column which is cooler at top. Different hydrocarbons have different boiling points. Those with lower boiling points reach higher up column before condensing. Fractions collected at different heights.',
@@ -354,7 +354,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'smm-q6',
-            question: 'Describe the process of crystallization to obtain pure salt from salt solution. (Foundation)',
+            question: 'Describe the process of crystallization to obtain pure salt from salt solution.',
             marks: 4,
             difficulty: 'easy',
             modelAnswer: 'Heat salt solution gently to evaporate water. Stop heating when crystals start to form. Allow solution to cool slowly. Filter to collect crystals. Wash crystals with distilled water and dry.',
@@ -368,7 +368,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'smm-q7',
-            question: 'Explain why sublimation occurs and give an example. (Higher)',
+            question: 'Explain why sublimation occurs and give an example.',
             marks: 4,
             difficulty: 'medium',
             modelAnswer: 'Sublimation is when a solid changes directly to gas without melting. Occurs when intermolecular forces are weak enough that particles can escape directly from solid state when given enough energy. Example: dry ice (solid carbon dioxide) sublimes at room temperature.',
@@ -382,7 +382,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'smm-q8',
-            question: 'Describe how to separate sand, salt and water from a mixture. (Foundation)',
+            question: 'Describe how to separate sand, salt and water from a mixture.',
             marks: 6,
             difficulty: 'medium',
             modelAnswer: 'First filter to separate sand (insoluble) from salt water solution. Sand remains on filter paper. Then crystallize salt solution by evaporation to separate salt from water. Heat gently until crystals form, then cool and filter to collect pure salt.',
@@ -397,7 +397,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'smm-q9',
-            question: 'Explain why water purification is important in chemical analysis. (Higher)',
+            question: 'Explain why water purification is important in chemical analysis.',
             marks: 4,
             difficulty: 'medium',
             modelAnswer: 'Pure water is needed as a solvent to avoid contamination of results. Impurities in water could react with test substances giving false results. Pure water has known properties (pH 7, specific boiling point) needed for accurate measurements. Impure water could interfere with chemical tests.',
@@ -411,7 +411,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'smm-q10',
-            question: 'Compare simple distillation with fractional distillation, stating when each is used. (Higher)',
+            question: 'Compare simple distillation with fractional distillation, stating when each is used.',
             marks: 6,
             difficulty: 'medium',
             modelAnswer: 'Simple distillation separates liquid from dissolved solid or liquids with very different boiling points. Uses single distillation. Fractional distillation separates liquids with similar boiling points using fractionating column for multiple distillations. Simple used for water from salt; fractional used for separating crude oil fractions.',
@@ -431,7 +431,7 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'cc-q1',
-            question: 'Explain the difference between a strong acid and a concentrated acid. (Higher)',
+            question: 'Explain the difference between a strong acid and a concentrated acid.',
             marks: 4,
             difficulty: 'medium',
             modelAnswer: 'Strong acid completely ionizes in water (releases all H⁺ ions), e.g., HCl. Concentrated acid has a high amount of acid dissolved in small amount of water. An acid can be strong but dilute, or weak but concentrated.',
@@ -445,7 +445,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'cc-q2',
-            question: 'Complete the word equation: Copper oxide + Sulfuric acid → ? + ? (Foundation)',
+            question: 'Complete the word equation: Copper oxide + Sulfuric acid → ? + ?',
             marks: 2,
             difficulty: 'easy',
             modelAnswer: 'Copper oxide + Sulfuric acid → Copper sulfate + Water',
@@ -459,7 +459,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'cc-q3',
-            question: 'During electrolysis of copper sulfate solution using copper electrodes, explain what happens at each electrode. (Higher)',
+            question: 'During electrolysis of copper sulfate solution using copper electrodes, explain what happens at each electrode.',
             marks: 6,
             difficulty: 'hard',
             modelAnswer: 'At cathode (negative): Cu²⁺ + 2e⁻ → Cu (copper deposited). At anode (positive): Cu → Cu²⁺ + 2e⁻ (copper dissolves). Overall effect: copper transfers from anode to cathode, purifying the copper.',
@@ -474,7 +474,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'cc-q4',
-            question: 'Write the balanced equation for the neutralization of hydrochloric acid with sodium hydroxide. (Foundation)',
+            question: 'Write the balanced equation for the neutralization of hydrochloric acid with sodium hydroxide.',
             marks: 3,
             difficulty: 'easy',
             modelAnswer: 'HCl + NaOH → NaCl + H₂O',
@@ -489,7 +489,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'cc-q5',
-            question: 'Describe the test for hydrogen gas and explain the result. (Foundation)',
+            question: 'Describe the test for hydrogen gas and explain the result.',
             marks: 3,
             difficulty: 'easy',
             modelAnswer: 'Hold lit splint near gas sample. Hydrogen burns with a \'pop\' sound. This happens because hydrogen burns rapidly in oxygen from air.',
@@ -504,7 +504,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'cc-q6',
-            question: 'Explain how pH changes when an acid is gradually added to an alkali. (Higher)',
+            question: 'Explain how pH changes when an acid is gradually added to an alkali.',
             marks: 4,
             difficulty: 'medium',
             modelAnswer: 'Initially pH is high (alkali). As acid is added, pH gradually decreases. At neutralization point, pH = 7. Further acid addition causes pH to drop below 7 (acidic). The change is gradual then rapid around pH 7.',
@@ -520,7 +520,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'cc-q7',
-            question: 'Define oxidation and reduction in terms of electron transfer. Give an example. (Higher)',
+            question: 'Define oxidation and reduction in terms of electron transfer. Give an example.',
             marks: 6,
             difficulty: 'medium',
             modelAnswer: 'Oxidation is loss of electrons. Reduction is gain of electrons. Example: Mg + CuSO₄ → MgSO₄ + Cu. Magnesium loses electrons (oxidized), copper ions gain electrons (reduced). Remember: OIL RIG (Oxidation Is Loss, Reduction Is Gain).',
@@ -535,7 +535,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'cc-q8',
-            question: 'Describe how to prepare copper sulfate crystals from copper oxide and sulfuric acid. (Foundation)',
+            question: 'Describe how to prepare copper sulfate crystals from copper oxide and sulfuric acid.',
             marks: 6,
             difficulty: 'medium',
             modelAnswer: 'Add excess copper oxide to warm sulfuric acid. Stir until no more dissolves. Filter to remove excess copper oxide. Heat filtrate gently to concentrate. Cool slowly to form crystals. Filter and dry crystals.',
@@ -550,7 +550,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'cc-q9',
-            question: 'Explain why during electrolysis, cations move to the cathode and anions move to the anode. (Higher)',
+            question: 'Explain why during electrolysis, cations move to the cathode and anions move to the anode.',
             marks: 4,
             difficulty: 'medium',
             modelAnswer: 'Cations are positively charged ions. Cathode is negative electrode. Opposite charges attract, so cations move to cathode. Anions are negatively charged ions. Anode is positive electrode. Opposite charges attract, so anions move to anode.',
@@ -564,7 +564,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'cc-q10',
-            question: 'Describe the test for carbon dioxide gas and explain why this result occurs. (Foundation)',
+            question: 'Describe the test for carbon dioxide gas and explain why this result occurs.',
             marks: 4,
             difficulty: 'easy',
             modelAnswer: 'Bubble gas through limewater (calcium hydroxide solution). Limewater turns milky/cloudy. This happens because CO₂ reacts with calcium hydroxide to form insoluble calcium carbonate: Ca(OH)₂ + CO₂ → CaCO₃ + H₂O',
@@ -585,7 +585,7 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'eme-q1',
-            question: 'Place these metals in order of reactivity: copper, zinc, iron, magnesium. Explain your reasoning. (Foundation)',
+            question: 'Place these metals in order of reactivity: copper, zinc, iron, magnesium. Explain your reasoning.',
             marks: 4,
             difficulty: 'easy',
             modelAnswer: 'Order (most to least reactive): Magnesium, zinc, iron, copper. This is based on their reactions with water, acids, and displacement reactions. More reactive metals displace less reactive ones from their compounds.',
@@ -599,7 +599,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'eme-q2',
-            question: 'Explain why aluminum is extracted by electrolysis rather than heating with carbon. (Higher)',
+            question: 'Explain why aluminum is extracted by electrolysis rather than heating with carbon.',
             marks: 4,
             difficulty: 'medium',
             modelAnswer: 'Aluminum is more reactive than carbon, so carbon cannot reduce aluminum oxide. Aluminum oxide has very strong ionic bonds requiring high energy to break. Electrolysis provides enough energy to decompose aluminum oxide into aluminum and oxygen.',
@@ -613,7 +613,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'eme-q3',
-            question: 'In the Haber process, explain how increasing pressure affects the equilibrium position and why. (Higher)',
+            question: 'In the Haber process, explain how increasing pressure affects the equilibrium position and why.',
             marks: 6,
             difficulty: 'hard',
             modelAnswer: 'N₂ + 3H₂ ⇌ 2NH₃. Left side has 4 gas molecules, right side has 2. Increasing pressure favors the side with fewer gas molecules (Le Chatelier\'s principle). Equilibrium shifts right, producing more ammonia. This maximizes efficiency of ammonia production.',
@@ -628,7 +628,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'eme-q4',
-            question: 'Write a word equation for the extraction of iron from iron oxide using carbon. (Foundation)',
+            question: 'Write a word equation for the extraction of iron from iron oxide using carbon.',
             marks: 2,
             difficulty: 'easy',
             modelAnswer: 'Iron oxide + Carbon → Iron + Carbon dioxide',
@@ -642,7 +642,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'eme-q5',
-            question: 'Explain why recycling metals is important for the environment and economy. (Foundation)',
+            question: 'Explain why recycling metals is important for the environment and economy.',
             marks: 6,
             difficulty: 'medium',
             modelAnswer: 'Environmental: Reduces mining damage, saves energy (recycling uses less energy than extraction), reduces waste in landfills. Economic: Cheaper than extracting from ores, creates jobs in recycling industry, conserves finite metal ores for future generations.',
@@ -656,7 +656,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'eme-q6',
-            question: 'Describe what happens in a displacement reaction between zinc and copper sulfate solution. (Foundation)',
+            question: 'Describe what happens in a displacement reaction between zinc and copper sulfate solution.',
             marks: 4,
             difficulty: 'easy',
             modelAnswer: 'Zinc is more reactive than copper. Zinc displaces copper from copper sulfate. Blue solution turns colorless. Brown copper metal forms. Word equation: Zinc + Copper sulfate → Zinc sulfate + Copper',
@@ -671,7 +671,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'eme-q7',
-            question: 'Explain how increasing temperature affects the Haber process equilibrium and industrial conditions. (Higher)',
+            question: 'Explain how increasing temperature affects the Haber process equilibrium and industrial conditions.',
             marks: 6,
             difficulty: 'hard',
             modelAnswer: 'Forward reaction is exothermic (releases heat). Increasing temperature favors endothermic direction (backward reaction). This reduces ammonia yield. However, higher temperature increases reaction rate. Industry uses compromise temperature (450°C) to balance yield and rate.',
@@ -686,7 +686,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'eme-q8',
-            question: 'Compare biological methods of metal extraction with traditional methods. (Higher)',
+            question: 'Compare biological methods of metal extraction with traditional methods.',
             marks: 6,
             difficulty: 'medium',
             modelAnswer: 'Biological methods: Use bacteria or plants, environmentally friendly, low energy, slow process. Traditional methods: High temperature furnaces, faster, high energy consumption, pollution. Phytoextraction uses plants; bioleaching uses bacteria. Biological methods better for low-grade ores.',
@@ -700,7 +700,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'eme-q9',
-            question: 'Describe what dynamic equilibrium means in a reversible reaction. (Higher)',
+            question: 'Describe what dynamic equilibrium means in a reversible reaction.',
             marks: 4,
             difficulty: 'medium',
             modelAnswer: 'Dynamic equilibrium means forward and backward reactions occur at equal rates. Concentrations of reactants and products remain constant. Reactions continue but no overall change is observed. System appears static but is actually dynamic.',
@@ -715,7 +715,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'eme-q10',
-            question: 'Explain the importance of iron as a catalyst in the Haber process. (Higher)',
+            question: 'Explain the importance of iron as a catalyst in the Haber process.',
             marks: 4,
             difficulty: 'medium',
             modelAnswer: 'Iron provides alternative reaction pathway with lower activation energy. Speeds up both forward and backward reactions equally. Does not affect equilibrium position, only rate of reaching equilibrium. Allows industrial process to be economically viable.',
@@ -736,7 +736,7 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'sch-q1',
-            question: 'Explain why transition metals make good catalysts, giving one example. (Higher)',
+            question: 'Explain why transition metals make good catalysts, giving one example.',
             marks: 4,
             difficulty: 'medium',
             modelAnswer: 'Transition metals can form multiple oxidation states, allowing them to provide alternative reaction pathways with lower activation energy. They can form temporary bonds with reactants. Example: Iron in Haber process catalyzes formation of ammonia.',
@@ -750,7 +750,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'sch-q2',
-            question: 'Calculate the atom economy for producing ammonia in the Haber process: N₂ + 3H₂ → 2NH₃ (N=14, H=1) (Higher)',
+            question: 'Calculate the atom economy for producing ammonia in the Haber process: N₂ + 3H₂ → 2NH₃ (N=14, H=1)',
             marks: 4,
             difficulty: 'medium',
             modelAnswer: 'RFM of reactants: N₂ = 28, 3H₂ = 6, total = 34. RFM of desired product: 2NH₃ = 2(14+3) = 34. Atom economy = (34/34) × 100 = 100%',
@@ -765,7 +765,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'sch-q3',
-            question: 'A fuel cell uses hydrogen and oxygen. Write the half equations and overall equation for this reaction. (Higher)',
+            question: 'A fuel cell uses hydrogen and oxygen. Write the half equations and overall equation for this reaction.',
             marks: 6,
             difficulty: 'hard',
             modelAnswer: 'At anode: H₂ → 2H⁺ + 2e⁻. At cathode: O₂ + 4H⁺ + 4e⁻ → 2H₂O. Overall: 2H₂ + O₂ → 2H₂O. Electrons flow from anode to cathode through external circuit.',
@@ -780,7 +780,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'sch-q4',
-            question: 'Calculate the percentage yield if 50g of product is obtained when 80g was theoretically possible. (Higher)',
+            question: 'Calculate the percentage yield if 50g of product is obtained when 80g was theoretically possible.',
             marks: 3,
             difficulty: 'easy',
             modelAnswer: 'Percentage yield = (actual yield / theoretical yield) × 100 = (50/80) × 100 = 62.5%',
@@ -795,7 +795,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'sch-q5',
-            question: 'Describe the properties of transition metals that make them useful in industry. (Higher)',
+            question: 'Describe the properties of transition metals that make them useful in industry.',
             marks: 6,
             difficulty: 'medium',
             modelAnswer: 'High melting and boiling points make them suitable for high-temperature processes. Form colored compounds useful in paints and ceramics. Good catalysts due to variable oxidation states. High density makes them suitable for construction. Malleable and ductile for shaping.',
@@ -809,7 +809,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'sch-q6',
-            question: 'Explain how electroplating works and why it is used. (Higher)',
+            question: 'Explain how electroplating works and why it is used.',
             marks: 6,
             difficulty: 'medium',
             modelAnswer: 'Object to be plated is cathode, coating metal is anode. Electric current passes through electrolyte solution of coating metal ions. Metal ions move to cathode and deposit as thin layer. Used to prevent corrosion, improve appearance, or add specific properties.',
@@ -823,7 +823,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'sch-q7',
-            question: 'Calculate the volume of hydrogen gas produced at r.t.p. when 2 moles of HCl react with excess magnesium. (Higher)',
+            question: 'Calculate the volume of hydrogen gas produced at r.t.p. when 2 moles of HCl react with excess magnesium.',
             marks: 4,
             difficulty: 'medium',
             modelAnswer: 'Mg + 2HCl → MgCl₂ + H₂. 2 moles HCl produce 1 mole H₂. At r.t.p., 1 mole of gas = 24 dm³. Volume = 1 × 24 = 24 dm³',
@@ -838,7 +838,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'sch-q8',
-            question: 'Compare the advantages and disadvantages of hydrogen fuel cells. (Higher)',
+            question: 'Compare the advantages and disadvantages of hydrogen fuel cells.',
             marks: 6,
             difficulty: 'medium',
             modelAnswer: 'Advantages: Only product is water (clean), high efficiency, renewable if hydrogen from electrolysis, quiet operation. Disadvantages: Hydrogen storage problems, expensive to produce, infrastructure not developed, potential safety issues with hydrogen gas.',
@@ -852,7 +852,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'sch-q9',
-            question: 'Explain why sacrificial protection works to prevent rusting of iron. (Higher)',
+            question: 'Explain why sacrificial protection works to prevent rusting of iron.',
             marks: 4,
             difficulty: 'medium',
             modelAnswer: 'More reactive metal (like zinc) is attached to iron. The more reactive metal is oxidized instead of iron. Zinc loses electrons more easily than iron. Iron is protected because it does not lose electrons while zinc is present.',
@@ -866,7 +866,7 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'sch-q10',
-            question: 'Calculate the concentration in mol/dm³ of a solution containing 20g of NaOH in 500cm³ of solution. (Na=23, O=16, H=1) (Higher)',
+            question: 'Calculate the concentration in mol/dm³ of a solution containing 20g of NaOH in 500cm³ of solution. (Na=23, O=16, H=1)',
             marks: 4,
             difficulty: 'medium',
             modelAnswer: 'RFM of NaOH = 23 + 16 + 1 = 40. Moles = 20/40 = 0.5. Volume = 500/1000 = 0.5 dm³. Concentration = 0.5/0.5 = 1.0 mol/dm³',
