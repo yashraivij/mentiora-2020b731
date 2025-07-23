@@ -12901,75 +12901,75 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'edexcel-eng-q1',
-            question: 'Read the extract below from "Great Expectations" by Charles Dickens (1861):\n\n"My sister, Mrs Joe Gargery, was more than twenty years older than I, and had established a great reputation with herself and the neighbours because she had brought me up \'by hand\'. Having at that time to find out for myself what the expression meant, and knowing her to have a hard and heavy hand, and to be much in the habit of laying it upon her husband as well as upon me, I supposed that Joe Gargery and I were both brought up by hand."\n\nFind a word or phrase from lines 1-2 that shows Mrs Joe was proud of raising the narrator.',
-            marks: 1,
+            question: 'Section A: Reading [40 marks]\n\nRead the following extract from a novel carefully and answer the questions that follow.\n\nExtract (from The Woman in Black by Susan Hill):\nI stood absolutely helpless in the middle of the rising water, my arms stretched out, my mouth open in horror. Then I ran. I ran as I had never run before, staggering, slipping, panting, my heart pounding, and still that dreadful sound, the moaning of the child, pursued me.\n\nThe mist was swirling more thickly than ever, and I could see nothing, nothing at all of what lay ahead. I ran blindly. The cry rang out again and again, as it grew fainter and fainter. Then, as suddenly as it had come, the sound died away.\n\nI stopped, gasping for breath, and then began to walk slowly forward, my head down. I was lost in the marshes, in the cold, clammy silence. I began to pray aloud, the first time since childhood that I had done such a thing.\n\nQuestion 1: List four things that happen in the extract.\n(You do not need to use full sentences.)',
+            marks: 4,
             difficulty: 'easy',
-            modelAnswer: '"established a great reputation with herself"',
+            modelAnswer: 'Any four from: narrator stands helpless in rising water, narrator runs, narrator hears moaning/crying of child, mist swirls thickly, narrator cannot see ahead, cry grows fainter, sound dies away, narrator stops gasping for breath, narrator walks slowly forward, narrator feels lost in marshes, narrator begins to pray aloud.',
             markingCriteria: {
               breakdown: [
-                'Accept: "established a great reputation with herself" or "great reputation" (1 mark)'
+                'Four correct events identified from the extract (4 marks - 1 mark each)'
               ]
             },
             specReference: 'Edexcel GCSE English Language 1EN0/01'
           },
           {
             id: 'edexcel-eng-q2',
-            question: 'Read this extract from "Jane Eyre" by Charlotte Brontë (1847):\n\n"There was no possibility of taking a walk that day. We had been wandering, indeed, in the leafless shrubbery an hour in the morning; but since dinner (Mrs. Reed, when there was no company, dined at one o\'clock) the cold winter wind had brought with it clouds so sombre, and a rain so penetrating, that further out-door exercise was now out of the question."\n\nGive two things that show the weather was unpleasant.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'The cold winter wind and penetrating rain show the weather was unpleasant.',
+            question: 'Question 2: How does the writer use language to describe the narrator\'s fear?\nRefer to words, phrases, and language techniques.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The writer uses powerful physical imagery to show fear through "my arms stretched out, my mouth open in horror" which creates a visual picture of shock and helplessness. The verb choices "staggering, slipping, panting" show the physical effects of terror, with the repetition emphasizing the chaotic nature of panic. The metaphor of the sound that "pursued me" personifies the cry, making it seem threatening and inescapable. The alliteration in "cold, clammy" creates an uncomfortable atmosphere that reflects the narrator\'s emotional state.',
             markingCriteria: {
               breakdown: [
-                'One weather feature identified (1 mark)',
-                'Second weather feature identified (1 mark)',
-                'Accept: cold winter wind, penetrating rain, sombre clouds'
+                'Identification of relevant language features (2 marks)',
+                'Analysis of effect on reader (2 marks)',
+                'Use of appropriate terminology (1 mark)',
+                'Reference to text (1 mark)'
               ]
             },
             specReference: 'Edexcel GCSE English Language 1EN0/01'
           },
           {
             id: 'edexcel-eng-q3',
-            question: 'Read this extract from "The Strange Case of Dr Jekyll and Mr Hyde" by Robert Louis Stevenson (1886):\n\n"Mr. Utterson the lawyer was a man of a rugged countenance that was never lighted by a smile; cold, scanty and embarrassed in discourse; backward in sentiment; lean, long, dusty, dreary. And yet somehow lovable. At friendly meetings, and when the wine was to his taste, something eminently human beaconed from his eye; something indeed which never found its way into his talk, but which spoke not only in these silent symbols, but more often and loudly in the acts of his life."\n\nHow does the writer use language and structure to show Mr Utterson\'s character?',
-            marks: 8,
+            question: 'Question 3: How does the writer create tension in the extract?\nYou should write about:\n• what happens in the extract\n• how the writer uses structure\n• how the writer engages the reader',
+            marks: 15,
             difficulty: 'medium',
-            modelAnswer: 'Stevenson uses a series of adjectives "cold, scanty and embarrassed" to create a cumulative effect, building up an image of Utterson as socially awkward. The alliteration in "lean, long, dusty, dreary" emphasizes his unappealing physical appearance through harsh sounds. However, the contrasting phrase "And yet somehow lovable" acts as a turning point, using the conjunction "yet" to introduce contradiction. The metaphor "something eminently human beaconed from his eye" suggests warmth beneath the surface, with "beaconed" implying guidance and hope. The structure moves from negative external description to positive internal qualities, reflecting the duality theme of the novel.',
+            modelAnswer: 'The writer creates tension through a combination of dramatic events, structural techniques, and engaging language. The narrative follows a pattern of escalating fear - from helplessness to panic to exhaustion - which builds tension systematically. The use of short, sharp sentences like "Then I ran" creates urgency and mirrors the narrator\'s breathless state. The writer uses sensory deprivation effectively - the narrator "could see nothing, nothing at all" - which increases vulnerability and reader anxiety. The mysterious "moaning of the child" provides an unexplained threat that haunts the narrator and reader alike. Structurally, the extract moves from action to reflection, with the prayer at the end suggesting desperation. The writer engages readers through vivid physical descriptions and by placing them in the narrator\'s confused, frightened perspective.',
             markingCriteria: {
               breakdown: [
-                'Analysis of adjectives and their effect (2 marks)',
-                'Discussion of alliteration or sound devices (2 marks)',
-                'Analysis of contrast/contradiction (2 marks)',
-                'Comment on metaphor and its effect (2 marks)'
+                'Analysis of events and their effect (5 marks)',
+                'Analysis of structural techniques (5 marks)',
+                'Analysis of reader engagement (3 marks)',
+                'Quality of expression and understanding (2 marks)'
               ]
             },
             specReference: 'Edexcel GCSE English Language 1EN0/01'
           },
           {
             id: 'edexcel-eng-q4',
-            question: 'Read this extract from "Wuthering Heights" by Emily Brontë (1847):\n\n"Wuthering Heights is the name of Mr. Heathcliff\'s dwelling. \'Wuthering\' being a significant provincial adjective, descriptive of the atmospheric tumult to which its station is exposed in stormy weather. Pure, bracing, ventilation they get up there at all times, indeed: one may guess the power of the north wind blowing over the edge, by the excessive slant of a few stunted firs at the end of the house; and by a range of gaunt thorns all stretching their limbs one way, as if craving alms of the sun."\n\nEvaluate how successfully the writer creates a sense of wildness and isolation.',
+            question: 'Question 4: In this extract, the narrator faces fear and uncertainty.\nCompare how fear is presented in this extract and in another fiction extract you have studied.',
             marks: 15,
             difficulty: 'hard',
-            modelAnswer: 'Brontë successfully creates wildness through her choice of vocabulary and imagery. The word "tumult" suggests chaos and violence, while "wuthering" itself implies harsh weather conditions. The personification of thorns "craving alms of the sun" effectively suggests desperation and need, creating sympathy while emphasizing the harsh environment. The "excessive slant" of trees provides concrete evidence of the wind\'s power, making the description believable. The isolation is conveyed through the remote "station" and the focus on natural forces rather than human presence. However, some readers might argue the descriptive language becomes overly elaborate, potentially distancing readers from the immediate sense of place. Overall, the combination of specific detail and figurative language successfully establishes the Gothic atmosphere central to the novel.',
+            modelAnswer: 'Both extracts present fear through physical and psychological responses, but use different techniques to create this effect. In The Woman in Black, fear is presented through frantic physical action - running, staggering, panting - which shows fear as something that overwhelms rational thought. The fear comes from an external, supernatural threat (the child\'s cry) that the narrator cannot understand or control. Similarly, in [comparison text], fear is also presented through [physical responses/psychological impact], but here the fear stems from [different source - internal conflict/known danger/social pressure]. Both writers use sensory details to immerse readers in the fear experience, but while Hill uses auditory imagery (the "moaning" and "cry"), [comparison writer] focuses more on [visual/tactile/other sensory details]. Structurally, both extracts build tension through [similar/different structural techniques], though Hill\'s use of short sentences creates more immediate panic compared to [comparison text\'s approach]. Both texts ultimately show fear as a dehumanizing force that reduces characters to basic survival instincts.',
             markingCriteria: {
               breakdown: [
-                'Evaluation of language choices (4 marks)',
-                'Analysis of imagery and literary devices (4 marks)',
-                'Assessment of overall effectiveness (4 marks)',
-                'Personal response with justification (2 marks)',
-                'Quality of expression (1 mark)'
+                'Comparison of fear presentation techniques (6 marks)',
+                'Analysis of similarities and differences (4 marks)',
+                'Reference to both texts (3 marks)',
+                'Quality of comparison and expression (2 marks)'
               ]
             },
             specReference: 'Edexcel GCSE English Language 1EN0/01'
           },
           {
             id: 'edexcel-eng-q5',
-            question: 'Section B Writing Task:\n\nWrite about a time when you encountered something unexpected or mysterious.\n\nYou should aim to write approximately 300-400 words.',
-            marks: 25,
+            question: 'Section B: Imaginative Writing [24 marks]\nChoose ONE of the following writing tasks. You are advised to spend 45 minutes on this section.\n\nEITHER\nQuestion 5: Write the opening to a story with the title "The Sound in the Fog".\n(You may use ideas from the extract, but do not copy it.)\n\nOR\nQuestion 6: Describe a time when you felt lost or uncertain.',
+            marks: 24,
             difficulty: 'medium',
-            modelAnswer: 'This is a creative writing task. Students should demonstrate:\n- Engaging narrative voice and perspective\n- Vivid descriptive language and imagery\n- Effective structure with clear beginning, development and conclusion\n- Varied sentence structures and vocabulary\n- Accurate spelling, punctuation and grammar\n- Successful creation of atmosphere and mood\n- Original and imaginative content linked to the theme',
+            modelAnswer: 'This is a creative writing task. Students should demonstrate:\n\nContent and Organisation (15 marks):\n- Clear, engaging opening that hooks the reader\n- Well-developed ideas with effective description\n- Coherent structure with logical progression\n- Appropriate tone and style for the task\n- Original and imaginative content\n- Effective use of literary techniques\n\nTechnical Accuracy (9 marks):\n- Accurate spelling throughout\n- Correct punctuation including speech marks if dialogue used\n- Varied sentence structures for effect\n- Wide range of vocabulary\n- Accurate grammar and sentence construction\n- Effective paragraphing',
             markingCriteria: {
               breakdown: [
-                'Content and organisation (15 marks): Ideas, structure, narrative voice',
-                'Technical accuracy (10 marks): Spelling, punctuation, grammar, vocabulary'
+                'Content and Organisation (15 marks): Ideas, structure, style, originality',
+                'Technical Accuracy (9 marks): Spelling, punctuation, grammar, vocabulary'
               ]
             },
             specReference: 'Edexcel GCSE English Language 1EN0/01'
