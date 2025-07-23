@@ -346,7 +346,7 @@ const PredictedQuestions = () => {
           <TabsContent value="aqa" className="mt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                {curriculum
-                 .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'edexcel-english-language')
+                 .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'edexcel-english-language' && subject.id !== 'physics-edexcel')
                  .map((subject) => renderSubjectCard(subject))}
             </div>
           </TabsContent>
@@ -356,8 +356,8 @@ const PredictedQuestions = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                  {curriculum
                    .filter((subject) => {
-                     // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, and edexcel-english-language only in edexcel tab
-                     if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'edexcel-english-language') {
+                      // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, physics-edexcel, and edexcel-english-language only in edexcel tab
+                      if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel' || subject.id === 'edexcel-english-language') {
                        return examBoard === 'edexcel';
                      }
                      
@@ -366,27 +366,29 @@ const PredictedQuestions = () => {
                        return false; // Don't show AQA GCSE subjects in Edexcel tab
                      }
                      
-                     // For other exam boards, show all other subjects as coming soon
-                     return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'edexcel-english-language';
+                      // For other exam boards, show all other subjects as coming soon
+                      return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language';
                    })
                    .sort((a, b) => {
-                     // In edexcel tab, put maths-edexcel first, then business-edexcel-igcse, then chemistry-edexcel, then edexcel-english-language
-                     if (examBoard === 'edexcel') {
-                       if (a.id === 'maths-edexcel') return -1;
-                       if (b.id === 'maths-edexcel') return 1;
-                       if (a.id === 'business-edexcel-igcse') return -1;
-                       if (b.id === 'business-edexcel-igcse') return 1;
-                       if (a.id === 'chemistry-edexcel') return -1;
-                       if (b.id === 'chemistry-edexcel') return 1;
-                       if (a.id === 'edexcel-english-language') return -1;
-                       if (b.id === 'edexcel-english-language') return 1;
-                     }
+                      // In edexcel tab, put maths-edexcel first, then business-edexcel-igcse, then chemistry-edexcel, then physics-edexcel, then edexcel-english-language
+                      if (examBoard === 'edexcel') {
+                        if (a.id === 'maths-edexcel') return -1;
+                        if (b.id === 'maths-edexcel') return 1;
+                        if (a.id === 'business-edexcel-igcse') return -1;
+                        if (b.id === 'business-edexcel-igcse') return 1;
+                        if (a.id === 'chemistry-edexcel') return -1;
+                        if (b.id === 'chemistry-edexcel') return 1;
+                        if (a.id === 'physics-edexcel') return -1;
+                        if (b.id === 'physics-edexcel') return 1;
+                        if (a.id === 'edexcel-english-language') return -1;
+                        if (b.id === 'edexcel-english-language') return 1;
+                      }
                      return 0;
                    })
                    .map((subject) => {
-                     // For non-Edexcel tabs, show subjects as coming soon if they're not actually available
-                     const isAvailable = examBoard === 'edexcel' && 
-                       (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'edexcel-english-language');
+                      // For non-Edexcel tabs, show subjects as coming soon if they're not actually available
+                      const isAvailable = examBoard === 'edexcel' && 
+                        (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel' || subject.id === 'edexcel-english-language');
                     
                     if (!isAvailable && examBoard !== 'edexcel') {
                       return (

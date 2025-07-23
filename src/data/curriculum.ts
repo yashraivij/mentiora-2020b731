@@ -27,7 +27,7 @@ export interface Subject {
 export const curriculum: Subject[] = [
   {
     id: 'physics-edexcel',
-    name: 'Physics (Edexcel)',
+    name: 'Physics',
     topics: [
       {
         id: 'key-concepts-physics',
