@@ -12901,87 +12901,75 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'edexcel-eng-q1',
-            question: 'Read the extract below from "The Mist" by Stephen King:\n\n"The morning after the storm, something was wrong with the world. I noticed it first when I stepped outside to check the damage to our place on Long Lake. Everything seemed muffled, as if the world had been wrapped in cotton. The air felt thick and strange, and there was an odd quality to the light - everything looked slightly sepia-toned, like an old photograph."\n\nSection A - Reading (40 marks)\n\nQuestion 1: List four things you learn about the setting from this extract.\n[4 marks]\n(You do not need to use full sentences.)',
-            marks: 4,
+            question: 'Read the extract below from "Great Expectations" by Charles Dickens (1861):\n\n"My sister, Mrs Joe Gargery, was more than twenty years older than I, and had established a great reputation with herself and the neighbours because she had brought me up \'by hand\'. Having at that time to find out for myself what the expression meant, and knowing her to have a hard and heavy hand, and to be much in the habit of laying it upon her husband as well as upon me, I supposed that Joe Gargery and I were both brought up by hand."\n\nFind a word or phrase from lines 1-2 that shows Mrs Joe was proud of raising the narrator.',
+            marks: 1,
             difficulty: 'easy',
-            modelAnswer: '1. It is morning after a storm\n2. The setting is near Long Lake\n3. There has been damage to property\n4. The atmosphere feels strange/muffled',
+            modelAnswer: '"established a great reputation with herself"',
             markingCriteria: {
               breakdown: [
-                'One mark for each correct point about the setting (4 marks total)',
-                'Accept: morning after storm, Long Lake location, property damage, strange atmosphere, muffled quality, thick air, sepia-toned light'
+                'Accept: "established a great reputation with herself" or "great reputation" (1 mark)'
               ]
             },
             specReference: 'Edexcel GCSE English Language 1EN0/01'
           },
           {
             id: 'edexcel-eng-q2',
-            question: 'How does the writer use language to describe the narrator\'s sense of unease?\n[6 marks]\nRefer to words, phrases, and language techniques.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'The writer creates unease through sensory language that suggests something is "wrong." The word "muffled" implies sound is being suppressed unnaturally, creating tension. The simile "wrapped in cotton" suggests suffocation and isolation. The metaphor of "sepia-toned" light evokes old photographs, implying the world has become somehow outdated or unreal. The repetition of "strange" emphasizes the narrator\'s growing concern.',
+            question: 'Read this extract from "Jane Eyre" by Charlotte Brontë (1847):\n\n"There was no possibility of taking a walk that day. We had been wandering, indeed, in the leafless shrubbery an hour in the morning; but since dinner (Mrs. Reed, when there was no company, dined at one o\'clock) the cold winter wind had brought with it clouds so sombre, and a rain so penetrating, that further out-door exercise was now out of the question."\n\nGive two things that show the weather was unpleasant.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The cold winter wind and penetrating rain show the weather was unpleasant.',
             markingCriteria: {
               breakdown: [
-                'Analysis of specific words/phrases (2 marks)',
-                'Identification of language techniques (2 marks)', 
-                'Explanation of effect on reader (2 marks)'
+                'One weather feature identified (1 mark)',
+                'Second weather feature identified (1 mark)',
+                'Accept: cold winter wind, penetrating rain, sombre clouds'
               ]
             },
             specReference: 'Edexcel GCSE English Language 1EN0/01'
           },
           {
             id: 'edexcel-eng-q3',
-            question: 'How does the writer use structure to build tension in the extract?\n[15 marks]\nYou should write about:\n• what happens in the extract\n• how the writer uses structure\n• how the writer engages the reader',
-            marks: 15,
+            question: 'Read this extract from "The Strange Case of Dr Jekyll and Mr Hyde" by Robert Louis Stevenson (1886):\n\n"Mr. Utterson the lawyer was a man of a rugged countenance that was never lighted by a smile; cold, scanty and embarrassed in discourse; backward in sentiment; lean, long, dusty, dreary. And yet somehow lovable. At friendly meetings, and when the wine was to his taste, something eminently human beaconed from his eye; something indeed which never found its way into his talk, but which spoke not only in these silent symbols, but more often and loudly in the acts of his life."\n\nHow does the writer use language and structure to show Mr Utterson\'s character?',
+            marks: 8,
             difficulty: 'medium',
-            modelAnswer: 'The writer builds tension through careful structural choices. The opening "The morning after the storm" immediately establishes that something significant has happened, creating reader curiosity. The structure moves from external observation to internal realization - first noticing damage, then recognizing something is "wrong." This progression mirrors the narrator\'s growing awareness. Short, declarative sentences like "Everything seemed muffled" create abrupt realizations. The writer engages readers through the narrator\'s confusion - we experience discovery alongside them. The extract ends without resolution, maintaining tension and encouraging readers to continue.',
+            modelAnswer: 'Stevenson uses a series of adjectives "cold, scanty and embarrassed" to create a cumulative effect, building up an image of Utterson as socially awkward. The alliteration in "lean, long, dusty, dreary" emphasizes his unappealing physical appearance through harsh sounds. However, the contrasting phrase "And yet somehow lovable" acts as a turning point, using the conjunction "yet" to introduce contradiction. The metaphor "something eminently human beaconed from his eye" suggests warmth beneath the surface, with "beaconed" implying guidance and hope. The structure moves from negative external description to positive internal qualities, reflecting the duality theme of the novel.',
             markingCriteria: {
               breakdown: [
-                'Summary of events (3 marks)',
-                'Analysis of structural techniques (6 marks)',
-                'Discussion of reader engagement (6 marks)'
+                'Analysis of adjectives and their effect (2 marks)',
+                'Discussion of alliteration or sound devices (2 marks)',
+                'Analysis of contrast/contradiction (2 marks)',
+                'Comment on metaphor and its effect (2 marks)'
               ]
             },
             specReference: 'Edexcel GCSE English Language 1EN0/01'
           },
           {
             id: 'edexcel-eng-q4',
-            question: 'In this extract, the narrator faces fear and uncertainty.\nCompare how fear is presented in this extract and in another fiction extract you have studied.\n[15 marks]',
+            question: 'Read this extract from "Wuthering Heights" by Emily Brontë (1847):\n\n"Wuthering Heights is the name of Mr. Heathcliff\'s dwelling. \'Wuthering\' being a significant provincial adjective, descriptive of the atmospheric tumult to which its station is exposed in stormy weather. Pure, bracing, ventilation they get up there at all times, indeed: one may guess the power of the north wind blowing over the edge, by the excessive slant of a few stunted firs at the end of the house; and by a range of gaunt thorns all stretching their limbs one way, as if craving alms of the sun."\n\nEvaluate how successfully the writer creates a sense of wildness and isolation.',
             marks: 15,
             difficulty: 'hard',
-            modelAnswer: 'Both extracts present fear through atmospheric uncertainty. In the Stephen King extract, fear emerges from environmental wrongness - the "muffled" world suggests supernatural threat. Similarly, in [student\'s chosen text], fear develops through [specific example]. However, King\'s fear is subtle and building, while [comparison text] might present more immediate danger. Both authors use sensory description to create unease, but King focuses on visual and auditory distortion while [comparison text] might emphasize different senses. The structural approach differs - King builds slowly through observation, while [comparison text] might use [different structural technique]. Both effectively engage readers by withholding information about the source of threat.',
+            modelAnswer: 'Brontë successfully creates wildness through her choice of vocabulary and imagery. The word "tumult" suggests chaos and violence, while "wuthering" itself implies harsh weather conditions. The personification of thorns "craving alms of the sun" effectively suggests desperation and need, creating sympathy while emphasizing the harsh environment. The "excessive slant" of trees provides concrete evidence of the wind\'s power, making the description believable. The isolation is conveyed through the remote "station" and the focus on natural forces rather than human presence. However, some readers might argue the descriptive language becomes overly elaborate, potentially distancing readers from the immediate sense of place. Overall, the combination of specific detail and figurative language successfully establishes the Gothic atmosphere central to the novel.',
             markingCriteria: {
               breakdown: [
-                'Analysis of fear in given extract (5 marks)',
-                'Analysis of fear in comparison text (5 marks)',
-                'Clear comparison between both texts (5 marks)'
+                'Evaluation of language choices (4 marks)',
+                'Analysis of imagery and literary devices (4 marks)',
+                'Assessment of overall effectiveness (4 marks)',
+                'Personal response with justification (2 marks)',
+                'Quality of expression (1 mark)'
               ]
             },
             specReference: 'Edexcel GCSE English Language 1EN0/01'
           },
           {
             id: 'edexcel-eng-q5',
-            question: 'Section B - Imaginative Writing (24 marks)\nChoose ONE of the following writing tasks. You are advised to spend 45 minutes on this section.\n\nEITHER\nQuestion 5: Write the opening to a story with the title "The Sound in the Fog".\n(You may use ideas from the extract, but do not copy it.)\n[24 marks]',
-            marks: 24,
+            question: 'Section B Writing Task:\n\nWrite about a time when you encountered something unexpected or mysterious.\n\nYou should aim to write approximately 300-400 words.',
+            marks: 25,
             difficulty: 'medium',
-            modelAnswer: 'This is a creative writing task. Students should demonstrate:\n• Engaging opening that establishes atmosphere\n• Effective use of descriptive language and imagery\n• Clear narrative voice and perspective\n• Appropriate structure for story opening\n• Varied sentence structures and vocabulary\n• Accurate spelling, punctuation and grammar\n• Creative interpretation of the title\n• Atmospheric writing suitable for the genre',
+            modelAnswer: 'This is a creative writing task. Students should demonstrate:\n- Engaging narrative voice and perspective\n- Vivid descriptive language and imagery\n- Effective structure with clear beginning, development and conclusion\n- Varied sentence structures and vocabulary\n- Accurate spelling, punctuation and grammar\n- Successful creation of atmosphere and mood\n- Original and imaginative content linked to the theme',
             markingCriteria: {
               breakdown: [
-                'Content and organisation (15 marks): Ideas, structure, narrative voice, atmospheric writing',
-                'Technical accuracy (9 marks): Spelling, punctuation, grammar, vocabulary'
-              ]
-            },
-            specReference: 'Edexcel GCSE English Language 1EN0/01'
-          },
-          {
-            id: 'edexcel-eng-q6',
-            question: 'OR\nQuestion 6: Describe a time when you felt lost or uncertain.\n[24 marks]',
-            marks: 24,
-            difficulty: 'medium',
-            modelAnswer: 'This is a descriptive writing task. Students should demonstrate:\n• Vivid descriptive language and imagery\n• Clear sense of place and atmosphere\n• Effective use of the five senses\n• Personal voice and reflection\n• Varied sentence structures and vocabulary\n• Accurate spelling, punctuation and grammar\n• Emotional engagement with the topic\n• Sophisticated vocabulary choices',
-            markingCriteria: {
-              breakdown: [
-                'Content and organisation (15 marks): Description, atmosphere, personal voice, emotional engagement',
-                'Technical accuracy (9 marks): Spelling, punctuation, grammar, vocabulary'
+                'Content and organisation (15 marks): Ideas, structure, narrative voice',
+                'Technical accuracy (10 marks): Spelling, punctuation, grammar, vocabulary'
               ]
             },
             specReference: 'Edexcel GCSE English Language 1EN0/01'
