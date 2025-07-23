@@ -13051,8 +13051,8 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Students should write an engaging story opening that establishes setting, character, and mood. The writing should demonstrate creative flair, varied vocabulary, and technical accuracy.',
             markingCriteria: {
               breakdown: [
-                'Content and organisation: ideas, structure, style (15 marks)',
-                'Technical accuracy: spelling, punctuation, grammar (9 marks)'
+                'Content and organisation: ideas, structure, style (20 marks)',
+                'Technical accuracy: spelling, punctuation, grammar (4 marks)'
               ]
             },
             specReference: 'Edexcel GCSE English Language 1EN0/01 Predicted 2026'
@@ -13065,8 +13065,8 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Students should write a descriptive piece that vividly conveys the experience of feeling lost or uncertain. The writing should use sensory details, varied vocabulary, and demonstrate technical accuracy.',
             markingCriteria: {
               breakdown: [
-                'Content and organisation: ideas, structure, style (15 marks)',
-                'Technical accuracy: spelling, punctuation, grammar (9 marks)'
+                'Content and organisation: ideas, structure, style (20 marks)',
+                'Technical accuracy: spelling, punctuation, grammar (4 marks)'
               ]
             },
             specReference: 'Edexcel GCSE English Language 1EN0/01 Predicted 2026'
