@@ -158,13 +158,13 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           return null;
         };
 
-        // Get all subjects from curriculum (excluding geography-paper-2)
-        const curriculumSubjectIds = curriculum.filter(s => s.id !== 'geography-paper-2').map(s => s.id);
+        // Get all subjects from curriculum (excluding geography-paper-2 and edexcel-english-language)
+        const curriculumSubjectIds = curriculum.filter(s => s.id !== 'geography-paper-2' && s.id !== 'edexcel-english-language').map(s => s.id);
         const progressSubjectIds = [...new Set(userProgress.map((p: any) => p.subjectId))];
         const examSubjectIds = [...new Set((predictedExamData || []).map(exam => exam.subject_id))];
         
-        // Include all curriculum subjects plus any additional subjects from progress/exams
-        const additionalSubjects = [...progressSubjectIds, ...examSubjectIds].filter(id => !curriculumSubjectIds.includes(id));
+        // Include all curriculum subjects plus any additional subjects from progress/exams (but exclude edexcel-english-language)
+        const additionalSubjects = [...progressSubjectIds, ...examSubjectIds].filter(id => !curriculumSubjectIds.includes(id) && id !== 'edexcel-english-language');
         const allSubjectIds = [...curriculumSubjectIds, ...additionalSubjects];
 
         // Process only subjects that have data
