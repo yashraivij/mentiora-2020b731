@@ -99,7 +99,7 @@ const PredictedQuestions = () => {
   };
 
   const getBadgeText = (subjectId: string) => {
-    if (subjectId === 'maths-edexcel' || subjectId === 'business-edexcel-igcse' || subjectId === 'chemistry-edexcel' || subjectId === 'edexcel-english-language') {
+    if (subjectId === 'maths-edexcel' || subjectId === 'business-edexcel-igcse' || subjectId === 'chemistry-edexcel' || subjectId === 'physics-edexcel' || subjectId === 'edexcel-english-language') {
       return 'Edexcel GCSE';
     }
     return 'AQA GCSE';
