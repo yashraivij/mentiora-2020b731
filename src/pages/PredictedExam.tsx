@@ -298,7 +298,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
   };
 
   const getBadgeText = (subjectId: string) => {
-    if (subjectId === 'maths-edexcel' || subjectId === 'business-edexcel-igcse' || subjectId === 'chemistry-edexcel' || subjectId === 'physics-edexcel' || subjectId === 'edexcel-english-language') {
+    if (subjectId === 'maths-edexcel' || subjectId === 'business-edexcel-igcse' || subjectId === 'chemistry-edexcel' || subjectId === 'physics-edexcel') {
       return 'Edexcel GCSE';
     }
     return 'AQA GCSE';
