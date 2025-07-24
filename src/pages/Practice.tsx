@@ -11,6 +11,7 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
 
 interface QuestionAttempt {
   questionId: string;
@@ -226,6 +227,40 @@ const Practice = () => {
       
       setAttempts([...attempts, attempt]);
       setShowFeedback(true);
+      
+      // Generate notebook entry if marks were lost
+      if (markingResult.marksAwarded < currentQuestion.marks && user?.id) {
+        try {
+          await NotebookGenerator.generateNotebookEntry(user.id, {
+            subject: subject?.name || 'Unknown',
+            paper: `${subject?.name} Paper 1`, // Default to Paper 1 for practice
+            topic: topic?.name || 'Unknown Topic',
+            subtopic: currentQuestion.specReference || 'General',
+            questionId: currentQuestion.id,
+            questionLabel: `Practice Q${currentQuestionIndex + 1}: ${currentQuestion.question.substring(0, 50)}...`,
+            questionText: currentQuestion.question,
+            correctAnswer: currentQuestion.modelAnswer,
+            userAnswer,
+            score: markingResult.marksAwarded,
+            maxMarks: currentQuestion.marks,
+            skillType: currentQuestion.difficulty || 'General'
+          });
+          
+          // Show notebook notification if significant marks lost
+          const marksLost = currentQuestion.marks - markingResult.marksAwarded;
+          if (marksLost >= 2) {
+            toast.success(`📝 Added notes to your Notebook for this topic!`, {
+              duration: 4000,
+              action: {
+                label: "→ View Notebook",
+                onClick: () => navigate('/notebook')
+              }
+            });
+          }
+        } catch (error) {
+          console.error('Error generating notebook entry:', error);
+        }
+      }
       
       // Show success toast with score
       toast.success(`Answer marked! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks`);
@@ -1030,6 +1065,28 @@ const Practice = () => {
                     <h4 className="font-semibold text-foreground mb-2">Specification Reference</h4>
                     <Badge variant="outline">{currentAttempt.feedback.specLink}</Badge>
                   </div>
+
+                  {/* Notebook Button for lost marks */}
+                  {currentAttempt.score < currentQuestion.marks && (
+                    <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-4 rounded-lg border border-purple-200 dark:border-purple-800">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className="font-semibold text-purple-700 dark:text-purple-300 mb-1">
+                            📝 Added to Your Notebook
+                          </h4>
+                          <p className="text-sm text-purple-600 dark:text-purple-400">
+                            Personalized study notes created for this topic
+                          </p>
+                        </div>
+                        <Button 
+                          onClick={() => navigate('/notebook')}
+                          className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
+                        >
+                          → View Notebook
+                        </Button>
+                      </div>
+                    </div>
+                  )}
 
                   <Button onClick={handleNextQuestion} className="w-full">
                     {currentQuestionIndex < shuffledQuestions.length - 1 ? "Next Question" : "Finish Session"}
