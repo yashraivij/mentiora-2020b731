@@ -12975,6 +12975,103 @@ export const curriculum: Subject[] = [
             specReference: 'Edexcel GCSE English Language 1EN0/01'
           }
         ]
+      },
+      {
+        id: '2026-predicted-exam',
+        name: '2026 Predicted Exam Questions',
+        questions: [
+          {
+            id: 'predicted-2026-q1',
+            question: 'Read the fiction extract provided.\n\nList four things you learn about the setting.\n\n[Section A - Reading]',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Students should identify four clear details about the setting from the extract. Examples might include: time period, geographical location, physical environment, social context, weather conditions, or atmosphere.',
+            markingCriteria: {
+              breakdown: [
+                'One clear detail about setting (1 mark)',
+                'Second clear detail about setting (1 mark)',
+                'Third clear detail about setting (1 mark)',
+                'Fourth clear detail about setting (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          },
+          {
+            id: 'predicted-2026-q2',
+            question: 'How does the writer use language to describe fear?\n\nYou should refer to the extract in your answer.\n\n[Section A - Reading]',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Students should analyze specific language techniques used to convey fear, such as: word choice/vocabulary, imagery, metaphors, similes, personification, sentence structure, sound devices. They should quote from the text and explain the effect of these techniques.',
+            markingCriteria: {
+              breakdown: [
+                'Identification of language techniques (2 marks)',
+                'Use of relevant quotations (2 marks)',
+                'Analysis of effects and impact (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          },
+          {
+            id: 'predicted-2026-q3',
+            question: 'How does the writer use structure to build tension in the extract?\n\nYou should refer to the extract in your answer.\n\n[Section A - Reading]',
+            marks: 15,
+            difficulty: 'hard',
+            modelAnswer: 'Students should analyze structural techniques such as: paragraph structure, sentence lengths, shift in focus, chronological progression, repetition, withholding information, pace, beginnings and endings. They should explain how these techniques specifically build tension and engage the reader.',
+            markingCriteria: {
+              breakdown: [
+                'Identification of structural techniques (4 marks)',
+                'Analysis of how tension is built (6 marks)',
+                'Use of textual references (3 marks)',
+                'Quality of expression and argument (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          },
+          {
+            id: 'predicted-2026-q4',
+            question: 'Compare how fear is presented in this extract and in another text you have studied.\n\nYou should consider:\n• the writers\' different approaches to presenting fear\n• the effects of these approaches on the reader\n\n[Section A - Reading]',
+            marks: 15,
+            difficulty: 'hard',
+            modelAnswer: 'Students should compare the presentation of fear between the given extract and another studied text. They should discuss: different language techniques, structural approaches, contexts, and the effects on readers. The comparison should be balanced and well-supported with evidence.',
+            markingCriteria: {
+              breakdown: [
+                'Comparison of language techniques (4 marks)',
+                'Comparison of effects on reader (4 marks)',
+                'Use of evidence from both texts (4 marks)',
+                'Quality of comparison and expression (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          },
+          {
+            id: 'predicted-2026-q5',
+            question: 'Write the opening of a story called "The Sound in the Fog".\n\nIn your writing, create a sense of mystery and atmosphere.\n\n[Section B - Imaginative Writing]\n\n(20 marks for content and organisation + 4 marks for technical accuracy)',
+            marks: 24,
+            difficulty: 'medium',
+            modelAnswer: 'Students should write an engaging story opening that creates mystery and atmosphere. They should demonstrate: effective narrative voice, vivid descriptive language, varied sentence structures, clear structure, and technical accuracy in spelling, punctuation and grammar.',
+            markingCriteria: {
+              breakdown: [
+                'Content and organisation (20 marks): Ideas, structure, language, narrative techniques',
+                'Technical accuracy (4 marks): Spelling, punctuation, grammar'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          },
+          {
+            id: 'predicted-2026-q6',
+            question: 'Describe a time when you felt lost or uncertain.\n\nFocus on your thoughts and feelings as well as what you could see, hear and feel around you.\n\n[Section B - Imaginative Writing]\n\n(20 marks for content and organisation + 4 marks for technical accuracy)',
+            marks: 24,
+            difficulty: 'medium',
+            modelAnswer: 'Students should write a descriptive piece focusing on thoughts, feelings and sensory details. They should demonstrate: effective use of descriptive techniques, varied vocabulary, clear structure, engagement with the topic, and technical accuracy in spelling, punctuation and grammar.',
+            markingCriteria: {
+              breakdown: [
+                'Content and organisation (20 marks): Ideas, structure, language, descriptive techniques',
+                'Technical accuracy (4 marks): Spelling, punctuation, grammar'
+              ]
+            },
+            specReference: 'Edexcel GCSE English Language 1EN0/01'
+          }
+        ]
       }
     ]
   }
