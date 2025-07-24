@@ -29,13 +29,379 @@ export const curriculum: Subject[] = [
     id: 'aqa-combined-science-trilogy',
     name: 'Combined Science (Trilogy)',
     topics: [
-      // BIOLOGY TOPICS
+      // BIOLOGY TOPICS - PAPER 1 (B1-B4)
       {
-        id: 'cell-structure-biology',
-        name: 'Cell Structure — (Biology)',
+        id: 'cell-biology',
+        name: 'Cell biology — (Biology)',
         questions: [
           {
-            id: 'cs-bio-q1',
+            id: 'cb-q1',
+            question: 'Compare the structure of a plant cell and an animal cell.',
+            marks: 6,
+            difficulty: 'medium' as const,
+            modelAnswer: 'Similarities: Both have cell membrane, cytoplasm, nucleus. Differences: Plant cells have cell wall, chloroplasts, and large permanent vacuole; animal cells do not have these structures.',
+            markingCriteria: { breakdown: ['Three similarities (3 marks)', 'Three differences (3 marks)'] },
+            specReference: 'AQA Combined Science Biology B1'
+          }
+        ]
+      },
+      {
+        id: 'organisation',
+        name: 'Organisation — (Biology)',
+        questions: [
+          {
+            id: 'org-q1',
+            question: 'Describe the levels of organisation in multicellular organisms.',
+            marks: 4,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Cells → Tissues → Organs → Organ Systems → Organisms.',
+            markingCriteria: { breakdown: ['Correct sequence (4 marks)'] },
+            specReference: 'AQA Combined Science Biology B2'
+          }
+        ]
+      },
+      {
+        id: 'infection-and-response',
+        name: 'Infection and response — (Biology)',
+        questions: [
+          {
+            id: 'ir-q1',
+            question: 'Describe the differences between communicable and non-communicable diseases.',
+            marks: 4,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Communicable diseases can be spread between individuals. Non-communicable diseases cannot be spread.',
+            markingCriteria: { breakdown: ['Communicable definition (2 marks)', 'Non-communicable definition (2 marks)'] },
+            specReference: 'AQA Combined Science Biology B3'
+          }
+        ]
+      },
+      {
+        id: 'bioenergetics',
+        name: 'Bioenergetics — (Biology)',
+        questions: [
+          {
+            id: 'bioen-q1',
+            question: 'Write the word equation for photosynthesis.',
+            marks: 2,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Carbon dioxide + Water → Glucose + Oxygen',
+            markingCriteria: { breakdown: ['Correct equation (2 marks)'] },
+            specReference: 'AQA Combined Science Biology B4'
+          }
+        ]
+      },
+      // BIOLOGY TOPICS - PAPER 2 (B5-B8)
+      {
+        id: 'homeostasis-and-response',
+        name: 'Homeostasis and response — (Biology)',
+        questions: [
+          {
+            id: 'hr-q1',
+            question: 'Define homeostasis.',
+            marks: 2,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Homeostasis is the regulation of internal conditions to maintain optimum conditions for enzyme action.',
+            markingCriteria: { breakdown: ['Correct definition (2 marks)'] },
+            specReference: 'AQA Combined Science Biology B5'
+          }
+        ]
+      },
+      {
+        id: 'inheritance-variation-evolution',
+        name: 'Inheritance, variation and evolution — (Biology)',
+        questions: [
+          {
+            id: 'ive-q1',
+            question: 'Explain the difference between mitosis and meiosis.',
+            marks: 4,
+            difficulty: 'medium' as const,
+            modelAnswer: 'Mitosis produces 2 diploid identical cells. Meiosis produces 4 haploid different gametes.',
+            markingCriteria: { breakdown: ['Mitosis (2 marks)', 'Meiosis (2 marks)'] },
+            specReference: 'AQA Combined Science Biology B6'
+          }
+        ]
+      },
+      {
+        id: 'ecology',
+        name: 'Ecology — (Biology)',
+        questions: [
+          {
+            id: 'eco-q1',
+            question: 'Define ecosystem, population, community, and habitat.',
+            marks: 4,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Ecosystem: all organisms and environment. Population: same species in area. Community: all populations. Habitat: where organism lives.',
+            markingCriteria: { breakdown: ['Four definitions (4 marks)'] },
+            specReference: 'AQA Combined Science Biology B7'
+          }
+        ]
+      },
+      // CHEMISTRY TOPICS - PAPER 1 (C1-C5)
+      {
+        id: 'atomic-structure-periodic-table',
+        name: 'Atomic structure and the periodic table — (Chemistry)',
+        questions: [
+          {
+            id: 'aspt-q1',
+            question: 'Describe the structure of an atom.',
+            marks: 4,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Nucleus contains protons and neutrons. Electrons orbit in shells around nucleus.',
+            markingCriteria: { breakdown: ['Nucleus description (2 marks)', 'Electron arrangement (2 marks)'] },
+            specReference: 'AQA Combined Science Chemistry C1'
+          }
+        ]
+      },
+      {
+        id: 'bonding-structure-properties',
+        name: 'Bonding, structure, and the properties of matter — (Chemistry)',
+        questions: [
+          {
+            id: 'bsp-q1',
+            question: 'Describe ionic bonding.',
+            marks: 4,
+            difficulty: 'medium' as const,
+            modelAnswer: 'Metal loses electrons, non-metal gains electrons. Opposite charges attract forming ionic bond.',
+            markingCriteria: { breakdown: ['Electron transfer (2 marks)', 'Attraction (2 marks)'] },
+            specReference: 'AQA Combined Science Chemistry C2'
+          }
+        ]
+      },
+      {
+        id: 'quantitative-chemistry',
+        name: 'Quantitative chemistry — (Chemistry)',
+        questions: [
+          {
+            id: 'qc-q1',
+            question: 'Calculate the relative formula mass of water (H₂O). [H=1, O=16]',
+            marks: 2,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Mr = (2 × 1) + 16 = 18',
+            markingCriteria: { breakdown: ['Correct calculation (2 marks)'] },
+            specReference: 'AQA Combined Science Chemistry C3'
+          }
+        ]
+      },
+      {
+        id: 'chemical-changes',
+        name: 'Chemical changes — (Chemistry)',
+        questions: [
+          {
+            id: 'cc-q1',
+            question: 'Define oxidation and reduction.',
+            marks: 4,
+            difficulty: 'medium' as const,
+            modelAnswer: 'Oxidation is loss of electrons. Reduction is gain of electrons.',
+            markingCriteria: { breakdown: ['Oxidation (2 marks)', 'Reduction (2 marks)'] },
+            specReference: 'AQA Combined Science Chemistry C4'
+          }
+        ]
+      },
+      {
+        id: 'energy-changes',
+        name: 'Energy changes — (Chemistry)',
+        questions: [
+          {
+            id: 'ec-q1',
+            question: 'Explain exothermic and endothermic reactions.',
+            marks: 4,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Exothermic releases energy. Endothermic absorbs energy.',
+            markingCriteria: { breakdown: ['Exothermic (2 marks)', 'Endothermic (2 marks)'] },
+            specReference: 'AQA Combined Science Chemistry C5'
+          }
+        ]
+      },
+      // CHEMISTRY TOPICS - PAPER 2 (C6-C10)
+      {
+        id: 'rate-extent-chemical-change',
+        name: 'The rate and extent of chemical change — (Chemistry)',
+        questions: [
+          {
+            id: 'recc-q1',
+            question: 'List factors affecting reaction rate.',
+            marks: 4,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Temperature, concentration, surface area, catalyst.',
+            markingCriteria: { breakdown: ['Four factors (4 marks)'] },
+            specReference: 'AQA Combined Science Chemistry C6'
+          }
+        ]
+      },
+      {
+        id: 'organic-chemistry',
+        name: 'Organic chemistry — (Chemistry)',
+        questions: [
+          {
+            id: 'oc-q1',
+            question: 'Describe crude oil composition.',
+            marks: 3,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Mixture of hydrocarbons of different chain lengths.',
+            markingCriteria: { breakdown: ['Hydrocarbon mixture (3 marks)'] },
+            specReference: 'AQA Combined Science Chemistry C7'
+          }
+        ]
+      },
+      {
+        id: 'chemical-analysis',
+        name: 'Chemical analysis — (Chemistry)',
+        questions: [
+          {
+            id: 'ca-q1',
+            question: 'Describe chromatography.',
+            marks: 4,
+            difficulty: 'medium' as const,
+            modelAnswer: 'Separates mixtures based on different solubilities in mobile phase.',
+            markingCriteria: { breakdown: ['Separation principle (4 marks)'] },
+            specReference: 'AQA Combined Science Chemistry C8'
+          }
+        ]
+      },
+      {
+        id: 'chemistry-atmosphere',
+        name: 'Chemistry of the atmosphere — (Chemistry)',
+        questions: [
+          {
+            id: 'coa-q1',
+            question: 'State the composition of Earth\'s atmosphere.',
+            marks: 3,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Nitrogen 78%, Oxygen 21%, Other gases 1%.',
+            markingCriteria: { breakdown: ['Three percentages (3 marks)'] },
+            specReference: 'AQA Combined Science Chemistry C9'
+          }
+        ]
+      },
+      {
+        id: 'using-resources',
+        name: 'Using resources — (Chemistry)',
+        questions: [
+          {
+            id: 'ur-q1',
+            question: 'Compare renewable and finite resources.',
+            marks: 4,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Renewable can be replaced. Finite will run out.',
+            markingCriteria: { breakdown: ['Renewable (2 marks)', 'Finite (2 marks)'] },
+            specReference: 'AQA Combined Science Chemistry C10'
+          }
+        ]
+      },
+      // PHYSICS TOPICS - PAPER 1 (P1-P4)
+      {
+        id: 'energy-physics',
+        name: 'Energy — (Physics)',
+        questions: [
+          {
+            id: 'energy-q1',
+            question: 'List energy stores.',
+            marks: 4,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Kinetic, gravitational potential, elastic, chemical.',
+            markingCriteria: { breakdown: ['Four energy stores (4 marks)'] },
+            specReference: 'AQA Combined Science Physics P1'
+          }
+        ]
+      },
+      {
+        id: 'electricity-physics',
+        name: 'Electricity — (Physics)',
+        questions: [
+          {
+            id: 'elec-q1',
+            question: 'State the equation for charge.',
+            marks: 1,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Q = I × t',
+            markingCriteria: { breakdown: ['Correct equation (1 mark)'] },
+            specReference: 'AQA Combined Science Physics P2'
+          }
+        ]
+      },
+      {
+        id: 'particle-model-matter',
+        name: 'Particle model of matter — (Physics)',
+        questions: [
+          {
+            id: 'pmm-q1',
+            question: 'Define density.',
+            marks: 2,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Mass per unit volume. Density = mass ÷ volume',
+            markingCriteria: { breakdown: ['Definition and equation (2 marks)'] },
+            specReference: 'AQA Combined Science Physics P3'
+          }
+        ]
+      },
+      {
+        id: 'atomic-structure-physics',
+        name: 'Atomic structure — (Physics)',
+        questions: [
+          {
+            id: 'asp-q1',
+            question: 'Name types of nuclear radiation.',
+            marks: 3,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Alpha, beta, gamma.',
+            markingCriteria: { breakdown: ['Three types (3 marks)'] },
+            specReference: 'AQA Combined Science Physics P4'
+          }
+        ]
+      },
+      // PHYSICS TOPICS - PAPER 2 (P5-P7)
+      {
+        id: 'forces-physics',
+        name: 'Forces — (Physics)',
+        questions: [
+          {
+            id: 'forces-q1',
+            question: 'State Newton\'s first law.',
+            marks: 2,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Object at rest stays at rest unless acted upon by resultant force.',
+            markingCriteria: { breakdown: ['First law statement (2 marks)'] },
+            specReference: 'AQA Combined Science Physics P5'
+          }
+        ]
+      },
+      {
+        id: 'waves-physics',
+        name: 'Waves — (Physics)',
+        questions: [
+          {
+            id: 'waves-q1',
+            question: 'State the wave equation.',
+            marks: 1,
+            difficulty: 'easy' as const,
+            modelAnswer: 'v = f × λ',
+            markingCriteria: { breakdown: ['Correct equation (1 mark)'] },
+            specReference: 'AQA Combined Science Physics P6'
+          }
+        ]
+      },
+      {
+        id: 'magnetism-electromagnetism',
+        name: 'Magnetism and electromagnetism — (Physics)',
+        questions: [
+          {
+            id: 'me-q1',
+            question: 'Describe magnetic field lines.',
+            marks: 3,
+            difficulty: 'easy' as const,
+            modelAnswer: 'Start at north pole, end at south pole, never cross.',
+            markingCriteria: { breakdown: ['Field line properties (3 marks)'] },
+            specReference: 'AQA Combined Science Physics P7'
+          }
+        ]
+      }
+      // BIOLOGY TOPICS - PAPER 1 (B1-B4)
+      {
+        id: 'cell-biology',
+        name: 'Cell biology — (Biology)',
+        questions: [
+          {
+            id: 'cb-q1',
             question: 'Compare the structure of a plant cell and an animal cell, identifying three similarities and three differences.',
             marks: 6,
             difficulty: 'medium',
@@ -46,10 +412,10 @@ export const curriculum: Subject[] = [
                 'Three correct differences (3 marks)'
               ]
             },
-            specReference: 'AQA Combined Science Biology 4.1.1'
+            specReference: 'AQA Combined Science Biology B1'
           },
           {
-            id: 'cs-bio-q2',
+            id: 'cb-q2',
             question: 'Explain the difference between prokaryotic and eukaryotic cells, giving one example of each.',
             marks: 4,
             difficulty: 'easy',
@@ -60,10 +426,10 @@ export const curriculum: Subject[] = [
                 'Definition of eukaryotic with example (2 marks)'
               ]
             },
-            specReference: 'AQA Combined Science Biology 4.1.1'
+            specReference: 'AQA Combined Science Biology B1'
           },
           {
-            id: 'cs-bio-q3',
+            id: 'cb-q3',
             question: 'Calculate the total magnification when using a ×10 eyepiece lens and a ×40 objective lens.',
             marks: 2,
             difficulty: 'easy',
@@ -74,40 +440,53 @@ export const curriculum: Subject[] = [
                 'Correct answer (1 mark)'
               ]
             },
-            specReference: 'AQA Combined Science Biology 4.1.1'
+            specReference: 'AQA Combined Science Biology B1'
           },
           {
-            id: 'cs-bio-q4',
-            question: 'Describe how to prepare a slide to observe plant cells under a light microscope.',
+            id: 'cb-q4',
+            question: 'Describe the process of mitosis and explain why it is important for organisms.',
             marks: 6,
             difficulty: 'medium',
-            modelAnswer: 'Cut thin section of plant tissue with sharp blade. Place on microscope slide. Add drop of water. Lower coverslip carefully to avoid air bubbles. Start with lowest magnification objective lens. Focus using coarse adjustment, then fine adjustment.',
+            modelAnswer: 'Mitosis produces two genetically identical diploid cells from one diploid cell. Chromosomes duplicate, line up at cell center, separate to opposite poles, then cell divides. Important for growth, repair, and asexual reproduction.',
             markingCriteria: {
               breakdown: [
-                'Correct sample preparation (2 marks)',
-                'Correct slide preparation (2 marks)',
-                'Correct microscope use (2 marks)'
+                'Description of mitosis process (3 marks)',
+                'Importance explained (3 marks)'
               ]
             },
-            specReference: 'AQA Combined Science Biology 4.1.1'
+            specReference: 'AQA Combined Science Biology B1'
           },
           {
-            id: 'cs-bio-q5',
-            question: 'State the function of the following cell organelles: nucleus, mitochondria, ribosomes.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Nucleus: controls cell activities and contains genetic material. Mitochondria: site of aerobic respiration, releases energy. Ribosomes: site of protein synthesis.',
+            id: 'cb-q5',
+            question: 'Explain how the surface area to volume ratio affects the efficiency of exchange in cells.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Smaller cells have larger surface area to volume ratio. This allows more efficient exchange of substances across cell membrane. Large cells need specialized exchange surfaces to maintain efficiency.',
             markingCriteria: {
               breakdown: [
-                'Nucleus function (1 mark)',
-                'Mitochondria function (1 mark)',
-                'Ribosomes function (1 mark)'
+                'Surface area to volume ratio concept (2 marks)',
+                'Effect on exchange efficiency (2 marks)'
               ]
             },
-            specReference: 'AQA Combined Science Biology 4.1.1'
+            specReference: 'AQA Combined Science Biology B1'
           },
           {
-            id: 'cs-bio-q6',
+            id: 'cb-q6',
+            question: 'Describe how substances move by diffusion, osmosis, and active transport.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Diffusion: movement from high to low concentration, no energy needed. Osmosis: diffusion of water through partially permeable membrane. Active transport: movement against concentration gradient using energy.',
+            markingCriteria: {
+              breakdown: [
+                'Diffusion definition (2 marks)',
+                'Osmosis definition (2 marks)',
+                'Active transport definition (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B1'
+          },
+          {
+            id: 'cb-q7',
             question: 'Explain why plant cells need chloroplasts but animal cells do not.',
             marks: 4,
             difficulty: 'medium',
@@ -118,10 +497,10 @@ export const curriculum: Subject[] = [
                 'Explanation of different energy sources (2 marks)'
               ]
             },
-            specReference: 'AQA Combined Science Biology 4.1.1'
+            specReference: 'AQA Combined Science Biology B1'
           },
           {
-            id: 'cs-bio-q7',
+            id: 'cb-q8',
             question: 'Calculate the actual size of a cell that appears 2.5 mm long under ×100 magnification.',
             marks: 3,
             difficulty: 'medium',
@@ -133,10 +512,10 @@ export const curriculum: Subject[] = [
                 'Appropriate units (1 mark)'
               ]
             },
-            specReference: 'AQA Combined Science Biology 4.1.1'
+            specReference: 'AQA Combined Science Biology B1'
           },
           {
-            id: 'cs-bio-q8',
+            id: 'cb-q9',
             question: 'Describe the key features of bacterial cells and explain why they are classified as prokaryotes.',
             marks: 6,
             difficulty: 'medium',
@@ -147,71 +526,10 @@ export const curriculum: Subject[] = [
                 'Explanation of prokaryotic classification (3 marks)'
               ]
             },
-            specReference: 'AQA Combined Science Biology 4.1.1'
+            specReference: 'AQA Combined Science Biology B1'
           },
           {
-            id: 'cs-bio-q9',
-            question: 'State three safety precautions when using a light microscope.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Carry microscope with both hands. Keep electrical parts away from water. Use lowest magnification first. Handle glass slides carefully. Clean lenses with lens tissue only.',
-            markingCriteria: {
-              breakdown: [
-                'Three appropriate safety precautions (3 marks - 1 each)'
-              ]
-            },
-            specReference: 'AQA Combined Science Biology 4.1.1'
-          },
-          {
-            id: 'cs-bio-q10',
-            question: 'Explain the advantages and limitations of using electron microscopes compared to light microscopes.',
-            marks: 6,
-            difficulty: 'hard',
-            modelAnswer: 'Advantages: Much higher magnification (up to ×2,000,000 vs ×2000), higher resolution shows more detail. Limitations: Cannot observe living specimens, expensive, require special preparation, no color images.',
-            markingCriteria: {
-              breakdown: [
-                'Advantages of electron microscopes (3 marks)',
-                'Limitations of electron microscopes (3 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science Biology 4.1.1'
-          }
-        ]
-      },
-      {
-        id: 'cell-division-biology',
-        name: 'Cell Division — (Biology)',
-        questions: [
-          {
-            id: 'cd-bio-q1',
-            question: 'Describe the process of mitosis and explain why it is important for organisms.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Mitosis produces two genetically identical diploid cells from one diploid cell. Chromosomes duplicate, line up at cell center, separate to opposite poles, then cell divides. Important for growth, repair, and asexual reproduction.',
-            markingCriteria: {
-              breakdown: [
-                'Description of mitosis process (3 marks)',
-                'Importance explained (3 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science Biology 4.1.2'
-          },
-          {
-            id: 'cd-bio-q2',
-            question: 'State the number of chromosomes in human diploid and haploid cells.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Diploid cells: 46 chromosomes (23 pairs). Haploid cells: 23 chromosomes.',
-            markingCriteria: {
-              breakdown: [
-                'Diploid number correct (1 mark)',
-                'Haploid number correct (1 mark)'
-              ]
-            },
-            specReference: 'AQA Combined Science Biology 4.1.2'
-          },
-          {
-            id: 'cd-bio-q3',
+            id: 'cb-q10',
             question: 'Explain what stem cells are and why they are important in medicine.',
             marks: 6,
             difficulty: 'medium',
@@ -223,116 +541,1515 @@ export const curriculum: Subject[] = [
                 'Potential benefits (2 marks)'
               ]
             },
-            specReference: 'AQA Combined Science Biology 4.1.2'
-          },
-          {
-            id: 'cd-bio-q4',
-            question: 'Compare embryonic and adult stem cells, stating one advantage and one disadvantage of each.',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'Embryonic: Advantage - can develop into any cell type. Disadvantage - ethical concerns about using embryos. Adult: Advantage - no ethical issues as taken from patient. Disadvantage - limited in cell types they can become.',
-            markingCriteria: {
-              breakdown: [
-                'Embryonic advantage and disadvantage (2 marks)',
-                'Adult advantage and disadvantage (2 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science Biology 4.1.2'
-          },
-          {
-            id: 'cd-bio-q5',
-            question: 'Describe how plant cells differ from animal cells during cell division.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Plant cells form a cell plate to divide the cytoplasm, while animal cells form a cleavage furrow that pinches the cell in two. Plant cells cannot move during division due to rigid cell wall.',
-            markingCriteria: {
-              breakdown: [
-                'Plant cell division method (2 marks)',
-                'Animal cell division method (2 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science Biology 4.1.2'
-          },
-          {
-            id: 'cd-bio-q6',
-            question: 'Explain the role of chromosomes in inheritance.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Chromosomes carry genes (DNA) that contain instructions for characteristics. During reproduction, chromosomes from both parents combine to pass genetic information to offspring, determining inherited traits.',
-            markingCriteria: {
-              breakdown: [
-                'Reference to genes/DNA (2 marks)',
-                'Role in passing traits to offspring (2 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science Biology 4.1.2'
-          },
-          {
-            id: 'cd-bio-q7',
-            question: 'State three conditions that stem cell therapy might be used to treat and explain why.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Diabetes - replace insulin-producing cells in pancreas. Paralysis - replace damaged nerve cells in spinal cord. Heart disease - replace damaged heart muscle cells. Stem cells can differentiate into the specific cell types needed.',
-            markingCriteria: {
-              breakdown: [
-                'Three appropriate conditions (3 marks)',
-                'Explanations for treatment (3 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science Biology 4.1.2'
-          },
-          {
-            id: 'cd-bio-q8',
-            question: 'Describe what happens to chromosomes during mitosis.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Chromosomes duplicate to form sister chromatids joined at centromere. They line up at the cell equator, then sister chromatids separate and move to opposite poles of the cell.',
-            markingCriteria: {
-              breakdown: [
-                'Chromosome duplication (1 mark)',
-                'Alignment at equator (1 mark)',
-                'Separation of chromatids (1 mark)',
-                'Movement to poles (1 mark)'
-              ]
-            },
-            specReference: 'AQA Combined Science Biology 4.1.2'
-          },
-          {
-            id: 'cd-bio-q9',
-            question: 'Explain why cell differentiation is important for multicellular organisms.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Cell differentiation allows cells to become specialized for specific functions, making organisms more efficient. Different cell types can perform specific tasks like transport, protection, or reproduction.',
-            markingCriteria: {
-              breakdown: [
-                'Definition of specialization (2 marks)',
-                'Benefits for organism function (2 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science Biology 4.1.2'
-          },
-          {
-            id: 'cd-bio-q10',
-            question: 'Discuss the ethical considerations surrounding the use of embryonic stem cells in medical research.',
-            marks: 6,
-            difficulty: 'hard',
-            modelAnswer: 'Arguments for: potential to cure serious diseases, save lives, reduce suffering. Arguments against: involves destruction of human embryos, concerns about human dignity, slippery slope to other unethical practices. Need to balance medical benefits with ethical concerns.',
-            markingCriteria: {
-              breakdown: [
-                'Arguments in favor (2 marks)',
-                'Arguments against (2 marks)',
-                'Balanced consideration (2 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science Biology 4.1.2'
+            specReference: 'AQA Combined Science Biology B1'
           }
         ]
       },
-      // Add more biology, chemistry, and physics topics...
-      // CHEMISTRY TOPICS
       {
-        id: 'atomic-structure-chemistry',
-        name: 'Atomic Structure — (Chemistry)',
+        id: 'organisation',
+        name: 'Organisation — (Biology)',
+        questions: [
+          {
+            id: 'org-q1',
+            question: 'Describe the levels of organisation in multicellular organisms from cells to organisms.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Cells → Tissues → Organs → Organ Systems → Organisms. Each level is made up of the previous level working together.',
+            markingCriteria: {
+              breakdown: [
+                'Correct sequence (2 marks)',
+                'Explanation of relationship (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B2'
+          },
+          {
+            id: 'org-q2',
+            question: 'Explain how the structure of the small intestine is adapted for absorption.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Large surface area due to villi and microvilli. Thin walls (one cell thick) for short diffusion distance. Good blood supply to maintain concentration gradient. Moist surface for absorption.',
+            markingCriteria: {
+              breakdown: [
+                'Surface area adaptations (2 marks)',
+                'Thin walls (2 marks)',
+                'Blood supply and concentration gradient (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B2'
+          },
+          {
+            id: 'org-q3',
+            question: 'Describe the function of enzymes and explain how temperature affects enzyme activity.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Enzymes are biological catalysts that speed up reactions by lowering activation energy. As temperature increases, enzyme activity increases due to more kinetic energy. Above optimum temperature, enzymes denature and activity decreases.',
+            markingCriteria: {
+              breakdown: [
+                'Function of enzymes (2 marks)',
+                'Effect of increasing temperature (2 marks)',
+                'Denaturation at high temperature (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B2'
+          },
+          {
+            id: 'org-q4',
+            question: 'Explain how the heart pumps blood around the body.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Heart muscle contracts (systole) forcing blood out of ventricles into arteries. Heart muscle relaxes (diastole) allowing ventricles to fill with blood from atria. Valves prevent backflow.',
+            markingCriteria: {
+              breakdown: [
+                'Systole description (2 marks)',
+                'Diastole description (1 mark)',
+                'Role of valves (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B2'
+          },
+          {
+            id: 'org-q5',
+            question: 'Compare the structure and function of arteries, veins, and capillaries.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Arteries: thick muscular walls, carry blood away from heart at high pressure. Veins: thinner walls, valves, carry blood to heart at low pressure. Capillaries: one cell thick, allow exchange of substances.',
+            markingCriteria: {
+              breakdown: [
+                'Artery structure and function (2 marks)',
+                'Vein structure and function (2 marks)',
+                'Capillary structure and function (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B2'
+          },
+          {
+            id: 'org-q6',
+            question: 'Describe the role of the different components of blood.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Red blood cells: transport oxygen using haemoglobin. White blood cells: fight infection and disease. Platelets: help blood clotting. Plasma: transports dissolved substances like glucose, amino acids, hormones, and waste products.',
+            markingCriteria: {
+              breakdown: [
+                'Red blood cells (2 marks)',
+                'White blood cells (2 marks)',
+                'Platelets (2 marks)',
+                'Plasma (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B2'
+          },
+          {
+            id: 'org-q7',
+            question: 'Explain how lifestyle factors can affect cardiovascular disease risk.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Poor diet (high fat/salt) increases cholesterol and blood pressure. Smoking damages arteries and reduces oxygen transport. Lack of exercise weakens heart muscle. Stress can increase blood pressure.',
+            markingCriteria: {
+              breakdown: [
+                'Diet effects (2 marks)',
+                'Smoking effects (2 marks)',
+                'Exercise and stress effects (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B2'
+          },
+          {
+            id: 'org-q8',
+            question: 'Describe how xylem and phloem are adapted for their functions in plants.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Xylem: dead cells form hollow tubes for water transport, lignin provides strength. Phloem: living cells with sieve plates allow sugar transport, companion cells provide energy.',
+            markingCriteria: {
+              breakdown: [
+                'Xylem structure and function (3 marks)',
+                'Phloem structure and function (3 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B2'
+          },
+          {
+            id: 'org-q9',
+            question: 'Explain the process of transpiration and its importance for plants.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Water evaporates from leaf surfaces through stomata. Creates transpiration stream that draws water up from roots. Important for cooling plant and transporting minerals.',
+            markingCriteria: {
+              breakdown: [
+                'Process description (2 marks)',
+                'Importance explained (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B2'
+          },
+          {
+            id: 'org-q10',
+            question: 'Describe the factors that affect the rate of transpiration.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Temperature: higher temperature increases evaporation rate. Wind: removes water vapour, increasing rate. Humidity: high humidity decreases rate. Light: opens stomata, increases rate.',
+            markingCriteria: {
+              breakdown: [
+                'Temperature effect (1 mark)',
+                'Wind effect (1 mark)',
+                'Humidity effect (1 mark)',
+                'Light effect (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B2'
+          }
+        ]
+      },
+      {
+        id: 'infection-and-response',
+        name: 'Infection and response — (Biology)',
+        questions: [
+          {
+            id: 'ir-q1',
+            question: 'Describe the differences between communicable and non-communicable diseases.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Communicable diseases: caused by pathogens, can be spread between individuals (e.g., flu, malaria). Non-communicable diseases: not caused by pathogens, cannot be spread (e.g., cancer, diabetes).',
+            markingCriteria: {
+              breakdown: [
+                'Communicable disease definition and example (2 marks)',
+                'Non-communicable disease definition and example (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B3'
+          },
+          {
+            id: 'ir-q2',
+            question: 'Explain how bacteria and viruses cause disease differently.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Bacteria: reproduce rapidly, produce toxins that damage tissues. Viruses: invade cells, use cell machinery to reproduce, cause cell damage when they burst out.',
+            markingCriteria: {
+              breakdown: [
+                'Bacterial disease mechanism (2 marks)',
+                'Viral disease mechanism (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B3'
+          },
+          {
+            id: 'ir-q3',
+            question: 'Describe the body\'s non-specific defence systems against pathogens.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Skin: barrier to pathogens. Nose: hairs and mucus trap particles. Trachea/bronchi: mucus traps pathogens, cilia move mucus upward. Stomach: acid kills pathogens.',
+            markingCriteria: {
+              breakdown: [
+                'Skin barrier (1 mark)',
+                'Nose defences (2 marks)',
+                'Respiratory system defences (2 marks)',
+                'Stomach acid (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B3'
+          },
+          {
+            id: 'ir-q4',
+            question: 'Explain how the immune system responds to pathogens.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'White blood cells detect foreign antigens on pathogens. B cells produce specific antibodies that bind to antigens. T cells destroy infected cells. Memory cells remain for rapid response to same pathogen.',
+            markingCriteria: {
+              breakdown: [
+                'Antigen recognition (2 marks)',
+                'Antibody production (2 marks)',
+                'Memory cell function (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B3'
+          },
+          {
+            id: 'ir-q5',
+            question: 'Describe how vaccination provides immunity against disease.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Vaccine contains dead/weakened pathogens or their antigens. Immune system produces antibodies and memory cells. If real pathogen enters, memory cells rapidly produce antibodies for quick response.',
+            markingCriteria: {
+              breakdown: [
+                'Vaccine contents (1 mark)',
+                'Primary immune response (2 marks)',
+                'Secondary immune response (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B3'
+          },
+          {
+            id: 'ir-q6',
+            question: 'Explain the difference between antibiotics and painkillers in treating disease.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Antibiotics: kill bacteria that cause disease, cure the infection. Painkillers: relieve symptoms but do not kill pathogens, do not cure disease.',
+            markingCriteria: {
+              breakdown: [
+                'Antibiotic function (2 marks)',
+                'Painkiller function (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B3'
+          },
+          {
+            id: 'ir-q7',
+            question: 'Describe the process of drug development from discovery to clinical use.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Discovery in laboratory. Preclinical testing on cells/tissues. Animal testing for safety. Clinical trials on healthy volunteers, then patients. Peer review and licensing before clinical use.',
+            markingCriteria: {
+              breakdown: [
+                'Preclinical stages (2 marks)',
+                'Clinical trial stages (2 marks)',
+                'Final approval process (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B3'
+          },
+          {
+            id: 'ir-q8',
+            question: 'Explain how antibiotic resistance develops in bacterial populations.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Random mutations make some bacteria resistant to antibiotics. When antibiotics used, non-resistant bacteria die. Resistant bacteria survive and reproduce. Resistance allele frequency increases in population.',
+            markingCriteria: {
+              breakdown: [
+                'Mutation creates resistance (1 mark)',
+                'Selection pressure from antibiotics (1 mark)',
+                'Survival of resistant bacteria (1 mark)',
+                'Increase in resistance frequency (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B3'
+          },
+          {
+            id: 'ir-q9',
+            question: 'Describe the life cycle of a malaria parasite and how it is transmitted.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Mosquito bites infected person, takes up parasites with blood. Parasites reproduce in mosquito. Mosquito bites healthy person, injects parasites. Parasites reproduce in liver and red blood cells.',
+            markingCriteria: {
+              breakdown: [
+                'Uptake by mosquito (2 marks)',
+                'Reproduction in mosquito (1 mark)',
+                'Transmission to new host (2 marks)',
+                'Reproduction in human (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B3'
+          },
+          {
+            id: 'ir-q10',
+            question: 'Explain methods to prevent the spread of communicable diseases.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Hygiene: hand washing, sterilization. Isolation of infected individuals. Vaccination programs. Vector control (e.g., mosquito nets). Safe food/water preparation.',
+            markingCriteria: {
+              breakdown: [
+                'Hygiene measures (2 marks)',
+                'Isolation and vaccination (2 marks)',
+                'Environmental controls (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B3'
+          }
+        ]
+      },
+      {
+        id: 'bioenergetics',
+        name: 'Bioenergetics — (Biology)',
+        questions: [
+          {
+            id: 'bioen-q1',
+            question: 'Write the word equation for photosynthesis.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Carbon dioxide + Water → Glucose + Oxygen (in the presence of light and chlorophyll)',
+            markingCriteria: {
+              breakdown: [
+                'Correct reactants and products (1 mark)',
+                'Light and chlorophyll mentioned (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B4'
+          },
+          {
+            id: 'bioen-q2',
+            question: 'Describe the factors that limit the rate of photosynthesis.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Light intensity: more light increases rate until another factor limits. Carbon dioxide concentration: higher CO₂ increases rate. Temperature: higher temperature increases rate until enzymes denature.',
+            markingCriteria: {
+              breakdown: [
+                'Light intensity effect (2 marks)',
+                'CO₂ concentration effect (2 marks)',
+                'Temperature effect (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B4'
+          },
+          {
+            id: 'bioen-q3',
+            question: 'Explain how the structure of a leaf is adapted for photosynthesis.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Large surface area to absorb light. Thin to allow light penetration. Chloroplasts contain chlorophyll. Stomata allow gas exchange. Vascular bundles transport water and products.',
+            markingCriteria: {
+              breakdown: [
+                'Surface area and thickness (2 marks)',
+                'Chloroplasts and chlorophyll (2 marks)',
+                'Gas exchange and transport (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B4'
+          },
+          {
+            id: 'bioen-q4',
+            question: 'Write the word equation for aerobic respiration.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Glucose + Oxygen → Carbon dioxide + Water + Energy (ATP)',
+            markingCriteria: {
+              breakdown: [
+                'Correct reactants and products (1 mark)',
+                'Energy/ATP mentioned (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B4'
+          },
+          {
+            id: 'bioen-q5',
+            question: 'Compare aerobic and anaerobic respiration.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Aerobic: uses oxygen, complete glucose breakdown, produces CO₂ and water, releases lots of energy. Anaerobic: no oxygen, incomplete breakdown, produces lactic acid (animals) or ethanol (plants), releases little energy.',
+            markingCriteria: {
+              breakdown: [
+                'Oxygen use comparison (2 marks)',
+                'Products comparison (2 marks)',
+                'Energy release comparison (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B4'
+          },
+          {
+            id: 'bioen-q6',
+            question: 'Explain what happens during exercise to meet increased energy demands.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Heart rate increases to supply more oxygen. Breathing rate increases to obtain more oxygen and remove CO₂. If oxygen runs out, anaerobic respiration occurs producing lactic acid.',
+            markingCriteria: {
+              breakdown: [
+                'Increased heart rate (1 mark)',
+                'Increased breathing rate (1 mark)',
+                'Purpose of increases (1 mark)',
+                'Anaerobic respiration (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B4'
+          },
+          {
+            id: 'bioen-q7',
+            question: 'Describe how farmers can use knowledge of limiting factors to increase crop yields.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Greenhouses provide warmth and protection. Artificial lighting extends photosynthesis time. CO₂ generators increase carbon dioxide levels. Careful monitoring ensures optimum conditions.',
+            markingCriteria: {
+              breakdown: [
+                'Temperature control (2 marks)',
+                'Light enhancement (2 marks)',
+                'CO₂ supplementation (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B4'
+          },
+          {
+            id: 'bioen-q8',
+            question: 'Explain the concept of metabolism and give examples.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Metabolism is the sum of all chemical reactions in a cell or organism. Examples: respiration releases energy, photosynthesis produces glucose, protein synthesis builds new proteins.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of metabolism (2 marks)',
+                'Appropriate examples (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B4'
+          },
+          {
+            id: 'bioen-q9',
+            question: 'Describe how to investigate the effect of light intensity on the rate of photosynthesis using pondweed.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Place pondweed in test tube of water. Count bubbles produced in set time. Move lamp to different distances to change light intensity. Keep temperature and CO₂ constant. Repeat for reliability.',
+            markingCriteria: {
+              breakdown: [
+                'Method description (2 marks)',
+                'Variable control (2 marks)',
+                'Measurement and reliability (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B4'
+          },
+          {
+            id: 'bioen-q10',
+            question: 'Explain why plants need glucose produced by photosynthesis.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Respiration: glucose used to release energy. Growth: glucose converted to cellulose for cell walls. Storage: glucose converted to starch. Reproduction: glucose used to make nectar and fruits.',
+            markingCriteria: {
+              breakdown: [
+                'Energy release (1 mark)',
+                'Structural uses (1 mark)',
+                'Storage (1 mark)',
+                'Reproduction (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B4'
+          }
+        ]
+      },
+      // BIOLOGY TOPICS - PAPER 2 (B5-B8)
+      {
+        id: 'homeostasis-and-response',
+        name: 'Homeostasis and response — (Biology)',
+        questions: [
+          {
+            id: 'hr-q1',
+            question: 'Define homeostasis and explain why it is important for organisms.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Homeostasis is the regulation of internal conditions to maintain optimum conditions for enzyme action and cell functions. Important because enzymes need specific pH and temperature to work efficiently.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of homeostasis (2 marks)',
+                'Importance explained (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B5'
+          },
+          {
+            id: 'hr-q2',
+            question: 'Describe the structure and function of the nervous system.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Central nervous system: brain and spinal cord process information. Peripheral nervous system: nerves carry signals. Sensory neurons carry impulses from receptors to CNS. Motor neurons carry impulses from CNS to effectors.',
+            markingCriteria: {
+              breakdown: [
+                'CNS structure and function (2 marks)',
+                'PNS structure and function (2 marks)',
+                'Neuron types and functions (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B5'
+          },
+          {
+            id: 'hr-q3',
+            question: 'Explain how a reflex action works, using the example of touching a hot object.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Heat receptors in skin detect stimulus. Sensory neuron carries impulse to spinal cord. Relay neuron in spinal cord connects to motor neuron. Motor neuron carries impulse to muscle. Muscle contracts to move hand away.',
+            markingCriteria: {
+              breakdown: [
+                'Receptor detection (1 mark)',
+                'Sensory neuron pathway (1 mark)',
+                'Spinal cord processing (2 marks)',
+                'Motor response (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B5'
+          },
+          {
+            id: 'hr-q4',
+            question: 'Compare the nervous and endocrine systems.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Nervous: electrical impulses, fast response, short duration, precise target. Endocrine: chemical hormones, slower response, longer duration, widespread effects through blood.',
+            markingCriteria: {
+              breakdown: [
+                'Method of communication (2 marks)',
+                'Speed and duration (2 marks)',
+                'Target specificity (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B5'
+          },
+          {
+            id: 'hr-q5',
+            question: 'Explain how blood glucose levels are controlled.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Pancreas monitors blood glucose. High glucose: insulin released, glucose converted to glycogen in liver. Low glucose: glucagon released, glycogen converted to glucose in liver.',
+            markingCriteria: {
+              breakdown: [
+                'Monitoring by pancreas (1 mark)',
+                'High glucose response (2 marks)',
+                'Low glucose response (2 marks)',
+                'Role of liver (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B5'
+          },
+          {
+            id: 'hr-q6',
+            question: 'Describe the role of hormones in the menstrual cycle.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'FSH stimulates egg maturation and oestrogen production. Oestrogen causes uterus lining to thicken and inhibits FSH. LH triggers ovulation. Progesterone maintains uterus lining. If no fertilization, progesterone falls and menstruation occurs.',
+            markingCriteria: {
+              breakdown: [
+                'FSH function (2 marks)',
+                'Oestrogen function (2 marks)',
+                'LH function (2 marks)',
+                'Progesterone function (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B5'
+          },
+          {
+            id: 'hr-q7',
+            question: 'Explain methods of contraception and how they work.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Barrier methods: condom/diaphragm prevent sperm reaching egg. Hormonal: pill contains oestrogen/progesterone to prevent ovulation. IUD: prevents implantation. Sterilization: cuts/blocks gamete transport.',
+            markingCriteria: {
+              breakdown: [
+                'Barrier methods (2 marks)',
+                'Hormonal methods (2 marks)',
+                'Other methods (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B5'
+          },
+          {
+            id: 'hr-q8',
+            question: 'Describe treatments for infertility.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Fertility drugs: stimulate egg release. IVF: eggs fertilized outside body then implanted. Donor eggs/sperm: if gametes not viable.',
+            markingCriteria: {
+              breakdown: [
+                'Fertility drugs (2 marks)',
+                'IVF process (1 mark)',
+                'Donor gametes (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B5'
+          },
+          {
+            id: 'hr-q9',
+            question: 'Explain what negative feedback is and give an example.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Negative feedback is when a change triggers a response that counteracts the original change, maintaining steady state. Example: blood glucose control - high glucose triggers insulin release to reduce glucose.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of negative feedback (2 marks)',
+                'Appropriate example (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B5'
+          },
+          {
+            id: 'hr-q10',
+            question: 'Describe how the eye responds to changes in light intensity.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Bright light: pupil constricts (gets smaller) as circular muscles contract and radial muscles relax. Dim light: pupil dilates (gets larger) as radial muscles contract and circular muscles relax.',
+            markingCriteria: {
+              breakdown: [
+                'Bright light response (2 marks)',
+                'Dim light response (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B5'
+          }
+        ]
+      },
+      {
+        id: 'inheritance-variation-evolution',
+        name: 'Inheritance, variation and evolution — (Biology)',
+        questions: [
+          {
+            id: 'ive-q1',
+            question: 'Explain the difference between mitosis and meiosis.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Mitosis: produces 2 diploid genetically identical cells for growth/repair. Meiosis: produces 4 haploid genetically different gametes for reproduction.',
+            markingCriteria: {
+              breakdown: [
+                'Mitosis products and purpose (3 marks)',
+                'Meiosis products and purpose (3 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B6'
+          },
+          {
+            id: 'ive-q2',
+            question: 'Define gene, allele, chromosome, and DNA.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Gene: section of DNA coding for a characteristic. Allele: different version of a gene. Chromosome: structure containing many genes. DNA: chemical that carries genetic information.',
+            markingCriteria: {
+              breakdown: [
+                'Gene definition (1 mark)',
+                'Allele definition (1 mark)',
+                'Chromosome definition (1 mark)',
+                'DNA definition (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B6'
+          },
+          {
+            id: 'ive-q3',
+            question: 'Use a Punnett square to show the inheritance of eye color where brown (B) is dominant and blue (b) is recessive. Cross Bb × Bb.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Punnett square showing: BB (brown), Bb (brown), Bb (brown), bb (blue). Ratio: 3 brown : 1 blue or 75% brown : 25% blue.',
+            markingCriteria: {
+              breakdown: [
+                'Correct Punnett square (2 marks)',
+                'Correct phenotype ratio (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B6'
+          },
+          {
+            id: 'ive-q4',
+            question: 'Explain how sex is determined in humans.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Males have XY chromosomes, females have XX chromosomes. Males can only pass Y or X, females can only pass X. 50:50 chance of male or female offspring.',
+            markingCriteria: {
+              breakdown: [
+                'Male and female chromosomes (1 mark)',
+                'Gamete chromosomes (1 mark)',
+                'Probability (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B6'
+          },
+          {
+            id: 'ive-q5',
+            question: 'Describe the causes of genetic variation.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Meiosis: independent assortment and crossing over create new allele combinations. Fertilization: random which gametes fuse. Mutations: changes in DNA sequence.',
+            markingCriteria: {
+              breakdown: [
+                'Meiosis effects (2 marks)',
+                'Random fertilization (1 mark)',
+                'Mutations (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B6'
+          },
+          {
+            id: 'ive-q6',
+            question: 'Explain Darwin\'s theory of evolution by natural selection.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Variation exists in populations. Environmental pressure creates competition. Individuals with advantageous characteristics survive and reproduce more. Favorable alleles passed to offspring. Over time, favorable characteristics become more common.',
+            markingCriteria: {
+              breakdown: [
+                'Variation (1 mark)',
+                'Competition/selection pressure (1 mark)',
+                'Survival advantage (2 marks)',
+                'Inheritance and frequency change (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B6'
+          },
+          {
+            id: 'ive-q7',
+            question: 'Describe selective breeding and give an example.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Humans choose organisms with desirable characteristics to breed together. Offspring with best characteristics selected for further breeding. Example: breeding cows for high milk yield.',
+            markingCriteria: {
+              breakdown: [
+                'Process description (2 marks)',
+                'Appropriate example (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B6'
+          },
+          {
+            id: 'ive-q8',
+            question: 'Explain what genetic engineering is and give an example.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Genetic engineering involves modifying an organism\'s genome by introducing genes from another species. Example: bacteria modified to produce human insulin for diabetes treatment.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of genetic engineering (2 marks)',
+                'Appropriate example (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B6'
+          },
+          {
+            id: 'ive-q9',
+            question: 'Describe evidence for evolution.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Fossils: show gradual changes over time. Antibiotic resistance: bacteria evolve resistance rapidly. DNA analysis: shows relationships between species.',
+            markingCriteria: {
+              breakdown: [
+                'Fossil evidence (2 marks)',
+                'Antibiotic resistance (2 marks)',
+                'DNA evidence (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B6'
+          },
+          {
+            id: 'ive-q10',
+            question: 'Explain how new species can form.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Populations become isolated (geographical barriers). Different selection pressures in each environment. Populations evolve differently. Eventually become so different they cannot interbreed to produce fertile offspring.',
+            markingCriteria: {
+              breakdown: [
+                'Isolation (1 mark)',
+                'Different selection pressures (1 mark)',
+                'Divergent evolution (1 mark)',
+                'Reproductive isolation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B6'
+          }
+        ]
+      },
+      {
+        id: 'ecology',
+        name: 'Ecology — (Biology)',
+        questions: [
+          {
+            id: 'eco-q1',
+            question: 'Define ecosystem, population, community, and habitat.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Ecosystem: all organisms and physical factors in an area. Population: all organisms of one species in an area. Community: all populations in an area. Habitat: place where organism lives.',
+            markingCriteria: {
+              breakdown: [
+                'Ecosystem definition (1 mark)',
+                'Population definition (1 mark)',
+                'Community definition (1 mark)',
+                'Habitat definition (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B7'
+          },
+          {
+            id: 'eco-q2',
+            question: 'Describe how organisms are adapted to their environment, giving examples.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Structural: polar bear thick fur for insulation. Behavioral: migration to find food/avoid cold. Functional: camel conserves water by producing concentrated urine.',
+            markingCriteria: {
+              breakdown: [
+                'Structural adaptation with example (2 marks)',
+                'Behavioral adaptation with example (2 marks)',
+                'Functional adaptation with example (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B7'
+          },
+          {
+            id: 'eco-q3',
+            question: 'Explain what abiotic and biotic factors are and give examples of each.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Abiotic: non-living factors e.g. temperature, light intensity, pH, oxygen concentration. Biotic: living factors e.g. predation, competition, disease, food availability.',
+            markingCriteria: {
+              breakdown: [
+                'Abiotic definition and examples (2 marks)',
+                'Biotic definition and examples (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B7'
+          },
+          {
+            id: 'eco-q4',
+            question: 'Describe how to use quadrats to estimate population size.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Place quadrats randomly in area. Count organisms in each quadrat. Calculate mean number per quadrat. Multiply by total number of quadrats that could fit in area.',
+            markingCriteria: {
+              breakdown: [
+                'Random placement (1 mark)',
+                'Counting method (1 mark)',
+                'Calculate mean (1 mark)',
+                'Scale up calculation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B7'
+          },
+          {
+            id: 'eco-q5',
+            question: 'Explain the relationship between predators and prey in an ecosystem.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Predator population increases when prey abundant. More predation reduces prey population. Reduced prey leads to predator population decrease. Cycle repeats with time lag.',
+            markingCriteria: {
+              breakdown: [
+                'Predator increase with prey abundance (1 mark)',
+                'Prey reduction due to predation (1 mark)',
+                'Predator decrease with prey scarcity (1 mark)',
+                'Cyclical nature (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B7'
+          },
+          {
+            id: 'eco-q6',
+            question: 'Describe the carbon cycle.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Photosynthesis removes CO₂ from atmosphere. Respiration by plants/animals returns CO₂. Decomposition of dead material releases CO₂. Combustion of fossil fuels adds CO₂.',
+            markingCriteria: {
+              breakdown: [
+                'Photosynthesis (2 marks)',
+                'Respiration (1 mark)',
+                'Decomposition (2 marks)',
+                'Combustion (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B7'
+          },
+          {
+            id: 'eco-q7',
+            question: 'Explain how human activities affect biodiversity.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Deforestation destroys habitats. Pollution kills organisms and disrupts food chains. Climate change alters habitats. Overhunting reduces populations. Introduces species compete with natives.',
+            markingCriteria: {
+              breakdown: [
+                'Habitat destruction (2 marks)',
+                'Pollution effects (1 mark)',
+                'Climate change (1 mark)',
+                'Overhunting and invasive species (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B7'
+          },
+          {
+            id: 'eco-q8',
+            question: 'Describe methods to maintain biodiversity.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Protected areas/nature reserves preserve habitats. Breeding programs prevent extinction. Seed banks store genetic diversity. Sustainable management balances human needs with conservation.',
+            markingCriteria: {
+              breakdown: [
+                'Protected areas (1 mark)',
+                'Breeding programs (1 mark)',
+                'Seed banks (1 mark)',
+                'Sustainable management (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B7'
+          },
+          {
+            id: 'eco-q9',
+            question: 'Explain how energy is transferred through a food chain.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Producers convert light energy to chemical energy. Primary consumers eat producers. Secondary consumers eat primary consumers. Only about 10% energy transferred to next level.',
+            markingCriteria: {
+              breakdown: [
+                'Producer energy conversion (1 mark)',
+                'Consumer feeding relationships (2 marks)',
+                'Energy transfer efficiency (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B7'
+          },
+          {
+            id: 'eco-q10',
+            question: 'Describe the water cycle.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Evaporation from oceans/lakes forms water vapor. Transpiration from plants adds water vapor. Condensation forms clouds. Precipitation returns water to earth.',
+            markingCriteria: {
+              breakdown: [
+                'Evaporation (1 mark)',
+                'Transpiration (1 mark)',
+                'Condensation (1 mark)',
+                'Precipitation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology B7'
+          }
+        ]
+      },
+      // CHEMISTRY TOPICS - PAPER 1 (C1-C5)
+      {
+        id: 'atomic-structure-periodic-table',
+        name: 'Atomic structure and the periodic table — (Chemistry)',
+        questions: [
+          {
+            id: 'aspt-q1',
+            question: 'Describe the structure of an atom, including the relative masses and charges of protons, neutrons, and electrons.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Atom has nucleus containing protons (+1 charge, mass 1) and neutrons (0 charge, mass 1). Electrons (-1 charge, negligible mass) orbit in shells around nucleus. Most of atom is empty space.',
+            markingCriteria: {
+              breakdown: [
+                'Description of nucleus (2 marks)',
+                'Properties of subatomic particles (3 marks)',
+                'Electron arrangement (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C1'
+          },
+          {
+            id: 'aspt-q2',
+            question: 'Calculate the number of protons, neutrons, and electrons in an atom of chlorine-35 (³⁵Cl).',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Protons: 17 (atomic number). Electrons: 17 (same as protons in neutral atom). Neutrons: 35 - 17 = 18 (mass number - atomic number).',
+            markingCriteria: {
+              breakdown: [
+                'Protons correct (1 mark)',
+                'Electrons correct (1 mark)',
+                'Neutrons correct (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C1'
+          },
+          {
+            id: 'aspt-q3',
+            question: 'Explain what isotopes are and give an example.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Isotopes are atoms of the same element with the same number of protons but different numbers of neutrons. Example: Carbon-12 and Carbon-14 both have 6 protons but 6 and 8 neutrons respectively.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of isotopes (2 marks)',
+                'Suitable example (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C1'
+          },
+          {
+            id: 'aspt-q4',
+            question: 'Describe how the model of the atom has changed over time.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Dalton: atoms as solid indivisible spheres. Thomson: plum pudding model with electrons in positive sphere. Rutherford: nuclear model with dense positive nucleus and electrons in space around it.',
+            markingCriteria: {
+              breakdown: [
+                'Dalton model (2 marks)',
+                'Thomson model (2 marks)',
+                'Rutherford model (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C1'
+          },
+          {
+            id: 'aspt-q5',
+            question: 'Explain the arrangement of elements in the modern periodic table.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Elements arranged by atomic number (proton number). Elements in same group have same number of outer electrons. Elements in same period have same number of electron shells.',
+            markingCriteria: {
+              breakdown: [
+                'Arrangement by atomic number (2 marks)',
+                'Group and period patterns (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C1'
+          },
+          {
+            id: 'aspt-q6',
+            question: 'Describe the properties of Group 1 metals.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Soft metals that can be cut with knife. Low density (lithium floats). React vigorously with water producing hydrogen. Reactivity increases down group. Form ionic compounds.',
+            markingCriteria: {
+              breakdown: [
+                'Physical properties (2 marks)',
+                'Reaction with water (2 marks)',
+                'Trends down group (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C1'
+          },
+          {
+            id: 'aspt-q7',
+            question: 'Explain the properties of Group 7 elements (halogens).',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Non-metals that exist as diatomic molecules. Reactivity decreases down group. Displacement reactions occur. Form ionic compounds with metals. Colors: F₂ pale yellow, Cl₂ green, Br₂ orange, I₂ purple.',
+            markingCriteria: {
+              breakdown: [
+                'Basic properties (2 marks)',
+                'Reactivity trend (2 marks)',
+                'Colors and reactions (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C1'
+          },
+          {
+            id: 'aspt-q8',
+            question: 'Describe the properties of Group 0 elements (noble gases).',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Unreactive/inert gases. Full outer electron shell makes them stable. Monatomic (exist as single atoms). Boiling points increase down group.',
+            markingCriteria: {
+              breakdown: [
+                'Unreactive nature (2 marks)',
+                'Electron arrangement (1 mark)',
+                'Physical properties (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C1'
+          },
+          {
+            id: 'aspt-q9',
+            question: 'Explain the difference between metals and non-metals in terms of their position in the periodic table.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Metals on left side of periodic table. Non-metals on right side. Metalloids along diagonal line. Metals lose electrons, non-metals gain electrons in reactions.',
+            markingCriteria: {
+              breakdown: [
+                'Position in periodic table (2 marks)',
+                'Electron behavior in reactions (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C1'
+          },
+          {
+            id: 'aspt-q10',
+            question: 'Calculate the relative atomic mass of chlorine given that 75% is Cl-35 and 25% is Cl-37.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Relative atomic mass = (75 × 35 + 25 × 37) ÷ 100 = (2625 + 925) ÷ 100 = 3550 ÷ 100 = 35.5',
+            markingCriteria: {
+              breakdown: [
+                'Correct method (1 mark)',
+                'Correct calculation (1 mark)',
+                'Correct answer (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C1'
+          }
+        ]
+      },
+      {
+        id: 'bonding-structure-properties',
+        name: 'Bonding, structure, and the properties of matter — (Chemistry)',
+        questions: [
+          {
+            id: 'bsp-q1',
+            question: 'Describe how ionic bonding occurs between sodium and chlorine.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Sodium loses electron to become Na⁺ ion. Chlorine gains electron to become Cl⁻ ion. Opposite charges attract forming ionic bond. Electrostatic attraction holds ions together.',
+            markingCriteria: {
+              breakdown: [
+                'Electron transfer (2 marks)',
+                'Ion formation (1 mark)',
+                'Electrostatic attraction (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C2'
+          },
+          {
+            id: 'bsp-q2',
+            question: 'Explain how covalent bonding occurs in water molecules.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Oxygen and hydrogen atoms share electrons. Each hydrogen shares 1 electron with oxygen. Oxygen shares 2 electrons (one with each hydrogen). Shared pairs form covalent bonds.',
+            markingCriteria: {
+              breakdown: [
+                'Electron sharing concept (2 marks)',
+                'Specific sharing in water (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C2'
+          },
+          {
+            id: 'bsp-q3',
+            question: 'Compare the properties of ionic and covalent compounds.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Ionic: high melting points, conduct when molten/dissolved, often soluble in water. Covalent: lower melting points, do not conduct electricity, often insoluble in water.',
+            markingCriteria: {
+              breakdown: [
+                'Melting points comparison (2 marks)',
+                'Electrical conductivity (2 marks)',
+                'Solubility (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C2'
+          },
+          {
+            id: 'bsp-q4',
+            question: 'Describe the structure of diamond and explain its properties.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Each carbon atom covalently bonded to 4 others in tetrahedral arrangement. Giant covalent structure. Very hard due to strong bonds throughout. High melting point. Does not conduct electricity.',
+            markingCriteria: {
+              breakdown: [
+                'Structure description (2 marks)',
+                'Hardness explanation (2 marks)',
+                'Other properties (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C2'
+          },
+          {
+            id: 'bsp-q5',
+            question: 'Explain why graphite conducts electricity but diamond does not.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Graphite has delocalized electrons that can move between layers. Diamond has all electrons localized in covalent bonds. Mobile electrons in graphite allow electrical conduction.',
+            markingCriteria: {
+              breakdown: [
+                'Graphite electron structure (2 marks)',
+                'Diamond electron structure (1 mark)',
+                'Conduction explanation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C2'
+          },
+          {
+            id: 'bsp-q6',
+            question: 'Describe the properties of metals and explain them in terms of structure.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Good electrical conductors due to delocalized electrons. Malleable and ductile because layers can slide. High melting points due to strong metallic bonding. Shiny appearance.',
+            markingCriteria: {
+              breakdown: [
+                'Electrical conductivity (2 marks)',
+                'Mechanical properties (2 marks)',
+                'Melting points and appearance (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C2'
+          },
+          {
+            id: 'bsp-q7',
+            question: 'Explain what an alloy is and why alloys are often stronger than pure metals.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Alloy is mixture of metal with other elements. Different sized atoms disrupt regular arrangement. Layers cannot slide past each other easily. Makes alloy harder and stronger.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of alloy (1 mark)',
+                'Structural disruption (2 marks)',
+                'Effect on properties (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C2'
+          },
+          {
+            id: 'bsp-q8',
+            question: 'Describe the three states of matter and explain the changes between them.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Solid: particles close together, vibrate. Liquid: particles close, can move. Gas: particles far apart, move rapidly. Melting/freezing between solid/liquid. Boiling/condensing between liquid/gas.',
+            markingCriteria: {
+              breakdown: [
+                'Three states described (3 marks)',
+                'State changes (3 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C2'
+          },
+          {
+            id: 'bsp-q9',
+            question: 'Explain why ionic compounds conduct electricity when molten but not when solid.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'In solid, ions fixed in lattice and cannot move. When molten, ions free to move. Moving charged particles (ions) carry electrical current.',
+            markingCriteria: {
+              breakdown: [
+                'Solid state explanation (2 marks)',
+                'Molten state explanation (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C2'
+          },
+          {
+            id: 'bsp-q10',
+            question: 'Describe the structure and properties of polymers.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Long chains of repeating units (monomers). Held together by covalent bonds within chains. Weak forces between chains. Generally do not conduct electricity.',
+            markingCriteria: {
+              breakdown: [
+                'Chain structure (2 marks)',
+                'Bonding description (1 mark)',
+                'Properties (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry C2'
+          }
+        ]
+      },
+      {
+        id: 'quantitative-chemistry',
+        name: 'Quantitative chemistry — (Chemistry)',
+        questions: [
+          {
+            id: 'qc-q1',
+            question: 'Calculate the relative formula mass of calcium carbonate (CaCO₃). [Ca=40, C=12, O=16]',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Mr = 40 + 12 + (3 × 16) = 40 + 12 + 48 = 100',
+            markingCriteria: {
+              breakdown: ['Correct method (1 mark)', 'Correct answer (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry C3'
+          }
+        ]
+      },
+      {
+        id: 'chemical-changes',
+        name: 'Chemical changes — (Chemistry)',
+        questions: [
+          {
+            id: 'cc-q1',
+            question: 'Explain what oxidation and reduction mean in terms of electron transfer.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Oxidation is loss of electrons. Reduction is gain of electrons. Remember: OIL RIG (Oxidation Is Loss, Reduction Is Gain).',
+            markingCriteria: {
+              breakdown: ['Oxidation definition (2 marks)', 'Reduction definition (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry C4'
+          }
+        ]
+      },
+      {
+        id: 'energy-changes',
+        name: 'Energy changes — (Chemistry)',
+        questions: [
+          {
+            id: 'ec-q1',
+            question: 'Explain the difference between exothermic and endothermic reactions.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Exothermic: heat energy released to surroundings, temperature increases. Endothermic: heat energy absorbed from surroundings, temperature decreases.',
+            markingCriteria: {
+              breakdown: ['Exothermic definition (2 marks)', 'Endothermic definition (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry C5'
+          }
+        ]
+      },
+      // CHEMISTRY TOPICS - PAPER 2 (C6-C10)
+      {
+        id: 'rate-extent-chemical-change',
+        name: 'The rate and extent of chemical change — (Chemistry)',
+        questions: [
+          {
+            id: 'recc-q1',
+            question: 'Describe four factors that affect the rate of chemical reactions.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Temperature: higher temperature increases rate. Concentration: higher concentration increases rate. Surface area: larger surface area increases rate. Catalyst: speeds up reaction.',
+            markingCriteria: {
+              breakdown: ['Four factors correctly identified (4 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry C6'
+          }
+        ]
+      },
+      {
+        id: 'organic-chemistry',
+        name: 'Organic chemistry — (Chemistry)',
+        questions: [
+          {
+            id: 'oc-q1',
+            question: 'Describe the composition and formation of crude oil.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Crude oil contains mixture of hydrocarbons. Formed from remains of ancient sea creatures over millions of years. Heat and pressure convert organic matter to oil.',
+            markingCriteria: {
+              breakdown: ['Composition (2 marks)', 'Formation process (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry C7'
+          }
+        ]
+      },
+      {
+        id: 'chemical-analysis',
+        name: 'Chemical analysis — (Chemistry)',
+        questions: [
+          {
+            id: 'ca-q1',
+            question: 'Describe how to use chromatography to separate mixtures.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Place spot of mixture on chromatography paper. Dip bottom of paper in solvent. Solvent moves up paper carrying different substances at different rates. Substances separate based on solubility.',
+            markingCriteria: {
+              breakdown: ['Method description (2 marks)', 'Separation principle (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry C8'
+          }
+        ]
+      },
+      {
+        id: 'chemistry-atmosphere',
+        name: 'Chemistry of the atmosphere — (Chemistry)',
+        questions: [
+          {
+            id: 'coa-q1',
+            question: 'Describe the composition of the Earth\'s atmosphere today.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Nitrogen: 78%. Oxygen: 21%. Other gases (including CO₂): 1%.',
+            markingCriteria: {
+              breakdown: ['Three percentages correct (3 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry C9'
+          }
+        ]
+      },
+      {
+        id: 'using-resources',
+        name: 'Using resources — (Chemistry)',
+        questions: [
+          {
+            id: 'ur-q1',
+            question: 'Explain the difference between renewable and finite resources.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Renewable resources: can be replaced as fast as they are used (e.g., wind, solar). Finite resources: limited amounts available, will run out (e.g., fossil fuels, metals).',
+            markingCriteria: {
+              breakdown: ['Renewable definition and example (2 marks)', 'Finite definition and example (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry C10'
+          }
+        ]
+      },
+      // PHYSICS TOPICS - PAPER 1 (P1-P4)
+      {
+        id: 'energy',
+        name: 'Energy — (Physics)',
+        questions: [
+          {
+            id: 'energy-q1',
+            question: 'List four energy stores and give an example of each.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Kinetic: moving car. Gravitational potential: ball at height. Elastic: stretched spring. Chemical: food/fuel.',
+            markingCriteria: {
+              breakdown: ['Four energy stores with examples (4 marks)']
+            },
+            specReference: 'AQA Combined Science Physics P1'
+          }
+        ]
+      },
+      {
+        id: 'electricity',
+        name: 'Electricity — (Physics)',
+        questions: [
+          {
+            id: 'elec-q1',
+            question: 'State the equation linking charge, current, and time.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Q = I × t (Charge = Current × Time)',
+            markingCriteria: {
+              breakdown: ['Correct equation (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics P2'
+          }
+        ]
+      },
+      {
+        id: 'particle-model-matter',
+        name: 'Particle model of matter — (Physics)',
+        questions: [
+          {
+            id: 'pmm-q1',
+            question: 'Define density and give its equation.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Density is mass per unit volume. Density = mass ÷ volume',
+            markingCriteria: {
+              breakdown: ['Definition (1 mark)', 'Equation (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics P3'
+          }
+        ]
+      },
+      {
+        id: 'atomic-structure-physics',
+        name: 'Atomic structure — (Physics)',
+        questions: [
+          {
+            id: 'asp-q1',
+            question: 'Name the three types of nuclear radiation.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Alpha, beta, gamma',
+            markingCriteria: {
+              breakdown: ['Three types named (3 marks)']
+            },
+            specReference: 'AQA Combined Science Physics P4'
+          }
+        ]
+      },
+      // PHYSICS TOPICS - PAPER 2 (P5-P7)
+      {
+        id: 'forces',
+        name: 'Forces — (Physics)',
+        questions: [
+          {
+            id: 'forces-q1',
+            question: 'State Newton\'s first law of motion.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'An object at rest stays at rest, and an object in motion stays in motion at constant velocity, unless acted upon by a resultant force.',
+            markingCriteria: {
+              breakdown: ['Complete statement of first law (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics P5'
+          }
+        ]
+      },
+      {
+        id: 'waves',
+        name: 'Waves — (Physics)',
+        questions: [
+          {
+            id: 'waves-q1',
+            question: 'State the equation linking wave speed, frequency, and wavelength.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'v = f × λ (wave speed = frequency × wavelength)',
+            markingCriteria: {
+              breakdown: ['Correct equation (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics P6'
+          }
+        ]
+      },
+      {
+        id: 'magnetism-electromagnetism',
+        name: 'Magnetism and electromagnetism — (Physics)',
+        questions: [
+          {
+            id: 'me-q1',
+            question: 'Describe the magnetic field around a bar magnet.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Field lines start at north pole and end at south pole. Field lines closer together show stronger field. Field lines never cross.',
+            markingCriteria: {
+              breakdown: ['Direction (1 mark)', 'Strength indication (1 mark)', 'Lines don\'t cross (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics P7'
+          }
+        ]
+      }
         questions: [
           {
             id: 'as-chem-q1',
