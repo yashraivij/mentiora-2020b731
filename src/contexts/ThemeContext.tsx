@@ -11,8 +11,11 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
-    const savedTheme = localStorage.getItem('mentiora-theme') as Theme;
-    return savedTheme || 'light';
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('mentiora-theme') as Theme;
+      return savedTheme || 'light';
+    }
+    return 'light';
   });
 
   useEffect(() => {
