@@ -297,6 +297,13 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     return details[novelId as keyof typeof details] || { author: '', theme: '' };
   };
 
+  const getBadgeText = (subjectId: string) => {
+    if (subjectId === 'maths-edexcel' || subjectId === 'business-edexcel-igcse' || subjectId === 'chemistry-edexcel' || subjectId === 'physics-edexcel' || subjectId === 'edexcel-english-language') {
+      return 'Edexcel GCSE';
+    }
+    return 'AQA GCSE';
+  };
+
   // History helper functions for generating exam questions with sources
   const getHistorySource = (topicId: string, questionType: string): string => {
     const sources = {
@@ -1395,7 +1402,7 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
                 <Crown className="h-8 w-8 text-amber-500" />
                 <div>
                   <CardTitle className="text-2xl font-bold">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : `${subject.name} Predicted Exam`}</CardTitle>
-                  <CardDescription>AQA GCSE • {getExamDuration()} minutes</CardDescription>
+                  <CardDescription>{getBadgeText(subjectId || '')} • {getExamDuration()} minutes</CardDescription>
                 </div>
               </div>
             </CardHeader>
