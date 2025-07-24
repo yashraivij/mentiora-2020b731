@@ -53,6 +53,8 @@ TOTAL MARKS: ${totalMarks}${formulaSheetNote}
 CRITICAL MARKING INSTRUCTIONS:
 - ACCEPT EQUIVALENT ANSWERS: If the student's answer is mathematically correct but uses different units (e.g., N/cm vs N/m, cm vs m, kg vs g), calculate if the values are equivalent and award full marks if correct
 - UNIT CONVERSIONS: Automatically check for common unit conversions (1 m = 100 cm, 1 kg = 1000 g, etc.) and accept correct answers in any reasonable unit
+- MATHEMATICAL PRECISION: If the student gives a more precise answer (e.g., 3.14159) than the model answer (e.g., 3.14), award full marks as long as it's mathematically correct. More precision should NEVER be penalized unless the question specifically asks for rounding.
+- DECIMAL VS ROUNDED: Accept both rounded and unrounded versions of the same numerical answer. For example, if the model answer is 2.5 and the student writes 2.53846..., this should receive full marks unless rounding was specifically requested in the question.
 - ALTERNATIVE FORMS: Accept answers in different but equivalent forms (fractions vs decimals, scientific notation, rearranged equations)
 - ONLY comment on what the student actually wrote - do not assume working that isn't shown
 - If the student gives just a final answer with no working, only assess the accuracy of that answer
