@@ -26,6 +26,619 @@ export interface Subject {
 
 export const curriculum: Subject[] = [
   {
+    id: 'aqa-combined-science-trilogy',
+    name: 'Combined Science (Trilogy)',
+    topics: [
+      // BIOLOGY TOPICS
+      {
+        id: 'cell-structure-biology',
+        name: 'Cell Structure — (Biology)',
+        questions: [
+          {
+            id: 'cs-bio-q1',
+            question: 'Compare the structure of a plant cell and an animal cell, identifying three similarities and three differences.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Similarities: Both have cell membrane, cytoplasm, nucleus. Differences: Plant cells have cell wall, chloroplasts, and large permanent vacuole; animal cells do not have these structures.',
+            markingCriteria: {
+              breakdown: [
+                'Three correct similarities (3 marks)',
+                'Three correct differences (3 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.1'
+          },
+          {
+            id: 'cs-bio-q2',
+            question: 'Explain the difference between prokaryotic and eukaryotic cells, giving one example of each.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Prokaryotic cells have no nucleus (genetic material free in cytoplasm) - example: bacteria. Eukaryotic cells have a nucleus containing genetic material - example: plant/animal cells.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of prokaryotic with example (2 marks)',
+                'Definition of eukaryotic with example (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.1'
+          },
+          {
+            id: 'cs-bio-q3',
+            question: 'Calculate the total magnification when using a ×10 eyepiece lens and a ×40 objective lens.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Total magnification = eyepiece magnification × objective magnification = 10 × 40 = ×400',
+            markingCriteria: {
+              breakdown: [
+                'Correct method (1 mark)',
+                'Correct answer (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.1'
+          },
+          {
+            id: 'cs-bio-q4',
+            question: 'Describe how to prepare a slide to observe plant cells under a light microscope.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Cut thin section of plant tissue with sharp blade. Place on microscope slide. Add drop of water. Lower coverslip carefully to avoid air bubbles. Start with lowest magnification objective lens. Focus using coarse adjustment, then fine adjustment.',
+            markingCriteria: {
+              breakdown: [
+                'Correct sample preparation (2 marks)',
+                'Correct slide preparation (2 marks)',
+                'Correct microscope use (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.1'
+          },
+          {
+            id: 'cs-bio-q5',
+            question: 'State the function of the following cell organelles: nucleus, mitochondria, ribosomes.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Nucleus: controls cell activities and contains genetic material. Mitochondria: site of aerobic respiration, releases energy. Ribosomes: site of protein synthesis.',
+            markingCriteria: {
+              breakdown: [
+                'Nucleus function (1 mark)',
+                'Mitochondria function (1 mark)',
+                'Ribosomes function (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.1'
+          },
+          {
+            id: 'cs-bio-q6',
+            question: 'Explain why plant cells need chloroplasts but animal cells do not.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Plant cells need chloroplasts because they contain chlorophyll for photosynthesis, allowing plants to make their own food using light energy. Animal cells get energy from consuming other organisms, so do not need to photosynthesize.',
+            markingCriteria: {
+              breakdown: [
+                'Reference to photosynthesis (2 marks)',
+                'Explanation of different energy sources (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.1'
+          },
+          {
+            id: 'cs-bio-q7',
+            question: 'Calculate the actual size of a cell that appears 2.5 mm long under ×100 magnification.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Actual size = observed size ÷ magnification = 2.5 mm ÷ 100 = 0.025 mm = 25 μm',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct calculation (1 mark)',
+                'Appropriate units (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.1'
+          },
+          {
+            id: 'cs-bio-q8',
+            question: 'Describe the key features of bacterial cells and explain why they are classified as prokaryotes.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Bacterial cells have cell wall, cell membrane, cytoplasm, and genetic material (DNA) but no nucleus. The DNA is free in the cytoplasm. They may have plasmids (small DNA rings) and flagella for movement. Classified as prokaryotes because genetic material is not enclosed in a nucleus.',
+            markingCriteria: {
+              breakdown: [
+                'Key structural features (3 marks)',
+                'Explanation of prokaryotic classification (3 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.1'
+          },
+          {
+            id: 'cs-bio-q9',
+            question: 'State three safety precautions when using a light microscope.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Carry microscope with both hands. Keep electrical parts away from water. Use lowest magnification first. Handle glass slides carefully. Clean lenses with lens tissue only.',
+            markingCriteria: {
+              breakdown: [
+                'Three appropriate safety precautions (3 marks - 1 each)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.1'
+          },
+          {
+            id: 'cs-bio-q10',
+            question: 'Explain the advantages and limitations of using electron microscopes compared to light microscopes.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Advantages: Much higher magnification (up to ×2,000,000 vs ×2000), higher resolution shows more detail. Limitations: Cannot observe living specimens, expensive, require special preparation, no color images.',
+            markingCriteria: {
+              breakdown: [
+                'Advantages of electron microscopes (3 marks)',
+                'Limitations of electron microscopes (3 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.1'
+          }
+        ]
+      },
+      {
+        id: 'cell-division-biology',
+        name: 'Cell Division — (Biology)',
+        questions: [
+          {
+            id: 'cd-bio-q1',
+            question: 'Describe the process of mitosis and explain why it is important for organisms.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Mitosis produces two genetically identical diploid cells from one diploid cell. Chromosomes duplicate, line up at cell center, separate to opposite poles, then cell divides. Important for growth, repair, and asexual reproduction.',
+            markingCriteria: {
+              breakdown: [
+                'Description of mitosis process (3 marks)',
+                'Importance explained (3 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.2'
+          },
+          {
+            id: 'cd-bio-q2',
+            question: 'State the number of chromosomes in human diploid and haploid cells.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Diploid cells: 46 chromosomes (23 pairs). Haploid cells: 23 chromosomes.',
+            markingCriteria: {
+              breakdown: [
+                'Diploid number correct (1 mark)',
+                'Haploid number correct (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.2'
+          },
+          {
+            id: 'cd-bio-q3',
+            question: 'Explain what stem cells are and why they are important in medicine.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Stem cells are undifferentiated cells that can divide and develop into different specialized cell types. Important in medicine for treating conditions like diabetes, paralysis, and replacing damaged tissues. Can potentially cure diseases by replacing faulty cells.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of stem cells (2 marks)',
+                'Medical applications (2 marks)',
+                'Potential benefits (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.2'
+          },
+          {
+            id: 'cd-bio-q4',
+            question: 'Compare embryonic and adult stem cells, stating one advantage and one disadvantage of each.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Embryonic: Advantage - can develop into any cell type. Disadvantage - ethical concerns about using embryos. Adult: Advantage - no ethical issues as taken from patient. Disadvantage - limited in cell types they can become.',
+            markingCriteria: {
+              breakdown: [
+                'Embryonic advantage and disadvantage (2 marks)',
+                'Adult advantage and disadvantage (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.2'
+          },
+          {
+            id: 'cd-bio-q5',
+            question: 'Describe how plant cells differ from animal cells during cell division.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Plant cells form a cell plate to divide the cytoplasm, while animal cells form a cleavage furrow that pinches the cell in two. Plant cells cannot move during division due to rigid cell wall.',
+            markingCriteria: {
+              breakdown: [
+                'Plant cell division method (2 marks)',
+                'Animal cell division method (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.2'
+          },
+          {
+            id: 'cd-bio-q6',
+            question: 'Explain the role of chromosomes in inheritance.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Chromosomes carry genes (DNA) that contain instructions for characteristics. During reproduction, chromosomes from both parents combine to pass genetic information to offspring, determining inherited traits.',
+            markingCriteria: {
+              breakdown: [
+                'Reference to genes/DNA (2 marks)',
+                'Role in passing traits to offspring (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.2'
+          },
+          {
+            id: 'cd-bio-q7',
+            question: 'State three conditions that stem cell therapy might be used to treat and explain why.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Diabetes - replace insulin-producing cells in pancreas. Paralysis - replace damaged nerve cells in spinal cord. Heart disease - replace damaged heart muscle cells. Stem cells can differentiate into the specific cell types needed.',
+            markingCriteria: {
+              breakdown: [
+                'Three appropriate conditions (3 marks)',
+                'Explanations for treatment (3 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.2'
+          },
+          {
+            id: 'cd-bio-q8',
+            question: 'Describe what happens to chromosomes during mitosis.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Chromosomes duplicate to form sister chromatids joined at centromere. They line up at the cell equator, then sister chromatids separate and move to opposite poles of the cell.',
+            markingCriteria: {
+              breakdown: [
+                'Chromosome duplication (1 mark)',
+                'Alignment at equator (1 mark)',
+                'Separation of chromatids (1 mark)',
+                'Movement to poles (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.2'
+          },
+          {
+            id: 'cd-bio-q9',
+            question: 'Explain why cell differentiation is important for multicellular organisms.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Cell differentiation allows cells to become specialized for specific functions, making organisms more efficient. Different cell types can perform specific tasks like transport, protection, or reproduction.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of specialization (2 marks)',
+                'Benefits for organism function (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.2'
+          },
+          {
+            id: 'cd-bio-q10',
+            question: 'Discuss the ethical considerations surrounding the use of embryonic stem cells in medical research.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Arguments for: potential to cure serious diseases, save lives, reduce suffering. Arguments against: involves destruction of human embryos, concerns about human dignity, slippery slope to other unethical practices. Need to balance medical benefits with ethical concerns.',
+            markingCriteria: {
+              breakdown: [
+                'Arguments in favor (2 marks)',
+                'Arguments against (2 marks)',
+                'Balanced consideration (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Biology 4.1.2'
+          }
+        ]
+      },
+      // Add more biology, chemistry, and physics topics...
+      // CHEMISTRY TOPICS
+      {
+        id: 'atomic-structure-chemistry',
+        name: 'Atomic Structure — (Chemistry)',
+        questions: [
+          {
+            id: 'as-chem-q1',
+            question: 'Describe the structure of an atom, including the relative masses and charges of protons, neutrons, and electrons.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Atom has nucleus containing protons (+1 charge, mass 1) and neutrons (0 charge, mass 1). Electrons (-1 charge, negligible mass) orbit in shells around nucleus. Most of atom is empty space.',
+            markingCriteria: {
+              breakdown: [
+                'Description of nucleus (2 marks)',
+                'Properties of subatomic particles (3 marks)',
+                'Electron arrangement (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry 5.1'
+          },
+          {
+            id: 'as-chem-q2',
+            question: 'Calculate the number of protons, neutrons, and electrons in an atom of chlorine-35 (³⁵Cl).',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Protons: 17 (atomic number). Electrons: 17 (same as protons in neutral atom). Neutrons: 35 - 17 = 18 (mass number - atomic number).',
+            markingCriteria: {
+              breakdown: [
+                'Protons correct (1 mark)',
+                'Electrons correct (1 mark)',
+                'Neutrons correct (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry 5.1'
+          },
+          {
+            id: 'as-chem-q3',
+            question: 'Explain what isotopes are and give an example.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Isotopes are atoms of the same element with the same number of protons but different numbers of neutrons. Example: Carbon-12 and Carbon-14 both have 6 protons but 6 and 8 neutrons respectively.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of isotopes (2 marks)',
+                'Suitable example (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry 5.1'
+          },
+          {
+            id: 'as-chem-q4',
+            question: 'Describe how the model of the atom has changed over time, mentioning Dalton, Thomson, and Rutherford.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Dalton: atoms as solid indivisible spheres. Thomson: plum pudding model with electrons in positive sphere. Rutherford: nuclear model with dense positive nucleus and electrons in space around it, discovered through alpha particle scattering.',
+            markingCriteria: {
+              breakdown: [
+                'Dalton\'s model (2 marks)',
+                'Thomson\'s model (2 marks)',
+                'Rutherford\'s model (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry 5.1'
+          },
+          {
+            id: 'as-chem-q5',
+            question: 'Calculate the relative atomic mass of chlorine given that 75% is ³⁵Cl and 25% is ³⁷Cl.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'Relative atomic mass = (35 × 75/100) + (37 × 25/100) = 26.25 + 9.25 = 35.5',
+            markingCriteria: {
+              breakdown: [
+                'Correct method shown (1 mark)',
+                'Correct calculation (1 mark)',
+                'Correct answer (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry 5.1'
+          },
+          {
+            id: 'as-chem-q6',
+            question: 'Draw the electronic structure of sodium (Na, atomic number 11).',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Electronic structure: 2,8,1. Diagram should show nucleus with 11+ and three electron shells with 2, 8, and 1 electrons respectively.',
+            markingCriteria: {
+              breakdown: [
+                'Correct electron arrangement (1 mark)',
+                'Clear diagram (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry 5.1'
+          },
+          {
+            id: 'as-chem-q7',
+            question: 'Explain why atoms are neutral despite containing charged particles.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Atoms have equal numbers of protons (positive charge) and electrons (negative charge). The positive and negative charges cancel out, making the overall charge zero.',
+            markingCriteria: {
+              breakdown: [
+                'Equal numbers of protons and electrons (1 mark)',
+                'Opposite charges (1 mark)',
+                'Charges cancel out (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry 5.1'
+          },
+          {
+            id: 'as-chem-q8',
+            question: 'State what the atomic number and mass number tell us about an atom.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Atomic number: number of protons (and electrons in neutral atom), defines the element. Mass number: total number of protons and neutrons in the nucleus.',
+            markingCriteria: {
+              breakdown: [
+                'Atomic number definition (2 marks)',
+                'Mass number definition (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry 5.1'
+          },
+          {
+            id: 'as-chem-q9',
+            question: 'Explain how Rutherford\'s alpha particle scattering experiment led to the discovery of the nucleus.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Alpha particles were fired at thin gold foil. Most passed straight through, some deflected slightly, a few bounced back. This showed atoms mostly empty space with small, dense, positive nucleus that repelled positive alpha particles.',
+            markingCriteria: {
+              breakdown: [
+                'Description of experiment (2 marks)',
+                'Observations (2 marks)',
+                'Conclusions about atomic structure (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry 5.1'
+          },
+          {
+            id: 'as-chem-q10',
+            question: 'Compare the properties of protons, neutrons, and electrons in terms of location, mass, and charge.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Protons: in nucleus, relative mass 1, charge +1. Neutrons: in nucleus, relative mass 1, charge 0. Electrons: in shells around nucleus, negligible mass, charge -1.',
+            markingCriteria: {
+              breakdown: [
+                'Proton properties (2 marks)',
+                'Neutron properties (2 marks)',
+                'Electron properties (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Chemistry 5.1'
+          }
+        ]
+      },
+      // PHYSICS TOPICS
+      {
+        id: 'energy-stores-physics',
+        name: 'Energy Stores & Systems — (Physics)',
+        questions: [
+          {
+            id: 'es-phys-q1',
+            question: 'State the different energy stores and give an example of each.',
+            marks: 8,
+            difficulty: 'easy',
+            modelAnswer: 'Kinetic (moving car), gravitational potential (book on shelf), elastic potential (stretched spring), chemical (food/fuel), nuclear (uranium), electrostatic (charged capacitor), magnetic (magnets), thermal (hot water).',
+            markingCriteria: {
+              breakdown: [
+                'Eight energy stores with examples (8 marks - 1 each)'
+              ]
+            },
+            specReference: 'AQA Combined Science Physics 6.1'
+          },
+          {
+            id: 'es-phys-q2',
+            question: 'Calculate the gravitational potential energy stored when a 2.0 kg book is lifted 1.5 m. (g = 9.8 m/s²)',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'GPE = mgh = 2.0 kg × 9.8 m/s² × 1.5 m = 29.4 J',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct substitution (1 mark)',
+                'Correct answer with units (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Physics 6.1'
+          },
+          {
+            id: 'es-phys-q3',
+            question: 'Calculate the kinetic energy of a 1200 kg car travelling at 15 m/s.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'KE = ½mv² = ½ × 1200 kg × (15 m/s)² = ½ × 1200 × 225 = 135,000 J',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct substitution (1 mark)',
+                'Correct answer with units (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Physics 6.1'
+          },
+          {
+            id: 'es-phys-q4',
+            question: 'Explain what is meant by the conservation of energy principle.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Energy cannot be created or destroyed, only transferred from one store to another or transformed from one form to another. The total amount of energy in a closed system remains constant.',
+            markingCriteria: {
+              breakdown: [
+                'Statement that energy cannot be created/destroyed (2 marks)',
+                'Energy can be transferred/transformed (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Physics 6.1'
+          },
+          {
+            id: 'es-phys-q5',
+            question: 'A 50 g ball is dropped from a height of 2.0 m. Calculate its speed just before hitting the ground, assuming no air resistance. (g = 9.8 m/s²)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'GPE at top = KE at bottom. mgh = ½mv². v² = 2gh = 2 × 9.8 × 2.0 = 39.2. v = √39.2 = 6.3 m/s',
+            markingCriteria: {
+              breakdown: [
+                'Conservation of energy principle (1 mark)',
+                'Correct equation setup (1 mark)',
+                'Correct calculation (1 mark)',
+                'Correct answer with units (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Physics 6.1'
+          },
+          {
+            id: 'es-phys-q6',
+            question: 'Calculate the elastic potential energy stored in a spring with spring constant 200 N/m when compressed by 0.05 m.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Elastic PE = ½kx² = ½ × 200 N/m × (0.05 m)² = ½ × 200 × 0.0025 = 0.25 J',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct substitution (1 mark)',
+                'Correct answer with units (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Physics 6.1'
+          },
+          {
+            id: 'es-phys-q7',
+            question: 'Describe the energy transfers that occur when a pendulum swings.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'At highest points: maximum gravitational potential energy, zero kinetic energy. At lowest point: zero gravitational potential energy, maximum kinetic energy. Energy continuously transfers between these stores as pendulum swings.',
+            markingCriteria: {
+              breakdown: [
+                'Energy at highest points (2 marks)',
+                'Energy at lowest point (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Physics 6.1'
+          },
+          {
+            id: 'es-phys-q8',
+            question: 'Calculate the power developed by a motor that transfers 1500 J of energy in 25 s.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Power = energy transferred ÷ time = 1500 J ÷ 25 s = 60 W',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct substitution (1 mark)',
+                'Correct answer with units (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Physics 6.1'
+          },
+          {
+            id: 'es-phys-q9',
+            question: 'Explain why some energy is always "wasted" during energy transfers and what happens to this energy.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Energy is transferred to less useful forms, often as heat due to friction or air resistance. This "wasted" energy spreads out to the surroundings and becomes difficult to use further, but total energy is still conserved.',
+            markingCriteria: {
+              breakdown: [
+                'Reference to less useful forms/heat (2 marks)',
+                'Energy spreads to surroundings (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science Physics 6.1'
+          },
+          {
+            id: 'es-phys-q10',
+            question: 'Calculate the efficiency of an electric motor that uses 800 J of electrical energy to produce 600 J of useful kinetic energy.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Efficiency = (useful energy output ÷ total energy input) × 100% = (600 ÷ 800) × 100% = 75%',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct calculation (1 mark)',
+                'Answer as percentage (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science Physics 6.1'
+          }
+        ]
+      }
+    ]
+  },
+  {
     id: 'physics-edexcel',
     name: 'Physics',
     topics: [
