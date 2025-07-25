@@ -1370,12 +1370,14 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
 
   const markAnswerWithAI = async (question: ExamQuestion, answer: string) => {
     try {
+      console.log('Marking predicted exam answer:', { questionId: question.id, marks: question.marks });
+      
       const { data, error } = await supabase.functions.invoke('mark-answer', {
         body: {
           question: question.text,
           userAnswer: answer,
-          modelAnswer: `This is a predicted exam question for ${question.marks} marks. Provide appropriate feedback based on the question requirements.`,
-          markingCriteria: `Mark this ${question.marks} mark question appropriately based on content quality and detail.`,
+          modelAnswer: `This is a predicted exam question for ${question.marks} marks. Provide appropriate feedback based on the question requirements and content depth expected for this mark value.`,
+          markingCriteria: `Mark this ${question.marks} mark question appropriately. Award marks based on: content accuracy, depth of explanation, use of appropriate terminology, and completeness of answer. Consider what a ${question.marks} mark response should demonstrate.`,
           totalMarks: question.marks,
           subject: subjectId
         }
@@ -1418,12 +1420,17 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
         for (const answer of answers) {
           const question = examQuestions.find(q => q.id === answer.questionId);
           if (question && answer.answer.trim()) {
+            console.log('Processing predicted exam question:', { questionId: question.id, marks: question.marks });
+            
             // Mark the answer with AI
             const markingResult = await markAnswerWithAI(question, answer.answer);
             const marksLost = question.marks - markingResult.marksAwarded;
             
+            console.log('Marking result:', { marksAwarded: markingResult.marksAwarded, marksLost, totalMarks: question.marks });
+            
             // Only generate notes if marks were lost
             if (marksLost > 0) {
+              console.log('Generating notes for lost marks:', marksLost);
               // Create a mock Question object compatible with NotebookGenerator
               const mockQuestion = {
                 id: question.id,
