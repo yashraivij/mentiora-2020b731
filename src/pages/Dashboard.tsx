@@ -311,107 +311,68 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Premium Streak Section */}
-        <div className="mb-8">
-          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 dark:from-orange-950/30 dark:via-red-950/20 dark:to-pink-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 group">
+        {/* Premium Streak Section - Compact */}
+        <div className="mb-6">
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 dark:from-orange-950/30 dark:via-red-950/20 dark:to-pink-950/30 shadow-xl hover:shadow-2xl transition-all duration-300 group">
             {/* Animated Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 via-red-400/20 to-pink-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 via-red-400/20 to-pink-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
             {/* Glowing Border Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 rounded-lg p-[2px] group-hover:animate-pulse">
-              <div className="bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 dark:from-orange-950/30 dark:via-red-950/20 dark:to-pink-950/30 rounded-[6px] h-full w-full" />
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 rounded-lg p-[1px] group-hover:animate-pulse">
+              <div className="bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 dark:from-orange-950/30 dark:via-red-950/20 dark:to-pink-950/30 rounded-[7px] h-full w-full" />
             </div>
             
-            <CardContent className="relative p-8">
+            <CardContent className="relative p-4">
               <div className="flex items-center justify-between">
                 {/* Left Section - Streak Info */}
-                <div className="flex items-center space-x-6">
+                <div className="flex items-center space-x-4">
                   {/* Animated Fire Icon */}
                   <div className="relative">
-                    <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 flex items-center justify-center shadow-2xl group-hover:shadow-orange-500/25 transition-shadow duration-300">
-                      <div className="absolute inset-2 rounded-2xl bg-white/20 backdrop-blur-sm" />
-                      <Flame className="h-10 w-10 text-white relative z-10 group-hover:scale-110 transition-transform duration-300 animate-pulse" />
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 flex items-center justify-center shadow-lg group-hover:shadow-orange-500/25 transition-shadow duration-300">
+                      <Flame className="h-6 w-6 text-white group-hover:scale-110 transition-transform duration-300 animate-pulse" />
                     </div>
                     {/* Floating Sparkles */}
-                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center animate-bounce">
-                      <Sparkles className="h-3 w-3 text-white" />
-                    </div>
-                    <div className="absolute -bottom-1 -left-1 w-4 h-4 bg-gradient-to-r from-pink-400 to-red-400 rounded-full flex items-center justify-center animate-pulse delay-300">
-                      <Star className="h-2 w-2 text-white" />
+                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center animate-bounce">
+                      <Sparkles className="h-2 w-2 text-white" />
                     </div>
                   </div>
                   
                   {/* Streak Text */}
                   <div>
-                    <div className="flex items-center space-x-3 mb-2">
-                      <h3 className="text-4xl font-black bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent">
+                    <div className="flex items-center space-x-2 mb-1">
+                      <h3 className="text-2xl font-black bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent">
                         {getStudyStreak()}
                       </h3>
-                      <span className="text-2xl font-bold text-orange-600 dark:text-orange-400">Days</span>
+                      <span className="text-lg font-bold text-orange-600 dark:text-orange-400">Days</span>
                     </div>
-                    <h4 className="text-xl font-bold text-foreground mb-1">Study Streak</h4>
-                    <p className="text-muted-foreground text-base">Keep the momentum going!</p>
+                    <h4 className="text-sm font-bold text-foreground">Study Streak</h4>
                   </div>
                 </div>
                 
-                {/* Right Section - Motivational Elements */}
-                <div className="flex flex-col items-end space-y-4">
-                  {/* Achievement Badges */}
-                  <div className="flex items-center space-x-2">
-                    <div className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-full border border-yellow-300/30">
-                      <Trophy className="h-4 w-4 text-yellow-600 dark:text-yellow-400" />
-                      <span className="text-sm font-bold text-yellow-700 dark:text-yellow-300">Streak Master</span>
+                {/* Right Section - Compact Stats */}
+                <div className="flex items-center space-x-6 text-center">
+                  <div>
+                    <div className="text-lg font-bold bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
+                      {userProgress.length}
                     </div>
+                    <div className="text-xs font-medium text-muted-foreground">Topics</div>
                   </div>
-                  
-                  {/* Streak Progress */}
-                  <div className="text-right">
-                    <div className="flex items-center space-x-2 mb-2">
-                      <span className="text-sm font-medium text-muted-foreground">Next milestone:</span>
-                      <span className="text-sm font-bold text-orange-600 dark:text-orange-400">{Math.max(7, 14, 30) - getStudyStreak()} days to {getStudyStreak() < 7 ? 'Weekly Hero' : getStudyStreak() < 14 ? 'Study Champion' : 'Legend Status'}</span>
+                  <div className="w-px h-6 bg-orange-300/50 dark:bg-orange-700/50" />
+                  <div>
+                    <div className="text-lg font-bold bg-gradient-to-r from-red-600 to-pink-600 dark:from-red-400 dark:to-pink-400 bg-clip-text text-transparent">
+                      {getMasteredTopics()}
                     </div>
-                    
-                    {/* Progress Bar */}
-                    <div className="w-40 h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 rounded-full transition-all duration-500 animate-pulse"
-                        style={{ width: `${Math.min(100, (getStudyStreak() / 7) * 100)}%` }}
-                      />
-                    </div>
+                    <div className="text-xs font-medium text-muted-foreground">Mastered</div>
                   </div>
-                  
-                  {/* Call to Action */}
+                  <div className="w-px h-6 bg-orange-300/50 dark:bg-orange-700/50" />
                   <Button 
-                    className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white shadow-xl hover:shadow-orange-500/25 transform hover:scale-105 transition-all duration-300 px-6 py-2 text-sm font-semibold"
+                    size="sm"
+                    className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white shadow-lg hover:shadow-orange-500/25 transform hover:scale-105 transition-all duration-300 px-4 py-2 text-xs font-semibold"
                     onClick={() => navigate('/practice')}
                   >
-                    <Flame className="h-4 w-4 mr-2" />
-                    Keep The Fire Burning
+                    <Flame className="h-3 w-3 mr-1" />
+                    Keep Going
                   </Button>
-                </div>
-              </div>
-              
-              {/* Bottom Achievement Row */}
-              <div className="mt-6 flex items-center justify-center space-x-8 pt-6 border-t border-orange-200/50 dark:border-orange-800/30">
-                <div className="text-center">
-                  <div className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
-                    {userProgress.length}
-                  </div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Topics Practiced</div>
-                </div>
-                <div className="w-px h-8 bg-orange-300/50 dark:bg-orange-700/50" />
-                <div className="text-center">
-                  <div className="text-2xl font-bold bg-gradient-to-r from-red-600 to-pink-600 dark:from-red-400 dark:to-pink-400 bg-clip-text text-transparent">
-                    {getMasteredTopics()}
-                  </div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Topics Mastered</div>
-                </div>
-                <div className="w-px h-8 bg-orange-300/50 dark:bg-orange-700/50" />
-                <div className="text-center">
-                  <div className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-orange-600 dark:from-pink-400 dark:to-orange-400 bg-clip-text text-transparent">
-                    {getOverallProgress()}%
-                  </div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Overall Progress</div>
                 </div>
               </div>
             </CardContent>
