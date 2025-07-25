@@ -36,9 +36,16 @@ export class NotebookGenerator {
       // Find the actual subject and topic names from curriculum
       const { curriculum } = await import('@/data/curriculum');
       const subject = curriculum.find(s => s.id === subjectId);
-      const topic = subject?.topics.find(t => t.id === topicId);
       const subjectName = subject?.name || subjectId;
-      const topicName = topic?.name || topicId;
+      
+      // Handle special cases for topic names
+      let topicName = topicId;
+      if (topicId === 'predicted-exam') {
+        topicName = 'Predicted Exam';
+      } else {
+        const topic = subject?.topics.find(t => t.id === topicId);
+        topicName = topic?.name || topicId;
+      }
 
       // Generate notes using OpenAI
       const { data: notesData, error: notesError } = await supabase.functions.invoke('generate-notebook-notes', {

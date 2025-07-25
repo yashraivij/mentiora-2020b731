@@ -185,11 +185,11 @@ const Notebook = () => {
                 <div className="text-xs text-blue-600 dark:text-blue-400">Total Notes</div>
               </CardContent>
             </Card>
-            <Card className="bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-950/30 dark:to-amber-900/20 border-amber-200/50 dark:border-amber-800/30">
+            <Card className="bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/30 dark:to-red-900/20 border-red-200/50 dark:border-red-800/30">
               <CardContent className="p-4 text-center">
-                <Star className="h-6 w-6 text-amber-600 dark:text-amber-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-amber-800 dark:text-amber-300">{stats.lowConfidence}</div>
-                <div className="text-xs text-amber-600 dark:text-amber-400">Priority Topics</div>
+                <TrendingUp className="h-6 w-6 text-red-600 dark:text-red-400 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-red-800 dark:text-red-300">{stats.totalMarksLost}</div>
+                <div className="text-xs text-red-600 dark:text-red-400">Marks Lost</div>
               </CardContent>
             </Card>
             <Card className="bg-gradient-to-br from-green-50 to-green-100/50 dark:from-green-950/30 dark:to-green-900/20 border-green-200/50 dark:border-green-800/30">
@@ -239,7 +239,6 @@ const Notebook = () => {
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="recent">Recent</SelectItem>
                   <SelectItem value="subject">Subject</SelectItem>
                   <SelectItem value="confidence">Confidence</SelectItem>
                   <SelectItem value="marks">Marks Lost</SelectItem>

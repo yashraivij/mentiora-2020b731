@@ -406,7 +406,7 @@ const PredictedResults = () => {
                 attempt.userAnswer,
                 marksLost,
                 subjectId === 'geography-paper-2' ? 'geography' : subjectId || '',
-                'general'
+                'predicted-exam'
               );
               
               if (success) {
