@@ -182,29 +182,34 @@ export const usePersonalizedNotifications = () => {
   }, []);
 
   
-  // Helper function to extract topic from question text
+  // Helper function to extract topic from question text - using actual curriculum topics
   const extractTopicFromText = useCallback((questionText: string): string => {
     const text = questionText.toLowerCase();
     
-    // Geography topics - more comprehensive
-    if (text.includes('urbanisation') || text.includes('urban') || text.includes('city') || text.includes('megacity') || text.includes('slum') || text.includes('suburb')) return 'Urbanisation and Settlement';
-    if (text.includes('migration') || text.includes('refugee') || text.includes('push factor') || text.includes('pull factor') || text.includes('immigra')) return 'Migration and Population';
-    if (text.includes('development') || text.includes('gdp') || text.includes('hdi') || text.includes('poverty') || text.includes('economic') || text.includes('trade')) return 'Development and Inequality';
-    if (text.includes('demographic') || text.includes('population') || text.includes('birth rate') || text.includes('death rate') || text.includes('ageing')) return 'Population Dynamics';
-    if (text.includes('resource') || text.includes('energy') || text.includes('water') || text.includes('food') || text.includes('sustainability') || text.includes('renewable')) return 'Resource Management';
-    if (text.includes('hazard') || text.includes('earthquake') || text.includes('volcano') || text.includes('tsunami') || text.includes('disaster') || text.includes('risk')) return 'Natural Hazards';
-    if (text.includes('climate') || text.includes('weather') || text.includes('storm') || text.includes('hurricane') || text.includes('typhoon') || text.includes('monsoon')) return 'Weather and Climate';
-    if (text.includes('ecosystem') || text.includes('tropical') || text.includes('desert') || text.includes('rainforest') || text.includes('savanna') || text.includes('biodiversity')) return 'Ecosystems and Biomes';
-    if (text.includes('plate') || text.includes('tectonic') || text.includes('fold') || text.includes('fault') || text.includes('crust') || text.includes('mantle')) return 'Plate Tectonics';
-    if (text.includes('river') || text.includes('drainage') || text.includes('meander') || text.includes('flood') || text.includes('erosion') || text.includes('deposition')) return 'Rivers and Coasts';
-    if (text.includes('coast') || text.includes('beach') || text.includes('cliff') || text.includes('wave') || text.includes('longshore') || text.includes('headland')) return 'Coastal Processes';
-    if (text.includes('glacier') || text.includes('ice') || text.includes('periglacial') || text.includes('moraine') || text.includes('fjord')) return 'Glaciation';
+    // Match actual geography curriculum topics
+    if (text.includes('urbanisation') || text.includes('urban') || text.includes('city') || text.includes('megacity') || text.includes('slum') || text.includes('suburb')) return 'Urban Issues and Challenges';
+    if (text.includes('economic') || text.includes('development') || text.includes('trade') || text.includes('globalization') || text.includes('tnc') || text.includes('aid')) return 'The Changing Economic World';
+    if (text.includes('resource') || text.includes('water') || text.includes('energy') || text.includes('food') || text.includes('sustainability')) return 'Resource Management';
+    if (text.includes('hazard') || text.includes('earthquake') || text.includes('volcano') || text.includes('tsunami') || text.includes('disaster')) return 'Natural Hazards';
+    if (text.includes('tectonic') || text.includes('plate') || text.includes('continental') || text.includes('destructive') || text.includes('constructive')) return 'Tectonic Hazards';
+    if (text.includes('storm') || text.includes('hurricane') || text.includes('typhoon') || text.includes('drought') || text.includes('extreme weather')) return 'Weather Hazards';
+    if (text.includes('climate change') || text.includes('greenhouse') || text.includes('global warming') || text.includes('carbon')) return 'Climate Change';
+    if (text.includes('ecosystem') || text.includes('biodiversity') || text.includes('food chain') || text.includes('nutrient cycle')) return 'Ecosystems';
+    if (text.includes('rainforest') || text.includes('tropical') || text.includes('deforestation') || text.includes('amazon')) return 'Tropical Rainforests';
+    if (text.includes('desert') || text.includes('tundra') || text.includes('polar') || text.includes('antarctica')) return 'Hot Deserts/Cold Environments';
+    if (text.includes('coast') || text.includes('beach') || text.includes('cliff') || text.includes('wave') || text.includes('erosion') || text.includes('longshore')) return 'Coastal Landscapes in the UK';
+    if (text.includes('river') || text.includes('drainage') || text.includes('meander') || text.includes('flood') || text.includes('waterfall')) return 'River Landscapes in the UK';
+    if (text.includes('glacier') || text.includes('ice') || text.includes('corrie') || text.includes('moraine') || text.includes('fjord')) return 'Glacial Landscapes in the UK';
+    if (text.includes('physical landscape') || text.includes('uk landscape') || text.includes('upland') || text.includes('lowland')) return 'UK Physical Landscapes Overview';
+    
+    // For geography paper 2 specific topics
+    if (text.includes('migration') || text.includes('refugee') || text.includes('population')) return 'Urban Issues and Challenges';
     
     // Extract from section/topic hints in question structure
-    if (text.includes('section a') || text.includes('physical') || text.includes('landscape')) return 'Physical Geography';
-    if (text.includes('section b') || text.includes('human') || text.includes('people')) return 'Human Geography';
+    if (text.includes('section a') || text.includes('physical')) return 'Natural Hazards';
+    if (text.includes('section b') || text.includes('human')) return 'Urban Issues and Challenges';
     
-    return 'Geography Topics';
+    return 'Natural Hazards'; // Default fallback to an actual topic
   }, []);
 
   // Check for recent exam completion and show weak topic recommendation
