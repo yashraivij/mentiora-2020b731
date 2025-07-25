@@ -33,6 +33,12 @@ export class NotebookGenerator {
     try {
       console.log('Generating notebook notes for question:', question.id);
 
+      // Find the actual topic name from curriculum
+      const { curriculum } = await import('@/data/curriculum');
+      const subject = curriculum.find(s => s.id === subjectId);
+      const topic = subject?.topics.find(t => t.id === topicId);
+      const topicName = topic?.name || topicId;
+
       // Generate notes using OpenAI
       const { data: notesData, error: notesError } = await supabase.functions.invoke('generate-notebook-notes', {
         body: {
@@ -41,8 +47,8 @@ export class NotebookGenerator {
           modelAnswer: question.modelAnswer,
           markingCriteria: question.markingCriteria?.breakdown?.join('; ') || 'Standard marking criteria',
           subject: subjectId,
-          topic: topicId,
-          subtopic: topicId,
+          topic: topicName,
+          subtopic: topicName,
           marksLost
         }
       });
@@ -65,8 +71,8 @@ export class NotebookGenerator {
         .select('*')
         .eq('user_id', userId)
         .eq('subject', subjectId)
-        .eq('topic', topicId)
-        .eq('subtopic', topicId);
+        .eq('topic', topicName)
+        .eq('subtopic', topicName);
 
       if (fetchError) {
         console.error('Error checking existing notes:', fetchError);
@@ -114,8 +120,8 @@ export class NotebookGenerator {
           user_id: userId,
           subject: subjectId,
           paper: `${subjectId} Paper 1`, // Default paper name
-          topic: topicId,
-          subtopic: topicId,
+          topic: topicName,
+          subtopic: topicName,
           question_id: question.id,
           question_label: `Q: ${question.question.substring(0, 50)}...`,
           confidence_level: confidenceLevel,

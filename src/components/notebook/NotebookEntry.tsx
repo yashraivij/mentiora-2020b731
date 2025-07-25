@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Lightbulb, Target, Clock, ExternalLink, Brain } from "lucide-react";
+import { BookOpen, Lightbulb, Target, Clock, ExternalLink, Brain, AlertCircle } from "lucide-react";
 import { format } from "date-fns";
 
 interface NotebookEntryProps {
@@ -108,7 +108,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             {entry.bulletproof_notes.map((note, index) => (
               <li key={index} className="flex items-start gap-2 text-blue-700 dark:text-blue-200 text-sm">
                 <span className="text-blue-500 dark:text-blue-400 mt-1">•</span>
-                <span dangerouslySetInnerHTML={{ __html: note.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                <span dangerouslySetInnerHTML={{ __html: note.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*/g, '') }} />
               </li>
             ))}
           </ul>
@@ -121,9 +121,9 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
               <Target className="h-4 w-4" />
               Mini Worked Example
             </h4>
-            <pre className="text-purple-700 dark:text-purple-200 text-sm whitespace-pre-wrap font-mono">
-              {entry.mini_example}
-            </pre>
+            <p className="text-purple-700 dark:text-purple-200 text-sm whitespace-pre-wrap">
+              {entry.mini_example?.replace(/\*/g, '')}
+            </p>
           </div>
         )}
 
@@ -165,6 +165,3 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
     </Card>
   );
 };
-
-// Import the missing AlertCircle icon
-import { AlertCircle } from "lucide-react";

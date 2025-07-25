@@ -177,19 +177,12 @@ const Notebook = () => {
           </div>
 
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             <Card className="bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/30 dark:to-blue-900/20 border-blue-200/50 dark:border-blue-800/30">
               <CardContent className="p-4 text-center">
                 <BookOpen className="h-6 w-6 text-blue-600 dark:text-blue-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-blue-800 dark:text-blue-300">{stats.totalEntries}</div>
                 <div className="text-xs text-blue-600 dark:text-blue-400">Total Notes</div>
-              </CardContent>
-            </Card>
-            <Card className="bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/30 dark:to-red-900/20 border-red-200/50 dark:border-red-800/30">
-              <CardContent className="p-4 text-center">
-                <TrendingUp className="h-6 w-6 text-red-600 dark:text-red-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-red-800 dark:text-red-300">{stats.totalMarksLost}</div>
-                <div className="text-xs text-red-600 dark:text-red-400">Marks to Recover</div>
               </CardContent>
             </Card>
             <Card className="bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-950/30 dark:to-amber-900/20 border-amber-200/50 dark:border-amber-800/30">
@@ -272,34 +265,9 @@ const Notebook = () => {
           </Card>
         ) : (
           <div className="space-y-6">
-            {/* Group by subject if multiple subjects */}
-            {getSubjects().length > 1 && selectedSubject === 'all' ? (
-              <Tabs value={getSubjects()[0]} className="w-full">
-                <TabsList className="grid w-full grid-cols-3 max-w-md">
-                  {getSubjects().slice(0, 3).map(subject => (
-                    <TabsTrigger key={subject} value={subject} className="capitalize">
-                      {subject}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-                
-                {getSubjects().map(subject => (
-                  <TabsContent key={subject} value={subject} className="mt-6">
-                    <div className="space-y-6">
-                      {sortedEntries.filter(entry => entry.subject === subject).map(entry => (
-                        <NotebookEntry key={entry.id} entry={entry} />
-                      ))}
-                    </div>
-                  </TabsContent>
-                ))}
-              </Tabs>
-            ) : (
-              <div className="space-y-6">
-                {sortedEntries.map(entry => (
-                  <NotebookEntry key={entry.id} entry={entry} />
-                ))}
-              </div>
-            )}
+            {sortedEntries.map(entry => (
+              <NotebookEntry key={entry.id} entry={entry} />
+            ))}
           </div>
         )}
 
