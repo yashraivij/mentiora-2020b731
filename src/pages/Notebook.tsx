@@ -86,7 +86,10 @@ const Notebook = () => {
   const sortedEntries = [...filteredEntries].sort((a, b) => {
     switch (sortBy) {
       case 'recent':
-        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        // Ensure newest entries are always at the top
+        const dateA = new Date(a.created_at).getTime();
+        const dateB = new Date(b.created_at).getTime();
+        return dateB - dateA; // Descending order (newest first)
       case 'subject':
         return a.subject.localeCompare(b.subject);
       case 'confidence':
@@ -96,7 +99,10 @@ const Notebook = () => {
       case 'marks':
         return b.mark_loss - a.mark_loss;
       default:
-        return 0;
+        // Default to newest first as well
+        const defaultDateA = new Date(a.created_at).getTime();
+        const defaultDateB = new Date(b.created_at).getTime();
+        return defaultDateB - defaultDateA;
     }
   });
 
