@@ -909,28 +909,31 @@ const Dashboard = () => {
         />
       )}
 
-      {/* Debug/Feedback Buttons */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-2">
-        {/* Debug button - temporary for testing */}
+      {/* AI Study Recommendation Button */}
+      <div className="fixed bottom-6 right-6 z-50">
         <Button
           onClick={() => {
             clearNotificationCache();
             checkForWeakTopicRecommendation();
           }}
-          variant="outline"
-          size="sm"
-          className="bg-background/80 backdrop-blur-sm border shadow-lg hover:shadow-xl transition-all duration-200"
+          className="relative overflow-hidden bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 hover:from-purple-700 hover:via-blue-700 hover:to-cyan-600 text-white border-0 shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 px-6 py-3 rounded-xl font-semibold backdrop-blur-sm"
+          size="default"
         >
-          🔄 Test Notifications
-        </Button>
-        
-        <Button
-          data-feedback-fish
-          variant="outline"
-          size="sm"
-          className="bg-background/80 backdrop-blur-sm border shadow-lg hover:shadow-xl transition-all duration-200"
-        >
-          💬 Feedback
+          {/* Animated background sparkles */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-2 left-3 w-1 h-1 bg-white/60 rounded-full animate-pulse" />
+            <div className="absolute bottom-3 right-4 w-1.5 h-1.5 bg-cyan-300/70 rounded-full animate-pulse delay-300" />
+            <div className="absolute top-1/2 right-2 w-0.5 h-0.5 bg-purple-300/80 rounded-full animate-pulse delay-700" />
+          </div>
+          
+          {/* Content */}
+          <div className="relative flex items-center gap-2">
+            <div className="w-5 h-5 border-2 border-white/70 border-t-white rounded-full animate-spin" />
+            <span>What Should I Study?</span>
+          </div>
+          
+          {/* Subtle glow effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-blue-400/20 to-cyan-400/20 rounded-xl blur-sm" />
         </Button>
       </div>
     </div>
