@@ -67,7 +67,7 @@ export const PersonalizedNotification = ({
           message: `Based on your recent exam, we recommend focusing on ${weakestTopic} to improve your grade.`,
           actionText: "Practice Topic",
           badgeText: "AI Analysis",
-          gradient: "from-purple-500 via-violet-500 to-indigo-500"
+          gradient: "from-sky-400 via-blue-500 to-cyan-500"
         };
       case "exam-recommendation":
         return {
