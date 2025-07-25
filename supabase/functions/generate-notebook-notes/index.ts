@@ -39,24 +39,24 @@ SUBJECT: ${subject}
 TOPIC: ${topic}
 SUBTOPIC: ${subtopic}
 
-Create ultra-clear, Grade 9-level revision notes in this EXACT format:
+Create ultra-clear, Grade 9-level revision notes in this EXACT format. Use proper grammar and start ALL sentences with capital letters:
 
-1. WHAT TRIPPED ME UP (1 line): [Ultra-short diagnosis of the main mistake]
+1. WHAT TRIPPED ME UP (1 line): [Ultra-short diagnosis of the main mistake, starting with capital letter]
 
-2. FIX IN ONE SENTENCE: [The one rule that would have saved me marks]
+2. FIX IN ONE SENTENCE: [The one rule that would have saved me marks, starting with capital letter]
 
 3. BULLETPROOF NOTES (3-5 short bullets):
-• [Key fact/definition with bold terms]
-• [Essential equation in symbols and words]
-• [Common mistake to avoid]
-• [Memory aid or comparison]
+• [Key fact/definition with bold terms, starting with capital letter]
+• [Essential equation in symbols and words, starting with capital letter]
+• [Common mistake to avoid, starting with capital letter]
+• [Memory aid or comparison, starting with capital letter]
 
 4. MINI WORKED EXAMPLE (2-4 lines max):
-[Brief example showing correct method]
+[Brief example showing correct method, starting with capital letter]
 
 5. KEYWORDS: [5-8 key terms separated by commas]
 
-6. NEXT STEP: [1 sentence suggesting what to practice next]
+6. NEXT STEP: [1 sentence suggesting what to practice next, starting with capital letter]
 
 Style guide:
 - Grade 9 explaining to Grade 9 tone
@@ -65,6 +65,7 @@ Style guide:
 - Include units in equations
 - Use "Don't do this → ... / Do this → ..." for pitfalls
 - Keep it exam-focused and practical
+- ALWAYS start sentences with capital letters
 
 Generate the notes now:`;
 

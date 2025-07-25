@@ -163,6 +163,37 @@ export class NotebookGenerator {
       if (result.marks_awarded < result.total_marks) {
         const marksLost = result.total_marks - result.marks_awarded;
         
+        // Resolve topic from question data or try to determine from content
+        let topicId = 'general';
+        
+        if (result.question_data?.topic) {
+          topicId = result.question_data.topic;
+        } else if (result.topic) {
+          topicId = result.topic;
+        } else {
+          // Try to determine topic from question content for specific subjects
+          const questionText = (result.question_text || '').toLowerCase();
+          
+          if (subjectId === 'english-language') {
+            // Check for Children's Language Development keywords
+            if (questionText.includes('child') || questionText.includes('transcript') || 
+                questionText.includes('language development') || questionText.includes('phonological') ||
+                questionText.includes('vocabulary') || questionText.includes('grammar development')) {
+              topicId = 'childrens-language-development';
+            }
+            // Check for Textual Variations and Representations keywords
+            else if (questionText.includes('text') || questionText.includes('language techniques') ||
+                     questionText.includes('representation') || questionText.includes('analyse') ||
+                     questionText.includes('compare') || questionText.includes('language choice')) {
+              topicId = 'textual-variations-representations';
+            }
+            // Default to the first topic if we can't determine
+            else {
+              topicId = 'textual-variations-representations';
+            }
+          }
+        }
+        
         // Create a simplified question object
         const question = {
           id: result.question_id || `exam_q_${Date.now()}`,
@@ -180,7 +211,7 @@ export class NotebookGenerator {
           result.user_answer || '',
           marksLost,
           subjectId,
-          result.topic || 'general'
+          topicId
         );
 
         if (success) {
