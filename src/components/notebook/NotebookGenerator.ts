@@ -124,7 +124,7 @@ export class NotebookGenerator {
           topic: topicName,
           subtopic: topicName,
           question_id: question.id,
-          question_label: `Q: ${question.question.substring(0, 50)}...`,
+          question_label: question.question,
           confidence_level: confidenceLevel,
           what_tripped_up: notes.whatTrippedUp,
           fix_sentence: notes.fixSentence,

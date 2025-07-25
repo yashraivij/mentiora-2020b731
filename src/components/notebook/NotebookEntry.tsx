@@ -65,7 +65,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
               </Badge>
               <Badge variant="outline" className="flex items-center gap-1">
                 {getSkillIcon(entry.skill_type)}
-                {entry.skill_type}
+                {entry.skill_type.charAt(0).toUpperCase() + entry.skill_type.slice(1)}
               </Badge>
               <Badge variant="secondary">
                 -{entry.mark_loss} marks
