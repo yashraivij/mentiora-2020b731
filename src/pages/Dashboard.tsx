@@ -26,7 +26,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { StressTracker } from "@/lib/stressTracker";
 import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
-import { useToast } from "@/hooks/use-toast";
 
 interface UserProgress {
   subjectId: string;
@@ -54,8 +53,6 @@ const Dashboard = () => {
     hideNotification,
     clearNotification
   } = usePersonalizedNotifications();
-
-  const { toast } = useToast();
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -916,25 +913,6 @@ const Dashboard = () => {
       <div className="fixed bottom-6 right-6 z-50">
         <Button
           onClick={() => {
-            // Don't show learning journey message if there's already a notification visible
-            if (!notification.isVisible) {
-              toast({
-                title: "🎯 Unlock Your Academic Potential",
-                description: "Take your first predicted exam to discover personalized study recommendations and see what grade you're on track for!",
-                duration: 6000,
-                action: (
-                  <Button
-                    size="sm"
-                    onClick={() => navigate('/predicted-results')}
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 shadow-lg"
-                  >
-                    📊 View Predicted Grades
-                  </Button>
-                ),
-              });
-            }
-            
-            // Always try to get recommendations
             clearNotificationCache();
             checkForWeakTopicRecommendation();
           }}
