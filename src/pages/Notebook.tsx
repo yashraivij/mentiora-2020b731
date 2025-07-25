@@ -41,7 +41,7 @@ const Notebook = () => {
   const [loading, setLoading] = useState(true);
   const [selectedSubject, setSelectedSubject] = useState<string>('all');
   const [selectedConfidence, setSelectedConfidence] = useState<string>('all');
-  const [sortBy, setSortBy] = useState<string>('subject');
+  const [sortBy, setSortBy] = useState<string>('recent');
 
   useEffect(() => {
     if (!user?.id) {
@@ -109,10 +109,15 @@ const Notebook = () => {
     const totalEntries = entries.length;
     const totalMarksLost = entries.reduce((sum, entry) => sum + entry.mark_loss, 0);
     const lowConfidence = entries.filter(entry => entry.confidence_level.toLowerCase() === 'low').length;
-    const avgMarksPerNote = totalEntries > 0 ? Math.round(totalMarksLost / totalEntries * 10) / 10 : 0;
+    const recentNotes = entries.filter(entry => {
+      const noteDate = new Date(entry.created_at);
+      const weekAgo = new Date();
+      weekAgo.setDate(weekAgo.getDate() - 7);
+      return noteDate >= weekAgo;
+    }).length;
     const subjects = getSubjects();
 
-    return { totalEntries, totalMarksLost, lowConfidence, avgMarksPerNote, subjectsWithNotes: subjects.length };
+    return { totalEntries, totalMarksLost, lowConfidence, recentNotes, subjectsWithNotes: subjects.length };
   };
 
   const stats = getStats();
@@ -186,11 +191,11 @@ const Notebook = () => {
                 <div className="text-xs text-blue-600 dark:text-blue-400">Total Notes</div>
               </CardContent>
             </Card>
-            <Card className="bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-950/30 dark:to-amber-900/20 border-amber-200/50 dark:border-amber-800/30">
+            <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/30 dark:to-emerald-900/20 border-emerald-200/50 dark:border-emerald-800/30">
               <CardContent className="p-4 text-center">
-                <TrendingUp className="h-6 w-6 text-amber-600 dark:text-amber-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-amber-800 dark:text-amber-300">{stats.avgMarksPerNote}</div>
-                <div className="text-xs text-amber-600 dark:text-amber-400">Avg Marks/Note</div>
+                <Calendar className="h-6 w-6 text-emerald-600 dark:text-emerald-400 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-emerald-800 dark:text-emerald-300">{stats.recentNotes}</div>
+                <div className="text-xs text-emerald-600 dark:text-emerald-400">This Week</div>
               </CardContent>
             </Card>
             <Card className="bg-gradient-to-br from-green-50 to-green-100/50 dark:from-green-950/30 dark:to-green-900/20 border-green-200/50 dark:border-green-800/30">
