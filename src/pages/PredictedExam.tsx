@@ -9,6 +9,9 @@ import { ArrowLeft, Clock, AlertCircle, CheckCircle, Crown, Target } from "lucid
 import { curriculum } from "@/data/curriculum";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
+import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ExamQuestion {
   id: string;
@@ -27,6 +30,7 @@ const PredictedExam = () => {
   const { subjectId } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { user } = useAuth();
   
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTimeUp, setIsTimeUp] = useState(false);
@@ -1364,10 +1368,53 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
     return answers.find(a => a.questionId === questionId)?.answer || '';
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Allow submission at any time for all subjects - no validation required
     
     setIsSubmitted(true);
+    
+    // Generate notebook notes for exam practice if user is logged in
+    if (user?.id && answers.length > 0) {
+      try {
+        // Generate notes for each answered question
+        for (const answer of answers) {
+          const question = examQuestions.find(q => q.id === answer.questionId);
+          if (question && answer.answer.trim()) {
+            // Create a mock Question object compatible with NotebookGenerator
+            const mockQuestion = {
+              id: question.id,
+              question: question.text,
+              marks: question.marks,
+              difficulty: 'medium' as const,
+              modelAnswer: `This is a predicted exam question. Review your answer and compare with mark schemes.`,
+              markingCriteria: { breakdown: [`Review marking criteria for ${question.marks} mark question`] },
+              specReference: 'Predicted Exam Practice'
+            };
+            
+            await NotebookGenerator.generateAndSaveNotes(
+              user.id,
+              mockQuestion,
+              answer.answer,
+              Math.ceil(question.marks * 0.3), // Assume 30% marks lost for note generation
+              subjectId || '',
+              'predicted-exam'
+            );
+          }
+        }
+        
+        toast({
+          title: "Exam submitted!",
+          description: "Practice notes have been added to your Smart Notebook for review.",
+        });
+      } catch (error) {
+        console.error('Error generating notebook notes:', error);
+        toast({
+          title: "Exam submitted!",
+          description: "Exam submitted successfully.",
+        });
+      }
+    }
+    
     navigate(`/predicted-results/${subjectId}`, { 
       state: { 
         questions: examQuestions, 
