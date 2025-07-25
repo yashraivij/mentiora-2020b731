@@ -50,9 +50,38 @@ const PredictedResults = () => {
   
   const { questions, answers, timeElapsed, isReview, completion, totalMarks } = location.state || {};
   
+  // If no state is provided, show a message instead of redirecting
   if (!questions || !answers) {
-    navigate('/predicted-questions');
-    return null;
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10">
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-4xl mx-auto">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-center">No Exam Results Found</CardTitle>
+                <CardDescription className="text-center">
+                  It looks like you haven't completed an exam yet or the session expired.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="text-center space-y-4">
+                <Button 
+                  onClick={() => navigate('/predicted-questions')}
+                  className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700"
+                >
+                  Take a Predicted Exam
+                </Button>
+                <Button 
+                  onClick={() => navigate('/dashboard')} 
+                  variant="outline"
+                >
+                  Back to Dashboard
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const subject = curriculum.find(s => s.id === subjectId);

@@ -1420,13 +1420,13 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
         for (const answer of answers) {
           const question = examQuestions.find(q => q.id === answer.questionId);
           if (question && answer.answer.trim()) {
-            console.log('Processing predicted exam question:', { questionId: question.id, marks: question.marks });
+            console.log('Processing predicted exam question:', { questionId: question.id, marks: question.marks, subject: subjectId });
             
             // Mark the answer with AI
             const markingResult = await markAnswerWithAI(question, answer.answer);
             const marksLost = question.marks - markingResult.marksAwarded;
             
-            console.log('Marking result:', { marksAwarded: markingResult.marksAwarded, marksLost, totalMarks: question.marks });
+            console.log('Marking result:', { marksAwarded: markingResult.marksAwarded, marksLost, totalMarks: question.marks, subject: subjectId });
             
             // Only generate notes if marks were lost
             if (marksLost > 0) {
@@ -1447,6 +1447,14 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
                 specReference: 'Predicted Exam Practice'
               };
               
+              console.log('Calling NotebookGenerator with:', { 
+                userId: user.id, 
+                questionId: question.id, 
+                marksLost, 
+                subjectId: subjectId || '', 
+                topicId: 'predicted-exam' 
+              });
+              
               const success = await NotebookGenerator.generateAndSaveNotes(
                 user.id,
                 mockQuestion,
@@ -1455,6 +1463,8 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
                 subjectId || '',
                 'predicted-exam'
               );
+              
+              console.log('NotebookGenerator result:', success);
               
               if (success) {
                 notesGenerated++;
