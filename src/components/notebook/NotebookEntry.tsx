@@ -151,16 +151,6 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
           <p className="text-amber-700 dark:text-amber-200 text-sm">{entry.next_step_suggestion}</p>
         </div>
 
-        {/* Spec Link */}
-        <div className="flex items-center justify-between pt-4 border-t border-border">
-          <div className="text-xs text-muted-foreground">
-            <span className="font-medium">Specification:</span> {entry.spec_link}
-          </div>
-          <Button variant="ghost" size="sm" className="text-xs">
-            <ExternalLink className="h-3 w-3 mr-1" />
-            View Spec
-          </Button>
-        </div>
       </CardContent>
     </Card>
   );

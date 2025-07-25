@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Crown, Target, CheckCircle, XCircle, BookOpen, Clock, RotateCcw, Book, Lightbulb, HelpCircle, User, StickyNote } from "lucide-react";
+import { ArrowLeft, Crown, Target, CheckCircle, XCircle, BookOpen, Clock, RotateCcw, Book, Lightbulb, HelpCircle, User, StickyNote, Brain } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { supabase } from "@/integrations/supabase/client";
@@ -681,7 +681,7 @@ const PredictedResults = () => {
               <CardHeader className="text-center pb-4">
                 <CardTitle className="flex items-center justify-center gap-3 text-purple-800 dark:text-purple-200 text-xl">
                   <div className="p-2 bg-purple-100 dark:bg-purple-900/50 rounded-full">
-                    <StickyNote className="h-6 w-6" />
+                    <Brain className="h-6 w-6" />
                   </div>
                   Smart Revision Notes Generated
                 </CardTitle>
@@ -698,7 +698,7 @@ const PredictedResults = () => {
                   className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
                   size="lg"
                 >
-                  <StickyNote className="h-5 w-5 mr-2" />
+                  <Brain className="h-5 w-5 mr-2" />
                   View Smart Notebook
                 </Button>
               </CardContent>

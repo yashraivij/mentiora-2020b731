@@ -322,12 +322,64 @@ const Dashboard = () => {
         {/* Predicted 2026 Questions Section */}
         <PredictedQuestionsSection />
 
-        {/* Premium Stress Monitor - Prominently displayed */}
-        <DashboardStressMonitor 
-          userId={user?.id} 
-          userProgress={userProgress}
-          onSubjectClick={handlePractice}
-        />
+        {/* Premium Stress Monitor & Smart Revision Notebook - Side by Side */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          <DashboardStressMonitor 
+            userId={user?.id} 
+            userProgress={userProgress}
+            onSubjectClick={handlePractice}
+          />
+          
+          {/* Smart Revision Notebook - Premium Feature */}
+          <Card className="border-l-4 border-l-amber-500 bg-gradient-to-br from-amber-50/50 to-yellow-50/30 dark:from-amber-950/20 dark:to-yellow-950/10 shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer group" onClick={() => navigate('/notebook')}>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center shadow-lg">
+                    <BookOpen className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-foreground group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors">
+                      Smart Revision Notebook
+                    </h3>
+                    <div className="flex items-center space-x-2">
+                      <Crown className="h-3 w-3 text-amber-500" />
+                      <span className="text-xs font-medium text-muted-foreground">Premium Feature</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2 opacity-60 group-hover:opacity-100 transition-opacity">
+                  <Brain className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+                  <span className="text-sm text-amber-700 dark:text-amber-300 font-medium">AI-Generated</span>
+                </div>
+              </div>
+              
+              <p className="text-muted-foreground mb-4">
+                Automatically generates ultra-clear, Grade 9-level revision notes for every question where you lose marks. Written by AI in student-friendly language with key definitions, equations, and exam tips.
+              </p>
+              
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="text-sm text-amber-700 dark:text-amber-300">
+                    <span className="font-semibold">✓</span> Instant note generation
+                  </div>
+                  <div className="text-sm text-amber-700 dark:text-amber-300">
+                    <span className="font-semibold">✓</span> Organized by topic
+                  </div>
+                  <div className="text-sm text-amber-700 dark:text-amber-300">
+                    <span className="font-semibold">✓</span> Exam-focused content
+                  </div>
+                </div>
+                <Button 
+                  variant="outline" 
+                  className="border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/20 group-hover:shadow-md transition-all"
+                >
+                  Open Notebook →
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Subjects Section */}
         <div className="mb-8">
@@ -518,55 +570,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Smart Revision Notebook - Premium Feature */}
-        <Card className="mb-8 border-l-4 border-l-amber-500 bg-gradient-to-br from-amber-50/50 to-yellow-50/30 dark:from-amber-950/20 dark:to-yellow-950/10 shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer group" onClick={() => navigate('/notebook')}>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center shadow-lg">
-                  <BookOpen className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-foreground group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors">
-                    Smart Revision Notebook
-                  </h3>
-                  <div className="flex items-center space-x-2">
-                    <Crown className="h-3 w-3 text-amber-500" />
-                    <span className="text-xs font-medium text-muted-foreground">Premium Feature</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center space-x-2 opacity-60 group-hover:opacity-100 transition-opacity">
-                <Brain className="h-5 w-5 text-amber-600 dark:text-amber-400" />
-                <span className="text-sm text-amber-700 dark:text-amber-300 font-medium">AI-Generated</span>
-              </div>
-            </div>
-            
-            <p className="text-muted-foreground mb-4">
-              Automatically generates ultra-clear, Grade 9-level revision notes for every question where you lose marks. Written by AI in student-friendly language with key definitions, equations, and exam tips.
-            </p>
-            
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <div className="text-sm text-amber-700 dark:text-amber-300">
-                  <span className="font-semibold">✓</span> Instant note generation
-                </div>
-                <div className="text-sm text-amber-700 dark:text-amber-300">
-                  <span className="font-semibold">✓</span> Organized by topic
-                </div>
-                <div className="text-sm text-amber-700 dark:text-amber-300">
-                  <span className="font-semibold">✓</span> Exam-focused content
-                </div>
-              </div>
-              <Button 
-                variant="outline" 
-                className="border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/20 group-hover:shadow-md transition-all"
-              >
-                Open Notebook →
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Premium Locked Analytics */}
         <div className="space-y-6">
