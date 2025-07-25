@@ -183,33 +183,43 @@ export const usePersonalizedNotifications = () => {
 
   
   // Helper function to extract topic from question text - using actual curriculum topics
-  const extractTopicFromText = useCallback((questionText: string): string => {
+  const extractTopicFromText = useCallback((questionText: string, subjectId: string): string => {
     const text = questionText.toLowerCase();
     
-    // Match actual geography curriculum topics
-    if (text.includes('urbanisation') || text.includes('urban') || text.includes('city') || text.includes('megacity') || text.includes('slum') || text.includes('suburb')) return 'Urban Issues and Challenges';
-    if (text.includes('economic') || text.includes('development') || text.includes('trade') || text.includes('globalization') || text.includes('tnc') || text.includes('aid')) return 'The Changing Economic World';
-    if (text.includes('resource') || text.includes('water') || text.includes('energy') || text.includes('food') || text.includes('sustainability')) return 'Resource Management';
-    if (text.includes('hazard') || text.includes('earthquake') || text.includes('volcano') || text.includes('tsunami') || text.includes('disaster')) return 'Natural Hazards';
-    if (text.includes('tectonic') || text.includes('plate') || text.includes('continental') || text.includes('destructive') || text.includes('constructive')) return 'Tectonic Hazards';
-    if (text.includes('storm') || text.includes('hurricane') || text.includes('typhoon') || text.includes('drought') || text.includes('extreme weather')) return 'Weather Hazards';
-    if (text.includes('climate change') || text.includes('greenhouse') || text.includes('global warming') || text.includes('carbon')) return 'Climate Change';
-    if (text.includes('ecosystem') || text.includes('biodiversity') || text.includes('food chain') || text.includes('nutrient cycle')) return 'Ecosystems';
-    if (text.includes('rainforest') || text.includes('tropical') || text.includes('deforestation') || text.includes('amazon')) return 'Tropical Rainforests';
-    if (text.includes('desert') || text.includes('tundra') || text.includes('polar') || text.includes('antarctica')) return 'Hot Deserts/Cold Environments';
-    if (text.includes('coast') || text.includes('beach') || text.includes('cliff') || text.includes('wave') || text.includes('erosion') || text.includes('longshore')) return 'Coastal Landscapes in the UK';
-    if (text.includes('river') || text.includes('drainage') || text.includes('meander') || text.includes('flood') || text.includes('waterfall')) return 'River Landscapes in the UK';
-    if (text.includes('glacier') || text.includes('ice') || text.includes('corrie') || text.includes('moraine') || text.includes('fjord')) return 'Glacial Landscapes in the UK';
-    if (text.includes('physical landscape') || text.includes('uk landscape') || text.includes('upland') || text.includes('lowland')) return 'UK Physical Landscapes Overview';
+    // Biology topics
+    if (subjectId === 'biology') {
+      if (text.includes('enzyme') || text.includes('protein synthesis') || text.includes('ribosome') || text.includes('cell') || text.includes('nucleus') || text.includes('mitochondria') || text.includes('osmosis') || text.includes('diffusion') || text.includes('active transport')) return 'Cell biology';
+      if (text.includes('heart') || text.includes('circulatory') || text.includes('enzyme') || text.includes('digestive') || text.includes('bile') || text.includes('starch') || text.includes('amylase') || text.includes('protease') || text.includes('xylem') || text.includes('phloem')) return 'Organisation';
+      if (text.includes('infection') || text.includes('immune') || text.includes('pathogen') || text.includes('antibody') || text.includes('vaccination') || text.includes('antibiotic') || text.includes('drug') || text.includes('disease')) return 'Infection & response';
+      if (text.includes('photosynthesis') || text.includes('respiration') || text.includes('glucose') || text.includes('oxygen') || text.includes('carbon dioxide') || text.includes('chlorophyll') || text.includes('atp') || text.includes('energy transfer')) return 'Bioenergetics';
+      if (text.includes('homeostasis') || text.includes('temperature') || text.includes('blood sugar') || text.includes('kidney') || text.includes('nervous system') || text.includes('hormone') || text.includes('endocrine') || text.includes('diabetes')) return 'Homeostasis';
+      if (text.includes('inheritance') || text.includes('genetic') || text.includes('dna') || text.includes('chromosome') || text.includes('allele') || text.includes('dominant') || text.includes('recessive') || text.includes('mutation') || text.includes('variation')) return 'Inheritance';
+      if (text.includes('ecosystem') || text.includes('food chain') || text.includes('population') || text.includes('community') || text.includes('biodiversity') || text.includes('conservation') || text.includes('environmental') || text.includes('habitat')) return 'Ecology';
+      return 'Cell biology'; // Default for biology
+    }
     
-    // For geography paper 2 specific topics
-    if (text.includes('migration') || text.includes('refugee') || text.includes('population')) return 'Urban Issues and Challenges';
+    // Geography topics
+    if (subjectId === 'geography' || subjectId === 'geography-paper-2') {
+      if (text.includes('urbanisation') || text.includes('urban') || text.includes('city') || text.includes('megacity') || text.includes('slum') || text.includes('suburb')) return 'Urban Issues and Challenges';
+      if (text.includes('economic') || text.includes('development') || text.includes('trade') || text.includes('globalization') || text.includes('tnc') || text.includes('aid')) return 'The Changing Economic World';
+      if (text.includes('resource') || text.includes('water') || text.includes('energy') || text.includes('food') || text.includes('sustainability')) return 'Resource Management';
+      if (text.includes('hazard') || text.includes('earthquake') || text.includes('volcano') || text.includes('tsunami') || text.includes('disaster')) return 'Natural Hazards';
+      if (text.includes('tectonic') || text.includes('plate') || text.includes('continental') || text.includes('destructive') || text.includes('constructive')) return 'Tectonic Hazards';
+      if (text.includes('storm') || text.includes('hurricane') || text.includes('typhoon') || text.includes('drought') || text.includes('extreme weather')) return 'Weather Hazards';
+      if (text.includes('climate change') || text.includes('greenhouse') || text.includes('global warming') || text.includes('carbon')) return 'Climate Change';
+      if (text.includes('ecosystem') || text.includes('biodiversity') || text.includes('food chain') || text.includes('nutrient cycle')) return 'Ecosystems';
+      if (text.includes('rainforest') || text.includes('tropical') || text.includes('deforestation') || text.includes('amazon')) return 'Tropical Rainforests';
+      if (text.includes('desert') || text.includes('tundra') || text.includes('polar') || text.includes('antarctica')) return 'Hot Deserts/Cold Environments';
+      if (text.includes('coast') || text.includes('beach') || text.includes('cliff') || text.includes('wave') || text.includes('erosion') || text.includes('longshore')) return 'Coastal Landscapes in the UK';
+      if (text.includes('river') || text.includes('drainage') || text.includes('meander') || text.includes('flood') || text.includes('waterfall')) return 'River Landscapes in the UK';
+      if (text.includes('glacier') || text.includes('ice') || text.includes('corrie') || text.includes('moraine') || text.includes('fjord')) return 'Glacial Landscapes in the UK';
+      if (text.includes('physical landscape') || text.includes('uk landscape') || text.includes('upland') || text.includes('lowland')) return 'UK Physical Landscapes Overview';
+      if (text.includes('migration') || text.includes('refugee') || text.includes('population')) return 'Urban Issues and Challenges';
+      return 'Natural Hazards'; // Default for geography
+    }
     
-    // Extract from section/topic hints in question structure
-    if (text.includes('section a') || text.includes('physical')) return 'Natural Hazards';
-    if (text.includes('section b') || text.includes('human')) return 'Urban Issues and Challenges';
-    
-    return 'Natural Hazards'; // Default fallback to an actual topic
+    // For other subjects, return a generic fallback
+    return 'General Topics';
   }, []);
 
   // Check for recent exam completion and show weak topic recommendation
@@ -270,7 +280,7 @@ export const usePersonalizedNotifications = () => {
             
             // If no explicit topic, extract from question text
             if (!topic || topic === 'A' || topic.length < 3) {
-              topic = extractTopicFromText(question.text || question.question || '');
+              topic = extractTopicFromText(question.text || question.question || '', recentExam.subject_id);
             }
             
             // Final fallback based on subject
