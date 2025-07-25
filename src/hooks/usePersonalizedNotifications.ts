@@ -198,6 +198,16 @@ export const usePersonalizedNotifications = () => {
       return 'Cell biology'; // Default for biology
     }
     
+    // Business topics
+    if (subjectId === 'business' || subjectId === 'business-edexcel-igcse') {
+      if (text.includes('entrepreneur') || text.includes('business objective') || text.includes('sole trader') || text.includes('limited company') || text.includes('partnership') || text.includes('stakeholder') || text.includes('location') || text.includes('planning') || text.includes('government') || text.includes('economy')) return 'Business in the real world';
+      if (text.includes('cash flow') || text.includes('profit') || text.includes('revenue') || text.includes('costs') || text.includes('break-even') || text.includes('investment') || text.includes('loan') || text.includes('share') || text.includes('crowdfunding') || text.includes('finance') || text.includes('budget')) return 'Business Finance';
+      if (text.includes('market research') || text.includes('target market') || text.includes('marketing mix') || text.includes('product life cycle') || text.includes('price') || text.includes('promotion') || text.includes('advertising') || text.includes('brand') || text.includes('digital marketing') || text.includes('social media') || text.includes('segmentation')) return 'Marketing';
+      if (text.includes('production') || text.includes('quality') || text.includes('supply chain') || text.includes('procurement') || text.includes('logistics') || text.includes('inventory') || text.includes('customer service') || text.includes('lean production') || text.includes('technology') || text.includes('automation')) return 'Business operations';
+      if (text.includes('recruitment') || text.includes('training') || text.includes('motivation') || text.includes('leadership') || text.includes('organisational structure') || text.includes('span of control') || text.includes('staff') || text.includes('employee') || text.includes('human resource') || text.includes('workforce')) return 'Human resources';
+      return 'Business in the real world'; // Default for business
+    }
+    
     // Geography topics
     if (subjectId === 'geography' || subjectId === 'geography-paper-2') {
       if (text.includes('urbanisation') || text.includes('urban') || text.includes('city') || text.includes('megacity') || text.includes('slum') || text.includes('suburb')) return 'Urban Issues and Challenges';
