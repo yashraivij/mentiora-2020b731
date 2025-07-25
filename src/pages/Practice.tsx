@@ -907,7 +907,7 @@ const Practice = () => {
                                     <Book className="h-4 w-4 mr-2" />
                                     {section}
                                   </h4>
-                                  <div className="text-foreground bg-background/80 p-3 rounded">
+                                  <div className="text-foreground font-normal bg-background/80 p-3 rounded">
                                     "{nextSection.trim()}"
                                   </div>
                                 </div>
