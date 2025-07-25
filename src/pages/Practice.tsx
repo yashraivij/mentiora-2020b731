@@ -1070,7 +1070,6 @@ const Practice = () => {
                       variant="outline"
                       className="w-full bg-gradient-to-r from-purple-50 to-indigo-50 border-purple-200 text-purple-700 hover:from-purple-100 hover:to-indigo-100 hover:border-purple-300 hover:shadow-md transition-all duration-200 dark:from-purple-950/30 dark:to-indigo-950/30 dark:border-purple-700 dark:text-purple-300 dark:hover:from-purple-950/50 dark:hover:to-indigo-950/50 dark:hover:border-purple-600"
                     >
-                      <StickyNote className="h-4 w-4 mr-2 text-purple-600 dark:text-purple-400" />
                       <span className="font-medium">📚 View Smart Notebook</span>
                     </Button>
                   </div>
