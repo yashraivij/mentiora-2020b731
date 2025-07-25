@@ -26,6 +26,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { StressTracker } from "@/lib/stressTracker";
 import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
+import { useToast } from "@/hooks/use-toast";
 
 interface UserProgress {
   subjectId: string;
@@ -53,6 +54,8 @@ const Dashboard = () => {
     hideNotification,
     clearNotification
   } = usePersonalizedNotifications();
+
+  const { toast } = useToast();
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -913,6 +916,16 @@ const Dashboard = () => {
       <div className="fixed bottom-6 right-6 z-50">
         <Button
           onClick={() => {
+            // Simple check: if no notification has been triggered yet, show info toast
+            if (!notification.isVisible) {
+              toast({
+                title: "Start Your Learning Journey! 🎯",
+                description: "Take a predicted exam first to get personalized study recommendations based on your performance.",
+                duration: 4000,
+              });
+            }
+            
+            // Always try to get recommendations
             clearNotificationCache();
             checkForWeakTopicRecommendation();
           }}
