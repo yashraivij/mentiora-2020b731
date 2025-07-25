@@ -1411,98 +1411,79 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
     
     setIsSubmitted(true);
     
-    // Generate notebook notes for exam practice if user is logged in
+    // Show immediate success message
+    toast({
+      title: "Exam submitted!",
+      description: "Processing your results...",
+    });
+    
+    // Generate notebook notes in the background (don't await)
     if (user?.id && answers.length > 0) {
-      try {
-        let notesGenerated = 0;
-        
-        // Mark each answered question and generate notes for wrong answers
-        for (const answer of answers) {
-          const question = examQuestions.find(q => q.id === answer.questionId);
-          if (question && answer.answer.trim()) {
-            console.log('Processing predicted exam question:', { questionId: question.id, marks: question.marks, subject: subjectId });
-            
-            // Mark the answer with AI
-            const markingResult = await markAnswerWithAI(question, answer.answer);
-            const marksLost = question.marks - markingResult.marksAwarded;
-            
-            console.log('Marking result:', { marksAwarded: markingResult.marksAwarded, marksLost, totalMarks: question.marks, subject: subjectId });
-            
-            // Only generate notes if marks were lost
-            if (marksLost > 0) {
-              console.log('Generating notes for lost marks:', marksLost);
-              
-              // Create a mock Question object compatible with NotebookGenerator
-              const mockQuestion = {
-                id: question.id,
-                question: question.text,
-                marks: question.marks,
-                difficulty: 'medium' as const,
-                modelAnswer: markingResult.feedback || `This is a predicted exam question worth ${question.marks} marks. Focus on addressing the key marking criteria.`,
-                markingCriteria: { 
-                  breakdown: [
-                    `Analysis and understanding (${Math.ceil(question.marks / 2)} marks)`,
-                    `Application and evaluation (${Math.floor(question.marks / 2)} marks)`
-                  ] 
-                },
-                specReference: 'Predicted Exam Practice'
-              };
-              
-              console.log('About to call NotebookGenerator with:', { 
-                userId: user.id, 
-                questionText: question.text.substring(0, 50) + '...', 
-                userAnswer: answer.answer.substring(0, 50) + '...',
-                marksLost, 
-                subjectId: subjectId || '', 
-                topicId: 'predicted-exam' 
-              });
-              
+      // Run notebook generation in background without blocking navigation
+      (async () => {
+        try {
+          let notesGenerated = 0;
+          
+          // Mark each answered question and generate notes for wrong answers
+          for (const answer of answers) {
+            const question = examQuestions.find(q => q.id === answer.questionId);
+            if (question && answer.answer.trim()) {
               try {
-                const success = await NotebookGenerator.generateAndSaveNotes(
-                  user.id,
-                  mockQuestion,
-                  answer.answer,
-                  marksLost,
-                  subjectId || '',
-                  'predicted-exam'
-                );
+                // Mark the answer with AI
+                const markingResult = await markAnswerWithAI(question, answer.answer);
+                const marksLost = question.marks - markingResult.marksAwarded;
                 
-                console.log('NotebookGenerator result:', success);
-                
-                if (success) {
-                  notesGenerated++;
-                  console.log('Successfully generated note for question:', question.id);
-                } else {
-                  console.error('Failed to generate note for question:', question.id);
+                // Only generate notes if marks were lost
+                if (marksLost > 0) {
+                  // Create a mock Question object compatible with NotebookGenerator
+                  const mockQuestion = {
+                    id: question.id,
+                    question: question.text,
+                    marks: question.marks,
+                    difficulty: 'medium' as const,
+                    modelAnswer: markingResult.feedback || `This is a predicted exam question worth ${question.marks} marks. Focus on addressing the key marking criteria.`,
+                    markingCriteria: { 
+                      breakdown: [
+                        `Analysis and understanding (${Math.ceil(question.marks / 2)} marks)`,
+                        `Application and evaluation (${Math.floor(question.marks / 2)} marks)`
+                      ] 
+                    },
+                    specReference: 'Predicted Exam Practice'
+                  };
+                  
+                  const success = await NotebookGenerator.generateAndSaveNotes(
+                    user.id,
+                    mockQuestion,
+                    answer.answer,
+                    marksLost,
+                    subjectId || '',
+                    'predicted-exam'
+                  );
+                  
+                  if (success) {
+                    notesGenerated++;
+                  }
                 }
               } catch (error) {
-                console.error('Error generating note for question:', question.id, error);
+                console.error('Error processing question:', question.id, error);
               }
             }
           }
+          
+          // Show final notification once background processing is complete
+          if (notesGenerated > 0) {
+            toast({
+              title: "Notes generated!",
+              description: `Smart notes added to your Notebook for ${notesGenerated} question${notesGenerated > 1 ? 's' : ''} where you lost marks.`,
+            });
+          }
+        } catch (error) {
+          console.error('Error generating notebook notes:', error);
         }
-        
-        if (notesGenerated > 0) {
-          toast({
-            title: "Exam submitted!",
-            description: `Smart notes added to your Notebook for ${notesGenerated} question${notesGenerated > 1 ? 's' : ''} where you lost marks.`,
-          });
-        } else {
-          toast({
-            title: "Exam submitted!",
-            description: "Exam submitted successfully.",
-          });
-        }
-      } catch (error) {
-        console.error('Error generating notebook notes:', error);
-        toast({
-          title: "Exam submitted!",
-          description: "Exam submitted successfully.",
-        });
-      }
+      })();
     }
     
-    navigate(`/predicted-results/${subjectId}`, { 
+    navigate(`/predicted-results/${subjectId}`, {
       state: { 
         questions: examQuestions, 
         answers: answers,
