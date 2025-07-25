@@ -5,11 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 interface PersonalizedNotificationProps {
-  type: "wrong-answer" | "practice-streak";
+  type: "wrong-answer" | "practice-streak" | "weak-topic-recommendation" | "exam-recommendation";
   questionNumber?: number;
   topicName?: string;
   subjectName?: string;
   streakCount?: number;
+  weakestTopic?: string;
+  subjectId?: string;
   onClose: () => void;
   onAction?: () => void;
 }
@@ -20,6 +22,8 @@ export const PersonalizedNotification = ({
   topicName,
   subjectName,
   streakCount,
+  weakestTopic,
+  subjectId,
   onClose,
   onAction
 }: PersonalizedNotificationProps) => {
@@ -37,24 +41,52 @@ export const PersonalizedNotification = ({
   };
 
   const getNotificationContent = () => {
-    if (type === "wrong-answer") {
-      return {
-        icon: <BookOpen className="h-5 w-5" />,
-        title: "Recommended Revision",
-        message: `You got Q${questionNumber} wrong. We recommend revising ${topicName}.`,
-        actionText: "Revise Topic",
-        badgeText: "Smart Feedback",
-        gradient: "from-orange-500 via-red-500 to-pink-500"
-      };
-    } else {
-      return {
-        icon: <TrendingUp className="h-5 w-5" />,
-        title: "Great Progress!",
-        message: `You're doing well on practice questions. Try the 2026 Predicted Exam to see what grade you're on track for.`,
-        actionText: "Take Predicted Exam",
-        badgeText: `${streakCount}+ Correct`,
-        gradient: "from-green-500 via-blue-500 to-purple-500"
-      };
+    switch (type) {
+      case "wrong-answer":
+        return {
+          icon: <BookOpen className="h-5 w-5" />,
+          title: "Recommended Revision",
+          message: `You got Q${questionNumber} wrong. We recommend revising ${topicName}.`,
+          actionText: "Revise Topic",
+          badgeText: "Smart Feedback",
+          gradient: "from-orange-500 via-red-500 to-pink-500"
+        };
+      case "practice-streak":
+        return {
+          icon: <TrendingUp className="h-5 w-5" />,
+          title: "Great Progress!",
+          message: `You're doing well on practice questions. Try the 2026 Predicted Exam to see what grade you're on track for.`,
+          actionText: "Take Predicted Exam",
+          badgeText: `${streakCount}+ Correct`,
+          gradient: "from-green-500 via-blue-500 to-purple-500"
+        };
+      case "weak-topic-recommendation":
+        return {
+          icon: <Target className="h-5 w-5" />,
+          title: "Focus Your Revision",
+          message: `Based on your recent exam, we recommend focusing on ${weakestTopic} to improve your grade.`,
+          actionText: "Practice Topic",
+          badgeText: "AI Analysis",
+          gradient: "from-purple-500 via-violet-500 to-indigo-500"
+        };
+      case "exam-recommendation":
+        return {
+          icon: <CheckCircle className="h-5 w-5" />,
+          title: "Ready for Predicted Exam?",
+          message: `You've answered ${streakCount}+ practice questions correctly. Try the 2026 Predicted Exam for ${subjectName}!`,
+          actionText: "Take Exam",
+          badgeText: "High Performance",
+          gradient: "from-emerald-500 via-teal-500 to-cyan-500"
+        };
+      default:
+        return {
+          icon: <Star className="h-5 w-5" />,
+          title: "Notification",
+          message: "You have a new update.",
+          actionText: "View",
+          badgeText: "Update",
+          gradient: "from-gray-500 via-slate-500 to-zinc-500"
+        };
     }
   };
 

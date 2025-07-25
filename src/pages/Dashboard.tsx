@@ -24,6 +24,8 @@ import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGrap
 import { DashboardStressMonitor } from "@/components/dashboard/DashboardStressMonitor";
 import { supabase } from "@/integrations/supabase/client";
 import { StressTracker } from "@/lib/stressTracker";
+import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
+import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
 
 interface UserProgress {
   subjectId: string;
@@ -42,6 +44,14 @@ const Dashboard = () => {
   const [sortBy, setSortBy] = useState<'alphabetical' | 'weakest' | 'progress'>('progress');
   const [isNotifyClicked, setIsNotifyClicked] = useState(false);
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
+
+  const {
+    notification,
+    checkForWeakTopicRecommendation,
+    checkForExamRecommendation,
+    hideNotification,
+    clearNotification
+  } = usePersonalizedNotifications();
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -70,6 +80,9 @@ const Dashboard = () => {
       if (savedPinnedSubjects) {
         setPinnedSubjects(JSON.parse(savedPinnedSubjects));
       }
+
+      // Check for recommendations on dashboard load
+      await checkForWeakTopicRecommendation();
     };
 
     loadUserData();
@@ -243,6 +256,14 @@ const Dashboard = () => {
 
   const handleNotifyClick = () => {
     setIsNotifyClicked(true);
+  };
+
+  const handleNotificationAction = () => {
+    if (notification.type === "weak-topic-recommendation" && notification.subjectId) {
+      navigate(`/subject/${notification.subjectId}`);
+    } else if (notification.type === "exam-recommendation" && notification.subjectId) {
+      navigate(`/predicted-exam/${notification.subjectId}`);
+    }
   };
 
   const getGreeting = () => {
@@ -870,6 +891,21 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
+      {/* Personalized Notification */}
+      {notification.isVisible && (
+        <PersonalizedNotification
+          type={notification.type!}
+          questionNumber={notification.questionNumber}
+          topicName={notification.topicName}
+          subjectName={notification.subjectName}
+          streakCount={notification.streakCount}
+          weakestTopic={notification.weakestTopic}
+          subjectId={notification.subjectId}
+          onClose={clearNotification}
+          onAction={handleNotificationAction}
+        />
+      )}
 
       {/* Feedback Button */}
       <div className="fixed bottom-6 right-6 z-50">
