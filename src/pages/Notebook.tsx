@@ -316,7 +316,10 @@ const Notebook = () => {
             Back to Dashboard
           </Button>
           <Button 
-            onClick={() => navigate('/dashboard')}
+            onClick={() => {
+              navigate('/dashboard');
+              window.scrollTo(0, 0);
+            }}
             className="px-8 py-3 rounded-xl bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 hover:from-violet-600 hover:via-purple-600 hover:to-blue-600 text-white shadow-lg hover:shadow-xl transition-all duration-200"
           >
             <BookOpen className="h-4 w-4 mr-2" />
