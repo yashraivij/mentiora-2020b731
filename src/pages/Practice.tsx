@@ -12,6 +12,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
+import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
+import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
 
 interface QuestionAttempt {
   questionId: string;
@@ -65,6 +67,13 @@ const Practice = () => {
   const [sessionComplete, setSessionComplete] = useState(false);
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
   const [showHint, setShowHint] = useState(false);
+  
+  const {
+    notification,
+    handlePracticeQuestionResult,
+    hideNotification,
+    clearNotification
+  } = usePersonalizedNotifications();
 
   const subject = curriculum.find(s => s.id === subjectId);
   const topic = subject?.topics.find(t => t.id === topicId);
@@ -258,6 +267,17 @@ const Practice = () => {
         }
       } else {
         toast.success(`Answer marked! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks`);
+      }
+
+      // Handle personalized notifications for practice results
+      if (user?.id && subjectId && subject?.name) {
+        await handlePracticeQuestionResult(
+          subjectId,
+          subject.name,
+          markingResult.marksAwarded > 0,
+          markingResult.marksAwarded,
+          currentQuestion.marks
+        );
       }
       
     } catch (error) {
@@ -1079,6 +1099,26 @@ const Practice = () => {
           </div>
         </div>
       </div>
+      
+      {/* Personalized Notification */}
+      {notification.isVisible && (
+        <PersonalizedNotification
+          type={notification.type!}
+          questionNumber={notification.questionNumber}
+          topicName={notification.topicName}
+          subjectName={notification.subjectName}
+          streakCount={notification.streakCount}
+          onClose={clearNotification}
+          onAction={() => {
+            if (notification.type === "practice-streak") {
+              navigate(`/predicted-exam/${subjectId}`);
+            } else if (notification.type === "wrong-answer") {
+              navigate(`/subject-topics/${subjectId}`);
+            }
+            clearNotification();
+          }}
+        />
+      )}
     </div>
   );
 };

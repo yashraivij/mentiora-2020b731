@@ -12,6 +12,8 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
 import { supabase } from "@/integrations/supabase/client";
+import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
+import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
 
 interface ExamQuestion {
   id: string;
@@ -38,6 +40,13 @@ const PredictedExam = () => {
   const [answers, setAnswers] = useState<ExamAnswer[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [examStarted, setExamStarted] = useState(false);
+  
+  const {
+    notification,
+    handlePredictedExamWrongAnswer,
+    hideNotification,
+    clearNotification
+  } = usePersonalizedNotifications();
   
   const subject = curriculum.find(s => s.id === subjectId);
   
@@ -435,6 +444,65 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       'conflict-tension-gulf': '\'Economic factors were the main cause of conflict in the Gulf region between 1990 and 2009.\'\n\nHow far do you agree with this statement?\n\nExplain your answer.'
     };
     return `${essays[topicId as keyof typeof essays]}\n\n[12 marks]`;
+  };
+
+  // Helper function to get topic name from any question ID
+  const getTopicNameFromQuestionId = (questionId: string): string => {
+    // For regular curriculum questions, extract from the curriculum
+    for (const topic of subject.topics) {
+      const foundQuestion = topic.questions.find(q => q.id === questionId);
+      if (foundQuestion) {
+        return topic.name;
+      }
+    }
+    
+    // For generated questions, extract from question ID patterns
+    if (questionId.includes('shakespeare-')) {
+      const playId = questionId.replace('shakespeare-', '');
+      const playNames: { [key: string]: string } = {
+        'macbeth': 'Macbeth',
+        'romeo-and-juliet': 'Romeo and Juliet',
+        'the-tempest': 'The Tempest',
+        'merchant-of-venice': 'The Merchant of Venice',
+        'much-ado-about-nothing': 'Much Ado About Nothing',
+        'julius-caesar': 'Julius Caesar'
+      };
+      return playNames[playId] || 'Shakespeare Literature';
+    }
+    
+    if (questionId.includes('novel-')) {
+      const novelId = questionId.replace('novel-', '');
+      const novelNames: { [key: string]: string } = {
+        'jekyll-and-hyde': 'Jekyll and Hyde',
+        'christmas-carol': 'A Christmas Carol',
+        'great-expectations': 'Great Expectations',
+        'pride-and-prejudice': 'Pride and Prejudice',
+        'sign-of-four': 'The Sign of Four',
+        'jane-eyre': 'Jane Eyre',
+        'frankenstein': 'Frankenstein'
+      };
+      return novelNames[novelId] || 'Novel Literature';
+    }
+    
+    if (questionId.includes('period-') || questionId.includes('depth-')) {
+      const historyTopicMap: { [key: string]: string } = {
+        'america-1840-1895': 'America 1840-1895',
+        'germany-1890-1945': 'Germany 1890-1945',
+        'russia-1894-1945': 'Russia 1894-1945',
+        'america-1920-1973': 'America 1920-1973',
+        'conflict-tension-ww1': 'Conflict and Tension: WWI',
+        'conflict-tension-interwar': 'Conflict and Tension: 1918-1939',
+        'conflict-tension-east-west': 'Conflict and Tension: Cold War',
+        'conflict-tension-asia': 'Conflict and Tension: Asia',
+        'conflict-tension-gulf': 'Conflict and Tension: Gulf'
+      };
+      
+      const topicId = Object.keys(historyTopicMap).find(topic => questionId.includes(topic));
+      return topicId ? historyTopicMap[topicId] : 'History';
+    }
+    
+    // Default fallback
+    return 'General Topic';
   };
 
   // Helper function to get topic from History question ID and assign colors
@@ -1433,6 +1501,18 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
                 const markingResult = await markAnswerWithAI(question, answer.answer);
                 const marksLost = question.marks - markingResult.marksAwarded;
                 
+                // Handle personalized notification for wrong answers
+                if (marksLost > 0) {
+                  const topicName = getTopicNameFromQuestionId(question.id);
+                  handlePredictedExamWrongAnswer(
+                    question.questionNumber,
+                    topicName,
+                    subject.name,
+                    markingResult.marksAwarded,
+                    question.marks
+                  );
+                }
+                
                 // Only generate notes if marks were lost
                 if (marksLost > 0) {
                   // Create a mock Question object compatible with NotebookGenerator
@@ -1743,6 +1823,24 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
           </div>
         </div>
       </div>
+      
+      {/* Personalized Notification */}
+      {notification.isVisible && (
+        <PersonalizedNotification
+          type={notification.type!}
+          questionNumber={notification.questionNumber}
+          topicName={notification.topicName}
+          subjectName={notification.subjectName}
+          streakCount={notification.streakCount}
+          onClose={clearNotification}
+          onAction={() => {
+            if (notification.type === "wrong-answer") {
+              navigate(`/subject-topics/${subjectId}`);
+            }
+            clearNotification();
+          }}
+        />
+      )}
     </div>
   );
 };
