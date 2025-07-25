@@ -181,11 +181,32 @@ export const usePersonalizedNotifications = () => {
     });
   }, []);
 
+  
+  // Helper function to extract topic from question text
+  const extractTopicFromText = useCallback((questionText: string): string => {
+    const text = questionText.toLowerCase();
+    
+    // Geography topics
+    if (text.includes('urbanisation') || text.includes('urban') || text.includes('city') || text.includes('megacity')) return 'Urbanisation';
+    if (text.includes('migration') || text.includes('push') || text.includes('pull')) return 'Migration';
+    if (text.includes('development') || text.includes('gdp') || text.includes('hdi')) return 'Development';
+    if (text.includes('demographic') || text.includes('population')) return 'Population and Demographics';
+    if (text.includes('resource') || text.includes('energy') || text.includes('water') || text.includes('food')) return 'Resource Management';
+    if (text.includes('hazard') || text.includes('earthquake') || text.includes('volcano')) return 'Natural Hazards';
+    if (text.includes('climate') || text.includes('weather') || text.includes('storm')) return 'Weather and Climate';
+    if (text.includes('ecosystem') || text.includes('tropical') || text.includes('desert')) return 'Ecosystems';
+    if (text.includes('plate') || text.includes('tectonic')) return 'Plate Tectonics';
+    
+    return 'Geography Concepts';
+  }, []);
+
   // Check for recent exam completion and show weak topic recommendation
   const checkForWeakTopicRecommendation = useCallback(async () => {
     if (!user?.id) return;
 
     try {
+      console.log('Checking for weak topic recommendations for user:', user.id);
+      
       // Get the most recent exam completion from last 24 hours
       const { data: recentExam, error } = await supabase
         .from('predicted_exam_completions')
@@ -196,31 +217,57 @@ export const usePersonalizedNotifications = () => {
         .limit(1)
         .single();
 
-      if (error || !recentExam) return;
+      console.log('Recent exam query result:', { recentExam, error });
+
+      if (error && error.code !== 'PGRST116') {
+        console.error('Database error:', error);
+        return;
+      }
+      
+      if (!recentExam) {
+        console.log('No recent exam found');
+        return;
+      }
 
       // Check if we've already shown a notification for this exam
       const notificationKey = `notification_shown_${recentExam.id}`;
-      if (localStorage.getItem(notificationKey)) return;
+      const hasShownNotification = localStorage.getItem(notificationKey);
+      console.log('Notification key check:', { notificationKey, hasShownNotification });
+      
+      if (hasShownNotification) {
+        console.log('Notification already shown for exam:', recentExam.id);
+        return;
+      }
 
       // Analyze wrong answers to find most frequent weak topic
       const questions = recentExam.questions as any[];
       const answers = recentExam.answers as any[];
       const results = recentExam.results as any[];
 
+      console.log('Analyzing exam data:', { questionsCount: questions?.length, answersCount: answers?.length, resultsCount: results?.length });
+
       const topicErrors: Record<string, number> = {};
 
-      questions.forEach((question, index) => {
-        const result = results[index];
-        if (result && result.marksAwarded < result.totalMarks) {
-          const topic = question.topic || 'General';
-          topicErrors[topic] = (topicErrors[topic] || 0) + 1;
-        }
-      });
+      // Analyze results to find weak topics
+      if (results && results.length > 0) {
+        results.forEach((result, index) => {
+          const question = questions[index];
+          if (result && question && result.score < question.marks) {
+            // Try to extract topic from question or use a general topic
+            const topic = question.topic || question.section || extractTopicFromText(question.text) || 'General Topics';
+            topicErrors[topic] = (topicErrors[topic] || 0) + 1;
+            console.log(`Found error in topic: ${topic}, total errors: ${topicErrors[topic]}`);
+          }
+        });
+      }
+
+      console.log('Topic errors analysis:', topicErrors);
 
       // Find the topic with most errors
       const weakestTopic = Object.entries(topicErrors).sort((a, b) => b[1] - a[1])[0];
 
-      if (weakestTopic && weakestTopic[1] >= 2) { // Show if 2+ errors in same topic
+      if (weakestTopic && weakestTopic[1] >= 1) { // Show if 1+ errors (reduced threshold)
+        console.log('Showing weak topic notification for:', weakestTopic[0]);
         setNotification({
           isVisible: true,
           type: "weak-topic-recommendation",
@@ -231,12 +278,31 @@ export const usePersonalizedNotifications = () => {
 
         // Mark notification as shown
         localStorage.setItem(notificationKey, 'true');
+      } else {
+        console.log('No significant weak topics found or insufficient errors');
       }
     } catch (error) {
       console.error('Error checking for weak topic recommendation:', error);
     }
-  }, [user?.id]);
+  }, [user?.id, extractTopicFromText]);
 
+
+  // Clear notification cache for testing
+  const clearNotificationCache = useCallback(() => {
+    if (!user?.id) return;
+    
+    // Clear all notification-related localStorage keys
+    const keysToRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && (key.startsWith('notification_shown_') || key.startsWith('exam_recommendation_'))) {
+        keysToRemove.push(key);
+      }
+    }
+    
+    keysToRemove.forEach(key => localStorage.removeItem(key));
+    console.log('Cleared notification cache:', keysToRemove);
+  }, [user?.id]);
 
   return {
     notification,
@@ -244,6 +310,7 @@ export const usePersonalizedNotifications = () => {
     handlePredictedExamWrongAnswer,
     checkForWeakTopicRecommendation,
     checkForExamRecommendation,
+    clearNotificationCache,
     hideNotification,
     clearNotification
   };

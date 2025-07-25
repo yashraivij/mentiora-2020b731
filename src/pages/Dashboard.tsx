@@ -49,6 +49,7 @@ const Dashboard = () => {
     notification,
     checkForWeakTopicRecommendation,
     checkForExamRecommendation,
+    clearNotificationCache,
     hideNotification,
     clearNotification
   } = usePersonalizedNotifications();
@@ -82,6 +83,7 @@ const Dashboard = () => {
       }
 
       // Check for recommendations on dashboard load
+      console.log('Dashboard loading, checking for weak topic recommendations...');
       await checkForWeakTopicRecommendation();
     };
 
@@ -907,8 +909,21 @@ const Dashboard = () => {
         />
       )}
 
-      {/* Feedback Button */}
-      <div className="fixed bottom-6 right-6 z-50">
+      {/* Debug/Feedback Buttons */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-2">
+        {/* Debug button - temporary for testing */}
+        <Button
+          onClick={() => {
+            clearNotificationCache();
+            checkForWeakTopicRecommendation();
+          }}
+          variant="outline"
+          size="sm"
+          className="bg-background/80 backdrop-blur-sm border shadow-lg hover:shadow-xl transition-all duration-200"
+        >
+          🔄 Test Notifications
+        </Button>
+        
         <Button
           data-feedback-fish
           variant="outline"
