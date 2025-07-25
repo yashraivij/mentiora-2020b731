@@ -1368,6 +1368,42 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
     return answers.find(a => a.questionId === questionId)?.answer || '';
   };
 
+  const markAnswerWithAI = async (question: ExamQuestion, answer: string) => {
+    try {
+      const { data, error } = await supabase.functions.invoke('mark-answer', {
+        body: {
+          question: question.text,
+          userAnswer: answer,
+          modelAnswer: `This is a predicted exam question for ${question.marks} marks. Provide appropriate feedback based on the question requirements.`,
+          markingCriteria: `Mark this ${question.marks} mark question appropriately based on content quality and detail.`,
+          totalMarks: question.marks,
+          subject: subjectId
+        }
+      });
+
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw error;
+      }
+
+      return {
+        marksAwarded: data.marksAwarded || 0,
+        feedback: data.feedback || "No feedback available",
+        assessment: data.assessment || "Needs Review"
+      };
+
+    } catch (error) {
+      console.error('Error calling AI marking function:', error);
+      
+      // Fallback to basic marking
+      return {
+        marksAwarded: answer.trim() ? Math.round(question.marks * 0.5) : 0,
+        feedback: "AI marking temporarily unavailable. Answer has been given partial credit.",
+        assessment: "Needs Review"
+      };
+    }
+  };
+
   const handleSubmit = async () => {
     // Allow submission at any time for all subjects - no validation required
     
@@ -1376,36 +1412,61 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
     // Generate notebook notes for exam practice if user is logged in
     if (user?.id && answers.length > 0) {
       try {
-        // Generate notes for each answered question
+        let notesGenerated = 0;
+        
+        // Mark each answered question and generate notes for wrong answers
         for (const answer of answers) {
           const question = examQuestions.find(q => q.id === answer.questionId);
           if (question && answer.answer.trim()) {
-            // Create a mock Question object compatible with NotebookGenerator
-            const mockQuestion = {
-              id: question.id,
-              question: question.text,
-              marks: question.marks,
-              difficulty: 'medium' as const,
-              modelAnswer: `This is a predicted exam question. Review your answer and compare with mark schemes.`,
-              markingCriteria: { breakdown: [`Review marking criteria for ${question.marks} mark question`] },
-              specReference: 'Predicted Exam Practice'
-            };
+            // Mark the answer with AI
+            const markingResult = await markAnswerWithAI(question, answer.answer);
+            const marksLost = question.marks - markingResult.marksAwarded;
             
-            await NotebookGenerator.generateAndSaveNotes(
-              user.id,
-              mockQuestion,
-              answer.answer,
-              Math.ceil(question.marks * 0.3), // Assume 30% marks lost for note generation
-              subjectId || '',
-              'predicted-exam'
-            );
+            // Only generate notes if marks were lost
+            if (marksLost > 0) {
+              // Create a mock Question object compatible with NotebookGenerator
+              const mockQuestion = {
+                id: question.id,
+                question: question.text,
+                marks: question.marks,
+                difficulty: 'medium' as const,
+                modelAnswer: `This is a predicted exam question. Review your answer and compare with mark schemes.`,
+                markingCriteria: { 
+                  breakdown: [
+                    `Review marking criteria for ${question.marks} mark question`,
+                    markingResult.feedback
+                  ] 
+                },
+                specReference: 'Predicted Exam Practice'
+              };
+              
+              const success = await NotebookGenerator.generateAndSaveNotes(
+                user.id,
+                mockQuestion,
+                answer.answer,
+                marksLost,
+                subjectId || '',
+                'predicted-exam'
+              );
+              
+              if (success) {
+                notesGenerated++;
+              }
+            }
           }
         }
         
-        toast({
-          title: "Exam submitted!",
-          description: "Practice notes have been added to your Smart Notebook for review.",
-        });
+        if (notesGenerated > 0) {
+          toast({
+            title: "Exam submitted!",
+            description: `Smart notes added to your Notebook for ${notesGenerated} question${notesGenerated > 1 ? 's' : ''} where you lost marks.`,
+          });
+        } else {
+          toast({
+            title: "Exam submitted!",
+            description: "Exam submitted successfully.",
+          });
+        }
       } catch (error) {
         console.error('Error generating notebook notes:', error);
         toast({
