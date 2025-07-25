@@ -33,10 +33,11 @@ export class NotebookGenerator {
     try {
       console.log('Generating notebook notes for question:', question.id);
 
-      // Find the actual topic name from curriculum
+      // Find the actual subject and topic names from curriculum
       const { curriculum } = await import('@/data/curriculum');
       const subject = curriculum.find(s => s.id === subjectId);
       const topic = subject?.topics.find(t => t.id === topicId);
+      const subjectName = subject?.name || subjectId;
       const topicName = topic?.name || topicId;
 
       // Generate notes using OpenAI
@@ -70,7 +71,7 @@ export class NotebookGenerator {
         .from('notebook_entries')
         .select('*')
         .eq('user_id', userId)
-        .eq('subject', subjectId)
+        .eq('subject', subjectName)
         .eq('topic', topicName)
         .eq('subtopic', topicName);
 
@@ -118,8 +119,8 @@ export class NotebookGenerator {
         .from('notebook_entries')
         .insert({
           user_id: userId,
-          subject: subjectId,
-          paper: `${subjectId} Paper 1`, // Default paper name
+          subject: subjectName,
+          paper: `${subjectName} Paper 1`, // Default paper name
           topic: topicName,
           subtopic: topicName,
           question_id: question.id,

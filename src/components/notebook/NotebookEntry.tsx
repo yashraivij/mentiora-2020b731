@@ -52,7 +52,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <CardTitle className="text-lg font-bold text-foreground mb-2">
-              {entry.topic} → {entry.subtopic}
+              {entry.subject} → {entry.topic}
             </CardTitle>
             <CardDescription className="text-sm text-muted-foreground mb-3">
               {entry.question_label}
