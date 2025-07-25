@@ -41,7 +41,7 @@ const Notebook = () => {
   const [loading, setLoading] = useState(true);
   const [selectedSubject, setSelectedSubject] = useState<string>('all');
   const [selectedConfidence, setSelectedConfidence] = useState<string>('all');
-  const [sortBy, setSortBy] = useState<string>('recent');
+  const [sortBy, setSortBy] = useState<string>('subject');
 
   useEffect(() => {
     if (!user?.id) {
@@ -109,9 +109,10 @@ const Notebook = () => {
     const totalEntries = entries.length;
     const totalMarksLost = entries.reduce((sum, entry) => sum + entry.mark_loss, 0);
     const lowConfidence = entries.filter(entry => entry.confidence_level.toLowerCase() === 'low').length;
+    const avgMarksPerNote = totalEntries > 0 ? Math.round(totalMarksLost / totalEntries * 10) / 10 : 0;
     const subjects = getSubjects();
 
-    return { totalEntries, totalMarksLost, lowConfidence, subjectsWithNotes: subjects.length };
+    return { totalEntries, totalMarksLost, lowConfidence, avgMarksPerNote, subjectsWithNotes: subjects.length };
   };
 
   const stats = getStats();
@@ -185,11 +186,11 @@ const Notebook = () => {
                 <div className="text-xs text-blue-600 dark:text-blue-400">Total Notes</div>
               </CardContent>
             </Card>
-            <Card className="bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/30 dark:to-red-900/20 border-red-200/50 dark:border-red-800/30">
+            <Card className="bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-950/30 dark:to-amber-900/20 border-amber-200/50 dark:border-amber-800/30">
               <CardContent className="p-4 text-center">
-                <TrendingUp className="h-6 w-6 text-red-600 dark:text-red-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-red-800 dark:text-red-300">{stats.totalMarksLost}</div>
-                <div className="text-xs text-red-600 dark:text-red-400">Marks Lost</div>
+                <TrendingUp className="h-6 w-6 text-amber-600 dark:text-amber-400 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-amber-800 dark:text-amber-300">{stats.avgMarksPerNote}</div>
+                <div className="text-xs text-amber-600 dark:text-amber-400">Avg Marks/Note</div>
               </CardContent>
             </Card>
             <Card className="bg-gradient-to-br from-green-50 to-green-100/50 dark:from-green-950/30 dark:to-green-900/20 border-green-200/50 dark:border-green-800/30">
@@ -205,9 +206,6 @@ const Notebook = () => {
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-4">
               <h3 className="text-xl font-semibold text-foreground">Revision Notes</h3>
-              <Badge variant="outline" className="text-muted-foreground">
-                {sortedEntries.length} notes
-              </Badge>
             </div>
             <div className="flex items-center space-x-3">
               <Select value={selectedSubject} onValueChange={setSelectedSubject}>
@@ -234,16 +232,6 @@ const Notebook = () => {
                 </SelectContent>
               </Select>
 
-              <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Sort by" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="subject">Subject</SelectItem>
-                  <SelectItem value="confidence">Confidence</SelectItem>
-                  <SelectItem value="marks">Marks Lost</SelectItem>
-                </SelectContent>
-              </Select>
             </div>
           </div>
         </div>
