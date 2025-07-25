@@ -4,6 +4,17 @@ import { Button } from "@/components/ui/button";
 import { BookOpen, Lightbulb, Target, Clock, ExternalLink, Brain, AlertCircle } from "lucide-react";
 import { format } from "date-fns";
 
+// Safe text formatting function to prevent XSS
+const formatBoldText = (text: string): React.ReactNode => {
+  const parts = text.split(/(\*\*.*?\*\*)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
+    }
+    return part.replace(/\*/g, '');
+  });
+};
+
 interface NotebookEntryProps {
   entry: {
     id: string;
@@ -108,7 +119,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             {entry.bulletproof_notes.map((note, index) => (
               <li key={index} className="flex items-start gap-2 text-blue-700 dark:text-blue-200 text-sm">
                 <span className="text-blue-500 dark:text-blue-400 mt-1">•</span>
-                <span dangerouslySetInnerHTML={{ __html: note.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*/g, '') }} />
+                <span>{formatBoldText(note)}</span>
               </li>
             ))}
           </ul>
