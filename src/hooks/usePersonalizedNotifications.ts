@@ -198,6 +198,33 @@ export const usePersonalizedNotifications = () => {
       return 'Cell biology'; // Default for biology
     }
     
+    // Chemistry topics
+    if (subjectId === 'chemistry' || subjectId === 'chemistry-edexcel') {
+      if (text.includes('atom') || text.includes('proton') || text.includes('neutron') || text.includes('electron') || text.includes('periodic table') || text.includes('isotope') || text.includes('atomic number') || text.includes('alkali') || text.includes('halogen') || text.includes('noble gas')) return 'Atomic structure and the periodic table';
+      if (text.includes('ionic') || text.includes('covalent') || text.includes('metallic') || text.includes('bonding') || text.includes('structure') || text.includes('crystal') || text.includes('molecule') || text.includes('compound')) return 'Bonding, structure, and the properties of matter';
+      if (text.includes('mole') || text.includes('concentration') || text.includes('yield') || text.includes('equation') || text.includes('calculation') || text.includes('mass') || text.includes('formula')) return 'Quantitative chemistry';
+      if (text.includes('acid') || text.includes('base') || text.includes('ph') || text.includes('neutralisation') || text.includes('salt') || text.includes('electrolysis') || text.includes('redox') || text.includes('oxidation') || text.includes('reduction')) return 'Chemical changes';
+      if (text.includes('exothermic') || text.includes('endothermic') || text.includes('energy change') || text.includes('bond energy') || text.includes('activation energy') || text.includes('catalyst')) return 'Energy changes';
+      if (text.includes('rate of reaction') || text.includes('collision theory') || text.includes('equilibrium') || text.includes('reversible') || text.includes('concentration') || text.includes('pressure') || text.includes('temperature')) return 'The rate and extent of chemical change';
+      if (text.includes('hydrocarbon') || text.includes('alkane') || text.includes('alkene') || text.includes('alcohol') || text.includes('carboxylic acid') || text.includes('polymer') || text.includes('crude oil') || text.includes('fractional distillation')) return 'Organic chemistry';
+      if (text.includes('chromatography') || text.includes('flame test') || text.includes('spectroscopy') || text.includes('analysis') || text.includes('identification') || text.includes('purity')) return 'Chemical analysis';
+      if (text.includes('atmosphere') || text.includes('greenhouse') || text.includes('carbon dioxide') || text.includes('global warming') || text.includes('climate change') || text.includes('pollutant')) return 'Chemistry of the atmosphere';
+      if (text.includes('resource') || text.includes('sustainability') || text.includes('recycling') || text.includes('finite') || text.includes('renewable') || text.includes('extraction') || text.includes('life cycle') || text.includes('potable water')) return 'Using resources';
+      return 'Key ideas'; // Default for chemistry
+    }
+    
+    // Physics topics
+    if (subjectId === 'physics' || subjectId === 'physics-edexcel') {
+      if (text.includes('energy') || text.includes('kinetic') || text.includes('potential') || text.includes('work') || text.includes('power') || text.includes('efficiency') || text.includes('conservation') || text.includes('transfer')) return 'Energy';
+      if (text.includes('electric') || text.includes('current') || text.includes('voltage') || text.includes('resistance') || text.includes('circuit') || text.includes('charge') || text.includes('power') || text.includes('conductor')) return 'Electricity';
+      if (text.includes('particle') || text.includes('atom') || text.includes('radiation') || text.includes('radioactive') || text.includes('nuclear') || text.includes('alpha') || text.includes('beta') || text.includes('gamma')) return 'Particle model of matter';
+      if (text.includes('atomic') || text.includes('structure') || text.includes('radiation') || text.includes('radioactivity') || text.includes('nuclear') || text.includes('fission') || text.includes('fusion')) return 'Atomic structure';
+      if (text.includes('force') || text.includes('motion') || text.includes('acceleration') || text.includes('velocity') || text.includes('momentum') || text.includes('newton') || text.includes('pressure')) return 'Forces';
+      if (text.includes('wave') || text.includes('frequency') || text.includes('wavelength') || text.includes('sound') || text.includes('light') || text.includes('electromagnetic') || text.includes('reflection') || text.includes('refraction')) return 'Waves';
+      if (text.includes('magnet') || text.includes('magnetic') || text.includes('field') || text.includes('electromagnet') || text.includes('motor') || text.includes('generator') || text.includes('transformer')) return 'Magnetism and electromagnetism';
+      return 'Energy'; // Default for physics
+    }
+    
     // Business topics
     if (subjectId === 'business' || subjectId === 'business-edexcel-igcse') {
       if (text.includes('entrepreneur') || text.includes('business objective') || text.includes('sole trader') || text.includes('limited company') || text.includes('partnership') || text.includes('stakeholder') || text.includes('location') || text.includes('planning') || text.includes('government') || text.includes('economy')) return 'Business in the real world';
@@ -228,8 +255,18 @@ export const usePersonalizedNotifications = () => {
       return 'Natural Hazards'; // Default for geography
     }
     
-    // For other subjects, return a generic fallback
-    return 'General Topics';
+    // Subject-specific fallbacks based on common first topics
+    if (subjectId === 'maths' || subjectId === 'mathematics') return 'Number';
+    if (subjectId === 'english' || subjectId === 'english-literature') return 'Reading';
+    if (subjectId === 'history') return 'Historical Knowledge';
+    if (subjectId === 'computer-science' || subjectId === 'computing') return 'Computational thinking';
+    if (subjectId === 'art') return 'Drawing and Painting';
+    if (subjectId === 'music') return 'Performance';
+    if (subjectId === 'pe' || subjectId === 'physical-education') return 'Sports Skills';
+    if (subjectId === 'french' || subjectId === 'spanish' || subjectId === 'german') return 'Vocabulary';
+    
+    // Final fallback - try to extract first topic from subject name
+    return 'Fundamental Concepts';
   }, []);
 
   // Check for recent exam completion and show weak topic recommendation
