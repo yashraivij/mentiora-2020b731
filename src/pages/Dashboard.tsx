@@ -264,7 +264,7 @@ const Dashboard = () => {
     if (notification.type === "weak-topic-recommendation" && notification.subjectId) {
       navigate(`/subject/${notification.subjectId}`);
     } else if (notification.type === "exam-recommendation" && notification.subjectId) {
-      navigate(`/predicted-exam/${notification.subjectId}`);
+      navigate('/predicted-questions');
     }
   };
 
