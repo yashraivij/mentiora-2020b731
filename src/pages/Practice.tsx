@@ -903,7 +903,7 @@ const Practice = () => {
                             if (nextSection) {
                               return (
                                 <div key={index} className="bg-muted/50 p-4 rounded-lg border-l-4 border-primary">
-                                  <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                                   <h4 className="font-mono font-semibold text-foreground mb-2 flex items-center">
                                     <Book className="h-4 w-4 mr-2" />
                                     {section}
                                   </h4>
