@@ -1,0 +1,187 @@
+import { supabase } from "@/integrations/supabase/client";
+import { Question } from "@/data/curriculum";
+
+interface NotebookEntry {
+  subject: string;
+  paper: string;
+  topic: string;
+  subtopic: string;
+  questionId: string;
+  questionLabel: string;
+  confidenceLevel: 'Low' | 'Medium' | 'High';
+  whatTrippedUp: string;
+  fixSentence: string;
+  bulletproofNotes: string[];
+  miniExample?: string;
+  keywords: string[];
+  specLink: string;
+  nextStepSuggestion: string;
+  skillType: string;
+  bloomLevel: string;
+  markLoss: number;
+}
+
+export class NotebookGenerator {
+  static async generateAndSaveNotes(
+    userId: string,
+    question: Question,
+    userAnswer: string,
+    marksLost: number,
+    subjectId: string,
+    topicId: string
+  ): Promise<boolean> {
+    try {
+      console.log('Generating notebook notes for question:', question.id);
+
+      // Generate notes using OpenAI
+      const { data: notesData, error: notesError } = await supabase.functions.invoke('generate-notebook-notes', {
+        body: {
+          questionText: question.question,
+          userAnswer,
+          modelAnswer: question.modelAnswer,
+          markingCriteria: question.markingCriteria?.breakdown?.join('; ') || 'Standard marking criteria',
+          subject: subjectId,
+          topic: topicId,
+          subtopic: topicId,
+          marksLost
+        }
+      });
+
+      if (notesError) {
+        console.error('Error generating notes:', notesError);
+        return false;
+      }
+
+      if (!notesData.success) {
+        console.error('Failed to generate notes:', notesData.error);
+        return false;
+      }
+
+      const notes = notesData.notes;
+
+      // Check if similar note already exists for this topic
+      const { data: existingNotes, error: fetchError } = await supabase
+        .from('notebook_entries')
+        .select('*')
+        .eq('user_id', userId)
+        .eq('subject', subjectId)
+        .eq('topic', topicId)
+        .eq('subtopic', topicId);
+
+      if (fetchError) {
+        console.error('Error checking existing notes:', fetchError);
+      }
+
+      // Check for near-identical content
+      const isDuplicate = existingNotes?.some(entry => 
+        entry.what_tripped_up === notes.whatTrippedUp ||
+        entry.fix_sentence === notes.fixSentence
+      );
+
+      if (isDuplicate) {
+        console.log('Similar note already exists, skipping...');
+        return true; // Still return true as this is not an error
+      }
+
+      // Determine confidence level based on marks lost
+      const totalMarks = question.marks || 1;
+      const lossPercentage = (marksLost / totalMarks) * 100;
+      let confidenceLevel: 'Low' | 'Medium' | 'High';
+      
+      if (lossPercentage >= 70) confidenceLevel = 'Low';
+      else if (lossPercentage >= 40) confidenceLevel = 'Medium';
+      else confidenceLevel = 'High';
+
+      // Determine skill type based on question content
+      const questionText = question.question.toLowerCase();
+      let skillType = 'explain';
+      if (questionText.includes('calculate') || questionText.includes('work out')) skillType = 'calc';
+      else if (questionText.includes('define') || questionText.includes('what is')) skillType = 'define';
+      else if (questionText.includes('graph') || questionText.includes('plot')) skillType = 'graph';
+      else if (questionText.includes('evaluate') || questionText.includes('assess')) skillType = 'evaluate';
+
+      // Determine Bloom level
+      let bloomLevel = 'recall';
+      if (questionText.includes('explain') || questionText.includes('describe')) bloomLevel = 'understand';
+      else if (questionText.includes('calculate') || questionText.includes('apply')) bloomLevel = 'apply';
+      else if (questionText.includes('compare') || questionText.includes('analyse')) bloomLevel = 'analyse';
+      else if (questionText.includes('evaluate') || questionText.includes('assess')) bloomLevel = 'evaluate';
+
+      // Save to database
+      const { error: insertError } = await supabase
+        .from('notebook_entries')
+        .insert({
+          user_id: userId,
+          subject: subjectId,
+          paper: `${subjectId} Paper 1`, // Default paper name
+          topic: topicId,
+          subtopic: topicId,
+          question_id: question.id,
+          question_label: `Q: ${question.question.substring(0, 50)}...`,
+          confidence_level: confidenceLevel,
+          what_tripped_up: notes.whatTrippedUp,
+          fix_sentence: notes.fixSentence,
+          bulletproof_notes: notes.bulletproofNotes,
+          mini_example: notes.miniExample || null,
+          keywords: notes.keywords,
+          spec_link: question.specReference || `${subjectId.toUpperCase()} specification`,
+          next_step_suggestion: notes.nextStep,
+          skill_type: skillType,
+          bloom_level: bloomLevel,
+          mark_loss: marksLost
+        });
+
+      if (insertError) {
+        console.error('Error saving notebook entry:', insertError);
+        return false;
+      }
+
+      console.log('Notebook entry saved successfully');
+      return true;
+
+    } catch (error) {
+      console.error('Error in notebook generation:', error);
+      return false;
+    }
+  }
+
+  static async generateNotesForExam(
+    userId: string,
+    examResults: any[],
+    subjectId: string
+  ): Promise<number> {
+    let notesGenerated = 0;
+
+    for (const result of examResults) {
+      if (result.marks_awarded < result.total_marks) {
+        const marksLost = result.total_marks - result.marks_awarded;
+        
+        // Create a simplified question object
+        const question = {
+          id: result.question_id || `exam_q_${Date.now()}`,
+          question: result.question_text || 'Exam question',
+          marks: result.total_marks,
+          difficulty: 'medium' as const,
+          modelAnswer: result.model_answer || 'Model answer not available',
+          markingCriteria: { breakdown: result.marking_criteria?.split('; ') || [] },
+          specReference: result.spec_reference || `${subjectId.toUpperCase()} specification`
+        };
+
+        const success = await this.generateAndSaveNotes(
+          userId,
+          question,
+          result.user_answer || '',
+          marksLost,
+          subjectId,
+          result.topic || 'general'
+        );
+
+        if (success) {
+          notesGenerated++;
+        }
+      }
+    }
+
+    return notesGenerated;
+  }
+}

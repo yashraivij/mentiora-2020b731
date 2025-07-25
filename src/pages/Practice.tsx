@@ -11,6 +11,7 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
 
 interface QuestionAttempt {
   questionId: string;
@@ -227,8 +228,37 @@ const Practice = () => {
       setAttempts([...attempts, attempt]);
       setShowFeedback(true);
       
-      // Show success toast with score
-      toast.success(`Answer marked! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks`);
+      // Generate notebook notes if marks were lost
+      const marksLost = currentQuestion.marks - markingResult.marksAwarded;
+      if (marksLost > 0 && user?.id) {
+        console.log('Generating notebook notes for lost marks:', marksLost);
+        try {
+          const notesGenerated = await NotebookGenerator.generateAndSaveNotes(
+            user.id,
+            currentQuestion,
+            userAnswer,
+            marksLost,
+            subjectId || '',
+            topicId || ''
+          );
+          
+          if (notesGenerated) {
+            toast.success(`Answer marked! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks. Smart notes added to your Notebook!`, {
+              action: {
+                label: "View Notebook",
+                onClick: () => navigate('/notebook')
+              }
+            });
+          } else {
+            toast.success(`Answer marked! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks`);
+          }
+        } catch (error) {
+          console.error('Error generating notebook notes:', error);
+          toast.success(`Answer marked! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks`);
+        }
+      } else {
+        toast.success(`Answer marked! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks`);
+      }
       
     } catch (error) {
       console.error('Error marking answer:', error);
