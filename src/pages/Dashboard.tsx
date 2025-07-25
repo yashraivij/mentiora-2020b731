@@ -311,68 +311,92 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Premium Streak Section - Compact */}
+        {/* Premium Streak Section - Enhanced */}
         <div className="mb-6">
-          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 dark:from-orange-950/30 dark:via-red-950/20 dark:to-pink-950/30 shadow-xl hover:shadow-2xl transition-all duration-300 group">
-            {/* Animated Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 via-red-400/20 to-pink-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-orange-50/80 to-red-50/80 dark:from-slate-900 dark:via-orange-950/20 dark:to-red-950/20 shadow-2xl hover:shadow-3xl transition-all duration-500 group backdrop-blur-xl">
+            {/* Premium Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-red-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
-            {/* Glowing Border Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 rounded-lg p-[1px] group-hover:animate-pulse">
-              <div className="bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 dark:from-orange-950/30 dark:via-red-950/20 dark:to-pink-950/30 rounded-[7px] h-full w-full" />
+            {/* Sophisticated Border */}
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 rounded-xl p-[1px]">
+              <div className="bg-gradient-to-br from-white via-orange-50/80 to-red-50/80 dark:from-slate-900 dark:via-orange-950/20 dark:to-red-950/20 rounded-[11px] h-full w-full backdrop-blur-xl" />
             </div>
             
-            <CardContent className="relative p-4">
+            {/* Floating Orbs */}
+            <div className="absolute top-2 right-4 w-2 h-2 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse opacity-60" />
+            <div className="absolute bottom-3 left-6 w-1.5 h-1.5 bg-gradient-to-r from-pink-400 to-red-400 rounded-full animate-bounce opacity-40" />
+            
+            <CardContent className="relative p-5">
               <div className="flex items-center justify-between">
-                {/* Left Section - Streak Info */}
-                <div className="flex items-center space-x-4">
-                  {/* Animated Fire Icon */}
-                  <div className="relative">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 flex items-center justify-center shadow-lg group-hover:shadow-orange-500/25 transition-shadow duration-300">
-                      <Flame className="h-6 w-6 text-white group-hover:scale-110 transition-transform duration-300 animate-pulse" />
+                {/* Left Section - Streak Display */}
+                <div className="flex items-center space-x-5">
+                  {/* Premium Fire Icon */}
+                  <div className="relative group/icon">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 flex items-center justify-center shadow-xl shadow-orange-500/25 group-hover:shadow-orange-500/40 transition-all duration-300 relative overflow-hidden">
+                      {/* Inner Glow */}
+                      <div className="absolute inset-1 rounded-xl bg-white/15 backdrop-blur-sm" />
+                      <Flame className="h-7 w-7 text-white relative z-10 group-hover/icon:scale-110 transition-transform duration-300 drop-shadow-lg" />
+                      
+                      {/* Rotating Ring */}
+                      <div className="absolute inset-0 rounded-2xl border-2 border-yellow-400/30 group-hover/icon:rotate-180 transition-transform duration-1000" />
                     </div>
-                    {/* Floating Sparkles */}
-                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center animate-bounce">
-                      <Sparkles className="h-2 w-2 text-white" />
+                    
+                    {/* Premium Floating Elements */}
+                    <div className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg animate-bounce">
+                      <Sparkles className="h-2.5 w-2.5 text-white drop-shadow-sm" />
                     </div>
+                    
+                    {/* Pulsing Ring */}
+                    <div className="absolute inset-0 rounded-2xl border border-orange-300/20 animate-ping opacity-75" />
                   </div>
                   
-                  {/* Streak Text */}
-                  <div>
-                    <div className="flex items-center space-x-2 mb-1">
-                      <h3 className="text-2xl font-black bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent">
+                  {/* Enhanced Streak Text */}
+                  <div className="space-y-1">
+                    <div className="flex items-baseline space-x-2">
+                      <h3 className="text-3xl font-black bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent tracking-tight">
                         {getStudyStreak()}
                       </h3>
-                      <span className="text-lg font-bold text-orange-600 dark:text-orange-400">Days</span>
+                      <span className="text-lg font-bold bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
+                        Day{getStudyStreak() !== 1 ? 's' : ''}
+                      </span>
                     </div>
-                    <h4 className="text-sm font-bold text-foreground">Study Streak</h4>
+                    <div className="flex items-center space-x-2">
+                      <h4 className="text-sm font-bold text-foreground/90 tracking-wide">Study Streak</h4>
+                      <div className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full animate-pulse" />
+                    </div>
                   </div>
                 </div>
                 
-                {/* Right Section - Compact Stats */}
-                <div className="flex items-center space-x-6 text-center">
-                  <div>
-                    <div className="text-lg font-bold bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
-                      {userProgress.length}
+                {/* Right Section - Premium Stats */}
+                <div className="flex items-center space-x-6">
+                  {/* Stat Cards */}
+                  <div className="flex items-center space-x-4">
+                    <div className="text-center px-3 py-2 bg-gradient-to-br from-orange-100/80 to-red-100/80 dark:from-orange-950/40 dark:to-red-950/40 rounded-xl border border-orange-200/50 dark:border-orange-800/30 backdrop-blur-sm">
+                      <div className="text-lg font-black bg-gradient-to-br from-orange-700 to-red-700 dark:from-orange-300 dark:to-red-300 bg-clip-text text-transparent">
+                        {userProgress.length}
+                      </div>
+                      <div className="text-xs font-semibold text-orange-600/80 dark:text-orange-400/80 uppercase tracking-wider">Topics</div>
                     </div>
-                    <div className="text-xs font-medium text-muted-foreground">Topics</div>
-                  </div>
-                  <div className="w-px h-6 bg-orange-300/50 dark:bg-orange-700/50" />
-                  <div>
-                    <div className="text-lg font-bold bg-gradient-to-r from-red-600 to-pink-600 dark:from-red-400 dark:to-pink-400 bg-clip-text text-transparent">
-                      {getMasteredTopics()}
+                    
+                    <div className="w-px h-8 bg-gradient-to-b from-transparent via-orange-300/40 to-transparent" />
+                    
+                    <div className="text-center px-3 py-2 bg-gradient-to-br from-red-100/80 to-pink-100/80 dark:from-red-950/40 dark:to-pink-950/40 rounded-xl border border-red-200/50 dark:border-red-800/30 backdrop-blur-sm">
+                      <div className="text-lg font-black bg-gradient-to-br from-red-700 to-pink-700 dark:from-red-300 dark:to-pink-300 bg-clip-text text-transparent">
+                        {getMasteredTopics()}
+                      </div>
+                      <div className="text-xs font-semibold text-red-600/80 dark:text-red-400/80 uppercase tracking-wider">Mastered</div>
                     </div>
-                    <div className="text-xs font-medium text-muted-foreground">Mastered</div>
                   </div>
-                  <div className="w-px h-6 bg-orange-300/50 dark:bg-orange-700/50" />
-                  <Button 
-                    size="sm"
-                    className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white shadow-lg hover:shadow-orange-500/25 transform hover:scale-105 transition-all duration-300 px-4 py-2 text-xs font-semibold"
-                    onClick={() => navigate('/practice')}
-                  >
-                    <Flame className="h-3 w-3 mr-1" />
-                    Keep Going
-                  </Button>
+                  
+                  {/* Premium Achievement Badge */}
+                  <div className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-br from-yellow-100/90 via-amber-100/90 to-orange-100/90 dark:from-yellow-950/40 dark:via-amber-950/40 dark:to-orange-950/40 rounded-full border border-yellow-300/50 dark:border-yellow-700/30 shadow-lg backdrop-blur-sm group-hover:shadow-yellow-500/20 transition-shadow duration-300">
+                    <div className="w-5 h-5 bg-gradient-to-br from-yellow-500 to-amber-500 rounded-full flex items-center justify-center shadow-sm">
+                      <Trophy className="h-2.5 w-2.5 text-white drop-shadow-sm" />
+                    </div>
+                    <span className="text-sm font-bold bg-gradient-to-r from-yellow-700 via-amber-700 to-orange-700 dark:from-yellow-300 dark:via-amber-300 dark:to-orange-300 bg-clip-text text-transparent tracking-wide">
+                      {getStudyStreak() >= 7 ? 'Streak Master' : 'Rising Star'}
+                    </span>
+                  </div>
                 </div>
               </div>
             </CardContent>
