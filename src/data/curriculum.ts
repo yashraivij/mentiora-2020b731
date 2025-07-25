@@ -1676,15 +1676,15 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'tvr-q11',
-            question: 'Compare how these two texts use language to create different atmospheres:\n\nText A: "The storm approached slowly, its dark clouds gathering ominously over the quiet town. Thunder rumbled in the distance like an ancient warning."\n\nText B: "Rain is forecast for this afternoon with possible thunderstorms. Temperatures will drop to 15°C. Visibility may be reduced."',
+            question: 'Compare how these two texts use punctuation to create different effects:\n\nText A: "The results were clear. Undeniable. Final."\nText B: "The results were clear, undeniable, and final."',
             marks: 8,
             difficulty: 'medium',
-            modelAnswer: 'Text A uses personification ("storm approached") and metaphor ("like an ancient warning") to create a dramatic, foreboding atmosphere. Descriptive adjectives like "dark," "ominous," and "quiet" build tension and suggest impending doom. Text B uses factual, objective language typical of weather reports. Short, declarative sentences convey information efficiently without emotional impact. The clinical tone contrasts sharply with Text A\'s literary, atmospheric approach.',
+            modelAnswer: 'Text A uses short sentences and full stops to create dramatic pauses and emphasis, building tension through fragmented delivery. Each word gains weight through isolation. Text B uses commas in a list structure, creating smooth flow and matter-of-fact presentation. The coordinating conjunction "and" provides closure and completeness, making the statement feel more measured and less dramatic than Text A\'s staccato effect.',
             markingCriteria: {
               breakdown: [
-                'Analysis of language techniques in Text A (3 marks)',
-                'Analysis of language techniques in Text B (3 marks)',
-                'Comparison of different atmospheric effects (2 marks)'
+                'Analysis of punctuation in Text A (3 marks)',
+                'Analysis of punctuation in Text B (3 marks)',
+                'Comparison of different effects (2 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
@@ -1701,6 +1701,182 @@ export const curriculum: Subject[] = [
                 'Discussion of parallel structure and imperatives (3 marks)',
                 'Analysis of meta-commentary function (2 marks)',
                 'Overall effect on reader and writer authority (2 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          }
+        ]
+      },
+      {
+        id: 'childrens-language-development',
+        name: 'Children\'s Language Development',
+        questions: [
+          {
+            id: 'cld-q1',
+            question: 'Analyse this transcript of a 2-year-old child talking about their toys. What does it reveal about their phonological development?\n\nTranscript:\nChild: "Me got tuck! Big tuck go vroom! Teddy in ca... ca sit here."\nCaregiver: "You\'ve got a truck! A big truck goes vroom! Teddy is in the car... the car sits here."\nChild: "Tuck go up! Up, up! Teddy faw down."\nCaregiver: "The truck goes up! Up, up! Teddy fell down."',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The transcript shows typical phonological processes including cluster reduction where "truck" becomes "tuck" and final consonant deletion where "car" becomes "ca." The child demonstrates difficulty with consonant clusters and shows systematic sound substitutions. The child successfully produces initial consonants but struggles with final sounds, indicating normal developmental patterns where certain sounds are mastered before others.',
+            markingCriteria: {
+              breakdown: [
+                'Identification of phonological features (6-8 marks)',
+                'Reference to developmental theories (6-8 marks)',
+                'Analysis of patterns (6-8 marks)',
+                'Application to transcript (6-8 marks)',
+                'Technical accuracy (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q2',
+            question: 'Using the transcript provided, analyse how this 18-month-old child is developing their understanding of grammar.\n\nTranscript:\nChild: "Daddy go"\nCaregiver: "Yes, daddy is going to work"\nChild: "My teddy"\nCaregiver: "That\'s your teddy bear"\nChild: "Want milk"\nCaregiver: "You want some milk?"\nChild: "More book"\nCaregiver: "You want more books to read?"',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The child shows telegraphic speech with two-word combinations following basic word order patterns. They demonstrate understanding of semantic relations like agent-action ("daddy go"), possession ("my teddy"), and desire ("want milk"). The child uses appropriate word order and shows emerging grammar without function words, reflecting normal developmental stages described in acquisition theories.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of grammatical features (6-8 marks)',
+                'Reference to language acquisition theories (6-8 marks)',
+                'Discussion of semantic development (6-8 marks)',
+                'Use of transcript evidence (6-8 marks)',
+                'Quality of expression (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q3',
+            question: 'Analyse how caregivers\' speech patterns in this transcript support the child\'s language development.\n\nTranscript:\nChild: "Ball gone"\nCaregiver: "Oh no! The ball has gone! Where has the ball gone?"\nChild: "Under"\nCaregiver: "Yes, it\'s under the table. The red ball is under the big table."\nChild: "Get ball"\nCaregiver: "You want to get the ball? Let\'s get the ball together!"',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The caregiver uses child-directed speech with expansions ("Ball gone" → "The ball has gone"), questions to encourage response, and positive reinforcement. They provide semantic and syntactic expansions, adding descriptive words ("red ball", "big table") and demonstrating correct grammar while maintaining the child\'s meaning. This supports language development through scaffolding and modelling.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of caregiver speech features (6-8 marks)',
+                'Reference to support theories (6-8 marks)',
+                'Discussion of interaction patterns (6-8 marks)',
+                'Evidence from transcript (6-8 marks)',
+                'Critical evaluation (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q4',
+            question: 'Analyse how this 5-year-old child uses different sentence structures in their storytelling.\n\nExtract from child\'s story:\n"My cat is black and white. She likes to play with her ball. Yesterday she ran up the tree and got stuck. Dad had to get a ladder to help her down. She was very frightened but then she was okay. Now she stays away from tall trees."',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The child demonstrates sophisticated sentence structures including complex sentences with subordinate clauses ("She was very frightened but then she was okay"). They use temporal markers ("Yesterday", "Now") showing understanding of narrative sequencing. The child employs past tense consistently and uses varied sentence lengths, indicating advanced syntactic development for their age.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of spelling strategies (6-8 marks)',
+                'Reference to developmental stages (6-8 marks)',
+                'Discussion of phonological awareness (6-8 marks)',
+                'Use of writing sample evidence (6-8 marks)',
+                'Theoretical understanding (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q5',
+            question: 'Analyse how this 3-year-old uses language for different functions in the playground transcript.\n\nTranscript:\nChild: "Stop that! My turn now!"\nOther child: "No, I was here first"\nChild: "We can share. You have it, then me have it."\nChild: "Look! Big slide is scary. I go down little slide."\nChild: "Mummy, watch me! I\'m going fast!"',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The child demonstrates multiple language functions: regulatory ("Stop that! My turn now!"), interactional ("We can share"), representational ("Big slide is scary"), and personal ("I go down little slide"). They use language to control situations, negotiate social relationships, describe their environment, and express personal feelings, showing sophisticated pragmatic awareness.',
+            markingCriteria: {
+              breakdown: [
+                'Identification of language functions (6-8 marks)',
+                'Reference to Halliday\'s functions (6-8 marks)',
+                'Analysis of pragmatic development (6-8 marks)',
+                'Evidence from transcript (6-8 marks)',
+                'Contextual understanding (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q6',
+            question: 'Discuss the role of interaction in children\'s early vocabulary development, referring to relevant theories.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Social interaction is crucial for vocabulary acquisition through joint attention, labelling activities, and contextual learning. Vygotsky emphasises social construction of knowledge while Bruner\'s LASS theory shows how caregivers facilitate language learning through structured interactions and scaffolding.',
+            markingCriteria: {
+              breakdown: [
+                'Discussion of interaction importance (6-8 marks)',
+                'Reference to relevant theories (6-8 marks)',
+                'Analysis of learning mechanisms (6-8 marks)',
+                'Examples and evidence (6-8 marks)',
+                'Critical evaluation (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q7',
+            question: 'Analyse how nature versus nurture influences are evident in this transcript of siblings learning language.\n\nTranscript:\nChild A (3 years): "I goed to shops with mummy"\nChild B (5 years): "You mean you went to the shops"\nChild A: "No, I goed! I goed yesterday!"\nParent: "Yes, you went yesterday. You both went to different shops."\nChild B: "I went to the big shop and bought sweets"\nChild A: "I want to go to big shop too"',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'The transcript shows universal patterns supporting nativist theories: both children apply regular past tense rules ("goed"), suggesting innate grammar acquisition. However, environmental factors are evident in the older child\'s correction and parental modelling. The interaction demonstrates both innate capacity (systematic error patterns) and learned behaviours (correction, imitation) contributing to acquisition.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of innate factors (6-8 marks)',
+                'Analysis of environmental factors (6-8 marks)',
+                'Reference to key theories (6-8 marks)',
+                'Use of transcript evidence (6-8 marks)',
+                'Balanced evaluation (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q8',
+            question: 'Analyse how a 4-year-old child typically develops their narrative skills. What features would you expect to see in their storytelling?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'The child demonstrates emerging story structure with beginning, middle, and end, though may show non-linear sequencing. They use past tense markers and temporal connectives. The narrative shows developing theory of mind as they consider character motivations and audience needs.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of narrative structure (6-8 marks)',
+                'Discussion of linguistic features (6-8 marks)',
+                'Reference to cognitive development (6-8 marks)',
+                'Evidence from transcript (6-8 marks)',
+                'Sophisticated analysis (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q9',
+            question: 'Analyse how bilingual language development is evident in this transcript of a child switching between languages.\n\nTranscript:\nChild (to English-speaking friend): "Let\'s play with the cars!"\nChild (to Spanish-speaking grandmother): "Abuela, mira los coches!" (Grandmother, look at the cars!)\nChild (to friend): "My abuela says the red car is muy bonito... very pretty"\nGrandmother: "¿Cuál te gusta más?" (Which one do you like more?)\nChild: "Me gusta el azul porque es fast... rápido!"',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'The transcript demonstrates sophisticated code-switching as the child appropriately chooses languages for different interlocutors. They show metalinguistic awareness by translating for monolingual speakers and using both languages strategically. The mixing ("muy bonito... very pretty") indicates balanced bilingual development rather than confusion, supporting additive bilingualism theories.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of code-switching patterns (6-8 marks)',
+                'Discussion of bilingual development (6-8 marks)',
+                'Reference to bilingual theories (6-8 marks)',
+                'Use of transcript evidence (6-8 marks)',
+                'Cultural sensitivity (3-4 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q10',
+            question: 'Evaluate the claim that children\'s language development follows predictable stages, using transcript evidence.\n\nTranscript (24-month-old):\n"Daddy car go work. Mummy stay home. Me want juice now. No bed! Me no tired. Big dog scary but teddy nice. Where daddy go?"',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'The transcript shows typical two-word plus stage features: telegraphic speech, missing function words, and basic word order. However, it also shows individual variation in complexity and some three-word combinations earlier than expected. This supports stage theories while highlighting individual differences in timing and progression, suggesting broad developmental patterns with personal variation.',
+            markingCriteria: {
+              breakdown: [
+                'Evaluation of stage theories (6-8 marks)',
+                'Discussion of individual variation (6-8 marks)',
+                'Reference to research evidence (6-8 marks)',
+                'Analysis of transcript data (6-8 marks)',
+                'Justified conclusion (3-4 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'

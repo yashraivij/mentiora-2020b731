@@ -168,7 +168,7 @@ const Practice = () => {
           modelAnswer: question.modelAnswer,
           markingCriteria: question.markingCriteria,
           totalMarks: question.marks,
-          subject: subjectId
+          subjectId: subjectId
         }
       });
 
@@ -903,11 +903,11 @@ const Practice = () => {
                             if (nextSection) {
                               return (
                                 <div key={index} className="bg-muted/50 p-4 rounded-lg border-l-4 border-primary">
-                                   <h4 className="font-mono font-semibold text-foreground mb-2 flex items-center">
+                                  <h4 className="font-semibold text-foreground mb-2 flex items-center">
                                     <Book className="h-4 w-4 mr-2" />
                                     {section}
                                   </h4>
-                                  <div className="text-foreground font-normal bg-background/80 p-3 rounded">
+                                  <div className="text-foreground italic bg-background/80 p-3 rounded">
                                     "{nextSection.trim()}"
                                   </div>
                                 </div>
@@ -1068,9 +1068,10 @@ const Practice = () => {
                     <Button 
                       onClick={() => navigate('/notebook')}
                       variant="outline"
-                      className="w-full bg-gradient-to-r from-purple-50 to-indigo-50 border-purple-200 text-purple-700 hover:from-purple-100 hover:to-indigo-100 hover:border-purple-300 hover:shadow-md transition-all duration-200 dark:from-purple-950/30 dark:to-indigo-950/30 dark:border-purple-700 dark:text-purple-300 dark:hover:from-purple-950/50 dark:hover:to-indigo-950/50 dark:hover:border-purple-600"
+                      className="w-full border-purple-200 text-purple-700 hover:bg-purple-50 dark:border-purple-700 dark:text-purple-300 dark:hover:bg-purple-950/20"
                     >
-                      <span className="font-medium">📚 View Smart Notebook</span>
+                      <StickyNote className="h-4 w-4 mr-2" />
+                      View Smart Notebook
                     </Button>
                   </div>
                 </CardContent>
