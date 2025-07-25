@@ -722,13 +722,6 @@ const PredictedResults = () => {
               Try Another Subject
             </Button>
             <Button 
-              onClick={() => navigate('/notebook')}
-              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
-            >
-              <StickyNote className="h-4 w-4 mr-2" />
-              View Smart Notebook
-            </Button>
-            <Button 
               onClick={() => navigate('/dashboard')} 
               variant="outline"
             >
