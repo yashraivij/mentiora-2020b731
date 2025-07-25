@@ -40,7 +40,6 @@ const PredictedExam = () => {
   const [answers, setAnswers] = useState<ExamAnswer[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [examStarted, setExamStarted] = useState(false);
-  const [isProcessingNext, setIsProcessingNext] = useState(false);
   
   const {
     notification,
@@ -1437,41 +1436,6 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
     return answers.find(a => a.questionId === questionId)?.answer || '';
   };
 
-  // Function to handle immediate feedback when moving to next question
-  const handleNextQuestion = async () => {
-    const question = examQuestions[currentQuestion];
-    const answer = getAnswer(question.id);
-    
-    // Show loading state
-    setIsProcessingNext(true);
-    
-    // Provide immediate feedback if they've written an answer
-    if (answer.trim() && user?.id) {
-      try {
-        const markingResult = await markAnswerWithAI(question, answer);
-        const marksLost = question.marks - markingResult.marksAwarded;
-        
-        // Show notification immediately if they lost marks
-        if (marksLost > 0) {
-          const topicName = getTopicNameFromQuestionId(question.id);
-          handlePredictedExamWrongAnswer(
-            question.questionNumber,
-            topicName,
-            subject.name,
-            markingResult.marksAwarded,
-            question.marks
-          );
-        }
-      } catch (error) {
-        console.error('Error marking answer for immediate feedback:', error);
-      }
-    }
-    
-    // Navigate to next question
-    setCurrentQuestion(Math.min(examQuestions.length - 1, currentQuestion + 1));
-    setIsProcessingNext(false);
-  };
-
   const markAnswerWithAI = async (question: ExamQuestion, answer: string) => {
     try {
       console.log('Marking predicted exam answer:', { questionId: question.id, marks: question.marks });
@@ -1848,10 +1812,9 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
                     </Button>
                   ) : (
                     <Button
-                      onClick={handleNextQuestion}
-                      disabled={isProcessingNext}
+                      onClick={() => setCurrentQuestion(Math.min(examQuestions.length - 1, currentQuestion + 1))}
                     >
-                      {isProcessingNext ? "Processing..." : "Next"}
+                      Next
                     </Button>
                   )}
                 </div>
