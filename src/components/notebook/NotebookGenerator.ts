@@ -73,28 +73,51 @@ export class NotebookGenerator {
 
       const notes = notesData.notes;
 
-      // Check if similar note already exists for this topic
+      // Check if similar note already exists for this topic and question
       const { data: existingNotes, error: fetchError } = await supabase
         .from('notebook_entries')
         .select('*')
         .eq('user_id', userId)
         .eq('subject', subjectName)
         .eq('topic', topicName)
-        .eq('subtopic', topicName);
+        .eq('question_id', question.id);
 
       if (fetchError) {
         console.error('Error checking existing notes:', fetchError);
       }
 
-      // Check for near-identical content
-      const isDuplicate = existingNotes?.some(entry => 
-        entry.what_tripped_up === notes.whatTrippedUp ||
-        entry.fix_sentence === notes.fixSentence
-      );
-
-      if (isDuplicate) {
-        console.log('Similar note already exists, skipping...');
+      // Check if note already exists for this specific question
+      if (existingNotes && existingNotes.length > 0) {
+        console.log('Note already exists for this question, skipping...');
         return true; // Still return true as this is not an error
+      }
+
+      // Also check for very similar content across all notes to prevent conceptual duplicates
+      const { data: allUserNotes, error: allNotesError } = await supabase
+        .from('notebook_entries')
+        .select('what_tripped_up, fix_sentence, bulletproof_notes')
+        .eq('user_id', userId)
+        .eq('subject', subjectName)
+        .eq('topic', topicName);
+
+      if (!allNotesError && allUserNotes) {
+        const isSimilarContent = allUserNotes.some(entry => {
+          // Check if the core learning points are too similar
+          const existingKeywords = entry.bulletproof_notes?.join(' ').toLowerCase() || '';
+          const newKeywords = notes.bulletproofNotes?.join(' ').toLowerCase() || '';
+          
+          // Simple similarity check - if more than 50% of key concepts overlap
+          const existingWords = existingKeywords.split(' ').filter(w => w.length > 4);
+          const newWords = newKeywords.split(' ').filter(w => w.length > 4);
+          const commonWords = existingWords.filter(word => newWords.includes(word));
+          
+          return commonWords.length > Math.min(existingWords.length, newWords.length) * 0.5;
+        });
+
+        if (isSimilarContent) {
+          console.log('Similar content already exists, skipping...');
+          return true;
+        }
       }
 
       // Determine confidence level based on marks lost

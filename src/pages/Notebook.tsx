@@ -109,15 +109,15 @@ const Notebook = () => {
     const totalEntries = entries.length;
     const totalMarksLost = entries.reduce((sum, entry) => sum + entry.mark_loss, 0);
     const lowConfidence = entries.filter(entry => entry.confidence_level.toLowerCase() === 'low').length;
-    const recentNotes = entries.filter(entry => {
-      const noteDate = new Date(entry.created_at);
-      const weekAgo = new Date();
-      weekAgo.setDate(weekAgo.getDate() - 7);
-      return noteDate >= weekAgo;
-    }).length;
+    const focusAreas = entries.reduce((acc, entry) => {
+      const key = `${entry.subject} - ${entry.topic}`;
+      acc[key] = (acc[key] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+    const topFocusAreas = Object.keys(focusAreas).length;
     const subjects = getSubjects();
 
-    return { totalEntries, totalMarksLost, lowConfidence, recentNotes, subjectsWithNotes: subjects.length };
+    return { totalEntries, totalMarksLost, lowConfidence, topFocusAreas, subjectsWithNotes: subjects.length };
   };
 
   const stats = getStats();
@@ -191,11 +191,11 @@ const Notebook = () => {
                 <div className="text-xs text-blue-600 dark:text-blue-400">Total Notes</div>
               </CardContent>
             </Card>
-            <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/30 dark:to-emerald-900/20 border-emerald-200/50 dark:border-emerald-800/30">
+            <Card className="bg-gradient-to-br from-purple-50 to-purple-100/50 dark:from-purple-950/30 dark:to-purple-900/20 border-purple-200/50 dark:border-purple-800/30">
               <CardContent className="p-4 text-center">
-                <Calendar className="h-6 w-6 text-emerald-600 dark:text-emerald-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-emerald-800 dark:text-emerald-300">{stats.recentNotes}</div>
-                <div className="text-xs text-emerald-600 dark:text-emerald-400">This Week</div>
+                <Star className="h-6 w-6 text-purple-600 dark:text-purple-400 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-purple-800 dark:text-purple-300">{stats.topFocusAreas}</div>
+                <div className="text-xs text-purple-600 dark:text-purple-400">Focus Areas</div>
               </CardContent>
             </Card>
             <Card className="bg-gradient-to-br from-green-50 to-green-100/50 dark:from-green-950/30 dark:to-green-900/20 border-green-200/50 dark:border-green-800/30">
