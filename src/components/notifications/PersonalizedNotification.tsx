@@ -76,7 +76,7 @@ export const PersonalizedNotification = ({
           message: `You've answered ${streakCount}+ practice questions correctly. Try the 2026 Predicted Exam for ${subjectName}!`,
           actionText: "Take Exam",
           badgeText: "High Performance",
-          gradient: "from-green-500 via-blue-500 to-purple-500"
+          gradient: "from-emerald-500 via-teal-500 to-cyan-500"
         };
       default:
         return {
