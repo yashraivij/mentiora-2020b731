@@ -57,10 +57,10 @@ serve(async (req) => {
     }
 
     const requestData = await req.json();
-    const { question, userAnswer, modelAnswer, markingCriteria, subject, totalMarks, marksLost } = requestData;
+    const { questionText, userAnswer, modelAnswer, markingCriteria, subject, topic, subtopic, marksLost } = requestData;
 
     // Validate required fields
-    if (!question || !userAnswer || !subject) {
+    if (!questionText || !userAnswer || !subject) {
       return new Response(JSON.stringify({ error: 'Missing required fields' }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -68,14 +68,14 @@ serve(async (req) => {
     }
 
     // Validate input lengths to prevent abuse
-    if (question.length > 5000 || userAnswer.length > 5000 || (modelAnswer && modelAnswer.length > 5000)) {
+    if (questionText.length > 5000 || userAnswer.length > 5000 || (modelAnswer && modelAnswer.length > 5000)) {
       return new Response(JSON.stringify({ error: 'Input too long' }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
-    console.log('Generating notebook notes for:', { subject, totalMarks, marksLost });
+    console.log('Generating notebook notes for:', { subject, topic, marksLost });
 
     const prompt = `You are an expert GCSE tutor creating concise revision notes for a Grade 9 student who lost marks on a question.
 
@@ -202,7 +202,7 @@ Generate the notes now:`;
         fixSentence: fixSentence || 'Review the fundamental principles and practice similar questions',
         bulletproofNotes: bulletproofNotes.length > 0 ? bulletproofNotes : ['Review core concepts', 'Practice similar questions', 'Focus on key definitions'],
         miniExample: miniExample || 'Practice examples available in textbook',
-        keywords: keywords.length > 0 ? keywords : [topic, subtopic],
+        keywords: keywords.length > 0 ? keywords : [topic || subject, subtopic || subject],
         nextStep: nextStep || 'Practice more questions on this topic'
       };
     };
