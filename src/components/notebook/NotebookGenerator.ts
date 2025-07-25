@@ -31,7 +31,16 @@ export class NotebookGenerator {
     topicId: string
   ): Promise<boolean> {
     try {
-      console.log('Generating notebook notes for question:', question.id);
+      console.log('=== NotebookGenerator.generateAndSaveNotes CALLED ===');
+      console.log('Inputs:', { 
+        userId, 
+        questionId: question.id, 
+        questionText: question.question?.substring(0, 50) + '...',
+        userAnswerLength: userAnswer.length,
+        marksLost, 
+        subjectId, 
+        topicId 
+      });
 
       // Find the actual subject and topic names from curriculum
       const { curriculum } = await import('@/data/curriculum');

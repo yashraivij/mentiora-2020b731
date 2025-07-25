@@ -1431,43 +1431,52 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
             // Only generate notes if marks were lost
             if (marksLost > 0) {
               console.log('Generating notes for lost marks:', marksLost);
+              
               // Create a mock Question object compatible with NotebookGenerator
               const mockQuestion = {
                 id: question.id,
                 question: question.text,
                 marks: question.marks,
                 difficulty: 'medium' as const,
-                modelAnswer: `This is a predicted exam question. Review your answer and compare with mark schemes.`,
+                modelAnswer: markingResult.feedback || `This is a predicted exam question worth ${question.marks} marks. Focus on addressing the key marking criteria.`,
                 markingCriteria: { 
                   breakdown: [
-                    `Review marking criteria for ${question.marks} mark question`,
-                    markingResult.feedback
+                    `Analysis and understanding (${Math.ceil(question.marks / 2)} marks)`,
+                    `Application and evaluation (${Math.floor(question.marks / 2)} marks)`
                   ] 
                 },
                 specReference: 'Predicted Exam Practice'
               };
               
-              console.log('Calling NotebookGenerator with:', { 
+              console.log('About to call NotebookGenerator with:', { 
                 userId: user.id, 
-                questionId: question.id, 
+                questionText: question.text.substring(0, 50) + '...', 
+                userAnswer: answer.answer.substring(0, 50) + '...',
                 marksLost, 
                 subjectId: subjectId || '', 
                 topicId: 'predicted-exam' 
               });
               
-              const success = await NotebookGenerator.generateAndSaveNotes(
-                user.id,
-                mockQuestion,
-                answer.answer,
-                marksLost,
-                subjectId || '',
-                'predicted-exam'
-              );
-              
-              console.log('NotebookGenerator result:', success);
-              
-              if (success) {
-                notesGenerated++;
+              try {
+                const success = await NotebookGenerator.generateAndSaveNotes(
+                  user.id,
+                  mockQuestion,
+                  answer.answer,
+                  marksLost,
+                  subjectId || '',
+                  'predicted-exam'
+                );
+                
+                console.log('NotebookGenerator result:', success);
+                
+                if (success) {
+                  notesGenerated++;
+                  console.log('Successfully generated note for question:', question.id);
+                } else {
+                  console.error('Failed to generate note for question:', question.id);
+                }
+              } catch (error) {
+                console.error('Error generating note for question:', question.id, error);
               }
             }
           }
