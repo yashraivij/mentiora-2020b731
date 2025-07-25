@@ -168,7 +168,7 @@ const Practice = () => {
           modelAnswer: question.modelAnswer,
           markingCriteria: question.markingCriteria,
           totalMarks: question.marks,
-          subjectId: subjectId
+          subject: subjectId
         }
       });
 
