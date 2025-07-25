@@ -916,7 +916,7 @@ const Dashboard = () => {
             clearNotificationCache();
             checkForWeakTopicRecommendation();
           }}
-          className="relative overflow-hidden bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 hover:from-violet-500 hover:via-purple-500 hover:to-indigo-600 text-white border-0 shadow-2xl hover:shadow-purple-500/25 transition-all duration-500 transform hover:scale-105 px-8 py-4 rounded-2xl font-bold backdrop-blur-sm group"
+          className="relative overflow-hidden bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 hover:from-violet-500 hover:via-purple-500 hover:to-indigo-600 text-white border-0 shadow-2xl hover:shadow-purple-500/25 transition-all duration-500 transform hover:scale-105 px-4 py-2 rounded-xl font-semibold backdrop-blur-sm group"
           size="lg"
         >
           {/* Premium animated background */}
