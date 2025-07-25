@@ -4,11 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Crown, Target, CheckCircle, XCircle, BookOpen, Clock, RotateCcw, Book, Lightbulb, HelpCircle, User } from "lucide-react";
+import { ArrowLeft, Crown, Target, CheckCircle, XCircle, BookOpen, Clock, RotateCcw, Book, Lightbulb, HelpCircle, User, StickyNote } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
 
 interface ExamQuestion {
   id: string;
@@ -380,7 +381,54 @@ const PredictedResults = () => {
         await saveExamCompletion(markedAttempts);
       }
       
-      toast.success("Exam marked successfully!");
+      // Generate notebook entries for questions where marks were lost
+      if (!isReview) {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          let notesGenerated = 0;
+          for (const attempt of markedAttempts) {
+            const question = questions.find((q: ExamQuestion) => q.id === attempt.questionId);
+            if (question && attempt.score < question.marks) {
+              const marksLost = question.marks - attempt.score;
+              const questionObj = {
+                id: question.id,
+                question: question.text || question.question || '',
+                marks: question.marks,
+                difficulty: 'medium' as const,
+                modelAnswer: attempt.feedback.modelAnswer,
+                markingCriteria: { breakdown: attempt.feedback.whyThisGetsMark.split('\n') },
+                specReference: attempt.feedback.specLink
+              };
+              
+              const success = await NotebookGenerator.generateAndSaveNotes(
+                user.id,
+                questionObj,
+                attempt.userAnswer,
+                marksLost,
+                subjectId === 'geography-paper-2' ? 'geography' : subjectId || '',
+                'general'
+              );
+              
+              if (success) {
+                notesGenerated++;
+              }
+            }
+          }
+          
+          if (notesGenerated > 0) {
+            toast.success(`Exam marked successfully! ${notesGenerated} revision notes added to your Smart Notebook.`, {
+              action: {
+                label: "View Notes",
+                onClick: () => navigate('/notebook')
+              }
+            });
+          } else {
+            toast.success("Exam marked successfully!");
+          }
+        }
+      } else {
+        toast.success("Exam marked successfully!");
+      }
       
     } catch (error) {
       console.error('Error in markAllAnswers:', error);
@@ -624,6 +672,38 @@ const PredictedResults = () => {
             </Card>
           ))}
 
+          {/* Weak Topics Summary */}
+          {!isReview && attempts.some(attempt => {
+            const question = questions.find((q: ExamQuestion) => q.id === attempt.questionId);
+            return question && attempt.score < question.marks;
+          }) && (
+            <Card className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 border-amber-200 dark:border-amber-800">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-amber-800 dark:text-amber-200">
+                  <StickyNote className="h-5 w-5" />
+                  Smart Revision Notes Generated
+                </CardTitle>
+                <CardDescription className="text-amber-700 dark:text-amber-300">
+                  AI has automatically created revision notes for topics where you lost marks
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <div className="text-amber-800 dark:text-amber-200">
+                    Review personalized notes to strengthen weak areas and improve your Grade 9 performance
+                  </div>
+                  <Button 
+                    onClick={() => navigate('/notebook')}
+                    className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+                  >
+                    <StickyNote className="h-4 w-4 mr-2" />
+                    Review All Notes in Notebook
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
           {/* Action Buttons */}
           <div className="flex justify-center space-x-6 mt-12">
             <Button 
@@ -639,6 +719,13 @@ const PredictedResults = () => {
             >
               <BookOpen className="h-5 w-5 mr-2" />
               Try Another Subject
+            </Button>
+            <Button 
+              onClick={() => navigate('/notebook')}
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+            >
+              <StickyNote className="h-4 w-4 mr-2" />
+              View Smart Notebook
             </Button>
             <Button 
               onClick={() => navigate('/dashboard')} 
