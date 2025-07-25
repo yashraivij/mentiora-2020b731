@@ -677,29 +677,30 @@ const PredictedResults = () => {
             const question = questions.find((q: ExamQuestion) => q.id === attempt.questionId);
             return question && attempt.score < question.marks;
           }) && (
-            <Card className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 border-amber-200 dark:border-amber-800">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-amber-800 dark:text-amber-200">
-                  <StickyNote className="h-5 w-5" />
+            <Card className="bg-gradient-to-br from-purple-50 via-indigo-50 to-pink-50 dark:from-purple-950/30 dark:via-indigo-950/30 dark:to-pink-950/30 border-purple-200 dark:border-purple-700/50 shadow-lg">
+              <CardHeader className="text-center pb-4">
+                <CardTitle className="flex items-center justify-center gap-3 text-purple-800 dark:text-purple-200 text-xl">
+                  <div className="p-2 bg-purple-100 dark:bg-purple-900/50 rounded-full">
+                    <StickyNote className="h-6 w-6" />
+                  </div>
                   Smart Revision Notes Generated
                 </CardTitle>
-                <CardDescription className="text-amber-700 dark:text-amber-300">
+                <CardDescription className="text-purple-700 dark:text-purple-300 text-base">
                   AI has automatically created revision notes for topics where you lost marks
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-between">
-                  <div className="text-amber-800 dark:text-amber-200">
-                    Review personalized notes to strengthen weak areas and improve your Grade 9 performance
-                  </div>
-                  <Button 
-                    onClick={() => navigate('/notebook')}
-                    className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
-                  >
-                    <StickyNote className="h-4 w-4 mr-2" />
-                    Review All Notes in Notebook
-                  </Button>
+              <CardContent className="text-center space-y-4">
+                <div className="text-purple-800 dark:text-purple-200 text-lg font-medium">
+                  Review personalized notes to strengthen weak areas and improve your Grade 9 performance
                 </div>
+                <Button 
+                  onClick={() => navigate('/notebook')}
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+                  size="lg"
+                >
+                  <StickyNote className="h-5 w-5 mr-2" />
+                  View Smart Notebook
+                </Button>
               </CardContent>
             </Card>
           )}

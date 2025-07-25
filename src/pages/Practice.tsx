@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb, HelpCircle, X } from "lucide-react";
+import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb, HelpCircle, X, StickyNote } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -1061,9 +1061,19 @@ const Practice = () => {
                     <Badge variant="outline">{currentAttempt.feedback.specLink}</Badge>
                   </div>
 
-                  <Button onClick={handleNextQuestion} className="w-full">
-                    {currentQuestionIndex < shuffledQuestions.length - 1 ? "Next Question" : "Finish Session"}
-                  </Button>
+                  <div className="space-y-3">
+                    <Button onClick={handleNextQuestion} className="w-full">
+                      {currentQuestionIndex < shuffledQuestions.length - 1 ? "Next Question" : "Finish Session"}
+                    </Button>
+                    <Button 
+                      onClick={() => navigate('/notebook')}
+                      variant="outline"
+                      className="w-full border-purple-200 text-purple-700 hover:bg-purple-50 dark:border-purple-700 dark:text-purple-300 dark:hover:bg-purple-950/20"
+                    >
+                      <StickyNote className="h-4 w-4 mr-2" />
+                      View Smart Notebook
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             )}
