@@ -93,22 +93,24 @@ export const PersonalizedNotification = ({
   const content = getNotificationContent();
 
   return (
-    <div className={`fixed top-4 right-4 z-50 transition-all duration-500 ease-out ${
+        <div className={`fixed top-4 right-4 z-50 transition-all duration-500 ease-out ${
       isVisible ? "translate-x-0 opacity-100 scale-100" : "translate-x-full opacity-0 scale-95"
     }`}>
-      <Card className="relative w-96 overflow-hidden border-0 shadow-2xl backdrop-blur-xl">
-        {/* Premium gradient background */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${content.gradient} opacity-90`} />
+      <Card className="relative w-[420px] overflow-hidden border-0 shadow-2xl backdrop-blur-xl">
+        {/* Premium gradient background with enhanced colors */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${content.gradient} opacity-95`} />
         
-        {/* Glass overlay for readability */}
-        <div className="absolute inset-0 bg-background/10 backdrop-blur-sm" />
+        {/* Enhanced glass overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/10 to-transparent backdrop-blur-md" />
         
-        {/* Animated sparkles */}
+        {/* Enhanced animated sparkles with more colors */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-2 left-4 w-1 h-1 bg-white/60 rounded-full animate-pulse" />
-          <div className="absolute top-6 right-8 w-1 h-1 bg-white/40 rounded-full animate-pulse delay-300" />
-          <div className="absolute bottom-4 left-8 w-1 h-1 bg-white/50 rounded-full animate-pulse delay-700" />
-          <div className="absolute bottom-8 right-4 w-1 h-1 bg-white/60 rounded-full animate-pulse delay-1000" />
+          <div className="absolute top-3 left-6 w-1.5 h-1.5 bg-yellow-300/80 rounded-full animate-pulse" />
+          <div className="absolute top-8 right-12 w-1 h-1 bg-pink-300/60 rounded-full animate-pulse delay-300" />
+          <div className="absolute bottom-6 left-12 w-1.5 h-1.5 bg-cyan-300/70 rounded-full animate-pulse delay-700" />
+          <div className="absolute bottom-12 right-6 w-1 h-1 bg-purple-300/80 rounded-full animate-pulse delay-1000" />
+          <div className="absolute top-1/2 left-8 w-0.5 h-0.5 bg-white/60 rounded-full animate-pulse delay-500" />
+          <div className="absolute top-1/3 right-8 w-0.5 h-0.5 bg-emerald-300/70 rounded-full animate-pulse delay-1200" />
         </div>
         
         {/* Content */}
@@ -116,21 +118,21 @@ export const PersonalizedNotification = ({
           {/* Header */}
           <div className="flex items-start justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-white/20 rounded-xl backdrop-blur-sm">
+              <div className="p-3 bg-white/25 rounded-xl backdrop-blur-sm shadow-lg">
                 {content.icon}
               </div>
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <h3 className="font-semibold text-lg">{content.title}</h3>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-1 flex-wrap">
+                  <h3 className="font-bold text-lg whitespace-nowrap">{content.title}</h3>
                   <Badge 
                     variant="secondary" 
-                    className="bg-white/20 text-white border-white/30 text-xs"
+                    className="bg-white/25 text-white border-white/40 text-xs font-medium px-2 py-1 whitespace-nowrap"
                   >
                     {content.badgeText}
                   </Badge>
                 </div>
                 {subjectName && (
-                  <p className="text-xs text-white/80 font-medium">{subjectName}</p>
+                  <p className="text-sm text-white/90 font-semibold capitalize">{subjectName.replace('-', ' ')}</p>
                 )}
               </div>
             </div>
@@ -146,7 +148,7 @@ export const PersonalizedNotification = ({
           </div>
           
           {/* Message */}
-          <p className="text-white/90 text-sm leading-relaxed mb-4">
+          <p className="text-white text-base leading-relaxed mb-5 font-medium">
             {content.message}
           </p>
           
@@ -154,16 +156,16 @@ export const PersonalizedNotification = ({
           <div className="flex items-center justify-between">
             <Button
               onClick={onAction}
-              className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur-sm text-sm"
+              className="bg-white/25 hover:bg-white/35 text-white border-white/40 backdrop-blur-sm text-sm font-semibold px-4 py-2 shadow-lg hover:shadow-xl transition-all duration-200"
               variant="outline"
               size="sm"
             >
               <Target className="h-4 w-4 mr-2" />
-              {content.actionText}
+              <span className="whitespace-nowrap">{content.actionText}</span>
             </Button>
             
-            <div className="flex items-center gap-1 text-xs text-white/70">
-              <Star className="h-3 w-3 fill-current" />
+            <div className="flex items-center gap-1.5 text-xs text-white/80 font-medium">
+              <Star className="h-3 w-3 fill-current text-yellow-300" />
               <span>AI Powered</span>
             </div>
           </div>

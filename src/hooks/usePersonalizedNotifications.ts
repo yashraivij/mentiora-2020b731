@@ -186,18 +186,25 @@ export const usePersonalizedNotifications = () => {
   const extractTopicFromText = useCallback((questionText: string): string => {
     const text = questionText.toLowerCase();
     
-    // Geography topics
-    if (text.includes('urbanisation') || text.includes('urban') || text.includes('city') || text.includes('megacity')) return 'Urbanisation';
-    if (text.includes('migration') || text.includes('push') || text.includes('pull')) return 'Migration';
-    if (text.includes('development') || text.includes('gdp') || text.includes('hdi')) return 'Development';
-    if (text.includes('demographic') || text.includes('population')) return 'Population and Demographics';
-    if (text.includes('resource') || text.includes('energy') || text.includes('water') || text.includes('food')) return 'Resource Management';
-    if (text.includes('hazard') || text.includes('earthquake') || text.includes('volcano')) return 'Natural Hazards';
-    if (text.includes('climate') || text.includes('weather') || text.includes('storm')) return 'Weather and Climate';
-    if (text.includes('ecosystem') || text.includes('tropical') || text.includes('desert')) return 'Ecosystems';
-    if (text.includes('plate') || text.includes('tectonic')) return 'Plate Tectonics';
+    // Geography topics - more comprehensive
+    if (text.includes('urbanisation') || text.includes('urban') || text.includes('city') || text.includes('megacity') || text.includes('slum') || text.includes('suburb')) return 'Urbanisation and Settlement';
+    if (text.includes('migration') || text.includes('refugee') || text.includes('push factor') || text.includes('pull factor') || text.includes('immigra')) return 'Migration and Population';
+    if (text.includes('development') || text.includes('gdp') || text.includes('hdi') || text.includes('poverty') || text.includes('economic') || text.includes('trade')) return 'Development and Inequality';
+    if (text.includes('demographic') || text.includes('population') || text.includes('birth rate') || text.includes('death rate') || text.includes('ageing')) return 'Population Dynamics';
+    if (text.includes('resource') || text.includes('energy') || text.includes('water') || text.includes('food') || text.includes('sustainability') || text.includes('renewable')) return 'Resource Management';
+    if (text.includes('hazard') || text.includes('earthquake') || text.includes('volcano') || text.includes('tsunami') || text.includes('disaster') || text.includes('risk')) return 'Natural Hazards';
+    if (text.includes('climate') || text.includes('weather') || text.includes('storm') || text.includes('hurricane') || text.includes('typhoon') || text.includes('monsoon')) return 'Weather and Climate';
+    if (text.includes('ecosystem') || text.includes('tropical') || text.includes('desert') || text.includes('rainforest') || text.includes('savanna') || text.includes('biodiversity')) return 'Ecosystems and Biomes';
+    if (text.includes('plate') || text.includes('tectonic') || text.includes('fold') || text.includes('fault') || text.includes('crust') || text.includes('mantle')) return 'Plate Tectonics';
+    if (text.includes('river') || text.includes('drainage') || text.includes('meander') || text.includes('flood') || text.includes('erosion') || text.includes('deposition')) return 'Rivers and Coasts';
+    if (text.includes('coast') || text.includes('beach') || text.includes('cliff') || text.includes('wave') || text.includes('longshore') || text.includes('headland')) return 'Coastal Processes';
+    if (text.includes('glacier') || text.includes('ice') || text.includes('periglacial') || text.includes('moraine') || text.includes('fjord')) return 'Glaciation';
     
-    return 'Geography Concepts';
+    // Extract from section/topic hints in question structure
+    if (text.includes('section a') || text.includes('physical') || text.includes('landscape')) return 'Physical Geography';
+    if (text.includes('section b') || text.includes('human') || text.includes('people')) return 'Human Geography';
+    
+    return 'Geography Topics';
   }, []);
 
   // Check for recent exam completion and show weak topic recommendation
@@ -253,8 +260,19 @@ export const usePersonalizedNotifications = () => {
         results.forEach((result, index) => {
           const question = questions[index];
           if (result && question && result.score < question.marks) {
-            // Try to extract topic from question or use a general topic
-            const topic = question.topic || question.section || extractTopicFromText(question.text) || 'General Topics';
+            // Extract topic with multiple fallback methods
+            let topic = question.topic || question.section;
+            
+            // If no explicit topic, extract from question text
+            if (!topic || topic === 'A' || topic.length < 3) {
+              topic = extractTopicFromText(question.text || question.question || '');
+            }
+            
+            // Final fallback based on subject
+            if (!topic || topic === 'Geography Topics') {
+              topic = recentExam.subject_id === 'geography' ? 'Physical Geography Concepts' : 'General Topics';
+            }
+            
             topicErrors[topic] = (topicErrors[topic] || 0) + 1;
             console.log(`Found error in topic: ${topic}, total errors: ${topicErrors[topic]}`);
           }

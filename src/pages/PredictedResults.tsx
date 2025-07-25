@@ -737,7 +737,12 @@ const PredictedResults = () => {
           {/* Action Buttons */}
           <div className="flex justify-center space-x-6 mt-12">
             <Button 
-              onClick={() => navigate(`/predicted-exam/${subjectId}`)}
+              onClick={() => {
+                console.log('Retake button clicked for subject:', subjectId);
+                // Handle geography-paper-2 case specifically
+                const examSubjectId = subjectId === 'geography' ? 'geography-paper-2' : subjectId;
+                navigate(`/predicted-exam/${examSubjectId}`);
+              }}
               className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700"
             >
               <RotateCcw className="h-5 w-5 mr-2" />
