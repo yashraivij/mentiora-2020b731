@@ -1676,15 +1676,15 @@ export const curriculum: Subject[] = [
           },
           {
             id: 'tvr-q11',
-            question: 'Compare how these two texts use punctuation to create different effects:\n\nText A: "The results were clear. Undeniable. Final."\nText B: "The results were clear, undeniable, and final."',
+            question: 'Compare how these two texts use language to create different atmospheres:\n\nText A: "The storm approached slowly, its dark clouds gathering ominously over the quiet town. Thunder rumbled in the distance like an ancient warning."\n\nText B: "Rain is forecast for this afternoon with possible thunderstorms. Temperatures will drop to 15°C. Visibility may be reduced."',
             marks: 8,
             difficulty: 'medium',
-            modelAnswer: 'Text A uses short sentences and full stops to create dramatic pauses and emphasis, building tension through fragmented delivery. Each word gains weight through isolation. Text B uses commas in a list structure, creating smooth flow and matter-of-fact presentation. The coordinating conjunction "and" provides closure and completeness, making the statement feel more measured and less dramatic than Text A\'s staccato effect.',
+            modelAnswer: 'Text A uses personification ("storm approached") and metaphor ("like an ancient warning") to create a dramatic, foreboding atmosphere. Descriptive adjectives like "dark," "ominous," and "quiet" build tension and suggest impending doom. Text B uses factual, objective language typical of weather reports. Short, declarative sentences convey information efficiently without emotional impact. The clinical tone contrasts sharply with Text A\'s literary, atmospheric approach.',
             markingCriteria: {
               breakdown: [
-                'Analysis of punctuation in Text A (3 marks)',
-                'Analysis of punctuation in Text B (3 marks)',
-                'Comparison of different effects (2 marks)'
+                'Analysis of language techniques in Text A (3 marks)',
+                'Analysis of language techniques in Text B (3 marks)',
+                'Comparison of different atmospheric effects (2 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
