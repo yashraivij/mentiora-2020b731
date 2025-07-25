@@ -541,35 +541,6 @@ const Dashboard = () => {
             
             <PredictivePerformanceCard userProgress={userProgress} />
             
-            {/* Premium Notebook Card */}
-            <Card 
-              className="premium-card border-2 hover:shadow-lg transition-all duration-300 cursor-pointer bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-purple-200 dark:border-purple-800"
-              onClick={() => navigate('/notebook')}
-            >
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">
-                      <BookOpen className="h-6 w-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-lg">Personal Notebook</h3>
-                      <p className="text-sm text-muted-foreground">AI-generated study notes</p>
-                    </div>
-                  </div>
-                  <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white">
-                    Premium
-                  </Badge>
-                </div>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Automatically creates Grade-9 style notes for every topic where you lose marks
-                </p>
-                <Button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white">
-                  Open Notebook →
-                </Button>
-              </CardContent>
-            </Card>
-            
             <PremiumAnalyticsCard
               title="Learning Velocity"
               description="Measure and optimize your knowledge acquisition speed"
