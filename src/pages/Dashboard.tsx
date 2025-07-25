@@ -311,16 +311,57 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Predicted GCSE Grades Section */}
-        <PredictedGradesGraph userProgress={userProgress} />
-
-        {/* Optimal Learning Time - Premium Feature */}
-        <div className="mb-8">
-          <OptimalLearningTimeCard />
+        {/* Hero Progress Section - Most Dopamine-Inducing Elements First */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {/* Study Streak - Most motivating, placed first */}
+          <div className="lg:col-span-1">
+            <ProgressCard
+              title="Study Streak"
+              value={`${getStudyStreak()} days`}
+              subtitle="Keep it up!"
+              icon={Flame}
+              color="bg-gradient-to-br from-orange-500 to-red-500"
+            />
+          </div>
+          
+          {/* Overall Progress - Second most motivating */}
+          <div className="lg:col-span-1">
+            <ProgressCard
+              title="Overall Progress"
+              value={`${getOverallProgress()}%`}
+              subtitle="Average across subjects"
+              progress={getOverallProgress()}
+              icon={TrendingUp}
+              color="bg-gradient-to-br from-primary via-primary/90 to-primary/80"
+              trend={userProgress.length > 0 ? 5 : undefined}
+            />
+          </div>
+          
+          {/* Topics Mastered - Achievement focused */}
+          <div className="lg:col-span-1">
+            <ProgressCard
+              title="Topics Mastered"
+              value={getMasteredTopics()}
+              subtitle="85%+ average score"
+              icon={Trophy}
+              color="bg-gradient-to-br from-emerald-500 to-emerald-600"
+            />
+          </div>
+          
+          {/* Practice Sessions - Effort tracking */}
+          <div className="lg:col-span-1">
+            <ProgressCard
+              title="Practice Sessions"
+              value={userProgress.reduce((sum, p) => sum + p.attempts, 0)}
+              subtitle="Questions completed"
+              icon={BookOpen}
+              color="bg-gradient-to-br from-blue-500 to-blue-600"
+            />
+          </div>
         </div>
 
-        {/* Predicted 2026 Questions Section */}
-        <PredictedQuestionsSection />
+        {/* Predicted GCSE Grades Section - High Dopamine Feature */}
+        <PredictedGradesGraph userProgress={userProgress} />
 
         {/* Premium Stress Monitor & Smart Revision Notebook - Side by Side */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
@@ -379,6 +420,14 @@ const Dashboard = () => {
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Predicted 2026 Questions Section */}
+        <PredictedQuestionsSection />
+
+        {/* Optimal Learning Time - Premium Feature */}
+        <div className="mb-8">
+          <OptimalLearningTimeCard />
         </div>
 
         {/* Subjects Section */}
@@ -517,42 +566,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Premium Progress Overview */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <ProgressCard
-            title="Overall Progress"
-            value={`${getOverallProgress()}%`}
-            subtitle="Average across subjects"
-            progress={getOverallProgress()}
-            icon={TrendingUp}
-            color="bg-gradient-to-br from-primary via-primary/90 to-primary/80"
-            trend={userProgress.length > 0 ? 5 : undefined}
-          />
-          
-          <ProgressCard
-            title="Topics Mastered"
-            value={getMasteredTopics()}
-            subtitle="85%+ average score"
-            icon={Trophy}
-            color="bg-gradient-to-br from-emerald-500 to-emerald-600"
-          />
-          
-          <ProgressCard
-            title="Practice Sessions"
-            value={userProgress.reduce((sum, p) => sum + p.attempts, 0)}
-            subtitle="Questions completed"
-            icon={BookOpen}
-            color="bg-gradient-to-br from-blue-500 to-blue-600"
-          />
-          
-          <ProgressCard
-            title="Study Streak"
-            value={`${getStudyStreak()} days`}
-            subtitle="Keep it up!"
-            icon={Flame}
-            color="bg-gradient-to-br from-orange-500 to-red-500"
-          />
-        </div>
 
         {/* Premium Analytics Section */}
         <div className="grid lg:grid-cols-3 gap-6 mb-8">
