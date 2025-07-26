@@ -12713,6 +12713,635 @@ export const curriculum: Subject[] = [
       }
     ]
   },
+  {
+    id: 'combined-science-aqa',
+    name: 'Combined Science (AQA)',
+    topics: [
+      {
+        id: 'biology-cell-biology',
+        name: 'Biology: Cell Biology',
+        questions: [
+          {
+            id: 'cb-q1',
+            question: 'State the differences between eukaryotic and prokaryotic cells.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Eukaryotic cells have a membrane-bound nucleus and organelles (e.g., mitochondria, chloroplasts). Prokaryotic cells have no membrane-bound nucleus; genetic material is free in cytoplasm. Eukaryotic cells are larger and more complex. Prokaryotic cells are smaller and simpler.',
+            markingCriteria: {
+              breakdown: [
+                'Nucleus difference (1 mark)',
+                'Organelles difference (1 mark)',
+                'Size difference (1 mark)',
+                'Complexity difference (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.1.1) F/H'
+          },
+          {
+            id: 'cb-q2',
+            question: 'Describe the function of mitochondria in cells.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Mitochondria are the site of aerobic respiration. They release energy from glucose to produce ATP.',
+            markingCriteria: {
+              breakdown: [
+                'Site of aerobic respiration (1 mark)',
+                'Energy/ATP production (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.1.1) F/H'
+          },
+          {
+            id: 'cb-q3',
+            question: 'Explain how the structure of a sperm cell is adapted to its function.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The head contains nucleus with genetic material for fertilization. Acrosome contains enzymes to digest egg membrane. Many mitochondria in middle section provide energy for swimming. Long tail (flagellum) enables movement through female reproductive system. Streamlined shape reduces resistance.',
+            markingCriteria: {
+              breakdown: [
+                'Head/nucleus function (2 marks)',
+                'Mitochondria for energy (2 marks)',
+                'Tail for movement (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.1.1) H'
+          },
+          {
+            id: 'cb-q4',
+            question: 'Calculate the magnification of a cell image that is 50mm long if the actual cell is 0.1mm long.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Magnification = image size ÷ actual size = 50mm ÷ 0.1mm = ×500',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula (1 mark)',
+                'Correct substitution (1 mark)',
+                'Correct answer (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.1.1) F/H',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'cb-q5',
+            question: 'Describe what happens during mitosis.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Chromosomes line up at the cell equator. Chromosomes are pulled apart to opposite poles of the cell. Nuclear membranes form around each set of chromosomes. Cytoplasm divides to form two identical diploid cells.',
+            markingCriteria: {
+              breakdown: [
+                'Chromosome alignment (1 mark)',
+                'Chromosome separation (1 mark)',
+                'Nuclear membrane formation (1 mark)',
+                'Cytoplasm division (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.1.2) F/H'
+          },
+          {
+            id: 'cb-q6',
+            question: 'Explain the importance of stem cells in medical treatments.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Stem cells are undifferentiated cells that can develop into many different cell types. They can replace damaged tissues and organs. Adult stem cells from bone marrow can treat blood disorders. Embryonic stem cells could treat conditions like diabetes and paralysis. However, there are ethical concerns about using embryonic stem cells.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of stem cells (2 marks)',
+                'Medical applications (2 marks)',
+                'Ethical considerations (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.1.2) H'
+          },
+          {
+            id: 'cb-q7',
+            question: 'Describe how substances move by diffusion.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Particles move from an area of high concentration to an area of low concentration. Movement is down a concentration gradient. No energy is required (passive process).',
+            markingCriteria: {
+              breakdown: [
+                'High to low concentration (1 mark)',
+                'Down concentration gradient (1 mark)',
+                'No energy required (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.1.3) F/H'
+          },
+          {
+            id: 'cb-q8',
+            question: 'Explain why active transport requires energy.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Active transport moves substances against the concentration gradient. Movement is from low to high concentration. This is against the natural tendency of particles. Energy (ATP) is needed to pump substances against the gradient.',
+            markingCriteria: {
+              breakdown: [
+                'Against concentration gradient (2 marks)',
+                'Energy required explanation (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.1.3) F/H'
+          },
+          {
+            id: 'cb-q9',
+            question: 'Describe how the small intestine is adapted for absorption.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Large surface area due to villi and microvilli increases absorption rate. Thin walls (one cell thick) provide short diffusion distance. Rich blood supply maintains concentration gradient. Each villus contains lacteal for fat absorption.',
+            markingCriteria: {
+              breakdown: [
+                'Surface area adaptations (2 marks)',
+                'Thin walls (2 marks)',
+                'Blood supply/transport (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.1.3) H'
+          },
+          {
+            id: 'cb-q10',
+            question: 'Compare osmosis and diffusion.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Both are passive processes requiring no energy. Both move down concentration gradients. Osmosis is specifically water movement through a semi-permeable membrane. Diffusion can involve any substance through any medium.',
+            markingCriteria: {
+              breakdown: [
+                'Both passive processes (1 mark)',
+                'Down gradients (1 mark)',
+                'Osmosis - water only (1 mark)',
+                'Diffusion - any substance (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.1.3) F/H'
+          }
+        ]
+      },
+      {
+        id: 'biology-organisation',
+        name: 'Biology: Organisation',
+        questions: [
+          {
+            id: 'org-q1',
+            question: 'Describe the hierarchy of organisation in living organisms.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Cells → Tissues → Organs → Organ systems. Cells are the basic units. Tissues are groups of similar cells. Organs are made of different tissues. Organ systems work together.',
+            markingCriteria: {
+              breakdown: [
+                'Correct sequence (2 marks)',
+                'Definition of each level (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.2.1) F/H'
+          },
+          {
+            id: 'org-q2',
+            question: 'Describe the function of enzymes in digestion.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Enzymes are biological catalysts that speed up reactions. Amylase breaks down starch to sugar. Protease breaks down proteins to amino acids. Lipase breaks down fats to fatty acids and glycerol. They work by lowering activation energy.',
+            markingCriteria: {
+              breakdown: [
+                'Enzyme definition (2 marks)',
+                'Specific enzyme functions (3 marks)',
+                'Mechanism of action (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.2.2) F/H'
+          },
+          {
+            id: 'org-q3',
+            question: 'Explain how the heart pumps blood around the body.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Heart has four chambers: two atria and two ventricles. Atria receive blood, ventricles pump blood out. Right side pumps deoxygenated blood to lungs. Left side pumps oxygenated blood to body. Valves prevent backflow. Heart muscle contracts rhythmically.',
+            markingCriteria: {
+              breakdown: [
+                'Four chambers identified (2 marks)',
+                'Function of each side (2 marks)',
+                'Valve function (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.2.2) F/H'
+          },
+          {
+            id: 'org-q4',
+            question: 'Compare the structure and function of arteries and veins.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Arteries carry blood away from heart under high pressure. They have thick muscular walls and narrow lumen. Veins carry blood to heart under low pressure. They have thin walls, wide lumen, and valves to prevent backflow.',
+            markingCriteria: {
+              breakdown: [
+                'Direction of blood flow (2 marks)',
+                'Pressure differences (2 marks)',
+                'Structural differences (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.2.2) F/H'
+          },
+          {
+            id: 'org-q5',
+            question: 'Describe the components of blood and their functions.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Red blood cells carry oxygen using haemoglobin; biconcave shape increases surface area. White blood cells fight infection; some produce antibodies, others engulf pathogens. Platelets help blood clotting to prevent bleeding. Plasma transports dissolved substances like glucose, proteins, and waste products.',
+            markingCriteria: {
+              breakdown: [
+                'Red blood cells function (2 marks)',
+                'White blood cells function (2 marks)',
+                'Platelets function (2 marks)',
+                'Plasma function (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.2.2) F/H'
+          },
+          {
+            id: 'org-q6',
+            question: 'Explain how lifestyle factors can cause coronary heart disease.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'High fat diet increases cholesterol levels, leading to fatty deposits in coronary arteries. Smoking damages artery walls and reduces oxygen in blood. Lack of exercise reduces heart fitness and increases blood pressure. Stress can raise blood pressure and affect heart rhythm.',
+            markingCriteria: {
+              breakdown: [
+                'Diet effects (2 marks)',
+                'Smoking effects (2 marks)',
+                'Exercise/stress effects (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.2.2) H'
+          },
+          {
+            id: 'org-q7',
+            question: 'Describe the structure and function of xylem tissue.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Xylem is made of dead cells forming hollow tubes. Thick walls contain lignin for support. Transports water and minerals from roots to leaves. One-way transport upwards only.',
+            markingCriteria: {
+              breakdown: [
+                'Structure description (2 marks)',
+                'Function description (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.2.3) F/H'
+          },
+          {
+            id: 'org-q8',
+            question: 'Explain how transpiration helps plants.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Water evaporates from leaves through stomata. This creates suction that pulls water up through xylem. Helps transport minerals from roots. Provides cooling effect for plant. Maintains cell turgidity for support.',
+            markingCriteria: {
+              breakdown: [
+                'Water loss mechanism (2 marks)',
+                'Transport function (2 marks)',
+                'Additional benefits (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.2.3) F/H'
+          },
+          {
+            id: 'org-q9',
+            question: 'Describe how guard cells control stomatal opening.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Guard cells absorb water and become turgid to open stomata. Loss of water makes cells flaccid, closing stomata. Opening allows gas exchange for photosynthesis. Closing prevents excessive water loss.',
+            markingCriteria: {
+              breakdown: [
+                'Opening mechanism (2 marks)',
+                'Closing mechanism (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.2.3) H'
+          },
+          {
+            id: 'org-q10',
+            question: 'Compare the functions of xylem and phloem.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Xylem transports water and minerals upwards from roots to leaves. Made of dead cells, transport is one-way only. Phloem transports sugars in both directions around the plant. Made of living cells, requires energy for active transport.',
+            markingCriteria: {
+              breakdown: [
+                'Xylem function and direction (2 marks)',
+                'Phloem function and direction (2 marks)',
+                'Structural/energy differences (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.2.3) F/H'
+          }
+        ]
+      },
+      {
+        id: 'biology-infection-response',
+        name: 'Biology: Infection and Response',
+        questions: [
+          {
+            id: 'ir-q1',
+            question: 'Name four types of pathogens and give an example of a disease caused by each.',
+            marks: 8,
+            difficulty: 'easy',
+            modelAnswer: 'Viruses cause measles, HIV, or tobacco mosaic virus. Bacteria cause salmonella or gonorrhoea. Fungi cause rose black spot. Protists cause malaria.',
+            markingCriteria: {
+              breakdown: [
+                'Four pathogen types named (4 marks)',
+                'Correct disease examples (4 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.3.1) F/H'
+          },
+          {
+            id: 'ir-q2',
+            question: 'Describe how the human body defends against pathogens.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Skin provides physical barrier preventing entry. Stomach acid kills pathogens in food. White blood cells engulf pathogens (phagocytosis). Antibodies bind to specific antigens. Antitoxins neutralize toxins produced by bacteria.',
+            markingCriteria: {
+              breakdown: [
+                'Physical barriers (2 marks)',
+                'Chemical barriers (2 marks)',
+                'Cellular responses (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.3.1) F/H'
+          },
+          {
+            id: 'ir-q3',
+            question: 'Explain how vaccination prevents disease.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Vaccine contains dead or weakened pathogens. White blood cells recognize antigens and produce antibodies. Memory cells are formed. If real pathogen enters, memory cells quickly produce antibodies. This prevents disease development.',
+            markingCriteria: {
+              breakdown: [
+                'Vaccine composition (2 marks)',
+                'Primary immune response (2 marks)',
+                'Secondary immune response (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.3.1) F/H'
+          },
+          {
+            id: 'ir-q4',
+            question: 'Describe the difference between antibiotics and painkillers.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Antibiotics kill bacteria that cause disease. They target bacterial cell structures. Painkillers only treat symptoms, reducing pain and inflammation. They do not kill pathogens.',
+            markingCriteria: {
+              breakdown: [
+                'Antibiotic function (2 marks)',
+                'Painkiller function (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.3.1) F/H'
+          },
+          {
+            id: 'ir-q5',
+            question: 'Explain why antibiotic resistance is a problem.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Bacteria with resistance genes survive antibiotic treatment. They reproduce rapidly, passing resistance to offspring. Resistant bacteria spread between organisms. Diseases become harder to treat, requiring stronger or new antibiotics. This leads to increased illness and death.',
+            markingCriteria: {
+              breakdown: [
+                'Selection of resistant bacteria (2 marks)',
+                'Reproduction and spread (2 marks)',
+                'Consequences for treatment (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.3.1) H'
+          },
+          {
+            id: 'ir-q6',
+            question: 'Describe how new drugs are developed and tested.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Drugs are first tested on cells and tissues in laboratory. Then tested on animals to check safety and dosage. Clinical trials on healthy volunteers test for side effects. Trials on patients test effectiveness. Double-blind trials prevent bias. Peer review ensures results are valid.',
+            markingCriteria: {
+              breakdown: [
+                'Laboratory testing (2 marks)',
+                'Animal testing (2 marks)',
+                'Human trials (2 marks)',
+                'Trial methodology (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.3.1) H'
+          },
+          {
+            id: 'ir-q7',
+            question: 'Explain how HIV affects the immune system.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'HIV infects and destroys white blood cells (T-helper cells). This weakens the immune system. Body cannot fight other infections effectively. Can lead to AIDS where opportunistic infections occur.',
+            markingCriteria: {
+              breakdown: [
+                'Target cells identified (2 marks)',
+                'Effect on immune system (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.3.1) F/H'
+          },
+          {
+            id: 'ir-q8',
+            question: 'Describe how malaria is transmitted and its symptoms.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Malaria is caused by protist parasites. Transmitted by mosquito bites when female mosquito feeds on blood. Parasites reproduce in liver and red blood cells. Symptoms include fever, chills, and anemia. Can be fatal if untreated.',
+            markingCriteria: {
+              breakdown: [
+                'Pathogen and vector (2 marks)',
+                'Transmission method (2 marks)',
+                'Symptoms and effects (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.3.1) F/H'
+          },
+          {
+            id: 'ir-q9',
+            question: 'Explain how tobacco mosaic virus affects plants.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'TMV causes mosaic pattern of discoloration on leaves. Reduces chlorophyll content, affecting photosynthesis. Stunts plant growth and reduces crop yield. Virus spreads through contact with infected plants.',
+            markingCriteria: {
+              breakdown: [
+                'Visual symptoms (2 marks)',
+                'Effect on plant function (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.3.1) F/H'
+          },
+          {
+            id: 'ir-q10',
+            question: 'Describe methods to prevent the spread of communicable diseases.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Hygiene measures like handwashing remove pathogens. Isolation of infected individuals prevents transmission. Vaccination programs create herd immunity. Vector control reduces disease carriers like mosquitoes. Safe food preparation kills harmful bacteria. Water treatment removes pathogens.',
+            markingCriteria: {
+              breakdown: [
+                'Personal hygiene (2 marks)',
+                'Isolation/quarantine (2 marks)',
+                'Vaccination programs (2 marks)',
+                'Environmental controls (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.3.1) F/H'
+          }
+        ]
+      },
+      {
+        id: 'biology-bioenergetics',
+        name: 'Biology: Bioenergetics',
+        questions: [
+          {
+            id: 'bio-q1',
+            question: 'Write the word equation for photosynthesis.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Carbon dioxide + Water → Glucose + Oxygen',
+            markingCriteria: {
+              breakdown: [
+                'Correct reactants (1 mark)',
+                'Correct products (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.4.1) F/H'
+          },
+          {
+            id: 'bio-q2',
+            question: 'Name three limiting factors of photosynthesis.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Light intensity, carbon dioxide concentration, temperature.',
+            markingCriteria: {
+              breakdown: [
+                'Three correct factors named (3 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.4.1) F/H'
+          },
+          {
+            id: 'bio-q3',
+            question: 'Explain how temperature affects the rate of photosynthesis.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'As temperature increases, rate increases due to more kinetic energy and enzyme activity. Above optimum temperature, enzymes denature. Rate decreases rapidly. Very low temperatures slow down chemical reactions.',
+            markingCriteria: {
+              breakdown: [
+                'Effect of increasing temperature (2 marks)',
+                'Effect of high temperature (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.4.1) F/H'
+          },
+          {
+            id: 'bio-q4',
+            question: 'Describe how light intensity affects photosynthesis rate, including the inverse square law.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'As light intensity increases, photosynthesis rate increases proportionally. More light provides more energy for reactions. Rate plateaus when light is no longer limiting. Inverse square law: intensity ∝ 1/distance². Doubling distance quarters intensity.',
+            markingCriteria: {
+              breakdown: [
+                'Effect of light intensity (2 marks)',
+                'Plateau explanation (2 marks)',
+                'Inverse square law (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.4.1) H',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'bio-q5',
+            question: 'Explain why greenhouses can improve crop production.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Greenhouses maintain optimum temperature for photosynthesis. CO₂ can be increased to boost photosynthesis rate. Light can be controlled and supplemented. Protection from pests and diseases. Controlled water supply prevents stress.',
+            markingCriteria: {
+              breakdown: [
+                'Temperature control (2 marks)',
+                'CO₂ enhancement (2 marks)',
+                'Additional benefits (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.4.1) F/H'
+          },
+          {
+            id: 'bio-q6',
+            question: 'Describe what plants do with the glucose produced in photosynthesis.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Glucose is used for respiration to release energy. Converted to starch for storage. Used to make cellulose for cell walls. Converted to fats and oils for storage. Combined with nitrates to make amino acids for proteins.',
+            markingCriteria: {
+              breakdown: [
+                'Respiration (1 mark)',
+                'Starch storage (1 mark)',
+                'Cellulose (1 mark)',
+                'Fats/oils (1 mark)',
+                'Proteins (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.4.1) F/H'
+          },
+          {
+            id: 'bio-q7',
+            question: 'Compare aerobic and anaerobic respiration.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Aerobic uses oxygen, anaerobic does not. Aerobic produces 38 ATP, anaerobic produces 2 ATP. Aerobic products are CO₂ and water. Anaerobic produces lactic acid (animals) or ethanol and CO₂ (plants/yeast).',
+            markingCriteria: {
+              breakdown: [
+                'Oxygen requirements (2 marks)',
+                'Energy yield comparison (2 marks)',
+                'Products comparison (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.4.2) F/H'
+          },
+          {
+            id: 'bio-q8',
+            question: 'Explain what happens during exercise and recovery.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'During exercise, oxygen demand increases for aerobic respiration. If oxygen supply is insufficient, anaerobic respiration occurs. Lactic acid builds up causing muscle fatigue. Heart rate and breathing rate increase. During recovery, oxygen debt must be repaid. Extra oxygen oxidizes lactic acid back to CO₂ and water.',
+            markingCriteria: {
+              breakdown: [
+                'Oxygen demand during exercise (2 marks)',
+                'Anaerobic respiration effects (2 marks)',
+                'Body responses (2 marks)',
+                'Recovery process (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.4.2) F/H'
+          },
+          {
+            id: 'bio-q9',
+            question: 'Describe what metabolism includes in living organisms.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Metabolism includes all chemical reactions in living organisms. Conversion of glucose to starch, glycogen, and cellulose. Formation of lipid molecules from fatty acids and glycerol. Breakdown of excess proteins to form urea.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of metabolism (1 mark)',
+                'Carbohydrate conversions (1 mark)',
+                'Lipid formation (1 mark)',
+                'Protein breakdown (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.4.2) F/H'
+          },
+          {
+            id: 'bio-q10',
+            question: 'Explain why yeast is used in bread making and brewing.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Yeast respires anaerobically when oxygen is limited. Fermentation produces ethanol and carbon dioxide. In bread, CO₂ makes dough rise creating light texture. In brewing, ethanol produces alcoholic content. Sugar is converted to useful products.',
+            markingCriteria: {
+              breakdown: [
+                'Anaerobic respiration in yeast (2 marks)',
+                'Bread making application (2 marks)',
+                'Brewing application (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.4.2) F/H'
+          }
+        ]
+      }
+    ]
+  },
   
   // ===== EDEXCEL SUBJECTS =====
   {
