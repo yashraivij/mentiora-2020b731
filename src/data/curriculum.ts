@@ -12715,7 +12715,7 @@ export const curriculum: Subject[] = [
   },
   {
     id: 'combined-science-aqa',
-    name: 'Combined Science Paper 1 (AQA)',
+    name: 'Combined Science',
     topics: [
       {
         id: 'biology-cell-biology',
@@ -13339,13 +13339,7 @@ export const curriculum: Subject[] = [
             specReference: 'AQA Combined Science 8464 (4.4.2) F/H'
           }
         ]
-      }
-    ]
-  },
-  {
-    id: 'combined-science-aqa-paper2',
-    name: 'Combined Science Paper 2 (AQA)',
-    topics: [
+      },
       {
         id: 'biology-homeostasis-response',
         name: 'Biology: Homeostasis and Response',
