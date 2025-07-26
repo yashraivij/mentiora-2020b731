@@ -3,13 +3,19 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Crown, Star, Sparkles, Target, Clock, BookOpen, Zap, Trophy, Rocket } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useSubscription } from "@/contexts/SubscriptionContext";
 import { CountdownTimer } from "./CountdownTimer";
 
 export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
+  const { isSubscribed, createCheckoutSession } = useSubscription();
 
   const handleStartPredicted = () => {
-    navigate('/predicted-questions');
+    if (isSubscribed) {
+      navigate('/predicted-questions');
+    } else {
+      createCheckoutSession();
+    }
   };
 
   return (
@@ -136,8 +142,8 @@ export const PredictedQuestionsSection = () => {
               onClick={handleStartPredicted}
               className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-4 px-8 rounded-2xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300 text-lg"
             >
-              <Crown className="h-5 w-5 mr-3" />
-              Start Premium Exam Practice
+                  <Crown className="h-5 w-5 mr-3" />
+                  {isSubscribed ? 'Start Premium Exam Practice' : 'Upgrade to Access'}
               <Sparkles className="h-5 w-5 ml-3" />
             </Button>
           </CardContent>

@@ -26,6 +26,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { StressTracker } from "@/lib/stressTracker";
 import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
+import { useSubscription } from "@/contexts/SubscriptionContext";
+import { PremiumOverlay } from "@/components/premium/PremiumOverlay";
 
 interface UserProgress {
   subjectId: string;
@@ -37,6 +39,7 @@ interface UserProgress {
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
+  const { isSubscribed, createCheckoutSession } = useSubscription();
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
@@ -552,9 +555,18 @@ const Dashboard = () => {
           />
           
           {/* Smart Revision Notebook - Premium Feature */}
-          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => navigate('/notebook')}>
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => isSubscribed ? navigate('/notebook') : createCheckoutSession()}>
             {/* Premium Glow Effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Premium Overlay for non-subscribers */}
+            {!isSubscribed && (
+              <PremiumOverlay 
+                title="Smart Revision Notebook"
+                description="Unlock AI-powered revision notes for every question you get wrong"
+                gradient="from-purple-500 via-pink-500 to-indigo-500"
+              />
+            )}
             
             {/* Animated Border */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 rounded-lg p-[2px] group-hover:animate-pulse">
@@ -888,12 +900,20 @@ const Dashboard = () => {
 
         {/* Premium Locked Analytics */}
         <div className="space-y-6">
-          <div className="flex items-center space-x-3 mb-6">
-            <Crown className="h-6 w-6 text-amber-500" />
-            <h3 className="text-2xl font-bold text-foreground">Premium Analytics</h3>
-            <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0">
-              Pro Feature
-            </Badge>
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center space-x-3">
+              <Crown className="h-6 w-6 text-amber-500" />
+              <h3 className="text-2xl font-bold text-foreground">Premium Analytics</h3>
+              <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0">
+                Pro Feature
+              </Badge>
+            </div>
+            {!isSubscribed && (
+              <Button onClick={createCheckoutSession} className="bg-gradient-to-r from-violet-500 to-purple-600 hover:shadow-lg text-white border-0 px-6 py-2 rounded-xl font-semibold">
+                <Crown className="h-4 w-4 mr-2" />
+                Upgrade Now
+              </Button>
+            )}
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -929,6 +949,15 @@ const Dashboard = () => {
               {/* Premium Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-violet-500 to-purple-600 opacity-5 group-hover:opacity-10 transition-opacity duration-500" />
               
+              {/* Premium Overlay for non-subscribers */}
+              {!isSubscribed && (
+                <PremiumOverlay 
+                  title="Stress Monitor"
+                  description="Track your wellness across all subjects with smart AI insights"
+                  gradient="from-violet-500 to-purple-600"
+                />
+              )}
+              
               <CardHeader className="pb-4 relative z-10">
                 <div className="flex items-center justify-between">
                   <div className="p-3 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg group-hover:scale-110 transition-transform duration-300">
@@ -940,7 +969,7 @@ const Dashboard = () => {
                 </div>
               </CardHeader>
 
-              <CardContent className="relative z-10">
+              <CardContent className={`relative z-10 ${!isSubscribed ? 'blur-sm' : ''}`}>
                 <div className="space-y-3">
                   <CardTitle className="text-lg font-bold text-foreground leading-tight">
                     Stress Monitor

@@ -4,7 +4,9 @@ import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { TrendingUp, Crown, Target, Sparkles, Trophy, Zap } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useSubscription } from "@/contexts/SubscriptionContext";
 import { supabase } from "@/integrations/supabase/client";
+import { BlurredPreview } from "@/components/premium/BlurredPreview";
 import { curriculum } from "@/data/curriculum";
 
 interface GradeData {
@@ -33,8 +35,12 @@ interface PredictedGradesGraphProps {
 
 export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
   const { user } = useAuth();
+  const { isSubscribed } = useSubscription();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
+  
+  // Show preview after user completes some practice
+  const hasProgress = userProgress.length > 0;
 
   // Grade to percentage mapping
   const gradeToPercentage = (grade: string): number => {
@@ -391,7 +397,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
 
       <CardContent className="relative">
         {gradesData.some(g => g.finalGrade !== '–') ? (
-          <TooltipProvider>
+          <BlurredPreview showPreview={hasProgress && !isSubscribed} className="w-full">
+            <TooltipProvider>
             <div className="space-y-6">
               {/* Premium Grade bars */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 overflow-visible">
@@ -511,7 +518,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
               </div>
             </div>
             </div>
-          </TooltipProvider>
+            </TooltipProvider>
+          </BlurredPreview>
         ) : (
           <div className="text-center py-16 relative">
             {/* Premium background effects */}

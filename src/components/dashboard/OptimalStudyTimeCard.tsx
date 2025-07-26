@@ -4,6 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Clock, TrendingUp, Zap, Sparkles, Crown, Brain } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
+import { useSubscription } from "@/contexts/SubscriptionContext";
+import { PremiumOverlay } from "@/components/premium/PremiumOverlay";
 
 interface SessionData {
   hour: number;
@@ -23,6 +25,7 @@ interface TimeSlotAnalysis {
 
 export const OptimalStudyTimeCard = () => {
   const { user } = useAuth();
+  const { isSubscribed } = useSubscription();
   const [analysis, setAnalysis] = useState<TimeSlotAnalysis | null>(null);
   const [loading, setLoading] = useState(true);
   const [hasEnoughData, setHasEnoughData] = useState(false);
@@ -253,6 +256,15 @@ export const OptimalStudyTimeCard = () => {
   return (
     <Card className="relative overflow-hidden border-0 shadow-2xl bg-gradient-to-br from-emerald-600/20 via-teal-600/20 to-cyan-600/20 backdrop-blur-xl">
       <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-teal-500/10 to-cyan-500/10" />
+      
+      {/* Premium Overlay for non-subscribers */}
+      {!isSubscribed && (
+        <PremiumOverlay 
+          title="AI Study Optimizer"
+          description="Discover your peak learning hours with advanced AI analysis"
+          gradient="from-emerald-500 via-teal-500 to-cyan-500"
+        />
+      )}
       <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-yellow-400/20 to-orange-500/20 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-green-400/20 to-emerald-500/20 rounded-full blur-2xl" />
       <div className="absolute top-1/2 left-1/2 w-20 h-20 bg-gradient-to-br from-cyan-400/15 to-blue-500/15 rounded-full blur-xl transform -translate-x-1/2 -translate-y-1/2" />
@@ -279,7 +291,7 @@ export const OptimalStudyTimeCard = () => {
         </div>
       </CardHeader>
       
-      <CardContent className="relative">
+      <CardContent className={`relative ${!isSubscribed ? 'blur-sm' : ''}`}>
         <div className="space-y-4">
           <div className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-white/80 to-white/60 dark:from-gray-800/80 dark:to-gray-800/60 backdrop-blur-sm border border-white/20 shadow-lg">
             <div className="text-3xl p-2 rounded-lg bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30">
