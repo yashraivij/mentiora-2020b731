@@ -132,8 +132,8 @@ export const SubjectCard = ({
           <div className="flex items-center space-x-4 flex-1">
             <div className={`w-4 h-4 rounded-full ${subject.color} shadow-lg ${!comingSoon && 'group-hover:scale-125'} transition-transform duration-300`}></div>
             <div className="flex-1">
-              <div className="flex items-center justify-between mb-2">
-                <CardTitle className={`text-xl font-bold leading-tight ${
+              <div className="flex items-start justify-between mb-2 gap-3">
+                <CardTitle className={`text-xl font-bold leading-tight flex-1 ${
                   comingSoon 
                     ? 'text-muted-foreground' 
                     : 'text-foreground group-hover:text-muted-foreground'
@@ -141,22 +141,22 @@ export const SubjectCard = ({
                   {subject.name}
                 </CardTitle>
                 
-                {/* Add/Remove Subject Button - Next to subject name */}
+                {/* Add to My Subjects Button - Premium styling */}
                 {showSelectionCheckbox && onToggleSelection && !comingSoon && (
                   <Button
-                    variant={isSelected ? "default" : "outline"}
+                    variant="ghost"
                     size="sm"
                     onClick={(e) => {
                       e.stopPropagation();
                       onToggleSelection();
                     }}
-                    className={`text-xs font-medium transition-all duration-300 ml-3 ${
+                    className={`shrink-0 h-8 px-3 text-xs font-semibold transition-all duration-300 rounded-lg border backdrop-blur-sm ${
                       isSelected 
-                        ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white border-0 shadow-md' 
-                        : 'bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white border-0 shadow-md hover:scale-105'
+                        ? 'bg-gradient-to-r from-emerald-500/10 to-emerald-600/10 border-emerald-300/50 text-emerald-700 dark:text-emerald-400 hover:from-emerald-500/20 hover:to-emerald-600/20 shadow-sm' 
+                        : 'bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20 text-primary hover:from-primary/10 hover:to-primary/20 hover:border-primary/30 shadow-sm hover:scale-105'
                     }`}
                   >
-                    {isSelected ? '✓ Added' : 'Add'}
+                    {isSelected ? '✓ Added to My Subjects' : 'Add to My Subjects'}
                   </Button>
                 )}
               </div>
