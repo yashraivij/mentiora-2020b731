@@ -44,7 +44,6 @@ const Dashboard = () => {
   const [sortBy, setSortBy] = useState<'alphabetical' | 'weakest' | 'progress'>('progress');
   const [isNotifyClicked, setIsNotifyClicked] = useState(false);
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
-  const [userSubjects, setUserSubjects] = useState<Array<{id: string, subject_name: string, exam_board: string}>>([]);
 
   const {
     notification,
@@ -76,9 +75,6 @@ const Dashboard = () => {
 
       // Load weak topics from database
       await loadWeakTopicsFromDatabase();
-
-      // Load user subjects from database
-      await loadUserSubjects();
 
       // Load pinned subjects from localStorage
       const savedPinnedSubjects = localStorage.getItem(`mentiora_pinned_subjects_${user.id}`);
@@ -142,81 +138,6 @@ const Dashboard = () => {
     }
   };
 
-  const loadUserSubjects = async () => {
-    if (!user?.id) return;
-
-    try {
-      const { data, error } = await supabase
-        .from('user_subjects')
-        .select('id, subject_name, exam_board')
-        .eq('user_id', user.id);
-
-      if (error) {
-        console.error('Error loading user subjects:', error);
-        return;
-      }
-
-      if (data) {
-        setUserSubjects(data.map(subject => ({
-          id: subject.subject_name.toLowerCase().replace(/\s+/g, '-'),
-          subject_name: subject.subject_name,
-          exam_board: subject.exam_board.toLowerCase()
-        })));
-      }
-    } catch (error) {
-      console.error('Error loading user subjects:', error);
-    }
-  };
-
-  const addSubjectToUser = async (subjectName: string, examBoard: string = 'AQA') => {
-    if (!user?.id) return;
-
-    try {
-      const { error } = await supabase
-        .from('user_subjects')
-        .insert({
-          user_id: user.id,
-          subject_name: subjectName,
-          exam_board: examBoard,
-          predicted_grade: '5',
-          target_grade: '7',
-          priority_level: 3
-        });
-
-      if (error) {
-        console.error('Error adding subject:', error);
-        return;
-      }
-
-      // Reload user subjects
-      await loadUserSubjects();
-    } catch (error) {
-      console.error('Error adding subject:', error);
-    }
-  };
-
-  const removeSubjectFromUser = async (subjectName: string) => {
-    if (!user?.id) return;
-
-    try {
-      const { error } = await supabase
-        .from('user_subjects')
-        .delete()
-        .eq('user_id', user.id)
-        .eq('subject_name', subjectName);
-
-      if (error) {
-        console.error('Error removing subject:', error);
-        return;
-      }
-
-      // Reload user subjects
-      await loadUserSubjects();
-    } catch (error) {
-      console.error('Error removing subject:', error);
-    }
-  };
-
   // Update weak topics whenever progress changes
   useEffect(() => {
     if (!user?.id || userProgress.length === 0) return;
@@ -276,59 +197,24 @@ const Dashboard = () => {
     return colors[index];
   };
 
-  // Filter curriculum subjects to only show those the user has selected
-  const sortedSubjects = [...curriculum]
-    .filter(subject => {
-      // Filter out geography-paper-2
-      if (subject.id === 'geography-paper-2') return false;
-      
-      // Only show subjects that the user has selected
-      return userSubjects.some(userSubject => {
-        // Match by subject name mapping
-        const subjectIdMappings: Record<string, string[]> = {
-          'maths': ['mathematics', 'math', 'maths'],
-          'english': ['english language', 'english literature', 'english'],
-          'physics': ['physics'],
-          'chemistry': ['chemistry'],
-          'biology': ['biology'],
-          'history': ['history'],
-          'geography': ['geography'],
-          'art': ['art', 'art and design'],
-          'business': ['business', 'business studies'],
-          'computer-science': ['computer science', 'computing', 'ict'],
-          'music': ['music'],
-          'pe': ['physical education', 'pe', 'sport'],
-          'french': ['french'],
-          'spanish': ['spanish'],
-          'german': ['german'],
-          'religious-studies': ['religious studies', 'rs', 'religious education']
-        };
-        
-        const possibleNames = subjectIdMappings[subject.id] || [subject.name.toLowerCase()];
-        return possibleNames.some(name => 
-          userSubject.subject_name.toLowerCase().includes(name) || 
-          name.includes(userSubject.subject_name.toLowerCase())
-        );
-      });
-    })
-    .sort((a, b) => {
-      const isPinnedA = pinnedSubjects.includes(a.id);
-      const isPinnedB = pinnedSubjects.includes(b.id);
-      
-      if (isPinnedA && !isPinnedB) return -1;
-      if (!isPinnedA && isPinnedB) return 1;
-      
-      switch (sortBy) {
-        case 'alphabetical':
-          return a.name.localeCompare(b.name);
-        case 'weakest':
-          return getSubjectProgress(a.id) - getSubjectProgress(b.id);
-        case 'progress':
-          return getSubjectProgress(b.id) - getSubjectProgress(a.id);
-        default:
-          return 0;
-      }
-    });
+  const sortedSubjects = [...curriculum].filter(subject => subject.id !== 'geography-paper-2').sort((a, b) => {
+    const isPinnedA = pinnedSubjects.includes(a.id);
+    const isPinnedB = pinnedSubjects.includes(b.id);
+    
+    if (isPinnedA && !isPinnedB) return -1;
+    if (!isPinnedA && isPinnedB) return 1;
+    
+    switch (sortBy) {
+      case 'alphabetical':
+        return a.name.localeCompare(b.name);
+      case 'weakest':
+        return getSubjectProgress(a.id) - getSubjectProgress(b.id);
+      case 'progress':
+        return getSubjectProgress(b.id) - getSubjectProgress(a.id);
+      default:
+        return 0;
+    }
+  });
 
   const togglePinSubject = (subjectId: string) => {
     const newPinned = pinnedSubjects.includes(subjectId)
@@ -640,40 +526,13 @@ const Dashboard = () => {
           </Card>
         </div>
 
-        {/* Manage Subjects Section */}
-        {userSubjects.length === 0 && (
-          <div className="mb-6">
-            <Card className="border-dashed border-2 border-muted-foreground/20 bg-muted/5">
-              <CardContent className="p-6 text-center">
-                <div className="flex flex-col items-center space-y-4">
-                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center">
-                    <BookOpen className="h-6 w-6 text-muted-foreground" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">Select Your Subjects</h3>
-                    <p className="text-muted-foreground mb-4">
-                      Choose the subjects you're studying to personalize your dashboard and get targeted recommendations.
-                    </p>
-                    <Button 
-                      onClick={() => navigate('/register')} 
-                      className="bg-primary hover:bg-primary/90"
-                    >
-                      Add Your Subjects
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        )}
-
         {/* Subjects Section */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-4">
               <h3 className="text-2xl font-bold text-foreground">Your Subjects</h3>
               <Badge variant="outline" className="text-muted-foreground border-border bg-card/50">
-                {sortedSubjects.length} subjects
+                {curriculum.filter(subject => subject.id !== 'geography-paper-2').length} subjects
               </Badge>
             </div>
             <div className="flex items-center space-x-3">
@@ -717,75 +576,51 @@ const Dashboard = () => {
             </TabsList>
 
             <TabsContent value="aqa" className="mt-6">
-              {sortedSubjects.filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language').length === 0 ? (
-                <div className="text-center py-12">
-                  <div className="w-16 h-16 rounded-full bg-muted mx-auto mb-4 flex items-center justify-center">
-                    <BookOpen className="h-8 w-8 text-muted-foreground" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">No AQA subjects selected</h3>
-                  <p className="text-muted-foreground mb-4">
-                    You haven't added any AQA subjects yet. Contact your teacher or add subjects to get started.
-                  </p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {sortedSubjects.filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language').map((subject) => (
-                    <SubjectCard
-                      key={subject.id}
-                      subject={{
-                        ...subject,
-                        color: getSubjectColor(subject.id)
-                      }}
-                      progress={userProgress}
-                      onStartPractice={handlePractice}
-                      onTogglePin={togglePinSubject}
-                      isPinned={pinnedSubjects.includes(subject.id)}
-                      lastActivity={getLastActivity(subject.id)}
-                      userId={user?.id}
-                    />
-                  ))}
-                </div>
-              )}
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {sortedSubjects.filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language').map((subject) => (
+                  <SubjectCard
+                    key={subject.id}
+                    subject={{
+                      ...subject,
+                      color: getSubjectColor(subject.id)
+                    }}
+                    progress={userProgress}
+                    onStartPractice={handlePractice}
+                    onTogglePin={togglePinSubject}
+                    isPinned={pinnedSubjects.includes(subject.id)}
+                    lastActivity={getLastActivity(subject.id)}
+                    userId={user?.id}
+                  />
+                ))}
+              </div>
             </TabsContent>
 
             {['edexcel', 'ccea', 'ocr', 'wjec'].map((examBoard) => (
               <TabsContent key={examBoard} value={examBoard} className="mt-6">
-                {(() => {
-                  const filteredSubjects = sortedSubjects.filter((subject) => {
-                    // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, and physics-edexcel only in edexcel tab
-                    if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') {
-                      return examBoard === 'edexcel';
-                     }
-                     // Hide edexcel subjects from other tabs, show other subjects as coming soon
-                     return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel';
-                  }).sort((a, b) => {
-                     // In edexcel tab, put maths-edexcel first, then business-edexcel-igcse, then chemistry-edexcel, then physics-edexcel
-                     if (examBoard === 'edexcel') {
-                       if (a.id === 'maths-edexcel') return -1;
-                       if (b.id === 'maths-edexcel') return 1;
-                       if (a.id === 'business-edexcel-igcse') return -1;
-                       if (b.id === 'business-edexcel-igcse') return 1;
-                       if (a.id === 'chemistry-edexcel') return -1;
-                       if (b.id === 'chemistry-edexcel') return 1;
-                       if (a.id === 'physics-edexcel') return -1;
-                       if (b.id === 'physics-edexcel') return 1;
-                     }
-                    return 0;
-                  });
-
-                  return filteredSubjects.length === 0 ? (
-                    <div className="text-center py-12">
-                      <div className="w-16 h-16 rounded-full bg-muted mx-auto mb-4 flex items-center justify-center">
-                        <BookOpen className="h-8 w-8 text-muted-foreground" />
-                      </div>
-                      <h3 className="text-lg font-semibold text-foreground mb-2">No {examBoard.toUpperCase()} subjects selected</h3>
-                      <p className="text-muted-foreground mb-4">
-                        You haven't added any {examBoard.toUpperCase()} subjects yet. Contact your teacher or add subjects to get started.
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                      {filteredSubjects
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {sortedSubjects
+                    .filter((subject) => {
+                      // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, and physics-edexcel only in edexcel tab
+                      if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') {
+                        return examBoard === 'edexcel';
+                       }
+                       // Hide edexcel subjects from other tabs, show other subjects as coming soon
+                       return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel';
+                    })
+                      .sort((a, b) => {
+                         // In edexcel tab, put maths-edexcel first, then business-edexcel-igcse, then chemistry-edexcel, then physics-edexcel
+                         if (examBoard === 'edexcel') {
+                           if (a.id === 'maths-edexcel') return -1;
+                           if (b.id === 'maths-edexcel') return 1;
+                           if (a.id === 'business-edexcel-igcse') return -1;
+                           if (b.id === 'business-edexcel-igcse') return 1;
+                           if (a.id === 'chemistry-edexcel') return -1;
+                           if (b.id === 'chemistry-edexcel') return 1;
+                           if (a.id === 'physics-edexcel') return -1;
+                           if (b.id === 'physics-edexcel') return 1;
+                         }
+                        return 0;
+                      })
                      .map((subject) => {
                        // Modify subject name for Edexcel subjects to remove brackets
                        let modifiedSubject = { ...subject };
@@ -817,11 +652,9 @@ const Dashboard = () => {
                        userId={user?.id}
                      />
                         );
-                       })}
-                     </div>
-                   );
-                 })()}
-               </TabsContent>
+                      })}
+                </div>
+              </TabsContent>
             ))}
           </Tabs>
 
