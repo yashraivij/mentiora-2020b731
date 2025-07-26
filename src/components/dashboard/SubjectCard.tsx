@@ -150,13 +150,13 @@ export const SubjectCard = ({
                       e.stopPropagation();
                       onToggleSelection();
                     }}
-                    className={`text-[10px] font-medium transition-all duration-300 ml-2 px-2 py-1 h-6 min-w-0 ${
+                    className={`text-xs font-medium transition-all duration-300 ml-3 ${
                       isSelected 
                         ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white border-0 shadow-md' 
                         : 'bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white border-0 shadow-md hover:scale-105'
                     }`}
                   >
-                    {isSelected ? '✓ Added' : 'Add to My Subjects'}
+                    {isSelected ? '✓ Added' : 'Add'}
                   </Button>
                 )}
               </div>
