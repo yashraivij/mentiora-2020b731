@@ -33,8 +33,8 @@ const Index = () => {
     },
     {
       icon: Brain,
-      title: "AI Feedback", 
-      description: "Revolutionary AI that understands your learning style",
+      title: "Smart Feedback", 
+      description: "Revolutionary insights that understand your learning style",
       color: "from-purple-500 to-pink-500",
       bgColor: "from-purple-50 to-pink-50"
     },
@@ -85,7 +85,7 @@ const Index = () => {
     {
       name: "Sarah M.",
       grade: "Year 11",
-      content: "This platform is absolutely revolutionary. The AI feedback is more detailed than my actual teachers - went from struggling with C grades to confidently achieving A* in just 3 months.",
+      content: "This platform is absolutely revolutionary. The feedback is more detailed than my actual teachers - went from struggling with C grades to confidently achieving A* in just 3 months.",
       rating: 5,
       color: "from-blue-50 to-indigo-50",
       accent: "border-blue-200"
@@ -170,7 +170,7 @@ const Index = () => {
     },
     { 
       number: "24/7", 
-      label: "AI Availability", 
+      label: "Support Availability", 
       color: "text-orange-600", 
       bg: "bg-gradient-to-br from-orange-100 to-orange-200",
       description: "Never wait for help",
@@ -182,8 +182,8 @@ const Index = () => {
     {
       icon: Target,
       title: "What Should I Study?",
-      description: "AI-powered personalized study recommendations that tell you exactly what to focus on next",
-      badge: "AI-Powered",
+      description: "Intelligent personalized study recommendations that tell you exactly what to focus on next",
+      badge: "Smart-Powered",
       color: "from-violet-600 to-purple-600",
       bgColor: "from-violet-50 to-purple-50",
       premium: true
@@ -200,7 +200,7 @@ const Index = () => {
     {
       icon: Calendar,
       title: "Predicted Exams",
-      description: "Access weekly refreshed predicted exam papers built from our advanced AI analysis of past papers",
+      description: "Access weekly refreshed predicted exam papers built from our advanced analysis of past papers",
       badge: "Updated Weekly",
       color: "from-blue-600 to-cyan-600",
       bgColor: "from-blue-50 to-cyan-50",
@@ -208,7 +208,7 @@ const Index = () => {
     },
     {
       icon: Clock,
-      title: "AI Study Time Optimizer",
+      title: "Study Time Optimizer",
       description: "Intelligent scheduling that maximizes your learning efficiency by analyzing your peak performance hours",
       badge: "Smart Planning",
       color: "from-amber-600 to-orange-600",
@@ -384,13 +384,13 @@ const Index = () => {
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-violet-100 to-purple-100 border border-violet-200 rounded-full text-violet-700 text-sm font-bold mb-8"
             >
               <Crown className="h-5 w-5 mr-2 text-violet-600 animate-pulse" />
-              Premium AI Features
+              Premium Smart Features
             </motion.div>
             <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
               Everything You Need to <span className="bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">Ace Your GCSEs</span>
             </h3>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Advanced AI technology that adapts to your learning style and accelerates your progress.
+              Advanced technology that adapts to your learning style and accelerates your progress.
             </p>
           </motion.div>
           
@@ -517,7 +517,7 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed"
             >
-              Join over 10,000 students who've improved their grades by an average of <span className="font-bold text-white">2.3 levels</span> with our AI-powered platform.
+              Join over 10,000 students who've improved their grades by an average of <span className="font-bold text-white">2.3 levels</span> with our smart platform.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
