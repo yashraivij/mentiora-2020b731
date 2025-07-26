@@ -313,7 +313,7 @@ const Index = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl text-gray-600 mb-16 max-w-3xl mx-auto leading-relaxed"
           >
-            Every <span className="text-blue-600 font-semibold">question you answer</span> powers a <span className="text-purple-600 font-semibold">personalised plan</span> to get you closer to <span className="text-emerald-600 font-semibold">top grades</span>.
+            Every <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent font-bold">question</span> powers a <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent font-bold">personalised plan</span> for <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent font-bold">top grades</span>.
           </motion.p>
           
           <motion.div
