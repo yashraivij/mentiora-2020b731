@@ -697,7 +697,7 @@ const Dashboard = () => {
                     userId={user?.id}
                     onToggleUserSubject={toggleUserSubject}
                     isUserSubject={userSubjects.includes(subject.id)}
-                    showAddButton={userSubjects.length === 0 || !userSubjects.includes(subject.id)}
+                    showAddButton={true}
                   />
                 ))}
               </div>
@@ -760,7 +760,7 @@ const Dashboard = () => {
                            userId={user?.id}
                            onToggleUserSubject={toggleUserSubject}
                            isUserSubject={userSubjects.includes(subject.id)}
-                           showAddButton={userSubjects.length === 0 || !userSubjects.includes(subject.id)}
+                           showAddButton={true}
                      />
                         );
                       })}
