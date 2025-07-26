@@ -110,33 +110,33 @@ export const SubjectCard = ({
 
       {/* Add/Remove Subject Button */}
       {showSelectionCheckbox && onToggleSelection && !comingSoon && (
-        <div className="absolute top-4 left-4 z-10">
+        <div className="absolute top-4 right-4 z-10">
           <Button
-            variant={isSelected ? "default" : "outline"}
+            variant={isSelected ? "default" : "secondary"}
             size="sm"
             onClick={(e) => {
               e.stopPropagation();
               onToggleSelection();
             }}
-            className={`opacity-0 group-hover:opacity-100 transition-all duration-300 text-xs font-medium ${
+            className={`text-xs font-medium shadow-md transition-all duration-300 ${
               isSelected 
-                ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-md' 
-                : 'bg-background/80 border-border hover:bg-accent hover:text-accent-foreground'
+                ? 'bg-emerald-600 hover:bg-emerald-700 text-white border-0' 
+                : 'bg-background hover:bg-accent text-foreground border border-border'
             }`}
           >
-            {isSelected ? '✓ Added' : '+ Add'}
+            {isSelected ? '✓ In My Subjects' : 'Add to My Subjects'}
           </Button>
         </div>
       )}
 
       {/* Pin Button with Premium Styling */}
-      {onTogglePin && !comingSoon && (
+      {onTogglePin && !comingSoon && !showSelectionCheckbox && (
         <Button
           variant="ghost"
           size="sm"
-          className={`absolute top-4 ${showSelectionCheckbox ? 'right-4' : 'right-4'} z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl backdrop-blur-sm dark:hidden ${
+          className={`absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl backdrop-blur-sm dark:hidden ${
             isPinned 
-              ? 'opacity-100 text-amber-500 bg-amber-50/80 hover:bg-amber-100/80' 
+              ? 'opacity-100 text-amber-500 bg-amber-50/80 hover:bg-amber-100/80'
               : 'text-muted-foreground bg-background/50 hover:bg-background/80'
           }`}
           onClick={(e) => {
