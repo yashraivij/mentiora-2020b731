@@ -266,39 +266,43 @@ export const SubjectCard = ({
             </span>
           </div>
           
-          {/* Add/Remove Subject Button - Integrated into footer */}
-          {showSelectionCheckbox && onToggleSelection && !comingSoon ? (
-            <Button
-              variant={isSelected ? "default" : "secondary"}
-              size="sm"
-              onClick={(e) => {
-                e.stopPropagation();
-                onToggleSelection();
-              }}
-              className={`text-xs font-medium shadow-lg transition-all duration-300 ${
-                isSelected 
-                  ? 'bg-emerald-600 hover:bg-emerald-700 text-white border-0' 
-                  : 'bg-white hover:bg-white/90 text-foreground border border-border dark:bg-gray-800 dark:hover:bg-gray-700'
-              }`}
-            >
-              {isSelected ? '✓ In My Subjects' : 'Add to My Subjects'}
-            </Button>
-          ) : comingSoon ? (
-            <Badge variant="secondary" className="px-4 py-2 bg-muted/50 text-muted-foreground border border-muted">
-              Coming Soon
-            </Badge>
-          ) : (
-            <Button 
-              className="bg-gradient-to-r from-emerald-400 to-cyan-500 hover:from-emerald-500 hover:to-cyan-600 text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-              onClick={(e) => {
-                e.stopPropagation();
-                onStartPractice(subject.id);
-              }}
-            >
-              Start Practice
-              <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
-          )}
+          <div className="flex items-center gap-3">
+            {/* Add/Remove Subject Button - Premium styling */}
+            {showSelectionCheckbox && onToggleSelection && !comingSoon && (
+              <Button
+                variant={isSelected ? "default" : "outline"}
+                size="sm"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggleSelection();
+                }}
+                className={`text-xs font-medium transition-all duration-300 ${
+                  isSelected 
+                    ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white border-0 shadow-lg hover:shadow-xl' 
+                    : 'bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white border-0 shadow-lg hover:shadow-xl hover:scale-105'
+                }`}
+              >
+                {isSelected ? '✓ In My Subjects' : 'Add to My Subjects'}
+              </Button>
+            )}
+            
+            {comingSoon ? (
+              <Badge variant="secondary" className="px-4 py-2 bg-muted/50 text-muted-foreground border border-muted">
+                Coming Soon
+              </Badge>
+            ) : (
+              <Button 
+                className="bg-gradient-to-r from-emerald-400 to-cyan-500 hover:from-emerald-500 hover:to-cyan-600 text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onStartPractice(subject.id);
+                }}
+              >
+                Start Practice
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            )}
+          </div>
         </div>
       </CardContent>
 
