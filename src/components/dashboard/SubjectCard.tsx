@@ -129,17 +129,39 @@ export const SubjectCard = ({
 
       <CardHeader className="pb-4 relative z-10">
         <div className="flex items-start justify-between">
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 flex-1">
             <div className={`w-4 h-4 rounded-full ${subject.color} shadow-lg ${!comingSoon && 'group-hover:scale-125'} transition-transform duration-300`}></div>
-            <div>
-              <CardTitle className={`text-xl font-bold leading-tight ${
-                comingSoon 
-                  ? 'text-muted-foreground' 
-                  : 'text-foreground group-hover:text-muted-foreground'
-              } transition-colors`}>
-                {subject.name}
-              </CardTitle>
-              <div className="flex items-center space-x-3 mt-2">
+            <div className="flex-1">
+              <div className="flex items-center justify-between mb-2">
+                <CardTitle className={`text-xl font-bold leading-tight ${
+                  comingSoon 
+                    ? 'text-muted-foreground' 
+                    : 'text-foreground group-hover:text-muted-foreground'
+                } transition-colors`}>
+                  {subject.name}
+                </CardTitle>
+                
+                {/* Add/Remove Subject Button - Next to subject name */}
+                {showSelectionCheckbox && onToggleSelection && !comingSoon && (
+                  <Button
+                    variant={isSelected ? "default" : "outline"}
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onToggleSelection();
+                    }}
+                    className={`text-xs font-medium transition-all duration-300 ml-3 ${
+                      isSelected 
+                        ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white border-0 shadow-md' 
+                        : 'bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white border-0 shadow-md hover:scale-105'
+                    }`}
+                  >
+                    {isSelected ? '✓ Added' : 'Add'}
+                  </Button>
+                )}
+              </div>
+              
+              <div className="flex items-center space-x-3">
                 <span className={`text-sm font-semibold ${comingSoon ? 'text-muted-foreground' : 'text-muted-foreground'}`}>
                   {comingSoon ? '--% accuracy' : `${averageScore}% accuracy`}
                 </span>
@@ -266,27 +288,7 @@ export const SubjectCard = ({
             </span>
           </div>
           
-          <div className="flex items-center gap-3">
-            {/* Add/Remove Subject Button - Premium styling */}
-            {showSelectionCheckbox && onToggleSelection && !comingSoon && (
-              <Button
-                variant={isSelected ? "default" : "outline"}
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onToggleSelection();
-                }}
-                className={`text-xs font-medium transition-all duration-300 ${
-                  isSelected 
-                    ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white border-0 shadow-lg hover:shadow-xl' 
-                    : 'bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white border-0 shadow-lg hover:shadow-xl hover:scale-105'
-                }`}
-              >
-                {isSelected ? '✓ In My Subjects' : 'Add to My Subjects'}
-              </Button>
-            )}
-            
-            {comingSoon ? (
+          {comingSoon ? (
               <Badge variant="secondary" className="px-4 py-2 bg-muted/50 text-muted-foreground border border-muted">
                 Coming Soon
               </Badge>
@@ -302,7 +304,6 @@ export const SubjectCard = ({
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Button>
             )}
-          </div>
         </div>
       </CardContent>
 
