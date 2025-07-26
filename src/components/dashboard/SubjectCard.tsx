@@ -108,27 +108,6 @@ export const SubjectCard = ({
         </div>
       )}
 
-      {/* Add/Remove Subject Button */}
-      {showSelectionCheckbox && onToggleSelection && !comingSoon && (
-        <div className="absolute top-16 right-3 z-20">
-          <Button
-            variant={isSelected ? "default" : "secondary"}
-            size="sm"
-            onClick={(e) => {
-              e.stopPropagation();
-              onToggleSelection();
-            }}
-            className={`text-xs font-medium shadow-lg transition-all duration-300 backdrop-blur-sm ${
-              isSelected 
-                ? 'bg-emerald-600 hover:bg-emerald-700 text-white border-0' 
-                : 'bg-white/90 hover:bg-white text-foreground border border-border dark:bg-gray-800/90 dark:hover:bg-gray-800'
-            }`}
-          >
-            {isSelected ? '✓ In My Subjects' : 'Add to My Subjects'}
-          </Button>
-        </div>
-      )}
-
       {/* Pin Button with Premium Styling */}
       {onTogglePin && !comingSoon && !showSelectionCheckbox && (
         <Button
@@ -286,7 +265,25 @@ export const SubjectCard = ({
               {subject.topics.length} topics available
             </span>
           </div>
-          {comingSoon ? (
+          
+          {/* Add/Remove Subject Button - Integrated into footer */}
+          {showSelectionCheckbox && onToggleSelection && !comingSoon ? (
+            <Button
+              variant={isSelected ? "default" : "secondary"}
+              size="sm"
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleSelection();
+              }}
+              className={`text-xs font-medium shadow-lg transition-all duration-300 ${
+                isSelected 
+                  ? 'bg-emerald-600 hover:bg-emerald-700 text-white border-0' 
+                  : 'bg-white hover:bg-white/90 text-foreground border border-border dark:bg-gray-800 dark:hover:bg-gray-700'
+              }`}
+            >
+              {isSelected ? '✓ In My Subjects' : 'Add to My Subjects'}
+            </Button>
+          ) : comingSoon ? (
             <Badge variant="secondary" className="px-4 py-2 bg-muted/50 text-muted-foreground border border-muted">
               Coming Soon
             </Badge>
