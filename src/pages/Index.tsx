@@ -57,8 +57,8 @@ const Index = () => {
   const howItWorks = [
     {
       step: "01",
-      title: "Choose Your Subject & Topic",
-      description: "Pick your AQA GCSE subject and the exact topic you want to master.",
+      title: "Pick Your Subject",
+      description: "Choose your subject and the exact topic you want to master.",
       icon: Target,
       color: "from-blue-500 to-purple-600",
       accent: "text-blue-600"
@@ -134,11 +134,11 @@ const Index = () => {
       icon: Target
     },
     { 
-      number: "3 Weeks", 
-      label: "To See Results", 
+      number: "A* to 9", 
+      label: "Grade Guarantees", 
       color: "text-orange-600", 
       bg: "bg-gradient-to-br from-orange-50 to-orange-100",
-      description: "Fastest improvements",
+      description: "Proven outcomes",
       icon: Zap
     }
   ];
@@ -161,7 +161,7 @@ const Index = () => {
       icon: Brain
     },
     { 
-      number: "A*-A", 
+      number: "Grade 9", 
       label: "Typical Result", 
       color: "text-purple-600", 
       bg: "bg-gradient-to-br from-purple-100 to-purple-200",
@@ -180,21 +180,30 @@ const Index = () => {
 
   const premiumFeatures = [
     {
-      icon: Calendar,
-      title: "2026 Predicted Exam Papers",
-      description: "Access weekly refreshed predicted exam papers built from our advanced AI analysis of past papers and mark schemes",
-      badge: "Updated Weekly",
+      icon: Target,
+      title: "What Should I Study",
+      description: "AI-powered personalized study recommendations that tell you exactly what to focus on next",
+      badge: "AI-Powered",
       color: "from-violet-600 to-purple-600",
       bgColor: "from-violet-50 to-purple-50",
       premium: true
     },
     {
-      icon: TrendingUp,
-      title: "Grade Prediction Graph",
-      description: "Real-time grade predictions with confidence intervals based on your performance data and learning trajectory",
-      badge: "AI-Powered",
+      icon: BookOpen,
+      title: "Smart Revision Notebook",
+      description: "Automatically generated notes tailored to your learning style and exam board requirements",
+      badge: "Personalized",
       color: "from-emerald-600 to-teal-600",
       bgColor: "from-emerald-50 to-teal-50",
+      premium: true
+    },
+    {
+      icon: Calendar,
+      title: "Predicted Exams",
+      description: "Access weekly refreshed predicted exam papers built from our advanced AI analysis of past papers",
+      badge: "Updated Weekly",
+      color: "from-blue-600 to-cyan-600",
+      bgColor: "from-blue-50 to-cyan-50",
       premium: true
     },
     {
@@ -202,15 +211,6 @@ const Index = () => {
       title: "AI Study Time Optimizer",
       description: "Intelligent scheduling that maximizes your learning efficiency by analyzing your peak performance hours",
       badge: "Smart Planning",
-      color: "from-blue-600 to-cyan-600",
-      bgColor: "from-blue-50 to-cyan-50",
-      premium: true
-    },
-    {
-      icon: Trophy,
-      title: "Daily Goals + Retention Tracking",
-      description: "Personalized daily targets with spaced repetition algorithms to ensure long-term knowledge retention",
-      badge: "Proven Method",
       color: "from-amber-600 to-orange-600",
       bgColor: "from-amber-50 to-orange-50",
       premium: true
@@ -302,10 +302,8 @@ const Index = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-6xl lg:text-7xl font-bold mb-8 leading-tight tracking-tight"
           >
-            <span className="text-gray-900">Transform Your</span>
-            <br />
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              GCSE Results
+              GCSE grades that open doors
             </span>
           </motion.h2>
           
@@ -315,8 +313,7 @@ const Index = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl text-gray-600 mb-16 max-w-3xl mx-auto leading-relaxed"
           >
-            Students using our AI improve by <span className="font-bold text-emerald-600">2.3 grades on average</span> while studying <span className="font-bold text-blue-600">67% less time</span>. 
-            Join the revolution with <span className="font-semibold text-purple-600 hover:text-purple-800 transition-colors duration-300">2026 predicted papers</span>
+            The AI-powered platform that guarantees grade improvements in record time
           </motion.p>
           
           <motion.div
@@ -330,7 +327,7 @@ const Index = () => {
               onClick={() => navigate('/register')} 
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 rounded-2xl group"
             >
-              Start Your Journey Free
+              Get Your Free Grade 9 Blueprint
               <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
             </Button>
           </motion.div>
