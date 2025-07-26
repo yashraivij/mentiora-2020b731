@@ -13339,6 +13339,626 @@ export const curriculum: Subject[] = [
             specReference: 'AQA Combined Science 8464 (4.4.2) F/H'
           }
         ]
+      },
+      {
+        id: 'biology-homeostasis-response',
+        name: 'Biology: Homeostasis and Response',
+        questions: [
+          {
+            id: 'hr-q1',
+            question: 'Define homeostasis and explain why it is important.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Homeostasis is the maintenance of a constant internal environment. It keeps conditions like temperature, blood glucose, and water levels within narrow limits. This is important for enzyme function and cellular processes to work optimally.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of homeostasis (2 marks)',
+                'Importance explanation (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.5.1) F/H'
+          },
+          {
+            id: 'hr-q2',
+            question: 'Describe the components of a control system in homeostasis.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Receptors detect changes in the environment. Coordination centres process information and organize responses. Effectors bring about responses to restore optimum conditions. Example: blood glucose - receptors in pancreas, brain coordinates, liver acts as effector.',
+            markingCriteria: {
+              breakdown: [
+                'Receptors function (2 marks)',
+                'Coordination centres function (2 marks)',
+                'Effectors function (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.5.1) F/H'
+          },
+          {
+            id: 'hr-q3',
+            question: 'Explain how blood glucose levels are controlled.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Pancreas monitors blood glucose levels. When high, insulin is released causing liver and muscles to store glucose as glycogen. When low, glucagon is released causing liver to convert glycogen back to glucose. This is negative feedback control.',
+            markingCriteria: {
+              breakdown: [
+                'High glucose response (2 marks)',
+                'Low glucose response (2 marks)',
+                'Negative feedback concept (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.5.1) H'
+          },
+          {
+            id: 'hr-q4',
+            question: 'Describe the structure and function of the nervous system.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Central nervous system (CNS) consists of brain and spinal cord. Peripheral nervous system connects CNS to rest of body. Sensory neurons carry impulses to CNS. Motor neurons carry impulses from CNS to effectors. Relay neurons connect sensory and motor neurons.',
+            markingCriteria: {
+              breakdown: [
+                'CNS components (2 marks)',
+                'Neuron types and functions (4 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.5.2) F/H'
+          },
+          {
+            id: 'hr-q5',
+            question: 'Describe the structure of a motor neuron.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Cell body contains nucleus and most organelles. Dendrites receive impulses from other neurons. Long axon carries impulses away from cell body. Myelin sheath insulates axon and speeds up transmission.',
+            markingCriteria: {
+              breakdown: [
+                'Cell body function (1 mark)',
+                'Dendrites function (1 mark)',
+                'Axon function (1 mark)',
+                'Myelin sheath function (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.5.2) F/H'
+          },
+          {
+            id: 'hr-q6',
+            question: 'Explain what happens at a synapse.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Electrical impulse arrives at synapse terminal. Causes release of neurotransmitter chemicals into synaptic gap. Neurotransmitters diffuse across gap and bind to receptors on next neuron. This triggers new electrical impulse in second neuron. Neurotransmitters are then broken down.',
+            markingCriteria: {
+              breakdown: [
+                'Neurotransmitter release (2 marks)',
+                'Diffusion and binding (2 marks)',
+                'New impulse generation (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.5.2) H'
+          },
+          {
+            id: 'hr-q7',
+            question: 'Describe the reflex arc and explain its importance.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Stimulus detected by receptor. Sensory neuron carries impulse to spinal cord. Relay neuron in spinal cord processes information. Motor neuron carries impulse to effector. Response occurs automatically without conscious thought. Important for rapid protection from danger.',
+            markingCriteria: {
+              breakdown: [
+                'Reflex arc pathway (4 marks)',
+                'Importance/advantage (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.5.2) F/H'
+          },
+          {
+            id: 'hr-q8',
+            question: 'Compare nervous and hormonal coordination.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Nervous system uses electrical impulses, hormonal uses chemical messages. Nervous responses are rapid and short-lived. Hormonal responses are slower but longer-lasting. Nervous system has precise targeting, hormones affect multiple organs.',
+            markingCriteria: {
+              breakdown: [
+                'Message type comparison (2 marks)',
+                'Speed and duration comparison (2 marks)',
+                'Targeting comparison (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.5.3) F/H'
+          },
+          {
+            id: 'hr-q9',
+            question: 'Explain how insulin and glucagon control blood glucose as an example of negative feedback.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'High blood glucose detected by pancreas. Insulin released, causing liver to store glucose as glycogen. Blood glucose falls back to normal. Low blood glucose detected by pancreas. Glucagon released, causing liver to convert glycogen to glucose. Blood glucose rises back to normal. This is negative feedback because the response counteracts the original change.',
+            markingCriteria: {
+              breakdown: [
+                'High glucose pathway (3 marks)',
+                'Low glucose pathway (3 marks)',
+                'Negative feedback explanation (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.5.3) H'
+          },
+          {
+            id: 'hr-q10',
+            question: 'Describe the causes and treatment of Type 1 and Type 2 diabetes.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Type 1: Pancreas cannot produce insulin due to immune system destroying insulin-producing cells. Usually develops in childhood. Treated with insulin injections and diet control. Type 2: Body becomes resistant to insulin or produces insufficient amounts. Usually develops in adulthood. Treated with diet, exercise, and sometimes medication.',
+            markingCriteria: {
+              breakdown: [
+                'Type 1 cause and treatment (4 marks)',
+                'Type 2 cause and treatment (4 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.5.3) H'
+          }
+        ]
+      },
+      {
+        id: 'biology-inheritance-variation-evolution',
+        name: 'Biology: Inheritance, Variation and Evolution',
+        questions: [
+          {
+            id: 'ive-q1',
+            question: 'Compare sexual and asexual reproduction.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Sexual reproduction involves two parents and produces genetically different offspring. Asexual reproduction involves one parent and produces genetically identical offspring (clones). Sexual reproduction allows variation for evolution. Asexual reproduction is faster and requires less energy.',
+            markingCriteria: {
+              breakdown: [
+                'Number of parents (2 marks)',
+                'Genetic variation differences (2 marks)',
+                'Advantages of each (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.6.1) F/H'
+          },
+          {
+            id: 'ive-q2',
+            question: 'Describe what happens during meiosis.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'DNA replicates before division starts. First division separates homologous chromosome pairs. Second division separates sister chromatids. Four genetically different haploid gametes are produced. Crossing over creates new combinations of genes.',
+            markingCriteria: {
+              breakdown: [
+                'Two divisions described (3 marks)',
+                'Chromosome separation (2 marks)',
+                'Genetic variation creation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.6.1) H'
+          },
+          {
+            id: 'ive-q3',
+            question: 'Define the terms gene, allele, phenotype, and genotype.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Gene is a section of DNA that codes for a specific characteristic. Allele is a different version of the same gene. Genotype is the genetic makeup of an organism (combination of alleles). Phenotype is the observable characteristics resulting from genotype and environment.',
+            markingCriteria: {
+              breakdown: [
+                'Gene definition (2 marks)',
+                'Allele definition (2 marks)',
+                'Genotype definition (2 marks)',
+                'Phenotype definition (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.6.1) F/H'
+          },
+          {
+            id: 'ive-q4',
+            question: 'Use a Punnett square to show the inheritance of tongue rolling. R = can roll tongue, r = cannot roll tongue. Cross Rr × Rr.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Punnett square shows: RR (25%), Rr (50%), rr (25%). Phenotype ratio: 3 can roll tongue : 1 cannot roll tongue. Genotype ratio: 1 RR : 2 Rr : 1 rr.',
+            markingCriteria: {
+              breakdown: [
+                'Correct Punnett square (2 marks)',
+                'Correct ratios (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.6.1) F/H'
+          },
+          {
+            id: 'ive-q5',
+            question: 'Explain how sex is determined in humans.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Males have XY chromosomes, females have XX chromosomes. Male gametes can carry either X or Y chromosome. Female gametes always carry X chromosome. 50% chance of male or female offspring.',
+            markingCriteria: {
+              breakdown: [
+                'Male and female chromosomes (2 marks)',
+                'Gamete chromosomes and probability (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.6.1) F/H'
+          },
+          {
+            id: 'ive-q6',
+            question: 'Describe how mutations can lead to evolution by natural selection.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Mutations create genetic variation in populations. Environmental change creates selection pressure. Individuals with advantageous mutations survive better. They reproduce more successfully, passing on beneficial alleles. Over time, frequency of advantageous alleles increases in population. This leads to evolution of the species.',
+            markingCriteria: {
+              breakdown: [
+                'Mutations create variation (2 marks)',
+                'Selection pressure (2 marks)',
+                'Differential survival and reproduction (2 marks)',
+                'Change in allele frequency (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.6.2) H'
+          },
+          {
+            id: 'ive-q7',
+            question: 'Explain the benefits and risks of genetic engineering.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Benefits: GM crops can be resistant to herbicides and pests, reducing pesticide use. Bacteria can produce human insulin for diabetics. Can improve crop yield and nutrition. Risks: Unknown long-term effects on health. Could affect non-target organisms. Genes might spread to wild populations.',
+            markingCriteria: {
+              breakdown: [
+                'Medical/agricultural benefits (3 marks)',
+                'Environmental/health risks (3 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.6.3) H'
+          },
+          {
+            id: 'ive-q8',
+            question: 'Describe how fossils provide evidence for evolution.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Fossils show progression of life forms over time. Simple organisms appear in older rocks, complex organisms in younger rocks. Intermediate forms show gradual change. Geographical distribution supports continental drift and evolution.',
+            markingCriteria: {
+              breakdown: [
+                'Progression over time (2 marks)',
+                'Transitional forms (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.6.4) F/H'
+          },
+          {
+            id: 'ive-q9',
+            question: 'Explain how antibiotic resistance provides evidence for evolution.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Random mutations give some bacteria resistance to antibiotics. When antibiotics are used, non-resistant bacteria die. Resistant bacteria survive and reproduce rapidly. Resistance genes spread through population. This shows evolution happening in real time through natural selection.',
+            markingCriteria: {
+              breakdown: [
+                'Mutations create resistance (2 marks)',
+                'Selection by antibiotics (2 marks)',
+                'Rapid evolution demonstration (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.6.4) F/H'
+          },
+          {
+            id: 'ive-q10',
+            question: 'Describe the three-domain classification system.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Three domains are Bacteria, Archaea, and Eukarya. Bacteria and Archaea are prokaryotic but genetically different. Eukarya includes all organisms with membrane-bound nuclei. System based on genetic analysis rather than just physical features. Shows evolutionary relationships more accurately.',
+            markingCriteria: {
+              breakdown: [
+                'Three domains named (3 marks)',
+                'Basis of classification (2 marks)',
+                'Evolutionary relationships (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.6.4) H'
+          }
+        ]
+      },
+      {
+        id: 'biology-ecology',
+        name: 'Biology: Ecology',
+        questions: [
+          {
+            id: 'eco-q1',
+            question: 'Define the terms community, population, and habitat.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Population is all organisms of one species in an area. Community is all populations of different species in an area. Habitat is the environment where an organism lives and meets its needs.',
+            markingCriteria: {
+              breakdown: [
+                'Population definition (2 marks)',
+                'Community definition (2 marks)',
+                'Habitat definition (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.7.1) F/H'
+          },
+          {
+            id: 'eco-q2',
+            question: 'Explain what organisms compete for and why.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Plants compete for light, water, nutrients, and space for growth. Animals compete for food, mates, and territory. Competition occurs because resources are limited. Successful competitors survive and reproduce better.',
+            markingCriteria: {
+              breakdown: [
+                'Plant competition factors (2 marks)',
+                'Animal competition factors (2 marks)',
+                'Reason for competition (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.7.1) F/H'
+          },
+          {
+            id: 'eco-q3',
+            question: 'Distinguish between abiotic and biotic factors, giving examples.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Abiotic factors are non-living environmental conditions. Examples: light intensity, temperature, pH, oxygen levels. Biotic factors are living components. Examples: predators, food availability, pathogens, competition.',
+            markingCriteria: {
+              breakdown: [
+                'Abiotic definition and examples (3 marks)',
+                'Biotic definition and examples (3 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.7.1) F/H'
+          },
+          {
+            id: 'eco-q4',
+            question: 'Describe how organisms are adapted to their environment.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Structural adaptations: Arctic fox has thick fur for insulation. Behavioral adaptations: Migration to avoid harsh conditions. Functional adaptations: Desert animals produce concentrated urine to conserve water. Adaptations improve survival and reproduction in specific environments.',
+            markingCriteria: {
+              breakdown: [
+                'Structural adaptations (3 marks)',
+                'Behavioral adaptations (2 marks)',
+                'Functional adaptations (3 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.7.1) F/H'
+          },
+          {
+            id: 'eco-q5',
+            question: 'Explain what extremophiles are and give examples.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Extremophiles are organisms living in extreme conditions. Examples: bacteria in hot springs, organisms in high salt concentrations, bacteria in highly acidic conditions. They have special adaptations to survive where most life cannot.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of extremophiles (2 marks)',
+                'Examples with conditions (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.7.1) H'
+          },
+          {
+            id: 'eco-q6',
+            question: 'Describe energy transfer in food chains and explain why food chains are usually short.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Energy enters ecosystem through producers (photosynthesis). Only 10% of energy transfers between trophic levels. 90% is lost as heat, movement, and undigested material. Food chains are short because insufficient energy remains to support many levels.',
+            markingCriteria: {
+              breakdown: [
+                'Energy source (1 mark)',
+                'Energy transfer efficiency (2 marks)',
+                'Energy losses (2 marks)',
+                'Chain length explanation (1 mark)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.7.2) F/H'
+          },
+          {
+            id: 'eco-q7',
+            question: 'Describe how to use quadrats to estimate population size.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Place quadrats randomly in study area. Count organisms in each quadrat. Calculate mean number per quadrat. Multiply by total number of quadrats that would fit in whole area. Formula: Population = mean per quadrat × total area ÷ quadrat area.',
+            markingCriteria: {
+              breakdown: [
+                'Random sampling method (2 marks)',
+                'Counting and calculation (2 marks)',
+                'Population estimate formula (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.7.2) F/H',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'eco-q8',
+            question: 'Explain the carbon cycle.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Carbon dioxide removed from atmosphere by photosynthesis. Plants use carbon to make glucose and other compounds. Animals eat plants, obtaining carbon compounds. Respiration returns CO₂ to atmosphere. Decomposers break down dead organisms, releasing CO₂. Combustion of fossil fuels adds extra CO₂.',
+            markingCriteria: {
+              breakdown: [
+                'Photosynthesis removes CO₂ (2 marks)',
+                'Feeding transfers carbon (2 marks)',
+                'Respiration returns CO₂ (2 marks)',
+                'Decomposition and combustion (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.7.2) F/H'
+          },
+          {
+            id: 'eco-q9',
+            question: 'Describe human impacts on biodiversity.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Deforestation destroys habitats and reduces species diversity. Pollution kills organisms and disrupts food chains. Climate change alters habitats faster than species can adapt. Overfishing reduces marine biodiversity. Introduced species can outcompete native species.',
+            markingCriteria: {
+              breakdown: [
+                'Habitat destruction (2 marks)',
+                'Pollution effects (2 marks)',
+                'Climate change (2 marks)',
+                'Other impacts (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.7.3) H'
+          },
+          {
+            id: 'eco-q10',
+            question: 'Explain conservation methods used to protect biodiversity.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Breeding programs maintain genetic diversity of endangered species. Habitat protection preserves ecosystems. Recycling reduces resource extraction pressure. Education increases public awareness. International cooperation protects migrating species.',
+            markingCriteria: {
+              breakdown: [
+                'Breeding programs (2 marks)',
+                'Habitat protection (2 marks)',
+                'Other conservation methods (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.7.3) F/H'
+          }
+        ]
+      },
+      {
+        id: 'biology-key-ideas',
+        name: 'Biology: Key Ideas',
+        questions: [
+          {
+            id: 'ki-q1',
+            question: 'Explain what is meant by life processes and list the main ones.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Life processes are the essential functions that all living organisms carry out to stay alive. Main life processes include: nutrition, respiration, excretion, growth, reproduction, sensitivity (responding to stimuli), and movement.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of life processes (2 marks)',
+                'List of main processes (4 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.8) F/H'
+          },
+          {
+            id: 'ki-q2',
+            question: 'Explain how cells are the basic units of life.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'All living organisms are made of cells. Cells carry out all life processes. Single-celled organisms perform all functions within one cell. Multicellular organisms have specialized cells working together.',
+            markingCriteria: {
+              breakdown: [
+                'Cellular basis of life (2 marks)',
+                'Cell functions (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.8) F/H'
+          },
+          {
+            id: 'ki-q3',
+            question: 'Describe how organisms are interdependent in ecosystems.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Organisms depend on each other for food through food chains. Predator-prey relationships control population sizes. Pollination by insects helps plant reproduction. Decomposers recycle nutrients for other organisms. Symbiotic relationships benefit both partners.',
+            markingCriteria: {
+              breakdown: [
+                'Food relationships (2 marks)',
+                'Population control (2 marks)',
+                'Nutrient cycling and other relationships (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.8) F/H'
+          },
+          {
+            id: 'ki-q4',
+            question: 'Explain the importance of photosynthesis and respiration in living organisms.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Photosynthesis captures light energy and converts it to chemical energy in glucose. Provides food for plants and oxygen for atmosphere. Respiration releases energy from glucose for cellular activities. Produces CO₂ that plants need for photosynthesis. Together they form the basis of energy flow in ecosystems.',
+            markingCriteria: {
+              breakdown: [
+                'Photosynthesis importance (3 marks)',
+                'Respiration importance (3 marks)',
+                'Link between processes (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.8) F/H'
+          },
+          {
+            id: 'ki-q5',
+            question: 'Describe the cycling of materials in ecosystems.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Carbon cycles between atmosphere and organisms through photosynthesis and respiration. Nitrogen cycles through soil bacteria, plants, and decomposition. Water cycles through evaporation, transpiration, and precipitation. Decomposers break down dead material to release nutrients back to soil.',
+            markingCriteria: {
+              breakdown: [
+                'Carbon cycling (2 marks)',
+                'Nitrogen/water cycling (2 marks)',
+                'Role of decomposers (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.8) F/H'
+          },
+          {
+            id: 'ki-q6',
+            question: 'Explain how genes and environment interact to determine characteristics.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Genes provide the blueprint for characteristics through DNA instructions. Environment affects how genes are expressed. Some traits are purely genetic (blood type). Some are purely environmental (scars). Most traits result from gene-environment interaction (height, intelligence).',
+            markingCriteria: {
+              breakdown: [
+                'Gene role (2 marks)',
+                'Environmental influence (2 marks)',
+                'Interaction examples (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.8) H'
+          },
+          {
+            id: 'ki-q7',
+            question: 'Describe how evolution occurs through natural selection.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Genetic variation exists in populations due to mutations and sexual reproduction. Environmental change creates selection pressure. Individuals with advantageous traits survive better. They reproduce more successfully, passing genes to offspring. Over many generations, beneficial traits become more common. This leads to evolution of the species.',
+            markingCriteria: {
+              breakdown: [
+                'Variation sources (2 marks)',
+                'Selection pressure (2 marks)',
+                'Differential reproduction (2 marks)',
+                'Evolutionary change (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.8) H'
+          },
+          {
+            id: 'ki-q8',
+            question: 'Explain the relationship between structure and function in biological systems.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Structure is adapted to perform specific functions efficiently. Examples: Red blood cells are biconcave to maximize surface area for oxygen transport. Root hairs increase surface area for water absorption. Enzyme active sites have specific shapes to bind particular substrates.',
+            markingCriteria: {
+              breakdown: [
+                'Structure-function principle (2 marks)',
+                'Cellular examples (2 marks)',
+                'Molecular examples (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.8) F/H'
+          },
+          {
+            id: 'ki-q9',
+            question: 'Describe how energy flows through ecosystems.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Energy enters as sunlight captured by producers through photosynthesis. Energy transfers through food chains from producers to consumers. Energy is lost at each trophic level as heat and movement. Energy flow is unidirectional - it cannot be recycled like materials.',
+            markingCriteria: {
+              breakdown: [
+                'Energy input (2 marks)',
+                'Energy transfer (2 marks)',
+                'Energy loss and direction (2 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.8) F/H'
+          },
+          {
+            id: 'ki-q10',
+            question: 'Explain how biological systems maintain themselves through feedback mechanisms.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Negative feedback maintains homeostasis by counteracting changes. Example: Blood glucose regulation - high levels trigger insulin release to lower glucose. Positive feedback amplifies changes until completion. Example: Blood clotting - initial clotting triggers more clotting. Most biological control systems use negative feedback to maintain stability.',
+            markingCriteria: {
+              breakdown: [
+                'Negative feedback concept (3 marks)',
+                'Negative feedback example (2 marks)',
+                'Positive feedback concept and example (3 marks)'
+              ]
+            },
+            specReference: 'AQA Combined Science 8464 (4.8) H'
+          }
+        ]
       }
     ]
   },
