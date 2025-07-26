@@ -329,7 +329,7 @@ const Dashboard = () => {
             </div>
             <div className="hidden md:flex items-center space-x-3 px-4 py-2 bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-950/30 dark:to-blue-950/30 rounded-2xl border border-emerald-200/50 dark:border-emerald-800/30">
               <Zap className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-              <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">AI-Powered Insights</span>
+              <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">Smart Insights</span>
             </div>
           </div>
         </div>
@@ -469,14 +469,14 @@ const Dashboard = () => {
                     </h3>
                     <div className="flex items-center space-x-2 mt-1">
                       <Crown className="h-4 w-4 text-amber-500 animate-bounce" />
-                      <span className="text-sm font-semibold bg-gradient-to-r from-amber-600 to-yellow-600 dark:from-amber-400 dark:to-yellow-400 bg-clip-text text-transparent">Premium AI Feature</span>
+                      <span className="text-sm font-semibold bg-gradient-to-r from-amber-600 to-yellow-600 dark:from-amber-400 dark:to-yellow-400 bg-clip-text text-transparent">Premium Feature</span>
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-col items-end space-y-2 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="flex items-center space-x-2 px-3 py-1 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-full border border-emerald-300/30">
                     <Zap className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
-                    <span className="text-xs font-medium text-emerald-700 dark:text-emerald-300">AI-Powered</span>
+                    <span className="text-xs font-medium text-emerald-700 dark:text-emerald-300">Smart</span>
                   </div>
                   <div className="flex items-center space-x-2 px-3 py-1 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full border border-blue-300/30">
                     <Target className="h-3 w-3 text-blue-600 dark:text-blue-400" />
@@ -486,7 +486,7 @@ const Dashboard = () => {
               </div>
               
               <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
-                Revolutionary AI creates <span className="font-semibold text-purple-700 dark:text-purple-300">ultra-clear, Grade 9-level revision notes</span> instantly for every question where you lose marks. Each note is meticulously crafted with key definitions, equations, and premium exam strategies.
+                Revolutionary technology creates <span className="font-semibold text-purple-700 dark:text-purple-300">ultra-clear, Grade 9-level revision notes</span> instantly for every question where you lose marks. Each note is meticulously crafted with key definitions, equations, and premium exam strategies.
               </p>
               
               <div className="grid grid-cols-1 gap-4 mb-6">
@@ -776,7 +776,7 @@ const Dashboard = () => {
                     Stress Monitor
                   </CardTitle>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    AI-powered wellness tracking across all subjects
+                    Smart wellness tracking across all subjects
                   </p>
                   
                   {/* Mini Stress Data */}
@@ -872,7 +872,7 @@ const Dashboard = () => {
                 <Sparkles className="h-6 w-6 text-violet-500 dark:text-violet-400" />
               </div>
               <p className="text-muted-foreground max-w-md mx-auto">
-                We're working hard to bring you powerful AI-driven insights to supercharge your GCSE revision. 
+                We're working hard to bring you powerful data-driven insights to supercharge your GCSE revision. 
                 Stay tuned for updates!
               </p>
               <Button 
@@ -909,7 +909,7 @@ const Dashboard = () => {
         />
       )}
 
-      {/* AI Study Recommendation Button */}
+      {/* Smart Study Recommendation Button */}
       <div className="fixed bottom-6 right-6 z-50">
         <Button
           onClick={() => {
@@ -932,7 +932,7 @@ const Dashboard = () => {
           
           {/* Main content */}
           <div className="relative flex items-center gap-3">
-            {/* Premium brain/AI icon with rotation animation */}
+            {/* Premium brain icon with rotation animation */}
             <div className="relative">
               <div className="w-6 h-6 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center animate-pulse">
                 <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
