@@ -4,18 +4,11 @@ import { BookOpen, CheckCircle, BarChart3, Users, ArrowRight, Star, Sparkles, Qu
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { motion, useInView } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 
 const Index = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  
-  // Redirect authenticated users to dashboard
-  useEffect(() => {
-    if (user) {
-      navigate('/dashboard');
-    }
-  }, [user, navigate]);
   
   // Animation refs
   const heroRef = useRef(null);
