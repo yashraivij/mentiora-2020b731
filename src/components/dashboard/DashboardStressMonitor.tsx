@@ -143,7 +143,7 @@ export const DashboardStressMonitor = ({
                 Stress Monitor
               </CardTitle>
               <p className={cn("text-sm opacity-90", colors.text)}>
-                AI-powered emotional wellness tracking
+                Smart emotional wellness tracking
               </p>
             </div>
           </div>
@@ -171,7 +171,7 @@ export const DashboardStressMonitor = ({
               <div className="flex items-center space-x-2">
                 <Sparkles className={cn("h-4 w-4", colors.icon)} />
                 <span className={cn("text-sm font-medium", colors.text)}>
-                  AI Analysis
+                  Smart Analysis
                 </span>
               </div>
             </div>
