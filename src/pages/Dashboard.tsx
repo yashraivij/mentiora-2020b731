@@ -93,6 +93,7 @@ const Dashboard = () => {
     };
 
     loadUserData();
+    
   }, [user?.id]);
 
   const loadWeakTopicsFromDatabase = async () => {
@@ -170,6 +171,7 @@ const Dashboard = () => {
           );
           return subject?.id;
         }).filter(Boolean) as string[];
+        
         
         setUserSubjects(subjectIds);
       }
@@ -677,7 +679,7 @@ const Dashboard = () => {
               onClick={() => setSubjectsTab('my-subjects')}
               className={subjectsTab === 'my-subjects' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90 flex-1' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors flex-1'}
             >
-              My Subjects ({userSubjects.filter(Boolean).length})
+              My Subjects ({userSubjects.filter(id => id && id.trim()).length})
             </Button>
             <Button
               variant={subjectsTab === 'all-subjects' ? 'default' : 'ghost'}
