@@ -1322,6 +1322,53 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
       return questions;
     }
     
+    // Special format for Combined Science papers
+    if (subjectId === 'combined-science-paper-1') {
+      // Paper 1 covers topics 4.1-4.4: Cell Biology, Organisation, Infection and Response, Bioenergetics
+      const paper1Topics = subject.topics.filter(topic => 
+        ['biology-cell-biology', 'biology-organisation', 'biology-infection-response', 'biology-bioenergetics'].includes(topic.id)
+      );
+      
+      let questionNumber = 1;
+      paper1Topics.forEach((topic, topicIndex) => {
+        const topicQuestions = topic.questions.slice(0, 3);
+        topicQuestions.forEach((q, qIndex) => {
+          questions.push({
+            id: `${topicIndex}-${qIndex}`,
+            questionNumber: questionNumber++,
+            text: q.question,
+            marks: q.marks || 2,
+            section: topicIndex < 2 ? 'A' : 'B'
+          });
+        });
+      });
+      
+      return questions.slice(0, 20);
+    }
+    
+    if (subjectId === 'combined-science-paper-2') {
+      // Paper 2 covers topics 4.5-4.7: Homeostasis and Response, Inheritance/Variation/Evolution, Ecology
+      const paper2Topics = subject.topics.filter(topic => 
+        ['biology-homeostasis-response', 'biology-inheritance-variation-evolution', 'biology-ecology'].includes(topic.id)
+      );
+      
+      let questionNumber = 1;
+      paper2Topics.forEach((topic, topicIndex) => {
+        const topicQuestions = topic.questions.slice(0, 3);
+        topicQuestions.forEach((q, qIndex) => {
+          questions.push({
+            id: `${topicIndex}-${qIndex}`,
+            questionNumber: questionNumber++,
+            text: q.question,
+            marks: q.marks || 2,
+            section: topicIndex < 2 ? 'A' : 'B'
+          });
+        });
+      });
+      
+      return questions.slice(0, 20);
+    }
+    
     // Standard exam format for other subjects
     let questionNumber = 1;
     subject.topics.forEach((topic, topicIndex) => {
@@ -1360,7 +1407,9 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
       german: 120, // 2h
       geography: 120, // 2h
       "computer-science": 120, // 2h
-      psychology: 135 // 2h 15min
+      psychology: 135, // 2h 15min
+      "combined-science-paper-1": 75, // 1h 15min
+      "combined-science-paper-2": 75 // 1h 15min
     };
     return durations[subjectId as keyof typeof durations] || 90;
   };
@@ -1374,6 +1423,12 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
     }
     if (subjectId === 'history') {
       return 56; // History Paper 1 out of 56 marks
+    }
+    if (subjectId === 'combined-science-paper-1') {
+      return 70; // Combined Science Paper 1 out of 70 marks
+    }
+    if (subjectId === 'combined-science-paper-2') {
+      return 70; // Combined Science Paper 2 out of 70 marks
     }
     if (subjectId === 'religious-studies') {
       return 96; // 96 marks total
@@ -1596,7 +1651,7 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
               <div className="flex items-center justify-center space-x-3 mb-4">
                 <Crown className="h-8 w-8 text-amber-500" />
                 <div>
-                  <CardTitle className="text-2xl font-bold">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : `${subject.name} Predicted Exam`}</CardTitle>
+                  <CardTitle className="text-2xl font-bold">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'combined-science-paper-1' ? 'Combined Science Paper 1' : subjectId === 'combined-science-paper-2' ? 'Combined Science Paper 2' : `${subject.name} Predicted Exam`}</CardTitle>
                   <CardDescription>{getBadgeText(subjectId || '')} • {getExamDuration()} minutes</CardDescription>
                 </div>
               </div>
@@ -1676,7 +1731,7 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
             <div className="flex items-center space-x-4">
               <Crown className="h-6 w-6 text-amber-500" />
               <div>
-                <h1 className="text-lg font-bold text-foreground">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : `${subject.name} Predicted Exam`}</h1>
+                <h1 className="text-lg font-bold text-foreground">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'combined-science-paper-1' ? 'Combined Science Paper 1' : subjectId === 'combined-science-paper-2' ? 'Combined Science Paper 2' : `${subject.name} Predicted Exam`}</h1>
                 <p className="text-sm text-muted-foreground">Question {currentQuestion + 1} of {examQuestions.length}</p>
               </div>
             </div>
