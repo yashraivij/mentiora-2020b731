@@ -258,7 +258,7 @@ export const usePersonalizedNotifications = () => {
     // Subject-specific fallbacks based on common first topics
     if (subjectId === 'maths' || subjectId === 'mathematics') return 'Number';
     if (subjectId === 'english' || subjectId === 'english-literature') return 'Reading';
-    if (subjectId === 'history') return 'Historical Knowledge';
+    if (subjectId === 'history') return 'America, 1840–1895';
     if (subjectId === 'computer-science' || subjectId === 'computing') return 'Computational thinking';
     if (subjectId === 'art') return 'Drawing and Painting';
     if (subjectId === 'music') return 'Performance';
