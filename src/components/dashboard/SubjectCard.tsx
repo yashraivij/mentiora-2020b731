@@ -131,9 +131,9 @@ export const SubjectCard = ({
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-4 flex-1">
             <div className={`w-4 h-4 rounded-full ${subject.color} shadow-lg ${!comingSoon && 'group-hover:scale-125'} transition-transform duration-300`}></div>
-            <div className="flex-1">
-              <div className="flex items-start justify-between mb-2 gap-3">
-                <CardTitle className={`text-xl font-bold leading-tight flex-1 ${
+            <div className="flex-1 min-w-0">
+              <div className="flex items-start justify-between mb-3 gap-4">
+                <CardTitle className={`text-xl font-bold leading-tight flex-1 min-w-0 ${
                   comingSoon 
                     ? 'text-muted-foreground' 
                     : 'text-foreground group-hover:text-muted-foreground'
@@ -141,27 +141,29 @@ export const SubjectCard = ({
                   {subject.name}
                 </CardTitle>
                 
-                {/* Add to My Subjects Button - Premium styling */}
+                {/* Add to My Subjects Button - Premium styling with better spacing */}
                 {showSelectionCheckbox && onToggleSelection && !comingSoon && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onToggleSelection();
-                    }}
-                    className={`shrink-0 h-8 px-3 text-xs font-semibold transition-all duration-300 rounded-lg border backdrop-blur-sm ${
-                      isSelected 
-                        ? 'bg-gradient-to-r from-emerald-500/10 to-emerald-600/10 border-emerald-300/50 text-emerald-700 dark:text-emerald-400 hover:from-emerald-500/20 hover:to-emerald-600/20 shadow-sm' 
-                        : 'bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20 text-primary hover:from-primary/10 hover:to-primary/20 hover:border-primary/30 shadow-sm hover:scale-105'
-                    }`}
-                  >
-                    {isSelected ? '✓ Added to My Subjects' : 'Add to My Subjects'}
-                  </Button>
+                  <div className="flex-shrink-0">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onToggleSelection();
+                      }}
+                      className={`h-7 px-3 text-xs font-semibold transition-all duration-300 rounded-lg border backdrop-blur-sm whitespace-nowrap ${
+                        isSelected 
+                          ? 'bg-gradient-to-r from-emerald-500/10 to-emerald-600/10 border-emerald-300/50 text-emerald-700 dark:text-emerald-400 hover:from-emerald-500/20 hover:to-emerald-600/20 shadow-sm' 
+                          : 'bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20 text-primary hover:from-primary/10 hover:to-primary/20 hover:border-primary/30 shadow-sm hover:scale-105'
+                      }`}
+                    >
+                      {isSelected ? '✓ Added to My Subjects' : 'Add to My Subjects'}
+                    </Button>
+                  </div>
                 )}
               </div>
               
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-3 mt-2">
                 <span className={`text-sm font-semibold ${comingSoon ? 'text-muted-foreground' : 'text-muted-foreground'}`}>
                   {comingSoon ? '--% accuracy' : `${averageScore}% accuracy`}
                 </span>
