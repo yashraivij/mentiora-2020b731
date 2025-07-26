@@ -134,12 +134,12 @@ const Index = () => {
       icon: Target
     },
     { 
-      number: "A* to 9", 
-      label: "Grade Guarantees", 
+      number: "£2,847", 
+      label: "Tuition Savings", 
       color: "text-orange-600", 
       bg: "bg-gradient-to-br from-orange-50 to-orange-100",
-      description: "Proven outcomes",
-      icon: Zap
+      description: "vs private tutoring",
+      icon: Trophy
     }
   ];
 
@@ -303,7 +303,7 @@ const Index = () => {
             className="text-6xl lg:text-7xl font-bold mb-8 leading-tight tracking-tight"
           >
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              GCSE grades that open doors
+              GCSE Grades That Open Doors
             </span>
           </motion.h2>
           
@@ -313,7 +313,7 @@ const Index = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl text-gray-600 mb-16 max-w-3xl mx-auto leading-relaxed"
           >
-            The AI-powered platform that guarantees grade improvements in record time
+            Transform your revision with <span className="text-purple-600 font-semibold">AI-powered insights</span> that guarantee <span className="text-emerald-600 font-semibold">grade 9 success</span>
           </motion.p>
           
           <motion.div
@@ -327,7 +327,7 @@ const Index = () => {
               onClick={() => navigate('/register')} 
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 rounded-2xl group"
             >
-              Get Your Free Grade 9 Blueprint
+              Start Free - No Credit Card Required
               <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
             </Button>
           </motion.div>
@@ -435,54 +435,6 @@ const Index = () => {
           </div>
         </motion.div>
 
-        {/* Impact Stats */}
-        <motion.div 
-          ref={impactRef}
-          className="mb-32 bg-gradient-to-r from-gray-50 to-blue-50 rounded-3xl p-16"
-        >
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={impactInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
-              The <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Real Impact</span> On Your Future
-            </h3>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              See how students transform their academic journey with measurable results
-            </p>
-          </motion.div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {impactStats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                animate={impactInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.9 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -10 }}
-                className="text-center group cursor-pointer"
-              >
-                <motion.div 
-                  className={`w-20 h-20 mx-auto mb-6 bg-gradient-to-r ${stat.bg} rounded-3xl flex items-center justify-center group-hover:shadow-2xl transition-all duration-500`}
-                  whileHover={{ rotate: 12 }}
-                >
-                  <stat.icon className={`h-10 w-10 ${stat.color}`} />
-                </motion.div>
-                <div className={`text-4xl lg:text-5xl font-bold ${stat.color} mb-3 tracking-tight`}>
-                  {stat.number}
-                </div>
-                <div className="text-gray-900 font-bold text-lg mb-2">
-                  {stat.label}
-                </div>
-                <div className="text-gray-600 text-sm">
-                  {stat.description}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* How It Works - Simplified */}
         <div className="mb-32">
