@@ -182,7 +182,7 @@ const Index = () => {
     {
       icon: Target,
       title: "What Should I Study?",
-      description: "Intelligent personalized study recommendations that tell you exactly what to focus on next",
+      description: "Personalized study recommendations that tell you exactly what to focus on next",
       badge: "Smart-Powered",
       color: "from-violet-600 to-purple-600",
       bgColor: "from-violet-50 to-purple-50",
@@ -209,7 +209,7 @@ const Index = () => {
     {
       icon: Clock,
       title: "Study Time Optimizer",
-      description: "Intelligent scheduling that maximizes your learning efficiency by analyzing your peak performance hours",
+      description: "Scheduling that maximizes your learning efficiency by analyzing your peak performance hours",
       badge: "Smart Planning",
       color: "from-amber-600 to-orange-600",
       bgColor: "from-amber-50 to-orange-50",
@@ -517,7 +517,7 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed"
             >
-              Join over 10,000 students who've improved their grades by an average of <span className="font-bold text-white">2.3 levels</span> with our smart platform.
+              Join thousands of students who've improved their grades by an average of <span className="font-bold text-white">2.3 levels</span> with our smart platform.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
