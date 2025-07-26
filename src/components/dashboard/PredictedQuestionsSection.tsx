@@ -45,7 +45,7 @@ export const PredictedQuestionsSection = () => {
                       Predicted 2026 Questions
                     </CardTitle>
                     <CardDescription className="text-white/90 text-lg">
-                      Premium AI-powered exam simulation
+                      Premium smart exam simulation
                     </CardDescription>
                   </div>
                 </div>

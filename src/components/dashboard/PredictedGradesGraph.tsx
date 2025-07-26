@@ -369,7 +369,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                   PREMIUM
                 </Badge>
               </CardTitle>
-              <p className="text-sm text-muted-foreground mt-1 font-medium">🚀 AI-powered predictions • Real-time updates</p>
+              <p className="text-sm text-muted-foreground mt-1 font-medium">🚀 Smart predictions • Real-time updates</p>
             </div>
           </div>
           <div className="flex items-center space-x-6">
@@ -546,7 +546,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                     ✨ Start Revising to Unlock Predictions
                   </h3>
                   <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                    Complete practice questions or take predicted papers to see your <span className="font-semibold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">AI-powered grade forecasts</span>
+                    Complete practice questions or take predicted papers to see your <span className="font-semibold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">smart grade forecasts</span>
                   </p>
                 </div>
                 
@@ -564,7 +564,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                     <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center mb-3 shadow-lg">
                       <Zap className="h-5 w-5 text-white" />
                     </div>
-                    <h4 className="font-bold text-emerald-800 dark:text-emerald-200 mb-1">AI Predictions</h4>
+                    <h4 className="font-bold text-emerald-800 dark:text-emerald-200 mb-1">Smart Predictions</h4>
                     <p className="text-xs text-emerald-600 dark:text-emerald-300">Smart grade forecasting</p>
                   </div>
                   
@@ -581,7 +581,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                 <div className="flex flex-col items-center space-y-4 mt-8">
                   <Badge className="bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 text-white border-0 px-6 py-2 text-sm font-bold shadow-xl shadow-purple-500/25 animate-pulse">
                     <Sparkles className="h-4 w-4 mr-2 animate-spin" />
-                    🚀 AI predictions available after first activity
+                    🚀 Smart predictions available after first activity
                   </Badge>
                   
                   <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">

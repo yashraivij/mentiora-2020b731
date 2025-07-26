@@ -203,10 +203,10 @@ export const OptimalLearningTimeCard = () => {
               <div className="p-4 rounded-xl bg-gradient-to-r from-white/80 to-white/60 dark:from-gray-800/80 dark:to-gray-800/60 backdrop-blur-sm border border-white/30 shadow-lg">
                 <p className="text-sm font-bold bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent mb-2 flex items-center justify-center gap-1">
                   <Sparkles className="h-4 w-4 text-amber-500" />
-                  🧠 AI Learning Pattern Discovery
+                  🧠 Learning Pattern Discovery
                 </p>
                 <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Complete more practice sessions to unlock your personalized peak learning hours with advanced AI analysis
+                  Complete more practice sessions to unlock your personalized peak learning hours with advanced analysis
                 </p>
               </div>
               
@@ -216,7 +216,7 @@ export const OptimalLearningTimeCard = () => {
                   <span className="text-sm font-medium text-amber-700 dark:text-amber-300">Premium Intelligence</span>
                 </div>
                 <p className="text-xs text-amber-600 dark:text-amber-400 leading-relaxed">
-                  Discover when your brain learns best with AI-powered time optimization
+                  Discover when your brain learns best with smart time optimization
                 </p>
               </div>
             </div>

@@ -157,7 +157,7 @@ export const OptimalStudyTimeCard = () => {
               </div>
               <div>
                 <CardTitle className="text-lg font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
-                  AI Study Optimizer
+                  Study Optimizer
                 </CardTitle>
                 <p className="text-xs text-muted-foreground">Premium Intelligence</p>
               </div>
@@ -200,7 +200,7 @@ export const OptimalStudyTimeCard = () => {
               </div>
               <div>
                 <CardTitle className="text-lg font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  AI Study Optimizer
+                  Study Optimizer
                 </CardTitle>
                 <p className="text-xs text-muted-foreground">Premium Intelligence</p>
               </div>
@@ -227,7 +227,7 @@ export const OptimalStudyTimeCard = () => {
             <div className="space-y-3">
               <div className="p-3 rounded-lg bg-gradient-to-r from-white/80 to-white/60 dark:from-gray-800/80 dark:to-gray-800/60 backdrop-blur-sm border border-white/20 shadow-lg">
                 <p className="text-sm font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-1">
-                  🧠 AI Learning Analysis in Progress
+                  🧠 Learning Analysis in Progress
                 </p>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Complete more practice sessions to unlock personalized study time recommendations
@@ -240,7 +240,7 @@ export const OptimalStudyTimeCard = () => {
                   <span className="text-sm font-medium text-violet-700 dark:text-violet-300">Smart Insights</span>
                 </div>
                 <p className="text-xs text-violet-600 dark:text-violet-400 leading-relaxed">
-                  Discover your peak learning hours with advanced AI pattern recognition
+                  Discover your peak learning hours with advanced pattern recognition
                 </p>
               </div>
             </div>
@@ -265,7 +265,7 @@ export const OptimalStudyTimeCard = () => {
             </div>
             <div>
               <CardTitle className="text-lg font-bold bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">
-                AI Study Optimizer
+                Study Optimizer
               </CardTitle>
               <p className="text-xs text-muted-foreground">Premium Intelligence</p>
             </div>
@@ -319,7 +319,7 @@ export const OptimalStudyTimeCard = () => {
           <div className="p-3 rounded-lg bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-950/20 dark:to-blue-950/20 border border-cyan-200/50 dark:border-cyan-800/30">
             <div className="flex items-center gap-2 mb-1">
               <Sparkles className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
-              <span className="text-sm font-medium text-cyan-700 dark:text-cyan-300">AI Recommendation</span>
+              <span className="text-sm font-medium text-cyan-700 dark:text-cyan-300">Smart Recommendation</span>
             </div>
             <p className="text-xs text-cyan-600 dark:text-cyan-400 leading-relaxed">
               Schedule your most challenging revision sessions during {analysis?.timeRange} to maximize learning efficiency and retention.
