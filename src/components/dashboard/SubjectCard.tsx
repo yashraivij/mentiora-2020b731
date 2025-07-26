@@ -110,7 +110,7 @@ export const SubjectCard = ({
 
       {/* Add/Remove Subject Button */}
       {showSelectionCheckbox && onToggleSelection && !comingSoon && (
-        <div className="absolute top-3 right-3 z-20">
+        <div className="absolute top-16 right-3 z-20">
           <Button
             variant={isSelected ? "default" : "secondary"}
             size="sm"
