@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { Checkbox } from "@/components/ui/checkbox";
 import { CheckCircle, AlertCircle, Circle, Pin, Calendar, ArrowRight, Sparkles } from "lucide-react";
 import { StressIndicator } from "./StressIndicator";
 import { StressTracker } from "@/lib/stressTracker";
@@ -26,6 +27,9 @@ interface SubjectCardProps {
   lastActivity?: Date | null;
   comingSoon?: boolean;
   userId?: string;
+  isSelected?: boolean;
+  onToggleSelection?: () => void;
+  showSelectionCheckbox?: boolean;
 }
 
 export const SubjectCard = ({ 
@@ -36,7 +40,10 @@ export const SubjectCard = ({
   isPinned = false, 
   lastActivity,
   comingSoon = false,
-  userId 
+  userId,
+  isSelected = false,
+  onToggleSelection,
+  showSelectionCheckbox = false
 }: SubjectCardProps) => {
   const subjectProgress = progress.filter(p => p.subjectId === subject.id);
   const averageScore = subjectProgress.length > 0 
@@ -102,12 +109,24 @@ export const SubjectCard = ({
         </div>
       )}
 
+      {/* Selection Checkbox */}
+      {showSelectionCheckbox && onToggleSelection && !comingSoon && (
+        <div className="absolute top-4 left-4 z-10">
+          <Checkbox
+            checked={isSelected}
+            onCheckedChange={onToggleSelection}
+            className="bg-background/80 border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+
       {/* Pin Button with Premium Styling */}
       {onTogglePin && !comingSoon && (
         <Button
           variant="ghost"
           size="sm"
-          className={`absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl backdrop-blur-sm dark:hidden ${
+          className={`absolute top-4 ${showSelectionCheckbox ? 'right-4' : 'right-4'} z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl backdrop-blur-sm dark:hidden ${
             isPinned 
               ? 'opacity-100 text-amber-500 bg-amber-50/80 hover:bg-amber-100/80' 
               : 'text-muted-foreground bg-background/50 hover:bg-background/80'
