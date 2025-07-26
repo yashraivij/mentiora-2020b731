@@ -45,6 +45,7 @@ const Dashboard = () => {
   const [isNotifyClicked, setIsNotifyClicked] = useState(false);
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
   const [userSubjects, setUserSubjects] = useState<string[]>([]);
+  const [subjectsTab, setSubjectsTab] = useState<'my-subjects' | 'all-subjects'>('my-subjects');
 
   const {
     notification,
@@ -635,7 +636,7 @@ const Dashboard = () => {
             <div className="flex items-center space-x-4">
               <h3 className="text-2xl font-bold text-foreground">Your Subjects</h3>
               <Badge variant="outline" className="text-muted-foreground border-border bg-card/50">
-                {userSubjects.length > 0 ? userSubjects.length : 'All'} subjects
+                {subjectsTab === 'my-subjects' ? userSubjects.length : allSubjects.length} subjects
               </Badge>
             </div>
             <div className="flex items-center space-x-3">
@@ -668,6 +669,26 @@ const Dashboard = () => {
             </div>
           </div>
 
+          {/* Subject Tabs */}
+          <div className="flex space-x-1 bg-muted/50 rounded-xl p-1 mb-6 max-w-md">
+            <Button
+              variant={subjectsTab === 'my-subjects' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setSubjectsTab('my-subjects')}
+              className={subjectsTab === 'my-subjects' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90 flex-1' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors flex-1'}
+            >
+              My Subjects ({userSubjects.length})
+            </Button>
+            <Button
+              variant={subjectsTab === 'all-subjects' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setSubjectsTab('all-subjects')}
+              className={subjectsTab === 'all-subjects' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90 flex-1' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors flex-1'}
+            >
+              All Subjects ({allSubjects.length})
+            </Button>
+          </div>
+
           {/* Exam Board Tabs */}
           <Tabs value={selectedExamBoard} onValueChange={setSelectedExamBoard} className="mb-6">
             <TabsList className="grid w-full grid-cols-5 max-w-md">
@@ -679,56 +700,91 @@ const Dashboard = () => {
             </TabsList>
 
             <TabsContent value="aqa" className="mt-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {(userSubjects.length > 0 ? sortedSubjects : allSubjects)
-                  .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language')
-                  .map((subject) => (
-                  <SubjectCard
-                    key={subject.id}
-                    subject={{
-                      ...subject,
-                      color: getSubjectColor(subject.id)
-                    }}
-                    progress={userProgress}
-                    onStartPractice={handlePractice}
-                    onTogglePin={togglePinSubject}
-                    isPinned={pinnedSubjects.includes(subject.id)}
-                    lastActivity={getLastActivity(subject.id)}
-                    userId={user?.id}
-                    onToggleUserSubject={toggleUserSubject}
-                    isUserSubject={userSubjects.includes(subject.id)}
-                    showAddButton={true}
-                  />
-                ))}
-              </div>
+              {subjectsTab === 'my-subjects' && userSubjects.length === 0 ? (
+                <div className="text-center py-12">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted/50 flex items-center justify-center">
+                    <BookOpen className="h-8 w-8 text-muted-foreground" />
+                  </div>
+                  <h4 className="text-lg font-semibold text-foreground mb-2">No subjects selected yet</h4>
+                  <p className="text-muted-foreground mb-4">Add subjects to your list to get started with personalized learning</p>
+                  <Button 
+                    onClick={() => setSubjectsTab('all-subjects')}
+                    className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"
+                  >
+                    Browse All Subjects
+                  </Button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {(subjectsTab === 'my-subjects' ? 
+                    (userSubjects.length > 0 ? sortedSubjects.filter(s => userSubjects.includes(s.id)) : []) 
+                    : allSubjects)
+                    .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language')
+                    .map((subject) => (
+                    <SubjectCard
+                      key={subject.id}
+                      subject={{
+                        ...subject,
+                        color: getSubjectColor(subject.id)
+                      }}
+                      progress={userProgress}
+                      onStartPractice={handlePractice}
+                      onTogglePin={togglePinSubject}
+                      isPinned={pinnedSubjects.includes(subject.id)}
+                      lastActivity={getLastActivity(subject.id)}
+                      userId={user?.id}
+                      onToggleUserSubject={toggleUserSubject}
+                      isUserSubject={userSubjects.includes(subject.id)}
+                      showAddButton={subjectsTab === 'all-subjects'}
+                    />
+                  ))}
+                </div>
+              )}
             </TabsContent>
 
             {['edexcel', 'ccea', 'ocr', 'wjec'].map((examBoard) => (
               <TabsContent key={examBoard} value={examBoard} className="mt-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {(userSubjects.length > 0 ? sortedSubjects : allSubjects)
-                    .filter((subject) => {
-                      // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, and physics-edexcel only in edexcel tab
-                      if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') {
-                        return examBoard === 'edexcel';
-                       }
-                       // Hide edexcel subjects from other tabs, show other subjects as coming soon
-                       return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel';
-                    })
-                      .sort((a, b) => {
-                         // In edexcel tab, put maths-edexcel first, then business-edexcel-igcse, then chemistry-edexcel, then physics-edexcel
-                         if (examBoard === 'edexcel') {
-                           if (a.id === 'maths-edexcel') return -1;
-                           if (b.id === 'maths-edexcel') return 1;
-                           if (a.id === 'business-edexcel-igcse') return -1;
-                           if (b.id === 'business-edexcel-igcse') return 1;
-                           if (a.id === 'chemistry-edexcel') return -1;
-                           if (b.id === 'chemistry-edexcel') return 1;
-                           if (a.id === 'physics-edexcel') return -1;
-                           if (b.id === 'physics-edexcel') return 1;
-                         }
-                        return 0;
-                      })
+                {subjectsTab === 'my-subjects' && userSubjects.length === 0 ? (
+                  <div className="text-center py-12">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted/50 flex items-center justify-center">
+                      <BookOpen className="h-8 w-8 text-muted-foreground" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-foreground mb-2">No subjects selected yet</h4>
+                    <p className="text-muted-foreground mb-4">Add subjects to your list to get started with personalized learning</p>
+                    <Button 
+                      onClick={() => setSubjectsTab('all-subjects')}
+                      className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"
+                    >
+                      Browse All Subjects
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    {(subjectsTab === 'my-subjects' ? 
+                      (userSubjects.length > 0 ? sortedSubjects.filter(s => userSubjects.includes(s.id)) : []) 
+                      : allSubjects)
+                       .filter((subject) => {
+                         // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, and physics-edexcel only in edexcel tab
+                         if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') {
+                           return examBoard === 'edexcel';
+                          }
+                          // Hide edexcel subjects from other tabs, show other subjects as coming soon
+                          return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel';
+                       })
+                         .sort((a, b) => {
+                            // In edexcel tab, put maths-edexcel first, then business-edexcel-igcse, then chemistry-edexcel, then physics-edexcel
+                            if (examBoard === 'edexcel') {
+                              if (a.id === 'maths-edexcel') return -1;
+                              if (b.id === 'maths-edexcel') return 1;
+                              if (a.id === 'business-edexcel-igcse') return -1;
+                              if (b.id === 'business-edexcel-igcse') return 1;
+                              if (a.id === 'chemistry-edexcel') return -1;
+                              if (b.id === 'chemistry-edexcel') return 1;
+                              if (a.id === 'physics-edexcel') return -1;
+                              if (b.id === 'physics-edexcel') return 1;
+                            }
+                           return 0;
+                         })
                      .map((subject) => {
                        // Modify subject name for Edexcel subjects to remove brackets
                        let modifiedSubject = { ...subject };
@@ -760,11 +816,12 @@ const Dashboard = () => {
                            userId={user?.id}
                            onToggleUserSubject={toggleUserSubject}
                            isUserSubject={userSubjects.includes(subject.id)}
-                           showAddButton={true}
+                           showAddButton={subjectsTab === 'all-subjects'}
                      />
                         );
-                      })}
-                </div>
+                       })}
+                  </div>
+                )}
               </TabsContent>
             ))}
           </Tabs>
