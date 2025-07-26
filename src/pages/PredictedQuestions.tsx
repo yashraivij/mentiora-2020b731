@@ -76,9 +76,7 @@ const PredictedQuestions = () => {
       history: "from-amber-500 to-orange-600",
       geography: "from-teal-500 to-cyan-600",
       "computer-science": "from-slate-500 to-gray-600",
-      psychology: "from-violet-500 to-purple-600",
-      "combined-science-paper-1": "from-emerald-500 to-green-600",
-      "combined-science-paper-2": "from-emerald-500 to-green-600"
+      psychology: "from-violet-500 to-purple-600"
     };
     return colors[subjectId as keyof typeof colors] || "from-gray-500 to-slate-600";
   };
@@ -95,9 +93,7 @@ const PredictedQuestions = () => {
       history: "1h 15min",
       geography: "1h 30min",
       "computer-science": "1h 30min",
-      psychology: "1h 45min",
-      "combined-science-paper-1": "1h 15min",
-      "combined-science-paper-2": "1h 15min"
+      psychology: "1h 45min"
     };
     return durations[subjectId as keyof typeof durations] || "1h 30min";
   };
