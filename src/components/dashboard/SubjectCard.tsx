@@ -26,9 +26,6 @@ interface SubjectCardProps {
   lastActivity?: Date | null;
   comingSoon?: boolean;
   userId?: string;
-  isSelected?: boolean;
-  onToggleSelection?: () => void;
-  showSelectionCheckbox?: boolean;
 }
 
 export const SubjectCard = ({ 
@@ -39,10 +36,7 @@ export const SubjectCard = ({
   isPinned = false, 
   lastActivity,
   comingSoon = false,
-  userId,
-  isSelected = false,
-  onToggleSelection,
-  showSelectionCheckbox = false
+  userId 
 }: SubjectCardProps) => {
   const subjectProgress = progress.filter(p => p.subjectId === subject.id);
   const averageScore = subjectProgress.length > 0 
@@ -109,13 +103,13 @@ export const SubjectCard = ({
       )}
 
       {/* Pin Button with Premium Styling */}
-      {onTogglePin && !comingSoon && !showSelectionCheckbox && (
+      {onTogglePin && !comingSoon && (
         <Button
           variant="ghost"
           size="sm"
           className={`absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl backdrop-blur-sm dark:hidden ${
             isPinned 
-              ? 'opacity-100 text-amber-500 bg-amber-50/80 hover:bg-amber-100/80'
+              ? 'opacity-100 text-amber-500 bg-amber-50/80 hover:bg-amber-100/80' 
               : 'text-muted-foreground bg-background/50 hover:bg-background/80'
           }`}
           onClick={(e) => {
@@ -129,40 +123,16 @@ export const SubjectCard = ({
 
       <CardHeader className="pb-4 relative z-10">
         <div className="flex items-start justify-between">
-          <div className="flex items-center space-x-4 flex-1">
+          <div className="flex items-center space-x-4">
             <div className={`w-4 h-4 rounded-full ${subject.color} shadow-lg ${!comingSoon && 'group-hover:scale-125'} transition-transform duration-300`}></div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-start justify-between mb-3 gap-4">
-                <CardTitle className={`text-xl font-bold leading-tight flex-1 min-w-0 ${
-                  comingSoon 
-                    ? 'text-muted-foreground' 
-                    : 'text-foreground group-hover:text-muted-foreground'
-                } transition-colors`}>
-                  {subject.name}
-                </CardTitle>
-                
-                {/* Add to My Subjects Button - Premium styling with better spacing */}
-                {showSelectionCheckbox && onToggleSelection && !comingSoon && (
-                  <div className="flex-shrink-0">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onToggleSelection();
-                      }}
-                      className={`h-7 px-3 text-xs font-semibold transition-all duration-300 rounded-lg border backdrop-blur-sm whitespace-nowrap ${
-                        isSelected 
-                          ? 'bg-gradient-to-r from-emerald-500/10 to-emerald-600/10 border-emerald-300/50 text-emerald-700 dark:text-emerald-400 hover:from-emerald-500/20 hover:to-emerald-600/20 shadow-sm' 
-                          : 'bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20 text-primary hover:from-primary/10 hover:to-primary/20 hover:border-primary/30 shadow-sm hover:scale-105'
-                      }`}
-                    >
-                      {isSelected ? '✓ Added to My Subjects' : 'Add to My Subjects'}
-                    </Button>
-                  </div>
-                )}
-              </div>
-              
+            <div>
+              <CardTitle className={`text-xl font-bold leading-tight ${
+                comingSoon 
+                  ? 'text-muted-foreground' 
+                  : 'text-foreground group-hover:text-muted-foreground'
+              } transition-colors`}>
+                {subject.name}
+              </CardTitle>
               <div className="flex items-center space-x-3 mt-2">
                 <span className={`text-sm font-semibold ${comingSoon ? 'text-muted-foreground' : 'text-muted-foreground'}`}>
                   {comingSoon ? '--% accuracy' : `${averageScore}% accuracy`}
@@ -289,23 +259,22 @@ export const SubjectCard = ({
               {subject.topics.length} topics available
             </span>
           </div>
-          
           {comingSoon ? (
-              <Badge variant="secondary" className="px-4 py-2 bg-muted/50 text-muted-foreground border border-muted">
-                Coming Soon
-              </Badge>
-            ) : (
-              <Button 
-                className="bg-gradient-to-r from-emerald-400 to-cyan-500 hover:from-emerald-500 hover:to-cyan-600 text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onStartPractice(subject.id);
-                }}
-              >
-                Start Practice
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Button>
-            )}
+            <Badge variant="secondary" className="px-4 py-2 bg-muted/50 text-muted-foreground border border-muted">
+              Coming Soon
+            </Badge>
+          ) : (
+            <Button 
+              className="bg-gradient-to-r from-emerald-400 to-cyan-500 hover:from-emerald-500 hover:to-cyan-600 text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              onClick={(e) => {
+                e.stopPropagation();
+                onStartPractice(subject.id);
+              }}
+            >
+              Start Practice
+              <ArrowRight className="h-4 w-4 ml-2" />
+            </Button>
+          )}
         </div>
       </CardContent>
 

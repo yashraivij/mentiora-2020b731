@@ -44,8 +44,6 @@ const Dashboard = () => {
   const [sortBy, setSortBy] = useState<'alphabetical' | 'weakest' | 'progress'>('progress');
   const [isNotifyClicked, setIsNotifyClicked] = useState(false);
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
-  const [userSubjects, setUserSubjects] = useState<string[]>([]);
-  const [subjectView, setSubjectView] = useState<'all' | 'yours'>('all');
 
   const {
     notification,
@@ -83,9 +81,6 @@ const Dashboard = () => {
       if (savedPinnedSubjects) {
         setPinnedSubjects(JSON.parse(savedPinnedSubjects));
       }
-
-      // Load user subjects from database
-      await loadUserSubjects();
 
       // Check for recommendations on dashboard load
       console.log('Dashboard loading, checking for weak topic recommendations...');
@@ -140,80 +135,6 @@ const Dashboard = () => {
       }
     } catch (error) {
       console.error('Error saving weak topics:', error);
-    }
-  };
-
-  const loadUserSubjects = async () => {
-    if (!user?.id) return;
-
-    try {
-      const { data, error } = await supabase
-        .from('user_subjects')
-        .select('subject_name')
-        .eq('user_id', user.id);
-
-      if (error) {
-        console.error('Error loading user subjects:', error);
-        return;
-      }
-
-      const subjectNames = data?.map(item => item.subject_name) || [];
-      setUserSubjects(subjectNames);
-    } catch (error) {
-      console.error('Error loading user subjects:', error);
-    }
-  };
-
-  const addSubjectToUser = async (subjectName: string) => {
-    if (!user?.id) return;
-
-    try {
-      const { error } = await supabase
-        .from('user_subjects')
-        .insert({
-          user_id: user.id,
-          subject_name: subjectName,
-          exam_board: selectedExamBoard,
-          predicted_grade: 'C'
-        });
-
-      if (error) {
-        console.error('Error adding subject:', error);
-        return;
-      }
-
-      setUserSubjects(prev => [...prev, subjectName]);
-    } catch (error) {
-      console.error('Error adding subject:', error);
-    }
-  };
-
-  const removeSubjectFromUser = async (subjectName: string) => {
-    if (!user?.id) return;
-
-    try {
-      const { error } = await supabase
-        .from('user_subjects')
-        .delete()
-        .eq('user_id', user.id)
-        .eq('subject_name', subjectName);
-
-      if (error) {
-        console.error('Error removing subject:', error);
-        return;
-      }
-
-      setUserSubjects(prev => prev.filter(name => name !== subjectName));
-    } catch (error) {
-      console.error('Error removing subject:', error);
-    }
-  };
-
-  const toggleSubjectSelection = async (subjectName: string) => {
-    if (userSubjects.includes(subjectName)) {
-      await removeSubjectFromUser(subjectName);
-    } else {
-      await addSubjectToUser(subjectName);
     }
   };
 
@@ -276,13 +197,7 @@ const Dashboard = () => {
     return colors[index];
   };
 
-  const allSubjects = [...curriculum].filter(subject => subject.id !== 'geography-paper-2');
-  
-  const filteredSubjects = subjectView === 'yours' 
-    ? allSubjects.filter(subject => userSubjects.includes(subject.name))
-    : allSubjects;
-  
-  const sortedSubjects = filteredSubjects.sort((a, b) => {
+  const sortedSubjects = [...curriculum].filter(subject => subject.id !== 'geography-paper-2').sort((a, b) => {
     const isPinnedA = pinnedSubjects.includes(a.id);
     const isPinnedB = pinnedSubjects.includes(b.id);
     
@@ -615,27 +530,9 @@ const Dashboard = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-4">
-              <h3 className="text-2xl font-bold text-foreground">Subjects</h3>
-              <div className="flex items-center space-x-2 bg-background/80 dark:bg-card/80 backdrop-blur-sm rounded-2xl p-1 border border-border shadow-sm">
-                <Button
-                  variant={subjectView === 'all' ? 'default' : 'ghost'}
-                  size="sm"
-                  onClick={() => setSubjectView('all')}
-                  className={subjectView === 'all' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors'}
-                >
-                  All Subjects
-                </Button>
-                <Button
-                  variant={subjectView === 'yours' ? 'default' : 'ghost'}
-                  size="sm"
-                  onClick={() => setSubjectView('yours')}
-                  className={subjectView === 'yours' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors'}
-                >
-                  Your Subjects
-                </Button>
-              </div>
+              <h3 className="text-2xl font-bold text-foreground">Your Subjects</h3>
               <Badge variant="outline" className="text-muted-foreground border-border bg-card/50">
-                {subjectView === 'yours' ? userSubjects.length : allSubjects.length} subjects
+                {curriculum.filter(subject => subject.id !== 'geography-paper-2').length} subjects
               </Badge>
             </div>
             <div className="flex items-center space-x-3">
@@ -679,18 +576,8 @@ const Dashboard = () => {
             </TabsList>
 
             <TabsContent value="aqa" className="mt-6">
-              {subjectView === 'yours' && userSubjects.length === 0 ? (
-                <div className="text-center py-12">
-                  <BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-foreground mb-2">No subjects selected</h3>
-                  <p className="text-muted-foreground mb-4">Switch to "All Subjects" to select the subjects you want to study.</p>
-                  <Button onClick={() => setSubjectView('all')} variant="outline">
-                    Browse All Subjects
-                  </Button>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {sortedSubjects.filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language').map((subject) => (
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {sortedSubjects.filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language').map((subject) => (
                   <SubjectCard
                     key={subject.id}
                     subject={{
@@ -703,28 +590,14 @@ const Dashboard = () => {
                     isPinned={pinnedSubjects.includes(subject.id)}
                     lastActivity={getLastActivity(subject.id)}
                     userId={user?.id}
-                    isSelected={userSubjects.includes(subject.name)}
-                    onToggleSelection={() => toggleSubjectSelection(subject.name)}
-                    showSelectionCheckbox={subjectView === 'all'}
                   />
-                  ))}
-                </div>
-              )}
+                ))}
+              </div>
             </TabsContent>
 
             {['edexcel', 'ccea', 'ocr', 'wjec'].map((examBoard) => (
               <TabsContent key={examBoard} value={examBoard} className="mt-6">
-                {subjectView === 'yours' && userSubjects.length === 0 ? (
-                  <div className="text-center py-12">
-                    <BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold text-foreground mb-2">No subjects selected</h3>
-                    <p className="text-muted-foreground mb-4">Switch to "All Subjects" to select the subjects you want to study.</p>
-                    <Button onClick={() => setSubjectView('all')} variant="outline">
-                      Browse All Subjects
-                    </Button>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {sortedSubjects
                     .filter((subject) => {
                       // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, and physics-edexcel only in edexcel tab
@@ -776,15 +649,11 @@ const Dashboard = () => {
                           isPinned={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? pinnedSubjects.includes(subject.id) : false}
                           lastActivity={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? getLastActivity(subject.id) : null}
                           comingSoon={!((subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel')}
-                          userId={user?.id}
-                          isSelected={userSubjects.includes(modifiedSubject.name)}
-                          onToggleSelection={() => toggleSubjectSelection(modifiedSubject.name)}
-                          showSelectionCheckbox={subjectView === 'all'}
-                        />
-                         );
-                       })}
-                  </div>
-                )}
+                       userId={user?.id}
+                     />
+                        );
+                      })}
+                </div>
               </TabsContent>
             ))}
           </Tabs>
