@@ -606,7 +606,7 @@ const Dashboard = () => {
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center shadow-lg">
                     <BookOpen className="h-4 w-4 text-white" />
                   </div>
-                  <span className="font-medium text-gray-800 dark:text-gray-200">Intelligently organized by topic</span>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">Smartly organized by topic</span>
                 </div>
                 <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
