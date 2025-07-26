@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Checkbox } from "@/components/ui/checkbox";
 import { CheckCircle, AlertCircle, Circle, Pin, Calendar, ArrowRight, Sparkles } from "lucide-react";
 import { StressIndicator } from "./StressIndicator";
 import { StressTracker } from "@/lib/stressTracker";
@@ -109,15 +108,24 @@ export const SubjectCard = ({
         </div>
       )}
 
-      {/* Selection Checkbox */}
+      {/* Add/Remove Subject Button */}
       {showSelectionCheckbox && onToggleSelection && !comingSoon && (
         <div className="absolute top-4 left-4 z-10">
-          <Checkbox
-            checked={isSelected}
-            onCheckedChange={onToggleSelection}
-            className="bg-background/80 border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary"
-            onClick={(e) => e.stopPropagation()}
-          />
+          <Button
+            variant={isSelected ? "default" : "outline"}
+            size="sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleSelection();
+            }}
+            className={`opacity-0 group-hover:opacity-100 transition-all duration-300 text-xs font-medium ${
+              isSelected 
+                ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-md' 
+                : 'bg-background/80 border-border hover:bg-accent hover:text-accent-foreground'
+            }`}
+          >
+            {isSelected ? '✓ Added' : '+ Add'}
+          </Button>
         </div>
       )}
 
