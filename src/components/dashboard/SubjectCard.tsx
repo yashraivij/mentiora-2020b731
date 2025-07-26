@@ -110,7 +110,7 @@ export const SubjectCard = ({
 
       {/* Add/Remove Subject Button */}
       {showSelectionCheckbox && onToggleSelection && !comingSoon && (
-        <div className="absolute top-4 right-4 z-10">
+        <div className="absolute top-3 right-3 z-20">
           <Button
             variant={isSelected ? "default" : "secondary"}
             size="sm"
@@ -118,10 +118,10 @@ export const SubjectCard = ({
               e.stopPropagation();
               onToggleSelection();
             }}
-            className={`text-xs font-medium shadow-md transition-all duration-300 ${
+            className={`text-xs font-medium shadow-lg transition-all duration-300 backdrop-blur-sm ${
               isSelected 
                 ? 'bg-emerald-600 hover:bg-emerald-700 text-white border-0' 
-                : 'bg-background hover:bg-accent text-foreground border border-border'
+                : 'bg-white/90 hover:bg-white text-foreground border border-border dark:bg-gray-800/90 dark:hover:bg-gray-800'
             }`}
           >
             {isSelected ? '✓ In My Subjects' : 'Add to My Subjects'}
