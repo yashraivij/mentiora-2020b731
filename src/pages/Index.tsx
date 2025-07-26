@@ -181,7 +181,7 @@ const Index = () => {
   const premiumFeatures = [
     {
       icon: Target,
-      title: "What Should I Study",
+      title: "What Should I Study?",
       description: "AI-powered personalized study recommendations that tell you exactly what to focus on next",
       badge: "AI-Powered",
       color: "from-violet-600 to-purple-600",
@@ -313,7 +313,7 @@ const Index = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl text-gray-600 mb-16 max-w-3xl mx-auto leading-relaxed"
           >
-            Every question you answer powers a personalised plan to get you closer to top grades.
+            Every <span className="text-blue-600 font-semibold">question you answer</span> powers a <span className="text-purple-600 font-semibold">personalised plan</span> to get you closer to <span className="text-emerald-600 font-semibold">top grades</span>.
           </motion.p>
           
           <motion.div
@@ -387,10 +387,10 @@ const Index = () => {
               Premium AI Features
             </motion.div>
             <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
-              Everything You Need to <span className="bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">Dominate Your GCSEs</span>
+              Everything You Need to <span className="bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">Ace Your GCSEs</span>
             </h3>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Advanced AI technology that adapts to your learning style and accelerates your progress
+              Advanced AI technology that adapts to your learning style and accelerates your progress.
             </p>
           </motion.div>
           
