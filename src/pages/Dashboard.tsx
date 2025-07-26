@@ -677,7 +677,7 @@ const Dashboard = () => {
               onClick={() => setSubjectsTab('my-subjects')}
               className={subjectsTab === 'my-subjects' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90 flex-1' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors flex-1'}
             >
-              My Subjects ({userSubjects.length})
+              My Subjects ({userSubjects.filter(Boolean).length})
             </Button>
             <Button
               variant={subjectsTab === 'all-subjects' ? 'default' : 'ghost'}
