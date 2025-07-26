@@ -313,7 +313,7 @@ const Index = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl text-gray-600 mb-16 max-w-3xl mx-auto leading-relaxed"
           >
-            Transform your revision with <span className="text-purple-600 font-semibold">AI-powered insights</span> that guarantee <span className="text-emerald-600 font-semibold">grade 9 success</span>
+            Every question you answer powers a personalised plan to get you closer to top grades.
           </motion.p>
           
           <motion.div
@@ -327,7 +327,7 @@ const Index = () => {
               onClick={() => navigate('/register')} 
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 rounded-2xl group"
             >
-              Start Free - No Credit Card Required
+              Get Started Free
               <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
             </Button>
           </motion.div>
