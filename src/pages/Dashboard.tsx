@@ -44,6 +44,7 @@ const Dashboard = () => {
   const [sortBy, setSortBy] = useState<'alphabetical' | 'weakest' | 'progress'>('progress');
   const [isNotifyClicked, setIsNotifyClicked] = useState(false);
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
+  const [userSubjects, setUserSubjects] = useState<string[]>([]);
 
   const {
     notification,
@@ -81,6 +82,9 @@ const Dashboard = () => {
       if (savedPinnedSubjects) {
         setPinnedSubjects(JSON.parse(savedPinnedSubjects));
       }
+
+      // Load user's selected subjects from database
+      await loadUserSubjects();
 
       // Check for recommendations on dashboard load
       console.log('Dashboard loading, checking for weak topic recommendations...');
@@ -136,6 +140,98 @@ const Dashboard = () => {
     } catch (error) {
       console.error('Error saving weak topics:', error);
     }
+  };
+
+  const loadUserSubjects = async () => {
+    if (!user?.id) return;
+
+    try {
+      const { data, error } = await supabase
+        .from('user_subjects')
+        .select('subject_name, exam_board')
+        .eq('user_id', user.id);
+
+      if (error) {
+        console.error('Error loading user subjects:', error);
+        return;
+      }
+
+      if (data) {
+        // Convert database records to subject IDs based on curriculum
+        const subjectIds = data.map(record => {
+          // Find matching subject in curriculum
+          const subject = curriculum.find(s => 
+            s.name.toLowerCase() === record.subject_name.toLowerCase() ||
+            (record.subject_name === 'Mathematics' && s.name === 'Maths (Edexcel)') ||
+            (record.subject_name === 'IGCSE Business' && s.name === 'Business (Edexcel IGCSE)') ||
+            (record.subject_name === 'Chemistry' && record.exam_board.toLowerCase() === 'edexcel' && s.name === 'Chemistry (Edexcel)') ||
+            (record.subject_name === 'Physics' && record.exam_board.toLowerCase() === 'edexcel' && s.name === 'Physics (Edexcel)')
+          );
+          return subject?.id;
+        }).filter(Boolean) as string[];
+        
+        setUserSubjects(subjectIds);
+      }
+    } catch (error) {
+      console.error('Error loading user subjects:', error);
+    }
+  };
+
+  const toggleUserSubject = async (subjectId: string) => {
+    if (!user?.id) return;
+
+    const subject = curriculum.find(s => s.id === subjectId);
+    if (!subject) return;
+
+    const isCurrentlySelected = userSubjects.includes(subjectId);
+
+    try {
+      if (isCurrentlySelected) {
+        // Remove from database
+        const { error } = await supabase
+          .from('user_subjects')
+          .delete()
+          .eq('user_id', user.id)
+          .eq('subject_name', getSubjectName(subject))
+          .eq('exam_board', getExamBoard(subjectId));
+
+        if (!error) {
+          setUserSubjects(prev => prev.filter(id => id !== subjectId));
+        }
+      } else {
+        // Add to database
+        const { error } = await supabase
+          .from('user_subjects')
+          .insert({
+            user_id: user.id,
+            subject_name: getSubjectName(subject),
+            exam_board: getExamBoard(subjectId),
+            predicted_grade: 'U',
+            target_grade: null,
+            priority_level: 3
+          });
+
+        if (!error) {
+          setUserSubjects(prev => [...prev, subjectId]);
+        }
+      }
+    } catch (error) {
+      console.error('Error toggling user subject:', error);
+    }
+  };
+
+  const getSubjectName = (subject: any) => {
+    // Convert curriculum names to database names
+    if (subject.name === 'Maths (Edexcel)') return 'Mathematics';
+    if (subject.name === 'Business (Edexcel IGCSE)') return 'IGCSE Business';
+    if (subject.name === 'Chemistry (Edexcel)') return 'Chemistry';
+    if (subject.name === 'Physics (Edexcel)') return 'Physics';
+    return subject.name;
+  };
+
+  const getExamBoard = (subjectId: string) => {
+    if (subjectId.includes('edexcel')) return 'Edexcel';
+    return 'AQA'; // Default to AQA for most subjects
   };
 
   // Update weak topics whenever progress changes
@@ -197,7 +293,14 @@ const Dashboard = () => {
     return colors[index];
   };
 
-  const sortedSubjects = [...curriculum].filter(subject => subject.id !== 'geography-paper-2').sort((a, b) => {
+  const allSubjects = [...curriculum].filter(subject => subject.id !== 'geography-paper-2');
+  
+  // Filter to show only selected subjects, or all if none selected
+  const filteredSubjects = userSubjects.length > 0 
+    ? allSubjects.filter(subject => userSubjects.includes(subject.id))
+    : allSubjects;
+
+  const sortedSubjects = filteredSubjects.sort((a, b) => {
     const isPinnedA = pinnedSubjects.includes(a.id);
     const isPinnedB = pinnedSubjects.includes(b.id);
     
@@ -532,7 +635,7 @@ const Dashboard = () => {
             <div className="flex items-center space-x-4">
               <h3 className="text-2xl font-bold text-foreground">Your Subjects</h3>
               <Badge variant="outline" className="text-muted-foreground border-border bg-card/50">
-                {curriculum.filter(subject => subject.id !== 'geography-paper-2').length} subjects
+                {userSubjects.length > 0 ? userSubjects.length : 'All'} subjects
               </Badge>
             </div>
             <div className="flex items-center space-x-3">
@@ -577,7 +680,9 @@ const Dashboard = () => {
 
             <TabsContent value="aqa" className="mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {sortedSubjects.filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language').map((subject) => (
+                {(userSubjects.length > 0 ? sortedSubjects : allSubjects)
+                  .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language')
+                  .map((subject) => (
                   <SubjectCard
                     key={subject.id}
                     subject={{
@@ -590,6 +695,9 @@ const Dashboard = () => {
                     isPinned={pinnedSubjects.includes(subject.id)}
                     lastActivity={getLastActivity(subject.id)}
                     userId={user?.id}
+                    onToggleUserSubject={toggleUserSubject}
+                    isUserSubject={userSubjects.includes(subject.id)}
+                    showAddButton={userSubjects.length === 0 || !userSubjects.includes(subject.id)}
                   />
                 ))}
               </div>
@@ -598,7 +706,7 @@ const Dashboard = () => {
             {['edexcel', 'ccea', 'ocr', 'wjec'].map((examBoard) => (
               <TabsContent key={examBoard} value={examBoard} className="mt-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {sortedSubjects
+                  {(userSubjects.length > 0 ? sortedSubjects : allSubjects)
                     .filter((subject) => {
                       // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, and physics-edexcel only in edexcel tab
                       if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') {
@@ -636,20 +744,23 @@ const Dashboard = () => {
                           }
                          }
                        
-                        return (
-                        <SubjectCard
-                          key={subject.id}
-                          subject={{
-                            ...modifiedSubject,
-                            color: getSubjectColor(subject.id)
-                          }}
-                          progress={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? userProgress : []}
-                          onStartPractice={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? handlePractice : () => {}}
-                          onTogglePin={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? togglePinSubject : () => {}}
-                          isPinned={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? pinnedSubjects.includes(subject.id) : false}
-                          lastActivity={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? getLastActivity(subject.id) : null}
-                          comingSoon={!((subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel')}
-                       userId={user?.id}
+                         return (
+                         <SubjectCard
+                           key={subject.id}
+                           subject={{
+                             ...modifiedSubject,
+                             color: getSubjectColor(subject.id)
+                           }}
+                           progress={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? userProgress : []}
+                           onStartPractice={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? handlePractice : () => {}}
+                           onTogglePin={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? togglePinSubject : () => {}}
+                           isPinned={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? pinnedSubjects.includes(subject.id) : false}
+                           lastActivity={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? getLastActivity(subject.id) : null}
+                           comingSoon={!((subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel')}
+                           userId={user?.id}
+                           onToggleUserSubject={toggleUserSubject}
+                           isUserSubject={userSubjects.includes(subject.id)}
+                           showAddButton={userSubjects.length === 0 || !userSubjects.includes(subject.id)}
                      />
                         );
                       })}

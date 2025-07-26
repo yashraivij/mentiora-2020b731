@@ -26,6 +26,9 @@ interface SubjectCardProps {
   lastActivity?: Date | null;
   comingSoon?: boolean;
   userId?: string;
+  onToggleUserSubject?: (subjectId: string) => void;
+  isUserSubject?: boolean;
+  showAddButton?: boolean;
 }
 
 export const SubjectCard = ({ 
@@ -36,7 +39,10 @@ export const SubjectCard = ({
   isPinned = false, 
   lastActivity,
   comingSoon = false,
-  userId 
+  userId,
+  onToggleUserSubject,
+  isUserSubject = false,
+  showAddButton = false
 }: SubjectCardProps) => {
   const subjectProgress = progress.filter(p => p.subjectId === subject.id);
   const averageScore = subjectProgress.length > 0 
@@ -263,6 +269,27 @@ export const SubjectCard = ({
             <Badge variant="secondary" className="px-4 py-2 bg-muted/50 text-muted-foreground border border-muted">
               Coming Soon
             </Badge>
+          ) : showAddButton && onToggleUserSubject ? (
+            <Button 
+              className={`font-semibold px-4 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm ${
+                isUserSubject 
+                  ? 'bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white' 
+                  : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white'
+              }`}
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleUserSubject(subject.id);
+              }}
+            >
+              {isUserSubject ? (
+                <>
+                  <CheckCircle className="h-4 w-4 mr-2" />
+                  Added to My Subjects
+                </>
+              ) : (
+                'Add to My Subjects'
+              )}
+            </Button>
           ) : (
             <Button 
               className="bg-gradient-to-r from-emerald-400 to-cyan-500 hover:from-emerald-500 hover:to-cyan-600 text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
