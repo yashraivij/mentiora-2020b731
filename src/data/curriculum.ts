@@ -12715,7 +12715,7 @@ export const curriculum: Subject[] = [
   },
   {
     id: 'combined-science-aqa',
-    name: 'Combined Science (AQA)',
+    name: 'Combined Science Paper 1 (AQA)',
     topics: [
       {
         id: 'biology-cell-biology',
@@ -13339,7 +13339,13 @@ export const curriculum: Subject[] = [
             specReference: 'AQA Combined Science 8464 (4.4.2) F/H'
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    id: 'combined-science-aqa-paper2',
+    name: 'Combined Science Paper 2 (AQA)',
+    topics: [
       {
         id: 'biology-homeostasis-response',
         name: 'Biology: Homeostasis and Response',
@@ -13802,161 +13808,6 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'AQA Combined Science 8464 (4.7.3) F/H'
-          }
-        ]
-      },
-      {
-        id: 'biology-key-ideas',
-        name: 'Biology: Key Ideas',
-        questions: [
-          {
-            id: 'ki-q1',
-            question: 'Explain what is meant by life processes and list the main ones.',
-            marks: 6,
-            difficulty: 'easy',
-            modelAnswer: 'Life processes are the essential functions that all living organisms carry out to stay alive. Main life processes include: nutrition, respiration, excretion, growth, reproduction, sensitivity (responding to stimuli), and movement.',
-            markingCriteria: {
-              breakdown: [
-                'Definition of life processes (2 marks)',
-                'List of main processes (4 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science 8464 (4.8) F/H'
-          },
-          {
-            id: 'ki-q2',
-            question: 'Explain how cells are the basic units of life.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'All living organisms are made of cells. Cells carry out all life processes. Single-celled organisms perform all functions within one cell. Multicellular organisms have specialized cells working together.',
-            markingCriteria: {
-              breakdown: [
-                'Cellular basis of life (2 marks)',
-                'Cell functions (2 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science 8464 (4.8) F/H'
-          },
-          {
-            id: 'ki-q3',
-            question: 'Describe how organisms are interdependent in ecosystems.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Organisms depend on each other for food through food chains. Predator-prey relationships control population sizes. Pollination by insects helps plant reproduction. Decomposers recycle nutrients for other organisms. Symbiotic relationships benefit both partners.',
-            markingCriteria: {
-              breakdown: [
-                'Food relationships (2 marks)',
-                'Population control (2 marks)',
-                'Nutrient cycling and other relationships (2 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science 8464 (4.8) F/H'
-          },
-          {
-            id: 'ki-q4',
-            question: 'Explain the importance of photosynthesis and respiration in living organisms.',
-            marks: 8,
-            difficulty: 'medium',
-            modelAnswer: 'Photosynthesis captures light energy and converts it to chemical energy in glucose. Provides food for plants and oxygen for atmosphere. Respiration releases energy from glucose for cellular activities. Produces CO₂ that plants need for photosynthesis. Together they form the basis of energy flow in ecosystems.',
-            markingCriteria: {
-              breakdown: [
-                'Photosynthesis importance (3 marks)',
-                'Respiration importance (3 marks)',
-                'Link between processes (2 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science 8464 (4.8) F/H'
-          },
-          {
-            id: 'ki-q5',
-            question: 'Describe the cycling of materials in ecosystems.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Carbon cycles between atmosphere and organisms through photosynthesis and respiration. Nitrogen cycles through soil bacteria, plants, and decomposition. Water cycles through evaporation, transpiration, and precipitation. Decomposers break down dead material to release nutrients back to soil.',
-            markingCriteria: {
-              breakdown: [
-                'Carbon cycling (2 marks)',
-                'Nitrogen/water cycling (2 marks)',
-                'Role of decomposers (2 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science 8464 (4.8) F/H'
-          },
-          {
-            id: 'ki-q6',
-            question: 'Explain how genes and environment interact to determine characteristics.',
-            marks: 6,
-            difficulty: 'hard',
-            modelAnswer: 'Genes provide the blueprint for characteristics through DNA instructions. Environment affects how genes are expressed. Some traits are purely genetic (blood type). Some are purely environmental (scars). Most traits result from gene-environment interaction (height, intelligence).',
-            markingCriteria: {
-              breakdown: [
-                'Gene role (2 marks)',
-                'Environmental influence (2 marks)',
-                'Interaction examples (2 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science 8464 (4.8) H'
-          },
-          {
-            id: 'ki-q7',
-            question: 'Describe how evolution occurs through natural selection.',
-            marks: 8,
-            difficulty: 'hard',
-            modelAnswer: 'Genetic variation exists in populations due to mutations and sexual reproduction. Environmental change creates selection pressure. Individuals with advantageous traits survive better. They reproduce more successfully, passing genes to offspring. Over many generations, beneficial traits become more common. This leads to evolution of the species.',
-            markingCriteria: {
-              breakdown: [
-                'Variation sources (2 marks)',
-                'Selection pressure (2 marks)',
-                'Differential reproduction (2 marks)',
-                'Evolutionary change (2 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science 8464 (4.8) H'
-          },
-          {
-            id: 'ki-q8',
-            question: 'Explain the relationship between structure and function in biological systems.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Structure is adapted to perform specific functions efficiently. Examples: Red blood cells are biconcave to maximize surface area for oxygen transport. Root hairs increase surface area for water absorption. Enzyme active sites have specific shapes to bind particular substrates.',
-            markingCriteria: {
-              breakdown: [
-                'Structure-function principle (2 marks)',
-                'Cellular examples (2 marks)',
-                'Molecular examples (2 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science 8464 (4.8) F/H'
-          },
-          {
-            id: 'ki-q9',
-            question: 'Describe how energy flows through ecosystems.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Energy enters as sunlight captured by producers through photosynthesis. Energy transfers through food chains from producers to consumers. Energy is lost at each trophic level as heat and movement. Energy flow is unidirectional - it cannot be recycled like materials.',
-            markingCriteria: {
-              breakdown: [
-                'Energy input (2 marks)',
-                'Energy transfer (2 marks)',
-                'Energy loss and direction (2 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science 8464 (4.8) F/H'
-          },
-          {
-            id: 'ki-q10',
-            question: 'Explain how biological systems maintain themselves through feedback mechanisms.',
-            marks: 8,
-            difficulty: 'hard',
-            modelAnswer: 'Negative feedback maintains homeostasis by counteracting changes. Example: Blood glucose regulation - high levels trigger insulin release to lower glucose. Positive feedback amplifies changes until completion. Example: Blood clotting - initial clotting triggers more clotting. Most biological control systems use negative feedback to maintain stability.',
-            markingCriteria: {
-              breakdown: [
-                'Negative feedback concept (3 marks)',
-                'Negative feedback example (2 marks)',
-                'Positive feedback concept and example (3 marks)'
-              ]
-            },
-            specReference: 'AQA Combined Science 8464 (4.8) H'
           }
         ]
       }
