@@ -319,11 +319,23 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
 
           <DropdownMenuSeparator />
 
-          {/* Current Track */}
-          <div className="text-center space-y-1">
-            <h4 className="text-sm font-medium text-foreground">
-              {tracks[currentTrack].name}
-            </h4>
+          {/* Track List */}
+          <div className="space-y-2">
+            {tracks.map((track, index) => (
+              <Button
+                key={index}
+                variant={currentTrack === index ? "default" : "ghost"}
+                size="sm"
+                onClick={() => {
+                  stopAudio();
+                  setCurrentTrack(index);
+                  setIsPlaying(false);
+                }}
+                className="w-full justify-start text-xs"
+              >
+                {track.name}
+              </Button>
+            ))}
           </div>
 
           {/* Controls */}
