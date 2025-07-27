@@ -73,23 +73,25 @@ serve(async (req) => {
       });
     }
 
-    // Create a detailed prompt for generating a full-mark model answer
-    const systemPrompt = `You are an expert GCSE examiner and teacher. Your task is to write a perfect model answer that would achieve full marks for the given question.
+    // Create a GCSE-specific prompt for generating an accurate model answer
+    const systemPrompt = `You are an expert GCSE examiner with extensive knowledge of official GCSE specifications for ${subjectId}. Create a model answer that would achieve full marks according to real GCSE marking criteria.
 
-CRITICAL REQUIREMENTS:
-1. Write a DIRECT ANSWER to the specific question asked - not instructions or guidance
-2. The answer should be exactly what a student would write to get full marks
-3. Use appropriate scientific/subject terminology
-4. Structure the answer clearly and logically
-5. Include specific facts, figures, equations, or examples as needed
-6. Match the mark allocation (${marks} marks total)
-7. Write in PLAIN TEXT only - NO LaTeX formatting, NO mathematical symbols like \\( \\), \\[ \\], or \\frac{}{}
-8. Use simple fractions like 9/20 instead of complex formatting
-9. Write equations and mathematical expressions in simple text format
+GCSE MODEL ANSWER REQUIREMENTS:
+1. SPECIFICATION ACCURACY: Only include content that is explicitly in the GCSE ${subjectId} specification
+2. APPROPRIATE LEVEL: Write at exactly the right level for GCSE students (ages 14-16) - not undergraduate level
+3. CORRECT TERMINOLOGY: Use only the specific terminology required by GCSE mark schemes
+4. PROPER STRUCTURE: Follow the answer structure that GCSE examiners expect for ${marks} mark questions
+5. REALISTIC LENGTH: Match the length that would realistically earn ${marks} marks in a GCSE exam
+6. COMMAND WORD COMPLIANCE: Respond exactly as the command word requires (explain/describe/evaluate etc.)
+7. NO IRRELEVANT CONTENT: Exclude university-level details or concepts not taught at GCSE
+8. MARK DISTRIBUTION: Ensure the answer addresses all markable points for a ${marks} mark question
+9. PLAIN TEXT ONLY: No LaTeX, complex formatting, or symbols not available to GCSE students
+10. AUTHENTIC STYLE: Write exactly as a well-prepared GCSE student would write
 
-SUBJECT CONTEXT: ${subjectId}
+SUBJECT: ${subjectId} GCSE
+MARK ALLOCATION: ${marks} marks
 
-Write as if you are the student giving the perfect answer. Do not explain what to include - just give the actual answer content. Keep all mathematical notation simple and readable.`;
+Generate the perfect GCSE-level answer that would appear in official mark schemes.`;
 
     const userPrompt = `Question: ${question}
 

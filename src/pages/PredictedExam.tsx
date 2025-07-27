@@ -1322,24 +1322,57 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
       return questions;
     }
     
-    // Standard exam format for other subjects
+    // Standard exam format for other subjects - GCSE specification focused
     let questionNumber = 1;
     subject.topics.forEach((topic, topicIndex) => {
-      // Take 2-3 questions from each topic for a full paper
-      const topicQuestions = topic.questions.slice(0, 3);
+      // Filter questions to ensure they are GCSE specification appropriate
+      const gcseAppropriateQuestions = topic.questions.filter(q => {
+        // Exclude questions that are too advanced or not in GCSE scope
+        const questionText = q.question.toLowerCase();
+        
+        // Exclude university-level concepts
+        const excludedTerms = [
+          'quantum mechanics', 'calculus', 'differential equations', 'advanced statistics',
+          'university level', 'postgraduate', 'undergraduate', 'research methodology',
+          'theoretical framework', 'epistemology', 'historiography beyond gcse scope'
+        ];
+        
+        const hasExcludedTerms = excludedTerms.some(term => questionText.includes(term));
+        
+        // Include only questions with appropriate GCSE marks (1-12 typically)
+        const appropriateMarks = (q.marks || 2) <= 12;
+        
+        // Include only questions with GCSE-appropriate difficulty
+        const gcseLevel = true; // All curriculum questions are already GCSE-level
+        
+        return !hasExcludedTerms && appropriateMarks && gcseLevel;
+      });
+      
+      // Take 2-3 GCSE-appropriate questions from each topic
+      const topicQuestions = gcseAppropriateQuestions.slice(0, 3);
       
       topicQuestions.forEach((q, qIndex) => {
+        // Ensure question follows GCSE command word patterns
+        let questionText = q.question;
+        
+        // Enhance question to be more GCSE-specific if needed
+        if (q.marks && q.marks >= 4 && !questionText.includes('Explain') && !questionText.includes('Describe')) {
+          if (q.marks <= 6) {
+            questionText = `Explain ${questionText.toLowerCase().replace(/^[a-z]/, (match) => match.toUpperCase())}`;
+          }
+        }
+        
         questions.push({
           id: `${topicIndex}-${qIndex}`,
           questionNumber: questionNumber++,
-          text: q.question,
-          marks: q.marks || 2,
+          text: questionText,
+          marks: Math.min(q.marks || 2, 12), // Cap marks at 12 for GCSE appropriateness
           section: topicIndex < Math.ceil(subject.topics.length / 2) ? 'A' : 'B'
         });
       });
     });
     
-    return questions.slice(0, 20); // Limit to 20 questions for exam length
+    return questions.slice(0, 15); // Reduce to 15 high-quality GCSE questions
   };
 
   const [examQuestions] = useState<ExamQuestion[]>(generateExamQuestions());
@@ -1440,12 +1473,30 @@ Referring to Data Set 2 in detail, and to relevant ideas from language study, ev
     try {
       console.log('Marking predicted exam answer:', { questionId: question.id, marks: question.marks });
       
+      // First generate an accurate GCSE model answer
+      const modelAnswerResult = await supabase.functions.invoke('generate-model-answer', {
+        body: {
+          question: question.text,
+          subjectId: subjectId,
+          marks: question.marks
+        }
+      });
+
+      const modelAnswer = modelAnswerResult.data?.modelAnswer || 
+        `GCSE ${subjectId} ${question.marks} mark question. Answer should demonstrate appropriate knowledge and understanding at GCSE level with correct terminology.`;
+
+      // Then mark against the precise GCSE standard
       const { data, error } = await supabase.functions.invoke('mark-answer', {
         body: {
           question: question.text,
           userAnswer: answer,
-          modelAnswer: `This is a predicted exam question for ${question.marks} marks. Provide appropriate feedback based on the question requirements and content depth expected for this mark value.`,
-          markingCriteria: `Mark this ${question.marks} mark question appropriately. Award marks based on: content accuracy, depth of explanation, use of appropriate terminology, and completeness of answer. Consider what a ${question.marks} mark response should demonstrate.`,
+          modelAnswer: modelAnswer,
+          markingCriteria: `GCSE ${subjectId} marking criteria for ${question.marks} marks:
+- Award marks only for content in GCSE specification
+- Require appropriate GCSE-level terminology and depth
+- Apply official GCSE command word requirements
+- Match mark allocation to depth of response expected
+- Reject irrelevant or over-complex content not required at GCSE level`,
           totalMarks: question.marks,
           subject: subjectId
         }
