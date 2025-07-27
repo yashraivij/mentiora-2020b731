@@ -28,6 +28,7 @@ import { StressTracker } from "@/lib/stressTracker";
 import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
 import { StreakCelebration } from "@/components/ui/streak-celebration";
+import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
 
 interface UserProgress {
   subjectId: string;
@@ -610,34 +611,34 @@ const Dashboard = () => {
                       <span className="text-lg">🎁</span>
                       <div>
                         <div className="text-sm font-bold text-emerald-700 dark:text-emerald-300">Next Reward</div>
-                        <div className="text-xs text-emerald-600/80 dark:text-emerald-400/80">
-                          {getStudyStreak() >= 90 ? "Max Level Reached!" : 
-                           getStudyStreak() >= 75 ? "Elite GCSE Master badge + early beta access" :
-                           getStudyStreak() >= 60 ? "AI-marked mock exam with in-depth feedback" :
-                           getStudyStreak() >= 45 ? "AI Exam Coach session (custom revision plan)" :
-                           getStudyStreak() >= 30 ? "Premium-only predicted paper" :
-                           getStudyStreak() >= 21 ? "Exclusive AI-generated mini exam pack" :
-                           getStudyStreak() >= 14 ? "Smart notebook expansion + AI study tips" :
-                           getStudyStreak() >= 7 ? "Early access to new AI chatbot features" :
-                           getStudyStreak() >= 3 ? "Exclusive '7-Day Streak' badge" :
-                           "Dashboard Color Theme"
-                           }
+                         <div className="text-xs text-emerald-600/80 dark:text-emerald-400/80">
+                           {getStudyStreak() >= 90 ? "Max Level Reached!" : 
+                            getStudyStreak() >= 75 ? "Elite GCSE Master badge + early beta access" :
+                            getStudyStreak() >= 60 ? "AI-marked mock exam with in-depth feedback" :
+                            getStudyStreak() >= 45 ? "AI Exam Coach session (custom revision plan)" :
+                            getStudyStreak() >= 30 ? "Premium-only predicted paper" :
+                            getStudyStreak() >= 21 ? "Exclusive AI-generated mini exam pack" :
+                            getStudyStreak() >= 14 ? "Smart notebook expansion + AI study tips" :
+                            getStudyStreak() >= 7 ? "Study playlist & background sounds" :
+                            getStudyStreak() >= 3 ? "Dashboard Color Theme" :
+                            "Dashboard Color Theme"
+                            }
                         </div>
                       </div>
                     </div>
                     <div className="text-right">
                       <div className="text-sm font-black bg-gradient-to-r from-emerald-700 to-blue-700 dark:from-emerald-300 dark:to-blue-300 bg-clip-text text-transparent">
-                        {getStudyStreak() >= 90 ? "🎉" :
-                         getStudyStreak() >= 75 ? "Unlocked!" :
-                         getStudyStreak() >= 60 ? "Unlocked!" :
-                         getStudyStreak() >= 45 ? "Unlocked!" :
-                         getStudyStreak() >= 30 ? "Unlocked!" :
-                         getStudyStreak() >= 21 ? "Unlocked!" :
-                         getStudyStreak() >= 14 ? "Unlocked!" :
-                         getStudyStreak() >= 7 ? "Unlocked!" :
-                         getStudyStreak() >= 3 ? `${7 - getStudyStreak()} days` :
-                         `${3 - getStudyStreak()} days`
-                        }
+                         {getStudyStreak() >= 90 ? "🎉" :
+                          getStudyStreak() >= 75 ? "Unlocked!" :
+                          getStudyStreak() >= 60 ? "Unlocked!" :
+                          getStudyStreak() >= 45 ? "Unlocked!" :
+                          getStudyStreak() >= 30 ? "Unlocked!" :
+                          getStudyStreak() >= 21 ? "Unlocked!" :
+                          getStudyStreak() >= 14 ? "Unlocked!" :
+                          getStudyStreak() >= 7 ? "Unlocked!" :
+                          getStudyStreak() >= 3 ? `${7 - getStudyStreak()} days` :
+                          `${3 - getStudyStreak()} days`
+                         }
                       </div>
                       <div className="text-xs font-semibold text-emerald-600/80 dark:text-emerald-400/80 uppercase tracking-wider">
                         {getStudyStreak() >= 90 ? "Max Level" : getStudyStreak() >= 3 ? "to go" : "to go"}
@@ -785,6 +786,11 @@ const Dashboard = () => {
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Study Playlist - 7-Day Streak Reward */}
+        <div className="mb-8">
+          <StudyPlaylist isUnlocked={getStudyStreak() >= 7} />
         </div>
 
         {/* Subjects Section */}
