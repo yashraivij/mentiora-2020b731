@@ -237,7 +237,7 @@ export const OptimalStudyTimeCard = () => {
               <div className="p-3 rounded-lg bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-950/20 dark:to-purple-950/20 border border-violet-200/50 dark:border-violet-800/30">
                 <div className="flex items-center gap-2 mb-1">
                   <Clock className="h-4 w-4 text-violet-600 dark:text-violet-400" />
-                  <span className="text-sm font-medium text-violet-700 dark:text-violet-300">Smart Insights</span>
+                  <span className="text-sm font-medium text-violet-700 dark:text-violet-300">Insights</span>
                 </div>
                 <p className="text-xs text-violet-600 dark:text-violet-400 leading-relaxed">
                   Discover your peak learning hours with advanced pattern recognition
@@ -319,7 +319,7 @@ export const OptimalStudyTimeCard = () => {
           <div className="p-3 rounded-lg bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-950/20 dark:to-blue-950/20 border border-cyan-200/50 dark:border-cyan-800/30">
             <div className="flex items-center gap-2 mb-1">
               <Sparkles className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
-              <span className="text-sm font-medium text-cyan-700 dark:text-cyan-300">Smart Recommendation</span>
+              <span className="text-sm font-medium text-cyan-700 dark:text-cyan-300">Recommendation</span>
             </div>
             <p className="text-xs text-cyan-600 dark:text-cyan-400 leading-relaxed">
               Schedule your most challenging revision sessions during {analysis?.timeRange} to maximize learning efficiency and retention.

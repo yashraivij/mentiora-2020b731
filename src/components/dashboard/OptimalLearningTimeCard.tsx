@@ -216,7 +216,7 @@ export const OptimalLearningTimeCard = () => {
                   <span className="text-sm font-medium text-amber-700 dark:text-amber-300">Premium Intelligence</span>
                 </div>
                 <p className="text-xs text-amber-600 dark:text-amber-400 leading-relaxed">
-                  Discover when your brain learns best with smart time optimization
+                  Discover when your brain learns best with time optimization
                 </p>
               </div>
             </div>
