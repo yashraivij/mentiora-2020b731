@@ -1539,168 +1539,127 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'tvr-q1',
-            question: 'What is meant by the term "graphology" in language analysis?',
-            marks: 2,
+            question: 'The following extract is from a travel blog about visiting Japan, published in 2023.\n\n"Tokyo hits you like a neon-soaked punch to the senses. Everywhere you look, there\'s something demanding your attention – flashing billboards, tiny alleyways packed with salarymen grabbing quick ramen, the constant hum of humanity moving at breakneck speed. It\'s overwhelming. It\'s exhausting. It\'s absolutely intoxicating."\n\nList 4 things from this extract that the writer tells us about Tokyo.',
+            marks: 4,
             difficulty: 'easy',
-            modelAnswer: 'Graphology refers to the visual aspects of language, including typography, layout, font choices, spacing, colour, and other design elements that contribute to meaning in written texts.',
+            modelAnswer: '1. There are neon lights/flashing billboards, 2. There are small alleyways, 3. Workers eat ramen in these spaces, 4. People move very quickly/there are lots of people, 5. It has a constant noise/hum, 6. It\'s overwhelming, 7. It\'s exhausting, 8. It\'s intoxicating (any 4 acceptable)',
             markingCriteria: {
               breakdown: [
-                'Clear definition of graphology (1 mark)',
-                'Reference to visual elements or design features (1 mark)'
+                '1 mark for each correct point (4 marks total)',
+                'Must be factual information from the text',
+                'No analysis required, just identification'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q2',
-            question: 'Identify two features that distinguish formal written language from informal spoken language.',
-            marks: 4,
-            difficulty: 'easy',
-            modelAnswer: 'Formal written language typically uses complete sentences and standard grammar, while informal spoken language often includes incomplete sentences and non-standard constructions. Formal written language employs precise vocabulary and technical terms, whereas informal spoken language uses colloquialisms and contractions.',
+            question: 'Look in detail at lines 15-25 of the following extract from a newspaper article about online shopping.\n\n"The high street is dying. That\'s what they tell us, anyway. Walk through any town centre and you\'ll see the evidence: boarded-up shops, \'To Let\' signs, and the hollow echo of footsteps where once there was the buzz of commerce. But is this really the whole story? Perhaps we\'re witnessing not death, but transformation."\n\nHow does the writer use language here to present their viewpoint about the high street?',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'The writer uses contrasting perspectives to challenge common assumptions. The metaphor "The high street is dying" presents the dominant narrative, while "That\'s what they tell us, anyway" immediately questions this view. Visual imagery of "boarded-up shops" and "\'To Let\' signs" creates a sense of abandonment and decline. The auditory imagery contrasts "hollow echo of footsteps" with "buzz of commerce" to emphasize the loss of vitality. However, the rhetorical question "But is this really the whole story?" signals a shift in perspective. The final metaphor contrasts "death" with "transformation," suggesting renewal rather than destruction.',
             markingCriteria: {
               breakdown: [
-                'First feature correctly identified and explained (2 marks)',
-                'Second feature correctly identified and explained (2 marks)'
+                'Analysis of metaphor and contrast (2-3 marks)',
+                'Discussion of imagery and sensory details (2-3 marks)',
+                'Analysis of rhetorical techniques (2-3 marks)',
+                'Overall effect on reader\'s understanding (1-2 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q3',
-            question: 'Explain how context affects language choices in different social situations.',
-            marks: 6,
+            question: 'Read the following two texts about social media.\n\nText A: From a blog post by a teenager in 2024\n"Social media is literally my lifeline. Without Instagram and TikTok, I\'d be completely isolated from my friends. Yeah, there\'s drama sometimes, but that\'s just part of growing up, right?"\n\nText B: From a newspaper opinion piece in 2024\n"Social media platforms exploit young people\'s natural desire for connection, trapping them in cycles of validation-seeking behaviour that can damage their mental health and self-esteem."\n\nCompare how the two writers present different attitudes towards social media.',
+            marks: 10,
             difficulty: 'medium',
-            modelAnswer: 'Context significantly influences language choices through factors like audience, purpose, and setting. In formal contexts like job interviews, speakers use standard English, avoid slang, and employ respectful titles. In informal contexts with friends, speakers use casual vocabulary, contractions, and may include regional dialect features. The relationship between participants also affects register - equal relationships allow informal language while hierarchical relationships often require more formal approaches.',
+            modelAnswer: 'Text A presents social media positively through personal, informal language. The metaphor "literally my lifeline" suggests dependency but frames it as essential for survival and connection. The dismissive "Yeah, there\'s drama sometimes" minimizes negative aspects, while the rhetorical question normalizes conflict as "just part of growing up." Text B adopts a critical, formal tone using analytical language like "exploit" and "cycles of validation-seeking behaviour." The medical metaphor of "damage" presents social media as harmful to "mental health." Text A uses first person and colloquial language to create authenticity, while Text B uses third person and academic vocabulary to establish authority and objectivity.',
             markingCriteria: {
               breakdown: [
-                'Explanation of context factors (2 marks)',
-                'Example of formal context language choices (2 marks)',
-                'Example of informal context language choices (2 marks)'
+                'Analysis of Text A\'s positive presentation (3-4 marks)',
+                'Analysis of Text B\'s critical presentation (3-4 marks)',
+                'Comparison of language techniques and effects (2-3 marks)',
+                'Discussion of different perspectives and tones (1-2 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q4',
-            question: 'Analyse how personal pronouns create different effects in texts.\n\nText A: "One must consider the implications carefully."\nText B: "You need to think about what this means for you."',
-            marks: 8,
+            question: 'The following extract is from a memoir about growing up in the 1980s.\n\n"Saturday mornings meant one thing: pocket money and the sweet shop. Mrs Henderson\'s corner shop was a treasure trove of sugary delights – rows of glass jars filled with cola bottles, sherbet lemons, and those impossible-to-open toffees that would glue your teeth together for hours. The bell above the door would announce our arrival with a cheerful jingle, and Mrs Henderson would peer over her spectacles with that knowing smile."\n\nAnalyse how the writer uses language to create a sense of nostalgia.',
+            marks: 12,
             difficulty: 'medium',
-            modelAnswer: 'Text A uses the formal pronoun "one" which creates distance and objectivity, suggesting academic or official discourse. This impersonal approach implies universal applicability but may seem detached. Text B uses direct address with "you" which creates intimacy and personal connection, making the reader feel directly involved. The repetition of "you" emphasizes personal responsibility and creates a conversational, engaging tone that draws the reader in.',
+            modelAnswer: 'The writer creates nostalgia through sensory details and positive associations with childhood. The opening "Saturday mornings meant one thing" establishes a routine that evokes security and anticipation. The metaphor "treasure trove" transforms the ordinary shop into something magical and valuable from a child\'s perspective. Specific details like "cola bottles, sherbet lemons" trigger sensory memories, while the humorous description of toffees that "glue your teeth together" creates affectionate recollection of childhood experiences. The personification of the bell\'s "cheerful jingle" and Mrs Henderson\'s "knowing smile" suggest warmth and community. The writer uses past tense throughout to emphasize the distance from this idealized time, making the reader yearn for this simpler, more innocent period.',
             markingCriteria: {
               breakdown: [
-                'Analysis of "one" and its effects (2 marks)',
-                'Analysis of "you" and its effects (2 marks)',
-                'Comparison of different effects created (2 marks)',
-                'Reference to tone and audience relationship (2 marks)'
+                'Analysis of specific language techniques (4-5 marks)',
+                'Discussion of sensory details and their effects (3-4 marks)',
+                'Analysis of how nostalgia is created (3-4 marks)',
+                'Overall understanding of writer\'s methods (1-2 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q5',
-            question: 'How do different text types use language to achieve their purposes? Compare a news report and an advertisement.',
-            marks: 10,
-            difficulty: 'medium',
-            modelAnswer: 'News reports use objective language with third-person narration and factual statements to inform readers. They employ formal register, passive voice for objectivity, and temporal markers to establish credibility. Headlines use brief, attention-grabbing language. Advertisements use persuasive language with emotive adjectives, imperatives, and direct address to influence consumer behaviour. They employ rhetorical questions, superlatives, and branded language to create desire and encourage action. Both adapt their language to achieve their distinct purposes.',
+            question: 'You are going to compare how the two writers present their experiences of visiting London for the first time.\n\nText A: From a travel blog (2023)\n"London swallowed me whole. The Underground spat me out into a world of red buses, black cabs, and more people than I\'d ever seen in one place. Every corner turned revealed another iconic sight – Big Ben looming overhead, the Thames snaking through it all like a muddy ribbon."\n\nText B: From a guidebook (1995)\n"Visitors to London should prepare themselves for a city of remarkable contrasts. Ancient landmarks stand alongside modern developments, while efficient transport systems connect diverse neighbourhoods, each with its own distinct character and attractions."\n\nCompare how the writers present London.',
+            marks: 15,
+            difficulty: 'hard',
+            modelAnswer: 'Text A presents London as overwhelming and exciting through vivid, personal language. The metaphor "London swallowed me whole" suggests the city\'s power to engulf visitors, while "The Underground spat me out" uses violent imagery to show disorientation. Sensory details like "red buses, black cabs" create immediate visual recognition, and the simile comparing the Thames to "a muddy ribbon" offers a personal, slightly irreverent perspective. Text B adopts an informative, objective tone using formal language like "remarkable contrasts" and "efficient transport systems." It presents London analytically through balanced descriptions of "Ancient landmarks" versus "modern developments." Text A uses first person to create immediacy and emotional connection, while Text B\'s third person maintains professional distance. Both texts acknowledge London\'s scale, but Text A emphasizes emotional impact while Text B focuses on practical information for visitors.',
             markingCriteria: {
               breakdown: [
-                'Analysis of news report language features (3 marks)',
-                'Analysis of advertisement language features (3 marks)',
-                'Explanation of how features achieve purposes (2 marks)',
-                'Comparison between the text types (2 marks)'
+                'Analysis of Text A\'s personal, vivid presentation (4-5 marks)',
+                'Analysis of Text B\'s formal, informative presentation (4-5 marks)',
+                'Detailed comparison of language techniques (4-5 marks)',
+                'Discussion of different purposes and audiences (2-3 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q6',
-            question: 'Analyse how the following sentence creates meaning through word choice:\n\n"The magnificent Victorian mansion dominated the quaint village street."',
-            marks: 6,
+            question: 'Look at the following extract from a sports report.\n\n"In the dying seconds of the match, Henderson found herself alone in front of goal. The crowd held its breath. Time seemed suspended as she drew back her foot, the weight of expectation heavy on her shoulders. The ball flew like a rocket into the top corner, and suddenly the stadium erupted into pure chaos."\n\nHow does the writer build tension and excitement in this extract?',
+            marks: 8,
             difficulty: 'medium',
-            modelAnswer: 'The adjective "magnificent" creates positive connotations of grandeur and beauty, elevating the status of the building. "Victorian" provides historical context and suggests traditional architectural values. "Mansion" implies wealth and high social status compared to a simple "house." The verb "dominated" suggests power and control, indicating the building\'s imposing presence. "Quaint" creates contrast by presenting the village as charming but small-scale, emphasizing the mansion\'s prominence through juxtaposition.',
+            modelAnswer: 'The writer builds tension through careful pacing and dramatic timing. The phrase "dying seconds" immediately creates urgency and pressure. The isolation of Henderson being "alone in front of goal" emphasizes the pressure on her. The writer then slows down time with "The crowd held its breath" and "Time seemed suspended," creating a pause that builds anticipation. The metaphor "weight of expectation heavy on her shoulders" adds psychological pressure. The simile "ball flew like a rocket" suggests speed and power, leading to the explosive release of tension as "the stadium erupted into pure chaos." The structure moves from slow, tense buildup to sudden, explosive release.',
             markingCriteria: {
               breakdown: [
-                'Analysis of adjectives and their connotations (2 marks)',
-                'Analysis of verb choice and effect (2 marks)',
-                'Discussion of contrast and juxtaposition (2 marks)'
+                'Analysis of temporal language and pacing (2-3 marks)',
+                'Discussion of metaphors and similes (2-3 marks)',
+                'Analysis of structural effects (2-3 marks)',
+                'Understanding of how tension builds (1-2 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q7',
-            question: 'Explain how dialect and accent differ, and discuss why both are important in representing identity.',
-            marks: 8,
+            question: 'The following text is from a speech by a head teacher addressing new students.\n\n"Welcome to Westfield Academy. You stand at the threshold of opportunity. Here, you will discover not just subjects, but yourselves. You will face challenges, certainly, but remember – diamonds are formed under pressure."\n\nAnalyse how the speaker uses language to motivate and inspire the students.',
+            marks: 10,
             difficulty: 'medium',
-            modelAnswer: 'Dialect refers to vocabulary, grammar, and language structure variations in different regions or social groups, while accent refers to pronunciation patterns. Dialect includes different words for the same concept and varied sentence structures. Both represent cultural identity and social belonging, connecting speakers to their communities and backgrounds. They can indicate education level, social class, and regional origin, though this can lead to linguistic prejudice. Understanding both helps recognize the rich diversity of English and challenges prescriptivist attitudes about "correct" language.',
+            modelAnswer: 'The speaker uses formal, elevated language to create a sense of occasion and importance. The metaphor "threshold of opportunity" presents the school as a gateway to success, suggesting transformation and potential. The direct address "you" creates personal connection and involvement. The parallel structure "not just subjects, but yourselves" emphasizes personal development over academic achievement. The acknowledgment "You will face challenges, certainly" shows honesty while the adverb "certainly" demonstrates confidence. The metaphor "diamonds are formed under pressure" transforms difficulties into something valuable and necessary, suggesting that struggle leads to brilliance and worth. The alliteration and rhythm create memorable, inspiring language that students will remember.',
             markingCriteria: {
               breakdown: [
-                'Clear distinction between dialect and accent (2 marks)',
-                'Examples of dialect features (2 marks)',
-                'Discussion of identity representation (2 marks)',
-                'Reference to social attitudes or prejudice (2 marks)'
+                'Analysis of metaphorical language (3-4 marks)',
+                'Discussion of direct address and personal connection (2-3 marks)',
+                'Analysis of structural features and rhythm (2-3 marks)',
+                'Understanding of motivational techniques (2-3 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q8',
-            question: 'How does technology influence modern language use? Discuss three specific changes.',
-            marks: 9,
-            difficulty: 'hard',
-            modelAnswer: 'Technology has introduced abbreviations and acronyms like "LOL" and "ASAP" to speed communication, creating new lexical items that cross into spoken language. Emoji and symbols now supplement or replace words, adding emotional context and creating visual meaning systems. Character limits on platforms like Twitter have led to compression techniques, removing articles and using unconventional spelling. These changes reflect efficiency needs and new social communication contexts, though they sometimes create generational divides in language understanding.',
-            markingCriteria: {
-              breakdown: [
-                'First technological influence explained (3 marks)',
-                'Second technological influence explained (3 marks)',
-                'Third technological influence explained (3 marks)'
-              ]
-            },
-            specReference: 'AQA English Language 8700 Paper 1'
-          },
-          {
-            id: 'tvr-q9',
-            question: 'Analyse how power relationships are shown through language choices in this workplace exchange:\n\nManager: "I need you to complete this by Friday."\nEmployee: "Would it be possible to have until Monday? I\'ve got several other priorities."',
-            marks: 10,
-            difficulty: 'hard',
-            modelAnswer: 'The manager uses direct language with the declarative "I need" and imperative structure, asserting authority through confident, unqualified statements. The specific deadline shows control over timing and expectations. The employee uses tentative language with "Would it be possible" - a polite interrogative that acknowledges the manager\'s power to grant or refuse. The explanation "I\'ve got several other priorities" justifies the request professionally while showing respect for hierarchy. The contrast demonstrates how power dynamics shape linguistic choices in professional contexts.',
-            markingCriteria: {
-              breakdown: [
-                'Analysis of manager\'s authoritative language (3 marks)',
-                'Analysis of employee\'s deferential language (3 marks)',
-                'Discussion of power dynamics shown (2 marks)',
-                'Reference to professional context (2 marks)'
-              ]
-            },
-            specReference: 'AQA English Language 8700 Paper 1'
-          },
-          {
-            id: 'tvr-q11',
-            question: 'Compare how these two texts use language to create different atmospheres:\n\nText A: "The storm approached slowly, its dark clouds gathering ominously over the quiet town. Thunder rumbled in the distance like an ancient warning."\n\nText B: "Rain is forecast for this afternoon with possible thunderstorms. Temperatures will drop to 15°C. Visibility may be reduced."',
+            question: 'Read this extract from a restaurant review.\n\n"The service was appalling. Our waiter seemed more interested in his phone than our order, and when the food finally arrived – cold, I might add – he had the audacity to ask if everything was \'alright.\' Alright? The pasta was like rubber, the sauce had clearly been reheated multiple times, and don\'t even get me started on the so-called \'fresh\' salad."\n\nHow does the reviewer use language to express their dissatisfaction?',
             marks: 8,
             difficulty: 'medium',
-            modelAnswer: 'Text A uses personification ("storm approached") and metaphor ("like an ancient warning") to create a dramatic, foreboding atmosphere. Descriptive adjectives like "dark," "ominous," and "quiet" build tension and suggest impending doom. Text B uses factual, objective language typical of weather reports. Short, declarative sentences convey information efficiently without emotional impact. The clinical tone contrasts sharply with Text A\'s literary, atmospheric approach.',
+            modelAnswer: 'The reviewer uses increasingly negative language to build frustration. The opening "appalling" immediately establishes a harsh tone. The criticism becomes personal with "seemed more interested in his phone," suggesting unprofessionalism. The parenthetical "cold, I might add" shows mounting irritation. The phrase "had the audacity" expresses outrage at the waiter\'s question. The rhetorical question "Alright?" shows disbelief and sarcasm. Specific criticisms use simile ("like rubber") and repeated evidence ("reheated multiple times"). The dismissive "so-called \'fresh\'" uses scare quotes to suggest deception. The final "don\'t even get me started" suggests there are even more problems, creating a sense of overwhelming dissatisfaction.',
             markingCriteria: {
               breakdown: [
-                'Analysis of language techniques in Text A (3 marks)',
-                'Analysis of language techniques in Text B (3 marks)',
-                'Comparison of different atmospheric effects (2 marks)'
-              ]
-            },
-            specReference: 'AQA English Language 8700 Paper 1'
-          },
-          {
-            id: 'tvr-q12',
-            question: 'Analyse how the following text creates meaning through its structure and organization:\n\n"First, consider the evidence. Then, examine the implications. Finally, reach your conclusion. This systematic approach ensures thorough analysis."',
-            marks: 10,
-            difficulty: 'hard',
-            modelAnswer: 'The text uses temporal sequencing with "First," "Then," and "Finally" to create logical progression and guide reader thinking. The parallel structure of imperative verbs ("consider," "examine," "reach") establishes authority and clear instruction. The final sentence provides meta-commentary, explicitly stating the purpose and benefits of the structure. This creates a sense of expertise and reliability, positioning the writer as knowledgeable and the method as trustworthy.',
-            markingCriteria: {
-              breakdown: [
-                'Analysis of temporal sequencing and connectives (3 marks)',
-                'Discussion of parallel structure and imperatives (3 marks)',
-                'Analysis of meta-commentary function (2 marks)',
-                'Overall effect on reader and writer authority (2 marks)'
+                'Analysis of increasingly negative language (2-3 marks)',
+                'Discussion of rhetorical techniques (2-3 marks)',
+                'Analysis of specific criticisms and evidence (2-3 marks)',
+                'Understanding of tone and attitude (1-2 marks)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
