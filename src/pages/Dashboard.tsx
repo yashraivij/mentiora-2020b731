@@ -50,7 +50,6 @@ const Dashboard = () => {
   const [userSubjects, setUserSubjects] = useState<string[]>([]);
   const [subjectsTab, setSubjectsTab] = useState<'my-subjects' | 'all-subjects'>('my-subjects');
   const [showStreakCelebration, setShowStreakCelebration] = useState(false);
-  const [hasShownCelebration, setHasShownCelebration] = useState(false);
 
   const {
     notification,
@@ -60,6 +59,46 @@ const Dashboard = () => {
     hideNotification,
     clearNotification
   } = usePersonalizedNotifications();
+
+  // Check if user has seen streak celebration for specific streak count
+  const hasSeenStreakCelebration = async (streakDays: number): Promise<boolean> => {
+    if (!user?.id) return false;
+    
+    try {
+      const { data, error } = await supabase
+        .from('streak_celebrations_viewed')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('streak_days', streakDays)
+        .single();
+      
+      if (error && error.code !== 'PGRST116') {
+        console.error('Error checking streak celebration viewed:', error);
+        return false;
+      }
+      
+      return !!data;
+    } catch (error) {
+      console.error('Error checking streak celebration viewed:', error);
+      return false;
+    }
+  };
+
+  // Mark streak celebration as viewed
+  const markStreakCelebrationViewed = async (streakDays: number) => {
+    if (!user?.id) return;
+    
+    try {
+      await supabase
+        .from('streak_celebrations_viewed')
+        .insert({
+          user_id: user.id,
+          streak_days: streakDays
+        });
+    } catch (error) {
+      console.error('Error marking streak celebration as viewed:', error);
+    }
+  };
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -99,14 +138,20 @@ const Dashboard = () => {
 
     loadUserData();
     
-    // Show celebration for 7-day streak achievement
-    const streak = getStudyStreak();
-    if (streak >= 7 && !hasShownCelebration) {
-      setTimeout(() => {
-        setShowStreakCelebration(true);
-        setHasShownCelebration(true);
-      }, 1000); // Delay to let page load first
-    }
+    const checkStreakCelebration = async () => {
+      // Show celebration for 7-day streak achievement
+      const streak = getStudyStreak();
+      if (streak >= 7) {
+        const hasSeenCelebration = await hasSeenStreakCelebration(7);
+        if (!hasSeenCelebration) {
+          setTimeout(() => {
+            setShowStreakCelebration(true);
+          }, 1000); // Delay to let page load first
+        }
+      }
+    };
+
+    checkStreakCelebration();
     
   }, [user?.id]);
 
@@ -1175,7 +1220,10 @@ const Dashboard = () => {
       {/* Streak Celebration Modal */}
       <StreakCelebration
         isVisible={showStreakCelebration}
-        onClose={() => setShowStreakCelebration(false)}
+        onClose={async () => {
+          setShowStreakCelebration(false);
+          await markStreakCelebrationViewed(7);
+        }}
         streakDays={getStudyStreak()}
         rewardText="Study Playlist & Background Sounds"
         rewardEmoji="🎵"
