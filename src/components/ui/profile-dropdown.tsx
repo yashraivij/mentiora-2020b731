@@ -167,7 +167,6 @@ export function ProfileDropdown({ streakDays, firstName }: ProfileDropdownProps)
               <User className="h-3 w-3 text-primary-foreground" />
             </div>
             <span className="text-sm font-medium text-foreground">{firstName}</span>
-            <Lock className="h-3 w-3 text-muted-foreground" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent 

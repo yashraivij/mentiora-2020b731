@@ -573,12 +573,12 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Premium Streak & Rewards Section - Enhanced */}
-        <div className="mb-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Premium Streak & Rewards Section - Compact for better grades visibility */}
+        <div className="mb-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Study Streak Card */}
-          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-orange-50/80 to-red-50/80 dark:from-slate-900 dark:via-orange-950/20 dark:to-red-950/20 shadow-2xl hover:shadow-3xl transition-all duration-500 group backdrop-blur-xl">
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-orange-50/80 to-red-50/80 dark:from-slate-900 dark:via-orange-950/20 dark:to-red-950/20 shadow-lg hover:shadow-xl transition-all duration-300 group backdrop-blur-xl">
             {/* Premium Glow Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-red-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-red-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
             {/* Sophisticated Border */}
             <div className="absolute inset-0 bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 rounded-xl p-[1px]">
@@ -589,37 +589,31 @@ const Dashboard = () => {
             <div className="absolute top-2 right-4 w-2 h-2 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse opacity-60" />
             <div className="absolute bottom-3 left-6 w-1.5 h-1.5 bg-gradient-to-r from-pink-400 to-red-400 rounded-full animate-bounce opacity-40" />
             
-            <CardContent className="relative p-5">
-              <div className="flex flex-col space-y-4">
+            <CardContent className="relative p-4">
+              <div className="flex flex-col space-y-3">
                 {/* Top Section - Streak Display */}
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-3">
                   {/* Premium Fire Icon */}
                   <div className="relative group/icon">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 flex items-center justify-center shadow-xl shadow-orange-500/25 group-hover:shadow-orange-500/40 transition-all duration-300 relative overflow-hidden">
+                    <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 flex items-center justify-center shadow-lg shadow-orange-500/25 group-hover:shadow-orange-500/40 transition-all duration-300 relative overflow-hidden">
                       {/* Inner Glow */}
                       <div className="absolute inset-1 rounded-xl bg-white/15 backdrop-blur-sm" />
-                      <Flame className="h-6 w-6 text-white relative z-10 group-hover/icon:scale-110 transition-transform duration-300 drop-shadow-lg" />
-                      
-                      {/* Rotating Ring */}
-                      <div className="absolute inset-0 rounded-2xl border-2 border-yellow-400/30 group-hover/icon:rotate-180 transition-transform duration-1000" />
+                      <Flame className="h-5 w-5 text-white relative z-10 group-hover/icon:scale-110 transition-transform duration-300 drop-shadow-lg" />
                     </div>
                     
                     {/* Premium Floating Elements */}
-                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg animate-bounce">
-                      <Sparkles className="h-2 w-2 text-white drop-shadow-sm" />
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-md animate-bounce">
+                      <Sparkles className="h-1.5 w-1.5 text-white drop-shadow-sm" />
                     </div>
-                    
-                    {/* Pulsing Ring */}
-                    <div className="absolute inset-0 rounded-2xl border border-orange-300/20 animate-ping opacity-75" />
                   </div>
                   
                   {/* Enhanced Streak Text */}
                   <div className="space-y-1">
                     <div className="flex items-baseline space-x-2">
-                      <h3 className="text-2xl font-black bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent tracking-tight">
+                      <h3 className="text-xl font-black bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent tracking-tight">
                         {getStudyStreak()}
                       </h3>
-                      <span className="text-base font-bold bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
+                      <span className="text-sm font-bold bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
                         Day{getStudyStreak() !== 1 ? 's' : ''}
                       </span>
                     </div>
@@ -668,9 +662,9 @@ const Dashboard = () => {
           </Card>
 
           {/* Daily Streak Rewards Card */}
-          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-emerald-50/80 to-blue-50/80 dark:from-slate-900 dark:via-emerald-950/20 dark:to-blue-950/20 shadow-2xl hover:shadow-3xl transition-all duration-500 group backdrop-blur-xl">
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-emerald-50/80 to-blue-50/80 dark:from-slate-900 dark:via-emerald-950/20 dark:to-blue-950/20 shadow-lg hover:shadow-xl transition-all duration-300 group backdrop-blur-xl">
             {/* Premium Glow Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
             {/* Sophisticated Border */}
             <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-400 rounded-xl p-[1px]">
@@ -681,39 +675,33 @@ const Dashboard = () => {
             <div className="absolute top-2 right-4 w-2 h-2 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full animate-pulse opacity-60" />
             <div className="absolute bottom-3 left-6 w-1.5 h-1.5 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-bounce opacity-40" />
             
-            <CardContent className="relative p-5">
-              <div className="flex flex-col space-y-4">
+            <CardContent className="relative p-4">
+              <div className="flex flex-col space-y-3">
                 {/* Top Section - Rewards Display */}
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-3">
                   {/* Premium Gift Icon */}
                   <div className="relative group/icon">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 via-blue-500 to-purple-500 flex items-center justify-center shadow-xl shadow-emerald-500/25 group-hover:shadow-emerald-500/40 transition-all duration-300 relative overflow-hidden">
+                    <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 via-blue-500 to-purple-500 flex items-center justify-center shadow-lg shadow-emerald-500/25 group-hover:shadow-emerald-500/40 transition-all duration-300 relative overflow-hidden">
                       {/* Inner Glow */}
                       <div className="absolute inset-1 rounded-xl bg-white/15 backdrop-blur-sm" />
-                      <Star className="h-6 w-6 text-white relative z-10 group-hover/icon:scale-110 transition-transform duration-300 drop-shadow-lg" />
-                      
-                      {/* Rotating Ring */}
-                      <div className="absolute inset-0 rounded-2xl border-2 border-yellow-400/30 group-hover/icon:rotate-180 transition-transform duration-1000" />
+                      <Star className="h-5 w-5 text-white relative z-10 group-hover/icon:scale-110 transition-transform duration-300 drop-shadow-lg" />
                     </div>
                     
                     {/* Premium Floating Elements */}
-                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg animate-bounce">
-                      <Sparkles className="h-2 w-2 text-white drop-shadow-sm" />
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-md animate-bounce">
+                      <Sparkles className="h-1.5 w-1.5 text-white drop-shadow-sm" />
                     </div>
-                    
-                    {/* Pulsing Ring */}
-                    <div className="absolute inset-0 rounded-2xl border border-emerald-300/20 animate-ping opacity-75" />
                   </div>
                   
                   {/* Enhanced Rewards Text */}
                   <div className="space-y-1">
                     <div className="flex items-baseline space-x-2">
-                      <h3 className="text-xl font-black bg-gradient-to-br from-emerald-600 via-blue-600 to-purple-600 dark:from-emerald-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent tracking-tight">
+                      <h3 className="text-lg font-black bg-gradient-to-br from-emerald-600 via-blue-600 to-purple-600 dark:from-emerald-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent tracking-tight">
                         Streak Rewards
                       </h3>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <h4 className="text-sm font-bold text-foreground/90 tracking-wide">Daily Login Incentives</h4>
+                      <h4 className="text-sm font-bold text-foreground/90 tracking-wide">Daily Incentives</h4>
                       <div className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full animate-pulse" />
                     </div>
                   </div>
@@ -722,74 +710,38 @@ const Dashboard = () => {
                 {/* Bottom Section - Next Reward & Progress */}
                 <div className="space-y-3">
                   {/* Next Reward Preview */}
-                  <div className="flex items-center justify-between p-3 bg-gradient-to-r from-emerald-100/80 to-blue-100/80 dark:from-emerald-950/40 dark:to-blue-950/40 rounded-xl border border-emerald-200/50 dark:border-emerald-800/30 backdrop-blur-sm">
-                    <div className="flex items-center space-x-3">
-                      <span className="text-lg">🎁</span>
+                  <div className="flex items-center justify-between p-2 bg-gradient-to-r from-emerald-100/80 to-blue-100/80 dark:from-emerald-950/40 dark:to-blue-950/40 rounded-lg border border-emerald-200/50 dark:border-emerald-800/30 backdrop-blur-sm">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm">🎁</span>
                       <div>
-                        <div className="text-sm font-bold text-emerald-700 dark:text-emerald-300">Next Reward</div>
+                        <div className="text-xs font-bold text-emerald-700 dark:text-emerald-300">Next Reward</div>
                          <div className="text-xs text-emerald-600/80 dark:text-emerald-400/80">
-                           {getStudyStreak() >= 90 ? "Max Level Reached!" : 
-                            getStudyStreak() >= 75 ? "Elite GCSE Master badge + early beta access" :
-                            getStudyStreak() >= 60 ? "AI-marked mock exam with in-depth feedback" :
-                            getStudyStreak() >= 45 ? "AI Exam Coach session (custom revision plan)" :
-                            getStudyStreak() >= 30 ? "Premium-only predicted paper" :
-                            getStudyStreak() >= 21 ? "Exclusive AI-generated mini exam pack" :
-                            getStudyStreak() >= 14 ? "Smart notebook expansion + AI study tips" :
-                            getStudyStreak() >= 7 ? "Study playlist & background sounds" :
-                            getStudyStreak() >= 3 ? "Dashboard Color Theme" :
-                            "Dashboard Color Theme"
+                           {getStudyStreak() >= 90 ? "Max Level!" : 
+                            getStudyStreak() >= 14 ? "Smart notebook" :
+                            getStudyStreak() >= 7 ? "Study playlist" :
+                            "Color theme"
                             }
                         </div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-sm font-black bg-gradient-to-r from-emerald-700 to-blue-700 dark:from-emerald-300 dark:to-blue-300 bg-clip-text text-transparent">
-                         {getStudyStreak() >= 90 ? "🎉" :
-                          getStudyStreak() >= 75 ? "Unlocked!" :
-                          getStudyStreak() >= 60 ? "Unlocked!" :
-                          getStudyStreak() >= 45 ? "Unlocked!" :
-                          getStudyStreak() >= 30 ? "Unlocked!" :
-                          getStudyStreak() >= 21 ? "Unlocked!" :
-                          getStudyStreak() >= 14 ? "Unlocked!" :
+                      <div className="text-xs font-black bg-gradient-to-r from-emerald-700 to-blue-700 dark:from-emerald-300 dark:to-blue-300 bg-clip-text text-transparent">
+                         {getStudyStreak() >= 14 ? "Unlocked!" :
                           getStudyStreak() >= 7 ? "Unlocked!" :
-                          getStudyStreak() >= 3 ? `${7 - getStudyStreak()} days` :
-                          `${3 - getStudyStreak()} days`
+                          getStudyStreak() >= 3 ? `${7 - getStudyStreak()}d` :
+                          `${3 - getStudyStreak()}d`
                          }
-                      </div>
-                      <div className="text-xs font-semibold text-emerald-600/80 dark:text-emerald-400/80 uppercase tracking-wider">
-                        {getStudyStreak() >= 90 ? "Max Level" : getStudyStreak() >= 3 ? "to go" : "to go"}
                       </div>
                     </div>
                   </div>
                   
                   {/* Progress Bar */}
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-xs font-medium text-muted-foreground">
-                      <span>Progress to next milestone</span>
-                      <span>
-                        {getStudyStreak() >= 90 ? "🎉 Maximum Level!" :
-                         getStudyStreak() >= 75 ? `${getStudyStreak()}/90` :
-                         getStudyStreak() >= 60 ? `${getStudyStreak()}/75` :
-                         getStudyStreak() >= 45 ? `${getStudyStreak()}/60` :
-                         getStudyStreak() >= 30 ? `${getStudyStreak()}/45` :
-                         getStudyStreak() >= 21 ? `${getStudyStreak()}/30` :
-                         getStudyStreak() >= 14 ? `${getStudyStreak()}/21` :
-                         getStudyStreak() >= 7 ? `${getStudyStreak()}/14` :
-                         getStudyStreak() >= 3 ? `${getStudyStreak()}/7` :
-                         `${getStudyStreak()}/3`
-                        }
-                      </span>
-                    </div>
-                    <div className="w-full bg-muted/50 rounded-full h-2 overflow-hidden">
+                  <div className="space-y-1">
+                    <div className="w-full bg-muted/50 rounded-full h-1.5 overflow-hidden">
                       <div 
                         className="h-full bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 rounded-full transition-all duration-700 shadow-lg"
                         style={{
                           width: `${getStudyStreak() >= 90 ? 100 :
-                                   getStudyStreak() >= 75 ? (getStudyStreak() / 90) * 100 :
-                                   getStudyStreak() >= 60 ? (getStudyStreak() / 75) * 100 :
-                                   getStudyStreak() >= 45 ? (getStudyStreak() / 60) * 100 :
-                                   getStudyStreak() >= 30 ? (getStudyStreak() / 45) * 100 :
-                                   getStudyStreak() >= 21 ? (getStudyStreak() / 30) * 100 :
                                    getStudyStreak() >= 14 ? (getStudyStreak() / 21) * 100 :
                                    getStudyStreak() >= 7 ? (getStudyStreak() / 14) * 100 :
                                    getStudyStreak() >= 3 ? (getStudyStreak() / 7) * 100 :
