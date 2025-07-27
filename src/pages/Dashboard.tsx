@@ -1096,7 +1096,7 @@ const Dashboard = () => {
                        isPinned={pinnedSubjects.includes(subject.id)}
                        lastActivity={getLastActivity(subject.id)}
                        userId={user?.id}
-                       onToggleUserSubject={handlePhysicsToggle}
+                       onToggleUserSubject={subject.id === 'physics-aqa' ? handlePhysicsToggle : toggleUserSubject}
                        isUserSubject={userSubjects.includes(subject.id)}
                        showAddButton={subjectsTab === 'all-subjects'}
                      />
