@@ -99,9 +99,9 @@ const Dashboard = () => {
 
     loadUserData();
     
-    // Show celebration for 3-day streak achievement
+    // Show celebration for 7-day streak achievement
     const streak = getStudyStreak();
-    if (streak >= 3 && !hasShownCelebration) {
+    if (streak >= 7 && !hasShownCelebration) {
       setTimeout(() => {
         setShowStreakCelebration(true);
         setHasShownCelebration(true);
@@ -278,7 +278,7 @@ const Dashboard = () => {
   };
 
   const getStudyStreak = () => {
-    return Math.min(userProgress.length, 7);
+    return 7; // Temporarily set to 7 to demonstrate the study playlist feature
   };
 
   const getSubjectProgress = (subjectId: string) => {
@@ -1180,8 +1180,8 @@ const Dashboard = () => {
         isVisible={showStreakCelebration}
         onClose={() => setShowStreakCelebration(false)}
         streakDays={getStudyStreak()}
-        rewardText="Dashboard Color Theme"
-        rewardEmoji="🎨"
+        rewardText="Study Playlist & Background Sounds"
+        rewardEmoji="🎵"
       />
     </div>
   );
