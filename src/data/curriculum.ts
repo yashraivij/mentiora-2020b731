@@ -1539,127 +1539,207 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'tvr-q1',
-            question: 'The following extract is from a travel blog about visiting Japan, published in 2023.\n\n"Tokyo hits you like a neon-soaked punch to the senses. Everywhere you look, there\'s something demanding your attention – flashing billboards, tiny alleyways packed with salarymen grabbing quick ramen, the constant hum of humanity moving at breakneck speed. It\'s overwhelming. It\'s exhausting. It\'s absolutely intoxicating."\n\nList 4 things from this extract that the writer tells us about Tokyo.',
-            marks: 4,
+            question: 'Identify two features of formal written language.',
+            marks: 2,
             difficulty: 'easy',
-            modelAnswer: '1. There are neon lights/flashing billboards, 2. There are small alleyways, 3. Workers eat ramen in these spaces, 4. People move very quickly/there are lots of people, 5. It has a constant noise/hum, 6. It\'s overwhelming, 7. It\'s exhausting, 8. It\'s intoxicating (any 4 acceptable)',
+            modelAnswer: 'Any two from: Complete sentences, Standard spelling and grammar, No contractions (do not instead of don\'t), Third person pronouns, Complex vocabulary, Objective tone, No slang or colloquialisms.',
             markingCriteria: {
               breakdown: [
-                '1 mark for each correct point (4 marks total)',
-                'Must be factual information from the text',
-                'No analysis required, just identification'
+                'One correct feature of formal language (1 mark)',
+                'Second correct feature of formal language (1 mark)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q2',
-            question: 'Look in detail at lines 15-25 of the following extract from a newspaper article about online shopping.\n\n"The high street is dying. That\'s what they tell us, anyway. Walk through any town centre and you\'ll see the evidence: boarded-up shops, \'To Let\' signs, and the hollow echo of footsteps where once there was the buzz of commerce. But is this really the whole story? Perhaps we\'re witnessing not death, but transformation."\n\nHow does the writer use language here to present their viewpoint about the high street?',
-            marks: 8,
-            difficulty: 'medium',
-            modelAnswer: 'The writer uses contrasting perspectives to challenge common assumptions. The metaphor "The high street is dying" presents the dominant narrative, while "That\'s what they tell us, anyway" immediately questions this view. Visual imagery of "boarded-up shops" and "\'To Let\' signs" creates a sense of abandonment and decline. The auditory imagery contrasts "hollow echo of footsteps" with "buzz of commerce" to emphasize the loss of vitality. However, the rhetorical question "But is this really the whole story?" signals a shift in perspective. The final metaphor contrasts "death" with "transformation," suggesting renewal rather than destruction.',
+            question: 'Give one difference between a news report and a personal diary.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Any one from: News reports are written for a public audience, diaries are private; News reports use formal language, diaries use informal language; News reports are factual and objective, diaries are personal and subjective; News reports follow a specific structure, diaries are more flexible.',
             markingCriteria: {
               breakdown: [
-                'Analysis of metaphor and contrast (2-3 marks)',
-                'Discussion of imagery and sensory details (2-3 marks)',
-                'Analysis of rhetorical techniques (2-3 marks)',
-                'Overall effect on reader\'s understanding (1-2 marks)'
+                'One clear difference between the two text types (1 mark)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q3',
-            question: 'Read the following two texts about social media.\n\nText A: From a blog post by a teenager in 2024\n"Social media is literally my lifeline. Without Instagram and TikTok, I\'d be completely isolated from my friends. Yeah, there\'s drama sometimes, but that\'s just part of growing up, right?"\n\nText B: From a newspaper opinion piece in 2024\n"Social media platforms exploit young people\'s natural desire for connection, trapping them in cycles of validation-seeking behaviour that can damage their mental health and self-esteem."\n\nCompare how the two writers present different attitudes towards social media.',
-            marks: 10,
-            difficulty: 'medium',
-            modelAnswer: 'Text A presents social media positively through personal, informal language. The metaphor "literally my lifeline" suggests dependency but frames it as essential for survival and connection. The dismissive "Yeah, there\'s drama sometimes" minimizes negative aspects, while the rhetorical question normalizes conflict as "just part of growing up." Text B adopts a critical, formal tone using analytical language like "exploit" and "cycles of validation-seeking behaviour." The medical metaphor of "damage" presents social media as harmful to "mental health." Text A uses first person and colloquial language to create authenticity, while Text B uses third person and academic vocabulary to establish authority and objectivity.',
+            question: 'What is meant by the term "tone" in a text?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Tone is the attitude or feeling that the writer conveys through their choice of words and style.',
             markingCriteria: {
               breakdown: [
-                'Analysis of Text A\'s positive presentation (3-4 marks)',
-                'Analysis of Text B\'s critical presentation (3-4 marks)',
-                'Comparison of language techniques and effects (2-3 marks)',
-                'Discussion of different perspectives and tones (1-2 marks)'
+                'Correct definition showing understanding of tone as writer\'s attitude (1 mark)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q4',
-            question: 'The following extract is from a memoir about growing up in the 1980s.\n\n"Saturday mornings meant one thing: pocket money and the sweet shop. Mrs Henderson\'s corner shop was a treasure trove of sugary delights – rows of glass jars filled with cola bottles, sherbet lemons, and those impossible-to-open toffees that would glue your teeth together for hours. The bell above the door would announce our arrival with a cheerful jingle, and Mrs Henderson would peer over her spectacles with that knowing smile."\n\nAnalyse how the writer uses language to create a sense of nostalgia.',
-            marks: 12,
-            difficulty: 'medium',
-            modelAnswer: 'The writer creates nostalgia through sensory details and positive associations with childhood. The opening "Saturday mornings meant one thing" establishes a routine that evokes security and anticipation. The metaphor "treasure trove" transforms the ordinary shop into something magical and valuable from a child\'s perspective. Specific details like "cola bottles, sherbet lemons" trigger sensory memories, while the humorous description of toffees that "glue your teeth together" creates affectionate recollection of childhood experiences. The personification of the bell\'s "cheerful jingle" and Mrs Henderson\'s "knowing smile" suggest warmth and community. The writer uses past tense throughout to emphasize the distance from this idealized time, making the reader yearn for this simpler, more innocent period.',
+            question: 'Explain why a writer might use short sentences to build tension.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Short sentences create a quick, choppy rhythm that mirrors urgency or panic. They make the reader read faster, increasing pace and creating suspense about what happens next.',
             markingCriteria: {
               breakdown: [
-                'Analysis of specific language techniques (4-5 marks)',
-                'Discussion of sensory details and their effects (3-4 marks)',
-                'Analysis of how nostalgia is created (3-4 marks)',
-                'Overall understanding of writer\'s methods (1-2 marks)'
+                'Understanding of rhythm/pace effect (1 mark)',
+                'Connection to tension/suspense building (1 mark)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q5',
-            question: 'You are going to compare how the two writers present their experiences of visiting London for the first time.\n\nText A: From a travel blog (2023)\n"London swallowed me whole. The Underground spat me out into a world of red buses, black cabs, and more people than I\'d ever seen in one place. Every corner turned revealed another iconic sight – Big Ben looming overhead, the Thames snaking through it all like a muddy ribbon."\n\nText B: From a guidebook (1995)\n"Visitors to London should prepare themselves for a city of remarkable contrasts. Ancient landmarks stand alongside modern developments, while efficient transport systems connect diverse neighbourhoods, each with its own distinct character and attractions."\n\nCompare how the writers present London.',
-            marks: 15,
-            difficulty: 'hard',
-            modelAnswer: 'Text A presents London as overwhelming and exciting through vivid, personal language. The metaphor "London swallowed me whole" suggests the city\'s power to engulf visitors, while "The Underground spat me out" uses violent imagery to show disorientation. Sensory details like "red buses, black cabs" create immediate visual recognition, and the simile comparing the Thames to "a muddy ribbon" offers a personal, slightly irreverent perspective. Text B adopts an informative, objective tone using formal language like "remarkable contrasts" and "efficient transport systems." It presents London analytically through balanced descriptions of "Ancient landmarks" versus "modern developments." Text A uses first person to create immediacy and emotional connection, while Text B\'s third person maintains professional distance. Both texts acknowledge London\'s scale, but Text A emphasizes emotional impact while Text B focuses on practical information for visitors.',
+            question: 'Identify two persuasive techniques that could be used in a speech.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Any two from: Rhetorical questions, Repetition, Emotive language, Statistics/facts, Personal pronouns (you/we), Direct address, Alliteration, Rule of three.',
             markingCriteria: {
               breakdown: [
-                'Analysis of Text A\'s personal, vivid presentation (4-5 marks)',
-                'Analysis of Text B\'s formal, informative presentation (4-5 marks)',
-                'Detailed comparison of language techniques (4-5 marks)',
-                'Discussion of different purposes and audiences (2-3 marks)'
+                'One correct persuasive technique (1 mark)',
+                'Second correct persuasive technique (1 mark)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q6',
-            question: 'Look at the following extract from a sports report.\n\n"In the dying seconds of the match, Henderson found herself alone in front of goal. The crowd held its breath. Time seemed suspended as she drew back her foot, the weight of expectation heavy on her shoulders. The ball flew like a rocket into the top corner, and suddenly the stadium erupted into pure chaos."\n\nHow does the writer build tension and excitement in this extract?',
-            marks: 8,
+            question: 'Why might a writer choose to start a story in the middle of an action scene?',
+            marks: 2,
             difficulty: 'medium',
-            modelAnswer: 'The writer builds tension through careful pacing and dramatic timing. The phrase "dying seconds" immediately creates urgency and pressure. The isolation of Henderson being "alone in front of goal" emphasizes the pressure on her. The writer then slows down time with "The crowd held its breath" and "Time seemed suspended," creating a pause that builds anticipation. The metaphor "weight of expectation heavy on her shoulders" adds psychological pressure. The simile "ball flew like a rocket" suggests speed and power, leading to the explosive release of tension as "the stadium erupted into pure chaos." The structure moves from slow, tense buildup to sudden, explosive release.',
+            modelAnswer: 'Starting in the middle of action immediately grabs the reader\'s attention and creates excitement. It makes the reader want to continue reading to understand what is happening and what led to this moment.',
             markingCriteria: {
               breakdown: [
-                'Analysis of temporal language and pacing (2-3 marks)',
-                'Discussion of metaphors and similes (2-3 marks)',
-                'Analysis of structural effects (2-3 marks)',
-                'Understanding of how tension builds (1-2 marks)'
+                'Understanding of engaging the reader (1 mark)',
+                'Creating excitement/interest effect (1 mark)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q7',
-            question: 'The following text is from a speech by a head teacher addressing new students.\n\n"Welcome to Westfield Academy. You stand at the threshold of opportunity. Here, you will discover not just subjects, but yourselves. You will face challenges, certainly, but remember – diamonds are formed under pressure."\n\nAnalyse how the speaker uses language to motivate and inspire the students.',
-            marks: 10,
-            difficulty: 'medium',
-            modelAnswer: 'The speaker uses formal, elevated language to create a sense of occasion and importance. The metaphor "threshold of opportunity" presents the school as a gateway to success, suggesting transformation and potential. The direct address "you" creates personal connection and involvement. The parallel structure "not just subjects, but yourselves" emphasizes personal development over academic achievement. The acknowledgment "You will face challenges, certainly" shows honesty while the adverb "certainly" demonstrates confidence. The metaphor "diamonds are formed under pressure" transforms difficulties into something valuable and necessary, suggesting that struggle leads to brilliance and worth. The alliteration and rhythm create memorable, inspiring language that students will remember.',
+            question: 'Give one effect of using rhetorical questions in an advertisement.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Any one from: Makes the reader think about the product/service; Engages the reader directly; Creates a sense of involvement; Makes the reader consider their needs; Implies the product is the answer.',
             markingCriteria: {
               breakdown: [
-                'Analysis of metaphorical language (3-4 marks)',
-                'Discussion of direct address and personal connection (2-3 marks)',
-                'Analysis of structural features and rhythm (2-3 marks)',
-                'Understanding of motivational techniques (2-3 marks)'
+                'One correct effect of rhetorical questions in advertising (1 mark)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
           },
           {
             id: 'tvr-q8',
-            question: 'Read this extract from a restaurant review.\n\n"The service was appalling. Our waiter seemed more interested in his phone than our order, and when the food finally arrived – cold, I might add – he had the audacity to ask if everything was \'alright.\' Alright? The pasta was like rubber, the sauce had clearly been reheated multiple times, and don\'t even get me started on the so-called \'fresh\' salad."\n\nHow does the reviewer use language to express their dissatisfaction?',
-            marks: 8,
+            question: 'How can a writer make a setting feel threatening?',
+            marks: 3,
             difficulty: 'medium',
-            modelAnswer: 'The reviewer uses increasingly negative language to build frustration. The opening "appalling" immediately establishes a harsh tone. The criticism becomes personal with "seemed more interested in his phone," suggesting unprofessionalism. The parenthetical "cold, I might add" shows mounting irritation. The phrase "had the audacity" expresses outrage at the waiter\'s question. The rhetorical question "Alright?" shows disbelief and sarcasm. Specific criticisms use simile ("like rubber") and repeated evidence ("reheated multiple times"). The dismissive "so-called \'fresh\'" uses scare quotes to suggest deception. The final "don\'t even get me started" suggests there are even more problems, creating a sense of overwhelming dissatisfaction.',
+            modelAnswer: 'Writers can use dark, mysterious imagery such as shadows and fog. They can describe threatening sounds like creaking or howling. They can use personification to make the setting seem alive and menacing, such as "the house watched them".',
             markingCriteria: {
               breakdown: [
-                'Analysis of increasingly negative language (2-3 marks)',
-                'Discussion of rhetorical techniques (2-3 marks)',
-                'Analysis of specific criticisms and evidence (2-3 marks)',
-                'Understanding of tone and attitude (1-2 marks)'
+                'Use of dark/mysterious imagery (1 mark)',
+                'Threatening sounds or atmosphere (1 mark)',
+                'Language techniques like personification (1 mark)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q9',
+            question: 'Identify one structural feature often found in newspaper articles.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Any one from: Headline, Lead paragraph summarising key information, Paragraphs in order of importance, Subheadings, Quotes from sources, Byline.',
+            markingCriteria: {
+              breakdown: [
+                'One correct structural feature of newspaper articles (1 mark)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q10',
+            question: 'Explain the difference between fact and opinion with an example of each.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A fact is something that can be proven true, such as "London is the capital of England." An opinion is a personal view or belief, such as "London is the best city in the world."',
+            markingCriteria: {
+              breakdown: [
+                'Correct definition and example of fact (1 mark)',
+                'Correct definition and example of opinion (1 mark)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q11',
+            question: 'Why might a writer use repetition in a text?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Repetition emphasizes important points and makes them memorable. It can also create rhythm and pattern that makes the text more engaging and persuasive.',
+            markingCriteria: {
+              breakdown: [
+                'Understanding of emphasis/memorable effect (1 mark)',
+                'Recognition of rhythm/persuasive effect (1 mark)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q12',
+            question: 'How does formal language make a business letter effective?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Formal language shows respect for the recipient and creates a professional impression. It makes the message clear and serious, helping to establish credibility and trust. It also follows expected conventions that business people understand.',
+            markingCriteria: {
+              breakdown: [
+                'Shows respect/professionalism (1 mark)',
+                'Creates credibility/trust (1 mark)',
+                'Follows expected conventions (1 mark)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q13',
+            question: 'Identify one word that could create a sense of excitement in a text and explain why.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Any appropriate word such as "electrifying" - this creates excitement because it suggests energy and intensity that makes the reader feel energized. Or "thrilling" - this creates excitement because it suggests something that makes your heart race.',
+            markingCriteria: {
+              breakdown: [
+                'Appropriate word choice (1 mark)',
+                'Clear explanation of why it creates excitement (1 mark)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q14',
+            question: 'How can sentence variety improve the flow of writing?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Using different sentence lengths and structures prevents the writing from becoming monotonous or boring. It creates rhythm and keeps the reader interested by varying the pace and emphasis.',
+            markingCriteria: {
+              breakdown: [
+                'Prevents monotony/maintains interest (1 mark)',
+                'Creates rhythm/varies pace (1 mark)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'tvr-q15',
+            question: 'Give one example of how context influences language choices.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Any one from: Texting friends uses informal language and abbreviations; Writing to an employer uses formal language; Speaking to a child uses simple vocabulary; Writing for a teenage audience uses contemporary references.',
+            markingCriteria: {
+              breakdown: [
+                'Clear example showing how context affects language choice (1 mark)'
               ]
             },
             specReference: 'AQA English Language 8700 Paper 1'
