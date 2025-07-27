@@ -1142,7 +1142,7 @@ const Dashboard = () => {
                   </Button>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div id="subjects-section" className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {(subjectsTab === 'my-subjects' ? 
                     (userSubjects.length > 0 ? sortedSubjects.filter(s => userSubjects.includes(s.id)) : []) 
                     : allSubjects)
