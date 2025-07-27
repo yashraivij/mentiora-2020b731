@@ -334,6 +334,25 @@ const Dashboard = () => {
           });
         }
       } else {
+        // Check if subject already exists in database first
+        const { data: existingSubject } = await supabase
+          .from('user_subjects')
+          .select('id')
+          .eq('user_id', user.id)
+          .eq('subject_name', getSubjectName(subject))
+          .eq('exam_board', getExamBoard(subjectId))
+          .single();
+
+        if (existingSubject) {
+          console.log('Subject already exists in database, updating local state');
+          setUserSubjects(prev => prev.includes(subjectId) ? prev : [...prev, subjectId]);
+          toast({
+            title: "Already Added",
+            description: `${subject.name} is already in your subjects.`,
+          });
+          return;
+        }
+
         // Add to database
         console.log('Attempting to insert:', {
           user_id: user.id,
