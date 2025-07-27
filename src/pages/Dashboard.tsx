@@ -335,6 +335,15 @@ const Dashboard = () => {
         }
       } else {
         // Add to database
+        console.log('Attempting to insert:', {
+          user_id: user.id,
+          subject_name: getSubjectName(subject),
+          exam_board: getExamBoard(subjectId),
+          predicted_grade: 'U',
+          target_grade: null,
+          priority_level: 3
+        });
+        
         const { error } = await supabase
           .from('user_subjects')
           .insert({
@@ -347,7 +356,8 @@ const Dashboard = () => {
           });
 
         if (error) {
-          console.error('Error adding subject:', error);
+          console.error('Database error adding subject:', error);
+          console.error('Error details:', JSON.stringify(error, null, 2));
           toast({
             title: "Error",
             description: `Failed to add ${subject.name} to your subjects. Please try again.`,
