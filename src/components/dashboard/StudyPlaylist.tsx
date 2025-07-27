@@ -23,8 +23,8 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
   const [isMuted, setIsMuted] = useState(false);
   const audioContextRef = useRef<AudioContext | null>(null);
   const gainNodeRef = useRef<GainNode | null>(null);
-  const oscillatorRef = useRef<OscillatorNode | null>(null);
-  const noiseBufferRef = useRef<AudioBuffer | null>(null);
+  const audioSourcesRef = useRef<AudioNode[]>([]);
+  const isGeneratingRef = useRef(false);
 
   const playlists = [
     {
@@ -88,129 +88,199 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
     }
   };
 
-  // Generate different types of audio
+  // Generate and manage audio
   const generateAudio = (audioType: 'lofi' | 'nature' | 'whitenoise' | 'ambient') => {
+    if (isGeneratingRef.current) return;
+    
     initAudioContext();
     if (!audioContextRef.current || !gainNodeRef.current) return;
 
-    // Stop any existing audio
-    stopAudio();
-
+    // Clear any existing audio sources
+    audioSourcesRef.current.forEach(source => {
+      try {
+        if ('stop' in source) {
+          (source as AudioBufferSourceNode | OscillatorNode).stop();
+        }
+      } catch (e) {
+        // Source might already be stopped
+      }
+    });
+    audioSourcesRef.current = [];
+    
+    isGeneratingRef.current = true;
     const ctx = audioContextRef.current;
 
     switch (audioType) {
       case 'lofi':
-        // Create a simple lo-fi beat with low-pass filtered noise and a subtle bass
-        const lofiOsc = ctx.createOscillator();
+        // Enhanced lo-fi with multiple layers
+        const lofiOsc1 = ctx.createOscillator();
+        const lofiOsc2 = ctx.createOscillator();
         const lofiGain = ctx.createGain();
-        const filter = ctx.createBiquadFilter();
+        const lofiFilter = ctx.createBiquadFilter();
+        const lofiDelay = ctx.createDelay();
+        const lofiDelayGain = ctx.createGain();
         
-        lofiOsc.type = 'sawtooth';
-        lofiOsc.frequency.setValueAtTime(220, ctx.currentTime); // A3 note
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(800, ctx.currentTime);
-        lofiGain.gain.setValueAtTime(0.1, ctx.currentTime);
+        lofiOsc1.type = 'triangle';
+        lofiOsc2.type = 'sine';
+        lofiOsc1.frequency.setValueAtTime(220, ctx.currentTime);
+        lofiOsc2.frequency.setValueAtTime(110, ctx.currentTime);
         
-        lofiOsc.connect(filter);
-        filter.connect(lofiGain);
+        lofiFilter.type = 'lowpass';
+        lofiFilter.frequency.setValueAtTime(1200, ctx.currentTime);
+        lofiFilter.Q.setValueAtTime(2, ctx.currentTime);
+        
+        lofiDelay.delayTime.setValueAtTime(0.3, ctx.currentTime);
+        lofiDelayGain.gain.setValueAtTime(0.3, ctx.currentTime);
+        lofiGain.gain.setValueAtTime(0.08, ctx.currentTime);
+        
+        lofiOsc1.connect(lofiFilter);
+        lofiOsc2.connect(lofiFilter);
+        lofiFilter.connect(lofiGain);
+        lofiFilter.connect(lofiDelay);
+        lofiDelay.connect(lofiDelayGain);
+        lofiDelayGain.connect(lofiGain);
         lofiGain.connect(gainNodeRef.current);
         
-        lofiOsc.start();
-        oscillatorRef.current = lofiOsc;
+        lofiOsc1.start();
+        lofiOsc2.start();
+        audioSourcesRef.current.push(lofiOsc1, lofiOsc2);
         break;
 
       case 'nature':
-        // Create nature sounds using filtered white noise
-        const bufferSize = 2 * ctx.sampleRate;
-        const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-        const output = noiseBuffer.getChannelData(0);
+        // Enhanced nature sounds with multiple frequency bands
+        const bufferSize = 4 * ctx.sampleRate;
+        const noiseBuffer = ctx.createBuffer(2, bufferSize, ctx.sampleRate);
         
-        for (let i = 0; i < bufferSize; i++) {
-          output[i] = Math.random() * 2 - 1;
+        for (let channel = 0; channel < 2; channel++) {
+          const output = noiseBuffer.getChannelData(channel);
+          for (let i = 0; i < bufferSize; i++) {
+            output[i] = (Math.random() * 2 - 1) * 0.5;
+          }
         }
         
-        const whiteNoise = ctx.createBufferSource();
-        const bandpass = ctx.createBiquadFilter();
+        const natureSource = ctx.createBufferSource();
+        const lowPass = ctx.createBiquadFilter();
+        const highPass = ctx.createBiquadFilter();
         const natureGain = ctx.createGain();
         
-        whiteNoise.buffer = noiseBuffer;
-        whiteNoise.loop = true;
-        bandpass.type = 'bandpass';
-        bandpass.frequency.setValueAtTime(1000, ctx.currentTime);
-        bandpass.Q.setValueAtTime(0.5, ctx.currentTime);
-        natureGain.gain.setValueAtTime(0.05, ctx.currentTime);
+        natureSource.buffer = noiseBuffer;
+        natureSource.loop = true;
+        lowPass.type = 'lowpass';
+        lowPass.frequency.setValueAtTime(2000, ctx.currentTime);
+        highPass.type = 'highpass';
+        highPass.frequency.setValueAtTime(200, ctx.currentTime);
+        natureGain.gain.setValueAtTime(0.06, ctx.currentTime);
         
-        whiteNoise.connect(bandpass);
-        bandpass.connect(natureGain);
+        natureSource.connect(highPass);
+        highPass.connect(lowPass);
+        lowPass.connect(natureGain);
         natureGain.connect(gainNodeRef.current);
         
-        whiteNoise.start();
+        natureSource.start();
+        audioSourcesRef.current.push(natureSource);
         break;
 
       case 'whitenoise':
-        // Create white noise
-        const whiteNoiseBufferSize = 2 * ctx.sampleRate;
-        const whiteNoiseBuffer = ctx.createBuffer(1, whiteNoiseBufferSize, ctx.sampleRate);
-        const whiteOutput = whiteNoiseBuffer.getChannelData(0);
+        // Enhanced white noise with better frequency distribution
+        const noiseBufferSize = 4 * ctx.sampleRate;
+        const whiteNoiseBuffer = ctx.createBuffer(2, noiseBufferSize, ctx.sampleRate);
         
-        for (let i = 0; i < whiteNoiseBufferSize; i++) {
-          whiteOutput[i] = Math.random() * 2 - 1;
+        for (let channel = 0; channel < 2; channel++) {
+          const output = whiteNoiseBuffer.getChannelData(channel);
+          for (let i = 0; i < noiseBufferSize; i++) {
+            output[i] = Math.random() * 2 - 1;
+          }
         }
         
         const whiteNoiseSource = ctx.createBufferSource();
+        const whiteNoiseFilter = ctx.createBiquadFilter();
         const whiteNoiseGain = ctx.createGain();
         
         whiteNoiseSource.buffer = whiteNoiseBuffer;
         whiteNoiseSource.loop = true;
-        whiteNoiseGain.gain.setValueAtTime(0.1, ctx.currentTime);
+        whiteNoiseFilter.type = 'lowpass';
+        whiteNoiseFilter.frequency.setValueAtTime(8000, ctx.currentTime);
+        whiteNoiseGain.gain.setValueAtTime(0.08, ctx.currentTime);
         
-        whiteNoiseSource.connect(whiteNoiseGain);
+        whiteNoiseSource.connect(whiteNoiseFilter);
+        whiteNoiseFilter.connect(whiteNoiseGain);
         whiteNoiseGain.connect(gainNodeRef.current);
         
         whiteNoiseSource.start();
+        audioSourcesRef.current.push(whiteNoiseSource);
         break;
 
       case 'ambient':
-        // Create ambient drone with multiple oscillators
-        const freq1 = ctx.createOscillator();
-        const freq2 = ctx.createOscillator();
+        // Enhanced ambient with multiple harmonic layers
+        const ambientOsc1 = ctx.createOscillator();
+        const ambientOsc2 = ctx.createOscillator();
+        const ambientOsc3 = ctx.createOscillator();
         const ambientGain = ctx.createGain();
+        const ambientFilter = ctx.createBiquadFilter();
         
-        freq1.type = 'sine';
-        freq2.type = 'sine';
-        freq1.frequency.setValueAtTime(110, ctx.currentTime); // A2
-        freq2.frequency.setValueAtTime(165, ctx.currentTime); // E3
-        ambientGain.gain.setValueAtTime(0.05, ctx.currentTime);
+        ambientOsc1.type = 'sine';
+        ambientOsc2.type = 'triangle';
+        ambientOsc3.type = 'sine';
+        ambientOsc1.frequency.setValueAtTime(110, ctx.currentTime);
+        ambientOsc2.frequency.setValueAtTime(165, ctx.currentTime);
+        ambientOsc3.frequency.setValueAtTime(220, ctx.currentTime);
         
-        freq1.connect(ambientGain);
-        freq2.connect(ambientGain);
+        ambientFilter.type = 'lowpass';
+        ambientFilter.frequency.setValueAtTime(1500, ctx.currentTime);
+        ambientGain.gain.setValueAtTime(0.04, ctx.currentTime);
+        
+        ambientOsc1.connect(ambientFilter);
+        ambientOsc2.connect(ambientFilter);
+        ambientOsc3.connect(ambientFilter);
+        ambientFilter.connect(ambientGain);
         ambientGain.connect(gainNodeRef.current);
         
-        freq1.start();
-        freq2.start();
-        oscillatorRef.current = freq1; // Store reference for cleanup
+        ambientOsc1.start();
+        ambientOsc2.start();
+        ambientOsc3.start();
+        audioSourcesRef.current.push(ambientOsc1, ambientOsc2, ambientOsc3);
         break;
+    }
+    
+    isGeneratingRef.current = false;
+  };
+
+  const pauseAudio = () => {
+    if (audioContextRef.current?.state === 'running') {
+      audioContextRef.current.suspend();
+    }
+  };
+
+  const resumeAudio = () => {
+    if (audioContextRef.current?.state === 'suspended') {
+      audioContextRef.current.resume();
     }
   };
 
   const stopAudio = () => {
-    if (oscillatorRef.current) {
+    audioSourcesRef.current.forEach(source => {
       try {
-        oscillatorRef.current.stop();
+        if ('stop' in source) {
+          (source as AudioBufferSourceNode | OscillatorNode).stop();
+        }
       } catch (e) {
-        // Oscillator might already be stopped
+        // Source might already be stopped
       }
-      oscillatorRef.current = null;
-    }
+    });
+    audioSourcesRef.current = [];
   };
 
   const togglePlayPause = () => {
     if (!isPlaying) {
-      const currentAudioType = playlists[selectedPlaylist].tracks[currentTrack].audioType;
-      generateAudio(currentAudioType);
+      if (audioSourcesRef.current.length === 0) {
+        const currentAudioType = playlists[selectedPlaylist].tracks[currentTrack].audioType;
+        generateAudio(currentAudioType);
+      } else {
+        resumeAudio();
+      }
       setIsPlaying(true);
     } else {
-      stopAudio();
+      pauseAudio();
       setIsPlaying(false);
     }
   };
@@ -300,16 +370,16 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
 
   return (
     <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 dark:from-indigo-950/40 dark:via-purple-950/20 dark:to-pink-950/30 shadow-xl">
-      <CardHeader className="pb-4">
+      <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="p-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500">
-              <Music className="h-5 w-5 text-white" />
+          <div className="flex items-center space-x-2">
+            <div className="p-1.5 rounded-full bg-gradient-to-r from-purple-500 to-pink-500">
+              <Music className="h-4 w-4 text-white" />
             </div>
             <div>
-              <CardTitle className="text-lg text-foreground">Study Playlist</CardTitle>
+              <CardTitle className="text-base text-foreground">Study Playlist</CardTitle>
               <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white border-0 text-xs">
-                7-Day Reward
+                Unlocked
               </Badge>
             </div>
           </div>
@@ -317,55 +387,56 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
             {playlists.map((playlist, index) => (
               <Button
                 key={index}
-                variant={selectedPlaylist === index ? "default" : "ghost"}
+                variant="ghost"
                 size="sm"
                 onClick={() => setSelectedPlaylist(index)}
                 className={cn(
-                  "p-2 h-auto",
+                  "p-1.5 h-auto rounded-lg",
                   selectedPlaylist === index && `bg-gradient-to-r ${playlist.color} text-white`
                 )}
               >
-                <playlist.icon className="h-4 w-4" />
+                <playlist.icon className="h-3.5 w-3.5" />
               </Button>
             ))}
           </div>
         </div>
       </CardHeader>
       
-      <CardContent className="space-y-4">
-        {/* Current Track */}
-        <div className="text-center space-y-2">
-          <h4 className="font-semibold text-foreground">
-            {playlists[selectedPlaylist].tracks[currentTrack].name}
-          </h4>
-          <p className="text-sm text-muted-foreground">
-            {playlists[selectedPlaylist].name} • {playlists[selectedPlaylist].tracks[currentTrack].duration}
-          </p>
-        </div>
+      <CardContent className="space-y-3 pt-0">
+        {/* Current Track & Controls */}
+        <div className="space-y-2">
+          <div className="text-center">
+            <h4 className="text-sm font-semibold text-foreground">
+              {playlists[selectedPlaylist].tracks[currentTrack].name}
+            </h4>
+            <p className="text-xs text-muted-foreground">
+              {playlists[selectedPlaylist].name}
+            </p>
+          </div>
 
-        {/* Controls */}
-        <div className="flex items-center justify-center space-x-4">
-          <Button variant="ghost" size="sm" onClick={prevTrack}>
-            <SkipBack className="h-4 w-4" />
-          </Button>
-          
-          <Button 
-            size="sm" 
-            onClick={togglePlayPause}
-            className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-full w-10 h-10 p-0"
-          >
-            {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-          </Button>
-          
-          <Button variant="ghost" size="sm" onClick={nextTrack}>
-            <SkipForward className="h-4 w-4" />
-          </Button>
+          <div className="flex items-center justify-center space-x-3">
+            <Button variant="ghost" size="sm" onClick={prevTrack} className="h-8 w-8 p-0">
+              <SkipBack className="h-3.5 w-3.5" />
+            </Button>
+            
+            <Button 
+              size="sm" 
+              onClick={togglePlayPause}
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-full w-8 h-8 p-0"
+            >
+              {isPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
+            </Button>
+            
+            <Button variant="ghost" size="sm" onClick={nextTrack} className="h-8 w-8 p-0">
+              <SkipForward className="h-3.5 w-3.5" />
+            </Button>
+          </div>
         </div>
 
         {/* Volume Control */}
-        <div className="flex items-center space-x-3">
-          <Button variant="ghost" size="sm" onClick={toggleMute}>
-            {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+        <div className="flex items-center space-x-2">
+          <Button variant="ghost" size="sm" onClick={toggleMute} className="h-6 w-6 p-0">
+            {isMuted ? <VolumeX className="h-3 w-3" /> : <Volume2 className="h-3 w-3" />}
           </Button>
           <Slider
             value={isMuted ? [0] : volume}
@@ -374,33 +445,9 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
             step={1}
             className="flex-1"
           />
-          <span className="text-xs text-muted-foreground w-8 text-right">
+          <span className="text-xs text-muted-foreground w-6 text-right">
             {isMuted ? 0 : volume[0]}
           </span>
-        </div>
-
-        {/* Track List */}
-        <div className="max-h-32 overflow-y-auto space-y-1">
-          {playlists[selectedPlaylist].tracks.map((track, index) => (
-            <div
-              key={index}
-              onClick={() => setCurrentTrack(index)}
-              className={cn(
-                "flex items-center justify-between p-2 rounded-lg cursor-pointer transition-colors",
-                currentTrack === index 
-                  ? "bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/40 dark:to-pink-900/40" 
-                  : "hover:bg-muted/50"
-              )}
-            >
-              <span className={cn(
-                "text-sm",
-                currentTrack === index ? "font-semibold text-purple-700 dark:text-purple-300" : "text-foreground"
-              )}>
-                {track.name}
-              </span>
-              <span className="text-xs text-muted-foreground">{track.duration}</span>
-            </div>
-          ))}
         </div>
       </CardContent>
     </Card>
