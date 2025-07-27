@@ -183,10 +183,12 @@ const Dashboard = () => {
         const subjectsSection = document.getElementById('subjects-section');
         if (subjectsSection) {
           subjectsSection.scrollIntoView({ behavior: 'smooth' });
+          // Clear the hash from URL after scrolling
+          window.history.replaceState({}, '', '/dashboard');
         }
-      }, 100); // Small delay to ensure DOM is ready
+      }, 300); // Increased delay to ensure DOM is ready
     }
-  }, [location.hash]);
+  }, [location.pathname, location.hash]);
 
   const loadWeakTopicsFromDatabase = async () => {
     if (!user?.id) return;
