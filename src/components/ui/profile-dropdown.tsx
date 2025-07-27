@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
-import { User, Camera, Save, X } from 'lucide-react';
+import { User, Camera, Check, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
@@ -227,13 +227,33 @@ export function ProfileDropdown({ streakDays, firstName }: ProfileDropdownProps)
                   </div>
 
                   <div>
-                    <label className="text-xs font-medium text-muted-foreground">Avatar URL</label>
-                    <Input
-                      value={editData.avatar_url}
-                      onChange={(e) => setEditData({ ...editData, avatar_url: e.target.value })}
-                      placeholder="https://example.com/your-avatar.jpg"
-                      className="mt-1"
-                    />
+                    <label className="text-xs font-medium text-muted-foreground">Choose Avatar</label>
+                    <div className="grid grid-cols-5 gap-2 mt-2">
+                      {[
+                        'https://images.unsplash.com/photo-1485856327981-352400470457',
+                        'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158',
+                        'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7',
+                        'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9',
+                        'https://images.unsplash.com/photo-1535268647777-531c46309700'
+                      ].map((avatarUrl, index) => (
+                        <button
+                          key={index}
+                          type="button"
+                          onClick={() => setEditData({ ...editData, avatar_url: avatarUrl })}
+                          className={`w-12 h-12 rounded-full border-2 overflow-hidden transition-all ${
+                            editData.avatar_url === avatarUrl 
+                              ? 'border-primary ring-2 ring-primary/20' 
+                              : 'border-border hover:border-primary/50'
+                          }`}
+                        >
+                          <img 
+                            src={avatarUrl} 
+                            alt={`Avatar option ${index + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
@@ -243,7 +263,7 @@ export function ProfileDropdown({ streakDays, firstName }: ProfileDropdownProps)
                     disabled={isLoading || !editData.username.trim()}
                     className="flex-1 bg-gradient-to-r from-emerald-500 to-blue-500 hover:from-emerald-600 hover:to-blue-600 text-white"
                   >
-                    <Save className="h-4 w-4 mr-2" />
+                    <Check className="h-4 w-4 mr-2" />
                     {isLoading ? 'Saving...' : 'Save'}
                   </Button>
                   <Button 
