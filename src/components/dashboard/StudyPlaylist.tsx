@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { Slider } from '@/components/ui/slider';
-import { Play, Pause, SkipForward, SkipBack, Volume2, VolumeX, Music, Waves, Cloud, TreePine, Flame } from 'lucide-react';
+import { Play, Pause, SkipForward, SkipBack, Volume2, VolumeX, Music, Waves, Cloud, TreePine } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface StudyPlaylistProps {
@@ -33,7 +32,6 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
       color: "from-purple-500 to-pink-500",
       audioType: 'lofi' as const,
       tracks: [
-        { name: "Midnight Study", duration: "3:24", audioType: 'lofi' as const },
         { name: "Coffee Shop Vibes", duration: "4:12", audioType: 'lofi' as const },
         { name: "Rainy Day Focus", duration: "3:45", audioType: 'lofi' as const },
         { name: "Late Night Pages", duration: "4:01", audioType: 'lofi' as const }
@@ -339,74 +337,59 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
   }, []);
 
   if (!isUnlocked) {
-    return (
-      <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-slate-100 to-gray-200 dark:from-slate-900 dark:to-gray-800 opacity-60">
-        <div className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm">
-          <div className="text-center space-y-2">
-            <Flame className="h-8 w-8 mx-auto text-orange-500" />
-            <div className="text-sm font-semibold text-foreground">Study Playlist Locked</div>
-            <div className="text-xs text-muted-foreground">Unlock with 7-day streak</div>
-          </div>
-        </div>
-        <CardContent className="p-6">
-          <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <Music className="h-6 w-6 text-muted-foreground" />
-              <h3 className="text-lg font-semibold text-muted-foreground">Study Music & Sounds</h3>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              {playlists.map((playlist, index) => (
-                <div key={index} className="p-3 rounded-lg bg-muted/50 text-center">
-                  <playlist.icon className="h-5 w-5 mx-auto mb-2 text-muted-foreground" />
-                  <div className="text-sm font-medium text-muted-foreground">{playlist.name}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    );
+    return null; // Don't show anything when locked
   }
 
   return (
-    <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 dark:from-indigo-950/40 dark:via-purple-950/20 dark:to-pink-950/30 shadow-xl">
-      <CardHeader className="pb-2">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="p-1.5 rounded-full bg-gradient-to-r from-purple-500 to-pink-500">
-              <Music className="h-4 w-4 text-white" />
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="ghost"
+          size="sm"
+          className={cn(
+            "h-9 w-9 rounded-full p-0 transition-all duration-200",
+            isPlaying 
+              ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/25" 
+              : "bg-muted/80 hover:bg-muted text-muted-foreground hover:text-foreground"
+          )}
+        >
+          <Music className="h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent 
+        align="end" 
+        className="w-80 p-4 bg-card/95 backdrop-blur-xl border border-border shadow-xl z-50"
+      >
+        <div className="space-y-4">
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <Music className="h-4 w-4 text-purple-500" />
+              <span className="font-semibold text-sm">Study Playlist</span>
             </div>
-            <div>
-              <CardTitle className="text-base text-foreground">Study Playlist</CardTitle>
-              <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white border-0 text-xs">
-                Unlocked
-              </Badge>
+            <div className="flex space-x-1">
+              {playlists.map((playlist, index) => (
+                <Button
+                  key={index}
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setSelectedPlaylist(index)}
+                  className={cn(
+                    "p-1.5 h-auto rounded-lg",
+                    selectedPlaylist === index && `bg-gradient-to-r ${playlist.color} text-white`
+                  )}
+                >
+                  <playlist.icon className="h-3 w-3" />
+                </Button>
+              ))}
             </div>
           </div>
-          <div className="flex space-x-1">
-            {playlists.map((playlist, index) => (
-              <Button
-                key={index}
-                variant="ghost"
-                size="sm"
-                onClick={() => setSelectedPlaylist(index)}
-                className={cn(
-                  "p-1.5 h-auto rounded-lg",
-                  selectedPlaylist === index && `bg-gradient-to-r ${playlist.color} text-white`
-                )}
-              >
-                <playlist.icon className="h-3.5 w-3.5" />
-              </Button>
-            ))}
-          </div>
-        </div>
-      </CardHeader>
-      
-      <CardContent className="space-y-3 pt-0">
-        {/* Current Track & Controls */}
-        <div className="space-y-2">
-          <div className="text-center">
-            <h4 className="text-sm font-semibold text-foreground">
+
+          <DropdownMenuSeparator />
+
+          {/* Current Track */}
+          <div className="text-center space-y-1">
+            <h4 className="text-sm font-medium text-foreground">
               {playlists[selectedPlaylist].tracks[currentTrack].name}
             </h4>
             <p className="text-xs text-muted-foreground">
@@ -414,6 +397,7 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
             </p>
           </div>
 
+          {/* Controls */}
           <div className="flex items-center justify-center space-x-3">
             <Button variant="ghost" size="sm" onClick={prevTrack} className="h-8 w-8 p-0">
               <SkipBack className="h-3.5 w-3.5" />
@@ -431,26 +415,26 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
               <SkipForward className="h-3.5 w-3.5" />
             </Button>
           </div>
-        </div>
 
-        {/* Volume Control */}
-        <div className="flex items-center space-x-2">
-          <Button variant="ghost" size="sm" onClick={toggleMute} className="h-6 w-6 p-0">
-            {isMuted ? <VolumeX className="h-3 w-3" /> : <Volume2 className="h-3 w-3" />}
-          </Button>
-          <Slider
-            value={isMuted ? [0] : volume}
-            onValueChange={setVolume}
-            max={100}
-            step={1}
-            className="flex-1"
-          />
-          <span className="text-xs text-muted-foreground w-6 text-right">
-            {isMuted ? 0 : volume[0]}
-          </span>
+          {/* Volume Control */}
+          <div className="flex items-center space-x-2">
+            <Button variant="ghost" size="sm" onClick={toggleMute} className="h-6 w-6 p-0">
+              {isMuted ? <VolumeX className="h-3 w-3" /> : <Volume2 className="h-3 w-3" />}
+            </Button>
+            <Slider
+              value={isMuted ? [0] : volume}
+              onValueChange={setVolume}
+              max={100}
+              step={1}
+              className="flex-1"
+            />
+            <span className="text-xs text-muted-foreground w-6 text-right">
+              {isMuted ? 0 : volume[0]}
+            </span>
+          </div>
         </div>
-      </CardContent>
-    </Card>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 
