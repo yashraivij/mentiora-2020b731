@@ -1030,7 +1030,7 @@ const Dashboard = () => {
         <div className="space-y-6">
           <div className="flex items-center space-x-3 mb-6">
             <Crown className="h-6 w-6 text-amber-500" />
-            <h3 className="text-2xl font-bold text-foreground">Premium Analytics</h3>
+            <h3 className="text-2xl font-bold text-foreground">Coming Soon</h3>
             <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0">
               Pro Feature
             </Badge>
@@ -1044,10 +1044,6 @@ const Dashboard = () => {
               gradient="from-purple-500 to-indigo-600"
               comingSoon={true}
             />
-            
-            <OptimalStudyTimeCard />
-            
-            <PredictivePerformanceCard userProgress={userProgress} />
             
             <PremiumAnalyticsCard
               title="Learning Velocity"
@@ -1064,114 +1060,6 @@ const Dashboard = () => {
               gradient="from-pink-500 to-rose-600"
               comingSoon={true}
             />
-            
-            <Card className="group relative overflow-hidden border-0 bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 rounded-3xl">
-              {/* Premium Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-500 to-purple-600 opacity-5 group-hover:opacity-10 transition-opacity duration-500" />
-              
-              <CardHeader className="pb-4 relative z-10">
-                <div className="flex items-center justify-between">
-                  <div className="p-3 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <Brain className="h-6 w-6 text-white" />
-                  </div>
-                  <Badge className="bg-gradient-to-r from-emerald-500 to-green-600 text-white border-0 text-xs">
-                    Active
-                  </Badge>
-                </div>
-              </CardHeader>
-
-              <CardContent className="relative z-10">
-                <div className="space-y-3">
-                  <CardTitle className="text-lg font-bold text-foreground leading-tight">
-                    Stress Monitor
-                  </CardTitle>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Wellness tracking across all subjects
-                  </p>
-                  
-                  {/* Mini Stress Data */}
-                  <div className="mt-6 space-y-4">
-                    {(() => {
-                      const subjectsWithProgress = userProgress?.reduce((acc, progress) => {
-                        if (!acc.includes(progress.subjectId)) {
-                          acc.push(progress.subjectId);
-                        }
-                        return acc;
-                      }, [] as string[]) || [];
-
-                      const subjectStressLevels = user?.id && subjectsWithProgress.length > 0 
-                        ? subjectsWithProgress.map(subjectId => {
-                            const stressLevel = StressTracker.getStressLevel(user.id, subjectId);
-                            return { subjectId, stressLevel, category: StressTracker.getStressLevelCategory(stressLevel) };
-                          }).filter(s => s.stressLevel > 0)
-                        : [];
-
-                      const hasStressData = subjectStressLevels.length > 0;
-                      const stressCounts = hasStressData ? {
-                        low: subjectStressLevels.filter(s => s.category === 'low').length,
-                        medium: subjectStressLevels.filter(s => s.category === 'medium').length,
-                        high: subjectStressLevels.filter(s => s.category === 'high').length
-                      } : { low: 0, medium: 0, high: 0 };
-
-                      return (
-                        <>
-                          <div className="grid grid-cols-3 gap-2 text-center">
-                            <div className="space-y-1">
-                              <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">
-                                {stressCounts.low}
-                              </div>
-                              <div className="text-xs text-muted-foreground font-medium">
-                                Low
-                              </div>
-                            </div>
-                            <div className="space-y-1">
-                              <div className="text-lg font-bold text-amber-600 dark:text-amber-400">
-                                {stressCounts.medium}
-                              </div>
-                              <div className="text-xs text-muted-foreground font-medium">
-                                Medium
-                              </div>
-                            </div>
-                            <div className="space-y-1">
-                              <div className="text-lg font-bold text-red-600 dark:text-red-400">
-                                {stressCounts.high}
-                              </div>
-                              <div className="text-xs text-muted-foreground font-medium">
-                                High
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div className="flex justify-between text-xs text-muted-foreground">
-                            <span>Overall Wellness</span>
-                            <span className="font-semibold bg-gradient-to-r from-violet-500 to-purple-600 bg-clip-text text-transparent">
-                              {!hasStressData ? 'No Data' : 
-                               stressCounts.high > 0 ? 'Needs Attention' :
-                               stressCounts.medium > 0 ? 'Moderate' : 'Excellent'}
-                            </span>
-                          </div>
-                          <div className="relative h-2 bg-muted/30 rounded-full overflow-hidden">
-                            <div 
-                              className="absolute inset-y-0 left-0 bg-gradient-to-r from-violet-500 to-purple-600 rounded-full transition-all duration-1000"
-                              style={{ 
-                                width: !hasStressData ? '0%' : 
-                                       stressCounts.high > 0 ? '30%' :
-                                       stressCounts.medium > 0 ? '65%' : '95%'
-                              }}
-                            />
-                          </div>
-                        </>
-                      );
-                    })()}
-                  </div>
-                </div>
-              </CardContent>
-
-              {/* Premium Border Glow */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-violet-500 to-purple-600 p-[1px] opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none">
-                <div className="w-full h-full bg-card rounded-3xl" />
-              </div>
-            </Card>
           </div>
 
           <div className="text-center py-8">
