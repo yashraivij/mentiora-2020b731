@@ -611,22 +611,23 @@ const Dashboard = () => {
                       <div>
                         <div className="text-sm font-bold text-emerald-700 dark:text-emerald-300">Next Reward</div>
                         <div className="text-xs text-emerald-600/80 dark:text-emerald-400/80">
-                          {getStudyStreak() >= 90 ? "Elite GCSE Master!" : 
-                           getStudyStreak() >= 75 ? "AI Mock Exam" :
-                           getStudyStreak() >= 60 ? "AI Exam Coach" :
-                           getStudyStreak() >= 45 ? "Premium Paper" :
-                           getStudyStreak() >= 30 ? "Mini Exam Pack" :
-                           getStudyStreak() >= 21 ? "Notebook Expansion" :
-                           getStudyStreak() >= 14 ? "AI Beta Access" :
-                           getStudyStreak() >= 7 ? "7-Day Badge" :
+                          {getStudyStreak() >= 90 ? "Max Level Reached!" : 
+                           getStudyStreak() >= 75 ? "Elite GCSE Master badge + early beta access" :
+                           getStudyStreak() >= 60 ? "AI-marked mock exam with in-depth feedback" :
+                           getStudyStreak() >= 45 ? "AI Exam Coach session (custom revision plan)" :
+                           getStudyStreak() >= 30 ? "Premium-only predicted paper" :
+                           getStudyStreak() >= 21 ? "Exclusive AI-generated mini exam pack" :
+                           getStudyStreak() >= 14 ? "Smart notebook expansion + AI study tips" :
+                           getStudyStreak() >= 7 ? "Early access to new AI chatbot features" :
+                           getStudyStreak() >= 3 ? "Exclusive '7-Day Streak' badge" :
                            "Dashboard Color Theme"
-                          }
+                           }
                         </div>
                       </div>
                     </div>
                     <div className="text-right">
                       <div className="text-sm font-black bg-gradient-to-r from-emerald-700 to-blue-700 dark:from-emerald-300 dark:to-blue-300 bg-clip-text text-transparent">
-                        {getStudyStreak() >= 90 ? "Unlocked!" :
+                        {getStudyStreak() >= 90 ? "🎉" :
                          getStudyStreak() >= 75 ? "Unlocked!" :
                          getStudyStreak() >= 60 ? "Unlocked!" :
                          getStudyStreak() >= 45 ? "Unlocked!" :
@@ -634,12 +635,12 @@ const Dashboard = () => {
                          getStudyStreak() >= 21 ? "Unlocked!" :
                          getStudyStreak() >= 14 ? "Unlocked!" :
                          getStudyStreak() >= 7 ? "Unlocked!" :
-                         getStudyStreak() >= 3 ? "Unlocked!" :
+                         getStudyStreak() >= 3 ? `${7 - getStudyStreak()} days` :
                          `${3 - getStudyStreak()} days`
                         }
                       </div>
                       <div className="text-xs font-semibold text-emerald-600/80 dark:text-emerald-400/80 uppercase tracking-wider">
-                        {getStudyStreak() >= 3 ? "Earned" : "to go"}
+                        {getStudyStreak() >= 90 ? "Max Level" : getStudyStreak() >= 3 ? "to go" : "to go"}
                       </div>
                     </div>
                   </div>
@@ -649,7 +650,7 @@ const Dashboard = () => {
                     <div className="flex justify-between text-xs font-medium text-muted-foreground">
                       <span>Progress to next milestone</span>
                       <span>
-                        {getStudyStreak() >= 90 ? "Max Level!" :
+                        {getStudyStreak() >= 90 ? "🎉 Maximum Level!" :
                          getStudyStreak() >= 75 ? `${getStudyStreak()}/90` :
                          getStudyStreak() >= 60 ? `${getStudyStreak()}/75` :
                          getStudyStreak() >= 45 ? `${getStudyStreak()}/60` :
