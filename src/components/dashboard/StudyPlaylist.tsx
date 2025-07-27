@@ -32,7 +32,6 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
       color: "from-purple-500 to-pink-500",
       audioType: 'lofi' as const,
       tracks: [
-        { name: "Coffee Shop Vibes", duration: "4:12", audioType: 'lofi' as const },
         { name: "Rainy Day Focus", duration: "3:45", audioType: 'lofi' as const },
         { name: "Late Night Pages", duration: "4:01", audioType: 'lofi' as const }
       ]
@@ -60,22 +59,10 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
         { name: "Fan Sounds", duration: "8:30", audioType: 'whitenoise' as const },
         { name: "Static Calm", duration: "10:00", audioType: 'whitenoise' as const }
       ]
-    },
-    {
-      name: "Ambient Focus",
-      icon: Cloud,
-      color: "from-indigo-500 to-purple-500",
-      audioType: 'ambient' as const,
-      tracks: [
-        { name: "Deep Space", duration: "7:20", audioType: 'ambient' as const },
-        { name: "Ethereal Drones", duration: "6:45", audioType: 'ambient' as const },
-        { name: "Minimal Synths", duration: "5:30", audioType: 'ambient' as const },
-        { name: "Floating Pads", duration: "8:15", audioType: 'ambient' as const }
-      ]
     }
   ];
 
-  const [selectedPlaylist, setSelectedPlaylist] = useState(0);
+  const [selectedPlaylist, setSelectedPlaylist] = useState(1); // Default to Nature Sounds
 
   // Initialize Audio Context
   const initAudioContext = () => {
