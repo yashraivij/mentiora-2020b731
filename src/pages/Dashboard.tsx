@@ -573,185 +573,141 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Premium Unified Streak & Rewards Card - Highly Incentivizing Design */}
-        <div className="mb-3">
-          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-amber-50/90 to-emerald-50/90 dark:from-slate-900 dark:via-amber-950/30 dark:to-emerald-950/30 shadow-2xl hover:shadow-amber-500/20 transition-all duration-500 group backdrop-blur-xl">
-            {/* Animated Premium Glow Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse" />
+        {/* Premium Streak & Rewards Section - Compact for better grades visibility */}
+        <div className="mb-3 grid grid-cols-1 lg:grid-cols-2 gap-3">
+          {/* Study Streak Card */}
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-orange-50/80 to-red-50/80 dark:from-slate-900 dark:via-orange-950/20 dark:to-red-950/20 shadow-lg hover:shadow-xl transition-all duration-300 group backdrop-blur-xl">
+            {/* Premium Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-red-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
-            {/* Luxury Border with Animation */}
-            <div className="absolute inset-0 bg-gradient-to-r from-amber-400 via-orange-400 to-emerald-400 rounded-xl p-[2px] animate-pulse">
-              <div className="bg-gradient-to-br from-white via-amber-50/90 to-emerald-50/90 dark:from-slate-900 dark:via-amber-950/30 dark:to-emerald-950/30 rounded-[10px] h-full w-full backdrop-blur-xl" />
+            {/* Sophisticated Border */}
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 rounded-xl p-[1px]">
+              <div className="bg-gradient-to-br from-white via-orange-50/80 to-red-50/80 dark:from-slate-900 dark:via-orange-950/20 dark:to-red-950/20 rounded-[11px] h-full w-full backdrop-blur-xl" />
             </div>
             
-            {/* Enhanced Floating Particles */}
-            <div className="absolute top-3 right-6 w-3 h-3 bg-gradient-to-r from-yellow-400 to-amber-400 rounded-full animate-bounce opacity-80" />
-            <div className="absolute bottom-4 left-8 w-2 h-2 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full animate-pulse opacity-70" />
-            <div className="absolute top-1/2 right-2 w-1.5 h-1.5 bg-gradient-to-r from-orange-400 to-red-400 rounded-full animate-ping opacity-60" />
+            {/* Floating Orbs */}
+            <div className="absolute top-2 right-4 w-2 h-2 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse opacity-60" />
+            <div className="absolute bottom-3 left-6 w-1.5 h-1.5 bg-gradient-to-r from-pink-400 to-red-400 rounded-full animate-bounce opacity-40" />
             
-            <CardContent className="relative p-4">
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-                {/* Left Side - Study Streak (2/5 width) */}
-                <div className="lg:col-span-2 flex flex-col space-y-3">
-                  {/* Streak Display */}
-                  <div className="flex items-center space-x-3">
-                    {/* Enhanced Fire Icon */}
-                    <div className="relative group/icon">
-                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 flex items-center justify-center shadow-xl shadow-orange-500/40 transition-all duration-300 relative overflow-hidden group-hover:scale-110">
-                        <div className="absolute inset-2 rounded-xl bg-white/20 backdrop-blur-sm" />
-                        <Flame className="h-6 w-6 text-white relative z-10 transition-transform duration-300 drop-shadow-xl animate-pulse" />
-                        
-                        {/* Fire Glow Effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-red-400 rounded-2xl opacity-50 animate-pulse" />
-                      </div>
-                      
-                      {/* Floating Sparkle */}
-                      <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-yellow-300 via-amber-300 to-orange-300 rounded-full flex items-center justify-center shadow-lg animate-bounce">
-                        <Sparkles className="h-2 w-2 text-white drop-shadow-sm" />
-                      </div>
+            <CardContent className="relative p-2">
+              <div className="flex flex-col space-y-1">
+                {/* Top Section - Compact Streak Display */}
+                <div className="flex items-center space-x-2">
+                  {/* Premium Fire Icon */}
+                  <div className="relative group/icon">
+                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 flex items-center justify-center shadow-md shadow-orange-500/25 transition-all duration-300 relative overflow-hidden">
+                      {/* Inner Glow */}
+                      <div className="absolute inset-1 rounded-lg bg-white/15 backdrop-blur-sm" />
+                      <Flame className="h-4 w-4 text-white relative z-10 transition-transform duration-300 drop-shadow-lg" />
                     </div>
                     
-                    {/* Enhanced Streak Text */}
-                    <div className="space-y-1">
-                      <div className="flex items-baseline space-x-2">
-                        <h3 className="text-2xl font-black bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent tracking-tight">
-                          {getStudyStreak()}
-                        </h3>
-                        <span className="text-base font-bold bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
-                          Day{getStudyStreak() !== 1 ? 's' : ''}
-                        </span>
-                      </div>
-                      <h4 className="text-sm font-semibold text-foreground/90 tracking-wide">Study Streak</h4>
-                    </div>
-                  </div>
-
-                  {/* Compact Hall of Fame */}
-                  <div className="mt-3 pt-3 border-t border-orange-200/50 dark:border-orange-800/30">
-                    <PublicStreakProfiles />
-                  </div>
-                </div>
-
-                {/* Right Side - Enticing Rewards Section (3/5 width) */}
-                <div className="lg:col-span-3 flex flex-col space-y-4">
-                  {/* Rewards Header with Sparkle Animation */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className="relative">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 via-blue-500 to-purple-500 flex items-center justify-center shadow-xl shadow-emerald-500/40 transition-all duration-300 animate-pulse">
-                          <div className="absolute inset-2 rounded-xl bg-white/20 backdrop-blur-sm" />
-                          <Star className="h-6 w-6 text-white relative z-10 drop-shadow-xl" />
-                        </div>
-                        <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-yellow-300 via-amber-300 to-orange-300 rounded-full animate-spin">
-                          <Sparkles className="h-4 w-4 text-white" />
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-black bg-gradient-to-br from-emerald-600 via-blue-600 to-purple-600 dark:from-emerald-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent tracking-tight">
-                          Streak Rewards
-                        </h3>
-                        <p className="text-sm font-medium text-muted-foreground">Unlock amazing benefits!</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-1 px-3 py-1 bg-gradient-to-r from-amber-100 to-yellow-100 dark:from-amber-950/50 dark:to-yellow-950/50 rounded-full border border-amber-300/50 dark:border-amber-700/50">
-                      <Trophy className="h-3 w-3 text-amber-600 dark:text-amber-400" />
-                      <span className="text-xs font-bold text-amber-700 dark:text-amber-300">Premium</span>
+                    {/* Premium Floating Elements */}
+                    <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-sm animate-bounce">
+                      <Sparkles className="h-1 w-1 text-white drop-shadow-sm" />
                     </div>
                   </div>
                   
-                  {/* Current Reward - Make it super enticing */}
-                  <div className="relative p-4 bg-gradient-to-r from-emerald-100/90 via-blue-100/90 to-purple-100/90 dark:from-emerald-950/50 dark:via-blue-950/50 dark:to-purple-950/50 rounded-xl border-2 border-emerald-300/50 dark:border-emerald-700/50 backdrop-blur-sm group hover:scale-[1.02] transition-all duration-300">
-                    {/* Shine Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
-                    
-                    <div className="flex items-center justify-between relative z-10">
-                      <div className="flex items-center space-x-3">
-                        <div className="text-2xl animate-bounce">
-                          {getStudyStreak() >= 90 ? "🏆" : 
-                           getStudyStreak() >= 14 ? "📝" :
-                           getStudyStreak() >= 7 ? "🎵" :
-                           "🎨"}
-                        </div>
-                        <div>
-                          <div className="text-base font-bold text-emerald-800 dark:text-emerald-200">
-                            {getStudyStreak() >= 90 ? "🎉 ULTIMATE MASTER!" : 
-                             getStudyStreak() >= 14 ? "🔥 Smart AI Notebook" :
-                             getStudyStreak() >= 7 ? "🎶 Focus Music Playlists" :
-                             "🌈 Custom Color Themes"}
-                          </div>
-                          <div className="text-sm text-emerald-700/80 dark:text-emerald-300/80 font-medium">
-                            {getStudyStreak() >= 90 ? "You've reached the pinnacle!" : 
-                             getStudyStreak() >= 14 ? "AI-powered personalized study notes" :
-                             getStudyStreak() >= 7 ? "Curated playlists for deep focus" :
-                             "Personalize your study environment"}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className={`text-lg font-black ${
-                          getStudyStreak() >= 14 ? 'text-green-600 dark:text-green-400' :
-                          getStudyStreak() >= 7 ? 'text-green-600 dark:text-green-400' :
-                          'bg-gradient-to-r from-emerald-700 to-blue-700 dark:from-emerald-300 dark:to-blue-300 bg-clip-text text-transparent'
-                        }`}>
-                          {getStudyStreak() >= 14 ? "✨ UNLOCKED!" :
-                           getStudyStreak() >= 7 ? "✨ UNLOCKED!" :
-                           getStudyStreak() >= 3 ? `${7 - getStudyStreak()} days left` :
-                           `${3 - getStudyStreak()} days left`}
-                        </div>
-                        {(getStudyStreak() < 14 && getStudyStreak() < 7) && (
-                          <div className="text-xs text-emerald-600 dark:text-emerald-400 font-medium animate-pulse">
-                            Keep going! 🚀
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Coming Up Next - Preview of future rewards */}
-                  <div className="space-y-2">
-                    <h5 className="text-sm font-bold text-muted-foreground flex items-center space-x-1">
-                      <span>🔮 Coming Up Next</span>
-                    </h5>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      {getStudyStreak() < 7 && (
-                        <div className="p-2 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/30 dark:to-purple-950/30 rounded-lg border border-blue-200/50 dark:border-blue-800/30">
-                          <div className="flex items-center space-x-2">
-                            <span className="text-sm">🎵</span>
-                            <div>
-                              <div className="text-xs font-semibold text-blue-700 dark:text-blue-300">7 Days</div>
-                              <div className="text-xs text-blue-600/80 dark:text-blue-400/80">Focus Playlists</div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                      {getStudyStreak() < 14 && (
-                        <div className="p-2 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg border border-purple-200/50 dark:border-purple-800/30">
-                          <div className="flex items-center space-x-2">
-                            <span className="text-sm">📝</span>
-                            <div>
-                              <div className="text-xs font-semibold text-purple-700 dark:text-purple-300">14 Days</div>
-                              <div className="text-xs text-purple-600/80 dark:text-purple-400/80">AI Notebook</div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Enhanced Progress Bar */}
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-medium text-muted-foreground">Progress to next reward</span>
-                      <span className="text-xs font-bold bg-gradient-to-r from-emerald-600 to-blue-600 dark:from-emerald-400 dark:to-blue-400 bg-clip-text text-transparent">
-                        {Math.round((getStudyStreak() >= 90 ? 100 :
-                          getStudyStreak() >= 14 ? (getStudyStreak() / 21) * 100 :
-                          getStudyStreak() >= 7 ? (getStudyStreak() / 14) * 100 :
-                          getStudyStreak() >= 3 ? (getStudyStreak() / 7) * 100 :
-                          (getStudyStreak() / 3) * 100))}%
+                  {/* Enhanced Streak Text */}
+                  <div className="space-y-1">
+                    <div className="flex items-baseline space-x-2">
+                      <h3 className="text-xl font-black bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent tracking-tight">
+                        {getStudyStreak()}
+                      </h3>
+                      <span className="text-sm font-bold bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
+                        Day{getStudyStreak() !== 1 ? 's' : ''}
                       </span>
                     </div>
-                    <div className="relative w-full bg-gradient-to-r from-muted/50 to-muted/30 rounded-full h-2 overflow-hidden">
+                    <div className="flex items-center space-x-2">
+                      <h4 className="text-sm font-bold text-foreground/90 tracking-wide">Study Streak</h4>
+                      <div className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full animate-pulse" />
+                    </div>
+                  </div>
+                </div>
+                
+
+                {/* Streak Hall of Fame - Show to all users */}
+                <div className="mt-2 pt-2 border-t border-orange-200/50 dark:border-orange-800/30">
+                  <PublicStreakProfiles />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Daily Streak Rewards Card */}
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-emerald-50/80 to-blue-50/80 dark:from-slate-900 dark:via-emerald-950/20 dark:to-blue-950/20 shadow-lg hover:shadow-xl transition-all duration-300 group backdrop-blur-xl">
+            {/* Premium Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            
+            {/* Sophisticated Border */}
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-400 rounded-xl p-[1px]">
+              <div className="bg-gradient-to-br from-white via-emerald-50/80 to-blue-50/80 dark:from-slate-900 dark:via-emerald-950/20 dark:to-blue-950/20 rounded-[11px] h-full w-full backdrop-blur-xl" />
+            </div>
+            
+            {/* Floating Orbs */}
+            <div className="absolute top-2 right-4 w-2 h-2 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full animate-pulse opacity-60" />
+            <div className="absolute bottom-3 left-6 w-1.5 h-1.5 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-bounce opacity-40" />
+            
+            <CardContent className="relative p-2">
+              <div className="flex flex-col space-y-1">
+                {/* Top Section - Compact Rewards Display */}
+                <div className="flex items-center space-x-2">
+                  {/* Premium Gift Icon */}
+                  <div className="relative group/icon">
+                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500 via-blue-500 to-purple-500 flex items-center justify-center shadow-md shadow-emerald-500/25 transition-all duration-300 relative overflow-hidden">
+                      {/* Inner Glow */}
+                      <div className="absolute inset-1 rounded-lg bg-white/15 backdrop-blur-sm" />
+                      <Star className="h-4 w-4 text-white relative z-10 transition-transform duration-300 drop-shadow-lg" />
+                    </div>
+                    
+                    {/* Premium Floating Elements */}
+                    <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-sm animate-bounce">
+                      <Sparkles className="h-1 w-1 text-white drop-shadow-sm" />
+                    </div>
+                  </div>
+                  
+                  {/* Compact Rewards Text */}
+                  <div className="space-y-0">
+                    <div className="flex items-baseline space-x-1">
+                      <h3 className="text-lg font-black bg-gradient-to-br from-emerald-600 via-blue-600 to-purple-600 dark:from-emerald-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent tracking-tight">
+                        Rewards
+                      </h3>
+                    </div>
+                    <h4 className="text-xs font-medium text-foreground/80">Daily Streaks</h4>
+                  </div>
+                </div>
+                
+                {/* Bottom Section - Compact Next Reward */}
+                <div className="space-y-2">
+                  {/* Compact Next Reward Preview */}
+                  <div className="flex items-center justify-between p-1.5 bg-gradient-to-r from-emerald-100/80 to-blue-100/80 dark:from-emerald-950/40 dark:to-blue-950/40 rounded-lg border border-emerald-200/50 dark:border-emerald-800/30 backdrop-blur-sm">
+                    <div className="flex items-center space-x-1.5">
+                      <span className="text-xs">🎁</span>
+                      <div>
+                        <div className="text-xs font-medium text-emerald-700 dark:text-emerald-300">
+                          {getStudyStreak() >= 90 ? "Max Level!" : 
+                           getStudyStreak() >= 14 ? "Smart notebook" :
+                           getStudyStreak() >= 7 ? "Study playlist" :
+                           "Color theme"
+                          }
+                        </div>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-xs font-bold bg-gradient-to-r from-emerald-700 to-blue-700 dark:from-emerald-300 dark:to-blue-300 bg-clip-text text-transparent">
+                         {getStudyStreak() >= 14 ? "Unlocked!" :
+                          getStudyStreak() >= 7 ? "Unlocked!" :
+                          getStudyStreak() >= 3 ? `${7 - getStudyStreak()}d` :
+                          `${3 - getStudyStreak()}d`
+                         }
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Compact Progress Bar */}
+                  <div className="space-y-0.5">
+                    <div className="w-full bg-muted/50 rounded-full h-1 overflow-hidden">
                       <div 
-                        className="h-full bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 rounded-full transition-all duration-1000 shadow-lg relative overflow-hidden"
+                        className="h-full bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 rounded-full transition-all duration-700 shadow-lg"
                         style={{
                           width: `${getStudyStreak() >= 90 ? 100 :
                                    getStudyStreak() >= 14 ? (getStudyStreak() / 21) * 100 :
@@ -759,10 +715,7 @@ const Dashboard = () => {
                                    getStudyStreak() >= 3 ? (getStudyStreak() / 7) * 100 :
                                    (getStudyStreak() / 3) * 100}%`
                         }}
-                      >
-                        {/* Animated shine effect on progress bar */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse" />
-                      </div>
+                      />
                     </div>
                   </div>
                 </div>
@@ -770,235 +723,10 @@ const Dashboard = () => {
             </CardContent>
           </Card>
         </div>
-                  
-                  {/* Compact Next Reward */}
-                  <div className="space-y-2">
-                    {/* Compact Next Reward Preview */}
-                    <div className="flex items-center justify-between p-1.5 bg-gradient-to-r from-emerald-100/80 to-blue-100/80 dark:from-emerald-950/40 dark:to-blue-950/40 rounded-lg border border-emerald-200/50 dark:border-emerald-800/30 backdrop-blur-sm">
-                      <div className="flex items-center space-x-1.5">
-                        <span className="text-xs">🎁</span>
-                        <div>
-                          <div className="text-xs font-medium text-emerald-700 dark:text-emerald-300">
-                            {getStudyStreak() >= 90 ? "Max Level!" : 
-                             getStudyStreak() >= 14 ? "Smart notebook" :
-                             getStudyStreak() >= 7 ? "Study playlist" :
-                             "Color theme"
-                            }
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-xs font-bold bg-gradient-to-r from-emerald-700 to-blue-700 dark:from-emerald-300 dark:to-blue-300 bg-clip-text text-transparent">
-                           {getStudyStreak() >= 14 ? "Unlocked!" :
-                            getStudyStreak() >= 7 ? "Unlocked!" :
-                            getStudyStreak() >= 3 ? `${7 - getStudyStreak()}d` :
-                            `${3 - getStudyStreak()}d`
-                           }
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Compact Progress Bar */}
-                    <div className="space-y-0.5">
-                      <div className="w-full bg-muted/50 rounded-full h-1 overflow-hidden">
-                        <div 
-                          className="h-full bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 rounded-full transition-all duration-700 shadow-lg"
-                          style={{
-                            width: `${getStudyStreak() >= 90 ? 100 :
-                                     getStudyStreak() >= 14 ? (getStudyStreak() / 21) * 100 :
-                                     getStudyStreak() >= 7 ? (getStudyStreak() / 14) * 100 :
-                                     getStudyStreak() >= 3 ? (getStudyStreak() / 7) * 100 :
-                                     (getStudyStreak() / 3) * 100}%`
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+
 
         {/* Predicted GCSE Grades Section */}
         <PredictedGradesGraph userProgress={userProgress} />
-
-        {/* Optimal Learning Time - Premium Feature */}
-        <div className="mb-8">
-          <OptimalLearningTimeCard />
-        </div>
-
-        {/* Predicted 2026 Questions Section */}
-        <PredictedQuestionsSection />
-
-        {/* Premium Stress Monitor & Revision Notebook - Side by Side */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <DashboardStressMonitor 
-            userId={user?.id} 
-            userProgress={userProgress}
-            onSubjectClick={handlePractice}
-          />
-          
-          <div className="space-y-6">
-            {/* Goals Section */}
-            <GoalsSection 
-              userId={user?.id} 
-              progress={{
-                totalQuestions: userProgress.reduce((sum, p) => sum + p.attempts, 0),
-                correctAnswers: Math.round(userProgress.reduce((sum, p) => sum + (p.averageScore / 100 * p.attempts), 0)),
-                averageScore: getOverallProgress(),
-                improvementRate: userProgress.length > 0 ? 5 : 0,
-                weeklyHours: Math.round(userProgress.length * 0.5),
-                topicsMastered: getMasteredTopics()
-              }}
-            />
-          </div>
-        </div>
-
-        {/* Progress Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <ProgressCard
-            title="Subjects Active"
-            value={userSubjects.length}
-            subtitle="Currently studying"
-            icon={BookOpen}
-            color="bg-gradient-to-br from-blue-500 to-blue-600"
-          />
-          
-          <ProgressCard
-            title="Overall Progress"
-            value={`${getOverallProgress()}%`}
-            subtitle="Average across subjects"
-            progress={getOverallProgress()}
-            icon={TrendingUp}
-            color="bg-gradient-to-br from-primary via-primary/90 to-primary/80"
-            trend={userProgress.length > 0 ? 5 : undefined}
-          />
-          
-          <ProgressCard
-            title="Topics Mastered"
-            value={getMasteredTopics()}
-            subtitle="85%+ average score"
-            icon={Trophy}
-            color="bg-gradient-to-br from-emerald-500 to-emerald-600"
-          />
-          
-          <ProgressCard
-            title="Practice Sessions"
-            value={userProgress.reduce((sum, p) => sum + p.attempts, 0)}
-            subtitle="Total attempts"
-            icon={Target}
-            color="bg-gradient-to-br from-orange-500 to-orange-600"
-          />
-        </div>
-
-        {/* Subject Selection Modal */}
-        {showSubjectModal && (
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="bg-background border rounded-lg shadow-lg max-w-4xl w-full max-h-[80vh] overflow-hidden">
-              <div className="p-6 border-b">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-2xl font-bold">Choose Your GCSE Subjects</h2>
-                  <button
-                    onClick={() => setShowSubjectModal(false)}
-                    className="h-10 w-10 rounded-full bg-muted hover:bg-muted/80 flex items-center justify-center transition-colors"
-                  >
-                    <X className="h-5 w-5" />
-                  </button>
-                </div>
-                <p className="text-muted-foreground mt-2">
-                  Select the subjects you're studying this year. You can always change these later.
-                </p>
-              </div>
-              
-              <div className="p-6 overflow-y-auto max-h-[60vh]">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {curriculum.map((subject) => {
-                    const isSelected = userSubjects.includes(subject.id);
-                    return (
-                      <div
-                        key={subject.id}
-                        onClick={() => toggleUserSubject(subject.id)}
-                        className={cn(
-                          "p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 hover:shadow-md",
-                          isSelected
-                            ? "border-primary bg-primary/5 shadow-sm"
-                            : "border-border hover:border-primary/50"
-                        )}
-                      >
-                        <h3 className="font-semibold text-lg mb-2">{subject.name}</h3>
-                        <p className="text-sm text-muted-foreground mb-3">
-                          {subject.topics.length} topics available
-                        </p>
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-medium bg-muted px-2 py-1 rounded">
-                            {getExamBoard(subject.id)}
-                          </span>
-                          {isSelected && (
-                            <div className="h-5 w-5 rounded-full bg-primary flex items-center justify-center">
-                              <Check className="h-3 w-3 text-primary-foreground" />
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              
-              <div className="p-6 border-t bg-muted/30">
-                <div className="flex items-center justify-between">
-                  <div className="text-sm text-muted-foreground">
-                    {userSubjects.length} subjects selected
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <button
-                      onClick={() => setShowSubjectModal(false)}
-                      className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      onClick={() => setShowSubjectModal(false)}
-                      disabled={userSubjects.length === 0}
-                      className="px-6 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-md hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      Continue ({userSubjects.length})
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Weak Topics Section */}
-        <WeakTopicsSection 
-          weakTopics={weakTopics}
-          curriculum={curriculum}
-          onPractice={handlePractice}
-        />
-      </div>
-
-      {/* Personalized Notification */}
-      {notification.isVisible && (
-        <PersonalizedNotification
-          message={notification.message}
-          type={notification.type}
-          onDismiss={() => setNotification(prev => ({ ...prev, isVisible: false }))}
-        />
-      )}
-
-      {/* Streak Celebration */}
-      {showStreakCelebration && (
-        <StreakCelebration
-          streakDays={getStudyStreak()}
-          onClose={() => setShowStreakCelebration(false)}
-        />
-      )}
-    </div>
-  );
-}
 
         {/* Optimal Learning Time - Premium Feature */}
         <div className="mb-8">
