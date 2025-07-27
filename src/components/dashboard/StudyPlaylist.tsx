@@ -25,57 +25,13 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
   const audioSourcesRef = useRef<AudioNode[]>([]);
   const isGeneratingRef = useRef(false);
 
-  const playlists = [
-    {
-      name: "Lo-Fi Study Beats",
-      icon: Music,
-      color: "from-purple-500 to-pink-500",
-      audioType: 'lofi' as const,
-      tracks: [
-        { name: "Coffee Shop Vibes", duration: "4:12", audioType: 'lofi' as const },
-        { name: "Rainy Day Focus", duration: "3:45", audioType: 'lofi' as const },
-        { name: "Late Night Pages", duration: "4:01", audioType: 'lofi' as const }
-      ]
-    },
-    {
-      name: "Nature Sounds",
-      icon: TreePine,
-      color: "from-green-500 to-emerald-500",
-      audioType: 'nature' as const,
-      tracks: [
-        { name: "Forest Rain", duration: "5:00", audioType: 'nature' as const },
-        { name: "Ocean Waves", duration: "6:30", audioType: 'nature' as const },
-        { name: "Mountain Stream", duration: "4:45", audioType: 'nature' as const },
-        { name: "Birds & Breeze", duration: "5:15", audioType: 'nature' as const }
-      ]
-    },
-    {
-      name: "White Noise",
-      icon: Waves,
-      color: "from-blue-500 to-cyan-500",
-      audioType: 'whitenoise' as const,
-      tracks: [
-        { name: "Brown Noise", duration: "10:00", audioType: 'whitenoise' as const },
-        { name: "Pink Noise", duration: "10:00", audioType: 'whitenoise' as const },
-        { name: "Fan Sounds", duration: "8:30", audioType: 'whitenoise' as const },
-        { name: "Static Calm", duration: "10:00", audioType: 'whitenoise' as const }
-      ]
-    },
-    {
-      name: "Ambient Focus",
-      icon: Cloud,
-      color: "from-indigo-500 to-purple-500",
-      audioType: 'ambient' as const,
-      tracks: [
-        { name: "Deep Space", duration: "7:20", audioType: 'ambient' as const },
-        { name: "Ethereal Drones", duration: "6:45", audioType: 'ambient' as const },
-        { name: "Minimal Synths", duration: "5:30", audioType: 'ambient' as const },
-        { name: "Floating Pads", duration: "8:15", audioType: 'ambient' as const }
-      ]
-    }
+  const tracks = [
+    { name: "Forest Rain", duration: "5:00", audioType: 'nature' as const },
+    { name: "Brown Noise", duration: "10:00", audioType: 'whitenoise' as const },
+    { name: "Deep Space", duration: "7:20", audioType: 'ambient' as const }
   ];
 
-  const [selectedPlaylist, setSelectedPlaylist] = useState(0);
+  
 
   // Initialize Audio Context
   const initAudioContext = () => {
@@ -271,7 +227,7 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
   const togglePlayPause = () => {
     if (!isPlaying) {
       if (audioSourcesRef.current.length === 0) {
-        const currentAudioType = playlists[selectedPlaylist].tracks[currentTrack].audioType;
+        const currentAudioType = tracks[currentTrack].audioType;
         generateAudio(currentAudioType);
       } else {
         resumeAudio();
@@ -286,7 +242,7 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
   const nextTrack = () => {
     stopAudio();
     setCurrentTrack((prev) => 
-      prev < playlists[selectedPlaylist].tracks.length - 1 ? prev + 1 : 0
+      prev < tracks.length - 1 ? prev + 1 : 0
     );
     setIsPlaying(false);
   };
@@ -294,7 +250,7 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
   const prevTrack = () => {
     stopAudio();
     setCurrentTrack((prev) => 
-      prev > 0 ? prev - 1 : playlists[selectedPlaylist].tracks.length - 1
+      prev > 0 ? prev - 1 : tracks.length - 1
     );
     setIsPlaying(false);
   };
@@ -319,12 +275,6 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
     }
   }, [volume, isMuted]);
 
-  // Reset track when playlist changes
-  useEffect(() => {
-    stopAudio();
-    setCurrentTrack(0);
-    setIsPlaying(false);
-  }, [selectedPlaylist]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -362,27 +312,9 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
       >
         <div className="space-y-4">
           {/* Header */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Music className="h-4 w-4 text-purple-500" />
-              <span className="font-semibold text-sm">Study Playlist</span>
-            </div>
-            <div className="flex space-x-1">
-              {playlists.map((playlist, index) => (
-                <Button
-                  key={index}
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setSelectedPlaylist(index)}
-                  className={cn(
-                    "p-1.5 h-auto rounded-lg",
-                    selectedPlaylist === index && `bg-gradient-to-r ${playlist.color} text-white`
-                  )}
-                >
-                  <playlist.icon className="h-3 w-3" />
-                </Button>
-              ))}
-            </div>
+          <div className="flex items-center space-x-2">
+            <Music className="h-4 w-4 text-purple-500" />
+            <span className="font-semibold text-sm">Study Playlist</span>
           </div>
 
           <DropdownMenuSeparator />
@@ -390,11 +322,8 @@ const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
           {/* Current Track */}
           <div className="text-center space-y-1">
             <h4 className="text-sm font-medium text-foreground">
-              {playlists[selectedPlaylist].tracks[currentTrack].name}
+              {tracks[currentTrack].name}
             </h4>
-            <p className="text-xs text-muted-foreground">
-              {playlists[selectedPlaylist].name}
-            </p>
           </div>
 
           {/* Controls */}
