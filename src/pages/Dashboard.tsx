@@ -417,7 +417,7 @@ const Dashboard = () => {
                 <span className="text-sm font-extrabold">Join Community</span>
               </Button>
               <ThemeToggle />
-              {getStudyStreak() >= 3 && <ColorThemeToggle />}
+              <ColorThemeToggle />
               <div className="flex items-center space-x-2 px-4 py-2 bg-background/60 dark:bg-card/60 backdrop-blur-sm rounded-2xl border border-border shadow-sm">
                 <div className="w-6 h-6 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
                   <User className="h-3 w-3 text-primary-foreground" />

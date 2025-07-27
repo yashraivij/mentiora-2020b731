@@ -25,10 +25,10 @@ export function ColorThemeToggle() {
         <Button
           variant="ghost"
           size="sm"
-          className="h-9 w-9 rounded-lg border border-border bg-background hover:bg-accent hover:text-accent-foreground relative"
+          className="h-9 w-9 rounded-lg border border-emerald-400/50 bg-gradient-to-br from-emerald-50 to-blue-50 dark:from-emerald-950/30 dark:to-blue-950/30 hover:from-emerald-100 hover:to-blue-100 dark:hover:from-emerald-900/40 dark:hover:to-blue-900/40 text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 relative shadow-sm"
         >
           <Palette className="h-4 w-4" />
-          <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full animate-pulse" />
+          <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full animate-pulse shadow-sm" />
           <span className="sr-only">Change color theme</span>
         </Button>
       </DropdownMenuTrigger>
