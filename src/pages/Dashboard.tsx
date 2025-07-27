@@ -721,92 +721,109 @@ const Dashboard = () => {
                     </div>
                   </div>
                   
-                  {/* Next reward teaser with urgency */}
-                  <div className="p-3 bg-gradient-to-br from-blue-100/80 via-purple-50/70 to-indigo-100/80 dark:from-blue-950/50 dark:via-purple-900/40 dark:to-indigo-950/50 rounded-xl border-2 border-blue-200/70 dark:border-blue-800/50 shadow-lg backdrop-blur-sm relative overflow-hidden">
-                    {/* Shimmer effect for desirability */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 animate-pulse opacity-40" />
-                    
-                    <div className="relative z-10">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-black text-blue-700 dark:text-blue-300 tracking-wider">COMING NEXT</span>
-                        <div className="px-2 py-0.5 bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-full border border-orange-400/30">
-                          <span className="text-xs text-orange-700 dark:text-orange-300 font-bold">
-                            {getStudyStreak() >= 21 ? "MAX LEVEL!" :
-                             getStudyStreak() >= 14 ? `${21 - getStudyStreak()}d` : 
-                             getStudyStreak() >= 7 ? `${14 - getStudyStreak()}d` :
-                             getStudyStreak() >= 3 ? `${7 - getStudyStreak()}d` :
-                             `${3 - getStudyStreak()}d`
+                   {/* Next reward teaser with urgency */}
+                  {getStudyStreak() < 14 && (
+                    <div className="p-3 bg-gradient-to-br from-blue-100/80 via-purple-50/70 to-indigo-100/80 dark:from-blue-950/50 dark:via-purple-900/40 dark:to-indigo-950/50 rounded-xl border-2 border-blue-200/70 dark:border-blue-800/50 shadow-lg backdrop-blur-sm relative overflow-hidden">
+                      {/* Shimmer effect for desirability */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 animate-pulse opacity-40" />
+                      
+                      <div className="relative z-10">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-xs font-black text-blue-700 dark:text-blue-300 tracking-wider">COMING NEXT</span>
+                          <div className="px-2 py-0.5 bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-full border border-orange-400/30">
+                            <span className="text-xs text-orange-700 dark:text-orange-300 font-bold">
+                              {getStudyStreak() >= 7 ? `${14 - getStudyStreak()}d` :
+                               getStudyStreak() >= 3 ? `${7 - getStudyStreak()}d` :
+                               `${3 - getStudyStreak()}d`
+                              }
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <span className="text-2xl filter drop-shadow-lg">
+                            {getStudyStreak() >= 7 ? "🧠" :
+                             getStudyStreak() >= 3 ? "🎵" :
+                             "🎨"
                             }
                           </span>
+                          <div className="flex-1">
+                            <div className="text-sm font-bold text-foreground">
+                              {getStudyStreak() >= 7 ? "AI Smart Notes" :
+                               getStudyStreak() >= 3 ? "Study Sounds" :
+                               "Custom Themes"
+                              }
+                            </div>
+                            <div className="text-xs text-blue-700 dark:text-blue-300 font-medium">
+                              {getStudyStreak() >= 7 ? "Revolutionary study companion" :
+                               getStudyStreak() >= 3 ? "Focus music & ambient sounds" :
+                               "Personalize your experience"
+                              }
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Max reward achieved message for 14+ day streaks */}
+                  {getStudyStreak() >= 14 && (
+                    <div className="p-3 bg-gradient-to-br from-amber-100/80 via-yellow-50/70 to-orange-100/80 dark:from-amber-950/50 dark:via-yellow-900/40 dark:to-orange-950/50 rounded-xl border-2 border-amber-200/70 dark:border-amber-800/50 shadow-lg backdrop-blur-sm">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-black text-amber-700 dark:text-amber-300 tracking-wider">MAX LEVEL ACHIEVED</span>
+                        <div className="flex items-center space-x-1">
+                          <Crown className="h-3 w-3 text-amber-600 dark:text-amber-400" />
+                          <span className="text-xs text-amber-600 dark:text-amber-400 font-bold">ELITE</span>
                         </div>
                       </div>
                       <div className="flex items-center space-x-3">
-                        <span className="text-2xl filter drop-shadow-lg">
-                          {getStudyStreak() >= 21 ? "👑" :
-                           getStudyStreak() >= 14 ? "🏆" : 
-                           getStudyStreak() >= 7 ? "🧠" :
-                           getStudyStreak() >= 3 ? "🎵" :
-                           "🎨"
-                          }
-                        </span>
+                        <span className="text-2xl filter drop-shadow-lg">👑</span>
                         <div className="flex-1">
                           <div className="text-sm font-bold text-foreground">
-                            {getStudyStreak() >= 21 ? "Hall of Fame Status" :
-                             getStudyStreak() >= 14 ? "Hall of Fame Entry" : 
-                             getStudyStreak() >= 7 ? "AI Smart Notes" :
-                             getStudyStreak() >= 3 ? "Study Sounds" :
-                             "Custom Themes"
-                            }
+                            All Rewards Unlocked
                           </div>
-                          <div className="text-xs text-blue-700 dark:text-blue-300 font-medium">
-                            {getStudyStreak() >= 21 ? "Ultimate recognition achieved!" :
-                             getStudyStreak() >= 14 ? "Public profile & bragging rights" :
-                             getStudyStreak() >= 7 ? "Revolutionary study companion" :
-                             getStudyStreak() >= 3 ? "Focus music & ambient sounds" :
-                             "Personalize your experience"
-                            }
+                          <div className="text-xs text-amber-700 dark:text-amber-300 font-medium">
+                            You've mastered the ultimate study experience!
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </div>
                 
                 {/* Compelling progress bar with momentum psychology */}
-                <div className="space-y-1.5">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-black text-muted-foreground tracking-wider">PROGRESS TO NEXT</span>
-                    <span className="font-black bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-600 dark:from-emerald-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
-                      {getStudyStreak() >= 21 ? "MAXED OUT!" :
-                       getStudyStreak() >= 14 ? `${Math.round(((getStudyStreak() - 14) / 7) * 100)}%` :
-                       getStudyStreak() >= 7 ? `${Math.round(((getStudyStreak() - 7) / 7) * 100)}%` :
-                       getStudyStreak() >= 3 ? `${Math.round(((getStudyStreak() - 3) / 4) * 100)}%` :
-                       `${Math.round((getStudyStreak() / 3) * 100)}%`
-                      }
-                    </span>
-                  </div>
-                  
-                  {/* Ultra-premium progress bar */}
-                  <div className="relative">
-                    <div className="w-full bg-gradient-to-r from-muted/60 to-muted/40 rounded-full h-2 overflow-hidden shadow-inner">
-                      <div 
-                        className="h-full bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 rounded-full transition-all duration-1000 shadow-lg relative overflow-hidden"
-                        style={{
-                          width: `${getStudyStreak() >= 21 ? 100 :
-                                   getStudyStreak() >= 14 ? ((getStudyStreak() - 14) / 7) * 100 :
-                                   getStudyStreak() >= 7 ? ((getStudyStreak() - 7) / 7) * 100 :
-                                   getStudyStreak() >= 3 ? ((getStudyStreak() - 3) / 4) * 100 :
-                                   (getStudyStreak() / 3) * 100}%`
-                        }}
-                      >
-                        {/* Animated shine effect for premium feel */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12 animate-pulse" />
-                      </div>
+                {getStudyStreak() < 14 && (
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-black text-muted-foreground tracking-wider">PROGRESS TO NEXT</span>
+                      <span className="font-black bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-600 dark:from-emerald-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+                        {getStudyStreak() >= 7 ? `${Math.round(((getStudyStreak() - 7) / 7) * 100)}%` :
+                         getStudyStreak() >= 3 ? `${Math.round(((getStudyStreak() - 3) / 4) * 100)}%` :
+                         `${Math.round((getStudyStreak() / 3) * 100)}%`
+                        }
+                      </span>
                     </div>
-                    {/* Progress glow effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-blue-500/30 to-purple-500/30 rounded-full blur-sm opacity-50" />
+                    
+                    {/* Ultra-premium progress bar */}
+                    <div className="relative">
+                      <div className="w-full bg-gradient-to-r from-muted/60 to-muted/40 rounded-full h-2 overflow-hidden shadow-inner">
+                        <div 
+                          className="h-full bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 rounded-full transition-all duration-1000 shadow-lg relative overflow-hidden"
+                          style={{
+                            width: `${getStudyStreak() >= 14 ? 100 :
+                                     getStudyStreak() >= 7 ? ((getStudyStreak() - 7) / 7) * 100 :
+                                     getStudyStreak() >= 3 ? ((getStudyStreak() - 3) / 4) * 100 :
+                                     (getStudyStreak() / 3) * 100}%`
+                          }}
+                        >
+                          {/* Animated shine effect for premium feel */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12 animate-pulse" />
+                        </div>
+                      </div>
+                      {/* Progress glow effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-blue-500/30 to-purple-500/30 rounded-full blur-sm opacity-50" />
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </CardContent>
           </Card>
