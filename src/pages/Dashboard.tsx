@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Gamepad2 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
@@ -45,6 +45,7 @@ const Dashboard = () => {
   const { user, logout } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
   const [pinnedSubjects, setPinnedSubjects] = useState<string[]>([]);
@@ -174,6 +175,18 @@ const Dashboard = () => {
     checkStreakCelebration();
     
   }, [user?.id]);
+
+  // Handle scrolling to subjects section when coming from practice
+  useEffect(() => {
+    if (location.hash === '#subjects') {
+      setTimeout(() => {
+        const subjectsSection = document.getElementById('subjects-section');
+        if (subjectsSection) {
+          subjectsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100); // Small delay to ensure DOM is ready
+    }
+  }, [location.hash]);
 
   const loadWeakTopicsFromDatabase = async () => {
     if (!user?.id) return;
@@ -1058,7 +1071,7 @@ const Dashboard = () => {
 
 
         {/* Subjects Section */}
-        <div className="mb-8">
+        <div id="subjects-section" className="mb-8">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-4">
               <h3 className="text-2xl font-bold text-foreground">Your Subjects</h3>
