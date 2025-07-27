@@ -125,7 +125,7 @@ export const PredictedQuestionsSection = () => {
                     Fresh practice papers every week
                   </p>
                   <p className="text-white/90 text-xs">
-                    Expertly crafted content aligned with 2026 exam trends
+                    Content aligned with 2026 exam trends
                   </p>
                 </div>
               </div>
