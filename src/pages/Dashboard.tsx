@@ -573,7 +573,139 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Premium Streak & Rewards Section - Compact for better grades visibility */}
+        {/* Merged Streak & Rewards Card - Compact for better grades visibility */}
+        <div className="mb-3">
+          {/* Single Unified Streak Card */}
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-orange-50/80 to-emerald-50/80 dark:from-slate-900 dark:via-orange-950/20 dark:to-emerald-950/20 shadow-lg hover:shadow-xl transition-all duration-300 group backdrop-blur-xl">
+            {/* Premium Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-red-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            
+            {/* Sophisticated Border */}
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-400 via-red-400 to-emerald-400 rounded-xl p-[1px]">
+              <div className="bg-gradient-to-br from-white via-orange-50/80 to-emerald-50/80 dark:from-slate-900 dark:via-orange-950/20 dark:to-emerald-950/20 rounded-[11px] h-full w-full backdrop-blur-xl" />
+            </div>
+            
+            {/* Floating Orbs */}
+            <div className="absolute top-2 right-4 w-2 h-2 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse opacity-60" />
+            <div className="absolute bottom-3 left-6 w-1.5 h-1.5 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full animate-bounce opacity-40" />
+            
+            <CardContent className="relative p-3">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {/* Left Side - Study Streak */}
+                <div className="flex flex-col space-y-2">
+                  {/* Streak Display */}
+                  <div className="flex items-center space-x-2">
+                    {/* Premium Fire Icon */}
+                    <div className="relative group/icon">
+                      <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 flex items-center justify-center shadow-md shadow-orange-500/25 transition-all duration-300 relative overflow-hidden">
+                        {/* Inner Glow */}
+                        <div className="absolute inset-1 rounded-lg bg-white/15 backdrop-blur-sm" />
+                        <Flame className="h-4 w-4 text-white relative z-10 transition-transform duration-300 drop-shadow-lg" />
+                      </div>
+                      
+                      {/* Premium Floating Elements */}
+                      <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-sm animate-bounce">
+                        <Sparkles className="h-1 w-1 text-white drop-shadow-sm" />
+                      </div>
+                    </div>
+                    
+                    {/* Compact Streak Text */}
+                    <div className="space-y-0">
+                      <div className="flex items-baseline space-x-1">
+                        <h3 className="text-lg font-black bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent tracking-tight">
+                          {getStudyStreak()}
+                        </h3>
+                        <span className="text-sm font-bold bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
+                          Day{getStudyStreak() !== 1 ? 's' : ''}
+                        </span>
+                      </div>
+                      <h4 className="text-xs font-medium text-foreground/80">Study Streak</h4>
+                    </div>
+                  </div>
+
+                  {/* Streak Hall of Fame */}
+                  <div className="mt-2 pt-2 border-t border-orange-200/50 dark:border-orange-800/30">
+                    <PublicStreakProfiles />
+                  </div>
+                </div>
+
+                {/* Right Side - Rewards */}
+                <div className="flex flex-col space-y-2">
+                  {/* Rewards Display */}
+                  <div className="flex items-center space-x-2">
+                    {/* Premium Gift Icon */}
+                    <div className="relative group/icon">
+                      <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500 via-blue-500 to-purple-500 flex items-center justify-center shadow-md shadow-emerald-500/25 transition-all duration-300 relative overflow-hidden">
+                        {/* Inner Glow */}
+                        <div className="absolute inset-1 rounded-lg bg-white/15 backdrop-blur-sm" />
+                        <Star className="h-4 w-4 text-white relative z-10 transition-transform duration-300 drop-shadow-lg" />
+                      </div>
+                      
+                      {/* Premium Floating Elements */}
+                      <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-sm animate-bounce">
+                        <Sparkles className="h-1 w-1 text-white drop-shadow-sm" />
+                      </div>
+                    </div>
+                    
+                    {/* Compact Rewards Text */}
+                    <div className="space-y-0">
+                      <div className="flex items-baseline space-x-1">
+                        <h3 className="text-lg font-black bg-gradient-to-br from-emerald-600 via-blue-600 to-purple-600 dark:from-emerald-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent tracking-tight">
+                          Rewards
+                        </h3>
+                      </div>
+                      <h4 className="text-xs font-medium text-foreground/80">Daily Streaks</h4>
+                    </div>
+                  </div>
+                  
+                  {/* Compact Next Reward */}
+                  <div className="space-y-2">
+                    {/* Compact Next Reward Preview */}
+                    <div className="flex items-center justify-between p-1.5 bg-gradient-to-r from-emerald-100/80 to-blue-100/80 dark:from-emerald-950/40 dark:to-blue-950/40 rounded-lg border border-emerald-200/50 dark:border-emerald-800/30 backdrop-blur-sm">
+                      <div className="flex items-center space-x-1.5">
+                        <span className="text-xs">🎁</span>
+                        <div>
+                          <div className="text-xs font-medium text-emerald-700 dark:text-emerald-300">
+                            {getStudyStreak() >= 90 ? "Max Level!" : 
+                             getStudyStreak() >= 14 ? "Smart notebook" :
+                             getStudyStreak() >= 7 ? "Study playlist" :
+                             "Color theme"
+                            }
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xs font-bold bg-gradient-to-r from-emerald-700 to-blue-700 dark:from-emerald-300 dark:to-blue-300 bg-clip-text text-transparent">
+                           {getStudyStreak() >= 14 ? "Unlocked!" :
+                            getStudyStreak() >= 7 ? "Unlocked!" :
+                            getStudyStreak() >= 3 ? `${7 - getStudyStreak()}d` :
+                            `${3 - getStudyStreak()}d`
+                           }
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Compact Progress Bar */}
+                    <div className="space-y-0.5">
+                      <div className="w-full bg-muted/50 rounded-full h-1 overflow-hidden">
+                        <div 
+                          className="h-full bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 rounded-full transition-all duration-700 shadow-lg"
+                          style={{
+                            width: `${getStudyStreak() >= 90 ? 100 :
+                                     getStudyStreak() >= 14 ? (getStudyStreak() / 21) * 100 :
+                                     getStudyStreak() >= 7 ? (getStudyStreak() / 14) * 100 :
+                                     getStudyStreak() >= 3 ? (getStudyStreak() / 7) * 100 :
+                                     (getStudyStreak() / 3) * 100}%`
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
         <div className="mb-3 grid grid-cols-1 lg:grid-cols-2 gap-3">
           {/* Study Streak Card */}
           <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-orange-50/80 to-red-50/80 dark:from-slate-900 dark:via-orange-950/20 dark:to-red-950/20 shadow-lg hover:shadow-xl transition-all duration-300 group backdrop-blur-xl">
