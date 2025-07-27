@@ -244,15 +244,15 @@ const Dashboard = () => {
         const subjectIds = data.map(record => {
           console.log('Processing record:', record);
           
-          // Find matching subject in curriculum
+          // Find matching subject in curriculum - check specific matches first
           const subject = curriculum.find(s => {
             const matches = 
-              s.name.toLowerCase() === record.subject_name.toLowerCase() ||
+              (record.subject_name === 'Physics' && record.exam_board.toLowerCase() === 'aqa' && s.id === 'physics') ||
+              (record.subject_name === 'Physics' && record.exam_board.toLowerCase() === 'edexcel' && s.id === 'physics-edexcel') ||
+              (record.subject_name === 'Chemistry' && record.exam_board.toLowerCase() === 'edexcel' && s.id === 'physics-edexcel') ||
               (record.subject_name === 'Mathematics' && s.name === 'Maths (Edexcel)') ||
               (record.subject_name === 'IGCSE Business' && s.name === 'Business (Edexcel IGCSE)') ||
-              (record.subject_name === 'Chemistry' && record.exam_board.toLowerCase() === 'edexcel' && s.id === 'physics-edexcel') ||
-              (record.subject_name === 'Physics' && record.exam_board.toLowerCase() === 'edexcel' && s.id === 'physics-edexcel') ||
-              (record.subject_name === 'Physics' && record.exam_board.toLowerCase() === 'aqa' && s.id === 'physics');
+              s.name.toLowerCase() === record.subject_name.toLowerCase();
             
             console.log(`Checking subject ${s.id} (${s.name}) against ${record.subject_name} ${record.exam_board}: ${matches}`);
             return matches;
