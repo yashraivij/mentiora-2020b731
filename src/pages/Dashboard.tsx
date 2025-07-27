@@ -5,7 +5,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
-import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell } from "lucide-react";
+import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, MessageSquare } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useState, useEffect } from "react";
 import { ProgressCard } from "@/components/dashboard/ProgressCard";
@@ -408,6 +408,13 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="flex items-center space-x-3">
+              <Button 
+                onClick={() => window.open('https://discord.gg/Jq2YTZ3aMa', '_blank')}
+                className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white border-0 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-300 rounded-xl px-4 py-2 h-9"
+              >
+                <MessageSquare className="h-4 w-4 mr-2" />
+                <span className="text-sm font-medium">Join Community</span>
+              </Button>
               <ThemeToggle />
               <div className="flex items-center space-x-2 px-4 py-2 bg-background/60 dark:bg-card/60 backdrop-blur-sm rounded-2xl border border-border shadow-sm">
                 <div className="w-6 h-6 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
