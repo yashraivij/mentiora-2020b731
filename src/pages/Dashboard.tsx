@@ -1063,7 +1063,7 @@ const Dashboard = () => {
             <div className="flex items-center space-x-4">
               <h3 className="text-2xl font-bold text-foreground">Your Subjects</h3>
               <Badge variant="outline" className="text-muted-foreground border-border bg-card/50">
-                {subjectsTab === 'my-subjects' ? userSubjects.length : allSubjects.filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language').length} subjects
+                {subjectsTab === 'my-subjects' ? userSubjects.length : allSubjects.length} subjects
               </Badge>
             </div>
             <div className="flex items-center space-x-3">
@@ -1112,7 +1112,7 @@ const Dashboard = () => {
               onClick={() => setSubjectsTab('all-subjects')}
               className={subjectsTab === 'all-subjects' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90 flex-1' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors flex-1'}
             >
-              All Subjects ({allSubjects.filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language').length})
+              All Subjects ({allSubjects.length})
             </Button>
           </div>
 
