@@ -7,6 +7,7 @@ import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
 import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Gamepad2 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
 import { useState, useEffect } from "react";
 import { ProgressCard } from "@/components/dashboard/ProgressCard";
 import { SubjectCard } from "@/components/dashboard/SubjectCard";
@@ -416,6 +417,7 @@ const Dashboard = () => {
                 <span className="text-sm font-extrabold">Join Community</span>
               </Button>
               <ThemeToggle />
+              {getStudyStreak() >= 3 && <ColorThemeToggle />}
               <div className="flex items-center space-x-2 px-4 py-2 bg-background/60 dark:bg-card/60 backdrop-blur-sm rounded-2xl border border-border shadow-sm">
                 <div className="w-6 h-6 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
                   <User className="h-3 w-3 text-primary-foreground" />
@@ -605,7 +607,7 @@ const Dashboard = () => {
                            getStudyStreak() >= 21 ? "Notebook Expansion" :
                            getStudyStreak() >= 14 ? "AI Beta Access" :
                            getStudyStreak() >= 7 ? "7-Day Badge" :
-                           "10 Bonus Hints"
+                           "Dashboard Color Theme"
                           }
                         </div>
                       </div>
