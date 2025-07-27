@@ -262,9 +262,12 @@ const Dashboard = () => {
   // Wrapper function specifically for physics button clicks
   const handlePhysicsToggle = async (subjectId: string) => {
     console.log('handlePhysicsToggle called with:', subjectId);
+    console.log('User ID:', user?.id);
+    console.log('Current userSubjects:', userSubjects);
     
     // Force immediate feedback
     if (!user?.id) {
+      console.error('No user ID found');
       toast({
         title: "Error",
         description: "You must be logged in to add subjects",
@@ -273,7 +276,18 @@ const Dashboard = () => {
       return;
     }
     
-    await toggleUserSubject(subjectId);
+    try {
+      console.log('Calling toggleUserSubject with:', subjectId);
+      await toggleUserSubject(subjectId);
+      console.log('toggleUserSubject completed successfully');
+    } catch (error) {
+      console.error('Error in handlePhysicsToggle:', error);
+      toast({
+        title: "Error",
+        description: "Failed to update subjects. Please try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   const toggleUserSubject = async (subjectId: string) => {
