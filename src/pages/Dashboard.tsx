@@ -246,7 +246,8 @@ const Dashboard = () => {
             (record.subject_name === 'Mathematics' && s.name === 'Maths (Edexcel)') ||
             (record.subject_name === 'IGCSE Business' && s.name === 'Business (Edexcel IGCSE)') ||
             (record.subject_name === 'Chemistry' && record.exam_board.toLowerCase() === 'edexcel' && s.name === 'Chemistry (Edexcel)') ||
-            (record.subject_name === 'Physics' && record.exam_board.toLowerCase() === 'edexcel' && s.name === 'Physics (Edexcel)')
+            (record.subject_name === 'Physics' && record.exam_board.toLowerCase() === 'edexcel' && s.id === 'physics-edexcel') ||
+            (record.subject_name === 'Physics' && record.exam_board.toLowerCase() === 'aqa' && s.id === 'physics')
           );
           return subject?.id;
         }).filter(Boolean) as string[];
