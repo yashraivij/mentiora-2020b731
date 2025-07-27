@@ -27,6 +27,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { StressTracker } from "@/lib/stressTracker";
 import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
+import { StreakCelebration } from "@/components/ui/streak-celebration";
 
 interface UserProgress {
   subjectId: string;
@@ -47,6 +48,8 @@ const Dashboard = () => {
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
   const [userSubjects, setUserSubjects] = useState<string[]>([]);
   const [subjectsTab, setSubjectsTab] = useState<'my-subjects' | 'all-subjects'>('my-subjects');
+  const [showStreakCelebration, setShowStreakCelebration] = useState(false);
+  const [hasShownCelebration, setHasShownCelebration] = useState(false);
 
   const {
     notification,
@@ -94,6 +97,15 @@ const Dashboard = () => {
     };
 
     loadUserData();
+    
+    // Show celebration for 3-day streak achievement
+    const streak = getStudyStreak();
+    if (streak >= 3 && !hasShownCelebration) {
+      setTimeout(() => {
+        setShowStreakCelebration(true);
+        setHasShownCelebration(true);
+      }, 1000); // Delay to let page load first
+    }
     
   }, [user?.id]);
 
@@ -265,7 +277,7 @@ const Dashboard = () => {
   };
 
   const getStudyStreak = () => {
-    return Math.min(userProgress.length, 7);
+    return 3; // Temporarily set to 3 to show celebration
   };
 
   const getSubjectProgress = (subjectId: string) => {
@@ -1155,6 +1167,15 @@ const Dashboard = () => {
           <div className="absolute inset-0.5 bg-gradient-to-br from-white/20 via-transparent to-transparent rounded-2xl opacity-50" />
         </Button>
       </div>
+
+      {/* Streak Celebration Modal */}
+      <StreakCelebration
+        isVisible={showStreakCelebration}
+        onClose={() => setShowStreakCelebration(false)}
+        streakDays={getStudyStreak()}
+        rewardText="Dashboard Color Theme"
+        rewardEmoji="🎨"
+      />
     </div>
   );
 };
