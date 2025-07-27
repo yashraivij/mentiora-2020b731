@@ -18,22 +18,15 @@ interface PublicProfile {
   display_name: string | null;
   avatar_url: string | null;
   streak_days: number;
-  current_subject?: string;
 }
 
 // Fake profiles that change daily
 const generateFakeProfiles = (): PublicProfile[] => {
   const names = [
-    'StudyQueen', 'MathWizard', 'ScienceGeek', 'HistoryBuff', 'LitLover', 
-    'ChemMaster', 'PhysicsPhoenix', 'BioBeast', 'GeographyGuru', 'ArtAce',
-    'MusicMaven', 'CodeCracker', 'DataDynamo', 'StatsStar', 'AlgebraAlpha',
-    'EcoExpert', 'PsychPro', 'SocioSage', 'PhiloPhoenix', 'CulinaryChamp'
-  ];
-  
-  const subjects = [
-    'Mathematics', 'Physics', 'Chemistry', 'Biology', 'English Literature',
-    'History', 'Geography', 'Art', 'Music', 'Computer Science', 'Psychology',
-    'Sociology', 'Philosophy', 'Economics', 'Business Studies', 'Statistics'
+    'Emily Chen', 'Marcus Johnson', 'Sophia Ahmed', 'Jake Williams', 'Aisha Patel', 
+    'Oliver Smith', 'Maya Rodriguez', 'Ethan Brown', 'Zara Khan', 'Lucas Davis',
+    'Isabella Garcia', 'Noah Wilson', 'Aria Thompson', 'Tyler Martinez', 'Chloe Lee',
+    'Ryan Anderson', 'Mia Jackson', 'Alex Turner', 'Grace Miller', 'Jordan Taylor'
   ];
   
   const avatars = [catAvatar, dogAvatar, foxAvatar, rabbitAvatar, bearAvatar];
@@ -64,15 +57,13 @@ const generateFakeProfiles = (): PublicProfile[] => {
     
     const streakDays = Math.floor(seededRandom() * 50) + 14; // 14-63 days
     const avatar = avatars[Math.floor(seededRandom() * avatars.length)];
-    const subject = subjects[Math.floor(seededRandom() * subjects.length)];
     
     profiles.push({
       id: `fake-${i}-${seed}`,
       username: name,
       display_name: name,
       avatar_url: avatar,
-      streak_days: streakDays,
-      current_subject: subject
+      streak_days: streakDays
     });
   }
   
@@ -218,6 +209,9 @@ export function PublicStreakProfiles() {
                         </AvatarFallback>
                       </Avatar>
                       
+                      {/* Active indicator - green dot */}
+                      <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 border border-background rounded-full"></div>
+                      
                       {/* Rank Badge */}
                       <div className={`absolute -top-1 -right-1 w-4 h-4 ${
                         overallRank === 1 ? 'bg-gradient-to-br from-amber-500 to-orange-500' :
@@ -243,16 +237,6 @@ export function PublicStreakProfiles() {
                           {profile.streak_days}
                         </span>
                       </div>
-                      
-                      {/* Show current subject for fake profiles */}
-                      {profile.current_subject && (
-                        <div className="flex items-center justify-center space-x-1 mt-1">
-                          <BookOpen className="h-2 w-2 text-emerald-500" />
-                          <span className="text-xs text-muted-foreground truncate max-w-full">
-                            {profile.current_subject}
-                          </span>
-                        </div>
-                      )}
                     </div>
                   </div>
                 </CardContent>

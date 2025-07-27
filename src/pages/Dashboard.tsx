@@ -574,7 +574,7 @@ const Dashboard = () => {
         </div>
 
         {/* Premium Streak & Rewards Section - Compact for better grades visibility */}
-        <div className="mb-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="mb-3 grid grid-cols-1 lg:grid-cols-2 gap-3">
           {/* Study Streak Card */}
           <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-orange-50/80 to-red-50/80 dark:from-slate-900 dark:via-orange-950/20 dark:to-red-950/20 shadow-lg hover:shadow-xl transition-all duration-300 group backdrop-blur-xl">
             {/* Premium Glow Effect */}
@@ -589,8 +589,8 @@ const Dashboard = () => {
             <div className="absolute top-2 right-4 w-2 h-2 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse opacity-60" />
             <div className="absolute bottom-3 left-6 w-1.5 h-1.5 bg-gradient-to-r from-pink-400 to-red-400 rounded-full animate-bounce opacity-40" />
             
-            <CardContent className="relative p-4">
-              <div className="flex flex-col space-y-3">
+            <CardContent className="relative p-3">
+              <div className="flex flex-col space-y-2">
                 {/* Top Section - Streak Display */}
                 <div className="flex items-center space-x-3">
                   {/* Premium Fire Icon */}
@@ -675,8 +675,8 @@ const Dashboard = () => {
             <div className="absolute top-2 right-4 w-2 h-2 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full animate-pulse opacity-60" />
             <div className="absolute bottom-3 left-6 w-1.5 h-1.5 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-bounce opacity-40" />
             
-            <CardContent className="relative p-4">
-              <div className="flex flex-col space-y-3">
+            <CardContent className="relative p-3">
+              <div className="flex flex-col space-y-2">
                 {/* Top Section - Rewards Display */}
                 <div className="flex items-center space-x-3">
                   {/* Premium Gift Icon */}
