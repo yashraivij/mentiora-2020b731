@@ -246,10 +246,11 @@ const Dashboard = () => {
           
           // Find matching subject in curriculum - check specific matches first
           const subject = curriculum.find(s => {
+            const examBoard = record.exam_board.toLowerCase();
             const matches = 
-              (record.subject_name === 'Physics' && record.exam_board.toLowerCase() === 'aqa' && s.id === 'physics') ||
-              (record.subject_name === 'Physics' && record.exam_board.toLowerCase() === 'edexcel' && s.id === 'physics-edexcel') ||
-              (record.subject_name === 'Chemistry' && record.exam_board.toLowerCase() === 'edexcel' && s.id === 'physics-edexcel') ||
+              (record.subject_name === 'Physics' && examBoard === 'aqa' && s.id === 'physics') ||
+              (record.subject_name === 'Physics' && examBoard === 'edexcel' && s.id === 'physics-edexcel') ||
+              (record.subject_name === 'Chemistry' && examBoard === 'edexcel' && s.id === 'chemistry-edexcel') ||
               (record.subject_name === 'Mathematics' && s.name === 'Maths (Edexcel)') ||
               (record.subject_name === 'IGCSE Business' && s.name === 'Business (Edexcel IGCSE)') ||
               s.name.toLowerCase() === record.subject_name.toLowerCase();
