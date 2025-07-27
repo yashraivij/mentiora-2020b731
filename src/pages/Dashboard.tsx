@@ -1112,7 +1112,16 @@ const Dashboard = () => {
               onClick={() => setSubjectsTab('all-subjects')}
               className={subjectsTab === 'all-subjects' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90 flex-1' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors flex-1'}
             >
-              All Subjects ({allSubjects.filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language').length})
+              All Subjects ({
+                selectedExamBoard === 'aqa' 
+                  ? allSubjects.filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language').length
+                  : allSubjects.filter((subject) => {
+                      if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') {
+                        return selectedExamBoard === 'edexcel';
+                      }
+                      return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel';
+                    }).length
+              })
             </Button>
           </div>
 
