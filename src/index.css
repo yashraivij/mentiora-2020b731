@@ -63,37 +63,73 @@
   .theme-ocean {
     --primary: 199 89% 48%;
     --primary-foreground: 210 40% 98%;
+    --secondary: 188 94% 95%;
+    --secondary-foreground: 199 89% 48%;
     --accent: 188 94% 87%;
     --accent-foreground: 199 89% 48%;
+    --muted: 188 94% 95%;
+    --muted-foreground: 199 50% 25%;
+    --card: 188 94% 98%;
+    --card-foreground: 199 89% 15%;
+    --border: 188 94% 87%;
+    --ring: 199 89% 48%;
     --gradient-primary: linear-gradient(135deg, hsl(199 89% 48%), hsl(187 85% 53%));
     --gradient-accent: linear-gradient(135deg, hsl(199 89% 48%), hsl(187 85% 53%));
+    --gradient-background: linear-gradient(135deg, hsl(188 94% 98%), hsl(188 94% 95%));
   }
 
   .theme-sunset {
     --primary: 24 95% 53%;
     --primary-foreground: 210 40% 98%;
+    --secondary: 320 85% 95%;
+    --secondary-foreground: 24 95% 53%;
     --accent: 320 85% 84%;
     --accent-foreground: 24 95% 53%;
+    --muted: 320 85% 95%;
+    --muted-foreground: 24 50% 25%;
+    --card: 320 85% 98%;
+    --card-foreground: 24 95% 15%;
+    --border: 320 85% 84%;
+    --ring: 24 95% 53%;
     --gradient-primary: linear-gradient(135deg, hsl(24 95% 53%), hsl(320 91% 69%));
     --gradient-accent: linear-gradient(135deg, hsl(24 95% 53%), hsl(320 91% 69%));
+    --gradient-background: linear-gradient(135deg, hsl(320 85% 98%), hsl(320 85% 95%));
   }
 
   .theme-forest {
     --primary: 142 76% 36%;
     --primary-foreground: 210 40% 98%;
+    --secondary: 156 100% 95%;
+    --secondary-foreground: 142 76% 36%;
     --accent: 156 100% 87%;
     --accent-foreground: 142 76% 36%;
+    --muted: 156 100% 95%;
+    --muted-foreground: 142 50% 25%;
+    --card: 156 100% 98%;
+    --card-foreground: 142 76% 15%;
+    --border: 156 100% 87%;
+    --ring: 142 76% 36%;
     --gradient-primary: linear-gradient(135deg, hsl(142 76% 36%), hsl(156 72% 47%));
     --gradient-accent: linear-gradient(135deg, hsl(142 76% 36%), hsl(156 72% 47%));
+    --gradient-background: linear-gradient(135deg, hsl(156 100% 98%), hsl(156 100% 95%));
   }
 
   .theme-royal {
     --primary: 263 85% 58%;
     --primary-foreground: 210 40% 98%;
+    --secondary: 240 85% 95%;
+    --secondary-foreground: 263 85% 58%;
     --accent: 240 85% 84%;
     --accent-foreground: 263 85% 58%;
+    --muted: 240 85% 95%;
+    --muted-foreground: 263 50% 25%;
+    --card: 240 85% 98%;
+    --card-foreground: 263 85% 15%;
+    --border: 240 85% 84%;
+    --ring: 263 85% 58%;
     --gradient-primary: linear-gradient(135deg, hsl(263 85% 58%), hsl(240 91% 69%));
     --gradient-accent: linear-gradient(135deg, hsl(263 85% 58%), hsl(240 91% 69%));
+    --gradient-background: linear-gradient(135deg, hsl(240 85% 98%), hsl(240 85% 95%));
   }
 
   .theme-default {
