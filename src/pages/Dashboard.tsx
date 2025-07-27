@@ -1112,16 +1112,7 @@ const Dashboard = () => {
               onClick={() => setSubjectsTab('all-subjects')}
               className={subjectsTab === 'all-subjects' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90 flex-1' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors flex-1'}
             >
-              All Subjects ({allSubjects.filter(subject => {
-                if (selectedExamBoard === 'aqa') {
-                  return !['maths-edexcel', 'business-edexcel-igcse', 'chemistry-edexcel', 'physics-edexcel', 'edexcel-english-language'].includes(subject.id);
-                } else if (selectedExamBoard === 'edexcel') {
-                  return true; // Include all subjects in edexcel tab
-                } else {
-                  // For other exam boards, exclude edexcel-specific subjects
-                  return !['maths-edexcel', 'business-edexcel-igcse', 'chemistry-edexcel', 'physics-edexcel'].includes(subject.id);
-                }
-              }).length})
+              All Subjects (14)
             </Button>
           </div>
 
