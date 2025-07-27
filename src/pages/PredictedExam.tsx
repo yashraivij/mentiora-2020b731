@@ -1224,12 +1224,17 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       questions.push({
         id: 'english-lang-q1',
         questionNumber: 1,
-        text: `Text A is an online article from BBC News, published in March 2019.
+        text: `Text A is from a lifestyle blog post titled "Generation Next: Why Digital Detox is the New Self-Care" published in 2024.
 
 Text A:
-"Climate activists have blocked roads across London today, causing widespread disruption to commuters. The protesters, mostly young people, say they are fighting for their future. 'We can't just sit back and watch our planet die,' said Emma, 19, who has been protesting since 6am. Police estimate that over 500 people have joined the demonstrations, with some gluing themselves to government buildings. The Metropolitan Police have made 87 arrests so far."
+"So here's the thing about constantly being online – it's literally draining our souls. I mean, when did we become a generation that can't sit with our own thoughts for five minutes without reaching for our phones? Last week, I decided to try something radical: a proper digital detox. No Instagram, no TikTok, no endless scrolling through other people's highlight reels. And honestly? It was terrifying at first. But then something magical happened. I actually started living my life instead of documenting it. I'm not saying technology is evil – obviously I'm using it to write this post! But maybe, just maybe, we need to remember that real connection happens when we look up from our screens."
 
 Analyse how Text A uses language to create meanings and representations.
+
+You should refer to specific examples from the text, including:
+• Word choices and phrases
+• Language techniques and methods
+• Sentence forms and structures
 
 [25 marks]`,
         marks: 25,
@@ -1240,12 +1245,17 @@ Analyse how Text A uses language to create meanings and representations.
       questions.push({
         id: 'english-lang-q2',
         questionNumber: 2,
-        text: `Text B is a magazine article from The Bystander, published in April 1928.
+        text: `Text B is from a newspaper editorial in The Daily Telegraph, published in 1962, discussing the impact of television on family life.
 
 Text B:
-"The modern girl of today presents a most fascinating study. Gone are the days when a lady's place was solely in the drawing-room, occupied with her needlework and watercolours. She now ventures forth into the world of commerce and industry, her bobbed hair defying the conventions of her mother's generation. Yet one cannot help but wonder whether this newfound freedom comes at too great a cost to the gentler qualities which have long been the ornament of womanhood."
+"The television set has established itself as the dominant feature of the modern British sitting room, commanding attention with an authority that would have been unthinkable to previous generations. Families now arrange their furniture around this glowing altar of entertainment, their conversations interrupted by the scheduled demands of programme viewing. Children, once expected to engage in meaningful discourse at the dinner table, now consume their meals in reverent silence, their eyes transfixed by moving pictures. One cannot help but wonder whether this technological marvel, for all its educational potential, represents a fundamental erosion of the conversational arts that have long distinguished civilised society."
 
 Analyse how Text B uses language to create meanings and representations.
+
+You should refer to specific examples from the text, including:
+• Word choices and phrases
+• Language techniques and methods
+• Sentence forms and structures
 
 [25 marks]`,
         marks: 25,
@@ -1258,6 +1268,12 @@ Analyse how Text B uses language to create meanings and representations.
         questionNumber: 3,
         text: `Explore the similarities and differences in the ways that Text A and Text B use language.
 
+You should refer to both texts in your answer. You might consider:
+• The writers' attitudes and perspectives
+• How the contexts of the texts affect language choices
+• Techniques used to engage and influence readers
+• The different purposes and audiences
+
 [20 marks]`,
         marks: 20,
         section: 'A'
@@ -1268,20 +1284,22 @@ Analyse how Text B uses language to create meanings and representations.
       questions.push({
         id: 'english-lang-q4',
         questionNumber: 4,
-        text: `Data Set 1: Transcript of a 4-year-old child, Jake, talking to his mother while looking at a picture book.
+        text: `Data Set 1: Transcript of a conversation between 3-year-old Mia and her grandmother while playing with toy cars.
 
-Mother: "What can you see in this picture?"
-Jake: "There's a big dog and... and a little cat."
-Mother: "That's right. What are they doing?"
-Jake: "The dog is chasing the cat up a tree. The cat looks scared!"
-Mother: "How do you think the cat feels?"
-Jake: "Frightened! I don't like it when dogs chase cats. It's not nice."
-Mother: "Why do you think that?"
-Jake: "Because... because cats are smaller and they can't run as fast. The dog should be gentle."
+Grandmother: "Which car would you like to play with?"
+Mia: "The red one! It's the fastest."
+Grandmother: "How do you know it's the fastest?"
+Mia: "Because... because red cars go vroom vroom really loud. And daddy's car is red and he drives super fast to work."
+Grandmother: "Does colour make cars go faster?"
+Mia: (pauses) "Maybe... no. The engine makes it go fast. But red ones look fast though."
+Grandmother: "That's very clever thinking."
+Mia: "I want to drive a red car when I'm big like daddy. But not too fast because that's dangerous and police will be cross."
 
-'Children's language development depends on their experiences of the world around them.'
+'Children's language reflects their developing understanding of the world around them.'
 
 Referring to Data Set 1 in detail, and to relevant ideas from language study, evaluate this view of children's language development.
+
+You should refer to specific linguistic features and relevant linguistic concepts in your answer.
 
 [30 marks]`,
         marks: 30,
@@ -1291,15 +1309,17 @@ Referring to Data Set 1 in detail, and to relevant ideas from language study, ev
       questions.push({
         id: 'english-lang-q5',
         questionNumber: 5,
-        text: `Data Set 2: Examples of creative writing by children aged 6-7.
+        text: `Data Set 2: Written work by Year 2 children (aged 6-7) describing their favourite animal.
 
-Child A (age 6): "The dragon was big and red. He lived in a cave. One day a prince came to fight him but the dragon said please don't hurt me I am lonely. So they became friends."
+Child A: "My favrit animal is a elefent. Elefents are gray and have long noses called trunks. They use there trunks to pick up food and spray water. I think elefents are kind animals because they help each other and look after baby elefents. If I was a elefent I would use my trunk to give hugs."
 
-Child B (age 7): "Once upon a time there was a magical unicorn who could fly to the moon. She had rainbow hair and sparkly wings. Every night she would dance with the stars and sing beautiful songs that made flowers grow."
+Child B: "I love dolphins the most of all animals! Dolphins are mammals but they live in the ocean which is really cool. They can swim super fast and jump out of the water. Dolphins talk to each other by making clicking noises and they are very intelligent. Scientists say dolphins can recognise themselves in mirrors. I wish I could swim with dolphins one day."
 
-'Being creative is an essential part of learning to write.'
+'Children's writing development shows clear progression in both technical skills and conceptual understanding.'
 
 Referring to Data Set 2 in detail, and to relevant ideas from language study, evaluate this view of children's language development.
+
+You should refer to specific linguistic features and relevant linguistic concepts in your answer.
 
 [30 marks]`,
         marks: 30,
