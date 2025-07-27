@@ -133,6 +133,9 @@ const Dashboard = () => {
       // Load user's selected subjects from database
       await loadUserSubjects();
 
+      // Check and update public profile for 14+ day streaks
+      await checkAndUpdatePublicProfile();
+
       // Check for recommendations on dashboard load
       console.log('Dashboard loading, checking for weak topic recommendations...');
       await checkForWeakTopicRecommendation();
@@ -457,6 +460,49 @@ const Dashboard = () => {
     }
   };
 
+  
+  // Function to automatically create/update public profile for 14+ day streaks
+  const checkAndUpdatePublicProfile = async () => {
+    if (!user?.id) return;
+    
+    const currentStreak = getStudyStreak();
+    
+    // Only auto-create profile if user has 14+ day streak
+    if (currentStreak >= 14) {
+      try {
+        // Check if profile already exists
+        const { data: existingProfile } = await supabase
+          .from('public_profiles')
+          .select('*')
+          .eq('user_id', user.id)
+          .single();
+        
+        const profileData = {
+          user_id: user.id,
+          username: user.email?.split('@')[0] || 'anonymous',
+          display_name: getFirstName(),
+          avatar_url: null, // Will be set when user manually edits profile
+          streak_days: currentStreak
+        };
+        
+        if (existingProfile) {
+          // Update existing profile with current streak
+          await supabase
+            .from('public_profiles')
+            .update({ streak_days: currentStreak })
+            .eq('user_id', user.id);
+        } else {
+          // Create new profile
+          await supabase
+            .from('public_profiles')
+            .insert(profileData);
+        }
+      } catch (error) {
+        console.error('Error managing public profile:', error);
+      }
+    }
+  };
+
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour < 12) return 'Good morning';
@@ -613,12 +659,10 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                {/* Streak Hall of Fame - Only show if user has 14+ day streak */}
-                {getStudyStreak() >= 14 && (
-                  <div className="mt-4 pt-4 border-t border-orange-200/50 dark:border-orange-800/30">
-                    <PublicStreakProfiles />
-                  </div>
-                )}
+                {/* Streak Hall of Fame - Show to all users */}
+                <div className="mt-4 pt-4 border-t border-orange-200/50 dark:border-orange-800/30">
+                  <PublicStreakProfiles />
+                </div>
               </div>
             </CardContent>
           </Card>
