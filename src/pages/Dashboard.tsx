@@ -481,7 +481,7 @@ const Dashboard = () => {
           user_id: user.id,
           username: user.email?.split('@')[0] || 'anonymous',
           display_name: getFirstName(),
-          avatar_url: '/src/assets/avatars/dog-avatar.png', // Default avatar for test@gmail.com
+          avatar_url: null, // Will be set when user manually edits profile
           streak_days: currentStreak
         };
         
