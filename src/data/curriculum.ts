@@ -1665,6 +1665,107 @@ export const curriculum: Subject[] = [
             specReference: 'AQA English Language 8700 Paper 1'
           }
         ]
+      },
+      {
+        id: 'childrens-language-development',
+        name: 'Children\'s Language Development',
+        questions: [
+          {
+            id: 'cld-q1',
+            question: 'Read the following transcripts of two children speaking.\n\nChild A (18 months): "Mummy car! Go car! Big car!"\nChild B (4 years): "Look mummy, there\'s a really big red car outside. Can we go in it?"\n\nIdentify two differences between the language used by Child A and Child B.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Child A uses two-word utterances while Child B uses complete sentences. Child A uses no function words (articles, prepositions) while Child B uses function words like "there\'s", "in", "can". Child A uses simple vocabulary while Child B uses more complex vocabulary like "really" and "outside". Child B asks questions using proper question formation while Child A makes statements.',
+            markingCriteria: {
+              breakdown: [
+                'One clear difference identified (2 marks)',
+                'Second clear difference identified (2 marks)',
+                'Must relate to linguistic features, not content'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q2',
+            question: 'The following extract shows a conversation between a 3-year-old child and their parent.\n\nChild: "I goed to the park yesterday."\nParent: "Oh, you went to the park yesterday."\nChild: "Yes, I went with daddy and we sawed some ducks."\nParent: "You saw some ducks? How lovely!"\n\nAnalyse how this extract demonstrates typical features of child language development.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'The child demonstrates overgeneralization of past tense rules, using "goed" instead of "went" and "sawed" instead of "saw." This shows they understand the regular past tense rule (-ed) but haven\'t yet learned irregular forms. The parent uses recasting, repeating the child\'s utterance with correct grammar ("you went") without directly correcting them. This provides positive reinforcement while modeling correct forms. The child shows self-correction, changing from "goed" to "went" after hearing the parent\'s model. The conversation demonstrates the child\'s growing grammatical awareness and the parent\'s supportive role in language development through implicit correction rather than explicit teaching.',
+            markingCriteria: {
+              breakdown: [
+                'Identification of overgeneralization (2-3 marks)',
+                'Analysis of parent\'s recasting technique (2-3 marks)',
+                'Discussion of child\'s response to modeling (2-3 marks)',
+                'Understanding of language acquisition process (1-2 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q3',
+            question: 'Read the following writing samples from two different children.\n\nSample A (age 6): "mi frend cam to mi hows and we playd gaems"\nSample B (age 8): "My friend came to my house and we played games in the garden all afternoon."\n\nCompare how the two children demonstrate different stages of writing development.',
+            marks: 10,
+            difficulty: 'medium',
+            modelAnswer: 'Sample A shows phonetic spelling where the child writes words as they sound ("frend" for "friend", "hows" for "house", "playd" for "played"). This demonstrates understanding of sound-letter correspondence but not conventional spelling rules. Sample B uses conventional spelling throughout, showing mastery of standard orthographic patterns. Sample A uses simple sentence structure with basic conjunctions ("and"), while Sample B shows more complex sentence construction with additional detail ("in the garden all afternoon"). Sample A lacks punctuation, while Sample B uses appropriate punctuation. Both samples show age-appropriate narrative skills, but Sample B demonstrates greater linguistic sophistication and awareness of written conventions.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of spelling development (3-4 marks)',
+                'Comparison of sentence complexity (3-4 marks)',
+                'Discussion of punctuation and conventions (2-3 marks)',
+                'Understanding of writing development stages (1-2 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q4',
+            question: 'The following transcript shows a 2-year-old child talking about a picture book.\n\n"Look! Doggy! Big doggy! Doggy running! Where mummy? Mummy gone! Doggy sad now. Poor doggy."\n\nAnalyse how this extract demonstrates features of early language development.',
+            marks: 12,
+            difficulty: 'medium',
+            modelAnswer: 'The child demonstrates telegraphic speech, omitting function words like articles ("the") and auxiliary verbs while keeping content words that carry meaning ("doggy", "running", "mummy"). The present participle "running" shows emerging understanding of verb forms, though auxiliary "is" is missing. The child uses simple sentence structures, mostly two-word combinations, typical of this developmental stage. Vocabulary shows concrete nouns ("doggy", "mummy") rather than abstract concepts. The child demonstrates understanding of emotional states ("sad") and empathy ("poor doggy"), showing cognitive development alongside linguistic growth. The use of "where" questions shows emerging interrogative skills, though grammatically incomplete. The repetition of "doggy" shows how children use familiar words as building blocks for communication.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of telegraphic speech features (4-5 marks)',
+                'Discussion of sentence structure and grammar (3-4 marks)',
+                'Analysis of vocabulary and semantic development (3-4 marks)',
+                'Understanding of cognitive-linguistic connections (1-2 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q5',
+            question: 'Read the following conversation between a 5-year-old child and an adult.\n\nAdult: "What did you do at school today?"\nChild: "We did numbers and writing and Miss Jones readed us a story about a princess who had magic powers and she could fly and turn things into gold but then the bad witch came..."\nAdult: "Slow down! Tell me about the numbers first."\nChild: "Oh. We did adding. I can do five plus three equals eight!"\n\nEvaluate how this extract shows the child\'s developing conversational skills.',
+            marks: 15,
+            difficulty: 'hard',
+            modelAnswer: 'The child demonstrates narrative enthusiasm but limited awareness of listener needs, launching into a long, breathless account without considering the adult\'s ability to follow. The run-on sentence structure with multiple conjunctions ("and...and...but then") shows developing but not yet mature syntactic skills. However, the child shows flexibility when redirected by the adult, immediately adjusting topic and providing the requested information about numbers. The child uses correct mathematical vocabulary ("plus", "equals") and demonstrates pride in achievement through emphatic delivery ("I can do...!"). The extract shows the child\'s ability to maintain topic coherence while switching between narrative and informational modes. The conversational skills show both strengths (responsiveness, topic maintenance) and areas for development (turn-taking awareness, audience consideration). The child\'s linguistic competence exceeds their pragmatic awareness, typical of this developmental stage.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of narrative structure and delivery (4-5 marks)',
+                'Discussion of conversational awareness and turn-taking (4-5 marks)',
+                'Evaluation of linguistic versus pragmatic development (4-5 marks)',
+                'Understanding of developmental appropriateness (2-3 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          },
+          {
+            id: 'cld-q6',
+            question: 'The following shows a text message exchange between two teenagers.\n\nTeen A: "omg did u see what happened in assembly 😂"\nTeen B: "nooo what??"\nTeen A: "mr jones totally fell off the stage lmaooo"\nTeen B: "dead 💀💀 was he ok tho"\nTeen A: "yh he was fine just embarrassed af"\n\nAnalyse how these teenagers adapt their language for digital communication.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'The teenagers use extensive abbreviation and acronyms ("omg", "u", "lmaooo", "af") to create efficient communication suitable for quick typing. They employ phonetic spelling ("yh" for "yeah", "tho" for "though") that reflects their spoken language. Emojis (😂, 💀💀) replace or supplement verbal expressions, with the skull emoji meaning something is funny rather than its literal meaning. The informal register uses slang terms ("dead" meaning funny) that create in-group identity. Punctuation is minimal or non-standard (multiple question marks for emphasis), while capitalization is largely abandoned except for emphasis. The conversational structure maintains informal spoken patterns despite the written medium, showing how digital communication blends spoken and written modes.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of abbreviation and phonetic spelling (2-3 marks)',
+                'Discussion of emoji use and meaning (2-3 marks)',
+                'Analysis of informal register and slang (2-3 marks)',
+                'Understanding of digital communication conventions (1-2 marks)'
+              ]
+            },
+            specReference: 'AQA English Language 8700 Paper 1'
+          }
+        ]
       }
     ]
   },
