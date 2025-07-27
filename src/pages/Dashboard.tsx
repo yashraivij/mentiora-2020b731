@@ -259,6 +259,23 @@ const Dashboard = () => {
     }
   };
 
+  // Wrapper function specifically for physics button clicks
+  const handlePhysicsToggle = async (subjectId: string) => {
+    console.log('handlePhysicsToggle called with:', subjectId);
+    
+    // Force immediate feedback
+    if (!user?.id) {
+      toast({
+        title: "Error",
+        description: "You must be logged in to add subjects",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    await toggleUserSubject(subjectId);
+  };
+
   const toggleUserSubject = async (subjectId: string) => {
     if (!user?.id) return;
 
@@ -1066,26 +1083,26 @@ const Dashboard = () => {
                     (userSubjects.length > 0 ? sortedSubjects.filter(s => userSubjects.includes(s.id)) : []) 
                     : allSubjects)
                     .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language')
-                    .map((subject) => (
-                    <SubjectCard
-                      key={subject.id}
-                      subject={{
-                        ...subject,
-                        color: getSubjectColor(subject.id)
-                      }}
-                      progress={userProgress}
-                      onStartPractice={handlePractice}
-                      onTogglePin={togglePinSubject}
-                      isPinned={pinnedSubjects.includes(subject.id)}
-                      lastActivity={getLastActivity(subject.id)}
-                      userId={user?.id}
-                      onToggleUserSubject={toggleUserSubject}
-                      isUserSubject={userSubjects.includes(subject.id)}
-                      showAddButton={subjectsTab === 'all-subjects'}
-                    />
-                  ))}
-                </div>
-              )}
+                     .map((subject) => (
+                     <SubjectCard
+                       key={subject.id}
+                       subject={{
+                         ...subject,
+                         color: getSubjectColor(subject.id)
+                       }}
+                       progress={userProgress}
+                       onStartPractice={handlePractice}
+                       onTogglePin={togglePinSubject}
+                       isPinned={pinnedSubjects.includes(subject.id)}
+                       lastActivity={getLastActivity(subject.id)}
+                       userId={user?.id}
+                       onToggleUserSubject={handlePhysicsToggle}
+                       isUserSubject={userSubjects.includes(subject.id)}
+                       showAddButton={subjectsTab === 'all-subjects'}
+                     />
+                     ))}
+                 </div>
+               )}
             </TabsContent>
 
             {['edexcel', 'ccea', 'ocr', 'wjec'].map((examBoard) => (
