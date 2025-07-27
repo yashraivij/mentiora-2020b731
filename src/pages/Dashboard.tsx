@@ -323,7 +323,7 @@ const Dashboard = () => {
   };
 
   const getStudyStreak = () => {
-    return 7; // Temporarily set to 7 to demonstrate the study playlist feature
+    return 0; // Reset streak to 0
   };
 
   const getSubjectProgress = (subjectId: string) => {
