@@ -388,9 +388,9 @@ const Dashboard = () => {
     if (subject.name === 'Chemistry (Edexcel)') return 'Chemistry';
     if (subject.name === 'Physics (Edexcel)') return 'Physics';
     
-    // Handle both physics subjects - distinguish by ID
-    if (subject.id === 'physics-edexcel') return 'Physics (Edexcel)';
-    if (subject.id === 'physics') return 'Physics (AQA)';
+    // Handle both physics subjects - use consistent naming
+    if (subject.id === 'physics-edexcel') return 'Physics';
+    if (subject.id === 'physics-aqa') return 'Physics';
     
     return subject.name;
   };
