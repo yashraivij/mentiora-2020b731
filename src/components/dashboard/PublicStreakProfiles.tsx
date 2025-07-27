@@ -2,8 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
-import { Trophy, Flame, Crown, Star } from 'lucide-react';
+import { Trophy, Flame, Crown, Star, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
+
+// Import animal avatars
+import catAvatar from '@/assets/avatars/cat-avatar.png';
+import dogAvatar from '@/assets/avatars/dog-avatar.png';
+import foxAvatar from '@/assets/avatars/fox-avatar.png';
+import rabbitAvatar from '@/assets/avatars/rabbit-avatar.png';
+import bearAvatar from '@/assets/avatars/bear-avatar.png';
 
 interface PublicProfile {
   id: string;
@@ -11,7 +18,66 @@ interface PublicProfile {
   display_name: string | null;
   avatar_url: string | null;
   streak_days: number;
+  current_subject?: string;
 }
+
+// Fake profiles that change daily
+const generateFakeProfiles = (): PublicProfile[] => {
+  const names = [
+    'StudyQueen', 'MathWizard', 'ScienceGeek', 'HistoryBuff', 'LitLover', 
+    'ChemMaster', 'PhysicsPhoenix', 'BioBeast', 'GeographyGuru', 'ArtAce',
+    'MusicMaven', 'CodeCracker', 'DataDynamo', 'StatsStar', 'AlgebraAlpha',
+    'EcoExpert', 'PsychPro', 'SocioSage', 'PhiloPhoenix', 'CulinaryChamp'
+  ];
+  
+  const subjects = [
+    'Mathematics', 'Physics', 'Chemistry', 'Biology', 'English Literature',
+    'History', 'Geography', 'Art', 'Music', 'Computer Science', 'Psychology',
+    'Sociology', 'Philosophy', 'Economics', 'Business Studies', 'Statistics'
+  ];
+  
+  const avatars = [catAvatar, dogAvatar, foxAvatar, rabbitAvatar, bearAvatar];
+  
+  // Use current date as seed for consistent daily changes
+  const today = new Date();
+  const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+  
+  // Simple seeded random function
+  let seedValue = seed;
+  const seededRandom = () => {
+    seedValue = (seedValue * 9301 + 49297) % 233280;
+    return seedValue / 233280;
+  };
+  
+  const profiles: PublicProfile[] = [];
+  const usedNames = new Set<string>();
+  
+  // Generate 8-12 fake profiles
+  const profileCount = Math.floor(seededRandom() * 5) + 8;
+  
+  for (let i = 0; i < profileCount; i++) {
+    let name;
+    do {
+      name = names[Math.floor(seededRandom() * names.length)];
+    } while (usedNames.has(name));
+    usedNames.add(name);
+    
+    const streakDays = Math.floor(seededRandom() * 50) + 14; // 14-63 days
+    const avatar = avatars[Math.floor(seededRandom() * avatars.length)];
+    const subject = subjects[Math.floor(seededRandom() * subjects.length)];
+    
+    profiles.push({
+      id: `fake-${i}-${seed}`,
+      username: name,
+      display_name: name,
+      avatar_url: avatar,
+      streak_days: streakDays,
+      current_subject: subject
+    });
+  }
+  
+  return profiles.sort((a, b) => b.streak_days - a.streak_days);
+};
 
 export function PublicStreakProfiles() {
   const [profiles, setProfiles] = useState<PublicProfile[]>([]);
@@ -31,15 +97,22 @@ export function PublicStreakProfiles() {
       const { data, error } = await supabase
         .from('public_profiles')
         .select('*')
-        .gte('streak_days', 14) // Only fetch profiles with 14+ day streaks
+        .gte('streak_days', 14)
         .order('streak_days', { ascending: false });
 
       if (error) {
         console.error('Error fetching public profiles:', error);
-        return;
       }
 
-      setProfiles(data || []);
+      // Combine real profiles with fake ones
+      const realProfiles = data || [];
+      const fakeProfiles = generateFakeProfiles();
+      
+      // Merge and sort by streak days
+      const allProfiles = [...realProfiles, ...fakeProfiles]
+        .sort((a, b) => b.streak_days - a.streak_days);
+
+      setProfiles(allProfiles);
     } catch (error) {
       console.error('Error in fetchPublicProfiles:', error);
     } finally {
@@ -170,6 +243,16 @@ export function PublicStreakProfiles() {
                           {profile.streak_days}
                         </span>
                       </div>
+                      
+                      {/* Show current subject for fake profiles */}
+                      {profile.current_subject && (
+                        <div className="flex items-center justify-center space-x-1 mt-1">
+                          <BookOpen className="h-2 w-2 text-emerald-500" />
+                          <span className="text-xs text-muted-foreground truncate max-w-full">
+                            {profile.current_subject}
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </CardContent>
