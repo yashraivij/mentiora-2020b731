@@ -237,33 +237,42 @@ const Dashboard = () => {
         return;
       }
 
-      console.log('Database records:', data);
+      console.log('=== DEBUG: Database records ===', data);
 
       if (data) {
         // Convert database records to subject IDs based on curriculum
         const subjectIds = data.map(record => {
-          console.log('Processing record:', record);
+          console.log(`=== Processing record: ${record.subject_name} | ${record.exam_board} ===`);
+          const examBoard = record.exam_board.toLowerCase();
           
-          // Find matching subject in curriculum - check specific matches first
-          const subject = curriculum.find(s => {
-            const examBoard = record.exam_board.toLowerCase();
-            const matches = 
-              (record.subject_name === 'Physics' && examBoard === 'aqa' && s.id === 'physics') ||
-              (record.subject_name === 'Physics' && examBoard === 'edexcel' && s.id === 'physics-edexcel') ||
-              (record.subject_name === 'Chemistry' && examBoard === 'edexcel' && s.id === 'chemistry-edexcel') ||
-              (record.subject_name === 'Mathematics' && s.name === 'Maths (Edexcel)') ||
-              (record.subject_name === 'IGCSE Business' && s.name === 'Business (Edexcel IGCSE)') ||
-              s.name.toLowerCase() === record.subject_name.toLowerCase();
-            
-            console.log(`Checking subject ${s.id} (${s.name}) against ${record.subject_name} ${record.exam_board}: ${matches}`);
-            return matches;
-          });
+          // Check each potential match explicitly
+          if (record.subject_name === 'Physics' && examBoard === 'aqa') {
+            console.log('✅ Matched Physics AQA to physics ID');
+            return 'physics';
+          }
+          if (record.subject_name === 'Physics' && examBoard === 'edexcel') {
+            console.log('✅ Matched Physics Edexcel to physics-edexcel ID');
+            return 'physics-edexcel';
+          }
           
-          console.log('Found subject:', subject?.id);
-          return subject?.id;
+          // Find matching subject in curriculum for other subjects
+          const subject = curriculum.find(s => 
+            (record.subject_name === 'Mathematics' && s.name === 'Maths (Edexcel)') ||
+            (record.subject_name === 'IGCSE Business' && s.name === 'Business (Edexcel IGCSE)') ||
+            (record.subject_name === 'Chemistry' && examBoard === 'edexcel' && s.id === 'chemistry-edexcel') ||
+            s.name.toLowerCase() === record.subject_name.toLowerCase()
+          );
+          
+          if (subject) {
+            console.log(`✅ Found subject: ${subject.id} for ${record.subject_name}`);
+            return subject.id;
+          } else {
+            console.log(`❌ No match found for: ${record.subject_name} | ${record.exam_board}`);
+            return null;
+          }
         }).filter(Boolean) as string[];
         
-        console.log('Final subject IDs:', subjectIds);
+        console.log('=== Final subject IDs ===', subjectIds);
         setUserSubjects(subjectIds);
       }
     } catch (error) {
