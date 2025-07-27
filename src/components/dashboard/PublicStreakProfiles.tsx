@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
-import { Trophy, Flame, Crown, Star, BookOpen } from 'lucide-react';
+import { Trophy, Flame, Crown, Star, BookOpen, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 // Import animal avatars
@@ -160,18 +160,36 @@ export function PublicStreakProfiles() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h4 className="text-sm font-semibold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-          Streak Hall of Fame ({profiles.length} Elite Members)
-        </h4>
+      <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-amber-50/80 via-yellow-50/80 to-orange-50/80 dark:from-amber-950/30 dark:via-yellow-950/30 dark:to-orange-950/30 border border-amber-200/50 dark:border-amber-800/30">
+        <div className="flex items-center space-x-3">
+          <div className="relative">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 via-yellow-500 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/25">
+              <Crown className="h-5 w-5 text-white drop-shadow-sm" />
+            </div>
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full animate-bounce"></div>
+          </div>
+          <div>
+            <h4 className="text-sm font-bold bg-gradient-to-r from-amber-700 via-yellow-700 to-orange-700 dark:from-amber-300 dark:via-yellow-300 dark:to-orange-300 bg-clip-text text-transparent">
+              Elite Hall of Fame
+            </h4>
+            <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1">
+                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">{profiles.length} Active</span>
+              </div>
+              <div className="w-1 h-1 bg-muted-foreground/30 rounded-full"></div>
+              <span className="text-xs text-muted-foreground">14+ Day Masters</span>
+            </div>
+          </div>
+        </div>
         <div className="flex items-center space-x-1">
           <Star className="h-3 w-3 text-amber-500" />
-          <span className="text-xs font-medium text-muted-foreground">14+ Days</span>
+          <Zap className="h-3 w-3 text-yellow-500" />
         </div>
       </div>
 
-      {/* Profile Grid */}
-      <div className="grid grid-cols-3 gap-2">
+      {/* Premium Profile Grid */}
+      <div className="grid grid-cols-3 gap-3">
         {currentProfiles.map((profile, index) => {
           const overallRank = currentPage * PROFILES_PER_PAGE + index + 1;
           const isTopThree = overallRank <= 3;
@@ -183,59 +201,74 @@ export function PublicStreakProfiles() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
             >
-              <Card className={`relative overflow-hidden border-0 ${
+              <Card className={`relative overflow-hidden ${
                 isTopThree 
-                  ? 'bg-gradient-to-br from-amber-50/80 via-yellow-50/80 to-orange-50/80 dark:from-amber-950/30 dark:via-yellow-950/30 dark:to-orange-950/30' 
-                  : 'bg-gradient-to-r from-background/80 to-muted/20'
-              } shadow-sm hover:shadow-md transition-all duration-200`}>
+                  ? 'bg-gradient-to-br from-amber-50/90 via-yellow-50/90 to-orange-50/90 dark:from-amber-950/40 dark:via-yellow-950/40 dark:to-orange-950/40 shadow-lg shadow-amber-500/20' 
+                  : 'bg-gradient-to-br from-slate-50/80 via-white/80 to-slate-50/80 dark:from-slate-900/80 dark:via-slate-800/80 dark:to-slate-900/80 shadow-md'
+              } hover:shadow-xl transition-all duration-300 group border-0`}>
                 {/* Premium Border for Top 3 */}
                 {isTopThree && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 rounded-lg p-[1px]">
-                    <div className="bg-gradient-to-br from-amber-50/80 via-yellow-50/80 to-orange-50/80 dark:from-amber-950/30 dark:via-yellow-950/30 dark:to-orange-950/30 rounded-[7px] h-full w-full" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 rounded-lg p-[1.5px]">
+                    <div className="bg-gradient-to-br from-amber-50/90 via-yellow-50/90 to-orange-50/90 dark:from-amber-950/40 dark:via-yellow-950/40 dark:to-orange-950/40 rounded-[6px] h-full w-full" />
                   </div>
                 )}
                 
-                <CardContent className="relative p-3">
-                  <div className="flex flex-col items-center space-y-2">
+                {/* Floating particles for top 3 */}
+                {isTopThree && (
+                  <>
+                    <div className="absolute top-1 right-2 w-1 h-1 bg-amber-400 rounded-full animate-ping opacity-60"></div>
+                    <div className="absolute bottom-2 left-2 w-1.5 h-1.5 bg-yellow-400 rounded-full animate-pulse opacity-50"></div>
+                  </>
+                )}
+                
+                <CardContent className="relative p-4">
+                  <div className="flex flex-col items-center space-y-3">
                     <div className="relative">
-                      <Avatar className={`w-8 h-8 ${isTopThree ? 'border-2 border-amber-400' : ''}`}>
+                      <Avatar className={`w-10 h-10 ring-2 ${isTopThree ? 'ring-amber-400/50' : 'ring-slate-200/50 dark:ring-slate-700/50'} ring-offset-2 ring-offset-background`}>
                         <AvatarImage src={profile.avatar_url || undefined} />
-                        <AvatarFallback className={`text-xs ${
+                        <AvatarFallback className={`text-sm font-bold ${
                           isTopThree 
                             ? 'bg-gradient-to-br from-amber-500 to-orange-500 text-white' 
                             : 'bg-gradient-to-br from-emerald-500 to-blue-500 text-white'
-                        } font-bold`}>
+                        }`}>
                           {profile.username[0]?.toUpperCase()}
                         </AvatarFallback>
                       </Avatar>
                       
-                      {/* Active indicator - green dot */}
-                      <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 border border-background rounded-full"></div>
+                      {/* Enhanced Active indicator - more prominent green dot with glow */}
+                      <div className="absolute -bottom-0.5 -right-0.5 flex items-center justify-center">
+                        <div className="w-4 h-4 bg-emerald-500 border-2 border-white dark:border-slate-900 rounded-full shadow-lg animate-pulse"></div>
+                        <div className="absolute w-4 h-4 bg-emerald-400 rounded-full animate-ping opacity-75"></div>
+                        <div className="absolute w-2 h-2 bg-emerald-300 rounded-full animate-pulse"></div>
+                      </div>
                       
-                      {/* Rank Badge */}
-                      <div className={`absolute -top-1 -right-1 w-4 h-4 ${
-                        overallRank === 1 ? 'bg-gradient-to-br from-amber-500 to-orange-500' :
-                        overallRank === 2 ? 'bg-gradient-to-br from-slate-400 to-slate-500' :
-                        overallRank === 3 ? 'bg-gradient-to-br from-amber-600 to-orange-600' :
-                        'bg-gradient-to-br from-slate-400 to-slate-500'
-                      } rounded-full flex items-center justify-center text-white text-xs font-bold`}>
-                        {overallRank === 1 ? <Crown className="h-2 w-2" /> : overallRank}
+                      {/* Enhanced Rank Badge */}
+                      <div className={`absolute -top-1 -left-1 w-5 h-5 ${
+                        overallRank === 1 ? 'bg-gradient-to-br from-amber-500 to-orange-500 shadow-lg shadow-amber-500/30' :
+                        overallRank === 2 ? 'bg-gradient-to-br from-slate-400 to-slate-600 shadow-lg shadow-slate-500/30' :
+                        overallRank === 3 ? 'bg-gradient-to-br from-amber-600 to-orange-700 shadow-lg shadow-amber-600/30' :
+                        'bg-gradient-to-br from-slate-500 to-slate-600 shadow-lg shadow-slate-500/30'
+                      } rounded-full flex items-center justify-center text-white text-xs font-bold border-2 border-white dark:border-slate-900`}>
+                        {overallRank === 1 ? <Crown className="h-2.5 w-2.5" /> : overallRank}
                       </div>
                     </div>
                     
-                    <div className="text-center">
-                      <h6 className="font-medium text-xs text-foreground truncate max-w-full">
+                    <div className="text-center space-y-1">
+                      <h6 className="font-semibold text-sm text-foreground truncate max-w-full">
                         {profile.display_name || profile.username}
                       </h6>
-                      <div className="flex items-center justify-center space-x-1 mt-1">
-                        <Flame className="h-2 w-2 text-orange-500" />
-                        <span className={`text-xs font-bold ${
+                      <div className="flex items-center justify-center space-x-1">
+                        <div className={`p-1 rounded-md ${isTopThree ? 'bg-amber-100 dark:bg-amber-950/50' : 'bg-slate-100 dark:bg-slate-800'}`}>
+                          <Flame className="h-2.5 w-2.5 text-orange-500" />
+                        </div>
+                        <span className={`text-sm font-bold ${
                           isTopThree 
                             ? 'bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent' 
                             : 'text-muted-foreground'
                         }`}>
                           {profile.streak_days}
                         </span>
+                        <span className="text-xs text-muted-foreground/70">days</span>
                       </div>
                     </div>
                   </div>
