@@ -28,6 +28,8 @@ import { StressTracker } from "@/lib/stressTracker";
 import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
 import { StreakCelebration } from "@/components/ui/streak-celebration";
+import { ProfileDropdown } from '@/components/ui/profile-dropdown';
+import { PublicStreakProfiles } from '@/components/dashboard/PublicStreakProfiles';
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
 
 interface UserProgress {
@@ -139,8 +141,21 @@ const Dashboard = () => {
     loadUserData();
     
     const checkStreakCelebration = async () => {
-      // Show celebration for 7-day streak achievement
+      // Show celebration for streak achievements (prioritize highest unseen milestone)
       const streak = getStudyStreak();
+      
+      // Check 14-day streak first (highest milestone)
+      if (streak >= 14) {
+        const hasSeenCelebration = await hasSeenStreakCelebration(14);
+        if (!hasSeenCelebration) {
+          setTimeout(() => {
+            setShowStreakCelebration(true);
+          }, 1000); // Delay to let page load first
+          return;
+        }
+      }
+      
+      // Check 7-day streak if 14-day already seen or not reached
       if (streak >= 7) {
         const hasSeenCelebration = await hasSeenStreakCelebration(7);
         if (!hasSeenCelebration) {
@@ -323,7 +338,7 @@ const Dashboard = () => {
   };
 
   const getStudyStreak = () => {
-    return 0; // Reset streak to 0
+    return 14; // Set to 14 for testing 14-day streak feature
   };
 
   const getSubjectProgress = (subjectId: string) => {
@@ -477,12 +492,7 @@ const Dashboard = () => {
               <ThemeToggle />
               {getStudyStreak() >= 3 && <ColorThemeToggle />}
               {getStudyStreak() >= 7 && <StudyPlaylist isUnlocked={true} />}
-              <div className="flex items-center space-x-2 px-4 py-2 bg-background/60 dark:bg-card/60 backdrop-blur-sm rounded-2xl border border-border shadow-sm">
-                <div className="w-6 h-6 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
-                  <User className="h-3 w-3 text-primary-foreground" />
-                </div>
-                <span className="text-sm font-medium text-foreground">{getFirstName()}</span>
-              </div>
+              <ProfileDropdown streakDays={getStudyStreak()} firstName={getFirstName()} />
               <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
                 <LogOut className="h-4 w-4" />
               </Button>
@@ -589,7 +599,7 @@ const Dashboard = () => {
                       <Trophy className="h-2 w-2 text-white drop-shadow-sm" />
                     </div>
                     <span className="text-xs font-bold bg-gradient-to-r from-yellow-700 via-amber-700 to-orange-700 dark:from-yellow-300 dark:via-amber-300 dark:to-orange-300 bg-clip-text text-transparent tracking-wide">
-                      {getStudyStreak() >= 7 ? 'Streak Master' : 'Rising Star'}
+                      {getStudyStreak() >= 14 ? 'Elite Master' : getStudyStreak() >= 7 ? 'Streak Master' : 'Rising Star'}
                     </span>
                   </div>
                 </div>
@@ -733,6 +743,22 @@ const Dashboard = () => {
             </CardContent>
           </Card>
         </div>
+
+        {/* Streak Leaders Section - Only show if someone has 14+ day streak */}
+        {getStudyStreak() >= 14 && (
+          <div className="mb-6">
+            <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-purple-50/80 to-indigo-50/80 dark:from-slate-900 dark:via-purple-950/20 dark:to-indigo-950/20 shadow-2xl backdrop-blur-xl">
+              {/* Premium Border */}
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-400 via-indigo-400 to-blue-400 rounded-xl p-[1px]">
+                <div className="bg-gradient-to-br from-white via-purple-50/80 to-indigo-50/80 dark:from-slate-900 dark:via-purple-950/20 dark:to-indigo-950/20 rounded-[11px] h-full w-full backdrop-blur-xl" />
+              </div>
+              
+              <CardContent className="relative p-6">
+                <PublicStreakProfiles />
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
         {/* Predicted GCSE Grades Section */}
         <PredictedGradesGraph userProgress={userProgress} />
@@ -1222,11 +1248,22 @@ const Dashboard = () => {
         isVisible={showStreakCelebration}
         onClose={async () => {
           setShowStreakCelebration(false);
-          await markStreakCelebrationViewed(7);
+          const streak = getStudyStreak();
+          // Mark the appropriate celebration as viewed
+          if (streak >= 14) {
+            const hasSeenCelebration = await hasSeenStreakCelebration(14);
+            if (!hasSeenCelebration) {
+              await markStreakCelebrationViewed(14);
+            } else {
+              await markStreakCelebrationViewed(7);
+            }
+          } else {
+            await markStreakCelebrationViewed(7);
+          }
         }}
         streakDays={getStudyStreak()}
-        rewardText="Study Playlist & Background Sounds"
-        rewardEmoji="🎵"
+        rewardText={getStudyStreak() >= 14 ? "Create Your Public Profile & Get Recognition" : "Study Playlist & Background Sounds"}
+        rewardEmoji={getStudyStreak() >= 14 ? "👤" : "🎵"}
       />
     </div>
   );

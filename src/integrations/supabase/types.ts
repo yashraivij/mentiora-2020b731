@@ -656,6 +656,7 @@ export type Database = {
           id: string
           revision_goals: Json | null
           subject_preferences: Json | null
+          username: string | null
         }
         Insert: {
           avatar_url?: string | null
@@ -665,6 +666,7 @@ export type Database = {
           id: string
           revision_goals?: Json | null
           subject_preferences?: Json | null
+          username?: string | null
         }
         Update: {
           avatar_url?: string | null
@@ -674,6 +676,40 @@ export type Database = {
           id?: string
           revision_goals?: Json | null
           subject_preferences?: Json | null
+          username?: string | null
+        }
+        Relationships: []
+      }
+      public_profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          display_name: string | null
+          id: string
+          streak_days: number | null
+          updated_at: string | null
+          user_id: string
+          username: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          id?: string
+          streak_days?: number | null
+          updated_at?: string | null
+          user_id: string
+          username: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          id?: string
+          streak_days?: number | null
+          updated_at?: string | null
+          user_id?: string
+          username?: string
         }
         Relationships: []
       }
