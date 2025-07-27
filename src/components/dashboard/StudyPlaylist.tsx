@@ -10,85 +10,263 @@ interface StudyPlaylistProps {
   isUnlocked: boolean;
 }
 
+interface AudioTrack {
+  name: string;
+  duration: string;
+  audioType: 'lofi' | 'nature' | 'whitenoise' | 'ambient';
+}
+
 const StudyPlaylist = ({ isUnlocked }: StudyPlaylistProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(0);
   const [volume, setVolume] = useState([75]);
   const [isMuted, setIsMuted] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const gainNodeRef = useRef<GainNode | null>(null);
+  const oscillatorRef = useRef<OscillatorNode | null>(null);
+  const noiseBufferRef = useRef<AudioBuffer | null>(null);
 
   const playlists = [
     {
       name: "Lo-Fi Study Beats",
       icon: Music,
       color: "from-purple-500 to-pink-500",
+      audioType: 'lofi' as const,
       tracks: [
-        { name: "Midnight Study", duration: "3:24" },
-        { name: "Coffee Shop Vibes", duration: "4:12" },
-        { name: "Rainy Day Focus", duration: "3:45" },
-        { name: "Late Night Pages", duration: "4:01" }
+        { name: "Midnight Study", duration: "3:24", audioType: 'lofi' as const },
+        { name: "Coffee Shop Vibes", duration: "4:12", audioType: 'lofi' as const },
+        { name: "Rainy Day Focus", duration: "3:45", audioType: 'lofi' as const },
+        { name: "Late Night Pages", duration: "4:01", audioType: 'lofi' as const }
       ]
     },
     {
       name: "Nature Sounds",
       icon: TreePine,
       color: "from-green-500 to-emerald-500",
+      audioType: 'nature' as const,
       tracks: [
-        { name: "Forest Rain", duration: "5:00" },
-        { name: "Ocean Waves", duration: "6:30" },
-        { name: "Mountain Stream", duration: "4:45" },
-        { name: "Birds & Breeze", duration: "5:15" }
+        { name: "Forest Rain", duration: "5:00", audioType: 'nature' as const },
+        { name: "Ocean Waves", duration: "6:30", audioType: 'nature' as const },
+        { name: "Mountain Stream", duration: "4:45", audioType: 'nature' as const },
+        { name: "Birds & Breeze", duration: "5:15", audioType: 'nature' as const }
       ]
     },
     {
       name: "White Noise",
       icon: Waves,
       color: "from-blue-500 to-cyan-500",
+      audioType: 'whitenoise' as const,
       tracks: [
-        { name: "Brown Noise", duration: "10:00" },
-        { name: "Pink Noise", duration: "10:00" },
-        { name: "Fan Sounds", duration: "8:30" },
-        { name: "Static Calm", duration: "10:00" }
+        { name: "Brown Noise", duration: "10:00", audioType: 'whitenoise' as const },
+        { name: "Pink Noise", duration: "10:00", audioType: 'whitenoise' as const },
+        { name: "Fan Sounds", duration: "8:30", audioType: 'whitenoise' as const },
+        { name: "Static Calm", duration: "10:00", audioType: 'whitenoise' as const }
       ]
     },
     {
       name: "Ambient Focus",
       icon: Cloud,
       color: "from-indigo-500 to-purple-500",
+      audioType: 'ambient' as const,
       tracks: [
-        { name: "Deep Space", duration: "7:20" },
-        { name: "Ethereal Drones", duration: "6:45" },
-        { name: "Minimal Synths", duration: "5:30" },
-        { name: "Floating Pads", duration: "8:15" }
+        { name: "Deep Space", duration: "7:20", audioType: 'ambient' as const },
+        { name: "Ethereal Drones", duration: "6:45", audioType: 'ambient' as const },
+        { name: "Minimal Synths", duration: "5:30", audioType: 'ambient' as const },
+        { name: "Floating Pads", duration: "8:15", audioType: 'ambient' as const }
       ]
     }
   ];
 
   const [selectedPlaylist, setSelectedPlaylist] = useState(0);
 
+  // Initialize Audio Context
+  const initAudioContext = () => {
+    if (!audioContextRef.current) {
+      audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+      gainNodeRef.current = audioContextRef.current.createGain();
+      gainNodeRef.current.connect(audioContextRef.current.destination);
+    }
+  };
+
+  // Generate different types of audio
+  const generateAudio = (audioType: 'lofi' | 'nature' | 'whitenoise' | 'ambient') => {
+    initAudioContext();
+    if (!audioContextRef.current || !gainNodeRef.current) return;
+
+    // Stop any existing audio
+    stopAudio();
+
+    const ctx = audioContextRef.current;
+
+    switch (audioType) {
+      case 'lofi':
+        // Create a simple lo-fi beat with low-pass filtered noise and a subtle bass
+        const lofiOsc = ctx.createOscillator();
+        const lofiGain = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
+        
+        lofiOsc.type = 'sawtooth';
+        lofiOsc.frequency.setValueAtTime(220, ctx.currentTime); // A3 note
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(800, ctx.currentTime);
+        lofiGain.gain.setValueAtTime(0.1, ctx.currentTime);
+        
+        lofiOsc.connect(filter);
+        filter.connect(lofiGain);
+        lofiGain.connect(gainNodeRef.current);
+        
+        lofiOsc.start();
+        oscillatorRef.current = lofiOsc;
+        break;
+
+      case 'nature':
+        // Create nature sounds using filtered white noise
+        const bufferSize = 2 * ctx.sampleRate;
+        const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+        
+        for (let i = 0; i < bufferSize; i++) {
+          output[i] = Math.random() * 2 - 1;
+        }
+        
+        const whiteNoise = ctx.createBufferSource();
+        const bandpass = ctx.createBiquadFilter();
+        const natureGain = ctx.createGain();
+        
+        whiteNoise.buffer = noiseBuffer;
+        whiteNoise.loop = true;
+        bandpass.type = 'bandpass';
+        bandpass.frequency.setValueAtTime(1000, ctx.currentTime);
+        bandpass.Q.setValueAtTime(0.5, ctx.currentTime);
+        natureGain.gain.setValueAtTime(0.05, ctx.currentTime);
+        
+        whiteNoise.connect(bandpass);
+        bandpass.connect(natureGain);
+        natureGain.connect(gainNodeRef.current);
+        
+        whiteNoise.start();
+        break;
+
+      case 'whitenoise':
+        // Create white noise
+        const whiteNoiseBufferSize = 2 * ctx.sampleRate;
+        const whiteNoiseBuffer = ctx.createBuffer(1, whiteNoiseBufferSize, ctx.sampleRate);
+        const whiteOutput = whiteNoiseBuffer.getChannelData(0);
+        
+        for (let i = 0; i < whiteNoiseBufferSize; i++) {
+          whiteOutput[i] = Math.random() * 2 - 1;
+        }
+        
+        const whiteNoiseSource = ctx.createBufferSource();
+        const whiteNoiseGain = ctx.createGain();
+        
+        whiteNoiseSource.buffer = whiteNoiseBuffer;
+        whiteNoiseSource.loop = true;
+        whiteNoiseGain.gain.setValueAtTime(0.1, ctx.currentTime);
+        
+        whiteNoiseSource.connect(whiteNoiseGain);
+        whiteNoiseGain.connect(gainNodeRef.current);
+        
+        whiteNoiseSource.start();
+        break;
+
+      case 'ambient':
+        // Create ambient drone with multiple oscillators
+        const freq1 = ctx.createOscillator();
+        const freq2 = ctx.createOscillator();
+        const ambientGain = ctx.createGain();
+        
+        freq1.type = 'sine';
+        freq2.type = 'sine';
+        freq1.frequency.setValueAtTime(110, ctx.currentTime); // A2
+        freq2.frequency.setValueAtTime(165, ctx.currentTime); // E3
+        ambientGain.gain.setValueAtTime(0.05, ctx.currentTime);
+        
+        freq1.connect(ambientGain);
+        freq2.connect(ambientGain);
+        ambientGain.connect(gainNodeRef.current);
+        
+        freq1.start();
+        freq2.start();
+        oscillatorRef.current = freq1; // Store reference for cleanup
+        break;
+    }
+  };
+
+  const stopAudio = () => {
+    if (oscillatorRef.current) {
+      try {
+        oscillatorRef.current.stop();
+      } catch (e) {
+        // Oscillator might already be stopped
+      }
+      oscillatorRef.current = null;
+    }
+  };
+
   const togglePlayPause = () => {
-    setIsPlaying(!isPlaying);
+    if (!isPlaying) {
+      const currentAudioType = playlists[selectedPlaylist].tracks[currentTrack].audioType;
+      generateAudio(currentAudioType);
+      setIsPlaying(true);
+    } else {
+      stopAudio();
+      setIsPlaying(false);
+    }
   };
 
   const nextTrack = () => {
+    stopAudio();
     setCurrentTrack((prev) => 
       prev < playlists[selectedPlaylist].tracks.length - 1 ? prev + 1 : 0
     );
+    setIsPlaying(false);
   };
 
   const prevTrack = () => {
+    stopAudio();
     setCurrentTrack((prev) => 
       prev > 0 ? prev - 1 : playlists[selectedPlaylist].tracks.length - 1
     );
+    setIsPlaying(false);
   };
 
   const toggleMute = () => {
     setIsMuted(!isMuted);
+    if (gainNodeRef.current) {
+      gainNodeRef.current.gain.setValueAtTime(
+        isMuted ? (volume[0] / 100) * 0.3 : 0,
+        audioContextRef.current?.currentTime || 0
+      );
+    }
   };
 
+  // Update volume
   useEffect(() => {
+    if (gainNodeRef.current && !isMuted) {
+      gainNodeRef.current.gain.setValueAtTime(
+        (volume[0] / 100) * 0.3, // Scale down for comfortable listening
+        audioContextRef.current?.currentTime || 0
+      );
+    }
+  }, [volume, isMuted]);
+
+  // Reset track when playlist changes
+  useEffect(() => {
+    stopAudio();
     setCurrentTrack(0);
+    setIsPlaying(false);
   }, [selectedPlaylist]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      stopAudio();
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+      }
+    };
+  }, []);
 
   if (!isUnlocked) {
     return (
