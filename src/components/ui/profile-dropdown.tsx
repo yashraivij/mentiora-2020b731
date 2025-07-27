@@ -14,6 +14,13 @@ import {
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 
+// Import cartoon animal avatars
+import catAvatar from '@/assets/avatars/cat-avatar.png';
+import dogAvatar from '@/assets/avatars/dog-avatar.png';
+import foxAvatar from '@/assets/avatars/fox-avatar.png';
+import rabbitAvatar from '@/assets/avatars/rabbit-avatar.png';
+import bearAvatar from '@/assets/avatars/bear-avatar.png';
+
 interface PublicProfile {
   username: string;
   avatar_url: string | null;
@@ -230,25 +237,25 @@ export function ProfileDropdown({ streakDays, firstName }: ProfileDropdownProps)
                     <label className="text-xs font-medium text-muted-foreground">Choose Avatar</label>
                     <div className="grid grid-cols-5 gap-2 mt-2">
                       {[
-                        'https://images.unsplash.com/photo-1485856327981-352400470457',
-                        'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158',
-                        'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7',
-                        'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9',
-                        'https://images.unsplash.com/photo-1535268647777-531c46309700'
-                      ].map((avatarUrl, index) => (
+                        { src: catAvatar, name: 'Cat' },
+                        { src: dogAvatar, name: 'Dog' },
+                        { src: foxAvatar, name: 'Fox' },
+                        { src: rabbitAvatar, name: 'Rabbit' },
+                        { src: bearAvatar, name: 'Bear' }
+                      ].map((avatar, index) => (
                         <button
                           key={index}
                           type="button"
-                          onClick={() => setEditData({ ...editData, avatar_url: avatarUrl })}
+                          onClick={() => setEditData({ ...editData, avatar_url: avatar.src })}
                           className={`w-12 h-12 rounded-full border-2 overflow-hidden transition-all ${
-                            editData.avatar_url === avatarUrl 
+                            editData.avatar_url === avatar.src 
                               ? 'border-primary ring-2 ring-primary/20' 
                               : 'border-border hover:border-primary/50'
                           }`}
                         >
                           <img 
-                            src={avatarUrl} 
-                            alt={`Avatar option ${index + 1}`}
+                            src={avatar.src} 
+                            alt={`${avatar.name} avatar`}
                             className="w-full h-full object-cover"
                           />
                         </button>

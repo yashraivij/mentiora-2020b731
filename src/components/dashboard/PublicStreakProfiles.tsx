@@ -19,6 +19,9 @@ export function PublicStreakProfiles() {
 
   useEffect(() => {
     fetchPublicProfiles();
+    // Refresh every 30 seconds to show updated profiles
+    const interval = setInterval(fetchPublicProfiles, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   const fetchPublicProfiles = async () => {
