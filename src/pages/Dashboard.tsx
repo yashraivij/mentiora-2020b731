@@ -1063,7 +1063,7 @@ const Dashboard = () => {
             <div className="flex items-center space-x-4">
               <h3 className="text-2xl font-bold text-foreground">Your Subjects</h3>
               <Badge variant="outline" className="text-muted-foreground border-border bg-card/50">
-                {subjectsTab === 'my-subjects' ? userSubjects.length : allSubjects.length} subjects
+                {subjectsTab === 'my-subjects' ? userSubjects.length : allSubjects.filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language').length} subjects
               </Badge>
             </div>
             <div className="flex items-center space-x-3">
