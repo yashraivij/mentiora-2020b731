@@ -410,7 +410,7 @@ const Dashboard = () => {
             <div className="flex items-center space-x-3">
               <Button 
                 onClick={() => window.open('https://discord.gg/Jq2YTZ3aMa', '_blank')}
-                className="bg-gradient-to-r from-purple-500 via-indigo-500 to-purple-600 hover:from-purple-600 hover:via-indigo-600 hover:to-purple-700 text-white border-0 shadow-xl shadow-purple-500/30 hover:shadow-purple-500/50 transition-all duration-300 rounded-xl px-6 py-3 h-11 animate-pulse hover:animate-none hover:scale-105 font-semibold"
+                className="bg-gradient-to-r from-purple-500 via-indigo-500 to-purple-600 hover:from-purple-600 hover:via-indigo-600 hover:to-purple-700 text-white border-0 shadow-xl shadow-purple-500/30 hover:shadow-purple-500/50 transition-all duration-300 rounded-xl px-6 py-3 h-11 hover:scale-105 font-semibold"
               >
                 <Gamepad2 className="h-5 w-5 mr-2" />
                 <span className="text-sm font-bold">Join Community</span>
