@@ -237,22 +237,32 @@ const Dashboard = () => {
         return;
       }
 
+      console.log('Database records:', data);
+
       if (data) {
         // Convert database records to subject IDs based on curriculum
         const subjectIds = data.map(record => {
+          console.log('Processing record:', record);
+          
           // Find matching subject in curriculum
-          const subject = curriculum.find(s => 
-            s.name.toLowerCase() === record.subject_name.toLowerCase() ||
-            (record.subject_name === 'Mathematics' && s.name === 'Maths (Edexcel)') ||
-            (record.subject_name === 'IGCSE Business' && s.name === 'Business (Edexcel IGCSE)') ||
-            (record.subject_name === 'Chemistry' && record.exam_board.toLowerCase() === 'edexcel' && s.name === 'Chemistry (Edexcel)') ||
-            (record.subject_name === 'Physics' && record.exam_board.toLowerCase() === 'edexcel' && s.id === 'physics-edexcel') ||
-            (record.subject_name === 'Physics' && record.exam_board.toLowerCase() === 'aqa' && s.id === 'physics')
-          );
+          const subject = curriculum.find(s => {
+            const matches = 
+              s.name.toLowerCase() === record.subject_name.toLowerCase() ||
+              (record.subject_name === 'Mathematics' && s.name === 'Maths (Edexcel)') ||
+              (record.subject_name === 'IGCSE Business' && s.name === 'Business (Edexcel IGCSE)') ||
+              (record.subject_name === 'Chemistry' && record.exam_board.toLowerCase() === 'edexcel' && s.id === 'physics-edexcel') ||
+              (record.subject_name === 'Physics' && record.exam_board.toLowerCase() === 'edexcel' && s.id === 'physics-edexcel') ||
+              (record.subject_name === 'Physics' && record.exam_board.toLowerCase() === 'aqa' && s.id === 'physics');
+            
+            console.log(`Checking subject ${s.id} (${s.name}) against ${record.subject_name} ${record.exam_board}: ${matches}`);
+            return matches;
+          });
+          
+          console.log('Found subject:', subject?.id);
           return subject?.id;
         }).filter(Boolean) as string[];
         
-        
+        console.log('Final subject IDs:', subjectIds);
         setUserSubjects(subjectIds);
       }
     } catch (error) {
