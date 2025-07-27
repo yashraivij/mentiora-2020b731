@@ -23,8 +23,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const [colorTheme, setColorTheme] = useState<ColorTheme>(() => {
     if (typeof window !== 'undefined') {
-      const savedColorTheme = localStorage.getItem('mentiora-color-theme') as ColorTheme;
-      return savedColorTheme || 'default';
+      // Reset to default and clear any saved theme
+      localStorage.removeItem('mentiora-color-theme');
+      return 'default';
     }
     return 'default';
   });
