@@ -23,10 +23,10 @@ interface PublicProfile {
 // Fake profiles that change daily
 const generateFakeProfiles = (): PublicProfile[] => {
   const names = [
-    'Emily Chen', 'Marcus Johnson', 'Sophia Ahmed', 'Jake Williams', 'Aisha Patel', 
-    'Oliver Smith', 'Maya Rodriguez', 'Ethan Brown', 'Zara Khan', 'Lucas Davis',
-    'Isabella Garcia', 'Noah Wilson', 'Aria Thompson', 'Tyler Martinez', 'Chloe Lee',
-    'Ryan Anderson', 'Mia Jackson', 'Alex Turner', 'Grace Miller', 'Jordan Taylor'
+    'Emily Chen', 'studyqueen123', 'Marcus', 'sophia_a', 'Jake W', 
+    'aisha.p', 'Oliver Smith', 'maya_r', 'Ethan', 'zara_k',
+    'Lucas Davis', 'bella_g', 'noah_w', 'aria.t', 'Tyler', 
+    'chloe_lee', 'Ryan', 'mia.j', 'alex_t', 'Grace Miller'
   ];
   
   const avatars = [catAvatar, dogAvatar, foxAvatar, rabbitAvatar, bearAvatar];
