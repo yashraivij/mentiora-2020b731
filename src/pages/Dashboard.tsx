@@ -262,8 +262,19 @@ const Dashboard = () => {
   const toggleUserSubject = async (subjectId: string) => {
     if (!user?.id) return;
 
+    console.log('toggleUserSubject called with subjectId:', subjectId);
+    
     const subject = curriculum.find(s => s.id === subjectId);
-    if (!subject) return;
+    if (!subject) {
+      console.error('Subject not found for id:', subjectId);
+      return;
+    }
+    
+    console.log('Found subject:', subject.name);
+    
+    const subjectName = getSubjectName(subject);
+    const examBoard = getExamBoard(subjectId);
+    console.log('Subject name mapping:', subjectName, 'Exam board:', examBoard);
 
     const isCurrentlySelected = userSubjects.includes(subjectId);
 
@@ -335,6 +346,11 @@ const Dashboard = () => {
     if (subject.name === 'Business (Edexcel IGCSE)') return 'IGCSE Business';
     if (subject.name === 'Chemistry (Edexcel)') return 'Chemistry';
     if (subject.name === 'Physics (Edexcel)') return 'Physics';
+    
+    // Handle both physics subjects - distinguish by ID
+    if (subject.id === 'physics-edexcel') return 'Physics (Edexcel)';
+    if (subject.id === 'physics') return 'Physics (AQA)';
+    
     return subject.name;
   };
 
