@@ -603,6 +603,13 @@ const Dashboard = () => {
                     </span>
                   </div>
                 </div>
+
+                {/* Streak Hall of Fame - Only show if user has 14+ day streak */}
+                {getStudyStreak() >= 14 && (
+                  <div className="mt-4 pt-4 border-t border-orange-200/50 dark:border-orange-800/30">
+                    <PublicStreakProfiles />
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -744,21 +751,6 @@ const Dashboard = () => {
           </Card>
         </div>
 
-        {/* Streak Leaders Section - Only show if someone has 14+ day streak */}
-        {getStudyStreak() >= 14 && (
-          <div className="mb-6">
-            <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-purple-50/80 to-indigo-50/80 dark:from-slate-900 dark:via-purple-950/20 dark:to-indigo-950/20 shadow-2xl backdrop-blur-xl">
-              {/* Premium Border */}
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-400 via-indigo-400 to-blue-400 rounded-xl p-[1px]">
-                <div className="bg-gradient-to-br from-white via-purple-50/80 to-indigo-50/80 dark:from-slate-900 dark:via-purple-950/20 dark:to-indigo-950/20 rounded-[11px] h-full w-full backdrop-blur-xl" />
-              </div>
-              
-              <CardContent className="relative p-6">
-                <PublicStreakProfiles />
-              </CardContent>
-            </Card>
-          </div>
-        )}
 
         {/* Predicted GCSE Grades Section */}
         <PredictedGradesGraph userProgress={userProgress} />
