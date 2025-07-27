@@ -17,7 +17,7 @@ export function PublicStreakProfiles() {
   const [profiles, setProfiles] = useState<PublicProfile[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
-  const PROFILES_PER_PAGE = 6; // 2 rows of 3
+  const PROFILES_PER_PAGE = 3; // 1 row of 3
 
   useEffect(() => {
     fetchPublicProfiles();
@@ -70,7 +70,7 @@ export function PublicStreakProfiles() {
       <div className="space-y-3">
         <h4 className="text-sm font-semibold text-muted-foreground mb-3">Streak Leaders</h4>
         <div className="grid grid-cols-3 gap-2">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
+          {[1, 2, 3].map((i) => (
             <div key={i} className="w-full h-16 bg-muted animate-pulse rounded-lg" />
           ))}
         </div>

@@ -338,7 +338,16 @@ const Dashboard = () => {
   };
 
   const getStudyStreak = () => {
-    return 14; // Set to 14 for testing 14-day streak feature
+    if (!user?.id) return 0;
+    
+    // For testing: only test@gmail.com gets a 14-day streak
+    if (user.email === 'test@gmail.com') {
+      return 14;
+    }
+    
+    // Get streak from localStorage for other accounts
+    const savedStreak = localStorage.getItem(`mentiora_streak_${user.id}`);
+    return savedStreak ? parseInt(savedStreak, 10) : 0;
   };
 
   const getSubjectProgress = (subjectId: string) => {
