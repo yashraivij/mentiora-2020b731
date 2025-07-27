@@ -31,6 +31,7 @@ import { StreakCelebration } from "@/components/ui/streak-celebration";
 import { ProfileDropdown } from '@/components/ui/profile-dropdown';
 import { PublicStreakProfiles } from '@/components/dashboard/PublicStreakProfiles';
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
+import { useToast } from "@/hooks/use-toast";
 
 interface UserProgress {
   subjectId: string;
@@ -42,6 +43,7 @@ interface UserProgress {
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
+  const { toast } = useToast();
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
@@ -275,8 +277,19 @@ const Dashboard = () => {
           .eq('subject_name', getSubjectName(subject))
           .eq('exam_board', getExamBoard(subjectId));
 
-        if (!error) {
+        if (error) {
+          console.error('Error removing subject:', error);
+          toast({
+            title: "Error",
+            description: `Failed to remove ${subject.name} from your subjects. Please try again.`,
+            variant: "destructive"
+          });
+        } else {
           setUserSubjects(prev => prev.filter(id => id !== subjectId));
+          toast({
+            title: "Success", 
+            description: `${subject.name} removed from your subjects.`,
+          });
         }
       } else {
         // Add to database
@@ -291,12 +304,28 @@ const Dashboard = () => {
             priority_level: 3
           });
 
-        if (!error) {
+        if (error) {
+          console.error('Error adding subject:', error);
+          toast({
+            title: "Error",
+            description: `Failed to add ${subject.name} to your subjects. Please try again.`,
+            variant: "destructive"
+          });
+        } else {
           setUserSubjects(prev => [...prev, subjectId]);
+          toast({
+            title: "Success",
+            description: `${subject.name} added to your subjects!`,
+          });
         }
       }
     } catch (error) {
       console.error('Error toggling user subject:', error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive"
+      });
     }
   };
 
