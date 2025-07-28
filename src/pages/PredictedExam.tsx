@@ -1303,25 +1303,25 @@ In your response, you could:
       questions.push({
         id: 'english-lang-q5',
         questionNumber: 5,
-        text: `**Section B: Writing**
+        text: `Section B: Writing
 
-**You are advised to spend about 45 minutes on this section.**
-**Write in full sentences.**
-**You are reminded of the need to plan your answer.**
-**You should leave enough time to check your work at the end.**
+You are advised to spend about 45 minutes on this section.
+Write in full sentences.
+You are reminded of the need to plan your answer.
+You should leave enough time to check your work at the end.
 
 A magazine has asked for contributions for their creative writing section.
 
-**Either:**
-**Write a description of a library as suggested by this source.**
+Either:
+Write a description of a library as suggested by this source.
 
-**Or:**
-**Write a story about discovering a hidden object.**
+Or:
+Write a story about discovering a hidden object.
 
-**(24 marks for content and organisation
-16 marks for technical accuracy)**
+(24 marks for content and organisation
+16 marks for technical accuracy)
 
-**[40 marks]**`,
+[40 marks]`,
         marks: 40,
         section: 'B'
       });
