@@ -1216,113 +1216,113 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return questions;
     }
     
-    // Special format for English Language
+    // Special format for English Language - AQA GCSE Paper 1
     if (subjectId === 'english-language') {
-      // Section A: Textual Variations and Representations (70 marks total)
+      const sourceText = `The library was a cathedral of knowledge, its vaulted ceilings disappearing into shadows above towering shelves that stretched impossibly high. Dust motes danced in golden shafts of sunlight streaming through tall, arched windows, each beam illuminating thousands of leather-bound volumes that had witnessed centuries pass. The silence was profound yet somehow alive, broken only by the whispered turning of pages and the soft footfalls of scholars moving reverently between the stacks. Ancient wooden tables, scarred by generations of students, stood like altars where minds came to worship at the shrine of learning. In this sacred space, time seemed suspended, and the weight of accumulated human wisdom pressed gently down upon all who entered, reminding them of their small place in the vast continuum of knowledge.`;
       
-      // Question 1: Analyse Text A (25 marks)
+      // Section A: Reading - exactly 45 minutes advised
+      // Question 1: List 4 things (4 marks)
       questions.push({
         id: 'english-lang-q1',
         questionNumber: 1,
-        text: `Text A is from a lifestyle blog post titled "Generation Next: Why Digital Detox is the New Self-Care" published in 2024.
+        text: `Read again the first part of the source, from lines 1 to 5.
 
-Text A:
-"So here's the thing about constantly being online – it's literally draining our souls. I mean, when did we become a generation that can't sit with our own thoughts for five minutes without reaching for our phones? Last week, I decided to try something radical: a proper digital detox. No Instagram, no TikTok, no endless scrolling through other people's highlight reels. And honestly? It was terrifying at first. But then something magical happened. I actually started living my life instead of documenting it. I'm not saying technology is evil – obviously I'm using it to write this post! But maybe, just maybe, we need to remember that real connection happens when we look up from our screens."
+Source: Extract from "The Scholar's Journey" by Modern Author (2020)
 
-Analyse how Text A uses language to create meanings and representations.
+"${sourceText}"
 
-You should refer to specific examples from the text, including:
-• Word choices and phrases
-• Language techniques and methods
-• Sentence forms and structures
+List four things about the library from this part of the source.
 
-[25 marks]`,
-        marks: 25,
+[4 marks]`,
+        marks: 4,
         section: 'A'
       });
 
-      // Question 2: Analyse Text B (25 marks)
+      // Question 2: Language analysis (8 marks)
       questions.push({
         id: 'english-lang-q2',
         questionNumber: 2,
-        text: `Text B is from a newspaper editorial in The Daily Telegraph, published in 1962, discussing the impact of television on family life.
+        text: `Look in detail at this extract, from lines 6 to 14 of the source:
 
-Text B:
-"The television set has established itself as the dominant feature of the modern British sitting room, commanding attention with an authority that would have been unthinkable to previous generations. Families now arrange their furniture around this glowing altar of entertainment, their conversations interrupted by the scheduled demands of programme viewing. Children, once expected to engage in meaningful discourse at the dinner table, now consume their meals in reverent silence, their eyes transfixed by moving pictures. One cannot help but wonder whether this technological marvel, for all its educational potential, represents a fundamental erosion of the conversational arts that have long distinguished civilised society."
+"The silence was profound yet somehow alive, broken only by the whispered turning of pages and the soft footfalls of scholars moving reverently between the stacks. Ancient wooden tables, scarred by generations of students, stood like altars where minds came to worship at the shrine of learning. In this sacred space, time seemed suspended, and the weight of accumulated human wisdom pressed gently down upon all who entered."
 
-Analyse how Text B uses language to create meanings and representations.
+How does the writer use language here to describe the atmosphere of the library?
 
-You should refer to specific examples from the text, including:
-• Word choices and phrases
-• Language techniques and methods
-• Sentence forms and structures
+You could include the writer's choice of:
+• words and phrases
+• language features and techniques
+• sentence forms.
 
-[25 marks]`,
-        marks: 25,
+[8 marks]`,
+        marks: 8,
         section: 'A'
       });
 
-      // Question 3: Compare both texts (20 marks)
+      // Question 3: Structure analysis (8 marks)
       questions.push({
         id: 'english-lang-q3',
         questionNumber: 3,
-        text: `Explore the similarities and differences in the ways that Text A and Text B use language.
+        text: `You now need to think about the whole of the source.
 
-You should refer to both texts in your answer. You might consider:
-• The writers' attitudes and perspectives
-• How the contexts of the texts affect language choices
-• Techniques used to engage and influence readers
-• The different purposes and audiences
+This text is from a novel describing a character's first visit to an ancient library.
+
+How has the writer structured the text to interest you as a reader?
+
+You could write about:
+• what the writer focuses your attention on at the beginning of the source
+• how and why the writer changes this focus as the source develops
+• any other structural features that interest you.
+
+[8 marks]`,
+        marks: 8,
+        section: 'A'
+      });
+
+      // Question 4: Evaluation (20 marks)
+      questions.push({
+        id: 'english-lang-q4',
+        questionNumber: 4,
+        text: `Focus this part of your answer on the second part of the source, from line 18 to the end.
+
+A student said, "The writer makes it clear that the library is a place of deep reverence and learning. The description shows us why people feel overwhelmed and inspired when they enter."
+
+To what extent do you agree?
+
+In your response, you could:
+• consider your own impressions of the library
+• evaluate how the writer creates a sense of awe and reverence
+• support your response with references to the text.
 
 [20 marks]`,
         marks: 20,
         section: 'A'
       });
 
-      // Section B: Children's Language Development (30 marks)
-      // Question 4 OR 5 - students choose one
-      questions.push({
-        id: 'english-lang-q4',
-        questionNumber: 4,
-        text: `Data Set 1: Transcript of a conversation between 3-year-old Mia and her grandmother while playing with toy cars.
-
-Grandmother: "Which car would you like to play with?"
-Mia: "The red one! It's the fastest."
-Grandmother: "How do you know it's the fastest?"
-Mia: "Because... because red cars go vroom vroom really loud. And daddy's car is red and he drives super fast to work."
-Grandmother: "Does colour make cars go faster?"
-Mia: (pauses) "Maybe... no. The engine makes it go fast. But red ones look fast though."
-Grandmother: "That's very clever thinking."
-Mia: "I want to drive a red car when I'm big like daddy. But not too fast because that's dangerous and police will be cross."
-
-'Children's language reflects their developing understanding of the world around them.'
-
-Referring to Data Set 1 in detail, and to relevant ideas from language study, evaluate this view of children's language development.
-
-You should refer to specific linguistic features and relevant linguistic concepts in your answer.
-
-[30 marks]`,
-        marks: 30,
-        section: 'B'
-      });
-
+      // Section B: Writing - exactly 45 minutes advised
+      // Question 5: Creative writing (40 marks total - 24 content + 16 technical)
       questions.push({
         id: 'english-lang-q5',
         questionNumber: 5,
-        text: `Data Set 2: Written work by Year 2 children (aged 6-7) describing their favourite animal.
+        text: `Section B: Writing
 
-Child A: "My favrit animal is a elefent. Elefents are gray and have long noses called trunks. They use there trunks to pick up food and spray water. I think elefents are kind animals because they help each other and look after baby elefents. If I was a elefent I would use my trunk to give hugs."
+You are advised to spend about 45 minutes on this section.
+Write in full sentences.
+You are reminded of the need to plan your answer.
+You should leave enough time to check your work at the end.
 
-Child B: "I love dolphins the most of all animals! Dolphins are mammals but they live in the ocean which is really cool. They can swim super fast and jump out of the water. Dolphins talk to each other by making clicking noises and they are very intelligent. Scientists say dolphins can recognise themselves in mirrors. I wish I could swim with dolphins one day."
+A magazine has asked for contributions for their creative writing section.
 
-'Children's writing development shows clear progression in both technical skills and conceptual understanding.'
+Either:
+Write a description of a library as suggested by this source.
 
-Referring to Data Set 2 in detail, and to relevant ideas from language study, evaluate this view of children's language development.
+Or:
+Write a story about discovering a hidden object.
 
-You should refer to specific linguistic features and relevant linguistic concepts in your answer.
+(24 marks for content and organisation
+16 marks for technical accuracy)
 
-[30 marks]`,
-        marks: 30,
+[40 marks]`,
+        marks: 40,
         section: 'B'
       });
 
@@ -1420,7 +1420,7 @@ You should refer to specific linguistic features and relevant linguistic concept
 
   const getTotalMarks = () => {
     if (subjectId === 'english-language') {
-      return 100; // Section A: 40 marks + Section B: 60 marks
+      return 80; // Section A: 40 marks (4+8+8+20) + Section B: 40 marks
     }
     if (subjectId === 'english-literature') {
       return 60; // Two questions at 30 marks each
