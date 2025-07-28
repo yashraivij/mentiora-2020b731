@@ -701,124 +701,189 @@ const Dashboard = () => {
 
         {/* ULTRA PREMIUM Combined Streak & Rewards Card - Maximum dopamine boost */}
         <div className="mb-6">
-          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-orange-50/90 to-emerald-50/90 dark:from-slate-900 dark:via-orange-950/30 dark:to-emerald-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 group backdrop-blur-xl transform hover:scale-[1.01]">
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-background via-purple-50/30 to-blue-50/30 dark:from-background dark:via-purple-950/20 dark:to-blue-950/20 shadow-2xl hover:shadow-3xl transition-all duration-500 group backdrop-blur-xl transform hover:scale-[1.01]">
             {/* Multi-layer premium glow effects */}
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 via-emerald-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-br from-orange-300/10 via-emerald-300/10 to-blue-300/10 animate-pulse" />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 animate-pulse" />
             
             {/* Luxurious animated rainbow border */}
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-400 via-emerald-400 via-blue-400 to-purple-400 rounded-xl p-[3px] group-hover:p-[4px] transition-all duration-300">
-              <div className="bg-gradient-to-br from-white via-orange-50/90 to-emerald-50/90 dark:from-slate-900 dark:via-orange-950/30 dark:to-emerald-950/30 rounded-[10px] h-full w-full backdrop-blur-xl" />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary via-accent to-primary rounded-xl p-[2px] group-hover:p-[3px] transition-all duration-300 animate-gradient-x">
+              <div className="bg-gradient-to-br from-background via-purple-50/30 to-blue-50/30 dark:from-background dark:via-purple-950/20 dark:to-blue-950/20 rounded-[10px] h-full w-full backdrop-blur-xl" />
             </div>
             
             {/* Premium floating particles */}
-            <div className="absolute top-3 right-4 w-2 h-2 bg-gradient-to-r from-yellow-300 to-orange-400 rounded-full animate-bounce opacity-80" />
-            <div className="absolute bottom-4 left-5 w-1.5 h-1.5 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full animate-pulse opacity-60" />
-            <div className="absolute top-5 left-12 w-1 h-1 bg-gradient-to-r from-purple-300 to-pink-400 rounded-full animate-ping opacity-50" />
-            <div className="absolute bottom-6 right-8 w-1 h-1 bg-gradient-to-r from-amber-300 to-yellow-400 rounded-full animate-ping opacity-40" />
+            <div className="absolute top-4 right-6 w-2 h-2 bg-gradient-to-r from-primary to-secondary rounded-full animate-bounce opacity-80" />
+            <div className="absolute bottom-5 left-8 w-1.5 h-1.5 bg-gradient-to-r from-secondary to-accent rounded-full animate-pulse opacity-60" />
+            <div className="absolute top-6 left-16 w-1 h-1 bg-gradient-to-r from-accent to-primary rounded-full animate-ping opacity-50" />
+            <div className="absolute bottom-8 right-12 w-1 h-1 bg-gradient-to-r from-primary to-accent rounded-full animate-ping opacity-40" />
             
-            <CardContent className="relative p-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <CardContent className="relative p-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* LEFT SIDE: Study Streak Section */}
-                <div className="space-y-4">
-                  <div className="text-center space-y-3">
+                <div className="space-y-6">
+                  <div className="text-center space-y-4">
                     <div className="relative inline-block">
                       {/* Ultra premium fire icon with multiple effects */}
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 flex items-center justify-center shadow-2xl shadow-orange-500/40 transition-all duration-300 group-hover:scale-110 relative overflow-hidden mx-auto">
-                        <div className="absolute inset-1 rounded-xl bg-white/20 backdrop-blur-sm" />
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent" />
-                        <Flame className="h-8 w-8 text-white relative z-10 drop-shadow-xl animate-pulse" />
+                      <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-primary via-primary-foreground to-secondary flex items-center justify-center shadow-2xl shadow-primary/50 transition-all duration-300 group-hover:scale-110 relative overflow-hidden mx-auto">
+                        <div className="absolute inset-2 rounded-2xl bg-background/20 backdrop-blur-sm" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-background/30 via-transparent to-transparent" />
+                        <Flame className="h-10 w-10 text-primary-foreground relative z-10 drop-shadow-2xl animate-pulse" />
                       </div>
                       {/* Achievement ring */}
-                      <div className="absolute inset-0 bg-orange-400/30 rounded-2xl animate-ping opacity-20" />
+                      <div className="absolute inset-0 bg-primary/30 rounded-3xl animate-ping opacity-20" />
                       {/* Premium badge */}
-                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg animate-bounce">
-                        <Crown className="h-3 w-3 text-white drop-shadow-sm" />
+                      <div className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-accent via-secondary to-primary rounded-full flex items-center justify-center shadow-xl animate-bounce">
+                        <Crown className="h-4 w-4 text-primary-foreground drop-shadow-sm" />
                       </div>
                     </div>
                     
                     {/* Massive streak number for impact */}
-                    <div className="space-y-2">
-                      <h3 className="text-5xl font-black bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent tracking-tight drop-shadow-sm">
+                    <div className="space-y-3">
+                      <h3 className="text-6xl font-black bg-gradient-to-br from-primary via-secondary to-accent bg-clip-text text-transparent tracking-tight drop-shadow-lg">
                         {getStudyStreak()}
                       </h3>
-                      <div className="flex items-center justify-center space-x-2">
-                        <span className="text-xl font-bold bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
+                      <div className="flex items-center justify-center space-x-3">
+                        <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                           Day{getStudyStreak() !== 1 ? 's' : ''} Strong!
                         </span>
-                        <div className="w-3 h-3 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full animate-pulse" />
+                        <div className="w-4 h-4 bg-gradient-to-r from-accent to-secondary rounded-full animate-pulse shadow-lg" />
                       </div>
                     </div>
                   </div>
 
-                  {/* Call to action */}
+                  {/* Premium Call to action */}
                   <Button 
                     onClick={() => navigate('/practice')} 
-                    className="w-full h-14 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white text-lg font-bold shadow-2xl shadow-orange-500/30 transform hover:scale-105 transition-all duration-300 border-0"
+                    className="w-full h-16 bg-gradient-to-r from-primary via-secondary to-accent hover:from-primary/90 hover:via-secondary/90 hover:to-accent/90 text-primary-foreground text-xl font-bold shadow-2xl shadow-primary/40 transform hover:scale-105 transition-all duration-300 border-0 group"
                   >
-                    <Flame className="mr-2 h-5 w-5" />
-                    Keep The Streak Alive!
+                    <div className="flex items-center justify-center space-x-3">
+                      <Flame className="h-6 w-6 group-hover:animate-pulse" />
+                      <span className="bg-gradient-to-r from-background to-background/90 bg-clip-text text-transparent">Continue Your Journey</span>
+                      <Sparkles className="h-5 w-5 animate-bounce" />
+                    </div>
                   </Button>
                 </div>
 
                 {/* RIGHT SIDE: Rewards Section */}
-                <div className="space-y-4">
-                  <div className="text-center space-y-3">
+                <div className="space-y-6">
+                  <div className="text-center space-y-4">
                     <div className="relative inline-block">
                       {/* Ultra premium trophy with effects */}
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 via-blue-500 to-purple-500 flex items-center justify-center shadow-2xl shadow-emerald-500/40 transition-all duration-300 group-hover:scale-110 relative overflow-hidden mx-auto">
-                        <div className="absolute inset-1 rounded-xl bg-white/20 backdrop-blur-sm" />
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent" />
-                        <Trophy className="h-8 w-8 text-white relative z-10 drop-shadow-xl animate-pulse" />
+                      <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-accent via-secondary to-primary flex items-center justify-center shadow-2xl shadow-accent/50 transition-all duration-300 group-hover:scale-110 relative overflow-hidden mx-auto">
+                        <div className="absolute inset-2 rounded-2xl bg-background/20 backdrop-blur-sm" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-background/30 via-transparent to-transparent" />
+                        <Trophy className="h-10 w-10 text-primary-foreground relative z-10 drop-shadow-2xl animate-pulse" />
                       </div>
                       {/* Achievement ring */}
-                      <div className="absolute inset-0 bg-emerald-400/30 rounded-2xl animate-ping opacity-20" />
+                      <div className="absolute inset-0 bg-accent/30 rounded-3xl animate-ping opacity-20" />
                       {/* Premium badge */}
-                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg animate-bounce">
-                        <Sparkles className="h-3 w-3 text-white drop-shadow-sm" />
+                      <div className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-primary via-accent to-secondary rounded-full flex items-center justify-center shadow-xl animate-bounce">
+                        <Sparkles className="h-4 w-4 text-primary-foreground drop-shadow-sm" />
                       </div>
                     </div>
                     
-                    <div className="space-y-2">
-                      <h3 className="text-3xl font-black bg-gradient-to-br from-emerald-600 via-blue-600 to-purple-600 dark:from-emerald-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent tracking-tight">
-                        Rewards Unlocked
+                    <div className="space-y-3">
+                      <h3 className="text-4xl font-black bg-gradient-to-br from-accent via-secondary to-primary bg-clip-text text-transparent tracking-tight">
+                        Premium Rewards
                       </h3>
                       <div className="text-lg font-semibold text-muted-foreground">
-                        {getStudyStreak() >= 7 ? 'Premium Features Active!' : `${7 - getStudyStreak()} days to unlock`}
+                        Unlock exclusive features as you grow
                       </div>
                     </div>
                   </div>
 
-                  {/* Reward unlock buttons */}
-                  {getStudyStreak() >= 7 ? (
-                    <div className="space-y-3">
-                      <Button 
-                        onClick={() => navigate('/practice')} 
-                        className="w-full h-12 bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 hover:from-emerald-600 hover:via-blue-600 hover:to-purple-600 text-white font-bold shadow-xl shadow-emerald-500/20 transform hover:scale-105 transition-all duration-300"
-                      >
-                        <Gamepad2 className="mr-2 h-4 w-4" />
-                        Study Playlist & Sounds
-                      </Button>
-                      {getStudyStreak() >= 14 && (
-                        <Button 
-                          className="w-full h-12 bg-gradient-to-r from-yellow-500 via-amber-500 to-orange-500 hover:from-yellow-600 hover:via-amber-600 hover:to-orange-600 text-white font-bold shadow-xl shadow-yellow-500/20 transform hover:scale-105 transition-all duration-300"
-                        >
-                          <User className="mr-2 h-4 w-4" />
-                          Create Public Profile
-                        </Button>
-                      )}
-                    </div>
-                  ) : (
-                    <div className="text-center">
-                      <div className="text-sm text-muted-foreground mb-2">Progress to 7-day streak</div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
-                        <div 
-                          className="bg-gradient-to-r from-emerald-400 to-blue-400 h-3 rounded-full transition-all duration-500" 
-                          style={{ width: `${Math.min((getStudyStreak() / 7) * 100, 100)}%` }}
-                        />
+                  {/* Reward tiers */}
+                  <div className="space-y-4">
+                    {/* 3 Day Reward - Color Themes */}
+                    <div className={`p-4 rounded-2xl border-2 transition-all duration-300 ${
+                      getStudyStreak() >= 3 
+                        ? 'bg-gradient-to-r from-primary/10 to-secondary/10 border-primary/30 shadow-lg' 
+                        : 'bg-muted/30 border-muted-foreground/20'
+                    }`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                            getStudyStreak() >= 3 
+                              ? 'bg-gradient-to-br from-primary to-secondary shadow-lg' 
+                              : 'bg-muted'
+                          }`}>
+                            <span className="text-2xl">🎨</span>
+                          </div>
+                          <div>
+                            <p className="font-bold text-foreground">Custom Color Themes</p>
+                            <p className="text-sm text-muted-foreground">Personalize your interface</p>
+                          </div>
+                        </div>
+                        <div className={`px-3 py-1 rounded-full text-xs font-bold ${
+                          getStudyStreak() >= 3 
+                            ? 'bg-gradient-to-r from-primary to-secondary text-primary-foreground' 
+                            : 'bg-muted text-muted-foreground'
+                        }`}>
+                          {getStudyStreak() >= 3 ? 'UNLOCKED' : '3 DAYS'}
+                        </div>
                       </div>
                     </div>
-                  )}
+
+                    {/* 7 Day Reward */}
+                    <div className={`p-4 rounded-2xl border-2 transition-all duration-300 ${
+                      getStudyStreak() >= 7 
+                        ? 'bg-gradient-to-r from-secondary/10 to-accent/10 border-secondary/30 shadow-lg' 
+                        : 'bg-muted/30 border-muted-foreground/20'
+                    }`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                            getStudyStreak() >= 7 
+                              ? 'bg-gradient-to-br from-secondary to-accent shadow-lg' 
+                              : 'bg-muted'
+                          }`}>
+                            <Gamepad2 className="h-5 w-5 text-primary-foreground" />
+                          </div>
+                          <div>
+                            <p className="font-bold text-foreground">Study Playlists</p>
+                            <p className="text-sm text-muted-foreground">Focus sounds & music</p>
+                          </div>
+                        </div>
+                        <div className={`px-3 py-1 rounded-full text-xs font-bold ${
+                          getStudyStreak() >= 7 
+                            ? 'bg-gradient-to-r from-secondary to-accent text-primary-foreground' 
+                            : 'bg-muted text-muted-foreground'
+                        }`}>
+                          {getStudyStreak() >= 7 ? 'UNLOCKED' : '7 DAYS'}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 14 Day Reward */}
+                    <div className={`p-4 rounded-2xl border-2 transition-all duration-300 ${
+                      getStudyStreak() >= 14 
+                        ? 'bg-gradient-to-r from-accent/10 to-primary/10 border-accent/30 shadow-lg' 
+                        : 'bg-muted/30 border-muted-foreground/20'
+                    }`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                            getStudyStreak() >= 14 
+                              ? 'bg-gradient-to-br from-accent to-primary shadow-lg' 
+                              : 'bg-muted'
+                          }`}>
+                            <User className="h-5 w-5 text-primary-foreground" />
+                          </div>
+                          <div>
+                            <p className="font-bold text-foreground">Public Profile</p>
+                            <p className="text-sm text-muted-foreground">Share your achievements</p>
+                          </div>
+                        </div>
+                        <div className={`px-3 py-1 rounded-full text-xs font-bold ${
+                          getStudyStreak() >= 14 
+                            ? 'bg-gradient-to-r from-accent to-primary text-primary-foreground' 
+                            : 'bg-muted text-muted-foreground'
+                        }`}>
+                          {getStudyStreak() >= 14 ? 'UNLOCKED' : '14 DAYS'}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </CardContent>
