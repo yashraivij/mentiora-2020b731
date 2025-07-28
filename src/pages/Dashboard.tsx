@@ -1301,51 +1301,6 @@ const Dashboard = () => {
         />
       )}
 
-      {/* Study Recommendation Button */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <Button
-          onClick={() => {
-            showStudyRecommendation();
-          }}
-          className="relative overflow-hidden bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 hover:from-violet-500 hover:via-purple-500 hover:to-indigo-600 text-white border-0 shadow-2xl hover:shadow-purple-500/25 transition-all duration-500 transform hover:scale-105 px-4 py-2 rounded-xl font-semibold backdrop-blur-sm group"
-          size="lg"
-        >
-          {/* Premium animated background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          
-          {/* Floating sparkles animation */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-2 left-4 w-1.5 h-1.5 bg-yellow-300/80 rounded-full animate-pulse" />
-            <div className="absolute bottom-3 right-5 w-1 h-1 bg-cyan-300/70 rounded-full animate-pulse delay-300" />
-            <div className="absolute top-1/2 right-3 w-0.5 h-0.5 bg-pink-300/60 rounded-full animate-pulse delay-700" />
-            <div className="absolute top-3 right-8 w-1.5 h-1.5 bg-emerald-300/70 rounded-full animate-pulse delay-1000" />
-          </div>
-          
-          {/* Main content */}
-          <div className="relative flex items-center gap-3">
-            {/* Premium brain icon with rotation animation */}
-            <div className="relative">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center animate-pulse">
-                <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-              </div>
-              <div className="absolute inset-0 bg-cyan-400/40 rounded-full animate-ping" />
-            </div>
-            
-            <span className="text-lg tracking-wide">What Should I Study?</span>
-            
-            {/* Processing indicator */}
-            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin opacity-70" />
-          </div>
-          
-          {/* Premium glow effect */}
-          <div className="absolute -inset-1 bg-gradient-to-br from-violet-600/50 via-purple-600/50 to-indigo-700/50 rounded-2xl blur-lg opacity-60 group-hover:opacity-80 transition-opacity duration-500 -z-10" />
-          
-          {/* Inner highlight */}
-          <div className="absolute inset-0.5 bg-gradient-to-br from-white/20 via-transparent to-transparent rounded-2xl opacity-50" />
-        </Button>
-      </div>
 
       {/* Streak Celebration Modal */}
       <StreakCelebration
