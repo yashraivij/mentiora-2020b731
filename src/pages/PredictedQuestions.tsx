@@ -19,6 +19,9 @@ const PredictedQuestions = () => {
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
 
   useEffect(() => {
+    // Ensure page starts at top when navigating here
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
     fetchCompletedExams();
   }, []);
 
