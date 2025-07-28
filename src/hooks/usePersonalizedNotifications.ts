@@ -280,20 +280,17 @@ export const usePersonalizedNotifications = () => {
     if (!user?.id) return;
 
     try {
-      // Get all recent exam completions (last 30 days)
-      const { data: recentExams, error } = await supabase
-        .from('predicted_exam_completions')
+      // Get recent notebook entries (last 30 days) to extract actual study recommendations
+      const { data: notebookEntries, error: notebookError } = await supabase
+        .from('notebook_entries')
         .select('*')
         .eq('user_id', user.id)
-        .gte('completed_at', new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString())
-        .order('completed_at', { ascending: false });
+        .gte('created_at', new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString())
+        .order('created_at', { ascending: false });
 
-      if (error) {
-        console.error('Error fetching exam completions:', error);
-        return;
-      }
-
-      if (!recentExams || recentExams.length === 0) {
+      if (notebookError) {
+        console.error('Error fetching notebook entries:', notebookError);
+        // Fallback to generic recommendation
         setNotification({
           isVisible: true,
           type: "study-recommendation",
@@ -302,60 +299,36 @@ export const usePersonalizedNotifications = () => {
         return;
       }
 
-      // Analyze all exams to find weakest areas with specific feedback
-      const weaknessDetails: Record<string, { errors: number; details: string[] }> = {};
+      if (!notebookEntries || notebookEntries.length === 0) {
+        setNotification({
+          isVisible: true,
+          type: "study-recommendation",
+          studyDetails: null
+        });
+        return;
+      }
 
-      recentExams.forEach((exam) => {
-        const questions = exam.questions as any[];
-        const results = exam.results as any[];
+      // Extract actual insights from notebook entries
+      const weaknessDetails: Record<string, { errors: number; details: string[]; subject: string }> = {};
 
-        if (results && results.length > 0) {
-          results.forEach((result, index) => {
-            const question = questions[index];
-            if (result && question && result.score < question.marks) {
-              // Extract detailed feedback from marking
-              const feedback = result.feedback || '';
-              const questionText = question.text || question.question || '';
-              
-              // Analyze what specifically went wrong
-              let specificWeakness = '';
-              if (exam.subject_id.includes('english')) {
-                if (feedback.toLowerCase().includes('analysis') || questionText.toLowerCase().includes('analyse')) {
-                  specificWeakness = 'analysing emotional impacts and literary techniques';
-                } else if (feedback.toLowerCase().includes('example') || questionText.toLowerCase().includes('example')) {
-                  specificWeakness = 'providing relevant examples and evidence';
-                } else if (feedback.toLowerCase().includes('link') || questionText.toLowerCase().includes('explain')) {
-                  specificWeakness = 'linking back to the question and context';
-                } else if (feedback.toLowerCase().includes('structure') || questionText.toLowerCase().includes('structure')) {
-                  specificWeakness = 'essay structure and organization';
-                } else if (feedback.toLowerCase().includes('language') || questionText.toLowerCase().includes('language')) {
-                  specificWeakness = 'language analysis and terminology';
-                } else {
-                  specificWeakness = 'critical analysis and interpretation';
-                }
-              } else {
-                // For other subjects, extract topic
-                let topic = question.topic || question.section;
-                if (!topic || topic === 'A' || topic.length < 3) {
-                  topic = extractTopicFromText(questionText, exam.subject_id);
-                }
-                specificWeakness = topic;
-              }
-
-              if (!weaknessDetails[specificWeakness]) {
-                weaknessDetails[specificWeakness] = { errors: 0, details: [] };
-              }
-              weaknessDetails[specificWeakness].errors++;
-              
-              // Add specific details about what went wrong
-              const detail = `Q${index + 1} (${result.score}/${question.marks} marks)`;
-              weaknessDetails[specificWeakness].details.push(detail);
-            }
-          });
+      notebookEntries.forEach((entry) => {
+        if (entry.what_tripped_up && entry.mark_loss > 0) {
+          // Use the actual "what tripped up" text as the weakness
+          const weakness = entry.what_tripped_up;
+          const subject = entry.subject || 'Unknown';
+          
+          if (!weaknessDetails[weakness]) {
+            weaknessDetails[weakness] = { errors: 0, details: [], subject };
+          }
+          weaknessDetails[weakness].errors += entry.mark_loss;
+          
+          // Add specific details about what went wrong
+          const detail = `${entry.paper || 'Question'} (${entry.mark_loss} marks lost)`;
+          weaknessDetails[weakness].details.push(detail);
         }
       });
 
-      // Find the most frequent weakness
+      // Find the most significant weakness (by marks lost)
       const sortedWeaknesses = Object.entries(weaknessDetails)
         .sort((a, b) => b[1].errors - a[1].errors);
 
@@ -368,7 +341,7 @@ export const usePersonalizedNotifications = () => {
             topic: weakness,
             errorCount: details.errors,
             details: details.details.slice(0, 3), // Show max 3 examples
-            subject: recentExams[0].subject_id
+            subject: details.subject
           }
         });
       } else {
@@ -386,7 +359,7 @@ export const usePersonalizedNotifications = () => {
         studyDetails: null
       });
     }
-  }, [user?.id, extractTopicFromText]);
+  }, [user?.id]);
 
   // Check for recent exam completion and show weak topic recommendation
   const checkForWeakTopicRecommendation = useCallback(async () => {
