@@ -584,6 +584,8 @@ const Dashboard = () => {
       navigate(`/subject/${notification.subjectId}`);
     } else if (notification.type === "exam-recommendation" && notification.subjectId) {
       navigate('/predicted-questions');
+    } else if (notification.type === "study-recommendation") {
+      navigate('/predicted-exam');
     }
   };
 

@@ -93,16 +93,16 @@ export const PersonalizedNotification = ({
             message: "Take a practice exam first to get personalized study recommendations based on your performance!",
             actionText: "Take Practice Exam",
             badgeText: "Get Started",
-            gradient: "from-violet-500 via-purple-500 to-indigo-500"
+            gradient: "from-sky-400 via-blue-500 to-cyan-500"
           };
         }
         return {
           icon: <Target className="h-5 w-5" />,
           title: "Personalized Study Recommendation",
           message: `Focus on: ${studyDetails.topic} in ${studyDetails.subject.replace('-', ' ')}${studyDetails.details.length > 0 ? ` (based on ${studyDetails.details.join(', ')})` : ''}`,
-          actionText: "Start Studying",
+          actionText: "Take Practice Exam",
           badgeText: "AI Analysis",
-          gradient: "from-violet-500 via-purple-500 to-indigo-500"
+          gradient: "from-sky-400 via-blue-500 to-cyan-500"
         };
       default:
         return {
