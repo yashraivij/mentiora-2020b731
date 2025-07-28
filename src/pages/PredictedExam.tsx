@@ -1225,7 +1225,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       questions.push({
         id: 'english-lang-q1',
         questionNumber: 1,
-        text: `Read again the first part of the source, from lines 1 to 5.
+        text: `Read again the first part of the source, from lines 1 to 3.
 
 Source: Extract from "The Scholar's Journey" by Modern Author (2020)
 
@@ -1242,9 +1242,9 @@ List four things about the library from this part of the source.
       questions.push({
         id: 'english-lang-q2',
         questionNumber: 2,
-        text: `Look in detail at this extract, from lines 6 to 14 of the source:
+        text: `Look in detail at this extract, from lines 3 to 6 of the source:
 
-"The silence was profound yet somehow alive, broken only by the whispered turning of pages and the soft footfalls of scholars moving reverently between the stacks. Ancient wooden tables, scarred by generations of students, stood like altars where minds came to worship at the shrine of learning. In this sacred space, time seemed suspended, and the weight of accumulated human wisdom pressed gently down upon all who entered."
+"The silence was profound yet somehow alive, broken only by the whispered turning of pages and the soft footfalls of scholars moving reverently between the stacks. Ancient wooden tables, scarred by generations of students, stood like altars where minds came to worship at the shrine of learning."
 
 How does the writer use language here to describe the atmosphere of the library?
 
@@ -1282,7 +1282,7 @@ You could write about:
       questions.push({
         id: 'english-lang-q4',
         questionNumber: 4,
-        text: `Focus this part of your answer on the second part of the source, from line 18 to the end.
+        text: `Focus this part of your answer on the second part of the source, from line 4 to the end.
 
 A student said, "The writer makes it clear that the library is a place of deep reverence and learning. The description shows us why people feel overwhelmed and inspired when they enter."
 
@@ -1303,25 +1303,25 @@ In your response, you could:
       questions.push({
         id: 'english-lang-q5',
         questionNumber: 5,
-        text: `Section B: Writing
+        text: `**Section B: Writing**
 
-You are advised to spend about 45 minutes on this section.
-Write in full sentences.
-You are reminded of the need to plan your answer.
-You should leave enough time to check your work at the end.
+**You are advised to spend about 45 minutes on this section.**
+**Write in full sentences.**
+**You are reminded of the need to plan your answer.**
+**You should leave enough time to check your work at the end.**
 
 A magazine has asked for contributions for their creative writing section.
 
-Either:
-Write a description of a library as suggested by this source.
+**Either:**
+**Write a description of a library as suggested by this source.**
 
-Or:
-Write a story about discovering a hidden object.
+**Or:**
+**Write a story about discovering a hidden object.**
 
-(24 marks for content and organisation
-16 marks for technical accuracy)
+**(24 marks for content and organisation
+16 marks for technical accuracy)**
 
-[40 marks]`,
+**[40 marks]**`,
         marks: 40,
         section: 'B'
       });
