@@ -96,10 +96,29 @@ export const PersonalizedNotification = ({
             gradient: "from-sky-400 via-blue-500 to-cyan-500"
           };
         }
+        // Transform the topic text to make it a proper study recommendation
+        const formatStudyTopic = (topicText: string) => {
+          // If it starts with "I" or contains personal pronouns, transform it
+          if (topicText.toLowerCase().startsWith('i ') || topicText.includes(' I ')) {
+            // Convert from first person to a study topic
+            return topicText
+              .replace(/^I\s+/i, '')
+              .replace(/\bI\b/g, 'you')
+              .replace(/overlooked/i, 'understanding')
+              .replace(/my/gi, 'your')
+              .replace(/\.$/, '')
+              .toLowerCase()
+              .replace(/^./, c => c.toUpperCase());
+          }
+          return topicText;
+        };
+
+        const formattedTopic = formatStudyTopic(studyDetails.topic);
+        
         return {
           icon: <Target className="h-5 w-5" />,
           title: "Personalized Study Recommendation",
-          message: `Focus on: ${studyDetails.topic} in ${studyDetails.subject.replace('-', ' ')}${studyDetails.details.length > 0 ? ` (based on ${studyDetails.details.join(', ')})` : ''}`,
+          message: `Focus on: ${formattedTopic} in ${studyDetails.subject.replace('-', ' ')}${studyDetails.details.length > 0 ? ` (based on ${studyDetails.details.join(', ')})` : ''}`,
           actionText: "Take Practice Exam",
           badgeText: "AI Analysis",
           gradient: "from-sky-400 via-blue-500 to-cyan-500"
