@@ -110,11 +110,15 @@ export const PersonalizedNotification = ({
               (!text.toLowerCase().includes('did not') && 
                !text.toLowerCase().includes('did ') && 
                !text.toLowerCase().startsWith('i ') &&
-               text.length > 10 && !text.includes('analyze'))) {
+               text.length > 10 && !text.includes('analyze') && !text.includes('overlooked'))) {
             return text;
           }
           
-          // Handle specific problematic cases - if it contains structure/analyze, make it a proper topic
+          // Handle specific cases for better topic extraction
+          if (text.toLowerCase().includes('structure and clarity in') && text.toLowerCase().includes('writing')) {
+            return 'Writing Structure and Clarity';
+          }
+          
           if (text.toLowerCase().includes('analyze') && text.toLowerCase().includes('structure')) {
             return 'Textual Structure and Analysis';
           }
@@ -125,9 +129,11 @@ export const PersonalizedNotification = ({
           text = text.replace(/^did\s+/i, ''); // Remove "did"
           text = text.replace(/\bnot\s+/gi, ''); // Remove "not"
           text = text.replace(/^failed\s+to\s+/i, ''); // Remove "failed to"
+          text = text.replace(/overlooked\s+the\s+importance\s+of\s+/gi, ''); // Remove "overlooked the importance of"
           text = text.replace(/\bI\b/g, 'you'); // Replace I with you
           text = text.replace(/my/gi, 'your'); // Replace my with your
-          text = text.replace(/overlooked/i, 'understanding'); // Replace overlooked with understanding
+          text = text.replace(/\bin\s+my\s+writing/gi, ''); // Remove "in my writing"
+          text = text.replace(/\bin\s+writing/gi, ''); // Remove "in writing"
           
           // Clean up punctuation and spacing
           text = text.replace(/\.$/, '');
