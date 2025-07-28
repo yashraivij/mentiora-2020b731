@@ -5,13 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 interface PersonalizedNotificationProps {
-  type: "wrong-answer" | "practice-streak" | "weak-topic-recommendation" | "exam-recommendation";
+  type: "wrong-answer" | "practice-streak" | "weak-topic-recommendation" | "exam-recommendation" | "study-recommendation";
   questionNumber?: number;
   topicName?: string;
   subjectName?: string;
   streakCount?: number;
   weakestTopic?: string;
   subjectId?: string;
+  studyDetails?: {
+    topic: string;
+    errorCount: number;
+    details: string[];
+    subject: string;
+  } | null;
   onClose: () => void;
   onAction?: () => void;
 }
@@ -24,6 +30,7 @@ export const PersonalizedNotification = ({
   streakCount,
   weakestTopic,
   subjectId,
+  studyDetails,
   onClose,
   onAction
 }: PersonalizedNotificationProps) => {
@@ -77,6 +84,25 @@ export const PersonalizedNotification = ({
           actionText: "Take Exam",
           badgeText: "High Performance",
           gradient: "from-emerald-500 via-teal-500 to-cyan-500"
+        };
+      case "study-recommendation":
+        if (!studyDetails) {
+          return {
+            icon: <BookOpen className="h-5 w-5" />,
+            title: "No Recent Exam Data",
+            message: "Take a practice exam first to get personalized study recommendations based on your performance!",
+            actionText: "Take Practice Exam",
+            badgeText: "Get Started",
+            gradient: "from-violet-500 via-purple-500 to-indigo-500"
+          };
+        }
+        return {
+          icon: <Target className="h-5 w-5" />,
+          title: "Personalized Study Recommendation",
+          message: `Focus on: ${studyDetails.topic} in ${studyDetails.subject.replace('-', ' ')}${studyDetails.details.length > 0 ? ` (based on ${studyDetails.details.join(', ')})` : ''}`,
+          actionText: "Start Studying",
+          badgeText: "AI Analysis",
+          gradient: "from-violet-500 via-purple-500 to-indigo-500"
         };
       default:
         return {

@@ -4,13 +4,19 @@ import { supabase } from "@/integrations/supabase/client";
 
 interface NotificationState {
   isVisible: boolean;
-  type: "wrong-answer" | "practice-streak" | "weak-topic-recommendation" | "exam-recommendation" | null;
+  type: "wrong-answer" | "practice-streak" | "weak-topic-recommendation" | "exam-recommendation" | "study-recommendation" | null;
   questionNumber?: number;
   topicName?: string;
   subjectName?: string;
   streakCount?: number;
   weakestTopic?: string;
   subjectId?: string;
+  studyDetails?: {
+    topic: string;
+    errorCount: number;
+    details: string[];
+    subject: string;
+  };
 }
 
 export const usePersonalizedNotifications = () => {
@@ -269,9 +275,9 @@ export const usePersonalizedNotifications = () => {
     return 'Fundamental Concepts';
   }, []);
 
-  // Get personalized study recommendation based on exam performance
-  const getStudyRecommendation = useCallback(async () => {
-    if (!user?.id) return null;
+  // Show study recommendation notification
+  const showStudyRecommendation = useCallback(async () => {
+    if (!user?.id) return;
 
     try {
       // Get all recent exam completions (last 30 days)
@@ -284,11 +290,16 @@ export const usePersonalizedNotifications = () => {
 
       if (error) {
         console.error('Error fetching exam completions:', error);
-        return null;
+        return;
       }
 
       if (!recentExams || recentExams.length === 0) {
-        return null;
+        setNotification({
+          isVisible: true,
+          type: "study-recommendation",
+          studyDetails: null
+        });
+        return;
       }
 
       // Analyze all exams to find weakest areas with specific feedback
@@ -350,18 +361,30 @@ export const usePersonalizedNotifications = () => {
 
       if (sortedWeaknesses.length > 0) {
         const [weakness, details] = sortedWeaknesses[0];
-        return {
-          topic: weakness,
-          errorCount: details.errors,
-          details: details.details.slice(0, 3), // Show max 3 examples
-          subject: recentExams[0].subject_id
-        };
+        setNotification({
+          isVisible: true,
+          type: "study-recommendation",
+          studyDetails: {
+            topic: weakness,
+            errorCount: details.errors,
+            details: details.details.slice(0, 3), // Show max 3 examples
+            subject: recentExams[0].subject_id
+          }
+        });
+      } else {
+        setNotification({
+          isVisible: true,
+          type: "study-recommendation",
+          studyDetails: null
+        });
       }
-
-      return null;
     } catch (error) {
       console.error('Error getting study recommendation:', error);
-      return null;
+      setNotification({
+        isVisible: true,
+        type: "study-recommendation",
+        studyDetails: null
+      });
     }
   }, [user?.id, extractTopicFromText]);
 
@@ -486,7 +509,7 @@ export const usePersonalizedNotifications = () => {
     handlePredictedExamWrongAnswer,
     checkForWeakTopicRecommendation,
     checkForExamRecommendation,
-    getStudyRecommendation,
+    showStudyRecommendation,
     clearNotificationCache,
     hideNotification,
     clearNotification
