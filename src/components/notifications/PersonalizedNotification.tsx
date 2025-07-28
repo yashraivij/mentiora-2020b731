@@ -100,8 +100,18 @@ export const PersonalizedNotification = ({
         const formatStudyTopic = (topicText: string) => {
           let text = topicText.trim();
           
-          // Handle "Did not..." patterns (case insensitive, handle extra spaces)
+          // If it's already a proper topic name (like "Textual Variations and Representations"), return as-is
+          if (text.includes('Variations') || text.includes('Representations') || 
+              text.includes('Analysis') || text.includes('Structure') ||
+              (!text.toLowerCase().startsWith('did') && !text.toLowerCase().startsWith('i '))) {
+            return text;
+          }
+          
+          // Handle "Did not..." patterns (remove "did not")
           text = text.replace(/^did\s+not\s+/i, '');
+          
+          // Handle "Did..." patterns (remove "did")
+          text = text.replace(/^did\s+/i, '');
           
           // Handle "I..." patterns
           text = text.replace(/^I\s+/i, '');
