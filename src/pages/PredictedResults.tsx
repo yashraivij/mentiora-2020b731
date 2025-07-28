@@ -237,11 +237,15 @@ const PredictedResults = () => {
     
     // Generate specific model answers based on question content for English Language AQA
     if (question.includes('list four things about the library') && question.includes('lines 1 to 3')) {
-      return "The library is described as a cathedral of knowledge. It has vaulted ceilings that disappear into shadows above. There are towering shelves that stretch impossibly high. Dust motes dance in golden shafts of sunlight streaming through tall, arched windows.";
+      return "The library is described as a cathedral of knowledge. It has vaulted ceilings that disappear into shadows above. There are towering shelves that stretch impossibly high. The library contains ancient wisdom.";
     }
     
     if (question.includes('language here to describe the atmosphere') && question.includes('lines 4 to 6')) {
       return "The writer uses personification when describing the silence as 'alive', suggesting the library has a living, breathing quality that makes it feel dynamic rather than empty. The metaphor of tables as 'altars' and learning as a 'shrine' creates religious imagery that emphasizes the sacred, reverent atmosphere. The alliteration in 'soft footfalls' and 'whispered turning' emphasizes the gentle, respectful sounds that maintain the peaceful atmosphere. The verb 'moving reverently' suggests people treat the space with deep respect and awe, reinforcing the spiritual quality of the environment.";
+    }
+    
+    if (question.includes('evaluate how the writer creates a sense of awe and reverence') && question.includes('20 marks')) {
+      return "The writer creates a powerful sense of awe and reverence through the use of religious imagery and metaphor. The library is described as a 'cathedral of knowledge', immediately establishing it as a sacred space deserving of respect. This religious metaphor is extended through the description of tables as 'altars' where minds come to 'worship at the shrine of learning', suggesting that education itself is a form of spiritual devotion. The writer's use of personification makes the silence 'alive', creating an almost mystical atmosphere where the very air seems to hold knowledge and wisdom. The physical description contributes to this sense of awe through the 'vaulted ceilings' that 'disappear into shadows above', creating a sense of infinite height and grandeur that mirrors the limitless nature of knowledge itself. The alliteration in 'soft footfalls' and 'whispered turning' emphasizes the reverent behaviour of the library users, while the adverb 'reverently' directly states their respectful attitude. The writer's imagery of 'dust motes dancing in golden shafts of sunlight' creates an almost ethereal quality, as if knowledge itself is illuminated and made visible. Through these combined techniques, the writer successfully transforms a simple library into a temple of learning that inspires both awe and deep respect.";
     }
     
     // Generate specific model answers based on question content

@@ -181,7 +181,7 @@ export function ProfileDropdown({ streakDays, firstName }: ProfileDropdownProps)
             <div>
               <h3 className="font-semibold text-foreground">Profile Locked</h3>
               <p className="text-sm text-muted-foreground mt-1">
-                Reach a 14-day study streak to unlock your public profile and join the Hall of Fame!
+                Reach a 14-day study streak to unlock your public profile!
               </p>
             </div>
             <div className="text-xs text-muted-foreground/80">
