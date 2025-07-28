@@ -98,10 +98,16 @@ export const PersonalizedNotification = ({
         }
         // Transform the topic text to make it a proper study recommendation
         const formatStudyTopic = (topicText: string) => {
-          // If it starts with "I" or contains personal pronouns, transform it
-          if (topicText.toLowerCase().startsWith('i ') || topicText.includes(' I ')) {
-            // Convert from first person to a study topic
-            return topicText
+          const text = topicText.trim();
+          
+          // Handle "Did not..." patterns
+          if (text.toLowerCase().startsWith('did not ')) {
+            return text.replace(/^did not /i, '').replace(/^./, c => c.toUpperCase());
+          }
+          
+          // Handle "I overlooked..." or similar first-person patterns
+          if (text.toLowerCase().startsWith('i ') || text.includes(' I ')) {
+            return text
               .replace(/^I\s+/i, '')
               .replace(/\bI\b/g, 'you')
               .replace(/overlooked/i, 'understanding')
@@ -110,7 +116,16 @@ export const PersonalizedNotification = ({
               .toLowerCase()
               .replace(/^./, c => c.toUpperCase());
           }
-          return topicText;
+          
+          // Handle negative patterns like "not analyzing", "failed to", etc.
+          if (text.toLowerCase().includes('not ') || text.toLowerCase().startsWith('failed to ')) {
+            return text
+              .replace(/not /gi, '')
+              .replace(/failed to /gi, '')
+              .replace(/^./, c => c.toUpperCase());
+          }
+          
+          return text;
         };
 
         const formattedTopic = formatStudyTopic(studyDetails.topic);
