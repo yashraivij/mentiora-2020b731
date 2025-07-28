@@ -115,7 +115,7 @@ GCSE MARKING STANDARDS - CRITICAL REQUIREMENTS:
 1. GCSE CONTENT ACCURACY: Only award marks for content that is explicitly required by GCSE specifications. Reject irrelevant details not in the GCSE curriculum.
 2. SUBJECT-SPECIFIC TERMINOLOGY: Require proper GCSE terminology. Award marks only when students use the correct scientific/subject-specific vocabulary expected at GCSE level.
 3. MARK SCHEME PRECISION: Follow official GCSE mark scheme patterns:
-   - 1 mark questions: One correct fact/identification
+   - 1 mark questions: One correct fact/identification (NO ADDITIONAL EXPLANATION NEEDED - if correct, award full marks without suggesting more detail)
    - 2 mark questions: Two correct points OR one explained point
    - 3-4 mark questions: Detailed explanation with correct use of terminology
    - 5-6 mark questions: Extended answer with multiple linked points
