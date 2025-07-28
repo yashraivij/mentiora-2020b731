@@ -61,7 +61,8 @@ const Dashboard = () => {
     checkForExamRecommendation,
     clearNotificationCache,
     hideNotification,
-    clearNotification
+    clearNotification,
+    getPersonalizedStudyRecommendation
   } = usePersonalizedNotifications();
 
   // Check if user has seen streak celebration for specific streak count
@@ -1300,9 +1301,31 @@ const Dashboard = () => {
       {/* Study Recommendation Button */}
       <div className="fixed bottom-6 right-6 z-50">
         <Button
-          onClick={() => {
-            clearNotificationCache();
-            checkForWeakTopicRecommendation();
+          onClick={async () => {
+            try {
+              // Show loading state briefly
+              toast({
+                title: "Analyzing your performance...",
+                description: "Finding your best study focus areas",
+              });
+
+              // Get personalized recommendation based on actual exam performance
+              const recommendedTopic = await getPersonalizedStudyRecommendation();
+              
+              // Show the recommendation
+              toast({
+                title: "📚 Study Recommendation",
+                description: `We recommend focusing on '${recommendedTopic}' to improve your grade based on your recent exam performance.`,
+                duration: 8000,
+              });
+            } catch (error) {
+              console.error('Error getting study recommendation:', error);
+              toast({
+                title: "Error",
+                description: "Unable to get study recommendation. Please try again.",
+                variant: "destructive"
+              });
+            }
           }}
           className="relative overflow-hidden bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 hover:from-violet-500 hover:via-purple-500 hover:to-indigo-600 text-white border-0 shadow-2xl hover:shadow-purple-500/25 transition-all duration-500 transform hover:scale-105 px-4 py-2 rounded-xl font-semibold backdrop-blur-sm group"
           size="lg"
