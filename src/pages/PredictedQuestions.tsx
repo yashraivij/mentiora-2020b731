@@ -141,8 +141,7 @@ const PredictedQuestions = () => {
     return (
       <Card 
         key={subject.id} 
-        className="group cursor-pointer relative overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
-        onClick={() => !isCompleted && handleSubjectSelect(subject.id)}
+        className="group relative overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
       >
         {/* Card Background Gradient */}
         <div className={`absolute inset-0 bg-gradient-to-br ${getSubjectColor(subject.id)} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
