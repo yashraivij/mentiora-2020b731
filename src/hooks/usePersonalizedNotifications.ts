@@ -256,22 +256,30 @@ export const usePersonalizedNotifications = () => {
     }
     
     // Subject-specific fallbacks based on actual first topics from curriculum
-    if (subjectId === 'maths' || subjectId === 'mathematics') return 'Number';
-    if (subjectId === 'english' || subjectId === 'english-literature') return 'Reading';
+    if (subjectId === 'maths' || subjectId === 'mathematics' || subjectId === 'maths-edexcel') return 'Number';
+    if (subjectId === 'english' || subjectId === 'english-literature' || subjectId === 'edexcel-english-language' || subjectId === 'english-language') return 'Reading';
     if (subjectId === 'history') return 'America, 1840–1895';
     if (subjectId === 'computer-science' || subjectId === 'computing') return 'Computational thinking';
     if (subjectId === 'art') return 'Drawing and Painting';
     if (subjectId === 'music') return 'Performance';
     if (subjectId === 'pe' || subjectId === 'physical-education') return 'Sports Skills';
     if (subjectId === 'french' || subjectId === 'spanish' || subjectId === 'german') return 'Vocabulary';
-    
-    // Additional subjects that might not be handled above
     if (subjectId === 'physics-aqa') return 'Energy';
-    if (subjectId === 'maths-edexcel') return 'Number'; 
-    if (subjectId === 'edexcel-english-language') return 'Reading';
     
-    // Final fallback - return the most common weak topic instead of generic text
-    return 'Cell biology'; // This is typically the most common weak area across sciences
+    // Science subjects fallbacks
+    if (subjectId.includes('biology')) return 'Cell biology';
+    if (subjectId.includes('chemistry')) return 'Key ideas';
+    if (subjectId.includes('physics')) return 'Energy';
+    
+    // Language subjects fallbacks
+    if (subjectId.includes('english')) return 'Reading';
+    if (subjectId.includes('language')) return 'Reading';
+    
+    // Math subjects fallbacks  
+    if (subjectId.includes('math')) return 'Number';
+    
+    // Final fallback - return most common foundational topic
+    return 'Reading'; // Reading is fundamental across most subjects
   }, []);
 
   // Check for recent exam completion and show weak topic recommendation
