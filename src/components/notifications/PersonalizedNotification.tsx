@@ -100,34 +100,45 @@ export const PersonalizedNotification = ({
         const formatStudyTopic = (topicText: string) => {
           let text = topicText.trim();
           
+          // Debug log to see what we're getting
+          console.log('Original topic text:', text);
+          
           // If it's already a proper topic name (like "Textual Variations and Representations"), return as-is
           if (text.includes('Variations') || text.includes('Representations') || 
               text.includes('Analysis') || text.includes('Structure') ||
-              (!text.toLowerCase().startsWith('did') && !text.toLowerCase().startsWith('i '))) {
+              text.includes('Language Features') || text.includes('Context') ||
+              (!text.toLowerCase().includes('did not') && 
+               !text.toLowerCase().includes('did ') && 
+               !text.toLowerCase().startsWith('i ') &&
+               text.length > 10 && !text.includes('analyze'))) {
             return text;
           }
           
-          // Handle "Did not..." patterns (remove "did not")
-          text = text.replace(/^did\s+not\s+/i, '');
+          // Handle specific problematic cases - if it contains structure/analyze, make it a proper topic
+          if (text.toLowerCase().includes('analyze') && text.toLowerCase().includes('structure')) {
+            return 'Textual Structure and Analysis';
+          }
           
-          // Handle "Did..." patterns (remove "did")
-          text = text.replace(/^did\s+/i, '');
+          // Clean up the text step by step
+          text = text.replace(/^i\s+/i, ''); // Remove leading "i "
+          text = text.replace(/^did\s+not\s+/i, ''); // Remove "did not"
+          text = text.replace(/^did\s+/i, ''); // Remove "did"
+          text = text.replace(/\bnot\s+/gi, ''); // Remove "not"
+          text = text.replace(/^failed\s+to\s+/i, ''); // Remove "failed to"
+          text = text.replace(/\bI\b/g, 'you'); // Replace I with you
+          text = text.replace(/my/gi, 'your'); // Replace my with your
+          text = text.replace(/overlooked/i, 'understanding'); // Replace overlooked with understanding
           
-          // Handle "I..." patterns
-          text = text.replace(/^I\s+/i, '');
-          text = text.replace(/\bI\b/g, 'you');
-          text = text.replace(/overlooked/i, 'understanding');
-          text = text.replace(/my/gi, 'your');
-          
-          // Handle other negative patterns
-          text = text.replace(/\bnot\s+/gi, '');
-          text = text.replace(/^failed\s+to\s+/i, '');
-          
-          // Clean up and capitalize
+          // Clean up punctuation and spacing
           text = text.replace(/\.$/, '');
           text = text.trim();
-          text = text.charAt(0).toUpperCase() + text.slice(1);
           
+          // Capitalize first letter
+          if (text.length > 0) {
+            text = text.charAt(0).toUpperCase() + text.slice(1);
+          }
+          
+          console.log('Formatted topic text:', text);
           return text;
         };
 
