@@ -749,7 +749,12 @@ const Dashboard = () => {
 
                   {/* Compact call to action */}
                   <Button 
-                    onClick={() => navigate('/practice')} 
+                    onClick={() => {
+                      const subjectsSection = document.getElementById('subjects-section');
+                      if (subjectsSection) {
+                        subjectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }} 
                     className="w-full h-10 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white font-semibold shadow-lg shadow-orange-500/20 transform hover:scale-105 transition-all duration-300 border-0"
                   >
                     <Zap className="mr-2 h-4 w-4" />
@@ -958,7 +963,7 @@ const Dashboard = () => {
 
 
         {/* Subjects Section */}
-        <div className="mb-8">
+        <div className="mb-8" id="subjects-section">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-4">
               <h3 className="text-2xl font-bold text-foreground">Your Subjects</h3>
