@@ -255,31 +255,18 @@ export const usePersonalizedNotifications = () => {
       return 'Natural Hazards'; // Default for geography
     }
     
-    // Subject-specific fallbacks based on actual first topics from curriculum
-    if (subjectId === 'maths' || subjectId === 'mathematics' || subjectId === 'maths-edexcel') return 'Number';
-    if (subjectId === 'english' || subjectId === 'english-literature' || subjectId === 'edexcel-english-language' || subjectId === 'english-language') return 'Reading';
+    // Subject-specific fallbacks based on common first topics
+    if (subjectId === 'maths' || subjectId === 'mathematics') return 'Number';
+    if (subjectId === 'english' || subjectId === 'english-literature') return 'Reading';
     if (subjectId === 'history') return 'America, 1840–1895';
     if (subjectId === 'computer-science' || subjectId === 'computing') return 'Computational thinking';
     if (subjectId === 'art') return 'Drawing and Painting';
     if (subjectId === 'music') return 'Performance';
     if (subjectId === 'pe' || subjectId === 'physical-education') return 'Sports Skills';
     if (subjectId === 'french' || subjectId === 'spanish' || subjectId === 'german') return 'Vocabulary';
-    if (subjectId === 'physics-aqa') return 'Energy';
     
-    // Science subjects fallbacks
-    if (subjectId.includes('biology')) return 'Cell biology';
-    if (subjectId.includes('chemistry')) return 'Key ideas';
-    if (subjectId.includes('physics')) return 'Energy';
-    
-    // Language subjects fallbacks
-    if (subjectId.includes('english')) return 'Reading';
-    if (subjectId.includes('language')) return 'Reading';
-    
-    // Math subjects fallbacks  
-    if (subjectId.includes('math')) return 'Number';
-    
-    // Final fallback - return most common foundational topic
-    return 'Reading'; // Reading is fundamental across most subjects
+    // Final fallback - try to extract first topic from subject name
+    return 'Fundamental Concepts';
   }, []);
 
   // Check for recent exam completion and show weak topic recommendation
@@ -379,106 +366,6 @@ export const usePersonalizedNotifications = () => {
     }
   }, [user?.id, extractTopicFromText]);
 
-  // Get personalized study recommendation based on actual performance
-  const getPersonalizedStudyRecommendation = useCallback(async (subjectId?: string): Promise<string> => {
-    if (!user?.id) {
-      return extractTopicFromText('', subjectId || '');
-    }
-
-    try {
-      // Get recent exam completions (last 7 days for broader analysis)
-      const { data: recentExams, error } = await supabase
-        .from('predicted_exam_completions')
-        .select('*')
-        .eq('user_id', user.id)
-        .gte('completed_at', new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString())
-        .order('completed_at', { ascending: false })
-        .limit(10); // Get more exams for better analysis
-
-      if (error) {
-        console.error('Error fetching recent exams for study recommendation:', error);
-        return extractTopicFromText('', subjectId || '');
-      }
-
-      if (!recentExams || recentExams.length === 0) {
-        console.log('No recent exam data found, using fallback recommendation');
-        return extractTopicFromText('', subjectId || '');
-      }
-
-      // Analyze all recent exams to find most problematic topics
-      const topicErrors: Record<string, { errors: number, totalQuestions: number }> = {};
-
-      recentExams.forEach(exam => {
-        // Skip if subject doesn't match (when subjectId is specified)
-        if (subjectId && exam.subject_id !== subjectId) {
-          return;
-        }
-
-        const questions = exam.questions as any[];
-        const results = exam.results as any[];
-
-        if (results && results.length > 0) {
-          results.forEach((result, index) => {
-            const question = questions[index];
-            if (result && question) {
-              // Extract topic
-              let topic = question.topic || question.section;
-              
-              if (!topic || topic === 'A' || topic.length < 3) {
-                topic = extractTopicFromText(question.text || question.question || '', exam.subject_id);
-              }
-
-              // Initialize topic tracking
-              if (!topicErrors[topic]) {
-                topicErrors[topic] = { errors: 0, totalQuestions: 0 };
-              }
-
-              topicErrors[topic].totalQuestions += 1;
-
-              // Count as error if they got less than full marks
-              if (result.score < question.marks) {
-                topicErrors[topic].errors += 1;
-              }
-            }
-          });
-        }
-      });
-
-      // Find the topic with highest error rate (errors/totalQuestions)
-      const topicAnalysis = Object.entries(topicErrors)
-        .filter(([_, data]) => data.totalQuestions >= 2) // At least 2 questions attempted
-        .map(([topic, data]) => ({
-          topic,
-          errorRate: data.errors / data.totalQuestions,
-          totalErrors: data.errors,
-          totalQuestions: data.totalQuestions
-        }))
-        .sort((a, b) => {
-          // Prioritize by error rate, then by total errors
-          if (Math.abs(a.errorRate - b.errorRate) < 0.1) {
-            return b.totalErrors - a.totalErrors;
-          }
-          return b.errorRate - a.errorRate;
-        });
-
-      console.log('Study recommendation analysis:', topicAnalysis);
-
-      // Return the most problematic topic if we have good data
-      if (topicAnalysis.length > 0 && topicAnalysis[0].errorRate > 0.3) {
-        console.log(`Recommending topic based on performance: ${topicAnalysis[0].topic} (${Math.round(topicAnalysis[0].errorRate * 100)}% error rate)`);
-        return topicAnalysis[0].topic;
-      }
-
-      // Fallback to generic recommendation
-      console.log('No significant weak topics found in recent performance, using fallback');
-      return extractTopicFromText('', subjectId || '');
-
-    } catch (error) {
-      console.error('Error getting personalized study recommendation:', error);
-      return extractTopicFromText('', subjectId || '');
-    }
-  }, [user?.id, extractTopicFromText]);
-
 
   // Clear notification cache for testing
   const clearNotificationCache = useCallback(() => {
@@ -505,7 +392,6 @@ export const usePersonalizedNotifications = () => {
     checkForExamRecommendation,
     clearNotificationCache,
     hideNotification,
-    clearNotification,
-    getPersonalizedStudyRecommendation
+    clearNotification
   };
 };
