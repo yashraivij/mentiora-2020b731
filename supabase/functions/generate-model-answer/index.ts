@@ -87,6 +87,14 @@ GCSE MODEL ANSWER REQUIREMENTS:
 8. MARK DISTRIBUTION: Ensure the answer addresses all markable points for a ${marks} mark question
 9. PLAIN TEXT ONLY: No LaTeX, complex formatting, or symbols not available to GCSE students
 10. AUTHENTIC STYLE: Write exactly as a well-prepared GCSE student would write
+11. LINE RESTRICTION COMPLIANCE: For English Language questions, only refer to content from the specific lines mentioned in the question
+12. PARAGRAPH FORMAT: For English Language analysis questions, write in flowing paragraph format, NOT numbered points
+
+CRITICAL FOR ENGLISH LANGUAGE:
+- If the question asks about "lines 1 to 3" or "lines 4 to 6", ONLY use content from those specific lines
+- Do NOT include content from other parts of the text
+- For language analysis questions, write in paragraph format with flowing analysis
+- Avoid numbered points or bullet lists for English Language answers
 
 SUBJECT: ${subjectId} GCSE
 MARK ALLOCATION: ${marks} marks
