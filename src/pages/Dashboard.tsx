@@ -748,168 +748,78 @@ const Dashboard = () => {
                         </span>
                         <div className="w-3 h-3 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full animate-pulse" />
                       </div>
-                      <p className="text-base font-semibold text-muted-foreground">
-                        {getStudyStreak() === 0 ? "🔥 Start your journey today!" :
-                         getStudyStreak() < 3 ? "🚀 You're building momentum!" :
-                         getStudyStreak() < 7 ? "💪 Getting stronger every day!" :
-                         getStudyStreak() < 14 ? "⭐ You're on fire! Keep going!" :
-                         "👑 Legendary dedication!"}
-                      </p>
                     </div>
                   </div>
+
+                  {/* Call to action */}
+                  <Button 
+                    onClick={() => navigate('/practice')} 
+                    className="w-full h-14 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white text-lg font-bold shadow-2xl shadow-orange-500/30 transform hover:scale-105 transition-all duration-300 border-0"
+                  >
+                    <Flame className="mr-2 h-5 w-5" />
+                    Keep The Streak Alive!
+                  </Button>
                 </div>
 
-                {/* RIGHT SIDE: Premium Rewards Section */}
+                {/* RIGHT SIDE: Rewards Section */}
                 <div className="space-y-4">
                   <div className="text-center space-y-3">
                     <div className="relative inline-block">
-                      {/* Ultra premium star icon */}
+                      {/* Ultra premium trophy with effects */}
                       <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 via-blue-500 to-purple-500 flex items-center justify-center shadow-2xl shadow-emerald-500/40 transition-all duration-300 group-hover:scale-110 relative overflow-hidden mx-auto">
-                        <div className="absolute inset-1 rounded-xl bg-white/25 backdrop-blur-sm" />
+                        <div className="absolute inset-1 rounded-xl bg-white/20 backdrop-blur-sm" />
                         <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent" />
-                        <Star className="h-8 w-8 text-white relative z-10 drop-shadow-xl animate-pulse" />
+                        <Trophy className="h-8 w-8 text-white relative z-10 drop-shadow-xl animate-pulse" />
                       </div>
-                      {/* Achievement particles */}
+                      {/* Achievement ring */}
                       <div className="absolute inset-0 bg-emerald-400/30 rounded-2xl animate-ping opacity-20" />
-                      {/* Premium floating badge */}
+                      {/* Premium badge */}
                       <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg animate-bounce">
                         <Sparkles className="h-3 w-3 text-white drop-shadow-sm" />
                       </div>
                     </div>
                     
                     <div className="space-y-2">
-                      <h3 className="text-2xl font-black bg-gradient-to-br from-emerald-600 via-blue-600 to-purple-600 dark:from-emerald-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent tracking-tight">
-                        Rewards
+                      <h3 className="text-3xl font-black bg-gradient-to-br from-emerald-600 via-blue-600 to-purple-600 dark:from-emerald-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent tracking-tight">
+                        Rewards Unlocked
                       </h3>
-                      <p className="text-sm font-semibold text-muted-foreground">
-                        Unlock premium features with your streak!
-                      </p>
+                      <div className="text-lg font-semibold text-muted-foreground">
+                        {getStudyStreak() >= 7 ? 'Premium Features Active!' : `${7 - getStudyStreak()} days to unlock`}
+                      </div>
                     </div>
                   </div>
-                  
-                  {/* Current reward showcase */}
-                  <div className="p-3 bg-gradient-to-br from-emerald-100/80 via-emerald-50/70 to-green-100/80 dark:from-emerald-950/50 dark:via-emerald-900/40 dark:to-green-950/50 rounded-xl border-2 border-emerald-200/70 dark:border-emerald-800/50 shadow-lg backdrop-blur-sm">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-black text-emerald-700 dark:text-emerald-300 tracking-wider">NOW UNLOCKED</span>
-                      {getStudyStreak() >= 3 && (
-                        <div className="flex items-center space-x-1">
-                          <CheckCircle className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
-                          <span className="text-xs text-emerald-600 dark:text-emerald-400 font-bold">ACTIVE</span>
-                        </div>
+
+                  {/* Reward unlock buttons */}
+                  {getStudyStreak() >= 7 ? (
+                    <div className="space-y-3">
+                      <Button 
+                        onClick={() => navigate('/practice')} 
+                        className="w-full h-12 bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 hover:from-emerald-600 hover:via-blue-600 hover:to-purple-600 text-white font-bold shadow-xl shadow-emerald-500/20 transform hover:scale-105 transition-all duration-300"
+                      >
+                        <Gamepad2 className="mr-2 h-4 w-4" />
+                        Study Playlist & Sounds
+                      </Button>
+                      {getStudyStreak() >= 14 && (
+                        <Button 
+                          className="w-full h-12 bg-gradient-to-r from-yellow-500 via-amber-500 to-orange-500 hover:from-yellow-600 hover:via-amber-600 hover:to-orange-600 text-white font-bold shadow-xl shadow-yellow-500/20 transform hover:scale-105 transition-all duration-300"
+                        >
+                          <User className="mr-2 h-4 w-4" />
+                          Create Public Profile
+                        </Button>
                       )}
                     </div>
-                    <div className="flex items-center space-x-3">
-                      <span className="text-2xl filter drop-shadow-lg">
-                        {getStudyStreak() >= 14 ? "🧠" : getStudyStreak() >= 7 ? "🎵" : getStudyStreak() >= 3 ? "🎨" : "🔒"}
-                      </span>
-                      <div className="flex-1">
-                        <div className="text-sm font-bold text-foreground">
-                          {getStudyStreak() >= 14 ? "AI-Powered Smart Notes" : 
-                           getStudyStreak() >= 7 ? "Focus Music & Sounds" :
-                           getStudyStreak() >= 3 ? "Premium Themes" :
-                           "Locked - Keep Going!"
-                          }
-                        </div>
-                        <div className="text-xs text-emerald-700 dark:text-emerald-300 font-medium">
-                          {getStudyStreak() >= 14 ? "Revolutionary note generator" :
-                           getStudyStreak() >= 7 ? "Study playlists & white noise" :
-                           getStudyStreak() >= 3 ? "Dark mode & custom colors" :
-                           `Just ${3 - getStudyStreak()} more day${3 - getStudyStreak() !== 1 ? 's' : ''}!`
-                          }
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl font-black bg-gradient-to-br from-emerald-600 via-blue-600 to-purple-600 dark:from-emerald-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
-                      Unlock Rewards
-                    </h3>
-                    <p className="text-xs font-semibold text-muted-foreground">
-                      Level {getStudyStreak() >= 14 ? "Elite" : getStudyStreak() >= 7 ? "Pro" : getStudyStreak() >= 3 ? "Active" : "Starter"}
-                      {getStudyStreak() < 3 && " • 🎯 Almost there!"}
-                    </p>
-                  </div>
-                </div>
-                  
-                  {/* Next reward teaser with urgency */}
-                  {getStudyStreak() < 14 && (
-                    <div className="p-3 bg-gradient-to-br from-blue-100/80 via-purple-50/70 to-indigo-100/80 dark:from-blue-950/50 dark:via-purple-900/40 dark:to-indigo-950/50 rounded-xl border-2 border-blue-200/70 dark:border-blue-800/50 shadow-lg backdrop-blur-sm relative overflow-hidden">
-                      {/* Shimmer effect for desirability */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 animate-pulse opacity-40" />
-                      
-                      <div className="relative z-10">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs font-black text-blue-700 dark:text-blue-300 tracking-wider">COMING NEXT</span>
-                          <div className="px-2 py-0.5 bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-full border border-orange-400/30">
-                            <span className="text-xs text-orange-700 dark:text-orange-300 font-bold">
-                              {getStudyStreak() >= 7 ? `${14 - getStudyStreak()}d` :
-                               getStudyStreak() >= 3 ? `${7 - getStudyStreak()}d` :
-                               `${3 - getStudyStreak()}d`
-                               }
-                             </span>
-                           </div>
-                         </div>
-                         <div className="flex items-center space-x-3">
-                           <span className="text-2xl filter drop-shadow-lg">
-                             {getStudyStreak() >= 7 ? "🧠" :
-                              getStudyStreak() >= 3 ? "🎵" :
-                              "🎨"
-                             }
-                           </span>
-                           <div className="flex-1">
-                             <div className="text-sm font-bold text-foreground">
-                               {getStudyStreak() >= 7 ? "AI Smart Notes" :
-                                getStudyStreak() >= 3 ? "Study Sounds" :
-                                "Custom Themes"
-                               }
-                             </div>
-                             <div className="text-xs text-blue-700 dark:text-blue-300 font-medium">
-                               {getStudyStreak() >= 7 ? "Revolutionary study companion" :
-                                getStudyStreak() >= 3 ? "Focus music & ambient sounds" :
-                                "Personalize your experience"
-                               }
-                             </div>
-                           </div>
-                         </div>
-                       </div>
-                     </div>
-                   )}
-                 </div>
-               </div>
-             </CardContent>
-           </Card>
-         </div>
-                      <span className="font-black bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-600 dark:from-emerald-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
-                        {getStudyStreak() >= 7 ? `${Math.round(((getStudyStreak() - 7) / 7) * 100)}%` :
-                         getStudyStreak() >= 3 ? `${Math.round(((getStudyStreak() - 3) / 4) * 100)}%` :
-                         `${Math.round((getStudyStreak() / 3) * 100)}%`
-                        }
-                      </span>
-                    </div>
-                    
-                    {/* Ultra-premium progress bar */}
-                    <div className="relative">
-                      <div className="w-full bg-gradient-to-r from-muted/60 to-muted/40 rounded-full h-2 overflow-hidden shadow-inner">
+                  ) : (
+                    <div className="text-center">
+                      <div className="text-sm text-muted-foreground mb-2">Progress to 7-day streak</div>
+                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
                         <div 
-                          className="h-full bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 rounded-full transition-all duration-1000 shadow-lg relative overflow-hidden"
-                          style={{
-                            width: `${getStudyStreak() >= 14 ? 100 :
-                                     getStudyStreak() >= 7 ? ((getStudyStreak() - 7) / 7) * 100 :
-                                     getStudyStreak() >= 3 ? ((getStudyStreak() - 3) / 4) * 100 :
-                                     (getStudyStreak() / 3) * 100}%`
-                          }}
-                        >
-                          {/* Animated shine effect for premium feel */}
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12 animate-pulse" />
-                        </div>
+                          className="bg-gradient-to-r from-emerald-400 to-blue-400 h-3 rounded-full transition-all duration-500" 
+                          style={{ width: `${Math.min((getStudyStreak() / 7) * 100, 100)}%` }}
+                        />
                       </div>
-                      {/* Progress glow effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-blue-500/30 to-purple-500/30 rounded-full blur-sm opacity-50" />
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </CardContent>
           </Card>
