@@ -98,32 +98,25 @@ export const PersonalizedNotification = ({
         }
         // Transform the topic text to make it a proper study recommendation
         const formatStudyTopic = (topicText: string) => {
-          const text = topicText.trim();
+          let text = topicText.trim();
           
-          // Handle "Did not..." patterns
-          if (text.toLowerCase().startsWith('did not ')) {
-            return text.replace(/^did not /i, '').replace(/^./, c => c.toUpperCase());
-          }
+          // Handle "Did not..." patterns (case insensitive, handle extra spaces)
+          text = text.replace(/^did\s+not\s+/i, '');
           
-          // Handle "I overlooked..." or similar first-person patterns
-          if (text.toLowerCase().startsWith('i ') || text.includes(' I ')) {
-            return text
-              .replace(/^I\s+/i, '')
-              .replace(/\bI\b/g, 'you')
-              .replace(/overlooked/i, 'understanding')
-              .replace(/my/gi, 'your')
-              .replace(/\.$/, '')
-              .toLowerCase()
-              .replace(/^./, c => c.toUpperCase());
-          }
+          // Handle "I..." patterns
+          text = text.replace(/^I\s+/i, '');
+          text = text.replace(/\bI\b/g, 'you');
+          text = text.replace(/overlooked/i, 'understanding');
+          text = text.replace(/my/gi, 'your');
           
-          // Handle negative patterns like "not analyzing", "failed to", etc.
-          if (text.toLowerCase().includes('not ') || text.toLowerCase().startsWith('failed to ')) {
-            return text
-              .replace(/not /gi, '')
-              .replace(/failed to /gi, '')
-              .replace(/^./, c => c.toUpperCase());
-          }
+          // Handle other negative patterns
+          text = text.replace(/\bnot\s+/gi, '');
+          text = text.replace(/^failed\s+to\s+/i, '');
+          
+          // Clean up and capitalize
+          text = text.replace(/\.$/, '');
+          text = text.trim();
+          text = text.charAt(0).toUpperCase() + text.slice(1);
           
           return text;
         };
