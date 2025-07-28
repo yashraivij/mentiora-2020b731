@@ -269,6 +269,102 @@ export const usePersonalizedNotifications = () => {
     return 'Fundamental Concepts';
   }, []);
 
+  // Get personalized study recommendation based on exam performance
+  const getStudyRecommendation = useCallback(async () => {
+    if (!user?.id) return null;
+
+    try {
+      // Get all recent exam completions (last 30 days)
+      const { data: recentExams, error } = await supabase
+        .from('predicted_exam_completions')
+        .select('*')
+        .eq('user_id', user.id)
+        .gte('completed_at', new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString())
+        .order('completed_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching exam completions:', error);
+        return null;
+      }
+
+      if (!recentExams || recentExams.length === 0) {
+        return null;
+      }
+
+      // Analyze all exams to find weakest areas with specific feedback
+      const weaknessDetails: Record<string, { errors: number; details: string[] }> = {};
+
+      recentExams.forEach((exam) => {
+        const questions = exam.questions as any[];
+        const results = exam.results as any[];
+
+        if (results && results.length > 0) {
+          results.forEach((result, index) => {
+            const question = questions[index];
+            if (result && question && result.score < question.marks) {
+              // Extract detailed feedback from marking
+              const feedback = result.feedback || '';
+              const questionText = question.text || question.question || '';
+              
+              // Analyze what specifically went wrong
+              let specificWeakness = '';
+              if (exam.subject_id.includes('english')) {
+                if (feedback.toLowerCase().includes('analysis') || questionText.toLowerCase().includes('analyse')) {
+                  specificWeakness = 'analysing emotional impacts and literary techniques';
+                } else if (feedback.toLowerCase().includes('example') || questionText.toLowerCase().includes('example')) {
+                  specificWeakness = 'providing relevant examples and evidence';
+                } else if (feedback.toLowerCase().includes('link') || questionText.toLowerCase().includes('explain')) {
+                  specificWeakness = 'linking back to the question and context';
+                } else if (feedback.toLowerCase().includes('structure') || questionText.toLowerCase().includes('structure')) {
+                  specificWeakness = 'essay structure and organization';
+                } else if (feedback.toLowerCase().includes('language') || questionText.toLowerCase().includes('language')) {
+                  specificWeakness = 'language analysis and terminology';
+                } else {
+                  specificWeakness = 'critical analysis and interpretation';
+                }
+              } else {
+                // For other subjects, extract topic
+                let topic = question.topic || question.section;
+                if (!topic || topic === 'A' || topic.length < 3) {
+                  topic = extractTopicFromText(questionText, exam.subject_id);
+                }
+                specificWeakness = topic;
+              }
+
+              if (!weaknessDetails[specificWeakness]) {
+                weaknessDetails[specificWeakness] = { errors: 0, details: [] };
+              }
+              weaknessDetails[specificWeakness].errors++;
+              
+              // Add specific details about what went wrong
+              const detail = `Q${index + 1} (${result.score}/${question.marks} marks)`;
+              weaknessDetails[specificWeakness].details.push(detail);
+            }
+          });
+        }
+      });
+
+      // Find the most frequent weakness
+      const sortedWeaknesses = Object.entries(weaknessDetails)
+        .sort((a, b) => b[1].errors - a[1].errors);
+
+      if (sortedWeaknesses.length > 0) {
+        const [weakness, details] = sortedWeaknesses[0];
+        return {
+          topic: weakness,
+          errorCount: details.errors,
+          details: details.details.slice(0, 3), // Show max 3 examples
+          subject: recentExams[0].subject_id
+        };
+      }
+
+      return null;
+    } catch (error) {
+      console.error('Error getting study recommendation:', error);
+      return null;
+    }
+  }, [user?.id, extractTopicFromText]);
+
   // Check for recent exam completion and show weak topic recommendation
   const checkForWeakTopicRecommendation = useCallback(async () => {
     if (!user?.id) return;
@@ -390,6 +486,7 @@ export const usePersonalizedNotifications = () => {
     handlePredictedExamWrongAnswer,
     checkForWeakTopicRecommendation,
     checkForExamRecommendation,
+    getStudyRecommendation,
     clearNotificationCache,
     hideNotification,
     clearNotification
