@@ -19,8 +19,6 @@ const PredictedQuestions = () => {
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
 
   useEffect(() => {
-    // Scroll to top when component mounts
-    window.scrollTo(0, 0);
     fetchCompletedExams();
   }, []);
 
@@ -310,7 +308,7 @@ const PredictedQuestions = () => {
         </div>
       </header>
 
-      <div className="relative z-10 container mx-auto px-6 py-8 max-w-6xl">
+      <div className="relative z-10 container mx-auto px-6 pt-4 pb-8 max-w-6xl">
         {/* Header Section */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-3 mb-4">
