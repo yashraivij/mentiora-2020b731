@@ -255,7 +255,7 @@ export const usePersonalizedNotifications = () => {
       return 'Natural Hazards'; // Default for geography
     }
     
-    // Subject-specific fallbacks based on common first topics
+    // Subject-specific fallbacks based on actual first topics from curriculum
     if (subjectId === 'maths' || subjectId === 'mathematics') return 'Number';
     if (subjectId === 'english' || subjectId === 'english-literature') return 'Reading';
     if (subjectId === 'history') return 'America, 1840–1895';
@@ -265,8 +265,13 @@ export const usePersonalizedNotifications = () => {
     if (subjectId === 'pe' || subjectId === 'physical-education') return 'Sports Skills';
     if (subjectId === 'french' || subjectId === 'spanish' || subjectId === 'german') return 'Vocabulary';
     
-    // Final fallback - try to extract first topic from subject name
-    return 'Fundamental Concepts';
+    // Additional subjects that might not be handled above
+    if (subjectId === 'physics-aqa') return 'Energy';
+    if (subjectId === 'maths-edexcel') return 'Number'; 
+    if (subjectId === 'edexcel-english-language') return 'Reading';
+    
+    // Final fallback - return the most common weak topic instead of generic text
+    return 'Cell biology'; // This is typically the most common weak area across sciences
   }, []);
 
   // Check for recent exam completion and show weak topic recommendation
