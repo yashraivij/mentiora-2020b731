@@ -1375,16 +1375,8 @@ Write a story about discovering a hidden object.
         // Ensure question follows GCSE command word patterns
         let questionText = q.question;
         
-        // Enhance question to be more GCSE-specific if needed
-        if (q.marks && q.marks >= 4 && !questionText.includes('Explain') && !questionText.includes('Describe')) {
-          // Check if question already starts with a command word
-          const commandWords = ['List', 'State', 'Calculate', 'Define', 'Name', 'Give', 'Identify', 'Write', 'Show', 'Draw', 'Sketch', 'Outline', 'Describe', 'Explain', 'Compare', 'Analyse', 'Evaluate', 'Assess', 'Discuss', 'Simplify', 'Solve', 'Find', 'Determine', 'Work out', 'Plot', 'Construct', 'Measure', 'Expand', 'Express'];
-          const startsWithCommandWord = commandWords.some(word => questionText.trim().startsWith(word));
-          
-          if (q.marks <= 6 && !startsWithCommandWord) {
-            questionText = `Explain ${questionText.toLowerCase().replace(/^[a-z]/, (match) => match.toUpperCase())}`;
-          }
-        }
+        // Keep the original question text without automatic prepending
+        // Questions should already be properly formatted from the AI generation
         
         questions.push({
           id: `${topicIndex}-${qIndex}`,
