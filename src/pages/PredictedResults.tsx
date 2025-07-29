@@ -656,9 +656,62 @@ const PredictedResults = () => {
                   </h4>
                   <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border-l-4 border-green-500">
                     <div className="text-foreground space-y-2">
-                      {attempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).map((sentence, index) => (
-                        <p key={index} className="leading-relaxed">{sentence.trim()}{index < attempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).length - 1 ? '.' : ''}</p>
-                      ))}
+                      {(() => {
+                        const content = attempt.feedback.modelAnswer;
+                        
+                        // Check if content contains numbered lists (1., 2., 3., etc.)
+                        if (/\d+\.\s/.test(content)) {
+                          // Split by numbered points and format as list
+                          const parts = content.split(/(?=\d+\.\s)/);
+                          const intro = parts[0].trim();
+                          const listItems = parts.slice(1);
+                          
+                          return (
+                            <div className="space-y-3">
+                              {intro && <p className="leading-relaxed">{intro}</p>}
+                              <ul className="space-y-2 ml-4">
+                                {listItems.map((item, index) => (
+                                  <li key={index} className="leading-relaxed">
+                                    <span className="font-medium text-green-700 dark:text-green-300">
+                                      {item.match(/^\d+\./)?.[0]} 
+                                    </span>
+                                    <span className="ml-2">
+                                      {item.replace(/^\d+\.\s*/, '').trim()}
+                                    </span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          );
+                        }
+                        
+                        // Check if content contains bullet points (•, -, *)
+                        if (/[•\-\*]\s/.test(content)) {
+                          // Split by bullet points and format as list
+                          const parts = content.split(/(?=[•\-\*]\s)/);
+                          const intro = parts[0].trim();
+                          const listItems = parts.slice(1);
+                          
+                          return (
+                            <div className="space-y-3">
+                              {intro && <p className="leading-relaxed">{intro}</p>}
+                              <ul className="space-y-2 ml-4">
+                                {listItems.map((item, index) => (
+                                  <li key={index} className="leading-relaxed flex items-start">
+                                    <span className="text-green-600 dark:text-green-400 mt-1 mr-2">•</span>
+                                    <span>{item.replace(/^[•\-\*]\s*/, '').trim()}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          );
+                        }
+                        
+                        // Default: split by sentences for regular text
+                        return content.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).map((sentence, index) => (
+                          <p key={index} className="leading-relaxed">{sentence.trim()}{index < content.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).length - 1 ? '.' : ''}</p>
+                        ));
+                      })()}
                     </div>
                   </div>
                 </div>
