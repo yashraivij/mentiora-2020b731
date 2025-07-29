@@ -111,33 +111,38 @@ ${typeof markingCriteria === 'string' ? markingCriteria : markingCriteria.breakd
 
 TOTAL MARKS: ${totalMarks}${formulaSheetNote}
 
+CRITICAL MARKING REQUIREMENT - BASE FEEDBACK ONLY ON WHAT WAS ACTUALLY WRITTEN:
+🚨 ABSOLUTELY CRITICAL: Your feedback must ONLY refer to what the student actually wrote. DO NOT make assumptions about working, steps, or methods they didn't show. DO NOT suggest they showed working when they only provided a final answer. Be completely accurate about what was actually submitted.
+
 GCSE MARKING STANDARDS - CRITICAL REQUIREMENTS:
-1. GCSE CONTENT ACCURACY: Only award marks for content that is explicitly required by GCSE specifications. Reject irrelevant details not in the GCSE curriculum.
-2. SUBJECT-SPECIFIC TERMINOLOGY: Require proper GCSE terminology. Award marks only when students use the correct scientific/subject-specific vocabulary expected at GCSE level.
-3. MARK SCHEME PRECISION: Follow official GCSE mark scheme patterns:
+1. ACCURACY OF FEEDBACK: Base all feedback strictly on the actual student submission. If they only wrote a final answer, acknowledge that. If they showed working, comment on the working shown.
+2. GCSE CONTENT ACCURACY: Only award marks for content that is explicitly required by GCSE specifications. Reject irrelevant details not in the GCSE curriculum.
+3. SUBJECT-SPECIFIC TERMINOLOGY: Require proper GCSE terminology. Award marks only when students use the correct scientific/subject-specific vocabulary expected at GCSE level.
+4. MARK SCHEME PRECISION: Follow official GCSE mark scheme patterns:
    - 1 mark questions: One correct fact/identification (NO ADDITIONAL EXPLANATION NEEDED - if correct, award full marks without suggesting more detail)
    - 2 mark questions: Two correct points OR one explained point
    - 3-4 mark questions: Detailed explanation with correct use of terminology
    - 5-6 mark questions: Extended answer with multiple linked points
    - 8+ mark questions: Comprehensive answer with evaluation/analysis
-4. MATHEMATICAL ACCURACY: 
+5. MATHEMATICAL ACCURACY: 
    - For physics calculations, ALWAYS verify your own calculation before marking
    - Example: KE = 0.5 × mass × velocity² = 0.5 × 1200 × 25² = 0.5 × 1200 × 625 = 375,000 J
    - Accept equivalent mathematical answers but require proper units and significant figures as specified in GCSE mark schemes
-   - If the student's numerical answer is correct, award full marks even if working is not shown (unless specifically required)
+   - If the student's numerical answer is correct and working is not specifically required, award full marks
+   - If working is required and not shown, deduct marks appropriately
    - Double-check all formula applications and arithmetic
-5. COMMAND WORDS: Strictly apply GCSE command word requirements:
+6. COMMAND WORDS: Strictly apply GCSE command word requirements:
    - "State/Give": Simple facts only (no explanation needed)
    - "Describe": Detailed account without explanation
    - "Explain": Reasons why/how something happens
    - "Evaluate/Assess": Judgment with supporting evidence
    - "Compare": Similarities AND differences
-6. ASSESSMENT OBJECTIVES: Mark according to GCSE Assessment Objectives:
+7. ASSESSMENT OBJECTIVES: Mark according to GCSE Assessment Objectives:
    - AO1: Knowledge and understanding
    - AO2: Application of knowledge
    - AO3: Analysis and evaluation
-7. LEVEL OF DETAIL: Award marks only for the depth of answer appropriate to the mark allocation
-8. REJECT OVER-COMPLICATION: Do not award marks for unnecessarily complex answers when simple GCSE-level responses are required
+8. LEVEL OF DETAIL: Award marks only for the depth of answer appropriate to the mark allocation
+9. REJECT OVER-COMPLICATION: Do not award marks for unnecessarily complex answers when simple GCSE-level responses are required
 
 PREMIUM GCSE MARKING APPROACH:
 - Cross-reference the student's answer against official GCSE mark schemes and specification requirements
@@ -145,23 +150,26 @@ PREMIUM GCSE MARKING APPROACH:
 - Apply the same rigour as real GCSE examiners
 - Identify specific curriculum points the student has demonstrated knowledge of
 - Note any misconceptions or gaps in GCSE-level understanding
+- Be completely honest about what the student actually submitted vs what they should have included
 
 Your response must include:
 1. MARKS_AWARDED: Exact number from 0 to ${totalMarks} based on official GCSE standards
 2. FEEDBACK: Professional examiner feedback that:
+   - Is based ONLY on what the student actually wrote (never assume working that wasn't shown)
    - Identifies which specific GCSE content points were correctly addressed
    - Explains what was missing for full marks (referencing GCSE requirements)
    - Notes correct use of GCSE terminology and concepts
    - Highlights any content beyond GCSE scope (and explains it's not required)
    - Provides specific guidance for improvement based on GCSE mark schemes
+   - If only a final answer was given, acknowledge this fact accurately
 3. ASSESSMENT: Professional judgment like "Excellent GCSE standard", "Good understanding shown", "Needs more GCSE detail", or "Requires GCSE-level terminology"
 
-Apply the highest standards of GCSE examining. Be precise, fair, and educationally valuable in your marking.
+Apply the highest standards of GCSE examining. Be precise, fair, and educationally valuable in your marking. Most importantly, be completely accurate about what the student actually submitted.
 
 Respond in this exact JSON format:
 {
   "marksAwarded": [number],
-  "feedback": "[friendly, conversational feedback based only on what was actually written]",
+  "feedback": "[friendly, conversational feedback based ONLY on what was actually written - no assumptions]",
   "assessment": "[encouraging assessment]"
 }`;
 
