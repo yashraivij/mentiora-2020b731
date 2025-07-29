@@ -88,12 +88,13 @@ const Practice = () => {
       setTimeout(() => playTone(659, 0.15), 100); // E5
       setTimeout(() => playTone(784, 0.25), 200); // G5
     } else if (marksAwarded > 0) {
-      // Some marks - encouraging double note
-      playTone(523, 0.2); // C5
-      setTimeout(() => playTone(659, 0.2), 150); // E5
+      // Some marks - encouraging gentle ascending notes
+      playTone(392, 0.2); // G4 - warm start
+      setTimeout(() => playTone(523, 0.25), 120); // C5 - gentle rise
     } else {
-      // No marks - gentle supportive note
-      playTone(440, 0.3); // A4 - warm, encouraging tone
+      // No marks - gentle supportive ascending notes
+      playTone(349, 0.2); // F4 - warm, low start
+      setTimeout(() => playTone(392, 0.25), 150); // G4 - gentle encouraging lift
     }
   };
   
