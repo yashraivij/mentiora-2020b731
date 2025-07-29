@@ -1377,7 +1377,11 @@ Write a story about discovering a hidden object.
         
         // Enhance question to be more GCSE-specific if needed
         if (q.marks && q.marks >= 4 && !questionText.includes('Explain') && !questionText.includes('Describe')) {
-          if (q.marks <= 6) {
+          // Check if question already starts with a command word
+          const commandWords = ['List', 'State', 'Calculate', 'Define', 'Name', 'Give', 'Identify', 'Write', 'Show', 'Draw', 'Sketch'];
+          const startsWithCommandWord = commandWords.some(word => questionText.trim().startsWith(word));
+          
+          if (q.marks <= 6 && !startsWithCommandWord) {
             questionText = `Explain ${questionText.toLowerCase().replace(/^[a-z]/, (match) => match.toUpperCase())}`;
           }
         }
