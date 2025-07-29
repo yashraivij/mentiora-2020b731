@@ -58,6 +58,44 @@ const Practice = () => {
   const { subjectId, topicId } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+
+  // Play sound based on marking results
+  const playMarkingSound = (marksAwarded: number, totalMarks: number) => {
+    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    
+    const playTone = (frequency: number, duration: number, volume: number = 0.1) => {
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+      oscillator.type = 'sine';
+      
+      gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+      gainNode.gain.linearRampToValueAtTime(volume, audioContext.currentTime + 0.01);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + duration);
+    };
+
+    // Determine sound based on performance
+    if (marksAwarded === totalMarks) {
+      // Full marks - celebratory ascending notes
+      playTone(523, 0.15); // C5
+      setTimeout(() => playTone(659, 0.15), 100); // E5
+      setTimeout(() => playTone(784, 0.25), 200); // G5
+    } else if (marksAwarded > 0) {
+      // Some marks - encouraging double note
+      playTone(523, 0.2); // C5
+      setTimeout(() => playTone(659, 0.2), 150); // E5
+    } else {
+      // No marks - gentle supportive note
+      playTone(440, 0.3); // A4 - warm, encouraging tone
+    }
+  };
   
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
@@ -236,6 +274,9 @@ const Practice = () => {
       
       setAttempts([...attempts, attempt]);
       setShowFeedback(true);
+      
+      // Play appropriate sound based on marks awarded
+      playMarkingSound(markingResult.marksAwarded, currentQuestion.marks);
       
       // Generate notebook notes if marks were lost
       const marksLost = currentQuestion.marks - markingResult.marksAwarded;
