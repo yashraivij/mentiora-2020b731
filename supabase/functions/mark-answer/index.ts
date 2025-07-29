@@ -120,7 +120,12 @@ GCSE MARKING STANDARDS - CRITICAL REQUIREMENTS:
    - 3-4 mark questions: Detailed explanation with correct use of terminology
    - 5-6 mark questions: Extended answer with multiple linked points
    - 8+ mark questions: Comprehensive answer with evaluation/analysis
-4. MATHEMATICAL ACCURACY: Accept equivalent mathematical answers but require proper units and significant figures as specified in GCSE mark schemes
+4. MATHEMATICAL ACCURACY: 
+   - For physics calculations, ALWAYS verify your own calculation before marking
+   - Example: KE = 0.5 × mass × velocity² = 0.5 × 1200 × 25² = 0.5 × 1200 × 625 = 375,000 J
+   - Accept equivalent mathematical answers but require proper units and significant figures as specified in GCSE mark schemes
+   - If the student's numerical answer is correct, award full marks even if working is not shown (unless specifically required)
+   - Double-check all formula applications and arithmetic
 5. COMMAND WORDS: Strictly apply GCSE command word requirements:
    - "State/Give": Simple facts only (no explanation needed)
    - "Describe": Detailed account without explanation
