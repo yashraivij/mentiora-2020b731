@@ -140,6 +140,23 @@ const Practice = () => {
   };
 
   useEffect(() => {
+    // Record activity when user visits practice page
+    const recordVisit = async () => {
+      if (user?.id) {
+        try {
+          await supabase
+            .from('user_activities')
+            .insert({
+              user_id: user.id,
+              activity_type: 'practice_visit'
+            });
+        } catch (error) {
+          console.error('Error recording practice visit:', error);
+        }
+      }
+    };
+    
+    recordVisit();
     if (!subject || !topic) {
       navigate('/dashboard');
       return;
@@ -214,6 +231,20 @@ const Practice = () => {
     }
 
     setIsSubmitting(true);
+    
+    // Record practice activity
+    if (user?.id) {
+      try {
+        await supabase
+          .from('user_activities')
+          .insert({
+            user_id: user.id,
+            activity_type: 'question_answered'
+          });
+      } catch (error) {
+        console.error('Error recording activity:', error);
+      }
+    }
     
     try {
       console.log('Starting to mark answer...');

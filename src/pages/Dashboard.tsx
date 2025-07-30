@@ -484,32 +484,20 @@ const Dashboard = () => {
 
   // Record user activity and update streak
   const recordActivity = async (activityType: string) => {
-    if (!user?.id) {
-      console.log('No user ID available for recording activity');
-      return;
-    }
-    
-    console.log('Recording activity:', activityType, 'for user:', user.id);
+    if (!user?.id) return;
     
     try {
-      const { data, error } = await supabase
+      await supabase
         .from('user_activities')
         .insert({
           user_id: user.id,
           activity_type: activityType
         });
-        
-      console.log('Activity record result:', { data, error });
       
-      if (error) {
-        console.error('Error recording activity:', error);
-        return;
-      }
-      
-      // After recording activity, refresh the streak
+      // Refresh the streak after recording activity
       setTimeout(() => {
         fetchCurrentStreak();
-      }, 1000);
+      }, 500);
       
     } catch (error) {
       console.error('Error recording activity:', error);
@@ -518,40 +506,23 @@ const Dashboard = () => {
 
   // Fetch current streak from database
   const fetchCurrentStreak = async () => {
-    if (!user?.id) {
-      console.log('No user ID available for streak fetch');
-      return;
-    }
-    
-    console.log('Fetching streak for user:', user.id);
+    if (!user?.id) return;
     
     try {
       const { data, error } = await supabase.rpc('get_user_streak', {
         user_uuid: user.id
       });
       
-      console.log('Streak RPC result:', { data, error });
-      
       if (error) {
         console.error('Error fetching streak:', error);
+        setCurrentStreak(0);
         return;
       }
       
-      console.log('Setting current streak to:', data || 0);
       setCurrentStreak(data || 0);
-      
-      // Also check daily usage records for debugging
-      const { data: dailyUsage, error: dailyError } = await supabase
-        .from('daily_usage')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('date', { ascending: false })
-        .limit(5);
-        
-      console.log('Daily usage records:', { dailyUsage, dailyError });
-      
     } catch (error) {
       console.error('Error fetching streak:', error);
+      setCurrentStreak(0);
     }
   };
 
@@ -624,7 +595,8 @@ const Dashboard = () => {
     navigate('/');
   };
 
-  const handlePractice = (subjectId: string, topicId?: string) => {
+  const handlePractice = async (subjectId: string, topicId?: string) => {
+    await recordActivity('practice_start');
     if (topicId) {
       navigate(`/practice/${subjectId}/${topicId}`);
     } else {
