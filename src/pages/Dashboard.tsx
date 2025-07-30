@@ -484,15 +484,33 @@ const Dashboard = () => {
 
   // Record user activity and update streak
   const recordActivity = async (activityType: string) => {
-    if (!user?.id) return;
+    if (!user?.id) {
+      console.log('No user ID available for recording activity');
+      return;
+    }
+    
+    console.log('Recording activity:', activityType, 'for user:', user.id);
     
     try {
-      await supabase
+      const { data, error } = await supabase
         .from('user_activities')
         .insert({
           user_id: user.id,
           activity_type: activityType
         });
+        
+      console.log('Activity record result:', { data, error });
+      
+      if (error) {
+        console.error('Error recording activity:', error);
+        return;
+      }
+      
+      // After recording activity, refresh the streak
+      setTimeout(() => {
+        fetchCurrentStreak();
+      }, 1000);
+      
     } catch (error) {
       console.error('Error recording activity:', error);
     }
@@ -500,19 +518,38 @@ const Dashboard = () => {
 
   // Fetch current streak from database
   const fetchCurrentStreak = async () => {
-    if (!user?.id) return;
+    if (!user?.id) {
+      console.log('No user ID available for streak fetch');
+      return;
+    }
+    
+    console.log('Fetching streak for user:', user.id);
     
     try {
       const { data, error } = await supabase.rpc('get_user_streak', {
         user_uuid: user.id
       });
       
+      console.log('Streak RPC result:', { data, error });
+      
       if (error) {
         console.error('Error fetching streak:', error);
         return;
       }
       
+      console.log('Setting current streak to:', data || 0);
       setCurrentStreak(data || 0);
+      
+      // Also check daily usage records for debugging
+      const { data: dailyUsage, error: dailyError } = await supabase
+        .from('daily_usage')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('date', { ascending: false })
+        .limit(5);
+        
+      console.log('Daily usage records:', { dailyUsage, dailyError });
+      
     } catch (error) {
       console.error('Error fetching streak:', error);
     }
