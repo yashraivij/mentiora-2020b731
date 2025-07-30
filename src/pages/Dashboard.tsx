@@ -479,11 +479,6 @@ const Dashboard = () => {
   const [currentStreak, setCurrentStreak] = useState(0);
 
   const getStudyStreak = () => {
-    // Only give 3-day streak to the original test account
-    if (user?.email === 'test@gmail.com') {
-      return 3;
-    }
-    // All other accounts start at 0
     return currentStreak;
   };
 
