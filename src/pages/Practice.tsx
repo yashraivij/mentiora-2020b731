@@ -794,7 +794,7 @@ const Practice = () => {
               <Button 
                 variant="default" 
                 onClick={() => window.location.reload()}
-                className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-200"
+                className="bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 font-semibold"
               >
                 Practice More Questions
               </Button>
