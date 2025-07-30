@@ -476,11 +476,15 @@ const Dashboard = () => {
     return Math.round(totalScore / userProgress.length);
   };
 
-  const [currentStreak, setCurrentStreak] = useState(3); // Temporary: Set to 3 for testing
+  const [currentStreak, setCurrentStreak] = useState(0);
 
   const getStudyStreak = () => {
-    // Temporary hardcode for testing - you should see 3 days
-    return 3;
+    // Only give 3-day streak to the original test account
+    if (user?.email === 'test@gmail.com') {
+      return 3;
+    }
+    // All other accounts start at 0
+    return currentStreak;
   };
 
   // Record user activity and update streak
