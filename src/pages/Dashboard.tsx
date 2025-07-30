@@ -19,13 +19,13 @@ import { TopicMasteryDisplay } from "@/components/dashboard/TopicMasteryDisplay"
 
 import { PredictivePerformanceCard } from "@/components/dashboard/PredictivePerformanceCard";
 import { OptimalStudyTimeCard } from "@/components/dashboard/OptimalStudyTimeCard";
-import { OptimalLearningTimeCard } from "@/components/dashboard/OptimalLearningTimeCard";
+
 import { PredictedQuestionsSection } from "@/components/dashboard/PredictedQuestionsSection";
 import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
-import { DashboardStressMonitor } from "@/components/dashboard/DashboardStressMonitor";
+
 import { supabase } from "@/integrations/supabase/client";
 import { StressTracker } from "@/lib/stressTracker";
-import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
+
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
 import { StreakCelebration } from "@/components/ui/streak-celebration";
 import { ProfileDropdown } from '@/components/ui/profile-dropdown';
@@ -867,21 +867,12 @@ const Dashboard = () => {
         {/* Predicted GCSE Grades Section */}
         <PredictedGradesGraph userProgress={userProgress} />
 
-        {/* Optimal Learning Time - Premium Feature */}
-        <div className="mb-8">
-          <OptimalLearningTimeCard />
-        </div>
 
         {/* Predicted 2026 Questions Section */}
         <PredictedQuestionsSection />
 
-        {/* Premium Stress Monitor & Revision Notebook - Side by Side */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <DashboardStressMonitor 
-            userId={user?.id} 
-            userProgress={userProgress}
-            onSubjectClick={handlePractice}
-          />
+        {/* Revision Notebook - Premium Feature */}
+        <div className="mb-8">
           
           {/* Revision Notebook - Premium Feature */}
           <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => navigate('/notebook')}>
@@ -1284,23 +1275,6 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-
-      {/* Personalized Notification */}
-      {notification.isVisible && (
-        <PersonalizedNotification
-          type={notification.type!}
-          questionNumber={notification.questionNumber}
-          topicName={notification.topicName}
-          subjectName={notification.subjectName}
-          streakCount={notification.streakCount}
-          weakestTopic={notification.weakestTopic}
-          subjectId={notification.subjectId}
-          studyDetails={notification.studyDetails}
-          onClose={clearNotification}
-          onAction={handleNotificationAction}
-        />
-      )}
-
 
       {/* Streak Celebration Modal */}
       <StreakCelebration
