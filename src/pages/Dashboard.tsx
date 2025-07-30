@@ -136,6 +136,10 @@ const Dashboard = () => {
       // Load user's selected subjects from database
       await loadUserSubjects();
 
+      // Record login activity and fetch current streak
+      await recordActivity('dashboard_visit');
+      await fetchCurrentStreak();
+
       // Check and update public profile for 14+ day streaks
       await checkAndUpdatePublicProfile();
 
@@ -467,17 +471,46 @@ const Dashboard = () => {
     return Math.round(totalScore / userProgress.length);
   };
 
+  const [currentStreak, setCurrentStreak] = useState(0);
+
   const getStudyStreak = () => {
-    if (!user?.id) return 0;
+    return currentStreak;
+  };
+
+  // Record user activity and update streak
+  const recordActivity = async (activityType: string) => {
+    if (!user?.id) return;
     
-    // For testing: only test@gmail.com gets a 14-day streak
-    if (user.email === 'test@gmail.com') {
-      return 14;
+    try {
+      await supabase
+        .from('user_activities')
+        .insert({
+          user_id: user.id,
+          activity_type: activityType
+        });
+    } catch (error) {
+      console.error('Error recording activity:', error);
     }
+  };
+
+  // Fetch current streak from database
+  const fetchCurrentStreak = async () => {
+    if (!user?.id) return;
     
-    // Get streak from localStorage for other accounts
-    const savedStreak = localStorage.getItem(`mentiora_streak_${user.id}`);
-    return savedStreak ? parseInt(savedStreak, 10) : 0;
+    try {
+      const { data, error } = await supabase.rpc('get_user_streak', {
+        user_uuid: user.id
+      });
+      
+      if (error) {
+        console.error('Error fetching streak:', error);
+        return;
+      }
+      
+      setCurrentStreak(data || 0);
+    } catch (error) {
+      console.error('Error fetching streak:', error);
+    }
   };
 
   const getSubjectProgress = (subjectId: string) => {
