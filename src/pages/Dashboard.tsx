@@ -150,6 +150,11 @@ const Dashboard = () => {
 
     loadUserData();
     
+    // Also fetch streak on component mount
+    if (user?.id) {
+      fetchCurrentStreak();
+    }
+    
     const checkStreakCelebration = async () => {
       // Show celebration for streak achievements (prioritize highest unseen milestone)
       const streak = getStudyStreak();
