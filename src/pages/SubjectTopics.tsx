@@ -257,13 +257,13 @@ const SubjectTopics = () => {
                   <Button 
                     className={`w-full font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
                       isMastered 
-                        ? 'bg-gradient-to-r from-muted to-muted-foreground hover:from-muted-foreground hover:to-foreground text-white' 
+                        ? 'bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground' 
                         : 'bg-gradient-to-r from-emerald-400 to-cyan-500 hover:from-emerald-500 hover:to-cyan-600 text-white'
                     }`}
                     onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
                   >
                     {isNew ? 'Start Practice' : 
-                     isMastered ? 'Review' : 
+                     isMastered ? 'Practice More' : 
                      'Continue Practice'}
                   </Button>
                 </CardContent>
