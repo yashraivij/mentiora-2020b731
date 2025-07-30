@@ -5,7 +5,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
-import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Gamepad2, HelpCircle, StickyNote } from "lucide-react";
+import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Gamepad2 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
 import { useState, useEffect } from "react";
@@ -749,250 +749,499 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Premium Hero Streak & Rewards Card */}
-        <div className="mb-8">
-          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-950/40 dark:via-purple-950/40 dark:to-pink-950/40 shadow-2xl hover:shadow-3xl transition-all duration-500 group backdrop-blur-sm transform hover:scale-[1.01]">
-            {/* Animated glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-400/10 via-pink-400/10 to-orange-400/10 opacity-0 group-hover:opacity-100 transition-all duration-500" />
+        {/* Premium Combined Streak & Rewards Card */}
+        <div className="mb-6">
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-violet-50/60 to-cyan-50/60 dark:from-slate-900 dark:via-violet-950/30 dark:to-cyan-950/30 shadow-xl hover:shadow-2xl transition-all duration-500 group backdrop-blur-sm transform hover:scale-[1.01]">
+            {/* Subtle glow effects */}
+            <div className="absolute inset-0 bg-gradient-to-r from-violet-400/15 via-cyan-400/15 to-emerald-400/15 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
             {/* Premium border */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-2xl p-[2px]">
-              <div className="w-full h-full bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-950/40 dark:via-purple-950/40 dark:to-pink-950/40 rounded-2xl" />
+            <div className="absolute inset-0 bg-gradient-to-r from-violet-500 via-cyan-500 to-emerald-500 rounded-xl p-[2px] group-hover:p-[3px] transition-all duration-300">
+              <div className="bg-gradient-to-br from-white via-violet-50/60 to-cyan-50/60 dark:from-slate-900 dark:via-violet-950/30 dark:to-cyan-950/30 rounded-[10px] h-full w-full backdrop-blur-sm" />
             </div>
             
-            {/* Floating elements */}
-            <div className="absolute top-6 right-8 animate-bounce delay-100">
-              <Sparkles className="h-5 w-5 text-purple-400 opacity-70" />
-            </div>
-            <div className="absolute bottom-8 left-12 animate-bounce delay-300">
-              <Star className="h-4 w-4 text-pink-400 opacity-60" />
-            </div>
+            {/* Subtle floating particles */}
+            <div className="absolute top-3 right-4 w-1.5 h-1.5 bg-gradient-to-r from-amber-300 to-yellow-400 rounded-full animate-bounce opacity-70" />
+            <div className="absolute bottom-4 left-6 w-1 h-1 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full animate-pulse opacity-60" />
             
-            <CardContent className="relative z-10 p-8">
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                
-                {/* LEFT: Streak Display */}
-                <div className="text-center space-y-6">
-                  <div className="relative inline-block">
-                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-orange-400 via-red-500 to-pink-600 flex items-center justify-center shadow-2xl shadow-orange-500/30 transition-all duration-300 group-hover:scale-105 relative overflow-hidden mx-auto">
-                      <div className="absolute inset-2 rounded-full bg-white/20 backdrop-blur-sm" />
-                      <Flame className="h-8 w-8 text-white relative z-10 drop-shadow-lg" />
+            <CardContent className="relative p-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* LEFT SIDE: Study Streak Section */}
+                <div className="space-y-4">
+                  <div className="text-center space-y-3">
+                    <div className="relative inline-block">
+                      {/* Compact fire icon */}
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 flex items-center justify-center shadow-xl shadow-orange-500/30 transition-all duration-300 group-hover:scale-105 relative overflow-hidden mx-auto">
+                        <div className="absolute inset-1 rounded-xl bg-white/20 backdrop-blur-sm" />
+                        <Flame className="h-6 w-6 text-white relative z-10 drop-shadow-lg" />
+                      </div>
+                      {/* Subtle achievement ring */}
+                      <div className="absolute inset-0 bg-orange-400/20 rounded-2xl animate-ping opacity-20" />
+                      {/* Compact badge */}
+                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-md animate-bounce">
+                        <Crown className="h-2.5 w-2.5 text-white" />
+                      </div>
                     </div>
-                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-yellow-300 to-orange-500 rounded-full flex items-center justify-center shadow-lg animate-bounce">
-                      <Crown className="h-3 w-3 text-white" />
+                    
+                    {/* Compact streak display */}
+                    <div className="space-y-2">
+                      <h3 className="text-4xl font-bold bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent tracking-tight">
+                        {getStudyStreak()}
+                      </h3>
+                      <div className="flex items-center justify-center space-x-2">
+                        <span className="text-lg font-semibold bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
+                          Day{getStudyStreak() !== 1 ? 's' : ''} Strong!
+                        </span>
+                        <div className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full animate-pulse" />
+                      </div>
                     </div>
                   </div>
-                  
-                  <div className="space-y-2">
-                    <div className="text-5xl font-black bg-gradient-to-r from-orange-500 via-red-500 to-pink-600 bg-clip-text text-transparent">
-                      {getStudyStreak()}
-                    </div>
-                    <div className="text-lg font-bold text-gray-700 dark:text-gray-300">
-                      Day{getStudyStreak() !== 1 ? 's' : ''} Strong! 🔥
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
-                      {getStudyStreak() === 0 ? "Start your journey today!" : "Keep the momentum going!"}
-                    </div>
-                  </div>
+
+                  {/* Compact call to action */}
+                  <Button 
+                    onClick={() => {
+                      const subjectsSection = document.getElementById('subjects-section');
+                      if (subjectsSection) {
+                        subjectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }} 
+                    className="w-full h-10 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white font-semibold shadow-lg shadow-orange-500/20 transform hover:scale-105 transition-all duration-300 border-0"
+                  >
+                    <Zap className="mr-2 h-4 w-4" />
+                    Continue Streak
+                  </Button>
                 </div>
 
-                {/* RIGHT: Rewards */}
-                <div className="space-y-6">
-                  <div className="text-center">
-                    <h3 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-                      Unlock Premium Features
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">Build your streak to unlock exclusive rewards</p>
+                {/* RIGHT SIDE: Compact Rewards Section */}
+                <div className="space-y-4">
+                  <div className="text-center space-y-3">
+                    <div className="relative inline-block">
+                      {/* Compact trophy */}
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 via-cyan-500 to-violet-500 flex items-center justify-center shadow-xl shadow-emerald-500/30 transition-all duration-300 group-hover:scale-105 relative overflow-hidden mx-auto">
+                        <div className="absolute inset-1 rounded-xl bg-white/20 backdrop-blur-sm" />
+                        <Trophy className="h-6 w-6 text-white relative z-10 drop-shadow-lg" />
+                      </div>
+                      {/* Subtle achievement ring */}
+                      <div className="absolute inset-0 bg-emerald-400/20 rounded-2xl animate-ping opacity-20" />
+                      {/* Compact badge */}
+                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-md animate-bounce">
+                        <Sparkles className="h-2.5 w-2.5 text-white" />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-1">
+                      <h3 className="text-2xl font-bold bg-gradient-to-br from-emerald-600 via-cyan-600 to-violet-600 dark:from-emerald-400 dark:via-cyan-400 dark:to-violet-400 bg-clip-text text-transparent">
+                        Premium Rewards
+                      </h3>
+                    </div>
                   </div>
-                  
-                  <div className="space-y-3">
-                    {/* Color Themes - 3 days */}
-                    <div className={`p-3 rounded-xl border-2 transition-all duration-300 ${getStudyStreak() >= 3 ? 'bg-gradient-to-r from-violet-100 to-purple-100 dark:from-violet-950/30 dark:to-purple-950/30 border-violet-300 shadow-lg' : 'bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700'}`}>
+
+                  {/* Compact reward tier system */}
+                  <div className="space-y-2">
+                    {/* Color Themes Reward - 3 days */}
+                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 3 ? 'bg-gradient-to-r from-violet-500/10 to-purple-500/10 border-violet-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${getStudyStreak() >= 3 ? 'bg-gradient-to-br from-violet-500 to-purple-600' : 'bg-gray-400'}`}>
-                            <Sparkles className="h-4 w-4 text-white" />
+                        <div className="flex items-center space-x-2">
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 3 ? 'bg-gradient-to-br from-violet-500 to-purple-600 shadow-sm' : 'bg-gray-400'}`}>
+                            <Star className="h-3 w-3 text-white" />
                           </div>
                           <div>
-                            <p className={`font-semibold text-sm ${getStudyStreak() >= 3 ? 'text-violet-700 dark:text-violet-300' : 'text-gray-500'}`}>Color Themes</p>
-                            <p className="text-xs text-gray-500">Personalize your experience</p>
+                            <p className={`text-sm font-semibold ${getStudyStreak() >= 3 ? 'text-violet-700 dark:text-violet-300' : 'text-gray-500'}`}>
+                              Custom Color Themes
+                            </p>
+                            <p className="text-xs text-muted-foreground">3 days</p>
                           </div>
                         </div>
                         {getStudyStreak() >= 3 ? (
-                          <Badge className="bg-violet-500 text-white text-xs">UNLOCKED ✨</Badge>
+                          <CheckCircle className="h-4 w-4 text-violet-600" />
                         ) : (
-                          <span className="text-xs text-gray-500">{3 - getStudyStreak()}d to go</span>
+                          <div className="text-xs font-medium text-muted-foreground">{3 - getStudyStreak()}d</div>
                         )}
                       </div>
                     </div>
 
-                    {/* Study Playlist - 7 days */}
-                    <div className={`p-3 rounded-xl border-2 transition-all duration-300 ${getStudyStreak() >= 7 ? 'bg-gradient-to-r from-emerald-100 to-cyan-100 dark:from-emerald-950/30 dark:to-cyan-950/30 border-emerald-300 shadow-lg' : 'bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700'}`}>
+                    {/* Study Playlist Reward - 7 days */}
+                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 7 ? 'bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border-emerald-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${getStudyStreak() >= 7 ? 'bg-gradient-to-br from-emerald-500 to-cyan-600' : 'bg-gray-400'}`}>
-                            <Brain className="h-4 w-4 text-white" />
+                        <div className="flex items-center space-x-2">
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 7 ? 'bg-gradient-to-br from-emerald-500 to-cyan-600 shadow-sm' : 'bg-gray-400'}`}>
+                            <Gamepad2 className="h-3 w-3 text-white" />
                           </div>
                           <div>
-                            <p className={`font-semibold text-sm ${getStudyStreak() >= 7 ? 'text-emerald-700 dark:text-emerald-300' : 'text-gray-500'}`}>Study Playlist</p>
-                            <p className="text-xs text-gray-500">Focus-enhancing music</p>
+                            <p className={`text-sm font-semibold ${getStudyStreak() >= 7 ? 'text-emerald-700 dark:text-emerald-300' : 'text-gray-500'}`}>
+                              Study Playlists & Sounds
+                            </p>
+                            <p className="text-xs text-muted-foreground">7 days</p>
                           </div>
                         </div>
                         {getStudyStreak() >= 7 ? (
-                          <Badge className="bg-emerald-500 text-white text-xs">UNLOCKED 🎵</Badge>
+                          <CheckCircle className="h-4 w-4 text-emerald-600" />
                         ) : (
-                          <span className="text-xs text-gray-500">{7 - getStudyStreak()}d to go</span>
+                          <div className="text-xs font-medium text-muted-foreground">{7 - getStudyStreak()}d</div>
                         )}
                       </div>
                     </div>
 
-                    {/* Hall of Fame - 14 days */}
-                    <div className={`p-3 rounded-xl border-2 transition-all duration-300 ${getStudyStreak() >= 14 ? 'bg-gradient-to-r from-amber-100 to-yellow-100 dark:from-amber-950/30 dark:to-yellow-950/30 border-amber-300 shadow-lg' : 'bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700'}`}>
+                    {/* Public Profile Reward - 14 days */}
+                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 14 ? 'bg-gradient-to-r from-amber-500/10 to-yellow-500/10 border-amber-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${getStudyStreak() >= 14 ? 'bg-gradient-to-br from-amber-500 to-yellow-600' : 'bg-gray-400'}`}>
-                            <Trophy className="h-4 w-4 text-white" />
+                        <div className="flex items-center space-x-2">
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 14 ? 'bg-gradient-to-br from-amber-500 to-yellow-600 shadow-sm' : 'bg-gray-400'}`}>
+                            <User className="h-3 w-3 text-white" />
                           </div>
                           <div>
-                            <p className={`font-semibold text-sm ${getStudyStreak() >= 14 ? 'text-amber-700 dark:text-amber-300' : 'text-gray-500'}`}>Hall of Fame</p>
-                            <p className="text-xs text-gray-500">Public recognition</p>
+                            <p className={`text-sm font-semibold ${getStudyStreak() >= 14 ? 'text-amber-700 dark:text-amber-300' : 'text-gray-500'}`}>
+                              Public Profile Creation
+                            </p>
+                            <p className="text-xs text-muted-foreground">14 days</p>
                           </div>
                         </div>
                         {getStudyStreak() >= 14 ? (
-                          <Badge className="bg-amber-500 text-white text-xs">LEGENDARY 👑</Badge>
+                          <CheckCircle className="h-4 w-4 text-amber-600" />
                         ) : (
-                          <span className="text-xs text-gray-500">{14 - getStudyStreak()}d to go</span>
+                          <div className="text-xs font-medium text-muted-foreground">{14 - getStudyStreak()}d</div>
                         )}
                       </div>
                     </div>
                   </div>
-                  
-                  <div className="text-center pt-2">
-                    <Button 
-                      onClick={() => navigate('/practice')}
-                      className="bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 hover:from-purple-700 hover:via-pink-700 hover:to-orange-700 text-white font-bold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-0"
-                    >
-                      <Zap className="h-4 w-4 mr-2" />
-                      Start Practicing
-                    </Button>
-                  </div>
-                 </div>
-               </div>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Main Content - Side by Side Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left column - Main content */}
-          <div className="lg:col-span-2 space-y-8">
-            {/* Subjects Section */}
-            <div id="subjects-section">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200">Your Subjects</h2>
+
+        {/* Predicted GCSE Grades Section */}
+        <PredictedGradesGraph userProgress={userProgress} />
+
+
+        {/* Predicted 2026 Questions Section */}
+        <PredictedQuestionsSection />
+
+        {/* Revision Notebook - Premium Feature */}
+        <div className="mb-8">
+          
+          {/* Revision Notebook - Premium Feature */}
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => navigate('/notebook')}>
+            {/* Premium Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Animated Border */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 rounded-lg p-[2px] group-hover:animate-pulse">
+              <div className="bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 rounded-[6px] h-full w-full" />
+            </div>
+            
+            <CardContent className="relative p-8">
+              <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center space-x-4">
-                  <Tabs value={subjectsTab} onValueChange={(value) => setSubjectsTab(value as 'my-subjects' | 'all-subjects')} className="w-auto">
-                    <TabsList className="grid w-full grid-cols-2">
-                      <TabsTrigger value="my-subjects">My Subjects</TabsTrigger>
-                      <TabsTrigger value="all-subjects">All Subjects</TabsTrigger>
-                    </TabsList>
-                  </Tabs>
-                </div>
-              </div>
-
-              <Tabs value={subjectsTab} className="w-full">
-                <TabsContent value="my-subjects" className="mt-0">
-                  {userSubjects.length === 0 ? (
-                    <Card className="p-8 text-center border-dashed border-2 border-gray-300 dark:border-gray-600">
-                      <div className="space-y-4">
-                        <BookOpen className="h-12 w-12 text-gray-400 mx-auto" />
-                        <div>
-                          <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                            No subjects added yet
-                          </h3>
-                          <p className="text-gray-600 dark:text-gray-400 mb-4">
-                            Add subjects from the "All Subjects" tab to start your learning journey
-                          </p>
-                          <Button 
-                            onClick={() => setSubjectsTab('all-subjects')}
-                            className="bg-gradient-to-r from-blue-500 to-purple-600 text-white"
-                          >
-                            Browse All Subjects
-                          </Button>
-                        </div>
-                      </div>
-                    </Card>
-                  ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {curriculum
-                        .filter(subject => userSubjects.includes(subject.id))
-                        .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language')
-                        .map((subject) => (
-                        <SubjectCard
-                          key={subject.id}
-                          subject={{
-                            ...subject,
-                            color: getSubjectColor(subject.id)
-                          }}
-                          progress={userProgress}
-                          onStartPractice={handlePractice}
-                          onTogglePin={togglePinSubject}
-                          isPinned={pinnedSubjects.includes(subject.id)}
-                          lastActivity={getLastActivity(subject.id)}
-                          userId={user?.id}
-                          onToggleUserSubject={subject.id === 'physics-aqa' ? handlePhysicsToggle : toggleUserSubject}
-                          isUserSubject={userSubjects.includes(subject.id)}
-                          showAddButton={subjectsTab === 'all-subjects'}
-                        />
-                        ))}
-                    </div>
-                  )}
-                </TabsContent>
-
-                <TabsContent value="all-subjects" className="mt-0">
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {curriculum.map((subject) => {
-                        const modifiedSubject = subject.id === 'maths-edexcel' 
-                          ? { ...subject, name: 'Maths (Edexcel)' }
-                          : subject.id === 'business-edexcel-igcse'
-                          ? { ...subject, name: 'Business (Edexcel IGCSE)' }
-                          : subject.id === 'chemistry-edexcel'
-                          ? { ...subject, name: 'Chemistry (Edexcel)' }
-                          : subject.id === 'physics-edexcel'
-                          ? { ...subject, name: 'Physics (Edexcel)' }
-                          : subject.id === 'edexcel-english-language'
-                          ? { ...subject, name: 'English Language (Edexcel)' }
-                          : subject;
-                        
-                        return (
-                        <SubjectCard
-                          key={subject.id}
-                          subject={{
-                            ...modifiedSubject,
-                            color: getSubjectColor(subject.id)
-                          }}
-                          progress={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && selectedExamBoard === 'edexcel' ? userProgress : []}
-                          onStartPractice={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && selectedExamBoard === 'edexcel' ? handlePractice : () => {}}
-                          onTogglePin={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && selectedExamBoard === 'edexcel' ? togglePinSubject : () => {}}
-                          isPinned={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && selectedExamBoard === 'edexcel' ? pinnedSubjects.includes(subject.id) : false}
-                          lastActivity={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && selectedExamBoard === 'edexcel' ? getLastActivity(subject.id) : null}
-                          comingSoon={!((subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && selectedExamBoard === 'edexcel')}
-                          userId={user?.id}
-                          onToggleUserSubject={toggleUserSubject}
-                          isUserSubject={userSubjects.includes(subject.id)}
-                          showAddButton={subjectsTab === 'all-subjects'}
-                        />
-                        );
-                      })}
+                  <div className="relative w-16 h-16 rounded-3xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-500 flex items-center justify-center shadow-2xl group-hover:shadow-purple-500/25 transition-shadow duration-300">
+                    <div className="absolute inset-2 rounded-2xl bg-white/20 backdrop-blur-sm" />
+                    <Brain className="h-8 w-8 text-white relative z-10 group-hover:scale-110 transition-transform duration-300" />
+                    <Sparkles className="absolute -top-1 -right-1 h-4 w-4 text-yellow-300 animate-pulse" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-700 via-pink-600 to-indigo-700 dark:from-purple-300 dark:via-pink-300 dark:to-indigo-300 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
+                      Revision Notebook
+                    </h3>
+                    <div className="flex items-center space-x-2 mt-1">
+                      <Crown className="h-4 w-4 text-amber-500 animate-bounce" />
+                      <span className="text-sm font-semibold bg-gradient-to-r from-amber-600 to-yellow-600 dark:from-amber-400 dark:to-yellow-400 bg-clip-text text-transparent">Premium Feature</span>
                     </div>
                   </div>
-                </TabsContent>
-              </Tabs>
+                </div>
+                <div className="flex flex-col items-end space-y-2 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="flex items-center space-x-2 px-3 py-1 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-full border border-emerald-300/30">
+                    <Zap className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
+                    <span className="text-xs font-medium text-emerald-700 dark:text-emerald-300">Auto</span>
+                  </div>
+                  <div className="flex items-center space-x-2 px-3 py-1 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full border border-blue-300/30">
+                    <Target className="h-3 w-3 text-blue-600 dark:text-blue-400" />
+                    <span className="text-xs font-medium text-blue-700 dark:text-blue-300">Grade 9 Focus</span>
+                  </div>
+                </div>
+              </div>
+              
+              <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
+                Revolutionary technology creates <span className="font-semibold text-purple-700 dark:text-purple-300">ultra-clear, Grade 9-level revision notes</span> instantly for every question where you lose marks. Each note is meticulously crafted with key definitions, equations, and premium exam strategies.
+              </p>
+              
+              <div className="grid grid-cols-1 gap-4 mb-6">
+                <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">Instant premium note generation</span>
+                </div>
+                <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center shadow-lg">
+                    <BookOpen className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">Organized by topic</span>
+                </div>
+                <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
+                    <Trophy className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">Exam-focused premium content</span>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2 text-sm text-purple-600 dark:text-purple-400 font-medium">
+                  <Clock className="h-4 w-4" />
+                  <span>Save 10+ hours per week</span>
+                </div>
+                <Button 
+                  className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white shadow-xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 px-8 py-3 text-base font-semibold"
+                >
+                  <Brain className="h-4 w-4 mr-2" />
+                  Open Premium Notebook
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+
+        {/* Subjects Section */}
+        <div className="mb-8" id="subjects-section">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center space-x-4">
+              <h3 className="text-2xl font-bold text-foreground">Your Subjects</h3>
+              <Badge variant="outline" className="text-muted-foreground border-border bg-card/50">
+                {subjectsTab === 'my-subjects' ? userSubjects.length : allSubjects.length} subjects
+              </Badge>
+            </div>
+            <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-1 bg-background/80 dark:bg-card/80 backdrop-blur-sm rounded-2xl p-1.5 border border-border shadow-sm">
+                <Button
+                  variant={sortBy === 'progress' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setSortBy('progress')}
+                  className={sortBy === 'progress' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors'}
+                >
+                  Progress
+                </Button>
+                <Button
+                  variant={sortBy === 'weakest' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setSortBy('weakest')}
+                  className={sortBy === 'weakest' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors'}
+                >
+                  Weakest
+                </Button>
+                <Button
+                  variant={sortBy === 'alphabetical' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setSortBy('alphabetical')}
+                  className={sortBy === 'alphabetical' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors'}
+                >
+                  A-Z
+                </Button>
+              </div>
             </div>
           </div>
 
-          {/* Right column - Progress overview */}
+          {/* Subject Tabs */}
+          <div className="flex space-x-1 bg-muted/50 rounded-xl p-1 mb-6 max-w-md">
+            <Button
+              variant={subjectsTab === 'my-subjects' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setSubjectsTab('my-subjects')}
+              className={subjectsTab === 'my-subjects' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90 flex-1' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors flex-1'}
+            >
+              My Subjects ({userSubjects.filter(id => id && id.trim()).length})
+            </Button>
+            <Button
+              variant={subjectsTab === 'all-subjects' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setSubjectsTab('all-subjects')}
+              className={subjectsTab === 'all-subjects' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90 flex-1' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors flex-1'}
+            >
+              All Subjects (14)
+            </Button>
+          </div>
+
+          {/* Exam Board Tabs */}
+          <Tabs value={selectedExamBoard} onValueChange={setSelectedExamBoard} className="mb-6">
+            <TabsList className="grid w-full grid-cols-5 max-w-md">
+              <TabsTrigger value="aqa">AQA</TabsTrigger>
+              <TabsTrigger value="edexcel">Edexcel</TabsTrigger>
+              <TabsTrigger value="ccea">CCEA</TabsTrigger>
+              <TabsTrigger value="ocr">OCR</TabsTrigger>
+              <TabsTrigger value="wjec">WJEC</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="aqa" className="mt-6">
+              {subjectsTab === 'my-subjects' && userSubjects.length === 0 ? (
+                <div className="text-center py-12">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted/50 flex items-center justify-center">
+                    <BookOpen className="h-8 w-8 text-muted-foreground" />
+                  </div>
+                  <h4 className="text-lg font-semibold text-foreground mb-2">No subjects selected yet</h4>
+                  <p className="text-muted-foreground mb-4">Add subjects to your list to get started with personalized learning</p>
+                  <Button 
+                    onClick={() => setSubjectsTab('all-subjects')}
+                    className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"
+                  >
+                    Browse All Subjects
+                  </Button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {(subjectsTab === 'my-subjects' ? 
+                    (userSubjects.length > 0 ? sortedSubjects.filter(s => userSubjects.includes(s.id)) : []) 
+                    : allSubjects)
+                    .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language')
+                     .map((subject) => (
+                     <SubjectCard
+                       key={subject.id}
+                       subject={{
+                         ...subject,
+                         color: getSubjectColor(subject.id)
+                       }}
+                       progress={userProgress}
+                       onStartPractice={handlePractice}
+                       onTogglePin={togglePinSubject}
+                       isPinned={pinnedSubjects.includes(subject.id)}
+                       lastActivity={getLastActivity(subject.id)}
+                       userId={user?.id}
+                       onToggleUserSubject={subject.id === 'physics-aqa' ? handlePhysicsToggle : toggleUserSubject}
+                       isUserSubject={userSubjects.includes(subject.id)}
+                       showAddButton={subjectsTab === 'all-subjects'}
+                     />
+                     ))}
+                 </div>
+               )}
+            </TabsContent>
+
+            {['edexcel', 'ccea', 'ocr', 'wjec'].map((examBoard) => (
+              <TabsContent key={examBoard} value={examBoard} className="mt-6">
+                {subjectsTab === 'my-subjects' && userSubjects.length === 0 ? (
+                  <div className="text-center py-12">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted/50 flex items-center justify-center">
+                      <BookOpen className="h-8 w-8 text-muted-foreground" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-foreground mb-2">No subjects selected yet</h4>
+                    <p className="text-muted-foreground mb-4">Add subjects to your list to get started with personalized learning</p>
+                    <Button 
+                      onClick={() => setSubjectsTab('all-subjects')}
+                      className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"
+                    >
+                      Browse All Subjects
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    {(subjectsTab === 'my-subjects' ? 
+                      (userSubjects.length > 0 ? sortedSubjects.filter(s => userSubjects.includes(s.id)) : []) 
+                      : allSubjects)
+                       .filter((subject) => {
+                         // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, and physics-edexcel only in edexcel tab
+                         if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') {
+                           return examBoard === 'edexcel';
+                          }
+                          // Hide edexcel subjects from other tabs, show other subjects as coming soon
+                          return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel';
+                       })
+                         .sort((a, b) => {
+                            // In edexcel tab, put maths-edexcel first, then business-edexcel-igcse, then chemistry-edexcel, then physics-edexcel
+                            if (examBoard === 'edexcel') {
+                              if (a.id === 'maths-edexcel') return -1;
+                              if (b.id === 'maths-edexcel') return 1;
+                              if (a.id === 'business-edexcel-igcse') return -1;
+                              if (b.id === 'business-edexcel-igcse') return 1;
+                              if (a.id === 'chemistry-edexcel') return -1;
+                              if (b.id === 'chemistry-edexcel') return 1;
+                              if (a.id === 'physics-edexcel') return -1;
+                              if (b.id === 'physics-edexcel') return 1;
+                            }
+                           return 0;
+                         })
+                     .map((subject) => {
+                       // Modify subject name for Edexcel subjects to remove brackets
+                       let modifiedSubject = { ...subject };
+                         if (examBoard === 'edexcel') {
+                           if (subject.id === 'maths-edexcel') {
+                             modifiedSubject = { ...subject, name: 'Mathematics' };
+                           } else if (subject.id === 'business-edexcel-igcse') {
+                             modifiedSubject = { ...subject, name: 'IGCSE Business' };
+                           } else if (subject.id === 'chemistry-edexcel') {
+                             modifiedSubject = { ...subject, name: 'Chemistry' };
+                          } else if (subject.id === 'physics-edexcel') {
+                            modifiedSubject = { ...subject, name: 'Physics' };
+                          }
+                         }
+                       
+                         return (
+                         <SubjectCard
+                           key={subject.id}
+                           subject={{
+                             ...modifiedSubject,
+                             color: getSubjectColor(subject.id)
+                           }}
+                           progress={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? userProgress : []}
+                           onStartPractice={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? handlePractice : () => {}}
+                           onTogglePin={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? togglePinSubject : () => {}}
+                           isPinned={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? pinnedSubjects.includes(subject.id) : false}
+                           lastActivity={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel' ? getLastActivity(subject.id) : null}
+                           comingSoon={!((subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard === 'edexcel')}
+                           userId={user?.id}
+                           onToggleUserSubject={toggleUserSubject}
+                           isUserSubject={userSubjects.includes(subject.id)}
+                           showAddButton={subjectsTab === 'all-subjects'}
+                     />
+                        );
+                       })}
+                  </div>
+                )}
+              </TabsContent>
+            ))}
+          </Tabs>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" style={{ display: 'none' }}>
+          </div>
+        </div>
+
+        {/* Premium Progress Overview */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <ProgressCard
+            title="Overall Progress"
+            value={`${getOverallProgress()}%`}
+            subtitle="Average across subjects"
+            progress={getOverallProgress()}
+            icon={TrendingUp}
+            color="bg-gradient-to-br from-primary via-primary/90 to-primary/80"
+            trend={userProgress.length > 0 ? 5 : undefined}
+          />
+          
+          <ProgressCard
+            title="Topics Mastered"
+            value={getMasteredTopics()}
+            subtitle="85%+ average score"
+            icon={Trophy}
+            color="bg-gradient-to-br from-emerald-500 to-emerald-600"
+          />
+          
+          <ProgressCard
+            title="Practice Sessions"
+            value={userProgress.reduce((sum, p) => sum + p.attempts, 0)}
+            subtitle="Questions completed"
+            icon={BookOpen}
+            color="bg-gradient-to-br from-blue-500 to-blue-600"
+          />
+          
+          <ProgressCard
+            title="Study Streak"
+            value={`${getStudyStreak()} days`}
+            subtitle="Keep it up!"
+            icon={Flame}
+            color="bg-gradient-to-br from-orange-500 to-red-500"
+          />
+        </div>
+
+        {/* Premium Analytics Section */}
+        <div className="grid lg:grid-cols-3 gap-6 mb-8">
           <div className="lg:col-span-1 space-y-6">
             <AOBreakdown userProgress={userProgress} />
             <GoalsSection />
@@ -1007,66 +1256,91 @@ const Dashboard = () => {
           </div>
         </div>
 
+
         {/* Premium Locked Analytics */}
         <div className="space-y-6">
           <div className="flex items-center space-x-3 mb-6">
             <Crown className="h-6 w-6 text-amber-500" />
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200">Premium Analytics</h2>
+            <h3 className="text-2xl font-bold text-foreground">Coming Soon</h3>
+            <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0">
+              Pro Feature
+            </Badge>
           </div>
-          
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-             <PredictivePerformanceCard userProgress={userProgress} />
-             <OptimalStudyTimeCard />
-             <PremiumAnalyticsCard 
-               title="Premium Analytics"
-               description="Advanced insights"
-               icon={LineChart}
-               gradient="from-purple-500 to-pink-500"
-             />
-           </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <PremiumAnalyticsCard
+              title="Learning Retention"
+              description="Track how well you retain information over time with spaced repetition analysis"
+              icon={Brain}
+              gradient="from-purple-500 to-indigo-600"
+              comingSoon={true}
+            />
+            
+            <PremiumAnalyticsCard
+              title="Learning Velocity"
+              description="Measure and optimize your knowledge acquisition speed"
+              icon={Zap}
+              gradient="from-orange-500 to-red-500"
+              comingSoon={true}
+            />
+            
+            <PremiumAnalyticsCard
+              title="Concept Mapping"
+              description="Visualize connections between topics and identify knowledge gaps"
+              icon={Target}
+              gradient="from-pink-500 to-rose-600"
+              comingSoon={true}
+            />
+          </div>
+
+          <div className="text-center py-8">
+            <div className="space-y-4">
+              <div className="flex items-center justify-center space-x-2">
+                <Sparkles className="h-6 w-6 text-violet-500 dark:text-violet-400" />
+                <h4 className="text-xl font-bold text-foreground">Advanced Analytics Coming Soon</h4>
+                <Sparkles className="h-6 w-6 text-violet-500 dark:text-violet-400" />
+              </div>
+              <p className="text-muted-foreground max-w-md mx-auto">
+                We're working hard to bring you powerful data-driven insights to supercharge your GCSE revision. 
+                Stay tuned for updates!
+              </p>
+              <Button 
+                variant="outline" 
+                className={`
+                  px-6 py-2 rounded-xl transition-all duration-300 transform
+                  ${isNotifyClicked 
+                    ? 'bg-emerald-100 border-emerald-300 text-emerald-700 scale-105 shadow-lg' 
+                    : 'bg-white/80 backdrop-blur-sm border-violet-200 text-violet-700 hover:bg-violet-50 hover:border-violet-300'
+                  }
+                `}
+                onClick={handleNotifyClick}
+              >
+                {isNotifyClicked ? <CheckCircle className="h-4 w-4 mr-2" /> : <Bell className="h-4 w-4 mr-2" />}
+                {isNotifyClicked ? 'We\'ll Notify You!' : 'Notify Me When Ready'}
+              </Button>
+            </div>
+          </div>
         </div>
-
-        {/* Predicted GCSE Grades Section */}
-        <PredictedGradesGraph userProgress={userProgress} />
-
-        {/* Predicted 2026 Questions Section */}
-        <PredictedQuestionsSection />
-
-        {/* Progress Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <ProgressCard
-            title="Questions Answered"
-            value="127"
-            subtitle="This week"
-            icon={HelpCircle}
-            color="bg-gradient-to-br from-green-500 to-green-600"
-          />
-          
-          <ProgressCard
-            title="Average Score"
-            value="78%"
-            subtitle="Across all subjects"
-            icon={TrendingUp}
-            color="bg-gradient-to-br from-blue-500 to-blue-600"
-          />
-          
-          <ProgressCard
-            title="Study Streak"
-            value={`${getStudyStreak()} days`}
-            subtitle="Keep it up!"
-            icon={Flame}
-            color="bg-gradient-to-br from-orange-500 to-red-500"
-          />
-        </div>
-
-        {/* Hall of Fame Section */}
-        <PublicStreakProfiles />
       </div>
 
       {/* Streak Celebration Modal */}
       <StreakCelebration
         isVisible={showStreakCelebration}
-        onClose={() => setShowStreakCelebration(false)}
+        onClose={async () => {
+          setShowStreakCelebration(false);
+          const streak = getStudyStreak();
+          // Mark the appropriate celebration as viewed
+          if (streak >= 14) {
+            const hasSeenCelebration = await hasSeenStreakCelebration(14);
+            if (!hasSeenCelebration) {
+              await markStreakCelebrationViewed(14);
+            } else {
+              await markStreakCelebrationViewed(7);
+            }
+          } else {
+            await markStreakCelebrationViewed(7);
+          }
+        }}
         streakDays={getStudyStreak()}
         rewardText={getStudyStreak() >= 14 ? "Create Your Public Profile & Get Recognition" : "Study Playlist & Background Sounds"}
         rewardEmoji={getStudyStreak() >= 14 ? "👤" : "🎵"}
