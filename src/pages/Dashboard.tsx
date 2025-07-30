@@ -476,10 +476,11 @@ const Dashboard = () => {
     return Math.round(totalScore / userProgress.length);
   };
 
-  const [currentStreak, setCurrentStreak] = useState(0);
+  const [currentStreak, setCurrentStreak] = useState(3); // Temporary: Set to 3 for testing
 
   const getStudyStreak = () => {
-    return currentStreak;
+    // Temporary hardcode for testing - you should see 3 days
+    return 3;
   };
 
   // Record user activity and update streak
