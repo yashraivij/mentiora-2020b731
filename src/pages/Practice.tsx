@@ -791,8 +791,12 @@ const Practice = () => {
               <Button onClick={() => navigate(`/subject/${subjectId}`)}>
                 Back to {subject?.name}
               </Button>
-              <Button variant="outline" onClick={() => window.location.reload()}>
-                Try Again
+              <Button 
+                variant="default" 
+                onClick={() => window.location.reload()}
+                className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-200"
+              >
+                Practice More Questions
               </Button>
             </div>
           </CardContent>
