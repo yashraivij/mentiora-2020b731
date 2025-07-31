@@ -90,6 +90,13 @@ GCSE MODEL ANSWER REQUIREMENTS:
 11. LINE RESTRICTION COMPLIANCE: For English Language questions, only refer to content from the specific lines mentioned in the question
 12. PARAGRAPH FORMAT: For English Language analysis questions, write in flowing paragraph format, NOT numbered points
 
+CRITICAL ACCURACY REQUIREMENTS:
+- MATHEMATICAL PRECISION: For Mathematics questions, ensure all calculations are 100% correct with proper notation
+- NO CALCULATION ERRORS: Double-check all arithmetic, algebra, and numerical operations
+- PROPER MATHEMATICAL NOTATION: Use correct symbols, avoid notation errors like "10^7 - -3" (should be "10^(7+3)" or "10^10")
+- SCIENTIFIC ACCURACY: For Science questions, ensure all facts, formulas, and processes are scientifically correct
+- VERIFICATION: Always verify calculations and facts before including them in the answer
+
 CRITICAL FOR ENGLISH LANGUAGE:
 - If the question asks about "lines 1 to 3" or "lines 4 to 6", ONLY use content from those specific lines
 - Do NOT include content from other parts of the text
@@ -99,7 +106,7 @@ CRITICAL FOR ENGLISH LANGUAGE:
 SUBJECT: ${subjectId} GCSE
 MARK ALLOCATION: ${marks} marks
 
-Generate the perfect GCSE-level answer that would appear in official mark schemes.`;
+Generate the perfect GCSE-level answer that would appear in official mark schemes. Ensure complete accuracy in all calculations, facts, and content.`;
 
     const userPrompt = `Question: ${question}
 

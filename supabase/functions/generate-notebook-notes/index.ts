@@ -107,6 +107,14 @@ Create ultra-clear, Grade 9-level revision notes in this EXACT format. Use prope
 
 6. NEXT STEP: [1 sentence suggesting what to practice next, starting with capital letter]
 
+CRITICAL ACCURACY REQUIREMENTS:
+- MATHEMATICAL PRECISION: Ensure all calculations are 100% correct with proper notation
+- NO CALCULATION ERRORS: Verify all arithmetic, algebra, and numerical operations before including
+- PROPER NOTATION: Use correct mathematical symbols and avoid errors like "10^7 - -3" (should be "10^(7+3)" or "10^10")
+- SCIENTIFIC ACCURACY: Ensure all facts, formulas, and processes are scientifically correct
+- DOUBLE-CHECK: Always verify any calculations or worked examples before including them
+- FACTUAL VERIFICATION: Cross-check all statements against GCSE specifications
+
 Style guide:
 - Grade 9 explaining to Grade 9 tone
 - Zero fluff, maximum clarity
@@ -115,6 +123,7 @@ Style guide:
 - Use "Don't do this → ... / Do this → ..." for pitfalls
 - Keep it exam-focused and practical
 - ALWAYS start sentences with capital letters
+- Ensure complete factual and mathematical accuracy
 
 Generate the notes now:`;
 

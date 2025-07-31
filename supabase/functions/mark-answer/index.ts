@@ -130,10 +130,14 @@ GCSE MARKING STANDARDS - CRITICAL REQUIREMENTS:
    - NEVER declare a student's mathematical answer as incorrect without first verifying what the correct answer actually is
    - For algebraic expressions, check if the student's answer is mathematically equivalent to the correct form
    - Example: if asked to expand (2x + 3)² - (x - 1)(x + 4), work it out: (2x + 3)² = 4x² + 12x + 9, (x - 1)(x + 4) = x² + 3x - 4, so the answer is 4x² + 12x + 9 - (x² + 3x - 4) = 3x² + 9x + 13
+   - NOTATION ACCURACY: Reject incorrect mathematical notation like "10^7 - -3" (should be "10^(7+3)" or "10^10")
+   - CALCULATION VERIFICATION: Double-check all arithmetic operations for accuracy
+   - SCIENTIFIC NOTATION: Ensure proper format for standard form (e.g., 3.2 × 10^7 not 32 × 10^6)
    - Accept equivalent mathematical answers but require proper units and significant figures as specified in GCSE mark schemes
    - If the student's numerical answer is correct and working is not specifically required, award full marks
    - If working is required and not shown, deduct marks appropriately but acknowledge the correct final answer
    - Double-check all formula applications and arithmetic before making any marking decisions
+   - FACTUAL ACCURACY: Verify all scientific facts, formulas, and constants are correct
 6. COMMAND WORDS: Strictly apply GCSE command word requirements:
    - "State/Give": Simple facts only (no explanation needed)
    - "Describe": Detailed account without explanation
