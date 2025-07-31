@@ -1271,6 +1271,14 @@ const Dashboard = () => {
             />
             
             <PremiumAnalyticsCard
+              title="Stress Monitor"
+              description="AI-powered stress detection and recommendations for optimal learning"
+              icon={Brain}
+              gradient="from-emerald-500 to-teal-600"
+              comingSoon={true}
+            />
+            
+            <PremiumAnalyticsCard
               title="Concept Mapping"
               description="Visualize connections between topics and identify knowledge gaps"
               icon={Target}
