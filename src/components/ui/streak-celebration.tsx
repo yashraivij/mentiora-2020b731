@@ -150,7 +150,7 @@ export function StreakCelebration({ isVisible, onClose, streakDays, rewardText, 
                         {streakDays} Day Study Streak Complete!
                       </p>
                       <p className="text-muted-foreground">
-                        You've unlocked your first reward!
+                        You've unlocked your second reward!
                       </p>
                     </div>
 

@@ -6,6 +6,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
 import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Gamepad2 } from "lucide-react";
+import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
 import { useState, useEffect } from "react";
@@ -768,17 +769,37 @@ const Dashboard = () => {
                     </div>
                     
                     {/* Compact streak display */}
-                    <div className="space-y-2">
-                      <h3 className="text-4xl font-bold bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent tracking-tight">
-                        {getStudyStreak()}
-                      </h3>
-                      <div className="flex items-center justify-center space-x-2">
-                        <span className="text-lg font-semibold bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
-                          Day{getStudyStreak() !== 1 ? 's' : ''} Strong!
-                        </span>
-                        <div className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full animate-pulse" />
-                      </div>
-                    </div>
+                     <div className="space-y-2">
+                       <motion.h3 
+                         key={getStudyStreak()}
+                         initial={{ scale: 0.5, rotate: -180, opacity: 0 }}
+                         animate={{ scale: 1, rotate: 0, opacity: 1 }}
+                         transition={{ 
+                           type: "spring", 
+                           damping: 15, 
+                           stiffness: 300,
+                           duration: 0.8 
+                         }}
+                         className="text-4xl font-bold bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent tracking-tight"
+                       >
+                         {getStudyStreak()}
+                       </motion.h3>
+                       <div className="flex items-center justify-center space-x-2">
+                         <motion.span 
+                           initial={{ y: 10, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.3 }}
+                           className="text-lg font-semibold bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent"
+                         >
+                           Day{getStudyStreak() !== 1 ? 's' : ''} Strong!
+                         </motion.span>
+                         <motion.div 
+                           animate={{ scale: [1, 1.2, 1] }}
+                           transition={{ duration: 2, repeat: Infinity }}
+                           className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full animate-pulse" 
+                         />
+                       </div>
+                     </div>
                   </div>
 
                   {/* Compact call to action */}
