@@ -130,9 +130,9 @@ const Dashboard = () => {
       }
 
       const totalEntries = entries?.length || 0;
-      // Calculate time saved: Assume each note saves 15 minutes of manual revision time
-      const timeSavedMinutes = totalEntries * 15;
-      const newTimeSavedHours = Math.round(timeSavedMinutes / 60 * 10) / 10;
+      // Calculate time saved: Assume each note saves 10 minutes of manual revision time (more realistic)
+      const timeSavedMinutes = totalEntries * 10;
+      const newTimeSavedHours = Math.round(timeSavedMinutes / 6) / 10; // Convert to hours and round to 1 decimal
 
       console.log('Time saved calculation:', { 
         totalEntries, 

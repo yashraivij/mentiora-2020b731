@@ -50,17 +50,18 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
   };
 
   const getTimeSavedDisplay = () => {
-    const days = Math.floor(timeSavedHours / 24);
-    const remainingHours = timeSavedHours - (days * 24);
+    const totalHours = Math.round(timeSavedHours * 10) / 10; // Round to 1 decimal place
+    const days = Math.floor(totalHours / 24);
+    const remainingHours = Math.round((totalHours - (days * 24)) * 10) / 10; // Proper rounding
     
     if (days >= 1) {
-      if (remainingHours > 0) {
+      if (remainingHours >= 0.1) { // Only show remaining hours if >= 0.1
         return `${days}d ${remainingHours}h`;
       } else {
         return `${days} day${days > 1 ? 's' : ''}`;
       }
     } else {
-      return `${timeSavedHours}h`;
+      return `${totalHours}h`;
     }
   };
 
