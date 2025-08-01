@@ -155,34 +155,6 @@ const Dashboard = () => {
       fetchCurrentStreak();
     }
     
-    const checkStreakCelebration = async () => {
-      // Show celebration for streak achievements (prioritize highest unseen milestone)
-      const streak = getStudyStreak();
-      
-      // Check 14-day streak first (highest milestone)
-      if (streak >= 14) {
-        const hasSeenCelebration = await hasSeenStreakCelebration(14);
-        if (!hasSeenCelebration) {
-          setTimeout(() => {
-            setShowStreakCelebration(true);
-          }, 1000); // Delay to let page load first
-          return;
-        }
-      }
-      
-      // Check 7-day streak if 14-day already seen or not reached
-      if (streak >= 7) {
-        const hasSeenCelebration = await hasSeenStreakCelebration(7);
-        if (!hasSeenCelebration) {
-          setTimeout(() => {
-            setShowStreakCelebration(true);
-          }, 1000); // Delay to let page load first
-        }
-      }
-    };
-
-    checkStreakCelebration();
-    
   }, [user?.id]);
 
   const loadWeakTopicsFromDatabase = async () => {
@@ -510,6 +482,32 @@ const Dashboard = () => {
     
     // Simulate a 7-day streak to show celebration
     setCurrentStreak(7);
+    
+    // Check for streak celebration after setting the streak
+    setTimeout(async () => {
+      const streak = 7; // Use the streak value we just set
+      
+      // Check 14-day streak first (highest milestone)
+      if (streak >= 14) {
+        const hasSeenCelebration = await hasSeenStreakCelebration(14);
+        if (!hasSeenCelebration) {
+          setTimeout(() => {
+            setShowStreakCelebration(true);
+          }, 1000);
+          return;
+        }
+      }
+      
+      // Check 7-day streak if 14-day already seen or not reached
+      if (streak >= 7) {
+        const hasSeenCelebration = await hasSeenStreakCelebration(7);
+        if (!hasSeenCelebration) {
+          setTimeout(() => {
+            setShowStreakCelebration(true);
+          }, 1000);
+        }
+      }
+    }, 100); // Small delay to ensure state is updated
   };
 
   const getSubjectProgress = (subjectId: string) => {
