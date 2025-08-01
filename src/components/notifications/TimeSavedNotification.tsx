@@ -69,37 +69,54 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 50 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: -50 }}
+          initial={{ opacity: 0, scale: 0.8, x: 100, y: -50 }}
+          animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+          exit={{ opacity: 0, scale: 0.8, x: 100, y: -50 }}
           transition={{ 
             type: "spring", 
-            damping: 25, 
-            stiffness: 300,
-            duration: 0.5 
+            damping: 20, 
+            stiffness: 400,
+            duration: 0.6 
           }}
-          className="fixed bottom-6 right-6 z-50 max-w-sm"
+          className="fixed top-6 right-6 z-50 max-w-sm"
         >
-          <Card className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 dark:from-emerald-950/90 dark:via-green-950/90 dark:to-teal-950/90 border-emerald-200/50 dark:border-emerald-700/50 shadow-2xl shadow-emerald-500/20 backdrop-blur-xl">
-            {/* Animated sparkles background */}
+          <Card className="relative overflow-hidden bg-gradient-to-br from-violet-50 via-purple-50 to-pink-50 dark:from-violet-950/95 dark:via-purple-950/95 dark:to-pink-950/95 border-violet-200/60 dark:border-violet-700/60 shadow-2xl shadow-violet-500/25 backdrop-blur-xl">
+            {/* Animated sparkles and gradient overlay */}
             <div className="absolute inset-0 overflow-hidden">
+              {/* Premium gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 via-purple-500/10 to-pink-500/10 dark:from-violet-400/20 dark:via-purple-400/20 dark:to-pink-400/20" />
+              
+              {/* Multiple sparkles with different animations */}
               <motion.div
                 animate={{ 
-                  scale: [1, 1.2, 1],
-                  rotate: [0, 90, 180, 270, 360]
+                  scale: [1, 1.3, 1],
+                  rotate: [0, 120, 240, 360],
+                  opacity: [0.3, 0.7, 0.3]
                 }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-4 -right-4 w-8 h-8 text-emerald-300/30 dark:text-emerald-400/20"
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-2 -right-2 w-6 h-6 text-violet-400/50 dark:text-violet-300/40"
               >
                 <Sparkles className="w-full h-full" />
               </motion.div>
               <motion.div
                 animate={{ 
                   scale: [1.2, 1, 1.2],
-                  rotate: [360, 270, 180, 90, 0]
+                  rotate: [360, 240, 120, 0],
+                  opacity: [0.4, 0.8, 0.4]
                 }}
-                transition={{ duration: 6, repeat: Infinity, ease: "linear", delay: 1 }}
-                className="absolute -bottom-2 -left-2 w-6 h-6 text-teal-300/30 dark:text-teal-400/20"
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                className="absolute top-1/2 -left-1 w-5 h-5 text-purple-400/50 dark:text-purple-300/40"
+              >
+                <Sparkles className="w-full h-full" />
+              </motion.div>
+              <motion.div
+                animate={{ 
+                  scale: [1, 1.4, 1],
+                  rotate: [0, 180, 360],
+                  opacity: [0.2, 0.6, 0.2]
+                }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute -bottom-1 right-1/3 w-4 h-4 text-pink-400/50 dark:text-pink-300/40"
               >
                 <Sparkles className="w-full h-full" />
               </motion.div>
@@ -111,18 +128,18 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                 variant="ghost"
                 size="sm"
                 onClick={handleClose}
-                className="absolute top-2 right-2 w-8 h-8 p-0 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400"
+                className="absolute top-2 right-2 w-8 h-8 p-0 hover:bg-violet-100 dark:hover:bg-violet-900/50 text-violet-600 dark:text-violet-400"
               >
                 <X className="h-4 w-4" />
               </Button>
 
-              {/* Header with icon */}
+              {/* Header with premium icon */}
               <div className="flex items-center space-x-3 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <div className="w-12 h-12 bg-gradient-to-br from-violet-500 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg shadow-violet-500/30">
                   <Clock className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <Badge className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg mb-1">
+                  <Badge className="bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 text-white shadow-lg mb-1 border-0">
                     <Crown className="h-3 w-3 mr-1" />
                     Time Saved!
                   </Badge>
@@ -137,27 +154,27 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                   transition={{ delay: 0.2, type: "spring", damping: 20 }}
                   className="text-center"
                 >
-                  <div className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 dark:from-emerald-400 dark:to-teal-400 bg-clip-text text-transparent mb-2">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 dark:from-violet-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2">
                     {getTimeSavedDisplay()}
                   </div>
-                  <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-300 mb-1">
+                  <p className="text-sm font-semibold text-violet-700 dark:text-violet-300 mb-1">
                     Total Time Saved
                   </p>
-                  <p className="text-xs text-emerald-600/80 dark:text-emerald-400/80">
+                  <p className="text-xs text-violet-600/80 dark:text-violet-400/80">
                     with AI Auto-Notes
                   </p>
                 </motion.div>
 
-                <div className="bg-white/60 dark:bg-emerald-900/30 rounded-xl p-4 border border-emerald-200/50 dark:border-emerald-700/50">
-                  <p className="text-sm font-medium text-emerald-800 dark:text-emerald-200 text-center leading-relaxed">
+                <div className="bg-white/70 dark:bg-violet-900/40 rounded-xl p-4 border border-violet-200/60 dark:border-violet-700/60 backdrop-blur-sm">
+                  <p className="text-sm font-medium text-violet-800 dark:text-violet-200 text-center leading-relaxed">
                     {getEncouragingMessage()}
                   </p>
                 </div>
 
                 {/* Progress indicator */}
                 <div className="flex items-center justify-center space-x-2">
-                  <TrendingUp className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                  <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                  <TrendingUp className="h-4 w-4 text-violet-600 dark:text-violet-400" />
+                  <span className="text-xs font-medium text-violet-600 dark:text-violet-400">
                     Keep going strong!
                   </span>
                 </div>
@@ -173,7 +190,7 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                 <Button
                   onClick={() => window.location.href = '/notebook'}
                   size="sm"
-                  className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white shadow-lg hover:shadow-xl transition-all duration-200"
+                  className="bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 hover:from-violet-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl transition-all duration-200"
                 >
                   <BookOpen className="h-3 w-3 mr-1" />
                   View Notes

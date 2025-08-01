@@ -140,23 +140,31 @@ const Dashboard = () => {
         storedPreviousTime
       });
 
-      // Show notification if time saved has increased or if first time user with entries
+      // Show notification only for first-time users who have actually saved time
+      // or when existing users increase their time saved
       const hasIncrease = newTimeSavedHours > storedPreviousTime;
-      const isFirstTime = storedPreviousTime === 0 && newTimeSavedHours > 0;
+      const isFirstTimeWithSavings = storedPreviousTime === 0 && newTimeSavedHours > 0;
       
-      if (hasIncrease || isFirstTime) {
-        console.log('🎉 Triggering time saved notification!', { 
-          hasIncrease, 
-          isFirstTime, 
+      if (hasIncrease && storedPreviousTime > 0) {
+        // Existing user with increased time saved
+        console.log('🎉 Triggering time saved notification for existing user!', { 
           newTime: newTimeSavedHours, 
           oldTime: storedPreviousTime 
         });
         setShowTimeSavedNotification(true);
-        
-        // Store new value immediately after triggering notification
         localStorage.setItem(`mentiora_time_saved_${user.id}`, newTimeSavedHours.toString());
         
-        // Auto-hide notification after 10 seconds
+        setTimeout(() => {
+          setShowTimeSavedNotification(false);
+        }, 10000);
+      } else if (isFirstTimeWithSavings) {
+        // First-time user who has actually saved time
+        console.log('🎉 Triggering time saved notification for first-time user!', { 
+          timeSaved: newTimeSavedHours 
+        });
+        setShowTimeSavedNotification(true);
+        localStorage.setItem(`mentiora_time_saved_${user.id}`, newTimeSavedHours.toString());
+        
         setTimeout(() => {
           setShowTimeSavedNotification(false);
         }, 10000);
