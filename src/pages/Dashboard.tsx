@@ -504,12 +504,12 @@ const Dashboard = () => {
     }
   };
 
-  // Fetch current streak from database - showing 3-day streak
+  // Fetch current streak from database - showing 7-day streak
   const fetchCurrentStreak = async () => {
     if (!user?.id) return;
     
-    // Simulate a 3-day streak as if user just logged in
-    setCurrentStreak(3);
+    // Simulate a 7-day streak to show celebration
+    setCurrentStreak(7);
   };
 
   const getSubjectProgress = (subjectId: string) => {
