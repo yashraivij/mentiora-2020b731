@@ -580,8 +580,14 @@ const Dashboard = () => {
 
       const currentDate = new Date();
       
-      // Check for consecutive days starting from today or yesterday
-      for (let i = 0; i < 365; i++) { // Maximum reasonable streak
+      // Check if user has activity today
+      const hasActivityToday = activityDates.has(today);
+      
+      // Start checking from today if has activity, otherwise from yesterday
+      let startDay = hasActivityToday ? 0 : 1;
+      
+      // Check for consecutive days
+      for (let i = startDay; i < 365; i++) {
         const checkDate = new Date(currentDate);
         checkDate.setDate(currentDate.getDate() - i);
         const dateStr = checkDate.toISOString().split('T')[0];
@@ -589,10 +595,6 @@ const Dashboard = () => {
         if (activityDates.has(dateStr)) {
           streak++;
         } else {
-          // Allow missing today if we're checking from today
-          if (i === 0 && dateStr === today) {
-            continue;
-          }
           break;
         }
       }
