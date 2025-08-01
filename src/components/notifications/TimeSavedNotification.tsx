@@ -30,7 +30,15 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
   };
 
   const getEncouragingMessage = () => {
-    if (timeSavedHours >= 10) {
+    const days = Math.floor(timeSavedHours / 24);
+    
+    if (days >= 2) {
+      return `Incredible! You've saved over ${days} whole days of study time!`;
+    } else if (days >= 1) {
+      return "Amazing! You've saved over a whole day of study time!";
+    } else if (timeSavedHours >= 20) {
+      return "Outstanding! You've saved over 20 hours with smart notes!";
+    } else if (timeSavedHours >= 10) {
       return "You're absolutely crushing it! That's over 10 hours saved!";
     } else if (timeSavedHours >= 5) {
       return "Amazing progress! You've saved so much time with smart notes!";
@@ -38,6 +46,21 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
       return "Great work! Your AI notes are saving you precious study time!";
     } else {
       return "Fantastic! Every minute saved adds up to success!";
+    }
+  };
+
+  const getTimeSavedDisplay = () => {
+    const days = Math.floor(timeSavedHours / 24);
+    const remainingHours = timeSavedHours - (days * 24);
+    
+    if (days >= 1) {
+      if (remainingHours > 0) {
+        return `${days}d ${remainingHours}h`;
+      } else {
+        return `${days} day${days > 1 ? 's' : ''}`;
+      }
+    } else {
+      return `${timeSavedHours}h`;
     }
   };
 
@@ -114,7 +137,7 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                   className="text-center"
                 >
                   <div className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 dark:from-emerald-400 dark:to-teal-400 bg-clip-text text-transparent mb-2">
-                    {timeSavedHours}h
+                    {getTimeSavedDisplay()}
                   </div>
                   <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-300 mb-1">
                     Total Time Saved

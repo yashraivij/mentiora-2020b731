@@ -115,6 +115,10 @@ const Dashboard = () => {
     if (!user?.id) return;
 
     try {
+      // Get the stored previous value first
+      const savedTimeSaved = localStorage.getItem(`mentiora_time_saved_${user.id}`);
+      const storedPreviousTime = savedTimeSaved ? parseFloat(savedTimeSaved) : 0;
+
       const { data: entries, error } = await supabase
         .from('notebook_entries')
         .select('id')
@@ -133,24 +137,26 @@ const Dashboard = () => {
       console.log('Time saved calculation:', { 
         totalEntries, 
         newTimeSavedHours, 
-        previousTimeSaved,
-        shouldShow: newTimeSavedHours > previousTimeSaved 
+        storedPreviousTime,
+        shouldShow: newTimeSavedHours > storedPreviousTime 
       });
 
-      // Check if time saved has increased (show notification on any increase, including first time)
-      if (newTimeSavedHours > previousTimeSaved) {
-        console.log('Showing time saved notification!');
+      // Check if time saved has increased compared to stored value
+      if (newTimeSavedHours > storedPreviousTime) {
+        console.log('Showing time saved notification! New:', newTimeSavedHours, 'Previous:', storedPreviousTime);
         setShowTimeSavedNotification(true);
         
-        // Auto-hide notification after 8 seconds
+        // Auto-hide notification after 10 seconds
         setTimeout(() => {
           setShowTimeSavedNotification(false);
-        }, 8000);
+        }, 10000);
       }
 
+      // Update states
       setTimeSavedHours(newTimeSavedHours);
+      setPreviousTimeSaved(newTimeSavedHours);
       
-      // Store in localStorage for comparison on next load
+      // Store new value in localStorage for next comparison
       localStorage.setItem(`mentiora_time_saved_${user.id}`, newTimeSavedHours.toString());
     } catch (error) {
       console.error('Error calculating time saved:', error);
@@ -195,7 +201,7 @@ const Dashboard = () => {
       // Check and update public profile for 14+ day streaks
       await checkAndUpdatePublicProfile();
 
-      // Initialize previous time saved from localStorage
+      // Initialize previous time saved from localStorage (this happens before loadTimeSavedStats)
       const savedTimeSaved = localStorage.getItem(`mentiora_time_saved_${user.id}`);
       if (savedTimeSaved) {
         setPreviousTimeSaved(parseFloat(savedTimeSaved));
@@ -203,14 +209,6 @@ const Dashboard = () => {
 
       // Load and track time saved from notebook entries
       await loadTimeSavedStats();
-
-      // For testing: Force show notification if user has any notebook entries
-      setTimeout(() => {
-        if (timeSavedHours > 0) {
-          console.log('Force showing notification for testing');
-          setShowTimeSavedNotification(true);
-        }
-      }, 2000);
 
       // Check for recommendations on dashboard load
       console.log('Dashboard loading, checking for weak topic recommendations...');
