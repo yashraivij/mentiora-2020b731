@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
 import { useState, useEffect } from "react";
+import { TimeSavedNotification } from "@/components/notifications/TimeSavedNotification";
 import { ProgressCard } from "@/components/dashboard/ProgressCard";
 import { SubjectCard } from "@/components/dashboard/SubjectCard";
 import { WeakTopicsSection } from "@/components/dashboard/WeakTopicsSection";
@@ -55,6 +56,9 @@ const Dashboard = () => {
   const [userSubjects, setUserSubjects] = useState<string[]>([]);
   const [subjectsTab, setSubjectsTab] = useState<'my-subjects' | 'all-subjects'>('my-subjects');
   const [showStreakCelebration, setShowStreakCelebration] = useState(false);
+  const [showTimeSavedNotification, setShowTimeSavedNotification] = useState(false);
+  const [timeSavedHours, setTimeSavedHours] = useState(0);
+  const [previousTimeSaved, setPreviousTimeSaved] = useState(0);
 
   const {
     notification,
@@ -106,6 +110,41 @@ const Dashboard = () => {
     }
   };
 
+  // Load time saved statistics from notebook entries
+  const loadTimeSavedStats = async () => {
+    if (!user?.id) return;
+
+    try {
+      const { data: entries, error } = await supabase
+        .from('notebook_entries')
+        .select('id')
+        .eq('user_id', user.id);
+
+      if (error) {
+        console.error('Error loading notebook entries for time saved:', error);
+        return;
+      }
+
+      const totalEntries = entries?.length || 0;
+      // Calculate time saved: Assume each note saves 15 minutes of manual revision time
+      const timeSavedMinutes = totalEntries * 15;
+      const newTimeSavedHours = Math.round(timeSavedMinutes / 60 * 10) / 10;
+
+      // Check if time saved has increased
+      if (newTimeSavedHours > previousTimeSaved && previousTimeSaved > 0) {
+        setShowTimeSavedNotification(true);
+      }
+
+      setTimeSavedHours(newTimeSavedHours);
+      setPreviousTimeSaved(newTimeSavedHours);
+
+      // Store in localStorage for comparison on next load
+      localStorage.setItem(`mentiora_time_saved_${user.id}`, newTimeSavedHours.toString());
+    } catch (error) {
+      console.error('Error calculating time saved:', error);
+    }
+  };
+
   useEffect(() => {
     const loadUserData = async () => {
       if (!user?.id) return;
@@ -143,6 +182,15 @@ const Dashboard = () => {
 
       // Check and update public profile for 14+ day streaks
       await checkAndUpdatePublicProfile();
+
+      // Initialize previous time saved from localStorage
+      const savedTimeSaved = localStorage.getItem(`mentiora_time_saved_${user.id}`);
+      if (savedTimeSaved) {
+        setPreviousTimeSaved(parseFloat(savedTimeSaved));
+      }
+
+      // Load and track time saved from notebook entries
+      await loadTimeSavedStats();
 
       // Check for recommendations on dashboard load
       console.log('Dashboard loading, checking for weak topic recommendations...');
@@ -1357,6 +1405,13 @@ const Dashboard = () => {
         streakDays={getStudyStreak()}
         rewardText={getStudyStreak() >= 14 ? "Create Your Public Profile & Get Recognition" : "Study Playlist & Background Sounds"}
         rewardEmoji={getStudyStreak() >= 14 ? "👤" : "🎵"}
+      />
+
+      {/* Time Saved Notification */}
+      <TimeSavedNotification
+        timeSavedHours={timeSavedHours}
+        show={showTimeSavedNotification}
+        onClose={() => setShowTimeSavedNotification(false)}
       />
     </div>
   );
