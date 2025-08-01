@@ -130,14 +130,26 @@ const Dashboard = () => {
       const timeSavedMinutes = totalEntries * 15;
       const newTimeSavedHours = Math.round(timeSavedMinutes / 60 * 10) / 10;
 
-      // Check if time saved has increased
-      if (newTimeSavedHours > previousTimeSaved && previousTimeSaved > 0) {
+      console.log('Time saved calculation:', { 
+        totalEntries, 
+        newTimeSavedHours, 
+        previousTimeSaved,
+        shouldShow: newTimeSavedHours > previousTimeSaved 
+      });
+
+      // Check if time saved has increased (show notification on any increase, including first time)
+      if (newTimeSavedHours > previousTimeSaved) {
+        console.log('Showing time saved notification!');
         setShowTimeSavedNotification(true);
+        
+        // Auto-hide notification after 8 seconds
+        setTimeout(() => {
+          setShowTimeSavedNotification(false);
+        }, 8000);
       }
 
       setTimeSavedHours(newTimeSavedHours);
-      setPreviousTimeSaved(newTimeSavedHours);
-
+      
       // Store in localStorage for comparison on next load
       localStorage.setItem(`mentiora_time_saved_${user.id}`, newTimeSavedHours.toString());
     } catch (error) {
@@ -191,6 +203,14 @@ const Dashboard = () => {
 
       // Load and track time saved from notebook entries
       await loadTimeSavedStats();
+
+      // For testing: Force show notification if user has any notebook entries
+      setTimeout(() => {
+        if (timeSavedHours > 0) {
+          console.log('Force showing notification for testing');
+          setShowTimeSavedNotification(true);
+        }
+      }, 2000);
 
       // Check for recommendations on dashboard load
       console.log('Dashboard loading, checking for weak topic recommendations...');
