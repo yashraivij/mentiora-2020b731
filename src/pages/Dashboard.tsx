@@ -545,38 +545,89 @@ const Dashboard = () => {
     }
   };
 
-  // Fetch current streak from database - showing 7-day streak
+  // Fetch current streak from database
   const fetchCurrentStreak = async () => {
     if (!user?.id) return;
     
-    // Simulate a 7-day streak to show celebration
-    setCurrentStreak(7);
-    
-    // Check for streak celebration after setting the streak
-    setTimeout(async () => {
-      const streak = 7; // Use the streak value we just set
+    try {
+      const today = new Date().toISOString().split('T')[0];
       
-      // Check 14-day streak first (highest milestone)
-      if (streak >= 14) {
-        const hasSeenCelebration = await hasSeenStreakCelebration(14);
-        if (!hasSeenCelebration) {
-          setTimeout(() => {
-            setShowStreakCelebration(true);
-          }, 1000);
-          return;
+      // Get user activities for streak calculation
+      const { data: activities, error } = await supabase
+        .from('user_activities')
+        .select('created_at')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching activities for streak:', error);
+        setCurrentStreak(0);
+        return;
+      }
+
+      if (!activities || activities.length === 0) {
+        setCurrentStreak(0);
+        return;
+      }
+
+      // Calculate consecutive days
+      let streak = 0;
+      const activityDates = new Set(
+        activities.map(activity => 
+          new Date(activity.created_at).toISOString().split('T')[0]
+        )
+      );
+
+      const currentDate = new Date();
+      
+      // Check for consecutive days starting from today or yesterday
+      for (let i = 0; i < 365; i++) { // Maximum reasonable streak
+        const checkDate = new Date(currentDate);
+        checkDate.setDate(currentDate.getDate() - i);
+        const dateStr = checkDate.toISOString().split('T')[0];
+        
+        if (activityDates.has(dateStr)) {
+          streak++;
+        } else {
+          // Allow missing today if we're checking from today
+          if (i === 0 && dateStr === today) {
+            continue;
+          }
+          break;
         }
       }
+
+      setCurrentStreak(streak);
       
-      // Check 7-day streak if 14-day already seen or not reached
-      if (streak >= 7) {
-        const hasSeenCelebration = await hasSeenStreakCelebration(7);
-        if (!hasSeenCelebration) {
-          setTimeout(() => {
-            setShowStreakCelebration(true);
-          }, 1000);
+      // Check for streak celebration after setting the streak
+      setTimeout(async () => {        
+        // Check 14-day streak first (highest milestone)
+        if (streak >= 14) {
+          const hasSeenCelebration = await hasSeenStreakCelebration(14);
+          if (!hasSeenCelebration) {
+            setTimeout(() => {
+              setShowStreakCelebration(true);
+            }, 1000);
+            await markStreakCelebrationViewed(14);
+          }
         }
-      }
-    }, 100); // Small delay to ensure state is updated
+        
+        // Check 7-day streak if 14-day already seen or not reached
+        if (streak >= 7) {
+          const hasSeenCelebration = await hasSeenStreakCelebration(7);
+          if (!hasSeenCelebration) {
+            setTimeout(() => {
+              setShowStreakCelebration(true);
+            }, 1000);
+            await markStreakCelebrationViewed(7);
+          }
+        }
+      }, 500);
+      
+    } catch (error) {
+      console.error('Error calculating streak:', error);
+      setCurrentStreak(0);
+    }
   };
 
   const getSubjectProgress = (subjectId: string) => {
