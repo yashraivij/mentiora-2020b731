@@ -137,14 +137,24 @@ const Dashboard = () => {
       console.log('Time saved calculation:', { 
         totalEntries, 
         newTimeSavedHours, 
-        storedPreviousTime,
-        shouldShow: newTimeSavedHours > storedPreviousTime 
+        storedPreviousTime
       });
 
-      // Check if time saved has increased compared to stored value
-      if (newTimeSavedHours > storedPreviousTime) {
-        console.log('Showing time saved notification! New:', newTimeSavedHours, 'Previous:', storedPreviousTime);
+      // Show notification if time saved has increased or if first time user with entries
+      const hasIncrease = newTimeSavedHours > storedPreviousTime;
+      const isFirstTime = storedPreviousTime === 0 && newTimeSavedHours > 0;
+      
+      if (hasIncrease || isFirstTime) {
+        console.log('🎉 Triggering time saved notification!', { 
+          hasIncrease, 
+          isFirstTime, 
+          newTime: newTimeSavedHours, 
+          oldTime: storedPreviousTime 
+        });
         setShowTimeSavedNotification(true);
+        
+        // Store new value immediately after triggering notification
+        localStorage.setItem(`mentiora_time_saved_${user.id}`, newTimeSavedHours.toString());
         
         // Auto-hide notification after 10 seconds
         setTimeout(() => {
@@ -155,9 +165,6 @@ const Dashboard = () => {
       // Update states
       setTimeSavedHours(newTimeSavedHours);
       setPreviousTimeSaved(newTimeSavedHours);
-      
-      // Store new value in localStorage for next comparison
-      localStorage.setItem(`mentiora_time_saved_${user.id}`, newTimeSavedHours.toString());
     } catch (error) {
       console.error('Error calculating time saved:', error);
     }
