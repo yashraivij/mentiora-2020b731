@@ -36,7 +36,7 @@ const Login = () => {
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="flex items-center justify-center space-x-2 mb-4">
+          <div className="flex items-center justify-center mb-4">
             <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
               <img 
                 src="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png" 
@@ -44,7 +44,6 @@ const Login = () => {
                 className="w-5 h-5 object-contain"
               />
             </div>
-            <h1 className="text-2xl font-bold text-slate-900">Educlara</h1>
           </div>
           <CardTitle>Welcome Back</CardTitle>
           <CardDescription>
