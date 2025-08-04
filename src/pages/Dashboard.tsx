@@ -803,13 +803,13 @@ const Dashboard = () => {
                 <div className="w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg">
                   <img 
                     src="/lovable-uploads/99dd490e-1b20-4181-b127-6915d3c47932.png" 
-                    alt="Mentiora Logo" 
+                    alt="Examenta Logo" 
                     className="w-8 h-8"
                   />
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-                    Mentiora
+                    Examenta
                   </h1>
                   <div className="flex items-center space-x-2">
                     <Crown className="h-3 w-3 text-amber-500" />

@@ -235,13 +235,13 @@ const Index = () => {
             <div className="w-12 h-12 flex items-center justify-center">
               <motion.img 
                 src="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png" 
-                alt="Mentiora Logo" 
+                alt="Examenta Logo" 
                 className="w-10 h-10 object-contain"
                 whileHover={{ rotate: 12 }}
                 transition={{ duration: 0.3 }}
               />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Mentiora</h1>
+            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Examenta</h1>
           </motion.div>
           <div className="flex gap-3 mt-6 sm:mt-0">
             {user ? (
