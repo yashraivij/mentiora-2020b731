@@ -54,14 +54,6 @@ export const PremiumPaywall = ({
           <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-2xl shadow-lg animate-[spin_20s_linear_infinite]"></div>
           <div className="absolute inset-[2px] bg-white dark:bg-gray-900 rounded-[14px]"></div>
           
-          {/* Enhanced floating particles */}
-          <div className="absolute inset-0 overflow-hidden rounded-2xl">
-            <div className="absolute top-16 left-8 w-3 h-3 bg-purple-400 rounded-full animate-[bounce_2s_ease-in-out_infinite] shadow-lg"></div>
-            <div className="absolute top-28 right-12 w-2 h-2 bg-pink-400 rounded-full animate-[bounce_2.5s_ease-in-out_infinite_reverse] shadow-md"></div>
-            <div className="absolute bottom-20 left-16 w-2.5 h-2.5 bg-blue-400 rounded-full animate-[bounce_3s_ease-in-out_infinite] shadow-lg"></div>
-            <div className="absolute bottom-32 right-8 w-2 h-2 bg-cyan-400 rounded-full animate-[bounce_1.8s_ease-in-out_infinite_reverse] shadow-md"></div>
-            <div className="absolute top-40 left-1/2 w-1.5 h-1.5 bg-yellow-400 rounded-full animate-[bounce_2.2s_ease-in-out_infinite] shadow-sm"></div>
-          </div>
           
           {/* Premium Header */}
           <div className="relative bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 p-4 text-center overflow-hidden">
