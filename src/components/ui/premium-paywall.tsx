@@ -45,27 +45,27 @@ export const PremiumPaywall = ({
       {/* Premium Card */}
       <div className="relative">
         {/* Multi-layered premium dynamic glow */}
-        <div className="absolute -inset-4 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 opacity-40 rounded-3xl blur-2xl animate-pulse"></div>
-        <div className="absolute -inset-3 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 opacity-30 rounded-3xl blur-xl animate-[pulse_3s_ease-in-out_infinite]"></div>
-        <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 opacity-20 rounded-2xl blur-lg animate-[pulse_2s_ease-in-out_infinite_reverse]"></div>
-        <div className="absolute -inset-1 bg-gradient-to-r from-purple-300 via-pink-300 to-blue-300 opacity-15 rounded-xl blur animate-[pulse_4s_ease-in-out_infinite]"></div>
+        <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 via-turquoise-500 to-cyan-600 opacity-40 rounded-3xl blur-2xl animate-pulse"></div>
+        <div className="absolute -inset-3 bg-gradient-to-r from-cyan-400 via-blue-500 to-turquoise-500 opacity-30 rounded-3xl blur-xl animate-[pulse_3s_ease-in-out_infinite]"></div>
+        <div className="absolute -inset-2 bg-gradient-to-r from-turquoise-400 via-blue-400 to-cyan-400 opacity-20 rounded-2xl blur-lg animate-[pulse_2s_ease-in-out_infinite_reverse]"></div>
+        <div className="absolute -inset-1 bg-gradient-to-r from-blue-300 via-turquoise-300 to-cyan-300 opacity-15 rounded-xl blur animate-[pulse_4s_ease-in-out_infinite]"></div>
         
         <Card className="relative bg-white dark:bg-gray-900 border-2 border-transparent bg-clip-padding shadow-2xl rounded-2xl overflow-hidden">
           {/* Dynamic gradient border with rotation */}
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-2xl shadow-lg animate-[spin_20s_linear_infinite]"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-turquoise-500 to-cyan-600 rounded-2xl shadow-lg animate-[spin_20s_linear_infinite]"></div>
           <div className="absolute inset-[2px] bg-white dark:bg-gray-900 rounded-[14px]"></div>
           
           {/* Enhanced floating particles */}
           <div className="absolute inset-0 overflow-hidden rounded-2xl">
-            <div className="absolute top-16 left-8 w-3 h-3 bg-purple-400 rounded-full animate-[bounce_2s_ease-in-out_infinite] shadow-lg"></div>
-            <div className="absolute top-28 right-12 w-2 h-2 bg-pink-400 rounded-full animate-[bounce_2.5s_ease-in-out_infinite_reverse] shadow-md"></div>
-            <div className="absolute bottom-20 left-16 w-2.5 h-2.5 bg-blue-400 rounded-full animate-[bounce_3s_ease-in-out_infinite] shadow-lg"></div>
-            <div className="absolute bottom-32 right-8 w-2 h-2 bg-cyan-400 rounded-full animate-[bounce_1.8s_ease-in-out_infinite_reverse] shadow-md"></div>
-            <div className="absolute top-40 left-1/2 w-1.5 h-1.5 bg-yellow-400 rounded-full animate-[bounce_2.2s_ease-in-out_infinite] shadow-sm"></div>
+            <div className="absolute top-16 left-8 w-3 h-3 bg-blue-400 rounded-full animate-[bounce_2s_ease-in-out_infinite] shadow-lg"></div>
+            <div className="absolute top-28 right-12 w-2 h-2 bg-turquoise-400 rounded-full animate-[bounce_2.5s_ease-in-out_infinite_reverse] shadow-md"></div>
+            <div className="absolute bottom-20 left-16 w-2.5 h-2.5 bg-cyan-400 rounded-full animate-[bounce_3s_ease-in-out_infinite] shadow-lg"></div>
+            <div className="absolute bottom-32 right-8 w-2 h-2 bg-blue-300 rounded-full animate-[bounce_1.8s_ease-in-out_infinite_reverse] shadow-md"></div>
+            <div className="absolute top-40 left-1/2 w-1.5 h-1.5 bg-turquoise-300 rounded-full animate-[bounce_2.2s_ease-in-out_infinite] shadow-sm"></div>
           </div>
           
           {/* Premium Header */}
-          <div className="relative bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 p-4 text-center overflow-hidden">
+          <div className="relative bg-gradient-to-r from-blue-600 via-turquoise-500 to-cyan-600 p-4 text-center overflow-hidden">
             {/* Animated background pattern */}
             <div className="absolute inset-0 opacity-20">
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
@@ -75,7 +75,7 @@ export const PremiumPaywall = ({
               <div className="inline-flex items-center justify-center w-16 h-16 mb-3 bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 rounded-full shadow-xl transform hover:scale-110 transition-transform duration-300">
                 <Crown className="h-8 w-8 text-white animate-pulse" />
               </div>
-              <CardTitle className="text-2xl font-black text-white mb-2 bg-gradient-to-r from-yellow-200 via-white to-pink-200 bg-clip-text text-transparent drop-shadow-lg">
+              <CardTitle className="text-2xl font-black text-white mb-2 bg-gradient-to-r from-cyan-200 via-white to-blue-200 bg-clip-text text-transparent drop-shadow-lg">
                 ⚡ EduClara Premium: Smarter, Faster Results
               </CardTitle>
               <CardDescription className="text-white/95 text-base font-semibold">
@@ -102,7 +102,7 @@ export const PremiumPaywall = ({
               {/* Premium Features Column */}
               <div className="md:col-span-2 space-y-3">
                 <div className="text-center mb-3">
-                  <h4 className="text-base font-black bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent mb-1">
+                  <h4 className="text-base font-black bg-gradient-to-r from-blue-600 via-turquoise-500 to-cyan-600 bg-clip-text text-transparent mb-1">
                     🌟 Game-Changing Features
                   </h4>
                   <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">
@@ -192,7 +192,7 @@ export const PremiumPaywall = ({
             {/* CTA Button */}
             <Button 
               onClick={handleUpgrade}
-              className="w-full h-10 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-700 hover:via-pink-700 hover:to-blue-700 text-white font-bold text-sm rounded-xl shadow-xl hover:shadow-purple-500/25 transform hover:scale-[1.02] transition-all duration-300 group"
+              className="w-full h-10 bg-gradient-to-r from-blue-600 via-turquoise-500 to-cyan-600 hover:from-blue-700 hover:via-turquoise-600 hover:to-cyan-700 text-white font-bold text-sm rounded-xl shadow-xl hover:shadow-blue-500/25 transform hover:scale-[1.02] transition-all duration-300 group"
             >
               <Rocket className="h-4 w-4 mr-2 group-hover:animate-bounce" />
               🎯 START FREE TRIAL NOW
