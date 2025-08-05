@@ -133,6 +133,9 @@ export const PremiumPaywall = ({
                       "border-indigo-300/60 dark:border-indigo-600/40"
                     ];
                     
+                    // Extract emoji from benefit text
+                    const emoji = benefit.split(' ')[0];
+                    
                     return (
                       <div 
                         key={index} 
@@ -140,7 +143,7 @@ export const PremiumPaywall = ({
                       >
                         <div className="flex-shrink-0">
                           <div className={`w-8 h-8 bg-gradient-to-r ${gradients[index]} rounded-full flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform duration-300`}>
-                            <Star className="h-4 w-4 text-white fill-white group-hover:scale-110 transition-transform duration-300" />
+                            <span className="text-sm group-hover:scale-110 transition-transform duration-300">{emoji}</span>
                           </div>
                         </div>
                         <span className="text-gray-800 dark:text-gray-100 font-semibold text-sm group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300">
