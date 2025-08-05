@@ -402,7 +402,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
               <div className="space-y-3 mb-6 text-left max-w-md mx-auto">
                 <div className="flex items-center space-x-3 bg-gradient-to-r from-purple-500/10 to-blue-500/10 p-3 rounded-xl border border-purple-500/20">
                   <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                  <span className="text-sm font-semibold text-foreground/80">AI predicts your exact GCSE grades</span>
+                  <span className="text-sm font-semibold text-foreground/80">Our algorithm predicts your exact GCSE grades</span>
                 </div>
                 <div className="flex items-center space-x-3 bg-gradient-to-r from-amber-500/10 to-orange-500/10 p-3 rounded-xl border border-amber-500/20">
                   <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse" />
@@ -571,7 +571,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                     className="max-w-80 w-auto p-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white text-xs rounded-2xl shadow-2xl border border-white/10 backdrop-blur-sm"
                   >
                     <div className="space-y-2">
-                      <div className="font-semibold text-amber-300 text-center">🤖 AI Insight</div>
+                      <div className="font-semibold text-amber-300 text-center">🤖 Algorithm Insight</div>
                       <div className="text-gray-200 leading-relaxed">
                         {getTooltipText(grade)}
                       </div>
