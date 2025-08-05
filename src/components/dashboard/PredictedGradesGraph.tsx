@@ -439,7 +439,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
             </Button>
             
             <p className="text-xs text-muted-foreground/60 mt-4">
-              ⚡ Instant access • Cancel anytime • 30-day guarantee
+              ⚡ Instant access • Cancel anytime
             </p>
           </div>
         </div>
