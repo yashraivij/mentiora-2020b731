@@ -356,7 +356,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
 
 
   return (
-    <Card className="glass-effect mb-8 relative border-2 border-gradient-to-r from-purple-500/20 via-blue-500/20 to-emerald-500/20 overflow-visible">
+    <Card className="glass-effect mb-8 relative border-2 border-gradient-to-r from-purple-500/20 via-blue-500/20 to-emerald-500/20 overflow-hidden">
       {/* Premium background decorations */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-emerald-500/5" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-400/10 via-purple-500/10 to-transparent rounded-full blur-3xl animate-pulse" />
@@ -367,9 +367,9 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
       <div className="absolute top-8 right-12 w-1 h-1 bg-emerald-400 rounded-full animate-pulse" />
       <div className="absolute top-12 right-8 w-1.5 h-1.5 bg-purple-400 rounded-full animate-bounce" />
       
-      {/* Ultra Premium Blur Overlay */}
+      {/* Ultra Premium Blur Overlay - positioned early to prevent flickering */}
       {!subscription.subscribed && (
-        <div className="absolute inset-0 backdrop-blur-xl bg-gradient-to-br from-white/20 via-purple-500/10 to-amber-500/20 dark:from-black/30 dark:via-purple-900/20 dark:to-amber-900/20 rounded-lg z-10 flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 backdrop-blur-2xl bg-gradient-to-br from-white/30 via-purple-500/20 to-amber-500/30 dark:from-black/40 dark:via-purple-900/30 dark:to-amber-900/30 rounded-lg z-50 flex items-center justify-center overflow-hidden">
           {/* Animated background elements */}
           <div className="absolute top-0 left-0 w-full h-full">
             <div className="absolute top-10 left-10 w-20 h-20 bg-gradient-to-br from-amber-400/30 to-orange-500/30 rounded-full blur-xl animate-pulse" />
@@ -414,11 +414,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                 </div>
               </div>
               
-              <p className="text-muted-foreground text-sm mb-2">
-                <strong className="text-amber-600 dark:text-amber-400">Join 50,000+ students</strong> who know their future grades
-              </p>
-              <p className="text-xs text-muted-foreground/70">
-                "I went from predicted 6s to getting 8s and 9s!" - Sarah, Manchester
+              <p className="text-xs text-muted-foreground/70 mb-2">
+                "The predicted grades showed me I was on track for a 5 in Maths, so I focused my revision there and got a 7! Game changer for my Year 11 results." - Emma, Leeds
               </p>
             </div>
             
