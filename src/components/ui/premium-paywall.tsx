@@ -87,9 +87,9 @@ export const PremiumPaywall = ({
             {/* Time Savings Highlight */}
             <div className="text-center p-3 mb-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/30 rounded-xl border border-emerald-300/50 dark:border-emerald-600/50">
               <div className="flex items-center justify-center space-x-2 mb-1">
-                <Zap className="h-5 w-5 text-emerald-600" />
+                <Target className="h-5 w-5 text-emerald-600" />
                 <h3 className="text-lg font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                  Save 15+ Hours Every Week
+                  Learn Exactly What You Need
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">
