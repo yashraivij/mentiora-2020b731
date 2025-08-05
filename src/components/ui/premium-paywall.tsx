@@ -111,30 +111,29 @@ export const PremiumPaywall = ({
                 
                 <div className="grid gap-3">
                   {benefits.map((benefit, index) => {
-                    const gradients = [
-                      "from-purple-500 via-pink-500 to-red-500",
-                      "from-blue-500 via-cyan-500 to-teal-500", 
-                      "from-green-500 via-emerald-500 to-lime-500",
-                      "from-orange-500 via-yellow-500 to-amber-500",
-                      "from-indigo-500 via-purple-500 to-pink-500"
+                    // Custom gradients for each emoji
+                    const emojiGradients = [
+                      "from-purple-500 via-violet-500 to-indigo-500", // 🔮 crystal ball - mystical purple
+                      "from-orange-500 via-amber-500 to-yellow-500", // 📓 notebook - warm orange/brown
+                      "from-blue-500 via-cyan-500 to-teal-500", // 📊 chart - data blue
+                      "from-red-500 via-pink-500 to-rose-500" // 🎯 target - red/pink
                     ];
                     const bgGradients = [
-                      "from-purple-50 via-pink-50 to-red-50 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-red-900/20",
+                      "from-purple-50 via-violet-50 to-indigo-50 dark:from-purple-900/20 dark:via-violet-900/20 dark:to-indigo-900/20",
+                      "from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-900/20 dark:via-amber-900/20 dark:to-yellow-900/20",
                       "from-blue-50 via-cyan-50 to-teal-50 dark:from-blue-900/20 dark:via-cyan-900/20 dark:to-teal-900/20",
-                      "from-green-50 via-emerald-50 to-lime-50 dark:from-green-900/20 dark:via-emerald-900/20 dark:to-lime-900/20",
-                      "from-orange-50 via-yellow-50 to-amber-50 dark:from-orange-900/20 dark:via-yellow-900/20 dark:to-amber-900/20",
-                      "from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-900/20 dark:via-purple-900/20 dark:to-pink-900/20"
+                      "from-red-50 via-pink-50 to-rose-50 dark:from-red-900/20 dark:via-pink-900/20 dark:to-rose-900/20"
                     ];
                     const borderColors = [
                       "border-purple-300/60 dark:border-purple-600/40",
-                      "border-blue-300/60 dark:border-blue-600/40",
-                      "border-green-300/60 dark:border-green-600/40",
                       "border-orange-300/60 dark:border-orange-600/40",
-                      "border-indigo-300/60 dark:border-indigo-600/40"
+                      "border-blue-300/60 dark:border-blue-600/40",
+                      "border-red-300/60 dark:border-red-600/40"
                     ];
                     
-                    // Extract emoji from benefit text
+                    // Extract emoji and remove it from text
                     const emoji = benefit.split(' ')[0];
+                    const textWithoutEmoji = benefit.split(' ').slice(1).join(' ');
                     
                     return (
                       <div 
@@ -142,12 +141,12 @@ export const PremiumPaywall = ({
                         className={`group flex items-center space-x-3 p-3 bg-gradient-to-r ${bgGradients[index]} rounded-xl border ${borderColors[index]} hover:scale-105 transition-all duration-300 hover:shadow-lg`}
                       >
                         <div className="flex-shrink-0">
-                          <div className={`w-8 h-8 bg-gradient-to-r ${gradients[index]} rounded-full flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform duration-300`}>
+                          <div className={`w-8 h-8 bg-gradient-to-r ${emojiGradients[index]} rounded-full flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform duration-300`}>
                             <span className="text-sm group-hover:scale-110 transition-transform duration-300">{emoji}</span>
                           </div>
                         </div>
                         <span className="text-gray-800 dark:text-gray-100 font-semibold text-sm group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300">
-                          {benefit}
+                          {textWithoutEmoji}
                         </span>
                         <div className="ml-auto">
                           <ChevronRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 group-hover:translate-x-1 transition-all duration-300" />
