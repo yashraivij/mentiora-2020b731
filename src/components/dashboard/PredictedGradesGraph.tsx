@@ -367,6 +367,28 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
       <div className="absolute top-8 right-12 w-1 h-1 bg-emerald-400 rounded-full animate-pulse" />
       <div className="absolute top-12 right-8 w-1.5 h-1.5 bg-purple-400 rounded-full animate-bounce" />
       
+      {/* Blur overlay for non-premium users */}
+      {!subscription.subscribed && (
+        <div className="absolute inset-0 backdrop-blur-md bg-white/10 dark:bg-black/20 rounded-lg z-10 flex items-center justify-center">
+          <div className="text-center p-8 max-w-md">
+            <div className="mb-6">
+              <div className="flex justify-center mb-4">
+                <Trophy className="h-16 w-16 text-amber-500 animate-bounce" />
+              </div>
+              <h3 className="text-2xl font-bold text-foreground mb-2">See Your Potential</h3>
+              <p className="text-muted-foreground">Unlock AI-powered grade predictions and see exactly which grades you're on track for in every subject</p>
+            </div>
+            <Button 
+              onClick={handleUpgrade}
+              className="bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition-all duration-200 transform hover:scale-105"
+            >
+              <Crown className="h-4 w-4 mr-2" />
+              Unlock Predictions
+            </Button>
+          </div>
+        </div>
+      )}
+      
       <CardHeader className="relative">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
@@ -390,13 +412,13 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
             </div>
           </div>
           <div className="flex items-center space-x-6">
-            {averageGrade > 0 && (
+            {subscription.subscribed && averageGrade > 0 && (
               <div className="text-center p-3 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl border border-purple-500/20">
                 <div className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">{averageGrade.toFixed(1)}</div>
                 <div className="text-xs text-muted-foreground font-semibold">Avg Grade</div>
               </div>
             )}
-            {grade7PlusCount > 0 && (
+            {subscription.subscribed && grade7PlusCount > 0 && (
               <Badge className="bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-600 text-white border-0 px-4 py-2 text-sm font-bold shadow-lg shadow-emerald-500/25 animate-pulse">
                 <Trophy className="h-4 w-4 mr-2 animate-bounce" />
                 {grade7PlusCount} Grade 7+ 🎉
