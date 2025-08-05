@@ -6,28 +6,41 @@ import { useNavigate } from "react-router-dom";
 import { CountdownTimer } from "./CountdownTimer";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
+import { PremiumPaywall } from "@/components/ui/premium-paywall";
+import { useState } from "react";
 
 export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
-  const { subscription, createCheckout } = useAuth();
+  const { subscription } = useAuth();
+  const [showPaywall, setShowPaywall] = useState(false);
 
-  const handleStartPredicted = async () => {
+  const handleStartPredicted = () => {
     if (!subscription.subscribed) {
-      try {
-        const checkoutUrl = await createCheckout();
-        if (checkoutUrl) {
-          window.open(checkoutUrl, '_blank');
-        } else {
-          toast.error('Failed to create checkout session');
-        }
-      } catch (error) {
-        console.error('Error creating checkout:', error);
-        toast.error('Failed to start checkout process');
-      }
+      setShowPaywall(true);
     } else {
       navigate('/predicted-questions');
     }
   };
+
+  if (showPaywall) {
+    return (
+      <div className="mb-8 space-y-6">
+        <div className="text-center mb-4">
+          <Button 
+            onClick={() => setShowPaywall(false)}
+            variant="outline"
+            className="mb-4"
+          >
+            ← Back to Dashboard
+          </Button>
+        </div>
+        <PremiumPaywall 
+          feature="Premium Exam Practice"
+          description="Access predicted 2026 questions and AI-powered exam simulation."
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="mb-8 space-y-6">
