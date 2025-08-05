@@ -48,10 +48,10 @@ export const PremiumPaywall = ({
         <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 opacity-40 rounded-3xl blur-lg animate-pulse"></div>
         <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 opacity-20 rounded-2xl blur animate-ping"></div>
         
-        <Card className="relative bg-gradient-to-br from-white via-purple-50/40 to-pink-50/40 dark:from-gray-900 dark:via-purple-900/30 dark:to-pink-900/30 backdrop-blur-xl border-2 border-transparent bg-clip-padding shadow-2xl rounded-2xl overflow-hidden">
+        <Card className="relative bg-white dark:bg-gray-900 border-2 border-transparent bg-clip-padding shadow-2xl rounded-2xl overflow-hidden">
           {/* Dynamic gradient border */}
           <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-2xl"></div>
-          <div className="absolute inset-[2px] bg-gradient-to-br from-white via-purple-50/40 to-pink-50/40 dark:from-gray-900 dark:via-purple-900/30 dark:to-pink-900/30 rounded-[14px]"></div>
+          <div className="absolute inset-[2px] bg-white dark:bg-gray-900 rounded-[14px]"></div>
           
           {/* Floating particles effect */}
           <div className="absolute inset-0 overflow-hidden rounded-2xl">
