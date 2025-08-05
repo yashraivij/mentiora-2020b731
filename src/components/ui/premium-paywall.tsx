@@ -17,7 +17,7 @@ export const PremiumPaywall = ({
   description, 
   icon = <Crown className="h-8 w-8" />,
   benefits = [
-    "🎯 AI creates personalized study notes for YOUR weaknesses",
+    "🎯 Creates personalized study notes for YOUR weaknesses",
     "🔮 Get exact exam questions before they're asked",
     "📈 See your predicted grades and improve before it's too late",
     "🎵 Study playlists that boost your focus and memory",
@@ -44,9 +44,9 @@ export const PremiumPaywall = ({
     <div className="w-full max-w-4xl mx-auto">
       {/* Premium Card */}
       <div className="relative">
-        {/* Multi-layered animated glow effect */}
-        <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 opacity-40 rounded-3xl blur-lg animate-pulse"></div>
-        <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 opacity-20 rounded-2xl blur animate-ping"></div>
+        {/* Subtle animated glow effect */}
+        <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 opacity-20 rounded-3xl blur-lg"></div>
+        <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 opacity-10 rounded-2xl blur"></div>
         
         <Card className="relative bg-white dark:bg-gray-900 border-2 border-transparent bg-clip-padding shadow-2xl rounded-2xl overflow-hidden">
           {/* Dynamic gradient border */}
@@ -73,10 +73,10 @@ export const PremiumPaywall = ({
                 <Crown className="h-8 w-8 text-white animate-pulse" />
               </div>
               <CardTitle className="text-2xl font-black text-white mb-2 bg-gradient-to-r from-yellow-200 via-white to-pink-200 bg-clip-text text-transparent drop-shadow-lg">
-                ⚡ Premium AI Study Revolution
+                ⚡ Premium Study Revolution
               </CardTitle>
               <CardDescription className="text-white/95 text-base font-semibold">
-                🚀 Save 15+ hours weekly • 📊 Get A+ grades faster
+                🚀 Save 15+ hours weekly • 📊 Reach your target grade faster
               </CardDescription>
             </div>
           </div>
@@ -91,19 +91,19 @@ export const PremiumPaywall = ({
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">
-                More time for friends & hobbies while improving grades
+                Study efficiently with perfect exam focus
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 mb-6">
+            <div className="grid md:grid-cols-3 gap-4 mb-4">
               {/* Premium Features Column */}
-              <div className="md:col-span-2 space-y-4">
-                <div className="text-center mb-4">
-                  <h4 className="text-lg font-black bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent mb-1">
+              <div className="md:col-span-2 space-y-3">
+                <div className="text-center mb-3">
+                  <h4 className="text-base font-black bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent mb-1">
                     🌟 Game-Changing Features
                   </h4>
                   <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">
-                    Transform your study experience with AI superpowers
+                    Transform your study experience with smart technology
                   </p>
                 </div>
                 
@@ -169,17 +169,17 @@ export const PremiumPaywall = ({
                 {/* Offer */}
                 <div className="text-center p-2 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-lg border border-orange-200 dark:border-orange-600/50">
                   <h4 className="text-xs font-bold text-orange-700 dark:text-orange-300 mb-1">
-                    🔥 First Month FREE
+                    🔥 First Week FREE
                   </h4>
                   <p className="text-orange-600 dark:text-orange-400 font-medium text-xs">
-                    See results in 2 weeks!
+                    Users save 12+ hrs in week 1
                   </p>
                 </div>
 
                 {/* Guarantee */}
                 <div className="text-center p-2 bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-lg border border-violet-200 dark:border-violet-600/50">
                   <div className="flex items-center justify-center space-x-1 text-violet-600 dark:text-violet-400 text-xs font-semibold">
-                    <Shield className="h-3 w-3" />
+                    <Target className="h-3 w-3" />
                     <span>Cancel anytime</span>
                   </div>
                 </div>
