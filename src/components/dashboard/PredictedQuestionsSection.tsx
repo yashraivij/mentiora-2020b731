@@ -4,12 +4,29 @@ import { Badge } from "@/components/ui/badge";
 import { Crown, Star, Sparkles, Target, Clock, BookOpen, Zap, Trophy, Rocket } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { CountdownTimer } from "./CountdownTimer";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "sonner";
 
 export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
+  const { subscription, createCheckout } = useAuth();
 
-  const handleStartPredicted = () => {
-    navigate('/predicted-questions');
+  const handleStartPredicted = async () => {
+    if (!subscription.subscribed) {
+      try {
+        const checkoutUrl = await createCheckout();
+        if (checkoutUrl) {
+          window.open(checkoutUrl, '_blank');
+        } else {
+          toast.error('Failed to create checkout session');
+        }
+      } catch (error) {
+        console.error('Error creating checkout:', error);
+        toast.error('Failed to start checkout process');
+      }
+    } else {
+      navigate('/predicted-questions');
+    }
   };
 
   return (

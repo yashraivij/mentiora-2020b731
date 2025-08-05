@@ -10,6 +10,7 @@ import { ArrowLeft, BookOpen, Crown, Brain, TrendingUp, Star, Filter, Calendar }
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { supabase } from "@/integrations/supabase/client";
 import { NotebookEntry } from "@/components/notebook/NotebookEntry";
+import { PremiumPaywall } from "@/components/ui/premium-paywall";
 import { toast } from "sonner";
 
 interface NotebookEntryData {
@@ -34,7 +35,7 @@ interface NotebookEntryData {
 }
 
 const Notebook = () => {
-  const { user } = useAuth();
+  const { user, subscription } = useAuth();
   const navigate = useNavigate();
   
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
@@ -134,6 +135,47 @@ const Notebook = () => {
             <p className="text-foreground font-medium text-lg">Loading your Smart Revision Notebook...</p>
             <p className="text-muted-foreground text-sm mt-2">Preparing your AI-generated study notes</p>
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Check for premium subscription
+  if (!subscription.subscribed) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/50">
+        <header className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-700/50 sticky top-0 z-50 shadow-xl shadow-black/5 dark:shadow-black/20">
+          <div className="container mx-auto px-6 py-4">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center space-x-4">
+                <Button 
+                  variant="ghost" 
+                  onClick={() => navigate('/dashboard')}
+                  className="text-muted-foreground hover:text-foreground hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200"
+                >
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Dashboard
+                </Button>
+              </div>
+              <div className="flex items-center space-x-3">
+                <ThemeToggle />
+              </div>
+            </div>
+          </div>
+        </header>
+        
+        <div className="container mx-auto px-6 py-8 max-w-4xl">
+          <PremiumPaywall 
+            feature="Smart Revision Notebook"
+            description="Access AI-generated revision notes for every question you've answered incorrectly. Get personalized study materials that help you understand exactly what went wrong and how to fix it."
+            icon={<BookOpen className="h-8 w-8 text-slate-500" />}
+            benefits={[
+              "AI-generated revision notes for every wrong answer",
+              "Personalized study materials based on your mistakes",
+              "Confidence tracking and improvement suggestions", 
+              "Automatic note organization by subject and topic"
+            ]}
+          />
         </div>
       </div>
     );
