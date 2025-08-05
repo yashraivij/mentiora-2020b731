@@ -812,7 +812,11 @@ const Dashboard = () => {
                     EduClara
                   </h1>
                   <div className="flex items-center space-x-2">
-                    <Crown className="h-3 w-3 text-amber-500" />
+                    {subscription.subscribed ? (
+                      <Crown className="h-3 w-3 text-amber-500" />
+                    ) : (
+                      <User className="h-3 w-3 text-muted-foreground" />
+                    )}
                     <span className="text-xs font-medium text-muted-foreground">
                       {subscription.subscribed ? "Premium" : "Standard"}
                     </span>
