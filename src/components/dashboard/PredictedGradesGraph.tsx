@@ -415,17 +415,27 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
               </div>
               
               <p className="text-xs text-muted-foreground/70 mb-2">
-                "The predicted grades showed me I was on track for a 5 in Maths, so I focused my revision there and got a 7! Game changer for my Year 11 results." - Emma, Leeds
+                "The predicted grades showed me I was on track for a 5 in Maths, so I focused my revision there and got a 7!" - Emma, Year 11
               </p>
             </div>
             
             <Button 
               onClick={handleUpgrade}
-              className="bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 hover:from-amber-500 hover:via-orange-600 hover:to-red-600 text-white font-black px-8 py-4 rounded-2xl shadow-2xl shadow-amber-500/50 transition-all duration-300 transform hover:scale-110 hover:shadow-3xl text-lg border-2 border-white/20 animate-pulse"
+              className="relative bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 hover:from-amber-500 hover:via-orange-600 hover:to-red-600 text-white font-black px-10 py-5 rounded-3xl shadow-2xl shadow-amber-500/60 hover:shadow-amber-500/80 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 text-xl border-3 border-white/30 hover:border-white/50 backdrop-blur-sm overflow-hidden group"
             >
-              <Crown className="h-5 w-5 mr-3 animate-bounce" />
-              Unlock My Grades Now
-              <Sparkles className="h-4 w-4 ml-3 animate-spin" />
+              {/* Premium glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-white/20 group-hover:from-white/30 group-hover:to-white/30 transition-all duration-500" />
+              
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-pulse" />
+              </div>
+              
+              <div className="relative flex items-center justify-center space-x-3">
+                <Crown className="h-6 w-6 drop-shadow-lg" />
+                <span className="drop-shadow-lg">Unlock My Grades Now</span>
+                <Sparkles className="h-5 w-5 drop-shadow-lg" />
+              </div>
             </Button>
             
             <p className="text-xs text-muted-foreground/60 mt-4">
