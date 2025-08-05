@@ -33,7 +33,7 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
 
   const getEncouragingMessage = () => {
     if (!isSubscribed) {
-      return "You've just studied smarter — now see exactly how many hours you've saved. Join thousands of students turning time into top grades.";
+      return "🎯 You've just studied smarter — now see exactly how many hours you've saved. Join thousands of students turning time into top grades.";
     }
     
     const days = Math.floor(timeSavedHours / 24);
@@ -167,7 +167,7 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                     Total Time Saved
                   </p>
                   <p className="text-xs text-violet-600/80 dark:text-violet-400/80">
-                    {isSubscribed ? 'with AI Auto-Notes' : 'Unlock with Premium'}
+                    {isSubscribed ? 'with AI Auto-Notes' : '🔒 Unlock with Premium'}
                   </p>
                 </motion.div>
 
@@ -199,7 +199,7 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                       size="sm"
                       className="bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 hover:from-amber-600 hover:via-orange-600 hover:to-red-600 text-white shadow-lg hover:shadow-xl transition-all duration-200"
                     >
-                      🔒<Lock className="h-3 w-3 mx-1" />
+                      <Crown className="h-3 w-3 mr-1" />
                       Unlock Premium
                     </Button>
                  ) : (
