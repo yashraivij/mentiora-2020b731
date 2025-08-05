@@ -9,12 +9,14 @@ interface TimeSavedNotificationProps {
   timeSavedHours: number;
   onClose: () => void;
   show: boolean;
+  isSubscribed?: boolean;
 }
 
 export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
   timeSavedHours,
   onClose,
-  show
+  show,
+  isSubscribed = false
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -30,6 +32,10 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
   };
 
   const getEncouragingMessage = () => {
+    if (!isSubscribed) {
+      return "Unlock detailed time tracking with Premium!";
+    }
+    
     const days = Math.floor(timeSavedHours / 24);
     
     if (days >= 2) {
@@ -54,15 +60,19 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
     const days = Math.floor(totalHours / 24);
     const remainingHours = Math.round((totalHours - (days * 24)) * 10) / 10; // Proper rounding
     
+    let timeDisplay = '';
     if (days >= 1) {
       if (remainingHours >= 0.1) { // Only show remaining hours if >= 0.1
-        return `${days}d ${remainingHours}h`;
+        timeDisplay = `${days}d ${remainingHours}h`;
       } else {
-        return `${days} day${days > 1 ? 's' : ''}`;
+        timeDisplay = `${days} day${days > 1 ? 's' : ''}`;
       }
     } else {
-      return `${totalHours}h`;
+      timeDisplay = `${totalHours}h`;
     }
+    
+    // Blur for non-premium users
+    return isSubscribed ? timeDisplay : '••••';
   };
 
   return (
@@ -154,14 +164,14 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                   transition={{ delay: 0.2, type: "spring", damping: 20 }}
                   className="text-center"
                 >
-                  <div className="text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 dark:from-violet-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2">
+                  <div className={`text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 dark:from-violet-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2 ${!isSubscribed ? 'blur-sm' : ''}`}>
                     {getTimeSavedDisplay()}
                   </div>
                   <p className="text-sm font-semibold text-violet-700 dark:text-violet-300 mb-1">
                     Total Time Saved
                   </p>
                   <p className="text-xs text-violet-600/80 dark:text-violet-400/80">
-                    with AI Auto-Notes
+                    {isSubscribed ? 'with AI Auto-Notes' : 'Unlock with Premium'}
                   </p>
                 </motion.div>
 

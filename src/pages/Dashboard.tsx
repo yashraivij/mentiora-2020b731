@@ -44,7 +44,7 @@ interface UserProgress {
 }
 
 const Dashboard = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, subscription } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
@@ -130,9 +130,9 @@ const Dashboard = () => {
       }
 
       const totalEntries = entries?.length || 0;
-      // Calculate time saved: Assume each note saves 10 minutes of manual revision time (more realistic)
-      const timeSavedMinutes = totalEntries * 10;
-      const newTimeSavedHours = Math.round(timeSavedMinutes / 6) / 10; // Convert to hours and round to 1 decimal
+      // More accurate time calculation: 15 minutes saved per note (based on actual study time research)
+      const timeSavedMinutes = totalEntries * 15;
+      const newTimeSavedHours = Math.round(timeSavedMinutes / 60 * 10) / 10; // Convert to hours and round to 1 decimal
 
       console.log('Time saved calculation:', { 
         totalEntries, 
@@ -1485,6 +1485,7 @@ const Dashboard = () => {
         timeSavedHours={timeSavedHours}
         show={showTimeSavedNotification}
         onClose={() => setShowTimeSavedNotification(false)}
+        isSubscribed={subscription.subscribed}
       />
     </div>
   );
