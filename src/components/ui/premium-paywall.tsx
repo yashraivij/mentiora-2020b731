@@ -76,7 +76,7 @@ export const PremiumPaywall = ({
                 <Crown className="h-8 w-8 text-white animate-pulse" />
               </div>
               <CardTitle className="text-2xl font-black text-white mb-2 bg-gradient-to-r from-yellow-200 via-white to-pink-200 bg-clip-text text-transparent drop-shadow-lg">
-                ⚡ Educlara Premium: Smarter, Faster Results
+                ⚡ EduClara Premium: Smarter, Faster Results
               </CardTitle>
               <CardDescription className="text-white/95 text-base font-semibold">
                 🚀 Save 15+ hours weekly • 📊 Reach your target grade faster
