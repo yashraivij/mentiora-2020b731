@@ -44,19 +44,19 @@ export const PremiumPaywall = ({
       {/* Premium Card */}
       <div className="relative">
         {/* Multi-layered premium dynamic glow */}
-        <div className="absolute -inset-4 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 opacity-40 rounded-3xl blur-2xl animate-pulse"></div>
-        <div className="absolute -inset-3 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 opacity-30 rounded-3xl blur-xl animate-[pulse_3s_ease-in-out_infinite]"></div>
-        <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 opacity-20 rounded-2xl blur-lg animate-[pulse_2s_ease-in-out_infinite_reverse]"></div>
-        <div className="absolute -inset-1 bg-gradient-to-r from-purple-300 via-pink-300 to-blue-300 opacity-15 rounded-xl blur animate-[pulse_4s_ease-in-out_infinite]"></div>
+        <div className="absolute -inset-4 bg-gradient-to-r from-teal-600 via-cyan-600 to-blue-600 opacity-40 rounded-3xl blur-2xl animate-pulse"></div>
+        <div className="absolute -inset-3 bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-500 opacity-30 rounded-3xl blur-xl animate-[pulse_3s_ease-in-out_infinite]"></div>
+        <div className="absolute -inset-2 bg-gradient-to-r from-teal-400 via-cyan-400 to-blue-400 opacity-20 rounded-2xl blur-lg animate-[pulse_2s_ease-in-out_infinite_reverse]"></div>
+        <div className="absolute -inset-1 bg-gradient-to-r from-teal-300 via-cyan-300 to-blue-300 opacity-15 rounded-xl blur animate-[pulse_4s_ease-in-out_infinite]"></div>
         
         <Card className="relative bg-white dark:bg-gray-900 border-2 border-transparent bg-clip-padding shadow-2xl rounded-2xl overflow-hidden">
           {/* Dynamic gradient border with rotation */}
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-2xl shadow-lg animate-[spin_20s_linear_infinite]"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-teal-600 via-cyan-600 to-blue-600 rounded-2xl shadow-lg animate-[spin_20s_linear_infinite]"></div>
           <div className="absolute inset-[2px] bg-white dark:bg-gray-900 rounded-[14px]"></div>
           
           
           {/* Premium Header */}
-          <div className="relative bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 p-4 text-center overflow-hidden">
+          <div className="relative bg-gradient-to-r from-teal-600 via-cyan-600 to-blue-600 p-4 text-center overflow-hidden">
             {/* Animated background pattern */}
             <div className="absolute inset-0 opacity-20">
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
@@ -141,7 +141,7 @@ export const PremiumPaywall = ({
             {/* CTA Button */}
             <Button 
               onClick={handleUpgrade}
-              className="w-full h-10 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-700 hover:via-pink-700 hover:to-blue-700 text-white font-bold text-sm rounded-xl shadow-xl hover:shadow-purple-500/25 transform hover:scale-[1.02] transition-all duration-300 group"
+              className="w-full h-10 bg-gradient-to-r from-teal-600 via-cyan-600 to-blue-600 hover:from-teal-700 hover:via-cyan-700 hover:to-blue-700 text-white font-bold text-sm rounded-xl shadow-xl hover:shadow-teal-500/25 transform hover:scale-[1.02] transition-all duration-300 group"
             >
               <Rocket className="h-4 w-4 mr-2 group-hover:animate-bounce" />
               🎯 START FREE TRIAL NOW
