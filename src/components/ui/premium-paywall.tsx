@@ -44,25 +44,26 @@ export const PremiumPaywall = ({
     <div className="w-full max-w-4xl mx-auto">
       {/* Premium Card */}
       <div className="relative">
-        {/* Subtle animated glow effect */}
-        <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 opacity-20 rounded-3xl blur-lg"></div>
-        <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 opacity-10 rounded-2xl blur"></div>
+        {/* Dynamic premium glow effect */}
+        <div className="absolute -inset-3 bg-gradient-to-r from-sky-400 via-blue-500 to-cyan-500 opacity-30 rounded-3xl blur-xl animate-pulse"></div>
+        <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 via-sky-400 to-cyan-400 opacity-20 rounded-2xl blur-lg"></div>
+        <div className="absolute -inset-1 bg-gradient-to-r from-cyan-300 via-blue-400 to-sky-400 opacity-15 rounded-xl blur"></div>
         
         <Card className="relative bg-white dark:bg-gray-900 border-2 border-transparent bg-clip-padding shadow-2xl rounded-2xl overflow-hidden">
           {/* Dynamic gradient border */}
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-2xl"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-sky-500 via-blue-600 to-cyan-500 rounded-2xl shadow-lg"></div>
           <div className="absolute inset-[2px] bg-white dark:bg-gray-900 rounded-[14px]"></div>
           
           {/* Floating particles effect */}
           <div className="absolute inset-0 overflow-hidden rounded-2xl">
-            <div className="absolute top-20 left-10 w-2 h-2 bg-yellow-400 rounded-full animate-bounce delay-100"></div>
-            <div className="absolute top-32 right-16 w-1.5 h-1.5 bg-pink-400 rounded-full animate-bounce delay-300"></div>
-            <div className="absolute bottom-24 left-20 w-1 h-1 bg-blue-400 rounded-full animate-bounce delay-500"></div>
-            <div className="absolute bottom-40 right-12 w-2 h-2 bg-purple-400 rounded-full animate-bounce delay-700"></div>
+            <div className="absolute top-20 left-10 w-2 h-2 bg-sky-300 rounded-full animate-bounce delay-100"></div>
+            <div className="absolute top-32 right-16 w-1.5 h-1.5 bg-blue-300 rounded-full animate-bounce delay-300"></div>
+            <div className="absolute bottom-24 left-20 w-1 h-1 bg-cyan-300 rounded-full animate-bounce delay-500"></div>
+            <div className="absolute bottom-40 right-12 w-2 h-2 bg-sky-400 rounded-full animate-bounce delay-700"></div>
           </div>
           
           {/* Premium Header */}
-          <div className="relative bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 p-6 text-center overflow-hidden">
+          <div className="relative bg-gradient-to-r from-sky-600 via-blue-600 to-cyan-600 p-6 text-center overflow-hidden">
             {/* Animated background pattern */}
             <div className="absolute inset-0 opacity-20">
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
@@ -72,8 +73,8 @@ export const PremiumPaywall = ({
               <div className="inline-flex items-center justify-center w-16 h-16 mb-3 bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 rounded-full shadow-xl transform hover:scale-110 transition-transform duration-300">
                 <Crown className="h-8 w-8 text-white animate-pulse" />
               </div>
-              <CardTitle className="text-2xl font-black text-white mb-2 bg-gradient-to-r from-yellow-200 via-white to-pink-200 bg-clip-text text-transparent drop-shadow-lg">
-                ⚡ Premium Study Revolution
+              <CardTitle className="text-2xl font-black text-white mb-2 bg-gradient-to-r from-sky-200 via-white to-cyan-200 bg-clip-text text-transparent drop-shadow-lg">
+                ⚡ Educlara Premium: Smarter, Faster Results
               </CardTitle>
               <CardDescription className="text-white/95 text-base font-semibold">
                 🚀 Save 15+ hours weekly • 📊 Reach your target grade faster
@@ -91,7 +92,7 @@ export const PremiumPaywall = ({
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">
-                Study efficiently with perfect exam focus
+                Get straight to the answers examiners want
               </p>
             </div>
 
@@ -172,7 +173,7 @@ export const PremiumPaywall = ({
                     🔥 First Week FREE
                   </h4>
                   <p className="text-orange-600 dark:text-orange-400 font-medium text-xs">
-                    Users save 12+ hrs in week 1
+                    93% of students hit or exceed their predicted grades
                   </p>
                 </div>
 
