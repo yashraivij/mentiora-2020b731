@@ -61,15 +61,30 @@ export const PremiumPaywall = ({
                 <GraduationCap className="h-8 w-8 text-white" />
               </div>
               <CardTitle className="text-2xl font-bold text-white mb-2 bg-gradient-to-r from-yellow-200 to-white bg-clip-text text-transparent">
-                🚀 Unlock Your Academic Superpowers
+                💎 Premium AI Study Experience
               </CardTitle>
               <CardDescription className="text-white/95 text-lg font-medium">
-                Join 50,000+ students boosting grades by 2+ levels
+                Save 15+ hours every week • Get better grades faster
               </CardDescription>
             </div>
           </div>
 
           <CardContent className="p-6">
+            {/* Time Savings Highlight */}
+            <div className="text-center p-4 mb-6 bg-gradient-to-r from-yellow-50 via-orange-50 to-red-50 dark:from-yellow-900/20 dark:via-orange-900/20 dark:to-red-900/20 rounded-xl border-2 border-yellow-300 dark:border-yellow-600/50 shadow-lg">
+              <div className="flex justify-center mb-2">
+                <div className="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full shadow-lg">
+                  <Zap className="h-5 w-5 text-white" />
+                </div>
+              </div>
+              <h3 className="text-xl font-black bg-gradient-to-r from-yellow-600 via-orange-600 to-red-600 bg-clip-text text-transparent mb-1">
+                ⚡ Save 15+ Hours Every Week
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300 text-sm font-semibold">
+                More time for hobbies, friends & relaxation while getting better grades
+              </p>
+            </div>
+
             <div className="grid lg:grid-cols-2 gap-6">
               {/* Left Column */}
               <div className="space-y-4">
@@ -87,14 +102,14 @@ export const PremiumPaywall = ({
                 {/* Benefits */}
                 <div className="space-y-2">
                   <h4 className="font-bold text-lg text-center bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                    ✨ What You'll Get
+                    ✨ Premium Features Included
                   </h4>
                   <div className="grid gap-2">
-                    {benefits.slice(0, 3).map((benefit, index) => (
+                    {benefits.map((benefit, index) => (
                       <div key={index} className="flex items-center space-x-2 p-2 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg border border-blue-200 dark:border-blue-700/50">
                         <div className="flex-shrink-0">
                           <div className="w-5 h-5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg">
-                            <Zap className="h-2.5 w-2.5 text-white" />
+                            <Star className="h-2.5 w-2.5 text-white fill-white" />
                           </div>
                         </div>
                         <span className="text-gray-800 dark:text-gray-200 font-medium text-xs leading-relaxed">{benefit}</span>
@@ -106,45 +121,48 @@ export const PremiumPaywall = ({
 
               {/* Right Column */}
               <div className="space-y-4">
-                {/* More benefits */}
-                <div className="space-y-2">
-                  <div className="grid gap-2">
-                    {benefits.slice(3).map((benefit, index) => (
-                      <div key={index + 3} className="flex items-center space-x-2 p-2 bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-lg border border-cyan-200 dark:border-cyan-700/50">
-                        <div className="flex-shrink-0">
-                          <div className="w-5 h-5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center shadow-lg">
-                            <Star className="h-2.5 w-2.5 text-white fill-white" />
-                          </div>
-                        </div>
-                        <span className="text-gray-800 dark:text-gray-200 font-medium text-xs leading-relaxed">{benefit}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
                 {/* Urgency */}
-                <div className="text-center p-3 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-xl border-2 border-orange-200 dark:border-orange-700/50">
-                  <div className="flex justify-center mb-1">
-                    <Trophy className="h-5 w-5 text-orange-500" />
+                <div className="text-center p-4 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-xl border-2 border-orange-200 dark:border-orange-700/50">
+                  <div className="flex justify-center mb-2">
+                    <Trophy className="h-6 w-6 text-orange-500" />
                   </div>
-                  <h4 className="text-sm font-bold text-orange-700 dark:text-orange-300 mb-1">
-                    🔥 Limited Time: First Month FREE
+                  <h4 className="text-lg font-bold text-orange-700 dark:text-orange-300 mb-2">
+                    🔥 Limited Time Offer
                   </h4>
-                  <p className="text-orange-600 dark:text-orange-400 font-medium text-xs">
-                    See improvements within 2 weeks!
+                  <p className="text-orange-600 dark:text-orange-400 font-medium text-sm mb-2">
+                    First Month Completely FREE
+                  </p>
+                  <p className="text-orange-500 dark:text-orange-400 font-medium text-xs">
+                    See grade improvements within 2 weeks!
                   </p>
                 </div>
 
                 {/* Pricing */}
-                <div className="text-center py-3 px-3 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border-2 border-green-200 dark:border-green-700/50">
-                  <div className="flex items-baseline justify-center space-x-1 mb-1">
-                    <span className="text-2xl font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">$7.99</span>
+                <div className="text-center py-4 px-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border-2 border-green-200 dark:border-green-700/50">
+                  <div className="flex items-baseline justify-center space-x-1 mb-2">
+                    <span className="text-3xl font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">£14.99</span>
                     <span className="text-gray-600 dark:text-gray-400 text-sm">/month</span>
                   </div>
-                  <div className="flex items-center justify-center space-x-1 text-green-700 dark:text-green-300 font-semibold text-xs">
+                  <div className="flex items-center justify-center space-x-1 text-green-700 dark:text-green-300 font-semibold text-xs mb-1">
                     <Shield className="h-3 w-3" />
                     <span>Cancel anytime</span>
                   </div>
+                  <p className="text-green-600 dark:text-green-400 font-medium text-xs">
+                    Less than £0.50 per day
+                  </p>
+                </div>
+
+                {/* Value proposition */}
+                <div className="text-center p-3 bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-xl border-2 border-violet-200 dark:border-violet-700/50">
+                  <div className="flex justify-center mb-1">
+                    <Target className="h-5 w-5 text-violet-500" />
+                  </div>
+                  <h4 className="text-sm font-bold text-violet-700 dark:text-violet-300 mb-1">
+                    🎯 Perfect For Students
+                  </h4>
+                  <p className="text-violet-600 dark:text-violet-400 font-medium text-xs">
+                    Study smarter, not harder
+                  </p>
                 </div>
               </div>
             </div>
