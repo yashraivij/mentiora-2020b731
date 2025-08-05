@@ -813,7 +813,9 @@ const Dashboard = () => {
                   </h1>
                   <div className="flex items-center space-x-2">
                     <Crown className="h-3 w-3 text-amber-500" />
-                    <span className="text-xs font-medium text-muted-foreground">Premium</span>
+                    <span className="text-xs font-medium text-muted-foreground">
+                      {subscription.subscribed ? "Premium" : "Standard"}
+                    </span>
                   </div>
                 </div>
               </div>
