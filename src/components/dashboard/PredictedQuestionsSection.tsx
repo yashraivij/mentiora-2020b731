@@ -1,29 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Crown, Star, Sparkles, Target, Clock, BookOpen, Zap, Trophy, Rocket } from "lucide-react";
+import { Crown, Star, Sparkles, Target, Clock, BookOpen, Zap, Trophy, Rocket, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { CountdownTimer } from "./CountdownTimer";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
+import { PremiumPaywall } from "@/components/ui/premium-paywall";
+import { useState } from "react";
 
 export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
   const { subscription, createCheckout } = useAuth();
+  const [showPaywall, setShowPaywall] = useState(false);
 
   const handleStartPredicted = async () => {
     if (!subscription.subscribed) {
-      try {
-        const checkoutUrl = await createCheckout();
-        if (checkoutUrl) {
-          window.open(checkoutUrl, '_blank');
-        } else {
-          toast.error('Failed to create checkout session');
-        }
-      } catch (error) {
-        console.error('Error creating checkout:', error);
-        toast.error('Failed to start checkout process');
-      }
+      setShowPaywall(true);
     } else {
       navigate('/predicted-questions');
     }
@@ -31,8 +24,31 @@ export const PredictedQuestionsSection = () => {
 
   return (
     <div className="mb-8 space-y-6">
-      {/* Main Premium Feature Card */}
-      <div className="relative overflow-hidden rounded-3xl">
+      {showPaywall ? (
+        <div className="space-y-4">
+          <Button
+            onClick={() => setShowPaywall(false)}
+            variant="ghost"
+            className="flex items-center space-x-2 text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            <span>Back to Predicted Questions</span>
+          </Button>
+          <PremiumPaywall
+            feature="Predicted 2026 Questions"
+            description="Access AI-generated exam questions based on latest 2026 exam trends"
+            benefits={[
+              "🔮 Predicted 2026 questions for your exact exam board",
+              "📓 Smart notebook auto-saves key revision points", 
+              "📊 Grade predictions updated with every quiz you take",
+              "🎯 Targeted revision based on your weak topics"
+            ]}
+          />
+        </div>
+      ) : (
+        <>
+          {/* Main Premium Feature Card */}
+          <div className="relative overflow-hidden rounded-3xl">
         {/* Animated Background Gradients */}
         <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 opacity-90" />
         <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 opacity-80 animate-pulse" />
@@ -160,6 +176,8 @@ export const PredictedQuestionsSection = () => {
           </CardContent>
         </div>
       </div>
+        </>
+      )}
     </div>
   );
 };
