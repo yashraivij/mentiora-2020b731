@@ -61,10 +61,10 @@ export const PremiumPaywall = ({
                 <GraduationCap className="h-8 w-8 text-white" />
               </div>
               <CardTitle className="text-2xl font-bold text-white mb-2 bg-gradient-to-r from-yellow-200 to-white bg-clip-text text-transparent">
-                🚀 Unlock Your Academic Superpowers
+                🎯 AI-Powered Study Revolution
               </CardTitle>
               <CardDescription className="text-white/95 text-lg font-medium">
-                Join 50,000+ students boosting grades by 2+ levels
+                Save 15+ hours every week with intelligent learning
               </CardDescription>
             </div>
           </div>
@@ -104,11 +104,11 @@ export const PremiumPaywall = ({
                 </div>
               </div>
 
-              {/* Right Column */}
+               {/* Right Column */}
               <div className="space-y-4">
                 {/* More benefits */}
                 <div className="space-y-2">
-                  <div className="grid gap-2">
+                  <div className="grid gap-2 mt-8">
                     {benefits.slice(3).map((benefit, index) => (
                       <div key={index + 3} className="flex items-center space-x-2 p-2 bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-lg border border-cyan-200 dark:border-cyan-700/50">
                         <div className="flex-shrink-0">
@@ -138,7 +138,7 @@ export const PremiumPaywall = ({
                 {/* Pricing */}
                 <div className="text-center py-3 px-3 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border-2 border-green-200 dark:border-green-700/50">
                   <div className="flex items-baseline justify-center space-x-1 mb-1">
-                    <span className="text-2xl font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">$7.99</span>
+                    <span className="text-2xl font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">£14.99</span>
                     <span className="text-gray-600 dark:text-gray-400 text-sm">/month</span>
                   </div>
                   <div className="flex items-center justify-center space-x-1 text-green-700 dark:text-green-300 font-semibold text-xs">
