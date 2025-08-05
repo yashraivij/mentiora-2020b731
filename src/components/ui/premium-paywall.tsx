@@ -17,11 +17,10 @@ export const PremiumPaywall = ({
   description, 
   icon = <Crown className="h-8 w-8" />,
   benefits = [
-    "🎯 Creates personalized study notes for YOUR weaknesses",
-    "🔮 Get exact exam questions before they're asked",
-    "📈 See your predicted grades and improve before it's too late",
-    "🎵 Study playlists that boost your focus and memory",
-    "⚡ Save 10+ hours per week with smart recommendations"
+    "🔮 Predicted 2026 questions for your exact exam board",
+    "📓 Smart notebook auto-saves key revision points",
+    "📊 Grade predictions updated with every quiz you take",
+    "🎯 Targeted revision based on your weak topics"
   ]
 }: PremiumPaywallProps) => {
   const { createCheckout } = useAuth();
