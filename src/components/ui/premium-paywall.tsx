@@ -41,148 +41,110 @@ export const PremiumPaywall = ({
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div className="w-full max-w-3xl mx-auto">
       {/* Premium Card */}
       <div className="relative">
-        {/* Animated rainbow glow effect */}
-        <div className="absolute -inset-1 bg-gradient-to-r from-violet-500 via-purple-500 via-blue-500 via-green-500 via-yellow-500 via-orange-500 to-red-500 opacity-40 rounded-2xl blur animate-pulse"></div>
+        {/* Animated glow effect */}
+        <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 opacity-30 rounded-2xl blur animate-pulse"></div>
         
-        <Card className="relative bg-gradient-to-br from-violet-50/90 via-purple-50/90 to-pink-50/90 dark:from-violet-900/30 dark:via-purple-900/30 dark:to-pink-900/30 backdrop-blur-xl border-0 shadow-2xl rounded-2xl overflow-hidden">
-          {/* Colorful Header */}
-          <div className="relative bg-gradient-to-br from-violet-600 via-purple-600 to-pink-600 p-6 text-center">
-            <div className="absolute inset-0">
-              <div className="absolute inset-0 bg-gradient-to-r from-violet-600/90 via-purple-600/90 to-pink-600/90"></div>
-              <div className="absolute top-0 left-1/4 w-32 h-32 bg-yellow-400/20 rounded-full blur-2xl"></div>
-              <div className="absolute bottom-0 right-1/4 w-32 h-32 bg-cyan-400/20 rounded-full blur-2xl"></div>
-            </div>
-            
+        <Card className="relative bg-gradient-to-br from-white via-purple-50/30 to-pink-50/30 dark:from-gray-900 dark:via-purple-900/20 dark:to-pink-900/20 backdrop-blur-xl border border-purple-200/50 dark:border-purple-700/50 shadow-2xl rounded-2xl overflow-hidden">
+          {/* Compact Header */}
+          <div className="relative bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 p-4 text-center">
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-600/95 via-pink-600/95 to-blue-600/95"></div>
             <div className="relative z-10">
-              <div className="inline-flex items-center justify-center w-16 h-16 mb-3 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full shadow-lg">
-                <GraduationCap className="h-8 w-8 text-white" />
+              <div className="inline-flex items-center justify-center w-12 h-12 mb-2 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full shadow-lg">
+                <Crown className="h-6 w-6 text-white" />
               </div>
-              <CardTitle className="text-2xl font-bold text-white mb-2 bg-gradient-to-r from-yellow-200 to-white bg-clip-text text-transparent">
+              <CardTitle className="text-xl font-bold text-white mb-1 bg-gradient-to-r from-yellow-200 to-white bg-clip-text text-transparent">
                 💎 Premium AI Study Experience
               </CardTitle>
-              <CardDescription className="text-white/95 text-lg font-medium">
+              <CardDescription className="text-white/95 text-sm font-medium">
                 Save 15+ hours every week • Get better grades faster
               </CardDescription>
             </div>
           </div>
 
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             {/* Time Savings Highlight */}
-            <div className="text-center p-4 mb-6 bg-gradient-to-r from-yellow-50 via-orange-50 to-red-50 dark:from-yellow-900/20 dark:via-orange-900/20 dark:to-red-900/20 rounded-xl border-2 border-yellow-300 dark:border-yellow-600/50 shadow-lg">
-              <div className="flex justify-center mb-2">
-                <div className="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full shadow-lg">
-                  <Zap className="h-5 w-5 text-white" />
-                </div>
+            <div className="text-center p-3 mb-4 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 dark:from-emerald-400/20 dark:to-teal-400/20 rounded-xl border border-emerald-300/50 dark:border-emerald-600/50">
+              <div className="flex items-center justify-center space-x-2 mb-1">
+                <Zap className="h-5 w-5 text-emerald-600" />
+                <h3 className="text-lg font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                  Save 15+ Hours Every Week
+                </h3>
               </div>
-              <h3 className="text-xl font-black bg-gradient-to-r from-yellow-600 via-orange-600 to-red-600 bg-clip-text text-transparent mb-1">
-                ⚡ Save 15+ Hours Every Week
-              </h3>
-              <p className="text-gray-700 dark:text-gray-300 text-sm font-semibold">
-                More time for hobbies, friends & relaxation while getting better grades
+              <p className="text-gray-600 dark:text-gray-300 text-xs font-medium">
+                More time for friends & hobbies while improving grades
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-6">
-              {/* Left Column */}
-              <div className="space-y-4">
-                {/* Feature highlight */}
-                <div className="text-center p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/30 rounded-xl border-2 border-emerald-200 dark:border-emerald-700/50">
-                  <div className="flex justify-center mb-2">
-                    <Brain className="h-6 w-6 text-emerald-600" />
-                  </div>
-                  <h3 className="text-lg font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mb-1">
-                    {feature}
-                  </h3>
-                  <p className="text-gray-700 dark:text-gray-300 text-sm font-medium">{description}</p>
-                </div>
-
-                {/* Benefits */}
-                <div className="space-y-2">
-                  <h4 className="font-bold text-lg text-center bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                    ✨ Premium Features Included
-                  </h4>
-                  <div className="grid gap-2">
-                    {benefits.map((benefit, index) => (
-                      <div key={index} className="flex items-center space-x-2 p-2 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg border border-blue-200 dark:border-blue-700/50">
-                        <div className="flex-shrink-0">
-                          <div className="w-5 h-5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg">
-                            <Star className="h-2.5 w-2.5 text-white fill-white" />
-                          </div>
+            <div className="grid md:grid-cols-3 gap-4 mb-4">
+              {/* Benefits Column */}
+              <div className="md:col-span-2 space-y-3">
+                <h4 className="font-bold text-sm bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent text-center">
+                  ✨ Premium Features Included
+                </h4>
+                <div className="grid gap-2">
+                  {benefits.map((benefit, index) => (
+                    <div key={index} className="flex items-center space-x-2 p-2 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 rounded-lg border border-blue-200/50 dark:border-blue-700/30">
+                      <div className="flex-shrink-0">
+                        <div className="w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                          <Star className="h-2 w-2 text-white fill-white" />
                         </div>
-                        <span className="text-gray-800 dark:text-gray-200 font-medium text-xs leading-relaxed">{benefit}</span>
                       </div>
-                    ))}
-                  </div>
+                      <span className="text-gray-700 dark:text-gray-200 font-medium text-xs">{benefit}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              {/* Right Column */}
-              <div className="space-y-4">
-                {/* Urgency */}
-                <div className="text-center p-4 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-xl border-2 border-orange-200 dark:border-orange-700/50">
-                  <div className="flex justify-center mb-2">
-                    <Trophy className="h-6 w-6 text-orange-500" />
+              {/* Pricing & CTA Column */}
+              <div className="space-y-3">
+                {/* Pricing */}
+                <div className="text-center p-3 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border border-green-200 dark:border-green-600/50">
+                  <div className="flex items-baseline justify-center space-x-1 mb-1">
+                    <span className="text-2xl font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">£14.99</span>
+                    <span className="text-gray-500 dark:text-gray-400 text-xs">/month</span>
                   </div>
-                  <h4 className="text-lg font-bold text-orange-700 dark:text-orange-300 mb-2">
-                    🔥 Limited Time Offer
-                  </h4>
-                  <p className="text-orange-600 dark:text-orange-400 font-medium text-sm mb-2">
-                    First Month Completely FREE
-                  </p>
-                  <p className="text-orange-500 dark:text-orange-400 font-medium text-xs">
-                    See grade improvements within 2 weeks!
+                  <p className="text-green-600 dark:text-green-400 font-medium text-xs">
+                    Less than £0.50/day
                   </p>
                 </div>
 
-                {/* Pricing */}
-                <div className="text-center py-4 px-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border-2 border-green-200 dark:border-green-700/50">
-                  <div className="flex items-baseline justify-center space-x-1 mb-2">
-                    <span className="text-3xl font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">£14.99</span>
-                    <span className="text-gray-600 dark:text-gray-400 text-sm">/month</span>
-                  </div>
-                  <div className="flex items-center justify-center space-x-1 text-green-700 dark:text-green-300 font-semibold text-xs mb-1">
+                {/* Offer */}
+                <div className="text-center p-2 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-lg border border-orange-200 dark:border-orange-600/50">
+                  <h4 className="text-xs font-bold text-orange-700 dark:text-orange-300 mb-1">
+                    🔥 First Month FREE
+                  </h4>
+                  <p className="text-orange-600 dark:text-orange-400 font-medium text-xs">
+                    See results in 2 weeks!
+                  </p>
+                </div>
+
+                {/* Guarantee */}
+                <div className="text-center p-2 bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-lg border border-violet-200 dark:border-violet-600/50">
+                  <div className="flex items-center justify-center space-x-1 text-violet-600 dark:text-violet-400 text-xs font-semibold">
                     <Shield className="h-3 w-3" />
                     <span>Cancel anytime</span>
                   </div>
-                  <p className="text-green-600 dark:text-green-400 font-medium text-xs">
-                    Less than £0.50 per day
-                  </p>
-                </div>
-
-                {/* Value proposition */}
-                <div className="text-center p-3 bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-xl border-2 border-violet-200 dark:border-violet-700/50">
-                  <div className="flex justify-center mb-1">
-                    <Target className="h-5 w-5 text-violet-500" />
-                  </div>
-                  <h4 className="text-sm font-bold text-violet-700 dark:text-violet-300 mb-1">
-                    🎯 Perfect For Students
-                  </h4>
-                  <p className="text-violet-600 dark:text-violet-400 font-medium text-xs">
-                    Study smarter, not harder
-                  </p>
                 </div>
               </div>
             </div>
 
-            {/* CTA Button - Full Width */}
-            <div className="mt-6 space-y-3">
-              <Button 
-                onClick={handleUpgrade}
-                className="w-full h-12 bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 hover:from-violet-700 hover:via-purple-700 hover:to-pink-700 text-white font-black text-lg rounded-xl shadow-2xl hover:shadow-violet-500/25 transform hover:scale-[1.02] transition-all duration-300 group"
-              >
-                <Rocket className="h-5 w-5 mr-2 group-hover:animate-bounce" />
-                🎯 START FREE TRIAL NOW
-                <Sparkles className="h-5 w-5 ml-2 group-hover:animate-spin" />
-              </Button>
-              
-              <div className="text-center">
-                <p className="text-xs text-gray-600 dark:text-gray-400">
-                  ⚡ Instant access • No commitment • Save 10+ hours per week
-                </p>
-              </div>
+            {/* CTA Button */}
+            <Button 
+              onClick={handleUpgrade}
+              className="w-full h-10 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-700 hover:via-pink-700 hover:to-blue-700 text-white font-bold text-sm rounded-xl shadow-xl hover:shadow-purple-500/25 transform hover:scale-[1.02] transition-all duration-300 group"
+            >
+              <Rocket className="h-4 w-4 mr-2 group-hover:animate-bounce" />
+              🎯 START FREE TRIAL NOW
+              <Sparkles className="h-4 w-4 ml-2 group-hover:animate-spin" />
+            </Button>
+            
+            <div className="text-center mt-2">
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                ⚡ Instant access • No commitment required
+              </p>
             </div>
           </CardContent>
         </Card>
