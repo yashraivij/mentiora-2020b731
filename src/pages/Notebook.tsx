@@ -170,10 +170,10 @@ const Notebook = () => {
             description="Access AI-generated revision notes for every question you've answered incorrectly. Get personalized study materials that help you understand exactly what went wrong and how to fix it."
             icon={<BookOpen className="h-8 w-8 text-slate-500" />}
             benefits={[
-              "AI-generated revision notes for every wrong answer",
-              "Personalized study materials based on your mistakes",
-              "Confidence tracking and improvement suggestions", 
-              "Automatic note organization by subject and topic"
+              "🔮 Predicted 2026 questions for your exact exam board",
+              "📓 Smart notebook auto-saves key revision points",
+              "📊 Grade predictions updated with every quiz you take",
+              "🎯 Targeted revision based on your weak topics"
             ]}
           />
         </div>
