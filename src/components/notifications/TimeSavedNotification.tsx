@@ -33,7 +33,7 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
 
   const getEncouragingMessage = () => {
     if (!isSubscribed) {
-      return "Unlock detailed time tracking with Premium!";
+      return "🔓 See your EXACT time savings with Premium! Join thousands of students maximizing their study efficiency.";
     }
     
     const days = Math.floor(timeSavedHours / 24);
@@ -60,19 +60,15 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
     const days = Math.floor(totalHours / 24);
     const remainingHours = Math.round((totalHours - (days * 24)) * 10) / 10; // Proper rounding
     
-    let timeDisplay = '';
     if (days >= 1) {
       if (remainingHours >= 0.1) { // Only show remaining hours if >= 0.1
-        timeDisplay = `${days}d ${remainingHours}h`;
+        return `${days}d ${remainingHours}h`;
       } else {
-        timeDisplay = `${days} day${days > 1 ? 's' : ''}`;
+        return `${days} day${days > 1 ? 's' : ''}`;
       }
     } else {
-      timeDisplay = `${totalHours}h`;
+      return `${totalHours}h`;
     }
-    
-    // Blur for non-premium users
-    return isSubscribed ? timeDisplay : '••••';
   };
 
   return (
@@ -190,22 +186,33 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                 </div>
               </div>
 
-              {/* Action button */}
-              <motion.div
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="mt-4 text-center"
-              >
-                <Button
-                  onClick={() => window.location.href = '/notebook'}
-                  size="sm"
-                  className="bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 hover:from-violet-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl transition-all duration-200"
-                >
-                  <BookOpen className="h-3 w-3 mr-1" />
-                  View Notes
-                </Button>
-              </motion.div>
+               {/* Action button */}
+               <motion.div
+                 initial={{ y: 10, opacity: 0 }}
+                 animate={{ y: 0, opacity: 1 }}
+                 transition={{ delay: 0.4 }}
+                 className="mt-4 text-center space-y-2"
+               >
+                 {!isSubscribed ? (
+                   <Button
+                     onClick={() => window.location.href = '/premium'}
+                     size="sm"
+                     className="bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 hover:from-amber-600 hover:via-orange-600 hover:to-red-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 animate-pulse"
+                   >
+                     <Crown className="h-3 w-3 mr-1" />
+                     Unlock Premium
+                   </Button>
+                 ) : (
+                   <Button
+                     onClick={() => window.location.href = '/notebook'}
+                     size="sm"
+                     className="bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 hover:from-violet-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl transition-all duration-200"
+                   >
+                     <BookOpen className="h-3 w-3 mr-1" />
+                     View Notes
+                   </Button>
+                 )}
+               </motion.div>
             </div>
           </Card>
         </motion.div>
