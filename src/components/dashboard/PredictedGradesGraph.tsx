@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { TrendingUp, Crown, Target, Sparkles, Trophy, Zap } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { curriculum } from "@/data/curriculum";
 import { Button } from "@/components/ui/button";
@@ -34,22 +35,13 @@ interface PredictedGradesGraphProps {
 }
 
 export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
-  const { user, subscription, createCheckout } = useAuth();
+  const { user, subscription } = useAuth();
+  const navigate = useNavigate();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const handleUpgrade = async () => {
-    try {
-      const checkoutUrl = await createCheckout();
-      if (checkoutUrl) {
-        window.open(checkoutUrl, '_blank');
-      } else {
-        toast.error('Failed to create checkout session');
-      }
-    } catch (error) {
-      console.error('Error creating checkout:', error);
-      toast.error('Failed to start checkout process');
-    }
+  const handleUpgrade = () => {
+    navigate('/premium');
   };
 
   // Grade to percentage mapping
