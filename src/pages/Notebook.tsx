@@ -210,7 +210,7 @@ const Notebook = () => {
           </div>
 
           {/* Premium Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 relative ${!isPremium ? 'blur-sm' : ''}`}>
             <Card className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 dark:from-blue-950/50 dark:via-indigo-950/50 dark:to-blue-900/50 border-blue-200/50 dark:border-blue-800/30 shadow-xl shadow-blue-500/10 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-blue-400/20 to-transparent rounded-bl-full"></div>
               <CardContent className="p-6 text-center relative">
@@ -244,6 +244,16 @@ const Notebook = () => {
                 <div className="text-xs text-violet-500/70 dark:text-violet-400/70 mt-1">Covered</div>
               </CardContent>
             </Card>
+            
+            {/* Stats Lock Overlay for Non-Premium */}
+            {!isPremium && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-xl p-4 text-center border-2 border-sky-200 dark:border-sky-800 shadow-xl">
+                  <Crown className="h-8 w-8 mx-auto mb-2 text-sky-600" />
+                  <p className="text-sm font-medium text-sky-700 dark:text-sky-300">Premium Stats</p>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Enhanced Filters */}
@@ -304,42 +314,90 @@ const Notebook = () => {
           </Card>
         ) : (
           <>
-            {/* Premium CTA for non-premium users */}
+            {/* Enhanced Premium CTA for non-premium users */}
             {!isPremium && sortedEntries.length > 0 && (
-              <Card className="mb-8 bg-gradient-to-r from-sky-50 via-blue-50 to-indigo-50 dark:from-sky-950/50 dark:via-blue-950/50 dark:to-indigo-950/50 border-2 border-sky-200/50 dark:border-sky-800/30 shadow-xl">
-                <CardContent className="p-8 text-center">
-                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-sky-400 via-blue-400 to-indigo-400 rounded-3xl flex items-center justify-center shadow-lg">
-                    <Crown className="h-10 w-10 text-white" />
-                  </div>
-                  <h2 className="text-3xl font-bold bg-gradient-to-r from-sky-700 via-blue-700 to-indigo-700 dark:from-sky-300 dark:via-blue-300 dark:to-indigo-300 bg-clip-text text-transparent mb-4">
-                    Unlock Your Detailed Revision Notes
-                  </h2>
-                  <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-                    See exactly what went wrong, get clear explanations, and master every topic with AI-generated study materials tailored to your mistakes.
-                  </p>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 text-sm">
-                    <div className="flex items-center justify-center space-x-2 p-3 bg-white/50 dark:bg-slate-800/50 rounded-lg">
-                      <Brain className="h-4 w-4 text-sky-600" />
-                      <span>Detailed explanations</span>
+              <div className="relative mb-8">
+                {/* Premium glow effects */}
+                <div className="absolute -inset-4 bg-gradient-to-r from-sky-400/30 via-blue-400/30 to-indigo-400/30 rounded-3xl blur-2xl animate-pulse"></div>
+                <div className="absolute -inset-2 bg-gradient-to-r from-sky-300/20 via-blue-300/20 to-indigo-300/20 rounded-2xl blur-xl animate-[pulse_3s_ease-in-out_infinite]"></div>
+                
+                <Card className="relative bg-gradient-to-br from-white via-sky-50/50 to-blue-50 dark:from-slate-900 dark:via-sky-950/30 dark:to-blue-950/30 border-2 border-transparent bg-clip-padding shadow-2xl">
+                  {/* Animated gradient border */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400 rounded-2xl animate-[spin_20s_linear_infinite]"></div>
+                  <div className="absolute inset-[2px] bg-gradient-to-br from-white via-sky-50/50 to-blue-50 dark:from-slate-900 dark:via-sky-950/30 dark:to-blue-950/30 rounded-[14px]"></div>
+                  
+                  {/* Premium header strip */}
+                  <div className="relative bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400 p-4 text-center overflow-hidden rounded-t-[14px]">
+                    <div className="absolute inset-0 opacity-20">
+                      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
                     </div>
-                    <div className="flex items-center justify-center space-x-2 p-3 bg-white/50 dark:bg-slate-800/50 rounded-lg">
-                      <Target className="h-4 w-4 text-blue-600" />
-                      <span>Worked examples</span>
-                    </div>
-                    <div className="flex items-center justify-center space-x-2 p-3 bg-white/50 dark:bg-slate-800/50 rounded-lg">
-                      <BookOpen className="h-4 w-4 text-indigo-600" />
-                      <span>Key concepts</span>
+                    <div className="relative flex items-center justify-center space-x-3">
+                      <Crown className="h-6 w-6 text-white animate-bounce" />
+                      <span className="text-white font-bold text-lg">Premium Feature</span>
+                      <Crown className="h-6 w-6 text-white animate-bounce" style={{ animationDelay: '0.5s' }} />
                     </div>
                   </div>
-                  <Button 
-                    onClick={handleUpgrade}
-                    className="bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400 hover:from-sky-500 hover:via-blue-500 hover:to-indigo-500 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-xl hover:shadow-blue-500/25 transform hover:scale-[1.02] transition-all duration-300"
-                  >
-                    <Crown className="h-5 w-5 mr-3" />
-                    Upgrade to Premium
-                  </Button>
-                </CardContent>
-              </Card>
+                  
+                  <CardContent className="relative p-10 text-center">
+                    {/* Main icon with glow */}
+                    <div className="relative w-24 h-24 mx-auto mb-8">
+                      <div className="absolute inset-0 bg-gradient-to-br from-sky-400 via-blue-400 to-indigo-400 rounded-3xl blur-lg opacity-40 animate-pulse"></div>
+                      <div className="relative w-full h-full bg-gradient-to-br from-sky-400 via-blue-400 to-indigo-400 rounded-3xl flex items-center justify-center shadow-2xl">
+                        <BookOpen className="h-12 w-12 text-white" />
+                      </div>
+                    </div>
+                    
+                    <h2 className="text-4xl font-bold bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 dark:from-sky-300 dark:via-blue-300 dark:to-indigo-300 bg-clip-text text-transparent mb-6 leading-tight">
+                      Unlock Your Detailed<br />Revision Notes
+                    </h2>
+                    
+                    <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+                      Get instant access to AI-powered study materials that show you exactly what went wrong and how to fix it
+                    </p>
+                    
+                    {/* Feature grid with enhanced styling */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                      <div className="group p-6 bg-gradient-to-br from-sky-50 to-sky-100 dark:from-sky-950/50 dark:to-sky-900/50 rounded-2xl border border-sky-200/50 dark:border-sky-800/30 hover:shadow-lg transition-all duration-300">
+                        <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-sky-500 to-sky-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          <Brain className="h-6 w-6 text-white" />
+                        </div>
+                        <h3 className="font-bold text-sky-700 dark:text-sky-300 mb-2">Smart Analysis</h3>
+                        <p className="text-sm text-sky-600 dark:text-sky-400">Detailed explanations of your mistakes</p>
+                      </div>
+                      
+                      <div className="group p-6 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/50 dark:to-blue-900/50 rounded-2xl border border-blue-200/50 dark:border-blue-800/30 hover:shadow-lg transition-all duration-300">
+                        <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          <Target className="h-6 w-6 text-white" />
+                        </div>
+                        <h3 className="font-bold text-blue-700 dark:text-blue-300 mb-2">Worked Examples</h3>
+                        <p className="text-sm text-blue-600 dark:text-blue-400">Step-by-step solution guides</p>
+                      </div>
+                      
+                      <div className="group p-6 bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-950/50 dark:to-indigo-900/50 rounded-2xl border border-indigo-200/50 dark:border-indigo-800/30 hover:shadow-lg transition-all duration-300">
+                        <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          <Star className="h-6 w-6 text-white" />
+                        </div>
+                        <h3 className="font-bold text-indigo-700 dark:text-indigo-300 mb-2">Key Insights</h3>
+                        <p className="text-sm text-indigo-600 dark:text-indigo-400">Essential concepts you need to master</p>
+                      </div>
+                    </div>
+                    
+                    {/* Enhanced CTA button */}
+                    <Button 
+                      onClick={handleUpgrade}
+                      className="relative group bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400 hover:from-sky-500 hover:via-blue-500 hover:to-indigo-500 text-white font-bold text-xl px-12 py-6 rounded-2xl shadow-2xl hover:shadow-blue-500/30 transform hover:scale-[1.05] transition-all duration-300 overflow-hidden"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <Crown className="h-6 w-6 mr-4 group-hover:animate-bounce" />
+                      <span className="relative">Upgrade to Premium</span>
+                    </Button>
+                    
+                    <p className="text-sm text-muted-foreground mt-4 opacity-75">
+                      Instant access • Cancel anytime • 30-day money back guarantee
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
             )}
             
             <div className="space-y-8">
@@ -347,8 +405,7 @@ const Notebook = () => {
                 <div key={entry.id} className="transform hover:scale-[1.02] transition-all duration-200">
                   <NotebookEntry 
                     entry={entry} 
-                    isPremium={isPremium} 
-                    onUpgrade={handleUpgrade} 
+                    isPremium={isPremium}
                   />
                 </div>
               ))}
