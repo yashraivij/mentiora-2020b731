@@ -223,21 +223,41 @@ const Dashboard = () => {
       if (urlParams.get('checkout') === 'success') {
         console.log('🎉 Checkout success detected, refreshing subscription status...');
         
-        // Wait a moment for Stripe to process the payment
-        setTimeout(async () => {
+        // Force immediate subscription check with retries
+        const retryCheckSubscription = async (attempts = 0) => {
+          console.log(`🔄 Checking subscription (attempt ${attempts + 1}/5)...`);
           await checkSubscription();
           
-          // Show success message
-          toast({
-            title: "Welcome to Premium! 🎉",
-            description: "Your premium features are now active. Enjoy unlimited access!",
-            duration: 5000
-          });
+          // Check if subscription is now active
+          if (subscription.subscribed) {
+            console.log('✅ Premium subscription confirmed!');
+            toast({
+              title: "Welcome to Premium! 🎉",
+              description: "Your premium features are now active. Enjoy unlimited access!",
+              duration: 5000
+            });
+            return;
+          }
+          
+          // Retry up to 5 times with increasing delays
+          if (attempts < 4) {
+            setTimeout(() => retryCheckSubscription(attempts + 1), (attempts + 1) * 2000);
+          } else {
+            console.log('⚠️ Subscription not confirmed after 5 attempts');
+            toast({
+              title: "Payment Processing",
+              description: "Your payment is being processed. Premium features may take a moment to activate.",
+              duration: 7000
+            });
+          }
+        };
 
-          // Remove the checkout parameter from URL
-          const newUrl = window.location.pathname;
-          window.history.replaceState({}, '', newUrl);
-        }, 2000);
+        // Start checking immediately
+        retryCheckSubscription();
+
+        // Remove the checkout parameter from URL
+        const newUrl = window.location.pathname;
+        window.history.replaceState({}, '', newUrl);
       } else if (urlParams.get('checkout') === 'cancelled') {
         toast({
           title: "Payment Cancelled",

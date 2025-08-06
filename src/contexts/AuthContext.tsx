@@ -14,7 +14,7 @@ interface AuthContextType {
     subscription_tier: string | null;
     subscription_end: string | null;
   };
-  checkSubscription: () => Promise<void>;
+  checkSubscription: () => Promise<any>;
   createCheckout: () => Promise<string | null>;
 }
 
@@ -138,10 +138,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const checkSubscription = async () => {
-    if (!session?.access_token) return;
+    if (!session?.access_token) {
+      console.log('❌ No session token available for subscription check');
+      return;
+    }
     
     try {
-      console.log('🔄 Checking subscription status...');
+      console.log('🔄 Checking subscription status...', { userId: user?.id, email: user?.email });
       const { data, error } = await supabase.functions.invoke('check-subscription', {
         headers: {
           Authorization: `Bearer ${session.access_token}`,
@@ -149,18 +152,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
       
       if (error) {
-        console.error('Error checking subscription:', error);
+        console.error('❌ Error checking subscription:', error);
         return;
       }
       
-      console.log('✅ Subscription status updated:', data);
-      setSubscription({
+      console.log('✅ Subscription status received:', data);
+      
+      const newSubscription = {
         subscribed: data.subscribed || false,
         subscription_tier: data.subscription_tier || null,
         subscription_end: data.subscription_end || null,
-      });
+      };
+      
+      setSubscription(newSubscription);
+      console.log('🎯 Subscription state updated:', newSubscription);
+      
+      return newSubscription;
     } catch (error) {
-      console.error('Error checking subscription:', error);
+      console.error('❌ Error checking subscription:', error);
+      throw error;
     }
   };
 
