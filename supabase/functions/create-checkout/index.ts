@@ -51,16 +51,13 @@ serve(async (req) => {
       customer_email: customerId ? undefined : user.email,
       line_items: [
         {
-          price: "price_1RsvVNCtgl2dlnVOimI7vPXe",
+          price: "price_1RsZoICtgl2dlnVOzeRaiU6M",
           quantity: 1,
         },
       ],
       mode: "subscription",
-      success_url: `${req.headers.get("origin")}/payment-success`,
-      cancel_url: `${req.headers.get("origin")}/dashboard`,
-      metadata: {
-        userId: user.id,
-      },
+      success_url: `${req.headers.get("origin")}/dashboard?checkout=success`,
+      cancel_url: `${req.headers.get("origin")}/dashboard?checkout=cancelled`,
     });
 
     logStep("Checkout session created", { sessionId: session.id, url: session.url });
