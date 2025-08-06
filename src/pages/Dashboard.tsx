@@ -60,6 +60,17 @@ const Dashboard = () => {
   const [timeSavedHours, setTimeSavedHours] = useState(0);
   const [previousTimeSaved, setPreviousTimeSaved] = useState(0);
 
+  // Add manual activation for testing if user paid but activation failed
+  const forceActivatePremium = () => {
+    console.log('🚀 Manual premium activation triggered...');
+    activatePremiumAccess();
+    toast({
+      title: "🎉 Premium Activated!",
+      description: "Your account has been manually upgraded to Premium! All premium features are now unlocked.",
+      duration: 6000,
+    });
+  };
+
   const {
     notification,
     checkForWeakTopicRecommendation,
@@ -227,28 +238,18 @@ const Dashboard = () => {
         console.log('🚀 Immediately activating premium access for user...');
         console.log('Current subscription before activation:', subscription);
         activatePremiumAccess();
-        console.log('Current subscription after activation:', subscription);
         
-        // Force a component re-render to ensure UI updates
+        // Force a component re-render and show notification
         setTimeout(() => {
           console.log('Final subscription state check:', subscription);
-        }, 100);
-        
-        // Show immediate feedback to user
-        toast({
-          title: "Payment Successful!",
-          description: "Premium account activated! 🎉",
-          duration: 5000,
-        });
-        
-        // Show success message
-        setTimeout(() => {
+          
+          // Show premium activation notification
           toast({
             title: "🎉 Welcome to Premium!",
-            description: "All premium features are now unlocked. Enjoy unlimited access!",
-            duration: 5000,
+            description: "Your account has been upgraded to Premium! All premium features are now unlocked.",
+            duration: 6000,
           });
-        }, 1000);
+        }, 500);
         
         // Also check with server in background (but don't wait for it)
         setTimeout(async () => {
@@ -275,6 +276,7 @@ const Dashboard = () => {
         window.history.replaceState({}, '', newUrl);
       }
     };
+
 
     loadUserData();
     checkCheckoutSuccess();
@@ -885,6 +887,16 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="flex items-center space-x-3">
+              {/* Debug: Manual Premium Activation Button (only show if not premium) */}
+              {!subscription.subscribed && (
+                <Button 
+                  onClick={forceActivatePremium}
+                  className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white border-2 border-amber-300 shadow-2xl shadow-amber-500/40 hover:shadow-amber-500/60 transition-all duration-300 rounded-xl px-4 py-2 h-9 hover:scale-110 font-bold ring-2 ring-amber-200/50"
+                >
+                  <Crown className="h-4 w-4 mr-2" />
+                  <span className="text-xs font-extrabold">Activate Premium</span>
+                </Button>
+              )}
               <Button 
                 onClick={() => window.open('https://discord.gg/Jq2YTZ3aMa', '_blank')}
                 className="bg-gradient-to-r from-emerald-400 to-green-500 hover:from-emerald-500 hover:to-green-600 text-white border-2 border-emerald-300 shadow-2xl shadow-emerald-500/40 hover:shadow-emerald-500/60 transition-all duration-300 rounded-xl px-6 py-3 h-11 hover:scale-110 font-bold ring-2 ring-emerald-200/50"
