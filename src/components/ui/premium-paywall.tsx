@@ -27,10 +27,15 @@ export const PremiumPaywall = ({
 
   const handleUpgrade = async () => {
     try {
+      console.log('Starting checkout process...');
       const checkoutUrl = await createCheckout();
+      console.log('Checkout URL received:', checkoutUrl);
+      
       if (checkoutUrl) {
+        console.log('Redirecting to:', checkoutUrl);
         window.location.href = checkoutUrl;
       } else {
+        console.error('No checkout URL received');
         toast("Failed to create checkout session. Please try again.");
       }
     } catch (error) {
