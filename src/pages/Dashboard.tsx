@@ -44,7 +44,7 @@ interface UserProgress {
 }
 
 const Dashboard = () => {
-  const { user, logout, subscription, checkSubscription } = useAuth();
+  const { user, logout, subscription, checkSubscription, activatePremiumAccess } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
@@ -230,20 +230,9 @@ const Dashboard = () => {
           duration: 5000,
         });
         
-        // FORCE PREMIUM ACTIVATION IMMEDIATELY - Don't wait for webhooks
+        // FORCE PREMIUM ACTIVATION IMMEDIATELY using AuthContext function
         console.log('🚀 Immediately activating premium access for user...');
-        
-        // Set premium subscription state directly
-        const premiumSubscription = {
-          subscribed: true,
-          subscription_tier: "Premium" as string | null,
-          subscription_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() as string | null
-        };
-        
-        // Force update subscription context immediately
-        if (typeof subscription === 'object' && subscription !== null) {
-          Object.assign(subscription, premiumSubscription);
-        }
+        activatePremiumAccess();
         
         // Also check with server in background (but don't wait for it)
         setTimeout(async () => {
