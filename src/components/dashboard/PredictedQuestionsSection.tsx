@@ -11,11 +11,8 @@ export const PredictedQuestionsSection = () => {
   const { subscription } = useAuth();
 
   const handleStartPredicted = async () => {
-    if (!subscription.subscribed) {
-      navigate('/premium');
-    } else {
-      navigate('/predicted-questions');
-    }
+    // Always navigate to predicted questions page - premium check happens when clicking into exams
+    navigate('/predicted-questions');
   };
 
   return (

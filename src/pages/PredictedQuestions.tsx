@@ -64,7 +64,25 @@ const PredictedQuestions = () => {
   };
 
   const handleSubjectSelect = (subjectId: string) => {
-    navigate(`/predicted-exam/${subjectId}`);
+    // Check premium status before allowing exam access
+    const checkPremium = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        navigate('/premium');
+        return;
+      }
+      
+      // Check if user has active subscription
+      const { data } = await supabase.functions.invoke('check-subscription');
+      if (!data?.subscribed) {
+        navigate('/premium');
+        return;
+      }
+      
+      navigate(`/predicted-exam/${subjectId}`);
+    };
+    
+    checkPremium();
   };
 
   const getSubjectColor = (subjectId: string) => {
