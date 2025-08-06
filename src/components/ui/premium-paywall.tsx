@@ -25,11 +25,18 @@ export const PremiumPaywall = ({
 }: PremiumPaywallProps) => {
   const { createCheckout } = useAuth();
 
-  const handleUpgrade = () => {
-    const currentOrigin = window.location.origin;
-    const successUrl = encodeURIComponent(currentOrigin + '/payment-success');
-    const stripeUrl = `https://buy.stripe.com/fZu8wO8ogcnUdaw81a8N201?success_url=${successUrl}`;
-    window.location.href = stripeUrl;
+  const handleUpgrade = async () => {
+    try {
+      const checkoutUrl = await createCheckout();
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      } else {
+        toast("Failed to create checkout session. Please try again.");
+      }
+    } catch (error) {
+      console.error('Error creating checkout:', error);
+      toast("Failed to create checkout session. Please try again.");
+    }
   };
 
   return (
