@@ -141,6 +141,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (!session?.access_token) return;
     
     try {
+      console.log('🔄 Checking subscription status...');
       const { data, error } = await supabase.functions.invoke('check-subscription', {
         headers: {
           Authorization: `Bearer ${session.access_token}`,
@@ -152,6 +153,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
       
+      console.log('✅ Subscription status updated:', data);
       setSubscription({
         subscribed: data.subscribed || false,
         subscription_tier: data.subscription_tier || null,

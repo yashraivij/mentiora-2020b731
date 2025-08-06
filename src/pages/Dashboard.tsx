@@ -44,7 +44,7 @@ interface UserProgress {
 }
 
 const Dashboard = () => {
-  const { user, logout, subscription } = useAuth();
+  const { user, logout, subscription, checkSubscription } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
@@ -217,7 +217,42 @@ const Dashboard = () => {
       await checkForWeakTopicRecommendation();
     };
 
+    // Check for checkout success and refresh subscription status
+    const checkCheckoutSuccess = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('checkout') === 'success') {
+        console.log('🎉 Checkout success detected, refreshing subscription status...');
+        
+        // Wait a moment for Stripe to process the payment
+        setTimeout(async () => {
+          await checkSubscription();
+          
+          // Show success message
+          toast({
+            title: "Welcome to Premium! 🎉",
+            description: "Your premium features are now active. Enjoy unlimited access!",
+            duration: 5000
+          });
+
+          // Remove the checkout parameter from URL
+          const newUrl = window.location.pathname;
+          window.history.replaceState({}, '', newUrl);
+        }, 2000);
+      } else if (urlParams.get('checkout') === 'cancelled') {
+        toast({
+          title: "Payment Cancelled",
+          description: "Your subscription was not activated. You can try again anytime.",
+          variant: "destructive"
+        });
+        
+        // Remove the checkout parameter from URL
+        const newUrl = window.location.pathname;
+        window.history.replaceState({}, '', newUrl);
+      }
+    };
+
     loadUserData();
+    checkCheckoutSuccess();
     
     // Also fetch streak on component mount
     if (user?.id) {
