@@ -217,20 +217,61 @@ const Notebook = () => {
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <BookOpen className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-300 dark:to-indigo-300 bg-clip-text text-transparent mb-1">{stats.totalEntries}</div>
-                <div className="text-sm font-medium text-blue-600 dark:text-blue-400">Total Notes</div>
-                <div className="text-xs text-blue-500/70 dark:text-blue-400/70 mt-1">AI Generated</div>
+                {isPremium ? (
+                  <>
+                    <div className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-300 dark:to-indigo-300 bg-clip-text text-transparent mb-1">{stats.totalEntries}</div>
+                    <div className="text-sm font-medium text-blue-600 dark:text-blue-400">Total Notes</div>
+                    <div className="text-xs text-blue-500/70 dark:text-blue-400/70 mt-1">AI Generated</div>
+                  </>
+                ) : (
+                  <div className="relative">
+                    <div className="filter blur-sm select-none pointer-events-none">
+                      <div className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-300 dark:to-indigo-300 bg-clip-text text-transparent mb-1">{stats.totalEntries}</div>
+                      <div className="text-sm font-medium text-blue-600 dark:text-blue-400">Total Notes</div>
+                      <div className="text-xs text-blue-500/70 dark:text-blue-400/70 mt-1">AI Generated</div>
+                    </div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="bg-black/50 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-white/20">
+                        <Crown className="h-4 w-4 text-amber-400 mx-auto mb-1" />
+                        <div className="text-xs text-white font-medium">Premium</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
-            <Card className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-100 dark:from-emerald-950/50 dark:via-teal-950/50 dark:to-emerald-900/50 border-emerald-200/50 dark:border-emerald-800/30 shadow-xl shadow-emerald-500/10 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300">
+            <Card className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-100 dark:from-emerald-950/50 dark:via-teal-950/50 dark:to-emerald-900/50 border-emerald-200/50 dark:border-emerald-800/30 shadow-xl shadow-emerald-500/10 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 cursor-pointer group" onClick={!isPremium ? handleUpgrade : undefined}>
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-bl-full"></div>
+              {!isPremium && (
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/10 via-amber-400/10 to-orange-400/10 animate-pulse" />
+              )}
               <CardContent className="p-6 text-center relative">
-                <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                   <TrendingUp className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-3xl font-bold bg-gradient-to-r from-emerald-700 to-teal-700 dark:from-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-1">{stats.timeSavedHours}h</div>
-                <div className="text-sm font-medium text-emerald-600 dark:text-emerald-400">Time Saved</div>
-                <div className="text-xs text-emerald-500/70 dark:text-emerald-400/70 mt-1">Auto Notes</div>
+                {isPremium ? (
+                  <>
+                    <div className="text-3xl font-bold bg-gradient-to-r from-emerald-700 to-teal-700 dark:from-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-1">{stats.timeSavedHours}h</div>
+                    <div className="text-sm font-medium text-emerald-600 dark:text-emerald-400">Time Saved</div>
+                    <div className="text-xs text-emerald-500/70 dark:text-emerald-400/70 mt-1">Auto Notes</div>
+                  </>
+                ) : (
+                  <div className="relative">
+                    <div className="filter blur-sm select-none pointer-events-none">
+                      <div className="text-3xl font-bold bg-gradient-to-r from-emerald-700 to-teal-700 dark:from-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-1">{stats.timeSavedHours}h</div>
+                      <div className="text-sm font-medium text-emerald-600 dark:text-emerald-400">Time Saved</div>
+                      <div className="text-xs text-emerald-500/70 dark:text-emerald-400/70 mt-1">Auto Notes</div>
+                    </div>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <div className="bg-gradient-to-r from-emerald-500/90 to-teal-500/90 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/30 shadow-xl group-hover:scale-105 transition-transform duration-300">
+                        <Crown className="h-5 w-5 text-amber-300 mx-auto mb-1.5 animate-bounce" />
+                        <div className="text-sm text-white font-bold mb-1">See Your</div>
+                        <div className="text-xs text-emerald-100 font-medium">Time Saved!</div>
+                        <div className="w-8 h-0.5 bg-amber-300 mx-auto mt-2 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
             <Card className="relative overflow-hidden bg-gradient-to-br from-violet-50 via-purple-50 to-violet-100 dark:from-violet-950/50 dark:via-purple-950/50 dark:to-violet-900/50 border-violet-200/50 dark:border-violet-800/30 shadow-xl shadow-violet-500/10 hover:shadow-2xl hover:shadow-violet-500/20 transition-all duration-300">
@@ -239,9 +280,27 @@ const Notebook = () => {
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <Brain className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-3xl font-bold bg-gradient-to-r from-violet-700 to-purple-700 dark:from-violet-300 dark:to-purple-300 bg-clip-text text-transparent mb-1">{stats.subjectsWithNotes}</div>
-                <div className="text-sm font-medium text-violet-600 dark:text-violet-400">Subjects</div>
-                <div className="text-xs text-violet-500/70 dark:text-violet-400/70 mt-1">Covered</div>
+                {isPremium ? (
+                  <>
+                    <div className="text-3xl font-bold bg-gradient-to-r from-violet-700 to-purple-700 dark:from-violet-300 dark:to-purple-300 bg-clip-text text-transparent mb-1">{stats.subjectsWithNotes}</div>
+                    <div className="text-sm font-medium text-violet-600 dark:text-violet-400">Subjects</div>
+                    <div className="text-xs text-violet-500/70 dark:text-violet-400/70 mt-1">Covered</div>
+                  </>
+                ) : (
+                  <div className="relative">
+                    <div className="filter blur-sm select-none pointer-events-none">
+                      <div className="text-3xl font-bold bg-gradient-to-r from-violet-700 to-purple-700 dark:from-violet-300 dark:to-purple-300 bg-clip-text text-transparent mb-1">{stats.subjectsWithNotes}</div>
+                      <div className="text-sm font-medium text-violet-600 dark:text-violet-400">Subjects</div>
+                      <div className="text-xs text-violet-500/70 dark:text-violet-400/70 mt-1">Covered</div>
+                    </div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="bg-black/50 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-white/20">
+                        <Crown className="h-4 w-4 text-amber-400 mx-auto mb-1" />
+                        <div className="text-xs text-white font-medium">Premium</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>
