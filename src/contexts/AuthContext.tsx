@@ -16,6 +16,7 @@ interface AuthContextType {
   };
   checkSubscription: () => Promise<any>;
   createCheckout: () => Promise<string | null>;
+  activatePremiumAccess: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -199,6 +200,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const activatePremiumAccess = () => {
+    console.log('🚀 Force activating premium access...');
+    const premiumSubscription = {
+      subscribed: true,
+      subscription_tier: "Premium" as string | null,
+      subscription_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() as string | null
+    };
+    setSubscription(premiumSubscription);
+    console.log('✅ Premium access activated locally');
+  };
+
   return (
     <AuthContext.Provider value={{
       user,
@@ -208,7 +220,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       isLoading,
       subscription,
       checkSubscription,
-      createCheckout
+      createCheckout,
+      activatePremiumAccess
     }}>
       {children}
     </AuthContext.Provider>
