@@ -60,45 +60,46 @@ export const NotebookEntry = ({ entry, isPremium = true, onUpgrade }: NotebookEn
   };
 
   return (
-    <Card className="mb-6 border-l-4 border-l-primary shadow-lg hover:shadow-xl transition-shadow duration-300">
-      <CardHeader className="pb-4">
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <CardTitle className="text-lg font-bold text-foreground mb-2">
-              {entry.subject} → {entry.topic}
-            </CardTitle>
-            <CardDescription className="text-sm text-muted-foreground mb-3">
-              {entry.question_label}
-            </CardDescription>
-            <div className="flex items-center gap-2 flex-wrap">
-              <Badge 
-                className={`${getConfidenceColor(entry.confidence_level)} border-0 font-medium`}
-              >
-                {entry.confidence_level} Confidence
-              </Badge>
-              <Badge variant="outline" className="flex items-center gap-1">
-                {getSkillIcon(entry.skill_type)}
-                {entry.skill_type.charAt(0).toUpperCase() + entry.skill_type.slice(1)}
-              </Badge>
-              <Badge variant="secondary">
-                -{entry.mark_loss} marks
-              </Badge>
-              <Badge variant="outline" className="text-xs">
-                <Clock className="h-3 w-3 mr-1" />
-                {format(new Date(entry.created_at), 'MMM d, yyyy')}
-              </Badge>
-              {!isPremium && (
-                <Badge className="bg-sky-100 text-sky-800 dark:bg-sky-900/30 dark:text-sky-300 border-0 font-medium">
-                  <Crown className="h-3 w-3 mr-1" />
-                  Premium
+    <div className="relative mb-6">
+      <Card className="border-l-4 border-l-primary shadow-lg hover:shadow-xl transition-shadow duration-300">
+        <CardHeader className="pb-4">
+          <div className="flex items-start justify-between">
+            <div className="flex-1">
+              <CardTitle className="text-lg font-bold text-foreground mb-2">
+                {entry.subject} → {entry.topic}
+              </CardTitle>
+              <CardDescription className="text-sm text-muted-foreground mb-3">
+                {entry.question_label}
+              </CardDescription>
+              <div className="flex items-center gap-2 flex-wrap">
+                <Badge 
+                  className={`${getConfidenceColor(entry.confidence_level)} border-0 font-medium`}
+                >
+                  {entry.confidence_level} Confidence
                 </Badge>
-              )}
+                <Badge variant="outline" className="flex items-center gap-1">
+                  {getSkillIcon(entry.skill_type)}
+                  {entry.skill_type.charAt(0).toUpperCase() + entry.skill_type.slice(1)}
+                </Badge>
+                <Badge variant="secondary">
+                  -{entry.mark_loss} marks
+                </Badge>
+                <Badge variant="outline" className="text-xs">
+                  <Clock className="h-3 w-3 mr-1" />
+                  {format(new Date(entry.created_at), 'MMM d, yyyy')}
+                </Badge>
+                {!isPremium && (
+                  <Badge className="bg-sky-100 text-sky-800 dark:bg-sky-900/30 dark:text-sky-300 border-0 font-medium">
+                    <Crown className="h-3 w-3 mr-1" />
+                    Premium
+                  </Badge>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      </CardHeader>
-      
-      <CardContent className={`space-y-6 ${!isPremium ? 'blur-sm' : ''}`}>
+        </CardHeader>
+        
+        <CardContent className={`space-y-6 ${!isPremium ? 'blur-sm' : ''}`}>
         {/* What Tripped Me Up */}
         <div className="bg-red-50 dark:bg-red-950/20 p-4 rounded-lg border border-red-200 dark:border-red-800/30">
           <h4 className="font-semibold text-red-800 dark:text-red-300 mb-2 flex items-center gap-2">
@@ -161,15 +162,38 @@ export const NotebookEntry = ({ entry, isPremium = true, onUpgrade }: NotebookEn
           </div>
         </div>
 
-        {/* Next Step */}
-        <div className="bg-amber-50 dark:bg-amber-950/20 p-4 rounded-lg border border-amber-200 dark:border-amber-800/30">
-          <h4 className="font-semibold text-amber-800 dark:text-amber-300 mb-2 flex items-center gap-2">
-            <Target className="h-4 w-4" />
-            Next Step
-          </h4>
-          <p className="text-amber-700 dark:text-amber-200 text-sm">{entry.next_step_suggestion}</p>
+          {/* Next Step */}
+          <div className="bg-amber-50 dark:bg-amber-950/20 p-4 rounded-lg border border-amber-200 dark:border-amber-800/30">
+            <h4 className="font-semibold text-amber-800 dark:text-amber-300 mb-2 flex items-center gap-2">
+              <Target className="h-4 w-4" />
+              Next Step
+            </h4>
+            <p className="text-amber-700 dark:text-amber-200 text-sm">{entry.next_step_suggestion}</p>
+          </div>
+        </CardContent>
+      </Card>
+      
+      {/* Premium Upgrade Overlay */}
+      {!isPremium && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-lg">
+          <div className="text-center p-6 max-w-sm">
+            <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-sky-400 via-blue-400 to-indigo-400 rounded-2xl flex items-center justify-center shadow-lg">
+              <Crown className="h-8 w-8 text-white" />
+            </div>
+            <h3 className="text-lg font-bold text-foreground mb-2">Premium Feature</h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              Unlock detailed AI-generated revision notes to see exactly what tripped you up and how to fix it.
+            </p>
+            <Button 
+              onClick={onUpgrade}
+              className="bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400 hover:from-sky-500 hover:via-blue-500 hover:to-indigo-500 text-white font-medium text-sm shadow-lg hover:shadow-blue-500/25 transform hover:scale-[1.02] transition-all duration-300"
+            >
+              <Crown className="h-4 w-4 mr-2" />
+              Upgrade to Premium
+            </Button>
+          </div>
         </div>
-      </CardContent>
-    </Card>
+      )}
+    </div>
   );
 };
