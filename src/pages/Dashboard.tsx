@@ -223,26 +223,23 @@ const Dashboard = () => {
       if (urlParams.get('checkout') === 'success') {
         console.log('🎉 Checkout success detected, immediately activating premium account...');
         
+        // FORCE PREMIUM ACTIVATION IMMEDIATELY using AuthContext function
+        console.log('🚀 Immediately activating premium access for user...');
+        console.log('Current subscription before activation:', subscription);
+        activatePremiumAccess();
+        console.log('Current subscription after activation:', subscription);
+        
+        // Force a component re-render to ensure UI updates
+        setTimeout(() => {
+          console.log('Final subscription state check:', subscription);
+        }, 100);
+        
         // Show immediate feedback to user
         toast({
           title: "Payment Successful!",
           description: "Premium account activated! 🎉",
           duration: 5000,
         });
-        
-        // FORCE PREMIUM ACTIVATION IMMEDIATELY using AuthContext function
-        console.log('🚀 Immediately activating premium access for user...');
-        activatePremiumAccess();
-        
-        // Also check with server in background (but don't wait for it)
-        setTimeout(async () => {
-          try {
-            await checkSubscription();
-            console.log('✅ Background subscription check completed');
-          } catch (error) {
-            console.log('⚠️ Background subscription check failed, but user already has premium access');
-          }
-        }, 1000);
         
         // Show success message
         setTimeout(() => {
@@ -252,6 +249,16 @@ const Dashboard = () => {
             duration: 5000,
           });
         }, 1000);
+        
+        // Also check with server in background (but don't wait for it)
+        setTimeout(async () => {
+          try {
+            await checkSubscription();
+            console.log('✅ Background subscription check completed');
+          } catch (error) {
+            console.log('⚠️ Background subscription check failed, but user already has premium access');
+          }
+        }, 2000);
 
         // Remove the checkout parameter from URL
         const newUrl = window.location.pathname;
