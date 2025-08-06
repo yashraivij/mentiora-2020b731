@@ -11,11 +11,7 @@ export const PredictedQuestionsSection = () => {
   const { subscription } = useAuth();
 
   const handleStartPredicted = async () => {
-    // Check if user is premium before allowing access
-    if (!subscription.subscribed) {
-      navigate('/premium');
-      return;
-    }
+    // Always navigate to predicted questions page - premium check happens when clicking into exams
     navigate('/predicted-questions');
   };
 
@@ -144,7 +140,7 @@ export const PredictedQuestionsSection = () => {
               className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-4 px-8 rounded-2xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300 text-lg"
             >
               <Crown className="h-5 w-5 mr-3" />
-              {subscription.subscribed ? "Start Exam Practice" : "Start Premium Exam Practice"}
+              Start Premium Exam Practice
               <Sparkles className="h-5 w-5 ml-3" />
             </Button>
           </CardContent>

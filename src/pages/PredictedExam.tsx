@@ -32,7 +32,7 @@ const PredictedExam = () => {
   const { subjectId } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { user, subscription } = useAuth();
+  const { user } = useAuth();
   
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTimeUp, setIsTimeUp] = useState(false);
