@@ -73,9 +73,20 @@ serve(async (req) => {
             logStep("Active subscription confirmed", { subscriptionId: subscription.id, endDate: subscriptionEnd });
           }
 
+          // Get user_id from profiles table
+          const { data: profileData } = await supabaseClient
+            .from("profiles")
+            .select("id")
+            .eq("email", customerEmail)
+            .single();
+
+          const userId = profileData?.id;
+          logStep("Found user profile", { userId, email: customerEmail });
+
           // Update the subscribers table
           await supabaseClient.from("subscribers").upsert({
             email: customerEmail,
+            user_id: userId,
             stripe_customer_id: customerId,
             subscribed: hasActiveSub,
             subscription_tier: hasActiveSub ? subscriptionTier : null,
@@ -100,8 +111,18 @@ serve(async (req) => {
         const subscriptionEnd = subscriptionActive ? 
           new Date(subscription.current_period_end * 1000).toISOString() : null;
 
+        // Get user_id from profiles table
+        const { data: profileData } = await supabaseClient
+          .from("profiles")
+          .select("id")
+          .eq("email", customer.email)
+          .single();
+
+        const userId = profileData?.id;
+
         await supabaseClient.from("subscribers").upsert({
           email: customer.email,
+          user_id: userId,
           stripe_customer_id: customerId,
           subscribed: subscriptionActive,
           subscription_tier: subscriptionActive ? "Premium" : null,
