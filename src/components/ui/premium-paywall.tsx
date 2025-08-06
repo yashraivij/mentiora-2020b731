@@ -26,10 +26,10 @@ export const PremiumPaywall = ({
   const { createCheckout } = useAuth();
 
   const handleUpgrade = () => {
-    // Use the direct Stripe payment link with dashboard redirect
     const currentOrigin = window.location.origin;
-    const stripeUrl = `https://buy.stripe.com/fZu8wO8ogcnUdaw81a8N201?prefilled_success_url=${encodeURIComponent(currentOrigin + '/dashboard')}`;
-    window.open(stripeUrl, '_blank');
+    const successUrl = encodeURIComponent(currentOrigin + '/payment-success');
+    const stripeUrl = `https://buy.stripe.com/fZu8wO8ogcnUdaw81a8N201?success_url=${successUrl}`;
+    window.location.href = stripeUrl;
   };
 
   return (
