@@ -142,10 +142,6 @@ const Notebook = () => {
 
   const isPremium = subscription.subscribed;
 
-  const handleUpgrade = () => {
-    navigate('/premium');
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/50">
       {/* Premium Header */}
@@ -397,7 +393,7 @@ const Notebook = () => {
                     </div>
                   </div>
                   <Button 
-                    onClick={handleUpgrade}
+                    onClick={() => navigate('/premium')}
                     className="bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400 hover:from-sky-500 hover:via-blue-500 hover:to-indigo-500 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-xl hover:shadow-blue-500/25 transform hover:scale-[1.02] transition-all duration-300"
                   >
                     <Crown className="h-5 w-5 mr-3" />
@@ -413,7 +409,7 @@ const Notebook = () => {
                   <NotebookEntry 
                     entry={entry} 
                     isPremium={isPremium} 
-                    onUpgrade={handleUpgrade} 
+                    onUpgrade={() => navigate('/premium')} 
                   />
                 </div>
               ))}

@@ -881,7 +881,7 @@ const Dashboard = () => {
                     ) : (
                       <User className="h-3 w-3 text-muted-foreground" />
                     )}
-                    <span className="text-xs font-medium text-muted-foreground">
+                    <span className={`text-xs font-medium ${subscription.subscribed ? 'text-amber-600 dark:text-amber-400' : 'text-muted-foreground'}`}>
                       {subscription.subscribed ? "Premium" : "Standard"}
                     </span>
                   </div>
