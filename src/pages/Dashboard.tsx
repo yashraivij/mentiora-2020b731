@@ -223,32 +223,51 @@ const Dashboard = () => {
       if (urlParams.get('checkout') === 'success') {
         console.log('🎉 Checkout success detected, refreshing subscription status...');
         
-        // Force immediate subscription check with retries
+        // Show immediate feedback to user
+        toast({
+          title: "Payment Successful!",
+          description: "Activating your premium account...",
+          duration: 3000,
+        });
+        
+        // Force immediate subscription check with retries and longer delays
         const retryCheckSubscription = async (attempts = 0) => {
-          console.log(`🔄 Checking subscription (attempt ${attempts + 1}/5)...`);
-          await checkSubscription();
+          console.log(`🔄 Checking subscription (attempt ${attempts + 1}/8)...`);
           
-          // Check if subscription is now active
-          if (subscription.subscribed) {
-            console.log('✅ Premium subscription confirmed!');
-            toast({
-              title: "Welcome to Premium! 🎉",
-              description: "Your premium features are now active. Enjoy unlimited access!",
-              duration: 5000
-            });
-            return;
-          }
-          
-          // Retry up to 5 times with increasing delays
-          if (attempts < 4) {
-            setTimeout(() => retryCheckSubscription(attempts + 1), (attempts + 1) * 2000);
-          } else {
-            console.log('⚠️ Subscription not confirmed after 5 attempts');
-            toast({
-              title: "Payment Processing",
-              description: "Your payment is being processed. Premium features may take a moment to activate.",
-              duration: 7000
-            });
+          try {
+            const result = await checkSubscription();
+            console.log('Subscription check result:', result);
+            
+            // Check if subscription is now active using the returned result
+            if (result && result.subscribed) {
+              console.log('✅ Premium subscription confirmed!');
+              toast({
+                title: "🎉 Premium Activated!",
+                description: "Your premium subscription is now active. Enjoy all premium features!",
+                duration: 5000,
+              });
+              return;
+            }
+            
+            // Retry up to 8 times with longer delays to allow webhook processing
+            if (attempts < 7) {
+              const delay = Math.min((attempts + 1) * 3000, 15000); // 3s, 6s, 9s, 12s, 15s, 15s, 15s, 15s
+              console.log(`⏳ Subscription not active yet, retrying in ${delay}ms... (webhook may still be processing)`);
+              setTimeout(() => retryCheckSubscription(attempts + 1), delay);
+            } else {
+              console.log('⚠️ Subscription check failed after 8 attempts');
+              toast({
+                title: "Subscription Processing",
+                description: "Your payment is being processed. Please refresh the page in a few moments if premium features are not showing.",
+                duration: 8000,
+              });
+            }
+          } catch (error) {
+            console.error('Error during subscription check:', error);
+            if (attempts < 7) {
+              const delay = Math.min((attempts + 1) * 3000, 15000);
+              setTimeout(() => retryCheckSubscription(attempts + 1), delay);
+            }
           }
         };
 
