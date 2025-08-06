@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, BookOpen, Crown, Brain, TrendingUp, Star, Filter, Calendar } from "lucide-react";
+import { ArrowLeft, BookOpen, Crown, Brain, TrendingUp, Star, Filter, Calendar, Target } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { supabase } from "@/integrations/supabase/client";
 import { NotebookEntry } from "@/components/notebook/NotebookEntry";
@@ -140,46 +140,11 @@ const Notebook = () => {
     );
   }
 
-  // Check for premium subscription
-  if (!subscription.subscribed) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/50">
-        <header className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-700/50 sticky top-0 z-50 shadow-xl shadow-black/5 dark:shadow-black/20">
-          <div className="container mx-auto px-6 py-4">
-            <div className="flex justify-between items-center">
-              <div className="flex items-center space-x-4">
-                <Button 
-                  variant="ghost" 
-                  onClick={() => navigate('/dashboard')}
-                  className="text-muted-foreground hover:text-foreground hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200"
-                >
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  Dashboard
-                </Button>
-              </div>
-              <div className="flex items-center space-x-3">
-                <ThemeToggle />
-              </div>
-            </div>
-          </div>
-        </header>
-        
-        <div className="container mx-auto px-6 py-8 max-w-4xl">
-          <PremiumPaywall 
-            feature="Smart Revision Notebook"
-            description="Access AI-generated revision notes for every question you've answered incorrectly. Get personalized study materials that help you understand exactly what went wrong and how to fix it."
-            icon={<BookOpen className="h-8 w-8 text-slate-500" />}
-            benefits={[
-              "🔮 Predicted 2026 questions for your exact exam board",
-              "📓 Smart notebook auto-saves key revision points",
-              "📊 Grade predictions updated with every quiz you take",
-              "🎯 Targeted revision based on your weak topics"
-            ]}
-          />
-        </div>
-      </div>
-    );
-  }
+  const isPremium = subscription.subscribed;
+
+  const handleUpgrade = () => {
+    navigate('/premium');
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/50">
@@ -338,13 +303,57 @@ const Notebook = () => {
             </CardContent>
           </Card>
         ) : (
-          <div className="space-y-8">
-            {sortedEntries.map((entry, index) => (
-              <div key={entry.id} className="transform hover:scale-[1.02] transition-all duration-200">
-                <NotebookEntry entry={entry} />
-              </div>
-            ))}
-          </div>
+          <>
+            {/* Premium CTA for non-premium users */}
+            {!isPremium && sortedEntries.length > 0 && (
+              <Card className="mb-8 bg-gradient-to-r from-sky-50 via-blue-50 to-indigo-50 dark:from-sky-950/50 dark:via-blue-950/50 dark:to-indigo-950/50 border-2 border-sky-200/50 dark:border-sky-800/30 shadow-xl">
+                <CardContent className="p-8 text-center">
+                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-sky-400 via-blue-400 to-indigo-400 rounded-3xl flex items-center justify-center shadow-lg">
+                    <Crown className="h-10 w-10 text-white" />
+                  </div>
+                  <h2 className="text-3xl font-bold bg-gradient-to-r from-sky-700 via-blue-700 to-indigo-700 dark:from-sky-300 dark:via-blue-300 dark:to-indigo-300 bg-clip-text text-transparent mb-4">
+                    Unlock Your Detailed Revision Notes
+                  </h2>
+                  <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
+                    See exactly what went wrong, get clear explanations, and master every topic with AI-generated study materials tailored to your mistakes.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 text-sm">
+                    <div className="flex items-center justify-center space-x-2 p-3 bg-white/50 dark:bg-slate-800/50 rounded-lg">
+                      <Brain className="h-4 w-4 text-sky-600" />
+                      <span>Detailed explanations</span>
+                    </div>
+                    <div className="flex items-center justify-center space-x-2 p-3 bg-white/50 dark:bg-slate-800/50 rounded-lg">
+                      <Target className="h-4 w-4 text-blue-600" />
+                      <span>Worked examples</span>
+                    </div>
+                    <div className="flex items-center justify-center space-x-2 p-3 bg-white/50 dark:bg-slate-800/50 rounded-lg">
+                      <BookOpen className="h-4 w-4 text-indigo-600" />
+                      <span>Key concepts</span>
+                    </div>
+                  </div>
+                  <Button 
+                    onClick={handleUpgrade}
+                    className="bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400 hover:from-sky-500 hover:via-blue-500 hover:to-indigo-500 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-xl hover:shadow-blue-500/25 transform hover:scale-[1.02] transition-all duration-300"
+                  >
+                    <Crown className="h-5 w-5 mr-3" />
+                    Upgrade to Premium
+                  </Button>
+                </CardContent>
+              </Card>
+            )}
+            
+            <div className="space-y-8">
+              {sortedEntries.map((entry, index) => (
+                <div key={entry.id} className="transform hover:scale-[1.02] transition-all duration-200">
+                  <NotebookEntry 
+                    entry={entry} 
+                    isPremium={isPremium} 
+                    onUpgrade={handleUpgrade} 
+                  />
+                </div>
+              ))}
+            </div>
+          </>
         )}
 
         {/* Premium Action Buttons */}
