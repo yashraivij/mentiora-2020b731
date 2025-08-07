@@ -2,7 +2,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
-import { toast } from '@/hooks/use-toast';
 
 interface AuthContextType {
   user: User | null;
@@ -41,37 +40,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   });
 
   useEffect(() => {
-    // Check for checkout success on any page
-    const urlParams = new URLSearchParams(window.location.search);
-    const checkoutStatus = urlParams.get('checkout');
-    const sessionId = urlParams.get('session_id'); // Stripe also adds session_id
-    
-    console.log('🔍 Checking URL for checkout success...', { 
-      checkoutStatus, 
-      sessionId, 
-      fullUrl: window.location.href 
-    });
-    
-    if (checkoutStatus === 'success' || sessionId) {
-      console.log('🎉 Checkout success detected globally, activating premium...');
-      activatePremiumAccess();
-      
-      // Clear the checkout params from URL
-      const newUrl = new URL(window.location.href);
-      newUrl.searchParams.delete('checkout');
-      newUrl.searchParams.delete('session_id');
-      window.history.replaceState({}, '', newUrl.toString());
-      
-      // Show immediate notification
-      setTimeout(() => {
-        toast({
-          title: "🎉 Payment Successful!",
-          description: "Your Premium account has been activated! Welcome to Premium!",
-          duration: 6000,
-        });
-      }, 500);
-    }
-
     // Set up auth state listener
     const { data: { subscription: authSubscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
@@ -231,20 +199,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return null;
     }
   };
-
-  // Watch for subscription changes and show premium notification (only once)
-  const [hasShownPremiumNotification, setHasShownPremiumNotification] = useState(false);
-  useEffect(() => {
-    if (subscription.subscribed && subscription.subscription_tier === "Premium" && !hasShownPremiumNotification) {
-      console.log('🎉 Premium subscription detected, showing notification');
-      setHasShownPremiumNotification(true);
-      toast({
-        title: "🎉 Welcome to Premium!",
-        description: "Your account has been upgraded to Premium! All premium features are now unlocked.",
-        duration: 6000,
-      });
-    }
-  }, [subscription.subscribed, subscription.subscription_tier, hasShownPremiumNotification]);
 
   const activatePremiumAccess = () => {
     console.log('🚀 Force activating premium access...');

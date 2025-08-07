@@ -140,10 +140,7 @@ const Notebook = () => {
     );
   }
 
-  // Check if accessing from premium dashboard
-  const isPremiumAccess = sessionStorage.getItem('premiumDashboardAccess') === 'true';
-  
-  const isPremium = subscription.subscribed || isPremiumAccess;
+  const isPremium = subscription.subscribed;
 
   const handleUpgrade = () => {
     navigate('/premium');

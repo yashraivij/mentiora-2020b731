@@ -20,9 +20,6 @@ const PredictedQuestions = () => {
   const [loading, setLoading] = useState(true);
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
 
-  // Check if accessing from premium dashboard
-  const isPremiumAccess = sessionStorage.getItem('premiumDashboardAccess') === 'true';
-
   useEffect(() => {
     // Ensure page starts at top when navigating here
     document.documentElement.scrollTop = 0;
@@ -69,19 +66,15 @@ const PredictedQuestions = () => {
   };
 
   const handleSubjectSelect = (subjectId: string) => {
-    // Check premium status using local subscription state or premium access flag
-    if (!subscription.subscribed && !isPremiumAccess) {
+    // Check premium status using local subscription state
+    if (!subscription.subscribed) {
       console.log('User not premium, redirecting to premium page');
       navigate('/premium');
       return;
     }
     
-    // User is premium or accessing from premium dashboard, allow access to exam
+    // User is premium, allow access to exam
     console.log('User is premium, allowing access to exam:', subjectId);
-    if (isPremiumAccess) {
-      // Keep the session flag for the exam page
-      sessionStorage.setItem('premiumDashboardAccess', 'true');
-    }
     navigate(`/predicted-exam/${subjectId}`);
   };
 
@@ -269,7 +262,7 @@ const PredictedQuestions = () => {
                   }}
                 >
                   <Crown className="h-4 w-4 mr-2" />
-                    {isPremiumAccess ? 'Start Exam' : 'Start Premium Exam'}
+                  Start Premium Exam
                   <Sparkles className="h-4 w-4 ml-2" />
                 </Button>
               )}
@@ -333,12 +326,10 @@ const PredictedQuestions = () => {
         {/* Header Section */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-3 mb-4">
-            {!isPremiumAccess && (
-              <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold px-3 py-1 hover:from-yellow-300 hover:to-orange-300">
-                <Crown className="h-3 w-3 mr-1" />
-                PREMIUM EXCLUSIVE
-              </Badge>
-            )}
+            <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold px-3 py-1 hover:from-yellow-300 hover:to-orange-300">
+              <Crown className="h-3 w-3 mr-1" />
+              PREMIUM EXCLUSIVE
+            </Badge>
             <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
               <Zap className="h-3 w-3 mr-1" />
               Weekly Updates

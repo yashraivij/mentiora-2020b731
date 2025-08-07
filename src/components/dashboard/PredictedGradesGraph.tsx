@@ -32,17 +32,13 @@ interface UserProgress {
 
 interface PredictedGradesGraphProps {
   userProgress: UserProgress[];
-  isPremiumDashboard?: boolean;
 }
 
-export const PredictedGradesGraph = ({ userProgress, isPremiumDashboard = false }: PredictedGradesGraphProps) => {
+export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
   const { user, subscription } = useAuth();
   const navigate = useNavigate();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
-
-  // Force premium access in premium dashboard
-  const isSubscribed = isPremiumDashboard || subscription.subscribed;
 
   const handleUpgrade = () => {
     navigate('/premium');
@@ -364,7 +360,7 @@ export const PredictedGradesGraph = ({ userProgress, isPremiumDashboard = false 
       <div className="absolute top-12 right-8 w-1.5 h-1.5 bg-purple-400 rounded-full animate-bounce" />
       
       {/* Ultra Premium Blur Overlay - positioned early to prevent flickering */}
-      {!isSubscribed && (
+      {!subscription.subscribed && (
         <div className="absolute inset-0 backdrop-blur-2xl bg-gradient-to-br from-white/30 via-purple-500/20 to-amber-500/30 dark:from-black/40 dark:via-purple-900/30 dark:to-amber-900/30 rounded-lg z-50 flex items-center justify-center overflow-hidden">
           {/* Animated background elements */}
           <div className="absolute top-0 left-0 w-full h-full">
@@ -464,13 +460,13 @@ export const PredictedGradesGraph = ({ userProgress, isPremiumDashboard = false 
             </div>
           </div>
           <div className="flex items-center space-x-6">
-            {isSubscribed && averageGrade > 0 && (
+            {subscription.subscribed && averageGrade > 0 && (
               <div className="text-center p-3 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl border border-purple-500/20">
                 <div className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">{averageGrade.toFixed(1)}</div>
                 <div className="text-xs text-muted-foreground font-semibold">Avg Grade</div>
               </div>
             )}
-            {isSubscribed && grade7PlusCount > 0 && (
+            {subscription.subscribed && grade7PlusCount > 0 && (
               <Badge className="bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-600 text-white border-0 px-4 py-2 text-sm font-bold shadow-lg shadow-emerald-500/25 animate-pulse">
                 <Trophy className="h-4 w-4 mr-2 animate-bounce" />
                 {grade7PlusCount} Grade 7+ 🎉

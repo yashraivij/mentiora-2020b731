@@ -6,23 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { CountdownTimer } from "./CountdownTimer";
 import { useAuth } from "@/contexts/AuthContext";
 
-interface PredictedQuestionsSectionProps {
-  isPremiumDashboard?: boolean;
-}
-
-export const PredictedQuestionsSection = ({ isPremiumDashboard = false }: PredictedQuestionsSectionProps) => {
+export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
   const { subscription } = useAuth();
 
   const handleStartPredicted = async () => {
-    if (isPremiumDashboard) {
-      // From premium dashboard, set session flag and navigate
-      sessionStorage.setItem('premiumDashboardAccess', 'true');
-      navigate('/predicted-questions');
-    } else {
-      // Regular behavior - navigate to predicted questions page where premium check happens
-      navigate('/predicted-questions');
-    }
+    // Always navigate to predicted questions page - premium check happens when clicking into exams
+    navigate('/predicted-questions');
   };
 
   return (
@@ -64,12 +54,10 @@ export const PredictedQuestionsSection = ({ isPremiumDashboard = false }: Predic
                 </div>
                 
                 <div className="flex items-center space-x-3">
-                  {!isPremiumDashboard && (
-                    <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold px-3 py-1 hover:from-yellow-300 hover:to-orange-300">
-                      <Crown className="h-3 w-3 mr-1" />
-                      PREMIUM EXCLUSIVE
-                    </Badge>
-                  )}
+                  <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold px-3 py-1 hover:from-yellow-300 hover:to-orange-300">
+                    <Crown className="h-3 w-3 mr-1" />
+                    PREMIUM EXCLUSIVE
+                  </Badge>
                   <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
                     <Zap className="h-3 w-3 mr-1" />
                     Weekly Updates
@@ -146,24 +134,14 @@ export const PredictedQuestionsSection = ({ isPremiumDashboard = false }: Predic
               </div>
             </div>
             
-            {/* CTA Button */}
+            {/* Premium CTA Button */}
             <Button 
               onClick={handleStartPredicted}
               className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-4 px-8 rounded-2xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300 text-lg"
             >
-              {isPremiumDashboard ? (
-                <>
-                  <Rocket className="h-5 w-5 mr-3" />
-                  Start Exam Practice
-                  <Sparkles className="h-5 w-5 ml-3" />
-                </>
-              ) : (
-                <>
-                  <Crown className="h-5 w-5 mr-3" />
-                  Start Premium Exam Practice
-                  <Sparkles className="h-5 w-5 ml-3" />
-                </>
-              )}
+              <Crown className="h-5 w-5 mr-3" />
+              Start Premium Exam Practice
+              <Sparkles className="h-5 w-5 ml-3" />
             </Button>
           </CardContent>
         </div>
