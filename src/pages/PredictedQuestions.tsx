@@ -9,12 +9,10 @@ import { curriculum } from "@/data/curriculum";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { useAuth } from "@/contexts/AuthContext";
 
 const PredictedQuestions = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { subscription } = useAuth();
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [completedExams, setCompletedExams] = useState<{[key: string]: any}>({});
   const [loading, setLoading] = useState(true);
@@ -66,16 +64,25 @@ const PredictedQuestions = () => {
   };
 
   const handleSubjectSelect = (subjectId: string) => {
-    // Check premium status using local subscription state
-    if (!subscription.subscribed) {
-      console.log('User not premium, redirecting to premium page');
-      navigate('/premium');
-      return;
-    }
+    // Check premium status before allowing exam access
+    const checkPremium = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        navigate('/premium');
+        return;
+      }
+      
+      // Check if user has active subscription
+      const { data } = await supabase.functions.invoke('check-subscription');
+      if (!data?.subscribed) {
+        navigate('/premium');
+        return;
+      }
+      
+      navigate(`/predicted-exam/${subjectId}`);
+    };
     
-    // User is premium, allow access to exam
-    console.log('User is premium, allowing access to exam:', subjectId);
-    navigate(`/predicted-exam/${subjectId}`);
+    checkPremium();
   };
 
   const getSubjectColor = (subjectId: string) => {
