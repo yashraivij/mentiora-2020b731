@@ -226,30 +226,37 @@ const Dashboard = () => {
       if (urlParams.get('checkout') === 'success') {
         console.log('🎉 Checkout success detected, immediately activating premium account...');
         
-        // FORCE PREMIUM ACTIVATION IMMEDIATELY using AuthContext function
+        // IMMEDIATELY activate premium access for instant feedback
         console.log('🚀 Immediately activating premium access for user...');
         console.log('Current subscription before activation:', subscription);
         activatePremiumAccess();
         
-        // Force a component re-render and show notification
-        setTimeout(() => {
-          console.log('Final subscription state check:', subscription);
-          
-          // Show premium activation notification
-          toast({
-            title: "🎉 Welcome to Premium!",
-            description: "Your account has been upgraded to Premium! All premium features are now unlocked.",
-            duration: 6000,
-          });
-        }, 500);
+        // Show premium activation notification immediately
+        toast({
+          title: "🎉 Premium Activated!",
+          description: "Welcome to Premium! All premium features are now unlocked.",
+          duration: 6000,
+        });
         
-        // Also check with server in background (but don't wait for it)
+        // Background subscription check to sync with Stripe
         setTimeout(async () => {
           try {
-            await checkSubscription();
-            console.log('✅ Background subscription check completed');
+            console.log('🔄 Running background subscription verification...');
+            const updatedSubscription = await checkSubscription();
+            if (updatedSubscription?.subscribed) {
+              console.log('✅ Premium subscription confirmed with Stripe');
+              toast({
+                title: "✅ Premium Verified!",
+                description: "Your Premium subscription has been confirmed with Stripe.",
+                duration: 4000,
+              });
+            } else {
+              console.log('⚠️ Stripe verification pending, but user already has premium access');
+              // Keep the local premium access even if Stripe hasn't updated yet
+            }
           } catch (error) {
             console.log('⚠️ Background subscription check failed, but user already has premium access');
+            // Don't revert premium access just because of verification issues
           }
         }, 2000);
 
