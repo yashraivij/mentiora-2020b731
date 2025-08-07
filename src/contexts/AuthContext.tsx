@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
+import { toast } from '@/hooks/use-toast';
 
 interface AuthContextType {
   user: User | null;
@@ -40,6 +41,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   });
 
   useEffect(() => {
+    // Check for checkout success on any page
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('checkout') === 'success') {
+      console.log('🎉 Checkout success detected globally, activating premium...');
+      activatePremiumAccess();
+      
+      // Clear the checkout param from URL
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.delete('checkout');
+      window.history.replaceState({}, '', newUrl.toString());
+    }
+
     // Set up auth state listener
     const { data: { subscription: authSubscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
@@ -199,6 +212,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return null;
     }
   };
+
+  // Watch for subscription changes and show premium notification
+  useEffect(() => {
+    if (subscription.subscribed && subscription.subscription_tier === "Premium") {
+      console.log('🎉 Premium subscription detected, showing notification');
+      toast({
+        title: "🎉 Welcome to Premium!",
+        description: "Your account has been upgraded to Premium! All premium features are now unlocked.",
+        duration: 6000,
+      });
+    }
+  }, [subscription.subscribed, subscription.subscription_tier]);
 
   const activatePremiumAccess = () => {
     console.log('🚀 Force activating premium access...');
