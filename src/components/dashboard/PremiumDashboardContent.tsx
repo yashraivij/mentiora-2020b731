@@ -567,7 +567,7 @@ const PremiumDashboardContent = ({ forceShow = true }: PremiumDashboardContentPr
 
           {/* Predicted Questions Section - UNLOCKED */}
           <div className="mb-8">
-            <PredictedQuestionsSection />
+            <PredictedQuestionsSection isPremiumDashboard={true} />
           </div>
 
           {/* Advanced Analytics - FULLY UNLOCKED */}
