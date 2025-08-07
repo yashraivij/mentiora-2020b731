@@ -140,12 +140,12 @@ const Dashboard = () => {
         storedPreviousTime
       });
 
-      // Show notification whenever time saved has increased and user has actual savings
-      if (newTimeSavedHours > storedPreviousTime && newTimeSavedHours > 0) {
+      // Show notification only when time saved has meaningfully increased (not on first load)
+      if (newTimeSavedHours > storedPreviousTime && storedPreviousTime > 0) {
         console.log('🎉 Triggering time saved notification!', { 
           newTime: newTimeSavedHours, 
           oldTime: storedPreviousTime,
-          isFirstTime: storedPreviousTime === 0
+          timeSavedIncrease: newTimeSavedHours - storedPreviousTime
         });
         
         setShowTimeSavedNotification(true);
@@ -155,6 +155,9 @@ const Dashboard = () => {
         setTimeout(() => {
           setShowTimeSavedNotification(false);
         }, 10000);
+      } else if (storedPreviousTime === 0 && newTimeSavedHours > 0) {
+        // For new users, just store the initial time saved without showing notification
+        localStorage.setItem(`mentiora_time_saved_${user.id}`, newTimeSavedHours.toString());
       }
 
       // Update states
