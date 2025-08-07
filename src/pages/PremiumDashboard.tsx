@@ -7,7 +7,7 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
 import { ProfileDropdown } from '@/components/ui/profile-dropdown';
 import { PremiumWelcomeNotification } from "@/components/notifications/PremiumWelcomeNotification";
-import Dashboard from "./Dashboard";
+import PremiumDashboardContent from "../components/dashboard/PremiumDashboardContent";
 
 const PremiumDashboard = () => {
   const { subscription } = useAuth();
@@ -63,8 +63,8 @@ const PremiumDashboard = () => {
         </div>
       </div>
 
-      {/* Premium Content - Same as regular dashboard but with all features unlocked */}
-      <Dashboard />
+      {/* Premium Content - Paywall-free dashboard with all features unlocked */}
+      <PremiumDashboardContent />
 
       {/* Premium Welcome Notification */}
       {showWelcomeNotification && (
