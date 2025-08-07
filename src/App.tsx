@@ -19,6 +19,7 @@ import PredictedExam from "./pages/PredictedExam";
 import PredictedResults from "./pages/PredictedResults";
 import Notebook from "./pages/Notebook";
 import Premium from "./pages/Premium";
+import PremiumDashboard from "./pages/PremiumDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -79,6 +80,11 @@ const App: React.FC = () => (
             <Route path="/premium" element={
               <ProtectedRoute>
                 <Premium />
+              </ProtectedRoute>
+            } />
+            <Route path="/premium-dashboard" element={
+              <ProtectedRoute>
+                <PremiumDashboard />
               </ProtectedRoute>
             } />
             <Route path="*" element={<NotFound />} />
