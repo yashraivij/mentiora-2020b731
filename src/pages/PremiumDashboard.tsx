@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Crown } from "lucide-react";
@@ -6,11 +6,13 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
 import { ProfileDropdown } from '@/components/ui/profile-dropdown';
+import { PremiumWelcomeNotification } from "@/components/notifications/PremiumWelcomeNotification";
 import Dashboard from "./Dashboard";
 
 const PremiumDashboard = () => {
   const { subscription } = useAuth();
   const navigate = useNavigate();
+  const [showWelcomeNotification, setShowWelcomeNotification] = useState(false);
 
   // Check if user has premium access
   useEffect(() => {
@@ -18,6 +20,19 @@ const PremiumDashboard = () => {
       navigate('/dashboard');
     }
   }, [subscription, navigate]);
+
+  // Show welcome notification for first-time premium users
+  useEffect(() => {
+    const hasSeenWelcome = localStorage.getItem('mentiora_premium_welcome_seen');
+    if (subscription.subscribed && subscription.subscription_tier === "Premium" && !hasSeenWelcome) {
+      setShowWelcomeNotification(true);
+      localStorage.setItem('mentiora_premium_welcome_seen', 'true');
+    }
+  }, [subscription]);
+
+  const handleWelcomeClose = () => {
+    setShowWelcomeNotification(false);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/20">
@@ -48,8 +63,13 @@ const PremiumDashboard = () => {
         </div>
       </div>
 
-      {/* Premium Content - Same as regular dashboard */}
+      {/* Premium Content - Same as regular dashboard but with all features unlocked */}
       <Dashboard />
+
+      {/* Premium Welcome Notification */}
+      {showWelcomeNotification && (
+        <PremiumWelcomeNotification onClose={handleWelcomeClose} />
+      )}
     </div>
   );
 };
