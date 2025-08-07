@@ -14,9 +14,8 @@ interface AuthContextType {
     subscription_tier: string | null;
     subscription_end: string | null;
   };
-  checkSubscription: () => Promise<any>;
+  checkSubscription: () => Promise<void>;
   createCheckout: () => Promise<string | null>;
-  activatePremiumAccess: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -139,13 +138,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const checkSubscription = async () => {
-    if (!session?.access_token) {
-      console.log('❌ No session token available for subscription check');
-      return;
-    }
+    if (!session?.access_token) return;
     
     try {
-      console.log('🔄 Checking subscription status...', { userId: user?.id, email: user?.email });
       const { data, error } = await supabase.functions.invoke('check-subscription', {
         headers: {
           Authorization: `Bearer ${session.access_token}`,
@@ -153,25 +148,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
       
       if (error) {
-        console.error('❌ Error checking subscription:', error);
+        console.error('Error checking subscription:', error);
         return;
       }
       
-      console.log('✅ Subscription status received:', data);
-      
-      const newSubscription = {
+      setSubscription({
         subscribed: data.subscribed || false,
         subscription_tier: data.subscription_tier || null,
         subscription_end: data.subscription_end || null,
-      };
-      
-      setSubscription(newSubscription);
-      console.log('🎯 Subscription state updated:', newSubscription);
-      
-      return newSubscription;
+      });
     } catch (error) {
-      console.error('❌ Error checking subscription:', error);
-      throw error;
+      console.error('Error checking subscription:', error);
     }
   };
 
@@ -200,17 +187,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const activatePremiumAccess = () => {
-    console.log('🚀 Force activating premium access...');
-    const premiumSubscription = {
-      subscribed: true,
-      subscription_tier: "Premium" as string | null,
-      subscription_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() as string | null
-    };
-    setSubscription(premiumSubscription);
-    console.log('✅ Premium access activated locally');
-  };
-
   return (
     <AuthContext.Provider value={{
       user,
@@ -220,8 +196,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       isLoading,
       subscription,
       checkSubscription,
-      createCheckout,
-      activatePremiumAccess
+      createCheckout
     }}>
       {children}
     </AuthContext.Provider>

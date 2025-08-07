@@ -44,7 +44,7 @@ interface UserProgress {
 }
 
 const Dashboard = () => {
-  const { user, logout, subscription, checkSubscription, activatePremiumAccess } = useAuth();
+  const { user, logout, subscription } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
@@ -59,35 +59,6 @@ const Dashboard = () => {
   const [showTimeSavedNotification, setShowTimeSavedNotification] = useState(false);
   const [timeSavedHours, setTimeSavedHours] = useState(0);
   const [previousTimeSaved, setPreviousTimeSaved] = useState(0);
-
-  // Toggle between Premium and Standard for testing
-  const togglePremiumStatus = () => {
-    if (subscription.subscribed) {
-      // Revert to standard
-      console.log('🔄 Reverting to Standard account...');
-      const standardSubscription = {
-        subscribed: false,
-        subscription_tier: null as string | null,
-        subscription_end: null as string | null
-      };
-      // Update through AuthContext (this will need to be implemented)
-      Object.assign(subscription, standardSubscription);
-      toast({
-        title: "Reverted to Standard",
-        description: "Your account has been reverted to Standard for testing purposes.",
-        duration: 4000,
-      });
-    } else {
-      // Activate premium
-      console.log('🚀 Manual premium activation triggered...');
-      activatePremiumAccess();
-      toast({
-        title: "🎉 Premium Activated!",
-        description: "Your account has been manually upgraded to Premium! All premium features are now unlocked.",
-        duration: 6000,
-      });
-    }
-  };
 
   const {
     notification,
@@ -246,58 +217,7 @@ const Dashboard = () => {
       await checkForWeakTopicRecommendation();
     };
 
-    // Check for checkout success and immediately activate premium
-    const checkCheckoutSuccess = async () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('checkout') === 'success') {
-        console.log('🎉 Checkout success detected, immediately activating premium account...');
-        
-        // FORCE PREMIUM ACTIVATION IMMEDIATELY using AuthContext function
-        console.log('🚀 Immediately activating premium access for user...');
-        console.log('Current subscription before activation:', subscription);
-        activatePremiumAccess();
-        
-        // Force a component re-render and show notification
-        setTimeout(() => {
-          console.log('Final subscription state check:', subscription);
-          
-          // Show premium activation notification
-          toast({
-            title: "🎉 Welcome to Premium!",
-            description: "Your account has been upgraded to Premium! All premium features are now unlocked.",
-            duration: 6000,
-          });
-        }, 500);
-        
-        // Also check with server in background (but don't wait for it)
-        setTimeout(async () => {
-          try {
-            await checkSubscription();
-            console.log('✅ Background subscription check completed');
-          } catch (error) {
-            console.log('⚠️ Background subscription check failed, but user already has premium access');
-          }
-        }, 2000);
-
-        // Remove the checkout parameter from URL
-        const newUrl = window.location.pathname;
-        window.history.replaceState({}, '', newUrl);
-      } else if (urlParams.get('checkout') === 'cancelled') {
-        toast({
-          title: "Payment Cancelled",
-          description: "Your subscription was not activated. You can try again anytime.",
-          variant: "destructive"
-        });
-        
-        // Remove the checkout parameter from URL
-        const newUrl = window.location.pathname;
-        window.history.replaceState({}, '', newUrl);
-      }
-    };
-
-
     loadUserData();
-    checkCheckoutSuccess();
     
     // Also fetch streak on component mount
     if (user?.id) {
@@ -905,27 +825,6 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              {/* Toggle Premium/Standard Status Button */}
-              <Button 
-                onClick={togglePremiumStatus}
-                className={`${
-                  subscription.subscribed 
-                    ? "bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 border-red-300 shadow-red-500/40 hover:shadow-red-500/60 ring-red-200/50" 
-                    : "bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 border-amber-300 shadow-amber-500/40 hover:shadow-amber-500/60 ring-amber-200/50"
-                } text-white border-2 shadow-2xl transition-all duration-300 rounded-xl px-4 py-2 h-9 hover:scale-110 font-bold ring-2`}
-              >
-                {subscription.subscribed ? (
-                  <>
-                    <User className="h-4 w-4 mr-2" />
-                    <span className="text-xs font-extrabold">Go Standard</span>
-                  </>
-                ) : (
-                  <>
-                    <Crown className="h-4 w-4 mr-2" />
-                    <span className="text-xs font-extrabold">Go Premium</span>
-                  </>
-                )}
-              </Button>
               <Button 
                 onClick={() => window.open('https://discord.gg/Jq2YTZ3aMa', '_blank')}
                 className="bg-gradient-to-r from-emerald-400 to-green-500 hover:from-emerald-500 hover:to-green-600 text-white border-2 border-emerald-300 shadow-2xl shadow-emerald-500/40 hover:shadow-emerald-500/60 transition-all duration-300 rounded-xl px-6 py-3 h-11 hover:scale-110 font-bold ring-2 ring-emerald-200/50"

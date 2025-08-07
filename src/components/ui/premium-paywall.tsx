@@ -25,11 +25,18 @@ export const PremiumPaywall = ({
 }: PremiumPaywallProps) => {
   const { createCheckout } = useAuth();
 
-  const handleUpgrade = () => {
-    // Use the direct Stripe payment link with dashboard redirect
-    const currentOrigin = window.location.origin;
-    const stripeUrl = `https://buy.stripe.com/fZu8wO8ogcnUdaw81a8N201?prefilled_success_url=${encodeURIComponent(currentOrigin + '/dashboard')}`;
-    window.open(stripeUrl, '_blank');
+  const handleUpgrade = async () => {
+    try {
+      const checkoutUrl = await createCheckout();
+      if (checkoutUrl) {
+        window.open(checkoutUrl, '_blank');
+      } else {
+        toast.error('Failed to create checkout session');
+      }
+    } catch (error) {
+      console.error('Error creating checkout:', error);
+      toast.error('Failed to start checkout process');
+    }
   };
 
   return (
