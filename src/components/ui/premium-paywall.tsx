@@ -10,6 +10,7 @@ interface PremiumPaywallProps {
   description: string;
   icon?: React.ReactNode;
   benefits?: string[];
+  hideButton?: boolean;
 }
 
 export const PremiumPaywall = ({ 
@@ -21,7 +22,8 @@ export const PremiumPaywall = ({
     "📓 Smart notebook auto-saves key revision points",
     "📊 Grade predictions updated with every quiz you take",
     "🎯 Targeted revision based on your weak topics"
-  ]
+  ],
+  hideButton = false
 }: PremiumPaywallProps) => {
   const { createCheckout } = useAuth();
 
@@ -132,20 +134,24 @@ export const PremiumPaywall = ({
             </div>
 
             {/* CTA Button */}
-            <Button 
-              onClick={handleUpgrade}
-              className="w-full h-10 bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400 hover:from-sky-500 hover:via-blue-500 hover:to-indigo-500 text-white font-bold text-sm rounded-xl shadow-xl hover:shadow-blue-500/25 transform hover:scale-[1.02] transition-all duration-300 group"
-            >
-              <Rocket className="h-4 w-4 mr-2 group-hover:animate-bounce" />
-              🎯 START FREE TRIAL NOW
-              <Sparkles className="h-4 w-4 ml-2 group-hover:animate-spin" />
-            </Button>
-            
-            <div className="text-center mt-2">
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                ⚡ Instant access • No commitment required
-              </p>
-            </div>
+            {!hideButton && (
+              <>
+                <Button 
+                  onClick={handleUpgrade}
+                  className="w-full h-10 bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400 hover:from-sky-500 hover:via-blue-500 hover:to-indigo-500 text-white font-bold text-sm rounded-xl shadow-xl hover:shadow-blue-500/25 transform hover:scale-[1.02] transition-all duration-300 group"
+                >
+                  <Rocket className="h-4 w-4 mr-2 group-hover:animate-bounce" />
+                  🎯 START FREE TRIAL NOW
+                  <Sparkles className="h-4 w-4 ml-2 group-hover:animate-spin" />
+                </Button>
+                
+                <div className="text-center mt-2">
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    ⚡ Instant access • No commitment required
+                  </p>
+                </div>
+              </>
+            )}
           </CardContent>
         </Card>
       </div>

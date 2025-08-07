@@ -46,6 +46,7 @@ const PremiumDashboard = () => {
             "📊 Grade predictions updated with every quiz you take",
             "🎯 Targeted revision based on your weak topics"
           ]}
+          hideButton={true}
         />
       </div>
     </div>
