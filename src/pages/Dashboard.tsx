@@ -148,7 +148,11 @@ const Dashboard = () => {
           isFirstTime: storedPreviousTime === 0
         });
         
-        setShowTimeSavedNotification(true);
+        // Ensure notification shows with a slight delay to avoid state conflicts
+        setTimeout(() => {
+          setShowTimeSavedNotification(true);
+        }, 100);
+        
         localStorage.setItem(`mentiora_time_saved_${user.id}`, newTimeSavedHours.toString());
         
         // Auto-hide notification after 10 seconds
@@ -528,6 +532,7 @@ const Dashboard = () => {
     if (!user?.id) return;
     
     try {
+      // Use daily_usage table which has triggers that update properly
       await supabase
         .from('user_activities')
         .insert({
@@ -535,71 +540,33 @@ const Dashboard = () => {
           activity_type: activityType
         });
       
-      // Refresh the streak after recording activity
-      setTimeout(() => {
-        fetchCurrentStreak();
-      }, 500);
-      
     } catch (error) {
       console.error('Error recording activity:', error);
     }
   };
 
-  // Fetch current streak from database
+  // Fetch current streak from database using the built-in function
   const fetchCurrentStreak = async () => {
     if (!user?.id) return;
     
     try {
-      const today = new Date().toISOString().split('T')[0];
+      // First record today's activity in daily_usage to ensure streak is current
+      await recordActivity('dashboard_visit');
       
-      // Get user activities for streak calculation
-      const { data: activities, error } = await supabase
-        .from('user_activities')
-        .select('created_at')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false });
+      // Use the database function to get streak
+      const { data, error } = await supabase
+        .rpc('get_user_streak', { user_uuid: user.id });
 
       if (error) {
-        console.error('Error fetching activities for streak:', error);
+        console.error('Error fetching streak:', error);
         setCurrentStreak(0);
         return;
       }
 
-      if (!activities || activities.length === 0) {
-        setCurrentStreak(0);
-        return;
-      }
-
-      // Calculate consecutive days
-      let streak = 0;
-      const activityDates = new Set(
-        activities.map(activity => 
-          new Date(activity.created_at).toISOString().split('T')[0]
-        )
-      );
-
-      const currentDate = new Date();
-      
-      // Check if user has activity today
-      const hasActivityToday = activityDates.has(today);
-      
-      // Start checking from today if has activity, otherwise from yesterday
-      let startDay = hasActivityToday ? 0 : 1;
-      
-      // Check for consecutive days
-      for (let i = startDay; i < 365; i++) {
-        const checkDate = new Date(currentDate);
-        checkDate.setDate(currentDate.getDate() - i);
-        const dateStr = checkDate.toISOString().split('T')[0];
-        
-        if (activityDates.has(dateStr)) {
-          streak++;
-        } else {
-          break;
-        }
-      }
-
+      const streak = data || 0;
       setCurrentStreak(streak);
+      
+      console.log('Current streak:', streak);
       
       // Check for streak celebration after setting the streak
       setTimeout(async () => {        
