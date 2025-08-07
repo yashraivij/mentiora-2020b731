@@ -140,7 +140,11 @@ const Notebook = () => {
     );
   }
 
-  const isPremium = subscription.subscribed;
+  // Check if accessing from premium dashboard
+  const urlParams = new URLSearchParams(window.location.search);
+  const isPremiumAccess = urlParams.get('premium') === 'true';
+  
+  const isPremium = subscription.subscribed || isPremiumAccess;
 
   const handleUpgrade = () => {
     navigate('/premium');

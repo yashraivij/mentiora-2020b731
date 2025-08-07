@@ -15,8 +15,13 @@ export const PredictedQuestionsSection = ({ isPremiumDashboard = false }: Predic
   const { subscription } = useAuth();
 
   const handleStartPredicted = async () => {
-    // Always navigate to predicted questions page - premium check happens when clicking into exams
-    navigate('/predicted-questions');
+    if (isPremiumDashboard) {
+      // From premium dashboard, bypass subscription check
+      navigate('/predicted-questions?premium=true');
+    } else {
+      // Regular behavior - navigate to predicted questions page where premium check happens
+      navigate('/predicted-questions');
+    }
   };
 
   return (

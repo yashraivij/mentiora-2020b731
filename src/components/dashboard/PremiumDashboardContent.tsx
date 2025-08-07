@@ -461,6 +461,11 @@ const PremiumDashboardContent = ({ forceShow = true }: PremiumDashboardContentPr
     setIsNotifyClicked(true);
   };
 
+  const handleOpenNotebook = () => {
+    // For premium dashboard, bypass subscription check and go directly  
+    navigate('/notebook?premium=true');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/20">
       {/* Main Content */}
@@ -635,7 +640,7 @@ const PremiumDashboardContent = ({ forceShow = true }: PremiumDashboardContentPr
               </CardContent>
             </Card>
             
-            <PredictedGradesGraph userProgress={userProgress} />
+            <PredictedGradesGraph userProgress={userProgress} isPremiumDashboard={true} />
           </div>
 
           <div className="text-center py-8">

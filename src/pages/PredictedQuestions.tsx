@@ -20,6 +20,10 @@ const PredictedQuestions = () => {
   const [loading, setLoading] = useState(true);
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
 
+  // Check if accessing from premium dashboard
+  const urlParams = new URLSearchParams(window.location.search);
+  const isPremiumAccess = urlParams.get('premium') === 'true';
+
   useEffect(() => {
     // Ensure page starts at top when navigating here
     document.documentElement.scrollTop = 0;
@@ -66,16 +70,17 @@ const PredictedQuestions = () => {
   };
 
   const handleSubjectSelect = (subjectId: string) => {
-    // Check premium status using local subscription state
-    if (!subscription.subscribed) {
+    // Check premium status using local subscription state or premium access flag
+    if (!subscription.subscribed && !isPremiumAccess) {
       console.log('User not premium, redirecting to premium page');
       navigate('/premium');
       return;
     }
     
-    // User is premium, allow access to exam
+    // User is premium or accessing from premium dashboard, allow access to exam
     console.log('User is premium, allowing access to exam:', subjectId);
-    navigate(`/predicted-exam/${subjectId}`);
+    const examUrl = isPremiumAccess ? `/predicted-exam/${subjectId}?premium=true` : `/predicted-exam/${subjectId}`;
+    navigate(examUrl);
   };
 
   const getSubjectColor = (subjectId: string) => {
