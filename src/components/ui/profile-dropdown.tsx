@@ -45,14 +45,12 @@ export function ProfileDropdown({ streakDays, firstName }: ProfileDropdownProps)
   });
   const [isLoading, setIsLoading] = useState(false);
 
-  // Check if user has unlocked profile feature (14+ day streak)
-  const canCreateProfile = streakDays >= 14;
+  // Check if user has unlocked tutoring session feature (14+ day streak)
+  const canAccessTutoring = streakDays >= 14;
 
   useEffect(() => {
-    if (user && canCreateProfile) {
-      fetchPublicProfile();
-    }
-  }, [user, canCreateProfile]);
+    // No need to fetch profile data for tutoring session
+  }, [user, canAccessTutoring]);
 
   const fetchPublicProfile = async () => {
     if (!user) return;
@@ -154,7 +152,7 @@ export function ProfileDropdown({ streakDays, firstName }: ProfileDropdownProps)
     setIsEditing(false);
   };
 
-  if (!canCreateProfile) {
+  if (!canAccessTutoring) {
     // Regular profile display for users without 14-day streak
     return (
       <DropdownMenu>
@@ -175,13 +173,13 @@ export function ProfileDropdown({ streakDays, firstName }: ProfileDropdownProps)
           sideOffset={8}
         >
           <div className="p-4 text-center space-y-3">
-            <div className="w-12 h-12 mx-auto bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-full flex items-center justify-center">
-              <Lock className="h-6 w-6 text-amber-500" />
+            <div className="w-12 h-12 mx-auto bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full flex items-center justify-center">
+              <Lock className="h-6 w-6 text-blue-500" />
             </div>
             <div>
-              <h3 className="font-semibold text-foreground">Profile Locked</h3>
+              <h3 className="font-semibold text-foreground">Tutoring Locked</h3>
               <p className="text-sm text-muted-foreground mt-1">
-                Reach a 14-day study streak to unlock your public profile!
+                Reach a 14-day study streak to unlock a free tutoring session!
               </p>
             </div>
             <div className="text-xs text-muted-foreground/80">
@@ -198,176 +196,63 @@ export function ProfileDropdown({ streakDays, firstName }: ProfileDropdownProps)
       <DropdownMenuTrigger asChild>
         <Button 
           variant="ghost" 
-          className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-emerald-50/80 to-blue-50/80 dark:from-emerald-950/30 dark:to-blue-950/30 backdrop-blur-sm rounded-2xl border border-emerald-200/50 dark:border-emerald-800/30 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300"
+          className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-50/80 to-purple-50/80 dark:from-blue-950/30 dark:to-purple-950/30 backdrop-blur-sm rounded-2xl border border-blue-200/50 dark:border-blue-800/30 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300"
         >
-          {publicProfile ? (
-            <>
-              <Avatar className="w-6 h-6">
-                <AvatarImage src={publicProfile.avatar_url || undefined} />
-                <AvatarFallback className="text-xs bg-gradient-to-br from-emerald-500 to-blue-500 text-white">
-                  {publicProfile.username[0]?.toUpperCase()}
-                </AvatarFallback>
-              </Avatar>
-              <span className="text-sm font-medium text-foreground">
-                {publicProfile.display_name || publicProfile.username}
-              </span>
-              <div className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full animate-pulse" />
-            </>
-          ) : (
-            <>
-              <div className="w-6 h-6 bg-gradient-to-br from-emerald-500 to-blue-500 rounded-full flex items-center justify-center">
-                <User className="h-3 w-3 text-white" />
-              </div>
-              <span className="text-sm font-medium text-foreground">{firstName}</span>
-              <div className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full animate-pulse" />
-            </>
-          )}
+          <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+            <User className="h-3 w-3 text-white" />
+          </div>
+          <span className="text-sm font-medium text-foreground">{firstName}</span>
+          <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse" />
         </Button>
       </DropdownMenuTrigger>
       
       <DropdownMenuContent align="end" className="w-80 p-0 bg-card/95 backdrop-blur-xl border border-border shadow-2xl">
         <Card className="border-0 shadow-none bg-transparent">
           <CardContent className="p-4">
-            {isEditing ? (
-              <div className="space-y-4">
-                <div className="text-center">
-                  <h3 className="font-bold text-lg bg-gradient-to-r from-emerald-600 to-blue-600 dark:from-emerald-400 dark:to-blue-400 bg-clip-text text-transparent">
-                    {publicProfile ? 'Edit Profile' : 'Create Your Profile'}
+            <div className="space-y-4">
+              <div className="text-center space-y-2">
+                <div className="w-16 h-16 mx-auto bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                  <User className="h-8 w-8 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+                    Free Tutoring Session
                   </h3>
-                  <p className="text-xs text-muted-foreground">
-                    14-day streak reward unlocked! 🎉
+                  <p className="text-sm text-muted-foreground">
+                    You've unlocked a free tutoring session with your 14-day streak!
                   </p>
-                </div>
-
-                <div className="space-y-3">
-                  <div>
-                    <label className="text-xs font-medium text-muted-foreground">Username</label>
-                    <Input
-                      value={editData.username}
-                      onChange={(e) => setEditData({ ...editData, username: e.target.value })}
-                      placeholder="Choose a username"
-                      className="mt-1"
-                    />
+                  <div className="flex items-center justify-center space-x-1 mt-1">
+                    <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse" />
+                    <span className="text-xs font-medium text-blue-600 dark:text-blue-400">
+                      {streakDays} day streak
+                    </span>
                   </div>
-
-                  <div>
-                    <label className="text-xs font-medium text-muted-foreground">Display Name</label>
-                    <Input
-                      value={editData.display_name}
-                      onChange={(e) => setEditData({ ...editData, display_name: e.target.value })}
-                      placeholder="How should others see you?"
-                      className="mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-xs font-medium text-muted-foreground">Choose Avatar</label>
-                    <div className="grid grid-cols-5 gap-2 mt-2">
-                      {[
-                        { src: catAvatar, name: 'Cat' },
-                        { src: dogAvatar, name: 'Dog' },
-                        { src: foxAvatar, name: 'Fox' },
-                        { src: rabbitAvatar, name: 'Rabbit' },
-                        { src: bearAvatar, name: 'Bear' }
-                      ].map((avatar, index) => (
-                        <button
-                          key={index}
-                          type="button"
-                          onClick={() => setEditData({ ...editData, avatar_url: avatar.src })}
-                          className={`w-12 h-12 rounded-full border-2 overflow-hidden transition-all ${
-                            editData.avatar_url === avatar.src 
-                              ? 'border-primary ring-2 ring-primary/20' 
-                              : 'border-border hover:border-primary/50'
-                          }`}
-                        >
-                          <img 
-                            src={avatar.src} 
-                            alt={`${avatar.name} avatar`}
-                            className="w-full h-full object-cover"
-                          />
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex space-x-2">
-                  <Button 
-                    onClick={handleSaveProfile} 
-                    disabled={isLoading || !editData.username.trim()}
-                    className="flex-1 bg-gradient-to-r from-emerald-500 to-blue-500 hover:from-emerald-600 hover:to-blue-600 text-white"
-                  >
-                    <Check className="h-4 w-4 mr-2" />
-                    {isLoading ? 'Saving...' : 'Save'}
-                  </Button>
-                  <Button 
-                    onClick={handleCancel} 
-                    variant="outline"
-                    disabled={isLoading}
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
                 </div>
               </div>
-            ) : (
-              <div className="space-y-4">
-                {publicProfile ? (
-                  <>
-                    <div className="text-center space-y-2">
-                      <Avatar className="w-16 h-16 mx-auto">
-                        <AvatarImage src={publicProfile.avatar_url || undefined} />
-                        <AvatarFallback className="text-lg bg-gradient-to-br from-emerald-500 to-blue-500 text-white">
-                          {publicProfile.username[0]?.toUpperCase()}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <h3 className="font-bold text-lg">{publicProfile.display_name || publicProfile.username}</h3>
-                        <p className="text-sm text-muted-foreground">@{publicProfile.username}</p>
-                        <div className="flex items-center justify-center space-x-1 mt-1">
-                          <div className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full animate-pulse" />
-                          <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400">
-                            {streakDays} day streak
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <Button 
-                      onClick={() => setIsEditing(true)} 
-                      variant="outline" 
-                      className="w-full"
-                    >
-                      <Camera className="h-4 w-4 mr-2" />
-                      Edit Profile
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    <div className="text-center space-y-2">
-                      <div className="w-16 h-16 mx-auto bg-gradient-to-br from-emerald-500 to-blue-500 rounded-full flex items-center justify-center">
-                        <User className="h-8 w-8 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-lg bg-gradient-to-r from-emerald-600 to-blue-600 dark:from-emerald-400 dark:to-blue-400 bg-clip-text text-transparent">
-                          Create Your Profile
-                        </h3>
-                        <p className="text-sm text-muted-foreground">
-                          You've unlocked the profile feature with your 14-day streak!
-                        </p>
-                      </div>
-                    </div>
-                    
-                    <Button 
-                      onClick={() => setIsEditing(true)} 
-                      className="w-full bg-gradient-to-r from-emerald-500 to-blue-500 hover:from-emerald-600 hover:to-blue-600 text-white"
-                    >
-                      <Camera className="h-4 w-4 mr-2" />
-                      Setup Profile
-                    </Button>
-                  </>
-                )}
+              
+              <div className="bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-lg p-4 space-y-3">
+                <h4 className="font-semibold text-sm text-foreground">What's included:</h4>
+                <ul className="text-xs text-muted-foreground space-y-1">
+                  <li>• 1-hour personalized tutoring session</li>
+                  <li>• Subject of your choice</li>
+                  <li>• Expert tutor matched to your needs</li>
+                  <li>• Flexible scheduling</li>
+                </ul>
               </div>
-            )}
+              
+              <Button 
+                onClick={() => {
+                  toast({
+                    title: "Tutoring Session Activated!",
+                    description: "We'll contact you within 24 hours to schedule your free session.",
+                  });
+                }}
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white"
+              >
+                <Check className="h-4 w-4 mr-2" />
+                Claim Free Session
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </DropdownMenuContent>

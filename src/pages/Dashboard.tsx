@@ -1008,22 +1008,22 @@ const Dashboard = () => {
                       </div>
                     </div>
 
-                    {/* Public Profile Reward - 14 days */}
-                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 14 ? 'bg-gradient-to-r from-amber-500/10 to-yellow-500/10 border-amber-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
+                    {/* Free Tutoring Session - 14 days */}
+                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 14 ? 'bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-blue-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
-                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 14 ? 'bg-gradient-to-br from-amber-500 to-yellow-600 shadow-sm' : 'bg-gray-400'}`}>
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 14 ? 'bg-gradient-to-br from-blue-500 to-purple-600 shadow-sm' : 'bg-gray-400'}`}>
                             <User className="h-3 w-3 text-white" />
                           </div>
                           <div>
-                            <p className={`text-sm font-semibold ${getStudyStreak() >= 14 ? 'text-amber-700 dark:text-amber-300' : 'text-gray-500'}`}>
-                              Public Profile Creation
+                            <p className={`text-sm font-semibold ${getStudyStreak() >= 14 ? 'text-blue-700 dark:text-blue-300' : 'text-gray-500'}`}>
+                              Free Tutoring Session
                             </p>
                             <p className="text-xs text-muted-foreground">14 days</p>
                           </div>
                         </div>
                         {getStudyStreak() >= 14 ? (
-                          <CheckCircle className="h-4 w-4 text-amber-600" />
+                          <CheckCircle className="h-4 w-4 text-blue-600" />
                         ) : (
                           <div className="text-xs font-medium text-muted-foreground">{14 - getStudyStreak()}d</div>
                         )}
@@ -1476,8 +1476,8 @@ const Dashboard = () => {
           }
         }}
         streakDays={getStudyStreak()}
-        rewardText={getStudyStreak() >= 14 ? "Create Your Public Profile & Get Recognition" : "Study Playlist & Background Sounds"}
-        rewardEmoji={getStudyStreak() >= 14 ? "👤" : "🎵"}
+        rewardText={getStudyStreak() >= 14 ? "Claim Your Free Tutoring Session" : "Study Playlist & Background Sounds"}
+        rewardEmoji={getStudyStreak() >= 14 ? "👨‍🏫" : "🎵"}
       />
 
       {/* Time Saved Notification */}
