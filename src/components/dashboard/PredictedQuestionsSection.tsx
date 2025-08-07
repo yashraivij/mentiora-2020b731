@@ -16,8 +16,9 @@ export const PredictedQuestionsSection = ({ isPremiumDashboard = false }: Predic
 
   const handleStartPredicted = async () => {
     if (isPremiumDashboard) {
-      // From premium dashboard, bypass subscription check
-      navigate('/predicted-questions?premium=true');
+      // From premium dashboard, set session flag and navigate
+      sessionStorage.setItem('premiumDashboardAccess', 'true');
+      navigate('/predicted-questions');
     } else {
       // Regular behavior - navigate to predicted questions page where premium check happens
       navigate('/predicted-questions');

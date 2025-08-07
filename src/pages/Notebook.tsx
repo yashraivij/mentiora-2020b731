@@ -141,8 +141,7 @@ const Notebook = () => {
   }
 
   // Check if accessing from premium dashboard
-  const urlParams = new URLSearchParams(window.location.search);
-  const isPremiumAccess = urlParams.get('premium') === 'true';
+  const isPremiumAccess = sessionStorage.getItem('premiumDashboardAccess') === 'true';
   
   const isPremium = subscription.subscribed || isPremiumAccess;
 

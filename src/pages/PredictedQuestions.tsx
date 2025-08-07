@@ -21,8 +21,7 @@ const PredictedQuestions = () => {
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
 
   // Check if accessing from premium dashboard
-  const urlParams = new URLSearchParams(window.location.search);
-  const isPremiumAccess = urlParams.get('premium') === 'true';
+  const isPremiumAccess = sessionStorage.getItem('premiumDashboardAccess') === 'true';
 
   useEffect(() => {
     // Ensure page starts at top when navigating here
@@ -79,8 +78,11 @@ const PredictedQuestions = () => {
     
     // User is premium or accessing from premium dashboard, allow access to exam
     console.log('User is premium, allowing access to exam:', subjectId);
-    const examUrl = isPremiumAccess ? `/predicted-exam/${subjectId}?premium=true` : `/predicted-exam/${subjectId}`;
-    navigate(examUrl);
+    if (isPremiumAccess) {
+      // Keep the session flag for the exam page
+      sessionStorage.setItem('premiumDashboardAccess', 'true');
+    }
+    navigate(`/predicted-exam/${subjectId}`);
   };
 
   const getSubjectColor = (subjectId: string) => {

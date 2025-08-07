@@ -462,8 +462,9 @@ const PremiumDashboardContent = ({ forceShow = true }: PremiumDashboardContentPr
   };
 
   const handleOpenNotebook = () => {
-    // For premium dashboard, bypass subscription check and go directly  
-    navigate('/notebook?premium=true');
+    // For premium dashboard, set a session flag and navigate
+    sessionStorage.setItem('premiumDashboardAccess', 'true');
+    navigate('/notebook');
   };
 
   return (
