@@ -25,7 +25,7 @@ const Login = () => {
     const success = await login(email, password);
     
     if (success) {
-      toast.success("Welcome back to EduClara!");
+      toast.success("Welcome back to Mentiora!");
       navigate("/dashboard");
     } else {
       toast.error("Invalid email or password");
@@ -40,7 +40,7 @@ const Login = () => {
             <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
               <img 
                 src="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png" 
-                alt="EduClara Logo" 
+                alt="Mentiora Logo" 
                 className="w-5 h-5 object-contain"
               />
             </div>
