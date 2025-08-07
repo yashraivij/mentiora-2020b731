@@ -418,15 +418,13 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
               {/* Premium glow effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-white/20 group-hover:from-white/30 group-hover:to-white/30 transition-all duration-500" />
               
-              {/* Shimmer effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-pulse" />
-              </div>
+              {/* Premium Features Unlocked */}
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-blue-500/20 rounded-xl" />
               
               <div className="relative flex items-center justify-center space-x-3">
-                <Crown className="h-6 w-6 drop-shadow-lg" />
-                <span className="drop-shadow-lg">Unlock My Grades Now</span>
-                <Sparkles className="h-5 w-5 drop-shadow-lg" />
+                <Crown className="h-6 w-6 text-amber-500 drop-shadow-lg" />
+                <span className="text-foreground font-semibold drop-shadow-lg">Premium Features Active</span>
+                <Sparkles className="h-5 w-5 text-amber-500 drop-shadow-lg" />
               </div>
             </Button>
             
@@ -666,15 +664,15 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                 
                 {/* Call to action */}
                 <div className="flex flex-col items-center space-y-4 mt-8">
-                  <Badge className="bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 text-white border-0 px-6 py-2 text-sm font-bold shadow-xl shadow-purple-500/25 animate-pulse">
-                    <Sparkles className="h-4 w-4 mr-2 animate-spin" />
-                    🚀 Predictions available after first activity
+                  <Badge className="bg-gradient-to-r from-emerald-500 to-blue-500 text-white border-0 px-6 py-2 text-sm font-bold shadow-xl shadow-emerald-500/25">
+                    <Sparkles className="h-4 w-4 mr-2" />
+                    🚀 Premium predictions active
                   </Badge>
                   
                   <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                    <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                    <span>Premium insights unlock automatically</span>
-                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                    <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                    <span>Live grade tracking enabled</span>
+                    <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
                   </div>
                 </div>
               </div>
