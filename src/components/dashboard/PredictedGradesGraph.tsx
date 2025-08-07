@@ -4,11 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { TrendingUp, Crown, Target, Sparkles, Trophy, Zap } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { curriculum } from "@/data/curriculum";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 
 interface GradeData {
   subjectId: string;
@@ -35,14 +32,9 @@ interface PredictedGradesGraphProps {
 }
 
 export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
-  const { user, subscription } = useAuth();
-  const navigate = useNavigate();
+  const { user } = useAuth();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
-
-  const handleUpgrade = () => {
-    navigate('/premium');
-  };
 
   // Grade to percentage mapping
   const gradeToPercentage = (grade: string): number => {
@@ -346,9 +338,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
     );
   }
 
-
   return (
-    <Card className="glass-effect mb-8 relative border-2 border-gradient-to-r from-purple-500/20 via-blue-500/20 to-emerald-500/20 overflow-hidden">
+    <Card className="glass-effect mb-8 relative border-2 border-gradient-to-r from-purple-500/20 via-blue-500/20 to-emerald-500/20 overflow-visible">
       {/* Premium background decorations */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-emerald-500/5" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-400/10 via-purple-500/10 to-transparent rounded-full blur-3xl animate-pulse" />
@@ -358,84 +349,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
       <div className="absolute top-4 right-4 w-2 h-2 bg-amber-400 rounded-full animate-ping opacity-75" />
       <div className="absolute top-8 right-12 w-1 h-1 bg-emerald-400 rounded-full animate-pulse" />
       <div className="absolute top-12 right-8 w-1.5 h-1.5 bg-purple-400 rounded-full animate-bounce" />
-      
-      {/* Ultra Premium Blur Overlay - positioned early to prevent flickering */}
-      {!subscription.subscribed && (
-        <div className="absolute inset-0 backdrop-blur-2xl bg-gradient-to-br from-white/30 via-purple-500/20 to-amber-500/30 dark:from-black/40 dark:via-purple-900/30 dark:to-amber-900/30 rounded-lg z-50 flex items-center justify-center overflow-hidden">
-          {/* Animated background elements */}
-          <div className="absolute top-0 left-0 w-full h-full">
-            <div className="absolute top-10 left-10 w-20 h-20 bg-gradient-to-br from-amber-400/30 to-orange-500/30 rounded-full blur-xl animate-pulse" />
-            <div className="absolute top-20 right-16 w-16 h-16 bg-gradient-to-br from-purple-400/30 to-pink-500/30 rounded-full blur-lg animate-bounce" />
-            <div className="absolute bottom-16 left-20 w-24 h-24 bg-gradient-to-br from-emerald-400/30 to-teal-500/30 rounded-full blur-2xl animate-pulse" />
-            <div className="absolute bottom-10 right-10 w-12 h-12 bg-gradient-to-br from-blue-400/30 to-indigo-500/30 rounded-full blur-md animate-bounce" />
-          </div>
-          
-          <div className="text-center p-10 max-w-lg relative z-10">
-            <div className="mb-8">
-              {/* Multiple animated icons */}
-              <div className="flex justify-center items-center mb-6 space-x-4">
-                <div className="relative">
-                  <Trophy className="h-20 w-20 text-amber-500 animate-bounce drop-shadow-2xl" />
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-emerald-400 to-green-500 rounded-full flex items-center justify-center animate-spin">
-                    <Sparkles className="h-3 w-3 text-white" />
-                  </div>
-                </div>
-                <Target className="h-16 w-16 text-purple-500 animate-pulse drop-shadow-xl" />
-                <Zap className="h-18 w-18 text-blue-500 animate-bounce drop-shadow-xl" />
-              </div>
-              
-              <h3 className="text-4xl font-black bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 bg-clip-text text-transparent mb-4 drop-shadow-lg animate-pulse">
-                🎯 Your Future Grades Await
-              </h3>
-              <h4 className="text-xl font-bold text-foreground/90 mb-4">
-                See EXACTLY which grades you'll get in every subject
-              </h4>
-              
-              <div className="space-y-3 mb-6 text-left max-w-md mx-auto">
-                <div className="flex items-center space-x-3 bg-gradient-to-r from-purple-500/10 to-blue-500/10 p-3 rounded-xl border border-purple-500/20">
-                  <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                  <span className="text-sm font-semibold text-foreground/80">Our algorithm predicts your exact GCSE grades</span>
-                </div>
-                <div className="flex items-center space-x-3 bg-gradient-to-r from-amber-500/10 to-orange-500/10 p-3 rounded-xl border border-amber-500/20">
-                  <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse" />
-                  <span className="text-sm font-semibold text-foreground/80">Updates in real-time as you study</span>
-                </div>
-                <div className="flex items-center space-x-3 bg-gradient-to-r from-rose-500/10 to-pink-500/10 p-3 rounded-xl border border-rose-500/20">
-                  <div className="w-2 h-2 bg-rose-500 rounded-full animate-pulse" />
-                  <span className="text-sm font-semibold text-foreground/80">See which subjects need urgent attention</span>
-                </div>
-              </div>
-              
-              <p className="text-xs text-muted-foreground/70 mb-2">
-                "The predicted grades showed me I was on track for a 5 in Maths, so I focused my revision there and got a 7!" - Emma, Year 11
-              </p>
-            </div>
-            
-            <Button 
-              onClick={handleUpgrade}
-              className="relative bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 hover:from-amber-500 hover:via-orange-600 hover:to-red-600 text-white font-black px-10 py-5 rounded-3xl shadow-2xl shadow-amber-500/60 hover:shadow-amber-500/80 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 text-xl border-3 border-white/30 hover:border-white/50 backdrop-blur-sm overflow-hidden group"
-            >
-              {/* Premium glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-white/20 group-hover:from-white/30 group-hover:to-white/30 transition-all duration-500" />
-              
-              {/* Shimmer effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-pulse" />
-              </div>
-              
-              <div className="relative flex items-center justify-center space-x-3">
-                <Crown className="h-6 w-6 drop-shadow-lg" />
-                <span className="drop-shadow-lg">Unlock My Grades Now</span>
-                <Sparkles className="h-5 w-5 drop-shadow-lg" />
-              </div>
-            </Button>
-            
-            <p className="text-xs text-muted-foreground/60 mt-4">
-              ⚡ Instant access • Cancel anytime
-            </p>
-          </div>
-        </div>
-      )}
       
       <CardHeader className="relative">
         <div className="flex items-center justify-between">
@@ -460,13 +373,13 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
             </div>
           </div>
           <div className="flex items-center space-x-6">
-            {subscription.subscribed && averageGrade > 0 && (
+            {averageGrade > 0 && (
               <div className="text-center p-3 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl border border-purple-500/20">
                 <div className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">{averageGrade.toFixed(1)}</div>
                 <div className="text-xs text-muted-foreground font-semibold">Avg Grade</div>
               </div>
             )}
-            {subscription.subscribed && grade7PlusCount > 0 && (
+            {grade7PlusCount > 0 && (
               <Badge className="bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-600 text-white border-0 px-4 py-2 text-sm font-bold shadow-lg shadow-emerald-500/25 animate-pulse">
                 <Trophy className="h-4 w-4 mr-2 animate-bounce" />
                 {grade7PlusCount} Grade 7+ 🎉
@@ -563,7 +476,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                     className="max-w-80 w-auto p-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white text-xs rounded-2xl shadow-2xl border border-white/10 backdrop-blur-sm"
                   >
                     <div className="space-y-2">
-                      <div className="font-semibold text-amber-300 text-center">🤖 Algorithm Insight</div>
+                      <div className="font-semibold text-amber-300 text-center">🤖 AI Insight</div>
                       <div className="text-gray-200 leading-relaxed">
                         {getTooltipText(grade)}
                       </div>

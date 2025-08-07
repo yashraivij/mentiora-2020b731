@@ -9,13 +9,6 @@ interface AuthContextType {
   register: (name: string, email: string, password: string) => Promise<boolean>;
   logout: () => void;
   isLoading: boolean;
-  subscription: {
-    subscribed: boolean;
-    subscription_tier: string | null;
-    subscription_end: string | null;
-  };
-  checkSubscription: () => Promise<void>;
-  createCheckout: () => Promise<string | null>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -32,27 +25,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [subscription, setSubscription] = useState({
-    subscribed: false,
-    subscription_tier: null as string | null,
-    subscription_end: null as string | null,
-  });
 
   useEffect(() => {
     // Set up auth state listener
-    const { data: { subscription: authSubscription } } = supabase.auth.onAuthStateChange(
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
         console.log('Auth state changed:', event, session?.user?.email);
         setSession(session);
         setUser(session?.user ?? null);
         setIsLoading(false);
-        
-        // Check subscription when user logs in
-        if (session?.user) {
-          setTimeout(() => {
-            checkSubscription();
-          }, 0);
-        }
       }
     );
 
@@ -62,16 +43,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setSession(session);
       setUser(session?.user ?? null);
       setIsLoading(false);
-      
-      // Check subscription for existing session
-      if (session?.user) {
-        setTimeout(() => {
-          checkSubscription();
-        }, 0);
-      }
     });
 
-    return () => authSubscription.unsubscribe();
+    return () => subscription.unsubscribe();
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
@@ -137,66 +111,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     await supabase.auth.signOut();
   };
 
-  const checkSubscription = async () => {
-    if (!session?.access_token) return;
-    
-    try {
-      const { data, error } = await supabase.functions.invoke('check-subscription', {
-        headers: {
-          Authorization: `Bearer ${session.access_token}`,
-        },
-      });
-      
-      if (error) {
-        console.error('Error checking subscription:', error);
-        return;
-      }
-      
-      setSubscription({
-        subscribed: data.subscribed || false,
-        subscription_tier: data.subscription_tier || null,
-        subscription_end: data.subscription_end || null,
-      });
-    } catch (error) {
-      console.error('Error checking subscription:', error);
-    }
-  };
-
-  const createCheckout = async (): Promise<string | null> => {
-    if (!session?.access_token) {
-      console.error('No session token available');
-      return null;
-    }
-    
-    try {
-      const { data, error } = await supabase.functions.invoke('create-checkout', {
-        headers: {
-          Authorization: `Bearer ${session.access_token}`,
-        },
-      });
-      
-      if (error) {
-        console.error('Error creating checkout:', error);
-        return null;
-      }
-      
-      return data.url;
-    } catch (error) {
-      console.error('Error creating checkout:', error);
-      return null;
-    }
-  };
-
   return (
     <AuthContext.Provider value={{
       user,
       login,
       register,
       logout,
-      isLoading,
-      subscription,
-      checkSubscription,
-      createCheckout
+      isLoading
     }}>
       {children}
     </AuthContext.Provider>

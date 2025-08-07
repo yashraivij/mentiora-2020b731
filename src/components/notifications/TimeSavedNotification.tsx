@@ -3,20 +3,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Clock, X, BookOpen, Crown, TrendingUp, Sparkles, Lock } from 'lucide-react';
+import { Clock, X, BookOpen, Crown, TrendingUp, Sparkles } from 'lucide-react';
 
 interface TimeSavedNotificationProps {
   timeSavedHours: number;
   onClose: () => void;
   show: boolean;
-  isSubscribed?: boolean;
 }
 
 export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
   timeSavedHours,
   onClose,
-  show,
-  isSubscribed = false
+  show
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -32,10 +30,6 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
   };
 
   const getEncouragingMessage = () => {
-    if (!isSubscribed) {
-      return "🎯 You've just studied smarter — now see exactly how many hours you've saved. Join thousands of students turning time into top grades.";
-    }
-    
     const days = Math.floor(timeSavedHours / 24);
     
     if (days >= 2) {
@@ -160,14 +154,14 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                   transition={{ delay: 0.2, type: "spring", damping: 20 }}
                   className="text-center"
                 >
-                  <div className={`text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 dark:from-violet-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2 ${!isSubscribed ? 'blur-[8px]' : ''}`}>
+                  <div className="text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 dark:from-violet-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2">
                     {getTimeSavedDisplay()}
                   </div>
                   <p className="text-sm font-semibold text-violet-700 dark:text-violet-300 mb-1">
                     Total Time Saved
                   </p>
                   <p className="text-xs text-violet-600/80 dark:text-violet-400/80">
-                    {isSubscribed ? 'with AI Auto-Notes' : '🔒 Unlock with Premium'}
+                    with AI Auto-Notes
                   </p>
                 </motion.div>
 
@@ -186,33 +180,22 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                 </div>
               </div>
 
-               {/* Action button */}
-               <motion.div
-                 initial={{ y: 10, opacity: 0 }}
-                 animate={{ y: 0, opacity: 1 }}
-                 transition={{ delay: 0.4 }}
-                 className="mt-4 text-center space-y-2"
-               >
-                 {!isSubscribed ? (
-                    <Button
-                      onClick={() => window.location.href = '/premium'}
-                      size="sm"
-                      className="bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 hover:from-amber-600 hover:via-orange-600 hover:to-red-600 text-white shadow-lg hover:shadow-xl transition-all duration-200"
-                    >
-                      <Crown className="h-3 w-3 mr-1" />
-                      Unlock Premium
-                    </Button>
-                 ) : (
-                   <Button
-                     onClick={() => window.location.href = '/notebook'}
-                     size="sm"
-                     className="bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 hover:from-violet-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl transition-all duration-200"
-                   >
-                     <BookOpen className="h-3 w-3 mr-1" />
-                     View Notes
-                   </Button>
-                 )}
-               </motion.div>
+              {/* Action button */}
+              <motion.div
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="mt-4 text-center"
+              >
+                <Button
+                  onClick={() => window.location.href = '/notebook'}
+                  size="sm"
+                  className="bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 hover:from-violet-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl transition-all duration-200"
+                >
+                  <BookOpen className="h-3 w-3 mr-1" />
+                  View Notes
+                </Button>
+              </motion.div>
             </div>
           </Card>
         </motion.div>

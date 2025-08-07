@@ -44,7 +44,7 @@ interface UserProgress {
 }
 
 const Dashboard = () => {
-  const { user, logout, subscription } = useAuth();
+  const { user, logout } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
@@ -130,9 +130,9 @@ const Dashboard = () => {
       }
 
       const totalEntries = entries?.length || 0;
-      // More accurate time calculation: 15 minutes saved per note (based on actual study time research)
-      const timeSavedMinutes = totalEntries * 15;
-      const newTimeSavedHours = Math.round(timeSavedMinutes / 60 * 10) / 10; // Convert to hours and round to 1 decimal
+      // Calculate time saved: Assume each note saves 10 minutes of manual revision time (more realistic)
+      const timeSavedMinutes = totalEntries * 10;
+      const newTimeSavedHours = Math.round(timeSavedMinutes / 6) / 10; // Convert to hours and round to 1 decimal
 
       console.log('Time saved calculation:', { 
         totalEntries, 
@@ -812,14 +812,8 @@ const Dashboard = () => {
                     EduClara
                   </h1>
                   <div className="flex items-center space-x-2">
-                    {subscription.subscribed ? (
-                      <Crown className="h-3 w-3 text-amber-500" />
-                    ) : (
-                      <User className="h-3 w-3 text-muted-foreground" />
-                    )}
-                    <span className="text-xs font-medium text-muted-foreground">
-                      {subscription.subscribed ? "Premium" : "Standard"}
-                    </span>
+                    <Crown className="h-3 w-3 text-amber-500" />
+                    <span className="text-xs font-medium text-muted-foreground">Premium</span>
                   </div>
                 </div>
               </div>
@@ -1491,7 +1485,6 @@ const Dashboard = () => {
         timeSavedHours={timeSavedHours}
         show={showTimeSavedNotification}
         onClose={() => setShowTimeSavedNotification(false)}
-        isSubscribed={subscription.subscribed}
       />
     </div>
   );
