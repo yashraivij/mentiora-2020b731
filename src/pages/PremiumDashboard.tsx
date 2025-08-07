@@ -28,6 +28,11 @@ const PremiumDashboard = () => {
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Dashboard
               </Button>
+              <div>
+                <h1 className="text-xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+                  EduClara Premium
+                </h1>
+              </div>
             </div>
             <div className="flex items-center space-x-3">
               <ThemeToggle />
