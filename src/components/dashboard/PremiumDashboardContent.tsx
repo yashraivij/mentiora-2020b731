@@ -641,6 +641,22 @@ const PremiumDashboardContent = ({ forceShow = true }: PremiumDashboardContentPr
             </Card>
             
             <PredictedGradesGraph userProgress={userProgress} isPremiumDashboard={true} />
+            
+            {/* Premium Notebook Access Card */}
+            <Card className="bg-gradient-to-br from-emerald-500/10 to-teal-600/10 border-emerald-200 dark:border-emerald-800 cursor-pointer hover:shadow-lg transition-all duration-300" onClick={handleOpenNotebook}>
+              <CardHeader>
+                <div className="flex items-center space-x-2">
+                  <Brain className="h-5 w-5 text-emerald-600" />
+                  <CardTitle>Premium Notebook</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground mb-4">Access your AI-generated revision notes instantly</p>
+                <Button className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white">
+                  Open Notebook
+                </Button>
+              </CardContent>
+            </Card>
           </div>
 
           <div className="text-center py-8">

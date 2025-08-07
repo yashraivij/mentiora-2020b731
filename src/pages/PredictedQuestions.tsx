@@ -267,7 +267,7 @@ const PredictedQuestions = () => {
                   }}
                 >
                   <Crown className="h-4 w-4 mr-2" />
-                  Start Premium Exam
+                    {isPremiumAccess ? 'Start Exam' : 'Start Premium Exam'}
                   <Sparkles className="h-4 w-4 ml-2" />
                 </Button>
               )}
@@ -331,10 +331,12 @@ const PredictedQuestions = () => {
         {/* Header Section */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-3 mb-4">
-            <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold px-3 py-1 hover:from-yellow-300 hover:to-orange-300">
-              <Crown className="h-3 w-3 mr-1" />
-              PREMIUM EXCLUSIVE
-            </Badge>
+            {!isPremiumAccess && (
+              <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold px-3 py-1 hover:from-yellow-300 hover:to-orange-300">
+                <Crown className="h-3 w-3 mr-1" />
+                PREMIUM EXCLUSIVE
+              </Badge>
+            )}
             <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
               <Zap className="h-3 w-3 mr-1" />
               Weekly Updates
