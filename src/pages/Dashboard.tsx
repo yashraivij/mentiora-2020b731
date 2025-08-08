@@ -801,6 +801,17 @@ const Dashboard = () => {
               {getStudyStreak() >= 3 && <ColorThemeToggle />}
               {getStudyStreak() >= 7 && <StudyPlaylist isUnlocked={true} />}
               
+              {/* User Activity Analytics Button - Admin/Developer Feature */}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigate('/user-analytics')}
+                className="hidden md:flex items-center space-x-2"
+              >
+                <BarChart3 className="h-4 w-4" />
+                <span>User Analytics</span>
+              </Button>
+              
               <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
                 <LogOut className="h-4 w-4" />
               </Button>

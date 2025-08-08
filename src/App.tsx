@@ -14,6 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import SubjectTopics from "./pages/SubjectTopics";
 import Practice from "./pages/Practice";
 import Analytics from "./pages/Analytics";
+import UserActivityAnalytics from "./pages/UserActivityAnalytics";
 import PredictedQuestions from "./pages/PredictedQuestions";
 import PredictedExam from "./pages/PredictedExam";
 import PredictedResults from "./pages/PredictedResults";
@@ -53,6 +54,11 @@ const App: React.FC = () => (
             <Route path="/analytics" element={
               <ProtectedRoute>
                 <Analytics />
+              </ProtectedRoute>
+            } />
+            <Route path="/user-analytics" element={
+              <ProtectedRoute>
+                <UserActivityAnalytics />
               </ProtectedRoute>
             } />
             <Route path="/predicted-questions" element={
