@@ -30,7 +30,7 @@ import { StressTracker } from "@/lib/stressTracker";
 
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
 import { StreakCelebration } from "@/components/ui/streak-celebration";
-import { ProfileDropdown } from '@/components/ui/profile-dropdown';
+
 import { PublicStreakProfiles } from '@/components/dashboard/PublicStreakProfiles';
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
 import { useToast } from "@/hooks/use-toast";
@@ -796,7 +796,7 @@ const Dashboard = () => {
               <ThemeToggle />
               {getStudyStreak() >= 3 && <ColorThemeToggle />}
               {getStudyStreak() >= 7 && <StudyPlaylist isUnlocked={true} />}
-              <ProfileDropdown streakDays={getStudyStreak()} firstName={getFirstName()} />
+              
               <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
                 <LogOut className="h-4 w-4" />
               </Button>
