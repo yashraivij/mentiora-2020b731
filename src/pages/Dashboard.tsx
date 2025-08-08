@@ -201,7 +201,6 @@ const Dashboard = () => {
       await loadUserSubjects();
 
       // Record login activity and fetch current streak
-      await recordActivity('dashboard_visit');
       await fetchCurrentStreak();
 
       // Check and update public profile for 14+ day streaks
@@ -528,16 +527,21 @@ const Dashboard = () => {
   };
 
   // Record user activity and update streak
-  const recordActivity = async (activityType: string) => {
+  const recordActivity = async () => {
     if (!user?.id) return;
     
     try {
-      // Use daily_usage table which has triggers that update properly
+      // Insert/update today's usage in daily_usage table
       await supabase
-        .from('user_activities')
-        .insert({
+        .from('daily_usage')
+        .upsert({
           user_id: user.id,
-          activity_type: activityType
+          date: new Date().toISOString().split('T')[0], // Today's date in YYYY-MM-DD format
+          activities_count: 1,
+          total_minutes: 5
+        }, {
+          onConflict: 'user_id,date',
+          ignoreDuplicates: false
         });
       
     } catch (error) {
@@ -551,7 +555,7 @@ const Dashboard = () => {
     
     try {
       // First record today's activity in daily_usage to ensure streak is current
-      await recordActivity('dashboard_visit');
+      await recordActivity();
       
       // Use the database function to get streak
       const { data, error } = await supabase
@@ -669,7 +673,7 @@ const Dashboard = () => {
   };
 
   const handlePractice = async (subjectId: string, topicId?: string) => {
-    await recordActivity('practice_start');
+    await recordActivity();
     if (topicId) {
       navigate(`/practice/${subjectId}/${topicId}`);
     } else {
