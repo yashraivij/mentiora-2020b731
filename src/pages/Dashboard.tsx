@@ -815,10 +815,6 @@ const Dashboard = () => {
               </h2>
               <p className="text-muted-foreground text-lg">Ready to elevate your GCSE revision journey?</p>
             </div>
-            <div className="hidden md:flex items-center space-x-3 px-4 py-2 bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-950/30 dark:to-blue-950/30 rounded-2xl border border-emerald-200/50 dark:border-emerald-800/30">
-              <Zap className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-              <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">Insights</span>
-            </div>
           </div>
         </div>
 
