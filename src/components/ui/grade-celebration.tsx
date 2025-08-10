@@ -97,8 +97,8 @@ const getGradeTheme = (grade: string) => {
       glowEffect: 'from-amber-500/20 via-orange-500/20 to-yellow-500/20',
       textGradient: 'from-amber-600 via-orange-600 to-yellow-600 dark:from-amber-400 dark:via-orange-400 dark:to-yellow-400',
       icon: TrendingUp,
-      title: '📊 Grade Updated!',
-      message: 'Every grade is a step in your journey!',
+      title: '📚 Every Grade Counts!',
+      message: 'Building your knowledge step by step!',
       confettiColors: ['#F59E0B', '#D97706', '#B45309', '#92400E']
     };
   } else {
