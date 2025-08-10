@@ -1613,41 +1613,6 @@ const Dashboard = () => {
         onClose={() => setShowDiscordInvitation(false)}
       />
 
-      {/* Test Button for Discord Invitation */}
-      <div className="fixed bottom-4 right-4 z-50 space-y-2">
-        <Button
-          onClick={() => setShowDiscordInvitation(true)}
-          variant="outline"
-          size="sm"
-          className="bg-white/90 hover:bg-white shadow-lg block w-full"
-        >
-          Test Discord Invite
-        </Button>
-        <Button
-          onClick={async () => {
-            console.log('Manual Discord check triggered');
-            await checkForDiscordInvitation();
-          }}
-          variant="outline"
-          size="sm"
-          className="bg-blue-100/90 hover:bg-blue-200 shadow-lg block w-full"
-        >
-          Check Discord Criteria
-        </Button>
-        <Button
-          onClick={() => {
-            if (user?.id) {
-              localStorage.removeItem(`discord_invitation_shown_${user.id}`);
-              console.log('Discord invitation flag cleared');
-            }
-          }}
-          variant="outline"
-          size="sm"
-          className="bg-red-100/90 hover:bg-red-200 shadow-lg block w-full text-xs"
-        >
-          Reset Discord Flag
-        </Button>
-      </div>
     </div>
   );
 };
