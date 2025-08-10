@@ -14,6 +14,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
 import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
+import { playCelebratorySound } from "@/lib/celebratory-sound";
 
 interface QuestionAttempt {
   questionId: string;
@@ -267,6 +268,11 @@ const Practice = () => {
       
       setAttempts([...attempts, attempt]);
       setShowFeedback(true);
+      
+      // Play celebratory sound if user got marks (but not if they got zero)
+      if (markingResult.marksAwarded > 0) {
+        playCelebratorySound();
+      }
       
       // Generate notebook notes if marks were lost
       const marksLost = currentQuestion.marks - markingResult.marksAwarded;
