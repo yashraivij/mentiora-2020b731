@@ -72,6 +72,107 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel Physics Paper 1 (1.4)'
+          },
+          {
+            id: 'kcp-q4',
+            question: 'Calculate the percentage uncertainty in a measurement of 15.2 ± 0.3 cm.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Percentage uncertainty = (absolute uncertainty ÷ measured value) × 100% = (0.3 ÷ 15.2) × 100% = 1.97% ≈ 2.0%',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula used (1 mark)',
+                'Correct calculation with appropriate rounding (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (1.5)'
+          },
+          {
+            id: 'kcp-q5',
+            question: 'A student measures the length of a wire as 125 cm using a ruler with mm divisions. State the resolution and suggest how to improve the precision.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Resolution = 1 mm (smallest division on ruler). To improve precision: use a measuring device with smaller divisions (e.g., digital calipers), take multiple measurements and calculate mean, use a longer ruler to reduce relative error.',
+            markingCriteria: {
+              breakdown: [
+                'Resolution = 1 mm (1 mark)',
+                'Two appropriate methods to improve precision (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (1.6)'
+          },
+          {
+            id: 'kcp-q6',
+            question: 'Convert 2.5 × 10⁻⁴ m to micrometers (μm).',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '2.5 × 10⁻⁴ m = 2.5 × 10⁻⁴ × 10⁶ μm = 250 μm',
+            markingCriteria: {
+              breakdown: [
+                'Correct conversion factor (1 mark)',
+                'Correct final answer (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (1.2-1.3)'
+          },
+          {
+            id: 'kcp-q7',
+            question: 'Distinguish between systematic and random errors, giving one example of each.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Systematic errors affect all measurements in the same way and can be corrected. Example: zero error on an ammeter. Random errors vary unpredictably and can be reduced by averaging multiple measurements. Example: reaction time variations in timing experiments.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of systematic error with example (2 marks)',
+                'Definition of random error with example (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (1.7)'
+          },
+          {
+            id: 'kcp-q8',
+            question: 'A rectangular block has dimensions 12.4 cm × 8.2 cm × 3.6 cm. Calculate its volume and express your answer to an appropriate number of significant figures.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Volume = length × width × height = 12.4 × 8.2 × 3.6 = 366.048 cm³. Since all measurements have 2 significant figures after the decimal, answer = 370 cm³ (2 significant figures).',
+            markingCriteria: {
+              breakdown: [
+                'Correct calculation (1 mark)',
+                'Recognition of significant figures rule (1 mark)',
+                'Final answer to 2 significant figures (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (1.4)'
+          },
+          {
+            id: 'kcp-q9',
+            question: 'Calculate 4.2 × 10³ + 3.8 × 10² and express your answer in standard form.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '4.2 × 10³ + 3.8 × 10² = 4200 + 380 = 4580 = 4.58 × 10³',
+            markingCriteria: {
+              breakdown: [
+                'Correct addition (1 mark)',
+                'Answer in standard form (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (1.2-1.3)'
+          },
+          {
+            id: 'kcp-q10',
+            question: 'A student uses a stopwatch to measure the time for 10 oscillations of a pendulum as 18.4 s. Calculate the period and its absolute uncertainty if the stopwatch uncertainty is ±0.1 s.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Period = total time ÷ number of oscillations = 18.4 ÷ 10 = 1.84 s. Absolute uncertainty in period = uncertainty in time ÷ number of oscillations = 0.1 ÷ 10 = 0.01 s. Therefore period = 1.84 ± 0.01 s.',
+            markingCriteria: {
+              breakdown: [
+                'Correct period calculation (1 mark)',
+                'Correct uncertainty calculation method (1 mark)',
+                'Correct uncertainty value (1 mark)',
+                'Final answer with uncertainty (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (1.5-1.7)'
           }
         ]
       },
@@ -291,6 +392,73 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel Physics Paper 1 (3.13-3.14)'
+          },
+          {
+            id: 'ce-q7',
+            question: 'A ball of mass 0.5 kg is dropped from a height of 10 m. Calculate its speed just before it hits the ground, assuming no air resistance. (g = 9.8 m/s²)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Using conservation of energy: GPE at top = KE at bottom. mgh = ½mv². Cancel mass: gh = ½v². v² = 2gh = 2 × 9.8 × 10 = 196. v = √196 = 14 m/s',
+            markingCriteria: {
+              breakdown: [
+                'Conservation of energy principle stated (1 mark)',
+                'Correct equation setup (1 mark)',
+                'Correct substitution and calculation (1 mark)',
+                'Final answer with units (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (3.4-3.6)'
+          },
+          {
+            id: 'ce-q8',
+            question: 'Calculate the power output of a motor that lifts a 200 kg load through a vertical height of 15 m in 30 s. (g = 9.8 m/s²)',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Work done = Force × distance = Weight × height = mgh = 200 × 9.8 × 15 = 29,400 J. Power = Work done ÷ time = 29,400 ÷ 30 = 980 W',
+            markingCriteria: {
+              breakdown: [
+                'Calculate weight correctly (1 mark)',
+                'Work done = mgh (1 mark)',
+                'Correct calculation of work = 29,400 J (1 mark)',
+                'Power formula used correctly (1 mark)',
+                'Final answer = 980 W (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (3.12)'
+          },
+          {
+            id: 'ce-q9',
+            question: 'A spring with spring constant 500 N/m is compressed by 0.2 m. Calculate the elastic potential energy stored and the speed of a 2 kg mass when released. Assume no energy losses.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Elastic PE = ½kx² = ½ × 500 × (0.2)² = ½ × 500 × 0.04 = 10 J. When released, all elastic PE converts to KE: ½mv² = 10 J. v² = 20/m = 20/2 = 10. v = √10 = 3.16 m/s',
+            markingCriteria: {
+              breakdown: [
+                'Elastic PE formula used correctly (1 mark)',
+                'Correct calculation of elastic PE = 10 J (2 marks)',
+                'Energy conservation applied (1 mark)',
+                'Correct setup for KE calculation (1 mark)',
+                'Final speed = 3.16 m/s (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (3.3, 3.4)'
+          },
+          {
+            id: 'ce-q10',
+            question: 'A hydroelectric power station has a water flow rate of 500 m³/s falling through a height of 80 m. If the overall efficiency is 85%, calculate the electrical power output. (Density of water = 1000 kg/m³, g = 9.8 m/s²)',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Mass per second = density × volume per second = 1000 × 500 = 500,000 kg/s. Power input = mgh per second = 500,000 × 9.8 × 80 = 392,000,000 W. Electrical power = efficiency × input power = 0.85 × 392,000,000 = 333,200,000 W = 333 MW',
+            markingCriteria: {
+              breakdown: [
+                'Calculate mass flow rate (1 mark)',
+                'Power input formula correct (1 mark)',
+                'Correct calculation of input power (2 marks)',
+                'Apply efficiency correctly (1 mark)',
+                'Final answer = 333 MW (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Physics Paper 1 (3.11-3.14)'
           }
         ]
       },
@@ -7868,6 +8036,50 @@ export const curriculum: Subject[] = [
               breakdown: ['Description of North-South divide (2 marks)', 'Evidence of inequalities (1 mark)', 'Government strategies to reduce inequalities (3 marks)']
             },
             specReference: '3.2.2.2 - Regional inequalities'
+          },
+          {
+            id: 'econ-q7',
+            question: 'Explain how trade affects uneven development and evaluate the role of fair trade in reducing inequalities.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Trade can worsen development gaps as HICs export manufactured goods while LICs export raw materials, creating unequal value exchange. TNCs may exploit cheap labor in LICs. Fair trade guarantees minimum prices for producers, ensures better working conditions, and invests premiums in community development. However, fair trade reaches limited numbers of producers and may create market distortions.',
+            markingCriteria: {
+              breakdown: ['How trade affects uneven development (4 marks)', 'Fair trade benefits explained (2 marks)', 'Evaluation of fair trade limitations (2 marks)']
+            },
+            specReference: '3.2.2.1 - Trade and fair trade'
+          },
+          {
+            id: 'econ-q8',
+            question: 'Using a named example, explain how tourism can contribute to development and evaluate its environmental and social impacts.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Kenya: Tourism contributes 10% of GDP, creates employment in hotels, guides, and transport, brings foreign currency, and funds conservation of wildlife parks. However, benefits often leak to foreign companies, local communities may be displaced, and mass tourism damages fragile ecosystems and coral reefs. Cultural impacts include loss of traditional lifestyles.',
+            markingCriteria: {
+              breakdown: ['Named example used (1 mark)', 'Economic benefits of tourism (3 marks)', 'Environmental impacts evaluated (2 marks)', 'Social impacts evaluated (2 marks)']
+            },
+            specReference: '3.2.2.1 - Tourism as development strategy'
+          },
+          {
+            id: 'econ-q9',
+            question: 'Explain the causes and consequences of uneven development between and within countries.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Causes include historical factors (colonialism), physical geography (landlocked countries, climate), economic factors (lack of investment), and political factors (corruption, conflict). Consequences include migration from poor to rich areas, health and education disparities, environmental degradation in poor regions, and political instability.',
+            markingCriteria: {
+              breakdown: ['Causes of uneven development (3 marks)', 'Consequences of uneven development (3 marks)']
+            },
+            specReference: '3.2.2.1 - Uneven development causes and consequences'
+          },
+          {
+            id: 'econ-q10',
+            question: 'Evaluate the effectiveness of different types of aid in promoting development in LICs.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Emergency aid saves lives during disasters but doesn\'t address long-term development. Development aid funds infrastructure and education but may create dependency and debt. Bilateral aid can be tied to political conditions. Multilateral aid through UN agencies may be more neutral but bureaucratic. Bottom-up aid working with local communities is often more sustainable than top-down government aid.',
+            markingCriteria: {
+              breakdown: ['Emergency aid evaluation (2 marks)', 'Development aid evaluation (2 marks)', 'Bilateral vs multilateral aid (2 marks)', 'Bottom-up vs top-down approaches (2 marks)']
+            },
+            specReference: '3.2.2.1 - Types and effectiveness of aid'
           }
         ]
       },
@@ -7940,6 +8152,72 @@ export const curriculum: Subject[] = [
               breakdown: ['Supply-side strategies for chosen resource (2 marks)', 'Demand-side or efficiency strategies (2 marks)', 'Technology and international cooperation (2 marks)']
             },
             specReference: '3.2.3 - Resource focus areas'
+          },
+          {
+            id: 'resource-q5',
+            question: 'Explain how climate change affects global food security and evaluate adaptive strategies.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Climate change affects food security through changing rainfall patterns, extreme weather events, rising temperatures, and sea level rise affecting coastal agriculture. Some regions may benefit from longer growing seasons while others face droughts or flooding. Adaptive strategies include developing drought-resistant crops, improving irrigation efficiency, changing crop varieties and farming locations, and building climate-resilient infrastructure.',
+            markingCriteria: {
+              breakdown: ['Effects of climate change on food production (3 marks)', 'Adaptive strategies to maintain food security (3 marks)']
+            },
+            specReference: '3.2.3 - Climate change and food security'
+          },
+          {
+            id: 'resource-q6',
+            question: 'Explain the concept of water stress and evaluate methods to manage water scarcity in arid regions.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Water stress occurs when water demand exceeds available supply, typically when renewable water resources fall below 1,700 m³ per person per year. Management methods include water conservation (drip irrigation, recycling), supply enhancement (desalination, groundwater extraction), demand reduction (pricing, rationing), and technology solutions (water harvesting, efficient distribution).',
+            markingCriteria: {
+              breakdown: ['Definition and causes of water stress (2 marks)', 'Water conservation methods (2 marks)', 'Supply enhancement and technology solutions (2 marks)']
+            },
+            specReference: '3.2.3 - Water stress and management'
+          },
+          {
+            id: 'resource-q7',
+            question: 'Evaluate the environmental impacts of different energy sources and their role in sustainable development.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Fossil fuels produce greenhouse gases and air pollution but have reliable output. Nuclear power has low carbon emissions but creates radioactive waste and safety concerns. Renewable sources like wind and solar have minimal emissions but variable output and require land use. Hydroelectric power is clean but affects river ecosystems. Sustainable development requires balancing environmental protection with energy security and economic needs.',
+            markingCriteria: {
+              breakdown: ['Environmental impacts of fossil fuels (2 marks)', 'Environmental impacts of nuclear power (2 marks)', 'Environmental impacts of renewable sources (2 marks)', 'Evaluation of sustainable development balance (2 marks)']
+            },
+            specReference: '3.2.3 - Energy and environment'
+          },
+          {
+            id: 'resource-q8',
+            question: 'Explain how population growth and urbanization affect resource consumption patterns globally.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Population growth increases total demand for food, water, and energy resources. Urbanization concentrates resource consumption in cities, creating pressure on surrounding areas for food and water supply. Urban populations typically consume more energy per capita due to industrial activities and lifestyle changes. This creates challenges for resource distribution and infrastructure development.',
+            markingCriteria: {
+              breakdown: ['Effects of population growth on resource demand (2 marks)', 'Urbanization impacts on consumption patterns (2 marks)', 'Challenges for resource distribution and infrastructure (2 marks)']
+            },
+            specReference: '3.2.3 - Population and resource consumption'
+          },
+          {
+            id: 'resource-q9',
+            question: 'Evaluate the role of technology in improving resource efficiency and sustainability.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Technology improves efficiency through precision agriculture (GPS, sensors), smart irrigation systems, and renewable energy innovations. Digital systems optimize resource distribution and reduce waste. However, technology requires investment and expertise that may not be available in developing countries. Some technologies have their own environmental costs (rare earth minerals, electronic waste).',
+            markingCriteria: {
+              breakdown: ['Technology applications for resource efficiency (3 marks)', 'Benefits of technological solutions (1 mark)', 'Limitations and challenges of technology (2 marks)']
+            },
+            specReference: '3.2.3 - Technology and sustainability'
+          },
+          {
+            id: 'resource-q10',
+            question: 'Using a named example, explain how international cooperation can address global resource challenges.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Example: The Paris Climate Agreement addresses global energy and climate challenges through international cooperation. Countries set emission reduction targets, share technology, and provide climate finance to developing nations. Successes include increased renewable energy investment and technology transfer. However, challenges include enforcement difficulties, different national priorities, and insufficient funding for adaptation in developing countries.',
+            markingCriteria: {
+              breakdown: ['Named example of international cooperation (1 mark)', 'Explanation of how cooperation addresses resource challenges (3 marks)', 'Evidence of successes (2 marks)', 'Evaluation of limitations or challenges (2 marks)']
+            },
+            specReference: '3.2.3 - International cooperation on resources'
           },
         ]
       }
