@@ -582,10 +582,11 @@ const Dashboard = () => {
               setShowStreakCelebration(true);
             }, 1000);
             await markStreakCelebrationViewed(14);
+            return; // Exit early to avoid multiple celebrations
           }
         }
         
-        // Check 7-day streak if 14-day already seen or not reached
+        // Check 7-day streak
         if (streak >= 7) {
           const hasSeenCelebration = await hasSeenStreakCelebration(7);
           if (!hasSeenCelebration) {
@@ -593,6 +594,18 @@ const Dashboard = () => {
               setShowStreakCelebration(true);
             }, 1000);
             await markStreakCelebrationViewed(7);
+            return; // Exit early to avoid multiple celebrations
+          }
+        }
+        
+        // Check 3-day streak (new milestone for early encouragement)
+        if (streak >= 3) {
+          const hasSeenCelebration = await hasSeenStreakCelebration(3);
+          if (!hasSeenCelebration) {
+            setTimeout(() => {
+              setShowStreakCelebration(true);
+            }, 1000);
+            await markStreakCelebrationViewed(3);
           }
         }
       }, 500);
@@ -1438,13 +1451,27 @@ const Dashboard = () => {
             } else {
               await markStreakCelebrationViewed(7);
             }
-          } else {
+          } else if (streak >= 7) {
             await markStreakCelebrationViewed(7);
+          } else if (streak >= 3) {
+            await markStreakCelebrationViewed(3);
           }
         }}
         streakDays={getStudyStreak()}
-        rewardText={getStudyStreak() >= 14 ? "Claim Your Free Tutoring Session" : "Study Playlist & Background Sounds"}
-        rewardEmoji={getStudyStreak() >= 14 ? "👨‍🏫" : "🎵"}
+        rewardText={
+          getStudyStreak() >= 14 
+            ? "Claim Your Free Tutoring Session" 
+            : getStudyStreak() >= 7 
+            ? "Study Playlist & Background Sounds"
+            : "Color Theme Customization"
+        }
+        rewardEmoji={
+          getStudyStreak() >= 14 
+            ? "👨‍🏫" 
+            : getStudyStreak() >= 7 
+            ? "🎵" 
+            : "🎨"
+        }
       />
 
       {/* Time Saved Notification */}
