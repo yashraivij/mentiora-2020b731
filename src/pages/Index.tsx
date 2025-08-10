@@ -344,31 +344,78 @@ const Index = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="mt-16 pt-8 border-t border-gray-100"
           >
-            <p className="text-sm text-gray-500 font-medium mb-8 text-center">Proven Results From Real Students</p>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
-              {trustStats.map((stat, index) => (
-                <motion.div 
-                  key={index} 
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={statsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                  transition={{ duration: 0.6, delay: 0.9 + index * 0.1 }}
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  className="text-center group cursor-pointer"
-                >
-                  <div className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-r ${stat.bg} rounded-2xl flex items-center justify-center group-hover:shadow-lg transition-all duration-300`}>
-                    <stat.icon className={`h-8 w-8 ${stat.color}`} />
-                  </div>
-                  <div className={`text-3xl lg:text-4xl font-bold ${stat.color} mb-2 tracking-tight`}>
-                    {stat.number}
-                  </div>
-                  <div className="text-gray-900 font-semibold text-sm mb-1">
-                    {stat.label}
-                  </div>
-                  <div className="text-gray-500 text-xs">
-                    {stat.description}
-                  </div>
-                </motion.div>
-              ))}
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={statsInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.6, delay: 1.0 }}
+              className="text-sm text-gray-500 font-medium mb-8 text-center"
+            >
+              Proven Results From Real Students
+            </motion.p>
+            <div className="relative overflow-hidden">
+              <motion.div 
+                className="flex gap-8 justify-center"
+                animate={{ 
+                  x: [0, -20, 0, 20, 0] 
+                }}
+                transition={{
+                  x: {
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    duration: 8,
+                    ease: "easeInOut",
+                  },
+                }}
+              >
+                {trustStats.map((stat, index) => (
+                  <motion.div 
+                    key={index} 
+                    initial={{ opacity: 0, y: 30, scale: 0.8 }}
+                    animate={statsInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.8 }}
+                    transition={{ 
+                      duration: 0.6, 
+                      delay: 0.9 + index * 0.15,
+                      type: "spring",
+                      stiffness: 100
+                    }}
+                    whileHover={{ 
+                      scale: 1.15, 
+                      y: -8,
+                      rotate: [0, -2, 2, 0],
+                      transition: { duration: 0.3 }
+                    }}
+                    className="text-center group cursor-pointer min-w-[140px]"
+                  >
+                    <motion.div 
+                      className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-r ${stat.bg} rounded-2xl flex items-center justify-center group-hover:shadow-2xl transition-all duration-500 relative overflow-hidden`}
+                      whileHover={{ 
+                        boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
+                        rotate: 360
+                      }}
+                      transition={{ duration: 0.8 }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <stat.icon className={`h-8 w-8 ${stat.color} relative z-10`} />
+                    </motion.div>
+                    <motion.div 
+                      className={`text-3xl lg:text-4xl font-bold ${stat.color} mb-2 tracking-tight`}
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      {stat.number}
+                    </motion.div>
+                    <motion.div 
+                      className="text-gray-900 font-semibold text-sm mb-1"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      {stat.label}
+                    </motion.div>
+                    <div className="text-gray-500 text-xs">
+                      {stat.description}
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
             </div>
           </motion.div>
         </motion.div>
