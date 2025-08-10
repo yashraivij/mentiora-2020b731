@@ -20,7 +20,7 @@ const testimonials = [
   {
     name: "Olivia K.",
     year: "Year 11",
-    content: "The AI predictions were spot on! Helped me focus on exactly what I needed to improve.",
+    content: "The predictions were spot on! Helped me focus on exactly what I needed to improve.",
     subject: "Mathematics",
     improvement: "Grade 5 to 9"
   },
