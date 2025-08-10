@@ -104,7 +104,7 @@ const Index = () => {
     {
       name: "Emma L.",
       grade: "Year 11",
-      content: "My parents love that we're saving thousands on tutoring while I'm getting better results than ever. The AI personalizes everything to my weak spots - achieved grade 9 in Chemistry after struggling with grade 6s for months!",
+      content: "My parents love that we're saving thousands on tutoring while I'm getting better results than ever. The platform personalizes everything to my weak spots - achieved grade 9 in Chemistry after struggling with grade 6s for months!",
       rating: 5,
       color: "from-emerald-50 to-teal-50",
       accent: "border-emerald-200"
