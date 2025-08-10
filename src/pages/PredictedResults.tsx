@@ -710,65 +710,6 @@ const PredictedResults = () => {
                     {attempt.feedback.specLink}
                   </Badge>
                 </div>
-
-                {/* Manual Override Section */}
-                {attempt.score < (questions[index]?.marks || 5) && (
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <Target className="h-4 w-4 mr-2 text-orange-600" />
-                      📝 Request Mark Review
-                    </h4>
-                    <div className="bg-orange-50 dark:bg-orange-950/20 p-4 rounded-lg border-l-4 border-orange-500">
-                      <p className="text-sm text-muted-foreground mb-3">
-                        Think you deserve more marks? Explain why your answer should receive additional credit.
-                      </p>
-                      <div className="space-y-3">
-                        <textarea
-                          placeholder="Explain why you think your answer deserves more marks (e.g., 'I showed the correct formula and working but made a calculation error - this should get method marks')"
-                          className="w-full h-20 p-3 border rounded-lg resize-none text-sm bg-background"
-                          data-question-id={attempt.questionId}
-                        />
-                        <div className="flex items-center gap-2">
-                          <label className="text-sm font-medium">Marks you think you deserve:</label>
-                          <select 
-                            className="px-2 py-1 border rounded text-sm bg-background"
-                            data-question-id={attempt.questionId}
-                            defaultValue={attempt.score}
-                          >
-                            {Array.from({ length: (questions[index]?.marks || 5) + 1 }, (_, i) => (
-                              <option key={i} value={i}>{i}/{questions[index]?.marks || 5}</option>
-                            ))}
-                          </select>
-                        </div>
-                        <Button 
-                          size="sm" 
-                          variant="outline"
-                          onClick={() => {
-                            const textarea = document.querySelector(`textarea[data-question-id="${attempt.questionId}"]`) as HTMLTextAreaElement;
-                            const select = document.querySelector(`select[data-question-id="${attempt.questionId}"]`) as HTMLSelectElement;
-                            
-                            if (textarea?.value.trim()) {
-                              toast.success("Mark review request submitted! Your teacher will review this question.");
-                              // In a real app, this would send the request to a teacher dashboard
-                              console.log('Mark review request:', {
-                                questionId: attempt.questionId,
-                                currentScore: attempt.score,
-                                requestedScore: select?.value,
-                                justification: textarea.value,
-                                question: questions[index]?.text || questions[index]?.question,
-                                userAnswer: attempt.userAnswer
-                              });
-                            } else {
-                              toast.error("Please provide a justification for your mark request.");
-                            }
-                          }}
-                        >
-                          Submit Request
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                )}
               </CardContent>
             </Card>
           ))}
