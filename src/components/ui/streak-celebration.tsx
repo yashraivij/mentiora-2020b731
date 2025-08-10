@@ -53,65 +53,74 @@ const Confetti = () => {
 export function StreakCelebration({ isVisible, onClose, streakDays, rewardText, rewardEmoji }: StreakCelebrationProps) {
   const [showConfetti, setShowConfetti] = useState(false);
 
-  // Function to play congratulatory speech
-  const playCelebrationSound = async () => {
-    const apiKey = import.meta.env.VITE_ELEVENLABS_API_KEY;
-    if (!apiKey) {
-      console.warn('ElevenLabs API key not found. Add VITE_ELEVENLABS_API_KEY to your environment variables.');
-      return;
-    }
-
+  // Function to play celebration sounds using Web Audio API
+  const playCelebrationSounds = () => {
     try {
-      const celebrationMessages = [
-        "Congratulations! You've achieved an amazing study streak! Keep up the fantastic work!",
-        "Wow! Another streak milestone reached! You're doing incredible! Keep going!",
-        "Outstanding! Your dedication is paying off! This streak shows real commitment!",
-        "Amazing achievement! Your consistent studying is building great habits! Well done!"
-      ];
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
       
-      const message = celebrationMessages[Math.floor(Math.random() * celebrationMessages.length)];
-      
-      const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/9BWtsMINqrJLrRacOk9x', {
-        method: 'POST',
-        headers: {
-          'Accept': 'audio/mpeg',
-          'Content-Type': 'application/json',
-          'xi-api-key': apiKey
-        },
-        body: JSON.stringify({
-          text: message,
-          model_id: 'eleven_turbo_v2_5',
-          voice_settings: {
-            stability: 0.75,
-            similarity_boost: 0.85,
-            style: 0.2,
-            use_speaker_boost: true
-          }
-        })
-      });
+      // Play multiple celebration sounds in sequence
+      const playSound = (frequency: number, duration: number, delay: number, type: OscillatorType = 'sine') => {
+        setTimeout(() => {
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+          
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+          
+          oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+          oscillator.type = type;
+          
+          gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+          gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.01);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+          
+          oscillator.start(audioContext.currentTime);
+          oscillator.stop(audioContext.currentTime + duration);
+        }, delay);
+      };
 
-      if (response.ok) {
-        const audioBlob = await response.blob();
-        const audioUrl = URL.createObjectURL(audioBlob);
-        const audio = new Audio(audioUrl);
-        audio.volume = 0.7; // Set volume to 70%
-        await audio.play();
-        
-        // Clean up the URL after playing
-        audio.addEventListener('ended', () => {
-          URL.revokeObjectURL(audioUrl);
+      // Confetti/celebration sound sequence
+      playSound(523.25, 0.15, 0); // C5
+      playSound(659.25, 0.15, 100); // E5
+      playSound(783.99, 0.15, 200); // G5
+      playSound(1046.5, 0.2, 300); // C6
+      
+      // Add some sparkle sounds
+      playSound(1318.5, 0.1, 450, 'square'); // E6
+      playSound(1567.98, 0.1, 550, 'square'); // G6
+      playSound(2093, 0.15, 650, 'triangle'); // C7
+
+      // Add a final triumphant chord
+      setTimeout(() => {
+        [523.25, 659.25, 783.99, 1046.5].forEach((freq, index) => {
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+          
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+          
+          oscillator.frequency.setValueAtTime(freq, audioContext.currentTime);
+          oscillator.type = 'triangle';
+          
+          gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+          gainNode.gain.linearRampToValueAtTime(0.15, audioContext.currentTime + 0.01);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
+          
+          oscillator.start(audioContext.currentTime + index * 0.05);
+          oscillator.stop(audioContext.currentTime + 0.8);
         });
-      }
+      }, 800);
+
     } catch (error) {
-      console.error('Error playing celebration sound:', error);
+      console.log('Audio not supported or blocked:', error);
     }
   };
 
   useEffect(() => {
     if (isVisible) {
       setShowConfetti(true);
-      // Play the celebration sound when the modal appears
-      playCelebrationSound();
+      // Play celebration sounds when modal appears
+      playCelebrationSounds();
       const timer = setTimeout(() => setShowConfetti(false), 4000);
       return () => clearTimeout(timer);
     }
