@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { DynamicTestimonials } from "@/components/ui/dynamic-testimonials";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -331,6 +332,9 @@ const Index = () => {
               <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
             </Button>
           </motion.div>
+          
+          {/* Dynamic Testimonials */}
+          <DynamicTestimonials />
           
           {/* Trust Stats Strip */}
           <motion.div 
