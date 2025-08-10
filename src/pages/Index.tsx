@@ -568,7 +568,7 @@ const Index = () => {
                   onClick={() => { setTestGrade('4'); setTestSubject('Physics'); setShowGradeCelebration(true); }}
                   className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 text-sm font-medium rounded-xl"
                 >
-                  📈 Test Grade 4
+                  📊 Test Grade 4
                 </Button>
                 <Button 
                   onClick={() => { setTestGrade('U'); setTestSubject('Maths'); setShowGradeCelebration(true); }}
@@ -587,7 +587,7 @@ const Index = () => {
           onClose={() => setShowGradeCelebration(false)}
           grade={testGrade}
           subject={testSubject}
-          previousGrade="5"
+          previousGrade={testGrade === 'U' ? undefined : '5'}
         />
       </div>
     </div>

@@ -97,8 +97,8 @@ const getGradeTheme = (grade: string) => {
       glowEffect: 'from-amber-500/20 via-orange-500/20 to-yellow-500/20',
       textGradient: 'from-amber-600 via-orange-600 to-yellow-600 dark:from-amber-400 dark:via-orange-400 dark:to-yellow-400',
       icon: TrendingUp,
-      title: '📈 Progress Made!',
-      message: 'You\'re improving! Keep going!',
+      title: '📊 Grade Updated!',
+      message: 'Every grade is a step in your journey!',
       confettiColors: ['#F59E0B', '#D97706', '#B45309', '#92400E']
     };
   } else {
@@ -127,7 +127,7 @@ export function GradeCelebration({ isVisible, onClose, grade, subject, previousG
   // Function to play celebration sounds (only for grade 7+)
   const playCelebrationSounds = () => {
     const gradeNum = parseInt(grade);
-    if (gradeNum < 7 && grade !== '7' && grade !== '8' && grade !== '9') return;
+    if (gradeNum < 7 && grade !== '7' && grade !== '8' && grade !== '9' || grade === 'U') return;
     
     try {
       const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
