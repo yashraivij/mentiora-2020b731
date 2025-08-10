@@ -182,10 +182,13 @@ const Dashboard = () => {
       return;
     }
 
-    // Check if user has already seen the Discord invitation
+    // Check if user has already seen the Discord invitation - PREVENT MULTIPLE SHOWINGS
     const hasSeenDiscord = localStorage.getItem(`discord_invitation_shown_${user.id}`);
-    console.log('Discord check: Has seen before?', hasSeenDiscord);
-    if (hasSeenDiscord) return;
+    console.log('Discord check: Has user seen invitation before?', !!hasSeenDiscord);
+    if (hasSeenDiscord) {
+      console.log('Discord check: User has already seen invitation, skipping to prevent annoyance');
+      return;
+    }
 
     try {
       // Count completed topics from practice progress
@@ -219,10 +222,11 @@ const Dashboard = () => {
 
       // Show Discord invitation if user has completed 2+ activities total
       if (totalActivities >= 2) {
-        console.log('🎉 Showing Discord invitation!');
+        console.log('🎉 Showing Discord invitation for the FIRST AND LAST time!');
         setShowDiscordInvitation(true);
-        // Mark as shown so it never appears again
+        // CRITICAL: Mark as shown immediately to prevent any future showings
         localStorage.setItem(`discord_invitation_shown_${user.id}`, 'true');
+        console.log('Discord check: User permanently marked as having seen invitation');
       }
     } catch (error) {
       console.error('Error checking Discord invitation criteria:', error);

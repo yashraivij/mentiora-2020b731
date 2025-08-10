@@ -94,6 +94,7 @@ export function DiscordInvitation({ isVisible, onClose }: DiscordInvitationProps
   }, [isVisible]);
 
   const handleJoinDiscord = () => {
+    console.log('User joined Discord community - they will not see this invitation again');
     window.open('https://discord.gg/Jq2YTZ3aMa', '_blank');
     onClose();
   };
