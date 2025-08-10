@@ -194,37 +194,16 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           else if (practiceCount >= 10) confidence = 'medium';
           else confidence = 'low';
 
-          // Ensure all grades are 7+ with variety of 7s, 8s, and 9s
-          let adjustedGrade = combinedResult.grade || 'U';
-          let adjustedPercentage = isNaN(combinedResult.percentage) ? 0 : combinedResult.percentage;
-          
-          if (adjustedGrade === 'U' || parseInt(adjustedGrade) < 7) {
-            // Assign grades based on subject index and practice score for variety
-            const subjectIndex = allSubjectIds.indexOf(subjectId);
-            const practiceScore = combinedResult.practiceScore;
-            
-            if (practiceScore >= 80 || subjectIndex % 4 === 0) {
-              adjustedGrade = '9';
-              adjustedPercentage = Math.max(adjustedPercentage, 90);
-            } else if (practiceScore >= 65 || subjectIndex % 3 === 0) {
-              adjustedGrade = '8';
-              adjustedPercentage = Math.max(adjustedPercentage, 82);
-            } else {
-              adjustedGrade = '7';
-              adjustedPercentage = Math.max(adjustedPercentage, 75);
-            }
-          }
-
           return {
             subjectId: subjectId,
             subjectName,
             practiceScore: combinedResult.practiceScore,
             examGrade: combinedResult.examGrade,
-            finalGrade: adjustedGrade,
-            finalPercentage: adjustedPercentage,
+            finalGrade: combinedResult.grade || 'U',
+            finalPercentage: isNaN(combinedResult.percentage) ? 0 : combinedResult.percentage,
             confidence,
             practiceCount,
-            isGrade7Plus: true // All grades are now 7+
+            isGrade7Plus: combinedResult.grade !== 'U' && !isNaN(parseInt(combinedResult.grade)) && parseInt(combinedResult.grade) >= 7
           } as GradeData;
         });
 
