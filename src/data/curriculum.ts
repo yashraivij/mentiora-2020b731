@@ -9112,6 +9112,18 @@ export const curriculum: Subject[] = [
             },
             specReference: 'Edexcel 1H - Ratio problems',
             calculatorGuidance: 'non-calc-friendly'
+          },
+          {
+            id: 'me1-q10',
+            question: 'Three numbers are in the ratio 3:5:7. The sum of the smallest and largest numbers is 80. Find all three numbers.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Let the numbers be 3x, 5x, 7x. Then 3x + 7x = 80, so 10x = 80, x = 8. Therefore the numbers are 24, 40, 56.',
+            markingCriteria: {
+              breakdown: ['Express numbers as 3x, 5x, 7x (1 mark)', 'Set up equation: 3x + 7x = 80 (1 mark)', 'Solve: x = 8 (1 mark)', 'Find all three numbers: 24, 40, 56 (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Ratio problems',
+            calculatorGuidance: 'non-calc-friendly'
           }
         ]
       },
@@ -9237,6 +9249,18 @@ export const curriculum: Subject[] = [
               breakdown: ['Calculate g(4) = 6 (1 mark)', 'Set up equation x² - 3x + 2 = 0 (1 mark)', 'Factorize to (x - 1)(x - 2) (1 mark)', 'Find x = 1 (1 mark)', 'Find x = 2 (1 mark)']
             },
             specReference: 'Edexcel 2H - Functions and quadratic equations',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me2-q10',
+            question: 'Given that g(x) = 2x² - 3x + 1, find g(-2) and solve g(x) = 6.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'g(-2) = 2(-2)² - 3(-2) + 1 = 8 + 6 + 1 = 15. For g(x) = 6: 2x² - 3x + 1 = 6, so 2x² - 3x - 5 = 0. Using quadratic formula: x = (3 ± √49)/4 = (3 ± 7)/4. So x = 2.5 or x = -1.',
+            markingCriteria: {
+              breakdown: ['Calculate g(-2) = 15 (1 mark)', 'Set up equation: 2x² - 3x - 5 = 0 (1 mark)', 'Use quadratic formula correctly (1 mark)', 'Calculate discriminant: 49 (1 mark)', 'Both solutions: x = 2.5 and x = -1 (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Function evaluation and solving',
             calculatorGuidance: 'calc-recommended'
           }
         ]
@@ -9364,6 +9388,18 @@ export const curriculum: Subject[] = [
             },
             specReference: 'Edexcel 1H - Proportion and unit costs',
             calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me3-q10',
+            question: 'A bakery sells cakes for 6 people at £18 each. How much would a cake for 10 people cost if the price is directly proportional to the number of people? If ingredients cost 40% of the selling price, what is the profit on a cake for 10 people?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Price for 10 people: (£18 × 10) ÷ 6 = £30. Ingredient cost = 40% of £30 = £12. Profit = £30 - £12 = £18.',
+            markingCriteria: {
+              breakdown: ['Calculate price for 10 people using proportion: £30 (1 mark)', 'Calculate ingredient cost: £12 (1 mark)', 'Calculate profit correctly (1 mark)', 'Final answer: £18 profit (1 mark)']
+            },
+            specReference: 'Edexcel 1H - Direct proportion and percentage',
+            calculatorGuidance: 'calc-recommended'
           }
         ]
       },
@@ -9490,6 +9526,18 @@ export const curriculum: Subject[] = [
             },
             specReference: 'Edexcel 2H - Area of parallelogram and prism volume',
             calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me4-q10',
+            question: 'A frustum is formed by cutting a cone of height 15 cm and base radius 12 cm with a plane parallel to the base at height 9 cm from the top. Calculate the volume of the frustum.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Small cone radius = (9/15) × 12 = 7.2 cm. Large cone volume = (1/3)π × 12² × 15 = 720π cm³. Small cone volume = (1/3)π × 7.2² × 9 = 155.52π cm³. Frustum volume = 720π - 155.52π = 564.48π = 1773.2 cm³.',
+            markingCriteria: {
+              breakdown: ['Calculate small cone radius using similar triangles: 7.2 cm (1 mark)', 'Calculate large cone volume: 720π cm³ (1 mark)', 'Calculate small cone volume: 155.52π cm³ (1 mark)', 'Subtract to find frustum volume (1 mark)', 'Final answer: 1773.2 cm³ (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Volume of frustums',
+            calculatorGuidance: 'calc-recommended'
           }
         ]
       },
@@ -9611,6 +9659,18 @@ export const curriculum: Subject[] = [
             marks: 5,
             difficulty: 'hard',
             modelAnswer: 'P(C ∩ D) = P(C) × P(D) = 0.5 × 0.3 = 0.15. P(C ∪ D) = P(C) + P(D) - P(C ∩ D) = 0.5 + 0.3 - 0.15 = 0.65. P(C\') = 0.5, P(D\') = 0.7, so P(C\' ∩ D\') = 0.5 × 0.7 = 0.35',
+            markingCriteria: {
+              breakdown: ['Calculate P(C ∩ D) = 0.15 using independence (1 mark)', 'Use addition rule for P(C ∪ D) = 0.65 (1 mark)', 'Find P(C\') = 0.5 and P(D\') = 0.7 (1 mark)', 'Calculate P(C\' ∩ D\') = 0.35 (1 mark)', 'Show all working clearly (1 mark)']
+            },
+            specReference: 'Edexcel 2H - Independent events and set operations',
+            calculatorGuidance: 'calc-recommended'
+          },
+          {
+            id: 'me5-q10',
+            question: 'Events C and D are independent. P(C) = 0.5 and P(D) = 0.3. Calculate P(C ∩ D), P(C ∪ D), and P(C\' ∩ D\').',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'P(C ∩ D) = P(C) × P(D) = 0.5 × 0.3 = 0.15. P(C ∪ D) = P(C) + P(D) - P(C ∩ D) = 0.5 + 0.3 - 0.15 = 0.65. P(C\') = 1 - 0.5 = 0.5, P(D\') = 1 - 0.3 = 0.7. P(C\' ∩ D\') = P(C\') × P(D\') = 0.5 × 0.7 = 0.35.',
             markingCriteria: {
               breakdown: ['Calculate P(C ∩ D) = 0.15 using independence (1 mark)', 'Use addition rule for P(C ∪ D) = 0.65 (1 mark)', 'Find P(C\') = 0.5 and P(D\') = 0.7 (1 mark)', 'Calculate P(C\' ∩ D\') = 0.35 (1 mark)', 'Show all working clearly (1 mark)']
             },
