@@ -114,6 +114,19 @@ TOTAL MARKS: ${totalMarks}${formulaSheetNote}
 CRITICAL MARKING REQUIREMENT - BASE FEEDBACK ONLY ON WHAT WAS ACTUALLY WRITTEN:
 🚨 ABSOLUTELY CRITICAL: Your feedback must ONLY refer to what the student actually wrote. DO NOT make assumptions about working, steps, or methods they didn't show. DO NOT suggest they showed working when they only provided a final answer. Be completely accurate about what was actually submitted.
 
+EQUIVALENT TERMINOLOGY ACCEPTANCE:
+🎯 IMPORTANT: Accept scientifically accurate alternative terminology and phrasings that mean the same thing:
+- "Shells" = "Energy levels" = "Electron shells" (Chemistry/Physics)
+- "Orbits" = "Orbitals" when used in basic GCSE context
+- "Speed" = "Velocity" in basic motion contexts  
+- "Weight" = "Force due to gravity" = "Gravitational force"
+- "Dissolves" = "Goes into solution" = "Forms a solution"
+- "Breaks down" = "Decomposes" = "Decomposes into"
+- "Increases" = "Goes up" = "Rises" = "Gets bigger/larger"
+- Accept equivalent mathematical expressions (e.g., "3x + 2x = 5x" vs "2x + 3x = 5x")
+- Accept equivalent units (e.g., "m/s" = "metres per second" = "meters per second")
+Do NOT penalize students for using correct alternative scientific terminology that demonstrates the same understanding.
+
 GCSE MARKING STANDARDS - CRITICAL REQUIREMENTS:
 1. ACCURACY OF FEEDBACK: Base all feedback strictly on the actual student submission. If they only wrote a final answer, acknowledge that. If they showed working, comment on the working shown.
 2. GCSE CONTENT ACCURACY: Only award marks for content that is explicitly required by GCSE specifications. Reject irrelevant details not in the GCSE curriculum.
