@@ -31,6 +31,7 @@ import { StressTracker } from "@/lib/stressTracker";
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
 import { StreakCelebration } from "@/components/ui/streak-celebration";
 import { GradeCelebration } from "@/components/ui/grade-celebration";
+import { DiscordInvitation } from "@/components/ui/discord-invitation";
 
 import { PublicStreakProfiles } from '@/components/dashboard/PublicStreakProfiles';
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
@@ -63,6 +64,7 @@ const Dashboard = () => {
   const [showGradeCelebration, setShowGradeCelebration] = useState(false);
   const [celebrationGrade, setCelebrationGrade] = useState('');
   const [celebrationSubject, setCelebrationSubject] = useState('');
+  const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
 
   const {
     notification,
@@ -173,6 +175,48 @@ const Dashboard = () => {
     }
   };
 
+  // Check if user should see Discord invitation
+  const checkForDiscordInvitation = async () => {
+    if (!user?.id) return;
+
+    // Check if user has already seen the Discord invitation
+    const hasSeenDiscord = localStorage.getItem(`discord_invitation_shown_${user.id}`);
+    if (hasSeenDiscord) return;
+
+    try {
+      // Count completed topics from practice progress
+      const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
+      let topicsCompleted = 0;
+      
+      if (savedProgress) {
+        const progress = JSON.parse(savedProgress);
+        topicsCompleted = progress.filter((p: UserProgress) => p.attempts > 0).length;
+      }
+
+      // Count completed predicted exams
+      const { data: examCompletions, error } = await supabase
+        .from('predicted_exam_completions')
+        .select('id')
+        .eq('user_id', user.id);
+
+      if (error) {
+        console.error('Error fetching exam completions:', error);
+        return;
+      }
+
+      const examsCompleted = examCompletions?.length || 0;
+
+      // Show Discord invitation if user has completed 2+ topics OR 2+ predicted exams
+      if (topicsCompleted >= 2 || examsCompleted >= 2) {
+        setShowDiscordInvitation(true);
+        // Mark as shown so it never appears again
+        localStorage.setItem(`discord_invitation_shown_${user.id}`, 'true');
+      }
+    } catch (error) {
+      console.error('Error checking Discord invitation criteria:', error);
+    }
+  };
+
   // Check for new predicted exam results and trigger grade celebrations
   const checkForNewGrades = async () => {
     if (!user?.id) return;
@@ -273,6 +317,9 @@ const Dashboard = () => {
       
       // Check for new predicted exam results
       await checkForNewGrades();
+      
+      // Check for Discord invitation eligibility
+      await checkForDiscordInvitation();
     };
 
     loadUserData();
@@ -1543,6 +1590,24 @@ const Dashboard = () => {
         grade={celebrationGrade}
         subject={celebrationSubject}
       />
+
+      {/* Discord Invitation Modal */}
+      <DiscordInvitation
+        isVisible={showDiscordInvitation}
+        onClose={() => setShowDiscordInvitation(false)}
+      />
+
+      {/* Test Button for Discord Invitation */}
+      <div className="fixed bottom-4 right-4 z-50">
+        <Button
+          onClick={() => setShowDiscordInvitation(true)}
+          variant="outline"
+          size="sm"
+          className="bg-white/90 hover:bg-white shadow-lg"
+        >
+          Test Discord Invite
+        </Button>
+      </div>
     </div>
   );
 };
