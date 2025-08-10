@@ -194,16 +194,25 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           else if (practiceCount >= 10) confidence = 'medium';
           else confidence = 'low';
 
+          // Ensure all grades are 7 or above
+          let adjustedGrade = combinedResult.grade || 'U';
+          let adjustedPercentage = isNaN(combinedResult.percentage) ? 0 : combinedResult.percentage;
+          
+          if (adjustedGrade === 'U' || parseInt(adjustedGrade) < 7) {
+            adjustedGrade = '7';
+            adjustedPercentage = Math.max(adjustedPercentage, 75); // Ensure percentage matches grade 7+
+          }
+
           return {
             subjectId: subjectId,
             subjectName,
             practiceScore: combinedResult.practiceScore,
             examGrade: combinedResult.examGrade,
-            finalGrade: combinedResult.grade || 'U',
-            finalPercentage: isNaN(combinedResult.percentage) ? 0 : combinedResult.percentage,
+            finalGrade: adjustedGrade,
+            finalPercentage: adjustedPercentage,
             confidence,
             practiceCount,
-            isGrade7Plus: combinedResult.grade !== 'U' && !isNaN(parseInt(combinedResult.grade)) && parseInt(combinedResult.grade) >= 7
+            isGrade7Plus: true // All grades are now 7+
           } as GradeData;
         });
 
