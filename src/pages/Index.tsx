@@ -4,12 +4,14 @@ import { BookOpen, CheckCircle, BarChart3, Users, ArrowRight, Star, Sparkles, Qu
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { DynamicTestimonials } from "@/components/ui/dynamic-testimonials";
+import { StreakCelebration } from "@/components/ui/streak-celebration";
 
 const Index = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const [showTestCelebration, setShowTestCelebration] = useState(false);
   
   // Animation refs
   const heroRef = useRef(null);
@@ -538,15 +540,32 @@ const Index = () => {
             >
               <Button 
                 onClick={() => navigate('/register')} 
-                className="bg-white text-gray-900 hover:bg-gray-100 px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-white/25 transition-all duration-300 rounded-2xl group"
+                className="bg-white text-gray-900 hover:bg-gray-100 px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-white/25 transition-all duration-300 rounded-2xl group mr-4"
               >
                 Start Free Today
                 <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              
+              {/* Test Celebration Button */}
+              <Button 
+                onClick={() => setShowTestCelebration(true)} 
+                className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white px-8 py-4 text-lg font-bold shadow-2xl transition-all duration-300 rounded-2xl"
+              >
+                🎉 Test Celebration
               </Button>
             </motion.div>
           </div>
         </motion.div>
       </div>
+      
+      {/* Test Streak Celebration */}
+      <StreakCelebration
+        isVisible={showTestCelebration}
+        onClose={() => setShowTestCelebration(false)}
+        streakDays={3}
+        rewardText="Color Theme Customization"
+        rewardEmoji="🎨"
+      />
     </div>
   );
 };
