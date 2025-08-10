@@ -6,16 +6,16 @@ const testimonials = [
   {
     name: "Sophie T.",
     year: "Year 11",
-    content: "Got A* in Biology! The personalized feedback helped me understand complex topics so much better.",
+    content: "Got Grade 9 in Biology! The personalized feedback helped me understand complex topics so much better.",
     subject: "Biology",
-    improvement: "C to A*"
+    improvement: "Grade 4 to 9"
   },
   {
     name: "Mason R.",
     year: "Year 10", 
     content: "Finally understand Chemistry concepts. Went from struggling to confident in just a few weeks.",
     subject: "Chemistry", 
-    improvement: "D to B"
+    improvement: "Grade 3 to 6"
   },
   {
     name: "Olivia K.",
