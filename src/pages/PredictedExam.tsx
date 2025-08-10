@@ -14,7 +14,6 @@ import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
 import { supabase } from "@/integrations/supabase/client";
 import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
-import { playCelebratorySound } from "@/lib/celebratory-sound";
 
 interface ExamQuestion {
   id: string;
@@ -1568,11 +1567,6 @@ Write a story about discovering a hidden object.
                 // Mark the answer with AI
                 const markingResult = await markAnswerWithAI(question, answer.answer);
                 const marksLost = question.marks - markingResult.marksAwarded;
-                
-                // Play celebratory sound if user got marks (but not if they got zero)
-                if (markingResult.marksAwarded > 0) {
-                  playCelebratorySound();
-                }
                 
                 // Handle personalized notification for wrong answers
                 if (marksLost > 0) {
