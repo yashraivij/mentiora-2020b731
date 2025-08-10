@@ -194,13 +194,25 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           else if (practiceCount >= 10) confidence = 'medium';
           else confidence = 'low';
 
-          // Ensure all grades are 7 or above
+          // Ensure all grades are 7+ with variety of 7s, 8s, and 9s
           let adjustedGrade = combinedResult.grade || 'U';
           let adjustedPercentage = isNaN(combinedResult.percentage) ? 0 : combinedResult.percentage;
           
           if (adjustedGrade === 'U' || parseInt(adjustedGrade) < 7) {
-            adjustedGrade = '7';
-            adjustedPercentage = Math.max(adjustedPercentage, 75); // Ensure percentage matches grade 7+
+            // Assign grades based on subject index and practice score for variety
+            const subjectIndex = allSubjectIds.indexOf(subjectId);
+            const practiceScore = combinedResult.practiceScore;
+            
+            if (practiceScore >= 80 || subjectIndex % 4 === 0) {
+              adjustedGrade = '9';
+              adjustedPercentage = Math.max(adjustedPercentage, 90);
+            } else if (practiceScore >= 65 || subjectIndex % 3 === 0) {
+              adjustedGrade = '8';
+              adjustedPercentage = Math.max(adjustedPercentage, 82);
+            } else {
+              adjustedGrade = '7';
+              adjustedPercentage = Math.max(adjustedPercentage, 75);
+            }
           }
 
           return {
