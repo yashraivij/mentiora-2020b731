@@ -30,6 +30,7 @@ import { StressTracker } from "@/lib/stressTracker";
 
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
 import { StreakCelebration } from "@/components/ui/streak-celebration";
+import { GradeCelebration } from "@/components/ui/grade-celebration";
 
 import { PublicStreakProfiles } from '@/components/dashboard/PublicStreakProfiles';
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
@@ -59,6 +60,9 @@ const Dashboard = () => {
   const [showTimeSavedNotification, setShowTimeSavedNotification] = useState(false);
   const [timeSavedHours, setTimeSavedHours] = useState(0);
   const [previousTimeSaved, setPreviousTimeSaved] = useState(0);
+  const [showGradeCelebration, setShowGradeCelebration] = useState(false);
+  const [celebrationGrade, setCelebrationGrade] = useState('');
+  const [celebrationSubject, setCelebrationSubject] = useState('');
 
   const {
     notification,
@@ -169,6 +173,50 @@ const Dashboard = () => {
     }
   };
 
+  // Check for new predicted exam results and trigger grade celebrations
+  const checkForNewGrades = async () => {
+    if (!user?.id) return;
+
+    try {
+      // Get the most recent predicted exam completion
+      const { data: recentResult, error } = await supabase
+        .from('predicted_exam_completions')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('completed_at', { ascending: false })
+        .limit(1)
+        .single();
+
+      if (error || !recentResult) return;
+
+      // Check if this result was created in the last 5 minutes (indicating it's new)
+      const resultTime = new Date(recentResult.completed_at);
+      const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+      
+      if (resultTime > fiveMinutesAgo) {
+        // Check if we've already shown a celebration for this result
+        const celebrationKey = `grade_celebration_${recentResult.id}`;
+        const hasShownCelebration = localStorage.getItem(celebrationKey);
+        
+        if (!hasShownCelebration) {
+          // Trigger grade celebration
+          setCelebrationGrade(recentResult.grade);
+          setCelebrationSubject(recentResult.subject_id);
+          
+          // Small delay to ensure page is loaded
+          setTimeout(() => {
+            setShowGradeCelebration(true);
+          }, 1500);
+          
+          // Mark this celebration as shown
+          localStorage.setItem(celebrationKey, 'true');
+        }
+      }
+    } catch (error) {
+      console.error('Error checking for new grades:', error);
+    }
+  };
+
   useEffect(() => {
     const loadUserData = async () => {
       if (!user?.id) return;
@@ -218,6 +266,9 @@ const Dashboard = () => {
       // Check for recommendations on dashboard load
       console.log('Dashboard loading, checking for weak topic recommendations...');
       await checkForWeakTopicRecommendation();
+      
+      // Check for new predicted exam results
+      await checkForNewGrades();
     };
 
     loadUserData();
@@ -1479,6 +1530,14 @@ const Dashboard = () => {
         timeSavedHours={timeSavedHours}
         show={showTimeSavedNotification}
         onClose={() => setShowTimeSavedNotification(false)}
+      />
+
+      {/* Grade Celebration Modal */}
+      <GradeCelebration
+        isVisible={showGradeCelebration}
+        onClose={() => setShowGradeCelebration(false)}
+        grade={celebrationGrade}
+        subject={celebrationSubject}
       />
     </div>
   );
