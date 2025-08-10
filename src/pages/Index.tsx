@@ -88,7 +88,7 @@ const Index = () => {
     {
       name: "Sarah M.",
       grade: "Year 11",
-      content: "This platform is absolutely revolutionary. The feedback is more detailed than my actual teachers - went from struggling with C grades to confidently achieving A* in just 3 months.",
+      content: "This platform saved me £2,400 on private tutoring! The personalized feedback is incredible - it knows exactly what I struggle with and adapts to my learning style. Went from C grades to A* in just 3 months while studying 60% less time.",
       rating: 5,
       color: "from-blue-50 to-indigo-50",
       accent: "border-blue-200"
@@ -96,7 +96,7 @@ const Index = () => {
     {
       name: "James K.",
       grade: "Year 10", 
-      content: "I've never seen anything like this before. It's like having the world's best tutor available 24/7. My parents are amazed at how much my confidence has grown.",
+      content: "The personalization is mind-blowing - it's like having a tutor who knows me better than I know myself. I'm saving 15 hours a week compared to traditional revision and my grades have jumped from grade 5s to 8s consistently.",
       rating: 5,
       color: "from-purple-50 to-pink-50",
       accent: "border-purple-200"
@@ -104,7 +104,7 @@ const Index = () => {
     {
       name: "Emma L.",
       grade: "Year 11",
-      content: "The personalized learning is incredible - it knows exactly what I need to work on. Just achieved an A in my Chemistry mock exam after struggling for months!",
+      content: "My parents love that we're saving thousands on tutoring while I'm getting better results than ever. The AI personalizes everything to my weak spots - achieved grade 9 in Chemistry after struggling with grade 6s for months!",
       rating: 5,
       color: "from-emerald-50 to-teal-50",
       accent: "border-emerald-200"
