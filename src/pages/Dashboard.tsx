@@ -196,7 +196,7 @@ const Dashboard = () => {
         const progress = JSON.parse(savedProgress);
         topicsCompleted = progress.filter((p: UserProgress) => p.attempts > 0).length;
       }
-      console.log('Discord check: Topics completed:', topicsCompleted);
+      console.log('Discord check: Practice topics completed:', topicsCompleted);
 
       // Count completed predicted exams
       const { data: examCompletions, error } = await supabase
@@ -210,11 +210,15 @@ const Dashboard = () => {
       }
 
       const examsCompleted = examCompletions?.length || 0;
-      console.log('Discord check: Exams completed:', examsCompleted);
-      console.log('Discord check: Should show invitation?', topicsCompleted >= 2 || examsCompleted >= 2);
+      console.log('Discord check: Predicted exams completed:', examsCompleted);
 
-      // Show Discord invitation if user has completed 2+ topics OR 2+ predicted exams
-      if (topicsCompleted >= 2 || examsCompleted >= 2) {
+      // Calculate total activities (practice topics + predicted exams)
+      const totalActivities = topicsCompleted + examsCompleted;
+      console.log('Discord check: Total activities:', totalActivities);
+      console.log('Discord check: Should show invitation?', totalActivities >= 2);
+
+      // Show Discord invitation if user has completed 2+ activities total
+      if (totalActivities >= 2) {
         console.log('🎉 Showing Discord invitation!');
         setShowDiscordInvitation(true);
         // Mark as shown so it never appears again
