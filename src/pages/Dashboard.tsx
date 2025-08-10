@@ -177,10 +177,14 @@ const Dashboard = () => {
 
   // Check if user should see Discord invitation
   const checkForDiscordInvitation = async () => {
-    if (!user?.id) return;
+    if (!user?.id) {
+      console.log('Discord check: No user ID');
+      return;
+    }
 
     // Check if user has already seen the Discord invitation
     const hasSeenDiscord = localStorage.getItem(`discord_invitation_shown_${user.id}`);
+    console.log('Discord check: Has seen before?', hasSeenDiscord);
     if (hasSeenDiscord) return;
 
     try {
@@ -192,6 +196,7 @@ const Dashboard = () => {
         const progress = JSON.parse(savedProgress);
         topicsCompleted = progress.filter((p: UserProgress) => p.attempts > 0).length;
       }
+      console.log('Discord check: Topics completed:', topicsCompleted);
 
       // Count completed predicted exams
       const { data: examCompletions, error } = await supabase
@@ -205,9 +210,12 @@ const Dashboard = () => {
       }
 
       const examsCompleted = examCompletions?.length || 0;
+      console.log('Discord check: Exams completed:', examsCompleted);
+      console.log('Discord check: Should show invitation?', topicsCompleted >= 2 || examsCompleted >= 2);
 
       // Show Discord invitation if user has completed 2+ topics OR 2+ predicted exams
       if (topicsCompleted >= 2 || examsCompleted >= 2) {
+        console.log('🎉 Showing Discord invitation!');
         setShowDiscordInvitation(true);
         // Mark as shown so it never appears again
         localStorage.setItem(`discord_invitation_shown_${user.id}`, 'true');
@@ -1598,14 +1606,38 @@ const Dashboard = () => {
       />
 
       {/* Test Button for Discord Invitation */}
-      <div className="fixed bottom-4 right-4 z-50">
+      <div className="fixed bottom-4 right-4 z-50 space-y-2">
         <Button
           onClick={() => setShowDiscordInvitation(true)}
           variant="outline"
           size="sm"
-          className="bg-white/90 hover:bg-white shadow-lg"
+          className="bg-white/90 hover:bg-white shadow-lg block w-full"
         >
           Test Discord Invite
+        </Button>
+        <Button
+          onClick={async () => {
+            console.log('Manual Discord check triggered');
+            await checkForDiscordInvitation();
+          }}
+          variant="outline"
+          size="sm"
+          className="bg-blue-100/90 hover:bg-blue-200 shadow-lg block w-full"
+        >
+          Check Discord Criteria
+        </Button>
+        <Button
+          onClick={() => {
+            if (user?.id) {
+              localStorage.removeItem(`discord_invitation_shown_${user.id}`);
+              console.log('Discord invitation flag cleared');
+            }
+          }}
+          variant="outline"
+          size="sm"
+          className="bg-red-100/90 hover:bg-red-200 shadow-lg block w-full text-xs"
+        >
+          Reset Discord Flag
         </Button>
       </div>
     </div>
