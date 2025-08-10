@@ -4,12 +4,18 @@ import { BookOpen, CheckCircle, BarChart3, Users, ArrowRight, Star, Sparkles, Qu
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { DynamicTestimonials } from "@/components/ui/dynamic-testimonials";
+import { GradeCelebration } from "@/components/ui/grade-celebration";
 
 const Index = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  
+  // Grade celebration states
+  const [showGradeCelebration, setShowGradeCelebration] = useState(false);
+  const [testGrade, setTestGrade] = useState('9');
+  const [testSubject, setTestSubject] = useState('Biology');
   
   // Animation refs
   const heroRef = useRef(null);
@@ -538,14 +544,51 @@ const Index = () => {
             >
               <Button 
                 onClick={() => navigate('/register')} 
-                className="bg-white text-gray-900 hover:bg-gray-100 px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-white/25 transition-all duration-300 rounded-2xl group"
+                className="bg-white text-gray-900 hover:bg-gray-100 px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-white/25 transition-all duration-300 rounded-2xl group mr-4"
               >
                 Start Free Today
                 <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
               </Button>
+              
+              {/* Test Grade Celebration Buttons */}
+              <div className="mt-8 flex flex-wrap gap-3 justify-center">
+                <Button 
+                  onClick={() => { setTestGrade('9'); setTestSubject('Biology'); setShowGradeCelebration(true); }}
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 text-sm font-medium rounded-xl"
+                >
+                  🎉 Test Grade 9
+                </Button>
+                <Button 
+                  onClick={() => { setTestGrade('6'); setTestSubject('Chemistry'); setShowGradeCelebration(true); }}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 text-sm font-medium rounded-xl"
+                >
+                  👏 Test Grade 6
+                </Button>
+                <Button 
+                  onClick={() => { setTestGrade('4'); setTestSubject('Physics'); setShowGradeCelebration(true); }}
+                  className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 text-sm font-medium rounded-xl"
+                >
+                  📈 Test Grade 4
+                </Button>
+                <Button 
+                  onClick={() => { setTestGrade('U'); setTestSubject('Maths'); setShowGradeCelebration(true); }}
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 text-sm font-medium rounded-xl"
+                >
+                  💪 Test Grade U
+                </Button>
+              </div>
             </motion.div>
           </div>
         </motion.div>
+        
+        {/* Grade Celebration Modal */}
+        <GradeCelebration
+          isVisible={showGradeCelebration}
+          onClose={() => setShowGradeCelebration(false)}
+          grade={testGrade}
+          subject={testSubject}
+          previousGrade="5"
+        />
       </div>
     </div>
   );
