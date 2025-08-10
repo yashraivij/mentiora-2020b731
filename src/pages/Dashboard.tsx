@@ -199,9 +199,13 @@ const Dashboard = () => {
         const hasShownCelebration = localStorage.getItem(celebrationKey);
         
         if (!hasShownCelebration) {
+          // Get subject name and format it properly
+          const subjectName = curriculum.find(s => s.id === recentResult.subject_id)?.name || recentResult.subject_id;
+          const formattedSubjectName = subjectName.replace(/-/g, ' ');
+          
           // Trigger grade celebration
           setCelebrationGrade(recentResult.grade);
-          setCelebrationSubject(recentResult.subject_id);
+          setCelebrationSubject(formattedSubjectName);
           
           // Small delay to ensure page is loaded
           setTimeout(() => {

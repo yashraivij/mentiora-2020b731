@@ -495,13 +495,13 @@ const PredictedResults = () => {
             <Clock className="h-16 w-16 text-blue-500 mx-auto mb-4 animate-pulse" />
             <CardTitle className="text-foreground">Marking Your Predicted 2026 Exam</CardTitle>
             <CardDescription className="text-muted-foreground">
-              AI is analyzing your answers with premium marking intelligence...
+              Analyzing your answers with premium marking intelligence...
             </CardDescription>
           </CardHeader>
           <CardContent className="text-center space-y-4">
             <div className="space-y-2">
               <div className="text-lg font-medium text-foreground">
-                Applying AQA mark schemes with advanced AI analysis
+                Applying AQA mark schemes with advanced analysis
               </div>
               <Progress value={100} className="w-full animate-pulse" />
             </div>
@@ -535,7 +535,7 @@ const PredictedResults = () => {
                   {subject?.name} - Predicted Exam Results
                 </h1>
                 <p className="text-sm text-muted-foreground">
-                  Marked using the same AI system as Practice Questions
+                  
                 </p>
               </div>
             </div>
