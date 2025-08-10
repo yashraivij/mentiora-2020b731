@@ -53,9 +53,65 @@ const Confetti = () => {
 export function StreakCelebration({ isVisible, onClose, streakDays, rewardText, rewardEmoji }: StreakCelebrationProps) {
   const [showConfetti, setShowConfetti] = useState(false);
 
+  // Function to play congratulatory speech
+  const playCelebrationSound = async () => {
+    const apiKey = import.meta.env.VITE_ELEVENLABS_API_KEY;
+    if (!apiKey) {
+      console.warn('ElevenLabs API key not found. Add VITE_ELEVENLABS_API_KEY to your environment variables.');
+      return;
+    }
+
+    try {
+      const celebrationMessages = [
+        "Congratulations! You've achieved an amazing study streak! Keep up the fantastic work!",
+        "Wow! Another streak milestone reached! You're doing incredible! Keep going!",
+        "Outstanding! Your dedication is paying off! This streak shows real commitment!",
+        "Amazing achievement! Your consistent studying is building great habits! Well done!"
+      ];
+      
+      const message = celebrationMessages[Math.floor(Math.random() * celebrationMessages.length)];
+      
+      const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/9BWtsMINqrJLrRacOk9x', {
+        method: 'POST',
+        headers: {
+          'Accept': 'audio/mpeg',
+          'Content-Type': 'application/json',
+          'xi-api-key': apiKey
+        },
+        body: JSON.stringify({
+          text: message,
+          model_id: 'eleven_turbo_v2_5',
+          voice_settings: {
+            stability: 0.75,
+            similarity_boost: 0.85,
+            style: 0.2,
+            use_speaker_boost: true
+          }
+        })
+      });
+
+      if (response.ok) {
+        const audioBlob = await response.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const audio = new Audio(audioUrl);
+        audio.volume = 0.7; // Set volume to 70%
+        await audio.play();
+        
+        // Clean up the URL after playing
+        audio.addEventListener('ended', () => {
+          URL.revokeObjectURL(audioUrl);
+        });
+      }
+    } catch (error) {
+      console.error('Error playing celebration sound:', error);
+    }
+  };
+
   useEffect(() => {
     if (isVisible) {
       setShowConfetti(true);
+      // Play the celebration sound when the modal appears
+      playCelebrationSound();
       const timer = setTimeout(() => setShowConfetti(false), 4000);
       return () => clearTimeout(timer);
     }
