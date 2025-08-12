@@ -13031,12 +13031,13 @@ export const curriculum: Subject[] = [
     ]
   },
   
-  // ===== AQA COMBINED SCIENCE =====
+  // ===== AQA COMBINED SCIENCE - 6 SEPARATE PAPERS =====
+  
+  // Biology Paper 1: Topics 1–4: Cell Biology; Organisation; Infection and response; and Bioenergetics
   {
-    id: 'combined-science-aqa',
-    name: 'Combined Science (AQA)',
+    id: 'combined-science-bio-paper1-aqa',
+    name: 'Combined Science Biology Paper 1 (AQA)',
     topics: [
-      // ===== BIOLOGY TOPICS (all except key ideas) =====
       {
         id: 'b1-cell-biology',
         name: 'Biology: Cell Biology',
@@ -13073,83 +13074,6 @@ export const curriculum: Subject[] = [
               breakdown: ['Movement from high to low concentration (1 mark)', 'Down concentration gradient (1 mark)', 'Passive process/no energy required (1 mark)']
             },
             specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
-          },
-          {
-            id: 'b1-q4',
-            question: 'What is the function of the ribosomes in a cell?',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: 'Protein synthesis',
-            markingCriteria: {
-              breakdown: ['Protein synthesis (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
-          },
-          {
-            id: 'b1-q5',
-            question: 'Name two adaptations of a sperm cell.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Long tail for swimming and many mitochondria for energy',
-            markingCriteria: {
-              breakdown: ['Long tail for swimming (1 mark)', 'Many mitochondria for energy (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
-          },
-          {
-            id: 'b1-q6',
-            question: 'What is the function of the nucleus in a cell?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'The nucleus controls all cellular activities and contains the genetic material (DNA) which carries instructions for protein synthesis.',
-            markingCriteria: {
-              breakdown: ['Controls cellular activities (1 mark)', 'Contains genetic material/DNA (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
-          },
-          {
-            id: 'b1-q7',
-            question: 'What is osmosis?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Osmosis is the net movement of water molecules from a region of higher water potential to a region of lower water potential through a partially permeable membrane.',
-            markingCriteria: {
-              breakdown: ['Movement of water molecules (1 mark)', 'From high to low water potential (1 mark)', 'Through partially permeable membrane (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
-          },
-          {
-            id: 'b1-q8',
-            question: 'Name two factors that affect the rate of diffusion.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Temperature and concentration gradient',
-            markingCriteria: {
-              breakdown: ['Temperature (1 mark)', 'Concentration gradient (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
-          },
-          {
-            id: 'b1-q9',
-            question: 'What is active transport and how does it differ from diffusion?',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'Active transport is the movement of substances against a concentration gradient using energy from ATP. Unlike diffusion, it requires energy and can move substances from low to high concentration.',
-            markingCriteria: {
-              breakdown: ['Movement against concentration gradient (1 mark)', 'Requires energy/ATP (1 mark)', 'Differs from diffusion - needs energy (1 mark)', 'Can move from low to high concentration (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
-          },
-          {
-            id: 'b1-q10',
-            question: 'Describe the stages of the cell cycle and explain why cell division is important for organisms.',
-            marks: 6,
-            difficulty: 'hard',
-            modelAnswer: 'Cell cycle stages: G1 (growth), S (DNA synthesis), G2 (growth and preparation), M (mitosis and cytokinesis). Importance: growth of organism, repair of damaged tissues, replacement of worn-out cells, asexual reproduction in some organisms.',
-            markingCriteria: {
-              breakdown: ['G1 phase - growth (1 mark)', 'S phase - DNA synthesis (1 mark)', 'G2 phase - preparation for division (1 mark)', 'M phase - mitosis and cytokinesis (1 mark)', 'Importance: growth/repair/replacement (1 mark)', 'Asexual reproduction (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
           }
         ]
       },
@@ -13159,111 +13083,12 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'b2-q1',
-            question: 'Describe the function of enzymes in digestion.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Enzymes are biological catalysts that speed up the breakdown of large insoluble food molecules into smaller soluble molecules that can be absorbed into the bloodstream.',
-            markingCriteria: {
-              breakdown: ['Biological catalysts (1 mark)', 'Speed up reactions (1 mark)', 'Break down large molecules (1 mark)', 'Into smaller soluble molecules (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
-          },
-          {
-            id: 'b2-q2',
-            question: 'Explain the structure and function of the heart.',
+            question: 'Describe the structure and function of the digestive system.',
             marks: 6,
-            difficulty: 'hard',
-            modelAnswer: 'The heart has four chambers: two atria (top) and two ventricles (bottom). The right side pumps deoxygenated blood to the lungs, while the left side pumps oxygenated blood to the body. Valves prevent backflow of blood.',
-            markingCriteria: {
-              breakdown: ['Four chambers identified (2 marks)', 'Right side to lungs (1 mark)', 'Left side to body (1 mark)', 'Oxygenated vs deoxygenated blood (1 mark)', 'Valves prevent backflow (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
-          },
-          {
-            id: 'b2-q3',
-            question: 'Name the enzyme that breaks down proteins.',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: 'Protease',
-            markingCriteria: {
-              breakdown: ['Protease (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
-          },
-          {
-            id: 'b2-q4',
-            question: 'What is the role of bile in digestion?',
-            marks: 2,
             difficulty: 'medium',
-            modelAnswer: 'Bile emulsifies fats, breaking them into smaller droplets to increase surface area for lipase enzyme action.',
+            modelAnswer: 'The digestive system breaks down large insoluble food molecules into small soluble molecules that can be absorbed into the bloodstream. Key organs include the stomach (produces acid and enzymes), small intestine (absorption), liver (produces bile), and pancreas (produces digestive enzymes).',
             markingCriteria: {
-              breakdown: ['Emulsifies fats (1 mark)', 'Increases surface area for enzyme action (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
-          },
-          {
-            id: 'b2-q5',
-            question: 'Describe the structure and function of xylem tissue in plants.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Xylem is composed of dead cells with thick walls strengthened by lignin. It transports water and mineral salts from roots to leaves and provides structural support to the plant.',
-            markingCriteria: {
-              breakdown: ['Dead cells with thick walls (1 mark)', 'Strengthened by lignin (1 mark)', 'Transports water and minerals (1 mark)', 'Provides structural support (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
-          },
-          {
-            id: 'b2-q6',
-            question: 'What is the difference between arteries and veins?',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Arteries carry blood away from the heart at high pressure and have thick muscular walls. Veins carry blood back to the heart at low pressure and have thin walls with valves.',
-            markingCriteria: {
-              breakdown: ['Arteries carry blood away from heart (1 mark)', 'Arteries have thick muscular walls (1 mark)', 'Veins carry blood to heart (1 mark)', 'Veins have thin walls with valves (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
-          },
-          {
-            id: 'b2-q7',
-            question: 'Explain the function of phloem tissue.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Phloem transports sugars (mainly sucrose) produced by photosynthesis from leaves to other parts of the plant where they are needed for growth or storage.',
-            markingCriteria: {
-              breakdown: ['Transports sugars/sucrose (1 mark)', 'From leaves to other parts (1 mark)', 'For growth or storage (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
-          },
-          {
-            id: 'b2-q8',
-            question: 'Describe the function of red blood cells.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Red blood cells transport oxygen from the lungs to body tissues. They contain hemoglobin which binds to oxygen and have no nucleus to maximize space for hemoglobin.',
-            markingCriteria: {
-              breakdown: ['Transport oxygen (1 mark)', 'Contain hemoglobin (1 mark)', 'No nucleus to maximize hemoglobin space (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
-          },
-          {
-            id: 'b2-q9',
-            question: 'Explain how the lungs are adapted for gas exchange.',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'The lungs have millions of alveoli which provide a large surface area. The alveoli walls are one cell thick for efficient diffusion. They have a rich blood supply to maintain concentration gradients. The moist lining dissolves gases.',
-            markingCriteria: {
-              breakdown: ['Large surface area from alveoli (1 mark)', 'Walls one cell thick (1 mark)', 'Rich blood supply maintains gradients (1 mark)', 'Moist lining dissolves gases (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
-          },
-          {
-            id: 'b2-q10',
-            question: 'Explain how the structure of the small intestine is adapted for absorption.',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'The small intestine has villi and microvilli which increase surface area for absorption. It has a good blood supply to maintain concentration gradients. The walls are thin (one cell thick) for efficient diffusion. It is long to provide more time for absorption.',
-            markingCriteria: {
-              breakdown: ['Villi/microvilli increase surface area (1 mark)', 'Good blood supply maintains gradients (1 mark)', 'Thin walls for efficient diffusion (1 mark)', 'Long length provides more time (1 mark)']
+              breakdown: ['Function: breaks down large to small molecules (2 marks)', 'Stomach function (1 mark)', 'Small intestine function (1 mark)', 'Liver/pancreas function (2 marks)']
             },
             specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
           }
@@ -13275,111 +13100,12 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'b3-q1',
-            question: 'Describe how white blood cells help defend the body against pathogens.',
-            marks: 4,
+            question: 'Explain how white blood cells help defend the body against disease.',
+            marks: 6,
             difficulty: 'medium',
-            modelAnswer: 'White blood cells defend against pathogens by phagocytosis (engulfing and digesting pathogens), producing antibodies specific to antigens on pathogens, and producing antitoxins to neutralize toxins.',
+            modelAnswer: 'White blood cells defend against disease by: phagocytosis (engulfing and digesting pathogens), producing antibodies specific to antigens on pathogens, and producing antitoxins to neutralize toxins produced by bacteria.',
             markingCriteria: {
-              breakdown: ['Phagocytosis (1 mark)', 'Engulfing pathogens (1 mark)', 'Producing antibodies (1 mark)', 'Producing antitoxins (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
-          },
-          {
-            id: 'b3-q2',
-            question: 'What is a pathogen?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'A pathogen is a microorganism that causes disease in plants or animals.',
-            markingCriteria: {
-              breakdown: ['Microorganism (1 mark)', 'Causes disease (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
-          },
-          {
-            id: 'b3-q3',
-            question: 'Name four types of pathogens.',
-            marks: 4,
-            difficulty: 'easy',
-            modelAnswer: 'Bacteria, viruses, fungi, and protists',
-            markingCriteria: {
-              breakdown: ['Bacteria (1 mark)', 'Viruses (1 mark)', 'Fungi (1 mark)', 'Protists (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
-          },
-          {
-            id: 'b3-q4',
-            question: 'What is vaccination and how does it work?',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Vaccination involves introducing dead or inactive pathogens into the body. This stimulates white blood cells to produce antibodies and memory cells. If the same pathogen enters later, memory cells quickly produce antibodies for rapid response.',
-            markingCriteria: {
-              breakdown: ['Introduction of dead/inactive pathogens (1 mark)', 'Stimulates antibody production (1 mark)', 'Memory cells formed (1 mark)', 'Rapid response on re-infection (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
-          },
-          {
-            id: 'b3-q5',
-            question: 'Name three ways pathogens can be transmitted.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Direct contact, airborne droplets, and contaminated food/water',
-            markingCriteria: {
-              breakdown: ['Direct contact (1 mark)', 'Airborne droplets (1 mark)', 'Contaminated food/water (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
-          },
-          {
-            id: 'b3-q6',
-            question: 'Explain what antibiotics are and why they cannot treat viral infections.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Antibiotics are drugs that kill bacteria or stop their growth. They cannot treat viral infections because viruses reproduce inside host cells and antibiotics cannot penetrate these cells effectively.',
-            markingCriteria: {
-              breakdown: ['Antibiotics kill/stop bacteria growth (1 mark)', 'Cannot treat viruses (1 mark)', 'Viruses reproduce inside host cells (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
-          },
-          {
-            id: 'b3-q7',
-            question: 'Describe the body\'s first line of defense against pathogens.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'The skin acts as a physical barrier. Stomach acid kills pathogens in food. Tears and saliva contain enzymes that kill bacteria. Mucus in airways traps pathogens.',
-            markingCriteria: {
-              breakdown: ['Skin as physical barrier (1 mark)', 'Stomach acid kills pathogens (1 mark)', 'Tears/saliva contain enzymes (1 mark)', 'Mucus traps pathogens (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
-          },
-          {
-            id: 'b3-q8',
-            question: 'What is meant by antibiotic resistance?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Antibiotic resistance occurs when bacteria evolve to survive exposure to antibiotics. This happens through natural selection when antibiotics are overused or misused.',
-            markingCriteria: {
-              breakdown: ['Bacteria survive antibiotic exposure (1 mark)', 'Evolution/natural selection (1 mark)', 'Due to overuse/misuse of antibiotics (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
-          },
-          {
-            id: 'b3-q9',
-            question: 'Explain the difference between communicable and non-communicable diseases.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Communicable diseases are caused by pathogens and can be transmitted from person to person. Non-communicable diseases are not caused by pathogens and cannot be transmitted between people.',
-            markingCriteria: {
-              breakdown: ['Communicable caused by pathogens (1 mark)', 'Communicable can be transmitted (1 mark)', 'Non-communicable cannot be transmitted (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
-          },
-          {
-            id: 'b3-q10',
-            question: 'Describe how drug testing is carried out before new medicines are approved.',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'First, drugs are tested in laboratory on cells and tissues. Then tested on animals to check safety and effectiveness. Finally, clinical trials on human volunteers test safety, dosage, and effectiveness before approval.',
-            markingCriteria: {
-              breakdown: ['Laboratory testing on cells/tissues (1 mark)', 'Animal testing for safety/effectiveness (1 mark)', 'Human clinical trials (1 mark)', 'Test safety, dosage, and effectiveness (1 mark)']
+              breakdown: ['Phagocytosis described (2 marks)', 'Antibody production (2 marks)', 'Antitoxin production (2 marks)']
             },
             specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
           }
@@ -13394,224 +13120,34 @@ export const curriculum: Subject[] = [
             question: 'Write the word equation for photosynthesis.',
             marks: 2,
             difficulty: 'easy',
-            modelAnswer: 'Carbon dioxide + Water → Glucose + Oxygen (in the presence of light and chlorophyll)',
+            modelAnswer: 'carbon dioxide + water → glucose + oxygen',
             markingCriteria: {
-              breakdown: ['Correct reactants (1 mark)', 'Correct products (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
-          },
-          {
-            id: 'b4-q2',
-            question: 'Explain why respiration is important for living organisms.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Respiration releases energy from glucose for metabolic processes such as movement, active transport, and maintaining body temperature in mammals.',
-            markingCriteria: {
-              breakdown: ['Releases energy from glucose (1 mark)', 'For metabolic processes (1 mark)', 'Examples of processes (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
-          },
-          {
-            id: 'b4-q3',
-            question: 'Name the factors that can limit the rate of photosynthesis.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Light intensity, carbon dioxide concentration, and temperature',
-            markingCriteria: {
-              breakdown: ['Light intensity (1 mark)', 'Carbon dioxide concentration (1 mark)', 'Temperature (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
-          },
-          {
-            id: 'b4-q4',
-            question: 'Explain why photosynthesis is important for life on Earth.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Photosynthesis produces oxygen for respiration, removes carbon dioxide from the atmosphere, and produces glucose which is the basis of food chains.',
-            markingCriteria: {
-              breakdown: ['Produces oxygen (1 mark)', 'Removes carbon dioxide (1 mark)', 'Produces glucose/basis of food chains (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
-          },
-          {
-            id: 'b4-q5',
-            question: 'Write the word equation for aerobic respiration.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Glucose + Oxygen → Carbon dioxide + Water + Energy (ATP)',
-            markingCriteria: {
-              breakdown: ['Correct reactants and products (1 mark)', 'Energy/ATP mentioned (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
-          },
-          {
-            id: 'b4-q6',
-            question: 'Explain the difference between aerobic and anaerobic respiration.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Aerobic respiration uses oxygen and produces carbon dioxide, water, and lots of ATP. Anaerobic respiration occurs without oxygen, produces less ATP, and forms lactic acid in animals or ethanol in plants/yeast.',
-            markingCriteria: {
-              breakdown: ['Aerobic uses oxygen (1 mark)', 'Aerobic produces more ATP (1 mark)', 'Anaerobic without oxygen (1 mark)', 'Anaerobic produces lactic acid/ethanol (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
-          },
-          {
-            id: 'b4-q7',
-            question: 'Where does photosynthesis occur in plant cells?',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: 'Chloroplasts',
-            markingCriteria: {
-              breakdown: ['Chloroplasts (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
-          },
-          {
-            id: 'b4-q8',
-            question: 'How do plants use the glucose produced during photosynthesis?',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Plants use glucose for respiration to release energy, convert it to starch for storage, use it to make cellulose for cell walls, and combine it with nitrates to make amino acids for proteins.',
-            markingCriteria: {
-              breakdown: ['Respiration for energy (1 mark)', 'Convert to starch for storage (1 mark)', 'Make cellulose for cell walls (1 mark)', 'Make amino acids for proteins (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
-          },
-          {
-            id: 'b4-q9',
-            question: 'Explain how the leaf is adapted for photosynthesis.',
-            marks: 5,
-            difficulty: 'hard',
-            modelAnswer: 'Leaves are broad and flat for maximum light absorption. They contain chloroplasts with chlorophyll to absorb light. Stomata allow gas exchange. Veins transport water and remove glucose. Thin structure allows light to reach all cells.',
-            markingCriteria: {
-              breakdown: ['Broad and flat for light absorption (1 mark)', 'Chloroplasts contain chlorophyll (1 mark)', 'Stomata for gas exchange (1 mark)', 'Veins for transport (1 mark)', 'Thin for light penetration (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
-          },
-          {
-            id: 'b4-q10',
-            question: 'A student investigated the effect of light intensity on the rate of photosynthesis by counting oxygen bubbles. Describe what the results would show on a graph and explain the pattern.',
-            marks: 6,
-            difficulty: 'hard',
-            modelAnswer: 'The graph would show the rate of photosynthesis (oxygen production) increasing linearly with light intensity initially, then levelling off at higher intensities. At low light intensities, light is the limiting factor so increasing light increases the rate proportionally. At high intensities, other factors like CO2 concentration or temperature become limiting, so further increases in light intensity have no effect on the rate.',
-            markingCriteria: {
-              breakdown: ['Linear increase initially (1 mark)', 'Levels off at high intensities (1 mark)', 'Light is limiting factor at low intensities (1 mark)', 'Proportional increase when light limiting (1 mark)', 'Other factors become limiting at high intensities (1 mark)', 'No effect when other factors limiting (1 mark)']
+              breakdown: ['Correct reactants: carbon dioxide + water (1 mark)', 'Correct products: glucose + oxygen (1 mark)']
             },
             specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
           }
         ]
-      },
+      }
+    ]
+  },
+
+  // Biology Paper 2: Topics 5–7: Homeostasis and response; Inheritance, variation and evolution; and Ecology
+  {
+    id: 'combined-science-bio-paper2-aqa',
+    name: 'Combined Science Biology Paper 2 (AQA)',
+    topics: [
       {
-        id: 'b5-homeostasis-response',
+        id: 'b5-homeostasis',
         name: 'Biology: Homeostasis and Response',
         questions: [
           {
             id: 'b5-q1',
-            question: 'Explain how the body controls blood glucose levels.',
-            marks: 6,
-            difficulty: 'hard',
-            modelAnswer: 'The pancreas monitors blood glucose levels. When levels are high, insulin is released causing cells to take up glucose and the liver to convert glucose to glycogen. When levels are low, glucagon is released causing the liver to convert glycogen back to glucose.',
-            markingCriteria: {
-              breakdown: ['Pancreas monitors levels (1 mark)', 'Insulin released when high (1 mark)', 'Cells take up glucose (1 mark)', 'Glucose converted to glycogen (1 mark)', 'Glucagon released when low (1 mark)', 'Glycogen converted to glucose (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
-          },
-          {
-            id: 'b5-q2',
-            question: 'What is homeostasis?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Homeostasis is the maintenance of a constant internal environment despite changes in external conditions.',
-            markingCriteria: {
-              breakdown: ['Maintenance of constant internal environment (1 mark)', 'Despite external changes (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
-          },
-          {
-            id: 'b5-q3',
-            question: 'Name three conditions in the body that need to be controlled.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Body temperature, blood glucose concentration, and water content',
-            markingCriteria: {
-              breakdown: ['Body temperature (1 mark)', 'Blood glucose concentration (1 mark)', 'Water content (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
-          },
-          {
-            id: 'b5-q4',
-            question: 'Describe the structure of the nervous system.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'The nervous system consists of the central nervous system (brain and spinal cord) and the peripheral nervous system (all other nerves).',
-            markingCriteria: {
-              breakdown: ['Central nervous system (1 mark)', 'Brain and spinal cord (1 mark)', 'Peripheral nervous system/other nerves (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
-          },
-          {
-            id: 'b5-q5',
-            question: 'Explain what happens in a reflex action.',
+            question: 'Define homeostasis and explain why it is important.',
             marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'A stimulus is detected by a receptor. An impulse travels along a sensory neuron to the spinal cord. A relay neuron connects to a motor neuron. The motor neuron carries the impulse to an effector (muscle) which responds.',
+            modelAnswer: 'Homeostasis is the regulation of internal conditions in an organism to maintain optimal conditions for enzyme action and cellular functions. Important because enzymes only work efficiently within narrow temperature and pH ranges.',
             markingCriteria: {
-              breakdown: ['Stimulus detected by receptor (1 mark)', 'Sensory neuron to spinal cord (1 mark)', 'Relay neuron connects to motor neuron (1 mark)', 'Motor neuron to effector/response (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
-          },
-          {
-            id: 'b5-q6',
-            question: 'What is the function of insulin in the body?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Insulin is a hormone produced by the pancreas that causes liver and muscle cells to take up glucose from the blood, lowering blood glucose concentration.',
-            markingCriteria: {
-              breakdown: ['Hormone produced by pancreas (1 mark)', 'Causes cells to take up glucose (1 mark)', 'Lowers blood glucose concentration (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
-          },
-          {
-            id: 'b5-q7',
-            question: 'Describe how body temperature is controlled when it gets too hot.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Sweating increases to cool the body through evaporation. Blood vessels near the skin surface dilate (vasodilation) to increase heat loss. Metabolic rate decreases. Hair follicles relax so hairs lie flat.',
-            markingCriteria: {
-              breakdown: ['Increased sweating/evaporation (1 mark)', 'Vasodilation increases heat loss (1 mark)', 'Decreased metabolic rate (1 mark)', 'Hairs lie flat (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
-          },
-          {
-            id: 'b5-q8',
-            question: 'What is Type 1 diabetes?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Type 1 diabetes is a condition where the pancreas does not produce enough insulin, resulting in high blood glucose levels that cannot be controlled naturally.',
-            markingCriteria: {
-              breakdown: ['Pancreas does not produce enough insulin (1 mark)', 'High blood glucose levels (1 mark)', 'Cannot be controlled naturally (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
-          },
-          {
-            id: 'b5-q9',
-            question: 'Name the parts of the eye and their functions.',
-            marks: 6,
-            difficulty: 'hard',
-            modelAnswer: 'Cornea - refracts light. Iris - controls amount of light entering. Lens - focuses light on retina. Retina - contains light-sensitive cells. Optic nerve - carries impulses to brain. Pupil - allows light to enter.',
-            markingCriteria: {
-              breakdown: ['Cornea refracts light (1 mark)', 'Iris controls light (1 mark)', 'Lens focuses light (1 mark)', 'Retina contains light-sensitive cells (1 mark)', 'Optic nerve to brain (1 mark)', 'Pupil allows light entry (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
-          },
-          {
-            id: 'b5-q10',
-            question: 'Explain how the eye focuses on near and distant objects.',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'For near objects, ciliary muscles contract, suspensory ligaments slacken, and the lens becomes more curved (thicker). For distant objects, ciliary muscles relax, suspensory ligaments tighten, and the lens becomes less curved (thinner).',
-            markingCriteria: {
-              breakdown: ['Near: ciliary muscles contract (1 mark)', 'Near: lens becomes more curved (1 mark)', 'Distant: ciliary muscles relax (1 mark)', 'Distant: lens becomes less curved (1 mark)']
+              breakdown: ['Definition: regulation of internal conditions (2 marks)', 'Maintains optimal conditions for enzymes (1 mark)', 'Reference to temperature/pH ranges (1 mark)']
             },
             specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
           }
@@ -13623,111 +13159,12 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'b6-q1',
-            question: 'Define the terms gene, allele, and chromosome.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'A gene is a section of DNA that codes for a specific characteristic. An allele is a different version of the same gene. A chromosome is a structure containing many genes.',
-            markingCriteria: {
-              breakdown: ['Gene definition (1 mark)', 'Allele definition (1 mark)', 'Chromosome definition (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
-          },
-          {
-            id: 'b6-q2',
-            question: 'What is meant by the term species?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'A species is a group of organisms that can reproduce to produce fertile offspring.',
-            markingCriteria: {
-              breakdown: ['Group of organisms (1 mark)', 'Can reproduce to produce fertile offspring (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
-          },
-          {
-            id: 'b6-q3',
             question: 'Explain the difference between sexual and asexual reproduction.',
             marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'Sexual reproduction involves two parents and produces genetically different offspring. Asexual reproduction involves one parent and produces genetically identical offspring (clones).',
+            modelAnswer: 'Sexual reproduction involves the fusion of male and female gametes, producing genetically different offspring. Asexual reproduction involves only one parent producing genetically identical offspring (clones).',
             markingCriteria: {
-              breakdown: ['Sexual: two parents (1 mark)', 'Sexual: genetically different offspring (1 mark)', 'Asexual: one parent (1 mark)', 'Asexual: genetically identical offspring (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
-          },
-          {
-            id: 'b6-q4',
-            question: 'What is DNA and where is it found?',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'DNA is the genetic material that contains coded information for characteristics. It is found in the nucleus of cells.',
-            markingCriteria: {
-              breakdown: ['Genetic material (1 mark)', 'Contains coded information (1 mark)', 'Found in nucleus (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
-          },
-          {
-            id: 'b6-q5',
-            question: 'Explain how natural selection works.',
-            marks: 5,
-            difficulty: 'hard',
-            modelAnswer: 'Individuals with characteristics best suited to their environment are more likely to survive and reproduce. They pass on their advantageous characteristics to their offspring. Over time, these characteristics become more common in the population.',
-            markingCriteria: {
-              breakdown: ['Individuals with advantageous characteristics survive (1 mark)', 'More likely to reproduce (1 mark)', 'Pass on characteristics to offspring (1 mark)', 'Characteristics become more common (1 mark)', 'Over time/many generations (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
-          },
-          {
-            id: 'b6-q6',
-            question: 'What is meant by extinction?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Extinction occurs when all members of a species die out and the species no longer exists.',
-            markingCriteria: {
-              breakdown: ['All members of species die out (1 mark)', 'Species no longer exists (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
-          },
-          {
-            id: 'b6-q7',
-            question: 'Describe how fossils provide evidence for evolution.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Fossils show how organisms have changed over time. The fossil record shows progression from simple to more complex organisms. Fossils of transitional forms show links between different groups of organisms.',
-            markingCriteria: {
-              breakdown: ['Show how organisms changed over time (1 mark)', 'Progression from simple to complex (1 mark)', 'Transitional forms (1 mark)', 'Links between different groups (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
-          },
-          {
-            id: 'b6-q8',
-            question: 'What causes variation in organisms?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Variation is caused by genetic factors (inherited from parents), environmental factors (conditions organisms live in), or a combination of both.',
-            markingCriteria: {
-              breakdown: ['Genetic factors/inheritance (1 mark)', 'Environmental factors (1 mark)', 'Combination of both (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
-          },
-          {
-            id: 'b6-q9',
-            question: 'Explain how antibiotic resistance in bacteria supports the theory of evolution.',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'Some bacteria have mutations that make them resistant to antibiotics. When antibiotics are used, non-resistant bacteria die but resistant bacteria survive and reproduce. The resistance gene is passed to offspring, increasing the proportion of resistant bacteria in the population.',
-            markingCriteria: {
-              breakdown: ['Mutations cause resistance (1 mark)', 'Resistant bacteria survive antibiotic treatment (1 mark)', 'Resistant bacteria reproduce (1 mark)', 'Resistance increases in population (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
-          },
-          {
-            id: 'b6-q10',
-            question: 'Define the term classification and explain its importance.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Classification is the grouping of organisms based on their similarities and differences. It helps scientists study and understand organisms, predict characteristics of newly discovered species, and understand evolutionary relationships.',
-            markingCriteria: {
-              breakdown: ['Grouping based on similarities/differences (1 mark)', 'Helps study organisms (1 mark)', 'Predict characteristics (1 mark)', 'Understand evolutionary relationships (1 mark)']
+              breakdown: ['Sexual: fusion of gametes (1 mark)', 'Sexual: genetically different offspring (1 mark)', 'Asexual: one parent (1 mark)', 'Asexual: genetically identical offspring (1 mark)']
             },
             specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
           }
@@ -13744,114 +13181,22 @@ export const curriculum: Subject[] = [
             difficulty: 'hard',
             modelAnswer: 'Carbon dioxide is removed from the atmosphere by photosynthesis in plants. Carbon compounds in plants and animals are returned to the atmosphere as carbon dioxide through respiration. Decomposition of dead organisms also releases carbon dioxide. Combustion of fossil fuels adds extra carbon dioxide to the atmosphere.',
             markingCriteria: {
-              breakdown: ['CO2 removed by photosynthesis (2 marks)', 'Returned by respiration (1 mark)', 'Decomposition releases CO2 (1 mark)', 'Combustion of fossil fuels (2 marks)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
-          },
-          {
-            id: 'b7-q2',
-            question: 'What is an ecosystem?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'An ecosystem is all the organisms living in a particular area and all the non-living conditions that affect them.',
-            markingCriteria: {
-              breakdown: ['All organisms in an area (1 mark)', 'Non-living conditions (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
-          },
-          {
-            id: 'b7-q3',
-            question: 'Define the terms producer, primary consumer, and secondary consumer.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Producers make their own food by photosynthesis. Primary consumers eat producers. Secondary consumers eat primary consumers.',
-            markingCriteria: {
-              breakdown: ['Producer makes own food (1 mark)', 'Primary consumer eats producers (1 mark)', 'Secondary consumer eats primary consumers (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
-          },
-          {
-            id: 'b7-q4',
-            question: 'What is meant by biodiversity?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Biodiversity is the variety of different species living in an ecosystem.',
-            markingCriteria: {
-              breakdown: ['Variety of species (1 mark)', 'In an ecosystem (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
-          },
-          {
-            id: 'b7-q5',
-            question: 'Explain how deforestation affects the environment.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Deforestation reduces biodiversity by destroying habitats. It increases carbon dioxide levels because fewer trees absorb CO2 and burning releases stored carbon. It can cause soil erosion and flooding.',
-            markingCriteria: {
-              breakdown: ['Reduces biodiversity/destroys habitats (1 mark)', 'Increases CO2 levels (1 mark)', 'Fewer trees to absorb CO2 (1 mark)', 'Soil erosion/flooding (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
-          },
-          {
-            id: 'b7-q6',
-            question: 'Describe the nitrogen cycle.',
-            marks: 6,
-            difficulty: 'hard',
-            modelAnswer: 'Nitrogen gas in the atmosphere is converted to nitrates by nitrogen-fixing bacteria in root nodules or by lightning. Plants absorb nitrates and use them to make proteins. When organisms die, decomposing bacteria break down proteins releasing ammonia. Nitrifying bacteria convert ammonia to nitrates. Denitrifying bacteria convert nitrates back to nitrogen gas.',
-            markingCriteria: {
-              breakdown: ['Nitrogen fixation by bacteria/lightning (1 mark)', 'Plants absorb nitrates (1 mark)', 'Make proteins (1 mark)', 'Decomposition releases ammonia (1 mark)', 'Nitrification: ammonia to nitrates (1 mark)', 'Denitrification: nitrates to nitrogen (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
-          },
-          {
-            id: 'b7-q7',
-            question: 'What is meant by competition in ecosystems?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Competition occurs when organisms compete for limited resources such as food, water, space, or mates. Competition can be between individuals of the same species (intraspecific) or different species (interspecific).',
-            markingCriteria: {
-              breakdown: ['Competing for limited resources (1 mark)', 'Examples of resources (1 mark)', 'Intraspecific or interspecific competition (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
-          },
-          {
-            id: 'b7-q8',
-            question: 'Explain what happens to energy as it flows through a food chain.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Energy is transferred from one trophic level to the next when organisms are eaten. However, most energy (about 90%) is lost at each level through respiration, movement, heat loss, and waste products. Only about 10% is transferred to the next level.',
-            markingCriteria: {
-              breakdown: ['Energy transferred between trophic levels (1 mark)', 'Most energy lost at each level (1 mark)', 'Lost through respiration/heat/waste (1 mark)', 'Only ~10% transferred (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
-          },
-          {
-            id: 'b7-q9',
-            question: 'What factors can affect the distribution of organisms in an ecosystem?',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Temperature, light intensity, moisture levels, pH, availability of nutrients, oxygen levels, and carbon dioxide levels can all affect where organisms can live and survive.',
-            markingCriteria: {
-              breakdown: ['Temperature (1 mark)', 'Light intensity (1 mark)', 'Moisture/pH/nutrients (1 mark)', 'Oxygen/carbon dioxide levels (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
-          },
-          {
-            id: 'b7-q10',
-            question: 'Describe how pollution can affect ecosystems.',
-            marks: 5,
-            difficulty: 'hard',
-            modelAnswer: 'Air pollution can cause acid rain which damages plants and water ecosystems. Water pollution can kill aquatic organisms and disrupt food chains. Land pollution can contaminate soil making it unsuitable for plants. Pollution can reduce biodiversity and alter species distribution.',
-            markingCriteria: {
-              breakdown: ['Air pollution causes acid rain (1 mark)', 'Water pollution kills aquatic organisms (1 mark)', 'Land pollution contaminates soil (1 mark)', 'Disrupts food chains (1 mark)', 'Reduces biodiversity (1 mark)']
+              breakdown: ['CO2 removed by photosynthesis (1 mark)', 'CO2 returned by respiration (1 mark)', 'CO2 from decomposition (1 mark)', 'CO2 from combustion (1 mark)', 'Reference to atmosphere (1 mark)', 'Cycle concept (1 mark)']
             },
             specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
           }
         ]
-      },
-      // ===== CHEMISTRY TOPICS (all except key ideas) =====
+      }
+    ]
+  },
+
+  // Chemistry Paper 1: Topics 8–12: Atomic structure and the periodic table; Bonding, structure, and the properties of matter; Quantitative chemistry; Chemical changes; and Energy changes
+  {
+    id: 'combined-science-chem-paper1-aqa',
+    name: 'Combined Science Chemistry Paper 1 (AQA)',
+    topics: [
       {
-        id: 'c1-atomic-structure-periodic-table',
+        id: 'c1-atomic-structure',
         name: 'Chemistry: Atomic Structure and the Periodic Table',
         questions: [
           {
@@ -13859,226 +13204,28 @@ export const curriculum: Subject[] = [
             question: 'Describe the structure of an atom.',
             marks: 3,
             difficulty: 'easy',
-            modelAnswer: 'An atom has a nucleus containing protons and neutrons, with electrons orbiting in shells around the nucleus. The nucleus is positively charged and very small compared to the atom.',
+            modelAnswer: 'An atom has a small central nucleus containing protons and neutrons, with electrons orbiting in energy levels (shells) around the nucleus.',
             markingCriteria: {
-              breakdown: ['Nucleus with protons and neutrons (1 mark)', 'Electrons in shells (1 mark)', 'Nucleus is small and positive (1 mark)']
+              breakdown: ['Central nucleus (1 mark)', 'Contains protons and neutrons (1 mark)', 'Electrons in energy levels/shells (1 mark)']
             },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
-          },
-          {
-            id: 'c1-q2',
-            question: 'Explain how the modern periodic table is arranged.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Elements are arranged in order of increasing atomic number. Elements with similar properties are in the same group (vertical columns). The period number indicates the number of electron shells.',
-            markingCriteria: {
-              breakdown: ['Order of atomic number (1 mark)', 'Similar properties in groups (1 mark)', 'Groups are vertical columns (1 mark)', 'Period = number of shells (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
-          },
-          {
-            id: 'c1-q3',
-            question: 'What is meant by the term mass number?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Mass number is the total number of protons and neutrons in the nucleus of an atom.',
-            markingCriteria: {
-              breakdown: ['Total number of protons and neutrons (1 mark)', 'In the nucleus (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
-          },
-          {
-            id: 'c1-q4',
-            question: 'What is meant by the term atomic number?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Atomic number is the number of protons in the nucleus of an atom.',
-            markingCriteria: {
-              breakdown: ['Number of protons (1 mark)', 'In the nucleus (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
-          },
-          {
-            id: 'c1-q5',
-            question: 'Why do elements in the same group have similar properties?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Elements in the same group have the same number of electrons in their outer shell, which determines their chemical properties.',
-            markingCriteria: {
-              breakdown: ['Same number of outer electrons (1 mark)', 'Outer electrons determine properties (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
-          },
-          {
-            id: 'c1-q6',
-            question: 'What happens to atomic radius as you go down a group?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Atomic radius increases as you go down a group because atoms have more electron shells.',
-            markingCriteria: {
-              breakdown: ['Atomic radius increases (1 mark)', 'More electron shells (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
-          },
-          {
-            id: 'c1-q7',
-            question: 'Describe the properties of metals.',
-            marks: 4,
-            difficulty: 'easy',
-            modelAnswer: 'Metals are good conductors of heat and electricity, have high melting points, are malleable and ductile, and have a shiny appearance.',
-            markingCriteria: {
-              breakdown: ['Good conductors (1 mark)', 'High melting points (1 mark)', 'Malleable and ductile (1 mark)', 'Shiny appearance (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
-          },
-          {
-            id: 'c1-q8',
-            question: 'What are isotopes?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Isotopes are atoms of the same element that have the same number of protons but different numbers of neutrons.',
-            markingCriteria: {
-              breakdown: ['Atoms of same element (1 mark)', 'Same number of protons (1 mark)', 'Different numbers of neutrons (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
-          },
-          {
-            id: 'c1-q9',
-            question: 'Explain why noble gases are unreactive.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Noble gases have complete outer electron shells, making them stable and unreactive.',
-            markingCriteria: {
-              breakdown: ['Complete outer electron shells (1 mark)', 'Makes them stable/unreactive (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
-          },
-          {
-            id: 'c1-q10',
-            question: 'Describe the trend in reactivity of Group 1 metals as you go down the group.',
-            marks: 3,
-            difficulty: 'hard',
-            modelAnswer: 'Reactivity increases as you go down Group 1 because the outer electron is further from the nucleus, so it is more easily lost.',
-            markingCriteria: {
-              breakdown: ['Reactivity increases down group (1 mark)', 'Outer electron further from nucleus (1 mark)', 'Easier to lose electron (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and the periodic table'
           }
         ]
       },
       {
-        id: 'c2-bonding-structure-properties',
-        name: 'Chemistry: Bonding, Structure, and the Properties of Matter',
+        id: 'c2-bonding-structure',
+        name: 'Chemistry: Bonding, Structure, and Properties of Matter',
         questions: [
           {
             id: 'c2-q1',
-            question: 'Compare the properties of ionic and covalent compounds.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Ionic compounds have high melting points, conduct electricity when molten or dissolved, and are often soluble in water. Covalent compounds have lower melting points, do not conduct electricity, and are often insoluble in water.',
-            markingCriteria: {
-              breakdown: ['Ionic: high melting points (1 mark)', 'Ionic: conduct when molten/dissolved (1 mark)', 'Ionic: soluble in water (1 mark)', 'Covalent: low melting points (1 mark)', 'Covalent: do not conduct (1 mark)', 'Covalent: insoluble in water (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
-          },
-          {
-            id: 'c2-q2',
-            question: 'What is an ionic bond?',
+            question: 'Explain why sodium chloride has a high melting point.',
             marks: 3,
             difficulty: 'medium',
-            modelAnswer: 'An ionic bond is the electrostatic attraction between oppositely charged ions, formed when electrons are transferred from metals to non-metals.',
+            modelAnswer: 'Sodium chloride has ionic bonding between Na+ and Cl- ions. Strong electrostatic forces of attraction between oppositely charged ions require large amounts of energy to break.',
             markingCriteria: {
-              breakdown: ['Electrostatic attraction (1 mark)', 'Between oppositely charged ions (1 mark)', 'Electrons transferred metal to non-metal (1 mark)']
+              breakdown: ['Ionic bonding identified (1 mark)', 'Strong electrostatic forces (1 mark)', 'Large amounts of energy needed (1 mark)']
             },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
-          },
-          {
-            id: 'c2-q3',
-            question: 'What is a covalent bond?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'A covalent bond is formed when two atoms share a pair of electrons.',
-            markingCriteria: {
-              breakdown: ['Sharing of electrons (1 mark)', 'Between two atoms (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
-          },
-          {
-            id: 'c2-q4',
-            question: 'Explain why diamond is so hard.',
-            marks: 3,
-            difficulty: 'hard',
-            modelAnswer: 'Diamond has a giant covalent structure where each carbon atom is bonded to four others in a tetrahedral arrangement. This creates a very strong three-dimensional network.',
-            markingCriteria: {
-              breakdown: ['Giant covalent structure (1 mark)', 'Each carbon bonded to four others (1 mark)', 'Strong 3D network (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
-          },
-          {
-            id: 'c2-q5',
-            question: 'Why does graphite conduct electricity?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Graphite has delocalized electrons that are free to move, allowing it to conduct electricity.',
-            markingCriteria: {
-              breakdown: ['Delocalized electrons (1 mark)', 'Free to move (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
-          },
-          {
-            id: 'c2-q6',
-            question: 'What are the properties of metals and why do they have these properties?',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'Metals conduct electricity and heat due to delocalized electrons that can move freely. They are malleable and ductile because layers of atoms can slide over each other without breaking bonds.',
-            markingCriteria: {
-              breakdown: ['Conduct due to delocalized electrons (1 mark)', 'Electrons free to move (1 mark)', 'Malleable/ductile (1 mark)', 'Layers can slide (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
-          },
-          {
-            id: 'c2-q7',
-            question: 'What are polymers?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Polymers are large molecules made from many small repeating units called monomers.',
-            markingCriteria: {
-              breakdown: ['Large molecules (1 mark)', 'Made from repeating monomers (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
-          },
-          {
-            id: 'c2-q8',
-            question: 'Explain the difference between thermosoftening and thermosetting plastics.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Thermosoftening plastics soften when heated and can be reshaped repeatedly because they have no cross-links between polymer chains. Thermosetting plastics do not soften when heated because they have cross-links that prevent chains from moving.',
-            markingCriteria: {
-              breakdown: ['Thermosoftening: soften when heated (1 mark)', 'Can be reshaped repeatedly (1 mark)', 'Thermosetting: do not soften (1 mark)', 'Cross-links prevent movement (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
-          },
-          {
-            id: 'c2-q9',
-            question: 'What is metallic bonding?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Metallic bonding is the electrostatic attraction between positive metal ions and a sea of delocalized electrons.',
-            markingCriteria: {
-              breakdown: ['Electrostatic attraction (1 mark)', 'Between positive metal ions (1 mark)', 'And delocalized electrons (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
-          },
-          {
-            id: 'c2-q10',
-            question: 'Explain why ionic compounds have high melting points.',
-            marks: 3,
-            difficulty: 'hard',
-            modelAnswer: 'Ionic compounds have strong electrostatic forces of attraction between oppositely charged ions, which require large amounts of energy to overcome.',
-            markingCriteria: {
-              breakdown: ['Strong electrostatic forces (1 mark)', 'Between oppositely charged ions (1 mark)', 'Large amounts of energy needed (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and the properties of matter'
           }
         ]
       },
@@ -14088,111 +13235,12 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'c3-q1',
-            question: 'Calculate the relative formula mass of calcium carbonate (CaCO₃). [Ar: Ca=40, C=12, O=16]',
+            question: 'Calculate the relative formula mass of calcium carbonate, CaCO₃. (Ar: Ca = 40, C = 12, O = 16)',
             marks: 2,
             difficulty: 'easy',
-            modelAnswer: 'CaCO₃ = 40 + 12 + (3 × 16) = 40 + 12 + 48 = 100',
+            modelAnswer: 'Mr = 40 + 12 + (3 × 16) = 40 + 12 + 48 = 100',
             markingCriteria: {
-              breakdown: ['Correct method shown (1 mark)', 'Correct answer: 100 (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
-          },
-          {
-            id: 'c3-q2',
-            question: 'What is Avogadro\'s constant?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Avogadro\'s constant is 6.02 × 10²³ mol⁻¹, representing the number of particles in one mole.',
-            markingCriteria: {
-              breakdown: ['6.02 × 10²³ mol⁻¹ (1 mark)', 'Number of particles in one mole (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
-          },
-          {
-            id: 'c3-q3',
-            question: 'Calculate the number of moles in 88g of carbon dioxide (CO₂). [Mr: CO₂ = 44]',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Moles = mass ÷ Mr = 88 ÷ 44 = 2 moles',
-            markingCriteria: {
-              breakdown: ['Correct formula (1 mark)', 'Correct answer: 2 moles (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
-          },
-          {
-            id: 'c3-q4',
-            question: 'What is meant by the term limiting reactant?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'The limiting reactant is the reactant that is completely used up in a reaction, determining how much product can be formed.',
-            markingCriteria: {
-              breakdown: ['Reactant completely used up (1 mark)', 'Determines amount of product (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
-          },
-          {
-            id: 'c3-q5',
-            question: 'Calculate the percentage of carbon in methane (CH₄). [Ar: C=12, H=1]',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Mr of CH₄ = 12 + (4 × 1) = 16. Percentage of C = (12 ÷ 16) × 100 = 75%',
-            markingCriteria: {
-              breakdown: ['Correct Mr calculation (1 mark)', 'Correct percentage formula (1 mark)', 'Correct answer: 75% (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
-          },
-          {
-            id: 'c3-q6',
-            question: 'What is meant by concentration in chemistry?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Concentration is the amount of solute dissolved in a given volume of solution.',
-            markingCriteria: {
-              breakdown: ['Amount of solute (1 mark)', 'In given volume of solution (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
-          },
-          {
-            id: 'c3-q7',
-            question: 'Calculate the concentration of a solution containing 20g of salt in 500cm³ of water.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Concentration = mass ÷ volume = 20g ÷ 500cm³ = 0.04 g/cm³ or 40 g/dm³',
-            markingCriteria: {
-              breakdown: ['Correct formula used (1 mark)', 'Correct answer with units (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
-          },
-          {
-            id: 'c3-q8',
-            question: 'What is the law of conservation of mass?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'The law states that mass cannot be created or destroyed in a chemical reaction, so the total mass of reactants equals the total mass of products.',
-            markingCriteria: {
-              breakdown: ['Mass cannot be created or destroyed (1 mark)', 'Mass of reactants = mass of products (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
-          },
-          {
-            id: 'c3-q9',
-            question: 'Calculate the volume of 0.5 moles of any gas at room temperature and pressure.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Volume = moles × 24 = 0.5 × 24 = 12 dm³',
-            markingCriteria: {
-              breakdown: ['Correct molar volume used (24 dm³) (1 mark)', 'Correct calculation: 12 dm³ (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
-          },
-          {
-            id: 'c3-q10',
-            question: 'In the reaction Mg + 2HCl → MgCl₂ + H₂, what mass of hydrogen is produced from 24g of magnesium? [Ar: Mg=24, H=1]',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'Moles of Mg = 24 ÷ 24 = 1 mole. From equation, 1 mole Mg produces 1 mole H₂. Mr of H₂ = 2. Mass of H₂ = 1 × 2 = 2g',
-            markingCriteria: {
-              breakdown: ['Moles of Mg calculated (1 mark)', 'Mole ratio from equation (1 mark)', 'Mr of H₂ = 2 (1 mark)', 'Correct final answer: 2g (1 mark)']
+              breakdown: ['Correct method shown (1 mark)', 'Correct answer = 100 (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
           }
@@ -14204,111 +13252,12 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'c4-q1',
-            question: 'Describe what happens when an acid reacts with a metal.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'When an acid reacts with a metal, a salt and hydrogen gas are produced. The metal dissolves and effervescence (fizzing) is observed due to hydrogen gas being released.',
-            markingCriteria: {
-              breakdown: ['Salt and hydrogen produced (1 mark)', 'Metal dissolves (1 mark)', 'Effervescence/fizzing observed (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
-          },
-          {
-            id: 'c4-q2',
-            question: 'What is oxidation in terms of oxygen?',
+            question: 'What is an acid and what ions do acids produce in aqueous solution?',
             marks: 2,
             difficulty: 'easy',
-            modelAnswer: 'Oxidation is the gain of oxygen by a substance.',
+            modelAnswer: 'An acid is a substance that produces hydrogen ions (H+) in aqueous solution.',
             markingCriteria: {
-              breakdown: ['Gain of oxygen (1 mark)', 'By a substance (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
-          },
-          {
-            id: 'c4-q3',
-            question: 'What is reduction in terms of oxygen?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Reduction is the loss of oxygen from a substance.',
-            markingCriteria: {
-              breakdown: ['Loss of oxygen (1 mark)', 'From a substance (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
-          },
-          {
-            id: 'c4-q4',
-            question: 'Write the general equation for the reaction between an acid and a metal carbonate.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Acid + Metal carbonate → Salt + Water + Carbon dioxide',
-            markingCriteria: {
-              breakdown: ['Correct reactants (1 mark)', 'Correct products (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
-          },
-          {
-            id: 'c4-q5',
-            question: 'What is the test for hydrogen gas?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Hold a lit splint near the gas. Hydrogen burns with a squeaky pop.',
-            markingCriteria: {
-              breakdown: ['Lit splint test (1 mark)', 'Squeaky pop sound (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
-          },
-          {
-            id: 'c4-q6',
-            question: 'What is the pH scale?',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'The pH scale measures how acidic or alkaline a solution is, ranging from 0 to 14. pH 7 is neutral, below 7 is acidic, above 7 is alkaline.',
-            markingCriteria: {
-              breakdown: ['Measures acidity/alkalinity (1 mark)', 'Range 0-14 (1 mark)', 'pH 7 neutral, <7 acidic, >7 alkaline (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
-          },
-          {
-            id: 'c4-q7',
-            question: 'What happens during neutralization?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'An acid reacts with a base to form a salt and water, with pH moving towards 7.',
-            markingCriteria: {
-              breakdown: ['Acid + base → salt + water (1 mark)', 'pH moves towards 7 (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
-          },
-          {
-            id: 'c4-q8',
-            question: 'How can you extract metals from their ores?',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'Metals can be extracted by reduction with carbon (for metals less reactive than carbon), by electrolysis (for very reactive metals), or by reduction with hydrogen.',
-            markingCriteria: {
-              breakdown: ['Reduction with carbon (1 mark)', 'For less reactive metals (1 mark)', 'Electrolysis for reactive metals (1 mark)', 'Alternative: reduction with hydrogen (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
-          },
-          {
-            id: 'c4-q9',
-            question: 'What is electrolysis?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Electrolysis is the breakdown of ionic compounds using electricity, where ions move to electrodes and are discharged.',
-            markingCriteria: {
-              breakdown: ['Breakdown using electricity (1 mark)', 'Of ionic compounds (1 mark)', 'Ions move to electrodes (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
-          },
-          {
-            id: 'c4-q10',
-            question: 'What happens at the anode and cathode during electrolysis?',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'At the anode (positive electrode), negative ions are oxidized and lose electrons. At the cathode (negative electrode), positive ions are reduced and gain electrons.',
-            markingCriteria: {
-              breakdown: ['Anode: negative ions oxidized (1 mark)', 'Lose electrons at anode (1 mark)', 'Cathode: positive ions reduced (1 mark)', 'Gain electrons at cathode (1 mark)']
+              breakdown: ['Produces hydrogen ions (1 mark)', 'H+ ions identified (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
           }
@@ -14323,226 +13272,36 @@ export const curriculum: Subject[] = [
             question: 'Explain the difference between exothermic and endothermic reactions.',
             marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'Exothermic reactions release energy to the surroundings, causing the temperature to increase. Endothermic reactions absorb energy from the surroundings, causing the temperature to decrease.',
+            modelAnswer: 'Exothermic reactions release energy to the surroundings, causing temperature to increase. Endothermic reactions absorb energy from the surroundings, causing temperature to decrease.',
             markingCriteria: {
               breakdown: ['Exothermic releases energy (1 mark)', 'Temperature increases (1 mark)', 'Endothermic absorbs energy (1 mark)', 'Temperature decreases (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
-          },
-          {
-            id: 'c5-q2',
-            question: 'Give two examples of exothermic reactions.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Combustion and neutralization reactions.',
-            markingCriteria: {
-              breakdown: ['Combustion (1 mark)', 'Neutralization (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
-          },
-          {
-            id: 'c5-q3',
-            question: 'Give two examples of endothermic reactions.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Thermal decomposition and photosynthesis.',
-            markingCriteria: {
-              breakdown: ['Thermal decomposition (1 mark)', 'Photosynthesis (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
-          },
-          {
-            id: 'c5-q4',
-            question: 'What is activation energy?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Activation energy is the minimum amount of energy needed for a reaction to occur.',
-            markingCriteria: {
-              breakdown: ['Minimum amount of energy (1 mark)', 'Needed for reaction to occur (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
-          },
-          {
-            id: 'c5-q5',
-            question: 'How can you measure the energy change in a reaction?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Measure the temperature change of the reaction mixture using a thermometer, and calculate energy change using mass, specific heat capacity, and temperature change.',
-            markingCriteria: {
-              breakdown: ['Measure temperature change (1 mark)', 'Use thermometer (1 mark)', 'Calculate using mass, heat capacity, temp change (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
-          },
-          {
-            id: 'c5-q6',
-            question: 'What is a fuel cell?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'A fuel cell is a device that produces electricity from the reaction between a fuel and oxygen.',
-            markingCriteria: {
-              breakdown: ['Device that produces electricity (1 mark)', 'From fuel and oxygen reaction (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
-          },
-          {
-            id: 'c5-q7',
-            question: 'What are the advantages of hydrogen fuel cells?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'They produce only water as a waste product, are more efficient than combustion engines, and provide a renewable source of electricity.',
-            markingCriteria: {
-              breakdown: ['Only water as waste (1 mark)', 'More efficient than combustion (1 mark)', 'Renewable electricity source (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
-          },
-          {
-            id: 'c5-q8',
-            question: 'What is a battery?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'A battery is a device that stores chemical energy and converts it to electrical energy.',
-            markingCriteria: {
-              breakdown: ['Stores chemical energy (1 mark)', 'Converts to electrical energy (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
-          },
-          {
-            id: 'c5-q9',
-            question: 'Why do rechargeable batteries eventually stop working?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'The chemical reactions become irreversible over time, or the electrodes degrade.',
-            markingCriteria: {
-              breakdown: ['Reactions become irreversible (1 mark)', 'Electrode degradation (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
-          },
-          {
-            id: 'c5-q10',
-            question: 'Describe what happens in an energy profile diagram for an exothermic reaction.',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'The reactants start at a higher energy level than the products. Energy rises to a peak (activation energy) then falls. The products are at a lower energy level, with energy released to surroundings.',
-            markingCriteria: {
-              breakdown: ['Reactants higher than products (1 mark)', 'Energy rises to peak (activation energy) (1 mark)', 'Then falls to products (1 mark)', 'Energy released to surroundings (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
           }
         ]
-      },
+      }
+    ]
+  },
+
+  // Chemistry Paper 2: Topics 13–17: The rate and extent of chemical change; Organic chemistry; Chemical analysis; Chemistry of the atmosphere; and Using resources
+  {
+    id: 'combined-science-chem-paper2-aqa',
+    name: 'Combined Science Chemistry Paper 2 (AQA)',
+    topics: [
       {
-        id: 'c6-rate-extent-chemical-change',
+        id: 'c6-rate-extent',
         name: 'Chemistry: The Rate and Extent of Chemical Change',
         questions: [
           {
             id: 'c6-q1',
-            question: 'State four factors that affect the rate of a chemical reaction.',
+            question: 'List four factors that affect the rate of chemical reactions.',
             marks: 4,
             difficulty: 'easy',
             modelAnswer: 'Temperature, concentration, surface area (particle size), and presence of a catalyst.',
             markingCriteria: {
               breakdown: ['Temperature (1 mark)', 'Concentration (1 mark)', 'Surface area/particle size (1 mark)', 'Catalyst (1 mark)']
             },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
-          },
-          {
-            id: 'c6-q2',
-            question: 'Explain how temperature affects reaction rate.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Higher temperature increases particle kinetic energy, causing more frequent and energetic collisions, leading to faster reaction rates.',
-            markingCriteria: {
-              breakdown: ['Increases particle kinetic energy (1 mark)', 'More frequent collisions (1 mark)', 'More energetic collisions (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
-          },
-          {
-            id: 'c6-q3',
-            question: 'What is a catalyst?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'A catalyst is a substance that speeds up a chemical reaction without being used up in the reaction.',
-            markingCriteria: {
-              breakdown: ['Speeds up reaction (1 mark)', 'Not used up in reaction (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
-          },
-          {
-            id: 'c6-q4',
-            question: 'How does surface area affect reaction rate?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Smaller particles have larger surface area, providing more area for collisions and faster reaction rates.',
-            markingCriteria: {
-              breakdown: ['Smaller particles = larger surface area (1 mark)', 'More area for collisions (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
-          },
-          {
-            id: 'c6-q5',
-            question: 'What is meant by a reversible reaction?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'A reversible reaction is one where the products can react to form the original reactants.',
-            markingCriteria: {
-              breakdown: ['Products can react (1 mark)', 'To form original reactants (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
-          },
-          {
-            id: 'c6-q6',
-            question: 'What is dynamic equilibrium?',
-            marks: 3,
-            difficulty: 'hard',
-            modelAnswer: 'Dynamic equilibrium occurs when the rate of forward reaction equals the rate of reverse reaction, and concentrations remain constant.',
-            markingCriteria: {
-              breakdown: ['Forward rate = reverse rate (1 mark)', 'Concentrations remain constant (1 mark)', 'Reactions still occurring (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
-          },
-          {
-            id: 'c6-q7',
-            question: 'How does concentration affect reaction rate?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Higher concentration means more particles in the same volume, leading to more frequent collisions and faster reaction rates.',
-            markingCriteria: {
-              breakdown: ['More particles in same volume (1 mark)', 'More frequent collisions (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
-          },
-          {
-            id: 'c6-q8',
-            question: 'Explain Le Chatelier\'s principle.',
-            marks: 3,
-            difficulty: 'hard',
-            modelAnswer: 'If conditions of an equilibrium are changed, the position of equilibrium shifts to oppose the change.',
-            markingCriteria: {
-              breakdown: ['If conditions changed (1 mark)', 'Equilibrium shifts (1 mark)', 'To oppose the change (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
-          },
-          {
-            id: 'c6-q9',
-            question: 'How do you calculate the rate of reaction?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Rate of reaction = amount of product formed (or reactant used) ÷ time taken',
-            markingCriteria: {
-              breakdown: ['Amount of product formed or reactant used (1 mark)', 'Divided by time taken (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
-          },
-          {
-            id: 'c6-q10',
-            question: 'What happens to equilibrium position when temperature is increased in an endothermic reaction?',
-            marks: 2,
-            difficulty: 'hard',
-            modelAnswer: 'The equilibrium shifts to the right (towards products) to absorb the extra heat.',
-            markingCriteria: {
-              breakdown: ['Shifts to the right/towards products (1 mark)', 'To absorb extra heat (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
+            specReference: 'AQA Combined Science Chemistry Paper 2 - The rate and extent of chemical change'
           }
         ]
       },
@@ -14552,111 +13311,12 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'c7-q1',
-            question: 'What is crude oil and how is it separated?',
+            question: 'Name the first four alkanes in the homologous series.',
             marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Crude oil is a mixture of hydrocarbons. It is separated by fractional distillation, where different fractions are separated based on their different boiling points.',
-            markingCriteria: {
-              breakdown: ['Mixture of hydrocarbons (1 mark)', 'Separated by fractional distillation (1 mark)', 'Based on boiling points (1 mark)', 'Different fractions obtained (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
-          },
-          {
-            id: 'c7-q2',
-            question: 'What is a hydrocarbon?',
-            marks: 2,
             difficulty: 'easy',
-            modelAnswer: 'A hydrocarbon is a compound containing only hydrogen and carbon atoms.',
+            modelAnswer: 'Methane, ethane, propane, butane.',
             markingCriteria: {
-              breakdown: ['Compound (1 mark)', 'Only hydrogen and carbon atoms (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
-          },
-          {
-            id: 'c7-q3',
-            question: 'What is complete combustion?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Complete combustion occurs when a fuel burns in sufficient oxygen to produce carbon dioxide and water only.',
-            markingCriteria: {
-              breakdown: ['Fuel burns in sufficient oxygen (1 mark)', 'Produces carbon dioxide (1 mark)', 'Produces water only (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
-          },
-          {
-            id: 'c7-q4',
-            question: 'What is incomplete combustion?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Incomplete combustion occurs when there is insufficient oxygen, producing carbon monoxide and/or carbon (soot) instead of carbon dioxide.',
-            markingCriteria: {
-              breakdown: ['Insufficient oxygen (1 mark)', 'Produces carbon monoxide (1 mark)', 'Or carbon/soot (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
-          },
-          {
-            id: 'c7-q5',
-            question: 'What are alkanes?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Alkanes are saturated hydrocarbons with only single bonds between carbon atoms.',
-            markingCriteria: {
-              breakdown: ['Saturated hydrocarbons (1 mark)', 'Only single bonds (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
-          },
-          {
-            id: 'c7-q6',
-            question: 'What are alkenes?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Alkenes are unsaturated hydrocarbons with at least one double bond between carbon atoms.',
-            markingCriteria: {
-              breakdown: ['Unsaturated hydrocarbons (1 mark)', 'At least one double bond (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
-          },
-          {
-            id: 'c7-q7',
-            question: 'How can you test for alkenes?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Add bromine water - it turns from orange to colourless if alkenes are present.',
-            markingCriteria: {
-              breakdown: ['Add bromine water (1 mark)', 'Orange to colourless (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
-          },
-          {
-            id: 'c7-q8',
-            question: 'What is cracking?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Cracking is the process of breaking down large alkane molecules into smaller, more useful molecules including alkenes.',
-            markingCriteria: {
-              breakdown: ['Breaking down large alkanes (1 mark)', 'Into smaller molecules (1 mark)', 'Including alkenes (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
-          },
-          {
-            id: 'c7-q9',
-            question: 'Why is cracking important?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Cracking produces smaller, more useful molecules. It produces alkenes needed for making plastics and increases the supply of petrol.',
-            markingCriteria: {
-              breakdown: ['Produces smaller useful molecules (1 mark)', 'Produces alkenes for plastics (1 mark)', 'Increases petrol supply (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
-          },
-          {
-            id: 'c7-q10',
-            question: 'What is the general formula for alkanes?',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: 'CₙH₂ₙ₊₂',
-            markingCriteria: {
-              breakdown: ['CₙH₂ₙ₊₂ (1 mark)']
+              breakdown: ['Methane (1 mark)', 'Ethane (1 mark)', 'Propane (1 mark)', 'Butane (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
           }
@@ -14668,111 +13328,12 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'c8-q1',
-            question: 'Describe how to test for hydrogen gas.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Hold a lit splint near the gas. If hydrogen is present, it will burn with a squeaky pop sound.',
-            markingCriteria: {
-              breakdown: ['Use lit splint (1 mark)', 'Squeaky pop sound (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
-          },
-          {
-            id: 'c8-q2',
-            question: 'Describe the test for oxygen gas.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Insert a glowing splint into the gas. If oxygen is present, the splint will relight.',
-            markingCriteria: {
-              breakdown: ['Use glowing splint (1 mark)', 'Splint relights (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
-          },
-          {
-            id: 'c8-q3',
-            question: 'Describe the test for carbon dioxide gas.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Bubble the gas through limewater. If carbon dioxide is present, the limewater turns cloudy/milky.',
-            markingCriteria: {
-              breakdown: ['Bubble through limewater (1 mark)', 'Limewater turns cloudy/milky (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
-          },
-          {
-            id: 'c8-q4',
-            question: 'What is chromatography used for?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Chromatography is used to separate and identify different substances in a mixture.',
-            markingCriteria: {
-              breakdown: ['Separate substances (1 mark)', 'Identify substances in mixture (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
-          },
-          {
-            id: 'c8-q5',
-            question: 'How do you calculate Rf values in chromatography?',
+            question: 'Describe how you would test for the presence of chlorine gas.',
             marks: 2,
             difficulty: 'medium',
-            modelAnswer: 'Rf = distance moved by substance ÷ distance moved by solvent front',
+            modelAnswer: 'Use damp blue litmus paper. Chlorine gas will bleach the paper, turning it white.',
             markingCriteria: {
-              breakdown: ['Distance moved by substance (1 mark)', 'Divided by distance moved by solvent (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
-          },
-          {
-            id: 'c8-q6',
-            question: 'What is a pure substance in chemistry?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'A pure substance contains only one type of element or compound.',
-            markingCriteria: {
-              breakdown: ['Contains only one type (1 mark)', 'Of element or compound (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
-          },
-          {
-            id: 'c8-q7',
-            question: 'How can you test the purity of a substance?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Measure its melting point and compare to known values. Pure substances have sharp, specific melting points.',
-            markingCriteria: {
-              breakdown: ['Measure melting point (1 mark)', 'Pure substances have sharp, specific melting points (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
-          },
-          {
-            id: 'c8-q8',
-            question: 'What is the test for chlorine gas?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Use damp litmus paper. Chlorine bleaches the litmus paper white.',
-            markingCriteria: {
-              breakdown: ['Use damp litmus paper (1 mark)', 'Bleaches litmus white (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
-          },
-          {
-            id: 'c8-q9',
-            question: 'How do you test for water?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Use anhydrous copper sulfate, which turns from white to blue in the presence of water.',
-            markingCriteria: {
-              breakdown: ['Use anhydrous copper sulfate (1 mark)', 'White to blue colour change (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
-          },
-          {
-            id: 'c8-q10',
-            question: 'What is flame testing used for?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Flame testing is used to identify metal ions by the characteristic colours they produce in a flame.',
-            markingCriteria: {
-              breakdown: ['Identify metal ions (1 mark)', 'Characteristic colours (1 mark)', 'In a flame (1 mark)']
+              breakdown: ['Damp blue litmus paper (1 mark)', 'Bleaches/turns white (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
           }
@@ -14784,113 +13345,14 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'c9-q1',
-            question: 'Describe the composition of the Earth\'s atmosphere today.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'The atmosphere is approximately 78% nitrogen, 21% oxygen, and 1% other gases including carbon dioxide and noble gases.',
-            markingCriteria: {
-              breakdown: ['78% nitrogen (1 mark)', '21% oxygen (1 mark)', '1% other gases (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
-          },
-          {
-            id: 'c9-q2',
-            question: 'How did oxygen levels increase in the early atmosphere?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Oxygen levels increased due to photosynthesis by early plants and algae, which removed carbon dioxide and released oxygen.',
-            markingCriteria: {
-              breakdown: ['Photosynthesis by plants/algae (1 mark)', 'Removed carbon dioxide (1 mark)', 'Released oxygen (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
-          },
-          {
-            id: 'c9-q3',
-            question: 'What is the greenhouse effect?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Greenhouse gases in the atmosphere absorb heat radiation from Earth and re-emit it, keeping the planet warm.',
-            markingCriteria: {
-              breakdown: ['Greenhouse gases absorb heat (1 mark)', 'Re-emit radiation (1 mark)', 'Keeps planet warm (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
-          },
-          {
-            id: 'c9-q4',
-            question: 'Name three greenhouse gases.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Carbon dioxide, methane, and water vapour.',
-            markingCriteria: {
-              breakdown: ['Carbon dioxide (1 mark)', 'Methane (1 mark)', 'Water vapour (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
-          },
-          {
-            id: 'c9-q5',
-            question: 'What causes acid rain?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Acid rain is caused by sulfur dioxide and nitrogen oxides dissolving in rainwater to form acids.',
-            markingCriteria: {
-              breakdown: ['Sulfur dioxide (1 mark)', 'Nitrogen oxides (1 mark)', 'Dissolve in rainwater to form acids (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
-          },
-          {
-            id: 'c9-q6',
-            question: 'What are the effects of acid rain?',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Acid rain damages buildings and statues, kills trees and plants, makes lakes acidic harming aquatic life, and can cause respiratory problems.',
-            markingCriteria: {
-              breakdown: ['Damages buildings/statues (1 mark)', 'Kills trees/plants (1 mark)', 'Makes lakes acidic (1 mark)', 'Respiratory problems (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
-          },
-          {
-            id: 'c9-q7',
-            question: 'How can we reduce greenhouse gas emissions?',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Use renewable energy sources, improve energy efficiency, use public transport, plant trees, and develop carbon capture technologies.',
-            markingCriteria: {
-              breakdown: ['Renewable energy (1 mark)', 'Energy efficiency (1 mark)', 'Public transport (1 mark)', 'Plant trees/carbon capture (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
-          },
-          {
-            id: 'c9-q8',
-            question: 'What was the early atmosphere mainly composed of?',
+            question: 'State the approximate percentage of nitrogen and oxygen in the current atmosphere.',
             marks: 2,
             difficulty: 'easy',
-            modelAnswer: 'The early atmosphere was mainly carbon dioxide with some water vapour.',
+            modelAnswer: 'Nitrogen: 78%, Oxygen: 21%',
             markingCriteria: {
-              breakdown: ['Mainly carbon dioxide (1 mark)', 'Some water vapour (1 mark)']
+              breakdown: ['Nitrogen 78% (1 mark)', 'Oxygen 21% (1 mark)']
             },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
-          },
-          {
-            id: 'c9-q9',
-            question: 'How did the oceans form?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Water vapour in the atmosphere condensed as the Earth cooled, forming the oceans.',
-            markingCriteria: {
-              breakdown: ['Water vapour condensed (1 mark)', 'As Earth cooled (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
-          },
-          {
-            id: 'c9-q10',
-            question: 'What is carbon footprint?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Carbon footprint is the total amount of greenhouse gases produced by human activities.',
-            markingCriteria: {
-              breakdown: ['Total amount of greenhouse gases (1 mark)', 'Produced by human activities (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of the atmosphere'
           }
         ]
       },
@@ -14900,228 +13362,37 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'c10-q1',
-            question: 'Explain why recycling metals is important.',
+            question: 'Explain why recycling metals is important for sustainable development.',
             marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'Recycling metals conserves limited natural resources, reduces energy consumption compared to extracting from ores, reduces pollution, and reduces the need for mining.',
+            modelAnswer: 'Recycling metals conserves finite natural resources, reduces energy consumption compared to extracting from ores, reduces environmental impact of mining, and reduces waste in landfills.',
             markingCriteria: {
-              breakdown: ['Conserves natural resources (1 mark)', 'Reduces energy consumption (1 mark)', 'Reduces pollution (1 mark)', 'Reduces need for mining (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
-          },
-          {
-            id: 'c10-q2',
-            question: 'What is sustainable development?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Sustainable development meets current needs without compromising the ability of future generations to meet their needs.',
-            markingCriteria: {
-              breakdown: ['Meets current needs (1 mark)', 'Without compromising future generations (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
-          },
-          {
-            id: 'c10-q3',
-            question: 'How is drinking water produced?',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Water is filtered to remove large particles, then chlorinated to kill bacteria and other microorganisms, making it safe to drink.',
-            markingCriteria: {
-              breakdown: ['Filtration removes particles (1 mark)', 'Chlorination kills bacteria (1 mark)', 'Kills microorganisms (1 mark)', 'Makes water safe (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
-          },
-          {
-            id: 'c10-q4',
-            question: 'What is desalination?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Desalination is the process of removing salt from seawater to produce fresh water.',
-            markingCriteria: {
-              breakdown: ['Removing salt (1 mark)', 'From seawater to produce fresh water (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
-          },
-          {
-            id: 'c10-q5',
-            question: 'What are the advantages of recycling?',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Recycling conserves natural resources, reduces landfill waste, and saves energy.',
-            markingCriteria: {
-              breakdown: ['Conserves natural resources (1 mark)', 'Reduces landfill waste (1 mark)', 'Saves energy (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
-          },
-          {
-            id: 'c10-q6',
-            question: 'How do we extract metals from low-grade ores?',
-            marks: 3,
-            difficulty: 'hard',
-            modelAnswer: 'Phytoextraction uses plants to absorb metals, or bioleaching uses bacteria to extract metals from ores.',
-            markingCriteria: {
-              breakdown: ['Phytoextraction using plants (1 mark)', 'Plants absorb metals (1 mark)', 'Bioleaching uses bacteria (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
-          },
-          {
-            id: 'c10-q7',
-            question: 'What is a life cycle assessment?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'A life cycle assessment evaluates the environmental impact of a product through all stages from raw materials to disposal.',
-            markingCriteria: {
-              breakdown: ['Evaluates environmental impact (1 mark)', 'Of a product (1 mark)', 'From raw materials to disposal (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
-          },
-          {
-            id: 'c10-q8',
-            question: 'Why is it important to treat sewage?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Sewage treatment prevents pollution of water sources, removes harmful bacteria, and protects public health.',
-            markingCriteria: {
-              breakdown: ['Prevents water pollution (1 mark)', 'Removes harmful bacteria (1 mark)', 'Protects public health (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
-          },
-          {
-            id: 'c10-q9',
-            question: 'What are the problems with extracting metals from ores?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Metal extraction is energy-intensive, damages the environment through mining, and produces waste products.',
-            markingCriteria: {
-              breakdown: ['Energy-intensive (1 mark)', 'Environmental damage from mining (1 mark)', 'Produces waste (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
-          },
-          {
-            id: 'c10-q10',
-            question: 'What is the difference between renewable and non-renewable resources?',
-            marks: 4,
-            difficulty: 'easy',
-            modelAnswer: 'Renewable resources can be replenished naturally and will not run out (like solar energy). Non-renewable resources are finite and will eventually be depleted (like fossil fuels).',
-            markingCriteria: {
-              breakdown: ['Renewable can be replenished (1 mark)', 'Will not run out (1 mark)', 'Non-renewable are finite (1 mark)', 'Will be depleted (1 mark)']
+              breakdown: ['Conserves natural resources (1 mark)', 'Reduces energy consumption (1 mark)', 'Reduces environmental impact (1 mark)', 'Reduces waste (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
           }
         ]
-      },
-      // ===== PHYSICS TOPICS (all except Space physics) =====
+      }
+    ]
+  },
+
+  // Physics Paper 1: Topics 18–21: Energy; Electricity; Particle model of matter; and Atomic structure
+  {
+    id: 'combined-science-phys-paper1-aqa',
+    name: 'Combined Science Physics Paper 1 (AQA)',
+    topics: [
       {
         id: 'p1-energy',
         name: 'Physics: Energy',
         questions: [
           {
             id: 'p1-q1',
-            question: 'State the conservation of energy principle.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Energy cannot be created or destroyed, only transferred from one store to another.',
-            markingCriteria: {
-              breakdown: ['Cannot be created or destroyed (1 mark)', 'Only transferred between stores (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
-          },
-          {
-            id: 'p1-q2',
-            question: 'Calculate the gravitational potential energy of a 2 kg object lifted 5 m above the ground. (g = 9.8 m/s²)',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'GPE = mgh = 2 × 9.8 × 5 = 98 J',
-            markingCriteria: {
-              breakdown: ['Correct formula GPE = mgh (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
-          },
-          {
-            id: 'p1-q3',
-            question: 'Calculate the kinetic energy of a 800 kg car travelling at 20 m/s.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'KE = ½ × mass × velocity² = ½ × 800 kg × (20 m/s)² = ½ × 800 × 400 = 160,000 J',
-            markingCriteria: {
-              breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
-          },
-          {
-            id: 'p1-q4',
-            question: 'What is meant by energy efficiency?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Energy efficiency is the ratio of useful energy output to total energy input.',
-            markingCriteria: {
-              breakdown: ['Ratio of useful energy output (1 mark)', 'To total energy input (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
-          },
-          {
-            id: 'p1-q5',
-            question: 'Calculate the efficiency of a motor that uses 2000 J of electrical energy to produce 1600 J of useful mechanical energy.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Efficiency = (useful energy output ÷ total energy input) × 100% = (1600 ÷ 2000) × 100% = 80%',
-            markingCriteria: {
-              breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer as percentage (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
-          },
-          {
-            id: 'p1-q6',
-            question: 'Name four energy stores.',
+            question: 'List eight energy stores.',
             marks: 4,
             difficulty: 'easy',
-            modelAnswer: 'Kinetic, gravitational potential, elastic potential, and chemical energy stores.',
+            modelAnswer: 'Kinetic, gravitational potential, elastic potential, chemical, thermal, magnetic, electrostatic, nuclear.',
             markingCriteria: {
-              breakdown: ['Kinetic (1 mark)', 'Gravitational potential (1 mark)', 'Elastic potential (1 mark)', 'Chemical (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
-          },
-          {
-            id: 'p1-q7',
-            question: 'What is power and what is its unit?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Power is the rate of energy transfer, measured in watts (W).',
-            markingCriteria: {
-              breakdown: ['Rate of energy transfer (1 mark)', 'Unit: watts/W (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
-          },
-          {
-            id: 'p1-q8',
-            question: 'Compare renewable and non-renewable energy resources.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Renewable resources can be replenished naturally and won\'t run out (examples: wind, solar). Non-renewable resources are finite and will eventually be used up (examples: coal, oil).',
-            markingCriteria: {
-              breakdown: ['Renewable can be replenished (1 mark)', 'Examples of renewable (1 mark)', 'Non-renewable are finite (1 mark)', 'Examples of non-renewable (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
-          },
-          {
-            id: 'p1-q9',
-            question: 'Calculate the power of a crane that lifts a 500 kg load through a height of 20 m in 10 seconds. (g = 9.8 m/s²)',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'Work done = mgh = 500 × 9.8 × 20 = 98,000 J. Power = work done ÷ time = 98,000 ÷ 10 = 9,800 W',
-            markingCriteria: {
-              breakdown: ['Work done calculation (2 marks)', 'Power formula (1 mark)', 'Correct final answer (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
-          },
-          {
-            id: 'p1-q10',
-            question: 'Explain why energy is described as being "dissipated" rather than "lost".',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Energy is "dissipated" because it spreads to the surroundings as heat, but is not destroyed - total energy is conserved according to the principle of conservation of energy.',
-            markingCriteria: {
-              breakdown: ['Energy spreads to surroundings (1 mark)', 'As heat (1 mark)', 'Not destroyed/energy conserved (1 mark)']
+              breakdown: ['Any four correct energy stores (4 marks)']
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Energy'
           }
@@ -15133,227 +13404,29 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'p2-q1',
-            question: 'State Ohm\'s law.',
-            marks: 2,
+            question: 'State the equation linking charge, current, and time.',
+            marks: 1,
             difficulty: 'easy',
-            modelAnswer: 'The current through a conductor is directly proportional to the potential difference across it, provided temperature remains constant.',
+            modelAnswer: 'Q = I × t (or charge = current × time)',
             markingCriteria: {
-              breakdown: ['Current proportional to potential difference (1 mark)', 'At constant temperature (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
-          },
-          {
-            id: 'p2-q2',
-            question: 'Calculate the current in a circuit with a voltage of 12V and resistance of 4Ω.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'I = V ÷ R = 12 ÷ 4 = 3 A',
-            markingCriteria: {
-              breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
-          },
-          {
-            id: 'p2-q3',
-            question: 'What is electric current?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Electric current is the flow of electric charge, measured in amperes (A).',
-            markingCriteria: {
-              breakdown: ['Flow of electric charge (1 mark)', 'Unit: amperes/A (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
-          },
-          {
-            id: 'p2-q4',
-            question: 'What is potential difference?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Potential difference is the energy transferred per unit charge, measured in volts (V).',
-            markingCriteria: {
-              breakdown: ['Energy transferred per unit charge (1 mark)', 'Unit: volts/V (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
-          },
-          {
-            id: 'p2-q5',
-            question: 'What is resistance?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Resistance is the opposition to current flow, measured in ohms (Ω).',
-            markingCriteria: {
-              breakdown: ['Opposition to current flow (1 mark)', 'Unit: ohms/Ω (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
-          },
-          {
-            id: 'p2-q6',
-            question: 'How do you calculate electrical power?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'P = I × V (power = current × voltage) or P = I²R or P = V²/R',
-            markingCriteria: {
-              breakdown: ['P = I × V (1 mark)', 'Alternative formula (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
-          },
-          {
-            id: 'p2-q7',
-            question: 'What happens to current in a series circuit?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Current is the same at all points in a series circuit.',
-            markingCriteria: {
-              breakdown: ['Current is the same (1 mark)', 'At all points (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
-          },
-          {
-            id: 'p2-q8',
-            question: 'What happens to voltage in a parallel circuit?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Voltage is the same across all branches in a parallel circuit.',
-            markingCriteria: {
-              breakdown: ['Voltage is the same (1 mark)', 'Across all branches (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
-          },
-          {
-            id: 'p2-q9',
-            question: 'Calculate the total resistance of two 6Ω resistors connected in series.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Total resistance = R₁ + R₂ = 6 + 6 = 12Ω',
-            markingCriteria: {
-              breakdown: ['Correct series formula (1 mark)', 'Correct answer: 12Ω (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
-          },
-          {
-            id: 'p2-q10',
-            question: 'Calculate the energy transferred when a 3A current flows through a 12V circuit for 5 minutes.',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'E = I × V × t = 3 × 12 × 300 = 10,800 J (or 10.8 kJ)',
-            markingCriteria: {
-              breakdown: ['Correct formula E = IVt (1 mark)', 'Convert time to seconds (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+              breakdown: ['Correct equation Q = I × t (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
           }
         ]
       },
       {
-        id: 'p3-particle-model-matter',
+        id: 'p3-particle-model',
         name: 'Physics: Particle Model of Matter',
         questions: [
           {
             id: 'p3-q1',
-            question: 'Describe the arrangement and movement of particles in solids, liquids, and gases.',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Solids: particles close together in regular arrangement, vibrate about fixed positions. Liquids: particles close together but irregular arrangement, move around each other. Gases: particles far apart and irregular, move rapidly in all directions.',
-            markingCriteria: {
-              breakdown: ['Solids: close, regular, vibrate (2 marks)', 'Liquids: close, irregular, move around (2 marks)', 'Gases: far apart, rapid movement (2 marks)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
-          },
-          {
-            id: 'p3-q2',
-            question: 'Explain what happens to particles when a solid melts.',
+            question: 'Describe the arrangement and movement of particles in a solid.',
             marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'When a solid melts, particles gain energy and vibrate more vigorously until they break free from their fixed positions and can move around each other.',
-            markingCriteria: {
-              breakdown: ['Particles gain energy (1 mark)', 'Vibrate more vigorously (1 mark)', 'Break free and move around each other (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
-          },
-          {
-            id: 'p3-q3',
-            question: 'What is density?',
-            marks: 2,
             difficulty: 'easy',
-            modelAnswer: 'Density is mass per unit volume, measured in kg/m³.',
+            modelAnswer: 'Particles are closely packed in a regular arrangement. They vibrate about fixed positions but do not move from place to place.',
             markingCriteria: {
-              breakdown: ['Mass per unit volume (1 mark)', 'Unit: kg/m³ (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
-          },
-          {
-            id: 'p3-q4',
-            question: 'Calculate the density of an object with mass 200g and volume 50cm³.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Density = mass ÷ volume = 200g ÷ 50cm³ = 4 g/cm³',
-            markingCriteria: {
-              breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
-          },
-          {
-            id: 'p3-q5',
-            question: 'What is pressure?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Pressure is force per unit area, measured in pascals (Pa).',
-            markingCriteria: {
-              breakdown: ['Force per unit area (1 mark)', 'Unit: pascals/Pa (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
-          },
-          {
-            id: 'p3-q6',
-            question: 'Why does pressure increase with depth in a liquid?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Pressure increases with depth because there is more liquid above pressing down, creating greater weight and therefore greater force per unit area.',
-            markingCriteria: {
-              breakdown: ['More liquid above (1 mark)', 'Greater weight pressing down (1 mark)', 'Greater force per unit area (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
-          },
-          {
-            id: 'p3-q7',
-            question: 'Explain what happens to gas pressure when temperature increases.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'When temperature increases, gas particles move faster and collide with container walls more frequently and with greater force, increasing pressure.',
-            markingCriteria: {
-              breakdown: ['Particles move faster (1 mark)', 'More frequent collisions (1 mark)', 'Greater force of collisions (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
-          },
-          {
-            id: 'p3-q8',
-            question: 'What is meant by absolute zero?',
-            marks: 2,
-            difficulty: 'hard',
-            modelAnswer: 'Absolute zero is the temperature at which particles have minimum kinetic energy, equal to -273°C or 0 Kelvin.',
-            markingCriteria: {
-              breakdown: ['Temperature of minimum kinetic energy (1 mark)', '-273°C or 0K (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
-          },
-          {
-            id: 'p3-q9',
-            question: 'Explain how atmospheric pressure is created.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Atmospheric pressure is created by the weight of air in the atmosphere pressing down on the Earth\'s surface due to gravitational attraction.',
-            markingCriteria: {
-              breakdown: ['Weight of air in atmosphere (1 mark)', 'Pressing down on Earth\'s surface (1 mark)', 'Due to gravitational attraction (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
-          },
-          {
-            id: 'p3-q10',
-            question: 'Calculate the pressure when a force of 500N acts on an area of 2.5m².',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Pressure = Force ÷ Area = 500N ÷ 2.5m² = 200 Pa',
-            markingCriteria: {
-              breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+              breakdown: ['Closely packed (1 mark)', 'Regular arrangement (1 mark)', 'Vibrate about fixed positions (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
           }
@@ -15365,116 +13438,25 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'p4-q1',
-            question: 'Describe the structure of an atom.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'An atom has a nucleus containing protons and neutrons, with electrons in shells around the nucleus. The nucleus is very small compared to the whole atom.',
-            markingCriteria: {
-              breakdown: ['Nucleus with protons and neutrons (1 mark)', 'Electrons in shells around nucleus (1 mark)', 'Nucleus very small compared to atom (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
-          },
-          {
-            id: 'p4-q2',
-            question: 'What is the relative charge and mass of protons, neutrons, and electrons?',
-            marks: 6,
-            difficulty: 'medium',
-            modelAnswer: 'Protons: charge +1, relative mass 1. Neutrons: charge 0, relative mass 1. Electrons: charge -1, relative mass 1/1836 (approximately 0).',
-            markingCriteria: {
-              breakdown: ['Proton charge +1, mass 1 (2 marks)', 'Neutron charge 0, mass 1 (2 marks)', 'Electron charge -1, mass ~0 (2 marks)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
-          },
-          {
-            id: 'p4-q3',
-            question: 'What is radioactive decay?',
+            question: 'What happens when an unstable nucleus undergoes radioactive decay?',
             marks: 2,
             difficulty: 'medium',
-            modelAnswer: 'Radioactive decay is the random breakdown of unstable atomic nuclei, emitting radiation.',
+            modelAnswer: 'The nucleus emits radiation (alpha, beta, or gamma) and transforms into a more stable nucleus.',
             markingCriteria: {
-              breakdown: ['Random breakdown of unstable nuclei (1 mark)', 'Emitting radiation (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
-          },
-          {
-            id: 'p4-q4',
-            question: 'Name the three types of nuclear radiation.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Alpha, beta, and gamma radiation.',
-            markingCriteria: {
-              breakdown: ['Alpha (1 mark)', 'Beta (1 mark)', 'Gamma (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
-          },
-          {
-            id: 'p4-q5',
-            question: 'Describe the properties of alpha radiation.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Alpha radiation consists of helium nuclei (2 protons, 2 neutrons), has low penetration (stopped by paper), and is highly ionizing.',
-            markingCriteria: {
-              breakdown: ['Helium nuclei/2 protons 2 neutrons (1 mark)', 'Low penetration/stopped by paper (1 mark)', 'Highly ionizing (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
-          },
-          {
-            id: 'p4-q6',
-            question: 'Describe the properties of beta radiation.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Beta radiation consists of fast-moving electrons, has moderate penetration (stopped by aluminum), and is moderately ionizing.',
-            markingCriteria: {
-              breakdown: ['Fast-moving electrons (1 mark)', 'Moderate penetration/stopped by aluminum (1 mark)', 'Moderately ionizing (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
-          },
-          {
-            id: 'p4-q7',
-            question: 'Describe the properties of gamma radiation.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Gamma radiation is electromagnetic waves, has high penetration (reduced by lead), and is weakly ionizing.',
-            markingCriteria: {
-              breakdown: ['Electromagnetic waves (1 mark)', 'High penetration/reduced by lead (1 mark)', 'Weakly ionizing (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
-          },
-          {
-            id: 'p4-q8',
-            question: 'What is half-life?',
-            marks: 2,
-            difficulty: 'hard',
-            modelAnswer: 'Half-life is the time taken for half the radioactive nuclei in a sample to decay.',
-            markingCriteria: {
-              breakdown: ['Time for half nuclei to decay (1 mark)', 'In a sample (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
-          },
-          {
-            id: 'p4-q9',
-            question: 'What is background radiation?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Background radiation is nuclear radiation that exists naturally in the environment from cosmic rays and radioactive materials.',
-            markingCriteria: {
-              breakdown: ['Nuclear radiation in environment (1 mark)', 'From cosmic rays and radioactive materials (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
-          },
-          {
-            id: 'p4-q10',
-            question: 'Give two medical uses of radiation.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Cancer treatment (radiotherapy) and medical imaging (X-rays).',
-            markingCriteria: {
-              breakdown: ['Cancer treatment/radiotherapy (1 mark)', 'Medical imaging/X-rays (1 mark)']
+              breakdown: ['Emits radiation (1 mark)', 'Becomes more stable (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
           }
         ]
-      },
+      }
+    ]
+  },
+
+  // Physics Paper 2: Topics 22–24: Forces; Waves; and Magnetism and electromagnetism
+  {
+    id: 'combined-science-phys-paper2-aqa',
+    name: 'Combined Science Physics Paper 2 (AQA)',
+    topics: [
       {
         id: 'p5-forces',
         name: 'Physics: Forces',
@@ -15484,108 +13466,9 @@ export const curriculum: Subject[] = [
             question: 'State Newton\'s First Law of Motion.',
             marks: 2,
             difficulty: 'easy',
-            modelAnswer: 'An object will remain at rest or continue moving at constant velocity unless acted upon by a resultant force.',
+            modelAnswer: 'An object at rest stays at rest and an object in motion stays in motion at constant velocity, unless acted upon by an unbalanced force.',
             markingCriteria: {
-              breakdown: ['Object at rest or constant velocity (1 mark)', 'Unless acted upon by resultant force (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
-          },
-          {
-            id: 'p5-q2',
-            question: 'State Newton\'s Second Law of Motion.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'The acceleration of an object is proportional to the resultant force and inversely proportional to its mass (F = ma).',
-            markingCriteria: {
-              breakdown: ['Acceleration proportional to force (1 mark)', 'Inversely proportional to mass/F=ma (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
-          },
-          {
-            id: 'p5-q3',
-            question: 'State Newton\'s Third Law of Motion.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'For every action force, there is an equal and opposite reaction force.',
-            markingCriteria: {
-              breakdown: ['Every action has reaction (1 mark)', 'Equal and opposite (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
-          },
-          {
-            id: 'p5-q4',
-            question: 'Calculate the force needed to accelerate a 10 kg object at 5 m/s².',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'F = ma = 10 kg × 5 m/s² = 50 N',
-            markingCriteria: {
-              breakdown: ['Correct formula F = ma (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
-          },
-          {
-            id: 'p5-q5',
-            question: 'What is weight and how is it calculated?',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Weight is the force of gravity acting on an object. Weight = mass × gravitational field strength (W = mg).',
-            markingCriteria: {
-              breakdown: ['Force of gravity on object (1 mark)', 'W = mg (1 mark)', 'Correct units mentioned (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
-          },
-          {
-            id: 'p5-q6',
-            question: 'What is the difference between mass and weight?',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Mass is the amount of matter in an object, measured in kg, and remains constant. Weight is the force of gravity on an object, measured in N, and varies with gravitational field strength.',
-            markingCriteria: {
-              breakdown: ['Mass = amount of matter, kg (1 mark)', 'Mass remains constant (1 mark)', 'Weight = force of gravity, N (1 mark)', 'Weight varies with gravity (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
-          },
-          {
-            id: 'p5-q7',
-            question: 'What is meant by terminal velocity?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Terminal velocity is the maximum velocity reached by a falling object when air resistance equals weight, so acceleration becomes zero.',
-            markingCriteria: {
-              breakdown: ['Maximum velocity of falling object (1 mark)', 'Air resistance equals weight (1 mark)', 'Acceleration becomes zero (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
-          },
-          {
-            id: 'p5-q8',
-            question: 'What is momentum and how is it calculated?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'Momentum is the quantity of motion of an object, calculated as momentum = mass × velocity (p = mv).',
-            markingCriteria: {
-              breakdown: ['Quantity of motion (1 mark)', 'p = mv (1 mark)', 'Correct units kg⋅m/s (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
-          },
-          {
-            id: 'p5-q9',
-            question: 'State the law of conservation of momentum.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'In a closed system, the total momentum before a collision equals the total momentum after the collision.',
-            markingCriteria: {
-              breakdown: ['In closed system (1 mark)', 'Total momentum before = total momentum after (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
-          },
-          {
-            id: 'p5-q10',
-            question: 'Calculate the momentum of a 1200 kg car travelling at 15 m/s.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Momentum = mass × velocity = 1200 kg × 15 m/s = 18,000 kg⋅m/s',
-            markingCriteria: {
-              breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+              breakdown: ['Object at rest stays at rest (1 mark)', 'Object in motion stays in motion unless acted upon by unbalanced force (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 2 - Forces'
           }
@@ -15597,227 +13480,29 @@ export const curriculum: Subject[] = [
         questions: [
           {
             id: 'p6-q1',
-            question: 'Define amplitude, frequency, and wavelength.',
-            marks: 3,
+            question: 'Define the amplitude of a wave.',
+            marks: 1,
             difficulty: 'easy',
-            modelAnswer: 'Amplitude is the maximum displacement from the rest position. Frequency is the number of waves passing a point per second. Wavelength is the distance between two consecutive identical points on a wave.',
+            modelAnswer: 'The maximum displacement of a point on the wave from its rest position.',
             markingCriteria: {
-              breakdown: ['Amplitude definition (1 mark)', 'Frequency definition (1 mark)', 'Wavelength definition (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
-          },
-          {
-            id: 'p6-q2',
-            question: 'What is the wave equation?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Wave speed = frequency × wavelength (v = f × λ)',
-            markingCriteria: {
-              breakdown: ['v = f × λ (1 mark)', 'Correct identification of variables (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
-          },
-          {
-            id: 'p6-q3',
-            question: 'What is the difference between transverse and longitudinal waves?',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Transverse waves vibrate perpendicular to the direction of energy transfer (e.g., light waves). Longitudinal waves vibrate parallel to the direction of energy transfer (e.g., sound waves).',
-            markingCriteria: {
-              breakdown: ['Transverse: vibrate perpendicular (1 mark)', 'Example of transverse wave (1 mark)', 'Longitudinal: vibrate parallel (1 mark)', 'Example of longitudinal wave (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
-          },
-          {
-            id: 'p6-q4',
-            question: 'Calculate the wave speed of a wave with frequency 50 Hz and wavelength 0.4 m.',
-            marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Wave speed = frequency × wavelength = 50 Hz × 0.4 m = 20 m/s',
-            markingCriteria: {
-              breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
-          },
-          {
-            id: 'p6-q5',
-            question: 'What is reflection?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Reflection occurs when waves bounce off a surface and change direction.',
-            markingCriteria: {
-              breakdown: ['Waves bounce off surface (1 mark)', 'Change direction (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
-          },
-          {
-            id: 'p6-q6',
-            question: 'What is refraction?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Refraction occurs when waves change speed and direction as they pass from one medium to another.',
-            markingCriteria: {
-              breakdown: ['Waves change speed and direction (1 mark)', 'Passing between different media (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
-          },
-          {
-            id: 'p6-q7',
-            question: 'What is the electromagnetic spectrum?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'The electromagnetic spectrum is the complete range of electromagnetic waves, from radio waves to gamma rays, arranged by frequency and wavelength.',
-            markingCriteria: {
-              breakdown: ['Complete range of EM waves (1 mark)', 'From radio to gamma rays (1 mark)', 'Arranged by frequency/wavelength (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
-          },
-          {
-            id: 'p6-q8',
-            question: 'List the electromagnetic waves in order of increasing frequency.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Radio waves, microwaves, infrared, visible light, ultraviolet, X-rays, gamma rays.',
-            markingCriteria: {
-              breakdown: ['Radio, microwaves, infrared (1 mark)', 'Visible light (1 mark)', 'Ultraviolet, X-rays (1 mark)', 'Gamma rays (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
-          },
-          {
-            id: 'p6-q9',
-            question: 'What happens to wave speed when frequency increases but wavelength decreases?',
-            marks: 2,
-            difficulty: 'hard',
-            modelAnswer: 'Wave speed remains constant in the same medium, as v = f × λ.',
-            markingCriteria: {
-              breakdown: ['Wave speed remains constant (1 mark)', 'In same medium (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
-          },
-          {
-            id: 'p6-q10',
-            question: 'Calculate the frequency of a wave with speed 340 m/s and wavelength 0.68 m.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'f = v ÷ λ = 340 ÷ 0.68 = 500 Hz',
-            markingCriteria: {
-              breakdown: ['Correct rearranged formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+              breakdown: ['Maximum displacement from rest position (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 2 - Waves'
           }
         ]
       },
       {
-        id: 'p7-magnetism-electromagnetism',
+        id: 'p7-magnetism',
         name: 'Physics: Magnetism and Electromagnetism',
         questions: [
           {
             id: 'p7-q1',
-            question: 'Describe the difference between permanent and induced magnets.',
+            question: 'Explain the difference between permanent and induced magnets.',
             marks: 3,
-            difficulty: 'easy',
-            modelAnswer: 'Permanent magnets produce their own magnetic field and keep their magnetism. Induced magnets become magnetic only when placed in a magnetic field and lose their magnetism when removed.',
+            difficulty: 'medium',
+            modelAnswer: 'Permanent magnets produce their own magnetic field and keep their magnetism. Induced magnets only become magnetic when placed in a magnetic field.',
             markingCriteria: {
               breakdown: ['Permanent magnets produce own field (1 mark)', 'Keep their magnetism (1 mark)', 'Induced magnets only magnetic in field (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
-          },
-          {
-            id: 'p7-q2',
-            question: 'What is a magnetic field?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'A magnetic field is the region around a magnet where magnetic forces can be detected.',
-            markingCriteria: {
-              breakdown: ['Region around a magnet (1 mark)', 'Where magnetic forces detected (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
-          },
-          {
-            id: 'p7-q3',
-            question: 'How can you show the shape of a magnetic field?',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Use iron filings or plot with a compass to show magnetic field lines.',
-            markingCriteria: {
-              breakdown: ['Iron filings (1 mark)', 'Compass plotting (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
-          },
-          {
-            id: 'p7-q4',
-            question: 'What is the motor effect?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'The motor effect is the force experienced by a current-carrying conductor in a magnetic field.',
-            markingCriteria: {
-              breakdown: ['Force on current-carrying conductor (1 mark)', 'In magnetic field (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
-          },
-          {
-            id: 'p7-q5',
-            question: 'What factors affect the strength of the motor effect?',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: 'The strength of current, strength of magnetic field, and length of conductor in the field.',
-            markingCriteria: {
-              breakdown: ['Strength of current (1 mark)', 'Strength of magnetic field (1 mark)', 'Length of conductor (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
-          },
-          {
-            id: 'p7-q6',
-            question: 'What is electromagnetic induction?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'Electromagnetic induction is the generation of an electric current when a conductor moves through a magnetic field.',
-            markingCriteria: {
-              breakdown: ['Generation of electric current (1 mark)', 'Conductor moves through magnetic field (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
-          },
-          {
-            id: 'p7-q7',
-            question: 'How does a generator work?',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'A generator uses electromagnetic induction. A coil rotates in a magnetic field, causing the magnetic flux through the coil to change, which induces an alternating current.',
-            markingCriteria: {
-              breakdown: ['Uses electromagnetic induction (1 mark)', 'Coil rotates in magnetic field (1 mark)', 'Magnetic flux changes (1 mark)', 'Induces alternating current (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
-          },
-          {
-            id: 'p7-q8',
-            question: 'How does a transformer work?',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'A transformer has two coils around an iron core. Alternating current in the primary coil creates a changing magnetic field, which induces a voltage in the secondary coil.',
-            markingCriteria: {
-              breakdown: ['Two coils around iron core (1 mark)', 'AC in primary coil (1 mark)', 'Creates changing magnetic field (1 mark)', 'Induces voltage in secondary (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
-          },
-          {
-            id: 'p7-q9',
-            question: 'What is the difference between step-up and step-down transformers?',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Step-up transformers increase voltage (more turns on secondary than primary). Step-down transformers decrease voltage (fewer turns on secondary than primary).',
-            markingCriteria: {
-              breakdown: ['Step-up increases voltage (1 mark)', 'More secondary turns (1 mark)', 'Step-down decreases voltage (1 mark)', 'Fewer secondary turns (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
-          },
-          {
-            id: 'p7-q10',
-            question: 'What is the national grid and why do we use high voltages for transmission?',
-            marks: 4,
-            difficulty: 'hard',
-            modelAnswer: 'The national grid is the network that distributes electricity across the country. High voltages are used because they reduce current for the same power, which reduces energy losses in transmission lines.',
-            markingCriteria: {
-              breakdown: ['Network distributing electricity (1 mark)', 'Across the country (1 mark)', 'High voltage reduces current (1 mark)', 'Reduces energy losses (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
           }
