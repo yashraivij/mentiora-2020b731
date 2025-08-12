@@ -15257,6 +15257,105 @@ export const curriculum: Subject[] = [
               breakdown: ['Solids: close, regular, vibrate (2 marks)', 'Liquids: close, irregular, move around (2 marks)', 'Gases: far apart, rapid movement (2 marks)']
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+          },
+          {
+            id: 'p3-q2',
+            question: 'Explain what happens to particles when a solid melts.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'When a solid melts, particles gain energy and vibrate more vigorously until they break free from their fixed positions and can move around each other.',
+            markingCriteria: {
+              breakdown: ['Particles gain energy (1 mark)', 'Vibrate more vigorously (1 mark)', 'Break free and move around each other (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+          },
+          {
+            id: 'p3-q3',
+            question: 'What is density?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Density is mass per unit volume, measured in kg/m³.',
+            markingCriteria: {
+              breakdown: ['Mass per unit volume (1 mark)', 'Unit: kg/m³ (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+          },
+          {
+            id: 'p3-q4',
+            question: 'Calculate the density of an object with mass 200g and volume 50cm³.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Density = mass ÷ volume = 200g ÷ 50cm³ = 4 g/cm³',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+          },
+          {
+            id: 'p3-q5',
+            question: 'What is pressure?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Pressure is force per unit area, measured in pascals (Pa).',
+            markingCriteria: {
+              breakdown: ['Force per unit area (1 mark)', 'Unit: pascals/Pa (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+          },
+          {
+            id: 'p3-q6',
+            question: 'Why does pressure increase with depth in a liquid?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Pressure increases with depth because there is more liquid above pressing down, creating greater weight and therefore greater force per unit area.',
+            markingCriteria: {
+              breakdown: ['More liquid above (1 mark)', 'Greater weight pressing down (1 mark)', 'Greater force per unit area (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+          },
+          {
+            id: 'p3-q7',
+            question: 'Explain what happens to gas pressure when temperature increases.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'When temperature increases, gas particles move faster and collide with container walls more frequently and with greater force, increasing pressure.',
+            markingCriteria: {
+              breakdown: ['Particles move faster (1 mark)', 'More frequent collisions (1 mark)', 'Greater force of collisions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+          },
+          {
+            id: 'p3-q8',
+            question: 'What is meant by absolute zero?',
+            marks: 2,
+            difficulty: 'hard',
+            modelAnswer: 'Absolute zero is the temperature at which particles have minimum kinetic energy, equal to -273°C or 0 Kelvin.',
+            markingCriteria: {
+              breakdown: ['Temperature of minimum kinetic energy (1 mark)', '-273°C or 0K (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+          },
+          {
+            id: 'p3-q9',
+            question: 'Explain how atmospheric pressure is created.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Atmospheric pressure is created by the weight of air in the atmosphere pressing down on the Earth\'s surface due to gravitational attraction.',
+            markingCriteria: {
+              breakdown: ['Weight of air in atmosphere (1 mark)', 'Pressing down on Earth\'s surface (1 mark)', 'Due to gravitational attraction (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+          },
+          {
+            id: 'p3-q10',
+            question: 'Calculate the pressure when a force of 500N acts on an area of 2.5m².',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Pressure = Force ÷ Area = 500N ÷ 2.5m² = 200 Pa',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
           }
         ]
       },
@@ -15272,6 +15371,105 @@ export const curriculum: Subject[] = [
             modelAnswer: 'An atom has a nucleus containing protons and neutrons, with electrons in shells around the nucleus. The nucleus is very small compared to the whole atom.',
             markingCriteria: {
               breakdown: ['Nucleus with protons and neutrons (1 mark)', 'Electrons in shells around nucleus (1 mark)', 'Nucleus very small compared to atom (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+          },
+          {
+            id: 'p4-q2',
+            question: 'What is the relative charge and mass of protons, neutrons, and electrons?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Protons: charge +1, relative mass 1. Neutrons: charge 0, relative mass 1. Electrons: charge -1, relative mass 1/1836 (approximately 0).',
+            markingCriteria: {
+              breakdown: ['Proton charge +1, mass 1 (2 marks)', 'Neutron charge 0, mass 1 (2 marks)', 'Electron charge -1, mass ~0 (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+          },
+          {
+            id: 'p4-q3',
+            question: 'What is radioactive decay?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Radioactive decay is the random breakdown of unstable atomic nuclei, emitting radiation.',
+            markingCriteria: {
+              breakdown: ['Random breakdown of unstable nuclei (1 mark)', 'Emitting radiation (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+          },
+          {
+            id: 'p4-q4',
+            question: 'Name the three types of nuclear radiation.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Alpha, beta, and gamma radiation.',
+            markingCriteria: {
+              breakdown: ['Alpha (1 mark)', 'Beta (1 mark)', 'Gamma (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+          },
+          {
+            id: 'p4-q5',
+            question: 'Describe the properties of alpha radiation.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Alpha radiation consists of helium nuclei (2 protons, 2 neutrons), has low penetration (stopped by paper), and is highly ionizing.',
+            markingCriteria: {
+              breakdown: ['Helium nuclei/2 protons 2 neutrons (1 mark)', 'Low penetration/stopped by paper (1 mark)', 'Highly ionizing (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+          },
+          {
+            id: 'p4-q6',
+            question: 'Describe the properties of beta radiation.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Beta radiation consists of fast-moving electrons, has moderate penetration (stopped by aluminum), and is moderately ionizing.',
+            markingCriteria: {
+              breakdown: ['Fast-moving electrons (1 mark)', 'Moderate penetration/stopped by aluminum (1 mark)', 'Moderately ionizing (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+          },
+          {
+            id: 'p4-q7',
+            question: 'Describe the properties of gamma radiation.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Gamma radiation is electromagnetic waves, has high penetration (reduced by lead), and is weakly ionizing.',
+            markingCriteria: {
+              breakdown: ['Electromagnetic waves (1 mark)', 'High penetration/reduced by lead (1 mark)', 'Weakly ionizing (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+          },
+          {
+            id: 'p4-q8',
+            question: 'What is half-life?',
+            marks: 2,
+            difficulty: 'hard',
+            modelAnswer: 'Half-life is the time taken for half the radioactive nuclei in a sample to decay.',
+            markingCriteria: {
+              breakdown: ['Time for half nuclei to decay (1 mark)', 'In a sample (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+          },
+          {
+            id: 'p4-q9',
+            question: 'What is background radiation?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Background radiation is nuclear radiation that exists naturally in the environment from cosmic rays and radioactive materials.',
+            markingCriteria: {
+              breakdown: ['Nuclear radiation in environment (1 mark)', 'From cosmic rays and radioactive materials (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+          },
+          {
+            id: 'p4-q10',
+            question: 'Give two medical uses of radiation.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Cancer treatment (radiotherapy) and medical imaging (X-rays).',
+            markingCriteria: {
+              breakdown: ['Cancer treatment/radiotherapy (1 mark)', 'Medical imaging/X-rays (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
           }
@@ -15291,6 +15489,105 @@ export const curriculum: Subject[] = [
               breakdown: ['Object at rest or constant velocity (1 mark)', 'Unless acted upon by resultant force (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+          },
+          {
+            id: 'p5-q2',
+            question: 'State Newton\'s Second Law of Motion.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The acceleration of an object is proportional to the resultant force and inversely proportional to its mass (F = ma).',
+            markingCriteria: {
+              breakdown: ['Acceleration proportional to force (1 mark)', 'Inversely proportional to mass/F=ma (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+          },
+          {
+            id: 'p5-q3',
+            question: 'State Newton\'s Third Law of Motion.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'For every action force, there is an equal and opposite reaction force.',
+            markingCriteria: {
+              breakdown: ['Every action has reaction (1 mark)', 'Equal and opposite (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+          },
+          {
+            id: 'p5-q4',
+            question: 'Calculate the force needed to accelerate a 10 kg object at 5 m/s².',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'F = ma = 10 kg × 5 m/s² = 50 N',
+            markingCriteria: {
+              breakdown: ['Correct formula F = ma (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+          },
+          {
+            id: 'p5-q5',
+            question: 'What is weight and how is it calculated?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Weight is the force of gravity acting on an object. Weight = mass × gravitational field strength (W = mg).',
+            markingCriteria: {
+              breakdown: ['Force of gravity on object (1 mark)', 'W = mg (1 mark)', 'Correct units mentioned (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+          },
+          {
+            id: 'p5-q6',
+            question: 'What is the difference between mass and weight?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Mass is the amount of matter in an object, measured in kg, and remains constant. Weight is the force of gravity on an object, measured in N, and varies with gravitational field strength.',
+            markingCriteria: {
+              breakdown: ['Mass = amount of matter, kg (1 mark)', 'Mass remains constant (1 mark)', 'Weight = force of gravity, N (1 mark)', 'Weight varies with gravity (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+          },
+          {
+            id: 'p5-q7',
+            question: 'What is meant by terminal velocity?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Terminal velocity is the maximum velocity reached by a falling object when air resistance equals weight, so acceleration becomes zero.',
+            markingCriteria: {
+              breakdown: ['Maximum velocity of falling object (1 mark)', 'Air resistance equals weight (1 mark)', 'Acceleration becomes zero (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+          },
+          {
+            id: 'p5-q8',
+            question: 'What is momentum and how is it calculated?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Momentum is the quantity of motion of an object, calculated as momentum = mass × velocity (p = mv).',
+            markingCriteria: {
+              breakdown: ['Quantity of motion (1 mark)', 'p = mv (1 mark)', 'Correct units kg⋅m/s (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+          },
+          {
+            id: 'p5-q9',
+            question: 'State the law of conservation of momentum.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'In a closed system, the total momentum before a collision equals the total momentum after the collision.',
+            markingCriteria: {
+              breakdown: ['In closed system (1 mark)', 'Total momentum before = total momentum after (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+          },
+          {
+            id: 'p5-q10',
+            question: 'Calculate the momentum of a 1200 kg car travelling at 15 m/s.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Momentum = mass × velocity = 1200 kg × 15 m/s = 18,000 kg⋅m/s',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
           }
         ]
       },
@@ -15308,6 +15605,105 @@ export const curriculum: Subject[] = [
               breakdown: ['Amplitude definition (1 mark)', 'Frequency definition (1 mark)', 'Wavelength definition (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+          },
+          {
+            id: 'p6-q2',
+            question: 'What is the wave equation?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Wave speed = frequency × wavelength (v = f × λ)',
+            markingCriteria: {
+              breakdown: ['v = f × λ (1 mark)', 'Correct identification of variables (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+          },
+          {
+            id: 'p6-q3',
+            question: 'What is the difference between transverse and longitudinal waves?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Transverse waves vibrate perpendicular to the direction of energy transfer (e.g., light waves). Longitudinal waves vibrate parallel to the direction of energy transfer (e.g., sound waves).',
+            markingCriteria: {
+              breakdown: ['Transverse: vibrate perpendicular (1 mark)', 'Example of transverse wave (1 mark)', 'Longitudinal: vibrate parallel (1 mark)', 'Example of longitudinal wave (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+          },
+          {
+            id: 'p6-q4',
+            question: 'Calculate the wave speed of a wave with frequency 50 Hz and wavelength 0.4 m.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Wave speed = frequency × wavelength = 50 Hz × 0.4 m = 20 m/s',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+          },
+          {
+            id: 'p6-q5',
+            question: 'What is reflection?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Reflection occurs when waves bounce off a surface and change direction.',
+            markingCriteria: {
+              breakdown: ['Waves bounce off surface (1 mark)', 'Change direction (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+          },
+          {
+            id: 'p6-q6',
+            question: 'What is refraction?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Refraction occurs when waves change speed and direction as they pass from one medium to another.',
+            markingCriteria: {
+              breakdown: ['Waves change speed and direction (1 mark)', 'Passing between different media (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+          },
+          {
+            id: 'p6-q7',
+            question: 'What is the electromagnetic spectrum?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'The electromagnetic spectrum is the complete range of electromagnetic waves, from radio waves to gamma rays, arranged by frequency and wavelength.',
+            markingCriteria: {
+              breakdown: ['Complete range of EM waves (1 mark)', 'From radio to gamma rays (1 mark)', 'Arranged by frequency/wavelength (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+          },
+          {
+            id: 'p6-q8',
+            question: 'List the electromagnetic waves in order of increasing frequency.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Radio waves, microwaves, infrared, visible light, ultraviolet, X-rays, gamma rays.',
+            markingCriteria: {
+              breakdown: ['Radio, microwaves, infrared (1 mark)', 'Visible light (1 mark)', 'Ultraviolet, X-rays (1 mark)', 'Gamma rays (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+          },
+          {
+            id: 'p6-q9',
+            question: 'What happens to wave speed when frequency increases but wavelength decreases?',
+            marks: 2,
+            difficulty: 'hard',
+            modelAnswer: 'Wave speed remains constant in the same medium, as v = f × λ.',
+            markingCriteria: {
+              breakdown: ['Wave speed remains constant (1 mark)', 'In same medium (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+          },
+          {
+            id: 'p6-q10',
+            question: 'Calculate the frequency of a wave with speed 340 m/s and wavelength 0.68 m.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'f = v ÷ λ = 340 ÷ 0.68 = 500 Hz',
+            markingCriteria: {
+              breakdown: ['Correct rearranged formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
           }
         ]
       },
@@ -15323,6 +15719,105 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Permanent magnets produce their own magnetic field and keep their magnetism. Induced magnets become magnetic only when placed in a magnetic field and lose their magnetism when removed.',
             markingCriteria: {
               breakdown: ['Permanent magnets produce own field (1 mark)', 'Keep their magnetism (1 mark)', 'Induced magnets only magnetic in field (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+          },
+          {
+            id: 'p7-q2',
+            question: 'What is a magnetic field?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A magnetic field is the region around a magnet where magnetic forces can be detected.',
+            markingCriteria: {
+              breakdown: ['Region around a magnet (1 mark)', 'Where magnetic forces detected (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+          },
+          {
+            id: 'p7-q3',
+            question: 'How can you show the shape of a magnetic field?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Use iron filings or plot with a compass to show magnetic field lines.',
+            markingCriteria: {
+              breakdown: ['Iron filings (1 mark)', 'Compass plotting (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+          },
+          {
+            id: 'p7-q4',
+            question: 'What is the motor effect?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'The motor effect is the force experienced by a current-carrying conductor in a magnetic field.',
+            markingCriteria: {
+              breakdown: ['Force on current-carrying conductor (1 mark)', 'In magnetic field (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+          },
+          {
+            id: 'p7-q5',
+            question: 'What factors affect the strength of the motor effect?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'The strength of current, strength of magnetic field, and length of conductor in the field.',
+            markingCriteria: {
+              breakdown: ['Strength of current (1 mark)', 'Strength of magnetic field (1 mark)', 'Length of conductor (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+          },
+          {
+            id: 'p7-q6',
+            question: 'What is electromagnetic induction?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Electromagnetic induction is the generation of an electric current when a conductor moves through a magnetic field.',
+            markingCriteria: {
+              breakdown: ['Generation of electric current (1 mark)', 'Conductor moves through magnetic field (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+          },
+          {
+            id: 'p7-q7',
+            question: 'How does a generator work?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'A generator uses electromagnetic induction. A coil rotates in a magnetic field, causing the magnetic flux through the coil to change, which induces an alternating current.',
+            markingCriteria: {
+              breakdown: ['Uses electromagnetic induction (1 mark)', 'Coil rotates in magnetic field (1 mark)', 'Magnetic flux changes (1 mark)', 'Induces alternating current (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+          },
+          {
+            id: 'p7-q8',
+            question: 'How does a transformer work?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'A transformer has two coils around an iron core. Alternating current in the primary coil creates a changing magnetic field, which induces a voltage in the secondary coil.',
+            markingCriteria: {
+              breakdown: ['Two coils around iron core (1 mark)', 'AC in primary coil (1 mark)', 'Creates changing magnetic field (1 mark)', 'Induces voltage in secondary (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+          },
+          {
+            id: 'p7-q9',
+            question: 'What is the difference between step-up and step-down transformers?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Step-up transformers increase voltage (more turns on secondary than primary). Step-down transformers decrease voltage (fewer turns on secondary than primary).',
+            markingCriteria: {
+              breakdown: ['Step-up increases voltage (1 mark)', 'More secondary turns (1 mark)', 'Step-down decreases voltage (1 mark)', 'Fewer secondary turns (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+          },
+          {
+            id: 'p7-q10',
+            question: 'What is the national grid and why do we use high voltages for transmission?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'The national grid is the network that distributes electricity across the country. High voltages are used because they reduce current for the same power, which reduces energy losses in transmission lines.',
+            markingCriteria: {
+              breakdown: ['Network distributing electricity (1 mark)', 'Across the country (1 mark)', 'High voltage reduces current (1 mark)', 'Reduces energy losses (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
           }
