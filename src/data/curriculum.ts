@@ -14561,6 +14561,105 @@ export const curriculum: Subject[] = [
               breakdown: ['Four factors correct (4 marks)']
             },
             specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q2',
+            question: 'How does temperature affect reaction rate?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Higher temperature increases rate; particles move faster.',
+            markingCriteria: {
+              breakdown: ['Higher temperature increases rate (1 mark)', 'Particles move faster (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q3',
+            question: 'How does concentration affect reaction rate?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Higher concentration increases rate; more particles to collide.',
+            markingCriteria: {
+              breakdown: ['Higher concentration increases rate (1 mark)', 'More particles to collide (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q4',
+            question: 'How does surface area affect reaction rate?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Larger surface area increases rate; more area for collisions.',
+            markingCriteria: {
+              breakdown: ['Larger surface area increases rate (1 mark)', 'More area for collisions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q5',
+            question: 'How does a catalyst affect reaction rate?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Increases rate; lowers activation energy.',
+            markingCriteria: {
+              breakdown: ['Increases rate (1 mark)', 'Lowers activation energy (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q6',
+            question: 'What is collision theory?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Particles must collide; with enough energy; to react.',
+            markingCriteria: {
+              breakdown: ['Particles must collide (1 mark)', 'With enough energy (1 mark)', 'To react (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q7',
+            question: 'What is a reversible reaction?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Reaction that can go both ways; products can form reactants.',
+            markingCriteria: {
+              breakdown: ['Goes both ways (1 mark)', 'Products form reactants (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q8',
+            question: 'What is equilibrium?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Forward and backward rates equal; concentrations stay constant.',
+            markingCriteria: {
+              breakdown: ['Forward and backward rates equal (1 mark)', 'Concentrations constant (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q9',
+            question: 'How can you measure reaction rate?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Measure gas produced; measure mass lost; measure color change.',
+            markingCriteria: {
+              breakdown: ['Gas produced (1 mark)', 'Mass lost (1 mark)', 'Color change (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q10',
+            question: 'What happens to equilibrium if you increase temperature?',
+            marks: 2,
+            difficulty: 'hard',
+            modelAnswer: 'Equilibrium shifts; in endothermic direction.',
+            markingCriteria: {
+              breakdown: ['Equilibrium shifts (1 mark)', 'Endothermic direction (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
           }
         ]
       },
@@ -14578,6 +14677,105 @@ export const curriculum: Subject[] = [
               breakdown: ['Contains only hydrogen and carbon (2 marks)']
             },
             specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q2',
+            question: 'What is crude oil?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Mixture of hydrocarbons; formed from ancient organisms.',
+            markingCriteria: {
+              breakdown: ['Mixture of hydrocarbons (1 mark)', 'From ancient organisms (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q3',
+            question: 'What is fractional distillation?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Separating crude oil; by boiling points.',
+            markingCriteria: {
+              breakdown: ['Separating crude oil (1 mark)', 'By boiling points (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q4',
+            question: 'What is an alkane?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Saturated hydrocarbon; single bonds only.',
+            markingCriteria: {
+              breakdown: ['Saturated hydrocarbon (1 mark)', 'Single bonds only (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q5',
+            question: 'What is the general formula for alkanes?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'CₙH₂ₙ₊₂',
+            markingCriteria: {
+              breakdown: ['CₙH₂ₙ₊₂ (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q6',
+            question: 'What is combustion?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Burning in oxygen; releases energy.',
+            markingCriteria: {
+              breakdown: ['Burning in oxygen (1 mark)', 'Releases energy (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q7',
+            question: 'What are the products of complete combustion?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Carbon dioxide and water.',
+            markingCriteria: {
+              breakdown: ['Carbon dioxide (1 mark)', 'Water (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q8',
+            question: 'What causes incomplete combustion?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Limited oxygen supply; produces carbon monoxide.',
+            markingCriteria: {
+              breakdown: ['Limited oxygen (1 mark)', 'Carbon monoxide (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q9',
+            question: 'What is cracking?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Breaking long hydrocarbons; into shorter ones.',
+            markingCriteria: {
+              breakdown: ['Breaking long hydrocarbons (1 mark)', 'Into shorter ones (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q10',
+            question: 'Why is cracking useful?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Produces more useful fuels; like petrol and diesel.',
+            markingCriteria: {
+              breakdown: ['More useful fuels (1 mark)', 'Petrol and diesel (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
           }
         ]
       },
@@ -14593,6 +14791,105 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Contains only one compound or element; has fixed melting and boiling points.',
             markingCriteria: {
               breakdown: ['One compound/element (1 mark)', 'Fixed melting/boiling points (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q2',
+            question: 'What is a mixture?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Contains two or more substances; not chemically combined.',
+            markingCriteria: {
+              breakdown: ['Two or more substances (1 mark)', 'Not chemically combined (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q3',
+            question: 'How do you test for hydrogen gas?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Burning splint; produces squeaky pop.',
+            markingCriteria: {
+              breakdown: ['Burning splint (1 mark)', 'Squeaky pop (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q4',
+            question: 'How do you test for oxygen gas?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Glowing splint; relights.',
+            markingCriteria: {
+              breakdown: ['Glowing splint (1 mark)', 'Relights (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q5',
+            question: 'How do you test for carbon dioxide?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Limewater; turns milky/cloudy.',
+            markingCriteria: {
+              breakdown: ['Limewater (1 mark)', 'Turns milky (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q6',
+            question: 'How do you test for chlorine gas?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Damp litmus paper; turns white/bleaches.',
+            markingCriteria: {
+              breakdown: ['Damp litmus paper (1 mark)', 'Turns white/bleaches (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q7',
+            question: 'What is chromatography?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Technique to separate mixtures; based on solubility.',
+            markingCriteria: {
+              breakdown: ['Separates mixtures (1 mark)', 'Based on solubility (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q8',
+            question: 'What is an Rf value?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Distance moved by substance ÷ distance moved by solvent.',
+            markingCriteria: {
+              breakdown: ['Distance by substance (1 mark)', 'Divided by solvent distance (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q9',
+            question: 'How do you test for metal ions using flame tests?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Put sample in flame; observe color produced.',
+            markingCriteria: {
+              breakdown: ['Put in flame (1 mark)', 'Observe color (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q10',
+            question: 'What color flame does sodium produce?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Yellow/orange flame.',
+            markingCriteria: {
+              breakdown: ['Yellow/orange (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
           }
@@ -14614,6 +14911,105 @@ export const curriculum: Subject[] = [
               breakdown: ['One mark for each correct energy store (8 marks)']
             },
             specReference: 'AQA Combined Science Physics - Energy'
+          },
+          {
+            id: 'p1-q2',
+            question: 'What is kinetic energy?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Energy of moving objects; depends on mass and speed.',
+            markingCriteria: {
+              breakdown: ['Energy of movement (1 mark)', 'Depends on mass and speed (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Energy'
+          },
+          {
+            id: 'p1-q3',
+            question: 'What is gravitational potential energy?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Energy stored due to position; in gravitational field.',
+            markingCriteria: {
+              breakdown: ['Energy due to position (1 mark)', 'In gravitational field (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Energy'
+          },
+          {
+            id: 'p1-q4',
+            question: 'Write the equation for kinetic energy.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'KE = ½mv²',
+            markingCriteria: {
+              breakdown: ['KE = ½mv² (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Energy'
+          },
+          {
+            id: 'p1-q5',
+            question: 'Write the equation for gravitational potential energy.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'GPE = mgh',
+            markingCriteria: {
+              breakdown: ['GPE = mgh (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Energy'
+          },
+          {
+            id: 'p1-q6',
+            question: 'What is the principle of conservation of energy?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Energy cannot be created or destroyed; only transferred.',
+            markingCriteria: {
+              breakdown: ['Cannot be created or destroyed (1 mark)', 'Only transferred (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Energy'
+          },
+          {
+            id: 'p1-q7',
+            question: 'What is power?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Rate of energy transfer; measured in watts.',
+            markingCriteria: {
+              breakdown: ['Rate of energy transfer (1 mark)', 'Measured in watts (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Energy'
+          },
+          {
+            id: 'p1-q8',
+            question: 'Write the equation for power.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'P = E/t',
+            markingCriteria: {
+              breakdown: ['P = E/t (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Energy'
+          },
+          {
+            id: 'p1-q9',
+            question: 'What is efficiency?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Useful energy output ÷ total energy input; as percentage.',
+            markingCriteria: {
+              breakdown: ['Useful output ÷ total input (1 mark)', 'As percentage (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Energy'
+          },
+          {
+            id: 'p1-q10',
+            question: 'Why can efficiency never be 100%?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Some energy always wasted; as heat or sound.',
+            markingCriteria: {
+              breakdown: ['Some energy wasted (1 mark)', 'Heat or sound (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Energy'
           }
         ]
       },
@@ -14629,6 +15025,105 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Current is directly proportional to voltage; when temperature is constant.',
             markingCriteria: {
               breakdown: ['Directly proportional (1 mark)', 'Constant temperature (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Electricity'
+          },
+          {
+            id: 'p2-q2',
+            question: 'Write the equation for Ohm\'s law.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'V = IR',
+            markingCriteria: {
+              breakdown: ['V = IR (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Electricity'
+          },
+          {
+            id: 'p2-q3',
+            question: 'What is current?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Flow of electric charge; measured in amperes.',
+            markingCriteria: {
+              breakdown: ['Flow of charge (1 mark)', 'Measured in amperes (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Electricity'
+          },
+          {
+            id: 'p2-q4',
+            question: 'What is voltage?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Energy per unit charge; measured in volts.',
+            markingCriteria: {
+              breakdown: ['Energy per unit charge (1 mark)', 'Measured in volts (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Electricity'
+          },
+          {
+            id: 'p2-q5',
+            question: 'What is resistance?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Opposition to current flow; measured in ohms.',
+            markingCriteria: {
+              breakdown: ['Opposition to current (1 mark)', 'Measured in ohms (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Electricity'
+          },
+          {
+            id: 'p2-q6',
+            question: 'How do you calculate electrical power?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'P = VI or P = I²R or P = V²/R',
+            markingCriteria: {
+              breakdown: ['Any correct power equation (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Electricity'
+          },
+          {
+            id: 'p2-q7',
+            question: 'What happens to current in series circuits?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Current is the same everywhere.',
+            markingCriteria: {
+              breakdown: ['Same everywhere (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Electricity'
+          },
+          {
+            id: 'p2-q8',
+            question: 'What happens to voltage in series circuits?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Voltage is shared between components.',
+            markingCriteria: {
+              breakdown: ['Shared between components (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Electricity'
+          },
+          {
+            id: 'p2-q9',
+            question: 'What happens to current in parallel circuits?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Current is shared between branches.',
+            markingCriteria: {
+              breakdown: ['Shared between branches (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Electricity'
+          },
+          {
+            id: 'p2-q10',
+            question: 'What happens to voltage in parallel circuits?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Voltage is the same across each branch.',
+            markingCriteria: {
+              breakdown: ['Same across branches (1 mark)']
             },
             specReference: 'AQA Combined Science Physics - Electricity'
           }
@@ -14648,6 +15143,105 @@ export const curriculum: Subject[] = [
               breakdown: ['Regular arrangement (1 mark)', 'Close together (1 mark)', 'Vibrate in fixed positions (1 mark)']
             },
             specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q2',
+            question: 'Describe the arrangement of particles in a liquid.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Irregular arrangement; particles close together; move around each other.',
+            markingCriteria: {
+              breakdown: ['Irregular arrangement (1 mark)', 'Close together (1 mark)', 'Move around each other (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q3',
+            question: 'Describe the arrangement of particles in a gas.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Random arrangement; particles far apart; move rapidly in all directions.',
+            markingCriteria: {
+              breakdown: ['Random arrangement (1 mark)', 'Far apart (1 mark)', 'Move rapidly (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q4',
+            question: 'What happens during melting?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Solid changes to liquid; particles gain energy.',
+            markingCriteria: {
+              breakdown: ['Solid to liquid (1 mark)', 'Particles gain energy (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q5',
+            question: 'What happens during boiling?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Liquid changes to gas; particles gain more energy.',
+            markingCriteria: {
+              breakdown: ['Liquid to gas (1 mark)', 'Particles gain energy (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q6',
+            question: 'What is the difference between evaporation and boiling?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Evaporation occurs at surface; boiling occurs throughout liquid.',
+            markingCriteria: {
+              breakdown: ['Evaporation at surface (1 mark)', 'Boiling throughout (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q7',
+            question: 'What is internal energy?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Total kinetic and potential energy; of all particles.',
+            markingCriteria: {
+              breakdown: ['Kinetic and potential energy (1 mark)', 'Of all particles (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q8',
+            question: 'What is specific heat capacity?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Energy needed to raise temperature; of 1kg by 1°C.',
+            markingCriteria: {
+              breakdown: ['Energy needed to raise temperature (1 mark)', '1kg by 1°C (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q9',
+            question: 'What is latent heat?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Energy needed to change state; without changing temperature.',
+            markingCriteria: {
+              breakdown: ['Energy to change state (1 mark)', 'No temperature change (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q10',
+            question: 'What happens to temperature during melting?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Temperature stays constant; energy breaks bonds.',
+            markingCriteria: {
+              breakdown: ['Temperature constant (1 mark)', 'Energy breaks bonds (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
           }
         ]
       },
@@ -14663,6 +15257,105 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Random process where unstable nuclei emit radiation; to become more stable; cannot be predicted when individual atom will decay.',
             markingCriteria: {
               breakdown: ['Random process (1 mark)', 'Unstable nuclei emit radiation (1 mark)', 'Cannot predict individual decay (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q2',
+            question: 'Name the three types of nuclear radiation.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Alpha, beta, gamma.',
+            markingCriteria: {
+              breakdown: ['Alpha (1 mark)', 'Beta (1 mark)', 'Gamma (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q3',
+            question: 'What is alpha radiation?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Helium nucleus; two protons and two neutrons.',
+            markingCriteria: {
+              breakdown: ['Helium nucleus (1 mark)', 'Two protons, two neutrons (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q4',
+            question: 'What is beta radiation?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'High energy electron; from the nucleus.',
+            markingCriteria: {
+              breakdown: ['High energy electron (1 mark)', 'From nucleus (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q5',
+            question: 'What is gamma radiation?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Electromagnetic wave; high frequency.',
+            markingCriteria: {
+              breakdown: ['Electromagnetic wave (1 mark)', 'High frequency (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q6',
+            question: 'What is half-life?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Time for half the nuclei to decay; or activity to halve.',
+            markingCriteria: {
+              breakdown: ['Time for half to decay (1 mark)', 'Or activity to halve (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q7',
+            question: 'How can you detect radiation?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Geiger counter; photographic film.',
+            markingCriteria: {
+              breakdown: ['Geiger counter (1 mark)', 'Photographic film (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q8',
+            question: 'What is background radiation?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Natural radiation; always present in environment.',
+            markingCriteria: {
+              breakdown: ['Natural radiation (1 mark)', 'Always present (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q9',
+            question: 'Give three sources of background radiation.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Cosmic rays, rocks, medical procedures.',
+            markingCriteria: {
+              breakdown: ['Three correct sources (3 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q10',
+            question: 'Why is radiation dangerous?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Damages living cells; can cause cancer.',
+            markingCriteria: {
+              breakdown: ['Damages cells (1 mark)', 'Can cause cancer (1 mark)']
             },
             specReference: 'AQA Combined Science Physics - Atomic Structure'
           }
@@ -14682,6 +15375,105 @@ export const curriculum: Subject[] = [
               breakdown: ['At rest stays at rest (1 mark)', 'Motion continues at constant velocity (1 mark)', 'Unless resultant force acts (1 mark)']
             },
             specReference: 'AQA Combined Science Physics - Forces'
+          },
+          {
+            id: 'p5-q2',
+            question: 'State Newton\'s Second Law.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Force equals mass times acceleration; F = ma.',
+            markingCriteria: {
+              breakdown: ['Force = mass × acceleration (1 mark)', 'F = ma (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Forces'
+          },
+          {
+            id: 'p5-q3',
+            question: 'State Newton\'s Third Law.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Every action has equal and opposite reaction.',
+            markingCriteria: {
+              breakdown: ['Equal and opposite reaction (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Forces'
+          },
+          {
+            id: 'p5-q4',
+            question: 'What is weight?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Force due to gravity; measured in newtons.',
+            markingCriteria: {
+              breakdown: ['Force due to gravity (1 mark)', 'Measured in newtons (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Forces'
+          },
+          {
+            id: 'p5-q5',
+            question: 'Write the equation for weight.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'W = mg',
+            markingCriteria: {
+              breakdown: ['W = mg (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Forces'
+          },
+          {
+            id: 'p5-q6',
+            question: 'What is the difference between mass and weight?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Mass is amount of matter; weight is force of gravity.',
+            markingCriteria: {
+              breakdown: ['Mass is amount of matter (1 mark)', 'Weight is force (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Forces'
+          },
+          {
+            id: 'p5-q7',
+            question: 'What is friction?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Force that opposes motion; between surfaces.',
+            markingCriteria: {
+              breakdown: ['Opposes motion (1 mark)', 'Between surfaces (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Forces'
+          },
+          {
+            id: 'p5-q8',
+            question: 'What is air resistance?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Friction with air; opposes motion through air.',
+            markingCriteria: {
+              breakdown: ['Friction with air (1 mark)', 'Opposes motion (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Forces'
+          },
+          {
+            id: 'p5-q9',
+            question: 'What is terminal velocity?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Maximum velocity reached; when forces are balanced.',
+            markingCriteria: {
+              breakdown: ['Maximum velocity (1 mark)', 'Forces balanced (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Forces'
+          },
+          {
+            id: 'p5-q10',
+            question: 'What is momentum?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Mass times velocity; p = mv.',
+            markingCriteria: {
+              breakdown: ['Mass times velocity (1 mark)', 'p = mv (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Forces'
           }
         ]
       },
@@ -14699,6 +15491,105 @@ export const curriculum: Subject[] = [
               breakdown: ['Transverse - perpendicular oscillations (2 marks)', 'Longitudinal - parallel oscillations (2 marks)']
             },
             specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q2',
+            question: 'What is the amplitude of a wave?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Maximum displacement; from rest position.',
+            markingCriteria: {
+              breakdown: ['Maximum displacement (1 mark)', 'From rest position (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q3',
+            question: 'What is the wavelength of a wave?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Distance between two identical points; on adjacent waves.',
+            markingCriteria: {
+              breakdown: ['Distance between identical points (1 mark)', 'Adjacent waves (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q4',
+            question: 'What is the frequency of a wave?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Number of waves; per second.',
+            markingCriteria: {
+              breakdown: ['Number of waves (1 mark)', 'Per second (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q5',
+            question: 'Write the wave equation.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'v = fλ',
+            markingCriteria: {
+              breakdown: ['v = fλ (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q6',
+            question: 'What is reflection?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Wave bounces off surface; angle of incidence equals angle of reflection.',
+            markingCriteria: {
+              breakdown: ['Bounces off surface (1 mark)', 'Equal angles (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q7',
+            question: 'What is refraction?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Wave changes direction; when entering different medium.',
+            markingCriteria: {
+              breakdown: ['Changes direction (1 mark)', 'Different medium (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q8',
+            question: 'What causes refraction?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Change in wave speed; in different medium.',
+            markingCriteria: {
+              breakdown: ['Change in speed (1 mark)', 'Different medium (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q9',
+            question: 'What is the electromagnetic spectrum?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Range of electromagnetic waves; different frequencies.',
+            markingCriteria: {
+              breakdown: ['Range of EM waves (1 mark)', 'Different frequencies (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q10',
+            question: 'List the electromagnetic spectrum in order of increasing frequency.',
+            marks: 7,
+            difficulty: 'medium',
+            modelAnswer: 'Radio, microwave, infrared, visible, ultraviolet, X-ray, gamma.',
+            markingCriteria: {
+              breakdown: ['Seven types in correct order (7 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
           }
         ]
       },
@@ -14714,6 +15605,105 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Region around a magnet; where magnetic forces can be detected.',
             markingCriteria: {
               breakdown: ['Region around magnet (1 mark)', 'Where forces detected (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism'
+          },
+          {
+            id: 'p7-q2',
+            question: 'What are the two poles of a magnet?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'North pole and south pole.',
+            markingCriteria: {
+              breakdown: ['North pole (1 mark)', 'South pole (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism'
+          },
+          {
+            id: 'p7-q3',
+            question: 'What happens when like poles are brought together?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'They repel each other.',
+            markingCriteria: {
+              breakdown: ['Repel (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism'
+          },
+          {
+            id: 'p7-q4',
+            question: 'What happens when opposite poles are brought together?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'They attract each other.',
+            markingCriteria: {
+              breakdown: ['Attract (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism'
+          },
+          {
+            id: 'p7-q5',
+            question: 'What is an electromagnet?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Magnet created by electric current; can be switched on and off.',
+            markingCriteria: {
+              breakdown: ['Created by current (1 mark)', 'Can be switched (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism'
+          },
+          {
+            id: 'p7-q6',
+            question: 'How can you increase the strength of an electromagnet?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Increase current; more turns of wire; add iron core.',
+            markingCriteria: {
+              breakdown: ['Increase current (1 mark)', 'More turns (1 mark)', 'Iron core (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism'
+          },
+          {
+            id: 'p7-q7',
+            question: 'What is the motor effect?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Current-carrying conductor in magnetic field; experiences force.',
+            markingCriteria: {
+              breakdown: ['Current in magnetic field (1 mark)', 'Experiences force (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism'
+          },
+          {
+            id: 'p7-q8',
+            question: 'What is electromagnetic induction?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Voltage induced; when magnetic field changes.',
+            markingCriteria: {
+              breakdown: ['Voltage induced (1 mark)', 'Magnetic field changes (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism'
+          },
+          {
+            id: 'p7-q9',
+            question: 'How can you increase induced voltage?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Move faster; stronger magnetic field; more turns of wire.',
+            markingCriteria: {
+              breakdown: ['Move faster (1 mark)', 'Stronger field (1 mark)', 'More turns (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism'
+          },
+          {
+            id: 'p7-q10',
+            question: 'How does a generator work?',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'Coil rotates in magnetic field; cutting magnetic field lines; induces voltage.',
+            markingCriteria: {
+              breakdown: ['Coil rotates (1 mark)', 'Cuts field lines (1 mark)', 'Induces voltage (1 mark)']
             },
             specReference: 'AQA Combined Science Physics - Magnetism'
           }
