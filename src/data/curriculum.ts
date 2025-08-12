@@ -13151,6 +13151,171 @@ export const curriculum: Subject[] = [
               breakdown: ['Stem cells undifferentiated (1 mark)', 'Can form different cell types (1 mark)', 'Specialized cells have specific functions (1 mark)']
             },
             specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
+          },
+          {
+            id: 'b1-q11',
+            question: 'Describe the process of specialisation in animal cells.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "As an animal develops, cells differentiate to become specialized for specific functions. This involves switching genes on and off to produce specific proteins.",
+            markingCriteria: {
+              breakdown: ['Cells differentiate during development (1 mark)', 'Become specialized for functions (1 mark)', 'Genes switched on/off (1 mark)', 'Produce specific proteins (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
+          },
+          {
+            id: 'b1-q12',
+            question: 'Explain how a light microscope works.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Light passes through the specimen. Lenses focus the light to magnify the image. The eyepiece lens further magnifies what is seen. Total magnification = objective lens × eyepiece lens.",
+            markingCriteria: {
+              breakdown: ['Light passes through specimen (1 mark)', 'Lenses focus light (1 mark)', 'Eyepiece magnifies (1 mark)', 'Total magnification calculation (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
+          },
+          {
+            id: 'b1-q13',
+            question: 'Calculate the actual size of a cell that appears 2mm when magnified ×400.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: "Actual size = image size ÷ magnification = 2mm ÷ 400 = 0.005mm = 5μm",
+            markingCriteria: {
+              breakdown: ['Correct formula used (1 mark)', 'Correct calculation (1 mark)', 'Correct units (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
+          },
+          {
+            id: 'b1-q14',
+            question: 'Compare prokaryotic and eukaryotic cells.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Prokaryotic cells (bacteria) have no nucleus, genetic material free in cytoplasm. Eukaryotic cells (plants/animals) have nucleus containing genetic material and membrane-bound organelles.",
+            markingCriteria: {
+              breakdown: ['Prokaryotic: no nucleus (1 mark)', 'Genetic material free in cytoplasm (1 mark)', 'Eukaryotic: nucleus present (1 mark)', 'Membrane-bound organelles (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
+          },
+          {
+            id: 'b1-q15',
+            question: 'Describe three factors that affect the rate of diffusion.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: "Concentration gradient: greater difference increases rate. Temperature: higher temperature increases kinetic energy and rate. Surface area: larger area allows more diffusion.",
+            markingCriteria: {
+              breakdown: ['Concentration gradient (2 marks)', 'Temperature (2 marks)', 'Surface area (2 marks)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
+          },
+          {
+            id: 'b2-q11',
+            question: 'Explain how muscle cells are adapted for contraction.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Contain protein filaments (actin and myosin) that slide past each other. Many mitochondria provide energy for contraction. Can change length to create movement.",
+            markingCriteria: {
+              breakdown: ['Protein filaments actin and myosin (1 mark)', 'Sliding mechanism (1 mark)', 'Many mitochondria for energy (1 mark)', 'Change length for movement (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          },
+          {
+            id: 'b2-q12',
+            question: 'Describe the function of bile in digestion.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: "Bile neutralizes stomach acid creating alkaline conditions for enzymes. Emulsifies fats breaking them into smaller droplets to increase surface area for lipase.",
+            markingCriteria: {
+              breakdown: ['Neutralizes acid (1 mark)', 'Creates alkaline conditions (1 mark)', 'Emulsifies fats/increases surface area (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          },
+          {
+            id: 'b2-q13',
+            question: 'Explain why the heart is described as a double pump.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Right side pumps deoxygenated blood to lungs (pulmonary circulation). Left side pumps oxygenated blood to body (systemic circulation). Two separate circuits prevent mixing.",
+            markingCriteria: {
+              breakdown: ['Right side to lungs (1 mark)', 'Left side to body (1 mark)', 'Two separate circuits (1 mark)', 'Prevents mixing (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          },
+          {
+            id: 'b2-q14',
+            question: 'Describe how oxygen is transported in the blood.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Oxygen binds to haemoglobin in red blood cells forming oxyhaemoglobin. Each haemoglobin can carry four oxygen molecules. Released in tissues where oxygen concentration is low.",
+            markingCriteria: {
+              breakdown: ['Binds to haemoglobin (1 mark)', 'Forms oxyhaemoglobin (1 mark)', 'Four oxygen molecules per haemoglobin (1 mark)', 'Released in tissues (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          },
+          {
+            id: 'b2-q15',
+            question: 'Explain how coronary heart disease develops and its effects.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: "Fatty deposits build up in coronary arteries. This reduces blood flow to heart muscle. Heart muscle receives less oxygen and glucose. Can lead to heart attack if blocked completely.",
+            markingCriteria: {
+              breakdown: ['Fatty deposits in arteries (1 mark)', 'Reduced blood flow (1 mark)', 'Less oxygen to heart muscle (1 mark)', 'Can cause heart attack (1 mark)', 'Clear explanation (2 marks)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          },
+          {
+            id: 'b3-q6',
+            question: 'Describe how monoclonal antibodies are produced.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: "Mice injected with antigen. B-lymphocytes removed from spleen. Fused with immortal tumor cells. Hybridoma cells divide rapidly producing identical antibodies.",
+            markingCriteria: {
+              breakdown: ['Mice injected with antigen (1 mark)', 'B-lymphocytes removed (1 mark)', 'Fused with tumor cells (1 mark)', 'Hybridoma cells formed (1 mark)', 'Identical antibodies produced (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
+          },
+          {
+            id: 'b3-q7',
+            question: 'Explain how painkillers and antibiotics differ in their action.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Painkillers treat symptoms by blocking nerve impulses but do not kill pathogens. Antibiotics kill bacteria or stop their growth, treating the cause of illness.",
+            markingCriteria: {
+              breakdown: ['Painkillers treat symptoms (1 mark)', 'Block nerve impulses (1 mark)', 'Antibiotics kill bacteria (1 mark)', 'Treat cause not symptoms (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
+          },
+          {
+            id: 'b3-q8',
+            question: 'Describe the symptoms and treatment of gonorrhoea.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Sexually transmitted bacterial infection. Symptoms include thick discharge and pain when urinating. Treated with antibiotics. Prevention by barrier contraception.",
+            markingCriteria: {
+              breakdown: ['Bacterial STI (1 mark)', 'Symptoms described (1 mark)', 'Treated with antibiotics (1 mark)', 'Prevention methods (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
+          },
+          {
+            id: 'b3-q9',
+            question: 'Explain how HIV affects the immune system.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: "HIV attacks and destroys white blood cells (T-helper cells). This weakens the immune system. Body cannot fight other infections. Leads to AIDS.",
+            markingCriteria: {
+              breakdown: ['Attacks white blood cells (1 mark)', 'Destroys T-helper cells (1 mark)', 'Weakens immune system (1 mark)', 'Leads to AIDS (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
+          },
+          {
+            id: 'b3-q10',
+            question: 'Describe the life cycle of a virus.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: "Virus attaches to host cell. Injects genetic material into cell. Uses cell machinery to replicate. New viruses assembled inside cell. Cell bursts releasing viruses.",
+            markingCriteria: {
+              breakdown: ['Attaches to host cell (1 mark)', 'Injects genetic material (1 mark)', 'Uses cell machinery (1 mark)', 'New viruses assembled (1 mark)', 'Cell bursts (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
           }
         ]
       },
@@ -13267,6 +13432,61 @@ export const curriculum: Subject[] = [
               breakdown: ['Xylem transports water and minerals (1 mark)', 'From roots to leaves (1 mark)', 'Phloem transports sugars (1 mark)', 'From leaves to other parts (1 mark)']
             },
             specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          },
+          {
+            id: 'b4-q6',
+            question: 'Describe how leaves are adapted for efficient gas exchange.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: "Stomata allow gases in and out. Guard cells control opening of stomata. Large internal air spaces increase surface area. Thin leaves reduce diffusion distance.",
+            markingCriteria: {
+              breakdown: ['Stomata for gas exchange (1 mark)', 'Guard cells control stomata (1 mark)', 'Large air spaces (1 mark)', 'Increase surface area (1 mark)', 'Thin leaves/short diffusion distance (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
+          },
+          {
+            id: 'b4-q7',
+            question: 'Explain why plants need both photosynthesis and respiration.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Photosynthesis makes glucose using light energy during day. Respiration releases energy from glucose for life processes. Happens continuously day and night.",
+            markingCriteria: {
+              breakdown: ['Photosynthesis makes glucose (1 mark)', 'Uses light energy (1 mark)', 'Respiration releases energy (1 mark)', 'Continuous process (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
+          },
+          {
+            id: 'b4-q8',
+            question: 'Describe what happens during anaerobic respiration in muscle cells.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Glucose broken down without oxygen. Produces lactic acid and small amount of energy. Lactic acid causes muscle fatigue and pain. Oxygen debt must be repaid.",
+            markingCriteria: {
+              breakdown: ['Glucose broken down without oxygen (1 mark)', 'Produces lactic acid (1 mark)', 'Causes fatigue/pain (1 mark)', 'Oxygen debt (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
+          },
+          {
+            id: 'b4-q9',
+            question: 'Explain how the rate of photosynthesis can be measured.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Count bubbles of oxygen produced by aquatic plant. Measure volume of oxygen collected. Measure rate of carbon dioxide uptake. Measure increase in biomass.",
+            markingCriteria: {
+              breakdown: ['Count oxygen bubbles (1 mark)', 'Measure oxygen volume (1 mark)', 'Measure CO2 uptake (1 mark)', 'Measure biomass increase (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
+          },
+          {
+            id: 'b4-q10',
+            question: 'Calculate the energy released when 10g of glucose is completely respired. (Energy content of glucose = 16 kJ/g)',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: "Energy = mass × energy content = 10g × 16 kJ/g = 160 kJ",
+            markingCriteria: {
+              breakdown: ['Correct calculation method (1 mark)', 'Correct answer 160 kJ (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
           }
         ]
       },
@@ -13458,6 +13678,39 @@ export const curriculum: Subject[] = [
               breakdown: ['Cornea refracts (1 mark)', 'Lens focuses (1 mark)', 'Retina has receptors (1 mark)', 'Optic nerve to brain (1 mark)', 'Iris controls light (1 mark)', 'Overall coordination (1 mark)']
             },
             specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
+          },
+          {
+            id: 'b5-q6',
+            question: 'Explain how Type 1 and Type 2 diabetes differ.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: "Type 1: pancreas produces little/no insulin, usually develops in childhood, treated with insulin injections. Type 2: body becomes resistant to insulin, usually develops in adulthood, treated with diet and exercise.",
+            markingCriteria: {
+              breakdown: ['Type 1: little/no insulin (1 mark)', 'Childhood onset (1 mark)', 'Insulin treatment (1 mark)', 'Type 2: insulin resistance (1 mark)', 'Adult onset (1 mark)', 'Diet/exercise treatment (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
+          },
+          {
+            id: 'b5-q7',
+            question: 'Describe how the kidney filters blood.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Blood enters kidney through renal artery. Filtered in glomerulus under high pressure. Useful substances reabsorbed in tubules. Waste products form urine.",
+            markingCriteria: {
+              breakdown: ['Blood enters via renal artery (1 mark)', 'Filtered in glomerulus (1 mark)', 'Reabsorption in tubules (1 mark)', 'Waste forms urine (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
+          },
+          {
+            id: 'b5-q8',
+            question: 'Explain how ADH controls water content in blood.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: "Brain monitors blood water content. If blood too concentrated, more ADH released. ADH makes kidneys reabsorb more water. Less water lost in urine. Negative feedback system.",
+            markingCriteria: {
+              breakdown: ['Brain monitors blood (1 mark)', 'More ADH when concentrated (1 mark)', 'ADH increases reabsorption (1 mark)', 'Less water in urine (1 mark)', 'Negative feedback (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
           }
         ]
       },
@@ -13519,6 +13772,50 @@ export const curriculum: Subject[] = [
               breakdown: ['Genetic variation (1 mark)', 'Environmental pressure/competition (1 mark)', 'Survival of fittest (1 mark)', 'Advantageous alleles passed on (1 mark)', 'Frequency increases over time (1 mark)']
             },
             specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
+          },
+          {
+            id: 'b6-q6',
+            question: 'Describe what happens during fertilisation.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Sperm cell fuses with egg cell. Nuclei combine to form diploid zygote. Genetic material from both parents mixed. Zygote divides by mitosis to form embryo.",
+            markingCriteria: {
+              breakdown: ['Sperm fuses with egg (1 mark)', 'Nuclei combine (1 mark)', 'Genetic material mixed (1 mark)', 'Zygote divides to form embryo (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
+          },
+          {
+            id: 'b6-q7',
+            question: 'Explain what causes genetic variation.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Sexual reproduction mixes genetic material from parents. Independent assortment during meiosis. Crossing over in meiosis. Random fertilisation of gametes.",
+            markingCriteria: {
+              breakdown: ['Sexual reproduction mixes genes (1 mark)', 'Independent assortment (1 mark)', 'Crossing over (1 mark)', 'Random fertilisation (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
+          },
+          {
+            id: 'b6-q8',
+            question: 'Define gene, allele, chromosome and genome.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Gene: section of DNA coding for characteristic. Allele: version of a gene. Chromosome: structure containing many genes. Genome: all genetic material in organism.",
+            markingCriteria: {
+              breakdown: ['Gene definition (1 mark)', 'Allele definition (1 mark)', 'Chromosome definition (1 mark)', 'Genome definition (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
+          },
+          {
+            id: 'b6-q9',
+            question: 'Describe evidence for evolution.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: "Fossil record shows gradual changes over time. Antibiotic resistance in bacteria. Similarities in DNA sequences between species. Geographical distribution of species.",
+            markingCriteria: {
+              breakdown: ['Fossil record (2 marks)', 'Antibiotic resistance (1 mark)', 'DNA similarities (1 mark)', 'Geographical distribution (1 mark)', 'Clear examples (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
           }
         ]
       },
@@ -13578,6 +13875,39 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Increases atmospheric CO2 as trees removed. Reduces biodiversity through habitat destruction. Soil erosion increases. Disrupts water cycle.',
             markingCriteria: {
               breakdown: ['Increases CO2 (1 mark)', 'Reduces biodiversity (1 mark)', 'Soil erosion (1 mark)', 'Disrupts water cycle (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
+          },
+          {
+            id: 'b7-q6',
+            question: 'Explain how water pollution affects ecosystems.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: "Sewage increases bacterial growth using oxygen. Fish die from lack of oxygen. Fertilisers cause eutrophication. Toxic chemicals kill organisms directly.",
+            markingCriteria: {
+              breakdown: ['Sewage increases bacteria (1 mark)', 'Uses oxygen (1 mark)', 'Fish die from oxygen lack (1 mark)', 'Fertilisers cause eutrophication (1 mark)', 'Toxic chemicals kill organisms (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
+          },
+          {
+            id: 'b7-q7',
+            question: 'Describe how quadrats can be used to sample plants.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Place quadrat randomly in area. Count number of species in quadrat. Repeat many times for reliability. Calculate mean number per quadrat.",
+            markingCriteria: {
+              breakdown: ['Random placement (1 mark)', 'Count species (1 mark)', 'Repeat sampling (1 mark)', 'Calculate mean (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
+          },
+          {
+            id: 'b7-q8',
+            question: 'Explain the importance of maintaining biodiversity.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: "Maintains stable ecosystems. Provides resources like medicines and food. Reduces risk of extinction. Maintains genetic diversity for breeding programs.",
+            markingCriteria: {
+              breakdown: ['Stable ecosystems (1 mark)', 'Provides resources (1 mark)', 'Reduces extinction risk (1 mark)', 'Genetic diversity (1 mark)', 'Clear understanding (1 mark)']
             },
             specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
           }
@@ -13649,6 +13979,61 @@ export const curriculum: Subject[] = [
               breakdown: ['Full outer electron shells (1 mark)', 'Stable/unreactive (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and the periodic table'
+          },
+          {
+            id: 'c1-q6',
+            question: 'Describe the trend in atomic radius down a group.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: "Atomic radius increases down the group. More electron shells are added. Outer electrons are further from nucleus.",
+            markingCriteria: {
+              breakdown: ['Increases down group (1 mark)', 'More electron shells (1 mark)', 'Outer electrons further from nucleus (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and the periodic table'
+          },
+          {
+            id: 'c1-q7',
+            question: 'Explain how atoms become ions.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Atoms gain or lose electrons to achieve full outer shells. Metal atoms lose electrons to form positive ions. Non-metal atoms gain electrons to form negative ions.",
+            markingCriteria: {
+              breakdown: ['Gain or lose electrons (1 mark)', 'To achieve full outer shells (1 mark)', 'Metals lose electrons/positive ions (1 mark)', 'Non-metals gain electrons/negative ions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and the periodic table'
+          },
+          {
+            id: 'c1-q8',
+            question: 'Calculate the number of protons, neutrons and electrons in ²³Na⁺.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: "Protons = 11 (atomic number). Neutrons = 23 - 11 = 12. Electrons = 11 - 1 = 10 (lost one electron).",
+            markingCriteria: {
+              breakdown: ['Protons = 11 (1 mark)', 'Neutrons = 12 (1 mark)', 'Electrons = 10 (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and the periodic table'
+          },
+          {
+            id: 'c2-q6',
+            question: 'Describe the structure and properties of graphite.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Giant covalent structure with carbon atoms in layers. Each carbon bonded to three others. Layers can slide over each other making it soft. Conducts electricity due to delocalised electrons.",
+            markingCriteria: {
+              breakdown: ['Layered structure (1 mark)', 'Each carbon bonded to three others (1 mark)', 'Layers slide/soft (1 mark)', 'Conducts electricity (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and the properties of matter'
+          },
+          {
+            id: 'c2-q7',
+            question: 'Explain the difference between pure and impure substances.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: "Pure substances contain only one compound or element. Have sharp melting and boiling points. Impure substances contain mixtures and have ranges of melting/boiling points.",
+            markingCriteria: {
+              breakdown: ['Pure: one compound/element (1 mark)', 'Sharp melting/boiling points (1 mark)', 'Impure: mixtures with ranges (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and the properties of matter'
           }
         ]
       },
@@ -13771,6 +14156,39 @@ export const curriculum: Subject[] = [
               breakdown: ['24 dm³ (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          },
+          {
+            id: 'c3-q6',
+            question: 'Calculate the mass of 2.5 moles of sodium chloride, NaCl. (Mr = 58.5)',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: "mass = moles × Mr = 2.5 × 58.5 = 146.25 g",
+            markingCriteria: {
+              breakdown: ['Correct formula used (1 mark)', 'Correct answer 146.25 g (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          },
+          {
+            id: 'c3-q7',
+            question: 'Calculate the concentration of a solution containing 20g of salt in 500cm³ of water.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: "concentration = mass ÷ volume = 20g ÷ 500cm³ = 0.04 g/cm³",
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Correct answer 0.04 g/cm³ (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          },
+          {
+            id: 'c3-q8',
+            question: 'Balance the equation: H₂ + O₂ → H₂O',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: "2H₂ + O₂ → 2H₂O",
+            markingCriteria: {
+              breakdown: ['Correct balanced equation (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
           }
         ]
       },
@@ -13832,6 +14250,39 @@ export const curriculum: Subject[] = [
               breakdown: ['Electric current through ionic compound (1 mark)', 'Positive ions to cathode (1 mark)', 'Negative ions to anode (1 mark)', 'Ions discharged (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          },
+          {
+            id: 'c4-q6',
+            question: 'Describe how metals can be extracted from their ores.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Reduction with carbon for less reactive metals. Electrolysis for more reactive metals. Displacement reactions. Biological methods using bacteria.",
+            markingCriteria: {
+              breakdown: ['Reduction with carbon (1 mark)', 'Electrolysis (1 mark)', 'Displacement (1 mark)', 'Biological methods (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          },
+          {
+            id: 'c4-q7',
+            question: 'Write the ionic equation for neutralisation.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: "H⁺ + OH⁻ → H₂O",
+            markingCriteria: {
+              breakdown: ['Correct ions (1 mark)', 'Correct products (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          },
+          {
+            id: 'c4-q8',
+            question: 'Explain why copper can be extracted by displacement but aluminium cannot.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: "Copper is less reactive than carbon so can be displaced. Aluminium is more reactive than carbon so cannot be displaced. Requires electrolysis.",
+            markingCriteria: {
+              breakdown: ['Copper less reactive than carbon (1 mark)', 'Aluminium more reactive than carbon (1 mark)', 'Requires electrolysis (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
           }
         ]
       },
@@ -13891,6 +14342,28 @@ export const curriculum: Subject[] = [
             modelAnswer: 'A catalyst provides an alternative pathway with lower activation energy. This increases the rate of reaction without being consumed.',
             markingCriteria: {
               breakdown: ['Alternative pathway (1 mark)', 'Lower activation energy (1 mark)', 'Not consumed (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          },
+          {
+            id: 'c5-q6',
+            question: 'Draw an energy profile diagram for an exothermic reaction.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: "Products lower energy than reactants. Activation energy peak shown. Energy released to surroundings indicated.",
+            markingCriteria: {
+              breakdown: ['Products lower than reactants (1 mark)', 'Activation energy shown (1 mark)', 'Energy released shown (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          },
+          {
+            id: 'c5-q7',
+            question: 'Calculate the energy change when 1000J is required to break bonds and 1500J is released when bonds form.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: "Energy change = energy released - energy required = 1500J - 1000J = +500J (exothermic)",
+            markingCriteria: {
+              breakdown: ['Correct calculation (1 mark)', 'Correct sign and exothermic (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
           }
@@ -14275,6 +14748,28 @@ export const curriculum: Subject[] = [
               breakdown: ['Rate of energy transfer (1 mark)', 'Energy per second (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+          },
+          {
+            id: 'p1-q6',
+            question: 'Calculate the efficiency of a motor that wastes 400J of energy when supplied with 1000J.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: "Useful energy = 1000 - 400 = 600J. Efficiency = (600/1000) × 100% = 60%",
+            markingCriteria: {
+              breakdown: ['Calculate useful energy (1 mark)', 'Use efficiency formula (1 mark)', 'Correct answer 60% (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+          },
+          {
+            id: 'p1-q7',
+            question: 'Describe the energy changes when a ball is thrown upwards.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: "Initially: kinetic energy from throwing. Rising: kinetic converts to gravitational potential. At top: maximum gravitational potential, zero kinetic. Falling: gravitational potential converts back to kinetic.",
+            markingCriteria: {
+              breakdown: ['Initial kinetic energy (1 mark)', 'Rising: KE to GPE (1 mark)', 'Top: max GPE, zero KE (1 mark)', 'Falling: GPE to KE (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
           }
         ]
       },
@@ -14334,6 +14829,28 @@ export const curriculum: Subject[] = [
             modelAnswer: 'R = V ÷ I = 12 ÷ 3 = 4 Ω',
             markingCriteria: {
               breakdown: ['Correct formula R = V ÷ I (1 mark)', 'Correct answer 4 Ω (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+          },
+          {
+            id: 'p2-q6',
+            question: 'Explain why current is the same everywhere in a series circuit.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: "In series circuits, charge cannot build up anywhere. The same amount of charge flows through each component every second.",
+            markingCriteria: {
+              breakdown: ['Charge cannot build up (1 mark)', 'Same charge flow through components (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+          },
+          {
+            id: 'p2-q7',
+            question: 'Calculate the total resistance when 6Ω and 4Ω resistors are connected in series.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: "Total resistance = R₁ + R₂ = 6Ω + 4Ω = 10Ω",
+            markingCriteria: {
+              breakdown: ['Correct formula for series (1 mark)', 'Correct answer 10Ω (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
           }
@@ -14397,6 +14914,17 @@ export const curriculum: Subject[] = [
               breakdown: ['Correct substitution (1 mark)', 'Correct answer 4 g/cm³ (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+          },
+          {
+            id: 'p3-q6',
+            question: 'Explain the relationship between temperature and particle movement.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: "Higher temperature means particles have more kinetic energy. Particles move faster and vibrate more. Lower temperature means slower particle movement.",
+            markingCriteria: {
+              breakdown: ['Higher temperature = more kinetic energy (1 mark)', 'Particles move faster (1 mark)', 'Lower temperature = slower movement (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
           }
         ]
       },
@@ -14456,6 +14984,17 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Medical tracers and radiotherapy, carbon dating.',
             markingCriteria: {
               breakdown: ['Medical uses (1 mark)', 'Carbon dating (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+          },
+          {
+            id: 'p4-q6',
+            question: 'Explain the concept of background radiation.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: "Radiation that exists everywhere in environment at low levels. Comes from natural sources like rocks, soil, cosmic rays. Always present and must be subtracted from measurements.",
+            markingCriteria: {
+              breakdown: ['Low level radiation everywhere (1 mark)', 'Natural sources (1 mark)', 'Must be subtracted from measurements (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
           }
