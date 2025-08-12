@@ -13875,12 +13875,100 @@ export const curriculum: Subject[] = [
               breakdown: ['Order of atomic number (1 mark)', 'Similar properties in groups (1 mark)', 'Groups are vertical columns (1 mark)', 'Period = number of shells (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
+          },
+          {
+            id: 'c1-q3',
+            question: 'What is meant by the term mass number?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Mass number is the total number of protons and neutrons in the nucleus of an atom.',
+            markingCriteria: {
+              breakdown: ['Total number of protons and neutrons (1 mark)', 'In the nucleus (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
+          },
+          {
+            id: 'c1-q4',
+            question: 'What is meant by the term atomic number?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Atomic number is the number of protons in the nucleus of an atom.',
+            markingCriteria: {
+              breakdown: ['Number of protons (1 mark)', 'In the nucleus (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
+          },
+          {
+            id: 'c1-q5',
+            question: 'Why do elements in the same group have similar properties?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Elements in the same group have the same number of electrons in their outer shell, which determines their chemical properties.',
+            markingCriteria: {
+              breakdown: ['Same number of outer electrons (1 mark)', 'Outer electrons determine properties (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
+          },
+          {
+            id: 'c1-q6',
+            question: 'What happens to atomic radius as you go down a group?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Atomic radius increases as you go down a group because atoms have more electron shells.',
+            markingCriteria: {
+              breakdown: ['Atomic radius increases (1 mark)', 'More electron shells (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
+          },
+          {
+            id: 'c1-q7',
+            question: 'Describe the properties of metals.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Metals are good conductors of heat and electricity, have high melting points, are malleable and ductile, and have a shiny appearance.',
+            markingCriteria: {
+              breakdown: ['Good conductors (1 mark)', 'High melting points (1 mark)', 'Malleable and ductile (1 mark)', 'Shiny appearance (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
+          },
+          {
+            id: 'c1-q8',
+            question: 'What are isotopes?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Isotopes are atoms of the same element that have the same number of protons but different numbers of neutrons.',
+            markingCriteria: {
+              breakdown: ['Atoms of same element (1 mark)', 'Same number of protons (1 mark)', 'Different numbers of neutrons (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
+          },
+          {
+            id: 'c1-q9',
+            question: 'Explain why noble gases are unreactive.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Noble gases have complete outer electron shells, making them stable and unreactive.',
+            markingCriteria: {
+              breakdown: ['Complete outer electron shells (1 mark)', 'Makes them stable/unreactive (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
+          },
+          {
+            id: 'c1-q10',
+            question: 'Describe the trend in reactivity of Group 1 metals as you go down the group.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'Reactivity increases as you go down Group 1 because the outer electron is further from the nucleus, so it is more easily lost.',
+            markingCriteria: {
+              breakdown: ['Reactivity increases down group (1 mark)', 'Outer electron further from nucleus (1 mark)', 'Easier to lose electron (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
           }
         ]
       },
       {
         id: 'c2-bonding-structure-properties',
-        name: 'Bonding, structure, and the properties of matter',
+        name: 'Chemistry: Bonding, Structure, and the Properties of Matter',
         questions: [
           {
             id: 'c2-q1',
@@ -13892,12 +13980,111 @@ export const curriculum: Subject[] = [
               breakdown: ['Ionic: high melting points (1 mark)', 'Ionic: conduct when molten/dissolved (1 mark)', 'Ionic: soluble in water (1 mark)', 'Covalent: low melting points (1 mark)', 'Covalent: do not conduct (1 mark)', 'Covalent: insoluble in water (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
+          },
+          {
+            id: 'c2-q2',
+            question: 'What is an ionic bond?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'An ionic bond is the electrostatic attraction between oppositely charged ions, formed when electrons are transferred from metals to non-metals.',
+            markingCriteria: {
+              breakdown: ['Electrostatic attraction (1 mark)', 'Between oppositely charged ions (1 mark)', 'Electrons transferred metal to non-metal (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
+          },
+          {
+            id: 'c2-q3',
+            question: 'What is a covalent bond?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'A covalent bond is formed when two atoms share a pair of electrons.',
+            markingCriteria: {
+              breakdown: ['Sharing of electrons (1 mark)', 'Between two atoms (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
+          },
+          {
+            id: 'c2-q4',
+            question: 'Explain why diamond is so hard.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'Diamond has a giant covalent structure where each carbon atom is bonded to four others in a tetrahedral arrangement. This creates a very strong three-dimensional network.',
+            markingCriteria: {
+              breakdown: ['Giant covalent structure (1 mark)', 'Each carbon bonded to four others (1 mark)', 'Strong 3D network (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
+          },
+          {
+            id: 'c2-q5',
+            question: 'Why does graphite conduct electricity?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Graphite has delocalized electrons that are free to move, allowing it to conduct electricity.',
+            markingCriteria: {
+              breakdown: ['Delocalized electrons (1 mark)', 'Free to move (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
+          },
+          {
+            id: 'c2-q6',
+            question: 'What are the properties of metals and why do they have these properties?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Metals conduct electricity and heat due to delocalized electrons that can move freely. They are malleable and ductile because layers of atoms can slide over each other without breaking bonds.',
+            markingCriteria: {
+              breakdown: ['Conduct due to delocalized electrons (1 mark)', 'Electrons free to move (1 mark)', 'Malleable/ductile (1 mark)', 'Layers can slide (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
+          },
+          {
+            id: 'c2-q7',
+            question: 'What are polymers?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Polymers are large molecules made from many small repeating units called monomers.',
+            markingCriteria: {
+              breakdown: ['Large molecules (1 mark)', 'Made from repeating monomers (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
+          },
+          {
+            id: 'c2-q8',
+            question: 'Explain the difference between thermosoftening and thermosetting plastics.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Thermosoftening plastics soften when heated and can be reshaped repeatedly because they have no cross-links between polymer chains. Thermosetting plastics do not soften when heated because they have cross-links that prevent chains from moving.',
+            markingCriteria: {
+              breakdown: ['Thermosoftening: soften when heated (1 mark)', 'Can be reshaped repeatedly (1 mark)', 'Thermosetting: do not soften (1 mark)', 'Cross-links prevent movement (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
+          },
+          {
+            id: 'c2-q9',
+            question: 'What is metallic bonding?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Metallic bonding is the electrostatic attraction between positive metal ions and a sea of delocalized electrons.',
+            markingCriteria: {
+              breakdown: ['Electrostatic attraction (1 mark)', 'Between positive metal ions (1 mark)', 'And delocalized electrons (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
+          },
+          {
+            id: 'c2-q10',
+            question: 'Explain why ionic compounds have high melting points.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'Ionic compounds have strong electrostatic forces of attraction between oppositely charged ions, which require large amounts of energy to overcome.',
+            markingCriteria: {
+              breakdown: ['Strong electrostatic forces (1 mark)', 'Between oppositely charged ions (1 mark)', 'Large amounts of energy needed (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
           }
         ]
       },
       {
         id: 'c3-quantitative-chemistry',
-        name: 'Quantitative chemistry',
+        name: 'Chemistry: Quantitative Chemistry',
         questions: [
           {
             id: 'c3-q1',
@@ -13909,12 +14096,111 @@ export const curriculum: Subject[] = [
               breakdown: ['Correct method shown (1 mark)', 'Correct answer: 100 (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          },
+          {
+            id: 'c3-q2',
+            question: 'What is Avogadro\'s constant?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Avogadro\'s constant is 6.02 × 10²³ mol⁻¹, representing the number of particles in one mole.',
+            markingCriteria: {
+              breakdown: ['6.02 × 10²³ mol⁻¹ (1 mark)', 'Number of particles in one mole (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          },
+          {
+            id: 'c3-q3',
+            question: 'Calculate the number of moles in 88g of carbon dioxide (CO₂). [Mr: CO₂ = 44]',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Moles = mass ÷ Mr = 88 ÷ 44 = 2 moles',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Correct answer: 2 moles (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          },
+          {
+            id: 'c3-q4',
+            question: 'What is meant by the term limiting reactant?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'The limiting reactant is the reactant that is completely used up in a reaction, determining how much product can be formed.',
+            markingCriteria: {
+              breakdown: ['Reactant completely used up (1 mark)', 'Determines amount of product (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          },
+          {
+            id: 'c3-q5',
+            question: 'Calculate the percentage of carbon in methane (CH₄). [Ar: C=12, H=1]',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Mr of CH₄ = 12 + (4 × 1) = 16. Percentage of C = (12 ÷ 16) × 100 = 75%',
+            markingCriteria: {
+              breakdown: ['Correct Mr calculation (1 mark)', 'Correct percentage formula (1 mark)', 'Correct answer: 75% (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          },
+          {
+            id: 'c3-q6',
+            question: 'What is meant by concentration in chemistry?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Concentration is the amount of solute dissolved in a given volume of solution.',
+            markingCriteria: {
+              breakdown: ['Amount of solute (1 mark)', 'In given volume of solution (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          },
+          {
+            id: 'c3-q7',
+            question: 'Calculate the concentration of a solution containing 20g of salt in 500cm³ of water.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Concentration = mass ÷ volume = 20g ÷ 500cm³ = 0.04 g/cm³ or 40 g/dm³',
+            markingCriteria: {
+              breakdown: ['Correct formula used (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          },
+          {
+            id: 'c3-q8',
+            question: 'What is the law of conservation of mass?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The law states that mass cannot be created or destroyed in a chemical reaction, so the total mass of reactants equals the total mass of products.',
+            markingCriteria: {
+              breakdown: ['Mass cannot be created or destroyed (1 mark)', 'Mass of reactants = mass of products (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          },
+          {
+            id: 'c3-q9',
+            question: 'Calculate the volume of 0.5 moles of any gas at room temperature and pressure.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Volume = moles × 24 = 0.5 × 24 = 12 dm³',
+            markingCriteria: {
+              breakdown: ['Correct molar volume used (24 dm³) (1 mark)', 'Correct calculation: 12 dm³ (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          },
+          {
+            id: 'c3-q10',
+            question: 'In the reaction Mg + 2HCl → MgCl₂ + H₂, what mass of hydrogen is produced from 24g of magnesium? [Ar: Mg=24, H=1]',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Moles of Mg = 24 ÷ 24 = 1 mole. From equation, 1 mole Mg produces 1 mole H₂. Mr of H₂ = 2. Mass of H₂ = 1 × 2 = 2g',
+            markingCriteria: {
+              breakdown: ['Moles of Mg calculated (1 mark)', 'Mole ratio from equation (1 mark)', 'Mr of H₂ = 2 (1 mark)', 'Correct final answer: 2g (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
           }
         ]
       },
       {
         id: 'c4-chemical-changes',
-        name: 'Chemical changes',
+        name: 'Chemistry: Chemical Changes',
         questions: [
           {
             id: 'c4-q1',
@@ -13926,12 +14212,111 @@ export const curriculum: Subject[] = [
               breakdown: ['Salt and hydrogen produced (1 mark)', 'Metal dissolves (1 mark)', 'Effervescence/fizzing observed (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          },
+          {
+            id: 'c4-q2',
+            question: 'What is oxidation in terms of oxygen?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Oxidation is the gain of oxygen by a substance.',
+            markingCriteria: {
+              breakdown: ['Gain of oxygen (1 mark)', 'By a substance (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          },
+          {
+            id: 'c4-q3',
+            question: 'What is reduction in terms of oxygen?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Reduction is the loss of oxygen from a substance.',
+            markingCriteria: {
+              breakdown: ['Loss of oxygen (1 mark)', 'From a substance (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          },
+          {
+            id: 'c4-q4',
+            question: 'Write the general equation for the reaction between an acid and a metal carbonate.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Acid + Metal carbonate → Salt + Water + Carbon dioxide',
+            markingCriteria: {
+              breakdown: ['Correct reactants (1 mark)', 'Correct products (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          },
+          {
+            id: 'c4-q5',
+            question: 'What is the test for hydrogen gas?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Hold a lit splint near the gas. Hydrogen burns with a squeaky pop.',
+            markingCriteria: {
+              breakdown: ['Lit splint test (1 mark)', 'Squeaky pop sound (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          },
+          {
+            id: 'c4-q6',
+            question: 'What is the pH scale?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The pH scale measures how acidic or alkaline a solution is, ranging from 0 to 14. pH 7 is neutral, below 7 is acidic, above 7 is alkaline.',
+            markingCriteria: {
+              breakdown: ['Measures acidity/alkalinity (1 mark)', 'Range 0-14 (1 mark)', 'pH 7 neutral, <7 acidic, >7 alkaline (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          },
+          {
+            id: 'c4-q7',
+            question: 'What happens during neutralization?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'An acid reacts with a base to form a salt and water, with pH moving towards 7.',
+            markingCriteria: {
+              breakdown: ['Acid + base → salt + water (1 mark)', 'pH moves towards 7 (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          },
+          {
+            id: 'c4-q8',
+            question: 'How can you extract metals from their ores?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Metals can be extracted by reduction with carbon (for metals less reactive than carbon), by electrolysis (for very reactive metals), or by reduction with hydrogen.',
+            markingCriteria: {
+              breakdown: ['Reduction with carbon (1 mark)', 'For less reactive metals (1 mark)', 'Electrolysis for reactive metals (1 mark)', 'Alternative: reduction with hydrogen (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          },
+          {
+            id: 'c4-q9',
+            question: 'What is electrolysis?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Electrolysis is the breakdown of ionic compounds using electricity, where ions move to electrodes and are discharged.',
+            markingCriteria: {
+              breakdown: ['Breakdown using electricity (1 mark)', 'Of ionic compounds (1 mark)', 'Ions move to electrodes (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          },
+          {
+            id: 'c4-q10',
+            question: 'What happens at the anode and cathode during electrolysis?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'At the anode (positive electrode), negative ions are oxidized and lose electrons. At the cathode (negative electrode), positive ions are reduced and gain electrons.',
+            markingCriteria: {
+              breakdown: ['Anode: negative ions oxidized (1 mark)', 'Lose electrons at anode (1 mark)', 'Cathode: positive ions reduced (1 mark)', 'Gain electrons at cathode (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
           }
         ]
       },
       {
         id: 'c5-energy-changes',
-        name: 'Energy changes',
+        name: 'Chemistry: Energy Changes',
         questions: [
           {
             id: 'c5-q1',
@@ -13943,12 +14328,111 @@ export const curriculum: Subject[] = [
               breakdown: ['Exothermic releases energy (1 mark)', 'Temperature increases (1 mark)', 'Endothermic absorbs energy (1 mark)', 'Temperature decreases (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          },
+          {
+            id: 'c5-q2',
+            question: 'Give two examples of exothermic reactions.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Combustion and neutralization reactions.',
+            markingCriteria: {
+              breakdown: ['Combustion (1 mark)', 'Neutralization (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          },
+          {
+            id: 'c5-q3',
+            question: 'Give two examples of endothermic reactions.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Thermal decomposition and photosynthesis.',
+            markingCriteria: {
+              breakdown: ['Thermal decomposition (1 mark)', 'Photosynthesis (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          },
+          {
+            id: 'c5-q4',
+            question: 'What is activation energy?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Activation energy is the minimum amount of energy needed for a reaction to occur.',
+            markingCriteria: {
+              breakdown: ['Minimum amount of energy (1 mark)', 'Needed for reaction to occur (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          },
+          {
+            id: 'c5-q5',
+            question: 'How can you measure the energy change in a reaction?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Measure the temperature change of the reaction mixture using a thermometer, and calculate energy change using mass, specific heat capacity, and temperature change.',
+            markingCriteria: {
+              breakdown: ['Measure temperature change (1 mark)', 'Use thermometer (1 mark)', 'Calculate using mass, heat capacity, temp change (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          },
+          {
+            id: 'c5-q6',
+            question: 'What is a fuel cell?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'A fuel cell is a device that produces electricity from the reaction between a fuel and oxygen.',
+            markingCriteria: {
+              breakdown: ['Device that produces electricity (1 mark)', 'From fuel and oxygen reaction (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          },
+          {
+            id: 'c5-q7',
+            question: 'What are the advantages of hydrogen fuel cells?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'They produce only water as a waste product, are more efficient than combustion engines, and provide a renewable source of electricity.',
+            markingCriteria: {
+              breakdown: ['Only water as waste (1 mark)', 'More efficient than combustion (1 mark)', 'Renewable electricity source (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          },
+          {
+            id: 'c5-q8',
+            question: 'What is a battery?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A battery is a device that stores chemical energy and converts it to electrical energy.',
+            markingCriteria: {
+              breakdown: ['Stores chemical energy (1 mark)', 'Converts to electrical energy (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          },
+          {
+            id: 'c5-q9',
+            question: 'Why do rechargeable batteries eventually stop working?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'The chemical reactions become irreversible over time, or the electrodes degrade.',
+            markingCriteria: {
+              breakdown: ['Reactions become irreversible (1 mark)', 'Electrode degradation (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          },
+          {
+            id: 'c5-q10',
+            question: 'Describe what happens in an energy profile diagram for an exothermic reaction.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'The reactants start at a higher energy level than the products. Energy rises to a peak (activation energy) then falls. The products are at a lower energy level, with energy released to surroundings.',
+            markingCriteria: {
+              breakdown: ['Reactants higher than products (1 mark)', 'Energy rises to peak (activation energy) (1 mark)', 'Then falls to products (1 mark)', 'Energy released to surroundings (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
           }
         ]
       },
       {
         id: 'c6-rate-extent-chemical-change',
-        name: 'The rate and extent of chemical change',
+        name: 'Chemistry: The Rate and Extent of Chemical Change',
         questions: [
           {
             id: 'c6-q1',
@@ -13960,12 +14444,111 @@ export const curriculum: Subject[] = [
               breakdown: ['Temperature (1 mark)', 'Concentration (1 mark)', 'Surface area/particle size (1 mark)', 'Catalyst (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
+          },
+          {
+            id: 'c6-q2',
+            question: 'Explain how temperature affects reaction rate.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Higher temperature increases particle kinetic energy, causing more frequent and energetic collisions, leading to faster reaction rates.',
+            markingCriteria: {
+              breakdown: ['Increases particle kinetic energy (1 mark)', 'More frequent collisions (1 mark)', 'More energetic collisions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
+          },
+          {
+            id: 'c6-q3',
+            question: 'What is a catalyst?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A catalyst is a substance that speeds up a chemical reaction without being used up in the reaction.',
+            markingCriteria: {
+              breakdown: ['Speeds up reaction (1 mark)', 'Not used up in reaction (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
+          },
+          {
+            id: 'c6-q4',
+            question: 'How does surface area affect reaction rate?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Smaller particles have larger surface area, providing more area for collisions and faster reaction rates.',
+            markingCriteria: {
+              breakdown: ['Smaller particles = larger surface area (1 mark)', 'More area for collisions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
+          },
+          {
+            id: 'c6-q5',
+            question: 'What is meant by a reversible reaction?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A reversible reaction is one where the products can react to form the original reactants.',
+            markingCriteria: {
+              breakdown: ['Products can react (1 mark)', 'To form original reactants (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
+          },
+          {
+            id: 'c6-q6',
+            question: 'What is dynamic equilibrium?',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'Dynamic equilibrium occurs when the rate of forward reaction equals the rate of reverse reaction, and concentrations remain constant.',
+            markingCriteria: {
+              breakdown: ['Forward rate = reverse rate (1 mark)', 'Concentrations remain constant (1 mark)', 'Reactions still occurring (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
+          },
+          {
+            id: 'c6-q7',
+            question: 'How does concentration affect reaction rate?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Higher concentration means more particles in the same volume, leading to more frequent collisions and faster reaction rates.',
+            markingCriteria: {
+              breakdown: ['More particles in same volume (1 mark)', 'More frequent collisions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
+          },
+          {
+            id: 'c6-q8',
+            question: 'Explain Le Chatelier\'s principle.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'If conditions of an equilibrium are changed, the position of equilibrium shifts to oppose the change.',
+            markingCriteria: {
+              breakdown: ['If conditions changed (1 mark)', 'Equilibrium shifts (1 mark)', 'To oppose the change (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
+          },
+          {
+            id: 'c6-q9',
+            question: 'How do you calculate the rate of reaction?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Rate of reaction = amount of product formed (or reactant used) ÷ time taken',
+            markingCriteria: {
+              breakdown: ['Amount of product formed or reactant used (1 mark)', 'Divided by time taken (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
+          },
+          {
+            id: 'c6-q10',
+            question: 'What happens to equilibrium position when temperature is increased in an endothermic reaction?',
+            marks: 2,
+            difficulty: 'hard',
+            modelAnswer: 'The equilibrium shifts to the right (towards products) to absorb the extra heat.',
+            markingCriteria: {
+              breakdown: ['Shifts to the right/towards products (1 mark)', 'To absorb extra heat (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
           }
         ]
       },
       {
         id: 'c7-organic-chemistry',
-        name: 'Organic chemistry',
+        name: 'Chemistry: Organic Chemistry',
         questions: [
           {
             id: 'c7-q1',
@@ -13977,12 +14560,111 @@ export const curriculum: Subject[] = [
               breakdown: ['Mixture of hydrocarbons (1 mark)', 'Separated by fractional distillation (1 mark)', 'Based on boiling points (1 mark)', 'Different fractions obtained (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+          },
+          {
+            id: 'c7-q2',
+            question: 'What is a hydrocarbon?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A hydrocarbon is a compound containing only hydrogen and carbon atoms.',
+            markingCriteria: {
+              breakdown: ['Compound (1 mark)', 'Only hydrogen and carbon atoms (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+          },
+          {
+            id: 'c7-q3',
+            question: 'What is complete combustion?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Complete combustion occurs when a fuel burns in sufficient oxygen to produce carbon dioxide and water only.',
+            markingCriteria: {
+              breakdown: ['Fuel burns in sufficient oxygen (1 mark)', 'Produces carbon dioxide (1 mark)', 'Produces water only (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+          },
+          {
+            id: 'c7-q4',
+            question: 'What is incomplete combustion?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Incomplete combustion occurs when there is insufficient oxygen, producing carbon monoxide and/or carbon (soot) instead of carbon dioxide.',
+            markingCriteria: {
+              breakdown: ['Insufficient oxygen (1 mark)', 'Produces carbon monoxide (1 mark)', 'Or carbon/soot (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+          },
+          {
+            id: 'c7-q5',
+            question: 'What are alkanes?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Alkanes are saturated hydrocarbons with only single bonds between carbon atoms.',
+            markingCriteria: {
+              breakdown: ['Saturated hydrocarbons (1 mark)', 'Only single bonds (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+          },
+          {
+            id: 'c7-q6',
+            question: 'What are alkenes?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Alkenes are unsaturated hydrocarbons with at least one double bond between carbon atoms.',
+            markingCriteria: {
+              breakdown: ['Unsaturated hydrocarbons (1 mark)', 'At least one double bond (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+          },
+          {
+            id: 'c7-q7',
+            question: 'How can you test for alkenes?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Add bromine water - it turns from orange to colourless if alkenes are present.',
+            markingCriteria: {
+              breakdown: ['Add bromine water (1 mark)', 'Orange to colourless (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+          },
+          {
+            id: 'c7-q8',
+            question: 'What is cracking?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Cracking is the process of breaking down large alkane molecules into smaller, more useful molecules including alkenes.',
+            markingCriteria: {
+              breakdown: ['Breaking down large alkanes (1 mark)', 'Into smaller molecules (1 mark)', 'Including alkenes (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+          },
+          {
+            id: 'c7-q9',
+            question: 'Why is cracking important?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Cracking produces smaller, more useful molecules. It produces alkenes needed for making plastics and increases the supply of petrol.',
+            markingCriteria: {
+              breakdown: ['Produces smaller useful molecules (1 mark)', 'Produces alkenes for plastics (1 mark)', 'Increases petrol supply (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+          },
+          {
+            id: 'c7-q10',
+            question: 'What is the general formula for alkanes?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'CₙH₂ₙ₊₂',
+            markingCriteria: {
+              breakdown: ['CₙH₂ₙ₊₂ (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
           }
         ]
       },
       {
         id: 'c8-chemical-analysis',
-        name: 'Chemical analysis',
+        name: 'Chemistry: Chemical Analysis',
         questions: [
           {
             id: 'c8-q1',
@@ -13994,12 +14676,111 @@ export const curriculum: Subject[] = [
               breakdown: ['Use lit splint (1 mark)', 'Squeaky pop sound (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+          },
+          {
+            id: 'c8-q2',
+            question: 'Describe the test for oxygen gas.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Insert a glowing splint into the gas. If oxygen is present, the splint will relight.',
+            markingCriteria: {
+              breakdown: ['Use glowing splint (1 mark)', 'Splint relights (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+          },
+          {
+            id: 'c8-q3',
+            question: 'Describe the test for carbon dioxide gas.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Bubble the gas through limewater. If carbon dioxide is present, the limewater turns cloudy/milky.',
+            markingCriteria: {
+              breakdown: ['Bubble through limewater (1 mark)', 'Limewater turns cloudy/milky (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+          },
+          {
+            id: 'c8-q4',
+            question: 'What is chromatography used for?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Chromatography is used to separate and identify different substances in a mixture.',
+            markingCriteria: {
+              breakdown: ['Separate substances (1 mark)', 'Identify substances in mixture (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+          },
+          {
+            id: 'c8-q5',
+            question: 'How do you calculate Rf values in chromatography?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Rf = distance moved by substance ÷ distance moved by solvent front',
+            markingCriteria: {
+              breakdown: ['Distance moved by substance (1 mark)', 'Divided by distance moved by solvent (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+          },
+          {
+            id: 'c8-q6',
+            question: 'What is a pure substance in chemistry?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A pure substance contains only one type of element or compound.',
+            markingCriteria: {
+              breakdown: ['Contains only one type (1 mark)', 'Of element or compound (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+          },
+          {
+            id: 'c8-q7',
+            question: 'How can you test the purity of a substance?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Measure its melting point and compare to known values. Pure substances have sharp, specific melting points.',
+            markingCriteria: {
+              breakdown: ['Measure melting point (1 mark)', 'Pure substances have sharp, specific melting points (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+          },
+          {
+            id: 'c8-q8',
+            question: 'What is the test for chlorine gas?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Use damp litmus paper. Chlorine bleaches the litmus paper white.',
+            markingCriteria: {
+              breakdown: ['Use damp litmus paper (1 mark)', 'Bleaches litmus white (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+          },
+          {
+            id: 'c8-q9',
+            question: 'How do you test for water?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Use anhydrous copper sulfate, which turns from white to blue in the presence of water.',
+            markingCriteria: {
+              breakdown: ['Use anhydrous copper sulfate (1 mark)', 'White to blue colour change (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+          },
+          {
+            id: 'c8-q10',
+            question: 'What is flame testing used for?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Flame testing is used to identify metal ions by the characteristic colours they produce in a flame.',
+            markingCriteria: {
+              breakdown: ['Identify metal ions (1 mark)', 'Characteristic colours (1 mark)', 'In a flame (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
           }
         ]
       },
       {
         id: 'c9-atmosphere',
-        name: 'Chemistry of the atmosphere',
+        name: 'Chemistry: Chemistry of the Atmosphere',
         questions: [
           {
             id: 'c9-q1',
@@ -14011,12 +14792,111 @@ export const curriculum: Subject[] = [
               breakdown: ['78% nitrogen (1 mark)', '21% oxygen (1 mark)', '1% other gases (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
+          },
+          {
+            id: 'c9-q2',
+            question: 'How did oxygen levels increase in the early atmosphere?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Oxygen levels increased due to photosynthesis by early plants and algae, which removed carbon dioxide and released oxygen.',
+            markingCriteria: {
+              breakdown: ['Photosynthesis by plants/algae (1 mark)', 'Removed carbon dioxide (1 mark)', 'Released oxygen (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
+          },
+          {
+            id: 'c9-q3',
+            question: 'What is the greenhouse effect?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Greenhouse gases in the atmosphere absorb heat radiation from Earth and re-emit it, keeping the planet warm.',
+            markingCriteria: {
+              breakdown: ['Greenhouse gases absorb heat (1 mark)', 'Re-emit radiation (1 mark)', 'Keeps planet warm (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
+          },
+          {
+            id: 'c9-q4',
+            question: 'Name three greenhouse gases.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Carbon dioxide, methane, and water vapour.',
+            markingCriteria: {
+              breakdown: ['Carbon dioxide (1 mark)', 'Methane (1 mark)', 'Water vapour (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
+          },
+          {
+            id: 'c9-q5',
+            question: 'What causes acid rain?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Acid rain is caused by sulfur dioxide and nitrogen oxides dissolving in rainwater to form acids.',
+            markingCriteria: {
+              breakdown: ['Sulfur dioxide (1 mark)', 'Nitrogen oxides (1 mark)', 'Dissolve in rainwater to form acids (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
+          },
+          {
+            id: 'c9-q6',
+            question: 'What are the effects of acid rain?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Acid rain damages buildings and statues, kills trees and plants, makes lakes acidic harming aquatic life, and can cause respiratory problems.',
+            markingCriteria: {
+              breakdown: ['Damages buildings/statues (1 mark)', 'Kills trees/plants (1 mark)', 'Makes lakes acidic (1 mark)', 'Respiratory problems (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
+          },
+          {
+            id: 'c9-q7',
+            question: 'How can we reduce greenhouse gas emissions?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Use renewable energy sources, improve energy efficiency, use public transport, plant trees, and develop carbon capture technologies.',
+            markingCriteria: {
+              breakdown: ['Renewable energy (1 mark)', 'Energy efficiency (1 mark)', 'Public transport (1 mark)', 'Plant trees/carbon capture (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
+          },
+          {
+            id: 'c9-q8',
+            question: 'What was the early atmosphere mainly composed of?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The early atmosphere was mainly carbon dioxide with some water vapour.',
+            markingCriteria: {
+              breakdown: ['Mainly carbon dioxide (1 mark)', 'Some water vapour (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
+          },
+          {
+            id: 'c9-q9',
+            question: 'How did the oceans form?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Water vapour in the atmosphere condensed as the Earth cooled, forming the oceans.',
+            markingCriteria: {
+              breakdown: ['Water vapour condensed (1 mark)', 'As Earth cooled (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
+          },
+          {
+            id: 'c9-q10',
+            question: 'What is carbon footprint?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Carbon footprint is the total amount of greenhouse gases produced by human activities.',
+            markingCriteria: {
+              breakdown: ['Total amount of greenhouse gases (1 mark)', 'Produced by human activities (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
           }
         ]
       },
       {
         id: 'c10-using-resources',
-        name: 'Using resources',
+        name: 'Chemistry: Using Resources',
         questions: [
           {
             id: 'c10-q1',
@@ -14028,13 +14908,112 @@ export const curriculum: Subject[] = [
               breakdown: ['Conserves natural resources (1 mark)', 'Reduces energy consumption (1 mark)', 'Reduces pollution (1 mark)', 'Reduces need for mining (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+          },
+          {
+            id: 'c10-q2',
+            question: 'What is sustainable development?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Sustainable development meets current needs without compromising the ability of future generations to meet their needs.',
+            markingCriteria: {
+              breakdown: ['Meets current needs (1 mark)', 'Without compromising future generations (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+          },
+          {
+            id: 'c10-q3',
+            question: 'How is drinking water produced?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Water is filtered to remove large particles, then chlorinated to kill bacteria and other microorganisms, making it safe to drink.',
+            markingCriteria: {
+              breakdown: ['Filtration removes particles (1 mark)', 'Chlorination kills bacteria (1 mark)', 'Kills microorganisms (1 mark)', 'Makes water safe (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+          },
+          {
+            id: 'c10-q4',
+            question: 'What is desalination?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Desalination is the process of removing salt from seawater to produce fresh water.',
+            markingCriteria: {
+              breakdown: ['Removing salt (1 mark)', 'From seawater to produce fresh water (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+          },
+          {
+            id: 'c10-q5',
+            question: 'What are the advantages of recycling?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Recycling conserves natural resources, reduces landfill waste, and saves energy.',
+            markingCriteria: {
+              breakdown: ['Conserves natural resources (1 mark)', 'Reduces landfill waste (1 mark)', 'Saves energy (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+          },
+          {
+            id: 'c10-q6',
+            question: 'How do we extract metals from low-grade ores?',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'Phytoextraction uses plants to absorb metals, or bioleaching uses bacteria to extract metals from ores.',
+            markingCriteria: {
+              breakdown: ['Phytoextraction using plants (1 mark)', 'Plants absorb metals (1 mark)', 'Bioleaching uses bacteria (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+          },
+          {
+            id: 'c10-q7',
+            question: 'What is a life cycle assessment?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'A life cycle assessment evaluates the environmental impact of a product through all stages from raw materials to disposal.',
+            markingCriteria: {
+              breakdown: ['Evaluates environmental impact (1 mark)', 'Of a product (1 mark)', 'From raw materials to disposal (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+          },
+          {
+            id: 'c10-q8',
+            question: 'Why is it important to treat sewage?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Sewage treatment prevents pollution of water sources, removes harmful bacteria, and protects public health.',
+            markingCriteria: {
+              breakdown: ['Prevents water pollution (1 mark)', 'Removes harmful bacteria (1 mark)', 'Protects public health (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+          },
+          {
+            id: 'c10-q9',
+            question: 'What are the problems with extracting metals from ores?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Metal extraction is energy-intensive, damages the environment through mining, and produces waste products.',
+            markingCriteria: {
+              breakdown: ['Energy-intensive (1 mark)', 'Environmental damage from mining (1 mark)', 'Produces waste (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+          },
+          {
+            id: 'c10-q10',
+            question: 'What is the difference between renewable and non-renewable resources?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Renewable resources can be replenished naturally and will not run out (like solar energy). Non-renewable resources are finite and will eventually be depleted (like fossil fuels).',
+            markingCriteria: {
+              breakdown: ['Renewable can be replenished (1 mark)', 'Will not run out (1 mark)', 'Non-renewable are finite (1 mark)', 'Will be depleted (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
           }
         ]
       },
       // ===== PHYSICS TOPICS (all except Space physics) =====
       {
         id: 'p1-energy',
-        name: 'Energy',
+        name: 'Physics: Energy',
         questions: [
           {
             id: 'p1-q1',
@@ -14057,12 +15036,100 @@ export const curriculum: Subject[] = [
               breakdown: ['Correct formula GPE = mgh (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+          },
+          {
+            id: 'p1-q3',
+            question: 'Calculate the kinetic energy of a 800 kg car travelling at 20 m/s.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'KE = ½ × mass × velocity² = ½ × 800 kg × (20 m/s)² = ½ × 800 × 400 = 160,000 J',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+          },
+          {
+            id: 'p1-q4',
+            question: 'What is meant by energy efficiency?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Energy efficiency is the ratio of useful energy output to total energy input.',
+            markingCriteria: {
+              breakdown: ['Ratio of useful energy output (1 mark)', 'To total energy input (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+          },
+          {
+            id: 'p1-q5',
+            question: 'Calculate the efficiency of a motor that uses 2000 J of electrical energy to produce 1600 J of useful mechanical energy.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Efficiency = (useful energy output ÷ total energy input) × 100% = (1600 ÷ 2000) × 100% = 80%',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer as percentage (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+          },
+          {
+            id: 'p1-q6',
+            question: 'Name four energy stores.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Kinetic, gravitational potential, elastic potential, and chemical energy stores.',
+            markingCriteria: {
+              breakdown: ['Kinetic (1 mark)', 'Gravitational potential (1 mark)', 'Elastic potential (1 mark)', 'Chemical (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+          },
+          {
+            id: 'p1-q7',
+            question: 'What is power and what is its unit?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Power is the rate of energy transfer, measured in watts (W).',
+            markingCriteria: {
+              breakdown: ['Rate of energy transfer (1 mark)', 'Unit: watts/W (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+          },
+          {
+            id: 'p1-q8',
+            question: 'Compare renewable and non-renewable energy resources.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Renewable resources can be replenished naturally and won\'t run out (examples: wind, solar). Non-renewable resources are finite and will eventually be used up (examples: coal, oil).',
+            markingCriteria: {
+              breakdown: ['Renewable can be replenished (1 mark)', 'Examples of renewable (1 mark)', 'Non-renewable are finite (1 mark)', 'Examples of non-renewable (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+          },
+          {
+            id: 'p1-q9',
+            question: 'Calculate the power of a crane that lifts a 500 kg load through a height of 20 m in 10 seconds. (g = 9.8 m/s²)',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Work done = mgh = 500 × 9.8 × 20 = 98,000 J. Power = work done ÷ time = 98,000 ÷ 10 = 9,800 W',
+            markingCriteria: {
+              breakdown: ['Work done calculation (2 marks)', 'Power formula (1 mark)', 'Correct final answer (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+          },
+          {
+            id: 'p1-q10',
+            question: 'Explain why energy is described as being "dissipated" rather than "lost".',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Energy is "dissipated" because it spreads to the surroundings as heat, but is not destroyed - total energy is conserved according to the principle of conservation of energy.',
+            markingCriteria: {
+              breakdown: ['Energy spreads to surroundings (1 mark)', 'As heat (1 mark)', 'Not destroyed/energy conserved (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
           }
         ]
       },
       {
         id: 'p2-electricity',
-        name: 'Electricity',
+        name: 'Physics: Electricity',
         questions: [
           {
             id: 'p2-q1',
@@ -14074,12 +15141,111 @@ export const curriculum: Subject[] = [
               breakdown: ['Current proportional to potential difference (1 mark)', 'At constant temperature (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+          },
+          {
+            id: 'p2-q2',
+            question: 'Calculate the current in a circuit with a voltage of 12V and resistance of 4Ω.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'I = V ÷ R = 12 ÷ 4 = 3 A',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+          },
+          {
+            id: 'p2-q3',
+            question: 'What is electric current?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Electric current is the flow of electric charge, measured in amperes (A).',
+            markingCriteria: {
+              breakdown: ['Flow of electric charge (1 mark)', 'Unit: amperes/A (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+          },
+          {
+            id: 'p2-q4',
+            question: 'What is potential difference?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Potential difference is the energy transferred per unit charge, measured in volts (V).',
+            markingCriteria: {
+              breakdown: ['Energy transferred per unit charge (1 mark)', 'Unit: volts/V (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+          },
+          {
+            id: 'p2-q5',
+            question: 'What is resistance?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Resistance is the opposition to current flow, measured in ohms (Ω).',
+            markingCriteria: {
+              breakdown: ['Opposition to current flow (1 mark)', 'Unit: ohms/Ω (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+          },
+          {
+            id: 'p2-q6',
+            question: 'How do you calculate electrical power?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'P = I × V (power = current × voltage) or P = I²R or P = V²/R',
+            markingCriteria: {
+              breakdown: ['P = I × V (1 mark)', 'Alternative formula (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+          },
+          {
+            id: 'p2-q7',
+            question: 'What happens to current in a series circuit?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Current is the same at all points in a series circuit.',
+            markingCriteria: {
+              breakdown: ['Current is the same (1 mark)', 'At all points (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+          },
+          {
+            id: 'p2-q8',
+            question: 'What happens to voltage in a parallel circuit?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Voltage is the same across all branches in a parallel circuit.',
+            markingCriteria: {
+              breakdown: ['Voltage is the same (1 mark)', 'Across all branches (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+          },
+          {
+            id: 'p2-q9',
+            question: 'Calculate the total resistance of two 6Ω resistors connected in series.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Total resistance = R₁ + R₂ = 6 + 6 = 12Ω',
+            markingCriteria: {
+              breakdown: ['Correct series formula (1 mark)', 'Correct answer: 12Ω (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+          },
+          {
+            id: 'p2-q10',
+            question: 'Calculate the energy transferred when a 3A current flows through a 12V circuit for 5 minutes.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'E = I × V × t = 3 × 12 × 300 = 10,800 J (or 10.8 kJ)',
+            markingCriteria: {
+              breakdown: ['Correct formula E = IVt (1 mark)', 'Convert time to seconds (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
           }
         ]
       },
       {
         id: 'p3-particle-model-matter',
-        name: 'Particle model of matter',
+        name: 'Physics: Particle Model of Matter',
         questions: [
           {
             id: 'p3-q1',
@@ -14096,7 +15262,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: 'p4-atomic-structure',
-        name: 'Atomic structure',
+        name: 'Physics: Atomic Structure',
         questions: [
           {
             id: 'p4-q1',
@@ -14113,7 +15279,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: 'p5-forces',
-        name: 'Forces',
+        name: 'Physics: Forces',
         questions: [
           {
             id: 'p5-q1',
@@ -14130,7 +15296,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: 'p6-waves',
-        name: 'Waves',
+        name: 'Physics: Waves',
         questions: [
           {
             id: 'p6-q1',
@@ -14147,7 +15313,7 @@ export const curriculum: Subject[] = [
       },
       {
         id: 'p7-magnetism-electromagnetism',
-        name: 'Magnetism and electromagnetism',
+        name: 'Physics: Magnetism and Electromagnetism',
         questions: [
           {
             id: 'p7-q1',
