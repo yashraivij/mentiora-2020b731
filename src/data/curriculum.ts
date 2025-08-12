@@ -13900,17 +13900,127 @@ export const curriculum: Subject[] = [
             },
             specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
           },
-          {
-            id: 'b7-q8',
-            question: 'Explain the importance of maintaining biodiversity.',
-            marks: 5,
-            difficulty: 'medium',
-            modelAnswer: "Maintains stable ecosystems. Provides resources like medicines and food. Reduces risk of extinction. Maintains genetic diversity for breeding programs.",
-            markingCriteria: {
-              breakdown: ['Stable ecosystems (1 mark)', 'Provides resources (1 mark)', 'Reduces extinction risk (1 mark)', 'Genetic diversity (1 mark)', 'Clear understanding (1 mark)']
-            },
-            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
-          }
+           {
+             id: 'b7-q8',
+             question: 'Explain the importance of maintaining biodiversity.',
+             marks: 5,
+             difficulty: 'medium',
+             modelAnswer: "Maintains stable ecosystems. Provides resources like medicines and food. Reduces risk of extinction. Maintains genetic diversity for breeding programs.",
+             markingCriteria: {
+               breakdown: ['Stable ecosystems (1 mark)', 'Provides resources (1 mark)', 'Reduces extinction risk (1 mark)', 'Genetic diversity (1 mark)', 'Clear understanding (1 mark)']
+             },
+             specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
+           },
+           {
+             id: 'b5-q8',
+             question: 'Explain how contraceptive hormones prevent pregnancy.',
+             marks: 4,
+             difficulty: 'medium',
+             modelAnswer: "Oestrogen inhibits FSH production, preventing follicle maturation. Progesterone inhibits LH production, preventing ovulation. Combined effect prevents egg release.",
+             markingCriteria: {
+               breakdown: ['Oestrogen inhibits FSH (1 mark)', 'Prevents follicle maturation (1 mark)', 'Progesterone inhibits LH (1 mark)', 'Prevents ovulation (1 mark)']
+             },
+             specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
+           },
+           {
+             id: 'b5-q9',
+             question: 'Describe how plant hormones coordinate growth responses.',
+             marks: 5,
+             difficulty: 'medium',
+             modelAnswer: "Auxins accumulate on shaded side of shoot, causing cell elongation and bending towards light (phototropism). Gibberellins promote stem elongation and germination. Ethene controls fruit ripening.",
+             markingCriteria: {
+               breakdown: ['Auxins in phototropism (2 marks)', 'Gibberellins promote growth (1 mark)', 'Ethene in ripening (1 mark)', 'Clear explanation (1 mark)']
+             },
+             specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
+           },
+           {
+             id: 'b5-q10',
+             question: 'Explain how water is lost from plants and how this loss is controlled.',
+             marks: 6,
+             difficulty: 'medium',
+             modelAnswer: "Water lost through stomata by transpiration. Guard cells control stomatal opening. When water scarce, stomata close to reduce water loss. Waxy cuticle also reduces water loss.",
+             markingCriteria: {
+               breakdown: ['Transpiration through stomata (1 mark)', 'Guard cells control opening (1 mark)', 'Stomata close when water scarce (2 marks)', 'Waxy cuticle reduces loss (1 mark)', 'Overall coordination (1 mark)']
+             },
+             specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
+           },
+           {
+             id: 'b6-q6',
+             question: 'Explain how genetic engineering works using the example of insulin production.',
+             marks: 6,
+             difficulty: 'hard',
+             modelAnswer: "Human insulin gene inserted into bacterial plasmid using enzymes. Modified bacteria grown in fermenters. Bacteria reproduce rapidly, producing human insulin. Insulin harvested and purified for medical use.",
+             markingCriteria: {
+               breakdown: ['Gene insertion into plasmid (2 marks)', 'Bacteria grown in fermenters (1 mark)', 'Rapid reproduction (1 mark)', 'Insulin production and harvest (2 marks)']
+             },
+             specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
+           },
+           {
+             id: 'b6-q7',
+             question: 'Describe the process of selective breeding and give an example.',
+             marks: 5,
+             difficulty: 'medium',
+             modelAnswer: "Choose organisms with desired characteristics. Breed them together. Select offspring with best characteristics. Repeat over many generations. Example: breeding cattle for increased milk production.",
+             markingCriteria: {
+               breakdown: ['Choose desired characteristics (1 mark)', 'Breeding process (1 mark)', 'Selection of offspring (1 mark)', 'Repeat over generations (1 mark)', 'Suitable example (1 mark)']
+             },
+             specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
+           },
+           {
+             id: 'b6-q8',
+             question: 'Explain the advantages and disadvantages of genetic engineering.',
+             marks: 6,
+             difficulty: 'hard',
+             modelAnswer: "Advantages: produces useful substances like insulin, improves crop yields, treats genetic diseases. Disadvantages: potential unknown effects, ethical concerns, possible impact on other organisms.",
+             markingCriteria: {
+               breakdown: ['Two advantages given with examples (3 marks)', 'Two disadvantages given with examples (3 marks)']
+             },
+             specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
+           },
+           {
+             id: 'b7-q9',
+             question: 'Explain how human activities affect the environment and suggest solutions.',
+             marks: 8,
+             difficulty: 'hard',
+             modelAnswer: "Deforestation destroys habitats and reduces CO2 absorption. Pollution kills organisms and disrupts food chains. Overfishing depletes fish stocks. Solutions: reforestation, renewable energy, sustainable fishing quotas, waste reduction.",
+             markingCriteria: {
+               breakdown: ['Human impacts identified (4 marks)', 'Solutions suggested (4 marks)']
+             },
+             specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
+           },
+           {
+             id: 'b7-q10',
+             question: 'Describe how nutrients are recycled in ecosystems.',
+             marks: 6,
+             difficulty: 'medium',
+             modelAnswer: "Decomposers break down dead organisms. Nutrients returned to soil. Plants absorb nutrients through roots. Animals eat plants. Cycle continues when organisms die.",
+             markingCriteria: {
+               breakdown: ['Decomposers break down organisms (2 marks)', 'Nutrients return to soil (1 mark)', 'Plant absorption (1 mark)', 'Animal consumption (1 mark)', 'Cyclical process (1 mark)']
+             },
+             specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
+           },
+           {
+             id: 'b7-q11',
+             question: 'Explain the greenhouse effect and its impact on climate change.',
+             marks: 6,
+             difficulty: 'medium',
+             modelAnswer: "Greenhouse gases trap heat from sun. More greenhouse gases lead to more heat trapped. Global temperatures rise. Results in melting ice caps, rising sea levels, extreme weather patterns.",
+             markingCriteria: {
+               breakdown: ['Greenhouse gases trap heat (2 marks)', 'More gases = more heat (1 mark)', 'Global temperature rise (1 mark)', 'Impact examples (2 marks)']
+             },
+             specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
+           },
+           {
+             id: 'b7-q12',
+             question: 'Describe how biomass and energy are transferred through food chains.',
+             marks: 5,
+             difficulty: 'medium',
+             modelAnswer: "Energy transferred from sun to producers by photosynthesis. Primary consumers eat producers. Secondary consumers eat primary consumers. Energy lost at each stage through respiration, movement, and heat.",
+             markingCriteria: {
+               breakdown: ['Sun to producers (1 mark)', 'Primary consumers eat producers (1 mark)', 'Secondary consumers (1 mark)', 'Energy lost at each stage (2 marks)']
+             },
+             specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
+           }
         ]
       }
     ]
@@ -14356,17 +14466,105 @@ export const curriculum: Subject[] = [
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
           },
-          {
-            id: 'c5-q7',
-            question: 'Calculate the energy change when 1000J is required to break bonds and 1500J is released when bonds form.',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: "Energy change = energy released - energy required = 1500J - 1000J = +500J (exothermic)",
-            markingCriteria: {
-              breakdown: ['Correct calculation (1 mark)', 'Correct sign and exothermic (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
-          }
+           {
+             id: 'c5-q7',
+             question: 'Calculate the energy change when 1000J is required to break bonds and 1500J is released when bonds form.',
+             marks: 2,
+             difficulty: 'medium',
+             modelAnswer: "Energy change = energy released - energy required = 1500J - 1000J = +500J (exothermic)",
+             markingCriteria: {
+               breakdown: ['Correct calculation (1 mark)', 'Correct sign and exothermic (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+           },
+           {
+             id: 'c1-q6',
+             question: 'Explain why atomic radius decreases across a period.',
+             marks: 3,
+             difficulty: 'medium',
+             modelAnswer: "Number of protons increases across period. Nuclear charge increases. Electrons are pulled closer to nucleus.",
+             markingCriteria: {
+               breakdown: ['Protons increase (1 mark)', 'Nuclear charge increases (1 mark)', 'Electrons pulled closer (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
+           },
+           {
+             id: 'c1-q7',
+             question: 'Describe the trend in reactivity of Group 1 metals.',
+             marks: 4,
+             difficulty: 'medium',
+             modelAnswer: "Reactivity increases down the group. Outer electron is further from nucleus. Easier to lose electron. Less nuclear attraction.",
+             markingCriteria: {
+               breakdown: ['Reactivity increases down group (1 mark)', 'Electron further from nucleus (1 mark)', 'Easier to lose electron (1 mark)', 'Less nuclear attraction (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
+           },
+           {
+             id: 'c2-q6',
+             question: 'Explain why ionic compounds conduct electricity when molten but not when solid.',
+             marks: 4,
+             difficulty: 'medium',
+             modelAnswer: "When solid, ions are in fixed positions and cannot move. When molten, ions are free to move and can carry electric charge.",
+             markingCriteria: {
+               breakdown: ['Solid: ions in fixed positions (1 mark)', 'Solid: cannot move (1 mark)', 'Molten: ions free to move (1 mark)', 'Molten: can carry charge (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties of matter'
+           },
+           {
+             id: 'c2-q7',
+             question: 'Describe the structure and properties of diamond.',
+             marks: 5,
+             difficulty: 'medium',
+             modelAnswer: "Each carbon atom covalently bonded to four others. Forms giant covalent structure. Very hard. High melting point. Does not conduct electricity.",
+             markingCriteria: {
+               breakdown: ['Four covalent bonds per carbon (1 mark)', 'Giant covalent structure (1 mark)', 'Very hard (1 mark)', 'High melting point (1 mark)', 'Does not conduct (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties of matter'
+           },
+           {
+             id: 'c3-q5',
+             question: 'Calculate the number of moles in 44g of carbon dioxide (CO₂). (Mr of CO₂ = 44)',
+             marks: 2,
+             difficulty: 'easy',
+             modelAnswer: "Moles = mass ÷ Mr = 44g ÷ 44 = 1 mol",
+             markingCriteria: {
+               breakdown: ['Correct formula (1 mark)', 'Correct answer with units (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+           },
+           {
+             id: 'c3-q6',
+             question: 'What is the empirical formula of a compound containing 40% carbon, 6.7% hydrogen and 53.3% oxygen by mass?',
+             marks: 4,
+             difficulty: 'hard',
+             modelAnswer: "C: 40/12 = 3.33, H: 6.7/1 = 6.7, O: 53.3/16 = 3.33. Ratio = 1:2:1. Empirical formula = CH₂O",
+             markingCriteria: {
+               breakdown: ['Divide by atomic masses (1 mark)', 'Calculate mole ratios (1 mark)', 'Simplify to whole numbers (1 mark)', 'Correct empirical formula (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+           },
+           {
+             id: 'c4-q9',
+             question: 'Explain how electrolysis is used to extract aluminium from aluminium oxide.',
+             marks: 5,
+             difficulty: 'hard',
+             modelAnswer: "Aluminium oxide dissolved in molten cryolite. Positive aluminium ions move to cathode. Negative oxide ions move to anode. Aluminium formed at cathode, oxygen at anode.",
+             markingCriteria: {
+               breakdown: ['Dissolved in cryolite (1 mark)', 'Al³⁺ to cathode (1 mark)', 'O²⁻ to anode (1 mark)', 'Aluminium at cathode (1 mark)', 'Oxygen at anode (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+           },
+           {
+             id: 'c5-q8',
+             question: 'Explain what happens to energy during a chemical reaction and how this relates to bond energies.',
+             marks: 6,
+             difficulty: 'hard',
+             modelAnswer: "Energy required to break bonds in reactants. Energy released when new bonds form in products. If more energy released than required, reaction is exothermic. If less energy released than required, reaction is endothermic.",
+             markingCriteria: {
+               breakdown: ['Energy required to break bonds (1 mark)', 'Energy released forming bonds (1 mark)', 'More released = exothermic (2 marks)', 'Less released = endothermic (2 marks)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+           }
         ]
       }
     ]
@@ -14669,17 +14867,116 @@ export const curriculum: Subject[] = [
             },
             specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
           },
-          {
-            id: 'c10-q5',
-            question: 'Compare renewable and non-renewable resources.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Renewable resources can be replenished naturally and won\'t run out (e.g., wind, solar). Non-renewable resources are finite and will be used up (e.g., fossil fuels, metals).',
-            markingCriteria: {
-              breakdown: ['Renewable can be replenished (1 mark)', 'Won\'t run out (1 mark)', 'Non-renewable are finite (1 mark)', 'Examples given (1 mark)']
-            },
-            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
-          }
+           {
+             id: 'c10-q5',
+             question: 'Compare renewable and non-renewable resources.',
+             marks: 4,
+             difficulty: 'medium',
+             modelAnswer: 'Renewable resources can be replenished naturally and won\'t run out (e.g., wind, solar). Non-renewable resources are finite and will be used up (e.g., fossil fuels, metals).',
+             markingCriteria: {
+               breakdown: ['Renewable can be replenished (1 mark)', 'Won\'t run out (1 mark)', 'Non-renewable are finite (1 mark)', 'Examples given (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+           },
+           {
+             id: 'c6-q6',
+             question: 'Explain how concentration affects the rate of reaction.',
+             marks: 4,
+             difficulty: 'medium',
+             modelAnswer: "Higher concentration means more particles in same volume. More frequent collisions between reactants. Increases rate of successful collisions. Therefore rate of reaction increases.",
+             markingCriteria: {
+               breakdown: ['More particles in same volume (1 mark)', 'More frequent collisions (1 mark)', 'More successful collisions (1 mark)', 'Rate increases (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
+           },
+           {
+             id: 'c6-q7',
+             question: 'Describe how to measure the rate of reaction when a gas is produced.',
+             marks: 5,
+             difficulty: 'medium',
+             modelAnswer: "Use gas syringe to collect gas produced. Measure volume at regular time intervals. Plot graph of volume against time. Calculate rate from gradient of line.",
+             markingCriteria: {
+               breakdown: ['Gas syringe used (1 mark)', 'Measure volume at intervals (1 mark)', 'Plot graph (1 mark)', 'Rate from gradient (2 marks)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
+           },
+           {
+             id: 'c7-q5',
+             question: 'Write the general formula for alkanes and give an example.',
+             marks: 3,
+             difficulty: 'easy',
+             modelAnswer: "General formula: CₙH₂ₙ₊₂. Example: methane CH₄ or ethane C₂H₆.",
+             markingCriteria: {
+               breakdown: ['Correct general formula (2 marks)', 'Correct example (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+           },
+           {
+             id: 'c7-q6',
+             question: 'Describe the complete combustion of methane.',
+             marks: 4,
+             difficulty: 'medium',
+             modelAnswer: "CH₄ + 2O₂ → CO₂ + 2H₂O. Methane burns in excess oxygen to produce carbon dioxide and water.",
+             markingCriteria: {
+               breakdown: ['Correct equation (2 marks)', 'Excess oxygen (1 mark)', 'Products named (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+           },
+           {
+             id: 'c8-q4',
+             question: 'Describe how to test for oxygen gas.',
+             marks: 2,
+             difficulty: 'easy',
+             modelAnswer: "Use a glowing splint. Oxygen will relight the splint.",
+             markingCriteria: {
+               breakdown: ['Glowing splint (1 mark)', 'Relights splint (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+           },
+           {
+             id: 'c8-q5',
+             question: 'Explain how chromatography separates substances.',
+             marks: 4,
+             difficulty: 'medium',
+             modelAnswer: "Different substances have different solubilities in solvent. They move at different rates up the paper. More soluble substances travel further.",
+             markingCriteria: {
+               breakdown: ['Different solubilities (1 mark)', 'Move at different rates (1 mark)', 'More soluble travel further (2 marks)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+           },
+           {
+             id: 'c9-q4',
+             question: 'Explain how human activities increase carbon dioxide levels.',
+             marks: 4,
+             difficulty: 'medium',
+             modelAnswer: "Burning fossil fuels releases CO₂. Deforestation reduces trees that absorb CO₂. Industrial processes release CO₂. Transportation burns fuel producing CO₂.",
+             markingCriteria: {
+               breakdown: ['Burning fossil fuels (1 mark)', 'Deforestation (1 mark)', 'Industrial processes (1 mark)', 'Transportation (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of the atmosphere'
+           },
+           {
+             id: 'c9-q5',
+             question: 'Describe the greenhouse effect.',
+             marks: 5,
+             difficulty: 'medium',
+             modelAnswer: "Sun radiates energy to Earth. Earth absorbs energy and warms up. Earth radiates energy back to space. Greenhouse gases absorb some of this energy. Energy is re-radiated keeping Earth warm.",
+             markingCriteria: {
+               breakdown: ['Sun radiates to Earth (1 mark)', 'Earth warms and radiates back (1 mark)', 'Greenhouse gases absorb energy (1 mark)', 'Energy re-radiated (1 mark)', 'Keeps Earth warm (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of the atmosphere'
+           },
+           {
+             id: 'c10-q6',
+             question: 'Explain the advantages and disadvantages of using alternative methods to extract copper.',
+             marks: 6,
+             difficulty: 'hard',
+             modelAnswer: "Phytomining: plants absorb copper, burned to get copper-rich ash. Advantages: works on low-grade ores, environmentally friendly. Disadvantages: slow process. Bioleaching: bacteria produce solutions containing copper. Advantages: low energy. Disadvantages: toxic products.",
+             markingCriteria: {
+               breakdown: ['Phytomining described (2 marks)', 'Bioleaching described (2 marks)', 'Advantages and disadvantages (2 marks)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+           }
         ]
       }
     ]
@@ -14987,17 +15284,83 @@ export const curriculum: Subject[] = [
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
           },
-          {
-            id: 'p4-q6',
-            question: 'Explain the concept of background radiation.',
-            marks: 3,
-            difficulty: 'medium',
-            modelAnswer: "Radiation that exists everywhere in environment at low levels. Comes from natural sources like rocks, soil, cosmic rays. Always present and must be subtracted from measurements.",
-            markingCriteria: {
-              breakdown: ['Low level radiation everywhere (1 mark)', 'Natural sources (1 mark)', 'Must be subtracted from measurements (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
-          }
+           {
+             id: 'p4-q6',
+             question: 'Explain the concept of background radiation.',
+             marks: 3,
+             difficulty: 'medium',
+             modelAnswer: "Radiation that exists everywhere in environment at low levels. Comes from natural sources like rocks, soil, cosmic rays. Always present and must be subtracted from measurements.",
+             markingCriteria: {
+               breakdown: ['Low level radiation everywhere (1 mark)', 'Natural sources (1 mark)', 'Must be subtracted from measurements (1 mark)']
+             },
+             specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+           },
+           {
+             id: 'p1-q6',
+             question: 'Calculate the kinetic energy of a 2kg object moving at 5m/s.',
+             marks: 3,
+             difficulty: 'easy',
+             modelAnswer: "KE = ½mv² = ½ × 2kg × (5m/s)² = ½ × 2 × 25 = 25J",
+             markingCriteria: {
+               breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+             },
+             specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+           },
+           {
+             id: 'p1-q7',
+             question: 'Explain the difference between renewable and non-renewable energy resources.',
+             marks: 4,
+             difficulty: 'medium',
+             modelAnswer: "Renewable resources can be replenished naturally (wind, solar, wave). Non-renewable resources are finite and will run out (fossil fuels, nuclear). Renewable sources are generally cleaner but less reliable.",
+             markingCriteria: {
+               breakdown: ['Renewable definition with examples (2 marks)', 'Non-renewable definition with examples (2 marks)']
+             },
+             specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+           },
+           {
+             id: 'p2-q6',
+             question: 'Calculate the current when charge of 120C flows in 30 seconds.',
+             marks: 3,
+             difficulty: 'easy',
+             modelAnswer: "Current = charge ÷ time = 120C ÷ 30s = 4A",
+             markingCriteria: {
+               breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+             },
+             specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+           },
+           {
+             id: 'p2-q7',
+             question: 'Explain why the National Grid uses high voltages for transmission.',
+             marks: 4,
+             difficulty: 'medium',
+             modelAnswer: "High voltage reduces current for same power. Lower current reduces energy lost as heat in cables. Makes transmission more efficient.",
+             markingCriteria: {
+               breakdown: ['High voltage reduces current (1 mark)', 'For same power (1 mark)', 'Lower current reduces energy loss (1 mark)', 'More efficient transmission (1 mark)']
+             },
+             specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+           },
+           {
+             id: 'p3-q4',
+             question: 'Explain how increasing temperature affects the motion of particles.',
+             marks: 4,
+             difficulty: 'medium',
+             modelAnswer: "Higher temperature gives particles more kinetic energy. Particles move faster and vibrate more. Increases pressure in gases and can cause state changes.",
+             markingCriteria: {
+               breakdown: ['More kinetic energy (1 mark)', 'Particles move faster (1 mark)', 'Increases pressure (1 mark)', 'Can cause state changes (1 mark)']
+             },
+             specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+           },
+           {
+             id: 'p3-q5',
+             question: 'Describe the arrangement and motion of particles in the three states of matter.',
+             marks: 6,
+             difficulty: 'medium',
+             modelAnswer: "Solid: particles close together, regular arrangement, vibrate about fixed positions. Liquid: particles close together, random arrangement, move around each other. Gas: particles far apart, random arrangement, move quickly in all directions.",
+             markingCriteria: {
+               breakdown: ['Solid description (2 marks)', 'Liquid description (2 marks)', 'Gas description (2 marks)']
+             },
+             specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+           }
         ]
       }
     ]
@@ -15178,17 +15541,105 @@ export const curriculum: Subject[] = [
             },
             specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
           },
-          {
-            id: 'p7-q5',
-            question: 'What is meant by electromagnetic induction?',
-            marks: 2,
-            difficulty: 'medium',
-            modelAnswer: 'The process of inducing a voltage when a conductor moves through a magnetic field or when the magnetic field through a conductor changes.',
-            markingCriteria: {
-              breakdown: ['Inducing voltage (1 mark)', 'Conductor moves through field OR field changes (1 mark)']
-            },
-            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
-          }
+           {
+             id: 'p7-q5',
+             question: 'What is meant by electromagnetic induction?',
+             marks: 2,
+             difficulty: 'medium',
+             modelAnswer: 'The process of inducing a voltage when a conductor moves through a magnetic field or when the magnetic field through a conductor changes.',
+             markingCriteria: {
+               breakdown: ['Inducing voltage (1 mark)', 'Conductor moves through field OR field changes (1 mark)']
+             },
+             specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+           },
+           {
+             id: 'p5-q6',
+             question: 'Explain the difference between weight and mass.',
+             marks: 4,
+             difficulty: 'medium',
+             modelAnswer: "Mass is the amount of matter in an object, measured in kg. Weight is the force of gravity on an object, measured in N. Weight = mass × gravitational field strength.",
+             markingCriteria: {
+               breakdown: ['Mass is amount of matter in kg (1 mark)', 'Weight is gravitational force in N (1 mark)', 'Weight = mg (2 marks)']
+             },
+             specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+           },
+           {
+             id: 'p5-q7',
+             question: 'Calculate the resultant force when forces of 30N right and 20N left act on an object.',
+             marks: 2,
+             difficulty: 'easy',
+             modelAnswer: "Resultant force = 30N - 20N = 10N to the right",
+             markingCriteria: {
+               breakdown: ['Correct calculation (1 mark)', 'Correct direction (1 mark)']
+             },
+             specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+           },
+           {
+             id: 'p5-q8',
+             question: 'Describe the motion of an object when the resultant force is zero.',
+             marks: 3,
+             difficulty: 'medium',
+             modelAnswer: "Object continues at constant velocity (Newton's First Law). If stationary, remains stationary. If moving, continues at same speed in same direction.",
+             markingCriteria: {
+               breakdown: ['Constant velocity (1 mark)', 'Stationary remains stationary (1 mark)', 'Moving continues same speed/direction (1 mark)']
+             },
+             specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+           },
+           {
+             id: 'p6-q5',
+             question: 'Calculate the frequency of a wave with wavelength 2m and speed 10m/s.',
+             marks: 3,
+             difficulty: 'easy',
+             modelAnswer: "Frequency = wave speed ÷ wavelength = 10m/s ÷ 2m = 5Hz",
+             markingCriteria: {
+               breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+             },
+             specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+           },
+           {
+             id: 'p6-q6',
+             question: 'Explain the difference between transverse and longitudinal waves.',
+             marks: 4,
+             difficulty: 'medium',
+             modelAnswer: "Transverse waves: oscillations perpendicular to direction of energy transfer (light, water waves). Longitudinal waves: oscillations parallel to direction of energy transfer (sound waves).",
+             markingCriteria: {
+               breakdown: ['Transverse: perpendicular oscillations (1 mark)', 'Example of transverse (1 mark)', 'Longitudinal: parallel oscillations (1 mark)', 'Example of longitudinal (1 mark)']
+             },
+             specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+           },
+           {
+             id: 'p6-q7',
+             question: 'Describe what happens when waves are reflected.',
+             marks: 3,
+             difficulty: 'medium',
+             modelAnswer: "Waves bounce off a barrier. Angle of incidence equals angle of reflection. Frequency and wavelength remain the same.",
+             markingCriteria: {
+               breakdown: ['Waves bounce off barrier (1 mark)', 'Angle of incidence = angle of reflection (1 mark)', 'Frequency/wavelength unchanged (1 mark)']
+             },
+             specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+           },
+           {
+             id: 'p6-q8',
+             question: 'Explain how sound waves travel through air.',
+             marks: 4,
+             difficulty: 'medium',
+             modelAnswer: "Sound waves are longitudinal pressure waves. Air particles vibrate back and forth. Creates compressions (high pressure) and rarefactions (low pressure). Energy transferred through medium without particles moving far.",
+             markingCriteria: {
+               breakdown: ['Longitudinal pressure waves (1 mark)', 'Particles vibrate back and forth (1 mark)', 'Compressions and rarefactions (1 mark)', 'Energy transferred without particle movement (1 mark)']
+             },
+             specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+           },
+           {
+             id: 'p7-q6',
+             question: 'Explain how a loudspeaker works.',
+             marks: 5,
+             difficulty: 'hard',
+             modelAnswer: "AC current flows through coil. Coil becomes electromagnet. Magnetic field interacts with permanent magnet. Forces coil to move back and forth. Cone attached to coil vibrates air to produce sound.",
+             markingCriteria: {
+               breakdown: ['AC current in coil (1 mark)', 'Coil becomes electromagnet (1 mark)', 'Interacts with permanent magnet (1 mark)', 'Forces cause movement (1 mark)', 'Cone vibrates air (1 mark)']
+             },
+             specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+           }
         ]
       }
     ]
