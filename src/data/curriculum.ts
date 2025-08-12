@@ -15829,6 +15829,475 @@ export const curriculum: Subject[] = [
     ]
   },
   
+  // ===== PREDICTED 2026 COMBINED SCIENCE EXAMS =====
+  
+  // Combined Science Biology Paper 2 2026
+  {
+    id: 'predicted-combined-science-biology-paper2-2026',
+    name: 'Combined Science Biology Paper 2 Predicted 2026 Exam',
+    topics: [
+      {
+        id: 'homeostasis-response-2026',
+        name: 'Homeostasis and Response',
+        questions: [
+          {
+            id: 'hr-2026-q1',
+            question: 'Define homeostasis and explain why it is important for maintaining optimal conditions in the body.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Homeostasis is the maintenance of a constant internal environment. It is important because enzymes work best at optimal conditions; cells need stable conditions to function properly; prevents damage from extreme conditions.',
+            markingCriteria: {
+              breakdown: ['Definition of homeostasis (2 marks)', 'Importance for enzymes (1 mark)', 'Importance for cell function (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 2026 - Homeostasis and Response'
+          },
+          {
+            id: 'hr-2026-q2',
+            question: 'Describe the structure and function of the nervous system, including the central and peripheral nervous systems.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Central nervous system: brain and spinal cord; processes information and coordinates responses. Peripheral nervous system: nerves; carries information to and from CNS. Brain controls conscious activities; spinal cord controls reflexes.',
+            markingCriteria: {
+              breakdown: ['CNS components (2 marks)', 'CNS function (1 mark)', 'PNS structure and function (2 marks)', 'Brain/spinal cord roles (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 2026 - Homeostasis and Response'
+          },
+          {
+            id: 'hr-2026-q3',
+            question: 'Explain how blood glucose concentration is controlled by the pancreas.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Pancreas monitors blood glucose; high glucose triggers insulin release from beta cells; insulin causes glucose uptake by cells and liver; glucose converted to glycogen; low glucose triggers glucagon release from alpha cells; glucagon causes glucose release from liver.',
+            markingCriteria: {
+              breakdown: ['Pancreas monitoring (1 mark)', 'Insulin release from beta cells (1 mark)', 'Insulin effects (2 marks)', 'Glucagon release from alpha cells (1 mark)', 'Glucagon effects (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 2026 - Homeostasis and Response'
+          },
+          {
+            id: 'hr-2026-q4',
+            question: 'Compare Type 1 and Type 2 diabetes, including causes, symptoms, and treatments.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Type 1: pancreas does not produce insulin; usually develops in childhood; autoimmune condition; symptoms include excessive thirst, frequent urination; treated with insulin injections and diet control. Type 2: body becomes resistant to insulin; usually develops in adulthood; linked to obesity and lifestyle; same symptoms as Type 1; treated with diet, exercise, and medication.',
+            markingCriteria: {
+              breakdown: ['Type 1 cause and age (2 marks)', 'Type 1 treatment (1 mark)', 'Type 2 cause and risk factors (2 marks)', 'Type 2 treatment (1 mark)', 'Common symptoms (2 marks)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 2026 - Homeostasis and Response'
+          },
+          {
+            id: 'hr-2026-q5',
+            question: 'Describe how body temperature is regulated in humans.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Hypothalamus monitors core body temperature; if too hot: sweating increases heat loss through evaporation, vasodilation increases heat loss through radiation; if too cold: shivering generates heat through muscle contraction, vasoconstriction reduces heat loss.',
+            markingCriteria: {
+              breakdown: ['Hypothalamus control (1 mark)', 'Hot responses - sweating (1 mark)', 'Hot responses - vasodilation (1 mark)', 'Cold responses - shivering (1 mark)', 'Cold responses - vasoconstriction (1 mark)', 'Heat transfer mechanisms (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 2026 - Homeostasis and Response'
+          }
+        ]
+      },
+      {
+        id: 'inheritance-evolution-2026',
+        name: 'Inheritance, Variation and Evolution',
+        questions: [
+          {
+            id: 'ive-2026-q1',
+            question: 'Explain the terms gene, allele, chromosome, genotype, and phenotype.',
+            marks: 10,
+            difficulty: 'medium',
+            modelAnswer: 'Gene: section of DNA that codes for a specific characteristic; Allele: different versions of the same gene; Chromosome: structure containing many genes made of DNA; Genotype: the genetic makeup/combination of alleles; Phenotype: the physical appearance/characteristics expressed.',
+            markingCriteria: {
+              breakdown: ['Gene definition (2 marks)', 'Allele definition (2 marks)', 'Chromosome definition (2 marks)', 'Genotype definition (2 marks)', 'Phenotype definition (2 marks)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 2026 - Inheritance, Variation and Evolution'
+          },
+          {
+            id: 'ive-2026-q2',
+            question: 'A plant with red flowers (RR) is crossed with a plant with white flowers (rr). Complete a genetic cross to show the genotypes and phenotypes of the F1 generation.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Parents: RR × rr; Gametes: R and r; F1 offspring: all Rr; All offspring have red flowers (dominant phenotype).',
+            markingCriteria: {
+              breakdown: ['Correct parent genotypes (1 mark)', 'Correct gametes (1 mark)', 'Correct F1 genotype Rr (1 mark)', 'Correct phenotype - all red (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 2026 - Inheritance, Variation and Evolution'
+          },
+          {
+            id: 'ive-2026-q3',
+            question: 'Explain what causes variation in organisms and distinguish between genetic and environmental variation.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Genetic variation: caused by different combinations of alleles, sexual reproduction, mutations; examples include eye color, blood group. Environmental variation: caused by external factors like diet, exercise, climate; examples include height, weight, accent. Most characteristics show both genetic and environmental influences.',
+            markingCriteria: {
+              breakdown: ['Genetic variation causes (2 marks)', 'Environmental variation causes (2 marks)', 'Examples of each (1 mark)', 'Interaction mentioned (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 2026 - Inheritance, Variation and Evolution'
+          },
+          {
+            id: 'ive-2026-q4',
+            question: 'Describe the process of natural selection and explain how it leads to evolution.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Genetic variation exists in populations due to mutations and sexual reproduction; environmental pressures create competition for resources; individuals with advantageous characteristics are more likely to survive and reproduce successfully; beneficial alleles are passed to offspring; over many generations, allele frequencies change in the population; species evolves and becomes better adapted to environment.',
+            markingCriteria: {
+              breakdown: ['Genetic variation exists (1 mark)', 'Environmental pressure/competition (1 mark)', 'Survival advantage (1 mark)', 'Successful reproduction (1 mark)', 'Allele inheritance (1 mark)', 'Frequency changes (1 mark)', 'Evolution over time (1 mark)', 'Better adaptation (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 2026 - Inheritance, Variation and Evolution'
+          },
+          {
+            id: 'ive-2026-q5',
+            question: 'Compare selective breeding and genetic engineering as methods of producing organisms with desired characteristics.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Selective breeding: choosing parents with desired traits, breeding them together, selecting best offspring, repeating over generations; slow process, limited to existing variation, produces organisms with multiple traits. Genetic engineering: directly modifying genes, inserting specific genes from other organisms, faster process, can introduce completely new characteristics, more precise control.',
+            markingCriteria: {
+              breakdown: ['Selective breeding process (3 marks)', 'Selective breeding limitations (1 mark)', 'Genetic engineering process (2 marks)', 'Genetic engineering advantages (1 mark)', 'Comparison made (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 2026 - Inheritance, Variation and Evolution'
+          }
+        ]
+      },
+      {
+        id: 'ecology-2026',
+        name: 'Ecology',
+        questions: [
+          {
+            id: 'eco-2026-q1',
+            question: 'Define the terms ecosystem, community, population, and habitat.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Ecosystem: living organisms and their physical environment interacting together; Community: all the different species living in the same area; Population: all organisms of the same species living in the same area; Habitat: the place where an organism lives.',
+            markingCriteria: {
+              breakdown: ['Ecosystem definition (2 marks)', 'Community definition (2 marks)', 'Population definition (2 marks)', 'Habitat definition (2 marks)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 2026 - Ecology'
+          },
+          {
+            id: 'eco-2026-q2',
+            question: 'Explain why energy transfer in food chains is inefficient and describe what happens to the energy at each trophic level.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Only about 10% of energy is transferred between trophic levels; energy is lost as heat through respiration; energy used for movement and life processes; not all parts of organisms are eaten; energy lost in waste products; some energy used for growth that is not passed on.',
+            markingCriteria: {
+              breakdown: ['10% transfer efficiency (1 mark)', 'Heat loss through respiration (1 mark)', 'Energy for movement/life processes (1 mark)', 'Incomplete consumption (1 mark)', 'Energy in waste (1 mark)', 'Growth energy (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 2026 - Ecology'
+          },
+          {
+            id: 'eco-2026-q3',
+            question: 'Describe the carbon cycle and explain the role of different processes in maintaining carbon dioxide levels.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Carbon dioxide in atmosphere; taken up by plants during photosynthesis and converted to glucose; carbon passes through food chains when animals eat plants; carbon returned to atmosphere through respiration by all living organisms; decomposers break down dead organisms releasing carbon; fossil fuel combustion adds extra carbon dioxide; deforestation reduces carbon uptake.',
+            markingCriteria: {
+              breakdown: ['CO₂ in atmosphere (1 mark)', 'Photosynthesis uptake (1 mark)', 'Food chain transfer (1 mark)', 'Respiration release (1 mark)', 'Decomposer action (1 mark)', 'Fossil fuel combustion (1 mark)', 'Deforestation impact (1 mark)', 'Cycle completion (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 2026 - Ecology'
+          },
+          {
+            id: 'eco-2026-q4',
+            question: 'Explain the importance of biodiversity and describe how human activities can reduce biodiversity.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Biodiversity provides stable ecosystems; variety of food sources; medical discoveries from plants and animals; genetic resources for crop breeding; environmental services like pollination and pest control. Human activities reducing biodiversity: deforestation destroying habitats; pollution killing organisms; overfishing depleting species; climate change altering habitats; introduction of invasive species.',
+            markingCriteria: {
+              breakdown: ['Ecosystem stability (1 mark)', 'Food variety (1 mark)', 'Medical resources (1 mark)', 'Genetic resources (1 mark)', 'Environmental services (1 mark)', 'Three human impacts (3 marks)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 2026 - Ecology'
+          },
+          {
+            id: 'eco-2026-q5',
+            question: 'Discuss the causes and consequences of global warming, and suggest methods to reduce its impact.',
+            marks: 10,
+            difficulty: 'hard',
+            modelAnswer: 'Causes: increased greenhouse gas emissions from burning fossil fuels; deforestation reducing CO₂ absorption; industrial processes; agriculture producing methane. Consequences: rising global temperatures; melting ice caps and glaciers; rising sea levels; extreme weather events; habitat loss and species extinction. Solutions: use renewable energy sources; improve energy efficiency; reforestation and afforestation; carbon capture technology; international cooperation and legislation.',
+            markingCriteria: {
+              breakdown: ['Causes identified (3 marks)', 'Consequences described (3 marks)', 'Solutions suggested (3 marks)', 'Clear explanations (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 2026 - Ecology'
+          }
+        ]
+      }
+    ]
+  },
+  
+  // Combined Science Chemistry Paper 1 2026
+  {
+    id: 'predicted-combined-science-chemistry-paper1-2026',
+    name: 'Combined Science Chemistry Paper 1 Predicted 2026 Exam',
+    topics: [
+      {
+        id: 'bonding-structure-2026',
+        name: 'Bonding, Structure, and Properties of Matter',
+        questions: [
+          {
+            id: 'bsp-2026-q1',
+            question: 'Compare and contrast ionic and covalent bonding, including how each type of bond forms and the properties of compounds formed.',
+            marks: 10,
+            difficulty: 'hard',
+            modelAnswer: 'Ionic bonding: transfer of electrons from metal to non-metal atoms; metal loses electrons to form positive ions, non-metal gains electrons to form negative ions; electrostatic attraction between oppositely charged ions. Properties: high melting/boiling points, conduct electricity when molten/dissolved, often soluble in water, brittle. Covalent bonding: sharing of electrons between non-metal atoms; electrons shared in pairs to complete outer shells. Properties: lower melting/boiling points, do not conduct electricity, often insoluble in water.',
+            markingCriteria: {
+              breakdown: ['Ionic bond formation (3 marks)', 'Ionic compound properties (2 marks)', 'Covalent bond formation (2 marks)', 'Covalent compound properties (2 marks)', 'Clear comparison (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 2026 - Bonding and Structure'
+          },
+          {
+            id: 'bsp-2026-q2',
+            question: 'Describe the structure and properties of diamond and graphite, explaining why they have different properties despite both being forms of carbon.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Diamond: each carbon atom bonded to 4 others in giant covalent structure; very hard due to strong bonds in all directions; high melting point; does not conduct electricity as all electrons in bonds. Graphite: each carbon bonded to 3 others in layers; soft as layers can slide over each other; conducts electricity due to delocalized electrons; used as lubricant and in pencils.',
+            markingCriteria: {
+              breakdown: ['Diamond structure (2 marks)', 'Diamond properties and explanations (2 marks)', 'Graphite structure (2 marks)', 'Graphite properties and explanations (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 2026 - Bonding and Structure'
+          },
+          {
+            id: 'bsp-2026-q3',
+            question: 'Explain metallic bonding and describe how this type of bonding accounts for the typical properties of metals.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Metallic bonding involves a sea of delocalized electrons; positive metal ions held together by electrostatic attraction to mobile electrons. Properties explained: conduct electricity because electrons can move freely; malleable and ductile because layers can slide over each other while maintaining bonding; high melting points due to strong metallic bonds.',
+            markingCriteria: {
+              breakdown: ['Description of metallic bonding (2 marks)', 'Electrical conductivity explanation (1 mark)', 'Malleability explanation (1 mark)', 'High melting point explanation (1 mark)', 'Clear link between structure and properties (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 2026 - Bonding and Structure'
+          },
+          {
+            id: 'bsp-2026-q4',
+            question: 'Describe the properties of polymers and explain how their structure affects their properties.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Polymers are large molecules made from many repeating monomer units joined by covalent bonds. Properties depend on structure: long chain molecules give strength; cross-linking between chains increases strength and heat resistance; crystalline regions make polymers stronger and less flexible; amorphous regions make polymers more flexible.',
+            markingCriteria: {
+              breakdown: ['Definition of polymer (1 mark)', 'Monomer units mentioned (1 mark)', 'Chain length effects (1 mark)', 'Cross-linking effects (1 mark)', 'Crystalline vs amorphous regions (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 2026 - Bonding and Structure'
+          },
+          {
+            id: 'bsp-2026-q5',
+            question: 'Compare the structures and properties of simple molecular substances with giant covalent structures.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Simple molecular: small molecules held together by weak intermolecular forces; low melting/boiling points; do not conduct electricity; often gases or liquids at room temperature. Giant covalent: atoms bonded in continuous network of covalent bonds; very high melting/boiling points; usually do not conduct electricity (except graphite); hard and brittle solids.',
+            markingCriteria: {
+              breakdown: ['Simple molecular structure (2 marks)', 'Simple molecular properties (2 marks)', 'Giant covalent structure (2 marks)', 'Giant covalent properties (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 2026 - Bonding and Structure'
+          }
+        ]
+      }
+    ]
+  },
+  
+  // Combined Science Chemistry Paper 2 2026
+  {
+    id: 'predicted-combined-science-chemistry-paper2-2026',
+    name: 'Combined Science Chemistry Paper 2 Predicted 2026 Exam',
+    topics: [
+      {
+        id: 'rate-extent-2026',
+        name: 'Rate and Extent of Chemical Change',
+        questions: [
+          {
+            id: 'rec-2026-q1',
+            question: 'Explain collision theory and use it to explain how temperature, concentration, surface area, and catalysts affect the rate of chemical reactions.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Collision theory: particles must collide with sufficient energy (activation energy) and correct orientation for reaction to occur. Temperature: higher temperature increases kinetic energy of particles, more frequent collisions, more particles have activation energy. Concentration: more particles in same volume, more frequent collisions. Surface area: more exposed particles available for collision. Catalysts: provide alternative pathway with lower activation energy, more particles can react.',
+            markingCriteria: {
+              breakdown: ['Collision theory explanation (3 marks)', 'Temperature effect (2 marks)', 'Concentration effect (2 marks)', 'Surface area effect (2 marks)', 'Catalyst effect (3 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 2026 - Rate and Extent'
+          },
+          {
+            id: 'rec-2026-q2',
+            question: 'Describe different methods for measuring the rate of chemical reactions and explain the advantages and disadvantages of each method.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Gas collection: measure volume of gas produced over time; advantages - easy to measure, accurate; disadvantages - only works for reactions producing gas. Mass loss: measure decrease in mass over time; advantages - simple equipment, continuous monitoring; disadvantages - only works when gas escapes. Color change: observe change in color intensity; advantages - immediate results; disadvantages - subjective, difficult to quantify.',
+            markingCriteria: {
+              breakdown: ['Gas collection method and evaluation (3 marks)', 'Mass loss method and evaluation (3 marks)', 'Color change method and evaluation (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 2026 - Rate and Extent'
+          },
+          {
+            id: 'rec-2026-q3',
+            question: 'Explain what is meant by a reversible reaction and dynamic equilibrium.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Reversible reaction: reaction where products can react together to form the original reactants; shown by ⇌ symbol. Dynamic equilibrium: occurs in closed system when forward and reverse reactions occur at equal rates; concentrations of reactants and products remain constant; reactions continue but there is no overall change.',
+            markingCriteria: {
+              breakdown: ['Reversible reaction definition (2 marks)', 'Dynamic equilibrium definition (2 marks)', 'Equal rates mentioned (1 mark)', 'Constant concentrations (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 2026 - Rate and Extent'
+          },
+          {
+            id: 'rec-2026-q4',
+            question: 'State Le Chatelier\'s principle and use it to predict the effect of changing temperature, pressure, and concentration on the position of equilibrium.',
+            marks: 10,
+            difficulty: 'hard',
+            modelAnswer: 'Le Chatelier\'s principle: if conditions of a system at equilibrium are changed, the position of equilibrium shifts to oppose the change. Temperature: increasing temperature favors endothermic direction, decreasing temperature favors exothermic direction. Pressure: increasing pressure favors side with fewer gas molecules, decreasing pressure favors side with more gas molecules. Concentration: increasing concentration of reactant shifts right, increasing concentration of product shifts left.',
+            markingCriteria: {
+              breakdown: ['Le Chatelier\'s principle statement (2 marks)', 'Temperature effects (3 marks)', 'Pressure effects (3 marks)', 'Concentration effects (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 2026 - Rate and Extent'
+          },
+          {
+            id: 'rec-2026-q5',
+            question: 'Describe the Haber process for manufacturing ammonia, including the conditions used and why these conditions represent a compromise.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Haber process: N₂ + 3H₂ ⇌ 2NH₃ (+ heat). Conditions: 450°C temperature, 200 atmospheres pressure, iron catalyst. Compromise: higher pressure favors ammonia formation but is expensive; lower temperature favors ammonia formation but reaction too slow; 450°C is compromise between rate and yield; catalyst speeds up reaction without affecting position.',
+            markingCriteria: {
+              breakdown: ['Balanced equation (2 marks)', 'Conditions stated (3 marks)', 'Compromise explanations (3 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 2026 - Rate and Extent'
+          }
+        ]
+      }
+    ]
+  },
+  
+  // Combined Science Physics Paper 1 2026
+  {
+    id: 'predicted-combined-science-physics-paper1-2026',
+    name: 'Combined Science Physics Paper 1 Predicted 2026 Exam',
+    topics: [
+      {
+        id: 'energy-2026',
+        name: 'Energy',
+        questions: [
+          {
+            id: 'en-2026-q1',
+            question: 'List and define the eight energy stores, giving an example of each.',
+            marks: 16,
+            difficulty: 'medium',
+            modelAnswer: 'Kinetic: energy of moving objects (moving car); Gravitational potential: energy due to position in gravitational field (book on shelf); Elastic potential: energy in stretched/compressed objects (stretched spring); Chemical: energy in chemical bonds (food, fuel); Nuclear: energy in atomic nuclei (uranium); Internal/thermal: energy due to temperature (hot water); Magnetic: energy in magnetic fields (magnets); Electrostatic: energy in electric fields (charged objects).',
+            markingCriteria: {
+              breakdown: ['Eight energy stores correctly identified (8 marks)', 'Correct definitions (4 marks)', 'Appropriate examples (4 marks)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 2026 - Energy'
+          },
+          {
+            id: 'en-2026-q2',
+            question: 'Calculate the kinetic energy of a 1200 kg car traveling at 25 m/s, and the gravitational potential energy of a 2 kg object at a height of 50 m. (g = 9.8 m/s²)',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Kinetic energy: KE = ½mv² = ½ × 1200 × 25² = ½ × 1200 × 625 = 375,000 J. Gravitational potential energy: GPE = mgh = 2 × 9.8 × 50 = 980 J.',
+            markingCriteria: {
+              breakdown: ['KE formula and substitution (2 marks)', 'Correct KE answer (1 mark)', 'GPE formula and substitution (2 marks)', 'Correct GPE answer (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 2026 - Energy'
+          },
+          {
+            id: 'en-2026-q3',
+            question: 'Explain the principle of conservation of energy and describe what happens to energy in a pendulum throughout one complete swing.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Conservation of energy: energy cannot be created or destroyed, only transferred from one store to another; total energy remains constant. Pendulum: at highest points - maximum GPE, zero KE; at lowest point - zero GPE, maximum KE; energy constantly transfers between GPE and KE; some energy lost to surroundings as heat and sound due to air resistance and friction.',
+            markingCriteria: {
+              breakdown: ['Conservation principle (2 marks)', 'Energy at highest points (2 marks)', 'Energy at lowest point (2 marks)', 'Energy transfers (1 mark)', 'Energy losses (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 2026 - Energy'
+          },
+          {
+            id: 'en-2026-q4',
+            question: 'Define power and efficiency. Calculate the power of a motor that transfers 5000 J of energy in 25 seconds, and the efficiency if only 4000 J is useful energy output.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Power: rate of energy transfer (energy per unit time). Efficiency: ratio of useful energy output to total energy input. Power = Energy ÷ Time = 5000 ÷ 25 = 200 W. Efficiency = (useful output ÷ total input) × 100% = (4000 ÷ 5000) × 100% = 80%.',
+            markingCriteria: {
+              breakdown: ['Power definition (1 mark)', 'Efficiency definition (1 mark)', 'Power calculation (3 marks)', 'Efficiency calculation (3 marks)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 2026 - Energy'
+          },
+          {
+            id: 'en-2026-q5',
+            question: 'Compare renewable and non-renewable energy resources, discussing their advantages and disadvantages for electricity generation.',
+            marks: 10,
+            difficulty: 'hard',
+            modelAnswer: 'Renewable: solar, wind, hydroelectric, geothermal, biomass, tidal. Advantages: will not run out, environmentally clean, low running costs. Disadvantages: weather dependent, initial high costs, visual pollution. Non-renewable: coal, oil, gas, nuclear. Advantages: reliable, high energy density, existing infrastructure. Disadvantages: will run out, pollution, greenhouse gas emissions, nuclear waste.',
+            markingCriteria: {
+              breakdown: ['Renewable sources (2 marks)', 'Renewable advantages (2 marks)', 'Renewable disadvantages (2 marks)', 'Non-renewable sources (1 mark)', 'Non-renewable advantages (1 mark)', 'Non-renewable disadvantages (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 2026 - Energy'
+          }
+        ]
+      }
+    ]
+  },
+  
+  // Combined Science Physics Paper 2 2026
+  {
+    id: 'predicted-combined-science-physics-paper2-2026',
+    name: 'Combined Science Physics Paper 2 Predicted 2026 Exam',
+    topics: [
+      {
+        id: 'forces-2026',
+        name: 'Forces',
+        questions: [
+          {
+            id: 'fo-2026-q1',
+            question: 'State Newton\'s three laws of motion and give an example to illustrate each law.',
+            marks: 9,
+            difficulty: 'medium',
+            modelAnswer: 'First law: An object at rest stays at rest and an object in motion stays in motion at constant velocity, unless acted upon by an unbalanced force. Example: passenger thrown forward when car brakes. Second law: The acceleration of an object is proportional to the resultant force and inversely proportional to its mass (F = ma). Example: harder push produces greater acceleration. Third law: For every action there is an equal and opposite reaction. Example: rocket propulsion.',
+            markingCriteria: {
+              breakdown: ['First law statement and example (3 marks)', 'Second law statement and example (3 marks)', 'Third law statement and example (3 marks)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 2026 - Forces'
+          },
+          {
+            id: 'fo-2026-q2',
+            question: 'Calculate the weight of a 75 kg astronaut on Earth and on the Moon. Earth g = 9.8 m/s², Moon g = 1.6 m/s². Explain why the values are different.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Weight on Earth: W = mg = 75 × 9.8 = 735 N. Weight on Moon: W = mg = 75 × 1.6 = 120 N. The Moon has weaker gravitational field strength because it has less mass than Earth; gravitational field strength depends on the mass of the planet.',
+            markingCriteria: {
+              breakdown: ['Earth weight calculation (2 marks)', 'Moon weight calculation (2 marks)', 'Explanation of difference (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 2026 - Forces'
+          },
+          {
+            id: 'fo-2026-q3',
+            question: 'Define momentum and state the principle of conservation of momentum. Calculate the momentum of a 800 kg car traveling at 15 m/s.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Momentum: product of mass and velocity (p = mv). Conservation of momentum: in a closed system, total momentum before collision equals total momentum after collision. Momentum = 800 × 15 = 12,000 kg·m/s.',
+            markingCriteria: {
+              breakdown: ['Momentum definition (2 marks)', 'Conservation principle (2 marks)', 'Momentum calculation (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 2026 - Forces'
+          },
+          {
+            id: 'fo-2026-q4',
+            question: 'Explain the factors that affect stopping distance and why this is important for road safety.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Stopping distance = thinking distance + braking distance. Thinking distance factors: speed (proportional), reaction time, drugs/alcohol, tiredness. Braking distance factors: speed (proportional to square), vehicle mass, road conditions, tire condition, brake condition. Road safety: higher speeds dramatically increase stopping distance; drivers need to maintain safe following distances; speed limits protect lives.',
+            markingCriteria: {
+              breakdown: ['Stopping distance components (1 mark)', 'Thinking distance factors (2 marks)', 'Braking distance factors (3 marks)', 'Road safety implications (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 2026 - Forces'
+          },
+          {
+            id: 'fo-2026-q5',
+            question: 'Describe the motion of an object falling through air, including the concept of terminal velocity.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Initially object accelerates downward due to gravitational force; as speed increases, air resistance increases; air resistance opposes motion; when air resistance equals weight, resultant force is zero; object reaches terminal velocity and falls at constant speed; terminal velocity depends on object\'s shape, size, and density.',
+            markingCriteria: {
+              breakdown: ['Initial acceleration (1 mark)', 'Air resistance increases (1 mark)', 'Forces balance (2 marks)', 'Terminal velocity reached (2 marks)', 'Constant speed (1 mark)', 'Factors affecting terminal velocity (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 2026 - Forces'
+          }
+        ]
+      }
+    ]
+  },
+  
   // Keep existing predicted 2026 exams as separate subjects
   {
     id: 'predicted-biology-2026',
