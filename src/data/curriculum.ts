@@ -13918,6 +13918,50 @@ export const curriculum: Subject[] = [
               breakdown: ['Temperature (1 mark)', 'Concentration (1 mark)', 'Surface area/particle size (1 mark)', 'Catalyst (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 2 - The rate and extent of chemical change'
+          },
+          {
+            id: 'c6-q2',
+            question: 'Explain how increasing temperature affects reaction rate.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Higher temperature gives particles more energy. Particles move faster and collide more frequently. More collisions have energy greater than activation energy.',
+            markingCriteria: {
+              breakdown: ['Particles have more energy (1 mark)', 'More frequent collisions (1 mark)', 'More successful collisions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - The rate and extent of chemical change'
+          },
+          {
+            id: 'c6-q3',
+            question: 'Describe how to measure the rate of a reaction.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Measure quantity of reactant used or product formed over time. Can measure mass loss, volume of gas produced, or change in concentration.',
+            markingCriteria: {
+              breakdown: ['Quantity of reactant/product over time (2 marks)', 'Examples: mass loss, gas volume, concentration (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - The rate and extent of chemical change'
+          },
+          {
+            id: 'c6-q4',
+            question: 'Explain what is meant by a reversible reaction.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'A reaction where products can react to form the original reactants. Shown using ⇌ symbol. Can reach equilibrium.',
+            markingCriteria: {
+              breakdown: ['Products can form reactants (1 mark)', '⇌ symbol (1 mark)', 'Can reach equilibrium (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - The rate and extent of chemical change'
+          },
+          {
+            id: 'c6-q5',
+            question: 'State Le Chatelier\'s principle.',
+            marks: 2,
+            difficulty: 'hard',
+            modelAnswer: 'If conditions of an equilibrium are changed, the equilibrium shifts to oppose the change.',
+            markingCriteria: {
+              breakdown: ['Equilibrium shifts when conditions change (1 mark)', 'Shifts to oppose the change (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - The rate and extent of chemical change'
           }
         ]
       },
@@ -13933,6 +13977,50 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Methane, ethane, propane, butane.',
             markingCriteria: {
               breakdown: ['Methane (1 mark)', 'Ethane (1 mark)', 'Propane (1 mark)', 'Butane (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+          },
+          {
+            id: 'c7-q2',
+            question: 'What is the general formula for alkanes?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'CₙH₂ₙ₊₂',
+            markingCriteria: {
+              breakdown: ['CₙH₂ₙ₊₂ (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+          },
+          {
+            id: 'c7-q3',
+            question: 'Describe the combustion of hydrocarbons.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Hydrocarbons burn in oxygen to produce carbon dioxide and water. Complete combustion occurs with plenty of oxygen. Incomplete combustion produces carbon monoxide.',
+            markingCriteria: {
+              breakdown: ['Produces CO₂ and water (1 mark)', 'Complete combustion with oxygen (1 mark)', 'Incomplete gives CO (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+          },
+          {
+            id: 'c7-q4',
+            question: 'Name the alcohol produced when ethanol undergoes fermentation.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Ethanol',
+            markingCriteria: {
+              breakdown: ['Ethanol (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+          },
+          {
+            id: 'c7-q5',
+            question: 'Write the word equation for fermentation.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'glucose → ethanol + carbon dioxide',
+            markingCriteria: {
+              breakdown: ['Glucose → ethanol (1 mark)', '+ carbon dioxide (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
           }
@@ -13952,6 +14040,50 @@ export const curriculum: Subject[] = [
               breakdown: ['Damp blue litmus paper (1 mark)', 'Bleaches/turns white (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+          },
+          {
+            id: 'c8-q2',
+            question: 'How would you test for hydrogen gas?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Use a burning splint. Hydrogen burns with a squeaky pop.',
+            markingCriteria: {
+              breakdown: ['Burning splint (1 mark)', 'Squeaky pop (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+          },
+          {
+            id: 'c8-q3',
+            question: 'Describe the flame test for sodium ions.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Dip clean wire loop in sample and hold in blue Bunsen flame. Sodium produces yellow/orange flame.',
+            markingCriteria: {
+              breakdown: ['Clean wire loop in flame (1 mark)', 'Yellow/orange color (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+          },
+          {
+            id: 'c8-q4',
+            question: 'How would you test for carbon dioxide gas?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Bubble gas through limewater. Limewater turns cloudy/milky.',
+            markingCriteria: {
+              breakdown: ['Bubble through limewater (1 mark)', 'Turns cloudy/milky (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+          },
+          {
+            id: 'c8-q5',
+            question: 'Describe how to test for sulfate ions.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Add dilute hydrochloric acid then barium chloride solution. White precipitate forms if sulfate ions present.',
+            markingCriteria: {
+              breakdown: ['Add HCl first (1 mark)', 'Then barium chloride (1 mark)', 'White precipitate (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
           }
         ]
       },
@@ -13969,6 +14101,50 @@ export const curriculum: Subject[] = [
               breakdown: ['Nitrogen 78% (1 mark)', 'Oxygen 21% (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of the atmosphere'
+          },
+          {
+            id: 'c9-q2',
+            question: 'Describe how carbon dioxide levels in the atmosphere have changed.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Carbon dioxide levels have increased significantly since industrial revolution. Caused by burning fossil fuels and deforestation. Leading to enhanced greenhouse effect.',
+            markingCriteria: {
+              breakdown: ['Increased since industrial revolution (1 mark)', 'Caused by fossil fuels/deforestation (1 mark)', 'Enhanced greenhouse effect (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of the atmosphere'
+          },
+          {
+            id: 'c9-q3',
+            question: 'Explain how the greenhouse effect works.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Solar radiation warms Earth\'s surface. Earth emits infrared radiation. Greenhouse gases absorb infrared radiation. Atmosphere warms up.',
+            markingCriteria: {
+              breakdown: ['Solar radiation warms surface (1 mark)', 'Earth emits infrared (1 mark)', 'Greenhouse gases absorb infrared (1 mark)', 'Atmosphere warms (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of the atmosphere'
+          },
+          {
+            id: 'c9-q4',
+            question: 'List three greenhouse gases.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Carbon dioxide, methane, water vapor.',
+            markingCriteria: {
+              breakdown: ['Carbon dioxide (1 mark)', 'Methane (1 mark)', 'Water vapor (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of the atmosphere'
+          },
+          {
+            id: 'c9-q5',
+            question: 'Describe the problems caused by air pollution.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Acid rain damages buildings and kills plants. Particulates cause respiratory problems. Carbon monoxide is toxic. Global warming affects climate.',
+            markingCriteria: {
+              breakdown: ['Acid rain effects (1 mark)', 'Particulates and health (1 mark)', 'Carbon monoxide toxic (1 mark)', 'Global warming (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of the atmosphere'
           }
         ]
       },
@@ -13984,6 +14160,50 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Recycling metals conserves finite natural resources, reduces energy consumption compared to extracting from ores, reduces environmental impact of mining, and reduces waste in landfills.',
             markingCriteria: {
               breakdown: ['Conserves natural resources (1 mark)', 'Reduces energy consumption (1 mark)', 'Reduces environmental impact (1 mark)', 'Reduces waste (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+          },
+          {
+            id: 'c10-q2',
+            question: 'What is meant by a finite resource?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A resource that will eventually run out and cannot be replaced.',
+            markingCriteria: {
+              breakdown: ['Will run out (1 mark)', 'Cannot be replaced (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+          },
+          {
+            id: 'c10-q3',
+            question: 'Describe the process of water treatment.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Filtration removes large particles. Sedimentation allows particles to settle. Chlorination kills bacteria. UV light can also sterilize water.',
+            markingCriteria: {
+              breakdown: ['Filtration removes particles (1 mark)', 'Sedimentation (1 mark)', 'Chlorination kills bacteria (1 mark)', 'UV sterilization (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+          },
+          {
+            id: 'c10-q4',
+            question: 'Explain how life cycle assessment is used.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Assesses environmental impact of a product from raw materials to disposal. Considers energy use, waste production, and pollution at each stage.',
+            markingCriteria: {
+              breakdown: ['Assesses environmental impact (1 mark)', 'From raw materials to disposal (1 mark)', 'Considers energy, waste, pollution (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+          },
+          {
+            id: 'c10-q5',
+            question: 'Compare renewable and non-renewable resources.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Renewable resources can be replenished naturally and won\'t run out (e.g., wind, solar). Non-renewable resources are finite and will be used up (e.g., fossil fuels, metals).',
+            markingCriteria: {
+              breakdown: ['Renewable can be replenished (1 mark)', 'Won\'t run out (1 mark)', 'Non-renewable are finite (1 mark)', 'Examples given (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
           }
@@ -14011,6 +14231,50 @@ export const curriculum: Subject[] = [
               breakdown: ['Any four correct energy stores (4 marks)']
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+          },
+          {
+            id: 'p1-q2',
+            question: 'Calculate the kinetic energy of a 1200 kg car moving at 15 m/s. Use KE = ½mv²',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'KE = ½mv² = ½ × 1200 × 15² = ½ × 1200 × 225 = 135,000 J',
+            markingCriteria: {
+              breakdown: ['Correct formula used (1 mark)', 'Correct substitution (1 mark)', 'Correct answer 135,000 J (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+          },
+          {
+            id: 'p1-q3',
+            question: 'What is meant by the conservation of energy?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Energy cannot be created or destroyed, only transferred from one store to another.',
+            markingCriteria: {
+              breakdown: ['Cannot be created or destroyed (1 mark)', 'Only transferred between stores (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+          },
+          {
+            id: 'p1-q4',
+            question: 'Calculate the gravitational potential energy of a 5 kg object lifted 10 m high. Use GPE = mgh (g = 9.8 m/s²)',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'GPE = mgh = 5 × 9.8 × 10 = 490 J',
+            markingCriteria: {
+              breakdown: ['Correct formula used (1 mark)', 'Correct substitution (1 mark)', 'Correct answer 490 J (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+          },
+          {
+            id: 'p1-q5',
+            question: 'Explain what is meant by power.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Power is the rate of energy transfer or the amount of energy transferred per second.',
+            markingCriteria: {
+              breakdown: ['Rate of energy transfer (1 mark)', 'Energy per second (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
           }
         ]
       },
@@ -14026,6 +14290,50 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Q = I × t (or charge = current × time)',
             markingCriteria: {
               breakdown: ['Correct equation Q = I × t (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+          },
+          {
+            id: 'p2-q2',
+            question: 'Calculate the charge that flows when a current of 2 A flows for 5 s.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Q = I × t = 2 × 5 = 10 C',
+            markingCriteria: {
+              breakdown: ['Correct substitution (1 mark)', 'Correct answer 10 C (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+          },
+          {
+            id: 'p2-q3',
+            question: 'State Ohm\'s law.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Voltage is directly proportional to current (at constant temperature). V = I × R',
+            markingCriteria: {
+              breakdown: ['Directly proportional statement (1 mark)', 'V = I × R (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+          },
+          {
+            id: 'p2-q4',
+            question: 'Describe the difference between series and parallel circuits.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Series: components connected in a single loop, current same everywhere, voltage shared. Parallel: components connected in separate branches, voltage same across each branch, current shared.',
+            markingCriteria: {
+              breakdown: ['Series: single loop (1 mark)', 'Series: current same, voltage shared (1 mark)', 'Parallel: separate branches (1 mark)', 'Parallel: voltage same, current shared (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+          },
+          {
+            id: 'p2-q5',
+            question: 'Calculate the resistance of a component when 12 V produces a current of 3 A.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'R = V ÷ I = 12 ÷ 3 = 4 Ω',
+            markingCriteria: {
+              breakdown: ['Correct formula R = V ÷ I (1 mark)', 'Correct answer 4 Ω (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
           }
@@ -14045,6 +14353,50 @@ export const curriculum: Subject[] = [
               breakdown: ['Closely packed (1 mark)', 'Regular arrangement (1 mark)', 'Vibrate about fixed positions (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+          },
+          {
+            id: 'p3-q2',
+            question: 'Explain what happens to particles when a solid melts.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Particles gain energy and vibrate more. Forces between particles weaken. Particles can move past each other.',
+            markingCriteria: {
+              breakdown: ['Particles gain energy (1 mark)', 'Forces weaken (1 mark)', 'Can move past each other (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+          },
+          {
+            id: 'p3-q3',
+            question: 'Define density and state its equation.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Density is mass per unit volume. ρ = m/V',
+            markingCriteria: {
+              breakdown: ['Mass per unit volume (1 mark)', 'ρ = m/V (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+          },
+          {
+            id: 'p3-q4',
+            question: 'Explain the difference between evaporation and boiling.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Evaporation occurs at surface only, at any temperature, slowly. Boiling occurs throughout liquid, at boiling point only, rapidly.',
+            markingCriteria: {
+              breakdown: ['Evaporation at surface only (1 mark)', 'Any temperature (1 mark)', 'Boiling throughout liquid (1 mark)', 'At boiling point only (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+          },
+          {
+            id: 'p3-q5',
+            question: 'Calculate the density of a 200 g object with volume 50 cm³.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'ρ = m/V = 200/50 = 4 g/cm³',
+            markingCriteria: {
+              breakdown: ['Correct substitution (1 mark)', 'Correct answer 4 g/cm³ (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
           }
         ]
       },
@@ -14060,6 +14412,50 @@ export const curriculum: Subject[] = [
             modelAnswer: 'The nucleus emits radiation (alpha, beta, or gamma) and transforms into a more stable nucleus.',
             markingCriteria: {
               breakdown: ['Emits radiation (1 mark)', 'Becomes more stable (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+          },
+          {
+            id: 'p4-q2',
+            question: 'Name the three types of radioactive radiation.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Alpha, beta, gamma.',
+            markingCriteria: {
+              breakdown: ['Alpha (1 mark)', 'Beta (1 mark)', 'Gamma (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+          },
+          {
+            id: 'p4-q3',
+            question: 'Describe the properties of alpha radiation.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Alpha particles are helium nuclei, highly ionizing, stopped by paper or skin.',
+            markingCriteria: {
+              breakdown: ['Helium nuclei (1 mark)', 'Highly ionizing (1 mark)', 'Stopped by paper/skin (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+          },
+          {
+            id: 'p4-q4',
+            question: 'What is meant by half-life?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'The time taken for half the radioactive nuclei in a sample to decay.',
+            markingCriteria: {
+              breakdown: ['Time for half nuclei to decay (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+          },
+          {
+            id: 'p4-q5',
+            question: 'Give two uses of radioactivity.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Medical tracers and radiotherapy, carbon dating.',
+            markingCriteria: {
+              breakdown: ['Medical uses (1 mark)', 'Carbon dating (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
           }
@@ -14087,6 +14483,50 @@ export const curriculum: Subject[] = [
               breakdown: ['Object at rest stays at rest (1 mark)', 'Object in motion stays in motion unless acted upon by unbalanced force (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+          },
+          {
+            id: 'p5-q2',
+            question: 'Calculate the weight of a 50 kg person on Earth. (g = 9.8 m/s²)',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Weight = mg = 50 × 9.8 = 490 N',
+            markingCriteria: {
+              breakdown: ['Correct formula W = mg (1 mark)', 'Correct answer 490 N (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+          },
+          {
+            id: 'p5-q3',
+            question: 'What is meant by resultant force?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'The single force that has the same effect as all the forces acting on an object.',
+            markingCriteria: {
+              breakdown: ['Single force (1 mark)', 'Same effect as all forces (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+          },
+          {
+            id: 'p5-q4',
+            question: 'State Newton\'s Second Law of Motion.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'The acceleration of an object is proportional to the resultant force and inversely proportional to its mass. F = ma',
+            markingCriteria: {
+              breakdown: ['Acceleration proportional to force (1 mark)', 'F = ma (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+          },
+          {
+            id: 'p5-q5',
+            question: 'Calculate the force needed to accelerate a 10 kg object at 5 m/s².',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'F = ma = 10 × 5 = 50 N',
+            markingCriteria: {
+              breakdown: ['Correct substitution (1 mark)', 'Correct answer 50 N (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
           }
         ]
       },
@@ -14104,6 +14544,50 @@ export const curriculum: Subject[] = [
               breakdown: ['Maximum displacement from rest position (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+          },
+          {
+            id: 'p6-q2',
+            question: 'Define the frequency of a wave.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'The number of waves passing a point per second.',
+            markingCriteria: {
+              breakdown: ['Number of waves per second (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+          },
+          {
+            id: 'p6-q3',
+            question: 'State the equation linking wave speed, frequency, and wavelength.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'v = f × λ (wave speed = frequency × wavelength)',
+            markingCriteria: {
+              breakdown: ['v = f × λ (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+          },
+          {
+            id: 'p6-q4',
+            question: 'Describe the difference between transverse and longitudinal waves.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Transverse waves: vibrations perpendicular to direction of energy transfer (e.g., light). Longitudinal waves: vibrations parallel to direction of energy transfer (e.g., sound).',
+            markingCriteria: {
+              breakdown: ['Transverse: perpendicular vibrations (1 mark)', 'Example of transverse wave (1 mark)', 'Longitudinal: parallel vibrations (1 mark)', 'Example of longitudinal wave (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+          },
+          {
+            id: 'p6-q5',
+            question: 'Calculate the wave speed of a wave with frequency 50 Hz and wavelength 2 m.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'v = f × λ = 50 × 2 = 100 m/s',
+            markingCriteria: {
+              breakdown: ['Correct substitution (1 mark)', 'Correct answer 100 m/s (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
           }
         ]
       },
@@ -14119,6 +14603,50 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Permanent magnets produce their own magnetic field and keep their magnetism. Induced magnets only become magnetic when placed in a magnetic field.',
             markingCriteria: {
               breakdown: ['Permanent magnets produce own field (1 mark)', 'Keep their magnetism (1 mark)', 'Induced magnets only magnetic in field (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+          },
+          {
+            id: 'p7-q2',
+            question: 'Describe how to plot magnetic field lines using a compass.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Place compass near magnet. Mark direction needle points. Move compass to end of line. Repeat until field line complete.',
+            markingCriteria: {
+              breakdown: ['Place compass near magnet (1 mark)', 'Mark needle direction (1 mark)', 'Move and repeat (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+          },
+          {
+            id: 'p7-q3',
+            question: 'State the motor effect.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'A current-carrying conductor in a magnetic field experiences a force.',
+            markingCriteria: {
+              breakdown: ['Current-carrying conductor (1 mark)', 'Experiences force in magnetic field (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+          },
+          {
+            id: 'p7-q4',
+            question: 'Explain how a transformer works.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Primary coil connected to AC supply. Changing current creates changing magnetic field. This induces voltage in secondary coil. Voltage depends on turns ratio.',
+            markingCriteria: {
+              breakdown: ['AC in primary coil (1 mark)', 'Creates changing magnetic field (1 mark)', 'Induces voltage in secondary (1 mark)', 'Voltage depends on turns ratio (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+          },
+          {
+            id: 'p7-q5',
+            question: 'What is meant by electromagnetic induction?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'The process of inducing a voltage when a conductor moves through a magnetic field or when the magnetic field through a conductor changes.',
+            markingCriteria: {
+              breakdown: ['Inducing voltage (1 mark)', 'Conductor moves through field OR field changes (1 mark)']
             },
             specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
           }
