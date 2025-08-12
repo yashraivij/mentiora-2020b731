@@ -13062,6 +13062,94 @@ export const curriculum: Subject[] = [
               breakdown: ['Site of respiration (1 mark)', 'Releases energy (1 mark)']
             },
             specReference: 'AQA Combined Science Biology - Cell Biology'
+          },
+          {
+            id: 'b1-q3',
+            question: 'What is the function of chloroplasts?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Site of photosynthesis; contains chlorophyll to absorb light.',
+            markingCriteria: {
+              breakdown: ['Site of photosynthesis (1 mark)', 'Contains chlorophyll (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Cell Biology'
+          },
+          {
+            id: 'b1-q4',
+            question: 'State the function of the nucleus.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Controls cell activities; contains genetic material/DNA.',
+            markingCriteria: {
+              breakdown: ['Controls activities (1 mark)', 'Contains DNA (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Cell Biology'
+          },
+          {
+            id: 'b1-q5',
+            question: 'What is the function of the cell membrane?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Controls what enters and leaves the cell; selectively permeable.',
+            markingCriteria: {
+              breakdown: ['Controls entry/exit (1 mark)', 'Selectively permeable (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Cell Biology'
+          },
+          {
+            id: 'b1-q6',
+            question: 'State the function of ribosomes.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Site of protein synthesis.',
+            markingCriteria: {
+              breakdown: ['Protein synthesis (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Cell Biology'
+          },
+          {
+            id: 'b1-q7',
+            question: 'What is the function of the cell wall?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Provides structural support; prevents over-expansion.',
+            markingCriteria: {
+              breakdown: ['Structural support (1 mark)', 'Prevents expansion (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Cell Biology'
+          },
+          {
+            id: 'b1-q8',
+            question: 'State the function of the permanent vacuole.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Stores cell sap; maintains turgor pressure.',
+            markingCriteria: {
+              breakdown: ['Stores cell sap (1 mark)', 'Turgor pressure (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Cell Biology'
+          },
+          {
+            id: 'b1-q9',
+            question: 'What type of cells are bacteria?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Prokaryotic cells; no membrane-bound nucleus.',
+            markingCriteria: {
+              breakdown: ['Prokaryotic (1 mark)', 'No membrane-bound nucleus (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Cell Biology'
+          },
+          {
+            id: 'b1-q10',
+            question: 'Calculate the magnification if an object appears 50mm but is actually 2mm.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Magnification = image size ÷ actual size = 50 ÷ 2 = ×25',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Correct answer ×25 (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Cell Biology'
           }
         ]
       },
@@ -13079,6 +13167,105 @@ export const curriculum: Subject[] = [
               breakdown: ['Pumps blood (1 mark)', 'Around body/circulation (1 mark)', 'Four chambers (1 mark)']
             },
             specReference: 'AQA Combined Science Biology - Organisation'
+          },
+          {
+            id: 'b2-q2',
+            question: 'What is the function of red blood cells?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Transport oxygen; contain haemoglobin.',
+            markingCriteria: {
+              breakdown: ['Transport oxygen (1 mark)', 'Contain haemoglobin (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Organisation'
+          },
+          {
+            id: 'b2-q3',
+            question: 'State the function of white blood cells.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Fight infection; part of immune system.',
+            markingCriteria: {
+              breakdown: ['Fight infection (1 mark)', 'Immune system (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Organisation'
+          },
+          {
+            id: 'b2-q4',
+            question: 'What is the function of platelets?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Help blood clot; prevent bleeding.',
+            markingCriteria: {
+              breakdown: ['Blood clotting (1 mark)', 'Prevent bleeding (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Organisation'
+          },
+          {
+            id: 'b2-q5',
+            question: 'State the function of plasma.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Transports dissolved substances; carries blood cells.',
+            markingCriteria: {
+              breakdown: ['Transports substances (1 mark)', 'Carries cells (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Organisation'
+          },
+          {
+            id: 'b2-q6',
+            question: 'What is the function of arteries?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Carry blood away from heart; high pressure.',
+            markingCriteria: {
+              breakdown: ['Away from heart (1 mark)', 'High pressure (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Organisation'
+          },
+          {
+            id: 'b2-q7',
+            question: 'State the function of veins.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Carry blood to the heart; have valves.',
+            markingCriteria: {
+              breakdown: ['To the heart (1 mark)', 'Have valves (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Organisation'
+          },
+          {
+            id: 'b2-q8',
+            question: 'What is the function of capillaries?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Allow exchange of substances; one cell thick.',
+            markingCriteria: {
+              breakdown: ['Exchange substances (1 mark)', 'One cell thick (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Organisation'
+          },
+          {
+            id: 'b2-q9',
+            question: 'State the function of the lungs.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Gas exchange; oxygen in, carbon dioxide out.',
+            markingCriteria: {
+              breakdown: ['Gas exchange (1 mark)', 'O2 in, CO2 out (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Organisation'
+          },
+          {
+            id: 'b2-q10',
+            question: 'What is the function of the digestive system?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Break down food; absorb nutrients.',
+            markingCriteria: {
+              breakdown: ['Break down food (1 mark)', 'Absorb nutrients (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Organisation'
           }
         ]
       },
@@ -13094,6 +13281,105 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Bacteria, viruses, fungi, protists.',
             markingCriteria: {
               breakdown: ['Three correct pathogens (3 marks)']
+            },
+            specReference: 'AQA Combined Science Biology - Infection and Response'
+          },
+          {
+            id: 'b3-q2',
+            question: 'How do bacteria make you ill?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Reproduce rapidly; produce toxins.',
+            markingCriteria: {
+              breakdown: ['Reproduce rapidly (1 mark)', 'Produce toxins (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Infection and Response'
+          },
+          {
+            id: 'b3-q3',
+            question: 'How do viruses make you ill?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Invade cells; reproduce inside cells; damage cells.',
+            markingCriteria: {
+              breakdown: ['Invade cells (1 mark)', 'Damage cells (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Infection and Response'
+          },
+          {
+            id: 'b3-q4',
+            question: 'List three ways pathogens can be spread.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Air (droplets), water, direct contact.',
+            markingCriteria: {
+              breakdown: ['Three correct methods (3 marks)']
+            },
+            specReference: 'AQA Combined Science Biology - Infection and Response'
+          },
+          {
+            id: 'b3-q5',
+            question: 'State three ways to prevent spread of disease.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Hygiene, vaccination, isolation.',
+            markingCriteria: {
+              breakdown: ['Three correct methods (3 marks)']
+            },
+            specReference: 'AQA Combined Science Biology - Infection and Response'
+          },
+          {
+            id: 'b3-q6',
+            question: 'What is the function of white blood cells?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Engulf pathogens; produce antibodies; produce antitoxins.',
+            markingCriteria: {
+              breakdown: ['Engulf pathogens (1 mark)', 'Produce antibodies (1 mark)', 'Produce antitoxins (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Infection and Response'
+          },
+          {
+            id: 'b3-q7',
+            question: 'What is a vaccine?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Dead or inactive pathogen; stimulates immune response.',
+            markingCriteria: {
+              breakdown: ['Dead/inactive pathogen (1 mark)', 'Stimulates immunity (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Infection and Response'
+          },
+          {
+            id: 'b3-q8',
+            question: 'What are antibiotics?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Drugs that kill bacteria; do not work on viruses.',
+            markingCriteria: {
+              breakdown: ['Kill bacteria (1 mark)', 'Do not work on viruses (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Infection and Response'
+          },
+          {
+            id: 'b3-q9',
+            question: 'What is antibiotic resistance?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'When bacteria are not killed by antibiotics; caused by overuse; bacteria mutate.',
+            markingCriteria: {
+              breakdown: ['Bacteria not killed (1 mark)', 'Caused by overuse (1 mark)', 'Mutation (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Infection and Response'
+          },
+          {
+            id: 'b3-q10',
+            question: 'How can antibiotic resistance be reduced?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Complete course of antibiotics; only prescribe when necessary; develop new antibiotics.',
+            markingCriteria: {
+              breakdown: ['Complete course (1 mark)', 'Only when necessary (1 mark)', 'Develop new ones (1 mark)']
             },
             specReference: 'AQA Combined Science Biology - Infection and Response'
           }
@@ -13455,6 +13741,105 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Universe started from a very hot, dense point; expanded rapidly; continues to expand; evidence from cosmic microwave background radiation.',
             markingCriteria: {
               breakdown: ['Hot, dense start (1 mark)', 'Rapid expansion (1 mark)', 'Continues expanding (1 mark)', 'Evidence mentioned (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Space Physics'
+          },
+          {
+            id: 'p8-q2',
+            question: 'What is a galaxy?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Collection of billions of stars; held together by gravity.',
+            markingCriteria: {
+              breakdown: ['Billions of stars (1 mark)', 'Held by gravity (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Space Physics'
+          },
+          {
+            id: 'p8-q3',
+            question: 'What is the solar system?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The Sun and all objects that orbit it; including planets and moons.',
+            markingCriteria: {
+              breakdown: ['Sun and orbiting objects (1 mark)', 'Planets and moons (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Space Physics'
+          },
+          {
+            id: 'p8-q4',
+            question: 'Name the eight planets in order from the Sun.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.',
+            markingCriteria: {
+              breakdown: ['All eight planets in correct order (8 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Space Physics'
+          },
+          {
+            id: 'p8-q5',
+            question: 'What is a star?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Ball of gas; produces energy by nuclear fusion.',
+            markingCriteria: {
+              breakdown: ['Ball of gas (1 mark)', 'Nuclear fusion (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Space Physics'
+          },
+          {
+            id: 'p8-q6',
+            question: 'What is a moon?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Natural satellite; orbits a planet.',
+            markingCriteria: {
+              breakdown: ['Natural satellite (1 mark)', 'Orbits planet (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Space Physics'
+          },
+          {
+            id: 'p8-q7',
+            question: 'Why do planets orbit the Sun?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Gravitational attraction; centripetal force.',
+            markingCriteria: {
+              breakdown: ['Gravitational attraction (1 mark)', 'Centripetal force (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Space Physics'
+          },
+          {
+            id: 'p8-q8',
+            question: 'What is the life cycle of a star like the Sun?',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Nebula → protostar → main sequence → red giant → white dwarf.',
+            markingCriteria: {
+              breakdown: ['Five stages in correct order (5 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Space Physics'
+          },
+          {
+            id: 'p8-q9',
+            question: 'What happens to very massive stars?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Become red supergiants; explode as supernovas; form neutron stars or black holes.',
+            markingCriteria: {
+              breakdown: ['Red supergiant (1 mark)', 'Supernova (1 mark)', 'Neutron star/black hole (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Space Physics'
+          },
+          {
+            id: 'p8-q10',
+            question: 'What evidence supports the Big Bang theory?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Cosmic microwave background radiation; red shift of galaxies; abundance of light elements.',
+            markingCriteria: {
+              breakdown: ['Cosmic microwave background (1 mark)', 'Red shift (1 mark)', 'Light element abundance (1 mark)']
             },
             specReference: 'AQA Combined Science Physics - Space Physics'
           }
