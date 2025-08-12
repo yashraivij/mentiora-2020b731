@@ -13074,6 +13074,83 @@ export const curriculum: Subject[] = [
               breakdown: ['Movement from high to low concentration (1 mark)', 'Down concentration gradient (1 mark)', 'Passive process/no energy required (1 mark)']
             },
             specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
+          },
+          {
+            id: 'b1-q4',
+            question: 'What is the function of the ribosomes in a cell?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Protein synthesis.',
+            markingCriteria: {
+              breakdown: ['Protein synthesis (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
+          },
+          {
+            id: 'b1-q5',
+            question: 'Explain what is meant by active transport.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Active transport is the movement of substances from a low concentration to a high concentration against the concentration gradient, using energy from respiration.',
+            markingCriteria: {
+              breakdown: ['Movement against concentration gradient (1 mark)', 'From low to high concentration (1 mark)', 'Requires energy (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
+          },
+          {
+            id: 'b1-q6',
+            question: 'Compare osmosis and diffusion.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Osmosis is the movement of water molecules across a partially permeable membrane from high to low water concentration. Diffusion is movement of any particles from high to low concentration. Both are passive processes.',
+            markingCriteria: {
+              breakdown: ['Osmosis: water molecules only (1 mark)', 'Osmosis: across partially permeable membrane (1 mark)', 'Diffusion: any particles (1 mark)', 'Both passive processes (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
+          },
+          {
+            id: 'b1-q7',
+            question: 'Describe how to prepare a slide to observe plant cells under a light microscope.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Place thin section of plant tissue on slide. Add drop of water/iodine. Lower cover slip slowly to avoid air bubbles. Start with lowest power objective lens.',
+            markingCriteria: {
+              breakdown: ['Thin section on slide (1 mark)', 'Add water/stain (1 mark)', 'Cover slip carefully (1 mark)', 'Start with low power (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
+          },
+          {
+            id: 'b1-q8',
+            question: 'Explain why nerve cells are adapted for their function.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Long axon to carry impulses over long distances. Branched dendrites to connect with other nerve cells. Myelin sheath insulates and speeds up transmission.',
+            markingCriteria: {
+              breakdown: ['Long axon for long distances (1 mark)', 'Branched dendrites for connections (1 mark)', 'Myelin sheath for insulation (1 mark)', 'Speeds up transmission (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
+          },
+          {
+            id: 'b1-q9',
+            question: 'State what happens during mitosis.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Chromosomes line up at the center of the cell. Cell fibers pull chromosomes apart. Two identical diploid cells are formed.',
+            markingCriteria: {
+              breakdown: ['Chromosomes line up (1 mark)', 'Chromosomes pulled apart (1 mark)', 'Two identical diploid cells formed (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
+          },
+          {
+            id: 'b1-q10',
+            question: 'Explain how stem cells are different from specialized cells.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Stem cells are undifferentiated and can divide to form different types of specialized cells. Specialized cells have specific structures for specific functions.',
+            markingCriteria: {
+              breakdown: ['Stem cells undifferentiated (1 mark)', 'Can form different cell types (1 mark)', 'Specialized cells have specific functions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
           }
         ]
       },
@@ -13089,6 +13166,105 @@ export const curriculum: Subject[] = [
             modelAnswer: 'The digestive system breaks down large insoluble food molecules into small soluble molecules that can be absorbed into the bloodstream. Key organs include the stomach (produces acid and enzymes), small intestine (absorption), liver (produces bile), and pancreas (produces digestive enzymes).',
             markingCriteria: {
               breakdown: ['Function: breaks down large to small molecules (2 marks)', 'Stomach function (1 mark)', 'Small intestine function (1 mark)', 'Liver/pancreas function (2 marks)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          },
+          {
+            id: 'b2-q2',
+            question: 'Explain how the structure of the small intestine is adapted for absorption.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Villi increase surface area for absorption. Villi have good blood supply to maintain concentration gradients. Thin walls for short diffusion distance.',
+            markingCriteria: {
+              breakdown: ['Villi increase surface area (1 mark)', 'Good blood supply (1 mark)', 'Maintains concentration gradients (1 mark)', 'Thin walls/short diffusion distance (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          },
+          {
+            id: 'b2-q3',
+            question: 'Describe the function of enzymes in digestion.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Enzymes are biological catalysts that speed up the breakdown of large food molecules. Amylase breaks down starch, protease breaks down proteins, lipase breaks down fats.',
+            markingCriteria: {
+              breakdown: ['Biological catalysts (1 mark)', 'Speed up breakdown (1 mark)', 'Specific enzymes for specific substrates (1 mark)', 'Examples given (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          },
+          {
+            id: 'b2-q4',
+            question: 'Explain how the heart pumps blood around the body.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Heart has four chambers. Atria fill with blood, then contract to push blood into ventricles. Ventricles contract to push blood out of heart. Valves prevent backflow of blood.',
+            markingCriteria: {
+              breakdown: ['Four chambers (1 mark)', 'Atria fill and contract (1 mark)', 'Ventricles contract (1 mark)', 'Valves prevent backflow (1 mark)', 'Sequence of pumping (2 marks)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          },
+          {
+            id: 'b2-q5',
+            question: 'Compare the structure and function of arteries and veins.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Arteries carry blood away from heart at high pressure, so have thick muscular walls and no valves. Veins carry blood to heart at low pressure, so have thin walls and valves to prevent backflow.',
+            markingCriteria: {
+              breakdown: ['Arteries carry blood from heart (1 mark)', 'High pressure (1 mark)', 'Thick muscular walls (1 mark)', 'Veins carry blood to heart (1 mark)', 'Low pressure, thin walls (1 mark)', 'Valves in veins (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          },
+          {
+            id: 'b2-q6',
+            question: 'Describe the role of red blood cells.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Red blood cells transport oxygen from lungs to body tissues. They contain haemoglobin which binds to oxygen. No nucleus gives more space for haemoglobin.',
+            markingCriteria: {
+              breakdown: ['Transport oxygen (1 mark)', 'Contain haemoglobin (1 mark)', 'No nucleus for more space (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          },
+          {
+            id: 'b2-q7',
+            question: 'Explain how gases are exchanged in the lungs.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Oxygen diffuses from alveoli into blood. Carbon dioxide diffuses from blood into alveoli. Large surface area and good blood supply maintain concentration gradients.',
+            markingCriteria: {
+              breakdown: ['Oxygen diffuses into blood (1 mark)', 'CO2 diffuses into alveoli (1 mark)', 'Large surface area (1 mark)', 'Good blood supply maintains gradients (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          },
+          {
+            id: 'b2-q8',
+            question: 'Describe how the structure of leaves is adapted for photosynthesis.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Broad and flat to maximize light absorption. Chloroplasts contain chlorophyll to absorb light. Stomata allow gas exchange. Veins transport water and sugars.',
+            markingCriteria: {
+              breakdown: ['Broad and flat for light (1 mark)', 'Chloroplasts contain chlorophyll (1 mark)', 'Stomata for gas exchange (1 mark)', 'Veins for transport (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          },
+          {
+            id: 'b2-q9',
+            question: 'Explain how the structure of the root hair cell is adapted for its function.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Long projection increases surface area for absorption of water and minerals. Thin cell wall for easy movement of water. Many mitochondria provide energy for active transport.',
+            markingCriteria: {
+              breakdown: ['Long projection increases surface area (1 mark)', 'Thin cell wall (1 mark)', 'Mitochondria for active transport (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          },
+          {
+            id: 'b2-q10',
+            question: 'Describe the transport systems in plants.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Xylem transports water and minerals from roots to leaves. Phloem transports sugars from leaves to other parts of plant. Both form vascular bundles.',
+            markingCriteria: {
+              breakdown: ['Xylem transports water and minerals (1 mark)', 'From roots to leaves (1 mark)', 'Phloem transports sugars (1 mark)', 'From leaves to other parts (1 mark)']
             },
             specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
           }
@@ -13108,6 +13284,50 @@ export const curriculum: Subject[] = [
               breakdown: ['Phagocytosis described (2 marks)', 'Antibody production (2 marks)', 'Antitoxin production (2 marks)']
             },
             specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
+          },
+          {
+            id: 'b3-q2',
+            question: 'Describe how vaccination protects against disease.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Vaccination introduces dead or weakened pathogens into the body. White blood cells recognize antigens and produce antibodies. Memory cells remain in blood for rapid response to future infections.',
+            markingCriteria: {
+              breakdown: ['Dead/weakened pathogens introduced (1 mark)', 'White blood cells produce antibodies (1 mark)', 'Memory cells formed (1 mark)', 'Rapid response to future infection (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
+          },
+          {
+            id: 'b3-q3',
+            question: 'Explain how antibiotics work and why they cannot treat viral infections.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Antibiotics kill bacteria by interfering with processes in bacterial cells. They cannot treat viral infections because viruses live inside host cells and have different life processes.',
+            markingCriteria: {
+              breakdown: ['Kill bacteria (1 mark)', 'Interfere with bacterial processes (1 mark)', 'Viruses live inside host cells (1 mark)', 'Different life processes (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
+          },
+          {
+            id: 'b3-q4',
+            question: 'Describe the physical barriers that prevent pathogens entering the body.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Skin acts as a barrier. Mucus in airways traps pathogens. Stomach acid kills pathogens. Tears contain enzymes that kill bacteria.',
+            markingCriteria: {
+              breakdown: ['Skin barrier (1 mark)', 'Mucus traps pathogens (1 mark)', 'Stomach acid (1 mark)', 'Tears/enzymes (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
+          },
+          {
+            id: 'b3-q5',
+            question: 'Explain what is meant by antibiotic resistance.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Some bacteria are not killed by antibiotics. These resistant bacteria survive and reproduce. Resistance can spread to other bacteria.',
+            markingCriteria: {
+              breakdown: ['Bacteria not killed by antibiotics (1 mark)', 'Resistant bacteria survive and reproduce (1 mark)', 'Resistance spreads (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
           }
         ]
       },
@@ -13123,6 +13343,50 @@ export const curriculum: Subject[] = [
             modelAnswer: 'carbon dioxide + water → glucose + oxygen',
             markingCriteria: {
               breakdown: ['Correct reactants: carbon dioxide + water (1 mark)', 'Correct products: glucose + oxygen (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
+          },
+          {
+            id: 'b4-q2',
+            question: 'Explain how light intensity affects the rate of photosynthesis.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'As light intensity increases, rate of photosynthesis increases up to a maximum. Beyond this point, light is no longer the limiting factor. Other factors like temperature or CO2 concentration become limiting.',
+            markingCriteria: {
+              breakdown: ['Rate increases with light intensity (1 mark)', 'Up to maximum (1 mark)', 'Light no longer limiting (1 mark)', 'Other factors become limiting (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
+          },
+          {
+            id: 'b4-q3',
+            question: 'Describe what happens during aerobic respiration.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Glucose reacts with oxygen to release energy. Carbon dioxide and water are produced as waste products. Reaction occurs in mitochondria.',
+            markingCriteria: {
+              breakdown: ['Glucose + oxygen (1 mark)', 'Energy released (1 mark)', 'CO2 and water produced (1 mark)', 'Occurs in mitochondria (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
+          },
+          {
+            id: 'b4-q4',
+            question: 'Compare aerobic and anaerobic respiration.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Aerobic uses oxygen and produces CO2 and water, releasing lots of energy. Anaerobic occurs without oxygen, produces lactic acid (animals) or ethanol and CO2 (plants/yeast), releasing less energy.',
+            markingCriteria: {
+              breakdown: ['Aerobic uses oxygen (1 mark)', 'Produces CO2 and water (1 mark)', 'Anaerobic without oxygen (1 mark)', 'Different products (1 mark)', 'Energy differences (2 marks)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
+          },
+          {
+            id: 'b4-q5',
+            question: 'Explain how plants use glucose from photosynthesis.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Respiration for energy. Converted to starch for storage. Made into cellulose for cell walls. Combined with nitrates to make amino acids for proteins. Made into fats and oils for storage.',
+            markingCriteria: {
+              breakdown: ['Respiration (1 mark)', 'Starch storage (1 mark)', 'Cellulose for cell walls (1 mark)', 'Amino acids/proteins (1 mark)', 'Fats and oils (1 mark)']
             },
             specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
           }
@@ -13150,6 +13414,50 @@ export const curriculum: Subject[] = [
               breakdown: ['Definition: regulation of internal conditions (2 marks)', 'Maintains optimal conditions for enzymes (1 mark)', 'Reference to temperature/pH ranges (1 mark)']
             },
             specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
+          },
+          {
+            id: 'b5-q2',
+            question: 'Explain how the nervous system coordinates responses.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Receptors detect stimuli. Sensory neurons carry impulses to CNS. CNS processes information. Motor neurons carry impulses to effectors which produce responses.',
+            markingCriteria: {
+              breakdown: ['Receptors detect stimuli (1 mark)', 'Sensory neurons to CNS (1 mark)', 'CNS processes information (1 mark)', 'Motor neurons to effectors (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
+          },
+          {
+            id: 'b5-q3',
+            question: 'Describe how body temperature is controlled.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Thermoregulatory center in brain monitors blood temperature. If too hot: sweating, vasodilation, less heat from respiration. If too cold: shivering, vasoconstriction, more heat from respiration.',
+            markingCriteria: {
+              breakdown: ['Brain monitors temperature (1 mark)', 'Too hot responses (2 marks)', 'Too cold responses (2 marks)', 'Negative feedback (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
+          },
+          {
+            id: 'b5-q4',
+            question: 'Explain how blood glucose is controlled.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Pancreas monitors blood glucose. If too high, insulin released to convert glucose to glycogen. If too low, glucagon released to convert glycogen to glucose.',
+            markingCriteria: {
+              breakdown: ['Pancreas monitors (1 mark)', 'Insulin when high (1 mark)', 'Glucagon when low (1 mark)', 'Glucose-glycogen conversion (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
+          },
+          {
+            id: 'b5-q5',
+            question: 'Describe the structure and function of the eye.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Cornea refracts light. Lens focuses light on retina. Retina contains light receptors. Optic nerve carries impulses to brain. Iris controls amount of light entering.',
+            markingCriteria: {
+              breakdown: ['Cornea refracts (1 mark)', 'Lens focuses (1 mark)', 'Retina has receptors (1 mark)', 'Optic nerve to brain (1 mark)', 'Iris controls light (1 mark)', 'Overall coordination (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
           }
         ]
       },
@@ -13167,6 +13475,50 @@ export const curriculum: Subject[] = [
               breakdown: ['Sexual: fusion of gametes (1 mark)', 'Sexual: genetically different offspring (1 mark)', 'Asexual: one parent (1 mark)', 'Asexual: genetically identical offspring (1 mark)']
             },
             specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
+          },
+          {
+            id: 'b6-q2',
+            question: 'Describe what happens during meiosis.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Chromosomes duplicate then pair up. Pairs separate and move to opposite ends. Cell divides. Chromosomes separate again. Four haploid gametes formed.',
+            markingCriteria: {
+              breakdown: ['Chromosomes duplicate and pair (1 mark)', 'Pairs separate (1 mark)', 'First division (1 mark)', 'Four haploid gametes (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
+          },
+          {
+            id: 'b6-q3',
+            question: 'Explain how characteristics are inherited.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Characteristics controlled by genes. Genes are inherited from parents. Each parent contributes one allele for each gene. Combination determines characteristics.',
+            markingCriteria: {
+              breakdown: ['Controlled by genes (1 mark)', 'Inherited from parents (1 mark)', 'One allele from each parent (1 mark)', 'Combination determines characteristics (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
+          },
+          {
+            id: 'b6-q4',
+            question: 'Define the terms dominant and recessive alleles.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Dominant allele is expressed when present. Recessive allele is only expressed when no dominant allele is present.',
+            markingCriteria: {
+              breakdown: ['Dominant expressed when present (1 mark)', 'Recessive only when no dominant (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
+          },
+          {
+            id: 'b6-q5',
+            question: 'Explain how evolution occurs by natural selection.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Genetic variation exists in populations. Environmental pressure causes competition. Individuals with advantageous characteristics survive and reproduce. Advantageous alleles passed to offspring. Over time, frequency of advantageous alleles increases.',
+            markingCriteria: {
+              breakdown: ['Genetic variation (1 mark)', 'Environmental pressure/competition (1 mark)', 'Survival of fittest (1 mark)', 'Advantageous alleles passed on (1 mark)', 'Frequency increases over time (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
           }
         ]
       },
@@ -13182,6 +13534,50 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Carbon dioxide is removed from the atmosphere by photosynthesis in plants. Carbon compounds in plants and animals are returned to the atmosphere as carbon dioxide through respiration. Decomposition of dead organisms also releases carbon dioxide. Combustion of fossil fuels adds extra carbon dioxide to the atmosphere.',
             markingCriteria: {
               breakdown: ['CO2 removed by photosynthesis (1 mark)', 'CO2 returned by respiration (1 mark)', 'CO2 from decomposition (1 mark)', 'CO2 from combustion (1 mark)', 'Reference to atmosphere (1 mark)', 'Cycle concept (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
+          },
+          {
+            id: 'b7-q2',
+            question: 'Explain what is meant by a food chain.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'A food chain shows the feeding relationships between organisms. Energy is transferred from one trophic level to the next. Arrows show direction of energy transfer.',
+            markingCriteria: {
+              breakdown: ['Shows feeding relationships (1 mark)', 'Energy transfer between levels (1 mark)', 'Arrows show direction (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
+          },
+          {
+            id: 'b7-q3',
+            question: 'Describe how energy is lost between trophic levels.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Energy lost through respiration as heat. Energy in waste products not consumed. Movement uses energy. Not all parts of organism eaten.',
+            markingCriteria: {
+              breakdown: ['Lost through respiration/heat (1 mark)', 'Waste products (1 mark)', 'Movement (1 mark)', 'Parts not eaten (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
+          },
+          {
+            id: 'b7-q4',
+            question: 'Explain how organisms compete for resources.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Plants compete for light, water, minerals, and space. Animals compete for food, water, mates, and territory. Competition affects distribution and abundance.',
+            markingCriteria: {
+              breakdown: ['Plant competition factors (2 marks)', 'Animal competition factors (2 marks)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
+          },
+          {
+            id: 'b7-q5',
+            question: 'Describe how deforestation affects the environment.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Increases atmospheric CO2 as trees removed. Reduces biodiversity through habitat destruction. Soil erosion increases. Disrupts water cycle.',
+            markingCriteria: {
+              breakdown: ['Increases CO2 (1 mark)', 'Reduces biodiversity (1 mark)', 'Soil erosion (1 mark)', 'Disrupts water cycle (1 mark)']
             },
             specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
           }
@@ -13209,6 +13605,50 @@ export const curriculum: Subject[] = [
               breakdown: ['Central nucleus (1 mark)', 'Contains protons and neutrons (1 mark)', 'Electrons in energy levels/shells (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and the periodic table'
+          },
+          {
+            id: 'c1-q2',
+            question: 'State the relative masses and charges of protons, neutrons and electrons.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Proton: mass 1, charge +1. Neutron: mass 1, charge 0. Electron: mass 1/1840, charge -1.',
+            markingCriteria: {
+              breakdown: ['Proton mass 1, charge +1 (1 mark)', 'Neutron mass 1, charge 0 (1 mark)', 'Electron very small mass, charge -1 (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and the periodic table'
+          },
+          {
+            id: 'c1-q3',
+            question: 'Explain how elements are arranged in the periodic table.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Elements arranged in order of atomic number. Groups are vertical columns with similar properties. Periods are horizontal rows. Elements in same group have same number of outer electrons.',
+            markingCriteria: {
+              breakdown: ['Order of atomic number (1 mark)', 'Groups are columns (1 mark)', 'Periods are rows (1 mark)', 'Same group, same outer electrons (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and the periodic table'
+          },
+          {
+            id: 'c1-q4',
+            question: 'Describe the properties of Group 1 metals.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Soft metals that can be cut with knife. React with water to produce hydrogen gas and metal hydroxide. Reactivity increases down the group. Low melting points.',
+            markingCriteria: {
+              breakdown: ['Soft metals (1 mark)', 'React with water to give H2 and hydroxide (1 mark)', 'Reactivity increases down group (1 mark)', 'Low melting points (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and the periodic table'
+          },
+          {
+            id: 'c1-q5',
+            question: 'Explain why noble gases are unreactive.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Noble gases have full outer electron shells, making them stable and unreactive.',
+            markingCriteria: {
+              breakdown: ['Full outer electron shells (1 mark)', 'Stable/unreactive (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and the periodic table'
           }
         ]
       },
@@ -13224,6 +13664,50 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Sodium chloride has ionic bonding between Na+ and Cl- ions. Strong electrostatic forces of attraction between oppositely charged ions require large amounts of energy to break.',
             markingCriteria: {
               breakdown: ['Ionic bonding identified (1 mark)', 'Strong electrostatic forces (1 mark)', 'Large amounts of energy needed (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and the properties of matter'
+          },
+          {
+            id: 'c2-q2',
+            question: 'Compare the properties of ionic and covalent compounds.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Ionic: high melting points, conduct when molten/dissolved, often soluble in water. Covalent: low melting points, do not conduct electricity, often insoluble in water.',
+            markingCriteria: {
+              breakdown: ['Ionic high melting points (1 mark)', 'Ionic conduct when molten (1 mark)', 'Ionic soluble in water (1 mark)', 'Covalent low melting points (1 mark)', 'Covalent do not conduct (1 mark)', 'Covalent insoluble (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and the properties of matter'
+          },
+          {
+            id: 'c2-q3',
+            question: 'Explain how covalent bonding occurs.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Non-metal atoms share pairs of electrons to achieve full outer shells. Shared electrons are attracted to nuclei of both atoms, forming the bond.',
+            markingCriteria: {
+              breakdown: ['Share pairs of electrons (1 mark)', 'Achieve full outer shells (1 mark)', 'Electrons attracted to both nuclei (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and the properties of matter'
+          },
+          {
+            id: 'c2-q4',
+            question: 'Describe the structure and properties of diamond.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Giant covalent structure with each carbon bonded to four others. Very hard due to strong covalent bonds. High melting point. Does not conduct electricity.',
+            markingCriteria: {
+              breakdown: ['Giant covalent structure (1 mark)', 'Each carbon bonded to four others (1 mark)', 'Very hard/high melting point (1 mark)', 'Does not conduct (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and the properties of matter'
+          },
+          {
+            id: 'c2-q5',
+            question: 'Explain why metals conduct electricity.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Metals have delocalised electrons that are free to move through the structure. When voltage is applied, electrons flow creating an electric current.',
+            markingCriteria: {
+              breakdown: ['Delocalised electrons (1 mark)', 'Free to move (1 mark)', 'Flow when voltage applied (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and the properties of matter'
           }
@@ -13243,6 +13727,50 @@ export const curriculum: Subject[] = [
               breakdown: ['Correct method shown (1 mark)', 'Correct answer = 100 (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          },
+          {
+            id: 'c3-q2',
+            question: 'Calculate the percentage by mass of carbon in methane, CH₄. (Ar: C = 12, H = 1)',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Mr of CH₄ = 12 + (4 × 1) = 16. Percentage of C = (12/16) × 100 = 75%',
+            markingCriteria: {
+              breakdown: ['Calculate Mr correctly = 16 (1 mark)', 'Use correct formula (12/16) × 100 (1 mark)', 'Final answer 75% (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          },
+          {
+            id: 'c3-q3',
+            question: 'Explain what is meant by a mole.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'A mole is the amount of substance containing 6.02 × 10²³ particles (atoms, molecules, or ions).',
+            markingCriteria: {
+              breakdown: ['Amount of substance (1 mark)', '6.02 × 10²³ particles (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          },
+          {
+            id: 'c3-q4',
+            question: 'Calculate the number of moles in 88g of carbon dioxide, CO₂. (Mr = 44)',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'moles = mass ÷ Mr = 88 ÷ 44 = 2 moles',
+            markingCriteria: {
+              breakdown: ['Correct formula used (1 mark)', 'Correct answer = 2 moles (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          },
+          {
+            id: 'c3-q5',
+            question: 'What volume does 1 mole of any gas occupy at room temperature and pressure?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: '24 dm³ (or 24,000 cm³)',
+            markingCriteria: {
+              breakdown: ['24 dm³ (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
           }
         ]
       },
@@ -13260,6 +13788,50 @@ export const curriculum: Subject[] = [
               breakdown: ['Produces hydrogen ions (1 mark)', 'H+ ions identified (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          },
+          {
+            id: 'c4-q2',
+            question: 'Write the word equation for the reaction between magnesium and hydrochloric acid.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'magnesium + hydrochloric acid → magnesium chloride + hydrogen',
+            markingCriteria: {
+              breakdown: ['Correct reactants (1 mark)', 'Correct products (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          },
+          {
+            id: 'c4-q3',
+            question: 'What is meant by oxidation and reduction?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Oxidation is the gain of oxygen or loss of electrons. Reduction is the loss of oxygen or gain of electrons.',
+            markingCriteria: {
+              breakdown: ['Oxidation: gain oxygen OR loss electrons (2 marks)', 'Reduction: loss oxygen OR gain electrons (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          },
+          {
+            id: 'c4-q4',
+            question: 'Describe what happens when metals react with acids.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Metal reacts with acid to produce a salt and hydrogen gas. Metal is oxidized, acid is reduced.',
+            markingCriteria: {
+              breakdown: ['Produces salt and hydrogen (2 marks)', 'Metal oxidized (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          },
+          {
+            id: 'c4-q5',
+            question: 'Explain what happens during electrolysis.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Electric current is passed through ionic compound. Positive ions move to cathode (negative electrode). Negative ions move to anode (positive electrode). Ions are discharged forming elements.',
+            markingCriteria: {
+              breakdown: ['Electric current through ionic compound (1 mark)', 'Positive ions to cathode (1 mark)', 'Negative ions to anode (1 mark)', 'Ions discharged (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
           }
         ]
       },
@@ -13275,6 +13847,50 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Exothermic reactions release energy to the surroundings, causing temperature to increase. Endothermic reactions absorb energy from the surroundings, causing temperature to decrease.',
             markingCriteria: {
               breakdown: ['Exothermic releases energy (1 mark)', 'Temperature increases (1 mark)', 'Endothermic absorbs energy (1 mark)', 'Temperature decreases (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          },
+          {
+            id: 'c5-q2',
+            question: 'Give two examples of exothermic reactions.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Combustion (burning) and neutralization reactions.',
+            markingCriteria: {
+              breakdown: ['Combustion/burning (1 mark)', 'Neutralization (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          },
+          {
+            id: 'c5-q3',
+            question: 'Describe what happens during bond breaking and bond forming.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Bond breaking requires energy (endothermic). Bond forming releases energy (exothermic). Overall energy change depends on difference between energy required and energy released.',
+            markingCriteria: {
+              breakdown: ['Bond breaking requires energy (1 mark)', 'Bond forming releases energy (1 mark)', 'Overall change depends on difference (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          },
+          {
+            id: 'c5-q4',
+            question: 'What is activation energy?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'The minimum energy needed for a reaction to occur.',
+            markingCriteria: {
+              breakdown: ['Minimum energy (1 mark)', 'For reaction to occur (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          },
+          {
+            id: 'c5-q5',
+            question: 'Explain how a catalyst affects a reaction.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'A catalyst provides an alternative pathway with lower activation energy. This increases the rate of reaction without being consumed.',
+            markingCriteria: {
+              breakdown: ['Alternative pathway (1 mark)', 'Lower activation energy (1 mark)', 'Not consumed (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
           }
