@@ -13031,6 +13031,438 @@ export const curriculum: Subject[] = [
     ]
   },
   
+  // ===== AQA COMBINED SCIENCE =====
+  {
+    id: 'combined-science-aqa',
+    name: 'Combined Science (AQA)',
+    topics: [
+      // Biology Topics
+      {
+        id: 'b1-cell-biology',
+        name: 'Biology: Cell Biology',
+        questions: [
+          {
+            id: 'b1-q1',
+            question: 'State the differences between plant and animal cells.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Plant cells have: cell wall, chloroplasts, permanent vacuole. Animal cells do not have these structures.',
+            markingCriteria: {
+              breakdown: ['Cell wall (1 mark)', 'Chloroplasts (1 mark)', 'Permanent vacuole (1 mark)', 'Clear comparison (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Cell Biology'
+          },
+          {
+            id: 'b1-q2',
+            question: 'What is the function of mitochondria?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Site of aerobic respiration; releases energy from glucose.',
+            markingCriteria: {
+              breakdown: ['Site of respiration (1 mark)', 'Releases energy (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Cell Biology'
+          }
+        ]
+      },
+      {
+        id: 'b2-organisation',
+        name: 'Biology: Organisation',
+        questions: [
+          {
+            id: 'b2-q1',
+            question: 'Describe the function of the heart.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Pumps blood around the body; maintains circulation; has four chambers.',
+            markingCriteria: {
+              breakdown: ['Pumps blood (1 mark)', 'Around body/circulation (1 mark)', 'Four chambers (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Organisation'
+          }
+        ]
+      },
+      {
+        id: 'b3-infection-response',
+        name: 'Biology: Infection and Response',
+        questions: [
+          {
+            id: 'b3-q1',
+            question: 'Name three types of pathogen.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Bacteria, viruses, fungi, protists.',
+            markingCriteria: {
+              breakdown: ['Three correct pathogens (3 marks)']
+            },
+            specReference: 'AQA Combined Science Biology - Infection and Response'
+          }
+        ]
+      },
+      {
+        id: 'b4-bioenergetics',
+        name: 'Biology: Bioenergetics',
+        questions: [
+          {
+            id: 'b4-q1',
+            question: 'Write the word equation for photosynthesis.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Carbon dioxide + water → glucose + oxygen',
+            markingCriteria: {
+              breakdown: ['Reactants correct (1 mark)', 'Products correct (1 mark)', 'Arrow direction (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Bioenergetics'
+          }
+        ]
+      },
+      {
+        id: 'b5-homeostasis',
+        name: 'Biology: Homeostasis and Response',
+        questions: [
+          {
+            id: 'b5-q1',
+            question: 'What is homeostasis?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Maintaining a stable internal environment; automatic control systems.',
+            markingCriteria: {
+              breakdown: ['Stable internal environment (1 mark)', 'Automatic control (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Homeostasis and Response'
+          }
+        ]
+      },
+      {
+        id: 'b6-inheritance',
+        name: 'Biology: Inheritance, Variation and Evolution',
+        questions: [
+          {
+            id: 'b6-q1',
+            question: 'What is DNA?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Deoxyribonucleic acid; genetic material; contains instructions for characteristics.',
+            markingCriteria: {
+              breakdown: ['Full name (1 mark)', 'Genetic material (1 mark)', 'Contains instructions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Inheritance, Variation and Evolution'
+          }
+        ]
+      },
+      {
+        id: 'b7-ecology',
+        name: 'Biology: Ecology',
+        questions: [
+          {
+            id: 'b7-q1',
+            question: 'Define ecosystem.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'All living organisms in an area; plus their physical environment.',
+            markingCriteria: {
+              breakdown: ['Living organisms (1 mark)', 'Physical environment (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Ecology'
+          }
+        ]
+      },
+      {
+        id: 'b8-key-ideas',
+        name: 'Biology: Key Ideas',
+        questions: [
+          {
+            id: 'b8-q1',
+            question: 'List the characteristics of living organisms.',
+            marks: 7,
+            difficulty: 'medium',
+            modelAnswer: 'Movement, respiration, sensitivity, growth, reproduction, excretion, nutrition.',
+            markingCriteria: {
+              breakdown: ['Seven characteristics listed (7 marks)']
+            },
+            specReference: 'AQA Combined Science Biology - Key Ideas'
+          }
+        ]
+      },
+
+      // Chemistry Topics
+      {
+        id: 'c1-atomic-structure',
+        name: 'Chemistry: Atomic Structure and Periodic Table',
+        questions: [
+          {
+            id: 'c1-q1',
+            question: 'Describe the structure of an atom.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Nucleus contains protons and neutrons; electrons orbit the nucleus; nucleus is positively charged; electrons are negatively charged.',
+            markingCriteria: {
+              breakdown: ['Nucleus contains protons and neutrons (2 marks)', 'Electrons orbit nucleus (1 mark)', 'Charges correct (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atomic Structure'
+          }
+        ]
+      },
+      {
+        id: 'c2-bonding',
+        name: 'Chemistry: Bonding, Structure and Properties',
+        questions: [
+          {
+            id: 'c2-q1',
+            question: 'What is ionic bonding?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Transfer of electrons; from metal to non-metal; forming charged ions.',
+            markingCriteria: {
+              breakdown: ['Transfer of electrons (1 mark)', 'Metal to non-metal (1 mark)', 'Forms ions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Bonding'
+          }
+        ]
+      },
+      {
+        id: 'c3-quantitative',
+        name: 'Chemistry: Quantitative Chemistry',
+        questions: [
+          {
+            id: 'c3-q1',
+            question: 'Calculate the relative formula mass of water (H₂O). (H = 1, O = 16)',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '(2 × 1) + 16 = 18',
+            markingCriteria: {
+              breakdown: ['Correct calculation (1 mark)', 'Answer = 18 (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          }
+        ]
+      },
+      {
+        id: 'c4-chemical-changes',
+        name: 'Chemistry: Chemical Changes',
+        questions: [
+          {
+            id: 'c4-q1',
+            question: 'What is oxidation?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Gain of oxygen; loss of electrons.',
+            markingCriteria: {
+              breakdown: ['Gain of oxygen (1 mark)', 'Loss of electrons (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          }
+        ]
+      },
+      {
+        id: 'c5-energy-changes',
+        name: 'Chemistry: Energy Changes',
+        questions: [
+          {
+            id: 'c5-q1',
+            question: 'What is an exothermic reaction?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Reaction that gives out energy; temperature increases.',
+            markingCriteria: {
+              breakdown: ['Gives out energy (1 mark)', 'Temperature increases (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          }
+        ]
+      },
+      {
+        id: 'c6-rate-extent',
+        name: 'Chemistry: Rate and Extent of Chemical Change',
+        questions: [
+          {
+            id: 'c6-q1',
+            question: 'Name four factors that affect rate of reaction.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Temperature, concentration, surface area, catalyst.',
+            markingCriteria: {
+              breakdown: ['Four factors correct (4 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          }
+        ]
+      },
+      {
+        id: 'c7-organic',
+        name: 'Chemistry: Organic Chemistry',
+        questions: [
+          {
+            id: 'c7-q1',
+            question: 'What is a hydrocarbon?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Compound containing only hydrogen and carbon.',
+            markingCriteria: {
+              breakdown: ['Contains only hydrogen and carbon (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          }
+        ]
+      },
+      {
+        id: 'c8-chemical-analysis',
+        name: 'Chemistry: Chemical Analysis',
+        questions: [
+          {
+            id: 'c8-q1',
+            question: 'What is a pure substance?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Contains only one compound or element; has fixed melting and boiling points.',
+            markingCriteria: {
+              breakdown: ['One compound/element (1 mark)', 'Fixed melting/boiling points (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          }
+        ]
+      },
+
+      // Physics Topics
+      {
+        id: 'p1-energy',
+        name: 'Physics: Energy',
+        questions: [
+          {
+            id: 'p1-q1',
+            question: 'List eight energy stores.',
+            marks: 8,
+            difficulty: 'easy',
+            modelAnswer: 'Kinetic, gravitational potential, elastic potential, chemical, nuclear, internal (thermal), magnetic, electrostatic.',
+            markingCriteria: {
+              breakdown: ['One mark for each correct energy store (8 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Energy'
+          }
+        ]
+      },
+      {
+        id: 'p2-electricity',
+        name: 'Physics: Electricity',
+        questions: [
+          {
+            id: 'p2-q1',
+            question: 'State Ohm\'s law.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Current is directly proportional to voltage; when temperature is constant.',
+            markingCriteria: {
+              breakdown: ['Directly proportional (1 mark)', 'Constant temperature (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Electricity'
+          }
+        ]
+      },
+      {
+        id: 'p3-particle-model',
+        name: 'Physics: Particle Model of Matter',
+        questions: [
+          {
+            id: 'p3-q1',
+            question: 'Describe the arrangement of particles in a solid.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Regular arrangement; particles close together; vibrate about fixed positions.',
+            markingCriteria: {
+              breakdown: ['Regular arrangement (1 mark)', 'Close together (1 mark)', 'Vibrate in fixed positions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          }
+        ]
+      },
+      {
+        id: 'p4-atomic-structure',
+        name: 'Physics: Atomic Structure',
+        questions: [
+          {
+            id: 'p4-q1',
+            question: 'What is radioactive decay?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Random process where unstable nuclei emit radiation; to become more stable; cannot be predicted when individual atom will decay.',
+            markingCriteria: {
+              breakdown: ['Random process (1 mark)', 'Unstable nuclei emit radiation (1 mark)', 'Cannot predict individual decay (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          }
+        ]
+      },
+      {
+        id: 'p5-forces',
+        name: 'Physics: Forces',
+        questions: [
+          {
+            id: 'p5-q1',
+            question: 'State Newton\'s First Law.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Object at rest stays at rest; object in motion continues at constant velocity; unless acted upon by resultant force.',
+            markingCriteria: {
+              breakdown: ['At rest stays at rest (1 mark)', 'Motion continues at constant velocity (1 mark)', 'Unless resultant force acts (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Forces'
+          }
+        ]
+      },
+      {
+        id: 'p6-waves',
+        name: 'Physics: Waves',
+        questions: [
+          {
+            id: 'p6-q1',
+            question: 'What is the difference between transverse and longitudinal waves?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Transverse: oscillations perpendicular to direction of energy transfer. Longitudinal: oscillations parallel to direction of energy transfer.',
+            markingCriteria: {
+              breakdown: ['Transverse - perpendicular oscillations (2 marks)', 'Longitudinal - parallel oscillations (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          }
+        ]
+      },
+      {
+        id: 'p7-magnetism',
+        name: 'Physics: Magnetism and Electromagnetism',
+        questions: [
+          {
+            id: 'p7-q1',
+            question: 'What is a magnetic field?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Region around a magnet; where magnetic forces can be detected.',
+            markingCriteria: {
+              breakdown: ['Region around magnet (1 mark)', 'Where forces detected (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism'
+          }
+        ]
+      },
+      {
+        id: 'p8-space',
+        name: 'Physics: Space Physics',
+        questions: [
+          {
+            id: 'p8-q1',
+            question: 'How was the universe formed according to the Big Bang theory?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Universe started from a very hot, dense point; expanded rapidly; continues to expand; evidence from cosmic microwave background radiation.',
+            markingCriteria: {
+              breakdown: ['Hot, dense start (1 mark)', 'Rapid expansion (1 mark)', 'Continues expanding (1 mark)', 'Evidence mentioned (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Space Physics'
+          }
+        ]
+      }
+    ]
+  },
+  
   // ===== EDEXCEL SUBJECTS =====
   {
     id: 'edexcel-english-language',
