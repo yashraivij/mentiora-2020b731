@@ -346,7 +346,7 @@ const PredictedQuestions = () => {
           <TabsContent value="aqa" className="mt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                {curriculum
-                 .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language')
+                 .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language' && subject.id !== 'combined-science-aqa')
                  .map((subject) => renderSubjectCard(subject))}
             </div>
           </TabsContent>
@@ -366,8 +366,8 @@ const PredictedQuestions = () => {
                        return false; // Don't show AQA GCSE subjects in Edexcel tab
                      }
                      
-                      // For other exam boards, show all other subjects as coming soon
-                      return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language';
+                       // For other exam boards, show all other subjects as coming soon
+                       return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language' && subject.id !== 'combined-science-aqa';
                    })
                    .sort((a, b) => {
                       // In edexcel tab, put maths-edexcel first, then business-edexcel-igcse, then chemistry-edexcel, then physics-edexcel
