@@ -14084,6 +14084,934 @@ export const curriculum: Subject[] = [
           }
         ]
       },
+      {
+        id: 'c3-quantitative-chemistry',
+        name: 'Chemistry: Quantitative Chemistry',
+        questions: [
+          {
+            id: 'c3-q1',
+            question: 'What is relative atomic mass?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Average mass of atoms of an element compared to 1/12 the mass of a carbon-12 atom.',
+            markingCriteria: {
+              breakdown: ['Average mass of atoms (1 mark)', 'Compared to 1/12 carbon-12 (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q2',
+            question: 'Calculate the relative formula mass of water (H₂O). (H = 1, O = 16)',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'RFM = (2 × 1) + (1 × 16) = 2 + 16 = 18',
+            markingCriteria: {
+              breakdown: ['Correct calculation (1 mark)', 'Answer = 18 (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q3',
+            question: 'What is a mole?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'The amount of substance containing 6.02 × 10²³ particles (Avogadro number).',
+            markingCriteria: {
+              breakdown: ['Amount of substance (1 mark)', 'Avogadro number/6.02 × 10²³ (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q4',
+            question: 'Calculate the number of moles in 88g of carbon dioxide (CO₂). (C = 12, O = 16)',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'RFM of CO₂ = 12 + (2 × 16) = 44. Moles = mass ÷ RFM = 88 ÷ 44 = 2 mol',
+            markingCriteria: {
+              breakdown: ['Correct RFM = 44 (1 mark)', 'Correct formula (1 mark)', 'Answer = 2 mol (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q5',
+            question: 'What is meant by concentration?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Amount of solute dissolved in a given volume of solution.',
+            markingCriteria: {
+              breakdown: ['Amount of solute (1 mark)', 'Per unit volume (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q6',
+            question: 'Calculate the concentration of a solution containing 4g of salt in 200 cm³ of water.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Concentration = mass ÷ volume = 4g ÷ 200 cm³ = 0.02 g/cm³ or 20 g/dm³',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Correct calculation (1 mark)', 'Correct units (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q7',
+            question: 'What is meant by yield in a chemical reaction?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'The amount of product actually obtained from a reaction.',
+            markingCriteria: {
+              breakdown: ['Amount of product (1 mark)', 'Actually obtained (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q8',
+            question: 'Why is percentage yield often less than 100%?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Reaction may be reversible; some product lost during separation; side reactions may occur.',
+            markingCriteria: {
+              breakdown: ['Reversible reaction (1 mark)', 'Product lost (1 mark)', 'Side reactions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q9',
+            question: 'Calculate the percentage yield if 8g of product is obtained when 10g was expected.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Percentage yield = (actual ÷ theoretical) × 100% = (8 ÷ 10) × 100% = 80%',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Answer = 80% (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q10',
+            question: 'What is atom economy and why is it important?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Measure of efficiency showing percentage of reactant atoms that become useful products; important for reducing waste and environmental impact.',
+            markingCriteria: {
+              breakdown: ['Efficiency measure (1 mark)', 'Percentage of atoms in products (1 mark)', 'Reducing waste (1 mark)', 'Environmental impact (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          }
+        ]
+      },
+      {
+        id: 'c4-chemical-changes',
+        name: 'Chemistry: Chemical Changes',
+        questions: [
+          {
+            id: 'c4-q1',
+            question: 'What is oxidation?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Loss of electrons or gain of oxygen.',
+            markingCriteria: {
+              breakdown: ['Loss of electrons (1 mark)', 'Gain of oxygen (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q2',
+            question: 'What is reduction?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Gain of electrons or loss of oxygen.',
+            markingCriteria: {
+              breakdown: ['Gain of electrons (1 mark)', 'Loss of oxygen (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q3',
+            question: 'What is an acid?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A substance that produces hydrogen ions (H⁺) in aqueous solution.',
+            markingCriteria: {
+              breakdown: ['Produces H⁺ ions (1 mark)', 'In aqueous solution (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q4',
+            question: 'What is a base?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A substance that neutralizes acids by accepting hydrogen ions.',
+            markingCriteria: {
+              breakdown: ['Neutralizes acids (1 mark)', 'Accepts H⁺ ions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q5',
+            question: 'Write the word equation for neutralization.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Acid + Base → Salt + Water',
+            markingCriteria: {
+              breakdown: ['Correct reactants (1 mark)', 'Correct products (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q6',
+            question: 'What is the pH scale?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Scale from 0-14 measuring acidity; 0-6 is acidic, 7 is neutral, 8-14 is alkaline.',
+            markingCriteria: {
+              breakdown: ['Scale 0-14 (1 mark)', 'Measures acidity (1 mark)', 'Ranges described (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q7',
+            question: 'Name three methods of extracting metals from their ores.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Reduction with carbon; electrolysis; displacement reactions.',
+            markingCriteria: {
+              breakdown: ['Reduction with carbon (1 mark)', 'Electrolysis (1 mark)', 'Displacement (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q8',
+            question: 'Explain why aluminum is extracted by electrolysis.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'Aluminum is more reactive than carbon; cannot be displaced by carbon; requires electrolysis to extract.',
+            markingCriteria: {
+              breakdown: ['More reactive than carbon (1 mark)', 'Cannot be displaced (1 mark)', 'Requires electrolysis (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q9',
+            question: 'What happens to the reactivity of metals as you go down Group 1?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Reactivity increases; outer electron further from nucleus; easier to lose electron.',
+            markingCriteria: {
+              breakdown: ['Reactivity increases (1 mark)', 'Electron further from nucleus (1 mark)', 'Easier to lose (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q10',
+            question: 'Describe what happens when magnesium reacts with hydrochloric acid.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Produces hydrogen gas and magnesium chloride; bubbling observed; metal dissolves; Mg + 2HCl → MgCl₂ + H₂',
+            markingCriteria: {
+              breakdown: ['Products identified (2 marks)', 'Observations (1 mark)', 'Balanced equation (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          }
+        ]
+      },
+      {
+        id: 'c5-energy-changes',
+        name: 'Chemistry: Energy Changes',
+        questions: [
+          {
+            id: 'c5-q1',
+            question: 'What is an exothermic reaction?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A reaction that releases energy to the surroundings, usually as heat.',
+            markingCriteria: {
+              breakdown: ['Releases energy (1 mark)', 'To surroundings (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q2',
+            question: 'What is an endothermic reaction?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'A reaction that takes in energy from the surroundings.',
+            markingCriteria: {
+              breakdown: ['Takes in energy (1 mark)', 'From surroundings (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q3',
+            question: 'Give two examples of exothermic reactions.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Combustion; neutralization; respiration; hand warmers.',
+            markingCriteria: {
+              breakdown: ['Two correct examples (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q4',
+            question: 'Give two examples of endothermic reactions.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Photosynthesis; thermal decomposition; melting; sports injury packs.',
+            markingCriteria: {
+              breakdown: ['Two correct examples (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q5',
+            question: 'What happens to temperature in an exothermic reaction?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Temperature increases as energy is released to surroundings.',
+            markingCriteria: {
+              breakdown: ['Temperature increases (1 mark)', 'Energy released (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q6',
+            question: 'What is activation energy?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Minimum energy needed for particles to react.',
+            markingCriteria: {
+              breakdown: ['Minimum energy (1 mark)', 'For particles to react (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q7',
+            question: 'How do catalysts affect activation energy?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Catalysts lower the activation energy by providing alternative reaction pathway.',
+            markingCriteria: {
+              breakdown: ['Lower activation energy (1 mark)', 'Alternative pathway (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q8',
+            question: 'What are reaction profiles used for?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Show energy changes during reactions; show activation energy; compare exothermic and endothermic reactions.',
+            markingCriteria: {
+              breakdown: ['Show energy changes (1 mark)', 'Show activation energy (1 mark)', 'Compare reaction types (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q9',
+            question: 'What is bond breaking and making in terms of energy?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Breaking bonds requires energy (endothermic); making bonds releases energy (exothermic); overall energy change determines if reaction is exothermic or endothermic.',
+            markingCriteria: {
+              breakdown: ['Breaking bonds endothermic (1 mark)', 'Making bonds exothermic (1 mark)', 'Overall change determines reaction type (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q10',
+            question: 'Describe how to measure energy changes in reactions.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Use calorimetry; measure temperature change; use formula Q = mcΔT; insulate container; stir mixture; measure at regular intervals.',
+            markingCriteria: {
+              breakdown: ['Calorimetry mentioned (1 mark)', 'Temperature measurement (1 mark)', 'Q = mcΔT (1 mark)', 'Insulation (1 mark)', 'Stirring/regular measurement (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          }
+        ]
+      },
+      {
+        id: 'c6-rate-extent',
+        name: 'Chemistry: The Rate and Extent of Chemical Change',
+        questions: [
+          {
+            id: 'c6-q1',
+            question: 'List four factors that affect the rate of chemical reactions.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Temperature; concentration; pressure; surface area; catalysts.',
+            markingCriteria: {
+              breakdown: ['Four correct factors (4 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q2',
+            question: 'Explain how temperature affects reaction rate.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Higher temperature increases particle kinetic energy; more frequent collisions; more particles have activation energy.',
+            markingCriteria: {
+              breakdown: ['Increased kinetic energy (1 mark)', 'More frequent collisions (1 mark)', 'More particles with activation energy (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q3',
+            question: 'How does surface area affect reaction rate?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Larger surface area provides more exposed particles; more collision sites available; increases reaction rate.',
+            markingCriteria: {
+              breakdown: ['More exposed particles (1 mark)', 'More collision sites (1 mark)', 'Increases rate (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q4',
+            question: 'What is a catalyst?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Substance that increases reaction rate; provides alternative pathway; not used up in reaction.',
+            markingCriteria: {
+              breakdown: ['Increases reaction rate (1 mark)', 'Alternative pathway (1 mark)', 'Not used up (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q5',
+            question: 'How can you measure the rate of a reaction?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Measure volume of gas produced; measure mass lost; measure pH change; measure color change.',
+            markingCriteria: {
+              breakdown: ['Gas volume (1 mark)', 'Mass change (1 mark)', 'pH change (1 mark)', 'Color change (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q6',
+            question: 'What is a reversible reaction?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Reaction where products can react to form reactants again.',
+            markingCriteria: {
+              breakdown: ['Products react back (1 mark)', 'To form reactants (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q7',
+            question: 'What is dynamic equilibrium?',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'Forward and reverse reactions occur at equal rates; concentrations remain constant; reactions continue but no overall change.',
+            markingCriteria: {
+              breakdown: ['Equal rates (1 mark)', 'Constant concentrations (1 mark)', 'Reactions continue (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q8',
+            question: 'State Le Chatelier\'s principle.',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'If conditions of equilibrium are changed, the position shifts to oppose the change.',
+            markingCriteria: {
+              breakdown: ['Conditions changed (1 mark)', 'Position shifts (1 mark)', 'To oppose change (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q9',
+            question: 'How does pressure affect equilibrium position?',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'Increased pressure favors side with fewer gas molecules; decreased pressure favors side with more gas molecules.',
+            markingCriteria: {
+              breakdown: ['Increased pressure effect (1 mark)', 'Fewer gas molecules (1 mark)', 'Decreased pressure effect (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          },
+          {
+            id: 'c6-q10',
+            question: 'How does temperature affect equilibrium position?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Increased temperature favors endothermic direction; decreased temperature favors exothermic direction; equilibrium shifts to oppose temperature change.',
+            markingCriteria: {
+              breakdown: ['Increased temperature effect (1 mark)', 'Decreased temperature effect (1 mark)', 'Endothermic/exothermic direction (1 mark)', 'Opposes change (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Rate and Extent'
+          }
+        ]
+      },
+      {
+        id: 'c7-organic-chemistry',
+        name: 'Chemistry: Organic Chemistry',
+        questions: [
+          {
+            id: 'c7-q1',
+            question: 'What are hydrocarbons?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Compounds containing only hydrogen and carbon atoms.',
+            markingCriteria: {
+              breakdown: ['Only hydrogen and carbon (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q2',
+            question: 'What is crude oil?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Mixture of hydrocarbons; formed from ancient marine organisms; finite resource.',
+            markingCriteria: {
+              breakdown: ['Mixture of hydrocarbons (1 mark)', 'From ancient organisms (1 mark)', 'Finite resource (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q3',
+            question: 'How is crude oil separated?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Fractional distillation; based on different boiling points; fractions collected at different levels.',
+            markingCriteria: {
+              breakdown: ['Fractional distillation (1 mark)', 'Different boiling points (1 mark)', 'Different levels (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q4',
+            question: 'Name three fractions obtained from crude oil.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Petrol; kerosene; diesel; bitumen; gases.',
+            markingCriteria: {
+              breakdown: ['Three correct fractions (3 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q5',
+            question: 'What is complete combustion of hydrocarbons?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Reaction with sufficient oxygen; produces carbon dioxide and water; releases energy.',
+            markingCriteria: {
+              breakdown: ['Sufficient oxygen (1 mark)', 'CO₂ and H₂O products (1 mark)', 'Releases energy (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q6',
+            question: 'What is incomplete combustion?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Combustion with insufficient oxygen; produces carbon monoxide and/or carbon; dangerous.',
+            markingCriteria: {
+              breakdown: ['Insufficient oxygen (1 mark)', 'CO and/or C products (1 mark)', 'Dangerous (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q7',
+            question: 'What is cracking?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Breaking down large hydrocarbon molecules; into smaller, more useful molecules; produces alkenes; uses heat and catalysts.',
+            markingCriteria: {
+              breakdown: ['Breaking down large molecules (1 mark)', 'Smaller molecules (1 mark)', 'Produces alkenes (1 mark)', 'Heat and catalysts (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q8',
+            question: 'What are alkanes?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Saturated hydrocarbons; single bonds only; general formula CₙH₂ₙ₊₂.',
+            markingCriteria: {
+              breakdown: ['Saturated hydrocarbons (1 mark)', 'Single bonds only (1 mark)', 'General formula (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q9',
+            question: 'What are alkenes?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Unsaturated hydrocarbons; contain double bonds; general formula CₙH₂ₙ.',
+            markingCriteria: {
+              breakdown: ['Unsaturated hydrocarbons (1 mark)', 'Double bonds (1 mark)', 'General formula (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          },
+          {
+            id: 'c7-q10',
+            question: 'How can you test for alkenes?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Add bromine water; alkenes turn bromine water colorless; alkanes show no change.',
+            markingCriteria: {
+              breakdown: ['Bromine water test (1 mark)', 'Colorless with alkenes (1 mark)', 'No change with alkanes (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Organic Chemistry'
+          }
+        ]
+      },
+      {
+        id: 'c8-chemical-analysis',
+        name: 'Chemistry: Chemical Analysis',
+        questions: [
+          {
+            id: 'c8-q1',
+            question: 'What is a pure substance?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Contains only one compound or element; has fixed melting and boiling points.',
+            markingCriteria: {
+              breakdown: ['One compound/element (1 mark)', 'Fixed melting/boiling points (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q2',
+            question: 'How can you test the purity of water?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Check melting point is 0°C; check boiling point is 100°C; pure water has fixed values.',
+            markingCriteria: {
+              breakdown: ['Melting point 0°C (1 mark)', 'Boiling point 100°C (1 mark)', 'Fixed values (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q3',
+            question: 'What is a formulation?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Mixture designed for specific purpose; each component has specific function; examples include medicines, paints.',
+            markingCriteria: {
+              breakdown: ['Mixture for specific purpose (1 mark)', 'Components have functions (1 mark)', 'Examples given (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q4',
+            question: 'What is chromatography used for?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Separating mixtures; identifying substances; analyzing purity.',
+            markingCriteria: {
+              breakdown: ['Separating mixtures (1 mark)', 'Identifying substances (1 mark)', 'Analyzing purity (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q5',
+            question: 'Describe how paper chromatography works.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Sample spotted on paper; paper placed in solvent; solvent moves up paper; components separate based on solubility; different substances travel different distances.',
+            markingCriteria: {
+              breakdown: ['Sample spotted (1 mark)', 'Paper in solvent (1 mark)', 'Solvent moves up (1 mark)', 'Separation by solubility (1 mark)', 'Different distances (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q6',
+            question: 'What is Rf value?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Distance traveled by substance ÷ distance traveled by solvent; used to identify substances; pure substances have fixed Rf values.',
+            markingCriteria: {
+              breakdown: ['Ratio calculation (1 mark)', 'Used for identification (1 mark)', 'Fixed values for pure substances (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q7',
+            question: 'How do you test for hydrogen gas?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Lighted splint; produces squeaky pop sound.',
+            markingCriteria: {
+              breakdown: ['Lighted splint (1 mark)', 'Squeaky pop (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q8',
+            question: 'How do you test for oxygen gas?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Glowing splint; relights in oxygen.',
+            markingCriteria: {
+              breakdown: ['Glowing splint (1 mark)', 'Relights (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q9',
+            question: 'How do you test for carbon dioxide?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Bubble through limewater; turns cloudy/milky.',
+            markingCriteria: {
+              breakdown: ['Limewater test (1 mark)', 'Turns cloudy (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          },
+          {
+            id: 'c8-q10',
+            question: 'Describe flame tests for metal ions.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Dip wire in acid then sample; place in blue flame; lithium = red; sodium = yellow; potassium = lilac; calcium = orange-red.',
+            markingCriteria: {
+              breakdown: ['Method described (2 marks)', 'Four correct colors (4 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Analysis'
+          }
+        ]
+      },
+      {
+        id: 'c9-atmosphere',
+        name: 'Chemistry: Chemistry of the Atmosphere',
+        questions: [
+          {
+            id: 'c9-q1',
+            question: 'What gases make up the current atmosphere?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: '78% nitrogen; 21% oxygen; 0.04% carbon dioxide; small amounts of noble gases.',
+            markingCriteria: {
+              breakdown: ['Nitrogen 78% (1 mark)', 'Oxygen 21% (1 mark)', 'Carbon dioxide 0.04% (1 mark)', 'Noble gases (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atmosphere'
+          },
+          {
+            id: 'c9-q2',
+            question: 'How did oxygen levels increase in early atmosphere?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Early plants evolved; photosynthesis began; carbon dioxide converted to oxygen.',
+            markingCriteria: {
+              breakdown: ['Plants evolved (1 mark)', 'Photosynthesis (1 mark)', 'CO₂ to O₂ conversion (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atmosphere'
+          },
+          {
+            id: 'c9-q3',
+            question: 'What is the greenhouse effect?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Greenhouse gases trap heat; from solar radiation; keep Earth warm; natural process essential for life.',
+            markingCriteria: {
+              breakdown: ['Gases trap heat (1 mark)', 'From solar radiation (1 mark)', 'Keep Earth warm (1 mark)', 'Natural process (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atmosphere'
+          },
+          {
+            id: 'c9-q4',
+            question: 'Name three greenhouse gases.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Carbon dioxide; methane; water vapor; nitrous oxide.',
+            markingCriteria: {
+              breakdown: ['Three correct gases (3 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atmosphere'
+          },
+          {
+            id: 'c9-q5',
+            question: 'What human activities increase carbon dioxide levels?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Burning fossil fuels; deforestation; industrial processes; transportation.',
+            markingCriteria: {
+              breakdown: ['Burning fossil fuels (1 mark)', 'Deforestation (1 mark)', 'Industrial processes (1 mark)', 'Transportation (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atmosphere'
+          },
+          {
+            id: 'c9-q6',
+            question: 'What are the effects of climate change?',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Rising temperatures; melting ice caps; rising sea levels; extreme weather; habitat loss.',
+            markingCriteria: {
+              breakdown: ['Rising temperatures (1 mark)', 'Melting ice (1 mark)', 'Sea level rise (1 mark)', 'Extreme weather (1 mark)', 'Habitat loss (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atmosphere'
+          },
+          {
+            id: 'c9-q7',
+            question: 'What causes acid rain?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Sulfur dioxide and nitrogen oxides; from burning fossil fuels; dissolve in rainwater; form acids.',
+            markingCriteria: {
+              breakdown: ['SO₂ and NOₓ (1 mark)', 'From fossil fuels (1 mark)', 'Dissolve in rain (1 mark)', 'Form acids (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atmosphere'
+          },
+          {
+            id: 'c9-q8',
+            question: 'What are the effects of acid rain?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Damages buildings and statues; kills trees and plants; acidifies lakes; harms aquatic life.',
+            markingCriteria: {
+              breakdown: ['Damages buildings (1 mark)', 'Kills plants (1 mark)', 'Acidifies water (1 mark)', 'Harms aquatic life (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atmosphere'
+          },
+          {
+            id: 'c9-q9',
+            question: 'How can carbon dioxide be removed from atmosphere?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Photosynthesis by plants; dissolving in oceans; carbon capture technology; reforestation.',
+            markingCriteria: {
+              breakdown: ['Photosynthesis (1 mark)', 'Ocean absorption (1 mark)', 'Carbon capture (1 mark)', 'Reforestation (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atmosphere'
+          },
+          {
+            id: 'c9-q10',
+            question: 'What is carbon footprint and how can it be reduced?',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Amount of CO₂ produced by activities; reduce by using renewable energy; improving efficiency; recycling; reducing consumption.',
+            markingCriteria: {
+              breakdown: ['Definition of carbon footprint (1 mark)', 'Renewable energy (1 mark)', 'Improving efficiency (1 mark)', 'Recycling (1 mark)', 'Reducing consumption (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atmosphere'
+          }
+        ]
+      },
+      {
+        id: 'c10-using-resources',
+        name: 'Chemistry: Using Resources',
+        questions: [
+          {
+            id: 'c10-q1',
+            question: 'What is sustainable development?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Meeting present needs; without compromising future generations; balancing economic, social and environmental factors.',
+            markingCriteria: {
+              breakdown: ['Meeting present needs (1 mark)', 'Not compromising future (1 mark)', 'Balancing factors (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Using Resources'
+          },
+          {
+            id: 'c10-q2',
+            question: 'Why is recycling important?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Conserves natural resources; reduces waste; saves energy; reduces pollution.',
+            markingCriteria: {
+              breakdown: ['Conserves resources (1 mark)', 'Reduces waste (1 mark)', 'Saves energy (1 mark)', 'Reduces pollution (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Using Resources'
+          },
+          {
+            id: 'c10-q3',
+            question: 'What is potable water?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Water that is safe to drink; low levels of dissolved salts and microbes.',
+            markingCriteria: {
+              breakdown: ['Safe to drink (1 mark)', 'Low salts and microbes (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Using Resources'
+          },
+          {
+            id: 'c10-q4',
+            question: 'How is drinking water produced?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Filtration to remove solids; sterilization to kill microbes; use chlorine or UV light; sometimes fluoride added.',
+            markingCriteria: {
+              breakdown: ['Filtration (1 mark)', 'Sterilization (1 mark)', 'Chlorine/UV (1 mark)', 'Fluoride addition (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Using Resources'
+          },
+          {
+            id: 'c10-q5',
+            question: 'What is desalination?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Removing salt from seawater; by distillation or reverse osmosis; to produce fresh water.',
+            markingCriteria: {
+              breakdown: ['Removing salt (1 mark)', 'Methods mentioned (1 mark)', 'Produce fresh water (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Using Resources'
+          },
+          {
+            id: 'c10-q6',
+            question: 'Why is sewage treatment necessary?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Remove harmful bacteria; reduce pollution; protect environment and health.',
+            markingCriteria: {
+              breakdown: ['Remove bacteria (1 mark)', 'Reduce pollution (1 mark)', 'Protect health/environment (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Using Resources'
+          },
+          {
+            id: 'c10-q7',
+            question: 'What are the stages of sewage treatment?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Screening and grit removal; sedimentation; biological treatment; final clarification.',
+            markingCriteria: {
+              breakdown: ['Screening (1 mark)', 'Sedimentation (1 mark)', 'Biological treatment (1 mark)', 'Final clarification (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Using Resources'
+          },
+          {
+            id: 'c10-q8',
+            question: 'What is a life cycle assessment?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Analysis of environmental impact; from raw materials to disposal; includes extraction, manufacture, use, disposal.',
+            markingCriteria: {
+              breakdown: ['Environmental impact analysis (1 mark)', 'Cradle to grave (1 mark)', 'Extraction (1 mark)', 'Manufacture/use/disposal (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Using Resources'
+          },
+          {
+            id: 'c10-q9',
+            question: 'What are the advantages and disadvantages of using metals?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Advantages: strong, durable, good conductors, recyclable. Disadvantages: mining damages environment, extraction uses energy, some corrode.',
+            markingCriteria: {
+              breakdown: ['Two advantages (2 marks)', 'Two disadvantages (2 marks)', 'Environmental/energy considerations (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Using Resources'
+          },
+          {
+            id: 'c10-q10',
+            question: 'Compare glass and plastic for packaging.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Glass: easily recycled, chemically inert, heavy, brittle. Plastic: lightweight, flexible, harder to recycle, may contain additives.',
+            markingCriteria: {
+              breakdown: ['Glass properties (2 marks)', 'Plastic properties (2 marks)', 'Recycling comparison (1 mark)', 'Environmental considerations (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Using Resources'
+          }
+        ]
+      },
       
       // Physics Topics
       {
