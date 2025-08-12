@@ -13031,6 +13031,491 @@ export const curriculum: Subject[] = [
     ]
   },
   
+  // ===== AQA COMBINED SCIENCE =====
+  {
+    id: 'combined-science-aqa',
+    name: 'Combined Science (AQA)',
+    topics: [
+      // ===== BIOLOGY TOPICS (all except key ideas) =====
+      {
+        id: 'b1-cell-biology',
+        name: 'Cell Biology',
+        questions: [
+          {
+            id: 'b1-q1',
+            question: 'State the differences between plant and animal cells.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Plant cells have a cell wall, chloroplasts, and a large permanent vacuole. Animal cells do not have these structures but may have small temporary vacuoles.',
+            markingCriteria: {
+              breakdown: ['Cell wall in plants only (1 mark)', 'Chloroplasts in plants only (1 mark)', 'Large permanent vacuole in plants (1 mark)', 'Small/temporary vacuoles in animals (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
+          },
+          {
+            id: 'b1-q2',
+            question: 'Describe the function of the mitochondria.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Mitochondria are the sites of aerobic respiration in cells, where glucose is broken down to release energy for cellular processes.',
+            markingCriteria: {
+              breakdown: ['Site of aerobic respiration (1 mark)', 'Releases energy from glucose (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
+          },
+          {
+            id: 'b1-q3',
+            question: 'Explain how substances move into and out of cells by diffusion.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Diffusion is the net movement of particles from an area of high concentration to an area of low concentration down a concentration gradient. No energy is required as it is a passive process.',
+            markingCriteria: {
+              breakdown: ['Movement from high to low concentration (1 mark)', 'Down concentration gradient (1 mark)', 'Passive process/no energy required (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Cell Biology'
+          }
+        ]
+      },
+      {
+        id: 'b2-organisation',
+        name: 'Organisation',
+        questions: [
+          {
+            id: 'b2-q1',
+            question: 'Describe the function of enzymes in digestion.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Enzymes are biological catalysts that speed up the breakdown of large insoluble food molecules into smaller soluble molecules that can be absorbed into the bloodstream.',
+            markingCriteria: {
+              breakdown: ['Biological catalysts (1 mark)', 'Speed up reactions (1 mark)', 'Break down large molecules (1 mark)', 'Into smaller soluble molecules (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          },
+          {
+            id: 'b2-q2',
+            question: 'Explain the structure and function of the heart.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The heart has four chambers: two atria (top) and two ventricles (bottom). The right side pumps deoxygenated blood to the lungs, while the left side pumps oxygenated blood to the body. Valves prevent backflow of blood.',
+            markingCriteria: {
+              breakdown: ['Four chambers identified (2 marks)', 'Right side to lungs (1 mark)', 'Left side to body (1 mark)', 'Oxygenated vs deoxygenated blood (1 mark)', 'Valves prevent backflow (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Organisation'
+          }
+        ]
+      },
+      {
+        id: 'b3-infection-response',
+        name: 'Infection and response',
+        questions: [
+          {
+            id: 'b3-q1',
+            question: 'Describe how white blood cells help defend the body against pathogens.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'White blood cells defend against pathogens by phagocytosis (engulfing and digesting pathogens), producing antibodies specific to antigens on pathogens, and producing antitoxins to neutralize toxins.',
+            markingCriteria: {
+              breakdown: ['Phagocytosis (1 mark)', 'Engulfing pathogens (1 mark)', 'Producing antibodies (1 mark)', 'Producing antitoxins (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Infection and response'
+          }
+        ]
+      },
+      {
+        id: 'b4-bioenergetics',
+        name: 'Bioenergetics',
+        questions: [
+          {
+            id: 'b4-q1',
+            question: 'Write the word equation for photosynthesis.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Carbon dioxide + Water → Glucose + Oxygen (in the presence of light and chlorophyll)',
+            markingCriteria: {
+              breakdown: ['Correct reactants (1 mark)', 'Correct products (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
+          },
+          {
+            id: 'b4-q2',
+            question: 'Explain why respiration is important for living organisms.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Respiration releases energy from glucose for metabolic processes such as movement, active transport, and maintaining body temperature in mammals.',
+            markingCriteria: {
+              breakdown: ['Releases energy from glucose (1 mark)', 'For metabolic processes (1 mark)', 'Examples of processes (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 1 - Bioenergetics'
+          }
+        ]
+      },
+      {
+        id: 'b5-homeostasis-response',
+        name: 'Homeostasis and response',
+        questions: [
+          {
+            id: 'b5-q1',
+            question: 'Explain how the body controls blood glucose levels.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The pancreas monitors blood glucose levels. When levels are high, insulin is released causing cells to take up glucose and the liver to convert glucose to glycogen. When levels are low, glucagon is released causing the liver to convert glycogen back to glucose.',
+            markingCriteria: {
+              breakdown: ['Pancreas monitors levels (1 mark)', 'Insulin released when high (1 mark)', 'Cells take up glucose (1 mark)', 'Glucose converted to glycogen (1 mark)', 'Glucagon released when low (1 mark)', 'Glycogen converted to glucose (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
+          }
+        ]
+      },
+      {
+        id: 'b6-inheritance-variation-evolution',
+        name: 'Inheritance, variation and evolution',
+        questions: [
+          {
+            id: 'b6-q1',
+            question: 'Define the terms gene, allele, and chromosome.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'A gene is a section of DNA that codes for a specific characteristic. An allele is a different version of the same gene. A chromosome is a structure containing many genes.',
+            markingCriteria: {
+              breakdown: ['Gene definition (1 mark)', 'Allele definition (1 mark)', 'Chromosome definition (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
+          }
+        ]
+      },
+      {
+        id: 'b7-ecology',
+        name: 'Ecology',
+        questions: [
+          {
+            id: 'b7-q1',
+            question: 'Describe the carbon cycle.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Carbon dioxide is removed from the atmosphere by photosynthesis in plants. Carbon compounds in plants and animals are returned to the atmosphere as carbon dioxide through respiration. Decomposition of dead organisms also releases carbon dioxide. Combustion of fossil fuels adds extra carbon dioxide to the atmosphere.',
+            markingCriteria: {
+              breakdown: ['CO2 removed by photosynthesis (2 marks)', 'Returned by respiration (1 mark)', 'Decomposition releases CO2 (1 mark)', 'Combustion of fossil fuels (2 marks)']
+            },
+            specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
+          }
+        ]
+      },
+      // ===== CHEMISTRY TOPICS (all except key ideas) =====
+      {
+        id: 'c1-atomic-structure-periodic-table',
+        name: 'Atomic structure and the periodic table',
+        questions: [
+          {
+            id: 'c1-q1',
+            question: 'Describe the structure of an atom.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'An atom has a nucleus containing protons and neutrons, with electrons orbiting in shells around the nucleus. The nucleus is positively charged and very small compared to the atom.',
+            markingCriteria: {
+              breakdown: ['Nucleus with protons and neutrons (1 mark)', 'Electrons in shells (1 mark)', 'Nucleus is small and positive (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
+          },
+          {
+            id: 'c1-q2',
+            question: 'Explain how the modern periodic table is arranged.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Elements are arranged in order of increasing atomic number. Elements with similar properties are in the same group (vertical columns). The period number indicates the number of electron shells.',
+            markingCriteria: {
+              breakdown: ['Order of atomic number (1 mark)', 'Similar properties in groups (1 mark)', 'Groups are vertical columns (1 mark)', 'Period = number of shells (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
+          }
+        ]
+      },
+      {
+        id: 'c2-bonding-structure-properties',
+        name: 'Bonding, structure, and the properties of matter',
+        questions: [
+          {
+            id: 'c2-q1',
+            question: 'Compare the properties of ionic and covalent compounds.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Ionic compounds have high melting points, conduct electricity when molten or dissolved, and are often soluble in water. Covalent compounds have lower melting points, do not conduct electricity, and are often insoluble in water.',
+            markingCriteria: {
+              breakdown: ['Ionic: high melting points (1 mark)', 'Ionic: conduct when molten/dissolved (1 mark)', 'Ionic: soluble in water (1 mark)', 'Covalent: low melting points (1 mark)', 'Covalent: do not conduct (1 mark)', 'Covalent: insoluble in water (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties'
+          }
+        ]
+      },
+      {
+        id: 'c3-quantitative-chemistry',
+        name: 'Quantitative chemistry',
+        questions: [
+          {
+            id: 'c3-q1',
+            question: 'Calculate the relative formula mass of calcium carbonate (CaCO₃). [Ar: Ca=40, C=12, O=16]',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'CaCO₃ = 40 + 12 + (3 × 16) = 40 + 12 + 48 = 100',
+            markingCriteria: {
+              breakdown: ['Correct method shown (1 mark)', 'Correct answer: 100 (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+          }
+        ]
+      },
+      {
+        id: 'c4-chemical-changes',
+        name: 'Chemical changes',
+        questions: [
+          {
+            id: 'c4-q1',
+            question: 'Describe what happens when an acid reacts with a metal.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'When an acid reacts with a metal, a salt and hydrogen gas are produced. The metal dissolves and effervescence (fizzing) is observed due to hydrogen gas being released.',
+            markingCriteria: {
+              breakdown: ['Salt and hydrogen produced (1 mark)', 'Metal dissolves (1 mark)', 'Effervescence/fizzing observed (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+          }
+        ]
+      },
+      {
+        id: 'c5-energy-changes',
+        name: 'Energy changes',
+        questions: [
+          {
+            id: 'c5-q1',
+            question: 'Explain the difference between exothermic and endothermic reactions.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Exothermic reactions release energy to the surroundings, causing the temperature to increase. Endothermic reactions absorb energy from the surroundings, causing the temperature to decrease.',
+            markingCriteria: {
+              breakdown: ['Exothermic releases energy (1 mark)', 'Temperature increases (1 mark)', 'Endothermic absorbs energy (1 mark)', 'Temperature decreases (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          }
+        ]
+      },
+      {
+        id: 'c6-rate-extent-chemical-change',
+        name: 'The rate and extent of chemical change',
+        questions: [
+          {
+            id: 'c6-q1',
+            question: 'State four factors that affect the rate of a chemical reaction.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Temperature, concentration, surface area (particle size), and presence of a catalyst.',
+            markingCriteria: {
+              breakdown: ['Temperature (1 mark)', 'Concentration (1 mark)', 'Surface area/particle size (1 mark)', 'Catalyst (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
+          }
+        ]
+      },
+      {
+        id: 'c7-organic-chemistry',
+        name: 'Organic chemistry',
+        questions: [
+          {
+            id: 'c7-q1',
+            question: 'What is crude oil and how is it separated?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Crude oil is a mixture of hydrocarbons. It is separated by fractional distillation, where different fractions are separated based on their different boiling points.',
+            markingCriteria: {
+              breakdown: ['Mixture of hydrocarbons (1 mark)', 'Separated by fractional distillation (1 mark)', 'Based on boiling points (1 mark)', 'Different fractions obtained (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+          }
+        ]
+      },
+      {
+        id: 'c8-chemical-analysis',
+        name: 'Chemical analysis',
+        questions: [
+          {
+            id: 'c8-q1',
+            question: 'Describe how to test for hydrogen gas.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Hold a lit splint near the gas. If hydrogen is present, it will burn with a squeaky pop sound.',
+            markingCriteria: {
+              breakdown: ['Use lit splint (1 mark)', 'Squeaky pop sound (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+          }
+        ]
+      },
+      {
+        id: 'c9-atmosphere',
+        name: 'Chemistry of the atmosphere',
+        questions: [
+          {
+            id: 'c9-q1',
+            question: 'Describe the composition of the Earth\'s atmosphere today.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'The atmosphere is approximately 78% nitrogen, 21% oxygen, and 1% other gases including carbon dioxide and noble gases.',
+            markingCriteria: {
+              breakdown: ['78% nitrogen (1 mark)', '21% oxygen (1 mark)', '1% other gases (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of atmosphere'
+          }
+        ]
+      },
+      {
+        id: 'c10-using-resources',
+        name: 'Using resources',
+        questions: [
+          {
+            id: 'c10-q1',
+            question: 'Explain why recycling metals is important.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Recycling metals conserves limited natural resources, reduces energy consumption compared to extracting from ores, reduces pollution, and reduces the need for mining.',
+            markingCriteria: {
+              breakdown: ['Conserves natural resources (1 mark)', 'Reduces energy consumption (1 mark)', 'Reduces pollution (1 mark)', 'Reduces need for mining (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+          }
+        ]
+      },
+      // ===== PHYSICS TOPICS (all except Space physics) =====
+      {
+        id: 'p1-energy',
+        name: 'Energy',
+        questions: [
+          {
+            id: 'p1-q1',
+            question: 'State the conservation of energy principle.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Energy cannot be created or destroyed, only transferred from one store to another.',
+            markingCriteria: {
+              breakdown: ['Cannot be created or destroyed (1 mark)', 'Only transferred between stores (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+          },
+          {
+            id: 'p1-q2',
+            question: 'Calculate the gravitational potential energy of a 2 kg object lifted 5 m above the ground. (g = 9.8 m/s²)',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'GPE = mgh = 2 × 9.8 × 5 = 98 J',
+            markingCriteria: {
+              breakdown: ['Correct formula GPE = mgh (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+          }
+        ]
+      },
+      {
+        id: 'p2-electricity',
+        name: 'Electricity',
+        questions: [
+          {
+            id: 'p2-q1',
+            question: 'State Ohm\'s law.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'The current through a conductor is directly proportional to the potential difference across it, provided temperature remains constant.',
+            markingCriteria: {
+              breakdown: ['Current proportional to potential difference (1 mark)', 'At constant temperature (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+          }
+        ]
+      },
+      {
+        id: 'p3-particle-model-matter',
+        name: 'Particle model of matter',
+        questions: [
+          {
+            id: 'p3-q1',
+            question: 'Describe the arrangement and movement of particles in solids, liquids, and gases.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Solids: particles close together in regular arrangement, vibrate about fixed positions. Liquids: particles close together but irregular arrangement, move around each other. Gases: particles far apart and irregular, move rapidly in all directions.',
+            markingCriteria: {
+              breakdown: ['Solids: close, regular, vibrate (2 marks)', 'Liquids: close, irregular, move around (2 marks)', 'Gases: far apart, rapid movement (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+          }
+        ]
+      },
+      {
+        id: 'p4-atomic-structure',
+        name: 'Atomic structure',
+        questions: [
+          {
+            id: 'p4-q1',
+            question: 'Describe the structure of an atom.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'An atom has a nucleus containing protons and neutrons, with electrons in shells around the nucleus. The nucleus is very small compared to the whole atom.',
+            markingCriteria: {
+              breakdown: ['Nucleus with protons and neutrons (1 mark)', 'Electrons in shells around nucleus (1 mark)', 'Nucleus very small compared to atom (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+          }
+        ]
+      },
+      {
+        id: 'p5-forces',
+        name: 'Forces',
+        questions: [
+          {
+            id: 'p5-q1',
+            question: 'State Newton\'s First Law of Motion.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'An object will remain at rest or continue moving at constant velocity unless acted upon by a resultant force.',
+            markingCriteria: {
+              breakdown: ['Object at rest or constant velocity (1 mark)', 'Unless acted upon by resultant force (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+          }
+        ]
+      },
+      {
+        id: 'p6-waves',
+        name: 'Waves',
+        questions: [
+          {
+            id: 'p6-q1',
+            question: 'Define amplitude, frequency, and wavelength.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Amplitude is the maximum displacement from the rest position. Frequency is the number of waves passing a point per second. Wavelength is the distance between two consecutive identical points on a wave.',
+            markingCriteria: {
+              breakdown: ['Amplitude definition (1 mark)', 'Frequency definition (1 mark)', 'Wavelength definition (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+          }
+        ]
+      },
+      {
+        id: 'p7-magnetism-electromagnetism',
+        name: 'Magnetism and electromagnetism',
+        questions: [
+          {
+            id: 'p7-q1',
+            question: 'Describe the difference between permanent and induced magnets.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Permanent magnets produce their own magnetic field and keep their magnetism. Induced magnets become magnetic only when placed in a magnetic field and lose their magnetism when removed.',
+            markingCriteria: {
+              breakdown: ['Permanent magnets produce own field (1 mark)', 'Keep their magnetism (1 mark)', 'Induced magnets only magnetic in field (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+          }
+        ]
+      }
+    ]
+  },
+
   // ===== EDEXCEL SUBJECTS =====
   {
     id: 'edexcel-english-language',
