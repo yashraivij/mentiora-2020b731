@@ -13399,6 +13399,105 @@ export const curriculum: Subject[] = [
               breakdown: ['Reactants correct (1 mark)', 'Products correct (1 mark)', 'Arrow direction (1 mark)']
             },
             specReference: 'AQA Combined Science Biology - Bioenergetics'
+          },
+          {
+            id: 'b4-q2',
+            question: 'Write the symbol equation for photosynthesis.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: '6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂',
+            markingCriteria: {
+              breakdown: ['Correct symbols (1 mark)', 'Balanced equation (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Bioenergetics'
+          },
+          {
+            id: 'b4-q3',
+            question: 'Where does photosynthesis take place?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'In chloroplasts; mainly in leaves.',
+            markingCriteria: {
+              breakdown: ['Chloroplasts (1 mark)', 'Leaves (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Bioenergetics'
+          },
+          {
+            id: 'b4-q4',
+            question: 'What are the limiting factors of photosynthesis?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Light intensity, carbon dioxide concentration, temperature.',
+            markingCriteria: {
+              breakdown: ['Light intensity (1 mark)', 'CO₂ concentration (1 mark)', 'Temperature (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Bioenergetics'
+          },
+          {
+            id: 'b4-q5',
+            question: 'Write the word equation for aerobic respiration.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Glucose + oxygen → carbon dioxide + water',
+            markingCriteria: {
+              breakdown: ['Reactants correct (1 mark)', 'Products correct (1 mark)', 'Arrow direction (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Bioenergetics'
+          },
+          {
+            id: 'b4-q6',
+            question: 'Where does aerobic respiration take place?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'In mitochondria; in all living cells.',
+            markingCriteria: {
+              breakdown: ['Mitochondria (1 mark)', 'All living cells (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Bioenergetics'
+          },
+          {
+            id: 'b4-q7',
+            question: 'What is anaerobic respiration?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Respiration without oxygen; produces less energy.',
+            markingCriteria: {
+              breakdown: ['Without oxygen (1 mark)', 'Less energy (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Bioenergetics'
+          },
+          {
+            id: 'b4-q8',
+            question: 'What are the products of anaerobic respiration in animals?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Glucose → lactic acid',
+            markingCriteria: {
+              breakdown: ['Glucose (1 mark)', 'Lactic acid (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Bioenergetics'
+          },
+          {
+            id: 'b4-q9',
+            question: 'What are the products of anaerobic respiration in plants?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Glucose → ethanol + carbon dioxide',
+            markingCriteria: {
+              breakdown: ['Ethanol (1 mark)', 'Carbon dioxide (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Bioenergetics'
+          },
+          {
+            id: 'b4-q10',
+            question: 'Why do we need energy from respiration?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Movement, active transport, maintaining body temperature.',
+            markingCriteria: {
+              breakdown: ['Movement (1 mark)', 'Active transport (1 mark)', 'Body temperature (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Bioenergetics'
           }
         ]
       },
@@ -13414,6 +13513,105 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Maintaining a stable internal environment; automatic control systems.',
             markingCriteria: {
               breakdown: ['Stable internal environment (1 mark)', 'Automatic control (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Homeostasis and Response'
+          },
+          {
+            id: 'b5-q2',
+            question: 'What is the nervous system?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Coordination system; uses electrical impulses.',
+            markingCriteria: {
+              breakdown: ['Coordination system (1 mark)', 'Electrical impulses (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Homeostasis and Response'
+          },
+          {
+            id: 'b5-q3',
+            question: 'What is a stimulus?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'A change in the environment.',
+            markingCriteria: {
+              breakdown: ['Change in environment (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Homeostasis and Response'
+          },
+          {
+            id: 'b5-q4',
+            question: 'What is a response?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Reaction to a stimulus.',
+            markingCriteria: {
+              breakdown: ['Reaction to stimulus (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Homeostasis and Response'
+          },
+          {
+            id: 'b5-q5',
+            question: 'What is a reflex action?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Automatic response; protects from harm.',
+            markingCriteria: {
+              breakdown: ['Automatic response (1 mark)', 'Protects from harm (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Homeostasis and Response'
+          },
+          {
+            id: 'b5-q6',
+            question: 'What is the endocrine system?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'System of glands; produces hormones.',
+            markingCriteria: {
+              breakdown: ['System of glands (1 mark)', 'Produces hormones (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Homeostasis and Response'
+          },
+          {
+            id: 'b5-q7',
+            question: 'What are hormones?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Chemical messengers; travel in blood.',
+            markingCriteria: {
+              breakdown: ['Chemical messengers (1 mark)', 'Travel in blood (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Homeostasis and Response'
+          },
+          {
+            id: 'b5-q8',
+            question: 'What does insulin do?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Controls blood glucose; produced by pancreas.',
+            markingCriteria: {
+              breakdown: ['Controls blood glucose (1 mark)', 'Produced by pancreas (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Homeostasis and Response'
+          },
+          {
+            id: 'b5-q9',
+            question: 'What is Type 1 diabetes?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Pancreas produces no insulin; treated with insulin injections.',
+            markingCriteria: {
+              breakdown: ['No insulin produced (1 mark)', 'Insulin injections (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Homeostasis and Response'
+          },
+          {
+            id: 'b5-q10',
+            question: 'How is body temperature controlled?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Detected by hypothalamus; sweating cools; shivering warms.',
+            markingCriteria: {
+              breakdown: ['Hypothalamus detects (1 mark)', 'Sweating cools (1 mark)', 'Shivering warms (1 mark)']
             },
             specReference: 'AQA Combined Science Biology - Homeostasis and Response'
           }
@@ -13433,6 +13631,105 @@ export const curriculum: Subject[] = [
               breakdown: ['Full name (1 mark)', 'Genetic material (1 mark)', 'Contains instructions (1 mark)']
             },
             specReference: 'AQA Combined Science Biology - Inheritance, Variation and Evolution'
+          },
+          {
+            id: 'b6-q2',
+            question: 'What is a gene?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Section of DNA; codes for a characteristic.',
+            markingCriteria: {
+              breakdown: ['Section of DNA (1 mark)', 'Codes for characteristic (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Inheritance, Variation and Evolution'
+          },
+          {
+            id: 'b6-q3',
+            question: 'What is a chromosome?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Structure containing DNA; found in nucleus.',
+            markingCriteria: {
+              breakdown: ['Contains DNA (1 mark)', 'Found in nucleus (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Inheritance, Variation and Evolution'
+          },
+          {
+            id: 'b6-q4',
+            question: 'What is an allele?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Different version of a gene; controls variation.',
+            markingCriteria: {
+              breakdown: ['Different version of gene (1 mark)', 'Controls variation (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Inheritance, Variation and Evolution'
+          },
+          {
+            id: 'b6-q5',
+            question: 'What is dominant and recessive?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Dominant alleles are expressed; recessive only expressed in pairs.',
+            markingCriteria: {
+              breakdown: ['Dominant expressed (1 mark)', 'Recessive in pairs (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Inheritance, Variation and Evolution'
+          },
+          {
+            id: 'b6-q6',
+            question: 'What is variation?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Differences between individuals; genetic and environmental.',
+            markingCriteria: {
+              breakdown: ['Differences between individuals (1 mark)', 'Genetic and environmental (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Inheritance, Variation and Evolution'
+          },
+          {
+            id: 'b6-q7',
+            question: 'What is evolution?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Change in inherited characteristics; over time.',
+            markingCriteria: {
+              breakdown: ['Change in characteristics (1 mark)', 'Over time (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Inheritance, Variation and Evolution'
+          },
+          {
+            id: 'b6-q8',
+            question: 'What is natural selection?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Survival of the fittest; better adapted organisms survive; pass on genes.',
+            markingCriteria: {
+              breakdown: ['Survival of fittest (1 mark)', 'Better adapted survive (1 mark)', 'Pass on genes (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Inheritance, Variation and Evolution'
+          },
+          {
+            id: 'b6-q9',
+            question: 'What is selective breeding?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Choosing organisms with desired characteristics; breeding them.',
+            markingCriteria: {
+              breakdown: ['Choosing desired characteristics (1 mark)', 'Breeding them (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Inheritance, Variation and Evolution'
+          },
+          {
+            id: 'b6-q10',
+            question: 'What is genetic engineering?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Modifying genes; inserting genes from other organisms.',
+            markingCriteria: {
+              breakdown: ['Modifying genes (1 mark)', 'Inserting genes (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Inheritance, Variation and Evolution'
           }
         ]
       },
@@ -13450,6 +13747,105 @@ export const curriculum: Subject[] = [
               breakdown: ['Living organisms (1 mark)', 'Physical environment (1 mark)']
             },
             specReference: 'AQA Combined Science Biology - Ecology'
+          },
+          {
+            id: 'b7-q2',
+            question: 'What is a population?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'All organisms of the same species in an area.',
+            markingCriteria: {
+              breakdown: ['Same species in area (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Ecology'
+          },
+          {
+            id: 'b7-q3',
+            question: 'What is a community?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'All populations in an area.',
+            markingCriteria: {
+              breakdown: ['All populations (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Ecology'
+          },
+          {
+            id: 'b7-q4',
+            question: 'What is interdependence?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Organisms depend on each other; for food and shelter.',
+            markingCriteria: {
+              breakdown: ['Depend on each other (1 mark)', 'Food and shelter (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Ecology'
+          },
+          {
+            id: 'b7-q5',
+            question: 'What is competition?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Organisms compete for resources; such as food and territory.',
+            markingCriteria: {
+              breakdown: ['Compete for resources (1 mark)', 'Food and territory (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Ecology'
+          },
+          {
+            id: 'b7-q6',
+            question: 'What is a food chain?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Shows feeding relationships; energy transfer.',
+            markingCriteria: {
+              breakdown: ['Feeding relationships (1 mark)', 'Energy transfer (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Ecology'
+          },
+          {
+            id: 'b7-q7',
+            question: 'What is a producer?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Makes own food; by photosynthesis.',
+            markingCriteria: {
+              breakdown: ['Makes own food (1 mark)', 'Photosynthesis (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Ecology'
+          },
+          {
+            id: 'b7-q8',
+            question: 'What is a primary consumer?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Eats producers; herbivore.',
+            markingCriteria: {
+              breakdown: ['Eats producers (1 mark)', 'Herbivore (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Ecology'
+          },
+          {
+            id: 'b7-q9',
+            question: 'What causes pollution?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Human activities; waste products; toxic chemicals.',
+            markingCriteria: {
+              breakdown: ['Human activities (1 mark)', 'Waste products (1 mark)', 'Toxic chemicals (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Ecology'
+          },
+          {
+            id: 'b7-q10',
+            question: 'How can we reduce environmental impact?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Recycling, renewable energy, reduce consumption.',
+            markingCriteria: {
+              breakdown: ['Recycling (1 mark)', 'Renewable energy (1 mark)', 'Reduce consumption (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Ecology'
           }
         ]
       },
@@ -13465,6 +13861,105 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Movement, respiration, sensitivity, growth, reproduction, excretion, nutrition.',
             markingCriteria: {
               breakdown: ['Seven characteristics listed (7 marks)']
+            },
+            specReference: 'AQA Combined Science Biology - Key Ideas'
+          },
+          {
+            id: 'b8-q2',
+            question: 'What is movement in living organisms?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Change of position; response to stimuli.',
+            markingCriteria: {
+              breakdown: ['Change of position (1 mark)', 'Response to stimuli (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Key Ideas'
+          },
+          {
+            id: 'b8-q3',
+            question: 'What is respiration?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Release of energy; from food molecules.',
+            markingCriteria: {
+              breakdown: ['Release of energy (1 mark)', 'From food (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Key Ideas'
+          },
+          {
+            id: 'b8-q4',
+            question: 'What is sensitivity?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Detecting changes; responding to environment.',
+            markingCriteria: {
+              breakdown: ['Detecting changes (1 mark)', 'Responding to environment (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Key Ideas'
+          },
+          {
+            id: 'b8-q5',
+            question: 'What is growth?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Increase in size; increase in complexity.',
+            markingCriteria: {
+              breakdown: ['Increase in size (1 mark)', 'Increase in complexity (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Key Ideas'
+          },
+          {
+            id: 'b8-q6',
+            question: 'What is reproduction?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Producing offspring; passing on genes.',
+            markingCriteria: {
+              breakdown: ['Producing offspring (1 mark)', 'Passing on genes (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Key Ideas'
+          },
+          {
+            id: 'b8-q7',
+            question: 'What is excretion?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Removal of waste; toxic products.',
+            markingCriteria: {
+              breakdown: ['Removal of waste (1 mark)', 'Toxic products (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Key Ideas'
+          },
+          {
+            id: 'b8-q8',
+            question: 'What is nutrition?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Taking in nutrients; for energy and growth.',
+            markingCriteria: {
+              breakdown: ['Taking in nutrients (1 mark)', 'Energy and growth (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Key Ideas'
+          },
+          {
+            id: 'b8-q9',
+            question: 'What is the difference between growth and reproduction?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Growth increases size; reproduction creates new organisms.',
+            markingCriteria: {
+              breakdown: ['Growth increases size (1 mark)', 'Reproduction creates new organisms (1 mark)']
+            },
+            specReference: 'AQA Combined Science Biology - Key Ideas'
+          },
+          {
+            id: 'b8-q10',
+            question: 'Why do all living organisms need energy?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'For movement, growth, reproduction.',
+            markingCriteria: {
+              breakdown: ['Movement (1 mark)', 'Growth (1 mark)', 'Reproduction (1 mark)']
             },
             specReference: 'AQA Combined Science Biology - Key Ideas'
           }
@@ -13486,6 +13981,105 @@ export const curriculum: Subject[] = [
               breakdown: ['Nucleus contains protons and neutrons (2 marks)', 'Electrons orbit nucleus (1 mark)', 'Charges correct (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry - Atomic Structure'
+          },
+          {
+            id: 'c1-q2',
+            question: 'What are the relative masses of protons, neutrons and electrons?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Proton = 1, neutron = 1, electron = very small (1/2000).',
+            markingCriteria: {
+              breakdown: ['Proton = 1 (1 mark)', 'Neutron = 1 (1 mark)', 'Electron very small (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atomic Structure'
+          },
+          {
+            id: 'c1-q3',
+            question: 'What are the relative charges of protons, neutrons and electrons?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Proton = +1, neutron = 0, electron = -1.',
+            markingCriteria: {
+              breakdown: ['Proton +1 (1 mark)', 'Neutron 0 (1 mark)', 'Electron -1 (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atomic Structure'
+          },
+          {
+            id: 'c1-q4',
+            question: 'What is the atomic number?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Number of protons; in the nucleus.',
+            markingCriteria: {
+              breakdown: ['Number of protons (1 mark)', 'In nucleus (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atomic Structure'
+          },
+          {
+            id: 'c1-q5',
+            question: 'What is the mass number?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Number of protons plus neutrons; in the nucleus.',
+            markingCriteria: {
+              breakdown: ['Protons plus neutrons (1 mark)', 'In nucleus (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atomic Structure'
+          },
+          {
+            id: 'c1-q6',
+            question: 'How are electrons arranged in atoms?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'In shells or energy levels; around the nucleus.',
+            markingCriteria: {
+              breakdown: ['Shells/energy levels (1 mark)', 'Around nucleus (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atomic Structure'
+          },
+          {
+            id: 'c1-q7',
+            question: 'What is the maximum number of electrons in the first three shells?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'First shell = 2, second shell = 8, third shell = 8.',
+            markingCriteria: {
+              breakdown: ['First = 2 (1 mark)', 'Second = 8 (1 mark)', 'Third = 8 (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atomic Structure'
+          },
+          {
+            id: 'c1-q8',
+            question: 'How are elements arranged in the periodic table?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'In order of atomic number; with similar properties in groups.',
+            markingCriteria: {
+              breakdown: ['Order of atomic number (1 mark)', 'Similar properties in groups (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atomic Structure'
+          },
+          {
+            id: 'c1-q9',
+            question: 'What is a group in the periodic table?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Vertical column; elements with similar properties.',
+            markingCriteria: {
+              breakdown: ['Vertical column (1 mark)', 'Similar properties (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atomic Structure'
+          },
+          {
+            id: 'c1-q10',
+            question: 'What is a period in the periodic table?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Horizontal row; same number of electron shells.',
+            markingCriteria: {
+              breakdown: ['Horizontal row (1 mark)', 'Same electron shells (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Atomic Structure'
           }
         ]
       },
@@ -13501,6 +14095,105 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Transfer of electrons; from metal to non-metal; forming charged ions.',
             markingCriteria: {
               breakdown: ['Transfer of electrons (1 mark)', 'Metal to non-metal (1 mark)', 'Forms ions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Bonding'
+          },
+          {
+            id: 'c2-q2',
+            question: 'What is covalent bonding?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Sharing of electrons; between non-metals.',
+            markingCriteria: {
+              breakdown: ['Sharing electrons (1 mark)', 'Between non-metals (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Bonding'
+          },
+          {
+            id: 'c2-q3',
+            question: 'What is metallic bonding?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Electrons are delocalized; sea of electrons.',
+            markingCriteria: {
+              breakdown: ['Delocalized electrons (1 mark)', 'Sea of electrons (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Bonding'
+          },
+          {
+            id: 'c2-q4',
+            question: 'Properties of ionic compounds.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'High melting points; conduct when molten; soluble in water.',
+            markingCriteria: {
+              breakdown: ['High melting points (1 mark)', 'Conduct when molten (1 mark)', 'Soluble in water (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Bonding'
+          },
+          {
+            id: 'c2-q5',
+            question: 'Properties of covalent compounds.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Low melting points; do not conduct electricity; insoluble in water.',
+            markingCriteria: {
+              breakdown: ['Low melting points (1 mark)', 'Do not conduct (1 mark)', 'Insoluble in water (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Bonding'
+          },
+          {
+            id: 'c2-q6',
+            question: 'Properties of metals.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Good conductors; malleable; ductile; lustrous.',
+            markingCriteria: {
+              breakdown: ['Good conductors (1 mark)', 'Malleable (1 mark)', 'Ductile (1 mark)', 'Lustrous (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Bonding'
+          },
+          {
+            id: 'c2-q7',
+            question: 'What is an alloy?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Mixture of metals; stronger than pure metals.',
+            markingCriteria: {
+              breakdown: ['Mixture of metals (1 mark)', 'Stronger than pure (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Bonding'
+          },
+          {
+            id: 'c2-q8',
+            question: 'What is a polymer?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Large molecule; made from monomers.',
+            markingCriteria: {
+              breakdown: ['Large molecule (1 mark)', 'Made from monomers (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Bonding'
+          },
+          {
+            id: 'c2-q9',
+            question: 'What is diamond?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Giant covalent structure; each carbon bonded to four others; very hard.',
+            markingCriteria: {
+              breakdown: ['Giant covalent (1 mark)', 'Four bonds per carbon (1 mark)', 'Very hard (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Bonding'
+          },
+          {
+            id: 'c2-q10',
+            question: 'What is graphite?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Giant covalent structure; layers can slide; conducts electricity.',
+            markingCriteria: {
+              breakdown: ['Giant covalent (1 mark)', 'Layers slide (1 mark)', 'Conducts electricity (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry - Bonding'
           }
@@ -13520,6 +14213,105 @@ export const curriculum: Subject[] = [
               breakdown: ['Correct calculation (1 mark)', 'Answer = 18 (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q2',
+            question: 'Calculate the relative formula mass of carbon dioxide (CO₂). (C = 12, O = 16)',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: '12 + (2 × 16) = 12 + 32 = 44',
+            markingCriteria: {
+              breakdown: ['Correct calculation (1 mark)', 'Answer = 44 (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q3',
+            question: 'What is the law of conservation of mass?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Mass is neither created nor destroyed; in chemical reactions.',
+            markingCriteria: {
+              breakdown: ['Neither created nor destroyed (1 mark)', 'In chemical reactions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q4',
+            question: 'What is a mole?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Amount of substance; containing 6.02 × 10²³ particles.',
+            markingCriteria: {
+              breakdown: ['Amount of substance (1 mark)', 'Avogadro number (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q5',
+            question: 'Calculate moles from mass: 44g of CO₂. (Mr = 44)',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Moles = mass ÷ Mr = 44 ÷ 44 = 1 mole',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Answer = 1 mole (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q6',
+            question: 'Calculate mass from moles: 2 moles of H₂O. (Mr = 18)',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Mass = moles × Mr = 2 × 18 = 36g',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Answer = 36g (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q7',
+            question: 'What is concentration?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Amount of solute; per unit volume of solution.',
+            markingCriteria: {
+              breakdown: ['Amount of solute (1 mark)', 'Per unit volume (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q8',
+            question: 'Calculate concentration: 2g dissolved in 500cm³.',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Concentration = mass ÷ volume = 2 ÷ 0.5 = 4 g/dm³',
+            markingCriteria: {
+              breakdown: ['Correct calculation (1 mark)', 'Answer = 4 g/dm³ (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q9',
+            question: 'What is percentage yield?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Actual yield ÷ theoretical yield × 100%',
+            markingCriteria: {
+              breakdown: ['Correct formula (2 marks)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
+          },
+          {
+            id: 'c3-q10',
+            question: 'Why is percentage yield usually less than 100%?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Incomplete reactions; side reactions; losses during separation.',
+            markingCriteria: {
+              breakdown: ['Incomplete reactions (1 mark)', 'Side reactions (1 mark)', 'Losses (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Quantitative Chemistry'
           }
         ]
       },
@@ -13537,6 +14329,105 @@ export const curriculum: Subject[] = [
               breakdown: ['Gain of oxygen (1 mark)', 'Loss of electrons (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q2',
+            question: 'What is reduction?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Loss of oxygen; gain of electrons.',
+            markingCriteria: {
+              breakdown: ['Loss of oxygen (1 mark)', 'Gain of electrons (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q3',
+            question: 'What is an acid?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Substance with pH less than 7; produces H+ ions.',
+            markingCriteria: {
+              breakdown: ['pH less than 7 (1 mark)', 'Produces H+ ions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q4',
+            question: 'What is a base?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Substance with pH greater than 7; produces OH- ions.',
+            markingCriteria: {
+              breakdown: ['pH greater than 7 (1 mark)', 'Produces OH- ions (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q5',
+            question: 'What is neutralization?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Acid + base → salt + water.',
+            markingCriteria: {
+              breakdown: ['Acid + base (1 mark)', 'Salt + water (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q6',
+            question: 'What is electrolysis?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Breaking down compounds; using electricity.',
+            markingCriteria: {
+              breakdown: ['Breaking down compounds (1 mark)', 'Using electricity (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q7',
+            question: 'What happens at the cathode?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Reduction occurs; positive ions gain electrons.',
+            markingCriteria: {
+              breakdown: ['Reduction (1 mark)', 'Gain electrons (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q8',
+            question: 'What happens at the anode?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Oxidation occurs; negative ions lose electrons.',
+            markingCriteria: {
+              breakdown: ['Oxidation (1 mark)', 'Lose electrons (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q9',
+            question: 'What is the reactivity series?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'List of metals; in order of reactivity.',
+            markingCriteria: {
+              breakdown: ['List of metals (1 mark)', 'Order of reactivity (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
+          },
+          {
+            id: 'c4-q10',
+            question: 'How do you extract metals?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Reactive metals by electrolysis; less reactive by reduction with carbon.',
+            markingCriteria: {
+              breakdown: ['Reactive by electrolysis (1 mark)', 'Less reactive by reduction (1 mark)', 'With carbon (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Chemical Changes'
           }
         ]
       },
@@ -13552,6 +14443,105 @@ export const curriculum: Subject[] = [
             modelAnswer: 'Reaction that gives out energy; temperature increases.',
             markingCriteria: {
               breakdown: ['Gives out energy (1 mark)', 'Temperature increases (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q2',
+            question: 'What is an endothermic reaction?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Reaction that takes in energy; temperature decreases.',
+            markingCriteria: {
+              breakdown: ['Takes in energy (1 mark)', 'Temperature decreases (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q3',
+            question: 'Give an example of an exothermic reaction.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Combustion, respiration, neutralization.',
+            markingCriteria: {
+              breakdown: ['One correct example (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q4',
+            question: 'Give an example of an endothermic reaction.',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Photosynthesis, thermal decomposition.',
+            markingCriteria: {
+              breakdown: ['One correct example (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q5',
+            question: 'What is activation energy?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Minimum energy needed; to start a reaction.',
+            markingCriteria: {
+              breakdown: ['Minimum energy (1 mark)', 'To start reaction (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q6',
+            question: 'What does a catalyst do?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Speeds up reaction; lowers activation energy.',
+            markingCriteria: {
+              breakdown: ['Speeds up reaction (1 mark)', 'Lowers activation energy (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q7',
+            question: 'Are catalysts used up in reactions?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'No, catalysts are not used up.',
+            markingCriteria: {
+              breakdown: ['Not used up (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q8',
+            question: 'What happens to bonds in chemical reactions?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Bonds are broken; new bonds are formed.',
+            markingCriteria: {
+              breakdown: ['Bonds broken (1 mark)', 'New bonds formed (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q9',
+            question: 'Which process requires energy in reactions?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Breaking bonds requires energy.',
+            markingCriteria: {
+              breakdown: ['Breaking bonds (1 mark)']
+            },
+            specReference: 'AQA Combined Science Chemistry - Energy Changes'
+          },
+          {
+            id: 'c5-q10',
+            question: 'Which process releases energy in reactions?',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'Forming bonds releases energy.',
+            markingCriteria: {
+              breakdown: ['Forming bonds (1 mark)']
             },
             specReference: 'AQA Combined Science Chemistry - Energy Changes'
           }
