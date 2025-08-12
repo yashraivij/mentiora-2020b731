@@ -15361,6 +15361,470 @@ export const curriculum: Subject[] = [
             specReference: 'AQA Combined Science Physics - Forces'
           }
         ]
+      },
+      {
+        id: 'p3-particle-model',
+        name: 'Physics: Particle Model of Matter',
+        questions: [
+          {
+            id: 'p3-q1',
+            question: 'Describe the arrangement and movement of particles in solids, liquids and gases.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Solids: particles close together in regular arrangement, vibrate about fixed positions. Liquids: particles close together but irregular arrangement, move around each other. Gases: particles far apart, move randomly at high speed.',
+            markingCriteria: {
+              breakdown: ['Solid arrangement and movement (2 marks)', 'Liquid arrangement and movement (2 marks)', 'Gas arrangement and movement (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q2',
+            question: 'What is meant by density?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Mass per unit volume of a substance.',
+            markingCriteria: {
+              breakdown: ['Mass per unit volume (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q3',
+            question: 'Calculate the density of an object with mass 200g and volume 50 cm³.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Density = mass ÷ volume = 200g ÷ 50 cm³ = 4 g/cm³',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q4',
+            question: 'Explain what happens during melting in terms of particles.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Particles gain energy; vibrate more vigorously; overcome forces holding them in fixed positions; become free to move around each other.',
+            markingCriteria: {
+              breakdown: ['Particles gain energy (1 mark)', 'Increased vibration (1 mark)', 'Overcome forces (1 mark)', 'Free to move (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q5',
+            question: 'What is internal energy?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Total kinetic energy and potential energy of all particles in a system.',
+            markingCriteria: {
+              breakdown: ['Total energy (1 mark)', 'Kinetic energy (1 mark)', 'Potential energy (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q6',
+            question: 'Explain what happens during evaporation.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Particles at surface of liquid; gain enough energy to escape; only fastest particles escape; average kinetic energy decreases.',
+            markingCriteria: {
+              breakdown: ['Surface particles (1 mark)', 'Gain energy to escape (1 mark)', 'Fastest particles escape (1 mark)', 'Average energy decreases (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q7',
+            question: 'What is pressure in terms of particles?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Force exerted by particles; when they collide with container walls; per unit area.',
+            markingCriteria: {
+              breakdown: ['Force by particles (1 mark)', 'Collisions with walls (1 mark)', 'Per unit area (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q8',
+            question: 'How does temperature affect gas pressure?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Higher temperature increases particle kinetic energy; particles move faster; more frequent and forceful collisions; pressure increases.',
+            markingCriteria: {
+              breakdown: ['Higher temperature increases energy (1 mark)', 'Particles move faster (1 mark)', 'More collisions (1 mark)', 'Pressure increases (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q9',
+            question: 'What is specific heat capacity?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Energy needed to raise temperature of 1 kg of substance by 1°C.',
+            markingCriteria: {
+              breakdown: ['Energy needed (1 mark)', '1 kg of substance (1 mark)', 'By 1°C (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          },
+          {
+            id: 'p3-q10',
+            question: 'Calculate the energy needed to heat 2 kg of water from 20°C to 100°C. (Specific heat capacity of water = 4200 J/kg°C)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Energy = mcΔT = 2 × 4200 × (100-20) = 2 × 4200 × 80 = 672,000 J',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Correct temperature change (1 mark)', 'Correct substitution (1 mark)', 'Correct answer (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Particle Model'
+          }
+        ]
+      },
+      {
+        id: 'p4-atomic-structure',
+        name: 'Physics: Atomic Structure',
+        questions: [
+          {
+            id: 'p4-q1',
+            question: 'Describe the structure of an atom.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Nucleus at center containing protons and neutrons; electrons orbit nucleus; mostly empty space; nucleus very small compared to atom.',
+            markingCriteria: {
+              breakdown: ['Nucleus at center (1 mark)', 'Contains protons and neutrons (1 mark)', 'Electrons orbit (1 mark)', 'Mostly empty space (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q2',
+            question: 'What is radioactive decay?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Random process where unstable nuclei emit radiation; to become more stable; cannot be predicted when individual atom will decay.',
+            markingCriteria: {
+              breakdown: ['Random process (1 mark)', 'Unstable nuclei emit radiation (1 mark)', 'Cannot predict individual decay (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q3',
+            question: 'Name the three types of nuclear radiation.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Alpha particles; beta particles; gamma rays.',
+            markingCriteria: {
+              breakdown: ['Alpha (1 mark)', 'Beta (1 mark)', 'Gamma (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q4',
+            question: 'Compare the properties of alpha, beta and gamma radiation.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Alpha: helium nucleus, +2 charge, stopped by paper, highly ionizing, short range. Beta: electron, -1 charge, stopped by aluminum, moderately ionizing, medium range. Gamma: electromagnetic wave, no charge, stopped by thick lead, weakly ionizing, long range.',
+            markingCriteria: {
+              breakdown: ['Alpha properties (3 marks)', 'Beta properties (3 marks)', 'Gamma properties (3 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q5',
+            question: 'What is half-life?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Time taken for half the radioactive nuclei in a sample to decay; or time for activity to halve.',
+            markingCriteria: {
+              breakdown: ['Time for half to decay (2 marks)', 'Or activity to halve (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q6',
+            question: 'A radioactive sample has 800 atoms. After 10 years, 200 atoms remain. What is the half-life?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'After 1 half-life: 400 atoms. After 2 half-lives: 200 atoms. 2 half-lives = 10 years, so half-life = 5 years.',
+            markingCriteria: {
+              breakdown: ['Identifies 2 half-lives (1 mark)', 'Correct calculation (1 mark)', 'Answer = 5 years (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q7',
+            question: 'Give three uses of radioactivity.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Medical imaging; cancer treatment; carbon dating; sterilization; tracers.',
+            markingCriteria: {
+              breakdown: ['Three correct uses (3 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q8',
+            question: 'What safety precautions should be taken with radioactive materials?',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Keep sources in lead containers; minimize exposure time; maximize distance from source; use protective clothing; monitor exposure levels.',
+            markingCriteria: {
+              breakdown: ['Lead containers (1 mark)', 'Minimize time (1 mark)', 'Maximize distance (1 mark)', 'Protective clothing (1 mark)', 'Monitor exposure (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q9',
+            question: 'What is background radiation?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Radiation that exists naturally in environment; from cosmic rays, rocks, medical procedures; always present.',
+            markingCriteria: {
+              breakdown: ['Natural radiation (1 mark)', 'Sources mentioned (1 mark)', 'Always present (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          },
+          {
+            id: 'p4-q10',
+            question: 'Explain the difference between contamination and irradiation.',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Contamination: radioactive material gets onto or into body, continues to emit radiation. Irradiation: exposed to radiation from external source, stops when source removed.',
+            markingCriteria: {
+              breakdown: ['Contamination definition (2 marks)', 'Irradiation definition (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Atomic Structure'
+          }
+        ]
+      },
+      {
+        id: 'p6-waves',
+        name: 'Physics: Waves',
+        questions: [
+          {
+            id: 'p6-q1',
+            question: 'What is a wave?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Transfer of energy without transfer of matter.',
+            markingCriteria: {
+              breakdown: ['Transfer of energy (1 mark)', 'Without transfer of matter (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q2',
+            question: 'What is the difference between transverse and longitudinal waves?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Transverse: oscillations perpendicular to direction of energy transfer. Longitudinal: oscillations parallel to direction of energy transfer.',
+            markingCriteria: {
+              breakdown: ['Transverse definition (2 marks)', 'Longitudinal definition (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q3',
+            question: 'Define amplitude, wavelength, frequency and period.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Amplitude: maximum displacement from rest position. Wavelength: distance between two consecutive points in phase. Frequency: number of waves per second. Period: time for one complete wave.',
+            markingCriteria: {
+              breakdown: ['Amplitude (2 marks)', 'Wavelength (2 marks)', 'Frequency (2 marks)', 'Period (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q4',
+            question: 'Calculate the wave speed if frequency is 50 Hz and wavelength is 4 m.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Wave speed = frequency × wavelength = 50 × 4 = 200 m/s',
+            markingCriteria: {
+              breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q5',
+            question: 'What is reflection?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Waves bounce off a surface and change direction.',
+            markingCriteria: {
+              breakdown: ['Waves bounce off surface (1 mark)', 'Change direction (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q6',
+            question: 'State the law of reflection.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Angle of incidence equals angle of reflection.',
+            markingCriteria: {
+              breakdown: ['Angle of incidence equals angle of reflection (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q7',
+            question: 'What is refraction?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Waves change direction when passing from one medium to another; due to change in wave speed.',
+            markingCriteria: {
+              breakdown: ['Change direction (1 mark)', 'Different medium (1 mark)', 'Due to speed change (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q8',
+            question: 'List the electromagnetic spectrum in order of increasing frequency.',
+            marks: 7,
+            difficulty: 'medium',
+            modelAnswer: 'Radio waves, microwaves, infrared, visible light, ultraviolet, X-rays, gamma rays.',
+            markingCriteria: {
+              breakdown: ['All seven in correct order (7 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q9',
+            question: 'Give one use for each: radio waves, microwaves, infrared.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Radio waves: broadcasting; microwaves: cooking; infrared: thermal imaging.',
+            markingCriteria: {
+              breakdown: ['Radio waves use (1 mark)', 'Microwaves use (1 mark)', 'Infrared use (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          },
+          {
+            id: 'p6-q10',
+            question: 'What are the dangers of electromagnetic radiation?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'UV: skin cancer, sunburn; X-rays: tissue damage, cancer; gamma rays: radiation sickness, cancer; microwaves: heating of body tissue.',
+            markingCriteria: {
+              breakdown: ['UV dangers (2 marks)', 'X-ray dangers (2 marks)', 'Gamma/microwave dangers (2 marks)']
+            },
+            specReference: 'AQA Combined Science Physics - Waves'
+          }
+        ]
+      },
+      {
+        id: 'p7-magnetism-electromagnetism',
+        name: 'Physics: Magnetism and Electromagnetism',
+        questions: [
+          {
+            id: 'p7-q1',
+            question: 'What is a magnetic field?',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Region around a magnet where magnetic force can be detected.',
+            markingCriteria: {
+              breakdown: ['Region around magnet (1 mark)', 'Where force detected (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism and Electromagnetism'
+          },
+          {
+            id: 'p7-q2',
+            question: 'How can you show the shape of a magnetic field?',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Use iron filings; use plotting compass; magnetic field lines show direction and strength.',
+            markingCriteria: {
+              breakdown: ['Iron filings (1 mark)', 'Plotting compass (1 mark)', 'Field lines (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism and Electromagnetism'
+          },
+          {
+            id: 'p7-q3',
+            question: 'What happens when a current flows through a wire?',
+            marks: 2,
+            difficulty: 'medium',
+            modelAnswer: 'Creates a magnetic field around the wire.',
+            markingCriteria: {
+              breakdown: ['Creates magnetic field (1 mark)', 'Around wire (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism and Electromagnetism'
+          },
+          {
+            id: 'p7-q4',
+            question: 'How can you increase the strength of an electromagnet?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Increase current; increase number of turns of wire; use iron core; coil wire closer together.',
+            markingCriteria: {
+              breakdown: ['Increase current (1 mark)', 'More turns (1 mark)', 'Iron core (1 mark)', 'Closer coils (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism and Electromagnetism'
+          },
+          {
+            id: 'p7-q5',
+            question: 'What is the motor effect?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Current-carrying conductor in magnetic field experiences force; force perpendicular to both current and field.',
+            markingCriteria: {
+              breakdown: ['Conductor experiences force (1 mark)', 'In magnetic field (1 mark)', 'Perpendicular direction (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism and Electromagnetism'
+          },
+          {
+            id: 'p7-q6',
+            question: 'How does a simple electric motor work?',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Current through coil in magnetic field; forces on opposite sides of coil; forces in opposite directions; causes rotation; commutator reverses current.',
+            markingCriteria: {
+              breakdown: ['Current in magnetic field (1 mark)', 'Forces on coil (1 mark)', 'Opposite directions (1 mark)', 'Causes rotation (1 mark)', 'Commutator function (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism and Electromagnetism'
+          },
+          {
+            id: 'p7-q7',
+            question: 'What is electromagnetic induction?',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Voltage induced when conductor moves relative to magnetic field; or when magnetic field changes.',
+            markingCriteria: {
+              breakdown: ['Voltage induced (1 mark)', 'Conductor moves relative to field (1 mark)', 'Or field changes (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism and Electromagnetism'
+          },
+          {
+            id: 'p7-q8',
+            question: 'How can you increase induced voltage?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Move conductor faster; use stronger magnetic field; use more turns of wire; use iron core.',
+            markingCriteria: {
+              breakdown: ['Move faster (1 mark)', 'Stronger field (1 mark)', 'More turns (1 mark)', 'Iron core (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism and Electromagnetism'
+          },
+          {
+            id: 'p7-q9',
+            question: 'How does a generator work?',
+            marks: 4,
+            difficulty: 'hard',
+            modelAnswer: 'Coil rotates in magnetic field; conductor cuts field lines; voltage induced; slip rings maintain connection.',
+            markingCriteria: {
+              breakdown: ['Coil rotates (1 mark)', 'Cuts field lines (1 mark)', 'Voltage induced (1 mark)', 'Slip rings (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism and Electromagnetism'
+          },
+          {
+            id: 'p7-q10',
+            question: 'What is a transformer and how does it work?',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'Device that changes voltage; has primary and secondary coils; changing current in primary creates changing magnetic field; induces voltage in secondary.',
+            markingCriteria: {
+              breakdown: ['Changes voltage (1 mark)', 'Primary and secondary coils (1 mark)', 'Changing magnetic field (1 mark)', 'Induces voltage (1 mark)', 'Iron core (1 mark)']
+            },
+            specReference: 'AQA Combined Science Physics - Magnetism and Electromagnetism'
+          }
+        ]
       }
     ]
   },
