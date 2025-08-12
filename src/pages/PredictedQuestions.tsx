@@ -96,7 +96,8 @@ const PredictedQuestions = () => {
       history: "1h 15min",
       geography: "1h 30min",
       "computer-science": "1h 30min",
-      psychology: "1h 45min"
+      psychology: "1h 45min",
+      "combined-science-aqa": "1h 15min"
     };
     return durations[subjectId as keyof typeof durations] || "1h 30min";
   };
@@ -118,6 +119,8 @@ const PredictedQuestions = () => {
       name = 'IGCSE Business';
     } else if (subject.id === 'chemistry-edexcel') {
       name = 'Chemistry';
+    } else if (subject.id === 'combined-science-aqa') {
+      name = 'Combined Science Biology';
     }
     
     // For coming soon cards in CCEA, OCR, WJEC - remove Paper 1
@@ -171,7 +174,10 @@ const PredictedQuestions = () => {
             {getSubjectDisplayName(subject, examBoard)}
           </CardTitle>
           <CardDescription className="text-white/80 text-sm">
-            {isCompleted ? `Last Grade: ${completion.grade} (${completion.percentage}%)` : 'Full predicted paper practice'}
+            {isCompleted ? `Last Grade: ${completion.grade} (${completion.percentage}%)` : 
+             subject.id === 'combined-science-aqa' ? 
+               'Biology topics 1–4: Cell Biology; Organisation; Infection and response; and Bioenergetics' : 
+               'Full predicted paper practice'}
           </CardDescription>
         </CardHeader>
         
@@ -193,8 +199,17 @@ const PredictedQuestions = () => {
                   <Target className="h-4 w-4 text-white" />
                 </div>
                 <div>
-                  <p className="text-white text-sm font-medium">{subject.topics.length} topics covered</p>
-                  <p className="text-white/70 text-xs">Full specification</p>
+                  {subject.id === 'combined-science-aqa' ? (
+                    <>
+                      <p className="text-white text-sm font-medium">70 marks • 16.7% of GCSE</p>
+                      <p className="text-white/70 text-xs">Foundation and Higher Tier</p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-white text-sm font-medium">{subject.topics.length} topics covered</p>
+                      <p className="text-white/70 text-xs">Full specification</p>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
