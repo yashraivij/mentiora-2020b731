@@ -14019,8 +14019,74 @@ export const curriculum: Subject[] = [
              markingCriteria: {
                breakdown: ['Sun to producers (1 mark)', 'Primary consumers eat producers (1 mark)', 'Secondary consumers (1 mark)', 'Energy lost at each stage (2 marks)']
              },
-             specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
-           }
+              specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
+            },
+            {
+              id: 'b5-q11',
+              question: 'Explain how negative feedback maintains homeostasis.',
+              marks: 5,
+              difficulty: 'medium',
+              modelAnswer: "Change detected by receptors. Information sent to coordination center. Response produced by effectors. Response counteracts original change. System returns to normal.",
+              markingCriteria: {
+                breakdown: ['Change detected (1 mark)', 'Information to coordination center (1 mark)', 'Response by effectors (1 mark)', 'Counteracts change (1 mark)', 'Returns to normal (1 mark)']
+              },
+              specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
+            },
+            {
+              id: 'b5-q12',
+              question: 'Describe the menstrual cycle and role of hormones.',
+              marks: 8,
+              difficulty: 'hard',
+              modelAnswer: "FSH stimulates egg maturation and oestrogen production. Oestrogen causes uterus lining to thicken and inhibits FSH. LH triggers ovulation. Progesterone maintains uterus lining. If no fertilisation, progesterone falls and menstruation occurs.",
+              markingCriteria: {
+                breakdown: ['FSH role (2 marks)', 'Oestrogen role (2 marks)', 'LH triggers ovulation (1 mark)', 'Progesterone role (2 marks)', 'Menstruation process (1 mark)']
+              },
+              specReference: 'AQA Combined Science Biology Paper 2 - Homeostasis and response'
+            },
+            {
+              id: 'b6-q9',
+              question: 'Explain how fossils provide evidence for evolution.',
+              marks: 6,
+              difficulty: 'medium',
+              modelAnswer: "Fossils show gradual changes in organisms over time. Simple organisms in older rocks, complex in newer rocks. Shows progression from simple to complex life. Missing links show intermediate stages.",
+              markingCriteria: {
+                breakdown: ['Gradual changes over time (2 marks)', 'Simple to complex progression (2 marks)', 'Intermediate stages (2 marks)']
+              },
+              specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
+            },
+            {
+              id: 'b6-q10',
+              question: 'Describe how antibiotic resistance develops in bacteria.',
+              marks: 6,
+              difficulty: 'hard',
+              modelAnswer: "Random mutations in bacteria create antibiotic resistance. Antibiotics kill non-resistant bacteria. Resistant bacteria survive and reproduce. Resistance alleles become more common in population. Natural selection favors resistant bacteria.",
+              markingCriteria: {
+                breakdown: ['Random mutations create resistance (1 mark)', 'Antibiotics kill non-resistant (1 mark)', 'Resistant survive and reproduce (2 marks)', 'Natural selection process (2 marks)']
+              },
+              specReference: 'AQA Combined Science Biology Paper 2 - Inheritance, variation and evolution'
+            },
+            {
+              id: 'b7-q13',
+              question: 'Explain how farming methods can affect biodiversity.',
+              marks: 6,
+              difficulty: 'medium',
+              modelAnswer: "Monoculture reduces plant diversity. Pesticides kill beneficial insects. Fertilizers cause eutrophication. Removal of hedgerows destroys habitats. Organic farming and crop rotation can help maintain biodiversity.",
+              markingCriteria: {
+                breakdown: ['Monoculture effects (1 mark)', 'Pesticide impacts (1 mark)', 'Fertilizer problems (1 mark)', 'Habitat destruction (1 mark)', 'Solutions mentioned (2 marks)']
+              },
+              specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
+            },
+            {
+              id: 'b7-q14',
+              question: 'Calculate the efficiency of energy transfer in a food chain where primary consumers receive 1000kJ and secondary consumers receive 100kJ.',
+              marks: 3,
+              difficulty: 'medium',
+              modelAnswer: "Efficiency = (energy transferred ÷ energy received) × 100% = (100 ÷ 1000) × 100% = 10%",
+              markingCriteria: {
+                breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with percentage (1 mark)']
+              },
+              specReference: 'AQA Combined Science Biology Paper 2 - Ecology'
+            }
         ]
       }
     ]
@@ -14563,21 +14629,76 @@ export const curriculum: Subject[] = [
              markingCriteria: {
                breakdown: ['Energy required to break bonds (1 mark)', 'Energy released forming bonds (1 mark)', 'More released = exothermic (2 marks)', 'Less released = endothermic (2 marks)']
              },
+            specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
+          },
+           {
+             id: 'c1-q8',
+             question: 'Explain why noble gases are unreactive.',
+             marks: 3,
+             difficulty: 'medium',
+             modelAnswer: "Noble gases have full outer electron shells. This makes them very stable. They do not need to gain or lose electrons.",
+             markingCriteria: {
+               breakdown: ['Full outer electron shells (1 mark)', 'Very stable (1 mark)', 'Do not need to gain/lose electrons (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 1 - Atomic structure and periodic table'
+           },
+           {
+             id: 'c2-q8',
+             question: 'Describe the structure and properties of graphite.',
+             marks: 5,
+             difficulty: 'medium',
+             modelAnswer: "Each carbon atom bonded to three others. Forms layers that can slide. Has delocalized electrons so conducts electricity. Soft and slippery. High melting point.",
+             markingCriteria: {
+               breakdown: ['Three bonds per carbon (1 mark)', 'Layers that slide (1 mark)', 'Conducts electricity (1 mark)', 'Soft/slippery (1 mark)', 'High melting point (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 1 - Bonding, structure, and properties of matter'
+           },
+           {
+             id: 'c3-q7',
+             question: 'Balance the equation: _Mg + _HCl → _MgCl₂ + _H₂',
+             marks: 2,
+             difficulty: 'easy',
+             modelAnswer: "Mg + 2HCl → MgCl₂ + H₂",
+             markingCriteria: {
+               breakdown: ['Correct coefficients (2 marks)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 1 - Quantitative chemistry'
+           },
+           {
+             id: 'c4-q10',
+             question: 'Explain why acids have a pH less than 7.',
+             marks: 3,
+             difficulty: 'medium',
+             modelAnswer: "Acids produce hydrogen ions (H⁺) in aqueous solution. Higher concentration of H⁺ ions means lower pH. pH scale measures H⁺ ion concentration.",
+             markingCriteria: {
+               breakdown: ['Acids produce H⁺ ions (1 mark)', 'Higher H⁺ concentration (1 mark)', 'Lower pH (1 mark)']
+             },
+             specReference: 'AQA Combined Science Chemistry Paper 1 - Chemical changes'
+           },
+           {
+             id: 'c5-q9',
+             question: 'Describe how energy changes in reactions can be measured experimentally.',
+             marks: 5,
+             difficulty: 'hard',
+             modelAnswer: "Use calorimetry to measure temperature change. Measure mass and specific heat capacity of solution. Calculate energy change using Q = mcΔT. Account for heat losses to surroundings.",
+             markingCriteria: {
+               breakdown: ['Calorimetry method (1 mark)', 'Measure temperature change (1 mark)', 'Q = mcΔT formula (2 marks)', 'Account for heat losses (1 mark)']
+             },
              specReference: 'AQA Combined Science Chemistry Paper 1 - Energy changes'
            }
-        ]
-      }
-    ]
-  },
+         ]
+       }
+     ]
+   },
 
-  // Chemistry Paper 2: Topics 13–17: The rate and extent of chemical change; Organic chemistry; Chemical analysis; Chemistry of the atmosphere; and Using resources
-  {
-    id: 'combined-science-chem-paper2-aqa',
-    name: 'Combined Science Chemistry Paper 2 (AQA)',
-    topics: [
-      {
-        id: 'c6-rate-extent',
-        name: 'Chemistry: The Rate and Extent of Chemical Change',
+   // Chemistry Paper 2: Topics 13–17: The rate and extent of chemical change; Organic chemistry; Chemical analysis; Chemistry of the atmosphere; and Using resources
+   {
+     id: 'combined-science-chem-paper2-aqa',
+     name: 'Combined Science Chemistry Paper 2 (AQA)',
+     topics: [
+       {
+         id: 'c6-rate-extent',
+         name: 'Chemistry: The Rate and Extent of Chemical Change',
         questions: [
           {
             id: 'c6-q1',
@@ -14975,8 +15096,63 @@ export const curriculum: Subject[] = [
              markingCriteria: {
                breakdown: ['Phytomining described (2 marks)', 'Bioleaching described (2 marks)', 'Advantages and disadvantages (2 marks)']
              },
-             specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
-           }
+              specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+            },
+            {
+              id: 'c6-q8',
+              question: 'Explain why increasing surface area increases the rate of reaction.',
+              marks: 4,
+              difficulty: 'medium',
+              modelAnswer: "Smaller pieces have larger surface area. More particles exposed to react. More collisions per second. Increases rate of reaction.",
+              markingCriteria: {
+                breakdown: ['Smaller pieces = larger surface area (1 mark)', 'More particles exposed (1 mark)', 'More collisions per second (1 mark)', 'Increases rate (1 mark)']
+              },
+              specReference: 'AQA Combined Science Chemistry Paper 2 - Rate and extent of chemical change'
+            },
+            {
+              id: 'c7-q7',
+              question: 'Write the equation for the incomplete combustion of methane.',
+              marks: 2,
+              difficulty: 'medium',
+              modelAnswer: "2CH₄ + 3O₂ → 2CO + 4H₂O",
+              markingCriteria: {
+                breakdown: ['Correct reactants and products (1 mark)', 'Balanced equation (1 mark)']
+              },
+              specReference: 'AQA Combined Science Chemistry Paper 2 - Organic chemistry'
+            },
+            {
+              id: 'c8-q6',
+              question: 'Describe the flame test for sodium ions.',
+              marks: 2,
+              difficulty: 'easy',
+              modelAnswer: "Clean platinum wire in acid. Dip in sample. Hold in blue flame. Sodium produces yellow flame.",
+              markingCriteria: {
+                breakdown: ['Clean wire and dip in sample (1 mark)', 'Yellow flame for sodium (1 mark)']
+              },
+              specReference: 'AQA Combined Science Chemistry Paper 2 - Chemical analysis'
+            },
+            {
+              id: 'c9-q6',
+              question: 'Explain how carbon dioxide levels have changed and why.',
+              marks: 5,
+              difficulty: 'medium',
+              modelAnswer: "CO₂ levels have increased dramatically since Industrial Revolution. Burning fossil fuels releases CO₂. Deforestation reduces CO₂ absorption. Leads to enhanced greenhouse effect and global warming.",
+              markingCriteria: {
+                breakdown: ['Increased since Industrial Revolution (1 mark)', 'Burning fossil fuels (1 mark)', 'Deforestation (1 mark)', 'Enhanced greenhouse effect (1 mark)', 'Global warming (1 mark)']
+              },
+              specReference: 'AQA Combined Science Chemistry Paper 2 - Chemistry of the atmosphere'
+            },
+            {
+              id: 'c10-q7',
+              question: 'Explain the importance of sustainable development.',
+              marks: 4,
+              difficulty: 'medium',
+              modelAnswer: "Meets needs of current generation without compromising future generations. Conserves resources for the future. Reduces environmental damage. Ensures economic and social progress continues.",
+              markingCriteria: {
+                breakdown: ['Current needs without compromising future (2 marks)', 'Conserves resources (1 mark)', 'Reduces environmental damage (1 mark)']
+              },
+              specReference: 'AQA Combined Science Chemistry Paper 2 - Using resources'
+            }
         ]
       }
     ]
@@ -15359,8 +15535,52 @@ export const curriculum: Subject[] = [
              markingCriteria: {
                breakdown: ['Solid description (2 marks)', 'Liquid description (2 marks)', 'Gas description (2 marks)']
              },
-             specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
-           }
+              specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+            },
+            {
+              id: 'p1-q8',
+              question: 'Calculate the power when 500J of energy is transferred in 25 seconds.',
+              marks: 3,
+              difficulty: 'easy',
+              modelAnswer: "Power = energy ÷ time = 500J ÷ 25s = 20W",
+              markingCriteria: {
+                breakdown: ['Correct formula (1 mark)', 'Correct substitution (1 mark)', 'Correct answer with units (1 mark)']
+              },
+              specReference: 'AQA Combined Science Physics Paper 1 - Energy'
+            },
+            {
+              id: 'p2-q8',
+              question: 'Explain the difference between direct and alternating current.',
+              marks: 4,
+              difficulty: 'medium',
+              modelAnswer: "Direct current (DC) flows in one direction only. Alternating current (AC) changes direction repeatedly. Mains electricity is AC. Batteries produce DC.",
+              markingCriteria: {
+                breakdown: ['DC flows one direction (1 mark)', 'AC changes direction (1 mark)', 'Mains is AC (1 mark)', 'Batteries produce DC (1 mark)']
+              },
+              specReference: 'AQA Combined Science Physics Paper 1 - Electricity'
+            },
+            {
+              id: 'p3-q6',
+              question: 'Explain what happens to pressure when temperature increases at constant volume.',
+              marks: 3,
+              difficulty: 'medium',
+              modelAnswer: "Pressure increases when temperature increases. Particles move faster and collide more frequently with container walls. More frequent and harder collisions increase pressure.",
+              markingCriteria: {
+                breakdown: ['Pressure increases (1 mark)', 'Particles move faster (1 mark)', 'More frequent/harder collisions (1 mark)']
+              },
+              specReference: 'AQA Combined Science Physics Paper 1 - Particle model of matter'
+            },
+            {
+              id: 'p4-q7',
+              question: 'Describe the penetrating power of beta radiation.',
+              marks: 3,
+              difficulty: 'medium',
+              modelAnswer: "Beta particles can penetrate paper and skin. Stopped by thin aluminum sheet. More penetrating than alpha but less than gamma.",
+              markingCriteria: {
+                breakdown: ['Penetrates paper/skin (1 mark)', 'Stopped by aluminum (1 mark)', 'More than alpha, less than gamma (1 mark)']
+              },
+              specReference: 'AQA Combined Science Physics Paper 1 - Atomic structure'
+            }
         ]
       }
     ]
@@ -15638,8 +15858,63 @@ export const curriculum: Subject[] = [
              markingCriteria: {
                breakdown: ['AC current in coil (1 mark)', 'Coil becomes electromagnet (1 mark)', 'Interacts with permanent magnet (1 mark)', 'Forces cause movement (1 mark)', 'Cone vibrates air (1 mark)']
              },
-             specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
-           }
+              specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+            },
+            {
+              id: 'p5-q9',
+              question: 'Calculate the acceleration when the velocity changes from 5m/s to 15m/s in 2 seconds.',
+              marks: 3,
+              difficulty: 'easy',
+              modelAnswer: "Acceleration = change in velocity ÷ time = (15 - 5) ÷ 2 = 10 ÷ 2 = 5m/s²",
+              markingCriteria: {
+                breakdown: ['Correct formula (1 mark)', 'Correct calculation of change (1 mark)', 'Correct answer with units (1 mark)']
+              },
+              specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+            },
+            {
+              id: 'p5-q10',
+              question: 'Explain what happens when an object falls through air.',
+              marks: 5,
+              difficulty: 'medium',
+              modelAnswer: "Initially accelerates due to gravity. Air resistance increases with speed. Eventually reaches terminal velocity when air resistance equals weight. Then falls at constant speed.",
+              markingCriteria: {
+                breakdown: ['Initially accelerates (1 mark)', 'Air resistance increases (1 mark)', 'Terminal velocity reached (1 mark)', 'Air resistance equals weight (1 mark)', 'Constant speed (1 mark)']
+              },
+              specReference: 'AQA Combined Science Physics Paper 2 - Forces'
+            },
+            {
+              id: 'p6-q9',
+              question: 'Describe how to measure the wavelength of water waves.',
+              marks: 4,
+              difficulty: 'medium',
+              modelAnswer: "Use a ruler to measure distance between wave crests. Measure several wavelengths and calculate average. Wavelength is distance between two consecutive crests or troughs.",
+              markingCriteria: {
+                breakdown: ['Measure distance between crests (1 mark)', 'Measure several and average (1 mark)', 'Distance between consecutive crests/troughs (2 marks)']
+              },
+              specReference: 'AQA Combined Science Physics Paper 2 - Waves'
+            },
+            {
+              id: 'p7-q7',
+              question: 'Explain how to increase the strength of an electromagnet.',
+              marks: 4,
+              difficulty: 'medium',
+              modelAnswer: "Increase current flowing through coil. Increase number of turns in coil. Use iron core instead of air. Make sure coils are close together.",
+              markingCriteria: {
+                breakdown: ['Increase current (1 mark)', 'Increase turns (1 mark)', 'Use iron core (1 mark)', 'Close coils together (1 mark)']
+              },
+              specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+            },
+            {
+              id: 'p7-q8',
+              question: 'Describe the structure and operation of a simple electric motor.',
+              marks: 6,
+              difficulty: 'hard',
+              modelAnswer: "Rectangular coil in magnetic field. Current flows through coil making it magnetic. Magnetic field exerts forces on coil. Coil rotates due to motor effect. Commutator reverses current every half turn to maintain rotation.",
+              markingCriteria: {
+                breakdown: ['Coil in magnetic field (1 mark)', 'Current makes coil magnetic (1 mark)', 'Forces on coil (1 mark)', 'Rotation due to motor effect (1 mark)', 'Commutator reverses current (2 marks)']
+              },
+              specReference: 'AQA Combined Science Physics Paper 2 - Magnetism and electromagnetism'
+            }
         ]
       }
     ]
