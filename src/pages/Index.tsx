@@ -335,14 +335,6 @@ const Index = () => {
             </Button>
           </motion.div>
           
-          {/* Dynamic Testimonials */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
-            <DynamicTestimonials />
-          </motion.div>
           
           {/* Trust Stats Strip */}
           <motion.div 
