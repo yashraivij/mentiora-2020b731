@@ -330,16 +330,15 @@ const Index = () => {
               whileTap={{ scale: 0.98 }}
               className="relative group"
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 rounded-3xl blur-lg opacity-75 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-rose-400 via-pink-400 to-fuchsia-400 rounded-3xl blur-lg opacity-60 group-hover:opacity-80 transition duration-300"></div>
               <Button 
                 onClick={() => navigate('/register')} 
-                className="relative bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 hover:from-pink-600 hover:via-purple-700 hover:to-indigo-700 text-white px-10 py-6 text-lg font-bold shadow-2xl hover:shadow-pink-500/50 transition-all duration-500 rounded-3xl group border border-white/20 backdrop-blur-sm w-full sm:w-auto overflow-hidden"
+                className="relative bg-gradient-to-r from-rose-500 via-pink-600 to-fuchsia-600 hover:from-rose-600 hover:via-pink-700 hover:to-fuchsia-700 text-white px-10 py-6 text-lg font-bold shadow-2xl hover:shadow-pink-500/50 transition-all duration-500 rounded-3xl group border border-white/20 backdrop-blur-sm w-full sm:w-auto overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="relative flex flex-col items-center">
-                  <span className="text-2xl mb-1">👩‍👧</span>
-                  <span className="font-bold">I'm a parent</span>
-                  <span className="text-sm font-normal mt-1 text-pink-100">See how Mentiora helps my child</span>
+                  <span className="font-bold">👩‍👧 I'm a parent</span>
+                  <span className="text-sm font-normal mt-1 text-rose-100">See how Mentiora helps my child</span>
                 </div>
               </Button>
             </motion.div>
@@ -349,16 +348,15 @@ const Index = () => {
               whileTap={{ scale: 0.98 }}
               className="relative group"
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 rounded-3xl blur-lg opacity-75 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 rounded-3xl blur-lg opacity-60 group-hover:opacity-80 transition duration-300"></div>
               <Button 
                 onClick={() => navigate('/register')} 
-                className="relative bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 hover:from-blue-700 hover:via-cyan-700 hover:to-teal-700 text-white px-10 py-6 text-lg font-bold shadow-2xl hover:shadow-cyan-500/50 transition-all duration-500 rounded-3xl group border border-white/20 backdrop-blur-sm w-full sm:w-auto overflow-hidden"
+                className="relative bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-700 hover:via-teal-700 hover:to-cyan-700 text-white px-10 py-6 text-lg font-bold shadow-2xl hover:shadow-teal-500/50 transition-all duration-500 rounded-3xl group border border-white/20 backdrop-blur-sm w-full sm:w-auto overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="relative flex flex-col items-center">
-                  <span className="text-2xl mb-1">🎓</span>
-                  <span className="font-bold">I'm a student</span>
-                  <span className="text-sm font-normal mt-1 text-blue-100">Start for free and improve your grade</span>
+                  <span className="font-bold">🎓 I'm a student</span>
+                  <span className="text-sm font-normal mt-1 text-emerald-100">Start for free and improve your grade</span>
                 </div>
               </Button>
             </motion.div>
