@@ -27,7 +27,7 @@ const testimonials = [
   {
     name: "Mark T.",
     year: "Parent",
-    content: "I was skeptical at first, but watching Tom's confidence grow in Physics has been amazing. He went from barely understanding to helping his classmates. Worth every penny.",
+    content: "Watching Tom's confidence grow in Physics has been absolutely amazing. He went from barely understanding to helping his classmates. Worth every penny.",
     subject: "Physics",
     improvement: "Grade 4 to 8"
   },
