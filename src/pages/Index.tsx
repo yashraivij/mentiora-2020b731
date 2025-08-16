@@ -323,16 +323,33 @@ const Index = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <Button 
-              onClick={() => navigate('/register')} 
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 rounded-2xl group"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Get Started Free
-              <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
-            </Button>
+              <Button 
+                onClick={() => navigate('/register')} 
+                className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 text-lg font-bold shadow-2xl hover:shadow-pink-500/25 transition-all duration-300 rounded-2xl group w-full sm:w-auto"
+              >
+                👩‍👧 I'm a parent
+                <span className="block text-sm font-normal mt-1">See how Mentiora helps my child</span>
+              </Button>
+            </motion.div>
+            
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button 
+                onClick={() => navigate('/register')} 
+                className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-4 text-lg font-bold shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 rounded-2xl group w-full sm:w-auto"
+              >
+                🎓 I'm a student
+                <span className="block text-sm font-normal mt-1">Start for free and improve your grade</span>
+              </Button>
+            </motion.div>
           </motion.div>
           
           {/* Dynamic Testimonials */}
