@@ -326,28 +326,40 @@ const Index = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="relative group"
             >
+              <div className="absolute -inset-1 bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 rounded-3xl blur-lg opacity-75 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
               <Button 
                 onClick={() => navigate('/register')} 
-                className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 text-lg font-bold shadow-2xl hover:shadow-pink-500/25 transition-all duration-300 rounded-2xl group w-full sm:w-auto"
+                className="relative bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 hover:from-pink-600 hover:via-purple-700 hover:to-indigo-700 text-white px-10 py-6 text-lg font-bold shadow-2xl hover:shadow-pink-500/50 transition-all duration-500 rounded-3xl group border border-white/20 backdrop-blur-sm w-full sm:w-auto overflow-hidden"
               >
-                👩‍👧 I'm a parent
-                <span className="block text-sm font-normal mt-1">See how Mentiora helps my child</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative flex flex-col items-center">
+                  <span className="text-2xl mb-1">👩‍👧</span>
+                  <span className="font-bold">I'm a parent</span>
+                  <span className="text-sm font-normal mt-1 text-pink-100">See how Mentiora helps my child</span>
+                </div>
               </Button>
             </motion.div>
             
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="relative group"
             >
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 rounded-3xl blur-lg opacity-75 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
               <Button 
                 onClick={() => navigate('/register')} 
-                className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-4 text-lg font-bold shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 rounded-2xl group w-full sm:w-auto"
+                className="relative bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 hover:from-blue-700 hover:via-cyan-700 hover:to-teal-700 text-white px-10 py-6 text-lg font-bold shadow-2xl hover:shadow-cyan-500/50 transition-all duration-500 rounded-3xl group border border-white/20 backdrop-blur-sm w-full sm:w-auto overflow-hidden"
               >
-                🎓 I'm a student
-                <span className="block text-sm font-normal mt-1">Start for free and improve your grade</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative flex flex-col items-center">
+                  <span className="text-2xl mb-1">🎓</span>
+                  <span className="font-bold">I'm a student</span>
+                  <span className="text-sm font-normal mt-1 text-blue-100">Start for free and improve your grade</span>
+                </div>
               </Button>
             </motion.div>
           </motion.div>
