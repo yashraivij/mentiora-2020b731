@@ -326,28 +326,38 @@ const Index = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <motion.div
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, y: -4 }}
               whileTap={{ scale: 0.95 }}
+              className="group"
             >
               <Button 
                 onClick={() => navigate('/register')} 
-                className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 text-lg font-bold shadow-2xl hover:shadow-pink-500/25 transition-all duration-300 rounded-2xl group w-full sm:w-auto"
+                className="relative overflow-hidden bg-gradient-to-br from-rose-500 via-pink-600 to-fuchsia-700 hover:from-rose-600 hover:via-pink-700 hover:to-fuchsia-800 text-white px-10 py-6 text-lg font-bold shadow-2xl hover:shadow-pink-500/30 transition-all duration-500 rounded-3xl border border-white/20 backdrop-blur-sm w-full sm:w-auto"
               >
-                👩‍👧 I'm a parent
-                <span className="block text-sm font-normal mt-1">See how Mentiora helps my child</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10 flex flex-col items-center">
+                  <span className="text-2xl mb-1">👩‍👧</span>
+                  <span className="text-lg font-bold">I'm a parent</span>
+                  <span className="block text-sm font-normal mt-1 opacity-90">See how Mentiora helps my child</span>
+                </div>
               </Button>
             </motion.div>
             
             <motion.div
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, y: -4 }}
               whileTap={{ scale: 0.95 }}
+              className="group"
             >
               <Button 
                 onClick={() => navigate('/register')} 
-                className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-4 text-lg font-bold shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 rounded-2xl group w-full sm:w-auto"
+                className="relative overflow-hidden bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-700 hover:from-emerald-600 hover:via-teal-700 hover:to-cyan-800 text-white px-10 py-6 text-lg font-bold shadow-2xl hover:shadow-emerald-500/30 transition-all duration-500 rounded-3xl border border-white/20 backdrop-blur-sm w-full sm:w-auto"
               >
-                🎓 I'm a student
-                <span className="block text-sm font-normal mt-1">Start for free and improve your grade</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10 flex flex-col items-center">
+                  <span className="text-2xl mb-1">🎓</span>
+                  <span className="text-lg font-bold">I'm a student</span>
+                  <span className="block text-sm font-normal mt-1 opacity-90">Start for free and improve your grade</span>
+                </div>
               </Button>
             </motion.div>
           </motion.div>
