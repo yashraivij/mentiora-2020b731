@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.3 (519615d)"
@@ -1124,18 +1124,18 @@ export type Database = {
         Returns: string
       }
       calculate_subject_accuracy: {
-        Args: { user_uuid: string; subject: string; exam_board?: string }
+        Args: { exam_board?: string; subject: string; user_uuid: string }
         Returns: number
       }
       get_user_performance_summary: {
-        Args: { user_uuid: string; days_back?: number }
+        Args: { days_back?: number; user_uuid: string }
         Returns: {
-          subject_id: string
-          exam_board: string
-          total_study_minutes: number
-          questions_answered: number
           accuracy_rate: number
+          exam_board: string
           improvement_trend: number
+          questions_answered: number
+          subject_id: string
+          total_study_minutes: number
         }[]
       }
       get_user_streak: {
