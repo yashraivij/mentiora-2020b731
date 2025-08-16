@@ -340,6 +340,7 @@ const Index = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.8 }}
+            className="mt-16"
           >
             <DynamicTestimonials />
           </motion.div>
