@@ -47,7 +47,7 @@ const Login = () => {
           </div>
           <CardTitle>Welcome Back</CardTitle>
           <CardDescription>
-            Sign in to continue your GCSE revision journey
+            Sign in to continue transforming GCSE results
           </CardDescription>
         </CardHeader>
         <CardContent>
