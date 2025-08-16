@@ -530,7 +530,7 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed"
             >
-              Join thousands of students who've improved their grades by an average of <span className="font-bold text-white">2.3 levels</span> with our smart platform.
+              Join thousands of students who've improved their grades by an average of <span className="font-bold text-white">two full grade boundaries</span> with our smart platform.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
