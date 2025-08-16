@@ -1127,6 +1127,10 @@ export type Database = {
         Args: { exam_board?: string; subject: string; user_uuid: string }
         Returns: number
       }
+      get_subscription_stats: {
+        Args: Record<PropertyKey, never>
+        Returns: Json
+      }
       get_user_performance_summary: {
         Args: { days_back?: number; user_uuid: string }
         Returns: {
