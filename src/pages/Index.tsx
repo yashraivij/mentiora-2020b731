@@ -360,7 +360,7 @@ const Index = () => {
                     <span className="text-2xl">🎓</span>
                     <span className="font-bold">I'm a student</span>
                   </div>
-                  <span className="text-sm font-normal opacity-90">Start for free and improve your grade</span>
+                  <span className="text-sm font-normal opacity-90">Transform your GCSE results together</span>
                 </div>
               </Button>
             </motion.div>
