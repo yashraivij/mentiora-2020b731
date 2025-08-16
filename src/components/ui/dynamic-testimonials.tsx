@@ -4,46 +4,46 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const testimonials = [
   {
-    name: "Sophie T.",
-    year: "Year 11",
-    content: "Got Grade 9 in Biology! The personalized feedback helped me understand complex topics so much better.",
-    subject: "Biology",
-    improvement: "Grade 4 to 9"
+    name: "Sarah M.",
+    year: "Parent",
+    content: "As a working mum, I was worried about Emily's Chemistry grades. This platform gave her the confidence she needed and I could see her progress daily. Best investment we've made!",
+    subject: "Chemistry",
+    improvement: "Grade 4 to 7"
   },
   {
-    name: "Mason R.",
-    year: "Year 10", 
-    content: "Finally understand Chemistry concepts. Went from struggling to confident in just a few weeks.",
-    subject: "Chemistry", 
+    name: "David K.",
+    year: "Parent", 
+    content: "My son Jake went from dreading Maths to actually asking for extra practice time. The personalized approach really works - his teacher noticed the improvement immediately.",
+    subject: "Mathematics", 
     improvement: "Grade 3 to 6"
   },
   {
-    name: "Olivia K.",
-    year: "Year 11",
-    content: "The predictions were spot on! Helped me focus on exactly what I needed to improve.",
-    subject: "Mathematics",
+    name: "Lisa H.",
+    year: "Parent",
+    content: "Sophie was so stressed about her GCSEs until we found this. The predicted grades helped us plan better and she felt prepared rather than panicked. She exceeded all expectations!",
+    subject: "Biology",
     improvement: "Grade 5 to 9"
   },
   {
-    name: "Ethan M.",
-    year: "Year 10",
-    content: "Love how it adapts to my learning style. Physics actually makes sense now!",
+    name: "Mark T.",
+    year: "Parent",
+    content: "I was skeptical at first, but watching Tom's confidence grow in Physics has been amazing. He went from barely understanding to helping his classmates. Worth every penny.",
     subject: "Physics",
     improvement: "Grade 4 to 8"
   },
   {
-    name: "Zara H.",
-    year: "Year 11",
-    content: "The essay feedback is incredible - better than any teacher comments I've received.",
+    name: "Rachel W.",
+    year: "Parent",
+    content: "As a teacher myself, I know good educational tools when I see them. My daughter Chloe's English Literature essays improved dramatically - even I was impressed by the feedback quality.",
     subject: "English Literature",
     improvement: "Grade 6 to 9"
   },
   {
-    name: "Liam S.",
-    year: "Year 10",
-    content: "Boosted my confidence so much. Now I actually enjoy studying Chemistry!",
+    name: "James P.",
+    year: "Parent",
+    content: "Alex was struggling with Chemistry and losing motivation. This platform not only improved his grades but brought back his love for science. He's now considering A-levels in the subject!",
     subject: "Chemistry",
-    improvement: "Grade 5 to 9"
+    improvement: "Grade 5 to 8"
   }
 ];
 
