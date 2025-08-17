@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Lightbulb, Target, Clock, ExternalLink, Brain, AlertCircle } from "lucide-react";
+import { BookOpen, Lightbulb, Target, Clock, ExternalLink, Brain, AlertCircle, Crown, Lock } from "lucide-react";
 import { format } from "date-fns";
 
 // Safe text formatting function to prevent XSS
@@ -58,7 +58,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
   };
 
   return (
-    <Card className="mb-6 border-l-4 border-l-primary shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <Card className="mb-6 border-l-4 border-l-primary shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden">
       <CardHeader className="pb-4">
         <div className="flex items-start justify-between">
           <div className="flex-1">
@@ -90,7 +90,9 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         </div>
       </CardHeader>
       
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-6 relative">
+        {/* Blurred Content */}
+        <div className="filter blur-sm pointer-events-none select-none">
         {/* What Tripped Me Up */}
         <div className="bg-red-50 dark:bg-red-950/20 p-4 rounded-lg border border-red-200 dark:border-red-800/30">
           <h4 className="font-semibold text-red-800 dark:text-red-300 mb-2 flex items-center gap-2">
@@ -160,6 +162,32 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             Next Step
           </h4>
           <p className="text-amber-700 dark:text-amber-200 text-sm">{entry.next_step_suggestion}</p>
+        </div>
+        </div>
+
+        {/* Premium Paywall Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-900/95 backdrop-blur-sm flex items-center justify-center">
+          <div className="text-center p-8 max-w-md">
+            <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-2xl shadow-amber-500/30">
+              <Crown className="h-8 w-8 text-white" />
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-3">
+              Premium Content
+            </h3>
+            <p className="text-slate-300 mb-6 leading-relaxed">
+              Unlock AI-generated revision notes tailored to your mistakes. Get instant, Grade 9-level explanations for every mark lost.
+            </p>
+            <div className="space-y-3">
+              <Button className="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 hover:from-amber-600 hover:via-orange-600 hover:to-red-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
+                <Crown className="h-4 w-4 mr-2" />
+                Upgrade to Premium
+              </Button>
+              <div className="flex items-center justify-center space-x-2 text-xs text-slate-400">
+                <Lock className="h-3 w-3" />
+                <span>Secure • Instant Access • Cancel Anytime</span>
+              </div>
+            </div>
+          </div>
         </div>
 
       </CardContent>
