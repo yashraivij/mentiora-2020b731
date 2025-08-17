@@ -466,16 +466,21 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                   <TooltipContent 
                     side="top" 
                     align="center"
-                    className="max-w-80 w-auto p-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white text-xs rounded-2xl shadow-2xl border border-white/10 backdrop-blur-sm"
+                    className="max-w-80 w-auto p-6 bg-gradient-to-br from-purple-900 via-blue-900 to-emerald-900 text-white text-sm rounded-2xl shadow-2xl border border-white/20 backdrop-blur-sm"
                   >
-                    <div className="space-y-2">
-                      <div className="font-semibold text-amber-300 text-center filter blur-md">🤖 AI Insight</div>
-                      <div className="text-gray-200 leading-relaxed filter blur-md">
-                        {getTooltipText(grade)}
+                    <div className="space-y-4 text-center">
+                      <div className="flex items-center justify-center space-x-2">
+                        <Crown className="h-5 w-5 text-amber-400 animate-pulse" />
+                        <div className="font-bold text-amber-300">🔒 Premium Feature</div>
+                        <Crown className="h-5 w-5 text-amber-400 animate-pulse" />
                       </div>
-                      {grade.isGrade7Plus && (
-                        <div className="text-emerald-300 font-semibold text-center filter blur-md">🎉 Excellent work! Keep it up!</div>
-                      )}
+                      <div className="text-gray-300 leading-relaxed">
+                        Upgrade to Premium to unlock detailed AI insights, grade predictions, and personalized feedback for your GCSE performance.
+                      </div>
+                      <button className="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+                        <Zap className="h-4 w-4" />
+                        <span>Unlock Now</span>
+                      </button>
                     </div>
                   </TooltipContent>
                 </Tooltip>
