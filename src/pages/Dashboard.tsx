@@ -1055,7 +1055,7 @@ const Dashboard = () => {
                     
                     <div className="space-y-1">
                       <h3 className="text-2xl font-bold bg-gradient-to-br from-emerald-600 via-cyan-600 to-violet-600 dark:from-emerald-400 dark:via-cyan-400 dark:to-violet-400 bg-clip-text text-transparent">
-                        Premium Rewards
+                        Streak Rewards
                       </h3>
                     </div>
                   </div>
