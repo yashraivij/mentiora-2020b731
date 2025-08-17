@@ -43,7 +43,7 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
     } else if (timeSavedHours >= 5) {
       return "Amazing progress! You've saved so much time with smart notes!";
     } else if (timeSavedHours >= 2) {
-      return "Great work! Your AI notes are saving you precious study time!";
+      return "Great work! Your smart notes are saving you precious study time!";
     } else {
       return "Fantastic! Every minute saved adds up to success!";
     }
@@ -154,14 +154,14 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                   transition={{ delay: 0.2, type: "spring", damping: 20 }}
                   className="text-center"
                 >
-                  <div className="text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 dark:from-violet-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 dark:from-violet-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2 filter blur-sm">
                     {getTimeSavedDisplay()}
                   </div>
                   <p className="text-sm font-semibold text-violet-700 dark:text-violet-300 mb-1">
                     Total Time Saved
                   </p>
                   <p className="text-xs text-violet-600/80 dark:text-violet-400/80">
-                    with AI Auto-Notes
+                    with Smart Auto-Notes
                   </p>
                 </motion.div>
 
