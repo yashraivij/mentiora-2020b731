@@ -163,7 +163,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         </div>
 
         {/* Premium CTA Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-[1px]">
+        <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center p-6 max-w-sm mx-4">
             <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
               <Crown className="h-6 w-6 text-white" />
