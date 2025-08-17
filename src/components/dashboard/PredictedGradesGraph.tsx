@@ -531,7 +531,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                   <div className="flex flex-col items-end space-y-3">
                     <button className="bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 border border-white/30 group">
                       <div className="flex items-center space-x-3">
-                        <Zap className="h-5 w-5 group-hover:animate-pulse" />
+                        <Zap className="h-6 w-6 group-hover:animate-pulse" />
                         <span className="text-lg">Upgrade to Premium</span>
                       </div>
                     </button>
