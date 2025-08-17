@@ -444,7 +444,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                           {/* Premium percentage indicator */}
                           {grade.finalGrade !== '–' && (
                             <div className="absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1">
-                              <span className="text-xs font-bold text-white">{grade.finalPercentage}%</span>
+                              <span className="text-xs font-bold text-white filter blur-md">{grade.finalPercentage}%</span>
                             </div>
                           )}
                         </div>
@@ -454,7 +454,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                           <div className="text-sm font-bold text-foreground truncate mb-2">{grade.subjectName}</div>
                           {grade.isGrade7Plus && (
                             <div className="mt-2">
-                              <Badge className="bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse">
+                              <Badge className="bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse filter blur-md">
                                 🎯 Target Hit!
                               </Badge>
                             </div>
@@ -469,12 +469,12 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                     className="max-w-80 w-auto p-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white text-xs rounded-2xl shadow-2xl border border-white/10 backdrop-blur-sm"
                   >
                     <div className="space-y-2">
-                      <div className="font-semibold text-amber-300 text-center">🤖 AI Insight</div>
-                      <div className="text-gray-200 leading-relaxed">
+                      <div className="font-semibold text-amber-300 text-center filter blur-md">🤖 AI Insight</div>
+                      <div className="text-gray-200 leading-relaxed filter blur-md">
                         {getTooltipText(grade)}
                       </div>
                       {grade.isGrade7Plus && (
-                        <div className="text-emerald-300 font-semibold text-center">🎉 Excellent work! Keep it up!</div>
+                        <div className="text-emerald-300 font-semibold text-center filter blur-md">🎉 Excellent work! Keep it up!</div>
                       )}
                     </div>
                   </TooltipContent>
@@ -531,7 +531,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                   <div className="flex flex-col items-end space-y-3">
                     <button className="bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 border border-white/30 group">
                       <div className="flex items-center space-x-3">
-                        <Zap className="h-6 w-6 group-hover:animate-pulse" />
+                        <Zap className="h-8 w-8 group-hover:animate-pulse" />
                         <span className="text-lg">Upgrade to Premium</span>
                       </div>
                     </button>
