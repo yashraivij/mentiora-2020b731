@@ -390,7 +390,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
       </CardHeader>
 
       <CardContent className="relative">
-        <div className="filter blur-sm">
         {gradesData.some(g => g.finalGrade !== '–') ? (
           <TooltipProvider>
             <div className="space-y-6">
@@ -409,7 +408,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                               <div 
                                 className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t ${getSubjectColor(index)} rounded-3xl transition-all duration-1000 ease-out animate-in slide-in-from-bottom-4`}
                                 style={{ 
-                                  height: `100%`,
+                                  height: `${Math.max(grade.finalPercentage * 0.85, 20)}%`,
                                   filter: grade.isGrade7Plus ? 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.6))' : 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))'
                                 }}
                               />
@@ -417,7 +416,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                               {/* Premium glow overlay */}
                               <div 
                                 className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white/20 to-transparent rounded-3xl opacity-60`}
-                                style={{ height: `100%` }}
+                                style={{ height: `${Math.max(grade.finalPercentage * 0.85, 20)}%` }}
                               />
                               
                               {/* Animated shimmer effect */}
@@ -595,33 +594,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
             </div>
           </div>
         )}
-        </div>
-
-        {/* Premium CTA Overlay - Positioned at bottom */}
-        <div className="absolute bottom-4 left-4 right-4 flex justify-center z-20">
-          <div className="bg-gradient-to-r from-slate-900/95 via-slate-800/95 to-slate-900/95 dark:from-slate-100/95 dark:via-white/95 dark:to-slate-100/95 backdrop-blur-lg rounded-2xl p-6 shadow-2xl border border-white/20 dark:border-slate-200/20 max-w-md w-full">
-            <div className="flex items-center justify-center space-x-4">
-              <div className="relative">
-                <div className="w-10 h-10 bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg animate-pulse">
-                  <Crown className="h-5 w-5 text-white" />
-                </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-400 rounded-full animate-bounce"></div>
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-extrabold text-white dark:text-slate-900 mb-1">
-                  Premium Analytics
-                </h3>
-                <p className="text-sm font-medium text-slate-300 dark:text-slate-600 leading-tight">
-                  Unlock detailed grade predictions & insights
-                </p>
-              </div>
-              <button className="bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 hover:from-amber-600 hover:via-yellow-600 hover:to-orange-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-pulse">
-                <Crown className="h-4 w-4 mr-2 inline" />
-                Upgrade
-              </button>
-            </div>
-          </div>
-        </div>
       </CardContent>
     </Card>
   );
