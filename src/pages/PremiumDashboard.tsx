@@ -201,12 +201,16 @@ const PremiumDashboard = () => {
                   {curriculum.slice(0, 4).map((subject) => (
                     <SubjectCard
                       key={subject.id}
-                      subject={subject}
+                      subject={{
+                        ...subject,
+                        color: subject.id === 'physics-edexcel' ? 'blue' : 
+                               subject.id === 'chemistry-aqa' ? 'green' :
+                               subject.id === 'biology-aqa' ? 'red' : 'purple'
+                      }}
                       progress={userProgress.filter(p => p.subjectId === subject.id)}
-                      onClick={() => handleSubjectClick(subject.id)}
+                      onStartPractice={() => handleStartPractice(subject.id, '')}
                       isPinned={pinnedSubjects.includes(subject.id)}
                       onTogglePin={() => {}}
-                      onStartPractice={() => {}}
                     />
                   ))}
                 </div>
