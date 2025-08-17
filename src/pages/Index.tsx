@@ -323,47 +323,16 @@ const Index = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <motion.div
-              whileHover={{ scale: 1.05, y: -8 }}
-              whileTap={{ scale: 0.95 }}
-              className="group"
+            <Button 
+              onClick={() => navigate('/register')} 
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 rounded-2xl group"
             >
-              <Button 
-                onClick={() => navigate('/register')} 
-                className="relative overflow-hidden bg-gradient-to-br from-rose-500 via-pink-500 to-fuchsia-600 hover:from-rose-600 hover:via-pink-600 hover:to-fuchsia-700 text-white px-10 py-6 text-lg font-bold shadow-2xl hover:shadow-3xl shadow-pink-500/25 hover:shadow-pink-500/40 transition-all duration-500 rounded-3xl w-full sm:w-auto min-h-[80px] group backdrop-blur-sm border border-pink-200/20"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="relative z-10 flex flex-col items-center">
-                  <div className="flex items-center gap-3 mb-1">
-                    <span className="text-2xl">👩‍👧</span>
-                    <span className="font-bold">I'm a parent</span>
-                  </div>
-                  <span className="text-sm font-normal opacity-90">See how Mentiora helps my child</span>
-                </div>
-              </Button>
-            </motion.div>
-            
-            <motion.div
-              whileHover={{ scale: 1.05, y: -8 }}
-              whileTap={{ scale: 0.95 }}
-              className="group"
-            >
-              <Button 
-                onClick={() => navigate('/register')} 
-                className="relative overflow-hidden bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-700 text-white px-10 py-6 text-lg font-bold shadow-2xl hover:shadow-3xl shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-500 rounded-3xl w-full sm:w-auto min-h-[80px] group backdrop-blur-sm border border-emerald-200/20"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="relative z-10 flex flex-col items-center">
-                  <div className="flex items-center gap-3 mb-1">
-                    <span className="text-2xl">🎓</span>
-                    <span className="font-bold">I'm a student</span>
-                  </div>
-                  <span className="text-sm font-normal opacity-90">Start for free and improve your grade</span>
-                </div>
-              </Button>
-            </motion.div>
+              Get Started Free
+              <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+            </Button>
           </motion.div>
           
           {/* Dynamic Testimonials */}
