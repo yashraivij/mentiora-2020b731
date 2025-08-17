@@ -90,7 +90,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         </div>
       </CardHeader>
       
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-6 relative">
         {/* What Tripped Me Up */}
         <div className="bg-red-50 dark:bg-red-950/20 p-4 rounded-lg border border-red-200 dark:border-red-800/30 filter blur-sm">
           <h4 className="font-semibold text-red-800 dark:text-red-300 mb-2 flex items-center gap-2">
@@ -160,6 +160,28 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             Next Step
           </h4>
           <p className="text-amber-700 dark:text-amber-200 text-sm">{entry.next_step_suggestion}</p>
+        </div>
+
+        {/* Premium CTA Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-[1px]">
+          <div className="text-center p-6 max-w-sm mx-4">
+            <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+              <Crown className="h-6 w-6 text-white" />
+            </div>
+            <h3 className="text-lg font-bold text-foreground mb-2">
+              Premium Feature
+            </h3>
+            <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+              Unlock AI-generated revision notes for every mistake you make
+            </p>
+            <Button 
+              size="sm" 
+              className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-medium px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+            >
+              <Crown className="h-3 w-3 mr-2" />
+              Upgrade Now
+            </Button>
+          </div>
         </div>
 
       </CardContent>
