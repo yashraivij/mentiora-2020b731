@@ -390,24 +390,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
       </CardHeader>
 
       <CardContent className="relative">
-        {/* Premium CTA Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center z-20">
-          <div className="text-center p-6 max-w-sm mx-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm rounded-xl shadow-lg border border-slate-200/50 dark:border-slate-700/50">
-            <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
-              <Crown className="h-6 w-6 text-white" />
-            </div>
-            <h3 className="text-lg font-bold text-foreground mb-2">
-              Premium Feature
-            </h3>
-            <p className="text-sm font-semibold text-muted-foreground mb-4 leading-relaxed">
-              Unlock detailed grade predictions for all subjects
-            </p>
-            <button className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200">
-              <Crown className="h-3 w-3 mr-2 inline" />
-              Upgrade Now
-            </button>
-          </div>
-        </div>
+        <div className="filter blur-sm">
         {gradesData.some(g => g.finalGrade !== '–') ? (
           <TooltipProvider>
             <div className="space-y-6">
@@ -612,6 +595,33 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
             </div>
           </div>
         )}
+        </div>
+
+        {/* Premium CTA Overlay - Positioned at bottom */}
+        <div className="absolute bottom-4 left-4 right-4 flex justify-center z-20">
+          <div className="bg-gradient-to-r from-slate-900/95 via-slate-800/95 to-slate-900/95 dark:from-slate-100/95 dark:via-white/95 dark:to-slate-100/95 backdrop-blur-lg rounded-2xl p-6 shadow-2xl border border-white/20 dark:border-slate-200/20 max-w-md w-full">
+            <div className="flex items-center justify-center space-x-4">
+              <div className="relative">
+                <div className="w-10 h-10 bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg animate-pulse">
+                  <Crown className="h-5 w-5 text-white" />
+                </div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-400 rounded-full animate-bounce"></div>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-extrabold text-white dark:text-slate-900 mb-1">
+                  Premium Analytics
+                </h3>
+                <p className="text-sm font-medium text-slate-300 dark:text-slate-600 leading-tight">
+                  Unlock detailed grade predictions & insights
+                </p>
+              </div>
+              <button className="bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 hover:from-amber-600 hover:via-yellow-600 hover:to-orange-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-pulse">
+                <Crown className="h-4 w-4 mr-2 inline" />
+                Upgrade
+              </button>
+            </div>
+          </div>
+        </div>
       </CardContent>
     </Card>
   );
