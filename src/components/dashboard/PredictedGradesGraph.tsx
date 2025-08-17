@@ -563,7 +563,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
               <div className="flex items-center space-x-3 px-4 py-3 bg-gradient-to-r from-amber-500/15 via-amber-500/10 to-amber-500/5 rounded-2xl border border-amber-500/20 shadow-lg">
                 <Crown className="h-5 w-5 text-amber-500 animate-pulse" />
                 <span className="text-sm font-semibold text-foreground">
-                  👑 Premium insights
+                  👑 Streak rewards
                 </span>
               </div>
             </div>
