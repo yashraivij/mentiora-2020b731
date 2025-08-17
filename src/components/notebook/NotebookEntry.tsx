@@ -90,11 +90,9 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         </div>
       </CardHeader>
       
-      <CardContent className="space-y-6 relative">
-        {/* Blurred Content */}
-        <div className="filter blur-sm pointer-events-none select-none">
+      <CardContent className="space-y-6">
         {/* What Tripped Me Up */}
-        <div className="bg-red-50 dark:bg-red-950/20 p-4 rounded-lg border border-red-200 dark:border-red-800/30">
+        <div className="bg-red-50 dark:bg-red-950/20 p-4 rounded-lg border border-red-200 dark:border-red-800/30 filter blur-sm">
           <h4 className="font-semibold text-red-800 dark:text-red-300 mb-2 flex items-center gap-2">
             <AlertCircle className="h-4 w-4" />
             What Tripped Me Up
@@ -103,7 +101,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         </div>
 
         {/* Fix Sentence */}
-        <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border border-green-200 dark:border-green-800/30">
+        <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border border-green-200 dark:border-green-800/30 filter blur-sm">
           <h4 className="font-semibold text-green-800 dark:text-green-300 mb-2 flex items-center gap-2">
             <Lightbulb className="h-4 w-4" />
             Fix in One Sentence
@@ -112,7 +110,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         </div>
 
         {/* Bulletproof Notes */}
-        <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800/30">
+        <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800/30 filter blur-sm">
           <h4 className="font-semibold text-blue-800 dark:text-blue-300 mb-3 flex items-center gap-2">
             <BookOpen className="h-4 w-4" />
             Bulletproof Notes
@@ -129,7 +127,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
 
         {/* Mini Example */}
         {entry.mini_example && (
-          <div className="bg-purple-50 dark:bg-purple-950/20 p-4 rounded-lg border border-purple-200 dark:border-purple-800/30">
+          <div className="bg-purple-50 dark:bg-purple-950/20 p-4 rounded-lg border border-purple-200 dark:border-purple-800/30 filter blur-sm">
             <h4 className="font-semibold text-purple-800 dark:text-purple-300 mb-2 flex items-center gap-2">
               <Target className="h-4 w-4" />
               Mini Worked Example
@@ -141,7 +139,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         )}
 
         {/* Keywords */}
-        <div className="bg-gray-50 dark:bg-gray-950/20 p-4 rounded-lg border border-gray-200 dark:border-gray-800/30">
+        <div className="bg-gray-50 dark:bg-gray-950/20 p-4 rounded-lg border border-gray-200 dark:border-gray-800/30 filter blur-sm">
           <h4 className="font-semibold text-gray-800 dark:text-gray-300 mb-2 flex items-center gap-2">
             <Brain className="h-4 w-4" />
             Keywords
@@ -156,38 +154,12 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         </div>
 
         {/* Next Step */}
-        <div className="bg-amber-50 dark:bg-amber-950/20 p-4 rounded-lg border border-amber-200 dark:border-amber-800/30">
+        <div className="bg-amber-50 dark:bg-amber-950/20 p-4 rounded-lg border border-amber-200 dark:border-amber-800/30 filter blur-sm">
           <h4 className="font-semibold text-amber-800 dark:text-amber-300 mb-2 flex items-center gap-2">
             <Target className="h-4 w-4" />
             Next Step
           </h4>
           <p className="text-amber-700 dark:text-amber-200 text-sm">{entry.next_step_suggestion}</p>
-        </div>
-        </div>
-
-        {/* Premium Paywall Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-900/95 backdrop-blur-sm flex items-center justify-center">
-          <div className="text-center p-8 max-w-md">
-            <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-2xl shadow-amber-500/30">
-              <Crown className="h-8 w-8 text-white" />
-            </div>
-            <h3 className="text-2xl font-bold text-white mb-3">
-              Premium Content
-            </h3>
-            <p className="text-slate-300 mb-6 leading-relaxed">
-              Unlock AI-generated revision notes tailored to your mistakes. Get instant, Grade 9-level explanations for every mark lost.
-            </p>
-            <div className="space-y-3">
-              <Button className="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 hover:from-amber-600 hover:via-orange-600 hover:to-red-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
-                <Crown className="h-4 w-4 mr-2" />
-                Upgrade to Premium
-              </Button>
-              <div className="flex items-center justify-center space-x-2 text-xs text-slate-400">
-                <Lock className="h-3 w-3" />
-                <span>Secure • Instant Access • Cancel Anytime</span>
-              </div>
-            </div>
-          </div>
         </div>
 
       </CardContent>
