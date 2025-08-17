@@ -47,7 +47,7 @@ const Login = () => {
           </div>
           <CardTitle>Welcome Back</CardTitle>
           <CardDescription>
-            Let's keep working towards your target grade.
+            Welcome back — let's keep working towards your target grade.
           </CardDescription>
         </CardHeader>
         <CardContent>
