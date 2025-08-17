@@ -164,19 +164,19 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
 
         {/* Premium CTA Overlay */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center p-6 max-w-sm mx-4">
+          <div className="text-center p-6 max-w-sm mx-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm rounded-xl shadow-lg border border-slate-200/50 dark:border-slate-700/50">
             <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
               <Crown className="h-6 w-6 text-white" />
             </div>
             <h3 className="text-lg font-bold text-foreground mb-2">
               Premium Feature
             </h3>
-            <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-              Unlock AI-generated revision notes for every mistake you make
+            <p className="text-sm font-semibold text-muted-foreground mb-4 leading-relaxed">
+              Unlock instant revision notes that save 15+ minutes per mistake
             </p>
             <Button 
               size="sm" 
-              className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-medium px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+              className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
             >
               <Crown className="h-3 w-3 mr-2" />
               Upgrade Now
