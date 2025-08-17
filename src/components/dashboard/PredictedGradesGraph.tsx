@@ -614,7 +614,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                   
                   <div className="p-4 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 border border-emerald-200/60 dark:border-emerald-800/40 shadow-lg">
                     <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center mb-3 shadow-lg">
-                      <Zap className="h-5 w-5 text-white" />
+                      <Zap className="h-6 w-6 text-white" />
                     </div>
                     <h4 className="font-bold text-emerald-800 dark:text-emerald-200 mb-1">Predictions</h4>
                     <p className="text-xs text-emerald-600 dark:text-emerald-300">Advanced grade forecasting using performance data and exam trends</p>
