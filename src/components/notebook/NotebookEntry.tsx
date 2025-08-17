@@ -172,7 +172,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
               Premium Feature
             </h3>
             <p className="text-sm font-semibold text-muted-foreground mb-4 leading-relaxed">
-              Unlock instant revision notes that save 15+ minutes per mistake
+              Turn 3-hour revision sessions into 30 minutes with instant notes
             </p>
             <Button 
               size="sm" 
