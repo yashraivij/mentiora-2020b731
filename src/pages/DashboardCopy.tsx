@@ -1673,6 +1673,7 @@ const DashboardCopy = () => {
 
         {showTimeSavedNotification && (
           <TimeSavedNotification 
+            show={showTimeSavedNotification}
             timeSavedHours={timeSavedHours}
             onClose={() => setShowTimeSavedNotification(false)}
           />
@@ -1689,6 +1690,7 @@ const DashboardCopy = () => {
 
         {showDiscordInvitation && (
           <DiscordInvitation 
+            isVisible={showDiscordInvitation}
             onClose={() => setShowDiscordInvitation(false)}
           />
         )}
