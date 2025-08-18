@@ -1161,7 +1161,7 @@ const Dashboard = () => {
 
 
         {/* Predicted GCSE Grades Section */}
-        <PredictedGradesGraph userProgress={userProgress} />
+        <PredictedGradesGraph userProgress={userProgress} subscribed={subscribed} />
 
 
         {/* Predicted 2026 Questions Section */}
