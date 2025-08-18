@@ -1196,7 +1196,7 @@ const Dashboard = () => {
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-700 via-pink-600 to-indigo-700 dark:from-purple-300 dark:via-pink-300 dark:to-indigo-300 bg-clip-text text-transparent">
-                        Revision Notebook
+                        Smart Revision Notebook
                       </h3>
                       <div className="flex items-center space-x-2 mt-1">
                         <CheckCircle className="h-4 w-4 text-emerald-500" />
@@ -1216,28 +1216,64 @@ const Dashboard = () => {
                   </div>
                 </div>
                 
-                <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
-                  Revolutionary technology creates <span className="font-semibold text-purple-700 dark:text-purple-300">ultra-clear, Grade 9-level revision notes</span> instantly for every question where you lose marks. Each note is meticulously crafted with key definitions, equations, and premium exam strategies.
-                </p>
-                
-                <div className="grid grid-cols-1 gap-4 mb-6">
-                  <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg">
-                      <CheckCircle className="h-4 w-4 text-white" />
+                {/* Blurred Stats for Premium Users */}
+                <div className="grid grid-cols-3 gap-4 mb-6 relative">
+                  <div className="relative">
+                    <div className="bg-white/60 dark:bg-white/10 rounded-xl p-4 text-center border border-purple-200/50 dark:border-purple-700/30">
+                      <div className="text-2xl font-bold text-purple-700 dark:text-purple-300 blur-sm select-none">142</div>
+                      <div className="text-sm font-medium text-purple-600 dark:text-purple-400">Total Notes</div>
                     </div>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">Instant premium note generation</span>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Lock className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center shadow-lg">
-                      <BookOpen className="h-4 w-4 text-white" />
+                  <div className="relative">
+                    <div className="bg-white/60 dark:bg-white/10 rounded-xl p-4 text-center border border-purple-200/50 dark:border-purple-700/30">
+                      <div className="text-2xl font-bold text-emerald-700 dark:text-emerald-300 blur-sm select-none">28.5h</div>
+                      <div className="text-sm font-medium text-emerald-600 dark:text-emerald-400">Time Saved</div>
                     </div>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">Organized by topic</span>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Lock className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
-                      <Trophy className="h-4 w-4 text-white" />
+                  <div className="relative">
+                    <div className="bg-white/60 dark:bg-white/10 rounded-xl p-4 text-center border border-purple-200/50 dark:border-purple-700/30">
+                      <div className="text-2xl font-bold text-violet-700 dark:text-violet-300 blur-sm select-none">8</div>
+                      <div className="text-sm font-medium text-violet-600 dark:text-violet-400">Subjects</div>
                     </div>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">Exam-focused premium content</span>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Lock className="h-6 w-6 text-violet-600 dark:text-violet-400" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Blurred Notes Preview */}
+                <div className="mb-6 relative">
+                  <h4 className="text-lg font-semibold text-purple-700 dark:text-purple-300 mb-3">Recent Notes</h4>
+                  <div className="space-y-3">
+                    <div className="bg-white/60 dark:bg-white/10 rounded-xl p-4 border border-purple-200/50 dark:border-purple-700/30 blur-sm select-none">
+                      <div className="flex items-center justify-between mb-2">
+                        <Badge className="bg-blue-100 text-blue-700">Mathematics</Badge>
+                        <span className="text-xs text-muted-foreground">2 days ago</span>
+                      </div>
+                      <p className="text-sm text-foreground font-medium">Differentiation Chain Rule</p>
+                      <p className="text-xs text-muted-foreground mt-1">Remember to multiply by the derivative of the inner function...</p>
+                    </div>
+                    <div className="bg-white/60 dark:bg-white/10 rounded-xl p-4 border border-purple-200/50 dark:border-purple-700/30 blur-sm select-none">
+                      <div className="flex items-center justify-between mb-2">
+                        <Badge className="bg-green-100 text-green-700">Physics</Badge>
+                        <span className="text-xs text-muted-foreground">3 days ago</span>
+                      </div>
+                      <p className="text-sm text-foreground font-medium">Electric Fields and Potential</p>
+                      <p className="text-xs text-muted-foreground mt-1">Electric field strength is force per unit charge...</p>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 flex items-center justify-center bg-white/20 dark:bg-black/20 rounded-xl">
+                    <div className="text-center">
+                      <Crown className="h-8 w-8 text-amber-500 mx-auto mb-2" />
+                      <p className="text-sm font-semibold text-purple-700 dark:text-purple-300">Upgrade to Premium</p>
+                      <p className="text-xs text-purple-600 dark:text-purple-400">View your revision notes</p>
+                    </div>
                   </div>
                 </div>
                 
@@ -1256,11 +1292,9 @@ const Dashboard = () => {
               </CardContent>
             </Card>
           ) : (
-            <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => navigate('/notebook')}>
+            <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => setShowPremiumPaywall(true)}>
               {/* Premium Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
-              {/* Lock Overlay - Removed hover overlay */}
               
               {/* Animated Border */}
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 rounded-lg p-[2px] group-hover:animate-pulse">
@@ -1277,7 +1311,7 @@ const Dashboard = () => {
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-700 via-pink-600 to-indigo-700 dark:from-purple-300 dark:via-pink-300 dark:to-indigo-300 bg-clip-text text-transparent">
-                        Revision Notebook
+                        Smart Revision Notebook
                       </h3>
                       <div className="flex items-center space-x-2 mt-1">
                         <Crown className="h-4 w-4 text-amber-500 animate-bounce" />
@@ -1297,28 +1331,64 @@ const Dashboard = () => {
                   </div>
                 </div>
                 
-                <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
-                  Revolutionary technology creates <span className="font-semibold text-purple-700 dark:text-purple-300">ultra-clear, Grade 9-level revision notes</span> instantly for every question where you lose marks. Each note is meticulously crafted with key definitions, equations, and premium exam strategies.
-                </p>
-                
-                <div className="grid grid-cols-1 gap-4 mb-6">
-                  <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg">
-                      <CheckCircle className="h-4 w-4 text-white" />
+                {/* Blurred Stats for Non-Premium Users */}
+                <div className="grid grid-cols-3 gap-4 mb-6 relative">
+                  <div className="relative">
+                    <div className="bg-white/60 dark:bg-white/10 rounded-xl p-4 text-center border border-purple-200/50 dark:border-purple-700/30">
+                      <div className="text-2xl font-bold text-purple-700 dark:text-purple-300 blur-sm select-none">142</div>
+                      <div className="text-sm font-medium text-purple-600 dark:text-purple-400">Total Notes</div>
                     </div>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">Instant premium note generation</span>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Lock className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center shadow-lg">
-                      <BookOpen className="h-4 w-4 text-white" />
+                  <div className="relative">
+                    <div className="bg-white/60 dark:bg-white/10 rounded-xl p-4 text-center border border-purple-200/50 dark:border-purple-700/30">
+                      <div className="text-2xl font-bold text-emerald-700 dark:text-emerald-300 blur-sm select-none">28.5h</div>
+                      <div className="text-sm font-medium text-emerald-600 dark:text-emerald-400">Time Saved</div>
                     </div>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">Organized by topic</span>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Lock className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
-                      <Trophy className="h-4 w-4 text-white" />
+                  <div className="relative">
+                    <div className="bg-white/60 dark:bg-white/10 rounded-xl p-4 text-center border border-purple-200/50 dark:border-purple-700/30">
+                      <div className="text-2xl font-bold text-violet-700 dark:text-violet-300 blur-sm select-none">8</div>
+                      <div className="text-sm font-medium text-violet-600 dark:text-violet-400">Subjects</div>
                     </div>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">Exam-focused premium content</span>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Lock className="h-6 w-6 text-violet-600 dark:text-violet-400" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Blurred Notes Preview */}
+                <div className="mb-6 relative">
+                  <h4 className="text-lg font-semibold text-purple-700 dark:text-purple-300 mb-3">Recent Notes</h4>
+                  <div className="space-y-3">
+                    <div className="bg-white/60 dark:bg-white/10 rounded-xl p-4 border border-purple-200/50 dark:border-purple-700/30 blur-sm select-none">
+                      <div className="flex items-center justify-between mb-2">
+                        <Badge className="bg-blue-100 text-blue-700">Mathematics</Badge>
+                        <span className="text-xs text-muted-foreground">2 days ago</span>
+                      </div>
+                      <p className="text-sm text-foreground font-medium">Differentiation Chain Rule</p>
+                      <p className="text-xs text-muted-foreground mt-1">Remember to multiply by the derivative of the inner function...</p>
+                    </div>
+                    <div className="bg-white/60 dark:bg-white/10 rounded-xl p-4 border border-purple-200/50 dark:border-purple-700/30 blur-sm select-none">
+                      <div className="flex items-center justify-between mb-2">
+                        <Badge className="bg-green-100 text-green-700">Physics</Badge>
+                        <span className="text-xs text-muted-foreground">3 days ago</span>
+                      </div>
+                      <p className="text-sm text-foreground font-medium">Electric Fields and Potential</p>
+                      <p className="text-xs text-muted-foreground mt-1">Electric field strength is force per unit charge...</p>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 flex items-center justify-center bg-white/20 dark:bg-black/20 rounded-xl">
+                    <div className="text-center">
+                      <Crown className="h-8 w-8 text-amber-500 mx-auto mb-2" />
+                      <p className="text-sm font-semibold text-purple-700 dark:text-purple-300">Upgrade to Premium</p>
+                      <p className="text-xs text-purple-600 dark:text-purple-400">View your revision notes</p>
+                    </div>
                   </div>
                 </div>
                 
