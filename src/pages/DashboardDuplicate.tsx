@@ -579,7 +579,7 @@ const DashboardDuplicate = () => {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-                    Mentiora Duplicate
+                    Mentiora
                   </h1>
                   <div className="flex items-center space-x-2">
                     <Crown className="h-3 w-3 text-amber-500" />
@@ -616,7 +616,7 @@ const DashboardDuplicate = () => {
               <h2 className="text-3xl font-bold text-foreground mb-2">
                 {getGreeting()}, {getFirstName()}
               </h2>
-              <p className="text-muted-foreground text-lg">This is your duplicate dashboard - everything exactly the same!</p>
+              <p className="text-muted-foreground text-lg">Ready to elevate your GCSE revision journey?</p>
             </div>
           </div>
         </div>
