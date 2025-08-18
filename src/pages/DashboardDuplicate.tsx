@@ -621,43 +621,269 @@ const DashboardDuplicate = () => {
           </div>
         </div>
 
-        {/* Progress Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <ProgressCard
-            title="Study Streak"
-            value={`${getStudyStreak()} days`}
-            icon={Flame}
-            color="bg-gradient-to-br from-orange-500 to-red-600"
-            trend={getStudyStreak() > 0 ? 10 : 0}
-          />
-          <ProgressCard
-            title="Overall Progress"
-            value={`${getOverallProgress()}%`}
-            progress={getOverallProgress()}
-            icon={TrendingUp}
-            color="bg-gradient-to-br from-blue-500 to-cyan-600"
-          />
-          <ProgressCard
-            title="Mastered Topics"
-            value={getMasteredTopics().toString()}
-            subtitle="Grade A+ level"
-            icon={CheckCircle}
-            color="bg-gradient-to-br from-green-500 to-emerald-600"
-          />
-          <ProgressCard
-            title="Time Saved"
-            value={`${timeSavedHours}h`}
-            subtitle="With AI notes"
-            icon={Clock}
-            color="bg-gradient-to-br from-purple-500 to-pink-600"
-          />
+        {/* Premium Combined Streak & Rewards Card */}
+        <div className="mb-6">
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-violet-50/60 to-cyan-50/60 dark:from-slate-900 dark:via-violet-950/30 dark:to-cyan-950/30 shadow-xl hover:shadow-2xl transition-all duration-500 group backdrop-blur-sm transform hover:scale-[1.01]">
+            {/* Subtle glow effects */}
+            <div className="absolute inset-0 bg-gradient-to-r from-violet-400/15 via-cyan-400/15 to-emerald-400/15 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Premium border */}
+            <div className="absolute inset-0 bg-gradient-to-r from-violet-500 via-cyan-500 to-emerald-500 rounded-xl p-[2px] group-hover:p-[3px] transition-all duration-300">
+              <div className="bg-gradient-to-br from-white via-violet-50/60 to-cyan-50/60 dark:from-slate-900 dark:via-violet-950/30 dark:to-cyan-950/30 rounded-[10px] h-full w-full backdrop-blur-sm" />
+            </div>
+            
+            {/* Subtle floating particles */}
+            <div className="absolute top-3 right-4 w-1.5 h-1.5 bg-gradient-to-r from-amber-300 to-yellow-400 rounded-full animate-bounce opacity-70" />
+            <div className="absolute bottom-4 left-6 w-1 h-1 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full animate-pulse opacity-60" />
+            
+            <CardContent className="relative p-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* LEFT SIDE: Study Streak Section */}
+                <div className="space-y-4">
+                  <div className="text-center space-y-3">
+                    <div className="relative inline-block">
+                      {/* Compact fire icon */}
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 flex items-center justify-center shadow-xl shadow-orange-500/30 transition-all duration-300 group-hover:scale-105 relative overflow-hidden mx-auto">
+                        <div className="absolute inset-1 rounded-xl bg-white/20 backdrop-blur-sm" />
+                        <Flame className="h-6 w-6 text-white relative z-10 drop-shadow-lg" />
+                      </div>
+                      {/* Subtle achievement ring */}
+                      <div className="absolute inset-0 bg-orange-400/20 rounded-2xl animate-ping opacity-20" />
+                      {/* Compact badge */}
+                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-md animate-bounce">
+                        <Crown className="h-2.5 w-2.5 text-white" />
+                      </div>
+                    </div>
+                    
+                    {/* Compact streak display */}
+                     <div className="space-y-2">
+                       <motion.h3 
+                         key={getStudyStreak()}
+                         initial={{ scale: 0.5, rotate: -180, opacity: 0 }}
+                         animate={{ scale: 1, rotate: 0, opacity: 1 }}
+                         transition={{ 
+                           type: "spring", 
+                           damping: 15, 
+                           stiffness: 300,
+                           duration: 0.8 
+                         }}
+                         className="text-4xl font-bold bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent tracking-tight"
+                       >
+                         {getStudyStreak()}
+                       </motion.h3>
+                       <div className="flex items-center justify-center space-x-2">
+                         <motion.span 
+                           initial={{ y: 10, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.3 }}
+                           className="text-lg font-semibold bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent"
+                         >
+                           Day{getStudyStreak() !== 1 ? 's' : ''} Strong!
+                         </motion.span>
+                         <motion.div 
+                           animate={{ scale: [1, 1.2, 1] }}
+                           transition={{ duration: 2, repeat: Infinity }}
+                           className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full animate-pulse" 
+                         />
+                       </div>
+                     </div>
+                  </div>
+
+                  {/* Compact call to action */}
+                  <Button 
+                    onClick={() => {
+                      const subjectsSection = document.getElementById('subjects-section');
+                      if (subjectsSection) {
+                        subjectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }} 
+                    className="w-full h-10 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white font-semibold shadow-lg shadow-orange-500/20 transform hover:scale-105 transition-all duration-300 border-0"
+                  >
+                    <Zap className="mr-2 h-4 w-4" />
+                    Continue Streak
+                  </Button>
+                </div>
+
+                {/* RIGHT SIDE: Compact Rewards Section */}
+                <div className="space-y-4">
+                  <div className="text-center space-y-3">
+                    <div className="relative inline-block">
+                      {/* Compact trophy */}
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 via-cyan-500 to-violet-500 flex items-center justify-center shadow-xl shadow-emerald-500/30 transition-all duration-300 group-hover:scale-105 relative overflow-hidden mx-auto">
+                        <div className="absolute inset-1 rounded-xl bg-white/20 backdrop-blur-sm" />
+                        <Trophy className="h-6 w-6 text-white relative z-10 drop-shadow-lg" />
+                      </div>
+                      {/* Subtle achievement ring */}
+                      <div className="absolute inset-0 bg-emerald-400/20 rounded-2xl animate-ping opacity-20" />
+                      {/* Compact badge */}
+                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-md animate-bounce">
+                        <Sparkles className="h-2.5 w-2.5 text-white" />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-1">
+                      <h3 className="text-2xl font-bold bg-gradient-to-br from-emerald-600 via-cyan-600 to-violet-600 dark:from-emerald-400 dark:via-cyan-400 dark:to-violet-400 bg-clip-text text-transparent">
+                        Streak Rewards
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Compact reward tier system */}
+                  <div className="space-y-2">
+                    {/* Color Themes Reward - 3 days */}
+                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 3 ? 'bg-gradient-to-r from-violet-500/10 to-purple-500/10 border-violet-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 3 ? 'bg-gradient-to-br from-violet-500 to-purple-600 shadow-sm' : 'bg-gray-400'}`}>
+                            <Star className="h-3 w-3 text-white" />
+                          </div>
+                          <div>
+                            <p className={`text-sm font-semibold ${getStudyStreak() >= 3 ? 'text-violet-700 dark:text-violet-300' : 'text-gray-500'}`}>
+                              Custom Color Themes
+                            </p>
+                            <p className="text-xs text-muted-foreground">3 days</p>
+                          </div>
+                        </div>
+                        {getStudyStreak() >= 3 ? (
+                          <CheckCircle className="h-4 w-4 text-violet-600" />
+                        ) : (
+                          <div className="text-xs font-medium text-muted-foreground">{3 - getStudyStreak()}d</div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Study Playlist Reward - 7 days */}
+                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 7 ? 'bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border-emerald-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 7 ? 'bg-gradient-to-br from-emerald-500 to-cyan-600 shadow-sm' : 'bg-gray-400'}`}>
+                            <Gamepad2 className="h-3 w-3 text-white" />
+                          </div>
+                          <div>
+                            <p className={`text-sm font-semibold ${getStudyStreak() >= 7 ? 'text-emerald-700 dark:text-emerald-300' : 'text-gray-500'}`}>
+                              Study Playlists & Sounds
+                            </p>
+                            <p className="text-xs text-muted-foreground">7 days</p>
+                          </div>
+                        </div>
+                        {getStudyStreak() >= 7 ? (
+                          <CheckCircle className="h-4 w-4 text-emerald-600" />
+                        ) : (
+                          <div className="text-xs font-medium text-muted-foreground">{7 - getStudyStreak()}d</div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Free Tutoring Session - 14 days */}
+                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 14 ? 'bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-blue-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 14 ? 'bg-gradient-to-br from-blue-500 to-purple-600 shadow-sm' : 'bg-gray-400'}`}>
+                            <User className="h-3 w-3 text-white" />
+                          </div>
+                          <div>
+                            <p className={`text-sm font-semibold ${getStudyStreak() >= 14 ? 'text-blue-700 dark:text-blue-300' : 'text-gray-500'}`}>
+                              Free Tutoring Session
+                            </p>
+                            <p className="text-xs text-muted-foreground">14 days</p>
+                          </div>
+                        </div>
+                        {getStudyStreak() >= 14 ? (
+                          <CheckCircle className="h-4 w-4 text-blue-600" />
+                        ) : (
+                          <div className="text-xs font-medium text-muted-foreground">{14 - getStudyStreak()}d</div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Predicted Grades Graph */}
+
+        {/* Predicted GCSE Grades Section */}
         <PredictedGradesGraph userProgress={userProgress} />
 
-        {/* Predicted Questions Section */}
+
+        {/* Predicted 2026 Questions Section */}
         <PredictedQuestionsSection />
+
+        {/* Revision Notebook - Premium Feature */}
+        <div className="mb-8">
+          
+          {/* Revision Notebook - Premium Feature */}
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => navigate('/notebook')}>
+            {/* Premium Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Animated Border */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 rounded-lg p-[2px] group-hover:animate-pulse">
+              <div className="bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 rounded-[6px] h-full w-full" />
+            </div>
+            
+            <CardContent className="relative p-8">
+              <div className="flex items-start justify-between mb-6">
+                <div className="flex items-center space-x-4">
+                  <div className="relative w-16 h-16 rounded-3xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-500 flex items-center justify-center shadow-2xl group-hover:shadow-purple-500/25 transition-shadow duration-300">
+                    <div className="absolute inset-2 rounded-2xl bg-white/20 backdrop-blur-sm" />
+                    <Brain className="h-8 w-8 text-white relative z-10 group-hover:scale-110 transition-transform duration-300" />
+                    <Sparkles className="absolute -top-1 -right-1 h-4 w-4 text-yellow-300 animate-pulse" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-700 via-pink-600 to-indigo-700 dark:from-purple-300 dark:via-pink-300 dark:to-indigo-300 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
+                      Revision Notebook
+                    </h3>
+                    <div className="flex items-center space-x-2 mt-1">
+                      <Crown className="h-4 w-4 text-amber-500 animate-bounce" />
+                      <span className="text-sm font-medium text-purple-700 dark:text-purple-300 bg-amber-100 dark:bg-amber-900/30 px-2 py-1 rounded-lg border border-amber-200 dark:border-amber-800">
+                        AI Premium Feature
+                      </span>
+                    </div>
+                    <p className="text-purple-600/80 dark:text-purple-300/80 mt-2 text-lg leading-relaxed">
+                      Generate instant revision notes from past papers and your weak topics. Save hours of manual note-taking.
+                    </p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-emerald-100 to-green-100 dark:from-emerald-900/30 dark:to-green-900/30 px-4 py-2 rounded-2xl border border-emerald-200 dark:border-emerald-800">
+                    <Clock className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                    <span className="text-sm font-bold text-emerald-700 dark:text-emerald-300">
+                      {timeSavedHours}h saved
+                    </span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Quick Action Buttons */}
+              <div className="grid grid-cols-2 gap-3">
+                <Button 
+                  className="h-12 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold shadow-lg transform hover:scale-105 transition-all duration-300 border-0"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate('/notebook');
+                  }}
+                >
+                  <BookOpen className="mr-2 h-4 w-4" />
+                  View Notebook
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="h-12 border-2 border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-950/30 font-semibold transform hover:scale-105 transition-all duration-300"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // Could add a quick generate action here
+                    navigate('/notebook');
+                  }}
+                >
+                  <Sparkles className="mr-2 h-4 w-4" />
+                  Generate Notes
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Subjects Section */}
         <div id="subjects-section" className="mb-8">
