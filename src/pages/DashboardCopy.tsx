@@ -1181,7 +1181,7 @@ const DashboardCopy = () => {
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex items-center space-x-4">
                     <div className="relative w-16 h-16 rounded-3xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-500 flex items-center justify-center shadow-2xl">
-                      <div className="absolute inset-2 rounded-2xl bg-white/20 backdrop-blur-sm" />
+                      <div className="absolute inset-2 rounded-2xl bg-white/20" />
                       <Brain className="h-8 w-8 text-white relative z-10" />
                       <Sparkles className="absolute -top-1 -right-1 h-4 w-4 text-yellow-300 animate-pulse" />
                     </div>
@@ -1262,7 +1262,7 @@ const DashboardCopy = () => {
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex items-center space-x-4">
                     <div className="relative w-16 h-16 rounded-3xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-500 flex items-center justify-center shadow-2xl">
-                      <div className="absolute inset-2 rounded-2xl bg-white/20 backdrop-blur-sm" />
+                      <div className="absolute inset-2 rounded-2xl bg-white/20" />
                       <Brain className="h-8 w-8 text-white relative z-10" />
                       <Sparkles className="absolute -top-1 -right-1 h-4 w-4 text-yellow-300 animate-pulse" />
                     </div>
