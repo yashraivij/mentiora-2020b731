@@ -3,7 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { TrendingUp, Crown, Target, Sparkles, Trophy, Zap } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
+import { useSubscription } from "@/contexts/SubscriptionContext";
 import { supabase } from "@/integrations/supabase/client";
 import { curriculum } from "@/data/curriculum";
 
@@ -34,6 +36,7 @@ interface PredictedGradesGraphProps {
 
 export const PredictedGradesGraph = ({ userProgress, subscribed = false }: PredictedGradesGraphProps) => {
   const { user } = useAuth();
+  const { createCheckout } = useSubscription();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -683,6 +686,29 @@ export const PredictedGradesGraph = ({ userProgress, subscribed = false }: Predi
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* Premium CTA for free accounts */}
+        {!subscribed && (
+          <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 via-blue-50 to-emerald-50 dark:from-purple-900/20 dark:via-blue-900/20 dark:to-emerald-900/20 rounded-xl border border-purple-200/50 dark:border-purple-800/50">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl flex items-center justify-center">
+                  <Crown className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground">Unlock Premium Grade Predictions</h3>
+                  <p className="text-sm text-muted-foreground">Get detailed insights and unblurred metrics</p>
+                </div>
+              </div>
+              <Button 
+                onClick={createCheckout}
+                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold px-6 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+              >
+                Upgrade Now
+              </Button>
             </div>
           </div>
         )}
