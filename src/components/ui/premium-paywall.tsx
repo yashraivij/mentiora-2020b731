@@ -109,10 +109,10 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
               </motion.div>
               
               <h1 className="text-2xl font-bold text-white mb-4">
-                Secure Your Child's Future Success
+                Secure Academic Future Success
               </h1>
               <p className="text-lg text-white/80 max-w-2xl mx-auto">
-                Give your child the competitive edge to achieve Grade 9s and secure their place at top universities
+                Get the competitive edge to achieve Grade 9s and secure places at top universities
               </p>
               
               {/* Sparkles Animation */}
@@ -149,7 +149,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                   onClick={onUpgrade}
                   className="w-full mt-4 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-semibold py-2 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                 >
-                  Get Premium Now
+                  Start Free Trial
                 </Button>
               </div>
             </div>
