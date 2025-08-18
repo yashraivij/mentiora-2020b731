@@ -1536,124 +1536,58 @@ const DashboardCopy = () => {
           </Tabs>
         </div>
 
-        {/* Quick Analysis Section */}
-        <div className="mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-            <ProgressCard
-              title="Overall Progress"
-              value="0%"
-              subtitle="Average across subjects"
-              progress={0}
-              icon={BarChart3}
-              color="bg-gradient-to-br from-blue-500 to-cyan-600"
-            />
-            
-            <ProgressCard
-              title="Topics Mastered"
-              value="0"
-              subtitle="85%+ average score"
-              icon={CheckCircle}
-              color="bg-gradient-to-br from-emerald-500 to-green-600"
-            />
-            
-            <ProgressCard
-              title="Practice Sessions"
-              value="0"
-              subtitle="Questions completed"
-              icon={Clock}
-              color="bg-gradient-to-br from-purple-500 to-pink-600"
-            />
-            
-            <ProgressCard
-              title="Study Streak"
-              value="4 days"
-              subtitle="Keep it up!"
-              icon={Flame}
-              color="bg-gradient-to-br from-orange-500 to-red-600"
-            />
-          </div>
+        {/* Premium Progress Overview */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <ProgressCard
+            title="Overall Progress"
+            value="0%"
+            subtitle="Average across subjects"
+            progress={0}
+            icon={TrendingUp}
+            color="bg-gradient-to-br from-primary via-primary/90 to-primary/80"
+          />
+          
+          <ProgressCard
+            title="Topics Mastered"
+            value="0"
+            subtitle="85%+ average score"
+            icon={Trophy}
+            color="bg-gradient-to-br from-emerald-500 to-emerald-600"
+          />
+          
+          <ProgressCard
+            title="Practice Sessions"
+            value="0"
+            subtitle="Questions completed"
+            icon={BookOpen}
+            color="bg-gradient-to-br from-blue-500 to-blue-600"
+          />
+          
+          <ProgressCard
+            title="Study Streak"
+            value="4 days"
+            subtitle="Keep it up!"
+            icon={Flame}
+            color="bg-gradient-to-br from-orange-500 to-red-500"
+          />
         </div>
-
-        {/* Weak Topics Section */}
-        <WeakTopicsSection 
-          weakTopics={weakTopics} 
-          userProgress={userProgress}
-          onPractice={handlePractice}
-        />
 
         {/* Premium Analytics Section */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-2xl font-bold text-foreground">Premium Analytics</h3>
-            <Badge className="bg-gradient-to-r from-amber-500 to-yellow-600 text-white border-0">
-              <Crown className="h-3 w-3 mr-1" />
-              Premium
-            </Badge>
+        <div className="grid lg:grid-cols-3 gap-6 mb-8">
+          <div className="lg:col-span-1 space-y-6">
+            <AOBreakdown userProgress={userProgress} />
+            <GoalsSection />
+            <TopicMasteryDisplay />
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            <PremiumAnalyticsCard
-              title="Stress Level Analysis"
-              description="Monitor your learning stress levels across subjects and get personalized recommendations."
-              icon={Brain}
-              gradient="from-red-500 to-pink-600"
-            />
-            
-            <PremiumAnalyticsCard
-              title="Learning Pattern Insights"
-              description="Discover your optimal study times and track your learning efficiency patterns."
-              icon={TrendingUp}
-              gradient="from-blue-500 to-cyan-600"
-            />
-            
-            <PremiumAnalyticsCard
-              title="Predictive Grade Analysis"
-              description="Get AI-powered predictions of your exam performance with detailed breakdowns."
-              icon={Target}
-              gradient="from-purple-500 to-indigo-600"
-            />
-            
-            <PremiumAnalyticsCard
-              title="Subject Mastery Timeline"
-              description="Visualize your learning journey with detailed progress tracking over time."
-              icon={LineChart}
-              gradient="from-emerald-500 to-green-600"
-            />
-            
-            <PremiumAnalyticsCard
-              title="Smart Study Recommendations"
-              description="Receive AI-generated study plans based on your performance and learning style."
-              icon={Brain}
-              gradient="from-violet-500 to-purple-600"
-            />
-            
-            <PremiumAnalyticsCard
-              title="Exam Board Comparisons"
-              description="Compare your performance across different exam boards and topics."
-              icon={BarChart3}
-              gradient="from-orange-500 to-red-600"
-              comingSoon={true}
+          <div className="lg:col-span-2">
+            <WeakTopicsSection 
+              weakTopics={weakTopics}
+              userProgress={userProgress}
+              onPractice={handlePractice}
             />
           </div>
         </div>
 
-        {/* Quick Actions with Premium Features */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-8">
-          <PredictivePerformanceCard userProgress={userProgress} />
-          <AOBreakdown userProgress={userProgress} />
-          <OptimalStudyTimeCard />
-        </div>
-
-        {/* Daily Goals & Topic Mastery */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-8">
-          <GoalsSection />
-          <TopicMasteryDisplay />
-        </div>
-
-        {/* Hall of Fame */}
-        <div className="mb-8">
-          <PublicStreakProfiles />
-        </div>
 
         {/* Celebrations and Notifications */}
         {showStreakCelebration && (
