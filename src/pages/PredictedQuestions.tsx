@@ -335,9 +335,9 @@ const PredictedQuestions = () => {
         {/* Header Section */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-3 mb-4">
-            <Badge className="bg-gradient-to-r from-blue-400 to-cyan-400 text-white font-bold px-3 py-1 hover:from-blue-300 hover:to-cyan-300">
-              <Sparkles className="h-3 w-3 mr-1" />
-              AI POWERED
+            <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold px-3 py-1 hover:from-yellow-300 hover:to-orange-300">
+              <Crown className="h-3 w-3 mr-1" />
+              PREMIUM EXCLUSIVE
             </Badge>
             <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
               <Zap className="h-3 w-3 mr-1" />
