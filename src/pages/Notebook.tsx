@@ -10,6 +10,7 @@ import { ArrowLeft, BookOpen, Crown, Brain, TrendingUp, Star, Filter, Calendar }
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { supabase } from "@/integrations/supabase/client";
 import { NotebookEntry } from "@/components/notebook/NotebookEntry";
+import { PremiumPaywall } from "@/components/ui/premium-paywall";
 import { toast } from "sonner";
 
 interface NotebookEntryData {
@@ -42,6 +43,7 @@ const Notebook = () => {
   const [selectedSubject, setSelectedSubject] = useState<string>('all');
   const [selectedConfidence, setSelectedConfidence] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('recent');
+  const [showPaywall, setShowPaywall] = useState(false);
 
   useEffect(() => {
     if (!user?.id) {
@@ -299,7 +301,7 @@ const Notebook = () => {
           <div className="space-y-8">
             {sortedEntries.map((entry, index) => (
               <div key={entry.id} className="transform hover:scale-[1.02] transition-all duration-200">
-                <NotebookEntry entry={entry} />
+                <NotebookEntry entry={entry} onUpgradeClick={() => setShowPaywall(true)} />
               </div>
             ))}
           </div>
@@ -327,6 +329,15 @@ const Notebook = () => {
           </Button>
         </div>
       </div>
+
+      <PremiumPaywall 
+        isOpen={showPaywall}
+        onClose={() => setShowPaywall(false)}
+        onUpgrade={() => {
+          setShowPaywall(false);
+          toast.success("Redirecting to premium upgrade...");
+        }}
+      />
     </div>
   );
 };

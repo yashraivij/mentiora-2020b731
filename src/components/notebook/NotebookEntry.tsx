@@ -36,9 +36,10 @@ interface NotebookEntryProps {
     mark_loss: number;
     created_at: string;
   };
+  onUpgradeClick?: () => void;
 }
 
-export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
+export const NotebookEntry = ({ entry, onUpgradeClick }: NotebookEntryProps) => {
   const getConfidenceColor = (level: string) => {
     switch (level.toLowerCase()) {
       case 'low': return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300';
@@ -176,6 +177,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             </p>
             <Button 
               size="sm" 
+              onClick={onUpgradeClick}
               className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
             >
               <Crown className="h-3 w-3 mr-2" />
