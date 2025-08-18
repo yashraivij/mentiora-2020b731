@@ -1260,14 +1260,7 @@ const Dashboard = () => {
               {/* Premium Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
-              {/* Lock Overlay */}
-              <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px] flex items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="bg-white/90 dark:bg-gray-900/90 p-4 rounded-xl border border-white/50 dark:border-gray-700/50 shadow-xl">
-                  <Lock className="h-8 w-8 text-gray-700 dark:text-gray-300 mx-auto mb-2" />
-                  <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center">Premium Feature</p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 text-center">Click to upgrade</p>
-                </div>
-              </div>
+              {/* Lock Overlay - Removed hover overlay */}
               
               {/* Animated Border */}
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 rounded-lg p-[2px] group-hover:animate-pulse">
