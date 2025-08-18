@@ -9,7 +9,8 @@ export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
 
   const handleStartPredicted = () => {
-    navigate('/predicted-questions');
+    // Dispatch event to open premium paywall
+    window.dispatchEvent(new CustomEvent('openPremiumPaywall'));
   };
 
   return (
