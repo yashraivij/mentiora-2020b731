@@ -119,6 +119,19 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
         checkSubscription();
       }, 2000);
     }
+    
+    // Also check if user was redirected from Stripe (common redirect pattern)
+    if (window.location.pathname === '/dashboard' && user) {
+      // Check if this might be a return from payment (no previous subscription)
+      const checkForNewSubscription = async () => {
+        // Wait a bit longer for Stripe to process
+        setTimeout(() => {
+          checkSubscription();
+        }, 3000);
+      };
+      
+      checkForNewSubscription();
+    }
   }, [user]);
 
   return (
