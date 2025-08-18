@@ -449,7 +449,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                           )}
                           
                           {/* Enhanced Grade number with conditional blur for free accounts */}
-                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110 ${!subscribed ? 'blur-sm' : ''}`}>
+                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110 ${!subscribed ? 'blur-lg' : ''}`}>
                             {grade.finalGrade}
                           </div>
 
