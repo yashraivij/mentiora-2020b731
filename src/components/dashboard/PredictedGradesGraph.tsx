@@ -402,8 +402,9 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                             <>
                               {/* Main gradient bar */}
                               <div 
-                                className={`absolute inset-0 bg-gradient-to-t ${getSubjectColor(index)} rounded-3xl transition-all duration-1000 ease-out animate-in slide-in-from-bottom-4`}
+                                className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t ${getSubjectColor(index)} rounded-b-3xl transition-all duration-1000 ease-out animate-in slide-in-from-bottom-4`}
                                 style={{ 
+                                  height: `${Math.max(grade.finalPercentage, 10)}%`,
                                   filter: grade.isGrade7Plus ? 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.6))' : 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))'
                                 }}
                               />
