@@ -1322,7 +1322,7 @@ const DashboardCopy = () => {
                     className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white shadow-xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 px-8 py-3 text-base font-semibold"
                   >
                     <Crown className="h-4 w-4 mr-2" />
-                    Upgrade to Premium
+                    Open Premium Notebook
                   </Button>
                 </div>
               </CardContent>
