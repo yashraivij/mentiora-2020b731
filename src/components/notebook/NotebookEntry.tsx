@@ -39,6 +39,8 @@ interface NotebookEntryProps {
 }
 
 export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
+  console.log('NotebookEntry component is rendering on page:', window.location.pathname);
+  
   const getConfidenceColor = (level: string) => {
     switch (level.toLowerCase()) {
       case 'low': return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300';
