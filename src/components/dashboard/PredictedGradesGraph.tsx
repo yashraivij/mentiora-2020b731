@@ -427,17 +427,17 @@ export const PredictedGradesGraph = ({ userProgress, subscribed = false }: Predi
                     <div className="group relative transform transition-all duration-300 hover:scale-105 cursor-pointer">
                       <div className="relative">
                         {/* Premium Bar with enhanced effects */}
-                        <div className={`relative h-40 bg-gradient-to-t from-gray-100/30 to-gray-50/20 dark:from-gray-800/30 dark:to-gray-700/20 rounded-3xl overflow-hidden border-2 border-white/20 backdrop-blur-sm shadow-xl ${getSubjectShadow(index)} group-hover:shadow-2xl transition-all duration-500 ${!subscribed ? 'blur-lg' : ''}`}>
-                          {grade.finalGrade !== '–' && (
-                            <>
-                              {/* Main gradient bar */}
-                              <div 
-                                className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t ${getSubjectColor(index)} rounded-b-3xl transition-all duration-1000 ease-out animate-in slide-in-from-bottom-4`}
-                                style={{ 
-                                  height: `${Math.max(grade.finalPercentage, 10)}%`,
-                                  filter: grade.isGrade7Plus ? 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.6))' : 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))'
-                                }}
-                              />
+                         <div className={`relative h-40 bg-gradient-to-t from-gray-100/30 to-gray-50/20 dark:from-gray-800/30 dark:to-gray-700/20 rounded-3xl overflow-hidden border-2 border-white/20 backdrop-blur-sm shadow-xl ${getSubjectShadow(index)} group-hover:shadow-2xl transition-all duration-500 ${!subscribed ? 'blur-lg' : ''}`}>
+                           {grade.finalGrade !== '–' && (
+                             <>
+                               {/* Main gradient bar - always show full color, blur applies on top */}
+                               <div 
+                                 className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t ${getSubjectColor(index)} rounded-b-3xl transition-all duration-1000 ease-out animate-in slide-in-from-bottom-4`}
+                                 style={{ 
+                                   height: `100%`,
+                                   filter: grade.isGrade7Plus ? 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.6))' : 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))'
+                                 }}
+                               />
                               
                               {/* Premium glow overlay */}
                               <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent rounded-3xl opacity-60" />
