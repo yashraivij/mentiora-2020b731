@@ -280,16 +280,16 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
 
   const getTooltipText = (grade: GradeData) => {
     if (grade.finalGrade === '–') {
-      return "Start revising to unlock your prediction";
+      return "✨ Begin your premium revision journey to unlock exclusive grade predictions";
     }
 
     let text = '';
     if (grade.practiceScore > 0 && grade.examGrade) {
-      text = `You scored an average of ${grade.practiceScore}% across your ${grade.subjectName} quizzes and achieved a Grade ${grade.examGrade} in your predicted paper. This puts you on track for a Grade ${grade.finalGrade} in the real exam.`;
+      text = `🎯 Premium Analysis: Your exceptional ${grade.practiceScore}% average across ${grade.subjectName} practice sessions, combined with your Grade ${grade.examGrade} performance on our advanced predicted exam, positions you perfectly for a Grade ${grade.finalGrade} in your actual GCSE. Our premium algorithms are confident in this prediction.`;
     } else if (grade.practiceScore > 0) {
-      text = `You scored an average of ${grade.practiceScore}% across your ${grade.subjectName} quizzes. This puts you on track for a Grade ${grade.finalGrade} in the real exam.`;
+      text = `⚡ Elite Performance: Your outstanding ${grade.practiceScore}% mastery across ${grade.subjectName} practice sessions demonstrates you're perfectly positioned for a Grade ${grade.finalGrade} in your real GCSE. Our premium prediction engine is highly confident.`;
     } else if (grade.examGrade) {
-      text = `You scored a Grade ${grade.examGrade} in your ${grade.subjectName} predicted paper. This puts you on track for a Grade ${grade.finalGrade} in the real exam.`;
+      text = `🏆 Premium Insight: Your impressive Grade ${grade.examGrade} on our advanced ${grade.subjectName} predicted exam indicates you're excellently prepared for a Grade ${grade.finalGrade} in the actual examination.`;
     }
 
     // Only show next grade advice for numeric grades (not U)
@@ -297,7 +297,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
       const nextGrade = parseInt(grade.finalGrade) + 1;
       if (nextGrade <= 9) {
         const nextGradePercentage = gradeToPercentage(nextGrade.toString());
-        text += ` To hit a Grade ${nextGrade}, aim for ${nextGradePercentage}%+ across all topics.`;
+        text += ` 🚀 Premium Strategy: To achieve the coveted Grade ${nextGrade}, our exclusive algorithm recommends maintaining ${nextGradePercentage}%+ mastery across all topics.`;
       }
     }
 
