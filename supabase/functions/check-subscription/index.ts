@@ -28,8 +28,8 @@ serve(async (req) => {
   try {
     logStep("Function started");
 
-    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
-    if (!stripeKey) throw new Error("STRIPE_SECRET_KEY is not set");
+    const stripeKey = Deno.env.get("stripe key");
+    if (!stripeKey) throw new Error("Stripe secret key is not set");
     logStep("Stripe key verified");
 
     const authHeader = req.headers.get("Authorization");
@@ -68,13 +68,12 @@ serve(async (req) => {
     const customerId = customers.data[0].id;
     logStep("Found Stripe customer", { customerId });
 
-    // Check for active subscriptions first
     const subscriptions = await stripe.subscriptions.list({
       customer: customerId,
       status: "active",
       limit: 1,
     });
-    let hasActiveSub = subscriptions.data.length > 0;
+    const hasActiveSub = subscriptions.data.length > 0;
     let subscriptionTier = null;
     let subscriptionEnd = null;
 
@@ -95,37 +94,7 @@ serve(async (req) => {
       }
       logStep("Determined subscription tier", { priceId, amount, subscriptionTier });
     } else {
-      logStep("No active subscription found, checking for successful one-time payments");
-      
-      // Check for successful one-time payments (checkout sessions)
-      const checkoutSessions = await stripe.checkout.sessions.list({
-        customer: customerId,
-        limit: 10,
-      });
-      
-      // Look for successful payment sessions in the last 24 hours
-      const twentyFourHoursAgo = Math.floor((Date.now() - 24 * 60 * 60 * 1000) / 1000);
-      const recentSuccessfulPayments = checkoutSessions.data.filter(session => 
-        session.payment_status === 'paid' && 
-        session.created > twentyFourHoursAgo &&
-        session.mode === 'payment' // one-time payment
-      );
-      
-      if (recentSuccessfulPayments.length > 0) {
-        logStep("Found recent successful one-time payment", { 
-          sessionCount: recentSuccessfulPayments.length,
-          latestSession: recentSuccessfulPayments[0].id 
-        });
-        
-        // Treat one-time payment as Premium access for 1 year
-        hasActiveSub = true;
-        subscriptionTier = "Premium";
-        subscriptionEnd = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(); // 1 year from now
-        
-        logStep("Granted Premium access for one-time payment", { subscriptionTier, subscriptionEnd });
-      } else {
-        logStep("No recent successful payments found");
-      }
+      logStep("No active subscription found");
     }
 
     await supabaseClient.from("subscribers").upsert({

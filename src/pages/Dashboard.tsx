@@ -49,7 +49,7 @@ interface UserProgress {
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
-  const { subscribed, subscriptionTier, checkSubscription, openCustomerPortal } = useSubscription();
+  const { subscribed, subscriptionTier, openCustomerPortal } = useSubscription();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
@@ -953,35 +953,6 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              {/* Manual subscription refresh button for users who just paid */}
-              <Button 
-                onClick={async () => {
-                  console.log('BUTTON CLICKED - Manual subscription refresh triggered');
-                  console.log('User object:', user);
-                  console.log('User email:', user?.email);
-                  console.log('Current subscribed status:', subscribed);
-                  console.log('checkSubscription function:', checkSubscription);
-                  
-                  if (!user) {
-                    console.error('No user found');
-                    return;
-                  }
-                  
-                  try {
-                    console.log('Calling checkSubscription...');
-                    await checkSubscription();
-                    console.log('Subscription check completed successfully');
-                  } catch (error) {
-                    console.error('Error during subscription check:', error);
-                  }
-                }}
-                variant="outline"
-                className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-all duration-200"
-              >
-                <Target className="h-4 w-4 mr-2" />
-                Check Premium Status
-              </Button>
-              
               <Button 
                 onClick={() => window.open('https://discord.gg/Jq2YTZ3aMa', '_blank')}
                 className="bg-gradient-to-r from-emerald-400 to-green-500 hover:from-emerald-500 hover:to-green-600 text-white border-2 border-emerald-300 shadow-2xl shadow-emerald-500/40 hover:shadow-emerald-500/60 transition-all duration-300 rounded-xl px-6 py-3 h-11 hover:scale-110 font-bold ring-2 ring-emerald-200/50"
