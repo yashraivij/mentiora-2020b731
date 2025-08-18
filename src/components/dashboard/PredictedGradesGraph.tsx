@@ -423,26 +423,29 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
               {gradesData.map((grade, index) => (
                 <Tooltip key={grade.subjectId}>
                   <TooltipTrigger asChild>
-                    <div className="group relative transform transition-all duration-300 hover:scale-105 cursor-pointer">
+                    <div className="group relative transform transition-all duration-500 hover:scale-110 cursor-pointer hover:rotate-1">
                       <div className="relative">
-                        {/* Premium Bar with enhanced effects */}
-                        <div className={`relative h-40 bg-gradient-to-t from-gray-100/30 to-gray-50/20 dark:from-gray-800/30 dark:to-gray-700/20 rounded-3xl overflow-hidden border-2 border-white/20 backdrop-blur-sm shadow-xl ${getSubjectShadow(index)} group-hover:shadow-2xl transition-all duration-500`}>
+                        {/* Premium Bar with enhanced colorful hover effects */}
+                        <div className={`relative h-40 bg-gradient-to-t from-gray-100/30 to-gray-50/20 dark:from-gray-800/30 dark:to-gray-700/20 rounded-3xl overflow-hidden border-2 border-white/20 backdrop-blur-sm shadow-xl ${getSubjectShadow(index)} group-hover:shadow-2xl group-hover:shadow-purple-500/40 group-hover:border-purple-400/50 transition-all duration-500 group-hover:bg-gradient-to-br group-hover:from-purple-500/10 group-hover:via-blue-500/10 group-hover:to-emerald-500/10`}>
                           {grade.finalGrade !== '–' && (
                             <>
-                              {/* Main gradient bar */}
+                              {/* Main gradient bar with enhanced hover effects */}
                               <div 
-                                className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t ${getSubjectColor(index)} rounded-b-3xl transition-all duration-1000 ease-out animate-in slide-in-from-bottom-4`}
+                                className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t ${getSubjectColor(index)} rounded-b-3xl transition-all duration-1000 ease-out animate-in slide-in-from-bottom-4 group-hover:brightness-125 group-hover:saturate-150 group-hover:shadow-lg group-hover:shadow-current`}
                                 style={{ 
                                   height: `${Math.max(grade.finalPercentage, 10)}%`,
                                   filter: grade.isGrade7Plus ? 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.6))' : 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))'
                                 }}
                               />
                               
-                              {/* Premium glow overlay */}
-                              <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent rounded-3xl opacity-60" />
+                              {/* Premium glow overlay with rainbow hover effect */}
+                              <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent rounded-3xl opacity-60 group-hover:bg-gradient-to-t group-hover:from-rainbow-400/30 group-hover:via-rainbow-300/20 group-hover:to-rainbow-200/10 transition-all duration-500" />
                               
-                              {/* Animated shimmer effect */}
-                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-3xl animate-pulse" />
+                              {/* Animated shimmer effect with colorful hover */}
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-3xl animate-pulse group-hover:bg-gradient-to-r group-hover:from-transparent group-hover:via-rainbow-300/50 group-hover:to-transparent group-hover:animate-ping transition-all duration-300" />
+                              
+                              {/* Rainbow glow effect on hover */}
+                              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-t from-red-400/20 via-yellow-400/20 to-blue-400/20 rounded-3xl transition-opacity duration-500 animate-pulse" />
                             </>
                           )}
                           
@@ -475,12 +478,12 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                           )}
                         </div>
 
-                        {/* Premium Subject name */}
+                        {/* Premium Subject name with colorful hover effects */}
                         <div className="mt-4 text-center">
-                          <div className="text-sm font-bold text-foreground truncate mb-2">{grade.subjectName}</div>
+                          <div className="text-sm font-bold text-foreground truncate mb-2 group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:via-blue-600 group-hover:to-emerald-600 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-500">{grade.subjectName}</div>
                           {grade.isGrade7Plus && (
                             <div className="mt-2">
-                              <Badge className="bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse">
+                              <Badge className="bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse group-hover:from-purple-400 group-hover:via-pink-400 group-hover:to-red-400 group-hover:animate-bounce transition-all duration-300">
                                 🎯 Target Hit!
                               </Badge>
                             </div>
