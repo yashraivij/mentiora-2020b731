@@ -146,7 +146,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                 <div className="text-amber-400 text-sm font-medium">Save 50% - First 3 months</div>
                 <div className="text-white/60 text-xs mt-2">Less than a single tutoring session</div>
                 <Button
-                  onClick={onUpgrade}
+                  onClick={() => window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank')}
                   className="w-full mt-4 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-semibold py-2 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                 >
                   Start Free Trial
@@ -216,7 +216,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
             <div className="px-8 pb-8">
               <div className="space-y-4">
                 <Button
-                  onClick={onUpgrade}
+                  onClick={() => window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank')}
                   className="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 text-lg"
                 >
                   <div className="flex items-center justify-center space-x-3">
