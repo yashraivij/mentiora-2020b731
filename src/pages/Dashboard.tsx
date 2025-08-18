@@ -937,17 +937,10 @@ const Dashboard = () => {
                     Mentiora
                   </h1>
                   <div className="flex items-center space-x-2">
-                    {subscribed ? (
-                      <>
-                        <Crown className="h-3 w-3 text-amber-500" />
-                        <span className="text-xs font-medium text-muted-foreground">Premium</span>
-                      </>
-                    ) : (
-                      <>
-                        <User className="h-3 w-3 text-muted-foreground" />
-                        <span className="text-xs font-medium text-muted-foreground">Free Account</span>
-                      </>
-                    )}
+                    <>
+                      <Crown className="h-3 w-3 text-amber-500" />
+                      <span className="text-xs font-medium text-muted-foreground">Premium</span>
+                    </>
                   </div>
                 </div>
               </div>
@@ -1331,7 +1324,7 @@ const Dashboard = () => {
                     className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white shadow-xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 px-8 py-3 text-base font-semibold"
                   >
                     <Crown className="h-4 w-4 mr-2" />
-                    Upgrade to Premium
+                    Open Premium Notebook
                   </Button>
                 </div>
               </CardContent>
@@ -1623,7 +1616,7 @@ const Dashboard = () => {
             
             <PremiumAnalyticsCard
               title="Stress Monitor"
-              description="AI-powered stress detection and recommendations for optimal learning"
+              description="Intelligent stress detection and recommendations for optimal learning"
               icon={Brain}
               gradient="from-emerald-500 to-teal-600"
               comingSoon={true}

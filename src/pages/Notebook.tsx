@@ -134,7 +134,7 @@ const Notebook = () => {
           <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent mx-auto mb-6"></div>
           <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl px-8 py-6 shadow-2xl shadow-primary/10">
             <p className="text-foreground font-medium text-lg">Loading your Smart Revision Notebook...</p>
-            <p className="text-muted-foreground text-sm mt-2">Preparing your AI-generated study notes</p>
+            <p className="text-muted-foreground text-sm mt-2">Preparing your personalized study notes</p>
           </div>
         </div>
       </div>

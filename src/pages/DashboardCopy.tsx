@@ -1608,7 +1608,7 @@ const DashboardCopy = () => {
             
             <PremiumAnalyticsCard
               title="Stress Monitor"
-              description="AI-powered stress detection and recommendations for optimal learning"
+              description="Intelligent stress detection and recommendations for optimal learning"
               icon={Brain}
               gradient="from-emerald-500 to-teal-600"
               comingSoon={true}
