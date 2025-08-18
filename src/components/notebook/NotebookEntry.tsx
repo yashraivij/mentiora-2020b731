@@ -3,7 +3,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Lightbulb, Target, Clock, ExternalLink, Brain, AlertCircle, Crown, Lock } from "lucide-react";
 import { format } from "date-fns";
-import { useSubscription } from "@/contexts/SubscriptionContext";
 
 // Safe text formatting function to prevent XSS
 const formatBoldText = (text: string): React.ReactNode => {
@@ -41,8 +40,6 @@ interface NotebookEntryProps {
 }
 
 export const NotebookEntry = ({ entry, onUpgradeClick }: NotebookEntryProps) => {
-  const { subscribed } = useSubscription();
-  
   const getConfidenceColor = (level: string) => {
     switch (level.toLowerCase()) {
       case 'low': return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300';
@@ -95,31 +92,8 @@ export const NotebookEntry = ({ entry, onUpgradeClick }: NotebookEntryProps) => 
       </CardHeader>
       
       <CardContent className="space-y-6 relative">
-        {!subscribed && (
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/80 to-white dark:via-slate-900/80 dark:to-slate-900 z-10 flex items-center justify-center rounded-lg">
-            <div className="text-center p-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-xl shadow-2xl border border-slate-200/50 dark:border-slate-700/50">
-              <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center">
-                <Crown className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-foreground mb-2">Premium Feature</h3>
-              <p className="text-sm text-muted-foreground mb-4 max-w-sm">
-                Unlock AI-generated revision notes to boost your grades
-              </p>
-              {onUpgradeClick && (
-                <Button 
-                  onClick={onUpgradeClick}
-                  className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-6 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
-                >
-                  <Crown className="h-4 w-4 mr-2" />
-                  Upgrade to Premium
-                </Button>
-              )}
-            </div>
-          </div>
-        )}
-        
         {/* What Tripped Me Up */}
-        <div className={`bg-red-50 dark:bg-red-950/20 p-4 rounded-lg border border-red-200 dark:border-red-800/30 ${!subscribed ? 'blur-lg' : ''}`}>
+        <div className="bg-red-50 dark:bg-red-950/20 p-4 rounded-lg border border-red-200 dark:border-red-800/30">
           <h4 className="font-semibold text-red-800 dark:text-red-300 mb-2 flex items-center gap-2">
             <AlertCircle className="h-4 w-4" />
             What Tripped Me Up
@@ -128,7 +102,7 @@ export const NotebookEntry = ({ entry, onUpgradeClick }: NotebookEntryProps) => 
         </div>
 
         {/* Fix Sentence */}
-        <div className={`bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border border-green-200 dark:border-green-800/30 ${!subscribed ? 'blur-lg' : ''}`}>
+        <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border border-green-200 dark:border-green-800/30">
           <h4 className="font-semibold text-green-800 dark:text-green-300 mb-2 flex items-center gap-2">
             <Lightbulb className="h-4 w-4" />
             Fix in One Sentence
@@ -137,7 +111,7 @@ export const NotebookEntry = ({ entry, onUpgradeClick }: NotebookEntryProps) => 
         </div>
 
         {/* Bulletproof Notes */}
-        <div className={`bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800/30 ${!subscribed ? 'blur-lg' : ''}`}>
+        <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800/30">
           <h4 className="font-semibold text-blue-800 dark:text-blue-300 mb-3 flex items-center gap-2">
             <BookOpen className="h-4 w-4" />
             Bulletproof Notes
@@ -154,7 +128,7 @@ export const NotebookEntry = ({ entry, onUpgradeClick }: NotebookEntryProps) => 
 
         {/* Mini Example */}
         {entry.mini_example && (
-          <div className={`bg-purple-50 dark:bg-purple-950/20 p-4 rounded-lg border border-purple-200 dark:border-purple-800/30 ${!subscribed ? 'blur-lg' : ''}`}>
+          <div className="bg-purple-50 dark:bg-purple-950/20 p-4 rounded-lg border border-purple-200 dark:border-purple-800/30">
             <h4 className="font-semibold text-purple-800 dark:text-purple-300 mb-2 flex items-center gap-2">
               <Target className="h-4 w-4" />
               Mini Worked Example
@@ -166,7 +140,7 @@ export const NotebookEntry = ({ entry, onUpgradeClick }: NotebookEntryProps) => 
         )}
 
         {/* Keywords */}
-        <div className={`bg-gray-50 dark:bg-gray-950/20 p-4 rounded-lg border border-gray-200 dark:border-gray-800/30 ${!subscribed ? 'blur-lg' : ''}`}>
+        <div className="bg-gray-50 dark:bg-gray-950/20 p-4 rounded-lg border border-gray-200 dark:border-gray-800/30">
           <h4 className="font-semibold text-gray-800 dark:text-gray-300 mb-2 flex items-center gap-2">
             <Brain className="h-4 w-4" />
             Keywords
@@ -181,7 +155,7 @@ export const NotebookEntry = ({ entry, onUpgradeClick }: NotebookEntryProps) => 
         </div>
 
         {/* Next Step */}
-        <div className={`bg-amber-50 dark:bg-amber-950/20 p-4 rounded-lg border border-amber-200 dark:border-amber-800/30 ${!subscribed ? 'blur-lg' : ''}`}>
+        <div className="bg-amber-50 dark:bg-amber-950/20 p-4 rounded-lg border border-amber-200 dark:border-amber-800/30">
           <h4 className="font-semibold text-amber-800 dark:text-amber-300 mb-2 flex items-center gap-2">
             <Target className="h-4 w-4" />
             Next Step
