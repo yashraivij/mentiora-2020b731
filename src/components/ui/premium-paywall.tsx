@@ -112,7 +112,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                 Unlock Your Academic Potential
               </h1>
               <p className="text-lg text-white/80 max-w-2xl mx-auto">
-                Unlock your full academic potential and achieve Grade 9s to secure places at top universities with Mentiora Premium
+                Give your child the competitive edge to achieve Grade 9s and secure their place at top universities
               </p>
               
               {/* Sparkles Animation */}
