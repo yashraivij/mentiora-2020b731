@@ -492,13 +492,16 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                   <TooltipContent 
                     side="top" 
                     align="center"
-                    className="max-w-80 w-auto p-4 bg-white dark:bg-gray-800 text-foreground text-sm rounded-xl shadow-xl border"
+                    className="max-w-80 w-auto p-4 bg-gradient-to-br from-purple-600/95 via-blue-600/95 to-emerald-600/95 backdrop-blur-sm text-white text-sm rounded-xl shadow-2xl border-2 border-white/30 relative overflow-hidden"
                   >
-                    <div className="space-y-2">
-                      <div className="font-bold">{grade.subjectName}</div>
-                      <div className="text-sm text-muted-foreground">
+                    <div className="absolute inset-0 bg-gradient-to-r from-pink-400/20 via-purple-400/20 to-blue-400/20 animate-pulse" />
+                    <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-yellow-300/30 to-amber-400/30 rounded-full blur-xl" />
+                    <div className="relative space-y-2">
+                      <div className="font-bold text-white drop-shadow-md bg-gradient-to-r from-white to-gray-100 bg-clip-text text-transparent">{grade.subjectName}</div>
+                      <div className="text-sm text-white/90 leading-relaxed drop-shadow-sm">
                         {getTooltipText(grade)}
                       </div>
+                      <div className="absolute -top-1 -right-1 w-2 h-2 bg-gradient-to-r from-yellow-300 to-amber-400 rounded-full animate-ping shadow-lg" />
                     </div>
                   </TooltipContent>
                 </Tooltip>
