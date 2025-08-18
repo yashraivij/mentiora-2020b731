@@ -29,10 +29,9 @@ interface UserProgress {
 
 interface PredictedGradesGraphProps {
   userProgress: UserProgress[];
-  blurGrades?: boolean;
 }
 
-export const PredictedGradesGraph = ({ userProgress, blurGrades = false }: PredictedGradesGraphProps) => {
+export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
   const { user } = useAuth();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -395,7 +394,7 @@ export const PredictedGradesGraph = ({ userProgress, blurGrades = false }: Predi
               {gradesData.map((grade, index) => (
                 <Tooltip key={grade.subjectId}>
                   <TooltipTrigger asChild>
-                    <div className={`group relative transform transition-all duration-300 hover:scale-105 cursor-pointer ${blurGrades ? 'blur-sm' : ''}`}>
+                    <div className="group relative transform transition-all duration-300 hover:scale-105 cursor-pointer">
                       <div className="relative">
                         {/* Premium Bar with enhanced effects */}
                         <div className={`relative h-40 bg-gradient-to-t from-gray-100/30 to-gray-50/20 dark:from-gray-800/30 dark:to-gray-700/20 rounded-3xl overflow-hidden border-2 border-white/20 backdrop-blur-sm shadow-xl ${getSubjectShadow(index)} group-hover:shadow-2xl transition-all duration-500`}>
