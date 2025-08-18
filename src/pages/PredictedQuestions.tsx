@@ -65,8 +65,7 @@ const PredictedQuestions = () => {
   };
 
   const handleSubjectSelect = (subjectId: string) => {
-    // Dispatch event to open premium paywall
-    window.dispatchEvent(new CustomEvent('openPremiumPaywall'));
+    navigate(`/predicted-exam/${subjectId}`);
   };
 
   const getSubjectColor = (subjectId: string) => {
@@ -216,12 +215,14 @@ const PredictedQuestions = () => {
               </div>
             </div>
             
-            <div className="bg-white/15 backdrop-blur-sm border border-white/30 rounded-xl p-3 mb-3">
-              <div className="flex items-center justify-between text-white text-sm">
-                <span>Questions refresh:</span>
-                <RefreshCountdown />
+            {isCompleted && (
+              <div className="bg-white/15 backdrop-blur-sm border border-white/30 rounded-xl p-3 mb-3">
+                <div className="flex items-center justify-between text-white text-sm">
+                  <span>Questions refresh:</span>
+                  <RefreshCountdown />
+                </div>
               </div>
-            </div>
+            )}
             
             <div className="space-y-2">
               {isCompleted ? (
