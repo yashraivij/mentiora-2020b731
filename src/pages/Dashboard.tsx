@@ -1168,11 +1168,92 @@ const Dashboard = () => {
 
 
         {/* Predicted GCSE Grades Section */}
-        <PredictedGradesGraph userProgress={userProgress} />
+        {subscribed ? (
+          <PredictedGradesGraph userProgress={userProgress} />
+        ) : (
+          <Card className="bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-indigo-950 dark:to-blue-950 border border-indigo-200 dark:border-indigo-800 relative mb-8">
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="p-2 bg-indigo-100 dark:bg-indigo-900 rounded-lg">
+                    <LineChart className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-lg text-indigo-900 dark:text-indigo-100">Predicted GCSE Grades</CardTitle>
+                    <CardDescription className="text-indigo-600 dark:text-indigo-400">Based on current performance</CardDescription>
+                  </div>
+                </div>
+                <Badge variant="secondary" className="bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-700">
+                  <Crown className="w-3 h-3 mr-1" />
+                  Premium
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="relative">
+                <div className="blur-md">
+                  <PredictedGradesGraph userProgress={userProgress} />
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 text-center">
+                    <Lock className="w-8 h-8 mx-auto mb-2 text-primary" />
+                    <h3 className="font-semibold mb-2">Premium Feature</h3>
+                    <p className="text-sm text-muted-foreground mb-4">Unlock AI-powered grade predictions</p>
+                    <Button onClick={() => setShowPremiumPaywall(true)} size="sm">
+                      Upgrade to Premium
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
 
         {/* Predicted 2026 Questions Section */}
-        <PredictedQuestionsSection />
+        {subscribed ? (
+          <PredictedQuestionsSection />
+        ) : (
+          <Card className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950 dark:to-pink-950 border border-purple-200 dark:border-purple-800 mb-8">
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="p-2 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 rounded-lg">
+                    <Brain className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-lg text-purple-900 dark:text-purple-100">Predicted 2026 Questions</CardTitle>
+                    <CardDescription className="text-purple-600 dark:text-purple-400">AI-powered exam simulation</CardDescription>
+                  </div>
+                </div>
+                <Badge variant="secondary" className="bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-700">
+                  <Crown className="w-3 h-3 mr-1" />
+                  Premium
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center py-8">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="p-4 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 rounded-full">
+                    <Lock className="w-8 h-8 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">Premium Feature</h3>
+                    <p className="text-muted-foreground mb-4 max-w-md">Access AI-powered predicted questions for your 2026 exams with real exam timers and smart marking.</p>
+                  </div>
+                  <Button 
+                    onClick={() => setShowPremiumPaywall(true)}
+                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                  >
+                    <Crown className="w-4 h-4 mr-2" />
+                    Upgrade to Premium
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Revision Notebook - Premium Feature */}
         <div className="mb-8">
