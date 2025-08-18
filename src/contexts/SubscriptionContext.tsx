@@ -68,18 +68,10 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
     
     try {
       setIsLoading(true);
-      const { data, error } = await supabase.functions.invoke('create-checkout');
-      
-      if (error) {
-        console.error('Error creating checkout:', error);
-        return;
-      }
-      
-      if (data?.url) {
-        window.open(data.url, '_blank');
-      }
+      // Open the specific Stripe payment link
+      window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank');
     } catch (error) {
-      console.error('Error creating checkout:', error);
+      console.error('Error opening checkout:', error);
     } finally {
       setIsLoading(false);
     }
