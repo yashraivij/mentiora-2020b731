@@ -31,9 +31,9 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
     },
     {
       icon: BookOpen,
-      title: "Smart Auto-Notes",
-      description: "Automatically generate revision notes from your weak topics and mistakes",
-      highlight: "Personalized content"
+      title: "Weakness Analysis",
+      description: "Get detailed breakdowns of your weak areas with targeted improvement strategies",
+      highlight: "Personalized insights"
     },
     {
       icon: Award,
@@ -112,7 +112,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                 Unlock Your Academic Potential
               </h1>
               <p className="text-lg text-white/80 max-w-2xl mx-auto">
-                Transform your study routine and achieve Grade 9s to secure places at top universities with Mentiora Premium
+                Unlock your full academic potential and achieve Grade 9s to secure places at top universities with Mentiora Premium
               </p>
               
               {/* Sparkles Animation */}
