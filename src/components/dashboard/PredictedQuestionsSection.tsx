@@ -4,19 +4,12 @@ import { Badge } from "@/components/ui/badge";
 import { Crown, Star, Sparkles, Target, Clock, BookOpen, Zap, Trophy, Rocket } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { CountdownTimer } from "./CountdownTimer";
-import { PremiumPaywall } from "@/components/ui/premium-paywall";
-import { useState } from "react";
 
 export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
-  const [showPaywall, setShowPaywall] = useState(false);
 
   const handleStartPredicted = () => {
-    setShowPaywall(true);
-  };
-
-  const handleUpgrade = () => {
-    window.open('https://buy.stripe.com/test_cN23fH5Qu6Rv4Vy8ww', '_blank');
+    navigate('/predicted-questions');
   };
 
   return (
@@ -156,12 +149,6 @@ export const PredictedQuestionsSection = () => {
           </CardContent>
         </div>
       </div>
-      
-      <PremiumPaywall 
-        isOpen={showPaywall}
-        onClose={() => setShowPaywall(false)}
-        onUpgrade={handleUpgrade}
-      />
     </div>
   );
 };
