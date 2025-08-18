@@ -176,7 +176,11 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             </p>
             <Button 
               size="sm" 
-              onClick={() => window.dispatchEvent(new CustomEvent('openPremiumPaywall'))}
+              onClick={() => {
+                console.log('Upgrade button clicked');
+                const event = new CustomEvent('openPremiumPaywall');
+                window.dispatchEvent(event);
+              }}
               className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
             >
               <Crown className="h-3 w-3 mr-2" />
