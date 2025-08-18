@@ -934,20 +934,11 @@ const DashboardCopy = () => {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-                    Mentiora Copy
+                    Mentiora
                   </h1>
                   <div className="flex items-center space-x-2">
-                    {subscribed ? (
-                      <>
-                        <Crown className="h-3 w-3 text-amber-500" />
-                        <span className="text-xs font-medium text-muted-foreground">Premium</span>
-                      </>
-                    ) : (
-                      <>
-                        <User className="h-3 w-3 text-muted-foreground" />
-                        <span className="text-xs font-medium text-muted-foreground">Free Account</span>
-                      </>
-                    )}
+                    <Crown className="h-3 w-3 text-amber-500" />
+                    <span className="text-xs font-medium text-muted-foreground">Premium</span>
                   </div>
                 </div>
               </div>
