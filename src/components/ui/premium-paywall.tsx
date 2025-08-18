@@ -14,7 +14,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
     {
       icon: TrendingUp,
       title: "Predicted Grade 9s",
-      description: "AI analyzes your performance to predict Grade 9 outcomes across all subjects",
+      description: "Advanced analytics predict Grade 9 outcomes across all subjects based on your performance",
       highlight: "92% accuracy rate"
     },
     {
@@ -43,9 +43,9 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
     },
     {
       icon: Star,
-      title: "Priority Support",
-      description: "Get instant help with premium chat support and advanced analytics",
-      highlight: "24/7 availability"
+      title: "Advanced Analytics",
+      description: "Deep insights into your performance with detailed progress tracking and recommendations",
+      highlight: "Comprehensive reports"
     }
   ];
 
@@ -112,7 +112,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                 Unlock Your Academic Potential
               </h1>
               <p className="text-lg text-white/80 max-w-2xl mx-auto">
-                Join 50,000+ students achieving Grade 9s and securing places at top universities with Mentiora Premium
+                Transform your study routine and achieve Grade 9s to secure places at top universities with Mentiora Premium
               </p>
               
               {/* Sparkles Animation */}
@@ -145,6 +145,12 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                 </div>
                 <div className="text-amber-400 text-sm font-medium">Save 50% - First 3 months</div>
                 <div className="text-white/60 text-xs mt-2">Less than a single tutoring session</div>
+                <Button
+                  onClick={onUpgrade}
+                  className="w-full mt-4 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-semibold py-2 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                >
+                  Get Premium Now
+                </Button>
               </div>
             </div>
 
@@ -222,7 +228,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                 
                 <div className="text-center">
                   <p className="text-white/60 text-sm">
-                    💯 30-day money-back guarantee • 🔒 Cancel anytime • ⚡ Instant access
+                    🔒 Cancel anytime • ⚡ Instant access
                   </p>
                 </div>
                 
