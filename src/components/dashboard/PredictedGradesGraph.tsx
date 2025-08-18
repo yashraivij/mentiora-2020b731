@@ -280,24 +280,53 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
 
   const getTooltipText = (grade: GradeData) => {
     if (grade.finalGrade === '–') {
-      return "✨ Begin your premium revision journey to unlock exclusive grade predictions";
+      return "✨ Unlock premium grade predictions by starting your revision journey";
     }
+
+    const gradeNum = parseInt(grade.finalGrade);
+    const isHighGrade = !isNaN(gradeNum) && gradeNum >= 7;
+    const isMidGrade = !isNaN(gradeNum) && gradeNum >= 4 && gradeNum < 7;
+    const isLowGrade = grade.finalGrade === 'U' || (!isNaN(gradeNum) && gradeNum < 4);
 
     let text = '';
+    
+    // Handle different grade scenarios with appropriate language
     if (grade.practiceScore > 0 && grade.examGrade) {
-      text = `🎯 Premium Analysis: Your exceptional ${grade.practiceScore}% average across ${grade.subjectName} practice sessions, combined with your Grade ${grade.examGrade} performance on our advanced predicted exam, positions you perfectly for a Grade ${grade.finalGrade} in your actual GCSE. Our premium algorithms are confident in this prediction.`;
+      if (isHighGrade) {
+        text = `🎯 Exceptional Performance: Your outstanding ${grade.practiceScore}% mastery across ${grade.subjectName} practice sessions, combined with your stellar Grade ${grade.examGrade} on our advanced predicted exam, positions you perfectly for a Grade ${grade.finalGrade}. Our premium algorithms show high confidence in this elite prediction.`;
+      } else if (isMidGrade) {
+        text = `📈 Solid Foundation: Your ${grade.practiceScore}% performance across ${grade.subjectName} practice sessions and Grade ${grade.examGrade} predicted exam result indicate you're on track for a Grade ${grade.finalGrade}. Our premium analysis shows consistent progress.`;
+      } else {
+        text = `💪 Room for Growth: Based on your ${grade.practiceScore}% practice average and Grade ${grade.examGrade} predicted exam, our premium system forecasts a Grade ${grade.finalGrade}. With focused revision, significant improvement is absolutely achievable.`;
+      }
     } else if (grade.practiceScore > 0) {
-      text = `⚡ Elite Performance: Your outstanding ${grade.practiceScore}% mastery across ${grade.subjectName} practice sessions demonstrates you're perfectly positioned for a Grade ${grade.finalGrade} in your real GCSE. Our premium prediction engine is highly confident.`;
+      if (isHighGrade) {
+        text = `⚡ Elite Mastery: Your exceptional ${grade.practiceScore}% dominance across ${grade.subjectName} practice sessions demonstrates you're excellently positioned for a Grade ${grade.finalGrade}. Our premium prediction engine shows maximum confidence.`;
+      } else if (isMidGrade) {
+        text = `🚀 Strong Progress: Your solid ${grade.practiceScore}% performance across ${grade.subjectName} practice sessions shows you're well-prepared for a Grade ${grade.finalGrade}. Our premium algorithms indicate steady achievement.`;
+      } else {
+        text = `📚 Development Phase: Your current ${grade.practiceScore}% practice average in ${grade.subjectName} suggests a Grade ${grade.finalGrade} trajectory. Our premium system identifies key areas where targeted revision can unlock substantial improvements.`;
+      }
     } else if (grade.examGrade) {
-      text = `🏆 Premium Insight: Your impressive Grade ${grade.examGrade} on our advanced ${grade.subjectName} predicted exam indicates you're excellently prepared for a Grade ${grade.finalGrade} in the actual examination.`;
+      if (isHighGrade) {
+        text = `🏆 Premium Excellence: Your outstanding Grade ${grade.examGrade} on our advanced ${grade.subjectName} predicted exam demonstrates you're superbly prepared for a Grade ${grade.finalGrade} in the actual examination.`;
+      } else if (isMidGrade) {
+        text = `📊 Steady Achievement: Your Grade ${grade.examGrade} on our ${grade.subjectName} predicted exam indicates solid preparation for a Grade ${grade.finalGrade} in your real GCSE.`;
+      } else {
+        text = `🎯 Growth Opportunity: Your Grade ${grade.examGrade} on our ${grade.subjectName} predicted exam provides a baseline for achieving Grade ${grade.finalGrade}. Our premium insights show clear pathways for improvement.`;
+      }
     }
 
-    // Only show next grade advice for numeric grades (not U)
+    // Premium strategy advice based on grade level
     if (grade.finalGrade !== 'U' && !isNaN(parseInt(grade.finalGrade))) {
       const nextGrade = parseInt(grade.finalGrade) + 1;
       if (nextGrade <= 9) {
         const nextGradePercentage = gradeToPercentage(nextGrade.toString());
-        text += ` 🚀 Premium Strategy: To achieve the coveted Grade ${nextGrade}, our exclusive algorithm recommends maintaining ${nextGradePercentage}%+ mastery across all topics.`;
+        if (isHighGrade) {
+          text += ` 🌟 Elite Strategy: To secure the coveted Grade ${nextGrade}, our exclusive algorithms recommend maintaining ${nextGradePercentage}%+ mastery across all topics with precision focus.`;
+        } else {
+          text += ` 🚀 Premium Pathway: To unlock Grade ${nextGrade}, our advanced system recommends achieving ${nextGradePercentage}%+ consistency across all topics through strategic revision.`;
+        }
       }
     }
 
