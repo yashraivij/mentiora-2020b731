@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { TrendingUp, Crown, Target, Sparkles, Trophy, Zap } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useSubscription } from "@/contexts/SubscriptionContext";
 import { supabase } from "@/integrations/supabase/client";
 import { curriculum } from "@/data/curriculum";
 
@@ -34,6 +35,7 @@ interface PredictedGradesGraphProps {
 
 export const PredictedGradesGraph = ({ userProgress, subscribed = false }: PredictedGradesGraphProps) => {
   const { user } = useAuth();
+  const { createCheckout } = useSubscription();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -416,6 +418,62 @@ export const PredictedGradesGraph = ({ userProgress, subscribed = false }: Predi
       </CardHeader>
 
       <CardContent className="relative">
+        {/* Premium Upgrade CTA for Free Accounts */}
+        {!subscribed && (
+          <div className="absolute inset-0 z-50 bg-black/40 backdrop-blur-sm rounded-xl flex items-center justify-center">
+            <div className="relative max-w-md mx-auto p-8 bg-gradient-to-br from-purple-600/95 via-blue-600/95 to-emerald-600/95 backdrop-blur-sm rounded-2xl border-2 border-white/30 shadow-2xl overflow-hidden">
+              {/* Premium background effects */}
+              <div className="absolute inset-0 bg-gradient-to-r from-pink-400/20 via-purple-400/20 to-blue-400/20 animate-pulse" />
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-yellow-300/30 to-amber-400/30 rounded-full blur-xl" />
+              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-tr from-emerald-400/30 to-teal-400/30 rounded-full blur-lg" />
+              
+              {/* Floating elements */}
+              <div className="absolute top-4 right-6 w-2 h-2 bg-gradient-to-r from-yellow-300 to-amber-400 rounded-full animate-ping" />
+              <div className="absolute bottom-6 left-6 w-1.5 h-1.5 bg-gradient-to-r from-emerald-300 to-teal-400 rounded-full animate-bounce" />
+              
+              <div className="relative text-center space-y-4">
+                <div className="flex items-center justify-center space-x-2">
+                  <Crown className="h-8 w-8 text-amber-400 animate-pulse" />
+                  <h3 className="text-2xl font-black text-white drop-shadow-lg bg-gradient-to-r from-white to-gray-100 bg-clip-text text-transparent">
+                    Unlock Premium Insights
+                  </h3>
+                  <Sparkles className="h-6 w-6 text-yellow-400 animate-bounce" />
+                </div>
+                
+                <p className="text-white/90 text-sm leading-relaxed drop-shadow-sm">
+                  Get detailed grade predictions, hover insights, and precise percentage tracking for all your subjects.
+                </p>
+                
+                <div className="flex flex-col space-y-2 pt-2">
+                  <div className="flex items-center space-x-2 text-white/80 text-xs">
+                    <Zap className="h-4 w-4 text-emerald-400" />
+                    <span>Unblurred grade predictions</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-white/80 text-xs">
+                    <Target className="h-4 w-4 text-blue-400" />
+                    <span>Detailed hover tooltips</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-white/80 text-xs">
+                    <TrendingUp className="h-4 w-4 text-purple-400" />
+                    <span>Advanced analytics</span>
+                  </div>
+                </div>
+                
+                <button
+                  onClick={createCheckout}
+                  className="w-full mt-6 px-6 py-3 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 text-white font-bold rounded-xl shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/40 transform hover:scale-105 transition-all duration-300 animate-pulse"
+                >
+                  <span className="flex items-center justify-center space-x-2">
+                    <Crown className="h-5 w-5" />
+                    <span>Upgrade to Premium</span>
+                    <Sparkles className="h-5 w-5" />
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         {gradesData.some(g => g.finalGrade !== '–') ? (
           <TooltipProvider>
             <div className="space-y-6">
