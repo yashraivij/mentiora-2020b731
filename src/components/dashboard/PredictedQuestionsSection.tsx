@@ -45,15 +45,15 @@ export const PredictedQuestionsSection = () => {
                       Predicted 2026 Questions
                     </CardTitle>
                     <CardDescription className="text-white/90 text-lg">
-                      Premium exam simulation
+                      AI-powered exam simulation
                     </CardDescription>
                   </div>
                 </div>
                 
                 <div className="flex items-center space-x-3">
-                  <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold px-3 py-1 hover:from-yellow-300 hover:to-orange-300">
-                    <Crown className="h-3 w-3 mr-1" />
-                    PREMIUM EXCLUSIVE
+                  <Badge className="bg-gradient-to-r from-blue-400 to-cyan-400 text-white font-bold px-3 py-1 hover:from-blue-300 hover:to-cyan-300">
+                    <Sparkles className="h-3 w-3 mr-1" />
+                    AI POWERED
                   </Badge>
                   <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
                     <Zap className="h-3 w-3 mr-1" />
@@ -136,8 +136,8 @@ export const PredictedQuestionsSection = () => {
               onClick={handleStartPredicted}
               className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-4 px-8 rounded-2xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300 text-lg"
             >
-              <Crown className="h-5 w-5 mr-3" />
-              Start Premium Exam Practice
+              <Rocket className="h-5 w-5 mr-3" />
+              Start Exam Practice
               <Sparkles className="h-5 w-5 ml-3" />
             </Button>
           </CardContent>

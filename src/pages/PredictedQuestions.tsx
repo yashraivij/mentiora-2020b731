@@ -67,7 +67,7 @@ const PredictedQuestions = () => {
   };
 
   const handleSubjectSelect = (subjectId: string) => {
-    setShowPaywall(true);
+    navigate(`/predicted-exam/${subjectId}`);
   };
 
   const handleUpgrade = () => {
@@ -254,7 +254,7 @@ const PredictedQuestions = () => {
                      className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
                      onClick={(e) => {
                        e.stopPropagation();
-                       setShowPaywall(true);
+                       navigate(`/predicted-exam/${subject.id}`);
                      }}
                    >
                      <RotateCcw className="h-4 w-4 mr-2" />
@@ -270,8 +270,8 @@ const PredictedQuestions = () => {
                     handleSubjectSelect(subject.id);
                   }}
                 >
-                  <Crown className="h-4 w-4 mr-2" />
-                  Start Premium Exam
+                  <Rocket className="h-4 w-4 mr-2" />
+                  Start Exam Practice
                   <Sparkles className="h-4 w-4 ml-2" />
                 </Button>
               )}
@@ -322,7 +322,7 @@ const PredictedQuestions = () => {
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-white">Predicted 2026 Questions</h1>
-                  <p className="text-sm text-white/90">Premium exam simulation</p>
+                  <p className="text-sm text-white/90">AI-powered exam simulation</p>
                 </div>
               </div>
             </div>
@@ -335,9 +335,9 @@ const PredictedQuestions = () => {
         {/* Header Section */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-3 mb-4">
-            <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold px-3 py-1 hover:from-yellow-300 hover:to-orange-300">
-              <Crown className="h-3 w-3 mr-1" />
-              PREMIUM EXCLUSIVE
+            <Badge className="bg-gradient-to-r from-blue-400 to-cyan-400 text-white font-bold px-3 py-1 hover:from-blue-300 hover:to-cyan-300">
+              <Sparkles className="h-3 w-3 mr-1" />
+              AI POWERED
             </Badge>
             <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
               <Zap className="h-3 w-3 mr-1" />
