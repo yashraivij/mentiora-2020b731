@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { TrendingUp, Crown, Target, Sparkles, Trophy, Zap } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useSubscription } from "@/contexts/SubscriptionContext";
 import { supabase } from "@/integrations/supabase/client";
 import { curriculum } from "@/data/curriculum";
 
@@ -34,7 +33,6 @@ interface PredictedGradesGraphProps {
 
 export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
   const { user } = useAuth();
-  const { subscribed } = useSubscription();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -448,8 +446,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                             </>
                           )}
                           
-                          {/* Enhanced Grade number with conditional blur for free accounts */}
-                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110 ${!subscribed ? 'blur-lg' : ''}`}>
+                          {/* Enhanced Grade number */}
+                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110`}>
                             {grade.finalGrade}
                           </div>
 
