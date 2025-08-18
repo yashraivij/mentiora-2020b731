@@ -956,12 +956,21 @@ const Dashboard = () => {
               {/* Manual subscription refresh button for users who just paid */}
               <Button 
                 onClick={async () => {
-                  console.log('Manual subscription refresh triggered');
-                  console.log('User:', user?.email);
+                  console.log('BUTTON CLICKED - Manual subscription refresh triggered');
+                  console.log('User object:', user);
+                  console.log('User email:', user?.email);
                   console.log('Current subscribed status:', subscribed);
+                  console.log('checkSubscription function:', checkSubscription);
+                  
+                  if (!user) {
+                    console.error('No user found');
+                    return;
+                  }
+                  
                   try {
+                    console.log('Calling checkSubscription...');
                     await checkSubscription();
-                    console.log('Subscription check completed');
+                    console.log('Subscription check completed successfully');
                   } catch (error) {
                     console.error('Error during subscription check:', error);
                   }
