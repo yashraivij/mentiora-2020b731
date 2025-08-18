@@ -713,6 +713,39 @@ export type Database = {
         }
         Relationships: []
       }
+      question_refresh_log: {
+        Row: {
+          created_at: string | null
+          details: Json | null
+          errors_count: number | null
+          execution_time_ms: number | null
+          id: string
+          questions_updated: number | null
+          refresh_date: string | null
+          status: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          details?: Json | null
+          errors_count?: number | null
+          execution_time_ms?: number | null
+          id?: string
+          questions_updated?: number | null
+          refresh_date?: string | null
+          status?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          details?: Json | null
+          errors_count?: number | null
+          execution_time_ms?: number | null
+          id?: string
+          questions_updated?: number | null
+          refresh_date?: string | null
+          status?: string | null
+        }
+        Relationships: []
+      }
       quizzes: {
         Row: {
           completed: boolean | null
