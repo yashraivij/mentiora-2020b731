@@ -157,9 +157,9 @@ const DashboardFree = () => {
         setTimeout(() => {
           setShowTimeSavedNotification(true);
         }, 100);
-
+        
         localStorage.setItem(`mentiora_time_saved_${user.id}`, newTimeSavedHours.toString());
-
+        
         // Auto-hide notification after 10 seconds
         setTimeout(() => {
           setShowTimeSavedNotification(false);
@@ -244,7 +244,7 @@ const DashboardFree = () => {
         .eq('user_id', user.id)
         .order('completed_at', { ascending: false })
         .limit(1)
-        .single();
+        .maybeSingle();
 
       if (error || !recentResult) return;
 
@@ -354,7 +354,7 @@ const DashboardFree = () => {
         .from('weak_topics')
         .select('topics')
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
 
       if (error && error.code !== 'PGRST116') {
         console.error('Error loading weak topics:', error);
@@ -408,21 +408,16 @@ const DashboardFree = () => {
         return;
       }
 
-      console.log('=== DEBUG: Database records ===', data);
-
       if (data) {
         // Convert database records to subject IDs based on curriculum
         const subjectIds = data.map(record => {
-          console.log(`=== Processing record: ${record.subject_name} | ${record.exam_board} ===`);
           const examBoard = record.exam_board.toLowerCase();
           
           // Check each potential match explicitly
           if (record.subject_name === 'Physics' && examBoard === 'aqa') {
-            console.log('✅ Matched Physics AQA to physics ID');
             return 'physics';
           }
           if (record.subject_name === 'Physics' && examBoard === 'edexcel') {
-            console.log('✅ Matched Physics Edexcel to physics-edexcel ID');
             return 'physics-edexcel';
           }
           
@@ -435,15 +430,12 @@ const DashboardFree = () => {
           );
           
           if (subject) {
-            console.log(`✅ Found subject: ${subject.id} for ${record.subject_name}`);
             return subject.id;
           } else {
-            console.log(`❌ No match found for: ${record.subject_name} | ${record.exam_board}`);
             return null;
           }
         }).filter(Boolean) as string[];
         
-        console.log('=== Final subject IDs ===', subjectIds);
         setUserSubjects(subjectIds);
       }
     } catch (error) {
@@ -451,786 +443,593 @@ const DashboardFree = () => {
     }
   };
 
-  // User activity tracking functions
-  const recordUserActivity = async () => {
-    if (!user?.id) return;
-
-    try {
-      const today = new Date().toISOString().split('T')[0];
-      
-      const { error } = await supabase
-        .from('daily_activity')
-        .upsert(
-          {
-            user_id: user.id,
-            activity_date: today,
-            last_active: new Date().toISOString()
-          },
-          {
-            onConflict: 'user_id,activity_date'
-          }
-        );
-
-      if (error) {
-        console.error('Error recording activity:', error);
-      }
-    } catch (error) {
-      console.error('Error recording activity:', error);
-    }
-  };
-
+  // Streak tracking state and functions
   const [currentStreak, setCurrentStreak] = useState(0);
+  const [publicStreakProfiles, setPublicStreakProfiles] = useState<any[]>([]);
 
   const fetchCurrentStreak = async () => {
     if (!user?.id) return;
 
     try {
-      await recordUserActivity();
-      
-      const { data, error } = await supabase
-        .from('daily_activity')
-        .select('activity_date')
+      // Record today's activity
+      await supabase
+        .from('user_activities')
+        .insert({
+          user_id: user.id,
+          activity_type: 'login',
+          session_id: crypto.randomUUID(),
+          metadata: { platform: 'web' }
+        });
+
+      // Get streak using the database function
+      const { data: streakData, error: streakError } = await supabase
+        .rpc('get_user_streak', { user_uuid: user.id });
+
+      if (streakError) {
+        console.error('Error fetching streak:', streakError);
+        return;
+      }
+
+      const streakDays = streakData || 0;
+      setCurrentStreak(streakDays);
+
+      // Fetch daily activity data for stress monitoring using daily_usage table
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+      const { data: activityData } = await supabase
+        .from('daily_usage')
+        .select('date, activities_count')
         .eq('user_id', user.id)
-        .order('activity_date', { ascending: false });
+        .gte('date', sevenDaysAgo.toISOString().split('T')[0])
+        .order('date', { ascending: true });
 
-      if (error) {
-        console.error('Error fetching streak:', error);
-        return;
+      // Map the activity data for stress calculation
+      const mappedActivityData = activityData?.map((entry: any) => ({
+        date: entry.date,
+        activityCount: entry.activities_count || 0
+      })) || [];
+
+      const last24Hours = new Date();
+      last24Hours.setHours(last24Hours.getHours() - 24);
+
+      const { data: recentActivity } = await supabase
+        .from('daily_usage')
+        .select('date, activities_count')
+        .eq('user_id', user.id)
+        .gte('date', last24Hours.toISOString().split('T')[0]);
+
+      let recentActivityCount = 0;
+      if (recentActivity && recentActivity.length > 0) {
+        const today = new Date().toISOString().split('T')[0];
+        const todayData = recentActivity.find((item: any) => item.date === today);
+        recentActivityCount = todayData?.activities_count || 0;
       }
 
-      if (!data || data.length === 0) {
-        setCurrentStreak(0);
-        return;
-      }
+      // Simple stress tracking without complex metrics
 
-      // Calculate streak
-      let streak = 0;
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-
-      // Convert activity dates to Date objects and sort
-      const sortedDates = data
-        .map(item => new Date(item.activity_date))
-        .sort((a, b) => b.getTime() - a.getTime());
-
-      // Check if there's activity today or yesterday
-      const latestActivity = sortedDates[0];
-      const daysDifference = Math.floor((today.getTime() - latestActivity.getTime()) / (1000 * 60 * 60 * 24));
-      
-      if (daysDifference > 1) {
-        // If latest activity is more than 1 day ago, streak is broken
-        setCurrentStreak(0);
-        return;
-      }
-
-      // Count consecutive days
-      let expectedDate = new Date(today);
-      if (daysDifference === 1) {
-        // If latest activity was yesterday, start counting from yesterday
-        expectedDate.setDate(expectedDate.getDate() - 1);
-      }
-
-      for (const activityDate of sortedDates) {
-        const activityDateOnly = new Date(activityDate);
-        activityDateOnly.setHours(0, 0, 0, 0);
-        
-        if (activityDateOnly.getTime() === expectedDate.getTime()) {
-          streak++;
-          expectedDate.setDate(expectedDate.getDate() - 1);
-        } else {
-          break;
+      // Check for streak celebration milestones (3, 7, 14, 30, 100 days)
+      const milestones = [3, 7, 14, 30, 100];
+      for (const milestone of milestones) {
+        if (streakDays === milestone) {
+          const hasSeenCelebration = await hasSeenStreakCelebration(milestone);
+          if (!hasSeenCelebration) {
+            console.log(`🎉 Triggering ${milestone}-day streak celebration!`);
+            setShowStreakCelebration(true);
+            await markStreakCelebrationViewed(milestone);
+            break; // Show only one celebration at a time
+          }
         }
       }
-
-      setCurrentStreak(streak);
-
-      // Check for streak celebrations
-      const hasSeenStreak3 = await hasSeenStreakCelebration(3);
-      const hasSeenStreak7 = await hasSeenStreakCelebration(7);
-      const hasSeenStreak14 = await hasSeenStreakCelebration(14);
-
-      // Show celebration for new milestones
-      if (streak >= 14 && !hasSeenStreak14) {
-        setTimeout(() => setShowStreakCelebration(true), 2000);
-      } else if (streak >= 7 && !hasSeenStreak7) {
-        setTimeout(() => setShowStreakCelebration(true), 2000);
-      } else if (streak >= 3 && !hasSeenStreak3) {
-        setTimeout(() => setShowStreakCelebration(true), 2000);
-      }
-
     } catch (error) {
-      console.error('Error fetching streak:', error);
+      console.error('Error in fetchCurrentStreak:', error);
     }
   };
 
-  const getStudyStreak = () => {
-    return currentStreak;
-  };
-
-  // Create or update public profile for users with 14+ day streaks
   const checkAndUpdatePublicProfile = async () => {
     if (!user?.id) return;
 
     try {
-      const streak = currentStreak;
-      
-      if (streak >= 14) {
-        // Check if public profile already exists
-        const { data: existingProfile, error: checkError } = await supabase
-          .from('public_streak_profiles')
-          .select('id')
+      // Get user's current streak
+      const { data: streakData, error: streakError } = await supabase
+        .rpc('get_user_streak', { user_uuid: user.id });
+
+      if (streakError) {
+        console.error('Error fetching streak for public profile:', streakError);
+        return;
+      }
+
+      const streakDays = streakData || 0;
+
+      // Fetch public profiles for streak display using public_profiles table
+      const { data: publicProfiles } = await supabase
+        .from('public_profiles')
+        .select('*')
+        .order('streak_days', { ascending: false })
+        .limit(5);
+
+      setPublicStreakProfiles(publicProfiles || []);
+
+      // Check for 14+ day streak achievement
+      const { data: highStreakProfiles } = await supabase
+        .from('public_profiles')
+        .select('*')
+        .gte('streak_days', 14)
+        .order('streak_days', { ascending: false });
+
+      // Update user's own public profile if they have 14+ day streak
+      if (streakDays >= 14 && user?.id) {
+        const { data: profile } = await supabase
+          .from('public_profiles')
+          .select('*')
           .eq('user_id', user.id)
-          .single();
+          .maybeSingle();
 
-        if (checkError && checkError.code !== 'PGRST116') {
-          console.error('Error checking public profile:', checkError);
-          return;
-        }
-
-        // Get user's first name for the profile
-        const firstName = getFirstName();
-        
-        if (!existingProfile) {
+        if (!profile) {
           // Create new public profile
-          const { error: insertError } = await supabase
-            .from('public_streak_profiles')
+          const { data: userProfile } = await supabase
+            .from('public_profiles')
             .insert({
               user_id: user.id,
-              display_name: firstName,
-              current_streak: streak,
-              is_visible: true,
-              created_at: new Date().toISOString()
-            });
-
-          if (insertError) {
-            console.error('Error creating public profile:', insertError);
-          } else {
-            console.log('✅ Created public streak profile for user with 14+ day streak');
-          }
-        } else {
-          // Update existing profile with current streak
-          const { error: updateError } = await supabase
-            .from('public_streak_profiles')
-            .update({
-              current_streak: streak,
-              display_name: firstName
+              username: user.email?.split('@')[0] || 'Anonymous',
+              display_name: user.email?.split('@')[0] || 'Anonymous',
+              streak_days: streakDays,
+              avatar_url: null
             })
-            .eq('user_id', user.id);
+            .select()
+            .maybeSingle();
 
-          if (updateError) {
-            console.error('Error updating public profile:', updateError);
-          } else {
-            console.log('✅ Updated public streak profile with current streak');
-          }
+        } else if (profile.streak_days < streakDays) {
+          // Update existing profile
+          await supabase
+            .from('public_profiles')
+            .update({ streak_days: streakDays })
+            .eq('user_id', user.id);
         }
       }
     } catch (error) {
-      console.error('Error managing public profile:', error);
+      console.error('Error updating public profile:', error);
     }
   };
 
-  const handleLogout = async () => {
-    await logout();
-    navigate('/login');
-  };
-
-  const handlePractice = (subjectId: string) => {
-    navigate(`/practice/${subjectId}`);
-  };
-
-  const getFirstName = () => {
-    if (!user?.email) return 'Student';
-    const emailName = user.email.split('@')[0];
-    const capitalizedName = emailName.charAt(0).toUpperCase() + emailName.slice(1);
-    return capitalizedName;
-  };
-
-  const getTimeBasedGreeting = () => {
-    const hour = new Date().getHours();
-    
-    if (hour < 12) {
-      return "Good morning";
-    } else if (hour < 17) {
-      return "Good afternoon";
-    } else {
-      return "Good evening";
-    }
-  };
-
-  const getSubjectProgress = (subjectId: string) => {
-    const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
-    if (subjectProgress.length === 0) return 0;
-    return Math.round(subjectProgress.reduce((sum, p) => sum + p.averageScore, 0) / subjectProgress.length);
-  };
-
-  const getLastActivity = (subjectId: string) => {
-    const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
-    if (subjectProgress.length === 0) return null;
-    const latest = subjectProgress.reduce((latest, current) => 
-      new Date(current.lastAttempt) > new Date(latest.lastAttempt) ? current : latest
-    );
-    return new Date(latest.lastAttempt);
-  };
-
-  const getSubjectColor = (subjectId: string) => {
-    const colors = [
-      'from-blue-500 to-blue-600',
-      'from-green-500 to-green-600',
-      'from-purple-500 to-purple-600',
-      'from-orange-500 to-orange-600',
-      'from-pink-500 to-pink-600',
-      'from-indigo-500 to-indigo-600',
-      'from-red-500 to-red-600',
-      'from-yellow-500 to-yellow-600',
-      'from-teal-500 to-teal-600',
-    ];
-    const index = Math.abs(subjectId.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0)) % colors.length;
-    return colors[index];
-  };
-
-  const getOverallProgress = () => {
-    if (userProgress.length === 0) return 0;
-    return Math.round(userProgress.reduce((sum, p) => sum + p.averageScore, 0) / userProgress.length);
-  };
-
-  const getMasteredTopics = () => {
-    return userProgress.filter(p => p.averageScore >= 85).length;
-  };
-
-  const togglePinSubject = (subjectId: string) => {
-    const updatedPinned = pinnedSubjects.includes(subjectId)
-      ? pinnedSubjects.filter(id => id !== subjectId)
-      : [...pinnedSubjects, subjectId];
-    
-    setPinnedSubjects(updatedPinned);
-    localStorage.setItem(`mentiora_pinned_subjects_${user?.id}`, JSON.stringify(updatedPinned));
-  };
-
-  const toggleUserSubject = async (subjectId: string, subjectName: string, isAdd: boolean) => {
+  const handleSubjectToggle = async (subjectId: string, subjectName: string = '', isAdd: boolean = true) => {
     if (!user?.id) return;
 
     try {
       if (isAdd) {
-        // Add subject to user's list
-        const { error } = await supabase
+        // Find the subject in curriculum to get proper name
+        const subject = curriculum.find(s => s.id === subjectId);
+        const actualSubjectName = subject?.name || subjectName;
+        
+        await supabase
           .from('user_subjects')
           .insert({
             user_id: user.id,
-            subject_name: subjectName,
-            exam_board: selectedExamBoard.toUpperCase()
+            subject_name: actualSubjectName,
+            exam_board: selectedExamBoard,
+            predicted_grade: 'U' // Required field
           });
-
-        if (error) {
-          console.error('Error adding subject:', error);
-          toast({
-            title: "Error",
-            description: "Failed to add subject. Please try again.",
-            variant: "destructive",
-          });
-          return;
-        }
 
         setUserSubjects(prev => [...prev, subjectId]);
+        
         toast({
           title: "Subject Added",
-          description: `${subjectName} has been added to your subjects.`,
+          description: `${actualSubjectName} has been added to your subjects.`
         });
       } else {
-        // Remove subject from user's list
-        const { error } = await supabase
-          .from('user_subjects')
-          .delete()
-          .eq('user_id', user.id)
-          .eq('subject_name', subjectName)
-          .eq('exam_board', selectedExamBoard.toUpperCase());
+        // Handle removal
+        const subject = curriculum.find(s => s.id === subjectId);
+        if (subject) {
+          await supabase
+            .from('user_subjects')
+            .delete()
+            .eq('user_id', user.id)
+            .eq('subject_name', subject.name)
+            .eq('exam_board', selectedExamBoard);
 
-        if (error) {
-          console.error('Error removing subject:', error);
+          setUserSubjects(prev => prev.filter(id => id !== subjectId));
+          
           toast({
-            title: "Error",
-            description: "Failed to remove subject. Please try again.",
-            variant: "destructive",
+            title: "Subject Removed",
+            description: `${subject.name} has been removed from your subjects.`
           });
-          return;
         }
-
-        setUserSubjects(prev => prev.filter(id => id !== subjectId));
-        toast({
-          title: "Subject Removed",
-          description: `${subjectName} has been removed from your subjects.`,
-        });
       }
     } catch (error) {
       console.error('Error toggling subject:', error);
       toast({
         title: "Error",
-        description: "Something went wrong. Please try again.",
-        variant: "destructive",
+        description: "Failed to update your subjects. Please try again.",
+        variant: "destructive"
       });
     }
   };
 
-  const getSortedSubjects = () => {
-    const subjects = curriculum.filter(subject => {
-      if (subjectsTab === 'my-subjects') {
-        return userSubjects.includes(subject.id);
-      }
-      return true;
-    });
-    
-    const pinnedFirst = subjects.sort((a, b) => {
-      const aPinned = pinnedSubjects.includes(a.id);
-      const bPinned = pinnedSubjects.includes(b.id);
-      
-      if (aPinned && !bPinned) return -1;
-      if (!aPinned && bPinned) return 1;
-      
-      if (sortBy === 'alphabetical') {
-        return a.name.localeCompare(b.name);
-      } else if (sortBy === 'weakest') {
-        return getSubjectProgress(a.id) - getSubjectProgress(b.id);
-      } else if (sortBy === 'progress') {
-        return getSubjectProgress(b.id) - getSubjectProgress(a.id);
-      }
-      
-      return 0;
-    });
-    
-    return pinnedFirst;
+  const handlePinSubject = (subjectId: string) => {
+    if (!user?.id) return;
+
+    const newPinnedSubjects = pinnedSubjects.includes(subjectId)
+      ? pinnedSubjects.filter(id => id !== subjectId)
+      : [...pinnedSubjects, subjectId];
+
+    setPinnedSubjects(newPinnedSubjects);
+    localStorage.setItem(`mentiora_pinned_subjects_${user.id}`, JSON.stringify(newPinnedSubjects));
   };
 
-  const examBoards = [
-    { id: 'aqa', name: 'AQA' },
-    { id: 'edexcel', name: 'Edexcel' },
-    { id: 'ccea', name: 'CCEA' },
-    { id: 'ocr', name: 'OCR' },
-    { id: 'wjec', name: 'WJEC' }
-  ];
+  // Mock stress level calculation
+  const getCurrentStressLevel = () => 'low';
 
-  // Notification handlers
-  const handleNotificationClick = () => {
-    if (notification?.action === 'practice' && notification?.subjectId) {
-      handlePractice(notification.subjectId);
-      clearNotification();
-    } else if (notification?.action === 'exam') {
-      navigate('/predicted-questions');
-      clearNotification();
+  // Updated notification handling
+  const handleNotificationAction = () => {
+    hideNotification();
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/');
+    } catch (error) {
+      console.error('Error logging out:', error);
     }
   };
 
-  const handleNotifyClick = () => {
-    setIsNotifyClicked(true);
-    
-    // Optional: Add actual notification signup logic here
-    setTimeout(() => {
-      setIsNotifyClicked(false);
-    }, 3000);
+  // Define filtered subjects based on exam board and search criteria
+  const getFilteredSubjects = () => {
+    const subjectsToShow = subjectsTab === 'my-subjects' ? 
+      curriculum.filter(subject => userSubjects.includes(subject.id)) : 
+      curriculum.filter(subject => 
+        selectedExamBoard === 'all' ||
+        subject.id.includes(selectedExamBoard) ||
+        (selectedExamBoard === 'aqa' && !subject.id.includes('edexcel') && !subject.id.includes('ocr'))
+      );
+
+    const sorted = [...subjectsToShow].sort((a, b) => {
+      // Always show pinned subjects first
+      const aIsPinned = pinnedSubjects.includes(a.id);
+      const bIsPinned = pinnedSubjects.includes(b.id);
+      
+      if (aIsPinned && !bIsPinned) return -1;
+      if (!aIsPinned && bIsPinned) return 1;
+      
+      // Then sort by the selected criteria
+      if (sortBy === 'alphabetical') {
+        return a.name.localeCompare(b.name);
+      } else if (sortBy === 'weakest') {
+        const aProgress = userProgress.filter(p => p.subjectId === a.id);
+        const bProgress = userProgress.filter(p => p.subjectId === b.id);
+        const aAvg = aProgress.length > 0 ? aProgress.reduce((sum, p) => sum + p.averageScore, 0) / aProgress.length : 0;
+        const bAvg = bProgress.length > 0 ? bProgress.reduce((sum, p) => sum + p.averageScore, 0) / bProgress.length : 0;
+        return aAvg - bAvg;
+      } else { // progress
+        const aProgress = userProgress.filter(p => p.subjectId === a.id);
+        const bProgress = userProgress.filter(p => p.subjectId === b.id);
+        const aTotalAttempts = aProgress.reduce((sum, p) => sum + p.attempts, 0);
+        const bTotalAttempts = bProgress.reduce((sum, p) => sum + p.attempts, 0);
+        return bTotalAttempts - aTotalAttempts;
+      }
+    });
+
+    return sorted;
   };
 
+  // UI rendering
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+    <div className="min-h-screen bg-background">
+      {/* Celebrations removed for free version */}
+
       {/* Header */}
-      <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-              Mentiora
-            </h1>
-            <Badge variant="secondary" className="hidden md:inline-flex">
-              Free Dashboard
-            </Badge>
-          </div>
-          
-          <div className="flex items-center space-x-4">
-            <ColorThemeToggle />
-            <ThemeToggle />
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={handleLogout}
-              className="h-9 w-9"
-            >
-              <User className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      <div className="container mx-auto p-6 space-y-8">
-        {/* Welcome Section */}
-        <div className="flex flex-col lg:flex-row items-start justify-between gap-6">
-          <div className="space-y-2">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-4xl font-bold text-foreground"
-            >
-              {getTimeBasedGreeting()}, {getFirstName()}! 👋
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-muted-foreground text-lg"
-            >
-              Ready to ace your GCSEs? Let's continue your journey.
-            </motion.p>
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="flex items-center space-x-3 pt-2"
-            >
-              <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white border-0 text-sm font-medium px-3 py-1">
-                <Flame className="h-4 w-4 mr-1" />
-                {getStudyStreak()} day streak
+      <div className="border-b border-border">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <h1 className="text-2xl font-bold">Dashboard</h1>
+              <Badge variant="outline" className="flex items-center gap-1">
+                <Flame className="h-3 w-3 text-orange-500" />
+                {currentStreak} day streak
               </Badge>
-              {userProgress.length > 0 && (
-                <Badge variant="secondary" className="text-sm font-medium px-3 py-1">
-                  <BookOpen className="h-4 w-4 mr-1" />
-                  {userProgress.reduce((sum, p) => sum + p.attempts, 0)} questions completed
-                </Badge>
-              )}
-            </motion.div>
-          </div>
-
-          {currentStreak >= 14 && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              <PublicStreakProfiles />
-            </motion.div>
-          )}
-        </div>
-
-        {/* Personalized Notification */}
-        {notification && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-          >
-            <Card className="border-primary/20 bg-gradient-to-r from-primary/5 to-primary/10">
-              <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className="p-2 rounded-full bg-primary/10">
-                      <Bell className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-lg text-foreground">{notification.title}</CardTitle>
-                      <p className="text-muted-foreground text-sm mt-1">{notification.message}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Button onClick={handleNotificationClick} size="sm">
-                      {notification.action === 'practice' ? 'Practice Now' : 'Start Exam'}
-                    </Button>
-                    <Button variant="ghost" size="sm" onClick={hideNotification}>
-                      ✕
-                    </Button>
-                  </div>
-                </div>
-              </CardHeader>
-            </Card>
-          </motion.div>
-        )}
-
-        {/* Predicted Grades */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
-          <PredictedGradesGraph userProgress={userProgress} />
-        </motion.div>
-
-        {/* Predicted Questions - Fully accessible in free version */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-        >
-          <PredictedQuestionsSection />
-        </motion.div>
-
-        {/* Study Playlist - Free to use */}
-        {getStudyStreak() >= 7 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-          >
-            <StudyPlaylist />
-          </motion.div>
-        )}
-
-        {/* Subject Selection */}
-        <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <div>
-              <h2 className="text-2xl font-bold text-foreground mb-2">Your Subjects</h2>
-              <p className="text-muted-foreground">Practice questions and track your progress</p>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Tabs value={subjectsTab} onValueChange={(value) => setSubjectsTab(value as any)} className="w-full sm:w-auto">
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="my-subjects">My Subjects</TabsTrigger>
-                  <TabsTrigger value="all-subjects">All Subjects</TabsTrigger>
-                </TabsList>
-              </Tabs>
-              
-              <div className="flex items-center space-x-2">
-                <Filter className="h-4 w-4 text-muted-foreground" />
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as any)}
-                  className="bg-background border border-border rounded-md px-3 py-1 text-sm"
+            <div className="flex items-center gap-4">
+              {/* Notification Bell */}
+              {notification && (
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="relative"
                 >
-                  <option value="progress">Sort by Progress</option>
-                  <option value="alphabetical">Sort Alphabetically</option>
-                  <option value="weakest">Sort by Weakest</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <Tabs value={selectedExamBoard} onValueChange={setSelectedExamBoard}>
-            <TabsList className="grid w-full grid-cols-5">
-              {examBoards.map(board => (
-                <TabsTrigger key={board.id} value={board.id}>
-                  {board.name}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-
-            {examBoards.map(examBoard => (
-              <TabsContent key={examBoard.id} value={examBoard.id} className="mt-6">
-                {subjectsTab === 'my-subjects' && userSubjects.length === 0 ? (
-                  <Card className="p-8 text-center">
-                    <CardContent>
-                      <BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                      <h3 className="text-lg font-semibold mb-2">No subjects added yet</h3>
-                      <p className="text-muted-foreground mb-4">
-                        Switch to "All Subjects" to browse and add subjects to your list.
-                      </p>
-                      <Button onClick={() => setSubjectsTab('all-subjects')}>
-                        Browse All Subjects
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleNotificationAction}
+                    className="relative"
+                  >
+                    <Bell className="h-4 w-4" />
+                    <span className="absolute -top-1 -right-1 h-2 w-2 bg-primary rounded-full"></span>
+                  </Button>
+                  
+                  {/* Notification popup */}
+                  <div className="absolute top-full right-0 mt-2 w-80 bg-card border border-border rounded-lg shadow-lg p-4 z-50">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <h4 className="font-medium mb-1">Notification</h4>
+                        <p className="text-sm text-muted-foreground mb-3">You have a notification</p>
+                        <div className="flex gap-2">
+                          <Button size="sm" onClick={handleNotificationAction}>
+                            Dismiss
+                          </Button>
+                          <Button variant="outline" size="sm" onClick={clearNotification}>
+                            Cancel
+                          </Button>
+                        </div>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={clearNotification}
+                        className="h-6 w-6 p-0"
+                      >
+                        ×
                       </Button>
-                    </CardContent>
-                  </Card>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                    {getSortedSubjects()
-                      .filter(subject => {
-                        if (examBoard.id === 'aqa') {
-                          return subject.id === 'physics' || subject.id === 'maths' || subject.id === 'chemistry' || subject.id === 'biology' || subject.id === 'computer-science' || subject.id === 'english-language' || subject.id === 'english-literature' || subject.id === 'french' || subject.id === 'spanish' || subject.id === 'german' || subject.id === 'history' || subject.id === 'geography' || subject.id === 'business' || subject.id === 'religious-studies' || subject.id === 'art' || subject.id === 'music' || subject.id === 'drama' || subject.id === 'psychology';
-                        } else if (examBoard.id === 'edexcel') {
-                          return subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel';
-                        }
-                        return false;
-                      })
-                      .map((subject) => {
-                        // Modify subject name for Edexcel subjects to remove brackets
-                        let modifiedSubject = { ...subject };
-                          if (examBoard.id === 'edexcel') {
-                            if (subject.id === 'maths-edexcel') {
-                              modifiedSubject = { ...subject, name: 'Mathematics' };
-                            } else if (subject.id === 'business-edexcel-igcse') {
-                              modifiedSubject = { ...subject, name: 'IGCSE Business' };
-                            } else if (subject.id === 'chemistry-edexcel') {
-                              modifiedSubject = { ...subject, name: 'Chemistry' };
-                           } else if (subject.id === 'physics-edexcel') {
-                             modifiedSubject = { ...subject, name: 'Physics' };
-                           }
-                          }
-                        
-                          return (
-                          <SubjectCard
-                            key={subject.id}
-                            subject={{
-                              ...modifiedSubject,
-                              color: getSubjectColor(subject.id)
-                            }}
-                            progress={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard.id === 'edexcel' ? userProgress : []}
-                            onStartPractice={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard.id === 'edexcel' ? handlePractice : () => {}}
-                            onTogglePin={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard.id === 'edexcel' ? togglePinSubject : () => {}}
-                            isPinned={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard.id === 'edexcel' ? pinnedSubjects.includes(subject.id) : false}
-                            lastActivity={(subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard.id === 'edexcel' ? getLastActivity(subject.id) : null}
-                            comingSoon={!((subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') && examBoard.id === 'edexcel')}
-                            userId={user?.id}
-                            onToggleUserSubject={toggleUserSubject}
-                            isUserSubject={userSubjects.includes(subject.id)}
-                            showAddButton={subjectsTab === 'all-subjects'}
-                      />
-                         );
-                        })}
-                   </div>
-                )}
-              </TabsContent>
-            ))}
-          </Tabs>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" style={{ display: 'none' }}>
-          </div>
-        </div>
-
-        {/* Progress Overview */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <ProgressCard
-            title="Overall Progress"
-            value={`${getOverallProgress()}%`}
-            subtitle="Average across subjects"
-            progress={getOverallProgress()}
-            icon={TrendingUp}
-            color="bg-gradient-to-br from-primary via-primary/90 to-primary/80"
-            trend={userProgress.length > 0 ? 5 : undefined}
-          />
-          
-          <ProgressCard
-            title="Topics Mastered"
-            value={getMasteredTopics()}
-            subtitle="85%+ average score"
-            icon={Trophy}
-            color="bg-gradient-to-br from-emerald-500 to-emerald-600"
-          />
-          
-          <ProgressCard
-            title="Practice Sessions"
-            value={userProgress.reduce((sum, p) => sum + p.attempts, 0)}
-            subtitle="Questions completed"
-            icon={BookOpen}
-            color="bg-gradient-to-br from-blue-500 to-blue-600"
-          />
-          
-          <ProgressCard
-            title="Study Streak"
-            value={`${getStudyStreak()} days`}
-            subtitle="Keep it up!"
-            icon={Flame}
-            color="bg-gradient-to-br from-orange-500 to-red-500"
-          />
-        </div>
-
-        {/* Analytics Section */}
-        <div className="grid lg:grid-cols-3 gap-6 mb-8">
-          <div className="lg:col-span-1 space-y-6">
-            <AOBreakdown userProgress={userProgress} />
-            <GoalsSection />
-            <TopicMasteryDisplay />
-          </div>
-          <div className="lg:col-span-2">
-            <WeakTopicsSection 
-              weakTopics={weakTopics}
-              userProgress={userProgress}
-              onPractice={handlePractice}
-            />
-          </div>
-        </div>
-
-        {/* Advanced Analytics - Available in free version */}
-        <div className="space-y-6">
-          <div className="flex items-center space-x-3 mb-6">
-            <Brain className="h-6 w-6 text-primary" />
-            <h3 className="text-2xl font-bold text-foreground">Advanced Analytics</h3>
-            <Badge className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white border-0">
-              Available
-            </Badge>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <PredictivePerformanceCard userProgress={userProgress} />
-            <OptimalStudyTimeCard userId={user?.id || ''} />
+              <ColorThemeToggle />
+              <ThemeToggle />
+              
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleLogout}
+                className="flex items-center gap-2"
+              >
+                <LogOut className="h-4 w-4" />
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Streak Celebration Modal */}
-      <StreakCelebration
-        isVisible={showStreakCelebration}
-        onClose={async () => {
-          setShowStreakCelebration(false);
-          const streak = getStudyStreak();
-          // Mark the appropriate celebration as viewed
-          if (streak >= 14) {
-            const hasSeenCelebration = await hasSeenStreakCelebration(14);
-            if (!hasSeenCelebration) {
-              await markStreakCelebrationViewed(14);
-            } else {
-              await markStreakCelebrationViewed(7);
-            }
-          } else if (streak >= 7) {
-            await markStreakCelebrationViewed(7);
-          } else if (streak >= 3) {
-            await markStreakCelebrationViewed(3);
-          }
-        }}
-        streakDays={getStudyStreak()}
-        rewardText={
-          getStudyStreak() >= 14 
-            ? "Claim Your Free Tutoring Session" 
-            : getStudyStreak() >= 7 
-            ? "Study Playlist & Background Sounds"
-            : "Color Theme Customization"
-        }
-        rewardEmoji={
-          getStudyStreak() >= 14 
-            ? "👨‍🏫" 
-            : getStudyStreak() >= 7 
-            ? "🎵"
-            : "🎨"
-        }
-      />
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-6">
+        <Tabs defaultValue="dashboard" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="dashboard" className="flex items-center gap-2">
+              <BarChart3 className="h-4 w-4" />
+              Dashboard
+            </TabsTrigger>
+            <TabsTrigger value="subjects" className="flex items-center gap-2">
+              <BookOpen className="h-4 w-4" />
+              Subjects
+            </TabsTrigger>
+            <TabsTrigger value="analytics" className="flex items-center gap-2">
+              <TrendingUp className="h-4 w-4" />
+              Analytics
+            </TabsTrigger>
+          </TabsList>
 
-      {/* Time Saved Notification */}
-      <TimeSavedNotification
-        timeSavedHours={timeSavedHours}
-        show={showTimeSavedNotification}
-        onClose={() => setShowTimeSavedNotification(false)}
-      />
+          <TabsContent value="dashboard" className="space-y-6">
+            {/* Study Playlist */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <div className="space-y-4">
+                <StudyPlaylist isUnlocked={true} />
+              </div>
+            </motion.div>
 
-      {/* Grade Celebration Modal */}
-      <GradeCelebration
-        isVisible={showGradeCelebration}
-        onClose={() => setShowGradeCelebration(false)}
-        grade={celebrationGrade}
-        subject={celebrationSubject}
-      />
+            {/* Quick Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+            >
+              <ProgressCard title="Study Streak" value={`${currentStreak} days`} icon={Flame} color="orange" />
+              <ProgressCard title="Hours Saved" value={`${timeSavedHours}h`} icon={Clock} color="blue" />
+              <ProgressCard title="Subjects" value={`${userSubjects.length}`} icon={BookOpen} color="green" />
+              <ProgressCard title="Topics Mastered" value={`${userProgress.filter(p => p.averageScore >= 80).length}`} icon={Trophy} color="yellow" />
+            </motion.div>
 
-      {/* Discord Invitation Modal */}
-      <DiscordInvitation
-        isVisible={showDiscordInvitation}
-        onClose={() => setShowDiscordInvitation(false)}
-      />
+            {/* Main Dashboard Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Left Column */}
+              <div className="lg:col-span-2 space-y-6">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <Card><CardContent className="p-6"><h3>Weak Topics</h3><p>Track your progress here</p></CardContent></Card>
+                </motion.div>
 
-      {/* Feedback Fish Button */}
-      <button
-        data-feedback-fish
-        data-feedback-fish-userid={user?.email}
-        className="fixed bottom-6 right-6 z-50 bg-primary hover:bg-primary/90 text-primary-foreground p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-105"
-        aria-label="Send Feedback"
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-5 h-5"
-        >
-          <path
-            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="currentColor"
-          />
-        </svg>
-      </button>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  <Card><CardContent className="p-6"><h3>Topic Mastery</h3><p>View your mastery levels</p></CardContent></Card>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <Card><CardContent className="p-6"><h3>Goals</h3><p>Set and track your study goals</p></CardContent></Card>
+                </motion.div>
+              </div>
+
+              {/* Right Column */}
+              <div className="space-y-6">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                >
+                  <Card><CardContent className="p-6"><h3>Performance Prediction</h3><p>AI-powered insights</p></CardContent></Card>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 }}
+                >
+                  <Card><CardContent className="p-6"><h3>Optimal Study Time</h3><p>Best times to study</p></CardContent></Card>
+                </motion.div>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="subjects" className="space-y-6">
+            {/* Subject Management Header */}
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold">Subjects</h2>
+                <p className="text-muted-foreground">Manage your subjects and track progress</p>
+              </div>
+              
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <Filter className="h-4 w-4" />
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value as any)}
+                    className="px-3 py-1 rounded border border-border bg-background"
+                  >
+                    <option value="progress">Sort by Progress</option>
+                    <option value="alphabetical">Sort Alphabetically</option>
+                    <option value="weakest">Sort by Weakest</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            {/* Subject Tabs */}
+            <Tabs value={subjectsTab} onValueChange={(value) => setSubjectsTab(value as any)}>
+              <div className="flex items-center justify-between">
+                <TabsList>
+                  <TabsTrigger value="my-subjects">My Subjects ({userSubjects.length})</TabsTrigger>
+                  <TabsTrigger value="all-subjects">All Subjects</TabsTrigger>
+                </TabsList>
+                
+                {subjectsTab === 'all-subjects' && (
+                  <select
+                    value={selectedExamBoard}
+                    onChange={(e) => setSelectedExamBoard(e.target.value)}
+                    className="px-3 py-1 rounded border border-border bg-background"
+                  >
+                    <option value="aqa">AQA</option>
+                    <option value="edexcel">Edexcel</option>
+                    <option value="all">All Exam Boards</option>
+                  </select>
+                )}
+              </div>
+
+              <TabsContent value="my-subjects" className="space-y-4">
+                {userSubjects.length === 0 ? (
+                  <Card>
+                    <CardContent className="text-center py-12">
+                      <BookOpen className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                      <h3 className="text-lg font-medium mb-2">No subjects added yet</h3>
+                      <p className="text-muted-foreground mb-4">Start by adding subjects from the "All Subjects" tab</p>
+                      <Button onClick={() => setSubjectsTab('all-subjects')}>
+                        Browse Subjects
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {getFilteredSubjects().map((subject) => (
+                      <SubjectCard
+                        key={subject.id}
+                        subject={subject}
+                        userProgress={userProgress}
+                        pinnedSubjects={pinnedSubjects}
+                        onPin={handlePinSubject}
+                        onSubjectToggle={(subjectId: string) => handleSubjectToggle(subjectId, '', false)}
+                        isUserSubject={true}
+                      />
+                    ))}
+                  </div>
+                )}
+              </TabsContent>
+
+              <TabsContent value="all-subjects" className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {getFilteredSubjects().map((subject) => (
+                    <SubjectCard
+                      key={subject.id}
+                      subject={subject}
+                      userProgress={userProgress}
+                      pinnedSubjects={pinnedSubjects}
+                      onPin={handlePinSubject}
+                      onSubjectToggle={(subjectId: string) => handleSubjectToggle(subjectId, '', true)}
+                      isUserSubject={userSubjects.includes(subject.id)}
+                    />
+                  ))}
+                </div>
+              </TabsContent>
+            </Tabs>
+          </TabsContent>
+
+          <TabsContent value="analytics" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+              >
+                <Card><CardContent className="p-6"><h3>Predicted Questions</h3><p>AI-generated practice questions</p></CardContent></Card>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <Card><CardContent className="p-6"><h3>Predicted Grades</h3><p>Track your grade predictions</p></CardContent></Card>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="lg:col-span-2"
+              >
+                <Card><CardContent className="p-6"><h3>Assessment Breakdown</h3><p>Detailed performance analysis</p></CardContent></Card>
+              </motion.div>
+            </div>
+
+            {/* Community Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Trophy className="h-5 w-5" />
+                    Community Leaderboard
+                  </CardTitle>
+                  <CardDescription>
+                    See how your study streak compares to other students
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <PublicStreakProfiles />
+                </CardContent>
+              </Card>
+            </motion.div>
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 };
