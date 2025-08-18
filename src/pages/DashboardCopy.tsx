@@ -1540,41 +1540,36 @@ const DashboardCopy = () => {
         <div className="mb-8">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
             <ProgressCard
-              title="Total Progress"
-              value={`${getOverallProgress()}%`}
-              subtitle="Overall performance"
-              progress={getOverallProgress()}
+              title="Overall Progress"
+              value="0%"
+              subtitle="Average across subjects"
+              progress={0}
               icon={BarChart3}
               color="bg-gradient-to-br from-blue-500 to-cyan-600"
-              trend={userProgress.length > 0 ? 5 : undefined}
             />
             
             <ProgressCard
-              title="Mastered Topics"
-              value={getMasteredTopics()}
+              title="Topics Mastered"
+              value="0"
               subtitle="85%+ average score"
-              progress={(getMasteredTopics() / Math.max(userProgress.length, 1)) * 100}
               icon={CheckCircle}
               color="bg-gradient-to-br from-emerald-500 to-green-600"
-              trend={userProgress.length > 0 ? 12 : undefined}
             />
             
             <ProgressCard
-              title="Time Saved"
-              value={`${timeSavedHours}h`}
-              subtitle="From AI-generated notes"
+              title="Practice Sessions"
+              value="0"
+              subtitle="Questions completed"
               icon={Clock}
               color="bg-gradient-to-br from-purple-500 to-pink-600"
-              trend={previousTimeSaved > 0 && timeSavedHours > previousTimeSaved ? Math.round(((timeSavedHours - previousTimeSaved) / previousTimeSaved) * 100) : undefined}
             />
             
             <ProgressCard
               title="Study Streak"
-              value={`${getStudyStreak()} days`}
-              subtitle="Keep it going!"
+              value="4 days"
+              subtitle="Keep it up!"
               icon={Flame}
               color="bg-gradient-to-br from-orange-500 to-red-600"
-              trend={getStudyStreak() > 0 ? 1 : undefined}
             />
           </div>
         </div>
