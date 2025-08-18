@@ -4,12 +4,19 @@ import { Badge } from "@/components/ui/badge";
 import { Crown, Star, Sparkles, Target, Clock, BookOpen, Zap, Trophy, Rocket } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { CountdownTimer } from "./CountdownTimer";
+import { PremiumPaywall } from "@/components/ui/premium-paywall";
+import { useState } from "react";
 
 export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
+  const [showPaywall, setShowPaywall] = useState(false);
 
   const handleStartPredicted = () => {
-    navigate('/predicted-questions');
+    setShowPaywall(true);
+  };
+
+  const handleUpgrade = () => {
+    window.open('https://buy.stripe.com/test_cN23fH5Qu6Rv4Vy8ww', '_blank');
   };
 
   return (
@@ -114,19 +121,25 @@ export const PredictedQuestionsSection = () => {
               </div>
             </div>
             
-            {/* Weekly Update Notice */}
+            {/* Refresh Timer Notice */}
             <div className="bg-gradient-to-r from-white/15 to-white/10 border border-white/30 rounded-2xl p-4 backdrop-blur-sm">
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-gradient-to-br from-yellow-400/30 to-orange-400/30 rounded-xl">
-                  <Sparkles className="h-5 w-5 text-white" />
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-gradient-to-br from-yellow-400/30 to-orange-400/30 rounded-xl">
+                    <Sparkles className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-white text-sm">
+                      Fresh practice papers every week
+                    </p>
+                    <p className="text-white/90 text-xs">
+                      Content aligned with 2026 exam trends
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-bold text-white text-sm">
-                    Fresh practice papers every week
-                  </p>
-                  <p className="text-white/90 text-xs">
-                    Content aligned with 2026 exam trends
-                  </p>
+                <div className="text-right">
+                  <p className="text-white/80 text-xs mb-1">Questions refresh:</p>
+                  <CountdownTimer />
                 </div>
               </div>
             </div>
@@ -143,6 +156,12 @@ export const PredictedQuestionsSection = () => {
           </CardContent>
         </div>
       </div>
+      
+      <PremiumPaywall 
+        isOpen={showPaywall}
+        onClose={() => setShowPaywall(false)}
+        onUpgrade={handleUpgrade}
+      />
     </div>
   );
 };

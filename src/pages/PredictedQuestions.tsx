@@ -10,6 +10,7 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { RefreshCountdown } from "@/components/ui/refresh-countdown";
+import { PremiumPaywall } from "@/components/ui/premium-paywall";
 
 const PredictedQuestions = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const PredictedQuestions = () => {
   const [completedExams, setCompletedExams] = useState<{[key: string]: any}>({});
   const [loading, setLoading] = useState(true);
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
+  const [showPaywall, setShowPaywall] = useState(false);
 
   useEffect(() => {
     // Ensure page starts at top when navigating here
@@ -65,7 +67,11 @@ const PredictedQuestions = () => {
   };
 
   const handleSubjectSelect = (subjectId: string) => {
-    navigate(`/predicted-exam/${subjectId}`);
+    setShowPaywall(true);
+  };
+
+  const handleUpgrade = () => {
+    window.open('https://buy.stripe.com/test_cN23fH5Qu6Rv4Vy8ww', '_blank');
   };
 
   const getSubjectColor = (subjectId: string) => {
@@ -215,14 +221,12 @@ const PredictedQuestions = () => {
               </div>
             </div>
             
-            {isCompleted && (
-              <div className="bg-white/15 backdrop-blur-sm border border-white/30 rounded-xl p-3 mb-3">
-                <div className="flex items-center justify-between text-white text-sm">
-                  <span>Questions refresh:</span>
-                  <RefreshCountdown />
-                </div>
+            <div className="bg-white/15 backdrop-blur-sm border border-white/30 rounded-xl p-3 mb-3">
+              <div className="flex items-center justify-between text-white text-sm">
+                <span>Questions refresh:</span>
+                <RefreshCountdown />
               </div>
-            )}
+            </div>
             
             <div className="space-y-2">
               {isCompleted ? (
@@ -246,17 +250,17 @@ const PredictedQuestions = () => {
                     Review Marking
                     <Target className="h-4 w-4 ml-2" />
                   </Button>
-                  <Button 
-                    className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleSubjectSelect(subject.id);
-                    }}
-                  >
-                    <RotateCcw className="h-4 w-4 mr-2" />
-                    Retake Exam
-                    <Sparkles className="h-4 w-4 ml-2" />
-                  </Button>
+                   <Button 
+                     className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
+                     onClick={(e) => {
+                       e.stopPropagation();
+                       setShowPaywall(true);
+                     }}
+                   >
+                     <RotateCcw className="h-4 w-4 mr-2" />
+                     Retake Exam
+                     <Sparkles className="h-4 w-4 ml-2" />
+                   </Button>
                 </>
               ) : (
                 <Button 
@@ -446,6 +450,12 @@ const PredictedQuestions = () => {
           ))}
         </Tabs>
       </div>
+      
+      <PremiumPaywall 
+        isOpen={showPaywall}
+        onClose={() => setShowPaywall(false)}
+        onUpgrade={handleUpgrade}
+      />
     </div>
   );
 };
