@@ -954,19 +954,24 @@ const Dashboard = () => {
             </div>
             <div className="flex items-center space-x-3">
               {/* Manual subscription refresh button for users who just paid */}
-              {!subscribed && (
-                <Button 
-                  onClick={() => {
-                    console.log('Manual subscription refresh triggered');
-                    checkSubscription();
-                  }}
-                  variant="outline"
-                  className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-all duration-200"
-                >
-                  <Target className="h-4 w-4 mr-2" />
-                  Check Premium Status
-                </Button>
-              )}
+              <Button 
+                onClick={async () => {
+                  console.log('Manual subscription refresh triggered');
+                  console.log('User:', user?.email);
+                  console.log('Current subscribed status:', subscribed);
+                  try {
+                    await checkSubscription();
+                    console.log('Subscription check completed');
+                  } catch (error) {
+                    console.error('Error during subscription check:', error);
+                  }
+                }}
+                variant="outline"
+                className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-all duration-200"
+              >
+                <Target className="h-4 w-4 mr-2" />
+                Check Premium Status
+              </Button>
               
               <Button 
                 onClick={() => window.open('https://discord.gg/Jq2YTZ3aMa', '_blank')}
