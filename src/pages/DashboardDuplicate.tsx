@@ -67,6 +67,7 @@ const DashboardDuplicate = () => {
   const [celebrationSubject, setCelebrationSubject] = useState('');
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
   const [showPremiumPaywall, setShowPremiumPaywall] = useState(false);
+  const [currentStreak, setCurrentStreak] = useState(0);
 
   const {
     notification,
@@ -123,10 +124,6 @@ const DashboardDuplicate = () => {
     if (!user?.id) return;
 
     try {
-      // Get the stored previous value first
-      const savedTimeSaved = localStorage.getItem(`mentiora_time_saved_${user.id}`);
-      const storedPreviousTime = savedTimeSaved ? parseFloat(savedTimeSaved) : 0;
-
       const { data: entries, error } = await supabase
         .from('notebook_entries')
         .select('id')
@@ -138,38 +135,9 @@ const DashboardDuplicate = () => {
       }
 
       const totalEntries = entries?.length || 0;
-      // Calculate time saved: Assume each note saves 10 minutes of manual revision time (more realistic)
       const timeSavedMinutes = totalEntries * 10;
-      const newTimeSavedHours = Math.round(timeSavedMinutes / 6) / 10; // Convert to hours and round to 1 decimal
+      const newTimeSavedHours = Math.round(timeSavedMinutes / 6) / 10;
 
-      console.log('Time saved calculation:', { 
-        totalEntries, 
-        newTimeSavedHours, 
-        storedPreviousTime
-      });
-
-      // Show notification whenever time saved has increased and user has actual savings
-      if (newTimeSavedHours > storedPreviousTime && newTimeSavedHours > 0) {
-        console.log('🎉 Triggering time saved notification!', { 
-          newTime: newTimeSavedHours, 
-          oldTime: storedPreviousTime,
-          isFirstTime: storedPreviousTime === 0
-        });
-        
-        // Ensure notification shows with a slight delay to avoid state conflicts
-        setTimeout(() => {
-          setShowTimeSavedNotification(true);
-        }, 100);
-        
-        localStorage.setItem(`mentiora_time_saved_${user.id}`, newTimeSavedHours.toString());
-        
-        // Auto-hide notification after 10 seconds
-        setTimeout(() => {
-          setShowTimeSavedNotification(false);
-        }, 10000);
-      }
-
-      // Update states
       setTimeSavedHours(newTimeSavedHours);
       setPreviousTimeSaved(newTimeSavedHours);
     } catch (error) {
@@ -177,190 +145,42 @@ const DashboardDuplicate = () => {
     }
   };
 
-  // Check if user should see Discord invitation
-  const checkForDiscordInvitation = async () => {
-    if (!user?.id) {
-      console.log('Discord check: No user ID');
-      return;
-    }
-
-    // Check if user has already seen the Discord invitation - PREVENT MULTIPLE SHOWINGS
-    const hasSeenDiscord = localStorage.getItem(`discord_invitation_shown_${user.id}`);
-    console.log('Discord check: Has user seen invitation before?', !!hasSeenDiscord);
-    if (hasSeenDiscord) {
-      console.log('Discord check: User has already seen invitation, skipping to prevent annoyance');
-      return;
-    }
-
+  // Fetch current streak using the database function
+  const fetchCurrentStreak = async () => {
+    if (!user?.id) return;
+    
     try {
-      // Count completed topics from practice progress
-      const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
-      let topicsCompleted = 0;
+      // Record today's activity first
+      await supabase
+        .from('daily_usage')
+        .upsert({
+          user_id: user.id,
+          date: new Date().toISOString().split('T')[0],
+          activities_count: 1,
+          total_minutes: 5
+        }, {
+          onConflict: 'user_id,date',
+          ignoreDuplicates: false
+        });
       
-      if (savedProgress) {
-        const progress = JSON.parse(savedProgress);
-        topicsCompleted = progress.filter((p: UserProgress) => p.attempts > 0).length;
-      }
-      console.log('Discord check: Practice topics completed:', topicsCompleted);
-
-      // Count completed predicted exams
-      const { data: examCompletions, error } = await supabase
-        .from('predicted_exam_completions')
-        .select('id')
-        .eq('user_id', user.id);
+      // Use the database function to get streak
+      const { data, error } = await supabase
+        .rpc('get_user_streak', { user_uuid: user.id });
 
       if (error) {
-        console.error('Error fetching exam completions:', error);
+        console.error('Error fetching streak:', error);
+        setCurrentStreak(0);
         return;
       }
 
-      const examsCompleted = examCompletions?.length || 0;
-      console.log('Discord check: Predicted exams completed:', examsCompleted);
-
-      // Calculate total activities (practice topics + predicted exams)
-      const totalActivities = topicsCompleted + examsCompleted;
-      console.log('Discord check: Total activities:', totalActivities);
-      console.log('Discord check: Should show invitation?', totalActivities >= 2);
-
-      // Show Discord invitation if user has completed 2+ activities total
-      if (totalActivities >= 2) {
-        console.log('🎉 Showing Discord invitation for the FIRST AND LAST time!');
-        setShowDiscordInvitation(true);
-        // CRITICAL: Mark as shown immediately to prevent any future showings
-        localStorage.setItem(`discord_invitation_shown_${user.id}`, 'true');
-        console.log('Discord check: User permanently marked as having seen invitation');
-      }
+      const streak = data || 0;
+      setCurrentStreak(streak);
+      
     } catch (error) {
-      console.error('Error checking Discord invitation criteria:', error);
+      console.error('Error calculating streak:', error);
+      setCurrentStreak(0);
     }
   };
-
-  // Check for new predicted exam results and trigger grade celebrations
-  const checkForNewGrades = async () => {
-    if (!user?.id) return;
-
-    try {
-      // Get the most recent predicted exam completion
-      const { data: recentResult, error } = await supabase
-        .from('predicted_exam_completions')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('completed_at', { ascending: false })
-        .limit(1)
-        .single();
-
-      if (error || !recentResult) return;
-
-      // Check if this result was created in the last 5 minutes (indicating it's new)
-      const resultTime = new Date(recentResult.completed_at);
-      const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
-      
-      if (resultTime > fiveMinutesAgo) {
-        // Check if we've already shown a celebration for this result
-        const celebrationKey = `grade_celebration_${recentResult.id}`;
-        const hasShownCelebration = localStorage.getItem(celebrationKey);
-        
-        if (!hasShownCelebration) {
-          // Get subject name and format it properly
-          const subjectName = curriculum.find(s => s.id === recentResult.subject_id)?.name || recentResult.subject_id;
-          const formattedSubjectName = subjectName.replace(/-/g, ' ');
-          
-          // Trigger grade celebration
-          setCelebrationGrade(recentResult.grade);
-          setCelebrationSubject(formattedSubjectName);
-          
-          // Small delay to ensure page is loaded
-          setTimeout(() => {
-            setShowGradeCelebration(true);
-          }, 1500);
-          
-          // Mark this celebration as shown
-          localStorage.setItem(celebrationKey, 'true');
-        }
-      }
-    } catch (error) {
-      console.error('Error checking for new grades:', error);
-    }
-  };
-
-  useEffect(() => {
-    const loadUserData = async () => {
-      if (!user?.id) return;
-
-      // Apply natural stress decay when dashboard loads
-      StressTracker.applyTimeDecay(user.id);
-
-      // Load progress from localStorage
-      const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
-      if (savedProgress) {
-        const progress = JSON.parse(savedProgress);
-        setUserProgress(progress);
-        
-        // Calculate and save weak topics to database
-        const weak = progress.filter((p: UserProgress) => p.averageScore < 70).map((p: UserProgress) => p.topicId);
-        await saveWeakTopicsToDatabase(weak);
-        setWeakTopics(weak);
-      }
-
-      // Load weak topics from database
-      await loadWeakTopicsFromDatabase();
-
-      // Load pinned subjects from localStorage
-      const savedPinnedSubjects = localStorage.getItem(`mentiora_pinned_subjects_${user.id}`);
-      if (savedPinnedSubjects) {
-        setPinnedSubjects(JSON.parse(savedPinnedSubjects));
-      }
-
-      // Load user's selected subjects from database
-      await loadUserSubjects();
-
-      // Record login activity and fetch current streak
-      await fetchCurrentStreak();
-
-      // Check and update public profile for 14+ day streaks
-      await checkAndUpdatePublicProfile();
-
-      // Initialize previous time saved from localStorage (this happens before loadTimeSavedStats)
-      const savedTimeSaved = localStorage.getItem(`mentiora_time_saved_${user.id}`);
-      if (savedTimeSaved) {
-        setPreviousTimeSaved(parseFloat(savedTimeSaved));
-      }
-
-      // Load and track time saved from notebook entries
-      await loadTimeSavedStats();
-
-      // Check for recommendations on dashboard load
-      console.log('Dashboard loading, checking for weak topic recommendations...');
-      await checkForWeakTopicRecommendation();
-      
-      // Check for new predicted exam results
-      await checkForNewGrades();
-      
-      // Check for Discord invitation eligibility
-      await checkForDiscordInvitation();
-    };
-
-    loadUserData();
-    
-    // Also fetch streak on component mount
-    if (user?.id) {
-      fetchCurrentStreak();
-    }
-    
-  }, [user?.id]);
-
-  // Listen for premium paywall events
-  useEffect(() => {
-    const handleOpenPremiumPaywall = () => {
-      setShowPremiumPaywall(true);
-    };
-
-    window.addEventListener('openPremiumPaywall', handleOpenPremiumPaywall);
-
-    return () => {
-      window.removeEventListener('openPremiumPaywall', handleOpenPremiumPaywall);
-    };
-  }, []);
 
   const loadWeakTopicsFromDatabase = async () => {
     if (!user?.id) return;
@@ -424,25 +244,17 @@ const DashboardDuplicate = () => {
         return;
       }
 
-      console.log('=== DEBUG: Database records ===', data);
-
       if (data) {
-        // Convert database records to subject IDs based on curriculum
         const subjectIds = data.map(record => {
-          console.log(`=== Processing record: ${record.subject_name} | ${record.exam_board} ===`);
           const examBoard = record.exam_board.toLowerCase();
           
-          // Check each potential match explicitly
           if (record.subject_name === 'Physics' && examBoard === 'aqa') {
-            console.log('✅ Matched Physics AQA to physics ID');
             return 'physics';
           }
           if (record.subject_name === 'Physics' && examBoard === 'edexcel') {
-            console.log('✅ Matched Physics Edexcel to physics-edexcel ID');
             return 'physics-edexcel';
           }
           
-          // Find matching subject in curriculum for other subjects
           const subject = curriculum.find(s => 
             (record.subject_name === 'Mathematics' && s.name === 'Maths (Edexcel)') ||
             (record.subject_name === 'IGCSE Business' && s.name === 'Business (Edexcel IGCSE)') ||
@@ -450,16 +262,9 @@ const DashboardDuplicate = () => {
             s.name.toLowerCase() === record.subject_name.toLowerCase()
           );
           
-          if (subject) {
-            console.log(`✅ Found subject: ${subject.id} for ${record.subject_name}`);
-            return subject.id;
-          } else {
-            console.log(`❌ No match found for: ${record.subject_name} | ${record.exam_board}`);
-            return null;
-          }
+          return subject ? subject.id : null;
         }).filter(Boolean) as string[];
         
-        console.log('=== Final subject IDs ===', subjectIds);
         setUserSubjects(subjectIds);
       }
     } catch (error) {
@@ -467,104 +272,269 @@ const DashboardDuplicate = () => {
     }
   };
 
-  // Additional functions that are part of the original Dashboard.tsx file
-  // These are assumed to be present in the original file and are included here fully
-
-  const fetchCurrentStreak = async () => {
+  const toggleUserSubject = async (subjectId: string) => {
     if (!user?.id) return;
 
-    try {
-      const { data, error } = await supabase
-        .from('user_streaks')
-        .select('current_streak')
-        .eq('user_id', user.id)
-        .single();
-
-      if (error && error.code !== 'PGRST116') {
-        console.error('Error fetching current streak:', error);
-        return;
-      }
-
-      if (data) {
-        // If streak is 7 or 14 days, show celebration
-        if (data.current_streak === 7 || data.current_streak === 14) {
-          const seen = await hasSeenStreakCelebration(data.current_streak);
-          if (!seen) {
-            setShowStreakCelebration(true);
-            await markStreakCelebrationViewed(data.current_streak);
-          }
-        }
-      }
-    } catch (error) {
-      console.error('Error fetching current streak:', error);
-    }
-  };
-
-  const checkAndUpdatePublicProfile = async () => {
-    if (!user?.id) return;
+    const subject = curriculum.find(s => s.id === subjectId);
+    if (!subject) return;
+    
+    const subjectName = getSubjectName(subject);
+    const examBoard = getExamBoard(subjectId);
+    const isCurrentlySelected = userSubjects.includes(subjectId);
 
     try {
-      const { data, error } = await supabase
-        .from('user_streaks')
-        .select('current_streak')
-        .eq('user_id', user.id)
-        .single();
-
-      if (error && error.code !== 'PGRST116') {
-        console.error('Error checking streak for public profile:', error);
-        return;
-      }
-
-      if (data && data.current_streak >= 14) {
-        // Check if user already has a public profile
-        const { data: profileData, error: profileError } = await supabase
-          .from('public_streak_profiles')
-          .select('id')
+      if (isCurrentlySelected) {
+        const { error } = await supabase
+          .from('user_subjects')
+          .delete()
           .eq('user_id', user.id)
-          .single();
+          .eq('subject_name', subjectName)
+          .eq('exam_board', examBoard);
 
-        if (profileError && profileError.code !== 'PGRST116') {
-          console.error('Error checking public profile:', profileError);
-          return;
+        if (error) {
+          console.error('Error removing subject:', error);
+          toast({
+            title: "Error",
+            description: `Failed to remove ${subject.name}`,
+            variant: "destructive"
+          });
+        } else {
+          setUserSubjects(prev => prev.filter(id => id !== subjectId));
+          toast({
+            title: "Success", 
+            description: `${subject.name} removed from your subjects.`,
+          });
         }
+      } else {
+        const { error } = await supabase
+          .from('user_subjects')
+          .insert({
+            user_id: user.id,
+            subject_name: subjectName,
+            exam_board: examBoard,
+            predicted_grade: 'U',
+            target_grade: null,
+            priority_level: 3
+          });
 
-        if (!profileData) {
-          // Create public profile
-          await supabase
-            .from('public_streak_profiles')
-            .insert({
-              user_id: user.id,
-              streak_days: data.current_streak,
-              created_at: new Date().toISOString()
-            });
+        if (error) {
+          console.error('Error adding subject:', error);
+          toast({
+            title: "Error",
+            description: `Failed to add ${subject.name}`,
+            variant: "destructive"
+          });
+        } else {
+          setUserSubjects(prev => [...prev, subjectId]);
+          toast({
+            title: "Success",
+            description: `${subject.name} added to your subjects!`,
+          });
         }
       }
     } catch (error) {
-      console.error('Error updating public profile:', error);
+      console.error('Error toggling user subject:', error);
     }
   };
 
-  // Render JSX for the dashboard duplicate
-  return (
-    <div className="min-h-screen bg-background text-foreground p-6">
-      <header className="flex items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold">Dashboard Duplicate</h1>
-        <div className="flex items-center space-x-4">
-          <ThemeToggle />
-          <ColorThemeToggle />
-          <Button variant="outline" onClick={() => logout()}>
-            <LogOut className="mr-2 h-4 w-4" />
-            Logout
-          </Button>
-        </div>
-      </header>
+  const getSubjectName = (subject: any) => {
+    if (subject.name === 'Maths (Edexcel)') return 'Mathematics';
+    if (subject.name === 'Business (Edexcel IGCSE)') return 'IGCSE Business';
+    if (subject.name === 'Chemistry (Edexcel)') return 'Chemistry';
+    if (subject.name === 'Physics (Edexcel)') return 'Physics';
+    if (subject.id === 'physics-edexcel') return 'Physics';
+    if (subject.id === 'physics-aqa') return 'Physics';
+    return subject.name;
+  };
 
+  const getExamBoard = (subjectId: string) => {
+    if (subjectId.includes('edexcel')) return 'Edexcel';
+    return 'AQA';
+  };
+
+  useEffect(() => {
+    const loadUserData = async () => {
+      if (!user?.id) return;
+
+      StressTracker.applyTimeDecay(user.id);
+
+      const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
+      if (savedProgress) {
+        const progress = JSON.parse(savedProgress);
+        setUserProgress(progress);
+        
+        const weak = progress.filter((p: UserProgress) => p.averageScore < 70).map((p: UserProgress) => p.topicId);
+        await saveWeakTopicsToDatabase(weak);
+        setWeakTopics(weak);
+      }
+
+      await loadWeakTopicsFromDatabase();
+
+      const savedPinnedSubjects = localStorage.getItem(`mentiora_pinned_subjects_${user.id}`);
+      if (savedPinnedSubjects) {
+        setPinnedSubjects(JSON.parse(savedPinnedSubjects));
+      }
+
+      await loadUserSubjects();
+      await fetchCurrentStreak();
+      await loadTimeSavedStats();
+      await checkForWeakTopicRecommendation();
+    };
+
+    loadUserData();
+  }, [user?.id]);
+
+  useEffect(() => {
+    const handleOpenPremiumPaywall = () => {
+      setShowPremiumPaywall(true);
+    };
+
+    window.addEventListener('openPremiumPaywall', handleOpenPremiumPaywall);
+
+    return () => {
+      window.removeEventListener('openPremiumPaywall', handleOpenPremiumPaywall);
+    };
+  }, []);
+
+  const getTopicProgress = (subjectId: string, topicId: string) => {
+    const progress = userProgress.find(p => p.subjectId === subjectId && p.topicId === topicId);
+    return progress || { attempts: 0, averageScore: 0, lastAttempt: new Date() };
+  };
+
+  const getMasteredTopics = () => {
+    return userProgress.filter(p => p.averageScore >= 85).length;
+  };
+
+  const getOverallProgress = () => {
+    if (userProgress.length === 0) return 0;
+    const totalScore = userProgress.reduce((sum, p) => sum + p.averageScore, 0);
+    return Math.round(totalScore / userProgress.length);
+  };
+
+  const getStudyStreak = () => {
+    return currentStreak;
+  };
+
+  const getSubjectProgress = (subjectId: string) => {
+    const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
+    if (subjectProgress.length === 0) return 0;
+    return Math.round(subjectProgress.reduce((sum, p) => sum + p.averageScore, 0) / subjectProgress.length);
+  };
+
+  const getLastActivity = (subjectId: string) => {
+    const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
+    if (subjectProgress.length === 0) return null;
+    const lastAttempt = Math.max(...subjectProgress.map(p => new Date(p.lastAttempt).getTime()));
+    return new Date(lastAttempt);
+  };
+
+  const getSubjectColor = (subjectId: string) => {
+    const colors = [
+      'bg-blue-500',
+      'bg-green-500', 
+      'bg-purple-500',
+      'bg-red-500',
+      'bg-yellow-500',
+      'bg-indigo-500',
+      'bg-pink-500',
+      'bg-teal-500'
+    ];
+    const index = subjectId.length % colors.length;
+    return colors[index];
+  };
+
+  const allSubjects = [...curriculum].filter(subject => subject.id !== 'geography-paper-2');
+  
+  const filteredSubjects = userSubjects.length > 0 
+    ? allSubjects.filter(subject => userSubjects.includes(subject.id))
+    : allSubjects;
+
+  const sortedSubjects = filteredSubjects.sort((a, b) => {
+    const isPinnedA = pinnedSubjects.includes(a.id);
+    const isPinnedB = pinnedSubjects.includes(b.id);
+    
+    if (isPinnedA && !isPinnedB) return -1;
+    if (!isPinnedA && isPinnedB) return 1;
+    
+    switch (sortBy) {
+      case 'alphabetical':
+        return a.name.localeCompare(b.name);
+      case 'weakest':
+        return getSubjectProgress(a.id) - getSubjectProgress(b.id);
+      case 'progress':
+        return getSubjectProgress(b.id) - getSubjectProgress(a.id);
+      default:
+        return 0;
+    }
+  });
+
+  const togglePinSubject = (subjectId: string) => {
+    const newPinned = pinnedSubjects.includes(subjectId)
+      ? pinnedSubjects.filter(id => id !== subjectId)
+      : [...pinnedSubjects, subjectId];
+    
+    setPinnedSubjects(newPinned);
+    localStorage.setItem(`mentiora_pinned_subjects_${user?.id}`, JSON.stringify(newPinned));
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
+  const handlePractice = async (subjectId: string, topicId?: string) => {
+    if (topicId) {
+      navigate(`/practice/${subjectId}/${topicId}`);
+    } else {
+      navigate(`/subject/${subjectId}`);
+    }
+  };
+
+  const getFirstName = () => {
+    if (!user) return 'there';
+    
+    const fullName = user.user_metadata?.full_name || user.user_metadata?.name;
+    if (fullName) {
+      const firstName = fullName.split(' ')[0];
+      return firstName;
+    }
+    
+    if (user.email) {
+      return user.email.split('@')[0];
+    }
+    
+    return 'there';
+  };
+
+  const handleNotificationAction = () => {
+    if (notification?.subjectId) {
+      navigate(`/subject/${notification.subjectId}`);
+    }
+  };
+
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good morning';
+    if (hour < 18) return 'Good afternoon';
+    return 'Good evening';
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10">
+      {/* Celebration Components */}
       {showStreakCelebration && (
-        <StreakCelebration onClose={() => setShowStreakCelebration(false)} />
+        <StreakCelebration
+          isVisible={showStreakCelebration}
+          streakDays={currentStreak}
+          rewardText="Amazing streak!"
+          rewardEmoji="🔥"
+          onClose={() => setShowStreakCelebration(false)}
+        />
       )}
 
       {showGradeCelebration && (
         <GradeCelebration
+          isVisible={showGradeCelebration}
           grade={celebrationGrade}
           subject={celebrationSubject}
           onClose={() => setShowGradeCelebration(false)}
@@ -572,105 +542,252 @@ const DashboardDuplicate = () => {
       )}
 
       {showTimeSavedNotification && (
-        <TimeSavedNotification hoursSaved={timeSavedHours} />
+        <TimeSavedNotification
+          timeSavedHours={timeSavedHours}
+          show={showTimeSavedNotification}
+          onClose={() => setShowTimeSavedNotification(false)}
+        />
       )}
 
       {showDiscordInvitation && (
-        <DiscordInvitation onClose={() => setShowDiscordInvitation(false)} />
+        <DiscordInvitation
+          isVisible={showDiscordInvitation}
+          onClose={() => setShowDiscordInvitation(false)}
+        />
       )}
 
       {showPremiumPaywall && (
-        <PremiumPaywall onClose={() => setShowPremiumPaywall(false)} />
+        <PremiumPaywall
+          isOpen={showPremiumPaywall}
+          onClose={() => setShowPremiumPaywall(false)}
+          onUpgrade={() => {}}
+        />
       )}
 
-      <main className="space-y-8">
-        <section>
-          <h2 className="text-xl font-semibold mb-4">Progress Overview</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <ProgressCard
-              title="Overall Progress"
-              value={`${Math.round(userProgress.reduce((acc, p) => acc + p.averageScore, 0) / (userProgress.length || 1))}%`}
-              subtitle="Average score across all topics"
-              progress={userProgress.length ? userProgress.reduce((acc, p) => acc + p.averageScore, 0) / userProgress.length : 0}
-              icon={TrendingUp}
-              color="bg-emerald-500"
-              trend={5}
-            />
-            <ProgressCard
-              title="Study Time"
-              value={`${timeSavedHours} hrs saved`}
-              subtitle="Estimated time saved by notes"
-              icon={Clock}
-              color="bg-blue-500"
-            />
-            <ProgressCard
-              title="Streak"
-              value="14 days"
-              subtitle="Current study streak"
-              icon={Flame}
-              color="bg-red-500"
-              trend={10}
-            />
+      {/* Header */}
+      <header className="bg-card/90 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-lg shadow-black/5 dark:shadow-black/20">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg">
+                  <img 
+                    src="/lovable-uploads/99dd490e-1b20-4181-b127-6915d3c47932.png" 
+                    alt="Mentiora Logo" 
+                    className="w-8 h-8"
+                  />
+                </div>
+                <div>
+                  <h1 className="text-2xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+                    Mentiora Duplicate
+                  </h1>
+                  <div className="flex items-center space-x-2">
+                    <Crown className="h-3 w-3 text-amber-500" />
+                    <span className="text-xs font-medium text-muted-foreground">Premium</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Button 
+                onClick={() => window.open('https://discord.gg/Jq2YTZ3aMa', '_blank')}
+                className="bg-gradient-to-r from-emerald-400 to-green-500 hover:from-emerald-500 hover:to-green-600 text-white border-2 border-emerald-300 shadow-2xl shadow-emerald-500/40 hover:shadow-emerald-500/60 transition-all duration-300 rounded-xl px-6 py-3 h-11 hover:scale-110 font-bold ring-2 ring-emerald-200/50"
+              >
+                <Gamepad2 className="h-5 w-5 mr-2" />
+                <span className="text-sm font-extrabold">Join Community</span>
+              </Button>
+              <ThemeToggle />
+              {getStudyStreak() >= 3 && <ColorThemeToggle />}
+              {getStudyStreak() >= 7 && <StudyPlaylist isUnlocked={true} />}
+              
+              <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
+                <LogOut className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
-        </section>
+        </div>
+      </header>
 
-        <section>
-          <Tabs value={subjectsTab} onValueChange={setSubjectsTab}>
-            <TabsList>
-              <TabsTrigger value="my-subjects">My Subjects</TabsTrigger>
-              <TabsTrigger value="all-subjects">All Subjects</TabsTrigger>
-            </TabsList>
-            <TabsContent value="my-subjects">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                {userSubjects.map(subjectId => (
-                  <SubjectCard key={subjectId} subjectId={subjectId} pinned={pinnedSubjects.includes(subjectId)} />
-                ))}
+      <div className="container mx-auto px-6 py-8 max-w-7xl">
+        {/* Welcome Section */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-3xl font-bold text-foreground mb-2">
+                {getGreeting()}, {getFirstName()}
+              </h2>
+              <p className="text-muted-foreground text-lg">This is your duplicate dashboard - everything exactly the same!</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Progress Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <ProgressCard
+            title="Study Streak"
+            value={`${getStudyStreak()} days`}
+            icon={Flame}
+            color="bg-gradient-to-br from-orange-500 to-red-600"
+            trend={getStudyStreak() > 0 ? 10 : 0}
+          />
+          <ProgressCard
+            title="Overall Progress"
+            value={`${getOverallProgress()}%`}
+            progress={getOverallProgress()}
+            icon={TrendingUp}
+            color="bg-gradient-to-br from-blue-500 to-cyan-600"
+          />
+          <ProgressCard
+            title="Mastered Topics"
+            value={getMasteredTopics().toString()}
+            subtitle="Grade A+ level"
+            icon={CheckCircle}
+            color="bg-gradient-to-br from-green-500 to-emerald-600"
+          />
+          <ProgressCard
+            title="Time Saved"
+            value={`${timeSavedHours}h`}
+            subtitle="With AI notes"
+            icon={Clock}
+            color="bg-gradient-to-br from-purple-500 to-pink-600"
+          />
+        </div>
+
+        {/* Predicted Grades Graph */}
+        <PredictedGradesGraph userProgress={userProgress} />
+
+        {/* Predicted Questions Section */}
+        <PredictedQuestionsSection />
+
+        {/* Subjects Section */}
+        <div id="subjects-section" className="mb-8">
+          <Card className="border-0 shadow-xl bg-card/80 backdrop-blur-sm">
+            <CardHeader>
+              <div className="flex justify-between items-center">
+                <CardTitle className="text-2xl font-bold flex items-center gap-3">
+                  <BookOpen className="h-6 w-6 text-primary" />
+                  My Subjects
+                </CardTitle>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <Filter className="h-4 w-4 text-muted-foreground" />
+                    <select
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value as any)}
+                      className="bg-transparent border border-border rounded-lg px-3 py-1 text-sm"
+                    >
+                      <option value="progress">By Progress</option>
+                      <option value="alphabetical">Alphabetical</option>
+                      <option value="weakest">Weakest First</option>
+                    </select>
+                  </div>
+                </div>
               </div>
-            </TabsContent>
-            <TabsContent value="all-subjects">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                {curriculum.map(subject => (
-                  <SubjectCard key={subject.id} subjectId={subject.id} pinned={pinnedSubjects.includes(subject.id)} />
-                ))}
-              </div>
-            </TabsContent>
-          </Tabs>
-        </section>
+            </CardHeader>
+            <CardContent>
+              <Tabs value={subjectsTab} onValueChange={(value) => setSubjectsTab(value as any)}>
+                <TabsList className="grid w-full grid-cols-2 mb-6">
+                  <TabsTrigger value="my-subjects">My Subjects ({userSubjects.length})</TabsTrigger>
+                  <TabsTrigger value="all-subjects">All Subjects ({allSubjects.length})</TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="my-subjects" className="space-y-4">
+                  {filteredSubjects.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {sortedSubjects.slice(0, 6).map((subject) => (
+                        <SubjectCard
+                          key={subject.id}
+                          subject={{
+                            ...subject,
+                            color: getSubjectColor(subject.id)
+                          }}
+                          progress={userProgress.filter(p => p.subjectId === subject.id)}
+                          onStartPractice={() => handlePractice(subject.id)}
+                          onTogglePin={() => togglePinSubject(subject.id)}
+                          onToggleUserSubject={() => toggleUserSubject(subject.id)}
+                          isPinned={pinnedSubjects.includes(subject.id)}
+                          isUserSubject={userSubjects.includes(subject.id)}
+                          lastActivity={getLastActivity(subject.id)}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-8">
+                      <BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                      <h3 className="text-lg font-semibold mb-2">No subjects selected</h3>
+                      <p className="text-muted-foreground mb-4">Add subjects from the "All Subjects" tab to get started</p>
+                    </div>
+                  )}
+                </TabsContent>
+                
+                <TabsContent value="all-subjects" className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {allSubjects.map((subject) => (
+                      <SubjectCard
+                        key={subject.id}
+                        subject={{
+                          ...subject,
+                          color: getSubjectColor(subject.id)
+                        }}
+                        progress={userProgress.filter(p => p.subjectId === subject.id)}
+                        onStartPractice={() => handlePractice(subject.id)}
+                        onTogglePin={() => togglePinSubject(subject.id)}
+                        onToggleUserSubject={() => toggleUserSubject(subject.id)}
+                        isPinned={pinnedSubjects.includes(subject.id)}
+                        isUserSubject={userSubjects.includes(subject.id)}
+                        lastActivity={getLastActivity(subject.id)}
+                      />
+                    ))}
+                  </div>
+                </TabsContent>
+              </Tabs>
+            </CardContent>
+          </Card>
+        </div>
 
-        <section>
-          <WeakTopicsSection weakTopics={weakTopics} />
-        </section>
+        {/* Weak Topics Section */}
+        <WeakTopicsSection 
+          weakTopics={weakTopics}
+          userProgress={userProgress}
+          onPractice={handlePractice}
+        />
 
-        <section>
-          <AOBreakdown userProgress={userProgress} />
-        </section>
-
-        <section>
-          <GoalsSection />
-        </section>
-
-        <section>
-          <TopicMasteryDisplay userProgress={userProgress} />
-        </section>
-
-        <section>
-          <PredictivePerformanceCard />
+        {/* Analytics Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <PredictivePerformanceCard userProgress={userProgress} />
           <OptimalStudyTimeCard />
-        </section>
+          <AOBreakdown userProgress={userProgress} />
+        </div>
 
-        <section>
-          <PredictedQuestionsSection />
-          <PredictedGradesGraph />
-        </section>
+        {/* Premium Analytics */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <PremiumAnalyticsCard
+            title="Study Time Optimizer"
+            description="AI-powered analysis of your optimal study times based on performance patterns"
+            icon={Clock}
+            gradient="from-blue-500 to-cyan-600"
+          />
+          <PremiumAnalyticsCard
+            title="Weakness Predictor"
+            description="Predict which topics you'll struggle with before you even start studying"
+            icon={Brain}
+            gradient="from-purple-500 to-pink-600"
+          />
+          <PremiumAnalyticsCard
+            title="Grade Trajectory"
+            description="See your predicted grade progression over time with personalized insights"
+            icon={TrendingUp}
+            gradient="from-green-500 to-emerald-600"
+            comingSoon={true}
+          />
+        </div>
 
-        <section>
-          <PublicStreakProfiles />
-        </section>
-
-        <section>
-          <StudyPlaylist />
-        </section>
-      </main>
+        {/* Goals and Topic Mastery */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <GoalsSection />
+          <TopicMasteryDisplay />
+        </div>
+      </div>
     </div>
   );
 };
