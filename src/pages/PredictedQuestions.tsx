@@ -9,6 +9,7 @@ import { curriculum } from "@/data/curriculum";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { RefreshCountdown } from "@/components/ui/refresh-countdown";
 
 const PredictedQuestions = () => {
   const navigate = useNavigate();
@@ -218,7 +219,7 @@ const PredictedQuestions = () => {
               <div className="bg-white/15 backdrop-blur-sm border border-white/30 rounded-xl p-3 mb-3">
                 <div className="flex items-center justify-between text-white text-sm">
                   <span>Questions refresh:</span>
-                  <span className="font-bold">Next week</span>
+                  <RefreshCountdown />
                 </div>
               </div>
             )}
