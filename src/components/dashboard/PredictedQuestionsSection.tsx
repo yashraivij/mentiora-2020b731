@@ -114,25 +114,19 @@ export const PredictedQuestionsSection = () => {
               </div>
             </div>
             
-            {/* Refresh Timer Notice */}
+            {/* Weekly Update Notice */}
             <div className="bg-gradient-to-r from-white/15 to-white/10 border border-white/30 rounded-2xl p-4 backdrop-blur-sm">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-gradient-to-br from-yellow-400/30 to-orange-400/30 rounded-xl">
-                    <Sparkles className="h-5 w-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-white text-sm">
-                      Fresh practice papers every week
-                    </p>
-                    <p className="text-white/90 text-xs">
-                      Content aligned with 2026 exam trends
-                    </p>
-                  </div>
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-gradient-to-br from-yellow-400/30 to-orange-400/30 rounded-xl">
+                  <Sparkles className="h-5 w-5 text-white" />
                 </div>
-                <div className="text-right">
-                  <p className="text-white/80 text-xs mb-1">Questions refresh:</p>
-                  <CountdownTimer />
+                <div>
+                  <p className="font-bold text-white text-sm">
+                    Fresh practice papers every week
+                  </p>
+                  <p className="text-white/90 text-xs">
+                    Content aligned with 2026 exam trends
+                  </p>
                 </div>
               </div>
             </div>
