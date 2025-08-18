@@ -11,6 +11,7 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
 import { useState, useEffect } from "react";
 import { TimeSavedNotification } from "@/components/notifications/TimeSavedNotification";
+import { PremiumPaywall } from "@/components/ui/premium-paywall";
 import { ProgressCard } from "@/components/dashboard/ProgressCard";
 import { SubjectCard } from "@/components/dashboard/SubjectCard";
 import { WeakTopicsSection } from "@/components/dashboard/WeakTopicsSection";
@@ -65,6 +66,7 @@ const Dashboard = () => {
   const [celebrationGrade, setCelebrationGrade] = useState('');
   const [celebrationSubject, setCelebrationSubject] = useState('');
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
+  const [showPremiumPaywall, setShowPremiumPaywall] = useState(false);
 
   const {
     notification,
@@ -346,6 +348,19 @@ const Dashboard = () => {
     }
     
   }, [user?.id]);
+
+  // Listen for premium paywall events
+  useEffect(() => {
+    const handleOpenPremiumPaywall = () => {
+      setShowPremiumPaywall(true);
+    };
+
+    window.addEventListener('openPremiumPaywall', handleOpenPremiumPaywall);
+
+    return () => {
+      window.removeEventListener('openPremiumPaywall', handleOpenPremiumPaywall);
+    };
+  }, []);
 
   const loadWeakTopicsFromDatabase = async () => {
     if (!user?.id) return;
@@ -1611,6 +1626,17 @@ const Dashboard = () => {
       <DiscordInvitation
         isVisible={showDiscordInvitation}
         onClose={() => setShowDiscordInvitation(false)}
+      />
+
+      {/* Premium Paywall Modal */}
+      <PremiumPaywall
+        isOpen={showPremiumPaywall}
+        onClose={() => setShowPremiumPaywall(false)}
+        onUpgrade={() => {
+          // Handle upgrade logic here
+          console.log('Upgrade to premium clicked');
+          setShowPremiumPaywall(false);
+        }}
       />
 
       {/* Feedback Fish Button */}
