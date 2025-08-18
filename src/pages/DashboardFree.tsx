@@ -948,11 +948,12 @@ const DashboardFree = () => {
                     {getFilteredSubjects().map((subject) => (
                       <SubjectCard
                         key={subject.id}
-                        subject={subject}
-                        userProgress={userProgress}
-                        pinnedSubjects={pinnedSubjects}
-                        onPin={handlePinSubject}
-                        onSubjectToggle={(subjectId: string) => handleSubjectToggle(subjectId, '', false)}
+                        subject={{...subject, color: 'blue'}}
+                        progress={userProgress}
+                        onStartPractice={(subjectId: string) => navigate(`/subjects/${subjectId}`)}
+                        onTogglePin={handlePinSubject}
+                        isPinned={pinnedSubjects.includes(subject.id)}
+                        onToggleUserSubject={(subjectId: string) => handleSubjectToggle(subjectId, '', false)}
                         isUserSubject={true}
                       />
                     ))}
@@ -965,11 +966,12 @@ const DashboardFree = () => {
                   {getFilteredSubjects().map((subject) => (
                     <SubjectCard
                       key={subject.id}
-                      subject={subject}
-                      userProgress={userProgress}
-                      pinnedSubjects={pinnedSubjects}
-                      onPin={handlePinSubject}
-                      onSubjectToggle={(subjectId: string) => handleSubjectToggle(subjectId, '', true)}
+                      subject={{...subject, color: 'blue'}}
+                      progress={userProgress}
+                      onStartPractice={(subjectId: string) => navigate(`/subjects/${subjectId}`)}
+                      onTogglePin={handlePinSubject}
+                      isPinned={pinnedSubjects.includes(subject.id)}
+                      onToggleUserSubject={(subjectId: string) => handleSubjectToggle(subjectId, '', true)}
                       isUserSubject={userSubjects.includes(subject.id)}
                     />
                   ))}
