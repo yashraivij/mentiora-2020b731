@@ -4,14 +4,27 @@ import { BookOpen, CheckCircle, BarChart3, Users, ArrowRight, Star, Sparkles, Qu
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { DynamicTestimonials } from "@/components/ui/dynamic-testimonials";
+import { PremiumPaywall } from "@/components/ui/premium-paywall";
 
 const Index = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const [showPremiumPaywall, setShowPremiumPaywall] = useState(false);
   
-  
+  // Listen for premium paywall events
+  useEffect(() => {
+    const handleOpenPremiumPaywall = () => {
+      setShowPremiumPaywall(true);
+    };
+
+    window.addEventListener('openPremiumPaywall', handleOpenPremiumPaywall);
+
+    return () => {
+      window.removeEventListener('openPremiumPaywall', handleOpenPremiumPaywall);
+    };
+  }, []);
   
   // Animation refs
   const heroRef = useRef(null);
@@ -550,6 +563,16 @@ const Index = () => {
           </div>
         </motion.div>
       </div>
+      
+      {/* Premium Paywall Modal */}
+      <PremiumPaywall 
+        isOpen={showPremiumPaywall} 
+        onClose={() => setShowPremiumPaywall(false)}
+        onUpgrade={() => {
+          setShowPremiumPaywall(false);
+          navigate('/register');
+        }}
+      />
     </div>
   );
 };
