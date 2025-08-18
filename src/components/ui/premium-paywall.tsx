@@ -109,7 +109,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
               </motion.div>
               
               <h1 className="text-2xl font-bold text-white mb-4">
-                Unlock Your Academic Potential
+                Secure Your Child's Future Success
               </h1>
               <p className="text-lg text-white/80 max-w-2xl mx-auto">
                 Give your child the competitive edge to achieve Grade 9s and secure their place at top universities
