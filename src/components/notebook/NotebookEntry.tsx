@@ -93,7 +93,7 @@ export const NotebookEntry = ({ entry, onUpgradeClick }: NotebookEntryProps) => 
       
       <CardContent className="space-y-6 relative">
         {/* What Tripped Me Up */}
-        <div className="bg-red-50 dark:bg-red-950/20 p-4 rounded-lg border border-red-200 dark:border-red-800/30 filter blur-sm">
+        <div className="bg-red-50 dark:bg-red-950/20 p-4 rounded-lg border border-red-200 dark:border-red-800/30">
           <h4 className="font-semibold text-red-800 dark:text-red-300 mb-2 flex items-center gap-2">
             <AlertCircle className="h-4 w-4" />
             What Tripped Me Up
@@ -102,7 +102,7 @@ export const NotebookEntry = ({ entry, onUpgradeClick }: NotebookEntryProps) => 
         </div>
 
         {/* Fix Sentence */}
-        <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border border-green-200 dark:border-green-800/30 filter blur-sm">
+        <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border border-green-200 dark:border-green-800/30">
           <h4 className="font-semibold text-green-800 dark:text-green-300 mb-2 flex items-center gap-2">
             <Lightbulb className="h-4 w-4" />
             Fix in One Sentence
@@ -111,7 +111,7 @@ export const NotebookEntry = ({ entry, onUpgradeClick }: NotebookEntryProps) => 
         </div>
 
         {/* Bulletproof Notes */}
-        <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800/30 filter blur-sm">
+        <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800/30">
           <h4 className="font-semibold text-blue-800 dark:text-blue-300 mb-3 flex items-center gap-2">
             <BookOpen className="h-4 w-4" />
             Bulletproof Notes
@@ -128,7 +128,7 @@ export const NotebookEntry = ({ entry, onUpgradeClick }: NotebookEntryProps) => 
 
         {/* Mini Example */}
         {entry.mini_example && (
-          <div className="bg-purple-50 dark:bg-purple-950/20 p-4 rounded-lg border border-purple-200 dark:border-purple-800/30 filter blur-sm">
+          <div className="bg-purple-50 dark:bg-purple-950/20 p-4 rounded-lg border border-purple-200 dark:border-purple-800/30">
             <h4 className="font-semibold text-purple-800 dark:text-purple-300 mb-2 flex items-center gap-2">
               <Target className="h-4 w-4" />
               Mini Worked Example
@@ -140,7 +140,7 @@ export const NotebookEntry = ({ entry, onUpgradeClick }: NotebookEntryProps) => 
         )}
 
         {/* Keywords */}
-        <div className="bg-gray-50 dark:bg-gray-950/20 p-4 rounded-lg border border-gray-200 dark:border-gray-800/30 filter blur-sm">
+        <div className="bg-gray-50 dark:bg-gray-950/20 p-4 rounded-lg border border-gray-200 dark:border-gray-800/30">
           <h4 className="font-semibold text-gray-800 dark:text-gray-300 mb-2 flex items-center gap-2">
             <Brain className="h-4 w-4" />
             Keywords
@@ -155,7 +155,7 @@ export const NotebookEntry = ({ entry, onUpgradeClick }: NotebookEntryProps) => 
         </div>
 
         {/* Next Step */}
-        <div className="bg-amber-50 dark:bg-amber-950/20 p-4 rounded-lg border border-amber-200 dark:border-amber-800/30 filter blur-sm">
+        <div className="bg-amber-50 dark:bg-amber-950/20 p-4 rounded-lg border border-amber-200 dark:border-amber-800/30">
           <h4 className="font-semibold text-amber-800 dark:text-amber-300 mb-2 flex items-center gap-2">
             <Target className="h-4 w-4" />
             Next Step
@@ -163,28 +163,6 @@ export const NotebookEntry = ({ entry, onUpgradeClick }: NotebookEntryProps) => 
           <p className="text-amber-700 dark:text-amber-200 text-sm">{entry.next_step_suggestion}</p>
         </div>
 
-        {/* Premium CTA Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center p-6 max-w-sm mx-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm rounded-xl shadow-lg border border-slate-200/50 dark:border-slate-700/50">
-            <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
-              <Crown className="h-6 w-6 text-white" />
-            </div>
-            <h3 className="text-lg font-bold text-foreground mb-2">
-              Premium Feature
-            </h3>
-            <p className="text-sm font-semibold text-muted-foreground mb-4 leading-relaxed">
-              Turn 3-hour revision sessions into 30 minutes with instant notes
-            </p>
-            <Button 
-              size="sm" 
-              onClick={onUpgradeClick}
-              className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
-            >
-              <Crown className="h-3 w-3 mr-2" />
-              Upgrade Now
-            </Button>
-          </div>
-        </div>
 
       </CardContent>
     </Card>
