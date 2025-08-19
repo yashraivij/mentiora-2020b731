@@ -9,7 +9,7 @@ import { DynamicTestimonials } from "@/components/ui/dynamic-testimonials";
 
 const Index = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, isPremium } = useAuth();
   
   
   
@@ -250,7 +250,10 @@ const Index = () => {
             {user ? (
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button 
-                  onClick={() => navigate('/dashboard')} 
+                  onClick={() => {
+                    const targetDashboard = isPremium ? '/premium-dashboard' : '/dashboard';
+                    navigate(targetDashboard);
+                  }} 
                   size="lg"
                   className="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-8 py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
                 >

@@ -2,7 +2,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
-import { useNavigate } from 'react-router-dom';
 
 interface AuthContextType {
   user: User | null;
@@ -61,12 +60,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           const premiumStatus = await checkPremiumStatus(session.user.id);
           setIsPremium(premiumStatus);
           
-          // Redirect to appropriate dashboard based on premium status
-          if (event === 'SIGNED_IN') {
-            const targetDashboard = premiumStatus ? '/premium-dashboard' : '/dashboard';
-            console.log('Redirecting to:', targetDashboard);
-            window.location.href = targetDashboard;
-          }
+          // Note: Navigation should be handled by components, not in auth context
         } else {
           setIsPremium(false);
         }
