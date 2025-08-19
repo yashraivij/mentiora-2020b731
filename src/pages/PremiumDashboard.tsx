@@ -1135,7 +1135,7 @@ const PremiumDashboard = () => {
         </div>
 
         {/* Premium Predicted GCSE Grades Section - NO BLUR */}
-        <PremiumPredictedGradesGraph userProgress={userProgress} />
+        <PremiumPredictedGradesGraph key="premium-grades-no-blur" userProgress={userProgress} />
 
         {/* Predicted 2026 Questions Section */}
         <PredictedQuestionsSection />
