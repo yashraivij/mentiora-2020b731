@@ -23,7 +23,7 @@ import { PredictivePerformanceCard } from "@/components/dashboard/PredictivePerf
 import { OptimalStudyTimeCard } from "@/components/dashboard/OptimalStudyTimeCard";
 
 import { PredictedQuestionsSection } from "@/components/dashboard/PredictedQuestionsSection";
-import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
+import { PremiumPredictedGradesGraph } from "@/components/dashboard/PremiumPredictedGradesGraph";
 
 import { supabase } from "@/integrations/supabase/client";
 import { StressTracker } from "@/lib/stressTracker";
@@ -1134,8 +1134,8 @@ const PremiumDashboard = () => {
           </Card>
         </div>
 
-        {/* Predicted GCSE Grades Section */}
-        <PredictedGradesGraph userProgress={userProgress} />
+        {/* Premium Predicted GCSE Grades Section - NO BLUR */}
+        <PremiumPredictedGradesGraph userProgress={userProgress} />
 
         {/* Predicted 2026 Questions Section */}
         <PredictedQuestionsSection />
