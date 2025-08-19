@@ -11,12 +11,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { RefreshCountdown } from "@/components/ui/refresh-countdown";
 import { PremiumPaywall } from "@/components/ui/premium-paywall";
-import { useAuth } from "@/contexts/AuthContext";
 
 const PredictedQuestions = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { isPremium } = useAuth();
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [completedExams, setCompletedExams] = useState<{[key: string]: any}>({});
   const [loading, setLoading] = useState(true);
@@ -68,37 +66,12 @@ const PredictedQuestions = () => {
     }
   };
 
-  const handleSubjectSelect = async (subjectId: string) => {
-    if (isPremium) {
-      // Premium users can access the exam directly
-      navigate(`/predicted-exam/${subjectId}`);
-    } else {
-      // Free users see paywall
-      setShowPaywall(true);
-    }
+  const handleSubjectSelect = (subjectId: string) => {
+    setShowPaywall(true);
   };
 
-  const handleUpgrade = async () => {
-    try {
-      const { data, error } = await supabase.functions.invoke('create-checkout');
-      if (error) {
-        console.error('Error creating checkout:', error);
-        toast({
-          title: "Error",
-          description: "Failed to start checkout process. Please try again.",
-          variant: "destructive"
-        });
-        return;
-      }
-      window.open(data.url, '_blank');
-    } catch (error) {
-      console.error('Checkout error:', error);
-      toast({
-        title: "Error", 
-        description: "Failed to start checkout process. Please try again.",
-        variant: "destructive"
-      });
-    }
+  const handleUpgrade = () => {
+    window.open('https://buy.stripe.com/test_cN23fH5Qu6Rv4Vy8ww', '_blank');
   };
 
   const getSubjectColor = (subjectId: string) => {
@@ -281,11 +254,7 @@ const PredictedQuestions = () => {
                      className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
                      onClick={(e) => {
                        e.stopPropagation();
-                       if (isPremium) {
-                         navigate(`/predicted-exam/${subject.id}`);
-                       } else {
-                         setShowPaywall(true);
-                       }
+                       setShowPaywall(true);
                      }}
                    >
                      <RotateCcw className="h-4 w-4 mr-2" />
