@@ -451,7 +451,7 @@ export const PremiumPredictedGradesGraph = ({ userProgress }: PremiumPredictedGr
                           
                           {/* Premium percentage indicator - NO BLUR */}
                           {grade.finalGrade !== '–' && (
-                            <div className="absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1">
+                            <div className="absolute bottom-2 right-2 bg-black/20 rounded-full px-2 py-1">
                               <span className="text-xs font-bold text-white">{grade.finalPercentage}%</span>
                             </div>
                           )}
