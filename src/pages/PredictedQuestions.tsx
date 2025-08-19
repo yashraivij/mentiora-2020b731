@@ -11,19 +11,15 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { RefreshCountdown } from "@/components/ui/refresh-countdown";
 import { PremiumPaywall } from "@/components/ui/premium-paywall";
-import { useSubscription } from "@/contexts/SubscriptionContext";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const PredictedQuestions = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { subscribed, createCheckout } = useSubscription();
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [completedExams, setCompletedExams] = useState<{[key: string]: any}>({});
   const [loading, setLoading] = useState(true);
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
   const [showPaywall, setShowPaywall] = useState(false);
-  const [showPremiumModal, setShowPremiumModal] = useState(false);
 
   useEffect(() => {
     // Ensure page starts at top when navigating here
@@ -71,11 +67,7 @@ const PredictedQuestions = () => {
   };
 
   const handleSubjectSelect = (subjectId: string) => {
-    if (!subscribed) {
-      setShowPremiumModal(true);
-      return;
-    }
-    navigate(`/predicted-exam/${subjectId}`);
+    setShowPaywall(true);
   };
 
   const handleUpgrade = () => {
@@ -262,7 +254,7 @@ const PredictedQuestions = () => {
                      className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
                      onClick={(e) => {
                        e.stopPropagation();
-                       navigate(`/predicted-exam/${subject.id}`);
+                       setShowPaywall(true);
                      }}
                    >
                      <RotateCcw className="h-4 w-4 mr-2" />
@@ -278,8 +270,8 @@ const PredictedQuestions = () => {
                     handleSubjectSelect(subject.id);
                   }}
                 >
-                  <Rocket className="h-4 w-4 mr-2" />
-                  Start Exam Practice
+                  <Crown className="h-4 w-4 mr-2" />
+                  Start Premium Exam
                   <Sparkles className="h-4 w-4 ml-2" />
                 </Button>
               )}
@@ -330,7 +322,7 @@ const PredictedQuestions = () => {
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-white">Predicted 2026 Questions</h1>
-                  <p className="text-sm text-white/90">AI-powered exam simulation</p>
+                  <p className="text-sm text-white/90">Premium exam simulation</p>
                 </div>
               </div>
             </div>
@@ -464,101 +456,6 @@ const PredictedQuestions = () => {
         onClose={() => setShowPaywall(false)}
         onUpgrade={handleUpgrade}
       />
-
-      {/* Premium Modal */}
-      <Dialog open={showPremiumModal} onOpenChange={setShowPremiumModal}>
-        <DialogContent className="max-w-2xl bg-gradient-to-br from-purple-50/95 via-blue-50/95 to-emerald-50/95 dark:from-purple-900/95 dark:via-blue-900/95 dark:to-emerald-900/95 backdrop-blur-xl border-2 border-purple-200/60 dark:border-purple-700/40">
-          <DialogHeader>
-            <div className="relative p-8 bg-gradient-to-br from-purple-500/10 via-blue-500/10 to-emerald-500/10 rounded-2xl border border-purple-200/50 dark:border-purple-700/40 overflow-hidden">
-              {/* Premium background effects */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-emerald-500/5" />
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400/20 to-purple-500/20 rounded-full blur-2xl" />
-              <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-gradient-to-br from-emerald-500/20 to-blue-500/20 rounded-full blur-xl" />
-              
-              {/* Floating sparkle elements */}
-              <div className="absolute top-4 right-12 w-1 h-1 bg-amber-400 rounded-full animate-ping" />
-              <div className="absolute top-8 right-6 w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse" />
-              <div className="absolute bottom-6 left-8 w-1 h-1 bg-emerald-400 rounded-full animate-ping delay-1000" />
-              
-              <div className="relative flex flex-col items-center text-center space-y-6">
-                {/* Premium icon with effects */}
-                <div className="relative">
-                  <div className="w-20 h-20 bg-gradient-to-br from-purple-500 via-blue-600 to-emerald-600 rounded-3xl flex items-center justify-center shadow-2xl shadow-purple-500/25 animate-pulse">
-                    <Rocket className="h-10 w-10 text-white drop-shadow-lg" />
-                  </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full border-4 border-background animate-bounce shadow-lg">
-                    <Sparkles className="h-4 w-4 text-white m-auto mt-1" />
-                  </div>
-                  <div className="absolute -bottom-1 -left-1 w-6 h-6 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full border-2 border-background animate-pulse shadow-md">
-                    <Crown className="h-3 w-3 text-white m-auto mt-1" />
-                  </div>
-                </div>
-                
-                <div className="space-y-4">
-                  <DialogTitle className="text-3xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 bg-clip-text text-transparent">
-                    ✨ Unlock Premium 2026 Exam Practice
-                  </DialogTitle>
-                  <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-md">
-                    Get access to AI-powered exam simulations with detailed insights and real exam timing
-                  </p>
-                </div>
-                
-                {/* Premium benefits grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-lg">
-                  <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-white/10 rounded-xl">
-                    <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">Full-length predicted papers</span>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-white/10 rounded-xl">
-                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse delay-200" />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">Real exam timing & pressure</span>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-white/10 rounded-xl">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse delay-500" />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">AI-powered smart marking</span>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-white/10 rounded-xl">
-                    <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse delay-700" />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">Weekly updated questions</span>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-white/10 rounded-xl">
-                    <div className="w-2 h-2 bg-rose-400 rounded-full animate-pulse delay-1000" />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">Detailed performance insights</span>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white/50 dark:bg-white/10 rounded-xl">
-                    <div className="w-2 h-2 bg-teal-400 rounded-full animate-pulse delay-1200" />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">Grade predictions & trends</span>
-                  </div>
-                </div>
-                
-                {/* Premium upgrade button */}
-                <div className="flex flex-col items-center space-y-3 pt-4">
-                  <Button 
-                    onClick={() => {
-                      setShowPremiumModal(false);
-                      createCheckout();
-                    }}
-                    className="relative bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 hover:from-purple-700 hover:via-blue-700 hover:to-emerald-700 text-white font-bold px-8 py-3 rounded-xl shadow-2xl shadow-purple-500/25 hover:shadow-purple-500/40 transition-all duration-300 transform hover:scale-105 border-2 border-white/20 hover:border-white/30"
-                  >
-                    <span className="relative z-10 flex items-center space-x-2">
-                      <Crown className="h-5 w-5" />
-                      <span>Upgrade to Premium</span>
-                      <Sparkles className="h-4 w-4 animate-spin" />
-                    </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent rounded-xl" />
-                  </Button>
-                  
-                  <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                    <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
-                    <span>Instant access to all premium features</span>
-                    <div className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };

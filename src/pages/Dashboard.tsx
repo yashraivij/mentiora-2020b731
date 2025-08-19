@@ -3,7 +3,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
-import { useSubscription } from "@/contexts/SubscriptionContext";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
 import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Gamepad2 } from "lucide-react";
@@ -49,7 +48,6 @@ interface UserProgress {
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
-  const { subscribed, subscriptionTier, openCustomerPortal } = useSubscription();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
@@ -354,13 +352,7 @@ const Dashboard = () => {
   // Listen for premium paywall events
   useEffect(() => {
     const handleOpenPremiumPaywall = () => {
-      // Only show paywall if user is not subscribed
-      if (!subscribed) {
-        setShowPremiumPaywall(true);
-      } else {
-        // If user is already subscribed, show manage subscription instead
-        openCustomerPortal();
-      }
+      setShowPremiumPaywall(true);
     };
 
     window.addEventListener('openPremiumPaywall', handleOpenPremiumPaywall);
@@ -368,7 +360,7 @@ const Dashboard = () => {
     return () => {
       window.removeEventListener('openPremiumPaywall', handleOpenPremiumPaywall);
     };
-  }, [subscribed, openCustomerPortal]);
+  }, []);
 
   const loadWeakTopicsFromDatabase = async () => {
     if (!user?.id) return;
@@ -937,10 +929,8 @@ const Dashboard = () => {
                     Mentiora
                   </h1>
                   <div className="flex items-center space-x-2">
-                    <>
-                      <User className="h-3 w-3 text-muted-foreground" />
-                      <span className="text-xs font-medium text-muted-foreground">Free Account</span>
-                    </>
+                    <Crown className="h-3 w-3 text-amber-500" />
+                    <span className="text-xs font-medium text-muted-foreground">Premium</span>
                   </div>
                 </div>
               </div>
@@ -1161,7 +1151,7 @@ const Dashboard = () => {
 
 
         {/* Predicted GCSE Grades Section */}
-        <PredictedGradesGraph userProgress={userProgress} subscribed={subscribed} />
+        <PredictedGradesGraph userProgress={userProgress} />
 
 
         {/* Predicted 2026 Questions Section */}
@@ -1169,167 +1159,86 @@ const Dashboard = () => {
 
         {/* Revision Notebook - Premium Feature */}
         <div className="mb-8">
-          {subscribed ? (
-            <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl cursor-pointer" onClick={() => navigate('/notebook')}>
-              {/* Premium Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-indigo-400/20" />
-              
-              {/* Animated Border */}
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 rounded-lg p-[2px]">
-                <div className="bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 rounded-[6px] h-full w-full" />
+          
+          {/* Revision Notebook - Premium Feature */}
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => navigate('/notebook')}>
+            {/* Premium Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Animated Border */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 rounded-lg p-[2px] group-hover:animate-pulse">
+              <div className="bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 rounded-[6px] h-full w-full" />
+            </div>
+            
+            <CardContent className="relative p-8">
+              <div className="flex items-start justify-between mb-6">
+                <div className="flex items-center space-x-4">
+                  <div className="relative w-16 h-16 rounded-3xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-500 flex items-center justify-center shadow-2xl group-hover:shadow-purple-500/25 transition-shadow duration-300">
+                    <div className="absolute inset-2 rounded-2xl bg-white/20 backdrop-blur-sm" />
+                    <Brain className="h-8 w-8 text-white relative z-10 group-hover:scale-110 transition-transform duration-300" />
+                    <Sparkles className="absolute -top-1 -right-1 h-4 w-4 text-yellow-300 animate-pulse" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-700 via-pink-600 to-indigo-700 dark:from-purple-300 dark:via-pink-300 dark:to-indigo-300 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
+                      Revision Notebook
+                    </h3>
+                    <div className="flex items-center space-x-2 mt-1">
+                      <Crown className="h-4 w-4 text-amber-500 animate-bounce" />
+                      <span className="text-sm font-semibold bg-gradient-to-r from-amber-600 to-yellow-600 dark:from-amber-400 dark:to-yellow-400 bg-clip-text text-transparent">Premium Feature</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col items-end space-y-2 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="flex items-center space-x-2 px-3 py-1 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-full border border-emerald-300/30">
+                    <Zap className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
+                    <span className="text-xs font-medium text-emerald-700 dark:text-emerald-300">Auto</span>
+                  </div>
+                  <div className="flex items-center space-x-2 px-3 py-1 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full border border-blue-300/30">
+                    <Target className="h-3 w-3 text-blue-600 dark:text-blue-400" />
+                    <span className="text-xs font-medium text-blue-700 dark:text-blue-300">Grade 9 Focus</span>
+                  </div>
+                </div>
               </div>
               
-              <CardContent className="relative p-8">
-                <div className="flex items-start justify-between mb-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="relative w-16 h-16 rounded-3xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-500 flex items-center justify-center shadow-2xl">
-                      <div className="absolute inset-2 rounded-2xl bg-white/20 backdrop-blur-sm" />
-                      <Brain className="h-8 w-8 text-white relative z-10" />
-                      <Sparkles className="absolute -top-1 -right-1 h-4 w-4 text-yellow-300 animate-pulse" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-700 via-pink-600 to-indigo-700 dark:from-purple-300 dark:via-pink-300 dark:to-indigo-300 bg-clip-text text-transparent">
-                        Revision Notebook
-                      </h3>
-                      <div className="flex items-center space-x-2 mt-1">
-                        <CheckCircle className="h-4 w-4 text-emerald-500" />
-                        <span className="text-sm font-semibold bg-gradient-to-r from-emerald-600 to-green-600 dark:from-emerald-400 dark:to-green-400 bg-clip-text text-transparent">Premium Active</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-end space-y-2 opacity-70">
-                    <div className="flex items-center space-x-2 px-3 py-1 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-full border border-emerald-300/30">
-                      <Zap className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
-                      <span className="text-xs font-medium text-emerald-700 dark:text-emerald-300">Auto</span>
-                    </div>
-                    <div className="flex items-center space-x-2 px-3 py-1 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full border border-blue-300/30">
-                      <Target className="h-3 w-3 text-blue-600 dark:text-blue-400" />
-                      <span className="text-xs font-medium text-blue-700 dark:text-blue-300">Grade 9 Focus</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
-                  Revolutionary technology creates <span className="font-semibold text-purple-700 dark:text-purple-300">ultra-clear, Grade 9-level revision notes</span> instantly for every question where you lose marks. Each note is meticulously crafted with key definitions, equations, and premium exam strategies.
-                </p>
-                
-                <div className="grid grid-cols-1 gap-4 mb-6">
-                  <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg">
-                      <CheckCircle className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">Instant premium note generation</span>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center shadow-lg">
-                      <BookOpen className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">Organized by topic</span>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
-                      <Trophy className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">Exam-focused premium content</span>
-                  </div>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2 text-sm text-purple-600 dark:text-purple-400 font-medium">
-                    <Clock className="h-4 w-4" />
-                    <span>Save 10+ hours per week</span>
-                  </div>
-                  <Button 
-                    className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white shadow-xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 px-8 py-3 text-base font-semibold"
-                  >
-                    <Brain className="h-4 w-4 mr-2" />
-                    Open Notebook
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ) : (
-            <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => navigate('/notebook')}>
-              {/* Premium Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
+                Revolutionary technology creates <span className="font-semibold text-purple-700 dark:text-purple-300">ultra-clear, Grade 9-level revision notes</span> instantly for every question where you lose marks. Each note is meticulously crafted with key definitions, equations, and premium exam strategies.
+              </p>
               
-              {/* Lock Overlay - Removed hover overlay */}
-              
-              {/* Animated Border */}
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 rounded-lg p-[2px] group-hover:animate-pulse">
-                <div className="bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 rounded-[6px] h-full w-full" />
+              <div className="grid grid-cols-1 gap-4 mb-6">
+                <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">Instant premium note generation</span>
+                </div>
+                <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center shadow-lg">
+                    <BookOpen className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">Organized by topic</span>
+                </div>
+                <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
+                    <Trophy className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">Exam-focused premium content</span>
+                </div>
               </div>
               
-              <CardContent className="relative p-8">
-                <div className="flex items-start justify-between mb-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="relative w-16 h-16 rounded-3xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-500 flex items-center justify-center shadow-2xl">
-                      <div className="absolute inset-2 rounded-2xl bg-white/20 backdrop-blur-sm" />
-                      <Brain className="h-8 w-8 text-white relative z-10" />
-                      <Sparkles className="absolute -top-1 -right-1 h-4 w-4 text-yellow-300 animate-pulse" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-700 via-pink-600 to-indigo-700 dark:from-purple-300 dark:via-pink-300 dark:to-indigo-300 bg-clip-text text-transparent">
-                        Revision Notebook
-                      </h3>
-                      <div className="flex items-center space-x-2 mt-1">
-                        <Crown className="h-4 w-4 text-amber-500 animate-bounce" />
-                        <span className="text-sm font-semibold bg-gradient-to-r from-amber-600 to-yellow-600 dark:from-amber-400 dark:to-yellow-400 bg-clip-text text-transparent">Premium Feature</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-end space-y-2 opacity-70">
-                    <div className="flex items-center space-x-2 px-3 py-1 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-full border border-emerald-300/30">
-                      <Zap className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
-                      <span className="text-xs font-medium text-emerald-700 dark:text-emerald-300">Auto</span>
-                    </div>
-                    <div className="flex items-center space-x-2 px-3 py-1 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full border border-blue-300/30">
-                      <Target className="h-3 w-3 text-blue-600 dark:text-blue-400" />
-                      <span className="text-xs font-medium text-blue-700 dark:text-blue-300">Grade 9 Focus</span>
-                    </div>
-                  </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2 text-sm text-purple-600 dark:text-purple-400 font-medium">
+                  <Clock className="h-4 w-4" />
+                  <span>Save 10+ hours per week</span>
                 </div>
-                
-                <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
-                  Revolutionary technology creates <span className="font-semibold text-purple-700 dark:text-purple-300">ultra-clear, Grade 9-level revision notes</span> instantly for every question where you lose marks. Each note is meticulously crafted with key definitions, equations, and premium exam strategies.
-                </p>
-                
-                <div className="grid grid-cols-1 gap-4 mb-6">
-                  <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg">
-                      <CheckCircle className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">Instant premium note generation</span>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center shadow-lg">
-                      <BookOpen className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">Organized by topic</span>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
-                      <Trophy className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="font-medium text-gray-800 dark:text-gray-200">Exam-focused premium content</span>
-                  </div>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2 text-sm text-purple-600 dark:text-purple-400 font-medium">
-                    <Clock className="h-4 w-4" />
-                    <span>Save 10+ hours per week</span>
-                  </div>
-                  <Button 
-                    className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white shadow-xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 px-8 py-3 text-base font-semibold"
-                  >
-                    <Crown className="h-4 w-4 mr-2" />
-                    Open Premium Notebook
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          )}
+                <Button 
+                  className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white shadow-xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 px-8 py-3 text-base font-semibold"
+                >
+                  <Brain className="h-4 w-4 mr-2" />
+                  Open Premium Notebook
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
 
@@ -1616,7 +1525,7 @@ const Dashboard = () => {
             
             <PremiumAnalyticsCard
               title="Stress Monitor"
-              description="Intelligent stress detection and recommendations for optimal learning"
+              description="AI-powered stress detection and recommendations for optimal learning"
               icon={Brain}
               gradient="from-emerald-500 to-teal-600"
               comingSoon={true}

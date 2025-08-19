@@ -73,7 +73,7 @@ export const PersonalizedNotification = ({
           title: "Focus Your Revision",
           message: `Based on your recent exam, we recommend focusing on ${weakestTopic} to improve your grade.`,
           actionText: "Practice Topic",
-          badgeText: "Smart Analysis",
+          badgeText: "AI Analysis",
           gradient: "from-sky-400 via-blue-500 to-cyan-500"
         };
       case "exam-recommendation":
@@ -155,7 +155,7 @@ export const PersonalizedNotification = ({
           title: "Personalized Study Recommendation",
           message: `Focus on: ${formattedTopic} in ${studyDetails.subject.replace('-', ' ')}${studyDetails.details.length > 0 ? ` (based on ${studyDetails.details.join(', ')})` : ''}`,
           actionText: "Take Practice Exam",
-          badgeText: "Smart Analysis",
+          badgeText: "AI Analysis",
           gradient: "from-sky-400 via-blue-500 to-cyan-500"
         };
       default:
@@ -246,7 +246,7 @@ export const PersonalizedNotification = ({
             
             <div className="flex items-center gap-1.5 text-xs text-white/80 font-medium">
               <Star className="h-3 w-3 fill-current text-yellow-300" />
-              <span>Smart Powered</span>
+              <span>AI Powered</span>
             </div>
           </div>
         </div>

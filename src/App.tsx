@@ -7,7 +7,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -19,7 +18,6 @@ import PredictedQuestions from "./pages/PredictedQuestions";
 import PredictedExam from "./pages/PredictedExam";
 import PredictedResults from "./pages/PredictedResults";
 import Notebook from "./pages/Notebook";
-import DashboardCopy from "./pages/DashboardCopy";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -32,8 +30,7 @@ const App: React.FC = () => (
         <Toaster />
         <Sonner />
         <AuthProvider>
-          <SubscriptionProvider>
-            <BrowserRouter>
+          <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<Login />} />
@@ -78,16 +75,10 @@ const App: React.FC = () => (
                 <Notebook />
               </ProtectedRoute>
             } />
-            <Route path="/dashboard-copy" element={
-              <ProtectedRoute>
-                <DashboardCopy />
-              </ProtectedRoute>
-            } />
             <Route path="*" element={<NotFound />} />
           </Routes>
-            </BrowserRouter>
-          </SubscriptionProvider>
-        </AuthProvider>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </ThemeProvider>
   </QueryClientProvider>

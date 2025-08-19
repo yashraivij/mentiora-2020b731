@@ -2,16 +2,14 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Crown, Zap, TrendingUp, Clock, Star, CheckCircle, Target, BookOpen, Award, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useSubscription } from '@/contexts/SubscriptionContext';
 
 interface PremiumPaywallProps {
   isOpen: boolean;
   onClose: () => void;
-  onUpgrade?: () => void;
+  onUpgrade: () => void;
 }
 
 export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose, onUpgrade }) => {
-  const { createCheckout, isLoading } = useSubscription();
   const benefits = [
     {
       icon: TrendingUp,
@@ -148,11 +146,10 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                 <div className="text-amber-400 text-sm font-medium">Save 50% - First 3 months</div>
                 <div className="text-white/60 text-xs mt-2">Less than a single tutoring session</div>
                 <Button
-                  onClick={createCheckout}
-                  disabled={isLoading}
-                  className="w-full mt-4 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-semibold py-2 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:opacity-50"
+                  onClick={() => window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank')}
+                  className="w-full mt-4 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-semibold py-2 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                 >
-                  {isLoading ? 'Loading...' : 'Start Free Trial'}
+                  Start Free Trial
                 </Button>
               </div>
             </div>
@@ -219,13 +216,12 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
             <div className="px-8 pb-8">
               <div className="space-y-4">
                 <Button
-                  onClick={onUpgrade || createCheckout}
-                  disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 text-lg disabled:opacity-50"
+                  onClick={() => window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank')}
+                  className="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 text-lg"
                 >
                   <div className="flex items-center justify-center space-x-3">
                     <Zap className="h-6 w-6" />
-                    <span>{isLoading ? 'Loading...' : 'Upgrade to Premium Now'}</span>
+                    <span>Upgrade to Premium Now</span>
                     <Crown className="h-6 w-6" />
                   </div>
                 </Button>
