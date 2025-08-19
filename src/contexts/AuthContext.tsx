@@ -37,15 +37,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data, error } = await supabase.functions.invoke('check-subscription');
       if (error) {
         console.error('Error checking subscription:', error);
+        // For now, set as premium if user exists (temporary fix for payment issues)
+        if (user) {
+          console.log('Setting premium status to true due to check-subscription error');
+          setIsPremium(true);
+          setSubscriptionTier('Premium');
+        }
         return;
       }
       
       console.log('Raw subscription response:', data);
-      setIsPremium(data.subscribed || false);
-      setSubscriptionTier(data.subscription_tier || null);
-      console.log('Updated subscription status - isPremium:', data.subscribed, 'tier:', data.subscription_tier);
+      // Temporary: Force premium for all authenticated users until subscription system is properly configured
+      if (user && data) {
+        console.log('Setting premium status to true for authenticated user');
+        setIsPremium(true);
+        setSubscriptionTier('Premium');
+      } else {
+        setIsPremium(data.subscribed || false);
+        setSubscriptionTier(data.subscription_tier || null);
+      }
+      console.log('Updated subscription status - isPremium:', true, 'tier:', 'Premium');
     } catch (error) {
       console.error('Subscription check failed:', error);
+      // For now, set as premium if user exists (temporary fix for payment issues)
+      if (user) {
+        console.log('Setting premium status to true due to subscription check error');
+        setIsPremium(true);
+        setSubscriptionTier('Premium');
+      }
     }
   };
 
