@@ -375,14 +375,14 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           <div className="flex items-center space-x-6">
             {averageGrade > 0 && (
               <div className="text-center p-3 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl border border-purple-500/20">
-                <div className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent filter blur-md">{averageGrade.toFixed(1)}</div>
+                <div className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">{averageGrade.toFixed(1)}</div>
                 <div className="text-xs text-muted-foreground font-semibold">Avg Grade</div>
               </div>
             )}
             {grade7PlusCount > 0 && (
               <Badge className="bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-600 text-white border-0 px-4 py-2 text-sm font-bold shadow-lg shadow-emerald-500/25 animate-pulse">
                 <Trophy className="h-4 w-4 mr-2 animate-bounce" />
-                <span className="filter blur-md">{grade7PlusCount} Grade 7+ 🎉</span>
+                <span>{grade7PlusCount} Grade 7+ 🎉</span>
               </Badge>
             )}
           </div>
@@ -421,7 +421,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                           )}
                           
                           {/* Enhanced Grade number */}
-                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110 filter blur-md`}>
+                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110`}>
                             {grade.finalGrade}
                           </div>
 
@@ -444,7 +444,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                           {/* Premium percentage indicator */}
                           {grade.finalGrade !== '–' && (
                             <div className="absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1">
-                              <span className="text-xs font-bold text-white filter blur-md">{grade.finalPercentage}%</span>
+                              <span className="text-xs font-bold text-white">{grade.finalPercentage}%</span>
                             </div>
                           )}
                         </div>
@@ -454,7 +454,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                           <div className="text-sm font-bold text-foreground truncate mb-2">{grade.subjectName}</div>
                           {grade.isGrade7Plus && (
                             <div className="mt-2">
-                              <Badge className="bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse filter blur-md">
+                              <Badge className="bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse">
                                 🎯 Target Hit!
                               </Badge>
                             </div>
