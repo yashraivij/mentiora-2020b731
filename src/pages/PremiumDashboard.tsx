@@ -1170,7 +1170,7 @@ const PremiumDashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col items-end space-y-2 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="flex flex-col items-end space-y-2">
                   <div className="flex items-center space-x-2 px-3 py-1 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-full border border-emerald-300/30">
                     <Zap className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
                     <span className="text-xs font-medium text-emerald-700 dark:text-emerald-300">Auto</span>
