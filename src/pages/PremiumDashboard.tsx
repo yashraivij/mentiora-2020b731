@@ -1420,41 +1420,193 @@ const PremiumDashboard = () => {
           </Tabs>
         </div>
 
-        {/* Modals */}
-        {showStreakCelebration && (
-          <StreakCelebration
-            isVisible={showStreakCelebration}
-            onClose={() => setShowStreakCelebration(false)}
-            streakDays={getStudyStreak()}
-            rewardText={getStudyStreak() >= 14 ? "Free Tutoring Session!" : getStudyStreak() >= 7 ? "Study Playlists Unlocked!" : "Custom Themes Unlocked!"}
-            rewardEmoji={getStudyStreak() >= 14 ? "🎯" : getStudyStreak() >= 7 ? "🎵" : "🎨"}
+        {/* Premium Progress Overview */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <ProgressCard
+            title="Overall Progress"
+            value={`${getOverallProgress()}%`}
+            subtitle="Average across subjects"
+            progress={getOverallProgress()}
+            icon={TrendingUp}
+            color="bg-gradient-to-br from-primary via-primary/90 to-primary/80"
+            trend={userProgress.length > 0 ? 5 : undefined}
           />
-        )}
+          
+          <ProgressCard
+            title="Topics Mastered"
+            value={getMasteredTopics()}
+            subtitle="85%+ average score"
+            icon={Trophy}
+            color="bg-gradient-to-br from-emerald-500 to-emerald-600"
+          />
+          
+          <ProgressCard
+            title="Practice Sessions"
+            value={userProgress.reduce((sum, p) => sum + p.attempts, 0)}
+            subtitle="Questions completed"
+            icon={BookOpen}
+            color="bg-gradient-to-br from-blue-500 to-blue-600"
+          />
+          
+          <ProgressCard
+            title="Study Streak"
+            value={`${getStudyStreak()} days`}
+            subtitle="Keep it up!"
+            icon={Flame}
+            color="bg-gradient-to-br from-orange-500 to-red-500"
+          />
+        </div>
 
-        {showTimeSavedNotification && (
-          <TimeSavedNotification 
-            timeSavedHours={timeSavedHours}
-            onClose={() => setShowTimeSavedNotification(false)}
-            show={showTimeSavedNotification}
-          />
-        )}
+        {/* Premium Analytics Section */}
+        <div className="grid lg:grid-cols-3 gap-6 mb-8">
+          <div className="lg:col-span-1 space-y-6">
+            <AOBreakdown userProgress={userProgress} />
+            <GoalsSection />
+            <TopicMasteryDisplay />
+          </div>
+          <div className="lg:col-span-2">
+            <WeakTopicsSection 
+              weakTopics={weakTopics}
+              userProgress={userProgress}
+              onPractice={handlePractice}
+            />
+          </div>
+        </div>
 
-        {showGradeCelebration && (
-          <GradeCelebration
-            isVisible={showGradeCelebration}
-            grade={celebrationGrade}
-            subject={celebrationSubject}
-            onClose={() => setShowGradeCelebration(false)}
-          />
-        )}
+        {/* Premium Locked Analytics */}
+        <div className="space-y-6">
+          <div className="flex items-center space-x-3 mb-6">
+            <Crown className="h-6 w-6 text-amber-500" />
+            <h3 className="text-2xl font-bold text-foreground">Coming Soon</h3>
+            <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0">
+              Pro Feature
+            </Badge>
+          </div>
 
-        {showDiscordInvitation && (
-          <DiscordInvitation 
-            isVisible={showDiscordInvitation}
-            onClose={() => setShowDiscordInvitation(false)}
-          />
-        )}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <PremiumAnalyticsCard
+              title="Learning Retention"
+              description="Track how well you retain information over time with spaced repetition analysis"
+              icon={Brain}
+              gradient="from-purple-500 to-indigo-600"
+              comingSoon={true}
+            />
+            
+            <PremiumAnalyticsCard
+              title="Learning Velocity"
+              description="Measure and optimize your knowledge acquisition speed"
+              icon={Zap}
+              gradient="from-orange-500 to-red-500"
+              comingSoon={true}
+            />
+            
+            <PremiumAnalyticsCard
+              title="Stress Monitor"
+              description="AI-powered stress detection and recommendations for optimal learning"
+              icon={Brain}
+              gradient="from-emerald-500 to-teal-600"
+              comingSoon={true}
+            />
+            
+            <PremiumAnalyticsCard
+              title="Concept Mapping"
+              description="Visualize connections between topics and identify knowledge gaps"
+              icon={Target}
+              gradient="from-pink-500 to-rose-600"
+              comingSoon={true}
+            />
+          </div>
+
+          <div className="text-center py-8">
+            <div className="space-y-4">
+              <div className="flex items-center justify-center space-x-2">
+                <Sparkles className="h-6 w-6 text-violet-500 dark:text-violet-400" />
+                <h4 className="text-xl font-bold text-foreground">Advanced Analytics Coming Soon</h4>
+                <Sparkles className="h-6 w-6 text-violet-500 dark:text-violet-400" />
+              </div>
+              <p className="text-muted-foreground max-w-md mx-auto">
+                We're working hard to bring you powerful data-driven insights to supercharge your GCSE revision. 
+                Stay tuned for updates!
+              </p>
+              <Button 
+                variant="outline" 
+                className={`
+                  px-6 py-2 rounded-xl transition-all duration-300 transform
+                  ${isNotifyClicked 
+                    ? 'bg-emerald-100 border-emerald-300 text-emerald-700 scale-105 shadow-lg' 
+                    : 'bg-white/80 backdrop-blur-sm border-violet-200 text-violet-700 hover:bg-violet-50 hover:border-violet-300'
+                  }
+                `}
+                onClick={handleNotifyClick}
+              >
+                {isNotifyClicked ? <CheckCircle className="h-4 w-4 mr-2" /> : <Bell className="h-4 w-4 mr-2" />}
+                {isNotifyClicked ? 'We\'ll Notify You!' : 'Notify Me When Ready'}
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
+
+      {/* Feedback Fish Button */}
+      <button
+        data-feedback-fish
+        data-feedback-fish-userid={user?.email}
+        className="fixed bottom-6 right-6 z-50 bg-primary hover:bg-primary/90 text-primary-foreground p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-105"
+        aria-label="Send Feedback"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-5 h-5"
+        >
+          <path
+            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+
+      {/* Modals */}
+      {showStreakCelebration && (
+        <StreakCelebration
+          isVisible={showStreakCelebration}
+          onClose={() => setShowStreakCelebration(false)}
+          streakDays={getStudyStreak()}
+          rewardText={getStudyStreak() >= 14 ? "Free Tutoring Session!" : getStudyStreak() >= 7 ? "Study Playlists Unlocked!" : "Custom Themes Unlocked!"}
+          rewardEmoji={getStudyStreak() >= 14 ? "🎯" : getStudyStreak() >= 7 ? "🎵" : "🎨"}
+        />
+      )}
+
+      {showTimeSavedNotification && (
+        <TimeSavedNotification 
+          timeSavedHours={timeSavedHours}
+          onClose={() => setShowTimeSavedNotification(false)}
+          show={showTimeSavedNotification}
+        />
+      )}
+
+      {showGradeCelebration && (
+        <GradeCelebration
+          isVisible={showGradeCelebration}
+          grade={celebrationGrade}
+          subject={celebrationSubject}
+          onClose={() => setShowGradeCelebration(false)}
+        />
+      )}
+
+      {showDiscordInvitation && (
+        <DiscordInvitation 
+          isVisible={showDiscordInvitation}
+          onClose={() => setShowDiscordInvitation(false)}
+        />
+      )}
     </div>
   );
 };
