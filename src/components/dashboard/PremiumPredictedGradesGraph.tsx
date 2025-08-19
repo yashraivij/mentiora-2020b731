@@ -343,8 +343,8 @@ export const PremiumPredictedGradesGraphNoBlur = ({ userProgress }: PremiumPredi
     <Card className="glass-effect mb-8 relative border-2 border-gradient-to-r from-purple-500/20 via-blue-500/20 to-emerald-500/20 overflow-visible">
       {/* Premium background decorations */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-emerald-500/5" />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-400/10 via-purple-500/10 to-transparent rounded-full blur-3xl animate-pulse" />
-      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-br from-emerald-500/10 via-blue-500/10 to-transparent rounded-full blur-2xl" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-400/10 via-purple-500/10 to-transparent rounded-full animate-pulse" />
+      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-br from-emerald-500/10 via-blue-500/10 to-transparent rounded-full" />
       
       {/* Floating elements for premium feel */}
       <div className="absolute top-4 right-4 w-2 h-2 bg-amber-400 rounded-full animate-ping opacity-75" />
@@ -474,7 +474,7 @@ export const PremiumPredictedGradesGraphNoBlur = ({ userProgress }: PremiumPredi
                   <TooltipContent 
                     side="top" 
                     align="center"
-                    className="max-w-80 w-auto p-6 bg-gradient-to-br from-purple-900 via-blue-900 to-emerald-900 text-white text-sm rounded-2xl shadow-2xl border border-white/20 backdrop-blur-sm"
+                    className="max-w-80 w-auto p-6 bg-gradient-to-br from-purple-900 via-blue-900 to-emerald-900 text-white text-sm rounded-2xl shadow-2xl border border-white/20"
                   >
                     <div className="space-y-2">
                       <div className="font-semibold text-amber-300">{grade.subjectName}</div>
@@ -520,9 +520,9 @@ export const PremiumPredictedGradesGraphNoBlur = ({ userProgress }: PremiumPredi
           <div className="text-center py-16 relative">
             {/* Premium background effects */}
             <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/10 to-emerald-500/10 rounded-3xl" />
-            <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-pink-400/20 to-rose-500/20 rounded-full blur-2xl animate-bounce" />
-            <div className="absolute top-1/3 left-1/4 w-24 h-24 bg-gradient-to-br from-cyan-400/15 to-blue-500/15 rounded-full blur-xl" />
+            <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-full animate-pulse" />
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-pink-400/20 to-rose-500/20 rounded-full animate-bounce" />
+            <div className="absolute top-1/3 left-1/4 w-24 h-24 bg-gradient-to-br from-cyan-400/15 to-blue-500/15 rounded-full" />
             
             {/* Floating elements */}
             <div className="absolute top-8 right-12 w-3 h-3 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full animate-pulse opacity-80" />
