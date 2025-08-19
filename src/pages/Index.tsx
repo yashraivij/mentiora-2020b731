@@ -538,6 +538,7 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              className="flex justify-center md:block"
             >
               <Button 
                 onClick={() => navigate('/register')} 
