@@ -692,23 +692,81 @@ export const PredictedGradesGraph = ({ userProgress, subscribed = false }: Predi
 
         {/* Premium CTA for free accounts */}
         {!subscribed && (
-          <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 via-blue-50 to-emerald-50 dark:from-purple-900/20 dark:via-blue-900/20 dark:to-emerald-900/20 rounded-xl border border-purple-200/50 dark:border-purple-800/50">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl flex items-center justify-center">
-                  <Crown className="h-5 w-5 text-white" />
+          <div className="relative mt-8 p-8 bg-gradient-to-br from-purple-50/80 via-blue-50/80 to-emerald-50/80 dark:from-purple-900/30 dark:via-blue-900/30 dark:to-emerald-900/30 rounded-2xl border-2 border-gradient-to-r from-purple-200/60 via-blue-200/60 to-emerald-200/60 dark:from-purple-700/40 dark:via-blue-700/40 dark:to-emerald-700/40 shadow-2xl shadow-purple-500/10 overflow-hidden">
+            {/* Premium background effects */}
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-emerald-500/5" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400/20 to-purple-500/20 rounded-full blur-2xl" />
+            <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-gradient-to-br from-emerald-500/20 to-blue-500/20 rounded-full blur-xl" />
+            
+            {/* Floating sparkle elements */}
+            <div className="absolute top-4 right-12 w-1 h-1 bg-amber-400 rounded-full animate-ping" />
+            <div className="absolute top-8 right-6 w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse" />
+            <div className="absolute bottom-6 left-8 w-1 h-1 bg-emerald-400 rounded-full animate-ping delay-1000" />
+            
+            <div className="relative flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex items-start space-x-4 flex-1">
+                {/* Premium icon with effects */}
+                <div className="relative">
+                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 via-blue-600 to-emerald-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-purple-500/25 animate-pulse">
+                    <Crown className="h-8 w-8 text-white drop-shadow-lg" />
+                  </div>
+                  <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full border-2 border-background animate-bounce shadow-lg">
+                    <Sparkles className="h-3 w-3 text-white m-auto mt-1" />
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-foreground">Unlock Premium Grade Predictions</h3>
-                  <p className="text-sm text-muted-foreground">Get detailed insights and unblurred metrics</p>
+                
+                <div className="space-y-3">
+                  <div>
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 bg-clip-text text-transparent mb-2">
+                      ✨ Unlock Premium Grade Predictions
+                    </h3>
+                    <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                      Get detailed insights, unblurred metrics, and advanced analytics
+                    </p>
+                  </div>
+                  
+                  {/* Premium benefits list */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                      <span className="text-gray-700 dark:text-gray-300">Detailed grade breakdowns</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse delay-200" />
+                      <span className="text-gray-700 dark:text-gray-300">Advanced performance insights</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse delay-500" />
+                      <span className="text-gray-700 dark:text-gray-300">Confidence indicators</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse delay-700" />
+                      <span className="text-gray-700 dark:text-gray-300">Improvement strategies</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <Button 
-                onClick={createCheckout}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold px-6 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
-              >
-                Upgrade Now
-              </Button>
+              
+              {/* Premium upgrade button */}
+              <div className="flex flex-col items-center space-y-3">
+                <Button 
+                  onClick={createCheckout}
+                  className="relative bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 hover:from-purple-700 hover:via-blue-700 hover:to-emerald-700 text-white font-bold px-8 py-3 rounded-xl shadow-2xl shadow-purple-500/25 hover:shadow-purple-500/40 transition-all duration-300 transform hover:scale-105 border-2 border-white/20 hover:border-white/30"
+                >
+                  <span className="relative z-10 flex items-center space-x-2">
+                    <Crown className="h-5 w-5" />
+                    <span>Upgrade Now</span>
+                    <Sparkles className="h-4 w-4 animate-spin" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent rounded-xl" />
+                </Button>
+                
+                <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                  <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
+                  <span>Instant access</span>
+                  <div className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse" />
+                </div>
+              </div>
             </div>
           </div>
         )}
