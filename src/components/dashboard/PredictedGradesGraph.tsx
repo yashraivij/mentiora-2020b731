@@ -32,7 +32,6 @@ interface PredictedGradesGraphProps {
 }
 
 export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
-  console.log('❌ Original PredictedGradesGraph component rendered - THIS SHOULD NOT HAPPEN ON PREMIUM DASHBOARD');
   const { user, isPremium } = useAuth();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);

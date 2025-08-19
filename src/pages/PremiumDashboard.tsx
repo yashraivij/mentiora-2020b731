@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Gamepad2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -23,7 +23,7 @@ import { PredictivePerformanceCard } from "@/components/dashboard/PredictivePerf
 import { OptimalStudyTimeCard } from "@/components/dashboard/OptimalStudyTimeCard";
 
 import { PredictedQuestionsSection } from "@/components/dashboard/PredictedQuestionsSection";
-import { PremiumPredictedGradesGraphUnblurred } from "@/components/dashboard/PremiumPredictedGradesGraph";
+import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
 
 import { supabase } from "@/integrations/supabase/client";
 import { StressTracker } from "@/lib/stressTracker";
@@ -49,7 +49,6 @@ const PremiumDashboard = () => {
   const { user, logout } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
-  const location = useLocation();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
   const [pinnedSubjects, setPinnedSubjects] = useState<string[]>([]);
@@ -283,7 +282,6 @@ const PremiumDashboard = () => {
   };
 
   useEffect(() => {
-    console.log('🔥 PremiumDashboard mounted/updated');
     const loadUserData = async () => {
       if (!user?.id) return;
 
@@ -1136,8 +1134,8 @@ const PremiumDashboard = () => {
           </Card>
         </div>
 
-        {/* Premium Predicted GCSE Grades Section - COMPLETELY UNBLURRED */}
-        <PremiumPredictedGradesGraphUnblurred key={`premium-grades-unblurred-${location.pathname}-${Date.now()}`} userProgress={userProgress} />
+        {/* Predicted GCSE Grades Section */}
+        <PredictedGradesGraph userProgress={userProgress} />
 
         {/* Predicted 2026 Questions Section */}
         <PredictedQuestionsSection />
