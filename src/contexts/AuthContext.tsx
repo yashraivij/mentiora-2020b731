@@ -41,9 +41,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       
       console.log('Raw subscription response:', data);
-      setIsPremium(data.subscribed || false);
-      setSubscriptionTier(data.subscription_tier || null);
-      console.log('Updated subscription status - isPremium:', data.subscribed, 'tier:', data.subscription_tier);
+      // Temporarily force premium status for testing
+      setIsPremium(true);
+      setSubscriptionTier('Premium');
+      console.log('FORCED premium status for testing - isPremium: true, tier: Premium');
     } catch (error) {
       console.error('Subscription check failed:', error);
     }
