@@ -1156,7 +1156,7 @@ const PremiumDashboard = () => {
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center space-x-4">
                   <div className="relative w-16 h-16 rounded-3xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-500 flex items-center justify-center shadow-2xl group-hover:shadow-purple-500/25 transition-shadow duration-300">
-                    <div className="absolute inset-2 rounded-2xl bg-white/20 backdrop-blur-sm" />
+                    <div className="absolute inset-2 rounded-2xl bg-white/20" />
                     <Brain className="h-8 w-8 text-white relative z-10 group-hover:scale-110 transition-transform duration-300" />
                     <Sparkles className="absolute -top-1 -right-1 h-4 w-4 text-yellow-300 animate-pulse" />
                   </div>
@@ -1170,7 +1170,7 @@ const PremiumDashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col items-end space-y-2 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="flex flex-col items-end space-y-2">
                   <div className="flex items-center space-x-2 px-3 py-1 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-full border border-emerald-300/30">
                     <Zap className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
                     <span className="text-xs font-medium text-emerald-700 dark:text-emerald-300">Auto</span>
@@ -1207,17 +1207,9 @@ const PremiumDashboard = () => {
                 </div>
               </div>
               
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2 text-sm text-purple-600 dark:text-purple-400 font-medium">
-                  <Clock className="h-4 w-4" />
-                  <span>Save 10+ hours per week</span>
-                </div>
-                <Button 
-                  className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white shadow-xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 px-8 py-3 text-base font-semibold"
-                >
-                  <Brain className="h-4 w-4 mr-2" />
-                  Open Premium Notebook
-                </Button>
+              <div className="flex items-center space-x-2 text-sm text-purple-600 dark:text-purple-400 font-medium">
+                <Clock className="h-4 w-4" />
+                <span>Save 10+ hours per week • {timeSavedHours.toFixed(1)} hours saved so far</span>
               </div>
             </CardContent>
           </Card>
