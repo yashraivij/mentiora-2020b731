@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -340,7 +340,10 @@ export const PremiumPredictedGradesGraphUnblurred = ({ userProgress }: PremiumPr
   }
 
   return (
-    <Card className="glass-effect mb-8 relative border-2 border-gradient-to-r from-purple-500/20 via-blue-500/20 to-emerald-500/20 overflow-visible">
+    <Card 
+      className="glass-effect mb-8 relative border-2 border-gradient-to-r from-purple-500/20 via-blue-500/20 to-emerald-500/20 overflow-visible"
+      style={{ filter: 'none !important', backdropFilter: 'none !important' }}
+    >
       {/* Premium background decorations */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-emerald-500/5" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-400/10 via-purple-500/10 to-transparent rounded-full animate-pulse" />
@@ -587,3 +590,6 @@ export const PremiumPredictedGradesGraphUnblurred = ({ userProgress }: PremiumPr
     </Card>
   );
 };
+
+// Memoized version to prevent re-renders that could cause blur
+export default memo(PremiumPredictedGradesGraphUnblurred);
