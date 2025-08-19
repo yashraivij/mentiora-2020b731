@@ -11,22 +11,8 @@ export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
   const { isPremium } = useAuth();
 
-  const handleStartPredicted = async () => {
-    if (isPremium) {
-      navigate('/predicted-questions');
-    } else {
-      // Redirect to Stripe checkout for premium upgrade
-      try {
-        const { data, error } = await supabase.functions.invoke('create-checkout');
-        if (error) {
-          console.error('Error creating checkout:', error);
-          return;
-        }
-        window.open(data.url, '_blank');
-      } catch (error) {
-        console.error('Checkout error:', error);
-      }
-    }
+  const handleStartPredicted = () => {
+    navigate('/predicted-questions');
   };
 
   return (
