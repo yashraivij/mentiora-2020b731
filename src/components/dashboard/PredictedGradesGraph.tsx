@@ -32,7 +32,7 @@ interface PredictedGradesGraphProps {
 }
 
 export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
-  const { user, isPremium } = useAuth();
+  const { user } = useAuth();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -468,105 +468,89 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                     align="center"
                     className="max-w-80 w-auto p-6 bg-gradient-to-br from-purple-900 via-blue-900 to-emerald-900 text-white text-sm rounded-2xl shadow-2xl border border-white/20 backdrop-blur-sm"
                   >
-                    {isPremium ? (
-                      <div className="space-y-2">
-                        <div className="font-semibold text-amber-300">{grade.subjectName}</div>
-                        <div className="text-gray-300 leading-relaxed">
-                          {getTooltipText(grade)}
-                        </div>
-                        <div className="flex items-center space-x-2 mt-2">
-                          <Badge className={`${getConfidenceColor(grade.confidence)} border-0 text-xs`}>
-                            {grade.confidence} confidence
-                          </Badge>
-                          <span className="text-xs text-gray-400">{grade.practiceCount} practices</span>
-                        </div>
+                    <div className="space-y-4 text-center">
+                      <div className="flex items-center justify-center space-x-2">
+                        <Crown className="h-5 w-5 text-amber-400 animate-pulse" />
+                        <div className="font-bold text-amber-300">🔒 Premium Feature</div>
+                        <Crown className="h-5 w-5 text-amber-400 animate-pulse" />
                       </div>
-                    ) : (
-                      <div className="space-y-4 text-center">
-                        <div className="flex items-center justify-center space-x-2">
-                          <Crown className="h-5 w-5 text-amber-400 animate-pulse" />
-                          <div className="font-bold text-amber-300">🔒 Premium Feature</div>
-                          <Crown className="h-5 w-5 text-amber-400 animate-pulse" />
-                        </div>
-                        <div className="text-gray-300 leading-relaxed">
-                          Upgrade to Premium to unlock detailed AI insights, grade predictions, and personalized feedback for your GCSE performance.
-                        </div>
-                        <button 
-                          onClick={() => window.dispatchEvent(new CustomEvent('openPremiumPaywall'))}
-                          className="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
-                        >
-                          <Zap className="h-4 w-4" />
-                          <span>Unlock Now</span>
-                        </button>
+                      <div className="text-gray-300 leading-relaxed">
+                        Upgrade to Premium to unlock detailed AI insights, grade predictions, and personalized feedback for your GCSE performance.
                       </div>
-                     )}
+                      <button 
+                        onClick={() => window.dispatchEvent(new CustomEvent('openPremiumPaywall'))}
+                        className="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
+                      >
+                        <Zap className="h-4 w-4" />
+                        <span>Unlock Now</span>
+                      </button>
+                    </div>
                   </TooltipContent>
                 </Tooltip>
               ))}
             </div>
 
-            {!isPremium && (
-              <div className="mt-8 relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-emerald-600/20 rounded-3xl blur-xl animate-pulse" />
-                <div className="relative bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 rounded-3xl p-8 text-white shadow-2xl shadow-purple-500/25 border border-white/20 overflow-hidden">
-                  {/* Background decorations */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400/30 to-orange-500/30 rounded-full blur-2xl animate-pulse" />
-                  <div className="absolute -bottom-16 -left-16 w-24 h-24 bg-gradient-to-tr from-pink-400/30 to-rose-500/30 rounded-full blur-xl animate-bounce" />
-                  
-                  {/* Floating sparkles */}
-                  <div className="absolute top-4 right-8 w-2 h-2 bg-amber-400 rounded-full animate-ping" />
-                  <div className="absolute top-12 right-16 w-1 h-1 bg-white rounded-full animate-pulse" />
-                  <div className="absolute bottom-8 left-8 w-1.5 h-1.5 bg-emerald-400 rounded-full animate-bounce" />
-                  
-                  <div className="relative z-10 flex items-center justify-between">
-                    <div className="flex items-center space-x-6">
-                      <div className="relative">
-                        <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-amber-500/50 animate-pulse">
-                          <Crown className="h-8 w-8 text-white drop-shadow-lg" />
-                        </div>
-                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-emerald-400 rounded-full border-2 border-white animate-bounce">
-                          <Sparkles className="h-3 w-3 text-white m-auto mt-0.5" />
-                        </div>
+            {/* Premium CTA */}
+            <div className="mt-8 relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-emerald-600/20 rounded-3xl blur-xl animate-pulse" />
+              <div className="relative bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 rounded-3xl p-8 text-white shadow-2xl shadow-purple-500/25 border border-white/20 overflow-hidden">
+                {/* Background decorations */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400/30 to-orange-500/30 rounded-full blur-2xl animate-pulse" />
+                <div className="absolute -bottom-16 -left-16 w-24 h-24 bg-gradient-to-tr from-pink-400/30 to-rose-500/30 rounded-full blur-xl animate-bounce" />
+                
+                {/* Floating sparkles */}
+                <div className="absolute top-4 right-8 w-2 h-2 bg-amber-400 rounded-full animate-ping" />
+                <div className="absolute top-12 right-16 w-1 h-1 bg-white rounded-full animate-pulse" />
+                <div className="absolute bottom-8 left-8 w-1.5 h-1.5 bg-emerald-400 rounded-full animate-bounce" />
+                
+                <div className="relative z-10 flex items-center justify-between">
+                  <div className="flex items-center space-x-6">
+                    <div className="relative">
+                      <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-amber-500/50 animate-pulse">
+                        <Crown className="h-8 w-8 text-white drop-shadow-lg" />
                       </div>
-                      <div>
-                        <h3 className="text-2xl font-bold text-white drop-shadow-lg mb-2">
-                          🎯 Unlock Your Grade Predictions
-                        </h3>
-                        <p className="text-white/90 text-base font-medium leading-relaxed">
-                          Get crystal-clear insights into your future GCSE results • See exactly which grades you're on track for • Identify areas for improvement before it's too late
-                        </p>
-                        <div className="flex items-center space-x-4 mt-3">
-                          <div className="flex items-center space-x-2 text-white/80 text-sm">
-                            <Target className="h-4 w-4" />
-                            <span>Personalized predictions</span>
-                          </div>
-                          <div className="flex items-center space-x-2 text-white/80 text-sm">
-                            <Zap className="h-4 w-4" />
-                            <span>Real-time updates</span>
-                          </div>
-                          <div className="flex items-center space-x-2 text-white/80 text-sm">
-                            <Trophy className="h-4 w-4" />
-                            <span>Grade 9 tracking</span>
-                          </div>
+                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-emerald-400 rounded-full border-2 border-white animate-bounce">
+                        <Sparkles className="h-3 w-3 text-white m-auto mt-0.5" />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-white drop-shadow-lg mb-2">
+                        🎯 Unlock Your Grade Predictions
+                      </h3>
+                      <p className="text-white/90 text-base font-medium leading-relaxed">
+                        Get crystal-clear insights into your future GCSE results • See exactly which grades you're on track for • Identify areas for improvement before it's too late
+                      </p>
+                      <div className="flex items-center space-x-4 mt-3">
+                        <div className="flex items-center space-x-2 text-white/80 text-sm">
+                          <Target className="h-4 w-4" />
+                          <span>Personalized predictions</span>
+                        </div>
+                        <div className="flex items-center space-x-2 text-white/80 text-sm">
+                          <Zap className="h-4 w-4" />
+                          <span>Real-time updates</span>
+                        </div>
+                        <div className="flex items-center space-x-2 text-white/80 text-sm">
+                          <Trophy className="h-4 w-4" />
+                          <span>Grade 9 tracking</span>
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col items-end space-y-3">
-                      <button 
-                        onClick={() => window.dispatchEvent(new CustomEvent('openPremiumPaywall'))}
-                        className="bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 border border-white/30 group"
-                      >
-                        <div className="flex items-center space-x-3">
-                          <Zap className="h-8 w-8 group-hover:animate-pulse" />
-                          <span className="text-lg">Upgrade to Premium</span>
-                        </div>
-                      </button>
-                      <p className="text-white/70 text-sm font-medium">See all your predicted grades instantly</p>
-                    </div>
+                  </div>
+                  <div className="flex flex-col items-end space-y-3">
+                    <button 
+                      onClick={() => window.dispatchEvent(new CustomEvent('openPremiumPaywall'))}
+                      className="bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 border border-white/30 group"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <Zap className="h-8 w-8 group-hover:animate-pulse" />
+                        <span className="text-lg">Upgrade to Premium</span>
+                      </div>
+                    </button>
+                    <p className="text-white/70 text-sm font-medium">See all your predicted grades instantly</p>
                   </div>
                 </div>
               </div>
-            )}
+            </div>
 
             {/* Premium Statistics */}
             <div className="flex flex-wrap gap-4 pt-6 border-t border-gradient-to-r from-purple-500/20 via-blue-500/20 to-emerald-500/20">

@@ -35,7 +35,7 @@ interface NotebookEntryData {
 }
 
 const Notebook = () => {
-  const { user, isPremium } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
@@ -301,7 +301,7 @@ const Notebook = () => {
           <div className="space-y-8">
             {sortedEntries.map((entry, index) => (
               <div key={entry.id} className="transform hover:scale-[1.02] transition-all duration-200">
-                <NotebookEntry entry={entry} onUpgradeClick={!isPremium ? () => setShowPaywall(true) : undefined} />
+                <NotebookEntry entry={entry} onUpgradeClick={() => setShowPaywall(true)} />
               </div>
             ))}
           </div>
@@ -330,16 +330,14 @@ const Notebook = () => {
         </div>
       </div>
 
-      {!isPremium && (
-        <PremiumPaywall 
-          isOpen={showPaywall}
-          onClose={() => setShowPaywall(false)}
-          onUpgrade={() => {
-            setShowPaywall(false);
-            toast.success("Redirecting to premium upgrade...");
-          }}
-        />
-      )}
+      <PremiumPaywall 
+        isOpen={showPaywall}
+        onClose={() => setShowPaywall(false)}
+        onUpgrade={() => {
+          setShowPaywall(false);
+          toast.success("Redirecting to premium upgrade...");
+        }}
+      />
     </div>
   );
 };
