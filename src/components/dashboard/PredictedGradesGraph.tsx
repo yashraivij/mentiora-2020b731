@@ -692,23 +692,52 @@ export const PredictedGradesGraph = ({ userProgress, subscribed = false }: Predi
 
         {/* Premium CTA for free accounts */}
         {!subscribed && (
-          <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 via-blue-50 to-emerald-50 dark:from-purple-900/20 dark:via-blue-900/20 dark:to-emerald-900/20 rounded-xl border border-purple-200/50 dark:border-purple-800/50">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl flex items-center justify-center">
-                  <Crown className="h-5 w-5 text-white" />
+          <div className="mt-6 p-6 bg-gradient-to-br from-purple-50 via-blue-50 to-emerald-50 dark:from-purple-900/20 dark:via-blue-900/20 dark:to-emerald-900/20 rounded-2xl border border-purple-200/50 dark:border-purple-800/50 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+              <div className="flex flex-col space-y-4">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 via-blue-600 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
+                    <Crown className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 bg-clip-text text-transparent">
+                      Unlock Premium Grade Predictions
+                    </h3>
+                    <p className="text-sm text-muted-foreground">Transform your study experience with AI-powered insights</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-foreground">Unlock Premium Grade Predictions</h3>
-                  <p className="text-sm text-muted-foreground">Get detailed insights and unblurred metrics</p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 ml-15">
+                  <div className="flex items-center space-x-2">
+                    <Target className="h-4 w-4 text-purple-500" />
+                    <span className="text-sm text-foreground">Detailed grade breakdowns</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Sparkles className="h-4 w-4 text-blue-500" />
+                    <span className="text-sm text-foreground">Unblurred prediction metrics</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Trophy className="h-4 w-4 text-emerald-500" />
+                    <span className="text-sm text-foreground">Advanced progress tracking</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Zap className="h-4 w-4 text-purple-500" />
+                    <span className="text-sm text-foreground">Personalized study recommendations</span>
+                  </div>
                 </div>
               </div>
-              <Button 
-                onClick={createCheckout}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold px-6 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
-              >
-                Upgrade Now
-              </Button>
+              
+              <div className="flex flex-col items-center lg:items-end space-y-2">
+                <Button 
+                  onClick={createCheckout}
+                  size="lg"
+                  className="bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 hover:from-purple-700 hover:via-blue-700 hover:to-emerald-700 text-white font-bold px-8 py-3 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                >
+                  <Crown className="h-5 w-5 mr-2" />
+                  Upgrade to Premium
+                </Button>
+                <p className="text-xs text-muted-foreground text-center">Cancel anytime</p>
+              </div>
             </div>
           </div>
         )}
