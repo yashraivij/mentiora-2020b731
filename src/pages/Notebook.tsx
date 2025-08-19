@@ -212,7 +212,7 @@ const Notebook = () => {
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <BookOpen className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-300 dark:to-indigo-300 bg-clip-text text-transparent mb-1 filter blur-md">{stats.totalEntries}</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-300 dark:to-indigo-300 bg-clip-text text-transparent mb-1">{stats.totalEntries}</div>
                 <div className="text-sm font-medium text-blue-600 dark:text-blue-400">Total Notes</div>
                 <div className="text-xs text-blue-500/70 dark:text-blue-400/70 mt-1">Smart Summaries</div>
               </CardContent>
@@ -223,7 +223,7 @@ const Notebook = () => {
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <TrendingUp className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-3xl font-bold bg-gradient-to-r from-emerald-700 to-teal-700 dark:from-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-1 filter blur-md">{stats.timeSavedHours}h</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-emerald-700 to-teal-700 dark:from-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-1">{stats.timeSavedHours}h</div>
                 <div className="text-sm font-medium text-emerald-600 dark:text-emerald-400">Time Saved</div>
                 <div className="text-xs text-emerald-500/70 dark:text-emerald-400/70 mt-1">Auto Notes</div>
               </CardContent>
@@ -234,7 +234,7 @@ const Notebook = () => {
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <Brain className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-3xl font-bold bg-gradient-to-r from-violet-700 to-purple-700 dark:from-violet-300 dark:to-purple-300 bg-clip-text text-transparent mb-1 filter blur-md">{stats.subjectsWithNotes}</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-violet-700 to-purple-700 dark:from-violet-300 dark:to-purple-300 bg-clip-text text-transparent mb-1">{stats.subjectsWithNotes}</div>
                 <div className="text-sm font-medium text-violet-600 dark:text-violet-400">Subjects</div>
                 <div className="text-xs text-violet-500/70 dark:text-violet-400/70 mt-1">Covered</div>
               </CardContent>
