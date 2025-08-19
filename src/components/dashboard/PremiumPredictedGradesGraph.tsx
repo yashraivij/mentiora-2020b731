@@ -257,24 +257,6 @@ export const PremiumPredictedGradesGraph = ({ userProgress }: PremiumPredictedGr
     return shadows[index % shadows.length];
   };
 
-  const getBorderColor = (index: number) => {
-    const colors = [
-      'border-purple-500',
-      'border-blue-500',
-      'border-emerald-500',
-      'border-orange-500',
-      'border-pink-500',
-      'border-indigo-500',
-      'border-amber-500',
-      'border-green-500',
-      'border-cyan-500',
-      'border-violet-500',
-      'border-rose-500',
-      'border-sky-500',
-    ];
-    return colors[index % colors.length];
-  };
-
   const getGradeColor = (grade: string) => {
     if (grade === '–') return 'text-muted-foreground';
     if (grade === 'U') return 'text-black dark:text-white font-medium';
@@ -422,13 +404,19 @@ export const PremiumPredictedGradesGraph = ({ userProgress }: PremiumPredictedGr
                         <div className={`relative h-40 bg-gradient-to-t from-gray-100/30 to-gray-50/20 dark:from-gray-800/30 dark:to-gray-700/20 rounded-3xl overflow-hidden border-2 border-white/20 backdrop-blur-sm shadow-xl ${getSubjectShadow(index)} group-hover:shadow-2xl transition-all duration-500`}>
                           {grade.finalGrade !== '–' && (
                             <>
-                              {/* Premium colored border only - no fill */}
+                              {/* Main gradient bar */}
                               <div 
-                                className={`absolute inset-1 border-4 rounded-2xl transition-all duration-1000 ease-out animate-in slide-in-from-bottom-4 ${getBorderColor(index)}`}
+                                className={`absolute inset-0 bg-gradient-to-t ${getSubjectColor(index)} rounded-3xl transition-all duration-1000 ease-out animate-in slide-in-from-bottom-4`}
                                 style={{ 
                                   filter: grade.isGrade7Plus ? 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.6))' : 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))'
                                 }}
                               />
+                              
+                              {/* Premium glow overlay */}
+                              <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent rounded-3xl opacity-60" />
+                              
+                              {/* Animated shimmer effect */}
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-3xl animate-pulse" />
                             </>
                           )}
                           
