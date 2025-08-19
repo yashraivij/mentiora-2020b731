@@ -11,10 +11,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { RefreshCountdown } from "@/components/ui/refresh-countdown";
 import { PremiumPaywall } from "@/components/ui/premium-paywall";
+import { useSubscription } from "@/contexts/SubscriptionContext";
 
 const PredictedQuestions = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { subscribed, createCheckout } = useSubscription();
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [completedExams, setCompletedExams] = useState<{[key: string]: any}>({});
   const [loading, setLoading] = useState(true);
@@ -67,6 +69,10 @@ const PredictedQuestions = () => {
   };
 
   const handleSubjectSelect = (subjectId: string) => {
+    if (!subscribed) {
+      createCheckout();
+      return;
+    }
     navigate(`/predicted-exam/${subjectId}`);
   };
 

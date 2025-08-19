@@ -4,11 +4,17 @@ import { Badge } from "@/components/ui/badge";
 import { Crown, Star, Sparkles, Target, Clock, BookOpen, Zap, Trophy, Rocket } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { CountdownTimer } from "./CountdownTimer";
+import { useSubscription } from "@/contexts/SubscriptionContext";
 
 export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
+  const { subscribed, createCheckout } = useSubscription();
 
   const handleStartPredicted = () => {
+    if (!subscribed) {
+      createCheckout();
+      return;
+    }
     navigate('/predicted-questions');
   };
 
