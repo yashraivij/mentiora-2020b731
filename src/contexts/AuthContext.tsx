@@ -63,6 +63,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           setTimeout(() => {
             checkSubscription();
           }, 100);
+          // Force immediate check on mount for existing users
+          setTimeout(() => {
+            checkSubscription();
+          }, 2000);
         } else {
           setIsPremium(false);
           setSubscriptionTier(null);
