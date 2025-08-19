@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Gamepad2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -23,7 +23,7 @@ import { PredictivePerformanceCard } from "@/components/dashboard/PredictivePerf
 import { OptimalStudyTimeCard } from "@/components/dashboard/OptimalStudyTimeCard";
 
 import { PredictedQuestionsSection } from "@/components/dashboard/PredictedQuestionsSection";
-import { PremiumPredictedGradesGraphNoBlur } from "@/components/dashboard/PremiumPredictedGradesGraph";
+import { PremiumPredictedGradesGraphUnblurred } from "@/components/dashboard/PremiumPredictedGradesGraph";
 
 import { supabase } from "@/integrations/supabase/client";
 import { StressTracker } from "@/lib/stressTracker";
@@ -49,6 +49,7 @@ const PremiumDashboard = () => {
   const { user, logout } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
   const [pinnedSubjects, setPinnedSubjects] = useState<string[]>([]);
@@ -1136,7 +1137,7 @@ const PremiumDashboard = () => {
         </div>
 
         {/* Premium Predicted GCSE Grades Section - COMPLETELY UNBLURRED */}
-        <PremiumPredictedGradesGraphNoBlur key={`premium-grades-unblurred-${Date.now()}`} userProgress={userProgress} />
+        <PremiumPredictedGradesGraphUnblurred key={`premium-grades-unblurred-${location.pathname}-${Date.now()}`} userProgress={userProgress} />
 
         {/* Predicted 2026 Questions Section */}
         <PredictedQuestionsSection />
