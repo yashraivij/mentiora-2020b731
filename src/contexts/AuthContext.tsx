@@ -33,15 +33,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const checkSubscription = async () => {
     try {
+      console.log('Checking subscription status...');
       const { data, error } = await supabase.functions.invoke('check-subscription');
       if (error) {
         console.error('Error checking subscription:', error);
         return;
       }
       
+      console.log('Raw subscription response:', data);
       setIsPremium(data.subscribed || false);
       setSubscriptionTier(data.subscription_tier || null);
-      console.log('Subscription status:', data);
+      console.log('Updated subscription status - isPremium:', data.subscribed, 'tier:', data.subscription_tier);
     } catch (error) {
       console.error('Subscription check failed:', error);
     }
