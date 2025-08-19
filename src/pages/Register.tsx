@@ -13,7 +13,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { register, isLoading, isPremium } = useAuth();
+  const { register, isLoading } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,9 +38,7 @@ const Register = () => {
     
     if (success) {
       toast.success("Welcome to Mentiora!");
-      // Navigate to appropriate dashboard based on premium status
-      const targetDashboard = isPremium ? '/premium-dashboard' : '/dashboard';
-      navigate(targetDashboard);
+      navigate("/dashboard");
     } else {
       toast.error("Registration failed. Please try again.");
     }

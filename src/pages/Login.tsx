@@ -11,7 +11,7 @@ import { toast } from "sonner";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, isLoading, isPremium } = useAuth();
+  const { login, isLoading } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -26,9 +26,7 @@ const Login = () => {
     
     if (success) {
       toast.success("Welcome back to Mentiora!");
-      // Navigate to appropriate dashboard based on premium status
-      const targetDashboard = isPremium ? '/premium-dashboard' : '/dashboard';
-      navigate(targetDashboard);
+      navigate("/dashboard");
     } else {
       toast.error("Invalid email or password");
     }

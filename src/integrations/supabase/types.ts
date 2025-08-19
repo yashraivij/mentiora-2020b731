@@ -654,7 +654,6 @@ export type Database = {
           email: string
           full_name: string | null
           id: string
-          premium: boolean
           revision_goals: Json | null
           subject_preferences: Json | null
           username: string | null
@@ -665,7 +664,6 @@ export type Database = {
           email: string
           full_name?: string | null
           id: string
-          premium?: boolean
           revision_goals?: Json | null
           subject_preferences?: Json | null
           username?: string | null
@@ -676,7 +674,6 @@ export type Database = {
           email?: string
           full_name?: string | null
           id?: string
-          premium?: boolean
           revision_goals?: Json | null
           subject_preferences?: Json | null
           username?: string | null
