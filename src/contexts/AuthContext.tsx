@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
+import { useNavigate } from 'react-router-dom';
 
 interface AuthContextType {
   user: User | null;
@@ -9,6 +10,7 @@ interface AuthContextType {
   register: (name: string, email: string, password: string) => Promise<boolean>;
   logout: () => void;
   isLoading: boolean;
+  isPremium: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -25,23 +27,65 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isPremium, setIsPremium] = useState(false);
+
+  const checkPremiumStatus = async (userId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('premium')
+        .eq('id', userId)
+        .single();
+      
+      if (error) {
+        console.error('Error checking premium status:', error);
+        return false;
+      }
+      
+      return data?.premium || false;
+    } catch (error) {
+      console.error('Error checking premium status:', error);
+      return false;
+    }
+  };
 
   useEffect(() => {
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      async (event, session) => {
         console.log('Auth state changed:', event, session?.user?.email);
         setSession(session);
         setUser(session?.user ?? null);
+        
+        if (session?.user) {
+          const premiumStatus = await checkPremiumStatus(session.user.id);
+          setIsPremium(premiumStatus);
+          
+          // Redirect to appropriate dashboard based on premium status
+          if (event === 'SIGNED_IN') {
+            const targetDashboard = premiumStatus ? '/premium-dashboard' : '/dashboard';
+            console.log('Redirecting to:', targetDashboard);
+            window.location.href = targetDashboard;
+          }
+        } else {
+          setIsPremium(false);
+        }
+        
         setIsLoading(false);
       }
     );
 
     // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       console.log('Initial session:', session?.user?.email);
       setSession(session);
       setUser(session?.user ?? null);
+      
+      if (session?.user) {
+        const premiumStatus = await checkPremiumStatus(session.user.id);
+        setIsPremium(premiumStatus);
+      }
+      
       setIsLoading(false);
     });
 
@@ -117,7 +161,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       login,
       register,
       logout,
-      isLoading
+      isLoading,
+      isPremium
     }}>
       {children}
     </AuthContext.Provider>

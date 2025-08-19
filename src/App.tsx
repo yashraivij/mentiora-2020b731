@@ -11,6 +11,7 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import PremiumDashboard from "./pages/PremiumDashboard";
 import SubjectTopics from "./pages/SubjectTopics";
 import Practice from "./pages/Practice";
 import Analytics from "./pages/Analytics";
@@ -38,6 +39,11 @@ const App: React.FC = () => (
             <Route path="/dashboard" element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/premium-dashboard" element={
+              <ProtectedRoute>
+                <PremiumDashboard />
               </ProtectedRoute>
             } />
             <Route path="/subject/:subjectId" element={
