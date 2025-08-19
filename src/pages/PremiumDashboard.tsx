@@ -1135,8 +1135,8 @@ const PremiumDashboard = () => {
           </Card>
         </div>
 
-        {/* Premium Predicted GCSE Grades Section - NO BLUR */}
-        <PremiumPredictedGradesGraphNoBlur key="premium-grades-no-blur" userProgress={userProgress} />
+        {/* Premium Predicted GCSE Grades Section - COMPLETELY UNBLURRED */}
+        <PremiumPredictedGradesGraphNoBlur key={`premium-grades-unblurred-${Date.now()}`} userProgress={userProgress} />
 
         {/* Predicted 2026 Questions Section */}
         <PredictedQuestionsSection />
