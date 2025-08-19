@@ -419,9 +419,9 @@ const Index = () => {
               >
                 <Card className="relative overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-700 bg-white rounded-3xl p-0 h-full">
                   <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-5 group-hover:opacity-15 transition-opacity duration-700`} />
-                  <div className="absolute top-2 right-2 md:top-4 md:right-4">
+                  <div className="absolute top-4 right-4">
                     <motion.span 
-                      className={`px-2 py-0.5 md:px-3 md:py-1 rounded-full text-xs md:text-xs font-bold bg-gradient-to-r ${feature.color} text-white shadow-lg`}
+                      className={`px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r ${feature.color} text-white shadow-lg`}
                       whileHover={{ scale: 1.1 }}
                     >
                       {feature.badge}
@@ -538,7 +538,6 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex justify-center md:block"
             >
               <Button 
                 onClick={() => navigate('/register')} 
