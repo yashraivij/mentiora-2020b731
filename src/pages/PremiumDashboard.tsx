@@ -282,6 +282,7 @@ const PremiumDashboard = () => {
   };
 
   useEffect(() => {
+    console.log('🔥 PremiumDashboard mounted/updated');
     const loadUserData = async () => {
       if (!user?.id) return;
 
