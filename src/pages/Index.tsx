@@ -540,7 +540,7 @@ const Index = () => {
               whileTap={{ scale: 0.95 }}
             >
               <Button 
-                onClick={() => navigate('/register')} 
+                onClick={() => window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank')} 
                 className="bg-white text-gray-900 hover:bg-gray-100 px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-white/25 transition-all duration-300 rounded-2xl group"
               >
                 Start Free Today
