@@ -9,6 +9,9 @@ interface AuthContextType {
   register: (name: string, email: string, password: string) => Promise<boolean>;
   logout: () => void;
   isLoading: boolean;
+  isPremium: boolean;
+  subscriptionTier: string | null;
+  checkSubscription: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -25,6 +28,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isPremium, setIsPremium] = useState(false);
+  const [subscriptionTier, setSubscriptionTier] = useState<string | null>(null);
+
+  const checkSubscription = async () => {
+    try {
+      const { data, error } = await supabase.functions.invoke('check-subscription');
+      if (error) {
+        console.error('Error checking subscription:', error);
+        return;
+      }
+      
+      setIsPremium(data.subscribed || false);
+      setSubscriptionTier(data.subscription_tier || null);
+      console.log('Subscription status:', data);
+    } catch (error) {
+      console.error('Subscription check failed:', error);
+    }
+  };
 
   useEffect(() => {
     // Set up auth state listener
@@ -34,6 +55,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setSession(session);
         setUser(session?.user ?? null);
         setIsLoading(false);
+        
+        // Check subscription status when user logs in
+        if (session?.user) {
+          setTimeout(() => {
+            checkSubscription();
+          }, 100);
+        } else {
+          setIsPremium(false);
+          setSubscriptionTier(null);
+        }
       }
     );
 
@@ -43,6 +74,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setSession(session);
       setUser(session?.user ?? null);
       setIsLoading(false);
+      
+      // Check subscription status for existing session
+      if (session?.user) {
+        setTimeout(() => {
+          checkSubscription();
+        }, 100);
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -117,7 +155,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       login,
       register,
       logout,
-      isLoading
+      isLoading,
+      isPremium,
+      subscriptionTier,
+      checkSubscription
     }}>
       {children}
     </AuthContext.Provider>
