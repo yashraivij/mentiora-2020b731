@@ -31,7 +31,7 @@ interface PremiumPredictedGradesGraphProps {
   userProgress: UserProgress[];
 }
 
-export const PremiumPredictedGradesGraph = ({ userProgress }: PremiumPredictedGradesGraphProps) => {
+export const PremiumPredictedGradesGraphNoBlur = ({ userProgress }: PremiumPredictedGradesGraphProps) => {
   console.log('🔥 PremiumPredictedGradesGraph component rendered - NO BLUR VERSION');
   const { user } = useAuth();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
