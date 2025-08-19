@@ -1000,20 +1000,25 @@ const PremiumDashboard = () => {
         {/* Modals */}
         {showStreakCelebration && (
           <StreakCelebration
-            streakDays={getStudyStreak()}
+            isVisible={showStreakCelebration}
             onClose={() => setShowStreakCelebration(false)}
+            streakDays={getStudyStreak()}
+            rewardText={getStudyStreak() >= 14 ? "Free Tutoring Session!" : getStudyStreak() >= 7 ? "Study Playlists Unlocked!" : "Custom Themes Unlocked!"}
+            rewardEmoji={getStudyStreak() >= 14 ? "🎯" : getStudyStreak() >= 7 ? "🎵" : "🎨"}
           />
         )}
 
         {showTimeSavedNotification && (
           <TimeSavedNotification 
-            hoursSaved={timeSavedHours}
+            timeSavedHours={timeSavedHours}
             onClose={() => setShowTimeSavedNotification(false)}
+            show={showTimeSavedNotification}
           />
         )}
 
         {showGradeCelebration && (
           <GradeCelebration
+            isVisible={showGradeCelebration}
             grade={celebrationGrade}
             subject={celebrationSubject}
             onClose={() => setShowGradeCelebration(false)}
@@ -1022,6 +1027,7 @@ const PremiumDashboard = () => {
 
         {showDiscordInvitation && (
           <DiscordInvitation 
+            isVisible={showDiscordInvitation}
             onClose={() => setShowDiscordInvitation(false)}
           />
         )}
