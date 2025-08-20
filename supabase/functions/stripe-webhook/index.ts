@@ -60,16 +60,37 @@ serve(async (req) => {
         logStep("Processing checkout.session.completed", { sessionId: session.id });
 
         if (session.customer_email) {
+          logStep("Attempting to update profile", { email: session.customer_email });
+          
           // Update user to premium status
-          const { error: profileError } = await supabase
+          const { data: profileData, error: profileError } = await supabase
             .from('profiles')
             .update({ is_premium: true, premium: true })
-            .eq('email', session.customer_email);
+            .eq('email', session.customer_email)
+            .select();
 
           if (profileError) {
-            logStep("Error updating profile", { error: profileError });
+            logStep("Error updating profile", { error: profileError, email: session.customer_email });
+          } else if (profileData && profileData.length > 0) {
+            logStep("Profile updated to premium", { email: session.customer_email, updatedRows: profileData.length });
           } else {
-            logStep("Profile updated to premium", { email: session.customer_email });
+            logStep("No profile found to update", { email: session.customer_email });
+            
+            // Try to find profile by user_id from auth.users
+            const { data: authUser } = await supabase.auth.admin.getUserByEmail(session.customer_email);
+            if (authUser.user) {
+              const { data: profileByUserId, error: profileByUserIdError } = await supabase
+                .from('profiles')
+                .update({ is_premium: true, premium: true })
+                .eq('id', authUser.user.id)
+                .select();
+                
+              if (profileByUserIdError) {
+                logStep("Error updating profile by user_id", { error: profileByUserIdError, userId: authUser.user.id });
+              } else {
+                logStep("Profile updated by user_id", { userId: authUser.user.id, updatedRows: profileByUserId?.length || 0 });
+              }
+            }
           }
 
           // Update or create subscriber record
