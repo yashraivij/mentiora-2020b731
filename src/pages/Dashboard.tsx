@@ -18,6 +18,9 @@ import { WeakTopicsSection } from "@/components/dashboard/WeakTopicsSection";
 import { AOBreakdown } from "@/components/dashboard/AOBreakdown";
 import { PremiumAnalyticsCard } from "@/components/dashboard/PremiumAnalyticsCard";
 import { GoalsSection } from "@/components/dashboard/GoalsSection";
+import { PremiumAnalytics } from "@/components/premium/PremiumAnalytics";
+import { PremiumGate } from "@/components/ui/premium-gate";
+import { PremiumUpgradeTest } from "@/components/premium/PremiumUpgradeTest";
 import { TopicMasteryDisplay } from "@/components/dashboard/TopicMasteryDisplay";
 
 import { PredictivePerformanceCard } from "@/components/dashboard/PredictivePerformanceCard";
@@ -1496,77 +1499,18 @@ const Dashboard = () => {
         </div>
 
 
-        {/* Premium Locked Analytics */}
-        <div className="space-y-6">
-          <div className="flex items-center space-x-3 mb-6">
-            <Crown className="h-6 w-6 text-amber-500" />
-            <h3 className="text-2xl font-bold text-foreground">Coming Soon</h3>
-            <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0">
-              Pro Feature
-            </Badge>
-          </div>
+        {/* Premium Analytics Section */}
+        <PremiumGate
+          title="Advanced Analytics"
+          description="Unlock deep insights into your learning patterns, performance trends, and personalized recommendations to supercharge your study sessions."
+          className="mb-8"
+        >
+          <PremiumAnalytics />
+        </PremiumGate>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <PremiumAnalyticsCard
-              title="Learning Retention"
-              description="Track how well you retain information over time with spaced repetition analysis"
-              icon={Brain}
-              gradient="from-purple-500 to-indigo-600"
-              comingSoon={true}
-            />
-            
-            <PremiumAnalyticsCard
-              title="Learning Velocity"
-              description="Measure and optimize your knowledge acquisition speed"
-              icon={Zap}
-              gradient="from-orange-500 to-red-500"
-              comingSoon={true}
-            />
-            
-            <PremiumAnalyticsCard
-              title="Stress Monitor"
-              description="AI-powered stress detection and recommendations for optimal learning"
-              icon={Brain}
-              gradient="from-emerald-500 to-teal-600"
-              comingSoon={true}
-            />
-            
-            <PremiumAnalyticsCard
-              title="Concept Mapping"
-              description="Visualize connections between topics and identify knowledge gaps"
-              icon={Target}
-              gradient="from-pink-500 to-rose-600"
-              comingSoon={true}
-            />
-          </div>
-
-          <div className="text-center py-8">
-            <div className="space-y-4">
-              <div className="flex items-center justify-center space-x-2">
-                <Sparkles className="h-6 w-6 text-violet-500 dark:text-violet-400" />
-                <h4 className="text-xl font-bold text-foreground">Advanced Analytics Coming Soon</h4>
-                <Sparkles className="h-6 w-6 text-violet-500 dark:text-violet-400" />
-              </div>
-              <p className="text-muted-foreground max-w-md mx-auto">
-                We're working hard to bring you powerful data-driven insights to supercharge your GCSE revision. 
-                Stay tuned for updates!
-              </p>
-              <Button 
-                variant="outline" 
-                className={`
-                  px-6 py-2 rounded-xl transition-all duration-300 transform
-                  ${isNotifyClicked 
-                    ? 'bg-emerald-100 border-emerald-300 text-emerald-700 scale-105 shadow-lg' 
-                    : 'bg-white/80 backdrop-blur-sm border-violet-200 text-violet-700 hover:bg-violet-50 hover:border-violet-300'
-                  }
-                `}
-                onClick={handleNotifyClick}
-              >
-                {isNotifyClicked ? <CheckCircle className="h-4 w-4 mr-2" /> : <Bell className="h-4 w-4 mr-2" />}
-                {isNotifyClicked ? 'We\'ll Notify You!' : 'Notify Me When Ready'}
-              </Button>
-            </div>
-          </div>
+        {/* Premium Status Test */}
+        <div className="mb-8">
+          <PremiumUpgradeTest />
         </div>
       </div>
 
