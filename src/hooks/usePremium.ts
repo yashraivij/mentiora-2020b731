@@ -35,7 +35,7 @@ export const usePremium = (): PremiumStatus => {
         .from('profiles')
         .select('is_premium, premium')
         .eq('email', user.email)
-        .single();
+        .maybeSingle();
 
       if (profileError) {
         console.error('Error fetching profile:', profileError);
@@ -46,9 +46,9 @@ export const usePremium = (): PremiumStatus => {
         .from('subscribers')
         .select('subscribed, subscription_tier, subscription_end')
         .eq('email', user.email)
-        .single();
+        .maybeSingle();
 
-      if (subscriberError && subscriberError.code !== 'PGRST116') {
+      if (subscriberError) {
         console.error('Error fetching subscriber:', subscriberError);
       }
 
