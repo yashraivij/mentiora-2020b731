@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { PremiumPaywall } from "@/components/ui/premium-paywall";
 import { TrendingUp, Crown, Target, Sparkles, Trophy, Zap } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
@@ -35,6 +36,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
   const { user } = useAuth();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showPaywall, setShowPaywall] = useState(false);
 
   // Grade to percentage mapping
   const gradeToPercentage = (grade: string): number => {
@@ -538,7 +540,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                   </div>
                   <div className="flex flex-col items-end space-y-3">
                     <button 
-                      onClick={() => window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank')}
+                      onClick={() => setShowPaywall(true)}
                       className="bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 border border-white/30 group"
                     >
                       <div className="flex items-center space-x-3">
@@ -658,6 +660,15 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           </div>
         )}
       </CardContent>
+      
+      <PremiumPaywall
+        isOpen={showPaywall}
+        onClose={() => setShowPaywall(false)}
+        onUpgrade={() => {
+          setShowPaywall(false);
+          window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank');
+        }}
+      />
     </Card>
   );
 };
