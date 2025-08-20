@@ -478,7 +478,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                         Upgrade to Premium to unlock detailed AI insights, grade predictions, and personalized feedback for your GCSE performance.
                       </div>
                       <button 
-                        onClick={() => window.dispatchEvent(new CustomEvent('openPremiumPaywall'))}
+                      onClick={() => window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank')}
                         className="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
                       >
                         <Zap className="h-4 w-4" />
@@ -538,7 +538,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                   </div>
                   <div className="flex flex-col items-end space-y-3">
                     <button 
-                      onClick={() => window.dispatchEvent(new CustomEvent('openPremiumPaywall'))}
+                      onClick={() => window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank')}
                       className="bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 border border-white/30 group"
                     >
                       <div className="flex items-center space-x-3">

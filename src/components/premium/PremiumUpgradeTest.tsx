@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { usePremium } from "@/hooks/usePremium";
 import { Crown, RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { UpgradeButton } from "@/components/upgrade/UpgradeButton";
 
 export const PremiumUpgradeTest = () => {
   const { isPremium, isLoading, subscriptionTier, subscriptionEnd } = usePremium();
@@ -81,10 +82,7 @@ export const PremiumUpgradeTest = () => {
 
         {!isPremium && (
           <div className="pt-4 border-t">
-            <Button onClick={handleUpgrade} className="w-full">
-              <Crown className="mr-2 h-4 w-4" />
-              Upgrade to Premium
-            </Button>
+            <UpgradeButton className="w-full" />
           </div>
         )}
 

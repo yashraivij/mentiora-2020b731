@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
-import { Lock, Crown } from "lucide-react";
+import { Lock } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { PremiumBadge } from "@/components/ui/premium-badge";
+import { UpgradeButton } from "@/components/upgrade/UpgradeButton";
 import { usePremium } from "@/hooks/usePremium";
 
 interface PremiumGateProps {
@@ -57,13 +57,7 @@ export const PremiumGate = ({
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent className="text-center">
-        <Button 
-          onClick={() => window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank')}
-          className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white"
-        >
-          <Crown className="mr-2 h-4 w-4" />
-          Upgrade to Premium
-        </Button>
+        <UpgradeButton />
       </CardContent>
     </Card>
   );

@@ -334,8 +334,9 @@ const Notebook = () => {
         isOpen={showPaywall}
         onClose={() => setShowPaywall(false)}
         onUpgrade={() => {
+          // Open Stripe checkout for premium upgrade
+          window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank');
           setShowPaywall(false);
-          toast.success("Redirecting to premium upgrade...");
         }}
       />
     </div>

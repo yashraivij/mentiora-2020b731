@@ -1577,8 +1577,8 @@ const Dashboard = () => {
         isOpen={showPremiumPaywall}
         onClose={() => setShowPremiumPaywall(false)}
         onUpgrade={() => {
-          // Handle upgrade logic here
-          console.log('Upgrade to premium clicked');
+          // Open Stripe checkout for premium upgrade
+          window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank');
           setShowPremiumPaywall(false);
         }}
       />
