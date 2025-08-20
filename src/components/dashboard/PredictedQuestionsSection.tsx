@@ -9,7 +9,7 @@ export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
 
   const handleStartPredicted = () => {
-    window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank');
+    navigate('/predicted-questions');
   };
 
   return (
