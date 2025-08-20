@@ -11,10 +11,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { RefreshCountdown } from "@/components/ui/refresh-countdown";
 import { PremiumPaywall } from "@/components/ui/premium-paywall";
+import { usePremium } from "@/hooks/usePremium";
 
 const PredictedQuestions = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { isPremium, isLoading: premiumLoading } = usePremium();
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [completedExams, setCompletedExams] = useState<{[key: string]: any}>({});
   const [loading, setLoading] = useState(true);
@@ -67,7 +69,13 @@ const PredictedQuestions = () => {
   };
 
   const handleSubjectSelect = (subjectId: string) => {
-    setShowPaywall(true);
+    if (isPremium) {
+      // Premium users can go directly to the exam
+      navigate(`/predicted-exam/${subjectId}`);
+    } else {
+      // Non-premium users see the paywall
+      setShowPaywall(true);
+    }
   };
 
   const handleUpgrade = () => {
@@ -254,7 +262,7 @@ const PredictedQuestions = () => {
                      className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
                      onClick={(e) => {
                        e.stopPropagation();
-                       setShowPaywall(true);
+                       handleSubjectSelect(subject.id);
                      }}
                    >
                      <RotateCcw className="h-4 w-4 mr-2" />
