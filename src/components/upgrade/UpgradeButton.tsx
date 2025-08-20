@@ -16,7 +16,7 @@ export const UpgradeButton = ({
   children = "Upgrade to Premium" 
 }: UpgradeButtonProps) => {
   const handleUpgrade = () => {
-    window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank');
+    window.location.href = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
   };
 
   return (
