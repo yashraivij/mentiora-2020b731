@@ -43,8 +43,14 @@ const Login = () => {
     setForgotPasswordLoading(true);
     
     try {
+      // Use the current hostname to construct the correct preview URL
+      const currentHost = window.location.hostname;
+      const redirectUrl = currentHost.includes('lovable.app') 
+        ? `https://${currentHost}/reset-password`
+        : `${window.location.origin}/reset-password`;
+        
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/reset-password`
+        redirectTo: redirectUrl
       });
 
       if (error) {
