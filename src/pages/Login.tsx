@@ -43,8 +43,8 @@ const Login = () => {
     setForgotPasswordLoading(true);
     
     try {
-      // Force the correct preview URL format
-      const redirectUrl = `https://${window.location.hostname}/reset-password`;
+      // Use the correct Lovable preview URL format
+      const redirectUrl = `${window.location.protocol}//${window.location.host}/reset-password`;
       
       console.log('Reset password redirect URL:', redirectUrl);
       
