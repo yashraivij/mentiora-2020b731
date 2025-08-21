@@ -15,41 +15,18 @@ const ResetPassword = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleAuthSession = async () => {
-      // Get session from URL hash (Supabase auth redirects include tokens in hash)
-      const hashParams = new URLSearchParams(window.location.hash.substring(1));
-      const accessToken = hashParams.get('access_token');
-      const refreshToken = hashParams.get('refresh_token');
-      
-      if (accessToken && refreshToken) {
-        try {
-          const { error } = await supabase.auth.setSession({
-            access_token: accessToken,
-            refresh_token: refreshToken
-          });
-          
-          if (error) {
-            console.error('Session error:', error);
-            toast.error('Invalid or expired reset link');
-            navigate('/login');
-          }
-        } catch (error) {
-          console.error('Auth error:', error);
-          toast.error('Invalid or expired reset link');
-          navigate('/login');
-        }
-      } else {
-        // Check if user has valid session already
-        const { data: { session } } = await supabase.auth.getSession();
-        if (!session) {
-          toast.error('Invalid or expired reset link');
-          navigate('/login');
-        }
-      }
-    };
-
-    handleAuthSession();
-  }, [searchParams, navigate]);
+    // Check if this is a valid reset password session
+    const accessToken = searchParams.get('access_token');
+    const refreshToken = searchParams.get('refresh_token');
+    
+    if (accessToken && refreshToken) {
+      // Set the session from URL params
+      supabase.auth.setSession({
+        access_token: accessToken,
+        refresh_token: refreshToken
+      });
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
