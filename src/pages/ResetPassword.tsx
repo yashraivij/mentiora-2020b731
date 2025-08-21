@@ -16,80 +16,40 @@ const ResetPassword = () => {
 
   useEffect(() => {
     const handleAuthSession = async () => {
-      console.log("Current URL:", window.location.href);
-      console.log("URL hash:", window.location.hash);
-      console.log("URL search:", window.location.search);
+      // Get session from URL hash (Supabase auth redirects include tokens in hash)
+      const hashParams = new URLSearchParams(window.location.hash.substring(1));
+      const accessToken = hashParams.get('access_token');
+      const refreshToken = hashParams.get('refresh_token');
       
-      // Supabase sends tokens in different formats, let's handle both
-      let accessToken, refreshToken, type;
-      
-      // Method 1: Check URL hash (common format)
-      if (window.location.hash) {
-        const hashParams = new URLSearchParams(window.location.hash.substring(1));
-        accessToken = hashParams.get('access_token');
-        refreshToken = hashParams.get('refresh_token');
-        type = hashParams.get('type');
-        console.log("Hash params:", { accessToken: !!accessToken, refreshToken: !!refreshToken, type });
-      }
-      
-      // Method 2: Check URL search params
-      if (!accessToken && window.location.search) {
-        const searchParams = new URLSearchParams(window.location.search);
-        accessToken = searchParams.get('access_token');
-        refreshToken = searchParams.get('refresh_token');
-        type = searchParams.get('type');
-        console.log("Search params:", { accessToken: !!accessToken, refreshToken: !!refreshToken, type });
-      }
-      
-      // Method 3: Let Supabase handle the session automatically from URL
-      if (!accessToken) {
-        try {
-          const { data, error } = await supabase.auth.getSession();
-          console.log("Supabase auto session:", { session: !!data.session, error });
-          
-          if (data.session) {
-            console.log("Found existing session, user can reset password");
-            return; // Session is valid, user can proceed
-          }
-        } catch (error) {
-          console.error("Session check error:", error);
-        }
-      }
-      
-      // If we have tokens, try to set the session
       if (accessToken && refreshToken) {
         try {
-          const { data, error } = await supabase.auth.setSession({
+          const { error } = await supabase.auth.setSession({
             access_token: accessToken,
             refresh_token: refreshToken
           });
           
-          console.log("Manual session set result:", { data: !!data.session, error });
-          
           if (error) {
             console.error('Session error:', error);
-            toast.error('Reset link has expired. Please request a new password reset.');
+            toast.error('Invalid or expired reset link');
             navigate('/login');
-            return;
-          }
-          
-          if (data.session) {
-            console.log("Session established successfully");
-            return;
           }
         } catch (error) {
           console.error('Auth error:', error);
+          toast.error('Invalid or expired reset link');
+          navigate('/login');
+        }
+      } else {
+        // Check if user has valid session already
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) {
+          toast.error('Invalid or expired reset link');
+          navigate('/login');
         }
       }
-      
-      // If we get here, no valid session could be established
-      console.log("No valid session found, redirecting to login");
-      toast.error('Invalid reset link. Please request a new password reset from the login page.');
-      navigate('/login');
     };
 
     handleAuthSession();
-  }, [navigate]);
+  }, [searchParams, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
