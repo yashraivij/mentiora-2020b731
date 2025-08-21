@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Crown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface UpgradeButtonProps {
   className?: string;
@@ -15,11 +16,14 @@ export const UpgradeButton = ({
   size = "default", 
   children = "Upgrade to Premium" 
 }: UpgradeButtonProps) => {
+  const { user } = useAuth();
+  
   const handleUpgrade = () => {
     console.log('Upgrade button clicked - redirecting to Stripe...');
     // Try multiple methods to ensure redirect works
     try {
-      const stripeUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
+      const baseUrl = 'https://buy.stripe.com/14A28qbAs87E9Yk5T28N203';
+      const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
       
       // Method 1: Create a temporary anchor and click it
       const link = document.createElement('a');
@@ -37,7 +41,8 @@ export const UpgradeButton = ({
     } catch (error) {
       console.error('Error redirecting to Stripe:', error);
       // Final fallback
-      window.location.href = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
+      const fallbackUrl = user?.id ? `https://buy.stripe.com/14A28qbAs87E9Yk5T28N203?client_reference_id=${user.id}` : 'https://buy.stripe.com/14A28qbAs87E9Yk5T28N203';
+      window.location.href = fallbackUrl;
     }
   };
 

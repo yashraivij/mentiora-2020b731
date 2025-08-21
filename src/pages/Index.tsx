@@ -415,7 +415,11 @@ const Index = () => {
               className="mb-16"
             >
               <Button 
-                onClick={() => window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank')} 
+                onClick={() => {
+                  const baseUrl = 'https://buy.stripe.com/14A28qbAs87E9Yk5T28N203';
+                  const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
+                  window.open(stripeUrl, '_blank');
+                }} 
                 className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-violet-500/25 transition-all duration-300 rounded-2xl group"
               >
                 <Crown className="mr-3 h-6 w-6" />

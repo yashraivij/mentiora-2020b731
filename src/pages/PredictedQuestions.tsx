@@ -12,11 +12,13 @@ import { useToast } from "@/hooks/use-toast";
 import { RefreshCountdown } from "@/components/ui/refresh-countdown";
 import { PremiumPaywall } from "@/components/ui/premium-paywall";
 import { usePremium } from "@/hooks/usePremium";
+import { useAuth } from "@/contexts/AuthContext";
 
 const PredictedQuestions = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { isPremium, isLoading: premiumLoading } = usePremium();
+  const { user } = useAuth();
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [completedExams, setCompletedExams] = useState<{[key: string]: any}>({});
   const [loading, setLoading] = useState(true);
@@ -79,7 +81,9 @@ const PredictedQuestions = () => {
   };
 
   const handleUpgrade = () => {
-    window.open('https://buy.stripe.com/test_cN23fH5Qu6Rv4Vy8ww', '_blank');
+    const baseUrl = 'https://buy.stripe.com/14A28qbAs87E9Yk5T28N203';
+    const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
+    window.open(stripeUrl, '_blank');
   };
 
   const getSubjectColor = (subjectId: string) => {

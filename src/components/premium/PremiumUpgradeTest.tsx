@@ -5,13 +5,17 @@ import { usePremium } from "@/hooks/usePremium";
 import { Crown, RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { UpgradeButton } from "@/components/upgrade/UpgradeButton";
+import { useAuth } from "@/contexts/AuthContext";
 
 export const PremiumUpgradeTest = () => {
   const { isPremium, isLoading, subscriptionTier, subscriptionEnd } = usePremium();
   const { toast } = useToast();
+  const { user } = useAuth();
 
   const handleUpgrade = () => {
-    window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank');
+    const baseUrl = 'https://buy.stripe.com/14A28qbAs87E9Yk5T28N203';
+    const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
+    window.open(stripeUrl, '_blank');
   };
 
   const refreshStatus = () => {

@@ -3,10 +3,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Crown, Star, Zap } from "lucide-react";
 import { motion } from "framer-motion";
+import { useAuth } from "@/contexts/AuthContext";
 
 export const PricingSection = () => {
+  const { user } = useAuth();
+  
   const handleUpgrade = () => {
-    window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank');
+    const baseUrl = 'https://buy.stripe.com/14A28qbAs87E9Yk5T28N203';
+    const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
+    window.open(stripeUrl, '_blank');
   };
 
   return (

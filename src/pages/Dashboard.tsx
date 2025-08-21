@@ -1578,7 +1578,9 @@ const Dashboard = () => {
         onClose={() => setShowPremiumPaywall(false)}
         onUpgrade={() => {
           // Open Stripe checkout for premium upgrade
-          window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank');
+          const baseUrl = 'https://buy.stripe.com/14A28qbAs87E9Yk5T28N203';
+          const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
+          window.open(stripeUrl, '_blank');
           setShowPremiumPaywall(false);
         }}
       />
