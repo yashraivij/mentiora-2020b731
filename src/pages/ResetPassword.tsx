@@ -16,40 +16,59 @@ const ResetPassword = () => {
 
   useEffect(() => {
     const handleAuthSession = async () => {
-      // Get session from URL hash (Supabase auth redirects include tokens in hash)
+      console.log("Current URL:", window.location.href);
+      console.log("URL hash:", window.location.hash);
+      console.log("URL search:", window.location.search);
+      
+      // Check URL hash first (most common for Supabase auth)
       const hashParams = new URLSearchParams(window.location.hash.substring(1));
-      const accessToken = hashParams.get('access_token');
-      const refreshToken = hashParams.get('refresh_token');
+      let accessToken = hashParams.get('access_token');
+      let refreshToken = hashParams.get('refresh_token');
+      
+      // Also check URL search params as fallback
+      if (!accessToken) {
+        const searchParams = new URLSearchParams(window.location.search);
+        accessToken = searchParams.get('access_token');
+        refreshToken = searchParams.get('refresh_token');
+      }
+      
+      console.log("Found tokens:", { accessToken: !!accessToken, refreshToken: !!refreshToken });
       
       if (accessToken && refreshToken) {
         try {
-          const { error } = await supabase.auth.setSession({
+          const { data, error } = await supabase.auth.setSession({
             access_token: accessToken,
             refresh_token: refreshToken
           });
           
+          console.log("Session set result:", { data, error });
+          
           if (error) {
             console.error('Session error:', error);
-            toast.error('Invalid or expired reset link');
+            toast.error('Invalid or expired reset link. Please request a new one.');
             navigate('/login');
+          } else {
+            console.log("Session established successfully");
           }
         } catch (error) {
           console.error('Auth error:', error);
-          toast.error('Invalid or expired reset link');
+          toast.error('Invalid or expired reset link. Please request a new one.');
           navigate('/login');
         }
       } else {
         // Check if user has valid session already
-        const { data: { session } } = await supabase.auth.getSession();
+        const { data: { session }, error } = await supabase.auth.getSession();
+        console.log("Existing session check:", { session: !!session, error });
+        
         if (!session) {
-          toast.error('Invalid or expired reset link');
+          toast.error('Invalid or expired reset link. Please request a new one.');
           navigate('/login');
         }
       }
     };
 
     handleAuthSession();
-  }, [searchParams, navigate]);
+  }, [navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
