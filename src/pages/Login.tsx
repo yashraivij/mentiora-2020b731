@@ -43,10 +43,11 @@ const Login = () => {
     setForgotPasswordLoading(true);
     
     try {
-      // Get the current URL origin to ensure proper redirect
+      // Use the current preview URL for redirect
       const currentOrigin = window.location.origin;
       const redirectUrl = `${currentOrigin}/reset-password`;
       
+      console.log("Current origin:", currentOrigin);
       console.log("Sending password reset to:", email, "with redirect:", redirectUrl);
       
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
@@ -57,7 +58,8 @@ const Login = () => {
         console.error("Reset password error:", error);
         toast.error(error.message);
       } else {
-        toast.success("Password reset email sent! Check your inbox and spam folder.");
+        toast.success(`Password reset email sent! The link will redirect to: ${redirectUrl}`);
+        console.log("Reset email sent successfully");
       }
     } catch (error) {
       console.error("Reset password catch error:", error);
