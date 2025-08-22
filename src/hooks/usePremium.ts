@@ -53,6 +53,16 @@ export const usePremium = (): PremiumStatus => {
       }
 
       const isPremium = profile?.is_premium || profile?.premium || subscriber?.subscribed || false;
+      
+      console.log('Premium Status Debug:', {
+        userEmail: user.email,
+        profile: profile,
+        subscriber: subscriber,
+        isPremium: isPremium,
+        profileIsPremium: profile?.is_premium,
+        profilePremium: profile?.premium,
+        subscriberSubscribed: subscriber?.subscribed
+      });
 
       setPremiumStatus({
         isPremium,

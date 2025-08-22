@@ -39,6 +39,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
   const [showPaywall, setShowPaywall] = useState(false);
+  
+  console.log('PredictedGradesGraph - isPremium:', isPremium);
 
   // Grade to percentage mapping
   const gradeToPercentage = (grade: string): number => {

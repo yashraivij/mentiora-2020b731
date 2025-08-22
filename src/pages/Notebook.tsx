@@ -40,6 +40,8 @@ const Notebook = () => {
   const { isPremium } = usePremium();
   const navigate = useNavigate();
   
+  console.log('Notebook - isPremium:', isPremium);
+  
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedSubject, setSelectedSubject] = useState<string>('all');
