@@ -1,1 +1,7 @@
 project_id = "mkmrasgbrhwtycwpdtke"
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.refresh-weekly-questions]
+verify_jwt = false
