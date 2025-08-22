@@ -80,33 +80,10 @@ const PredictedQuestions = () => {
     }
   };
 
-  const handleUpgrade = async () => {
-    try {
-      const { data, error } = await supabase.functions.invoke('create-checkout');
-      
-      if (error) {
-        console.error('Error creating checkout session:', error);
-        toast({
-          title: "Error",
-          description: "Failed to create checkout session. Please try again.",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      if (data?.url) {
-        window.open(data.url, '_blank', 'noopener,noreferrer');
-      } else {
-        throw new Error('No checkout URL received');
-      }
-    } catch (error) {
-      console.error('Error in handleUpgrade:', error);
-      toast({
-        title: "Error", 
-        description: "Something went wrong. Please try again.",
-        variant: "destructive",
-      });
-    }
+  const handleUpgrade = () => {
+    const baseUrl = 'https://buy.stripe.com/14A28qbAs87E9Yk5T28N203';
+    const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
+    window.open(stripeUrl, '_blank');
   };
 
   const getSubjectColor = (subjectId: string) => {
