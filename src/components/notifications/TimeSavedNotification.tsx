@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Clock, X, BookOpen, Crown, TrendingUp, Sparkles } from 'lucide-react';
+import { usePremium } from '@/hooks/usePremium';
 
 interface TimeSavedNotificationProps {
   timeSavedHours: number;
@@ -17,6 +18,7 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
   show
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const { isPremium } = usePremium();
 
   useEffect(() => {
     if (show) {
@@ -31,6 +33,10 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
 
   const getEncouragingMessage = () => {
     const days = Math.floor(timeSavedHours / 24);
+    
+    if (!isPremium) {
+      return "You're absolutely crushing it! Upgrade to see your exact time saved!";
+    }
     
     if (days >= 2) {
       return `Incredible! You've saved over ${days} whole days of study time!`;
@@ -154,8 +160,8 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                   transition={{ delay: 0.2, type: "spring", damping: 20 }}
                   className="text-center"
                 >
-                  <div className="text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 dark:from-violet-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2 filter blur-lg">
-                    {getTimeSavedDisplay()}
+                  <div className={`text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 dark:from-violet-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2 ${!isPremium ? 'filter blur-sm' : ''}`}>
+                    {isPremium ? getTimeSavedDisplay() : 'XX.Xh'}
                   </div>
                   <p className="text-sm font-semibold text-violet-700 dark:text-violet-300 mb-1">
                     Total Time Saved
