@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Crown, Zap, TrendingUp, Clock, Star, CheckCircle, Target, BookOpen, Award, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
 
 interface PremiumPaywallProps {
   isOpen: boolean;
@@ -13,11 +14,22 @@ interface PremiumPaywallProps {
 export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose, onUpgrade }) => {
   const { user } = useAuth();
   
-  const handleUpgradeClick = () => {
-    const baseUrl = 'https://buy.stripe.com/14A28qbAs87E9Yk5T28N203';
-    const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
-    window.open(stripeUrl, '_blank');
-    onUpgrade();
+  const handleUpgradeClick = async () => {
+    try {
+      const { data, error } = await supabase.functions.invoke('create-checkout');
+      
+      if (error) {
+        console.error('Error creating checkout session:', error);
+        return;
+      }
+
+      if (data?.url) {
+        window.open(data.url, '_blank', 'noopener,noreferrer');
+        onUpgrade();
+      }
+    } catch (error) {
+      console.error('Error in handleUpgradeClick:', error);
+    }
   };
   const benefits = [
     {

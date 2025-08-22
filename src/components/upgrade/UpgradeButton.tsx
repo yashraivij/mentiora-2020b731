@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Crown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface UpgradeButtonProps {
   className?: string;
@@ -17,32 +19,34 @@ export const UpgradeButton = ({
   children = "Upgrade to Premium" 
 }: UpgradeButtonProps) => {
   const { user } = useAuth();
+  const { toast } = useToast();
   
-  const handleUpgrade = () => {
-    console.log('Upgrade button clicked - redirecting to Stripe...');
-    // Try multiple methods to ensure redirect works
+  const handleUpgrade = async () => {
     try {
-      const baseUrl = 'https://buy.stripe.com/14A28qbAs87E9Yk5T28N203';
-      const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
+      const { data, error } = await supabase.functions.invoke('create-checkout');
       
-      // Method 1: Create a temporary anchor and click it
-      const link = document.createElement('a');
-      link.href = stripeUrl;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      // Method 2: Fallback to window.location if above doesn't work
-      setTimeout(() => {
-        window.location.href = stripeUrl;
-      }, 100);
+      if (error) {
+        console.error('Error creating checkout session:', error);
+        toast({
+          title: "Error",
+          description: "Failed to create checkout session. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (data?.url) {
+        window.open(data.url, '_blank', 'noopener,noreferrer');
+      } else {
+        throw new Error('No checkout URL received');
+      }
     } catch (error) {
-      console.error('Error redirecting to Stripe:', error);
-      // Final fallback
-      const fallbackUrl = user?.id ? `https://buy.stripe.com/14A28qbAs87E9Yk5T28N203?client_reference_id=${user.id}` : 'https://buy.stripe.com/14A28qbAs87E9Yk5T28N203';
-      window.location.href = fallbackUrl;
+      console.error('Error in handleUpgrade:', error);
+      toast({
+        title: "Error", 
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
     }
   };
 
