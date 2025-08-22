@@ -57,11 +57,30 @@ serve(async (req) => {
     switch (event.type) {
       case 'checkout.session.completed': {
         const session = event.data.object as Stripe.Checkout.Session;
-        logStep("Processing checkout.session.completed", { sessionId: session.id });
+        logStep("Processing checkout.session.completed", { 
+          sessionId: session.id, 
+          customerEmail: session.customer_email,
+          customerId: session.customer,
+          mode: session.mode,
+          paymentStatus: session.payment_status
+        });
 
         if (session.customer_email) {
           logStep("Attempting to update profile", { email: session.customer_email });
           
+          // First, check if profile exists
+          const { data: existingProfile, error: checkError } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('email', session.customer_email)
+            .single();
+            
+          logStep("Profile check result", { 
+            email: session.customer_email,
+            profileExists: !!existingProfile,
+            checkError: checkError?.message 
+          });
+
           // Update user to premium status
           const { data: profileData, error: profileError } = await supabase
             .from('profiles')
@@ -70,45 +89,62 @@ serve(async (req) => {
             .select();
 
           if (profileError) {
-            logStep("Error updating profile", { error: profileError, email: session.customer_email });
+            logStep("Error updating profile", { error: profileError.message, email: session.customer_email });
           } else if (profileData && profileData.length > 0) {
-            logStep("Profile updated to premium", { email: session.customer_email, updatedRows: profileData.length });
+            logStep("Profile updated to premium", { email: session.customer_email, updatedRows: profileData.length, updatedProfile: profileData[0] });
           } else {
-            logStep("No profile found to update", { email: session.customer_email });
+            logStep("No profile found to update by email", { email: session.customer_email });
             
             // Try to find profile by user_id from auth.users
-            const { data: authUser } = await supabase.auth.admin.getUserByEmail(session.customer_email);
-            if (authUser.user) {
-              const { data: profileByUserId, error: profileByUserIdError } = await supabase
-                .from('profiles')
-                .update({ is_premium: true, premium: true })
-                .eq('id', authUser.user.id)
-                .select();
-                
-              if (profileByUserIdError) {
-                logStep("Error updating profile by user_id", { error: profileByUserIdError, userId: authUser.user.id });
-              } else {
-                logStep("Profile updated by user_id", { userId: authUser.user.id, updatedRows: profileByUserId?.length || 0 });
+            try {
+              const { data: authUser, error: authError } = await supabase.auth.admin.getUserByEmail(session.customer_email);
+              logStep("Auth user lookup", { 
+                email: session.customer_email, 
+                userFound: !!authUser.user,
+                authError: authError?.message 
+              });
+              
+              if (authUser.user) {
+                const { data: profileByUserId, error: profileByUserIdError } = await supabase
+                  .from('profiles')
+                  .update({ is_premium: true, premium: true })
+                  .eq('id', authUser.user.id)
+                  .select();
+                  
+                if (profileByUserIdError) {
+                  logStep("Error updating profile by user_id", { error: profileByUserIdError.message, userId: authUser.user.id });
+                } else {
+                  logStep("Profile updated by user_id", { userId: authUser.user.id, updatedRows: profileByUserId?.length || 0 });
+                }
               }
+            } catch (authError) {
+              logStep("Auth lookup failed", { error: authError.message, email: session.customer_email });
             }
           }
 
           // Update or create subscriber record
-          const { error: subscriberError } = await supabase
+          const { data: subscriberData, error: subscriberError } = await supabase
             .from('subscribers')
             .upsert({
               email: session.customer_email,
+              user_id: existingProfile?.id || null,
               stripe_customer_id: session.customer as string,
               subscribed: true,
               subscription_tier: 'Premium',
               updated_at: new Date().toISOString(),
-            }, { onConflict: 'email' });
+            }, { onConflict: 'email' })
+            .select();
 
           if (subscriberError) {
-            logStep("Error updating subscriber", { error: subscriberError });
+            logStep("Error updating subscriber", { error: subscriberError.message, email: session.customer_email });
           } else {
-            logStep("Subscriber record updated", { email: session.customer_email });
+            logStep("Subscriber record updated", { 
+              email: session.customer_email, 
+              subscriberData: subscriberData?.[0] 
+            });
           }
+        } else {
+          logStep("No customer email in session", { sessionId: session.id });
         }
         break;
       }
