@@ -482,7 +482,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                       <button 
                       onClick={() => {
                         const { user } = useAuth();
-                        const baseUrl = 'https://buy.stripe.com/14A28qbAs87E9Yk5T28N203';
+                         const baseUrl = 'https://buy.stripe.com/test_28EbJ05c4drYb2o2GQ8N200';
                         const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
                         window.open(stripeUrl, '_blank');
                       }}
@@ -672,7 +672,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         onUpgrade={() => {
           setShowPaywall(false);
           const { user } = useAuth();
-          const baseUrl = 'https://buy.stripe.com/14A28qbAs87E9Yk5T28N203';
+          const baseUrl = 'https://buy.stripe.com/test_28EbJ05c4drYb2o2GQ8N200';
           const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
           window.open(stripeUrl, '_blank');
         }}

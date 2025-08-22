@@ -336,7 +336,7 @@ const Notebook = () => {
         onUpgrade={() => {
           // Open Stripe checkout for premium upgrade
           const { user } = useAuth();
-          const baseUrl = 'https://buy.stripe.com/14A28qbAs87E9Yk5T28N203';
+          const baseUrl = 'https://buy.stripe.com/test_28EbJ05c4drYb2o2GQ8N200';
           const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
           window.open(stripeUrl, '_blank');
           setShowPaywall(false);
