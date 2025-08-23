@@ -19,6 +19,7 @@ import PredictedQuestions from "./pages/PredictedQuestions";
 import PredictedExam from "./pages/PredictedExam";
 import PredictedResults from "./pages/PredictedResults";
 import Notebook from "./pages/Notebook";
+import Settings from "./pages/Settings";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -75,6 +76,11 @@ const App: React.FC = () => (
             <Route path="/notebook" element={
               <ProtectedRoute>
                 <Notebook />
+              </ProtectedRoute>
+            } />
+            <Route path="/settings" element={
+              <ProtectedRoute>
+                <Settings />
               </ProtectedRoute>
             } />
             <Route path="*" element={<NotFound />} />
