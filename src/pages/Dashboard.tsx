@@ -941,7 +941,7 @@ const Dashboard = () => {
                       </>
                     ) : (
                       <>
-                        <Shield className="h-3 w-3 text-blue-500" />
+                        <User className="h-3 w-3 text-blue-500" />
                         <span className="text-xs font-medium text-muted-foreground">Free Account</span>
                       </>
                     )}
