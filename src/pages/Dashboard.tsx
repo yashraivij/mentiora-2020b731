@@ -5,7 +5,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
-import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Gamepad2, Settings } from "lucide-react";
+import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Gamepad2, Settings, Shield } from "lucide-react";
 import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
@@ -40,6 +40,7 @@ import { DiscordInvitation } from "@/components/ui/discord-invitation";
 import { PublicStreakProfiles } from '@/components/dashboard/PublicStreakProfiles';
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
 import { useToast } from "@/hooks/use-toast";
+import { usePremium } from "@/hooks/usePremium";
 
 interface UserProgress {
   subjectId: string;
@@ -52,6 +53,7 @@ interface UserProgress {
 const Dashboard = () => {
   const { user, logout } = useAuth();
   const { toast } = useToast();
+  const { isPremium, isLoading: premiumLoading } = usePremium();
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
@@ -932,8 +934,17 @@ const Dashboard = () => {
                     Mentiora
                   </h1>
                   <div className="flex items-center space-x-2">
-                    <Crown className="h-3 w-3 text-amber-500" />
-                    <span className="text-xs font-medium text-muted-foreground">Premium</span>
+                    {isPremium ? (
+                      <>
+                        <Crown className="h-3 w-3 text-amber-500" />
+                        <span className="text-xs font-medium text-muted-foreground">Premium</span>
+                      </>
+                    ) : (
+                      <>
+                        <Shield className="h-3 w-3 text-blue-500" />
+                        <span className="text-xs font-medium text-muted-foreground">Free Account</span>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
