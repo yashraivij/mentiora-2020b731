@@ -5,7 +5,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
-import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Gamepad2, Settings } from "lucide-react";
+import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Gamepad2, Settings, Shield } from "lucide-react";
 import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
@@ -40,6 +40,7 @@ import { DiscordInvitation } from "@/components/ui/discord-invitation";
 import { PublicStreakProfiles } from '@/components/dashboard/PublicStreakProfiles';
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
 import { useToast } from "@/hooks/use-toast";
+import { usePremium } from "@/hooks/usePremium";
 
 interface UserProgress {
   subjectId: string;
@@ -52,6 +53,7 @@ interface UserProgress {
 const Dashboard = () => {
   const { user, logout } = useAuth();
   const { toast } = useToast();
+  const { isPremium, isLoading: premiumLoading } = usePremium();
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
@@ -932,8 +934,17 @@ const Dashboard = () => {
                     Mentiora
                   </h1>
                   <div className="flex items-center space-x-2">
-                    <Crown className="h-3 w-3 text-amber-500" />
-                    <span className="text-xs font-medium text-muted-foreground">Premium</span>
+                    {isPremium ? (
+                      <>
+                        <Crown className="h-3 w-3 text-amber-500" />
+                        <span className="text-xs font-medium text-muted-foreground">Premium</span>
+                      </>
+                    ) : (
+                      <>
+                        <User className="h-3 w-3 text-gray-500" />
+                        <span className="text-xs font-medium text-muted-foreground">Free Account</span>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -1502,18 +1513,80 @@ const Dashboard = () => {
         </div>
 
 
-        {/* Premium Analytics Section */}
-        <PremiumGate
-          title="Advanced Analytics"
-          description="Unlock deep insights into your learning patterns, performance trends, and personalized recommendations to supercharge your study sessions."
-          className="mb-8"
-        >
-          <PremiumAnalytics />
-        </PremiumGate>
+        {/* Premium Analytics Coming Soon Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <PremiumAnalyticsCard
+            title="Learning Retention"
+            description="Track how well you retain information over time with spaced repetition analysis"
+            icon={Brain}
+            gradient="from-purple-500 to-pink-600"
+            comingSoon={true}
+          />
+          
+          <PremiumAnalyticsCard
+            title="Learning Velocity"
+            description="Measure and optimize your knowledge acquisition speed"
+            icon={Zap}
+            gradient="from-blue-500 to-cyan-500"
+            comingSoon={true}
+          />
+          
+          <PremiumAnalyticsCard
+            title="Stress Monitor"
+            description="AI-powered stress detection and recommendations for optimal learning"
+            icon={Target}
+            gradient="from-emerald-500 to-teal-600"
+            comingSoon={true}
+          />
+          
+          <PremiumAnalyticsCard
+            title="Concept Mapping"
+            description="Visualize connections between topics and identify knowledge gaps"
+            icon={LineChart}
+            gradient="from-orange-500 to-red-600"
+            comingSoon={true}
+          />
+        </div>
 
-        {/* Premium Status Test */}
-        <div className="mb-8">
-          <PremiumUpgradeTest />
+        {/* Advanced Analytics Coming Soon Section */}
+        <div className="text-center py-12 mb-8">
+          <div className="flex flex-col items-center space-y-6">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-r from-purple-600 via-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+              <BarChart3 className="h-10 w-10 text-white" />
+            </div>
+            <div>
+              <h3 className="text-2xl font-bold mb-3 flex items-center justify-center gap-3">
+                <Sparkles className="h-6 w-6 text-purple-500" />
+                Advanced Analytics Coming Soon
+                <Sparkles className="h-6 w-6 text-purple-500" />
+              </h3>
+              <p className="text-muted-foreground max-w-lg mx-auto text-lg">
+                We're working hard to bring you powerful data-driven insights to supercharge your GCSE revision. Stay tuned for updates!
+              </p>
+            </div>
+            <Button 
+              variant="outline" 
+              className={`mt-6 px-8 py-3 text-lg font-semibold transition-all duration-300 ${
+                isNotifyClicked 
+                  ? 'border-green-500 text-green-600 bg-green-50 dark:bg-green-950 hover:bg-green-100 dark:hover:bg-green-900' 
+                  : 'border-purple-500 text-purple-600 bg-purple-50 dark:bg-purple-950 hover:bg-purple-100 dark:hover:bg-purple-900'
+              }`}
+              onClick={() => {
+                setIsNotifyClicked(true);
+                toast({
+                  title: "Thanks for your interest!",
+                  description: "We'll notify you as soon as advanced analytics are ready.",
+                });
+                // Reset color after 3 seconds
+                setTimeout(() => {
+                  setIsNotifyClicked(false);
+                }, 3000);
+              }}
+            >
+              <Bell className="h-5 w-5 mr-2" />
+              {isNotifyClicked ? "We'll Notify You!" : "Notify Me When Ready"}
+            </Button>
+          </div>
         </div>
       </div>
 
