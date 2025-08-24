@@ -1505,67 +1505,71 @@ const Dashboard = () => {
         {/* Premium Analytics Coming Soon Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <PremiumAnalyticsCard
-            title="Learning Retention"
+            title="Coming Soon"
             description="Track how well you retain information over time with spaced repetition analysis"
-            icon={Brain}
+            icon={Crown}
             gradient="from-purple-500 to-pink-600"
             comingSoon={true}
           />
           
           <PremiumAnalyticsCard
-            title="Learning Velocity"
+            title="Coming Soon"
             description="Measure and optimize your knowledge acquisition speed"
-            icon={Zap}
+            icon={Crown}
             gradient="from-blue-500 to-cyan-500"
             comingSoon={true}
           />
           
           <PremiumAnalyticsCard
-            title="Stress Monitor"
+            title="Coming Soon"
             description="AI-powered stress detection and recommendations for optimal learning"
-            icon={Target}
+            icon={Crown}
             gradient="from-emerald-500 to-teal-600"
             comingSoon={true}
           />
           
           <PremiumAnalyticsCard
-            title="Concept Mapping"
+            title="Coming Soon"
             description="Visualize connections between topics and identify knowledge gaps"
-            icon={LineChart}
+            icon={Crown}
             gradient="from-orange-500 to-red-600"
             comingSoon={true}
           />
         </div>
 
         {/* Advanced Analytics Coming Soon Section */}
-        <Card className="mb-8 border-dashed border-2 border-muted-foreground/30">
-          <CardContent className="text-center py-12">
-            <div className="flex flex-col items-center space-y-4">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                <BarChart3 className="h-8 w-8 text-white" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold mb-2">Advanced Analytics Coming Soon</h3>
-                <p className="text-muted-foreground max-w-md mx-auto">
-                  We're working hard to bring you powerful data-driven insights to supercharge your GCSE revision. Stay tuned for updates!
-                </p>
-              </div>
-              <Button 
-                variant="outline" 
-                className="mt-4"
-                onClick={() => {
-                  toast({
-                    title: "Thanks for your interest!",
-                    description: "We'll notify you as soon as advanced analytics are ready.",
-                  });
-                }}
-              >
-                <Bell className="h-4 w-4 mr-2" />
-                Notify Me When Ready
-              </Button>
+        <div className="mb-8 text-center py-12">
+          <div className="flex flex-col items-center space-y-4">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+              <BarChart3 className="h-8 w-8 text-white" />
             </div>
-          </CardContent>
-        </Card>
+            <div>
+              <h3 className="text-xl font-semibold mb-2">Advanced Analytics Coming Soon</h3>
+              <p className="text-muted-foreground max-w-md mx-auto">
+                We're working hard to bring you powerful data-driven insights to supercharge your GCSE revision. Stay tuned for updates!
+              </p>
+            </div>
+            <Button 
+              variant="outline" 
+              className={`mt-4 transition-all duration-300 ${
+                isNotifyClicked 
+                  ? 'bg-green-500 hover:bg-green-600 text-white border-green-500' 
+                  : 'bg-purple-500 hover:bg-purple-600 text-white border-purple-500'
+              }`}
+              onClick={() => {
+                setIsNotifyClicked(true);
+                toast({
+                  title: "Thanks for your interest!",
+                  description: "We'll notify you as soon as advanced analytics are ready.",
+                });
+                setTimeout(() => setIsNotifyClicked(false), 3000);
+              }}
+            >
+              <Bell className="h-4 w-4 mr-2" />
+              {isNotifyClicked ? 'Notified!' : 'Notify Me When Ready'}
+            </Button>
+          </div>
+        </div>
       </div>
 
       {/* Streak Celebration Modal */}

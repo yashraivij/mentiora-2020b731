@@ -43,8 +43,8 @@ export const PremiumAnalyticsCard = ({
             <Icon className="h-6 w-6 text-white" />
           </div>
           {comingSoon && (
-            <Badge className="bg-gradient-to-r from-violet-500 to-purple-600 text-white border-0 text-xs">
-              Coming Soon
+            <Badge className="bg-gradient-to-r from-amber-500 to-yellow-600 text-white border-0 text-xs">
+              Premium Feature
             </Badge>
           )}
         </div>
