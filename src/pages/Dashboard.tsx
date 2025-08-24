@@ -53,7 +53,7 @@ interface UserProgress {
 const Dashboard = () => {
   const { user, logout } = useAuth();
   const { toast } = useToast();
-  const { isPremium, isLoading: premiumLoading } = usePremium();
+  const { isPremium, isLoading: premiumLoading, hasStripeCustomer } = usePremium();
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
@@ -834,11 +834,21 @@ const Dashboard = () => {
 
       if (error) {
         console.error('Error creating customer portal session:', error);
-        toast({
-          title: "Error",
-          description: `Failed to open subscription management: ${error.message}`,
-          variant: "destructive",
-        });
+        
+        // Check if the error is about no Stripe customer
+        if (error.message?.includes('No Stripe customer found')) {
+          toast({
+            title: "No Subscription Found",
+            description: "You don't have an active Stripe subscription to manage. Please upgrade to premium first.",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Error",
+            description: `Failed to open subscription management: ${error.message}`,
+            variant: "destructive",
+          });
+        }
         return;
       }
 
@@ -998,7 +1008,7 @@ const Dashboard = () => {
                 <span className="text-sm font-extrabold">Join Community</span>
               </Button>
               
-              {isPremium && (
+              {isPremium && hasStripeCustomer && (
                 <Button 
                   onClick={handleManageSubscription}
                   variant="outline"
