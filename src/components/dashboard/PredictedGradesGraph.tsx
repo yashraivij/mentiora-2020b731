@@ -345,12 +345,11 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
   }
 
   return (
-    <>
-      <Card className="glass-effect mb-8 relative border-2 border-gradient-to-r from-purple-500/20 via-blue-500/20 to-emerald-500/20 overflow-visible">
-        {/* Premium background decorations */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-emerald-500/5" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-400/10 via-purple-500/10 to-transparent rounded-full blur-3xl animate-pulse" />
-        <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-br from-emerald-500/10 via-blue-500/10 to-transparent rounded-full blur-2xl" />
+    <Card className="glass-effect mb-8 relative border-2 border-gradient-to-r from-purple-500/20 via-blue-500/20 to-emerald-500/20 overflow-visible">
+      {/* Premium background decorations */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-emerald-500/5" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-400/10 via-purple-500/10 to-transparent rounded-full blur-3xl animate-pulse" />
+      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-br from-emerald-500/10 via-blue-500/10 to-transparent rounded-full blur-2xl" />
       
       {/* Floating elements for premium feel */}
       <div className="absolute top-4 right-4 w-2 h-2 bg-amber-400 rounded-full animate-ping opacity-75" />
@@ -490,7 +489,11 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                           Upgrade to Premium to unlock detailed AI insights, grade predictions, and personalized feedback for your GCSE performance.
                         </div>
                         <button 
-                          onClick={() => setShowPaywall(true)}
+                        onClick={() => {
+                          const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
+                          const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
+                          window.open(stripeUrl, '_blank');
+                        }}
                           className="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
                         >
                           <Zap className="h-4 w-4" />
@@ -673,18 +676,17 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           </div>
         )}
       </CardContent>
+      
+      <PremiumPaywall
+        isOpen={showPaywall}
+        onClose={() => setShowPaywall(false)}
+        onUpgrade={() => {
+          setShowPaywall(false);
+          const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
+          const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
+          window.open(stripeUrl, '_blank');
+        }}
+      />
     </Card>
-    
-    <PremiumPaywall
-      isOpen={showPaywall}
-      onClose={() => setShowPaywall(false)}
-      onUpgrade={() => {
-        setShowPaywall(false);
-        const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
-        const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
-        window.open(stripeUrl, '_blank');
-      }}
-    />
-    </>
   );
 };
