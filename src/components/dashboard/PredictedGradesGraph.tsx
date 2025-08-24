@@ -489,11 +489,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                           Upgrade to Premium to unlock detailed AI insights, grade predictions, and personalized feedback for your GCSE performance.
                         </div>
                         <button 
-                        onClick={() => {
-                          const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
-                          const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
-                          window.open(stripeUrl, '_blank');
-                        }}
+                          onClick={() => setShowPaywall(true)}
                           className="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
                         >
                           <Zap className="h-4 w-4" />
