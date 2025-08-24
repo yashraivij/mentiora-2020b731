@@ -104,7 +104,7 @@ serve(async (req) => {
     
     if (isInadequateAnswer) {
       // Special handling for clearly inadequate answers
-      prompt = `You are marking a GCSE ${subject || 'subject'} question. 
+      prompt = `You are a friendly GCSE ${subject || 'subject'} teacher providing encouraging feedback. 
 
 QUESTION: ${question}
 
@@ -117,20 +117,21 @@ TOTAL MARKS: ${totalMarks}
 CRITICAL INSTRUCTION: The student has provided an extremely brief answer ("${userAnswer}"). You must:
 
 1. Award 0 marks (this type of answer cannot meet GCSE standards)
-2. Be accurate in your feedback - mention exactly what they wrote: "${userAnswer}"
-3. Do NOT discuss content they didn't provide
-4. Do NOT make assumptions about what they might have meant
-5. Explain what type of answer was expected for the marks available
+2. Speak directly to the student using "you" and "your"
+3. Be encouraging and supportive while being honest about their answer
+4. Do NOT discuss content they didn't provide
+5. Do NOT make assumptions about what they might have meant
+6. Explain what type of answer was expected for the marks available
 
 Respond in this exact JSON format:
 {
   "marksAwarded": 0,
-  "feedback": "Your answer '${userAnswer}' does not provide sufficient detail to meet GCSE marking criteria. For ${totalMarks} marks, you need to provide a detailed response that addresses the question requirements. Please ensure you write complete sentences and include relevant subject-specific terminology.",
-  "assessment": "Insufficient detail provided"
+  "feedback": "I can see you wrote '${userAnswer}', but this doesn't provide enough detail to earn marks on a GCSE question. For ${totalMarks} marks, I need to see a much more detailed response with complete sentences and subject-specific terminology. Don't worry though - have another go and really expand on your ideas!",
+  "assessment": "Keep trying - you need more detail!"
 }`;
     } else {
       // Normal detailed marking for substantial answers
-      prompt = `You are an expert GCSE examiner marking a ${subject || 'GCSE subject'} question with absolute precision.
+      prompt = `You are a friendly and encouraging GCSE ${subject || 'subject'} teacher providing personalized feedback.
 
 QUESTION: ${question}
 
@@ -144,24 +145,26 @@ TOTAL MARKS: ${totalMarks}${formulaSheetNote}
 
 🚨 CRITICAL MARKING RULES:
 1. ONLY evaluate what the student actually wrote - quote their exact words when giving feedback
-2. Do NOT assume working, steps, or explanations they didn't provide  
-3. Do NOT discuss concepts they never mentioned
-4. Be precise about what they included vs what was missing
-5. For mathematical questions: verify the correct answer yourself before marking
+2. Speak directly to the student using "you" and "your" - be encouraging and supportive
+3. Do NOT assume working, steps, or explanations they didn't provide  
+4. Do NOT discuss concepts they never mentioned
+5. Be precise about what they included vs what was missing
+6. For mathematical questions: verify the correct answer yourself before marking
 
 GCSE MARKING STANDARDS:
 - Award marks only for GCSE-level content that directly answers the question
 - Use proper GCSE terminology requirements for each subject
 - Apply official mark scheme logic based on the marks available
 - Be fair but rigorous - this is a real GCSE standard examination
+- Always be encouraging and explain how they can improve
 
-Your feedback must be completely accurate about their actual submission.
+Your feedback must be friendly, encouraging, and completely accurate about their actual submission.
 
 Respond in this exact JSON format:
 {
   "marksAwarded": [number from 0 to ${totalMarks}],
-  "feedback": "[Based ONLY on what they actually wrote - quote their exact words]",
-  "assessment": "[Brief professional judgment]"
+  "feedback": "[Friendly, encouraging feedback speaking directly to the student about what they wrote]",
+  "assessment": "[Brief encouraging judgment]"
 }`;
     }
 
@@ -211,8 +214,8 @@ Respond in this exact JSON format:
       if (isInadequateAnswer && markingResult.marksAwarded > 0) {
         console.warn('AI awarded marks for inadequate answer, correcting to 0');
         markingResult.marksAwarded = 0;
-        markingResult.feedback = `Your answer "${userAnswer}" does not provide sufficient detail to meet GCSE marking criteria. For ${totalMarks} marks, you need to provide a detailed response that addresses the question requirements. Please ensure you write complete sentences and include relevant subject-specific terminology.`;
-        markingResult.assessment = "Insufficient detail provided";
+        markingResult.feedback = `I can see you wrote "${userAnswer}", but this doesn't provide enough detail to earn marks on a GCSE question. For ${totalMarks} marks, I need to see a much more detailed response with complete sentences and subject-specific terminology. Don't worry though - have another go and really expand on your ideas!`;
+        markingResult.assessment = "Keep trying - you need more detail!";
       }
       
       // Validate that feedback doesn't discuss content not in the user's answer
@@ -247,14 +250,14 @@ Respond in this exact JSON format:
       if (isInadequateAnswer) {
         markingResult = {
           marksAwarded: 0,
-          feedback: `Your answer "${userAnswer}" does not provide sufficient detail to meet GCSE marking criteria. For ${totalMarks} marks, you need to provide a detailed response that addresses the question requirements.`,
-          assessment: "Insufficient detail provided"
+          feedback: `I can see you wrote "${userAnswer}", but this doesn't provide enough detail to earn marks on a GCSE question. For ${totalMarks} marks, I need to see a much more detailed response with complete sentences and subject-specific terminology. Don't worry though - have another go and really expand on your ideas!`,
+          assessment: "Keep trying - you need more detail!"
         };
       } else {
         markingResult = {
           marksAwarded: 0, // More conservative fallback
-          feedback: "There was an error processing your answer. Please ensure your response is detailed and addresses all parts of the question.",
-          assessment: "Processing Error"
+          feedback: "I had trouble processing your answer - please make sure your response is detailed and addresses all parts of the question. You've got this!",
+          assessment: "Try again with more detail!"
         };
       }
     }
