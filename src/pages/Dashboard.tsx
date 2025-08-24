@@ -827,26 +827,37 @@ const Dashboard = () => {
     if (!user?.id) return;
 
     try {
+      console.log('Invoking customer-portal function...');
       const { data, error } = await supabase.functions.invoke('customer-portal');
+
+      console.log('Customer portal response:', { data, error });
 
       if (error) {
         console.error('Error creating customer portal session:', error);
         toast({
           title: "Error",
-          description: "Failed to open subscription management. Please try again.",
+          description: `Failed to open subscription management: ${error.message}`,
           variant: "destructive",
         });
         return;
       }
 
       if (data?.url) {
+        console.log('Opening customer portal:', data.url);
         window.open(data.url, '_blank');
+      } else {
+        console.error('No URL returned from customer portal');
+        toast({
+          title: "Error", 
+          description: "No redirect URL received from subscription management.",
+          variant: "destructive",
+        });
       }
     } catch (error) {
       console.error('Error invoking customer portal:', error);
       toast({
         title: "Error",
-        description: "Failed to open subscription management. Please try again.",
+        description: `Failed to open subscription management: ${error instanceof Error ? error.message : 'Unknown error'}`,
         variant: "destructive",
       });
     }
