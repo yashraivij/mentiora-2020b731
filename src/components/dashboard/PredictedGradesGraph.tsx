@@ -490,8 +490,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                         </div>
                         <button 
                         onClick={() => {
-                          const { user } = useAuth();
-                            const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
+                          const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
                           const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
                           window.open(stripeUrl, '_blank');
                         }}
@@ -683,7 +682,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
         onClose={() => setShowPaywall(false)}
         onUpgrade={() => {
           setShowPaywall(false);
-          const { user } = useAuth();
           const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
           const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
           window.open(stripeUrl, '_blank');
