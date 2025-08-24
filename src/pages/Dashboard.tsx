@@ -54,6 +54,13 @@ const Dashboard = () => {
   const { user, logout } = useAuth();
   const { toast } = useToast();
   const { isPremium, isLoading: premiumLoading, hasStripeCustomer } = usePremium();
+  
+  // Debug logging for subscription management button visibility
+  console.log('Dashboard subscription button visibility:', {
+    isPremium,
+    hasStripeCustomer,
+    shouldShowButton: isPremium && hasStripeCustomer
+  });
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);

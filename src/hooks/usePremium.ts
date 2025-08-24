@@ -64,6 +64,7 @@ export const usePremium = (): PremiumStatus => {
         subscriber: subscriber,
         isPremium: isPremium,
         hasStripeCustomer: hasStripeCustomer,
+        stripeCustomerId: subscriber?.stripe_customer_id,
         profileIsPremium: profile?.is_premium,
         profilePremium: profile?.premium,
         subscriberSubscribed: subscriber?.subscribed
