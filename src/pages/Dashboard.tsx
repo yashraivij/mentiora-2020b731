@@ -1502,18 +1502,31 @@ const Dashboard = () => {
         </div>
 
 
-        {/* Premium Analytics Section */}
-        <PremiumGate
-          title="Advanced Analytics"
-          description="Unlock deep insights into your learning patterns, performance trends, and personalized recommendations to supercharge your study sessions."
-          className="mb-8"
-        >
-          <PremiumAnalytics />
-        </PremiumGate>
-
-        {/* Premium Status Test */}
-        <div className="mb-8">
-          <PremiumUpgradeTest />
+        {/* Premium Analytics Coming Soon Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <PremiumAnalyticsCard
+            title="Learning Retention"
+            description="Track how well you retain information across different topics and time periods with advanced memory curve analysis."
+            icon={Brain}
+            gradient="from-purple-500 to-pink-600"
+            comingSoon={true}
+          />
+          
+          <PremiumAnalyticsCard
+            title="Efficiency Metrics"
+            description="Measure your study efficiency and discover optimal learning strategies tailored to your performance patterns."
+            icon={Target}
+            gradient="from-blue-500 to-cyan-500"
+            comingSoon={true}
+          />
+          
+          <PremiumAnalyticsCard
+            title="Advanced Analytics"
+            description="Deep insights into your learning patterns, performance trends, and personalized AI-powered recommendations."
+            icon={LineChart}
+            gradient="from-emerald-500 to-teal-600"
+            comingSoon={true}
+          />
         </div>
       </div>
 
