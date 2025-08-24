@@ -823,6 +823,35 @@ const Dashboard = () => {
     navigate('/');
   };
 
+  const handleManageSubscription = async () => {
+    if (!user?.id) return;
+
+    try {
+      const { data, error } = await supabase.functions.invoke('customer-portal');
+
+      if (error) {
+        console.error('Error creating customer portal session:', error);
+        toast({
+          title: "Error",
+          description: "Failed to open subscription management. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (data?.url) {
+        window.open(data.url, '_blank');
+      }
+    } catch (error) {
+      console.error('Error invoking customer portal:', error);
+      toast({
+        title: "Error",
+        description: "Failed to open subscription management. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
   const handlePractice = async (subjectId: string, topicId?: string) => {
     await recordActivity();
     if (topicId) {
@@ -957,6 +986,18 @@ const Dashboard = () => {
                 <Gamepad2 className="h-5 w-5 mr-2" />
                 <span className="text-sm font-extrabold">Join Community</span>
               </Button>
+              
+              {isPremium && (
+                <Button 
+                  onClick={handleManageSubscription}
+                  variant="outline"
+                  className="border-orange-300 text-orange-600 hover:bg-orange-50 hover:text-orange-700 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950 dark:hover:text-orange-300 transition-all duration-300 rounded-xl px-4 py-2 h-11"
+                >
+                  <Settings className="h-4 w-4 mr-2" />
+                  <span className="text-sm font-medium">Manage Subscription</span>
+                </Button>
+              )}
+              
               <ThemeToggle />
               {getStudyStreak() >= 3 && <ColorThemeToggle />}
               {getStudyStreak() >= 7 && <StudyPlaylist isUnlocked={true} />}
