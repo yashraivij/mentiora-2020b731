@@ -22,7 +22,7 @@ export const UpgradeButton = ({
     console.log('Upgrade button clicked - redirecting to Stripe...');
     // Try multiple methods to ensure redirect works
     try {
-      const baseUrl = 'https://buy.stripe.com/test_28EbJ05c4drYb2o2GQ8N200';
+      const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
       const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
       
       // Method 1: Create a temporary anchor and click it
@@ -41,7 +41,7 @@ export const UpgradeButton = ({
     } catch (error) {
       console.error('Error redirecting to Stripe:', error);
       // Final fallback
-      const fallbackUrl = user?.id ? `https://buy.stripe.com/test_28EbJ05c4drYb2o2GQ8N200?client_reference_id=${user.id}` : 'https://buy.stripe.com/test_28EbJ05c4drYb2o2GQ8N200';
+      const fallbackUrl = user?.id ? `https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202?client_reference_id=${user.id}` : 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
       window.location.href = fallbackUrl;
     }
   };

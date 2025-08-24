@@ -9,7 +9,7 @@ export const PricingSection = () => {
   const { user } = useAuth();
   
   const handleUpgrade = () => {
-    const baseUrl = 'https://buy.stripe.com/test_28EbJ05c4drYb2o2GQ8N200';
+    const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
     const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
     window.open(stripeUrl, '_blank');
   };
