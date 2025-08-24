@@ -1538,34 +1538,45 @@ const Dashboard = () => {
         </div>
 
         {/* Advanced Analytics Coming Soon Section */}
-        <Card className="mb-8 border-dashed border-2 border-muted-foreground/30">
-          <CardContent className="text-center py-12">
-            <div className="flex flex-col items-center space-y-4">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                <BarChart3 className="h-8 w-8 text-white" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold mb-2">Advanced Analytics Coming Soon</h3>
-                <p className="text-muted-foreground max-w-md mx-auto">
-                  We're working hard to bring you powerful data-driven insights to supercharge your GCSE revision. Stay tuned for updates!
-                </p>
-              </div>
-              <Button 
-                variant="outline" 
-                className="mt-4"
-                onClick={() => {
-                  toast({
-                    title: "Thanks for your interest!",
-                    description: "We'll notify you as soon as advanced analytics are ready.",
-                  });
-                }}
-              >
-                <Bell className="h-4 w-4 mr-2" />
-                Notify Me When Ready
-              </Button>
+        <div className="text-center py-12 mb-8">
+          <div className="flex flex-col items-center space-y-6">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-r from-purple-600 via-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+              <BarChart3 className="h-10 w-10 text-white" />
             </div>
-          </CardContent>
-        </Card>
+            <div>
+              <h3 className="text-2xl font-bold mb-3 flex items-center justify-center gap-3">
+                <Sparkles className="h-6 w-6 text-purple-500" />
+                Advanced Analytics Coming Soon
+                <Sparkles className="h-6 w-6 text-purple-500" />
+              </h3>
+              <p className="text-muted-foreground max-w-lg mx-auto text-lg">
+                We're working hard to bring you powerful data-driven insights to supercharge your GCSE revision. Stay tuned for updates!
+              </p>
+            </div>
+            <Button 
+              variant="outline" 
+              className={`mt-6 px-8 py-3 text-lg font-semibold transition-all duration-300 ${
+                isNotifyClicked 
+                  ? 'border-green-500 text-green-600 bg-green-50 dark:bg-green-950 hover:bg-green-100 dark:hover:bg-green-900' 
+                  : 'border-purple-500 text-purple-600 bg-purple-50 dark:bg-purple-950 hover:bg-purple-100 dark:hover:bg-purple-900'
+              }`}
+              onClick={() => {
+                setIsNotifyClicked(true);
+                toast({
+                  title: "Thanks for your interest!",
+                  description: "We'll notify you as soon as advanced analytics are ready.",
+                });
+                // Reset color after 3 seconds
+                setTimeout(() => {
+                  setIsNotifyClicked(false);
+                }, 3000);
+              }}
+            >
+              <Bell className="h-5 w-5 mr-2" />
+              Notify Me When Ready
+            </Button>
+          </div>
+        </div>
       </div>
 
       {/* Streak Celebration Modal */}
