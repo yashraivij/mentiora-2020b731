@@ -1573,7 +1573,7 @@ const Dashboard = () => {
               }}
             >
               <Bell className="h-5 w-5 mr-2" />
-              Notify Me When Ready
+              {isNotifyClicked ? "We'll Notify You!" : "Notify Me When Ready"}
             </Button>
           </div>
         </div>
