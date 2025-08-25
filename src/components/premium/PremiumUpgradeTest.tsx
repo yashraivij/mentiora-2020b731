@@ -5,6 +5,7 @@ import { usePremium } from "@/hooks/usePremium";
 import { Crown, RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { UpgradeButton } from "@/components/upgrade/UpgradeButton";
+import { CancelSubscriptionButton } from "@/components/ui/cancel-subscription-button";
 import { useAuth } from "@/contexts/AuthContext";
 
 export const PremiumUpgradeTest = () => {
@@ -91,10 +92,11 @@ export const PremiumUpgradeTest = () => {
         )}
 
         {isPremium && (
-          <div className="pt-4 border-t">
+          <div className="pt-4 border-t space-y-4">
             <div className="text-center text-green-600 font-medium">
               ✅ Premium features unlocked!
             </div>
+            <CancelSubscriptionButton />
           </div>
         )}
       </CardContent>
