@@ -119,12 +119,21 @@ const ExamInterface: React.FC = () => {
                 </div>
               </div>
 
-              <Button 
-                onClick={handleBackToSubjects}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
-              >
-                Back to Subject Selection
-              </Button>
+              <div className="space-y-4">
+                <Button 
+                  onClick={() => navigate('/dashboard')}
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-3 text-lg"
+                >
+                  Return to Dashboard
+                </Button>
+                <Button 
+                  variant="outline"
+                  onClick={handleBackToSubjects}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 text-lg"
+                >
+                  Take Another Exam
+                </Button>
+              </div>
             </div>
           </div>
         </div>

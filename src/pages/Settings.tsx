@@ -3,17 +3,57 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Trash2, Shield, UserX, Crown, Sparkles, Mail, User, AlertTriangle } from "lucide-react";
+import { ArrowLeft, Trash2, Shield, UserX, Crown, Sparkles, Mail, User, AlertTriangle, CreditCard } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
+import { usePremium } from "@/hooks/usePremium";
 
 const Settings = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { isPremium, subscriptionTier, subscriptionEnd } = usePremium();
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isCancelling, setIsCancelling] = useState(false);
+
+  const handleCancelSubscription = async () => {
+    if (!user?.id) return;
+    
+    setIsCancelling(true);
+    
+    try {
+      const { error } = await supabase.functions.invoke('cancel-subscription');
+      
+      if (error) {
+        console.error('Cancel subscription error:', error);
+        toast({
+          title: "Error",
+          description: "Failed to cancel subscription. Please try again or contact support.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      toast({
+        title: "Subscription Cancelled",
+        description: "Your subscription has been cancelled successfully. You'll retain access until your current billing period ends.",
+      });
+
+      // Refresh the page to update premium status
+      window.location.reload();
+    } catch (error) {
+      console.error('Cancel subscription error:', error);
+      toast({
+        title: "Error", 
+        description: "Failed to cancel subscription. Please try again or contact support.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsCancelling(false);
+    }
+  };
 
   const handleDeleteAccount = async () => {
     if (!user?.id) return;
@@ -175,24 +215,161 @@ const Settings = () => {
                       </div>
                       <div>
                         <h4 className="font-semibold text-lg bg-gradient-to-r from-amber-700 to-orange-600 dark:from-amber-300 dark:to-orange-300 bg-clip-text text-transparent">Account Type</h4>
-                        <p className="text-muted-foreground font-medium">Premium Student</p>
+                        <p className="text-muted-foreground font-medium">{isPremium ? 'Premium Student' : 'Free Student'}</p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-amber-100 to-yellow-100 dark:from-amber-900/50 dark:to-yellow-900/50 rounded-full border border-amber-300/50 dark:border-amber-600/30">
                       <Crown className="w-4 h-4 text-amber-600 dark:text-amber-400" />
-                      <span className="text-sm font-semibold text-amber-700 dark:text-amber-300">Active</span>
+                      <span className="text-sm font-semibold text-amber-700 dark:text-amber-300">{isPremium ? 'Active' : 'Free'}</span>
                     </div>
                   </div>
                 </div>
+
+                {/* Subscription Card - Only show if premium */}
+                {isPremium && (
+                  <div className="p-6 rounded-2xl bg-gradient-to-r from-green-100/50 via-emerald-100/40 to-teal-100/50 dark:from-green-900/30 dark:via-emerald-900/20 dark:to-teal-900/30 border border-green-200/50 dark:border-green-700/30 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group/subscription">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg group-hover/subscription:scale-110 transition-transform duration-200">
+                          <CreditCard className="h-5 w-5 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-lg bg-gradient-to-r from-green-700 to-emerald-600 dark:from-green-300 dark:to-emerald-300 bg-clip-text text-transparent">Subscription</h4>
+                          <p className="text-muted-foreground font-medium">{subscriptionTier || 'Premium'} Plan</p>
+                          {subscriptionEnd && (
+                            <p className="text-sm text-muted-foreground">
+                              Expires: {new Date(subscriptionEnd).toLocaleDateString()}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/50 dark:to-emerald-900/50 rounded-full border border-green-300/50 dark:border-green-600/30">
+                        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                        <span className="text-sm font-semibold text-green-700 dark:text-green-300">Active</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </motion.div>
+
+          {/* Subscription Management Section - Only show if premium */}
+          {isPremium && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-orange-50/90 via-amber-50/80 to-yellow-50/70 dark:from-orange-950/60 dark:via-amber-950/50 dark:to-yellow-950/40 shadow-2xl hover:shadow-3xl transition-all duration-500 group backdrop-blur-xl">
+                {/* Animated Border */}
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 rounded-2xl p-[2px] group-hover:p-[3px] transition-all duration-300">
+                  <div className="bg-gradient-to-br from-orange-50/90 via-amber-50/80 to-yellow-50/70 dark:from-orange-950/60 dark:via-amber-950/50 dark:to-yellow-950/40 rounded-[14px] h-full w-full backdrop-blur-xl" />
+                </div>
+                
+                {/* Warning Sparkles */}
+                <div className="absolute top-4 right-6 w-2 h-2 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full animate-pulse opacity-70" />
+                <div className="absolute bottom-6 left-8 w-1.5 h-1.5 bg-gradient-to-r from-amber-400 to-yellow-400 rounded-full animate-pulse delay-1000 opacity-60" />
+                
+                <CardHeader className="relative">
+                  <CardTitle className="flex items-center space-x-3 text-2xl">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-500 flex items-center justify-center shadow-xl shadow-orange-500/30">
+                      <CreditCard className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <span className="bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400 bg-clip-text text-transparent">Subscription Management</span>
+                      <p className="text-sm text-orange-600/70 dark:text-orange-400/70 font-medium mt-1">Manage your premium subscription</p>
+                    </div>
+                  </CardTitle>
+                  <CardDescription className="text-base text-muted-foreground ml-15">
+                    Cancel your subscription or manage billing preferences
+                  </CardDescription>
+                </CardHeader>
+                
+                <CardContent className="relative">
+                  <div className="p-6 rounded-2xl bg-gradient-to-r from-orange-100/60 via-amber-100/50 to-yellow-100/60 dark:from-orange-900/40 dark:via-amber-900/30 dark:to-yellow-900/40 border-2 border-orange-200/60 dark:border-orange-700/40 hover:border-orange-300/80 dark:hover:border-orange-600/60 transition-all duration-300 group/subscription">
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-start space-x-4">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center shadow-lg group-hover/subscription:scale-110 transition-transform duration-200">
+                          <CreditCard className="h-6 w-6 text-white" />
+                        </div>
+                        <div className="space-y-2">
+                          <h4 className="font-semibold text-xl bg-gradient-to-r from-orange-700 to-amber-600 dark:from-orange-400 dark:to-amber-400 bg-clip-text text-transparent">
+                            Cancel Subscription
+                          </h4>
+                          <p className="text-muted-foreground text-base max-w-md">
+                            Cancel your premium subscription. You'll retain access until your current billing period ends.
+                          </p>
+                          <div className="flex items-center space-x-2 mt-3">
+                            <Sparkles className="h-4 w-4 text-orange-500" />
+                            <span className="text-sm font-semibold text-orange-600 dark:text-orange-400">You can resubscribe anytime</span>
+                          </div>
+                        </div>
+                      </div>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button 
+                            variant="outline" 
+                            size="lg"
+                            className="ml-6 border-orange-300 text-orange-700 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/30 font-bold shadow-lg hover:shadow-orange-500/20 transition-all duration-300 rounded-xl px-8 py-3 hover:scale-105"
+                            disabled={isCancelling}
+                          >
+                            <CreditCard className="h-5 w-5 mr-2" />
+                            {isCancelling ? "Processing..." : "Cancel Subscription"}
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent className="border-0 bg-gradient-to-br from-white via-orange-50/30 to-amber-50/20 dark:from-slate-900 dark:via-orange-950/30 dark:to-amber-950/20 backdrop-blur-2xl shadow-2xl max-w-2xl">
+                          <AlertDialogHeader>
+                            <AlertDialogTitle className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400 bg-clip-text text-transparent flex items-center space-x-3">
+                              <CreditCard className="h-6 w-6 text-orange-500" />
+                              <span>Cancel Premium Subscription?</span>
+                            </AlertDialogTitle>
+                            <AlertDialogDescription className="space-y-4 text-base">
+                              <p className="text-lg font-medium">This will cancel your premium subscription at the end of your current billing period.</p>
+                              
+                              <div className="p-4 rounded-xl bg-orange-100/50 dark:bg-orange-900/30 border border-orange-200 dark:border-orange-800">
+                                <p className="font-semibold text-orange-800 dark:text-orange-200 mb-2">After cancellation, you will lose access to:</p>
+                                <ul className="list-disc list-inside space-y-2 text-orange-700 dark:text-orange-300">
+                                  <li>Predicted exam papers and questions</li>
+                                  <li>Advanced analytics and performance tracking</li>
+                                  <li>Premium study materials and resources</li>
+                                  <li>Unlimited practice sessions</li>
+                                  <li>Priority customer support</li>
+                                </ul>
+                              </div>
+                              
+                              <div className="p-4 rounded-xl bg-gradient-to-r from-green-500/10 to-emerald-500/10 border-2 border-green-400/50 dark:border-green-600/50">
+                                <p className="text-green-700 dark:text-green-300 font-bold text-lg flex items-center space-x-2">
+                                  <Sparkles className="h-5 w-5" />
+                                  <span>You can resubscribe at any time to regain full access!</span>
+                                </p>
+                              </div>
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter className="space-x-4">
+                            <AlertDialogCancel className="px-8 py-3 rounded-xl font-semibold">Keep Subscription</AlertDialogCancel>
+                            <AlertDialogAction 
+                              onClick={handleCancelSubscription}
+                              className="px-8 py-3 rounded-xl font-semibold bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white"
+                              disabled={isCancelling}
+                            >
+                              {isCancelling ? "Processing..." : "Cancel Subscription"}
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          )}
 
           {/* Danger Zone Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
             <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-red-50/90 via-rose-50/80 to-pink-50/70 dark:from-red-950/60 dark:via-rose-950/50 dark:to-pink-950/40 shadow-2xl hover:shadow-3xl transition-all duration-500 group backdrop-blur-xl">
               {/* Animated Danger Border */}
