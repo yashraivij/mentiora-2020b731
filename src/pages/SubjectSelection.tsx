@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Clock, BookOpen, Crown, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { PremiumPaywall } from '@/components/ui/premium-paywall';
 import { usePremium } from '@/hooks/usePremium';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
@@ -134,6 +135,8 @@ const SubjectSelection: React.FC = () => {
   const navigate = useNavigate();
   const { isPremium } = usePremium();
   const { user } = useAuth();
+  const [showPaywall, setShowPaywall] = useState(false);
+  const [selectedSubject, setSelectedSubject] = useState<typeof subjects[0] | null>(null);
 
   const handleStartPremiumExam = async (subject: typeof subjects[0]) => {
     if (isPremium) {
@@ -148,6 +151,14 @@ const SubjectSelection: React.FC = () => {
       return;
     }
 
+    // Show paywall modal instead of going directly to Stripe
+    setSelectedSubject(subject);
+    setShowPaywall(true);
+  };
+
+  const handleUpgrade = async () => {
+    if (!selectedSubject) return;
+
     try {
       // Create Stripe subscription
       const { data, error } = await supabase.functions.invoke('create-subscription');
@@ -160,7 +171,7 @@ const SubjectSelection: React.FC = () => {
 
       if (data?.url) {
         // Store the intended route to redirect after payment
-        sessionStorage.setItem('post-payment-route', subject.route);
+        sessionStorage.setItem('post-payment-route', selectedSubject.route);
         // Open Stripe checkout in same tab
         window.location.href = data.url;
       } else {
@@ -170,6 +181,11 @@ const SubjectSelection: React.FC = () => {
       console.error('Error creating subscription:', error);
       toast.error('An error occurred. Please try again.');
     }
+  };
+
+  const handleClosePaywall = () => {
+    setShowPaywall(false);
+    setSelectedSubject(null);
   };
 
   return (
@@ -274,6 +290,13 @@ const SubjectSelection: React.FC = () => {
           ))}
         </div>
       </div>
+
+      {/* Premium Paywall Modal */}
+      <PremiumPaywall
+        isOpen={showPaywall}
+        onClose={handleClosePaywall}
+        onUpgrade={handleUpgrade}
+      />
     </div>
   );
 };
