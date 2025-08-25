@@ -404,10 +404,10 @@ const PredictedQuestions = () => {
                        return examBoard === 'edexcel';
                      }
                      
-                      // For edexcel tab, don't show any other subjects except the Edexcel-specific ones
-                      if (examBoard === 'edexcel') {
-                        return false; // Don't show non-Edexcel subjects in Edexcel tab
-                      }
+                     // For edexcel tab, exclude subjects that have AQA GCSE badge
+                     if (examBoard === 'edexcel') {
+                       return false; // Don't show AQA GCSE subjects in Edexcel tab
+                     }
                      
                        // For other exam boards, show all other subjects as coming soon
                        return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language';

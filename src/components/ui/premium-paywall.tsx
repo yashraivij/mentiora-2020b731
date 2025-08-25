@@ -144,15 +144,15 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 bg-gradient-to-br from-purple-900/95 via-blue-900/95 to-emerald-900/95 backdrop-blur-md"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
           onClick={onClose}
         >
           <motion.div
-            initial={{ scale: 0.95, opacity: 0 }}
+            initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.95, opacity: 0 }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="relative w-full h-full overflow-y-auto"
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{ type: "spring", damping: 25, stiffness: 400 }}
+            className="relative w-full max-w-4xl max-h-[85vh] overflow-y-auto bg-gradient-to-br from-purple-900/95 via-blue-900/95 to-emerald-900/95 rounded-2xl shadow-2xl border border-white/20 backdrop-blur-lg"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -164,8 +164,8 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
             </button>
 
             {/* Header */}
-            <div className="relative py-16 px-8 text-center min-h-[50vh] flex flex-col justify-center">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-blue-600/15 to-emerald-600/20" />
+            <div className="relative p-12 text-center">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-600/30 via-blue-600/20 to-emerald-600/30 rounded-t-3xl" />
               
               {/* Sparkles Animation */}
               <div className="absolute top-8 left-1/4">
