@@ -394,7 +394,7 @@ const PredictedQuestions = () => {
             </div>
           </TabsContent>
 
-{['edexcel', 'ccea', 'ocr', 'wjec'].map((examBoard) => (
+          {['edexcel', 'ccea', 'ocr', 'wjec'].map((examBoard) => (
             <TabsContent key={examBoard} value={examBoard} className="mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                  {curriculum
@@ -422,11 +422,12 @@ const PredictedQuestions = () => {
                      return 0;
                    })
                    .map((subject) => {
-                      // For non-Edexcel tabs, show subjects as coming soon if they're not actually available
-                      const isAvailable = examBoard === 'edexcel' && 
-                        (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel');
-                    
-                    if (!isAvailable && examBoard !== 'edexcel') {
+                      // For Edexcel tab, render the subject cards normally
+                      if (examBoard === 'edexcel') {
+                        return renderSubjectCard(subject, examBoard);
+                      }
+                      
+                      // For other exam boards, show subjects as coming soon
                       return (
                         <Card 
                           key={subject.id} 
@@ -459,9 +460,6 @@ const PredictedQuestions = () => {
                           </CardContent>
                         </Card>
                       );
-                    }
-                    
-                    return renderSubjectCard(subject);
                   })}
               </div>
             </TabsContent>
