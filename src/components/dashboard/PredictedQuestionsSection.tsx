@@ -4,33 +4,13 @@ import { Badge } from "@/components/ui/badge";
 import { Crown, Star, Sparkles, Target, Clock, BookOpen, Zap, Trophy, Rocket } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { CountdownTimer } from "./CountdownTimer";
-import { supabase } from "@/integrations/supabase/client";
-import { usePremium } from "@/hooks/usePremium";
 
 export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
-  const { isPremium } = usePremium();
 
-  const handleStartPredicted = async () => {
-    if (isPremium) {
-      navigate('/predicted-questions');
-    } else {
-      // Create Stripe checkout for non-premium users
-      try {
-        const { data, error } = await supabase.functions.invoke('create-subscription');
-        
-        if (error) {
-          console.error('Error creating subscription:', error);
-          return;
-        }
-        
-        if (data?.url) {
-          window.location.href = data.url; // Redirect to Stripe checkout
-        }
-      } catch (error) {
-        console.error('Error creating subscription:', error);
-      }
-    }
+  const handleStartPredicted = () => {
+    // Navigate to subject selection page
+    navigate('/subject-selection');
   };
 
   return (

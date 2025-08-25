@@ -22,6 +22,8 @@ import Notebook from "./pages/Notebook";
 import Settings from "./pages/Settings";
 import Success from "./pages/Success";
 import Cancel from "./pages/Cancel";
+import SubjectSelection from "./pages/SubjectSelection";
+import ExamInterface from "./pages/ExamInterface";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -42,6 +44,8 @@ const App: React.FC = () => (
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/success" element={<Success />} />
             <Route path="/cancel" element={<Cancel />} />
+            <Route path="/subject-selection" element={<SubjectSelection />} />
+            <Route path="/exam/:examId" element={<ExamInterface />} />
             <Route path="/dashboard" element={
               <ProtectedRoute>
                 <Dashboard />

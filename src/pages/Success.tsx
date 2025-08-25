@@ -44,7 +44,16 @@ const Success = () => {
           
           <div className="space-y-3">
             <Button 
-              onClick={() => navigate('/predicted-questions')}
+              onClick={() => {
+                // Check if there's a stored route to redirect to
+                const storedRoute = sessionStorage.getItem('post-payment-route');
+                if (storedRoute) {
+                  sessionStorage.removeItem('post-payment-route');
+                  navigate(storedRoute);
+                } else {
+                  navigate('/subject-selection');
+                }
+              }}
               className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white"
             >
               <Crown className="h-4 w-4 mr-2" />
