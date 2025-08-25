@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Crown, Zap, TrendingUp, Clock, Star, CheckCircle, Target, BookOpen, Award, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
+import { usePremium } from '@/hooks/usePremium';
 
 interface PremiumPaywallProps {
   isOpen: boolean;
@@ -12,12 +15,70 @@ interface PremiumPaywallProps {
 
 export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose, onUpgrade }) => {
   const { user } = useAuth();
+  const { isPremium, subscriptionTier, subscriptionEnd } = usePremium();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isCanceling, setIsCanceling] = useState(false);
   
-  const handleUpgradeClick = () => {
-    const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
-    const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
-    window.open(stripeUrl, '_blank');
-    onUpgrade();
+  const handleUpgradeClick = async () => {
+    if (!user) {
+      toast.error('Please log in to upgrade to Premium');
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('create-subscription');
+      
+      if (error) {
+        toast.error('Failed to create subscription. Please try again.');
+        console.error('Subscription error:', error);
+        return;
+      }
+
+      if (data?.url) {
+        // Open Stripe checkout in a new tab
+        window.open(data.url, '_blank');
+        onUpgrade();
+      } else {
+        toast.error('Invalid response from subscription service');
+      }
+    } catch (error) {
+      console.error('Error creating subscription:', error);
+      toast.error('An error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleCancelSubscription = async () => {
+    if (!user) {
+      toast.error('Please log in to cancel subscription');
+      return;
+    }
+
+    setIsCanceling(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('cancel-subscription');
+      
+      if (error) {
+        toast.error('Failed to cancel subscription. Please try again.');
+        console.error('Cancel subscription error:', error);
+        return;
+      }
+
+      if (data?.success) {
+        toast.success('Subscription cancelled successfully');
+        // Force refresh of premium status
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
+    } catch (error) {
+      console.error('Error cancelling subscription:', error);
+      toast.error('An error occurred. Please try again.');
+    } finally {
+      setIsCanceling(false);
+    }
   };
   const benefits = [
     {
@@ -156,9 +217,10 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                 <div className="text-white/60 text-xs mt-2">Less than a single tutoring session</div>
                 <Button
                   onClick={handleUpgradeClick}
+                  disabled={isLoading}
                   className="w-full mt-4 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-semibold py-2 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                 >
-                  Start Free Trial
+                  {isLoading ? 'Creating Subscription...' : 'Start Free Trial'}
                 </Button>
               </div>
             </div>
@@ -224,29 +286,64 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
             {/* CTA Buttons */}
             <div className="px-8 pb-8">
               <div className="space-y-4">
-                <Button
-                  onClick={handleUpgradeClick}
-                  className="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 text-lg"
-                >
-                  <div className="flex items-center justify-center space-x-3">
-                    <Zap className="h-6 w-6" />
-                    <span>Upgrade to Premium Now</span>
-                    <Crown className="h-6 w-6" />
+                {isPremium ? (
+                  // Show subscription management for premium users
+                  <div className="space-y-4">
+                    <div className="bg-emerald-500/20 border border-emerald-400/30 rounded-xl p-4 text-center">
+                      <div className="flex items-center justify-center space-x-2 mb-2">
+                        <Crown className="h-5 w-5 text-emerald-400" />
+                        <span className="text-emerald-300 font-medium">You're Premium!</span>
+                      </div>
+                      <p className="text-white/70 text-sm">
+                        {subscriptionTier && `${subscriptionTier} plan`}
+                        {subscriptionEnd && ` • Renews ${new Date(subscriptionEnd).toLocaleDateString()}`}
+                      </p>
+                    </div>
+                    
+                    <Button
+                      onClick={handleCancelSubscription}
+                      disabled={isCanceling}
+                      className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300"
+                    >
+                      {isCanceling ? 'Cancelling...' : 'Cancel Subscription'}
+                    </Button>
+                    
+                    <button
+                      onClick={onClose}
+                      className="w-full text-white/60 hover:text-white/80 text-sm transition-colors py-2"
+                    >
+                      Close
+                    </button>
                   </div>
-                </Button>
-                
-                <div className="text-center">
-                  <p className="text-white/60 text-sm">
-                    🔒 Cancel anytime • ⚡ Instant access
-                  </p>
-                </div>
-                
-                <button
-                  onClick={onClose}
-                  className="w-full text-white/60 hover:text-white/80 text-sm transition-colors py-2"
-                >
-                  Maybe later
-                </button>
+                ) : (
+                  // Show upgrade buttons for non-premium users
+                  <>
+                    <Button
+                      onClick={handleUpgradeClick}
+                      disabled={isLoading}
+                      className="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 text-lg"
+                    >
+                      <div className="flex items-center justify-center space-x-3">
+                        <Zap className="h-6 w-6" />
+                        <span>{isLoading ? 'Creating Subscription...' : 'Upgrade to Premium Now'}</span>
+                        <Crown className="h-6 w-6" />
+                      </div>
+                    </Button>
+                    
+                    <div className="text-center">
+                      <p className="text-white/60 text-sm">
+                        🔒 Cancel anytime • ⚡ Instant access
+                      </p>
+                    </div>
+                    
+                    <button
+                      onClick={onClose}
+                      className="w-full text-white/60 hover:text-white/80 text-sm transition-colors py-2"
+                    >
+                      Maybe later
+                    </button>
+                  </>
+                )}
               </div>
             </div>
 

@@ -30,21 +30,10 @@ export const usePremium = (): PremiumStatus => {
     }
 
     try {
-      // Check profile premium status
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('is_premium, premium')
-        .eq('email', user.email)
-        .maybeSingle();
-
-      if (profileError) {
-        console.error('Error fetching profile:', profileError);
-      }
-
-      // Check subscriber status for additional details
+      // Check subscriber status for premium details
       const { data: subscriber, error: subscriberError } = await supabase
         .from('subscribers')
-        .select('subscribed, subscription_tier, subscription_end')
+        .select('subscribed, subscription_tier, subscription_end, subscription_id')
         .eq('email', user.email)
         .maybeSingle();
 
@@ -52,15 +41,12 @@ export const usePremium = (): PremiumStatus => {
         console.error('Error fetching subscriber:', subscriberError);
       }
 
-      const isPremium = profile?.is_premium || profile?.premium || subscriber?.subscribed || false;
+      const isPremium = subscriber?.subscribed || false;
       
       console.log('Premium Status Debug:', {
         userEmail: user.email,
-        profile: profile,
         subscriber: subscriber,
         isPremium: isPremium,
-        profileIsPremium: profile?.is_premium,
-        profilePremium: profile?.premium,
         subscriberSubscribed: subscriber?.subscribed
       });
 
