@@ -101,6 +101,9 @@ const PredictedQuestions = () => {
     const colors = {
       chemistry: "from-green-500 to-emerald-600",
       "chemistry-edexcel": "from-green-500 to-emerald-600",
+      "physics-edexcel": "from-blue-500 to-indigo-600",
+      "maths-edexcel": "from-purple-500 to-indigo-600",
+      "business-edexcel-igcse": "from-amber-500 to-orange-600",
       biology: "from-emerald-500 to-green-600", 
       physics: "from-blue-500 to-indigo-600",
       mathematics: "from-purple-500 to-indigo-600",
@@ -118,6 +121,9 @@ const PredictedQuestions = () => {
     const durations = {
       chemistry: "1h 45min",
       "chemistry-edexcel": "1h 45min",
+      "physics-edexcel": "1h 45min",
+      "maths-edexcel": "1h 30min",
+      "business-edexcel-igcse": "1h 30min",
       biology: "1h 45min",
       physics: "1h 45min", 
       mathematics: "1h 30min",
@@ -149,6 +155,8 @@ const PredictedQuestions = () => {
       name = 'IGCSE Business';
     } else if (subject.id === 'chemistry-edexcel') {
       name = 'Chemistry';
+    } else if (subject.id === 'physics-edexcel') {
+      name = 'Physics';
     } else if (subject.id === 'combined-science-aqa') {
       name = 'Combined Science Biology';
     }
