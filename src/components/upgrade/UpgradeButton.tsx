@@ -2,8 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Crown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
-import { supabase } from "@/integrations/supabase/client";
-import { STRIPE_CONFIG, isTestMode } from "@/lib/stripe-config";
 
 interface UpgradeButtonProps {
   className?: string;
@@ -20,27 +18,31 @@ export const UpgradeButton = ({
 }: UpgradeButtonProps) => {
   const { user } = useAuth();
   
-  const handleUpgrade = async () => {
-    console.log(`🧪 Creating subscription in ${STRIPE_CONFIG.MODE.toUpperCase()} mode`);
-    if (isTestMode()) {
-      console.log('💳 You can use test card: 4242424242424242');
-    }
-    
+  const handleUpgrade = () => {
+    console.log('Upgrade button clicked - redirecting to Stripe...');
+    // Try multiple methods to ensure redirect works
     try {
-      const { data, error } = await supabase.functions.invoke('create-subscription');
+      const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
+      const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
       
-      if (error) {
-        throw error;
-      }
-
-      if (data?.url) {
-        // Open Stripe checkout in a new tab
-        window.open(data.url, '_blank');
-      } else {
-        console.error('No checkout URL received');
-      }
+      // Method 1: Create a temporary anchor and click it
+      const link = document.createElement('a');
+      link.href = stripeUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // Method 2: Fallback to window.location if above doesn't work
+      setTimeout(() => {
+        window.location.href = stripeUrl;
+      }, 100);
     } catch (error) {
-      console.error('Error creating subscription:', error);
+      console.error('Error redirecting to Stripe:', error);
+      // Final fallback
+      const fallbackUrl = user?.id ? `https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202?client_reference_id=${user.id}` : 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
+      window.location.href = fallbackUrl;
     }
   };
 
@@ -55,7 +57,6 @@ export const UpgradeButton = ({
       )}
     >
       <Crown className="mr-2 h-4 w-4" />
-      {isTestMode() && '🧪 '}
       {children}
     </Button>
   );

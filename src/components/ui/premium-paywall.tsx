@@ -3,8 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Crown, Zap, TrendingUp, Clock, Star, CheckCircle, Target, BookOpen, Award, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
-import { supabase } from '@/integrations/supabase/client';
-import { STRIPE_CONFIG, isTestMode } from '@/lib/stripe-config';
 
 interface PremiumPaywallProps {
   isOpen: boolean;
@@ -15,23 +13,11 @@ interface PremiumPaywallProps {
 export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose, onUpgrade }) => {
   const { user } = useAuth();
   
-  const handleUpgradeClick = async () => {
-    console.log(`🧪 Creating subscription in ${STRIPE_CONFIG.MODE.toUpperCase()} mode`);
-    if (isTestMode()) {
-      console.log('💳 You can use test card: 4242424242424242');
-    }
-    
-    try {
-      const { data } = await supabase.functions.invoke('create-subscription');
-      if (data?.url) {
-        window.open(data.url, '_blank');
-        onUpgrade();
-      } else {
-        console.error('No checkout URL received');
-      }
-    } catch (error) {
-      console.error('Error creating subscription:', error);
-    }
+  const handleUpgradeClick = () => {
+    const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
+    const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
+    window.open(stripeUrl, '_blank');
+    onUpgrade();
   };
   const benefits = [
     {
@@ -172,7 +158,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                   onClick={handleUpgradeClick}
                   className="w-full mt-4 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-semibold py-2 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                 >
-                  {isTestMode() ? '🧪 Start Test Trial' : 'Start Free Trial'}
+                  Start Free Trial
                 </Button>
               </div>
             </div>

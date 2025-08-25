@@ -7,7 +7,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import { TestModeIndicator } from "./components/ui/test-mode-indicator";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -34,8 +33,7 @@ const App: React.FC = () => (
         <Sonner />
         <AuthProvider>
           <BrowserRouter>
-            <TestModeIndicator />
-            <Routes>
+          <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
