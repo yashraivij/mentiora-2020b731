@@ -513,11 +513,6 @@ const PremiumDashboard = () => {
         // Simplified for premium dashboard - just update local state
         console.log('Would add subject:', subjectName, examBoard);
 
-        if (error) {
-          console.error('Error adding user subject:', error);
-          return;
-        }
-
         setUserSubjects(prev => [...prev, subjectId]);
       }
     } catch (error) {
@@ -548,11 +543,6 @@ const PremiumDashboard = () => {
       } else {
         // Simplified for premium dashboard - just update local state
         console.log('Would add Physics AQA');
-
-        if (error) {
-          console.error('Error adding Physics AQA:', error);
-          return;
-        }
 
         setUserSubjects(prev => [...prev, subjectId]);
       }
