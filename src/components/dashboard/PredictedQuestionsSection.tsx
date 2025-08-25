@@ -9,7 +9,8 @@ export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
 
   const handleStartPredicted = () => {
-    navigate('/predicted-questions');
+    // Navigate to subject selection page
+    navigate('/subject-selection');
   };
 
   return (

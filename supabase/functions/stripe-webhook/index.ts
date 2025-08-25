@@ -22,7 +22,9 @@ serve(async (req) => {
   try {
     logStep("Webhook received", { method: req.method });
 
-    const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
+    // Use both test and live keys - the webhook will use the appropriate one
+    const stripeKey = Deno.env.get('STRIPE_TEST_SECRET_KEY') || Deno.env.get('STRIPE_SECRET_KEY') || '';
+    const stripe = new Stripe(stripeKey, {
       apiVersion: '2023-10-16',
     });
 
@@ -56,7 +58,7 @@ serve(async (req) => {
     // Handle different event types
     switch (event.type) {
       case 'checkout.session.completed': {
-        const session = event.data.object as Stripe.Checkout.Session;
+        const session = event.data.object as Stripe.CheckoutSession;
         logStep("Processing checkout.session.completed", { 
           sessionId: session.id, 
           customerEmail: session.customer_email,
@@ -65,13 +67,19 @@ serve(async (req) => {
           paymentStatus: session.payment_status
         });
 
-        if (session.customer_email) {
-          logStep("Attempting to update profile", { email: session.customer_email });
+        if (session.customer_email && session.mode === 'subscription') {
+          logStep("Processing subscription checkout", { email: session.customer_email });
           
-          // First, check if profile exists
+          // Get the subscription ID from the session
+          let subscriptionId = null;
+          if (session.subscription) {
+            subscriptionId = typeof session.subscription === 'string' ? session.subscription : session.subscription.id;
+          }
+          
+          // First, check if profile exists to get user_id
           const { data: existingProfile, error: checkError } = await supabase
             .from('profiles')
-            .select('*')
+            .select('id')
             .eq('email', session.customer_email)
             .single();
             
@@ -81,54 +89,14 @@ serve(async (req) => {
             checkError: checkError?.message 
           });
 
-          // Update user to premium status
-          const { data: profileData, error: profileError } = await supabase
-            .from('profiles')
-            .update({ is_premium: true, premium: true })
-            .eq('email', session.customer_email)
-            .select();
-
-          if (profileError) {
-            logStep("Error updating profile", { error: profileError.message, email: session.customer_email });
-          } else if (profileData && profileData.length > 0) {
-            logStep("Profile updated to premium", { email: session.customer_email, updatedRows: profileData.length, updatedProfile: profileData[0] });
-          } else {
-            logStep("No profile found to update by email", { email: session.customer_email });
-            
-            // Try to find profile by user_id from auth.users
-            try {
-              const { data: authUser, error: authError } = await supabase.auth.admin.getUserByEmail(session.customer_email);
-              logStep("Auth user lookup", { 
-                email: session.customer_email, 
-                userFound: !!authUser.user,
-                authError: authError?.message 
-              });
-              
-              if (authUser.user) {
-                const { data: profileByUserId, error: profileByUserIdError } = await supabase
-                  .from('profiles')
-                  .update({ is_premium: true, premium: true })
-                  .eq('id', authUser.user.id)
-                  .select();
-                  
-                if (profileByUserIdError) {
-                  logStep("Error updating profile by user_id", { error: profileByUserIdError.message, userId: authUser.user.id });
-                } else {
-                  logStep("Profile updated by user_id", { userId: authUser.user.id, updatedRows: profileByUserId?.length || 0 });
-                }
-              }
-            } catch (authError) {
-              logStep("Auth lookup failed", { error: authError.message, email: session.customer_email });
-            }
-          }
-
-          // Update or create subscriber record
+          // Update or create subscriber record with subscription_id
           const { data: subscriberData, error: subscriberError } = await supabase
             .from('subscribers')
             .upsert({
               email: session.customer_email,
               user_id: existingProfile?.id || null,
               stripe_customer_id: session.customer as string,
+              subscription_id: subscriptionId,
               subscribed: true,
               subscription_tier: 'Premium',
               updated_at: new Date().toISOString(),
@@ -140,11 +108,15 @@ serve(async (req) => {
           } else {
             logStep("Subscriber record updated", { 
               email: session.customer_email, 
+              subscriptionId: subscriptionId,
               subscriberData: subscriberData?.[0] 
             });
           }
         } else {
-          logStep("No customer email in session", { sessionId: session.id });
+          logStep("No customer email in session or not a subscription", { 
+            sessionId: session.id,
+            mode: session.mode 
+          });
         }
         break;
       }
@@ -154,17 +126,7 @@ serve(async (req) => {
         logStep("Processing invoice.payment_succeeded", { invoiceId: invoice.id });
 
         if (invoice.customer_email) {
-          // Ensure user remains premium
-          const { error: profileError } = await supabase
-            .from('profiles')
-            .update({ is_premium: true, premium: true })
-            .eq('email', invoice.customer_email);
-
-          if (profileError) {
-            logStep("Error updating profile on payment", { error: profileError });
-          }
-
-          // Update subscriber record
+          // Update subscriber record to ensure they remain subscribed
           const { error: subscriberError } = await supabase
             .from('subscribers')
             .update({
@@ -175,6 +137,8 @@ serve(async (req) => {
 
           if (subscriberError) {
             logStep("Error updating subscriber on payment", { error: subscriberError });
+          } else {
+            logStep("Subscriber updated on successful payment", { email: invoice.customer_email });
           }
         }
         break;
@@ -198,29 +162,20 @@ serve(async (req) => {
         }
 
         if (customerEmail) {
-          // Remove premium status
-          const { error: profileError } = await supabase
-            .from('profiles')
-            .update({ is_premium: false, premium: false })
-            .eq('email', customerEmail);
-
-          if (profileError) {
-            logStep("Error removing premium status", { error: profileError });
-          } else {
-            logStep("Premium status removed", { email: customerEmail });
-          }
-
-          // Update subscriber record
+          // Update subscriber record to mark as unsubscribed
           const { error: subscriberError } = await supabase
             .from('subscribers')
             .update({
               subscribed: false,
+              subscription_end: new Date().toISOString(),
               updated_at: new Date().toISOString(),
             })
             .eq('email', customerEmail);
 
           if (subscriberError) {
             logStep("Error updating subscriber on cancellation", { error: subscriberError });
+          } else {
+            logStep("Subscription cancelled successfully", { email: customerEmail });
           }
         }
         break;

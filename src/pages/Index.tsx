@@ -7,6 +7,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { DynamicTestimonials } from "@/components/ui/dynamic-testimonials";
 import { PricingSection } from "@/components/pricing/PricingSection";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -415,11 +416,22 @@ const Index = () => {
               className="mb-16"
             >
               <Button 
-                onClick={() => {
-                  const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
-                  const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
-                  window.open(stripeUrl, '_blank');
-                }} 
+                onClick={async () => {
+                  try {
+                    const { data, error } = await supabase.functions.invoke('create-subscription');
+                    
+                    if (error) {
+                      console.error('Error creating subscription:', error);
+                      return;
+                    }
+                    
+                    if (data?.url) {
+                      window.open(data.url, '_blank');
+                    }
+                  } catch (error) {
+                    console.error('Error creating subscription:', error);
+                  }
+                }}
                 className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-violet-500/25 transition-all duration-300 rounded-2xl group"
               >
                 <Crown className="mr-3 h-6 w-6" />
