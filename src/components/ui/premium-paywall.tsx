@@ -152,7 +152,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ type: "spring", damping: 20, stiffness: 300 }}
-            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-purple-900 via-blue-900 to-emerald-900 rounded-3xl shadow-2xl border border-white/20"
+            className="relative w-full max-w-6xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-purple-900 via-blue-900 to-emerald-900 rounded-3xl shadow-2xl border border-white/20"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
