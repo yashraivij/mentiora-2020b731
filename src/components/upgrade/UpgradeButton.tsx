@@ -3,6 +3,7 @@ import { Crown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
+import { STRIPE_CONFIG, isTestMode } from "@/lib/stripe-config";
 
 interface UpgradeButtonProps {
   className?: string;
@@ -20,7 +21,11 @@ export const UpgradeButton = ({
   const { user } = useAuth();
   
   const handleUpgrade = async () => {
-    console.log('Upgrade button clicked - creating subscription...');
+    console.log(`🧪 Creating subscription in ${STRIPE_CONFIG.MODE.toUpperCase()} mode`);
+    if (isTestMode()) {
+      console.log('💳 You can use test card: 4242424242424242');
+    }
+    
     try {
       const { data, error } = await supabase.functions.invoke('create-subscription');
       
@@ -50,6 +55,7 @@ export const UpgradeButton = ({
       )}
     >
       <Crown className="mr-2 h-4 w-4" />
+      {isTestMode() && '🧪 '}
       {children}
     </Button>
   );
