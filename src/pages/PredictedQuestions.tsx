@@ -80,30 +80,16 @@ const PredictedQuestions = () => {
     }
   };
 
-  const handleUpgrade = async () => {
-    try {
-      const { data, error } = await supabase.functions.invoke('create-subscription');
-      
-      if (error) {
-        console.error('Error creating subscription:', error);
-        return;
-      }
-      
-      if (data?.url) {
-        window.open(data.url, '_blank');
-      }
-    } catch (error) {
-      console.error('Error creating subscription:', error);
-    }
+  const handleUpgrade = () => {
+    const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
+    const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
+    window.open(stripeUrl, '_blank');
   };
 
   const getSubjectColor = (subjectId: string) => {
     const colors = {
       chemistry: "from-green-500 to-emerald-600",
       "chemistry-edexcel": "from-green-500 to-emerald-600",
-      "physics-edexcel": "from-blue-500 to-indigo-600",
-      "maths-edexcel": "from-purple-500 to-indigo-600",
-      "business-edexcel-igcse": "from-amber-500 to-orange-600",
       biology: "from-emerald-500 to-green-600", 
       physics: "from-blue-500 to-indigo-600",
       mathematics: "from-purple-500 to-indigo-600",
@@ -121,9 +107,6 @@ const PredictedQuestions = () => {
     const durations = {
       chemistry: "1h 45min",
       "chemistry-edexcel": "1h 45min",
-      "physics-edexcel": "1h 45min",
-      "maths-edexcel": "1h 30min",
-      "business-edexcel-igcse": "1h 30min",
       biology: "1h 45min",
       physics: "1h 45min", 
       mathematics: "1h 30min",
@@ -155,8 +138,6 @@ const PredictedQuestions = () => {
       name = 'IGCSE Business';
     } else if (subject.id === 'chemistry-edexcel') {
       name = 'Chemistry';
-    } else if (subject.id === 'physics-edexcel') {
-      name = 'Physics';
     } else if (subject.id === 'combined-science-aqa') {
       name = 'Combined Science Biology';
     }
@@ -407,12 +388,17 @@ const PredictedQuestions = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                  {curriculum
                    .filter((subject) => {
-                      // For edexcel tab, show only edexcel subjects
-                      if (examBoard === 'edexcel') {
-                        return subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel';
-                      }
+                      // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, and physics-edexcel only in edexcel tab
+                      if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') {
+                       return examBoard === 'edexcel';
+                     }
                      
-                       // For other exam boards, show all non-edexcel subjects as coming soon
+                     // For edexcel tab, exclude subjects that have AQA GCSE badge
+                     if (examBoard === 'edexcel') {
+                       return false; // Don't show AQA GCSE subjects in Edexcel tab
+                     }
+                     
+                       // For other exam boards, show all other subjects as coming soon
                        return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language';
                    })
                    .sort((a, b) => {
@@ -430,12 +416,11 @@ const PredictedQuestions = () => {
                      return 0;
                    })
                    .map((subject) => {
-                      // For Edexcel tab, render the subject cards normally
-                      if (examBoard === 'edexcel') {
-                        return renderSubjectCard(subject, examBoard);
-                      }
-                      
-                      // For other exam boards, show subjects as coming soon
+                      // For non-Edexcel tabs, show subjects as coming soon if they're not actually available
+                      const isAvailable = examBoard === 'edexcel' && 
+                        (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel');
+                    
+                    if (!isAvailable && examBoard !== 'edexcel') {
                       return (
                         <Card 
                           key={subject.id} 
@@ -468,6 +453,9 @@ const PredictedQuestions = () => {
                           </CardContent>
                         </Card>
                       );
+                    }
+                    
+                    return renderSubjectCard(subject);
                   })}
               </div>
             </TabsContent>
