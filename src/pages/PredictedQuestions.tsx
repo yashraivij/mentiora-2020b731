@@ -25,6 +25,8 @@ const PredictedQuestions = () => {
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
   const [showPaywall, setShowPaywall] = useState(false);
 
+  console.log('Current selectedExamBoard:', selectedExamBoard);
+
   useEffect(() => {
     // Ensure page starts at top when navigating here
     document.documentElement.scrollTop = 0;
@@ -407,9 +409,12 @@ const PredictedQuestions = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                  {curriculum
                    .filter((subject) => {
+                      console.log('Filtering subject:', subject.id, 'for examBoard:', examBoard);
                       // For edexcel tab, show only edexcel subjects
                       if (examBoard === 'edexcel') {
-                        return subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel';
+                        const isEdexcelSubject = subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel';
+                        console.log('Is Edexcel subject:', isEdexcelSubject, 'for', subject.id);
+                        return isEdexcelSubject;
                       }
                      
                        // For other exam boards, show all non-edexcel subjects as coming soon
