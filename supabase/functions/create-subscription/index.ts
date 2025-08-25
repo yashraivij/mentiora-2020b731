@@ -21,7 +21,7 @@ serve(async (req) => {
     logStep("Function started");
 
     // Initialize Stripe with test key
-    const stripe = new Stripe(Deno.env.get("STRIPE_TEST_SECRET_KEY") || "", {
+    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
       apiVersion: "2023-10-16",
     });
 
@@ -71,13 +71,23 @@ serve(async (req) => {
       customer: customerId,
       line_items: [
         {
-          price: "price_1RzsBhCtgl2dlnVO2C1G5vcO", // The provided price ID
+          price_data: {
+            currency: "gbp",
+            product_data: {
+              name: "Mentiora Premium",
+              description: "Premium exam simulation and analytics"
+            },
+            unit_amount: 999, // £9.99 in pence
+            recurring: {
+              interval: "month"
+            }
+          },
           quantity: 1,
         },
       ],
       mode: "subscription",
-      success_url: `${req.headers.get("origin")}/?subscription=success`,
-      cancel_url: `${req.headers.get("origin")}/?subscription=cancelled`,
+      success_url: `${req.headers.get("origin")}/success`,
+      cancel_url: `${req.headers.get("origin")}/cancel`,
       metadata: {
         user_id: user.id
       }
