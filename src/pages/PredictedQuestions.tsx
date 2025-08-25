@@ -394,22 +394,17 @@ const PredictedQuestions = () => {
             </div>
           </TabsContent>
 
-          {['edexcel', 'ccea', 'ocr', 'wjec'].map((examBoard) => (
+{['edexcel', 'ccea', 'ocr', 'wjec'].map((examBoard) => (
             <TabsContent key={examBoard} value={examBoard} className="mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                  {curriculum
                    .filter((subject) => {
-                      // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, and physics-edexcel only in edexcel tab
-                      if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') {
-                       return examBoard === 'edexcel';
-                     }
+                      // For edexcel tab, show only edexcel subjects
+                      if (examBoard === 'edexcel') {
+                        return subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel';
+                      }
                      
-                     // For edexcel tab, exclude subjects that have AQA GCSE badge
-                     if (examBoard === 'edexcel') {
-                       return false; // Don't show AQA GCSE subjects in Edexcel tab
-                     }
-                     
-                       // For other exam boards, show all other subjects as coming soon
+                       // For other exam boards, show all non-edexcel subjects as coming soon
                        return subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language';
                    })
                    .sort((a, b) => {
