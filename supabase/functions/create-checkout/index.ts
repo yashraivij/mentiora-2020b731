@@ -13,7 +13,15 @@ serve(async (req) => {
   }
 
   try {
-    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY_TEST") || "", {
+    console.log("[CREATE-CHECKOUT] Starting checkout session creation");
+    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY_TEST");
+    
+    if (!stripeKey) {
+      throw new Error("STRIPE_SECRET_KEY_TEST not configured");
+    }
+    
+    console.log("[CREATE-CHECKOUT] Using test key:", stripeKey.substring(0, 12) + "...");
+    const stripe = new Stripe(stripeKey, {
       apiVersion: "2023-10-16",
     });
 
@@ -54,6 +62,7 @@ serve(async (req) => {
     }
 
     // Create checkout session using the specific price ID
+    console.log("[CREATE-CHECKOUT] Creating session for:", customerEmail || "guest user");
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       customer_email: customerId ? undefined : customerEmail,
@@ -73,6 +82,7 @@ serve(async (req) => {
       },
     });
 
+    console.log("[CREATE-CHECKOUT] Session created successfully:", session.id);
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
