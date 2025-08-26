@@ -284,6 +284,9 @@ const PremiumDashboard = () => {
   };
 
   useEffect(() => {
+    // Set flag to indicate user is on premium dashboard
+    localStorage.setItem('mentiora_dashboard_mode', 'premium');
+    
     const loadUserData = async () => {
       if (!user?.id) return;
 
@@ -613,10 +616,12 @@ const PremiumDashboard = () => {
 
   const handlePractice = async (subjectId: string, topicId?: string) => {
     await recordActivity();
+    // Preserve premium dashboard context
+    localStorage.setItem('mentiora_return_to', 'premium-dashboard');
     if (topicId) {
-      navigate(`/practice/${subjectId}/${topicId}`, { state: { from: 'premium-dashboard' } });
+      navigate(`/practice/${subjectId}/${topicId}`, { state: { from: 'premium-dashboard', returnTo: 'premium-dashboard' } });
     } else {
-      navigate(`/subject/${subjectId}`, { state: { from: 'premium-dashboard' } });
+      navigate(`/subject/${subjectId}`, { state: { from: 'premium-dashboard', returnTo: 'premium-dashboard' } });
     }
   };
 
@@ -643,12 +648,14 @@ const PremiumDashboard = () => {
   };
 
   const handleNotificationAction = () => {
+    // Preserve premium dashboard context
+    localStorage.setItem('mentiora_return_to', 'premium-dashboard');
     if (notification.type === "weak-topic-recommendation" && notification.subjectId) {
-      navigate(`/subject/${notification.subjectId}`, { state: { from: 'premium-dashboard' } });
+      navigate(`/subject/${notification.subjectId}`, { state: { from: 'premium-dashboard', returnTo: 'premium-dashboard' } });
     } else if (notification.type === "exam-recommendation" && notification.subjectId) {
-      navigate('/predicted-questions', { state: { from: 'premium-dashboard' } });
+      navigate('/predicted-questions', { state: { from: 'premium-dashboard', returnTo: 'premium-dashboard' } });
     } else if (notification.type === "study-recommendation") {
-      navigate('/predicted-questions', { state: { from: 'premium-dashboard' } });
+      navigate('/predicted-questions', { state: { from: 'premium-dashboard', returnTo: 'premium-dashboard' } });
     }
   };
 
@@ -771,7 +778,10 @@ const PremiumDashboard = () => {
               {getStudyStreak() >= 3 && <ColorThemeToggle />}
               {getStudyStreak() >= 7 && <StudyPlaylist isUnlocked={true} />}
               
-              <Button variant="ghost" onClick={() => navigate('/settings', { state: { from: 'premium-dashboard' } })} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
+              <Button variant="ghost" onClick={() => {
+                localStorage.setItem('mentiora_return_to', 'premium-dashboard');
+                navigate('/settings', { state: { from: 'premium-dashboard', returnTo: 'premium-dashboard' } });
+              }} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
                 <Settings className="h-4 w-4" />
               </Button>
               <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
@@ -988,7 +998,10 @@ const PremiumDashboard = () => {
         <div className="mb-8">
           
           {/* Revision Notebook - Premium Feature */}
-          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => navigate('/notebook', { state: { from: 'premium-dashboard' } })}>
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => {
+            localStorage.setItem('mentiora_return_to', 'premium-dashboard');
+            navigate('/notebook', { state: { from: 'premium-dashboard', returnTo: 'premium-dashboard' } });
+          }}>
             {/* Premium Glow Effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
