@@ -1008,100 +1008,147 @@ const PremiumDashboard = () => {
                       </div>
                     </div>
                     
-                    {/* Compact streak display */}
-                     <div className="space-y-2">
-                       <motion.h3 
-                         key={getStudyStreak()}
-                         initial={{ scale: 0.5, rotate: -180, opacity: 0 }}
-                         animate={{ scale: 1, rotate: 0, opacity: 1 }}
-                         transition={{ 
-                           type: "spring", 
-                           damping: 15, 
-                           stiffness: 300,
-                           duration: 0.8 
-                         }}
-                         className="text-4xl font-bold bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent tracking-tight"
-                       >
-                         {getStudyStreak()}
-                       </motion.h3>
-                       <div className="flex items-center justify-center space-x-2">
-                         <motion.span 
-                           initial={{ opacity: 0 }}
-                           animate={{ opacity: 1 }}
-                           transition={{ delay: 0.3 }}
-                           className="text-muted-foreground font-medium text-lg"
-                         >
-                           {getStudyStreak() === 1 ? 'day streak' : 'day streak'}
-                         </motion.span>
-                         <motion.div
-                           initial={{ scale: 0 }}
-                           animate={{ scale: 1 }}
-                           transition={{ delay: 0.4, type: "spring" }}
-                         >
-                           <Star className="h-4 w-4 text-amber-500 fill-current" />
-                         </motion.div>
-                       </div>
-                     </div>
+                     {/* Compact streak display */}
+                      <div className="space-y-2">
+                        <motion.h3 
+                          key={getStudyStreak()}
+                          initial={{ scale: 0.5, rotate: -180, opacity: 0 }}
+                          animate={{ scale: 1, rotate: 0, opacity: 1 }}
+                          transition={{ 
+                            type: "spring", 
+                            damping: 15, 
+                            stiffness: 300,
+                            duration: 0.8 
+                          }}
+                          className="text-4xl font-bold bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent tracking-tight"
+                        >
+                          {getStudyStreak()}
+                        </motion.h3>
+                        <div className="flex items-center justify-center space-x-2">
+                          <motion.span 
+                            initial={{ y: 10, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.3 }}
+                            className="text-lg font-semibold bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent"
+                          >
+                            Day{getStudyStreak() !== 1 ? 's' : ''} Strong!
+                          </motion.span>
+                          <motion.div 
+                            animate={{ scale: [1, 1.2, 1] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full animate-pulse" 
+                          />
+                        </div>
+                      </div>
                   </div>
-                  
-                  {/* Compact streaks rewards */}
-                  <div className="space-y-2.5">
-                    <div className="flex items-center justify-between p-3 bg-white/30 dark:bg-white/5 rounded-xl backdrop-blur-sm border border-white/20">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center">
-                          <CheckCircle className="h-3.5 w-3.5 text-white" />
-                        </div>
-                        <span className="text-sm font-medium text-foreground">3 Day Streak</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-xs text-muted-foreground">Color Themes</span>
-                        {getStudyStreak() >= 3 ? (
-                          <CheckCircle className="h-4 w-4 text-emerald-500" />
-                        ) : (
-                          <div className="w-4 h-4 rounded-full border-2 border-muted-foreground/30" />
-                        )}
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center justify-between p-3 bg-white/30 dark:bg-white/5 rounded-xl backdrop-blur-sm border border-white/20">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                          <CheckCircle className="h-3.5 w-3.5 text-white" />
-                        </div>
-                        <span className="text-sm font-medium text-foreground">7 Day Streak</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-xs text-muted-foreground">Study Playlist</span>
-                        {getStudyStreak() >= 7 ? (
-                          <CheckCircle className="h-4 w-4 text-emerald-500" />
-                        ) : (
-                          <div className="w-4 h-4 rounded-full border-2 border-muted-foreground/30" />
-                        )}
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center justify-between p-3 bg-white/30 dark:bg-white/5 rounded-xl backdrop-blur-sm border border-white/20">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
-                          <CheckCircle className="h-3.5 w-3.5 text-white" />
-                        </div>
-                        <span className="text-sm font-medium text-foreground">14 Day Streak</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-xs text-muted-foreground">Free Tutoring</span>
-                        {getStudyStreak() >= 14 ? (
-                          <CheckCircle className="h-4 w-4 text-emerald-500" />
-                        ) : (
-                          <div className="w-4 h-4 rounded-full border-2 border-muted-foreground/30" />
-                        )}
-                      </div>
-                    </div>
-                  </div>
+
+                  {/* Compact call to action */}
+                  <Button 
+                    onClick={() => {
+                      const subjectsSection = document.getElementById('subjects-section');
+                      if (subjectsSection) {
+                        subjectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }} 
+                    className="w-full h-10 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white font-semibold shadow-lg shadow-orange-500/20 transform hover:scale-105 transition-all duration-300 border-0"
+                  >
+                    <Zap className="mr-2 h-4 w-4" />
+                    Continue Streak
+                  </Button>
                 </div>
 
-                {/* RIGHT SIDE: Public Streak Profiles */}
+                {/* RIGHT SIDE: Compact Rewards Section */}
                 <div className="space-y-4">
-                  <PublicStreakProfiles />
+                  <div className="text-center space-y-3">
+                    <div className="relative inline-block">
+                      {/* Compact trophy */}
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 via-cyan-500 to-violet-500 flex items-center justify-center shadow-xl shadow-emerald-500/30 transition-all duration-300 group-hover:scale-105 relative overflow-hidden mx-auto">
+                        <div className="absolute inset-1 rounded-xl bg-white/20 backdrop-blur-sm" />
+                        <Trophy className="h-6 w-6 text-white relative z-10 drop-shadow-lg" />
+                      </div>
+                      {/* Subtle achievement ring */}
+                      <div className="absolute inset-0 bg-emerald-400/20 rounded-2xl animate-ping opacity-20" />
+                      {/* Compact badge */}
+                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-md animate-bounce">
+                        <Sparkles className="h-2.5 w-2.5 text-white" />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-1">
+                      <h3 className="text-2xl font-bold bg-gradient-to-br from-emerald-600 via-cyan-600 to-violet-600 dark:from-emerald-400 dark:via-cyan-400 dark:to-violet-400 bg-clip-text text-transparent">
+                        Streak Rewards
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Compact reward tier system */}
+                  <div className="space-y-2">
+                    {/* Color Themes Reward - 3 days */}
+                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 3 ? 'bg-gradient-to-r from-violet-500/10 to-purple-500/10 border-violet-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 3 ? 'bg-gradient-to-br from-violet-500 to-purple-600 shadow-sm' : 'bg-gray-400'}`}>
+                            <Star className="h-3 w-3 text-white" />
+                          </div>
+                          <div>
+                            <p className={`text-sm font-semibold ${getStudyStreak() >= 3 ? 'text-violet-700 dark:text-violet-300' : 'text-gray-500'}`}>
+                              Custom Color Themes
+                            </p>
+                            <p className="text-xs text-muted-foreground">3 days</p>
+                          </div>
+                        </div>
+                        {getStudyStreak() >= 3 ? (
+                          <CheckCircle className="h-4 w-4 text-violet-600" />
+                        ) : (
+                          <div className="text-xs font-medium text-muted-foreground">{3 - getStudyStreak()}d</div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Study Playlist Reward - 7 days */}
+                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 7 ? 'bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border-emerald-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 7 ? 'bg-gradient-to-br from-emerald-500 to-cyan-600 shadow-sm' : 'bg-gray-400'}`}>
+                            <Gamepad2 className="h-3 w-3 text-white" />
+                          </div>
+                          <div>
+                            <p className={`text-sm font-semibold ${getStudyStreak() >= 7 ? 'text-emerald-700 dark:text-emerald-300' : 'text-gray-500'}`}>
+                              Study Playlists & Sounds
+                            </p>
+                            <p className="text-xs text-muted-foreground">7 days</p>
+                          </div>
+                        </div>
+                        {getStudyStreak() >= 7 ? (
+                          <CheckCircle className="h-4 w-4 text-emerald-600" />
+                        ) : (
+                          <div className="text-xs font-medium text-muted-foreground">{7 - getStudyStreak()}d</div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Free Tutoring Session - 14 days */}
+                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 14 ? 'bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-blue-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 14 ? 'bg-gradient-to-br from-blue-500 to-purple-600 shadow-sm' : 'bg-gray-400'}`}>
+                            <User className="h-3 w-3 text-white" />
+                          </div>
+                          <div>
+                            <p className={`text-sm font-semibold ${getStudyStreak() >= 14 ? 'text-blue-700 dark:text-blue-300' : 'text-gray-500'}`}>
+                              Free Tutoring Session
+                            </p>
+                            <p className="text-xs text-muted-foreground">14 days</p>
+                          </div>
+                        </div>
+                        {getStudyStreak() >= 14 ? (
+                          <CheckCircle className="h-4 w-4 text-blue-600" />
+                        ) : (
+                          <div className="text-xs font-medium text-muted-foreground">{14 - getStudyStreak()}d</div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -1448,14 +1495,14 @@ const PremiumDashboard = () => {
           </div>
         </div>
 
-        {/* Premium Analytics Cards - ALL UNLOCKED */}
+        {/* Premium Analytics Coming Soon Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <PremiumAnalyticsCard
             title="Learning Retention"
             description="Track how well you retain information over time with spaced repetition analysis"
             icon={Brain}
             gradient="from-purple-500 to-pink-600"
-            comingSoon={false}
+            comingSoon={true}
           />
           
           <PremiumAnalyticsCard
@@ -1463,7 +1510,7 @@ const PremiumDashboard = () => {
             description="Measure and optimize your knowledge acquisition speed"
             icon={Zap}
             gradient="from-blue-500 to-cyan-500"
-            comingSoon={false}
+            comingSoon={true}
           />
           
           <PremiumAnalyticsCard
@@ -1471,7 +1518,7 @@ const PremiumDashboard = () => {
             description="AI-powered stress detection and recommendations for optimal learning"
             icon={Target}
             gradient="from-emerald-500 to-teal-600"
-            comingSoon={false}
+            comingSoon={true}
           />
           
           <PremiumAnalyticsCard
@@ -1479,11 +1526,11 @@ const PremiumDashboard = () => {
             description="Visualize connections between topics and identify knowledge gaps"
             icon={LineChart}
             gradient="from-orange-500 to-red-600"
-            comingSoon={false}
+            comingSoon={true}
           />
         </div>
 
-        {/* Advanced Analytics Unlocked Section */}
+        {/* Advanced Analytics Coming Soon Section */}
         <div className="text-center py-12 mb-8">
           <div className="flex flex-col items-center space-y-6">
             <div className="w-20 h-20 rounded-full bg-gradient-to-r from-purple-600 via-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
@@ -1492,19 +1539,34 @@ const PremiumDashboard = () => {
             <div>
               <h3 className="text-2xl font-bold mb-3 flex items-center justify-center gap-3">
                 <Sparkles className="h-6 w-6 text-purple-500" />
-                Advanced Analytics Unlocked!
+                Advanced Analytics Coming Soon
                 <Sparkles className="h-6 w-6 text-purple-500" />
               </h3>
               <p className="text-muted-foreground max-w-lg mx-auto text-lg">
-                All premium analytics features are now available to supercharge your GCSE revision. Enjoy the full experience!
+                We're working hard to bring you powerful data-driven insights to supercharge your GCSE revision. Stay tuned for updates!
               </p>
             </div>
             <Button 
-              onClick={() => navigate('/analytics')}
-              className="mt-6 px-8 py-3 text-lg font-semibold bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white transition-all duration-300"
+              variant="outline" 
+              className={`mt-6 px-8 py-3 text-lg font-semibold transition-all duration-300 ${
+                isNotifyClicked 
+                  ? 'border-green-500 text-green-600 bg-green-50 dark:bg-green-950 hover:bg-green-100 dark:hover:bg-green-900' 
+                  : 'border-purple-500 text-purple-600 bg-purple-50 dark:bg-purple-950 hover:bg-purple-100 dark:hover:bg-purple-900'
+              }`}
+              onClick={() => {
+                setIsNotifyClicked(true);
+                toast({
+                  title: "Thanks for your interest!",
+                  description: "We'll notify you as soon as advanced analytics are ready.",
+                });
+                // Reset color after 3 seconds
+                setTimeout(() => {
+                  setIsNotifyClicked(false);
+                }, 3000);
+              }}
             >
-              <BarChart3 className="h-5 w-5 mr-2" />
-              Explore Analytics
+              <Bell className="h-5 w-5 mr-2" />
+              {isNotifyClicked ? "We'll Notify You!" : "Notify Me When Ready"}
             </Button>
           </div>
         </div>
