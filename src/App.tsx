@@ -16,6 +16,7 @@ import SubjectTopics from "./pages/SubjectTopics";
 import Practice from "./pages/Practice";
 import Analytics from "./pages/Analytics";
 import PredictedQuestions from "./pages/PredictedQuestions";
+import PremiumPredictedQuestions from "./pages/PremiumPredictedQuestions";
 import PredictedExam from "./pages/PredictedExam";
 import PredictedResults from "./pages/PredictedResults";
 import Notebook from "./pages/Notebook";
@@ -64,6 +65,11 @@ const App: React.FC = () => (
             <Route path="/predicted-questions" element={
               <ProtectedRoute>
                 <PredictedQuestions />
+              </ProtectedRoute>
+            } />
+            <Route path="/premium-predicted-questions" element={
+              <ProtectedRoute>
+                <PremiumPredictedQuestions />
               </ProtectedRoute>
             } />
             <Route path="/predicted-exam/:subjectId" element={
