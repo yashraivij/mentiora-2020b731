@@ -75,12 +75,25 @@ const PremiumDashboard = () => {
     localStorage.setItem('mentiora_return_to', 'premium-dashboard');
     localStorage.setItem('mentiora_premium_context', 'true');
     
+    // FORCE PREMIUM STATUS - ensure premium dashboard never shows free account
+    const forcePremiumStatus = () => {
+      // Find any elements that might show "Free Account" and override them
+      const statusElements = document.querySelectorAll('[data-premium-status], .text-xs.font-medium');
+      statusElements.forEach(el => {
+        if (el.textContent?.includes('Free Account')) {
+          console.log('Overriding Free Account text with Premium Active');
+          el.textContent = 'Premium Active';
+        }
+      });
+    };
+
     // Continuously check and redirect if needed
     const checkAndRedirect = () => {
       if (window.location.pathname === '/dashboard') {
         console.log('Detected redirect to regular dashboard, forcing back to premium');
         navigate('/premium-dashboard', { replace: true });
       }
+      forcePremiumStatus(); // Also force premium status on every check
     };
 
     // Set up multiple listeners to catch any navigation attempts
@@ -850,7 +863,10 @@ const PremiumDashboard = () => {
                   </h1>
                   <div className="flex items-center space-x-2">
                     <Crown className="h-3 w-3 text-amber-500" />
-                    <span className="text-xs font-medium text-muted-foreground">Premium Active</span>
+                    <span className="text-xs font-medium text-muted-foreground">
+                      {/* FORCED PREMIUM STATUS - NEVER SHOWS FREE ACCOUNT ON PREMIUM DASHBOARD */}
+                      Premium Active
+                    </span>
                   </div>
                 </div>
               </div>
