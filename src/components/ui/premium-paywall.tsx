@@ -35,7 +35,23 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
 
       if (error) {
         console.error('Error creating checkout session:', error);
-        alert(`Error: ${error.message}`);
+        
+        // Try to get detailed error message from the response
+        let errorMessage = error.message;
+        if (error.context?.body) {
+          try {
+            const errorDetails = JSON.parse(error.context.body);
+            errorMessage = errorDetails.error || errorDetails.details || error.message;
+            if (errorDetails.help) {
+              errorMessage += `\n\nHelp: ${errorDetails.help}`;
+            }
+          } catch (e) {
+            // If we can't parse the response, use the original error
+            errorMessage = error.message;
+          }
+        }
+        
+        alert(`Error: ${errorMessage}`);
         return;
       }
 
