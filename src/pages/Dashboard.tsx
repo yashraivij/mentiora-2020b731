@@ -1220,28 +1220,43 @@ const Dashboard = () => {
                 </div>
               </div>
               
-              <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
-                Revolutionary technology creates <span className="font-semibold text-purple-700 dark:text-purple-300">ultra-clear, Grade 9-level revision notes</span> instantly for every question where you lose marks. Each note is meticulously crafted with key definitions, equations, and premium exam strategies.
-              </p>
-              
-              <div className="grid grid-cols-1 gap-4 mb-6">
-                <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg">
-                    <CheckCircle className="h-4 w-4 text-white" />
+              <div className="relative">
+                {/* Always blurred content - even for premium users as per user requirements */}
+                <div className="filter blur-md">
+                  <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
+                    Revolutionary technology creates <span className="font-semibold text-purple-700 dark:text-purple-300">ultra-clear, Grade 9-level revision notes</span> instantly for every question where you lose marks. Each note is meticulously crafted with key definitions, equations, and premium exam strategies.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 gap-4 mb-6">
+                    <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
+                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg">
+                        <CheckCircle className="h-4 w-4 text-white" />
+                      </div>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">Instant premium note generation</span>
+                    </div>
+                    <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
+                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center shadow-lg">
+                        <BookOpen className="h-4 w-4 text-white" />
+                      </div>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">Organized by topic</span>
+                    </div>
+                    <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
+                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
+                        <Trophy className="h-4 w-4 text-white" />
+                      </div>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">Exam-focused premium content</span>
+                    </div>
                   </div>
-                  <span className="font-medium text-gray-800 dark:text-gray-200">Instant premium note generation</span>
                 </div>
-                <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center shadow-lg">
-                    <BookOpen className="h-4 w-4 text-white" />
+                
+                {/* Overlay message for blurred content */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-lg px-4 py-2 border border-purple-200 dark:border-purple-700">
+                    <p className="text-sm font-medium text-purple-700 dark:text-purple-300 flex items-center space-x-2">
+                      <Lock className="h-4 w-4" />
+                      <span>Notes preview - Click to access full notebook</span>
+                    </p>
                   </div>
-                  <span className="font-medium text-gray-800 dark:text-gray-200">Organized by topic</span>
-                </div>
-                <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
-                    <Trophy className="h-4 w-4 text-white" />
-                  </div>
-                  <span className="font-medium text-gray-800 dark:text-gray-200">Exam-focused premium content</span>
                 </div>
               </div>
               
