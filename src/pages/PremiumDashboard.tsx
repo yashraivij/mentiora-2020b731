@@ -114,6 +114,42 @@ const PremiumDashboard = () => {
       });
     };
 
+    // Set up MutationObserver to watch for ANY DOM changes and immediately fix them
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'childList' || mutation.type === 'characterData') {
+          // Check if any new nodes contain "Free Account"
+          mutation.addedNodes.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE && node.textContent?.includes('Free Account')) {
+              console.log('MutationObserver: Replacing Free Account in text node');
+              node.textContent = node.textContent.replace('Free Account', 'Premium Active');
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+              // Check all descendants of the added element
+              const element = node as Element;
+              if (element.textContent?.includes('Free Account')) {
+                console.log('MutationObserver: Replacing Free Account in added element');
+                forcePremiumStatus();
+              }
+            }
+          });
+          
+          // Check if the target node itself now contains "Free Account"
+          if (mutation.target.textContent?.includes('Free Account')) {
+            console.log('MutationObserver: Target node contains Free Account, fixing...');
+            forcePremiumStatus();
+          }
+        }
+      });
+    });
+
+    // Start observing the entire document for changes
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      characterDataOldValue: true
+    });
+
     // Continuously check and redirect if needed
     const checkAndRedirect = () => {
       if (window.location.pathname === '/dashboard') {
@@ -165,6 +201,7 @@ const PremiumDashboard = () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('popstate', handlePopState);
       clearInterval(interval);
+      observer.disconnect(); // Clean up MutationObserver
       
       // Restore original functions
       history.pushState = originalPushState;
