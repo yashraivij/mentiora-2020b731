@@ -22,26 +22,35 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
   }
   
   const handleUpgradeClick = async () => {
+    console.log('Premium paywall - Start Free Trial clicked');
     try {
+      console.log('User:', user);
       const { data, error } = await supabase.functions.invoke('create-checkout', {
         headers: user ? {
           Authorization: `Bearer ${(await supabase.auth.getSession()).data.session?.access_token}`
         } : {}
       });
 
+      console.log('Checkout response:', { data, error });
+
       if (error) {
         console.error('Error creating checkout session:', error);
+        alert(`Error: ${error.message}`);
         return;
       }
 
       if (data?.url) {
+        console.log('Redirecting to Stripe checkout:', data.url);
         // Redirect to Stripe checkout in same window for seamless experience
         window.location.href = data.url;
+      } else {
+        console.error('No checkout URL returned');
+        alert('Failed to create checkout session');
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Unexpected error:', error);
+      alert(`Unexpected error: ${error}`);
     }
-    onUpgrade();
   };
   const benefits = [
     {
