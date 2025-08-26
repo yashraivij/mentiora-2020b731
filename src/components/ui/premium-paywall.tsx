@@ -22,7 +22,9 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
     return null;
   }
   
-  const handleUpgradeClick = async () => {
+  const handleUpgradeClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     console.log('Premium paywall - Start Free Trial clicked');
     try {
       console.log('User:', user);
@@ -203,7 +205,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                 <div className="text-white/60 text-xs mt-2">Less than a single tutoring session</div>
                 <Button
                   onClick={handleUpgradeClick}
-                  className="w-full mt-4 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-semibold py-2 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                  className="w-full mt-4 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-semibold py-2 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 relative z-10 cursor-pointer"
                 >
                   Start Free Trial
                 </Button>
@@ -298,7 +300,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
             </div>
 
             {/* Floating elements */}
-            <div className="absolute top-1/4 left-4 opacity-20">
+            <div className="absolute top-1/4 left-4 opacity-20 pointer-events-none">
               <motion.div
                 animate={{ y: [-10, 10, -10], rotate: [0, 5, 0] }}
                 transition={{ duration: 4, repeat: Infinity }}
@@ -306,7 +308,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                 <Award className="h-8 w-8 text-amber-400" />
               </motion.div>
             </div>
-            <div className="absolute top-1/3 right-4 opacity-20">
+            <div className="absolute top-1/3 right-4 opacity-20 pointer-events-none">
               <motion.div
                 animate={{ y: [10, -10, 10], rotate: [0, -5, 0] }}
                 transition={{ duration: 3.5, repeat: Infinity }}
