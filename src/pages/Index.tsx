@@ -416,9 +416,28 @@ const Index = () => {
             >
               <Button 
                 onClick={() => {
-                  const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
-                  const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
-                  window.open(stripeUrl, '_blank');
+                  const handleUpgrade = async () => {
+                    try {
+                      const { supabase } = await import('@/integrations/supabase/client');
+                      const { data, error } = await supabase.functions.invoke('create-checkout', {
+                        headers: user ? {
+                          Authorization: `Bearer ${(await supabase.auth.getSession()).data.session?.access_token}`
+                        } : {}
+                      });
+
+                      if (error) {
+                        console.error('Error creating checkout session:', error);
+                        return;
+                      }
+
+                      if (data?.url) {
+                        window.location.href = data.url;
+                      }
+                    } catch (error) {
+                      console.error('Error:', error);
+                    }
+                  };
+                  handleUpgrade();
                 }} 
                 className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-violet-500/25 transition-all duration-300 rounded-2xl group"
               >

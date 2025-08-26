@@ -30,9 +30,9 @@ export const usePremium = (): PremiumStatus => {
     }
 
     try {
-      // Check profile premium status
+      // Check profile premium status - using correct table reference
       const { data: profile, error: profileError } = await supabase
-        .from('profiles')
+        .from('profiled')
         .select('is_premium, premium')
         .eq('email', user.email)
         .maybeSingle();

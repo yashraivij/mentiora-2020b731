@@ -4,14 +4,31 @@ import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Crown, Star, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 
 export const PricingSection = () => {
   const { user } = useAuth();
   
-  const handleUpgrade = () => {
-    const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
-    const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
-    window.open(stripeUrl, '_blank');
+  const handleUpgrade = async () => {
+    try {
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        headers: user ? {
+          Authorization: `Bearer ${(await supabase.auth.getSession()).data.session?.access_token}`
+        } : {}
+      });
+
+      if (error) {
+        console.error('Error creating checkout session:', error);
+        return;
+      }
+
+      if (data?.url) {
+        // Redirect to Stripe checkout
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
