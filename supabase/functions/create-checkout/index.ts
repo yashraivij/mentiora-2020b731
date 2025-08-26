@@ -27,13 +27,37 @@ serve(async (req) => {
     console.log("[CREATE-CHECKOUT] Direct secret access:", {
       stripeKeyFound: !!stripeKey,
       priceIdFound: !!priceId,
-      stripeKeyValue: stripeKey ? stripeKey.substring(0, 7) + "..." : "null",
+      stripeKeyPrefix: stripeKey ? stripeKey.substring(0, 7) : "null",
       priceIdValue: priceId ? priceId.substring(0, 10) + "..." : "null"
     });
+    
+    // Validate that we have a proper secret key (not publishable key)
+    if (stripeKey && stripeKey.startsWith('pk_')) {
+      return new Response(JSON.stringify({ 
+        error: "Invalid Stripe key: You're using a publishable key (pk_) instead of a secret key (sk_)",
+        details: `Found key starting with: ${stripeKey.substring(0, 7)}...`,
+        help: "Please update STRIPE_SECRET_KEY in Supabase with your secret key (starts with sk_test_ or sk_live_)"
+      }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500,
+      });
+    }
     
     // If not found, try alternative names
     const fallbackStripeKey = stripeKey || Deno.env.get("STRIPE_TEST_SECRET_KEY") || Deno.env.get("STRIPE_SECRET_KEY_TEST");
     const fallbackPriceId = priceId || Deno.env.get("STRIPE_PRODUCT_ID");
+    
+    // Validate the fallback key too
+    if (fallbackStripeKey && fallbackStripeKey.startsWith('pk_')) {
+      return new Response(JSON.stringify({ 
+        error: "Invalid Stripe key: All available keys are publishable keys (pk_) instead of secret keys (sk_)",
+        details: `Key prefix: ${fallbackStripeKey.substring(0, 7)}...`,
+        help: "Please set a proper secret key (starts with sk_test_ or sk_live_) in STRIPE_SECRET_KEY"
+      }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500,
+      });
+    }
     
     if (!fallbackStripeKey) {
       const availableKeys = allEnvKeys.filter(key => key.includes('STRIPE'));
