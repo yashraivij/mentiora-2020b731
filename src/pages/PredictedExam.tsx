@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -31,6 +31,7 @@ interface ExamAnswer {
 const PredictedExam = () => {
   const { subjectId } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { toast } = useToast();
   const { user } = useAuth();
   
@@ -51,7 +52,8 @@ const PredictedExam = () => {
   const subject = curriculum.find(s => s.id === subjectId);
   
   if (!subject) {
-    navigate(-1);
+    const source = searchParams.get('source');
+    navigate(source === 'premium' ? '/premium-predicted-questions' : '/predicted-questions');
     return null;
   }
 
@@ -1648,7 +1650,10 @@ Write a story about discovering a hidden object.
         <header className="bg-card/90 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-lg">
           <div className="container mx-auto px-6 py-4">
             <div className="flex justify-between items-center">
-              <Button variant="ghost" onClick={() => navigate(-1)} className="text-muted-foreground hover:text-foreground">
+              <Button variant="ghost" onClick={() => {
+                const source = searchParams.get('source');
+                navigate(source === 'premium' ? '/premium-predicted-questions' : '/predicted-questions');
+              }} className="text-muted-foreground hover:text-foreground">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Button>

@@ -65,7 +65,7 @@ const PremiumPredictedQuestions = () => {
   };
 
   const handleSubjectSelect = (subjectId: string) => {
-    navigate(`/predicted-exam/${subjectId}`);
+    navigate(`/predicted-exam/${subjectId}?source=premium`);
   };
 
   const getSubjectColor = (subjectId: string) => {
