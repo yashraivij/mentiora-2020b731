@@ -19,16 +19,21 @@ import { PremiumAnalyticsCard } from "@/components/dashboard/PremiumAnalyticsCar
 import { GoalsSection } from "@/components/dashboard/GoalsSection";
 import { PremiumAnalytics } from "@/components/premium/PremiumAnalytics";
 import { TopicMasteryDisplay } from "@/components/dashboard/TopicMasteryDisplay";
+
 import { PredictivePerformanceCard } from "@/components/dashboard/PredictivePerformanceCard";
 import { OptimalStudyTimeCard } from "@/components/dashboard/OptimalStudyTimeCard";
+
 import { PredictedQuestionsSection } from "@/components/dashboard/PredictedQuestionsSection";
 import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
+
 import { supabase } from "@/integrations/supabase/client";
 import { StressTracker } from "@/lib/stressTracker";
+
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
 import { StreakCelebration } from "@/components/ui/streak-celebration";
 import { GradeCelebration } from "@/components/ui/grade-celebration";
 import { DiscordInvitation } from "@/components/ui/discord-invitation";
+
 import { PublicStreakProfiles } from '@/components/dashboard/PublicStreakProfiles';
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
 import { useToast } from "@/hooks/use-toast";
@@ -44,6 +49,7 @@ interface UserProgress {
 const PremiumDashboard = () => {
   const { user, logout } = useAuth();
   const { toast } = useToast();
+  
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
@@ -454,63 +460,235 @@ const PremiumDashboard = () => {
   };
 
   const checkAndUpdatePublicProfile = async () => {
+    if (!user?.id) return;
+    
+    const currentStreak = getStudyStreak();
+    
+    // Only auto-create profile if user has 14+ day streak
+    if (currentStreak >= 14) {
+      try {
+        // Check if profile already exists
+        const { data: existingProfile } = await supabase
+          .from('public_profiles')
+          .select('*')
+          .eq('user_id', user.id)
+          .single();
+        
+        const profileData = {
+          user_id: user.id,
+          username: user.email?.split('@')[0] || 'anonymous',
+          display_name: getFirstName(),
+          avatar_url: null, // Will be set when user manually edits profile
+          streak_days: currentStreak
+        };
+        
+        if (existingProfile) {
+          // Update existing profile with current streak
+          await supabase
+            .from('public_profiles')
+            .update({ streak_days: currentStreak })
+            .eq('user_id', user.id);
+        } else {
+          // Create new profile
+          await supabase
+            .from('public_profiles')
+            .insert(profileData);
+        }
+      } catch (error) {
+        console.error('Error managing public profile:', error);
+      }
+    }
+  };
+
+  const recordActivity = async () => {
     // Simplified for premium dashboard
     return;
   };
 
-  const handlePractice = (subjectId: string) => {
-    const subject = curriculum.find(s => s.id === subjectId);
-    if (subject && subject.topics.length > 0) {
-      navigate(`/practice/${subjectId}/${subject.topics[0].id}`);
+  const getStudyStreak = (): number => {
+    if (!user?.id) return 0;
+    
+    // Get streak from localStorage for immediate access
+    const savedStreak = localStorage.getItem(`mentiora_streak_${user.id}`);
+    if (savedStreak) {
+      const streak = parseInt(savedStreak);
+      return isNaN(streak) ? 0 : streak;
     }
+    
+    return 0;
   };
 
+  const getOverallProgress = (): number => {
+    if (userProgress.length === 0) return 0;
+    const total = userProgress.reduce((sum, progress) => sum + progress.averageScore, 0);
+    return Math.round(total / userProgress.length);
+  };
+
+  const getMasteredTopics = (): string => {
+    const mastered = userProgress.filter(p => p.averageScore >= 85).length;
+    return mastered.toString();
+  };
+
+  const getSubjectProgress = (subjectId: string): number => {
+    const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
+    if (subjectProgress.length === 0) return 0;
+    const total = subjectProgress.reduce((sum, p) => sum + p.averageScore, 0);
+    return Math.round(total / subjectProgress.length);
+  };
+
+  const getLastActivity = (subjectId: string): Date | null => {
+    const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
+    if (subjectProgress.length === 0) return null;
+    
+    const lastActivity = subjectProgress.reduce((latest, current) => {
+      return new Date(current.lastAttempt) > new Date(latest.lastAttempt) ? current : latest;
+    });
+    
+    return lastActivity.lastAttempt;
+  };
+
+  const getSubjectColor = (subjectId: string): string => {
+    const colors = {
+      'physics': 'from-blue-400 to-blue-600',
+      'chemistry': 'from-green-400 to-green-600',
+      'biology': 'from-emerald-400 to-emerald-600',
+      'maths': 'from-purple-400 to-purple-600',
+      'english': 'from-red-400 to-red-600',
+      'history': 'from-amber-400 to-amber-600',
+      'geography': 'from-teal-400 to-teal-600',
+      'computer-science': 'from-indigo-400 to-indigo-600',
+      'business': 'from-orange-400 to-orange-600',
+      'economics': 'from-cyan-400 to-cyan-600',
+      'psychology': 'from-pink-400 to-pink-600',
+      'sociology': 'from-rose-400 to-rose-600',
+      'art': 'from-violet-400 to-violet-600',
+      'music': 'from-fuchsia-400 to-fuchsia-600',
+      'pe': 'from-lime-400 to-lime-600',
+      'spanish': 'from-yellow-400 to-yellow-600',
+      'french': 'from-sky-400 to-sky-600',
+      'german': 'from-slate-400 to-slate-600',
+      'maths-edexcel': 'from-purple-400 to-purple-600',
+      'business-edexcel-igcse': 'from-orange-400 to-orange-600',
+      'chemistry-edexcel': 'from-green-400 to-green-600',
+      'physics-edexcel': 'from-blue-400 to-blue-600',
+    };
+    return colors[subjectId as keyof typeof colors] || 'from-gray-400 to-gray-600';
+  };
+
+  const allSubjects = curriculum;
+  const filteredSubjects = allSubjects;
+
+  const sortedSubjects = filteredSubjects.sort((a, b) => {
+    const isPinnedA = pinnedSubjects.includes(a.id);
+    const isPinnedB = pinnedSubjects.includes(b.id);
+    
+    if (isPinnedA && !isPinnedB) return -1;
+    if (!isPinnedA && isPinnedB) return 1;
+    
+    switch (sortBy) {
+      case 'alphabetical':
+        return a.name.localeCompare(b.name);
+      case 'weakest':
+        return getSubjectProgress(a.id) - getSubjectProgress(b.id);
+      case 'progress':
+        return getSubjectProgress(b.id) - getSubjectProgress(a.id);
+      default:
+        return 0;
+    }
+  });
+
   const togglePinSubject = (subjectId: string) => {
-    const updatedPinnedSubjects = pinnedSubjects.includes(subjectId)
+    const newPinned = pinnedSubjects.includes(subjectId)
       ? pinnedSubjects.filter(id => id !== subjectId)
       : [...pinnedSubjects, subjectId];
     
-    setPinnedSubjects(updatedPinnedSubjects);
-    localStorage.setItem(`mentiora_pinned_subjects_${user?.id}`, JSON.stringify(updatedPinnedSubjects));
+    setPinnedSubjects(newPinned);
+    localStorage.setItem(`mentiora_pinned_subjects_${user?.id}`, JSON.stringify(newPinned));
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
+  const handlePractice = async (subjectId: string, topicId?: string) => {
+    await recordActivity();
+    if (topicId) {
+      navigate(`/practice/${subjectId}/${topicId}`);
+    } else {
+      navigate(`/subject/${subjectId}`);
+    }
+  };
+
+  const getFirstName = () => {
+    if (!user) return 'there';
+    
+    // Try to get name from user_metadata first (from registration)
+    const fullName = user.user_metadata?.full_name || user.user_metadata?.name;
+    if (fullName) {
+      const firstName = fullName.split(' ')[0];
+      return firstName;
+    }
+    
+    // Fallback to email if no name is available
+    if (user.email) {
+      return user.email.split('@')[0];
+    }
+    
+    return 'there';
+  };
+
+  const handleNotifyClick = () => {
+    setIsNotifyClicked(true);
+  };
+
+  const handleNotificationAction = () => {
+    if (notification.type === "weak-topic-recommendation" && notification.subjectId) {
+      navigate(`/subject/${notification.subjectId}`);
+    } else if (notification.type === "exam-recommendation" && notification.subjectId) {
+      navigate('/predicted-questions');
+    } else if (notification.type === "study-recommendation") {
+      navigate('/predicted-questions');
+    }
   };
 
   const toggleUserSubject = async (subjectId: string) => {
     if (!user?.id) return;
 
-    const subject = curriculum.find(s => s.id === subjectId);
-    if (!subject) return;
-
-    const isCurrentlyUserSubject = userSubjects.includes(subjectId);
-
     try {
-      if (isCurrentlyUserSubject) {
+      if (userSubjects.includes(subjectId)) {
+        // Remove subject
+        const subject = curriculum.find(s => s.id === subjectId);
+        if (!subject) return;
+
         const { error } = await supabase
           .from('user_subjects')
           .delete()
           .eq('user_id', user.id)
-          .eq('subject_name', subject.name.replace(/ \([^)]*\)/g, ''));
-
-        if (error) {
-          console.error('Error removing user subject:', error);
-          return;
-        }
+          .eq('subject_name', subject.name.replace(' (Edexcel)', '').replace(' (Edexcel IGCSE)', ''));
 
         setUserSubjects(prev => prev.filter(id => id !== subjectId));
       } else {
-        let subjectName = subject.name.replace(/ \([^)]*\)/g, '');
-        let examBoard = 'AQA';
+        // Add subject
+        const subject = curriculum.find(s => s.id === subjectId);
+        if (!subject) return;
 
-        if (subject.name.includes('(Edexcel')) {
-          examBoard = 'Edexcel';
-        } else if (subject.name.includes('(OCR')) {
-          examBoard = 'OCR';
-        } else if (subject.name.includes('(WJEC')) {
-          examBoard = 'WJEC';
-        } else if (subject.name.includes('(CCEA')) {
-          examBoard = 'CCEA';
+        let subjectName = subject.name;
+        const examBoard = selectedExamBoard.toUpperCase();
+
+        // Clean up subject names for database
+        if (subjectId === 'maths-edexcel') {
+          subjectName = 'Mathematics';
+        } else if (subjectId === 'business-edexcel-igcse') {
+          subjectName = 'IGCSE Business';
+        } else if (subjectId === 'chemistry-edexcel') {
+          subjectName = 'Chemistry';
+        } else if (subjectId === 'physics-edexcel') {
+          subjectName = 'Physics';
+        } else {
+          subjectName = subject.name.replace(' (Edexcel)', '').replace(' (Edexcel IGCSE)', '');
         }
 
-        // Simplified for premium dashboard - just update local state
         console.log('Would add subject:', subjectName, examBoard);
 
         setUserSubjects(prev => [...prev, subjectId]);
@@ -520,280 +698,444 @@ const PremiumDashboard = () => {
     }
   };
 
-  const handlePhysicsToggle = async (subjectId: string) => {
-    if (subjectId !== 'physics' || !user?.id) return;
-
-    const isCurrentlyUserSubject = userSubjects.includes(subjectId);
+  const handlePhysicsToggle = async () => {
+    const subjectId = selectedExamBoard === 'edexcel' ? 'physics-edexcel' : 'physics';
+    
+    if (!user?.id) return;
 
     try {
-      if (isCurrentlyUserSubject) {
+      if (userSubjects.includes(subjectId)) {
+        // Remove subject
         const { error } = await supabase
           .from('user_subjects')
           .delete()
           .eq('user_id', user.id)
           .eq('subject_name', 'Physics')
-          .eq('exam_board', 'AQA');
-
-        if (error) {
-          console.error('Error removing Physics AQA:', error);
-          return;
-        }
+          .eq('exam_board', selectedExamBoard.toUpperCase());
 
         setUserSubjects(prev => prev.filter(id => id !== subjectId));
       } else {
-        // Simplified for premium dashboard - just update local state
+        // Add Physics AQA as default
         console.log('Would add Physics AQA');
 
         setUserSubjects(prev => [...prev, subjectId]);
       }
     } catch (error) {
-      console.error('Error toggling Physics subject:', error);
+      console.error('Error toggling Physics:', error);
     }
   };
 
-  const getLastActivity = (subjectId: string): Date | null => {
-    const subjectProgress = userProgress.filter(p => p.subjectId === subjectId);
-    if (subjectProgress.length === 0) return null;
-    
-    return new Date(Math.max(...subjectProgress.map(p => new Date(p.lastAttempt).getTime())));
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good morning';
+    if (hour < 18) return 'Good afternoon';
+    return 'Good evening';
   };
-
-  const getOverallProgress = (): number => {
-    if (userProgress.length === 0) return 0;
-    const totalScore = userProgress.reduce((sum, p) => sum + p.averageScore, 0);
-    return Math.round(totalScore / userProgress.length);
-  };
-
-  const getMasteredTopics = (): string => {
-    const masteredCount = userProgress.filter(p => p.averageScore >= 85).length;
-    const totalTopics = userProgress.length;
-    return `${masteredCount}/${totalTopics}`;
-  };
-
-  const getStudyStreak = (): number => {
-    const savedStreak = localStorage.getItem(`mentiora_streak_${user?.id}`);
-    return savedStreak ? parseInt(savedStreak, 10) : 1;
-  };
-
-  const getSubjectColor = (subjectId: string): string => {
-    const colors = {
-      'maths': 'bg-blue-500',
-      'english-language': 'bg-green-500',
-      'english-literature': 'bg-emerald-500',
-      'physics': 'bg-purple-500',
-      'chemistry': 'bg-orange-500',
-      'biology': 'bg-teal-500',
-      'computer-science': 'bg-indigo-500',
-      'history': 'bg-amber-500',
-      'geography': 'bg-cyan-500',
-      'business': 'bg-pink-500',
-      'economics': 'bg-red-500',
-      'psychology': 'bg-violet-500'
-    };
-    return colors[subjectId as keyof typeof colors] || 'bg-gray-500';
-  };
-
-  const getSubjectsInAlphabeticalOrder = () => {
-    return [...curriculum].sort((a, b) => a.name.localeCompare(b.name));
-  };
-
-  const getSubjectsByWeakestFirst = () => {
-    return [...curriculum].sort((a, b) => {
-      const aProgress = userProgress.filter(p => p.subjectId === a.id);
-      const bProgress = userProgress.filter(p => p.subjectId === b.id);
-      
-      const aAverage = aProgress.length > 0 ? aProgress.reduce((sum, p) => sum + p.averageScore, 0) / aProgress.length : 0;
-      const bAverage = bProgress.length > 0 ? bProgress.reduce((sum, p) => sum + p.averageScore, 0) / bProgress.length : 0;
-      
-      return aAverage - bAverage;
-    });
-  };
-
-  const getSubjectsByProgress = () => {
-    const pinnedFirst = curriculum.filter(subject => pinnedSubjects.includes(subject.id));
-    const unpinned = curriculum.filter(subject => !pinnedSubjects.includes(subject.id));
-    
-    const sortUnpinned = (subjects: typeof curriculum) => {
-      return subjects.sort((a, b) => {
-        const aProgress = userProgress.filter(p => p.subjectId === a.id);
-        const bProgress = userProgress.filter(p => p.subjectId === b.id);
-        
-        if (aProgress.length === 0 && bProgress.length === 0) return 0;
-        if (aProgress.length === 0) return 1;
-        if (bProgress.length === 0) return -1;
-        
-        const aAverage = aProgress.reduce((sum, p) => sum + p.averageScore, 0) / aProgress.length;
-        const bAverage = bProgress.reduce((sum, p) => sum + p.averageScore, 0) / bProgress.length;
-        
-        return bAverage - aAverage;
-      });
-    };
-    
-    return [...pinnedFirst, ...sortUnpinned(unpinned)];
-  };
-
-  const sortedSubjects = (() => {
-    switch (sortBy) {
-      case 'alphabetical':
-        return getSubjectsInAlphabeticalOrder();
-      case 'weakest':
-        return getSubjectsByWeakestFirst();
-      case 'progress':
-      default:
-        return getSubjectsByProgress();
-    }
-  })();
-
-  const allSubjects = getSubjectsInAlphabeticalOrder();
-
-  if (!user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-foreground mb-4">Please sign in to access your premium dashboard</h2>
-          <Button onClick={() => navigate('/login')}>Sign In</Button>
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-card/50 backdrop-blur-sm border-b border-border sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10">
+      {/* Premium Header with Glassmorphism */}
+      <header className="bg-card/90 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-lg shadow-black/5 dark:shadow-black/20">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
-              <div className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                Mentiora Premium
-              </div>
-              <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white border-0">
-                <Crown className="h-3 w-3 mr-1" />
-                Premium Active
-              </Badge>
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <StudyPlaylist isUnlocked={true} />
-              <ColorThemeToggle />
-              <ThemeToggle />
-              
-              <div className="flex items-center space-x-2">
-                <div className="text-sm text-muted-foreground">
-                  {user.email}
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg">
+                  <img 
+                    src="/lovable-uploads/99dd490e-1b20-4181-b127-6915d3c47932.png" 
+                    alt="Mentiora Logo" 
+                    className="w-8 h-8"
+                  />
                 </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={logout}
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  <LogOut className="h-4 w-4" />
-                </Button>
+                <div>
+                  <h1 className="text-2xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+                    Mentiora
+                  </h1>
+                  <div className="flex items-center space-x-2">
+                    <Crown className="h-3 w-3 text-amber-500" />
+                    <span className="text-xs font-medium text-muted-foreground">Premium Active</span>
+                  </div>
+                </div>
               </div>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Button 
+                onClick={() => window.open('https://discord.gg/Jq2YTZ3aMa', '_blank')}
+                className="bg-gradient-to-r from-emerald-400 to-green-500 hover:from-emerald-500 hover:to-green-600 text-white border-2 border-emerald-300 shadow-2xl shadow-emerald-500/40 hover:shadow-emerald-500/60 transition-all duration-300 rounded-xl px-6 py-3 h-11 hover:scale-110 font-bold ring-2 ring-emerald-200/50"
+              >
+                <Gamepad2 className="h-5 w-5 mr-2" />
+                <span className="text-sm font-extrabold">Join Community</span>
+              </Button>
+              
+              <ThemeToggle />
+              {getStudyStreak() >= 3 && <ColorThemeToggle />}
+              {getStudyStreak() >= 7 && <StudyPlaylist isUnlocked={true} />}
+              
+              <Button variant="ghost" onClick={() => navigate('/settings')} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
+                <Settings className="h-4 w-4" />
+              </Button>
+              <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
+                <LogOut className="h-4 w-4" />
+              </Button>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Dashboard Header */}
+      <div className="container mx-auto px-6 py-8 max-w-7xl">
+        {/* Premium Welcome Section */}
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-foreground">Premium Dashboard</h1>
-              <p className="text-muted-foreground mt-1">Track your GCSE revision progress with advanced analytics</p>
+              <h2 className="text-3xl font-bold text-foreground mb-2">
+                {getGreeting()}, {getFirstName()}
+              </h2>
+              <p className="text-muted-foreground text-lg">Ready to elevate your GCSE revision journey?</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Premium Combined Streak & Rewards Card */}
+        <div className="mb-6">
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-violet-50/60 to-cyan-50/60 dark:from-slate-900 dark:via-violet-950/30 dark:to-cyan-950/30 shadow-xl hover:shadow-2xl transition-all duration-500 group backdrop-blur-sm transform hover:scale-[1.01]">
+            {/* Subtle glow effects */}
+            <div className="absolute inset-0 bg-gradient-to-r from-violet-400/15 via-cyan-400/15 to-emerald-400/15 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Premium border */}
+            <div className="absolute inset-0 bg-gradient-to-r from-violet-500 via-cyan-500 to-emerald-500 rounded-xl p-[2px] group-hover:p-[3px] transition-all duration-300">
+              <div className="bg-gradient-to-br from-white via-violet-50/60 to-cyan-50/60 dark:from-slate-900 dark:via-violet-950/30 dark:to-cyan-950/30 rounded-[10px] h-full w-full backdrop-blur-sm" />
             </div>
             
-            <div className="flex items-center space-x-4">
-              <Button
-                variant="outline"
-                onClick={() => navigate('/analytics')}
-                className="flex items-center space-x-2"
-              >
-                <BarChart3 className="h-4 w-4" />
-                <span>View Analytics</span>
-              </Button>
-              
-              <Button
-                variant="outline"
-                onClick={() => navigate('/notebook')}
-                className="flex items-center space-x-2"
-              >
-                <BookOpen className="h-4 w-4" />
-                <span>AI Notebook</span>
-              </Button>
-              
-              <Button
-                variant="outline"
-                onClick={() => navigate('/settings')}
-                className="flex items-center space-x-2"
-              >
-                <Settings className="h-4 w-4" />
-                <span>Settings</span>
-              </Button>
+            {/* Subtle floating particles */}
+            <div className="absolute top-3 right-4 w-1.5 h-1.5 bg-gradient-to-r from-amber-300 to-yellow-400 rounded-full animate-bounce opacity-70" />
+            <div className="absolute bottom-4 left-6 w-1 h-1 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full animate-pulse opacity-60" />
+            
+            <CardContent className="relative p-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* LEFT SIDE: Study Streak Section */}
+                <div className="space-y-4">
+                  <div className="text-center space-y-3">
+                    <div className="relative inline-block">
+                      {/* Compact fire icon */}
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 flex items-center justify-center shadow-xl shadow-orange-500/30 transition-all duration-300 group-hover:scale-105 relative overflow-hidden mx-auto">
+                        <div className="absolute inset-1 rounded-xl bg-white/20 backdrop-blur-sm" />
+                        <Flame className="h-6 w-6 text-white relative z-10 drop-shadow-lg" />
+                      </div>
+                      {/* Subtle achievement ring */}
+                      <div className="absolute inset-0 bg-orange-400/20 rounded-2xl animate-ping opacity-20" />
+                      {/* Compact badge */}
+                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-md animate-bounce">
+                        <Crown className="h-2.5 w-2.5 text-white" />
+                      </div>
+                    </div>
+                    
+                    {/* Compact streak display */}
+                     <div className="space-y-2">
+                       <motion.h3 
+                         key={getStudyStreak()}
+                         initial={{ scale: 0.5, rotate: -180, opacity: 0 }}
+                         animate={{ scale: 1, rotate: 0, opacity: 1 }}
+                         transition={{ 
+                           type: "spring", 
+                           damping: 15, 
+                           stiffness: 300,
+                           duration: 0.8 
+                         }}
+                         className="text-4xl font-bold bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 dark:from-orange-400 dark:via-red-400 dark:to-pink-400 bg-clip-text text-transparent tracking-tight"
+                       >
+                         {getStudyStreak()}
+                       </motion.h3>
+                       <div className="flex items-center justify-center space-x-2">
+                         <motion.span 
+                           initial={{ y: 10, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.3 }}
+                           className="text-lg font-semibold bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent"
+                         >
+                           Day{getStudyStreak() !== 1 ? 's' : ''} Strong!
+                         </motion.span>
+                         <motion.div 
+                           animate={{ scale: [1, 1.2, 1] }}
+                           transition={{ duration: 2, repeat: Infinity }}
+                           className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full animate-pulse" 
+                         />
+                       </div>
+                     </div>
+                  </div>
+
+                  {/* Compact call to action */}
+                  <Button 
+                    onClick={() => {
+                      const subjectsSection = document.getElementById('subjects-section');
+                      if (subjectsSection) {
+                        subjectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }} 
+                    className="w-full h-10 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white font-semibold shadow-lg shadow-orange-500/20 transform hover:scale-105 transition-all duration-300 border-0"
+                  >
+                    <Zap className="mr-2 h-4 w-4" />
+                    Continue Streak
+                  </Button>
+                </div>
+
+                {/* RIGHT SIDE: Compact Rewards Section */}
+                <div className="space-y-4">
+                  <div className="text-center space-y-3">
+                    <div className="relative inline-block">
+                      {/* Compact trophy */}
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 via-cyan-500 to-violet-500 flex items-center justify-center shadow-xl shadow-emerald-500/30 transition-all duration-300 group-hover:scale-105 relative overflow-hidden mx-auto">
+                        <div className="absolute inset-1 rounded-xl bg-white/20 backdrop-blur-sm" />
+                        <Trophy className="h-6 w-6 text-white relative z-10 drop-shadow-lg" />
+                      </div>
+                      {/* Subtle achievement ring */}
+                      <div className="absolute inset-0 bg-emerald-400/20 rounded-2xl animate-ping opacity-20" />
+                      {/* Compact badge */}
+                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-yellow-400 via-amber-400 to-orange-400 rounded-full flex items-center justify-center shadow-md animate-bounce">
+                        <Sparkles className="h-2.5 w-2.5 text-white" />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-1">
+                      <h3 className="text-2xl font-bold bg-gradient-to-br from-emerald-600 via-cyan-600 to-violet-600 dark:from-emerald-400 dark:via-cyan-400 dark:to-violet-400 bg-clip-text text-transparent">
+                        Streak Rewards
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Compact reward tier system */}
+                  <div className="space-y-2">
+                    {/* Color Themes Reward - 3 days */}
+                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 3 ? 'bg-gradient-to-r from-violet-500/10 to-purple-500/10 border-violet-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 3 ? 'bg-gradient-to-br from-violet-500 to-purple-600 shadow-sm' : 'bg-gray-400'}`}>
+                            <Star className="h-3 w-3 text-white" />
+                          </div>
+                          <div>
+                            <p className={`text-sm font-semibold ${getStudyStreak() >= 3 ? 'text-violet-700 dark:text-violet-300' : 'text-gray-500'}`}>
+                              Color Themes
+                            </p>
+                            <p className="text-xs text-muted-foreground">3 days</p>
+                          </div>
+                        </div>
+                        {getStudyStreak() >= 3 ? (
+                          <CheckCircle className="h-4 w-4 text-violet-600" />
+                        ) : (
+                          <div className="text-xs font-medium text-muted-foreground">{3 - getStudyStreak()}d</div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Study Playlist - 7 days */}
+                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 7 ? 'bg-gradient-to-r from-emerald-500/10 to-green-500/10 border-emerald-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 7 ? 'bg-gradient-to-br from-emerald-500 to-green-600 shadow-sm' : 'bg-gray-400'}`}>
+                            <Sparkles className="h-3 w-3 text-white" />
+                          </div>
+                          <div>
+                            <p className={`text-sm font-semibold ${getStudyStreak() >= 7 ? 'text-emerald-700 dark:text-emerald-300' : 'text-gray-500'}`}>
+                              Study Playlist
+                            </p>
+                            <p className="text-xs text-muted-foreground">7 days</p>
+                          </div>
+                        </div>
+                        {getStudyStreak() >= 7 ? (
+                          <CheckCircle className="h-4 w-4 text-emerald-600" />
+                        ) : (
+                          <div className="text-xs font-medium text-muted-foreground">{7 - getStudyStreak()}d</div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Free Tutoring Session - 14 days */}
+                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 14 ? 'bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-blue-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 14 ? 'bg-gradient-to-br from-blue-500 to-purple-600 shadow-sm' : 'bg-gray-400'}`}>
+                            <User className="h-3 w-3 text-white" />
+                          </div>
+                          <div>
+                            <p className={`text-sm font-semibold ${getStudyStreak() >= 14 ? 'text-blue-700 dark:text-blue-300' : 'text-gray-500'}`}>
+                              Free Tutoring Session
+                            </p>
+                            <p className="text-xs text-muted-foreground">14 days</p>
+                          </div>
+                        </div>
+                        {getStudyStreak() >= 14 ? (
+                          <CheckCircle className="h-4 w-4 text-blue-600" />
+                        ) : (
+                          <div className="text-xs font-medium text-muted-foreground">{14 - getStudyStreak()}d</div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+
+        {/* Predicted GCSE Grades Section */}
+        <PredictedGradesGraph userProgress={userProgress} />
+
+
+        {/* Predicted 2026 Questions Section */}
+        <PredictedQuestionsSection />
+
+        {/* Revision Notebook - Premium Feature */}
+        <div className="mb-8">
+          
+          {/* Revision Notebook - Premium Feature */}
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => navigate('/notebook')}>
+            {/* Premium Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Animated Border */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 rounded-lg p-[2px] group-hover:animate-pulse">
+              <div className="bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 rounded-[6px] h-full w-full" />
             </div>
-          </div>
+            
+            <CardContent className="relative p-8">
+              <div className="flex items-start justify-between mb-6">
+                <div className="flex items-center space-x-4">
+                  <div className="relative w-16 h-16 rounded-3xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-500 flex items-center justify-center shadow-2xl group-hover:shadow-purple-500/25 transition-shadow duration-300">
+                    <div className="absolute inset-2 rounded-2xl bg-white/20 backdrop-blur-sm" />
+                    <Brain className="h-8 w-8 text-white relative z-10 group-hover:scale-110 transition-transform duration-300" />
+                    <Sparkles className="absolute -top-1 -right-1 h-4 w-4 text-yellow-300 animate-pulse" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-700 via-pink-600 to-indigo-700 dark:from-purple-300 dark:via-pink-300 dark:to-indigo-300 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
+                      Revision Notebook
+                    </h3>
+                    <div className="flex items-center space-x-2 mt-1">
+                      <Crown className="h-4 w-4 text-amber-500 animate-bounce" />
+                      <span className="text-sm font-semibold bg-gradient-to-r from-amber-600 to-yellow-600 dark:from-amber-400 dark:to-yellow-400 bg-clip-text text-transparent">Premium Feature</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col items-end space-y-2 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="flex items-center space-x-2 px-3 py-1 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-full border border-emerald-300/30">
+                    <Zap className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
+                    <span className="text-xs font-medium text-emerald-700 dark:text-emerald-300">Auto</span>
+                  </div>
+                  <div className="flex items-center space-x-2 px-3 py-1 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full border border-blue-300/30">
+                    <Target className="h-3 w-3 text-blue-600 dark:text-blue-400" />
+                    <span className="text-xs font-medium text-blue-700 dark:text-blue-300">Grade 9 Focus</span>
+                  </div>
+                </div>
+              </div>
+              
+              <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
+                Revolutionary technology creates <span className="font-semibold text-purple-700 dark:text-purple-300">ultra-clear, Grade 9-level revision notes</span> instantly for every question where you lose marks. Each note is meticulously crafted with key definitions, equations, and premium exam strategies.
+              </p>
+              
+              <div className="grid grid-cols-1 gap-4 mb-6">
+                <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">Instant premium note generation</span>
+                </div>
+                <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center shadow-lg">
+                    <BookOpen className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">Organized by topic</span>
+                </div>
+                <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
+                    <Trophy className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">Exam-focused premium content</span>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2 text-sm text-purple-600 dark:text-purple-400 font-medium">
+                  <Clock className="h-4 w-4" />
+                  <span>Save 10+ hours per week</span>
+                </div>
+                <Button 
+                  className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white shadow-xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 px-8 py-3 text-base font-semibold"
+                >
+                  <Brain className="h-4 w-4 mr-2" />
+                  Open Premium Notebook
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Premium Predicted Questions Section - NO BLUR */}
-        <div className="mb-8">
-          <PredictedQuestionsSection />
-        </div>
-
-        {/* Premium Analytics Section - NO BLUR */}
-        <div className="mb-8">
-          <PremiumAnalytics />
-        </div>
-
-        {/* Advanced Dashboard Features - NO BLUR */}
-        <div className="grid lg:grid-cols-3 gap-6 mb-8">
-          <div className="lg:col-span-1">
-            <PredictivePerformanceCard userProgress={userProgress} />
-          </div>
-          <div className="lg:col-span-1">
-            <OptimalStudyTimeCard />
-          </div>
-          <div className="lg:col-span-1">
-            <PredictedGradesGraph userProgress={userProgress} />
-          </div>
-        </div>
 
         {/* Subjects Section */}
-        <div className="mb-8">
+        <div className="mb-8" id="subjects-section">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-foreground">Your Subjects</h2>
-            
             <div className="flex items-center space-x-4">
-              <Tabs value={subjectsTab} onValueChange={(value) => setSubjectsTab(value as 'my-subjects' | 'all-subjects')}>
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="my-subjects" className="text-sm">My Subjects</TabsTrigger>
-                  <TabsTrigger value="all-subjects" className="text-sm">All Subjects</TabsTrigger>
-                </TabsList>
-              </Tabs>
-              
-              <div className="flex items-center space-x-2">
-                <Filter className="h-4 w-4 text-muted-foreground" />
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as 'alphabetical' | 'weakest' | 'progress')}
-                  className="bg-background border border-border rounded-md px-3 py-2 text-sm"
+              <h3 className="text-2xl font-bold text-foreground">Your Subjects</h3>
+              <Badge variant="outline" className="text-muted-foreground border-border bg-card/50">
+                {subjectsTab === 'my-subjects' ? userSubjects.length : allSubjects.length} subjects
+              </Badge>
+            </div>
+            <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-1 bg-background/80 dark:bg-card/80 backdrop-blur-sm rounded-2xl p-1.5 border border-border shadow-sm">
+                <Button
+                  variant={sortBy === 'progress' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setSortBy('progress')}
+                  className={sortBy === 'progress' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors'}
                 >
-                  <option value="progress">Progress</option>
-                  <option value="alphabetical">Alphabetical</option>
-                  <option value="weakest">Weakest First</option>
-                </select>
+                  Progress
+                </Button>
+                <Button
+                  variant={sortBy === 'weakest' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setSortBy('weakest')}
+                  className={sortBy === 'weakest' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors'}
+                >
+                  Weakest
+                </Button>
+                <Button
+                  variant={sortBy === 'alphabetical' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setSortBy('alphabetical')}
+                  className={sortBy === 'alphabetical' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors'}
+                >
+                  A-Z
+                </Button>
               </div>
             </div>
           </div>
 
-          <Tabs value={selectedExamBoard} onValueChange={setSelectedExamBoard} className="w-full">
-            <TabsList className="grid w-full grid-cols-5 mb-6">
+          {/* Subject Tabs */}
+          <div className="flex space-x-1 bg-muted/50 rounded-xl p-1 mb-6 max-w-md">
+            <Button
+              variant={subjectsTab === 'my-subjects' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setSubjectsTab('my-subjects')}
+              className={subjectsTab === 'my-subjects' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90 flex-1' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors flex-1'}
+            >
+              My Subjects ({userSubjects.filter(id => id && id.trim()).length})
+            </Button>
+            <Button
+              variant={subjectsTab === 'all-subjects' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setSubjectsTab('all-subjects')}
+              className={subjectsTab === 'all-subjects' ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90 flex-1' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors flex-1'}
+            >
+              All Subjects (14)
+            </Button>
+          </div>
+
+          {/* Exam Board Tabs */}
+          <Tabs value={selectedExamBoard} onValueChange={setSelectedExamBoard} className="mb-6">
+            <TabsList className="grid w-full grid-cols-5 max-w-md">
               <TabsTrigger value="aqa">AQA</TabsTrigger>
               <TabsTrigger value="edexcel">Edexcel</TabsTrigger>
+              <TabsTrigger value="ccea">CCEA</TabsTrigger>
               <TabsTrigger value="ocr">OCR</TabsTrigger>
               <TabsTrigger value="wjec">WJEC</TabsTrigger>
-              <TabsTrigger value="ccea">CCEA</TabsTrigger>
             </TabsList>
 
             <TabsContent value="aqa" className="mt-6">
