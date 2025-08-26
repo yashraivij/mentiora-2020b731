@@ -1,4 +1,4 @@
-import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { useLocation, useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -45,6 +45,7 @@ const PredictedResults = () => {
   const { subjectId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const [attempts, setAttempts] = useState<QuestionAttempt[]>([]);
   const [isMarking, setIsMarking] = useState(true);
   
@@ -754,7 +755,9 @@ const PredictedResults = () => {
                 console.log('Retake button clicked for subject:', subjectId);
                 // Handle geography-paper-2 case specifically
                 const examSubjectId = subjectId === 'geography' ? 'geography-paper-2' : subjectId;
-                navigate(`/predicted-exam/${examSubjectId}`);
+                const source = searchParams.get('source');
+                const sourceParam = source ? `?source=${source}` : '';
+                navigate(`/predicted-exam/${examSubjectId}${sourceParam}`);
               }}
               className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700"
             >
@@ -762,7 +765,10 @@ const PredictedResults = () => {
               Retake This Exam
             </Button>
             <Button 
-              onClick={() => navigate('/predicted-questions')}
+              onClick={() => {
+                const source = searchParams.get('source');
+                navigate(source === 'premium' ? '/premium-predicted-questions' : '/predicted-questions');
+              }}
               className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700"
             >
               <BookOpen className="h-5 w-5 mr-2" />
