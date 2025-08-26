@@ -224,7 +224,7 @@ const PremiumPredictedResults = () => {
       setAttempts(initialAttempts);
       setIsMarking(false);
 
-      // Save exam completion data
+      // Save exam completion data - simplified structure
       if (!isReview) {
         try {
           const { data: { user } } = await supabase.auth.getUser();
@@ -234,11 +234,13 @@ const PremiumPredictedResults = () => {
               .insert({
                 user_id: user.id,
                 subject_id: subjectId,
-                grade: 'Pending',
+                grade: getGCSEGrade(Math.round((allMarksAwarded / calculatedTotalMarks) * 100)),
                 percentage: Math.round((allMarksAwarded / calculatedTotalMarks) * 100),
                 completed_at: new Date().toISOString(),
                 questions: questions,
                 answers: answers,
+                achieved_marks: allMarksAwarded,
+                results: JSON.stringify({ attempts: initialAttempts }),
                 time_taken_seconds: timeElapsed,
                 total_marks: calculatedTotalMarks
               });
@@ -466,7 +468,7 @@ const PremiumPredictedResults = () => {
                 )}
               </CardContent>
             </Card>
-          )))}
+          ))}
         </div>
 
         {/* Action Buttons */}

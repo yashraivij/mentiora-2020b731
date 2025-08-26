@@ -254,12 +254,11 @@ const PremiumPredictedExam = () => {
         </Card>
       </div>
 
-      {/* Personalized Notifications */}
+      {/* Personalized Notifications - placeholder */}
       {notification && (
-        <PersonalizedNotification
-          notification={notification}
-          onClose={hideNotification}
-        />
+        <div>
+          {/* Notification placeholder */}
+        </div>
       )}
     </div>
   );
