@@ -14,13 +14,19 @@ serve(async (req) => {
 
   try {
     console.log("[CREATE-CHECKOUT] Starting checkout session creation");
-    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY_TEST");
+    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
+    const priceId = Deno.env.get("STRIPE_PRICE_ID");
     
     if (!stripeKey) {
-      throw new Error("STRIPE_SECRET_KEY_TEST not configured");
+      throw new Error("STRIPE_SECRET_KEY not configured");
+    }
+    
+    if (!priceId) {
+      throw new Error("STRIPE_PRICE_ID not configured");
     }
     
     console.log("[CREATE-CHECKOUT] Using test key:", stripeKey.substring(0, 12) + "...");
+    console.log("[CREATE-CHECKOUT] Using price ID:", priceId);
     const stripe = new Stripe(stripeKey, {
       apiVersion: "2023-10-16",
     });
@@ -68,7 +74,7 @@ serve(async (req) => {
       customer_email: customerId ? undefined : customerEmail,
       line_items: [
         {
-          price: "price_1RzsBhCtgl2dlnVO2C1G5vcO", // Using provided price ID
+          price: priceId,
           quantity: 1,
         },
       ],
