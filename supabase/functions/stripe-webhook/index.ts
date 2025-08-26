@@ -26,9 +26,9 @@ serve(async (req) => {
       apiVersion: '2023-10-16',
     });
 
-    const webhookSecret = Deno.env.get('STRIPE_WEBHOOK_SECRET');
+    const webhookSecret = Deno.env.get('STRIPE_TEST_WEBHOOK_SECRET');
     if (!webhookSecret) {
-      throw new Error('STRIPE_WEBHOOK_SECRET not configured');
+      throw new Error('STRIPE_TEST_WEBHOOK_SECRET not configured');
     }
 
     // Get the raw body and signature
