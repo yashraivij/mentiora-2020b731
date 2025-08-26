@@ -30,15 +30,26 @@ export const UpgradeButton = ({
 
       if (error) {
         console.error('Error creating checkout session:', error);
+        alert(`Payment setup error: ${error.message}`);
+        return;
+      }
+
+      if (data?.error) {
+        console.error('Stripe configuration error:', data.error);
+        alert(`Stripe configuration error: ${data.error}`);
         return;
       }
 
       if (data?.url) {
         // Open Stripe checkout in a new tab
         window.open(data.url, '_blank');
+      } else {
+        console.error('No checkout URL received');
+        alert('No checkout URL received. Please try again.');
       }
     } catch (error) {
       console.error('Error:', error);
+      alert(`An error occurred: ${error.message}`);
     }
   };
 
