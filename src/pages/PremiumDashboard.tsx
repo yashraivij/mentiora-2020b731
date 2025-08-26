@@ -286,6 +286,7 @@ const PremiumDashboard = () => {
   useEffect(() => {
     // Set flag to indicate user is on premium dashboard
     localStorage.setItem('mentiora_dashboard_mode', 'premium');
+    localStorage.setItem('mentiora_preferred_dashboard', '/premium-dashboard');
     
     const loadUserData = async () => {
       if (!user?.id) return;
@@ -349,6 +350,13 @@ const PremiumDashboard = () => {
     if (user?.id) {
       fetchCurrentStreak();
     }
+
+    // Cleanup function to maintain premium dashboard preference
+    return () => {
+      // Keep the premium dashboard preference even when component unmounts
+      localStorage.setItem('mentiora_dashboard_mode', 'premium');
+      localStorage.setItem('mentiora_preferred_dashboard', '/premium-dashboard');
+    };
     
   }, [user?.id]);
 
@@ -610,18 +618,36 @@ const PremiumDashboard = () => {
   };
 
   const handleLogout = () => {
+    // Clear premium dashboard preference on logout
+    localStorage.removeItem('mentiora_dashboard_mode');
+    localStorage.removeItem('mentiora_preferred_dashboard');
+    localStorage.removeItem('mentiora_return_to');
     logout();
     navigate('/');
   };
 
   const handlePractice = async (subjectId: string, topicId?: string) => {
     await recordActivity();
-    // Preserve premium dashboard context
+    // Ensure premium dashboard context is preserved
+    localStorage.setItem('mentiora_dashboard_mode', 'premium');
+    localStorage.setItem('mentiora_preferred_dashboard', '/premium-dashboard');
     localStorage.setItem('mentiora_return_to', 'premium-dashboard');
     if (topicId) {
-      navigate(`/practice/${subjectId}/${topicId}`, { state: { from: 'premium-dashboard', returnTo: 'premium-dashboard' } });
+      navigate(`/practice/${subjectId}/${topicId}`, { 
+        state: { 
+          from: 'premium-dashboard', 
+          returnTo: 'premium-dashboard',
+          dashboardMode: 'premium' 
+        } 
+      });
     } else {
-      navigate(`/subject/${subjectId}`, { state: { from: 'premium-dashboard', returnTo: 'premium-dashboard' } });
+      navigate(`/subject/${subjectId}`, { 
+        state: { 
+          from: 'premium-dashboard', 
+          returnTo: 'premium-dashboard',
+          dashboardMode: 'premium' 
+        } 
+      });
     }
   };
 
