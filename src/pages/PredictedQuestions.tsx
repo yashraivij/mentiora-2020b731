@@ -71,8 +71,12 @@ const PredictedQuestions = () => {
   };
 
   const handleSubjectSelect = (subjectId: string) => {
-    if (isPremium) {
-      // Premium users can go directly to the exam
+    // On premium dashboard, all features are unlocked - bypass paywall
+    const currentPath = window.location.pathname;
+    const isFromPremiumDashboard = currentPath.includes('/premium') || document.referrer.includes('/premium-dashboard');
+    
+    if (isPremium || isFromPremiumDashboard) {
+      // Premium users or premium dashboard context can go directly to the exam
       navigate(`/predicted-exam/${subjectId}`);
     } else {
       // Non-premium users see the paywall
@@ -463,11 +467,22 @@ const PredictedQuestions = () => {
         </Tabs>
       </div>
       
-      <PremiumPaywall 
-        isOpen={showPaywall}
-        onClose={() => setShowPaywall(false)}
-        onUpgrade={handleUpgrade}
-      />
+      {/* Don't show paywall on premium dashboard */}
+      {(() => {
+        const currentPath = window.location.pathname;
+        const isFromPremiumDashboard = currentPath.includes('/premium') || document.referrer.includes('/premium-dashboard');
+        
+        if (!isFromPremiumDashboard) {
+          return (
+            <PremiumPaywall 
+              isOpen={showPaywall}
+              onClose={() => setShowPaywall(false)}
+              onUpgrade={handleUpgrade}
+            />
+          );
+        }
+        return null;
+      })()}
     </div>
   );
 };
