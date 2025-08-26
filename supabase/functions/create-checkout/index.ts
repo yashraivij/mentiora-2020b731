@@ -17,6 +17,13 @@ serve(async (req) => {
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
     const priceId = Deno.env.get("STRIPE_PRICE_ID");
     
+    console.log("[CREATE-CHECKOUT] Environment check:", {
+      hasStripeKey: !!stripeKey,
+      hasPriceId: !!priceId,
+      stripeKeyLength: stripeKey?.length || 0,
+      priceIdLength: priceId?.length || 0
+    });
+    
     if (!stripeKey) {
       throw new Error("STRIPE_SECRET_KEY not configured");
     }
