@@ -15,79 +15,55 @@ serve(async (req) => {
   try {
     console.log("[CREATE-CHECKOUT] Starting checkout session creation");
     
-    // Debug: List all available environment variables
-    const allEnvKeys = Object.keys(Deno.env.toObject());
-    console.log("[CREATE-CHECKOUT] All environment variables:", allEnvKeys);
-    console.log("[CREATE-CHECKOUT] Stripe-related variables:", allEnvKeys.filter(key => key.includes('STRIPE')));
+    // Get Stripe test keys - prioritize test keys for development
+    const stripeKey = Deno.env.get("STRIPE_TEST_SECRET_KEY") || 
+                      Deno.env.get("STRIPE_SECRET_KEY_TEST") || 
+                      Deno.env.get("STRIPE_TEST_SECRET_KEY1") ||
+                      Deno.env.get("STRIPE_SECRET_KEY");
     
-    // Try to get secrets with exact names from Supabase secrets
-    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
-    const priceId = Deno.env.get("STRIPE_PRICE_ID");
+    const priceId = Deno.env.get("STRIPE_PRICE_ID") || 
+                    Deno.env.get("STRIPE_PRODUCT_ID");
     
-    console.log("[CREATE-CHECKOUT] Direct secret access:", {
+    console.log("[CREATE-CHECKOUT] Using keys:", {
       stripeKeyFound: !!stripeKey,
       priceIdFound: !!priceId,
-      stripeKeyPrefix: stripeKey ? stripeKey.substring(0, 7) : "null",
-      priceIdValue: priceId ? priceId.substring(0, 10) + "..." : "null"
+      stripeKeyPrefix: stripeKey ? stripeKey.substring(0, 12) + "..." : "null"
     });
     
-    // Validate that we have a proper secret key (not publishable key)
-    if (stripeKey && stripeKey.startsWith('pk_')) {
+    // Validate Stripe secret key
+    if (!stripeKey) {
       return new Response(JSON.stringify({ 
-        error: "Invalid Stripe key: You're using a publishable key (pk_) instead of a secret key (sk_)",
-        details: `Found key starting with: ${stripeKey.substring(0, 7)}...`,
-        help: "Please update STRIPE_SECRET_KEY in Supabase with your secret key (starts with sk_test_ or sk_live_)"
+        error: "Stripe secret key not configured",
+        details: "Please set up STRIPE_TEST_SECRET_KEY in Supabase secrets"
       }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,
       });
     }
     
-    // Use test keys first (which should be properly configured), then fall back to live keys
-    const fallbackStripeKey = Deno.env.get("STRIPE_TEST_SECRET_KEY") || 
-                              Deno.env.get("STRIPE_SECRET_KEY_TEST") || 
-                              Deno.env.get("STRIPE_TEST_SECRET_KEY1") ||
-                              stripeKey;
-    const fallbackPriceId = priceId || Deno.env.get("STRIPE_PRODUCT_ID");
-    
-    // Validate the fallback key too
-    if (fallbackStripeKey && fallbackStripeKey.startsWith('pk_')) {
+    if (stripeKey.startsWith('pk_')) {
       return new Response(JSON.stringify({ 
-        error: "Invalid Stripe key: All available keys are publishable keys (pk_) instead of secret keys (sk_)",
-        details: `Key prefix: ${fallbackStripeKey.substring(0, 7)}...`,
-        help: "Please set a proper secret key (starts with sk_test_ or sk_live_) in STRIPE_SECRET_KEY"
+        error: "Invalid Stripe key: Using publishable key instead of secret key",
+        details: "Please use a secret key (starts with sk_test_ or sk_live_)"
       }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,
       });
     }
     
-    if (!fallbackStripeKey) {
-      const availableKeys = allEnvKeys.filter(key => key.includes('STRIPE'));
+    // Validate price ID
+    if (!priceId) {
       return new Response(JSON.stringify({ 
-        error: "Stripe secret key not found",
-        details: `Available Stripe keys: ${availableKeys.join(', ')}`,
-        help: "Please ensure STRIPE_SECRET_KEY is set in Supabase Edge Function secrets."
+        error: "Stripe price ID not configured",
+        details: "Please set up STRIPE_PRICE_ID in Supabase secrets"
       }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,
       });
     }
     
-    if (!fallbackPriceId) {
-      const availableKeys = allEnvKeys.filter(key => key.includes('STRIPE'));
-      return new Response(JSON.stringify({ 
-        error: "Stripe price ID not found",
-        details: `Available Stripe keys: ${availableKeys.join(', ')}`,
-        help: "Please ensure STRIPE_PRICE_ID is set in Supabase Edge Function secrets."
-      }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 500,
-      });
-    }
-    
-    console.log("[CREATE-CHECKOUT] Using keys - Stripe:", fallbackStripeKey.substring(0, 12) + "...", "Price:", fallbackPriceId);
-    const stripe = new Stripe(fallbackStripeKey, {
+    console.log("[CREATE-CHECKOUT] Using keys - Stripe:", stripeKey.substring(0, 12) + "...", "Price:", priceId);
+    const stripe = new Stripe(stripeKey, {
       apiVersion: "2023-10-16",
     });
 
@@ -134,7 +110,7 @@ serve(async (req) => {
       customer_email: customerId ? undefined : customerEmail,
       line_items: [
         {
-          price: fallbackPriceId,
+          price: priceId,
           quantity: 1,
         },
       ],
