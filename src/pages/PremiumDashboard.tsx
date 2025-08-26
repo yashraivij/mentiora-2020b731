@@ -68,6 +68,19 @@ const PremiumDashboard = () => {
   const [celebrationSubject, setCelebrationSubject] = useState('');
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
 
+  // Comprehensive premium dashboard tracking - runs on every render
+  useEffect(() => {
+    // Set multiple tracking mechanisms
+    localStorage.setItem('mentiora_dashboard_mode', 'premium');
+    localStorage.setItem('mentiora_preferred_dashboard', '/premium-dashboard');
+    localStorage.setItem('mentiora_return_to', 'premium-dashboard');
+    sessionStorage.setItem('mentiora_current_dashboard', 'premium');
+    localStorage.setItem('mentiora_premium_context', 'true');
+    
+    // Set timestamp for when premium context was last active
+    localStorage.setItem('mentiora_premium_timestamp', Date.now().toString());
+  });
+
   const {
     notification,
     checkForWeakTopicRecommendation,
@@ -1018,7 +1031,20 @@ const PremiumDashboard = () => {
 
 
         {/* Predicted 2026 Questions Section */}
-        <PredictedQuestionsSection />
+        <div style={{
+          position: 'relative'
+        }} onClickCapture={(e) => {
+          // Intercept any navigation from predicted questions section
+          const target = e.target as HTMLElement;
+          if (target.closest('button') && target.textContent?.includes('Start Premium Exam Practice')) {
+            localStorage.setItem('mentiora_dashboard_mode', 'premium');
+            localStorage.setItem('mentiora_preferred_dashboard', '/premium-dashboard');
+            localStorage.setItem('mentiora_return_to', 'premium-dashboard');
+            localStorage.setItem('mentiora_premium_context', 'true');
+          }
+        }}>
+          <PredictedQuestionsSection />
+        </div>
 
         {/* Revision Notebook - Premium Feature */}
         <div className="mb-8">
