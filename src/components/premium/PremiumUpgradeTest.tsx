@@ -6,28 +6,16 @@ import { Crown, RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { UpgradeButton } from "@/components/upgrade/UpgradeButton";
 import { useAuth } from "@/contexts/AuthContext";
-import { supabase } from "@/integrations/supabase/client";
 
 export const PremiumUpgradeTest = () => {
   const { isPremium, isLoading, subscriptionTier, subscriptionEnd } = usePremium();
   const { toast } = useToast();
   const { user } = useAuth();
 
-  const handleUpgrade = async () => {
-    try {
-      const { data, error } = await supabase.functions.invoke('create-subscription');
-      
-      if (error) {
-        console.error('Error creating subscription:', error);
-        return;
-      }
-      
-      if (data?.url) {
-        window.open(data.url, '_blank');
-      }
-    } catch (error) {
-      console.error('Error creating subscription:', error);
-    }
+  const handleUpgrade = () => {
+    const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
+    const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
+    window.open(stripeUrl, '_blank');
   };
 
   const refreshStatus = () => {
