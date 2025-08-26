@@ -947,8 +947,8 @@ const PremiumDashboard = () => {
                 <span className="text-sm font-extrabold">Join Community</span>
               </Button>
               <ThemeToggle />
-              <ColorThemeToggle />
-              <StudyPlaylist isUnlocked={true} />
+              {getStudyStreak() >= 3 && <ColorThemeToggle />}
+              <StudyPlaylist isUnlocked={getStudyStreak() >= 7} />
               
               <Button variant="ghost" onClick={() => navigate('/settings')} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
                 <Settings className="h-4 w-4" />
