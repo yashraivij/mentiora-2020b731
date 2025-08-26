@@ -1162,28 +1162,29 @@ const PremiumDashboard = () => {
 
         {/* Premium Analytics Section - FULLY UNLOCKED */}
         <div className="mb-6">
-          <Card className="group border-0 bg-gradient-to-br from-white via-purple-50/40 to-pink-50/40 dark:from-slate-900 dark:via-purple-950/20 dark:to-pink-950/20 shadow-xl hover:shadow-2xl transition-all duration-500 backdrop-blur-sm transform hover:scale-[1.01] relative overflow-hidden">
-            {/* Premium glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-400/10 via-pink-400/10 to-indigo-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => navigate('/notebook')}>
+            {/* Premium Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
-            {/* Enhanced premium border */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 rounded-xl p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="bg-gradient-to-br from-white via-purple-50/40 to-pink-50/40 dark:from-slate-900 dark:via-purple-950/20 dark:to-pink-950/20 rounded-[10px] h-full w-full" />
+            {/* Animated Border */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 rounded-lg p-[2px] group-hover:animate-pulse">
+              <div className="bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 rounded-[6px] h-full w-full" />
             </div>
 
-            <CardContent className="relative p-6">
+            <CardContent className="relative p-8">
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-600 via-pink-600 to-indigo-600 flex items-center justify-center shadow-2xl shadow-purple-500/30 relative overflow-hidden">
-                    <div className="absolute inset-2 rounded-xl bg-white/20 backdrop-blur-sm" />
-                    <Brain className="h-8 w-8 text-white relative z-10 drop-shadow-lg" />
+                  <div className="relative w-16 h-16 rounded-3xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-500 flex items-center justify-center shadow-2xl group-hover:shadow-purple-500/25 transition-shadow duration-300">
+                    <div className="absolute inset-2 rounded-2xl bg-white/20 backdrop-blur-sm" />
+                    <Brain className="h-8 w-8 text-white relative z-10 group-hover:scale-110 transition-transform duration-300" />
+                    <Sparkles className="absolute -top-1 -right-1 h-4 w-4 text-yellow-300 animate-pulse" />
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-700 via-pink-600 to-indigo-700 dark:from-purple-300 dark:via-pink-300 dark:to-indigo-300 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
                       Revision Notebook
                     </h3>
                     <div className="flex items-center space-x-2 mt-1">
-                      <Crown className="h-4 w-4 text-amber-500" />
+                      <Crown className="h-4 w-4 text-amber-500 animate-bounce" />
                       <span className="text-sm font-semibold bg-gradient-to-r from-amber-600 to-yellow-600 dark:from-amber-400 dark:to-yellow-400 bg-clip-text text-transparent">Premium Feature - Unlocked!</span>
                     </div>
                   </div>
