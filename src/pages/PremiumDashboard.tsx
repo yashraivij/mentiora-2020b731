@@ -945,8 +945,8 @@ const PremiumDashboard = () => {
               </Button>
               
               <ThemeToggle />
-              <ColorThemeToggle />
-              <StudyPlaylist isUnlocked={true} />
+              {getStudyStreak() >= 3 && <ColorThemeToggle />}
+              {getStudyStreak() >= 7 && <StudyPlaylist isUnlocked={true} />}
               
               <Button variant="ghost" onClick={() => {
                 localStorage.setItem('mentiora_return_to', 'premium-dashboard');
@@ -1084,57 +1084,69 @@ const PremiumDashboard = () => {
 
                   {/* Compact reward tier system */}
                   <div className="space-y-2">
-                    {/* Color Themes Reward - UNLOCKED */}
-                    <div className="p-3 rounded-xl border transition-all duration-300 bg-gradient-to-r from-violet-500/10 to-purple-500/10 border-violet-400/30 shadow-sm">
+                    {/* Color Themes Reward - 3 days */}
+                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 3 ? 'bg-gradient-to-r from-violet-500/10 to-purple-500/10 border-violet-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
-                          <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-gradient-to-br from-violet-500 to-purple-600 shadow-sm">
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 3 ? 'bg-gradient-to-br from-violet-500 to-purple-600 shadow-sm' : 'bg-gray-400'}`}>
                             <Star className="h-3 w-3 text-white" />
                           </div>
                           <div>
-                            <p className="text-sm font-semibold text-violet-700 dark:text-violet-300">
+                            <p className={`text-sm font-semibold ${getStudyStreak() >= 3 ? 'text-violet-700 dark:text-violet-300' : 'text-gray-500'}`}>
                               Color Themes
                             </p>
-                            <p className="text-xs text-muted-foreground">Unlocked</p>
+                            <p className="text-xs text-muted-foreground">3 days</p>
                           </div>
                         </div>
-                        <CheckCircle className="h-4 w-4 text-violet-600" />
+                        {getStudyStreak() >= 3 ? (
+                          <CheckCircle className="h-4 w-4 text-violet-600" />
+                        ) : (
+                          <div className="text-xs font-medium text-muted-foreground">{3 - getStudyStreak()}d</div>
+                        )}
                       </div>
                     </div>
 
-                    {/* Study Playlist - UNLOCKED */}
-                    <div className="p-3 rounded-xl border transition-all duration-300 bg-gradient-to-r from-emerald-500/10 to-green-500/10 border-emerald-400/30 shadow-sm">
+                    {/* Study Playlist - 7 days */}
+                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 7 ? 'bg-gradient-to-r from-emerald-500/10 to-green-500/10 border-emerald-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
-                          <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-gradient-to-br from-emerald-500 to-green-600 shadow-sm">
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 7 ? 'bg-gradient-to-br from-emerald-500 to-green-600 shadow-sm' : 'bg-gray-400'}`}>
                             <Sparkles className="h-3 w-3 text-white" />
                           </div>
                           <div>
-                            <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">
+                            <p className={`text-sm font-semibold ${getStudyStreak() >= 7 ? 'text-emerald-700 dark:text-emerald-300' : 'text-gray-500'}`}>
                               Study Playlist
                             </p>
-                            <p className="text-xs text-muted-foreground">Unlocked</p>
+                            <p className="text-xs text-muted-foreground">7 days</p>
                           </div>
                         </div>
-                        <CheckCircle className="h-4 w-4 text-emerald-600" />
+                        {getStudyStreak() >= 7 ? (
+                          <CheckCircle className="h-4 w-4 text-emerald-600" />
+                        ) : (
+                          <div className="text-xs font-medium text-muted-foreground">{7 - getStudyStreak()}d</div>
+                        )}
                       </div>
                     </div>
 
-                    {/* Free Tutoring Session - UNLOCKED */}
-                    <div className="p-3 rounded-xl border transition-all duration-300 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-blue-400/30 shadow-sm">
+                    {/* Free Tutoring Session - 14 days */}
+                    <div className={`p-3 rounded-xl border transition-all duration-300 ${getStudyStreak() >= 14 ? 'bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-blue-400/30 shadow-sm' : 'bg-gray-100/30 dark:bg-gray-800/30 border-gray-300/50 dark:border-gray-600/50'}`}>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
-                          <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 shadow-sm">
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${getStudyStreak() >= 14 ? 'bg-gradient-to-br from-blue-500 to-purple-600 shadow-sm' : 'bg-gray-400'}`}>
                             <User className="h-3 w-3 text-white" />
                           </div>
                           <div>
-                            <p className="text-sm font-semibold text-blue-700 dark:text-blue-300">
+                            <p className={`text-sm font-semibold ${getStudyStreak() >= 14 ? 'text-blue-700 dark:text-blue-300' : 'text-gray-500'}`}>
                               Free Tutoring Session
                             </p>
-                            <p className="text-xs text-muted-foreground">Unlocked</p>
+                            <p className="text-xs text-muted-foreground">14 days</p>
                           </div>
                         </div>
-                        <CheckCircle className="h-4 w-4 text-blue-600" />
+                        {getStudyStreak() >= 14 ? (
+                          <CheckCircle className="h-4 w-4 text-blue-600" />
+                        ) : (
+                          <div className="text-xs font-medium text-muted-foreground">{14 - getStudyStreak()}d</div>
+                        )}
                       </div>
                     </div>
                   </div>
