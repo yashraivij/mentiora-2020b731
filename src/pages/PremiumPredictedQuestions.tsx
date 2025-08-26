@@ -67,7 +67,7 @@ const PremiumPredictedQuestions = () => {
   };
 
   const handleSubjectSelect = (subjectId: string) => {
-    setShowPaywall(true);
+    navigate(`/predicted-exam/${subjectId}`);
   };
 
   const handleUpgrade = () => {
@@ -250,13 +250,13 @@ const PremiumPredictedQuestions = () => {
                     Review Marking
                     <Target className="h-4 w-4 ml-2" />
                   </Button>
-                   <Button 
-                     className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
-                     onClick={(e) => {
-                       e.stopPropagation();
-                       setShowPaywall(true);
-                     }}
-                   >
+                     <Button 
+                      className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleSubjectSelect(subject.id);
+                      }}
+                    >
                      <RotateCcw className="h-4 w-4 mr-2" />
                      Retake Exam
                      <Sparkles className="h-4 w-4 ml-2" />
