@@ -70,6 +70,20 @@ const Dashboard = () => {
   const [celebrationSubject, setCelebrationSubject] = useState('');
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
   const [showPremiumPaywall, setShowPremiumPaywall] = useState(false);
+  
+  // Check for payment success and show success message
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('payment') === 'success') {
+      toast({
+        title: "🎉 Welcome to Premium!",
+        description: "Your premium features are now unlocked. Enjoy your enhanced learning experience!",
+        duration: 5000,
+      });
+      // Clean up the URL
+      window.history.replaceState({}, document.title, '/dashboard');
+    }
+  }, [toast]);
 
   const {
     notification,

@@ -81,16 +81,27 @@ serve(async (req) => {
             checkError: checkError?.message 
           });
 
-          // Update user to premium status
+          // Update user to premium status in both tables
           const { data: profileData, error: profileError } = await supabase
             .from('profiles')
-            .update({ is_premium: true, premium: true })
+            .update({ is_premium: true })
             .eq('email', session.customer_email)
             .select();
 
+          // Also update profiled table for premium status
+          const { error: profiledError } = await supabase
+            .from('profiled')
+            .update({ is_premium: true, premium: true })
+            .eq('email', session.customer_email);
+
           if (profileError) {
             logStep("Error updating profile", { error: profileError.message, email: session.customer_email });
-          } else if (profileData && profileData.length > 0) {
+          }
+          if (profiledError) {
+            logStep("Error updating profiled table", { error: profiledError.message, email: session.customer_email });
+          }
+          
+          if (profileData && profileData.length > 0) {
             logStep("Profile updated to premium", { email: session.customer_email, updatedRows: profileData.length, updatedProfile: profileData[0] });
           } else {
             logStep("No profile found to update by email", { email: session.customer_email });
@@ -154,9 +165,14 @@ serve(async (req) => {
         logStep("Processing invoice.payment_succeeded", { invoiceId: invoice.id });
 
         if (invoice.customer_email) {
-          // Ensure user remains premium
+          // Ensure user remains premium in both tables
           const { error: profileError } = await supabase
             .from('profiles')
+            .update({ is_premium: true })
+            .eq('email', invoice.customer_email);
+
+          const { error: profiledError } = await supabase
+            .from('profiled')
             .update({ is_premium: true, premium: true })
             .eq('email', invoice.customer_email);
 
@@ -198,9 +214,14 @@ serve(async (req) => {
         }
 
         if (customerEmail) {
-          // Remove premium status
+          // Remove premium status from both tables
           const { error: profileError } = await supabase
             .from('profiles')
+            .update({ is_premium: false })
+            .eq('email', customerEmail);
+
+          const { error: profiledError } = await supabase
+            .from('profiled')
             .update({ is_premium: false, premium: false })
             .eq('email', customerEmail);
 

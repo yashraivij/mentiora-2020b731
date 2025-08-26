@@ -53,23 +53,13 @@ serve(async (req) => {
       }
     }
 
-    // Create checkout session
+    // Create checkout session using the specific price ID
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       customer_email: customerId ? undefined : customerEmail,
       line_items: [
         {
-          price_data: {
-            currency: "gbp",
-            product_data: {
-              name: "Mentiora Premium",
-              description: "Unlock advanced features, predicted exams, and personalized study plans",
-            },
-            unit_amount: 4999, // £49.99
-            recurring: {
-              interval: "month",
-            },
-          },
+          price: "price_1RzsBhCtgl2dlnVO2C1G5vcO", // Using provided price ID
           quantity: 1,
         },
       ],
