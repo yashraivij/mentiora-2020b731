@@ -614,9 +614,9 @@ const PremiumDashboard = () => {
   const handlePractice = async (subjectId: string, topicId?: string) => {
     await recordActivity();
     if (topicId) {
-      navigate(`/practice/${subjectId}/${topicId}`);
+      navigate(`/practice/${subjectId}/${topicId}`, { state: { from: 'premium-dashboard' } });
     } else {
-      navigate(`/subject/${subjectId}`);
+      navigate(`/subject/${subjectId}`, { state: { from: 'premium-dashboard' } });
     }
   };
 
@@ -644,11 +644,11 @@ const PremiumDashboard = () => {
 
   const handleNotificationAction = () => {
     if (notification.type === "weak-topic-recommendation" && notification.subjectId) {
-      navigate(`/subject/${notification.subjectId}`);
+      navigate(`/subject/${notification.subjectId}`, { state: { from: 'premium-dashboard' } });
     } else if (notification.type === "exam-recommendation" && notification.subjectId) {
-      navigate('/predicted-questions');
+      navigate('/predicted-questions', { state: { from: 'premium-dashboard' } });
     } else if (notification.type === "study-recommendation") {
-      navigate('/predicted-questions');
+      navigate('/predicted-questions', { state: { from: 'premium-dashboard' } });
     }
   };
 
@@ -771,7 +771,7 @@ const PremiumDashboard = () => {
               {getStudyStreak() >= 3 && <ColorThemeToggle />}
               {getStudyStreak() >= 7 && <StudyPlaylist isUnlocked={true} />}
               
-              <Button variant="ghost" onClick={() => navigate('/settings')} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
+              <Button variant="ghost" onClick={() => navigate('/settings', { state: { from: 'premium-dashboard' } })} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
                 <Settings className="h-4 w-4" />
               </Button>
               <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
@@ -988,7 +988,7 @@ const PremiumDashboard = () => {
         <div className="mb-8">
           
           {/* Revision Notebook - Premium Feature */}
-          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => navigate('/notebook')}>
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => navigate('/notebook', { state: { from: 'premium-dashboard' } })}>
             {/* Premium Glow Effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
