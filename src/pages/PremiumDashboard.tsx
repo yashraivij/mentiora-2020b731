@@ -929,8 +929,8 @@ const PremiumDashboard = () => {
                     Mentiora
                   </h1>
                   <div className="flex items-center space-x-2">
-                    <User className="h-3 w-3 text-muted-foreground" />
-                    <span className="text-xs font-medium text-muted-foreground">Free Account</span>
+                    <Crown className="h-3 w-3 text-amber-500" />
+                    <span className="text-xs font-medium text-amber-600 dark:text-amber-400">Premium</span>
                   </div>
                 </div>
               </div>
