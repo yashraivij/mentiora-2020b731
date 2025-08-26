@@ -18,14 +18,6 @@ import PredictedQuestions from "./pages/PredictedQuestions";
 import PredictedExam from "./pages/PredictedExam";
 import PredictedResults from "./pages/PredictedResults";
 import Notebook from "./pages/Notebook";
-import PremiumDashboard from "./pages/PremiumDashboard";
-import PremiumSubjectTopics from "./pages/PremiumSubjectTopics";
-import PremiumPractice from "./pages/PremiumPractice";
-import PremiumAnalytics from "./pages/PremiumAnalytics";
-import PremiumPredictedQuestions from "./pages/PremiumPredictedQuestions";
-import PremiumPredictedExam from "./pages/PremiumPredictedExam";
-import PremiumPredictedResults from "./pages/PremiumPredictedResults";
-import PremiumNotebook from "./pages/PremiumNotebook";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -81,46 +73,6 @@ const App: React.FC = () => (
             <Route path="/notebook" element={
               <ProtectedRoute>
                 <Notebook />
-              </ProtectedRoute>
-            } />
-            <Route path="/premium-dashboard" element={
-              <ProtectedRoute>
-                <PremiumDashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="/premium-subject/:subjectId" element={
-              <ProtectedRoute>
-                <PremiumSubjectTopics />
-              </ProtectedRoute>
-            } />
-            <Route path="/premium-practice/:subjectId/:topicId" element={
-              <ProtectedRoute>
-                <PremiumPractice />
-              </ProtectedRoute>
-            } />
-            <Route path="/premium-analytics" element={
-              <ProtectedRoute>
-                <PremiumAnalytics />
-              </ProtectedRoute>
-            } />
-            <Route path="/premium-predicted-questions" element={
-              <ProtectedRoute>
-                <PremiumPredictedQuestions />
-              </ProtectedRoute>
-            } />
-            <Route path="/premium-predicted-exam/:subjectId" element={
-              <ProtectedRoute>
-                <PremiumPredictedExam />
-              </ProtectedRoute>
-            } />
-            <Route path="/premium-predicted-results/:subjectId" element={
-              <ProtectedRoute>
-                <PremiumPredictedResults />
-              </ProtectedRoute>
-            } />
-            <Route path="/premium-notebook" element={
-              <ProtectedRoute>
-                <PremiumNotebook />
               </ProtectedRoute>
             } />
             <Route path="*" element={<NotFound />} />
