@@ -47,8 +47,8 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
       }
 
       if (data?.url) {
-        console.log('Opening Stripe checkout URL:', data.url);
-        window.open(data.url, '_blank');
+        console.log('Redirecting to Stripe checkout URL:', data.url);
+        window.location.href = data.url;
       } else if (data?.id) {
         console.log('Redirecting to Stripe checkout with session ID:', data.id);
         // Use Stripe.js to redirect to checkout
