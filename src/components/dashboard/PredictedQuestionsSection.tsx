@@ -9,7 +9,7 @@ export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
 
   const handleStartPredicted = () => {
-    navigate('/premium-predicted-questions');
+    navigate('/predicted-questions');
   };
 
   return (
