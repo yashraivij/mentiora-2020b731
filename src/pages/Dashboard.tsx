@@ -5,7 +5,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
-import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Gamepad2, Settings, Shield } from "lucide-react";
+import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Gamepad2, Settings } from "lucide-react";
 import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
@@ -40,7 +40,6 @@ import { DiscordInvitation } from "@/components/ui/discord-invitation";
 import { PublicStreakProfiles } from '@/components/dashboard/PublicStreakProfiles';
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
 import { useToast } from "@/hooks/use-toast";
-import { usePremium } from "@/hooks/usePremium";
 
 interface UserProgress {
   subjectId: string;
@@ -53,14 +52,6 @@ interface UserProgress {
 const Dashboard = () => {
   const { user, logout } = useAuth();
   const { toast } = useToast();
-  const { isPremium, isLoading: premiumLoading, hasStripeCustomer } = usePremium();
-  
-  // Debug logging for subscription management button visibility
-  console.log('Dashboard subscription button visibility:', {
-    isPremium,
-    hasStripeCustomer,
-    shouldShowButton: isPremium && hasStripeCustomer
-  });
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
@@ -830,56 +821,6 @@ const Dashboard = () => {
     navigate('/');
   };
 
-  const handleManageSubscription = async () => {
-    if (!user?.id) return;
-
-    try {
-      console.log('Invoking customer-portal function...');
-      const { data, error } = await supabase.functions.invoke('customer-portal');
-
-      console.log('Customer portal response:', { data, error });
-
-      if (error) {
-        console.error('Error creating customer portal session:', error);
-        
-        // Check if the error is about no Stripe customer
-        if (error.message?.includes('No Stripe customer found')) {
-          toast({
-            title: "No Subscription Found",
-            description: "You don't have an active Stripe subscription to manage. Please upgrade to premium first.",
-            variant: "destructive",
-          });
-        } else {
-          toast({
-            title: "Error",
-            description: `Failed to open subscription management: ${error.message}`,
-            variant: "destructive",
-          });
-        }
-        return;
-      }
-
-      if (data?.url) {
-        console.log('Opening customer portal:', data.url);
-        window.open(data.url, '_blank');
-      } else {
-        console.error('No URL returned from customer portal');
-        toast({
-          title: "Error", 
-          description: "No redirect URL received from subscription management.",
-          variant: "destructive",
-        });
-      }
-    } catch (error) {
-      console.error('Error invoking customer portal:', error);
-      toast({
-        title: "Error",
-        description: `Failed to open subscription management: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        variant: "destructive",
-      });
-    }
-  };
-
   const handlePractice = async (subjectId: string, topicId?: string) => {
     await recordActivity();
     if (topicId) {
@@ -991,17 +932,8 @@ const Dashboard = () => {
                     Mentiora
                   </h1>
                   <div className="flex items-center space-x-2">
-                    {isPremium ? (
-                      <>
-                        <Crown className="h-3 w-3 text-amber-500" />
-                        <span className="text-xs font-medium text-muted-foreground">Premium</span>
-                      </>
-                    ) : (
-                      <>
-                        <User className="h-3 w-3 text-gray-500" />
-                        <span className="text-xs font-medium text-muted-foreground">Free Account</span>
-                      </>
-                    )}
+                    <Crown className="h-3 w-3 text-amber-500" />
+                    <span className="text-xs font-medium text-muted-foreground">Premium</span>
                   </div>
                 </div>
               </div>
@@ -1014,18 +946,6 @@ const Dashboard = () => {
                 <Gamepad2 className="h-5 w-5 mr-2" />
                 <span className="text-sm font-extrabold">Join Community</span>
               </Button>
-              
-              {isPremium && hasStripeCustomer && (
-                <Button 
-                  onClick={handleManageSubscription}
-                  variant="outline"
-                  className="border-orange-300 text-orange-600 hover:bg-orange-50 hover:text-orange-700 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950 dark:hover:text-orange-300 transition-all duration-300 rounded-xl px-4 py-2 h-11"
-                >
-                  <Settings className="h-4 w-4 mr-2" />
-                  <span className="text-sm font-medium">Manage Subscription</span>
-                </Button>
-              )}
-              
               <ThemeToggle />
               {getStudyStreak() >= 3 && <ColorThemeToggle />}
               {getStudyStreak() >= 7 && <StudyPlaylist isUnlocked={true} />}
@@ -1721,11 +1641,21 @@ const Dashboard = () => {
       <PremiumPaywall
         isOpen={showPremiumPaywall}
         onClose={() => setShowPremiumPaywall(false)}
-        onUpgrade={() => {
-          // Open Stripe checkout for premium upgrade
-          const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
-          const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
-          window.open(stripeUrl, '_blank');
+        onUpgrade={async () => {
+          try {
+            const { data, error } = await supabase.functions.invoke('create-subscription');
+            
+            if (error) {
+              console.error('Error creating subscription:', error);
+              return;
+            }
+            
+            if (data?.url) {
+              window.open(data.url, '_blank');
+            }
+          } catch (error) {
+            console.error('Error creating subscription:', error);
+          }
           setShowPremiumPaywall(false);
         }}
       />

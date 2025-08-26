@@ -9,9 +9,8 @@ export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
 
   const handleStartPredicted = () => {
-    // Navigate directly to Mathematics exam to bypass paywall entirely
-    // Since we're on premium dashboard, user should have full access
-    navigate('/predicted-exam/mathematics');
+    // Navigate to subject selection page
+    navigate('/subject-selection');
   };
 
   return (

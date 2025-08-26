@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Crown, Zap, TrendingUp, Clock, Star, CheckCircle, Target, BookOpen, Award, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
+import { usePremium } from '@/hooks/usePremium';
 
 interface PremiumPaywallProps {
   isOpen: boolean;
@@ -12,12 +15,70 @@ interface PremiumPaywallProps {
 
 export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose, onUpgrade }) => {
   const { user } = useAuth();
+  const { isPremium, subscriptionTier, subscriptionEnd } = usePremium();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isCanceling, setIsCanceling] = useState(false);
   
-  const handleUpgradeClick = () => {
-    const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
-    const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
-    window.open(stripeUrl, '_blank');
-    onUpgrade();
+  const handleUpgradeClick = async () => {
+    if (!user) {
+      toast.error('Please log in to upgrade to Premium');
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('create-subscription');
+      
+      if (error) {
+        toast.error('Failed to create subscription. Please try again.');
+        console.error('Subscription error:', error);
+        return;
+      }
+
+      if (data?.url) {
+        // Open Stripe checkout in a new tab
+        window.open(data.url, '_blank');
+        onUpgrade();
+      } else {
+        toast.error('Invalid response from subscription service');
+      }
+    } catch (error) {
+      console.error('Error creating subscription:', error);
+      toast.error('An error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleCancelSubscription = async () => {
+    if (!user) {
+      toast.error('Please log in to cancel subscription');
+      return;
+    }
+
+    setIsCanceling(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('cancel-subscription');
+      
+      if (error) {
+        toast.error('Failed to cancel subscription. Please try again.');
+        console.error('Cancel subscription error:', error);
+        return;
+      }
+
+      if (data?.success) {
+        toast.success('Subscription cancelled successfully');
+        // Force refresh of premium status
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
+    } catch (error) {
+      console.error('Error cancelling subscription:', error);
+      toast.error('An error occurred. Please try again.');
+    } finally {
+      setIsCanceling(false);
+    }
   };
   const benefits = [
     {
@@ -103,29 +164,11 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
             </button>
 
             {/* Header */}
-            <div className="relative p-8 text-center">
-              <div className="absolute inset-0 bg-gradient-to-r from-amber-400/20 to-orange-500/20 rounded-t-3xl" />
-              <motion.div
-                animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="relative inline-flex items-center space-x-3 mb-4"
-              >
-                <Crown className="h-12 w-12 text-amber-400" />
-                <span className="text-4xl font-bold bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
-                  Mentiora Premium
-                </span>
-                <Crown className="h-12 w-12 text-amber-400" />
-              </motion.div>
-              
-              <h1 className="text-2xl font-bold text-white mb-4">
-                Secure Academic Future Success
-              </h1>
-              <p className="text-lg text-white/80 max-w-2xl mx-auto">
-                Get the competitive edge to achieve Grade 9s and secure places at top universities
-              </p>
+            <div className="relative p-12 text-center">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-600/30 via-blue-600/20 to-emerald-600/30 rounded-t-3xl" />
               
               {/* Sparkles Animation */}
-              <div className="absolute top-4 left-1/4">
+              <div className="absolute top-8 left-1/4">
                 <motion.div
                   animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
                   transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
@@ -133,7 +176,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                   <Sparkles className="h-6 w-6 text-amber-400" />
                 </motion.div>
               </div>
-              <div className="absolute top-8 right-1/3">
+              <div className="absolute top-12 right-1/3">
                 <motion.div
                   animate={{ scale: [1, 1.3, 1], opacity: [0.4, 1, 0.4] }}
                   transition={{ duration: 2.5, repeat: Infinity, delay: 1 }}
@@ -141,49 +184,70 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                   <Sparkles className="h-4 w-4 text-purple-400" />
                 </motion.div>
               </div>
+              
+              <motion.div
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="relative inline-flex items-center space-x-4 mb-6"
+              >
+                <Crown className="h-16 w-16 text-amber-400" />
+                <span className="text-5xl font-bold bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
+                  Mentiora Premium
+                </span>
+                <Crown className="h-16 w-16 text-amber-400" />
+              </motion.div>
+              
+              <h1 className="text-3xl font-bold text-white mb-4">
+                Secure Academic Future Success
+              </h1>
+              <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+                Get the competitive edge to achieve Grade 9s and secure places at top universities
+              </p>
             </div>
 
-            {/* Pricing */}
+            {/* Main Pricing Card */}
             <div className="px-8 mb-8">
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 text-center max-w-md mx-auto">
-                <div className="text-white/70 text-sm mb-2">Limited Time Offer</div>
-                <div className="flex items-center justify-center space-x-2 mb-2">
-                  <span className="text-white/60 line-through text-lg">£19.99</span>
-                  <span className="text-3xl font-bold text-white">£9.99</span>
-                  <span className="text-white/80">/month</span>
+              <div className="bg-gradient-to-br from-blue-600/30 to-purple-600/30 backdrop-blur-sm border-2 border-white/30 rounded-3xl p-8 text-center max-w-lg mx-auto shadow-2xl">
+                <div className="text-white/80 text-lg mb-3">Limited Time Offer</div>
+                <div className="flex items-center justify-center space-x-3 mb-3">
+                  <span className="text-white/60 line-through text-2xl">£19.99</span>
+                  <span className="text-6xl font-bold text-white">£9.99</span>
+                  <span className="text-white/90 text-xl">/month</span>
                 </div>
-                <div className="text-amber-400 text-sm font-medium">Save 50% - First 3 months</div>
-                <div className="text-white/60 text-xs mt-2">Less than a single tutoring session</div>
+                <div className="text-amber-400 text-lg font-semibold mb-2">Save 50% - First 3 months</div>
+                <div className="text-white/70 text-base mb-6">Less than a single tutoring session</div>
+                
                 <Button
                   onClick={handleUpgradeClick}
-                  className="w-full mt-4 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-semibold py-2 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                  disabled={isLoading}
+                  className="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-black font-bold py-4 px-8 rounded-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 text-lg"
                 >
-                  Start Free Trial
+                  {isLoading ? 'Creating Subscription...' : 'Start Free Trial'}
                 </Button>
               </div>
             </div>
 
-            {/* Benefits Grid */}
+            {/* Premium Features */}
             <div className="px-8 mb-8">
-              <h2 className="text-2xl font-bold text-white text-center mb-6">Premium Features</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <h2 className="text-3xl font-bold text-white text-center mb-8">Premium Features</h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {benefits.map((benefit, index) => (
                   <motion.div
                     key={benefit.title}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-all duration-300 group"
+                    transition={{ delay: index * 0.15 }}
+                    className="bg-white/10 backdrop-blur-sm border border-white/30 rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 group hover:scale-105"
                   >
-                    <div className="flex items-center space-x-3 mb-3">
-                      <div className="p-2 bg-gradient-to-br from-amber-400/30 to-orange-500/30 rounded-lg group-hover:scale-110 transition-transform">
-                        <benefit.icon className="h-6 w-6 text-amber-400" />
+                    <div className="flex items-center space-x-4 mb-4">
+                      <div className="p-3 bg-gradient-to-br from-amber-400/30 to-orange-500/30 rounded-xl group-hover:scale-110 transition-transform border border-amber-400/30">
+                        <benefit.icon className="h-7 w-7 text-amber-400" />
                       </div>
-                      <h3 className="font-semibold text-white text-sm">{benefit.title}</h3>
+                      <h3 className="font-bold text-white text-lg">{benefit.title}</h3>
                     </div>
-                    <p className="text-white/70 text-sm mb-3 leading-relaxed">{benefit.description}</p>
-                    <div className="inline-block bg-gradient-to-r from-emerald-400/20 to-blue-400/20 border border-emerald-400/30 rounded-full px-3 py-1">
-                      <span className="text-emerald-300 text-xs font-medium">{benefit.highlight}</span>
+                    <p className="text-white/80 text-base mb-4 leading-relaxed">{benefit.description}</p>
+                    <div className="inline-block bg-gradient-to-r from-emerald-400/20 to-blue-400/20 border border-emerald-400/40 rounded-full px-4 py-2">
+                      <span className="text-emerald-300 text-sm font-semibold">{benefit.highlight}</span>
                     </div>
                   </motion.div>
                 ))}
@@ -224,29 +288,64 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
             {/* CTA Buttons */}
             <div className="px-8 pb-8">
               <div className="space-y-4">
-                <Button
-                  onClick={handleUpgradeClick}
-                  className="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 text-lg"
-                >
-                  <div className="flex items-center justify-center space-x-3">
-                    <Zap className="h-6 w-6" />
-                    <span>Upgrade to Premium Now</span>
-                    <Crown className="h-6 w-6" />
+                {isPremium ? (
+                  // Show subscription management for premium users
+                  <div className="space-y-4">
+                    <div className="bg-emerald-500/20 border border-emerald-400/30 rounded-xl p-4 text-center">
+                      <div className="flex items-center justify-center space-x-2 mb-2">
+                        <Crown className="h-5 w-5 text-emerald-400" />
+                        <span className="text-emerald-300 font-medium">You're Premium!</span>
+                      </div>
+                      <p className="text-white/70 text-sm">
+                        {subscriptionTier && `${subscriptionTier} plan`}
+                        {subscriptionEnd && ` • Renews ${new Date(subscriptionEnd).toLocaleDateString()}`}
+                      </p>
+                    </div>
+                    
+                    <Button
+                      onClick={handleCancelSubscription}
+                      disabled={isCanceling}
+                      className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300"
+                    >
+                      {isCanceling ? 'Cancelling...' : 'Cancel Subscription'}
+                    </Button>
+                    
+                    <button
+                      onClick={onClose}
+                      className="w-full text-white/60 hover:text-white/80 text-sm transition-colors py-2"
+                    >
+                      Close
+                    </button>
                   </div>
-                </Button>
-                
-                <div className="text-center">
-                  <p className="text-white/60 text-sm">
-                    🔒 Cancel anytime • ⚡ Instant access
-                  </p>
-                </div>
-                
-                <button
-                  onClick={onClose}
-                  className="w-full text-white/60 hover:text-white/80 text-sm transition-colors py-2"
-                >
-                  Maybe later
-                </button>
+                ) : (
+                  // Show upgrade buttons for non-premium users
+                  <>
+                    <Button
+                      onClick={handleUpgradeClick}
+                      disabled={isLoading}
+                      className="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 text-lg"
+                    >
+                      <div className="flex items-center justify-center space-x-3">
+                        <Zap className="h-6 w-6" />
+                        <span>{isLoading ? 'Creating Subscription...' : 'Upgrade to Premium Now'}</span>
+                        <Crown className="h-6 w-6" />
+                      </div>
+                    </Button>
+                    
+                    <div className="text-center">
+                      <p className="text-white/60 text-sm">
+                        🔒 Cancel anytime • ⚡ Instant access
+                      </p>
+                    </div>
+                    
+                    <button
+                      onClick={onClose}
+                      className="w-full text-white/60 hover:text-white/80 text-sm transition-colors py-2"
+                    >
+                      Maybe later
+                    </button>
+                  </>
+                )}
               </div>
             </div>
 

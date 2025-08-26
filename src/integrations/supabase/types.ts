@@ -647,7 +647,7 @@ export type Database = {
         }
         Relationships: []
       }
-      profiles: {
+      profiled: {
         Row: {
           avatar_url: string | null
           created_at: string | null
@@ -682,6 +682,36 @@ export type Database = {
           premium?: boolean
           revision_goals?: Json | null
           subject_preferences?: Json | null
+          username?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          email: string
+          full_name: string | null
+          id: string
+          updated_at: string | null
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email: string
+          full_name?: string | null
+          id: string
+          updated_at?: string | null
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string | null
           username?: string | null
         }
         Relationships: []
@@ -955,6 +985,7 @@ export type Database = {
           stripe_customer_id: string | null
           subscribed: boolean
           subscription_end: string | null
+          subscription_id: string | null
           subscription_tier: string | null
           updated_at: string
           user_id: string | null
@@ -967,6 +998,7 @@ export type Database = {
           stripe_customer_id?: string | null
           subscribed?: boolean
           subscription_end?: string | null
+          subscription_id?: string | null
           subscription_tier?: string | null
           updated_at?: string
           user_id?: string | null
@@ -979,6 +1011,7 @@ export type Database = {
           stripe_customer_id?: string | null
           subscribed?: boolean
           subscription_end?: string | null
+          subscription_id?: string | null
           subscription_tier?: string | null
           updated_at?: string
           user_id?: string | null

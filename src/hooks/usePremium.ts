@@ -7,7 +7,6 @@ interface PremiumStatus {
   isLoading: boolean;
   subscriptionTier: string | null;
   subscriptionEnd: string | null;
-  hasStripeCustomer: boolean;
 }
 
 export const usePremium = (): PremiumStatus => {
@@ -17,7 +16,6 @@ export const usePremium = (): PremiumStatus => {
     isLoading: true,
     subscriptionTier: null,
     subscriptionEnd: null,
-    hasStripeCustomer: false,
   });
 
   const checkPremiumStatus = async () => {
@@ -27,27 +25,15 @@ export const usePremium = (): PremiumStatus => {
         isLoading: false,
         subscriptionTier: null,
         subscriptionEnd: null,
-        hasStripeCustomer: false,
       });
       return;
     }
 
     try {
-      // Check profile premium status
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('is_premium, premium')
-        .eq('email', user.email)
-        .maybeSingle();
-
-      if (profileError) {
-        console.error('Error fetching profile:', profileError);
-      }
-
-      // Check subscriber status for additional details including stripe_customer_id
+      // Check subscriber status for premium details
       const { data: subscriber, error: subscriberError } = await supabase
         .from('subscribers')
-        .select('subscribed, subscription_tier, subscription_end, stripe_customer_id')
+        .select('subscribed, subscription_tier, subscription_end, subscription_id')
         .eq('email', user.email)
         .maybeSingle();
 
@@ -55,18 +41,12 @@ export const usePremium = (): PremiumStatus => {
         console.error('Error fetching subscriber:', subscriberError);
       }
 
-      const isPremium = profile?.is_premium || profile?.premium || subscriber?.subscribed || false;
-      const hasStripeCustomer = !!subscriber?.stripe_customer_id;
+      const isPremium = subscriber?.subscribed || false;
       
       console.log('Premium Status Debug:', {
         userEmail: user.email,
-        profile: profile,
         subscriber: subscriber,
         isPremium: isPremium,
-        hasStripeCustomer: hasStripeCustomer,
-        stripeCustomerId: subscriber?.stripe_customer_id,
-        profileIsPremium: profile?.is_premium,
-        profilePremium: profile?.premium,
         subscriberSubscribed: subscriber?.subscribed
       });
 
@@ -75,7 +55,6 @@ export const usePremium = (): PremiumStatus => {
         isLoading: false,
         subscriptionTier: subscriber?.subscription_tier || null,
         subscriptionEnd: subscriber?.subscription_end || null,
-        hasStripeCustomer,
       });
     } catch (error) {
       console.error('Error checking premium status:', error);
@@ -84,7 +63,6 @@ export const usePremium = (): PremiumStatus => {
         isLoading: false,
         subscriptionTier: null,
         subscriptionEnd: null,
-        hasStripeCustomer: false,
       });
     }
   };
