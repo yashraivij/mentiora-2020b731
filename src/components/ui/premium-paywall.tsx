@@ -35,7 +35,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
       }
 
       if (data?.url) {
-        // Redirect to Stripe checkout
+        // Redirect to Stripe checkout in same window for seamless experience
         window.location.href = data.url;
       }
     } catch (error) {
