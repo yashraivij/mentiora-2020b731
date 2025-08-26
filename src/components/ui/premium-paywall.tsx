@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { usePremium } from '@/hooks/usePremium';
 import { supabase } from '@/integrations/supabase/client';
+import { stripePromise } from '@/lib/stripe';
 
 interface PremiumPaywallProps {
   isOpen: boolean;
@@ -35,32 +36,25 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
 
       if (error) {
         console.error('Error creating checkout session:', error);
-        
-        // Try to get detailed error message from the response
-        let errorMessage = error.message;
-        if (error.context?.body) {
-          try {
-            const errorDetails = JSON.parse(error.context.body);
-            errorMessage = errorDetails.error || errorDetails.details || error.message;
-            if (errorDetails.help) {
-              errorMessage += `\n\nHelp: ${errorDetails.help}`;
-            }
-          } catch (e) {
-            // If we can't parse the response, use the original error
-            errorMessage = error.message;
-          }
-        }
-        
-        alert(`Error: ${errorMessage}`);
+        alert(`Error: ${error.message}`);
         return;
       }
 
-      if (data?.url) {
-        console.log('Redirecting to Stripe checkout:', data.url);
-        // Redirect to Stripe checkout in same window for seamless experience
-        window.location.href = data.url;
+      if (data?.id) {
+        console.log('Redirecting to Stripe checkout with session ID:', data.id);
+        // Use Stripe.js to redirect to checkout
+        const stripe = await stripePromise;
+        if (stripe) {
+          const { error: stripeError } = await stripe.redirectToCheckout({
+            sessionId: data.id,
+          });
+          if (stripeError) {
+            console.error('Stripe redirect error:', stripeError);
+            alert(`Stripe redirect error: ${stripeError.message}`);
+          }
+        }
       } else {
-        console.error('No checkout URL returned');
+        console.error('No session ID returned');
         alert('Failed to create checkout session');
       }
     } catch (error) {

@@ -15,36 +15,29 @@ serve(async (req) => {
   try {
     console.log("[CREATE-CHECKOUT] Starting checkout session creation");
     
-    // Get Stripe test keys - prioritize test keys for development
-    const stripeKey = Deno.env.get("STRIPE_TEST_SECRET_KEY") || 
-                      Deno.env.get("STRIPE_SECRET_KEY_TEST") || 
-                      Deno.env.get("STRIPE_TEST_SECRET_KEY1") ||
-                      Deno.env.get("STRIPE_SECRET_KEY");
+    // Get Stripe keys
+    const stripeSecretKey = Deno.env.get("STRIPE_SECRET_KEY");
+    const stripePriceId = Deno.env.get("STRIPE_PRICE_ID");
     
-    const priceId = Deno.env.get("STRIPE_PRICE_ID") || 
-                    Deno.env.get("STRIPE_PRODUCT_ID");
-    
-    console.log("[CREATE-CHECKOUT] Using keys:", {
-      stripeKeyFound: !!stripeKey,
-      priceIdFound: !!priceId,
-      stripeKeyPrefix: stripeKey ? stripeKey.substring(0, 12) + "..." : "null"
+    console.log("[CREATE-CHECKOUT] Config check:", {
+      secretKeyFound: !!stripeSecretKey,
+      priceIdFound: !!stripePriceId,
+      secretKeyPrefix: stripeSecretKey ? stripeSecretKey.substring(0, 12) + "..." : "null"
     });
     
     // Validate Stripe secret key
-    if (!stripeKey) {
+    if (!stripeSecretKey) {
       return new Response(JSON.stringify({ 
-        error: "Stripe secret key not configured",
-        details: "Please set up STRIPE_TEST_SECRET_KEY in Supabase secrets"
+        error: "Stripe secret key not configured"
       }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,
       });
     }
     
-    if (stripeKey.startsWith('pk_')) {
+    if (!stripeSecretKey.startsWith('sk_')) {
       return new Response(JSON.stringify({ 
-        error: "Invalid Stripe key: Using publishable key instead of secret key",
-        details: "Please use a secret key (starts with sk_test_ or sk_live_)"
+        error: "Invalid Stripe secret key format"
       }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,
@@ -52,23 +45,22 @@ serve(async (req) => {
     }
     
     // Validate price ID
-    if (!priceId) {
+    if (!stripePriceId) {
       return new Response(JSON.stringify({ 
-        error: "Stripe price ID not configured",
-        details: "Please set up STRIPE_PRICE_ID in Supabase secrets"
+        error: "Stripe price ID not configured"
       }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,
       });
     }
     
-    console.log("[CREATE-CHECKOUT] Using keys - Stripe:", stripeKey.substring(0, 12) + "...", "Price:", priceId);
-    const stripe = new Stripe(stripeKey, {
+    console.log("[CREATE-CHECKOUT] Using keys - Stripe:", stripeSecretKey.substring(0, 12) + "...", "Price:", stripePriceId);
+    const stripe = new Stripe(stripeSecretKey, {
       apiVersion: "2023-10-16",
     });
 
     // Get the origin for redirect URLs
-    const origin = req.headers.get("origin") || "https://mkmrasgbrhwtycwpdtke.supabase.co";
+    const origin = req.headers.get("origin") || "http://localhost:3000";
     
     // Create Supabase client for user authentication
     const supabaseClient = createClient(
@@ -103,20 +95,20 @@ serve(async (req) => {
       }
     }
 
-    // Create checkout session using the specific price ID
+    // Create checkout session
     console.log("[CREATE-CHECKOUT] Creating session for:", customerEmail || "guest user");
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       customer_email: customerId ? undefined : customerEmail,
       line_items: [
         {
-          price: priceId,
+          price: stripePriceId,
           quantity: 1,
         },
       ],
       mode: "subscription",
-      success_url: `${origin}/dashboard?payment=success`,
-      cancel_url: `${origin}/?payment=cancelled`,
+      success_url: `${origin}/success`,
+      cancel_url: `${origin}/cancel`,
       allow_promotion_codes: true,
       billing_address_collection: "required",
       metadata: {
@@ -125,26 +117,31 @@ serve(async (req) => {
     });
 
     console.log("[CREATE-CHECKOUT] Session created successfully:", session.id);
-    return new Response(JSON.stringify({ url: session.url }), {
+    return new Response(JSON.stringify({ 
+      id: session.id,
+      url: session.url 
+    }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
   } catch (error) {
     console.error("Error creating checkout session:", error);
-    console.error("Error details:", {
-      message: error.message,
-      stack: error.stack,
-      name: error.name
-    });
-    return new Response(
-      JSON.stringify({ 
-        error: error.message,
-        details: error.toString()
-      }),
-      {
+    
+    // Handle Stripe-specific errors
+    if (error.type === 'StripeCardError' || error.type === 'StripeInvalidRequestError') {
+      return new Response(JSON.stringify({ 
+        error: error.message 
+      }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 500,
-      }
-    );
+        status: 400,
+      });
+    }
+    
+    return new Response(JSON.stringify({ 
+      error: error.message || "Internal server error"
+    }), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      status: 500,
+    });
   }
 });

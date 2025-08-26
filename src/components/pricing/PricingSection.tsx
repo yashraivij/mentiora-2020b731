@@ -5,6 +5,7 @@ import { CheckCircle, Crown, Star, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
+import { stripePromise } from "@/lib/stripe";
 
 export const PricingSection = () => {
   const { user } = useAuth();
@@ -22,9 +23,14 @@ export const PricingSection = () => {
         return;
       }
 
-      if (data?.url) {
-        // Redirect to Stripe checkout
-        window.location.href = data.url;
+      if (data?.id) {
+        // Use Stripe.js to redirect to checkout
+        const stripe = await stripePromise;
+        if (stripe) {
+          await stripe.redirectToCheckout({
+            sessionId: data.id,
+          });
+        }
       }
     } catch (error) {
       console.error('Error:', error);

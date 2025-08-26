@@ -3,6 +3,7 @@ import { Crown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
+import { stripePromise } from "@/lib/stripe";
 
 interface UpgradeButtonProps {
   className?: string;
@@ -40,12 +41,21 @@ export const UpgradeButton = ({
         return;
       }
 
-      if (data?.url) {
-        // Open Stripe checkout in a new tab
-        window.open(data.url, '_blank');
+      if (data?.id) {
+        // Use Stripe.js to redirect to checkout
+        const stripe = await stripePromise;
+        if (stripe) {
+          const { error: stripeError } = await stripe.redirectToCheckout({
+            sessionId: data.id,
+          });
+          if (stripeError) {
+            console.error('Stripe redirect error:', stripeError);
+            alert(`Stripe redirect error: ${stripeError.message}`);
+          }
+        }
       } else {
-        console.error('No checkout URL received');
-        alert('No checkout URL received. Please try again.');
+        console.error('No session ID received');
+        alert('No session ID received. Please try again.');
       }
     } catch (error) {
       console.error('Error:', error);
