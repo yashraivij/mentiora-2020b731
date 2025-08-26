@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import { QueryClient } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -12,20 +12,22 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import PremiumDashboard from "./pages/PremiumDashboard";
 import Practice from "./pages/Practice";
-import Subject from "./pages/Subject";
-import Topic from "./pages/Topic";
+import SubjectTopics from "./pages/SubjectTopics";
 import PredictedQuestions from "./pages/PredictedQuestions";
-import Account from "./pages/Account";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfService from "./pages/TermsOfService";
-import Contact from "./pages/Contact";
+import Analytics from "./pages/Analytics";
+import Notebook from "./pages/Notebook";
+import Settings from "./pages/Settings";
+import PredictedExam from "./pages/PredictedExam";
+import PredictedResults from "./pages/PredictedResults";
 import NotFound from "./pages/NotFound";
 
 function App() {
+  const queryClient = new QueryClient();
+  
   return (
     <AuthProvider>
       <ThemeProvider>
-        <QueryClient>
+        <QueryClientProvider client={queryClient}>
           <div className="min-h-screen">
             <Router>
               <Routes>
@@ -55,13 +57,7 @@ function App() {
 
                 <Route path="/subjects/:subjectId" element={
                   <ProtectedRoute>
-                    <Subject />
-                  </ProtectedRoute>
-                } />
-
-                <Route path="/topics/:topicId" element={
-                  <ProtectedRoute>
-                    <Topic />
+                    <SubjectTopics />
                   </ProtectedRoute>
                 } />
 
@@ -71,20 +67,40 @@ function App() {
                   </ProtectedRoute>
                 } />
 
-                <Route path="/account" element={
+                <Route path="/analytics" element={
                   <ProtectedRoute>
-                    <Account />
+                    <Analytics />
                   </ProtectedRoute>
                 } />
 
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/terms-of-service" element={<TermsOfService />} />
-                <Route path="/contact" element={<Contact />} />
+                <Route path="/notebook" element={
+                  <ProtectedRoute>
+                    <Notebook />
+                  </ProtectedRoute>
+                } />
+
+                <Route path="/settings" element={
+                  <ProtectedRoute>
+                    <Settings />
+                  </ProtectedRoute>
+                } />
+
+                <Route path="/predicted-exam" element={
+                  <ProtectedRoute>
+                    <PredictedExam />
+                  </ProtectedRoute>
+                } />
+
+                <Route path="/predicted-results" element={
+                  <ProtectedRoute>
+                    <PredictedResults />
+                  </ProtectedRoute>
+                } />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Router>
           </div>
-        </QueryClient>
+        </QueryClientProvider>
       </ThemeProvider>
     </AuthProvider>
   );

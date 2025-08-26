@@ -35,6 +35,7 @@ const PremiumDashboard = () => {
     averageScore: number;
     attempts: number;
   }>>([]);
+  const [weakTopics, setWeakTopics] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -89,6 +90,10 @@ const PremiumDashboard = () => {
       }));
 
       setUserProgress(progressArray);
+      
+      // Calculate weak topics (score < 70%)
+      const weak = progressArray.filter(p => p.averageScore < 70).map(p => p.topicId);
+      setWeakTopics(weak);
     } catch (error) {
       console.error('Error in fetchUserProgress:', error);
     } finally {
@@ -189,9 +194,12 @@ const PremiumDashboard = () => {
                 {curriculum.map((subject) => (
                   <SubjectCard
                     key={subject.id}
-                    subject={subject}
-                    progress={userProgress.find(p => p.subjectId === subject.id)}
-                    onClick={() => handleSubjectClick(subject.id)}
+                    subject={{
+                      ...subject,
+                      color: 'bg-gradient-to-r from-blue-500 to-purple-600'
+                    }}
+                    progress={userProgress.filter(p => p.subjectId === subject.id)}
+                    onStartPractice={() => handleSubjectClick(subject.id)}
                   />
                 ))}
               </div>
@@ -206,9 +214,12 @@ const PremiumDashboard = () => {
 
           {/* Right Column - Analytics & Tools */}
           <div className="space-y-6">
-            <ProgressCard userProgress={userProgress} />
             <OptimalLearningTimeCard />
-            <WeakTopicsSection />
+            <WeakTopicsSection 
+              weakTopics={weakTopics}
+              userProgress={userProgress}
+              onPractice={(subjectId: string, topicId: string) => navigate(`/practice/${subjectId}`)}
+            />
             <GoalsSection />
           </div>
         </div>
