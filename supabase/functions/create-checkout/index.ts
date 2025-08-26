@@ -15,8 +15,8 @@ serve(async (req) => {
   try {
     console.log("[CREATE-CHECKOUT] Starting checkout session creation");
     
-    // Get Stripe keys
-    const stripeSecretKey = Deno.env.get("STRIPE_SECRET_KEY") || Deno.env.get("STRIPE_TEST_SECRET_KEY");
+    // Get Stripe keys - try test key first for development
+    const stripeSecretKey = Deno.env.get("STRIPE_TEST_SECRET_KEY") || Deno.env.get("STRIPE_SECRET_KEY");
     const stripePriceId = Deno.env.get("STRIPE_PRICE_ID");
     
     console.log("[CREATE-CHECKOUT] Config check:", {
@@ -107,8 +107,8 @@ serve(async (req) => {
         },
       ],
       mode: "subscription",
-      success_url: `${origin}/success`,
-      cancel_url: `${origin}/cancel`,
+      success_url: `${origin}/payment-success`,
+      cancel_url: `${origin}/`,
       allow_promotion_codes: true,
       billing_address_collection: "required",
       metadata: {
