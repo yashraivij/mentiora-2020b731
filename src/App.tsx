@@ -85,7 +85,7 @@ function App() {
                   </ProtectedRoute>
                 } />
 
-                <Route path="/predicted-exam" element={
+                <Route path="/predicted-exam/:subjectId" element={
                   <ProtectedRoute>
                     <PredictedExam />
                   </ProtectedRoute>
