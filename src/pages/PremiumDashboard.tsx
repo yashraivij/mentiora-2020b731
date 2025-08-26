@@ -23,7 +23,7 @@ import { TopicMasteryDisplay } from "@/components/dashboard/TopicMasteryDisplay"
 import { PredictivePerformanceCard } from "@/components/dashboard/PredictivePerformanceCard";
 import { OptimalStudyTimeCard } from "@/components/dashboard/OptimalStudyTimeCard";
 
-import { PredictedQuestionsSection } from "@/components/dashboard/PredictedQuestionsSection";
+import { PremiumPredictedQuestionsSection } from "@/components/dashboard/PremiumPredictedQuestionsSection";
 import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
 
 import { supabase } from "@/integrations/supabase/client";
@@ -1155,7 +1155,7 @@ const PremiumDashboard = () => {
 
 
         {/* Predicted 2026 Questions Section */}
-        <PredictedQuestionsSection />
+        <PremiumPredictedQuestionsSection />
 
         {/* Revision Notebook - Premium Feature */}
         <div className="mb-8">
