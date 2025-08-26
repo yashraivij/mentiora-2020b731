@@ -375,14 +375,14 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
           <div className="flex items-center space-x-6">
             {averageGrade > 0 && (
               <div className="text-center p-3 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl border border-purple-500/20">
-                <div className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent filter blur-md">{averageGrade.toFixed(1)}</div>
+                <div className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">{averageGrade.toFixed(1)}</div>
                 <div className="text-xs text-muted-foreground font-semibold">Avg Grade</div>
               </div>
             )}
             {grade7PlusCount > 0 && (
               <Badge className="bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-600 text-white border-0 px-4 py-2 text-sm font-bold shadow-lg shadow-emerald-500/25 animate-pulse">
                 <Trophy className="h-4 w-4 mr-2 animate-bounce" />
-                <span className="filter blur-md">{grade7PlusCount} Grade 7+ 🎉</span>
+                <span>{grade7PlusCount} Grade 7+ 🎉</span>
               </Badge>
             )}
           </div>
@@ -421,7 +421,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                           )}
                           
                           {/* Enhanced Grade number */}
-                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110 filter blur-md`}>
+                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110`}>
                             {grade.finalGrade}
                           </div>
 
@@ -444,7 +444,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                           {/* Premium percentage indicator */}
                           {grade.finalGrade !== '–' && (
                             <div className="absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1">
-                              <span className="text-xs font-bold text-white filter blur-md">{grade.finalPercentage}%</span>
+                              <span className="text-xs font-bold text-white">{grade.finalPercentage}%</span>
                             </div>
                           )}
                         </div>
@@ -454,7 +454,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                           <div className="text-sm font-bold text-foreground truncate mb-2">{grade.subjectName}</div>
                           {grade.isGrade7Plus && (
                             <div className="mt-2">
-                              <Badge className="bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse filter blur-md">
+                              <Badge className="bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse">
                                 🎯 Target Hit!
                               </Badge>
                             </div>
@@ -490,67 +490,6 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
               ))}
             </div>
 
-            {/* Premium CTA */}
-            <div className="mt-8 relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-emerald-600/20 rounded-3xl blur-xl animate-pulse" />
-              <div className="relative bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 rounded-3xl p-8 text-white shadow-2xl shadow-purple-500/25 border border-white/20 overflow-hidden">
-                {/* Background decorations */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400/30 to-orange-500/30 rounded-full blur-2xl animate-pulse" />
-                <div className="absolute -bottom-16 -left-16 w-24 h-24 bg-gradient-to-tr from-pink-400/30 to-rose-500/30 rounded-full blur-xl animate-bounce" />
-                
-                {/* Floating sparkles */}
-                <div className="absolute top-4 right-8 w-2 h-2 bg-amber-400 rounded-full animate-ping" />
-                <div className="absolute top-12 right-16 w-1 h-1 bg-white rounded-full animate-pulse" />
-                <div className="absolute bottom-8 left-8 w-1.5 h-1.5 bg-emerald-400 rounded-full animate-bounce" />
-                
-                <div className="relative z-10 flex items-center justify-between">
-                  <div className="flex items-center space-x-6">
-                    <div className="relative">
-                      <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-amber-500/50 animate-pulse">
-                        <Crown className="h-8 w-8 text-white drop-shadow-lg" />
-                      </div>
-                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-emerald-400 rounded-full border-2 border-white animate-bounce">
-                        <Sparkles className="h-3 w-3 text-white m-auto mt-0.5" />
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-white drop-shadow-lg mb-2">
-                        🎯 Unlock Your Grade Predictions
-                      </h3>
-                      <p className="text-white/90 text-base font-medium leading-relaxed">
-                        Get crystal-clear insights into your future GCSE results • See exactly which grades you're on track for • Identify areas for improvement before it's too late
-                      </p>
-                      <div className="flex items-center space-x-4 mt-3">
-                        <div className="flex items-center space-x-2 text-white/80 text-sm">
-                          <Target className="h-4 w-4" />
-                          <span>Personalized predictions</span>
-                        </div>
-                        <div className="flex items-center space-x-2 text-white/80 text-sm">
-                          <Zap className="h-4 w-4" />
-                          <span>Real-time updates</span>
-                        </div>
-                        <div className="flex items-center space-x-2 text-white/80 text-sm">
-                          <Trophy className="h-4 w-4" />
-                          <span>Grade 9 tracking</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-end space-y-3">
-                    <button 
-                      onClick={() => window.dispatchEvent(new CustomEvent('openPremiumPaywall'))}
-                      className="bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 border border-white/30 group"
-                    >
-                      <div className="flex items-center space-x-3">
-                        <Zap className="h-8 w-8 group-hover:animate-pulse" />
-                        <span className="text-lg">Upgrade to Premium</span>
-                      </div>
-                    </button>
-                    <p className="text-white/70 text-sm font-medium">See all your predicted grades instantly</p>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             {/* Premium Statistics */}
             <div className="flex flex-wrap gap-4 pt-6 border-t border-gradient-to-r from-purple-500/20 via-blue-500/20 to-emerald-500/20">
