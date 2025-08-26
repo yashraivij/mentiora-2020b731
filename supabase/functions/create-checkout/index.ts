@@ -14,25 +14,43 @@ serve(async (req) => {
 
   try {
     console.log("[CREATE-CHECKOUT] Starting checkout session creation");
-    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
-    const priceId = Deno.env.get("STRIPE_PRICE_ID");
+    
+    // Try multiple secret name variations for development flexibility
+    let stripeKey = Deno.env.get("STRIPE_SECRET_KEY") || 
+                   Deno.env.get("STRIPE_SECRET_KEY_TEST") || 
+                   Deno.env.get("STRIPE_TEST_SECRET_KEY");
+    
+    let priceId = Deno.env.get("STRIPE_PRICE_ID") || 
+                 Deno.env.get("STRIPE_PRODUCT_ID");
     
     console.log("[CREATE-CHECKOUT] Environment check:", {
       hasStripeKey: !!stripeKey,
       hasPriceId: !!priceId,
       stripeKeyLength: stripeKey?.length || 0,
-      priceIdLength: priceId?.length || 0
+      priceIdLength: priceId?.length || 0,
+      availableSecrets: Object.keys(Deno.env.toObject()).filter(key => key.includes('STRIPE'))
     });
     
     if (!stripeKey) {
-      throw new Error("STRIPE_SECRET_KEY not configured");
+      const errorMsg = "STRIPE_SECRET_KEY not found. Available Stripe secrets: " + 
+                      Object.keys(Deno.env.toObject()).filter(key => key.includes('STRIPE')).join(', ');
+      console.error("[CREATE-CHECKOUT] " + errorMsg);
+      throw new Error(errorMsg);
     }
     
     if (!priceId) {
-      throw new Error("STRIPE_PRICE_ID not configured");
+      const errorMsg = "STRIPE_PRICE_ID not found. Available Stripe secrets: " + 
+                      Object.keys(Deno.env.toObject()).filter(key => key.includes('STRIPE')).join(', ');
+      console.error("[CREATE-CHECKOUT] " + errorMsg);
+      throw new Error(errorMsg);
     }
     
-    console.log("[CREATE-CHECKOUT] Using test key:", stripeKey.substring(0, 12) + "...");
+    // Validate Stripe key format
+    if (!stripeKey.startsWith('sk_test_') && !stripeKey.startsWith('sk_live_')) {
+      throw new Error("Invalid Stripe secret key format. Must start with sk_test_ or sk_live_");
+    }
+    
+    console.log("[CREATE-CHECKOUT] Using Stripe key:", stripeKey.substring(0, 12) + "...");
     console.log("[CREATE-CHECKOUT] Using price ID:", priceId);
     const stripe = new Stripe(stripeKey, {
       apiVersion: "2023-10-16",
