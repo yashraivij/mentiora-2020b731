@@ -1151,7 +1151,7 @@ const PremiumDashboard = () => {
 
 
         {/* Predicted GCSE Grades Section */}
-        <PredictedGradesGraph userProgress={userProgress} />
+        <PredictedGradesGraph userProgress={userProgress} isPremium={true} />
 
 
         {/* Predicted 2026 Questions Section */}
