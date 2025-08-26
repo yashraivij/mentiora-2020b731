@@ -10,7 +10,6 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { RefreshCountdown } from "@/components/ui/refresh-countdown";
-import { PremiumPaywall } from "@/components/ui/premium-paywall";
 
 const PremiumPredictedQuestions = () => {
   const navigate = useNavigate();
@@ -19,7 +18,6 @@ const PremiumPredictedQuestions = () => {
   const [completedExams, setCompletedExams] = useState<{[key: string]: any}>({});
   const [loading, setLoading] = useState(true);
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
-  const [showPaywall, setShowPaywall] = useState(false);
 
   useEffect(() => {
     // Ensure page starts at top when navigating here
@@ -68,10 +66,6 @@ const PremiumPredictedQuestions = () => {
 
   const handleSubjectSelect = (subjectId: string) => {
     navigate(`/predicted-exam/${subjectId}`);
-  };
-
-  const handleUpgrade = () => {
-    window.open('https://buy.stripe.com/test_cN23fH5Qu6Rv4Vy8ww', '_blank');
   };
 
   const getSubjectColor = (subjectId: string) => {
@@ -450,12 +444,6 @@ const PremiumPredictedQuestions = () => {
           ))}
         </Tabs>
       </div>
-      
-      <PremiumPaywall 
-        isOpen={showPaywall}
-        onClose={() => setShowPaywall(false)}
-        onUpgrade={handleUpgrade}
-      />
     </div>
   );
 };
