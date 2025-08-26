@@ -77,13 +77,40 @@ const PremiumDashboard = () => {
     
     // FORCE PREMIUM STATUS - ensure premium dashboard never shows free account
     const forcePremiumStatus = () => {
-      // Find any elements that might show "Free Account" and override them
-      const statusElements = document.querySelectorAll('[data-premium-status], .text-xs.font-medium');
-      statusElements.forEach(el => {
+      // Find ALL elements that might show "Free Account" and aggressively override them
+      const allElements = document.querySelectorAll('*');
+      allElements.forEach(el => {
         if (el.textContent?.includes('Free Account')) {
-          console.log('Overriding Free Account text with Premium Active');
-          el.textContent = 'Premium Active';
+          console.log('FORCING Premium Active override on element:', el);
+          // Replace the text content while preserving other elements
+          if (el.childNodes.length === 1 && el.childNodes[0].nodeType === Node.TEXT_NODE) {
+            el.textContent = el.textContent.replace('Free Account', 'Premium Active');
+          } else {
+            // Handle elements with mixed content
+            el.childNodes.forEach(node => {
+              if (node.nodeType === Node.TEXT_NODE && node.textContent?.includes('Free Account')) {
+                node.textContent = node.textContent.replace('Free Account', 'Premium Active');
+              }
+            });
+          }
         }
+      });
+      
+      // Also specifically target common selectors that might show premium status
+      const statusSelectors = [
+        '.text-xs.font-medium',
+        '[data-premium-status]',
+        'span[class*="text-xs"]',
+        'div[class*="flex"][class*="items-center"] span'
+      ];
+      
+      statusSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => {
+          if (el.textContent?.includes('Free Account')) {
+            console.log('Forcing Premium Active via selector:', selector, el);
+            el.textContent = el.textContent.replace('Free Account', 'Premium Active');
+          }
+        });
       });
     };
 
