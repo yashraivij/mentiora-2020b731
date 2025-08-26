@@ -75,8 +75,16 @@ const PredictedQuestions = () => {
   };
 
   const handleSubjectSelect = (subjectId: string) => {
-    // If user came from premium dashboard or is premium, bypass paywall
-    if (isPremium || fromPremiumDashboard) {
+    console.log('handleSubjectSelect Debug:', {
+      isPremium,
+      fromPremiumDashboard,
+      subjectId,
+      userLocation: location.pathname,
+      locationState: location.state
+    });
+    
+    // If user came from premium dashboard, they should have access
+    if (fromPremiumDashboard || isPremium) {
       navigate(`/predicted-exam/${subjectId}`);
     } else {
       // Non-premium users see the paywall
