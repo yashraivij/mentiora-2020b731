@@ -43,8 +43,11 @@ serve(async (req) => {
       });
     }
     
-    // If not found, try alternative names
-    const fallbackStripeKey = stripeKey || Deno.env.get("STRIPE_TEST_SECRET_KEY") || Deno.env.get("STRIPE_SECRET_KEY_TEST");
+    // Use test keys first (which should be properly configured), then fall back to live keys
+    const fallbackStripeKey = Deno.env.get("STRIPE_TEST_SECRET_KEY") || 
+                              Deno.env.get("STRIPE_SECRET_KEY_TEST") || 
+                              Deno.env.get("STRIPE_TEST_SECRET_KEY1") ||
+                              stripeKey;
     const fallbackPriceId = priceId || Deno.env.get("STRIPE_PRODUCT_ID");
     
     // Validate the fallback key too
