@@ -5,7 +5,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
-import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Gamepad2, Settings } from "lucide-react";
+import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCircle, Trophy, Filter, Star, Pin, Lock, Crown, Zap, Brain, Target, Clock, LineChart, Sparkles, Bell, Gamepad2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
@@ -18,9 +18,6 @@ import { WeakTopicsSection } from "@/components/dashboard/WeakTopicsSection";
 import { AOBreakdown } from "@/components/dashboard/AOBreakdown";
 import { PremiumAnalyticsCard } from "@/components/dashboard/PremiumAnalyticsCard";
 import { GoalsSection } from "@/components/dashboard/GoalsSection";
-import { PremiumAnalytics } from "@/components/premium/PremiumAnalytics";
-import { PremiumGate } from "@/components/ui/premium-gate";
-import { PremiumUpgradeTest } from "@/components/premium/PremiumUpgradeTest";
 import { TopicMasteryDisplay } from "@/components/dashboard/TopicMasteryDisplay";
 
 import { PredictivePerformanceCard } from "@/components/dashboard/PredictivePerformanceCard";
@@ -70,20 +67,6 @@ const Dashboard = () => {
   const [celebrationSubject, setCelebrationSubject] = useState('');
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
   const [showPremiumPaywall, setShowPremiumPaywall] = useState(false);
-  
-  // Check for payment success and show success message
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('payment') === 'success') {
-      toast({
-        title: "🎉 Welcome to Premium!",
-        description: "Your premium features are now unlocked. Enjoy your enhanced learning experience!",
-        duration: 5000,
-      });
-      // Clean up the URL
-      window.history.replaceState({}, document.title, '/dashboard');
-    }
-  }, [toast]);
 
   const {
     notification,
@@ -964,9 +947,6 @@ const Dashboard = () => {
               {getStudyStreak() >= 3 && <ColorThemeToggle />}
               {getStudyStreak() >= 7 && <StudyPlaylist isUnlocked={true} />}
               
-              <Button variant="ghost" onClick={() => navigate('/settings')} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
-                <Settings className="h-4 w-4" />
-              </Button>
               <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
                 <LogOut className="h-4 w-4" />
               </Button>
@@ -1220,33 +1200,28 @@ const Dashboard = () => {
                 </div>
               </div>
               
-              <div className="relative">
-                {/* Clear content without blur */}
-                <div>
-                  <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
-                    Revolutionary technology creates <span className="font-semibold text-purple-700 dark:text-purple-300">ultra-clear, Grade 9-level revision notes</span> instantly for every question where you lose marks. Each note is meticulously crafted with key definitions, equations, and premium exam strategies.
-                  </p>
-                  
-                  <div className="grid grid-cols-1 gap-4 mb-6">
-                    <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg">
-                        <CheckCircle className="h-4 w-4 text-white" />
-                      </div>
-                      <span className="font-medium text-gray-800 dark:text-gray-200">Instant premium note generation</span>
-                    </div>
-                    <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center shadow-lg">
-                        <BookOpen className="h-4 w-4 text-white" />
-                      </div>
-                      <span className="font-medium text-gray-800 dark:text-gray-200">Organized by topic</span>
-                    </div>
-                    <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
-                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
-                        <Trophy className="h-4 w-4 text-white" />
-                      </div>
-                      <span className="font-medium text-gray-800 dark:text-gray-200">Exam-focused premium content</span>
-                    </div>
+              <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
+                Revolutionary technology creates <span className="font-semibold text-purple-700 dark:text-purple-300">ultra-clear, Grade 9-level revision notes</span> instantly for every question where you lose marks. Each note is meticulously crafted with key definitions, equations, and premium exam strategies.
+              </p>
+              
+              <div className="grid grid-cols-1 gap-4 mb-6">
+                <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg">
+                    <CheckCircle className="h-4 w-4 text-white" />
                   </div>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">Instant premium note generation</span>
+                </div>
+                <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center shadow-lg">
+                    <BookOpen className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">Organized by topic</span>
+                </div>
+                <div className="flex items-center space-x-3 p-3 bg-white/60 dark:bg-white/10 rounded-xl border border-purple-200/50 dark:border-purple-700/30">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
+                    <Trophy className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">Exam-focused premium content</span>
                 </div>
               </div>
               
@@ -1521,79 +1496,76 @@ const Dashboard = () => {
         </div>
 
 
-        {/* Premium Analytics Coming Soon Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <PremiumAnalyticsCard
-            title="Learning Retention"
-            description="Track how well you retain information over time with spaced repetition analysis"
-            icon={Brain}
-            gradient="from-purple-500 to-pink-600"
-            comingSoon={true}
-          />
-          
-          <PremiumAnalyticsCard
-            title="Learning Velocity"
-            description="Measure and optimize your knowledge acquisition speed"
-            icon={Zap}
-            gradient="from-blue-500 to-cyan-500"
-            comingSoon={true}
-          />
-          
-          <PremiumAnalyticsCard
-            title="Stress Monitor"
-            description="AI-powered stress detection and recommendations for optimal learning"
-            icon={Target}
-            gradient="from-emerald-500 to-teal-600"
-            comingSoon={true}
-          />
-          
-          <PremiumAnalyticsCard
-            title="Concept Mapping"
-            description="Visualize connections between topics and identify knowledge gaps"
-            icon={LineChart}
-            gradient="from-orange-500 to-red-600"
-            comingSoon={true}
-          />
-        </div>
+        {/* Premium Locked Analytics */}
+        <div className="space-y-6">
+          <div className="flex items-center space-x-3 mb-6">
+            <Crown className="h-6 w-6 text-amber-500" />
+            <h3 className="text-2xl font-bold text-foreground">Coming Soon</h3>
+            <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0">
+              Pro Feature
+            </Badge>
+          </div>
 
-        {/* Advanced Analytics Coming Soon Section */}
-        <div className="text-center py-12 mb-8">
-          <div className="flex flex-col items-center space-y-6">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-r from-purple-600 via-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
-              <BarChart3 className="h-10 w-10 text-white" />
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold mb-3 flex items-center justify-center gap-3">
-                <Sparkles className="h-6 w-6 text-purple-500" />
-                Advanced Analytics Coming Soon
-                <Sparkles className="h-6 w-6 text-purple-500" />
-              </h3>
-              <p className="text-muted-foreground max-w-lg mx-auto text-lg">
-                We're working hard to bring you powerful data-driven insights to supercharge your GCSE revision. Stay tuned for updates!
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <PremiumAnalyticsCard
+              title="Learning Retention"
+              description="Track how well you retain information over time with spaced repetition analysis"
+              icon={Brain}
+              gradient="from-purple-500 to-indigo-600"
+              comingSoon={true}
+            />
+            
+            <PremiumAnalyticsCard
+              title="Learning Velocity"
+              description="Measure and optimize your knowledge acquisition speed"
+              icon={Zap}
+              gradient="from-orange-500 to-red-500"
+              comingSoon={true}
+            />
+            
+            <PremiumAnalyticsCard
+              title="Stress Monitor"
+              description="AI-powered stress detection and recommendations for optimal learning"
+              icon={Brain}
+              gradient="from-emerald-500 to-teal-600"
+              comingSoon={true}
+            />
+            
+            <PremiumAnalyticsCard
+              title="Concept Mapping"
+              description="Visualize connections between topics and identify knowledge gaps"
+              icon={Target}
+              gradient="from-pink-500 to-rose-600"
+              comingSoon={true}
+            />
+          </div>
+
+          <div className="text-center py-8">
+            <div className="space-y-4">
+              <div className="flex items-center justify-center space-x-2">
+                <Sparkles className="h-6 w-6 text-violet-500 dark:text-violet-400" />
+                <h4 className="text-xl font-bold text-foreground">Advanced Analytics Coming Soon</h4>
+                <Sparkles className="h-6 w-6 text-violet-500 dark:text-violet-400" />
+              </div>
+              <p className="text-muted-foreground max-w-md mx-auto">
+                We're working hard to bring you powerful data-driven insights to supercharge your GCSE revision. 
+                Stay tuned for updates!
               </p>
+              <Button 
+                variant="outline" 
+                className={`
+                  px-6 py-2 rounded-xl transition-all duration-300 transform
+                  ${isNotifyClicked 
+                    ? 'bg-emerald-100 border-emerald-300 text-emerald-700 scale-105 shadow-lg' 
+                    : 'bg-white/80 backdrop-blur-sm border-violet-200 text-violet-700 hover:bg-violet-50 hover:border-violet-300'
+                  }
+                `}
+                onClick={handleNotifyClick}
+              >
+                {isNotifyClicked ? <CheckCircle className="h-4 w-4 mr-2" /> : <Bell className="h-4 w-4 mr-2" />}
+                {isNotifyClicked ? 'We\'ll Notify You!' : 'Notify Me When Ready'}
+              </Button>
             </div>
-            <Button 
-              variant="outline" 
-              className={`mt-6 px-8 py-3 text-lg font-semibold transition-all duration-300 ${
-                isNotifyClicked 
-                  ? 'border-green-500 text-green-600 bg-green-50 dark:bg-green-950 hover:bg-green-100 dark:hover:bg-green-900' 
-                  : 'border-purple-500 text-purple-600 bg-purple-50 dark:bg-purple-950 hover:bg-purple-100 dark:hover:bg-purple-900'
-              }`}
-              onClick={() => {
-                setIsNotifyClicked(true);
-                toast({
-                  title: "Thanks for your interest!",
-                  description: "We'll notify you as soon as advanced analytics are ready.",
-                });
-                // Reset color after 3 seconds
-                setTimeout(() => {
-                  setIsNotifyClicked(false);
-                }, 3000);
-              }}
-            >
-              <Bell className="h-5 w-5 mr-2" />
-              {isNotifyClicked ? "We'll Notify You!" : "Notify Me When Ready"}
-            </Button>
           </div>
         </div>
       </div>
@@ -1661,10 +1633,8 @@ const Dashboard = () => {
         isOpen={showPremiumPaywall}
         onClose={() => setShowPremiumPaywall(false)}
         onUpgrade={() => {
-          // Open Stripe checkout for premium upgrade
-          const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
-          const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
-          window.open(stripeUrl, '_blank');
+          // Handle upgrade logic here
+          console.log('Upgrade to premium clicked');
           setShowPremiumPaywall(false);
         }}
       />

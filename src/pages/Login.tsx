@@ -7,12 +7,10 @@ import { Label } from "@/components/ui/label";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [forgotPasswordLoading, setForgotPasswordLoading] = useState(false);
   const { login, isLoading } = useAuth();
   const navigate = useNavigate();
 
@@ -31,36 +29,6 @@ const Login = () => {
       navigate("/dashboard");
     } else {
       toast.error("Invalid email or password");
-    }
-  };
-
-  const handleForgotPassword = async () => {
-    if (!email) {
-      toast.error("Please enter your email address first");
-      return;
-    }
-
-    setForgotPasswordLoading(true);
-    
-    try {
-      // Use the correct Lovable preview URL format
-      const redirectUrl = `${window.location.protocol}//${window.location.host}/reset-password`;
-      
-      console.log('Reset password redirect URL:', redirectUrl);
-      
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: redirectUrl
-      });
-
-      if (error) {
-        toast.error(error.message);
-      } else {
-        toast.success("Password reset email sent! Check your inbox.");
-      }
-    } catch (error) {
-      toast.error("An error occurred while sending the reset email");
-    } finally {
-      setForgotPasswordLoading(false);
     }
   };
 
@@ -114,16 +82,6 @@ const Login = () => {
               {isLoading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
-          <div className="mt-3 text-center">
-            <button
-              type="button"
-              onClick={handleForgotPassword}
-              disabled={forgotPasswordLoading}
-              className="text-sm text-blue-600 hover:underline disabled:opacity-50"
-            >
-              {forgotPasswordLoading ? "Sending..." : "Forgot your password?"}
-            </button>
-          </div>
           <div className="mt-4 text-center">
             <p className="text-sm text-slate-600">
               Don't have an account?{" "}

@@ -9,8 +9,7 @@ export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
 
   const handleStartPredicted = () => {
-    // Pass state indicating this came from premium dashboard to bypass paywall
-    navigate('/predicted-questions', { state: { fromPremiumDashboard: true } });
+    navigate('/predicted-questions');
   };
 
   return (

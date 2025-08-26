@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BookOpen, Clock, Crown, Target, Sparkles, Rocket, Zap, CheckCircle, RotateCcw } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -11,23 +11,15 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { RefreshCountdown } from "@/components/ui/refresh-countdown";
 import { PremiumPaywall } from "@/components/ui/premium-paywall";
-import { usePremium } from "@/hooks/usePremium";
-import { useAuth } from "@/contexts/AuthContext";
 
 const PredictedQuestions = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const { toast } = useToast();
-  const { isPremium, isLoading: premiumLoading } = usePremium();
-  const { user } = useAuth();
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [completedExams, setCompletedExams] = useState<{[key: string]: any}>({});
   const [loading, setLoading] = useState(true);
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
   const [showPaywall, setShowPaywall] = useState(false);
-  
-  // Check if user came from premium dashboard
-  const fromPremiumDashboard = location.state?.fromPremiumDashboard;
 
   useEffect(() => {
     // Ensure page starts at top when navigating here
@@ -75,27 +67,11 @@ const PredictedQuestions = () => {
   };
 
   const handleSubjectSelect = (subjectId: string) => {
-    console.log('handleSubjectSelect Debug:', {
-      isPremium,
-      fromPremiumDashboard,
-      subjectId,
-      userLocation: location.pathname,
-      locationState: location.state
-    });
-    
-    // If user came from premium dashboard, they should have access
-    if (fromPremiumDashboard || isPremium) {
-      navigate(`/predicted-exam/${subjectId}`);
-    } else {
-      // Non-premium users see the paywall
-      setShowPaywall(true);
-    }
+    setShowPaywall(true);
   };
 
   const handleUpgrade = () => {
-    const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
-    const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
-    window.open(stripeUrl, '_blank');
+    window.open('https://buy.stripe.com/test_cN23fH5Qu6Rv4Vy8ww', '_blank');
   };
 
   const getSubjectColor = (subjectId: string) => {
@@ -278,7 +254,7 @@ const PredictedQuestions = () => {
                      className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
                      onClick={(e) => {
                        e.stopPropagation();
-                       handleSubjectSelect(subject.id);
+                       setShowPaywall(true);
                      }}
                    >
                      <RotateCcw className="h-4 w-4 mr-2" />
@@ -475,14 +451,11 @@ const PredictedQuestions = () => {
         </Tabs>
       </div>
       
-      {/* Only show paywall if not from premium dashboard */}
-      {!fromPremiumDashboard && (
-        <PremiumPaywall 
-          isOpen={showPaywall}
-          onClose={() => setShowPaywall(false)}
-          onUpgrade={handleUpgrade}
-        />
-      )}
+      <PremiumPaywall 
+        isOpen={showPaywall}
+        onClose={() => setShowPaywall(false)}
+        onUpgrade={handleUpgrade}
+      />
     </div>
   );
 };

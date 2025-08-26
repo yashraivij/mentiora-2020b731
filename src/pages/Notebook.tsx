@@ -5,7 +5,6 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/contexts/AuthContext";
-import { usePremium } from "@/hooks/usePremium";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BookOpen, Crown, Brain, TrendingUp, Star, Filter, Calendar } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -37,10 +36,7 @@ interface NotebookEntryData {
 
 const Notebook = () => {
   const { user } = useAuth();
-  const { isPremium } = usePremium();
   const navigate = useNavigate();
-  
-  console.log('Notebook - isPremium:', isPremium);
   
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -216,7 +212,7 @@ const Notebook = () => {
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <BookOpen className="h-6 w-6 text-white" />
                 </div>
-                <div className={`text-3xl font-bold bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-300 dark:to-indigo-300 bg-clip-text text-transparent mb-1 ${!isPremium ? 'filter blur-md' : ''}`}>{stats.totalEntries}</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-300 dark:to-indigo-300 bg-clip-text text-transparent mb-1 filter blur-md">{stats.totalEntries}</div>
                 <div className="text-sm font-medium text-blue-600 dark:text-blue-400">Total Notes</div>
                 <div className="text-xs text-blue-500/70 dark:text-blue-400/70 mt-1">Smart Summaries</div>
               </CardContent>
@@ -227,7 +223,7 @@ const Notebook = () => {
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <TrendingUp className="h-6 w-6 text-white" />
                 </div>
-                <div className={`text-3xl font-bold bg-gradient-to-r from-emerald-700 to-teal-700 dark:from-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-1 ${!isPremium ? 'filter blur-md' : ''}`}>{stats.timeSavedHours}h</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-emerald-700 to-teal-700 dark:from-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-1 filter blur-md">{stats.timeSavedHours}h</div>
                 <div className="text-sm font-medium text-emerald-600 dark:text-emerald-400">Time Saved</div>
                 <div className="text-xs text-emerald-500/70 dark:text-emerald-400/70 mt-1">Auto Notes</div>
               </CardContent>
@@ -238,7 +234,7 @@ const Notebook = () => {
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <Brain className="h-6 w-6 text-white" />
                 </div>
-                <div className={`text-3xl font-bold bg-gradient-to-r from-violet-700 to-purple-700 dark:from-violet-300 dark:to-purple-300 bg-clip-text text-transparent mb-1 ${!isPremium ? 'filter blur-md' : ''}`}>{stats.subjectsWithNotes}</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-violet-700 to-purple-700 dark:from-violet-300 dark:to-purple-300 bg-clip-text text-transparent mb-1 filter blur-md">{stats.subjectsWithNotes}</div>
                 <div className="text-sm font-medium text-violet-600 dark:text-violet-400">Subjects</div>
                 <div className="text-xs text-violet-500/70 dark:text-violet-400/70 mt-1">Covered</div>
               </CardContent>
@@ -305,7 +301,7 @@ const Notebook = () => {
           <div className="space-y-8">
             {sortedEntries.map((entry, index) => (
               <div key={entry.id} className="transform hover:scale-[1.02] transition-all duration-200">
-                <NotebookEntry entry={entry} onUpgradeClick={isPremium ? undefined : () => setShowPaywall(true)} />
+                <NotebookEntry entry={entry} onUpgradeClick={() => setShowPaywall(true)} />
               </div>
             ))}
           </div>
@@ -338,12 +334,8 @@ const Notebook = () => {
         isOpen={showPaywall}
         onClose={() => setShowPaywall(false)}
         onUpgrade={() => {
-          // Open Stripe checkout for premium upgrade
-          const { user } = useAuth();
-          const baseUrl = 'https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202';
-          const stripeUrl = user?.id ? `${baseUrl}?client_reference_id=${user.id}` : baseUrl;
-          window.open(stripeUrl, '_blank');
           setShowPaywall(false);
+          toast.success("Redirecting to premium upgrade...");
         }}
       />
     </div>

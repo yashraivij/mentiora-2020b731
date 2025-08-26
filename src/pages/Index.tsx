@@ -6,7 +6,6 @@ import { useAuth } from "@/contexts/AuthContext";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { DynamicTestimonials } from "@/components/ui/dynamic-testimonials";
-import { PricingSection } from "@/components/pricing/PricingSection";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -383,7 +382,6 @@ const Index = () => {
           </motion.div>
         </motion.div>
 
-        {/* Premium Features Section */}
         <motion.div 
           ref={featuresRef}
           className="mb-32"
@@ -404,55 +402,9 @@ const Index = () => {
             <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
               Everything You Need to <span className="bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">Ace Your GCSEs</span>
             </h3>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Advanced technology that adapts to your learning style and accelerates your progress.
             </p>
-            
-            {/* Premium Upgrade Button */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="mb-16"
-            >
-              <Button 
-                onClick={() => {
-                  const handleUpgrade = async () => {
-                    try {
-                      const { supabase } = await import('@/integrations/supabase/client');
-                      const { data, error } = await supabase.functions.invoke('create-checkout', {
-                        headers: user ? {
-                          Authorization: `Bearer ${(await supabase.auth.getSession()).data.session?.access_token}`
-                        } : {}
-                      });
-
-                      if (error) {
-                        console.error('Error creating checkout session:', error);
-                        return;
-                      }
-
-                      if (data?.error) {
-                        console.error('Stripe configuration error:', data.error);
-                        return;
-                      }
-
-                      if (data?.url) {
-                        window.open(data.url, '_blank');
-                      } else {
-                        console.error('No checkout URL received:', data);
-                      }
-                    } catch (error) {
-                      console.error('Error:', error);
-                    }
-                  };
-                  handleUpgrade();
-                }} 
-                className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-violet-500/25 transition-all duration-300 rounded-2xl group"
-              >
-                <Crown className="mr-3 h-6 w-6" />
-                Upgrade to Premium Now
-                <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
           </motion.div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
@@ -496,8 +448,6 @@ const Index = () => {
           </div>
         </motion.div>
 
-        {/* Pricing Section */}
-        <PricingSection />
 
         {/* How It Works - Simplified */}
         <div className="mb-32">

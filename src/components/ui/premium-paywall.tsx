@@ -2,10 +2,6 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Crown, Zap, TrendingUp, Clock, Star, CheckCircle, Target, BookOpen, Award, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useAuth } from '@/contexts/AuthContext';
-import { usePremium } from '@/hooks/usePremium';
-import { supabase } from '@/integrations/supabase/client';
-import { stripePromise } from '@/lib/stripe';
 
 interface PremiumPaywallProps {
   isOpen: boolean;
@@ -14,60 +10,6 @@ interface PremiumPaywallProps {
 }
 
 export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose, onUpgrade }) => {
-  const { user } = useAuth();
-  const { isPremium } = usePremium();
-
-  // Don't show paywall for premium users
-  if (isPremium) {
-    return null;
-  }
-  
-  const handleUpgradeClick = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log('Premium paywall - Start Free Trial clicked');
-    try {
-      console.log('User:', user);
-      const { data, error } = await supabase.functions.invoke('create-checkout', {
-        headers: user ? {
-          Authorization: `Bearer ${(await supabase.auth.getSession()).data.session?.access_token}`
-        } : {}
-      });
-
-      console.log('Checkout response:', { data, error });
-
-      if (error) {
-        console.error('Error creating checkout session:', error);
-        return;
-      }
-
-      if (data?.error) {
-        console.error('Stripe configuration error:', data.error);
-        return;
-      }
-
-      if (data?.url) {
-        console.log('Redirecting to Stripe checkout URL:', data.url);
-        window.location.href = data.url;
-      } else if (data?.id) {
-        console.log('Redirecting to Stripe checkout with session ID:', data.id);
-        // Use Stripe.js to redirect to checkout
-        const stripe = await stripePromise;
-        if (stripe) {
-          const { error: stripeError } = await stripe.redirectToCheckout({
-            sessionId: data.id,
-          });
-          if (stripeError) {
-            console.error('Stripe redirect error:', stripeError);
-          }
-        }
-      } else {
-        console.error('No checkout URL or session ID received:', data);
-      }
-    } catch (error) {
-      console.error('Unexpected error:', error);
-    }
-  };
   const benefits = [
     {
       icon: TrendingUp,
@@ -204,8 +146,8 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                 <div className="text-amber-400 text-sm font-medium">Save 50% - First 3 months</div>
                 <div className="text-white/60 text-xs mt-2">Less than a single tutoring session</div>
                 <Button
-                  onClick={handleUpgradeClick}
-                  className="w-full mt-4 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-semibold py-2 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 relative z-10 cursor-pointer"
+                  onClick={() => window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank')}
+                  className="w-full mt-4 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-semibold py-2 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                 >
                   Start Free Trial
                 </Button>
@@ -274,7 +216,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
             <div className="px-8 pb-8">
               <div className="space-y-4">
                 <Button
-                  onClick={handleUpgradeClick}
+                  onClick={() => window.open('https://buy.stripe.com/3cI28q8og4VsfiE0yI8N202', '_blank')}
                   className="w-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 text-lg"
                 >
                   <div className="flex items-center justify-center space-x-3">
@@ -300,7 +242,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
             </div>
 
             {/* Floating elements */}
-            <div className="absolute top-1/4 left-4 opacity-20 pointer-events-none">
+            <div className="absolute top-1/4 left-4 opacity-20">
               <motion.div
                 animate={{ y: [-10, 10, -10], rotate: [0, 5, 0] }}
                 transition={{ duration: 4, repeat: Infinity }}
@@ -308,7 +250,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                 <Award className="h-8 w-8 text-amber-400" />
               </motion.div>
             </div>
-            <div className="absolute top-1/3 right-4 opacity-20 pointer-events-none">
+            <div className="absolute top-1/3 right-4 opacity-20">
               <motion.div
                 animate={{ y: [10, -10, 10], rotate: [0, -5, 0] }}
                 transition={{ duration: 3.5, repeat: Infinity }}
