@@ -16,7 +16,7 @@ serve(async (req) => {
     console.log("[CREATE-CHECKOUT] Starting checkout session creation");
     
     // Get Stripe keys
-    const stripeSecretKey = Deno.env.get("STRIPE_SECRET_KEY");
+    const stripeSecretKey = Deno.env.get("STRIPE_SECRET_KEY") || Deno.env.get("STRIPE_TEST_SECRET_KEY");
     const stripePriceId = Deno.env.get("STRIPE_PRICE_ID");
     
     console.log("[CREATE-CHECKOUT] Config check:", {
