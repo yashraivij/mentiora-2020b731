@@ -1115,7 +1115,7 @@ const PremiumDashboard = () => {
 
         {/* Premium Analytics Section - FULLY UNLOCKED */}
         <div className="mb-6">
-          <Card className="group border-0 bg-gradient-to-br from-white via-purple-50/40 to-pink-50/40 dark:from-slate-900 dark:via-purple-950/20 dark:to-pink-950/20 shadow-xl hover:shadow-2xl transition-all duration-500 backdrop-blur-sm transform hover:scale-[1.01] relative overflow-hidden">
+          <Card className="group border-0 bg-gradient-to-br from-white via-purple-50/40 to-pink-50/40 dark:from-slate-900 dark:via-purple-950/20 dark:to-pink-950/20 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-[1.01] relative overflow-hidden">
             {/* Premium glow effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-400/10 via-pink-400/10 to-indigo-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
@@ -1128,7 +1128,7 @@ const PremiumDashboard = () => {
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center space-x-4">
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-600 via-pink-600 to-indigo-600 flex items-center justify-center shadow-2xl shadow-purple-500/30 relative overflow-hidden">
-                    <div className="absolute inset-2 rounded-xl bg-white/20 backdrop-blur-sm" />
+                    <div className="absolute inset-2 rounded-xl bg-white/20" />
                     <Brain className="h-8 w-8 text-white relative z-10 drop-shadow-lg" />
                   </div>
                   <div>
