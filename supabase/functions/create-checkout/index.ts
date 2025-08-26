@@ -15,9 +15,11 @@ serve(async (req) => {
   try {
     console.log("[CREATE-CHECKOUT] Starting checkout session creation");
     
-    // Get Stripe keys - try test key first for development
-    const stripeSecretKey = Deno.env.get("STRIPE_TEST_SECRET_KEY") || Deno.env.get("STRIPE_SECRET_KEY");
-    const stripePriceId = Deno.env.get("STRIPE_PRICE_ID");
+    // Get Stripe keys - try all possible secret key names
+    const stripeSecretKey = Deno.env.get("STRIPE_SECRET_KEY") || 
+                           Deno.env.get("STRIPE_TEST_SECRET_KEY") || 
+                           Deno.env.get("STRIPE_SECRET_KEY_TEST");
+    const stripePriceId = Deno.env.get("STRIPE_PRICE_ID") || Deno.env.get("STRIPE_PRODUCT_ID");
     
     console.log("[CREATE-CHECKOUT] Config check:", {
       secretKeyFound: !!stripeSecretKey,
@@ -28,7 +30,7 @@ serve(async (req) => {
     // Validate Stripe secret key
     if (!stripeSecretKey) {
       return new Response(JSON.stringify({ 
-        error: "Stripe secret key not configured"
+        error: "Stripe secret key not configured - please set STRIPE_SECRET_KEY or STRIPE_TEST_SECRET_KEY"
       }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,
@@ -37,21 +39,33 @@ serve(async (req) => {
     
     if (!stripeSecretKey.startsWith('sk_')) {
       return new Response(JSON.stringify({ 
-        error: "Invalid Stripe secret key format"
+        error: `Invalid Stripe secret key format - got ${stripeSecretKey.substring(0, 12)}... but expected sk_test_ or sk_live_`
       }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,
       });
     }
     
-    // Validate price ID
-    if (!stripePriceId) {
-      return new Response(JSON.stringify({ 
-        error: "Stripe price ID not configured"
-      }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 500,
-      });
+    // If no price ID, create a default subscription price
+    let priceConfig;
+    if (stripePriceId) {
+      priceConfig = { price: stripePriceId, quantity: 1 };
+    } else {
+      // Create price on the fly if no price ID is configured
+      priceConfig = {
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: 'Premium Subscription',
+            description: 'Access to all premium features'
+          },
+          unit_amount: 999, // $9.99
+          recurring: {
+            interval: 'month'
+          }
+        },
+        quantity: 1
+      };
     }
     
     console.log("[CREATE-CHECKOUT] Using keys - Stripe:", stripeSecretKey.substring(0, 12) + "...", "Price:", stripePriceId);
@@ -100,12 +114,7 @@ serve(async (req) => {
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       customer_email: customerId ? undefined : customerEmail,
-      line_items: [
-        {
-          price: stripePriceId,
-          quantity: 1,
-        },
-      ],
+      line_items: [priceConfig],
       mode: "subscription",
       success_url: `${origin}/payment-success`,
       cancel_url: `${origin}/`,

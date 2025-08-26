@@ -31,7 +31,7 @@ export const UpgradeButton = ({
 
       if (error) {
         console.error('Error creating checkout session:', error);
-        alert(`Payment setup error: ${error.message}`);
+        alert(`Payment setup error: ${error.message || error.toString()}`);
         return;
       }
 
@@ -41,8 +41,11 @@ export const UpgradeButton = ({
         return;
       }
 
-      if (data?.id) {
-        // Use Stripe.js to redirect to checkout
+      if (data?.url) {
+        // Open Stripe checkout in a new tab
+        window.open(data.url, '_blank');
+      } else if (data?.id) {
+        // Fallback: Use Stripe.js to redirect to checkout
         const stripe = await stripePromise;
         if (stripe) {
           const { error: stripeError } = await stripe.redirectToCheckout({
@@ -54,8 +57,8 @@ export const UpgradeButton = ({
           }
         }
       } else {
-        console.error('No session ID received');
-        alert('No session ID received. Please try again.');
+        console.error('No session URL or ID received:', data);
+        alert('Payment system error: No checkout session created. Please try again.');
       }
     } catch (error) {
       console.error('Error:', error);

@@ -40,7 +40,16 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
         return;
       }
 
-      if (data?.id) {
+      if (data?.error) {
+        console.error('Stripe configuration error:', data.error);
+        alert(`Stripe configuration error: ${data.error}`);
+        return;
+      }
+
+      if (data?.url) {
+        console.log('Opening Stripe checkout URL:', data.url);
+        window.open(data.url, '_blank');
+      } else if (data?.id) {
         console.log('Redirecting to Stripe checkout with session ID:', data.id);
         // Use Stripe.js to redirect to checkout
         const stripe = await stripePromise;
@@ -54,8 +63,8 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
           }
         }
       } else {
-        console.error('No session ID returned');
-        alert('Failed to create checkout session');
+        console.error('No checkout URL or session ID received:', data);
+        alert('Payment system error. Please try again.');
       }
     } catch (error) {
       console.error('Unexpected error:', error);

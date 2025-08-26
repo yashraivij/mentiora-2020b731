@@ -430,8 +430,15 @@ const Index = () => {
                         return;
                       }
 
+                      if (data?.error) {
+                        console.error('Stripe configuration error:', data.error);
+                        return;
+                      }
+
                       if (data?.url) {
-                        window.location.href = data.url;
+                        window.open(data.url, '_blank');
+                      } else {
+                        console.error('No checkout URL received:', data);
                       }
                     } catch (error) {
                       console.error('Error:', error);

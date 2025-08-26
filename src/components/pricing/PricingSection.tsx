@@ -23,14 +23,23 @@ export const PricingSection = () => {
         return;
       }
 
-      if (data?.id) {
-        // Use Stripe.js to redirect to checkout
+      if (data?.error) {
+        console.error('Stripe configuration error:', data.error);
+        return;
+      }
+
+      if (data?.url) {
+        window.open(data.url, '_blank');
+      } else if (data?.id) {
+        // Fallback: Use Stripe.js to redirect to checkout
         const stripe = await stripePromise;
         if (stripe) {
           await stripe.redirectToCheckout({
             sessionId: data.id,
           });
         }
+      } else {
+        console.error('No checkout URL or session ID received:', data);
       }
     } catch (error) {
       console.error('Error:', error);
