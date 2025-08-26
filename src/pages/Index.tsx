@@ -6,7 +6,6 @@ import { useAuth } from "@/contexts/AuthContext";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { DynamicTestimonials } from "@/components/ui/dynamic-testimonials";
-import { PricingSection } from "@/components/pricing/PricingSection";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -470,8 +469,6 @@ const Index = () => {
           </div>
         </motion.div>
 
-        {/* Pricing Section */}
-        <PricingSection />
 
         {/* How It Works - Simplified */}
         <div className="mb-32">
