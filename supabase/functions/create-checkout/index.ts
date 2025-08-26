@@ -15,44 +15,52 @@ serve(async (req) => {
   try {
     console.log("[CREATE-CHECKOUT] Starting checkout session creation");
     
-    // Try multiple secret name variations for development flexibility
-    let stripeKey = Deno.env.get("STRIPE_SECRET_KEY") || 
-                   Deno.env.get("STRIPE_SECRET_KEY_TEST") || 
-                   Deno.env.get("STRIPE_TEST_SECRET_KEY");
+    // Debug: List all available environment variables
+    const allEnvKeys = Object.keys(Deno.env.toObject());
+    console.log("[CREATE-CHECKOUT] All environment variables:", allEnvKeys);
+    console.log("[CREATE-CHECKOUT] Stripe-related variables:", allEnvKeys.filter(key => key.includes('STRIPE')));
     
-    let priceId = Deno.env.get("STRIPE_PRICE_ID") || 
-                 Deno.env.get("STRIPE_PRODUCT_ID");
+    // Try to get secrets with exact names from Supabase secrets
+    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
+    const priceId = Deno.env.get("STRIPE_PRICE_ID");
     
-    console.log("[CREATE-CHECKOUT] Environment check:", {
-      hasStripeKey: !!stripeKey,
-      hasPriceId: !!priceId,
-      stripeKeyLength: stripeKey?.length || 0,
-      priceIdLength: priceId?.length || 0,
-      availableSecrets: Object.keys(Deno.env.toObject()).filter(key => key.includes('STRIPE'))
+    console.log("[CREATE-CHECKOUT] Direct secret access:", {
+      stripeKeyFound: !!stripeKey,
+      priceIdFound: !!priceId,
+      stripeKeyValue: stripeKey ? stripeKey.substring(0, 7) + "..." : "null",
+      priceIdValue: priceId ? priceId.substring(0, 10) + "..." : "null"
     });
     
-    if (!stripeKey) {
-      const errorMsg = "STRIPE_SECRET_KEY not found. Available Stripe secrets: " + 
-                      Object.keys(Deno.env.toObject()).filter(key => key.includes('STRIPE')).join(', ');
-      console.error("[CREATE-CHECKOUT] " + errorMsg);
-      throw new Error(errorMsg);
+    // If not found, try alternative names
+    const fallbackStripeKey = stripeKey || Deno.env.get("STRIPE_TEST_SECRET_KEY") || Deno.env.get("STRIPE_SECRET_KEY_TEST");
+    const fallbackPriceId = priceId || Deno.env.get("STRIPE_PRODUCT_ID");
+    
+    if (!fallbackStripeKey) {
+      const availableKeys = allEnvKeys.filter(key => key.includes('STRIPE'));
+      return new Response(JSON.stringify({ 
+        error: "Stripe secret key not found",
+        details: `Available Stripe keys: ${availableKeys.join(', ')}`,
+        help: "Please ensure STRIPE_SECRET_KEY is set in Supabase Edge Function secrets."
+      }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500,
+      });
     }
     
-    if (!priceId) {
-      const errorMsg = "STRIPE_PRICE_ID not found. Available Stripe secrets: " + 
-                      Object.keys(Deno.env.toObject()).filter(key => key.includes('STRIPE')).join(', ');
-      console.error("[CREATE-CHECKOUT] " + errorMsg);
-      throw new Error(errorMsg);
+    if (!fallbackPriceId) {
+      const availableKeys = allEnvKeys.filter(key => key.includes('STRIPE'));
+      return new Response(JSON.stringify({ 
+        error: "Stripe price ID not found",
+        details: `Available Stripe keys: ${availableKeys.join(', ')}`,
+        help: "Please ensure STRIPE_PRICE_ID is set in Supabase Edge Function secrets."
+      }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500,
+      });
     }
     
-    // Validate Stripe key format
-    if (!stripeKey.startsWith('sk_test_') && !stripeKey.startsWith('sk_live_')) {
-      throw new Error("Invalid Stripe secret key format. Must start with sk_test_ or sk_live_");
-    }
-    
-    console.log("[CREATE-CHECKOUT] Using Stripe key:", stripeKey.substring(0, 12) + "...");
-    console.log("[CREATE-CHECKOUT] Using price ID:", priceId);
-    const stripe = new Stripe(stripeKey, {
+    console.log("[CREATE-CHECKOUT] Using keys - Stripe:", fallbackStripeKey.substring(0, 12) + "...", "Price:", fallbackPriceId);
+    const stripe = new Stripe(fallbackStripeKey, {
       apiVersion: "2023-10-16",
     });
 
@@ -99,7 +107,7 @@ serve(async (req) => {
       customer_email: customerId ? undefined : customerEmail,
       line_items: [
         {
-          price: priceId,
+          price: fallbackPriceId,
           quantity: 1,
         },
       ],
