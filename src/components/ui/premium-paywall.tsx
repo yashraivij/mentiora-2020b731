@@ -19,6 +19,11 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
   const [isLoading, setIsLoading] = useState(false);
   const [isCanceling, setIsCanceling] = useState(false);
   
+  // Don't show paywall to premium users
+  if (isPremium) {
+    return null;
+  }
+  
   const handleUpgradeClick = async () => {
     if (!user) {
       toast.error('Please log in to upgrade to Premium');
