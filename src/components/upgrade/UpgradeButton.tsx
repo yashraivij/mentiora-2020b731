@@ -31,13 +31,11 @@ export const UpgradeButton = ({
 
       if (error) {
         console.error('Error creating checkout session:', error);
-        alert(`Payment setup error: ${error.message || error.toString()}`);
         return;
       }
 
       if (data?.error) {
         console.error('Stripe configuration error:', data.error);
-        alert(`Stripe configuration error: ${data.error}`);
         return;
       }
 
@@ -53,16 +51,13 @@ export const UpgradeButton = ({
           });
           if (stripeError) {
             console.error('Stripe redirect error:', stripeError);
-            alert(`Stripe redirect error: ${stripeError.message}`);
           }
         }
       } else {
         console.error('No session URL or ID received:', data);
-        alert('Payment system error: No checkout session created. Please try again.');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert(`An error occurred: ${error.message}`);
     }
   };
 

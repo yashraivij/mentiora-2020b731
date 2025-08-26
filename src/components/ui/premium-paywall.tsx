@@ -36,13 +36,11 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
 
       if (error) {
         console.error('Error creating checkout session:', error);
-        alert(`Error: ${error.message}`);
         return;
       }
 
       if (data?.error) {
         console.error('Stripe configuration error:', data.error);
-        alert(`Stripe configuration error: ${data.error}`);
         return;
       }
 
@@ -59,16 +57,13 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
           });
           if (stripeError) {
             console.error('Stripe redirect error:', stripeError);
-            alert(`Stripe redirect error: ${stripeError.message}`);
           }
         }
       } else {
         console.error('No checkout URL or session ID received:', data);
-        alert('Payment system error. Please try again.');
       }
     } catch (error) {
       console.error('Unexpected error:', error);
-      alert(`Unexpected error: ${error}`);
     }
   };
   const benefits = [
