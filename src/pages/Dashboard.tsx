@@ -1221,8 +1221,8 @@ const Dashboard = () => {
               </div>
               
               <div className="relative">
-                {/* Always blurred content - even for premium users as per user requirements */}
-                <div className="filter blur-md">
+                {/* Clear content without blur */}
+                <div>
                   <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
                     Revolutionary technology creates <span className="font-semibold text-purple-700 dark:text-purple-300">ultra-clear, Grade 9-level revision notes</span> instantly for every question where you lose marks. Each note is meticulously crafted with key definitions, equations, and premium exam strategies.
                   </p>
@@ -1246,16 +1246,6 @@ const Dashboard = () => {
                       </div>
                       <span className="font-medium text-gray-800 dark:text-gray-200">Exam-focused premium content</span>
                     </div>
-                  </div>
-                </div>
-                
-                {/* Overlay message for blurred content */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-lg px-4 py-2 border border-purple-200 dark:border-purple-700">
-                    <p className="text-sm font-medium text-purple-700 dark:text-purple-300 flex items-center space-x-2">
-                      <Lock className="h-4 w-4" />
-                      <span>Notes preview - Click to access full notebook</span>
-                    </p>
                   </div>
                 </div>
               </div>
