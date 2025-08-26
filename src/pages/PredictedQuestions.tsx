@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ArrowLeft, BookOpen, Clock, Crown, Target, Sparkles, Rocket, Zap, CheckCircle, RotateCcw } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -16,6 +16,7 @@ import { useAuth } from "@/contexts/AuthContext";
 
 const PredictedQuestions = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
   const { isPremium, isLoading: premiumLoading } = usePremium();
   const { user } = useAuth();
@@ -24,6 +25,9 @@ const PredictedQuestions = () => {
   const [loading, setLoading] = useState(true);
   const [selectedExamBoard, setSelectedExamBoard] = useState('aqa');
   const [showPaywall, setShowPaywall] = useState(false);
+  
+  // Check if user came from premium dashboard
+  const fromPremiumDashboard = location.state?.fromPremiumDashboard;
 
   useEffect(() => {
     // Ensure page starts at top when navigating here
@@ -71,12 +75,8 @@ const PredictedQuestions = () => {
   };
 
   const handleSubjectSelect = (subjectId: string) => {
-    // On premium dashboard, all features are unlocked - bypass paywall
-    const currentPath = window.location.pathname;
-    const isFromPremiumDashboard = currentPath.includes('/premium') || document.referrer.includes('/premium-dashboard');
-    
-    if (isPremium || isFromPremiumDashboard) {
-      // Premium users or premium dashboard context can go directly to the exam
+    // If user came from premium dashboard or is premium, bypass paywall
+    if (isPremium || fromPremiumDashboard) {
       navigate(`/predicted-exam/${subjectId}`);
     } else {
       // Non-premium users see the paywall
@@ -467,22 +467,14 @@ const PredictedQuestions = () => {
         </Tabs>
       </div>
       
-      {/* Don't show paywall on premium dashboard */}
-      {(() => {
-        const currentPath = window.location.pathname;
-        const isFromPremiumDashboard = currentPath.includes('/premium') || document.referrer.includes('/premium-dashboard');
-        
-        if (!isFromPremiumDashboard) {
-          return (
-            <PremiumPaywall 
-              isOpen={showPaywall}
-              onClose={() => setShowPaywall(false)}
-              onUpgrade={handleUpgrade}
-            />
-          );
-        }
-        return null;
-      })()}
+      {/* Only show paywall if not from premium dashboard */}
+      {!fromPremiumDashboard && (
+        <PremiumPaywall 
+          isOpen={showPaywall}
+          onClose={() => setShowPaywall(false)}
+          onUpgrade={handleUpgrade}
+        />
+      )}
     </div>
   );
 };
