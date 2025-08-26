@@ -68,18 +68,40 @@ const PremiumDashboard = () => {
   const [celebrationSubject, setCelebrationSubject] = useState('');
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
 
-  // Comprehensive premium dashboard tracking - runs on every render
+  // Force premium dashboard on focus/return - this ensures user always stays on premium dashboard
   useEffect(() => {
-    // Set multiple tracking mechanisms
     localStorage.setItem('mentiora_dashboard_mode', 'premium');
     localStorage.setItem('mentiora_preferred_dashboard', '/premium-dashboard');
     localStorage.setItem('mentiora_return_to', 'premium-dashboard');
-    sessionStorage.setItem('mentiora_current_dashboard', 'premium');
     localStorage.setItem('mentiora_premium_context', 'true');
     
-    // Set timestamp for when premium context was last active
-    localStorage.setItem('mentiora_premium_timestamp', Date.now().toString());
-  });
+    // Handle page focus/visibility change to redirect back to premium if needed
+    const handleFocus = () => {
+      // Check if current path is not premium dashboard
+      if (window.location.pathname !== '/premium-dashboard') {
+        console.log('Redirecting back to premium dashboard from:', window.location.pathname);
+        navigate('/premium-dashboard', { replace: true });
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        handleFocus();
+      }
+    };
+
+    // Set up listeners for when user returns to page
+    window.addEventListener('focus', handleFocus);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    // Also check immediately
+    setTimeout(handleFocus, 100);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [navigate]);
 
   const {
     notification,
