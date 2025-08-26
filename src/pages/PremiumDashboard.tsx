@@ -68,38 +68,67 @@ const PremiumDashboard = () => {
   const [celebrationSubject, setCelebrationSubject] = useState('');
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
 
-  // Force premium dashboard on focus/return - this ensures user always stays on premium dashboard
+  // Force premium dashboard always - prevent any redirects to regular dashboard
   useEffect(() => {
     localStorage.setItem('mentiora_dashboard_mode', 'premium');
     localStorage.setItem('mentiora_preferred_dashboard', '/premium-dashboard');
     localStorage.setItem('mentiora_return_to', 'premium-dashboard');
     localStorage.setItem('mentiora_premium_context', 'true');
     
-    // Handle page focus/visibility change to redirect back to premium if needed
-    const handleFocus = () => {
-      // Check if current path is not premium dashboard
-      if (window.location.pathname !== '/premium-dashboard') {
-        console.log('Redirecting back to premium dashboard from:', window.location.pathname);
+    // Continuously check and redirect if needed
+    const checkAndRedirect = () => {
+      if (window.location.pathname === '/dashboard') {
+        console.log('Detected redirect to regular dashboard, forcing back to premium');
         navigate('/premium-dashboard', { replace: true });
       }
     };
 
+    // Set up multiple listeners to catch any navigation attempts
+    const handleFocus = () => checkAndRedirect();
     const handleVisibilityChange = () => {
-      if (!document.hidden) {
-        handleFocus();
-      }
+      if (!document.hidden) checkAndRedirect();
+    };
+    const handlePopState = () => {
+      setTimeout(checkAndRedirect, 50);
     };
 
-    // Set up listeners for when user returns to page
+    // Override browser navigation
+    const originalPushState = history.pushState;
+    const originalReplaceState = history.replaceState;
+    
+    history.pushState = function(state, title, url) {
+      if (url === '/dashboard' || url?.toString().endsWith('/dashboard')) {
+        console.log('Intercepted navigation to dashboard, redirecting to premium');
+        return originalPushState.call(this, state, title, '/premium-dashboard');
+      }
+      return originalPushState.call(this, state, title, url);
+    };
+    
+    history.replaceState = function(state, title, url) {
+      if (url === '/dashboard' || url?.toString().endsWith('/dashboard')) {
+        console.log('Intercepted replaceState to dashboard, redirecting to premium');
+        return originalReplaceState.call(this, state, title, '/premium-dashboard');
+      }
+      return originalReplaceState.call(this, state, title, url);
+    };
+
     window.addEventListener('focus', handleFocus);
     document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('popstate', handlePopState);
     
-    // Also check immediately
-    setTimeout(handleFocus, 100);
+    // Check immediately and periodically
+    checkAndRedirect();
+    const interval = setInterval(checkAndRedirect, 1000);
 
     return () => {
       window.removeEventListener('focus', handleFocus);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('popstate', handlePopState);
+      clearInterval(interval);
+      
+      // Restore original functions
+      history.pushState = originalPushState;
+      history.replaceState = originalReplaceState;
     };
   }, [navigate]);
 
