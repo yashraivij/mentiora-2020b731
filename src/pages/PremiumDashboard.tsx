@@ -729,12 +729,18 @@ const PremiumDashboard = () => {
             {sortedSubjects.map(subject => (
               <SubjectCard
                 key={subject.id}
-                subject={subject}
-                progress={getSubjectProgress(subject.id)}
+                subject={{
+                  ...subject,
+                  color: getSubjectColor(subject.id)
+                }}
+                progress={userProgress}
                 lastActivity={getLastActivity(subject.id)}
                 isPinned={pinnedSubjects.includes(subject.id)}
-                onPinToggle={() => togglePinSubject(subject.id)}
-                onPractice={() => handlePractice(subject.id)}
+                onTogglePin={togglePinSubject}
+                onStartPractice={handlePractice}
+                userId={user?.id}
+                isUserSubject={userSubjects.includes(subject.id)}
+                showAddButton={false}
               />
             ))}
           </div>
@@ -797,12 +803,14 @@ const PremiumDashboard = () => {
       {/* Celebrations and Notifications */}
       <StreakCelebration 
         isVisible={showStreakCelebration}
-        streakDays={getStudyStreak()} 
+        streakDays={getStudyStreak()}
+        rewardText="Custom Color Themes"
+        rewardEmoji="🎨"
         onClose={() => setShowStreakCelebration(false)} 
       />
 
       <TimeSavedNotification 
-        isVisible={showTimeSavedNotification}
+        show={showTimeSavedNotification}
         timeSavedHours={timeSavedHours} 
         onClose={() => setShowTimeSavedNotification(false)}
       />
