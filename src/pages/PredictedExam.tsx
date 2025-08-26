@@ -1632,7 +1632,10 @@ Write a story about discovering a hidden object.
       })();
     }
     
-    navigate(`/predicted-results/${subjectId}`, {
+    const source = searchParams.get('source');
+    const sourceParam = source ? `?source=${source}` : '';
+    
+    navigate(`/predicted-results/${subjectId}${sourceParam}`, {
       state: { 
         questions: examQuestions, 
         answers: answers,
