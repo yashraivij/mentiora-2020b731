@@ -29,21 +29,32 @@ export const UpgradeButton = ({
         } : {}
       });
 
+      console.log('Supabase function response:', {
+        data,
+        error,
+        hasUrl: !!data?.url,
+        hasId: !!data?.id
+      });
+
       if (error) {
         console.error('Error creating checkout session:', error);
+        alert('Error creating checkout session: ' + JSON.stringify(error));
         return;
       }
 
       if (data?.error) {
         console.error('Stripe configuration error:', data.error);
+        alert('Stripe configuration error: ' + data.error);
         return;
       }
 
       if (data?.url) {
-        // Open Stripe checkout in a new tab
-        window.open(data.url, '_blank');
+        console.log('Redirecting to Stripe checkout:', data.url);
+        // Open Stripe checkout in the same tab for better user experience
+        window.location.href = data.url;
       } else if (data?.id) {
         // Fallback: Use Stripe.js to redirect to checkout
+        console.log('Using Stripe.js fallback with session ID:', data.id);
         const stripe = await stripePromise;
         if (stripe) {
           const { error: stripeError } = await stripe.redirectToCheckout({
@@ -51,13 +62,16 @@ export const UpgradeButton = ({
           });
           if (stripeError) {
             console.error('Stripe redirect error:', stripeError);
+            alert('Stripe redirect error: ' + stripeError.message);
           }
         }
       } else {
         console.error('No session URL or ID received:', data);
+        alert('No checkout session created. Please check your configuration.');
       }
     } catch (error) {
       console.error('Error:', error);
+      alert('Unexpected error: ' + error.message);
     }
   };
 
