@@ -54,7 +54,7 @@ const Settings = () => {
     
     try {
       // Call the Supabase RPC function to delete all user data
-      const { error } = await supabase.rpc('delete_user_account', {
+      const { error } = await (supabase.rpc as any)('delete_user_account', {
         user_id_to_delete: user.id
       });
 
