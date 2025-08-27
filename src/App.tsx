@@ -23,7 +23,6 @@ import Notebook from "./pages/Notebook";
 import PremiumNotebook from "./pages/PremiumNotebook";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
-import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient();
 
@@ -92,11 +91,6 @@ const App: React.FC = () => (
             <Route path="/premium-notebook" element={
               <ProtectedRoute>
                 <PremiumNotebook />
-              </ProtectedRoute>
-            } />
-            <Route path="/settings" element={
-              <ProtectedRoute>
-                <Settings />
               </ProtectedRoute>
             } />
             <Route path="*" element={<NotFound />} />
