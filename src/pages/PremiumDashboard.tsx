@@ -300,7 +300,7 @@ const PremiumDashboard = () => {
         // Small delay to ensure page is loaded
         setTimeout(() => {
           setShowPremiumWelcome(true);
-        }, 1000);
+        }, 500);
         
         // Mark as visited
         localStorage.setItem(firstVisitKey, 'true');

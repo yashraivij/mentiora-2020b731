@@ -220,7 +220,7 @@ export function PremiumWelcome({ isVisible, onClose, userName }: PremiumWelcomeP
                         Hey {firstName}! 👋
                       </p>
                       <p className="text-lg text-muted-foreground max-w-md mx-auto leading-relaxed">
-                        You're now part of an exclusive community with access to advanced AI-powered study tools, personalized insights, and premium features designed to supercharge your learning journey!
+                        You're now part of an exclusive community that has consistently achieved higher grades, faster revision times, and better exam performance. Get ready to transform your study results and unlock your full academic potential!
                       </p>
                       <div className="flex items-center justify-center space-x-2 text-sm text-violet-600 dark:text-violet-400 font-medium">
                         <Trophy className="h-4 w-4" />
