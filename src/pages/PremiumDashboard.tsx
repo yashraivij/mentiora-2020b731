@@ -291,6 +291,8 @@ const PremiumDashboard = () => {
 
     try {
       const firstVisitKey = `premium_dashboard_first_visit_${user.id}`;
+      // Temporarily clear the flag to show the notification
+      localStorage.removeItem(firstVisitKey);
       const hasVisitedBefore = localStorage.getItem(firstVisitKey);
       
       if (!hasVisitedBefore) {
