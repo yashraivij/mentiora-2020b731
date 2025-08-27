@@ -143,7 +143,7 @@ export const PremiumPaywall: React.FC<PremiumPaywallProps> = ({ isOpen, onClose,
                   <span className="text-3xl font-bold text-white">£9.99</span>
                   <span className="text-white/80">/month</span>
                 </div>
-                <div className="text-amber-400 text-sm font-medium">Save 50% - First 3 months</div>
+                <div className="text-amber-400 text-sm font-medium">Save 50%</div>
                 <div className="text-white/60 text-xs mt-2">Less than a single tutoring session</div>
                 <Button
                   onClick={() => window.open('https://buy.stripe.com/9B6eVc48087EeeA6X68N204', '_blank')}
