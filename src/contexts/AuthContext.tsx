@@ -110,11 +110,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     console.log('Signing out user:', user?.email);
     // Store current dashboard preference before logout
     const currentPath = window.location.pathname;
+    console.log('Current path during logout:', currentPath);
     if (currentPath === '/premium-dashboard') {
       localStorage.setItem('lastDashboard', 'premium');
+      console.log('Stored dashboard preference: premium');
     } else if (currentPath === '/dashboard') {
       localStorage.setItem('lastDashboard', 'regular');
+      console.log('Stored dashboard preference: regular');
     }
+    // Verify storage
+    const stored = localStorage.getItem('lastDashboard');
+    console.log('Verified stored dashboard preference:', stored);
     await supabase.auth.signOut();
   };
 
