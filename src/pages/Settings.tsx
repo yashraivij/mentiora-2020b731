@@ -97,27 +97,27 @@ const Settings = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Header */}
-      <header className="border-b border-border/40 bg-background/80 backdrop-blur-xl sticky top-0 z-50">
+      <header className="border-b border-white/10 bg-black/40 backdrop-blur-xl sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Button
                 variant="ghost"
                 onClick={handleBack}
-                className="hover:bg-accent/80 transition-colors"
+                className="hover:bg-white/10 transition-colors text-white"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Button>
               <div className="flex items-center space-x-3">
-                <div className="p-2 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20">
-                  <SettingsIcon className="h-5 w-5 text-primary" />
+                <div className="p-3 rounded-xl bg-gradient-to-r from-red-500 to-pink-600 shadow-lg shadow-red-500/25">
+                  <SettingsIcon className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-foreground">Settings</h1>
-                  <p className="text-sm text-muted-foreground">Manage your account preferences</p>
+                  <h1 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Settings</h1>
+                  <p className="text-sm text-gray-400">Account management</p>
                 </div>
               </div>
             </div>
@@ -130,128 +130,76 @@ const Settings = () => {
       </header>
 
       {/* Main Content */}
-      <div className="container mx-auto px-6 py-8 max-w-4xl">
+      <div className="container mx-auto px-6 py-16 max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="grid gap-6"
+          className="flex justify-center"
         >
-          {/* Account Information */}
-          <Card className="border-border/50 bg-card/50 backdrop-blur-sm shadow-lg">
-            <CardHeader className="pb-4">
-              <CardTitle className="flex items-center space-x-2">
-                <Shield className="h-5 w-5 text-primary" />
-                <span>Account Information</span>
+          {/* Danger Zone - Premium Style */}
+          <Card className="w-full border-red-500/30 bg-gradient-to-br from-red-950/50 to-pink-950/30 backdrop-blur-sm shadow-2xl shadow-red-500/20 ring-1 ring-red-500/20">
+            <CardHeader className="pb-6 bg-gradient-to-r from-red-500/10 to-pink-500/10 rounded-t-lg">
+              <CardTitle className="flex items-center space-x-3 text-red-400 text-xl">
+                <div className="p-2 rounded-lg bg-red-500/20 border border-red-400/30">
+                  <AlertTriangle className="h-6 w-6" />
+                </div>
+                <span className="font-bold">Danger Zone</span>
               </CardTitle>
-              <CardDescription>
-                Your account details and preferences
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-muted-foreground">Email</label>
-                  <div className="p-3 bg-muted/50 rounded-lg border border-border/50">
-                    <span className="text-sm text-foreground">{user?.email}</span>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-muted-foreground">Account Type</label>
-                  <div className="p-3 bg-muted/50 rounded-lg border border-border/50">
-                    <span className="text-sm text-foreground">
-                      {getReturnPath().includes('premium') ? 'Premium' : 'Free'}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Appearance Settings */}
-          <Card className="border-border/50 bg-card/50 backdrop-blur-sm shadow-lg">
-            <CardHeader className="pb-4">
-              <CardTitle className="flex items-center space-x-2">
-                <div className="w-5 h-5 rounded-full bg-gradient-to-r from-primary to-secondary" />
-                <span>Appearance</span>
-              </CardTitle>
-              <CardDescription>
-                Customize your visual experience
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="font-medium text-foreground">Theme</h4>
-                  <p className="text-sm text-muted-foreground">Switch between light and dark mode</p>
-                </div>
-                <ThemeToggle />
-              </div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="font-medium text-foreground">Color Theme</h4>
-                  <p className="text-sm text-muted-foreground">Choose your preferred color scheme</p>
-                </div>
-                <ColorThemeToggle />
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Danger Zone */}
-          <Card className="border-destructive/20 bg-destructive/5 shadow-lg">
-            <CardHeader className="pb-4">
-              <CardTitle className="flex items-center space-x-2 text-destructive">
-                <AlertTriangle className="h-5 w-5" />
-                <span>Danger Zone</span>
-              </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-gray-300 text-base">
                 Irreversible actions that will permanently affect your account
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="p-4 border border-destructive/20 rounded-lg bg-destructive/5">
+            <CardContent className="p-8">
+              <div className="p-6 border border-red-500/30 rounded-xl bg-gradient-to-br from-red-900/20 to-pink-900/20 backdrop-blur-sm">
                 <div className="flex items-start justify-between">
-                  <div className="space-y-1">
-                    <h4 className="font-medium text-destructive">Delete Account</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Permanently delete your account and all associated data. This action cannot be undone.
+                  <div className="space-y-3">
+                    <h4 className="text-lg font-bold text-red-400">Delete Account</h4>
+                    <p className="text-gray-300 leading-relaxed max-w-md">
+                      Permanently delete your account and all associated data. This action cannot be undone and will remove all your progress forever.
                     </p>
                   </div>
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
                       <Button
                         variant="destructive"
-                        size="sm"
-                        className="ml-4 shrink-0"
+                        size="lg"
+                        className="ml-6 shrink-0 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold px-6 py-3 rounded-xl shadow-lg shadow-red-500/25 border border-red-500/50 hover:shadow-red-500/40 transition-all duration-300"
                         disabled={isDeleting}
                       >
-                        <Trash2 className="h-4 w-4 mr-2" />
+                        <Trash2 className="h-5 w-5 mr-2" />
                         Delete Account
                       </Button>
                     </AlertDialogTrigger>
-                    <AlertDialogContent className="max-w-md">
+                    <AlertDialogContent className="max-w-lg bg-gradient-to-br from-slate-900 to-red-950 border-red-500/30 text-white">
                       <AlertDialogHeader>
-                        <AlertDialogTitle className="flex items-center space-x-2 text-destructive">
-                          <AlertTriangle className="h-5 w-5" />
+                        <AlertDialogTitle className="flex items-center space-x-3 text-red-400 text-xl">
+                          <div className="p-2 rounded-lg bg-red-500/20">
+                            <AlertTriangle className="h-6 w-6" />
+                          </div>
                           <span>Delete Account</span>
                         </AlertDialogTitle>
-                        <AlertDialogDescription className="text-left space-y-2">
-                          <p>Are you absolutely sure you want to delete your account?</p>
-                          <p className="font-medium">This will permanently delete:</p>
-                          <ul className="list-disc list-inside space-y-1 text-sm ml-2">
-                            <li>All your progress and study data</li>
-                            <li>Notebook entries and notes</li>
-                            <li>Exam results and analytics</li>
-                            <li>Account preferences and settings</li>
-                          </ul>
-                          <p className="font-medium text-destructive">This action cannot be undone.</p>
+                        <AlertDialogDescription className="text-left space-y-4 text-gray-300">
+                          <p className="text-base">Are you absolutely sure you want to delete your account?</p>
+                          <div className="bg-red-950/30 p-4 rounded-lg border border-red-500/20">
+                            <p className="font-semibold text-red-400 mb-2">This will permanently delete:</p>
+                            <ul className="list-disc list-inside space-y-1 text-sm ml-2">
+                              <li>All your progress and study data</li>
+                              <li>Notebook entries and notes</li>
+                              <li>Exam results and analytics</li>
+                              <li>Account preferences and settings</li>
+                            </ul>
+                          </div>
+                          <p className="font-bold text-red-400 text-center">This action cannot be undone.</p>
                         </AlertDialogDescription>
                       </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogFooter className="pt-6">
+                        <AlertDialogCancel className="bg-slate-700 text-white border-slate-600 hover:bg-slate-600">
+                          Cancel
+                        </AlertDialogCancel>
                         <AlertDialogAction
                           onClick={handleDeleteAccount}
-                          className="bg-destructive hover:bg-destructive/90"
+                          className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold shadow-lg shadow-red-500/25"
                           disabled={isDeleting}
                         >
                           {isDeleting ? "Deleting..." : "Yes, delete my account"}
