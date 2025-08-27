@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import { Settings as SettingsIcon, Trash2, Shield, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
@@ -12,8 +12,15 @@ import { useToast } from "@/hooks/use-toast";
 const Settings = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { toast } = useToast();
   const [isDeleting, setIsDeleting] = useState(false);
+
+  const fromPath = searchParams.get('from') || '/dashboard';
+
+  const handleGoBack = () => {
+    navigate(fromPath);
+  };
 
   const handleDeleteAccount = async () => {
     if (!user) return;
@@ -66,7 +73,7 @@ const Settings = () => {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => navigate(-1)}
+            onClick={handleGoBack}
             className="hover:bg-primary/10"
           >
             <ArrowLeft className="h-5 w-5" />

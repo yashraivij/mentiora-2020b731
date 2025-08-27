@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
 interface SettingsButtonProps {
@@ -15,6 +15,12 @@ export const SettingsButton = ({
   className = ""
 }: SettingsButtonProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleSettingsClick = () => {
+    const currentPath = location.pathname;
+    navigate(`/settings?from=${encodeURIComponent(currentPath)}`);
+  };
 
   return (
     <motion.div
@@ -24,7 +30,7 @@ export const SettingsButton = ({
       <Button
         variant={variant}
         size={size}
-        onClick={() => navigate('/settings')}
+        onClick={handleSettingsClick}
         className={`hover:bg-primary/10 transition-all duration-300 ${className}`}
         title="Settings"
       >
