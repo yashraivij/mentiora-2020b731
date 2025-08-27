@@ -405,11 +405,11 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false }: Predic
                         <div className={`relative h-40 bg-gradient-to-t from-gray-100/30 to-gray-50/20 dark:from-gray-800/30 dark:to-gray-700/20 rounded-3xl overflow-hidden border-2 border-white/20 backdrop-blur-sm shadow-xl ${getSubjectShadow(index)} group-hover:shadow-2xl transition-all duration-500`}>
                           {grade.finalGrade !== '–' && (
                             <>
-                              {/* Main gradient bar - height based on percentage */}
+                              {/* Main gradient bar - height based on percentage for premium, full for regular */}
                               <div 
-                                className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t ${getSubjectColor(index)} rounded-3xl transition-all duration-1000 ease-out animate-in slide-in-from-bottom-4`}
+                                className={`absolute ${isPremium ? 'bottom-0 left-0 right-0' : 'inset-0'} bg-gradient-to-t ${getSubjectColor(index)} rounded-3xl transition-all duration-1000 ease-out animate-in slide-in-from-bottom-4`}
                                 style={{ 
-                                  height: `${Math.max(15, grade.finalPercentage)}%`, // Minimum 15% height for visibility
+                                  height: isPremium ? `${Math.max(15, grade.finalPercentage)}%` : '100%', // Full height for regular dashboard
                                   filter: grade.isGrade7Plus ? 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.6))' : 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))'
                                 }}
                               />
