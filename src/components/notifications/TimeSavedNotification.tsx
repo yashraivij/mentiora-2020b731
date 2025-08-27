@@ -31,21 +31,24 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
 
   const getEncouragingMessage = () => {
     const days = Math.floor(timeSavedHours / 24);
+    const totalHours = Math.round(timeSavedHours * 10) / 10;
     
-    if (days >= 2) {
-      return `Incredible! You've saved over ${days} whole days of study time!`;
+    if (days >= 7) {
+      return `Incredible! You've saved ${getTimeSavedDisplay()} - that's over a week of study time!`;
+    } else if (days >= 2) {
+      return `Outstanding! You've saved ${getTimeSavedDisplay()} - imagine what else you could do with that time!`;
     } else if (days >= 1) {
-      return "Amazing! You've saved over a whole day of study time!";
-    } else if (timeSavedHours >= 20) {
-      return "Outstanding! You've saved over 20 hours with smart notes!";
-    } else if (timeSavedHours >= 10) {
-      return "You're absolutely crushing it! That's over 10 hours saved!";
-    } else if (timeSavedHours >= 5) {
-      return "Amazing progress! You've saved so much time with smart notes!";
-    } else if (timeSavedHours >= 2) {
-      return "Great work! Your smart notes are saving you precious study time!";
+      return `Amazing! You've saved ${getTimeSavedDisplay()} - that's a whole day back in your schedule!`;
+    } else if (totalHours >= 20) {
+      return `Incredible efficiency! ${getTimeSavedDisplay()} saved means more time for what matters most!`;
+    } else if (totalHours >= 10) {
+      return `You're on fire! ${getTimeSavedDisplay()} saved is like getting extra hours in your day!`;
+    } else if (totalHours >= 5) {
+      return `Excellent progress! ${getTimeSavedDisplay()} saved - that's serious time optimization!`;
+    } else if (totalHours >= 2) {
+      return `Great start! ${getTimeSavedDisplay()} saved is already making a real difference!`;
     } else {
-      return "Fantastic! Every minute saved adds up to success!";
+      return `Every minute counts! ${getTimeSavedDisplay()} saved is building your success momentum!`;
     }
   };
 
@@ -154,7 +157,7 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                   transition={{ delay: 0.2, type: "spring", damping: 20 }}
                   className="text-center"
                 >
-                  <div className="text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 dark:from-violet-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2 filter blur-lg">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 dark:from-violet-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2">
                     {getTimeSavedDisplay()}
                   </div>
                   <p className="text-sm font-semibold text-violet-700 dark:text-violet-300 mb-1">
@@ -188,7 +191,7 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                 className="mt-4 text-center"
               >
                 <Button
-                  onClick={() => window.location.href = '/notebook'}
+                  onClick={() => window.location.href = '/premium-notebook'}
                   size="sm"
                   className="bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 hover:from-violet-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl transition-all duration-200"
                 >
