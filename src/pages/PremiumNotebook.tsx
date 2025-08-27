@@ -150,7 +150,7 @@ const PremiumNotebook = () => {
             <div className="flex items-center space-x-4">
               <Button 
                 variant="ghost" 
-                onClick={() => navigate('/dashboard')}
+                onClick={() => navigate('/premium-dashboard')}
                 className="text-muted-foreground hover:text-foreground hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
@@ -212,7 +212,7 @@ const PremiumNotebook = () => {
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <BookOpen className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-300 dark:to-indigo-300 bg-clip-text text-transparent mb-1 filter blur-md">{stats.totalEntries}</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-300 dark:to-indigo-300 bg-clip-text text-transparent mb-1">{stats.totalEntries}</div>
                 <div className="text-sm font-medium text-blue-600 dark:text-blue-400">Total Notes</div>
                 <div className="text-xs text-blue-500/70 dark:text-blue-400/70 mt-1">Smart Summaries</div>
               </CardContent>
@@ -223,7 +223,7 @@ const PremiumNotebook = () => {
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <TrendingUp className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-3xl font-bold bg-gradient-to-r from-emerald-700 to-teal-700 dark:from-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-1 filter blur-md">{stats.timeSavedHours}h</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-emerald-700 to-teal-700 dark:from-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-1">{stats.timeSavedHours}h</div>
                 <div className="text-sm font-medium text-emerald-600 dark:text-emerald-400">Time Saved</div>
                 <div className="text-xs text-emerald-500/70 dark:text-emerald-400/70 mt-1">Auto Notes</div>
               </CardContent>
@@ -234,7 +234,7 @@ const PremiumNotebook = () => {
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <Brain className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-3xl font-bold bg-gradient-to-r from-violet-700 to-purple-700 dark:from-violet-300 dark:to-purple-300 bg-clip-text text-transparent mb-1 filter blur-md">{stats.subjectsWithNotes}</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-violet-700 to-purple-700 dark:from-violet-300 dark:to-purple-300 bg-clip-text text-transparent mb-1">{stats.subjectsWithNotes}</div>
                 <div className="text-sm font-medium text-violet-600 dark:text-violet-400">Subjects</div>
                 <div className="text-xs text-violet-500/70 dark:text-violet-400/70 mt-1">Covered</div>
               </CardContent>
@@ -292,7 +292,7 @@ const PremiumNotebook = () => {
               <p className="text-muted-foreground mb-8 max-w-md mx-auto text-lg">
                 Start practicing questions to generate your personalized AI revision notes!
               </p>
-              <Button onClick={() => navigate('/dashboard')} className="bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
+              <Button onClick={() => navigate('/premium-dashboard')} className="bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
                 Start Practicing
               </Button>
             </CardContent>
@@ -310,7 +310,7 @@ const PremiumNotebook = () => {
         {/* Premium Action Buttons */}
         <div className="flex justify-center space-x-6 mt-16">
           <Button 
-            onClick={() => navigate('/dashboard')} 
+            onClick={() => navigate('/premium-dashboard')} 
             variant="outline"
             className="px-8 py-3 rounded-xl border-2 border-slate-300 dark:border-slate-600 hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200"
           >
@@ -319,7 +319,7 @@ const PremiumNotebook = () => {
           </Button>
           <Button 
             onClick={() => {
-              navigate('/dashboard');
+              navigate('/premium-dashboard');
               window.scrollTo(0, 0);
             }}
             className="px-8 py-3 rounded-xl bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-200"
