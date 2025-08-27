@@ -294,7 +294,14 @@ const Practice = () => {
             toast.success(`Answer marked! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks. Smart notes added to your Notebook!`, {
               action: {
                 label: "View Notebook",
-                onClick: () => navigate('/notebook')
+                onClick: () => {
+                  const fromParam = searchParams.get('from');
+                  if (fromParam === 'premium') {
+                    navigate('/premium-notebook');
+                  } else {
+                    navigate('/notebook');
+                  }
+                }
               }
             });
           } else {
