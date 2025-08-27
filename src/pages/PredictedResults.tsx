@@ -92,10 +92,10 @@ const PredictedResults = () => {
     return null;
   }
 
-  // Use exact same AI marking system as Practice.tsx - OPTIMIZED
+  // Use exact same smart marking system as Practice.tsx - OPTIMIZED
   const markAnswerWithAI = async (question: ExamQuestion, answer: string, modelAnswer: string) => {
     try {
-      console.log('Calling AI marking function with:', { 
+      console.log('Calling smart marking function with:', { 
         question: question.text || question.question, 
         answer: answer.substring(0, 100) + '...' 
       });
@@ -116,7 +116,7 @@ const PredictedResults = () => {
         throw error;
       }
 
-      console.log('AI marking result:', data);
+      console.log('Smart marking result:', data);
 
       return {
         marksAwarded: data.marksAwarded || 0,
@@ -125,12 +125,12 @@ const PredictedResults = () => {
       };
 
     } catch (error) {
-      console.error('Error calling AI marking function:', error);
+      console.error('Error calling smart marking function:', error);
       
       // Fallback to basic marking
       return {
         marksAwarded: answer.trim() ? Math.round(question.marks * 0.5) : 0,
-        feedback: "AI marking temporarily unavailable. Answer has been given partial credit.",
+        feedback: "Automatic marking temporarily unavailable. Answer has been given partial credit.",
         assessment: "Needs Review"
       };
     }
@@ -208,7 +208,7 @@ const PredictedResults = () => {
 
   const generateModelAnswer = async (questionText: string, marks: number): Promise<string> => {
     try {
-      console.log('Generating AI model answer for question:', questionText.substring(0, 100) + '...');
+      console.log('Generating smart model answer for question:', questionText.substring(0, 100) + '...');
 
       const { data, error } = await supabase.functions.invoke('generate-model-answer', {
         body: {
@@ -223,11 +223,11 @@ const PredictedResults = () => {
         throw error;
       }
 
-      console.log('AI model answer generated successfully');
+      console.log('Smart model answer generated successfully');
       return data.modelAnswer || generateFallbackModelAnswer(questionText);
 
     } catch (error) {
-      console.error('Error generating AI model answer:', error);
+      console.error('Error generating smart model answer:', error);
       // Fallback to improved static model answer
       return generateFallbackModelAnswer(questionText);
     }
@@ -375,7 +375,7 @@ const PredictedResults = () => {
           } catch (error) {
             console.error('Error marking question:', error);
             
-            // Fallback attempt with AI model answer
+            // Fallback attempt with smart model answer
             const aiModelAnswer = await generateModelAnswer(question.text || question.question || '', question.marks);
             
             const attempt: QuestionAttempt = {
@@ -680,7 +680,7 @@ const PredictedResults = () => {
                   </div>
                 </div>
 
-                {/* AI Feedback - Conditional based on performance */}
+                {/* Smart Feedback - Conditional based on performance */}
                 <div>
                   <h4 className="font-semibold text-foreground mb-2 flex items-center">
                     {attempt.feedback.fullMarks ? (
@@ -732,7 +732,7 @@ const PredictedResults = () => {
                   Smart Revision Notes Generated
                 </CardTitle>
                 <CardDescription className="text-purple-700 dark:text-purple-300 text-base">
-                  AI has automatically created revision notes for topics where you lost marks
+                  Smart notes have been automatically created for topics where you lost marks
                 </CardDescription>
               </CardHeader>
               <CardContent className="text-center space-y-4">

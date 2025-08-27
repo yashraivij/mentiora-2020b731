@@ -1378,7 +1378,7 @@ Write a story about discovering a hidden object.
         let questionText = q.question;
         
         // Keep the original question text without automatic prepending
-        // Questions should already be properly formatted from the AI generation
+        // Questions should already be properly formatted from the smart generation
         
         questions.push({
           id: `${topicIndex}-${qIndex}`,
@@ -1532,12 +1532,12 @@ Write a story about discovering a hidden object.
       };
 
     } catch (error) {
-      console.error('Error calling AI marking function:', error);
+      console.error('Error calling smart marking function:', error);
       
       // Fallback to basic marking
       return {
         marksAwarded: answer.trim() ? Math.round(question.marks * 0.5) : 0,
-        feedback: "AI marking temporarily unavailable. Answer has been given partial credit.",
+        feedback: "Automatic marking temporarily unavailable. Answer has been given partial credit.",
         assessment: "Needs Review"
       };
     }
@@ -1566,7 +1566,7 @@ Write a story about discovering a hidden object.
             const question = examQuestions.find(q => q.id === answer.questionId);
             if (question && answer.answer.trim()) {
               try {
-                // Mark the answer with AI
+                // Mark the answer automatically
                 const markingResult = await markAnswerWithAI(question, answer.answer);
                 const marksLost = question.marks - markingResult.marksAwarded;
                 

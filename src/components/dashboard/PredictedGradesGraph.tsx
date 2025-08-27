@@ -504,7 +504,7 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false }: Predic
                           <Crown className="h-5 w-5 text-amber-400 animate-pulse" />
                         </div>
                         <div className="text-gray-300 leading-relaxed">
-                          Upgrade to Premium to unlock detailed AI insights, grade predictions, and personalized feedback for your GCSE performance.
+                          Upgrade to Premium to unlock detailed insights, grade predictions, and personalized feedback for your GCSE performance.
                         </div>
                         <button 
                           onClick={() => window.dispatchEvent(new CustomEvent('openPremiumPaywall'))}

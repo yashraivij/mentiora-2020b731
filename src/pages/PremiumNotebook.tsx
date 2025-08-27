@@ -134,7 +134,7 @@ const PremiumNotebook = () => {
           <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent mx-auto mb-6"></div>
           <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl px-8 py-6 shadow-2xl shadow-primary/10">
             <p className="text-foreground font-medium text-lg">Loading your Smart Revision Notebook...</p>
-            <p className="text-muted-foreground text-sm mt-2">Preparing your AI-generated study notes</p>
+            <p className="text-muted-foreground text-sm mt-2">Preparing your smart study notes</p>
           </div>
         </div>
       </div>
@@ -172,7 +172,7 @@ const PremiumNotebook = () => {
                   <div className="flex items-center space-x-2">
                     <div className="flex items-center space-x-1">
                       <Crown className="h-3.5 w-3.5 text-amber-500" />
-                      <span className="text-sm font-semibold text-amber-600 dark:text-amber-400">Premium AI Feature</span>
+                      <span className="text-sm font-semibold text-amber-600 dark:text-amber-400">Premium Smart Feature</span>
                     </div>
                     <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
                     <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">Auto-Generated</span>
@@ -192,10 +192,10 @@ const PremiumNotebook = () => {
         <div className="mb-8">
           <div className="text-center mb-8">
             <h2 className="text-4xl font-bold bg-gradient-to-r from-slate-800 via-purple-700 to-blue-700 dark:from-slate-200 dark:via-purple-300 dark:to-blue-300 bg-clip-text text-transparent mb-4">
-              Your AI-Generated Revision Notes
+              Your Smart Revision Notes
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Ultra-clear, Grade 9-level notes for every mark you've lost, powered by advanced AI analysis
+              Ultra-clear, Grade 9-level notes for every mark you've lost, powered by advanced analysis
             </p>
             <div className="flex items-center justify-center space-x-2 mt-4">
               <div className="w-2 h-2 bg-violet-500 rounded-full animate-pulse"></div>
@@ -290,7 +290,7 @@ const PremiumNotebook = () => {
               </div>
               <h3 className="text-2xl font-bold text-foreground mb-3">No Revision Notes Yet</h3>
               <p className="text-muted-foreground mb-8 max-w-md mx-auto text-lg">
-                Start practicing questions to generate your personalized AI revision notes!
+                Start practicing questions to generate your personalized smart revision notes!
               </p>
               <Button onClick={() => navigate('/premium-dashboard')} className="bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
                 Start Practicing
