@@ -20,6 +20,7 @@ import PremiumPredictedQuestions from "./pages/PremiumPredictedQuestions";
 import PredictedExam from "./pages/PredictedExam";
 import PredictedResults from "./pages/PredictedResults";
 import Notebook from "./pages/Notebook";
+import PremiumNotebook from "./pages/PremiumNotebook";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -85,6 +86,11 @@ const App: React.FC = () => (
             <Route path="/notebook" element={
               <ProtectedRoute>
                 <Notebook />
+              </ProtectedRoute>
+            } />
+            <Route path="/premium-notebook" element={
+              <ProtectedRoute>
+                <PremiumNotebook />
               </ProtectedRoute>
             } />
             <Route path="*" element={<NotFound />} />
