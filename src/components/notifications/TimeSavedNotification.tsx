@@ -32,6 +32,10 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
   };
 
   const getEncouragingMessage = () => {
+    if (!isPremium) {
+      return "Unlock premium to see your exact time savings and detailed insights!";
+    }
+    
     const days = Math.floor(timeSavedHours / 24);
     const totalHours = Math.round(timeSavedHours * 10) / 10;
     
@@ -176,15 +180,15 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                   <div className={`text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 dark:from-violet-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2 ${!isPremium ? 'blur-lg' : ''}`}>
                     {getTimeSavedDisplay()}
                   </div>
-                  <p className={`text-sm font-semibold text-violet-700 dark:text-violet-300 mb-1 ${!isPremium ? 'blur-sm' : ''}`}>
+                  <p className="text-sm font-semibold text-violet-700 dark:text-violet-300 mb-1">
                     Total Time Saved
                   </p>
-                  <p className={`text-xs text-violet-600/80 dark:text-violet-400/80 ${!isPremium ? 'blur-sm' : ''}`}>
+                  <p className="text-xs text-violet-600/80 dark:text-violet-400/80">
                     with Smart Auto-Notes
                   </p>
                 </motion.div>
 
-                <div className={`bg-white/70 dark:bg-violet-900/40 rounded-xl p-4 border border-violet-200/60 dark:border-violet-700/60 backdrop-blur-sm ${!isPremium ? 'blur-md' : ''}`}>
+                <div className="bg-white/70 dark:bg-violet-900/40 rounded-xl p-4 border border-violet-200/60 dark:border-violet-700/60 backdrop-blur-sm">
                   <p className="text-sm font-medium text-violet-800 dark:text-violet-200 text-center leading-relaxed">
                     {getEncouragingMessage()}
                   </p>
