@@ -468,30 +468,29 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false }: Predic
                   <TooltipContent 
                     side="top" 
                     align="center"
-                    className="max-w-80 w-auto p-8 bg-gradient-to-br from-amber-900/90 via-purple-900/90 to-blue-900/90 text-white text-sm rounded-3xl shadow-2xl border border-amber-400/30 backdrop-blur-xl"
+                    className="max-w-64 w-auto p-4 bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-blue-900/95 text-white text-xs rounded-2xl shadow-xl border border-purple-400/20 backdrop-blur-xl"
                   >
                     {isPremium ? (
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-center space-x-3 mb-4">
-                          <Crown className="h-6 w-6 text-amber-400" />
-                          <div className={`text-3xl font-bold bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent`}>
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-center space-x-2 mb-2">
+                          <Crown className="h-4 w-4 text-amber-400" />
+                          <div className="text-lg font-bold bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">
                             Grade {grade.finalGrade}
                           </div>
-                          <Crown className="h-6 w-6 text-amber-400" />
                         </div>
-                        <div className="flex justify-center mb-4">
-                          <Badge className={`${getConfidenceColor(grade.confidence)} text-sm px-4 py-2 rounded-full font-semibold shadow-lg`}>
+                        <div className="flex justify-center mb-2">
+                          <Badge className={`${getConfidenceColor(grade.confidence)} text-xs px-2 py-1 rounded-full font-medium shadow-sm`}>
                             {grade.confidence} confidence
                           </Badge>
                         </div>
-                        <p className="text-amber-50 leading-relaxed text-center font-medium">
+                        <p className="text-slate-200 leading-relaxed text-center text-xs font-medium">
                           {getTooltipText(grade)}
                         </p>
-                        <div className="pt-4 border-t border-amber-400/30">
+                        <div className="pt-2 border-t border-purple-400/20">
                           <div className="text-center">
-                            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-400/20 to-yellow-300/20 px-4 py-2 rounded-full">
-                              <span className="text-amber-300 font-semibold">Target:</span>
-                              <span className="text-white font-bold">{grade.finalPercentage}%</span>
+                            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-400/20 to-blue-400/20 px-2 py-1 rounded-full">
+                              <span className="text-purple-300 font-medium text-xs">Target:</span>
+                              <span className="text-white font-bold text-xs">{grade.finalPercentage}%</span>
                             </div>
                           </div>
                         </div>
