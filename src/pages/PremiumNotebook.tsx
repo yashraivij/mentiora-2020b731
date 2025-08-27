@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BookOpen, Crown, Brain, TrendingUp, Star, Filter, Calendar } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { supabase } from "@/integrations/supabase/client";
-import { NotebookEntry } from "@/components/notebook/NotebookEntry";
+import { PremiumNotebookEntry } from "@/components/notebook/PremiumNotebookEntry";
 import { PremiumPaywall } from "@/components/ui/premium-paywall";
 import { toast } from "sonner";
 
@@ -301,7 +301,7 @@ const PremiumNotebook = () => {
           <div className="space-y-8">
             {sortedEntries.map((entry, index) => (
               <div key={entry.id} className="transform hover:scale-[1.02] transition-all duration-200">
-                <NotebookEntry entry={entry} onUpgradeClick={() => setShowPaywall(true)} />
+                <PremiumNotebookEntry entry={entry} />
               </div>
             ))}
           </div>
