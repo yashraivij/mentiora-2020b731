@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
-import { Settings as SettingsIcon, Trash2, Shield, ArrowLeft } from "lucide-react";
+import { Settings as SettingsIcon, Trash2, Shield, ArrowLeft, CreditCard } from "lucide-react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -15,6 +15,7 @@ const Settings = () => {
   const [searchParams] = useSearchParams();
   const { toast } = useToast();
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isManagingSubscription, setIsManagingSubscription] = useState(false);
 
   const fromPath = searchParams.get('from') || '/dashboard';
 
@@ -61,6 +62,38 @@ const Settings = () => {
     }
   };
 
+  const handleManageSubscription = async () => {
+    if (!user) return;
+    
+    setIsManagingSubscription(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('customer-portal');
+      
+      if (error) {
+        console.error('Error creating customer portal session:', error);
+        toast({
+          title: "Error",
+          description: "Failed to open subscription management. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (data?.url) {
+        window.open(data.url, '_blank');
+      }
+    } catch (error) {
+      console.error('Error managing subscription:', error);
+      toast({
+        title: "Error",
+        description: "Failed to open subscription management. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsManagingSubscription(false);
+    }
+  };
+
   return (
     <div className="min-h-screen" style={{ background: 'var(--gradient-background)' }}>
       <div className="container mx-auto p-6 max-w-4xl">
@@ -88,6 +121,52 @@ const Settings = () => {
             </div>
           </div>
         </motion.div>
+
+        {/* Subscription Management - Only shown when coming from premium dashboard */}
+        {fromPath === '/premium-dashboard' && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="mb-8"
+          >
+            <Card className="relative overflow-hidden border-2 border-primary/20 shadow-xl bg-gradient-to-br from-primary/5 to-primary/10">
+              <CardHeader>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-full bg-primary/20">
+                    <CreditCard className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-xl">Subscription Management</CardTitle>
+                    <CardDescription>
+                      Manage your premium subscription and billing
+                    </CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="p-6 rounded-lg bg-muted/50 border border-primary/20">
+                  <div className="flex items-start justify-between">
+                    <div className="space-y-2">
+                      <h3 className="text-lg font-semibold">Manage Subscription</h3>
+                      <p className="text-sm text-muted-foreground max-w-md">
+                        Cancel your subscription, update payment methods, or view billing history through Stripe's secure portal.
+                      </p>
+                    </div>
+                    <Button 
+                      onClick={handleManageSubscription}
+                      disabled={isManagingSubscription}
+                      className="ml-4 bg-primary hover:bg-primary/90"
+                    >
+                      <CreditCard className="mr-2 h-4 w-4" />
+                      {isManagingSubscription ? "Opening..." : "Manage Subscription"}
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
 
         {/* Premium Danger Zone Card */}
         <motion.div
