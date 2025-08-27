@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
 import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb, HelpCircle, X, StickyNote } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -58,6 +58,7 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 const Practice = () => {
   const { subjectId, topicId } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { user } = useAuth();
   
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -159,7 +160,8 @@ const Practice = () => {
     
     recordVisit();
     if (!subject || !topic) {
-      navigate('/dashboard');
+      const fromParam = searchParams.get('from');
+      navigate(fromParam === 'premium' ? '/premium-dashboard' : '/dashboard');
       return;
     }
     
@@ -825,7 +827,14 @@ const Practice = () => {
             </div>
             
             <div className="flex flex-col space-y-2">
-              <Button onClick={() => navigate(`/subject/${subjectId}`)}>
+              <Button onClick={() => {
+                const fromParam = searchParams.get('from');
+                if (fromParam === 'premium') {
+                  navigate('/premium-dashboard');
+                } else {
+                  navigate(`/subject/${subjectId}`);
+                }
+              }}>
                 Back to {subject?.name}
               </Button>
               <Button 
@@ -846,7 +855,10 @@ const Practice = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4">No questions available</h2>
-          <Button onClick={() => navigate('/dashboard')}>
+          <Button onClick={() => {
+            const fromParam = searchParams.get('from');
+            navigate(fromParam === 'premium' ? '/premium-dashboard' : '/dashboard');
+          }}>
             Back to Dashboard
           </Button>
         </div>
@@ -863,7 +875,14 @@ const Practice = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button variant="outline" onClick={() => navigate(`/subject/${subjectId}`)}>
+              <Button variant="outline" onClick={() => {
+                const fromParam = searchParams.get('from');
+                if (fromParam === 'premium') {
+                  navigate('/premium-dashboard');
+                } else {
+                  navigate(`/subject/${subjectId}`);
+                }
+              }}>
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Button>

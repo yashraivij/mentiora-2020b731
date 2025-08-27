@@ -821,9 +821,9 @@ const PremiumDashboard = () => {
   const handlePractice = async (subjectId: string, topicId?: string) => {
     await recordActivity();
     if (topicId) {
-      navigate(`/practice/${subjectId}/${topicId}`);
+      navigate(`/practice/${subjectId}/${topicId}?from=premium`);
     } else {
-      navigate(`/subject/${subjectId}`);
+      navigate(`/subject/${subjectId}?from=premium`);
     }
   };
 
