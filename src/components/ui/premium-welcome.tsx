@@ -220,13 +220,12 @@ export function PremiumWelcome({ isVisible, onClose, userName }: PremiumWelcomeP
                         Hey {firstName}! 👋
                       </p>
                       <p className="text-lg text-muted-foreground max-w-md mx-auto leading-relaxed">
-                        You're now part of an exclusive community that has consistently achieved higher grades, faster revision times, and better exam performance. Get ready to transform your study results and unlock your full academic potential!
+                        You've just unlocked the best way to prepare for your GCSEs.
+                        As a Premium member, you'll get faster revision, clearer grade predictions, and smarter strategies to reach your top results.
                       </p>
-                      <div className="flex items-center justify-center space-x-2 text-sm text-violet-600 dark:text-violet-400 font-medium">
-                        <Trophy className="h-4 w-4" />
-                        <span>Premium Member Since Today</span>
-                        <Trophy className="h-4 w-4" />
-                      </div>
+                      <p className="text-lg text-muted-foreground max-w-md mx-auto leading-relaxed mt-3">
+                        This is where hard work meets smart learning — let's get those grades that open doors 🚀
+                      </p>
                     </div>
                   </motion.div>
 
