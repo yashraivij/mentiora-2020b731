@@ -9,6 +9,7 @@ import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCi
 import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
+import { SettingsButton } from "@/components/ui/settings-button";
 import { useState, useEffect } from "react";
 import { TimeSavedNotification } from "@/components/notifications/TimeSavedNotification";
 import { PremiumPaywall } from "@/components/ui/premium-paywall";
@@ -947,6 +948,7 @@ const Dashboard = () => {
               {getStudyStreak() >= 3 && <ColorThemeToggle />}
               {getStudyStreak() >= 7 && <StudyPlaylist isUnlocked={true} />}
               
+              <SettingsButton />
               <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
                 <LogOut className="h-4 w-4" />
               </Button>
