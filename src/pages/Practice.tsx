@@ -1145,7 +1145,14 @@ const Practice = () => {
                       {currentQuestionIndex < shuffledQuestions.length - 1 ? "Next Question" : "Finish Session"}
                     </Button>
                     <Button 
-                      onClick={() => navigate('/notebook')}
+                      onClick={() => {
+                        const fromParam = searchParams.get('from');
+                        if (fromParam === 'premium') {
+                          navigate('/premium-notebook');
+                        } else {
+                          navigate('/notebook');
+                        }
+                      }}
                       variant="outline"
                       className="w-full bg-gradient-to-r from-purple-50 to-indigo-50 border-purple-200 text-purple-700 hover:from-purple-100 hover:to-indigo-100 hover:border-purple-300 hover:shadow-md transition-all duration-200 dark:from-purple-950/30 dark:to-indigo-950/30 dark:border-purple-700 dark:text-purple-300 dark:hover:from-purple-950/50 dark:hover:to-indigo-950/50 dark:hover:border-purple-600"
                     >
