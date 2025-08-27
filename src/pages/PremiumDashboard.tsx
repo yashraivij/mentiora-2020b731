@@ -37,6 +37,7 @@ import { DiscordInvitation } from "@/components/ui/discord-invitation";
 import { PublicStreakProfiles } from '@/components/dashboard/PublicStreakProfiles';
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
 import { useToast } from "@/hooks/use-toast";
+import { PremiumWelcome } from "@/components/ui/premium-welcome";
 
 interface UserProgress {
   subjectId: string;
@@ -67,6 +68,7 @@ const PremiumDashboard = () => {
   const [celebrationSubject, setCelebrationSubject] = useState('');
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
   const [showPremiumPaywall, setShowPremiumPaywall] = useState(false);
+  const [showPremiumWelcome, setShowPremiumWelcome] = useState(false);
 
   const {
     notification,
@@ -283,6 +285,29 @@ const PremiumDashboard = () => {
     }
   };
 
+  // Check if this is the user's first visit to premium dashboard
+  const checkFirstPremiumVisit = async () => {
+    if (!user?.id) return;
+
+    try {
+      const firstVisitKey = `premium_dashboard_first_visit_${user.id}`;
+      const hasVisitedBefore = localStorage.getItem(firstVisitKey);
+      
+      if (!hasVisitedBefore) {
+        console.log('🎉 First time visiting premium dashboard!');
+        // Small delay to ensure page is loaded
+        setTimeout(() => {
+          setShowPremiumWelcome(true);
+        }, 1000);
+        
+        // Mark as visited
+        localStorage.setItem(firstVisitKey, 'true');
+      }
+    } catch (error) {
+      console.error('Error checking first premium visit:', error);
+    }
+  };
+
   useEffect(() => {
     const loadUserData = async () => {
       if (!user?.id) return;
@@ -338,6 +363,9 @@ const PremiumDashboard = () => {
       
       // Check for Discord invitation eligibility
       await checkForDiscordInvitation();
+      
+      // Check if this is the user's first visit to premium dashboard
+      await checkFirstPremiumVisit();
     };
 
     loadUserData();
@@ -1627,6 +1655,13 @@ const PremiumDashboard = () => {
       <DiscordInvitation
         isVisible={showDiscordInvitation}
         onClose={() => setShowDiscordInvitation(false)}
+      />
+
+      {/* Premium Welcome Modal */}
+      <PremiumWelcome
+        isVisible={showPremiumWelcome}
+        onClose={() => setShowPremiumWelcome(false)}
+        userName={getFirstName()}
       />
 
       {/* Premium Paywall Modal */}
