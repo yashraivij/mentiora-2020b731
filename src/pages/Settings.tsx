@@ -138,24 +138,24 @@ const Settings = () => {
           className="flex justify-center"
         >
           {/* Danger Zone - Premium Style */}
-          <Card className="w-full border-red-500/30 bg-gradient-to-br from-red-950/50 to-pink-950/30 backdrop-blur-sm shadow-2xl shadow-red-500/20 ring-1 ring-red-500/20">
-            <CardHeader className="pb-6 bg-gradient-to-r from-red-500/10 to-pink-500/10 rounded-t-lg">
-              <CardTitle className="flex items-center space-x-3 text-red-400 text-xl">
-                <div className="p-2 rounded-lg bg-red-500/20 border border-red-400/30">
-                  <AlertTriangle className="h-6 w-6" />
+          <Card className="w-full border-2 border-red-400/60 bg-gradient-to-br from-red-500/20 via-pink-500/15 to-orange-500/10 backdrop-blur-lg shadow-2xl shadow-red-500/30 ring-2 ring-red-400/40">
+            <CardHeader className="pb-6 bg-gradient-to-r from-red-400/30 via-pink-400/20 to-orange-400/20 rounded-t-lg border-b border-red-400/30">
+              <CardTitle className="flex items-center space-x-3 text-white text-2xl">
+                <div className="p-3 rounded-xl bg-gradient-to-br from-red-500 to-pink-600 shadow-lg shadow-red-500/50 border border-red-300/50">
+                  <AlertTriangle className="h-7 w-7 text-white" />
                 </div>
-                <span className="font-bold">Danger Zone</span>
+                <span className="font-bold bg-gradient-to-r from-red-200 to-pink-200 bg-clip-text text-transparent">Danger Zone</span>
               </CardTitle>
-              <CardDescription className="text-gray-300 text-base">
+              <CardDescription className="text-gray-200 text-lg font-medium">
                 Irreversible actions that will permanently affect your account
               </CardDescription>
             </CardHeader>
             <CardContent className="p-8">
-              <div className="p-6 border border-red-500/30 rounded-xl bg-gradient-to-br from-red-900/20 to-pink-900/20 backdrop-blur-sm">
+              <div className="p-8 border-2 border-red-400/50 rounded-2xl bg-gradient-to-br from-red-600/30 via-pink-600/20 to-orange-600/15 backdrop-blur-sm shadow-xl shadow-red-500/20">
                 <div className="flex items-start justify-between">
-                  <div className="space-y-3">
-                    <h4 className="text-lg font-bold text-red-400">Delete Account</h4>
-                    <p className="text-gray-300 leading-relaxed max-w-md">
+                  <div className="space-y-4">
+                    <h4 className="text-2xl font-bold text-white">Delete Account</h4>
+                    <p className="text-gray-100 leading-relaxed max-w-md text-lg">
                       Permanently delete your account and all associated data. This action cannot be undone and will remove all your progress forever.
                     </p>
                   </div>
@@ -164,42 +164,42 @@ const Settings = () => {
                       <Button
                         variant="destructive"
                         size="lg"
-                        className="ml-6 shrink-0 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold px-6 py-3 rounded-xl shadow-lg shadow-red-500/25 border border-red-500/50 hover:shadow-red-500/40 transition-all duration-300"
+                        className="ml-6 shrink-0 bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl shadow-red-500/40 border-2 border-red-300/60 hover:shadow-red-500/60 transition-all duration-300 hover:scale-105"
                         disabled={isDeleting}
                       >
-                        <Trash2 className="h-5 w-5 mr-2" />
+                        <Trash2 className="h-6 w-6 mr-3" />
                         Delete Account
                       </Button>
                     </AlertDialogTrigger>
-                    <AlertDialogContent className="max-w-lg bg-gradient-to-br from-slate-900 to-red-950 border-red-500/30 text-white">
+                    <AlertDialogContent className="max-w-lg bg-gradient-to-br from-slate-800 via-red-900 to-pink-900 border-2 border-red-400/60 text-white shadow-2xl shadow-red-500/30">
                       <AlertDialogHeader>
-                        <AlertDialogTitle className="flex items-center space-x-3 text-red-400 text-xl">
-                          <div className="p-2 rounded-lg bg-red-500/20">
-                            <AlertTriangle className="h-6 w-6" />
+                        <AlertDialogTitle className="flex items-center space-x-3 text-white text-2xl">
+                          <div className="p-3 rounded-xl bg-gradient-to-br from-red-500 to-pink-600 shadow-lg">
+                            <AlertTriangle className="h-7 w-7 text-white" />
                           </div>
-                          <span>Delete Account</span>
+                          <span className="bg-gradient-to-r from-red-200 to-pink-200 bg-clip-text text-transparent">Delete Account</span>
                         </AlertDialogTitle>
-                        <AlertDialogDescription className="text-left space-y-4 text-gray-300">
-                          <p className="text-base">Are you absolutely sure you want to delete your account?</p>
-                          <div className="bg-red-950/30 p-4 rounded-lg border border-red-500/20">
-                            <p className="font-semibold text-red-400 mb-2">This will permanently delete:</p>
-                            <ul className="list-disc list-inside space-y-1 text-sm ml-2">
+                        <AlertDialogDescription className="text-left space-y-4 text-gray-200">
+                          <p className="text-lg">Are you absolutely sure you want to delete your account?</p>
+                          <div className="bg-gradient-to-r from-red-800/40 to-pink-800/30 p-6 rounded-xl border-2 border-red-400/30 shadow-lg">
+                            <p className="font-semibold text-red-200 mb-3 text-lg">This will permanently delete:</p>
+                            <ul className="list-disc list-inside space-y-2 text-base ml-2 text-gray-200">
                               <li>All your progress and study data</li>
                               <li>Notebook entries and notes</li>
                               <li>Exam results and analytics</li>
                               <li>Account preferences and settings</li>
                             </ul>
                           </div>
-                          <p className="font-bold text-red-400 text-center">This action cannot be undone.</p>
+                          <p className="font-bold text-red-300 text-center text-xl">This action cannot be undone.</p>
                         </AlertDialogDescription>
                       </AlertDialogHeader>
-                      <AlertDialogFooter className="pt-6">
-                        <AlertDialogCancel className="bg-slate-700 text-white border-slate-600 hover:bg-slate-600">
+                      <AlertDialogFooter className="pt-6 space-x-4">
+                        <AlertDialogCancel className="bg-slate-600 text-white border-2 border-slate-400 hover:bg-slate-700 px-6 py-3 rounded-xl">
                           Cancel
                         </AlertDialogCancel>
                         <AlertDialogAction
                           onClick={handleDeleteAccount}
-                          className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold shadow-lg shadow-red-500/25"
+                          className="bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-bold shadow-2xl shadow-red-500/40 px-6 py-3 rounded-xl border-2 border-red-300/60"
                           disabled={isDeleting}
                         >
                           {isDeleting ? "Deleting..." : "Yes, delete my account"}
