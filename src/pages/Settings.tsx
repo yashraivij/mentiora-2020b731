@@ -105,7 +105,7 @@ const Settings = () => {
             <CardHeader className="relative">
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-full bg-destructive/20">
-                  <Shield className="h-5 w-5 text-destructive" />
+                  <Shield className="h-5 w-5 text-white" />
                 </div>
                 <div>
                   <CardTitle className="text-xl text-white">Danger Zone</CardTitle>
