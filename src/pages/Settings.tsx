@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
-import { Settings as SettingsIcon, Trash2, Shield, ArrowLeft, CreditCard } from "lucide-react";
+import { Settings as SettingsIcon, Trash2, Shield, ArrowLeft, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -15,7 +15,7 @@ const Settings = () => {
   const [searchParams] = useSearchParams();
   const { toast } = useToast();
   const [isDeleting, setIsDeleting] = useState(false);
-  const [isManagingSubscription, setIsManagingSubscription] = useState(false);
+  const [isCancellingSubscription, setIsCancellingSubscription] = useState(false);
 
   const fromPath = searchParams.get('from') || '/dashboard';
 
@@ -62,35 +62,41 @@ const Settings = () => {
     }
   };
 
-  const handleManageSubscription = async () => {
+  const handleCancelSubscription = async () => {
     if (!user) return;
     
-    setIsManagingSubscription(true);
+    setIsCancellingSubscription(true);
     try {
-      const { data, error } = await supabase.functions.invoke('customer-portal');
+      const { data, error } = await supabase.functions.invoke('cancel-subscription');
       
       if (error) {
-        console.error('Error creating customer portal session:', error);
+        console.error('Error cancelling subscription:', error);
         toast({
           title: "Error",
-          description: "Failed to open subscription management. Please try again.",
+          description: "Failed to cancel subscription. Please try again.",
           variant: "destructive",
         });
         return;
       }
 
-      if (data?.url) {
-        window.open(data.url, '_blank');
-      }
+      toast({
+        title: "Subscription Cancelled",
+        description: "Your subscription has been successfully cancelled. You'll be redirected to the dashboard.",
+      });
+      
+      // Redirect to dashboard after a short delay
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 2000);
     } catch (error) {
-      console.error('Error managing subscription:', error);
+      console.error('Error cancelling subscription:', error);
       toast({
         title: "Error",
-        description: "Failed to open subscription management. Please try again.",
+        description: "Failed to cancel subscription. Please try again.",
         variant: "destructive",
       });
     } finally {
-      setIsManagingSubscription(false);
+      setIsCancellingSubscription(false);
     }
   };
 
@@ -122,7 +128,7 @@ const Settings = () => {
           </div>
         </motion.div>
 
-        {/* Subscription Management - Only shown when coming from premium dashboard */}
+        {/* Premium Cancellation - Only shown when coming from premium dashboard */}
         {fromPath === '/premium-dashboard' && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -130,37 +136,72 @@ const Settings = () => {
             transition={{ delay: 0.1 }}
             className="mb-8"
           >
-            <Card className="relative overflow-hidden border-2 border-primary/20 shadow-xl bg-gradient-to-br from-primary/5 to-primary/10">
-              <CardHeader>
+            <Card className="relative overflow-hidden border-2 border-amber-500/50 shadow-2xl bg-gradient-to-br from-amber-600 to-orange-700">
+              <div 
+                className="absolute inset-0 bg-gradient-to-br from-amber-500/90 to-orange-600/95"
+              />
+              <div 
+                className="absolute inset-0 border-2 border-amber-400/30 rounded-lg"
+              />
+              <CardHeader className="relative">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-full bg-primary/20">
-                    <CreditCard className="h-5 w-5 text-primary" />
+                  <div className="p-2 rounded-full bg-amber-600/20">
+                    <X className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <CardTitle className="text-xl">Subscription Management</CardTitle>
-                    <CardDescription>
-                      Manage your premium subscription and billing
+                    <CardTitle className="text-xl text-white">Premium Membership</CardTitle>
+                    <CardDescription className="text-amber-100">
+                      Manage your premium subscription
                     </CardDescription>
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="p-6 rounded-lg bg-muted/50 border border-primary/20">
+              <CardContent className="relative space-y-6">
+                <div className="p-6 rounded-lg bg-amber-800/80 border border-amber-400/40 backdrop-blur-sm">
                   <div className="flex items-start justify-between">
                     <div className="space-y-2">
-                      <h3 className="text-lg font-semibold">Manage Subscription</h3>
-                      <p className="text-sm text-muted-foreground max-w-md">
-                        Cancel your subscription, update payment methods, or view billing history through Stripe's secure portal.
+                      <h3 className="text-lg font-semibold text-white">Cancel Membership</h3>
+                      <p className="text-sm text-amber-100 max-w-md">
+                        Cancel your premium subscription. You'll lose access to premium features immediately.
                       </p>
                     </div>
-                    <Button 
-                      onClick={handleManageSubscription}
-                      disabled={isManagingSubscription}
-                      className="ml-4 bg-primary hover:bg-primary/90"
-                    >
-                      <CreditCard className="mr-2 h-4 w-4" />
-                      {isManagingSubscription ? "Opening..." : "Manage Subscription"}
-                    </Button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button 
+                          variant="destructive" 
+                          size="sm"
+                          className="ml-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
+                        >
+                          <X className="mr-2 h-4 w-4" />
+                          Cancel Membership
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent className="border-amber-500/20">
+                        <AlertDialogHeader>
+                          <AlertDialogTitle className="text-amber-600">Cancel Premium Membership?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Are you sure you want to cancel your premium membership? You will immediately lose access to:
+                            <ul className="list-disc list-inside mt-2 space-y-1">
+                              <li>Advanced analytics and insights</li>
+                              <li>Premium study features</li>
+                              <li>Unlimited practice questions</li>
+                              <li>Priority support</li>
+                            </ul>
+                            <p className="mt-2 font-medium">This action cannot be undone.</p>
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Keep Membership</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={handleCancelSubscription}
+                            disabled={isCancellingSubscription}
+                            className="bg-amber-600 hover:bg-amber-700"
+                          >
+                            {isCancellingSubscription ? "Cancelling..." : "Yes, cancel membership"}
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   </div>
                 </div>
               </CardContent>
