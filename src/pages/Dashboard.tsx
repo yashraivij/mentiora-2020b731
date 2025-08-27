@@ -1612,6 +1612,7 @@ const Dashboard = () => {
         timeSavedHours={timeSavedHours}
         show={showTimeSavedNotification}
         onClose={() => setShowTimeSavedNotification(false)}
+        isPremium={false}
       />
 
       {/* Grade Celebration Modal */}

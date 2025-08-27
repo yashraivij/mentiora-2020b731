@@ -9,12 +9,14 @@ interface TimeSavedNotificationProps {
   timeSavedHours: number;
   onClose: () => void;
   show: boolean;
+  isPremium?: boolean;
 }
 
 export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
   timeSavedHours,
   onClose,
-  show
+  show,
+  isPremium = false
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -171,18 +173,18 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                   transition={{ delay: 0.2, type: "spring", damping: 20 }}
                   className="text-center"
                 >
-                  <div className="text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 dark:from-violet-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2">
+                  <div className={`text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 dark:from-violet-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2 ${!isPremium ? 'blur-lg' : ''}`}>
                     {getTimeSavedDisplay()}
                   </div>
-                  <p className="text-sm font-semibold text-violet-700 dark:text-violet-300 mb-1">
+                  <p className={`text-sm font-semibold text-violet-700 dark:text-violet-300 mb-1 ${!isPremium ? 'blur-sm' : ''}`}>
                     Total Time Saved
                   </p>
-                  <p className="text-xs text-violet-600/80 dark:text-violet-400/80">
+                  <p className={`text-xs text-violet-600/80 dark:text-violet-400/80 ${!isPremium ? 'blur-sm' : ''}`}>
                     with Smart Auto-Notes
                   </p>
                 </motion.div>
 
-                <div className="bg-white/70 dark:bg-violet-900/40 rounded-xl p-4 border border-violet-200/60 dark:border-violet-700/60 backdrop-blur-sm">
+                <div className={`bg-white/70 dark:bg-violet-900/40 rounded-xl p-4 border border-violet-200/60 dark:border-violet-700/60 backdrop-blur-sm ${!isPremium ? 'blur-md' : ''}`}>
                   <p className="text-sm font-medium text-violet-800 dark:text-violet-200 text-center leading-relaxed">
                     {getEncouragingMessage()}
                   </p>
@@ -205,7 +207,7 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                 className="mt-4 text-center"
               >
                 <Button
-                  onClick={() => window.location.href = '/premium-notebook'}
+                  onClick={() => window.location.href = isPremium ? '/premium-notebook' : '/notebook'}
                   size="sm"
                   className="bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 hover:from-violet-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl transition-all duration-200"
                 >
