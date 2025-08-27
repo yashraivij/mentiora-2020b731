@@ -291,11 +291,23 @@ const PremiumDashboard = () => {
     if (!user?.id) return;
 
     try {
+      // First check if user is actually premium
+      const { data: subscription, error } = await supabase
+        .from('subscribers')
+        .select('subscribed')
+        .eq('user_id', user.id)
+        .single();
+
+      if (error || !subscription?.subscribed) {
+        console.log('User is not premium, skipping welcome message');
+        return;
+      }
+
       const firstVisitKey = `premium_dashboard_first_visit_${user.id}`;
       const hasVisitedBefore = localStorage.getItem(firstVisitKey);
       
       if (!hasVisitedBefore) {
-        console.log('🎉 First time visiting premium dashboard!');
+        console.log('🎉 First time visiting premium dashboard by premium user!');
         // Small delay to ensure page is loaded
         setTimeout(() => {
           setShowPremiumWelcome(true);
