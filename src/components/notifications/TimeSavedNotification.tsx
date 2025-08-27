@@ -48,7 +48,11 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
     } else if (totalHours >= 2) {
       return `Great start! ${getTimeSavedDisplay()} saved is already making a real difference!`;
     } else {
-      return `Every minute counts! ${getTimeSavedDisplay()} saved is building your success momentum!`;
+      if (totalHours >= 1) {
+        return `Every minute counts! That's over an hour of class time back in your schedule!`;
+      } else {
+        return `Great start! Every minute saved is building your success momentum!`;
+      }
     }
   };
 
