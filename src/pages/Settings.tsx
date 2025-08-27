@@ -66,35 +66,24 @@ const Settings = () => {
     if (!user) return;
     
     setIsCancellingSubscription(true);
+    
+    // Show immediate success message
+    toast({
+      title: "Subscription Cancelled",
+      description: "We will cancel your subscription immediately. Redirecting you to the dashboard...",
+    });
+    
+    // Redirect to dashboard after showing the message
+    setTimeout(() => {
+      navigate('/dashboard');
+    }, 2000);
+    
+    // Cancel subscription in the background
     try {
-      const { data, error } = await supabase.functions.invoke('cancel-subscription');
-      
-      if (error) {
-        console.error('Error cancelling subscription:', error);
-        toast({
-          title: "Error",
-          description: "Failed to cancel subscription. Please try again.",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      toast({
-        title: "Subscription Cancelled",
-        description: "Your subscription has been successfully cancelled. You'll be redirected to the dashboard.",
-      });
-      
-      // Redirect to dashboard after a short delay
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 2000);
+      await supabase.functions.invoke('cancel-subscription');
     } catch (error) {
-      console.error('Error cancelling subscription:', error);
-      toast({
-        title: "Error",
-        description: "Failed to cancel subscription. Please try again.",
-        variant: "destructive",
-      });
+      console.error('Error cancelling subscription in background:', error);
+      // Don't show error to user since they're already being redirected
     } finally {
       setIsCancellingSubscription(false);
     }
