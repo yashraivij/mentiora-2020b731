@@ -108,6 +108,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = async () => {
     console.log('Signing out user:', user?.email);
+    // Store current dashboard preference before logout
+    const currentPath = window.location.pathname;
+    if (currentPath === '/premium-dashboard') {
+      localStorage.setItem('lastDashboard', 'premium');
+    } else if (currentPath === '/dashboard') {
+      localStorage.setItem('lastDashboard', 'regular');
+    }
     await supabase.auth.signOut();
   };
 

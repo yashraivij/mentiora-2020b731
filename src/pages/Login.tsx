@@ -26,7 +26,13 @@ const Login = () => {
     
     if (success) {
       toast.success("Welcome back to Mentiora!");
-      navigate("/dashboard");
+      // Check for dashboard preference and redirect accordingly
+      const lastDashboard = localStorage.getItem('lastDashboard');
+      if (lastDashboard === 'premium') {
+        navigate("/premium-dashboard");
+      } else {
+        navigate("/dashboard");
+      }
     } else {
       toast.error("Invalid email or password");
     }
