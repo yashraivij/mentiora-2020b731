@@ -40,13 +40,23 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
     } else if (days >= 1) {
       return `Amazing! You've saved ${getTimeSavedDisplay()} - that's a whole day back in your schedule!`;
     } else if (totalHours >= 20) {
-      return `Incredible efficiency! ${getTimeSavedDisplay()} saved means more time for what matters most!`;
+      return `Incredible efficiency! That's like skipping 20+ hours of classes - amazing work!`;
+    } else if (totalHours >= 15) {
+      return `Phenomenal! That's equivalent to 3+ full school days of time saved!`;
     } else if (totalHours >= 10) {
-      return `You're on fire! ${getTimeSavedDisplay()} saved is like getting extra hours in your day!`;
+      return `You're crushing it! That's like getting 2 full school days back!`;
+    } else if (totalHours >= 8) {
+      return `Outstanding! That's more than a full school day of time back in your life!`;
+    } else if (totalHours >= 6) {
+      return `Incredible! That's like skipping 6 full class periods - pure efficiency!`;
     } else if (totalHours >= 5) {
-      return `Excellent progress! ${getTimeSavedDisplay()} saved - that's serious time optimization!`;
+      return `Excellent! That's equivalent to a full morning of classes saved!`;
+    } else if (totalHours >= 4) {
+      return `Brilliant! That's like getting 4 class periods back in your day!`;
+    } else if (totalHours >= 3) {
+      return `Fantastic! That's like skipping 3 full classes - time well optimized!`;
     } else if (totalHours >= 2) {
-      return `Great start! ${getTimeSavedDisplay()} saved is already making a real difference!`;
+      return `Great work! That's like getting 2 class periods back - keep it up!`;
     } else {
       if (totalHours >= 1) {
         return `Every minute counts! That's over an hour of class time back in your schedule!`;
