@@ -88,21 +88,12 @@ const Settings = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <Card className="relative overflow-hidden border-0 shadow-2xl">
+          <Card className="relative overflow-hidden border-2 border-red-500/50 shadow-2xl bg-gradient-to-br from-red-600 to-red-800">
             <div 
-              className="absolute inset-0 opacity-10"
-              style={{ 
-                background: 'linear-gradient(135deg, hsl(0 84% 60%), hsl(320 91% 69%), hsl(24 95% 53%))'
-              }}
+              className="absolute inset-0 bg-gradient-to-br from-red-500/90 to-red-700/95"
             />
             <div 
-              className="absolute inset-0 border-2 border-transparent"
-              style={{
-                background: 'linear-gradient(135deg, hsl(0 84% 60%), hsl(320 91% 69%)) border-box',
-                WebkitMask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
-                WebkitMaskComposite: 'subtract',
-                maskComposite: 'subtract'
-              }}
+              className="absolute inset-0 border-2 border-red-400/30 rounded-lg"
             />
             <CardHeader className="relative">
               <div className="flex items-center gap-3">
@@ -118,7 +109,7 @@ const Settings = () => {
               </div>
             </CardHeader>
             <CardContent className="relative space-y-6">
-              <div className="p-6 rounded-lg bg-card/50 border border-destructive/20">
+              <div className="p-6 rounded-lg bg-red-800/80 border border-red-400/40 backdrop-blur-sm">
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
                     <h3 className="text-lg font-semibold text-white">Delete Account</h3>
