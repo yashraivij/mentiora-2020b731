@@ -26,9 +26,15 @@ const Login = () => {
     
     if (success) {
       toast.success("Welcome back to Mentiora!");
-      // All accounts now start on regular dashboard
-      console.log('Redirecting to regular dashboard');
-      navigate("/dashboard");
+      // Check if user has a saved dashboard preference from logout
+      const lastDashboard = localStorage.getItem('lastDashboard');
+      if (lastDashboard === 'premium') {
+        console.log('Redirecting to premium dashboard based on logout preference');
+        navigate("/premium-dashboard");
+      } else {
+        console.log('Redirecting to regular dashboard (default or saved preference)');
+        navigate("/dashboard");
+      }
     } else {
       toast.error("Invalid email or password");
     }
