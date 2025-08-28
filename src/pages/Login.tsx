@@ -26,13 +26,21 @@ const Login = () => {
     
     if (success) {
       toast.success("Welcome back to Mentiora!");
+      
       // Check if user has a saved dashboard preference from logout
       const lastDashboard = localStorage.getItem('lastDashboard');
+      
+      // For accounts that should start fresh, clear old preferences and start on dashboard
       if (lastDashboard === 'premium') {
         console.log('Redirecting to premium dashboard based on logout preference');
         navigate("/premium-dashboard");
       } else {
-        console.log('Redirecting to regular dashboard (default or saved preference)');
+        // Clear any stale localStorage data and start fresh on dashboard
+        if (lastDashboard && lastDashboard !== 'regular') {
+          console.log('Clearing stale dashboard preference for fresh start');
+          localStorage.removeItem('lastDashboard');
+        }
+        console.log('Redirecting to regular dashboard (default or fresh start)');
         navigate("/dashboard");
       }
     } else {
