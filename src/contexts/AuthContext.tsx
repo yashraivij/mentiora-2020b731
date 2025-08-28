@@ -34,6 +34,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setSession(session);
         setUser(session?.user ?? null);
         setIsLoading(false);
+        
+        // Clear dashboard preferences for all accounts - they should start on /dashboard
+        if (event === 'SIGNED_IN' && session?.user) {
+          localStorage.removeItem('lastDashboard');
+          console.log('Cleared dashboard preferences - user will start on regular dashboard');
+        }
       }
     );
 

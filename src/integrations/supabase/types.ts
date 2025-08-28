@@ -647,13 +647,15 @@ export type Database = {
         }
         Relationships: []
       }
-      profiles: {
+      profiled: {
         Row: {
           avatar_url: string | null
           created_at: string | null
           email: string
           full_name: string | null
           id: string
+          is_premium: boolean | null
+          premium: boolean
           revision_goals: Json | null
           subject_preferences: Json | null
           username: string | null
@@ -664,6 +666,8 @@ export type Database = {
           email: string
           full_name?: string | null
           id: string
+          is_premium?: boolean | null
+          premium?: boolean
           revision_goals?: Json | null
           subject_preferences?: Json | null
           username?: string | null
@@ -674,8 +678,40 @@ export type Database = {
           email?: string
           full_name?: string | null
           id?: string
+          is_premium?: boolean | null
+          premium?: boolean
           revision_goals?: Json | null
           subject_preferences?: Json | null
+          username?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          email: string
+          full_name: string | null
+          id: string
+          updated_at: string | null
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email: string
+          full_name?: string | null
+          id: string
+          updated_at?: string | null
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string | null
           username?: string | null
         }
         Relationships: []
@@ -945,9 +981,11 @@ export type Database = {
           created_at: string
           email: string
           id: string
+          is_premium: boolean | null
           stripe_customer_id: string | null
           subscribed: boolean
           subscription_end: string | null
+          subscription_id: string | null
           subscription_tier: string | null
           updated_at: string
           user_id: string | null
@@ -956,9 +994,11 @@ export type Database = {
           created_at?: string
           email: string
           id?: string
+          is_premium?: boolean | null
           stripe_customer_id?: string | null
           subscribed?: boolean
           subscription_end?: string | null
+          subscription_id?: string | null
           subscription_tier?: string | null
           updated_at?: string
           user_id?: string | null
@@ -967,9 +1007,11 @@ export type Database = {
           created_at?: string
           email?: string
           id?: string
+          is_premium?: boolean | null
           stripe_customer_id?: string | null
           subscribed?: boolean
           subscription_end?: string | null
+          subscription_id?: string | null
           subscription_tier?: string | null
           updated_at?: string
           user_id?: string | null
@@ -1159,6 +1201,10 @@ export type Database = {
       calculate_subject_accuracy: {
         Args: { exam_board?: string; subject: string; user_uuid: string }
         Returns: number
+      }
+      delete_user_account: {
+        Args: { user_id_to_delete: string }
+        Returns: undefined
       }
       get_subscription_stats: {
         Args: Record<PropertyKey, never>
