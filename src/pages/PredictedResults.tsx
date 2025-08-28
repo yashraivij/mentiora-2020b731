@@ -459,10 +459,11 @@ const PredictedResults = () => {
           }
           
           if (notesGenerated > 0) {
+            const isPremium = searchParams.get('source') === 'premium';
             toast.success(`Exam marked successfully! ${notesGenerated} revision notes added to your Smart Notebook.`, {
               action: {
                 label: "View Notes",
-                onClick: () => navigate('/notebook')
+                onClick: () => navigate(isPremium ? '/premium-notebook' : '/notebook')
               }
             });
           } else {
