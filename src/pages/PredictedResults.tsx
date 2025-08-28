@@ -741,9 +741,8 @@ const PredictedResults = () => {
                 </div>
                 <Button 
                   onClick={() => {
-                    // Check if we're in a premium context by looking at the current path or search params
-                    const currentPath = window.location.pathname;
-                    const isPremium = currentPath.includes('premium') || searchParams.get('from') === 'premium';
+                    // Check if we're in a premium context by looking at the search params
+                    const isPremium = searchParams.get('source') === 'premium';
                     
                     if (isPremium) {
                       navigate('/premium-notebook');
