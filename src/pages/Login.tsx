@@ -27,16 +27,16 @@ const Login = () => {
     if (success) {
       toast.success("Welcome back to Mentiora!");
       
-      // Clear all existing dashboard preferences so everyone starts fresh on /dashboard from today
-      // The logout preference system will work going forward, but we reset everyone to start fresh
-      const existingPreference = localStorage.getItem('lastDashboard');
-      if (existingPreference) {
-        console.log('Clearing existing dashboard preference for fresh start:', existingPreference);
-        localStorage.removeItem('lastDashboard');
-      }
+      // Check if user has a saved dashboard preference from logout
+      const lastDashboard = localStorage.getItem('lastDashboard');
       
-      console.log('Redirecting to dashboard (fresh start for all accounts from today)');
-      navigate("/dashboard");
+      if (lastDashboard === 'premium') {
+        console.log('Redirecting to premium dashboard based on logout preference');
+        navigate("/premium-dashboard");
+      } else {
+        console.log('Redirecting to regular dashboard (default or no preference)');
+        navigate("/dashboard");
+      }
     } else {
       toast.error("Invalid email or password");
     }
