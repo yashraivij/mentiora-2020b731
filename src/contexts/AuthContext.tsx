@@ -35,7 +35,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(session?.user ?? null);
         setIsLoading(false);
         
-        // Dashboard preferences are now preserved to respect logout location
+        // Clear dashboard preferences on first sign-in to ensure all users start on /dashboard
+        if (event === 'SIGNED_IN' && session?.user) {
+          const hasResetPreferences = localStorage.getItem('dashboardPreferencesReset');
+          if (!hasResetPreferences) {
+            localStorage.removeItem('lastDashboard');
+            localStorage.setItem('dashboardPreferencesReset', 'true');
+            console.log('Cleared dashboard preferences - user will start on regular dashboard');
+          }
+        }
       }
     );
 
