@@ -740,7 +740,17 @@ const PredictedResults = () => {
                   Review personalized notes to strengthen weak areas and improve your Grade 9 performance
                 </div>
                 <Button 
-                  onClick={() => navigate('/notebook')}
+                  onClick={() => {
+                    // Check if we're in a premium context by looking at the current path or search params
+                    const currentPath = window.location.pathname;
+                    const isPremium = currentPath.includes('premium') || searchParams.get('from') === 'premium';
+                    
+                    if (isPremium) {
+                      navigate('/premium-notebook');
+                    } else {
+                      navigate('/notebook');
+                    }
+                  }}
                   className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
                   size="lg"
                 >
