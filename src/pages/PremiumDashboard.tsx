@@ -39,7 +39,6 @@ import { PublicStreakProfiles } from '@/components/dashboard/PublicStreakProfile
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
 import { useToast } from "@/hooks/use-toast";
 import { PremiumWelcome } from "@/components/ui/premium-welcome";
-import { usePremiumStatus } from "@/hooks/usePremiumStatus";
 
 interface UserProgress {
   subjectId: string;
@@ -53,15 +52,6 @@ const PremiumDashboard = () => {
   const { user, logout } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { isPremium, isLoading: premiumLoading } = usePremiumStatus();
-
-  // Redirect non-premium users to regular dashboard
-  useEffect(() => {
-    if (!premiumLoading && !isPremium) {
-      console.log('User is not premium, redirecting to regular dashboard');
-      navigate('/dashboard');
-    }
-  }, [isPremium, premiumLoading, navigate]);
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
   const [pinnedSubjects, setPinnedSubjects] = useState<string[]>([]);
