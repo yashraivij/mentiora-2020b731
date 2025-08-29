@@ -11,17 +11,13 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import PremiumDashboard from "./pages/PremiumDashboard";
 import SubjectTopics from "./pages/SubjectTopics";
 import Practice from "./pages/Practice";
 import Analytics from "./pages/Analytics";
 import PredictedQuestions from "./pages/PredictedQuestions";
-import PremiumPredictedQuestions from "./pages/PremiumPredictedQuestions";
 import PredictedExam from "./pages/PredictedExam";
 import PredictedResults from "./pages/PredictedResults";
 import Notebook from "./pages/Notebook";
-import PremiumNotebook from "./pages/PremiumNotebook";
-import Settings from "./pages/Settings";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -44,11 +40,6 @@ const App: React.FC = () => (
                 <Dashboard />
               </ProtectedRoute>
             } />
-            <Route path="/premium-dashboard" element={
-              <ProtectedRoute>
-                <PremiumDashboard />
-              </ProtectedRoute>
-            } />
             <Route path="/subject/:subjectId" element={
               <ProtectedRoute>
                 <SubjectTopics />
@@ -69,11 +60,6 @@ const App: React.FC = () => (
                 <PredictedQuestions />
               </ProtectedRoute>
             } />
-            <Route path="/premium-predicted-questions" element={
-              <ProtectedRoute>
-                <PremiumPredictedQuestions />
-              </ProtectedRoute>
-            } />
             <Route path="/predicted-exam/:subjectId" element={
               <ProtectedRoute>
                 <PredictedExam />
@@ -87,16 +73,6 @@ const App: React.FC = () => (
             <Route path="/notebook" element={
               <ProtectedRoute>
                 <Notebook />
-              </ProtectedRoute>
-            } />
-            <Route path="/premium-notebook" element={
-              <ProtectedRoute>
-                <PremiumNotebook />
-              </ProtectedRoute>
-            } />
-            <Route path="/settings" element={
-              <ProtectedRoute>
-                <Settings />
               </ProtectedRoute>
             } />
             <Route path="*" element={<NotFound />} />

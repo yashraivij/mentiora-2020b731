@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { useParams, useNavigate, useSearchParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { curriculum } from "@/data/curriculum";
 import { ArrowLeft, BookOpen, Clock, TrendingUp } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -19,7 +19,6 @@ interface TopicProgress {
 const SubjectTopics = () => {
   const { subjectId } = useParams();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
   const { user } = useAuth();
   const [topicProgress, setTopicProgress] = useState<TopicProgress[]>([]);
 
@@ -57,10 +56,7 @@ const SubjectTopics = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Subject not found</h1>
-          <Button onClick={() => {
-            const fromParam = searchParams.get('from');
-            navigate(fromParam === 'premium' ? '/premium-dashboard' : '/dashboard');
-          }}>
+          <Button onClick={() => navigate('/dashboard')}>
             Back to Dashboard
           </Button>
         </div>
@@ -117,10 +113,7 @@ const SubjectTopics = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button variant="outline" onClick={() => {
-                const fromParam = searchParams.get('from');
-                navigate(fromParam === 'premium' ? '/premium-dashboard' : '/dashboard');
-              }}>
+              <Button variant="outline" onClick={() => navigate('/dashboard')}>
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Button>
@@ -267,10 +260,7 @@ const SubjectTopics = () => {
                         ? 'bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground' 
                         : 'bg-gradient-to-r from-emerald-400 to-cyan-500 hover:from-emerald-500 hover:to-cyan-600 text-white'
                     }`}
-                     onClick={() => {
-                       const fromParam = searchParams.get('from');
-                       navigate(`/practice/${subjectId}/${topic.id}${fromParam ? `?from=${fromParam}` : ''}`);
-                     }}
+                    onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
                   >
                     {isNew ? 'Start Practice' : 
                      isMastered ? 'Practice More' : 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate, useSearchParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -31,7 +31,6 @@ interface ExamAnswer {
 const PredictedExam = () => {
   const { subjectId } = useParams();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
   const { toast } = useToast();
   const { user } = useAuth();
   
@@ -52,8 +51,7 @@ const PredictedExam = () => {
   const subject = curriculum.find(s => s.id === subjectId);
   
   if (!subject) {
-    const source = searchParams.get('source');
-    navigate(source === 'premium' ? '/premium-predicted-questions' : '/predicted-questions');
+    navigate('/predicted-questions');
     return null;
   }
 
@@ -1378,7 +1376,7 @@ Write a story about discovering a hidden object.
         let questionText = q.question;
         
         // Keep the original question text without automatic prepending
-        // Questions should already be properly formatted from the smart generation
+        // Questions should already be properly formatted from the AI generation
         
         questions.push({
           id: `${topicIndex}-${qIndex}`,
@@ -1532,12 +1530,12 @@ Write a story about discovering a hidden object.
       };
 
     } catch (error) {
-      console.error('Error calling smart marking function:', error);
+      console.error('Error calling AI marking function:', error);
       
       // Fallback to basic marking
       return {
         marksAwarded: answer.trim() ? Math.round(question.marks * 0.5) : 0,
-        feedback: "Automatic marking temporarily unavailable. Answer has been given partial credit.",
+        feedback: "AI marking temporarily unavailable. Answer has been given partial credit.",
         assessment: "Needs Review"
       };
     }
@@ -1566,7 +1564,7 @@ Write a story about discovering a hidden object.
             const question = examQuestions.find(q => q.id === answer.questionId);
             if (question && answer.answer.trim()) {
               try {
-                // Mark the answer automatically
+                // Mark the answer with AI
                 const markingResult = await markAnswerWithAI(question, answer.answer);
                 const marksLost = question.marks - markingResult.marksAwarded;
                 
@@ -1632,10 +1630,7 @@ Write a story about discovering a hidden object.
       })();
     }
     
-    const source = searchParams.get('source');
-    const sourceParam = source ? `?source=${source}` : '';
-    
-    navigate(`/predicted-results/${subjectId}${sourceParam}`, {
+    navigate(`/predicted-results/${subjectId}`, {
       state: { 
         questions: examQuestions, 
         answers: answers,
@@ -1653,10 +1648,7 @@ Write a story about discovering a hidden object.
         <header className="bg-card/90 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-lg">
           <div className="container mx-auto px-6 py-4">
             <div className="flex justify-between items-center">
-              <Button variant="ghost" onClick={() => {
-                const source = searchParams.get('source');
-                navigate(source === 'premium' ? '/premium-predicted-questions' : '/predicted-questions');
-              }} className="text-muted-foreground hover:text-foreground">
+              <Button variant="ghost" onClick={() => navigate('/predicted-questions')} className="text-muted-foreground hover:text-foreground">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Button>

@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { useParams, useNavigate, useSearchParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
 import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb, HelpCircle, X, StickyNote } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -58,7 +58,6 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 const Practice = () => {
   const { subjectId, topicId } = useParams();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
   const { user } = useAuth();
   
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -160,8 +159,7 @@ const Practice = () => {
     
     recordVisit();
     if (!subject || !topic) {
-      const fromParam = searchParams.get('from');
-      navigate(fromParam === 'premium' ? '/premium-dashboard' : '/dashboard');
+      navigate('/dashboard');
       return;
     }
     
@@ -185,7 +183,7 @@ const Practice = () => {
 
   const markAnswerWithAI = async (question: Question, answer: string) => {
     try {
-      console.log('Calling smart marking function with:', { 
+      console.log('Calling AI marking function with:', { 
         question: question.question, 
         answer: answer.substring(0, 100) + '...' 
       });
@@ -206,7 +204,7 @@ const Practice = () => {
         throw error;
       }
 
-      console.log('Smart marking result:', data);
+      console.log('AI marking result:', data);
 
       return {
         marksAwarded: data.marksAwarded || 0,
@@ -215,13 +213,13 @@ const Practice = () => {
       };
 
     } catch (error) {
-      console.error('Error calling smart marking function:', error);
-      toast.error("Failed to mark answer automatically. Please try again.");
+      console.error('Error calling AI marking function:', error);
+      toast.error("Failed to mark answer with AI. Please try again.");
       
       // Fallback to basic marking
       return {
         marksAwarded: answer.trim() ? Math.round(question.marks * 0.5) : 0,
-        feedback: "Automatic marking temporarily unavailable. Answer has been given partial credit.",
+        feedback: "AI marking temporarily unavailable. Answer has been given partial credit.",
         assessment: "Needs Review"
       };
     }
@@ -294,14 +292,7 @@ const Practice = () => {
             toast.success(`Answer marked! You scored ${markingResult.marksAwarded}/${currentQuestion.marks} marks. Smart notes added to your Notebook!`, {
               action: {
                 label: "View Notebook",
-                onClick: () => {
-                  const fromParam = searchParams.get('from');
-                  if (fromParam === 'premium') {
-                    navigate('/premium-notebook');
-                  } else {
-                    navigate('/notebook');
-                  }
-                }
+                onClick: () => navigate('/notebook')
               }
             });
           } else {
@@ -834,14 +825,7 @@ const Practice = () => {
             </div>
             
             <div className="flex flex-col space-y-2">
-              <Button onClick={() => {
-                const fromParam = searchParams.get('from');
-                if (fromParam === 'premium') {
-                  navigate('/premium-dashboard');
-                } else {
-                  navigate(`/subject/${subjectId}`);
-                }
-              }}>
+              <Button onClick={() => navigate(`/subject/${subjectId}`)}>
                 Back to {subject?.name}
               </Button>
               <Button 
@@ -862,10 +846,7 @@ const Practice = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4">No questions available</h2>
-          <Button onClick={() => {
-            const fromParam = searchParams.get('from');
-            navigate(fromParam === 'premium' ? '/premium-dashboard' : '/dashboard');
-          }}>
+          <Button onClick={() => navigate('/dashboard')}>
             Back to Dashboard
           </Button>
         </div>
@@ -882,14 +863,7 @@ const Practice = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button variant="outline" onClick={() => {
-                const fromParam = searchParams.get('from');
-                if (fromParam === 'premium') {
-                  navigate('/premium-dashboard');
-                } else {
-                  navigate(`/subject/${subjectId}`);
-                }
-              }}>
+              <Button variant="outline" onClick={() => navigate(`/subject/${subjectId}`)}>
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Button>
@@ -1042,7 +1016,7 @@ const Practice = () => {
                           disabled={isSubmitting || !userAnswer.trim()}
                           className="flex-1"
                         >
-                          {isSubmitting ? "Marking your answer..." : "Submit Answer"}
+                          {isSubmitting ? "AI is marking your answer..." : "Submit Answer"}
                         </Button>
                         <Button 
                           variant="outline" 
@@ -1089,7 +1063,7 @@ const Practice = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center text-foreground">
                     <CheckCircle className="h-5 w-5 mr-2 text-green-600 dark:text-green-400" />
-                    Smart Teacher Feedback
+                    AI Teacher Feedback
                   </CardTitle>
                   <div className="flex items-center space-x-2">
                     <span className="text-2xl font-bold text-green-600 dark:text-green-400">
@@ -1130,11 +1104,11 @@ const Practice = () => {
                     </div>
                   </div>
 
-                  {/* Smart Feedback */}
+                  {/* AI Feedback */}
                   <div>
                     <h4 className="font-semibold text-foreground mb-2 flex items-center">
                       <Lightbulb className="h-4 w-4 mr-2" />
-                      Smart Teacher Feedback
+                      AI Teacher Feedback
                     </h4>
                     <div className="bg-yellow-50 dark:bg-yellow-950/20 p-4 rounded-lg border-l-4 border-yellow-500">
                       <p className="text-foreground">{currentAttempt.feedback.whyYoursDidnt}</p>
@@ -1152,14 +1126,7 @@ const Practice = () => {
                       {currentQuestionIndex < shuffledQuestions.length - 1 ? "Next Question" : "Finish Session"}
                     </Button>
                     <Button 
-                      onClick={() => {
-                        const fromParam = searchParams.get('from');
-                        if (fromParam === 'premium') {
-                          navigate('/premium-notebook');
-                        } else {
-                          navigate('/notebook');
-                        }
-                      }}
+                      onClick={() => navigate('/notebook')}
                       variant="outline"
                       className="w-full bg-gradient-to-r from-purple-50 to-indigo-50 border-purple-200 text-purple-700 hover:from-purple-100 hover:to-indigo-100 hover:border-purple-300 hover:shadow-md transition-all duration-200 dark:from-purple-950/30 dark:to-indigo-950/30 dark:border-purple-700 dark:text-purple-300 dark:hover:from-purple-950/50 dark:hover:to-indigo-950/50 dark:hover:border-purple-600"
                     >

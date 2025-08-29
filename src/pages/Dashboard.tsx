@@ -9,7 +9,6 @@ import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCi
 import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
-import { SettingsButton } from "@/components/ui/settings-button";
 import { useState, useEffect } from "react";
 import { TimeSavedNotification } from "@/components/notifications/TimeSavedNotification";
 import { PremiumPaywall } from "@/components/ui/premium-paywall";
@@ -930,8 +929,8 @@ const Dashboard = () => {
                     Mentiora
                   </h1>
                   <div className="flex items-center space-x-2">
-                    <User className="h-3 w-3 text-muted-foreground" />
-                    <span className="text-xs font-medium text-muted-foreground">Free Account</span>
+                    <Crown className="h-3 w-3 text-amber-500" />
+                    <span className="text-xs font-medium text-muted-foreground">Premium</span>
                   </div>
                 </div>
               </div>
@@ -948,7 +947,6 @@ const Dashboard = () => {
               {getStudyStreak() >= 3 && <ColorThemeToggle />}
               {getStudyStreak() >= 7 && <StudyPlaylist isUnlocked={true} />}
               
-              <SettingsButton />
               <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
                 <LogOut className="h-4 w-4" />
               </Button>
@@ -1527,7 +1525,7 @@ const Dashboard = () => {
             
             <PremiumAnalyticsCard
               title="Stress Monitor"
-              description="Smart stress detection and recommendations for optimal learning"
+              description="AI-powered stress detection and recommendations for optimal learning"
               icon={Brain}
               gradient="from-emerald-500 to-teal-600"
               comingSoon={true}
@@ -1614,7 +1612,6 @@ const Dashboard = () => {
         timeSavedHours={timeSavedHours}
         show={showTimeSavedNotification}
         onClose={() => setShowTimeSavedNotification(false)}
-        isPremium={false}
       />
 
       {/* Grade Celebration Modal */}

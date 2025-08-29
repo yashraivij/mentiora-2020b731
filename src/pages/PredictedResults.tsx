@@ -1,4 +1,4 @@
-import { useLocation, useParams, useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -45,7 +45,6 @@ const PredictedResults = () => {
   const { subjectId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const [searchParams] = useSearchParams();
   const [attempts, setAttempts] = useState<QuestionAttempt[]>([]);
   const [isMarking, setIsMarking] = useState(true);
   
@@ -92,10 +91,10 @@ const PredictedResults = () => {
     return null;
   }
 
-  // Use exact same smart marking system as Practice.tsx - OPTIMIZED
+  // Use exact same AI marking system as Practice.tsx - OPTIMIZED
   const markAnswerWithAI = async (question: ExamQuestion, answer: string, modelAnswer: string) => {
     try {
-      console.log('Calling smart marking function with:', { 
+      console.log('Calling AI marking function with:', { 
         question: question.text || question.question, 
         answer: answer.substring(0, 100) + '...' 
       });
@@ -116,7 +115,7 @@ const PredictedResults = () => {
         throw error;
       }
 
-      console.log('Smart marking result:', data);
+      console.log('AI marking result:', data);
 
       return {
         marksAwarded: data.marksAwarded || 0,
@@ -125,12 +124,12 @@ const PredictedResults = () => {
       };
 
     } catch (error) {
-      console.error('Error calling smart marking function:', error);
+      console.error('Error calling AI marking function:', error);
       
       // Fallback to basic marking
       return {
         marksAwarded: answer.trim() ? Math.round(question.marks * 0.5) : 0,
-        feedback: "Automatic marking temporarily unavailable. Answer has been given partial credit.",
+        feedback: "AI marking temporarily unavailable. Answer has been given partial credit.",
         assessment: "Needs Review"
       };
     }
@@ -208,7 +207,7 @@ const PredictedResults = () => {
 
   const generateModelAnswer = async (questionText: string, marks: number): Promise<string> => {
     try {
-      console.log('Generating smart model answer for question:', questionText.substring(0, 100) + '...');
+      console.log('Generating AI model answer for question:', questionText.substring(0, 100) + '...');
 
       const { data, error } = await supabase.functions.invoke('generate-model-answer', {
         body: {
@@ -223,11 +222,11 @@ const PredictedResults = () => {
         throw error;
       }
 
-      console.log('Smart model answer generated successfully');
+      console.log('AI model answer generated successfully');
       return data.modelAnswer || generateFallbackModelAnswer(questionText);
 
     } catch (error) {
-      console.error('Error generating smart model answer:', error);
+      console.error('Error generating AI model answer:', error);
       // Fallback to improved static model answer
       return generateFallbackModelAnswer(questionText);
     }
@@ -375,7 +374,7 @@ const PredictedResults = () => {
           } catch (error) {
             console.error('Error marking question:', error);
             
-            // Fallback attempt with smart model answer
+            // Fallback attempt with AI model answer
             const aiModelAnswer = await generateModelAnswer(question.text || question.question || '', question.marks);
             
             const attempt: QuestionAttempt = {
@@ -459,11 +458,10 @@ const PredictedResults = () => {
           }
           
           if (notesGenerated > 0) {
-            const isPremium = searchParams.get('source') === 'premium';
             toast.success(`Exam marked successfully! ${notesGenerated} revision notes added to your Smart Notebook.`, {
               action: {
                 label: "View Notes",
-                onClick: () => navigate(isPremium ? '/premium-notebook' : '/notebook')
+                onClick: () => navigate('/notebook')
               }
             });
           } else {
@@ -528,10 +526,7 @@ const PredictedResults = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button variant="outline" onClick={() => {
-                const source = searchParams.get('source');
-                navigate(source === 'premium' ? '/premium-predicted-questions' : '/predicted-questions');
-              }}>
+              <Button variant="outline" onClick={() => navigate('/predicted-questions')}>
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Button>
@@ -681,7 +676,7 @@ const PredictedResults = () => {
                   </div>
                 </div>
 
-                {/* Smart Feedback - Conditional based on performance */}
+                {/* AI Feedback - Conditional based on performance */}
                 <div>
                   <h4 className="font-semibold text-foreground mb-2 flex items-center">
                     {attempt.feedback.fullMarks ? (
@@ -733,7 +728,7 @@ const PredictedResults = () => {
                   Smart Revision Notes Generated
                 </CardTitle>
                 <CardDescription className="text-purple-700 dark:text-purple-300 text-base">
-                  Smart notes have been automatically created for topics where you lost marks
+                  AI has automatically created revision notes for topics where you lost marks
                 </CardDescription>
               </CardHeader>
               <CardContent className="text-center space-y-4">
@@ -741,16 +736,7 @@ const PredictedResults = () => {
                   Review personalized notes to strengthen weak areas and improve your Grade 9 performance
                 </div>
                 <Button 
-                  onClick={() => {
-                    // Check if we're in a premium context by looking at the search params
-                    const isPremium = searchParams.get('source') === 'premium';
-                    
-                    if (isPremium) {
-                      navigate('/premium-notebook');
-                    } else {
-                      navigate('/notebook');
-                    }
-                  }}
+                  onClick={() => navigate('/notebook')}
                   className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
                   size="lg"
                 >
@@ -768,9 +754,7 @@ const PredictedResults = () => {
                 console.log('Retake button clicked for subject:', subjectId);
                 // Handle geography-paper-2 case specifically
                 const examSubjectId = subjectId === 'geography' ? 'geography-paper-2' : subjectId;
-                const source = searchParams.get('source');
-                const sourceParam = source ? `?source=${source}` : '';
-                navigate(`/predicted-exam/${examSubjectId}${sourceParam}`);
+                navigate(`/predicted-exam/${examSubjectId}`);
               }}
               className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700"
             >
@@ -778,10 +762,7 @@ const PredictedResults = () => {
               Retake This Exam
             </Button>
             <Button 
-              onClick={() => {
-                const source = searchParams.get('source');
-                navigate(source === 'premium' ? '/premium-predicted-questions' : '/predicted-questions');
-              }}
+              onClick={() => navigate('/predicted-questions')}
               className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700"
             >
               <BookOpen className="h-5 w-5 mr-2" />
