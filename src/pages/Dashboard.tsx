@@ -61,6 +61,19 @@ const Dashboard = () => {
       "https://buy.stripe.com/9B69AS33W3RofiEa9i8N205" + join +
       "client_reference_id=" + encodeURIComponent(user.id);
   };
+
+  const openBillingPortal = async () => {
+    const { data: sessionData } = await supabase.auth.getSession();
+    const token = sessionData?.session?.access_token;
+
+    const { data, error } = await supabase.functions.invoke("create-portal", {
+      headers: { Authorization: `Bearer ${token}` },
+      body: { returnUrl: "https://preview--mentiora.lovable.app/dashboard" }
+    });
+
+    if (error) alert("Could not open billing portal");
+    else if (data?.url) window.location.href = data.url;
+  };
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
@@ -963,6 +976,31 @@ const Dashboard = () => {
               </h2>
               <p className="text-muted-foreground text-lg">Ready to elevate your GCSE revision journey?</p>
             </div>
+            {/* Premium User Billing Management */}
+            {isPremium && (
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-accent/5 w-64">
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Crown className="h-4 w-4 text-primary" />
+                      <span className="text-sm font-medium text-primary">Premium Active</span>
+                    </div>
+                    <Button 
+                      onClick={openBillingPortal}
+                      variant="outline"
+                      size="sm"
+                      className="w-full"
+                    >
+                      Manage Billing
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            )}
           </div>
         </div>
 
