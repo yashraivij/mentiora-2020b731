@@ -9,10 +9,8 @@ import { BarChart3, BookOpen, TrendingUp, User, LogOut, Flame, Calendar, CheckCi
 import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
-import { SettingsButton } from "@/components/ui/settings-button";
 import { useState, useEffect } from "react";
 import { TimeSavedNotification } from "@/components/notifications/TimeSavedNotification";
-import { PremiumPaywall } from "@/components/ui/premium-paywall";
 import { ProgressCard } from "@/components/dashboard/ProgressCard";
 import { SubjectCard } from "@/components/dashboard/SubjectCard";
 import { WeakTopicsSection } from "@/components/dashboard/WeakTopicsSection";
@@ -67,7 +65,6 @@ const Dashboard = () => {
   const [celebrationGrade, setCelebrationGrade] = useState('');
   const [celebrationSubject, setCelebrationSubject] = useState('');
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
-  const [showPremiumPaywall, setShowPremiumPaywall] = useState(false);
 
   const {
     notification,
@@ -349,19 +346,6 @@ const Dashboard = () => {
     }
     
   }, [user?.id]);
-
-  // Listen for premium paywall events
-  useEffect(() => {
-    const handleOpenPremiumPaywall = () => {
-      setShowPremiumPaywall(true);
-    };
-
-    window.addEventListener('openPremiumPaywall', handleOpenPremiumPaywall);
-
-    return () => {
-      window.removeEventListener('openPremiumPaywall', handleOpenPremiumPaywall);
-    };
-  }, []);
 
   const loadWeakTopicsFromDatabase = async () => {
     if (!user?.id) return;
@@ -930,8 +914,8 @@ const Dashboard = () => {
                     Mentiora
                   </h1>
                   <div className="flex items-center space-x-2">
-                    <User className="h-3 w-3 text-muted-foreground" />
-                    <span className="text-xs font-medium text-muted-foreground">Free Account</span>
+                    <Crown className="h-3 w-3 text-amber-500" />
+                    <span className="text-xs font-medium text-muted-foreground">Premium</span>
                   </div>
                 </div>
               </div>
@@ -948,7 +932,6 @@ const Dashboard = () => {
               {getStudyStreak() >= 3 && <ColorThemeToggle />}
               {getStudyStreak() >= 7 && <StudyPlaylist isUnlocked={true} />}
               
-              <SettingsButton />
               <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors">
                 <LogOut className="h-4 w-4" />
               </Button>
@@ -1072,7 +1055,7 @@ const Dashboard = () => {
                     
                     <div className="space-y-1">
                       <h3 className="text-2xl font-bold bg-gradient-to-br from-emerald-600 via-cyan-600 to-violet-600 dark:from-emerald-400 dark:via-cyan-400 dark:to-violet-400 bg-clip-text text-transparent">
-                        Streak Rewards
+                        Premium Rewards
                       </h3>
                     </div>
                   </div>
@@ -1527,7 +1510,7 @@ const Dashboard = () => {
             
             <PremiumAnalyticsCard
               title="Stress Monitor"
-              description="Smart stress detection and recommendations for optimal learning"
+              description="AI-powered stress detection and recommendations for optimal learning"
               icon={Brain}
               gradient="from-emerald-500 to-teal-600"
               comingSoon={true}
@@ -1614,7 +1597,6 @@ const Dashboard = () => {
         timeSavedHours={timeSavedHours}
         show={showTimeSavedNotification}
         onClose={() => setShowTimeSavedNotification(false)}
-        isPremium={false}
       />
 
       {/* Grade Celebration Modal */}
@@ -1629,17 +1611,6 @@ const Dashboard = () => {
       <DiscordInvitation
         isVisible={showDiscordInvitation}
         onClose={() => setShowDiscordInvitation(false)}
-      />
-
-      {/* Premium Paywall Modal */}
-      <PremiumPaywall
-        isOpen={showPremiumPaywall}
-        onClose={() => setShowPremiumPaywall(false)}
-        onUpgrade={() => {
-          // Handle upgrade logic here
-          console.log('Upgrade to premium clicked');
-          setShowPremiumPaywall(false);
-        }}
       />
 
       {/* Feedback Fish Button */}

@@ -286,7 +286,7 @@ export const OptimalLearningTimeCard = () => {
               <div className="p-1.5 rounded-lg bg-gradient-to-br from-teal-500 to-cyan-600 shadow-md">
                 <Brain className="h-4 w-4 text-white" />
               </div>
-              <span className="text-sm font-bold text-teal-800 dark:text-teal-200">Smart Insight</span>
+              <span className="text-sm font-bold text-teal-800 dark:text-teal-200">AI Insight</span>
             </div>
             <p className="text-xs text-teal-700 dark:text-teal-300 leading-relaxed font-medium">
               {getMotivationalMessage()}

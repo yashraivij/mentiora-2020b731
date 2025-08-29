@@ -95,17 +95,7 @@ export function DiscordInvitation({ isVisible, onClose }: DiscordInvitationProps
 
   const handleJoinDiscord = () => {
     console.log('User joined Discord community - they will not see this invitation again');
-    try {
-      // Try window.open first, fallback to direct navigation
-      const newWindow = window.open('https://discord.gg/NUy3u3A65B', '_blank');
-      if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
-        // Popup blocked, use direct navigation
-        window.location.href = 'https://discord.gg/NUy3u3A65B';
-      }
-    } catch (error) {
-      // Fallback to direct navigation
-      window.location.href = 'https://discord.gg/NUy3u3A65B';
-    }
+    window.open('https://discord.gg/Jq2YTZ3aMa', '_blank');
     onClose();
   };
 

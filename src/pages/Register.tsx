@@ -59,7 +59,7 @@ const Register = () => {
           </div>
           <CardTitle className="text-slate-900">Create Account</CardTitle>
           <CardDescription className="text-slate-600">
-            Start your personalized GCSE revision journey
+            Join thousands improving GCSE results
           </CardDescription>
         </CardHeader>
         <CardContent className="bg-white">

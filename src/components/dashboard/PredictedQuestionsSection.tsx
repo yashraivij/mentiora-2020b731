@@ -95,7 +95,7 @@ export const PredictedQuestionsSection = () => {
                     <BookOpen className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-white text-sm">All Exam Boards</p>
+                    <p className="font-bold text-white text-sm">AQA Structure</p>
                     <p className="text-white/80 text-xs">Exact 2026 format</p>
                   </div>
                 </div>
@@ -107,7 +107,7 @@ export const PredictedQuestionsSection = () => {
                     <Target className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-white text-sm">Smart Marking</p>
+                    <p className="font-bold text-white text-sm">AI Marking</p>
                     <p className="text-white/80 text-xs">Instant expert feedback</p>
                   </div>
                 </div>

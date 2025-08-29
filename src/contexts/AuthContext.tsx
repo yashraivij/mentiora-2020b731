@@ -34,8 +34,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setSession(session);
         setUser(session?.user ?? null);
         setIsLoading(false);
-        
-        // Dashboard preferences are now preserved to respect logout location
       }
     );
 
@@ -110,16 +108,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = async () => {
     console.log('Signing out user:', user?.email);
-    // Store current dashboard preference before logout
-    const currentPath = window.location.pathname;
-    console.log('Current path during logout:', currentPath);
-    if (currentPath === '/premium-dashboard') {
-      localStorage.setItem('lastDashboard', 'premium');
-      console.log('Stored dashboard preference: premium');
-    } else if (currentPath === '/dashboard') {
-      localStorage.setItem('lastDashboard', 'regular');
-      console.log('Stored dashboard preference: regular');
-    }
     await supabase.auth.signOut();
   };
 
