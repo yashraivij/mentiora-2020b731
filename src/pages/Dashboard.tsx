@@ -36,6 +36,8 @@ import { DiscordInvitation } from "@/components/ui/discord-invitation";
 import { PublicStreakProfiles } from '@/components/dashboard/PublicStreakProfiles';
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
 import { useToast } from "@/hooks/use-toast";
+import { useSubscription } from "@/hooks/useSubscription";
+import { PaywallCard } from "@/components/ui/paywall-card";
 
 interface UserProgress {
   subjectId: string;
@@ -48,6 +50,7 @@ interface UserProgress {
 const Dashboard = () => {
   const { user, logout } = useAuth();
   const { toast } = useToast();
+  const { isPremium, openPaymentLink } = useSubscription();
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
