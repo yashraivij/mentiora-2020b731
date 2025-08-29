@@ -24,7 +24,7 @@ import { TopicMasteryDisplay } from "@/components/dashboard/TopicMasteryDisplay"
 import { PredictivePerformanceCard } from "@/components/dashboard/PredictivePerformanceCard";
 import { OptimalStudyTimeCard } from "@/components/dashboard/OptimalStudyTimeCard";
 
-import { PredictedQuestionsSection } from "@/components/dashboard/PredictedQuestionsSection";
+import { PremiumPredictedQuestionsSection } from "@/components/dashboard/PremiumPredictedQuestionsSection";
 import { PredictedGradesGraph } from "@/components/dashboard/PredictedGradesGraph";
 
 import { supabase } from "@/integrations/supabase/client";
@@ -38,6 +38,7 @@ import { DiscordInvitation } from "@/components/ui/discord-invitation";
 import { PublicStreakProfiles } from '@/components/dashboard/PublicStreakProfiles';
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
 import { useToast } from "@/hooks/use-toast";
+import { PremiumWelcome } from "@/components/ui/premium-welcome";
 
 interface UserProgress {
   subjectId: string;
@@ -47,7 +48,7 @@ interface UserProgress {
   lastAttempt: Date;
 }
 
-const Dashboard = () => {
+const PremiumDashboard = () => {
   const { user, logout } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -68,6 +69,7 @@ const Dashboard = () => {
   const [celebrationSubject, setCelebrationSubject] = useState('');
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
   const [showPremiumPaywall, setShowPremiumPaywall] = useState(false);
+  const [showPremiumWelcome, setShowPremiumWelcome] = useState(false);
 
   const {
     notification,
@@ -284,6 +286,29 @@ const Dashboard = () => {
     }
   };
 
+  // Check if this is the user's first visit to premium dashboard
+  const checkFirstPremiumVisit = async () => {
+    if (!user?.id) return;
+
+    try {
+      const firstVisitKey = `premium_dashboard_first_visit_${user.id}`;
+      const hasVisitedBefore = localStorage.getItem(firstVisitKey);
+      
+      if (!hasVisitedBefore) {
+        console.log('🎉 First time visiting premium dashboard!');
+        // Small delay to ensure page is loaded
+        setTimeout(() => {
+          setShowPremiumWelcome(true);
+        }, 200);
+        
+        // Mark as visited
+        localStorage.setItem(firstVisitKey, 'true');
+      }
+    } catch (error) {
+      console.error('Error checking first premium visit:', error);
+    }
+  };
+
   useEffect(() => {
     const loadUserData = async () => {
       if (!user?.id) return;
@@ -339,6 +364,9 @@ const Dashboard = () => {
       
       // Check for Discord invitation eligibility
       await checkForDiscordInvitation();
+      
+      // Check if this is the user's first visit to premium dashboard
+      await checkFirstPremiumVisit();
     };
 
     loadUserData();
@@ -822,9 +850,9 @@ const Dashboard = () => {
   const handlePractice = async (subjectId: string, topicId?: string) => {
     await recordActivity();
     if (topicId) {
-      navigate(`/practice/${subjectId}/${topicId}`);
+      navigate(`/practice/${subjectId}/${topicId}?from=premium`);
     } else {
-      navigate(`/subject/${subjectId}`);
+      navigate(`/subject/${subjectId}?from=premium`);
     }
   };
 
@@ -930,8 +958,8 @@ const Dashboard = () => {
                     Mentiora
                   </h1>
                   <div className="flex items-center space-x-2">
-                    <User className="h-3 w-3 text-muted-foreground" />
-                    <span className="text-xs font-medium text-muted-foreground">Free Account</span>
+                    <Crown className="h-3 w-3 text-amber-500" />
+                    <span className="text-xs font-medium text-amber-600 dark:text-amber-400">Premium</span>
                   </div>
                 </div>
               </div>
@@ -1153,17 +1181,17 @@ const Dashboard = () => {
 
 
         {/* Predicted GCSE Grades Section */}
-        <PredictedGradesGraph userProgress={userProgress} />
+        <PredictedGradesGraph userProgress={userProgress} isPremium={true} />
 
 
         {/* Predicted 2026 Questions Section */}
-        <PredictedQuestionsSection />
+        <PremiumPredictedQuestionsSection />
 
         {/* Revision Notebook - Premium Feature */}
         <div className="mb-8">
           
           {/* Revision Notebook - Premium Feature */}
-          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => navigate('/notebook')}>
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => navigate('/premium-notebook')}>
             {/* Premium Glow Effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
@@ -1614,7 +1642,7 @@ const Dashboard = () => {
         timeSavedHours={timeSavedHours}
         show={showTimeSavedNotification}
         onClose={() => setShowTimeSavedNotification(false)}
-        isPremium={false}
+        isPremium={true}
       />
 
       {/* Grade Celebration Modal */}
@@ -1629,6 +1657,13 @@ const Dashboard = () => {
       <DiscordInvitation
         isVisible={showDiscordInvitation}
         onClose={() => setShowDiscordInvitation(false)}
+      />
+
+      {/* Premium Welcome Modal */}
+      <PremiumWelcome
+        isVisible={showPremiumWelcome}
+        onClose={() => setShowPremiumWelcome(false)}
+        userName={getFirstName()}
       />
 
       {/* Premium Paywall Modal */}
@@ -1671,4 +1706,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default PremiumDashboard;
