@@ -24,7 +24,7 @@ export const useSubscription = () => {
         .from('profiles')
         .select('subscription_status')
         .eq('id', user.id)
-        .single();
+        .maybeSingle();
 
       if (error) {
         console.error('Error fetching profile:', error);

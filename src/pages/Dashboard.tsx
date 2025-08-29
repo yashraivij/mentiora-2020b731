@@ -36,7 +36,6 @@ import { DiscordInvitation } from "@/components/ui/discord-invitation";
 import { PublicStreakProfiles } from '@/components/dashboard/PublicStreakProfiles';
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
 import { useToast } from "@/hooks/use-toast";
-import { useSubscription } from "@/hooks/useSubscription";
 import { PaywallCard } from "@/components/ui/paywall-card";
 
 interface UserProgress {
@@ -48,9 +47,20 @@ interface UserProgress {
 }
 
 const Dashboard = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, isPremium } = useAuth();
   const { toast } = useToast();
-  const { isPremium, openPaymentLink } = useSubscription();
+
+  const openPaymentLink = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      window.location.href = "/login";
+      return;
+    }
+    const join = "https://buy.stripe.com/9B69AS33W3RofiEa9i8N205".includes("?") ? "&" : "?";
+    window.location.href =
+      "https://buy.stripe.com/9B69AS33W3RofiEa9i8N205" + join +
+      "client_reference_id=" + encodeURIComponent(user.id);
+  };
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
@@ -1139,19 +1149,44 @@ const Dashboard = () => {
 
 
         {/* Predicted GCSE Grades Section */}
-        <PredictedGradesGraph userProgress={userProgress} />
+        {isPremium ? (
+          <PredictedGradesGraph userProgress={userProgress} />
+        ) : (
+          <PaywallCard 
+            title="Predicted GCSE Grades" 
+            description="See your predicted grades based on current performance"
+            onUpgrade={openPaymentLink}
+          >
+            <div className="h-64 bg-muted/20 rounded-lg flex items-center justify-center">
+              <BarChart3 className="h-16 w-16 text-muted-foreground/30" />
+            </div>
+          </PaywallCard>
+        )}
 
 
         {/* Predicted 2026 Questions Section */}
-        <PredictedQuestionsSection />
+        {isPremium ? (
+          <PredictedQuestionsSection />
+        ) : (
+          <PaywallCard 
+            title="Predicted 2026 Questions" 
+            description="Practice with AI-generated questions predicted for your exams"
+            onUpgrade={openPaymentLink}
+          >
+            <div className="space-y-4">
+              <div className="h-8 bg-muted/20 rounded"></div>
+              <div className="h-8 bg-muted/20 rounded w-3/4"></div>
+              <div className="h-8 bg-muted/20 rounded w-1/2"></div>
+            </div>
+          </PaywallCard>
+        )}
 
         {/* Revision Notebook - Premium Feature */}
-        <div className="mb-8">
-          
-          {/* Revision Notebook - Premium Feature */}
-          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => navigate('/notebook')}>
-            {/* Premium Glow Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        {isPremium ? (
+          <div className="mb-8">
+            <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]" onClick={() => navigate('/notebook')}>
+              {/* Premium Glow Effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
             {/* Animated Border */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 rounded-lg p-[2px] group-hover:animate-pulse">
@@ -1228,6 +1263,25 @@ const Dashboard = () => {
             </CardContent>
           </Card>
         </div>
+        ) : (
+          <PaywallCard 
+            title="Revision Notebook" 
+            description="Create personalized revision notes powered by AI"
+            onUpgrade={openPaymentLink}
+          >
+            <div className="space-y-4">
+              <div className="flex items-center space-x-3">
+                <Brain className="h-6 w-6 text-muted-foreground/30" />
+                <div className="h-4 bg-muted/20 rounded flex-1"></div>
+              </div>
+              <div className="space-y-2">
+                <div className="h-3 bg-muted/20 rounded"></div>
+                <div className="h-3 bg-muted/20 rounded w-3/4"></div>
+                <div className="h-3 bg-muted/20 rounded w-1/2"></div>
+              </div>
+            </div>
+          </PaywallCard>
+        )}
 
 
         {/* Subjects Section */}

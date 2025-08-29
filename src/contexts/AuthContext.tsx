@@ -9,6 +9,8 @@ interface AuthContextType {
   register: (name: string, email: string, password: string) => Promise<boolean>;
   logout: () => void;
   isLoading: boolean;
+  isPremium: boolean;
+  refreshSubscription: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -25,23 +27,54 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isPremium, setIsPremium] = useState(false);
+
+  const refreshSubscription = async () => {
+    if (!user?.id) return;
+    
+    try {
+      const { data } = await supabase
+        .from('profiles')
+        .select('subscription_status')
+        .eq('id', user.id)
+        .maybeSingle();
+      
+      setIsPremium(["active", "trialing"].includes(data?.subscription_status || ''));
+    } catch (error) {
+      console.error('Error fetching subscription:', error);
+      setIsPremium(false);
+    }
+  };
 
   useEffect(() => {
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      async (event, session) => {
         console.log('Auth state changed:', event, session?.user?.email);
         setSession(session);
         setUser(session?.user ?? null);
+        
+        // Refresh subscription status when user changes
+        if (session?.user) {
+          await refreshSubscription();
+        } else {
+          setIsPremium(false);
+        }
+        
         setIsLoading(false);
       }
     );
 
     // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       console.log('Initial session:', session?.user?.email);
       setSession(session);
       setUser(session?.user ?? null);
+      
+      if (session?.user) {
+        await refreshSubscription();
+      }
+      
       setIsLoading(false);
     });
 
@@ -117,7 +150,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       login,
       register,
       logout,
-      isLoading
+      isLoading,
+      isPremium,
+      refreshSubscription
     }}>
       {children}
     </AuthContext.Provider>

@@ -690,27 +690,39 @@ export type Database = {
         Row: {
           avatar_url: string | null
           created_at: string | null
+          current_period_end: string | null
           email: string
           full_name: string | null
           id: string
+          plan: string | null
+          stripe_customer_id: string | null
+          subscription_status: string | null
           updated_at: string | null
           username: string | null
         }
         Insert: {
           avatar_url?: string | null
           created_at?: string | null
+          current_period_end?: string | null
           email: string
           full_name?: string | null
           id: string
+          plan?: string | null
+          stripe_customer_id?: string | null
+          subscription_status?: string | null
           updated_at?: string | null
           username?: string | null
         }
         Update: {
           avatar_url?: string | null
           created_at?: string | null
+          current_period_end?: string | null
           email?: string
           full_name?: string | null
           id?: string
+          plan?: string | null
+          stripe_customer_id?: string | null
+          subscription_status?: string | null
           updated_at?: string | null
           username?: string | null
         }
