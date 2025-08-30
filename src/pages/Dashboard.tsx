@@ -69,14 +69,21 @@ const Dashboard = () => {
       return; 
     }
 
-    // invokes /functions/v1/create-portal and includes the user's JWT automatically
-    const { data, error } = await supabase.functions.invoke("create-portal", { method: "POST" });
+    // IMPORTANT: function name is exactly "create-portal" (no slashes)
+    const { data, error } = await supabase.functions.invoke("create-portal", {
+      method: "POST",
+    });
 
     if (error) {
+      console.error(error);
       alert(error.message || "Could not open billing portal");
       return;
     }
-    window.location.href = data.url; // send them to Stripe's portal
+    if (!data?.url) {
+      alert("No portal URL returned");
+      return;
+    }
+    window.location.href = data.url;
   };
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
