@@ -63,16 +63,20 @@ const Dashboard = () => {
   };
 
   const openBillingPortal = async () => {
-    const { data: sessionData } = await supabase.auth.getSession();
-    const token = sessionData?.session?.access_token;
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) { 
+      window.location.href = "/login"; 
+      return; 
+    }
 
-    const { data, error } = await supabase.functions.invoke("create-portal", {
-      headers: { Authorization: `Bearer ${token}` },
-      body: { returnUrl: "https://preview--mentiora.lovable.app/dashboard" }
-    });
+    // invokes /functions/v1/create-portal and includes the user's JWT automatically
+    const { data, error } = await supabase.functions.invoke("create-portal", { method: "POST" });
 
-    if (error) alert("Could not open billing portal");
-    else if (data?.url) window.location.href = data.url;
+    if (error) {
+      alert(error.message || "Could not open billing portal");
+      return;
+    }
+    window.location.href = data.url; // send them to Stripe's portal
   };
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
