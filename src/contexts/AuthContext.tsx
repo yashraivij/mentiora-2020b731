@@ -31,59 +31,41 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const refreshSubscription = async () => {
     if (!user?.id) {
-      console.log('RefreshSubscription: No user ID');
       return;
     }
-    
-    console.log('RefreshSubscription: Checking for user ID:', user.id);
     
     try {
       // Check subscription status from database
       const { data, error } = await supabase
         .from('profiles')
-        .select('subscription_status, email')
+        .select('subscription_status')
         .eq('id', user.id)
         .maybeSingle();
       
-      console.log('RefreshSubscription: Query result:', { data, error });
-      
       if (error) {
-        console.error('RefreshSubscription: Database error:', error);
-        setIsPremium(false);
-        return;
+        console.error('Subscription fetch error:', error);
+        return; // Don't reset premium status on error
       }
       
-      const premium = ["active", "trialing"].includes(data?.subscription_status || '');
-      console.log('RefreshSubscription: Setting isPremium to:', premium, 'based on status:', data?.subscription_status);
-      setIsPremium(premium);
+      if (data) {
+        const premium = ["active", "trialing"].includes(data.subscription_status || '');
+        setIsPremium(premium);
+      }
     } catch (error) {
       console.error('Error fetching subscription:', error);
-      setIsPremium(false);
+      // Don't reset premium status on error
     }
   };
 
   useEffect(() => {
-    // Set up auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        console.log('Auth state changed:', event, session?.user?.email);
-        setSession(session);
-        setUser(session?.user ?? null);
-        
-        // Refresh subscription status when user changes
-        if (session?.user) {
-          await refreshSubscription();
-        } else {
-          setIsPremium(false);
-        }
-        
-        setIsLoading(false);
-      }
-    );
-
-    // Check for existing session
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      console.log('Initial session:', session?.user?.email);
+    let mounted = true;
+    
+    const initializeAuth = async () => {
+      // Check for existing session first
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!mounted) return;
+      
       setSession(session);
       setUser(session?.user ?? null);
       
@@ -92,9 +74,33 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       
       setIsLoading(false);
-    });
+    };
 
-    return () => subscription.unsubscribe();
+    // Set up auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (!mounted) return;
+        
+        setSession(session);
+        setUser(session?.user ?? null);
+        
+        // Only refresh subscription on sign in, not on every auth change
+        if (event === 'SIGNED_IN' && session?.user) {
+          await refreshSubscription();
+        } else if (event === 'SIGNED_OUT') {
+          setIsPremium(false);
+        }
+        
+        setIsLoading(false);
+      }
+    );
+
+    initializeAuth();
+
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
