@@ -30,17 +30,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isPremium, setIsPremium] = useState(false);
 
   const refreshSubscription = async () => {
-    if (!user?.id) return;
+    if (!user?.id) {
+      console.log('RefreshSubscription: No user ID');
+      return;
+    }
+    
+    console.log('RefreshSubscription: Checking for user ID:', user.id);
     
     try {
       // Check subscription status from database
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from('profiles')
-        .select('subscription_status')
+        .select('subscription_status, email')
         .eq('id', user.id)
         .maybeSingle();
       
-      setIsPremium(["active", "trialing"].includes(data?.subscription_status || ''));
+      console.log('RefreshSubscription: Query result:', { data, error });
+      
+      if (error) {
+        console.error('RefreshSubscription: Database error:', error);
+        setIsPremium(false);
+        return;
+      }
+      
+      const premium = ["active", "trialing"].includes(data?.subscription_status || '');
+      console.log('RefreshSubscription: Setting isPremium to:', premium, 'based on status:', data?.subscription_status);
+      setIsPremium(premium);
     } catch (error) {
       console.error('Error fetching subscription:', error);
       setIsPremium(false);
