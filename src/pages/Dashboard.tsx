@@ -37,6 +37,7 @@ import { PublicStreakProfiles } from '@/components/dashboard/PublicStreakProfile
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
 import { useToast } from "@/hooks/use-toast";
 import { PaywallCard } from "@/components/ui/paywall-card";
+import { openManageBilling } from '@/lib/manageBilling';
 
 interface UserProgress {
   subjectId: string;
@@ -62,27 +63,6 @@ const Dashboard = () => {
       "client_reference_id=" + encodeURIComponent(user.id);
   };
 
-  const openBillingPortal = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { 
-      window.location.href = "/login"; 
-      return; 
-    }
-
-    const { data, error } = await supabase.functions.invoke("create-portal", { method: "POST" });
-
-    if (error) {
-      // Will include 401/404/409/500 details from the function body
-      console.error("portal invoke error:", error);
-      alert(error.message || "Could not open billing portal");
-      return;
-    }
-    if (!data?.url) {
-      alert("No portal URL returned");
-      return;
-    }
-    window.location.href = data.url;
-  };
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
@@ -999,7 +979,7 @@ const Dashboard = () => {
                       <span className="text-sm font-medium text-primary">Premium Active</span>
                     </div>
                     <Button 
-                      onClick={openBillingPortal}
+                      onClick={openManageBilling}
                       variant="outline"
                       size="sm"
                       className="w-full"
