@@ -929,8 +929,17 @@ const Dashboard = () => {
                     Mentiora
                   </h1>
                   <div className="flex items-center space-x-2">
-                    <Crown className="h-3 w-3 text-amber-500" />
-                    <span className="text-xs font-medium text-muted-foreground">Premium</span>
+                    {isPremium ? (
+                      <>
+                        <Crown className="h-3 w-3 text-amber-500" />
+                        <span className="text-xs font-medium text-muted-foreground">Premium</span>
+                      </>
+                    ) : (
+                      <>
+                        <User className="h-3 w-3 text-gray-400" />
+                        <span className="text-xs font-medium text-muted-foreground">Free account</span>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
