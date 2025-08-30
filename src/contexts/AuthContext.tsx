@@ -29,9 +29,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState(true);
   const [isPremium, setIsPremium] = useState(false);
 
-  const refreshSubscription = async (userId?: string) => {
-    const targetUserId = userId || user?.id;
-    if (!targetUserId) {
+  const refreshSubscription = async () => {
+    if (!user?.id) {
       return;
     }
     
@@ -40,7 +39,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data, error } = await supabase
         .from('profiles')
         .select('subscription_status')
-        .eq('id', targetUserId)
+        .eq('id', user.id)
         .maybeSingle();
       
       if (error) {
@@ -71,7 +70,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(session?.user ?? null);
       
       if (session?.user) {
-        await refreshSubscription(session.user.id);
+        await refreshSubscription();
       }
       
       setIsLoading(false);
@@ -85,10 +84,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setSession(session);
         setUser(session?.user ?? null);
         
-        // Refresh subscription whenever we have a valid session
-        if (session?.user) {
-          await refreshSubscription(session.user.id);
-        } else {
+        // Only refresh subscription on sign in, not on every auth change
+        if (event === 'SIGNED_IN' && session?.user) {
+          await refreshSubscription();
+        } else if (event === 'SIGNED_OUT') {
           setIsPremium(false);
         }
         
@@ -175,7 +174,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       logout,
       isLoading,
       isPremium,
-      refreshSubscription: () => refreshSubscription()
+      refreshSubscription
     }}>
       {children}
     </AuthContext.Provider>
