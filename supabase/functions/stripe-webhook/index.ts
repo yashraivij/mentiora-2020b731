@@ -8,13 +8,17 @@ const cryptoProvider = Stripe.createSubtleCryptoProvider();
 
 const supabase = createClient(
   Deno.env.get("SUPABASE_URL")!,
-  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")! // service role, no JWT required
+  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
 );
 
 Deno.serve(async (request) => {
   try {
-    const sig = request.headers.get("stripe-signature")!;
-    const rawBody = await request.text(); // must be raw, unparsed
+    const sig = request.headers.get("stripe-signature");
+    if (!sig) return new Response("Missing signature", { status: 400 });
+
+    // RAW body (safer version that avoids any normalization issues)
+    const buf = await request.arrayBuffer();
+    const rawBody = new TextDecoder("utf-8").decode(new Uint8Array(buf));
 
     const event = await stripe.webhooks.constructEventAsync(
       rawBody,
