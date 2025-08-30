@@ -33,6 +33,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (!user?.id) return;
     
     try {
+      // First check with Stripe to update subscription status
+      const { data: sessionData } = await supabase.auth.getSession();
+      const token = sessionData?.session?.access_token;
+      
+      if (token) {
+        const { data: checkResult, error: checkError } = await supabase.functions.invoke('check-subscription', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        
+        if (!checkError && checkResult) {
+          setIsPremium(checkResult.subscribed || false);
+          return;
+        }
+      }
+      
+      // Fallback to database check
       const { data } = await supabase
         .from('profiles')
         .select('subscription_status')
