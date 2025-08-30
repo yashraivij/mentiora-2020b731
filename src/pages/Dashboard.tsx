@@ -69,13 +69,11 @@ const Dashboard = () => {
       return; 
     }
 
-    // IMPORTANT: function name is exactly "create-portal" (no slashes)
-    const { data, error } = await supabase.functions.invoke("create-portal", {
-      method: "POST",
-    });
+    const { data, error } = await supabase.functions.invoke("create-portal", { method: "POST" });
 
     if (error) {
-      console.error(error);
+      // Will include 401/404/409/500 details from the function body
+      console.error("portal invoke error:", error);
       alert(error.message || "Could not open billing portal");
       return;
     }
