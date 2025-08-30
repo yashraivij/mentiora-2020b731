@@ -10,7 +10,7 @@ interface AuthContextType {
   logout: () => void;
   isLoading: boolean;
   isPremium: boolean;
-  refreshSubscription: (userId?: string) => Promise<void>;
+  refreshSubscription: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -29,9 +29,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState(true);
   const [isPremium, setIsPremium] = useState(false);
 
-  const refreshSubscription = async (userId?: string) => {
-    const targetUserId = userId || user?.id;
-    if (!targetUserId) {
+  const refreshSubscription = async () => {
+    if (!user?.id) {
       return;
     }
     
@@ -40,7 +39,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data, error } = await supabase
         .from('profiles')
         .select('subscription_status')
-        .eq('id', targetUserId)
+        .eq('id', user.id)
         .maybeSingle();
       
       if (error) {
@@ -71,8 +70,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(session?.user ?? null);
       
       if (session?.user) {
-        // Pass the user ID directly to avoid race condition
-        await refreshSubscription(session.user.id);
+        await refreshSubscription();
       }
       
       setIsLoading(false);
@@ -86,9 +84,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setSession(session);
         setUser(session?.user ?? null);
         
-        // Only refresh subscription on sign in and initial load
-        if (session?.user && (event === 'SIGNED_IN' || event === 'INITIAL_SESSION')) {
-          await refreshSubscription(session.user.id);
+        // Only refresh subscription on sign in, not on every auth change
+        if (event === 'SIGNED_IN' && session?.user) {
+          await refreshSubscription();
         } else if (event === 'SIGNED_OUT') {
           setIsPremium(false);
         }

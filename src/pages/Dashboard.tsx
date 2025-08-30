@@ -1010,7 +1010,7 @@ const Dashboard = () => {
                   <Button 
                     onClick={() => {
                       console.log('Manual refresh triggered');
-                      refreshSubscription(user?.id);
+                      refreshSubscription();
                     }}
                     variant="outline"
                     size="sm"
