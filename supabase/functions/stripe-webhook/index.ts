@@ -9,20 +9,23 @@ Deno.serve(async (req) => {
   if (req.method !== "POST") return new Response("ok", { status: 200 });
 
   const sig = req.headers.get("stripe-signature");
-  if (!sig) {
-    console.error("Missing Stripe signature header");
-    return new Response("Missing signature", { status: 400 });
-  }
+  if (!sig) return new Response("Missing signature", { status: 400 });
 
-  const body = await req.arrayBuffer();
+  const raw = await req.text();
+
+  // Keep this while testing; remove later if you want
+  console.log("verify debug", {
+    rawLen: raw.length,
+    sigPrefix: sig.slice(0, 12),
+    whsecPrefix: webhookSecret.slice(0, 12),
+  });
+
   let event: Stripe.Event;
   try {
-    event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
+    event = await stripe.webhooks.constructEventAsync(raw, sig, webhookSecret);
   } catch (err) {
     console.error("Signature verify error:", err);
-    console.error("Webhook secret length:", webhookSecret?.length);
-    console.error("Signature header:", sig);
-    return new Response(`Invalid signature: ${err.message}`, { status: 400 });
+    return new Response("Invalid signature", { status: 400 });
   }
 
   try {
