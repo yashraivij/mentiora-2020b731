@@ -10,7 +10,7 @@ interface AuthContextType {
   logout: () => void;
   isLoading: boolean;
   isPremium: boolean;
-  refreshSubscription: () => Promise<void>;
+  refreshSubscription: (userId?: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -29,8 +29,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState(true);
   const [isPremium, setIsPremium] = useState(false);
 
-  const refreshSubscription = async () => {
-    if (!user?.id) {
+  const refreshSubscription = async (userId?: string) => {
+    const targetUserId = userId || user?.id;
+    if (!targetUserId) {
       return;
     }
     
@@ -39,7 +40,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data, error } = await supabase
         .from('profiles')
         .select('subscription_status')
-        .eq('id', user.id)
+        .eq('id', targetUserId)
         .maybeSingle();
       
       if (error) {
@@ -70,7 +71,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(session?.user ?? null);
       
       if (session?.user) {
-        await refreshSubscription();
+        await refreshSubscription(session.user.id);
       }
       
       setIsLoading(false);
@@ -84,9 +85,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setSession(session);
         setUser(session?.user ?? null);
         
-        // Only refresh subscription on sign in, not on every auth change
-        if (event === 'SIGNED_IN' && session?.user) {
-          await refreshSubscription();
+        // Refresh subscription when we have a user session
+        if (session?.user) {
+          setTimeout(() => refreshSubscription(session.user.id), 0);
         } else if (event === 'SIGNED_OUT') {
           setIsPremium(false);
         }
