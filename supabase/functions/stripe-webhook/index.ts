@@ -1,28 +1,30 @@
 import Stripe from "https://esm.sh/stripe@14.23.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.4";
 
-const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY")!, { apiVersion: "2024-06-20" });
-const webhookSecret = Deno.env.get("STRIPE_WEBHOOK_SECRET")!;
-const supabase = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
+const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY")!.trim(), { apiVersion: "2024-06-20" });
+const webhookSecret = Deno.env.get("STRIPE_WEBHOOK_SECRET")!.trim(); // <-- IMPORTANT
+const supabase = createClient(Deno.env.get("SUPABASE_URL")!.trim(), Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!.trim());
 
 Deno.serve(async (req) => {
   if (req.method !== "POST") return new Response("ok", { status: 200 });
 
   const sig = req.headers.get("stripe-signature");
-  if (!sig) {
-    console.error("Missing stripe-signature header");
-    return new Response("Missing signature", { status: 400 });
-  }
+  if (!sig) return new Response("Missing signature", { status: 400 });
 
-  const raw = await req.text(); // IMPORTANT: raw string, not JSON
+  const raw = await req.text();
+
+  // keep your existing debug if you like:
+  console.log("verify debug", {
+    rawLen: raw.length,
+    sigPrefix: sig.slice(0, 12),
+    whsecPrefix: webhookSecret.slice(0, 12),
+  });
+
   let event: Stripe.Event;
-
   try {
     event = await stripe.webhooks.constructEventAsync(raw, sig, webhookSecret);
   } catch (err) {
     console.error("Signature verify error:", err);
-    // Helpful debug (safe to log): length + first 20 chars (do NOT log full payload)
-    console.error("raw length:", raw.length, "sig prefix:", sig.slice(0, 10), "whsec prefix:", webhookSecret.slice(0, 10));
     return new Response("Invalid signature", { status: 400 });
   }
 
