@@ -14,7 +14,8 @@ const supabase = createClient(
 Deno.serve(async (request) => {
   try {
     const sig = request.headers.get("stripe-signature")!;
-    const rawBody = await request.text();
+    const body = await request.arrayBuffer();
+    const rawBody = new Uint8Array(body);
 
     const event = await stripe.webhooks.constructEventAsync(
       rawBody,
