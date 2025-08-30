@@ -49,13 +49,26 @@ Deno.serve(async (req) => {
     }
 
     // 3) Create a customer-specific Billing Portal session
-    const session = await stripe.billingPortal.sessions.create({
-      customer: profile.stripe_customer_id,
-      return_url: RETURN_URL,
-    });
-
-    // 4) Return the URL to the browser
-    return new Response(JSON.stringify({ url: session.url }), { headers: CORS });
+    try {
+      const session = await stripe.billingPortal.sessions.create({
+        customer: profile.stripe_customer_id,
+        return_url: RETURN_URL,
+      });
+      console.log("Portal session created for", profile.stripe_customer_id);
+      return new Response(JSON.stringify({ url: session.url }), { headers: CORS });
+    } catch (e: any) {
+      // PRINT EVERYTHING USEFUL
+      console.error("Stripe portal create error", {
+        msg: e?.message,
+        type: e?.type,
+        code: e?.code,
+        raw: e?.raw,
+      });
+      return new Response(JSON.stringify({ error: "Stripe portal create failed" }), {
+        status: 500,
+        headers: CORS,
+      });
+    }
   } catch (e) {
     console.error("create-portal error:", e);
     return new Response(JSON.stringify({ error: "Failed to create portal session" }), {
