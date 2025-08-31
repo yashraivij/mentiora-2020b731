@@ -1111,28 +1111,6 @@ const Dashboard = () => {
                 Ready to elevate your GCSE revision journey?
               </p>
             </div>
-            {/* Premium User Billing Management */}
-            {isPremium && (
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Card className="border-muted/50 bg-card w-64">
-                  <CardContent className="p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Crown className="h-4 w-4 text-primary" />
-                      <span className="text-sm font-medium text-primary">
-                        Premium Active
-                      </span>
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                      Enjoying premium features
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            )}
 
             {/* Debug Subscription Status */}
             {/* <Card className="border-orange-500/50 bg-orange-50/50 dark:bg-orange-950/20 w-72">
