@@ -1397,74 +1397,198 @@ const Dashboard = () => {
         {isPremium ? (
           <PredictedGradesGraph userProgress={userProgress} />
         ) : (
-          <PaywallCard
-            title="🎯 Predicted GCSE Grades"
-            description="Get AI-powered grade predictions based on your current performance and practice data. See exactly what grades you're on track to achieve and identify areas for improvement before exam season."
-            onUpgrade={openPaymentLink}
-            theme="grades"
-            benefits={[
-              "🚀 Accurate grade predictions for all subjects",
-              "📊 Performance tracking & improvement insights", 
-              "⏰ Early warning for at-risk subjects",
-              "🎯 Personalized study recommendations",
-              "👨‍👩‍👧‍👦 Share progress reports with parents"
-            ]}
-          >
-            <div className="space-y-3">
-              {userSubjects.length > 0 ? (
-                // Show user's actual subjects with teaser grades
-                userSubjects.slice(0, 4).map((subjectId, index) => {
-                  const subject = curriculum.find(s => s.id === subjectId);
-                  const subjectName = subject?.name || subjectId.replace(/-/g, ' ');
-                  const teaserGrades = ['7', '8', '6', '9', '5', '8', '7']; // Mock grades to tease
-                  const teaserGrade = teaserGrades[index % teaserGrades.length];
-                  
-                  return (
-                    <div key={subjectId} className="flex items-center justify-between p-3 bg-background/50 rounded-lg border border-border/30">
-                      <div className="flex items-center gap-3">
-                        <div className="w-2 h-8 bg-gradient-to-b from-violet-500 to-purple-600 rounded-full"></div>
-                        <span className="font-medium text-foreground capitalize">{subjectName}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="px-3 py-1 bg-gradient-to-r from-violet-500/20 to-purple-500/20 rounded-full border border-violet-500/30">
-                          <span className="text-lg font-bold text-violet-600 blur-sm select-none">Grade {teaserGrade}</span>
-                        </div>
-                        <Lock className="w-4 h-4 text-violet-500" />
-                      </div>
-                    </div>
-                  );
-                })
-              ) : (
-                // Fallback for users with no subjects selected
-                <div className="space-y-3">
-                  {['Mathematics', 'English Literature', 'Physics', 'Chemistry'].map((subject, index) => {
-                    const teaserGrades = ['8', '7', '9', '6'];
-                    const teaserGrade = teaserGrades[index];
+          <Card className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-purple-500/5 to-fuchsia-500/5"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 via-purple-600/10 to-fuchsia-600/10 animate-pulse"></div>
+            
+            <CardHeader className="relative z-10">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-gradient-to-r from-violet-500 to-purple-600 rounded-lg">
+                    <BarChart3 className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
+                      Predicted GCSE Grades
+                    </CardTitle>
+                    <CardDescription className="flex items-center gap-2">
+                      <Zap className="h-4 w-4 text-violet-500" />
+                      Predictions • Real-time updates
+                    </CardDescription>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge variant="secondary" className="bg-gradient-to-r from-violet-500 to-purple-600 text-white">
+                    PREMIUM
+                  </Badge>
+                  <div className="text-right">
+                    <div className="text-2xl font-bold text-violet-600 blur-sm">1.0</div>
+                    <div className="text-xs text-muted-foreground">Avg Grade</div>
+                  </div>
+                  <Badge className="bg-gradient-to-r from-green-500 to-emerald-600 text-white blur-sm">
+                    <Crown className="h-3 w-3 mr-1" />
+                    1 Grade 7+
+                  </Badge>
+                </div>
+              </div>
+            </CardHeader>
+
+            <CardContent className="relative z-10">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
+                {userSubjects.length > 0 ? (
+                  userSubjects.slice(0, 6).map((subjectId, index) => {
+                    const subject = curriculum.find(s => s.id === subjectId);
+                    const subjectName = subject?.name || subjectId.replace(/-/g, ' ');
+                    const examBoard = subjectId.includes('-') ? subjectId.split('-')[1].toUpperCase() : 'AQA';
+                    const colors = [
+                      'from-purple-500 to-pink-500',
+                      'from-blue-500 to-cyan-500', 
+                      'from-green-500 to-emerald-500',
+                      'from-orange-500 to-red-500',
+                      'from-pink-500 to-rose-500',
+                      'from-indigo-500 to-purple-500'
+                    ];
+                    const color = colors[index % colors.length];
                     
                     return (
-                      <div key={subject} className="flex items-center justify-between p-3 bg-background/50 rounded-lg border border-border/30">
-                        <div className="flex items-center gap-3">
-                          <div className="w-2 h-8 bg-gradient-to-b from-violet-500 to-purple-600 rounded-full"></div>
-                          <span className="font-medium text-foreground">{subject}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="px-3 py-1 bg-gradient-to-r from-violet-500/20 to-purple-500/20 rounded-full border border-violet-500/30">
-                            <span className="text-lg font-bold text-violet-600 blur-sm select-none">Grade {teaserGrade}</span>
+                      <div key={subjectId} className="text-center space-y-2">
+                        <div className="relative">
+                          <div className="w-16 h-16 mx-auto relative">
+                            <div className="absolute inset-0 bg-muted/20 rounded-full"></div>
+                            <div className={`absolute inset-0 bg-gradient-to-r ${color} rounded-full opacity-20`}></div>
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <span className="text-2xl font-bold text-muted-foreground blur-sm select-none">U</span>
+                            </div>
                           </div>
-                          <Lock className="w-4 h-4 text-violet-500" />
+                          <div className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 px-2 py-0.5 bg-gradient-to-r ${color} rounded-full text-xs text-white font-medium blur-sm`}>
+                            0%
+                          </div>
+                        </div>
+                        <div className="text-sm font-medium text-foreground blur-sm">
+                          {subjectName} ({examBoard})
                         </div>
                       </div>
                     );
-                  })}
+                  })
+                ) : (
+                  // Fallback subjects
+                  ['English Language', 'Mathematics', 'Physics', 'Chemistry', 'History', 'Geography'].map((subject, index) => {
+                    const colors = [
+                      'from-purple-500 to-pink-500',
+                      'from-blue-500 to-cyan-500', 
+                      'from-green-500 to-emerald-500',
+                      'from-orange-500 to-red-500',
+                      'from-pink-500 to-rose-500',
+                      'from-indigo-500 to-purple-500'
+                    ];
+                    const color = colors[index];
+                    
+                    return (
+                      <div key={subject} className="text-center space-y-2">
+                        <div className="relative">
+                          <div className="w-16 h-16 mx-auto relative">
+                            <div className="absolute inset-0 bg-muted/20 rounded-full"></div>
+                            <div className={`absolute inset-0 bg-gradient-to-r ${color} rounded-full opacity-20`}></div>
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <span className="text-2xl font-bold text-muted-foreground blur-sm select-none">U</span>
+                            </div>
+                          </div>
+                          <div className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 px-2 py-0.5 bg-gradient-to-r ${color} rounded-full text-xs text-white font-medium blur-sm`}>
+                            0%
+                          </div>
+                        </div>
+                        <div className="text-sm font-medium text-foreground blur-sm">
+                          {subject} (AQA)
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+
+              {/* One highlighted subject with better grade */}
+              <div className="mb-6">
+                <div className="relative bg-gradient-to-r from-orange-400 to-yellow-500 p-4 rounded-xl">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-white/90 text-sm font-medium blur-sm">
+                        {userSubjects.length > 0 ? 
+                          (curriculum.find(s => s.id === userSubjects[0])?.name || userSubjects[0].replace(/-/g, ' ')) : 
+                          'Business'} (AQA)
+                      </div>
+                      <div className="text-3xl font-bold text-white mt-1 blur-sm select-none">7</div>
+                      <div className="text-white/80 text-sm blur-sm">70%</div>
+                    </div>
+                    <div className="text-right">
+                      <Star className="h-5 w-5 text-white/80 mb-1" />
+                      <div className="text-white/90 text-xs blur-sm">Target Hit!</div>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 bg-black/20 rounded-xl flex items-center justify-center">
+                    <Lock className="h-8 w-8 text-white/80" />
+                  </div>
                 </div>
-              )}
-              {userSubjects.length > 4 && (
-                <div className="text-center py-2 text-sm text-muted-foreground">
-                  + {userSubjects.length - 4} more subjects with predictions...
+              </div>
+
+              {/* Bottom stats */}
+              <div className="flex items-center justify-between text-sm bg-muted/30 p-3 rounded-lg">
+                <div className="flex items-center gap-2 blur-sm">
+                  <BarChart3 className="h-4 w-4 text-violet-500" />
+                  <span className="text-muted-foreground">{userSubjects.length || 7} subjects tracked</span>
                 </div>
-              )}
-            </div>
-          </PaywallCard>
+                <div className="flex items-center gap-2 blur-sm">
+                  <Zap className="h-4 w-4 text-green-500" />
+                  <span className="text-muted-foreground">Real-time updates</span>
+                </div>
+                <div className="flex items-center gap-2 blur-sm">
+                  <Crown className="h-4 w-4 text-yellow-500" />
+                  <span className="text-muted-foreground">Premium insights</span>
+                </div>
+              </div>
+
+              {/* Upgrade overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/70 to-transparent flex items-center justify-center">
+                <div className="text-center space-y-4 p-6">
+                  <div className="relative">
+                    <motion.div
+                      animate={{ rotate: [0, 360] }}
+                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                      className="absolute inset-0 rounded-full bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500 blur-xl opacity-50"
+                    />
+                    <motion.div
+                      animate={{ scale: [1, 1.1, 1], rotate: [0, -5, 5, 0] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                      className="relative bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 p-4 rounded-2xl shadow-2xl"
+                    >
+                      <Trophy className="h-12 w-12 text-white drop-shadow-lg" />
+                    </motion.div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <h3 className="font-bold text-xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
+                      🏆 Premium Feature
+                    </h3>
+                    <p className="text-foreground/90 max-w-md font-medium leading-relaxed">
+                      Get AI-powered grade predictions based on your current performance. See exactly what grades you're on track to achieve!
+                    </p>
+                  </div>
+                  
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button 
+                      onClick={openPaymentLink}
+                      size="lg"
+                      className="relative bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-700 hover:via-purple-700 hover:to-fuchsia-700 text-white font-bold px-8 py-4 rounded-xl shadow-2xl transition-all duration-300 text-lg overflow-hidden group"
+                      style={{ boxShadow: '0 20px 40px -10px rgba(139, 92, 246, 0.3)' }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                      <Crown className="h-5 w-5 mr-3" />
+                      ✨ Upgrade to Premium
+                    </Button>
+                  </motion.div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         )}
 
         {/* Predicted 2026 Questions Section */}
