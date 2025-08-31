@@ -1044,7 +1044,7 @@ const Dashboard = () => {
                   <h1 className="text-2xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
                     Mentiora
                   </h1>
-                  {/* <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     {isPremium ? (
                       <>
                         <Crown className="h-3 w-3 text-amber-500" />
@@ -1060,7 +1060,7 @@ const Dashboard = () => {
                         </span>
                       </>
                     )}
-                  </div> */}
+                  </div>
                 </div>
               </div>
             </div>
