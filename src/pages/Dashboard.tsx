@@ -1398,196 +1398,170 @@ const Dashboard = () => {
           <PredictedGradesGraph userProgress={userProgress} />
         ) : (
           <Card className="relative overflow-hidden">
+            {/* Background gradients */}
             <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-purple-500/5 to-fuchsia-500/5"></div>
             <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 via-purple-600/10 to-fuchsia-600/10 animate-pulse"></div>
             
-            <CardHeader className="relative z-10">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-gradient-to-r from-violet-500 to-purple-600 rounded-lg">
-                    <BarChart3 className="h-5 w-5 text-white" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
-                      Predicted GCSE Grades
-                    </CardTitle>
-                    <CardDescription className="flex items-center gap-2">
-                      <Zap className="h-4 w-4 text-violet-500" />
-                      Predictions • Real-time updates
-                    </CardDescription>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary" className="bg-gradient-to-r from-violet-500 to-purple-600 text-white">
-                    PREMIUM
-                  </Badge>
-                  <div className="text-right">
-                    <div className="text-2xl font-bold text-violet-600 blur-sm">1.0</div>
-                    <div className="text-xs text-muted-foreground">Avg Grade</div>
-                  </div>
-                  <Badge className="bg-gradient-to-r from-green-500 to-emerald-600 text-white blur-sm">
-                    <Crown className="h-3 w-3 mr-1" />
-                    1 Grade 7+
-                  </Badge>
-                </div>
-              </div>
-            </CardHeader>
-
-            <CardContent className="relative z-10">
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
-                {userSubjects.length > 0 ? (
-                  userSubjects.slice(0, 6).map((subjectId, index) => {
-                    const subject = curriculum.find(s => s.id === subjectId);
-                    const subjectName = subject?.name || subjectId.replace(/-/g, ' ');
-                    const examBoard = subjectId.includes('-') ? subjectId.split('-')[1].toUpperCase() : 'AQA';
-                    const colors = [
-                      'from-purple-500 to-pink-500',
-                      'from-blue-500 to-cyan-500', 
-                      'from-green-500 to-emerald-500',
-                      'from-orange-500 to-red-500',
-                      'from-pink-500 to-rose-500',
-                      'from-indigo-500 to-purple-500'
-                    ];
-                    const color = colors[index % colors.length];
-                    
-                    return (
-                      <div key={subjectId} className="text-center space-y-2">
-                        <div className="relative">
-                          <div className="w-16 h-16 mx-auto relative">
-                            <div className="absolute inset-0 bg-muted/20 rounded-full"></div>
-                            <div className={`absolute inset-0 bg-gradient-to-r ${color} rounded-full opacity-20`}></div>
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-2xl font-bold text-muted-foreground blur-sm select-none">U</span>
-                            </div>
-                          </div>
-                          <div className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 px-2 py-0.5 bg-gradient-to-r ${color} rounded-full text-xs text-white font-medium blur-sm`}>
-                            0%
-                          </div>
-                        </div>
-                        <div className="text-sm font-medium text-foreground blur-sm">
-                          {subjectName} ({examBoard})
-                        </div>
-                      </div>
-                    );
-                  })
-                ) : (
-                  // Fallback subjects
-                  ['English Language', 'Mathematics', 'Physics', 'Chemistry', 'History', 'Geography'].map((subject, index) => {
-                    const colors = [
-                      'from-purple-500 to-pink-500',
-                      'from-blue-500 to-cyan-500', 
-                      'from-green-500 to-emerald-500',
-                      'from-orange-500 to-red-500',
-                      'from-pink-500 to-rose-500',
-                      'from-indigo-500 to-purple-500'
-                    ];
-                    const color = colors[index];
-                    
-                    return (
-                      <div key={subject} className="text-center space-y-2">
-                        <div className="relative">
-                          <div className="w-16 h-16 mx-auto relative">
-                            <div className="absolute inset-0 bg-muted/20 rounded-full"></div>
-                            <div className={`absolute inset-0 bg-gradient-to-r ${color} rounded-full opacity-20`}></div>
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-2xl font-bold text-muted-foreground blur-sm select-none">U</span>
-                            </div>
-                          </div>
-                          <div className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 px-2 py-0.5 bg-gradient-to-r ${color} rounded-full text-xs text-white font-medium blur-sm`}>
-                            0%
-                          </div>
-                        </div>
-                        <div className="text-sm font-medium text-foreground blur-sm">
-                          {subject} (AQA)
-                        </div>
-                      </div>
-                    );
-                  })
-                )}
-              </div>
-
-              {/* One highlighted subject with better grade */}
-              <div className="mb-6">
-                <div className="relative bg-gradient-to-r from-orange-400 to-yellow-500 p-4 rounded-xl">
-                  <div className="flex items-center justify-between">
+            {/* Actual premium content - blurred */}
+            <div className="blur-[2px] select-none">
+              <CardHeader className="relative z-10">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-gradient-to-r from-orange-400 to-yellow-500 rounded-lg">
+                      <BarChart3 className="h-5 w-5 text-white" />
+                    </div>
                     <div>
-                      <div className="text-white/90 text-sm font-medium blur-sm">
-                        {userSubjects.length > 0 ? 
-                          (curriculum.find(s => s.id === userSubjects[0])?.name || userSubjects[0].replace(/-/g, ' ')) : 
-                          'Business'} (AQA)
-                      </div>
-                      <div className="text-3xl font-bold text-white mt-1 blur-sm select-none">7</div>
-                      <div className="text-white/80 text-sm blur-sm">70%</div>
+                      <CardTitle className="text-xl text-blue-600 font-bold">
+                        Predicted GCSE Grades
+                        <Crown className="inline h-5 w-5 ml-2 text-yellow-500" />
+                      </CardTitle>
+                      <CardDescription className="flex items-center gap-2 text-foreground/70">
+                        <Zap className="h-4 w-4 text-orange-500" />
+                        Predictions • Real-time updates
+                      </CardDescription>
                     </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Badge variant="secondary" className="bg-orange-500 text-white px-3 py-1">
+                      PREMIUM
+                    </Badge>
                     <div className="text-right">
-                      <Star className="h-5 w-5 text-white/80 mb-1" />
-                      <div className="text-white/90 text-xs blur-sm">Target Hit!</div>
+                      <div className="text-3xl font-bold text-purple-600">1.0</div>
+                      <div className="text-xs text-muted-foreground">Avg Grade</div>
+                    </div>
+                    <Badge className="bg-gradient-to-r from-green-500 to-emerald-600 text-white">
+                      <Crown className="h-3 w-3 mr-1" />
+                      1 Grade 7+
+                    </Badge>
+                  </div>
+                </div>
+              </CardHeader>
+
+              <CardContent className="relative z-10 space-y-6">
+                {/* Top row of subjects */}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                  {[
+                    { name: userSubjects.length > 0 ? (curriculum.find(s => s.id === userSubjects[0])?.name || 'English Language') : 'English Language', color: 'from-purple-500 to-purple-600', grade: 'U' },
+                    { name: userSubjects.length > 1 ? (curriculum.find(s => s.id === userSubjects[1])?.name || 'Religious Studies') : 'Religious Studies', color: 'from-blue-500 to-blue-600', grade: 'U' },
+                    { name: userSubjects.length > 2 ? (curriculum.find(s => s.id === userSubjects[2])?.name || 'History') : 'History', color: 'from-green-500 to-green-600', grade: 'U' },
+                    { name: userSubjects.length > 3 ? (curriculum.find(s => s.id === userSubjects[3])?.name || 'English Literature') : 'English Literature', color: 'from-orange-500 to-red-500', grade: 'U' },
+                    { name: userSubjects.length > 4 ? (curriculum.find(s => s.id === userSubjects[4])?.name || 'Physics') : 'Physics', color: 'from-pink-500 to-pink-600', grade: 'U' },
+                    { name: userSubjects.length > 5 ? (curriculum.find(s => s.id === userSubjects[5])?.name || 'Geography') : 'Geography', color: 'from-indigo-500 to-purple-600', grade: 'U' }
+                  ].map((subject, index) => (
+                    <div key={index} className="text-center space-y-2">
+                      <div className="relative">
+                        <div className="w-16 h-16 mx-auto relative">
+                          <div className="absolute inset-0 bg-gray-100 rounded-full"></div>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-2xl font-bold text-gray-400">{subject.grade}</span>
+                          </div>
+                        </div>
+                        <div className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-gradient-to-r ${subject.color} rounded-full text-xs text-white font-medium`}>
+                          0%
+                        </div>
+                      </div>
+                      <div className="text-sm font-medium text-foreground">
+                        {subject.name} (AQA)
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Star decorations */}
+                <div className="flex justify-center gap-8 py-2">
+                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                  <Sparkles className="h-5 w-5 text-purple-400" />
+                </div>
+
+                {/* Highlighted subject with better grade */}
+                <div className="max-w-xs">
+                  <div className="relative bg-gradient-to-r from-orange-400 to-yellow-500 p-4 rounded-xl shadow-lg">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-white/90 text-sm font-medium">
+                          {userSubjects.length > 0 ? 
+                            (curriculum.find(s => s.id === userSubjects[0])?.name || 'Business') : 
+                            'Business'} (AQA)
+                        </div>
+                        <div className="text-4xl font-bold text-white mt-2">7</div>
+                        <div className="text-white/80 text-sm">70%</div>
+                      </div>
+                      <div className="text-right">
+                        <Star className="h-6 w-6 text-white/90 mb-1 fill-current" />
+                      </div>
                     </div>
                   </div>
-                  <div className="absolute inset-0 bg-black/20 rounded-xl flex items-center justify-center">
-                    <Lock className="h-8 w-8 text-white/80" />
-                  </div>
+                  <Badge className="mt-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs">
+                    <Target className="h-3 w-3 mr-1" />
+                    Target Hit!
+                  </Badge>
                 </div>
-              </div>
 
-              {/* Bottom stats */}
-              <div className="flex items-center justify-between text-sm bg-muted/30 p-3 rounded-lg">
-                <div className="flex items-center gap-2 blur-sm">
-                  <BarChart3 className="h-4 w-4 text-violet-500" />
-                  <span className="text-muted-foreground">{userSubjects.length || 7} subjects tracked</span>
+                {/* Bottom stats */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-sm">
+                    <div className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center">
+                      <BarChart3 className="h-4 w-4 text-purple-600" />
+                    </div>
+                    <span className="text-muted-foreground font-medium">{userSubjects.length || 7} subjects tracked</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center">
+                      <Zap className="h-4 w-4 text-green-600" />
+                    </div>
+                    <span className="text-muted-foreground font-medium">Real-time updates</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <div className="w-6 h-6 rounded-full bg-yellow-500/20 flex items-center justify-center">
+                      <Crown className="h-4 w-4 text-yellow-600" />
+                    </div>
+                    <span className="text-muted-foreground font-medium">Premium insights</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 blur-sm">
-                  <Zap className="h-4 w-4 text-green-500" />
-                  <span className="text-muted-foreground">Real-time updates</span>
-                </div>
-                <div className="flex items-center gap-2 blur-sm">
-                  <Crown className="h-4 w-4 text-yellow-500" />
-                  <span className="text-muted-foreground">Premium insights</span>
-                </div>
-              </div>
+              </CardContent>
+            </div>
 
-              {/* Upgrade overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/70 to-transparent flex items-center justify-center">
-                <div className="text-center space-y-4 p-6">
-                  <div className="relative">
-                    <motion.div
-                      animate={{ rotate: [0, 360] }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                      className="absolute inset-0 rounded-full bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500 blur-xl opacity-50"
-                    />
-                    <motion.div
-                      animate={{ scale: [1, 1.1, 1], rotate: [0, -5, 5, 0] }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                      className="relative bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 p-4 rounded-2xl shadow-2xl"
-                    >
-                      <Trophy className="h-12 w-12 text-white drop-shadow-lg" />
-                    </motion.div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <h3 className="font-bold text-xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
-                      🏆 Premium Feature
-                    </h3>
-                    <p className="text-foreground/90 max-w-md font-medium leading-relaxed">
-                      Get AI-powered grade predictions based on your current performance. See exactly what grades you're on track to achieve!
-                    </p>
-                  </div>
-                  
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button 
-                      onClick={openPaymentLink}
-                      size="lg"
-                      className="relative bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-700 hover:via-purple-700 hover:to-fuchsia-700 text-white font-bold px-8 py-4 rounded-xl shadow-2xl transition-all duration-300 text-lg overflow-hidden group"
-                      style={{ boxShadow: '0 20px 40px -10px rgba(139, 92, 246, 0.3)' }}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                      <Crown className="h-5 w-5 mr-3" />
-                      ✨ Upgrade to Premium
-                    </Button>
+            {/* Upgrade overlay */}
+            <div className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center">
+              <div className="text-center space-y-4 p-6 max-w-md">
+                <div className="relative">
+                  <motion.div
+                    animate={{ rotate: [0, 360] }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500 blur-xl opacity-50"
+                  />
+                  <motion.div
+                    animate={{ scale: [1, 1.1, 1], rotate: [0, -5, 5, 0] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                    className="relative bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 p-4 rounded-2xl shadow-2xl"
+                  >
+                    <Trophy className="h-12 w-12 text-white drop-shadow-lg" />
                   </motion.div>
                 </div>
+                
+                <div className="space-y-2">
+                  <h3 className="font-bold text-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
+                    🏆 Premium Feature
+                  </h3>
+                  <p className="text-foreground/90 font-medium leading-relaxed">
+                    Get AI-powered grade predictions based on your performance. See exactly what grades you're on track to achieve!
+                  </p>
+                </div>
+                
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button 
+                    onClick={openPaymentLink}
+                    size="lg"
+                    className="relative bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-700 hover:via-purple-700 hover:to-fuchsia-700 text-white font-bold px-8 py-4 rounded-xl shadow-2xl transition-all duration-300 text-lg overflow-hidden group"
+                    style={{ boxShadow: '0 20px 40px -10px rgba(139, 92, 246, 0.3)' }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                    <Crown className="h-5 w-5 mr-3" />
+                    ✨ Upgrade to Premium
+                  </Button>
+                </motion.div>
               </div>
-            </CardContent>
+            </div>
           </Card>
         )}
 
