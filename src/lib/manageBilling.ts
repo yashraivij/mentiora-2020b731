@@ -2,14 +2,16 @@
 import { supabase } from "@/integrations/supabase/client";
 
 export async function openManageBilling() {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) { 
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session?.user) { 
     window.location.href = "/login"; 
     return; 
   }
 
   const { data, error } = await supabase.functions.invoke("create-portal", {
-    method: "POST",
+    headers: {
+      Authorization: `Bearer ${session.access_token}`,
+    },
   });
 
   if (error || !data?.url) {
