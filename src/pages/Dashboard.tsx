@@ -1131,7 +1131,7 @@ const Dashboard = () => {
             )}
 
             {/* Debug Subscription Status */}
-            <Card className="border-orange-500/50 bg-orange-50/50 dark:bg-orange-950/20 w-72">
+            {/* <Card className="border-orange-500/50 bg-orange-50/50 dark:bg-orange-950/20 w-72">
               <CardContent className="p-4">
                 <div className="text-sm space-y-2">
                   <div>
@@ -1156,7 +1156,7 @@ const Dashboard = () => {
                   </Button>
                 </div>
               </CardContent>
-            </Card>
+            </Card> */}
           </div>
         </div>
 
