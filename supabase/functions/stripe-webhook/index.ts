@@ -1,9 +1,13 @@
 import Stripe from "https://esm.sh/stripe@14.23.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.4";
 
-const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY")!.trim(), { apiVersion: "2024-06-20" });
-const webhookSecret = Deno.env.get("STRIPE_WEBHOOK_SECRET")!.trim();
-const supabase = createClient(Deno.env.get("SUPABASE_URL")!.trim(), Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!.trim());
+const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", { apiVersion: "2024-06-20" });
+const webhookSecret = Deno.env.get("STRIPE_WEBHOOK_SECRET") || "";
+const supabase = createClient(
+  Deno.env.get("SUPABASE_URL") || "",
+  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "",
+  { auth: { persistSession: false } }
+);
 
 Deno.serve(async (req) => {
   if (req.method !== "POST") return new Response("ok", { status: 200 });
