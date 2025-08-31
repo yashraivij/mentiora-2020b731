@@ -8,9 +8,7 @@ export async function openManageBilling() {
     return; 
   }
 
-  const { data, error } = await supabase.functions.invoke("create-portal", { 
-    method: 'POST' 
-  });
+  const { data, error } = await supabase.functions.invoke("create-portal");
 
   if (error) { 
     alert('Could not open billing portal'); 
