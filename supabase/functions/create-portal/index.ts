@@ -25,14 +25,29 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: CORS });
 
   try {
+    console.log("create-portal: Function started");
+    
     // 1) Auth: require the caller's Supabase JWT (invoke() sends it)
     const auth = req.headers.get("Authorization"); // "Bearer <jwt>"
-    if (!auth) return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: CORS });
+    if (!auth) {
+      console.log("create-portal: No authorization header");
+      return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: CORS });
+    }
 
     const token = auth.replace("Bearer ", "");
-    const { data: authData } = await supabase.auth.getUser(token);
+    const { data: authData, error: authError } = await supabase.auth.getUser(token);
+    if (authError) {
+      console.error("create-portal: Auth error:", authError);
+      return new Response(JSON.stringify({ error: "Auth failed" }), { status: 401, headers: CORS });
+    }
+    
     const user = authData?.user;
-    if (!user) return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: CORS });
+    if (!user) {
+      console.log("create-portal: No user found");
+      return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: CORS });
+    }
+
+    console.log("create-portal: User authenticated:", user.id);
 
     // 2) Load customer's stripe_customer_id from your profiles table
     const { data: profile, error } = await supabase
@@ -41,11 +56,21 @@ Deno.serve(async (req) => {
       .eq("id", user.id)
       .single();
 
-    if (error || !profile) {
+    console.log("create-portal: Profile query result:", { profile, error });
+
+    if (error) {
+      console.error("create-portal: Profile query error:", error);
+      return new Response(JSON.stringify({ error: `Profile error: ${error.message}` }), { status: 404, headers: CORS });
+    }
+    
+    if (!profile) {
+      console.log("create-portal: No profile found for user");
       return new Response(JSON.stringify({ error: "Profile not found" }), { status: 404, headers: CORS });
     }
+    
     if (!profile.stripe_customer_id) {
-      return new Response(JSON.stringify({ error: "No Stripe customer on file" }), { status: 409, headers: CORS });
+      console.log("create-portal: No stripe_customer_id in profile");
+      return new Response(JSON.stringify({ error: "No Stripe customer on file. Please subscribe first." }), { status: 409, headers: CORS });
     }
 
     // 3) Create a customer-specific Billing Portal session
