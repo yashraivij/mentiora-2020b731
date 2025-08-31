@@ -1410,8 +1410,59 @@ const Dashboard = () => {
               "👨‍👩‍👧‍👦 Share progress reports with parents"
             ]}
           >
-            <div className="h-64 bg-muted/20 rounded-lg flex items-center justify-center">
-              <BarChart3 className="h-16 w-16 text-muted-foreground/30" />
+            <div className="space-y-3">
+              {userSubjects.length > 0 ? (
+                // Show user's actual subjects with teaser grades
+                userSubjects.slice(0, 4).map((subjectId, index) => {
+                  const subject = curriculum.find(s => s.id === subjectId);
+                  const subjectName = subject?.name || subjectId.replace(/-/g, ' ');
+                  const teaserGrades = ['7', '8', '6', '9', '5', '8', '7']; // Mock grades to tease
+                  const teaserGrade = teaserGrades[index % teaserGrades.length];
+                  
+                  return (
+                    <div key={subjectId} className="flex items-center justify-between p-3 bg-background/50 rounded-lg border border-border/30">
+                      <div className="flex items-center gap-3">
+                        <div className="w-2 h-8 bg-gradient-to-b from-violet-500 to-purple-600 rounded-full"></div>
+                        <span className="font-medium text-foreground capitalize">{subjectName}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="px-3 py-1 bg-gradient-to-r from-violet-500/20 to-purple-500/20 rounded-full border border-violet-500/30">
+                          <span className="text-lg font-bold text-violet-600 blur-sm select-none">Grade {teaserGrade}</span>
+                        </div>
+                        <Lock className="w-4 h-4 text-violet-500" />
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                // Fallback for users with no subjects selected
+                <div className="space-y-3">
+                  {['Mathematics', 'English Literature', 'Physics', 'Chemistry'].map((subject, index) => {
+                    const teaserGrades = ['8', '7', '9', '6'];
+                    const teaserGrade = teaserGrades[index];
+                    
+                    return (
+                      <div key={subject} className="flex items-center justify-between p-3 bg-background/50 rounded-lg border border-border/30">
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-8 bg-gradient-to-b from-violet-500 to-purple-600 rounded-full"></div>
+                          <span className="font-medium text-foreground">{subject}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="px-3 py-1 bg-gradient-to-r from-violet-500/20 to-purple-500/20 rounded-full border border-violet-500/30">
+                            <span className="text-lg font-bold text-violet-600 blur-sm select-none">Grade {teaserGrade}</span>
+                          </div>
+                          <Lock className="w-4 h-4 text-violet-500" />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+              {userSubjects.length > 4 && (
+                <div className="text-center py-2 text-sm text-muted-foreground">
+                  + {userSubjects.length - 4} more subjects with predictions...
+                </div>
+              )}
             </div>
           </PaywallCard>
         )}
