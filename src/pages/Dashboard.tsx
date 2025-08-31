@@ -1397,74 +1397,42 @@ const Dashboard = () => {
         {isPremium ? (
           <PredictedGradesGraph userProgress={userProgress} />
         ) : (
-          <PaywallCard
-            title="🎯 Predicted GCSE Grades"
-            description="Get AI-powered grade predictions based on your current performance and practice data. See exactly what grades you're on track to achieve and identify areas for improvement before exam season."
-            onUpgrade={openPaymentLink}
-            theme="grades"
-            benefits={[
-              "🚀 Accurate grade predictions for all subjects",
-              "📊 Performance tracking & improvement insights", 
-              "⏰ Early warning for at-risk subjects",
-              "🎯 Personalized study recommendations",
-              "👨‍👩‍👧‍👦 Share progress reports with parents"
-            ]}
-          >
-            <div className="space-y-3">
-              {userSubjects.length > 0 ? (
-                // Show user's actual subjects with teaser grades
-                userSubjects.slice(0, 4).map((subjectId, index) => {
-                  const subject = curriculum.find(s => s.id === subjectId);
-                  const subjectName = subject?.name || subjectId.replace(/-/g, ' ');
-                  const teaserGrades = ['7', '8', '6', '9', '5', '8', '7']; // Mock grades to tease
-                  const teaserGrade = teaserGrades[index % teaserGrades.length];
-                  
-                  return (
-                    <div key={subjectId} className="flex items-center justify-between p-3 bg-background/50 rounded-lg border border-border/30">
-                      <div className="flex items-center gap-3">
-                        <div className="w-2 h-8 bg-gradient-to-b from-violet-500 to-purple-600 rounded-full"></div>
-                        <span className="font-medium text-foreground capitalize">{subjectName}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="px-3 py-1 bg-gradient-to-r from-violet-500/20 to-purple-500/20 rounded-full border border-violet-500/30">
-                          <span className="text-lg font-bold text-violet-600 blur-sm select-none">Grade {teaserGrade}</span>
-                        </div>
-                        <Lock className="w-4 h-4 text-violet-500" />
-                      </div>
-                    </div>
-                  );
-                })
-              ) : (
-                // Fallback for users with no subjects selected
-                <div className="space-y-3">
-                  {['Mathematics', 'English Literature', 'Physics', 'Chemistry'].map((subject, index) => {
-                    const teaserGrades = ['8', '7', '9', '6'];
-                    const teaserGrade = teaserGrades[index];
-                    
-                    return (
-                      <div key={subject} className="flex items-center justify-between p-3 bg-background/50 rounded-lg border border-border/30">
-                        <div className="flex items-center gap-3">
-                          <div className="w-2 h-8 bg-gradient-to-b from-violet-500 to-purple-600 rounded-full"></div>
-                          <span className="font-medium text-foreground">{subject}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="px-3 py-1 bg-gradient-to-r from-violet-500/20 to-purple-500/20 rounded-full border border-violet-500/30">
-                            <span className="text-lg font-bold text-violet-600 blur-sm select-none">Grade {teaserGrade}</span>
-                          </div>
-                          <Lock className="w-4 h-4 text-violet-500" />
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-              {userSubjects.length > 4 && (
-                <div className="text-center py-2 text-sm text-muted-foreground">
-                  + {userSubjects.length - 4} more subjects with predictions...
-                </div>
-              )}
+          <div className="relative mb-8">
+            {/* Actual grades component (blurred) */}
+            <div className="blur-sm pointer-events-none">
+              <PredictedGradesGraph userProgress={userProgress} />
             </div>
-          </PaywallCard>
+            
+            {/* Overlay with upgrade button */}
+            <div className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center rounded-lg">
+              <div className="text-center p-8 max-w-md">
+                <div className="w-16 h-16 bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-amber-500/25 animate-pulse">
+                  <Crown className="h-8 w-8 text-white drop-shadow-lg" />
+                </div>
+                <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 bg-clip-text text-transparent mb-3">
+                  🎯 Unlock Your Predictions
+                </h3>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  See your predicted grades, performance insights, and personalized recommendations to achieve your target grades.
+                </p>
+                <Button
+                  onClick={openPaymentLink}
+                  className="bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 hover:from-purple-600 hover:via-blue-600 hover:to-emerald-600 text-white border-0 px-8 py-3 font-bold shadow-xl shadow-purple-500/25 transition-all duration-300 hover:scale-105"
+                >
+                  <Crown className="mr-2 h-4 w-4" />
+                  Upgrade to Premium
+                </Button>
+                <div className="flex items-center justify-center gap-2 mt-4 text-sm text-muted-foreground">
+                  <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+                    ✓ 7-day free trial
+                  </Badge>
+                  <Badge className="bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
+                    ✓ Cancel anytime
+                  </Badge>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Predicted 2026 Questions Section */}
