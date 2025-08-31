@@ -1398,9 +1398,17 @@ const Dashboard = () => {
           <PredictedGradesGraph userProgress={userProgress} />
         ) : (
           <PaywallCard
-            title="Predicted GCSE Grades"
-            description="See your predicted grades based on current performance"
+            title="🎯 Predicted GCSE Grades"
+            description="Get AI-powered grade predictions based on your current performance and practice data. See exactly what grades you're on track to achieve and identify areas for improvement before exam season."
             onUpgrade={openPaymentLink}
+            theme="grades"
+            benefits={[
+              "🚀 Accurate grade predictions for all subjects",
+              "📊 Performance tracking & improvement insights", 
+              "⏰ Early warning for at-risk subjects",
+              "🎯 Personalized study recommendations",
+              "👨‍👩‍👧‍👦 Share progress reports with parents"
+            ]}
           >
             <div className="h-64 bg-muted/20 rounded-lg flex items-center justify-center">
               <BarChart3 className="h-16 w-16 text-muted-foreground/30" />
@@ -1413,9 +1421,17 @@ const Dashboard = () => {
           <PredictedQuestionsSection />
         ) : (
           <PaywallCard
-            title="Predicted 2026 Questions"
-            description="Practice with AI-generated questions predicted for your exams"
+            title="🎯 Predicted 2026 Questions"
+            description="Practice with AI-generated questions that are likely to appear in your upcoming GCSE exams. Our advanced algorithm analyzes past papers and current trends to predict what you'll face."
             onUpgrade={openPaymentLink}
+            theme="questions"
+            benefits={[
+              "🤖 AI-generated questions based on exam patterns",
+              "📈 Higher exam scores through targeted practice",
+              "⚡ Save 15+ hours of question searching",
+              "🎯 Focus on high-probability exam content",
+              "🏆 Build confidence before the real exams"
+            ]}
           >
             <div className="space-y-4">
               <div className="h-8 bg-muted/20 rounded"></div>
@@ -1528,9 +1544,17 @@ const Dashboard = () => {
           </div>
         ) : (
           <PaywallCard
-            title="Revision Notebook"
-            description="Create personalized revision notes powered by AI"
+            title="🧠 AI Revision Notebook"
+            description="Transform your study materials into personalized, intelligent revision notes. Our AI creates custom summaries, key points, and exam-focused content tailored to your learning style and exam board."
             onUpgrade={openPaymentLink}
+            theme="notebook"
+            benefits={[
+              "🧠 AI-powered note generation from any content",
+              "⏱️ Save 10+ hours per week on note-making",
+              "📚 Automatically organized by topics & subjects",
+              "🎯 Exam-focused summaries and key points",
+              "💡 Personalized to your learning style"
+            ]}
           >
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
