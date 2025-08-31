@@ -1397,15 +1397,49 @@ const Dashboard = () => {
         {isPremium ? (
           <PredictedGradesGraph userProgress={userProgress} />
         ) : (
-          <PaywallCard
-            title="Predicted GCSE Grades"
-            description="See your predicted grades based on current performance"
-            onUpgrade={openPaymentLink}
-          >
-            <div className="h-64 bg-muted/20 rounded-lg flex items-center justify-center">
-              <BarChart3 className="h-16 w-16 text-muted-foreground/30" />
+          <div className="relative">
+            {/* Blurred background with actual grades */}
+            <div className="blur-md pointer-events-none opacity-70">
+              <PredictedGradesGraph userProgress={userProgress} />
             </div>
-          </PaywallCard>
+            
+            {/* Premium overlay */}
+            <div className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+              <div className="text-center space-y-4 p-8 max-w-sm">
+                <motion.div
+                  className="flex justify-center"
+                  animate={{
+                    y: [-5, 5, -5],
+                    scale: [1, 1.1, 1]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    ease: "easeInOut",
+                    repeatDelay: 3
+                  }}
+                >
+                  <Sparkles className="h-12 w-12 text-primary" />
+                </motion.div>
+                
+                <div className="text-center space-y-2">
+                  <h3 className="font-semibold text-lg">Premium Feature</h3>
+                  <p className="text-sm text-muted-foreground max-w-sm">
+                    Unlock advanced analytics, predicted grades, and personalized study insights with Premium.
+                  </p>
+                </div>
+                
+                <Button 
+                  onClick={openPaymentLink}
+                  className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white font-semibold px-6 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  <Crown className="h-4 w-4 mr-2" />
+                  Upgrade to Premium
+                </Button>
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Predicted 2026 Questions Section */}
