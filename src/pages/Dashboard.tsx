@@ -88,11 +88,14 @@ const Dashboard = () => {
       window.location.href = "/login";
       return;
     }
-    const join = "https://buy.stripe.com/9B69AS33W3RofiEa9i8N205".includes("?")
+    // Test checkout link
+    const join = "https://buy.stripe.com/test_3cI28q8og4VsfiE0yI8N202".includes(
+      "?"
+    )
       ? "&"
       : "?";
     window.location.href =
-      "https://buy.stripe.com/9B69AS33W3RofiEa9i8N205" +
+      "https://buy.stripe.com/test_3cI28q8og4VsfiE0yI8N202" +
       join +
       "client_reference_id=" +
       encodeURIComponent(user.id);
