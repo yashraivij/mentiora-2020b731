@@ -1074,6 +1074,15 @@ const Dashboard = () => {
                 <Gamepad2 className="h-5 w-5 mr-2" />
                 <span className="text-sm font-extrabold">Join Community</span>
               </Button>
+              {isPremium && (
+                <Button
+                  onClick={openManageBilling}
+                  className="bg-gradient-to-r from-purple-400 to-violet-500 hover:from-purple-500 hover:to-violet-600 text-white border-2 border-purple-300 shadow-2xl shadow-purple-500/40 hover:shadow-purple-500/60 transition-all duration-300 rounded-xl px-6 py-3 h-11 hover:scale-110 font-bold ring-2 ring-purple-200/50"
+                >
+                  <Crown className="h-5 w-5 mr-2" />
+                  <span className="text-sm font-extrabold">Manage Billing</span>
+                </Button>
+              )}
               <ThemeToggle />
               {getStudyStreak() >= 3 && <ColorThemeToggle />}
               {getStudyStreak() >= 7 && <StudyPlaylist isUnlocked={true} />}
@@ -1109,7 +1118,7 @@ const Dashboard = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-accent/5 w-64">
+                <Card className="border-muted/50 bg-card w-64">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-2 mb-2">
                       <Crown className="h-4 w-4 text-primary" />
@@ -1117,14 +1126,9 @@ const Dashboard = () => {
                         Premium Active
                       </span>
                     </div>
-                    <Button
-                      onClick={openManageBilling}
-                      variant="outline"
-                      size="sm"
-                      className="w-full"
-                    >
-                      Manage Billing
-                    </Button>
+                    <p className="text-xs text-muted-foreground">
+                      Enjoying premium features
+                    </p>
                   </CardContent>
                 </Card>
               </motion.div>

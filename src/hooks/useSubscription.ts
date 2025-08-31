@@ -64,9 +64,4 @@ export const useSubscription = () => {
     openPaymentLink,
     refetch: fetchProfile
   };
-};,
-    isLoading,
-    openPaymentLink,
-    refetch: fetchProfile,
-  };
 };
