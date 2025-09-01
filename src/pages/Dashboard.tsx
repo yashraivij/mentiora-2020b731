@@ -1394,7 +1394,7 @@ const Dashboard = () => {
         </div>
 
         {/* Predicted GCSE Grades Section */}
-        <PredictedGradesGraph userProgress={userProgress} isPremium={isPremium} onUpgrade={openPaymentLink} />
+        <PredictedGradesGraph userProgress={userProgress} onUpgrade={openPaymentLink} />
 
         {/* Predicted 2026 Questions Section */}
         <PredictedQuestionsSection 
