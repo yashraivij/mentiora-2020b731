@@ -64,11 +64,27 @@ serve(async (req) => {
 
     // Check if answer is substantial enough to be marked
     const trimmedAnswer = userAnswer.trim();
-    if (trimmedAnswer.length < 2 || !/[a-zA-Z]/.test(trimmedAnswer)) {
+    
+    // Check if this is a multiple choice question (has options like a), b), c), d))
+    const isMultipleChoice = /[a-d]\)\s/.test(question);
+    
+    // For multiple choice, allow single letter answers; for other questions, require more detail
+    if (!isMultipleChoice && (trimmedAnswer.length < 2 || !/[a-zA-Z]/.test(trimmedAnswer))) {
       return new Response(JSON.stringify({ 
         marksAwarded: 0,
         feedback: "Your answer is too brief. Please provide a more detailed response that demonstrates your understanding.",
         assessment: "Insufficient Detail"
+      }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+    
+    // Basic validation for all answers
+    if (trimmedAnswer.length === 0 || !/[a-zA-Z0-9]/.test(trimmedAnswer)) {
+      return new Response(JSON.stringify({ 
+        marksAwarded: 0,
+        feedback: "Please provide an answer to the question.",
+        assessment: "No Answer Provided"
       }), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
