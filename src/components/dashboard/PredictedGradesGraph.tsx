@@ -515,10 +515,18 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
               {!isPremium && gradesData.some(g => g.finalGrade !== '–') && (
                 <Button 
                   onClick={onUpgrade}
-                  className="ml-auto bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-purple-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/40"
+                  className="ml-auto bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 hover:from-purple-700 hover:via-pink-700 hover:to-red-700 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl shadow-purple-500/40 transition-all duration-300 hover:shadow-xl hover:shadow-pink-500/50 animate-pulse hover:animate-none hover:scale-105 border-2 border-white/20"
                 >
-                  <Crown className="h-4 w-4 mr-2" />
-                  View My Grades
+                  <div className="flex items-center space-x-3">
+                    <div className="relative">
+                      <Crown className="h-5 w-5 animate-bounce" />
+                      <div className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 rounded-full animate-ping"></div>
+                    </div>
+                    <div className="text-left">
+                      <div className="text-lg font-extrabold">🔓 Unlock My Grades</div>
+                      <div className="text-xs font-medium opacity-90">See exactly what you'll get →</div>
+                    </div>
+                  </div>
                 </Button>
               )}
             </div>
