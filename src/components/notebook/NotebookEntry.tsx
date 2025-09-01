@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Lightbulb, Target, Clock, ExternalLink, Brain, AlertCircle } from "lucide-react";
 import { format } from "date-fns";
+import { useAuth } from "@/contexts/AuthContext";
 
 // Safe text formatting function to prevent XSS
 const formatBoldText = (text: string): React.ReactNode => {
@@ -39,6 +40,12 @@ interface NotebookEntryProps {
 }
 
 export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
+  const { isPremium } = useAuth();
+  
+  const BlurSpan = ({ children }: { children: React.ReactNode }) => (
+    <span className={!isPremium ? "blur-sm" : ""}>{children}</span>
+  );
+  
   const getConfidenceColor = (level: string) => {
     switch (level.toLowerCase()) {
       case 'low': return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300';
@@ -97,7 +104,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             <AlertCircle className="h-4 w-4" />
             What Tripped Me Up
           </h4>
-          <p className="text-red-700 dark:text-red-200 text-sm">{entry.what_tripped_up}</p>
+          <p className="text-red-700 dark:text-red-200 text-sm"><BlurSpan>{entry.what_tripped_up}</BlurSpan></p>
         </div>
 
         {/* Fix Sentence */}
@@ -106,7 +113,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             <Lightbulb className="h-4 w-4" />
             Fix in One Sentence
           </h4>
-          <p className="text-green-700 dark:text-green-200 text-sm font-medium">{entry.fix_sentence}</p>
+          <p className="text-green-700 dark:text-green-200 text-sm font-medium"><BlurSpan>{entry.fix_sentence}</BlurSpan></p>
         </div>
 
         {/* Bulletproof Notes */}
@@ -119,7 +126,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             {entry.bulletproof_notes.map((note, index) => (
               <li key={index} className="flex items-start gap-2 text-blue-700 dark:text-blue-200 text-sm">
                 <span className="text-blue-500 dark:text-blue-400 mt-1">•</span>
-                <span>{formatBoldText(note)}</span>
+                <span><BlurSpan>{formatBoldText(note)}</BlurSpan></span>
               </li>
             ))}
           </ul>
@@ -133,7 +140,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
               Mini Worked Example
             </h4>
             <p className="text-purple-700 dark:text-purple-200 text-sm whitespace-pre-wrap">
-              {entry.mini_example?.replace(/\*/g, '')}
+              <BlurSpan>{entry.mini_example?.replace(/\*/g, '')}</BlurSpan>
             </p>
           </div>
         )}
@@ -147,7 +154,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
           <div className="flex flex-wrap gap-2">
             {entry.keywords.map((keyword, index) => (
               <Badge key={index} variant="outline" className="text-xs">
-                {keyword}
+                <BlurSpan>{keyword}</BlurSpan>
               </Badge>
             ))}
           </div>
@@ -159,7 +166,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             <Target className="h-4 w-4" />
             Next Step
           </h4>
-          <p className="text-amber-700 dark:text-amber-200 text-sm">{entry.next_step_suggestion}</p>
+          <p className="text-amber-700 dark:text-amber-200 text-sm"><BlurSpan>{entry.next_step_suggestion}</BlurSpan></p>
         </div>
 
       </CardContent>

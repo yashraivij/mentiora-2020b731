@@ -282,22 +282,16 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
   };
 
   const getTooltipContent = (grade: GradeData, isPremium: boolean) => {
-    console.log('Tooltip data:', { 
-      finalGrade: grade.finalGrade, 
-      practiceScore: grade.practiceScore, 
-      examGrade: grade.examGrade,
-      subjectName: grade.subjectName,
-      isPremium 
-    });
-
     const BlurSpan = ({ children }: { children: React.ReactNode }) => (
       <span className={!isPremium ? "blur-sm" : ""}>{children}</span>
     );
     
+    // Show the example message from the user's request
     if (grade.practiceScore > 0 && grade.examGrade) {
       return (
         <>
-          You scored an average of <BlurSpan>{grade.practiceScore}%</BlurSpan> across your {grade.subjectName} quizzes and achieved a Grade <BlurSpan>{grade.examGrade}</BlurSpan> in your predicted paper. This puts you on track for a Grade <BlurSpan>{grade.finalGrade === '–' ? 'U' : grade.finalGrade}</BlurSpan> in the real exam.
+          📊 Your Results<br />
+          You scored an average of <BlurSpan>{grade.practiceScore}%</BlurSpan> across your {grade.subjectName} quizzes. This puts you on track for a Grade <BlurSpan>{grade.finalGrade === '–' ? 'U' : grade.finalGrade}</BlurSpan> in the real exam.
           {grade.finalGrade !== 'U' && grade.finalGrade !== '–' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
             <>
               {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for <BlurSpan>{gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+</BlurSpan> across all topics.
