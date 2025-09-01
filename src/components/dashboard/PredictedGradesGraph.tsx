@@ -282,7 +282,8 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
   };
 
   const getTooltipContent = (grade: GradeData, isPremium: boolean) => {
-    if (grade.finalGrade === '–') {
+    // Only show fallback message if there's truly no data
+    if (grade.finalGrade === '–' && grade.practiceScore === 0 && !grade.examGrade) {
       return "Start revising to unlock your prediction";
     }
 
@@ -293,8 +294,8 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
     if (grade.practiceScore > 0 && grade.examGrade) {
       return (
         <>
-          You scored an average of <BlurSpan>{grade.practiceScore}%</BlurSpan> across your {grade.subjectName} quizzes and achieved a Grade <BlurSpan>{grade.examGrade}</BlurSpan> in your predicted paper. This puts you on track for a Grade <BlurSpan>{grade.finalGrade}</BlurSpan> in the real exam.
-          {grade.finalGrade !== 'U' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
+          You scored an average of <BlurSpan>{grade.practiceScore}%</BlurSpan> across your {grade.subjectName} quizzes and achieved a Grade <BlurSpan>{grade.examGrade}</BlurSpan> in your predicted paper. This puts you on track for a Grade <BlurSpan>{grade.finalGrade === '–' ? 'U' : grade.finalGrade}</BlurSpan> in the real exam.
+          {grade.finalGrade !== 'U' && grade.finalGrade !== '–' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
             <>
               {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for <BlurSpan>{gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+</BlurSpan> across all topics.
             </>
@@ -304,8 +305,8 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
     } else if (grade.practiceScore > 0) {
       return (
         <>
-          You scored an average of <BlurSpan>{grade.practiceScore}%</BlurSpan> across your {grade.subjectName} quizzes. This puts you on track for a Grade <BlurSpan>{grade.finalGrade}</BlurSpan> in the real exam.
-          {grade.finalGrade !== 'U' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
+          You scored an average of <BlurSpan>{grade.practiceScore}%</BlurSpan> across your {grade.subjectName} quizzes. This puts you on track for a Grade <BlurSpan>{grade.finalGrade === '–' ? 'U' : grade.finalGrade}</BlurSpan> in the real exam.
+          {grade.finalGrade !== 'U' && grade.finalGrade !== '–' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
             <>
               {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for <BlurSpan>{gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+</BlurSpan> across all topics.
             </>
@@ -315,8 +316,8 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
     } else if (grade.examGrade) {
       return (
         <>
-          You scored a Grade <BlurSpan>{grade.examGrade}</BlurSpan> in your {grade.subjectName} predicted paper. This puts you on track for a Grade <BlurSpan>{grade.finalGrade}</BlurSpan> in the real exam.
-          {grade.finalGrade !== 'U' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
+          You scored a Grade <BlurSpan>{grade.examGrade}</BlurSpan> in your {grade.subjectName} predicted paper. This puts you on track for a Grade <BlurSpan>{grade.finalGrade === '–' ? 'U' : grade.finalGrade}</BlurSpan> in the real exam.
+          {grade.finalGrade !== 'U' && grade.finalGrade !== '–' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
             <>
               {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for <BlurSpan>{gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+</BlurSpan> across all topics.
             </>
