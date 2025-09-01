@@ -54,7 +54,7 @@ export const PredictedQuestionsSection = ({ isPremium = false, onUpgrade }: Pred
                       Predicted 2026 Questions
                     </CardTitle>
                     <CardDescription className="text-white/90 text-lg">
-                      {isPremium ? "Premium exam simulation" : "Practice with AI-generated questions that are likely to appear in your upcoming GCSE exams. Our advanced algorithm analyzes past papers and current trends to predict what you'll face."}
+                      Premium exam simulation
                     </CardDescription>
                   </div>
                 </div>
@@ -62,7 +62,7 @@ export const PredictedQuestionsSection = ({ isPremium = false, onUpgrade }: Pred
                 <div className="flex items-center space-x-3">
                   <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold px-3 py-1 hover:from-yellow-300 hover:to-orange-300">
                     <Crown className="h-3 w-3 mr-1" />
-                    {isPremium ? "PREMIUM EXCLUSIVE" : "🎯 Premium Feature"}
+                    PREMIUM EXCLUSIVE
                   </Badge>
                   <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
                     <Zap className="h-3 w-3 mr-1" />
@@ -92,8 +92,8 @@ export const PredictedQuestionsSection = ({ isPremium = false, onUpgrade }: Pred
                     <Clock className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-white text-sm">{isPremium ? "Real Exam Timer" : "🤖 AI-generated questions"}</p>
-                    <p className="text-white/80 text-xs">{isPremium ? "Authentic pressure simulation" : "Based on exam patterns"}</p>
+                    <p className="font-bold text-white text-sm">Real Exam Timer</p>
+                    <p className="text-white/80 text-xs">Authentic pressure simulation</p>
                   </div>
                 </div>
               </div>
@@ -104,8 +104,8 @@ export const PredictedQuestionsSection = ({ isPremium = false, onUpgrade }: Pred
                     <BookOpen className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-white text-sm">{isPremium ? "AQA Structure" : "📈 Higher exam scores"}</p>
-                    <p className="text-white/80 text-xs">{isPremium ? "Exact 2026 format" : "Through targeted practice"}</p>
+                    <p className="font-bold text-white text-sm">AQA Structure</p>
+                    <p className="text-white/80 text-xs">Exact 2026 format</p>
                   </div>
                 </div>
               </div>
@@ -116,14 +116,14 @@ export const PredictedQuestionsSection = ({ isPremium = false, onUpgrade }: Pred
                     <Target className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-white text-sm">{isPremium ? "AI Marking" : "⚡ Save 15+ hours"}</p>
-                    <p className="text-white/80 text-xs">{isPremium ? "Instant expert feedback" : "Of question searching"}</p>
+                    <p className="font-bold text-white text-sm">AI Marking</p>
+                    <p className="text-white/80 text-xs">Instant expert feedback</p>
                   </div>
                 </div>
               </div>
             </div>
             
-            {/* Benefits/Update Notice */}
+            {/* Weekly Update Notice */}
             <div className="bg-gradient-to-r from-white/15 to-white/10 border border-white/30 rounded-2xl p-4 backdrop-blur-sm">
               <div className="flex items-center space-x-3">
                 <div className="p-2 bg-gradient-to-br from-yellow-400/30 to-orange-400/30 rounded-xl">
@@ -131,10 +131,10 @@ export const PredictedQuestionsSection = ({ isPremium = false, onUpgrade }: Pred
                 </div>
                 <div>
                   <p className="font-bold text-white text-sm">
-                    {isPremium ? "Fresh practice papers every week" : "🎯 Focus on high-probability exam content"}
+                    Fresh practice papers every week
                   </p>
                   <p className="text-white/90 text-xs">
-                    {isPremium ? "Content aligned with 2026 exam trends" : "🏆 Build confidence before the real exams"}
+                    Content aligned with 2026 exam trends
                   </p>
                 </div>
               </div>
