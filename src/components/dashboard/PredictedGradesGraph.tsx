@@ -407,11 +407,11 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
                         <div className={`relative h-40 bg-gradient-to-t from-gray-100/30 to-gray-50/20 dark:from-gray-800/30 dark:to-gray-700/20 rounded-3xl overflow-hidden border-2 border-white/20 backdrop-blur-sm shadow-xl ${getSubjectShadow(index)} group-hover:shadow-2xl transition-all duration-500`}>
                           {grade.finalGrade !== '–' && (
                             <>
-                              {/* Main gradient bar - fill entire height for non-premium */}
+                              {/* Main gradient bar */}
                               <div 
                                 className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t ${getSubjectColor(index)} rounded-3xl transition-all duration-1000 ease-out animate-in slide-in-from-bottom-4`}
                                 style={{ 
-                                  height: isPremium ? `${Math.max(grade.finalPercentage * 0.85, 20)}%` : '100%',
+                                  height: `100%`,
                                   filter: grade.isGrade7Plus ? 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.6))' : 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))'
                                 }}
                               />
@@ -419,18 +419,18 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
                               {/* Premium glow overlay */}
                               <div 
                                 className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white/20 to-transparent rounded-3xl opacity-60`}
-                                style={{ height: isPremium ? `${Math.max(grade.finalPercentage * 0.85, 20)}%` : '100%' }}
+                                style={{ height: `100%` }}
                               />
                               
                               {/* Animated shimmer effect */}
                               <div 
                                 className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-3xl animate-pulse"
-                                style={{ height: isPremium ? `${Math.max(grade.finalPercentage * 0.85, 20)}%` : '100%' }}
+                                style={{ height: `100%` }}
                               />
                             </>
                           )}
                           
-                          {/* Enhanced Grade number with more blur for non-premium */}
+                          {/* Enhanced Grade number */}
                           <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110 ${!isPremium ? 'blur-md' : ''}`}>
                             {grade.finalGrade}
                           </div>
@@ -459,8 +459,8 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
                           )}
                         </div>
 
-                        {/* Premium Subject name - keep readable for non-premium */}
-                        <div className="mt-4 text-center">
+                        {/* Premium Subject name */}
+                          <div className="mt-4 text-center">
                           <div className="text-sm font-bold text-foreground truncate mb-2">{grade.subjectName}</div>
                           {grade.isGrade7Plus && (
                             <div className="mt-2">
@@ -513,20 +513,13 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
                 </span>
               </div>
               {!isPremium && gradesData.some(g => g.finalGrade !== '–') && (
-                <div className="mt-6 text-center">
-                  <div className="mb-4">
-                    <p className="text-muted-foreground text-sm mb-2">
-                      Upgrade to Premium to view your predicted grades and detailed performance insights
-                    </p>
-                  </div>
-                  <Button 
-                    onClick={onUpgrade}
-                    className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-purple-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/40"
-                  >
-                    <Crown className="h-4 w-4 mr-2" />
-                    Upgrade to Premium
-                  </Button>
-                </div>
+                <Button 
+                  onClick={onUpgrade}
+                  className="ml-auto bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-purple-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/40"
+                >
+                  <Crown className="h-4 w-4 mr-2" />
+                  View My Grades
+                </Button>
               )}
             </div>
             </div>
