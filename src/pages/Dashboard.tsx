@@ -61,7 +61,6 @@ import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotificatio
 import { StreakCelebration } from "@/components/ui/streak-celebration";
 import { GradeCelebration } from "@/components/ui/grade-celebration";
 import { DiscordInvitation } from "@/components/ui/discord-invitation";
-import { PremiumWelcome } from "@/components/ui/premium-welcome";
 
 import { PublicStreakProfiles } from "@/components/dashboard/PublicStreakProfiles";
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
@@ -124,8 +123,6 @@ const Dashboard = () => {
   const [celebrationGrade, setCelebrationGrade] = useState("");
   const [celebrationSubject, setCelebrationSubject] = useState("");
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
-  const [showPremiumWelcome, setShowPremiumWelcome] = useState(false);
-  const [previousPremiumStatus, setPreviousPremiumStatus] = useState(false);
 
   const {
     notification,
@@ -369,32 +366,6 @@ const Dashboard = () => {
     }
   };
 
-  // Check for premium status change and show welcome notification
-  const checkForPremiumWelcome = () => {
-    // Check if user has already seen the premium welcome
-    const premiumWelcomeKey = `premium_welcome_shown_${user?.id}`;
-    const hasSeenPremiumWelcome = localStorage.getItem(premiumWelcomeKey);
-    
-    // If user just became premium (wasn't premium before, but is now) and hasn't seen welcome
-    if (!previousPremiumStatus && isPremium && !hasSeenPremiumWelcome) {
-      console.log("🎉 User just became premium! Showing welcome notification");
-      setShowPremiumWelcome(true);
-      
-      // Mark premium welcome as shown to prevent showing again
-      localStorage.setItem(premiumWelcomeKey, "true");
-    }
-    // Update previous status for next check
-    setPreviousPremiumStatus(isPremium);
-  };
-
-  // Initialize previous premium status on mount
-  useEffect(() => {
-    if (user?.id) {
-      // Initialize with current premium status to prevent showing notification on first load
-      setPreviousPremiumStatus(isPremium);
-    }
-  }, [user?.id, isPremium]);
-
   useEffect(() => {
     const loadUserData = async () => {
       if (!user?.id) return;
@@ -460,9 +431,6 @@ const Dashboard = () => {
 
       // Check for Discord invitation eligibility
       await checkForDiscordInvitation();
-      
-      // Check for premium status changes
-      checkForPremiumWelcome();
     };
 
     loadUserData();
@@ -471,7 +439,7 @@ const Dashboard = () => {
     if (user?.id) {
       fetchCurrentStreak();
     }
-  }, [user?.id, isPremium]); // Add isPremium to dependency array
+  }, [user?.id]);
 
   const loadWeakTopicsFromDatabase = async () => {
     if (!user?.id) return;
@@ -2051,12 +2019,6 @@ const Dashboard = () => {
       <DiscordInvitation
         isVisible={showDiscordInvitation}
         onClose={() => setShowDiscordInvitation(false)}
-      />
-
-      {/* Premium Welcome Modal */}
-      <PremiumWelcome
-        isVisible={showPremiumWelcome}
-        onClose={() => setShowPremiumWelcome(false)}
       />
 
       {/* Feedback Fish Button */}
