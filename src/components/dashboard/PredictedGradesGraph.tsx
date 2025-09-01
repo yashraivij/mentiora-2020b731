@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { TrendingUp, Crown, Target, Sparkles, Trophy, Zap } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useSubscription } from "@/hooks/useSubscription";
 import { supabase } from "@/integrations/supabase/client";
 import { curriculum } from "@/data/curriculum";
 
@@ -31,11 +30,12 @@ interface UserProgress {
 
 interface PredictedGradesGraphProps {
   userProgress: UserProgress[];
+  isPremium?: boolean;
+  onUpgrade?: () => void;
 }
 
-export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
+export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrade }: PredictedGradesGraphProps) => {
   const { user } = useAuth();
-  const { isPremium, openPaymentLink } = useSubscription();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -404,7 +404,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                     <div className="group relative transform transition-all duration-300 hover:scale-105 cursor-pointer">
                       <div className="relative">
                         {/* Premium Bar with enhanced effects */}
-                        <div className={`relative h-40 bg-gradient-to-t from-gray-100/30 to-gray-50/20 dark:from-gray-800/30 dark:to-gray-700/20 rounded-3xl overflow-hidden border-2 border-white/20 backdrop-blur-sm shadow-xl ${getSubjectShadow(index)} group-hover:shadow-2xl transition-all duration-500`}>
+                        <div className={`relative h-40 bg-gradient-to-t from-gray-100/30 to-gray-50/20 dark:from-gray-800/30 dark:to-gray-700/20 rounded-3xl overflow-hidden border-2 border-white/20 backdrop-blur-sm shadow-xl ${getSubjectShadow(index)} group-hover:shadow-2xl transition-all duration-500 ${!isPremium ? 'blur-sm' : ''}`}>
                           {grade.finalGrade !== '–' && (
                             <>
                               {/* Main gradient bar */}
@@ -431,8 +431,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                           )}
                           
                           {/* Enhanced Grade number */}
-                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110 ${!isPremium ? 'blur-sm' : ''}`}>
-                            {isPremium ? grade.finalGrade : grade.finalGrade}
+                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110`}>
+                            {grade.finalGrade}
                           </div>
 
                           {/* Premium celebration effects for grade 7+ */}
@@ -453,18 +453,18 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                           
                           {/* Premium percentage indicator */}
                           {grade.finalGrade !== '–' && (
-                            <div className={`absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1 ${!isPremium ? 'blur-sm' : ''}`}>
-                              <span className="text-xs font-bold text-white">{isPremium ? `${grade.finalPercentage}%` : `${grade.finalPercentage}%`}</span>
+                            <div className="absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1">
+                              <span className="text-xs font-bold text-white">{grade.finalPercentage}%</span>
                             </div>
                           )}
                         </div>
 
                         {/* Premium Subject name */}
                         <div className="mt-4 text-center">
-                          <div className="text-sm font-bold text-foreground truncate mb-2">{grade.subjectName}</div>
+                          <div className={`text-sm font-bold text-foreground truncate mb-2 ${!isPremium ? 'blur-sm' : ''}`}>{grade.subjectName}</div>
                           {grade.isGrade7Plus && (
                             <div className="mt-2">
-                              <Badge className="bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse">
+                              <Badge className={`bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse ${!isPremium ? 'blur-sm' : ''}`}>
                                 🎯 Target Hit!
                               </Badge>
                             </div>
@@ -514,7 +514,7 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
               </div>
               {!isPremium && gradesData.some(g => g.finalGrade !== '–') && (
                 <Button 
-                  onClick={openPaymentLink}
+                  onClick={onUpgrade}
                   className="ml-auto bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-purple-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/40"
                 >
                   <Crown className="h-4 w-4 mr-2" />
