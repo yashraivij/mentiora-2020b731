@@ -288,8 +288,8 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
     
     // For premium users, always show detailed information if there's any data
     if (isPremium) {
-      // If user has practice data
-      if (grade.practiceScore > 0) {
+      // If user has practice data (including 0% scores)
+      if (grade.practiceScore >= 0 && grade.practiceCount > 0) {
         return (
           <>
             You scored an average of {grade.practiceScore}% across your {grade.subjectName} quizzes. This puts you on track for a Grade {grade.finalGrade === '–' ? 'U' : grade.finalGrade} in the real exam.
@@ -317,7 +317,7 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
     }
     
     // For non-premium users, show blurred content
-    if (grade.practiceScore > 0) {
+    if (grade.practiceScore >= 0 && grade.practiceCount > 0) {
       return (
         <>
           📊 Your Results<br />
