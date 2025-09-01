@@ -1397,42 +1397,48 @@ const Dashboard = () => {
         {isPremium ? (
           <PredictedGradesGraph userProgress={userProgress} />
         ) : (
-          <div className="relative mb-8">
-            {/* Actual grades component (blurred) */}
-            <div className="blur-sm pointer-events-none">
-              <PredictedGradesGraph userProgress={userProgress} />
-            </div>
-            
-            {/* Overlay with upgrade button */}
-            <div className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center rounded-lg">
-              <div className="text-center p-8 max-w-md">
-                <div className="w-16 h-16 bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-amber-500/25 animate-pulse">
-                  <Crown className="h-8 w-8 text-white drop-shadow-lg" />
-                </div>
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 bg-clip-text text-transparent mb-3">
-                  🎯 Unlock Your Predictions
-                </h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  See your predicted grades, performance insights, and personalized recommendations to achieve your target grades.
-                </p>
-                <Button
-                  onClick={openPaymentLink}
-                  className="bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 hover:from-purple-600 hover:via-blue-600 hover:to-emerald-600 text-white border-0 px-8 py-3 font-bold shadow-xl shadow-purple-500/25 transition-all duration-300 hover:scale-105"
-                >
-                  <Crown className="mr-2 h-4 w-4" />
-                  Upgrade to Premium
-                </Button>
-                <div className="flex items-center justify-center gap-2 mt-4 text-sm text-muted-foreground">
-                  <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
-                    ✓ 7-day free trial
-                  </Badge>
-                  <Badge className="bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
-                    ✓ Cancel anytime
-                  </Badge>
+          // Check if user has any progress data that would show grades
+          userProgress.length > 0 ? (
+            <div className="relative mb-8">
+              {/* Actual grades component (blurred) */}
+              <div className="blur-sm pointer-events-none">
+                <PredictedGradesGraph userProgress={userProgress} />
+              </div>
+              
+              {/* Overlay with upgrade button */}
+              <div className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center rounded-lg">
+                <div className="text-center p-8 max-w-md">
+                  <div className="w-16 h-16 bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-amber-500/25 animate-pulse">
+                    <Crown className="h-8 w-8 text-white drop-shadow-lg" />
+                  </div>
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 bg-clip-text text-transparent mb-3">
+                    🎯 Unlock Your Predictions
+                  </h3>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    See your predicted grades, performance insights, and personalized recommendations to achieve your target grades.
+                  </p>
+                  <Button
+                    onClick={openPaymentLink}
+                    className="bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 hover:from-purple-600 hover:via-blue-600 hover:to-emerald-600 text-white border-0 px-8 py-3 font-bold shadow-xl shadow-purple-500/25 transition-all duration-300 hover:scale-105"
+                  >
+                    <Crown className="mr-2 h-4 w-4" />
+                    Upgrade to Premium
+                  </Button>
+                  <div className="flex items-center justify-center gap-2 mt-4 text-sm text-muted-foreground">
+                    <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+                      ✓ 7-day free trial
+                    </Badge>
+                    <Badge className="bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
+                      ✓ Cancel anytime
+                    </Badge>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          ) : (
+            // No grades yet - show component without blur or overlay
+            <PredictedGradesGraph userProgress={userProgress} />
+          )
         )}
 
         {/* Predicted 2026 Questions Section */}
