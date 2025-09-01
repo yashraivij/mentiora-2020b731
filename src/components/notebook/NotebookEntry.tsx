@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { BookOpen, Lightbulb, Target, Clock, ExternalLink, Brain, AlertCircle, Unlock, Crown } from "lucide-react";
 import { format } from "date-fns";
 import { useAuth } from "@/contexts/AuthContext";
+import { useSubscription } from "@/hooks/useSubscription";
 
 // Safe text formatting function to prevent XSS
 const formatBoldText = (text: string): React.ReactNode => {
@@ -41,6 +42,7 @@ interface NotebookEntryProps {
 
 export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
   const { isPremium } = useAuth();
+  const { openPaymentLink } = useSubscription();
   
   const BlurSpan = ({ children }: { children: React.ReactNode }) => (
     <span className={!isPremium ? "blur-sm" : ""}>{children}</span>
@@ -144,7 +146,11 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             <p className="text-orange-700 dark:text-orange-200 text-xs mb-3">
               Upgrade to Premium to access complete revision notes and unlock all study features
             </p>
-            <Button size="sm" className="bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white px-4 py-2 rounded-lg text-xs">
+            <Button 
+              onClick={openPaymentLink}
+              size="sm" 
+              className="bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white px-4 py-2 rounded-lg text-xs"
+            >
               <Crown className="h-3 w-3 mr-1" />
               Upgrade to Premium
             </Button>
