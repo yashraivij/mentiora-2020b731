@@ -1436,29 +1436,10 @@ const Dashboard = () => {
         )}
 
         {/* Predicted 2026 Questions Section */}
-        {isPremium ? (
-          <PredictedQuestionsSection />
-        ) : (
-          <PaywallCard
-            title="🎯 Predicted 2026 Questions"
-            description="Practice with AI-generated questions that are likely to appear in your upcoming GCSE exams. Our advanced algorithm analyzes past papers and current trends to predict what you'll face."
-            onUpgrade={openPaymentLink}
-            theme="questions"
-            benefits={[
-              "🤖 AI-generated questions based on exam patterns",
-              "📈 Higher exam scores through targeted practice",
-              "⚡ Save 15+ hours of question searching",
-              "🎯 Focus on high-probability exam content",
-              "🏆 Build confidence before the real exams"
-            ]}
-          >
-            <div className="space-y-4">
-              <div className="h-8 bg-muted/20 rounded"></div>
-              <div className="h-8 bg-muted/20 rounded w-3/4"></div>
-              <div className="h-8 bg-muted/20 rounded w-1/2"></div>
-            </div>
-          </PaywallCard>
-        )}
+        <PredictedQuestionsSection 
+          isPremium={isPremium}
+          onUpgrade={openPaymentLink}
+        />
 
         {/* Revision Notebook - Premium Feature */}
         {isPremium ? (

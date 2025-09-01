@@ -5,11 +5,20 @@ import { Crown, Star, Sparkles, Target, Clock, BookOpen, Zap, Trophy, Rocket } f
 import { useNavigate } from "react-router-dom";
 import { CountdownTimer } from "./CountdownTimer";
 
-export const PredictedQuestionsSection = () => {
+interface PredictedQuestionsSectionProps {
+  isPremium?: boolean;
+  onUpgrade?: () => void;
+}
+
+export const PredictedQuestionsSection = ({ isPremium = false, onUpgrade }: PredictedQuestionsSectionProps) => {
   const navigate = useNavigate();
 
   const handleStartPredicted = () => {
-    navigate('/predicted-questions');
+    if (isPremium) {
+      navigate('/predicted-questions');
+    } else if (onUpgrade) {
+      onUpgrade();
+    }
   };
 
   return (
@@ -45,7 +54,7 @@ export const PredictedQuestionsSection = () => {
                       Predicted 2026 Questions
                     </CardTitle>
                     <CardDescription className="text-white/90 text-lg">
-                      Premium exam simulation
+                      {isPremium ? "Premium exam simulation" : "Practice with AI-generated questions that are likely to appear in your upcoming GCSE exams. Our advanced algorithm analyzes past papers and current trends to predict what you'll face."}
                     </CardDescription>
                   </div>
                 </div>
@@ -53,7 +62,7 @@ export const PredictedQuestionsSection = () => {
                 <div className="flex items-center space-x-3">
                   <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold px-3 py-1 hover:from-yellow-300 hover:to-orange-300">
                     <Crown className="h-3 w-3 mr-1" />
-                    PREMIUM EXCLUSIVE
+                    {isPremium ? "PREMIUM EXCLUSIVE" : "🎯 Premium Feature"}
                   </Badge>
                   <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
                     <Zap className="h-3 w-3 mr-1" />
@@ -83,8 +92,8 @@ export const PredictedQuestionsSection = () => {
                     <Clock className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-white text-sm">Real Exam Timer</p>
-                    <p className="text-white/80 text-xs">Authentic pressure simulation</p>
+                    <p className="font-bold text-white text-sm">{isPremium ? "Real Exam Timer" : "🤖 AI-generated questions"}</p>
+                    <p className="text-white/80 text-xs">{isPremium ? "Authentic pressure simulation" : "Based on exam patterns"}</p>
                   </div>
                 </div>
               </div>
@@ -95,8 +104,8 @@ export const PredictedQuestionsSection = () => {
                     <BookOpen className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-white text-sm">AQA Structure</p>
-                    <p className="text-white/80 text-xs">Exact 2026 format</p>
+                    <p className="font-bold text-white text-sm">{isPremium ? "AQA Structure" : "📈 Higher exam scores"}</p>
+                    <p className="text-white/80 text-xs">{isPremium ? "Exact 2026 format" : "Through targeted practice"}</p>
                   </div>
                 </div>
               </div>
@@ -107,14 +116,14 @@ export const PredictedQuestionsSection = () => {
                     <Target className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-white text-sm">AI Marking</p>
-                    <p className="text-white/80 text-xs">Instant expert feedback</p>
+                    <p className="font-bold text-white text-sm">{isPremium ? "AI Marking" : "⚡ Save 15+ hours"}</p>
+                    <p className="text-white/80 text-xs">{isPremium ? "Instant expert feedback" : "Of question searching"}</p>
                   </div>
                 </div>
               </div>
             </div>
             
-            {/* Weekly Update Notice */}
+            {/* Benefits/Update Notice */}
             <div className="bg-gradient-to-r from-white/15 to-white/10 border border-white/30 rounded-2xl p-4 backdrop-blur-sm">
               <div className="flex items-center space-x-3">
                 <div className="p-2 bg-gradient-to-br from-yellow-400/30 to-orange-400/30 rounded-xl">
@@ -122,22 +131,22 @@ export const PredictedQuestionsSection = () => {
                 </div>
                 <div>
                   <p className="font-bold text-white text-sm">
-                    Fresh practice papers every week
+                    {isPremium ? "Fresh practice papers every week" : "🎯 Focus on high-probability exam content"}
                   </p>
                   <p className="text-white/90 text-xs">
-                    Content aligned with 2026 exam trends
+                    {isPremium ? "Content aligned with 2026 exam trends" : "🏆 Build confidence before the real exams"}
                   </p>
                 </div>
               </div>
             </div>
             
-            {/* Premium CTA Button */}
+            {/* CTA Button */}
             <Button 
               onClick={handleStartPredicted}
               className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-4 px-8 rounded-2xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300 text-lg"
             >
               <Crown className="h-5 w-5 mr-3" />
-              Start Premium Exam Practice
+              {isPremium ? "Start Premium Exam Practice" : "✨ Upgrade to Premium"}
               <Sparkles className="h-5 w-5 ml-3" />
             </Button>
           </CardContent>
