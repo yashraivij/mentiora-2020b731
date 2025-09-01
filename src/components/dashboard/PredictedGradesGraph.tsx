@@ -282,10 +282,13 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
   };
 
   const getTooltipContent = (grade: GradeData, isPremium: boolean) => {
-    // Only show fallback message if there's truly no data
-    if (grade.finalGrade === '–' && grade.practiceScore === 0 && !grade.examGrade) {
-      return "Start revising to unlock your prediction";
-    }
+    console.log('Tooltip data:', { 
+      finalGrade: grade.finalGrade, 
+      practiceScore: grade.practiceScore, 
+      examGrade: grade.examGrade,
+      subjectName: grade.subjectName,
+      isPremium 
+    });
 
     const BlurSpan = ({ children }: { children: React.ReactNode }) => (
       <span className={!isPremium ? "blur-sm" : ""}>{children}</span>
