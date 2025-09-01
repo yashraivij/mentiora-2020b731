@@ -243,6 +243,30 @@ const Notebook = () => {
             </Card>
           </div>
 
+          {/* Unlock CTA for Non-Premium Users */}
+          {!isPremium && (
+            <div className="mb-8">
+              <Card className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 dark:from-amber-950/50 dark:via-orange-950/50 dark:to-amber-900/50 border-amber-200/50 dark:border-amber-800/30 shadow-xl shadow-amber-500/10">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-amber-400/20 to-transparent rounded-bl-full"></div>
+                <CardContent className="p-8 text-center relative">
+                  <div className="text-4xl mb-4">🔓</div>
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-amber-700 to-orange-700 dark:from-amber-300 dark:to-orange-300 bg-clip-text text-transparent mb-3">
+                    Unlock Your Full Revision Notes
+                  </h3>
+                  <p className="text-amber-600 dark:text-amber-400 mb-6 max-w-md mx-auto">
+                    Get crystal-clear access to all your AI-generated notes, statistics, and personalized study insights.
+                  </p>
+                  <Button 
+                    onClick={() => window.location.href = '/pricing'}
+                    className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+                  >
+                    🔓 Upgrade to Premium
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
           {/* Enhanced Filters */}
           <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-2xl p-6 shadow-2xl shadow-black/5 dark:shadow-black/20 border border-slate-200/50 dark:border-slate-700/50 mb-8">
             <div className="flex items-center justify-between">
