@@ -32,20 +32,28 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
   const getEncouragingMessage = () => {
     const days = Math.floor(timeSavedHours / 24);
     
-    if (days >= 2) {
-      return `Incredible! You've saved over ${days} whole days of study time!`;
+    if (days >= 7) {
+      return `Incredible! You've saved over ${days} days - that's like skipping a whole week of tedious note-taking!`;
+    } else if (days >= 3) {
+      return `Amazing! You've saved ${days} whole days - that's an entire weekend you could spend relaxing!`;
+    } else if (days >= 2) {
+      return `Incredible! You've saved over ${days} whole days - time for a proper break!`;
     } else if (days >= 1) {
-      return "Amazing! You've saved over a whole day of study time!";
-    } else if (timeSavedHours >= 20) {
-      return "Outstanding! You've saved over 20 hours with smart notes!";
-    } else if (timeSavedHours >= 10) {
-      return "You're absolutely crushing it! That's over 10 hours saved!";
-    } else if (timeSavedHours >= 5) {
-      return "Amazing progress! You've saved so much time with smart notes!";
+      return "Amazing! You've saved over a whole day - that's 24 hours of your life back!";
+    } else if (timeSavedHours >= 12) {
+      return "Outstanding! You've saved 12+ hours - that's like skipping two full school days!";
+    } else if (timeSavedHours >= 6) {
+      return "Brilliant! You've saved 6+ hours - that's a full school day you don't have to spend on notes!";
+    } else if (timeSavedHours >= 3) {
+      return "Fantastic! You've saved 3+ hours - that's a whole morning of school freed up!";
     } else if (timeSavedHours >= 2) {
-      return "Great work! Your AI notes are saving you precious study time!";
+      return "Great work! You've saved 2+ hours - that's like getting out of double PE early!";
+    } else if (timeSavedHours >= 1) {
+      return "Excellent! You've saved an hour - that's a whole class lesson you don't have to sit through!";
+    } else if (timeSavedHours >= 0.5) {
+      return "Nice! You've saved 30+ minutes - enough time for a proper lunch break!";
     } else {
-      return "Fantastic! Every minute saved adds up to success!";
+      return "Every minute saved adds up - you're building towards serious time freedom!";
     }
   };
 
