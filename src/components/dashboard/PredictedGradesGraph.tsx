@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { TrendingUp, Crown, Target, Sparkles, Trophy, Zap } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useSubscription } from "@/hooks/useSubscription";
 import { supabase } from "@/integrations/supabase/client";
 import { curriculum } from "@/data/curriculum";
 
@@ -33,6 +35,7 @@ interface PredictedGradesGraphProps {
 
 export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
   const { user } = useAuth();
+  const { isPremium, openPaymentLink } = useSubscription();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -428,8 +431,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                           )}
                           
                           {/* Enhanced Grade number */}
-                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110`}>
-                            {grade.finalGrade}
+                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110 ${!isPremium ? 'blur-sm' : ''}`}>
+                            {isPremium ? grade.finalGrade : grade.finalGrade}
                           </div>
 
                           {/* Premium celebration effects for grade 7+ */}
@@ -450,8 +453,8 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                           
                           {/* Premium percentage indicator */}
                           {grade.finalGrade !== '–' && (
-                            <div className="absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1">
-                              <span className="text-xs font-bold text-white">{grade.finalPercentage}%</span>
+                            <div className={`absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1 ${!isPremium ? 'blur-sm' : ''}`}>
+                              <span className="text-xs font-bold text-white">{isPremium ? `${grade.finalPercentage}%` : `${grade.finalPercentage}%`}</span>
                             </div>
                           )}
                         </div>
@@ -509,6 +512,15 @@ export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps
                   👑 Premium insights
                 </span>
               </div>
+              {!isPremium && gradesData.some(g => g.finalGrade !== '–') && (
+                <Button 
+                  onClick={openPaymentLink}
+                  className="ml-auto bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-purple-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/40"
+                >
+                  <Crown className="h-4 w-4 mr-2" />
+                  Upgrade to Premium
+                </Button>
+              )}
             </div>
             </div>
           </TooltipProvider>
