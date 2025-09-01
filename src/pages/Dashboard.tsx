@@ -367,21 +367,6 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    console.log('🔍 DASHBOARD DEBUG - User:', user?.email);
-    console.log('🔍 DASHBOARD DEBUG - isPremium:', isPremium);
-    console.log('🔍 DASHBOARD DEBUG - userProgress length:', userProgress.length);
-    console.log('🔍 DASHBOARD DEBUG - userProgress data:', userProgress);
-    
-    if (isPremium) {
-      console.log('🔵 DASHBOARD DEBUG - Will show PREMIUM grades (no blur)');
-    } else if (userProgress.length > 0) {
-      console.log('🟡 DASHBOARD DEBUG - Will show BLURRED grades with upgrade overlay');
-    } else {
-      console.log('🟢 DASHBOARD DEBUG - Will show CLEAN grades (no blur, no overlay)');
-    }
-  }, [user?.email, isPremium, userProgress.length]);
-
-  useEffect(() => {
     const loadUserData = async () => {
       if (!user?.id) return;
 
