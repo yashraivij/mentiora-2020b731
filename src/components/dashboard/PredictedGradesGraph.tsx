@@ -430,7 +430,7 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
                               <div 
                                 className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t ${getSubjectColor(index)} rounded-3xl transition-all duration-1000 ease-out animate-in slide-in-from-bottom-4`}
                                 style={{ 
-                                  height: `100%`,
+                                  height: isPremium ? `${Math.max(grade.finalPercentage, 10)}%` : `100%`,
                                   filter: grade.isGrade7Plus ? 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.6))' : 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))'
                                 }}
                               />
@@ -438,13 +438,13 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
                               {/* Premium glow overlay */}
                               <div 
                                 className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white/20 to-transparent rounded-3xl opacity-60`}
-                                style={{ height: `100%` }}
+                                style={{ height: isPremium ? `${Math.max(grade.finalPercentage, 10)}%` : `100%` }}
                               />
                               
                               {/* Animated shimmer effect */}
                               <div 
                                 className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-3xl animate-pulse"
-                                style={{ height: `100%` }}
+                                style={{ height: isPremium ? `${Math.max(grade.finalPercentage, 10)}%` : `100%` }}
                               />
                             </>
                           )}
