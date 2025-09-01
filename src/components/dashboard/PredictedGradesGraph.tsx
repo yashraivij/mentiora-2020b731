@@ -36,7 +36,7 @@ interface PredictedGradesGraphProps {
 
 export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGradesGraphProps) => {
   const { user } = useAuth();
-  const { isPremium } = useSubscription();
+  const { isPremium, isLoading: subscriptionLoading } = useSubscription();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -418,8 +418,8 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
           <div className="flex items-center space-x-6">
             {averageGrade > 0 && (
               <div className="text-center p-3 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl border border-purple-500/20">
-                <div className={`text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent ${!isPremium ? 'blur-md filter' : ''}`}>
-                  {!isPremium ? '•.•' : averageGrade.toFixed(1)}
+                <div className={`text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent`}>
+                  {isPremium && !subscriptionLoading ? averageGrade.toFixed(1) : '•.•'}
                 </div>
                 <div className="text-xs text-muted-foreground font-semibold">Avg Grade</div>
               </div>
