@@ -4,12 +4,18 @@ import { Badge } from "@/components/ui/badge";
 import { Crown, Star, Sparkles, Target, Clock, BookOpen, Zap, Trophy, Rocket } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { CountdownTimer } from "./CountdownTimer";
+import { useSubscription } from "@/hooks/useSubscription";
 
 export const PredictedQuestionsSection = () => {
   const navigate = useNavigate();
+  const { isPremium, openPaymentLink } = useSubscription();
 
-  const handleStartPredicted = () => {
-    navigate('/predicted-questions');
+  const handleButtonClick = () => {
+    if (isPremium) {
+      navigate('/predicted-questions');
+    } else {
+      openPaymentLink();
+    }
   };
 
   return (
@@ -133,11 +139,11 @@ export const PredictedQuestionsSection = () => {
             
             {/* Premium CTA Button */}
             <Button 
-              onClick={handleStartPredicted}
+              onClick={handleButtonClick}
               className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-4 px-8 rounded-2xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300 text-lg"
             >
               <Crown className="h-5 w-5 mr-3" />
-              Start Premium Exam Practice
+              {isPremium ? 'Start Premium Exam Practice' : 'Upgrade to Premium'}
               <Sparkles className="h-5 w-5 ml-3" />
             </Button>
           </CardContent>
