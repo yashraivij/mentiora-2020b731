@@ -186,23 +186,32 @@ PREMIUM GCSE MARKING APPROACH:
 
 Your response must include:
 1. MARKS_AWARDED: Exact number from 0 to ${totalMarks} based on official GCSE standards
-2. FEEDBACK: Professional examiner feedback that:
+2. FEEDBACK: Encouraging, student-friendly feedback that:
+   - Uses positive, supportive language that motivates the student
    - Is based ONLY on what the student actually wrote (never assume working that wasn't shown)
-   - Identifies which specific GCSE content points were correctly addressed
-   - Explains what was missing for full marks (referencing GCSE requirements)
-   - Notes correct use of GCSE terminology and concepts
-   - Highlights any content beyond GCSE scope (and explains it's not required)
-   - Provides specific guidance for improvement based on GCSE mark schemes
-   - If only a final answer was given, acknowledge this fact accurately
-3. ASSESSMENT: Professional judgment like "Excellent GCSE standard", "Good understanding shown", "Needs more GCSE detail", or "Requires GCSE-level terminology"
+   - Celebrates what the student got right first, then gently explains areas for improvement
+   - Uses simple, clear language that any GCSE student can understand
+   - Avoids jargon and explains technical terms when necessary
+   - Provides specific, actionable suggestions for improvement
+   - Ends on an encouraging note that builds confidence
+   - If only a final answer was given, acknowledge this positively while suggesting showing working
+3. ASSESSMENT: Encouraging judgment like "Great work!", "Good effort - almost there!", "You're on the right track!", or "Keep practicing - you've got this!"
 
 Apply the highest standards of GCSE examining. Be precise, fair, and educationally valuable in your marking. Most importantly, be completely accurate about what the student actually submitted.
+
+TONE AND LANGUAGE REQUIREMENTS:
+- Use encouraging, positive language throughout
+- Start feedback with something the student did well (even if partial) 
+- Use phrases like "Great start!", "You're on the right track!", "Well done for..."
+- Explain things simply - imagine talking to a friend who's learning
+- Avoid harsh criticism - instead use "Let's work on..." or "Next time, try..."
+- End with motivation like "Keep it up!", "You've got this!", or "Practice makes perfect!"
 
 Respond in this exact JSON format:
 {
   "marksAwarded": [number],
-  "feedback": "[friendly, conversational feedback based ONLY on what was actually written - no assumptions]",
-  "assessment": "[encouraging assessment]"
+  "feedback": "[warm, encouraging feedback that celebrates successes and gently guides improvement - use simple, friendly language]",
+  "assessment": "[positive, motivating assessment that builds confidence]"
 }`;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -249,8 +258,8 @@ Respond in this exact JSON format:
       markingResult = {
         marksAwarded: isSubstantialAnswer ? Math.round(totalMarks * 0.3) : 0,
         feedback: isSubstantialAnswer 
-          ? "Answer processed but AI analysis failed. Partial credit given based on content length."
-          : "Answer is too brief to receive marks. Please provide a more detailed response.",
+          ? "Great effort writing an answer! While AI marking isn't available right now, you've shown you're thinking about the topic. Keep practicing to build your confidence!"
+          : "I can see you're trying, but your answer needs more detail to show your understanding. Try explaining your thoughts in a few more words - you've got this!",
         assessment: "Needs Review"
       };
     }

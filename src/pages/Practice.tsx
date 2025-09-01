@@ -223,10 +223,8 @@ const Practice = () => {
       
       return {
         marksAwarded: isSubstantialAnswer ? Math.round(question.marks * 0.3) : 0,
-        feedback: isSubstantialAnswer 
-          ? "AI marking temporarily unavailable. Answer has been given partial credit based on length and content."
-          : "AI marking temporarily unavailable. Answer is too brief to receive marks - please provide a more detailed response.",
-        assessment: "Needs Review"
+        feedback: "Good effort! Your answer shows you're thinking about this topic. While our AI teacher is taking a quick break, I want to encourage you to keep practicing - every answer helps you learn and grow!",
+        assessment: "Keep Going!"
       };
     }
   };
