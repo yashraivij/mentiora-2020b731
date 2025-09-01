@@ -104,7 +104,7 @@ export const PredictedQuestionsSection = ({ isPremium = false, onUpgrade }: Pred
                     <BookOpen className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-white text-sm">Official Format</p>
+                    <p className="font-bold text-white text-sm">All Exam Boards</p>
                     <p className="text-white/80 text-xs">Exact 2026 structure</p>
                   </div>
                 </div>
