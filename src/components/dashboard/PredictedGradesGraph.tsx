@@ -281,18 +281,20 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
     }
   };
 
-  const getTooltipText = (grade: GradeData) => {
+  const getTooltipText = (grade: GradeData, isPremium: boolean) => {
     if (grade.finalGrade === '–') {
       return "Start revising to unlock your prediction";
     }
 
+    const blurClass = !isPremium ? "blur-sm" : "";
+    
     let text = '';
     if (grade.practiceScore > 0 && grade.examGrade) {
-      text = `You scored an average of ${grade.practiceScore}% across your ${grade.subjectName} quizzes and achieved a Grade ${grade.examGrade} in your predicted paper. This puts you on track for a Grade ${grade.finalGrade} in the real exam.`;
+      text = `You scored an average of <span class="${blurClass}">${grade.practiceScore}%</span> across your ${grade.subjectName} quizzes and achieved a Grade <span class="${blurClass}">${grade.examGrade}</span> in your predicted paper. This puts you on track for a Grade <span class="${blurClass}">${grade.finalGrade}</span> in the real exam.`;
     } else if (grade.practiceScore > 0) {
-      text = `You scored an average of ${grade.practiceScore}% across your ${grade.subjectName} quizzes. This puts you on track for a Grade ${grade.finalGrade} in the real exam.`;
+      text = `You scored an average of <span class="${blurClass}">${grade.practiceScore}%</span> across your ${grade.subjectName} quizzes. This puts you on track for a Grade <span class="${blurClass}">${grade.finalGrade}</span> in the real exam.`;
     } else if (grade.examGrade) {
-      text = `You scored a Grade ${grade.examGrade} in your ${grade.subjectName} predicted paper. This puts you on track for a Grade ${grade.finalGrade} in the real exam.`;
+      text = `You scored a Grade <span class="${blurClass}">${grade.examGrade}</span> in your ${grade.subjectName} predicted paper. This puts you on track for a Grade <span class="${blurClass}">${grade.finalGrade}</span> in the real exam.`;
     }
 
     // Only show next grade advice for numeric grades (not U)
@@ -300,7 +302,7 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
       const nextGrade = parseInt(grade.finalGrade) + 1;
       if (nextGrade <= 9) {
         const nextGradePercentage = gradeToPercentage(nextGrade.toString());
-        text += ` To hit a Grade ${nextGrade}, aim for ${nextGradePercentage}%+ across all topics.`;
+        text += ` To hit a Grade ${nextGrade}, aim for <span class="${blurClass}">${nextGradePercentage}%+</span> across all topics.`;
       }
     }
 
@@ -454,7 +456,7 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
                           {/* Premium percentage indicator */}
                           {grade.finalGrade !== '–' && (
                             <div className="absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1">
-                              <span className="text-xs font-bold text-white">{grade.finalPercentage}%</span>
+                              <span className={`text-xs font-bold text-white ${!isPremium ? 'blur-sm' : ''}`}>{grade.finalPercentage}%</span>
                             </div>
                           )}
                         </div>
@@ -479,9 +481,8 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
                     className="max-w-80 w-auto p-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white text-xs rounded-2xl shadow-2xl border border-white/10 backdrop-blur-sm"
                   >
                     <div className="space-y-2">
-                      <div className="font-semibold text-amber-300 text-center">🤖 AI Insight</div>
-                      <div className="text-gray-200 leading-relaxed">
-                        {getTooltipText(grade)}
+                      <div className="font-semibold text-amber-300 text-center">📊 Your Results</div>
+                      <div className="text-gray-200 leading-relaxed" dangerouslySetInnerHTML={{ __html: getTooltipText(grade, isPremium) }}>
                       </div>
                       {grade.isGrade7Plus && (
                         <div className="text-emerald-300 font-semibold text-center">🎉 Excellent work! Keep it up!</div>
