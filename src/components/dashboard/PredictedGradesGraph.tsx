@@ -286,8 +286,38 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
       <span className={!isPremium ? "blur-sm" : ""}>{children}</span>
     );
     
-    // Show the example message from the user's request
-    if (grade.practiceScore > 0 && grade.examGrade) {
+    // For premium users, always show detailed information if there's any data
+    if (isPremium) {
+      // If user has practice data
+      if (grade.practiceScore > 0) {
+        return (
+          <>
+            You scored an average of {grade.practiceScore}% across your {grade.subjectName} quizzes. This puts you on track for a Grade {grade.finalGrade === '–' ? 'U' : grade.finalGrade} in the real exam.
+            {grade.finalGrade !== 'U' && grade.finalGrade !== '–' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
+              <>
+                {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for {gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+ across all topics.
+              </>
+            )}
+          </>
+        );
+      }
+      // If user only has exam data
+      else if (grade.examGrade) {
+        return (
+          <>
+            You scored a Grade {grade.examGrade} in your {grade.subjectName} predicted paper. This puts you on track for a Grade {grade.finalGrade === '–' ? 'U' : grade.finalGrade} in the real exam.
+            {grade.finalGrade !== 'U' && grade.finalGrade !== '–' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
+              <>
+                {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for {gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+ across all topics.
+              </>
+            )}
+          </>
+        );
+      }
+    }
+    
+    // For non-premium users, show blurred content
+    if (grade.practiceScore > 0) {
       return (
         <>
           📊 Your Results<br />
@@ -299,20 +329,10 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
           )}
         </>
       );
-    } else if (grade.practiceScore > 0) {
-      return (
-        <>
-          You scored an average of <BlurSpan>{grade.practiceScore}%</BlurSpan> across your {grade.subjectName} quizzes. This puts you on track for a Grade <BlurSpan>{grade.finalGrade === '–' ? 'U' : grade.finalGrade}</BlurSpan> in the real exam.
-          {grade.finalGrade !== 'U' && grade.finalGrade !== '–' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
-            <>
-              {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for <BlurSpan>{gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+</BlurSpan> across all topics.
-            </>
-          )}
-        </>
-      );
     } else if (grade.examGrade) {
       return (
         <>
+          📊 Your Results<br />
           You scored a Grade <BlurSpan>{grade.examGrade}</BlurSpan> in your {grade.subjectName} predicted paper. This puts you on track for a Grade <BlurSpan>{grade.finalGrade === '–' ? 'U' : grade.finalGrade}</BlurSpan> in the real exam.
           {grade.finalGrade !== 'U' && grade.finalGrade !== '–' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
             <>
@@ -323,7 +343,7 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
       );
     }
 
-    return "Start revising to unlock your prediction";
+    return "📊 Your Results<br />Start revising to unlock your prediction";
   };
 
   // Helper function to convert grade string to number for calculations
