@@ -517,7 +517,7 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
                   onClick={onUpgrade}
                   className="ml-auto bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-purple-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/40"
                 >
-                  🔒 Unlock My Grades
+                  🔓 Unlock My Grades
                 </Button>
               )}
             </div>
