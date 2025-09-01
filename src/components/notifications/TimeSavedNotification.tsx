@@ -65,6 +65,11 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
   };
 
   const getTimeSavedDisplay = () => {
+    // Show generic placeholder for non-premium users
+    if (!isPremium) {
+      return "••h";
+    }
+    
     const totalHours = Math.round(timeSavedHours * 10) / 10; // Round to 1 decimal place
     const days = Math.floor(totalHours / 24);
     const remainingHours = Math.round((totalHours - (days * 24)) * 10) / 10; // Proper rounding
