@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Lightbulb, Target, Clock, ExternalLink, Brain, AlertCircle } from "lucide-react";
+import { BookOpen, Lightbulb, Target, Clock, ExternalLink, Brain, AlertCircle, Unlock, Crown } from "lucide-react";
 import { format } from "date-fns";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -168,6 +168,25 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
           </h4>
           <p className="text-amber-700 dark:text-amber-200 text-sm"><BlurSpan>{entry.next_step_suggestion}</BlurSpan></p>
         </div>
+
+        {/* Premium CTA for non-premium users */}
+        {!isPremium && (
+          <div className="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20 p-4 rounded-lg border border-orange-200 dark:border-orange-800/30 text-center">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <Unlock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
+              <h4 className="font-semibold text-orange-800 dark:text-orange-300">
+                🔓 Unlock Full Notes
+              </h4>
+            </div>
+            <p className="text-orange-700 dark:text-orange-200 text-xs mb-3">
+              Upgrade to Premium to access complete revision notes and unlock all study features
+            </p>
+            <Button size="sm" className="bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white px-4 py-2 rounded-lg text-xs">
+              <Crown className="h-3 w-3 mr-1" />
+              Upgrade to Premium
+            </Button>
+          </div>
+        )}
 
       </CardContent>
     </Card>
