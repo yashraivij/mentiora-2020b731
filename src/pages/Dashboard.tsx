@@ -1410,10 +1410,10 @@ const Dashboard = () => {
                   <Crown className="h-8 w-8 text-white drop-shadow-lg" />
                 </div>
                 <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 bg-clip-text text-transparent mb-3">
-                  🎯 Unlock Your Predictions
+                  🚀 Guarantee Your Child's Success
                 </h3>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
-                  See your predicted grades, performance insights, and personalized recommendations to achieve your target grades.
+                  Get AI-powered grade predictions, spot weak areas before it's too late, and receive a personalized study roadmap that could boost their final grades by 2+ levels. Give your child the competitive edge they need.
                 </p>
                 <Button
                   onClick={openPaymentLink}
