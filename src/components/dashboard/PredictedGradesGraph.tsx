@@ -281,32 +281,51 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
     }
   };
 
-  const getTooltipText = (grade: GradeData, isPremium: boolean) => {
+  const getTooltipContent = (grade: GradeData, isPremium: boolean) => {
     if (grade.finalGrade === '–') {
       return "Start revising to unlock your prediction";
     }
 
-    const blurClass = !isPremium ? "blur-sm" : "";
+    const BlurSpan = ({ children }: { children: React.ReactNode }) => (
+      <span className={!isPremium ? "blur-sm" : ""}>{children}</span>
+    );
     
-    let text = '';
     if (grade.practiceScore > 0 && grade.examGrade) {
-      text = `You scored an average of <span class="${blurClass}">${grade.practiceScore}%</span> across your ${grade.subjectName} quizzes and achieved a Grade <span class="${blurClass}">${grade.examGrade}</span> in your predicted paper. This puts you on track for a Grade <span class="${blurClass}">${grade.finalGrade}</span> in the real exam.`;
+      return (
+        <>
+          You scored an average of <BlurSpan>{grade.practiceScore}%</BlurSpan> across your {grade.subjectName} quizzes and achieved a Grade <BlurSpan>{grade.examGrade}</BlurSpan> in your predicted paper. This puts you on track for a Grade <BlurSpan>{grade.finalGrade}</BlurSpan> in the real exam.
+          {grade.finalGrade !== 'U' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
+            <>
+              {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for <BlurSpan>{gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+</BlurSpan> across all topics.
+            </>
+          )}
+        </>
+      );
     } else if (grade.practiceScore > 0) {
-      text = `You scored an average of <span class="${blurClass}">${grade.practiceScore}%</span> across your ${grade.subjectName} quizzes. This puts you on track for a Grade <span class="${blurClass}">${grade.finalGrade}</span> in the real exam.`;
+      return (
+        <>
+          You scored an average of <BlurSpan>{grade.practiceScore}%</BlurSpan> across your {grade.subjectName} quizzes. This puts you on track for a Grade <BlurSpan>{grade.finalGrade}</BlurSpan> in the real exam.
+          {grade.finalGrade !== 'U' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
+            <>
+              {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for <BlurSpan>{gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+</BlurSpan> across all topics.
+            </>
+          )}
+        </>
+      );
     } else if (grade.examGrade) {
-      text = `You scored a Grade <span class="${blurClass}">${grade.examGrade}</span> in your ${grade.subjectName} predicted paper. This puts you on track for a Grade <span class="${blurClass}">${grade.finalGrade}</span> in the real exam.`;
+      return (
+        <>
+          You scored a Grade <BlurSpan>{grade.examGrade}</BlurSpan> in your {grade.subjectName} predicted paper. This puts you on track for a Grade <BlurSpan>{grade.finalGrade}</BlurSpan> in the real exam.
+          {grade.finalGrade !== 'U' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
+            <>
+              {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for <BlurSpan>{gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+</BlurSpan> across all topics.
+            </>
+          )}
+        </>
+      );
     }
 
-    // Only show next grade advice for numeric grades (not U)
-    if (grade.finalGrade !== 'U' && !isNaN(parseInt(grade.finalGrade))) {
-      const nextGrade = parseInt(grade.finalGrade) + 1;
-      if (nextGrade <= 9) {
-        const nextGradePercentage = gradeToPercentage(nextGrade.toString());
-        text += ` To hit a Grade ${nextGrade}, aim for <span class="${blurClass}">${nextGradePercentage}%+</span> across all topics.`;
-      }
-    }
-
-    return text;
+    return "Start revising to unlock your prediction";
   };
 
   // Helper function to convert grade string to number for calculations
@@ -482,7 +501,8 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
                   >
                     <div className="space-y-2">
                       <div className="font-semibold text-amber-300 text-center">📊 Your Results</div>
-                      <div className="text-gray-200 leading-relaxed" dangerouslySetInnerHTML={{ __html: getTooltipText(grade, isPremium) }}>
+                      <div className="text-gray-200 leading-relaxed">
+                        {getTooltipContent(grade, isPremium)}
                       </div>
                       {grade.isGrade7Plus && (
                         <div className="text-emerald-300 font-semibold text-center">🎉 Excellent work! Keep it up!</div>
