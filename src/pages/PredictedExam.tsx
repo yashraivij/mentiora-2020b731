@@ -14,6 +14,7 @@ import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
 import { supabase } from "@/integrations/supabase/client";
 import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
+import { useSubscription } from "@/hooks/useSubscription";
 
 interface ExamQuestion {
   id: string;
@@ -33,6 +34,7 @@ const PredictedExam = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user } = useAuth();
+  const { isPremium, openPaymentLink } = useSubscription();
   
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTimeUp, setIsTimeUp] = useState(false);
@@ -1899,9 +1901,16 @@ Write a story about discovering a hidden object.
           topicName={notification.topicName}
           subjectName={notification.subjectName}
           streakCount={notification.streakCount}
+          isPremium={isPremium}
           onClose={clearNotification}
           onAction={() => {
-            if (notification.type === "wrong-answer") {
+            if (notification.type === "exam-recommendation") {
+              if (isPremium) {
+                navigate('/predicted-questions');
+              } else {
+                openPaymentLink();
+              }
+            } else if (notification.type === "wrong-answer") {
               navigate(`/subject-topics/${subjectId}`);
             }
             clearNotification();

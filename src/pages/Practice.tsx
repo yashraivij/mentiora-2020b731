@@ -14,6 +14,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
 import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
+import { useSubscription } from "@/hooks/useSubscription";
 import { playCelebratorySound } from "@/lib/celebratory-sound";
 
 interface QuestionAttempt {
@@ -59,6 +60,7 @@ const Practice = () => {
   const { subjectId, topicId } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { isPremium, openPaymentLink } = useSubscription();
   
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
@@ -1152,10 +1154,17 @@ const Practice = () => {
           topicName={notification.topicName}
           subjectName={notification.subjectName}
           streakCount={notification.streakCount}
+          isPremium={isPremium}
           onClose={clearNotification}
           onAction={() => {
             if (notification.type === "practice-streak") {
               navigate(`/predicted-exam/${subjectId}`);
+            } else if (notification.type === "exam-recommendation") {
+              if (isPremium) {
+                navigate('/predicted-questions');
+              } else {
+                openPaymentLink();
+              }
             } else if (notification.type === "wrong-answer") {
               navigate(`/subject-topics/${subjectId}`);
             }
