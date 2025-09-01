@@ -126,7 +126,7 @@ const Notebook = () => {
   const stats = getStats();
   
   const BlurSpan = ({ children }: { children: React.ReactNode }) => (
-    <span className={!isPremium ? "blur-sm select-none" : ""}>{children}</span>
+    <span className={!isPremium ? "blur-sm" : ""}>{children}</span>
   );
 
   if (loading) {
