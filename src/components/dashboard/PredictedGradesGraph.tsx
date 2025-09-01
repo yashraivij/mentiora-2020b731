@@ -454,7 +454,7 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
                           {/* Premium percentage indicator */}
                           {grade.finalGrade !== '–' && (
                             <div className="absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1">
-                              <span className={`text-xs font-bold text-white ${!isPremium ? 'blur-sm' : ''}`}>{grade.finalPercentage}%</span>
+                              <span className="text-xs font-bold text-white">{grade.finalPercentage}%</span>
                             </div>
                           )}
                         </div>
@@ -479,8 +479,8 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
                     className="max-w-80 w-auto p-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white text-xs rounded-2xl shadow-2xl border border-white/10 backdrop-blur-sm"
                   >
                     <div className="space-y-2">
-                      <div className="font-semibold text-amber-300 text-center">📊 Smart Insight</div>
-                      <div className={`text-gray-200 leading-relaxed ${!isPremium ? 'blur-sm' : ''}`}>
+                      <div className="font-semibold text-amber-300 text-center">🤖 AI Insight</div>
+                      <div className="text-gray-200 leading-relaxed">
                         {getTooltipText(grade)}
                       </div>
                       {grade.isGrade7Plus && (
