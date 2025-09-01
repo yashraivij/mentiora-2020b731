@@ -64,8 +64,8 @@ export const PersonalizedNotification = ({
         return {
           icon: <TrendingUp className="h-5 w-5" />,
           title: "Great Progress!",
-          message: `You're doing well on practice questions. Try the 2026 Predicted Exam to see what grade you're on track for.`,
-          actionText: "Take Predicted Exam",
+          message: `You're doing well on practice questions. ${isPremium ? 'Try the 2026 Predicted Exam to see what grade you\'re on track for.' : 'Upgrade to Premium to access the 2026 Predicted Exam!'}`,
+          actionText: isPremium ? "Take Exam" : "Upgrade to Premium",
           badgeText: `${streakCount}+ Correct`,
           gradient: "from-green-500 via-blue-500 to-purple-500"
         };

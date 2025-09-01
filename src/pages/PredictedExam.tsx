@@ -1904,7 +1904,13 @@ Write a story about discovering a hidden object.
           isPremium={isPremium}
           onClose={clearNotification}
           onAction={() => {
-            if (notification.type === "exam-recommendation") {
+            if (notification.type === "practice-streak") {
+              if (isPremium) {
+                navigate(`/predicted-exam/${subjectId}`);
+              } else {
+                openPaymentLink();
+              }
+            } else if (notification.type === "exam-recommendation") {
               if (isPremium) {
                 navigate('/predicted-questions');
               } else {

@@ -1158,7 +1158,11 @@ const Practice = () => {
           onClose={clearNotification}
           onAction={() => {
             if (notification.type === "practice-streak") {
-              navigate(`/predicted-exam/${subjectId}`);
+              if (isPremium) {
+                navigate(`/predicted-exam/${subjectId}`);
+              } else {
+                openPaymentLink();
+              }
             } else if (notification.type === "exam-recommendation") {
               if (isPremium) {
                 navigate('/predicted-questions');
