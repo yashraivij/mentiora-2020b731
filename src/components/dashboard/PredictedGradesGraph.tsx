@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { TrendingUp, Crown, Target, Sparkles, Trophy, Zap } from "lucide-react";
+import { TrendingUp, Crown, Target, Sparkles, Trophy, Zap, Lock } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { curriculum } from "@/data/curriculum";
@@ -517,8 +517,8 @@ export const PredictedGradesGraph = ({ userProgress, isPremium = false, onUpgrad
                   onClick={onUpgrade}
                   className="ml-auto bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-purple-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/40"
                 >
-                  <Crown className="h-4 w-4 mr-2" />
-                  View My Grades
+                  <Lock className="h-4 w-4 mr-2" />
+                  Unlock My Grades
                 </Button>
               )}
             </div>
