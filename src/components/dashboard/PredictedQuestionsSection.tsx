@@ -104,8 +104,8 @@ export const PredictedQuestionsSection = ({ isPremium = false, onUpgrade }: Pred
                     <BookOpen className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-white text-sm">AQA Structure</p>
-                    <p className="text-white/80 text-xs">Exact 2026 format</p>
+                    <p className="font-bold text-white text-sm">Official Format</p>
+                    <p className="text-white/80 text-xs">Exact 2026 structure</p>
                   </div>
                 </div>
               </div>
@@ -116,7 +116,7 @@ export const PredictedQuestionsSection = ({ isPremium = false, onUpgrade }: Pred
                     <Target className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-white text-sm">AI Marking</p>
+                    <p className="font-bold text-white text-sm">Smart Marking</p>
                     <p className="text-white/80 text-xs">Instant expert feedback</p>
                   </div>
                 </div>
