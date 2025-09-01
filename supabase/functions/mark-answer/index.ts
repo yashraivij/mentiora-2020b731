@@ -70,6 +70,18 @@ serve(async (req) => {
       });
     }
 
+    // Check if answer is substantial enough to be marked
+    const trimmedAnswer = userAnswer.trim();
+    if (trimmedAnswer.length < 2 || !/[a-zA-Z]/.test(trimmedAnswer)) {
+      return new Response(JSON.stringify({ 
+        marksAwarded: 0,
+        feedback: "Your answer is too brief. Please provide a more detailed response that demonstrates your understanding.",
+        assessment: "Insufficient Detail"
+      }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
     // Validate input lengths to prevent abuse
     if (question.length > 5000 || userAnswer.length > 5000 || (modelAnswer && modelAnswer.length > 5000)) {
       return new Response(JSON.stringify({ error: 'Input too long' }), {
@@ -229,10 +241,16 @@ Respond in this exact JSON format:
       markingResult = JSON.parse(aiResponse);
     } catch (parseError) {
       console.error('Failed to parse AI response:', aiResponse);
-      // Fallback response if JSON parsing fails
+      // Fallback response if JSON parsing fails - only give marks for substantial answers
+      const isSubstantialAnswer = userAnswer.trim().length >= 3 && 
+        userAnswer.trim().split(/\s+/).length >= 1 && 
+        /[a-zA-Z]/.test(userAnswer.trim());
+      
       markingResult = {
-        marksAwarded: Math.round(totalMarks * 0.5), // Give 50% as fallback
-        feedback: "Answer processed. Please review your response against the model answer.",
+        marksAwarded: isSubstantialAnswer ? Math.round(totalMarks * 0.3) : 0,
+        feedback: isSubstantialAnswer 
+          ? "Answer processed but AI analysis failed. Partial credit given based on content length."
+          : "Answer is too brief to receive marks. Please provide a more detailed response.",
         assessment: "Needs Review"
       };
     }

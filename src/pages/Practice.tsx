@@ -216,10 +216,16 @@ const Practice = () => {
       console.error('Error calling AI marking function:', error);
       toast.error("Failed to mark answer with AI. Please try again.");
       
-      // Fallback to basic marking
+      // Fallback to basic marking - only give marks for substantial answers
+      const isSubstantialAnswer = answer.trim().length >= 3 && 
+        answer.trim().split(/\s+/).length >= 1 && 
+        /[a-zA-Z]/.test(answer.trim());
+      
       return {
-        marksAwarded: answer.trim() ? Math.round(question.marks * 0.5) : 0,
-        feedback: "AI marking temporarily unavailable. Answer has been given partial credit.",
+        marksAwarded: isSubstantialAnswer ? Math.round(question.marks * 0.3) : 0,
+        feedback: isSubstantialAnswer 
+          ? "AI marking temporarily unavailable. Answer has been given partial credit based on length and content."
+          : "AI marking temporarily unavailable. Answer is too brief to receive marks - please provide a more detailed response.",
         assessment: "Needs Review"
       };
     }
