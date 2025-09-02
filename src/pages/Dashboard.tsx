@@ -61,6 +61,7 @@ import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotificatio
 import { StreakCelebration } from "@/components/ui/streak-celebration";
 import { GradeCelebration } from "@/components/ui/grade-celebration";
 import { DiscordInvitation } from "@/components/ui/discord-invitation";
+import { PremiumUpgradeNotifier } from "@/components/ui/premium-upgrade-notifier";
 
 import { PublicStreakProfiles } from "@/components/dashboard/PublicStreakProfiles";
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
@@ -123,6 +124,7 @@ const Dashboard = () => {
   const [celebrationGrade, setCelebrationGrade] = useState("");
   const [celebrationSubject, setCelebrationSubject] = useState("");
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
+  const [showPremiumUpgrade, setShowPremiumUpgrade] = useState(false);
 
   const {
     notification,
@@ -237,6 +239,21 @@ const Dashboard = () => {
       setPreviousTimeSaved(newTimeSavedHours);
     } catch (error) {
       console.error("Error calculating time saved:", error);
+    }
+  };
+
+  // Check if user should see premium upgrade notification
+  const checkForPremiumUpgrade = () => {
+    if (!user?.id || !isPremium) return;
+
+    const hasSeenUpgrade = localStorage.getItem(`premium_upgrade_shown_${user.id}`);
+    
+    if (!hasSeenUpgrade) {
+      console.log("🎉 Showing premium upgrade notification for the FIRST AND LAST time!");
+      setShowPremiumUpgrade(true);
+      // CRITICAL: Mark as shown immediately to prevent any future showings
+      localStorage.setItem(`premium_upgrade_shown_${user.id}`, "true");
+      console.log("Premium upgrade: User permanently marked as having seen notification");
     }
   };
 
@@ -429,8 +446,11 @@ const Dashboard = () => {
       // Check for new predicted exam results
       await checkForNewGrades();
 
-      // Check for Discord invitation eligibility
+  // Check for Discord invitation eligibility
       await checkForDiscordInvitation();
+
+      // Check for premium upgrade notification
+      checkForPremiumUpgrade();
     };
 
     loadUserData();
@@ -2019,6 +2039,12 @@ const Dashboard = () => {
       <DiscordInvitation
         isVisible={showDiscordInvitation}
         onClose={() => setShowDiscordInvitation(false)}
+      />
+
+      {/* Premium Upgrade Notification */}
+      <PremiumUpgradeNotifier
+        isVisible={showPremiumUpgrade}
+        onClose={() => setShowPremiumUpgrade(false)}
       />
 
       {/* Feedback Fish Button */}
