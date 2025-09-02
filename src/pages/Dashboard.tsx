@@ -244,9 +244,27 @@ const Dashboard = () => {
 
   // Check if user should see premium upgrade notification
   const checkForPremiumUpgrade = () => {
-    if (!user?.id || !isPremium) return;
+    console.log("🔍 Premium notification check:", {
+      userId: user?.id,
+      isPremium,
+      hasUser: !!user?.id
+    });
+
+    if (!user?.id) {
+      console.log("❌ No user ID, skipping premium notification");
+      return;
+    }
+
+    if (!isPremium) {
+      console.log("❌ User not premium, skipping notification");
+      return;
+    }
 
     const hasSeenUpgrade = localStorage.getItem(`premium_upgrade_shown_${user.id}`);
+    console.log("🔍 LocalStorage check:", {
+      key: `premium_upgrade_shown_${user.id}`,
+      hasSeenUpgrade
+    });
     
     if (!hasSeenUpgrade) {
       console.log("🎉 Showing premium upgrade notification for the FIRST AND LAST time!");
@@ -254,6 +272,8 @@ const Dashboard = () => {
       // CRITICAL: Mark as shown immediately to prevent any future showings
       localStorage.setItem(`premium_upgrade_shown_${user.id}`, "true");
       console.log("Premium upgrade: User permanently marked as having seen notification");
+    } else {
+      console.log("❌ User has already seen premium notification");
     }
   };
 
