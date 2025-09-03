@@ -20,7 +20,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[92vw] max-w-[860px] min-h-[360px] rounded-3xl p-8 md:p-10 bg-[#0f1115] border-0 text-white shadow-2xl mx-auto overflow-hidden">
+      <DialogContent className="w-[88vw] max-w-[780px] min-h-[320px] rounded-3xl p-6 md:p-8 bg-[#0f1115] border-0 text-white shadow-2xl mx-auto overflow-hidden">
         {/* Close button */}
         <button
           onClick={onClose}
