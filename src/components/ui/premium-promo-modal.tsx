@@ -20,21 +20,13 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[88vw] max-w-[780px] min-h-[280px] rounded-3xl p-6 md:p-8 bg-[#0f1115] border-0 text-white shadow-2xl mx-auto overflow-hidden">
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute right-6 top-6 z-10 rounded-full p-1.5 hover:bg-white/10 transition-colors"
-        >
-          <X className="h-5 w-5" />
-        </button>
-
+      <DialogContent className="w-[90vw] max-w-[820px] min-h-[300px] rounded-3xl p-7 md:p-9 bg-[#0f1115] border-0 text-white shadow-2xl mx-auto overflow-hidden">
         {/* Background gradient effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-teal-500/10 to-violet-500/10" />
         <div className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-emerald-400/20 to-transparent rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-violet-400/20 to-transparent rounded-full blur-2xl" />
 
-        <div className="relative z-10 grid md:grid-cols-[1.2fr_1fr] gap-6 md:gap-8 items-center">
+        <div className="relative z-10 grid md:grid-cols-[1.2fr_1fr] gap-7 md:gap-9 items-center">
           {/* Left Side - Content */}
           <div className="space-y-4">
             <div className="space-y-3">
