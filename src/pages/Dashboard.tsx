@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,6 +12,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
+import { PremiumPromoModal } from "@/components/ui/premium-promo-modal";
 import {
   BarChart3,
   BookOpen,
@@ -38,7 +40,6 @@ import {
 import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
-import { useState, useEffect } from "react";
 import { TimeSavedNotification } from "@/components/notifications/TimeSavedNotification";
 import { ProgressCard } from "@/components/dashboard/ProgressCard";
 import { SubjectCard } from "@/components/dashboard/SubjectCard";
@@ -80,7 +81,7 @@ const Dashboard = () => {
   const { user, logout, isPremium, refreshSubscription } = useAuth();
   const { toast } = useToast();
 
-  const openPaymentLink = async () => {
+  const originalOpenPaymentLink = async () => {
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -101,6 +102,10 @@ const Dashboard = () => {
       encodeURIComponent(user.id);
   };
 
+  const openPaymentLink = () => {
+    setShowPromoModal(true);
+  };
+
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<string[]>([]);
@@ -117,6 +122,7 @@ const Dashboard = () => {
   const [showStreakCelebration, setShowStreakCelebration] = useState(false);
   const [showTimeSavedNotification, setShowTimeSavedNotification] =
     useState(false);
+  const [showPromoModal, setShowPromoModal] = useState(false);
   const [timeSavedHours, setTimeSavedHours] = useState(0);
   const [previousTimeSaved, setPreviousTimeSaved] = useState(0);
   const [showGradeCelebration, setShowGradeCelebration] = useState(false);
@@ -1494,7 +1500,10 @@ const Dashboard = () => {
                   <Clock className="h-4 w-4" />
                   <span>Save 10+ hours per week</span>
                 </div>
-                <Button className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white shadow-xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 px-8 py-3 text-base font-semibold">
+                <Button 
+                  onClick={() => isPremium ? navigate("/notebook") : openPaymentLink()}
+                  className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white shadow-xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 px-8 py-3 text-base font-semibold"
+                >
                   <Brain className="h-4 w-4 mr-2" />
                   {isPremium ? "Open Premium Notebook" : "Upgrade to Premium"}
                 </Button>
@@ -2046,6 +2055,13 @@ const Dashboard = () => {
           />
         </svg>
       </button>
+
+      {/* Premium Promo Modal */}
+      <PremiumPromoModal
+        isOpen={showPromoModal}
+        onClose={() => setShowPromoModal(false)}
+        onUpgrade={originalOpenPaymentLink}
+      />
     </div>
   );
 };
