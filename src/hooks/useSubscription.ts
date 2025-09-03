@@ -50,7 +50,8 @@ export const useSubscription = () => {
     window.location.href =
       "https://buy.stripe.com/test_3cI28q8og4VsfiE0yI8N202" + join +
       "client_reference_id=" + encodeURIComponent(user.id) +
-      "&prefilled_email=" + encodeURIComponent(user.email || "");
+      "&prefilled_email=" + encodeURIComponent(user.email || "") +
+      "&success_url=" + encodeURIComponent("https://mentiora.com/dashboard");
   };
 
   useEffect(() => {
