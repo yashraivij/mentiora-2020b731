@@ -5,8 +5,6 @@ import { BookOpen, Lightbulb, Target, Clock, ExternalLink, Brain, AlertCircle, U
 import { format } from "date-fns";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
-import { PremiumPromoModal } from "@/components/ui/premium-promo-modal";
-import { useState } from "react";
 
 // Safe text formatting function to prevent XSS
 const formatBoldText = (text: string): React.ReactNode => {
@@ -45,7 +43,6 @@ interface NotebookEntryProps {
 export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
   const { isPremium } = useAuth();
   const { openPaymentLink } = useSubscription();
-  const [showPromoModal, setShowPromoModal] = useState(false);
   
   const BlurSpan = ({ children }: { children: React.ReactNode }) => (
     <span className={!isPremium ? "blur-sm" : ""}>{children}</span>
@@ -150,7 +147,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
               Upgrade to Premium to access complete revision notes and unlock all study features
             </p>
             <Button 
-              onClick={() => setShowPromoModal(true)}
+              onClick={openPaymentLink}
               size="sm" 
               className="bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white px-4 py-2 rounded-lg text-xs"
             >
@@ -198,12 +195,6 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         </div>
 
       </CardContent>
-      
-      <PremiumPromoModal
-        open={showPromoModal}
-        onOpenChange={setShowPromoModal}
-        onUpgrade={openPaymentLink}
-      />
     </Card>
   );
 };

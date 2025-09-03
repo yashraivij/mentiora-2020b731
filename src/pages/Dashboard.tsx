@@ -66,7 +66,6 @@ import { PublicStreakProfiles } from "@/components/dashboard/PublicStreakProfile
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
 import { useToast } from "@/hooks/use-toast";
 import { PaywallCard } from "@/components/ui/paywall-card";
-import { PremiumPromoModal } from "@/components/ui/premium-promo-modal";
 import { openManageBilling } from "@/lib/manageBilling";
 
 interface UserProgress {
@@ -124,7 +123,6 @@ const Dashboard = () => {
   const [celebrationGrade, setCelebrationGrade] = useState("");
   const [celebrationSubject, setCelebrationSubject] = useState("");
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
-  const [showPromoModal, setShowPromoModal] = useState(false);
 
   const {
     notification,
@@ -1396,19 +1394,19 @@ const Dashboard = () => {
         </div>
 
         {/* Predicted GCSE Grades Section */}
-        <PredictedGradesGraph userProgress={userProgress} onUpgrade={() => setShowPromoModal(true)} />
+        <PredictedGradesGraph userProgress={userProgress} onUpgrade={openPaymentLink} />
 
         {/* Predicted 2026 Questions Section */}
         <PredictedQuestionsSection 
           isPremium={isPremium}
-          onUpgrade={() => setShowPromoModal(true)}
+          onUpgrade={openPaymentLink}
         />
 
         {/* Revision Notebook - Premium Feature */}
         <div className="mb-8">
           <Card
             className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 dark:from-purple-950/40 dark:via-pink-950/20 dark:to-indigo-950/30 shadow-2xl hover:shadow-3xl transition-all duration-500 cursor-pointer group transform hover:scale-[1.02]"
-            onClick={isPremium ? () => navigate("/notebook") : () => setShowPromoModal(true)}
+            onClick={() => isPremium ? navigate("/notebook") : openPaymentLink()}
           >
             {/* Premium Glow Effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -1496,10 +1494,7 @@ const Dashboard = () => {
                   <Clock className="h-4 w-4" />
                   <span>Save 10+ hours per week</span>
                 </div>
-                <Button 
-                  onClick={isPremium ? () => navigate("/notebook") : () => setShowPromoModal(true)}
-                  className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white shadow-xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 px-8 py-3 text-base font-semibold"
-                >
+                <Button className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white shadow-xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 px-8 py-3 text-base font-semibold">
                   <Brain className="h-4 w-4 mr-2" />
                   {isPremium ? "Open Premium Notebook" : "Upgrade to Premium"}
                 </Button>
@@ -2051,12 +2046,6 @@ const Dashboard = () => {
           />
         </svg>
       </button>
-
-      <PremiumPromoModal
-        open={showPromoModal}
-        onOpenChange={setShowPromoModal}
-        onUpgrade={openPaymentLink}
-      />
     </div>
   );
 };
