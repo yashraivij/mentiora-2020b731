@@ -104,6 +104,7 @@ const Dashboard = () => {
   };
 
   const handleUpgradeClick = () => {
+    console.log("handleUpgradeClick called - showing modal");
     setShowPromoModal(true);
   };
 
@@ -2066,6 +2067,17 @@ const Dashboard = () => {
         onClose={() => setShowPromoModal(false)}
         onUpgrade={handlePromoUpgrade}
       />
+      
+      {/* Temporary test button for debugging */}
+      <Button
+        onClick={() => {
+          console.log("Test button clicked");
+          setShowPromoModal(true);
+        }}
+        className="fixed top-4 right-20 z-50 bg-red-500 hover:bg-red-600 text-white"
+      >
+        Test Modal
+      </Button>
     </div>
   );
 };
