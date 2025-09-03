@@ -18,6 +18,7 @@ interface PersonalizedNotificationProps {
     details: string[];
     subject: string;
   } | null;
+  isPremium?: boolean;
   onClose: () => void;
   onAction?: () => void;
 }
@@ -31,6 +32,7 @@ export const PersonalizedNotification = ({
   weakestTopic,
   subjectId,
   studyDetails,
+  isPremium = false,
   onClose,
   onAction
 }: PersonalizedNotificationProps) => {
@@ -62,8 +64,8 @@ export const PersonalizedNotification = ({
         return {
           icon: <TrendingUp className="h-5 w-5" />,
           title: "Great Progress!",
-          message: `You're doing well on practice questions. Try the 2026 Predicted Exam to see what grade you're on track for.`,
-          actionText: "Take Predicted Exam",
+          message: `You're doing well on practice questions. ${isPremium ? 'Try the 2026 Predicted Exam to see what grade you\'re on track for.' : 'Upgrade to Premium to access the 2026 Predicted Exam!'}`,
+          actionText: isPremium ? "Take Exam" : "Upgrade to Premium",
           badgeText: `${streakCount}+ Correct`,
           gradient: "from-green-500 via-blue-500 to-purple-500"
         };
@@ -80,8 +82,8 @@ export const PersonalizedNotification = ({
         return {
           icon: <CheckCircle className="h-5 w-5" />,
           title: "Ready for Predicted Exam?",
-          message: `You've answered ${streakCount}+ practice questions correctly. Try the 2026 Predicted Exam for ${subjectName}!`,
-          actionText: "Take Exam",
+          message: `You've answered ${streakCount}+ practice questions correctly. ${isPremium ? 'Try the 2026 Predicted Exam for ' + subjectName + '!' : 'Upgrade to Premium to access the 2026 Predicted Exam!'}`,
+          actionText: isPremium ? "Take Exam" : "Upgrade to Premium",
           badgeText: "High Performance",
           gradient: "from-emerald-500 via-teal-500 to-cyan-500"
         };
