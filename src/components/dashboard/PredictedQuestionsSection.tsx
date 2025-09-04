@@ -5,11 +5,20 @@ import { Crown, Star, Sparkles, Target, Clock, BookOpen, Zap, Trophy, Rocket } f
 import { useNavigate } from "react-router-dom";
 import { CountdownTimer } from "./CountdownTimer";
 
-export const PredictedQuestionsSection = () => {
+interface PredictedQuestionsSectionProps {
+  isPremium?: boolean;
+  onUpgrade?: () => void;
+}
+
+export const PredictedQuestionsSection = ({ isPremium = false, onUpgrade }: PredictedQuestionsSectionProps) => {
   const navigate = useNavigate();
 
   const handleStartPredicted = () => {
-    navigate('/predicted-questions');
+    if (isPremium) {
+      navigate('/predicted-questions');
+    } else if (onUpgrade) {
+      onUpgrade();
+    }
   };
 
   return (
@@ -95,8 +104,8 @@ export const PredictedQuestionsSection = () => {
                     <BookOpen className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-white text-sm">AQA Structure</p>
-                    <p className="text-white/80 text-xs">Exact 2026 format</p>
+                    <p className="font-bold text-white text-sm">All Exam Boards</p>
+                    <p className="text-white/80 text-xs">Exact 2026 structure</p>
                   </div>
                 </div>
               </div>
@@ -107,7 +116,7 @@ export const PredictedQuestionsSection = () => {
                     <Target className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-white text-sm">AI Marking</p>
+                    <p className="font-bold text-white text-sm">Smart Marking</p>
                     <p className="text-white/80 text-xs">Instant expert feedback</p>
                   </div>
                 </div>
@@ -131,13 +140,13 @@ export const PredictedQuestionsSection = () => {
               </div>
             </div>
             
-            {/* Premium CTA Button */}
+            {/* CTA Button */}
             <Button 
               onClick={handleStartPredicted}
               className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 text-black font-bold py-4 px-8 rounded-2xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300 text-lg"
             >
               <Crown className="h-5 w-5 mr-3" />
-              Start Premium Exam Practice
+              {isPremium ? "Start Premium Exam Practice" : "✨ Upgrade to Premium"}
               <Sparkles className="h-5 w-5 ml-3" />
             </Button>
           </CardContent>

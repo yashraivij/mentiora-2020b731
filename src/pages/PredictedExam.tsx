@@ -1242,7 +1242,7 @@ List four things about the library from this part of the source.
       questions.push({
         id: 'english-lang-q2',
         questionNumber: 2,
-        text: `Look in detail at this extract, from lines 4 to 6 of the source:
+        text: `Look in detail at this extract, from lines 5 to 9 of the source:
 
 "The silence was profound yet somehow alive, broken only by the whispered turning of pages and the soft footfalls of scholars moving reverently between the stacks. Ancient wooden tables, scarred by generations of students, stood like altars where minds came to worship at the shrine of learning."
 

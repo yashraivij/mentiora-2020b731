@@ -240,7 +240,7 @@ const PredictedResults = () => {
       return "The library is described as a cathedral of knowledge. It has vaulted ceilings that disappear into shadows above. There are towering shelves that stretch impossibly high. The library contains ancient wisdom.";
     }
     
-    if (question.includes('language here to describe the atmosphere') && question.includes('lines 4 to 6')) {
+    if (question.includes('language here to describe the atmosphere') && question.includes('lines 5 to 9')) {
       return "The writer uses personification when describing the silence as 'alive', suggesting the library has a living, breathing quality that makes it feel dynamic rather than empty. The metaphor of tables as 'altars' and learning as a 'shrine' creates religious imagery that emphasizes the sacred, reverent atmosphere. The alliteration in 'soft footfalls' and 'whispered turning' emphasizes the gentle, respectful sounds that maintain the peaceful atmosphere. The verb 'moving reverently' suggests people treat the space with deep respect and awe, reinforcing the spiritual quality of the environment.";
     }
     

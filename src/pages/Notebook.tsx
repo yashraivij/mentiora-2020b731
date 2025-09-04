@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, BookOpen, Crown, Brain, TrendingUp, Star, Filter, Calendar } from "lucide-react";
+import { ArrowLeft, BookOpen, Crown, Brain, TrendingUp, Star, Filter, Calendar, Unlock } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { supabase } from "@/integrations/supabase/client";
 import { NotebookEntry } from "@/components/notebook/NotebookEntry";
@@ -34,7 +34,7 @@ interface NotebookEntryData {
 }
 
 const Notebook = () => {
-  const { user } = useAuth();
+  const { user, isPremium } = useAuth();
   const navigate = useNavigate();
   
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
@@ -124,6 +124,10 @@ const Notebook = () => {
   };
 
   const stats = getStats();
+  
+  const BlurSpan = ({ children }: { children: React.ReactNode }) => (
+    <span className={!isPremium ? "blur-sm" : ""}>{children}</span>
+  );
 
   if (loading) {
     return (
@@ -210,7 +214,7 @@ const Notebook = () => {
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <BookOpen className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-300 dark:to-indigo-300 bg-clip-text text-transparent mb-1">{stats.totalEntries}</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-300 dark:to-indigo-300 bg-clip-text text-transparent mb-1"><BlurSpan>{stats.totalEntries}</BlurSpan></div>
                 <div className="text-sm font-medium text-blue-600 dark:text-blue-400">Total Notes</div>
                 <div className="text-xs text-blue-500/70 dark:text-blue-400/70 mt-1">AI Generated</div>
               </CardContent>
@@ -221,7 +225,7 @@ const Notebook = () => {
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <TrendingUp className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-3xl font-bold bg-gradient-to-r from-emerald-700 to-teal-700 dark:from-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-1">{stats.timeSavedHours}h</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-emerald-700 to-teal-700 dark:from-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-1"><BlurSpan>{stats.timeSavedHours}h</BlurSpan></div>
                 <div className="text-sm font-medium text-emerald-600 dark:text-emerald-400">Time Saved</div>
                 <div className="text-xs text-emerald-500/70 dark:text-emerald-400/70 mt-1">Auto Notes</div>
               </CardContent>
@@ -232,12 +236,13 @@ const Notebook = () => {
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <Brain className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-3xl font-bold bg-gradient-to-r from-violet-700 to-purple-700 dark:from-violet-300 dark:to-purple-300 bg-clip-text text-transparent mb-1">{stats.subjectsWithNotes}</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-violet-700 to-purple-700 dark:from-violet-300 dark:to-purple-300 bg-clip-text text-transparent mb-1"><BlurSpan>{stats.subjectsWithNotes}</BlurSpan></div>
                 <div className="text-sm font-medium text-violet-600 dark:text-violet-400">Subjects</div>
                 <div className="text-xs text-violet-500/70 dark:text-violet-400/70 mt-1">Covered</div>
               </CardContent>
             </Card>
           </div>
+
 
           {/* Enhanced Filters */}
           <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-2xl p-6 shadow-2xl shadow-black/5 dark:shadow-black/20 border border-slate-200/50 dark:border-slate-700/50 mb-8">
