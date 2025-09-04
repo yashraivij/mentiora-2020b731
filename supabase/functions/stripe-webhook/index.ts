@@ -50,50 +50,23 @@ Deno.serve(async (req) => {
         if (customerId) {
           if (userId) {
             // A) attach by user id
-            let { data, error } = await supabase
+            const { data, error } = await supabase
               .from("profiles")
               .update({ stripe_customer_id: customerId, updated_at: new Date().toISOString() })
               .eq("id", userId)
               .select("*");
             console.log("attach by userId", { count: data?.length ?? 0, error });
-            if ((data?.length ?? 0) === 0 && !error) {
-              // Try to create profile if it doesn't exist
-              const { data: insertData, error: insertError } = await supabase
-                .from("profiles")
-                .insert({ 
-                  id: userId, 
-                  email: email || "unknown@email.com",
-                  stripe_customer_id: customerId,
-                  subscription_status: "free",
-                  updated_at: new Date().toISOString()
-                })
-                .select("*");
-              console.log("create profile by userId", { count: insertData?.length ?? 0, error: insertError });
-            }
             if ((data?.length ?? 0) > 0) break; // done
           }
 
           if (email) {
             // B) attach by email
-            let { data, error } = await supabase
+            const { data, error } = await supabase
               .from("profiles")
               .update({ stripe_customer_id: customerId, updated_at: new Date().toISOString() })
               .eq("email", email)
               .select("*");
             console.log("attach by email (session)", { count: data?.length ?? 0, error });
-            if ((data?.length ?? 0) === 0 && !error) {
-              // Try to create profile if it doesn't exist
-              const { data: insertData, error: insertError } = await supabase
-                .from("profiles")
-                .insert({ 
-                  email: email,
-                  stripe_customer_id: customerId,
-                  subscription_status: "free",
-                  updated_at: new Date().toISOString()
-                })
-                .select("*");
-              console.log("create profile by email (session)", { count: insertData?.length ?? 0, error: insertError });
-            }
             if ((data?.length ?? 0) > 0) break; // done
           }
 
@@ -160,26 +133,6 @@ Deno.serve(async (req) => {
                 error: res2.error,
                 custEmail,
               });
-              
-              // If still no match, create the profile
-              if ((res2.data?.length ?? 0) === 0 && !res2.error) {
-                const res3 = await supabase
-                  .from("profiles")
-                  .insert({
-                    email: custEmail,
-                    stripe_customer_id: customerId,
-                    subscription_status: status,
-                    plan,
-                    current_period_end: currentPeriodEndIso,
-                    updated_at: new Date().toISOString(),
-                  })
-                  .select("*");
-                console.log("create profile by email for subscription", {
-                  count: res3.data?.length ?? 0,
-                  error: res3.error,
-                  custEmail,
-                });
-              }
             }
           }
         }

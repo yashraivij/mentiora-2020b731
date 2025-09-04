@@ -1,3 +1,4 @@
+logs_on = true
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
@@ -50,10 +51,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (data) {
         const premium = ["active", "trialing"].includes(data.subscription_status || '');
         setIsPremium(premium);
-        console.log('Premium status updated:', premium, 'for status:', data.subscription_status);
-      } else {
-        console.log('No profile found for user:', targetUserId);
-        setIsPremium(false);
       }
     } catch (error) {
       console.error('Error fetching subscription:', error);
