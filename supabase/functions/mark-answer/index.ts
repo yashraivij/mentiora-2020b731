@@ -20,24 +20,32 @@ serve(async (req) => {
   }
 
   try {
-    // Create Supabase client - it will automatically handle auth when called via supabase.functions.invoke()
+    // Verify JWT token and get user
+    const authHeader = req.headers.get('authorization');
+    if (!authHeader?.startsWith('Bearer ')) {
+      return new Response(JSON.stringify({ error: 'Unauthorized - Missing or invalid authorization header' }), {
+        status: 401,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    const token = authHeader.replace('Bearer ', '');
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_ANON_KEY') ?? '',
       {
         global: {
-          headers: { Authorization: req.headers.get('Authorization') ?? '' },
+          headers: { Authorization: `Bearer ${token}` },
         },
       }
     );
 
-    // Optional: Verify user is authenticated (but don't block on it for AI marking)
-    const authHeader = req.headers.get('authorization');
-    if (authHeader?.startsWith('Bearer ')) {
-      const { data: { user }, error: authError } = await supabase.auth.getUser();
-      console.log('User authenticated:', user?.id || 'No user');
-    } else {
-      console.log('No auth header found, proceeding with AI marking anyway');
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    if (authError || !user) {
+      return new Response(JSON.stringify({ error: 'Unauthorized - Invalid token' }), {
+        status: 401,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
     }
 
     const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
@@ -58,34 +66,6 @@ serve(async (req) => {
     if (!question || !userAnswer || !totalMarks) {
       return new Response(JSON.stringify({ error: 'Missing required fields: question, userAnswer, totalMarks' }), {
         status: 400,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
-    }
-
-    // Check if answer is substantial enough to be marked
-    const trimmedAnswer = userAnswer.trim();
-    
-    // Check if this is a multiple choice question (has options like a), b), c), d))
-    const isMultipleChoice = /[a-d]\)\s/.test(question);
-    
-    // For multiple choice, allow single letter answers; for other questions, require more detail
-    if (!isMultipleChoice && (trimmedAnswer.length < 2 || !/[a-zA-Z]/.test(trimmedAnswer))) {
-      return new Response(JSON.stringify({ 
-        marksAwarded: 0,
-        feedback: "Your answer is too brief. Please provide a more detailed response that demonstrates your understanding.",
-        assessment: "Insufficient Detail"
-      }), {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
-    }
-    
-    // Basic validation for all answers
-    if (trimmedAnswer.length === 0 || !/[a-zA-Z0-9]/.test(trimmedAnswer)) {
-      return new Response(JSON.stringify({ 
-        marksAwarded: 0,
-        feedback: "Please provide an answer to the question.",
-        assessment: "No Answer Provided"
-      }), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
@@ -194,32 +174,23 @@ PREMIUM GCSE MARKING APPROACH:
 
 Your response must include:
 1. MARKS_AWARDED: Exact number from 0 to ${totalMarks} based on official GCSE standards
-2. FEEDBACK: Encouraging, student-friendly feedback that:
-   - Uses positive, supportive language that motivates the student
+2. FEEDBACK: Professional examiner feedback that:
    - Is based ONLY on what the student actually wrote (never assume working that wasn't shown)
-   - Celebrates what the student got right first, then gently explains areas for improvement
-   - Uses simple, clear language that any GCSE student can understand
-   - Avoids jargon and explains technical terms when necessary
-   - Provides specific, actionable suggestions for improvement
-   - Ends on an encouraging note that builds confidence
-   - If only a final answer was given, acknowledge this positively while suggesting showing working
-3. ASSESSMENT: Encouraging judgment like "Great work!", "Good effort - almost there!", "You're on the right track!", or "Keep practicing - you've got this!"
+   - Identifies which specific GCSE content points were correctly addressed
+   - Explains what was missing for full marks (referencing GCSE requirements)
+   - Notes correct use of GCSE terminology and concepts
+   - Highlights any content beyond GCSE scope (and explains it's not required)
+   - Provides specific guidance for improvement based on GCSE mark schemes
+   - If only a final answer was given, acknowledge this fact accurately
+3. ASSESSMENT: Professional judgment like "Excellent GCSE standard", "Good understanding shown", "Needs more GCSE detail", or "Requires GCSE-level terminology"
 
 Apply the highest standards of GCSE examining. Be precise, fair, and educationally valuable in your marking. Most importantly, be completely accurate about what the student actually submitted.
-
-TONE AND LANGUAGE REQUIREMENTS:
-- Use encouraging, positive language throughout
-- Start feedback with something the student did well (even if partial) 
-- Use phrases like "Great start!", "You're on the right track!", "Well done for..."
-- Explain things simply - imagine talking to a friend who's learning
-- Avoid harsh criticism - instead use "Let's work on..." or "Next time, try..."
-- End with motivation like "Keep it up!", "You've got this!", or "Practice makes perfect!"
 
 Respond in this exact JSON format:
 {
   "marksAwarded": [number],
-  "feedback": "[warm, encouraging feedback that celebrates successes and gently guides improvement - use simple, friendly language]",
-  "assessment": "[positive, motivating assessment that builds confidence]"
+  "feedback": "[friendly, conversational feedback based ONLY on what was actually written - no assumptions]",
+  "assessment": "[encouraging assessment]"
 }`;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -258,16 +229,10 @@ Respond in this exact JSON format:
       markingResult = JSON.parse(aiResponse);
     } catch (parseError) {
       console.error('Failed to parse AI response:', aiResponse);
-      // Fallback response if JSON parsing fails - only give marks for substantial answers
-      const isSubstantialAnswer = userAnswer.trim().length >= 3 && 
-        userAnswer.trim().split(/\s+/).length >= 1 && 
-        /[a-zA-Z]/.test(userAnswer.trim());
-      
+      // Fallback response if JSON parsing fails
       markingResult = {
-        marksAwarded: isSubstantialAnswer ? Math.round(totalMarks * 0.3) : 0,
-        feedback: isSubstantialAnswer 
-          ? "Great effort writing an answer! While AI marking isn't available right now, you've shown you're thinking about the topic. Keep practicing to build your confidence!"
-          : "I can see you're trying, but your answer needs more detail to show your understanding. Try explaining your thoughts in a few more words - you've got this!",
+        marksAwarded: Math.round(totalMarks * 0.5), // Give 50% as fallback
+        feedback: "Answer processed. Please review your response against the model answer.",
         assessment: "Needs Review"
       };
     }

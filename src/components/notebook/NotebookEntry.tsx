@@ -1,12 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Lightbulb, Target, Clock, ExternalLink, Brain, AlertCircle, Unlock, Crown } from "lucide-react";
+import { BookOpen, Lightbulb, Target, Clock, ExternalLink, Brain, AlertCircle } from "lucide-react";
 import { format } from "date-fns";
-import { useAuth } from "@/contexts/AuthContext";
-import { useSubscription } from "@/hooks/useSubscription";
-import { PremiumPromoModal } from "@/components/ui/premium-promo-modal";
-import { useState } from "react";
 
 // Safe text formatting function to prevent XSS
 const formatBoldText = (text: string): React.ReactNode => {
@@ -43,14 +39,6 @@ interface NotebookEntryProps {
 }
 
 export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
-  const { isPremium } = useAuth();
-  const { openPaymentLink } = useSubscription();
-  const [showPromoModal, setShowPromoModal] = useState(false);
-  
-  const BlurSpan = ({ children }: { children: React.ReactNode }) => (
-    <span className={!isPremium ? "blur-sm" : ""}>{children}</span>
-  );
-  
   const getConfidenceColor = (level: string) => {
     switch (level.toLowerCase()) {
       case 'low': return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300';
@@ -109,7 +97,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             <AlertCircle className="h-4 w-4" />
             What Tripped Me Up
           </h4>
-          <p className="text-red-700 dark:text-red-200 text-sm"><BlurSpan>{entry.what_tripped_up}</BlurSpan></p>
+          <p className="text-red-700 dark:text-red-200 text-sm">{entry.what_tripped_up}</p>
         </div>
 
         {/* Fix Sentence */}
@@ -118,7 +106,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             <Lightbulb className="h-4 w-4" />
             Fix in One Sentence
           </h4>
-          <p className="text-green-700 dark:text-green-200 text-sm font-medium"><BlurSpan>{entry.fix_sentence}</BlurSpan></p>
+          <p className="text-green-700 dark:text-green-200 text-sm font-medium">{entry.fix_sentence}</p>
         </div>
 
         {/* Bulletproof Notes */}
@@ -131,34 +119,11 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             {entry.bulletproof_notes.map((note, index) => (
               <li key={index} className="flex items-start gap-2 text-blue-700 dark:text-blue-200 text-sm">
                 <span className="text-blue-500 dark:text-blue-400 mt-1">•</span>
-                <span><BlurSpan>{formatBoldText(note)}</BlurSpan></span>
+                <span>{formatBoldText(note)}</span>
               </li>
             ))}
           </ul>
         </div>
-
-        {/* Premium CTA for non-premium users */}
-        {!isPremium && (
-          <div className="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20 p-4 rounded-lg border border-orange-200 dark:border-orange-800/30 text-center">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Unlock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
-              <h4 className="font-semibold text-orange-800 dark:text-orange-300">
-                🔓 Unlock Full Notes
-              </h4>
-            </div>
-            <p className="text-orange-700 dark:text-orange-200 text-xs mb-3">
-              Upgrade to Premium to access complete revision notes and unlock all study features
-            </p>
-            <Button 
-              onClick={() => setShowPromoModal(true)}
-              size="sm" 
-              className="bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white px-4 py-2 rounded-lg text-xs"
-            >
-              <Crown className="h-3 w-3 mr-1" />
-              Upgrade to Premium
-            </Button>
-          </div>
-        )}
 
         {/* Mini Example */}
         {entry.mini_example && (
@@ -168,7 +133,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
               Mini Worked Example
             </h4>
             <p className="text-purple-700 dark:text-purple-200 text-sm whitespace-pre-wrap">
-              <BlurSpan>{entry.mini_example?.replace(/\*/g, '')}</BlurSpan>
+              {entry.mini_example?.replace(/\*/g, '')}
             </p>
           </div>
         )}
@@ -182,7 +147,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
           <div className="flex flex-wrap gap-2">
             {entry.keywords.map((keyword, index) => (
               <Badge key={index} variant="outline" className="text-xs">
-                <BlurSpan>{keyword}</BlurSpan>
+                {keyword}
               </Badge>
             ))}
           </div>
@@ -194,16 +159,10 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             <Target className="h-4 w-4" />
             Next Step
           </h4>
-          <p className="text-amber-700 dark:text-amber-200 text-sm"><BlurSpan>{entry.next_step_suggestion}</BlurSpan></p>
+          <p className="text-amber-700 dark:text-amber-200 text-sm">{entry.next_step_suggestion}</p>
         </div>
 
       </CardContent>
-      
-      <PremiumPromoModal
-        isOpen={showPromoModal}
-        onClose={() => setShowPromoModal(false)}
-        onUpgrade={openPaymentLink}
-      />
     </Card>
   );
 };

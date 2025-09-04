@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { TrendingUp, Crown, Target, Sparkles, Trophy, Zap } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { curriculum } from "@/data/curriculum";
-import { useSubscription } from "@/hooks/useSubscription";
 
 interface GradeData {
   subjectId: string;
@@ -31,12 +29,10 @@ interface UserProgress {
 
 interface PredictedGradesGraphProps {
   userProgress: UserProgress[];
-  onUpgrade?: () => void;
 }
 
-export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGradesGraphProps) => {
+export const PredictedGradesGraph = ({ userProgress }: PredictedGradesGraphProps) => {
   const { user } = useAuth();
-  const { isPremium, isLoading: subscriptionLoading } = useSubscription();
   const [gradesData, setGradesData] = useState<GradeData[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -282,69 +278,30 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
     }
   };
 
-  const getTooltipContent = (grade: GradeData, isPremium: boolean) => {
-    const BlurSpan = ({ children }: { children: React.ReactNode }) => (
-      <span className={!isPremium ? "blur-sm" : ""}>{children}</span>
-    );
-    
-    // For premium users, always show detailed information if there's any data
-    if (isPremium) {
-      // If user has practice data (including 0% scores)
-      if (grade.practiceScore >= 0 && grade.practiceCount > 0) {
-        return (
-          <>
-            You scored an average of {grade.practiceScore}% across your {grade.subjectName} quizzes. This puts you on track for a Grade {grade.finalGrade === '–' ? 'U' : grade.finalGrade} in the real exam.
-            {grade.finalGrade !== 'U' && grade.finalGrade !== '–' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
-              <>
-                {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for {gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+ across all topics.
-              </>
-            )}
-          </>
-        );
-      }
-      // If user only has exam data
-      else if (grade.examGrade) {
-        return (
-          <>
-            You scored a Grade {grade.examGrade} in your {grade.subjectName} predicted paper. This puts you on track for a Grade {grade.finalGrade === '–' ? 'U' : grade.finalGrade} in the real exam.
-            {grade.finalGrade !== 'U' && grade.finalGrade !== '–' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
-              <>
-                {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for {gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+ across all topics.
-              </>
-            )}
-          </>
-        );
-      }
-    }
-    
-    // For non-premium users, show blurred content
-    if (grade.practiceScore >= 0 && grade.practiceCount > 0) {
-      return (
-        <>
-          📊 Your Results<br />
-          You scored an average of <BlurSpan>{grade.practiceScore}%</BlurSpan> across your {grade.subjectName} quizzes. This puts you on track for a Grade <BlurSpan>{grade.finalGrade === '–' ? 'U' : grade.finalGrade}</BlurSpan> in the real exam.
-          {grade.finalGrade !== 'U' && grade.finalGrade !== '–' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
-            <>
-              {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for <BlurSpan>{gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+</BlurSpan> across all topics.
-            </>
-          )}
-        </>
-      );
-    } else if (grade.examGrade) {
-      return (
-        <>
-          📊 Your Results<br />
-          You scored a Grade <BlurSpan>{grade.examGrade}</BlurSpan> in your {grade.subjectName} predicted paper. This puts you on track for a Grade <BlurSpan>{grade.finalGrade === '–' ? 'U' : grade.finalGrade}</BlurSpan> in the real exam.
-          {grade.finalGrade !== 'U' && grade.finalGrade !== '–' && !isNaN(parseInt(grade.finalGrade)) && parseInt(grade.finalGrade) < 9 && (
-            <>
-              {' '}To hit a Grade {parseInt(grade.finalGrade) + 1}, aim for <BlurSpan>{gradeToPercentage((parseInt(grade.finalGrade) + 1).toString())}%+</BlurSpan> across all topics.
-            </>
-          )}
-        </>
-      );
+  const getTooltipText = (grade: GradeData) => {
+    if (grade.finalGrade === '–') {
+      return "Start revising to unlock your prediction";
     }
 
-    return "📊 Your Results<br />Start revising to unlock your prediction";
+    let text = '';
+    if (grade.practiceScore > 0 && grade.examGrade) {
+      text = `You scored an average of ${grade.practiceScore}% across your ${grade.subjectName} quizzes and achieved a Grade ${grade.examGrade} in your predicted paper. This puts you on track for a Grade ${grade.finalGrade} in the real exam.`;
+    } else if (grade.practiceScore > 0) {
+      text = `You scored an average of ${grade.practiceScore}% across your ${grade.subjectName} quizzes. This puts you on track for a Grade ${grade.finalGrade} in the real exam.`;
+    } else if (grade.examGrade) {
+      text = `You scored a Grade ${grade.examGrade} in your ${grade.subjectName} predicted paper. This puts you on track for a Grade ${grade.finalGrade} in the real exam.`;
+    }
+
+    // Only show next grade advice for numeric grades (not U)
+    if (grade.finalGrade !== 'U' && !isNaN(parseInt(grade.finalGrade))) {
+      const nextGrade = parseInt(grade.finalGrade) + 1;
+      if (nextGrade <= 9) {
+        const nextGradePercentage = gradeToPercentage(nextGrade.toString());
+        text += ` To hit a Grade ${nextGrade}, aim for ${nextGradePercentage}%+ across all topics.`;
+      }
+    }
+
+    return text;
   };
 
   // Helper function to convert grade string to number for calculations
@@ -418,9 +375,7 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
           <div className="flex items-center space-x-6">
             {averageGrade > 0 && (
               <div className="text-center p-3 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl border border-purple-500/20">
-                <div className={`text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent`}>
-                  {isPremium && !subscriptionLoading ? averageGrade.toFixed(1) : '•.•'}
-                </div>
+                <div className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">{averageGrade.toFixed(1)}</div>
                 <div className="text-xs text-muted-foreground font-semibold">Avg Grade</div>
               </div>
             )}
@@ -453,7 +408,7 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
                               <div 
                                 className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t ${getSubjectColor(index)} rounded-3xl transition-all duration-1000 ease-out animate-in slide-in-from-bottom-4`}
                                 style={{ 
-                                  height: isPremium ? `${Math.max(grade.finalPercentage, 10)}%` : `100%`,
+                                  height: `${Math.max(grade.finalPercentage * 0.85, 20)}%`,
                                   filter: grade.isGrade7Plus ? 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.6))' : 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))'
                                 }}
                               />
@@ -461,19 +416,19 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
                               {/* Premium glow overlay */}
                               <div 
                                 className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white/20 to-transparent rounded-3xl opacity-60`}
-                                style={{ height: isPremium ? `${Math.max(grade.finalPercentage, 10)}%` : `100%` }}
+                                style={{ height: `${Math.max(grade.finalPercentage * 0.85, 20)}%` }}
                               />
                               
                               {/* Animated shimmer effect */}
                               <div 
                                 className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-3xl animate-pulse"
-                                style={{ height: isPremium ? `${Math.max(grade.finalPercentage, 10)}%` : `100%` }}
+                                style={{ height: `${Math.max(grade.finalPercentage * 0.85, 20)}%` }}
                               />
                             </>
                           )}
                           
                           {/* Enhanced Grade number */}
-                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110 ${!isPremium ? 'blur-md' : ''}`}>
+                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110`}>
                             {grade.finalGrade}
                           </div>
 
@@ -496,17 +451,17 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
                           {/* Premium percentage indicator */}
                           {grade.finalGrade !== '–' && (
                             <div className="absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1">
-                              <span className={`text-xs font-bold text-white ${!isPremium ? 'blur-sm' : ''}`}>{grade.finalPercentage}%</span>
+                              <span className="text-xs font-bold text-white">{grade.finalPercentage}%</span>
                             </div>
                           )}
                         </div>
 
                         {/* Premium Subject name */}
-                          <div className="mt-4 text-center">
+                        <div className="mt-4 text-center">
                           <div className="text-sm font-bold text-foreground truncate mb-2">{grade.subjectName}</div>
                           {grade.isGrade7Plus && (
                             <div className="mt-2">
-                              <Badge className={`bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse ${!isPremium ? 'blur-sm' : ''}`}>
+                              <Badge className="bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse">
                                 🎯 Target Hit!
                               </Badge>
                             </div>
@@ -521,9 +476,9 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
                     className="max-w-80 w-auto p-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white text-xs rounded-2xl shadow-2xl border border-white/10 backdrop-blur-sm"
                   >
                     <div className="space-y-2">
-                      <div className="font-semibold text-amber-300 text-center">📊 Your Results</div>
+                      <div className="font-semibold text-amber-300 text-center">🤖 AI Insight</div>
                       <div className="text-gray-200 leading-relaxed">
-                        {getTooltipContent(grade, isPremium)}
+                        {getTooltipText(grade)}
                       </div>
                       {grade.isGrade7Plus && (
                         <div className="text-emerald-300 font-semibold text-center">🎉 Excellent work! Keep it up!</div>
@@ -554,14 +509,6 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
                   👑 Premium insights
                 </span>
               </div>
-              {!isPremium && gradesData.some(g => g.finalGrade !== '–') && (
-                <Button 
-                  onClick={onUpgrade}
-                  className="ml-auto bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-purple-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/40"
-                >
-                  🔓 Unlock My Grades
-                </Button>
-              )}
             </div>
             </div>
           </TooltipProvider>
