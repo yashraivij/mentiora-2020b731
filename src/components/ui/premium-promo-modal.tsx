@@ -4,7 +4,7 @@ import {
   DialogContent,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Crown, TrendingUp, Clock, Target, X, Sparkles } from "lucide-react";
+import { Crown, CheckCircle, X, GraduationCap, TrendingUp, Sparkles, Star, Zap } from "lucide-react";
 
 interface PremiumPromoModalProps {
   isOpen: boolean;
@@ -20,117 +20,86 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-[900px] rounded-3xl p-0 bg-gradient-to-br from-purple-600 via-blue-700 to-teal-600 border-0 text-white shadow-2xl mx-auto overflow-hidden">
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 z-50 text-white/70 hover:text-white transition-colors"
-        >
-          <X className="h-6 w-6" />
-        </button>
+      <DialogContent className="w-[90vw] max-w-[480px] rounded-3xl p-0 bg-gradient-to-br from-purple-900 via-blue-900 to-violet-900 border-0 text-white shadow-2xl mx-auto overflow-hidden">
+        {/* Dynamic background animations */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-blue-500/15 to-violet-500/20 animate-pulse" />
+        <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-yellow-400/30 to-orange-400/20 rounded-full blur-3xl animate-bounce" style={{ animationDuration: '3s' }} />
+        <div className="absolute bottom-0 right-0 w-28 h-28 bg-gradient-to-tl from-pink-400/30 to-purple-400/20 rounded-full blur-2xl animate-bounce" style={{ animationDuration: '4s', animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-gradient-to-r from-cyan-400/10 to-blue-400/10 rounded-full blur-3xl animate-spin" style={{ animationDuration: '10s' }} />
 
-        {/* Decorative elements */}
-        <div className="absolute top-6 left-6">
-          <Sparkles className="h-8 w-8 text-yellow-400/60" />
-        </div>
-        <div className="absolute top-6 right-16">
-          <div className="w-8 h-8 rounded-full bg-teal-400/30 flex items-center justify-center">
-            <div className="w-4 h-4 rounded-full bg-teal-300/50" />
-          </div>
-        </div>
-        <div className="absolute bottom-6 left-6">
-          <div className="w-6 h-6 rounded bg-purple-400/30" />
-        </div>
-
-        <div className="relative z-10 p-8 text-center">
-          {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Crown className="h-8 w-8 text-yellow-400" />
-              <h1 className="text-3xl md:text-4xl font-bold text-yellow-400">
-                Mentiora Premium
-              </h1>
-              <Crown className="h-8 w-8 text-yellow-400" />
+        <div className="relative z-10 p-8 text-center space-y-6">
+          {/* Premium crown icon with sparkles */}
+          <div className="flex justify-center relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full blur-lg animate-pulse" />
+            <div className="relative bg-gradient-to-br from-yellow-400 to-orange-500 p-4 rounded-full">
+              <Crown className="h-8 w-8 text-white" />
             </div>
-            <h2 className="text-2xl font-bold mb-4">Secure Academic Future Success</h2>
-            <p className="text-lg text-white/90 max-w-2xl mx-auto">
-              Get the competitive edge to achieve Grade 9s and secure places at top universities
+            <Sparkles className="absolute -top-2 -right-2 h-6 w-6 text-yellow-300 animate-pulse" />
+            <Star className="absolute -bottom-1 -left-2 h-4 w-4 text-yellow-400 animate-pulse" style={{ animationDelay: '1s' }} />
+          </div>
+
+          {/* Main heading */}
+          <div className="space-y-3">
+            <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent leading-tight animate-pulse">
+              Unlock Your Future
+            </h1>
+            <p className="text-lg font-bold text-white/90">
+              Turn Every Grade Into Gold ✨
             </p>
           </div>
 
-          {/* Pricing Section */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-8 max-w-md mx-auto">
-            <div className="text-center mb-4">
-              <p className="text-sm font-semibold text-blue-200 mb-2">Limited Time Offer</p>
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <span className="text-lg line-through text-white/60">£19.99</span>
-                <span className="text-4xl font-bold">£9.99</span>
-                <span className="text-lg text-white/80">/month</span>
-              </div>
-              <p className="text-yellow-300 font-semibold mb-2">Save 50% - First 3 months</p>
-              <p className="text-sm text-white/70">Less than a single tutoring session</p>
-            </div>
-            
-            <Button 
-              onClick={handleUpgrade}
-              className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-black font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-lg"
-            >
-              Start Free Trial
-            </Button>
+          {/* Limited offer badge */}
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500/20 to-pink-500/20 border border-red-400/30 rounded-full px-4 py-2 animate-pulse">
+            <Zap className="h-4 w-4 text-yellow-400" />
+            <span className="text-sm font-bold text-yellow-300">LIMITED OFFER: £9.99/month</span>
+            <Zap className="h-4 w-4 text-yellow-400" />
           </div>
 
-          {/* Premium Features */}
-          <div>
-            <h3 className="text-2xl font-bold mb-6">Premium Features</h3>
-            <div className="grid md:grid-cols-3 gap-4">
-              {/* Predicted Grade 9s */}
-              <div className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 backdrop-blur-sm border border-white/20 rounded-xl p-6 text-left">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-orange-500/20 p-2 rounded-lg">
-                    <TrendingUp className="h-6 w-6 text-orange-400" />
-                  </div>
-                  <h4 className="text-lg font-semibold">Predicted Grade 9s</h4>
+          {/* Key benefits - simplified */}
+          <div className="space-y-3">
+            {[
+              { icon: TrendingUp, text: "Predict Your GCSE Results", color: "text-green-400" },
+              { icon: GraduationCap, text: "Russell Group Ready", color: "text-blue-400" },
+              { icon: Sparkles, text: "Stress-Free Success", color: "text-purple-400" }
+            ].map((item, index) => (
+              <div key={index} className="flex items-center justify-center space-x-3 group">
+                <div className={`${item.color} p-2 rounded-full bg-white/10 group-hover:scale-110 transition-transform`}>
+                  <item.icon className="h-5 w-5" />
                 </div>
-                <p className="text-white/80 text-sm mb-4">
-                  Advanced analytics predict Grade 9 outcomes across all subjects based on your performance
-                </p>
-                <div className="bg-blue-500/20 rounded-lg px-3 py-1 inline-block">
-                  <span className="text-blue-300 text-xs font-medium">92% accuracy rate</span>
-                </div>
+                <span className="text-white font-semibold">{item.text}</span>
               </div>
+            ))}
+          </div>
 
-              {/* Save 15+ Hours Weekly */}
-              <div className="bg-gradient-to-br from-teal-500/20 to-green-600/20 backdrop-blur-sm border border-white/20 rounded-xl p-6 text-left">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-yellow-500/20 p-2 rounded-lg">
-                    <Clock className="h-6 w-6 text-yellow-400" />
-                  </div>
-                  <h4 className="text-lg font-semibold">Save 15+ Hours Weekly</h4>
-                </div>
-                <p className="text-white/80 text-sm mb-4">
-                  Smart study recommendations and auto-generated notes reduce revision time
-                </p>
-                <div className="bg-green-500/20 rounded-lg px-3 py-1 inline-block">
-                  <span className="text-green-300 text-xs font-medium">Worth £300+ in tutoring</span>
-                </div>
-              </div>
+          {/* Social proof */}
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4">
+            <p className="text-sm text-white/80">
+              🔥 <strong className="text-yellow-300">3,247 students</strong> upgraded this week
+            </p>
+            <p className="text-xs text-white/60 mt-1">
+              "Finally got the grades I needed!" - Sarah, Year 11
+            </p>
+          </div>
 
-              {/* Exam Board Mastery */}
-              <div className="bg-gradient-to-br from-purple-500/20 to-pink-600/20 backdrop-blur-sm border border-white/20 rounded-xl p-6 text-left">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-green-500/20 p-2 rounded-lg">
-                    <Target className="h-6 w-6 text-green-400" />
-                  </div>
-                  <h4 className="text-lg font-semibold">Exam Board Mastery</h4>
-                </div>
-                <p className="text-white/80 text-sm mb-4">
-                  Access to AQA, Edexcel, OCR, and WJEC predicted questions for 2026
-                </p>
-                <div className="bg-purple-500/20 rounded-lg px-3 py-1 inline-block">
-                  <span className="text-purple-300 text-xs font-medium">All specifications</span>
-                </div>
-              </div>
-            </div>
+          {/* CTA Buttons */}
+          <div className="space-y-3 pt-2">
+            <Button 
+              onClick={handleUpgrade}
+              className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-violet-600 hover:from-pink-600 hover:via-purple-600 hover:to-violet-700 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 text-lg relative overflow-hidden group"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000" />
+              <span className="relative flex items-center justify-center gap-2">
+                🚀 Get Premium Now - £9.99/month
+              </span>
+            </Button>
+            
+            <Button 
+              onClick={onClose}
+              variant="ghost"
+              className="w-full text-white/60 hover:text-white/80 hover:bg-white/5 py-3 text-sm"
+            >
+              Maybe later
+            </Button>
           </div>
         </div>
       </DialogContent>
