@@ -39,45 +39,61 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           </div>
 
           {/* Main heading */}
-          <div className="space-y-3">
-            <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent leading-tight animate-pulse">
-              Unlock Your Future
+          <div className="space-y-2">
+            <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent leading-tight">
+              Give Your Child The Competitive Edge
             </h1>
             <p className="text-lg font-bold text-white/90">
-              Turn Every Grade Into Gold ✨
+              Guarantee their place at top universities 🎯
+            </p>
+            <p className="text-sm text-white/70 font-medium">
+              While others struggle, your child excels
             </p>
           </div>
 
           {/* Limited offer badge */}
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500/20 to-pink-500/20 border border-red-400/30 rounded-full px-4 py-2 animate-pulse">
             <Zap className="h-4 w-4 text-yellow-400" />
-            <span className="text-sm font-bold text-yellow-300">LIMITED OFFER: £9.99/month</span>
+            <span className="text-sm font-bold text-yellow-300">ENDS SOON: Just £9.99/month</span>
             <Zap className="h-4 w-4 text-yellow-400" />
           </div>
 
-          {/* Key benefits - simplified */}
+          {/* Powerful parent-focused benefits */}
           <div className="space-y-3">
             {[
-              { icon: TrendingUp, text: "Predict Your GCSE Results", color: "text-green-400" },
-              { icon: GraduationCap, text: "Russell Group Ready", color: "text-blue-400" },
-              { icon: Sparkles, text: "Stress-Free Success", color: "text-purple-400" }
+              { icon: GraduationCap, text: "Oxford & Cambridge Ready", subtitle: "Beat 99% of applicants", color: "text-blue-400" },
+              { icon: TrendingUp, text: "Predict A* Grades Early", subtitle: "No more exam anxiety", color: "text-green-400" },
+              { icon: Sparkles, text: "£100k+ Future Salary", subtitle: "Your investment pays back 1000x", color: "text-purple-400" }
             ].map((item, index) => (
-              <div key={index} className="flex items-center justify-center space-x-3 group">
-                <div className={`${item.color} p-2 rounded-full bg-white/10 group-hover:scale-110 transition-transform`}>
+              <div key={index} className="flex items-start space-x-3 group bg-white/5 rounded-xl p-3 hover:bg-white/10 transition-all">
+                <div className={`${item.color} p-2 rounded-full bg-white/10 group-hover:scale-110 transition-transform flex-shrink-0`}>
                   <item.icon className="h-5 w-5" />
                 </div>
-                <span className="text-white font-semibold">{item.text}</span>
+                <div className="text-left">
+                  <p className="text-white font-semibold">{item.text}</p>
+                  <p className="text-white/60 text-xs">{item.subtitle}</p>
+                </div>
               </div>
             ))}
           </div>
 
-          {/* Social proof */}
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4">
-            <p className="text-sm text-white/80">
-              🔥 <strong className="text-yellow-300">3,247 students</strong> upgraded this week
+          {/* Compelling social proof */}
+          <div className="bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-sm border border-white/20 rounded-2xl p-4">
+            <p className="text-sm text-white/80 mb-2">
+              💡 <strong className="text-yellow-300">94% of parents</strong> see grade improvements within 30 days
+            </p>
+            <p className="text-xs text-white/60">
+              "My daughter went from B's to A*s. Worth every penny for her future." - Parent, Manchester
+            </p>
+          </div>
+
+          {/* Urgency message */}
+          <div className="bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-400/20 rounded-xl p-3">
+            <p className="text-sm text-white/90 font-medium">
+              ⚠️ <strong className="text-red-300">University applications open in 4 months</strong>
             </p>
             <p className="text-xs text-white/60 mt-1">
-              "Finally got the grades I needed!" - Sarah, Year 11
+              Don't let your child fall behind their peers
             </p>
           </div>
 
