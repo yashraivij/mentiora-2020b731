@@ -126,6 +126,7 @@ const Dashboard = () => {
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
   const [showPromoModal, setShowPromoModal] = useState(false);
   const [loading, setLoading] = useState(false); // This tracks if the page is loading
+  const [refreshKey, setRefreshKey] = useState(0); // For triggering re-renders after subscription changes
 
   const {
     notification,
@@ -392,10 +393,11 @@ useEffect(() => {
     // Load progress from localStorage
     const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
     if (savedProgress) {
-      setUserProgress(JSON.parse(savedProgress));
+      const parsedProgress = JSON.parse(savedProgress);
+      setUserProgress(parsedProgress);
 
       // Calculate and save weak topics to database
-      const weak = savedProgress
+      const weak = parsedProgress
         .filter((p: UserProgress) => p.averageScore < 70)
         .map((p: UserProgress) => p.topicId);
       await saveWeakTopicsToDatabase(weak);
@@ -1056,12 +1058,13 @@ useEffect(() => {
   };
 
   return (
-    {loading && (
-  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-    <p className="text-white">Refreshing subscription...</p>
-  </div>
-)}
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10">
+    <>
+      {loading && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <p className="text-white">Refreshing subscription...</p>
+        </div>
+      )}
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10">
       {/* Premium Header with Glassmorphism */}
       <header className="bg-card/90 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-lg shadow-black/5 dark:shadow-black/20">
         <div className="container mx-auto px-6 py-4">
@@ -2113,6 +2116,7 @@ useEffect(() => {
         </svg>
       </button>
     </div>
+      </>
   );
 };
 
