@@ -63,29 +63,6 @@ const refreshSubscription = async (userId?: string) => {
     // Don't reset premium status on error
   }
 };
-    
-    try {
-      // Check subscription status from database
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('subscription_status')
-        .eq('id', targetUserId)
-        .maybeSingle();
-      
-      if (error) {
-        console.error('Subscription fetch error:', error);
-        return; // Don't reset premium status on error
-      }
-      
-      if (data) {
-        const premium = ["active", "trialing"].includes(data.subscription_status || '');
-        setIsPremium(premium);
-      }
-    } catch (error) {
-      console.error('Error fetching subscription:', error);
-      // Don't reset premium status on error
-    }
-  };
 
   useEffect(() => {
     let mounted = true;
