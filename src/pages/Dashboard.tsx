@@ -125,6 +125,7 @@ const Dashboard = () => {
   const [celebrationSubject, setCelebrationSubject] = useState("");
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
   const [showPromoModal, setShowPromoModal] = useState(false);
+  const [loading, setLoading] = useState(false); // This tracks if the page is loading
 
   const {
     notification,
@@ -368,80 +369,107 @@ const Dashboard = () => {
     }
   };
 
-  useEffect(() => {
-    const loadUserData = async () => {
-      if (!user?.id) return;
+useEffect(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  let refreshed = false;
+  if (urlParams.get('upgraded') === 'true') {
+    setLoading(true); // Turn on loading
+    refreshSubscription()
+      .catch(err => console.error("Refresh failed:", err)) // Handle if it fails
+      .then(() => {
+        setRefreshKey(prev => prev + 1);
+        setLoading(false); // Turn off loading
+        refreshed = true;
+      });
+  }
 
-      // Apply natural stress decay when dashboard loads
-      StressTracker.applyTimeDecay(user.id);
+  const loadUserData = async () => {
+    if (!user?.id) return;
 
-      // Load progress from localStorage
-      const savedProgress = localStorage.getItem(
-        `mentiora_progress_${user.id}`
-      );
-      if (savedProgress) {
-        const progress = JSON.parse(savedProgress);
-        setUserProgress(progress);
+    // Apply natural stress decay
+    StressTracker.applyTimeDecay(user.id);
 
-        // Calculate and save weak topics to database
-        const weak = progress
-          .filter((p: UserProgress) => p.averageScore < 70)
-          .map((p: UserProgress) => p.topicId);
-        await saveWeakTopicsToDatabase(weak);
-        setWeakTopics(weak);
-      }
+    // Load progress from localStorage
+    const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
+    if (savedProgress) {
+      setUserProgress(JSON.parse(savedProgress));
 
-      // Load weak topics from database
-      await loadWeakTopicsFromDatabase();
-
-      // Load pinned subjects from localStorage
-      const savedPinnedSubjects = localStorage.getItem(
-        `mentiora_pinned_subjects_${user.id}`
-      );
-      if (savedPinnedSubjects) {
-        setPinnedSubjects(JSON.parse(savedPinnedSubjects));
-      }
-
-      // Load user's selected subjects from database
-      await loadUserSubjects();
-
-      // Record login activity and fetch current streak
-      await fetchCurrentStreak();
-
-      // Check and update public profile for 14+ day streaks
-      await checkAndUpdatePublicProfile();
-
-      // Initialize previous time saved from localStorage (this happens before loadTimeSavedStats)
-      const savedTimeSaved = localStorage.getItem(
-        `mentiora_time_saved_${user.id}`
-      );
-      if (savedTimeSaved) {
-        setPreviousTimeSaved(parseFloat(savedTimeSaved));
-      }
-
-      // Load and track time saved from notebook entries
-      await loadTimeSavedStats();
-
-      // Check for recommendations on dashboard load
-      console.log(
-        "Dashboard loading, checking for weak topic recommendations..."
-      );
-      await checkForWeakTopicRecommendation();
-
-      // Check for new predicted exam results
-      await checkForNewGrades();
-
-      // Check for Discord invitation eligibility
-      await checkForDiscordInvitation();
-    };
-
-    loadUserData();
-
-    // Also fetch streak on component mount
-    if (user?.id) {
-      fetchCurrentStreak();
+      // Calculate and save weak topics to database
+      const weak = savedProgress
+        .filter((p: UserProgress) => p.averageScore < 70)
+        .map((p: UserProgress) => p.topicId);
+      await saveWeakTopicsToDatabase(weak);
+      setWeakTopics(weak);
     }
-  }, [user?.id]);
+
+    // Load weak topics from database
+    await loadWeakTopicsFromDatabase();
+
+    // Load pinned subjects from localStorage
+    const savedPinnedSubjects = localStorage.getItem(`mentiora_pinned_subjects_${user.id}`);
+    if (savedPinnedSubjects) {
+      setPinnedSubjects(JSON.parse(savedPinnedSubjects));
+    }
+
+    // Load user's selected subjects from database
+    await loadUserSubjects();
+
+    // Record login activity and fetch current streak
+    await fetchCurrentStreak();
+
+    // Check and update public profile for 14+ day streaks
+    await checkAndUpdatePublicProfile();
+
+    // Initialize previous time saved from localStorage
+    const savedTimeSaved = localStorage.getItem(`mentiora_time_saved_${user.id}`);
+    if (savedTimeSaved) {
+      setPreviousTimeSaved(parseFloat(savedTimeSaved));
+    }
+
+    // Load and track time saved from notebook entries
+    await loadTimeSavedStats();
+
+    // Check for recommendations on dashboard load
+    console.log("Dashboard loading, checking for weak topic recommendations...");
+    await checkForWeakTopicRecommendation();
+
+    // Check for new predicted exam results
+    await checkForNewGrades();
+
+    // Check for Discord invitation eligibility
+    await checkForDiscordInvitation();
+
+    if (!refreshed) {
+      await refreshSubscription();
+    }
+  };
+
+  loadUserData();
+
+  // Also fetch streak on component mount
+  if (user?.id) {
+    fetchCurrentStreak();
+  }
+}, [user?.id, refreshKey]);
+  useEffect(() => {
+  let attempts = 0;
+  const maxAttempts = 3; // Try 3 times
+  const interval = setInterval(() => {
+    if (attempts < maxAttempts && !isPremium) {
+      console.log("Auto-refreshing subscription status, attempt:", attempts + 1);
+      refreshSubscription()
+        .catch(err => console.error("Auto-refresh failed:", err)) // Handle if it fails
+        .then(() => setRefreshKey(prev => prev + 1));
+      attempts++;
+    } else {
+      clearInterval(interval);
+    }
+  }, 5000); // Every 5 seconds
+
+  return () => {
+    clearInterval(interval);
+  };
+}, [isPremium]);
 
   const loadWeakTopicsFromDatabase = async () => {
     if (!user?.id) return;
@@ -1028,6 +1056,11 @@ const Dashboard = () => {
   };
 
   return (
+    {loading && (
+  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <p className="text-white">Refreshing subscription...</p>
+  </div>
+)}
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10">
       {/* Premium Header with Glassmorphism */}
       <header className="bg-card/90 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-lg shadow-black/5 dark:shadow-black/20">
@@ -1112,6 +1145,28 @@ const Dashboard = () => {
               <p className="text-muted-foreground text-lg">
                 Ready to elevate your GCSE revision journey?
               </p>
+              <Card className="border-orange-500/50 bg-orange-50/50 dark:bg-orange-950/20 w-72 mt-4">
+  <CardContent className="p-4">
+    <div className="text-sm space-y-2">
+      <div><strong>User ID:</strong> {user?.id}</div>
+      <div><strong>Email:</strong> {user?.email}</div>
+      <div><strong>isPremium:</strong> {isPremium ? "YES" : "NO"}</div>
+      <Button
+        onClick={() => {
+          console.log("Manual refresh triggered");
+          refreshSubscription()
+            .catch(err => console.error("Refresh failed:", err)) // Handle if it fails
+            .then(() => setRefreshKey(prev => prev + 1));
+        }}
+        variant="outline"
+        size="sm"
+        className="w-full mt-2"
+      >
+        Refresh Status
+      </Button>
+    </div>
+  </CardContent>
+</Card>
             </div>
 
             {/* Debug Subscription Status */}
