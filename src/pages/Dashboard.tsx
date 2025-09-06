@@ -1316,8 +1316,8 @@ useEffect(() => {
                             <p
                               className={`text-sm font-semibold ${
                                 getStudyStreak() >= 3
-                                  ? "text-violet-700 dark:text-violet-300"
-                                  : "text-gray-500"
+                                  ? "text-violet-700 dark:text-white"
+                                  : "text-gray-500 dark:text-white"
                               }`}
                             >
                               Custom Color Themes
@@ -1360,8 +1360,8 @@ useEffect(() => {
                             <p
                               className={`text-sm font-semibold ${
                                 getStudyStreak() >= 7
-                                  ? "text-emerald-700 dark:text-emerald-300"
-                                  : "text-gray-500"
+                                  ? "text-emerald-700 dark:text-white"
+                                  : "text-gray-500 dark:text-white"
                               }`}
                             >
                               Study Playlists & Sounds
@@ -1404,8 +1404,8 @@ useEffect(() => {
                             <p
                               className={`text-sm font-semibold ${
                                 getStudyStreak() >= 14
-                                  ? "text-blue-700 dark:text-blue-300"
-                                  : "text-gray-500"
+                                  ? "text-blue-700 dark:text-white"
+                                  : "text-gray-500 dark:text-white"
                               }`}
                             >
                               Free Tutoring Session
