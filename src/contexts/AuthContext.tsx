@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
+import { PremiumWelcomeNotification } from '@/components/ui/premium-welcome-notification';
 
 interface AuthContextType {
   user: User | null;
@@ -28,6 +29,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isPremium, setIsPremium] = useState(false);
+  const [showPremiumWelcome, setShowPremiumWelcome] = useState(false);
 
 const refreshSubscription = async (userId?: string) => {
   const targetUserId = userId || user?.id;
@@ -53,6 +55,13 @@ const refreshSubscription = async (userId?: string) => {
     if (data) {
       console.log("Fetched subscription status:", data.subscription_status);
       const premium = ["active", "trialing"].includes(data.subscription_status || '');
+      
+      // Show welcome notification if user just became premium
+      if (premium && !isPremium && user) {
+        console.log("User just became premium, showing welcome notification");
+        setShowPremiumWelcome(true);
+      }
+      
       setIsPremium(premium);
       console.log("Updated isPremium to:", premium);
     } else {
@@ -184,6 +193,10 @@ const refreshSubscription = async (userId?: string) => {
       refreshSubscription
     }}>
       {children}
+      <PremiumWelcomeNotification 
+        isVisible={showPremiumWelcome}
+        onClose={() => setShowPremiumWelcome(false)}
+      />
     </AuthContext.Provider>
   );
 };
