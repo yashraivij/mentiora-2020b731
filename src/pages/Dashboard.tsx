@@ -1148,28 +1148,6 @@ useEffect(() => {
               <p className="text-muted-foreground text-lg">
                 Ready to elevate your GCSE revision journey?
               </p>
-              <Card className="border-orange-500/50 bg-orange-50/50 dark:bg-orange-950/20 w-72 mt-4">
-  <CardContent className="p-4">
-    <div className="text-sm space-y-2">
-      <div><strong>User ID:</strong> {user?.id}</div>
-      <div><strong>Email:</strong> {user?.email}</div>
-      <div><strong>isPremium:</strong> {isPremium ? "YES" : "NO"}</div>
-      <Button
-        onClick={() => {
-          console.log("Manual refresh triggered");
-          refreshSubscription()
-            .catch(err => console.error("Refresh failed:", err)) // Handle if it fails
-            .then(() => setRefreshKey(prev => prev + 1));
-        }}
-        variant="outline"
-        size="sm"
-        className="w-full mt-2"
-      >
-        Refresh Status
-      </Button>
-    </div>
-  </CardContent>
-</Card>
             </div>
 
             {/* Debug Subscription Status */}
