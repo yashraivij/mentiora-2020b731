@@ -56,10 +56,15 @@ const refreshSubscription = async (userId?: string) => {
       console.log("Fetched subscription status:", data.subscription_status);
       const premium = ["active", "trialing"].includes(data.subscription_status || '');
       
-      // Show welcome notification if user just became premium
+      // Show welcome notification if user just became premium and hasn't seen it before
       if (premium && !isPremium && user) {
-        console.log("User just became premium, showing welcome notification");
-        setShowPremiumWelcome(true);
+        const hasSeenWelcome = localStorage.getItem(`premium_welcome_shown_${user.id}`);
+        if (!hasSeenWelcome) {
+          console.log("User just became premium, showing welcome notification");
+          setShowPremiumWelcome(true);
+          // Mark as seen immediately to prevent multiple showings
+          localStorage.setItem(`premium_welcome_shown_${user.id}`, "true");
+        }
       }
       
       setIsPremium(premium);
