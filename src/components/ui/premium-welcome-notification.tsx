@@ -202,7 +202,7 @@ export function PremiumWelcomeNotification({ isVisible, onClose }: PremiumWelcom
                         You've Unlocked Excellence
                       </p>
                       <p className="text-muted-foreground leading-relaxed">
-                        Get ready to supercharge your studies with unlimited practice questions, AI-powered insights, and advanced analytics designed to maximize your potential.
+                        Boost your results with exclusive predicted 2026 questions, real-time grade insights, and a revision notebook that simplifies your study.
                       </p>
                     </div>
 
@@ -218,10 +218,10 @@ export function PremiumWelcomeNotification({ isVisible, onClose }: PremiumWelcom
                           <Sparkles className="h-5 w-5 text-amber-600 dark:text-amber-400" fill="currentColor" />
                         </div>
                         <h3 className="text-sm font-bold bg-gradient-to-r from-amber-700 to-yellow-700 dark:from-amber-300 dark:to-yellow-300 bg-clip-text text-transparent">
-                          Unlimited Practice
+                          2026 Predictions
                         </h3>
                         <p className="text-xs text-amber-600/80 dark:text-amber-400/80">
-                          Access all questions
+                          Exclusive questions
                         </p>
                       </div>
 
@@ -230,10 +230,10 @@ export function PremiumWelcomeNotification({ isVisible, onClose }: PremiumWelcom
                           <Trophy className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
                         </div>
                         <h3 className="text-sm font-bold bg-gradient-to-r from-yellow-700 to-orange-700 dark:from-yellow-300 dark:to-orange-300 bg-clip-text text-transparent">
-                          AI Insights
+                          Grade Insights
                         </h3>
                         <p className="text-xs text-yellow-600/80 dark:text-yellow-400/80">
-                          Smart analytics
+                          Real-time tracking
                         </p>
                       </div>
                     </motion.div>
