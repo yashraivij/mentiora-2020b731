@@ -32,8 +32,8 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
             {/* Left Section - Header & Offer */}
             <div className="space-y-4">
-              <div className="text-center lg:text-left space-y-3">
-                <div className="flex justify-center lg:justify-start mb-2">
+              <div className="text-center space-y-3">
+                <div className="flex justify-center mb-2">
                   <div className="relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full blur-md animate-pulse" />
                     <div className="relative bg-gradient-to-br from-yellow-400 to-orange-500 p-2 rounded-full">
