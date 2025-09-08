@@ -4,7 +4,8 @@ import {
   DialogContent,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { PoundSterling, Clock, GraduationCap, Sparkles, Zap, University } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Crown, Target, BookOpen, TrendingUp, Clock, Shield } from "lucide-react";
 
 interface PremiumPromoModalProps {
   isOpen: boolean;
@@ -20,103 +21,143 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-[1000px] max-h-[90vh] rounded-3xl p-0 bg-gradient-to-br from-rose-500 via-pink-600 to-violet-700 border-0 text-white shadow-2xl mx-auto overflow-hidden">
-        <div className="flex min-h-[600px]">
-          {/* Left Section - Benefits */}
-          <div className="flex-1 p-8 space-y-6 bg-gradient-to-br from-rose-500/20 to-transparent backdrop-blur-sm">
-            <div className="space-y-4">
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-300 via-rose-300 to-violet-300 bg-clip-text text-transparent animate-pulse">
-                👑 Mentiora Premium 👑
-              </h1>
-              <p className="text-xl text-white/90 font-semibold">
-                Transform Your Child's Academic Success
-              </p>
+      <DialogContent className="w-[95vw] max-w-[900px] rounded-2xl p-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 border-0 text-white shadow-2xl mx-auto overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-indigo-500/10" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-400/20 to-orange-400/15 rounded-full blur-2xl" />
+        <div className="absolute bottom-0 left-0 w-28 h-28 bg-gradient-to-tl from-yellow-400/15 to-orange-400/10 rounded-full blur-2xl" />
+
+        <div className="relative z-10 p-6 space-y-6">
+          {/* Main Content - Vertical Layout */}
+          <div className="space-y-6">
+            {/* Header & Offer Section */}
+            <div className="text-center space-y-4">
+              <div className="space-y-3">
+                <div className="flex justify-center mb-2">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full blur-md animate-pulse" />
+                    <div className="relative bg-gradient-to-br from-yellow-400 to-orange-500 p-2 rounded-full">
+                      <Crown className="h-6 w-6 text-white" />
+                    </div>
+                  </div>
+                </div>
+                
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-yellow-400 bg-clip-text text-transparent">
+                  Mentiora Premium 👑
+                </h1>
+                <h2 className="text-lg font-semibold text-white">
+                  Secure Their Academic Future
+                </h2>
+                <p className="text-white/80 text-sm leading-relaxed max-w-md mx-auto">
+                  Help your child achieve Grade 9s and win a place at top universities with Mentiora's most powerful tools.
+                </p>
+              </div>
+
+              {/* Offer Section */}
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 relative max-w-sm mx-auto">
+                <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
+                  <Badge className="bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold px-3 py-1 text-xs animate-pulse">
+                    <Clock className="h-3 w-3 mr-1" />
+                    LIMITED TIME OFFER
+                  </Badge>
+                </div>
+                
+                <div className="text-center space-y-3 mt-2">
+                  <div className="flex items-center justify-center gap-2">
+                    <span className="text-white/60 line-through text-sm">£19.99</span>
+                    <span className="text-2xl font-bold bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+                      £9.99/month
+                    </span>
+                  </div>
+                  <p className="text-white/80 text-xs">
+                    Save 50% for the first 3 months — less than a single tutoring session.
+                  </p>
+                  
+                  <Button 
+                    onClick={handleUpgrade}
+                    className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-500 hover:from-yellow-500 hover:via-orange-500 hover:to-yellow-600 text-black font-bold py-3 px-6 rounded-lg shadow-xl hover:shadow-yellow-500/25 transform hover:scale-105 transition-all duration-300"
+                  >
+                    Start Free Trial
+                  </Button>
+                </div>
+              </div>
             </div>
 
-            {/* Quick Stats */}
-            <div className="grid grid-cols-1 gap-3">
-              <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-400/40 rounded-2xl backdrop-blur-sm hover:scale-105 transition-transform duration-300">
-                <div className="bg-emerald-500/40 p-3 rounded-full">
-                  <PoundSterling className="h-6 w-6 text-emerald-200" />
-                </div>
-                <div className="flex-1">
-                  <div className="text-2xl font-bold text-emerald-200">£300+</div>
-                  <div className="text-sm text-white/80">Saved vs Private Tutoring</div>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/40 rounded-2xl backdrop-blur-sm hover:scale-105 transition-transform duration-300">
-                <div className="bg-cyan-500/40 p-3 rounded-full">
-                  <Clock className="h-6 w-6 text-cyan-200" />
-                </div>
-                <div className="flex-1">
-                  <div className="text-2xl font-bold text-cyan-200">15+ Hours</div>
-                  <div className="text-sm text-white/80">Saved Weekly</div>
+            {/* Features Section */}
+            <div className="space-y-3 max-w-2xl mx-auto">
+              {/* Feature 1: Predicted Exam Questions */}
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-3 hover:bg-white/10 transition-all duration-300">
+                <div className="flex items-start gap-3">
+                  <div className="bg-green-500/20 p-2 rounded-lg">
+                    <Target className="h-4 w-4 text-green-400" />
+                  </div>
+                  <div className="flex-1 text-center">
+                    <div className="flex items-center justify-center gap-2 mb-1">
+                      <h3 className="font-semibold text-white text-sm">Predicted 2026 Exam Questions</h3>
+                      <Badge className="bg-green-500/20 text-green-300 text-xs">All specs covered</Badge>
+                    </div>
+                    <p className="text-white/70 text-xs">
+                      Exclusive predictions across AQA, Edexcel, OCR & WJEC — prepare with confidence.
+                    </p>
+                  </div>
                 </div>
               </div>
-              
-              <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-violet-500/20 to-purple-500/20 border border-violet-400/40 rounded-2xl backdrop-blur-sm hover:scale-105 transition-transform duration-300">
-                <div className="bg-violet-500/40 p-3 rounded-full">
-                  <University className="h-6 w-6 text-violet-200" />
-                </div>
-                <div className="flex-1">
-                  <div className="text-2xl font-bold text-violet-200">Grade 9s</div>
-                  <div className="text-sm text-white/80">Target Achievement</div>
-                </div>
-              </div>
-            </div>
 
-            {/* Key Features */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 text-white/90">
-                <Sparkles className="h-5 w-5 text-amber-300" />
-                <span className="font-medium">AI-powered personalized learning paths</span>
+              {/* Feature 2: Predicted Grades */}
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-3 hover:bg-white/10 transition-all duration-300">
+                <div className="flex items-start gap-3">
+                  <div className="bg-purple-500/20 p-2 rounded-lg">
+                    <TrendingUp className="h-4 w-4 text-purple-400" />
+                  </div>
+                  <div className="flex-1 text-center">
+                    <div className="flex items-center justify-center gap-2 mb-1">
+                      <h3 className="font-semibold text-white text-sm">Predicted Grades</h3>
+                      <Badge className="bg-purple-500/20 text-purple-300 text-xs">92% accuracy</Badge>
+                    </div>
+                    <p className="text-white/70 text-xs">
+                      Instantly see your child's projected results and track progress towards Grade 9s.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center gap-3 text-white/90">
-                <Zap className="h-5 w-5 text-cyan-300" />
-                <span className="font-medium">Instant note generation & summarization</span>
-              </div>
-              <div className="flex items-center gap-3 text-white/90">
-                <GraduationCap className="h-5 w-5 text-emerald-300" />
-                <span className="font-medium">Grade prediction & exam preparation</span>
+
+              {/* Feature 3: Revision Notebook */}
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-3 hover:bg-white/10 transition-all duration-300">
+                <div className="flex items-start gap-3">
+                  <div className="bg-teal-500/20 p-2 rounded-lg">
+                    <BookOpen className="h-4 w-4 text-teal-400" />
+                  </div>
+                  <div className="flex-1 text-center">
+                    <div className="flex items-center justify-center gap-2 mb-1">
+                      <h3 className="font-semibold text-white text-sm">Revision Notebook</h3>
+                      <Badge className="bg-teal-500/20 text-teal-300 text-xs">Worth £300+ in tutoring</Badge>
+                    </div>
+                    <p className="text-white/70 text-xs">
+                      Smart, organised notes that save 15+ study hours weekly — simplifying revision.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Right Section - Pricing & CTA */}
-          <div className="w-80 bg-gradient-to-br from-violet-600/30 to-rose-600/30 backdrop-blur-sm border-l border-white/20 flex flex-col justify-center p-8 space-y-6">
-            <div className="text-center space-y-4">
-              <div className="bg-gradient-to-r from-amber-400/20 to-rose-400/20 border-2 border-amber-400/50 rounded-2xl p-6 backdrop-blur-sm">
-                <div className="space-y-3">
-                  <div className="flex items-center justify-center gap-2">
-                    <span className="text-lg text-white/60 line-through">£19.99</span>
-                    <span className="text-3xl font-bold bg-gradient-to-r from-amber-300 to-rose-300 bg-clip-text text-transparent">£9.99</span>
-                  </div>
-                  <p className="text-lg font-semibold text-amber-300">🔥 50% OFF Launch Offer</p>
-                  <p className="text-white/90 text-sm">Less than one tutoring session. Lifetime impact.</p>
-                </div>
-              </div>
-              
-              <Button 
-                onClick={handleUpgrade}
-                className="w-full bg-gradient-to-r from-amber-500 via-rose-500 to-violet-500 hover:from-amber-600 hover:via-rose-600 hover:to-violet-600 text-white font-bold py-4 px-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 text-lg border-2 border-white/20"
-              >
-                ✨ Get Premium Access Now
-              </Button>
+          {/* Bottom Section */}
+          <div className="text-center space-y-3 border-t border-white/10 pt-4">
+            <p className="text-yellow-300 font-medium italic text-sm flex items-center justify-center gap-2">
+              ⏳ Limited time only — lock in this special offer today.
+            </p>
+            <div className="flex items-center justify-center gap-2 text-white/60 text-xs">
+              <Shield className="h-3 w-3" />
+              <span>Cancel anytime, no hidden fees.</span>
             </div>
-
-            <div className="text-center space-y-3 border-t border-white/20 pt-6">
-              <p className="text-xs text-white/60">
-                ✓ Cancel anytime • ✓ 30-day guarantee • ✓ Instant access
-              </p>
-              <Button 
-                onClick={onClose}
-                variant="ghost"
-                className="text-white/50 hover:text-white/70 hover:bg-white/10 text-sm"
-              >
-                Maybe later
-              </Button>
-            </div>
+            
+            <Button 
+              onClick={onClose}
+              variant="ghost"
+              className="text-white/60 hover:text-white/80 hover:bg-white/5 py-1 text-xs"
+            >
+              Maybe later
+            </Button>
           </div>
         </div>
       </DialogContent>
