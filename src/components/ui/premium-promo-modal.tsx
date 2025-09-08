@@ -4,7 +4,7 @@ import {
   DialogContent,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Crown, PoundSterling, Clock, GraduationCap, Sparkles, Zap, University } from "lucide-react";
+import { PoundSterling, Clock, GraduationCap, Sparkles, Zap, University } from "lucide-react";
 
 interface PremiumPromoModalProps {
   isOpen: boolean;
@@ -29,11 +29,6 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
         <div className="relative z-10 p-6 space-y-6">
           {/* Top Section - Premium headline */}
           <div className="text-center space-y-3">
-            <div className="flex justify-center">
-              <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-3 rounded-full shadow-lg">
-                <Crown className="h-8 w-8 text-white" />
-              </div>
-            </div>
             <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-yellow-300 via-orange-300 to-yellow-400 bg-clip-text text-transparent leading-tight">
               👑 Mentiora Premium
             </h1>
@@ -62,6 +57,16 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
             <p className="text-lg font-semibold text-white/90">
               "Less than one tutoring session. Lifetime impact on their future."
             </p>
+            
+            <Button 
+              onClick={handleUpgrade}
+              className="w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-600 hover:from-yellow-600 hover:via-orange-600 hover:to-yellow-700 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-orange-500/25 transform hover:scale-105 transition-all duration-300 text-xl relative overflow-hidden group border-0 mt-4"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000" />
+              <span className="relative flex items-center justify-center gap-2">
+                🚀 Invest in Their Future - Start Now
+              </span>
+            </Button>
           </div>
 
           {/* Concrete Benefits - What Parents Get */}
@@ -131,15 +136,6 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
               <p className="text-sm text-white/70">Less than one tutoring session. Better results guaranteed.</p>
             </div>
 
-            <Button 
-              onClick={handleUpgrade}
-              className="w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-600 hover:from-yellow-600 hover:via-orange-600 hover:to-yellow-700 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-orange-500/25 transform hover:scale-105 transition-all duration-300 text-xl relative overflow-hidden group border-0"
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000" />
-              <span className="relative flex items-center justify-center gap-2">
-                🚀 Invest in Their Future - Start Now
-              </span>
-            </Button>
           </div>
 
           {/* Footer Section - Urgency + Reassurance */}
