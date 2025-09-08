@@ -42,7 +42,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
           {/* Offer Area (30%) */}
           <div className="h-[30%] flex items-center justify-center px-6">
-            <div className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-sm border border-white/20 rounded-xl p-6 relative shadow-2xl w-full max-w-md">
+            <div className="bg-gradient-to-br from-white/20 via-white/15 to-white/10 backdrop-blur-md border border-white/30 rounded-xl p-6 relative shadow-2xl w-full max-w-md">
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                 <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-bold px-4 py-1 text-sm animate-pulse shadow-lg">
                   Limited Time Offer
