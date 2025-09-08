@@ -30,7 +30,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           {/* Top Section - Premium headline */}
           <div className="text-center space-y-3">
             <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-yellow-300 via-orange-300 to-yellow-400 bg-clip-text text-transparent leading-tight">
-              👑 Mentiora Premium
+              👑 Mentiora Premium 👑
             </h1>
             <h2 className="text-xl md:text-2xl font-bold text-white/95">
               Secure Their Academic Future
