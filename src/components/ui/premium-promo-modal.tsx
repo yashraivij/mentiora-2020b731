@@ -40,15 +40,85 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
             <h2 className="text-xl md:text-2xl font-bold text-white/95">
               Secure Their Academic Future
             </h2>
-            <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
-              "Give your child the competitive edge to achieve Grade 9s and win a place at top universities — for less than the cost of a single tutoring session."
+          </div>
+
+          {/* Investment Value - Front and Center */}
+          <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border-2 border-green-400/50 rounded-3xl p-6 text-center">
+            <h3 className="text-2xl font-black text-green-300 mb-4">💰 Your Investment Returns</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div className="bg-white/10 rounded-2xl p-4">
+                <div className="text-3xl font-black text-green-400">£300+</div>
+                <div className="text-sm text-white/80">Saved vs Tutoring</div>
+              </div>
+              <div className="bg-white/10 rounded-2xl p-4">
+                <div className="text-3xl font-black text-blue-400">15+</div>
+                <div className="text-sm text-white/80">Hours Saved Weekly</div>
+              </div>
+              <div className="bg-white/10 rounded-2xl p-4">
+                <div className="text-3xl font-black text-purple-400">Grade 9s</div>
+                <div className="text-sm text-white/80">+ University Place</div>
+              </div>
+            </div>
+            <p className="text-lg font-semibold text-white/90">
+              "Less than one tutoring session. Lifetime impact on their future."
             </p>
           </div>
 
-          {/* Offer Section - Center focus */}
+          {/* Concrete Benefits - What Parents Get */}
+          <div className="space-y-4">
+            <h3 className="text-2xl font-bold text-center text-white/95">🎯 What Your Child Gets</h3>
+            <div className="grid grid-cols-1 gap-4">
+              <div className="bg-white/10 backdrop-blur-sm border border-green-400/30 rounded-2xl p-5 space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="bg-green-500/30 p-3 rounded-full">
+                    <PoundSterling className="h-6 w-6 text-green-400" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-lg font-bold text-white">Save £300+ on Tutoring Costs</h4>
+                    <p className="text-sm text-white/80">Replace expensive 1-on-1 tutoring with AI-powered tools that deliver better results for a fraction of the cost.</p>
+                  </div>
+                  <div className="bg-green-500/20 border border-green-400/30 rounded-full px-3 py-1">
+                    <span className="text-xs font-bold text-green-300">£300+ SAVED</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-sm border border-blue-400/30 rounded-2xl p-5 space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="bg-blue-500/30 p-3 rounded-full">
+                    <Clock className="h-6 w-6 text-blue-400" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-lg font-bold text-white">Get Back 15+ Hours Weekly</h4>
+                    <p className="text-sm text-white/80">Smart study plans, instant notes, and targeted practice mean your child studies smarter, not harder.</p>
+                  </div>
+                  <div className="bg-blue-500/20 border border-blue-400/30 rounded-full px-3 py-1">
+                    <span className="text-xs font-bold text-blue-300">15+ HOURS</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-sm border border-purple-400/30 rounded-2xl p-5 space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="bg-purple-500/30 p-3 rounded-full">
+                    <University className="h-6 w-6 text-purple-400" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-lg font-bold text-white">Secure University Place</h4>
+                    <p className="text-sm text-white/80">2026 exam predictions, grade forecasting, and structured revision designed to achieve Grade 9s and Russell Group admission.</p>
+                  </div>
+                  <div className="bg-purple-500/20 border border-purple-400/30 rounded-full px-3 py-1">
+                    <span className="text-xs font-bold text-purple-300">UNI READY</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Offer Section */}
           <div className="bg-white/10 backdrop-blur-sm border border-yellow-400/30 rounded-3xl p-6 text-center space-y-4">
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500/30 to-orange-500/30 border border-red-400/50 rounded-full px-4 py-2">
-              <span className="text-lg font-bold text-yellow-300">🔥 Limited Time Offer</span>
+              <span className="text-lg font-bold text-yellow-300">🔥 Limited Time Investment</span>
             </div>
             
             <div className="space-y-2">
@@ -57,8 +127,8 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                 <span className="text-4xl font-black text-yellow-400">£9.99</span>
                 <span className="text-xl text-white/80">/ month</span>
               </div>
-              <p className="text-lg font-semibold text-orange-300">Save 50% — First 3 Months</p>
-              <p className="text-sm text-white/70">Smarter, more affordable than tutoring.</p>
+              <p className="text-lg font-semibold text-orange-300">50% OFF — Lock in this price today</p>
+              <p className="text-sm text-white/70">Less than one tutoring session. Better results guaranteed.</p>
             </div>
 
             <Button 
@@ -67,79 +137,28 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
             >
               <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000" />
               <span className="relative flex items-center justify-center gap-2">
-                Start Free Trial
+                🚀 Invest in Their Future - Start Now
               </span>
             </Button>
-          </div>
-
-          {/* Feature Section - 3 rounded cards */}
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-center text-white/95">✨ Why Parents Choose Premium</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 space-y-3 hover:bg-white/15 transition-all duration-300">
-                <div className="flex items-center gap-3">
-                  <div className="bg-green-500/20 p-3 rounded-full">
-                    <PoundSterling className="h-6 w-6 text-green-400" />
-                  </div>
-                  <h4 className="text-lg font-bold text-white">💷 Save Money</h4>
-                </div>
-                <p className="text-sm text-white/80 leading-relaxed">
-                  Cut tutoring costs by over £300 while unlocking tools proven to raise grades.
-                </p>
-                <div className="inline-block bg-green-500/20 border border-green-400/30 rounded-full px-3 py-1">
-                  <span className="text-xs font-semibold text-green-300">Worth £300+ in tutoring</span>
-                </div>
-              </div>
-
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 space-y-3 hover:bg-white/15 transition-all duration-300">
-                <div className="flex items-center gap-3">
-                  <div className="bg-blue-500/20 p-3 rounded-full">
-                    <Clock className="h-6 w-6 text-blue-400" />
-                  </div>
-                  <h4 className="text-lg font-bold text-white">⏳ Save Time</h4>
-                </div>
-                <p className="text-sm text-white/80 leading-relaxed">
-                  Your child gets back 15+ study hours weekly with smart notes, predictions, and organised revision.
-                </p>
-                <div className="inline-block bg-blue-500/20 border border-blue-400/30 rounded-full px-3 py-1">
-                  <span className="text-xs font-semibold text-blue-300">15+ hours weekly saved</span>
-                </div>
-              </div>
-
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 space-y-3 hover:bg-white/15 transition-all duration-300">
-                <div className="flex items-center gap-3">
-                  <div className="bg-purple-500/20 p-3 rounded-full">
-                    <University className="h-6 w-6 text-purple-400" />
-                  </div>
-                  <h4 className="text-lg font-bold text-white">🎓 Secure Their Future</h4>
-                </div>
-                <p className="text-sm text-white/80 leading-relaxed">
-                  Exclusive 2026 exam predictions, grade forecasts, and a structured revision notebook — designed to turn effort into Grade 9s, top university places, and future career success.
-                </p>
-                <div className="inline-block bg-purple-500/20 border border-purple-400/30 rounded-full px-3 py-1">
-                  <span className="text-xs font-semibold text-purple-300">Pathway to University</span>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Footer Section - Urgency + Reassurance */}
           <div className="text-center space-y-3">
             <div className="bg-red-500/10 border border-red-400/30 rounded-2xl p-4">
-              <h4 className="text-lg font-bold text-red-300 mb-2">⏳ Act Now</h4>
+              <h4 className="text-lg font-bold text-red-300 mb-2">⏳ Limited Time Only</h4>
               <p className="text-sm text-white/80">
-                "Limited time only — lock in this special price today."
+                "This special price expires soon. Secure their academic future today."
               </p>
             </div>
             <p className="text-sm text-white/60">
-              Cancel anytime. No hidden fees. Invest now in their future success.
+              Cancel anytime • No hidden fees • 30-day money-back guarantee
             </p>
             <Button 
               onClick={onClose}
               variant="ghost"
               className="text-white/50 hover:text-white/70 hover:bg-white/5 py-2 text-sm"
             >
-              Maybe later
+              I'll think about it
             </Button>
           </div>
         </div>
