@@ -20,24 +20,24 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-[900px] rounded-3xl p-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 border-0 text-white shadow-2xl mx-auto overflow-hidden">
+      <DialogContent className="w-[95vw] max-w-[1100px] max-h-[90vh] rounded-3xl p-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 border-0 text-white shadow-2xl mx-auto overflow-y-auto">
         {/* Premium background animations */}
         <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 via-orange-500/5 to-purple-500/10 animate-pulse" />
         <div className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-yellow-400/20 to-orange-400/15 rounded-full blur-3xl animate-bounce" style={{ animationDuration: '4s' }} />
         <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-orange-400/20 to-yellow-400/15 rounded-full blur-2xl animate-bounce" style={{ animationDuration: '5s', animationDelay: '1s' }} />
 
-        <div className="relative z-10 p-8 space-y-8">
+        <div className="relative z-10 p-6 space-y-6">
           {/* Top Section - Premium headline */}
-          <div className="text-center space-y-4">
+          <div className="text-center space-y-3">
             <div className="flex justify-center">
               <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-3 rounded-full shadow-lg">
                 <Crown className="h-8 w-8 text-white" />
               </div>
             </div>
-            <h1 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-yellow-300 via-orange-300 to-yellow-400 bg-clip-text text-transparent leading-tight">
+            <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-yellow-300 via-orange-300 to-yellow-400 bg-clip-text text-transparent leading-tight">
               👑 Mentiora Premium
             </h1>
-            <h2 className="text-2xl md:text-3xl font-bold text-white/95">
+            <h2 className="text-xl md:text-2xl font-bold text-white/95">
               Secure Their Academic Future
             </h2>
             <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
