@@ -31,25 +31,21 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           {/* Header & Offer Section */}
           <div className="p-6 space-y-6">
             {/* Header Section */}
-            <div className="text-center space-y-3">
-              <div className="flex justify-center mb-3">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full blur-lg animate-pulse" />
-                  <div className="relative bg-gradient-to-br from-yellow-400 to-orange-500 p-3 rounded-full shadow-2xl">
-                    <Crown className="h-6 w-6 text-white" />
-                  </div>
-                </div>
+            <div className="text-center space-y-4">
+              <div className="flex justify-center items-center gap-2 mb-2">
+                <Crown className="h-7 w-7 text-yellow-400" />
+                <h1 className="text-2xl lg:text-3xl font-extrabold bg-gradient-to-r from-yellow-200 via-orange-200 to-yellow-300 bg-clip-text text-transparent">
+                  Mentiora Premium
+                </h1>
+                <Crown className="h-7 w-7 text-yellow-400" />
               </div>
               
-              <div className="space-y-2">
-                <h1 className="text-2xl lg:text-3xl font-extrabold bg-gradient-to-r from-yellow-200 via-orange-200 to-yellow-300 bg-clip-text text-transparent">
-                  Mentiora Premium 👑
-                </h1>
-                <h2 className="text-base lg:text-lg font-bold text-white/95">
+              <div className="space-y-3">
+                <h2 className="text-lg lg:text-xl font-bold text-white/95">
                   Secure Their Academic Future
                 </h2>
-                <p className="text-white/80 text-sm leading-relaxed max-w-sm mx-auto">
-                  Help your child achieve Grade 9s and win a place at top universities.
+                <p className="text-white/85 text-sm leading-relaxed max-w-md mx-auto">
+                  Help your child achieve top grades, save valuable study time, and unlock opportunities at leading universities with our premium academic tools.
                 </p>
               </div>
             </div>
@@ -88,57 +84,57 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
           {/* Features Section */}
           <div className="flex-1 p-6 space-y-4">
-            <h3 className="text-center text-base lg:text-lg font-bold text-white mb-4">What's Included:</h3>
+            <h3 className="text-center text-lg font-bold text-white mb-6">What's Included:</h3>
             
-            {/* Feature 1 */}
-            <div className="bg-gradient-to-r from-white/15 via-white/10 to-white/15 backdrop-blur-sm border border-white/25 rounded-xl p-4 hover:bg-white/20 transition-all duration-300 shadow-lg">
+            {/* Feature 1 - Predicted Exam Questions */}
+            <div className="bg-gradient-to-r from-white/15 via-white/10 to-white/15 backdrop-blur-sm border border-white/25 rounded-xl p-5 hover:bg-white/20 transition-all duration-300 shadow-lg">
               <div className="flex items-start gap-4">
-                <div className="bg-gradient-to-br from-green-400/40 to-green-600/30 p-2 rounded-lg shadow-lg flex-shrink-0">
-                  <Target className="h-4 w-4 text-green-200" />
+                <div className="bg-gradient-to-br from-emerald-400/40 to-emerald-600/30 p-3 rounded-lg shadow-lg flex-shrink-0">
+                  <Target className="h-5 w-5 text-emerald-200" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-2">
-                    <h4 className="font-bold text-white text-sm">Predicted Exam Questions</h4>
-                    <Badge className="bg-gradient-to-r from-green-500/40 to-green-400/30 text-green-100 text-xs font-semibold">All specs</Badge>
+                    <h4 className="font-bold text-white text-base">Predicted Exam Questions (2026)</h4>
+                    <Badge className="bg-gradient-to-r from-emerald-500/40 to-emerald-400/30 text-emerald-100 text-xs font-semibold">Covers All Exam Boards</Badge>
                   </div>
                   <p className="text-white/85 text-sm leading-relaxed">
-                    Exclusive predictions across AQA, Edexcel, OCR & WJEC.
+                    Reduce exam stress and boost readiness with exclusive question predictions across AQA, Edexcel, OCR & WJEC specifications.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Feature 2 */}
-            <div className="bg-gradient-to-r from-white/15 via-white/10 to-white/15 backdrop-blur-sm border border-white/25 rounded-xl p-4 hover:bg-white/20 transition-all duration-300 shadow-lg">
+            {/* Feature 2 - Grade Predictions & Study Savings */}
+            <div className="bg-gradient-to-r from-white/15 via-white/10 to-white/15 backdrop-blur-sm border border-white/25 rounded-xl p-5 hover:bg-white/20 transition-all duration-300 shadow-lg">
               <div className="flex items-start gap-4">
-                <div className="bg-gradient-to-br from-purple-400/40 to-purple-600/30 p-2 rounded-lg shadow-lg flex-shrink-0">
-                  <TrendingUp className="h-4 w-4 text-purple-200" />
+                <div className="bg-gradient-to-br from-violet-400/40 to-violet-600/30 p-3 rounded-lg shadow-lg flex-shrink-0">
+                  <TrendingUp className="h-5 w-5 text-violet-200" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-2">
-                    <h4 className="font-bold text-white text-sm">Predicted Grades</h4>
-                    <Badge className="bg-gradient-to-r from-purple-500/40 to-purple-400/30 text-purple-100 text-xs font-semibold">92% accuracy</Badge>
+                    <h4 className="font-bold text-white text-base">Grade Predictions & Study Savings</h4>
+                    <Badge className="bg-gradient-to-r from-violet-500/40 to-violet-400/30 text-violet-100 text-xs font-semibold">Worth £300+ in tutoring</Badge>
                   </div>
                   <p className="text-white/85 text-sm leading-relaxed">
-                    See projected results and track progress towards Grade 9s.
+                    Save hundreds in tutoring costs while your child saves 15+ hours weekly with targeted study insights and grade projections.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Feature 3 */}
-            <div className="bg-gradient-to-r from-white/15 via-white/10 to-white/15 backdrop-blur-sm border border-white/25 rounded-xl p-4 hover:bg-white/20 transition-all duration-300 shadow-lg">
+            {/* Feature 3 - Revision Notebook & Path to Success */}
+            <div className="bg-gradient-to-r from-white/15 via-white/10 to-white/15 backdrop-blur-sm border border-white/25 rounded-xl p-5 hover:bg-white/20 transition-all duration-300 shadow-lg">
               <div className="flex items-start gap-4">
-                <div className="bg-gradient-to-br from-teal-400/40 to-teal-600/30 p-2 rounded-lg shadow-lg flex-shrink-0">
-                  <BookOpen className="h-4 w-4 text-teal-200" />
+                <div className="bg-gradient-to-br from-amber-400/40 to-amber-600/30 p-3 rounded-lg shadow-lg flex-shrink-0">
+                  <BookOpen className="h-5 w-5 text-amber-200" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-2">
-                    <h4 className="font-bold text-white text-sm">Revision Notebook</h4>
-                    <Badge className="bg-gradient-to-r from-teal-500/40 to-teal-400/30 text-teal-100 text-xs font-semibold">£300+ value</Badge>
+                    <h4 className="font-bold text-white text-base">Revision Notebook & Path to Success</h4>
+                    <Badge className="bg-gradient-to-r from-amber-500/40 to-amber-400/30 text-amber-100 text-xs font-semibold">Future-ready learning</Badge>
                   </div>
                   <p className="text-white/85 text-sm leading-relaxed">
-                    Smart notes that save 15+ study hours weekly.
+                    Organised study materials that lead to higher grades, university places, and career opportunities at top institutions.
                   </p>
                 </div>
               </div>
