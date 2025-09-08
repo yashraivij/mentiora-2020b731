@@ -21,179 +21,218 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-[1200px] max-h-[85vh] rounded-xl p-0 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:from-slate-900 dark:via-slate-800 dark:to-blue-950/30 border border-slate-200 dark:border-slate-700 shadow-2xl overflow-y-auto">
-        {/* Subtle Premium Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/3 via-purple-500/2 to-emerald-500/3" />
-        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/8 to-purple-500/6 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-emerald-500/6 to-blue-500/4 rounded-full blur-3xl" />
+      <DialogContent className="w-[95vw] max-w-[1400px] max-h-[90vh] rounded-2xl p-0 bg-gradient-to-br from-background via-primary/5 to-accent/10 border-2 border-primary/20 shadow-2xl overflow-y-auto">
+        {/* Exclusive Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 via-blue-500/5 to-emerald-500/10" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-violet-500/20 to-purple-500/15 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-emerald-500/15 to-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-r from-purple-500/8 to-pink-500/8 rounded-full blur-3xl animate-pulse delay-500" />
 
-        <div className="relative z-10 p-8">
-          {/* Refined Header with Immediate Offer */}
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-3 mb-4 px-6 py-2 rounded-full bg-gradient-to-r from-slate-100 to-blue-50 dark:from-slate-800 dark:to-blue-950 border border-slate-200 dark:border-slate-700">
-              <Crown className="h-4 w-4 text-blue-600" />
-              <span className="text-xs font-semibold text-slate-600 dark:text-slate-400 tracking-wider uppercase">Premium Access</span>
+        <div className="relative z-10 p-12">
+          {/* Exclusive Header with Immediate Offer */}
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-4 mb-6 px-10 py-5 rounded-full bg-gradient-to-r from-violet-600/30 to-purple-600/30 border-2 border-violet-400/50 backdrop-blur-sm shadow-xl">
+              <Crown className="h-7 w-7 text-violet-400" />
+              <span className="text-base font-black text-violet-200 tracking-widest uppercase">Exclusive Invitation</span>
+              <Crown className="h-7 w-7 text-purple-400" />
             </div>
             
-            {/* Elegant Limited Offer */}
-            <div className="mb-6 p-6 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20 border border-orange-200 dark:border-orange-800 rounded-xl backdrop-blur-sm shadow-lg relative">
-              <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
-                <Badge className="bg-gradient-to-r from-red-500 to-orange-500 text-white font-medium px-4 py-1 text-sm shadow-md">
-                  Limited Time: 50% Off
+            {/* Immediate Limited Offer */}
+            <div className="mb-8 p-8 bg-gradient-to-br from-orange-500/20 to-red-500/20 border-3 border-orange-400/60 rounded-2xl backdrop-blur-sm shadow-2xl relative">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white font-black px-8 py-3 text-lg shadow-xl animate-bounce border-2 border-white">
+                  🔥 FLASH SALE - 50% OFF
                 </Badge>
               </div>
-              <div className="pt-2 text-center">
-                <p className="text-sm font-medium text-orange-700 dark:text-orange-300 mb-3">Exclusive Offer for New Members</p>
-                <div className="flex items-center justify-center gap-6 mb-3">
+              <div className="pt-4 text-center">
+                <p className="text-xl font-bold text-orange-700 dark:text-orange-300 mb-4">Exclusive Access - Limited Time Only</p>
+                <div className="flex items-center justify-center gap-8 mb-4">
                   <div className="text-center">
-                    <p className="text-xs text-slate-500">Regular Price</p>
-                    <span className="text-xl text-red-500 line-through font-semibold">£19.99</span>
+                    <p className="text-sm text-orange-600">Was</p>
+                    <span className="text-4xl text-red-600 line-through font-black">£19.99</span>
                   </div>
                   <div className="text-center">
-                    <p className="text-xs text-slate-500">Your Price</p>
-                    <span className="text-4xl font-bold text-emerald-600">£9.99</span>
-                    <p className="text-sm text-slate-600">/month</p>
+                    <p className="text-sm text-orange-600">Now Only</p>
+                    <span className="text-7xl font-black bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent animate-pulse">£9.99</span>
+                    <p className="text-lg text-orange-700">/month</p>
                   </div>
                 </div>
-                <p className="text-sm text-orange-600 dark:text-orange-400">First 3 months at this exclusive rate</p>
+                <p className="text-lg font-bold text-orange-800 dark:text-orange-200">First 3 months at this exclusive rate</p>
               </div>
             </div>
 
-            <h1 className="text-3xl font-bold text-slate-800 dark:text-slate-200 mb-3 tracking-tight">
-              Premium Academic Support
+            <h1 className="text-6xl font-black bg-gradient-to-r from-violet-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent mb-6 tracking-tight">
+              Elite Academic Advantage
             </h1>
-            <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              Give your child the advantage they need with AI-powered learning tools designed for academic excellence.
+            <p className="text-2xl text-foreground max-w-4xl mx-auto leading-relaxed font-medium">
+              Join the exclusive circle of families who've secured their child's academic success. 
+              <span className="font-black bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent"> Elite tools. Elite results.</span>
             </p>
           </div>
 
-          {/* Sophisticated Premium Features */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-center mb-6 text-slate-800 dark:text-slate-200">
-              What's Included in Premium
+          {/* Premium Features Showcase */}
+          <div className="mb-12">
+            <h2 className="text-4xl font-black text-center mb-2 bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
+              Exclusive Premium Arsenal
             </h2>
+            <p className="text-center text-xl text-muted-foreground mb-10">What elite families get access to</p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Premium Feature 1 */}
-              <div className="p-5 rounded-lg bg-white/60 dark:bg-slate-800/60 border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg mt-1">
-                    <Brain className="h-5 w-5 text-blue-600" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Elite Feature 1 */}
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                <div className="relative p-8 rounded-2xl bg-gradient-to-br from-violet-50/90 to-purple-50/80 dark:from-violet-950/50 dark:to-purple-950/40 border-2 border-violet-400/40 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-4 bg-gradient-to-br from-violet-600 to-purple-600 rounded-xl shadow-lg group-hover:animate-pulse">
+                      <Brain className="h-8 w-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-black text-violet-700 dark:text-violet-300">AI Exam Oracle</h3>
+                      <p className="text-violet-600 dark:text-violet-400 font-semibold">2026 Question Predictions</p>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-1">Exam Predictions</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                      AI analysis of exam patterns to predict likely questions for strategic preparation.
-                    </p>
-                    <Badge variant="secondary" className="mt-2 text-xs">2026 Ready</Badge>
-                  </div>
-                </div>
-              </div>
-
-              {/* Premium Feature 2 */}
-              <div className="p-5 rounded-lg bg-white/60 dark:bg-slate-800/60 border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-emerald-100 dark:bg-emerald-900/50 rounded-lg mt-1">
-                    <Zap className="h-5 w-5 text-emerald-600" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-1">Smart Study Tools</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                      Automated note generation and revision schedules that save 15+ hours weekly.
-                    </p>
-                    <Badge variant="secondary" className="mt-2 text-xs">Time Saver</Badge>
+                  <p className="text-violet-700 dark:text-violet-300 text-lg leading-relaxed">
+                    Our AI analyzes years of exam patterns to predict exactly what questions will appear. 
+                    <span className="font-bold">Give your child the ultimate advantage.</span>
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <Badge className="bg-violet-500/20 text-violet-700 border border-violet-400/30">Predictive Analytics</Badge>
+                    <Badge className="bg-violet-500/20 text-violet-700 border border-violet-400/30">Strategic Prep</Badge>
                   </div>
                 </div>
               </div>
 
-              {/* Premium Feature 3 */}
-              <div className="p-5 rounded-lg bg-white/60 dark:bg-slate-800/60 border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-purple-100 dark:bg-purple-900/50 rounded-lg mt-1">
-                    <Trophy className="h-5 w-5 text-purple-600" />
+              {/* Elite Feature 2 */}
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                <div className="relative p-8 rounded-2xl bg-gradient-to-br from-emerald-50/90 to-green-50/80 dark:from-emerald-950/50 dark:to-green-950/40 border-2 border-emerald-400/40 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-4 bg-gradient-to-br from-emerald-600 to-green-600 rounded-xl shadow-lg group-hover:animate-pulse">
+                      <Zap className="h-8 w-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-black text-emerald-700 dark:text-emerald-300">Lightning Study System</h3>
+                      <p className="text-emerald-600 dark:text-emerald-400 font-semibold">15+ Hours Saved Weekly</p>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-1">Grade Forecasting</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                      Real-time performance tracking with predictive grade analysis and improvement plans.
-                    </p>
-                    <Badge variant="secondary" className="mt-2 text-xs">Success Tracking</Badge>
+                  <p className="text-emerald-700 dark:text-emerald-300 text-lg leading-relaxed">
+                    AI-generated notes, summaries, and revision schedules that cut study time while 
+                    <span className="font-bold"> maximizing retention and results.</span>
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <Badge className="bg-emerald-500/20 text-emerald-700 border border-emerald-400/30">Time Optimization</Badge>
+                    <Badge className="bg-emerald-500/20 text-emerald-700 border border-emerald-400/30">Smart Automation</Badge>
                   </div>
                 </div>
               </div>
 
-              {/* Premium Feature 4 */}
-              <div className="p-5 rounded-lg bg-white/60 dark:bg-slate-800/60 border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-orange-100 dark:bg-orange-900/50 rounded-lg mt-1">
-                    <GraduationCap className="h-5 w-5 text-orange-600" />
+              {/* Elite Feature 3 */}
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                <div className="relative p-8 rounded-2xl bg-gradient-to-br from-blue-50/90 to-cyan-50/80 dark:from-blue-950/50 dark:to-cyan-950/40 border-2 border-blue-400/40 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-4 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-xl shadow-lg group-hover:animate-pulse">
+                      <Trophy className="h-8 w-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-black text-blue-700 dark:text-blue-300">Grade Guarantee System</h3>
+                      <p className="text-blue-600 dark:text-blue-400 font-semibold">Performance Forecasting</p>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-1">University Guidance</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                      Personalized pathways to top universities with application strategy and preparation.
-                    </p>
-                    <Badge variant="secondary" className="mt-2 text-xs">Future Ready</Badge>
+                  <p className="text-blue-700 dark:text-blue-300 text-lg leading-relaxed">
+                    Real-time grade predictions and performance analytics that ensure your child stays on track for 
+                    <span className="font-bold">Grade 9s and university success.</span>
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <Badge className="bg-blue-500/20 text-blue-700 border border-blue-400/30">Grade Tracking</Badge>
+                    <Badge className="bg-blue-500/20 text-blue-700 border border-blue-400/30">Success Metrics</Badge>
+                  </div>
+                </div>
+              </div>
+
+              {/* Elite Feature 4 */}
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-pink-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                <div className="relative p-8 rounded-2xl bg-gradient-to-br from-orange-50/90 to-pink-50/80 dark:from-orange-950/50 dark:to-pink-950/40 border-2 border-orange-400/40 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-4 bg-gradient-to-br from-orange-600 to-pink-600 rounded-xl shadow-lg group-hover:animate-pulse">
+                      <Star className="h-8 w-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-black text-orange-700 dark:text-orange-300">University Pathway</h3>
+                      <p className="text-orange-600 dark:text-orange-400 font-semibold">Elite Institution Access</p>
+                    </div>
+                  </div>
+                  <p className="text-orange-700 dark:text-orange-300 text-lg leading-relaxed">
+                    Personalized strategies for Russell Group applications, with 
+                    <span className="font-bold"> 85% of our premium users securing top university places.</span>
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <Badge className="bg-orange-500/20 text-orange-700 border border-orange-400/30">Elite Access</Badge>
+                    <Badge className="bg-orange-500/20 text-orange-700 border border-orange-400/30">Success Rate</Badge>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Smart Investment Choice - Keep as user liked it */}
-          <div className="mb-8">
-            <div className="max-w-4xl mx-auto p-6 rounded-xl bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/20 dark:to-green-950/20 border border-emerald-200 dark:border-emerald-800 shadow-sm">
-              <h2 className="text-xl font-semibold text-center mb-6 text-emerald-800 dark:text-emerald-200">Smart Investment Choice</h2>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="text-center p-4 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg">
-                  <h3 className="text-base font-semibold text-red-700 dark:text-red-300 mb-2">Traditional Tutoring</h3>
-                  <div className="text-2xl font-bold text-red-600 mb-1">£300+</div>
-                  <div className="text-sm text-red-600">per month</div>
-                  <div className="mt-3 space-y-1 text-xs text-red-700 dark:text-red-300">
+          {/* Smart Investment vs Tutoring */}
+          <div className="mb-12">
+            <div className="max-w-4xl mx-auto p-10 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-green-500/10 border-2 border-emerald-400/40 shadow-2xl">
+              <h2 className="text-3xl font-black text-center mb-8 text-emerald-700 dark:text-emerald-300">Smart Investment Choice</h2>
+              <div className="grid grid-cols-2 gap-8">
+                <div className="text-center p-6 bg-red-500/10 border-2 border-red-400/30 rounded-xl">
+                  <h3 className="text-xl font-bold text-red-700 mb-4">Traditional Tutoring</h3>
+                  <div className="text-4xl font-black text-red-600 mb-2">£300+</div>
+                  <div className="text-red-600 font-medium">per month</div>
+                  <div className="mt-4 space-y-2 text-sm text-red-700">
                     <p>• Limited availability</p>
                     <p>• Travel time required</p>
-                    <p>• One-size-fits-all</p>
+                    <p>• One-size-fits-all approach</p>
                   </div>
                 </div>
-                <div className="text-center p-4 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 rounded-lg">
-                  <h3 className="text-base font-semibold text-emerald-700 dark:text-emerald-300 mb-2">Mentiora Premium</h3>
-                  <div className="text-2xl font-bold text-emerald-600 mb-1">£9.99</div>
-                  <div className="text-sm text-emerald-600">per month</div>
-                  <div className="mt-3 space-y-1 text-xs text-emerald-700 dark:text-emerald-300">
+                <div className="text-center p-6 bg-emerald-500/10 border-2 border-emerald-400/30 rounded-xl">
+                  <h3 className="text-xl font-bold text-emerald-700 mb-4">Mentiora Premium</h3>
+                  <div className="text-4xl font-black text-emerald-600 mb-2">£9.99</div>
+                  <div className="text-emerald-600 font-medium">per month</div>
+                  <div className="mt-4 space-y-2 text-sm text-emerald-700">
                     <p>• 24/7 AI availability</p>
                     <p>• Instant access anywhere</p>
-                    <p>• Personalized learning</p>
+                    <p>• Personalized to your child</p>
                   </div>
                 </div>
               </div>
-              <div className="text-center mt-4 p-3 bg-gradient-to-r from-emerald-100 to-green-100 dark:from-emerald-900/30 dark:to-green-900/30 border border-emerald-300 dark:border-emerald-700 rounded-lg">
-                <p className="text-lg font-semibold text-emerald-800 dark:text-emerald-200">Save £290+ Every Month</p>
-                <p className="text-sm text-emerald-700 dark:text-emerald-300">Better results, smarter investment</p>
+              <div className="text-center mt-8 p-6 bg-gradient-to-r from-emerald-500/20 to-green-500/20 border-2 border-emerald-400/50 rounded-xl">
+                <p className="text-2xl font-black text-emerald-700 dark:text-emerald-300">Save £290+ Every Month</p>
+                <p className="text-emerald-600 dark:text-emerald-400 mt-2">Better results, fraction of the cost</p>
               </div>
             </div>
           </div>
 
-          {/* Refined CTA */}
-          <div className="max-w-xl mx-auto">
-            <div className="p-6 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow-lg">
-              <div className="text-center space-y-4">
+          {/* Exclusive CTA */}
+          <div className="max-w-2xl mx-auto">
+            <div className="p-12 rounded-2xl bg-gradient-to-br from-white/95 to-violet-50/90 dark:from-gray-900/95 dark:to-violet-950/40 backdrop-blur-sm relative shadow-2xl border-2 border-violet-400/50">
+              <div className="text-center space-y-8">
                 <Button 
                   onClick={handleUpgrade}
-                  className="w-full h-11 text-base font-medium bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700 text-white shadow-md hover:shadow-lg transition-all duration-300"
+                  className="w-full h-16 text-xl font-black bg-gradient-to-r from-violet-600 via-purple-600 to-emerald-600 hover:from-violet-700 hover:via-purple-700 hover:to-emerald-700 text-white border-2 border-white/20 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 animate-pulse"
                 >
-                  Start Your 7-Day Free Trial
+                  Claim Your Exclusive Access - Start Free Trial
                 </Button>
                 
-                <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-                  <Shield className="h-4 w-4 text-emerald-600" />
-                  <span>No commitment • Full access • Cancel anytime</span>
+                <div className="flex items-center justify-center gap-3 text-lg font-medium text-muted-foreground">
+                  <Shield className="h-6 w-6 text-emerald-600" />
+                  <span>7-Day Free Trial • Elite Access • Cancel Anytime</span>
                 </div>
-                
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  Join thousands of families investing in their child's academic success
-                </p>
               </div>
             </div>
+          </div>
+
+          {/* Elite Trust */}
+          <div className="text-center mt-10 pt-8 border-t-2 border-gradient-to-r from-violet-400/30 to-purple-400/30">
+            <p className="text-lg font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
+              Join the exclusive circle of families securing academic excellence
+            </p>
           </div>
         </div>
       </DialogContent>
