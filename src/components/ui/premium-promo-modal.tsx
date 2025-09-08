@@ -27,7 +27,22 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
         <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-orange-400/20 to-yellow-400/15 rounded-full blur-2xl animate-bounce" style={{ animationDuration: '5s', animationDelay: '1s' }} />
 
         <div className="relative z-10 p-6 space-y-6">
-          {/* CTA Section - Now at the top */}
+          {/* Top Section - Premium headline */}
+          <div className="text-center space-y-3">
+            <div className="flex justify-center">
+              <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-3 rounded-full shadow-lg">
+                <Crown className="h-8 w-8 text-white" />
+              </div>
+            </div>
+            <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-yellow-300 via-orange-300 to-yellow-400 bg-clip-text text-transparent leading-tight">
+              👑 Mentiora Premium
+            </h1>
+            <h2 className="text-xl md:text-2xl font-bold text-white/95">
+              Secure Their Academic Future
+            </h2>
+          </div>
+
+          {/* CTA Section - Below header */}
           <div className="bg-white/10 backdrop-blur-sm border border-yellow-400/30 rounded-3xl p-6 text-center space-y-4">
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500/30 to-orange-500/30 border border-red-400/50 rounded-full px-4 py-2">
               <span className="text-lg font-bold text-yellow-300">🔥 Limited Time Investment</span>
@@ -52,21 +67,6 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                 🚀 Invest in Their Future - Start Now
               </span>
             </Button>
-          </div>
-
-          {/* Top Section - Premium headline */}
-          <div className="text-center space-y-3">
-            <div className="flex justify-center">
-              <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-3 rounded-full shadow-lg">
-                <Crown className="h-8 w-8 text-white" />
-              </div>
-            </div>
-            <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-yellow-300 via-orange-300 to-yellow-400 bg-clip-text text-transparent leading-tight">
-              👑 Mentiora Premium
-            </h1>
-            <h2 className="text-xl md:text-2xl font-bold text-white/95">
-              Secure Their Academic Future
-            </h2>
           </div>
 
           {/* Investment Value - Front and Center */}
