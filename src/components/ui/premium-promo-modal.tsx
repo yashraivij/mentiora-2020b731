@@ -21,15 +21,15 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-[900px] h-[85vh] max-h-[600px] rounded-2xl p-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 border-0 text-white shadow-2xl mx-auto overflow-hidden">
+      <DialogContent className="w-[95vw] max-w-[600px] max-h-[90vh] rounded-2xl p-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 border-0 text-white shadow-2xl mx-auto overflow-hidden">
         {/* Background decorative elements */}
         <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-indigo-500/10" />
         <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-yellow-400/20 to-orange-400/15 rounded-full blur-2xl" />
         <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tl from-yellow-400/15 to-orange-400/10 rounded-full blur-2xl" />
 
-        <div className="relative z-10 h-full flex flex-col lg:flex-row">
-          {/* Left Section - Header & Offer */}
-          <div className="flex-1 p-6 lg:p-8 flex flex-col justify-center space-y-6">
+        <div className="relative z-10 h-full flex flex-col overflow-y-auto">
+          {/* Header & Offer Section */}
+          <div className="p-6 space-y-6">
             {/* Header Section */}
             <div className="text-center space-y-3">
               <div className="flex justify-center mb-3">
@@ -55,7 +55,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
             </div>
 
             {/* Offer Section */}
-            <div className="bg-gradient-to-br from-white/15 via-white/10 to-white/5 backdrop-blur-md border border-white/30 rounded-xl p-5 relative shadow-2xl">
+            <div className="bg-gradient-to-br from-white/15 via-white/10 to-white/5 backdrop-blur-md border border-white/30 rounded-xl p-5 relative shadow-2xl max-w-md mx-auto">
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                 <Badge className="bg-gradient-to-r from-red-500 via-pink-500 to-red-600 text-white font-bold px-3 py-1 text-xs animate-pulse shadow-lg">
                   <Clock className="h-3 w-3 mr-1" />
@@ -86,8 +86,8 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
             </div>
           </div>
 
-          {/* Right Section - Features */}
-          <div className="flex-1 p-6 lg:p-8 flex flex-col justify-center space-y-4">
+          {/* Features Section */}
+          <div className="flex-1 p-6 space-y-4">
             <h3 className="text-center text-base lg:text-lg font-bold text-white mb-4">What's Included:</h3>
             
             {/* Feature 1 */}
