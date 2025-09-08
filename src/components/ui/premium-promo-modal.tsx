@@ -5,7 +5,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Crown, Target, BookOpen, TrendingUp, Clock, Shield } from "lucide-react";
+import { GraduationCap, Clock, DollarSign, Trophy, TrendingUp, CheckCircle2 } from "lucide-react";
 
 interface PremiumPromoModalProps {
   isOpen: boolean;
@@ -21,142 +21,129 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-[900px] rounded-2xl p-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 border-0 text-white shadow-2xl mx-auto overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-indigo-500/10" />
-        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-400/20 to-orange-400/15 rounded-full blur-2xl" />
-        <div className="absolute bottom-0 left-0 w-28 h-28 bg-gradient-to-tl from-yellow-400/15 to-orange-400/10 rounded-full blur-2xl" />
-
-        <div className="relative z-10 p-6 space-y-6">
-          {/* Main Content - Vertical Layout */}
-          <div className="space-y-6">
-            {/* Header & Offer Section */}
-            <div className="text-center space-y-4">
-              <div className="space-y-3">
-                <div className="flex justify-center mb-2">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full blur-md animate-pulse" />
-                    <div className="relative bg-gradient-to-br from-yellow-400 to-orange-500 p-2 rounded-full">
-                      <Crown className="h-6 w-6 text-white" />
-                    </div>
-                  </div>
-                </div>
-                
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-yellow-400 bg-clip-text text-transparent">
-                  Mentiora Premium 👑
-                </h1>
-                <h2 className="text-lg font-semibold text-white">
-                  Secure Their Academic Future
-                </h2>
-                <p className="text-white/80 text-sm leading-relaxed max-w-md mx-auto">
-                  Help your child achieve Grade 9s and win a place at top universities with Mentiora's most powerful tools.
-                </p>
+      <DialogContent className="w-[95vw] max-w-[800px] rounded-3xl p-0 bg-white border-0 shadow-2xl mx-auto overflow-hidden">
+        <div className="p-8 space-y-8">
+          {/* Header */}
+          <div className="text-center space-y-4">
+            <div className="flex justify-center mb-4">
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 rounded-full">
+                <GraduationCap className="h-8 w-8 text-white" />
               </div>
+            </div>
+            
+            <h1 className="text-4xl font-bold text-gray-900">
+              Invest in Your Child's Future
+            </h1>
+            <p className="text-xl text-gray-600 max-w-lg mx-auto leading-relaxed">
+              Give them the tools they need to secure a place at their dream university
+            </p>
+          </div>
 
-              {/* Offer Section */}
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 relative max-w-sm mx-auto">
-                <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
-                  <Badge className="bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold px-3 py-1 text-xs animate-pulse">
-                    <Clock className="h-3 w-3 mr-1" />
-                    LIMITED TIME OFFER
-                  </Badge>
+          {/* Value Proposition Cards */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Time Savings */}
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-2xl p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-green-600 p-2 rounded-lg">
+                  <Clock className="h-5 w-5 text-white" />
                 </div>
-                
-                <div className="text-center space-y-3 mt-2">
-                  <div className="flex items-center justify-center gap-2">
-                    <span className="text-white/60 line-through text-sm">£19.99</span>
-                    <span className="text-2xl font-bold bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-                      £9.99/month
-                    </span>
-                  </div>
-                  <p className="text-white/80 text-xs">
-                    Save 50% for the first 3 months — less than a single tutoring session.
-                  </p>
-                  
-                  <Button 
-                    onClick={handleUpgrade}
-                    className="w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-500 hover:from-yellow-500 hover:via-orange-500 hover:to-yellow-600 text-black font-bold py-3 px-6 rounded-lg shadow-xl hover:shadow-yellow-500/25 transform hover:scale-105 transition-all duration-300"
-                  >
-                    Start Free Trial
-                  </Button>
-                </div>
+                <h3 className="text-xl font-bold text-green-800">Save 15+ Hours Weekly</h3>
+              </div>
+              <p className="text-green-700 mb-4">
+                Our AI-powered revision notes and predicted questions eliminate hours of preparation time, letting your child focus on actual learning.
+              </p>
+              <div className="text-sm text-green-600 font-semibold">
+                Value: £300+ worth of tutoring time saved monthly
               </div>
             </div>
 
-            {/* Features Section */}
-            <div className="space-y-3 max-w-2xl mx-auto">
-              {/* Feature 1: Predicted Exam Questions */}
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-3 hover:bg-white/10 transition-all duration-300">
-                <div className="flex items-start gap-3">
-                  <div className="bg-green-500/20 p-2 rounded-lg">
-                    <Target className="h-4 w-4 text-green-400" />
-                  </div>
-                  <div className="flex-1 text-center">
-                    <div className="flex items-center justify-center gap-2 mb-1">
-                      <h3 className="font-semibold text-white text-sm">Predicted 2026 Exam Questions</h3>
-                      <Badge className="bg-green-500/20 text-green-300 text-xs">All specs covered</Badge>
-                    </div>
-                    <p className="text-white/70 text-xs">
-                      Exclusive predictions across AQA, Edexcel, OCR & WJEC — prepare with confidence.
-                    </p>
-                  </div>
+            {/* Money Savings */}
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-2xl p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-blue-600 p-2 rounded-lg">
+                  <DollarSign className="h-5 w-5 text-white" />
                 </div>
+                <h3 className="text-xl font-bold text-blue-800">Replaces £500+ Tutoring</h3>
+              </div>
+              <p className="text-blue-700 mb-4">
+                Get the same quality insights as expensive private tutors for a fraction of the cost. Predicted grades with 92% accuracy.
+              </p>
+              <div className="text-sm text-blue-600 font-semibold">
+                Save over £450 monthly vs private tutoring
+              </div>
+            </div>
+          </div>
+
+          {/* University Investment ROI */}
+          <div className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-8 text-white text-center">
+            <Trophy className="h-12 w-12 text-yellow-300 mx-auto mb-4" />
+            <h2 className="text-2xl font-bold mb-3">University Investment ROI</h2>
+            <p className="text-lg mb-4 text-purple-100">
+              Students using Mentiora achieve 0.8 grades higher on average
+            </p>
+            <div className="flex justify-center items-center gap-8 text-center">
+              <div>
+                <div className="text-3xl font-bold text-yellow-300">£300K+</div>
+                <div className="text-sm text-purple-200">Lifetime earnings boost from better grades</div>
+              </div>
+              <TrendingUp className="h-8 w-8 text-yellow-300" />
+              <div>
+                <div className="text-3xl font-bold text-yellow-300">5x</div>
+                <div className="text-sm text-purple-200">More likely to reach top universities</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Pricing & CTA */}
+          <div className="bg-gray-50 rounded-2xl p-6">
+            <div className="text-center space-y-4">
+              <Badge className="bg-red-600 text-white font-bold px-4 py-1 text-sm">
+                50% OFF - Limited Time Only
+              </Badge>
+              
+              <div className="space-y-2">
+                <div className="flex items-center justify-center gap-3">
+                  <span className="text-gray-500 line-through text-lg">£19.99/month</span>
+                  <span className="text-4xl font-bold text-gray-900">£9.99</span>
+                  <span className="text-gray-600">/month</span>
+                </div>
+                <p className="text-gray-600">
+                  Less than one tutoring session • Cancel anytime
+                </p>
               </div>
 
-              {/* Feature 2: Predicted Grades */}
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-3 hover:bg-white/10 transition-all duration-300">
-                <div className="flex items-start gap-3">
-                  <div className="bg-purple-500/20 p-2 rounded-lg">
-                    <TrendingUp className="h-4 w-4 text-purple-400" />
-                  </div>
-                  <div className="flex-1 text-center">
-                    <div className="flex items-center justify-center gap-2 mb-1">
-                      <h3 className="font-semibold text-white text-sm">Predicted Grades</h3>
-                      <Badge className="bg-purple-500/20 text-purple-300 text-xs">92% accuracy</Badge>
-                    </div>
-                    <p className="text-white/70 text-xs">
-                      Instantly see your child's projected results and track progress towards Grade 9s.
-                    </p>
-                  </div>
+              <Button 
+                onClick={handleUpgrade}
+                className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-4 px-8 rounded-xl text-lg shadow-xl transform hover:scale-105 transition-all duration-300"
+              >
+                Start Free 7-Day Trial
+              </Button>
+              
+              <div className="flex items-center justify-center gap-6 text-sm text-gray-500 pt-2">
+                <div className="flex items-center gap-1">
+                  <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <span>No commitment</span>
                 </div>
-              </div>
-
-              {/* Feature 3: Revision Notebook */}
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-3 hover:bg-white/10 transition-all duration-300">
-                <div className="flex items-start gap-3">
-                  <div className="bg-teal-500/20 p-2 rounded-lg">
-                    <BookOpen className="h-4 w-4 text-teal-400" />
-                  </div>
-                  <div className="flex-1 text-center">
-                    <div className="flex items-center justify-center gap-2 mb-1">
-                      <h3 className="font-semibold text-white text-sm">Revision Notebook</h3>
-                      <Badge className="bg-teal-500/20 text-teal-300 text-xs">Worth £300+ in tutoring</Badge>
-                    </div>
-                    <p className="text-white/70 text-xs">
-                      Smart, organised notes that save 15+ study hours weekly — simplifying revision.
-                    </p>
-                  </div>
+                <div className="flex items-center gap-1">
+                  <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <span>Instant access</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <span>Cancel anytime</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Bottom Section */}
-          <div className="text-center space-y-3 border-t border-white/10 pt-4">
-            <p className="text-yellow-300 font-medium italic text-sm flex items-center justify-center gap-2">
-              ⏳ Limited time only — lock in this special offer today.
-            </p>
-            <div className="flex items-center justify-center gap-2 text-white/60 text-xs">
-              <Shield className="h-3 w-3" />
-              <span>Cancel anytime, no hidden fees.</span>
-            </div>
-            
+          {/* Bottom */}
+          <div className="text-center">
             <Button 
               onClick={onClose}
               variant="ghost"
-              className="text-white/60 hover:text-white/80 hover:bg-white/5 py-1 text-xs"
+              className="text-gray-400 hover:text-gray-600 text-sm"
             >
-              Maybe later
+              I'll decide later
             </Button>
           </div>
         </div>
