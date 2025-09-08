@@ -20,80 +20,96 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-[600px] max-h-[90vh] rounded-2xl p-0 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-xl mx-auto overflow-y-auto">
+      <DialogContent className="w-[95vw] max-w-[600px] max-h-[90vh] rounded-2xl p-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 border-0 text-white shadow-2xl mx-auto overflow-y-auto">
         <div className="p-8 space-y-8">
           {/* Header */}
           <div className="text-center space-y-4">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-yellow-300 to-orange-400 bg-clip-text text-transparent">
               👑 Mentiora Premium 👑
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300">
-              Unlock your academic potential
+            <p className="text-xl text-white/90 font-semibold">
+              Transform Your Child's Academic Success
             </p>
           </div>
 
           {/* Key Benefits */}
           <div className="space-y-6">
             <div className="grid grid-cols-3 gap-4 text-center">
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl">
-                <div className="text-2xl font-bold text-green-600 dark:text-green-400">£300+</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Saved vs Tutoring</div>
+              <div className="p-4 bg-gradient-to-br from-green-500/20 to-emerald-500/20 border border-green-400/30 rounded-xl backdrop-blur-sm">
+                <div className="text-2xl font-bold text-green-300">£300+</div>
+                <div className="text-sm text-white/80">Saved vs Tutoring</div>
               </div>
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl">
-                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">15+</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Hours Saved Weekly</div>
+              <div className="p-4 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-400/30 rounded-xl backdrop-blur-sm">
+                <div className="text-2xl font-bold text-blue-300">15+</div>
+                <div className="text-sm text-white/80">Hours Saved Weekly</div>
               </div>
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl">
-                <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">Grade 9s</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Target Results</div>
+              <div className="p-4 bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-400/30 rounded-xl backdrop-blur-sm">
+                <div className="text-2xl font-bold text-purple-300">Grade 9s</div>
+                <div className="text-sm text-white/80">Target Results</div>
               </div>
             </div>
 
             {/* Features List */}
             <div className="space-y-3">
-              <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <PoundSterling className="h-5 w-5 text-green-600 dark:text-green-400" />
-                <span className="text-gray-900 dark:text-white font-medium">Save £300+ on tutoring costs</span>
+              <div className="flex items-center gap-4 p-4 bg-white/10 backdrop-blur-sm border border-green-400/30 rounded-xl">
+                <div className="bg-green-500/30 p-2 rounded-full">
+                  <PoundSterling className="h-5 w-5 text-green-300" />
+                </div>
+                <div className="flex-1">
+                  <span className="text-white font-semibold text-lg">Save £300+ on tutoring costs</span>
+                  <p className="text-white/70 text-sm">AI-powered learning at a fraction of the cost</p>
+                </div>
               </div>
-              <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <Clock className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                <span className="text-gray-900 dark:text-white font-medium">Get back 15+ hours weekly</span>
+              <div className="flex items-center gap-4 p-4 bg-white/10 backdrop-blur-sm border border-blue-400/30 rounded-xl">
+                <div className="bg-blue-500/30 p-2 rounded-full">
+                  <Clock className="h-5 w-5 text-blue-300" />
+                </div>
+                <div className="flex-1">
+                  <span className="text-white font-semibold text-lg">Get back 15+ hours weekly</span>
+                  <p className="text-white/70 text-sm">Smart study plans and instant note generation</p>
+                </div>
               </div>
-              <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <University className="h-5 w-5 text-purple-600 dark:text-purple-400" />
-                <span className="text-gray-900 dark:text-white font-medium">Secure university placement</span>
+              <div className="flex items-center gap-4 p-4 bg-white/10 backdrop-blur-sm border border-purple-400/30 rounded-xl">
+                <div className="bg-purple-500/30 p-2 rounded-full">
+                  <University className="h-5 w-5 text-purple-300" />
+                </div>
+                <div className="flex-1">
+                  <span className="text-white font-semibold text-lg">Secure university placement</span>
+                  <p className="text-white/70 text-sm">Grade predictions and targeted exam prep</p>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Pricing */}
-          <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl p-6 text-center space-y-4 border border-blue-200 dark:border-blue-800">
+          <div className="bg-gradient-to-r from-yellow-400/20 to-orange-400/20 border-2 border-yellow-400/50 rounded-2xl p-6 text-center space-y-4 backdrop-blur-sm">
             <div className="space-y-2">
               <div className="flex items-center justify-center gap-3">
-                <span className="text-xl text-gray-500 dark:text-gray-400 line-through">£19.99</span>
-                <span className="text-3xl font-bold text-gray-900 dark:text-white">£9.99</span>
-                <span className="text-lg text-gray-600 dark:text-gray-300">/ month</span>
+                <span className="text-xl text-white/60 line-through">£19.99</span>
+                <span className="text-4xl font-bold bg-gradient-to-r from-yellow-300 to-orange-400 bg-clip-text text-transparent">£9.99</span>
+                <span className="text-lg text-white/80">/ month</span>
               </div>
-              <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">50% OFF - Limited Time</p>
+              <p className="text-lg font-semibold text-yellow-300">🔥 50% OFF - Limited Time Only</p>
+              <p className="text-white/90 font-medium">Less than one tutoring session. Lifetime impact.</p>
             </div>
             
             <Button 
               onClick={handleUpgrade}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200"
+              className="w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white font-bold py-4 px-6 rounded-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 text-lg"
             >
-              Start Premium Now
+              🚀 Unlock Premium Features Now
             </Button>
           </div>
 
           {/* Footer */}
           <div className="text-center space-y-3">
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <p className="text-sm text-white/60">
               Cancel anytime • No hidden fees • 30-day money-back guarantee
             </p>
             <Button 
               onClick={onClose}
               variant="ghost"
-              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-sm"
+              className="text-white/50 hover:text-white/70 hover:bg-white/10 text-sm"
             >
               Maybe later
             </Button>
