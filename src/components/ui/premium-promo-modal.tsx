@@ -21,7 +21,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-[1400px] h-[700px] rounded-3xl p-0 bg-gradient-to-br from-background via-primary/5 to-secondary/10 border-2 border-primary/20 shadow-2xl overflow-hidden backdrop-blur-xl">
+      <DialogContent className="w-[95vw] max-w-[1400px] max-h-[90vh] rounded-3xl p-0 bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10 border-2 border-primary/30 shadow-2xl overflow-y-auto backdrop-blur-xl">
         {/* Premium Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/5" />
         <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-primary/30 to-accent/20 rounded-full blur-3xl animate-pulse" />
