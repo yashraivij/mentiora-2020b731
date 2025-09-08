@@ -4,8 +4,7 @@ import {
   DialogContent,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Crown, PoundSterling, Clock, GraduationCap, Shield, Star } from "lucide-react";
+import { Crown, CheckCircle, X, GraduationCap, TrendingUp, Sparkles, Star, Zap } from "lucide-react";
 
 interface PremiumPromoModalProps {
   isOpen: boolean;
@@ -21,109 +20,86 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-[1400px] h-[700px] rounded-2xl p-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 border-0 text-white shadow-2xl overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-indigo-500/10" />
-        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-400/20 to-orange-400/15 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tl from-yellow-400/15 to-orange-400/10 rounded-full blur-3xl" />
+      <DialogContent className="w-[90vw] max-w-[480px] rounded-3xl p-0 bg-gradient-to-br from-purple-900 via-blue-900 to-violet-900 border-0 text-white shadow-2xl mx-auto overflow-hidden">
+        {/* Dynamic background animations */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-blue-500/15 to-violet-500/20 animate-pulse" />
+        <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-yellow-400/30 to-orange-400/20 rounded-full blur-3xl animate-bounce" style={{ animationDuration: '3s' }} />
+        <div className="absolute bottom-0 right-0 w-28 h-28 bg-gradient-to-tl from-pink-400/30 to-purple-400/20 rounded-full blur-2xl animate-bounce" style={{ animationDuration: '4s', animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-gradient-to-r from-cyan-400/10 to-blue-400/10 rounded-full blur-3xl animate-spin" style={{ animationDuration: '10s' }} />
 
-        <div className="relative z-10 h-full flex flex-col p-6 space-y-6">
-          {/* Header */}
-          <div className="text-center">
-            <div className="flex justify-center items-center gap-2 mb-2">
-              <Crown className="h-6 w-6 text-yellow-400" />
-              <h1 className="text-2xl font-extrabold bg-gradient-to-r from-yellow-200 to-orange-200 bg-clip-text text-transparent">
-                👑 Mentiora Premium
-              </h1>
+        <div className="relative z-10 p-8 text-center space-y-6">
+          {/* Premium crown icon with sparkles */}
+          <div className="flex justify-center relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full blur-lg animate-pulse" />
+            <div className="relative bg-gradient-to-br from-yellow-400 to-orange-500 p-4 rounded-full">
+              <Crown className="h-8 w-8 text-white" />
             </div>
-            <h2 className="text-lg font-bold text-white/95 mb-2">Secure Their Academic Future</h2>
-            <p className="text-sm text-white/85 italic max-w-2xl mx-auto">
-              "Give your child the competitive edge to achieve Grade 9s and win a place at top universities — for less than the cost of a single tutoring session."
+            <Sparkles className="absolute -top-2 -right-2 h-6 w-6 text-yellow-300 animate-pulse" />
+            <Star className="absolute -bottom-1 -left-2 h-4 w-4 text-yellow-400 animate-pulse" style={{ animationDelay: '1s' }} />
+          </div>
+
+          {/* Main heading */}
+          <div className="space-y-3">
+            <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent leading-tight animate-pulse">
+              Unlock Your Future
+            </h1>
+            <p className="text-lg font-bold text-white/90">
+              Turn Every Grade Into Gold ✨
             </p>
           </div>
 
-          {/* Offer Card */}
-          <div className="bg-gradient-to-br from-white/20 via-white/15 to-white/10 backdrop-blur-md border border-white/30 rounded-xl p-5 relative shadow-2xl max-w-md mx-auto">
-            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-              <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-bold px-4 py-1 text-sm animate-pulse shadow-lg">
-                🔥 Limited Time Offer
-              </Badge>
-            </div>
-            
-            <div className="text-center space-y-2 mt-2">
-              <div className="flex items-center justify-center gap-3">
-                <span className="text-white/60 line-through text-lg">£19.99</span>
-                <span className="text-2xl font-black bg-gradient-to-r from-yellow-200 to-orange-200 bg-clip-text text-transparent">
-                  £9.99 / month
-                </span>
-              </div>
-              <p className="text-white/90 font-semibold text-sm">Save 50% — First 3 Months</p>
-              <p className="text-yellow-300 text-sm">Smarter, more affordable than tutoring.</p>
-              
-              <Button 
-                onClick={handleUpgrade}
-                className="w-full bg-gradient-to-r from-orange-400 to-yellow-500 hover:from-orange-500 hover:to-yellow-600 text-black font-bold py-2 px-6 rounded-lg shadow-xl hover:scale-105 transition-all duration-300 hover:shadow-2xl text-sm"
-              >
-                Start Free Trial
-              </Button>
-            </div>
+          {/* Limited offer badge */}
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500/20 to-pink-500/20 border border-red-400/30 rounded-full px-4 py-2 animate-pulse">
+            <Zap className="h-4 w-4 text-yellow-400" />
+            <span className="text-sm font-bold text-yellow-300">LIMITED OFFER: £9.99/month</span>
+            <Zap className="h-4 w-4 text-yellow-400" />
           </div>
 
-          {/* Features Section */}
-          <div className="flex-1">
-            <h3 className="text-lg font-bold text-center mb-4 bg-gradient-to-r from-yellow-200 to-orange-200 bg-clip-text text-transparent">
-              ✨ Why Parents Choose Premium
-            </h3>
-            
-            <div className="grid grid-cols-3 gap-4">
-              {/* Save Money Card */}
-              <div className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-sm border border-white/20 rounded-xl p-4 hover:from-white/20 hover:to-white/10 transition-all duration-300 hover:scale-[1.02] shadow-lg">
-                <div className="flex flex-col items-center text-center gap-3">
-                  <PoundSterling className="h-6 w-6 text-green-400" />
-                  <div>
-                    <h4 className="font-bold text-white text-sm mb-2">💷 Save Money</h4>
-                    <p className="text-white/80 text-xs mb-2">Cut tutoring costs by over £300 while unlocking tools proven to raise grades.</p>
-                    <Badge className="bg-green-500/40 text-green-100 text-xs">Worth £300+ in tutoring</Badge>
-                  </div>
+          {/* Key benefits - simplified */}
+          <div className="space-y-3">
+            {[
+              { icon: TrendingUp, text: "Predict Your GCSE Results", color: "text-green-400" },
+              { icon: GraduationCap, text: "Russell Group Ready", color: "text-blue-400" },
+              { icon: Sparkles, text: "Stress-Free Success", color: "text-purple-400" }
+            ].map((item, index) => (
+              <div key={index} className="flex items-center justify-center space-x-3 group">
+                <div className={`${item.color} p-2 rounded-full bg-white/10 group-hover:scale-110 transition-transform`}>
+                  <item.icon className="h-5 w-5" />
                 </div>
+                <span className="text-white font-semibold">{item.text}</span>
               </div>
-
-              {/* Save Time Card */}
-              <div className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-sm border border-white/20 rounded-xl p-4 hover:from-white/20 hover:to-white/10 transition-all duration-300 hover:scale-[1.02] shadow-lg">
-                <div className="flex flex-col items-center text-center gap-3">
-                  <Clock className="h-6 w-6 text-blue-400" />
-                  <div>
-                    <h4 className="font-bold text-white text-sm mb-2">⏳ Save Time</h4>
-                    <p className="text-white/80 text-xs mb-2">Your child gets back 15+ study hours weekly with smart notes, predictions, and organised revision.</p>
-                    <Badge className="bg-blue-500/40 text-blue-100 text-xs">15+ hours weekly saved</Badge>
-                  </div>
-                </div>
-              </div>
-
-              {/* Secure Future Card */}
-              <div className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-sm border border-white/20 rounded-xl p-4 hover:from-white/20 hover:to-white/10 transition-all duration-300 hover:scale-[1.02] shadow-lg">
-                <div className="flex flex-col items-center text-center gap-3">
-                  <GraduationCap className="h-6 w-6 text-yellow-400" />
-                  <div>
-                    <h4 className="font-bold text-white text-sm mb-2">🎓 Secure Their Future</h4>
-                    <p className="text-white/80 text-xs mb-2">Exclusive 2026 exam predictions, grade forecasts, and a structured revision notebook — designed to turn effort into Grade 9s, top university places, and future career success.</p>
-                    <Badge className="bg-yellow-500/40 text-yellow-100 text-xs">Pathway to University</Badge>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
 
-          {/* Footer */}
-          <div className="border-t border-white/10 pt-3">
-            <div className="text-center">
-              <p className="text-yellow-300 font-semibold text-sm mb-1">⏳ Act Now</p>
-              <p className="text-white/80 text-sm mb-1">"Limited time only — lock in this special price today."</p>
-              <div className="flex items-center justify-center gap-2 text-white/70 text-xs">
-                <Shield className="h-3 w-3" />
-                <span>Cancel anytime. No hidden fees. Invest now in their future success.</span>
-              </div>
-            </div>
+          {/* Social proof */}
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4">
+            <p className="text-sm text-white/80">
+              🔥 <strong className="text-yellow-300">3,247 students</strong> upgraded this week
+            </p>
+            <p className="text-xs text-white/60 mt-1">
+              "Finally got the grades I needed!" - Sarah, Year 11
+            </p>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="space-y-3 pt-2">
+            <Button 
+              onClick={handleUpgrade}
+              className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-violet-600 hover:from-pink-600 hover:via-purple-600 hover:to-violet-700 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 text-lg relative overflow-hidden group"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000" />
+              <span className="relative flex items-center justify-center gap-2">
+                🚀 Get Premium Now - £9.99/month
+              </span>
+            </Button>
+            
+            <Button 
+              onClick={onClose}
+              variant="ghost"
+              className="w-full text-white/60 hover:text-white/80 hover:bg-white/5 py-3 text-sm"
+            >
+              Maybe later
+            </Button>
           </div>
         </div>
       </DialogContent>
