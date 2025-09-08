@@ -37,7 +37,7 @@ export const AOBreakdown = ({ userProgress }: AOBreakdownProps) => {
   };
 
   return (
-    <Card className="border-0 bg-card/80 backdrop-blur-sm">
+    <Card className="border bg-card shadow-sm">
       <CardHeader>
         <CardTitle className="flex items-center text-foreground">
           <Brain className="h-5 w-5 mr-2 text-purple-600 dark:text-purple-400" />

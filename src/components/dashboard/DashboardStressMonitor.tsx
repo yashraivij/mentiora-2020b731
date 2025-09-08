@@ -110,7 +110,7 @@ export const DashboardStressMonitor = ({
   return (
     <div className="mb-8">
       <Card className={cn(
-        "relative overflow-hidden border-0 backdrop-blur-sm transition-all duration-300 rounded-3xl shadow-lg hover:shadow-xl",
+        "relative overflow-hidden border transition-all duration-300 rounded-3xl shadow-lg hover:shadow-xl",
         colors.bg,
         colors.border
       )}>
@@ -122,7 +122,7 @@ export const DashboardStressMonitor = ({
         {/* Premium Badge */}
         <div className="absolute top-4 right-4 z-10">
           <Badge className={cn(
-            "px-3 py-1 backdrop-blur-sm border-0 font-semibold text-xs",
+            "px-3 py-1 border font-semibold text-xs",
             colors.badge
           )}>
             <Crown className="h-3 w-3 mr-1" />
@@ -133,7 +133,7 @@ export const DashboardStressMonitor = ({
         <CardHeader className="pb-4 relative z-10">
           <div className="flex items-center space-x-3">
             <div className={cn(
-              "p-3 rounded-2xl bg-background/50 backdrop-blur-sm shadow-lg",
+              "p-3 rounded-2xl bg-background shadow-lg",
               colors.icon
             )}>
               <Brain className="h-6 w-6" />
