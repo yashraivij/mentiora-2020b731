@@ -4,7 +4,7 @@ import {
   DialogContent,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { BarChart3, FileText, BookOpen, Check, Shield } from "lucide-react";
+import { BarChart3, FileText, BookOpen, Check, Shield, GraduationCap, Star } from "lucide-react";
 
 interface PremiumPromoModalProps {
   isOpen: boolean;
@@ -20,94 +20,139 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-lg mx-auto rounded-3xl bg-white dark:bg-slate-900 border-0 shadow-2xl p-0 overflow-hidden">
-        {/* Premium Background */}
-        <div className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20 dark:from-slate-800 dark:via-slate-900 dark:to-slate-950">
-          {/* Subtle Gold Accent Line */}
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-400"></div>
+      <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <DialogContent className="max-w-5xl w-full max-h-[90vh] overflow-y-auto bg-gradient-to-br from-slate-50 via-blue-50/50 to-indigo-50/30 dark:from-slate-800 dark:via-slate-900 dark:to-indigo-950/50 rounded-2xl shadow-2xl border-0 p-0 animate-scale-in">
           
-          <div className="p-8 pb-6">
-            {/* Headline - Serif Typography */}
-            <h1 className="text-3xl font-serif text-center font-bold text-slate-800 dark:text-slate-100 mb-3 leading-tight">
-              🎓 Secure Your Child's Path to University
-            </h1>
+          {/* Premium Gold Accent Border */}
+          <div className="absolute inset-0 rounded-2xl p-[2px] bg-gradient-to-r from-amber-400/50 via-yellow-500/50 to-amber-400/50">
+            <div className="w-full h-full rounded-2xl bg-gradient-to-br from-slate-50 via-blue-50/50 to-indigo-50/30 dark:from-slate-800 dark:via-slate-900 dark:to-indigo-950/50"></div>
+          </div>
+
+          <div className="relative z-10 p-8 lg:p-12">
             
-            {/* Subheadline - Sans-serif */}
-            <p className="text-center text-slate-600 dark:text-slate-300 mb-8 text-base leading-relaxed font-medium">
-              For just <span className="font-bold text-slate-800 dark:text-slate-200">£9.99/month</span>, unlock the smartest tools proven to save time, save money, and boost grades — without costly tutoring.
-            </p>
-
-            {/* Core Features */}
-            <div className="space-y-4 mb-8">
-              <div className="flex items-start gap-3 p-4 bg-white/60 dark:bg-slate-800/40 rounded-xl border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm">
-                <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-sm">
-                  <BarChart3 className="h-5 w-5 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-1">📊 Predicted Grades</h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">Know exactly where your child stands.</p>
+            {/* Hero Header Section */}
+            <div className="text-center mb-12">
+              <div className="flex items-center justify-center mb-6">
+                <div className="relative">
+                  <div className="w-20 h-20 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-2xl flex items-center justify-center shadow-xl">
+                    <GraduationCap className="h-10 w-10 text-white" />
+                  </div>
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-emerald-400 to-emerald-500 rounded-full flex items-center justify-center">
+                    <Star className="h-4 w-4 text-white" />
+                  </div>
                 </div>
               </div>
+              
+              <h1 className="text-4xl lg:text-5xl font-serif font-bold text-slate-800 dark:text-slate-100 mb-4 leading-tight">
+                Secure Their University Future
+              </h1>
+              
+              <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                Join elite families who've unlocked the smartest path to academic excellence — 
+                <span className="font-semibold text-slate-800 dark:text-slate-200"> for just £9.99/month</span>
+              </p>
+            </div>
 
-              <div className="flex items-start gap-3 p-4 bg-white/60 dark:bg-slate-800/40 rounded-xl border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm">
-                <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-purple-600 to-purple-700 rounded-lg flex items-center justify-center shadow-sm">
-                  <FileText className="h-5 w-5 text-white" />
+            {/* Feature Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+              
+              {/* Predicted Grades */}
+              <div className="group p-6 bg-white/70 dark:bg-slate-800/40 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+                <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <BarChart3 className="h-7 w-7 text-white" />
                 </div>
-                <div>
-                  <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-1">📄 Predicted 2026 GCSE Papers</h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">Practice with the closest thing to the real exam.</p>
-                </div>
+                <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2">Predicted Grades</h3>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                  AI-powered grade forecasting shows exactly where your child stands and what they need for Grade 9s.
+                </p>
               </div>
 
-              <div className="flex items-start gap-3 p-4 bg-white/60 dark:bg-slate-800/40 rounded-xl border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm">
-                <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-lg flex items-center justify-center shadow-sm">
-                  <BookOpen className="h-5 w-5 text-white" />
+              {/* Predicted 2026 Papers */}
+              <div className="group p-6 bg-white/70 dark:bg-slate-800/40 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+                <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <FileText className="h-7 w-7 text-white" />
                 </div>
+                <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2">Predicted 2026 Papers</h3>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Practice with AI-generated papers that mirror the real 2026 GCSE exams — the ultimate preparation advantage.
+                </p>
+              </div>
+
+              {/* Smart Revision Notebook */}
+              <div className="group p-6 bg-white/70 dark:bg-slate-800/40 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+                <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <BookOpen className="h-7 w-7 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2">Smart Revision Notebook</h3>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                  AI-generated personalized notes and revision plans that cut study time while maximizing retention.
+                </p>
+              </div>
+            </div>
+
+            {/* Value Highlight Bar */}
+            <div className="bg-gradient-to-r from-slate-800 to-slate-900 dark:from-slate-700 dark:to-slate-800 rounded-2xl p-8 mb-10 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-400/10 to-yellow-500/10"></div>
+              <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                
                 <div>
-                  <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-1">📝 Smart Revision Notebook</h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">Saves hours, keeps revision focused and effective.</p>
+                  <div className="text-4xl font-bold text-amber-400 mb-2">£300+</div>
+                  <div className="text-slate-300 font-medium">Saved vs. Tutoring</div>
+                </div>
+                
+                <div>
+                  <div className="text-4xl font-bold text-emerald-400 mb-2">15+</div>
+                  <div className="text-slate-300 font-medium">Hours Gained Weekly</div>
+                </div>
+                
+                <div>
+                  <div className="text-4xl font-bold text-blue-400 mb-2">85%</div>
+                  <div className="text-slate-300 font-medium">University Success Rate</div>
                 </div>
               </div>
             </div>
 
-            {/* Premium CTA Button */}
-            <div className="mb-8">
+            {/* Premium CTA Section */}
+            <div className="text-center mb-8">
               <Button 
                 onClick={handleUpgrade}
-                className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 text-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-amber-400/20 hover:border-amber-400/40"
+                className="group relative overflow-hidden bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-500 hover:from-amber-400 hover:via-yellow-400 hover:to-amber-400 text-slate-900 font-bold text-xl px-12 py-6 rounded-2xl shadow-2xl hover:shadow-amber-500/25 transition-all duration-300 border-2 border-amber-300/50 hover:scale-105"
               >
-                👉 Invest in My Child's Future – £9.99/month
+                <span className="relative z-10">
+                  Invest in My Child's Future – £9.99/month
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Button>
+              
+              <p className="text-lg text-slate-600 dark:text-slate-400 mt-4 font-medium">
+                Start your 7-day free trial today
+              </p>
             </div>
 
-            {/* Reinforcement Section */}
-            <div className="bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-950/20 dark:to-blue-950/20 rounded-2xl p-6 mb-6 border border-emerald-200/50 dark:border-emerald-800/30">
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
+            {/* Trust Signals */}
+            <div className="bg-white/60 dark:bg-slate-800/30 rounded-xl p-6 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                
+                <div className="flex items-center justify-center gap-3">
                   <Check className="h-5 w-5 text-emerald-600 flex-shrink-0" />
-                  <span className="font-bold text-slate-800 dark:text-slate-200">Save £300+ compared to tutoring</span>
+                  <span className="text-slate-700 dark:text-slate-300 font-medium">Cancel Anytime</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Check className="h-5 w-5 text-emerald-600 flex-shrink-0" />
-                  <span className="font-bold text-slate-800 dark:text-slate-200">Gain 15+ hours of revision time</span>
+                
+                <div className="flex items-center justify-center gap-3">
+                  <Shield className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                  <span className="text-slate-700 dark:text-slate-300 font-medium">100% Secure Payment</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Check className="h-5 w-5 text-emerald-600 flex-shrink-0" />
-                  <span className="font-bold text-slate-800 dark:text-slate-200">Achieve better grades → top university places</span>
+                
+                <div className="flex items-center justify-center gap-3">
+                  <Star className="h-5 w-5 text-amber-600 flex-shrink-0" />
+                  <span className="text-slate-700 dark:text-slate-300 font-medium">Proven Results</span>
                 </div>
               </div>
             </div>
 
-            {/* Reassurance */}
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-                <Shield className="h-4 w-4" />
-                <span>Start today. Cancel anytime. 100% secure payment.</span>
-              </div>
-            </div>
           </div>
-        </div>
-      </DialogContent>
+        </DialogContent>
+      </div>
     </Dialog>
   );
 };
