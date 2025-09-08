@@ -413,7 +413,7 @@ export function GoalsSection() {
   };
 
   return (
-    <Card className="bg-card border-border shadow-lg hover:shadow-xl transition-all duration-300">
+    <Card className="bg-card/80 backdrop-blur-sm border-border shadow-lg hover:shadow-xl transition-all duration-300">
       <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
