@@ -31,7 +31,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           <div className="text-center space-y-3">
             <div className="flex justify-center">
               <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-3 rounded-full shadow-lg">
-                <span className="text-3xl">👑</span>
+                <Crown className="h-8 w-8 text-white" />
               </div>
             </div>
             <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-yellow-300 via-orange-300 to-yellow-400 bg-clip-text text-transparent leading-tight">
@@ -62,33 +62,6 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
             <p className="text-lg font-semibold text-white/90">
               "Less than one tutoring session. Lifetime impact on their future."
             </p>
-          </div>
-
-          {/* CTA Section - Moved Higher */}
-          <div className="bg-white/10 backdrop-blur-sm border border-yellow-400/30 rounded-3xl p-6 text-center space-y-4">
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500/30 to-orange-500/30 border border-red-400/50 rounded-full px-4 py-2">
-              <span className="text-lg font-bold text-yellow-300">🔥 Limited Time Investment</span>
-            </div>
-            
-            <div className="space-y-2">
-              <div className="flex items-center justify-center gap-4">
-                <span className="text-2xl text-white/60 line-through">£19.99</span>
-                <span className="text-4xl font-black text-yellow-400">£9.99</span>
-                <span className="text-xl text-white/80">/ month</span>
-              </div>
-              <p className="text-lg font-semibold text-orange-300">50% OFF — Lock in this price today</p>
-              <p className="text-sm text-white/70">Less than one tutoring session. Better results guaranteed.</p>
-            </div>
-
-            <Button 
-              onClick={handleUpgrade}
-              className="w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-600 hover:from-yellow-600 hover:via-orange-600 hover:to-yellow-700 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-orange-500/25 transform hover:scale-105 transition-all duration-300 text-xl relative overflow-hidden group border-0"
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000" />
-              <span className="relative flex items-center justify-center gap-2">
-                🚀 Invest in Their Future - Start Now
-              </span>
-            </Button>
           </div>
 
           {/* Concrete Benefits - What Parents Get */}
@@ -140,6 +113,33 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Offer Section */}
+          <div className="bg-white/10 backdrop-blur-sm border border-yellow-400/30 rounded-3xl p-6 text-center space-y-4">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500/30 to-orange-500/30 border border-red-400/50 rounded-full px-4 py-2">
+              <span className="text-lg font-bold text-yellow-300">🔥 Limited Time Investment</span>
+            </div>
+            
+            <div className="space-y-2">
+              <div className="flex items-center justify-center gap-4">
+                <span className="text-2xl text-white/60 line-through">£19.99</span>
+                <span className="text-4xl font-black text-yellow-400">£9.99</span>
+                <span className="text-xl text-white/80">/ month</span>
+              </div>
+              <p className="text-lg font-semibold text-orange-300">50% OFF — Lock in this price today</p>
+              <p className="text-sm text-white/70">Less than one tutoring session. Better results guaranteed.</p>
+            </div>
+
+            <Button 
+              onClick={handleUpgrade}
+              className="w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-600 hover:from-yellow-600 hover:via-orange-600 hover:to-yellow-700 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-orange-500/25 transform hover:scale-105 transition-all duration-300 text-xl relative overflow-hidden group border-0"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000" />
+              <span className="relative flex items-center justify-center gap-2">
+                🚀 Invest in Their Future - Start Now
+              </span>
+            </Button>
           </div>
 
           {/* Footer Section - Urgency + Reassurance */}
