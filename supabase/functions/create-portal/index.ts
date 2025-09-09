@@ -19,8 +19,21 @@ serve(async (req) => {
     const STRIPE_SECRET_KEY = Deno.env.get("STRIPE_SECRET_KEY");
     const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-    if (!STRIPE_SECRET_KEY || !SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
-      throw new Error("Missing environment variables");
+    
+    console.log("Environment check:", {
+      hasStripeKey: !!STRIPE_SECRET_KEY,
+      hasSupabaseUrl: !!SUPABASE_URL,
+      hasServiceRole: !!SUPABASE_SERVICE_ROLE_KEY
+    });
+    
+    if (!STRIPE_SECRET_KEY) {
+      throw new Error("STRIPE_SECRET_KEY is missing");
+    }
+    if (!SUPABASE_URL) {
+      throw new Error("SUPABASE_URL is missing");
+    }
+    if (!SUPABASE_SERVICE_ROLE_KEY) {
+      throw new Error("SUPABASE_SERVICE_ROLE_KEY is missing");
     }
     // Initialize Stripe
     const stripe = new Stripe(STRIPE_SECRET_KEY, {
@@ -87,7 +100,7 @@ serve(async (req) => {
     // Create Stripe billing portal session
     const session = await stripe.billingPortal.sessions.create({
       customer: profile.stripe_customer_id,
-      return_url: "https://preview--mentiora.lovable.app/dashboard",
+      return_url: "https://mentiora.com/dashboard",
     });
     return new Response(
       JSON.stringify({
