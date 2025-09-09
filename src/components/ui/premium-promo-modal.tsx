@@ -32,23 +32,23 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           <div className="text-center mb-8">
             <div className="inline-flex items-center gap-3 mb-4 px-6 py-3 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-400/30 backdrop-blur-sm">
               <GraduationCap className="h-6 w-6 text-purple-300" />
-              <span className="text-sm font-bold text-purple-200 uppercase tracking-wide">Your Child's Future Starts Here</span>
+              <span className="text-sm font-semibold text-purple-200 uppercase tracking-wide">Mentiora Premium</span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-purple-300 via-blue-300 to-emerald-300 bg-clip-text text-transparent mb-4 leading-tight">
-              Secure Your Child's Place at Oxford, Cambridge & Russell Group Universities
+            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-300 via-blue-300 to-emerald-300 bg-clip-text text-transparent mb-4 leading-tight">
+              Unlock Your Child's Russell Group Future
             </h1>
             
-            <p className="text-xl text-slate-200 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-slate-200 max-w-3xl mx-auto leading-relaxed">
               While other parents spend thousands on tutoring with uncertain results, 
-              <span className="font-bold text-emerald-300"> you can guarantee your child's academic success for just £9.99/month</span>
+              <span className="font-semibold text-emerald-300"> you can guarantee your child's academic success for just £9.99/month</span>
             </p>
           </div>
 
           {/* Value Comparison - The Smart Investment */}
           <div className="mb-8">
             <div className="bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border-2 border-emerald-400/30 rounded-2xl p-8 shadow-xl">
-              <h2 className="text-3xl font-black text-center mb-8 text-emerald-300">The Smart Parent's Choice</h2>
+              <h2 className="text-2xl md:text-3xl font-semibold text-center mb-8 text-emerald-300">The Smart Parent's Choice</h2>
               
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Traditional Tutoring */}
@@ -135,8 +135,8 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           <div className="text-center mb-8">
             <div className="bg-gradient-to-br from-white/5 to-slate-800/50 border-2 border-purple-300/30 rounded-2xl p-8 shadow-2xl hover:border-purple-300/50 transition-all duration-300">
               <div className="mb-6">
-                <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold px-6 py-2 text-base animate-pulse mb-4">
-                  ⏰ LIMITED TIME: First Month Only £1
+                <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-6 py-2 text-base animate-pulse mb-4">
+                  ⏰ LIMITED TIME: First Month £1 (Then £9.99/mo)
                 </Badge>
                 <h3 className="text-3xl font-bold text-white mb-3">
                   Give Your Child The University Edge
