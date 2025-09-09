@@ -40,12 +40,12 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           {/* Premium Header with Dynamic Effects */}
           <div className="text-center mb-6 relative">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-400/5 to-transparent blur-xl"></div>
-            <h1 className="relative text-3xl md:text-4xl font-black bg-gradient-to-r from-amber-300 via-purple-200 to-indigo-300 bg-clip-text text-transparent mb-4 leading-tight tracking-tight drop-shadow-lg animate-fade-in">
+            <h1 className="relative text-3xl md:text-4xl font-bold bg-gradient-to-r from-amber-300 via-purple-200 to-indigo-300 bg-clip-text text-transparent mb-4 leading-tight tracking-tight drop-shadow-lg animate-fade-in">
               Unlock Top Grades & Russell Group Universities
             </h1>
             
             <p className="text-lg text-slate-200/90 max-w-3xl mx-auto leading-relaxed backdrop-blur-sm">
-              While other parents spend thousands on tutoring with uncertain results, you can guarantee your child's academic success for just £9.99/month
+              While other parents spend thousands on tutoring with uncertain results, <span className="font-bold bg-gradient-to-r from-amber-300 via-yellow-300 to-amber-300 bg-clip-text text-transparent px-2 py-1 rounded-lg border border-amber-400/30 shadow-[0_0_15px_rgba(251,191,36,0.2)]">you can guarantee your child's academic success for just £9.99/month</span>
             </p>
           </div>
 
