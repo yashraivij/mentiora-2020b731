@@ -41,11 +41,11 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           <div className="text-center mb-6 relative">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-400/5 to-transparent blur-xl"></div>
             <h1 className="relative text-3xl md:text-4xl font-black bg-gradient-to-r from-amber-300 via-purple-200 to-indigo-300 bg-clip-text text-transparent mb-4 leading-tight tracking-tight drop-shadow-lg animate-fade-in">
-              Unlock Top Grades & Russell Group Universities
+              Secure Your Child's Path to University
             </h1>
             
             <p className="text-lg text-slate-200/90 max-w-3xl mx-auto leading-relaxed backdrop-blur-sm">
-              While other parents spend thousands on tutoring with uncertain results, you can guarantee your child's academic success for just £9.99/month
+              While others spend thousands on tutoring, you secure your child's success for just £9.99/month
             </p>
           </div>
 
@@ -91,12 +91,12 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                   <div className="absolute inset-0 bg-gradient-to-br from-amber-400/10 via-purple-400/5 to-indigo-400/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                     <Badge className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-400 text-black font-bold px-4 py-1 shadow-[0_0_15px_rgba(251,191,36,0.4)] animate-bounce">
-                      ✨ PREMIUM CHOICE
+                      ✨ SMART CHOICE
                     </Badge>
                   </div>
                   <div className="text-center pt-3 relative">
                     <div className="mb-4">
-                      <span className="text-2xl font-bold bg-gradient-to-r from-amber-300 to-yellow-200 bg-clip-text text-transparent">Premium Solution</span>
+                      <span className="text-2xl font-bold bg-gradient-to-r from-amber-300 to-yellow-200 bg-clip-text text-transparent">Our Platform</span>
                     </div>
                     <div className="text-5xl font-black bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-300 bg-clip-text text-transparent mb-2 drop-shadow-lg">£120</div>
                     <div className="text-amber-300 font-medium mb-4">per year</div>
@@ -169,7 +169,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           {/* Premium Benefits Section */}
           <div className="mb-10">
             <h2 className="text-3xl font-black text-center mb-8 bg-gradient-to-r from-amber-300 via-white to-amber-300 bg-clip-text text-transparent">
-              Luxury Investment Returns
+              What You Get
             </h2>
             
             <div className="grid md:grid-cols-2 gap-6">
