@@ -20,7 +20,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-[900px] max-h-[95vh] rounded-3xl p-0 bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 border border-amber-400/30 shadow-[0_0_50px_rgba(251,191,36,0.2)] overflow-y-auto animate-scale-in font-sans">
+      <DialogContent className="w-[95vw] max-w-[900px] max-h-[95vh] rounded-3xl p-0 bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 border border-amber-400/30 shadow-[0_0_50px_rgba(251,191,36,0.2)] overflow-y-auto animate-scale-in font-sans">
         {/* Dynamic Premium Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-purple-500/10 to-indigo-500/5 animate-pulse" />
         <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-amber-400/15 via-purple-400/10 to-transparent rounded-full blur-3xl animate-pulse animation-delay-1000" />
