@@ -41,8 +41,10 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-400/10 to-transparent blur-2xl"></div>
             <div className="relative inline-block mb-3">
               <div className="absolute inset-0 bg-gradient-to-r from-amber-400/20 via-purple-400/20 to-indigo-400/20 blur-xl rounded-full"></div>
-              <h1 className="relative text-2xl md:text-3xl font-black bg-gradient-to-r from-amber-200 via-white to-amber-200 bg-clip-text text-transparent leading-tight tracking-wide drop-shadow-2xl">
-                🎓 SECURE YOUR CHILD'S UNIVERSITY SUCCESS 🏆
+              <h1 className="relative text-2xl md:text-3xl font-black leading-tight tracking-wide drop-shadow-2xl">
+                <span className="text-2xl md:text-3xl">🎓</span>
+                <span className="bg-gradient-to-r from-amber-200 via-white to-amber-200 bg-clip-text text-transparent"> SECURE YOUR CHILD'S UNIVERSITY SUCCESS </span>
+                <span className="text-2xl md:text-3xl">🏆</span>
               </h1>
             </div>
             
