@@ -169,9 +169,12 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                   className="relative w-full h-14 px-8 text-lg font-black bg-gradient-to-r from-emerald-500 via-blue-500 to-indigo-500 hover:from-emerald-600 hover:via-blue-600 hover:to-indigo-600 text-white border-2 border-emerald-300/60 shadow-[0_0_30px_rgba(16,185,129,0.5)] hover:shadow-[0_0_40px_rgba(16,185,129,0.7)] hover:scale-105 transition-all duration-500 rounded-xl group overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-emerald-300/20 via-blue-300/20 to-indigo-300/20 animate-pulse"></div>
-                  <span className="relative flex items-center justify-center gap-2">
-                    <span className="text-xl">🎓</span>
-                    Secure My Child's Success - £1 First Month
+                  <span className="relative flex flex-col items-center justify-center gap-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl">🎓</span>
+                      <span>Limited Time: £9.99/month (was £19.99)</span>
+                    </div>
+                    <span className="text-sm opacity-90">Secure My Child's Success Today</span>
                   </span>
                 </Button>
               </div>
