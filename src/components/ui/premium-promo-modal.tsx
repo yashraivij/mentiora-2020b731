@@ -171,7 +171,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                   <div className="absolute inset-0 bg-gradient-to-r from-emerald-300/20 via-blue-300/20 to-indigo-300/20 animate-pulse"></div>
                   <span className="relative flex items-center justify-center gap-2">
                     <span className="text-xl">🎓</span>
-                    Secure My Child's Success - £1 First Month
+                    Unlock Premium for £9.99
                   </span>
                 </Button>
               </div>
