@@ -5,7 +5,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { GraduationCap, Shield, Clock, PoundSterling, BookOpen, TrendingUp, CheckCircle, Heart, Calendar, BarChart3, NotebookPen } from "lucide-react";
 
 interface PremiumPromoModalProps {
   isOpen: boolean;
@@ -21,7 +20,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-[900px] max-h-[95vh] rounded-3xl p-0 bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 border border-amber-400/30 shadow-[0_0_50px_rgba(251,191,36,0.2)] overflow-y-auto animate-scale-in">
+      <DialogContent className="w-[95vw] max-w-[900px] max-h-[95vh] rounded-3xl p-0 bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 border border-amber-400/30 shadow-[0_0_50px_rgba(251,191,36,0.2)] overflow-y-auto animate-scale-in font-sans">
         {/* Dynamic Premium Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-purple-500/10 to-indigo-500/5 animate-pulse" />
         <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-amber-400/15 via-purple-400/10 to-transparent rounded-full blur-3xl animate-pulse animation-delay-1000" />
@@ -36,7 +35,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           <div className="absolute bottom-20 right-20 w-1 h-1 bg-amber-300/50 rounded-full animate-bounce animation-delay-3500"></div>
         </div>
         
-        <div className="relative z-10 p-6 md:p-8">
+        <div className="relative z-10 p-6 md:p-8 font-sans">
           {/* Premium Header with Dynamic Effects */}
           <div className="text-center mb-6 relative">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-400/5 to-transparent blur-xl"></div>
@@ -155,7 +154,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-emerald-300/20 via-blue-300/20 to-indigo-300/20 animate-pulse"></div>
                   <span className="relative flex items-center justify-center gap-3">
-                    <GraduationCap className="h-6 w-6" />
+                    <span className="text-2xl">🎓</span>
                     Secure My Child's Success - £1 First Month
                   </span>
                 </Button>
@@ -175,8 +174,8 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                 <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 via-purple-500/15 to-indigo-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
                 <div className="relative p-6 rounded-2xl bg-gradient-to-br from-amber-950/30 via-purple-950/20 to-indigo-950/30 border border-amber-400/30 backdrop-blur-sm hover:border-amber-400/50 transition-all duration-500 hover:scale-105">
                   <div className="flex items-start gap-4">
-                    <div className="p-4 bg-gradient-to-br from-amber-500 via-yellow-500 to-amber-400 rounded-xl shadow-[0_0_20px_rgba(251,191,36,0.3)] group-hover:shadow-[0_0_30px_rgba(251,191,36,0.5)] transition-all duration-500">
-                      <TrendingUp className="h-7 w-7 text-black animate-pulse" />
+                    <div className="p-4 bg-gradient-to-br from-amber-500 via-yellow-500 to-amber-400 rounded-xl shadow-[0_0_20px_rgba(251,191,36,0.3)] group-hover:shadow-[0_0_30px_rgba(251,191,36,0.5)] transition-all duration-500 flex items-center justify-center">
+                      <span className="text-2xl">📈</span>
                     </div>
                     <div>
                       <h3 className="text-xl font-bold bg-gradient-to-r from-amber-300 to-yellow-200 bg-clip-text text-transparent mb-2">Grade 8-9 Guarantee</h3>
@@ -193,8 +192,8 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-indigo-500/15 to-blue-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
                 <div className="relative p-6 rounded-2xl bg-gradient-to-br from-purple-950/30 via-indigo-950/20 to-blue-950/30 border border-purple-400/30 backdrop-blur-sm hover:border-purple-400/50 transition-all duration-500 hover:scale-105">
                   <div className="flex items-start gap-4">
-                    <div className="p-4 bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 rounded-xl shadow-[0_0_20px_rgba(147,51,234,0.3)] group-hover:shadow-[0_0_30px_rgba(147,51,234,0.5)] transition-all duration-500">
-                      <Clock className="h-7 w-7 text-white animate-pulse" />
+                    <div className="p-4 bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 rounded-xl shadow-[0_0_20px_rgba(147,51,234,0.3)] group-hover:shadow-[0_0_30px_rgba(147,51,234,0.5)] transition-all duration-500 flex items-center justify-center">
+                      <span className="text-2xl">⏰</span>
                     </div>
                     <div>
                       <h3 className="text-xl font-bold bg-gradient-to-r from-purple-300 to-indigo-200 bg-clip-text text-transparent mb-2">15+ Hours Saved Weekly</h3>
@@ -211,8 +210,8 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                 <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-blue-500/15 to-cyan-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
                 <div className="relative p-6 rounded-2xl bg-gradient-to-br from-indigo-950/30 via-blue-950/20 to-cyan-950/30 border border-indigo-400/30 backdrop-blur-sm hover:border-indigo-400/50 transition-all duration-500 hover:scale-105">
                   <div className="flex items-start gap-4">
-                    <div className="p-4 bg-gradient-to-br from-indigo-500 via-blue-500 to-cyan-500 rounded-xl shadow-[0_0_20px_rgba(99,102,241,0.3)] group-hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] transition-all duration-500">
-                      <GraduationCap className="h-7 w-7 text-white animate-pulse" />
+                    <div className="p-4 bg-gradient-to-br from-indigo-500 via-blue-500 to-cyan-500 rounded-xl shadow-[0_0_20px_rgba(99,102,241,0.3)] group-hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] transition-all duration-500 flex items-center justify-center">
+                      <span className="text-2xl">🎓</span>
                     </div>
                     <div>
                       <h3 className="text-xl font-bold bg-gradient-to-r from-indigo-300 to-cyan-200 bg-clip-text text-transparent mb-2">University Success</h3>
@@ -229,8 +228,8 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                 <div className="absolute inset-0 bg-gradient-to-r from-rose-500/20 via-pink-500/15 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
                 <div className="relative p-6 rounded-2xl bg-gradient-to-br from-rose-950/30 via-pink-950/20 to-purple-950/30 border border-rose-400/30 backdrop-blur-sm hover:border-rose-400/50 transition-all duration-500 hover:scale-105">
                   <div className="flex items-start gap-4">
-                    <div className="p-4 bg-gradient-to-br from-rose-500 via-pink-500 to-purple-500 rounded-xl shadow-[0_0_20px_rgba(244,63,94,0.3)] group-hover:shadow-[0_0_30px_rgba(244,63,94,0.5)] transition-all duration-500">
-                      <Heart className="h-7 w-7 text-white animate-pulse" />
+                    <div className="p-4 bg-gradient-to-br from-rose-500 via-pink-500 to-purple-500 rounded-xl shadow-[0_0_20px_rgba(244,63,94,0.3)] group-hover:shadow-[0_0_30px_rgba(244,63,94,0.5)] transition-all duration-500 flex items-center justify-center">
+                      <span className="text-2xl">❤️</span>
                     </div>
                     <div>
                       <h3 className="text-xl font-bold bg-gradient-to-r from-rose-300 to-pink-200 bg-clip-text text-transparent mb-2">Complete Peace of Mind</h3>
