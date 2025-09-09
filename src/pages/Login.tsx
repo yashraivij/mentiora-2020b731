@@ -22,7 +22,7 @@ const Login = () => {
     }
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/login`,
+      redirectTo: "https://mentiora.com/login",
     });
 
     if (error) {
