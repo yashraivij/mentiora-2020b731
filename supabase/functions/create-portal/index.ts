@@ -87,7 +87,7 @@ serve(async (req) => {
     // Create Stripe billing portal session
     const session = await stripe.billingPortal.sessions.create({
       customer: profile.stripe_customer_id,
-      return_url: "https://preview--mentiora.lovable.app/dashboard",
+      return_url: "https://mentiora.com/dashboard",
     });
     return new Response(
       JSON.stringify({
