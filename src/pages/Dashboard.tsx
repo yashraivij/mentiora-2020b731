@@ -16,6 +16,7 @@ import {
   BookOpen,
   TrendingUp,
   User,
+  Settings,
   LogOut,
   Flame,
   Calendar,
@@ -1124,6 +1125,14 @@ useEffect(() => {
               <ThemeToggle />
               {getStudyStreak() >= 3 && <ColorThemeToggle />}
               {getStudyStreak() >= 7 && <StudyPlaylist isUnlocked={true} />}
+
+              <Button
+                variant="ghost"
+                onClick={() => navigate("/settings")}
+                className="text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-colors"
+              >
+                <Settings className="h-4 w-4" />
+              </Button>
 
               <Button
                 variant="ghost"

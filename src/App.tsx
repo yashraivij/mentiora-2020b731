@@ -20,6 +20,7 @@ import PredictedExam from "./pages/PredictedExam";
 import PredictedResults from "./pages/PredictedResults";
 import Notebook from "./pages/Notebook";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import Settings from "./pages/Settings";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -79,6 +80,11 @@ const App: React.FC = () => (
               </ProtectedRoute>
             } />
             <Route path="/payment-success" element={<PaymentSuccess />} />
+            <Route path="/settings" element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            } />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
