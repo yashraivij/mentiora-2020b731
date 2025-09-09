@@ -19,6 +19,10 @@ const ResetPassword = () => {
     const accessToken = hashParams.get('access_token');
     const refreshToken = hashParams.get('refresh_token');
     
+    console.log("Hash params:", window.location.hash);
+    console.log("Access token:", accessToken);
+    console.log("Refresh token:", refreshToken);
+    
     if (!accessToken || !refreshToken) {
       toast.error("Invalid reset link. Please request a new password reset.");
       navigate("/login");
@@ -29,6 +33,14 @@ const ResetPassword = () => {
     supabase.auth.setSession({
       access_token: accessToken,
       refresh_token: refreshToken,
+    }).then(({ error }) => {
+      if (error) {
+        console.error("Session error:", error);
+        toast.error("Invalid reset link. Please request a new password reset.");
+        navigate("/login");
+      } else {
+        console.log("Session set successfully");
+      }
     });
   }, [navigate]);
 

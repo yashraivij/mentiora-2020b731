@@ -18,11 +18,11 @@ const Index = () => {
     const type = hashParams.get('type');
     
     if (accessToken && type === 'recovery') {
-      // Redirect to reset password page with the hash
-      window.location.href = '/reset-password' + window.location.hash;
+      // Use navigate to properly redirect to reset password page
+      navigate('/reset-password' + window.location.hash, { replace: true });
       return;
     }
-  }, []);
+  }, [navigate]);
   
   // Animation refs
   const heroRef = useRef(null);
