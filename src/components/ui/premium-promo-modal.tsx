@@ -164,13 +164,27 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                   </div>
                 </div>
 
+                {/* Limited Time Offer Badge */}
+                <div className="relative mb-4">
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-500/25 via-orange-500/20 to-amber-500/25 rounded-lg blur-lg animate-pulse"></div>
+                  <div className="relative p-3 rounded-lg bg-gradient-to-r from-red-950/50 via-orange-950/40 to-amber-950/50 border-2 border-red-400/60 backdrop-blur-sm text-center">
+                    <div className="text-xs font-bold text-red-300 mb-1">⚡ LIMITED TIME OFFER ⚡</div>
+                    <div className="text-lg font-black text-white">
+                      <span className="line-through text-red-300/70">£19.99</span> 
+                      <span className="text-2xl text-amber-300 mx-2">→</span> 
+                      <span className="text-emerald-300">£9.99/month</span>
+                    </div>
+                    <div className="text-xs text-orange-200/80 mt-1">Price increases to £19.99 next week - Secure your spot now!</div>
+                  </div>
+                </div>
+
                 <Button 
                   onClick={handleUpgrade}
                   className="relative w-full h-14 px-8 text-lg font-black bg-gradient-to-r from-emerald-500 via-blue-500 to-indigo-500 hover:from-emerald-600 hover:via-blue-600 hover:to-indigo-600 text-white border-2 border-emerald-300/60 shadow-[0_0_30px_rgba(16,185,129,0.5)] hover:shadow-[0_0_40px_rgba(16,185,129,0.7)] hover:scale-105 transition-all duration-500 rounded-xl group overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-emerald-300/20 via-blue-300/20 to-indigo-300/20 animate-pulse"></div>
                   <span className="relative flex items-center justify-center gap-2">
-                    <span className="text-xl">🎓</span>
+                    <span className="text-xl">🔓</span>
                     Unlock Premium for £9.99
                   </span>
                 </Button>
