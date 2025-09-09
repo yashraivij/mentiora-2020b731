@@ -27,14 +27,9 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
         <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-purple-400/20 to-blue-400/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-0 left-0 w-56 h-56 bg-gradient-to-tr from-emerald-400/15 to-teal-400/10 rounded-full blur-3xl animate-pulse" />
         
-        <div className="relative z-10 p-8 md:p-12">
+        <div className="relative z-10 p-6 md:p-8">
           {/* Emotional Hook Header */}
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-3 mb-4 px-6 py-3 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-400/30 backdrop-blur-sm">
-              <GraduationCap className="h-6 w-6 text-purple-300" />
-              <span className="text-sm font-semibold text-purple-200 uppercase tracking-wide">Mentiora Premium</span>
-            </div>
-            
+          <div className="text-center mb-6">
             <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-300 via-blue-300 to-emerald-300 bg-clip-text text-transparent mb-4 leading-tight">
               Unlock Top Grades & Russell Group Universities
             </h1>
@@ -46,11 +41,11 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           </div>
 
           {/* Value Comparison - The Smart Investment */}
-          <div className="mb-8">
-            <div className="bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border-2 border-emerald-400/30 rounded-2xl p-8 shadow-xl">
-              <h2 className="text-2xl md:text-3xl font-semibold text-center mb-8 text-emerald-300">The Smart Parent's Choice</h2>
+          <div className="mb-6">
+            <div className="bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border-2 border-emerald-400/30 rounded-2xl p-6 shadow-xl">
+              <h2 className="text-2xl md:text-3xl font-semibold text-center mb-6 text-emerald-300">The Smart Parent's Choice</h2>
               
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid md:grid-cols-2 gap-6">
                 {/* Traditional Tutoring */}
                 <div className="relative p-6 bg-red-500/10 border-2 border-red-400/40 rounded-xl">
                   <div className="text-center">
@@ -119,7 +114,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                 </div>
               </div>
 
-              <div className="text-center mt-6 p-4 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border-2 border-purple-400/40 rounded-xl">
+              <div className="text-center mt-4 p-4 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border-2 border-purple-400/40 rounded-xl">
                 <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-4 py-1 text-sm animate-pulse mb-3">
                   ⏰ LIMITED TIME: First Month £1 (Then £9.99/mo)
                 </Badge>
