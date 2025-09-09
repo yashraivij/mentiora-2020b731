@@ -36,7 +36,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
             </div>
             
             <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-300 via-blue-300 to-emerald-300 bg-clip-text text-transparent mb-4 leading-tight">
-              Give Your Child The Grades That Open Every Door
+              Unlock Top Grades & Russell Group Universities
             </h1>
             
             <p className="text-lg text-slate-200 max-w-3xl mx-auto leading-relaxed">
@@ -119,34 +119,34 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                 </div>
               </div>
 
-              <div className="text-center mt-8 p-6 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border-2 border-purple-400/40 rounded-xl">
-                <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-6 py-2 text-base animate-pulse mb-4">
+              <div className="text-center mt-6 p-4 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border-2 border-purple-400/40 rounded-xl">
+                <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-4 py-1 text-sm animate-pulse mb-3">
                   ⏰ LIMITED TIME: First Month £1 (Then £9.99/mo)
                 </Badge>
-                <h3 className="text-2xl font-bold text-white mb-3">
+                <h3 className="text-xl font-bold text-white mb-2">
                   Give Your Child The University Edge
                 </h3>
-                <p className="text-lg text-slate-200 mb-6 max-w-2xl mx-auto">
-                  Join 15,000+ families who've secured their child's academic future. 
-                  <span className="font-semibold text-emerald-300"> Cancel anytime. Risk-free guarantee.</span>
+                <p className="text-sm text-slate-200 mb-4 max-w-2xl mx-auto">
+                  Join 15,000+ families who've secured their child's future. 
+                  <span className="font-semibold text-emerald-300"> Cancel anytime.</span>
                 </p>
 
                 <Button 
                   onClick={handleUpgrade}
-                  className="w-full md:w-auto h-14 px-12 text-xl font-semibold bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 hover:from-purple-700 hover:via-blue-700 hover:to-emerald-700 text-white border-2 border-white/20 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 rounded-xl"
+                  className="w-full md:w-auto h-12 px-8 text-lg font-semibold bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 hover:from-purple-700 hover:via-blue-700 hover:to-emerald-700 text-white border-2 border-white/20 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 rounded-xl"
                 >
-                  🎓 Secure My Child's Future - Start Now
+                  🎓 Start Premium Now
                 </Button>
                 
-                <div className="flex items-center justify-center gap-4 mt-6 text-slate-300">
-                  <div className="flex items-center gap-2">
-                    <Shield className="h-5 w-5 text-emerald-400" />
-                    <span className="text-sm">30-Day Money Back Guarantee</span>
+                <div className="flex items-center justify-center gap-3 mt-4 text-slate-300 text-xs">
+                  <div className="flex items-center gap-1">
+                    <Shield className="h-4 w-4 text-emerald-400" />
+                    <span>30-Day Guarantee</span>
                   </div>
                   <div className="w-1 h-1 bg-slate-400 rounded-full"></div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="h-5 w-5 text-emerald-400" />
-                    <span className="text-sm">Cancel Anytime</span>
+                  <div className="flex items-center gap-1">
+                    <CheckCircle className="h-4 w-4 text-emerald-400" />
+                    <span>Cancel Anytime</span>
                   </div>
                 </div>
               </div>
