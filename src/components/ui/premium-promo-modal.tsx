@@ -5,7 +5,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Crown, PoundSterling, Clock, GraduationCap, Shield, Star, TrendingUp, Award, Target, Zap, Brain, Trophy } from "lucide-react";
+import { GraduationCap, Shield, Clock, PoundSterling, BookOpen, TrendingUp, CheckCircle, Heart } from "lucide-react";
 
 interface PremiumPromoModalProps {
   isOpen: boolean;
@@ -21,218 +21,267 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-[1400px] max-h-[90vh] rounded-2xl p-0 bg-gradient-to-br from-background via-primary/5 to-accent/10 border-2 border-primary/20 shadow-2xl overflow-y-auto">
-        {/* Exclusive Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 via-blue-500/5 to-emerald-500/10" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-violet-500/20 to-purple-500/15 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-emerald-500/15 to-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-r from-purple-500/8 to-pink-500/8 rounded-full blur-3xl animate-pulse delay-500" />
-
-        <div className="relative z-10 p-12">
-          {/* Exclusive Header with Immediate Offer */}
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-4 mb-6 px-10 py-5 rounded-full bg-gradient-to-r from-violet-600/30 to-purple-600/30 border-2 border-violet-400/50 backdrop-blur-sm shadow-xl">
-              <Crown className="h-7 w-7 text-violet-400" />
-              <span className="text-base font-black text-violet-200 tracking-widest uppercase">Exclusive Invitation</span>
-              <Crown className="h-7 w-7 text-purple-400" />
+      <DialogContent className="w-[95vw] max-w-[900px] max-h-[95vh] rounded-3xl p-0 bg-gradient-to-br from-slate-900 via-blue-950 to-purple-950 border-2 border-purple-300/30 shadow-2xl overflow-y-auto">
+        {/* Premium Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-emerald-500/10" />
+        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-purple-400/20 to-blue-400/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-56 h-56 bg-gradient-to-tr from-emerald-400/15 to-teal-400/10 rounded-full blur-3xl" />
+        
+        <div className="relative z-10 p-8 md:p-12">
+          {/* Emotional Hook Header */}
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-3 mb-4 px-6 py-3 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-400/30 backdrop-blur-sm">
+              <GraduationCap className="h-6 w-6 text-purple-300" />
+              <span className="text-sm font-bold text-purple-200 uppercase tracking-wide">Your Child's Future Starts Here</span>
             </div>
             
-            {/* Immediate Limited Offer */}
-            <div className="mb-8 p-8 bg-gradient-to-br from-orange-500/20 to-red-500/20 border-3 border-orange-400/60 rounded-2xl backdrop-blur-sm shadow-2xl relative">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white font-black px-8 py-3 text-lg shadow-xl animate-bounce border-2 border-white">
-                  🔥 FLASH SALE - 50% OFF
-                </Badge>
-              </div>
-              <div className="pt-4 text-center">
-                <p className="text-xl font-bold text-orange-700 dark:text-orange-300 mb-4">Exclusive Access - Limited Time Only</p>
-                <div className="flex items-center justify-center gap-8 mb-4">
-                  <div className="text-center">
-                    <p className="text-sm text-orange-600">Was</p>
-                    <span className="text-4xl text-red-600 line-through font-black">£19.99</span>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-sm text-orange-600">Now Only</p>
-                    <span className="text-7xl font-black bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent animate-pulse">£9.99</span>
-                    <p className="text-lg text-orange-700">/month</p>
-                  </div>
-                </div>
-                <p className="text-lg font-bold text-orange-800 dark:text-orange-200">First 3 months at this exclusive rate</p>
-              </div>
-            </div>
-
-            <h1 className="text-6xl font-black bg-gradient-to-r from-violet-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent mb-6 tracking-tight">
-              Elite Academic Advantage
+            <h1 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-purple-300 via-blue-300 to-emerald-300 bg-clip-text text-transparent mb-4 leading-tight">
+              Secure Your Child's Place at Oxford, Cambridge & Russell Group Universities
             </h1>
-            <p className="text-2xl text-foreground max-w-4xl mx-auto leading-relaxed font-medium">
-              Join the exclusive circle of families who've secured their child's academic success. 
-              <span className="font-black bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent"> Elite tools. Elite results.</span>
-            </p>
-          </div>
-
-          {/* Premium Features Showcase */}
-          <div className="mb-12">
-            <h2 className="text-4xl font-black text-center mb-2 bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
-              Exclusive Premium Arsenal
-            </h2>
-            <p className="text-center text-xl text-muted-foreground mb-10">What elite families get access to</p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Elite Feature 1 */}
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-                <div className="relative p-8 rounded-2xl bg-gradient-to-br from-violet-50/90 to-purple-50/80 dark:from-violet-950/50 dark:to-purple-950/40 border-2 border-violet-400/40 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="p-4 bg-gradient-to-br from-violet-600 to-purple-600 rounded-xl shadow-lg group-hover:animate-pulse">
-                      <Brain className="h-8 w-8 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-black text-violet-700 dark:text-violet-300">AI Exam Oracle</h3>
-                      <p className="text-violet-600 dark:text-violet-400 font-semibold">2026 Question Predictions</p>
-                    </div>
-                  </div>
-                  <p className="text-violet-700 dark:text-violet-300 text-lg leading-relaxed">
-                    Our AI analyzes years of exam patterns to predict exactly what questions will appear. 
-                    <span className="font-bold">Give your child the ultimate advantage.</span>
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <Badge className="bg-violet-500/20 text-violet-700 border border-violet-400/30">Predictive Analytics</Badge>
-                    <Badge className="bg-violet-500/20 text-violet-700 border border-violet-400/30">Strategic Prep</Badge>
-                  </div>
-                </div>
-              </div>
-
-              {/* Elite Feature 2 */}
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-                <div className="relative p-8 rounded-2xl bg-gradient-to-br from-emerald-50/90 to-green-50/80 dark:from-emerald-950/50 dark:to-green-950/40 border-2 border-emerald-400/40 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="p-4 bg-gradient-to-br from-emerald-600 to-green-600 rounded-xl shadow-lg group-hover:animate-pulse">
-                      <Zap className="h-8 w-8 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-black text-emerald-700 dark:text-emerald-300">Lightning Study System</h3>
-                      <p className="text-emerald-600 dark:text-emerald-400 font-semibold">15+ Hours Saved Weekly</p>
-                    </div>
-                  </div>
-                  <p className="text-emerald-700 dark:text-emerald-300 text-lg leading-relaxed">
-                    AI-generated notes, summaries, and revision schedules that cut study time while 
-                    <span className="font-bold"> maximizing retention and results.</span>
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <Badge className="bg-emerald-500/20 text-emerald-700 border border-emerald-400/30">Time Optimization</Badge>
-                    <Badge className="bg-emerald-500/20 text-emerald-700 border border-emerald-400/30">Smart Automation</Badge>
-                  </div>
-                </div>
-              </div>
-
-              {/* Elite Feature 3 */}
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-                <div className="relative p-8 rounded-2xl bg-gradient-to-br from-blue-50/90 to-cyan-50/80 dark:from-blue-950/50 dark:to-cyan-950/40 border-2 border-blue-400/40 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="p-4 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-xl shadow-lg group-hover:animate-pulse">
-                      <Trophy className="h-8 w-8 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-black text-blue-700 dark:text-blue-300">Grade Guarantee System</h3>
-                      <p className="text-blue-600 dark:text-blue-400 font-semibold">Performance Forecasting</p>
-                    </div>
-                  </div>
-                  <p className="text-blue-700 dark:text-blue-300 text-lg leading-relaxed">
-                    Real-time grade predictions and performance analytics that ensure your child stays on track for 
-                    <span className="font-bold">Grade 9s and university success.</span>
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <Badge className="bg-blue-500/20 text-blue-700 border border-blue-400/30">Grade Tracking</Badge>
-                    <Badge className="bg-blue-500/20 text-blue-700 border border-blue-400/30">Success Metrics</Badge>
-                  </div>
-                </div>
-              </div>
-
-              {/* Elite Feature 4 */}
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-pink-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-                <div className="relative p-8 rounded-2xl bg-gradient-to-br from-orange-50/90 to-pink-50/80 dark:from-orange-950/50 dark:to-pink-950/40 border-2 border-orange-400/40 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="p-4 bg-gradient-to-br from-orange-600 to-pink-600 rounded-xl shadow-lg group-hover:animate-pulse">
-                      <Star className="h-8 w-8 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-black text-orange-700 dark:text-orange-300">University Pathway</h3>
-                      <p className="text-orange-600 dark:text-orange-400 font-semibold">Elite Institution Access</p>
-                    </div>
-                  </div>
-                  <p className="text-orange-700 dark:text-orange-300 text-lg leading-relaxed">
-                    Personalized strategies for Russell Group applications, with 
-                    <span className="font-bold"> 85% of our premium users securing top university places.</span>
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <Badge className="bg-orange-500/20 text-orange-700 border border-orange-400/30">Elite Access</Badge>
-                    <Badge className="bg-orange-500/20 text-orange-700 border border-orange-400/30">Success Rate</Badge>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Smart Investment vs Tutoring */}
-          <div className="mb-12">
-            <div className="max-w-4xl mx-auto p-10 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-green-500/10 border-2 border-emerald-400/40 shadow-2xl">
-              <h2 className="text-3xl font-black text-center mb-8 text-emerald-700 dark:text-emerald-300">Smart Investment Choice</h2>
-              <div className="grid grid-cols-2 gap-8">
-                <div className="text-center p-6 bg-red-500/10 border-2 border-red-400/30 rounded-xl">
-                  <h3 className="text-xl font-bold text-red-700 mb-4">Traditional Tutoring</h3>
-                  <div className="text-4xl font-black text-red-600 mb-2">£300+</div>
-                  <div className="text-red-600 font-medium">per month</div>
-                  <div className="mt-4 space-y-2 text-sm text-red-700">
-                    <p>• Limited availability</p>
-                    <p>• Travel time required</p>
-                    <p>• One-size-fits-all approach</p>
-                  </div>
-                </div>
-                <div className="text-center p-6 bg-emerald-500/10 border-2 border-emerald-400/30 rounded-xl">
-                  <h3 className="text-xl font-bold text-emerald-700 mb-4">Mentiora Premium</h3>
-                  <div className="text-4xl font-black text-emerald-600 mb-2">£9.99</div>
-                  <div className="text-emerald-600 font-medium">per month</div>
-                  <div className="mt-4 space-y-2 text-sm text-emerald-700">
-                    <p>• 24/7 AI availability</p>
-                    <p>• Instant access anywhere</p>
-                    <p>• Personalized to your child</p>
-                  </div>
-                </div>
-              </div>
-              <div className="text-center mt-8 p-6 bg-gradient-to-r from-emerald-500/20 to-green-500/20 border-2 border-emerald-400/50 rounded-xl">
-                <p className="text-2xl font-black text-emerald-700 dark:text-emerald-300">Save £290+ Every Month</p>
-                <p className="text-emerald-600 dark:text-emerald-400 mt-2">Better results, fraction of the cost</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Exclusive CTA */}
-          <div className="max-w-2xl mx-auto">
-            <div className="p-12 rounded-2xl bg-gradient-to-br from-white/95 to-violet-50/90 dark:from-gray-900/95 dark:to-violet-950/40 backdrop-blur-sm relative shadow-2xl border-2 border-violet-400/50">
-              <div className="text-center space-y-8">
-                <Button 
-                  onClick={handleUpgrade}
-                  className="w-full h-16 text-xl font-black bg-gradient-to-r from-violet-600 via-purple-600 to-emerald-600 hover:from-violet-700 hover:via-purple-700 hover:to-emerald-700 text-white border-2 border-white/20 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 animate-pulse"
-                >
-                  Claim Your Exclusive Access - Start Free Trial
-                </Button>
-                
-                <div className="flex items-center justify-center gap-3 text-lg font-medium text-muted-foreground">
-                  <Shield className="h-6 w-6 text-emerald-600" />
-                  <span>7-Day Free Trial • Elite Access • Cancel Anytime</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Elite Trust */}
-          <div className="text-center mt-10 pt-8 border-t-2 border-gradient-to-r from-violet-400/30 to-purple-400/30">
-            <p className="text-lg font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
-              Join the exclusive circle of families securing academic excellence
+            <p className="text-xl text-slate-200 max-w-3xl mx-auto leading-relaxed">
+              While other parents spend thousands on tutoring with uncertain results, 
+              <span className="font-bold text-emerald-300"> you can guarantee your child's academic success for just £9.99/month</span>
             </p>
+          </div>
+
+          {/* Value Comparison - The Smart Investment */}
+          <div className="mb-10">
+            <div className="bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border-2 border-emerald-400/30 rounded-2xl p-8 shadow-xl">
+              <h2 className="text-3xl font-black text-center mb-8 text-emerald-300">The Smart Parent's Choice</h2>
+              
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Traditional Tutoring */}
+                <div className="relative p-6 bg-red-500/10 border-2 border-red-400/40 rounded-xl">
+                  <div className="text-center">
+                    <div className="mb-4">
+                      <span className="text-2xl font-bold text-red-300">Traditional Tutoring</span>
+                    </div>
+                    <div className="text-5xl font-black text-red-400 mb-2">£3,600+</div>
+                    <div className="text-red-300 font-medium mb-4">per year</div>
+                    <div className="space-y-2 text-sm text-red-200">
+                      <p className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-red-400 rounded-full flex-shrink-0"></span>
+                        Limited to 1-2 hours per week
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-red-400 rounded-full flex-shrink-0"></span>
+                        Travel time & scheduling conflicts
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-red-400 rounded-full flex-shrink-0"></span>
+                        Generic approach, not exam-specific
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-red-400 rounded-full flex-shrink-0"></span>
+                        No guarantee of results
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mentiora Premium */}
+                <div className="relative p-6 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border-2 border-emerald-400/50 rounded-xl shadow-lg">
+                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                    <Badge className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold px-4 py-1 shadow-lg">
+                      SMART CHOICE
+                    </Badge>
+                  </div>
+                  <div className="text-center pt-3">
+                    <div className="mb-4">
+                      <span className="text-2xl font-bold text-emerald-300">Mentiora Premium</span>
+                    </div>
+                    <div className="text-5xl font-black text-emerald-400 mb-2">£120</div>
+                    <div className="text-emerald-300 font-medium mb-4">per year</div>
+                    <div className="space-y-2 text-sm text-emerald-100">
+                      <p className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        24/7 unlimited access
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        Instant AI tutoring anytime
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        Exam board specific content
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        Proven university success rate
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center mt-8 p-6 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border-2 border-emerald-400/40 rounded-xl">
+                <div className="flex items-center justify-center gap-3 mb-2">
+                  <PoundSterling className="h-8 w-8 text-emerald-400" />
+                  <span className="text-3xl font-black text-emerald-300">Save £3,480 This Year</span>
+                </div>
+                <p className="text-emerald-200 text-lg">
+                  Better results. Better future. Better investment.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Concrete Benefits - What Your Child Gets */}
+          <div className="mb-10">
+            <h2 className="text-3xl font-black text-center mb-8 text-white">
+              What Your Investment Delivers
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Benefit 1 */}
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                <div className="relative p-6 rounded-xl bg-gradient-to-br from-purple-900/40 to-blue-900/40 border border-purple-400/30 backdrop-blur-sm">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg shadow-lg">
+                      <TrendingUp className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-purple-200 mb-2">Grade 8-9 Guarantee</h3>
+                      <p className="text-purple-100/80 leading-relaxed">
+                        AI-powered predictions ensure your child knows exactly what to study for maximum grade impact
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Benefit 2 */}
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                <div className="relative p-6 rounded-xl bg-gradient-to-br from-emerald-900/40 to-teal-900/40 border border-emerald-400/30 backdrop-blur-sm">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg shadow-lg">
+                      <Clock className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-emerald-200 mb-2">15+ Hours Saved Weekly</h3>
+                      <p className="text-emerald-100/80 leading-relaxed">
+                        Efficient, targeted study plans mean more family time and less stress for everyone
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Benefit 3 */}
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                <div className="relative p-6 rounded-xl bg-gradient-to-br from-blue-900/40 to-cyan-900/40 border border-blue-400/30 backdrop-blur-sm">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg shadow-lg">
+                      <GraduationCap className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-blue-200 mb-2">University Success</h3>
+                      <p className="text-blue-100/80 leading-relaxed">
+                        92% of our premium students secure offers from their top-choice universities
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Benefit 4 */}
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-rose-500/20 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                <div className="relative p-6 rounded-xl bg-gradient-to-br from-pink-900/40 to-rose-900/40 border border-pink-400/30 backdrop-blur-sm">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-gradient-to-br from-pink-500 to-rose-500 rounded-lg shadow-lg">
+                      <Heart className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-pink-200 mb-2">Peace of Mind</h3>
+                      <p className="text-pink-100/80 leading-relaxed">
+                        Real-time progress tracking so you always know your child is on the right path
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Parent Testimonials */}
+          <div className="mb-10">
+            <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-600/30 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-center mb-6 text-white">What Parents Are Saying</h3>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="p-6 bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-purple-400/20 rounded-xl">
+                  <p className="text-purple-100 italic mb-3 leading-relaxed">
+                    "My daughter went from predicted 6s to achieving 8s and 9s. She's now at Imperial College studying Engineering. Best £120 we ever spent."
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                      S
+                    </div>
+                    <div>
+                      <p className="font-semibold text-purple-200">Sarah M.</p>
+                      <p className="text-sm text-purple-300">Parent, London</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-6 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border border-emerald-400/20 rounded-xl">
+                  <p className="text-emerald-100 italic mb-3 leading-relaxed">
+                    "No more expensive tutoring sessions. My son studies confidently on his own now and got into Cambridge. The ROI is incredible."
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold">
+                      M
+                    </div>
+                    <div>
+                      <p className="font-semibold text-emerald-200">Michael R.</p>
+                      <p className="text-sm text-emerald-300">Parent, Manchester</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Urgency + Reassurance CTA */}
+          <div className="text-center">
+            <div className="bg-gradient-to-br from-white/5 to-slate-800/50 border-2 border-purple-300/30 rounded-2xl p-8 shadow-2xl">
+              <div className="mb-6">
+                <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold px-6 py-2 text-base animate-pulse mb-4">
+                  ⏰ LIMITED TIME: First Month Only £1
+                </Badge>
+                <h3 className="text-3xl font-bold text-white mb-3">
+                  Give Your Child The University Edge
+                </h3>
+                <p className="text-xl text-slate-200 mb-6 max-w-2xl mx-auto">
+                  Join 15,000+ families who've secured their child's academic future. 
+                  <span className="font-bold text-emerald-300"> Cancel anytime. Risk-free guarantee.</span>
+                </p>
+              </div>
+
+              <Button 
+                onClick={handleUpgrade}
+                className="w-full md:w-auto h-14 px-12 text-xl font-black bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 hover:from-purple-700 hover:via-blue-700 hover:to-emerald-700 text-white border-2 border-white/20 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 rounded-xl"
+              >
+                🎓 Secure My Child's Future - Start Now
+              </Button>
+              
+              <div className="flex items-center justify-center gap-4 mt-6 text-slate-300">
+                <div className="flex items-center gap-2">
+                  <Shield className="h-5 w-5 text-emerald-400" />
+                  <span className="text-sm">30-Day Money Back Guarantee</span>
+                </div>
+                <div className="w-1 h-1 bg-slate-400 rounded-full"></div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-5 w-5 text-emerald-400" />
+                  <span className="text-sm">Cancel Anytime</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </DialogContent>
