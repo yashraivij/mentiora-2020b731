@@ -149,32 +149,32 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-3 gap-3 text-center mb-6">
-                  <div className="bg-emerald-950/50 border border-emerald-400/40 rounded-lg p-3 backdrop-blur-sm">
-                    <div className="text-2xl font-bold text-emerald-300">94%</div>
+                <div className="grid grid-cols-3 gap-2 text-center mb-4">
+                  <div className="bg-emerald-950/50 border border-emerald-400/40 rounded-lg p-2 backdrop-blur-sm">
+                    <div className="text-xl font-bold text-emerald-300">94%</div>
                     <div className="text-xs text-emerald-200/80">Prediction Accuracy</div>
                   </div>
-                  <div className="bg-blue-950/50 border border-blue-400/40 rounded-lg p-3 backdrop-blur-sm">
-                    <div className="text-2xl font-bold text-blue-300">£3,480</div>
+                  <div className="bg-blue-950/50 border border-blue-400/40 rounded-lg p-2 backdrop-blur-sm">
+                    <div className="text-xl font-bold text-blue-300">£3,480</div>
                     <div className="text-xs text-blue-200/80">Tutoring Saved</div>
                   </div>
-                  <div className="bg-indigo-950/50 border border-indigo-400/40 rounded-lg p-3 backdrop-blur-sm">
-                    <div className="text-2xl font-bold text-indigo-300">15+hrs</div>
+                  <div className="bg-indigo-950/50 border border-indigo-400/40 rounded-lg p-2 backdrop-blur-sm">
+                    <div className="text-xl font-bold text-indigo-300">15+hrs</div>
                     <div className="text-xs text-indigo-200/80">Weekly Time Saved</div>
                   </div>
                 </div>
 
                 {/* Limited Time Offer Badge */}
-                <div className="relative mb-4">
+                <div className="relative mb-3">
                   <div className="absolute inset-0 bg-gradient-to-r from-red-500/25 via-orange-500/20 to-amber-500/25 rounded-lg blur-lg animate-pulse"></div>
-                  <div className="relative p-3 rounded-lg bg-gradient-to-r from-red-950/50 via-orange-950/40 to-amber-950/50 border-2 border-red-400/60 backdrop-blur-sm text-center">
+                  <div className="relative p-2 rounded-lg bg-gradient-to-r from-red-950/50 via-orange-950/40 to-amber-950/50 border-2 border-red-400/60 backdrop-blur-sm text-center">
                     <div className="text-xs font-bold text-red-300 mb-1">⚡ LIMITED TIME OFFER ⚡</div>
-                    <div className="text-lg font-black text-white">
+                    <div className="text-base font-black text-white">
                       <span className="line-through text-red-300/70">£19.99</span> 
-                      <span className="text-2xl text-amber-300 mx-2">→</span> 
+                      <span className="text-lg text-amber-300 mx-1">→</span> 
                       <span className="text-emerald-300">£9.99/month</span>
                     </div>
-                    <div className="text-xs text-orange-200/80 mt-1">Price increases to £19.99 next week - Secure your spot now!</div>
+                    <div className="text-xs text-orange-200/80">Price increases to £19.99 next week - Secure your spot now!</div>
                   </div>
                 </div>
 
