@@ -5,7 +5,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { GraduationCap, Shield, Clock, PoundSterling, BookOpen, TrendingUp, CheckCircle, Heart } from "lucide-react";
+import { GraduationCap, Shield, Clock, PoundSterling, BookOpen, TrendingUp, CheckCircle, Heart, Calendar, BarChart3, NotebookPen } from "lucide-react";
 
 interface PremiumPromoModalProps {
   isOpen: boolean;
@@ -21,11 +21,11 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-[900px] max-h-[95vh] rounded-3xl p-0 bg-gradient-to-br from-slate-900 via-blue-950 to-purple-950 border-2 border-purple-300/30 shadow-2xl overflow-y-auto">
-        {/* Premium Background Effects */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-emerald-500/10" />
-        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-purple-400/20 to-blue-400/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-56 h-56 bg-gradient-to-tr from-emerald-400/15 to-teal-400/10 rounded-full blur-3xl" />
+      <DialogContent className="w-[95vw] max-w-[900px] max-h-[95vh] rounded-3xl p-0 bg-gradient-to-br from-slate-900 via-blue-950 to-purple-950 border-2 border-purple-300/30 shadow-2xl overflow-y-auto animate-scale-in">
+        {/* Premium Background Effects with Animation */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-emerald-500/10 animate-pulse" />
+        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-purple-400/20 to-blue-400/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 left-0 w-56 h-56 bg-gradient-to-tr from-emerald-400/15 to-teal-400/10 rounded-full blur-3xl animate-pulse" />
         
         <div className="relative z-10 p-8 md:p-12">
           {/* Emotional Hook Header */}
@@ -95,12 +95,16 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                     <div className="text-emerald-300 font-medium mb-4">per year</div>
                     <div className="space-y-2 text-sm text-emerald-100">
                       <p className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                        24/7 unlimited access
+                        <BarChart3 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        Predicted grades
                       </p>
                       <p className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                        Instant AI tutoring anytime
+                        <Calendar className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        Predicted 2026 exams
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <NotebookPen className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        Smart revision notebook
                       </p>
                       <p className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
@@ -209,12 +213,12 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           </div>
 
           {/* Parent Testimonials */}
-          <div className="mb-10">
-            <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-600/30 rounded-2xl p-8">
+          <div className="mb-8">
+            <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-600/30 rounded-2xl p-8 hover:border-slate-500/40 transition-all duration-300">
               <h3 className="text-2xl font-bold text-center mb-6 text-white">What Parents Are Saying</h3>
               
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="p-6 bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-purple-400/20 rounded-xl">
+                <div className="p-6 bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-purple-400/20 rounded-xl hover:border-purple-400/30 transition-all duration-300 hover:scale-105">
                   <p className="text-purple-100 italic mb-3 leading-relaxed">
                     "My daughter went from predicted 6s to achieving 8s and 9s. She's now at Imperial College studying Engineering. Best £120 we ever spent."
                   </p>
@@ -229,7 +233,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                   </div>
                 </div>
                 
-                <div className="p-6 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border border-emerald-400/20 rounded-xl">
+                <div className="p-6 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border border-emerald-400/20 rounded-xl hover:border-emerald-400/30 transition-all duration-300 hover:scale-105">
                   <p className="text-emerald-100 italic mb-3 leading-relaxed">
                     "No more expensive tutoring sessions. My son studies confidently on his own now and got into Cambridge. The ROI is incredible."
                   </p>
@@ -247,9 +251,9 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
             </div>
           </div>
 
-          {/* Urgency + Reassurance CTA */}
-          <div className="text-center">
-            <div className="bg-gradient-to-br from-white/5 to-slate-800/50 border-2 border-purple-300/30 rounded-2xl p-8 shadow-2xl">
+          {/* Primary CTA - Moved up from bottom */}
+          <div className="text-center mb-8">
+            <div className="bg-gradient-to-br from-white/5 to-slate-800/50 border-2 border-purple-300/30 rounded-2xl p-8 shadow-2xl hover:border-purple-300/50 transition-all duration-300">
               <div className="mb-6">
                 <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold px-6 py-2 text-base animate-pulse mb-4">
                   ⏰ LIMITED TIME: First Month Only £1
