@@ -39,7 +39,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           {/* Premium Header with Dynamic Effects */}
           <div className="text-center mb-6 relative">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-400/5 to-transparent blur-xl"></div>
-            <h1 className="relative text-3xl md:text-4xl font-black bg-gradient-to-r from-amber-300 via-purple-200 to-indigo-300 bg-clip-text text-transparent mb-4 leading-tight tracking-tight drop-shadow-lg animate-fade-in">
+            <h1 className="relative text-3xl md:text-4xl font-bold bg-gradient-to-r from-amber-300 via-purple-200 to-indigo-300 bg-clip-text text-transparent mb-4 leading-tight tracking-tight drop-shadow-lg animate-fade-in">
               🎓 Secure Your Child's Path to University 🏆
             </h1>
             
