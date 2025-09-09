@@ -1087,6 +1087,93 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     return questions;
   };
 
+  // Generate exam-specific questions that are different from practice questions
+  const generateExamSpecificQuestions = (subject: any): ExamQuestion[] => {
+    const questionTemplates = {
+      'business-edexcel-igcse': [
+        { text: 'Explain two ways a business can reduce its environmental impact.', marks: 4 },
+        { text: 'Analyse the importance of market research for a new business start-up.', marks: 6 },
+        { text: 'Evaluate the advantages and disadvantages of franchising as a method of business growth.', marks: 8 },
+        { text: 'Calculate the break-even point for a business with fixed costs of £50,000 and a contribution per unit of £25.', marks: 3 },
+        { text: 'Discuss whether businesses should prioritise profit maximisation or social responsibility.', marks: 10 },
+        { text: 'Analyse the impact of inflation on business costs and pricing decisions.', marks: 6 },
+        { text: 'Explain how a business might use technology to improve customer service.', marks: 4 },
+        { text: 'Evaluate the effectiveness of different promotional methods for launching a new product.', marks: 8 }
+      ],
+      'geography': [
+        { text: 'Study Figure 1, a map showing the distribution of tropical storms. Describe the global distribution of tropical storms.', marks: 3 },
+        { text: 'Explain how plate movements at destructive plate margins can lead to volcanic activity.', marks: 4 },
+        { text: 'Using a named example, assess the effectiveness of responses to a tropical storm.', marks: 9 },
+        { text: 'Evaluate the success of urban regeneration in reducing urban inequalities in a named UK city.', marks: 9 },
+        { text: 'Explain how climate change might affect the water cycle.', marks: 4 },
+        { text: 'Analyse the reasons why some countries are more vulnerable to natural hazards than others.', marks: 6 },
+        { text: 'To what extent can the impacts of earthquakes be reduced through prediction and protection?', marks: 9 },
+        { text: 'Explain the formation of a waterfall using an annotated diagram.', marks: 4 }
+      ],
+      'biology': [
+        { text: 'The diagram shows a plant cell. Label parts A, B and C on the diagram.', marks: 3 },
+        { text: 'Explain how the structure of the small intestine is adapted for absorption.', marks: 4 },
+        { text: 'Describe and explain the changes that occur during photosynthesis.', marks: 6 },
+        { text: 'A student investigated the effect of temperature on enzyme activity. Suggest two variables that should be controlled in this investigation.', marks: 2 },
+        { text: 'Explain how genetic variation is produced through sexual reproduction.', marks: 4 },
+        { text: 'Evaluate the use of genetic engineering in agriculture.', marks: 6 },
+        { text: 'Describe how the nervous system coordinates a response to stimulus.', marks: 4 },
+        { text: 'Compare and contrast mitosis and meiosis.', marks: 6 }
+      ],
+      'chemistry': [
+        { text: 'Balance the following chemical equation: ___Al + ___O₂ → ___Al₂O₃', marks: 1 },
+        { text: 'Explain why ionic compounds have high melting points.', marks: 3 },
+        { text: 'Describe the test for carbon dioxide gas and state the result.', marks: 2 },
+        { text: 'Calculate the relative formula mass of calcium carbonate (CaCO₃). [Relative atomic masses: Ca = 40, C = 12, O = 16]', marks: 2 },
+        { text: 'Explain why the rate of reaction increases when the temperature is increased.', marks: 3 },
+        { text: 'Compare the properties of metals and non-metals.', marks: 4 },
+        { text: 'Describe how crude oil is separated into useful fractions.', marks: 4 },
+        { text: 'Evaluate the advantages and disadvantages of using hydrogen as a fuel.', marks: 6 }
+      ],
+      'physics-edexcel': [
+        { text: 'State the equation that links distance, speed and time.', marks: 1 },
+        { text: 'Explain why a cyclist needs a driving force to maintain constant speed on a level road.', marks: 2 },
+        { text: 'Calculate the kinetic energy of a car with mass 1200 kg travelling at 15 m/s.', marks: 3 },
+        { text: 'Describe the energy transfers when a ball is thrown upwards and falls back down.', marks: 4 },
+        { text: 'Explain how the National Grid reduces energy losses during transmission.', marks: 4 },
+        { text: 'Compare the advantages and disadvantages of renewable and non-renewable energy sources.', marks: 6 },
+        { text: 'Describe how nuclear fission produces energy in a nuclear power station.', marks: 4 },
+        { text: 'Evaluate the use of different types of electromagnetic radiation in medicine.', marks: 6 }
+      ],
+      'maths-edexcel': [
+        { text: 'Solve the equation 3x + 7 = 22', marks: 2 },
+        { text: 'Work out 25% of £480', marks: 1 },
+        { text: 'The probability of rain tomorrow is 0.3. What is the probability it will NOT rain tomorrow?', marks: 1 },
+        { text: 'Factorise completely: 6x² + 9x', marks: 2 },
+        { text: 'A bag contains 5 red balls and 3 blue balls. Two balls are selected at random without replacement. Calculate the probability that both balls are red.', marks: 3 },
+        { text: 'The nth term of a sequence is 4n - 1. Find the 10th term of this sequence.', marks: 2 },
+        { text: 'Solve the simultaneous equations: 2x + y = 8 and x - y = 1', marks: 3 },
+        { text: 'Calculate the area of a circle with radius 6 cm. Give your answer in terms of π.', marks: 2 }
+      ]
+    };
+
+    const subjectTemplates = questionTemplates[subjectId as keyof typeof questionTemplates] || [];
+    
+    // If no specific templates, generate from topic names
+    if (subjectTemplates.length === 0) {
+      return subject.topics.slice(0, 8).map((topic: any, index: number) => ({
+        id: `exam-${topic.id}-${index}`,
+        questionNumber: index + 1,
+        text: `Explain two key concepts related to ${topic.name.toLowerCase()}.`,
+        marks: 4,
+        section: index < 4 ? 'A' : 'B'
+      }));
+    }
+
+    return subjectTemplates.map((template, index) => ({
+      id: `exam-${subjectId}-${index + 1}`,
+      questionNumber: index + 1,
+      text: template.text,
+      marks: template.marks,
+      section: index < Math.ceil(subjectTemplates.length / 2) ? 'A' : 'B'
+    }));
+  };
+
   // Generate exam questions from subject topics
   const generateExamQuestions = (): ExamQuestion[] => {
     const questions: ExamQuestion[] = [];
@@ -1342,53 +1429,9 @@ Write a story about discovering a hidden object.
       return questions;
     }
     
-    // Standard exam format for other subjects - GCSE specification focused
-    let questionNumber = 1;
-    subject.topics.forEach((topic, topicIndex) => {
-      // Filter questions to ensure they are GCSE specification appropriate
-      const gcseAppropriateQuestions = topic.questions.filter(q => {
-        // Exclude questions that are too advanced or not in GCSE scope
-        const questionText = q.question.toLowerCase();
-        
-        // Exclude university-level concepts
-        const excludedTerms = [
-          'quantum mechanics', 'calculus', 'differential equations', 'advanced statistics',
-          'university level', 'postgraduate', 'undergraduate', 'research methodology',
-          'theoretical framework', 'epistemology', 'historiography beyond gcse scope'
-        ];
-        
-        const hasExcludedTerms = excludedTerms.some(term => questionText.includes(term));
-        
-        // Include only questions with appropriate GCSE marks (1-12 typically)
-        const appropriateMarks = (q.marks || 2) <= 12;
-        
-        // Include only questions with GCSE-appropriate difficulty
-        const gcseLevel = true; // All curriculum questions are already GCSE-level
-        
-        return !hasExcludedTerms && appropriateMarks && gcseLevel;
-      });
-      
-      // Take 2-3 GCSE-appropriate questions from each topic
-      const topicQuestions = gcseAppropriateQuestions.slice(0, 3);
-      
-      topicQuestions.forEach((q, qIndex) => {
-        // Ensure question follows GCSE command word patterns
-        let questionText = q.question;
-        
-        // Keep the original question text without automatic prepending
-        // Questions should already be properly formatted from the AI generation
-        
-        questions.push({
-          id: `${topicIndex}-${qIndex}`,
-          questionNumber: questionNumber++,
-          text: questionText,
-          marks: Math.min(q.marks || 2, 12), // Cap marks at 12 for GCSE appropriateness
-          section: topicIndex < Math.ceil(subject.topics.length / 2) ? 'A' : 'B'
-        });
-      });
-    });
-    
-    return questions.slice(0, 15); // Reduce to 15 high-quality GCSE questions
+    // Generate exam-realistic questions different from practice questions
+    const examQuestions = generateExamSpecificQuestions(subject);
+    return examQuestions;
   };
 
   const [examQuestions] = useState<ExamQuestion[]>(generateExamQuestions());
