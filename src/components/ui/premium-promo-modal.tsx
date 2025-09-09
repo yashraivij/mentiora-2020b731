@@ -42,16 +42,16 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
             <div className="relative inline-block mb-3">
               <div className="absolute inset-0 bg-gradient-to-r from-amber-400/20 via-purple-400/20 to-indigo-400/20 blur-xl rounded-full"></div>
               <h1 className="relative text-2xl md:text-3xl font-black leading-tight tracking-wide drop-shadow-2xl">
-                <span className="text-2xl md:text-3xl">🎓</span>
+                <span className="text-2xl md:text-3xl">🚀</span>
                 <span className="bg-gradient-to-r from-amber-200 via-white to-amber-200 bg-clip-text text-transparent"> SECURE YOUR CHILD'S UNIVERSITY SUCCESS </span>
-                <span className="text-2xl md:text-3xl">🏆</span>
+                <span className="text-2xl md:text-3xl">⭐</span>
               </h1>
             </div>
             
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/5 via-blue-400/5 to-indigo-400/5 blur-lg rounded-xl"></div>
               <p className="relative text-base font-medium bg-gradient-to-r from-emerald-200 via-blue-200 to-indigo-200 bg-clip-text text-transparent max-w-2xl mx-auto leading-relaxed backdrop-blur-sm">
-                Join 10,000+ families saving £3,480+ on tutoring while achieving Grade 8-9 success
+                Join 10,000+ families saving £3,480+ on tutoring while achieving Grade 9 success
               </p>
             </div>
           </div>
@@ -68,9 +68,9 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                       <span className="text-lg">📈</span>
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold bg-gradient-to-r from-amber-300 to-yellow-200 bg-clip-text text-transparent mb-1">Grade 8-9 Guarantee</h3>
+                      <h3 className="text-lg font-bold bg-gradient-to-r from-amber-300 to-yellow-200 bg-clip-text text-transparent mb-1">Grade 9 Excellence</h3>
                       <p className="text-sm text-amber-100/80 leading-snug">
-                        AI-powered predictions with 94% accuracy ensure your child targets exactly what examiners want
+                        Predicted 2026 grades with 94% accuracy help your child target exactly what examiners want
                       </p>
                     </div>
                   </div>
@@ -88,7 +88,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                     <div>
                       <h3 className="text-lg font-bold bg-gradient-to-r from-purple-300 to-indigo-200 bg-clip-text text-transparent mb-1">15+ Hours Saved Weekly</h3>
                       <p className="text-sm text-purple-100/80 leading-snug">
-                        Precision-targeted study plans eliminate wasted time, giving families more quality moments together
+                        Smart revision notebook with predicted 2026 exams eliminates wasted study time
                       </p>
                     </div>
                   </div>
@@ -106,7 +106,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                     <div>
                       <h3 className="text-lg font-bold bg-gradient-to-r from-indigo-300 to-cyan-200 bg-clip-text text-transparent mb-1">University Success</h3>
                       <p className="text-sm text-indigo-100/80 leading-snug">
-                        92% of our premium students secure offers from Russell Group universities including Oxbridge
+                        92% of our premium students with predicted 2026 grades secure Russell Group university offers
                       </p>
                     </div>
                   </div>
@@ -124,7 +124,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                     <div>
                       <h3 className="text-lg font-bold bg-gradient-to-r from-rose-300 to-pink-200 bg-clip-text text-transparent mb-1">Complete Peace of Mind</h3>
                       <p className="text-sm text-rose-100/80 leading-snug">
-                        Real-time analytics and progress insights keep you confident in your child's academic journey
+                        Smart revision notebook and real-time analytics keep you confident in your child's journey
                       </p>
                     </div>
                   </div>
