@@ -31,11 +31,12 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           {/* Emotional Hook Header */}
           <div className="text-center mb-6">
             <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-300 via-blue-300 to-emerald-300 bg-clip-text text-transparent mb-4 leading-tight">
-              🎓 Secure Your Child's Path to University
+              Unlock Top Grades & Russell Group Universities
             </h1>
             
             <p className="text-lg text-slate-200 max-w-3xl mx-auto leading-relaxed">
-              While other parents spend thousands on tutoring with uncertain results, <span className="font-semibold text-emerald-300">you can guarantee your child's academic success for just £9.99/month</span>
+              While other parents spend thousands on tutoring with uncertain results, 
+              <span className="font-semibold text-emerald-300"> you can guarantee your child's academic success for just £9.99/month</span>
             </p>
           </div>
 
