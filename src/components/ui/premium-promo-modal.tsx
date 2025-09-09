@@ -174,7 +174,6 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                       <span className="text-lg text-amber-300 mx-1">→</span> 
                       <span className="text-emerald-300">£9.99/month</span>
                     </div>
-                    <div className="text-xs text-orange-200/80">Price increases to £19.99 next week - Secure your spot now!</div>
                   </div>
                 </div>
 
