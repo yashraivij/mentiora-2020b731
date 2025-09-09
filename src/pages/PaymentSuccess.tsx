@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 const PaymentSuccess: React.FC = () => {
-  const goHome = () => {
-    window.location.href = "/";
+  const { refreshSubscription } = useAuth();
+
+  useEffect(() => {
+    // Refresh subscription status when component loads
+    // Add slight delay to allow webhook to process
+    const timer = setTimeout(() => {
+      refreshSubscription();
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [refreshSubscription]);
+
+  const goToDashboard = () => {
+    window.location.href = "/dashboard";
   };
 
   return (
@@ -36,7 +49,7 @@ const PaymentSuccess: React.FC = () => {
             </div>
             
             <Button 
-              onClick={goHome}
+              onClick={goToDashboard}
               className="w-full"
               size="lg"
             >
