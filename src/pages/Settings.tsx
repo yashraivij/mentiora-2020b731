@@ -16,20 +16,27 @@ const Settings = () => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDeleteAccount = async () => {
-    if (!user?.id) return;
+    if (!user?.id) {
+      console.error('No user ID found');
+      return;
+    }
 
     setIsDeleting(true);
     try {
+      console.log('Attempting to delete account for user:', user.id);
+      
       // Call the delete user account function
-      const { error } = await supabase.rpc('delete_user_account', {
+      const { data, error } = await supabase.rpc('delete_user_account', {
         user_id_to_delete: user.id
       });
+
+      console.log('Delete account response:', { data, error });
 
       if (error) {
         console.error('Error deleting account:', error);
         toast({
           title: "Error",
-          description: "Failed to delete account. Please try again.",
+          description: `Failed to delete account: ${error.message}`,
           variant: "destructive",
         });
         return;
@@ -46,10 +53,10 @@ const Settings = () => {
       // Redirect to homepage
       navigate("/");
     } catch (error) {
-      console.error('Error deleting account:', error);
+      console.error('Error deleting account (catch block):', error);
       toast({
         title: "Error",
-        description: "Failed to delete account. Please try again.",
+        description: `Failed to delete account: ${error instanceof Error ? error.message : 'Unknown error'}`,
         variant: "destructive",
       });
     } finally {
