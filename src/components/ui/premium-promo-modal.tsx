@@ -51,9 +51,9 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
 
           {/* Premium Value Comparison */}
           <div className="mb-6">
-            <div className="relative bg-gradient-to-br from-amber-500/10 via-purple-500/10 to-indigo-500/10 border border-amber-400/30 rounded-3xl p-6 shadow-[0_0_30px_rgba(251,191,36,0.1)] backdrop-blur-sm">
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-400/5 to-purple-400/5 rounded-3xl animate-pulse"></div>
-              <h2 className="relative text-2xl md:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-amber-300 to-yellow-200 bg-clip-text text-transparent">The Smart Parent's Choice</h2>
+            <div className="relative bg-gradient-to-br from-emerald-950/40 via-blue-950/40 to-indigo-950/40 border-2 border-emerald-400/40 rounded-3xl p-6 shadow-[0_0_30px_rgba(16,185,129,0.15)] backdrop-blur-sm">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/8 via-blue-400/6 to-indigo-400/8 rounded-3xl animate-pulse"></div>
+              <h2 className="relative text-2xl md:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-emerald-300 via-blue-300 to-indigo-300 bg-clip-text text-transparent">The Smart Parent's Choice</h2>
               
               <div className="grid md:grid-cols-2 gap-6 relative">
                 {/* Traditional Tutoring */}
@@ -87,38 +87,38 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                 </div>
 
                 {/* Premium Solution */}
-                <div className="relative p-6 bg-gradient-to-br from-amber-950/30 via-purple-950/30 to-indigo-950/30 border border-amber-400/50 rounded-2xl shadow-[0_0_25px_rgba(251,191,36,0.15)] backdrop-blur-sm group hover:scale-105 transition-all duration-500">
-                  <div className="absolute inset-0 bg-gradient-to-br from-amber-400/10 via-purple-400/5 to-indigo-400/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative p-6 bg-gradient-to-br from-emerald-950/50 via-blue-950/40 to-indigo-950/50 border-2 border-emerald-400/60 rounded-2xl shadow-[0_0_25px_rgba(16,185,129,0.2)] backdrop-blur-sm group hover:scale-105 transition-all duration-500">
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/15 via-blue-400/10 to-indigo-400/15 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-400 text-black font-bold px-4 py-1 shadow-[0_0_15px_rgba(251,191,36,0.4)] animate-bounce">
+                    <Badge className="bg-gradient-to-r from-emerald-500 via-blue-500 to-indigo-500 text-white font-bold px-4 py-1 shadow-[0_0_15px_rgba(16,185,129,0.4)] animate-bounce">
                       ✨ SMART CHOICE
                     </Badge>
                   </div>
                   <div className="text-center pt-3 relative">
                     <div className="mb-4">
-                      <span className="text-2xl font-bold bg-gradient-to-r from-amber-300 to-yellow-200 bg-clip-text text-transparent">Mentiora Premium</span>
+                      <span className="text-2xl font-bold bg-gradient-to-r from-emerald-300 via-blue-300 to-indigo-300 bg-clip-text text-transparent">Mentiora Premium</span>
                     </div>
-                    <div className="text-5xl font-black bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-300 bg-clip-text text-transparent mb-2 drop-shadow-lg">£120</div>
-                    <div className="text-amber-300 font-medium mb-4">per year</div>
-                    <div className="space-y-2 text-sm text-amber-100/90">
+                    <div className="text-5xl font-black bg-gradient-to-r from-emerald-400 via-blue-300 to-indigo-400 bg-clip-text text-transparent mb-2 drop-shadow-lg">£120</div>
+                    <div className="text-emerald-300 font-medium mb-4">per year</div>
+                    <div className="space-y-2 text-sm text-emerald-100/90">
                       <p className="flex items-center gap-2">
-                        <span className="w-4 h-4 flex items-center justify-center text-amber-400 flex-shrink-0">📊</span>
+                        <span className="w-4 h-4 flex items-center justify-center text-emerald-400 flex-shrink-0">📊</span>
                         Predicted grades with 94% accuracy
                       </p>
                       <p className="flex items-center gap-2">
-                        <span className="w-4 h-4 flex items-center justify-center text-amber-400 flex-shrink-0">📅</span>
+                        <span className="w-4 h-4 flex items-center justify-center text-emerald-400 flex-shrink-0">📅</span>
                         Predicted 2026 exams (exact questions)
                       </p>
                       <p className="flex items-center gap-2">
-                        <span className="w-4 h-4 flex items-center justify-center text-amber-400 flex-shrink-0">📝</span>
+                        <span className="w-4 h-4 flex items-center justify-center text-emerald-400 flex-shrink-0">📝</span>
                         AI-powered revision notebook
                       </p>
                       <p className="flex items-center gap-2">
-                        <span className="w-4 h-4 flex items-center justify-center text-amber-400 flex-shrink-0">🎯</span>
+                        <span className="w-4 h-4 flex items-center justify-center text-emerald-400 flex-shrink-0">🎯</span>
                         Exam board specific predictions
                       </p>
                       <p className="flex items-center gap-2">
-                        <span className="w-4 h-4 flex items-center justify-center text-amber-400 flex-shrink-0">🏆</span>
+                        <span className="w-4 h-4 flex items-center justify-center text-emerald-400 flex-shrink-0">🏆</span>
                         92% university success rate
                       </p>
                     </div>
@@ -126,77 +126,39 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                 </div>
               </div>
 
-              {/* Premium CTA Section - Enhanced & More Visible */}
-              <div className="text-center mt-8 p-8 bg-gradient-to-br from-emerald-950/40 via-blue-950/40 to-indigo-950/40 border-2 border-emerald-400/60 rounded-3xl backdrop-blur-sm relative overflow-hidden shadow-[0_0_60px_rgba(16,185,129,0.25)] hover:shadow-[0_0_80px_rgba(16,185,129,0.35)] transition-all duration-500">
-                {/* Premium Background Effects */}
+              {/* Streamlined CTA Section */}
+              <div className="text-center mt-8 p-8 bg-gradient-to-br from-emerald-950/40 via-blue-950/40 to-indigo-950/40 border-2 border-emerald-400/60 rounded-3xl backdrop-blur-sm relative overflow-hidden shadow-[0_0_60px_rgba(16,185,129,0.25)]">
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/8 via-blue-400/6 to-indigo-400/8 animate-pulse"></div>
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 via-blue-400 to-indigo-400 animate-pulse"></div>
                 
-                {/* Floating Success Indicators */}
-                <div className="absolute top-4 right-4 flex items-center gap-2 text-emerald-300 text-sm font-semibold bg-emerald-950/50 px-3 py-1 rounded-full border border-emerald-400/30">
-                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                  15,000+ Students
-                </div>
+                <p className="text-lg text-emerald-100/90 mb-6 relative leading-relaxed">
+                  <span className="font-bold text-emerald-300">92% of our students</span> achieve Grade 8-9 and secure <span className="font-bold text-blue-300">Russell Group offers</span>
+                </p>
                 
-                <Badge className="relative bg-gradient-to-r from-emerald-500 via-blue-500 to-indigo-500 text-white font-bold px-8 py-3 text-base animate-bounce mb-6 shadow-[0_0_30px_rgba(16,185,129,0.4)] rounded-full">
-                  🔥 LIMITED TIME: First Month Only £1
-                </Badge>
-                
-                <h3 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-emerald-300 via-blue-300 to-indigo-300 bg-clip-text text-transparent mb-4 leading-tight">
-                  Transform Your Child's Future Today
-                </h3>
-                
-                <div className="bg-gradient-to-r from-emerald-950/30 via-blue-950/30 to-indigo-950/30 border border-emerald-400/40 rounded-2xl p-6 mb-6 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/5 to-indigo-400/5 animate-pulse"></div>
-                  <p className="text-lg text-emerald-100/90 mb-4 relative leading-relaxed">
-                    <span className="font-bold text-emerald-300">92% of our students</span> achieve Grade 8-9 and secure <span className="font-bold text-blue-300">Russell Group offers</span>
-                  </p>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                    <div className="bg-emerald-950/40 border border-emerald-400/30 rounded-xl p-3">
-                      <div className="text-2xl font-bold text-emerald-300">94%</div>
-                      <div className="text-xs text-emerald-200/80">Prediction Accuracy</div>
-                    </div>
-                    <div className="bg-blue-950/40 border border-blue-400/30 rounded-xl p-3">
-                      <div className="text-2xl font-bold text-blue-300">£3,480</div>
-                      <div className="text-xs text-blue-200/80">Tutoring Saved</div>
-                    </div>
-                    <div className="bg-indigo-950/40 border border-indigo-400/30 rounded-xl p-3">
-                      <div className="text-2xl font-bold text-indigo-300">15+hrs</div>
-                      <div className="text-xs text-indigo-200/80">Weekly Time Saved</div>
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center mb-8">
+                  <div className="bg-emerald-950/40 border border-emerald-400/30 rounded-xl p-4">
+                    <div className="text-3xl font-bold text-emerald-300">94%</div>
+                    <div className="text-sm text-emerald-200/80">Prediction Accuracy</div>
+                  </div>
+                  <div className="bg-blue-950/40 border border-blue-400/30 rounded-xl p-4">
+                    <div className="text-3xl font-bold text-blue-300">£3,480</div>
+                    <div className="text-sm text-blue-200/80">Tutoring Saved</div>
+                  </div>
+                  <div className="bg-indigo-950/40 border border-indigo-400/30 rounded-xl p-4">
+                    <div className="text-3xl font-bold text-indigo-300">15+hrs</div>
+                    <div className="text-sm text-indigo-200/80">Weekly Time Saved</div>
                   </div>
                 </div>
 
                 <Button 
                   onClick={handleUpgrade}
-                  className="relative w-full md:w-auto h-16 px-12 text-xl font-black bg-gradient-to-r from-emerald-500 via-blue-500 to-indigo-500 hover:from-emerald-600 hover:via-blue-600 hover:to-indigo-600 text-white border-2 border-emerald-300/60 shadow-[0_0_40px_rgba(16,185,129,0.5)] hover:shadow-[0_0_60px_rgba(16,185,129,0.7)] hover:scale-110 transition-all duration-500 rounded-2xl group overflow-hidden mb-6"
+                  className="relative w-full md:w-auto h-16 px-12 text-xl font-black bg-gradient-to-r from-emerald-500 via-blue-500 to-indigo-500 hover:from-emerald-600 hover:via-blue-600 hover:to-indigo-600 text-white border-2 border-emerald-300/60 shadow-[0_0_40px_rgba(16,185,129,0.5)] hover:shadow-[0_0_60px_rgba(16,185,129,0.7)] hover:scale-110 transition-all duration-500 rounded-2xl group overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-emerald-300/20 via-blue-300/20 to-indigo-300/20 animate-pulse"></div>
                   <span className="relative flex items-center justify-center gap-3">
                     <GraduationCap className="h-6 w-6" />
                     Secure My Child's Success - £1 First Month
-                    <div className="w-3 h-3 bg-white/40 rounded-full animate-bounce group-hover:animate-pulse"></div>
                   </span>
                 </Button>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-emerald-200/90 text-sm">
-                  <div className="flex items-center justify-center gap-2">
-                    <Shield className="h-5 w-5 text-emerald-400" />
-                    <span className="font-semibold">30-Day Guarantee</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-2">
-                    <CheckCircle className="h-5 w-5 text-emerald-400" />
-                    <span className="font-semibold">Cancel Anytime</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-2">
-                    <Heart className="h-5 w-5 text-emerald-400" />
-                    <span className="font-semibold">Trusted by 15K+ Families</span>
-                  </div>
-                </div>
-                
-                <p className="text-xs text-emerald-300/70 mt-4 italic">
-                  "Best investment we ever made for our daughter's education" - Sarah M., Parent
-                </p>
               </div>
             </div>
           </div>
