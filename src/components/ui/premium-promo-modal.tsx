@@ -88,7 +88,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                     <div>
                       <h3 className="text-lg font-bold bg-gradient-to-r from-purple-300 to-indigo-200 bg-clip-text text-transparent mb-1">Smart Revision Notebook</h3>
                       <p className="text-sm text-purple-100/80 leading-snug">
-                        Access predicted 2026 exam questions and personalized study notes
+                        Auto-generated notes from your mistakes help you learn faster and save study time
                       </p>
                     </div>
                   </div>
