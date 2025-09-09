@@ -4,14 +4,25 @@ import { BookOpen, CheckCircle, BarChart3, Users, ArrowRight, Star, Sparkles, Qu
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { DynamicTestimonials } from "@/components/ui/dynamic-testimonials";
 
 const Index = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   
-  
+  // Check for password reset tokens in URL hash and redirect
+  useEffect(() => {
+    const hashParams = new URLSearchParams(window.location.hash.substring(1));
+    const accessToken = hashParams.get('access_token');
+    const type = hashParams.get('type');
+    
+    if (accessToken && type === 'recovery') {
+      // Redirect to reset password page with the hash
+      window.location.href = '/reset-password' + window.location.hash;
+      return;
+    }
+  }, []);
   
   // Animation refs
   const heroRef = useRef(null);
