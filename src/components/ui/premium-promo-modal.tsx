@@ -41,11 +41,11 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           <div className="text-center mb-6 relative">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-400/5 to-transparent blur-xl"></div>
             <h1 className="relative text-3xl md:text-4xl font-black bg-gradient-to-r from-amber-300 via-purple-200 to-indigo-300 bg-clip-text text-transparent mb-4 leading-tight tracking-tight drop-shadow-lg animate-fade-in">
-              🎓 Secure Your Child's Path to University
+              Unlock Top Grades & Russell Group Universities
             </h1>
             
             <p className="text-lg text-slate-200/90 max-w-3xl mx-auto leading-relaxed backdrop-blur-sm">
-              While other parents spend thousands on tutoring with uncertain results, <span className="font-bold text-transparent bg-gradient-to-r from-amber-300 to-yellow-200 bg-clip-text"> you can guarantee your child's academic success for just £9.99/month</span>
+              While other parents spend thousands on tutoring with uncertain results, you can guarantee your child's academic success for just £9.99/month
             </p>
           </div>
 
@@ -53,7 +53,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           <div className="mb-6">
             <div className="relative bg-gradient-to-br from-amber-500/10 via-purple-500/10 to-indigo-500/10 border border-amber-400/30 rounded-3xl p-6 shadow-[0_0_30px_rgba(251,191,36,0.1)] backdrop-blur-sm">
               <div className="absolute inset-0 bg-gradient-to-br from-amber-400/5 to-purple-400/5 rounded-3xl animate-pulse"></div>
-              <h2 className="relative text-2xl md:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-amber-300 to-yellow-200 bg-clip-text text-transparent">The Luxury Investment</h2>
+              <h2 className="relative text-2xl md:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-amber-300 to-yellow-200 bg-clip-text text-transparent">The Smart Parent's Choice</h2>
               
               <div className="grid md:grid-cols-2 gap-6 relative">
                 {/* Traditional Tutoring */}
