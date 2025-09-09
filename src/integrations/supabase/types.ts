@@ -647,45 +647,6 @@ export type Database = {
         }
         Relationships: []
       }
-      profiled: {
-        Row: {
-          avatar_url: string | null
-          created_at: string | null
-          email: string
-          full_name: string | null
-          id: string
-          is_premium: boolean | null
-          premium: boolean
-          revision_goals: Json | null
-          subject_preferences: Json | null
-          username: string | null
-        }
-        Insert: {
-          avatar_url?: string | null
-          created_at?: string | null
-          email: string
-          full_name?: string | null
-          id: string
-          is_premium?: boolean | null
-          premium?: boolean
-          revision_goals?: Json | null
-          subject_preferences?: Json | null
-          username?: string | null
-        }
-        Update: {
-          avatar_url?: string | null
-          created_at?: string | null
-          email?: string
-          full_name?: string | null
-          id?: string
-          is_premium?: boolean | null
-          premium?: boolean
-          revision_goals?: Json | null
-          subject_preferences?: Json | null
-          username?: string | null
-        }
-        Relationships: []
-      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -694,6 +655,7 @@ export type Database = {
           email: string
           full_name: string | null
           id: string
+          is_premium: boolean | null
           plan: string | null
           stripe_customer_id: string | null
           subscription_status: string | null
@@ -707,6 +669,7 @@ export type Database = {
           email: string
           full_name?: string | null
           id: string
+          is_premium?: boolean | null
           plan?: string | null
           stripe_customer_id?: string | null
           subscription_status?: string | null
@@ -720,6 +683,7 @@ export type Database = {
           email?: string
           full_name?: string | null
           id?: string
+          is_premium?: boolean | null
           plan?: string | null
           stripe_customer_id?: string | null
           subscription_status?: string | null
