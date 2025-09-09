@@ -38,19 +38,26 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
         <div className="relative z-10 p-6 md:p-8 font-sans">
           {/* Premium Header with Dynamic Effects */}
           <div className="text-center mb-4 relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-400/10 to-transparent blur-2xl"></div>
-            <div className="relative inline-block mb-3">
-              <div className="absolute inset-0 bg-gradient-to-r from-amber-400/20 via-purple-400/20 to-indigo-400/20 blur-xl rounded-full"></div>
-              <h1 className="relative text-2xl md:text-3xl font-black bg-gradient-to-r from-amber-200 via-white to-amber-200 bg-clip-text text-transparent leading-tight tracking-wide drop-shadow-2xl">
-                🎓 SECURE YOUR CHILD'S UNIVERSITY SUCCESS 🏆
-              </h1>
-            </div>
-            
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/5 via-blue-400/5 to-indigo-400/5 blur-lg rounded-xl"></div>
-              <p className="relative text-base font-medium bg-gradient-to-r from-emerald-200 via-blue-200 to-indigo-200 bg-clip-text text-transparent max-w-2xl mx-auto leading-relaxed backdrop-blur-sm">
-                Join 10,000+ families saving £3,480+ on tutoring while achieving Grade 8-9 success
-              </p>
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-500/25 via-purple-500/20 to-indigo-500/25 rounded-xl blur-lg group-hover:blur-xl transition-all duration-500"></div>
+              <div className="relative p-6 rounded-xl bg-gradient-to-br from-amber-950/40 via-purple-950/30 to-indigo-950/40 border-2 border-amber-400/60 backdrop-blur-sm hover:border-amber-400/80 transition-all duration-500 hover:scale-105 shadow-[0_0_40px_rgba(251,191,36,0.3)]">
+                
+                <div className="flex items-center justify-center gap-4 mb-4">
+                  <div className="p-3 bg-gradient-to-br from-amber-500 via-purple-500 to-indigo-500 rounded-xl shadow-[0_0_20px_rgba(251,191,36,0.4)] group-hover:shadow-[0_0_30px_rgba(251,191,36,0.6)] transition-all duration-500 flex items-center justify-center">
+                    <span className="text-2xl">🎓</span>
+                  </div>
+                  <h1 className="text-xl md:text-2xl font-black bg-gradient-to-r from-amber-200 via-white to-amber-200 bg-clip-text text-transparent leading-tight tracking-wide">
+                    SECURE YOUR CHILD'S UNIVERSITY SUCCESS
+                  </h1>
+                  <div className="p-3 bg-gradient-to-br from-amber-500 via-purple-500 to-indigo-500 rounded-xl shadow-[0_0_20px_rgba(251,191,36,0.4)] group-hover:shadow-[0_0_30px_rgba(251,191,36,0.6)] transition-all duration-500 flex items-center justify-center">
+                    <span className="text-2xl">🏆</span>
+                  </div>
+                </div>
+                
+                <p className="text-sm font-medium bg-gradient-to-r from-emerald-200 via-blue-200 to-indigo-200 bg-clip-text text-transparent max-w-2xl mx-auto leading-snug">
+                  Join 10,000+ families saving £3,480+ on tutoring while achieving Grade 8-9 success
+                </p>
+              </div>
             </div>
           </div>
 
