@@ -46,9 +46,9 @@ export const useSubscription = () => {
       window.location.href = "/login";
       return;
     }
-    const join = "https://buy.stripe.com/test_3cI28q8og4VsfiE0yI8N202".includes("?") ? "&" : "?";
+    const join = "https://buy.stripe.com/3cs4jLf2W5ZweaA6ot".includes("?") ? "&" : "?";
     window.location.href =
-      "https://buy.stripe.com/test_3cI28q8og4VsfiE0yI8N202" + join +
+      "https://buy.stripe.com/3cs4jLf2W5ZweaA6ot" + join +
       "client_reference_id=" + encodeURIComponent(user.id) +
       "&prefilled_email=" + encodeURIComponent(user.email || "") +
       "&success_url=" + encodeURIComponent("https://mentiora.com/dashboard");
