@@ -46,7 +46,7 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
           </div>
 
           {/* Value Comparison - The Smart Investment */}
-          <div className="mb-10">
+          <div className="mb-8">
             <div className="bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border-2 border-emerald-400/30 rounded-2xl p-8 shadow-xl">
               <h2 className="text-3xl font-black text-center mb-8 text-emerald-300">The Smart Parent's Choice</h2>
               
@@ -95,15 +95,15 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                     <div className="text-emerald-300 font-medium mb-4">per year</div>
                     <div className="space-y-2 text-sm text-emerald-100">
                       <p className="flex items-center gap-2">
-                        <BarChart3 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        <span className="w-4 h-4 flex items-center justify-center text-emerald-400 flex-shrink-0">📊</span>
                         Predicted grades
                       </p>
                       <p className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        <span className="w-4 h-4 flex items-center justify-center text-emerald-400 flex-shrink-0">📅</span>
                         Predicted 2026 exams
                       </p>
                       <p className="flex items-center gap-2">
-                        <NotebookPen className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        <span className="w-4 h-4 flex items-center justify-center text-emerald-400 flex-shrink-0">📝</span>
                         Smart revision notebook
                       </p>
                       <p className="flex items-center gap-2">
@@ -127,6 +127,43 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                 <p className="text-emerald-200 text-lg">
                   Better results. Better future. Better investment.
                 </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Primary CTA - Moved to prominent position */}
+          <div className="text-center mb-8">
+            <div className="bg-gradient-to-br from-white/5 to-slate-800/50 border-2 border-purple-300/30 rounded-2xl p-8 shadow-2xl hover:border-purple-300/50 transition-all duration-300">
+              <div className="mb-6">
+                <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold px-6 py-2 text-base animate-pulse mb-4">
+                  ⏰ LIMITED TIME: First Month Only £1
+                </Badge>
+                <h3 className="text-3xl font-bold text-white mb-3">
+                  Give Your Child The University Edge
+                </h3>
+                <p className="text-xl text-slate-200 mb-6 max-w-2xl mx-auto">
+                  Join 15,000+ families who've secured their child's academic future. 
+                  <span className="font-bold text-emerald-300"> Cancel anytime. Risk-free guarantee.</span>
+                </p>
+              </div>
+
+              <Button 
+                onClick={handleUpgrade}
+                className="w-full md:w-auto h-14 px-12 text-xl font-black bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 hover:from-purple-700 hover:via-blue-700 hover:to-emerald-700 text-white border-2 border-white/20 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 rounded-xl"
+              >
+                🎓 Secure My Child's Future - Start Now
+              </Button>
+              
+              <div className="flex items-center justify-center gap-4 mt-6 text-slate-300">
+                <div className="flex items-center gap-2">
+                  <Shield className="h-5 w-5 text-emerald-400" />
+                  <span className="text-sm">30-Day Money Back Guarantee</span>
+                </div>
+                <div className="w-1 h-1 bg-slate-400 rounded-full"></div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-5 w-5 text-emerald-400" />
+                  <span className="text-sm">Cancel Anytime</span>
+                </div>
               </div>
             </div>
           </div>
@@ -246,43 +283,6 @@ export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoMo
                       <p className="text-sm text-emerald-300">Parent, Manchester</p>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Primary CTA - Moved up from bottom */}
-          <div className="text-center mb-8">
-            <div className="bg-gradient-to-br from-white/5 to-slate-800/50 border-2 border-purple-300/30 rounded-2xl p-8 shadow-2xl hover:border-purple-300/50 transition-all duration-300">
-              <div className="mb-6">
-                <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold px-6 py-2 text-base animate-pulse mb-4">
-                  ⏰ LIMITED TIME: First Month Only £1
-                </Badge>
-                <h3 className="text-3xl font-bold text-white mb-3">
-                  Give Your Child The University Edge
-                </h3>
-                <p className="text-xl text-slate-200 mb-6 max-w-2xl mx-auto">
-                  Join 15,000+ families who've secured their child's academic future. 
-                  <span className="font-bold text-emerald-300"> Cancel anytime. Risk-free guarantee.</span>
-                </p>
-              </div>
-
-              <Button 
-                onClick={handleUpgrade}
-                className="w-full md:w-auto h-14 px-12 text-xl font-black bg-gradient-to-r from-purple-600 via-blue-600 to-emerald-600 hover:from-purple-700 hover:via-blue-700 hover:to-emerald-700 text-white border-2 border-white/20 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 rounded-xl"
-              >
-                🎓 Secure My Child's Future - Start Now
-              </Button>
-              
-              <div className="flex items-center justify-center gap-4 mt-6 text-slate-300">
-                <div className="flex items-center gap-2">
-                  <Shield className="h-5 w-5 text-emerald-400" />
-                  <span className="text-sm">30-Day Money Back Guarantee</span>
-                </div>
-                <div className="w-1 h-1 bg-slate-400 rounded-full"></div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-emerald-400" />
-                  <span className="text-sm">Cancel Anytime</span>
                 </div>
               </div>
             </div>
