@@ -344,76 +344,6 @@ const Practice = () => {
     const questionText = question.question;
     const modelAnswer = question.modelAnswer;
     const markingCriteria = question.markingCriteria.breakdown;
-    const totalMarks = question.marks;
-    
-    // Identify question type
-    const questionLower = questionText.toLowerCase();
-    const isFunctionQuestion = questionLower.includes('function of') || questionLower.includes('role of') || questionLower.includes('purpose of');
-    const isDefine = !isFunctionQuestion && (questionLower.includes('define') || questionLower.includes('what is') || questionLower.includes('meaning of'));
-    const isExplain = questionLower.includes('explain') || questionLower.includes('describe') || questionLower.includes('how') || questionLower.includes('why');
-    const isList = questionLower.includes('list') || questionLower.includes('name') || questionLower.includes('identify') || questionLower.includes('state');
-    const isCalculate = questionLower.includes('calculate') || questionLower.includes('work out') || questionLower.includes('find');
-    
-    // Better word filtering - exclude common/inappropriate words
-    const excludeWords = new Set(['the', 'and', 'a', 'an', 'is', 'are', 'was', 'were', 'this', 'that', 'these', 'those', 'they', 'them', 'their', 'have', 'has', 'had', 'with', 'from', 'for', 'of', 'in', 'on', 'at', 'by', 'to', 'be', 'been', 'being', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'can', 'may', 'might', 'must', 'shall', 'get', 'got', 'give', 'gives', 'gave', 'take', 'takes', 'took', 'make', 'makes', 'made', 'come', 'comes', 'came', 'go', 'goes', 'went', 'see', 'sees', 'saw', 'know', 'knows', 'knew', 'think', 'thinks', 'thought', 'say', 'says', 'said', 'tell', 'tells', 'told', 'ask', 'asks', 'asked', 'work', 'works', 'worked', 'help', 'helps', 'helped', 'try', 'tries', 'tried', 'keep', 'keeps', 'kept', 'let', 'lets', 'put', 'puts', 'set', 'sets', 'run', 'runs', 'ran', 'find', 'finds', 'found', 'feel', 'feels', 'felt', 'seem', 'seems', 'seemed', 'look', 'looks', 'looked', 'turn', 'turns', 'turned', 'become', 'becomes', 'became', 'show', 'shows', 'showed', 'provides', 'allows', 'causes', 'means', 'includes', 'contains', 'gives', 'shows', 'demonstrates', 'illustrates', 'reveals', 'indicates', 'suggests', 'implies', 'refers', 'relates', 'concerns', 'involves', 'requires', 'needs', 'wants', 'wishes', 'hopes', 'expects', 'believes', 'thinks', 'feels', 'seems', 'appears', 'looks', 'sounds', 'leads', 'results', 'creates', 'produces', 'generates', 'develops', 'forms', 'builds', 'constructs', 'establishes', 'question', 'answer', 'explain', 'describe', 'define', 'example', 'examples', 'such', 'like', 'marks', 'mark', 'point', 'points', 'student', 'should', 'correct', 'appropriate', 'relevant', 'suitable', 'jesus', 'christ', 'god', 'lord', 'son', 'father', 'holy', 'spirit']);
-    
-    // Extract meaningful terms with better filtering
-    const extractKeyTerms = (text: string) => {
-      return text.toLowerCase()
-        .replace(/[^\w\s]/g, ' ')
-        .split(/\s+/)
-        .filter(word => 
-          word.length > 4 && 
-          !excludeWords.has(word) &&
-          !/^\d+$/.test(word) &&
-          word.match(/[aeiou]/)
-        )
-        .slice(0, 2);
-    };
-    
-    // Get key terms from marking criteria and model answer
-    const criteriaTerms = extractKeyTerms(markingCriteria.join(' '));
-    const modelTerms = extractKeyTerms(modelAnswer.split(/[.!?]/)[0] || '');
-    const bestTerms = criteriaTerms.length > 0 ? criteriaTerms : modelTerms;
-    
-    // Generate hints based on question type
-    if (isFunctionQuestion) {
-      return bestTerms.length > 0 
-        ? `Explain the specific role and what it does. Focus on concepts like ${bestTerms.join(' and ')}. Your answer needs ${totalMarks} clear points.`
-        : `Explain the specific role and what it does. Your answer needs ${totalMarks} clear points about its function and importance.`;
-    }
-    
-    if (isDefine) {
-      return bestTerms.length > 0 
-        ? `Define this clearly, mentioning key aspects like ${bestTerms.join(' and ')}. Include the essential characteristics for full marks.`
-        : "Provide a precise definition with the essential characteristics. Be specific and detailed.";
-    }
-    
-    if (isExplain) {
-      return bestTerms.length > 0 
-        ? `Explain step by step, covering concepts like ${bestTerms.join(' and ')}. You need ${totalMarks} clear points or stages.`
-        : `Break this down into ${totalMarks} clear steps or points. Explain each stage thoroughly.`;
-    }
-    
-    if (isList) {
-      return `List ${totalMarks} distinct, specific points. Each point should be clearly different and detailed.`;
-    }
-    
-    if (isCalculate) {
-      const numbers = modelAnswer.match(/\d+(?:\.\d+)?/g) || [];
-      return numbers.length >= 2 
-        ? `Use the numbers from the question and show all working. The calculation involves ${numbers.slice(0, 2).join(' and ')}.`
-        : "Show all your working step by step. Identify the correct numbers and operation from the question.";    
-    }
-    
-    // Generic hint - only use terms if they're good quality
-    return bestTerms.length > 0 && bestTerms.every(term => term.length > 5)
-      ? `Focus on key concepts like ${bestTerms.join(' and ')}. Make sure your answer has ${totalMarks} clear points to get full marks.`
-      : `Your answer needs ${totalMarks} clear, detailed points to get full marks. Be specific and thorough.`;
-  };
-    const questionText = question.question;
-    const modelAnswer = question.modelAnswer;
-    const markingCriteria = question.markingCriteria.breakdown;
     
     // Extract key points from marking criteria (array of strings)
     const totalMarks = question.marks;
@@ -427,37 +357,21 @@ const Practice = () => {
     const isList = questionLower.includes('list') || questionLower.includes('name') || questionLower.includes('identify') || questionLower.includes('state');
     const isCalculate = questionLower.includes('calculate') || questionLower.includes('work out') || questionLower.includes('find');
     
-    // Comprehensive word filter for better term extraction
-    const filterWords = new Set([
-      // Articles, pronouns, prepositions, common words
-      'the', 'a', 'an', 'this', 'that', 'these', 'those', 'they', 'them', 'their', 'there', 'then', 'when', 'where', 'what', 'which', 'who', 'how', 'why', 'with', 'from', 'into', 'onto', 'upon', 'over', 'under', 'through', 'during', 'before', 'after', 'above', 'below', 'between', 'among', 'within', 'without', 'against', 'toward', 'towards', 'about', 'around', 'beside', 'behind', 'beyond',
-      // Common verbs
-      'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'must', 'can', 'shall', 'ought', 'need', 'dare', 'used', 'get', 'got', 'give', 'gives', 'gave', 'take', 'takes', 'took', 'make', 'makes', 'made', 'come', 'comes', 'came', 'go', 'goes', 'went', 'see', 'sees', 'saw', 'know', 'knows', 'knew', 'think', 'thinks', 'thought', 'say', 'says', 'said', 'tell', 'tells', 'told', 'ask', 'asks', 'asked', 'work', 'works', 'worked', 'help', 'helps', 'helped', 'try', 'tries', 'tried', 'keep', 'keeps', 'kept', 'let', 'lets', 'put', 'puts', 'set', 'sets', 'run', 'runs', 'ran', 'find', 'finds', 'found', 'feel', 'feels', 'felt', 'seem', 'seems', 'seemed', 'look', 'looks', 'looked', 'turn', 'turns', 'turned', 'become', 'becomes', 'became', 'leave', 'leaves', 'left', 'move', 'moves', 'moved', 'live', 'lives', 'lived', 'show', 'shows', 'showed', 'play', 'plays', 'played', 'hear', 'hears', 'heard', 'bring', 'brings', 'brought', 'happen', 'happens', 'happened', 'write', 'writes', 'wrote', 'sit', 'sits', 'sat', 'stand', 'stands', 'stood', 'lose', 'loses', 'lost', 'pay', 'pays', 'paid', 'meet', 'meets', 'met', 'include', 'includes', 'included', 'continue', 'continues', 'continued', 'follow', 'follows', 'followed', 'stop', 'stops', 'stopped', 'create', 'creates', 'created', 'speak', 'speaks', 'spoke', 'read', 'reads', 'allow', 'allows', 'allowed', 'add', 'adds', 'added', 'spend', 'spends', 'spent', 'grow', 'grows', 'grew', 'open', 'opens', 'opened', 'walk', 'walks', 'walked', 'win', 'wins', 'won', 'offer', 'offers', 'offered', 'remember', 'remembers', 'remembered', 'love', 'loves', 'loved', 'consider', 'considers', 'considered', 'appear', 'appears', 'appeared', 'buy', 'buys', 'bought', 'wait', 'waits', 'waited', 'serve', 'serves', 'served', 'die', 'dies', 'died', 'send', 'sends', 'sent', 'expect', 'expects', 'expected', 'build', 'builds', 'built', 'stay', 'stays', 'stayed', 'fall', 'falls', 'fell', 'cut', 'cuts', 'reach', 'reaches', 'reached', 'kill', 'kills', 'killed', 'remain', 'remains', 'remained', 'suggest', 'suggests', 'suggested', 'raise', 'raises', 'raised', 'pass', 'passes', 'passed', 'sell', 'sells', 'sold', 'require', 'requires', 'required', 'report', 'reports', 'reported', 'decide', 'decides', 'decided', 'pull', 'pulls', 'pulled', 'provides', 'allows', 'causes', 'means', 'refers', 'relates', 'concerns', 'involves', 'requires', 'needs', 'wants', 'wishes', 'hopes', 'expects', 'believes', 'thinks', 'feels', 'seems', 'appears', 'looks', 'sounds', 'leads', 'results', 'causes', 'creates', 'produces', 'generates', 'develops', 'forms', 'makes', 'builds', 'constructs', 'establishes',
-      // Common adjectives and adverbs  
-      'all', 'any', 'each', 'every', 'some', 'many', 'much', 'more', 'most', 'less', 'few', 'little', 'other', 'another', 'such', 'same', 'different', 'new', 'old', 'good', 'great', 'small', 'large', 'long', 'short', 'high', 'low', 'right', 'left', 'next', 'last', 'first', 'second', 'third', 'important', 'possible', 'available', 'free', 'able', 'sure', 'certain', 'clear', 'hard', 'easy', 'strong', 'weak', 'full', 'empty', 'open', 'close', 'closed', 'very', 'quite', 'rather', 'too', 'enough', 'extremely', 'completely', 'totally', 'absolutely', 'perfectly', 'exactly', 'probably', 'possibly', 'certainly', 'definitely', 'obviously', 'clearly', 'apparently', 'perhaps', 'maybe', 'especially', 'particularly', 'mainly', 'mostly', 'generally', 'basically', 'essentially', 'actually', 'really', 'truly',
-      // Connectors and transitional words
-      'and', 'or', 'but', 'so', 'yet', 'for', 'nor', 'because', 'since', 'as', 'if', 'unless', 'until', 'while', 'whereas', 'although', 'though', 'even', 'however', 'therefore', 'thus', 'hence', 'consequently', 'accordingly', 'meanwhile', 'furthermore', 'moreover', 'additionally', 'also', 'too', 'either', 'neither', 'both', 'not', 'only', 'just', 'still', 'already', 'yet', 'soon', 'now', 'then', 'here', 'there', 'everywhere', 'somewhere', 'anywhere', 'nowhere', 'always', 'never', 'sometimes', 'often', 'usually', 'rarely', 'seldom', 'frequently', 'occasionally', 'constantly', 'continually', 'regularly',
-      // Question-specific and academic words that don't add value
-      'question', 'answer', 'explain', 'describe', 'define', 'example', 'examples', 'such', 'like', 'including', 'contains', 'includes', 'provides', 'gives', 'shows', 'demonstrates', 'illustrates', 'reveals', 'indicates', 'suggests', 'implies', 'means', 'refers', 'relates', 'concerns', 'involves', 'requires', 'needs', 'wants', 'wishes', 'hopes', 'expects', 'believes', 'thinks', 'feels', 'seems', 'appears', 'looks', 'sounds', 'marks', 'mark', 'point', 'points', 'answer', 'student', 'should', 'correct', 'appropriate', 'relevant', 'suitable', 'acceptable', 'valid', 'credit', 'awarded', 'given', 'jesus', 'christ', 'god', 'lord', 'son', 'father', 'holy', 'spirit'
-    ]);
+    // Extract key terms from first sentence of model answer
+    const firstSentence = modelAnswer.split(/[.!?]/)[0] || '';
+    const keyTerms = firstSentence.toLowerCase()
+      .replace(/[^\w\s]/g, ' ')
+      .split(/\s+/)
+      .filter(word => word.length > 3 && !['this', 'that', 'these', 'those', 'they', 'them', 'provides', 'allows', 'causes', 'means'].includes(word))
+      .slice(0, 2);
     
-    // Extract meaningful terms with comprehensive filtering
-    const extractMeaningfulTerms = (text: string) => {
-      const words = text.toLowerCase()
-        .replace(/[^\w\s]/g, ' ')
-        .split(/\s+/)
-        .filter(word => 
-          word.length > 4 && 
-          !filterWords.has(word) &&
-          !/^\d+$/.test(word) && // No pure numbers
-          !/^[ivxlcdm]+$/.test(word) && // No roman numerals
-          word.match(/[aeiou]/) && // Must contain a vowel
-          !word.match(/^(ing|ed|er|est|ly|tion|sion|ness|ment|ity|able|ible|ous|ful|less|ward|wise)$/) // No lone suffixes
-        );
-      
-      // Remove duplicates and return up to 2 meaningful terms
-      return [...new Set(words)].slice(0, 2);
-    };
+    // Extract key concepts from marking criteria for more targeted hints
+    const criteriaText = markingPoints.join(' ').toLowerCase();
+    const criteriaConcepts = criteriaText
+      .replace(/[^\w\s]/g, ' ')
+      .split(/\s+/)
+      .filter(word => word.length > 4 && !['marks', 'point', 'points', 'answer', 'student', 'should', 'correct', 'appropriate'].includes(word))
+      .slice(0, 2);
     
     // Generate targeted hints based on question type and marking criteria
     if (isFunctionQuestion) {
