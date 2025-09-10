@@ -431,11 +431,31 @@ const Practice = () => {
         if (modelLower.includes('reaction') && !modelLower.includes('chemical')) {
           return "Think about how characters react and what this tells us.";
         }
-        
-        // Math-specific content analysis
-        if (modelLower.includes('algebra') || modelLower.includes('solve') || modelLower.includes('x =')) {
-          return "Set up the equation step-by-step. Remember to show each algebraic manipulation clearly.";
-        }
+         
+         // Math-specific content analysis
+         // Check for specific number operations first
+         if (modelAnswer.match(/\d+\s*[\+\-\×÷]\s*\d+/) || modelLower.includes('calculate') || modelLower.includes('work out')) {
+           if (modelLower.includes('add') || modelAnswer.includes('+')) {
+             return "Add the numbers step by step. Line up decimal places if needed and check your arithmetic.";
+           }
+           if (modelLower.includes('subtract') || modelAnswer.includes('−') || modelAnswer.includes('-')) {
+             return "Subtract carefully, borrowing if necessary. Double-check by adding your answer to the smaller number.";
+           }
+           if (modelLower.includes('multiply') || modelAnswer.includes('×') || modelAnswer.includes('*')) {
+             return "Multiply step by step. Use the grid method or long multiplication, and check your place values.";
+           }
+           if (modelLower.includes('divide') || modelAnswer.includes('÷') || modelAnswer.includes('/')) {
+             return "Use long division or chunking method. Check your answer by multiplying back.";
+           }
+           if (modelAnswer.match(/\d+\.\d+/)) {
+             return "Work with decimals carefully. Line up decimal points when adding/subtracting, count decimal places when multiplying.";
+           }
+           return "Work through the calculation step by step, showing your method clearly.";
+         }
+         
+         if ((modelLower.includes('algebra') || modelLower.includes('solve') || modelLower.includes('x =')) && !modelAnswer.match(/^\d+$/)) {
+           return "Set up the equation step-by-step. Remember to show each algebraic manipulation clearly.";
+         }
         if (modelLower.includes('fraction') || modelLower.includes('/') && modelAnswer.match(/\d+\/\d+/)) {
           return "Work with fractions carefully. Find a common denominator when adding or subtracting, and simplify your final answer.";
         }
