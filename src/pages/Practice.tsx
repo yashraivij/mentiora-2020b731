@@ -345,69 +345,130 @@ const Practice = () => {
     const modelAnswer = question.modelAnswer;
     const markingCriteria = question.markingCriteria.breakdown;
     
-    // Extract key concepts from the model answer
-    const extractKeyTerms = (text: string) => {
-      const words = text.split(/[\s,.-]+/)
-        .filter(word => word.length > 3)
-        .map(word => word.toLowerCase().replace(/[^a-zA-Z]/g, ''));
+    // Advanced analysis of model answer to generate contextual hints
+    const analyzeModelAnswer = () => {
+      const sentences = modelAnswer.split(/[.!?]+/).filter(s => s.trim().length > 10);
+      const firstSentence = sentences[0]?.trim() || '';
+      const keyPoints = sentences.slice(1).map(s => s.trim()).filter(s => s.length > 5);
       
-      // Remove common words and focus on content-specific terms
-      const stopWords = ['this', 'that', 'with', 'from', 'they', 'have', 'been', 'will', 'would', 'could', 'should', 'because', 'when', 'where', 'what', 'which', 'more', 'most', 'some', 'many', 'such', 'than', 'also', 'very', 'can', 'and', 'but', 'are', 'was', 'were', 'the', 'for', 'not', 'all', 'any', 'can', 'had', 'her', 'him', 'his', 'how', 'its', 'may', 'new', 'now', 'old', 'see', 'two', 'who', 'boy', 'did', 'has', 'let', 'put', 'say', 'she', 'too', 'use'];
+      // Extract important scientific/academic terms and concepts
+      const extractImportantConcepts = (text: string) => {
+        const scientificTerms = [];
+        const commonWords = ['the', 'and', 'but', 'or', 'a', 'an', 'is', 'are', 'was', 'were', 'has', 'have', 'had', 'this', 'that', 'these', 'those', 'to', 'of', 'in', 'on', 'at', 'by', 'for', 'with', 'from', 'as', 'can', 'will', 'would', 'could', 'should', 'may', 'might', 'must', 'need', 'also', 'very', 'more', 'most', 'some', 'many', 'much', 'such', 'than', 'through', 'during', 'before', 'after', 'above', 'below', 'between', 'into', 'about', 'against', 'example', 'examples', 'because', 'therefore', 'however', 'although', 'while', 'when', 'where', 'what', 'which', 'who', 'how', 'why'];
+        
+        // Split text and find meaningful terms
+        const words = text.toLowerCase().split(/[\s,.-]+/)
+          .filter(word => word.length > 3 && !commonWords.includes(word))
+          .map(word => word.replace(/[^a-zA-Z]/g, ''));
+        
+        // Look for important scientific indicators
+        const patterns = [
+          /\d+°c|\d+\s*degrees/i, // temperatures
+          /\d+%|\d+\s*percent/i, // percentages  
+          /ph\s*\d+|ph\s*scale/i, // pH values
+          /formula|equation|reaction/i, // chemistry/physics
+          /cell|nucleus|mitochondria|chloroplast/i, // biology
+          /tectonic|volcanic|earthquake|tsunami/i, // geography
+          /energy|force|velocity|acceleration/i, // physics
+          /carbon|oxygen|hydrogen|nitrogen/i, // chemistry
+          /photosynthesis|respiration|osmosis|diffusion/i, // biology processes
+        ];
+        
+        patterns.forEach(pattern => {
+          const matches = text.match(pattern);
+          if (matches) {
+            scientificTerms.push(...matches.map(m => m.toLowerCase()));
+          }
+        });
+        
+        return [...new Set([...words.slice(0, 6), ...scientificTerms])];
+      };
       
-      return words.filter(word => !stopWords.includes(word) && word.length > 3);
+      return {
+        mainTopic: extractImportantConcepts(firstSentence),
+        supportingPoints: keyPoints.map(point => extractImportantConcepts(point)).flat(),
+        keyTerms: extractImportantConcepts(modelAnswer)
+      };
     };
     
-    // Get key concepts from model answer and marking criteria
-    const keyTerms = extractKeyTerms(modelAnswer);
-    const criteriaTerms = extractKeyTerms(markingCriteria.join(' '));
-    const allKeyTerms = [...new Set([...keyTerms, ...criteriaTerms])];
+    const analysis = analyzeModelAnswer();
     
-    // Provide hints based on question type and key terms
-    const getContentSpecificHint = () => {
-      // Check for question type indicators
-      const isDefinition = questionText.includes('define') || questionText.includes('what is') || questionText.includes('meaning');
-      const isExplain = questionText.includes('explain') || questionText.includes('describe') || questionText.includes('how');
-      const isCompare = questionText.includes('compare') || questionText.includes('contrast') || questionText.includes('difference');
-      const isEvaluate = questionText.includes('evaluate') || questionText.includes('assess') || questionText.includes('discuss');
-      const isList = questionText.includes('list') || questionText.includes('name') || questionText.includes('identify');
+    // Generate targeted hints based on question type and model answer analysis
+    const generateTargetedHint = () => {
+      // Identify question command words
+      const isDefine = questionText.includes('define') || questionText.includes('what is') || questionText.includes('meaning of');
+      const isExplain = questionText.includes('explain') || questionText.includes('describe') || questionText.includes('how does') || questionText.includes('why does');
+      const isCompare = questionText.includes('compare') || questionText.includes('contrast') || questionText.includes('difference between');
+      const isEvaluate = questionText.includes('evaluate') || questionText.includes('assess') || questionText.includes('discuss') || questionText.includes('advantages') || questionText.includes('disadvantages');
+      const isList = questionText.includes('list') || questionText.includes('name') || questionText.includes('identify') || questionText.includes('state');
+      const isCalculate = questionText.includes('calculate') || questionText.includes('work out') || questionText.includes('find the');
       
-      // Build hint based on question type and content
       let hint = '';
+      const allKeyTerms = [...new Set([...analysis.mainTopic, ...analysis.supportingPoints])].slice(0, 5);
       
-      if (isDefinition) {
-        hint = `Give a clear definition that includes: ${allKeyTerms.slice(0, 3).join(', ')}.`;
-      } else if (isCompare) {
-        hint = `Compare by discussing similarities and differences. Focus on: ${allKeyTerms.slice(0, 4).join(', ')}.`;
-      } else if (isEvaluate) {
-        hint = `Present arguments for and against, then reach a conclusion. Consider: ${allKeyTerms.slice(0, 4).join(', ')}.`;
-      } else if (isList) {
-        hint = `Provide a clear list including: ${allKeyTerms.slice(0, 5).join(', ')}.`;
-      } else if (isExplain) {
-        hint = `Explain the process/concept step by step. Key points to cover: ${allKeyTerms.slice(0, 4).join(', ')}.`;
-      } else {
-        // General content hint based on key terms
-        if (allKeyTerms.length >= 3) {
-          hint = `Your answer should include these key concepts: ${allKeyTerms.slice(0, 4).join(', ')}.`;
+      if (isDefine && analysis.mainTopic.length > 0) {
+        hint = `Start with a clear definition. Your answer should mention: ${analysis.mainTopic.slice(0, 3).join(', ')}. `;
+      } else if (isExplain && analysis.keyTerms.length > 0) {
+        const processTerms = analysis.keyTerms.filter(term => 
+          ['process', 'reaction', 'formation', 'movement', 'change', 'occurs', 'happens'].some(p => 
+            modelAnswer.toLowerCase().includes(p)
+          )
+        );
+        if (processTerms.length > 0 || modelAnswer.includes('first') || modelAnswer.includes('then') || modelAnswer.includes('finally')) {
+          hint = `Explain the process step-by-step. Key stages to cover: ${allKeyTerms.slice(0, 4).join(', ')}. `;
+        } else {
+          hint = `Explain the concept clearly. Important points to include: ${allKeyTerms.slice(0, 4).join(', ')}. `;
         }
+      } else if (isCompare && allKeyTerms.length > 2) {
+        hint = `Compare both sides systematically. Consider these aspects: ${allKeyTerms.slice(0, 4).join(', ')}. Mention similarities AND differences. `;
+      } else if (isEvaluate) {
+        hint = `Present balanced arguments. Consider: ${allKeyTerms.slice(0, 4).join(', ')}. Give advantages and disadvantages, then reach a conclusion. `;
+      } else if (isList && allKeyTerms.length > 0) {
+        const numberOfPoints = modelAnswer.split(/[.;]/).length - 1;
+        hint = `Provide a clear list (aim for ${Math.min(numberOfPoints, 5)} points). Include: ${allKeyTerms.slice(0, 5).join(', ')}. `;
+      } else if (isCalculate) {
+        const hasFormula = modelAnswer.includes('=') || modelAnswer.includes('×') || modelAnswer.includes('÷');
+        if (hasFormula) {
+          hint = `Identify the correct formula first. Show your working clearly. `;
+        } else {
+          hint = `Show your method step-by-step. Include relevant values and units. `;
+        }
+      } else if (allKeyTerms.length > 0) {
+        // Generic content hint based on model answer analysis
+        hint = `Your answer should cover these key areas: ${allKeyTerms.slice(0, 4).join(', ')}. `;
+      }
+      
+      // Add structure guidance based on marking criteria
+      const criteriaHints = markingCriteria.map(criteria => {
+        if (criteria.toLowerCase().includes('example')) return 'Include specific examples';
+        if (criteria.toLowerCase().includes('explain')) return 'Give clear explanations';
+        if (criteria.toLowerCase().includes('link') || criteria.toLowerCase().includes('connect')) return 'Link your ideas together';
+        if (criteria.toLowerCase().includes('accurate') || criteria.toLowerCase().includes('correct')) return 'Use accurate scientific terminology';
+        return '';
+      }).filter(h => h).slice(0, 2);
+      
+      if (criteriaHints.length > 0) {
+        hint += criteriaHints.join('. ') + '. ';
       }
       
       // Add mark-specific guidance
-      const marksAdvice = question.marks >= 6 
-        ? ' Provide detailed explanations with examples and link ideas together.'
-        : question.marks >= 3 
-        ? ' Give clear explanations with specific details.'
-        : ' Be precise and focus on the key concept.';
+      if (question.marks >= 6) {
+        hint += 'This is a detailed answer - develop your points fully with explanations and examples.';
+      } else if (question.marks >= 3) {
+        hint += 'Give clear explanations with specific details.';
+      } else {
+        hint += 'Be precise and focus on the key concept.';
+      }
       
-      return hint + marksAdvice;
+      return hint;
     };
     
-    // Try to generate content-specific hint
-    const specificHint = getContentSpecificHint();
-    if (specificHint && allKeyTerms.length > 0) {
-      return specificHint;
+    const targetedHint = generateTargetedHint();
+    if (targetedHint && (analysis.mainTopic.length > 0 || analysis.supportingPoints.length > 0)) {
+      return targetedHint;
     }
     
-    // Fallback based on question marks/difficulty
+    // Fallback for questions where model answer analysis doesn't yield good hints
     if (question.marks >= 6) {
       return "This is a longer answer question. Plan your response, use detailed scientific explanations, and include specific examples where relevant.";
     } else if (question.marks >= 3) {
