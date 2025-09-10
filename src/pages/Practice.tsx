@@ -395,52 +395,35 @@ const Practice = () => {
       .filter(word => word.length > 3 && !excludeWords.includes(word))
       .slice(0, 2);
     
-    // Generate targeted hints based on question type and marking criteria
+    // Generate encouraging, supportive hints based on question type
     if (isFunctionQuestion) {
-      if (criteriaConcepts.length > 0) {
-        return `Explain the specific role and what it does. Focus on: ${criteriaConcepts.join(', ')}. Your answer needs ${totalMarks} clear points.`;
-      }
-      return `Explain the specific role and what it does. Your answer needs ${totalMarks} clear points about its function and importance.`;
+      return `Think about what this does and why it's important! Focus on its main job and how it helps. You've got this! 💪`;
     }
     
     if (isDefine) {
-      if (criteriaConcepts.length > 0) {
-        return `Define this clearly, making sure to mention: ${criteriaConcepts.join(', ')}. Include the key characteristics for full marks.`;
-      } else if (keyTerms.length > 0) {
-        return `Define this clearly, making sure to mention: ${keyTerms.join(', ')}. Include the key characteristics for full marks.`;
-      }
-      return "Provide a precise definition with the essential characteristics. Be specific and detailed.";
+      return `Remember to use key words from the question in your definition. Think about the essential features that make it unique! ✨`;
     }
     
     if (isExplain) {
-      if (criteriaConcepts.length > 0) {
-        return `Explain step by step, covering: ${criteriaConcepts.join(', ')}. You need ${totalMarks} clear points or stages.`;
-      } else if (keyTerms.length > 0) {
-        return `Explain step by step, covering: ${keyTerms.join(', ')}. You need ${totalMarks} clear points or stages.`;
-      }
-      return `Break this down into ${totalMarks} clear steps or points. Explain each stage thoroughly.`;
+      return `Break it down step by step - you need ${totalMarks} clear points. Think about cause and effect, and use examples if you can! 🌟`;
     }
     
     if (isList) {
-      return `List ${totalMarks} distinct, specific points. Each point should be clearly different and detailed.`;
+      return `You need ${totalMarks} different points here. Make each one specific and detailed - you're doing great! 📝`;
     }
     
     if (isCalculate) {
-      const numbers = modelAnswer.match(/\d+(?:\.\d+)?/g) || [];
-      if (numbers.length >= 2) {
-        return `Use the numbers from the question and show all working. The calculation involves ${numbers.slice(0, 2).join(' and ')}.`;
-      }
-      return "Show all your working step by step. Identify the correct numbers and operation from the question.";
+      return `Show all your working clearly! Check the question for the numbers you need, and don't forget units. You can do this! 🔢`;
     }
     
-    // Generic hint based on marking criteria concepts or key terms
-    if (criteriaConcepts.length > 0) {
-      return `Focus on: ${criteriaConcepts.join(', ')}. Make sure your answer has ${totalMarks} clear points to get full marks.`;
-    } else if (keyTerms.length > 0) {
-      return `Focus on: ${keyTerms.join(', ')}. Make sure your answer has ${totalMarks} clear points to get full marks.`;
+    // Generic encouraging hints based on marks available
+    if (totalMarks >= 4) {
+      return `This is worth ${totalMarks} marks, so give ${totalMarks} detailed points. Use keywords from the question and explain your thinking! 🎯`;
+    } else if (totalMarks >= 2) {
+      return `Think carefully - you need ${totalMarks} clear points for full marks. Link to real examples if you can! 💡`;
+    } else {
+      return `Keep it simple but detailed. Use the key terms from the question in your answer! 👍`;
     }
-    
-    return `Your answer needs ${totalMarks} clear, detailed points to get full marks. Be specific and thorough.`;
   };
 
   const finishSession = async () => {
