@@ -419,6 +419,10 @@ const Practice = () => {
             return "Think about favorable outcomes over total possible outcomes. For multiple events, consider if they're independent.";
           }
           
+          if (questionText.match(/\d+[\^⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+/) || questionLower.includes('exponent') || questionLower.includes('power') || questionLower.includes('index')) {
+            return "Use the laws of exponents. When multiplying powers with the same base, add the exponents.";
+          }
+          
           if (questionLower.includes('algebra') || questionLower.includes('solve') || questionLower.includes('equation') || questionLower.includes('x =')) {
             return "Set up the equation step-by-step. Remember to show each algebraic manipulation clearly.";
           }
