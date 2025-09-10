@@ -642,20 +642,43 @@ const Practice = () => {
         if (specificContent) {
           hint = `${specificContent} Start with a clear definition of the key term.`;
         } else {
-          // Extract key terms from the question to provide specific guidance
+          // Smart extraction of what needs to be defined
           const questionLower = questionText.toLowerCase();
-          const keyTerms = [];
           
-          // Look for key terms in the question that need defining
-          const words = questionText.split(/\s+/).filter(word => word.length > 3);
-          const lastFewWords = words.slice(-3).join(' ').toLowerCase();
+          // Extract the term being asked to define
+          let termToDefine = null;
           
-          if (lastFewWords) {
-            // Clean up the words to create grammatically correct hint
-            const cleanWords = lastFewWords.replace(/[?!.,;:]/, '').trim();
-            hint = `Think about defining "${cleanWords}" clearly and precisely. Consider the essential characteristics that make it distinct from similar concepts.`;
+          // Pattern: "What is X?" - extract X
+          const whatIsMatch = questionText.match(/what\s+is\s+(?:a\s+|an\s+|the\s+)?([^?]+)/i);
+          if (whatIsMatch) {
+            termToDefine = whatIsMatch[1].trim();
+          }
+          
+          // Pattern: "Define X" - extract X  
+          const defineMatch = questionText.match(/define\s+(?:a\s+|an\s+|the\s+)?([^?]+)/i);
+          if (defineMatch) {
+            termToDefine = defineMatch[1].trim();
+          }
+          
+          // Pattern: "What does X mean?" - extract X
+          const meanMatch = questionText.match(/what\s+does\s+([^?]+?)\s+mean/i);
+          if (meanMatch) {
+            termToDefine = meanMatch[1].trim();
+          }
+          
+          // Pattern: "What is meant by X?" - extract X
+          const meantByMatch = questionText.match(/what\s+is\s+meant\s+by\s+([^?]+)/i);
+          if (meantByMatch) {
+            termToDefine = meantByMatch[1].trim();
+          }
+          
+          // Create a proper hint based on what was found
+          if (termToDefine) {
+            // Clean up the term (remove articles, punctuation)
+            const cleanTerm = termToDefine.replace(/[?!.,;:]$/, '').trim();
+            hint = `Focus on providing a clear definition of ${cleanTerm}. Think about the key characteristics that make it unique and distinct from similar concepts.`;
           } else {
-            hint = "Give a clear, precise definition. Think about the essential characteristics or features that make this concept unique.";
+            hint = "Provide a clear, precise definition. Focus on the essential characteristics and features that make this concept unique.";
           }
         }
       } else if (isExplain) {
@@ -915,18 +938,70 @@ const Practice = () => {
       
       let targetedHint = null;
       
-      // Extract what the question is asking for
-      const questionWords = questionText.split(/\s+/).filter(word => word.length > 3);
-      const lastWords = questionWords.slice(-4).join(' ').toLowerCase();
+      // Smart extraction of what the question is asking for
       
-      if (questionLower.includes('explain') && lastWords) {
-        // Clean up the words to create grammatically correct hint
-        const cleanWords = lastWords.replace(/[?!.,;:]/, '').trim();
-        targetedHint = `Focus on explaining ${cleanWords} clearly. Break down the key factors and their relationships with specific details.`;
-      } else if (questionLower.includes('describe') && lastWords) {
-        // Clean up the words to create grammatically correct hint
-        const cleanWords = lastWords.replace(/[?!.,;:]/, '').trim();
-        targetedHint = `Describe ${cleanWords} by focusing on specific features and characteristics. Give concrete examples to support your description.`;
+      if (questionLower.includes('explain')) {
+        // Extract what needs to be explained more intelligently
+        let topicToExplain = null;
+        
+        // Pattern: "Explain how X works/happens" 
+        const howMatch = questionText.match(/explain\s+how\s+([^?.]+?)(?:\s+works?|\s+happens?|\s+occurs?|$)/i);
+        if (howMatch) {
+          topicToExplain = `how ${howMatch[1].trim()} works`;
+        }
+        
+        // Pattern: "Explain why X"
+        const whyMatch = questionText.match(/explain\s+why\s+([^?.]+)/i);
+        if (whyMatch) {
+          topicToExplain = `why ${whyMatch[1].trim()}`;
+        }
+        
+        // Pattern: "Explain the X"
+        const theMatch = questionText.match(/explain\s+the\s+([^?.]+)/i);
+        if (theMatch) {
+          topicToExplain = `the ${theMatch[1].trim()}`;
+        }
+        
+        // Pattern: "Explain X"
+        const directMatch = questionText.match(/explain\s+([^?.]+)/i);
+        if (directMatch && !topicToExplain) {
+          topicToExplain = directMatch[1].trim();
+        }
+        
+        if (topicToExplain) {
+          targetedHint = `Break down ${topicToExplain} step by step. Consider the key factors and explain their relationships with specific details.`;
+        } else {
+          targetedHint = `Break down the topic step by step. Explain the key factors and their relationships with specific details.`;
+        }
+        
+      } else if (questionLower.includes('describe')) {
+        // Extract what needs to be described
+        let topicToDescribe = null;
+        
+        // Pattern: "Describe how X"
+        const howMatch = questionText.match(/describe\s+how\s+([^?.]+)/i);
+        if (howMatch) {
+          topicToDescribe = `how ${howMatch[1].trim()}`;
+        }
+        
+        // Pattern: "Describe the X"
+        const theMatch = questionText.match(/describe\s+the\s+([^?.]+)/i);
+        if (theMatch) {
+          topicToDescribe = `the ${theMatch[1].trim()}`;
+        }
+        
+        // Pattern: "Describe X"
+        const directMatch = questionText.match(/describe\s+([^?.]+)/i);
+        if (directMatch && !topicToDescribe) {
+          topicToDescribe = directMatch[1].trim();
+        }
+        
+        if (topicToDescribe) {
+          targetedHint = `Focus on describing ${topicToDescribe} using specific features and characteristics. Provide concrete examples to support your description.`;
+        } else {
+          targetedHint = `Focus on the specific features and characteristics. Provide concrete examples to support your description.`;
+        }
+        
       } else if (questionLower.includes('analyse') || questionLower.includes('analyze')) {
         targetedHint = `Break down the components and examine how they work together. Use evidence to support your analysis.`;
       }
@@ -992,8 +1067,14 @@ const Practice = () => {
             .slice(0, 3);
           
           if (meaningfulWords.length > 0) {
-            const concepts = meaningfulWords.join(' and ').toLowerCase();
-            return `Think about ${concepts} when forming your answer - be concise but accurate.`;
+            // Create a more natural hint based on the meaningful words found
+            if (meaningfulWords.length === 1) {
+              return `Focus on ${meaningfulWords[0].toLowerCase()} in your answer. Be concise but accurate.`;
+            } else if (meaningfulWords.length === 2) {
+              return `Consider ${meaningfulWords[0].toLowerCase()} and ${meaningfulWords[1].toLowerCase()} in your response. Keep it focused and precise.`;
+            } else {
+              return `Think about key concepts like ${meaningfulWords[0].toLowerCase()}, ${meaningfulWords[1].toLowerCase()}, and ${meaningfulWords[2].toLowerCase()}. Address these clearly in your answer.`;
+            }
           }
         }
         
