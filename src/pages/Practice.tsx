@@ -570,25 +570,54 @@ const Practice = () => {
         if (specificContent) {
           hint = specificContent;
         } else {
-          // Analyze the specific calculation needed
-          const questionLower = questionText;
-          const numbers = modelAnswer.match(/\d+(?:\.\d+)?/g) || [];
-          const operations = [];
-          if (modelAnswer.includes('+')) operations.push('addition');
-          if (modelAnswer.includes('-') || modelAnswer.includes('−')) operations.push('subtraction');
-          if (modelAnswer.includes('×') || modelAnswer.includes('*')) operations.push('multiplication');
-          if (modelAnswer.includes('÷') || modelAnswer.includes('/')) operations.push('division');
+          // Extract numbers from both question and model answer
+          const questionNumbers = questionText.match(/\d+(?:\.\d+)?/g) || [];
+          const modelNumbers = modelAnswer.match(/\d+(?:\.\d+)?/g) || [];
           
-          if (questionLower.includes('cost') || questionLower.includes('price') || questionLower.includes('money')) {
-            hint = `This is a money calculation. ${operations.length > 0 ? `You'll need ${operations.join(' and ')}.` : ''} Work with the amounts given and check your final answer makes sense.`;
-          } else if (questionLower.includes('time') || questionLower.includes('hour') || questionLower.includes('minute')) {
-            hint = `This involves time calculations. ${numbers.length > 1 ? `Work with the time values ${numbers.slice(0,2).join(' and ')}.` : ''} Remember to convert between hours and minutes if needed.`;
-          } else if (questionLower.includes('distance') || questionLower.includes('length') || questionLower.includes('speed')) {
-            hint = `This is a distance/speed problem. ${operations.length > 0 ? `Use ${operations.join(' and ')} with the values given.` : ''} Check if you need distance = speed × time.`;
-          } else if (numbers.length >= 2) {
-            hint = `Work with the numbers ${numbers.slice(0,3).join(', ')}. ${operations.length > 0 ? `This involves ${operations.join(' and ')}.` : ''} Show each step clearly.`;
+          // Analyze the model answer structure to understand the calculation
+          const modelAnswerLines = modelAnswer.split(/\n|=/).map(line => line.trim()).filter(line => line);
+          
+          // Look for specific calculation patterns in the model answer
+          if (modelAnswer.includes('×') || modelAnswer.includes('*')) {
+            const factors = modelAnswer.match(/(\d+(?:\.\d+)?)\s*[×*]\s*(\d+(?:\.\d+)?)/);
+            if (factors) {
+              hint = `You need to multiply ${factors[1]} by ${factors[2]}. ${factors[1]} × ${factors[2]} = ${parseFloat(factors[1]) * parseFloat(factors[2])}.`;
+            } else {
+              hint = "Look for the numbers you need to multiply together from the question.";
+            }
+          } else if (modelAnswer.includes('÷') || modelAnswer.includes('/')) {
+            const division = modelAnswer.match(/(\d+(?:\.\d+)?)\s*[÷/]\s*(\d+(?:\.\d+)?)/);
+            if (division) {
+              hint = `You need to divide ${division[1]} by ${division[2]}. Work out ${division[1]} ÷ ${division[2]}.`;
+            } else {
+              hint = "Find which number you need to divide by which from the question.";
+            }
+          } else if (modelAnswer.includes('+')) {
+            const addition = modelAnswer.match(/(\d+(?:\.\d+)?)\s*\+\s*(\d+(?:\.\d+)?)/);
+            if (addition) {
+              hint = `Add ${addition[1]} and ${addition[2]} together. ${addition[1]} + ${addition[2]} = ${parseFloat(addition[1]) + parseFloat(addition[2])}.`;
+            } else {
+              hint = "Identify which numbers from the question need to be added together.";
+            }
+          } else if (modelAnswer.includes('-') || modelAnswer.includes('−')) {
+            const subtraction = modelAnswer.match(/(\d+(?:\.\d+)?)\s*[-−]\s*(\d+(?:\.\d+)?)/);
+            if (subtraction) {
+              hint = `Subtract ${subtraction[2]} from ${subtraction[1]}. Work out ${subtraction[1]} - ${subtraction[2]}.`;
+            } else {
+              hint = "Find which numbers you need to subtract from the question.";
+            }
+          } else if (modelNumbers.length > 0 && questionNumbers.length > 0) {
+            // Find which question numbers appear in the model answer
+            const usedNumbers = questionNumbers.filter(num => modelAnswer.includes(num));
+            if (usedNumbers.length >= 2) {
+              hint = `Use the numbers ${usedNumbers.slice(0, 2).join(' and ')} from the question. Look at how they're combined in the calculation.`;
+            } else if (usedNumbers.length === 1) {
+              hint = `Start with the number ${usedNumbers[0]} from the question and see what operation you need to perform.`;
+            } else {
+              hint = `The answer should be ${modelNumbers[modelNumbers.length - 1]}. Work backwards to see which numbers and operations get you there.`;
+            }
           } else {
-            hint = `Look at what the question is asking you to find and work backwards from there.`;
+            hint = "Read the question carefully to identify what calculation is needed, then work through it step by step.";
           }
         }
       } else if (specificContent) {
