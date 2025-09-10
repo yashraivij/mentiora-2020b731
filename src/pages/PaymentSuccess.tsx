@@ -3,10 +3,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle, Loader2 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const PaymentSuccess: React.FC = () => {
   const { refreshSubscription } = useAuth();
   const [isRefreshing, setIsRefreshing] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handlePaymentSuccess = async () => {
@@ -25,8 +27,8 @@ const PaymentSuccess: React.FC = () => {
   }, [refreshSubscription]);
 
   const goHome = () => {
-    // Redirect to dashboard with upgraded flag to ensure proper refresh
-    window.location.href = "/dashboard?upgraded=true";
+    // Use React Router navigation to maintain authentication context
+    navigate("/dashboard?upgraded=true");
   };
 
   return (
