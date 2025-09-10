@@ -47,11 +47,12 @@ export const useSubscription = () => {
       return;
     }
     const join = "https://buy.stripe.com/00wbJ07kcbjQ5I495e8N206".includes("?") ? "&" : "?";
+    const successUrl = `${window.location.origin}/payment-success`;
     window.location.href =
       "https://buy.stripe.com/00wbJ07kcbjQ5I495e8N206" + join +
       "client_reference_id=" + encodeURIComponent(user.id) +
       "&prefilled_email=" + encodeURIComponent(user.email || "") +
-      "&success_url=" + encodeURIComponent("https://mentiora.com/dashboard");
+      "&success_url=" + encodeURIComponent(successUrl);
   };
 
   useEffect(() => {
