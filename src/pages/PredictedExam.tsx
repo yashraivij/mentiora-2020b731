@@ -1342,53 +1342,182 @@ Write a story about discovering a hidden object.
       return questions;
     }
     
-    // Standard exam format for other subjects - GCSE specification focused
-    let questionNumber = 1;
-    subject.topics.forEach((topic, topicIndex) => {
-      // Filter questions to ensure they are GCSE specification appropriate
-      const gcseAppropriateQuestions = topic.questions.filter(q => {
-        // Exclude questions that are too advanced or not in GCSE scope
-        const questionText = q.question.toLowerCase();
+    // Generate realistic GCSE predicted exam questions - DIFFERENT from practice questions
+    const generatePredictedExamQuestions = (subjectId: string, topics: any[]) => {
+      const predictedQuestions: ExamQuestion[] = [];
+      let questionNumber = 1;
+      
+      // Subject-specific question patterns based on real GCSE papers
+      const questionPatterns = {
+        'chemistry': [
+          { pattern: 'Describe the structure and bonding in [topic]', marks: 4 },
+          { pattern: 'Explain why [concept] occurs and give an example', marks: 5 },
+          { pattern: 'Calculate the [value] in this reaction: [scenario]', marks: 6 },
+          { pattern: 'Evaluate the advantages and disadvantages of [process]', marks: 8 },
+          { pattern: 'A student investigates [topic]. Describe a method to [objective]', marks: 6 }
+        ],
+        'biology': [
+          { pattern: 'Explain how [structure] is adapted for [function]', marks: 4 },
+          { pattern: 'Describe the process of [biological process] and explain its importance', marks: 6 },
+          { pattern: 'Compare and contrast [process A] and [process B]', marks: 5 },
+          { pattern: 'Suggest why [organism/structure] has evolved [feature]', marks: 3 },
+          { pattern: 'Analyse the data shown and explain the trend observed', marks: 6 }
+        ],
+        'physics': [
+          { pattern: 'Calculate the [quantity] using the equation [formula]', marks: 4 },
+          { pattern: 'Explain why [phenomenon] occurs in terms of [physics concept]', marks: 5 },
+          { pattern: 'Describe an experiment to investigate [physics law/principle]', marks: 6 },
+          { pattern: 'Compare the [properties] of [physics concept A] and [physics concept B]', marks: 4 },
+          { pattern: 'Evaluate the efficiency of [system/process] and suggest improvements', marks: 8 }
+        ],
+        'mathematics': [
+          { pattern: 'Solve the equation [mathematical expression]', marks: 3 },
+          { pattern: 'Find the [mathematical value] of the shape shown', marks: 4 },
+          { pattern: 'Prove that [mathematical statement] using algebraic methods', marks: 5 },
+          { pattern: 'A company has data showing [scenario]. Calculate [requirement]', marks: 6 },
+          { pattern: 'Given that [conditions], find the probability that [event]', marks: 4 }
+        ],
+        'business': [
+          { pattern: 'Analyse the impact of [business factor] on [business aspect]', marks: 6 },
+          { pattern: 'Evaluate whether [business decision] would be beneficial for [company type]', marks: 8 },
+          { pattern: 'Calculate the [financial metric] using the data provided', marks: 4 },
+          { pattern: 'Explain two advantages of [business strategy] for [stakeholder group]', marks: 4 },
+          { pattern: 'Assess the importance of [business concept] in the success of [business context]', marks: 10 }
+        ],
+        'geography': [
+          { pattern: 'Explain the formation of [geographical feature] using annotated diagrams', marks: 6 },
+          { pattern: 'Assess the effectiveness of [management strategy] in [geographical context]', marks: 8 },
+          { pattern: 'Analyse the social and economic impacts of [geographical process]', marks: 6 },
+          { pattern: 'Evaluate the role of [factor] in [geographical phenomenon]', marks: 8 },
+          { pattern: 'Using a named example, explain how [process] affects [environment/people]', marks: 6 }
+        ],
+        'computer-science': [
+          { pattern: 'Write pseudocode to [programming task] and explain your algorithm', marks: 6 },
+          { pattern: 'Analyse the advantages and disadvantages of [computer science concept]', marks: 6 },
+          { pattern: 'Explain how [data structure] is used to solve [computing problem]', marks: 4 },
+          { pattern: 'Evaluate the security implications of [technology] in [context]', marks: 8 },
+          { pattern: 'Describe the process of [computing concept] with reference to a practical example', marks: 5 }
+        ]
+      };
+      
+      // Get patterns for this subject or use generic ones
+      const patterns = questionPatterns[subjectId as keyof typeof questionPatterns] || [
+        { pattern: 'Explain the key features of [topic]', marks: 4 },
+        { pattern: 'Analyse the importance of [concept] in [context]', marks: 6 },
+        { pattern: 'Evaluate the effectiveness of [approach/method]', marks: 8 },
+        { pattern: 'Compare and contrast [concept A] with [concept B]', marks: 5 },
+        { pattern: 'Describe how [process] works and explain its significance', marks: 6 }
+      ];
+      
+      // Generate questions for each topic
+      topics.forEach((topic, topicIndex) => {
+        // Generate 2-4 questions per topic based on realistic exam structure
+        const questionsPerTopic = Math.min(3, Math.max(2, Math.floor(25 / topics.length)));
         
-        // Exclude university-level concepts
-        const excludedTerms = [
-          'quantum mechanics', 'calculus', 'differential equations', 'advanced statistics',
-          'university level', 'postgraduate', 'undergraduate', 'research methodology',
-          'theoretical framework', 'epistemology', 'historiography beyond gcse scope'
-        ];
-        
-        const hasExcludedTerms = excludedTerms.some(term => questionText.includes(term));
-        
-        // Include only questions with appropriate GCSE marks (1-12 typically)
-        const appropriateMarks = (q.marks || 2) <= 12;
-        
-        // Include only questions with GCSE-appropriate difficulty
-        const gcseLevel = true; // All curriculum questions are already GCSE-level
-        
-        return !hasExcludedTerms && appropriateMarks && gcseLevel;
+        for (let i = 0; i < questionsPerTopic; i++) {
+          const pattern = patterns[i % patterns.length];
+          const marks = pattern.marks + Math.floor(Math.random() * 3) - 1; // Vary marks slightly
+          const finalMarks = Math.max(2, Math.min(12, marks)); // Keep within GCSE range
+          
+          // Create realistic question based on topic
+          let questionText = '';
+          
+          // Subject-specific question generation
+          if (subjectId === 'chemistry') {
+            const chemQuestions = [
+              `A student investigates the rate of reaction between ${topic.name.toLowerCase()} and hydrochloric acid. Describe a method the student could use to measure the rate of reaction. Include safety precautions in your answer.`,
+              `Explain the bonding and structure in ${topic.name.toLowerCase()}. Include a diagram in your answer.`,
+              `${topic.name} is used in industry. Evaluate the advantages and disadvantages of using ${topic.name.toLowerCase()} compared to alternative methods.`,
+              `Calculate the percentage by mass of each element in ${topic.name.toLowerCase()}. Show your working clearly.`,
+              `Describe what happens when ${topic.name.toLowerCase()} reacts with oxygen. Write a balanced symbol equation for this reaction.`
+            ];
+            questionText = chemQuestions[i % chemQuestions.length];
+          } else if (subjectId === 'biology') {
+            const bioQuestions = [
+              `Explain how the structure of ${topic.name.toLowerCase()} is adapted for its function. Include specific examples in your answer.`,
+              `Describe the role of ${topic.name.toLowerCase()} in maintaining health. Explain what happens when this system doesn't work properly.`,
+              `A scientist investigated ${topic.name.toLowerCase()}. Suggest a method the scientist could use and explain how to make the results reliable.`,
+              `Compare and contrast ${topic.name.toLowerCase()} in plants and animals. Give specific examples to support your answer.`,
+              `Analyse the importance of ${topic.name.toLowerCase()} in the ecosystem. Consider both positive and negative impacts.`
+            ];
+            questionText = bioQuestions[i % bioQuestions.length];
+          } else if (subjectId === 'physics') {
+            const physQuestions = [
+              `A student investigates ${topic.name.toLowerCase()}. Describe the equipment needed and the method to follow. Explain how to improve accuracy.`,
+              `Calculate the ${topic.name.toLowerCase()} in the example shown. Show your working and include correct units.`,
+              `Explain the physics principles behind ${topic.name.toLowerCase()}. Use appropriate terminology in your answer.`,
+              `Compare the efficiency of different types of ${topic.name.toLowerCase()}. Evaluate which would be most suitable for domestic use.`,
+              `Describe an application of ${topic.name.toLowerCase()} in everyday life. Explain the advantages and disadvantages.`
+            ];
+            questionText = physQuestions[i % physQuestions.length];
+          } else if (subjectId === 'mathematics') {
+            const mathQuestions = [
+              `A company uses ${topic.name.toLowerCase()} to analyse their sales data. Calculate the required values and interpret your results.`,
+              `Solve the ${topic.name.toLowerCase()} problem shown. Give your answer to 3 significant figures where appropriate.`,
+              `Prove that the ${topic.name.toLowerCase()} relationship holds true using algebraic manipulation.`,
+              `A student measures ${topic.name.toLowerCase()} and records their results. Calculate the mean and explain the significance of your answer.`,
+              `Using ${topic.name.toLowerCase()}, find the solution to the given problem. Show all your working clearly.`
+            ];
+            questionText = mathQuestions[i % mathQuestions.length];
+          } else if (subjectId === 'business') {
+            const businessQuestions = [
+              `Analyse the impact of ${topic.name.toLowerCase()} on a small retail business. Consider both short-term and long-term effects.`,
+              `Evaluate whether implementing ${topic.name.toLowerCase()} would be beneficial for a manufacturing company. Use business theory to support your answer.`,
+              `A business is considering ${topic.name.toLowerCase()}. Calculate the financial implications and recommend whether they should proceed.`,
+              `Explain how ${topic.name.toLowerCase()} affects different stakeholder groups. Consider the perspectives of customers, employees, and shareholders.`,
+              `Assess the importance of ${topic.name.toLowerCase()} in achieving business success. Use real business examples to support your points.`
+            ];
+            questionText = businessQuestions[i % businessQuestions.length];
+          } else if (subjectId === 'geography') {
+            const geoQuestions = [
+              `Using a named example, explain how ${topic.name.toLowerCase()} affects people and the environment. Include specific details in your answer.`,
+              `Evaluate the effectiveness of strategies used to manage ${topic.name.toLowerCase()}. Consider social, economic and environmental factors.`,
+              `Analyse the causes and consequences of ${topic.name.toLowerCase()}. Explain the links between human and physical factors.`,
+              `Assess the role of ${topic.name.toLowerCase()} in sustainable development. Consider different viewpoints in your answer.`,
+              `Explain the formation of ${topic.name.toLowerCase()}. Use annotated diagrams to support your explanation.`
+            ];
+            questionText = geoQuestions[i % geoQuestions.length];
+          } else if (subjectId === 'computer-science') {
+            const csQuestions = [
+              `Write an algorithm to implement ${topic.name.toLowerCase()}. Explain the logic behind your solution and identify potential improvements.`,
+              `Evaluate the security implications of using ${topic.name.toLowerCase()} in a commercial system. Consider different types of threats.`,
+              `Analyse the advantages and disadvantages of ${topic.name.toLowerCase()} compared to alternative approaches. Include performance considerations.`,
+              `Explain how ${topic.name.toLowerCase()} works with reference to a real-world application. Include technical details in your answer.`,
+              `A programmer needs to implement ${topic.name.toLowerCase()}. Describe the data structures and algorithms they should use.`
+            ];
+            questionText = csQuestions[i % csQuestions.length];
+          } else {
+            // Generic format for other subjects
+            const genericQuestions = [
+              `Explain the key principles of ${topic.name.toLowerCase()} and analyse their importance in the wider context.`,
+              `Evaluate the effectiveness of different approaches to ${topic.name.toLowerCase()}. Support your answer with specific examples.`,
+              `Analyse the factors that influence ${topic.name.toLowerCase()}. Consider both positive and negative impacts.`,
+              `Compare and contrast different aspects of ${topic.name.toLowerCase()}. Use specific examples to support your points.`,
+              `Assess the significance of ${topic.name.toLowerCase()} in modern society. Consider different perspectives in your answer.`
+            ];
+            questionText = genericQuestions[i % genericQuestions.length];
+          }
+          
+          predictedQuestions.push({
+            id: `predicted-${topicIndex}-${i}`,
+            questionNumber: questionNumber++,
+            text: questionText,
+            marks: finalMarks,
+            section: topicIndex < Math.ceil(topics.length / 2) ? 'A' : 'B'
+          });
+        }
       });
       
-      // Take 2-3 GCSE-appropriate questions from each topic
-      const topicQuestions = gcseAppropriateQuestions.slice(0, 3);
-      
-      topicQuestions.forEach((q, qIndex) => {
-        // Ensure question follows GCSE command word patterns
-        let questionText = q.question;
-        
-        // Keep the original question text without automatic prepending
-        // Questions should already be properly formatted from the AI generation
-        
-        questions.push({
-          id: `${topicIndex}-${qIndex}`,
-          questionNumber: questionNumber++,
-          text: questionText,
-          marks: Math.min(q.marks || 2, 12), // Cap marks at 12 for GCSE appropriateness
-          section: topicIndex < Math.ceil(subject.topics.length / 2) ? 'A' : 'B'
-        });
-      });
-    });
+      // Ensure we have enough questions for a full exam (20-25 questions)
+      const targetQuestions = Math.min(25, Math.max(20, predictedQuestions.length));
+      return predictedQuestions.slice(0, targetQuestions);
+    };
+
+    // Use the new predicted question generator
+    const predictedQuestions = generatePredictedExamQuestions(subjectId, subject.topics);
+    questions.push(...predictedQuestions);
     
-    return questions.slice(0, 15); // Reduce to 15 high-quality GCSE questions
+    return questions;
   };
 
   const [examQuestions] = useState<ExamQuestion[]>(generateExamQuestions());
