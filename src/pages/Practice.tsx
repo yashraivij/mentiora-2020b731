@@ -345,375 +345,109 @@ const Practice = () => {
     const modelAnswer = question.modelAnswer.toLowerCase();
     const markingCriteria = question.markingCriteria.breakdown.join(' ').toLowerCase();
     
-    // Extract key terms from model answer for more intelligent hinting
-    const extractKeyTermsFromAnswer = () => {
-      const terms = new Set<string>();
+    // Generate specific hints based on question content and model answer keywords
+    const generateSpecificHint = () => {
       
-      // Split model answer into meaningful chunks
-      const answerWords = modelAnswer.split(/[\s,.:;()]+/).filter(word => word.length > 2);
-      
-      // Add scientific/technical terms
-      answerWords.forEach(word => {
-        if (word.length > 4 && 
-            (word.includes('tion') || word.includes('ment') || word.includes('ology') || 
-             word.includes('phys') || word.includes('chem') || word.includes('bio'))) {
-          terms.add(word);
+      // Use model answer keywords to provide content hints
+      const getKeywordsFromAnswer = () => {
+        const keywords = [];
+        
+        // Extract key scientific terms from model answer
+        if (modelAnswer.includes('tectonic plates') || modelAnswer.includes('plate boundary')) {
+          keywords.push('plate tectonics theory');
         }
-      });
+        if (modelAnswer.includes('convection currents')) {
+          keywords.push('convection currents in the mantle');
+        }
+        if (modelAnswer.includes('primary effects')) {
+          keywords.push('immediate impacts like building collapse, deaths');
+        }
+        if (modelAnswer.includes('secondary effects')) {
+          keywords.push('later consequences like disease, unemployment');
+        }
+        if (modelAnswer.includes('immediate response')) {
+          keywords.push('rescue operations, emergency aid');
+        }
+        if (modelAnswer.includes('long-term response')) {
+          keywords.push('rebuilding, prevention measures');
+        }
+        if (modelAnswer.includes('monitoring')) {
+          keywords.push('seismometers, GPS, satellite monitoring');
+        }
+        if (modelAnswer.includes('prediction')) {
+          keywords.push('early warning systems');
+        }
+        if (modelAnswer.includes('protection')) {
+          keywords.push('earthquake-resistant buildings');
+        }
+        if (modelAnswer.includes('planning')) {
+          keywords.push('evacuation routes, emergency drills');
+        }
+        
+        return keywords;
+      };
       
-      return Array.from(terms);
-    };
-    
-    // Analyze question for specific content clues
-    const analyzeQuestionContent = () => {
-      const hints = [];
-      
-      // Check for numbers/values that might indicate formulas needed
-      const numbersInQuestion = questionText.match(/\d+(\.\d+)?/g);
-      if (numbersInQuestion && numbersInQuestion.length >= 2) {
-        hints.push("calculation_needed");
-      }
-      
-      // Check for units that indicate formula work
-      if (questionText.match(/(m\/s|kg|joules?|newtons?|°c|cm³|m³|ml)/i)) {
-        hints.push("units_important");
-      }
-      
-      // Check for comparison words
-      if (questionText.match(/(compare|contrast|difference|similar|unlike)/)) {
-        hints.push("comparison_needed");
-      }
-      
-      // Check for process words
-      if (questionText.match(/(process|steps|stages|sequence|order)/)) {
-        hints.push("process_description");
-      }
-      
-      return hints;
-    };
-    
-    const contentAnalysis = analyzeQuestionContent();
-    const keyTerms = extractKeyTermsFromAnswer();
-    
-    // Generate subject-specific hints with enhanced intelligence
-    const generateSubjectSpecificHint = () => {
-      
-      // Geography-enhanced hints
+      // Geography-specific hints based on model answers
       if (subjectId === 'geography') {
-        // Natural Hazards - more comprehensive
+        const answerKeywords = getKeywordsFromAnswer();
+        
+        // Natural Hazards
         if (questionText.includes('natural hazard')) {
           if (questionText.includes('definition') || questionText.includes('what is')) {
-            return "Define as 'a natural process that poses a threat to people and property'. Include examples and mention the risk equation: Risk = Hazard × Vulnerability.";
+            return "Your answer should mention 'naturally occurring events' and 'threat to people and property'. Include examples like earthquakes, volcanoes, or tropical storms.";
           }
           if (questionText.includes('factor') && questionText.includes('risk')) {
-            const factorHints = [];
-            if (modelAnswer.includes('vulnerability')) factorHints.push("vulnerability of population");
-            if (modelAnswer.includes('magnitude')) factorHints.push("magnitude/intensity of hazard");
-            if (modelAnswer.includes('frequency')) factorHints.push("frequency of occurrence");
-            if (modelAnswer.includes('population')) factorHints.push("population density");
-            if (modelAnswer.includes('development')) factorHints.push("level of development/wealth");
-            if (modelAnswer.includes('location')) factorHints.push("geographical location");
-            
-            return factorHints.length > 0 ? 
-              `Key risk factors to discuss: ${factorHints.join(', ')}. Explain how each increases or decreases risk.` :
-              "Consider: population density, level of development, hazard frequency/magnitude, geographical location, and community preparedness.";
+            if (modelAnswer.includes('vulnerability')) {
+              return "Key factors to mention: vulnerability (how exposed people are), hazard magnitude/frequency, population density, and level of development/wealth.";
+            }
+            return "Think about what makes some areas more at risk - consider population, development level, frequency of hazards, and ability to cope.";
           }
         }
         
-        // Tectonic processes - enhanced
+        // Tectonic Hazards
         if (questionText.includes('plate') && (questionText.includes('margin') || questionText.includes('boundary'))) {
-          const plateTypes = [];
-          if (modelAnswer.includes('constructive') || modelAnswer.includes('divergent')) plateTypes.push("constructive (divergent) - plates move apart, new oceanic crust forms");
-          if (modelAnswer.includes('destructive') || modelAnswer.includes('convergent')) plateTypes.push("destructive (convergent) - plates collide, subduction occurs");
-          if (modelAnswer.includes('conservative') || modelAnswer.includes('transform')) plateTypes.push("conservative (transform) - plates slide past each other");
-          
-          return plateTypes.length > 0 ?
-            `Plate boundary types to explain: ${plateTypes.join('; ')}.` :
-            "Explain the three main plate boundary types: constructive (divergent), destructive (convergent), and conservative (transform). Include plate movement direction and processes.";
+          if (modelAnswer.includes('constructive')) {
+            return "Include all three types: constructive (plates move apart, new crust forms), destructive (plates collide, subduction), conservative (plates slide past).";
+          }
+          return "Describe the three plate margin types and what happens at each - think about plate movement direction and geological processes.";
         }
         
-        // Hazard impacts - enhanced specificity  
-        if ((questionText.includes('earthquake') || questionText.includes('volcanic') || questionText.includes('tsunami')) && 
-            (questionText.includes('effect') || questionText.includes('impact'))) {
-          
-          const primaryEffects = [];
-          const secondaryEffects = [];
-          
-          if (modelAnswer.includes('building') || modelAnswer.includes('collapse')) primaryEffects.push("building collapse/damage");
-          if (modelAnswer.includes('death') || modelAnswer.includes('casualties')) primaryEffects.push("deaths and injuries");
-          if (modelAnswer.includes('infrastructure')) primaryEffects.push("infrastructure damage (roads, bridges, utilities)");
-          if (modelAnswer.includes('ground')) primaryEffects.push("ground shaking/rupture");
-          
-          if (modelAnswer.includes('disease')) secondaryEffects.push("disease outbreaks");
-          if (modelAnswer.includes('unemployment') || modelAnswer.includes('economic')) secondaryEffects.push("unemployment and economic losses");
-          if (modelAnswer.includes('homeless')) secondaryEffects.push("homelessness");
-          if (modelAnswer.includes('psychological')) secondaryEffects.push("psychological trauma");
-          
-          let hint = "Separate primary (immediate) and secondary (longer-term) effects. ";
-          if (primaryEffects.length > 0) hint += `Primary: ${primaryEffects.join(', ')}. `;
-          if (secondaryEffects.length > 0) hint += `Secondary: ${secondaryEffects.join(', ')}.`;
-          
-          return hint || "Primary effects occur immediately (building damage, deaths, infrastructure failure). Secondary effects happen later (disease, unemployment, economic impact).";
-        }
-        
-        // Climate change - more specific
-        if (questionText.includes('climate change')) {
-          if (questionText.includes('evidence')) {
-            const evidenceTypes = [];
-            if (modelAnswer.includes('ice core')) evidenceTypes.push("ice cores (CO₂ levels from trapped air)");
-            if (modelAnswer.includes('tree ring')) evidenceTypes.push("tree rings (growth patterns show climate)");
-            if (modelAnswer.includes('coral')) evidenceTypes.push("coral reef data");
-            if (modelAnswer.includes('temperature')) evidenceTypes.push("instrumental temperature records");
-            if (modelAnswer.includes('photograph') || modelAnswer.includes('satellite')) evidenceTypes.push("satellite/photographic evidence");
-            
-            return evidenceTypes.length > 0 ?
-              `Types of evidence to discuss: ${evidenceTypes.join(', ')}.` :
-              "Use multiple evidence types: ice cores, tree rings, temperature records, coral data, and satellite observations.";
-          }
-          
-          if (questionText.includes('cause')) {
-            const naturalCauses = [];
-            const humanCauses = [];
-            
-            if (modelAnswer.includes('solar')) naturalCauses.push("solar output variations");
-            if (modelAnswer.includes('volcanic')) naturalCauses.push("volcanic eruptions");
-            if (modelAnswer.includes('orbital')) naturalCauses.push("orbital cycles (Milankovitch)");
-            
-            if (modelAnswer.includes('fossil fuel') || modelAnswer.includes('burning')) humanCauses.push("burning fossil fuels");
-            if (modelAnswer.includes('deforestation')) humanCauses.push("deforestation");
-            if (modelAnswer.includes('agriculture')) humanCauses.push("agriculture (methane from livestock)");
-            if (modelAnswer.includes('transport')) humanCauses.push("transportation emissions");
-            
-            let hint = "Distinguish natural and human causes. ";
-            if (naturalCauses.length > 0) hint += `Natural: ${naturalCauses.join(', ')}. `;
-            if (humanCauses.length > 0) hint += `Human: ${humanCauses.join(', ')}.`;
-            
-            return hint || "Natural causes: solar variations, volcanic eruptions, orbital cycles. Human causes: fossil fuel burning, deforestation, agriculture.";
-          }
-        }
-      }
-      
-      // Biology-enhanced hints
-      if (subjectId === 'biology') {
-        // Photosynthesis - more detailed
-        if (questionText.includes('photosynthesis')) {
-          if (questionText.includes('limiting factor')) {
-            const factors = [];
-            if (modelAnswer.includes('light')) factors.push("light intensity");
-            if (modelAnswer.includes('co2') || modelAnswer.includes('carbon dioxide')) factors.push("CO₂ concentration");
-            if (modelAnswer.includes('temperature')) factors.push("temperature");
-            if (modelAnswer.includes('chlorophyll')) factors.push("chlorophyll availability");
-            
-            return factors.length > 0 ?
-              `Limiting factors to consider: ${factors.join(', ')}. Explain the principle of limiting factors - the factor in shortest supply limits the rate.` :
-              "Limiting factors: light intensity, CO₂ concentration, temperature. The factor in shortest supply controls the rate. Use graphs to show this relationship.";
-          }
-          
-          if (questionText.includes('equation')) {
-            return modelAnswer.includes('symbol') ?
-              "Give both word and symbol equations. Word: carbon dioxide + water → glucose + oxygen (+ energy). Symbol: 6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂ (needs light energy and chlorophyll)." :
-              "Word equation: carbon dioxide + water → glucose + oxygen. Include that light energy and chlorophyll are needed for the reaction.";
-          }
-        }
-        
-        // Genetics - enhanced
-        if (questionText.includes('genetic') || questionText.includes('inherit') || questionText.includes('allele')) {
-          if (questionText.includes('cross') || questionText.includes('offspring')) {
-            return "Set up genetic cross clearly: 1) State parent phenotypes and genotypes, 2) Show possible gametes, 3) Draw Punnett square, 4) Give offspring genotypes and phenotypes, 5) State the ratio.";
-          }
-          
-          if (questionText.includes('dominant') || questionText.includes('recessive')) {
-            const tips = [];
-            if (modelAnswer.includes('homozygous')) tips.push("homozygous (same alleles, e.g., AA or aa)");
-            if (modelAnswer.includes('heterozygous')) tips.push("heterozygous (different alleles, e.g., Aa)");
-            if (modelAnswer.includes('phenotype')) tips.push("phenotype (physical appearance)");
-            if (modelAnswer.includes('genotype')) tips.push("genotype (genetic makeup)");
-            
-            return tips.length > 0 ?
-              `Key genetics terms: ${tips.join(', ')}. Remember: dominant alleles mask recessive ones.` :
-              "Use genetics terminology correctly: alleles (gene versions), genotype (genetic makeup), phenotype (appearance), homozygous/heterozygous.";
-          }
-        }
-        
-        // Cell processes
-        if (questionText.includes('osmosis')) {
-          if (modelAnswer.includes('concentrated') && modelAnswer.includes('dilute')) {
-            return "Osmosis: water moves from dilute solution (high water potential) to concentrated solution (low water potential) through partially permeable membrane. In cells, consider effects on turgor pressure.";
-          }
-          return "Define osmosis as water movement across membranes. Explain the direction (dilute to concentrated) and effects on plant/animal cells.";
-        }
-      }
-      
-      // Chemistry-enhanced hints
-      if (subjectId === 'chemistry') {
-        if (questionText.includes('balance') && questionText.includes('equation')) {
-          return "Balancing equations: 1) Count atoms of each element on both sides, 2) Start with most complex molecule, 3) Use coefficients (not subscripts), 4) Check all atoms balance, 5) Include state symbols if required.";
-        }
-        
-        if (questionText.includes('bond')) {
-          if (questionText.includes('ionic')) {
-            const details = [];
-            if (modelAnswer.includes('electron transfer') || modelAnswer.includes('lose') || modelAnswer.includes('gain')) {
-              details.push("electron transfer (metal loses, non-metal gains)");
+        if (questionText.includes('earthquake') || questionText.includes('volcanic')) {
+          if (questionText.includes('distribution')) {
+            if (modelAnswer.includes('ring of fire') || modelAnswer.includes('pacific')) {
+              return "Mention the Ring of Fire around the Pacific Ocean, mid-Atlantic ridge, and areas where plates meet. Link to plate boundaries.";
             }
-            if (modelAnswer.includes('electrostatic') || modelAnswer.includes('attraction')) {
-              details.push("electrostatic attraction between oppositely charged ions");
-            }
-            
-            return details.length > 0 ?
-              `Ionic bonding key points: ${details.join(', ')}.` :
-              "Ionic bonds: metal atoms lose electrons (become cations), non-metals gain electrons (become anions), then oppositely charged ions attract.";
+            return "Focus on patterns - where do most earthquakes/volcanoes occur? Think about plate boundaries and specific regions.";
           }
           
-          if (questionText.includes('covalent')) {
-            return modelAnswer.includes('share') || modelAnswer.includes('electron pair') ?
-              "Covalent bonding: non-metal atoms share electron pairs to achieve full outer shells. Each shared pair = one covalent bond." :
-              "Covalent bonds form when atoms share electrons. Focus on electron pair sharing and how this fills outer electron shells.";
+          if (questionText.includes('effect') || questionText.includes('impact')) {
+            if (modelAnswer.includes('primary') && modelAnswer.includes('secondary')) {
+              return "Separate primary effects (immediate: building collapse, deaths, infrastructure damage) from secondary effects (later: disease, unemployment, economic impact).";
+            }
+            return "Think about immediate impacts versus longer-term consequences. Consider social, economic, and environmental effects.";
           }
-        }
-        
-        // Calculations
-        if (questionText.includes('mole') || questionText.includes('calculate') && (questionText.includes('mass') || questionText.includes('concentration'))) {
-          const formulas = [];
-          if (modelAnswer.includes('mass')) formulas.push("moles = mass ÷ Mr");
-          if (modelAnswer.includes('concentration') || modelAnswer.includes('volume')) formulas.push("moles = concentration × volume (dm³)");
-          if (modelAnswer.includes('avogadro')) formulas.push("1 mole = 6.02 × 10²³ particles");
           
-          return formulas.length > 0 ?
-            `Key formulas: ${formulas.join(', ')}. Show all working steps clearly.` :
-            "Use mole calculations: moles = mass ÷ Mr, or moles = concentration × volume. Show working and include units.";
-        }
-      }
-      
-      // Physics-enhanced hints  
-      if (subjectId === 'physics') {
-        if (questionText.includes('force')) {
-          if (questionText.includes('newton')) {
-            const laws = [];
-            if (modelAnswer.includes('1st') || modelAnswer.includes('first') || modelAnswer.includes('inertia')) {
-              laws.push("1st law (inertia): objects continue in uniform motion unless acted on by resultant force");
+          if (questionText.includes('response')) {
+            if (modelAnswer.includes('immediate') && modelAnswer.includes('long-term')) {
+              return "Split into immediate responses (rescue, emergency aid, medical care) and long-term responses (rebuilding, new building codes, monitoring systems).";
             }
-            if (modelAnswer.includes('2nd') || modelAnswer.includes('second') || modelAnswer.includes('f=ma')) {
-              laws.push("2nd law: F = ma (force = mass × acceleration)");
-            }
-            if (modelAnswer.includes('3rd') || modelAnswer.includes('third') || modelAnswer.includes('equal') || modelAnswer.includes('opposite')) {
-              laws.push("3rd law: every action has equal and opposite reaction");
-            }
-            
-            return laws.length > 0 ? laws.join('. ') : 
-              "Newton's laws: 1st (inertia), 2nd (F=ma), 3rd (action-reaction). Apply the relevant law to this situation.";
+            return "Consider what happens straight after the disaster versus months/years later. Think about emergency help and longer-term recovery.";
           }
-        }
-        
-        if (questionText.includes('energy')) {
-          const energyTypes = [];
-          if (modelAnswer.includes('kinetic')) energyTypes.push("kinetic energy (KE = ½mv²)");
-          if (modelAnswer.includes('potential') || modelAnswer.includes('gravitational')) energyTypes.push("gravitational potential energy (GPE = mgh)");
-          if (modelAnswer.includes('elastic')) energyTypes.push("elastic potential energy");
-          if (modelAnswer.includes('conservation')) energyTypes.push("conservation of energy principle");
           
-          return energyTypes.length > 0 ?
-            `Energy concepts: ${energyTypes.join(', ')}.` :
-            "Consider energy types (kinetic, potential) and conservation principle. Use appropriate formulas and show calculations.";
-        }
-        
-        if (questionText.includes('circuit')) {
-          if (questionText.includes('series')) {
-            return "Series circuits: current same throughout (I₁=I₂=I₃), voltage adds up (V_total=V₁+V₂+V₃), resistance adds up (R_total=R₁+R₂+R₃).";
-          }
-          if (questionText.includes('parallel')) {
-            return "Parallel circuits: voltage same across branches (V₁=V₂=V₃), current splits (I_total=I₁+I₂+I₃), 1/R_total = 1/R₁ + 1/R₂ + 1/R₃.";
-          }
-        }
-      }
-      
-      // Mathematics-enhanced hints
-      if (subjectId === 'mathematics') {
-        if (questionText.includes('expand') || questionText.includes('multiply out')) {
-          return modelAnswer.includes('foil') || (questionText.includes('bracket') && questionText.includes('bracket')) ?
-            "Use FOIL method: First terms, Outside terms, Inside terms, Last terms. Then collect like terms. E.g., (a+b)(c+d) = ac + ad + bc + bd." :
-            "Multiply each term in first bracket by each term in second bracket. Collect like terms at the end.";
-        }
-        
-        if (questionText.includes('solve') && questionText.includes('equation')) {
-          if (questionText.includes('simultaneous')) {
-            return "Simultaneous equations: use elimination (make coefficients equal, subtract equations) or substitution (solve one for a variable, substitute into other).";
-          }
-          if (questionText.includes('quadratic')) {
-            return "Quadratic equations: try factoring first, then quadratic formula if needed. Remember to check both solutions make sense in context.";
+          if (questionText.includes('management') || questionText.includes('reduce')) {
+            if (answerKeywords.length > 0) {
+              return `Key management strategies include: ${answerKeywords.slice(0, 3).join(', ')}. Use the 4 P's framework if relevant.`;
+            }
+            return "Think about the 4 P's: Prediction (monitoring), Protection (building design), Preparation (education), Planning (evacuation routes).";
           }
         }
         
-        if (questionText.includes('probability')) {
-          if (contentAnalysis.includes('calculation_needed')) {
-            return "Calculate probability as favorable outcomes ÷ total outcomes. For multiple events, use P(A and B) = P(A) × P(B) if independent. Draw tree diagrams for complex scenarios.";
-          }
-        }
-      }
-      
-      return null; // No subject-specific hint found
-    };
-    
-    // Try subject-specific hint first
-    const subjectHint = generateSubjectSpecificHint();
-    if (subjectHint) return subjectHint;
-    
-    // Enhanced general hints based on question analysis
-    const generateEnhancedGeneralHint = () => {
-      // Command word specific hints
-      if (questionText.includes('calculate') || questionText.includes('find')) {
-        if (contentAnalysis.includes('calculation_needed')) {
-          return keyTerms.length > 0 ?
-            `This requires calculation. Key terms from the answer: ${keyTerms.slice(0, 3).join(', ')}. Identify given values, choose the right formula, show all working.` :
-            "Identify given values, determine what you need to find, select appropriate formula, substitute values, show all working steps clearly, include units.";
-        }
-        return "Identify the given information, what you need to calculate, and the appropriate method or formula to use.";
-      }
-      
-      if (questionText.includes('explain')) {
-        if (contentAnalysis.includes('process_description')) {
-          return keyTerms.length > 0 ?
-            `Explain the process step-by-step. Key concepts likely needed: ${keyTerms.slice(0, 4).join(', ')}. Use linking words like 'because', 'therefore', 'as a result'.` :
-            "Break down the process into clear steps. Use scientific terminology and explain cause-and-effect relationships.";
-        }
-        return keyTerms.length > 0 ?
-          `Give clear reasons using scientific terminology. Key terms from model answer: ${keyTerms.slice(0, 3).join(', ')}.` :
-          "Provide clear scientific explanations with reasoning. Use appropriate terminology and explain cause-and-effect relationships.";
-      }
-      
-      if (questionText.includes('describe')) {
-        return keyTerms.length > 0 ?
-          `Give a detailed account of key features. Important terms: ${keyTerms.slice(0, 4).join(', ')}. Focus on specific details and examples.` :
-          "Provide a detailed account focusing on key features, processes, or characteristics. Use specific examples and scientific terms.";
-      }
-      
-      if (questionText.includes('compare') || questionText.includes('contrast')) {
-        if (contentAnalysis.includes('comparison_needed')) {
-          return "Make direct comparisons showing both similarities and differences. Use comparative language: 'whereas', 'however', 'in contrast', 'similarly'.";
-        }
-      }
-      
-      if (questionText.includes('evaluate') || questionText.includes('assess')) {
-        return "Consider multiple perspectives, weigh evidence for and against, then make a reasoned judgment. Use evaluative language and justify your conclusion.";
-      }
-      
-      // Mark-based hints with content awareness
-      if (question.marks >= 6) {
-        return keyTerms.length > 0 ?
-          `Extended answer required (${question.marks} marks). Key concepts: ${keyTerms.slice(0, 5).join(', ')}. Structure your response logically with detailed explanations.` :
-          "This is an extended response question. Plan your answer structure, provide detailed explanations, use specific examples, and ensure you address all parts.";
-      } else if (question.marks >= 3) {
-        return keyTerms.length > 0 ?
-          `Medium-length answer (${question.marks} marks). Focus on: ${keyTerms.slice(0, 3).join(', ')}. Be specific and use correct terminology.` :
-          "Provide a clear explanation with specific details. Address all parts of the question and use appropriate scientific terminology.";
-      }
-      
-      return keyTerms.length > 0 ?
-        `Key concepts for this answer: ${keyTerms.slice(0, 2).join(', ')}. Keep focused and precise.` :
-        "Focus on the key concept being tested. Give a clear, accurate response using appropriate terminology.";
-    };
-    
-    return generateEnhancedGeneralHint();
+        // Weather Hazards
+        if (questionText.includes('tropical storm') || questionText.includes('hurricane') || questionText.includes('cyclone')) {
+          if (questionText.includes('formation') || questionText.includes('develop')) {
+            if (modelAnswer.includes('27') || modelAnswer.includes('temperature')) {
+              return "Essential conditions: warm ocean water (27°C+), low wind shear, distance from equator for Coriolis effect, atmospheric instability.";
+            }
             return "Think about ocean temperature requirements, wind conditions, location relative to equator, and atmospheric conditions needed.";
           }
           
