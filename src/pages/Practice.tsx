@@ -707,6 +707,62 @@ const Practice = () => {
           `Medium-length answer (${question.marks} marks). Focus on: ${keyTerms.slice(0, 3).join(', ')}. Be specific and use correct terminology.` :
           "Provide a clear explanation with specific details. Address all parts of the question and use appropriate scientific terminology.";
       }
+      return null; // No subject-specific hint found
+    };
+    
+    // Try subject-specific hint first
+    const subjectHint = generateSubjectSpecificHint();
+    if (subjectHint) return subjectHint;
+    
+    // Enhanced general hints based on question analysis
+    const generateEnhancedGeneralHint = () => {
+      // Command word specific hints
+      if (questionText.includes('calculate') || questionText.includes('find')) {
+        if (contentAnalysis.includes('calculation_needed')) {
+          return keyTerms.length > 0 ?
+            `This requires calculation. Key terms from the answer: ${keyTerms.slice(0, 3).join(', ')}. Identify given values, choose the right formula, show all working.` :
+            "Identify given values, determine what you need to find, select appropriate formula, substitute values, show all working steps clearly, include units.";
+        }
+        return "Identify the given information, what you need to calculate, and the appropriate method or formula to use.";
+      }
+      
+      if (questionText.includes('explain')) {
+        if (contentAnalysis.includes('process_description')) {
+          return keyTerms.length > 0 ?
+            `Explain the process step-by-step. Key concepts likely needed: ${keyTerms.slice(0, 4).join(', ')}. Use linking words like 'because', 'therefore', 'as a result'.` :
+            "Break down the process into clear steps. Use scientific terminology and explain cause-and-effect relationships.";
+        }
+        return keyTerms.length > 0 ?
+          `Give clear reasons using scientific terminology. Key terms from model answer: ${keyTerms.slice(0, 3).join(', ')}.` :
+          "Provide clear scientific explanations with reasoning. Use appropriate terminology and explain cause-and-effect relationships.";
+      }
+      
+      if (questionText.includes('describe')) {
+        return keyTerms.length > 0 ?
+          `Give a detailed account of key features. Important terms: ${keyTerms.slice(0, 4).join(', ')}. Focus on specific details and examples.` :
+          "Provide a detailed account focusing on key features, processes, or characteristics. Use specific examples and scientific terms.";
+      }
+      
+      if (questionText.includes('compare') || questionText.includes('contrast')) {
+        if (contentAnalysis.includes('comparison_needed')) {
+          return "Make direct comparisons showing both similarities and differences. Use comparative language: 'whereas', 'however', 'in contrast', 'similarly'.";
+        }
+      }
+      
+      if (questionText.includes('evaluate') || questionText.includes('assess')) {
+        return "Consider multiple perspectives, weigh evidence for and against, then make a reasoned judgment. Use evaluative language and justify your conclusion.";
+      }
+      
+      // Mark-based hints with content awareness
+      if (question.marks >= 6) {
+        return keyTerms.length > 0 ?
+          `Extended answer required (${question.marks} marks). Key concepts: ${keyTerms.slice(0, 5).join(', ')}. Structure your response logically with detailed explanations.` :
+          "This is an extended response question. Plan your answer structure, provide detailed explanations, use specific examples, and ensure you address all parts.";
+      } else if (question.marks >= 3) {
+        return keyTerms.length > 0 ?
+          `Medium-length answer (${question.marks} marks). Focus on: ${keyTerms.slice(0, 3).join(', ')}. Be specific and use correct terminology.` :
+          "Provide a clear explanation with specific details. Address all parts of the question and use appropriate scientific terminology.";
+      }
       
       return keyTerms.length > 0 ?
         `Key concepts for this answer: ${keyTerms.slice(0, 2).join(', ')}. Keep focused and precise.` :
