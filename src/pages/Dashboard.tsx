@@ -69,6 +69,7 @@ import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
 import { useToast } from "@/hooks/use-toast";
 import { PaywallCard } from "@/components/ui/paywall-card";
 import { openManageBilling } from "@/lib/manageBilling";
+import { useSubscription } from "@/hooks/useSubscription";
 
 interface UserProgress {
   subjectId: string;
@@ -81,27 +82,7 @@ interface UserProgress {
 const Dashboard = () => {
   const { user, logout, isPremium, refreshSubscription } = useAuth();
   const { toast } = useToast();
-
-  const openPaymentLink = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) {
-      window.location.href = "/login";
-      return;
-    }
-    // Test checkout link
-    const join = "https://buy.stripe.com/test_3cI28q8og4VsfiE0yI8N202".includes(
-      "?"
-    )
-      ? "&"
-      : "?";
-    window.location.href =
-      "https://buy.stripe.com/test_3cI28q8og4VsfiE0yI8N202" +
-      join +
-      "client_reference_id=" +
-      encodeURIComponent(user.id);
-  };
+  const { openPaymentLink } = useSubscription();
 
   const navigate = useNavigate();
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
