@@ -560,11 +560,45 @@ const Practice = () => {
           hint = "Present balanced arguments from different perspectives, then give your reasoned conclusion.";
         }
       } else if (isList) {
-        const numberOfPoints = modelAnswer.split(/[.;]/).length - 1;
+        // Extract the number of points requested from the question text
+        let requestedPoints = null;
+        
+        // Look for explicit numbers in the question
+        const numberWords = {
+          'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
+          'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10
+        };
+        
+        const questionLower = questionText.toLowerCase();
+        
+        // Check for written numbers (e.g., "two ways", "three examples")
+        for (const [word, num] of Object.entries(numberWords)) {
+          if (questionLower.includes(word)) {
+            requestedPoints = num;
+            break;
+          }
+        }
+        
+        // Check for digit numbers (e.g., "2 ways", "3 examples")
+        if (!requestedPoints) {
+          const digitMatch = questionText.match(/(\d+)\s*(?:ways?|examples?|points?|reasons?|methods?|factors?|benefits?|disadvantages?|advantages?)/i);
+          if (digitMatch) {
+            requestedPoints = parseInt(digitMatch[1]);
+          }
+        }
+        
+        // Fallback to analyzing model answer structure if no explicit number found
+        if (!requestedPoints) {
+          const numberOfPoints = modelAnswer.split(/[.;]/).filter(part => part.trim().length > 0).length;
+          requestedPoints = Math.max(numberOfPoints - 1, 1); // Subtract 1 to account for potential intro/conclusion
+        }
+        
+        const targetPoints = Math.min(requestedPoints, 5);
+        
         if (specificContent) {
-          hint = `${specificContent} Aim for around ${Math.min(numberOfPoints, 5)} clear points.`;
+          hint = `${specificContent} Aim for ${targetPoints} clear points.`;
         } else {
-          hint = `Provide a clear list of points (aim for ${Math.min(numberOfPoints, 5)}). Be specific and precise.`;
+          hint = `Provide a clear list of points (aim for ${targetPoints}). Be specific and precise.`;
         }
       } else if (isCalculate) {
         if (specificContent) {
