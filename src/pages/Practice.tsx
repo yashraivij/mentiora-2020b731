@@ -608,9 +608,11 @@ const Practice = () => {
           const lastFewWords = words.slice(-3).join(' ').toLowerCase();
           
           if (lastFewWords) {
-            hint = `Define ${lastFewWords} clearly and precisely. Think about the essential characteristics that make it distinct.`;
+            // Clean up the words to create grammatically correct hint
+            const cleanWords = lastFewWords.replace(/[?!.,;:]/, '').trim();
+            hint = `Think about defining "${cleanWords}" clearly and precisely. Consider the essential characteristics that make it distinct from similar concepts.`;
           } else {
-            hint = "Give a clear, precise definition. Think about the essential characteristics or features.";
+            hint = "Give a clear, precise definition. Think about the essential characteristics or features that make this concept unique.";
           }
         }
       } else if (isExplain) {
@@ -875,11 +877,15 @@ const Practice = () => {
       const lastWords = questionWords.slice(-4).join(' ').toLowerCase();
       
       if (questionLower.includes('explain') && lastWords) {
-        targetedHint = `Explain ${lastWords} by breaking down the key factors and their relationships with specific details.`;
+        // Clean up the words to create grammatically correct hint
+        const cleanWords = lastWords.replace(/[?!.,;:]/, '').trim();
+        targetedHint = `Focus on explaining ${cleanWords} clearly. Break down the key factors and their relationships with specific details.`;
       } else if (questionLower.includes('describe') && lastWords) {
-        targetedHint = `Describe ${lastWords} using specific features and characteristics, giving concrete examples.`;
+        // Clean up the words to create grammatically correct hint
+        const cleanWords = lastWords.replace(/[?!.,;:]/, '').trim();
+        targetedHint = `Describe ${cleanWords} by focusing on specific features and characteristics. Give concrete examples to support your description.`;
       } else if (questionLower.includes('analyse') || questionLower.includes('analyze')) {
-        targetedHint = `Break down the components and examine how they work together, using evidence to support your analysis.`;
+        targetedHint = `Break down the components and examine how they work together. Use evidence to support your analysis.`;
       }
       
       // Analyze model answer for specific content
@@ -908,7 +914,7 @@ const Practice = () => {
         
         if (meaningfulWords.length > 0) {
           const concepts = meaningfulWords.join(', ').toLowerCase();
-          targetedHint = `Consider ${concepts} and explain how these concepts work together with specific details.`;
+          targetedHint = `Think about ${concepts} and explain how these concepts work together. Use specific details to support your explanation.`;
         }
       }
       
@@ -919,7 +925,7 @@ const Practice = () => {
       const questionLower = questionText.toLowerCase();
       
       if (questionLower.includes('define') || questionLower.includes('what is')) {
-        return `Give a clear, precise definition focusing on the key characteristics that make this concept distinct.`;
+        return `Give a clear, precise definition focusing on the key characteristics that make this concept unique and distinct.`;
       } else if (questionLower.includes('state') || questionLower.includes('name')) {
         return `Provide the specific answer requested - be direct and precise in your response.`;
       } else {
