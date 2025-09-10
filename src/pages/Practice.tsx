@@ -393,8 +393,8 @@ const Practice = () => {
     
     const analysis = analyzeModelAnswer();
     
-    // Generate targeted hints based on question type and model answer analysis
-    const generateTargetedHint = () => {
+    // Generate friendly, personalized hints based on question type and content
+    const generateFriendlyHint = () => {
       // Identify question command words
       const isDefine = questionText.includes('define') || questionText.includes('what is') || questionText.includes('meaning of');
       const isExplain = questionText.includes('explain') || questionText.includes('describe') || questionText.includes('how does') || questionText.includes('why does');
@@ -407,7 +407,7 @@ const Practice = () => {
       const allKeyTerms = [...new Set([...analysis.mainTopic, ...analysis.supportingPoints])].slice(0, 5);
       
       if (isDefine && analysis.mainTopic.length > 0) {
-        hint = `Start with a clear definition. Your answer should mention: ${analysis.mainTopic.slice(0, 3).join(', ')}. `;
+        hint = `Think about giving a clear definition here. The key concepts you'll want to focus on are: ${analysis.mainTopic.slice(0, 3).join(', ')}. `;
       } else if (isExplain && analysis.keyTerms.length > 0) {
         const processTerms = analysis.keyTerms.filter(term => 
           ['process', 'reaction', 'formation', 'movement', 'change', 'occurs', 'happens'].some(p => 
@@ -415,66 +415,66 @@ const Practice = () => {
           )
         );
         if (processTerms.length > 0 || modelAnswer.includes('first') || modelAnswer.includes('then') || modelAnswer.includes('finally')) {
-          hint = `Explain the process step-by-step. Key stages to cover: ${allKeyTerms.slice(0, 4).join(', ')}. `;
+          hint = `This looks like it needs a step-by-step explanation. Try walking through the process and think about these key stages: ${allKeyTerms.slice(0, 4).join(', ')}. `;
         } else {
-          hint = `Explain the concept clearly. Important points to include: ${allKeyTerms.slice(0, 4).join(', ')}. `;
+          hint = `Break this down clearly - the main ideas to explore are: ${allKeyTerms.slice(0, 4).join(', ')}. `;
         }
       } else if (isCompare && allKeyTerms.length > 2) {
-        hint = `Compare both sides systematically. Consider these aspects: ${allKeyTerms.slice(0, 4).join(', ')}. Mention similarities AND differences. `;
+        hint = `Good comparison questions need you to look at both sides. Consider these different aspects: ${allKeyTerms.slice(0, 4).join(', ')}. Don't forget to mention both similarities and differences! `;
       } else if (isEvaluate) {
-        hint = `Present balanced arguments. Consider: ${allKeyTerms.slice(0, 4).join(', ')}. Give advantages and disadvantages, then reach a conclusion. `;
+        hint = `This is asking for your analysis, so weigh up the different factors. Think about: ${allKeyTerms.slice(0, 4).join(', ')}. Present both sides before giving your conclusion. `;
       } else if (isList && allKeyTerms.length > 0) {
         const numberOfPoints = modelAnswer.split(/[.;]/).length - 1;
-        hint = `Provide a clear list (aim for ${Math.min(numberOfPoints, 5)} points). Include: ${allKeyTerms.slice(0, 5).join(', ')}. `;
+        hint = `Try listing around ${Math.min(numberOfPoints, 5)} clear points here. Consider including: ${allKeyTerms.slice(0, 5).join(', ')}. `;
       } else if (isCalculate) {
         const hasFormula = modelAnswer.includes('=') || modelAnswer.includes('×') || modelAnswer.includes('÷');
         if (hasFormula) {
-          hint = `Identify the correct formula first. Show your working clearly. `;
+          hint = `Start by identifying which formula you need, then work through it step by step. Don't forget to show your working! `;
         } else {
-          hint = `Show your method step-by-step. Include relevant values and units. `;
+          hint = `Break this down methodically - show each step of your calculation and remember to include units where needed. `;
         }
       } else if (allKeyTerms.length > 0) {
         // Generic content hint based on model answer analysis
-        hint = `Your answer should cover these key areas: ${allKeyTerms.slice(0, 4).join(', ')}. `;
+        hint = `The main areas to cover in this answer are: ${allKeyTerms.slice(0, 4).join(', ')}. `;
       }
       
-      // Add structure guidance based on marking criteria
+      // Add friendly structure guidance based on marking criteria
       const criteriaHints = markingCriteria.map(criteria => {
-        if (criteria.toLowerCase().includes('example')) return 'Include specific examples';
-        if (criteria.toLowerCase().includes('explain')) return 'Give clear explanations';
-        if (criteria.toLowerCase().includes('link') || criteria.toLowerCase().includes('connect')) return 'Link your ideas together';
-        if (criteria.toLowerCase().includes('accurate') || criteria.toLowerCase().includes('correct')) return 'Use accurate scientific terminology';
+        if (criteria.toLowerCase().includes('example')) return 'add some specific examples';
+        if (criteria.toLowerCase().includes('explain')) return 'give detailed explanations';
+        if (criteria.toLowerCase().includes('link') || criteria.toLowerCase().includes('connect')) return 'connect your ideas together';
+        if (criteria.toLowerCase().includes('accurate') || criteria.toLowerCase().includes('correct')) return 'use the right scientific terminology';
         return '';
       }).filter(h => h).slice(0, 2);
       
       if (criteriaHints.length > 0) {
-        hint += criteriaHints.join('. ') + '. ';
+        hint += `Also remember to ${criteriaHints.join(' and ')}. `;
       }
       
-      // Add mark-specific guidance
+      // Add encouraging mark-specific guidance
       if (question.marks >= 6) {
-        hint += 'This is a detailed answer - develop your points fully with explanations and examples.';
+        hint += `This is worth quite a few marks, so take your time to develop your points fully with good explanations and examples.`;
       } else if (question.marks >= 3) {
-        hint += 'Give clear explanations with specific details.';
+        hint += `Make sure to include clear explanations with specific details.`;
       } else {
-        hint += 'Be precise and focus on the key concept.';
+        hint += `Keep it focused on the key concept - precision is key here!`;
       }
       
       return hint;
     };
     
-    const targetedHint = generateTargetedHint();
-    if (targetedHint && (analysis.mainTopic.length > 0 || analysis.supportingPoints.length > 0)) {
-      return targetedHint;
+    const friendlyHint = generateFriendlyHint();
+    if (friendlyHint && (analysis.mainTopic.length > 0 || analysis.supportingPoints.length > 0)) {
+      return friendlyHint;
     }
     
-    // Fallback for questions where model answer analysis doesn't yield good hints
+    // Friendly fallback hints for questions where model answer analysis doesn't yield good content
     if (question.marks >= 6) {
-      return "This is a longer answer question. Plan your response, use detailed scientific explanations, and include specific examples where relevant.";
+      return "This is a longer answer question, so take a moment to plan your response. Think about the main points you want to cover and support them with detailed explanations and examples.";
     } else if (question.marks >= 3) {
-      return "Provide a clear explanation with specific details. Make sure you address all parts of the question and use appropriate scientific terminology.";
+      return "Break this down clearly and give specific details. Make sure you're addressing all parts of the question and using the right scientific terminology.";
     } else {
-      return "Keep your answer focused and precise. Think about the key scientific concept being tested and give a clear, accurate response.";
+      return "Keep your answer focused and precise. Think about the main concept being tested and give a clear, accurate response.";
     }
   };
 
