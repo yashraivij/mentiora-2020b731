@@ -475,6 +475,12 @@ const Practice = () => {
         
         // Science-specific content analysis
         if (subjectId === 'biology' || subjectId === 'chemistry' || subjectId === 'physics') {
+          const questionLower = questionText.toLowerCase();
+          
+          // Biology-specific topics
+          if (questionLower.includes('drug testing') || questionLower.includes('medicine') || questionLower.includes('clinical trial')) {
+            return "Think about the stages of drug testing: laboratory testing, animal testing, then human trials (phases I, II, III). Consider safety and effectiveness at each stage.";
+          }
           if (modelLower.includes('photosynthesis')) {
             return "Consider the process of photosynthesis and what's needed for it to occur.";
           }
@@ -490,6 +496,43 @@ const Practice = () => {
           if (modelLower.includes('ecosystem') || modelLower.includes('food chain')) {
             return "Think about the relationships between organisms in the ecosystem.";
           }
+          if (questionLower.includes('antibiot') || modelLower.includes('antibiot')) {
+            return "Consider how antibiotics work against bacteria and why resistance develops.";
+          }
+          if (questionLower.includes('vaccin') || modelLower.includes('vaccin')) {
+            return "Think about how vaccines prepare the immune system to fight specific diseases.";
+          }
+          if (questionLower.includes('inheritance') || questionLower.includes('genetic') || modelLower.includes('allele')) {
+            return "Consider how genes are passed from parents to offspring and how dominant/recessive alleles work.";
+          }
+          
+          // Chemistry-specific topics
+          if (subjectId === 'chemistry') {
+            if (questionLower.includes('reaction') || modelLower.includes('reaction')) {
+              return "Think about the reactants, products, and conditions needed for this chemical reaction.";
+            }
+            if (questionLower.includes('acid') || questionLower.includes('alkali') || modelLower.includes('ph')) {
+              return "Consider the pH scale and how acids and alkalis behave in reactions.";
+            }
+          }
+          
+          // Physics-specific topics  
+          if (subjectId === 'physics') {
+            if (questionLower.includes('force') || questionLower.includes('motion')) {
+              return "Think about the forces acting and how they affect motion. Use Newton's laws if relevant.";
+            }
+            if (questionLower.includes('energy') || modelLower.includes('energy')) {
+              return "Consider the different types of energy and how energy is conserved or transferred.";
+            }
+          }
+          
+          // General science process questions
+          if (questionLower.includes('describe') && (questionLower.includes('process') || questionLower.includes('how'))) {
+            return "Break this scientific process down into clear stages. Explain what happens at each step and why.";
+          }
+          
+          // Return early to prevent falling through to literature analysis
+          return null;
         }
         
         // Business-specific content analysis
