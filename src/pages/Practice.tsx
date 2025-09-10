@@ -512,26 +512,76 @@ const Practice = () => {
         
         // Business-specific content analysis
         if (subjectId === 'business') {
+          const questionLower = questionText.toLowerCase();
+          
+          // Analyze the specific business topic being asked about
+          if (questionLower.includes('interest rate') || modelLower.includes('interest rate')) {
+            if (questionLower.includes('rising') || questionLower.includes('increase')) {
+              return "Think about how higher interest rates affect borrowing costs and consumer spending. Consider both challenges and any potential benefits.";
+            } else if (questionLower.includes('falling') || questionLower.includes('decrease')) {
+              return "Consider how lower interest rates make borrowing cheaper and encourage spending. Think about the effects on business investment and consumer behavior.";
+            } else {
+              return "Think about how interest rate changes affect borrowing, investment decisions, and consumer spending patterns.";
+            }
+          }
+          
+          if (questionLower.includes('exchange rate') || modelLower.includes('exchange rate')) {
+            if (questionLower.includes('export') || modelLower.includes('export')) {
+              return "Consider how currency changes affect the price competitiveness of exported goods in foreign markets.";
+            } else if (questionLower.includes('import') || modelLower.includes('import')) {
+              return "Think about how currency changes affect the cost of imported materials and goods for the business.";
+            } else {
+              return "Consider how currency value changes affect both costs (imports) and revenues (exports) for the business.";
+            }
+          }
+          
+          if (questionLower.includes('marketing') || questionLower.includes('advertis') || modelLower.includes('marketing')) {
+            return "Think about how this marketing approach affects customer awareness, brand image, and ultimately sales and profits.";
+          }
+          
+          if (questionLower.includes('staff') || questionLower.includes('employee') || questionLower.includes('worker')) {
+            if (questionLower.includes('motivat') || modelLower.includes('motivat')) {
+              return "Consider what motivates employees and how this affects their productivity, job satisfaction, and loyalty to the business.";
+            } else {
+              return "Think about the effects on employee performance, costs, and the overall efficiency of business operations.";
+            }
+          }
+          
+          if (questionLower.includes('technology') || questionLower.includes('automation') || modelLower.includes('technology')) {
+            return "Consider both the benefits (efficiency, cost savings) and challenges (initial costs, training needs) of technological changes.";
+          }
+          
+          if (questionLower.includes('location') || questionLower.includes('relocat') || modelLower.includes('location')) {
+            return "Think about factors like costs, access to customers and suppliers, transport links, and availability of skilled workers.";
+          }
+          
+          if (questionLower.includes('price') || questionLower.includes('pricing') || modelLower.includes('price')) {
+            if (questionLower.includes('increase') || questionLower.includes('rise')) {
+              return "Consider how higher prices affect customer demand, competitor responses, and profit margins.";
+            } else if (questionLower.includes('decrease') || questionLower.includes('lower')) {
+              return "Think about how lower prices can attract customers but may reduce profit margins per sale.";
+            } else {
+              return "Consider how pricing changes affect customer demand, sales volume, and overall profitability.";
+            }
+          }
+          
+          if (questionLower.includes('competition') || questionLower.includes('competitor') || modelLower.includes('competit')) {
+            return "Think about how competitive pressures affect pricing decisions, product development, and market share.";
+          }
+          
+          if (questionLower.includes('cash flow') || modelLower.includes('cash flow')) {
+            return "Consider how this affects the timing of money coming in and going out, and the business's ability to pay its bills.";
+          }
+          
+          // Fallback for other business questions - analyze model answer content
           if (modelLower.includes('profit') || modelLower.includes('revenue') || modelLower.includes('cost')) {
-            return "Consider the financial impact and how this affects the business's bottom line.";
+            return "Consider the financial impact and how this affects the business's profitability and success.";
           }
-          if (modelLower.includes('market') || modelLower.includes('competition') || modelLower.includes('competitor')) {
-            return "Think about market dynamics and competitive advantage.";
+          if (modelLower.includes('customer') || modelLower.includes('consumer')) {
+            return "Think about how this affects customer satisfaction, loyalty, and purchasing decisions.";
           }
-          if (modelLower.includes('stakeholder') || modelLower.includes('customer') || modelLower.includes('supplier')) {
-            return "Consider the different stakeholders and how they're affected.";
-          }
-          if (modelLower.includes('exchange rate') || modelLower.includes('currency')) {
-            return "Think about how currency changes affect costs, prices, and competitiveness.";
-          }
-          if (modelLower.includes('demand') || modelLower.includes('supply')) {
-            return "Consider supply and demand factors and their market effects.";
-          }
-          if (modelLower.includes('cash flow') || modelLower.includes('liquidity')) {
-            return "Focus on the cash flow implications and working capital effects.";
-          }
-          if (modelLower.includes('investment') || modelLower.includes('financing')) {
-            return "Consider the investment decision factors and financing implications.";
+          if (modelLower.includes('market') || modelLower.includes('demand')) {
+            return "Consider the market conditions and how supply and demand factors influence the business.";
           }
         }
         
