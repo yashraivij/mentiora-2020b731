@@ -759,13 +759,103 @@ const Practice = () => {
       return contextualHint;
     }
     
-    // Friendly fallback hints for questions where model answer analysis doesn't yield good content
+    // Analyze question and model answer content for specific guidance
     if (question.marks >= 6) {
-      return "This is a longer answer question, so take a moment to plan your response. Think about the main points you want to cover and support them with detailed explanations and examples.";
+      // For longer questions, analyze the model answer structure and question content
+      const questionLower = questionText.toLowerCase();
+      const modelLower = modelAnswer.toLowerCase();
+      const sentences = modelAnswer.split(/[.!?]/).filter(s => s.trim().length > 10);
+      
+      // Extract key themes or concepts from the question and model answer
+      let specificGuidance = null;
+      
+      // Literature analysis
+      if (questionLower.includes('frankenstein') || modelLower.includes('frankenstein')) {
+        specificGuidance = "Consider Shelley's themes of scientific responsibility, isolation, and the consequences of unchecked ambition. Use specific examples from the text.";
+      } else if (questionLower.includes('character') && (modelLower.includes('develop') || modelLower.includes('change'))) {
+        specificGuidance = "Analyze how the character develops through specific events and quote key moments that show this transformation.";
+      } else if (questionLower.includes('language') || questionLower.includes('technique')) {
+        specificGuidance = "Identify specific literary techniques used and explain their effect on the reader with textual evidence.";
+      }
+      
+      // Science analysis
+      else if (questionLower.includes('process') || modelLower.includes('process')) {
+        specificGuidance = "Break down each stage of the process and explain what happens at each step with scientific reasoning.";
+      } else if (questionLower.includes('effect') || modelLower.includes('effect')) {
+        specificGuidance = "Explain the cause-and-effect relationships and the scientific principles behind why this happens.";
+      }
+      
+      // Business analysis  
+      else if (questionLower.includes('business') || questionLower.includes('company')) {
+        specificGuidance = "Consider the impact on different stakeholders and use business terminology to explain the effects.";
+      }
+      
+      // Geography/History analysis
+      else if (questionLower.includes('impact') || questionLower.includes('consequence')) {
+        specificGuidance = "Examine both short-term and long-term effects, providing specific examples and evidence.";
+      }
+      
+      // Fallback: analyze model answer content
+      if (!specificGuidance && sentences.length >= 2) {
+        const keyTerms = [];
+        sentences.forEach(sentence => {
+          const words = sentence.split(/\s+/).filter(word => word.length > 4 && !['this', 'that', 'which', 'where', 'when'].includes(word.toLowerCase()));
+          keyTerms.push(...words.slice(0, 2));
+        });
+        
+        if (keyTerms.length > 0) {
+          const uniqueTerms = [...new Set(keyTerms.slice(0, 4))];
+          specificGuidance = `Focus on ${uniqueTerms.join(', ').toLowerCase()} and develop each point with detailed explanations and specific examples.`;
+        }
+      }
+      
+      return specificGuidance || "This requires a detailed response - plan your main points and support each one with specific examples and explanations.";
+      
     } else if (question.marks >= 3) {
-      return "Break this down clearly and give specific details. Make sure you're addressing all parts of the question and using the right scientific terminology.";
+      // For medium questions, provide targeted guidance
+      const questionLower = questionText.toLowerCase();
+      const modelLower = modelAnswer.toLowerCase();
+      
+      let targetedHint = null;
+      
+      // Extract what the question is asking for
+      const questionWords = questionText.split(/\s+/).filter(word => word.length > 3);
+      const lastWords = questionWords.slice(-4).join(' ').toLowerCase();
+      
+      if (questionLower.includes('explain') && lastWords) {
+        targetedHint = `Explain ${lastWords} by breaking down the key factors and their relationships with specific details.`;
+      } else if (questionLower.includes('describe') && lastWords) {
+        targetedHint = `Describe ${lastWords} using specific features and characteristics, giving concrete examples.`;
+      } else if (questionLower.includes('analyse') || questionLower.includes('analyze')) {
+        targetedHint = `Break down the components and examine how they work together, using evidence to support your analysis.`;
+      }
+      
+      // Analyze model answer for specific content
+      const sentences = modelAnswer.split(/[.!?]/).filter(s => s.trim().length > 5);
+      if (!targetedHint && sentences.length > 0) {
+        const firstSentence = sentences[0].trim().toLowerCase();
+        const keyWords = firstSentence.split(/\s+/).filter(word => word.length > 4).slice(0, 3);
+        if (keyWords.length > 0) {
+          targetedHint = `Focus on ${keyWords.join(', ')} and explain the connections between these concepts with specific details.`;
+        }
+      }
+      
+      return targetedHint || "Provide specific details and explanations for each point you make, using relevant examples.";
+      
     } else {
-      return "Keep your answer focused and precise. Think about the main concept being tested and give a clear, accurate response.";
+      // For short questions, analyze what's being asked
+      const questionLower = questionText.toLowerCase();
+      const modelWords = modelAnswer.split(/\s+/).filter(word => word.length > 2).slice(0, 5).join(' ');
+      
+      if (questionLower.includes('define') || questionLower.includes('what is')) {
+        return `Give a clear, precise definition focusing on the key characteristics that make this concept distinct.`;
+      } else if (questionLower.includes('state') || questionLower.includes('name')) {
+        return `Provide the specific answer requested - be direct and precise in your response.`;
+      } else if (modelWords) {
+        return `Your answer should focus on ${modelWords.toLowerCase()} - be concise but accurate.`;
+      } else {
+        return "Keep your answer focused and precise, directly addressing what the question asks for.";
+      }
     }
   };
 
