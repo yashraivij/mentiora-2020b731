@@ -567,36 +567,32 @@ const Practice = () => {
           hint = `Provide a clear list of points (aim for ${Math.min(numberOfPoints, 5)}). Be specific and precise.`;
         }
       } else if (isCalculate) {
-        const hasFormula = modelAnswer.includes('=') || modelAnswer.includes('×') || modelAnswer.includes('÷');
-        if (hasFormula) {
-          hint = "Identify the correct formula first, then substitute values carefully. Show all your working.";
+        if (specificContent) {
+          hint = specificContent;
         } else {
-          hint = "Work through this methodically, showing each step. Don't forget units in your final answer.";
+          // Analyze the specific calculation needed
+          const questionLower = questionText;
+          const numbers = modelAnswer.match(/\d+(?:\.\d+)?/g) || [];
+          const operations = [];
+          if (modelAnswer.includes('+')) operations.push('addition');
+          if (modelAnswer.includes('-') || modelAnswer.includes('−')) operations.push('subtraction');
+          if (modelAnswer.includes('×') || modelAnswer.includes('*')) operations.push('multiplication');
+          if (modelAnswer.includes('÷') || modelAnswer.includes('/')) operations.push('division');
+          
+          if (questionLower.includes('cost') || questionLower.includes('price') || questionLower.includes('money')) {
+            hint = `This is a money calculation. ${operations.length > 0 ? `You'll need ${operations.join(' and ')}.` : ''} Work with the amounts given and check your final answer makes sense.`;
+          } else if (questionLower.includes('time') || questionLower.includes('hour') || questionLower.includes('minute')) {
+            hint = `This involves time calculations. ${numbers.length > 1 ? `Work with the time values ${numbers.slice(0,2).join(' and ')}.` : ''} Remember to convert between hours and minutes if needed.`;
+          } else if (questionLower.includes('distance') || questionLower.includes('length') || questionLower.includes('speed')) {
+            hint = `This is a distance/speed problem. ${operations.length > 0 ? `Use ${operations.join(' and ')} with the values given.` : ''} Check if you need distance = speed × time.`;
+          } else if (numbers.length >= 2) {
+            hint = `Work with the numbers ${numbers.slice(0,3).join(', ')}. ${operations.length > 0 ? `This involves ${operations.join(' and ')}.` : ''} Show each step clearly.`;
+          } else {
+            hint = `Look at what the question is asking you to find and work backwards from there.`;
+          }
         }
       } else if (specificContent) {
         hint = specificContent;
-      }
-      
-      // Add structure guidance based on marking criteria  
-      const criteriaHints = markingCriteria.map(criteria => {
-        if (criteria.toLowerCase().includes('example')) return 'add some specific examples';
-        if (criteria.toLowerCase().includes('explain')) return 'give detailed explanations';
-        if (criteria.toLowerCase().includes('link') || criteria.toLowerCase().includes('connect')) return 'connect your ideas together';
-        if (criteria.toLowerCase().includes('accurate') || criteria.toLowerCase().includes('correct')) return 'use the right scientific terminology';
-        return '';
-      }).filter(h => h).slice(0, 2);
-      
-      if (criteriaHints.length > 0) {
-        hint += ` Also remember to ${criteriaHints.join(' and ')}.`;
-      }
-      
-      // Add encouraging mark-specific guidance
-      if (question.marks >= 6) {
-        hint += ` This is worth quite a few marks, so take your time to develop your points fully with good explanations and examples.`;
-      } else if (question.marks >= 3) {
-        hint += ` Make sure to include clear explanations with specific details.`;
-      } else {
-        hint += ` Keep it focused on the key concept - precision is key here!`;
       }
       
       return hint;
