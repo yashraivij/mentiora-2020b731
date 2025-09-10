@@ -215,9 +215,9 @@ const Practice: React.FC = () => {
 
       // Handle notifications for wrong answers
       if (result.score < currentQuestion.marks) {
-        handlePracticeQuestionResult(false, subjectId || '', topicId || '', currentQuestion.question);
+        handlePracticeQuestionResult(subjectId || '', subject?.name || '', false, result.score, currentQuestion.marks);
       } else {
-        handlePracticeQuestionResult(true, subjectId || '', topicId || '', currentQuestion.question);
+        handlePracticeQuestionResult(subjectId || '', subject?.name || '', true, result.score, currentQuestion.marks);
         playCelebratorySound();
       }
       
@@ -778,7 +778,6 @@ const Practice: React.FC = () => {
         <PersonalizedNotification
           type={notification.type}
           onClose={hideNotification}
-          onClear={clearNotification}
         />
       )}
       
