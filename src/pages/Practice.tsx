@@ -625,18 +625,38 @@ const Practice = () => {
           } else if (modelAnswer.includes('first') || modelAnswer.includes('then') || modelAnswer.includes('finally')) {
             hint = "This needs a step-by-step explanation. Walk through the process in logical order.";
           } else {
-            // Extract key concepts from the model answer
+            // Extract meaningful concepts from the model answer
             const sentences = modelAnswer.split(/[.!?]/).filter(s => s.trim().length > 0);
             if (sentences.length > 0) {
               const firstSentence = sentences[0].trim();
-              const keyWords = firstSentence.split(/\s+/).filter(word => word.length > 4).slice(0, 3);
-              if (keyWords.length > 0) {
-                hint = `Focus on ${keyWords.join(', ').toLowerCase()} and explain the connections clearly.`;
+              
+              // Filter out unhelpful words and focus on meaningful concepts
+              const wordsToIgnore = new Set([
+                'provides', 'does', 'uses', 'makes', 'shows', 'gives', 'takes', 'gets', 'comes', 'goes', 
+                'becomes', 'seems', 'appears', 'looks', 'feels', 'sounds', 'acts', 'works', 'helps',
+                'creates', 'forms', 'allows', 'causes', 'leads', 'results', 'means', 'involves',
+                'includes', 'contains', 'represents', 'demonstrates', 'illustrates', 'reveals',
+                'this', 'that', 'these', 'those', 'they', 'them', 'their', 'there', 'where', 'when',
+                'what', 'which', 'while', 'through', 'because', 'although', 'however', 'therefore'
+              ]);
+              
+              const meaningfulWords = firstSentence.split(/\s+/)
+                .filter(word => {
+                  const cleanWord = word.toLowerCase().replace(/[^\w]/g, '');
+                  return cleanWord.length > 3 && 
+                         !wordsToIgnore.has(cleanWord) &&
+                         !/^(the|and|but|for|with|from|into|upon|over|under)$/.test(cleanWord);
+                })
+                .slice(0, 2);
+              
+              if (meaningfulWords.length > 0) {
+                const concepts = meaningfulWords.join(' and ').toLowerCase();
+                hint = `Think about ${concepts} and how they connect to answer this question clearly.`;
               } else {
-                hint = "Break this down clearly and explain the reasoning behind what happens.";
+                hint = "Break this down step by step and explain your reasoning clearly.";
               }
             } else {
-              hint = "Break this down clearly and explain the reasoning behind what happens.";
+              hint = "Break this down step by step and explain your reasoning clearly.";
             }
           }
         }
@@ -833,10 +853,30 @@ const Practice = () => {
       // Analyze model answer for specific content
       const sentences = modelAnswer.split(/[.!?]/).filter(s => s.trim().length > 5);
       if (!targetedHint && sentences.length > 0) {
-        const firstSentence = sentences[0].trim().toLowerCase();
-        const keyWords = firstSentence.split(/\s+/).filter(word => word.length > 4).slice(0, 3);
-        if (keyWords.length > 0) {
-          targetedHint = `Focus on ${keyWords.join(', ')} and explain the connections between these concepts with specific details.`;
+        const firstSentence = sentences[0].trim();
+        
+        // Filter out unhelpful words and focus on meaningful concepts
+        const wordsToIgnore = new Set([
+          'provides', 'does', 'uses', 'makes', 'shows', 'gives', 'takes', 'gets', 'comes', 'goes', 
+          'becomes', 'seems', 'appears', 'looks', 'feels', 'sounds', 'acts', 'works', 'helps',
+          'creates', 'forms', 'allows', 'causes', 'leads', 'results', 'means', 'involves',
+          'includes', 'contains', 'represents', 'demonstrates', 'illustrates', 'reveals',
+          'this', 'that', 'these', 'those', 'they', 'them', 'their', 'there', 'where', 'when',
+          'what', 'which', 'while', 'through', 'because', 'although', 'however', 'therefore'
+        ]);
+        
+        const meaningfulWords = firstSentence.split(/\s+/)
+          .filter(word => {
+            const cleanWord = word.toLowerCase().replace(/[^\w]/g, '');
+            return cleanWord.length > 3 && 
+                   !wordsToIgnore.has(cleanWord) &&
+                   !/^(the|and|but|for|with|from|into|upon|over|under)$/.test(cleanWord);
+          })
+          .slice(0, 3);
+        
+        if (meaningfulWords.length > 0) {
+          const concepts = meaningfulWords.join(', ').toLowerCase();
+          targetedHint = `Consider ${concepts} and explain how these concepts work together with specific details.`;
         }
       }
       
@@ -845,15 +885,37 @@ const Practice = () => {
     } else {
       // For short questions, analyze what's being asked
       const questionLower = questionText.toLowerCase();
-      const modelWords = modelAnswer.split(/\s+/).filter(word => word.length > 2).slice(0, 5).join(' ');
       
       if (questionLower.includes('define') || questionLower.includes('what is')) {
         return `Give a clear, precise definition focusing on the key characteristics that make this concept distinct.`;
       } else if (questionLower.includes('state') || questionLower.includes('name')) {
         return `Provide the specific answer requested - be direct and precise in your response.`;
-      } else if (modelWords) {
-        return `Your answer should focus on ${modelWords.toLowerCase()} - be concise but accurate.`;
       } else {
+        // Extract meaningful concepts from model answer for guidance
+        const sentences = modelAnswer.split(/[.!?]/).filter(s => s.trim().length > 3);
+        if (sentences.length > 0) {
+          const firstSentence = sentences[0].trim();
+          
+          // Filter for meaningful concepts only
+          const wordsToIgnore = new Set([
+            'provides', 'does', 'uses', 'makes', 'shows', 'gives', 'takes', 'gets', 'comes', 'goes', 
+            'becomes', 'seems', 'appears', 'looks', 'feels', 'sounds', 'acts', 'works', 'helps',
+            'this', 'that', 'these', 'those', 'they', 'them', 'their', 'there', 'where', 'when'
+          ]);
+          
+          const meaningfulWords = firstSentence.split(/\s+/)
+            .filter(word => {
+              const cleanWord = word.toLowerCase().replace(/[^\w]/g, '');
+              return cleanWord.length > 2 && !wordsToIgnore.has(cleanWord);
+            })
+            .slice(0, 3);
+          
+          if (meaningfulWords.length > 0) {
+            const concepts = meaningfulWords.join(' and ').toLowerCase();
+            return `Think about ${concepts} when forming your answer - be concise but accurate.`;
+          }
+        }
+        
         return "Keep your answer focused and precise, directly addressing what the question asks for.";
       }
     }
