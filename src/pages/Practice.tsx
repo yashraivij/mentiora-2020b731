@@ -395,13 +395,22 @@ const Practice = () => {
     
     // Generate contextual hints based on question content and model answer
     const generateContextualHint = () => {
-      // Identify question command words
-      const isDefine = questionText.includes('define') || questionText.includes('what is') || questionText.includes('meaning of');
-      const isExplain = questionText.includes('explain') || questionText.includes('describe') || questionText.includes('how does') || questionText.includes('why does');
-      const isCompare = questionText.includes('compare') || questionText.includes('contrast') || questionText.includes('difference between');
-      const isEvaluate = questionText.includes('evaluate') || questionText.includes('assess') || questionText.includes('discuss') || questionText.includes('advantages') || questionText.includes('disadvantages');
-      const isList = questionText.includes('list') || questionText.includes('name') || questionText.includes('identify') || questionText.includes('state');
-      const isCalculate = questionText.includes('calculate') || questionText.includes('work out') || questionText.includes('find the');
+    // Identify question command words
+    const questionLower = questionText.toLowerCase();
+    
+    // Check for function/role/purpose questions first (these are NOT definition questions)
+    const isFunctionQuestion = questionLower.includes('function of') || questionLower.includes('role of') || questionLower.includes('purpose of') || 
+                              questionLower.includes('job of') || questionLower.includes('what does') && questionLower.includes('do');
+    
+    // More precise definition detection - exclude function/role questions
+    const isDefine = !isFunctionQuestion && (questionText.includes('define') || questionText.includes('meaning of') || 
+                     (questionText.includes('what is') && !questionLower.includes('function') && !questionLower.includes('role') && !questionLower.includes('purpose')));
+    
+    const isExplain = questionText.includes('explain') || questionText.includes('describe') || questionText.includes('how does') || questionText.includes('why does');
+    const isCompare = questionText.includes('compare') || questionText.includes('contrast') || questionText.includes('difference between');
+    const isEvaluate = questionText.includes('evaluate') || questionText.includes('assess') || questionText.includes('discuss') || questionText.includes('advantages') || questionText.includes('disadvantages');
+    const isList = questionText.includes('list') || questionText.includes('name') || questionText.includes('identify') || questionText.includes('state');
+    const isCalculate = questionText.includes('calculate') || questionText.includes('work out') || questionText.includes('find the');
       
       let hint = '';
       
@@ -638,7 +647,10 @@ const Practice = () => {
       
       const specificContent = analyzeContent();
       
-      if (isDefine) {
+      if (isFunctionQuestion) {
+        // Handle function/role/purpose questions
+        hint = "Explain what this structure or component does and how it contributes to the overall system. Focus on its specific role and importance.";
+      } else if (isDefine) {
         if (specificContent) {
           hint = `${specificContent} Start with a clear definition of the key term.`;
         } else {
