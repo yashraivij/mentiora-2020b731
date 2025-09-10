@@ -567,15 +567,78 @@ const Practice = () => {
         if (specificContent) {
           hint = `${specificContent} Start with a clear definition of the key term.`;
         } else {
-          hint = "Give a clear, precise definition. Think about the essential characteristics or features.";
+          // Extract key terms from the question to provide specific guidance
+          const questionLower = questionText.toLowerCase();
+          const keyTerms = [];
+          
+          // Look for key terms in the question that need defining
+          const words = questionText.split(/\s+/).filter(word => word.length > 3);
+          const lastFewWords = words.slice(-3).join(' ').toLowerCase();
+          
+          if (lastFewWords) {
+            hint = `Define ${lastFewWords} clearly and precisely. Think about the essential characteristics that make it distinct.`;
+          } else {
+            hint = "Give a clear, precise definition. Think about the essential characteristics or features.";
+          }
         }
       } else if (isExplain) {
         if (specificContent) {
           hint = `${specificContent} Explain this step-by-step with clear reasoning.`;
-        } else if (modelAnswer.includes('first') || modelAnswer.includes('then') || modelAnswer.includes('finally')) {
-          hint = "This needs a step-by-step explanation. Walk through the process in logical order.";
         } else {
-          hint = "Break this down clearly and explain the reasoning behind what happens.";
+          // Analyze the question and model answer for specific guidance
+          const questionLower = questionText.toLowerCase();
+          const modelLower = modelAnswer.toLowerCase();
+          
+          // Extract key concepts from the question
+          let contextualHint = null;
+          
+          // Literature/English specific guidance
+          if (questionLower.includes('frankenstein')) {
+            contextualHint = "Focus on Victor Frankenstein's character, his motivations, and the consequences of his actions.";
+          } else if (questionLower.includes('monster') || questionLower.includes('creature')) {
+            contextualHint = "Consider the creature's perspective, emotions, and relationship with its creator.";
+          } else if (questionLower.includes('character') || questionLower.includes('protagonist')) {
+            contextualHint = "Analyze the character's motivations, development, and relationships with others.";
+          } else if (questionLower.includes('theme') || questionLower.includes('message')) {
+            contextualHint = "Identify the main themes and explain how they're developed throughout the text.";
+          } else if (questionLower.includes('language') || questionLower.includes('technique')) {
+            contextualHint = "Examine the specific language techniques used and their effect on the reader.";
+          } else if (questionLower.includes('setting') || questionLower.includes('atmosphere')) {
+            contextualHint = "Consider how the setting creates mood and influences the events or characters.";
+          }
+          
+          // Science specific guidance  
+          else if (questionLower.includes('process') || questionLower.includes('reaction')) {
+            contextualHint = "Break down the process into clear steps and explain what happens at each stage.";
+          } else if (questionLower.includes('effect') || questionLower.includes('impact')) {
+            contextualHint = "Explain the cause-and-effect relationship and why this happens.";
+          }
+          
+          // Business specific guidance
+          else if (questionLower.includes('business') || questionLower.includes('company')) {
+            contextualHint = "Consider the business implications and how this affects different stakeholders.";
+          }
+          
+          // Use contextual hint or analyze model answer structure
+          if (contextualHint) {
+            hint = contextualHint;
+          } else if (modelAnswer.includes('first') || modelAnswer.includes('then') || modelAnswer.includes('finally')) {
+            hint = "This needs a step-by-step explanation. Walk through the process in logical order.";
+          } else {
+            // Extract key concepts from the model answer
+            const sentences = modelAnswer.split(/[.!?]/).filter(s => s.trim().length > 0);
+            if (sentences.length > 0) {
+              const firstSentence = sentences[0].trim();
+              const keyWords = firstSentence.split(/\s+/).filter(word => word.length > 4).slice(0, 3);
+              if (keyWords.length > 0) {
+                hint = `Focus on ${keyWords.join(', ').toLowerCase()} and explain the connections clearly.`;
+              } else {
+                hint = "Break this down clearly and explain the reasoning behind what happens.";
+              }
+            } else {
+              hint = "Break this down clearly and explain the reasoning behind what happens.";
+            }
+          }
         }
       } else if (isCompare) {
         if (specificContent) {
