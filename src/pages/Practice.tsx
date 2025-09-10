@@ -345,9 +345,9 @@ const Practice = () => {
     const modelAnswer = question.modelAnswer;
     const markingCriteria = question.markingCriteria.breakdown;
     
-    // Extract total marks and key points from marking criteria
-    const totalMarks = markingCriteria.reduce((sum, criteria) => sum + criteria.marks, 0);
-    const markingPoints = markingCriteria.map(criteria => criteria.description);
+    // Extract key points from marking criteria (array of strings)
+    const totalMarks = question.marks;
+    const markingPoints = markingCriteria;
     
     // Identify question type
     const questionLower = questionText.toLowerCase();
@@ -365,21 +365,36 @@ const Practice = () => {
       .filter(word => word.length > 3 && !['this', 'that', 'these', 'those', 'they', 'them', 'provides', 'allows', 'causes', 'means'].includes(word))
       .slice(0, 2);
     
+    // Extract key concepts from marking criteria for more targeted hints
+    const criteriaText = markingPoints.join(' ').toLowerCase();
+    const criteriaConcepts = criteriaText
+      .replace(/[^\w\s]/g, ' ')
+      .split(/\s+/)
+      .filter(word => word.length > 4 && !['marks', 'point', 'points', 'answer', 'student', 'should', 'correct', 'appropriate'].includes(word))
+      .slice(0, 2);
+    
     // Generate targeted hints based on question type and marking criteria
     if (isFunctionQuestion) {
+      if (criteriaConcepts.length > 0) {
+        return `Explain the specific role and what it does. Focus on: ${criteriaConcepts.join(', ')}. Your answer needs ${totalMarks} clear points.`;
+      }
       return `Explain the specific role and what it does. Your answer needs ${totalMarks} clear points about its function and importance.`;
     }
     
     if (isDefine) {
-      if (keyTerms.length > 0) {
+      if (criteriaConcepts.length > 0) {
+        return `Define this clearly, making sure to mention: ${criteriaConcepts.join(', ')}. Include the key characteristics for full marks.`;
+      } else if (keyTerms.length > 0) {
         return `Define this clearly, making sure to mention: ${keyTerms.join(', ')}. Include the key characteristics for full marks.`;
       }
       return "Provide a precise definition with the essential characteristics. Be specific and detailed.";
     }
     
     if (isExplain) {
-      if (keyTerms.length > 0) {
-        return `Explain step by step, covering: ${keyTerms.join(', ')}. You need ${totalMarks} clear points or stages in your explanation.`;
+      if (criteriaConcepts.length > 0) {
+        return `Explain step by step, covering: ${criteriaConcepts.join(', ')}. You need ${totalMarks} clear points or stages.`;
+      } else if (keyTerms.length > 0) {
+        return `Explain step by step, covering: ${keyTerms.join(', ')}. You need ${totalMarks} clear points or stages.`;
       }
       return `Break this down into ${totalMarks} clear steps or points. Explain each stage thoroughly.`;
     }
@@ -396,8 +411,10 @@ const Practice = () => {
       return "Show all your working step by step. Identify the correct numbers and operation from the question.";
     }
     
-    // Generic hint based on marking criteria
-    if (keyTerms.length > 0) {
+    // Generic hint based on marking criteria concepts or key terms
+    if (criteriaConcepts.length > 0) {
+      return `Focus on: ${criteriaConcepts.join(', ')}. Make sure your answer has ${totalMarks} clear points to get full marks.`;
+    } else if (keyTerms.length > 0) {
       return `Focus on: ${keyTerms.join(', ')}. Make sure your answer has ${totalMarks} clear points to get full marks.`;
     }
     
@@ -406,7 +423,6 @@ const Practice = () => {
 
   const finishSession = async () => {
     const totalMarks = shuffledQuestions.reduce((sum, q) => sum + q.marks, 0);
-    const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
     const marksEarned = attempts.reduce((sum, a) => sum + a.score, 0);
     const averagePercentage = totalMarks > 0 ? (marksEarned / totalMarks) * 100 : 0;
     
