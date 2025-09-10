@@ -414,21 +414,13 @@ const Practice = () => {
           // Math-specific content analysis based on actual question content
           const questionLower = questionText.toLowerCase();
           
-          // Analyze what the question is actually asking for
-          if (questionLower.includes('add') || questionLower.includes('sum') || (modelAnswer.includes('+') && modelAnswer.match(/\d+\s*\+\s*\d+/))) {
-            return "Add the numbers step by step. Line up decimal places if needed and check your arithmetic.";
+          // Check for advanced mathematical concepts first (higher priority)
+          if (questionLower.includes('probability') || questionLower.includes('chance') || questionLower.includes('likely')) {
+            return "Think about favorable outcomes over total possible outcomes. For multiple events, consider if they're independent.";
           }
           
-          if (questionLower.includes('subtract') || questionLower.includes('difference') || (modelAnswer.includes('-') && modelAnswer.match(/\d+\s*-\s*\d+/))) {
-            return "Subtract carefully, borrowing if necessary. Double-check by adding your answer to the smaller number.";
-          }
-          
-          if (questionLower.includes('multiply') || questionLower.includes('times') || questionLower.includes('product') || (modelAnswer.includes('×') && modelAnswer.match(/\d+\s*×\s*\d+/))) {
-            return "Multiply step by step. Use the grid method or long multiplication, and check your place values.";
-          }
-          
-          if (questionLower.includes('divide') || questionLower.includes('shared') || questionLower.includes('÷') || (modelAnswer.includes('÷') && modelAnswer.match(/\d+\s*÷\s*\d+/))) {
-            return "Use long division or chunking method. Check your answer by multiplying back.";
+          if (questionLower.includes('algebra') || questionLower.includes('solve') || questionLower.includes('equation') || questionLower.includes('x =')) {
+            return "Set up the equation step-by-step. Remember to show each algebraic manipulation clearly.";
           }
           
           if (questionLower.includes('fraction') || modelAnswer.includes('/') && modelAnswer.match(/\d+\/\d+/)) {
@@ -449,6 +441,23 @@ const Practice = () => {
           
           if (questionLower.includes('graph') || questionLower.includes('coordinate') || questionLower.includes('plot')) {
             return "Plot points carefully on the coordinate grid. Check your x and y values match the question.";
+          }
+          
+          // Basic arithmetic operations (lower priority)
+          if (questionLower.includes('add') || questionLower.includes('sum') || (modelAnswer.includes('+') && modelAnswer.match(/^\d+\s*\+\s*\d+$/))) {
+            return "Add the numbers step by step. Line up decimal places if needed and check your arithmetic.";
+          }
+          
+          if (questionLower.includes('subtract') || questionLower.includes('difference') || (modelAnswer.includes('-') && modelAnswer.match(/^\d+\s*-\s*\d+$/))) {
+            return "Subtract carefully, borrowing if necessary. Double-check by adding your answer to the smaller number.";
+          }
+          
+          if ((questionLower.includes('multiply') || questionLower.includes('times') || questionLower.includes('product')) && !questionLower.includes('probability')) {
+            return "Multiply step by step. Use the grid method or long multiplication, and check your place values.";
+          }
+          
+          if (questionLower.includes('divide') || questionLower.includes('shared') || questionLower.includes('÷')) {
+            return "Use long division or chunking method. Check your answer by multiplying back.";
           }
           
           // For general calculation questions
