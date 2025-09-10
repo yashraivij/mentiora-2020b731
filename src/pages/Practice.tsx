@@ -409,7 +409,133 @@ const Practice = () => {
       const analyzeContent = () => {
         const modelLower = modelAnswer.toLowerCase();
         
-        // Look for specific incidents or events
+        // Subject-aware content analysis
+        if (subjectId === 'maths') {
+          // Math-specific content analysis
+          // Check for specific number operations first
+          if (modelAnswer.match(/\d+\s*[\+\-\×÷]\s*\d+/) || modelLower.includes('calculate') || modelLower.includes('work out')) {
+            if (modelLower.includes('add') || modelAnswer.includes('+')) {
+              return "Add the numbers step by step. Line up decimal places if needed and check your arithmetic.";
+            }
+            if (modelLower.includes('subtract') || modelAnswer.includes('−') || modelAnswer.includes('-')) {
+              return "Subtract carefully, borrowing if necessary. Double-check by adding your answer to the smaller number.";
+            }
+            if (modelLower.includes('multiply') || modelAnswer.includes('×') || modelAnswer.includes('*')) {
+              return "Multiply step by step. Use the grid method or long multiplication, and check your place values.";
+            }
+            if (modelLower.includes('divide') || modelAnswer.includes('÷') || modelAnswer.includes('/')) {
+              return "Use long division or chunking method. Check your answer by multiplying back.";
+            }
+            if (modelAnswer.match(/\d+\.\d+/)) {
+              return "Work with decimals carefully. Line up decimal points when adding/subtracting, count decimal places when multiplying.";
+            }
+            return "Work through the calculation step by step, showing your method clearly.";
+          }
+          
+          if ((modelLower.includes('algebra') || modelLower.includes('solve') || modelLower.includes('x =')) && !modelAnswer.match(/^\d+$/)) {
+            return "Set up the equation step-by-step. Remember to show each algebraic manipulation clearly.";
+          }
+         if (modelLower.includes('fraction') || modelLower.includes('/') && modelAnswer.match(/\d+\/\d+/)) {
+           return "Work with fractions carefully. Find a common denominator when adding or subtracting, and simplify your final answer.";
+         }
+         if (modelLower.includes('percentage') || modelLower.includes('%')) {
+           return "Remember the percentage formula: (part/whole) × 100. Check if you need to find the part, whole, or percentage.";
+         }
+         if (modelLower.includes('area') || modelLower.includes('perimeter')) {
+           return "Identify the shape first, then apply the correct formula. Double-check you're calculating what the question asks for.";
+         }
+         if (modelLower.includes('volume') || modelLower.includes('surface area')) {
+           return "Visualize the 3D shape and identify which formula to use. Remember to use the correct units (cubic for volume).";
+         }
+         if (modelLower.includes('graph') || modelLower.includes('coordinate') || modelLower.includes('plot')) {
+           return "Read the graph carefully, paying attention to the scale and axis labels. Plot points accurately if drawing.";
+         }
+         if (modelLower.includes('probability') || modelLower.includes('chance')) {
+           return "Think about favorable outcomes over total possible outcomes. Express as a fraction, decimal, or percentage as required.";
+         }
+         if (modelLower.includes('ratio') || modelLower.includes(':')) {
+           return "Set up the ratio correctly and simplify if needed. Check if you need to find missing parts or total amounts.";
+         }
+         if (modelLower.includes('sequence') || modelLower.includes('pattern') || modelLower.includes('nth term')) {
+           return "Look for the pattern in differences between terms. For the nth term, identify if it's arithmetic or geometric.";
+         }
+         if (modelLower.includes('triangle') && (modelLower.includes('angle') || modelLower.includes('side'))) {
+           return "Use the properties of triangles. Remember angle sum is 180°, and consider if it's right-angled, isosceles, or equilateral.";
+         }
+         if (modelLower.includes('pythagoras') || (modelLower.includes('²') && modelLower.includes('triangle'))) {
+           return "Apply Pythagoras' theorem: a² + b² = c². Remember c is always the hypotenuse (longest side).";
+         }
+         if (modelLower.includes('mean') || modelLower.includes('average') || modelLower.includes('median') || modelLower.includes('mode')) {
+           return "For mean: add all values and divide by how many. For median: arrange in order and find middle. For mode: find most frequent.";
+         }
+         if (modelLower.includes('equation') && modelLower.includes('simultaneous')) {
+           return "Use substitution or elimination method. Label your equations clearly and check your answer works in both.";
+         }
+         if (modelLower.includes('factorize') || modelLower.includes('factor')) {
+           return "Look for common factors first, then consider if it's a quadratic that factorizes. Check your answer by expanding.";
+         }
+         if (modelLower.includes('expand') || modelLower.includes('bracket')) {
+           return "Multiply each term in the first bracket by each term in the second bracket. Collect like terms at the end.";
+         }
+         if (modelLower.includes('gradient') || modelLower.includes('slope')) {
+           return "Use the gradient formula: (change in y)/(change in x). Check if the line goes up (positive) or down (negative).";
+         }
+         if (modelLower.includes('circle') && (modelLower.includes('circumference') || modelLower.includes('area'))) {
+           return "For circumference use πd or 2πr. For area use πr². Make sure you have the radius, not diameter.";
+         }
+         if (modelLower.includes('standard form') || modelLower.includes('scientific notation')) {
+           return "Write as a × 10^n where 1 ≤ a < 10. Count decimal places moved to find the power of 10.";
+         }
+         if (modelLower.includes('quadratic') || (modelLower.includes('x²') && modelLower.includes('='))) {
+           return "Try factoring first, or use the quadratic formula if it won't factor. Remember there might be two solutions.";
+         }
+        }
+        
+        // Science-specific content analysis
+        if (subjectId === 'biology' || subjectId === 'chemistry' || subjectId === 'physics') {
+          if (modelLower.includes('photosynthesis')) {
+            return "Consider the process of photosynthesis and what's needed for it to occur.";
+          }
+          if (modelLower.includes('respiration')) {
+            return "Think about cellular respiration and how it differs from breathing.";
+          }
+          if (modelLower.includes('osmosis') || modelLower.includes('diffusion')) {
+            return "Focus on how substances move across membranes.";
+          }
+          if (modelLower.includes('enzyme')) {
+            return "Consider how enzymes work and what affects their activity.";
+          }
+          if (modelLower.includes('ecosystem') || modelLower.includes('food chain')) {
+            return "Think about the relationships between organisms in the ecosystem.";
+          }
+        }
+        
+        // Business-specific content analysis
+        if (subjectId === 'business') {
+          if (modelLower.includes('profit') || modelLower.includes('revenue') || modelLower.includes('cost')) {
+            return "Consider the financial impact and how this affects the business's bottom line.";
+          }
+          if (modelLower.includes('market') || modelLower.includes('competition') || modelLower.includes('competitor')) {
+            return "Think about market dynamics and competitive advantage.";
+          }
+          if (modelLower.includes('stakeholder') || modelLower.includes('customer') || modelLower.includes('supplier')) {
+            return "Consider the different stakeholders and how they're affected.";
+          }
+          if (modelLower.includes('exchange rate') || modelLower.includes('currency')) {
+            return "Think about how currency changes affect costs, prices, and competitiveness.";
+          }
+          if (modelLower.includes('demand') || modelLower.includes('supply')) {
+            return "Consider supply and demand factors and their market effects.";
+          }
+          if (modelLower.includes('cash flow') || modelLower.includes('liquidity')) {
+            return "Focus on the cash flow implications and working capital effects.";
+          }
+          if (modelLower.includes('investment') || modelLower.includes('financing')) {
+            return "Consider the investment decision factors and financing implications.";
+          }
+        }
+        
+        // General content analysis for literature/English
         if (modelLower.includes('trampl') || modelLower.includes('stomp')) {
           return "Think about the trampling incident and what it reveals about the character.";
         }
@@ -432,102 +558,6 @@ const Practice = () => {
           return "Think about how characters react and what this tells us.";
         }
          
-         // Math-specific content analysis
-         // Check for specific number operations first
-         if (modelAnswer.match(/\d+\s*[\+\-\×÷]\s*\d+/) || modelLower.includes('calculate') || modelLower.includes('work out')) {
-           if (modelLower.includes('add') || modelAnswer.includes('+')) {
-             return "Add the numbers step by step. Line up decimal places if needed and check your arithmetic.";
-           }
-           if (modelLower.includes('subtract') || modelAnswer.includes('−') || modelAnswer.includes('-')) {
-             return "Subtract carefully, borrowing if necessary. Double-check by adding your answer to the smaller number.";
-           }
-           if (modelLower.includes('multiply') || modelAnswer.includes('×') || modelAnswer.includes('*')) {
-             return "Multiply step by step. Use the grid method or long multiplication, and check your place values.";
-           }
-           if (modelLower.includes('divide') || modelAnswer.includes('÷') || modelAnswer.includes('/')) {
-             return "Use long division or chunking method. Check your answer by multiplying back.";
-           }
-           if (modelAnswer.match(/\d+\.\d+/)) {
-             return "Work with decimals carefully. Line up decimal points when adding/subtracting, count decimal places when multiplying.";
-           }
-           return "Work through the calculation step by step, showing your method clearly.";
-         }
-         
-         if ((modelLower.includes('algebra') || modelLower.includes('solve') || modelLower.includes('x =')) && !modelAnswer.match(/^\d+$/)) {
-           return "Set up the equation step-by-step. Remember to show each algebraic manipulation clearly.";
-         }
-        if (modelLower.includes('fraction') || modelLower.includes('/') && modelAnswer.match(/\d+\/\d+/)) {
-          return "Work with fractions carefully. Find a common denominator when adding or subtracting, and simplify your final answer.";
-        }
-        if (modelLower.includes('percentage') || modelLower.includes('%')) {
-          return "Remember the percentage formula: (part/whole) × 100. Check if you need to find the part, whole, or percentage.";
-        }
-        if (modelLower.includes('area') || modelLower.includes('perimeter')) {
-          return "Identify the shape first, then apply the correct formula. Double-check you're calculating what the question asks for.";
-        }
-        if (modelLower.includes('volume') || modelLower.includes('surface area')) {
-          return "Visualize the 3D shape and identify which formula to use. Remember to use the correct units (cubic for volume).";
-        }
-        if (modelLower.includes('graph') || modelLower.includes('coordinate') || modelLower.includes('plot')) {
-          return "Read the graph carefully, paying attention to the scale and axis labels. Plot points accurately if drawing.";
-        }
-        if (modelLower.includes('probability') || modelLower.includes('chance')) {
-          return "Think about favorable outcomes over total possible outcomes. Express as a fraction, decimal, or percentage as required.";
-        }
-        if (modelLower.includes('ratio') || modelLower.includes(':')) {
-          return "Set up the ratio correctly and simplify if needed. Check if you need to find missing parts or total amounts.";
-        }
-        if (modelLower.includes('sequence') || modelLower.includes('pattern') || modelLower.includes('nth term')) {
-          return "Look for the pattern in differences between terms. For the nth term, identify if it's arithmetic or geometric.";
-        }
-        if (modelLower.includes('triangle') && (modelLower.includes('angle') || modelLower.includes('side'))) {
-          return "Use the properties of triangles. Remember angle sum is 180°, and consider if it's right-angled, isosceles, or equilateral.";
-        }
-        if (modelLower.includes('pythagoras') || (modelLower.includes('²') && modelLower.includes('triangle'))) {
-          return "Apply Pythagoras' theorem: a² + b² = c². Remember c is always the hypotenuse (longest side).";
-        }
-        if (modelLower.includes('mean') || modelLower.includes('average') || modelLower.includes('median') || modelLower.includes('mode')) {
-          return "For mean: add all values and divide by how many. For median: arrange in order and find middle. For mode: find most frequent.";
-        }
-        if (modelLower.includes('equation') && modelLower.includes('simultaneous')) {
-          return "Use substitution or elimination method. Label your equations clearly and check your answer works in both.";
-        }
-        if (modelLower.includes('factorize') || modelLower.includes('factor')) {
-          return "Look for common factors first, then consider if it's a quadratic that factorizes. Check your answer by expanding.";
-        }
-        if (modelLower.includes('expand') || modelLower.includes('bracket')) {
-          return "Multiply each term in the first bracket by each term in the second bracket. Collect like terms at the end.";
-        }
-        if (modelLower.includes('gradient') || modelLower.includes('slope')) {
-          return "Use the gradient formula: (change in y)/(change in x). Check if the line goes up (positive) or down (negative).";
-        }
-        if (modelLower.includes('circle') && (modelLower.includes('circumference') || modelLower.includes('area'))) {
-          return "For circumference use πd or 2πr. For area use πr². Make sure you have the radius, not diameter.";
-        }
-        if (modelLower.includes('standard form') || modelLower.includes('scientific notation')) {
-          return "Write as a × 10^n where 1 ≤ a < 10. Count decimal places moved to find the power of 10.";
-        }
-        if (modelLower.includes('quadratic') || (modelLower.includes('x²') && modelLower.includes('='))) {
-          return "Try factoring first, or use the quadratic formula if it won't factor. Remember there might be two solutions.";
-        }
-        
-        // Science-specific content analysis
-        if (modelLower.includes('photosynthesis')) {
-          return "Consider the process of photosynthesis and what's needed for it to occur.";
-        }
-        if (modelLower.includes('respiration')) {
-          return "Think about cellular respiration and how it differs from breathing.";
-        }
-        if (modelLower.includes('osmosis') || modelLower.includes('diffusion')) {
-          return "Focus on how substances move across membranes.";
-        }
-        if (modelLower.includes('enzyme')) {
-          return "Consider how enzymes work and what affects their activity.";
-        }
-        if (modelLower.includes('ecosystem') || modelLower.includes('food chain')) {
-          return "Think about the relationships between organisms in the ecosystem.";
-        }
-        
         return null;
       };
       
