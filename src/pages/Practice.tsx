@@ -393,8 +393,8 @@ const Practice = () => {
     
     const analysis = analyzeModelAnswer();
     
-    // Generate friendly, personalized hints based on question type and content
-    const generateFriendlyHint = () => {
+    // Generate contextual hints based on question content and model answer
+    const generateContextualHint = () => {
       // Identify question command words
       const isDefine = questionText.includes('define') || questionText.includes('what is') || questionText.includes('meaning of');
       const isExplain = questionText.includes('explain') || questionText.includes('describe') || questionText.includes('how does') || questionText.includes('why does');
@@ -404,41 +404,101 @@ const Practice = () => {
       const isCalculate = questionText.includes('calculate') || questionText.includes('work out') || questionText.includes('find the');
       
       let hint = '';
-      const allKeyTerms = [...new Set([...analysis.mainTopic, ...analysis.supportingPoints])].slice(0, 5);
       
-      if (isDefine && analysis.mainTopic.length > 0) {
-        hint = `Think about giving a clear definition here. The key concepts you'll want to focus on are: ${analysis.mainTopic.slice(0, 3).join(', ')}. `;
-      } else if (isExplain && analysis.keyTerms.length > 0) {
-        const processTerms = analysis.keyTerms.filter(term => 
-          ['process', 'reaction', 'formation', 'movement', 'change', 'occurs', 'happens'].some(p => 
-            modelAnswer.toLowerCase().includes(p)
-          )
-        );
-        if (processTerms.length > 0 || modelAnswer.includes('first') || modelAnswer.includes('then') || modelAnswer.includes('finally')) {
-          hint = `This looks like it needs a step-by-step explanation. Try walking through the process and think about these key stages: ${allKeyTerms.slice(0, 4).join(', ')}. `;
-        } else {
-          hint = `Break this down clearly - the main ideas to explore are: ${allKeyTerms.slice(0, 4).join(', ')}. `;
+      // Analyze model answer for specific events, incidents, or concepts
+      const analyzeContent = () => {
+        const modelLower = modelAnswer.toLowerCase();
+        
+        // Look for specific incidents or events
+        if (modelLower.includes('trampl') || modelLower.includes('stomp')) {
+          return "Think about the trampling incident and what it reveals about the character.";
         }
-      } else if (isCompare && allKeyTerms.length > 2) {
-        hint = `Good comparison questions need you to look at both sides. Consider these different aspects: ${allKeyTerms.slice(0, 4).join(', ')}. Don't forget to mention both similarities and differences! `;
+        if (modelLower.includes('murder') || modelLower.includes('kill')) {
+          return "Consider the violent actions and their significance.";
+        }
+        if (modelLower.includes('transform') || modelLower.includes('chang')) {
+          return "Focus on the transformation process and what causes it.";
+        }
+        if (modelLower.includes('appear') || modelLower.includes('first')) {
+          return "Think about the first impression and initial description.";
+        }
+        if (modelLower.includes('symbol') || modelLower.includes('represent')) {
+          return "Consider what this represents or symbolizes in the broader context.";
+        }
+        if (modelLower.includes('conflict') || modelLower.includes('tension')) {
+          return "Analyze the conflict or tension being presented.";
+        }
+        if (modelLower.includes('reaction') && !modelLower.includes('chemical')) {
+          return "Think about how characters react and what this tells us.";
+        }
+        
+        // Science-specific content analysis
+        if (modelLower.includes('photosynthesis')) {
+          return "Consider the process of photosynthesis and what's needed for it to occur.";
+        }
+        if (modelLower.includes('respiration')) {
+          return "Think about cellular respiration and how it differs from breathing.";
+        }
+        if (modelLower.includes('osmosis') || modelLower.includes('diffusion')) {
+          return "Focus on how substances move across membranes.";
+        }
+        if (modelLower.includes('enzyme')) {
+          return "Consider how enzymes work and what affects their activity.";
+        }
+        if (modelLower.includes('ecosystem') || modelLower.includes('food chain')) {
+          return "Think about the relationships between organisms in the ecosystem.";
+        }
+        
+        return null;
+      };
+      
+      const specificContent = analyzeContent();
+      
+      if (isDefine) {
+        if (specificContent) {
+          hint = `${specificContent} Start with a clear definition of the key term.`;
+        } else {
+          hint = "Give a clear, precise definition. Think about the essential characteristics or features.";
+        }
+      } else if (isExplain) {
+        if (specificContent) {
+          hint = `${specificContent} Explain this step-by-step with clear reasoning.`;
+        } else if (modelAnswer.includes('first') || modelAnswer.includes('then') || modelAnswer.includes('finally')) {
+          hint = "This needs a step-by-step explanation. Walk through the process in logical order.";
+        } else {
+          hint = "Break this down clearly and explain the reasoning behind what happens.";
+        }
+      } else if (isCompare) {
+        if (specificContent) {
+          hint = `${specificContent} Make sure to compare both sides systematically.`;
+        } else {
+          hint = "Compare both sides systematically. Look for similarities and differences, then explain their significance.";
+        }
       } else if (isEvaluate) {
-        hint = `This is asking for your analysis, so weigh up the different factors. Think about: ${allKeyTerms.slice(0, 4).join(', ')}. Present both sides before giving your conclusion. `;
-      } else if (isList && allKeyTerms.length > 0) {
+        if (specificContent) {
+          hint = `${specificContent} Weigh up different viewpoints before reaching your conclusion.`;
+        } else {
+          hint = "Present balanced arguments from different perspectives, then give your reasoned conclusion.";
+        }
+      } else if (isList) {
         const numberOfPoints = modelAnswer.split(/[.;]/).length - 1;
-        hint = `Try listing around ${Math.min(numberOfPoints, 5)} clear points here. Consider including: ${allKeyTerms.slice(0, 5).join(', ')}. `;
+        if (specificContent) {
+          hint = `${specificContent} Aim for around ${Math.min(numberOfPoints, 5)} clear points.`;
+        } else {
+          hint = `Provide a clear list of points (aim for ${Math.min(numberOfPoints, 5)}). Be specific and precise.`;
+        }
       } else if (isCalculate) {
         const hasFormula = modelAnswer.includes('=') || modelAnswer.includes('×') || modelAnswer.includes('÷');
         if (hasFormula) {
-          hint = `Start by identifying which formula you need, then work through it step by step. Don't forget to show your working! `;
+          hint = "Identify the correct formula first, then substitute values carefully. Show all your working.";
         } else {
-          hint = `Break this down methodically - show each step of your calculation and remember to include units where needed. `;
+          hint = "Work through this methodically, showing each step. Don't forget units in your final answer.";
         }
-      } else if (allKeyTerms.length > 0) {
-        // Generic content hint based on model answer analysis
-        hint = `The main areas to cover in this answer are: ${allKeyTerms.slice(0, 4).join(', ')}. `;
+      } else if (specificContent) {
+        hint = specificContent;
       }
       
-      // Add friendly structure guidance based on marking criteria
+      // Add structure guidance based on marking criteria  
       const criteriaHints = markingCriteria.map(criteria => {
         if (criteria.toLowerCase().includes('example')) return 'add some specific examples';
         if (criteria.toLowerCase().includes('explain')) return 'give detailed explanations';
@@ -448,24 +508,24 @@ const Practice = () => {
       }).filter(h => h).slice(0, 2);
       
       if (criteriaHints.length > 0) {
-        hint += `Also remember to ${criteriaHints.join(' and ')}. `;
+        hint += ` Also remember to ${criteriaHints.join(' and ')}.`;
       }
       
       // Add encouraging mark-specific guidance
       if (question.marks >= 6) {
-        hint += `This is worth quite a few marks, so take your time to develop your points fully with good explanations and examples.`;
+        hint += ` This is worth quite a few marks, so take your time to develop your points fully with good explanations and examples.`;
       } else if (question.marks >= 3) {
-        hint += `Make sure to include clear explanations with specific details.`;
+        hint += ` Make sure to include clear explanations with specific details.`;
       } else {
-        hint += `Keep it focused on the key concept - precision is key here!`;
+        hint += ` Keep it focused on the key concept - precision is key here!`;
       }
       
       return hint;
     };
     
-    const friendlyHint = generateFriendlyHint();
-    if (friendlyHint && (analysis.mainTopic.length > 0 || analysis.supportingPoints.length > 0)) {
-      return friendlyHint;
+    const contextualHint = generateContextualHint();
+    if (contextualHint) {
+      return contextualHint;
     }
     
     // Friendly fallback hints for questions where model answer analysis doesn't yield good content
