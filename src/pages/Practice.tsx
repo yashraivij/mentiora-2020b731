@@ -349,6 +349,28 @@ const Practice = () => {
     const totalMarks = question.marks;
     const markingPoints = markingCriteria;
     
+    // Comprehensive list of words to exclude from key concepts
+    const excludeWords = [
+      // Articles
+      'the', 'a', 'an',
+      // Prepositions
+      'in', 'on', 'at', 'for', 'with', 'from', 'to', 'by', 'of', 'into', 'over', 'under', 'through', 'between', 'among', 'during', 'before', 'after', 'above', 'below', 'up', 'down', 'out', 'off', 'away', 'back', 'along', 'across', 'around', 'near', 'far', 'inside', 'outside', 'within', 'without', 'throughout', 'towards', 'against', 'behind', 'beside', 'beyond', 'beneath', 'onto', 'upon', 'until', 'since',
+      // Conjunctions
+      'and', 'or', 'but', 'so', 'yet', 'nor', 'because', 'since', 'unless', 'while', 'when', 'where', 'if', 'though', 'although', 'however', 'therefore', 'thus', 'hence', 'moreover', 'furthermore', 'nevertheless', 'nonetheless',
+      // Common pronouns
+      'it', 'its', 'this', 'that', 'these', 'those', 'they', 'them', 'their', 'theirs', 'he', 'him', 'his', 'she', 'her', 'hers', 'we', 'us', 'our', 'ours', 'you', 'your', 'yours', 'i', 'me', 'my', 'mine', 'who', 'whom', 'whose', 'which', 'what', 'some', 'any', 'all', 'both', 'each', 'every', 'either', 'neither', 'one', 'other', 'another', 'many', 'much', 'more', 'most', 'few', 'several', 'such', 'same', 'own',
+      // Common verbs that don't add meaning
+      'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'having', 'do', 'does', 'did', 'doing', 'will', 'would', 'could', 'should', 'might', 'may', 'can', 'must', 'shall', 'ought', 'need', 'dare', 'used', 'get', 'got', 'give', 'gives', 'gave', 'given', 'go', 'goes', 'went', 'gone', 'going', 'come', 'comes', 'came', 'coming', 'take', 'takes', 'took', 'taken', 'taking', 'make', 'makes', 'made', 'making', 'see', 'sees', 'saw', 'seen', 'seeing', 'know', 'knows', 'knew', 'known', 'knowing', 'think', 'thinks', 'thought', 'thinking', 'say', 'says', 'said', 'saying', 'tell', 'tells', 'told', 'telling', 'become', 'becomes', 'became', 'becoming', 'feel', 'feels', 'felt', 'feeling', 'seem', 'seems', 'seemed', 'seeming', 'look', 'looks', 'looked', 'looking', 'find', 'finds', 'found', 'finding', 'keep', 'keeps', 'kept', 'keeping', 'let', 'lets', 'letting', 'put', 'puts', 'putting', 'set', 'sets', 'setting', 'turn', 'turns', 'turned', 'turning', 'want', 'wants', 'wanted', 'wanting', 'work', 'works', 'worked', 'working', 'call', 'calls', 'called', 'calling', 'try', 'tries', 'tried', 'trying', 'ask', 'asks', 'asked', 'asking', 'move', 'moves', 'moved', 'moving', 'live', 'lives', 'lived', 'living', 'believe', 'believes', 'believed', 'believing', 'hold', 'holds', 'held', 'holding', 'bring', 'brings', 'brought', 'bringing', 'happen', 'happens', 'happened', 'happening', 'write', 'writes', 'wrote', 'written', 'writing', 'provide', 'provides', 'provided', 'providing', 'allow', 'allows', 'allowed', 'allowing', 'cause', 'causes', 'caused', 'causing', 'mean', 'means', 'meant', 'meaning', 'show', 'shows', 'showed', 'shown', 'showing', 'help', 'helps', 'helped', 'helping', 'play', 'plays', 'played', 'playing', 'run', 'runs', 'ran', 'running', 'begin', 'begins', 'began', 'begun', 'beginning', 'seem', 'leave', 'left', 'meet', 'met', 'include', 'includes', 'included', 'including', 'continue', 'continues', 'continued', 'continuing', 'sit', 'sits', 'sat', 'sitting', 'stand', 'stands', 'stood', 'standing', 'lose', 'loses', 'lost', 'losing', 'pay', 'pays', 'paid', 'paying', 'meet', 'meets', 'meeting', 'cut', 'cuts', 'cutting', 'kill', 'kills', 'killed', 'killing', 'remain', 'remains', 'remained', 'remaining', 'suggest', 'suggests', 'suggested', 'suggesting', 'raise', 'raises', 'raised', 'raising', 'pass', 'passes', 'passed', 'passing', 'sell', 'sells', 'sold', 'selling', 'require', 'requires', 'required', 'requiring', 'report', 'reports', 'reported', 'reporting', 'decide', 'decides', 'decided', 'deciding', 'pull', 'pulls', 'pulled', 'pulling',
+      // Academic/marking words
+      'marks', 'mark', 'point', 'points', 'answer', 'answers', 'student', 'students', 'should', 'correct', 'appropriate', 'question', 'questions', 'exam', 'test', 'paper', 'grade', 'grades', 'score', 'scores', 'result', 'results',
+      // Common adjectives that don't add meaning
+      'good', 'bad', 'big', 'small', 'large', 'little', 'long', 'short', 'high', 'low', 'right', 'wrong', 'old', 'new', 'young', 'early', 'late', 'first', 'last', 'next', 'previous', 'different', 'same', 'other', 'another', 'many', 'much', 'more', 'most', 'less', 'least', 'few', 'several', 'various', 'certain', 'sure', 'true', 'false', 'real', 'actual', 'possible', 'impossible', 'easy', 'hard', 'simple', 'complex', 'basic', 'advanced', 'general', 'specific', 'special', 'normal', 'usual', 'common', 'rare', 'unique', 'single', 'double', 'full', 'empty', 'clear', 'unclear', 'clean', 'dirty', 'fresh', 'old', 'hot', 'cold', 'warm', 'cool', 'dry', 'wet', 'light', 'dark', 'bright', 'heavy', 'strong', 'weak', 'fast', 'slow', 'quick', 'wide', 'narrow', 'thick', 'thin', 'deep', 'shallow', 'close', 'open', 'closed', 'free', 'busy', 'ready', 'sorry', 'glad', 'happy', 'sad', 'angry', 'careful', 'safe', 'dangerous',
+      // Religious/sensitive terms that might not be appropriate as generic "key concepts"
+      'jesus', 'christ', 'god', 'lord', 'allah', 'buddha', 'mohammad', 'mohammed', 'holy', 'sacred', 'divine', 'blessed', 'prayer', 'worship', 'church', 'mosque', 'temple', 'synagogue', 'bible', 'quran', 'torah',
+      // Very short or meaningless words
+      'ok', 'oh', 'ah', 'eh', 'um', 'uh', 'yes', 'no', 'not', 'too', 'now', 'then', 'here', 'there', 'where', 'when', 'why', 'how', 'who', 'what', 'well', 'just', 'only', 'also', 'even', 'still', 'yet', 'already', 'again', 'once', 'twice', 'always', 'never', 'often', 'sometimes', 'usually', 'rarely', 'hardly', 'almost', 'quite', 'very', 'really', 'actually', 'probably', 'maybe', 'perhaps', 'certainly', 'definitely', 'absolutely', 'completely', 'totally', 'entirely', 'exactly', 'particularly', 'especially', 'mainly', 'mostly', 'generally', 'basically', 'essentially', 'obviously', 'clearly', 'simply', 'easily', 'quickly', 'slowly', 'carefully', 'suddenly', 'immediately', 'finally', 'recently', 'currently', 'previously', 'originally', 'initially', 'eventually', 'ultimately', 'directly', 'indirectly'
+    ];
+    
     // Identify question type
     const questionLower = questionText.toLowerCase();
     const isFunctionQuestion = questionLower.includes('function of') || questionLower.includes('role of') || questionLower.includes('purpose of');
@@ -362,7 +384,7 @@ const Practice = () => {
     const keyTerms = firstSentence.toLowerCase()
       .replace(/[^\w\s]/g, ' ')
       .split(/\s+/)
-      .filter(word => word.length > 3 && !['this', 'that', 'these', 'those', 'they', 'them', 'provides', 'allows', 'causes', 'means'].includes(word))
+      .filter(word => word.length > 3 && !excludeWords.includes(word))
       .slice(0, 2);
     
     // Extract key concepts from marking criteria for more targeted hints
@@ -370,7 +392,7 @@ const Practice = () => {
     const criteriaConcepts = criteriaText
       .replace(/[^\w\s]/g, ' ')
       .split(/\s+/)
-      .filter(word => word.length > 4 && !['marks', 'point', 'points', 'answer', 'student', 'should', 'correct', 'appropriate'].includes(word))
+      .filter(word => word.length > 3 && !excludeWords.includes(word))
       .slice(0, 2);
     
     // Generate targeted hints based on question type and marking criteria
