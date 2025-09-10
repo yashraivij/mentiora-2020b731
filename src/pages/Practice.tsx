@@ -645,38 +645,52 @@ const Practice = () => {
           // Smart extraction of what needs to be defined
           const questionLower = questionText.toLowerCase();
           
-          // Extract the term being asked to define
+          // Extract the term being asked to define - be more precise
           let termToDefine = null;
           
-          // Pattern: "What is X?" - extract X
-          const whatIsMatch = questionText.match(/what\s+is\s+(?:a\s+|an\s+|the\s+)?([^?]+)/i);
+          // Pattern: "What is X?" - but stop at prepositions that indicate context
+          const whatIsMatch = questionText.match(/what\s+is\s+(?:a\s+|an\s+|the\s+)?([^?,]+?)(?:\s+in\s+|\s+of\s+|\s+for\s+|\s+during\s+|\s+when\s+|\s+\?|$)/i);
           if (whatIsMatch) {
             termToDefine = whatIsMatch[1].trim();
           }
           
-          // Pattern: "Define X" - extract X  
-          const defineMatch = questionText.match(/define\s+(?:a\s+|an\s+|the\s+)?([^?]+)/i);
-          if (defineMatch) {
-            termToDefine = defineMatch[1].trim();
+          // Pattern: "Define X" - but be more precise about what X is
+          if (!termToDefine) {
+            const defineMatch = questionText.match(/define\s+(?:a\s+|an\s+|the\s+)?([^?,]+?)(?:\s+in\s+|\s+of\s+|\s+for\s+|\s+during\s+|\s+when\s+|\s+\?|$)/i);
+            if (defineMatch) {
+              termToDefine = defineMatch[1].trim();
+            }
           }
           
           // Pattern: "What does X mean?" - extract X
-          const meanMatch = questionText.match(/what\s+does\s+([^?]+?)\s+mean/i);
-          if (meanMatch) {
-            termToDefine = meanMatch[1].trim();
+          if (!termToDefine) {
+            const meanMatch = questionText.match(/what\s+does\s+(?:a\s+|an\s+|the\s+)?([^?]+?)\s+mean/i);
+            if (meanMatch) {
+              termToDefine = meanMatch[1].trim();
+            }
           }
           
           // Pattern: "What is meant by X?" - extract X
-          const meantByMatch = questionText.match(/what\s+is\s+meant\s+by\s+([^?]+)/i);
-          if (meantByMatch) {
-            termToDefine = meantByMatch[1].trim();
+          if (!termToDefine) {
+            const meantByMatch = questionText.match(/what\s+is\s+meant\s+by\s+(?:a\s+|an\s+|the\s+)?([^?]+)/i);
+            if (meantByMatch) {
+              termToDefine = meantByMatch[1].trim();
+            }
           }
           
           // Create a proper hint based on what was found
-          if (termToDefine) {
-            // Clean up the term (remove articles, punctuation)
+          if (termToDefine && termToDefine.length > 0 && termToDefine.length < 50) {
+            // Clean up the term and validate it makes sense
             const cleanTerm = termToDefine.replace(/[?!.,;:]$/, '').trim();
-            hint = `Focus on providing a clear definition of ${cleanTerm}. Think about the key characteristics that make it unique and distinct from similar concepts.`;
+            
+            // Check if the extracted term makes sense (contains meaningful words, not too long)
+            const wordCount = cleanTerm.split(/\s+/).length;
+            if (wordCount <= 5 && cleanTerm.length > 2) {
+              hint = `Provide a clear definition of "${cleanTerm}". Focus on the key characteristics that make it unique and distinct from similar concepts.`;
+            } else {
+              // Fallback if extraction doesn't look right
+              hint = "Give a clear, precise definition. Focus on the essential characteristics and features that make this concept unique.";
+            }
           } else {
             hint = "Provide a clear, precise definition. Focus on the essential characteristics and features that make this concept unique.";
           }
