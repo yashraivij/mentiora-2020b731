@@ -411,25 +411,49 @@ const Practice = () => {
         
         // Subject-aware content analysis
         if (subjectId === 'maths') {
-          // Math-specific content analysis
-          // Check for specific number operations first
-          if (modelAnswer.match(/\d+\s*[\+\-\×÷]\s*\d+/) || modelLower.includes('calculate') || modelLower.includes('work out')) {
-            if (modelLower.includes('add') || modelAnswer.includes('+')) {
-              return "Add the numbers step by step. Line up decimal places if needed and check your arithmetic.";
-            }
-            if (modelLower.includes('subtract') || modelAnswer.includes('−') || modelAnswer.includes('-')) {
-              return "Subtract carefully, borrowing if necessary. Double-check by adding your answer to the smaller number.";
-            }
-            if (modelLower.includes('multiply') || modelAnswer.includes('×') || modelAnswer.includes('*')) {
-              return "Multiply step by step. Use the grid method or long multiplication, and check your place values.";
-            }
-            if (modelLower.includes('divide') || modelAnswer.includes('÷') || modelAnswer.includes('/')) {
-              return "Use long division or chunking method. Check your answer by multiplying back.";
-            }
-            if (modelAnswer.match(/\d+\.\d+/)) {
-              return "Work with decimals carefully. Line up decimal points when adding/subtracting, count decimal places when multiplying.";
-            }
-            return "Work through the calculation step by step, showing your method clearly.";
+          // Math-specific content analysis based on actual question content
+          const questionLower = questionText.toLowerCase();
+          
+          // Analyze what the question is actually asking for
+          if (questionLower.includes('add') || questionLower.includes('sum') || (modelAnswer.includes('+') && modelAnswer.match(/\d+\s*\+\s*\d+/))) {
+            return "Add the numbers step by step. Line up decimal places if needed and check your arithmetic.";
+          }
+          
+          if (questionLower.includes('subtract') || questionLower.includes('difference') || (modelAnswer.includes('-') && modelAnswer.match(/\d+\s*-\s*\d+/))) {
+            return "Subtract carefully, borrowing if necessary. Double-check by adding your answer to the smaller number.";
+          }
+          
+          if (questionLower.includes('multiply') || questionLower.includes('times') || questionLower.includes('product') || (modelAnswer.includes('×') && modelAnswer.match(/\d+\s*×\s*\d+/))) {
+            return "Multiply step by step. Use the grid method or long multiplication, and check your place values.";
+          }
+          
+          if (questionLower.includes('divide') || questionLower.includes('shared') || questionLower.includes('÷') || (modelAnswer.includes('÷') && modelAnswer.match(/\d+\s*÷\s*\d+/))) {
+            return "Use long division or chunking method. Check your answer by multiplying back.";
+          }
+          
+          if (questionLower.includes('fraction') || modelAnswer.includes('/') && modelAnswer.match(/\d+\/\d+/)) {
+            return "Work with fractions by finding common denominators. Simplify your answer if possible.";
+          }
+          
+          if (questionLower.includes('percentage') || questionLower.includes('%') || modelAnswer.includes('%')) {
+            return "Remember: to find a percentage, divide by 100. To find a percentage of an amount, multiply.";
+          }
+          
+          if (questionLower.includes('area') || questionLower.includes('perimeter') || questionLower.includes('volume')) {
+            return "Use the correct formula for the shape. Draw a diagram if it helps, and include units in your answer.";
+          }
+          
+          if (questionLower.includes('angle') || questionLower.includes('degrees') || questionLower.includes('triangle')) {
+            return "Remember angle rules: angles in a triangle add to 180°, angles on a line add to 180°.";
+          }
+          
+          if (questionLower.includes('graph') || questionLower.includes('coordinate') || questionLower.includes('plot')) {
+            return "Plot points carefully on the coordinate grid. Check your x and y values match the question.";
+          }
+          
+          // For general calculation questions
+          if (questionLower.includes('calculate') || questionLower.includes('work out') || questionLower.includes('find')) {
+            return "Work through the problem step by step, showing your method clearly. Double-check your calculations.";
           }
           
           if ((modelLower.includes('algebra') || modelLower.includes('solve') || modelLower.includes('x =')) && !modelAnswer.match(/^\d+$/)) {
