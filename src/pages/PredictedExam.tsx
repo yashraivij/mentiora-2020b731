@@ -1132,86 +1132,167 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return questions;
     }
     
-    // Special format for History
+    // Special format for History - AQA GCSE Paper 1
     if (subjectId === 'history') {
-      // Section A: Period Studies (choose one)
-      const periodStudies = subject.topics.filter(topic => 
-        ['america-1840-1895', 'germany-1890-1945', 'russia-1894-1945', 'america-1920-1973'].includes(topic.id)
-      );
-      
-      // Section B: Wider World Depth Studies (choose one)
-      const depthStudies = subject.topics.filter(topic => 
-        ['conflict-tension-ww1', 'conflict-tension-interwar', 'conflict-tension-east-west', 'conflict-tension-asia', 'conflict-tension-gulf'].includes(topic.id)
-      );
-      
-      // Generate Section A questions
-      periodStudies.forEach((topic) => {
-        // Source Utility question (8 marks)
-        questions.push({
-          id: `period-utility-${topic.id}`,
-          questionNumber: questions.length + 1,
-          text: getHistorySourceQuestion(topic.id, 'utility'),
+      // Section A: Period Studies (choose one) - 44 marks total
+      const periodStudyQuestions = [
+        // Q1 (4 marks) - Describe two features
+        {
+          id: 'history-period-q1',
+          questionNumber: 1,
+          text: `Describe two features of the work of cowboys.
+
+[4 marks]`,
+          marks: 4,
+          section: 'A'
+        },
+        // Q2 (8 marks) - Explain why
+        {
+          id: 'history-period-q2', 
+          questionNumber: 2,
+          text: `Explain why settlers travelled west in the 1840s.
+
+You may use the following in your answer:
+• Gold Rush
+• Homestead Act
+
+You must also use information of your own.
+
+[8 marks]`,
           marks: 8,
           section: 'A'
-        });
-        
-        // Narrative Account question (8 marks)
-        questions.push({
-          id: `period-narrative-${topic.id}`,
-          questionNumber: questions.length + 1,
-          text: getHistoryNarrativeQuestion(topic.id),
-          marks: 8,
+        },
+        // Q3 (12 marks) - Write an account
+        {
+          id: 'history-period-q3',
+          questionNumber: 3,
+          text: `Write an account of how the railroads changed the West.
+
+You may use the following information to help you:
+• Transportation of goods and people
+• Development of towns
+• Impact on Native Americans
+
+[12 marks]`,
+          marks: 12,
           section: 'A'
-        });
-        
-        // Importance/Consequence question (8 marks)
-        questions.push({
-          id: `period-importance-${topic.id}`,
-          questionNumber: questions.length + 1,
-          text: getHistoryImportanceQuestion(topic.id),
-          marks: 8,
+        },
+        // Q4 (16 marks + 4 SPaG) - How far do you agree
+        {
+          id: 'history-period-q4',
+          questionNumber: 4,
+          text: `"The main reason for the defeat of the Plains Indians was the US Army." How far do you agree with this statement?
+
+You may use the following in your answer:
+• Battle of the Little Bighorn
+• Government policies
+• Disease and the destruction of buffalo
+
+You must also use information of your own.
+
+[16 marks]
+[4 marks for SPaG]`,
+          marks: 20,
           section: 'A'
-        });
-      });
-      
-      // Generate Section B questions
-      depthStudies.forEach((topic) => {
-        // Source Analysis question (8 marks)
-        questions.push({
-          id: `depth-analysis-${topic.id}`,
-          questionNumber: questions.length + 1,
-          text: getHistorySourceAnalysisQuestion(topic.id),
-          marks: 8,
-          section: 'B'
-        });
-        
-        // Follow-up Inquiry question (4 marks)
-        questions.push({
-          id: `depth-followup-${topic.id}`,
-          questionNumber: questions.length + 1,
-          text: getHistoryFollowupQuestion(topic.id),
+        }
+      ];
+
+      // Section B: Wider World Depth Studies (choose one) - 40 marks total
+      const depthStudyQuestions = [
+        // Q1 (4 marks) - Source inference
+        {
+          id: 'history-depth-q1',
+          questionNumber: 1,
+          text: `Study Source A.
+
+Source A: A photograph showing British soldiers in trenches on the Western Front during World War One, 1916.
+
+The photograph shows soldiers standing in a muddy trench. Duckboards can be seen on the floor of the trench. Barbed wire is visible in the background. The soldiers are wearing helmets and carrying rifles.
+
+Give two things you can infer from Source A about life in the trenches.
+
+[4 marks]`,
           marks: 4,
           section: 'B'
-        });
-        
-        // Write an Account question (8 marks)
-        questions.push({
-          id: `depth-account-${topic.id}`,
-          questionNumber: questions.length + 1,
-          text: getHistoryAccountQuestion(topic.id),
-          marks: 8,
-          section: 'B'
-        });
-        
-        // Extended Essay question (12 marks)
-        questions.push({
-          id: `depth-essay-${topic.id}`,
-          questionNumber: questions.length + 1,
-          text: getHistoryEssayQuestion(topic.id),
+        },
+        // Q2 (12 marks) - Source utility
+        {
+          id: 'history-depth-q2',
+          questionNumber: 2,
+          text: `Study Sources B and C.
+
+Source B: From a diary written by a British soldier on the Western Front, 1917.
+"The mud is everywhere. It's impossible to keep clean or dry. The rats are as big as cats. We live in constant fear of gas attacks. Many of my friends have been killed or wounded. I don't know how much longer I can stand this."
+
+Source C: From a British government poster encouraging recruitment, 1915.
+"Your King and Country Need You! Join the Army today and serve with honour. Fight for freedom and justice. Together we will defeat the enemy and return home as heroes."
+
+How useful are Sources B and C to an historian studying the experiences of soldiers on the Western Front?
+
+Explain your answer using Sources B and C and your own knowledge.
+
+[12 marks]`,
           marks: 12,
           section: 'B'
-        });
-      });
+        },
+        // Q3 (8 marks) - Interpretations difference
+        {
+          id: 'history-depth-q3',
+          questionNumber: 3,
+          text: `Study Interpretations 1 and 2.
+
+Interpretation 1: From a history book written in 1960.
+"The generals of World War One were incompetent leaders who wasted the lives of millions of soldiers through poor planning and outdated tactics."
+
+Interpretation 2: From a history book written in 2010.
+"The generals of World War One faced unprecedented challenges and gradually developed effective tactics that eventually led to victory."
+
+What is the main difference between these views about the leadership of generals in World War One?
+
+Explain your answer using details from both interpretations.
+
+[8 marks]`,
+          marks: 8,
+          section: 'B'
+        },
+        // Q4 (4 marks) - Why interpretations differ
+        {
+          id: 'history-depth-q4',
+          questionNumber: 4,
+          text: `Suggest one reason why Interpretations 1 and 2 give different views about the leadership of generals in World War One.
+
+You may use Sources B and C to help explain your answer.
+
+[4 marks]`,
+          marks: 4,
+          section: 'B'
+        },
+        // Q5 (16 marks + 4 SPaG) - How far do you agree essay
+        {
+          id: 'history-depth-q5',
+          questionNumber: 5,
+          text: `"The main reason the Allies won World War One was the entry of the USA into the war." How far do you agree with this statement?
+
+You may use the following in your answer:
+• The entry of the USA in 1917
+• The failure of the German spring offensive in 1918
+• The naval blockade of Germany
+• New military technology
+
+You must also use information of your own.
+
+[16 marks]
+[4 marks for SPaG]`,
+          marks: 20,
+          section: 'B'
+        }
+      ];
+
+      // Add Section A questions
+      questions.push(...periodStudyQuestions);
+      
+      // Add Section B questions  
+      questions.push(...depthStudyQuestions);
       
       return questions;
     }
@@ -1668,7 +1749,7 @@ Write a story about a moment of fear.
       mathematics: 120, // 2h
       "english-language": 135, // 2h 15min
       "english-literature": 150, // 2h 30min
-      history: 135, // 2h 15min
+      history: 120, // 2h
       "religious-studies": 120, // 2h
       business: 105, // 1h 45min
       french: 120, // 2h
@@ -1689,7 +1770,7 @@ Write a story about a moment of fear.
       return 60; // Two questions at 30 marks each
     }
     if (subjectId === 'history') {
-      return 56; // History Paper 1 out of 56 marks
+      return 84; // History Paper 1: Section A (44 marks) + Section B (40 marks)
     }
     if (subjectId === 'religious-studies') {
       return 96; // 96 marks total
