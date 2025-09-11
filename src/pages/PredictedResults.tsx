@@ -237,7 +237,7 @@ const PredictedResults = () => {
     
     // Generate specific model answers based on question content for English Language AQA
     if (question.includes('list four things about the library') && question.includes('lines 1 to 3')) {
-      return "The library is described as a cathedral of knowledge. It has vaulted ceilings that disappear into shadows above. There are towering shelves that stretch impossibly high. The library contains ancient wisdom.";
+      return "The library is described as a 'cathedral of knowledge,' suggesting it is a grand and sacred place dedicated to learning. It has 'vaulted ceilings' that create an impressive and lofty atmosphere, emphasizing its size and grandeur. There are 'towering shelves that stretched impossibly high' indicating the vast scale of the building. 'Dust motes danced in golden shafts of sunlight streaming through tall, arched windows' shows the presence of natural light and architectural features from the specified lines.";
     }
     
     if (question.includes('language here to describe the atmosphere') && question.includes('lines 5 to 9')) {
