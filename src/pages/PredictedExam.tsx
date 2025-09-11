@@ -1567,7 +1567,7 @@ Write a story about discovering a hidden object.
           `Give one reason why urban areas in LIC/NEE countries are growing rapidly. [1 mark]`,
           `Using examples, explain how TNCs can have both positive and negative impacts on their host countries. [6 marks]`,
           `Assess the sustainability of different strategies used to increase energy supply. [6 marks]`,
-          `Explain how microfinance loans can help to reduce poverty in rural areas of LIC countries. [4 marks]`,
+          `Explain how economic development can lead to improved access to safe water. [4 marks]`,
           `Outline two ways that urban areas can become more sustainable. [2 marks]`,
           `Using a named example, evaluate the success of a bottom-up development project. [6 marks]`,
           `State one advantage of Fair Trade for farmers in LIC countries. [1 mark]`
