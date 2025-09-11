@@ -1556,21 +1556,21 @@ Write a story about discovering a hidden object.
           `To what extent has urban change created opportunities in a UK city you have studied? [9 marks + SPaG]`,
           `Using a case study of a LIC/NEE country, explain how manufacturing industry can encourage economic development. [6 marks]`,
           `Outline one way the political or trading relationship of a named LIC/NEE country with the wider world has changed. [2 marks]`,
-          `Assess the extent to which urban planning can improve quality of life in cities in LIC/NEE countries. [9 marks + SPaG]`,
-          `Explain how the growth of tourism in a LIC/NEE country can reduce the development gap. [6 marks]`,
+          `Explain how the growth of tourism in a LIC/NEE country can reduce the development gap. [4 marks]`,
           `State two characteristics of a sustainable city. [2 marks]`,
           `Using a named example of a LIC/NEE country, explain how international aid has encouraged development. [6 marks]`,
           `Evaluate the success of an urban regeneration project in improving quality of life. [9 marks + SPaG]`,
           `Outline one environmental challenge caused by urban growth in cities in LIC/NEE countries. [2 marks]`,
           `Explain how fair trade can help to reduce inequalities in global trade. [4 marks]`,
-          `Using a case study of a UK city, assess the effectiveness of transport strategies in reducing traffic congestion. [9 marks + SPaG]`,
+          `Using a case study of a UK city, assess the effectiveness of transport strategies in reducing traffic congestion. [6 marks]`,
           `Suggest why some countries have a low level of economic development. [4 marks]`,
           `Give one reason why urban areas in LIC/NEE countries are growing rapidly. [1 mark]`,
           `Using examples, explain how TNCs can have both positive and negative impacts on their host countries. [6 marks]`,
-          `Assess the sustainability of different strategies used to increase energy supply. [9 marks + SPaG]`,
+          `Assess the sustainability of different strategies used to increase energy supply. [6 marks]`,
           `Explain how microfinance loans can help to reduce poverty in rural areas of LIC countries. [4 marks]`,
           `Outline two ways that urban areas can become more sustainable. [2 marks]`,
-          `Using a named example, evaluate the success of a bottom-up development project. [9 marks + SPaG]`
+          `Using a named example, evaluate the success of a bottom-up development project. [6 marks]`,
+          `State one advantage of Fair Trade for farmers in LIC countries. [1 mark]`
         ];
       } else if (subjectId === 'computer-science') {
         questionPool = [
@@ -1627,15 +1627,16 @@ Write a story about discovering a hidden object.
         }
         
         usedQuestions.add(questionText);
-        const pattern = patterns[Math.floor(Math.random() * patterns.length)];
-        const marks = pattern.marks + Math.floor(Math.random() * 3) - 1;
-        const finalMarks = Math.max(2, Math.min(12, marks));
+        
+        // Extract marks from question text
+        const marksMatch = questionText.match(/\[(\d+)\s*marks?\]/i);
+        const extractedMarks = marksMatch ? parseInt(marksMatch[1]) : 4;
         
         predictedQuestions.push({
           id: `predicted-${i}`,
           questionNumber: questionNumber++,
           text: questionText,
-          marks: finalMarks,
+          marks: extractedMarks,
           section: i < Math.ceil(totalQuestionsNeeded / 2) ? 'A' : 'B'
         });
         
