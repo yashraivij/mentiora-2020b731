@@ -1233,13 +1233,13 @@ The storm outside was nothing compared to the terror that now gripped her heart.
       questions.push({
         id: 'english-lang-q1',
         questionNumber: 1,
-        text: `Read again the first part of the source, from lines 1 to 6.
+        text: `Read again the first part of the source, from lines 1 to 4.
 
 Source: Extract from "The Cottage" by Contemporary Author (2023)
 
 "${sourceText}"
 
-List four things about the setting from this part of the source.
+List four things about the weather from this part of the source.
 
 [4 marks]`,
         marks: 4,
@@ -1250,11 +1250,11 @@ List four things about the setting from this part of the source.
       questions.push({
         id: 'english-lang-q2',
         questionNumber: 2,
-        text: `Look in detail at this extract, from lines 7 to 12 of the source:
+        text: `Look in detail at this extract from the source:
 
-"Then she heard it - a sound that made her blood freeze. A low, rhythmic tapping coming from somewhere deep within the house. Tap. Tap. Tap. It wasn't the rain. It wasn't the wind. It was something else entirely. Sarah's heart began to race as she realised she might not be alone after all."
+"Then she heard it - a sound that made her blood freeze. A low, rhythmic tapping coming from somewhere deep within the house. Tap. Tap. Tap. It wasn't the rain. It wasn't the wind. It was something else entirely."
 
-How does the writer use language here to describe the effects of fear?
+How does the writer use language here to present the character's emotions?
 
 You could include the writer's choice of:
 • words and phrases
@@ -1290,7 +1290,7 @@ You could write about:
       questions.push({
         id: 'english-lang-q4',
         questionNumber: 4,
-        text: `Focus this part of your answer on the second half of the source, from line 8 to the end.
+        text: `Focus this part of your answer on the second half of the source.
 
 A student said, "The writer makes the main character's fear the most important idea in this passage. The description shows how quickly normal situations can become terrifying."
 
