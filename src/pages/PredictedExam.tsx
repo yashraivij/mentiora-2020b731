@@ -1384,13 +1384,28 @@ Write a story about discovering a hidden object.
           { pattern: 'Explain two advantages of [business strategy] for [stakeholder group]', marks: 4 },
           { pattern: 'Assess the importance of [business concept] in the success of [business context]', marks: 10 }
         ],
-        'geography': [
-          { pattern: 'Explain the formation of [geographical feature] using annotated diagrams', marks: 6 },
-          { pattern: 'Assess the effectiveness of [management strategy] in [geographical context]', marks: 8 },
-          { pattern: 'Analyse the social and economic impacts of [geographical process]', marks: 6 },
-          { pattern: 'Evaluate the role of [factor] in [geographical phenomenon]', marks: 8 },
-          { pattern: 'Using a named example, explain how [process] affects [environment/people]', marks: 6 }
-        ],
+         'geography': [
+           { pattern: 'Give one way in which a major city in a LIC/NEE is internationally important.', marks: 1 },
+           { pattern: 'Explain how urban industrial areas can help encourage development. Use your own understanding.', marks: 6 },
+           { pattern: 'To what extent has urban change created opportunities in a UK city you have studied?', marks: 9 },
+           { pattern: 'Using a case study of a LIC/NEE country, explain how manufacturing industry can encourage economic development.', marks: 6 },
+           { pattern: 'Outline one way the political or trading relationship of a named LIC/NEE country with the wider world has changed.', marks: 2 },
+           { pattern: 'Assess the extent to which urban planning can improve quality of life in cities in LIC/NEE countries.', marks: 9 },
+           { pattern: 'Explain how the growth of tourism in a LIC/NEE country can reduce the development gap.', marks: 6 },
+           { pattern: 'State two characteristics of a sustainable city.', marks: 2 },
+           { pattern: 'Using a named example of a LIC/NEE country, explain how international aid has encouraged development.', marks: 6 },
+           { pattern: 'Evaluate the success of an urban regeneration project in improving quality of life.', marks: 9 },
+           { pattern: 'Outline one environmental challenge caused by urban growth in cities in LIC/NEE countries.', marks: 2 },
+           { pattern: 'Explain how fair trade can help to reduce inequalities in global trade.', marks: 4 },
+           { pattern: 'Using a case study of a UK city, assess the effectiveness of transport strategies in reducing traffic congestion.', marks: 9 },
+           { pattern: 'Suggest why some countries have a low level of economic development.', marks: 4 },
+           { pattern: 'Give one reason why urban areas in LIC/NEE countries are growing rapidly.', marks: 1 },
+           { pattern: 'Using examples, explain how TNCs can have both positive and negative impacts on their host countries.', marks: 6 },
+           { pattern: 'Assess the sustainability of different strategies used to increase energy supply.', marks: 9 },
+           { pattern: 'Explain how microfinance loans can help to reduce poverty in rural areas of LIC countries.', marks: 4 },
+           { pattern: 'Outline two ways that urban areas can become more sustainable.', marks: 2 },
+           { pattern: 'Using a named example, evaluate the success of a bottom-up development project.', marks: 9 }
+         ],
         'computer-science': [
           { pattern: 'Write pseudocode to [programming task] and explain your algorithm', marks: 6 },
           { pattern: 'Analyse the advantages and disadvantages of [computer science concept]', marks: 6 },
