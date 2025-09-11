@@ -1371,11 +1371,11 @@ Write a story about discovering a hidden object.
           { pattern: 'Evaluate the efficiency of [system/process] and suggest improvements', marks: 8 }
         ],
         'mathematics': [
-          { pattern: 'Solve the equation [mathematical expression]', marks: 3 },
-          { pattern: 'Find the [mathematical value] of the shape shown', marks: 4 },
-          { pattern: 'Prove that [mathematical statement] using algebraic methods', marks: 5 },
-          { pattern: 'A company has data showing [scenario]. Calculate [requirement]', marks: 6 },
-          { pattern: 'Given that [conditions], find the probability that [event]', marks: 4 }
+          { pattern: 'Simplify: 3x + 5x - 7', marks: 2 },
+          { pattern: 'Solve for x: 4(x - 2) = 16', marks: 3 },
+          { pattern: 'Write 35% as a fraction in its simplest form', marks: 2 },
+          { pattern: 'Find the missing number in the sequence: 7, ___, 21, 28, 35', marks: 4 },
+          { pattern: 'A recipe needs 250 grams of sugar to make 5 portions. How much sugar is needed for 8 portions?', marks: 3 }
         ],
         'business': [
           { pattern: 'Analyse the impact of [business factor] on [business aspect]', marks: 6 },
