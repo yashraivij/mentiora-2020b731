@@ -1218,20 +1218,28 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     
     // Special format for English Language - AQA GCSE Paper 1
     if (subjectId === 'english-language') {
-      const sourceText = `The library was a cathedral of knowledge, its vaulted ceilings disappearing into shadows above towering shelves that stretched impossibly high. Dust motes danced in golden shafts of sunlight streaming through tall, arched windows, each beam illuminating thousands of leather-bound volumes that had witnessed centuries pass. The silence was profound yet somehow alive, broken only by the whispered turning of pages and the soft footfalls of scholars moving reverently between the stacks. Ancient wooden tables, scarred by generations of students, stood like altars where minds came to worship at the shrine of learning. In this sacred space, time seemed suspended, and the weight of accumulated human wisdom pressed gently down upon all who entered, reminding them of their small place in the vast continuum of knowledge.`;
+      const sourceText = `The storm had been building all day, turning the sky into a churning mass of grey and black clouds. Sarah pressed her face against the cold window of the old cottage, watching as the wind whipped the trees into a frenzied dance. The branches clawed desperately at the air, their leaves torn away and scattered across the moor like confetti at a wild party.
+
+She had been trapped here for three hours now, ever since the bridge had become impassable. The cottage felt smaller with each passing minute, its walls seeming to close in around her. Outside, the rain hammered against the glass with increasing fury, each drop like a tiny fist demanding entry.
+
+Then she heard it - a sound that made her blood freeze. A low, rhythmic tapping coming from somewhere deep within the house. Tap. Tap. Tap. It wasn't the rain. It wasn't the wind. It was something else entirely.
+
+Sarah's heart began to race as she realised she might not be alone after all. The tapping grew louder, more insistent, echoing through the empty rooms like a warning. She backed away from the window, her breath forming small clouds in the suddenly cold air.
+
+The storm outside was nothing compared to the terror that now gripped her heart.`;
       
       // Section A: Reading - exactly 45 minutes advised
       // Question 1: List 4 things (4 marks)
       questions.push({
         id: 'english-lang-q1',
         questionNumber: 1,
-        text: `Read again the first part of the source, from lines 1 to 3.
+        text: `Read again the first part of the source, from lines 1 to 6.
 
-Source: Extract from "The Scholar's Journey" by Modern Author (2020)
+Source: Extract from "The Cottage" by Contemporary Author (2023)
 
 "${sourceText}"
 
-List four things about the library from this part of the source.
+List four things about the setting from this part of the source.
 
 [4 marks]`,
         marks: 4,
@@ -1242,15 +1250,15 @@ List four things about the library from this part of the source.
       questions.push({
         id: 'english-lang-q2',
         questionNumber: 2,
-        text: `Look in detail at this extract, from lines 5 to 9 of the source:
+        text: `Look in detail at this extract, from lines 7 to 12 of the source:
 
-"The silence was profound yet somehow alive, broken only by the whispered turning of pages and the soft footfalls of scholars moving reverently between the stacks. Ancient wooden tables, scarred by generations of students, stood like altars where minds came to worship at the shrine of learning."
+"Then she heard it - a sound that made her blood freeze. A low, rhythmic tapping coming from somewhere deep within the house. Tap. Tap. Tap. It wasn't the rain. It wasn't the wind. It was something else entirely. Sarah's heart began to race as she realised she might not be alone after all."
 
-How does the writer use language here to describe the atmosphere of the library?
+How does the writer use language here to describe the effects of fear?
 
 You could include the writer's choice of:
 • words and phrases
-• language features and techniques
+• language features and techniques  
 • sentence forms.
 
 [8 marks]`,
@@ -1264,9 +1272,9 @@ You could include the writer's choice of:
         questionNumber: 3,
         text: `You now need to think about the whole of the source.
 
-This text is from a novel describing a character's first visit to an ancient library.
+This text is from a short story about a woman trapped in a cottage during a storm.
 
-How has the writer structured the text to interest you as a reader?
+How has the writer structured the text to build tension for the reader?
 
 You could write about:
 • what the writer focuses your attention on at the beginning of the source
@@ -1282,15 +1290,15 @@ You could write about:
       questions.push({
         id: 'english-lang-q4',
         questionNumber: 4,
-        text: `Focus this part of your answer on the second part of the source, from line 4 to the end.
+        text: `Focus this part of your answer on the second half of the source, from line 8 to the end.
 
-A student said, "The writer makes it clear that the library is a place of deep reverence and learning. The description shows us why people feel overwhelmed and inspired when they enter."
+A student said, "The writer makes the main character's fear the most important idea in this passage. The description shows how quickly normal situations can become terrifying."
 
 To what extent do you agree?
 
 In your response, you could:
-• consider your own impressions of the library
-• evaluate how the writer creates a sense of awe and reverence
+• consider your own impressions of the character's experience
+• evaluate how the writer presents fear and tension
 • support your response with references to the text.
 
 [20 marks]`,
@@ -1310,13 +1318,13 @@ Write in full sentences.
 You are reminded of the need to plan your answer.
 You should leave enough time to check your work at the end.
 
-A magazine has asked for contributions for their creative writing section.
+Choose ONE of the following:
 
 Either:
-Write a description of a library as suggested by this source.
+Write a description of a stormy landscape.
 
 Or:
-Write a story about discovering a hidden object.
+Write a story about a moment of fear.
 
 (24 marks for content and organisation
 16 marks for technical accuracy)
