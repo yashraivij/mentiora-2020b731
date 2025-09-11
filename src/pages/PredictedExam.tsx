@@ -1414,94 +1414,126 @@ Write a story about discovering a hidden object.
         // Generate 2-4 questions per topic based on realistic exam structure
         const questionsPerTopic = Math.min(3, Math.max(2, Math.floor(25 / topics.length)));
         
-        for (let i = 0; i < questionsPerTopic; i++) {
-          const pattern = patterns[i % patterns.length];
-          const marks = pattern.marks + Math.floor(Math.random() * 3) - 1; // Vary marks slightly
-          const finalMarks = Math.max(2, Math.min(12, marks)); // Keep within GCSE range
-          
-          // Create realistic question based on topic
-          let questionText = '';
-          
-          // Subject-specific question generation
-          if (subjectId === 'chemistry') {
-            const chemQuestions = [
-              `A student investigates the rate of reaction between ${topic.name.toLowerCase()} and hydrochloric acid. Describe a method the student could use to measure the rate of reaction. Include safety precautions in your answer.`,
-              `Explain the bonding and structure in ${topic.name.toLowerCase()}. Include a diagram in your answer.`,
-              `${topic.name} is used in industry. Evaluate the advantages and disadvantages of using ${topic.name.toLowerCase()} compared to alternative methods.`,
-              `Calculate the percentage by mass of each element in ${topic.name.toLowerCase()}. Show your working clearly.`,
-              `Describe what happens when ${topic.name.toLowerCase()} reacts with oxygen. Write a balanced symbol equation for this reaction.`
-            ];
-            questionText = chemQuestions[i % chemQuestions.length];
-          } else if (subjectId === 'biology') {
-            const bioQuestions = [
-              `Explain how the structure of ${topic.name.toLowerCase()} is adapted for its function. Include specific examples in your answer.`,
-              `Describe the role of ${topic.name.toLowerCase()} in maintaining health. Explain what happens when this system doesn't work properly.`,
-              `A scientist investigated ${topic.name.toLowerCase()}. Suggest a method the scientist could use and explain how to make the results reliable.`,
-              `Compare and contrast ${topic.name.toLowerCase()} in plants and animals. Give specific examples to support your answer.`,
-              `Analyse the importance of ${topic.name.toLowerCase()} in the ecosystem. Consider both positive and negative impacts.`
-            ];
-            questionText = bioQuestions[i % bioQuestions.length];
-          } else if (subjectId === 'physics') {
-            const physQuestions = [
-              `A student investigates ${topic.name.toLowerCase()}. Describe the equipment needed and the method to follow. Explain how to improve accuracy.`,
-              `Calculate the force needed to move an object with mass 50kg at constant velocity if the coefficient of friction is 0.3. Show your working and include correct units.`,
-              `Explain the physics principles behind ${topic.name.toLowerCase()}. Use appropriate terminology in your answer.`,
-              `Compare the efficiency of different types of ${topic.name.toLowerCase()}. Evaluate which would be most suitable for domestic use.`,
-              `Describe an application of ${topic.name.toLowerCase()} in everyday life. Explain the advantages and disadvantages.`
-            ];
-            questionText = physQuestions[i % physQuestions.length];
-          } else if (subjectId === 'mathematics') {
-            const mathQuestions = [
-              `A company uses ${topic.name.toLowerCase()} to analyse their sales data. Calculate the required values and interpret your results.`,
-              `Solve the ${topic.name.toLowerCase()} problem shown. Give your answer to 3 significant figures where appropriate.`,
-              `Prove that the ${topic.name.toLowerCase()} relationship holds true using algebraic manipulation.`,
-              `A student measures ${topic.name.toLowerCase()} and records their results. Calculate the mean and explain the significance of your answer.`,
-              `Using ${topic.name.toLowerCase()}, find the solution to the given problem. Show all your working clearly.`
-            ];
-            questionText = mathQuestions[i % mathQuestions.length];
-          } else if (subjectId === 'business') {
-            const businessQuestions = [
-              `Analyse the impact of ${topic.name.toLowerCase()} on a small retail business. Consider both short-term and long-term effects.`,
-              `Evaluate whether implementing ${topic.name.toLowerCase()} would be beneficial for a manufacturing company. Use business theory to support your answer.`,
-              `A business is considering ${topic.name.toLowerCase()}. Calculate the financial implications and recommend whether they should proceed.`,
-              `Explain how ${topic.name.toLowerCase()} affects different stakeholder groups. Consider the perspectives of customers, employees, and shareholders.`,
-              `Assess the importance of ${topic.name.toLowerCase()} in achieving business success. Use real business examples to support your points.`
-            ];
-            questionText = businessQuestions[i % businessQuestions.length];
-          } else if (subjectId === 'geography') {
-            const geoQuestions = [
-              `Using a named example, explain how ${topic.name.toLowerCase()} affects people and the environment. Include specific details in your answer.`,
-              `Evaluate the effectiveness of strategies used to manage ${topic.name.toLowerCase()}. Consider social, economic and environmental factors.`,
-              `Analyse the causes and consequences of ${topic.name.toLowerCase()}. Explain the links between human and physical factors.`,
-              `Assess the role of ${topic.name.toLowerCase()} in sustainable development. Consider different viewpoints in your answer.`,
-              `Explain the formation of ${topic.name.toLowerCase()}. Use annotated diagrams to support your explanation.`
-            ];
-            questionText = geoQuestions[i % geoQuestions.length];
-          } else if (subjectId === 'computer-science') {
-            const csQuestions = [
-              `Write an algorithm to implement ${topic.name.toLowerCase()}. Explain the logic behind your solution and identify potential improvements.`,
-              `Evaluate the security implications of using ${topic.name.toLowerCase()} in a commercial system. Consider different types of threats.`,
-              `Analyse the advantages and disadvantages of ${topic.name.toLowerCase()} compared to alternative approaches. Include performance considerations.`,
-              `Explain how ${topic.name.toLowerCase()} works with reference to a real-world application. Include technical details in your answer.`,
-              `A programmer needs to implement ${topic.name.toLowerCase()}. Describe the data structures and algorithms they should use.`
-            ];
-            questionText = csQuestions[i % csQuestions.length];
-          } else {
-            // Generic format for other subjects
-            const genericQuestions = [
-              `Explain the key principles of ${topic.name.toLowerCase()} and analyse their importance in the wider context.`,
-              `Evaluate the effectiveness of different approaches to ${topic.name.toLowerCase()}. Support your answer with specific examples.`,
-              `Analyse the factors that influence ${topic.name.toLowerCase()}. Consider both positive and negative impacts.`,
-              `Compare and contrast different aspects of ${topic.name.toLowerCase()}. Use specific examples to support your points.`,
-              `Assess the significance of ${topic.name.toLowerCase()} in modern society. Consider different perspectives in your answer.`
-            ];
-            questionText = genericQuestions[i % genericQuestions.length];
-          }
+        // Create a pool of questions for each subject to avoid duplicates
+        let questionPool: string[] = [];
+        
+        if (subjectId === 'chemistry') {
+          questionPool = [
+            `Magnesium reacts with hydrochloric acid to produce hydrogen gas. Describe a method to measure the volume of gas produced. Include safety precautions.`,
+            `Explain the difference between ionic and covalent bonding. Give examples of compounds that contain each type of bonding.`,
+            `A student investigates the effect of temperature on reaction rate. Describe the method and explain the results in terms of collision theory.`,
+            `Calculate the relative formula mass of calcium carbonate (CaCO₃). Show your working clearly. [Ar: Ca=40, C=12, O=16]`,
+            `Describe the test for carbon dioxide gas. Explain what you would observe and write a word equation for the reaction.`,
+            `The Haber process is used to make ammonia. Evaluate the conditions used and explain why they are a compromise.`,
+            `Explain how crude oil is separated by fractional distillation. Describe the properties of the different fractions obtained.`,
+            `A student electrolyses copper sulfate solution using copper electrodes. Predict what happens at each electrode and explain why.`,
+            `Compare the properties of diamond and graphite. Explain the differences in terms of their structures.`,
+            `Calculate the percentage by mass of water in hydrated copper sulfate (CuSO₄·5H₂O). Show your working clearly.`
+          ];
+        } else if (subjectId === 'biology') {
+          questionPool = [
+            `Explain how the structure of a red blood cell is adapted for its function. Include specific features in your answer.`,
+            `Describe what happens during photosynthesis. Write a balanced symbol equation for this process.`,
+            `A student investigates the effect of light intensity on the rate of photosynthesis. Describe a suitable method.`,
+            `Explain how the digestive system breaks down food. Include the role of enzymes in your answer.`,
+            `Compare aerobic and anaerobic respiration. Give examples of when each type occurs in the human body.`,
+            `Describe how plants respond to light and gravity. Explain the advantage of these responses.`,
+            `Explain how the structure of alveoli makes them efficient for gas exchange. Include specific adaptations.`,
+            `A food chain shows: grass → rabbit → fox. Explain what happens to energy as it passes along this food chain.`,
+            `Describe the stages of mitosis. Explain why this type of cell division is important for growth.`,
+            `Explain how natural selection leads to evolution. Use an example to illustrate your answer.`
+          ];
+        } else if (subjectId === 'physics') {
+          questionPool = [
+            `A car accelerates from rest to 20 m/s in 8 seconds. Calculate the acceleration. Show your working and include units.`,
+            `Explain the difference between renewable and non-renewable energy sources. Give examples of each type.`,
+            `A student investigates how the extension of a spring varies with applied force. Describe the method and expected results.`,
+            `Calculate the power of a motor that does 3000 J of work in 10 seconds. Show your working and include units.`,
+            `Explain how a transformer works. Describe one use of step-up transformers and one use of step-down transformers.`,
+            `A wave has a frequency of 50 Hz and wavelength of 6 m. Calculate the wave speed. Show your working.`,
+            `Describe the structure of an atom. Explain what determines the charge on an ion.`,
+            `Compare the advantages and disadvantages of solar panels and wind turbines for generating electricity.`,
+            `Explain why objects appear different colours. Describe what happens when white light passes through a prism.`,
+            `A pendulum has a period of 2 seconds. Explain what affects the period of a pendulum and describe how to measure it accurately.`
+          ];
+        } else if (subjectId === 'mathematics') {
+          questionPool = [
+            `Solve the equation 3x + 7 = 22. Show your working clearly.`,
+            `A shop reduces all prices by 15%. A jacket originally costs £80. Calculate the new price.`,
+            `The mean of 5 numbers is 12. Four of the numbers are 8, 10, 14, and 15. Find the fifth number.`,
+            `Calculate the area of a circle with radius 6 cm. Give your answer to 1 decimal place. [Use π = 3.14]`,
+            `A bag contains 3 red balls, 4 blue balls and 5 green balls. Calculate the probability of randomly selecting a blue ball.`,
+            `Factorise completely: 6x² + 9x. Show your working.`,
+            `The nth term of a sequence is 4n - 1. Find the first four terms of this sequence.`,
+            `A rectangle has length (x + 3) cm and width (x - 2) cm. Write an expression for the area in its simplest form.`,
+            `Convert 0.75 to a fraction in its simplest form. Show your method.`,
+            `Using trigonometry, calculate the height of a building if the angle of elevation from 50m away is 30°. Show your working.`
+          ];
+        } else if (subjectId === 'business') {
+          questionPool = [
+            `Analyse the impact of competition on a small business. Consider both positive and negative effects.`,
+            `Evaluate whether a business should focus on cost leadership or differentiation as a competitive strategy.`,
+            `A business has fixed costs of £10,000 and variable costs of £5 per unit. Calculate the break-even point if selling price is £15 per unit.`,
+            `Explain how changes in interest rates affect business decisions. Consider the impact on different stakeholders.`,
+            `Assess the importance of cash flow management for a new business. Use examples to support your answer.`,
+            `Compare the advantages and disadvantages of partnerships versus limited companies as business structures.`,
+            `Analyse the factors a business should consider when choosing a location. Include both qualitative and quantitative factors.`,
+            `Evaluate the effectiveness of advertising as a method of promotion for a small retailer.`,
+            `Explain how a business can motivate its employees. Discuss both financial and non-financial methods.`,
+            `Assess the impact of e-commerce on traditional high street retailers. Consider both challenges and opportunities.`
+          ];
+        } else if (subjectId === 'geography') {
+          questionPool = [
+            `Using a named example, explain how tectonic activity creates landforms. Include specific details about the processes involved.`,
+            `Evaluate the effectiveness of hard and soft engineering strategies for coastal management. Use named examples.`,
+            `Analyse the causes and effects of urban sprawl in a named city. Consider social, economic and environmental impacts.`,
+            `Explain how climate change affects different ecosystems. Use specific examples to support your answer.`,
+            `Assess the sustainability of tourism in a named destination. Consider economic, social and environmental factors.`,
+            `Using a named example, explain how river flooding can be managed. Evaluate the success of different strategies.`,
+            `Analyse the factors that influence population distribution in a named country. Include physical and human factors.`,
+            `Explain the formation of oxbow lakes. Use annotated diagrams to support your explanation.`,
+            `Evaluate the impact of globalisation on manufacturing industries. Use named examples from different countries.`,
+            `Assess the challenges and opportunities of living in hot desert environments. Use a named example.`
+          ];
+        } else if (subjectId === 'computer-science') {
+          questionPool = [
+            `Explain the difference between RAM and ROM. Give examples of what each type of memory is used for.`,
+            `Write pseudocode for an algorithm that finds the largest number in a list. Explain how your algorithm works.`,
+            `Describe three types of network topology. Give advantages and disadvantages of each type.`,
+            `Explain what is meant by a database. Describe the advantages of using a database compared to a flat file.`,
+            `Analyse the ethical issues surrounding the use of artificial intelligence in decision-making systems.`,
+            `Explain how data is represented in binary. Convert the decimal number 25 to binary, showing your working.`,
+            `Describe the fetch-decode-execute cycle. Explain what happens at each stage.`,
+            `Compare the advantages and disadvantages of different user interfaces (GUI, CLI, menu-driven).`,
+            `Explain what is meant by encryption. Describe why encryption is important for online transactions.`,
+            `Analyse the environmental impact of computing. Suggest ways that the impact could be reduced.`
+          ];
+        } else {
+          // Generic questions for other subjects
+          questionPool = [
+            `Explain the key features of ${topic.name.toLowerCase()}. Analyse why these features are important.`,
+            `Evaluate different approaches to ${topic.name.toLowerCase()}. Support your answer with specific examples.`,
+            `Analyse the factors that influence ${topic.name.toLowerCase()}. Consider both advantages and disadvantages.`,
+            `Compare and contrast different aspects of ${topic.name.toLowerCase()}. Use evidence to support your points.`,
+            `Assess the significance of ${topic.name.toLowerCase()} in its wider context. Consider different perspectives.`,
+            `Explain how ${topic.name.toLowerCase()} has developed over time. Analyse the reasons for these changes.`,
+            `Using specific examples, evaluate the effectiveness of different methods related to ${topic.name.toLowerCase()}.`,
+            `Analyse the relationship between ${topic.name.toLowerCase()} and other related concepts. Explain the connections.`
+          ];
+        }
+        
+        // Shuffle the question pool to ensure variety
+        const shuffledQuestions = [...questionPool].sort(() => Math.random() - 0.5);
+        
+        for (let i = 0; i < questionsPerTopic && i < shuffledQuestions.length; i++) {
+          const pattern = patterns[Math.floor(Math.random() * patterns.length)];
+          const marks = pattern.marks + Math.floor(Math.random() * 3) - 1;
+          const finalMarks = Math.max(2, Math.min(12, marks));
           
           predictedQuestions.push({
             id: `predicted-${topicIndex}-${i}`,
             questionNumber: questionNumber++,
-            text: questionText,
+            text: shuffledQuestions[i],
             marks: finalMarks,
             section: topicIndex < Math.ceil(topics.length / 2) ? 'A' : 'B'
           });
