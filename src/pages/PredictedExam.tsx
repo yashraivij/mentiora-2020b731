@@ -1549,7 +1549,7 @@ Write a story about discovering a hidden object.
           `Analyse the importance of brand image for consumer goods companies. Evaluate strategies to build brand loyalty.`,
           `Explain how businesses can use technology to improve efficiency. Consider the potential risks and costs.`
         ];
-      } else if (subjectId === 'geography') {
+      } else if (subjectId === 'geography' || subjectId === 'geography-paper-2') {
         questionPool = [
           `Give one way in which a major city in a LIC/NEE is internationally important. [1 mark]`,
           `Explain how urban industrial areas can help encourage development. Use your own understanding. [6 marks]`,
