@@ -1505,26 +1505,21 @@ Write a story about discovering a hidden object.
         ];
       } else if (subjectId === 'mathematics') {
         questionPool = [
-          `Solve the equation 3x + 7 = 22. Show your working clearly.`,
-          `A shop reduces all prices by 15%. A jacket originally costs £80. Calculate the new price.`,
-          `The mean of 5 numbers is 12. Four of the numbers are 8, 10, 14, and 15. Find the fifth number.`,
-          `Calculate the area of a circle with radius 6 cm. Give your answer to 1 decimal place. [Use π = 3.14]`,
-          `A bag contains 3 red balls, 4 blue balls and 5 green balls. Calculate the probability of randomly selecting a blue ball.`,
-          `Factorise completely: 6x² + 9x. Show your working.`,
-          `The nth term of a sequence is 4n - 1. Find the first four terms of this sequence.`,
-          `A rectangle has length (x + 3) cm and width (x - 2) cm. Write an expression for the area in its simplest form.`,
-          `Convert 0.75 to a fraction in its simplest form. Show your method.`,
-          `Using trigonometry, calculate the height of a building if the angle of elevation from 50m away is 30°. Show your working.`,
-          `Solve the simultaneous equations: 2x + y = 7 and x - y = 2. Show your method clearly.`,
-          `A cylinder has radius 4cm and height 10cm. Calculate its volume. Give your answer to the nearest cm³.`,
-          `Expand and simplify: (x + 3)(x - 5). Show each step of your working.`,
-          `A train travels 180km in 2 hours 30 minutes. Calculate the average speed in km/h.`,
-          `Plot the graph of y = 2x - 3. State the gradient and y-intercept.`,
-          `Calculate the surface area of a cuboid with dimensions 6cm × 4cm × 3cm. Show your working.`,
-          `A sequence has first term 3 and common difference 4. Find the 10th term.`,
-          `Rearrange the formula v = u + at to make t the subject. Show your working.`,
-          `Two fair dice are thrown. Calculate the probability of getting a total of 7.`,
-          `Use the quadratic formula to solve x² - 5x + 6 = 0. Show your working clearly.`
+          `Simplify: 3x + 5x - 7. [2 marks]`,
+          `Solve for x: 4(x - 2) = 16. [3 marks]`,
+          `Write 35% as a fraction in its simplest form. [2 marks]`,
+          `Find the missing number in the sequence: 7, ___, 21, 28, 35. [4 marks]`,
+          `A recipe needs 250 grams of sugar to make 5 portions. How much sugar is needed for 8 portions? [3 marks]`,
+          `What is 7² - 4 × 3? [3 marks]`,
+          `Convert 0.075 into a percentage. [4 marks]`,
+          `What is the prime factorization of 84? [2 marks]`,
+          `Solve: 2x + 3 = 5x - 6. [5 marks]`,
+          `If a car travels 150 km in 2.5 hours, what is its average speed in km/h? [4 marks]`,
+          `Express 81 as a power of 3. [3 marks]`,
+          `A shop offers a discount of 12% on a jacket that costs £85. What is the price after discount? [4 marks]`,
+          `Solve for x: x/4 - 2/3 = 1/6. [5 marks]`,
+          `A rectangle has perimeter 36 cm. If its length is 11 cm, what is its width? [3 marks]`,
+          `Find the lowest common multiple of 12 and 15. [4 marks]`
         ];
       } else if (subjectId === 'business') {
         questionPool = [
