@@ -1444,7 +1444,7 @@ Write a story about discovering a hidden object.
           } else if (subjectId === 'physics') {
             const physQuestions = [
               `A student investigates ${topic.name.toLowerCase()}. Describe the equipment needed and the method to follow. Explain how to improve accuracy.`,
-              `Calculate the ${topic.name.toLowerCase()} in the example shown. Show your working and include correct units.`,
+              `Calculate the force needed to move an object with mass 50kg at constant velocity if the coefficient of friction is 0.3. Show your working and include correct units.`,
               `Explain the physics principles behind ${topic.name.toLowerCase()}. Use appropriate terminology in your answer.`,
               `Compare the efficiency of different types of ${topic.name.toLowerCase()}. Evaluate which would be most suitable for domestic use.`,
               `Describe an application of ${topic.name.toLowerCase()} in everyday life. Explain the advantages and disadvantages.`
