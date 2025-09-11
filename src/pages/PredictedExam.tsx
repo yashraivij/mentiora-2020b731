@@ -1414,131 +1414,218 @@ Write a story about discovering a hidden object.
         // Generate 2-4 questions per topic based on realistic exam structure
         const questionsPerTopic = Math.min(3, Math.max(2, Math.floor(25 / topics.length)));
         
-        // Create a pool of questions for each subject to avoid duplicates
-        let questionPool: string[] = [];
-        
-        if (subjectId === 'chemistry') {
-          questionPool = [
-            `Magnesium reacts with hydrochloric acid to produce hydrogen gas. Describe a method to measure the volume of gas produced. Include safety precautions.`,
-            `Explain the difference between ionic and covalent bonding. Give examples of compounds that contain each type of bonding.`,
-            `A student investigates the effect of temperature on reaction rate. Describe the method and explain the results in terms of collision theory.`,
-            `Calculate the relative formula mass of calcium carbonate (CaCO₃). Show your working clearly. [Ar: Ca=40, C=12, O=16]`,
-            `Describe the test for carbon dioxide gas. Explain what you would observe and write a word equation for the reaction.`,
-            `The Haber process is used to make ammonia. Evaluate the conditions used and explain why they are a compromise.`,
-            `Explain how crude oil is separated by fractional distillation. Describe the properties of the different fractions obtained.`,
-            `A student electrolyses copper sulfate solution using copper electrodes. Predict what happens at each electrode and explain why.`,
-            `Compare the properties of diamond and graphite. Explain the differences in terms of their structures.`,
-            `Calculate the percentage by mass of water in hydrated copper sulfate (CuSO₄·5H₂O). Show your working clearly.`
-          ];
-        } else if (subjectId === 'biology') {
-          questionPool = [
-            `Explain how the structure of a red blood cell is adapted for its function. Include specific features in your answer.`,
-            `Describe what happens during photosynthesis. Write a balanced symbol equation for this process.`,
-            `A student investigates the effect of light intensity on the rate of photosynthesis. Describe a suitable method.`,
-            `Explain how the digestive system breaks down food. Include the role of enzymes in your answer.`,
-            `Compare aerobic and anaerobic respiration. Give examples of when each type occurs in the human body.`,
-            `Describe how plants respond to light and gravity. Explain the advantage of these responses.`,
-            `Explain how the structure of alveoli makes them efficient for gas exchange. Include specific adaptations.`,
-            `A food chain shows: grass → rabbit → fox. Explain what happens to energy as it passes along this food chain.`,
-            `Describe the stages of mitosis. Explain why this type of cell division is important for growth.`,
-            `Explain how natural selection leads to evolution. Use an example to illustrate your answer.`
-          ];
-        } else if (subjectId === 'physics') {
-          questionPool = [
-            `A car accelerates from rest to 20 m/s in 8 seconds. Calculate the acceleration. Show your working and include units.`,
-            `Explain the difference between renewable and non-renewable energy sources. Give examples of each type.`,
-            `A student investigates how the extension of a spring varies with applied force. Describe the method and expected results.`,
-            `Calculate the power of a motor that does 3000 J of work in 10 seconds. Show your working and include units.`,
-            `Explain how a transformer works. Describe one use of step-up transformers and one use of step-down transformers.`,
-            `A wave has a frequency of 50 Hz and wavelength of 6 m. Calculate the wave speed. Show your working.`,
-            `Describe the structure of an atom. Explain what determines the charge on an ion.`,
-            `Compare the advantages and disadvantages of solar panels and wind turbines for generating electricity.`,
-            `Explain why objects appear different colours. Describe what happens when white light passes through a prism.`,
-            `A pendulum has a period of 2 seconds. Explain what affects the period of a pendulum and describe how to measure it accurately.`
-          ];
-        } else if (subjectId === 'mathematics') {
-          questionPool = [
-            `Solve the equation 3x + 7 = 22. Show your working clearly.`,
-            `A shop reduces all prices by 15%. A jacket originally costs £80. Calculate the new price.`,
-            `The mean of 5 numbers is 12. Four of the numbers are 8, 10, 14, and 15. Find the fifth number.`,
-            `Calculate the area of a circle with radius 6 cm. Give your answer to 1 decimal place. [Use π = 3.14]`,
-            `A bag contains 3 red balls, 4 blue balls and 5 green balls. Calculate the probability of randomly selecting a blue ball.`,
-            `Factorise completely: 6x² + 9x. Show your working.`,
-            `The nth term of a sequence is 4n - 1. Find the first four terms of this sequence.`,
-            `A rectangle has length (x + 3) cm and width (x - 2) cm. Write an expression for the area in its simplest form.`,
-            `Convert 0.75 to a fraction in its simplest form. Show your method.`,
-            `Using trigonometry, calculate the height of a building if the angle of elevation from 50m away is 30°. Show your working.`
-          ];
-        } else if (subjectId === 'business') {
-          questionPool = [
-            `Analyse the impact of competition on a small business. Consider both positive and negative effects.`,
-            `Evaluate whether a business should focus on cost leadership or differentiation as a competitive strategy.`,
-            `A business has fixed costs of £10,000 and variable costs of £5 per unit. Calculate the break-even point if selling price is £15 per unit.`,
-            `Explain how changes in interest rates affect business decisions. Consider the impact on different stakeholders.`,
-            `Assess the importance of cash flow management for a new business. Use examples to support your answer.`,
-            `Compare the advantages and disadvantages of partnerships versus limited companies as business structures.`,
-            `Analyse the factors a business should consider when choosing a location. Include both qualitative and quantitative factors.`,
-            `Evaluate the effectiveness of advertising as a method of promotion for a small retailer.`,
-            `Explain how a business can motivate its employees. Discuss both financial and non-financial methods.`,
-            `Assess the impact of e-commerce on traditional high street retailers. Consider both challenges and opportunities.`
-          ];
-        } else if (subjectId === 'geography') {
-          questionPool = [
-            `Using a named example, explain how tectonic activity creates landforms. Include specific details about the processes involved.`,
-            `Evaluate the effectiveness of hard and soft engineering strategies for coastal management. Use named examples.`,
-            `Analyse the causes and effects of urban sprawl in a named city. Consider social, economic and environmental impacts.`,
-            `Explain how climate change affects different ecosystems. Use specific examples to support your answer.`,
-            `Assess the sustainability of tourism in a named destination. Consider economic, social and environmental factors.`,
-            `Using a named example, explain how river flooding can be managed. Evaluate the success of different strategies.`,
-            `Analyse the factors that influence population distribution in a named country. Include physical and human factors.`,
-            `Explain the formation of oxbow lakes. Use annotated diagrams to support your explanation.`,
-            `Evaluate the impact of globalisation on manufacturing industries. Use named examples from different countries.`,
-            `Assess the challenges and opportunities of living in hot desert environments. Use a named example.`
-          ];
-        } else if (subjectId === 'computer-science') {
-          questionPool = [
-            `Explain the difference between RAM and ROM. Give examples of what each type of memory is used for.`,
-            `Write pseudocode for an algorithm that finds the largest number in a list. Explain how your algorithm works.`,
-            `Describe three types of network topology. Give advantages and disadvantages of each type.`,
-            `Explain what is meant by a database. Describe the advantages of using a database compared to a flat file.`,
-            `Analyse the ethical issues surrounding the use of artificial intelligence in decision-making systems.`,
-            `Explain how data is represented in binary. Convert the decimal number 25 to binary, showing your working.`,
-            `Describe the fetch-decode-execute cycle. Explain what happens at each stage.`,
-            `Compare the advantages and disadvantages of different user interfaces (GUI, CLI, menu-driven).`,
-            `Explain what is meant by encryption. Describe why encryption is important for online transactions.`,
-            `Analyse the environmental impact of computing. Suggest ways that the impact could be reduced.`
-          ];
-        } else {
-          // Generic questions for other subjects
-          questionPool = [
-            `Explain the key features of ${topic.name.toLowerCase()}. Analyse why these features are important.`,
-            `Evaluate different approaches to ${topic.name.toLowerCase()}. Support your answer with specific examples.`,
-            `Analyse the factors that influence ${topic.name.toLowerCase()}. Consider both advantages and disadvantages.`,
-            `Compare and contrast different aspects of ${topic.name.toLowerCase()}. Use evidence to support your points.`,
-            `Assess the significance of ${topic.name.toLowerCase()} in its wider context. Consider different perspectives.`,
-            `Explain how ${topic.name.toLowerCase()} has developed over time. Analyse the reasons for these changes.`,
-            `Using specific examples, evaluate the effectiveness of different methods related to ${topic.name.toLowerCase()}.`,
-            `Analyse the relationship between ${topic.name.toLowerCase()} and other related concepts. Explain the connections.`
-          ];
-        }
-        
-        // Shuffle the question pool to ensure variety
-        const shuffledQuestions = [...questionPool].sort(() => Math.random() - 0.5);
-        
-        for (let i = 0; i < questionsPerTopic && i < shuffledQuestions.length; i++) {
-          const pattern = patterns[Math.floor(Math.random() * patterns.length)];
-          const marks = pattern.marks + Math.floor(Math.random() * 3) - 1;
-          const finalMarks = Math.max(2, Math.min(12, marks));
-          
-          predictedQuestions.push({
-            id: `predicted-${topicIndex}-${i}`,
-            questionNumber: questionNumber++,
-            text: shuffledQuestions[i],
-            marks: finalMarks,
-            section: topicIndex < Math.ceil(topics.length / 2) ? 'A' : 'B'
-          });
-        }
       });
+      
+      // Create a comprehensive pool of unique questions for each subject
+      let questionPool: string[] = [];
+      
+      if (subjectId === 'chemistry') {
+        questionPool = [
+          `Magnesium reacts with hydrochloric acid to produce hydrogen gas. Describe a method to measure the volume of gas produced. Include safety precautions.`,
+          `Explain the difference between ionic and covalent bonding. Give examples of compounds that contain each type of bonding.`,
+          `A student investigates the effect of temperature on reaction rate. Describe the method and explain the results in terms of collision theory.`,
+          `Calculate the relative formula mass of calcium carbonate (CaCO₃). Show your working clearly. [Ar: Ca=40, C=12, O=16]`,
+          `Describe the test for carbon dioxide gas. Explain what you would observe and write a word equation for the reaction.`,
+          `The Haber process is used to make ammonia. Evaluate the conditions used and explain why they are a compromise.`,
+          `Explain how crude oil is separated by fractional distillation. Describe the properties of the different fractions obtained.`,
+          `A student electrolyses copper sulfate solution using copper electrodes. Predict what happens at each electrode and explain why.`,
+          `Compare the properties of diamond and graphite. Explain the differences in terms of their structures.`,
+          `Calculate the percentage by mass of water in hydrated copper sulfate (CuSO₄·5H₂O). Show your working clearly.`,
+          `Describe how metals are extracted from their ores. Compare the methods used for reactive and unreactive metals.`,
+          `Explain why Group 1 elements become more reactive down the group. Include electronic structure in your answer.`,
+          `A student burns different alcohols and measures temperature changes. Describe how to make this a fair test.`,
+          `Explain the greenhouse effect. Discuss how human activities contribute to climate change.`,
+          `Describe the structure and bonding in polymers. Explain why different polymers have different properties.`,
+          `Calculate the volume of gas produced when 24g of magnesium reacts with excess acid at STP. Show your working.`,
+          `Explain how catalysts work. Describe their importance in industrial processes.`,
+          `Compare the environmental impact of different fuels. Evaluate which would be best for transport.`,
+          `Describe what happens during the electrolysis of brine. Write equations for the reactions at each electrode.`,
+          `Explain how the pH scale works. Describe how to measure pH using different methods.`
+        ];
+      } else if (subjectId === 'biology') {
+        questionPool = [
+          `Explain how the structure of a red blood cell is adapted for its function. Include specific features in your answer.`,
+          `Describe what happens during photosynthesis. Write a balanced symbol equation for this process.`,
+          `A student investigates the effect of light intensity on the rate of photosynthesis. Describe a suitable method.`,
+          `Explain how the digestive system breaks down food. Include the role of enzymes in your answer.`,
+          `Compare aerobic and anaerobic respiration. Give examples of when each type occurs in the human body.`,
+          `Describe how plants respond to light and gravity. Explain the advantage of these responses.`,
+          `Explain how the structure of alveoli makes them efficient for gas exchange. Include specific adaptations.`,
+          `A food chain shows: grass → rabbit → fox. Explain what happens to energy as it passes along this food chain.`,
+          `Describe the stages of mitosis. Explain why this type of cell division is important for growth.`,
+          `Explain how natural selection leads to evolution. Use an example to illustrate your answer.`,
+          `Describe the structure of DNA. Explain how genetic information is stored and passed on.`,
+          `Explain how antibodies help the body fight disease. Describe the difference between active and passive immunity.`,
+          `A student investigates enzyme activity at different temperatures. Predict the results and explain the shape of the graph.`,
+          `Describe how water moves through a plant. Explain the importance of transpiration.`,
+          `Compare the structure and function of arteries, veins and capillaries. Include diagrams in your answer.`,
+          `Explain how hormones control blood glucose levels. Describe what happens in diabetes.`,
+          `Describe the process of protein synthesis. Explain the roles of DNA, mRNA and ribosomes.`,
+          `A student counts organisms in different habitats using quadrats. Describe how to make the sampling reliable.`,
+          `Explain how characteristics are inherited. Use examples to show dominant and recessive alleles.`,
+          `Describe how the nervous system coordinates responses. Compare nervous and hormonal coordination.`
+        ];
+      } else if (subjectId === 'physics') {
+        questionPool = [
+          `A car accelerates from rest to 20 m/s in 8 seconds. Calculate the acceleration. Show your working and include units.`,
+          `Explain the difference between renewable and non-renewable energy sources. Give examples of each type.`,
+          `A student investigates how the extension of a spring varies with applied force. Describe the method and expected results.`,
+          `Calculate the power of a motor that does 3000 J of work in 10 seconds. Show your working and include units.`,
+          `Explain how a transformer works. Describe one use of step-up transformers and one use of step-down transformers.`,
+          `A wave has a frequency of 50 Hz and wavelength of 6 m. Calculate the wave speed. Show your working.`,
+          `Describe the structure of an atom. Explain what determines the charge on an ion.`,
+          `Compare the advantages and disadvantages of solar panels and wind turbines for generating electricity.`,
+          `Explain why objects appear different colours. Describe what happens when white light passes through a prism.`,
+          `A pendulum has a period of 2 seconds. Explain what affects the period of a pendulum and describe how to measure it accurately.`,
+          `Calculate the kinetic energy of a 1500kg car travelling at 25 m/s. Show your working and include units.`,
+          `Explain how nuclear power stations generate electricity. Discuss the advantages and disadvantages of nuclear power.`,
+          `A student drops a ball and measures the time taken to fall different distances. Describe how to improve accuracy.`,
+          `Explain the difference between transverse and longitudinal waves. Give examples of each type.`,
+          `Calculate the resistance of a component when 12V produces a current of 3A. Show your working.`,
+          `Describe how electromagnets work. Explain why the magnetic field can be varied.`,
+          `A satellite orbits Earth at constant speed. Explain why it doesn't fall to Earth despite gravity acting on it.`,
+          `Explain how X-rays are used in medicine. Discuss the risks and precautions needed.`,
+          `Calculate the efficiency of a machine that does 800J of useful work from 1000J of input energy.`,
+          `Describe the life cycle of stars. Explain how elements heavier than iron are formed.`
+        ];
+      } else if (subjectId === 'mathematics') {
+        questionPool = [
+          `Solve the equation 3x + 7 = 22. Show your working clearly.`,
+          `A shop reduces all prices by 15%. A jacket originally costs £80. Calculate the new price.`,
+          `The mean of 5 numbers is 12. Four of the numbers are 8, 10, 14, and 15. Find the fifth number.`,
+          `Calculate the area of a circle with radius 6 cm. Give your answer to 1 decimal place. [Use π = 3.14]`,
+          `A bag contains 3 red balls, 4 blue balls and 5 green balls. Calculate the probability of randomly selecting a blue ball.`,
+          `Factorise completely: 6x² + 9x. Show your working.`,
+          `The nth term of a sequence is 4n - 1. Find the first four terms of this sequence.`,
+          `A rectangle has length (x + 3) cm and width (x - 2) cm. Write an expression for the area in its simplest form.`,
+          `Convert 0.75 to a fraction in its simplest form. Show your method.`,
+          `Using trigonometry, calculate the height of a building if the angle of elevation from 50m away is 30°. Show your working.`,
+          `Solve the simultaneous equations: 2x + y = 7 and x - y = 2. Show your method clearly.`,
+          `A cylinder has radius 4cm and height 10cm. Calculate its volume. Give your answer to the nearest cm³.`,
+          `Expand and simplify: (x + 3)(x - 5). Show each step of your working.`,
+          `A train travels 180km in 2 hours 30 minutes. Calculate the average speed in km/h.`,
+          `Plot the graph of y = 2x - 3. State the gradient and y-intercept.`,
+          `Calculate the surface area of a cuboid with dimensions 6cm × 4cm × 3cm. Show your working.`,
+          `A sequence has first term 3 and common difference 4. Find the 10th term.`,
+          `Rearrange the formula v = u + at to make t the subject. Show your working.`,
+          `Two fair dice are thrown. Calculate the probability of getting a total of 7.`,
+          `Use the quadratic formula to solve x² - 5x + 6 = 0. Show your working clearly.`
+        ];
+      } else if (subjectId === 'business') {
+        questionPool = [
+          `Analyse the impact of competition on a small business. Consider both positive and negative effects.`,
+          `Evaluate whether a business should focus on cost leadership or differentiation as a competitive strategy.`,
+          `A business has fixed costs of £10,000 and variable costs of £5 per unit. Calculate the break-even point if selling price is £15 per unit.`,
+          `Explain how changes in interest rates affect business decisions. Consider the impact on different stakeholders.`,
+          `Assess the importance of cash flow management for a new business. Use examples to support your answer.`,
+          `Compare the advantages and disadvantages of partnerships versus limited companies as business structures.`,
+          `Analyse the factors a business should consider when choosing a location. Include both qualitative and quantitative factors.`,
+          `Evaluate the effectiveness of advertising as a method of promotion for a small retailer.`,
+          `Explain how a business can motivate its employees. Discuss both financial and non-financial methods.`,
+          `Assess the impact of e-commerce on traditional high street retailers. Consider both challenges and opportunities.`,
+          `Analyse the role of market research in business decision making. Evaluate different methods of collecting data.`,
+          `Explain how supply and demand affects pricing decisions. Use a real business example to illustrate your answer.`,
+          `Evaluate the benefits and drawbacks of franchising for both franchisors and franchisees.`,
+          `Assess the importance of corporate social responsibility for modern businesses. Consider different stakeholder views.`,
+          `Analyse the factors that influence consumer buying behaviour. Explain how businesses can use this knowledge.`,
+          `Evaluate the effectiveness of different recruitment methods. Consider costs and quality of candidates.`,
+          `Explain how businesses can achieve sustainable growth. Discuss the challenges they might face.`,
+          `Assess the impact of globalisation on UK manufacturing businesses. Consider both opportunities and threats.`,
+          `Analyse the importance of brand image for consumer goods companies. Evaluate strategies to build brand loyalty.`,
+          `Explain how businesses can use technology to improve efficiency. Consider the potential risks and costs.`
+        ];
+      } else if (subjectId === 'geography') {
+        questionPool = [
+          `Using a named example, explain how tectonic activity creates landforms. Include specific details about the processes involved.`,
+          `Evaluate the effectiveness of hard and soft engineering strategies for coastal management. Use named examples.`,
+          `Analyse the causes and effects of urban sprawl in a named city. Consider social, economic and environmental impacts.`,
+          `Explain how climate change affects different ecosystems. Use specific examples to support your answer.`,
+          `Assess the sustainability of tourism in a named destination. Consider economic, social and environmental factors.`,
+          `Using a named example, explain how river flooding can be managed. Evaluate the success of different strategies.`,
+          `Analyse the factors that influence population distribution in a named country. Include physical and human factors.`,
+          `Explain the formation of oxbow lakes. Use annotated diagrams to support your explanation.`,
+          `Evaluate the impact of globalisation on manufacturing industries. Use named examples from different countries.`,
+          `Assess the challenges and opportunities of living in hot desert environments. Use a named example.`,
+          `Explain how glacial processes create distinctive landforms. Use named examples to support your answer.`,
+          `Analyse the causes of migration. Evaluate the impacts on origin and destination countries.`,
+          `Assess the effectiveness of aid in promoting development. Use contrasting examples to support your answer.`,
+          `Explain how atmospheric circulation creates different climate zones. Include the role of ocean currents.`,
+          `Evaluate strategies to reduce the development gap between rich and poor countries. Consider their effectiveness.`,
+          `Analyse the environmental and economic impacts of deforestation. Use a named example.`,
+          `Explain how urban regeneration can improve quality of life. Evaluate a named regeneration project.`,
+          `Assess the sustainability of water supply management in contrasting areas. Use named examples.`,
+          `Analyse the factors affecting food security. Evaluate strategies to increase food production.`,
+          `Explain how coastal processes create distinctive landforms. Use named examples and annotated diagrams.`
+        ];
+      } else if (subjectId === 'computer-science') {
+        questionPool = [
+          `Explain the difference between RAM and ROM. Give examples of what each type of memory is used for.`,
+          `Write pseudocode for an algorithm that finds the largest number in a list. Explain how your algorithm works.`,
+          `Describe three types of network topology. Give advantages and disadvantages of each type.`,
+          `Explain what is meant by a database. Describe the advantages of using a database compared to a flat file.`,
+          `Analyse the ethical issues surrounding the use of artificial intelligence in decision-making systems.`,
+          `Explain how data is represented in binary. Convert the decimal number 25 to binary, showing your working.`,
+          `Describe the fetch-decode-execute cycle. Explain what happens at each stage.`,
+          `Compare the advantages and disadvantages of different user interfaces (GUI, CLI, menu-driven).`,
+          `Explain what is meant by encryption. Describe why encryption is important for online transactions.`,
+          `Analyse the environmental impact of computing. Suggest ways that the impact could be reduced.`,
+          `Describe the main components of the CPU. Explain the function of each component.`,
+          `Write an algorithm to sort a list of numbers into ascending order. Explain your method.`,
+          `Compare the features of different programming languages. Discuss when each type would be most suitable.`,
+          `Explain how compression works. Compare lossless and lossy compression methods.`,
+          `Describe the layers of the internet protocol stack. Explain the purpose of each layer.`,
+          `Analyse the legal issues relating to data protection. Explain the main principles of data protection law.`,
+          `Explain what is meant by computer modelling. Give examples of where computer models are used.`,
+          `Describe different methods of preventing unauthorised access to computer systems.`,
+          `Compare the advantages and disadvantages of cloud computing versus local storage.`,
+          `Explain how search engines work. Describe the algorithms used to rank web pages.`
+        ];
+      } else {
+        // Generic questions - generate based on topics
+        const topicNames = topics.map(t => t.name);
+        questionPool = topicNames.flatMap(topic => [
+          `Explain the key features of ${topic.toLowerCase()}. Analyse why these features are important.`,
+          `Evaluate different approaches to ${topic.toLowerCase()}. Support your answer with specific examples.`,
+          `Analyse the factors that influence ${topic.toLowerCase()}. Consider both advantages and disadvantages.`,
+          `Compare and contrast different aspects of ${topic.toLowerCase()}. Use evidence to support your points.`,
+          `Assess the significance of ${topic.toLowerCase()} in its wider context. Consider different perspectives.`,
+          `Explain how ${topic.toLowerCase()} has developed over time. Analyse the reasons for these changes.`
+        ]).slice(0, 25); // Limit to prevent too many questions
+      }
+      
+      // Shuffle questions and ensure no duplicates in the exam
+      const shuffledQuestions = [...questionPool].sort(() => Math.random() - 0.5);
+      const usedQuestions = new Set<string>();
+      
+      // Generate questions ensuring no duplicates
+      const totalQuestionsNeeded = Math.min(25, Math.max(20, topics.length * 3));
+      let questionIndex = 0;
+      
+      for (let i = 0; i < totalQuestionsNeeded && questionIndex < shuffledQuestions.length; i++) {
+        const questionText = shuffledQuestions[questionIndex];
+        
+        // Skip if question already used
+        if (usedQuestions.has(questionText)) {
+          questionIndex++;
+          i--; // Don't count this iteration
+          continue;
+        }
+        
+        usedQuestions.add(questionText);
+        const pattern = patterns[Math.floor(Math.random() * patterns.length)];
+        const marks = pattern.marks + Math.floor(Math.random() * 3) - 1;
+        const finalMarks = Math.max(2, Math.min(12, marks));
+        
+        predictedQuestions.push({
+          id: `predicted-${i}`,
+          questionNumber: questionNumber++,
+          text: questionText,
+          marks: finalMarks,
+          section: i < Math.ceil(totalQuestionsNeeded / 2) ? 'A' : 'B'
+        });
+        
+        questionIndex++;
+      }
       
       // Ensure we have enough questions for a full exam (20-25 questions)
       const targetQuestions = Math.min(25, Math.max(20, predictedQuestions.length));
