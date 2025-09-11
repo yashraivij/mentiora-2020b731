@@ -1555,7 +1555,7 @@ Write a story about discovering a hidden object.
           `Explain how urban regeneration can improve quality of life. Evaluate a named regeneration project.`,
           `Assess the sustainability of water supply management in contrasting areas. Use named examples.`,
           `Analyse the factors affecting food security. Evaluate strategies to increase food production.`,
-          `Explain how coastal processes create distinctive landforms. Use named examples and annotated diagrams.`
+          `Explain how coastal processes create distinctive landforms. Use named examples to support your answer.`
         ];
       } else if (subjectId === 'computer-science') {
         questionPool = [
