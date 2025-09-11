@@ -1553,13 +1553,13 @@ Write a story about discovering a hidden object.
         questionPool = [
           `Give one way in which a major city in a LIC/NEE is internationally important. [1 mark]`,
           `Explain how urban industrial areas can help encourage development. Use your own understanding. [6 marks]`,
-          `To what extent has urban change created opportunities in a UK city you have studied? [9 marks + SPaG]`,
+          `To what extent has urban change created opportunities in a UK city you have studied? [9 marks]`,
           `Using a case study of a LIC/NEE country, explain how manufacturing industry can encourage economic development. [6 marks]`,
           `Outline one way the political or trading relationship of a named LIC/NEE country with the wider world has changed. [2 marks]`,
           `Explain how the growth of tourism in a LIC/NEE country can reduce the development gap. [4 marks]`,
           `State two characteristics of a sustainable city. [2 marks]`,
           `Using a named example of a LIC/NEE country, explain how international aid has encouraged development. [6 marks]`,
-          `Evaluate the success of an urban regeneration project in improving quality of life. [9 marks + SPaG]`,
+          `Evaluate the success of an urban regeneration project in improving quality of life. [9 marks]`,
           `Outline one environmental challenge caused by urban growth in cities in LIC/NEE countries. [2 marks]`,
           `Explain how fair trade can help to reduce inequalities in global trade. [4 marks]`,
           `Using a case study of a UK city, assess the effectiveness of transport strategies in reducing traffic congestion. [6 marks]`,
@@ -1628,8 +1628,8 @@ Write a story about discovering a hidden object.
         
         usedQuestions.add(questionText);
         
-        // Extract marks from question text
-        const marksMatch = questionText.match(/\[(\d+)\s*marks?\]/i);
+        // Extract marks from question text - handle both "[X marks]" and "[X marks + SPaG]"
+        const marksMatch = questionText.match(/\[(\d+)\s*marks?(?:\s*\+\s*SPaG)?\]/i);
         const extractedMarks = marksMatch ? parseInt(marksMatch[1]) : 4;
         
         predictedQuestions.push({
