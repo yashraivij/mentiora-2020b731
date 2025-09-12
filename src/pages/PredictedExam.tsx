@@ -1703,42 +1703,42 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
           {
             id: 'geo-p2-c-sr-2',
             questionNumber: questionNumber++,
-            text: 'Identify one reason why food consumption is increasing globally.\n\n[1 mark]',
+            text: 'Identify one reason why food consumption is increasing globally.\n\nOR\n\nIdentify one reason why energy consumption is increasing globally.\n\nOR\n\nIdentify one reason why water consumption is increasing globally.\n\n[1 mark]',
             marks: 1,
             section: 'C'
           },
           {
             id: 'geo-p2-c-sr-3',
             questionNumber: questionNumber++,
-            text: 'What is meant by "energy security"?\n\n[2 marks]',
+            text: 'What is meant by "energy security"?\n\nOR\n\nWhat is meant by "food security"?\n\nOR\n\nWhat is meant by "water security"?\n\n[2 marks]',
             marks: 2,
             section: 'C'
           },
           {
             id: 'geo-p2-c-str-1',
             questionNumber: questionNumber++,
-            text: 'Explain why water insecurity is increasing in some parts of the world.\n\n[4 marks]',
+            text: 'Explain why water insecurity is increasing in some parts of the world.\n\nOR\n\nExplain why energy insecurity is increasing in some parts of the world.\n\nOR\n\nExplain why food insecurity is increasing in some parts of the world.\n\n[4 marks]',
             marks: 4,
             section: 'C'
           },
           {
             id: 'geo-p2-c-str-2',
             questionNumber: questionNumber++,
-            text: 'Explain how energy supply in the UK is changing.\n\n[6 marks]',
+            text: 'Explain how energy supply in the UK is changing.\n\nOR\n\nExplain how food supply in the UK is changing.\n\nOR\n\nExplain how water supply in the UK is changing.\n\n[6 marks]',
             marks: 6,
             section: 'C'
           },
           {
             id: 'geo-p2-c-str-3',
             questionNumber: questionNumber++,
-            text: 'Using an example, explain how food security can be improved.\n\n[6 marks]',
+            text: 'Using an example, explain how food security can be improved.\n\nOR\n\nUsing an example, explain how energy security can be improved.\n\nOR\n\nUsing an example, explain how water security can be improved.\n\n[6 marks]',
             marks: 6,
             section: 'C'
           },
           {
             id: 'geo-p2-c-ext-1',
             questionNumber: questionNumber++,
-            text: '"Increasing energy supply is more important than reducing energy demand." To what extent do you agree?\n\n[9 marks + 3 marks for SPaG]',
+            text: '"Increasing energy supply is more important than reducing energy demand." To what extent do you agree?\n\nOR\n\n"Increasing food production is more important than reducing food waste." To what extent do you agree?\n\nOR\n\n"Increasing water supply is more important than reducing water demand." To what extent do you agree?\n\n[9 marks + 3 marks for SPaG]',
             marks: 12,
             section: 'C'
           }
@@ -2481,7 +2481,7 @@ Write a story about a moment of fear.
           `Suggest why some countries have a low level of economic development. [4 marks]`,
           `Give one reason why urban areas in LIC/NEE countries are growing rapidly. [1 mark]`,
           `Using examples, explain how TNCs can have both positive and negative impacts on their host countries. [6 marks]`,
-          `Assess the sustainability of different strategies used to increase energy supply. [6 marks]`,
+          `Assess the sustainability of different strategies used to increase energy supply.\n\nOR\n\nAssess the sustainability of different strategies used to increase food production.\n\nOR\n\nAssess the sustainability of different strategies used to increase water supply.\n\n[6 marks]`,
           `Explain how economic development can lead to improved access to safe water.\n\nOR\n\nExplain how economic development can lead to improved access to energy.\n\nOR\n\nExplain how economic development can lead to improved access to food.\n\n[4 marks]`,
           `Outline two ways that urban areas can become more sustainable. [2 marks]`,
           `Using a named example, evaluate the success of a bottom-up development project. [6 marks]`,
