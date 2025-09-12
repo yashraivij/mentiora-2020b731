@@ -1275,15 +1275,15 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         {
           id: 'physics-ls-1',
           questionNumber: questionNumber++,
-          text: 'A kettle draws a current of 9 A from a 230 V supply. Calculate the power.\n\nShow your working and include units in your answer.\n\n[24 marks]',
-          marks: 24,
+          text: 'A kettle draws a current of 9 A from a 230 V supply. Calculate the power.\n\nShow your working and include units in your answer.\n\n[22 marks]',
+          marks: 22,
           section: 'B'
         },
         {
           id: 'physics-ls-2',
           questionNumber: questionNumber++,
-          text: 'A student investigates the density and thermal properties of materials.\n\n(a) Describe how to measure the volume of an irregular shaped object. [3 marks]\n\n(b) A block has a mass of 0.8 kg and volume 0.0002 m³. Calculate its density.\nShow your working and include units in your answer. [3 marks]\n\n(c) A 2 kg object is heated, increasing its temperature by 15 °C. The specific heat capacity is 4200 J/kg°C. Calculate the energy change.\nShow your working and include units in your answer. [4 marks]\n\n(d) It takes 3.0 × 10⁵ J to melt 1.5 kg of ice. Calculate the specific latent heat of fusion of ice.\nShow your working and include units in your answer. [4 marks]\n\n(e) Explain what happens to the movement and energy of particles during evaporation.\nIn your answer, you should consider:\n• Particle movement and kinetic energy\n• Energy distribution in the liquid [4 marks]\n\n(f) A circuit transfers 60 J of energy when 3 C of charge flows. Calculate the potential difference.\nShow your working and include units in your answer. [3 marks]\n\n(g) State one factor that affects the rate of evaporation. [1 mark]',
-          marks: 22,
+          text: 'A block has a mass of 0.8 kg and volume 0.0002 m³. Calculate its density.\n\nShow your working and include units in your answer.\n\n[20 marks]',
+          marks: 20,
           section: 'B'
         },
         {
