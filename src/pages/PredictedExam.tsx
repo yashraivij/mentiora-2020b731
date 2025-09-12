@@ -1289,7 +1289,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         {
           id: 'physics-ls-3',
           questionNumber: questionNumber++,
-          text: 'A student investigates radioactive decay and nuclear radiation.\n\n(a) Complete the table showing the properties of nuclear radiation:\n\n| Type | Charge | Relative Mass | Stopped by |\n|------|---------|---------------|------------|\n| Alpha | +2 | 4 | ? |\n| Beta | ? | 1/1840 | Aluminium |\n| Gamma | 0 | ? | Lead |\n\n[3 marks]\n\n(b) A radioactive isotope has a half-life of 5 years. If its activity starts at 400 Bq, calculate the activity after 15 years.\nShow your working and include units in your answer. [4 marks]\n\n(c) A sample has an activity of 600 Bq and decays to 75 Bq. How many half-lives have passed?\nShow your working. [3 marks]\n\n(d) A nucleus emits an alpha particle. If the original nucleus had 92 protons and 238 nucleons, state the number of protons and nucleons in the new nucleus. [2 marks]\n\n(e) Explain why radioactive decay is described as random. [2 marks]\n\n(f) Compare the uses and risks of gamma radiation and alpha radiation in medicine.\nIn your answer, you should consider:\n• Medical applications of each type\n• Safety precautions required [4 marks]',
+          text: 'A radioactive isotope has a half-life of 5 years. If its activity starts at 400 Bq, calculate the activity after 15 years.\n\nShow your working and include units in your answer.\n\n[18 marks]',
           marks: 18,
           section: 'B'
         }
