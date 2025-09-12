@@ -1932,7 +1932,12 @@ Write a story about a moment of fear.
     return questions;
   };
 
-  const [examQuestions] = useState<ExamQuestion[]>(generateExamQuestions());
+  const [examQuestions, setExamQuestions] = useState<ExamQuestion[]>([]);
+  
+  // Generate exam questions when component mounts or subject changes
+  useEffect(() => {
+    setExamQuestions(generateExamQuestions());
+  }, [subjectId]);
 
   const getExamDuration = () => {
     const durations = {
