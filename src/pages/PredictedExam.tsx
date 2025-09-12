@@ -1411,6 +1411,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       questions.push(...longerStructuredQuestions);
       questions.push(...extendedQuestions);
 
+      console.log('Physics questions generated:', questions.length);
       return questions;
     }
     
@@ -2236,7 +2237,9 @@ Write a story about a moment of fear.
   
   // Generate exam questions when component mounts or subject changes
   useEffect(() => {
-    setExamQuestions(generateExamQuestions());
+    const newQuestions = generateExamQuestions();
+    console.log('Setting exam questions, count:', newQuestions.length);
+    setExamQuestions(newQuestions);
   }, [subjectId]);
 
   const getExamDuration = () => {
