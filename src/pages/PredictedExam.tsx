@@ -1477,7 +1477,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       // Add ALL questions from ALL topics
       let questionCounter = 1;
       
-      // Add ALL Section A questions (4 questions × 4 topics = 16 questions)
+      // Add ALL Section A questions (4 questions × 4 topics = 16 questions) - no topic labels
       Object.entries(periodStudyTopics).forEach(([topicKey, topic]) => {
         topic.questions.forEach(q => {
           questions.push({
@@ -1490,14 +1490,14 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         });
       });
       
-      // Add ALL Section B questions (5 questions × 5 topics = 25 questions)  
+      // Add ALL Section B questions (5 questions × 5 topics = 25 questions) - with topic labels
       Object.entries(depthStudyTopics).forEach(([topicKey, topic]) => {
         topic.questions.forEach(q => {
           questions.push({
             ...q,
             id: `${topicKey}-${q.id}`,
             questionNumber: questionCounter++,
-            text: q.text,
+            text: `**Topic: ${topic.name}**\n\n${q.text}`,
             section: 'B'
           });
         });
