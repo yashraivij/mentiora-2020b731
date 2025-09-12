@@ -1419,6 +1419,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     if (subjectId === 'geography') {
       // Randomly select Paper 1 or Paper 2
       const geographyPaper = Math.random() < 0.5 ? 'paper1' : 'paper2';
+      setGeographyPaperType(geographyPaper === 'paper1' ? 'Paper 1' : 'Paper 2');
       let questionNumber = 1;
       
       if (geographyPaper === 'paper1') {
@@ -2572,6 +2573,7 @@ Write a story about a moment of fear.
   };
 
   const [examQuestions, setExamQuestions] = useState<ExamQuestion[]>([]);
+  const [geographyPaperType, setGeographyPaperType] = useState<string>('');
   
   // Generate exam questions when component mounts or subject changes
   useEffect(() => {
@@ -2936,7 +2938,12 @@ Write a story about a moment of fear.
             <div className="flex items-center space-x-4">
               <Crown className="h-6 w-6 text-amber-500" />
               <div>
-                <h1 className="text-lg font-bold text-foreground">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : `${subject.name} Predicted Exam`}</h1>
+                <h1 className="text-lg font-bold text-foreground">
+                  {subjectId === 'history' ? 'History Paper 1' : 
+                   subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
+                   subjectId === 'geography' ? `Geography ${geographyPaperType}` : 
+                   `${subject.name} Predicted Exam`}
+                </h1>
                 <p className="text-sm text-muted-foreground">Question {currentQuestion + 1} of {examQuestions.length}</p>
               </div>
             </div>
