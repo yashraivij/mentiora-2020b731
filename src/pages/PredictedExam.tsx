@@ -1417,9 +1417,9 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     
     // Special format for Geography - AQA GCSE (88 marks total including 3 SPaG)
     if (subjectId === 'geography') {
-      // Randomly select Paper 1 or Paper 2
-      const geographyPaper = Math.random() < 0.5 ? 'paper1' : 'paper2';
-      setGeographyPaperType(geographyPaper === 'paper1' ? 'Paper 1' : 'Paper 2');
+      // Geography Paper 1
+      const geographyPaper = 'paper1';
+      setGeographyPaperType('Paper 1');
       let questionNumber = 1;
       
       if (geographyPaper === 'paper1') {
@@ -2464,7 +2464,7 @@ Write a story about a moment of fear.
           `Analyse the importance of brand image for consumer goods companies. Evaluate strategies to build brand loyalty.`,
           `Explain how businesses can use technology to improve efficiency. Consider the potential risks and costs.`
         ];
-      } else if (subjectId === 'geography' || subjectId === 'geography-paper-2') {
+      } else if (subjectId === 'geography-paper-2') {
         questionPool = [
           `Give one way in which a major city in a LIC/NEE is internationally important. [1 mark]`,
           `Explain how urban industrial areas can help encourage development. Use your own understanding. [6 marks]`,
@@ -2942,6 +2942,7 @@ Write a story about a moment of fear.
                   {subjectId === 'history' ? 'History Paper 1' : 
                    subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
                    subjectId === 'geography' ? `Geography ${geographyPaperType}` : 
+                   subjectId === 'geography-paper-2' ? 'Geography Paper 2' :
                    `${subject.name} Predicted Exam`}
                 </h1>
                 <p className="text-sm text-muted-foreground">Question {currentQuestion + 1} of {examQuestions.length}</p>
