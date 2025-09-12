@@ -1132,6 +1132,280 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return questions;
     }
     
+    // Special format for Physics - AQA GCSE Paper 1 (100 marks total)
+    if (subjectId === 'physics') {
+      let questionNumber = 1;
+      
+      // Multiple Choice Questions (10 × 1 mark = 10 marks)
+      const multipleChoiceQuestions = [
+        {
+          id: 'physics-mc-1',
+          questionNumber: questionNumber++,
+          text: 'Which of the following is a renewable energy resource?\n\nA. Natural gas\nB. Coal\nC. Wind\nD. Oil\n\n[1 mark]',
+          marks: 1,
+          section: 'A'
+        },
+        {
+          id: 'physics-mc-2',
+          questionNumber: questionNumber++,
+          text: 'The unit of electric current is:\n\nA. Volt (V)\nB. Ampere (A)\nC. Ohm (Ω)\nD. Watt (W)\n\n[1 mark]',
+          marks: 1,
+          section: 'A'
+        },
+        {
+          id: 'physics-mc-3',
+          questionNumber: questionNumber++,
+          text: 'Which particle has no electric charge?\n\nA. Proton\nB. Neutron\nC. Electron\nD. Ion\n\n[1 mark]',
+          marks: 1,
+          section: 'A'
+        },
+        {
+          id: 'physics-mc-4',
+          questionNumber: questionNumber++,
+          text: 'The formula for density is:\n\nA. mass × volume\nB. mass ÷ volume\nC. volume ÷ mass\nD. mass + volume\n\n[1 mark]',
+          marks: 1,
+          section: 'A'
+        },
+        {
+          id: 'physics-mc-5',
+          questionNumber: questionNumber++,
+          text: 'Which type of nuclear radiation is stopped by a sheet of paper?\n\nA. Alpha\nB. Beta\nC. Gamma\nD. X-ray\n\n[1 mark]',
+          marks: 1,
+          section: 'A'
+        },
+        {
+          id: 'physics-mc-6',
+          questionNumber: questionNumber++,
+          text: 'Energy cannot be:\n\nA. Transferred\nB. Created or destroyed\nC. Stored\nD. Dissipated\n\n[1 mark]',
+          marks: 1,
+          section: 'A'
+        },
+        {
+          id: 'physics-mc-7',
+          questionNumber: questionNumber++,
+          text: 'UK mains electricity has a potential difference of:\n\nA. 12 V\nB. 110 V\nC. 230 V\nD. 415 V\n\n[1 mark]',
+          marks: 1,
+          section: 'A'
+        },
+        {
+          id: 'physics-mc-8',
+          questionNumber: questionNumber++,
+          text: 'Isotopes are atoms with the same number of:\n\nA. Neutrons but different protons\nB. Protons but different neutrons\nC. Electrons but different protons\nD. Protons and neutrons\n\n[1 mark]',
+          marks: 1,
+          section: 'A'
+        },
+        {
+          id: 'physics-mc-9',
+          questionNumber: questionNumber++,
+          text: 'What happens to particles during evaporation?\n\nA. They gain energy and move faster\nB. They lose energy and move slower\nC. They change into different particles\nD. They stop moving\n\n[1 mark]',
+          marks: 1,
+          section: 'A'
+        },
+        {
+          id: 'physics-mc-10',
+          questionNumber: questionNumber++,
+          text: 'Ohm\'s law states that:\n\nA. V = I × R\nB. V = I ÷ R\nC. V = I + R\nD. V = I - R\n\n[1 mark]',
+          marks: 1,
+          section: 'A'
+        }
+      ];
+
+      // Short Answer Questions (10 × 2 marks = 20 marks)
+      const shortAnswerQuestions = [
+        {
+          id: 'physics-sa-1',
+          questionNumber: questionNumber++,
+          text: 'State the law of conservation of energy.\n\n[2 marks]',
+          marks: 2,
+          section: 'A'
+        },
+        {
+          id: 'physics-sa-2',
+          questionNumber: questionNumber++,
+          text: 'Give two examples of renewable energy resources.\n\n[2 marks]',
+          marks: 2,
+          section: 'A'
+        },
+        {
+          id: 'physics-sa-3',
+          questionNumber: questionNumber++,
+          text: 'What is meant by "dissipation" of energy?\n\n[2 marks]',
+          marks: 2,
+          section: 'A'
+        },
+        {
+          id: 'physics-sa-4',
+          questionNumber: questionNumber++,
+          text: 'Define resistance in an electrical circuit.\n\n[2 marks]',
+          marks: 2,
+          section: 'A'
+        },
+        {
+          id: 'physics-sa-5',
+          questionNumber: questionNumber++,
+          text: 'What is meant by specific latent heat?\n\n[2 marks]',
+          marks: 2,
+          section: 'A'
+        },
+        {
+          id: 'physics-sa-6',
+          questionNumber: questionNumber++,
+          text: 'What are isotopes?\n\n[2 marks]',
+          marks: 2,
+          section: 'A'
+        },
+        {
+          id: 'physics-sa-7',
+          questionNumber: questionNumber++,
+          text: 'Name the three types of nuclear radiation.\n\n[2 marks]',
+          marks: 2,
+          section: 'A'
+        },
+        {
+          id: 'physics-sa-8',
+          questionNumber: questionNumber++,
+          text: 'What happens to the internal energy of a substance when it is heated?\n\n[2 marks]',
+          marks: 2,
+          section: 'A'
+        },
+        {
+          id: 'physics-sa-9',
+          questionNumber: questionNumber++,
+          text: 'State the formula for density.\n\n[2 marks]',
+          marks: 2,
+          section: 'A'
+        },
+        {
+          id: 'physics-sa-10',
+          questionNumber: questionNumber++,
+          text: 'Which radiation is stopped by a sheet of paper?\n\n[2 marks]',
+          marks: 2,
+          section: 'A'
+        }
+      ];
+
+      // Calculation Questions (10 × 4 marks = 40 marks)
+      const calculationQuestions = [
+        {
+          id: 'physics-calc-1',
+          questionNumber: questionNumber++,
+          text: 'A motor transfers 200 J of energy in 4 s. Calculate the power.\n\nShow your working and include units in your answer.\n\n[4 marks]',
+          marks: 4,
+          section: 'B'
+        },
+        {
+          id: 'physics-calc-2',
+          questionNumber: questionNumber++,
+          text: 'A 3 kg object is lifted 2 m vertically. Calculate the change in gravitational potential energy. (g = 9.8 N/kg)\n\nShow your working and include units in your answer.\n\n[4 marks]',
+          marks: 4,
+          section: 'B'
+        },
+        {
+          id: 'physics-calc-3',
+          questionNumber: questionNumber++,
+          text: 'A kettle transfers 1.5 kWh of energy. Calculate this in joules.\n\nShow your working and include units in your answer.\n\n[4 marks]',
+          marks: 4,
+          section: 'B'
+        },
+        {
+          id: 'physics-calc-4',
+          questionNumber: questionNumber++,
+          text: 'A lamp has a resistance of 12 Ω and a current of 4 A flows through it. Calculate the potential difference.\n\nShow your working and include units in your answer.\n\n[4 marks]',
+          marks: 4,
+          section: 'B'
+        },
+        {
+          id: 'physics-calc-5',
+          questionNumber: questionNumber++,
+          text: 'A circuit transfers 60 J of energy when 3 C of charge flows. Calculate the potential difference.\n\nShow your working and include units in your answer.\n\n[4 marks]',
+          marks: 4,
+          section: 'B'
+        },
+        {
+          id: 'physics-calc-6',
+          questionNumber: questionNumber++,
+          text: 'A kettle draws a current of 9 A from a 230 V supply. Calculate the power.\n\nShow your working and include units in your answer.\n\n[4 marks]',
+          marks: 4,
+          section: 'B'
+        },
+        {
+          id: 'physics-calc-7',
+          questionNumber: questionNumber++,
+          text: 'A block has a mass of 0.8 kg and volume 0.0002 m³. Calculate its density.\n\nShow your working and include units in your answer.\n\n[4 marks]',
+          marks: 4,
+          section: 'B'
+        },
+        {
+          id: 'physics-calc-8',
+          questionNumber: questionNumber++,
+          text: 'It takes 3.0 × 10⁵ J to melt 1.5 kg of ice. Calculate the specific latent heat of fusion of ice.\n\nShow your working and include units in your answer.\n\n[4 marks]',
+          marks: 4,
+          section: 'B'
+        },
+        {
+          id: 'physics-calc-9',
+          questionNumber: questionNumber++,
+          text: 'A 2 kg object is heated, increasing its temperature by 15 °C. The specific heat capacity is 4200 J/kg°C. Calculate the energy change.\n\nShow your working and include units in your answer.\n\n[4 marks]',
+          marks: 4,
+          section: 'B'
+        },
+        {
+          id: 'physics-calc-10',
+          questionNumber: questionNumber++,
+          text: 'A radioactive isotope has a half-life of 5 years. If its activity starts at 400 Bq, calculate the activity after 15 years.\n\nShow your working and include units in your answer.\n\n[4 marks]',
+          marks: 4,
+          section: 'B'
+        }
+      ];
+
+      // Extended Response Questions (5 × 6 marks = 30 marks)
+      const extendedQuestions = [
+        {
+          id: 'physics-ext-1',
+          questionNumber: questionNumber++,
+          text: 'Compare the advantages and disadvantages of wind and nuclear power stations for electricity generation.\n\nIn your answer, you should consider:\n• Environmental impact\n• Reliability\n• Cost factors\n• Energy output\n\n[6 marks]',
+          marks: 6,
+          section: 'C'
+        },
+        {
+          id: 'physics-ext-2',
+          questionNumber: questionNumber++,
+          text: 'Explain how resistance changes in a filament lamp as current increases.\n\nIn your answer, you should consider:\n• The relationship between current and temperature\n• How temperature affects resistance\n• The practical implications for the lamp\'s operation\n\n[6 marks]',
+          marks: 6,
+          section: 'C'
+        },
+        {
+          id: 'physics-ext-3',
+          questionNumber: questionNumber++,
+          text: 'Explain what happens to the movement and energy of particles during evaporation.\n\nIn your answer, you should consider:\n• Particle movement and kinetic energy\n• Energy distribution in the liquid\n• The evaporation process\n• Temperature changes\n\n[6 marks]',
+          marks: 6,
+          section: 'C'
+        },
+        {
+          id: 'physics-ext-4',
+          questionNumber: questionNumber++,
+          text: 'Compare the uses and risks of gamma radiation and alpha radiation in medicine.\n\nIn your answer, you should consider:\n• Medical applications of each type\n• Safety precautions required\n• Penetrating power\n• Biological effects\n\n[6 marks]',
+          marks: 6,
+          section: 'C'
+        },
+        {
+          id: 'physics-ext-5',
+          questionNumber: questionNumber++,
+          text: 'Explain how energy is transferred in a power station that burns fossil fuels.\n\nIn your answer, you should consider:\n• The energy transformations that occur\n• Efficiency and energy losses\n• Environmental considerations\n• The role of generators\n\n[6 marks]',
+          marks: 6,
+          section: 'C'
+        }
+      ];
+
+      // Combine all questions
+      questions.push(...multipleChoiceQuestions);
+      questions.push(...shortAnswerQuestions);
+      questions.push(...calculationQuestions);
+      questions.push(...extendedQuestions);
+
+      return questions;
+    }
+    
     // Special format for History - AQA GCSE Paper 1 (84 marks total)
     if (subjectId === 'history') {
       // Section A: Period Studies (44 marks total) - Choose ONE topic
