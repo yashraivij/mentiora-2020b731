@@ -1196,7 +1196,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         }
       ];
 
-      // Short Structured Questions (10 × 2 marks = 20 marks)
+      // Short Structured Questions (20 × 2-4 marks = 47 marks)
       const shortStructuredQuestions = [
         {
           id: 'physics-ss-1',
@@ -1257,40 +1257,131 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         {
           id: 'physics-ss-9',
           questionNumber: questionNumber++,
-          text: 'A motor transfers 200 J of energy in 4 s. Calculate the power.\nShow your working and include units in your answer.\n\n[2 marks]',
-          marks: 2,
+          text: 'A motor transfers 200 J of energy in 4 s. Calculate the power.\nShow your working and include units in your answer.\n\n[3 marks]',
+          marks: 3,
           section: 'A'
         },
         {
           id: 'physics-ss-10',
           questionNumber: questionNumber++,
-          text: 'A lamp has a resistance of 12 Ω and a current of 4 A flows through it. Calculate the potential difference.\nShow your working and include units in your answer.\n\n[2 marks]',
-          marks: 2,
+          text: 'A lamp has a resistance of 12 Ω and a current of 4 A flows through it. Calculate the potential difference.\nShow your working and include units in your answer.\n\n[3 marks]',
+          marks: 3,
           section: 'A'
+        },
+        {
+          id: 'physics-ss-11',
+          questionNumber: questionNumber++,
+          text: 'State two safety precautions when handling radioactive materials.\n\n[2 marks]',
+          marks: 2,
+          section: 'B'
+        },
+        {
+          id: 'physics-ss-12',
+          questionNumber: questionNumber++,
+          text: 'A student drops a ball from a height of 5 m. Calculate the velocity just before it hits the ground. (g = 9.8 m/s²)\nShow your working and include units.\n\n[3 marks]',
+          marks: 3,
+          section: 'B'
+        },
+        {
+          id: 'physics-ss-13',
+          questionNumber: questionNumber++,
+          text: 'Explain why alpha radiation is the most ionising type of nuclear radiation.\n\n[2 marks]',
+          marks: 2,
+          section: 'B'
+        },
+        {
+          id: 'physics-ss-14',
+          questionNumber: questionNumber++,
+          text: 'A wave has a frequency of 50 Hz and wavelength of 6 m. Calculate the wave speed.\nShow your working and include units.\n\n[3 marks]',
+          marks: 3,
+          section: 'B'
+        },
+        {
+          id: 'physics-ss-15',
+          questionNumber: questionNumber++,
+          text: 'State the unit of electric charge.\n\n[1 mark]',
+          marks: 1,
+          section: 'B'
+        },
+        {
+          id: 'physics-ss-16',
+          questionNumber: questionNumber++,
+          text: 'A transformer has 200 turns on the primary coil and 50 turns on the secondary coil. If the primary voltage is 240 V, calculate the secondary voltage.\nShow your working.\n\n[3 marks]',
+          marks: 3,
+          section: 'B'
+        },
+        {
+          id: 'physics-ss-17',
+          questionNumber: questionNumber++,
+          text: 'Name one factor that affects the rate of cooling of an object.\n\n[1 mark]',
+          marks: 1,
+          section: 'B'
+        },
+        {
+          id: 'physics-ss-18',
+          questionNumber: questionNumber++,
+          text: 'A spring extends by 0.05 m when a force of 10 N is applied. Calculate the spring constant.\nShow your working and include units.\n\n[3 marks]',
+          marks: 3,
+          section: 'B'
+        },
+        {
+          id: 'physics-ss-19',
+          questionNumber: questionNumber++,
+          text: 'State one use of ultrasound in medicine.\n\n[1 mark]',
+          marks: 1,
+          section: 'B'
+        },
+        {
+          id: 'physics-ss-20',
+          questionNumber: questionNumber++,
+          text: 'A car accelerates from rest to 20 m/s in 4 s. Calculate the acceleration.\nShow your working and include units.\n\n[3 marks]',
+          marks: 3,
+          section: 'B'
         }
       ];
 
-      // Longer Structured Questions (3 × 20-24 marks = 60 marks)
+      // Longer Structured Questions (6 × 5-6 marks = 33 marks)
       const longerStructuredQuestions = [
         {
           id: 'physics-ls-1',
           questionNumber: questionNumber++,
-          text: 'A kettle draws a current of 9 A from a 230 V supply. Calculate the power.\n\nShow your working and include units in your answer.\n\n[22 marks]',
-          marks: 22,
+          text: 'A kettle draws a current of 9 A from a 230 V supply. Calculate the power.\n\nShow your working and include units in your answer.\n\n[5 marks]',
+          marks: 5,
           section: 'B'
         },
         {
           id: 'physics-ls-2',
           questionNumber: questionNumber++,
-          text: 'A block has a mass of 0.8 kg and volume 0.0002 m³. Calculate its density.\n\nShow your working and include units in your answer.\n\n[20 marks]',
-          marks: 20,
+          text: 'A block has a mass of 0.8 kg and volume 0.0002 m³. Calculate its density.\n\nShow your working and include units in your answer.\n\n[5 marks]',
+          marks: 5,
           section: 'B'
         },
         {
           id: 'physics-ls-3',
           questionNumber: questionNumber++,
-          text: 'A radioactive isotope has a half-life of 5 years. If its activity starts at 400 Bq, calculate the activity after 15 years.\n\nShow your working and include units in your answer.\n\n[18 marks]',
-          marks: 18,
+          text: 'A radioactive isotope has a half-life of 5 years. If its activity starts at 400 Bq, calculate the activity after 15 years.\n\nShow your working and include units in your answer.\n\n[5 marks]',
+          marks: 5,
+          section: 'B'
+        },
+        {
+          id: 'physics-ls-4',
+          questionNumber: questionNumber++,
+          text: 'Describe how to investigate the relationship between force and extension for a spring.\nInclude the equipment needed and safety precautions.\n\n[6 marks]',
+          marks: 6,
+          section: 'B'
+        },
+        {
+          id: 'physics-ls-5',
+          questionNumber: questionNumber++,
+          text: 'Explain how to measure the speed of sound in air using an oscilloscope.\nDescribe the method and state one source of error.\n\n[6 marks]',
+          marks: 6,
+          section: 'B'
+        },
+        {
+          id: 'physics-ls-6',
+          questionNumber: questionNumber++,
+          text: 'Describe an experiment to investigate how the temperature of water affects its rate of cooling.\nInclude variables to control and measurements to take.\n\n[6 marks]',
+          marks: 6,
           section: 'B'
         }
       ];
@@ -1313,7 +1404,8 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         }
       ];
 
-      // Combine all questions (Total: 23 questions, 100 marks)
+      // Combine all questions (Total: 36 questions, 100 marks)
+      // 8 MC (8 marks) + 20 SS (47 marks) + 6 LS (33 marks) + 2 Ext (12 marks) = 100 marks
       questions.push(...multipleChoiceQuestions);
       questions.push(...shortStructuredQuestions);
       questions.push(...longerStructuredQuestions);
