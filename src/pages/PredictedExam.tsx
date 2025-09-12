@@ -2131,9 +2131,11 @@ Write a story about a moment of fear.
       return predictedQuestions.slice(0, targetQuestions);
     };
 
-    // Use the new predicted question generator
-    const predictedQuestions = generatePredictedExamQuestions(subjectId, subject.topics);
-    questions.push(...predictedQuestions);
+    // Use the new predicted question generator for subjects that don't have specific exam formats
+    if (subjectId !== 'physics' && subjectId !== 'english-literature' && subjectId !== 'history' && subjectId !== 'english-language' && subjectId !== 'religious-studies') {
+      const predictedQuestions = generatePredictedExamQuestions(subjectId, subject.topics);
+      questions.push(...predictedQuestions);
+    }
     
     return questions;
   };
