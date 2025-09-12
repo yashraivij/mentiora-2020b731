@@ -1132,167 +1132,360 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return questions;
     }
     
-    // Special format for History - AQA GCSE Paper 1
+    // Special format for History - AQA GCSE Paper 1 (84 marks total)
     if (subjectId === 'history') {
-      // Section A: Period Studies (choose one) - 44 marks total
-      const periodStudyQuestions = [
-        // Q1 (4 marks) - Describe two features
-        {
-          id: 'history-period-q1',
-          questionNumber: 1,
-          text: `Describe two features of the work of cowboys.
-
-[4 marks]`,
-          marks: 4,
-          section: 'A'
+      // Section A: Period Studies (44 marks total) - Choose ONE topic
+      const periodStudyTopics = {
+        'america-1840-1895': {
+          name: 'America, 1840–1895: Expansion and Consolidation',
+          questions: [
+            {
+              id: 'america-1840-q1',
+              questionNumber: 1,
+              text: `Describe two features of Plains Indians' way of life.\n\n[4 marks]`,
+              marks: 4,
+              section: 'A'
+            },
+            {
+              id: 'america-1840-q2',
+              questionNumber: 2,
+              text: `Explain why settlers travelled west in the 1840s.\n\nYou may use the following in your answer:\n• Gold Rush\n• Homestead Act\n\nYou must also use information of your own.\n\n[8 marks]`,
+              marks: 8,
+              section: 'A'
+            },
+            {
+              id: 'america-1840-q3',
+              questionNumber: 3,
+              text: `Write an account of how the railroads changed the West.\n\nYou may use the following information to help you:\n• Transportation of goods and people\n• Development of towns\n• Impact on Native Americans\n\n[12 marks]`,
+              marks: 12,
+              section: 'A'
+            },
+            {
+              id: 'america-1840-q4',
+              questionNumber: 4,
+              text: `"The main reason for the defeat of the Plains Indians was the US Army." How far do you agree with this statement?\n\nYou may use the following in your answer:\n• Battle of the Little Bighorn\n• Government policies\n• Disease and the destruction of buffalo\n\nYou must also use information of your own.\n\n[16 marks]\n[4 marks for SPaG]`,
+              marks: 20,
+              section: 'A'
+            }
+          ]
         },
-        // Q2 (8 marks) - Explain why
-        {
-          id: 'history-period-q2', 
-          questionNumber: 2,
-          text: `Explain why settlers travelled west in the 1840s.
-
-You may use the following in your answer:
-• Gold Rush
-• Homestead Act
-
-You must also use information of your own.
-
-[8 marks]`,
-          marks: 8,
-          section: 'A'
+        'germany-1890-1945': {
+          name: 'Germany, 1890–1945: Democracy and Dictatorship',
+          questions: [
+            {
+              id: 'germany-q1',
+              questionNumber: 1,
+              text: `Describe two features of the Weimar Constitution.\n\n[4 marks]`,
+              marks: 4,
+              section: 'A'
+            },
+            {
+              id: 'germany-q2',
+              questionNumber: 2,
+              text: `Explain why Hitler became Chancellor in 1933.\n\nYou may use the following in your answer:\n• The Depression\n• Political instability\n\nYou must also use information of your own.\n\n[8 marks]`,
+              marks: 8,
+              section: 'A'
+            },
+            {
+              id: 'germany-q3',
+              questionNumber: 3,
+              text: `Write an account of how the Reichstag Fire affected German politics.\n\nYou may use the following information to help you:\n• Emergency powers\n• Arrest of Communists\n• March 1933 elections\n\n[12 marks]`,
+              marks: 12,
+              section: 'A'
+            },
+            {
+              id: 'germany-q4',
+              questionNumber: 4,
+              text: `"The most important reason Hitler consolidated power in 1933–34 was the use of violence." How far do you agree with this statement?\n\nYou may use the following in your answer:\n• Night of the Long Knives\n• SA and SS\n• Legal methods\n\nYou must also use information of your own.\n\n[16 marks]\n[4 marks for SPaG]`,
+              marks: 20,
+              section: 'A'
+            }
+          ]
         },
-        // Q3 (12 marks) - Write an account
-        {
-          id: 'history-period-q3',
-          questionNumber: 3,
-          text: `Write an account of how the railroads changed the West.
-
-You may use the following information to help you:
-• Transportation of goods and people
-• Development of towns
-• Impact on Native Americans
-
-[12 marks]`,
-          marks: 12,
-          section: 'A'
+        'russia-1894-1945': {
+          name: 'Russia/USSR, 1894–1945: Tsardom and Communism',
+          questions: [
+            {
+              id: 'russia-q1',
+              questionNumber: 1,
+              text: `Describe two features of Tsarist rule before 1905.\n\n[4 marks]`,
+              marks: 4,
+              section: 'A'
+            },
+            {
+              id: 'russia-q2',
+              questionNumber: 2,
+              text: `Explain why the February Revolution was successful.\n\nYou may use the following in your answer:\n• Military mutiny\n• Economic problems\n\nYou must also use information of your own.\n\n[8 marks]`,
+              marks: 8,
+              section: 'A'
+            },
+            {
+              id: 'russia-q3',
+              questionNumber: 3,
+              text: `Write an account of how the Bolsheviks took power in October 1917.\n\nYou may use the following information to help you:\n• Lenin's return\n• Trotsky's organization\n• Storming of the Winter Palace\n\n[12 marks]`,
+              marks: 12,
+              section: 'A'
+            },
+            {
+              id: 'russia-q4',
+              questionNumber: 4,
+              text: `"The most important reason Stalin controlled the USSR was propaganda." How far do you agree with this statement?\n\nYou may use the following in your answer:\n• Cult of personality\n• Terror and purges\n• Economic policies\n\nYou must also use information of your own.\n\n[16 marks]\n[4 marks for SPaG]`,
+              marks: 20,
+              section: 'A'
+            }
+          ]
         },
-        // Q4 (16 marks + 4 SPaG) - How far do you agree
-        {
-          id: 'history-period-q4',
-          questionNumber: 4,
-          text: `"The main reason for the defeat of the Plains Indians was the US Army." How far do you agree with this statement?
-
-You may use the following in your answer:
-• Battle of the Little Bighorn
-• Government policies
-• Disease and the destruction of buffalo
-
-You must also use information of your own.
-
-[16 marks]
-[4 marks for SPaG]`,
-          marks: 20,
-          section: 'A'
+        'america-1920-1973': {
+          name: 'America, 1920–1973: Opportunity and Inequality',
+          questions: [
+            {
+              id: 'america-1920-q1',
+              questionNumber: 1,
+              text: `Describe two features of the economic boom of the 1920s.\n\n[4 marks]`,
+              marks: 4,
+              section: 'A'
+            },
+            {
+              id: 'america-1920-q2',
+              questionNumber: 2,
+              text: `Explain why the Ku Klux Klan was powerful in the 1920s.\n\nYou may use the following in your answer:\n• Racial tensions\n• Immigration fears\n\nYou must also use information of your own.\n\n[8 marks]`,
+              marks: 8,
+              section: 'A'
+            },
+            {
+              id: 'america-1920-q3',
+              questionNumber: 3,
+              text: `Write an account of how the New Deal attempted to solve America's problems.\n\nYou may use the following information to help you:\n• Alphabet agencies\n• Public works programs\n• Banking reforms\n\n[12 marks]`,
+              marks: 12,
+              section: 'A'
+            },
+            {
+              id: 'america-1920-q4',
+              questionNumber: 4,
+              text: `"The most important reason for the growth of the Civil Rights Movement was Martin Luther King." How far do you agree with this statement?\n\nYou may use the following in your answer:\n• Montgomery Bus Boycott\n• Other civil rights leaders\n• Government actions\n\nYou must also use information of your own.\n\n[16 marks]\n[4 marks for SPaG]`,
+              marks: 20,
+              section: 'A'
+            }
+          ]
         }
-      ];
+      };
 
-      // Section B: Wider World Depth Studies (choose one) - 40 marks total
-      const depthStudyQuestions = [
-        // Q1 (4 marks) - Source inference
-        {
-          id: 'history-depth-q1',
-          questionNumber: 1,
-          text: `Study Source A.
-
-Source A: A photograph showing British soldiers in trenches on the Western Front during World War One, 1916.
-
-The photograph shows soldiers standing in a muddy trench. Duckboards can be seen on the floor of the trench. Barbed wire is visible in the background. The soldiers are wearing helmets and carrying rifles.
-
-Give two things you can infer from Source A about life in the trenches.
-
-[4 marks]`,
-          marks: 4,
-          section: 'B'
+      // Section B: Wider World Depth Studies (40 marks total) - Choose ONE topic
+      const depthStudyTopics = {
+        'conflict-1894-1918': {
+          name: 'Conflict and Tension, 1894–1918 (WWI)',
+          questions: [
+            {
+              id: 'wwi-q1',
+              questionNumber: 1,
+              text: `Study Source A.\n\nSource A: A photograph showing British soldiers in trenches on the Western Front during World War One, 1916.\n\nThe photograph shows soldiers standing in a muddy trench. Duckboards can be seen on the floor of the trench. Barbed wire is visible in the background. The soldiers are wearing helmets and carrying rifles.\n\nGive two things you can infer from Source A about life in the trenches.\n\n[4 marks]`,
+              marks: 4,
+              section: 'B'
+            },
+            {
+              id: 'wwi-q2',
+              questionNumber: 2,
+              text: `Study Sources B and C.\n\nSource B: From a diary written by a British soldier on the Western Front, 1917.\n"The mud is everywhere. It's impossible to keep clean or dry. The rats are as big as cats. We live in constant fear of gas attacks. Many of my friends have been killed or wounded. I don't know how much longer I can stand this."\n\nSource C: From a British government poster encouraging recruitment, 1915.\n"Your King and Country Need You! Join the Army today and serve with honour. Fight for freedom and justice. Together we will defeat the enemy and return home as heroes."\n\nHow useful are Sources B and C to an historian studying the experiences of soldiers on the Western Front?\n\nExplain your answer using Sources B and C and your own knowledge.\n\n[12 marks]`,
+              marks: 12,
+              section: 'B'
+            },
+            {
+              id: 'wwi-q3',
+              questionNumber: 3,
+              text: `Study Interpretations 1 and 2.\n\nInterpretation 1: From a history book written in 1960.\n"The generals of World War One were incompetent leaders who wasted the lives of millions of soldiers through poor planning and outdated tactics."\n\nInterpretation 2: From a history book written in 2010.\n"The generals of World War One faced unprecedented challenges and gradually developed effective tactics that eventually led to victory."\n\nWhat is the main difference between these views about the leadership of generals in World War One?\n\nExplain your answer using details from both interpretations.\n\n[8 marks]`,
+              marks: 8,
+              section: 'B'
+            },
+            {
+              id: 'wwi-q4',
+              questionNumber: 4,
+              text: `Suggest one reason why Interpretations 1 and 2 give different views about the leadership of generals in World War One.\n\nYou may use Sources B and C to help explain your answer.\n\n[4 marks]`,
+              marks: 4,
+              section: 'B'
+            },
+            {
+              id: 'wwi-q5',
+              questionNumber: 5,
+              text: `"The main reason the Allies won World War One was the entry of the USA into the war." How far do you agree with this statement?\n\nYou may use the following in your answer:\n• The entry of the USA in 1917\n• The failure of the German spring offensive in 1918\n• The naval blockade of Germany\n• New military technology\n\nYou must also use information of your own.\n\n[16 marks]\n[4 marks for SPaG]`,
+              marks: 20,
+              section: 'B'
+            }
+          ]
         },
-        // Q2 (12 marks) - Source utility
-        {
-          id: 'history-depth-q2',
-          questionNumber: 2,
-          text: `Study Sources B and C.
-
-Source B: From a diary written by a British soldier on the Western Front, 1917.
-"The mud is everywhere. It's impossible to keep clean or dry. The rats are as big as cats. We live in constant fear of gas attacks. Many of my friends have been killed or wounded. I don't know how much longer I can stand this."
-
-Source C: From a British government poster encouraging recruitment, 1915.
-"Your King and Country Need You! Join the Army today and serve with honour. Fight for freedom and justice. Together we will defeat the enemy and return home as heroes."
-
-How useful are Sources B and C to an historian studying the experiences of soldiers on the Western Front?
-
-Explain your answer using Sources B and C and your own knowledge.
-
-[12 marks]`,
-          marks: 12,
-          section: 'B'
+        'conflict-1918-1939': {
+          name: 'Conflict and Tension, 1918–1939 (Interwar)',
+          questions: [
+            {
+              id: 'interwar-q1',
+              questionNumber: 1,
+              text: `Study Source A.\n\nSource A: A cartoon from a British newspaper, 1938, showing Chamberlain returning from Munich with a piece of paper.\n\nThe cartoon shows Chamberlain waving a document in the air. He appears confident and is smiling. The caption reads "Peace for our time!" In the background, storm clouds are gathering.\n\nGive two things you can infer from Source A about appeasement.\n\n[4 marks]`,
+              marks: 4,
+              section: 'B'
+            },
+            {
+              id: 'interwar-q2',
+              questionNumber: 2,
+              text: `Study Sources B and C.\n\nSource B: From Chamberlain's speech after Munich, September 1938.\n"We have achieved peace with honour. I believe it is peace for our time. We thank you from the bottom of our hearts. Go home and get a nice quiet sleep."\n\nSource C: From Churchill's speech in Parliament, October 1938.\n"We have suffered a total and unmitigated defeat. The German dictator, instead of snatching his victuals from the table, has been content to have them served to him course by course."\n\nHow useful are Sources B and C to an historian studying Chamberlain's policy of appeasement?\n\nExplain your answer using Sources B and C and your own knowledge.\n\n[12 marks]`,
+              marks: 12,
+              section: 'B'
+            },
+            {
+              id: 'interwar-q3',
+              questionNumber: 3,
+              text: `Study Interpretations 1 and 2.\n\nInterpretation 1: From a history book written in 1950.\n"Appeasement was a cowardly policy that encouraged Hitler's aggression and made war inevitable."\n\nInterpretation 2: From a history book written in 1990.\n"Appeasement was a reasonable policy given Britain's military weakness and the need to buy time for rearmament."\n\nWhat is the main difference between these views about appeasement?\n\nExplain your answer using details from both interpretations.\n\n[8 marks]`,
+              marks: 8,
+              section: 'B'
+            },
+            {
+              id: 'interwar-q4',
+              questionNumber: 4,
+              text: `Suggest one reason why Interpretations 1 and 2 give different views about appeasement.\n\nYou may use Sources B and C to help explain your answer.\n\n[4 marks]`,
+              marks: 4,
+              section: 'B'
+            },
+            {
+              id: 'interwar-q5',
+              questionNumber: 5,
+              text: `"The main reason WWII broke out was appeasement." How far do you agree with this statement?\n\nYou may use the following in your answer:\n• Munich Agreement 1938\n• Hitler's foreign policy\n• The Treaty of Versailles\n• The failure of the League of Nations\n\nYou must also use information of your own.\n\n[16 marks]\n[4 marks for SPaG]`,
+              marks: 20,
+              section: 'B'
+            }
+          ]
         },
-        // Q3 (8 marks) - Interpretations difference
-        {
-          id: 'history-depth-q3',
-          questionNumber: 3,
-          text: `Study Interpretations 1 and 2.
-
-Interpretation 1: From a history book written in 1960.
-"The generals of World War One were incompetent leaders who wasted the lives of millions of soldiers through poor planning and outdated tactics."
-
-Interpretation 2: From a history book written in 2010.
-"The generals of World War One faced unprecedented challenges and gradually developed effective tactics that eventually led to victory."
-
-What is the main difference between these views about the leadership of generals in World War One?
-
-Explain your answer using details from both interpretations.
-
-[8 marks]`,
-          marks: 8,
-          section: 'B'
+        'conflict-1945-1972': {
+          name: 'Conflict and Tension, 1945–1972 (Cold War)',
+          questions: [
+            {
+              id: 'coldwar-q1',
+              questionNumber: 1,
+              text: `Study Source A.\n\nSource A: A photograph of the Berlin Wall, 1962.\n\nThe photograph shows a high concrete wall topped with barbed wire. East German guards can be seen patrolling. On one side, buildings appear run-down. On the other side, there are more modern buildings and cars.\n\nGive two things you can infer from Source A about the Berlin Crisis.\n\n[4 marks]`,
+              marks: 4,
+              section: 'B'
+            },
+            {
+              id: 'coldwar-q2',
+              questionNumber: 2,
+              text: `Study Sources B and C.\n\nSource B: From President Truman's speech to Congress, March 1947.\n"It must be the policy of the United States to support free peoples who are resisting attempted subjugation by armed minorities or by outside pressures."\n\nSource C: From Stalin's speech, 1946.\n"The Soviet Union desires peace, but if war is forced upon us, we shall not be found unprepared. Capitalist encirclement threatens our socialist achievements."\n\nHow useful are Sources B and C to an historian studying the origins of the Cold War?\n\nExplain your answer using Sources B and C and your own knowledge.\n\n[12 marks]`,
+              marks: 12,
+              section: 'B'
+            },
+            {
+              id: 'coldwar-q3',
+              questionNumber: 3,
+              text: `Study Interpretations 1 and 2.\n\nInterpretation 1: From an American history book, 1960.\n"The Cold War began because of Soviet expansion in Eastern Europe and Stalin's aggressive policies."\n\nInterpretation 2: From a Soviet history book, 1960.\n"The Cold War was caused by American imperialism and the USA's attempt to dominate the world through atomic diplomacy."\n\nWhat is the main difference between these views about the origins of the Cold War?\n\nExplain your answer using details from both interpretations.\n\n[8 marks]`,
+              marks: 8,
+              section: 'B'
+            },
+            {
+              id: 'coldwar-q4',
+              questionNumber: 4,
+              text: `Suggest one reason why Interpretations 1 and 2 give different views about the origins of the Cold War.\n\nYou may use Sources B and C to help explain your answer.\n\n[4 marks]`,
+              marks: 4,
+              section: 'B'
+            },
+            {
+              id: 'coldwar-q5',
+              questionNumber: 5,
+              text: `"The most important reason for the Cold War was Soviet expansion in Eastern Europe." How far do you agree with this statement?\n\nYou may use the following in your answer:\n• Soviet control of Poland and other Eastern European countries\n• The USA's atomic bomb\n• Disagreements at Yalta and Potsdam\n• The Marshall Plan\n\nYou must also use information of your own.\n\n[16 marks]\n[4 marks for SPaG]`,
+              marks: 20,
+              section: 'B'
+            }
+          ]
         },
-        // Q4 (4 marks) - Why interpretations differ
-        {
-          id: 'history-depth-q4',
-          questionNumber: 4,
-          text: `Suggest one reason why Interpretations 1 and 2 give different views about the leadership of generals in World War One.
-
-You may use Sources B and C to help explain your answer.
-
-[4 marks]`,
-          marks: 4,
-          section: 'B'
+        'conflict-asia-1950-1975': {
+          name: 'Conflict and Tension in Asia, 1950–1975 (Korea & Vietnam)',
+          questions: [
+            {
+              id: 'asia-q1',
+              questionNumber: 1,
+              text: `Study Source A.\n\nSource A: A photograph of US soldiers in Vietnam, 1968.\n\nThe photograph shows American soldiers moving through dense jungle. They are carrying heavy equipment and weapons. The soldiers look tired and alert. Vegetation has been damaged, possibly by chemical weapons.\n\nGive two things you can infer from Source A about US soldiers' experiences in Vietnam.\n\n[4 marks]`,
+              marks: 4,
+              section: 'B'
+            },
+            {
+              id: 'asia-q2',
+              questionNumber: 2,
+              text: `Study Sources B and C.\n\nSource B: From a letter written by a US soldier in Vietnam, 1969.\n"We can't tell who is the enemy. The jungle is our enemy. The heat is our enemy. We're fighting ghosts who know this land better than we ever will."\n\nSource C: From a US government report on the Tet Offensive, 1968.\n"Despite initial setbacks, US and South Vietnamese forces have successfully repelled the Communist attacks and inflicted heavy casualties on the enemy."\n\nHow useful are Sources B and C to an historian studying the role of the media in Vietnam?\n\nExplain your answer using Sources B and C and your own knowledge.\n\n[12 marks]`,
+              marks: 12,
+              section: 'B'
+            },
+            {
+              id: 'asia-q3',
+              questionNumber: 3,
+              text: `Study Interpretations 1 and 2.\n\nInterpretation 1: From an American history book, 1975.\n"The USA lost the Vietnam War because of the role of the media, which turned public opinion against the war."\n\nInterpretation 2: From a Vietnamese history book, 1985.\n"The USA was defeated in Vietnam because of the determination of the Vietnamese people and effective guerrilla tactics."\n\nWhat is the main difference between these views about why the USA lost the Vietnam War?\n\nExplain your answer using details from both interpretations.\n\n[8 marks]`,
+              marks: 8,
+              section: 'B'
+            },
+            {
+              id: 'asia-q4',
+              questionNumber: 4,
+              text: `Suggest one reason why Interpretations 1 and 2 give different views about US defeat in Vietnam.\n\nYou may use Sources B and C to help explain your answer.\n\n[4 marks]`,
+              marks: 4,
+              section: 'B'
+            },
+            {
+              id: 'asia-q5',
+              questionNumber: 5,
+              text: `"The most important reason the USA lost the Vietnam War was the role of the media." How far do you agree with this statement?\n\nYou may use the following in your answer:\n• Television coverage of the war\n• Anti-war protests\n• Guerrilla tactics\n• The draft system\n\nYou must also use information of your own.\n\n[16 marks]\n[4 marks for SPaG]`,
+              marks: 20,
+              section: 'B'
+            }
+          ]
         },
-        // Q5 (16 marks + 4 SPaG) - How far do you agree essay
-        {
-          id: 'history-depth-q5',
-          questionNumber: 5,
-          text: `"The main reason the Allies won World War One was the entry of the USA into the war." How far do you agree with this statement?
-
-You may use the following in your answer:
-• The entry of the USA in 1917
-• The failure of the German spring offensive in 1918
-• The naval blockade of Germany
-• New military technology
-
-You must also use information of your own.
-
-[16 marks]
-[4 marks for SPaG]`,
-          marks: 20,
-          section: 'B'
+        'conflict-gulf-1990-2009': {
+          name: 'Conflict and Tension in the Gulf, 1990–2009',
+          questions: [
+            {
+              id: 'gulf-q1',
+              questionNumber: 1,
+              text: `Study Source A.\n\nSource A: A photograph of burning oil wells in Kuwait, 1991.\n\nThe photograph shows multiple oil wells on fire, creating massive black smoke clouds. Iraqi forces set fire to the wells during their retreat. The landscape is desert, and the destruction appears extensive.\n\nGive two things you can infer from Source A about the invasion of Kuwait in 1990.\n\n[4 marks]`,
+              marks: 4,
+              section: 'B'
+            },
+            {
+              id: 'gulf-q2',
+              questionNumber: 2,
+              text: `Study Sources B and C.\n\nSource B: From President Bush's speech, January 1991.\n"This will not stand, this aggression against Kuwait. We must act to restore the legitimate government of Kuwait and ensure the flow of oil to the world."\n\nSource C: From Saddam Hussein's radio broadcast, 1991.\n"We are fighting against the forces of imperialism and Zionism. Iraq will resist the foreign occupation and emerge victorious."\n\nHow useful are Sources B and C to an historian studying the causes of the Gulf War?\n\nExplain your answer using Sources B and C and your own knowledge.\n\n[12 marks]`,
+              marks: 12,
+              section: 'B'
+            },
+            {
+              id: 'gulf-q3',
+              questionNumber: 3,
+              text: `Study Interpretations 1 and 2.\n\nInterpretation 1: From a Western history book, 2003.\n"The 2003 Iraq War was justified because of the threat of weapons of mass destruction and Saddam's links to terrorism."\n\nInterpretation 2: From a Middle Eastern history book, 2010.\n"The 2003 Iraq War was an illegal invasion motivated by oil and American imperial ambitions."\n\nWhat is the main difference between these views about the Iraq War?\n\nExplain your answer using details from both interpretations.\n\n[8 marks]`,
+              marks: 8,
+              section: 'B'
+            },
+            {
+              id: 'gulf-q4',
+              questionNumber: 4,
+              text: `Suggest one reason why Interpretations 1 and 2 give different views about the Iraq War.\n\nYou may use Sources B and C to help explain your answer.\n\n[4 marks]`,
+              marks: 4,
+              section: 'B'
+            },
+            {
+              id: 'gulf-q5',
+              questionNumber: 5,
+              text: `"The most important reason for the 2003 Iraq War was the threat of weapons of mass destruction." How far do you agree with this statement?\n\nYou may use the following in your answer:\n• Intelligence reports about WMDs\n• September 11th attacks\n• Oil interests\n• Regime change policy\n\nYou must also use information of your own.\n\n[16 marks]\n[4 marks for SPaG]`,
+              marks: 20,
+              section: 'B'
+            }
+          ]
         }
-      ];
+      };
 
+      // Randomly select one topic from Section A and one from Section B
+      const periodTopicKeys = Object.keys(periodStudyTopics);
+      const depthTopicKeys = Object.keys(depthStudyTopics);
+      
+      const selectedPeriodTopic = periodTopicKeys[Math.floor(Math.random() * periodTopicKeys.length)];
+      const selectedDepthTopic = depthTopicKeys[Math.floor(Math.random() * depthTopicKeys.length)];
+      
       // Add Section A questions
-      questions.push(...periodStudyQuestions);
+      questions.push(...periodStudyTopics[selectedPeriodTopic].questions);
       
       // Add Section B questions  
-      questions.push(...depthStudyQuestions);
+      questions.push(...depthStudyTopics[selectedDepthTopic].questions);
       
       return questions;
     }
