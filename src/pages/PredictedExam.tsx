@@ -1132,11 +1132,11 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return questions;
     }
     
-    // Special format for Physics - AQA GCSE Paper 1 (100 marks total)
+    // Special format for Physics - AQA GCSE Paper 1 (100 marks total, 23 questions)
     if (subjectId === 'physics') {
       let questionNumber = 1;
       
-      // Multiple Choice Questions (10 × 1 mark = 10 marks)
+      // Multiple Choice Questions (8 × 1 mark = 8 marks)
       const multipleChoiceQuestions = [
         {
           id: 'physics-mc-1',
@@ -1176,33 +1176,19 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         {
           id: 'physics-mc-6',
           questionNumber: questionNumber++,
-          text: 'Energy cannot be:\n\nA. Transferred\nB. Created or destroyed\nC. Stored\nD. Dissipated\n\n[1 mark]',
+          text: 'UK mains electricity has a potential difference of:\n\nA. 12 V\nB. 110 V\nC. 230 V\nD. 415 V\n\n[1 mark]',
           marks: 1,
           section: 'A'
         },
         {
           id: 'physics-mc-7',
           questionNumber: questionNumber++,
-          text: 'UK mains electricity has a potential difference of:\n\nA. 12 V\nB. 110 V\nC. 230 V\nD. 415 V\n\n[1 mark]',
-          marks: 1,
-          section: 'A'
-        },
-        {
-          id: 'physics-mc-8',
-          questionNumber: questionNumber++,
           text: 'Isotopes are atoms with the same number of:\n\nA. Neutrons but different protons\nB. Protons but different neutrons\nC. Electrons but different protons\nD. Protons and neutrons\n\n[1 mark]',
           marks: 1,
           section: 'A'
         },
         {
-          id: 'physics-mc-9',
-          questionNumber: questionNumber++,
-          text: 'What happens to particles during evaporation?\n\nA. They gain energy and move faster\nB. They lose energy and move slower\nC. They change into different particles\nD. They stop moving\n\n[1 mark]',
-          marks: 1,
-          section: 'A'
-        },
-        {
-          id: 'physics-mc-10',
+          id: 'physics-mc-8',
           questionNumber: questionNumber++,
           text: 'Ohm\'s law states that:\n\nA. V = I × R\nB. V = I ÷ R\nC. V = I + R\nD. V = I - R\n\n[1 mark]',
           marks: 1,
@@ -1210,197 +1196,127 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         }
       ];
 
-      // Short Answer Questions (10 × 2 marks = 20 marks)
-      const shortAnswerQuestions = [
+      // Short Structured Questions (10 × 2 marks = 20 marks)
+      const shortStructuredQuestions = [
         {
-          id: 'physics-sa-1',
+          id: 'physics-ss-1',
           questionNumber: questionNumber++,
           text: 'State the law of conservation of energy.\n\n[2 marks]',
           marks: 2,
           section: 'A'
         },
         {
-          id: 'physics-sa-2',
+          id: 'physics-ss-2',
           questionNumber: questionNumber++,
           text: 'Give two examples of renewable energy resources.\n\n[2 marks]',
           marks: 2,
           section: 'A'
         },
         {
-          id: 'physics-sa-3',
+          id: 'physics-ss-3',
           questionNumber: questionNumber++,
           text: 'What is meant by "dissipation" of energy?\n\n[2 marks]',
           marks: 2,
           section: 'A'
         },
         {
-          id: 'physics-sa-4',
+          id: 'physics-ss-4',
           questionNumber: questionNumber++,
           text: 'Define resistance in an electrical circuit.\n\n[2 marks]',
           marks: 2,
           section: 'A'
         },
         {
-          id: 'physics-sa-5',
+          id: 'physics-ss-5',
           questionNumber: questionNumber++,
           text: 'What is meant by specific latent heat?\n\n[2 marks]',
           marks: 2,
           section: 'A'
         },
         {
-          id: 'physics-sa-6',
+          id: 'physics-ss-6',
           questionNumber: questionNumber++,
           text: 'What are isotopes?\n\n[2 marks]',
           marks: 2,
           section: 'A'
         },
         {
-          id: 'physics-sa-7',
+          id: 'physics-ss-7',
           questionNumber: questionNumber++,
           text: 'Name the three types of nuclear radiation.\n\n[2 marks]',
           marks: 2,
           section: 'A'
         },
         {
-          id: 'physics-sa-8',
-          questionNumber: questionNumber++,
-          text: 'What happens to the internal energy of a substance when it is heated?\n\n[2 marks]',
-          marks: 2,
-          section: 'A'
-        },
-        {
-          id: 'physics-sa-9',
+          id: 'physics-ss-8',
           questionNumber: questionNumber++,
           text: 'State the formula for density.\n\n[2 marks]',
           marks: 2,
           section: 'A'
         },
         {
-          id: 'physics-sa-10',
+          id: 'physics-ss-9',
           questionNumber: questionNumber++,
-          text: 'Which radiation is stopped by a sheet of paper?\n\n[2 marks]',
+          text: 'A motor transfers 200 J of energy in 4 s. Calculate the power.\nShow your working and include units in your answer.\n\n[2 marks]',
+          marks: 2,
+          section: 'A'
+        },
+        {
+          id: 'physics-ss-10',
+          questionNumber: questionNumber++,
+          text: 'A lamp has a resistance of 12 Ω and a current of 4 A flows through it. Calculate the potential difference.\nShow your working and include units in your answer.\n\n[2 marks]',
           marks: 2,
           section: 'A'
         }
       ];
 
-      // Calculation Questions (10 × 4 marks = 40 marks)
-      const calculationQuestions = [
+      // Longer Structured Questions (3 × 20-24 marks = 60 marks)
+      const longerStructuredQuestions = [
         {
-          id: 'physics-calc-1',
+          id: 'physics-ls-1',
           questionNumber: questionNumber++,
-          text: 'A motor transfers 200 J of energy in 4 s. Calculate the power.\n\nShow your working and include units in your answer.\n\n[4 marks]',
-          marks: 4,
+          text: 'A student investigates the relationship between current and potential difference for a filament lamp.\n\n(a) State the equipment the student would need for this investigation. [3 marks]\n\n(b) Draw a circuit diagram for this investigation. [3 marks]\n\n(c) A 3 kg object is lifted 2 m vertically. Calculate the change in gravitational potential energy. (g = 9.8 N/kg)\nShow your working and include units in your answer. [4 marks]\n\n(d) A kettle draws a current of 9 A from a 230 V supply. Calculate the power.\nShow your working and include units in your answer. [4 marks]\n\n(e) Explain how resistance changes in a filament lamp as current increases.\nIn your answer, you should consider:\n• The relationship between current and temperature\n• How temperature affects resistance [4 marks]\n\n(f) A kettle transfers 1.5 kWh of energy. Calculate this in joules.\nShow your working and include units in your answer. [4 marks]\n\n(g) Suggest two improvements to make the investigation more accurate. [2 marks]',
+          marks: 24,
           section: 'B'
         },
         {
-          id: 'physics-calc-2',
+          id: 'physics-ls-2',
           questionNumber: questionNumber++,
-          text: 'A 3 kg object is lifted 2 m vertically. Calculate the change in gravitational potential energy. (g = 9.8 N/kg)\n\nShow your working and include units in your answer.\n\n[4 marks]',
-          marks: 4,
+          text: 'A student investigates the density and thermal properties of materials.\n\n(a) Describe how to measure the volume of an irregular shaped object. [3 marks]\n\n(b) A block has a mass of 0.8 kg and volume 0.0002 m³. Calculate its density.\nShow your working and include units in your answer. [3 marks]\n\n(c) A 2 kg object is heated, increasing its temperature by 15 °C. The specific heat capacity is 4200 J/kg°C. Calculate the energy change.\nShow your working and include units in your answer. [4 marks]\n\n(d) It takes 3.0 × 10⁵ J to melt 1.5 kg of ice. Calculate the specific latent heat of fusion of ice.\nShow your working and include units in your answer. [4 marks]\n\n(e) Explain what happens to the movement and energy of particles during evaporation.\nIn your answer, you should consider:\n• Particle movement and kinetic energy\n• Energy distribution in the liquid [4 marks]\n\n(f) A circuit transfers 60 J of energy when 3 C of charge flows. Calculate the potential difference.\nShow your working and include units in your answer. [3 marks]\n\n(g) State one factor that affects the rate of evaporation. [1 mark]',
+          marks: 22,
           section: 'B'
         },
         {
-          id: 'physics-calc-3',
+          id: 'physics-ls-3',
           questionNumber: questionNumber++,
-          text: 'A kettle transfers 1.5 kWh of energy. Calculate this in joules.\n\nShow your working and include units in your answer.\n\n[4 marks]',
-          marks: 4,
-          section: 'B'
-        },
-        {
-          id: 'physics-calc-4',
-          questionNumber: questionNumber++,
-          text: 'A lamp has a resistance of 12 Ω and a current of 4 A flows through it. Calculate the potential difference.\n\nShow your working and include units in your answer.\n\n[4 marks]',
-          marks: 4,
-          section: 'B'
-        },
-        {
-          id: 'physics-calc-5',
-          questionNumber: questionNumber++,
-          text: 'A circuit transfers 60 J of energy when 3 C of charge flows. Calculate the potential difference.\n\nShow your working and include units in your answer.\n\n[4 marks]',
-          marks: 4,
-          section: 'B'
-        },
-        {
-          id: 'physics-calc-6',
-          questionNumber: questionNumber++,
-          text: 'A kettle draws a current of 9 A from a 230 V supply. Calculate the power.\n\nShow your working and include units in your answer.\n\n[4 marks]',
-          marks: 4,
-          section: 'B'
-        },
-        {
-          id: 'physics-calc-7',
-          questionNumber: questionNumber++,
-          text: 'A block has a mass of 0.8 kg and volume 0.0002 m³. Calculate its density.\n\nShow your working and include units in your answer.\n\n[4 marks]',
-          marks: 4,
-          section: 'B'
-        },
-        {
-          id: 'physics-calc-8',
-          questionNumber: questionNumber++,
-          text: 'It takes 3.0 × 10⁵ J to melt 1.5 kg of ice. Calculate the specific latent heat of fusion of ice.\n\nShow your working and include units in your answer.\n\n[4 marks]',
-          marks: 4,
-          section: 'B'
-        },
-        {
-          id: 'physics-calc-9',
-          questionNumber: questionNumber++,
-          text: 'A 2 kg object is heated, increasing its temperature by 15 °C. The specific heat capacity is 4200 J/kg°C. Calculate the energy change.\n\nShow your working and include units in your answer.\n\n[4 marks]',
-          marks: 4,
-          section: 'B'
-        },
-        {
-          id: 'physics-calc-10',
-          questionNumber: questionNumber++,
-          text: 'A radioactive isotope has a half-life of 5 years. If its activity starts at 400 Bq, calculate the activity after 15 years.\n\nShow your working and include units in your answer.\n\n[4 marks]',
-          marks: 4,
+          text: 'A student investigates radioactive decay and nuclear radiation.\n\n(a) Complete the table showing the properties of nuclear radiation:\n\n| Type | Charge | Relative Mass | Stopped by |\n|------|---------|---------------|------------|\n| Alpha | +2 | 4 | ? |\n| Beta | ? | 1/1840 | Aluminium |\n| Gamma | 0 | ? | Lead |\n\n[3 marks]\n\n(b) A radioactive isotope has a half-life of 5 years. If its activity starts at 400 Bq, calculate the activity after 15 years.\nShow your working and include units in your answer. [4 marks]\n\n(c) A sample has an activity of 600 Bq and decays to 75 Bq. How many half-lives have passed?\nShow your working. [3 marks]\n\n(d) A nucleus emits an alpha particle. If the original nucleus had 92 protons and 238 nucleons, state the number of protons and nucleons in the new nucleus. [2 marks]\n\n(e) Explain why radioactive decay is described as random. [2 marks]\n\n(f) Compare the uses and risks of gamma radiation and alpha radiation in medicine.\nIn your answer, you should consider:\n• Medical applications of each type\n• Safety precautions required [4 marks]',
+          marks: 18,
           section: 'B'
         }
       ];
 
-      // Extended Response Questions (5 × 6 marks = 30 marks)
+      // Extended Response Questions (2 × 6 marks = 12 marks)
       const extendedQuestions = [
         {
           id: 'physics-ext-1',
           questionNumber: questionNumber++,
-          text: 'Compare the advantages and disadvantages of wind and nuclear power stations for electricity generation.\n\nIn your answer, you should consider:\n• Environmental impact\n• Reliability\n• Cost factors\n• Energy output\n\n[6 marks]',
+          text: 'Compare the advantages and disadvantages of wind and nuclear power stations for electricity generation.\n\nIn your answer, you should consider:\n• Environmental impact\n• Reliability\n• Cost factors\n• Energy output\n\nWrite your answer in continuous prose.\n\n[6 marks]',
           marks: 6,
           section: 'C'
         },
         {
           id: 'physics-ext-2',
           questionNumber: questionNumber++,
-          text: 'Explain how resistance changes in a filament lamp as current increases.\n\nIn your answer, you should consider:\n• The relationship between current and temperature\n• How temperature affects resistance\n• The practical implications for the lamp\'s operation\n\n[6 marks]',
-          marks: 6,
-          section: 'C'
-        },
-        {
-          id: 'physics-ext-3',
-          questionNumber: questionNumber++,
-          text: 'Explain what happens to the movement and energy of particles during evaporation.\n\nIn your answer, you should consider:\n• Particle movement and kinetic energy\n• Energy distribution in the liquid\n• The evaporation process\n• Temperature changes\n\n[6 marks]',
-          marks: 6,
-          section: 'C'
-        },
-        {
-          id: 'physics-ext-4',
-          questionNumber: questionNumber++,
-          text: 'Compare the uses and risks of gamma radiation and alpha radiation in medicine.\n\nIn your answer, you should consider:\n• Medical applications of each type\n• Safety precautions required\n• Penetrating power\n• Biological effects\n\n[6 marks]',
-          marks: 6,
-          section: 'C'
-        },
-        {
-          id: 'physics-ext-5',
-          questionNumber: questionNumber++,
-          text: 'Explain how energy is transferred in a power station that burns fossil fuels.\n\nIn your answer, you should consider:\n• The energy transformations that occur\n• Efficiency and energy losses\n• Environmental considerations\n• The role of generators\n\n[6 marks]',
+          text: 'Explain how energy is transferred and wasted in the home, and suggest ways to improve energy efficiency.\n\nIn your answer, you should consider:\n• Different forms of energy transfer\n• How energy is wasted\n• Methods to reduce energy waste\n• The importance of insulation\n\nWrite your answer in continuous prose.\n\n[6 marks]',
           marks: 6,
           section: 'C'
         }
       ];
 
-      // Combine all questions
+      // Combine all questions (Total: 23 questions, 100 marks)
       questions.push(...multipleChoiceQuestions);
-      questions.push(...shortAnswerQuestions);
-      questions.push(...calculationQuestions);
+      questions.push(...shortStructuredQuestions);
+      questions.push(...longerStructuredQuestions);
       questions.push(...extendedQuestions);
 
       return questions;
