@@ -1275,7 +1275,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         {
           id: 'physics-ls-1',
           questionNumber: questionNumber++,
-          text: 'A student investigates the relationship between current and potential difference for a filament lamp.\n\n(a) State the equipment the student would need for this investigation. [3 marks]\n\n(b) Draw a circuit diagram for this investigation. [3 marks]\n\n(c) A 3 kg object is lifted 2 m vertically. Calculate the change in gravitational potential energy. (g = 9.8 N/kg)\nShow your working and include units in your answer. [4 marks]\n\n(d) A kettle draws a current of 9 A from a 230 V supply. Calculate the power.\nShow your working and include units in your answer. [4 marks]\n\n(e) Explain how resistance changes in a filament lamp as current increases.\nIn your answer, you should consider:\n• The relationship between current and temperature\n• How temperature affects resistance [4 marks]\n\n(f) A kettle transfers 1.5 kWh of energy. Calculate this in joules.\nShow your working and include units in your answer. [4 marks]\n\n(g) Suggest two improvements to make the investigation more accurate. [2 marks]',
+          text: 'A kettle draws a current of 9 A from a 230 V supply. Calculate the power.\n\nShow your working and include units in your answer.\n\n[24 marks]',
           marks: 24,
           section: 'B'
         },
