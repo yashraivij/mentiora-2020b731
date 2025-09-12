@@ -1474,7 +1474,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         }
       };
 
-      // Add ALL questions from ALL topics with topic labels
+      // Add ALL questions from ALL topics
       let questionCounter = 1;
       
       // Add ALL Section A questions (4 questions × 4 topics = 16 questions)
@@ -1484,7 +1484,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
             ...q,
             id: `${topicKey}-${q.id}`,
             questionNumber: questionCounter++,
-            text: `**Topic: ${topic.name}**\n\n${q.text}`,
+            text: q.text,
             section: 'A'
           });
         });
@@ -1497,7 +1497,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
             ...q,
             id: `${topicKey}-${q.id}`,
             questionNumber: questionCounter++,
-            text: `**Topic: ${topic.name}**\n\n${q.text}`,
+            text: q.text,
             section: 'B'
           });
         });
