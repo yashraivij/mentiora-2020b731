@@ -1474,18 +1474,34 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         }
       };
 
-      // Randomly select one topic from Section A and one from Section B
-      const periodTopicKeys = Object.keys(periodStudyTopics);
-      const depthTopicKeys = Object.keys(depthStudyTopics);
+      // Add ALL questions from ALL topics with topic labels
+      let questionCounter = 1;
       
-      const selectedPeriodTopic = periodTopicKeys[Math.floor(Math.random() * periodTopicKeys.length)];
-      const selectedDepthTopic = depthTopicKeys[Math.floor(Math.random() * depthTopicKeys.length)];
+      // Add ALL Section A questions (4 questions × 4 topics = 16 questions)
+      Object.entries(periodStudyTopics).forEach(([topicKey, topic]) => {
+        topic.questions.forEach(q => {
+          questions.push({
+            ...q,
+            id: `${topicKey}-${q.id}`,
+            questionNumber: questionCounter++,
+            text: `**Topic: ${topic.name}**\n\n${q.text}`,
+            section: 'A'
+          });
+        });
+      });
       
-      // Add Section A questions
-      questions.push(...periodStudyTopics[selectedPeriodTopic].questions);
-      
-      // Add Section B questions  
-      questions.push(...depthStudyTopics[selectedDepthTopic].questions);
+      // Add ALL Section B questions (5 questions × 5 topics = 25 questions)  
+      Object.entries(depthStudyTopics).forEach(([topicKey, topic]) => {
+        topic.questions.forEach(q => {
+          questions.push({
+            ...q,
+            id: `${topicKey}-${q.id}`,
+            questionNumber: questionCounter++,
+            text: `**Topic: ${topic.name}**\n\n${q.text}`,
+            section: 'B'
+          });
+        });
+      });
       
       return questions;
     }
