@@ -1490,14 +1490,14 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         });
       });
       
-      // Add ALL Section B questions (5 questions × 5 topics = 25 questions) - with topic labels
+      // Add ALL Section B questions (5 questions × 5 topics = 25 questions) - no topic labels, just badges
       Object.entries(depthStudyTopics).forEach(([topicKey, topic]) => {
         topic.questions.forEach(q => {
           questions.push({
             ...q,
             id: `${topicKey}-${q.id}`,
             questionNumber: questionCounter++,
-            text: `**Topic: ${topic.name}**\n\n${q.text}`,
+            text: q.text,
             section: 'B'
           });
         });
