@@ -1391,14 +1391,14 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         {
           id: 'physics-ext-1',
           questionNumber: questionNumber++,
-          text: 'Compare the advantages and disadvantages of wind and nuclear power stations for electricity generation.\n\nIn your answer, you should consider:\n• Environmental impact\n• Reliability\n• Cost factors\n• Energy output\n\nWrite your answer in continuous prose.\n\n[6 marks]',
+          text: 'Compare the advantages and disadvantages of wind and nuclear power stations for electricity generation.\n\nIn your answer, you should consider:\n• Environmental impact\n• Reliability\n• Cost factors\n• Energy output\n\n[6 marks]',
           marks: 6,
           section: 'C'
         },
         {
           id: 'physics-ext-2',
           questionNumber: questionNumber++,
-          text: 'Explain how energy is transferred and wasted in the home, and suggest ways to improve energy efficiency.\n\nIn your answer, you should consider:\n• Different forms of energy transfer\n• How energy is wasted\n• Methods to reduce energy waste\n• The importance of insulation\n\nWrite your answer in continuous prose.\n\n[6 marks]',
+          text: 'Explain how energy is transferred and wasted in the home, and suggest ways to improve energy efficiency.\n\nIn your answer, you should consider:\n• Different forms of energy transfer\n• How energy is wasted\n• Methods to reduce energy waste\n• The importance of insulation\n\n[6 marks]',
           marks: 6,
           section: 'C'
         }
