@@ -1415,159 +1415,339 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return questions;
     }
     
-    // Special format for Geography - AQA GCSE Paper 1 (88 marks total including 3 SPaG)
+    // Special format for Geography - AQA GCSE (88 marks total including 3 SPaG)
     if (subjectId === 'geography') {
+      // Randomly select Paper 1 or Paper 2
+      const geographyPaper = Math.random() < 0.5 ? 'paper1' : 'paper2';
       let questionNumber = 1;
       
-      // Section A: The Challenge of Natural Hazards (30 marks)
-      const sectionAQuestions = [
-        {
-          id: 'geo-a-mc-1',
-          questionNumber: questionNumber++,
-          text: 'Which of the following is an example of a primary effect of an earthquake?\n\nA. Disease outbreak\nB. Economic recession\nC. Building collapse\nD. Homelessness\n\n[1 mark]',
-          marks: 1,
-          section: 'A'
-        },
-        {
-          id: 'geo-a-sr-1',
-          questionNumber: questionNumber++,
-          text: 'What is meant by a natural hazard?\n\n[2 marks]',
-          marks: 2,
-          section: 'A'
-        },
-        {
-          id: 'geo-a-sr-2',
-          questionNumber: questionNumber++,
-          text: 'Give one reason why people live in areas at risk from volcanoes.\n\n[1 mark]',
-          marks: 1,
-          section: 'A'
-        },
-        {
-          id: 'geo-a-str-1',
-          questionNumber: questionNumber++,
-          text: 'Explain how monitoring and prediction can reduce the risk from tectonic hazards.\n\n[4 marks]',
-          marks: 4,
-          section: 'A'
-        },
-        {
-          id: 'geo-a-str-2',
-          questionNumber: questionNumber++,
-          text: 'Using an example, explain the primary and secondary effects of a tropical storm.\n\n[6 marks]',
-          marks: 6,
-          section: 'A'
-        },
-        {
-          id: 'geo-a-ext-1',
-          questionNumber: questionNumber++,
-          text: '"The effects of tropical storms are always more serious in LICs than HICs." To what extent do you agree?\n\n[9 marks]',
-          marks: 9,
-          section: 'A'
-        },
-        {
-          id: 'geo-a-str-3',
-          questionNumber: questionNumber++,
-          text: 'Explain the likely effects of climate change on people and the environment.\n\n[6 marks]',
-          marks: 6,
-          section: 'A'
-        }
-      ];
+      if (geographyPaper === 'paper1') {
+        // Paper 1: Living with the Physical Environment
+        
+        // Section A: The Challenge of Natural Hazards (30 marks)
+        const sectionAQuestions = [
+          {
+            id: 'geo-a-mc-1',
+            questionNumber: questionNumber++,
+            text: 'Which of the following is an example of a secondary effect of an earthquake?\n\nA. Buildings collapse\nB. Fires break out\nC. Ground shaking\nD. Fault movement\n\n[1 mark]',
+            marks: 1,
+            section: 'A'
+          },
+          {
+            id: 'geo-a-sr-1',
+            questionNumber: questionNumber++,
+            text: 'What is meant by a natural hazard?\n\n[2 marks]',
+            marks: 2,
+            section: 'A'
+          },
+          {
+            id: 'geo-a-sr-2',
+            questionNumber: questionNumber++,
+            text: 'Give one reason why people live in areas at risk from volcanoes.\n\n[1 mark]',
+            marks: 1,
+            section: 'A'
+          },
+          {
+            id: 'geo-a-str-1',
+            questionNumber: questionNumber++,
+            text: 'Explain how monitoring and prediction can reduce the risk from tectonic hazards.\n\n[4 marks]',
+            marks: 4,
+            section: 'A'
+          },
+          {
+            id: 'geo-a-str-2',
+            questionNumber: questionNumber++,
+            text: 'Using an example, explain the primary and secondary effects of a tropical storm.\n\n[6 marks]',
+            marks: 6,
+            section: 'A'
+          },
+          {
+            id: 'geo-a-ext-1',
+            questionNumber: questionNumber++,
+            text: '"The effects of tropical storms are always more serious in LICs than HICs." To what extent do you agree?\n\n[9 marks]',
+            marks: 9,
+            section: 'A'
+          },
+          {
+            id: 'geo-a-str-3',
+            questionNumber: questionNumber++,
+            text: 'Explain the likely effects of climate change on people and the environment.\n\n[6 marks]',
+            marks: 6,
+            section: 'A'
+          }
+        ];
 
-      // Section B: The Living World (30 marks)
-      const sectionBQuestions = [
-        {
-          id: 'geo-b-sr-1',
-          questionNumber: questionNumber++,
-          text: 'What is meant by the term "ecosystem"?\n\n[2 marks]',
-          marks: 2,
-          section: 'B'
-        },
-        {
-          id: 'geo-b-sr-2',
-          questionNumber: questionNumber++,
-          text: 'Name one producer and one consumer in a small-scale UK ecosystem.\n\n[2 marks]',
-          marks: 2,
-          section: 'B'
-        },
-        {
-          id: 'geo-b-str-1',
-          questionNumber: questionNumber++,
-          text: 'Explain the causes of deforestation in tropical rainforests.\n\n[4 marks]',
-          marks: 4,
-          section: 'B'
-        },
-        {
-          id: 'geo-b-str-2',
-          questionNumber: questionNumber++,
-          text: 'Using a case study, explain how tropical rainforests are being managed sustainably.\n\n[6 marks]',
-          marks: 6,
-          section: 'B'
-        },
-        {
-          id: 'geo-b-str-3',
-          questionNumber: questionNumber++,
-          text: 'Explain how plants and animals adapt to hot desert environments.\n\n[6 marks]',
-          marks: 6,
-          section: 'B'
-        },
-        {
-          id: 'geo-b-ext-1',
-          questionNumber: questionNumber++,
-          text: '"Deforestation in tropical rainforests can never be justified." To what extent do you agree?\n\n[9 marks]',
-          marks: 9,
-          section: 'B'
-        }
-      ];
+        // Section B: The Living World (30 marks)
+        const sectionBQuestions = [
+          {
+            id: 'geo-b-sr-1',
+            questionNumber: questionNumber++,
+            text: 'What is meant by the term "ecosystem"?\n\n[2 marks]',
+            marks: 2,
+            section: 'B'
+          },
+          {
+            id: 'geo-b-sr-2',
+            questionNumber: questionNumber++,
+            text: 'Name one producer and one consumer in a small-scale UK ecosystem.\n\n[2 marks]',
+            marks: 2,
+            section: 'B'
+          },
+          {
+            id: 'geo-b-str-1',
+            questionNumber: questionNumber++,
+            text: 'Explain the causes of deforestation in tropical rainforests.\n\n[4 marks]',
+            marks: 4,
+            section: 'B'
+          },
+          {
+            id: 'geo-b-str-2',
+            questionNumber: questionNumber++,
+            text: 'Using a case study, explain how tropical rainforests are being managed sustainably.\n\n[6 marks]',
+            marks: 6,
+            section: 'B'
+          },
+          {
+            id: 'geo-b-str-3',
+            questionNumber: questionNumber++,
+            text: 'Explain how plants and animals adapt to hot desert environments.\n\n[6 marks]',
+            marks: 6,
+            section: 'B'
+          },
+          {
+            id: 'geo-b-ext-1',
+            questionNumber: questionNumber++,
+            text: '"Deforestation in tropical rainforests can never be justified." To what extent do you agree?\n\n[9 marks]',
+            marks: 9,
+            section: 'B'
+          }
+        ];
 
-      // Section C: Physical Landscapes in the UK (25 marks + 3 SPaG)
-      const sectionCQuestions = [
-        {
-          id: 'geo-c-mc-1',
-          questionNumber: questionNumber++,
-          text: 'Which process of river erosion involves material scraping along the riverbed?\n\nA. Hydraulic action\nB. Abrasion\nC. Attrition\nD. Solution\n\n[1 mark]',
-          marks: 1,
-          section: 'C'
-        },
-        {
-          id: 'geo-c-sr-1',
-          questionNumber: questionNumber++,
-          text: 'What is meant by longshore drift?\n\n[2 marks]',
-          marks: 2,
-          section: 'C'
-        },
-        {
-          id: 'geo-c-sr-2',
-          questionNumber: questionNumber++,
-          text: 'Identify one landform created by coastal deposition.\n\n[1 mark]',
-          marks: 1,
-          section: 'C'
-        },
-        {
-          id: 'geo-c-str-1',
-          questionNumber: questionNumber++,
-          text: 'Explain the formation of a waterfall.\n\n[4 marks]',
-          marks: 4,
-          section: 'C'
-        },
-        {
-          id: 'geo-c-str-2',
-          questionNumber: questionNumber++,
-          text: 'Using a case study, explain the effects of coastal management strategies.\n\n[6 marks]',
-          marks: 6,
-          section: 'C'
-        },
-        {
-          id: 'geo-c-ext-1',
-          questionNumber: questionNumber++,
-          text: '"Hard engineering is the most effective way to reduce the risk of river flooding." To what extent do you agree?\n\n[9 marks + 3 marks for SPaG]',
-          marks: 12,
-          section: 'C'
-        }
-      ];
+        // Section C: Physical Landscapes in the UK (28 marks + 3 SPaG)
+        const sectionCQuestions = [
+          {
+            id: 'geo-c-mc-1',
+            questionNumber: questionNumber++,
+            text: 'Which process of river erosion involves material scraping along the riverbed?\n\nA. Hydraulic action\nB. Abrasion\nC. Attrition\nD. Solution\n\n[1 mark]',
+            marks: 1,
+            section: 'C'
+          },
+          {
+            id: 'geo-c-sr-1',
+            questionNumber: questionNumber++,
+            text: 'What is meant by longshore drift?\n\n[2 marks]',
+            marks: 2,
+            section: 'C'
+          },
+          {
+            id: 'geo-c-sr-2',
+            questionNumber: questionNumber++,
+            text: 'Identify one landform created by coastal deposition.\n\n[1 mark]',
+            marks: 1,
+            section: 'C'
+          },
+          {
+            id: 'geo-c-str-1',
+            questionNumber: questionNumber++,
+            text: 'Explain the formation of a waterfall.\n\n[4 marks]',
+            marks: 4,
+            section: 'C'
+          },
+          {
+            id: 'geo-c-str-2',
+            questionNumber: questionNumber++,
+            text: 'Explain how human activities can affect flood risk.\n\n[6 marks]',
+            marks: 6,
+            section: 'C'
+          },
+          {
+            id: 'geo-c-str-3',
+            questionNumber: questionNumber++,
+            text: 'Using a case study, explain the effects of coastal management strategies.\n\n[6 marks]',
+            marks: 6,
+            section: 'C'
+          },
+          {
+            id: 'geo-c-ext-1',
+            questionNumber: questionNumber++,
+            text: '"Hard engineering is the most effective way to reduce the risk of river flooding." To what extent do you agree?\n\n[9 marks + 3 marks for SPaG]',
+            marks: 12,
+            section: 'C'
+          }
+        ];
 
-      // Combine all sections (Total: 17 questions, 88 marks including 3 SPaG)
-      questions.push(...sectionAQuestions); // 30 marks
-      questions.push(...sectionBQuestions); // 29 marks  
-      questions.push(...sectionCQuestions); // 29 marks (26 + 3 SPaG)
+        // Combine all sections (Total: 17 questions, 88 marks including 3 SPaG)
+        questions.push(...sectionAQuestions); // 30 marks
+        questions.push(...sectionBQuestions); // 29 marks  
+        questions.push(...sectionCQuestions); // 29 marks (26 + 3 SPaG)
+
+      } else {
+        // Paper 2: Challenges in the Human Environment
+        
+        // Section A: Urban Issues and Challenges (30 marks)
+        const sectionAQuestions = [
+          {
+            id: 'geo-p2-a-sr-1',
+            questionNumber: questionNumber++,
+            text: 'Define "urbanisation".\n\n[2 marks]',
+            marks: 2,
+            section: 'A'
+          },
+          {
+            id: 'geo-p2-a-sr-2',
+            questionNumber: questionNumber++,
+            text: 'Give one reason for the growth of megacities.\n\n[1 mark]',
+            marks: 1,
+            section: 'A'
+          },
+          {
+            id: 'geo-p2-a-sr-3',
+            questionNumber: questionNumber++,
+            text: 'Name one problem caused by rapid urban growth in an LIC/NEE city.\n\n[1 mark]',
+            marks: 1,
+            section: 'A'
+          },
+          {
+            id: 'geo-p2-a-str-1',
+            questionNumber: questionNumber++,
+            text: 'Explain two causes of urbanisation.\n\n[4 marks]',
+            marks: 4,
+            section: 'A'
+          },
+          {
+            id: 'geo-p2-a-str-2',
+            questionNumber: questionNumber++,
+            text: 'Using an example of an LIC/NEE city, explain the challenges created by rapid urban growth.\n\n[6 marks]',
+            marks: 6,
+            section: 'A'
+          },
+          {
+            id: 'geo-p2-a-str-3',
+            questionNumber: questionNumber++,
+            text: 'Explain how urban transport strategies can reduce traffic congestion in a UK city.\n\n[6 marks]',
+            marks: 6,
+            section: 'A'
+          },
+          {
+            id: 'geo-p2-a-ext-1',
+            questionNumber: questionNumber++,
+            text: '"Urban planning in LICs and NEEs is more about solving social problems than economic ones." To what extent do you agree?\n\n[9 marks]',
+            marks: 9,
+            section: 'A'
+          }
+        ];
+
+        // Section B: The Changing Economic World (30 marks)
+        const sectionBQuestions = [
+          {
+            id: 'geo-p2-b-sr-1',
+            questionNumber: questionNumber++,
+            text: 'Define "development gap".\n\n[2 marks]',
+            marks: 2,
+            section: 'B'
+          },
+          {
+            id: 'geo-p2-b-sr-2',
+            questionNumber: questionNumber++,
+            text: 'Give one indicator of development.\n\n[1 mark]',
+            marks: 1,
+            section: 'B'
+          },
+          {
+            id: 'geo-p2-b-sr-3',
+            questionNumber: questionNumber++,
+            text: 'What is meant by "fair trade"?\n\n[2 marks]',
+            marks: 2,
+            section: 'B'
+          },
+          {
+            id: 'geo-p2-b-str-1',
+            questionNumber: questionNumber++,
+            text: 'Explain two causes of uneven development.\n\n[4 marks]',
+            marks: 4,
+            section: 'B'
+          },
+          {
+            id: 'geo-p2-b-str-2',
+            questionNumber: questionNumber++,
+            text: 'Using an example of an LIC/NEE, explain how industrial development can help reduce the development gap.\n\n[6 marks]',
+            marks: 6,
+            section: 'B'
+          },
+          {
+            id: 'geo-p2-b-str-3',
+            questionNumber: questionNumber++,
+            text: 'Explain how international aid can reduce the development gap.\n\n[6 marks]',
+            marks: 6,
+            section: 'B'
+          },
+          {
+            id: 'geo-p2-b-ext-1',
+            questionNumber: questionNumber++,
+            text: '"Economic development always leads to improvements in people\'s quality of life." To what extent do you agree?\n\n[9 marks]',
+            marks: 9,
+            section: 'B'
+          }
+        ];
+
+        // Section C: The Challenge of Resource Management (28 marks + 3 SPaG)
+        const sectionCQuestions = [
+          {
+            id: 'geo-p2-c-sr-1',
+            questionNumber: questionNumber++,
+            text: 'Define "resource".\n\n[1 mark]',
+            marks: 1,
+            section: 'C'
+          },
+          {
+            id: 'geo-p2-c-sr-2',
+            questionNumber: questionNumber++,
+            text: 'Identify one reason why food consumption is increasing globally.\n\n[1 mark]',
+            marks: 1,
+            section: 'C'
+          },
+          {
+            id: 'geo-p2-c-sr-3',
+            questionNumber: questionNumber++,
+            text: 'What is meant by "energy security"?\n\n[2 marks]',
+            marks: 2,
+            section: 'C'
+          },
+          {
+            id: 'geo-p2-c-str-1',
+            questionNumber: questionNumber++,
+            text: 'Explain why water insecurity is increasing in some parts of the world.\n\n[4 marks]',
+            marks: 4,
+            section: 'C'
+          },
+          {
+            id: 'geo-p2-c-str-2',
+            questionNumber: questionNumber++,
+            text: 'Explain how energy supply in the UK is changing.\n\n[6 marks]',
+            marks: 6,
+            section: 'C'
+          },
+          {
+            id: 'geo-p2-c-str-3',
+            questionNumber: questionNumber++,
+            text: 'Using an example, explain how food security can be improved.\n\n[6 marks]',
+            marks: 6,
+            section: 'C'
+          },
+          {
+            id: 'geo-p2-c-ext-1',
+            questionNumber: questionNumber++,
+            text: '"Increasing energy supply is more important than reducing energy demand." To what extent do you agree?\n\n[9 marks + 3 marks for SPaG]',
+            marks: 12,
+            section: 'C'
+          }
+        ];
+
+        // Combine all sections (Total: 21 questions, 88 marks including 3 SPaG)
+        questions.push(...sectionAQuestions); // 29 marks
+        questions.push(...sectionBQuestions); // 30 marks  
+        questions.push(...sectionCQuestions); // 29 marks (26 + 3 SPaG)
+      }
 
       console.log('Geography questions generated:', questions.length);
       return questions;
