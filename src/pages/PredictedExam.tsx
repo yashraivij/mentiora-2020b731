@@ -1415,6 +1415,205 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return questions;
     }
     
+    // Special format for AQA Maths Paper 1 - Non-Calculator (80 marks total)
+    if (subjectId === 'mathematics-paper-1') {
+      let questionNumber = 1;
+      
+      // Paper 1: 1hr 30min, 80 marks, No Calculator
+      // Distribution: ~20 marks (1-2 mark questions), ~35 marks (3-4 mark questions), ~25 marks (5-6 mark questions)
+      
+      const questions = [
+        // 1-2 Mark Quick Recall Questions (~20 marks total)
+        {
+          id: 'math-p1-q1',
+          questionNumber: questionNumber++,
+          text: 'Simplify 36/48\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'math-p1-q2', 
+          questionNumber: questionNumber++,
+          text: 'Write 0.375 as a fraction in simplest form.\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'math-p1-q3',
+          questionNumber: questionNumber++,
+          text: 'Find the HCF of 48 and 72.\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'math-p1-q4',
+          questionNumber: questionNumber++,
+          text: 'Simplify 5x + 7x - 3\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'math-p1-q5',
+          questionNumber: questionNumber++,
+          text: 'Expand (x + 4)(x - 2)\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'math-p1-q6',
+          questionNumber: questionNumber++,
+          text: 'Factorise x² + 7x + 12\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'math-p1-q7',
+          questionNumber: questionNumber++,
+          text: 'Simplify the ratio 40:50\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'math-p1-q8',
+          questionNumber: questionNumber++,
+          text: 'Write 300 g as a fraction of 1.5 kg.\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'math-p1-q9',
+          questionNumber: questionNumber++,
+          text: 'Name the type of triangle with sides 5 cm, 5 cm, 8 cm.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'math-p1-q10',
+          questionNumber: questionNumber++,
+          text: 'Find the area of a rectangle 7 cm by 4 cm.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'math-p1-q11',
+          questionNumber: questionNumber++,
+          text: 'Work out the volume of a cube of side 6 cm.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'math-p1-q12',
+          questionNumber: questionNumber++,
+          text: 'A fair coin is tossed. What is the probability of getting a head?\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'math-p1-q13',
+          questionNumber: questionNumber++,
+          text: 'Write down the mode of these numbers: 4, 7, 7, 9, 10\n\n[1 mark]',
+          marks: 1
+        },
+        
+        // 3-4 Mark Structured Questions (~35 marks total)
+        {
+          id: 'math-p1-q14',
+          questionNumber: questionNumber++,
+          text: 'A train ticket costs £7.20. It increases by 15%. Work out the new price.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'math-p1-q15',
+          questionNumber: questionNumber++,
+          text: 'Work out 8.5² - 3.5²\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'math-p1-q16',
+          questionNumber: questionNumber++,
+          text: 'Share £840 in the ratio 2:3:5.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'math-p1-q17',
+          questionNumber: questionNumber++,
+          text: 'Solve 3x + 7 = 19\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'math-p1-q18',
+          questionNumber: questionNumber++,
+          text: 'Solve simultaneously:\n2x + y = 10\nx - y = 1\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'math-p1-q19',
+          questionNumber: questionNumber++,
+          text: 'Rearrange the formula A = ½bh to make h the subject.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'math-p1-q20',
+          questionNumber: questionNumber++,
+          text: 'In a class, the ratio of boys to girls is 3:5. There are 32 students. Work out how many are boys.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'math-p1-q21',
+          questionNumber: questionNumber++,
+          text: 'A recipe for 12 cookies uses 300 g of flour. Work out how much flour is needed for 18 cookies.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'math-p1-q22',
+          questionNumber: questionNumber++,
+          text: 'A car travels 180 km in 3 hours. Find the average speed.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'math-p1-q23',
+          questionNumber: questionNumber++,
+          text: 'The interior angle of a regular polygon is 150°. Find the number of sides.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'math-p1-q24',
+          questionNumber: questionNumber++,
+          text: 'A ladder 5 m long rests against a wall. The bottom is 1.2 m from the wall. How high up the wall does it reach?\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'math-p1-q25',
+          questionNumber: questionNumber++,
+          text: 'A bag contains 3 red and 7 blue counters. Write down the probability of picking a red counter.\n\n[1 mark]\n\nA spinner has equal sections numbered 1 to 5. Find the probability of getting an even number.\n\n[2 marks]',
+          marks: 3
+        },
+
+        // 5-6 Mark Problem Solving Questions (~25 marks total)
+        {
+          id: 'math-p1-q26',
+          questionNumber: questionNumber++,
+          text: 'A phone costs £300. In a sale it is reduced by 20%. In the following year it increases by 15%. What is the final price?\n\n[5 marks]',
+          marks: 5
+        },
+        {
+          id: 'math-p1-q27',
+          questionNumber: questionNumber++,
+          text: 'The nth term of a sequence is 3n - 2. Write the first 4 terms.\n\nShow that the difference between the squares of two consecutive integers is always odd.\n\n[5 marks]',
+          marks: 5
+        },
+        {
+          id: 'math-p1-q28',
+          questionNumber: questionNumber++,
+          text: 'Solve 2x² - 5x - 3 = 0\n\n[5 marks]',
+          marks: 5
+        },
+        {
+          id: 'math-p1-q29',
+          questionNumber: questionNumber++,
+          text: '£60 is shared between A and B in the ratio 5:7. A then gives £6 to B. Find the new ratio of A\'s money to B\'s money.\n\n[5 marks]',
+          marks: 5
+        },
+        {
+          id: 'math-p1-q30',
+          questionNumber: questionNumber++,
+          text: 'The value of a car decreases by 15% each year. Initially, it costs £12,000. Work out its value after 3 years.\n\n[5 marks]',
+          marks: 5
+        }
+      ];
+      
+      console.log('AQA Maths Paper 1 questions generated:', questions.length);
+      return questions;
+    }
+
     // Special format for Geography - AQA GCSE (88 marks total including 3 SPaG)
     if (subjectId === 'geography') {
       // Geography Paper 1
@@ -2588,6 +2787,7 @@ Write a story about a moment of fear.
       biology: 135, // 2h 15min  
       physics: 135, // 2h 15min
       mathematics: 120, // 2h
+      "mathematics-paper-1": 90, // 1h 30min (AQA Maths Paper 1 Non-Calculator)
       "english-language": 135, // 2h 15min
       "english-literature": 150, // 2h 30min
       history: 120, // 2h
@@ -2858,7 +3058,7 @@ Write a story about a moment of fear.
               <div className="flex items-center justify-center space-x-3 mb-4">
                 <Crown className="h-8 w-8 text-amber-500" />
                 <div>
-                  <CardTitle className="text-2xl font-bold">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : `${subject.name} Predicted Exam`}</CardTitle>
+                  <CardTitle className="text-2xl font-bold">{subjectId === 'history' ? 'History Paper 1' : subjectId === 'religious-studies' ? 'Religious Studies Component 1' : subjectId === 'mathematics-paper-1' ? 'AQA Maths Paper 1 (Non-Calculator)' : `${subject.name} Predicted Exam`}</CardTitle>
                   <CardDescription>{getBadgeText(subjectId || '')} • {getExamDuration()} minutes</CardDescription>
                 </div>
               </div>
@@ -2938,13 +3138,14 @@ Write a story about a moment of fear.
             <div className="flex items-center space-x-4">
               <Crown className="h-6 w-6 text-amber-500" />
               <div>
-                <h1 className="text-lg font-bold text-foreground">
-                  {subjectId === 'history' ? 'History Paper 1' : 
-                   subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
-                   subjectId === 'geography' ? `Geography ${geographyPaperType}` : 
-                   subjectId === 'geography-paper-2' ? 'Geography Paper 2' :
-                   `${subject.name} Predicted Exam`}
-                </h1>
+                 <h1 className="text-lg font-bold text-foreground">
+                   {subjectId === 'history' ? 'History Paper 1' : 
+                    subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
+                    subjectId === 'geography' ? `Geography ${geographyPaperType}` : 
+                    subjectId === 'geography-paper-2' ? 'Geography Paper 2' :
+                    subjectId === 'mathematics-paper-1' ? 'AQA Maths Paper 1 (Non-Calculator)' :
+                    `${subject.name} Predicted Exam`}
+                 </h1>
                 <p className="text-sm text-muted-foreground">Question {currentQuestion + 1} of {examQuestions.length}</p>
               </div>
             </div>
