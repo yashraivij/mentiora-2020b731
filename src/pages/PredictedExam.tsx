@@ -1626,6 +1626,224 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return questions;
     }
 
+    // AQA Biology Paper 1 format
+    if (subjectId === 'biology') {
+      let questionNumber = 1;
+      
+      const questions = [
+        // Multiple Choice Questions (~10 marks)
+        {
+          id: 'bio-p1-q1',
+          questionNumber: questionNumber++,
+          text: 'Which of the following is NOT found in a plant cell?\nA) Cell wall\nB) Chloroplasts\nC) Centrioles\nD) Vacuole\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'bio-p1-q2',
+          questionNumber: questionNumber++,
+          text: 'What is the main function of mitochondria?\nA) Protein synthesis\nB) Photosynthesis\nC) Respiration\nD) DNA storage\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'bio-p1-q3',
+          questionNumber: questionNumber++,
+          text: 'Which blood vessel carries oxygenated blood from the lungs to the heart?\nA) Pulmonary artery\nB) Pulmonary vein\nC) Vena cava\nD) Aorta\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'bio-p1-q4',
+          questionNumber: questionNumber++,
+          text: 'What type of pathogen causes malaria?\nA) Bacteria\nB) Virus\nC) Fungus\nD) Protist\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'bio-p1-q5',
+          questionNumber: questionNumber++,
+          text: 'Which gas is produced during photosynthesis?\nA) Carbon dioxide\nB) Oxygen\nC) Nitrogen\nD) Hydrogen\n\n[1 mark]',
+          marks: 1
+        },
+
+        // Short Factual Recall (1-2 marks) - Cell Biology
+        {
+          id: 'bio-p1-q6',
+          questionNumber: questionNumber++,
+          text: 'Name the parts of a plant cell that are not found in an animal cell.\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'bio-p1-q7',
+          questionNumber: questionNumber++,
+          text: 'Define diffusion.\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'bio-p1-q8',
+          questionNumber: questionNumber++,
+          text: 'What is the function of the ribosomes?\n\n[1 mark]',
+          marks: 1
+        },
+
+        // Short Factual Recall - Organisation
+        {
+          id: 'bio-p1-q9',
+          questionNumber: questionNumber++,
+          text: 'Name the four main components of blood.\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'bio-p1-q10',
+          questionNumber: questionNumber++,
+          text: 'What is the function of the alveoli in the lungs?\n\n[1 mark]',
+          marks: 1
+        },
+
+        // Short Factual Recall - Infection and Response
+        {
+          id: 'bio-p1-q11',
+          questionNumber: questionNumber++,
+          text: 'Name the three main types of pathogen.\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'bio-p1-q12',
+          questionNumber: questionNumber++,
+          text: 'Give one way white blood cells help defend the body.\n\n[1 mark]',
+          marks: 1
+        },
+
+        // Short Factual Recall - Bioenergetics
+        {
+          id: 'bio-p1-q13',
+          questionNumber: questionNumber++,
+          text: 'Write the word equation for photosynthesis.\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'bio-p1-q14',
+          questionNumber: questionNumber++,
+          text: 'What is the role of chlorophyll?\n\n[1 mark]',
+          marks: 1
+        },
+
+        // Structured Questions (3-4 marks) - Cell Biology
+        {
+          id: 'bio-p1-q15',
+          questionNumber: questionNumber++,
+          text: 'Explain how the structure of a root hair cell is adapted to its function.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'bio-p1-q16',
+          questionNumber: questionNumber++,
+          text: 'A cell has an actual diameter of 0.05 mm. Under a microscope, the image diameter is 25 mm. Calculate the magnification.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'bio-p1-q17',
+          questionNumber: questionNumber++,
+          text: 'Describe the process of mitosis and explain why it is important.\n\n[4 marks]',
+          marks: 4
+        },
+
+        // Structured Questions - Organisation
+        {
+          id: 'bio-p1-q18',
+          questionNumber: questionNumber++,
+          text: 'Explain how the small intestine is adapted for absorption.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'bio-p1-q19',
+          questionNumber: questionNumber++,
+          text: 'Describe how the heart pumps blood around the body.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'bio-p1-q20',
+          questionNumber: questionNumber++,
+          text: 'Explain the effect of coronary heart disease on the heart.\n\n[3 marks]',
+          marks: 3
+        },
+
+        // Structured Questions - Infection and Response
+        {
+          id: 'bio-p1-q21',
+          questionNumber: questionNumber++,
+          text: 'Describe how painkillers and antibiotics differ in their effects on the body.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'bio-p1-q22',
+          questionNumber: questionNumber++,
+          text: 'Explain how vaccination helps protect against disease.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'bio-p1-q23',
+          questionNumber: questionNumber++,
+          text: 'Give two reasons why new drugs are tested and trialled before use.\n\n[3 marks]',
+          marks: 3
+        },
+
+        // Structured Questions - Bioenergetics
+        {
+          id: 'bio-p1-q24',
+          questionNumber: questionNumber++,
+          text: 'Describe how light intensity affects the rate of photosynthesis. Include a explanation of limiting factors.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'bio-p1-q25',
+          questionNumber: questionNumber++,
+          text: 'Explain how oxygen debt builds up during exercise.\n\n[3 marks]',
+          marks: 3
+        },
+
+        // Required Practical/Application Questions (~20 marks)
+        {
+          id: 'bio-p1-q26',
+          questionNumber: questionNumber++,
+          text: 'A student investigated the effect of sugar concentration on osmosis in plant cells.\n\nDescribe how you would carry out this investigation to obtain valid results.\n\nInclude:\n- The apparatus you would use\n- The measurements you would take\n- How you would ensure the results are reliable\n\n[5 marks]',
+          marks: 5
+        },
+        {
+          id: 'bio-p1-q27',
+          questionNumber: questionNumber++,
+          text: 'The table shows the number of bacteria in a culture over time:\n\nTime (hours) | Number of bacteria\n0           | 100\n2           | 200\n4           | 400\n6           | 800\n\nCalculate the mean rate of reproduction between 0 and 6 hours.\nShow your working.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'bio-p1-q28',
+          questionNumber: questionNumber++,
+          text: 'A student used a microscope to observe plant cells. Describe how to prepare a slide to observe onion cells and calculate the actual size of a cell.\n\n[4 marks]',
+          marks: 4
+        },
+
+        // Extended Response Questions (6 marks each)
+        {
+          id: 'bio-p1-q29',
+          questionNumber: questionNumber++,
+          text: 'Compare the processes of diffusion, osmosis, and active transport.\n\nIn your answer, explain:\n- How each process works\n- When each process is used in living organisms\n- The factors that affect the rate of each process\n\n[6 marks]',
+          marks: 6
+        },
+        {
+          id: 'bio-p1-q30',
+          questionNumber: questionNumber++,
+          text: 'Evaluate the use of vaccinations in controlling disease outbreaks.\n\nIn your answer, consider:\n- How vaccines work to prevent disease\n- The advantages of vaccination programmes\n- Potential concerns about vaccination\n- The concept of herd immunity\n\n[6 marks]',
+          marks: 6
+        },
+        {
+          id: 'bio-p1-q31',
+          questionNumber: questionNumber++,
+          text: 'Compare aerobic and anaerobic respiration in humans and plants.\n\nIn your answer, explain:\n- The word equations for each type of respiration\n- When each type occurs\n- The differences in energy release\n- The importance of each type to organisms\n\n[6 marks]',
+          marks: 6
+        }
+      ];
+      
+      console.log('AQA Biology Paper 1 questions generated:', questions.length);
+      return questions;
+    }
+
     // Special format for Geography - AQA GCSE (88 marks total including 3 SPaG)
     if (subjectId === 'geography') {
       // Geography Paper 1
@@ -2796,7 +3014,7 @@ Write a story about a moment of fear.
   const getExamDuration = () => {
     const durations = {
       chemistry: 135, // 2h 15min
-      biology: 135, // 2h 15min  
+      biology: 105, // 1h 45min (AQA Biology Paper 1)
       physics: 135, // 2h 15min
       mathematics: 120, // 2h
       "mathematics-paper-1": 90, // 1h 30min (AQA Maths Paper 1 Non-Calculator)
@@ -2821,6 +3039,12 @@ Write a story about a moment of fear.
     }
     if (subjectId === 'english-literature') {
       return 60; // Two questions at 30 marks each
+    }
+    if (subjectId === 'biology') {
+      return 100; // AQA Biology Paper 1: 100 marks
+    }
+    if (subjectId === 'maths') {
+      return 80; // AQA Maths Paper 1: 80 marks
     }
     if (subjectId === 'physics') {
       return 100; // 8 MC (8) + 20 SS (47) + 6 LS (33) + 2 Ext (12) = 100 marks
