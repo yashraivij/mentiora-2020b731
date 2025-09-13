@@ -63,6 +63,7 @@ import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotificatio
 import { StreakCelebration } from "@/components/ui/streak-celebration";
 import { GradeCelebration } from "@/components/ui/grade-celebration";
 import { DiscordInvitation } from "@/components/ui/discord-invitation";
+import { WelcomePopup } from "@/components/ui/welcome-popup";
 
 import { PublicStreakProfiles } from "@/components/dashboard/PublicStreakProfiles";
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
@@ -106,6 +107,7 @@ const Dashboard = () => {
   const [celebrationGrade, setCelebrationGrade] = useState("");
   const [celebrationSubject, setCelebrationSubject] = useState("");
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
+  const [showWelcomePopup, setShowWelcomePopup] = useState(false);
   const [showPromoModal, setShowPromoModal] = useState(false);
   const [loading, setLoading] = useState(false); // This tracks if the page is loading
   const [refreshKey, setRefreshKey] = useState(0); // For triggering re-renders after subscription changes
@@ -352,6 +354,46 @@ const Dashboard = () => {
     }
   };
 
+  // Check if new user should see welcome popup
+  const checkForWelcomePopup = async () => {
+    if (!user?.id) return;
+
+    // Check if user has already seen the welcome popup
+    const hasSeenWelcome = localStorage.getItem(`welcome_popup_shown_${user.id}`);
+    if (hasSeenWelcome) return;
+
+    // Check if user has any activity (practice attempts or exam completions)
+    const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
+    let hasProgress = false;
+
+    if (savedProgress) {
+      const progress = JSON.parse(savedProgress);
+      hasProgress = progress.some((p: UserProgress) => p.attempts > 0);
+    }
+
+    // Check for exam completions
+    try {
+      const { data: examCompletions, error } = await supabase
+        .from("predicted_exam_completions")
+        .select("id")
+        .eq("user_id", user.id)
+        .limit(1);
+
+      if (!error && examCompletions && examCompletions.length > 0) {
+        hasProgress = true;
+      }
+    } catch (error) {
+      console.error("Error checking exam completions for welcome:", error);
+    }
+
+    // Show welcome popup only for truly new users (no progress)
+    if (!hasProgress) {
+      setShowWelcomePopup(true);
+      // Mark as shown immediately
+      localStorage.setItem(`welcome_popup_shown_${user.id}`, "true");
+    }
+  };
+
 useEffect(() => {
   const urlParams = new URLSearchParams(window.location.search);
   let refreshed = false;
@@ -420,8 +462,11 @@ useEffect(() => {
     // Check for new predicted exam results
     await checkForNewGrades();
 
-    // Check for Discord invitation eligibility
+  // Check for Discord invitation eligibility
     await checkForDiscordInvitation();
+
+    // Check if this is a new user and show welcome popup
+    await checkForWelcomePopup();
 
     if (!refreshed) {
       await refreshSubscription();
@@ -2049,6 +2094,12 @@ useEffect(() => {
       <DiscordInvitation
         isVisible={showDiscordInvitation}
         onClose={() => setShowDiscordInvitation(false)}
+      />
+
+      {/* Welcome Popup Modal */}
+      <WelcomePopup
+        isVisible={showWelcomePopup}
+        onClose={() => setShowWelcomePopup(false)}
       />
 
       {/* Premium Promo Modal */}
