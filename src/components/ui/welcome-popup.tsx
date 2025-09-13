@@ -97,17 +97,17 @@ export function WelcomePopup({ isVisible, onClose }: WelcomePopupProps) {
 
   const handleBrowseSubjects = () => {
     onClose();
-    // Scroll to the subjects selection section on dashboard
+    // Scroll to practice questions section on dashboard
     setTimeout(() => {
-      const subjectsSection = document.querySelector('[data-testid="subjects-section"]') || 
-                             document.querySelector('h3:contains("No subjects selected yet")') ||
-                             document.querySelector('.text-center.space-y-4') ||
-                             document.querySelector('h3');
+      const practiceSection = document.querySelector('[data-testid="practice-questions-section"]') || 
+                             document.querySelector('.grid.gap-6.md\\:grid-cols-2.lg\\:grid-cols-3') ||
+                             document.querySelector('h2:contains("Practice Questions")') ||
+                             document.getElementById('subjects-section');
       
-      if (subjectsSection) {
-        subjectsSection.scrollIntoView({ 
+      if (practiceSection) {
+        practiceSection.scrollIntoView({ 
           behavior: 'smooth', 
-          block: 'center' 
+          block: 'start' 
         });
       }
     }, 100);
@@ -181,7 +181,7 @@ export function WelcomePopup({ isVisible, onClose }: WelcomePopupProps) {
                       transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                       className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-teal-400 to-green-400 rounded-full flex items-center justify-center shadow-lg"
                     >
-                      <span className="text-lg">👋</span>
+                      <Zap className="h-3 w-3 text-white drop-shadow-sm" />
                     </motion.div>
                     
                     <motion.div
