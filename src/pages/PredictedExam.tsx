@@ -2277,6 +2277,78 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return businessQuestions;
     }
 
+    // Special handling for Edexcel GCSE Maths Paper 1 (Non-Calculator) predicted exam format
+    if (subjectId === 'edexcel-maths') {
+      console.log('Generating Edexcel Maths Paper 1 questions...');
+      let questionNumber = 1;
+      
+      const edexcelMathsQuestions = [
+        // Number (1-2 mark questions)
+        { number: questionNumber++, text: "Simplify 36/48.", marks: 1, topic: "Number" },
+        { number: questionNumber++, text: "Find the HCF of 72 and 48.", marks: 2, topic: "Number" },
+        
+        // Algebra (1-2 mark questions)  
+        { number: questionNumber++, text: "Expand (x + 4)(x - 2).", marks: 2, topic: "Algebra" },
+        { number: questionNumber++, text: "Solve 3x + 7 = 19.", marks: 2, topic: "Algebra" },
+        
+        // Ratio, Proportion & Rates (3 mark questions)
+        { number: questionNumber++, text: "A recipe for 12 cookies uses 300 g flour. Work out the flour needed for 18 cookies.", marks: 3, topic: "Ratio, Proportion & Rates of Change" },
+        { number: questionNumber++, text: "A car travels 180 km in 3 hours. Work out the average speed.", marks: 3, topic: "Ratio, Proportion & Rates of Change" },
+        
+        // Geometry & Measures (3 mark question)
+        { number: questionNumber++, text: "The interior angle of a regular polygon is 150°. Find the number of sides.", marks: 3, topic: "Geometry & Measures" },
+        
+        // Probability (1-2 mark questions)
+        { number: questionNumber++, text: "A bag has 3 red and 7 blue counters. Work out the probability of selecting red.", marks: 1, topic: "Probability" },
+        { number: questionNumber++, text: "A spinner has 5 equal sections numbered 1-5. Find the probability of getting an even number.", marks: 2, topic: "Probability" },
+        
+        // Statistics (2 mark question)
+        { number: questionNumber++, text: "The ages of 5 children are 10, 11, 9, 13, 12. Find the median.", marks: 2, topic: "Statistics" },
+        
+        // Number (3 mark question)
+        { number: questionNumber++, text: "Share £840 in the ratio 2:3:5.", marks: 3, topic: "Number" },
+        
+        // Algebra (4 mark question)
+        { number: questionNumber++, text: "Solve simultaneously: 2x + y = 10, x - y = 1.", marks: 4, topic: "Algebra" },
+        
+        // Geometry & Measures (3 mark question)
+        { number: questionNumber++, text: "A sphere has radius 3 cm. Work out its volume. (Use 4/3 πr³)", marks: 3, topic: "Geometry & Measures" },
+        
+        // Probability (5 mark question)
+        { number: questionNumber++, text: "A bag has 5 red and 3 blue counters. Two counters are taken without replacement. Work out the probability both are red.", marks: 5, topic: "Probability" },
+        
+        // Algebra (6 mark question)
+        { number: questionNumber++, text: "Solve 2x² - 5x - 3 = 0.", marks: 6, topic: "Algebra" },
+        
+        // Number (5 mark question)
+        { number: questionNumber++, text: "A car costs £12,000 and decreases by 15% each year. Work out its value after 3 years.", marks: 5, topic: "Number" },
+        
+        // Geometry & Measures (6 mark question)
+        { number: questionNumber++, text: "A cylinder has radius 3 cm and height 10 cm. Calculate its surface area.", marks: 6, topic: "Geometry & Measures" },
+        
+        // Algebra (6 mark reasoning question)
+        { number: questionNumber++, text: "Show that the difference between the squares of two consecutive integers is always odd.", marks: 6, topic: "Algebra" },
+        
+        // Ratio, Proportion & Rates (6 mark question)
+        { number: questionNumber++, text: "£60 is shared between A and B in the ratio 5:7. A gives £6 to B. Find the new ratio.", marks: 6, topic: "Ratio, Proportion & Rates of Change" },
+        
+        // Statistics (5 mark question)
+        { number: questionNumber++, text: "The marks of 40 students are grouped into intervals. Estimate the mean from the frequency table.", marks: 5, topic: "Statistics" }
+      ];
+
+      return edexcelMathsQuestions.map(q => ({
+        id: `q${q.number}`,
+        questionNumber: q.number,
+        text: q.text,
+        marks: q.marks,
+        topic: q.topic,
+        userAnswer: '',
+        isCorrect: null,
+        feedback: '',
+        modelAnswer: ''
+      }));
+    }
+
     // Special handling for AQA Combined Science: Trilogy Biology Paper 1 predicted exam format
     if (subjectId === 'combined-science-aqa') {
       console.log('Generating Combined Science Biology Paper 1 questions...');
@@ -3656,6 +3728,9 @@ Write a story about a moment of fear.
     }
     if (subjectId === 'combined-science-aqa') {
       return 70; // AQA Combined Science Biology Paper 1: 70 marks
+    }
+    if (subjectId === 'edexcel-maths') {
+      return 80; // Edexcel GCSE Maths Paper 1: 80 marks
     }
     return examQuestions.reduce((total, q) => total + q.marks, 0);
   };
