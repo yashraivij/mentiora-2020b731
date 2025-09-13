@@ -2467,6 +2467,61 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       }));
     }
 
+    // Special handling for Edexcel Physics Paper 1 predicted exam format
+    if (subjectId === 'physics-edexcel') {
+      console.log('🎯 GENERATING EDEXCEL PHYSICS PAPER 1 QUESTIONS');
+      let physicsQuestionNumber = 1;
+      
+      const edexcelPhysicsQuestions = [
+        // Energy
+        { number: physicsQuestionNumber++, text: "State the law of conservation of energy.", marks: 1, topic: "Energy" },
+        { number: physicsQuestionNumber++, text: "What is meant by efficiency?", marks: 2, topic: "Energy" },
+        { number: physicsQuestionNumber++, text: "Give one example of a renewable energy source.", marks: 1, topic: "Energy" },
+        { number: physicsQuestionNumber++, text: "A 2 kg object is lifted 5 m. Calculate the increase in gravitational potential energy.", marks: 3, topic: "Energy" },
+        { number: physicsQuestionNumber++, text: "A motor transfers 200 J in 4 s. Calculate the power.", marks: 3, topic: "Energy" },
+        { number: physicsQuestionNumber++, text: "Compare the advantages and disadvantages of renewable and non-renewable energy resources.", marks: 6, topic: "Energy" },
+        
+        // Electricity
+        { number: physicsQuestionNumber++, text: "State Ohm's Law.", marks: 1, topic: "Electricity" },
+        { number: physicsQuestionNumber++, text: "What is the potential difference of UK mains electricity?", marks: 1, topic: "Electricity" },
+        { number: physicsQuestionNumber++, text: "Define resistance.", marks: 2, topic: "Electricity" },
+        { number: physicsQuestionNumber++, text: "A lamp has a resistance of 12 Ω and a current of 4 A flows. Calculate the potential difference.", marks: 3, topic: "Electricity" },
+        { number: physicsQuestionNumber++, text: "A circuit transfers 60 J when 3 C of charge flows. Calculate the potential difference.", marks: 3, topic: "Electricity" },
+        { number: physicsQuestionNumber++, text: "State what a resistor is used for in an electrical circuit.", marks: 1, topic: "Electricity" },
+        { number: physicsQuestionNumber++, text: "Explain how resistance changes in a filament lamp as current increases.", marks: 6, topic: "Electricity" },
+        
+        // Particle Model of Matter
+        { number: physicsQuestionNumber++, text: "State the formula for density.", marks: 1, topic: "Particle Model of Matter" },
+        { number: physicsQuestionNumber++, text: "What is meant by specific latent heat?", marks: 2, topic: "Particle Model of Matter" },
+        { number: physicsQuestionNumber++, text: "Name the change of state from gas to liquid.", marks: 1, topic: "Particle Model of Matter" },
+        { number: physicsQuestionNumber++, text: "A block has a mass of 0.8 kg and a volume of 0.0002 m³. Calculate its density.", marks: 3, topic: "Particle Model of Matter" },
+        { number: physicsQuestionNumber++, text: "A 2 kg object is heated, increasing its temperature by 15 °C. The specific heat capacity is 4200 J/kg°C. Calculate the energy transferred.", marks: 4, topic: "Particle Model of Matter" },
+        { number: physicsQuestionNumber++, text: "Explain the difference in particle behaviour between evaporation and boiling.", marks: 6, topic: "Particle Model of Matter" },
+        
+        // Atomic Structure
+        { number: physicsQuestionNumber++, text: "Name the three types of nuclear radiation.", marks: 2, topic: "Atomic Structure" },
+        { number: physicsQuestionNumber++, text: "Which type of radiation is stopped by a sheet of paper?", marks: 1, topic: "Atomic Structure" },
+        { number: physicsQuestionNumber++, text: "What is meant by half-life?", marks: 2, topic: "Atomic Structure" },
+        { number: physicsQuestionNumber++, text: "A radioactive isotope has a half-life of 5 years. Its activity starts at 400 Bq. Calculate the activity after 15 years.", marks: 3, topic: "Atomic Structure" },
+        { number: physicsQuestionNumber++, text: "A nucleus emits an alpha particle. State how the atomic and mass numbers change.", marks: 2, topic: "Atomic Structure" },
+        { number: physicsQuestionNumber++, text: "Compare the uses and risks of gamma radiation and alpha radiation in medicine.", marks: 6, topic: "Atomic Structure" }
+      ];
+
+      console.log('✅ Generated', edexcelPhysicsQuestions.length, 'Edexcel Physics Paper 1 questions');
+      
+      return edexcelPhysicsQuestions.map(q => ({
+        id: `q${q.number}`,
+        questionNumber: q.number,
+        text: q.text,
+        marks: q.marks,
+        topic: q.topic,
+        userAnswer: '',
+        isCorrect: null,
+        feedback: '',
+        modelAnswer: ''
+      }));
+    }
+
     // Special handling for AQA Combined Science: Trilogy Biology Paper 1 predicted exam format
     if (subjectId === 'combined-science-aqa') {
       console.log('Generating Combined Science Biology Paper 1 questions...');
@@ -3861,6 +3916,9 @@ Write a story about a moment of fear.
     }
     if (subjectId === 'chemistry-edexcel') {
       return 100; // Edexcel GCSE Chemistry Paper 1: 100 marks
+    }
+    if (subjectId === 'physics-edexcel') {
+      return 100; // Edexcel GCSE Physics Paper 1: 100 marks
     }
     return examQuestions.reduce((total, q) => total + q.marks, 0);
   };
