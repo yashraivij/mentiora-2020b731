@@ -1903,7 +1903,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         {
           id: 'chem-p1-q9',
           questionNumber: questionNumber++,
-          text: 'Draw the dot-and-cross diagram for a chlorine molecule.\n\n[2 marks]',
+          text: 'Explain how chlorine atoms bond together to form a chlorine molecule.\n\n[2 marks]',
           marks: 2
         },
         {
@@ -2047,7 +2047,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         {
           id: 'chem-p1-q32',
           questionNumber: questionNumber++,
-          text: 'Draw and label an energy profile diagram for an exothermic reaction.\n\n[4 marks]',
+          text: 'Describe the energy changes that occur during an exothermic reaction. Explain the role of activation energy.\n\n[4 marks]',
           marks: 4
         },
         {
@@ -3052,7 +3052,7 @@ Write a story about a moment of fear.
           `Explain how antibodies help the body fight disease. Describe the difference between active and passive immunity.`,
           `A student investigates enzyme activity at different temperatures. Predict the results and explain the shape of the graph.`,
           `Describe how water moves through a plant. Explain the importance of transpiration.`,
-          `Compare the structure and function of arteries, veins and capillaries. Include diagrams in your answer.`,
+          `Compare the structure and function of arteries, veins and capillaries.`,
           `Explain how hormones control blood glucose levels. Describe what happens in diabetes.`,
           `Describe the process of protein synthesis. Explain the roles of DNA, mRNA and ribosomes.`,
           `A student counts organisms in different habitats using quadrats. Describe how to make the sampling reliable.`,
