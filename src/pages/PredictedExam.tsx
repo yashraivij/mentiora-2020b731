@@ -2404,6 +2404,69 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       }));
     }
 
+    // Special handling for Edexcel Chemistry Paper 1 predicted exam format
+    if (subjectId === 'chemistry-edexcel') {
+      console.log('🎯 GENERATING EDEXCEL CHEMISTRY PAPER 1 QUESTIONS');
+      let questionNumber = 1;
+      
+      const edexcelChemistryQuestions = [
+        // Atomic Structure & Periodic Table
+        { number: questionNumber++, text: 'State the relative charges of protons, neutrons, and electrons.', marks: 2, topic: "Atomic Structure & Periodic Table" },
+        { number: questionNumber++, text: "What is the mass number of an atom with 12 protons and 12 neutrons?", marks: 1, topic: "Atomic Structure & Periodic Table" },
+        { number: questionNumber++, text: "Name the scientist who arranged the periodic table by atomic number.", marks: 1, topic: "Atomic Structure & Periodic Table" },
+        { number: questionNumber++, text: "Explain why atoms have no overall charge.", marks: 3, topic: "Atomic Structure & Periodic Table" },
+        { number: questionNumber++, text: "Compare the reactivity of lithium and potassium.", marks: 4, topic: "Atomic Structure & Periodic Table" },
+        { number: questionNumber++, text: "Explain how the reactivity of Group 7 elements changes down the group.", marks: 6, topic: "Atomic Structure & Periodic Table" },
+        
+        // Bonding, Structure & Properties of Matter
+        { number: questionNumber++, text: "What type of bond is found in sodium chloride?", marks: 1, topic: "Bonding, Structure & Properties" },
+        { number: questionNumber++, text: "Draw the dot-and-cross diagram for a molecule of oxygen.", marks: 2, topic: "Bonding, Structure & Properties" },
+        { number: questionNumber++, text: "Explain why ionic compounds have high melting points.", marks: 3, topic: "Bonding, Structure & Properties" },
+        { number: questionNumber++, text: "Explain why diamond and graphite have very different properties, even though both are forms of carbon.", marks: 4, topic: "Bonding, Structure & Properties" },
+        { number: questionNumber++, text: "Evaluate the advantages and disadvantages of using nanoparticles in medicine.", marks: 6, topic: "Bonding, Structure & Properties" },
+        
+        // Quantitative Chemistry
+        { number: questionNumber++, text: 'Define "mole".', marks: 1, topic: "Quantitative Chemistry" },
+        { number: questionNumber++, text: "Calculate the relative formula mass (Mr) of CO₂.", marks: 2, topic: "Quantitative Chemistry" },
+        { number: questionNumber++, text: "A reaction uses 48 g of magnesium (Ar = 24). Calculate the number of moles.", marks: 3, topic: "Quantitative Chemistry" },
+        { number: questionNumber++, text: "Calculate the percentage mass of oxygen in H₂O.", marks: 3, topic: "Quantitative Chemistry" },
+        { number: questionNumber++, text: "A student reacts 25 g of calcium carbonate (Mr = 100) with excess acid. Calculate the number of moles of calcium carbonate.", marks: 3, topic: "Quantitative Chemistry" },
+        { number: questionNumber++, text: "A sample of NaCl contains 0.5 moles. Calculate its mass. (Ar Na=23, Cl=35.5).", marks: 3, topic: "Quantitative Chemistry" },
+        { number: questionNumber++, text: "Evaluate the importance of atom economy in chemical reactions.", marks: 6, topic: "Quantitative Chemistry" },
+        
+        // Chemical Changes
+        { number: questionNumber++, text: "Give the pH of a neutral solution.", marks: 1, topic: "Chemical Changes" },
+        { number: questionNumber++, text: "What ions are present in all acids?", marks: 1, topic: "Chemical Changes" },
+        { number: questionNumber++, text: "What type of reaction takes place when magnesium reacts with hydrochloric acid?", marks: 1, topic: "Chemical Changes" },
+        { number: questionNumber++, text: "Write a balanced equation for the reaction of hydrochloric acid with sodium hydroxide.", marks: 3, topic: "Chemical Changes" },
+        { number: questionNumber++, text: "Explain why potassium is more reactive than lithium.", marks: 3, topic: "Chemical Changes" },
+        { number: questionNumber++, text: "A titration requires 25 cm³ of 0.2 mol/dm³ HCl to neutralise NaOH. Calculate the moles of HCl used.", marks: 3, topic: "Chemical Changes" },
+        { number: questionNumber++, text: "Describe how you would carry out a titration to determine the concentration of an acid.", marks: 6, topic: "Chemical Changes" },
+        
+        // Energy Changes
+        { number: questionNumber++, text: "What type of reaction releases energy to the surroundings?", marks: 1, topic: "Energy Changes" },
+        { number: questionNumber++, text: "State one everyday use of an endothermic reaction.", marks: 1, topic: "Energy Changes" },
+        { number: questionNumber++, text: "Draw and label an energy profile diagram for an exothermic reaction.", marks: 4, topic: "Energy Changes" },
+        { number: questionNumber++, text: "Define activation energy.", marks: 2, topic: "Energy Changes" },
+        { number: questionNumber++, text: "The bond energy of H–H is 436 kJ/mol and Cl–Cl is 242 kJ/mol. The bond energy of H–Cl is 431 kJ/mol. Calculate the energy change for the reaction: H₂ + Cl₂ → 2HCl.", marks: 6, topic: "Energy Changes" },
+        { number: questionNumber++, text: "Compare the advantages and disadvantages of hydrogen fuel cells and rechargeable batteries.", marks: 6, topic: "Energy Changes" }
+      ];
+
+      console.log('✅ Generated', edexcelChemistryQuestions.length, 'Edexcel Chemistry Paper 1 questions');
+      
+      return edexcelChemistryQuestions.map(q => ({
+        id: `q${q.number}`,
+        questionNumber: q.number,
+        text: q.text,
+        marks: q.marks,
+        topic: q.topic,
+        userAnswer: '',
+        isCorrect: null,
+        feedback: '',
+        modelAnswer: ''
+      }));
+    }
+
     // Special handling for AQA Combined Science: Trilogy Biology Paper 1 predicted exam format
     if (subjectId === 'combined-science-aqa') {
       console.log('Generating Combined Science Biology Paper 1 questions...');
@@ -3740,6 +3803,7 @@ Write a story about a moment of fear.
       "mathematics-paper-1": 90, // 1h 30min (AQA Maths Paper 1 Non-Calculator)
       "maths-edexcel": 90, // 1h 30min (Edexcel GCSE Maths Paper 1 Non-Calculator)
       "business-edexcel-igcse": 90, // 1h 30min (Edexcel IGCSE Business Paper 1)
+      "chemistry-edexcel": 105, // 1h 45min (Edexcel GCSE Chemistry Paper 1)
       "english-language": 135, // 2h 15min
       "english-literature": 150, // 2h 30min
       history: 120, // 2h
@@ -3794,6 +3858,9 @@ Write a story about a moment of fear.
     }
     if (subjectId === 'business-edexcel-igcse') {
       return 80; // Edexcel IGCSE Business Paper 1: 80 marks
+    }
+    if (subjectId === 'chemistry-edexcel') {
+      return 100; // Edexcel GCSE Chemistry Paper 1: 100 marks
     }
     return examQuestions.reduce((total, q) => total + q.marks, 0);
   };
