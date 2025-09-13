@@ -2074,6 +2074,208 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return chemistryQuestions;
     }
 
+    // Special handling for AQA GCSE Business Paper 1 predicted exam format
+    if (subjectId === 'business') {
+      let questionNumber = 1;
+      
+      const businessQuestions = [
+        // Section A: Knowledge & Understanding (~20 marks)
+        // Business in the Real World
+        {
+          id: 'bus-p1-q1',
+          questionNumber: questionNumber++,
+          text: 'Define "entrepreneur".\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'bus-p1-q2',
+          questionNumber: questionNumber++,
+          text: 'Give one objective of a business.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'bus-p1-q3',
+          questionNumber: questionNumber++,
+          text: 'State one advantage of being a sole trader.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'bus-p1-q4',
+          questionNumber: questionNumber++,
+          text: 'What is the difference between goods and services?\n\n[2 marks]',
+          marks: 2
+        },
+
+        // Influences on Business
+        {
+          id: 'bus-p1-q5',
+          questionNumber: questionNumber++,
+          text: 'Define "stakeholder".\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'bus-p1-q6',
+          questionNumber: questionNumber++,
+          text: 'Give one environmental factor that can influence business activity.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'bus-p1-q7',
+          questionNumber: questionNumber++,
+          text: 'What is meant by "legislation"?\n\n[2 marks]',
+          marks: 2
+        },
+
+        // Business Operations
+        {
+          id: 'bus-p1-q8',
+          questionNumber: questionNumber++,
+          text: 'What is meant by "job production"?\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'bus-p1-q9',
+          questionNumber: questionNumber++,
+          text: 'Give one method of achieving quality in a business.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'bus-p1-q10',
+          questionNumber: questionNumber++,
+          text: 'State one advantage of flow production.\n\n[1 mark]',
+          marks: 1
+        },
+
+        // Human Resources
+        {
+          id: 'bus-p1-q11',
+          questionNumber: questionNumber++,
+          text: 'Define "recruitment".\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'bus-p1-q12',
+          questionNumber: questionNumber++,
+          text: 'Give one reason why a business trains its employees.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'bus-p1-q13',
+          questionNumber: questionNumber++,
+          text: 'State one financial method of motivation.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'bus-p1-q14',
+          questionNumber: questionNumber++,
+          text: 'What is meant by "flexible working"?\n\n[2 marks]',
+          marks: 2
+        },
+
+        // Section B: Application & Analysis (~35 marks)
+        // 3-4 mark structured questions
+        {
+          id: 'bus-p1-q15',
+          questionNumber: questionNumber++,
+          text: 'Explain one advantage and one disadvantage of being a franchisee.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'bus-p1-q16',
+          questionNumber: questionNumber++,
+          text: 'Explain how technology can help a business operate more efficiently.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'bus-p1-q17',
+          questionNumber: questionNumber++,
+          text: 'Explain how pressure groups might affect business behaviour.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'bus-p1-q18',
+          questionNumber: questionNumber++,
+          text: 'Explain the impact of changing interest rates on a business.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'bus-p1-q19',
+          questionNumber: questionNumber++,
+          text: 'Explain the difference between job and batch production.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'bus-p1-q20',
+          questionNumber: questionNumber++,
+          text: 'Explain how Just-in-Time stock control can help a business.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'bus-p1-q21',
+          questionNumber: questionNumber++,
+          text: 'Explain the difference between internal and external recruitment.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'bus-p1-q22',
+          questionNumber: questionNumber++,
+          text: 'Explain one benefit and one drawback of on-the-job training.\n\n[4 marks]',
+          marks: 4
+        },
+
+        // 6-9 mark application/analysis questions
+        {
+          id: 'bus-p1-q23',
+          questionNumber: questionNumber++,
+          text: 'Sarah owns a small bakery and wants to expand her business. She is considering becoming a private limited company.\n\nAnalyse the advantages and disadvantages of Sarah changing her bakery from a sole trader to a private limited company.\n\n[9 marks]',
+          marks: 9
+        },
+        {
+          id: 'bus-p1-q24',
+          questionNumber: questionNumber++,
+          text: 'A clothing company called Fashion Forward imports materials from overseas suppliers.\n\nAnalyse how changes in exchange rates could affect Fashion Forward.\n\n[9 marks]',
+          marks: 9
+        },
+
+        // Section C: Extended Responses (~35 marks)
+        {
+          id: 'bus-p1-q25',
+          questionNumber: questionNumber++,
+          text: 'A furniture manufacturer is deciding between batch production and flow production for their new product line.\n\nAnalyse the advantages and disadvantages of each production method for this furniture manufacturer.\n\n[6 marks]',
+          marks: 6
+        },
+        {
+          id: 'bus-p1-q26',
+          questionNumber: questionNumber++,
+          text: 'Green Electronics is a growing business that needs to recruit more staff. The HR manager is deciding whether to recruit internally or externally.\n\nJustify whether Green Electronics should recruit internally or externally for these new positions.\n\n[9 marks]',
+          marks: 9
+        },
+        {
+          id: 'bus-p1-q27',
+          questionNumber: questionNumber++,
+          text: 'A retail store is considering offering commission to sales staff as a method of motivation instead of just paying hourly wages.\n\nAnalyse the advantages and disadvantages of using commission as a method of motivation for sales staff.\n\n[8 marks]',
+          marks: 8
+        },
+
+        // 12 mark extended evaluation questions
+        {
+          id: 'bus-p1-q28',
+          questionNumber: questionNumber++,
+          text: '"Profit is the most important objective for all businesses."\n\nTo what extent do you agree with this statement?\n\nIn your answer, you should:\n• Consider different business objectives\n• Evaluate the importance of profit compared to other objectives\n• Use examples to support your arguments\n• Reach a justified conclusion\n\n[12 marks]',
+          marks: 12
+        },
+        {
+          id: 'bus-p1-q29',
+          questionNumber: questionNumber++,
+          text: '"The external environment is the most important influence on business success."\n\nTo what extent do you agree with this statement?\n\nIn your answer, you should:\n• Analyse internal and external factors that influence business success\n• Evaluate which factors are most important\n• Use business examples to support your analysis\n• Reach a justified conclusion\n\n[12 marks]',
+          marks: 12
+        }
+      ];
+      
+      console.log('AQA Business Paper 1 questions generated:', businessQuestions.length);
+      return businessQuestions;
+    }
+
     // Special format for Geography - AQA GCSE (88 marks total including 3 SPaG)
     if (subjectId === 'geography') {
       // Geography Paper 1
@@ -3290,6 +3492,9 @@ Write a story about a moment of fear.
     }
     if (subjectId === 'religious-studies') {
       return 96; // 96 marks total
+    }
+    if (subjectId === 'business') {
+      return 90; // AQA Business Paper 1: 90 marks
     }
     return examQuestions.reduce((total, q) => total + q.marks, 0);
   };
