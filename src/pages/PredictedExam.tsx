@@ -2277,7 +2277,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     }
 
     // Special handling for AQA Combined Science: Trilogy Biology Paper 1 predicted exam format
-    if (subjectId === 'combined-science-biology') {
+    if (subjectId === 'combined-science-aqa') {
       let questionNumber = 1;
       
       const combinedScienceBiologyQuestions = [
@@ -3652,7 +3652,7 @@ Write a story about a moment of fear.
     if (subjectId === 'business') {
       return 90; // AQA Business Paper 1: 90 marks
     }
-    if (subjectId === 'combined-science-biology') {
+    if (subjectId === 'combined-science-aqa') {
       return 70; // AQA Combined Science Biology Paper 1: 70 marks
     }
     return examQuestions.reduce((total, q) => total + q.marks, 0);
