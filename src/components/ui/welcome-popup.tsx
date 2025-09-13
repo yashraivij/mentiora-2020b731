@@ -96,8 +96,21 @@ export function WelcomePopup({ isVisible, onClose }: WelcomePopupProps) {
   }, [isVisible]);
 
   const handleBrowseSubjects = () => {
-    navigate('/practice');
     onClose();
+    // Scroll to practice questions section on dashboard
+    setTimeout(() => {
+      const practiceSection = document.querySelector('[data-testid="practice-questions-section"]') || 
+                             document.querySelector('.grid.gap-6.md\\:grid-cols-2.lg\\:grid-cols-3') ||
+                             document.querySelector('h2:contains("Practice Questions")') ||
+                             document.getElementById('subjects-section');
+      
+      if (practiceSection) {
+        practiceSection.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }
+    }, 100);
   };
 
   return (
@@ -188,15 +201,15 @@ export function WelcomePopup({ isVisible, onClose }: WelcomePopupProps) {
                     className="space-y-4 mb-6"
                   >
                     <h2 className="text-3xl font-black bg-gradient-to-r from-emerald-600 via-teal-600 to-green-600 dark:from-emerald-400 dark:via-teal-400 dark:to-green-400 bg-clip-text text-transparent">
-                      🎉 Welcome to Mentiora!
+                      Hey 👋 Welcome to Mentiora!
                     </h2>
                     
                     <div className="space-y-3">
-                      <p className="text-lg font-bold text-foreground">
-                        Your AI Study Companion is Ready
+                      <p className="text-muted-foreground leading-relaxed">
+                        We know GCSEs can feel overwhelming, but you don't have to face them alone. Mentiora helps you focus only on what matters, practise with real exam questions, and stay on track with your goals.
                       </p>
                       <p className="text-muted-foreground leading-relaxed">
-                        Start your journey to academic success with personalized practice questions, AI-generated notes, and smart study insights!
+                        We're here to make revision easier, save you time, and boost your confidence from day one.
                       </p>
                     </div>
 
@@ -212,10 +225,10 @@ export function WelcomePopup({ isVisible, onClose }: WelcomePopupProps) {
                         <span className="text-2xl">🚀</span>
                       </div>
                       <h3 className="text-lg font-bold bg-gradient-to-r from-emerald-700 to-teal-700 dark:from-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-1">
-                        Smart Learning Ahead
+                        Ready to Start?
                       </h3>
                       <p className="text-sm font-medium text-emerald-600/80 dark:text-emerald-400/80">
-                        Practice questions, AI notes, and progress tracking - all tailored to your curriculum
+                        Practice questions, study notes, and progress tracking - all tailored to your curriculum
                       </p>
                     </motion.div>
                   </motion.div>
