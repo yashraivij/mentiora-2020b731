@@ -130,7 +130,7 @@ export function WelcomePopup({ isVisible, onClose }: WelcomePopupProps) {
               initial={{ scale: 0.5, y: 50, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.5, y: 50, opacity: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 500, delay: 0.1 }}
+              transition={{ type: "spring", damping: 25, stiffness: 500, delay: 0.05 }}
               onClick={(e) => e.stopPropagation()}
               className="relative"
             >
@@ -160,7 +160,7 @@ export function WelcomePopup({ isVisible, onClose }: WelcomePopupProps) {
                   <motion.div
                     initial={{ scale: 0, rotate: -90 }}
                     animate={{ scale: 1, rotate: 0 }}
-                    transition={{ type: "spring", damping: 15, stiffness: 300, delay: 0.3 }}
+                    transition={{ type: "spring", damping: 15, stiffness: 300, delay: 0.1 }}
                     className="relative mx-auto mb-6"
                   >
                     <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-500 to-green-500 flex items-center justify-center shadow-2xl shadow-emerald-500/25 relative overflow-hidden">
@@ -197,7 +197,7 @@ export function WelcomePopup({ isVisible, onClose }: WelcomePopupProps) {
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
+                    transition={{ delay: 0.2 }}
                     className="space-y-4 mb-6"
                   >
                     <h2 className="text-3xl font-black bg-gradient-to-r from-emerald-600 via-teal-600 to-green-600 dark:from-emerald-400 dark:via-teal-400 dark:to-green-400 bg-clip-text text-transparent">
@@ -217,7 +217,7 @@ export function WelcomePopup({ isVisible, onClose }: WelcomePopupProps) {
                     <motion.div
                       initial={{ scale: 0.8, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: 0.7, type: "spring", stiffness: 200 }}
+                      transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
                       className="p-4 bg-gradient-to-r from-emerald-100/80 to-teal-100/80 dark:from-emerald-950/40 dark:to-teal-950/40 rounded-2xl border border-emerald-200/50 dark:border-emerald-800/30 backdrop-blur-sm"
                     >
                       <div className="flex items-center justify-center space-x-2 mb-2">
@@ -237,7 +237,7 @@ export function WelcomePopup({ isVisible, onClose }: WelcomePopupProps) {
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.9 }}
+                    transition={{ delay: 0.4 }}
                     className="space-y-3"
                   >
                     <Button
