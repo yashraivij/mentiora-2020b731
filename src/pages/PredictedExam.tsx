@@ -2278,7 +2278,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     }
 
     // Special handling for Edexcel GCSE Maths Paper 1 (Non-Calculator) predicted exam format
-    if (subjectId === 'edexcel-maths') {
+    if (subjectId === 'maths-edexcel') {
       console.log('Generating Edexcel Maths Paper 1 questions...');
       let questionNumber = 1;
       
@@ -3729,7 +3729,7 @@ Write a story about a moment of fear.
     if (subjectId === 'combined-science-aqa') {
       return 70; // AQA Combined Science Biology Paper 1: 70 marks
     }
-    if (subjectId === 'edexcel-maths') {
+    if (subjectId === 'maths-edexcel') {
       return 80; // Edexcel GCSE Maths Paper 1: 80 marks
     }
     return examQuestions.reduce((total, q) => total + q.marks, 0);
