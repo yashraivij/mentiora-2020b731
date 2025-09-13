@@ -1089,7 +1089,6 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
 
   // Generate exam questions from subject topics
   const generateExamQuestions = (): ExamQuestion[] => {
-    console.log('generateExamQuestions called with subjectId:', subjectId);
     const questions: ExamQuestion[] = [];
     
     // Special handling for English Literature premium exam format
@@ -1843,6 +1842,236 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       
       console.log('AQA Biology Paper 1 questions generated:', questions.length);
       return questions;
+    }
+
+    // Special handling for AQA GCSE Chemistry Paper 1 predicted exam format
+    if (subjectId === 'chemistry') {
+      let questionNumber = 1;
+      
+      const chemistryQuestions = [
+        // Atomic Structure & the Periodic Table (20 marks)
+        {
+          id: 'chem-p1-q1',
+          questionNumber: questionNumber++,
+          text: 'Name the three subatomic particles and their charges.\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'chem-p1-q2',
+          questionNumber: questionNumber++,
+          text: 'What is the relative atomic mass of an isotope of chlorine with mass number 37?\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'chem-p1-q3',
+          questionNumber: questionNumber++,
+          text: 'Who is credited with developing the periodic table used today?\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'chem-p1-q4',
+          questionNumber: questionNumber++,
+          text: 'Explain why atoms have no overall charge.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'chem-p1-q5',
+          questionNumber: questionNumber++,
+          text: 'Describe how Mendeleev arranged the periodic table.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'chem-p1-q6',
+          questionNumber: questionNumber++,
+          text: 'Compare the reactivity of Group 1 elements lithium and potassium.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'chem-p1-q7',
+          questionNumber: questionNumber++,
+          text: 'Explain why the noble gases are unreactive.\n\n[6 marks]',
+          marks: 6
+        },
+
+        // Bonding, Structure, and Properties of Matter (20 marks)
+        {
+          id: 'chem-p1-q8',
+          questionNumber: questionNumber++,
+          text: 'What type of bond is found in sodium chloride?\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'chem-p1-q9',
+          questionNumber: questionNumber++,
+          text: 'Draw the dot-and-cross diagram for a chlorine molecule.\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'chem-p1-q10',
+          questionNumber: questionNumber++,
+          text: 'What is meant by a "giant covalent structure"?\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'chem-p1-q11',
+          questionNumber: questionNumber++,
+          text: 'Explain why ionic compounds have high melting points.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'chem-p1-q12',
+          questionNumber: questionNumber++,
+          text: 'Describe how metallic bonding explains the conductivity of metals.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'chem-p1-q13',
+          questionNumber: questionNumber++,
+          text: 'Explain why simple covalent molecules have low boiling points.\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'chem-p1-q14',
+          questionNumber: questionNumber++,
+          text: 'Compare the properties of diamond and graphite.\n\n[6 marks]',
+          marks: 6
+        },
+
+        // Quantitative Chemistry (20 marks)
+        {
+          id: 'chem-p1-q15',
+          questionNumber: questionNumber++,
+          text: 'What is meant by "conservation of mass"?\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'chem-p1-q16',
+          questionNumber: questionNumber++,
+          text: 'Define "mole".\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'chem-p1-q17',
+          questionNumber: questionNumber++,
+          text: 'Calculate the relative formula mass (Mr) of CO₂. (Ar: C = 12, O = 16)\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'chem-p1-q18',
+          questionNumber: questionNumber++,
+          text: 'A reaction uses 48 g of magnesium (Ar = 24). How many moles is this?\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'chem-p1-q19',
+          questionNumber: questionNumber++,
+          text: 'A sample of water contains 18 g. Calculate the number of moles (Mr = 18).\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'chem-p1-q20',
+          questionNumber: questionNumber++,
+          text: 'Calculate the percentage mass of oxygen in H₂O. (Ar: H = 1, O = 16)\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'chem-p1-q21',
+          questionNumber: questionNumber++,
+          text: 'A student reacts hydrochloric acid with calcium carbonate. Describe how they could calculate the concentration of the acid using titration.\n\n[6 marks]',
+          marks: 6
+        },
+
+        // Chemical Changes (20 marks)
+        {
+          id: 'chem-p1-q22',
+          questionNumber: questionNumber++,
+          text: 'What is produced when an acid reacts with a metal?\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'chem-p1-q23',
+          questionNumber: questionNumber++,
+          text: 'Give the pH of a neutral solution.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'chem-p1-q24',
+          questionNumber: questionNumber++,
+          text: 'What ions are present in all acids?\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'chem-p1-q25',
+          questionNumber: questionNumber++,
+          text: 'Write a balanced symbol equation for the reaction of hydrochloric acid with sodium hydroxide.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'chem-p1-q26',
+          questionNumber: questionNumber++,
+          text: 'Describe how you would carry out a titration to find the concentration of an unknown acid.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'chem-p1-q27',
+          questionNumber: questionNumber++,
+          text: 'Explain why reactivity increases down Group 1.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'chem-p1-q28',
+          questionNumber: questionNumber++,
+          text: 'Compare the reactivity of zinc, magnesium, and copper with dilute hydrochloric acid, using the reactivity series.\n\n[6 marks]',
+          marks: 6
+        },
+
+        // Energy Changes (20 marks)
+        {
+          id: 'chem-p1-q29',
+          questionNumber: questionNumber++,
+          text: 'What type of reaction releases energy to the surroundings?\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'chem-p1-q30',
+          questionNumber: questionNumber++,
+          text: 'Give one example of an endothermic reaction.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'chem-p1-q31',
+          questionNumber: questionNumber++,
+          text: 'What is meant by "activation energy"?\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'chem-p1-q32',
+          questionNumber: questionNumber++,
+          text: 'Draw and label an energy profile diagram for an exothermic reaction.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'chem-p1-q33',
+          questionNumber: questionNumber++,
+          text: 'Calculate the energy change of a reaction given: bonds broken = 2500 kJ/mol, bonds formed = 3000 kJ/mol.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'chem-p1-q34',
+          questionNumber: questionNumber++,
+          text: 'Explain why some reactions are exothermic and others endothermic.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'chem-p1-q35',
+          questionNumber: questionNumber++,
+          text: 'Compare the advantages and disadvantages of hydrogen fuel cells with rechargeable batteries.\n\n[6 marks]',
+          marks: 6
+        }
+      ];
+      
+      console.log('AQA Chemistry Paper 1 questions generated:', chemistryQuestions.length);
+      return chemistryQuestions;
     }
 
     // Special format for Geography - AQA GCSE (88 marks total including 3 SPaG)
@@ -3043,6 +3272,9 @@ Write a story about a moment of fear.
     }
     if (subjectId === 'biology') {
       return 100; // AQA Biology Paper 1: 100 marks
+    }
+    if (subjectId === 'chemistry') {
+      return 100; // AQA Chemistry Paper 1: 100 marks
     }
     if (subjectId === 'maths') {
       return 80; // AQA Maths Paper 1: 80 marks
