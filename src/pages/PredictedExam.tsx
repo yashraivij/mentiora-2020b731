@@ -1089,7 +1089,10 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
 
   // Generate exam questions from subject topics
   const generateExamQuestions = (): ExamQuestion[] => {
-    console.log('Generating exam questions for subjectId:', subjectId);
+    console.log('=== GENERATING EXAM QUESTIONS ===');
+    console.log('subjectId:', subjectId);
+    console.log('subject found:', !!subject);
+    console.log('subject name:', subject?.name);
     const questions: ExamQuestion[] = [];
     
     // Special handling for English Literature premium exam format
@@ -2279,7 +2282,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
 
     // Special handling for Edexcel GCSE Maths Paper 1 (Non-Calculator) predicted exam format
     if (subjectId === 'maths-edexcel') {
-      console.log('Generating Edexcel Maths Paper 1 questions...');
+      console.log('🎯 GENERATING EDEXCEL MATHS PAPER 1 QUESTIONS');
       let questionNumber = 1;
       
       const edexcelMathsQuestions = [
@@ -2336,6 +2339,8 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         { number: questionNumber++, text: "The marks of 40 students are grouped into intervals. Estimate the mean from the frequency table.", marks: 5, topic: "Statistics" }
       ];
 
+      console.log('✅ Generated', edexcelMathsQuestions.length, 'Edexcel Maths Paper 1 questions');
+      
       return edexcelMathsQuestions.map(q => ({
         id: `q${q.number}`,
         questionNumber: q.number,
@@ -3668,10 +3673,13 @@ Write a story about a moment of fear.
   
   // Generate exam questions when component mounts or subject changes
   useEffect(() => {
+    console.log('🔄 useEffect triggered for exam questions generation');
+    console.log('Current subjectId:', subjectId);
     const newQuestions = generateExamQuestions();
     console.log('Setting exam questions, count:', newQuestions.length);
+    console.log('First question preview:', newQuestions[0]?.text);
     setExamQuestions(newQuestions);
-  }, [subjectId]);
+  }, [subjectId, subject]); // Added subject as dependency
 
   const getExamDuration = () => {
     const durations = {
@@ -3680,6 +3688,7 @@ Write a story about a moment of fear.
       physics: 135, // 2h 15min
       mathematics: 120, // 2h
       "mathematics-paper-1": 90, // 1h 30min (AQA Maths Paper 1 Non-Calculator)
+      "maths-edexcel": 90, // 1h 30min (Edexcel GCSE Maths Paper 1 Non-Calculator)
       "english-language": 135, // 2h 15min
       "english-literature": 150, // 2h 30min
       history: 120, // 2h
