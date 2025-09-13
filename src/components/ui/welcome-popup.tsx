@@ -222,8 +222,7 @@ export function WelcomePopup({ isVisible, onClose }: WelcomePopupProps) {
                       transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
                       className="p-4 bg-gradient-to-r from-emerald-100/80 to-teal-100/80 dark:from-emerald-950/40 dark:to-teal-950/40 rounded-2xl border border-emerald-200/50 dark:border-emerald-800/30 backdrop-blur-sm"
                     >
-                      <div className="flex items-center justify-center space-x-2 mb-2">
-                        <BookOpen className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                      <div className="flex items-center justify-center mb-2">
                         <span className="text-2xl">🚀</span>
                       </div>
                       <h3 className="text-lg font-bold bg-gradient-to-r from-emerald-700 to-teal-700 dark:from-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-1">
