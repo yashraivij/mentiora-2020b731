@@ -97,17 +97,19 @@ export function WelcomePopup({ isVisible, onClose }: WelcomePopupProps) {
 
   const handleBrowseSubjects = () => {
     onClose();
-    // Scroll to practice questions section on dashboard
+    // Scroll to "No subjects selected yet" section on dashboard
     setTimeout(() => {
-      const practiceSection = document.querySelector('[data-testid="practice-questions-section"]') || 
-                             document.querySelector('.grid.gap-6.md\\:grid-cols-2.lg\\:grid-cols-3') ||
-                             document.querySelector('h2:contains("Practice Questions")') ||
-                             document.getElementById('subjects-section');
+      const subjectsEmptySection = Array.from(document.querySelectorAll('*')).find(el => 
+        el.textContent?.includes('No subjects selected yet')
+      ) || 
+      document.querySelector('[data-testid="empty-subjects"]') ||
+      document.querySelector('h3:contains("No subjects selected")') ||
+      document.getElementById('subjects-section');
       
-      if (practiceSection) {
-        practiceSection.scrollIntoView({ 
+      if (subjectsEmptySection) {
+        subjectsEmptySection.scrollIntoView({ 
           behavior: 'smooth', 
-          block: 'start' 
+          block: 'center' 
         });
       }
     }, 100);
