@@ -2420,7 +2420,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         
         // Bonding, Structure & Properties of Matter
         { number: questionNumber++, text: "What type of bond is found in sodium chloride?", marks: 1, topic: "Bonding, Structure & Properties" },
-        { number: questionNumber++, text: "Draw the dot-and-cross diagram for a molecule of oxygen.", marks: 2, topic: "Bonding, Structure & Properties" },
+        { number: questionNumber++, text: "Describe the bonding in a molecule of oxygen.", marks: 2, topic: "Bonding, Structure & Properties" },
         { number: questionNumber++, text: "Explain why ionic compounds have high melting points.", marks: 3, topic: "Bonding, Structure & Properties" },
         { number: questionNumber++, text: "Explain why diamond and graphite have very different properties, even though both are forms of carbon.", marks: 4, topic: "Bonding, Structure & Properties" },
         { number: questionNumber++, text: "Evaluate the advantages and disadvantages of using nanoparticles in medicine.", marks: 6, topic: "Bonding, Structure & Properties" },
@@ -2446,7 +2446,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         // Energy Changes
         { number: questionNumber++, text: "What type of reaction releases energy to the surroundings?", marks: 1, topic: "Energy Changes" },
         { number: questionNumber++, text: "State one everyday use of an endothermic reaction.", marks: 1, topic: "Energy Changes" },
-        { number: questionNumber++, text: "Draw and label an energy profile diagram for an exothermic reaction.", marks: 4, topic: "Energy Changes" },
+        { number: questionNumber++, text: "Describe the energy changes that occur during an exothermic reaction.", marks: 4, topic: "Energy Changes" },
         { number: questionNumber++, text: "Define activation energy.", marks: 2, topic: "Energy Changes" },
         { number: questionNumber++, text: "The bond energy of H–H is 436 kJ/mol and Cl–Cl is 242 kJ/mol. The bond energy of H–Cl is 431 kJ/mol. Calculate the energy change for the reaction: H₂ + Cl₂ → 2HCl.", marks: 6, topic: "Energy Changes" },
         { number: questionNumber++, text: "Compare the advantages and disadvantages of hydrogen fuel cells and rechargeable batteries.", marks: 6, topic: "Energy Changes" }
