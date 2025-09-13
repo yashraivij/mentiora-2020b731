@@ -1089,6 +1089,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
 
   // Generate exam questions from subject topics
   const generateExamQuestions = (): ExamQuestion[] => {
+    console.log('generateExamQuestions called with subjectId:', subjectId);
     const questions: ExamQuestion[] = [];
     
     // Special handling for English Literature premium exam format
