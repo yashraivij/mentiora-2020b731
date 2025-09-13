@@ -2276,6 +2276,162 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return businessQuestions;
     }
 
+    // Special handling for AQA Combined Science: Trilogy Biology Paper 1 predicted exam format
+    if (subjectId === 'combined-science-biology') {
+      let questionNumber = 1;
+      
+      const combinedScienceBiologyQuestions = [
+        // Cell Biology (15 marks)
+        {
+          id: 'csb-p1-q1',
+          questionNumber: questionNumber++,
+          text: 'Name the part of a cell where respiration mainly happens.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'csb-p1-q2',
+          questionNumber: questionNumber++,
+          text: 'State one difference between a bacterial cell and an animal cell.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'csb-p1-q3',
+          questionNumber: questionNumber++,
+          text: 'A cell has actual size 0.02 mm. The image size is 20 mm. Calculate magnification.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'csb-p1-q4',
+          questionNumber: questionNumber++,
+          text: 'Describe the process of mitosis.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'csb-p1-q5',
+          questionNumber: questionNumber++,
+          text: 'Compare diffusion, osmosis and active transport.\n\n[6 marks]',
+          marks: 6
+        },
+
+        // Organisation (15 marks)
+        {
+          id: 'csb-p1-q6',
+          questionNumber: questionNumber++,
+          text: 'What is the function of red blood cells?\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'csb-p1-q7',
+          questionNumber: questionNumber++,
+          text: 'State the role of the alveoli.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'csb-p1-q8',
+          questionNumber: questionNumber++,
+          text: 'Explain how the small intestine is adapted for absorption.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'csb-p1-q9',
+          questionNumber: questionNumber++,
+          text: 'Explain how stents help treat coronary heart disease.\n\n[3 marks]',
+          marks: 3
+        },
+        {
+          id: 'csb-p1-q10',
+          questionNumber: questionNumber++,
+          text: 'Compare the structure and function of arteries, veins and capillaries.\n\n[6 marks]',
+          marks: 6
+        },
+
+        // Infection and Response (15 marks)
+        {
+          id: 'csb-p1-q11',
+          questionNumber: questionNumber++,
+          text: 'Name the type of microorganism that causes measles.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'csb-p1-q12',
+          questionNumber: questionNumber++,
+          text: 'What is the purpose of vaccination?\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'csb-p1-q13',
+          questionNumber: questionNumber++,
+          text: 'Explain how vaccination helps protect the body from infection.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'csb-p1-q14',
+          questionNumber: questionNumber++,
+          text: 'State one reason why antibiotics do not kill viruses.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'csb-p1-q15',
+          questionNumber: questionNumber++,
+          text: 'Evaluate the use of antibiotics and explain why overuse is a problem.\n\n[6 marks]',
+          marks: 6
+        },
+        {
+          id: 'csb-p1-q16',
+          questionNumber: questionNumber++,
+          text: 'Evaluate the use of vaccination programmes in controlling disease outbreaks.\n\n[6 marks]',
+          marks: 6
+        },
+
+        // Bioenergetics (25 marks)
+        {
+          id: 'csb-p1-q17',
+          questionNumber: questionNumber++,
+          text: 'Write the word equation for photosynthesis.\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'csb-p1-q18',
+          questionNumber: questionNumber++,
+          text: 'State one factor that can limit the rate of photosynthesis.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'csb-p1-q19',
+          questionNumber: questionNumber++,
+          text: 'Describe how light intensity affects the rate of photosynthesis.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'csb-p1-q20',
+          questionNumber: questionNumber++,
+          text: 'A student counts 50 bubbles in 1 minute from pondweed. Calculate the rate per second.\n\n[2 marks]',
+          marks: 2
+        },
+        {
+          id: 'csb-p1-q21',
+          questionNumber: questionNumber++,
+          text: 'Suggest one way farmers can increase crop yield in a greenhouse.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'csb-p1-q22',
+          questionNumber: questionNumber++,
+          text: 'Compare aerobic and anaerobic respiration in humans.\n\n[6 marks]',
+          marks: 6
+        },
+        {
+          id: 'csb-p1-q23',
+          questionNumber: questionNumber++,
+          text: 'Evaluate the advantages and disadvantages of controlling limiting factors in commercial greenhouses.\n\n[6 marks]',
+          marks: 6
+        }
+      ];
+      
+      console.log('AQA Combined Science Biology Paper 1 questions generated:', combinedScienceBiologyQuestions.length);
+      return combinedScienceBiologyQuestions;
+    }
+
     // Special format for Geography - AQA GCSE (88 marks total including 3 SPaG)
     if (subjectId === 'geography') {
       // Geography Paper 1
@@ -3495,6 +3651,9 @@ Write a story about a moment of fear.
     }
     if (subjectId === 'business') {
       return 90; // AQA Business Paper 1: 90 marks
+    }
+    if (subjectId === 'combined-science-biology') {
+      return 70; // AQA Combined Science Biology Paper 1: 70 marks
     }
     return examQuestions.reduce((total, q) => total + q.marks, 0);
   };
