@@ -1573,37 +1573,49 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         {
           id: 'math-p1-q25',
           questionNumber: questionNumber++,
-          text: 'A bag contains 3 red and 7 blue counters. Write down the probability of picking a red counter.\n\n[1 mark]\n\nA spinner has equal sections numbered 1 to 5. Find the probability of getting an even number.\n\n[2 marks]',
-          marks: 3
+          text: 'A bag contains 3 red and 7 blue counters. Write down the probability of picking a red counter.\n\n[1 mark]',
+          marks: 1
+        },
+        {
+          id: 'math-p1-q26',
+          questionNumber: questionNumber++,
+          text: 'A spinner has equal sections numbered 1 to 5. Find the probability of getting an even number.\n\n[2 marks]',
+          marks: 2
         },
 
         // 5-6 Mark Problem Solving Questions (~25 marks total)
         {
-          id: 'math-p1-q26',
+          id: 'math-p1-q27',
           questionNumber: questionNumber++,
           text: 'A phone costs £300. In a sale it is reduced by 20%. In the following year it increases by 15%. What is the final price?\n\n[5 marks]',
           marks: 5
         },
         {
-          id: 'math-p1-q27',
+          id: 'math-p1-q28',
           questionNumber: questionNumber++,
-          text: 'The nth term of a sequence is 3n - 2. Write the first 4 terms.\n\nShow that the difference between the squares of two consecutive integers is always odd.\n\n[5 marks]',
-          marks: 5
+          text: 'The nth term of a sequence is 3n - 2. Write the first 4 terms.\n\n[4 marks]',
+          marks: 4
         },
         {
-          id: 'math-p1-q28',
+          id: 'math-p1-q29',
+          questionNumber: questionNumber++,
+          text: 'Show that the difference between the squares of two consecutive integers is always odd.\n\n[4 marks]',
+          marks: 4
+        },
+        {
+          id: 'math-p1-q30',
           questionNumber: questionNumber++,
           text: 'Solve 2x² - 5x - 3 = 0\n\n[5 marks]',
           marks: 5
         },
         {
-          id: 'math-p1-q29',
+          id: 'math-p1-q31',
           questionNumber: questionNumber++,
           text: '£60 is shared between A and B in the ratio 5:7. A then gives £6 to B. Find the new ratio of A\'s money to B\'s money.\n\n[5 marks]',
           marks: 5
         },
         {
-          id: 'math-p1-q30',
+          id: 'math-p1-q32',
           questionNumber: questionNumber++,
           text: 'The value of a car decreases by 15% each year. Initially, it costs £12,000. Work out its value after 3 years.\n\n[5 marks]',
           marks: 5
