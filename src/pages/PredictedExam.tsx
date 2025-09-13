@@ -2354,6 +2354,56 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       }));
     }
 
+    // Special handling for Edexcel IGCSE Business Paper 1 predicted exam format
+    if (subjectId === 'business-edexcel-igcse') {
+      console.log('🎯 GENERATING EDEXCEL IGCSE BUSINESS PAPER 1 QUESTIONS');
+      let questionNumber = 1;
+      
+      const igcseBusinessQuestions = [
+        // Business activity and influences on business
+        { number: questionNumber++, text: 'Define "opportunity cost".', marks: 2, topic: "Business Activity" },
+        { number: questionNumber++, text: "Explain two reasons why a business might set objectives.", marks: 4, topic: "Business Activity" },
+        { number: questionNumber++, text: "A small retailer is considering becoming a private limited company. Analyse the advantages and disadvantages of this change.", marks: 6, topic: "Business Activity" },
+        { number: questionNumber++, text: '"The main aim of all businesses is profit." To what extent do you agree? Justify your answer with examples.', marks: 12, topic: "Business Activity" },
+        
+        // People in business
+        { number: questionNumber++, text: 'What is meant by "span of control"?', marks: 2, topic: "People in Business" },
+        { number: questionNumber++, text: "Explain the difference between internal and external recruitment.", marks: 3, topic: "People in Business" },
+        { number: questionNumber++, text: "A business is expanding and needs more managers. Analyse whether it should promote internally or recruit externally.", marks: 8, topic: "People in Business" },
+        { number: questionNumber++, text: '"Motivation is the most important role of Human Resources." To what extent do you agree? Use examples to support your answer.', marks: 12, topic: "People in Business" },
+        
+        // Business finance
+        { number: questionNumber++, text: 'Define "cash flow".', marks: 2, topic: "Business Finance" },
+        { number: questionNumber++, text: "Explain one advantage and one disadvantage of using a bank loan as a source of finance.", marks: 4, topic: "Business Finance" },
+        { number: questionNumber++, text: "A new café needs £50,000 to expand. Analyse whether it should use retained profit or a bank loan.", marks: 8, topic: "Business Finance" },
+        { number: questionNumber++, text: '"Cash flow is more important than profit." To what extent do you agree? Justify your answer.', marks: 12, topic: "Business Finance" },
+        
+        // Marketing
+        { number: questionNumber++, text: 'Define "market segmentation".', marks: 2, topic: "Marketing" },
+        { number: questionNumber++, text: "Explain one advantage and one disadvantage of using social media for promotion.", marks: 4, topic: "Marketing" },
+        { number: questionNumber++, text: "A new sports drink is being launched. Analyse whether it should use price skimming or penetration pricing.", marks: 8, topic: "Marketing" },
+        
+        // Business operations
+        { number: questionNumber++, text: 'What is meant by "Just in Time" (JIT) stock control?', marks: 2, topic: "Business Operations" },
+        { number: questionNumber++, text: "Explain the difference between batch and flow production.", marks: 3, topic: "Business Operations" },
+        { number: questionNumber++, text: "A shoe manufacturer is deciding between job production and batch production. Analyse the advantages and disadvantages of each method.", marks: 8, topic: "Business Operations" }
+      ];
+
+      console.log('✅ Generated', igcseBusinessQuestions.length, 'IGCSE Business Paper 1 questions');
+      
+      return igcseBusinessQuestions.map(q => ({
+        id: `q${q.number}`,
+        questionNumber: q.number,
+        text: q.text,
+        marks: q.marks,
+        topic: q.topic,
+        userAnswer: '',
+        isCorrect: null,
+        feedback: '',
+        modelAnswer: ''
+      }));
+    }
+
     // Special handling for AQA Combined Science: Trilogy Biology Paper 1 predicted exam format
     if (subjectId === 'combined-science-aqa') {
       console.log('Generating Combined Science Biology Paper 1 questions...');
@@ -3689,6 +3739,7 @@ Write a story about a moment of fear.
       mathematics: 120, // 2h
       "mathematics-paper-1": 90, // 1h 30min (AQA Maths Paper 1 Non-Calculator)
       "maths-edexcel": 90, // 1h 30min (Edexcel GCSE Maths Paper 1 Non-Calculator)
+      "business-edexcel-igcse": 90, // 1h 30min (Edexcel IGCSE Business Paper 1)
       "english-language": 135, // 2h 15min
       "english-literature": 150, // 2h 30min
       history: 120, // 2h
@@ -3740,6 +3791,9 @@ Write a story about a moment of fear.
     }
     if (subjectId === 'maths-edexcel') {
       return 80; // Edexcel GCSE Maths Paper 1: 80 marks
+    }
+    if (subjectId === 'business-edexcel-igcse') {
+      return 80; // Edexcel IGCSE Business Paper 1: 80 marks
     }
     return examQuestions.reduce((total, q) => total + q.marks, 0);
   };
