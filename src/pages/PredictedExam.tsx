@@ -1089,6 +1089,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
 
   // Generate exam questions from subject topics
   const generateExamQuestions = (): ExamQuestion[] => {
+    console.log('Generating exam questions for subjectId:', subjectId);
     const questions: ExamQuestion[] = [];
     
     // Special handling for English Literature premium exam format
@@ -2278,6 +2279,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
 
     // Special handling for AQA Combined Science: Trilogy Biology Paper 1 predicted exam format
     if (subjectId === 'combined-science-aqa') {
+      console.log('Generating Combined Science Biology Paper 1 questions...');
       let questionNumber = 1;
       
       const combinedScienceBiologyQuestions = [
