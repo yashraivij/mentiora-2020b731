@@ -791,20 +791,21 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     transition={{ delay: 0.5, type: "spring" }}
                     className="relative"
                   >
+                    {/* Premium badge - positioned to overlap card */}
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-30">
+                      <motion.div
+                        animate={{ y: [0, -3, 0] }}
+                        transition={{ repeat: Infinity, duration: 2 }}
+                        className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-4 py-1 rounded-full font-black text-sm shadow-lg border-2 border-white"
+                      >
+                        🏆 MOST POPULAR
+                      </motion.div>
+                    </div>
+                    
                     {/* Glowing border effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 via-orange-500 via-pink-500 to-purple-500 rounded-xl blur-md opacity-75 animate-pulse" />
                     
-                    <Card className="relative bg-gradient-to-br from-yellow-50 via-orange-50 via-pink-50 to-purple-50 dark:from-yellow-950/30 dark:via-orange-950/30 dark:via-pink-950/30 dark:to-purple-950/30 border-0 overflow-hidden shadow-xl">
-                      {/* Premium badges */}
-                      <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 z-20">
-                        <motion.div
-                          animate={{ y: [0, -3, 0] }}
-                          transition={{ repeat: Infinity, duration: 2 }}
-                          className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-3 py-0.5 rounded-full font-black text-xs shadow-lg"
-                        >
-                          🏆 MOST POPULAR
-                        </motion.div>
-                      </div>
+                    <Card className="relative bg-gradient-to-br from-yellow-50 via-orange-50 via-pink-50 to-purple-50 dark:from-yellow-950/30 dark:via-orange-950/30 dark:via-pink-950/30 dark:to-purple-950/30 border-0 shadow-xl mt-4">
                       
                       <div className="absolute top-2 right-2 z-10">
                         <motion.div
@@ -917,18 +918,18 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   </div>
                   
                   {/* Action Buttons */}
-                  <div className="flex justify-between items-center pt-2 gap-2">
+                  <div className="flex justify-between items-center pt-4 gap-3 border-t border-gray-200 mt-4">
                     <Button 
                       variant="outline" 
                       onClick={() => setCurrentStep(4)} 
-                      className="px-4 py-2 text-sm border-gray-300 hover:bg-gray-50"
+                      className="flex-1 px-4 py-3 text-sm font-semibold border-2 border-gray-300 hover:bg-gray-50 hover:border-gray-400"
                     >
                       ← Back
                     </Button>
                     <Button 
-                      variant="ghost" 
+                      variant="outline" 
                       onClick={onClose} 
-                      className="text-muted-foreground hover:text-foreground text-sm px-4 py-2 border border-gray-200"
+                      className="flex-1 px-4 py-3 text-sm font-semibold border-2 border-gray-300 hover:bg-gray-50 hover:border-gray-400 text-gray-700"
                     >
                       Use Free Version
                     </Button>
