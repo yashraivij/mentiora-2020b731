@@ -580,37 +580,168 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             {/* Step 5: Premium Upgrade - Ultra Premium Design */}
             {currentStep === 5 && (
               <div className="space-y-2 max-h-[calc(98vh-140px)] overflow-hidden">
-                {/* Animated Premium Header - Compact */}
-                <div className="text-center space-y-1 relative">
+                {/* Animated Premium Header - Dynamic & Bigger */}
+                <div className="text-center space-y-2 relative overflow-hidden">
+                  {/* Floating background elements */}
+                  <div className="absolute inset-0 flex justify-center items-center opacity-10">
+                    <motion.div
+                      animate={{ 
+                        rotate: [0, 360],
+                        scale: [1, 1.2, 1]
+                      }}
+                      transition={{ 
+                        duration: 8, 
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                      className="w-32 h-32 bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 rounded-full blur-3xl"
+                    />
+                  </div>
+                  
                   <motion.div
                     initial={{ scale: 0, rotate: -180 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    transition={{ duration: 0.5, type: "spring" }}
-                    className="relative inline-block"
+                    animate={{ 
+                      scale: [0, 1.2, 1],
+                      rotate: [0, 360, 0] 
+                    }}
+                    transition={{ 
+                      duration: 1,
+                      type: "spring",
+                      bounce: 0.5
+                    }}
+                    className="relative inline-block z-10"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 rounded-xl blur-md opacity-75 animate-pulse" />
-                    <div className="relative bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 p-2 rounded-xl shadow-xl">
-                      <Crown className="h-6 w-6 text-white drop-shadow-lg" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 rounded-2xl blur-xl opacity-75">
+                      <motion.div
+                        animate={{ scale: [1, 1.1, 1] }}
+                        transition={{ 
+                          duration: 2, 
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                        className="w-full h-full bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 rounded-2xl"
+                      />
+                    </div>
+                    <div className="relative bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 p-4 rounded-2xl shadow-2xl">
+                      <motion.div
+                        animate={{ 
+                          rotate: [0, -10, 10, 0],
+                          scale: [1, 1.1, 1]
+                        }}
+                        transition={{ 
+                          duration: 3, 
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                      >
+                        <Crown className="h-10 w-10 text-white drop-shadow-2xl" />
+                      </motion.div>
                     </div>
                   </motion.div>
                   
                   <motion.h3
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="text-2xl font-black bg-gradient-to-r from-yellow-500 via-orange-500 via-pink-500 via-purple-500 to-violet-500 bg-clip-text text-transparent"
+                    initial={{ opacity: 0, y: 30, scale: 0.8 }}
+                    animate={{ 
+                      opacity: 1, 
+                      y: 0, 
+                      scale: 1
+                    }}
+                    transition={{ 
+                      delay: 0.3,
+                      duration: 0.8,
+                      type: "spring"
+                    }}
+                    className="text-4xl font-black bg-gradient-to-r from-yellow-500 via-orange-500 via-pink-500 via-purple-500 to-violet-500 bg-clip-text text-transparent relative z-10"
                   >
-                    🚀 Unlock Your Academic Superpower! ✨
+                    <motion.span
+                      animate={{ 
+                        textShadow: [
+                          "0 0 0px rgba(255,255,255,0)",
+                          "0 0 20px rgba(255,255,255,0.5)",
+                          "0 0 0px rgba(255,255,255,0)"
+                        ]
+                      }}
+                      transition={{ 
+                        duration: 3, 
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    >
+                      🚀 Unlock Your Academic Superpower! ✨
+                    </motion.span>
                   </motion.h3>
                   
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="text-base font-semibold"
+                    transition={{ 
+                      delay: 0.5,
+                      duration: 0.6
+                    }}
+                    className="text-xl font-bold relative z-10"
                   >
-                    Join <span className="font-black bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">10,000+ students</span> getting <span className="font-black bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">2+ grades higher</span> 
+                    <motion.span
+                      animate={{ 
+                        color: ["#059669", "#0891b2", "#7c3aed", "#059669"]
+                      }}
+                      transition={{ 
+                        duration: 4, 
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    >
+                      Join{" "}
+                      <motion.span 
+                        className="font-black bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent"
+                        animate={{ scale: [1, 1.05, 1] }}
+                        transition={{ 
+                          duration: 2, 
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                      >
+                        10,000+ students
+                      </motion.span>
+                      {" "}getting{" "}
+                      <motion.span 
+                        className="font-black bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent"
+                        animate={{ scale: [1, 1.1, 1] }}
+                        transition={{ 
+                          duration: 1.5, 
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 0.5
+                        }}
+                      >
+                        2+ grades higher
+                      </motion.span>
+                    </motion.span>
                   </motion.p>
+                  
+                  {/* Floating sparkles */}
+                  {[...Array(6)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute text-yellow-400"
+                      style={{
+                        left: `${20 + i * 12}%`,
+                        top: `${10 + (i % 2) * 60}%`
+                      }}
+                      animate={{
+                        y: [0, -20, 0],
+                        rotate: [0, 180, 360],
+                        scale: [0.5, 1, 0.5]
+                      }}
+                      transition={{
+                        duration: 3 + i * 0.5,
+                        repeat: Infinity,
+                        delay: i * 0.3,
+                        ease: "easeInOut"
+                      }}
+                    >
+                      ✨
+                    </motion.div>
+                  ))}
                 </div>
 
                 {/* Revolutionary Comparison Cards - Larger */}
