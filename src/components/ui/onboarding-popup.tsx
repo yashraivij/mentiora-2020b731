@@ -613,8 +613,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   </motion.p>
                 </div>
 
-                {/* Revolutionary Comparison Cards - Compact */}
-                <div className="grid md:grid-cols-2 gap-3 mt-2">
+                {/* Revolutionary Comparison Cards - Larger */}
+                <div className="grid md:grid-cols-2 gap-4 mt-3">
                   {/* Free Plan - Deliberately Limited */}
                   <motion.div
                     initial={{ opacity: 0, x: -50 }}
@@ -622,16 +622,16 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     transition={{ delay: 0.4 }}
                   >
                     <Card className="relative bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 border-2 border-gray-300 dark:border-gray-600 opacity-75">
-                      <CardHeader className="pb-1">
-                        <CardTitle className="flex items-center gap-2 text-gray-600 dark:text-gray-400 text-base">
-                          <div className="bg-gray-500 p-1 rounded">
-                            <Lock className="h-3 w-3 text-white" />
+                      <CardHeader className="pb-2">
+                        <CardTitle className="flex items-center gap-2 text-gray-600 dark:text-gray-400 text-lg">
+                          <div className="bg-gray-500 p-1.5 rounded">
+                            <Lock className="h-4 w-4 text-white" />
                           </div>
                           <span className="font-bold">Free (Limited)</span>
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-1 pb-2">
-                        <div className="space-y-1">
+                      <CardContent className="space-y-2 pb-3">
+                        <div className="space-y-2">
                           {[
                             { text: 'Basic practice questions', limited: true },
                             { text: 'Only 3 subjects', limited: true },
@@ -639,15 +639,15 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                             { text: 'Basic progress tracking', limited: true }
                           ].map((feature, index) => (
                             <div key={index} className="flex items-center gap-2">
-                              <X className="h-3 w-3 text-red-500" />
-                              <span className="text-xs text-gray-600 dark:text-gray-400">
+                              <X className="h-4 w-4 text-red-500" />
+                              <span className="text-sm text-gray-600 dark:text-gray-400">
                                 {feature.text}
                               </span>
                             </div>
                           ))}
                         </div>
-                        <div className="pt-1 border-t border-gray-300">
-                          <div className="text-lg font-black text-gray-600">FREE</div>
+                        <div className="pt-2 border-t border-gray-300">
+                          <div className="text-xl font-black text-gray-600">FREE</div>
                         </div>
                       </CardContent>
                     </Card>
@@ -679,24 +679,24 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         <motion.div
                           animate={{ rotate: [0, 10, 0] }}
                           transition={{ repeat: Infinity, duration: 3 }}
-                          className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-1.5 py-0.5 rounded-full text-xs font-bold"
+                          className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-2 py-0.5 rounded-full text-xs font-bold"
                         >
                           92% SUCCESS
                         </motion.div>
                       </div>
                       
-                      <CardHeader className="pb-1 relative z-10 pt-4">
+                      <CardHeader className="pb-2 relative z-10 pt-5">
                         <CardTitle className="flex items-center gap-2">
-                          <div className="bg-gradient-to-r from-yellow-500 to-orange-500 p-1.5 rounded-lg shadow-lg">
-                            <Crown className="h-4 w-4 text-white" />
+                          <div className="bg-gradient-to-r from-yellow-500 to-orange-500 p-2 rounded-lg shadow-lg">
+                            <Crown className="h-5 w-5 text-white" />
                           </div>
                           <span className="text-lg font-black bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
                             Premium Superpower
                           </span>
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-1 relative z-10 pb-2">
-                        <div className="space-y-1">
+                      <CardContent className="space-y-2 relative z-10 pb-3">
+                        <div className="space-y-2">
                           {[
                             { text: '🤖 AI Grade Predictor (99% accurate)', premium: true },
                             { text: '🧠 Smart Study Plans', premium: true },
@@ -713,22 +713,22 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                               className="flex items-center gap-2"
                             >
                               <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-full p-0.5">
-                                <Check className="h-2.5 w-2.5 text-white" />
+                                <Check className="h-3 w-3 text-white" />
                               </div>
-                              <span className="text-xs font-semibold">{feature.text}</span>
+                              <span className="text-sm font-semibold">{feature.text}</span>
                             </motion.div>
                           ))}
                         </div>
                         
                         {/* Pricing with massive discount */}
-                        <div className="pt-2 border-t border-gradient-to-r from-yellow-200 to-orange-200 space-y-0.5">
+                        <div className="pt-2 border-t border-gradient-to-r from-yellow-200 to-orange-200 space-y-1">
                           <div className="flex items-center gap-2">
                             <div className="text-xs text-muted-foreground line-through">£19.99/mo</div>
-                            <div className="bg-red-500 text-white px-1.5 py-0.5 rounded-full text-xs font-bold">75% OFF!</div>
+                            <div className="bg-red-500 text-white px-2 py-0.5 rounded-full text-xs font-bold">75% OFF!</div>
                           </div>
                           <div className="flex items-baseline gap-1">
                             <div className="text-2xl font-black bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">£4.99</div>
-                            <div className="text-xs text-muted-foreground">/month</div>
+                            <div className="text-sm text-muted-foreground">/month</div>
                           </div>
                           <div className="text-xs text-emerald-600 font-bold">⚡ LIMITED TIME: First month £1!</div>
                         </div>
