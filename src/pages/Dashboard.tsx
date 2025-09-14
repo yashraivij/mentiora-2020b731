@@ -64,6 +64,7 @@ import { StreakCelebration } from "@/components/ui/streak-celebration";
 import { GradeCelebration } from "@/components/ui/grade-celebration";
 import { DiscordInvitation } from "@/components/ui/discord-invitation";
 import { WelcomePopup } from "@/components/ui/welcome-popup";
+import { OnboardingPopup } from "@/components/ui/onboarding-popup";
 
 import { PublicStreakProfiles } from "@/components/dashboard/PublicStreakProfiles";
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
@@ -108,6 +109,7 @@ const Dashboard = () => {
   const [celebrationSubject, setCelebrationSubject] = useState("");
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
   const [showWelcomePopup, setShowWelcomePopup] = useState(false);
+  const [showOnboardingPopup, setShowOnboardingPopup] = useState(false);
   const [showPromoModal, setShowPromoModal] = useState(false);
   const [loading, setLoading] = useState(false); // This tracks if the page is loading
   const [refreshKey, setRefreshKey] = useState(0); // For triggering re-renders after subscription changes
@@ -354,13 +356,44 @@ const Dashboard = () => {
     }
   };
 
-  // Check if new user should see welcome popup
+  // Check if new user should see onboarding popup
+  const checkForOnboardingPopup = async () => {
+    if (!user?.id) return;
+
+    // Check if user has already completed onboarding
+    const hasCompletedOnboarding = localStorage.getItem(`onboarding_completed_${user.id}`);
+    if (hasCompletedOnboarding) return;
+
+    // Check if user is truly new (signed up recently)
+    try {
+      const { data: { user: authUser } } = await supabase.auth.getUser();
+      if (!authUser?.created_at) return;
+
+      const signupTime = new Date(authUser.created_at);
+      const now = new Date();
+      const timeDifference = now.getTime() - signupTime.getTime();
+      const hoursSinceSignup = timeDifference / (1000 * 60 * 60);
+
+      // Show onboarding only for users who signed up within the last 24 hours
+      if (hoursSinceSignup <= 24) {
+        setShowOnboardingPopup(true);
+      }
+    } catch (error) {
+      console.error("Error checking signup time:", error);
+    }
+  };
+
+  // Check if existing user should see welcome popup
   const checkForWelcomePopup = async () => {
     if (!user?.id) return;
 
     // Check if user has already seen the welcome popup
     const hasSeenWelcome = localStorage.getItem(`welcome_popup_shown_${user.id}`);
     if (hasSeenWelcome) return;
+
+    // Check if user has already completed onboarding (new users get onboarding instead)
+    const hasCompletedOnboarding = localStorage.getItem(`onboarding_completed_${user.id}`);
+    if (!hasCompletedOnboarding) return;
 
     // Check if user has any activity (practice attempts or exam completions)
     const savedProgress = localStorage.getItem(`mentiora_progress_${user.id}`);
@@ -386,7 +419,7 @@ const Dashboard = () => {
       console.error("Error checking exam completions for welcome:", error);
     }
 
-    // Show welcome popup only for truly new users (no progress)
+    // Show welcome popup only for users with some progress but who haven't seen welcome yet
     if (!hasProgress) {
       setShowWelcomePopup(true);
       // Mark as shown immediately
@@ -465,7 +498,10 @@ useEffect(() => {
   // Check for Discord invitation eligibility
     await checkForDiscordInvitation();
 
-    // Check if this is a new user and show welcome popup
+    // Check if this is a new user and show onboarding popup
+    await checkForOnboardingPopup();
+
+    // Check if existing user should see welcome popup
     await checkForWelcomePopup();
 
     if (!refreshed) {
@@ -2094,6 +2130,19 @@ useEffect(() => {
       <DiscordInvitation
         isVisible={showDiscordInvitation}
         onClose={() => setShowDiscordInvitation(false)}
+      />
+
+      {/* Onboarding Popup for New Sign-ups */}
+      <OnboardingPopup 
+        isOpen={showOnboardingPopup} 
+        onClose={() => {
+          setShowOnboardingPopup(false);
+          localStorage.setItem(`onboarding_completed_${user?.id}`, "true");
+        }}
+        onSubjectsAdded={() => {
+          // Reload user subjects after they're added
+          loadUserSubjects();
+        }}
       />
 
       {/* Welcome Popup Modal */}
