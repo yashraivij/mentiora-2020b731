@@ -765,12 +765,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         <div className="space-y-2">
                           {[
                             { text: 'Basic practice questions', limited: true },
-                            { text: 'Only 3 subjects', limited: true },
+                            { text: 'Limited subjects', limited: true },
                             { text: 'No AI predictions', limited: true },
                             { text: 'Basic progress tracking', limited: true }
                           ].map((feature, index) => (
                             <div key={index} className="flex items-center gap-2">
-                              <X className="h-4 w-4 text-red-500" />
+                              <Shield className="h-4 w-4 text-red-500" />
                               <span className="text-sm text-gray-600 dark:text-gray-400">
                                 {feature.text}
                               </span>
@@ -796,7 +796,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     
                     <Card className="relative bg-gradient-to-br from-yellow-50 via-orange-50 via-pink-50 to-purple-50 dark:from-yellow-950/30 dark:via-orange-950/30 dark:via-pink-950/30 dark:to-purple-950/30 border-0 overflow-hidden shadow-xl">
                       {/* Premium badges */}
-                      <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 z-20">
+                      <div className="absolute -top-0.5 left-1/2 transform -translate-x-1/2 z-20">
                         <motion.div
                           animate={{ y: [0, -3, 0] }}
                           transition={{ repeat: Infinity, duration: 2 }}
@@ -829,7 +829,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       <CardContent className="space-y-2 relative z-10 pb-3">
                         <div className="space-y-2">
                           {[
-                            { text: '🤖 AI Grade Predictor (99% accurate)', premium: true },
+                            { text: '🤖 Grade Predictor (99% accurate)', premium: true },
                             { text: '🧠 Smart Study Plans', premium: true },
                             { text: '♾️ Unlimited Everything', premium: true },
                             { text: '📊 Advanced Analytics', premium: true },
@@ -858,10 +858,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                             <div className="bg-red-500 text-white px-2 py-0.5 rounded-full text-xs font-bold">75% OFF!</div>
                           </div>
                           <div className="flex items-baseline gap-1">
-                            <div className="text-2xl font-black bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">£4.99</div>
+                            <div className="text-2xl font-black bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">£9.99</div>
                             <div className="text-sm text-muted-foreground">/month</div>
                           </div>
-                          <div className="text-xs text-emerald-600 font-bold">⚡ LIMITED TIME: First month £1!</div>
+                          <div className="text-xs text-emerald-600 font-bold">⚡ LIMITED TIME ONLY</div>
                         </div>
                       </CardContent>
                     </Card>
@@ -915,7 +915,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       ✅ 30-day money-back guarantee • 📱 Cancel anytime • 🔒 Secure payment
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      Join thousands of students who improved their grades by 2+ levels
+                      Unlock your full academic potential today
                     </p>
                   </div>
                   
