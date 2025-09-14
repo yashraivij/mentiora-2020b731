@@ -64,6 +64,7 @@ import { StreakCelebration } from "@/components/ui/streak-celebration";
 import { GradeCelebration } from "@/components/ui/grade-celebration";
 import { DiscordInvitation } from "@/components/ui/discord-invitation";
 import { WelcomePopup } from "@/components/ui/welcome-popup";
+import { OnboardingPopup } from "@/components/ui/onboarding-popup";
 
 import { PublicStreakProfiles } from "@/components/dashboard/PublicStreakProfiles";
 import StudyPlaylist from "@/components/dashboard/StudyPlaylist";
@@ -108,6 +109,7 @@ const Dashboard = () => {
   const [celebrationSubject, setCelebrationSubject] = useState("");
   const [showDiscordInvitation, setShowDiscordInvitation] = useState(false);
   const [showWelcomePopup, setShowWelcomePopup] = useState(false);
+  const [showOnboardingPopup, setShowOnboardingPopup] = useState(false);
   const [showPromoModal, setShowPromoModal] = useState(false);
   const [loading, setLoading] = useState(false); // This tracks if the page is loading
   const [refreshKey, setRefreshKey] = useState(0); // For triggering re-renders after subscription changes
@@ -354,7 +356,7 @@ const Dashboard = () => {
     }
   };
 
-  // Check if new user should see welcome popup
+  // Check if new user should see onboarding or welcome popup
   const checkForWelcomePopup = async () => {
     if (!user?.id) return;
 
@@ -386,9 +388,28 @@ const Dashboard = () => {
       console.error("Error checking exam completions for welcome:", error);
     }
 
-    // Show welcome popup only for truly new users (no progress)
+    // Show appropriate popup only for truly new users (no progress)
     if (!hasProgress) {
-      setShowWelcomePopup(true);
+      // Check if this is a brand new user (just signed up)
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('created_at')
+        .eq('id', user.id)
+        .single();
+      
+      if (profile) {
+        const signupTime = new Date(profile.created_at);
+        const now = new Date();
+        const hoursSinceSignup = (now.getTime() - signupTime.getTime()) / (1000 * 60 * 60);
+        
+        // Show onboarding for users who signed up within the last 24 hours
+        if (hoursSinceSignup < 24) {
+          setShowOnboardingPopup(true);
+        } else {
+          // Show regular welcome popup for existing users with no subjects
+          setShowWelcomePopup(true);
+        }
+      }
       // Mark as shown immediately
       localStorage.setItem(`welcome_popup_shown_${user.id}`, "true");
     }
@@ -2096,7 +2117,19 @@ useEffect(() => {
         onClose={() => setShowDiscordInvitation(false)}
       />
 
-      {/* Welcome Popup Modal */}
+      {/* Onboarding Popup for new users */}
+      <OnboardingPopup
+        isVisible={showOnboardingPopup}
+        onComplete={() => {
+          setShowOnboardingPopup(false);
+          // Reload subjects after onboarding
+          setTimeout(() => {
+            loadUserSubjects();
+          }, 500);
+        }}
+      />
+
+      {/* Welcome Popup for existing users */}
       <WelcomePopup
         isVisible={showWelcomePopup}
         onClose={() => setShowWelcomePopup(false)}
