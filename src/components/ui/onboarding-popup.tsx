@@ -796,11 +796,11 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     
                     <Card className="relative bg-gradient-to-br from-yellow-50 via-orange-50 via-pink-50 to-purple-50 dark:from-yellow-950/30 dark:via-orange-950/30 dark:via-pink-950/30 dark:to-purple-950/30 border-0 overflow-hidden shadow-xl">
                       {/* Premium badges */}
-                      <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 z-20">
+                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-30">
                         <motion.div
                           animate={{ y: [0, -3, 0] }}
                           transition={{ repeat: Infinity, duration: 2 }}
-                          className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-3 py-0.5 rounded-full font-black text-xs shadow-lg"
+                          className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-4 py-1 rounded-full font-black text-sm shadow-xl border-2 border-white"
                         >
                           🏆 MOST POPULAR
                         </motion.div>
@@ -916,23 +916,23 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     </p>
                   </div>
                   
-                  {/* Action Buttons */}
-                  <div className="flex justify-between items-center pt-2 gap-2">
-                    <Button 
-                      variant="outline" 
-                      onClick={() => setCurrentStep(4)} 
-                      className="px-4 py-2 text-sm border-gray-300 hover:bg-gray-50"
-                    >
-                      ← Back
-                    </Button>
-                    <Button 
-                      variant="ghost" 
-                      onClick={onClose} 
-                      className="text-muted-foreground hover:text-foreground text-sm px-4 py-2 border border-gray-200"
-                    >
-                      Use Free Version
-                    </Button>
-                  </div>
+                   {/* Action Buttons */}
+                   <div className="flex justify-between items-center pt-4 gap-4 border-t border-gray-200 mt-4">
+                     <Button 
+                       variant="outline" 
+                       onClick={() => setCurrentStep(4)} 
+                       className="px-6 py-3 text-base font-semibold border-2 border-gray-400 hover:bg-gray-100 shadow-md"
+                     >
+                       ← Back
+                     </Button>
+                     <Button 
+                       variant="outline" 
+                       onClick={onClose} 
+                       className="px-6 py-3 text-base font-semibold border-2 border-blue-400 text-blue-600 hover:bg-blue-50 shadow-md"
+                     >
+                       Use Free Version
+                     </Button>
+                   </div>
                 </motion.div>
               </div>
             )}
