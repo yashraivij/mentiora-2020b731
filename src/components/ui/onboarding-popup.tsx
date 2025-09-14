@@ -581,94 +581,94 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
             {/* Step 5: Premium Upgrade */}
             {currentStep === 5 && (
-              <div className="space-y-8 max-h-none overflow-visible">
+              <div className="space-y-4 max-h-[calc(98vh-180px)] overflow-y-auto scrollbar-thin scrollbar-thumb-primary/20">
                 {/* Premium Header */}
-                <div className="text-center space-y-4 relative">
+                <div className="text-center space-y-2 relative">
                   <div className="relative inline-block">
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 rounded-full blur-2xl opacity-50 animate-pulse" />
-                    <div className="relative bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 p-4 rounded-3xl shadow-2xl">
-                      <Crown className="h-12 w-12 text-white" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 rounded-full blur-xl opacity-50 animate-pulse" />
+                    <div className="relative bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 p-2 rounded-2xl shadow-xl">
+                      <Crown className="h-8 w-8 text-white" />
                     </div>
                   </div>
                   
-                  <h3 className="text-5xl font-black bg-gradient-to-r from-yellow-500 via-orange-500 via-pink-500 to-purple-500 bg-clip-text text-transparent">
+                  <h3 className="text-3xl font-black bg-gradient-to-r from-yellow-500 via-orange-500 via-pink-500 to-purple-500 bg-clip-text text-transparent">
                     Unlock Premium Power! 🚀
                   </h3>
                   
-                  <p className="text-xl text-muted-foreground font-medium">
+                  <p className="text-base text-muted-foreground font-medium">
                     Transform your revision with <span className="font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">AI-powered insights</span>
                   </p>
                   
                   {/* Stats Banner */}
-                  <div className="bg-gradient-to-r from-emerald-500/10 via-cyan-500/10 to-blue-500/10 border border-emerald-500/20 rounded-2xl p-4 mx-auto max-w-md">
-                    <p className="text-sm font-bold text-emerald-600">
-                      ⚡ Premium students achieve <span className="text-2xl">2.3x</span> better grades on average!
+                  <div className="bg-gradient-to-r from-emerald-500/10 via-cyan-500/10 to-blue-500/10 border border-emerald-500/20 rounded-xl p-2 mx-auto max-w-sm">
+                    <p className="text-xs font-bold text-emerald-600">
+                      ⚡ Premium students achieve <span className="text-lg">2.3x</span> better grades on average!
                     </p>
                   </div>
                 </div>
 
                 {/* Comparison Cards */}
-                <div className="grid md:grid-cols-2 gap-8 mt-8">
+                <div className="grid md:grid-cols-2 gap-4 mt-4">
                   {/* Free Plan */}
-                  <Card className="relative h-full bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 border-2 border-gray-200 dark:border-gray-700">
-                    <CardHeader className="pb-4">
-                      <CardTitle className="flex items-center gap-3 text-xl">
-                        <div className="bg-gradient-to-r from-gray-400 to-gray-500 p-2 rounded-lg">
-                          <Shield className="h-6 w-6 text-white" />
+                  <Card className="relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 border-2 border-gray-200 dark:border-gray-700">
+                    <CardHeader className="pb-2">
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <div className="bg-gradient-to-r from-gray-400 to-gray-500 p-1.5 rounded-lg">
+                          <Shield className="h-4 w-4 text-white" />
                         </div>
                         <span>Free Plan</span>
                       </CardTitle>
-                      <CardDescription className="text-lg font-medium">
+                      <CardDescription className="text-sm">
                         Good for getting started
                       </CardDescription>
                     </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="space-y-3">
+                    <CardContent className="space-y-2">
+                      <div className="space-y-2">
                         {[
                           'Basic practice questions',
                           'Limited analytics',
                           '3 subjects maximum',
                           'Basic progress tracking'
                         ].map((feature, index) => (
-                          <div key={index} className="flex items-center gap-3">
-                            <div className="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center">
-                              <Check className="h-3 w-3 text-gray-600" />
+                          <div key={index} className="flex items-center gap-2">
+                            <div className="w-4 h-4 rounded-full bg-gray-200 flex items-center justify-center">
+                              <Check className="h-2.5 w-2.5 text-gray-600" />
                             </div>
-                            <span className="text-gray-600">{feature}</span>
+                            <span className="text-sm text-gray-600">{feature}</span>
                           </div>
                         ))}
                       </div>
-                      <div className="pt-4 border-t">
-                        <div className="text-3xl font-black text-gray-600">FREE</div>
+                      <div className="pt-2 border-t">
+                        <div className="text-2xl font-black text-gray-600">FREE</div>
                       </div>
                     </CardContent>
                   </Card>
 
                   {/* Premium Plan */}
                   <div className="relative">
-                    <Card className="relative h-full bg-gradient-to-br from-yellow-50 via-orange-50 to-pink-50 dark:from-yellow-950/20 dark:via-orange-950/20 dark:to-pink-950/20 border-2 border-gradient-to-r from-yellow-400 to-pink-400 overflow-hidden">
+                    <Card className="relative bg-gradient-to-br from-yellow-50 via-orange-50 to-pink-50 dark:from-yellow-950/20 dark:via-orange-950/20 dark:to-pink-950/20 border-2 border-gradient-to-r from-yellow-400 to-pink-400 overflow-hidden">
                       {/* Recommended badge */}
-                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
-                        <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-6 py-2 rounded-full font-bold text-sm shadow-lg">
+                      <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 z-10">
+                        <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-4 py-1 rounded-full font-bold text-xs shadow-lg">
                           🏆 MOST POPULAR
                         </div>
                       </div>
                       
-                      <CardHeader className="pb-4 relative z-10">
-                        <CardTitle className="flex items-center gap-3 text-xl">
-                          <div className="bg-gradient-to-r from-yellow-500 to-orange-500 p-2 rounded-lg shadow-lg">
-                            <Crown className="h-6 w-6 text-white" />
+                      <CardHeader className="pb-2 relative z-10 pt-6">
+                        <CardTitle className="flex items-center gap-2 text-lg">
+                          <div className="bg-gradient-to-r from-yellow-500 to-orange-500 p-1.5 rounded-lg shadow-lg">
+                            <Crown className="h-4 w-4 text-white" />
                           </div>
                           <span className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent font-black">
                             Premium Plan
                           </span>
                         </CardTitle>
-                        <CardDescription className="text-lg font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">
+                        <CardDescription className="text-sm font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">
                           Supercharge your revision! 🚀
                         </CardDescription>
                       </CardHeader>
-                      <CardContent className="space-y-4 relative z-10">
-                        <div className="space-y-3">
+                      <CardContent className="space-y-2 relative z-10">
+                        <div className="space-y-2">
                           {[
                             { icon: Sparkles, text: 'AI-powered grade predictions' },
                             { icon: TrendingUp, text: 'Advanced analytics & insights' },
@@ -680,24 +680,24 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                           ].map((feature, index) => {
                             const FeatureIcon = feature.icon;
                             return (
-                              <div key={index} className="flex items-center gap-3">
-                                <div className="w-5 h-5 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center shadow-lg">
-                                  <Check className="h-3 w-3 text-white" />
+                              <div key={index} className="flex items-center gap-2">
+                                <div className="w-4 h-4 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center shadow-lg">
+                                  <Check className="h-2.5 w-2.5 text-white" />
                                 </div>
-                                <div className="flex items-center gap-2">
-                                  <FeatureIcon className="h-4 w-4 text-yellow-600" />
-                                  <span className="font-medium">{feature.text}</span>
+                                <div className="flex items-center gap-1">
+                                  <FeatureIcon className="h-3 w-3 text-yellow-600" />
+                                  <span className="text-sm font-medium">{feature.text}</span>
                                 </div>
                               </div>
                             );
                           })}
                         </div>
-                        <div className="pt-4 border-t border-yellow-200">
-                          <div className="flex items-center gap-2">
-                            <div className="text-3xl font-black bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">£4.99</div>
-                            <div className="text-muted-foreground">/month</div>
+                        <div className="pt-2 border-t border-yellow-200">
+                          <div className="flex items-center gap-1">
+                            <div className="text-2xl font-black bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">£4.99</div>
+                            <div className="text-sm text-muted-foreground">/month</div>
                           </div>
-                          <p className="text-sm text-emerald-600 font-medium">💰 Save 60% vs individual tutoring!</p>
+                          <p className="text-xs text-emerald-600 font-medium">💰 Save 60% vs individual tutoring!</p>
                         </div>
                       </CardContent>
                     </Card>
@@ -705,31 +705,31 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 </div>
 
                 {/* Action Buttons */}
-                <div className="text-center space-y-4 pt-8 border-t">
+                <div className="text-center space-y-3 pt-4">
                   <Button 
                     onClick={handleUpgrade}
-                    className="relative bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 hover:from-yellow-600 hover:via-orange-600 hover:to-pink-600 text-white font-black px-12 py-4 text-xl shadow-2xl shadow-orange-500/25 overflow-hidden group"
+                    className="relative bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 hover:from-yellow-600 hover:via-orange-600 hover:to-pink-600 text-white font-black px-8 py-3 text-lg shadow-xl shadow-orange-500/25 overflow-hidden group"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                    <div className="flex items-center gap-3">
-                      <Crown className="h-6 w-6" />
+                    <div className="flex items-center gap-2">
+                      <Crown className="h-5 w-5" />
                       <span>✨ Upgrade to Premium Power!</span>
-                      <Rocket className="h-5 w-5" />
+                      <Rocket className="h-4 w-4" />
                     </div>
                   </Button>
                 </div>
                 
                 {/* Trust indicators */}
                 <div className="text-center space-y-2">
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs text-muted-foreground">
                     ✅ 30-day money-back guarantee • 📱 Cancel anytime • 🔒 Secure payment
                   </p>
                   
-                  <div className="flex justify-between items-center pt-4">
-                    <Button variant="ghost" onClick={onClose} className="text-muted-foreground hover:text-foreground">
+                  <div className="flex justify-between items-center pt-2">
+                    <Button variant="ghost" onClick={onClose} className="text-muted-foreground hover:text-foreground text-sm">
                       Maybe later
                     </Button>
-                    <Button variant="outline" onClick={() => setCurrentStep(4)} className="px-6 py-2">
+                    <Button variant="outline" onClick={() => setCurrentStep(4)} className="px-4 py-1 text-sm">
                       Back
                     </Button>
                   </div>
