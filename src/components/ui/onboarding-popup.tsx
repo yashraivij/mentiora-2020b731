@@ -171,8 +171,6 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     exit: { opacity: 0, x: -100 }
   };
 
-  const floatingIcons: LucideIcon[] = [Star, Sparkles, Crown, Trophy, Zap, Rocket, Gem];
-
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-5xl max-h-[95vh] overflow-hidden bg-gradient-to-br from-violet-500/10 via-purple-500/5 to-fuchsia-500/10 border-0">
@@ -180,40 +178,6 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
         <div className="absolute inset-0 bg-gradient-to-br from-violet-600/20 via-purple-600/10 to-fuchsia-600/20 animate-pulse" />
         <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 via-transparent to-cyan-500/10" />
         <div className="absolute inset-0 bg-gradient-to-bl from-orange-500/10 via-transparent to-pink-500/10" />
-        
-        {/* Dynamic floating elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(35)].map((_, i) => {
-            const IconComponent = floatingIcons[i % floatingIcons.length];
-            const colors = ['text-violet-400', 'text-fuchsia-400', 'text-cyan-400', 'text-emerald-400', 'text-orange-400', 'text-pink-400', 'text-yellow-400'];
-            
-            return (
-              <motion.div
-                key={i}
-                className="absolute"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-                animate={{
-                  y: [-30, -60, -30],
-                  x: [-10, 10, -10],
-                  opacity: [0.2, 0.9, 0.2],
-                  scale: [0.3, 1.2, 0.3],
-                  rotate: [0, 360, 0],
-                }}
-                transition={{
-                  duration: 6 + Math.random() * 4,
-                  repeat: Infinity,
-                  delay: Math.random() * 3,
-                  ease: "easeInOut",
-                }}
-              >
-                <IconComponent className={`h-3 w-3 ${colors[i % colors.length]} drop-shadow-lg`} />
-              </motion.div>
-            );
-          })}
-        </div>
         
         {/* Glowing border effect */}
         <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-violet-500 via-purple-500 via-fuchsia-500 via-pink-500 to-orange-500 p-0.5 animate-pulse">
@@ -313,7 +277,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       whileTap={{ scale: 0.95 }}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05 }}
+                      transition={{ delay: index * 0.05 }}
                     >
                       <Card 
                         className={`cursor-pointer transition-all duration-300 relative overflow-hidden ${
@@ -421,87 +385,84 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     animate={{ opacity: 1, y: 0 }}
                     className="relative"
                   >
-                    <h3 className="text-3xl font-black bg-gradient-to-r from-rose-600 to-orange-600 bg-clip-text text-transparent">
-                      What's your biggest struggle? 🤔
+                    <h3 className="text-3xl font-black bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">
+                      What's your biggest struggle with revision? 🤔
                     </h3>
                     <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
-                      <Brain className="h-6 w-6 text-rose-400 animate-pulse" />
+                      <Brain className="h-6 w-6 text-blue-400 animate-pulse" />
                     </div>
                   </motion.div>
                   <p className="text-lg text-muted-foreground font-medium">
-                    Help us understand your challenges so we can <span className="font-bold text-rose-600">supercharge</span> your revision!
+                    We'll personalize your experience based on your challenges
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-6">
                   {[
-                    { text: "Staying motivated", icon: TrendingUp, gradient: "from-rose-500 to-pink-500", bg: "from-rose-500/20 to-pink-500/20" },
-                    { text: "Knowing what to revise", icon: BookOpen, gradient: "from-emerald-500 to-teal-500", bg: "from-emerald-500/20 to-teal-500/20" },
-                    { text: "Running out of time", icon: Timer, gradient: "from-orange-500 to-amber-500", bg: "from-orange-500/20 to-amber-500/20" },
-                    { text: "Understanding content", icon: Brain, gradient: "from-violet-500 to-purple-500", bg: "from-violet-500/20 to-purple-500/20" }
-                  ].map((struggle, index) => (
-                    <motion.div
-                      key={struggle.text}
-                      whileHover={{ 
-                        scale: 1.05,
-                        rotate: revisionStruggles.includes(struggle.text) ? 0 : 2
-                      }}
-                      whileTap={{ scale: 0.95 }}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <Card 
-                        className={`cursor-pointer transition-all duration-300 relative overflow-hidden h-40 ${
-                          revisionStruggles.includes(struggle.text)
-                            ? `ring-2 ring-offset-2 bg-gradient-to-br ${struggle.bg} shadow-lg`
-                            : 'hover:shadow-md hover:bg-gradient-to-br hover:from-muted/50 hover:to-muted/30'
-                        }`}
-                        onClick={() => handleStruggleToggle(struggle.text)}
+                    { text: 'Staying motivated', icon: Heart, gradient: 'from-pink-500 to-rose-500', bg: 'from-pink-500/20 to-rose-500/20' },
+                    { text: 'Knowing what to revise', icon: Target, gradient: 'from-emerald-500 to-green-500', bg: 'from-emerald-500/20 to-green-500/20' },
+                    { text: 'Running out of time', icon: Timer, gradient: 'from-orange-500 to-red-500', bg: 'from-orange-500/20 to-red-500/20' },
+                    { text: 'Understanding content', icon: Brain, gradient: 'from-blue-500 to-indigo-500', bg: 'from-blue-500/20 to-indigo-500/20' }
+                  ].map((struggle, index) => {
+                    const StruggleIcon = struggle.icon;
+                    return (
+                      <motion.div
+                        key={struggle.text}
+                        whileHover={{ scale: 1.05, y: -5 }}
+                        whileTap={{ scale: 0.95 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
                       >
-                        {revisionStruggles.includes(struggle.text) && (
-                          <div className={`absolute inset-0 bg-gradient-to-br ${struggle.bg} animate-pulse`} />
-                        )}
-                        
-                        <CardContent className="p-6 text-center h-full flex flex-col justify-center items-center relative">
+                        <Card 
+                          className={`cursor-pointer transition-all duration-300 relative overflow-hidden h-40 ${
+                            revisionStruggles.includes(struggle.text)
+                              ? `ring-2 ring-current shadow-lg bg-gradient-to-br ${struggle.bg}`
+                              : 'hover:shadow-md hover:bg-gradient-to-br hover:from-muted/50 hover:to-muted/30'
+                          }`}
+                          onClick={() => handleStruggleToggle(struggle.text)}
+                        >
+                          {revisionStruggles.includes(struggle.text) && (
+                            <div className={`absolute inset-0 bg-gradient-to-br ${struggle.bg} animate-pulse`} />
+                          )}
+                          
+                          <CardContent className="p-6 text-center h-full flex flex-col justify-center items-center relative">
                           <motion.div
                             animate={revisionStruggles.includes(struggle.text) ? { scale: [1, 1.1, 1] } : {}}
                             transition={{ duration: 2, repeat: Infinity }}
-                            className={`p-3 rounded-full mb-4 bg-gradient-to-r ${struggle.gradient} shadow-lg`}
-                          >
-                            <struggle.icon className="h-8 w-8 text-white" />
-                          </motion.div>
-                          <p className="font-bold text-lg">{struggle.text}</p>
-                          {revisionStruggles.includes(struggle.text) && (
-                            <motion.div
-                              initial={{ scale: 0, rotate: -180 }}
-                              animate={{ scale: 1, rotate: 0 }}
-                              className="absolute top-3 right-3"
+                              className={`p-3 rounded-full mb-4 bg-gradient-to-r ${struggle.gradient} shadow-lg`}
                             >
-                              <div className={`bg-gradient-to-r ${struggle.gradient} p-1 rounded-full`}>
-                                <Check className="h-4 w-4 text-white" />
-                              </div>
+                              <StruggleIcon className="h-8 w-8 text-white" />
                             </motion.div>
-                          )}
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  ))}
+                            <p className="font-bold text-lg">{struggle.text}</p>
+                            {revisionStruggles.includes(struggle.text) && (
+                              <motion.div
+                                initial={{ scale: 0, rotate: -180 }}
+                                animate={{ scale: 1, rotate: 0 }}
+                                className="absolute top-4 right-4"
+                              >
+                                <Check className="h-5 w-5 text-green-500" />
+                              </motion.div>
+                            )}
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    );
+                  })}
                 </div>
 
-                <div className="flex justify-end pt-6">
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                <div className="flex justify-between items-center pt-6 border-t">
+                  <Button variant="outline" onClick={() => setCurrentStep(1)} className="px-6 py-2">
+                    Back
+                  </Button>
+                  <Button 
+                    onClick={handleNext} 
+                    disabled={revisionStruggles.length === 0}
+                    className="bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-700 hover:to-cyan-700 text-white font-bold px-8 py-3 shadow-lg"
                   >
-                    <Button 
-                      onClick={handleNext}
-                      className="bg-gradient-to-r from-rose-600 via-pink-600 to-orange-600 hover:from-rose-700 hover:via-pink-700 hover:to-orange-700 text-white font-bold px-8 py-3 text-lg shadow-lg shadow-rose-500/25"
-                    >
-                      Got it! Continue 🚀
-                      <ChevronRight className="h-4 w-4 ml-2" />
-                    </Button>
-                  </motion.div>
+                    Continue Journey ✨
+                    <ChevronRight className="h-4 w-4 ml-2" />
+                  </Button>
                 </div>
               </motion.div>
             )}
@@ -517,56 +478,95 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 transition={{ duration: 0.3 }}
                 className="space-y-6"
               >
-                <div className="text-center space-y-2">
-                  <h3 className="text-2xl font-bold">How do you usually revise?</h3>
-                  <p className="text-muted-foreground">Select your preferred methods</p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { text: "Flashcards", icon: Target },
-                    { text: "Practice questions", icon: Brain },
-                    { text: "Reading notes", icon: BookOpen },
-                    { text: "Watching videos", icon: Users }
-                  ].map((method) => (
-                    <motion.div
-                      key={method.text}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <Card 
-                        className={`cursor-pointer transition-all duration-200 ${
-                          revisionMethods.includes(method.text)
-                            ? 'ring-2 ring-primary bg-primary/5'
-                            : 'hover:bg-muted/50'
-                        }`}
-                        onClick={() => handleMethodToggle(method.text)}
-                      >
-                        <CardContent className="p-6 text-center">
-                          <method.icon className="h-8 w-8 mx-auto mb-3 text-primary" />
-                          <p className="font-medium">{method.text}</p>
-                          {revisionMethods.includes(method.text) && (
-                            <Check className="h-5 w-5 text-primary mx-auto mt-2" />
-                          )}
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  ))}
-                </div>
-
-                <div className="flex justify-end">
-                  <Button 
-                    onClick={handleNext}
-                    className="bg-gradient-to-r from-primary to-secondary hover:opacity-90"
+                <div className="text-center space-y-4 mb-8">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="relative"
                   >
-                    Continue
+                    <h3 className="text-3xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                      How do you usually revise? 📖
+                    </h3>
+                    <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
+                      <BookOpen className="h-6 w-6 text-purple-400 animate-pulse" />
+                    </div>
+                  </motion.div>
+                  <p className="text-lg text-muted-foreground font-medium">
+                    We'll optimize your learning experience for your preferred methods
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-6">
+                  {[
+                    { text: 'Flashcards', icon: Zap, gradient: 'from-yellow-500 to-orange-500', bg: 'from-yellow-500/20 to-orange-500/20' },
+                    { text: 'Practice questions', icon: Trophy, gradient: 'from-purple-500 to-pink-500', bg: 'from-purple-500/20 to-pink-500/20' },
+                    { text: 'Reading notes', icon: BookOpen, gradient: 'from-green-500 to-teal-500', bg: 'from-green-500/20 to-teal-500/20' },
+                    { text: 'Watching videos', icon: Users, gradient: 'from-blue-500 to-cyan-500', bg: 'from-blue-500/20 to-cyan-500/20' }
+                  ].map((method, index) => {
+                    const MethodIcon = method.icon;
+                    return (
+                      <motion.div
+                        key={method.text}
+                        whileHover={{ scale: 1.05, y: -5 }}
+                        whileTap={{ scale: 0.95 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <Card 
+                          className={`cursor-pointer transition-all duration-300 relative overflow-hidden h-40 ${
+                            revisionMethods.includes(method.text)
+                              ? `ring-2 ring-current shadow-lg bg-gradient-to-br ${method.bg}`
+                              : 'hover:shadow-md hover:bg-gradient-to-br hover:from-muted/50 hover:to-muted/30'
+                          }`}
+                          onClick={() => handleMethodToggle(method.text)}
+                        >
+                          {revisionMethods.includes(method.text) && (
+                            <div className={`absolute inset-0 bg-gradient-to-br ${method.bg} animate-pulse`} />
+                          )}
+                          
+                          <CardContent className="p-6 text-center h-full flex flex-col justify-center items-center relative">
+                          <motion.div
+                            animate={revisionMethods.includes(method.text) ? { scale: [1, 1.1, 1] } : {}}
+                            transition={{ duration: 2, repeat: Infinity }}
+                              className={`p-3 rounded-full mb-4 bg-gradient-to-r ${method.gradient} shadow-lg`}
+                            >
+                              <MethodIcon className="h-8 w-8 text-white" />
+                            </motion.div>
+                            <p className="font-bold text-lg">{method.text}</p>
+                            {revisionMethods.includes(method.text) && (
+                              <motion.div
+                                initial={{ scale: 0, rotate: -180 }}
+                                animate={{ scale: 1, rotate: 0 }}
+                                className="absolute top-4 right-4"
+                              >
+                                <Check className="h-5 w-5 text-green-500" />
+                              </motion.div>
+                            )}
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                <div className="flex justify-between items-center pt-6 border-t">
+                  <Button variant="outline" onClick={() => setCurrentStep(2)} className="px-6 py-2">
+                    Back
+                  </Button>
+                  <Button 
+                    onClick={handleNext} 
+                    disabled={revisionMethods.length === 0}
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold px-8 py-3 shadow-lg"
+                  >
+                    Almost Done! 🎯
                     <ChevronRight className="h-4 w-4 ml-2" />
                   </Button>
                 </div>
               </motion.div>
             )}
 
-            {/* Step 4: Parent/Guardian Progress */}
+            {/* Step 4: Parent Progress Sharing */}
             {currentStep === 4 && (
               <motion.div
                 key="step4"
@@ -575,59 +575,77 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 animate="visible"
                 exit="exit"
                 transition={{ duration: 0.3 }}
-                className="space-y-6"
+                className="space-y-8"
               >
-                <div className="text-center space-y-2">
-                  <h3 className="text-2xl font-bold">Would you like us to show your parent/guardian your progress?</h3>
-                  <p className="text-muted-foreground">(Optional)</p>
+                <div className="text-center space-y-4 mb-8">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="relative"
+                  >
+                    <h3 className="text-3xl font-black bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                      Would you like us to share your progress? 👨‍👩‍👧‍👦
+                    </h3>
+                    <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
+                      <Users className="h-6 w-6 text-indigo-400 animate-pulse" />
+                    </div>
+                  </motion.div>
+                  <p className="text-lg text-muted-foreground font-medium">
+                    Keep your parent/guardian informed about your academic journey (Optional)
+                  </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+                <div className="max-w-2xl mx-auto space-y-6">
                   <motion.div
                     whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    className="relative"
                   >
-                    <Card 
-                      className={`cursor-pointer transition-all duration-200 ${
-                        showParentProgress
-                          ? 'ring-2 ring-primary bg-primary/5'
-                          : 'hover:bg-muted/50'
-                      }`}
-                      onClick={() => setShowParentProgress(true)}
+                    <Card className={`cursor-pointer transition-all duration-300 ${
+                      showParentProgress 
+                        ? 'ring-2 ring-indigo-500 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 shadow-lg' 
+                        : 'hover:shadow-md'
+                    }`}
+                    onClick={() => setShowParentProgress(!showParentProgress)}
                     >
-                      <CardContent className="p-6 text-center">
-                        <Check className="h-8 w-8 mx-auto mb-3 text-green-500" />
-                        <p className="font-medium">Yes, please</p>
+                      <CardContent className="p-8 text-center">
+                        <div className="flex items-center justify-center mb-4">
+                        <motion.div
+                          animate={showParentProgress ? { scale: [1, 1.1, 1] } : {}}
+                          transition={{ duration: 2, repeat: Infinity }}
+                            className="bg-gradient-to-r from-indigo-500 to-purple-500 p-4 rounded-2xl shadow-lg mr-4"
+                          >
+                            <Users className="h-10 w-10 text-white" />
+                          </motion.div>
+                          <div className="text-left">
+                            <h4 className="text-2xl font-bold">Share with Parent/Guardian</h4>
+                            <p className="text-muted-foreground">Keep them updated on your progress</p>
+                          </div>
+                          <div className="ml-auto">
+                            <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                              showParentProgress ? 'bg-indigo-500 border-indigo-500' : 'border-gray-300'
+                            }`}>
+                              {showParentProgress && <Check className="h-4 w-4 text-white" />}
+                            </div>
+                          </div>
+                        </div>
+                        <p className="text-sm text-muted-foreground">
+                          We'll send them weekly progress reports including your study streaks, 
+                          grade predictions, and achievements. You can change this anytime in settings.
+                        </p>
                       </CardContent>
                     </Card>
                   </motion.div>
-
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Card 
-                      className={`cursor-pointer transition-all duration-200 ${
-                        !showParentProgress
-                          ? 'ring-2 ring-primary bg-primary/5'
-                          : 'hover:bg-muted/50'
-                      }`}
-                      onClick={() => setShowParentProgress(false)}
-                    >
-                      <CardContent className="p-6 text-center">
-                        <Users className="h-8 w-8 mx-auto mb-3 text-muted-foreground" />
-                        <p className="font-medium">No, thanks</p>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
                 </div>
 
-                <div className="flex justify-end">
+                <div className="flex justify-between items-center pt-6 border-t">
+                  <Button variant="outline" onClick={() => setCurrentStep(3)} className="px-6 py-2">
+                    Back
+                  </Button>
                   <Button 
                     onClick={handleNext}
-                    className="bg-gradient-to-r from-primary to-secondary hover:opacity-90"
+                    className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold px-8 py-3 shadow-lg"
                   >
-                    Continue
+                    Final Step! 🚀
                     <ChevronRight className="h-4 w-4 ml-2" />
                   </Button>
                 </div>
@@ -643,7 +661,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 animate="visible"
                 exit="exit"
                 transition={{ duration: 0.3 }}
-                className="space-y-8"
+                className="space-y-8 max-h-96 overflow-y-auto pr-4 scrollbar-thin scrollbar-thumb-primary/20"
               >
                 {/* Premium Header */}
                 <div className="text-center space-y-4 relative">
@@ -661,16 +679,9 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     </div>
                   </motion.div>
                   
-                  <motion.h3 
-                    className="text-5xl font-black bg-gradient-to-r from-yellow-500 via-orange-500 via-pink-500 to-purple-500 bg-clip-text text-transparent"
-                    animate={{ 
-                      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                    }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                    style={{ backgroundSize: "200% 100%" }}
-                  >
+                  <h3 className="text-5xl font-black bg-gradient-to-r from-yellow-500 via-orange-500 via-pink-500 to-purple-500 bg-clip-text text-transparent">
                     Unlock Premium Power! 🚀
-                  </motion.h3>
+                  </h3>
                   
                   <p className="text-xl text-muted-foreground font-medium">
                     Transform your revision with <span className="font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">AI-powered insights</span>
@@ -689,95 +700,56 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 </div>
 
                 {/* Comparison Cards */}
-                <div className="grid md:grid-cols-2 gap-8">
-                  {/* Free Version */}
+                <div className="grid md:grid-cols-2 gap-8 mt-8">
+                  {/* Free Plan */}
                   <motion.div
-                    initial={{ opacity: 0, x: -50 }}
+                    initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 }}
                   >
-                    <Card className="border-2 border-muted/50 relative overflow-hidden h-full">
-                      <div className="absolute top-4 right-4">
-                        <Badge variant="secondary" className="font-bold">FREE</Badge>
-                      </div>
-                      
+                    <Card className="relative h-full bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 border-2 border-gray-200 dark:border-gray-700">
                       <CardHeader className="pb-4">
                         <CardTitle className="flex items-center gap-3 text-xl">
-                          <div className="bg-muted p-2 rounded-lg">
-                            <BookOpen className="h-6 w-6" />
+                          <div className="bg-gradient-to-r from-gray-400 to-gray-500 p-2 rounded-lg">
+                            <Shield className="h-6 w-6 text-white" />
                           </div>
-                          Basic Plan
+                          <span>Free Plan</span>
                         </CardTitle>
-                        <p className="text-muted-foreground">Good for getting started</p>
+                        <CardDescription className="text-lg font-medium">
+                          Good for getting started
+                        </CardDescription>
                       </CardHeader>
-                      
                       <CardContent className="space-y-4">
-                        {[
-                          "Basic practice questions",
-                          "Subject selection", 
-                          "Simple progress tracking",
-                          "Community support"
-                        ].map((feature, i) => (
-                          <div key={i} className="flex items-center gap-3">
-                            <div className="bg-green-500/10 p-1 rounded-full">
-                              <Check className="h-4 w-4 text-green-600" />
+                        <div className="space-y-3">
+                          {[
+                            'Basic practice questions',
+                            'Limited analytics',
+                            '3 subjects maximum',
+                            'Basic progress tracking'
+                          ].map((feature, index) => (
+                            <div key={index} className="flex items-center gap-3">
+                              <div className="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center">
+                                <Check className="h-3 w-3 text-gray-600" />
+                              </div>
+                              <span className="text-gray-600">{feature}</span>
                             </div>
-                            <span className="text-sm">{feature}</span>
-                          </div>
-                        ))}
-                        
-                        {[
-                          "Limited predictions",
-                          "No AI insights",
-                          "Basic analytics only"
-                        ].map((limitation, i) => (
-                          <div key={i} className="flex items-center gap-3 opacity-60">
-                            <div className="bg-muted p-1 rounded-full">
-                              <X className="h-4 w-4 text-muted-foreground" />
-                            </div>
-                            <span className="text-sm line-through">{limitation}</span>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
+                        <div className="pt-4 border-t">
+                          <div className="text-3xl font-black text-gray-600">FREE</div>
+                        </div>
                       </CardContent>
                     </Card>
                   </motion.div>
 
-                  {/* Premium Version */}
+                  {/* Premium Plan */}
                   <motion.div
-                    initial={{ opacity: 0, x: 50 }}
+                    initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 }}
+                    className="relative"
                   >
-                    <Card className="border-2 border-transparent bg-gradient-to-br from-yellow-500/20 via-orange-500/20 via-pink-500/20 to-purple-500/20 relative overflow-hidden h-full shadow-2xl shadow-yellow-500/25">
-                      {/* Animated background */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 via-orange-500/10 via-pink-500/10 to-purple-500/10 animate-pulse" />
-                      
-                      {/* Floating elements */}
-                      <div className="absolute inset-0 overflow-hidden">
-                        {[...Array(8)].map((_, i) => (
-                          <motion.div
-                            key={i}
-                            className="absolute"
-                            style={{
-                              left: `${Math.random() * 100}%`,
-                              top: `${Math.random() * 100}%`,
-                            }}
-                            animate={{
-                              y: [-10, -20, -10],
-                              opacity: [0.3, 0.8, 0.3],
-                              scale: [0.5, 1, 0.5],
-                            }}
-                            transition={{
-                              duration: 3 + Math.random() * 2,
-                              repeat: Infinity,
-                              delay: Math.random() * 2,
-                            }}
-                          >
-                            <Star className="h-2 w-2 text-yellow-400" />
-                          </motion.div>
-                        ))}
-                      </div>
-                      
+                    <Card className="relative h-full bg-gradient-to-br from-yellow-50 via-orange-50 to-pink-50 dark:from-yellow-950/20 dark:via-orange-950/20 dark:to-pink-950/20 border-2 border-gradient-to-r from-yellow-400 to-pink-400 overflow-hidden">
                       {/* Recommended badge */}
                       <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
                         <motion.div
@@ -802,69 +774,59 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                             Premium Plan
                           </span>
                         </CardTitle>
-                        <p className="text-muted-foreground font-medium">The ultimate revision companion</p>
-                        
-                        {/* Price highlight */}
-                        <div className="bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border border-emerald-500/20 rounded-lg p-3 mt-2">
-                          <p className="text-sm text-emerald-600 font-bold">
-                            💡 Worth over £200 in private tutoring!
-                          </p>
-                        </div>
+                        <CardDescription className="text-lg font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">
+                          Supercharge your revision! 🚀
+                        </CardDescription>
                       </CardHeader>
-                      
                       <CardContent className="space-y-4 relative z-10">
-                        {[
-                          { text: "Unlimited AI-powered practice questions", icon: Infinity, color: "text-violet-500" },
-                          { text: "Predictive grade forecasting", icon: Trophy, color: "text-yellow-500" },
-                          { text: "Smart revision notebook with AI insights", icon: Brain, color: "text-pink-500" },
-                          { text: "Advanced performance analytics", icon: TrendingUp, color: "text-emerald-500" },
-                          { text: "Personalized exam predictions", icon: Target, color: "text-orange-500" },
-                          { text: "Priority support & guidance", icon: Shield, color: "text-cyan-500" },
-                          { text: "Study streak & motivation tools", icon: Heart, color: "text-rose-500" },
-                          { text: "Access to all future features", icon: Rocket, color: "text-purple-500" }
-                        ].map((feature, i) => (
-                          <motion.div 
-                            key={i}
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.6 + (i * 0.1) }}
-                            className="flex items-center gap-3 group"
-                          >
-                            <motion.div
-                              whileHover={{ scale: 1.2, rotate: 180 }}
-                              className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 p-1.5 rounded-full group-hover:shadow-lg transition-all duration-200"
-                            >
-                              <feature.icon className={`h-4 w-4 ${feature.color}`} />
-                            </motion.div>
-                            <span className="text-sm font-medium">{feature.text}</span>
-                          </motion.div>
-                        ))}
+                        <div className="space-y-3">
+                          {[
+                            { icon: Sparkles, text: 'AI-powered grade predictions' },
+                            { icon: TrendingUp, text: 'Advanced analytics & insights' },
+                            { icon: Infinity, text: 'Unlimited subjects & questions' },
+                            { icon: Trophy, text: 'Personalized study plans' },
+                            { icon: Zap, text: 'Smart topic recommendations' },
+                            { icon: Globe, text: 'Premium question database' },
+                            { icon: Award, text: 'Priority support' }
+                          ].map((feature, index) => {
+                            const FeatureIcon = feature.icon;
+                            return (
+                              <motion.div
+                                key={index}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.6 + (index * 0.1) }}
+                                className="flex items-center gap-3"
+                              >
+                                <div className="w-5 h-5 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center shadow-lg">
+                                  <Check className="h-3 w-3 text-white" />
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <FeatureIcon className="h-4 w-4 text-yellow-600" />
+                                  <span className="font-medium">{feature.text}</span>
+                                </div>
+                              </motion.div>
+                            );
+                          })}
+                        </div>
+                        <div className="pt-4 border-t border-yellow-200">
+                          <div className="flex items-center gap-2">
+                            <div className="text-3xl font-black bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">£4.99</div>
+                            <div className="text-muted-foreground">/month</div>
+                          </div>
+                          <p className="text-sm text-emerald-600 font-medium">💰 Save 60% vs individual tutoring!</p>
+                        </div>
                       </CardContent>
                     </Card>
                   </motion.div>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Button 
-                      variant="outline" 
-                      onClick={onClose}
-                      className="px-8 py-3 text-lg font-medium border-2 hover:bg-muted/50"
-                    >
-                      Maybe Later
-                    </Button>
-                  </motion.div>
-                  
+                <div className="text-center space-y-4 pt-8 border-t">
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="relative"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 rounded-xl blur-lg opacity-50 animate-pulse" />
                     <Button 
                       onClick={handleUpgrade}
                       className="relative bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 hover:from-yellow-600 hover:via-orange-600 hover:to-pink-600 text-white font-black px-12 py-4 text-xl shadow-2xl shadow-orange-500/25 overflow-hidden group"
@@ -897,11 +859,17 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   className="text-center space-y-2"
                 >
                   <p className="text-sm text-muted-foreground">
-                    🔒 Secure payment • 💫 Cancel anytime • 🎯 30-day money-back guarantee
+                    ✅ 30-day money-back guarantee • 📱 Cancel anytime • 🔒 Secure payment
                   </p>
-                  <p className="text-xs text-muted-foreground/80">
-                    Join thousands of students already crushing their exams with Premium
-                  </p>
+                  
+                  <div className="flex justify-between items-center pt-4">
+                    <Button variant="ghost" onClick={onClose} className="text-muted-foreground hover:text-foreground">
+                      Maybe later
+                    </Button>
+                    <Button variant="outline" onClick={() => setCurrentStep(4)} className="px-6 py-2">
+                      Back
+                    </Button>
+                  </div>
                 </motion.div>
               </motion.div>
             )}
