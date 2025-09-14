@@ -374,8 +374,9 @@ const Dashboard = () => {
       const timeDifference = now.getTime() - signupTime.getTime();
       const hoursSinceSignup = timeDifference / (1000 * 60 * 60);
 
-      // Show onboarding only for users who signed up within the last 24 hours
-      if (hoursSinceSignup <= 24) {
+      // Show onboarding for new users (signed up within the last 72 hours for more flexibility)
+      // Also show immediately for users who just signed up (within minutes)
+      if (hoursSinceSignup <= 72 || hoursSinceSignup <= 0.1) {
         setShowOnboardingPopup(true);
       }
     } catch (error) {
