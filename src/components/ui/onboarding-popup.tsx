@@ -765,8 +765,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         <div className="space-y-2">
                           {[
                             { text: 'Basic practice questions', limited: true },
-                            { text: 'Limited subjects', limited: true },
-                            { text: 'No AI predictions', limited: true },
+                            { text: 'No grade predictions', limited: true },
+                            { text: 'No advanced analytics', limited: true },
                             { text: 'Basic progress tracking', limited: true }
                           ].map((feature, index) => (
                             <div key={index} className="flex items-center gap-2">
@@ -796,7 +796,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     
                     <Card className="relative bg-gradient-to-br from-yellow-50 via-orange-50 via-pink-50 to-purple-50 dark:from-yellow-950/30 dark:via-orange-950/30 dark:via-pink-950/30 dark:to-purple-950/30 border-0 overflow-hidden shadow-xl">
                       {/* Premium badges */}
-                      <div className="absolute -top-0.5 left-1/2 transform -translate-x-1/2 z-20">
+                      <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 z-20">
                         <motion.div
                           animate={{ y: [0, -3, 0] }}
                           transition={{ repeat: Infinity, duration: 2 }}
@@ -914,26 +914,23 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     <p className="text-xs font-bold text-emerald-600">
                       ✅ 30-day money-back guarantee • 📱 Cancel anytime • 🔒 Secure payment
                     </p>
-                    <p className="text-xs text-muted-foreground">
-                      Unlock your full academic potential today
-                    </p>
                   </div>
                   
                   {/* Action Buttons */}
-                  <div className="flex justify-between items-center pt-1">
-                    <Button 
-                      variant="ghost" 
-                      onClick={onClose} 
-                      className="text-muted-foreground hover:text-foreground text-xs px-2 py-1"
-                    >
-                      I'll stay limited 😔
-                    </Button>
+                  <div className="flex justify-between items-center pt-2 gap-2">
                     <Button 
                       variant="outline" 
                       onClick={() => setCurrentStep(4)} 
-                      className="px-3 py-1 text-xs border-gray-300"
+                      className="px-4 py-2 text-sm border-gray-300 hover:bg-gray-50"
                     >
                       ← Back
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      onClick={onClose} 
+                      className="text-muted-foreground hover:text-foreground text-sm px-4 py-2 border border-gray-200"
+                    >
+                      Use Free Version
                     </Button>
                   </div>
                 </motion.div>
