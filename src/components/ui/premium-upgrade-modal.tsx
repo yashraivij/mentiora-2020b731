@@ -60,26 +60,13 @@ export const PremiumUpgradeModal = ({ isOpen, onClose, onUpgrade }: PremiumUpgra
                 </DialogDescription>
               </div>
             </div>
-            
-            {/* Enhanced progress indicator */}
-            <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-muted-foreground">Step 5 of 5</span>
-              <div className="flex items-center gap-2">
-                {[1, 2, 3, 4, 5].map((step) => (
-                  <div
-                    key={step}
-                    className="h-3 w-12 rounded-full transition-all duration-500 bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500 shadow-lg"
-                  />
-                ))}
-              </div>
-            </div>
 
             {/* Close button */}
             <Button
               variant="ghost"
               size="sm"
               onClick={onClose}
-              className="absolute top-0 right-0 bg-white/10 hover:bg-white/20 rounded-full p-2"
+              className="bg-white/10 hover:bg-white/20 rounded-full p-2"
             >
               <X className="h-4 w-4" />
             </Button>
