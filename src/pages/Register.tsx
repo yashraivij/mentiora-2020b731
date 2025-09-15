@@ -37,7 +37,6 @@ const Register = () => {
     const success = await register(name, email, password);
     
     if (success) {
-      toast.success("Welcome to Mentiora!");
       navigate("/dashboard");
     } else {
       toast.error("Registration failed. Please try again.");
