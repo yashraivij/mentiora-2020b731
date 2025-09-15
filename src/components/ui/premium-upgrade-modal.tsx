@@ -28,7 +28,7 @@ export const PremiumUpgradeModal = ({ isOpen, onClose, onUpgrade }: PremiumUpgra
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-7xl max-h-[95vh] bg-gradient-to-br from-violet-500/10 via-purple-500/5 to-fuchsia-500/10 border-0 p-0">
+      <DialogContent className="max-w-7xl max-h-[98vh] bg-gradient-to-br from-violet-500/10 via-purple-500/5 to-fuchsia-500/10 border-0 p-0">
         {/* Animated background layers */}
         <div className="absolute inset-0 bg-gradient-to-br from-violet-600/20 via-purple-600/10 to-fuchsia-600/20 animate-pulse" />
         <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 via-transparent to-cyan-500/10" />
@@ -49,8 +49,7 @@ export const PremiumUpgradeModal = ({ isOpen, onClose, onUpgrade }: PremiumUpgra
           <X className="h-4 w-4" />
         </Button>
 
-        {/* Scrollable content container */}
-        <div className="relative z-10 max-h-[95vh] overflow-y-auto p-6">
+        <div className="relative z-10 p-6">
           {/* Welcome Header - Exact copy from onboarding */}
           <div className="flex items-center gap-6 mb-8">
             <div className="relative">
@@ -72,7 +71,7 @@ export const PremiumUpgradeModal = ({ isOpen, onClose, onUpgrade }: PremiumUpgra
             </div>
           </div>
 
-          {/* Step 5 Content - Complete duplicate */}
+          {/* Step 5 Content - Exact duplicate from onboarding */}
           <div className="space-y-2 max-h-[calc(98vh-140px)] overflow-hidden">
             {/* Animated Premium Header - Dynamic & Bigger */}
             <div className="text-center space-y-2 relative overflow-hidden">
