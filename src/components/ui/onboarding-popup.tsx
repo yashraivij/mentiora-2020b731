@@ -246,9 +246,6 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       </h3>
                       <div className="text-3xl">📚</div>
                     </div>
-                    <div className="absolute -top-4 -right-4 z-10">
-                      <Sparkles className="h-8 w-8 text-yellow-400 animate-pulse drop-shadow-lg" />
-                    </div>
                   </div>
                   <p className="text-lg text-muted-foreground font-medium">
                     Select all the subjects you're studying - we'll add them to your dashboard instantly!
@@ -366,9 +363,6 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       </h3>
                       <div className="text-3xl">🤔</div>
                     </div>
-                    <div className="absolute -top-4 -right-4 z-10">
-                      <Brain className="h-8 w-8 text-blue-400 animate-pulse drop-shadow-lg" />
-                    </div>
                   </div>
                   <p className="text-lg text-muted-foreground font-medium">
                     We'll personalize your experience based on your challenges
@@ -459,9 +453,6 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       </h3>
                       <div className="text-3xl">📖</div>
                     </div>
-                    <div className="absolute -top-4 -right-4 z-10">
-                      <BookOpen className="h-8 w-8 text-purple-400 animate-pulse drop-shadow-lg" />
-                    </div>
                   </div>
                   <p className="text-lg text-muted-foreground font-medium">
                     We'll optimize your learning experience for your preferred methods
@@ -551,9 +542,6 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         Would you like us to share your progress?
                       </h3>
                       <div className="text-3xl">👨‍👩‍👧‍👦</div>
-                    </div>
-                    <div className="absolute -top-4 -right-4 z-10">
-                      <Users className="h-8 w-8 text-indigo-400 animate-pulse drop-shadow-lg" />
                     </div>
                   </div>
                   <p className="text-lg text-muted-foreground font-medium">
