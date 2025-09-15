@@ -653,22 +653,22 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     }}
                     className="text-4xl font-black bg-gradient-to-r from-yellow-500 via-orange-500 via-pink-500 via-purple-500 to-violet-500 bg-clip-text text-transparent relative z-10"
                   >
-                    <motion.span
-                      animate={{ 
-                        textShadow: [
-                          "0 0 0px rgba(255,255,255,0)",
-                          "0 0 20px rgba(255,255,255,0.5)",
-                          "0 0 0px rgba(255,255,255,0)"
-                        ]
-                      }}
-                      transition={{ 
-                        duration: 3, 
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                    >
-                      🚀 Unlock Your Academic Superpower! ✨
-                    </motion.span>
+                     <motion.span
+                       animate={{ 
+                         textShadow: [
+                           "0 0 0px rgba(255,255,255,0)",
+                           "0 0 20px rgba(255,255,255,0.5)",
+                           "0 0 0px rgba(255,255,255,0)"
+                         ]
+                       }}
+                       transition={{ 
+                         duration: 3, 
+                         repeat: Infinity,
+                         ease: "easeInOut"
+                       }}
+                     >
+                       <span style={{ filter: 'none', color: 'initial' }}>🚀</span> Unlock Your Academic Superpower! <span style={{ filter: 'none', color: 'initial' }}>✨</span>
+                     </motion.span>
                   </motion.h3>
                   
                   <motion.p
@@ -738,9 +738,9 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         delay: i * 0.3,
                         ease: "easeInOut"
                       }}
-                    >
-                      ✨
-                    </motion.div>
+                     >
+                       <span style={{ filter: 'none', color: 'initial' }}>✨</span>
+                     </motion.div>
                   ))}
                 </div>
 
@@ -900,17 +900,17 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       className="relative bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 hover:from-yellow-600 hover:via-orange-600 hover:to-pink-600 text-white font-black px-6 py-2.5 text-sm shadow-xl shadow-orange-500/50 overflow-hidden group w-full max-w-md"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-pink-400 opacity-0 group-hover:opacity-20 transition-opacity" />
-                      <div className="flex items-center justify-center gap-2 relative z-10">
-                        <Rocket className="h-4 w-4" />
-                        <span>🚀 Start Your Academic Transformation!</span>
-                        <Sparkles className="h-4 w-4" />
-                      </div>
+                       <div className="flex items-center justify-center gap-2 relative z-10">
+                         <Rocket className="h-4 w-4" />
+                         <span><span style={{ filter: 'none', color: 'initial' }}>🚀</span> Start Your Academic Transformation!</span>
+                         <Sparkles className="h-4 w-4" />
+                       </div>
                     </Button>
                   </motion.div>
                   
                   {/* Guarantee & Benefits */}
                   <p className="text-xs font-bold text-emerald-600">
-                    ✅ 30-day money-back guarantee • 📱 Cancel anytime
+                    <span style={{ filter: 'none', color: 'initial' }}>✅</span> 30-day money-back guarantee • <span style={{ filter: 'none', color: 'initial' }}>📱</span> Cancel anytime
                   </p>
                 </motion.div>
                 
