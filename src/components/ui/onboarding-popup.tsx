@@ -880,7 +880,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         <div className="pt-2 border-t border-gradient-to-r from-yellow-200 to-orange-200 space-y-1">
                           <div className="flex items-center gap-2">
                             <div className="text-xs text-muted-foreground line-through">£19.99/mo</div>
-                            <div className="bg-red-500 text-white px-2 py-0.5 rounded-full text-xs font-bold">75% OFF!</div>
+                            <div className="bg-red-500 text-white px-2 py-0.5 rounded-full text-xs font-bold">50% OFF!</div>
                           </div>
                           <div className="flex items-baseline gap-1">
                             <div className="text-2xl font-black bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">£9.99</div>
