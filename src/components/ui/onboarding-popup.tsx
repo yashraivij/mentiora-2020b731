@@ -917,18 +917,18 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   </div>
                   
                    {/* Action Buttons */}
-                   <div className="flex justify-between items-center pt-4 gap-4 border-t border-gray-200 mt-4">
+                   <div className="flex justify-between items-center pt-6 gap-4 border-t border-gray-200 mt-6">
                      <Button 
                        variant="outline" 
                        onClick={() => setCurrentStep(4)} 
-                       className="px-6 py-3 text-base font-semibold border-2 border-gray-400 hover:bg-gray-100 shadow-md"
+                       className="px-6 py-3 text-base font-semibold border-2 border-gray-400 hover:bg-gray-100 shadow-lg"
                      >
                        ← Back
                      </Button>
                      <Button 
                        variant="outline" 
                        onClick={onClose} 
-                       className="px-6 py-3 text-base font-semibold border-2 border-blue-400 text-blue-600 hover:bg-blue-50 shadow-md"
+                       className="px-6 py-3 text-base font-semibold border-2 border-blue-500 bg-blue-50 text-blue-700 hover:bg-blue-100 shadow-lg"
                      >
                        Use Free Version
                      </Button>
