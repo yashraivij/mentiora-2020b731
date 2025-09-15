@@ -399,6 +399,9 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                           )}
                           
                           <CardContent className="p-6 text-center h-full flex flex-col justify-center items-center relative">
+                            <div className={`p-3 rounded-full mb-4 bg-gradient-to-r ${struggle.gradient} shadow-lg`}>
+                              <StruggleIcon className="h-8 w-8 text-white" />
+                            </div>
                             <p className="font-bold text-lg">{struggle.text}</p>
                             {revisionStruggles.includes(struggle.text) && (
                               <div className="absolute top-4 right-4">
@@ -486,6 +489,9 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                           )}
                           
                           <CardContent className="p-6 text-center h-full flex flex-col justify-center items-center relative">
+                            <div className={`p-3 rounded-full mb-4 bg-gradient-to-r ${method.gradient} shadow-lg`}>
+                              <MethodIcon className="h-8 w-8 text-white" />
+                            </div>
                             <p className="font-bold text-lg">{method.text}</p>
                             {revisionMethods.includes(method.text) && (
                               <div className="absolute top-4 right-4">
