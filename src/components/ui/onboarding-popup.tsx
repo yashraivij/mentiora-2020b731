@@ -193,7 +193,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               </div>
               <div>
                 <DialogTitle className="text-4xl font-black bg-gradient-to-r from-violet-600 via-purple-600 via-fuchsia-600 to-pink-600 bg-clip-text text-transparent">
-                  Welcome to Mentiora! 👋
+                  Welcome to Mentiora! <span style={{ fontSize: '1em' }}>👋</span>
                 </DialogTitle>
                 <DialogDescription className="text-xl text-muted-foreground font-medium">
                   Let's personalize your <span className="font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">premium</span> learning experience
@@ -938,18 +938,20 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 </motion.div>
                 
                 {/* Action Buttons - Fixed at bottom */}
-                <div className="flex justify-between items-center pt-4 gap-4 border-t border-gray-200 mt-4 bg-background">
-                  <Button 
-                    variant="outline" 
-                    onClick={() => setCurrentStep(4)} 
-                    className="px-6 py-3 text-base font-semibold border-2 border-gray-400 hover:bg-gray-100 shadow-lg"
-                  >
-                    ← Back
-                  </Button>
+                <div className="relative pt-4 border-t border-gray-200 mt-4 bg-background">
+                  <div className="flex justify-center">
+                    <Button 
+                      variant="outline" 
+                      onClick={() => setCurrentStep(4)} 
+                      className="px-6 py-3 text-base font-semibold border-2 border-gray-400 hover:bg-gray-100 shadow-lg"
+                    >
+                      ← Back
+                    </Button>
+                  </div>
                   <Button 
                     variant="outline" 
                     onClick={onClose} 
-                    className="px-6 py-3 text-base font-semibold border-2 border-blue-500 bg-blue-50 text-blue-700 hover:bg-blue-100 shadow-lg"
+                    className="absolute bottom-0 left-0 px-6 py-3 text-base font-semibold border-2 border-blue-500 bg-blue-50 text-blue-700 hover:bg-blue-100 shadow-lg"
                   >
                     Use Free Version
                   </Button>
