@@ -819,9 +819,9 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     {/* Glowing border effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 via-orange-500 via-pink-500 to-purple-500 rounded-xl blur-md opacity-75 animate-pulse" />
                     
-                    <Card className="relative bg-gradient-to-br from-yellow-50 via-orange-50 via-pink-50 to-purple-50 dark:from-yellow-950/30 dark:via-orange-950/30 dark:via-pink-950/30 dark:to-purple-950/30 border-0 overflow-hidden shadow-xl">
+                    <Card className="relative bg-gradient-to-br from-yellow-50 via-orange-50 via-pink-50 to-purple-50 dark:from-yellow-950/30 dark:via-orange-950/30 dark:via-pink-950/30 dark:to-purple-950/30 border-0 shadow-xl">
                       {/* Premium badges */}
-                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-30">
+                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-50">
                         <motion.div
                           animate={{ y: [0, -3, 0] }}
                           transition={{ repeat: Infinity, duration: 2 }}
