@@ -28,7 +28,7 @@ export const PremiumUpgradeModal = ({ isOpen, onClose, onUpgrade }: PremiumUpgra
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-7xl max-h-[98vh] overflow-hidden bg-gradient-to-br from-violet-500/10 via-purple-500/5 to-fuchsia-500/10 border-0">
+      <DialogContent className="max-w-7xl max-h-[95vh] bg-gradient-to-br from-violet-500/10 via-purple-500/5 to-fuchsia-500/10 border-0 p-0">
         {/* Animated background layers */}
         <div className="absolute inset-0 bg-gradient-to-br from-violet-600/20 via-purple-600/10 to-fuchsia-600/20 animate-pulse" />
         <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 via-transparent to-cyan-500/10" />
@@ -49,9 +49,10 @@ export const PremiumUpgradeModal = ({ isOpen, onClose, onUpgrade }: PremiumUpgra
           <X className="h-4 w-4" />
         </Button>
 
-        <div className="relative z-10">
+        {/* Scrollable content container */}
+        <div className="relative z-10 max-h-[95vh] overflow-y-auto p-6">
           {/* Welcome Header - Exact copy from onboarding */}
-          <div className="flex items-center gap-6 mb-8 pt-8">
+          <div className="flex items-center gap-6 mb-8">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full blur-xl opacity-50 animate-pulse" />
               <div className="relative bg-gradient-to-r from-violet-500 to-fuchsia-500 p-3 rounded-2xl shadow-2xl">
