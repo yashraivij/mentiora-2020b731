@@ -192,11 +192,13 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 </div>
               </div>
               <div>
-                <DialogTitle className="text-4xl font-black flex items-center gap-2">
-                  <span className="bg-gradient-to-r from-violet-600 via-purple-600 via-fuchsia-600 to-pink-600 bg-clip-text text-transparent">
-                    Welcome to Mentiora!
-                  </span>
-                  <span>👋</span>
+                <DialogTitle className="text-4xl font-black">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-gradient-to-r from-violet-600 via-purple-600 via-fuchsia-600 to-pink-600 bg-clip-text text-transparent">
+                      Welcome to Mentiora!
+                    </span>
+                    <div>👋</div>
+                  </div>
                 </DialogTitle>
                 <DialogDescription className="text-xl text-muted-foreground font-medium">
                   Let's personalize your <span className="font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">premium</span> learning experience
@@ -238,12 +240,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               >
                 <div className="text-center space-y-4 mb-8">
                   <div className="relative">
-                    <h3 className="text-3xl font-black">
-                      <span className="bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">
+                    <div className="flex items-center justify-center gap-3">
+                      <h3 className="text-3xl font-black bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">
                         What exams are you taking?
-                      </span>
-                      <span className="text-3xl ml-2">📚</span>
-                    </h3>
+                      </h3>
+                      <div className="text-3xl">📚</div>
+                    </div>
                     <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
                       <Sparkles className="h-6 w-6 text-yellow-400 animate-pulse" />
                     </div>
@@ -317,12 +319,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
                 <div className="flex justify-between items-center pt-6 border-t border-gradient-to-r from-violet-200 to-fuchsia-200">
                   <div>
-                    <p className="font-bold text-lg">
-                      <span className="bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">
+                    <div className="flex items-center justify-center gap-3">
+                      <p className="font-bold text-lg bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">
                         {selectedSubjects.length} subject{selectedSubjects.length !== 1 ? 's' : ''} selected
-                      </span>
-                      <span className="text-lg ml-2">✨</span>
-                    </p>
+                      </p>
+                      <div className="text-lg">✨</div>
+                    </div>
                   </div>
                   <Button 
                     onClick={handleNext} 
@@ -358,12 +360,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               >
                 <div className="text-center space-y-4 mb-8">
                   <div className="relative">
-                    <h3 className="text-3xl font-black">
-                      <span className="bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">
+                    <div className="flex items-center justify-center gap-3">
+                      <h3 className="text-3xl font-black bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">
                         What's your biggest struggle with revision?
-                      </span>
-                      <span className="text-3xl ml-2">🤔</span>
-                    </h3>
+                      </h3>
+                      <div className="text-3xl">🤔</div>
+                    </div>
                     <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
                       <Brain className="h-6 w-6 text-blue-400 animate-pulse" />
                     </div>
@@ -428,8 +430,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     disabled={revisionStruggles.length === 0}
                     className="bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-700 hover:to-cyan-700 text-white font-bold px-8 py-3 shadow-lg"
                   >
-                  <span>Continue Journey</span>
-                  <span className="ml-2">✨</span>
+                  <div className="flex items-center gap-2">
+                    <span>Continue Journey</span>
+                    <div>✨</div>
+                  </div>
                     <ChevronRight className="h-4 w-4 ml-2" />
                   </Button>
                 </div>
@@ -449,12 +453,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               >
                 <div className="text-center space-y-4 mb-8">
                   <div className="relative">
-                    <h3 className="text-3xl font-black">
-                      <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    <div className="flex items-center justify-center gap-3">
+                      <h3 className="text-3xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                         How do you usually revise?
-                      </span>
-                      <span className="text-3xl ml-2">📖</span>
-                    </h3>
+                      </h3>
+                      <div className="text-3xl">📖</div>
+                    </div>
                     <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
                       <BookOpen className="h-6 w-6 text-purple-400 animate-pulse" />
                     </div>
@@ -519,8 +523,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     disabled={revisionMethods.length === 0}
                     className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold px-8 py-3 shadow-lg"
                   >
-                  <span>Almost Done!</span>
-                  <span className="ml-2">🎯</span>
+                  <div className="flex items-center gap-2">
+                    <span>Almost Done!</span>
+                    <div>🎯</div>
+                  </div>
                     <ChevronRight className="h-4 w-4 ml-2" />
                   </Button>
                 </div>
@@ -540,12 +546,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
               >
                 <div className="text-center space-y-4 mb-8">
                   <div className="relative">
-                    <h3 className="text-3xl font-black">
-                      <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    <div className="flex items-center justify-center gap-3">
+                      <h3 className="text-3xl font-black bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                         Would you like us to share your progress?
-                      </span>
-                      <span className="text-3xl ml-2">👨‍👩‍👧‍👦</span>
-                    </h3>
+                      </h3>
+                      <div className="text-3xl">👨‍👩‍👧‍👦</div>
+                    </div>
                     <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
                       <Users className="h-6 w-6 text-indigo-400 animate-pulse" />
                     </div>
@@ -596,8 +602,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     onClick={handleNext}
                     className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold px-8 py-3 shadow-lg"
                   >
-                  <span>Final Step!</span>
-                  <span className="ml-2">🚀</span>
+                  <div className="flex items-center gap-2">
+                    <span>Final Step!</span>
+                    <div>🚀</div>
+                  </div>
                     <ChevronRight className="h-4 w-4 ml-2" />
                   </Button>
                 </div>
