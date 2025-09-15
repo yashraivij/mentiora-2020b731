@@ -639,20 +639,20 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     </div>
                   </motion.div>
                   
-                  <motion.h3
-                    initial={{ opacity: 0, y: 30, scale: 0.8 }}
-                    animate={{ 
-                      opacity: 1, 
-                      y: 0, 
-                      scale: 1
-                    }}
-                    transition={{ 
-                      delay: 0.3,
-                      duration: 0.8,
-                      type: "spring"
-                    }}
-                    className="text-4xl font-black bg-gradient-to-r from-yellow-500 via-orange-500 via-pink-500 via-purple-500 to-violet-500 bg-clip-text text-transparent relative z-10"
-                  >
+                   <motion.h3
+                     initial={{ opacity: 0, y: 30, scale: 0.8 }}
+                     animate={{ 
+                       opacity: 1, 
+                       y: 0, 
+                       scale: 1
+                     }}
+                     transition={{ 
+                       delay: 0.3,
+                       duration: 0.8,
+                       type: "spring"
+                     }}
+                     className="text-4xl font-black relative z-10 flex items-center justify-center gap-2"
+                   >
                      <motion.span
                        animate={{ 
                          textShadow: [
@@ -666,10 +666,31 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                          repeat: Infinity,
                          ease: "easeInOut"
                        }}
+                       style={{ fontSize: '1em' }}
                      >
-                       <span style={{ filter: 'none', color: 'initial' }}>🚀</span> Unlock Your Academic Superpower! <span style={{ filter: 'none', color: 'initial' }}>✨</span>
+                       🚀
                      </motion.span>
-                  </motion.h3>
+                     <span className="bg-gradient-to-r from-yellow-500 via-orange-500 via-pink-500 via-purple-500 to-violet-500 bg-clip-text text-transparent">
+                       Unlock Your Academic Superpower!
+                     </span>
+                     <motion.span
+                       animate={{ 
+                         textShadow: [
+                           "0 0 0px rgba(255,255,255,0)",
+                           "0 0 20px rgba(255,255,255,0.5)",
+                           "0 0 0px rgba(255,255,255,0)"
+                         ]
+                       }}
+                       transition={{ 
+                         duration: 3, 
+                         repeat: Infinity,
+                         ease: "easeInOut"
+                       }}
+                       style={{ fontSize: '1em' }}
+                     >
+                       ✨
+                     </motion.span>
+                   </motion.h3>
                   
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
@@ -719,29 +740,30 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   </motion.p>
                   
                   {/* Floating sparkles */}
-                  {[...Array(6)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute text-yellow-400"
-                      style={{
-                        left: `${20 + i * 12}%`,
-                        top: `${10 + (i % 2) * 60}%`
-                      }}
-                      animate={{
-                        y: [0, -20, 0],
-                        rotate: [0, 180, 360],
-                        scale: [0.5, 1, 0.5]
-                      }}
-                      transition={{
-                        duration: 3 + i * 0.5,
-                        repeat: Infinity,
-                        delay: i * 0.3,
-                        ease: "easeInOut"
-                      }}
-                     >
-                       <span style={{ filter: 'none', color: 'initial' }}>✨</span>
-                     </motion.div>
-                  ))}
+                     {[...Array(6)].map((_, i) => (
+                       <motion.div
+                         key={i}
+                         className="absolute"
+                         style={{
+                           left: `${20 + i * 12}%`,
+                           top: `${10 + (i % 2) * 60}%`,
+                           fontSize: '1.2em'
+                         }}
+                         animate={{
+                           y: [0, -20, 0],
+                           rotate: [0, 180, 360],
+                           scale: [0.5, 1, 0.5]
+                         }}
+                         transition={{
+                           duration: 3 + i * 0.5,
+                           repeat: Infinity,
+                           delay: i * 0.3,
+                           ease: "easeInOut"
+                         }}
+                       >
+                         ✨
+                       </motion.div>
+                     ))}
                 </div>
 
                 {/* Revolutionary Comparison Cards - Larger */}
@@ -902,7 +924,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-pink-400 opacity-0 group-hover:opacity-20 transition-opacity" />
                        <div className="flex items-center justify-center gap-2 relative z-10">
                          <Rocket className="h-4 w-4" />
-                         <span><span style={{ filter: 'none', color: 'initial' }}>🚀</span> Start Your Academic Transformation!</span>
+                         <span style={{ fontSize: '1em' }}>🚀</span>
+                         <span>Start Your Academic Transformation!</span>
                          <Sparkles className="h-4 w-4" />
                        </div>
                     </Button>
@@ -910,7 +933,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   
                   {/* Guarantee & Benefits */}
                   <p className="text-xs font-bold text-emerald-600">
-                    <span style={{ filter: 'none', color: 'initial' }}>✅</span> 30-day money-back guarantee • <span style={{ filter: 'none', color: 'initial' }}>📱</span> Cancel anytime
+                    <span style={{ fontSize: '1em' }}>✅</span> 30-day money-back guarantee • <span style={{ fontSize: '1em' }}>📱</span> Cancel anytime
                   </p>
                 </motion.div>
                 
