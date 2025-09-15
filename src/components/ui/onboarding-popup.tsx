@@ -299,12 +299,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                                   selectedSubjects.includes(subject.id)
                                     ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white'
                                     : subject.examBoard === 'AQA'
-                                    ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
+                                    ? 'bg-gradient-to-r from-slate-800 to-slate-600 text-white border border-slate-400/30'
                                     : subject.examBoard === 'Edexcel'
-                                    ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white'
+                                    ? 'bg-gradient-to-r from-emerald-800 to-teal-600 text-white border border-emerald-400/30'
                                     : subject.examBoard === 'OCR'
-                                    ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white'
-                                    : 'bg-gradient-to-r from-purple-500 to-pink-500 text-white'
+                                    ? 'bg-gradient-to-r from-amber-800 to-orange-600 text-white border border-amber-400/30'
+                                    : 'bg-gradient-to-r from-indigo-800 to-purple-600 text-white border border-indigo-400/30'
                                 }`}
                                >
                                 {subject.examBoard}
