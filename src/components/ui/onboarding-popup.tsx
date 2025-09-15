@@ -941,22 +941,20 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 </motion.div>
                 
                 {/* Action Buttons - Fixed at bottom */}
-                <div className="relative pt-4 border-t border-gray-200 mt-4 bg-background">
-                  <div className="flex justify-center">
-                    <Button 
-                      variant="outline" 
-                      onClick={() => setCurrentStep(4)} 
-                      className="px-6 py-3 text-base font-semibold border-2 border-gray-400 hover:bg-gray-100 shadow-lg"
-                    >
-                      ← Back
-                    </Button>
-                  </div>
+                <div className="flex justify-between items-center pt-4 border-t border-gray-200 mt-4 bg-background">
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setCurrentStep(4)} 
+                    className="px-6 py-3 text-base font-semibold border-2 border-gray-400 hover:bg-gray-100 shadow-lg"
+                  >
+                    ← Back
+                  </Button>
                   <Button 
                     variant="outline" 
                     onClick={onClose} 
-                    className="absolute bottom-0 left-0 px-6 py-3 text-base font-semibold border-2 border-blue-500 bg-blue-50 text-blue-700 hover:bg-blue-100 shadow-lg"
+                    className="px-6 py-3 text-base font-semibold border-2 border-blue-500 bg-blue-50 text-blue-700 hover:bg-blue-100 shadow-lg"
                   >
-                    Use Free Version
+                    Continue with Free Version
                   </Button>
                 </div>
               </div>
