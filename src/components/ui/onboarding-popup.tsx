@@ -246,8 +246,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       </h3>
                       <div className="text-3xl">📚</div>
                     </div>
-                    <div className="absolute top-0 right-0">
-                      <Sparkles className="h-6 w-6 text-yellow-400 animate-pulse" />
+                    <div className="absolute -top-4 -right-4 z-10">
+                      <Sparkles className="h-8 w-8 text-yellow-400 animate-pulse drop-shadow-lg" />
                     </div>
                   </div>
                   <p className="text-lg text-muted-foreground font-medium">
@@ -299,12 +299,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                                   selectedSubjects.includes(subject.id)
                                     ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white'
                                     : subject.examBoard === 'AQA'
-                                    ? 'bg-gradient-to-r from-slate-800 to-slate-600 text-white border border-slate-400/30'
+                                    ? 'bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-500 text-white shadow-lg border border-cyan-300/50'
                                     : subject.examBoard === 'Edexcel'
-                                    ? 'bg-gradient-to-r from-emerald-800 to-teal-600 text-white border border-emerald-400/30'
+                                    ? 'bg-gradient-to-r from-emerald-600 via-green-500 to-lime-500 text-white shadow-lg border border-green-300/50'
                                     : subject.examBoard === 'OCR'
-                                    ? 'bg-gradient-to-r from-amber-800 to-orange-600 text-white border border-amber-400/30'
-                                    : 'bg-gradient-to-r from-indigo-800 to-purple-600 text-white border border-indigo-400/30'
+                                    ? 'bg-gradient-to-r from-orange-600 via-amber-500 to-yellow-500 text-white shadow-lg border border-amber-300/50'
+                                    : 'bg-gradient-to-r from-purple-600 via-pink-500 to-rose-500 text-white shadow-lg border border-pink-300/50'
                                 }`}
                                >
                                 {subject.examBoard}
@@ -366,8 +366,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       </h3>
                       <div className="text-3xl">🤔</div>
                     </div>
-                    <div className="absolute top-0 right-0">
-                      <Brain className="h-6 w-6 text-blue-400 animate-pulse" />
+                    <div className="absolute -top-4 -right-4 z-10">
+                      <Brain className="h-8 w-8 text-blue-400 animate-pulse drop-shadow-lg" />
                     </div>
                   </div>
                   <p className="text-lg text-muted-foreground font-medium">
@@ -459,8 +459,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       </h3>
                       <div className="text-3xl">📖</div>
                     </div>
-                    <div className="absolute top-0 right-0">
-                      <BookOpen className="h-6 w-6 text-purple-400 animate-pulse" />
+                    <div className="absolute -top-4 -right-4 z-10">
+                      <BookOpen className="h-8 w-8 text-purple-400 animate-pulse drop-shadow-lg" />
                     </div>
                   </div>
                   <p className="text-lg text-muted-foreground font-medium">
@@ -552,8 +552,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       </h3>
                       <div className="text-3xl">👨‍👩‍👧‍👦</div>
                     </div>
-                    <div className="absolute top-0 right-0">
-                      <Users className="h-6 w-6 text-indigo-400 animate-pulse" />
+                    <div className="absolute -top-4 -right-4 z-10">
+                      <Users className="h-8 w-8 text-indigo-400 animate-pulse drop-shadow-lg" />
                     </div>
                   </div>
                   <p className="text-lg text-muted-foreground font-medium">
