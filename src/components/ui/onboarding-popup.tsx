@@ -192,8 +192,11 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 </div>
               </div>
               <div>
-                <DialogTitle className="text-4xl font-black bg-gradient-to-r from-violet-600 via-purple-600 via-fuchsia-600 to-pink-600 bg-clip-text text-transparent">
-                  Welcome to Mentiora! <span style={{ fontSize: '1em' }}>👋</span>
+                <DialogTitle className="text-4xl font-black flex items-center gap-2">
+                  <span className="bg-gradient-to-r from-violet-600 via-purple-600 via-fuchsia-600 to-pink-600 bg-clip-text text-transparent">
+                    Welcome to Mentiora!
+                  </span>
+                  <span style={{ fontSize: '1em' }}>👋</span>
                 </DialogTitle>
                 <DialogDescription className="text-xl text-muted-foreground font-medium">
                   Let's personalize your <span className="font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">premium</span> learning experience
