@@ -10,7 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft, User, Trash2, Settings as SettingsIcon, Crown, Sparkles, Shield, Zap } from "lucide-react";
 
 const Settings = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, isPremium } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isDeleting, setIsDeleting] = useState(false);
@@ -173,7 +173,9 @@ const Settings = () => {
                   <p className="text-sm font-medium text-purple-700 dark:text-purple-300 mb-1">Account Type</p>
                   <div className="flex items-center gap-2">
                     <Shield className="w-4 h-4 text-purple-600 dark:text-purple-400 drop-shadow-sm" />
-                    <p className="text-lg font-semibold text-purple-800 dark:text-purple-200">Premium Account</p>
+                    <p className="text-lg font-semibold text-purple-800 dark:text-purple-200">
+                      {isPremium ? "Premium Account" : "Free Account"}
+                    </p>
                   </div>
                 </div>
               </div>
