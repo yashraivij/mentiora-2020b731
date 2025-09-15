@@ -873,15 +873,14 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8 }}
-                  className="text-center space-y-2 pt-2 bg-background/98 backdrop-blur-sm border-t border-gradient-to-r from-yellow-200 to-orange-200"
+                  className="text-center space-y-3 pt-2"
                 >
                   {/* Social Proof */}
                   <div className="bg-gradient-to-r from-emerald-50 to-cyan-50 dark:from-emerald-950/20 dark:to-cyan-950/20 rounded-lg p-2 border border-emerald-200 dark:border-emerald-800">
-                    <div className="flex items-center justify-center gap-4 text-xs">
+                    <div className="flex items-center justify-center gap-3 text-xs">
                       <div className="flex items-center gap-1">
                         <Star className="h-3 w-3 text-yellow-500 fill-current" />
                         <span className="font-bold">4.9/5</span>
-                        <span className="text-muted-foreground">(2,847 reviews)</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Trophy className="h-3 w-3 text-orange-500" />
@@ -898,42 +897,40 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   >
                     <Button 
                       onClick={handleUpgrade}
-                      className="relative bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 hover:from-yellow-600 hover:via-orange-600 hover:to-pink-600 text-white font-black px-6 py-3 text-base shadow-xl shadow-orange-500/50 overflow-hidden group w-full max-w-md"
+                      className="relative bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 hover:from-yellow-600 hover:via-orange-600 hover:to-pink-600 text-white font-black px-6 py-2.5 text-sm shadow-xl shadow-orange-500/50 overflow-hidden group w-full max-w-md"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-pink-400 opacity-0 group-hover:opacity-20 transition-opacity" />
                       <div className="flex items-center justify-center gap-2 relative z-10">
-                        <Rocket className="h-5 w-5" />
+                        <Rocket className="h-4 w-4" />
                         <span>🚀 Start Your Academic Transformation!</span>
-                        <Sparkles className="h-5 w-5" />
+                        <Sparkles className="h-4 w-4" />
                       </div>
                     </Button>
                   </motion.div>
                   
                   {/* Guarantee & Benefits */}
-                  <div className="space-y-0.5">
-                    <p className="text-xs font-bold text-emerald-600">
-                      ✅ 30-day money-back guarantee • 📱 Cancel anytime • 🔒 Secure payment
-                    </p>
-                  </div>
-                  
-                   {/* Action Buttons */}
-                   <div className="flex justify-between items-center pt-6 gap-4 border-t border-gray-200 mt-6">
-                     <Button 
-                       variant="outline" 
-                       onClick={() => setCurrentStep(4)} 
-                       className="px-6 py-3 text-base font-semibold border-2 border-gray-400 hover:bg-gray-100 shadow-lg"
-                     >
-                       ← Back
-                     </Button>
-                     <Button 
-                       variant="outline" 
-                       onClick={onClose} 
-                       className="px-6 py-3 text-base font-semibold border-2 border-blue-500 bg-blue-50 text-blue-700 hover:bg-blue-100 shadow-lg"
-                     >
-                       Use Free Version
-                     </Button>
-                   </div>
+                  <p className="text-xs font-bold text-emerald-600">
+                    ✅ 30-day money-back guarantee • 📱 Cancel anytime
+                  </p>
                 </motion.div>
+                
+                {/* Action Buttons - Fixed at bottom */}
+                <div className="flex justify-between items-center pt-4 gap-4 border-t border-gray-200 mt-4 bg-background">
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setCurrentStep(4)} 
+                    className="px-6 py-3 text-base font-semibold border-2 border-gray-400 hover:bg-gray-100 shadow-lg"
+                  >
+                    ← Back
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    onClick={onClose} 
+                    className="px-6 py-3 text-base font-semibold border-2 border-blue-500 bg-blue-50 text-blue-700 hover:bg-blue-100 shadow-lg"
+                  >
+                    Use Free Version
+                  </Button>
+                </div>
               </div>
             )}
           </AnimatePresence>
