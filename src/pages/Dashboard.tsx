@@ -39,7 +39,7 @@ import {
 import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorThemeToggle } from "@/components/ui/color-theme-toggle";
-import { PremiumPromoModal } from "@/components/ui/premium-promo-modal";
+import { PremiumUpgradeModal } from "@/components/ui/premium-upgrade-modal";
 import { useState, useEffect } from "react";
 import { TimeSavedNotification } from "@/components/notifications/TimeSavedNotification";
 import { ProgressCard } from "@/components/dashboard/ProgressCard";
@@ -2152,8 +2152,8 @@ useEffect(() => {
         onClose={() => setShowWelcomePopup(false)}
       />
 
-      {/* Premium Promo Modal */}
-      <PremiumPromoModal
+      {/* Premium Upgrade Modal */}
+      <PremiumUpgradeModal
         isOpen={showPromoModal}
         onClose={() => setShowPromoModal(false)}
         onUpgrade={openPaymentLink}

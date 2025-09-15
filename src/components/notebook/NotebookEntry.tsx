@@ -5,7 +5,7 @@ import { BookOpen, Lightbulb, Target, Clock, ExternalLink, Brain, AlertCircle, U
 import { format } from "date-fns";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
-import { PremiumPromoModal } from "@/components/ui/premium-promo-modal";
+import { PremiumUpgradeModal } from "@/components/ui/premium-upgrade-modal";
 import { useState } from "react";
 
 // Safe text formatting function to prevent XSS
@@ -199,7 +199,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
 
       </CardContent>
       
-      <PremiumPromoModal
+      <PremiumUpgradeModal
         isOpen={showPromoModal}
         onClose={() => setShowPromoModal(false)}
         onUpgrade={openPaymentLink}
