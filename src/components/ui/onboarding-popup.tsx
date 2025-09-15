@@ -246,7 +246,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       </h3>
                       <div className="text-3xl">📚</div>
                     </div>
-                    <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
+                    <div className="absolute top-0 right-0">
                       <Sparkles className="h-6 w-6 text-yellow-400 animate-pulse" />
                     </div>
                   </div>
@@ -366,7 +366,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       </h3>
                       <div className="text-3xl">🤔</div>
                     </div>
-                    <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
+                    <div className="absolute top-0 right-0">
                       <Brain className="h-6 w-6 text-blue-400 animate-pulse" />
                     </div>
                   </div>
@@ -459,7 +459,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       </h3>
                       <div className="text-3xl">📖</div>
                     </div>
-                    <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
+                    <div className="absolute top-0 right-0">
                       <BookOpen className="h-6 w-6 text-purple-400 animate-pulse" />
                     </div>
                   </div>
@@ -552,7 +552,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       </h3>
                       <div className="text-3xl">👨‍👩‍👧‍👦</div>
                     </div>
-                    <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
+                    <div className="absolute top-0 right-0">
                       <Users className="h-6 w-6 text-indigo-400 animate-pulse" />
                     </div>
                   </div>
