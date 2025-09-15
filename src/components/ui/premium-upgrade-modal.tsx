@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogHeader } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
@@ -28,7 +28,7 @@ export const PremiumUpgradeModal = ({ isOpen, onClose, onUpgrade }: PremiumUpgra
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-7xl max-h-[98vh] bg-gradient-to-br from-violet-500/10 via-purple-500/5 to-fuchsia-500/10 border-0 p-0">
+      <DialogContent className="max-w-7xl max-h-[98vh] overflow-hidden bg-gradient-to-br from-violet-500/10 via-purple-500/5 to-fuchsia-500/10 border-0">
         {/* Animated background layers */}
         <div className="absolute inset-0 bg-gradient-to-br from-violet-600/20 via-purple-600/10 to-fuchsia-600/20 animate-pulse" />
         <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 via-transparent to-cyan-500/10" />
@@ -39,39 +39,55 @@ export const PremiumUpgradeModal = ({ isOpen, onClose, onUpgrade }: PremiumUpgra
           <div className="h-full w-full rounded-lg bg-background/95" />
         </div>
 
-        {/* Close button */}
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={onClose}
-          className="absolute top-4 right-4 z-50 bg-white/10 hover:bg-white/20 rounded-full p-2"
-        >
-          <X className="h-4 w-4" />
-        </Button>
-
-        <div className="relative z-10 p-6">
-          {/* Welcome Header - Exact copy from onboarding */}
-          <div className="flex items-center gap-6 mb-8">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full blur-xl opacity-50 animate-pulse" />
-              <div className="relative bg-gradient-to-r from-violet-500 to-fuchsia-500 p-3 rounded-2xl shadow-2xl">
-                <Sparkles className="h-8 w-8 text-white" />
+        <DialogHeader className="relative z-10 pb-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full blur-xl opacity-50 animate-pulse" />
+                <div className="relative bg-gradient-to-r from-violet-500 to-fuchsia-500 p-3 rounded-2xl shadow-2xl">
+                  <Sparkles className="h-8 w-8 text-white" />
+                </div>
+              </div>
+              <div>
+                <DialogTitle className="text-4xl font-black flex items-center gap-2">
+                  <span className="bg-gradient-to-r from-violet-600 via-purple-600 via-fuchsia-600 to-pink-600 bg-clip-text text-transparent">
+                    Welcome to Mentiora!
+                  </span>
+                  <span style={{ fontSize: '1em' }}>👋</span>
+                </DialogTitle>
+                <DialogDescription className="text-xl text-muted-foreground font-medium">
+                  Let's personalize your <span className="font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">premium</span> learning experience
+                </DialogDescription>
               </div>
             </div>
-            <div>
-              <DialogTitle className="text-4xl font-black flex items-center gap-2">
-                <span className="bg-gradient-to-r from-violet-600 via-purple-600 via-fuchsia-600 to-pink-600 bg-clip-text text-transparent">
-                  Welcome to Mentiora!
-                </span>
-                <span style={{ fontSize: '1em' }}>👋</span>
-              </DialogTitle>
-              <DialogDescription className="text-xl text-muted-foreground font-medium">
-                Let's personalize your <span className="font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">premium</span> learning experience
-              </DialogDescription>
+            
+            {/* Enhanced progress indicator */}
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-medium text-muted-foreground">Step 5 of 5</span>
+              <div className="flex items-center gap-2">
+                {[1, 2, 3, 4, 5].map((step) => (
+                  <div
+                    key={step}
+                    className="h-3 w-12 rounded-full transition-all duration-500 bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500 shadow-lg"
+                  />
+                ))}
+              </div>
             </div>
-          </div>
 
-          {/* Step 5 Content - Exact duplicate from onboarding */}
+            {/* Close button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={onClose}
+              className="absolute top-0 right-0 bg-white/10 hover:bg-white/20 rounded-full p-2"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
+        </DialogHeader>
+
+        <div className="relative z-10 flex-1 overflow-hidden">
+          {/* Step 5: Premium Upgrade - Ultra Premium Design - Exact duplicate */}
           <div className="space-y-2 max-h-[calc(98vh-140px)] overflow-hidden">
             {/* Animated Premium Header - Dynamic & Bigger */}
             <div className="text-center space-y-2 relative overflow-hidden">
