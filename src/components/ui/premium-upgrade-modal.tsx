@@ -40,7 +40,7 @@ export const PremiumUpgradeModal = ({ isOpen, onClose, onUpgrade }: PremiumUpgra
         </div>
 
         <DialogHeader className="relative z-10 pb-6">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center">
             <div className="flex items-center gap-4">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full blur-xl opacity-50 animate-pulse" />
@@ -60,16 +60,6 @@ export const PremiumUpgradeModal = ({ isOpen, onClose, onUpgrade }: PremiumUpgra
                 </DialogDescription>
               </div>
             </div>
-
-            {/* Close button */}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onClose}
-              className="bg-white/10 hover:bg-white/20 rounded-full p-2"
-            >
-              <X className="h-4 w-4" />
-            </Button>
           </div>
         </DialogHeader>
 
