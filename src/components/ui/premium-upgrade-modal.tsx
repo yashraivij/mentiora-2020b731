@@ -72,7 +72,7 @@ export const PremiumUpgradeModal = ({ isOpen, onClose, onUpgrade }: PremiumUpgra
             </div>
           </div>
 
-          {/* Step 5 Content - Exact copy from onboarding */}
+          {/* Step 5 Content - Complete duplicate */}
           <div className="space-y-2 max-h-[calc(98vh-140px)] overflow-hidden">
             {/* Animated Premium Header - Dynamic & Bigger */}
             <div className="text-center space-y-2 relative overflow-hidden">
@@ -432,7 +432,15 @@ export const PremiumUpgradeModal = ({ isOpen, onClose, onUpgrade }: PremiumUpgra
             </motion.div>
             
             {/* Action Buttons - Fixed at bottom */}
-            <div className="flex justify-end items-center pt-4 border-t border-gray-200 mt-4 bg-background">
+            <div className="flex justify-between items-center pt-4 border-t border-gray-200 mt-4 bg-background">
+              <Button 
+                variant="outline" 
+                onClick={() => {}} 
+                className="px-6 py-3 text-base font-semibold border-2 border-gray-400 hover:bg-gray-100 shadow-lg"
+                style={{ visibility: 'hidden' }}
+              >
+                ← Back
+              </Button>
               <Button 
                 variant="outline" 
                 onClick={onClose} 
