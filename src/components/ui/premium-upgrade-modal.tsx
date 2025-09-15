@@ -9,7 +9,6 @@ import {
   Check,
   Trophy,
   Rocket,
-  X,
   Lock,
   Shield
 } from "lucide-react";
