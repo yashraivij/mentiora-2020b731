@@ -393,6 +393,41 @@ const Index = () => {
           </motion.div>
         </motion.div>
 
+        {/* Demo Video Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          animate={statsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="mb-32 max-w-5xl mx-auto"
+        >
+          <div className="text-center mb-12">
+            <motion.h3 
+              className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 tracking-tight"
+              whileHover={{ scale: 1.02 }}
+            >
+              See How It <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Works</span>
+            </motion.h3>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Watch how our platform transforms GCSE revision with personalized feedback and smart analytics
+            </p>
+          </div>
+          
+          <motion.div 
+            className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.3 }}
+          >
+            <video 
+              controls
+              className="w-full h-auto"
+              poster="/lovable-uploads/99dd490e-1b20-4181-b127-6915d3c47932.png"
+            >
+              <source src="/demo-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </motion.div>
+        </motion.div>
+
         <motion.div 
           ref={featuresRef}
           className="mb-32"
