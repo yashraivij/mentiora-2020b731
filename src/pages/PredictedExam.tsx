@@ -3978,7 +3978,7 @@ Write a story about a moment of fear.
     return answers.find(a => a.questionId === questionId)?.answer || '';
   };
 
-  const markAnswerWithAI = async (question: ExamQuestion, answer: string) => {
+  const markAnswerWithSmart = async (question: ExamQuestion, answer: string) => {
     try {
       console.log('Marking predicted exam answer:', { questionId: question.id, marks: question.marks });
       
@@ -4023,12 +4023,12 @@ Write a story about a moment of fear.
       };
 
     } catch (error) {
-      console.error('Error calling AI marking function:', error);
+      console.error('Error calling Smart marking function:', error);
       
       // Fallback to basic marking
       return {
         marksAwarded: answer.trim() ? Math.round(question.marks * 0.5) : 0,
-        feedback: "AI marking temporarily unavailable. Answer has been given partial credit.",
+        feedback: "Smart marking temporarily unavailable. Answer has been given partial credit.",
         assessment: "Needs Review"
       };
     }
@@ -4057,8 +4057,8 @@ Write a story about a moment of fear.
             const question = examQuestions.find(q => q.id === answer.questionId);
             if (question && answer.answer.trim()) {
               try {
-                // Mark the answer with AI
-                const markingResult = await markAnswerWithAI(question, answer.answer);
+                // Mark the answer with Smart system
+                const markingResult = await markAnswerWithSmart(question, answer.answer);
                 const marksLost = question.marks - markingResult.marksAwarded;
                 
                 // Handle personalized notification for wrong answers

@@ -181,9 +181,9 @@ const Practice = () => {
     }
   }, [currentQuestionIndex, userAnswer, attempts, showFeedback, shuffledQuestions]);
 
-  const markAnswerWithAI = async (question: Question, answer: string) => {
+  const markAnswerWithSmart = async (question: Question, answer: string) => {
     try {
-      console.log('Calling AI marking function with:', { 
+      console.log('Calling Smart marking function with:', { 
         question: question.question, 
         answer: answer.substring(0, 100) + '...' 
       });
@@ -204,7 +204,7 @@ const Practice = () => {
         throw error;
       }
 
-      console.log('AI marking result:', data);
+      console.log('Smart marking result:', data);
 
       return {
         marksAwarded: data.marksAwarded || 0,
@@ -213,8 +213,8 @@ const Practice = () => {
       };
 
     } catch (error) {
-      console.error('Error calling AI marking function:', error);
-      toast.error("Failed to mark answer with AI. Please try again.");
+      console.error('Error calling Smart marking function:', error);
+      toast.error("Failed to mark answer with Smart system. Please try again.");
       
       // Fallback to basic marking - only give marks for substantial answers
       const isSubstantialAnswer = answer.trim().length >= 3 && 
@@ -223,7 +223,7 @@ const Practice = () => {
       
       return {
         marksAwarded: isSubstantialAnswer ? Math.round(question.marks * 0.3) : 0,
-        feedback: "Good effort! Your answer shows you're thinking about this topic. While our AI teacher is taking a quick break, I want to encourage you to keep practicing - every answer helps you learn and grow!",
+        feedback: "Good effort! Your answer shows you're thinking about this topic. While our Smart teacher is taking a quick break, I want to encourage you to keep practicing - every answer helps you learn and grow!",
         assessment: "Keep Going!"
       };
     }
@@ -254,7 +254,7 @@ const Practice = () => {
     try {
       console.log('Starting to mark answer...');
       
-      const markingResult = await markAnswerWithAI(currentQuestion, userAnswer);
+      const markingResult = await markAnswerWithSmart(currentQuestion, userAnswer);
       
       const feedback = {
         modelAnswer: currentQuestion.modelAnswer,
@@ -728,7 +728,7 @@ const Practice = () => {
                           disabled={isSubmitting || !userAnswer.trim()}
                           className="flex-1"
                         >
-                          {isSubmitting ? "AI is marking your answer..." : "Submit Answer"}
+                          {isSubmitting ? "Smart system is marking your answer..." : "Submit Answer"}
                         </Button>
                         <Button 
                           variant="outline" 
@@ -775,7 +775,7 @@ const Practice = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center text-foreground">
                     <CheckCircle className="h-5 w-5 mr-2 text-green-600 dark:text-green-400" />
-                    AI Teacher Feedback
+                    Smart Teacher Feedback
                   </CardTitle>
                   <div className="flex items-center space-x-2">
                     <span className="text-2xl font-bold text-green-600 dark:text-green-400">
@@ -816,11 +816,11 @@ const Practice = () => {
                     </div>
                   </div>
 
-                  {/* AI Feedback */}
+                  {/* Smart Feedback */}
                   <div>
                     <h4 className="font-semibold text-foreground mb-2 flex items-center">
                       <Lightbulb className="h-4 w-4 mr-2" />
-                      AI Teacher Feedback
+                      Smart Teacher Feedback
                     </h4>
                     <div className="bg-yellow-50 dark:bg-yellow-950/20 p-4 rounded-lg border-l-4 border-yellow-500">
                       <p className="text-foreground">{currentAttempt.feedback.whyYoursDidnt}</p>

@@ -68,7 +68,7 @@ const PaymentSuccess: React.FC = () => {
                 <li>• Unlimited practice questions</li>
                 <li>• Predicted exam papers</li>
                 <li>• Advanced analytics</li>
-                <li>• AI-powered study notes</li>
+                <li>• Smart study notes</li>
               </ul>
             </div>
             

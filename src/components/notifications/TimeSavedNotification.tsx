@@ -176,7 +176,7 @@ export const TimeSavedNotification: React.FC<TimeSavedNotificationProps> = ({
                     Total Time Saved
                   </p>
                   <p className="text-xs text-violet-600/80 dark:text-violet-400/80">
-                    with AI Auto-Notes
+                    with Smart Auto-Notes
                   </p>
                 </motion.div>
 
