@@ -420,7 +420,6 @@ const Index = () => {
             <video 
               controls
               className="w-full h-auto"
-              poster="/lovable-uploads/99dd490e-1b20-4181-b127-6915d3c47932.png"
             >
               <source src="/demo-video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
