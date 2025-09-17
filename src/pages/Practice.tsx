@@ -728,7 +728,7 @@ const Practice = () => {
                           disabled={isSubmitting || !userAnswer.trim()}
                           className="flex-1"
                         >
-                          {isSubmitting ? "Smart system is marking your answer..." : "Submit Answer"}
+                          {isSubmitting ? "marking your answer..." : "Submit Answer"}
                         </Button>
                         <Button 
                           variant="outline" 
