@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.create-portal]
 verify_jwt = false
+
+[functions.send-admin-notification]
+verify_jwt = false
