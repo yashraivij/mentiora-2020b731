@@ -281,7 +281,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
 
   const RedeemConfirmationModal = () => (
     <Dialog open={!!confirmRedemption} onOpenChange={() => setConfirmRedemption(null)}>
-      <DialogContent className="max-w-md bg-gradient-to-br from-white via-slate-50/80 to-purple-50/60 dark:from-slate-950 dark:via-slate-900/90 dark:to-purple-950/60">
+      <DialogContent className="max-w-md bg-gradient-to-br from-white via-slate-50/80 to-purple-50/60 dark:from-slate-950 dark:via-slate-900/90 dark:to-purple-950/60 z-[60]">
         <DialogHeader>
           <DialogTitle className="text-center text-xl font-bold">Confirm Purchase</DialogTitle>
         </DialogHeader>
@@ -366,6 +366,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
 
   const RewardsModal = () => (
     <DialogContent className="max-w-5xl max-h-[90vh] overflow-hidden bg-gradient-to-br from-white via-slate-50/80 to-purple-50/60 dark:from-slate-950 dark:via-slate-900/90 dark:to-purple-950/60 border-0 shadow-2xl backdrop-blur-sm">
+      <RedeemConfirmationModal />
       {/* Premium background with glassmorphism */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Organized gradient orbs */}
@@ -877,7 +878,6 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
   return (
     <>
       {showConfetti && <Confetti recycle={false} numberOfPieces={200} />}
-      <RedeemConfirmationModal />
       <SuccessModal />
       <div className="mb-6">
       
