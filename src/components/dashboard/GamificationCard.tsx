@@ -353,7 +353,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                       className="w-full h-3 bg-muted [&>div]:bg-gradient-to-r [&>div]:from-yellow-400 [&>div]:via-amber-400 [&>div]:to-orange-400"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-xs font-semibold text-white drop-shadow-lg">
+                      <span className="text-xs font-bold text-gray-800 dark:text-white drop-shadow-lg bg-white/20 dark:bg-black/20 px-2 py-1 rounded backdrop-blur-sm">
                         {Math.round(rewardProgress.progress)}%
                       </span>
                     </div>
@@ -472,14 +472,6 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                           <span>🎯</span>
                           <motion.span 
                             className="text-sm font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 dark:from-purple-400 dark:via-pink-400 dark:to-indigo-400 bg-clip-text text-transparent"
-                            animate={{ 
-                              textShadow: [
-                                "0 0 0px rgba(168, 85, 247, 0)",
-                                "0 0 10px rgba(168, 85, 247, 0.3)",
-                                "0 0 0px rgba(168, 85, 247, 0)"
-                              ]
-                            }}
-                            transition={{ duration: 2, repeat: Infinity }}
                           >
                             Predicted 2026 Exam
                           </motion.span>
