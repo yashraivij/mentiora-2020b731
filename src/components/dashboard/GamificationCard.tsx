@@ -479,7 +479,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                           }}
                           transition={{ duration: 2, repeat: Infinity }}
                         >
-                          🎯 Predicted 2026 Exam
+                          <span className="mr-2">🎯</span>Predicted 2026 Exam
                         </motion.span>
                         <p className="text-xs bg-gradient-to-r from-purple-500 to-pink-500 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent font-medium">
                           ✨ One-time mega milestone ✨
