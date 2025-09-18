@@ -318,29 +318,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                   </div>
 
                   {/* Premium tier badges */}
-                  {isPremiumTier && (
-                    <div className="absolute -top-2 -right-2 z-30">
-                      <motion.div
-                        animate={{ 
-                          scale: [1, 1.1, 1],
-                          rotate: [0, 10, -10, 0]
-                        }}
-                        transition={{ 
-                          duration: 3, 
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                        className="relative"
-                      >
-                        <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-amber-600 text-white text-xs px-3 py-1.5 rounded-full font-black shadow-xl shadow-purple-500/50 border-2 border-white/20">
-                          <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-amber-600 rounded-full blur-sm opacity-50" />
-                          <span className="relative z-10">ELITE ⭐</span>
-                        </div>
-                      </motion.div>
-                    </div>
-                  )}
-                  
-                  {isHighValue && !isPremiumTier && (
+                  {(isHighValue || isPremiumTier) && (
                     <div className="absolute top-3 right-3 z-20">
                       <motion.div
                         animate={{ 
