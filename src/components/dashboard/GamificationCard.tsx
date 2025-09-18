@@ -333,7 +333,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                   <div className="relative">
                     <Progress 
                       value={rewardProgress.progress} 
-                      className="w-full h-3 bg-muted [&>div]:bg-gradient-to-r [&>div]:from-purple-500 [&>div]:to-blue-500"
+                      className="w-full h-3 bg-muted [&>div]:bg-gradient-to-r [&>div]:from-yellow-400 [&>div]:via-amber-400 [&>div]:to-orange-400"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <span className="text-xs font-semibold text-white drop-shadow-lg">
