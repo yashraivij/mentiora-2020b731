@@ -299,16 +299,6 @@ const Index = () => {
           ref={heroRef}
           className="text-center mb-32 max-w-5xl mx-auto"
         >
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-100 rounded-full text-blue-700 text-sm font-semibold mb-8"
-            whileHover={{ scale: 1.05 }}
-          >
-            <Sparkles className="h-4 w-4 mr-2 text-blue-600 animate-pulse" />
-            The Future of GCSE Revision
-          </motion.div>
           
           <motion.h2 
             initial={{ opacity: 0, y: 40 }}
