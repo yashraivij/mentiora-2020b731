@@ -3,11 +3,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Trophy, Flame, Gift, Users, Zap, Crown, Sparkles } from "lucide-react";
-import { motion } from "framer-motion";
+import { Trophy, Flame, Gift, Users, Zap, Crown, Sparkles, CheckCircle, Clock } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface GamificationCardProps {
   isPremium: boolean;
@@ -35,6 +36,15 @@ interface RewardTier {
   icon: any;
 }
 
+interface RewardRedemption {
+  id: string;
+  reward_title: string;
+  reward_description: string;
+  mp_cost: number;
+  redeemed_at: string;
+  fulfilled: boolean;
+}
+
 const REWARDS = [
   { points: 100, title: "Theme/Badge", description: "Custom themes & badges", icon: Sparkles },
   { points: 200, title: "VIP Discord Role", description: "Exclusive Discord access", icon: Crown },
@@ -46,6 +56,7 @@ const REWARDS = [
 
 export function GamificationCard({ isPremium, onUpgrade, currentStreak }: GamificationCardProps) {
   const { user } = useAuth();
+  const { toast } = useToast();
   const [userPoints, setUserPoints] = useState<UserPoints>({
     total_points: 0,
     daily_login_complete: false,
@@ -53,6 +64,12 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
     predicted_exam_complete: false,
   });
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [userRedemptions, setUserRedemptions] = useState<RewardRedemption[]>([]);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [selectedReward, setSelectedReward] = useState<typeof REWARDS[0] | null>(null);
+  const [isRedeeming, setIsRedeeming] = useState(false);
+  const [actualMPBalance, setActualMPBalance] = useState(0);
   
   // Calculate next reward progress
   const getNextRewardProgress = () => {
@@ -115,6 +132,8 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
     if (user) {
       loadUserProgress();
       loadLeaderboard();
+      loadUserRedemptions();
+      loadActualMPBalance();
     }
   }, [user]);
 
@@ -179,6 +198,159 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
       { rank: 4, name: "ExamAce", points: 1600 },
       { rank: 5, name: "StudyGuru", points: 1400 },
     ]);
+  };
+
+  const loadActualMPBalance = async () => {
+    if (!user) return;
+    
+    try {
+      // Get or create user points record
+      const { data: userPointsData, error } = await supabase
+        .from('user_points')
+        .select('total_points')
+        .eq('user_id', user.id)
+        .single();
+
+      if (error && error.code === 'PGRST116') {
+        // User doesn't have points record, create one with default points
+        const { data: newUserPoints } = await supabase
+          .from('user_points')
+          .insert({ user_id: user.id, total_points: 1240 }) // Default starting balance
+          .select('total_points')
+          .single();
+        
+        if (newUserPoints) {
+          setActualMPBalance(newUserPoints.total_points);
+        }
+      } else if (userPointsData) {
+        setActualMPBalance(userPointsData.total_points);
+      }
+    } catch (error) {
+      console.error('Error loading MP balance:', error);
+      setActualMPBalance(1240); // Fallback balance
+    }
+  };
+
+  const loadUserRedemptions = async () => {
+    if (!user) return;
+    
+    try {
+      const { data: redemptions } = await supabase
+        .from('reward_redemptions')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('redeemed_at', { ascending: false });
+      
+      if (redemptions) {
+        setUserRedemptions(redemptions);
+      }
+    } catch (error) {
+      console.error('Error loading user redemptions:', error);
+    }
+  };
+
+  const canRedeemReward = (reward: typeof REWARDS[0]) => {
+    if (!isPremium || actualMPBalance < reward.points) return false;
+    
+    // Check if user has redeemed this reward in the current month
+    const currentMonth = new Date().getMonth();
+    const currentYear = new Date().getFullYear();
+    
+    const hasRedeemedThisMonth = userRedemptions.some(redemption => {
+      const redemptionDate = new Date(redemption.redeemed_at);
+      return redemption.reward_title === reward.title &&
+             redemptionDate.getMonth() === currentMonth &&
+             redemptionDate.getFullYear() === currentYear;
+    });
+    
+    return !hasRedeemedThisMonth;
+  };
+
+  const handleRedeemClick = (reward: typeof REWARDS[0]) => {
+    if (!canRedeemReward(reward)) return;
+    setSelectedReward(reward);
+    setShowConfirmModal(true);
+  };
+
+  const handleConfirmRedemption = async () => {
+    if (!selectedReward || !user || isRedeeming) return;
+    
+    setIsRedeeming(true);
+    
+    try {
+      // 1. Deduct MP from user balance
+      const newBalance = actualMPBalance - selectedReward.points;
+      const { error: pointsError } = await supabase
+        .from('user_points')
+        .update({ total_points: newBalance })
+        .eq('user_id', user.id);
+      
+      if (pointsError) throw pointsError;
+      
+      // 2. Create redemption record
+      const { error: redemptionError } = await supabase
+        .from('reward_redemptions')
+        .insert({
+          user_id: user.id,
+          reward_title: selectedReward.title,
+          reward_description: selectedReward.description,
+          mp_cost: selectedReward.points
+        });
+      
+      if (redemptionError) throw redemptionError;
+      
+      // 3. Create admin notification
+      const { error: notificationError } = await supabase
+        .from('admin_notifications')
+        .insert({
+          title: 'New Reward Redemption',
+          message: `Student has redeemed ${selectedReward.title} for ${selectedReward.points} MP`,
+          data: {
+            user_id: user.id,
+            reward_title: selectedReward.title,
+            reward_description: selectedReward.description,
+            mp_cost: selectedReward.points
+          }
+        });
+      
+      if (notificationError) throw notificationError;
+      
+      // 4. Update local state
+      setActualMPBalance(newBalance);
+      await loadUserRedemptions();
+      
+      // 5. Show success modal
+      setShowConfirmModal(false);
+      setShowSuccessModal(true);
+      
+      toast({
+        title: "🎉 Reward Redeemed!",
+        description: `We'll send your ${selectedReward.title} to you within 48 hours.`,
+      });
+      
+    } catch (error) {
+      console.error('Error redeeming reward:', error);
+      toast({
+        title: "Error",
+        description: "Failed to redeem reward. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsRedeeming(false);
+    }
+  };
+
+  const getDaysUntilNextRedemption = (reward: typeof REWARDS[0]) => {
+    const redemption = userRedemptions.find(r => r.reward_title === reward.title);
+    if (!redemption) return 0;
+    
+    const redemptionDate = new Date(redemption.redeemed_at);
+    const nextMonth = new Date(redemptionDate.getFullYear(), redemptionDate.getMonth() + 1, 1);
+    const today = new Date();
+    const diffTime = nextMonth.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    return Math.max(0, diffDays);
   };
 
   const RewardsModal = () => (
@@ -246,29 +418,31 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
             Turn your dedication into <span className="font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">amazing prizes</span>
           </motion.p>
           
-          {/* MP Balance display */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="mt-6 inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-cyan-500/10 backdrop-blur-sm border border-emerald-500/20 rounded-2xl"
-          >
-            <Zap className="h-5 w-5 text-emerald-500" />
-            <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400">
-              {userPoints.total_points} MP Available
-            </span>
-          </motion.div>
+           {/* MP Balance display */}
+           <motion.div
+             initial={{ y: 20, opacity: 0 }}
+             animate={{ y: 0, opacity: 1 }}
+             transition={{ delay: 0.5, duration: 0.6 }}
+             className="mt-6 inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-cyan-500/10 backdrop-blur-sm border border-emerald-500/20 rounded-2xl"
+           >
+             <Zap className="h-5 w-5 text-emerald-500" />
+             <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400">
+               Your Balance: {actualMPBalance} MP
+             </span>
+           </motion.div>
         </motion.div>
       </div>
       
       {/* Scrollable rewards section */}
       <div className="relative z-10 max-h-[45vh] overflow-y-auto scrollbar-hide">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-2 pb-4">
-          {REWARDS.map((reward, index) => {
-            const canRedeem = isPremium && userPoints.total_points >= reward.points;
-            const Icon = reward.icon;
-            const isHighValue = reward.points >= 1000;
-            const isPremiumTier = reward.points >= 2000;
+           {REWARDS.map((reward, index) => {
+             const canRedeem = canRedeemReward(reward);
+             const Icon = reward.icon;
+             const isHighValue = reward.points >= 1000;
+             const isPremiumTier = reward.points >= 2000;
+             const daysUntilNext = getDaysUntilNextRedemption(reward);
+             const hasRedeemedThisMonth = daysUntilNext > 0;
             
             return (
               <motion.div
@@ -428,22 +602,34 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                               Upgrade
                             </Button>
                           </motion.div>
-                        ) : canRedeem ? (
-                          <motion.div
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
-                          >
-                            <Button className="w-full h-8 bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 hover:from-emerald-700 hover:via-green-700 hover:to-teal-700 text-white font-bold shadow-lg shadow-emerald-500/30 border-0 rounded-lg text-xs tracking-wide transition-all duration-300">
-                              <Sparkles className="w-3 h-3 mr-1" />
-                              Claim
-                            </Button>
-                          </motion.div>
+                         ) : canRedeem ? (
+                           <motion.div
+                             whileHover={{ scale: 1.03 }}
+                             whileTap={{ scale: 0.97 }}
+                           >
+                             <Button 
+                               onClick={() => handleRedeemClick(reward)}
+                               className="w-full h-8 bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 hover:from-emerald-700 hover:via-green-700 hover:to-teal-700 text-white font-bold shadow-lg shadow-emerald-500/30 border-0 rounded-lg text-xs tracking-wide transition-all duration-300"
+                             >
+                               <Sparkles className="w-3 h-3 mr-1" />
+                               Redeem
+                             </Button>
+                           </motion.div>
+                         ) : hasRedeemedThisMonth ? (
+                           <div className="relative p-2 bg-gradient-to-r from-orange-100/80 to-amber-100/80 dark:from-orange-900/40 dark:to-amber-900/40 rounded-lg border border-dashed border-orange-300/50">
+                             <div className="text-center">
+                               <div className="text-xs font-bold text-orange-600 dark:text-orange-400 mb-0.5 flex items-center justify-center gap-1">
+                                 <Clock className="w-3 h-3" />
+                                 Next redemption in {daysUntilNext} days
+                               </div>
+                             </div>
+                           </div>
                         ) : (
                           <div className="relative p-2 bg-gradient-to-r from-slate-100/80 to-gray-100/80 dark:from-slate-800/80 dark:to-gray-800/80 rounded-lg border border-dashed border-muted-foreground/20">
                             <div className="text-center">
-                              <div className="text-xs font-bold text-muted-foreground/80 mb-0.5">
-                                {reward.points - userPoints.total_points} more MP
-                              </div>
+                               <div className="text-xs font-bold text-muted-foreground/80 mb-0.5">
+                                 {reward.points - actualMPBalance} more MP
+                               </div>
                               <div className="text-xs text-muted-foreground/60 font-medium">
                                 Keep studying! 💪
                               </div>
@@ -892,6 +1078,148 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
           </div>
         </CardContent>
       </Card>
+
+      {/* Confirmation Modal */}
+      <Dialog open={showConfirmModal} onOpenChange={setShowConfirmModal}>
+        <DialogContent className="max-w-md bg-gradient-to-br from-white via-slate-50/80 to-purple-50/60 dark:from-slate-950 dark:via-slate-900/90 dark:to-purple-950/60 border-0 shadow-2xl backdrop-blur-sm">
+          {selectedReward && (
+            <div className="text-center space-y-6 py-4">
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className="flex justify-center"
+              >
+                <div className="relative">
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-amber-500 shadow-xl flex items-center justify-center">
+                    <selectedReward.icon className="h-10 w-10 text-white" />
+                  </div>
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full flex items-center justify-center">
+                    <Gift className="w-4 h-4 text-white" />
+                  </div>
+                </div>
+              </motion.div>
+
+              <div className="space-y-2">
+                <h3 className="text-xl font-bold text-foreground">{selectedReward.title}</h3>
+                <p className="text-sm text-muted-foreground">{selectedReward.description}</p>
+                
+                <div className="flex items-center justify-center gap-2 mt-4 p-3 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-lg border border-emerald-200/50 dark:border-emerald-800/50">
+                  <Zap className="h-4 w-4 text-emerald-600" />
+                  <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
+                    Cost: {selectedReward.points} MP
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg">
+                  <span>Balance: {actualMPBalance} MP → {actualMPBalance - selectedReward.points} MP</span>
+                </div>
+
+                {!canRedeemReward(selectedReward) && (
+                  <div className="text-sm text-red-600 dark:text-red-400 font-medium">
+                    You can't redeem the same reward twice in the same month.
+                  </div>
+                )}
+              </div>
+
+              <div className="flex gap-3">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowConfirmModal(false)}
+                  className="flex-1"
+                  disabled={isRedeeming}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  onClick={handleConfirmRedemption}
+                  disabled={isRedeeming || !canRedeemReward(selectedReward)}
+                  className="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white"
+                >
+                  {isRedeeming ? "Redeeming..." : "Confirm Purchase"}
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Success Modal with Confetti */}
+      <Dialog open={showSuccessModal} onOpenChange={setShowSuccessModal}>
+        <DialogContent className="max-w-md bg-gradient-to-br from-white via-slate-50/80 to-purple-50/60 dark:from-slate-950 dark:via-slate-900/90 dark:to-purple-950/60 border-0 shadow-2xl backdrop-blur-sm">
+          <div className="text-center space-y-6 py-8">
+            {/* Confetti Animation */}
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
+              className="relative"
+            >
+              {/* Confetti particles */}
+              {[...Array(12)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ scale: 0, rotate: 0 }}
+                  animate={{
+                    scale: [0, 1, 0],
+                    rotate: [0, 180, 360],
+                    x: [0, (Math.random() - 0.5) * 200],
+                    y: [0, (Math.random() - 0.5) * 200],
+                  }}
+                  transition={{
+                    duration: 2,
+                    delay: i * 0.1,
+                    ease: "easeOut"
+                  }}
+                  className={`absolute w-3 h-3 rounded-full ${
+                    i % 4 === 0 ? 'bg-purple-400' :
+                    i % 4 === 1 ? 'bg-pink-400' :
+                    i % 4 === 2 ? 'bg-amber-400' : 'bg-emerald-400'
+                  }`}
+                  style={{
+                    left: '50%',
+                    top: '50%',
+                    transform: 'translate(-50%, -50%)'
+                  }}
+                />
+              ))}
+              
+              <div className="text-6xl">🎉</div>
+            </motion.div>
+
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="space-y-4"
+            >
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-amber-500 bg-clip-text text-transparent">
+                🎉 Reward Redeemed!
+              </h2>
+              
+              {selectedReward && (
+                <p className="text-muted-foreground">
+                  We'll send your <span className="font-semibold text-foreground">{selectedReward.title}</span> to you within 48 hours.
+                </p>
+              )}
+
+              <div className="flex items-center justify-center gap-2 p-3 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-lg border border-emerald-200/50 dark:border-emerald-800/50">
+                <CheckCircle className="h-4 w-4 text-emerald-600" />
+                <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
+                  New Balance: {actualMPBalance} MP
+                </span>
+              </div>
+            </motion.div>
+
+            <Button
+              onClick={() => setShowSuccessModal(false)}
+              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+            >
+              Close
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
