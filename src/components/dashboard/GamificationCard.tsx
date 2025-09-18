@@ -59,7 +59,6 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
     next_redemption_date: null,
   });
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
-  const [confirmRedemption, setConfirmRedemption] = useState<RewardTier | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [redeemedReward, setRedeemedReward] = useState<RewardTier | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -242,8 +241,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
         next_redemption_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
       }));
 
-      // Close confirmation and show success
-      setConfirmRedemption(null);
+      // Show success
       setRedeemedReward(reward);
       setShowSuccess(true);
       setShowConfetti(true);
@@ -315,66 +313,6 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
 
   const RewardsModal = () => (
     <DialogContent className="max-w-5xl max-h-[90vh] overflow-hidden bg-gradient-to-br from-white via-slate-50/80 to-purple-50/60 dark:from-slate-950 dark:via-slate-900/90 dark:to-purple-950/60 border-0 shadow-2xl backdrop-blur-sm">
-      {/* Confirmation Modal Overlay */}
-      {confirmRedemption && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
-          className="absolute inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={() => setConfirmRedemption(null)}
-        >
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="bg-gradient-to-br from-white via-slate-50/95 to-purple-50/90 dark:from-slate-950 dark:via-slate-900/95 dark:to-purple-950/90 rounded-2xl shadow-2xl border-0 p-6 max-w-md w-full mx-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="text-center space-y-4">
-              <h3 className="text-xl font-bold">Confirm Purchase</h3>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center">
-                  <Gift className="h-8 w-8 text-white" />
-                </div>
-                <h4 className="text-lg font-bold">{confirmRedemption.title}</h4>
-                <p className="text-sm text-muted-foreground">Cost: {confirmRedemption.points} MP</p>
-              </div>
-              
-              <div className="bg-muted/50 p-4 rounded-lg space-y-2">
-                <div className="flex justify-between">
-                  <span>Current Balance:</span>
-                  <span className="font-bold">{userPoints.mp_balance} MP</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>After Purchase:</span>
-                  <span className="font-bold">{userPoints.mp_balance - confirmRedemption.points} MP</span>
-                </div>
-              </div>
-              
-              <div className="bg-amber-50 dark:bg-amber-950/20 p-3 rounded-lg border border-amber-200 dark:border-amber-800">
-                <p className="text-sm text-amber-700 dark:text-amber-300">
-                  ⚠️ You can redeem 1 reward per month. Refreshes on {new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString()}.
-                </p>
-              </div>
-              
-              <div className="flex gap-3">
-                <Button variant="ghost" onClick={() => setConfirmRedemption(null)} className="flex-1">
-                  Cancel
-                </Button>
-                <Button 
-                  onClick={() => confirmRedemption && handleRedeemReward(confirmRedemption)} 
-                  className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-                >
-                  Confirm Purchase
-                </Button>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
       
       {/* Premium background with glassmorphism */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -628,7 +566,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                             whileTap={{ scale: 0.97 }}
                           >
                             <Button 
-                              onClick={() => setConfirmRedemption(reward)}
+                              onClick={() => handleRedeemReward(reward)}
                               className="w-full h-8 bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 hover:from-emerald-700 hover:via-green-700 hover:to-teal-700 text-white font-bold shadow-lg shadow-emerald-500/30 border-0 rounded-lg text-xs tracking-wide transition-all duration-300"
                             >
                               <Sparkles className="w-3 h-3 mr-1" />
@@ -660,7 +598,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                             whileTap={{ scale: 0.97 }}
                           >
                             <Button 
-                              onClick={() => setConfirmRedemption(reward)}
+                              onClick={() => handleRedeemReward(reward)}
                               className="w-full h-8 bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 hover:from-emerald-700 hover:via-green-700 hover:to-teal-700 text-white font-bold shadow-lg shadow-emerald-500/30 border-0 rounded-lg text-xs tracking-wide transition-all duration-300"
                             >
                               <Sparkles className="w-3 h-3 mr-1" />
