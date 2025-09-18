@@ -292,9 +292,9 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
 
   return (
     <div className="mb-6">
-      <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-purple-50/60 to-blue-50/60 dark:from-slate-900 dark:via-purple-950/30 dark:to-blue-950/30 shadow-xl hover:shadow-2xl transition-all duration-500 group backdrop-blur-sm transform hover:scale-[1.02] animate-pulse-glow">
+      <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-purple-50/60 to-blue-50/60 dark:from-slate-900 dark:via-purple-950/30 dark:to-blue-950/30 shadow-xl hover:shadow-2xl transition-all duration-500 group backdrop-blur-sm transform hover:scale-[1.02]">
         {/* Enhanced glow effects */}
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-blue-400/20 to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-gradient" />
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-blue-400/20 to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         
         {/* Floating orbs */}
         <div className="absolute top-4 right-6 w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-float opacity-60" />
@@ -302,7 +302,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
         <div className="absolute bottom-6 left-8 w-2.5 h-2.5 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full animate-bounce opacity-40" />
         
         {/* Premium border with animation */}
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 rounded-xl p-[2px] group-hover:p-[3px] transition-all duration-300 animate-border-glow">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 rounded-xl p-[2px] group-hover:p-[3px] transition-all duration-300">
           <div className="bg-gradient-to-br from-white via-purple-50/60 to-blue-50/60 dark:from-slate-900 dark:via-purple-950/30 dark:to-blue-950/30 rounded-[10px] h-full w-full backdrop-blur-sm" />
         </div>
 
