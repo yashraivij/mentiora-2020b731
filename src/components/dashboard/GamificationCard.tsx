@@ -182,280 +182,465 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
   };
 
   const RewardsModal = () => (
-    <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/50 dark:from-slate-950 dark:via-blue-950/30 dark:to-purple-950/50 border-0 shadow-2xl">
-      {/* Animated background elements */}
+    <DialogContent className="max-w-5xl max-h-[90vh] overflow-hidden bg-gradient-to-br from-white via-slate-50/80 to-purple-50/60 dark:from-slate-950 dark:via-slate-900/90 dark:to-purple-950/60 border-0 shadow-2xl backdrop-blur-sm">
+      {/* Premium background with glassmorphism */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full animate-pulse" />
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-emerald-400/20 to-teal-400/20 rounded-full animate-bounce" style={{ animationDelay: '2s' }} />
+        {/* Gradient orbs with enhanced glow */}
+        <div className="absolute -top-20 -left-20 w-72 h-72 bg-gradient-to-br from-purple-400/30 via-pink-400/20 to-amber-400/30 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-gradient-to-tl from-blue-400/25 via-cyan-400/20 to-emerald-400/25 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-gradient-to-r from-emerald-400/20 via-teal-400/15 to-cyan-400/20 rounded-full blur-2xl animate-bounce" style={{ animationDelay: '1s' }} />
         
-        {/* Floating sparkles */}
-        <div className="absolute top-8 right-16 text-2xl animate-bounce opacity-60" style={{ animationDelay: '0.5s' }}>✨</div>
-        <div className="absolute bottom-16 left-8 text-xl animate-pulse opacity-70" style={{ animationDelay: '1.5s' }}>💎</div>
-        <div className="absolute top-1/3 right-8 text-lg animate-bounce opacity-50" style={{ animationDelay: '2.5s' }}>🎯</div>
+        {/* Premium floating elements */}
+        <div className="absolute top-12 right-20 text-3xl animate-bounce opacity-70" style={{ animationDelay: '0.5s', filter: 'drop-shadow(0 0 10px rgba(255,215,0,0.5))' }}>✨</div>
+        <div className="absolute bottom-20 left-12 text-2xl animate-pulse opacity-80" style={{ animationDelay: '1.5s', filter: 'drop-shadow(0 0 8px rgba(147,51,234,0.5))' }}>💎</div>
+        <div className="absolute top-1/4 right-12 text-xl animate-bounce opacity-60" style={{ animationDelay: '2.5s', filter: 'drop-shadow(0 0 6px rgba(34,197,94,0.5))' }}>🎯</div>
+        <div className="absolute top-3/4 left-1/4 text-2xl animate-pulse opacity-75" style={{ animationDelay: '3s', filter: 'drop-shadow(0 0 10px rgba(251,191,36,0.5))' }}>⚡</div>
+        <div className="absolute top-8 left-1/2 text-xl animate-bounce opacity-65" style={{ animationDelay: '1.8s', filter: 'drop-shadow(0 0 8px rgba(239,68,68,0.5))' }}>🚀</div>
       </div>
 
-      <DialogHeader className="relative z-10 text-center pb-6">
+      {/* Header with premium styling */}
+      <div className="relative z-10 text-center pb-8 pt-6">
         <motion.div
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          initial={{ y: -30, opacity: 0, scale: 0.9 }}
+          animate={{ y: 0, opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <div className="flex items-center justify-center mb-4">
+          <div className="flex items-center justify-center mb-6">
             <motion.div
               animate={{ 
-                rotate: [0, 10, -10, 0],
-                scale: [1, 1.1, 1]
+                rotate: [0, 15, -15, 0],
+                scale: [1, 1.15, 1]
               }}
               transition={{ 
-                duration: 3, 
+                duration: 4, 
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="mr-3"
+              className="mr-4 p-3 rounded-2xl bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500 shadow-lg shadow-amber-500/30"
             >
-              <Gift className="h-8 w-8 text-amber-500" />
+              <Gift className="h-10 w-10 text-white drop-shadow-lg" />
             </motion.div>
-            <DialogTitle className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-amber-600 bg-clip-text text-transparent">
-              Mentiora Rewards Shop
-            </DialogTitle>
+            
+            <div className="text-center">
+              <h1 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-purple-600 via-pink-500 via-amber-500 to-orange-600 bg-clip-text text-transparent mb-2 tracking-tight">
+                Rewards Shop
+              </h1>
+              <div className="h-1 w-32 mx-auto bg-gradient-to-r from-purple-500 via-pink-500 to-amber-500 rounded-full mb-4" />
+            </div>
+            
             <motion.div
               animate={{ 
-                rotate: [0, -10, 10, 0],
-                scale: [1, 1.1, 1]
+                rotate: [0, -15, 15, 0],
+                scale: [1, 1.15, 1]
               }}
               transition={{ 
-                duration: 3, 
+                duration: 4, 
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: 1.5
+                delay: 2
               }}
-              className="ml-3"
+              className="ml-4 p-3 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-600 shadow-lg shadow-purple-500/30"
             >
-              <Crown className="h-8 w-8 text-purple-500" />
+              <Crown className="h-10 w-10 text-white drop-shadow-lg" />
             </motion.div>
           </div>
-          <p className="text-lg text-muted-foreground">
-            Transform your study points into amazing rewards! 🚀
-          </p>
-        </motion.div>
-      </DialogHeader>
-      
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-        {REWARDS.map((reward, index) => {
-          const canRedeem = isPremium && userPoints.total_points >= reward.points;
-          const Icon = reward.icon;
-          const isHighValue = reward.points >= 1000;
           
-          return (
-            <motion.div
-              key={index}
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ 
-                duration: 0.5, 
-                delay: index * 0.1,
-                ease: "easeOut"
-              }}
-              whileHover={{ 
-                scale: 1.05,
-                rotateY: 5,
-                transition: { duration: 0.2 }
-              }}
-              className="group"
-            >
-              <Card className={`relative overflow-hidden border-0 transition-all duration-500 hover:shadow-2xl ${
-                canRedeem 
-                  ? 'bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 dark:from-emerald-950/30 dark:via-green-950/30 dark:to-teal-950/30' 
-                  : isPremium 
-                    ? 'bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30 dark:from-slate-900 dark:via-blue-950/20 dark:to-purple-950/20' 
-                    : 'bg-gradient-to-br from-gray-50 to-slate-100 dark:from-gray-900 dark:to-slate-800 opacity-75'
-              }`}>
-                {/* Premium glow border */}
-                <div className={`absolute inset-0 bg-gradient-to-r ${
+          <motion.p 
+            className="text-xl text-muted-foreground/80 font-medium max-w-2xl mx-auto leading-relaxed"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            Turn your dedication into <span className="font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">amazing prizes</span>
+          </motion.p>
+          
+          {/* MP Balance display */}
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="mt-6 inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-cyan-500/10 backdrop-blur-sm border border-emerald-500/20 rounded-2xl"
+          >
+            <Zap className="h-5 w-5 text-emerald-500" />
+            <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400">
+              {userPoints.total_points} MP Available
+            </span>
+          </motion.div>
+        </motion.div>
+      </div>
+      
+      {/* Scrollable rewards section */}
+      <div className="relative z-10 max-h-[50vh] overflow-y-auto scrollbar-hide">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-2 pb-6">
+          {REWARDS.map((reward, index) => {
+            const canRedeem = isPremium && userPoints.total_points >= reward.points;
+            const Icon = reward.icon;
+            const isHighValue = reward.points >= 1000;
+            const isPremiumTier = reward.points >= 2000;
+            
+            return (
+              <motion.div
+                key={index}
+                initial={{ y: 30, opacity: 0, rotateX: 15 }}
+                animate={{ y: 0, opacity: 1, rotateX: 0 }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: index * 0.12,
+                  ease: "easeOut"
+                }}
+                whileHover={{ 
+                  scale: 1.08,
+                  rotateY: 8,
+                  z: 50,
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="group perspective-1000"
+              >
+                <Card className={`relative overflow-hidden border-0 transition-all duration-500 hover:shadow-2xl backdrop-blur-sm ${
                   canRedeem 
-                    ? 'from-emerald-400 via-green-400 to-teal-400' 
-                    : isHighValue
-                      ? 'from-purple-500 via-pink-500 to-amber-500'
-                      : 'from-blue-400 via-purple-400 to-pink-400'
-                } rounded-xl p-[2px] group-hover:p-[3px] transition-all duration-300`}>
-                  <div className="bg-white dark:bg-slate-900 rounded-[10px] h-full w-full" />
-                </div>
-
-                {/* Reward tier indicator */}
-                {isHighValue && (
-                  <div className="absolute top-3 right-3 z-20">
-                    <motion.div
-                      animate={{ 
-                        scale: [1, 1.2, 1],
-                        rotate: [0, 5, -5, 0]
-                      }}
-                      transition={{ 
-                        duration: 2, 
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                      className="bg-gradient-to-r from-amber-400 to-orange-500 text-white text-xs px-2 py-1 rounded-full font-bold shadow-lg"
-                    >
-                      PREMIUM
-                    </motion.div>
+                    ? 'bg-gradient-to-br from-emerald-50/80 via-green-50/70 to-teal-50/80 dark:from-emerald-950/40 dark:via-green-950/30 dark:to-teal-950/40 shadow-emerald-500/20' 
+                    : isPremium 
+                      ? 'bg-gradient-to-br from-white/90 via-slate-50/80 to-purple-50/70 dark:from-slate-900/90 dark:via-slate-800/80 dark:to-purple-950/60 shadow-purple-500/10' 
+                      : 'bg-gradient-to-br from-gray-100/60 to-slate-200/60 dark:from-gray-800/60 dark:to-slate-700/60 opacity-85'
+                }`}>
+                  
+                  {/* Glassmorphism border with premium glow */}
+                  <div className={`absolute inset-0 rounded-xl bg-gradient-to-r p-[2px] transition-all duration-500 group-hover:p-[3px] ${
+                    canRedeem 
+                      ? 'from-emerald-400 via-green-400 to-teal-400 shadow-lg shadow-emerald-500/30' 
+                      : isPremiumTier
+                        ? 'from-purple-500 via-pink-500 to-amber-500 shadow-xl shadow-purple-500/40'
+                        : isHighValue
+                          ? 'from-blue-500 via-purple-500 to-pink-500 shadow-lg shadow-blue-500/30'
+                          : 'from-indigo-400 via-purple-400 to-pink-400 shadow-md shadow-indigo-500/20'
+                  }`}>
+                    <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm rounded-[10px] h-full w-full" />
                   </div>
-                )}
 
-                {/* Floating particles for premium items */}
-                {isHighValue && (
-                  <>
-                    <div className="absolute top-2 left-2 w-2 h-2 bg-gradient-to-r from-amber-300 to-yellow-400 rounded-full animate-ping opacity-60" />
-                    <div className="absolute bottom-2 right-8 w-1.5 h-1.5 bg-gradient-to-r from-pink-300 to-purple-400 rounded-full animate-bounce opacity-70" style={{ animationDelay: '1s' }} />
-                  </>
-                )}
-
-                <CardContent className="relative z-10 p-6">
-                  <div className="text-center space-y-4">
-                    {/* Icon with enhanced styling */}
-                    <motion.div
-                      whileHover={{ 
-                        scale: 1.1,
-                        rotate: 360
-                      }}
-                      transition={{ duration: 0.6 }}
-                      className={`mx-auto w-16 h-16 rounded-2xl flex items-center justify-center shadow-xl ${
-                        canRedeem 
-                          ? 'bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 shadow-emerald-500/30' 
-                          : isHighValue
-                            ? 'bg-gradient-to-br from-purple-500 via-pink-500 to-amber-500 shadow-purple-500/30'
-                            : 'bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 shadow-blue-500/30'
-                      }`}
-                    >
-                      <div className="absolute inset-1 rounded-xl bg-white/20" />
-                      <Icon className="h-8 w-8 text-white relative z-10 drop-shadow-lg" />
-                    </motion.div>
-                    
-                    {/* Title and description */}
-                    <div className="space-y-2">
-                      <h3 className={`text-lg font-bold ${
-                        isHighValue 
-                          ? 'bg-gradient-to-r from-purple-600 via-pink-600 to-amber-600 bg-clip-text text-transparent'
-                          : 'text-foreground'
-                      }`}>
-                        {reward.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {reward.description}
-                      </p>
-                    </div>
-
-                    {/* Points badge with enhanced styling */}
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      className="flex justify-center"
-                    >
-                      <Badge 
-                        className={`text-sm font-bold px-4 py-2 ${
-                          isHighValue 
-                            ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/30'
-                            : canRedeem
-                              ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/30'
-                              : 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg shadow-blue-500/30'
-                        }`}
+                  {/* Premium tier badges */}
+                  {isPremiumTier && (
+                    <div className="absolute -top-2 -right-2 z-30">
+                      <motion.div
+                        animate={{ 
+                          scale: [1, 1.1, 1],
+                          rotate: [0, 10, -10, 0]
+                        }}
+                        transition={{ 
+                          duration: 3, 
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                        className="relative"
                       >
-                        {reward.points} MP ⚡
-                      </Badge>
-                    </motion.div>
-
-                    {/* Action button */}
-                    <div className="pt-2">
-                      {!isPremium ? (
-                        <Button 
-                          onClick={onUpgrade} 
-                          className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                        >
-                          🚀 Upgrade to Unlock
-                        </Button>
-                      ) : canRedeem ? (
-                        <motion.div
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <Button className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
-                            🎉 Redeem Now
-                          </Button>
-                        </motion.div>
-                      ) : (
-                        <div className="text-center p-3 bg-muted/50 rounded-lg border border-dashed">
-                          <span className="text-sm font-medium text-muted-foreground">
-                            Need {reward.points - userPoints.total_points} more MP 💪
-                          </span>
+                        <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-amber-600 text-white text-xs px-3 py-1.5 rounded-full font-black shadow-xl shadow-purple-500/50 border-2 border-white/20">
+                          <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-amber-600 rounded-full blur-sm opacity-50" />
+                          <span className="relative z-10">ELITE ⭐</span>
                         </div>
-                      )}
+                      </motion.div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          );
-        })}
+                  )}
+                  
+                  {isHighValue && !isPremiumTier && (
+                    <div className="absolute top-3 right-3 z-20">
+                      <motion.div
+                        animate={{ 
+                          scale: [1, 1.15, 1]
+                        }}
+                        transition={{ 
+                          duration: 2.5, 
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                        className="bg-gradient-to-r from-amber-500 to-orange-600 text-white text-xs px-2.5 py-1 rounded-full font-bold shadow-lg shadow-amber-500/40 border border-white/30"
+                      >
+                        PREMIUM
+                      </motion.div>
+                    </div>
+                  )}
+
+                  {/* Floating premium particles */}
+                  {isPremiumTier && (
+                    <>
+                      <div className="absolute top-4 left-4 w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full animate-ping opacity-70" />
+                      <div className="absolute bottom-6 right-12 w-1.5 h-1.5 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full animate-bounce opacity-80" style={{ animationDelay: '1s' }} />
+                      <div className="absolute top-8 right-8 w-1 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full animate-pulse opacity-60" style={{ animationDelay: '2s' }} />
+                    </>
+                  )}
+
+                  <CardContent className="relative z-10 p-7">
+                    <div className="text-center space-y-5">
+                      {/* Enhanced icon with multiple gradient layers */}
+                      <motion.div
+                        whileHover={{ 
+                          scale: 1.15,
+                          rotate: 360
+                        }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        className="relative mx-auto w-20 h-20 flex items-center justify-center"
+                      >
+                        {/* Outer glow ring */}
+                        <div className={`absolute inset-0 rounded-3xl blur-xl opacity-40 ${
+                          canRedeem 
+                            ? 'bg-gradient-to-br from-emerald-400 via-green-500 to-teal-500' 
+                            : isPremiumTier
+                              ? 'bg-gradient-to-br from-purple-500 via-pink-500 to-amber-500'
+                              : isHighValue
+                                ? 'bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500'
+                                : 'bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500'
+                        }`} />
+                        
+                        {/* Main icon container */}
+                        <div className={`relative w-full h-full rounded-3xl shadow-2xl flex items-center justify-center ${
+                          canRedeem 
+                            ? 'bg-gradient-to-br from-emerald-500 via-green-500 to-teal-600 shadow-emerald-500/40' 
+                            : isPremiumTier
+                              ? 'bg-gradient-to-br from-purple-500 via-pink-500 to-amber-500 shadow-purple-500/40'
+                              : isHighValue
+                                ? 'bg-gradient-to-br from-blue-500 via-purple-500 to-pink-600 shadow-blue-500/40'
+                                : 'bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 shadow-indigo-500/40'
+                        }`}>
+                          {/* Inner highlight */}
+                          <div className="absolute inset-2 rounded-2xl bg-gradient-to-br from-white/30 via-white/10 to-transparent" />
+                          <Icon className="h-10 w-10 text-white relative z-10 drop-shadow-2xl" />
+                        </div>
+                      </motion.div>
+                      
+                      {/* Title with enhanced typography */}
+                      <div className="space-y-3">
+                        <h3 className={`text-xl font-black tracking-tight ${
+                          isPremiumTier 
+                            ? 'bg-gradient-to-r from-purple-600 via-pink-600 to-amber-600 bg-clip-text text-transparent drop-shadow-sm'
+                            : isHighValue
+                              ? 'bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent'
+                              : 'text-foreground font-bold'
+                        }`}>
+                          {reward.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground/90 leading-relaxed font-medium">
+                          {reward.description}
+                        </p>
+                      </div>
+
+                      {/* Enhanced points badge */}
+                      <motion.div
+                        whileHover={{ scale: 1.08, rotate: [0, 5, -5, 0] }}
+                        transition={{ duration: 0.3 }}
+                        className="flex justify-center"
+                      >
+                        <div className={`relative px-5 py-2.5 rounded-2xl font-black text-sm shadow-xl overflow-hidden ${
+                          isPremiumTier 
+                            ? 'bg-gradient-to-r from-purple-500 via-pink-500 to-amber-500 text-white shadow-purple-500/40'
+                            : isHighValue 
+                              ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 text-white shadow-amber-500/40'
+                              : canRedeem
+                                ? 'bg-gradient-to-r from-emerald-500 via-green-500 to-teal-600 text-white shadow-emerald-500/40'
+                                : 'bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white shadow-indigo-500/40'
+                        }`}>
+                          {/* Animated shine effect */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000" />
+                          <span className="relative z-10">{reward.points} MP ⚡</span>
+                        </div>
+                      </motion.div>
+
+                      {/* Enhanced action buttons */}
+                      <div className="pt-3">
+                        {!isPremium ? (
+                          <motion.div
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                          >
+                            <Button 
+                              onClick={onUpgrade} 
+                              className="w-full h-12 bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white font-bold shadow-xl shadow-purple-500/30 border-0 rounded-xl text-sm tracking-wide transition-all duration-300"
+                            >
+                              <Crown className="w-4 h-4 mr-2" />
+                              Upgrade to Unlock
+                            </Button>
+                          </motion.div>
+                        ) : canRedeem ? (
+                          <motion.div
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                          >
+                            <Button className="w-full h-12 bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 hover:from-emerald-700 hover:via-green-700 hover:to-teal-700 text-white font-bold shadow-xl shadow-emerald-500/30 border-0 rounded-xl text-sm tracking-wide transition-all duration-300">
+                              <Sparkles className="w-4 h-4 mr-2" />
+                              Claim Reward
+                            </Button>
+                          </motion.div>
+                        ) : (
+                          <div className="relative p-4 bg-gradient-to-r from-slate-100/80 to-gray-100/80 dark:from-slate-800/80 dark:to-gray-800/80 rounded-xl border-2 border-dashed border-muted-foreground/20 backdrop-blur-sm">
+                            <div className="text-center">
+                              <div className="text-sm font-bold text-muted-foreground/80 mb-1">
+                                {reward.points - userPoints.total_points} more MP needed
+                              </div>
+                              <div className="text-xs text-muted-foreground/60 font-medium">
+                                Keep studying to unlock! 💪
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
       
       {!isPremium && (
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="relative z-10 mt-8"
+          initial={{ y: 30, opacity: 0, scale: 0.95 }}
+          animate={{ y: 0, opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+          className="relative z-10 mt-10"
         >
-          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-purple-50 via-pink-50 to-amber-50 dark:from-purple-950/30 dark:via-pink-950/30 dark:to-amber-950/30 shadow-2xl">
-            {/* Animated border */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-amber-500 rounded-xl p-[3px]">
-              <div className="bg-gradient-to-br from-purple-50 via-pink-50 to-amber-50 dark:from-purple-950/30 dark:via-pink-950/30 dark:to-amber-950/30 rounded-[9px] h-full w-full" />
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white/95 via-purple-50/90 to-pink-50/90 dark:from-slate-900/95 dark:via-purple-950/60 dark:to-pink-950/60 shadow-2xl backdrop-blur-sm">
+            {/* Premium animated border */}
+            <div className="absolute inset-0 rounded-xl p-[3px] bg-gradient-to-r from-purple-500 via-pink-500 via-amber-500 via-orange-500 to-red-500 animate-gradient-x">
+              <div className="bg-gradient-to-br from-white/95 via-purple-50/90 to-pink-50/90 dark:from-slate-900/95 dark:via-purple-950/60 dark:to-pink-950/60 rounded-[9px] h-full w-full backdrop-blur-sm" />
             </div>
             
-            {/* Floating crown animation */}
-            <div className="absolute top-4 right-6 opacity-20">
-              <motion.div
-                animate={{ 
-                  y: [-5, 5, -5],
-                  rotate: [0, 10, 0]
-                }}
-                transition={{ 
-                  duration: 3, 
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                <Crown className="h-16 w-16 text-amber-400" />
-              </motion.div>
+            {/* Floating premium elements */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <div className="absolute top-6 right-8 opacity-30">
+                <motion.div
+                  animate={{ 
+                    y: [-8, 8, -8],
+                    rotate: [0, 15, 0],
+                    scale: [1, 1.1, 1]
+                  }}
+                  transition={{ 
+                    duration: 4, 
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <Crown className="h-20 w-20 text-amber-400 drop-shadow-lg" />
+                </motion.div>
+              </div>
+              
+              <div className="absolute top-8 left-8 opacity-20">
+                <motion.div
+                  animate={{ 
+                    y: [5, -5, 5],
+                    rotate: [0, -10, 0],
+                    scale: [1, 1.05, 1]
+                  }}
+                  transition={{ 
+                    duration: 3.5, 
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1
+                  }}
+                >
+                  <Gift className="h-16 w-16 text-purple-400 drop-shadow-md" />
+                </motion.div>
+              </div>
+              
+              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 opacity-25">
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.2, 1],
+                    opacity: [0.25, 0.4, 0.25]
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 0.5
+                  }}
+                >
+                  <Sparkles className="h-12 w-12 text-pink-400" />
+                </motion.div>
+              </div>
             </div>
 
-            <CardContent className="relative z-10 p-8 text-center">
+            <CardContent className="relative z-10 p-10 text-center">
               <motion.div
-                animate={{ 
-                  scale: [1, 1.05, 1],
-                }}
-                transition={{ 
-                  duration: 2, 
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 1, duration: 0.6 }}
+                className="space-y-6"
               >
-                <Crown className="h-12 w-12 text-amber-500 mx-auto mb-4" />
-              </motion.div>
-              <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-purple-600 via-pink-600 to-amber-600 bg-clip-text text-transparent">
-                Unlock Premium Rewards
-              </h3>
-              <p className="text-muted-foreground mb-6 text-lg leading-relaxed">
-                🎯 Redeem exclusive rewards including vouchers, VIP Discord roles, and premium tech prizes!
-              </p>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button 
-                  onClick={onUpgrade} 
-                  className="bg-gradient-to-r from-purple-500 via-pink-500 to-amber-500 hover:from-purple-600 hover:via-pink-600 hover:to-amber-600 text-white font-bold text-lg px-8 py-4 shadow-2xl hover:shadow-3xl transition-all duration-300"
+                {/* Premium icon */}
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.08, 1],
+                    rotate: [0, 5, -5, 0]
+                  }}
+                  transition={{ 
+                    duration: 3, 
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="mx-auto w-16 h-16 bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center shadow-xl shadow-amber-500/30"
                 >
-                  ✨ Upgrade to Premium ✨
-                </Button>
+                  <Crown className="h-8 w-8 text-white drop-shadow-lg" />
+                </motion.div>
+                
+                {/* Enhanced title */}
+                <div className="space-y-3">
+                  <h3 className="text-3xl font-black bg-gradient-to-r from-purple-600 via-pink-600 via-amber-600 to-orange-600 bg-clip-text text-transparent tracking-tight">
+                    Unlock Premium Rewards
+                  </h3>
+                  <div className="h-1 w-24 mx-auto bg-gradient-to-r from-purple-500 via-pink-500 to-amber-500 rounded-full" />
+                </div>
+                
+                {/* Enhanced description */}
+                <p className="text-muted-foreground/90 text-lg leading-relaxed max-w-md mx-auto font-medium">
+                  Transform your study points into <span className="font-bold text-purple-600 dark:text-purple-400">real rewards</span> including vouchers, exclusive Discord roles, and premium tech prizes!
+                </p>
+                
+                {/* Feature highlights */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 mb-8">
+                  <div className="flex flex-col items-center space-y-2 p-4 rounded-xl bg-gradient-to-b from-emerald-50 to-green-50 dark:from-emerald-950/40 dark:to-green-950/40 border border-emerald-200/50 dark:border-emerald-800/50">
+                    <Gift className="h-6 w-6 text-emerald-600" />
+                    <span className="text-sm font-semibold text-emerald-700 dark:text-emerald-400">Food Vouchers</span>
+                  </div>
+                  <div className="flex flex-col items-center space-y-2 p-4 rounded-xl bg-gradient-to-b from-purple-50 to-pink-50 dark:from-purple-950/40 dark:to-pink-950/40 border border-purple-200/50 dark:border-purple-800/50">
+                    <Users className="h-6 w-6 text-purple-600" />
+                    <span className="text-sm font-semibold text-purple-700 dark:text-purple-400">VIP Access</span>
+                  </div>
+                  <div className="flex flex-col items-center space-y-2 p-4 rounded-xl bg-gradient-to-b from-amber-50 to-orange-50 dark:from-amber-950/40 dark:to-orange-950/40 border border-amber-200/50 dark:border-amber-800/50">
+                    <Trophy className="h-6 w-6 text-amber-600" />
+                    <span className="text-sm font-semibold text-amber-700 dark:text-amber-400">Tech Prizes</span>
+                  </div>
+                </div>
+                
+                {/* Enhanced CTA button */}
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button 
+                    onClick={onUpgrade} 
+                    className="h-14 px-8 bg-gradient-to-r from-purple-600 via-pink-600 via-amber-600 to-orange-600 hover:from-purple-700 hover:via-pink-700 hover:via-amber-700 hover:to-orange-700 text-white font-black text-lg shadow-2xl shadow-purple-500/30 border-0 rounded-2xl tracking-wide transition-all duration-300 group"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <motion.div
+                        animate={{ rotate: [0, 360] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                      >
+                        <Sparkles className="w-5 h-5" />
+                      </motion.div>
+                      <span>Upgrade to Premium</span>
+                      <motion.div
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                      >
+                        <Crown className="w-5 h-5" />
+                      </motion.div>
+                    </div>
+                  </Button>
+                </motion.div>
+                
+                {/* Trust indicator */}
+                <p className="text-xs text-muted-foreground/70 mt-4 font-medium">
+                  Join thousands of students already earning rewards ⭐
+                </p>
               </motion.div>
             </CardContent>
           </Card>
