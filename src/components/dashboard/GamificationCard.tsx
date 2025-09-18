@@ -188,13 +188,6 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
         {/* Organized gradient orbs */}
         <div className="absolute -top-16 -left-16 w-64 h-64 bg-gradient-to-br from-purple-400/25 via-pink-400/15 to-amber-400/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-gradient-to-tl from-blue-400/20 via-cyan-400/15 to-emerald-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-        
-        {/* Purposeful floating elements - rewards themed */}
-        <div className="absolute top-16 right-24 text-2xl animate-bounce opacity-60" style={{ animationDelay: '0.5s', filter: 'drop-shadow(0 0 8px rgba(255,215,0,0.4))' }}>🎯</div>
-        <div className="absolute bottom-32 left-16 text-xl animate-pulse opacity-70" style={{ animationDelay: '1.5s', filter: 'drop-shadow(0 0 6px rgba(147,51,234,0.4))' }}>🏆</div>
-        <div className="absolute top-1/3 right-16 text-lg animate-bounce opacity-50" style={{ animationDelay: '2.5s', filter: 'drop-shadow(0 0 4px rgba(34,197,94,0.4))' }}>💎</div>
-        <div className="absolute top-2/3 left-1/4 text-xl animate-pulse opacity-65" style={{ animationDelay: '3s', filter: 'drop-shadow(0 0 8px rgba(251,191,36,0.4))' }}>🎁</div>
-        <div className="absolute top-12 left-1/2 transform -translate-x-1/2 text-lg animate-bounce opacity-55" style={{ animationDelay: '1.8s', filter: 'drop-shadow(0 0 6px rgba(239,68,68,0.4))' }}>⭐</div>
       </div>
 
       {/* Header with premium styling */}
