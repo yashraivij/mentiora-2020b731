@@ -69,15 +69,11 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
       };
     }
     
-    const previousReward = REWARDS.filter(r => r.points <= currentPoints).pop();
-    const basePoints = previousReward?.points || 0;
-    const progressPoints = currentPoints - basePoints;
-    const totalNeeded = nextReward.points - basePoints;
-    const progressPercent = (progressPoints / totalNeeded) * 100;
+    const progressPercent = (currentPoints / nextReward.points) * 100;
     
     return {
-      current: progressPoints,
-      target: totalNeeded,
+      current: currentPoints,
+      target: nextReward.points,
       progress: progressPercent,
       nextReward
     };
@@ -337,7 +333,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                   <div className="relative">
                     <Progress 
                       value={rewardProgress.progress} 
-                      className="w-full h-3"
+                      className="w-full h-3 bg-muted [&>div]:bg-gradient-to-r [&>div]:from-purple-500 [&>div]:to-blue-500"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <span className="text-xs font-semibold text-white drop-shadow-lg">
