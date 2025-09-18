@@ -327,7 +327,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                             : 'bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 shadow-blue-500/30'
                       }`}
                     >
-                      <div className="absolute inset-1 rounded-xl bg-white/20 backdrop-blur-sm" />
+                      <div className="absolute inset-1 rounded-xl bg-white/20" />
                       <Icon className="h-8 w-8 text-white relative z-10 drop-shadow-lg" />
                     </motion.div>
                     
@@ -502,7 +502,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
 
   return (
     <div className="mb-6">
-      <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-purple-50/60 to-blue-50/60 dark:from-slate-900 dark:via-purple-950/30 dark:to-blue-950/30 shadow-xl hover:shadow-2xl transition-all duration-500 group backdrop-blur-sm transform hover:scale-[1.02]">
+      <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-purple-50/60 to-blue-50/60 dark:from-slate-900 dark:via-purple-950/30 dark:to-blue-950/30 shadow-xl hover:shadow-2xl transition-all duration-500 group transform hover:scale-[1.02]">
         {/* Enhanced glow effects */}
         <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-blue-400/20 to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         
@@ -513,7 +513,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
         
         {/* Premium border with animation */}
         <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 rounded-xl p-[2px] group-hover:p-[3px] transition-all duration-300">
-          <div className="bg-gradient-to-br from-white via-purple-50/60 to-blue-50/60 dark:from-slate-900 dark:via-purple-950/30 dark:to-blue-950/30 rounded-[10px] h-full w-full backdrop-blur-sm" />
+          <div className="bg-gradient-to-br from-white via-purple-50/60 to-blue-50/60 dark:from-slate-900 dark:via-purple-950/30 dark:to-blue-950/30 rounded-[10px] h-full w-full" />
         </div>
 
         {/* Additional floating particles with staggered animations */}
@@ -536,7 +536,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
               <div className="text-center space-y-3">
                 <div className="relative inline-block">
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 via-blue-500 to-emerald-500 flex items-center justify-center shadow-xl shadow-purple-500/30 transition-all duration-300 group-hover:scale-105 mx-auto">
-                    <div className="absolute inset-1 rounded-xl bg-white/20 backdrop-blur-sm" />
+                    <div className="absolute inset-1 rounded-xl bg-white/20" />
                     <Trophy className="h-7 w-7 text-white relative z-10 drop-shadow-lg" />
                   </div>
                   <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full flex items-center justify-center shadow-md">
