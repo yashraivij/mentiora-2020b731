@@ -185,9 +185,9 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
     <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/50 dark:from-slate-950 dark:via-blue-950/30 dark:to-purple-950/50 border-0 shadow-2xl">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-xl animate-pulse" />
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-emerald-400/20 to-teal-400/20 rounded-full blur-xl animate-bounce" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full animate-pulse" />
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-emerald-400/20 to-teal-400/20 rounded-full animate-bounce" style={{ animationDelay: '2s' }} />
         
         {/* Floating sparkles */}
         <div className="absolute top-8 right-16 text-2xl animate-bounce opacity-60" style={{ animationDelay: '0.5s' }}>✨</div>
