@@ -81,23 +81,34 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
 
   const rewardProgress = getNextRewardProgress();
 
-  // Play progress sound
+  // Play enhanced progress sound (similar to confetti sound)
   const playProgressSound = () => {
     const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
     
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.1);
-    
-    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-    
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.1);
+    const playSound = (frequency: number, duration: number, delay: number, waveType: OscillatorType = 'sine') => {
+      setTimeout(() => {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+        oscillator.type = waveType;
+        
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.15, audioContext.currentTime + 0.01);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration);
+      }, delay);
+    };
+
+    // Progress celebration sound sequence
+    playSound(659.25, 0.1, 0); // E5
+    playSound(783.99, 0.1, 80); // G5
+    playSound(1046.5, 0.15, 150); // C6
   };
 
   useEffect(() => {
@@ -281,18 +292,24 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
 
   return (
     <div className="mb-6">
-      <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-purple-50/60 to-blue-50/60 dark:from-slate-900 dark:via-purple-950/30 dark:to-blue-950/30 shadow-xl hover:shadow-2xl transition-all duration-500 group backdrop-blur-sm transform hover:scale-[1.01]">
-        {/* Glow effects */}
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-400/15 via-blue-400/15 to-emerald-400/15 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-purple-50/60 to-blue-50/60 dark:from-slate-900 dark:via-purple-950/30 dark:to-blue-950/30 shadow-xl hover:shadow-2xl transition-all duration-500 group backdrop-blur-sm transform hover:scale-[1.02] animate-pulse-glow">
+        {/* Enhanced glow effects */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-blue-400/20 to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-gradient" />
         
-        {/* Premium border */}
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 rounded-xl p-[2px] group-hover:p-[3px] transition-all duration-300">
+        {/* Floating orbs */}
+        <div className="absolute top-4 right-6 w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-float opacity-60" />
+        <div className="absolute top-8 right-12 w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full animate-float-delayed opacity-50" />
+        <div className="absolute bottom-6 left-8 w-2.5 h-2.5 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full animate-bounce opacity-40" />
+        
+        {/* Premium border with animation */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-blue-500 to-emerald-500 rounded-xl p-[2px] group-hover:p-[3px] transition-all duration-300 animate-border-glow">
           <div className="bg-gradient-to-br from-white via-purple-50/60 to-blue-50/60 dark:from-slate-900 dark:via-purple-950/30 dark:to-blue-950/30 rounded-[10px] h-full w-full backdrop-blur-sm" />
         </div>
 
-        {/* Floating particles */}
-        <div className="absolute top-3 right-4 w-1.5 h-1.5 bg-gradient-to-r from-amber-300 to-yellow-400 rounded-full animate-bounce opacity-70" />
-        <div className="absolute bottom-4 left-6 w-1 h-1 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full animate-pulse opacity-60" />
+        {/* Additional floating particles with staggered animations */}
+        <div className="absolute top-3 right-4 w-1.5 h-1.5 bg-gradient-to-r from-amber-300 to-yellow-400 rounded-full animate-bounce opacity-70" style={{ animationDelay: '0s' }} />
+        <div className="absolute bottom-4 left-6 w-1 h-1 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full animate-pulse opacity-60" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-12 left-4 w-1.5 h-1.5 bg-gradient-to-r from-pink-300 to-purple-400 rounded-full animate-ping opacity-30" style={{ animationDelay: '2s' }} />
 
         <CardContent className="relative p-6">
           {/* Header */}
@@ -345,10 +362,53 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
               </div>
 
               {/* Streak Display */}
-              <div className="flex items-center justify-center space-x-2 p-3 bg-orange-50 dark:bg-orange-950/20 rounded-xl border border-orange-200 dark:border-orange-800">
-                <span className="font-semibold text-orange-700 dark:text-orange-300">
-                  🔥 Streak: {currentStreak} days
-                </span>
+              <div className="relative p-4 bg-gradient-to-r from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/40 dark:via-amber-950/30 dark:to-yellow-950/20 rounded-2xl border-2 border-gradient-to-r from-orange-200 via-amber-200 to-yellow-200 dark:border-orange-800 overflow-hidden group/streak hover:shadow-lg transition-all duration-300">
+                {/* Animated background particles */}
+                <div className="absolute inset-0 opacity-20">
+                  <div className="absolute top-2 left-4 w-2 h-2 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
+                  <div className="absolute top-6 right-8 w-1.5 h-1.5 bg-amber-400 rounded-full animate-bounce" style={{ animationDelay: '0.5s' }} />
+                  <div className="absolute bottom-4 left-12 w-1 h-1 bg-yellow-400 rounded-full animate-pulse" />
+                  <div className="absolute bottom-2 right-4 w-2.5 h-2.5 bg-orange-300 rounded-full animate-ping" style={{ animationDelay: '1s' }} />
+                </div>
+                
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-400/10 via-transparent to-amber-400/10 opacity-0 group-hover/streak:opacity-100 transition-opacity duration-500" />
+                
+                <div className="relative flex items-center justify-center space-x-3">
+                  <motion.span 
+                    className="text-3xl animate-bounce"
+                    animate={{ 
+                      scale: [1, 1.2, 1],
+                      rotate: [0, 5, -5, 0]
+                    }}
+                    transition={{ 
+                      duration: 2, 
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    🔥
+                  </motion.span>
+                  <div className="text-center">
+                    <motion.span 
+                      className="text-2xl font-bold bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 dark:from-orange-400 dark:via-amber-400 dark:to-yellow-400 bg-clip-text text-transparent"
+                      key={currentStreak}
+                      initial={{ scale: 0.5, y: 20, opacity: 0 }}
+                      animate={{ scale: 1, y: 0, opacity: 1 }}
+                      transition={{ type: "spring", damping: 10, stiffness: 200 }}
+                    >
+                      Streak: {currentStreak} days
+                    </motion.span>
+                    <motion.div 
+                      className="text-xs font-medium text-orange-700 dark:text-orange-300 mt-1"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      Keep it going! 🚀
+                    </motion.div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -384,21 +444,58 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                   <Badge variant="secondary" className="text-xs">+40 MP</Badge>
                 </div>
 
-                {/* Special Milestone */}
-                <div className="p-3 rounded-lg bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-950/20 dark:to-yellow-950/20 border border-amber-200 dark:border-amber-800">
-                  <div className="flex items-center justify-between">
+                {/* Special Milestone - Enhanced */}
+                <motion.div 
+                  className="relative p-4 rounded-2xl bg-gradient-to-r from-purple-50 via-pink-50 to-indigo-50 dark:from-purple-950/30 dark:via-pink-950/20 dark:to-indigo-950/30 border-2 border-gradient-to-r from-purple-200 via-pink-200 to-indigo-200 dark:border-purple-800 overflow-hidden group/milestone hover:shadow-xl transition-all duration-500"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  {/* Premium background effects */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400/10 via-pink-400/10 to-indigo-400/10 opacity-0 group-hover/milestone:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute top-2 right-4 w-2 h-2 bg-purple-400 rounded-full animate-ping opacity-40" />
+                  <div className="absolute bottom-2 left-6 w-1.5 h-1.5 bg-pink-400 rounded-full animate-bounce opacity-50" style={{ animationDelay: '0.5s' }} />
+                  <div className="absolute top-4 left-4 w-1 h-1 bg-indigo-400 rounded-full animate-pulse opacity-60" />
+                  
+                  <div className="relative flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <Crown className="h-5 w-5 text-amber-500" />
+                      <motion.div
+                        animate={{ rotate: [0, 10, -10, 0] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                      >
+                        <Crown className="h-6 w-6 text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 bg-clip-text" style={{
+                          WebkitBackgroundClip: 'text',
+                          filter: 'drop-shadow(0 0 8px rgba(168, 85, 247, 0.4))'
+                        }} />
+                      </motion.div>
                       <div>
-                        <span className="text-sm font-semibold text-amber-700 dark:text-amber-300">
-                          Predicted 2026 Exam
-                        </span>
-                        <p className="text-xs text-amber-600 dark:text-amber-400">One-time milestone</p>
+                        <motion.span 
+                          className="text-sm font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 dark:from-purple-400 dark:via-pink-400 dark:to-indigo-400 bg-clip-text text-transparent"
+                          animate={{ 
+                            textShadow: [
+                              "0 0 0px rgba(168, 85, 247, 0)",
+                              "0 0 10px rgba(168, 85, 247, 0.3)",
+                              "0 0 0px rgba(168, 85, 247, 0)"
+                            ]
+                          }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          🎯 Predicted 2026 Exam
+                        </motion.span>
+                        <p className="text-xs bg-gradient-to-r from-purple-500 to-pink-500 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent font-medium">
+                          ✨ One-time mega milestone ✨
+                        </p>
                       </div>
                     </div>
-                    <Badge className="bg-amber-500 text-white text-xs">+500 MP</Badge>
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    >
+                      <Badge className="bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 text-white text-xs font-bold shadow-lg shadow-purple-500/25 border-0 px-3 py-1">
+                        +500 MP 💎
+                      </Badge>
+                    </motion.div>
                   </div>
-                </div>
+                </motion.div>
               </div>
 
               {/* Action Buttons */}
