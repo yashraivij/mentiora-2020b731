@@ -185,17 +185,16 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
     <DialogContent className="max-w-5xl max-h-[90vh] overflow-hidden bg-gradient-to-br from-white via-slate-50/80 to-purple-50/60 dark:from-slate-950 dark:via-slate-900/90 dark:to-purple-950/60 border-0 shadow-2xl backdrop-blur-sm">
       {/* Premium background with glassmorphism */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Gradient orbs with enhanced glow */}
-        <div className="absolute -top-20 -left-20 w-72 h-72 bg-gradient-to-br from-purple-400/30 via-pink-400/20 to-amber-400/30 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-gradient-to-tl from-blue-400/25 via-cyan-400/20 to-emerald-400/25 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-gradient-to-r from-emerald-400/20 via-teal-400/15 to-cyan-400/20 rounded-full blur-2xl animate-bounce" style={{ animationDelay: '1s' }} />
+        {/* Organized gradient orbs */}
+        <div className="absolute -top-16 -left-16 w-64 h-64 bg-gradient-to-br from-purple-400/25 via-pink-400/15 to-amber-400/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-gradient-to-tl from-blue-400/20 via-cyan-400/15 to-emerald-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
         
-        {/* Premium floating elements */}
-        <div className="absolute top-12 right-20 text-3xl animate-bounce opacity-70" style={{ animationDelay: '0.5s', filter: 'drop-shadow(0 0 10px rgba(255,215,0,0.5))' }}>✨</div>
-        <div className="absolute bottom-20 left-12 text-2xl animate-pulse opacity-80" style={{ animationDelay: '1.5s', filter: 'drop-shadow(0 0 8px rgba(147,51,234,0.5))' }}>💎</div>
-        <div className="absolute top-1/4 right-12 text-xl animate-bounce opacity-60" style={{ animationDelay: '2.5s', filter: 'drop-shadow(0 0 6px rgba(34,197,94,0.5))' }}>🎯</div>
-        <div className="absolute top-3/4 left-1/4 text-2xl animate-pulse opacity-75" style={{ animationDelay: '3s', filter: 'drop-shadow(0 0 10px rgba(251,191,36,0.5))' }}>⚡</div>
-        <div className="absolute top-8 left-1/2 text-xl animate-bounce opacity-65" style={{ animationDelay: '1.8s', filter: 'drop-shadow(0 0 8px rgba(239,68,68,0.5))' }}>🚀</div>
+        {/* Purposeful floating elements - rewards themed */}
+        <div className="absolute top-16 right-24 text-2xl animate-bounce opacity-60" style={{ animationDelay: '0.5s', filter: 'drop-shadow(0 0 8px rgba(255,215,0,0.4))' }}>🎯</div>
+        <div className="absolute bottom-32 left-16 text-xl animate-pulse opacity-70" style={{ animationDelay: '1.5s', filter: 'drop-shadow(0 0 6px rgba(147,51,234,0.4))' }}>🏆</div>
+        <div className="absolute top-1/3 right-16 text-lg animate-bounce opacity-50" style={{ animationDelay: '2.5s', filter: 'drop-shadow(0 0 4px rgba(34,197,94,0.4))' }}>💎</div>
+        <div className="absolute top-2/3 left-1/4 text-xl animate-pulse opacity-65" style={{ animationDelay: '3s', filter: 'drop-shadow(0 0 8px rgba(251,191,36,0.4))' }}>🎁</div>
+        <div className="absolute top-12 left-1/2 transform -translate-x-1/2 text-lg animate-bounce opacity-55" style={{ animationDelay: '1.8s', filter: 'drop-shadow(0 0 6px rgba(239,68,68,0.4))' }}>⭐</div>
       </div>
 
       {/* Header with premium styling */}
@@ -270,8 +269,8 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
       </div>
       
       {/* Scrollable rewards section */}
-      <div className="relative z-10 max-h-[50vh] overflow-y-auto scrollbar-hide">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-2 pb-6">
+      <div className="relative z-10 max-h-[45vh] overflow-y-auto scrollbar-hide">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-2 pb-4">
           {REWARDS.map((reward, index) => {
             const canRedeem = isPremium && userPoints.total_points >= reward.points;
             const Icon = reward.icon;
@@ -368,8 +367,8 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                     </>
                   )}
 
-                  <CardContent className="relative z-10 p-7">
-                    <div className="text-center space-y-5">
+                  <CardContent className="relative z-10 p-4">
+                    <div className="text-center space-y-3">
                       {/* Enhanced icon with multiple gradient layers */}
                       <motion.div
                         whileHover={{ 
@@ -377,10 +376,10 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                           rotate: 360
                         }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="relative mx-auto w-20 h-20 flex items-center justify-center"
+                        className="relative mx-auto w-14 h-14 flex items-center justify-center"
                       >
                         {/* Outer glow ring */}
-                        <div className={`absolute inset-0 rounded-3xl blur-xl opacity-40 ${
+                        <div className={`absolute inset-0 rounded-2xl blur-lg opacity-40 ${
                           canRedeem 
                             ? 'bg-gradient-to-br from-emerald-400 via-green-500 to-teal-500' 
                             : isPremiumTier
@@ -391,7 +390,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                         }`} />
                         
                         {/* Main icon container */}
-                        <div className={`relative w-full h-full rounded-3xl shadow-2xl flex items-center justify-center ${
+                        <div className={`relative w-full h-full rounded-2xl shadow-xl flex items-center justify-center ${
                           canRedeem 
                             ? 'bg-gradient-to-br from-emerald-500 via-green-500 to-teal-600 shadow-emerald-500/40' 
                             : isPremiumTier
@@ -401,14 +400,14 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                                 : 'bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 shadow-indigo-500/40'
                         }`}>
                           {/* Inner highlight */}
-                          <div className="absolute inset-2 rounded-2xl bg-gradient-to-br from-white/30 via-white/10 to-transparent" />
-                          <Icon className="h-10 w-10 text-white relative z-10 drop-shadow-2xl" />
+                          <div className="absolute inset-1 rounded-xl bg-gradient-to-br from-white/30 via-white/10 to-transparent" />
+                          <Icon className="h-6 w-6 text-white relative z-10 drop-shadow-lg" />
                         </div>
                       </motion.div>
                       
                       {/* Title with enhanced typography */}
-                      <div className="space-y-3">
-                        <h3 className={`text-xl font-black tracking-tight ${
+                      <div className="space-y-2">
+                        <h3 className={`text-sm font-bold tracking-tight ${
                           isPremiumTier 
                             ? 'bg-gradient-to-r from-purple-600 via-pink-600 to-amber-600 bg-clip-text text-transparent drop-shadow-sm'
                             : isHighValue
@@ -417,7 +416,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                         }`}>
                           {reward.title}
                         </h3>
-                        <p className="text-sm text-muted-foreground/90 leading-relaxed font-medium">
+                        <p className="text-xs text-muted-foreground/90 leading-relaxed font-medium">
                           {reward.description}
                         </p>
                       </div>
@@ -428,7 +427,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                         transition={{ duration: 0.3 }}
                         className="flex justify-center"
                       >
-                        <div className={`relative px-5 py-2.5 rounded-2xl font-black text-sm shadow-xl overflow-hidden ${
+                        <div className={`relative px-3 py-1.5 rounded-xl font-bold text-xs shadow-lg overflow-hidden ${
                           isPremiumTier 
                             ? 'bg-gradient-to-r from-purple-500 via-pink-500 to-amber-500 text-white shadow-purple-500/40'
                             : isHighValue 
@@ -444,7 +443,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                       </motion.div>
 
                       {/* Enhanced action buttons */}
-                      <div className="pt-3">
+                      <div className="pt-2">
                         {!isPremium ? (
                           <motion.div
                             whileHover={{ scale: 1.03 }}
@@ -452,10 +451,10 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                           >
                             <Button 
                               onClick={onUpgrade} 
-                              className="w-full h-12 bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white font-bold shadow-xl shadow-purple-500/30 border-0 rounded-xl text-sm tracking-wide transition-all duration-300"
+                              className="w-full h-8 bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 text-white font-bold shadow-lg shadow-purple-500/30 border-0 rounded-lg text-xs tracking-wide transition-all duration-300"
                             >
-                              <Crown className="w-4 h-4 mr-2" />
-                              Upgrade to Unlock
+                              <Crown className="w-3 h-3 mr-1" />
+                              Upgrade
                             </Button>
                           </motion.div>
                         ) : canRedeem ? (
@@ -463,19 +462,19 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
                           >
-                            <Button className="w-full h-12 bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 hover:from-emerald-700 hover:via-green-700 hover:to-teal-700 text-white font-bold shadow-xl shadow-emerald-500/30 border-0 rounded-xl text-sm tracking-wide transition-all duration-300">
-                              <Sparkles className="w-4 h-4 mr-2" />
-                              Claim Reward
+                            <Button className="w-full h-8 bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 hover:from-emerald-700 hover:via-green-700 hover:to-teal-700 text-white font-bold shadow-lg shadow-emerald-500/30 border-0 rounded-lg text-xs tracking-wide transition-all duration-300">
+                              <Sparkles className="w-3 h-3 mr-1" />
+                              Claim
                             </Button>
                           </motion.div>
                         ) : (
-                          <div className="relative p-4 bg-gradient-to-r from-slate-100/80 to-gray-100/80 dark:from-slate-800/80 dark:to-gray-800/80 rounded-xl border-2 border-dashed border-muted-foreground/20 backdrop-blur-sm">
+                          <div className="relative p-2 bg-gradient-to-r from-slate-100/80 to-gray-100/80 dark:from-slate-800/80 dark:to-gray-800/80 rounded-lg border border-dashed border-muted-foreground/20">
                             <div className="text-center">
-                              <div className="text-sm font-bold text-muted-foreground/80 mb-1">
-                                {reward.points - userPoints.total_points} more MP needed
+                              <div className="text-xs font-bold text-muted-foreground/80 mb-0.5">
+                                {reward.points - userPoints.total_points} more MP
                               </div>
                               <div className="text-xs text-muted-foreground/60 font-medium">
-                                Keep studying to unlock! 💪
+                                Keep studying! 💪
                               </div>
                             </div>
                           </div>
