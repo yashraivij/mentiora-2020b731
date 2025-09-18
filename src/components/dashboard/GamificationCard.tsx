@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Trophy, Flame, Gift, Users, Zap, Crown, Sparkles, CheckCircle, Play } from "lucide-react";
+import { Trophy, Flame, Gift, Users, Zap, Crown, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useAuth } from "@/contexts/AuthContext";
@@ -275,7 +275,6 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
 
               {/* Streak Display */}
               <div className="flex items-center justify-center space-x-2 p-3 bg-orange-50 dark:bg-orange-950/20 rounded-xl border border-orange-200 dark:border-orange-800">
-                <Flame className="h-5 w-5 text-orange-500" />
                 <span className="font-semibold text-orange-700 dark:text-orange-300">
                   🔥 Streak: {currentStreak} days
                 </span>
@@ -292,7 +291,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                 <div className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
                   <div className="flex items-center space-x-3">
                     {userPoints.daily_login_complete ? (
-                      <CheckCircle className="h-5 w-5 text-green-500" />
+                      <span className="text-lg">✅</span>
                     ) : (
                       <div className="w-5 h-5 rounded-full border-2 border-muted-foreground" />
                     )}
@@ -305,9 +304,9 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                 <div className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
                   <div className="flex items-center space-x-3">
                     {userPoints.practice_complete ? (
-                      <CheckCircle className="h-5 w-5 text-green-500" />
+                      <span className="text-lg">✅</span>
                     ) : (
-                      <Play className="h-5 w-5 text-muted-foreground" />
+                      <span className="text-lg">📚</span>
                     )}
                     <span className="text-sm font-medium">Finish 1 set of practice questions</span>
                   </div>
