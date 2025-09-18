@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { BookOpen, CheckCircle, BarChart3, Users, ArrowRight, Star, Sparkles, Quote, Target, Trophy, Zap, Brain, Award, Calendar, TrendingUp, Clock, Crown, GraduationCap, TimerIcon, TrendingUpIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
+import { DynamicTestimonials } from "@/components/ui/dynamic-testimonials";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -17,89 +18,277 @@ const Index = () => {
     const type = hashParams.get('type');
     
     if (accessToken && type === 'recovery') {
+      // Use navigate to properly redirect to reset password page
       navigate('/reset-password' + window.location.hash, { replace: true });
       return;
     }
   }, [navigate]);
   
+  // Animation refs
   const heroRef = useRef(null);
-  const featuresRef = useRef(null);
   const statsRef = useRef(null);
+  const featuresRef = useRef(null);
+  const impactRef = useRef(null);
+  const ctaRef = useRef(null);
   
-  const heroInView = useInView(heroRef, { once: true });
-  const featuresInView = useInView(featuresRef, { once: true });
-  const statsInView = useInView(statsRef, { once: true });
+  const heroInView = useInView(heroRef, { once: true, margin: "-100px" });
+  const statsInView = useInView(statsRef, { once: true, margin: "-100px" });
+  const featuresInView = useInView(featuresRef, { once: true, margin: "-100px" });
+  const impactInView = useInView(impactRef, { once: true, margin: "-100px" });
+  const ctaInView = useInView(ctaRef, { once: true, margin: "-100px" });
 
   const features = [
     {
-      title: "Smart Practice",
-      description: "Personalized questions that adapt to you",
-      cta: "Start Practice"
+      icon: BookOpen,
+      title: "Expert Questions",
+      description: "Curated AQA GCSE questions from experienced teachers",
+      color: "from-blue-500 to-cyan-500",
+      bgColor: "from-blue-50 to-cyan-50"
     },
     {
-      title: "Instant Feedback",
-      description: "Know exactly what to improve",
-      cta: "Get Feedback"
+      icon: Brain,
+      title: "Smart Feedback", 
+      description: "Revolutionary insights that understand your learning style",
+      color: "from-purple-500 to-pink-500",
+      bgColor: "from-purple-50 to-pink-50"
     },
     {
-      title: "Track Progress",
-      description: "See your improvement in real-time",
-      cta: "View Analytics"
+      icon: BarChart3,
+      title: "Smart Analytics",
+      description: "Data-driven insights that predict your exam success",
+      color: "from-emerald-500 to-teal-500",
+      bgColor: "from-emerald-50 to-teal-50"
     },
     {
-      title: "Exam Prep",
-      description: "Practice with real exam-style papers",
-      cta: "Take Mock Exam"
+      icon: Target,
+      title: "Personalized Path",
+      description: "Adaptive learning that evolves with your progress",
+      color: "from-orange-500 to-red-500",
+      bgColor: "from-orange-50 to-red-50"
+    }
+  ];
+
+  const howItWorks = [
+    {
+      step: "01",
+      title: "Pick Your Subject",
+      description: "Choose your subject and the exact topic you want to master.",
+      icon: Target,
+      color: "from-blue-500 to-purple-600",
+      accent: "text-blue-600"
+    },
+    {
+      step: "02",
+      title: "Answer Real Exam Questions",
+      description: "Get exam-style questions that match your spec and practice just like the real thing.",
+      icon: Zap,
+      color: "from-purple-500 to-pink-600",
+      accent: "text-purple-600"
+    },
+    {
+      step: "03",
+      title: "Get Instant Marking & Feedback",
+      description: "See exactly what the examiner wants, where you lost marks, and how to improve.",
+      icon: Award,
+      color: "from-emerald-500 to-cyan-600",
+      accent: "text-emerald-600"
+    }
+  ];
+
+  const reviews = [
+    {
+      name: "Sarah M.",
+      grade: "Year 11",
+      content: "This platform saved me £2,400 on private tutoring! The personalized feedback is incredible - it knows exactly what I struggle with and adapts to my learning style. Went from C grades to A* in just 3 months while studying 60% less time.",
+      rating: 5,
+      color: "from-blue-50 to-indigo-50",
+      accent: "border-blue-200"
+    },
+    {
+      name: "James K.",
+      grade: "Year 10", 
+      content: "The personalization is mind-blowing - it's like having a tutor who knows me better than I know myself. I'm saving 15 hours a week compared to traditional revision and my grades have jumped from grade 5s to 8s consistently.",
+      rating: 5,
+      color: "from-purple-50 to-pink-50",
+      accent: "border-purple-200"
+    },
+    {
+      name: "Emma L.",
+      grade: "Year 11",
+      content: "My parents love that we're saving thousands on tutoring while I'm getting better results than ever. The platform personalizes everything to my weak spots - achieved grade 9 in Chemistry after struggling with grade 6s for months!",
+      rating: 5,
+      color: "from-emerald-50 to-teal-50",
+      accent: "border-emerald-200"
+    }
+  ];
+
+  const trustStats = [
+    { 
+      number: "2.3", 
+      label: "Grades Higher", 
+      color: "text-emerald-600", 
+      bg: "bg-gradient-to-br from-emerald-50 to-emerald-100",
+      description: "Average grade improvement",
+      icon: TrendingUpIcon
+    },
+    { 
+      number: "67%", 
+      label: "Study Time Saved", 
+      color: "text-blue-600", 
+      bg: "bg-gradient-to-br from-blue-50 to-blue-100",
+      description: "Efficient learning",
+      icon: TimerIcon
+    },
+    { 
+      number: "94%", 
+      label: "Achieve Target Grade", 
+      color: "text-purple-600", 
+      bg: "bg-gradient-to-br from-purple-50 to-purple-100",
+      description: "Student success rate",
+      icon: Target
+    },
+    { 
+      number: "£2,847", 
+      label: "Tuition Savings", 
+      color: "text-orange-600", 
+      bg: "bg-gradient-to-br from-orange-50 to-orange-100",
+      description: "vs private tutoring",
+      icon: Trophy
+    }
+  ];
+
+  const impactStats = [
+    { 
+      number: "£2,847", 
+      label: "Tuition Savings", 
+      color: "text-emerald-600", 
+      bg: "bg-gradient-to-br from-emerald-100 to-emerald-200",
+      description: "vs private tutoring",
+      icon: Trophy
+    },
+    { 
+      number: "89%", 
+      label: "Faster Learning", 
+      color: "text-blue-600", 
+      bg: "bg-gradient-to-br from-blue-100 to-blue-200",
+      description: "Compared to textbooks",
+      icon: Brain
+    },
+    { 
+      number: "Grade 9", 
+      label: "Typical Result", 
+      color: "text-purple-600", 
+      bg: "bg-gradient-to-br from-purple-100 to-purple-200",
+      description: "After 8 weeks",
+      icon: GraduationCap
+    },
+    { 
+      number: "24/7", 
+      label: "Support Availability", 
+      color: "text-orange-600", 
+      bg: "bg-gradient-to-br from-orange-100 to-orange-200",
+      description: "Never wait for help",
+      icon: Clock
+    }
+  ];
+
+  const premiumFeatures = [
+    {
+      icon: Target,
+      title: "What Should I Study?",
+      description: "Personalized study recommendations that tell you exactly what to focus on next",
+      badge: "Smart-Powered",
+      color: "from-violet-600 to-purple-600",
+      bgColor: "from-violet-50 to-purple-50",
+      premium: true
+    },
+    {
+      icon: BookOpen,
+      title: "Smart Revision Notebook",
+      description: "Automatically generated notes tailored to your learning style and exam board requirements",
+      badge: "Personalized",
+      color: "from-emerald-600 to-teal-600",
+      bgColor: "from-emerald-50 to-teal-50",
+      premium: true
+    },
+    {
+      icon: Calendar,
+      title: "Predicted Exams",
+      description: "Access weekly refreshed predicted exam papers built from our advanced analysis of past papers",
+      badge: "Updated Weekly",
+      color: "from-blue-600 to-cyan-600",
+      bgColor: "from-blue-50 to-cyan-50",
+      premium: true
+    },
+    {
+      icon: Clock,
+      title: "Study Time Optimizer",
+      description: "Scheduling that maximizes your learning efficiency by analyzing your peak performance hours",
+      badge: "Smart Planning",
+      color: "from-amber-600 to-orange-600",
+      bgColor: "from-amber-50 to-orange-50",
+      premium: true
     }
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-6 py-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <div className="container mx-auto px-6 lg:px-8 py-6">
         {/* Header */}
         <motion.header 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex justify-between items-center mb-20"
+          className="flex flex-col sm:flex-row justify-between items-center mb-20 lg:mb-24"
         >
-          <div className="flex items-center space-x-4">
-            <div className="w-10 h-10 flex items-center justify-center">
-              <img 
+          <motion.div 
+            className="flex items-center space-x-4"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className="w-12 h-12 flex items-center justify-center">
+              <motion.img 
                 src="/lovable-uploads/b9fc36e7-121c-4ea0-8b31-fa15ba6d226c.png" 
                 alt="Mentiora Logo" 
-                className="w-8 h-8 object-contain"
+                className="w-10 h-10 object-contain"
+                whileHover={{ rotate: 12 }}
+                transition={{ duration: 0.3 }}
               />
             </div>
-            <h1 className="text-2xl font-bold text-foreground">Mentiora</h1>
-          </div>
-          
-          <div className="flex gap-3">
+            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Mentiora</h1>
+          </motion.div>
+          <div className="flex gap-3 mt-6 sm:mt-0">
             {user ? (
-              <Button 
-                onClick={() => navigate('/dashboard')} 
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground"
-              >
-                Dashboard
-              </Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button 
+                  onClick={() => navigate('/dashboard')} 
+                  size="lg"
+                  className="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-8 py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  Dashboard
+                </Button>
+              </motion.div>
             ) : (
               <>
-                <Button 
-                  variant="ghost" 
-                  size="lg"
-                  onClick={() => navigate('/login')} 
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  Sign In
-                </Button>
-                <Button 
-                  size="lg"
-                  onClick={() => navigate('/register')} 
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                >
-                  Start Free
-                </Button>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button 
+                    variant="ghost" 
+                    size="lg"
+                    onClick={() => navigate('/login')} 
+                    className="text-gray-600 hover:text-gray-900 hover:bg-gray-50 font-semibold px-8 py-3 rounded-2xl transition-all duration-300"
+                  >
+                    Sign In
+                  </Button>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button 
+                    size="lg"
+                    onClick={() => navigate('/register')} 
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-8 py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    Start Free
+                  </Button>
+                </motion.div>
               </>
             )}
           </div>
@@ -108,83 +297,116 @@ const Index = () => {
         {/* Hero Section */}
         <motion.div 
           ref={heroRef}
-          className="text-center mb-32 max-w-4xl mx-auto"
+          className="text-center mb-32 max-w-5xl mx-auto"
         >
+          
           <motion.h2 
-            initial={{ opacity: 0, y: 30 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-            className="text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight text-foreground"
+            initial={{ opacity: 0, y: 40 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-6xl lg:text-7xl font-bold mb-8 leading-tight tracking-tight"
           >
-            GCSE Revision, Simplified
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              GCSE Grades That Open Doors
+            </span>
           </motion.h2>
           
           <motion.p 
             initial={{ opacity: 0, y: 30 }}
             animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto"
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-xl text-gray-600 mb-16 max-w-3xl mx-auto leading-relaxed"
           >
-            Personalized practice that adapts to your learning style
+            Every <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent font-bold">question</span> powers a <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent font-bold">personalised plan</span> for <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent font-bold">top grades</span>.
           </motion.p>
           
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             <Button 
               onClick={() => navigate('/register')} 
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold rounded-xl"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 rounded-2xl group"
             >
-              Start Free Trial
-              <ArrowRight className="ml-2 h-5 w-5" />
+              Get Started Free
+              <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
             </Button>
           </motion.div>
-
-          {/* Simple Stats */}
+          
+          {/* Dynamic Testimonials */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="mt-16"
+          >
+            <DynamicTestimonials />
+          </motion.div>
+          
+          {/* Trust Stats Strip */}
           <motion.div 
             ref={statsRef}
-            initial={{ opacity: 0, y: 30 }}
-            animate={statsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-20 pt-8 border-t border-border"
+            initial={{ opacity: 0, y: 40 }}
+            animate={statsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="mt-16 pt-8 border-t border-gray-100"
           >
-            <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-foreground mb-1">2.3</div>
-                <div className="text-sm text-muted-foreground">Grades Higher</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-foreground mb-1">67%</div>
-                <div className="text-sm text-muted-foreground">Time Saved</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-foreground mb-1">94%</div>
-                <div className="text-sm text-muted-foreground">Success Rate</div>
-              </div>
+            <p className="text-sm text-gray-500 font-medium mb-8 text-center">Proven Results From Real Students</p>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+              {trustStats.map((stat, index) => (
+                <motion.div 
+                  key={index} 
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={statsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ duration: 0.6, delay: 0.9 + index * 0.1 }}
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  className="text-center group cursor-pointer"
+                >
+                  <div className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-r ${stat.bg} rounded-2xl flex items-center justify-center group-hover:shadow-lg transition-all duration-300`}>
+                    <stat.icon className={`h-8 w-8 ${stat.color}`} />
+                  </div>
+                  <div className={`text-3xl lg:text-4xl font-bold ${stat.color} mb-2 tracking-tight`}>
+                    {stat.number}
+                  </div>
+                  <div className="text-gray-900 font-semibold text-sm mb-1">
+                    {stat.label}
+                  </div>
+                  <div className="text-gray-500 text-xs">
+                    {stat.description}
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </motion.div>
 
         {/* Demo Video Section */}
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={statsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mb-32 max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 40 }}
+          animate={statsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="mb-32 max-w-5xl mx-auto"
         >
-          <div className="text-center mb-8">
-            <h3 className="text-3xl font-bold text-foreground mb-4">
-              See How It Works
-            </h3>
-            <p className="text-lg text-muted-foreground">
-              Watch how Mentiora transforms GCSE revision
+          <div className="text-center mb-12">
+            <motion.h3 
+              className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 tracking-tight"
+              whileHover={{ scale: 1.02 }}
+            >
+              See How It <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Works</span>
+            </motion.h3>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Watch how our platform transforms GCSE revision with personalized feedback and smart analytics
             </p>
           </div>
           
-          <div className="relative rounded-2xl overflow-hidden shadow-xl">
+          <motion.div 
+            className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.3 }}
+          >
             <video 
               controls
               className="w-full h-auto"
@@ -192,10 +414,9 @@ const Index = () => {
               <source src="/demo-video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-          </div>
+          </motion.div>
         </motion.div>
 
-        {/* Features Section */}
         <motion.div 
           ref={featuresRef}
           className="mb-32"
@@ -203,41 +424,58 @@ const Index = () => {
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={featuresInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            transition={{ duration: 0.8 }}
+            className="text-center mb-20"
           >
-            <h3 className="text-4xl font-bold text-foreground mb-4">
-              How It Works
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-violet-100 to-purple-100 border border-violet-200 rounded-full text-violet-700 text-sm font-bold mb-8"
+            >
+              <Crown className="h-5 w-5 mr-2 text-violet-600 animate-pulse" />
+              Premium Smart Features
+            </motion.div>
+            <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
+              Everything You Need to <span className="bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">Ace Your GCSEs</span>
             </h3>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Simple steps to better grades
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Advanced technology that adapts to your learning style and accelerates your progress.
             </p>
           </motion.div>
-
-          <div className="grid lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            {features.map((feature, index) => (
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {premiumFeatures.map((feature, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={featuresInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 50 }}
+                animate={featuresInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ y: -10, scale: 1.02 }}
+                className="group"
               >
-                <Card className="p-8 h-full text-center border-0 bg-card hover:shadow-lg transition-all duration-300 rounded-xl">
-                  <CardContent className="p-0 space-y-4">
-                    <h4 className="text-xl font-bold text-foreground">
-                      {feature.title}
-                    </h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {feature.description}
-                    </p>
-                    <Button 
-                      variant="outline"
-                      size="sm"
-                      onClick={() => navigate('/register')}
-                      className="mt-4"
+                <Card className="relative overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-700 bg-white rounded-3xl p-0 h-full">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-5 group-hover:opacity-15 transition-opacity duration-700`} />
+                  <div className="absolute top-4 right-4">
+                    <motion.span 
+                      className={`px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r ${feature.color} text-white shadow-lg`}
+                      whileHover={{ scale: 1.1 }}
                     >
-                      {feature.cta}
-                    </Button>
+                      {feature.badge}
+                    </motion.span>
+                  </div>
+                  <CardContent className="p-8 relative z-10">
+                    <div className="flex items-start space-x-6">
+                      <motion.div 
+                        className={`flex-shrink-0 w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center shadow-lg`}
+                        whileHover={{ scale: 1.1, rotate: 6 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
+                        <feature.icon className="h-8 w-8 text-white" />
+                      </motion.div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-700 transition-colors duration-300">{feature.title}</h3>
+                        <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -245,28 +483,105 @@ const Index = () => {
           </div>
         </motion.div>
 
-        {/* CTA Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
-          <div className="max-w-2xl mx-auto space-y-8">
-            <h3 className="text-4xl font-bold text-foreground">
-              Ready to improve your grades?
+
+        {/* How It Works - Simplified */}
+        <div className="mb-32">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-20"
+          >
+            <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
+              Simple. <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Effective.</span> Proven.
             </h3>
-            <p className="text-lg text-muted-foreground">
-              Join thousands of students already using Mentiora
-            </p>
-            <Button 
-              onClick={() => navigate('/register')} 
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold rounded-xl"
+            <p className="text-xl text-gray-600">Get started in 3 simple steps</p>
+          </motion.div>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              {howItWorks.map((step, index) => (
+                <motion.div 
+                  key={index} 
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -10 }}
+                  className="text-center group"
+                >
+                  <motion.div 
+                    className={`w-24 h-24 bg-gradient-to-r ${step.color} rounded-full flex items-center justify-center shadow-2xl mb-8 mx-auto`}
+                    whileHover={{ scale: 1.1, rotate: 12 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <step.icon className="h-12 w-12 text-white" />
+                  </motion.div>
+                  <div className={`text-sm font-bold ${step.accent} mb-4 tracking-wider uppercase`}>
+                    Step {step.step}
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-purple-700 transition-colors duration-300">{step.title}</h3>
+                  <p className="text-gray-600 leading-relaxed text-lg">{step.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+
+        {/* Final CTA */}
+        <motion.div 
+          ref={ctaRef}
+          initial={{ opacity: 0, y: 50 }}
+          animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8 }}
+          whileHover={{ scale: 1.02 }}
+          className="bg-gradient-to-r from-blue-600 via-purple-600 to-violet-600 rounded-3xl p-16 text-center text-white max-w-5xl mx-auto shadow-2xl relative overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 rounded-3xl" />
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-3xl"
+            animate={{ 
+              background: [
+                "linear-gradient(to right, rgba(37, 99, 235, 0.2), rgba(147, 51, 234, 0.2))",
+                "linear-gradient(to right, rgba(147, 51, 234, 0.2), rgba(37, 99, 235, 0.2))",
+                "linear-gradient(to right, rgba(37, 99, 235, 0.2), rgba(147, 51, 234, 0.2))"
+              ]
+            }}
+            transition={{ duration: 3, repeat: Infinity }}
+          />
+          <div className="relative z-10">
+            <motion.h3 
+              initial={{ opacity: 0, y: 30 }}
+              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-4xl lg:text-5xl font-bold mb-8 tracking-tight"
             >
-              Start Your Free Trial
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
+              Ready to Unlock Your Potential?
+            </motion.h3>
+            <motion.p 
+              initial={{ opacity: 0, y: 30 }}
+              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed"
+            >
+              Join thousands of students who've improved their grades by an average of <span className="font-bold text-white">two full grade boundaries</span> with our smart platform.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button 
+                onClick={() => navigate('/register')} 
+                className="bg-white text-gray-900 hover:bg-gray-100 px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-white/25 transition-all duration-300 rounded-2xl group"
+              >
+                Start Free Today
+                <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </motion.div>
           </div>
         </motion.div>
       </div>

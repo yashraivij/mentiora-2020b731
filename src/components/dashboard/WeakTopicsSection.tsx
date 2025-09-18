@@ -62,13 +62,15 @@ export const WeakTopicsSection = ({ weakTopics, userProgress, onPractice }: Weak
   }
 
   return (
-    <Card className="p-6 bg-card border-0 rounded-xl">
-      <div className="space-y-6">
-        <div>
-          <h3 className="text-lg font-semibold text-foreground">Focus Areas</h3>
-          <p className="text-sm text-muted-foreground">Topics that need attention</p>
-        </div>
-        
+    <Card className="border-0 bg-card/80 backdrop-blur-sm">
+      <CardHeader>
+        <CardTitle className="flex items-center text-destructive">
+          <AlertTriangle className="h-5 w-5 mr-2" />
+          Priority Focus Areas
+        </CardTitle>
+        <p className="text-sm text-muted-foreground">Topics scoring below 70% - focus here for maximum improvement</p>
+      </CardHeader>
+      <CardContent>
         <div className="space-y-3">
           {weakTopics.slice(0, 5).map((topicId) => {
             const info = getTopicInfo(topicId);
@@ -77,22 +79,34 @@ export const WeakTopicsSection = ({ weakTopics, userProgress, onPractice }: Weak
             if (!info) return null;
             
             return (
-              <div key={topicId} className="flex items-center justify-between p-4 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
-                <div className="flex-1">
-                  <h4 className="font-medium text-foreground">{info.topic.name}</h4>
-                  <p className="text-sm text-muted-foreground">{info.subject.name}</p>
+              <div key={topicId} className="group p-4 rounded-lg border border-destructive/20 bg-gradient-to-r from-destructive/5 to-destructive/10 hover:shadow-md transition-all duration-200">
+                <div className="flex items-center justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-center space-x-2 mb-1">
+                      <div className={`w-2 h-2 rounded-full ${getSubjectColor(info.subject.id)}`}></div>
+                      <h4 className="font-medium text-foreground">{info.topic.name}</h4>
+                      <Badge variant="outline" className="text-xs">{info.subject.name}</Badge>
+                    </div>
+                    {progress && (
+                      <p className="text-xs text-muted-foreground">
+                        {progress.attempts} attempts • {progress.averageScore}% average
+                      </p>
+                    )}
+                  </div>
+                  <Button 
+                    size="sm" 
+                    onClick={() => onPractice(info.subject.id, topicId)}
+                    variant="destructive"
+                  >
+                    Practice
+                    <ArrowRight className="h-3 w-3 ml-1" />
+                  </Button>
                 </div>
-                <Button 
-                  size="sm" 
-                  onClick={() => onPractice(info.subject.id, topicId)}
-                >
-                  Practice
-                </Button>
               </div>
             );
           })}
         </div>
-      </div>
+      </CardContent>
     </Card>
   );
 };
