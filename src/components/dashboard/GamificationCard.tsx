@@ -875,10 +875,11 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
   };
 
   return (
-    <div className="mb-6">
+    <>
       {showConfetti && <Confetti recycle={false} numberOfPieces={200} />}
       <RedeemConfirmationModal />
       <SuccessModal />
+      <div className="mb-6">
       
       <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white via-purple-50/60 to-blue-50/60 dark:from-slate-900 dark:via-purple-950/30 dark:to-blue-950/30 shadow-xl hover:shadow-2xl transition-all duration-500 group transform hover:scale-[1.02]">
         {/* Enhanced glow effects */}
@@ -1115,6 +1116,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
           </div>
         </CardContent>
       </Card>
-    </div>
+      </div>
+    </>
   );
 }
