@@ -468,19 +468,22 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                         }} />
                       </motion.div>
                       <div>
-                        <motion.span 
-                          className="text-sm font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 dark:from-purple-400 dark:via-pink-400 dark:to-indigo-400 bg-clip-text text-transparent"
-                          animate={{ 
-                            textShadow: [
-                              "0 0 0px rgba(168, 85, 247, 0)",
-                              "0 0 10px rgba(168, 85, 247, 0.3)",
-                              "0 0 0px rgba(168, 85, 247, 0)"
-                            ]
-                          }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                        >
-                          <span className="mr-2">🎯</span>Predicted 2026 Exam
-                        </motion.span>
+                        <div className="flex items-center space-x-2">
+                          <span>🎯</span>
+                          <motion.span 
+                            className="text-sm font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 dark:from-purple-400 dark:via-pink-400 dark:to-indigo-400 bg-clip-text text-transparent"
+                            animate={{ 
+                              textShadow: [
+                                "0 0 0px rgba(168, 85, 247, 0)",
+                                "0 0 10px rgba(168, 85, 247, 0.3)",
+                                "0 0 0px rgba(168, 85, 247, 0)"
+                              ]
+                            }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                          >
+                            Predicted 2026 Exam
+                          </motion.span>
+                        </div>
                         <p className="text-xs bg-gradient-to-r from-purple-500 to-pink-500 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent font-medium">
                           ✨ One-time mega milestone ✨
                         </p>
