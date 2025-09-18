@@ -28,6 +28,13 @@ interface LeaderboardEntry {
   points: number;
 }
 
+interface RewardTier {
+  points: number;
+  title: string;
+  description: string;
+  icon: any;
+}
+
 const REWARDS = [
   { points: 100, title: "Theme/Badge", description: "Custom themes & badges", icon: Sparkles },
   { points: 200, title: "VIP Discord Role", description: "Exclusive Discord access", icon: Crown },
@@ -47,8 +54,55 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
   });
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
   
-  const level = Math.floor(userPoints.total_points / 100) + 1;
-  const progressToNext = userPoints.total_points % 100;
+  // Calculate next reward progress
+  const getNextRewardProgress = () => {
+    const currentPoints = userPoints.total_points;
+    const nextReward = REWARDS.find(reward => reward.points > currentPoints);
+    
+    if (!nextReward) {
+      // Already at max reward
+      return {
+        current: currentPoints,
+        target: 5000,
+        progress: 100,
+        nextReward: REWARDS[REWARDS.length - 1]
+      };
+    }
+    
+    const previousReward = REWARDS.filter(r => r.points <= currentPoints).pop();
+    const basePoints = previousReward?.points || 0;
+    const progressPoints = currentPoints - basePoints;
+    const totalNeeded = nextReward.points - basePoints;
+    const progressPercent = (progressPoints / totalNeeded) * 100;
+    
+    return {
+      current: progressPoints,
+      target: totalNeeded,
+      progress: progressPercent,
+      nextReward
+    };
+  };
+
+  const rewardProgress = getNextRewardProgress();
+
+  // Play progress sound
+  const playProgressSound = () => {
+    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.1);
+    
+    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.1);
+  };
 
   useEffect(() => {
     if (user) {
@@ -56,6 +110,17 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
       loadLeaderboard();
     }
   }, [user]);
+
+  // Play sound when points increase
+  useEffect(() => {
+    if (userPoints.total_points > 0) {
+      try {
+        playProgressSound();
+      } catch (error) {
+        console.log('Audio not supported');
+      }
+    }
+  }, [userPoints.total_points]);
 
   const loadUserProgress = async () => {
     if (!user) return;
@@ -252,7 +317,7 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                     <Trophy className="h-7 w-7 text-white relative z-10 drop-shadow-lg" />
                   </div>
                   <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full flex items-center justify-center shadow-md">
-                    <span className="text-xs font-bold text-white">{level}</span>
+                    <Gift className="h-3 w-3 text-white" />
                   </div>
                 </div>
                 
@@ -267,9 +332,19 @@ export function GamificationCard({ isPremium, onUpgrade, currentStreak }: Gamifi
                     {userPoints.total_points} MP
                   </h3>
                   <p className="text-sm font-medium text-muted-foreground">
-                    Level {level} • {progressToNext}/100 to next level
+                    Next: {rewardProgress.nextReward.title} • {rewardProgress.current}/{rewardProgress.target} MP
                   </p>
-                  <Progress value={progressToNext} className="w-full h-2" />
+                  <div className="relative">
+                    <Progress 
+                      value={rewardProgress.progress} 
+                      className="w-full h-3"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-xs font-semibold text-white drop-shadow-lg">
+                        {Math.round(rewardProgress.progress)}%
+                      </span>
+                    </div>
+                  </div>
                 </motion.div>
               </div>
 
