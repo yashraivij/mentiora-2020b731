@@ -4,14 +4,12 @@ import { BookOpen, CheckCircle, BarChart3, Users, ArrowRight, Star, Sparkles, Qu
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { motion, useInView } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { DynamicTestimonials } from "@/components/ui/dynamic-testimonials";
-import { OnboardingPopup } from "@/components/ui/onboarding-popup";
 
 const Index = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const [showOnboarding, setShowOnboarding] = useState(true);
   
   // Check for password reset tokens in URL hash and redirect
   useEffect(() => {
@@ -234,7 +232,6 @@ const Index = () => {
   ];
 
   return (
-    <>
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       <div className="container mx-auto px-6 lg:px-8 py-6">
         {/* Header */}
@@ -589,13 +586,6 @@ const Index = () => {
         </motion.div>
       </div>
     </div>
-    
-    <OnboardingPopup
-      isOpen={showOnboarding}
-      onClose={() => setShowOnboarding(false)}
-      onSubjectsAdded={() => setShowOnboarding(false)}
-    />
-    </>
   );
 };
 
