@@ -1004,16 +1004,51 @@ const Dashboard = () => {
 
                   {/* Leaderboard Entries */}
                   <div className="space-y-2">
-                    {[
-                      { rank: 1, name: "Alex Chen", xp: 1847, topics: 42, grade: 8.6, streak: 14, isCurrentUser: false },
-                      { rank: 2, name: "Emma Wilson", xp: 1653, topics: 38, grade: 8.2, streak: 12, isCurrentUser: false },
-                      { rank: 3, name: "Liam Parker", xp: 1512, topics: 35, grade: 7.9, streak: 9, isCurrentUser: false },
-                      { rank: 4, name: "Sophia Lee", xp: 1344, topics: 31, grade: 7.5, streak: 8, isCurrentUser: false },
-                      { rank: 5, name: "You", xp: userGems, topics: 24, grade: 7.2, streak: currentStreak, isCurrentUser: true },
-                      { rank: 6, name: "James Smith", xp: 1098, topics: 22, grade: 6.8, streak: 5, isCurrentUser: false },
-                      { rank: 7, name: "Maya Patel", xp: 987, topics: 19, grade: 6.5, streak: 4, isCurrentUser: false },
-                      { rank: 8, name: "Oliver Brown", xp: 876, topics: 17, grade: 6.2, streak: 3, isCurrentUser: false },
-                    ].map((player, index) => {
+                    {(() => {
+                      // Define players with raw stats
+                      const players = [
+                        { name: "Alex Chen", xp: 1847, topics: 42, grade: 8.6, streak: 14, isCurrentUser: false },
+                        { name: "Emma Wilson", xp: 1653, topics: 38, grade: 8.2, streak: 12, isCurrentUser: false },
+                        { name: "Liam Parker", xp: 1512, topics: 35, grade: 7.9, streak: 9, isCurrentUser: false },
+                        { name: "Sophia Lee", xp: 1344, topics: 31, grade: 7.5, streak: 8, isCurrentUser: false },
+                        { name: "You", xp: userXP, topics: 28, grade: 8.0, streak: currentStreak, isCurrentUser: true },
+                        { name: "James Smith", xp: 1098, topics: 22, grade: 6.8, streak: 5, isCurrentUser: false },
+                        { name: "Maya Patel", xp: 987, topics: 19, grade: 6.5, streak: 4, isCurrentUser: false },
+                        { name: "Oliver Brown", xp: 876, topics: 17, grade: 6.2, streak: 3, isCurrentUser: false },
+                      ];
+
+                      // Calculate composite scores and rank players
+                      const maxXP = Math.max(...players.map(p => p.xp));
+                      const maxTopics = Math.max(...players.map(p => p.topics));
+                      const maxGrade = 9.0; // A* grade
+                      const maxStreak = Math.max(...players.map(p => p.streak));
+
+                      const playersWithScores = players.map(player => {
+                        // Normalize each stat to 0-1 scale
+                        const normalizedXP = player.xp / maxXP;
+                        const normalizedTopics = player.topics / maxTopics;
+                        const normalizedGrade = player.grade / maxGrade;
+                        const normalizedStreak = player.streak / maxStreak;
+
+                        // Calculate composite score (average of all normalized stats)
+                        const compositeScore = (normalizedXP + normalizedTopics + normalizedGrade + normalizedStreak) / 4;
+                        
+                        return {
+                          ...player,
+                          compositeScore
+                        };
+                      });
+
+                      // Sort by composite score and assign ranks
+                      const rankedPlayers = playersWithScores
+                        .sort((a, b) => b.compositeScore - a.compositeScore)
+                        .map((player, index) => ({
+                          ...player,
+                          rank: index + 1
+                        }));
+
+                      return rankedPlayers;
+                    })().map((player, index) => {
                       const getRankIcon = (rank: number) => {
                         if (rank === 1) return "🥇";
                         if (rank === 2) return "🥈";
