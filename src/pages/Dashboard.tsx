@@ -314,13 +314,7 @@ const Dashboard = () => {
               return (
                 <motion.button
                   key={item.id}
-                  onClick={() => {
-                    if (item.id === 'notes') {
-                      navigate('/notebook');
-                    } else {
-                      setActiveTab(item.id);
-                    }
-                  }}
+                  onClick={() => setActiveTab(item.id)}
                   whileHover={{ scale: 1.02 }}
                   className={`w-full flex items-center space-x-4 px-4 py-4 rounded-2xl text-left transition-all duration-200 ${
                     isActive 
@@ -485,8 +479,39 @@ const Dashboard = () => {
             </div>
           )}
 
-          {/* Other tabs - placeholder content */}
-          {activeTab !== "learn" && (
+          {/* Other tabs */}
+          {activeTab === "notes" && (
+            <div>
+              <div className="text-center mb-8">
+                <h2 className="text-4xl font-bold bg-gradient-to-r from-slate-800 via-purple-700 to-blue-700 dark:from-slate-200 dark:via-purple-300 dark:to-blue-300 bg-clip-text text-transparent mb-4">
+                  Smart Revision Notebook
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                  Ultra-clear, Grade 9-level notes for every mark you've lost, powered by advanced Smart analysis
+                </p>
+              </div>
+              
+              <Card className="text-center py-16 bg-gradient-to-br from-white/80 to-slate-50/80 backdrop-blur-xl border border-slate-200/50 shadow-2xl">
+                <CardContent>
+                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-slate-200 to-slate-300 rounded-3xl flex items-center justify-center">
+                    <NotebookPen className="h-10 w-10 text-slate-500" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-foreground mb-3">No Revision Notes Yet</h3>
+                  <p className="text-muted-foreground mb-8 max-w-md mx-auto text-lg">
+                    Start practicing questions to generate your personalized Smart revision notes!
+                  </p>
+                  <Button 
+                    onClick={() => setActiveTab("learn")} 
+                    className="bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+                  >
+                    Start Practicing
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {activeTab !== "learn" && activeTab !== "notes" && (
             <div className="text-center py-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-6 capitalize">
                 {activeTab}
