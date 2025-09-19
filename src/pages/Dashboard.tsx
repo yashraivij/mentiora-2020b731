@@ -712,7 +712,7 @@ const Dashboard = () => {
                                 <div className="flex-1">
                                   <div className="flex items-center space-x-2 mb-3">
                                     <span className={`text-xs font-bold ${colors.text} bg-gray-100 px-3 py-1 rounded-full`}>
-                                      GCSE • {progress.completed} OF {progress.total} UNITS
+                                      {progress.completed} OF {progress.total} UNITS
                                     </span>
                                   </div>
                                   
