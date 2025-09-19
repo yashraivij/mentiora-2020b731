@@ -90,8 +90,8 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState<string>("learn");
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
-  const [currentStreak, setCurrentStreak] = useState(7);
-  const [userXP, setUserXP] = useState(1122);
+  const [currentStreak, setCurrentStreak] = useState(0);
+  const [userXP, setUserXP] = useState(0);
   const [userHearts, setUserHearts] = useState(5);
   const [userGems, setUserGems] = useState(0);
   const [userSubjectsWithGrades, setUserSubjectsWithGrades] = useState<any[]>([]);
@@ -344,13 +344,40 @@ const Dashboard = () => {
     return { completed: completedTopics, total: subject.topics.length };
   };
 
+  const loadUserStats = async () => {
+    if (!user?.id) return;
+    
+    try {
+      const { MPPointsSystem } = await import('@/lib/mpPointsSystem');
+      const stats = await MPPointsSystem.getUserStats(user.id);
+      setUserStats(stats);
+      setUserGems(stats.totalPoints);
+      setCurrentStreak(stats.currentStreak);
+    } catch (error) {
+      console.error('Error loading user stats:', error);
+    }
+  };
+
   useEffect(() => {
-    loadUserSubjects();
-    loadUserProgress();
-    if (activeTab === "notes") {
-      loadNotebookEntries();
+    if (user?.id) {
+      loadUserStats();
+      loadUserSubjects();
+      loadUserProgress();
+      if (activeTab === "notes") {
+        loadNotebookEntries();
+      }
     }
   }, [user?.id, activeTab]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (user?.id) {
+        loadUserStats(); // Refresh stats every 30 seconds
+      }
+    }, 30000);
+    
+    return () => clearInterval(interval);
+  }, [user?.id]);
 
   const handleLogout = () => {
     logout();
