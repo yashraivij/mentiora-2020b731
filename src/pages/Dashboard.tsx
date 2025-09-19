@@ -1123,14 +1123,14 @@ useEffect(() => {
                 onClick={() =>
                   window.open("https://discord.gg/Jq2YTZ3aMa", "_blank")
                 }
-                className="text-foreground hover:text-primary cursor-pointer transition-colors text-sm"
+                className="text-foreground hover:text-primary hover:bg-accent/50 cursor-pointer transition-all duration-200 text-sm px-3 py-2 rounded-md"
               >
                 Join Community
               </span>
               {isPremium && (
                 <span
                   onClick={openManageBilling}
-                  className="text-foreground hover:text-primary cursor-pointer transition-colors text-sm"
+                  className="text-foreground hover:text-primary hover:bg-accent/50 cursor-pointer transition-all duration-200 text-sm px-3 py-2 rounded-md ml-4"
                 >
                   Manage Billing
                 </span>
