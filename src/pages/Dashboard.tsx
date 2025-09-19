@@ -46,14 +46,46 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState<string>("learn");
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
 
-  // Sidebar navigation items
+  // Sidebar navigation items with colors
   const sidebarItems = [
-    { id: "learn", label: "Learn", icon: Home },
-    { id: "progress", label: "Progress", icon: BarChart3 },
-    { id: "2026-exams", label: "2026 Exams", icon: Target },
-    { id: "leaderboard", label: "Leaderboard", icon: Trophy },
-    { id: "profile", label: "Profile", icon: User },
+    { id: "learn", label: "Learn", icon: Home, color: "blue" },
+    { id: "progress", label: "Progress", icon: BarChart3, color: "green" },
+    { id: "2026-exams", label: "2026 Exams", icon: Target, color: "orange" },
+    { id: "leaderboard", label: "Leaderboard", icon: Trophy, color: "yellow" },
+    { id: "profile", label: "Profile", icon: User, color: "purple" },
   ];
+
+  // Color mappings for nav items
+  const getNavItemColors = (color: string, isActive: boolean) => {
+    const colorMap = {
+      blue: {
+        bg: isActive ? "bg-blue-500" : "bg-blue-100 hover:bg-blue-200",
+        text: isActive ? "text-white" : "text-blue-700 hover:text-blue-800",
+        icon: isActive ? "text-white" : "text-blue-600"
+      },
+      green: {
+        bg: isActive ? "bg-green-500" : "bg-green-100 hover:bg-green-200", 
+        text: isActive ? "text-white" : "text-green-700 hover:text-green-800",
+        icon: isActive ? "text-white" : "text-green-600"
+      },
+      orange: {
+        bg: isActive ? "bg-orange-500" : "bg-orange-100 hover:bg-orange-200",
+        text: isActive ? "text-white" : "text-orange-700 hover:text-orange-800", 
+        icon: isActive ? "text-white" : "text-orange-600"
+      },
+      yellow: {
+        bg: isActive ? "bg-yellow-500" : "bg-yellow-100 hover:bg-yellow-200",
+        text: isActive ? "text-white" : "text-yellow-700 hover:text-yellow-800",
+        icon: isActive ? "text-white" : "text-yellow-600"
+      },
+      purple: {
+        bg: isActive ? "bg-violet-500" : "bg-violet-100 hover:bg-violet-200",
+        text: isActive ? "text-white" : "text-violet-700 hover:text-violet-800", 
+        icon: isActive ? "text-white" : "text-violet-600"
+      }
+    };
+    return colorMap[color] || colorMap.blue;
+  };
 
   // Subject icon mapping
   const getSubjectIcon = (subjectId: string) => {
@@ -186,23 +218,24 @@ const Dashboard = () => {
 
         {/* Navigation */}
         <nav className="flex-1 p-4">
-          <div className="space-y-2">
+          <div className="space-y-3">
             {sidebarItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
+              const colors = getNavItemColors(item.color, isActive);
               return (
-                <button
+                <motion.button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left transition-colors ${
-                    isActive
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                  }`}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`w-full flex items-center space-x-3 px-4 py-4 rounded-2xl text-left transition-all duration-200 ${colors.bg} shadow-sm`}
                 >
-                  <Icon className="h-5 w-5" />
-                  <span className="font-medium">{item.label}</span>
-                </button>
+                  <div className={`p-2 rounded-xl ${isActive ? 'bg-white/20' : 'bg-white/50'}`}>
+                    <Icon className={`h-5 w-5 ${colors.icon}`} />
+                  </div>
+                  <span className={`font-semibold ${colors.text}`}>{item.label}</span>
+                </motion.button>
               );
             })}
           </div>
@@ -269,30 +302,39 @@ const Dashboard = () => {
                         whileTap={{ scale: 0.98 }}
                       >
                         <Card 
-                          className="cursor-pointer hover:shadow-lg transition-all duration-200 border-border bg-card"
+                          className="cursor-pointer hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-gray-50/50 dark:from-gray-900 dark:to-gray-800/50 group hover:scale-105"
                           onClick={() => handlePractice(subject.id)}
                         >
                           <CardHeader className="pb-4">
-                            <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-2xl">
-                              <Icon className="h-8 w-8 text-primary" />
+                            <div className="flex items-center justify-center w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-400 to-blue-600 rounded-3xl shadow-lg group-hover:shadow-xl group-hover:shadow-blue-500/25 transition-all duration-300">
+                              <Icon className="h-10 w-10 text-white" />
                             </div>
-                            <CardTitle className="text-center text-base font-semibold text-foreground">
+                            <CardTitle className="text-center text-lg font-bold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 transition-colors">
                               {subject.name}
                             </CardTitle>
                           </CardHeader>
                           <CardContent className="pt-0">
-                            <div className="space-y-3">
-                              <div className="w-full bg-secondary rounded-full h-2">
+                            <div className="space-y-4">
+                              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
                                 <div
-                                  className="bg-primary h-2 rounded-full transition-all duration-300"
+                                  className="bg-gradient-to-r from-green-400 to-green-600 h-3 rounded-full transition-all duration-500 shadow-sm"
                                   style={{ width: `${progress}%` }}
                                 />
                               </div>
                               <div className="text-center">
-                                <span className="text-sm font-medium text-muted-foreground">
+                                <span className="text-base font-bold text-gray-700 dark:text-gray-300">
                                   {progress}% Complete
                                 </span>
                               </div>
+                              {progress > 0 && (
+                                <div className="flex justify-center">
+                                  <div className="px-3 py-1 bg-green-100 dark:bg-green-900/30 rounded-full">
+                                    <span className="text-sm font-semibold text-green-700 dark:text-green-400">
+                                      Keep going! 🎯
+                                    </span>
+                                  </div>
+                                </div>
+                              )}
                             </div>
                           </CardContent>
                         </Card>
