@@ -99,6 +99,7 @@ const Dashboard = () => {
   const [userStats, setUserStats] = useState<any>(null);
   const [activeLeaderboardTab, setActiveLeaderboardTab] = useState<'weekly' | 'alltime'>('weekly');
   const [leaderboardData, setLeaderboardData] = useState<any[]>([]);
+  const [todayEarnedMP, setTodayEarnedMP] = useState(0);
 
   // Notebook state
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
@@ -352,8 +353,55 @@ const Dashboard = () => {
       setUserStats(stats);
       setUserGems(stats.totalPoints);
       setCurrentStreak(stats.currentStreak);
+      
+      // Calculate today's earned MP
+      await calculateTodayEarnedMP();
     } catch (error) {
       console.error('Error loading user stats:', error);
+    }
+  };
+
+  const calculateTodayEarnedMP = async () => {
+    if (!user?.id) return;
+    
+    try {
+      // Get UK timezone date boundaries for today
+      const ukDate = new Date().toLocaleString("en-US", { timeZone: "Europe/London" });
+      const today = new Date(ukDate);
+      today.setHours(0, 0, 0, 0);
+      const todayEnd = new Date(today);
+      todayEnd.setHours(23, 59, 59, 999);
+      
+      // Get today's activities
+      const { data: todayActivities } = await supabase
+        .from('user_activities')
+        .select('activity_type')
+        .eq('user_id', user.id)
+        .gte('created_at', today.toISOString())
+        .lte('created_at', todayEnd.toISOString());
+      
+      let earnedToday = 0;
+      
+      if (todayActivities) {
+        // Count different activity types and calculate MP
+        const loginCount = todayActivities.filter(a => a.activity_type === 'daily_login').length;
+        const practiceCount = todayActivities.filter(a => a.activity_type === 'practice_completed').length;
+        const weeklyTopicsAwards = todayActivities.filter(a => a.activity_type === 'weekly_3_topics_awarded').length;
+        const weeklyPracticeAwards = todayActivities.filter(a => a.activity_type === 'weekly_5_practice_awarded').length;
+        const streakAwards = todayActivities.filter(a => a.activity_type === 'streak_7_days_awarded').length;
+        
+        earnedToday = 
+          (loginCount * 10) + 
+          (practiceCount * 40) + 
+          (weeklyTopicsAwards * 100) + 
+          (weeklyPracticeAwards * 250) + 
+          (streakAwards * 500);
+      }
+      
+      setTodayEarnedMP(earnedToday);
+    } catch (error) {
+      console.error('Error calculating today\'s earned MP:', error);
+      setTodayEarnedMP(0);
     }
   };
 
@@ -474,6 +522,7 @@ const Dashboard = () => {
     const interval = setInterval(() => {
       if (user?.id) {
         loadUserStats(); // Refresh stats every 30 seconds
+        calculateTodayEarnedMP(); // Refresh today's earned MP
         loadLeaderboardData(); // Refresh leaderboard every 30 seconds for live updates
       }
     }, 30000);
@@ -1437,18 +1486,18 @@ const Dashboard = () => {
                     <div>
                       <h3 className="text-xl font-bold text-gray-800">Daily Goal</h3>
                       <p className="text-gray-600">
-                        50 MP goal — {Math.min(userGems || 0, 50)}/50 completed
+                        50 MP goal — {Math.min(todayEarnedMP, 50)}/50 completed
                       </p>
                     </div>
                   </div>
                   <div className="text-2xl font-bold text-blue-500">
-                    {Math.round(((userGems || 0) / 50) * 100)}%
+                    {Math.round((todayEarnedMP / 50) * 100)}%
                   </div>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-4">
                   <div 
                     className="bg-blue-400 h-4 rounded-full transition-all duration-500" 
-                    style={{width: `${Math.min(((userGems || 0) / 50) * 100, 100)}%`}}
+                    style={{width: `${Math.min((todayEarnedMP / 50) * 100, 100)}%`}}
                   ></div>
                 </div>
               </div>
