@@ -26,7 +26,11 @@ import {
   Shield,
   Heart,
   Globe,
-  X
+  X,
+  Flame,
+  Clock,
+  NotebookPen,
+  User
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { curriculum } from "@/data/curriculum";
@@ -186,7 +190,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             <div className="flex items-center gap-4">
               <div className="relative">
                 <div className="w-16 h-16 bg-gradient-to-r from-sky-400 to-purple-400 rounded-3xl flex items-center justify-center shadow-lg">
-                  <Sparkles className="h-8 w-8 text-white" />
+                  <BookOpen className="h-8 w-8 text-white" />
                 </div>
               </div>
               <div>
@@ -309,7 +313,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   >
                     {isLoading ? (
                       <>
-                        <Sparkles className="h-4 w-4 mr-2 animate-spin" />
+                        <Star className="h-4 w-4 mr-2 animate-spin" />
                         Adding subjects...
                       </>
                     ) : (
@@ -345,10 +349,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
                 <div className="grid grid-cols-2 gap-6">
                   {[
-                    { text: 'Staying motivated', icon: Heart, color: 'from-pink-400 to-rose-400', bg: 'from-pink-50 to-rose-50' },
-                    { text: 'Knowing what to revise', icon: Target, color: 'from-green-400 to-emerald-400', bg: 'from-green-50 to-emerald-50' },
-                    { text: 'Running out of time', icon: Timer, color: 'from-orange-400 to-red-400', bg: 'from-orange-50 to-red-50' },
-                    { text: 'Understanding content', icon: Brain, color: 'from-blue-400 to-indigo-400', bg: 'from-blue-50 to-indigo-50' }
+                    { text: 'Staying motivated', icon: Flame, color: 'from-pink-400 to-rose-400', bg: 'from-pink-50 to-rose-50' },
+                    { text: 'Knowing what to revise', icon: Brain, color: 'from-green-400 to-emerald-400', bg: 'from-green-50 to-emerald-50' },
+                    { text: 'Running out of time', icon: Clock, color: 'from-orange-400 to-red-400', bg: 'from-orange-50 to-red-50' },
+                    { text: 'Understanding content', icon: BookOpen, color: 'from-blue-400 to-indigo-400', bg: 'from-blue-50 to-indigo-50' }
                   ].map((struggle, index) => {
                     const StruggleIcon = struggle.icon;
                     return (
@@ -428,10 +432,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
                 <div className="grid grid-cols-2 gap-6">
                   {[
-                    { text: 'Flashcards', icon: Zap, color: 'from-yellow-400 to-orange-400', bg: 'from-yellow-50 to-orange-50' },
-                    { text: 'Practice questions', icon: Trophy, color: 'from-purple-400 to-pink-400', bg: 'from-purple-50 to-pink-50' },
+                    { text: 'Flashcards', icon: Star, color: 'from-yellow-400 to-orange-400', bg: 'from-yellow-50 to-orange-50' },
+                    { text: 'Practice questions', icon: NotebookPen, color: 'from-purple-400 to-pink-400', bg: 'from-purple-50 to-pink-50' },
                     { text: 'Reading notes', icon: BookOpen, color: 'from-green-400 to-teal-400', bg: 'from-green-50 to-teal-50' },
-                    { text: 'Watching videos', icon: Users, color: 'from-blue-400 to-cyan-400', bg: 'from-blue-50 to-cyan-50' }
+                    { text: 'Watching videos', icon: TrendingUp, color: 'from-blue-400 to-cyan-400', bg: 'from-blue-50 to-cyan-50' }
                   ].map((method, index) => {
                     const MethodIcon = method.icon;
                     return (
@@ -520,7 +524,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     <CardContent className="p-8 text-center">
                       <div className="flex items-center justify-center mb-4">
                         <div className="bg-gradient-to-r from-indigo-400 to-purple-400 p-4 rounded-3xl shadow-lg mr-4">
-                          <Users className="h-10 w-10 text-white" />
+                          <User className="h-10 w-10 text-white" />
                         </div>
                         <div className="text-left">
                           <h4 className="text-2xl font-bold text-gray-800">Share with Parent/Guardian</h4>
@@ -566,7 +570,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 {/* Premium Header */}
                 <div className="text-center space-y-6 mb-8">
                   <div className="w-24 h-24 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl flex items-center justify-center mx-auto shadow-2xl">
-                    <Crown className="h-12 w-12 text-white" />
+                    <Gem className="h-12 w-12 text-white" />
                   </div>
                   
                   <h3 className="text-4xl font-bold text-gray-800">
@@ -590,7 +594,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       <CardHeader className="pb-2">
                         <CardTitle className="flex items-center gap-2 text-gray-600 text-lg">
                           <div className="bg-gray-500 p-1.5 rounded">
-                            <Lock className="h-4 w-4 text-white" />
+                            <X className="h-4 w-4 text-white" />
                           </div>
                           <span className="font-bold">Free (Limited)</span>
                         </CardTitle>
@@ -604,7 +608,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                              { text: 'Basic progress tracking', limited: true }
                            ].map((feature, index) => (
                              <div key={index} className="flex items-center gap-2">
-                               <Shield className="h-4 w-4 text-red-500" />
+                               <X className="h-4 w-4 text-red-500" />
                                <span className="text-sm text-gray-600">
                                  {feature.text}
                                </span>
@@ -653,7 +657,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       <CardHeader className="pb-2 relative z-10 pt-5">
                         <CardTitle className="flex items-center gap-2">
                           <div className="bg-gradient-to-r from-orange-400 to-red-400 p-2 rounded-lg shadow-lg">
-                            <Crown className="h-5 w-5 text-white" />
+                            <Gem className="h-5 w-5 text-white" />
                           </div>
                           <span className="text-lg font-black text-gray-800">
                             Premium Features
@@ -734,9 +738,9 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                      >
                        <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-pink-300 opacity-0 group-hover:opacity-30 transition-opacity" />
                         <div className="flex items-center justify-center gap-3 relative z-10">
-                          <Rocket className="h-5 w-5" />
+                          <Star className="h-5 w-5" />
                           <span>🚀 Start Your Academic Transformation! ✨</span>
-                          <Sparkles className="h-5 w-5" />
+                          <Star className="h-5 w-5" />
                         </div>
                     </Button>
                   </motion.div>
