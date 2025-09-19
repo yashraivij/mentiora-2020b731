@@ -46,29 +46,29 @@ const Dashboard = () => {
   const [userHearts, setUserHearts] = useState(5);
   const [userGems, setUserGems] = useState(850);
 
-  // Duolingo-style sidebar items
+  // Duolingo-style sidebar items with softer colors
   const sidebarItems = [
-    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-100", textColor: "text-sky-600", activeColor: "bg-sky-500" },
-    { id: "leaderboards", label: "LEADERBOARDS", icon: Trophy, bgColor: "bg-yellow-100", textColor: "text-yellow-600", activeColor: "bg-yellow-500" },
-    { id: "quests", label: "QUESTS", icon: Star, bgColor: "bg-orange-100", textColor: "text-orange-600", activeColor: "bg-orange-500" },
-    { id: "shop", label: "SHOP", icon: ShoppingBag, bgColor: "bg-red-100", textColor: "text-red-600", activeColor: "bg-red-500" },
-    { id: "profile", label: "PROFILE", icon: User, bgColor: "bg-gray-100", textColor: "text-gray-600", activeColor: "bg-gray-500" },
-    { id: "more", label: "MORE", icon: MoreHorizontal, bgColor: "bg-purple-100", textColor: "text-purple-600", activeColor: "bg-purple-500" },
+    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50", textColor: "text-sky-700", activeColor: "bg-sky-400" },
+    { id: "leaderboards", label: "LEADERBOARDS", icon: Trophy, bgColor: "bg-yellow-50", textColor: "text-yellow-700", activeColor: "bg-yellow-400" },
+    { id: "quests", label: "QUESTS", icon: Star, bgColor: "bg-orange-50", textColor: "text-orange-700", activeColor: "bg-orange-400" },
+    { id: "shop", label: "SHOP", icon: ShoppingBag, bgColor: "bg-red-50", textColor: "text-red-700", activeColor: "bg-red-400" },
+    { id: "profile", label: "PROFILE", icon: User, bgColor: "bg-gray-50", textColor: "text-gray-700", activeColor: "bg-gray-400" },
+    { id: "more", label: "MORE", icon: MoreHorizontal, bgColor: "bg-purple-50", textColor: "text-purple-700", activeColor: "bg-purple-400" },
   ];
 
-  // Subject colors mapping (Duolingo-style)
+  // Subject colors mapping (softer Duolingo-style)
   const subjectColors = {
-    "physics": { bg: "bg-blue-500", light: "bg-blue-100", text: "text-blue-600" },
-    "physics-edexcel": { bg: "bg-blue-500", light: "bg-blue-100", text: "text-blue-600" },
-    "chemistry-edexcel": { bg: "bg-green-500", light: "bg-green-100", text: "text-green-600" },
-    "mathematics": { bg: "bg-purple-500", light: "bg-purple-100", text: "text-purple-600" },
-    "maths-edexcel": { bg: "bg-purple-500", light: "bg-purple-100", text: "text-purple-600" },
-    "english-language": { bg: "bg-pink-500", light: "bg-pink-100", text: "text-pink-600" },
-    "english-literature": { bg: "bg-rose-500", light: "bg-rose-100", text: "text-rose-600" },
-    "geography": { bg: "bg-emerald-500", light: "bg-emerald-100", text: "text-emerald-600" },
-    "history": { bg: "bg-amber-500", light: "bg-amber-100", text: "text-amber-600" },
-    "religious-studies": { bg: "bg-violet-500", light: "bg-violet-100", text: "text-violet-600" },
-    "business-edexcel-igcse": { bg: "bg-teal-500", light: "bg-teal-100", text: "text-teal-600" },
+    "physics": { bg: "bg-blue-400", light: "bg-blue-50", text: "text-blue-700" },
+    "physics-edexcel": { bg: "bg-blue-400", light: "bg-blue-50", text: "text-blue-700" },
+    "chemistry-edexcel": { bg: "bg-green-400", light: "bg-green-50", text: "text-green-700" },
+    "mathematics": { bg: "bg-purple-400", light: "bg-purple-50", text: "text-purple-700" },
+    "maths-edexcel": { bg: "bg-purple-400", light: "bg-purple-50", text: "text-purple-700" },
+    "english-language": { bg: "bg-pink-400", light: "bg-pink-50", text: "text-pink-700" },
+    "english-literature": { bg: "bg-rose-400", light: "bg-rose-50", text: "text-rose-700" },
+    "geography": { bg: "bg-emerald-400", light: "bg-emerald-50", text: "text-emerald-700" },
+    "history": { bg: "bg-amber-400", light: "bg-amber-50", text: "text-amber-700" },
+    "religious-studies": { bg: "bg-violet-400", light: "bg-violet-50", text: "text-violet-700" },
+    "business-edexcel-igcse": { bg: "bg-teal-400", light: "bg-teal-50", text: "text-teal-700" },
   };
 
   // Load user's selected subjects
@@ -309,20 +309,20 @@ const Dashboard = () => {
             <div>
               {/* Header with stats */}
               <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center space-x-6">
-                  <div className="flex items-center space-x-2">
-                    <Flame className="h-6 w-6 text-orange-500" />
-                    <span className="text-xl font-bold text-orange-500">{currentStreak}</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Zap className="h-6 w-6 text-blue-500" />
-                    <span className="text-xl font-bold text-blue-500">{userXP}</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Gem className="h-6 w-6 text-cyan-500" />
-                    <span className="text-xl font-bold text-cyan-500">{userGems}</span>
-                  </div>
+              <div className="flex items-center space-x-6">
+                <div className="flex items-center space-x-2">
+                  <Flame className="h-6 w-6 text-orange-400" />
+                  <span className="text-xl font-bold text-orange-500">{currentStreak}</span>
                 </div>
+                <div className="flex items-center space-x-2">
+                  <Zap className="h-6 w-6 text-blue-400" />
+                  <span className="text-xl font-bold text-blue-500">{userXP}</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Gem className="h-6 w-6 text-cyan-400" />
+                  <span className="text-xl font-bold text-cyan-500">{userGems}</span>
+                </div>
+              </div>
               </div>
 
               {/* Subject Selection or Subject Path */}
@@ -448,7 +448,7 @@ const Dashboard = () => {
         {/* Right Sidebar - Premium & Stats */}
         <div className="w-80 bg-gray-50 p-6 space-y-6">
           {/* Premium Card */}
-          <Card className="border-0 bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg">
+          <Card className="border-0 bg-gradient-to-br from-blue-400 to-purple-500 text-white shadow-lg">
             <CardContent className="p-6">
               <div className="flex items-center space-x-3 mb-4">
                 <div className="bg-white/20 rounded-lg p-2">
@@ -459,7 +459,7 @@ const Dashboard = () => {
               <p className="text-white/90 mb-4">
                 No ads, unlimited hearts, and exclusive features!
               </p>
-              <Button className="w-full bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 rounded-2xl">
+              <Button className="w-full bg-white text-blue-500 hover:bg-gray-100 font-bold py-3 rounded-2xl">
                 TRY 2 WEEKS FREE
               </Button>
             </CardContent>
@@ -494,17 +494,17 @@ const Dashboard = () => {
               </div>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-yellow-400 rounded-lg flex items-center justify-center">
+                  <div className="w-8 h-8 bg-yellow-300 rounded-lg flex items-center justify-center">
                     <Zap className="h-4 w-4 text-yellow-700" />
                   </div>
                   <div className="flex-1">
                     <p className="font-bold text-gray-800">Earn 10 XP</p>
                     <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
-                      <div className="bg-yellow-400 h-2 rounded-full" style={{width: '60%'}}></div>
+                      <div className="bg-yellow-300 h-2 rounded-full" style={{width: '60%'}}></div>
                     </div>
                   </div>
-                  <div className="bg-amber-100 rounded-lg p-2">
-                    <span className="text-xs font-bold text-amber-700">6/10</span>
+                  <div className="bg-amber-50 rounded-lg p-2">
+                    <span className="text-xs font-bold text-amber-600">6/10</span>
                   </div>
                 </div>
               </div>
