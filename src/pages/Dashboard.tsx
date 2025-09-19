@@ -1064,7 +1064,7 @@ const Dashboard = () => {
                          { name: "Emma Wilson", xp: 1653, topics: 38, grade: 8.2, streak: 12, isCurrentUser: false },
                          { name: "Liam Parker", xp: 1512, topics: 35, grade: 7.9, streak: 9, isCurrentUser: false },
                          { name: "Sophia Lee", xp: 1344, topics: 31, grade: 7.5, streak: 8, isCurrentUser: false },
-                         { name: "You", xp: userXP, topics: userProgress.filter(p => p.averageScore >= 85).length, grade: predictedGrades.length > 0 ? predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length : 0, streak: currentStreak, isCurrentUser: true },
+                         { name: "You", xp: userXP, topics: userProgress.filter(p => p.averageScore >= 85).length, grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0, streak: currentStreak, isCurrentUser: true },
                          { name: "James Smith", xp: 1098, topics: 22, grade: 6.8, streak: 5, isCurrentUser: false },
                          { name: "Maya Patel", xp: 987, topics: 19, grade: 6.5, streak: 4, isCurrentUser: false },
                          { name: "Oliver Brown", xp: 876, topics: 17, grade: 6.2, streak: 3, isCurrentUser: false },
@@ -1193,12 +1193,13 @@ const Dashboard = () => {
                         return null;
                       };
 
-                      const getGradeColor = (grade: number) => {
-                        if (grade >= 8) return "text-green-600 bg-green-50";
-                        if (grade >= 7) return "text-blue-600 bg-blue-50";
-                        if (grade >= 6) return "text-orange-600 bg-orange-50";
-                        return "text-red-600 bg-red-50";
-                      };
+                       const getGradeColor = (grade: number) => {
+                         if (grade === 0) return "text-gray-600 bg-gray-50";
+                         if (grade >= 8) return "text-green-600 bg-green-50";
+                         if (grade >= 7) return "text-blue-600 bg-blue-50";
+                         if (grade >= 6) return "text-orange-600 bg-orange-50";
+                         return "text-red-600 bg-red-50";
+                       };
 
                       return (
                         <motion.div
@@ -1238,12 +1239,12 @@ const Dashboard = () => {
                             <span className="font-bold text-gray-800">{player.topics}</span>
                           </div>
 
-                          {/* Average Grade */}
-                          <div>
-                            <span className={`px-3 py-1 rounded-full text-sm font-bold ${getGradeColor(player.grade)}`}>
-                              {player.grade}
-                            </span>
-                          </div>
+                           {/* Average Grade */}
+                           <div>
+                             <span className={`px-3 py-1 rounded-full text-sm font-bold ${getGradeColor(player.grade)}`}>
+                               {player.grade === 0 ? '0.0' : player.grade}
+                             </span>
+                           </div>
 
                           {/* Streak */}
                           <div className="flex items-center space-x-1">
