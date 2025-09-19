@@ -702,7 +702,7 @@ const Dashboard = () => {
             <div>
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">
-                  Your Smart Revision Notebook
+                  Smart Revision Notebook
                 </h2>
                 <p className="text-lg text-gray-600 mb-8">
                   Instant notes for every lost mark
