@@ -105,9 +105,16 @@ const refreshSubscription = async (userId?: string) => {
         setSession(session);
         setUser(session?.user ?? null);
         
-        // Refresh subscription when we have a user session
+        // Refresh subscription and handle login rewards
         if (session?.user) {
-          setTimeout(() => refreshSubscription(session.user.id), 0);
+          setTimeout(async () => {
+            await refreshSubscription(session.user.id);
+            // Handle daily login MP reward
+            if (event === 'SIGNED_IN') {
+              const { MPPointsSystem } = await import('@/lib/mpPointsSystem');
+              await MPPointsSystem.handleDailyLogin(session.user.id);
+            }
+          }, 0);
         } else if (event === 'SIGNED_OUT') {
           setIsPremium(false);
         }

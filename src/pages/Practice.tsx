@@ -428,6 +428,12 @@ const Practice = () => {
     // Clear the current session state since it's completed
     clearSessionState();
     
+    // Handle MP rewards for practice completion
+    if (user?.id && subjectId && topicId) {
+      const { MPPointsSystem } = await import('@/lib/mpPointsSystem');
+      await MPPointsSystem.handlePracticeCompletion(user.id, subjectId, topicId);
+    }
+    
     // Save progress
     const progressKey = `mentiora_progress_${user?.id}`;
     const existingProgress = JSON.parse(localStorage.getItem(progressKey) || '[]');

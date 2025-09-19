@@ -93,9 +93,10 @@ const Dashboard = () => {
   const [currentStreak, setCurrentStreak] = useState(7);
   const [userXP, setUserXP] = useState(1122);
   const [userHearts, setUserHearts] = useState(5);
-  const [userGems, setUserGems] = useState(850);
+  const [userGems, setUserGems] = useState(0);
   const [userSubjectsWithGrades, setUserSubjectsWithGrades] = useState<any[]>([]);
   const [predictedGrades, setPredictedGrades] = useState<any[]>([]);
+  const [userStats, setUserStats] = useState<any>(null);
 
   // Notebook state
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
@@ -1307,19 +1308,21 @@ const Dashboard = () => {
                 <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center">
-                        <Check className="w-6 h-6 text-green-600" />
+                      <div className={`w-12 h-12 ${userStats?.loginToday ? 'bg-green-100' : 'bg-gray-100'} rounded-2xl flex items-center justify-center`}>
+                        <Check className={`w-6 h-6 ${userStats?.loginToday ? 'text-green-600' : 'text-gray-400'}`} />
                       </div>
                       <div>
                         <h4 className="text-lg font-bold text-gray-800">Log in today</h4>
-                        <p className="text-gray-600">Complete ✓</p>
+                        <p className="text-gray-600">{userStats?.loginToday ? 'Complete ✓' : 'Log in to earn MP'}</p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
                       <span className="text-lg font-bold text-green-600">+10 MP</span>
-                      <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                        <Check className="w-4 h-4 text-white" />
-                      </div>
+                      {userStats?.loginToday && (
+                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                          <Check className="w-4 h-4 text-white" />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -1328,16 +1331,29 @@ const Dashboard = () => {
                 <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-blue-400 rounded-2xl flex items-center justify-center">
-                        <BookOpen className="w-6 h-6 text-white" />
+                      <div className={`w-12 h-12 ${userStats?.practiceToday ? 'bg-green-100' : 'bg-blue-400'} rounded-2xl flex items-center justify-center`}>
+                        {userStats?.practiceToday ? (
+                          <Check className="w-6 h-6 text-green-600" />
+                        ) : (
+                          <BookOpen className="w-6 h-6 text-white" />
+                        )}
                       </div>
                       <div>
                         <h4 className="text-lg font-bold text-gray-800">Complete 1 practice set</h4>
-                        <p className="text-gray-600">Answer questions to earn MP</p>
+                        <p className="text-gray-600">
+                          {userStats?.practiceToday ? 'Complete ✓' : 'Answer questions to earn MP'}
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <span className="text-lg font-bold text-blue-500">+40 MP</span>
+                      <span className={`text-lg font-bold ${userStats?.practiceToday ? 'text-green-600' : 'text-blue-500'}`}>
+                        +40 MP
+                      </span>
+                      {userStats?.practiceToday && (
+                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                          <Check className="w-4 h-4 text-white" />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -1351,16 +1367,26 @@ const Dashboard = () => {
                       </div>
                       <div>
                         <h4 className="text-lg font-bold text-gray-800">Bonus: Do 3 topics</h4>
-                        <p className="text-gray-600">Weekly challenge — 1/3 completed</p>
+                        <p className="text-gray-600">
+                          Weekly challenge — {Math.min(userStats?.weeklyTopicsCount || 0, 3)}/3 completed
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
                       <span className="text-lg font-bold text-purple-500">+100 MP</span>
+                      {(userStats?.weeklyTopicsCount || 0) >= 3 && (
+                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                          <Check className="w-4 h-4 text-white" />
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="mt-4">
                     <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div className="bg-purple-400 h-2 rounded-full" style={{width: '33%'}}></div>
+                      <div 
+                        className="bg-purple-400 h-2 rounded-full" 
+                        style={{width: `${Math.min(((userStats?.weeklyTopicsCount || 0) / 3) * 100, 100)}%`}}
+                      ></div>
                     </div>
                   </div>
                 </div>
@@ -1378,16 +1404,26 @@ const Dashboard = () => {
                       </div>
                       <div>
                         <h4 className="text-lg font-bold text-gray-800">Complete 5 practice sets</h4>
-                        <p className="text-gray-600">2/5 completed this week</p>
+                        <p className="text-gray-600">
+                          {Math.min(userStats?.weeklyPracticeCount || 0, 5)}/5 completed this week
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
                       <span className="text-lg font-bold text-orange-500">+250 MP</span>
+                      {(userStats?.weeklyPracticeCount || 0) >= 5 && (
+                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                          <Check className="w-4 h-4 text-white" />
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="mt-4">
                     <div className="w-full bg-gray-200 rounded-full h-3">
-                      <div className="bg-orange-400 h-3 rounded-full" style={{width: '40%'}}></div>
+                      <div 
+                        className="bg-orange-400 h-3 rounded-full" 
+                        style={{width: `${Math.min(((userStats?.weeklyPracticeCount || 0) / 5) * 100, 100)}%`}}
+                      ></div>
                     </div>
                   </div>
                 </div>
@@ -1400,16 +1436,26 @@ const Dashboard = () => {
                       </div>
                       <div>
                         <h4 className="text-lg font-bold text-gray-800">Maintain 7-day streak</h4>
-                        <p className="text-gray-600">{currentStreak}/7 days completed</p>
+                        <p className="text-gray-600">
+                          {Math.min(userStats?.currentStreak || 0, 7)}/7 days completed
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
                       <span className="text-lg font-bold text-green-500">+500 MP</span>
+                      {(userStats?.currentStreak || 0) >= 7 && (
+                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                          <Check className="w-4 h-4 text-white" />
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="mt-4">
                     <div className="w-full bg-gray-200 rounded-full h-3">
-                      <div className="bg-green-400 h-3 rounded-full" style={{width: `${Math.min((currentStreak / 7) * 100, 100)}%`}}></div>
+                      <div 
+                        className="bg-green-400 h-3 rounded-full" 
+                        style={{width: `${Math.min(((userStats?.currentStreak || 0) / 7) * 100, 100)}%`}}
+                      ></div>
                     </div>
                   </div>
                 </div>
