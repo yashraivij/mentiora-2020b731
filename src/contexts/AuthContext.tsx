@@ -3,7 +3,6 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
 import { PremiumWelcomeNotification } from '@/components/ui/premium-welcome-notification';
-import { useMPRewards } from '@/hooks/useMPRewards';
 
 interface AuthContextType {
   user: User | null;
@@ -31,7 +30,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState(true);
   const [isPremium, setIsPremium] = useState(false);
   const [showPremiumWelcome, setShowPremiumWelcome] = useState(false);
-  const { showMPReward } = useMPRewards();
 
 const refreshSubscription = async (userId?: string) => {
   const targetUserId = userId || user?.id;
@@ -130,8 +128,6 @@ const refreshSubscription = async (userId?: string) => {
                     
                     if (result.awarded > 0) {
                       console.log(`Daily login bonus: +${result.awarded} MP`);
-                      // Show daily login MP reward toast
-                      showMPReward(result.awarded, 'daily_login', 'Daily check-in');
                     } else {
                       console.log(`Daily login already awarded today`);
                     }

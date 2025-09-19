@@ -817,11 +817,11 @@ const Dashboard = () => {
                 </div>
                 <div className="flex items-center space-x-2">
                   <Zap className="h-6 w-6 text-blue-400" />
-                  <span className="text-xl font-bold text-blue-500" data-mp-counter>{userGems}</span>
+                  <span className="text-xl font-bold text-blue-500">{userGems}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Gem className="h-6 w-6 text-cyan-400" />
-                  <span className="text-xl font-bold text-cyan-500" data-mp-counter>{userGems}</span>
+                  <span className="text-xl font-bold text-cyan-500">{userGems}</span>
                 </div>
               </div>
               </div>
@@ -1259,7 +1259,7 @@ const Dashboard = () => {
                    <div className="w-12 h-12 bg-cyan-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
                      <Gem className="w-6 h-6 text-white" />
                    </div>
-                   <div className="text-2xl font-bold text-gray-800" data-mp-counter>{userGems}</div>
+                   <div className="text-2xl font-bold text-gray-800">{userGems}</div>
                    <div className="text-sm text-gray-600">Total MP</div>
                  </div>
                  <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100 text-center">
@@ -1466,7 +1466,7 @@ const Dashboard = () => {
                   {/* MP Balance */}
                   <div className="flex items-center space-x-2 bg-white rounded-2xl px-6 py-3 shadow-lg border-2 border-gray-100">
                     <Gem className="h-6 w-6 text-cyan-400" />
-                    <span className="text-xl font-bold text-gray-800" data-mp-counter>{userGems} MP</span>
+                    <span className="text-xl font-bold text-gray-800">{userGems} MP</span>
                   </div>
                   {/* Streak Chip */}
                   <div className="flex items-center space-x-2 bg-white rounded-2xl px-6 py-3 shadow-lg border-2 border-gray-100">
