@@ -4141,7 +4141,7 @@ Write a story about a moment of fear.
         <header className="bg-card/90 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-lg">
           <div className="container mx-auto px-6 py-4">
             <div className="flex justify-between items-center">
-              <Button variant="ghost" onClick={() => navigate('/predicted-questions')} className="text-muted-foreground hover:text-foreground">
+              <Button variant="ghost" onClick={() => navigate('/dashboard')} className="text-muted-foreground hover:text-foreground">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Button>
