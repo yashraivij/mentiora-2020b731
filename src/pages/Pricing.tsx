@@ -28,11 +28,16 @@ const Pricing = () => {
   // Dynamic subject rotation every 4 seconds
   const subjects = ["Math", "Science", "English", "History", "Physics", "Chemistry", "Biology"];
   const [currentSubjectIndex, setCurrentSubjectIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
   const userName = user?.email?.split('@')[0] || "Student";
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSubjectIndex((prev) => (prev + 1) % subjects.length);
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentSubjectIndex((prev) => (prev + 1) % subjects.length);
+        setTimeout(() => setIsAnimating(false), 50);
+      }, 300);
     }, 4000);
 
     return () => clearInterval(interval);
@@ -65,7 +70,11 @@ const Pricing = () => {
             Progress faster in your
           </h1>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-            <span className="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent transition-all duration-500">
+            <span 
+              className={`bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent transition-all duration-300 ease-in-out transform ${
+                isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+              }`}
+            >
               {currentSubject}
             </span> studies with Super!
           </h1>
