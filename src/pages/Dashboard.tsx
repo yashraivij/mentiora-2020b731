@@ -1,30 +1,23 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
 import {
   BookOpen,
-  TrendingUp,
-  User,
-  Settings,
-  LogOut,
   Trophy,
-  Atom,
-  Calculator,
-  Globe,
-  Palette,
-  History,
-  Building,
-  FlaskConical,
-  PenTool,
-  Church,
-  Gamepad2,
-  Target,
-  BarChart3,
-  Home,
-  Lock,
   Star,
+  ShoppingBag,
+  User,
+  MoreHorizontal,
+  Home,
+  Flame,
+  Crown,
+  Lock,
+  Check,
+  Zap,
+  Heart,
+  Gem,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -47,65 +40,35 @@ const Dashboard = () => {
   const [userSubjects, setUserSubjects] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<string>("learn");
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
+  const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
+  const [currentStreak, setCurrentStreak] = useState(7);
+  const [userXP, setUserXP] = useState(1122);
+  const [userHearts, setUserHearts] = useState(5);
+  const [userGems, setUserGems] = useState(850);
 
-  // Sidebar navigation items with colors
+  // Duolingo-style sidebar items
   const sidebarItems = [
-    { id: "learn", label: "Learn", icon: Home, color: "blue" },
-    { id: "progress", label: "Progress", icon: BarChart3, color: "green" },
-    { id: "2026-exams", label: "2026 Exams", icon: Target, color: "orange" },
-    { id: "leaderboard", label: "Leaderboard", icon: Trophy, color: "yellow" },
-    { id: "profile", label: "Profile", icon: User, color: "purple" },
+    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-100", textColor: "text-sky-600", activeColor: "bg-sky-500" },
+    { id: "leaderboards", label: "LEADERBOARDS", icon: Trophy, bgColor: "bg-yellow-100", textColor: "text-yellow-600", activeColor: "bg-yellow-500" },
+    { id: "quests", label: "QUESTS", icon: Star, bgColor: "bg-orange-100", textColor: "text-orange-600", activeColor: "bg-orange-500" },
+    { id: "shop", label: "SHOP", icon: ShoppingBag, bgColor: "bg-red-100", textColor: "text-red-600", activeColor: "bg-red-500" },
+    { id: "profile", label: "PROFILE", icon: User, bgColor: "bg-gray-100", textColor: "text-gray-600", activeColor: "bg-gray-500" },
+    { id: "more", label: "MORE", icon: MoreHorizontal, bgColor: "bg-purple-100", textColor: "text-purple-600", activeColor: "bg-purple-500" },
   ];
 
-  // Color mappings for nav items
-  const getNavItemColors = (color: string, isActive: boolean) => {
-    const colorMap = {
-      blue: {
-        bg: isActive ? "bg-blue-500" : "bg-blue-100 hover:bg-blue-200",
-        text: isActive ? "text-white" : "text-blue-700 hover:text-blue-800",
-        icon: isActive ? "text-white" : "text-blue-600"
-      },
-      green: {
-        bg: isActive ? "bg-green-500" : "bg-green-100 hover:bg-green-200", 
-        text: isActive ? "text-white" : "text-green-700 hover:text-green-800",
-        icon: isActive ? "text-white" : "text-green-600"
-      },
-      orange: {
-        bg: isActive ? "bg-orange-500" : "bg-orange-100 hover:bg-orange-200",
-        text: isActive ? "text-white" : "text-orange-700 hover:text-orange-800", 
-        icon: isActive ? "text-white" : "text-orange-600"
-      },
-      yellow: {
-        bg: isActive ? "bg-yellow-500" : "bg-yellow-100 hover:bg-yellow-200",
-        text: isActive ? "text-white" : "text-yellow-700 hover:text-yellow-800",
-        icon: isActive ? "text-white" : "text-yellow-600"
-      },
-      purple: {
-        bg: isActive ? "bg-violet-500" : "bg-violet-100 hover:bg-violet-200",
-        text: isActive ? "text-white" : "text-violet-700 hover:text-violet-800", 
-        icon: isActive ? "text-white" : "text-violet-600"
-      }
-    };
-    return colorMap[color] || colorMap.blue;
-  };
-
-  // Subject icon mapping
-  const getSubjectIcon = (subjectId: string) => {
-    const iconMap: { [key: string]: any } = {
-      "physics": Atom,
-      "physics-edexcel": Atom,
-      "chemistry-edexcel": FlaskConical,
-      "mathematics": Calculator,
-      "maths-edexcel": Calculator,
-      "english-language": PenTool,
-      "english-literature": BookOpen,
-      "geography": Globe,
-      "geography-paper-2": Globe,
-      "history": History,
-      "religious-studies": Church,
-      "business-edexcel-igcse": Building,
-    };
-    return iconMap[subjectId] || BookOpen;
+  // Subject colors mapping (Duolingo-style)
+  const subjectColors = {
+    "physics": { bg: "bg-blue-500", light: "bg-blue-100", text: "text-blue-600" },
+    "physics-edexcel": { bg: "bg-blue-500", light: "bg-blue-100", text: "text-blue-600" },
+    "chemistry-edexcel": { bg: "bg-green-500", light: "bg-green-100", text: "text-green-600" },
+    "mathematics": { bg: "bg-purple-500", light: "bg-purple-100", text: "text-purple-600" },
+    "maths-edexcel": { bg: "bg-purple-500", light: "bg-purple-100", text: "text-purple-600" },
+    "english-language": { bg: "bg-pink-500", light: "bg-pink-100", text: "text-pink-600" },
+    "english-literature": { bg: "bg-rose-500", light: "bg-rose-100", text: "text-rose-600" },
+    "geography": { bg: "bg-emerald-500", light: "bg-emerald-100", text: "text-emerald-600" },
+    "history": { bg: "bg-amber-500", light: "bg-amber-100", text: "text-amber-600" },
+    "religious-studies": { bg: "bg-violet-500", light: "bg-violet-100", text: "text-violet-600" },
+    "business-edexcel-igcse": { bg: "bg-teal-500", light: "bg-teal-100", text: "text-teal-600" },
   };
 
   // Load user's selected subjects
@@ -128,24 +91,12 @@ const Dashboard = () => {
           .map((record) => {
             const examBoard = record.exam_board.toLowerCase();
             
-            // Map database records to curriculum IDs
-            if (record.subject_name === "Physics" && examBoard === "aqa") {
-              return "physics";
-            }
-            if (record.subject_name === "Physics" && examBoard === "edexcel") {
-              return "physics-edexcel";
-            }
-            if (record.subject_name === "Mathematics") {
-              return "maths-edexcel";
-            }
-            if (record.subject_name === "IGCSE Business") {
-              return "business-edexcel-igcse";
-            }
-            if (record.subject_name === "Chemistry" && examBoard === "edexcel") {
-              return "chemistry-edexcel";
-            }
+            if (record.subject_name === "Physics" && examBoard === "aqa") return "physics";
+            if (record.subject_name === "Physics" && examBoard === "edexcel") return "physics-edexcel";
+            if (record.subject_name === "Mathematics") return "maths-edexcel";
+            if (record.subject_name === "IGCSE Business") return "business-edexcel-igcse";
+            if (record.subject_name === "Chemistry" && examBoard === "edexcel") return "chemistry-edexcel";
 
-            // Find matching subject in curriculum
             const subject = curriculum.find(
               (s) => s.name.toLowerCase() === record.subject_name.toLowerCase()
             );
@@ -170,29 +121,40 @@ const Dashboard = () => {
     }
   };
 
-  // Get subject progress percentage
-  const getSubjectProgress = (subjectId: string) => {
-    const subjectProgress = userProgress.filter(
-      (p) => p.subjectId === subjectId
-    );
-    if (subjectProgress.length === 0) return 0;
-    return Math.round(
-      subjectProgress.reduce((sum, p) => sum + p.averageScore, 0) /
-        subjectProgress.length
-    );
+  // Get topic completion status
+  const getTopicStatus = (subjectId: string, topicIndex: number) => {
+    const subject = curriculum.find(s => s.id === subjectId);
+    if (!subject) return "locked";
+    
+    const topic = subject.topics[topicIndex];
+    if (!topic) return "locked";
+
+    const progress = userProgress.find(p => p.subjectId === subjectId && p.topicId === topic.id);
+    
+    if (progress && progress.attempts > 0) {
+      return progress.averageScore >= 85 ? "completed" : "active";
+    }
+    
+    // First topic is always available, others need previous to be completed
+    if (topicIndex === 0) return "available";
+    
+    const prevTopic = subject.topics[topicIndex - 1];
+    const prevProgress = userProgress.find(p => p.subjectId === subjectId && p.topicId === prevTopic.id);
+    
+    return (prevProgress && prevProgress.averageScore >= 70) ? "available" : "locked";
   };
 
-  // Get topics completed count
-  const getTopicsCompleted = (subjectId: string) => {
+  // Get subject progress
+  const getSubjectProgress = (subjectId: string) => {
     const subject = curriculum.find(s => s.id === subjectId);
     if (!subject) return { completed: 0, total: 0 };
     
-    const totalTopics = subject.topics.length;
-    const completedTopics = userProgress.filter(
-      (p) => p.subjectId === subjectId && p.attempts > 0
-    ).length;
+    const completedTopics = subject.topics.filter(topic => {
+      const progress = userProgress.find(p => p.subjectId === subjectId && p.topicId === topic.id);
+      return progress && progress.attempts > 0;
+    }).length;
     
-    return { completed: completedTopics, total: totalTopics };
+    return { completed: completedTopics, total: subject.topics.length };
   };
 
   useEffect(() => {
@@ -205,8 +167,8 @@ const Dashboard = () => {
     navigate("/");
   };
 
-  const handlePractice = (subjectId: string) => {
-    navigate(`/subject/${subjectId}`);
+  const handleTopicClick = (subjectId: string, topicId: string) => {
+    navigate(`/practice/${subjectId}/${topicId}`);
   };
 
   const getFirstName = () => {
@@ -222,34 +184,104 @@ const Dashboard = () => {
     ? curriculum.filter((subject) => userSubjects.includes(subject.id))
     : [];
 
+  // Render topic nodes in Duolingo path style
+  const renderTopicPath = (subject: any) => {
+    const colors = subjectColors[subject.id] || subjectColors["physics"];
+    
+    return (
+      <div className="flex flex-col items-center space-y-6 py-8">
+        {subject.topics.map((topic: any, index: number) => {
+          const status = getTopicStatus(subject.id, index);
+          const isLocked = status === "locked";
+          const isCompleted = status === "completed";
+          const isActive = status === "active";
+          const isAvailable = status === "available";
+
+          return (
+            <motion.div
+              key={topic.id}
+              className="flex flex-col items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <motion.button
+                onClick={() => !isLocked && handleTopicClick(subject.id, topic.id)}
+                disabled={isLocked}
+                className={`relative w-20 h-20 rounded-full border-4 shadow-lg transition-all duration-200 ${
+                  isCompleted 
+                    ? `${colors.bg} border-yellow-400 shadow-yellow-200` 
+                    : isActive
+                    ? `${colors.bg} border-white shadow-lg`
+                    : isAvailable
+                    ? `bg-white ${colors.text} border-gray-300 hover:border-gray-400`
+                    : "bg-gray-200 border-gray-300 cursor-not-allowed"
+                } ${!isLocked ? 'hover:scale-105' : ''}`}
+                whileHover={!isLocked ? { scale: 1.05 } : {}}
+                whileTap={!isLocked ? { scale: 0.95 } : {}}
+              >
+                {isLocked && (
+                  <Lock className="h-8 w-8 text-gray-400 absolute inset-0 m-auto" />
+                )}
+                {isCompleted && (
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center border-2 border-white">
+                    <Crown className="h-4 w-4 text-yellow-700" />
+                  </div>
+                )}
+                {(isActive || isAvailable) && !isCompleted && (
+                  <div className={`h-8 w-8 ${isActive ? 'text-white' : colors.text} absolute inset-0 m-auto`}>
+                    <BookOpen className="h-full w-full" />
+                  </div>
+                )}
+              </motion.button>
+              
+              <div className="text-center mt-3">
+                <p className={`text-sm font-bold ${isLocked ? 'text-gray-400' : 'text-gray-700'}`}>
+                  {topic.name}
+                </p>
+              </div>
+
+              {/* Connecting line to next topic */}
+              {index < subject.topics.length - 1 && (
+                <div className="h-8 w-1 bg-gray-300 my-2"></div>
+              )}
+            </motion.div>
+          );
+        })}
+      </div>
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-slate-900 flex">
-      {/* Left Sidebar */}
-      <div className="w-64 bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 flex flex-col shadow-sm">
-        {/* Header */}
-        <div className="p-6 border-b border-slate-200 dark:border-slate-700">
-          <h1 className="text-2xl font-bold text-green-500">Mentiora</h1>
+    <div className="min-h-screen bg-white flex">
+      {/* Left Sidebar - Duolingo Style */}
+      <div className="w-64 bg-white border-r-2 border-gray-100 flex flex-col py-6">
+        {/* Logo */}
+        <div className="px-6 mb-8">
+          <h1 className="text-3xl font-bold text-green-500">mentiora</h1>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4">
-          <div className="space-y-3">
+        <nav className="flex-1 px-4">
+          <div className="space-y-2">
             {sidebarItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
-              const colors = getNavItemColors(item.color, isActive);
               return (
                 <motion.button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
                   whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`w-full flex items-center space-x-3 px-4 py-4 rounded-2xl text-left transition-all duration-200 ${colors.bg} shadow-sm`}
+                  className={`w-full flex items-center space-x-4 px-4 py-4 rounded-2xl text-left transition-all duration-200 ${
+                    isActive 
+                      ? `${item.activeColor} text-white shadow-lg` 
+                      : `${item.bgColor} ${item.textColor} hover:scale-105`
+                  }`}
                 >
-                  <div className={`p-2 rounded-xl ${isActive ? 'bg-white/20' : 'bg-white/50'}`}>
-                    <Icon className={`h-5 w-5 ${colors.icon}`} />
+                  <div className={`p-2 rounded-xl ${isActive ? 'bg-white/20' : 'bg-white'}`}>
+                    <Icon className={`h-5 w-5 ${isActive ? 'text-white' : item.textColor}`} />
                   </div>
-                  <span className={`font-semibold ${colors.text}`}>{item.label}</span>
+                  <span className="font-bold text-sm tracking-wide">{item.label}</span>
                 </motion.button>
               );
             })}
@@ -257,210 +289,228 @@ const Dashboard = () => {
         </nav>
 
         {/* Bottom Section */}
-        <div className="p-4 border-t border-slate-200 dark:border-slate-700 space-y-2">
-          <div className="flex items-center justify-between text-sm">
-            <button
-              onClick={() => window.open("https://discord.gg/mentiora", "_blank")}
-              className="text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 px-2 py-1 rounded transition-colors"
-            >
-              Join Community
-            </button>
-            {isPremium && (
-              <button
-                onClick={() => openManageBilling()}
-                className="text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 px-2 py-1 rounded transition-colors"
-              >
-                Manage Billing
-              </button>
-            )}
-          </div>
+        <div className="px-4 pt-4 border-t border-gray-100">
           <Button
             variant="ghost"
             onClick={handleLogout}
-            className="w-full justify-start text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+            className="w-full justify-start text-gray-600 hover:text-gray-800 hover:bg-gray-100"
           >
-            <LogOut className="h-4 w-4 mr-3" />
+            <User className="h-4 w-4 mr-3" />
             Sign Out
           </Button>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-8 max-w-4xl mx-auto">
-        {activeTab === "learn" && (
-          <div>
-            {/* Welcome Header */}
-            <div className="mb-12 text-center">
-              <h2 className="text-4xl font-bold text-slate-800 dark:text-slate-100 mb-4">
-                Welcome back, {getFirstName()}!
+      <div className="flex-1 flex">
+        {/* Main Learning Area */}
+        <div className="flex-1 p-8 max-w-4xl mx-auto">
+          {activeTab === "learn" && (
+            <div>
+              {/* Header with stats */}
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center space-x-6">
+                  <div className="flex items-center space-x-2">
+                    <Flame className="h-6 w-6 text-orange-500" />
+                    <span className="text-xl font-bold text-orange-500">{currentStreak}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Zap className="h-6 w-6 text-blue-500" />
+                    <span className="text-xl font-bold text-blue-500">{userXP}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Gem className="h-6 w-6 text-cyan-500" />
+                    <span className="text-xl font-bold text-cyan-500">{userGems}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Subject Selection or Subject Path */}
+              {!selectedSubject ? (
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+                    Choose your GCSE subject
+                  </h2>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {filteredSubjects.map((subject) => {
+                      const colors = subjectColors[subject.id] || subjectColors["physics"];
+                      const progress = getSubjectProgress(subject.id);
+                      
+                      return (
+                        <motion.div
+                          key={subject.id}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <Card 
+                            className="cursor-pointer border-0 shadow-lg hover:shadow-xl transition-all duration-300"
+                            onClick={() => setSelectedSubject(subject.id)}
+                          >
+                            <CardContent className="p-8">
+                              <div className="flex items-center justify-between">
+                                <div className="flex-1">
+                                  <div className="flex items-center space-x-2 mb-3">
+                                    <span className={`text-xs font-bold ${colors.text} bg-gray-100 px-3 py-1 rounded-full`}>
+                                      GCSE • {progress.completed} OF {progress.total} UNITS
+                                    </span>
+                                  </div>
+                                  
+                                  <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                                    {subject.name}
+                                  </h3>
+                                  
+                                  <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                    <div
+                                      className={`${colors.bg} h-3 rounded-full transition-all duration-500`}
+                                      style={{ width: `${(progress.completed / progress.total) * 100}%` }}
+                                    />
+                                  </div>
+
+                                  <Button
+                                    className={`${colors.bg} hover:opacity-90 text-white font-bold py-3 px-8 rounded-2xl text-lg shadow-lg`}
+                                  >
+                                    {progress.completed === 0 ? "START" : "CONTINUE"}
+                                  </Button>
+                                </div>
+
+                                <div className={`w-20 h-20 ${colors.bg} rounded-full flex items-center justify-center ml-6`}>
+                                  <BookOpen className="h-10 w-10 text-white" />
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                // Subject Path View
+                <div>
+                  <div className="flex items-center mb-8">
+                    <Button
+                      variant="ghost"
+                      onClick={() => setSelectedSubject(null)}
+                      className="text-gray-600 hover:text-gray-800 mr-4"
+                    >
+                      ← Back
+                    </Button>
+                    <h2 className="text-3xl font-bold text-gray-800">
+                      {curriculum.find(s => s.id === selectedSubject)?.name}
+                    </h2>
+                  </div>
+
+                  <div className="flex justify-center">
+                    <div className="max-w-md">
+                      {renderTopicPath(curriculum.find(s => s.id === selectedSubject))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* No subjects message */}
+              {filteredSubjects.length === 0 && !selectedSubject && (
+                <div className="text-center py-16">
+                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
+                    <BookOpen className="h-12 w-12 text-gray-400" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                    No subjects selected yet
+                  </h3>
+                  <p className="text-lg text-gray-600 mb-8">
+                    Add subjects to your list to get started with GCSE revision
+                  </p>
+                  <Button
+                    onClick={() => navigate("/")}
+                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-2xl text-lg"
+                  >
+                    Browse Subjects
+                  </Button>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Other tabs - placeholder content */}
+          {activeTab !== "learn" && (
+            <div className="text-center py-16">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6 capitalize">
+                {activeTab}
               </h2>
-              <p className="text-xl text-slate-600 dark:text-slate-400">
-                Continue your learning journey 🎓
+              <p className="text-lg text-gray-600">
+                Coming soon! This feature is being developed.
               </p>
             </div>
+          )}
+        </div>
 
-            {/* Subjects Section */}
-            {filteredSubjects.length > 0 ? (
-              <div className="space-y-8">
-                {filteredSubjects.map((subject, index) => {
-                  const Icon = getSubjectIcon(subject.id);
-                  const progress = getSubjectProgress(subject.id);
-                  const { completed, total } = getTopicsCompleted(subject.id);
-                  const isLocked = index > 0 && getSubjectProgress(filteredSubjects[index - 1].id) < 70;
-                  
-                  return (
-                    <motion.div
-                      key={subject.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
-                        <CardContent className="p-8">
-                          <div className="flex items-center justify-between">
-                            <div className="flex-1">
-                              <div className="flex items-center space-x-3 mb-4">
-                                <span className="text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 px-3 py-1 rounded-full">
-                                  GCSE • SEE DETAILS
-                                </span>
-                              </div>
-                              
-                              <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-4">
-                                {subject.name}
-                              </h3>
-                              
-                              <div className="flex items-center space-x-4 mb-6">
-                                <div className="flex items-center space-x-2">
-                                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                                  <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
-                                    {completed} / {total}
-                                  </span>
-                                </div>
-                                {progress > 0 && (
-                                  <div className="bg-green-100 dark:bg-green-900/30 px-3 py-1 rounded-full">
-                                    <span className="text-sm font-semibold text-green-700 dark:text-green-400">
-                                      {progress}% Complete
-                                    </span>
-                                  </div>
-                                )}
-                              </div>
-
-                              {progress > 0 && (
-                                <div className="bg-white dark:bg-slate-600 rounded-xl p-3 mb-6 shadow-sm">
-                                  <div className="flex items-center space-x-2">
-                                    <span className="text-2xl">💬</span>
-                                    <span className="text-slate-700 dark:text-slate-300 font-medium">
-                                      Keep going! You're doing great!
-                                    </span>
-                                  </div>
-                                </div>
-                              )}
-
-                              <Button
-                                onClick={() => !isLocked && handlePractice(subject.id)}
-                                disabled={isLocked}
-                                className={`${
-                                  isLocked 
-                                    ? "bg-gray-400 hover:bg-gray-400 cursor-not-allowed" 
-                                    : "bg-sky-500 hover:bg-sky-600"
-                                } text-white font-bold py-4 px-8 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all duration-200`}
-                              >
-                                {isLocked ? (
-                                  <>
-                                    <Lock className="h-5 w-5 mr-2" />
-                                    LOCKED
-                                  </>
-                                ) : completed === 0 ? (
-                                  "START"
-                                ) : (
-                                  "CONTINUE"
-                                )}
-                              </Button>
-                            </div>
-
-                            <div className="flex-shrink-0 ml-8">
-                              <div className="w-32 h-32 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
-                                <Icon className="h-16 w-16 text-white" />
-                              </div>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            ) : (
-              <div className="text-center py-16">
-                <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center">
-                  <BookOpen className="h-12 w-12 text-slate-400" />
+        {/* Right Sidebar - Premium & Stats */}
+        <div className="w-80 bg-gray-50 p-6 space-y-6">
+          {/* Premium Card */}
+          <Card className="border-0 bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg">
+            <CardContent className="p-6">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="bg-white/20 rounded-lg p-2">
+                  <Crown className="h-6 w-6" />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-4">
-                  No subjects selected yet
-                </h3>
-                <p className="text-lg text-slate-600 dark:text-slate-400 mb-8">
-                  Add subjects to your list to get started with personalized learning
-                </p>
-                <Button
-                  onClick={() => navigate("/")}
-                  className="bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded-2xl text-lg"
-                >
-                  Browse Subjects
-                </Button>
+                <span className="font-bold text-lg">Try Premium for free</span>
               </div>
-            )}
-          </div>
-        )}
+              <p className="text-white/90 mb-4">
+                No ads, unlimited hearts, and exclusive features!
+              </p>
+              <Button className="w-full bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 rounded-2xl">
+                TRY 2 WEEKS FREE
+              </Button>
+            </CardContent>
+          </Card>
 
-        {activeTab === "progress" && (
-          <div className="text-center py-16">
-            <h2 className="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-6">
-              Your Progress
-            </h2>
-            <p className="text-lg text-slate-600 dark:text-slate-400">
-              Track your learning progress across all subjects
-            </p>
-          </div>
-        )}
+          {/* League Card */}
+          <Card className="border-0 shadow-md">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-gray-800">Silver League</h3>
+                <span className="text-blue-500 font-bold text-sm">VIEW LEAGUE</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                  <span className="text-white font-bold">🏆</span>
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm text-gray-600">
+                    Complete a lesson to join this week's leaderboard and compete against other learners
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
-        {activeTab === "2026-exams" && (
-          <div className="text-center py-16">
-            <h2 className="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-6">
-              2026 Exams
-            </h2>
-            <p className="text-lg text-slate-600 dark:text-slate-400 mb-8">
-              Practice with AI-predicted exam questions for 2026
-            </p>
-            <Button
-              onClick={() => navigate("/predicted-questions")}
-              className="bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded-2xl text-lg"
-            >
-              View Predicted Questions
-            </Button>
-          </div>
-        )}
-
-        {activeTab === "leaderboard" && (
-          <div className="text-center py-16">
-            <h2 className="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-6">
-              Leaderboard
-            </h2>
-            <p className="text-lg text-slate-600 dark:text-slate-400">
-              See how you rank against other learners
-            </p>
-          </div>
-        )}
-
-        {activeTab === "profile" && (
-          <div className="text-center py-16">
-            <h2 className="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-6">
-              Profile
-            </h2>
-            <p className="text-lg text-slate-600 dark:text-slate-400">
-              Manage your account settings and preferences
-            </p>
-          </div>
-        )}
+          {/* Daily Quests */}
+          <Card className="border-0 shadow-md">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-gray-800">Daily Quests</h3>
+                <span className="text-blue-500 font-bold text-sm">VIEW ALL</span>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-yellow-400 rounded-lg flex items-center justify-center">
+                    <Zap className="h-4 w-4 text-yellow-700" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-bold text-gray-800">Earn 10 XP</p>
+                    <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
+                      <div className="bg-yellow-400 h-2 rounded-full" style={{width: '60%'}}></div>
+                    </div>
+                  </div>
+                  <div className="bg-amber-100 rounded-lg p-2">
+                    <span className="text-xs font-bold text-amber-700">6/10</span>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
