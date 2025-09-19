@@ -18,6 +18,16 @@ import {
   Zap,
   Heart,
   Gem,
+  Atom,
+  Calculator,
+  FlaskConical,
+  PenTool,
+  Globe,
+  Clock,
+  Church,
+  Building,
+  Microscope,
+  TestTube,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -69,6 +79,25 @@ const Dashboard = () => {
     "history": { bg: "bg-amber-400", light: "bg-amber-50", text: "text-amber-700" },
     "religious-studies": { bg: "bg-violet-400", light: "bg-violet-50", text: "text-violet-700" },
     "business-edexcel-igcse": { bg: "bg-teal-400", light: "bg-teal-50", text: "text-teal-700" },
+  };
+
+  // Subject icon mapping
+  const getSubjectIcon = (subjectId: string) => {
+    const iconMap: { [key: string]: any } = {
+      "physics": Atom,
+      "physics-edexcel": Atom,
+      "chemistry-edexcel": FlaskConical,
+      "mathematics": Calculator,
+      "maths-edexcel": Calculator,
+      "english-language": PenTool,
+      "english-literature": BookOpen,
+      "geography": Globe,
+      "geography-paper-2": Globe,
+      "history": Clock,
+      "religious-studies": Church,
+      "business-edexcel-igcse": Building,
+    };
+    return iconMap[subjectId] || BookOpen;
   };
 
   // Load user's selected subjects
@@ -230,7 +259,10 @@ const Dashboard = () => {
                 )}
                 {(isActive || isAvailable) && !isCompleted && (
                   <div className={`h-8 w-8 ${isActive ? 'text-white' : colors.text} absolute inset-0 m-auto`}>
-                    <BookOpen className="h-full w-full" />
+                    {(() => {
+                      const IconComponent = getSubjectIcon(subject.id);
+                      return <IconComponent className="h-full w-full" />;
+                    })()}
                   </div>
                 )}
               </motion.button>
@@ -375,7 +407,10 @@ const Dashboard = () => {
                                 </div>
 
                                 <div className={`w-20 h-20 ${colors.bg} rounded-full flex items-center justify-center ml-6`}>
-                                  <BookOpen className="h-10 w-10 text-white" />
+                                  {(() => {
+                                    const IconComponent = getSubjectIcon(subject.id);
+                                    return <IconComponent className="h-10 w-10 text-white" />;
+                                  })()}
                                 </div>
                               </div>
                             </CardContent>
