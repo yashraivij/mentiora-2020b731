@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
-import { Trophy, Crown, Star, BookOpen, Zap, Award } from 'lucide-react';
+import { Trophy, Crown, Star, Zap, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 // Import animal avatars
@@ -171,13 +171,9 @@ export function PublicStreakProfiles() {
             <h4 className="text-sm font-bold bg-gradient-to-r from-amber-700 via-yellow-700 to-orange-700 dark:from-amber-300 dark:via-yellow-300 dark:to-orange-300 bg-clip-text text-transparent">
               Weekly League
             </h4>
-            <div className="flex items-center space-x-2">
-              <div className="flex items-center space-x-1">
-                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-                <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">{profiles.length} Active</span>
-              </div>
-              <div className="w-1 h-1 bg-muted-foreground/30 rounded-full"></div>
-              <span className="text-xs text-muted-foreground">Top Student MP</span>
+            <div className="flex items-center space-x-1">
+              <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+              <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">{profiles.length} Active</span>
             </div>
           </div>
         </div>
