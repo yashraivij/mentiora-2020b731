@@ -492,18 +492,18 @@ const Dashboard = () => {
         >
           <motion.button
             onClick={() => navigate(`/predicted-exam/${subject.id}`)}
-            className="relative w-24 h-24 rounded-full border-4 border-yellow-400 shadow-2xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all duration-300 animate-pulse"
+            className="relative w-24 h-24 rounded-full border-4 border-primary shadow-xl bg-primary hover:bg-primary/90 transition-all duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="text-white font-black text-sm text-center leading-tight">
+            <span className="text-primary-foreground font-bold text-sm text-center leading-tight">
               2026<br/>EXAM
             </span>
           </motion.button>
           
           <div className="text-center mt-3">
-            <p className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Final Challenge
+            <p className="text-sm font-bold text-foreground">
+              Predicted Exam
             </p>
           </div>
         </motion.div>
