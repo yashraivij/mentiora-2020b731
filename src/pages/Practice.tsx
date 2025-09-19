@@ -603,12 +603,7 @@ const Practice = () => {
                 variant="outline" 
                 onClick={() => {
                   console.log('Back button clicked');
-                  if (window.history.length > 1) {
-                    window.history.back();
-                  } else {
-                    // Fallback to dashboard if no history
-                    window.location.href = '/dashboard';
-                  }
+                  navigate(`/dashboard?subject=${subjectId}`);
                 }}
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
