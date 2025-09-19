@@ -186,37 +186,31 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="absolute inset-0 bg-primary rounded-full blur-xl opacity-30 animate-pulse" />
-                <div className="relative bg-primary p-3 rounded-2xl shadow-lg">
-                  <Sparkles className="h-8 w-8 text-primary-foreground" />
+                <div className="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center shadow-lg">
+                  <Sparkles className="h-8 w-8 text-white" />
                 </div>
               </div>
               <div>
-                <DialogTitle className="text-4xl font-black">
-                  <div className="flex items-center gap-2">
-                    <span className="text-gradient-primary">
-                      Welcome to Mentiora!
-                    </span>
-                    <div>👋</div>
-                  </div>
+                <DialogTitle className="text-3xl font-bold text-gray-800">
+                  Welcome to Mentiora!
                 </DialogTitle>
-                <DialogDescription className="text-xl text-muted-foreground font-medium">
-                  Let's personalize your <span className="font-bold text-primary">premium</span> learning experience
+                <DialogDescription className="text-lg text-gray-600 font-medium">
+                  Let's personalize your learning experience
                 </DialogDescription>
               </div>
             </div>
             
-            {/* Enhanced progress indicator */}
+            {/* Progress indicator */}
             <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-muted-foreground">Step {currentStep} of 5</span>
+              <span className="text-sm font-medium text-gray-600">Step {currentStep} of 5</span>
               <div className="flex items-center gap-2">
                 {[1, 2, 3, 4, 5].map((step) => (
                   <div
                     key={step}
-                    className={`h-3 w-12 rounded-full transition-all duration-500 ${
+                    className={`h-2 w-8 rounded-full transition-all duration-500 ${
                       step <= currentStep 
-                        ? 'bg-primary shadow-lg' 
-                        : 'bg-muted/50'
+                        ? 'bg-gray-800' 
+                        : 'bg-gray-200'
                     }`}
                   />
                 ))}
@@ -239,16 +233,11 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 className="space-y-6"
               >
                 <div className="text-center space-y-4 mb-8">
-                  <div className="relative">
-                    <div className="flex items-center justify-center gap-3">
-                      <h3 className="text-3xl font-black text-gradient-primary">
-                        What exams are you taking?
-                      </h3>
-                      <div className="text-3xl">📚</div>
-                    </div>
-                  </div>
-                  <p className="text-lg text-muted-foreground font-medium">
-                    Select all the subjects you're studying - we'll add them to your dashboard instantly!
+                  <h3 className="text-2xl font-bold text-gray-800">
+                    What exams are you taking?
+                  </h3>
+                  <p className="text-gray-600">
+                    Select all the subjects you're studying - we'll add them to your dashboard
                   </p>
                 </div>
 
@@ -265,13 +254,13 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       <Card 
                         className={`cursor-pointer transition-all duration-300 relative overflow-hidden ${
                           selectedSubjects.includes(subject.id)
-                            ? 'ring-2 ring-primary bg-primary/10 shadow-lg'
-                            : 'hover:bg-accent/50 hover:shadow-md'
+                            ? 'ring-2 ring-gray-800 bg-gray-50 shadow-lg'
+                            : 'hover:bg-gray-50 hover:shadow-md border border-gray-200'
                         }`}
                         onClick={() => handleSubjectToggle(subject.id)}
                       >
                         {selectedSubjects.includes(subject.id) && (
-                          <div className="absolute inset-0 bg-primary/5 animate-pulse" />
+                          <div className="absolute inset-0 bg-gray-800/5" />
                         )}
                         
                         <CardContent className="p-5">
@@ -294,8 +283,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                                 variant="secondary" 
                                 className={`text-xs mt-1 ${
                                   selectedSubjects.includes(subject.id)
-                                    ? 'bg-primary text-primary-foreground'
-                                    : 'bg-secondary text-secondary-foreground'
+                                    ? 'bg-gray-800 text-white'
+                                    : 'bg-gray-100 text-gray-700'
                                 }`}
                                >
                                 {subject.examBoard}
@@ -308,19 +297,16 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   ))}
                 </div>
 
-                <div className="flex justify-between items-center pt-6 border-t border-border">
+                <div className="flex justify-between items-center pt-6 border-t border-gray-200">
                   <div>
-                    <div className="flex items-center justify-center gap-3">
-                      <p className="font-bold text-lg text-gradient-primary">
-                        {selectedSubjects.length} subject{selectedSubjects.length !== 1 ? 's' : ''} selected
-                      </p>
-                      <div className="text-lg">✨</div>
-                    </div>
+                    <p className="font-bold text-lg text-gray-800">
+                      {selectedSubjects.length} subject{selectedSubjects.length !== 1 ? 's' : ''} selected
+                    </p>
                   </div>
                   <Button 
                     onClick={handleNext} 
                     disabled={selectedSubjects.length === 0 || isLoading}
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-3 text-lg shadow-lg disabled:opacity-50"
+                    className="bg-gray-800 hover:bg-gray-900 text-white font-bold px-8 py-3 disabled:opacity-50"
                   >
                     {isLoading ? (
                       <>
@@ -329,7 +315,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       </>
                     ) : (
                       <>
-                        Let's Continue! 
+                        Continue
                         <ChevronRight className="h-4 w-4 ml-2" />
                       </>
                     )}
@@ -350,15 +336,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 className="space-y-6"
               >
                 <div className="text-center space-y-4 mb-8">
-                  <div className="relative">
-                    <div className="flex items-center justify-center gap-3">
-                      <h3 className="text-3xl font-black text-gradient-primary">
-                        What's your biggest struggle with revision?
-                      </h3>
-                      <div className="text-3xl">🤔</div>
-                    </div>
-                  </div>
-                  <p className="text-lg text-muted-foreground font-medium">
+                  <h3 className="text-2xl font-bold text-gray-800">
+                    What's your biggest struggle with revision?
+                  </h3>
+                  <p className="text-gray-600">
                     We'll personalize your experience based on your challenges
                   </p>
                 </div>
@@ -383,23 +364,23 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         <Card 
                           className={`cursor-pointer transition-all duration-300 relative overflow-hidden h-40 ${
                             revisionStruggles.includes(struggle.text)
-                              ? 'ring-2 ring-primary shadow-lg bg-primary/10'
-                              : 'hover:shadow-md hover:bg-accent/50'
+                              ? 'ring-2 ring-gray-800 shadow-lg bg-gray-50'
+                              : 'hover:shadow-md hover:bg-gray-50 border border-gray-200'
                           }`}
                           onClick={() => handleStruggleToggle(struggle.text)}
                         >
                           {revisionStruggles.includes(struggle.text) && (
-                            <div className="absolute inset-0 bg-primary/5 animate-pulse" />
+                            <div className="absolute inset-0 bg-gray-800/5" />
                           )}
                           
                           <CardContent className="p-6 text-center h-full flex flex-col justify-center items-center relative">
-                            <div className="p-3 rounded-full mb-4 bg-primary shadow-lg">
-                              <StruggleIcon className="h-8 w-8 text-primary-foreground" />
+                            <div className="p-3 rounded-full mb-4 bg-gray-800 shadow-lg">
+                              <StruggleIcon className="h-8 w-8 text-white" />
                             </div>
-                            <p className="font-bold text-lg">{struggle.text}</p>
+                            <p className="font-bold text-lg text-gray-800">{struggle.text}</p>
                             {revisionStruggles.includes(struggle.text) && (
                               <div className="absolute top-4 right-4">
-                                <Check className="h-5 w-5 text-primary" />
+                                <Check className="h-5 w-5 text-gray-800" />
                               </div>
                             )}
                           </CardContent>
@@ -416,13 +397,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   <Button 
                     onClick={handleNext} 
                     disabled={revisionStruggles.length === 0}
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-3 shadow-lg"
+                    className="bg-gray-800 hover:bg-gray-900 text-white font-bold px-8 py-3"
                   >
                   <div className="flex items-center gap-2">
-                    <span>Continue Journey</span>
-                    <div>✨</div>
+                    <span>Continue</span>
+                    <ChevronRight className="h-4 w-4" />
                   </div>
-                    <ChevronRight className="h-4 w-4 ml-2" />
                   </Button>
                 </div>
               </motion.div>
@@ -440,15 +420,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 className="space-y-6"
               >
                 <div className="text-center space-y-4 mb-8">
-                  <div className="relative">
-                    <div className="flex items-center justify-center gap-3">
-                      <h3 className="text-3xl font-black text-gradient-primary">
-                        How do you usually revise?
-                      </h3>
-                      <div className="text-3xl">📖</div>
-                    </div>
-                  </div>
-                  <p className="text-lg text-muted-foreground font-medium">
+                  <h3 className="text-2xl font-bold text-gray-800">
+                    How do you usually revise?
+                  </h3>
+                  <p className="text-gray-600">
                     We'll optimize your learning experience for your preferred methods
                   </p>
                 </div>
@@ -473,23 +448,23 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         <Card 
                           className={`cursor-pointer transition-all duration-300 relative overflow-hidden h-40 ${
                             revisionMethods.includes(method.text)
-                              ? 'ring-2 ring-primary shadow-lg bg-primary/10'
-                              : 'hover:shadow-md hover:bg-accent/50'
+                              ? 'ring-2 ring-gray-800 shadow-lg bg-gray-50'
+                              : 'hover:shadow-md hover:bg-gray-50 border border-gray-200'
                           }`}
                           onClick={() => handleMethodToggle(method.text)}
                         >
                           {revisionMethods.includes(method.text) && (
-                            <div className="absolute inset-0 bg-primary/5 animate-pulse" />
+                            <div className="absolute inset-0 bg-gray-800/5" />
                           )}
                           
                           <CardContent className="p-6 text-center h-full flex flex-col justify-center items-center relative">
-                            <div className="p-3 rounded-full mb-4 bg-primary shadow-lg">
-                              <MethodIcon className="h-8 w-8 text-primary-foreground" />
+                            <div className="p-3 rounded-full mb-4 bg-gray-800 shadow-lg">
+                              <MethodIcon className="h-8 w-8 text-white" />
                             </div>
-                            <p className="font-bold text-lg">{method.text}</p>
+                            <p className="font-bold text-lg text-gray-800">{method.text}</p>
                             {revisionMethods.includes(method.text) && (
                               <div className="absolute top-4 right-4">
-                                <Check className="h-5 w-5 text-primary" />
+                                <Check className="h-5 w-5 text-gray-800" />
                               </div>
                             )}
                           </CardContent>
@@ -506,13 +481,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   <Button 
                     onClick={handleNext} 
                     disabled={revisionMethods.length === 0}
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-3 shadow-lg"
+                    className="bg-gray-800 hover:bg-gray-900 text-white font-bold px-8 py-3"
                   >
                   <div className="flex items-center gap-2">
                     <span>Almost Done!</span>
-                    <div>🎯</div>
+                    <ChevronRight className="h-4 w-4" />
                   </div>
-                    <ChevronRight className="h-4 w-4 ml-2" />
                   </Button>
                 </div>
               </motion.div>
@@ -530,15 +504,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 className="space-y-8"
               >
                 <div className="text-center space-y-4 mb-8">
-                  <div className="relative">
-                    <div className="flex items-center justify-center gap-3">
-                      <h3 className="text-3xl font-black text-gradient-primary">
-                        Would you like us to share your progress?
-                      </h3>
-                      <div className="text-3xl">👨‍👩‍👧‍👦</div>
-                    </div>
-                  </div>
-                  <p className="text-lg text-muted-foreground font-medium">
+                  <h3 className="text-2xl font-bold text-gray-800">
+                    Would you like us to share your progress?
+                  </h3>
+                  <p className="text-gray-600">
                     Keep your parent/guardian informed about your academic journey (Optional)
                   </p>
                 </div>
@@ -546,29 +515,29 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 <div className="max-w-2xl mx-auto space-y-6">
                   <Card className={`cursor-pointer transition-all duration-300 ${
                     showParentProgress 
-                      ? 'ring-2 ring-primary bg-primary/10 shadow-lg' 
-                      : 'hover:shadow-md'
+                      ? 'ring-2 ring-gray-800 bg-gray-50 shadow-lg' 
+                      : 'hover:shadow-md border border-gray-200'
                   }`}
                   onClick={() => setShowParentProgress(!showParentProgress)}
                   >
                     <CardContent className="p-8 text-center">
                       <div className="flex items-center justify-center mb-4">
-                        <div className="bg-primary p-4 rounded-2xl shadow-lg mr-4">
-                          <Users className="h-10 w-10 text-primary-foreground" />
+                        <div className="bg-gray-800 p-4 rounded-2xl shadow-lg mr-4">
+                          <Users className="h-10 w-10 text-white" />
                         </div>
                         <div className="text-left">
-                          <h4 className="text-2xl font-bold">Share with Parent/Guardian</h4>
-                          <p className="text-muted-foreground">Keep them updated on your progress</p>
+                          <h4 className="text-2xl font-bold text-gray-800">Share with Parent/Guardian</h4>
+                          <p className="text-gray-600">Keep them updated on your progress</p>
                         </div>
                         <div className="ml-auto">
                           <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                            showParentProgress ? 'bg-primary border-primary' : 'border-muted-foreground'
+                            showParentProgress ? 'bg-gray-800 border-gray-800' : 'border-gray-400'
                           }`}>
-                            {showParentProgress && <Check className="h-4 w-4 text-primary-foreground" />}
+                            {showParentProgress && <Check className="h-4 w-4 text-white" />}
                           </div>
                         </div>
                       </div>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-sm text-gray-600">
                         We'll send them weekly progress reports including your study streaks, 
                         grade predictions, and achievements. You can change this anytime in settings.
                       </p>
@@ -582,13 +551,12 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   </Button>
                   <Button 
                     onClick={handleNext}
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-3 shadow-lg"
+                    className="bg-gray-800 hover:bg-gray-900 text-white font-bold px-8 py-3"
                   >
                   <div className="flex items-center gap-2">
                     <span>Final Step!</span>
-                    <div>🚀</div>
+                    <ChevronRight className="h-4 w-4" />
                   </div>
-                    <ChevronRight className="h-4 w-4 ml-2" />
                   </Button>
                 </div>
               </motion.div>
@@ -597,190 +565,19 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             {/* Step 5: Premium Upgrade - Ultra Premium Design */}
             {currentStep === 5 && (
               <div className="space-y-2 max-h-[calc(98vh-140px)] overflow-hidden">
-                {/* Animated Premium Header - Dynamic & Bigger */}
-                <div className="text-center space-y-2 relative overflow-hidden">
-                  {/* Floating background elements */}
-                  <div className="absolute inset-0 flex justify-center items-center opacity-10">
-                    <motion.div
-                      animate={{ 
-                        rotate: [0, 360],
-                        scale: [1, 1.2, 1]
-                      }}
-                      transition={{ 
-                        duration: 8, 
-                        repeat: Infinity,
-                        ease: "linear"
-                      }}
-                      className="w-32 h-32 bg-primary rounded-full blur-3xl"
-                    />
+                {/* Premium Header */}
+                <div className="text-center space-y-4 mb-8">
+                  <div className="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
+                    <Crown className="h-8 w-8 text-white" />
                   </div>
                   
-                  <motion.div
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={{ 
-                      scale: [0, 1.2, 1],
-                      rotate: [0, 360, 0] 
-                    }}
-                    transition={{ 
-                      duration: 1,
-                      type: "spring",
-                      bounce: 0.5
-                    }}
-                    className="relative inline-block z-10"
-                  >
-                    <div className="absolute inset-0 bg-primary rounded-2xl blur-xl opacity-75">
-                      <motion.div
-                        animate={{ scale: [1, 1.1, 1] }}
-                        transition={{ 
-                          duration: 2, 
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                        className="w-full h-full bg-primary rounded-2xl"
-                      />
-                    </div>
-                    <div className="relative bg-primary p-4 rounded-2xl shadow-2xl">
-                      <motion.div
-                        animate={{ 
-                          rotate: [0, -10, 10, 0],
-                          scale: [1, 1.1, 1]
-                        }}
-                        transition={{ 
-                          duration: 3, 
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      >
-                        <Crown className="h-10 w-10 text-primary-foreground drop-shadow-2xl" />
-                      </motion.div>
-                    </div>
-                  </motion.div>
+                  <h3 className="text-3xl font-bold text-gray-800">
+                    Unlock Your Academic Potential!
+                  </h3>
                   
-                   <motion.h3
-                     initial={{ opacity: 0, y: 30, scale: 0.8 }}
-                     animate={{ 
-                       opacity: 1, 
-                       y: 0, 
-                       scale: 1
-                     }}
-                     transition={{ 
-                       delay: 0.3,
-                       duration: 0.8,
-                       type: "spring"
-                     }}
-                     className="text-4xl font-black relative z-10 flex items-center justify-center gap-2"
-                   >
-                     <motion.span
-                       animate={{ 
-                         textShadow: [
-                           "0 0 0px rgba(255,255,255,0)",
-                           "0 0 20px rgba(255,255,255,0.5)",
-                           "0 0 0px rgba(255,255,255,0)"
-                         ]
-                       }}
-                       transition={{ 
-                         duration: 3, 
-                         repeat: Infinity,
-                         ease: "easeInOut"
-                       }}
-                       style={{ fontSize: '1em' }}
-                     >
-                       🚀
-                     </motion.span>
-                      <span className="text-gradient-primary">
-                        Unlock Your Academic Superpower!
-                      </span>
-                     <motion.span
-                       animate={{ 
-                         textShadow: [
-                           "0 0 0px rgba(255,255,255,0)",
-                           "0 0 20px rgba(255,255,255,0.5)",
-                           "0 0 0px rgba(255,255,255,0)"
-                         ]
-                       }}
-                       transition={{ 
-                         duration: 3, 
-                         repeat: Infinity,
-                         ease: "easeInOut"
-                       }}
-                       style={{ fontSize: '1em' }}
-                     >
-                       ✨
-                     </motion.span>
-                   </motion.h3>
-                  
-                  <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ 
-                      delay: 0.5,
-                      duration: 0.6
-                    }}
-                    className="text-xl font-bold relative z-10"
-                  >
-                    <motion.span
-                      animate={{ 
-                        color: ["#059669", "#0891b2", "#7c3aed", "#059669"]
-                      }}
-                      transition={{ 
-                        duration: 4, 
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                    >
-                      Join{" "}
-                       <motion.span 
-                         className="font-black text-primary"
-                         animate={{ scale: [1, 1.05, 1] }}
-                         transition={{ 
-                           duration: 2, 
-                           repeat: Infinity,
-                           ease: "easeInOut"
-                         }}
-                       >
-                         10,000+ students
-                       </motion.span>
-                       {" "}getting{" "}
-                       <motion.span 
-                         className="font-black text-primary"
-                         animate={{ scale: [1, 1.1, 1] }}
-                         transition={{ 
-                           duration: 1.5, 
-                           repeat: Infinity,
-                           ease: "easeInOut",
-                           delay: 0.5
-                         }}
-                       >
-                         2+ grades higher
-                       </motion.span>
-                    </motion.span>
-                  </motion.p>
-                  
-                  {/* Floating sparkles */}
-                     {[...Array(6)].map((_, i) => (
-                       <motion.div
-                         key={i}
-                         className="absolute"
-                         style={{
-                           left: `${20 + i * 12}%`,
-                           top: `${10 + (i % 2) * 60}%`,
-                           fontSize: '1.2em'
-                         }}
-                         animate={{
-                           y: [0, -20, 0],
-                           rotate: [0, 180, 360],
-                           scale: [0.5, 1, 0.5]
-                         }}
-                         transition={{
-                           duration: 3 + i * 0.5,
-                           repeat: Infinity,
-                           delay: i * 0.3,
-                           ease: "easeInOut"
-                         }}
-                       >
-                         ✨
-                       </motion.div>
-                     ))}
+                  <p className="text-lg text-gray-600">
+                    Join thousands of students achieving top grades
+                  </p>
                 </div>
 
                 {/* Revolutionary Comparison Cards - Larger */}
@@ -791,11 +588,11 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 }}
                   >
-                    <Card className="relative bg-muted border-2 border-muted-foreground opacity-75">
+                    <Card className="relative bg-white border border-gray-200 opacity-75">
                       <CardHeader className="pb-2">
-                        <CardTitle className="flex items-center gap-2 text-muted-foreground text-lg">
-                          <div className="bg-muted-foreground p-1.5 rounded">
-                            <Lock className="h-4 w-4 text-background" />
+                        <CardTitle className="flex items-center gap-2 text-gray-600 text-lg">
+                          <div className="bg-gray-500 p-1.5 rounded">
+                            <Lock className="h-4 w-4 text-white" />
                           </div>
                           <span className="font-bold">Free (Limited)</span>
                         </CardTitle>
@@ -809,15 +606,15 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                              { text: 'Basic progress tracking', limited: true }
                            ].map((feature, index) => (
                              <div key={index} className="flex items-center gap-2">
-                               <Shield className="h-4 w-4 text-destructive" />
-                               <span className="text-sm text-muted-foreground">
+                               <Shield className="h-4 w-4 text-red-500" />
+                               <span className="text-sm text-gray-600">
                                  {feature.text}
                                </span>
                              </div>
                            ))}
                         </div>
-                         <div className="pt-2 border-t border-muted">
-                           <div className="text-xl font-black text-muted-foreground">FREE</div>
+                         <div className="pt-2 border-t border-gray-200">
+                           <div className="text-xl font-black text-gray-600">FREE</div>
                          </div>
                       </CardContent>
                     </Card>
@@ -830,16 +627,16 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     transition={{ delay: 0.5, type: "spring" }}
                     className="relative"
                   >
-                     {/* Glowing border effect */}
-                     <div className="absolute inset-0 bg-primary rounded-xl blur-md opacity-75 animate-pulse" />
+                     {/* Highlighted border */}
+                     <div className="absolute inset-0 bg-gray-800 rounded-xl blur-sm opacity-20" />
                      
-                     <Card className="relative bg-card border-0 shadow-xl">
+                     <Card className="relative bg-white border-0 shadow-xl">
                       {/* Premium badges */}
                       <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-50">
                         <motion.div
                           animate={{ y: [0, -3, 0] }}
                           transition={{ repeat: Infinity, duration: 2 }}
-                          className="bg-primary text-primary-foreground px-4 py-1 rounded-full font-black text-sm shadow-xl border-2 border-background"
+                          className="bg-gray-800 text-white px-4 py-1 rounded-full font-black text-sm shadow-xl border-2 border-white"
                         >
                           🏆 MOST POPULAR
                         </motion.div>
@@ -849,7 +646,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         <motion.div
                           animate={{ rotate: [0, 10, 0] }}
                           transition={{ repeat: Infinity, duration: 3 }}
-                          className="bg-accent text-accent-foreground px-2 py-0.5 rounded-full text-xs font-bold"
+                          className="bg-green-500 text-white px-2 py-0.5 rounded-full text-xs font-bold"
                         >
                           92% SUCCESS
                         </motion.div>
@@ -857,11 +654,11 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       
                       <CardHeader className="pb-2 relative z-10 pt-5">
                         <CardTitle className="flex items-center gap-2">
-                          <div className="bg-primary p-2 rounded-lg shadow-lg">
-                            <Crown className="h-5 w-5 text-primary-foreground" />
+                          <div className="bg-gray-800 p-2 rounded-lg shadow-lg">
+                            <Crown className="h-5 w-5 text-white" />
                           </div>
-                          <span className="text-lg font-black text-gradient-primary">
-                            Premium Superpower
+                          <span className="text-lg font-black text-gray-800">
+                            Premium Features
                           </span>
                         </CardTitle>
                       </CardHeader>
@@ -882,25 +679,25 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                               transition={{ delay: 0.6 + (index * 0.05) }}
                               className="flex items-center gap-2"
                             >
-                               <div className="bg-accent rounded-full p-0.5">
-                                 <Check className="h-3 w-3 text-accent-foreground" />
+                               <div className="bg-green-500 rounded-full p-0.5">
+                                 <Check className="h-3 w-3 text-white" />
                                </div>
-                              <span className="text-sm font-semibold">{feature.text}</span>
+                              <span className="text-sm font-semibold text-gray-800">{feature.text}</span>
                             </motion.div>
                           ))}
                         </div>
                         
                         {/* Pricing with massive discount */}
-                         <div className="pt-2 border-t border-border space-y-1">
+                         <div className="pt-2 border-t border-gray-200 space-y-1">
                            <div className="flex items-center gap-2">
-                             <div className="text-xs text-muted-foreground line-through">£19.99/mo</div>
-                             <div className="bg-destructive text-destructive-foreground px-2 py-0.5 rounded-full text-xs font-bold">50% OFF!</div>
+                             <div className="text-xs text-gray-500 line-through">£19.99/mo</div>
+                             <div className="bg-red-500 text-white px-2 py-0.5 rounded-full text-xs font-bold">50% OFF!</div>
                            </div>
                            <div className="flex items-baseline gap-1">
-                             <div className="text-2xl font-black text-gradient-primary">£9.99</div>
-                             <div className="text-sm text-muted-foreground">/month</div>
+                             <div className="text-2xl font-black text-gray-800">£9.99</div>
+                             <div className="text-sm text-gray-600">/month</div>
                           </div>
-                          <div className="text-xs text-accent font-bold">⚡ LIMITED TIME ONLY</div>
+                          <div className="text-xs text-green-600 font-bold">⚡ LIMITED TIME ONLY</div>
                         </div>
                       </CardContent>
                     </Card>
@@ -915,16 +712,16 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   className="text-center space-y-3 pt-2"
                 >
                   {/* Social Proof */}
-                   <div className="bg-accent/10 rounded-lg p-2 border border-accent">
+                   <div className="bg-gray-50 rounded-lg p-2 border border-gray-200">
                      <div className="flex items-center justify-center gap-3 text-xs">
                        <div className="flex items-center gap-1">
-                         <Star className="h-3 w-3 text-primary fill-current" />
+                         <Star className="h-3 w-3 text-yellow-500 fill-current" />
                          <span className="font-bold">4.9/5</span>
                        </div>
                        <div className="flex items-center gap-1">
-                         <Trophy className="h-3 w-3 text-primary" />
+                         <Trophy className="h-3 w-3 text-orange-500" />
                          <span className="font-bold">92%</span>
-                         <span className="text-muted-foreground">grade improvement</span>
+                         <span className="text-gray-600">grade improvement</span>
                        </div>
                      </div>
                    </div>
@@ -936,26 +733,25 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   >
                      <Button 
                        onClick={handleUpgrade}
-                       className="relative bg-primary hover:bg-primary/90 text-primary-foreground font-black px-6 py-2.5 text-sm shadow-xl overflow-hidden group w-full max-w-md"
+                       className="relative bg-gray-800 hover:bg-gray-900 text-white font-black px-6 py-2.5 text-sm shadow-xl overflow-hidden group w-full max-w-md"
                      >
-                       <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-20 transition-opacity" />
-                       <div className="flex items-center justify-center gap-2 relative z-10">
-                         <Rocket className="h-4 w-4" />
-                         <span style={{ fontSize: '1em' }}>🚀</span>
-                         <span>Start Your Academic Transformation!</span>
-                         <Sparkles className="h-4 w-4" />
-                       </div>
+                       <div className="absolute inset-0 bg-gray-700 opacity-0 group-hover:opacity-20 transition-opacity" />
+                        <div className="flex items-center justify-center gap-2 relative z-10">
+                          <Rocket className="h-4 w-4" />
+                          <span>Start Your Academic Transformation!</span>
+                          <Sparkles className="h-4 w-4" />
+                        </div>
                     </Button>
                   </motion.div>
                   
                   {/* Guarantee & Benefits */}
-                   <p className="text-xs font-bold text-accent">
-                     <span style={{ fontSize: '1em' }}>✅</span> 30-day money-back guarantee • <span style={{ fontSize: '1em' }}>📱</span> Cancel anytime
+                   <p className="text-xs font-bold text-green-600">
+                     ✅ 30-day money-back guarantee • 📱 Cancel anytime
                    </p>
                 </motion.div>
                 
                 {/* Action Buttons - Fixed at bottom */}
-                 <div className="flex justify-between items-center pt-4 border-t border-border mt-4 bg-background">
+                 <div className="flex justify-between items-center pt-4 border-t border-gray-200 mt-4 bg-white">
                    <Button 
                      variant="outline" 
                      onClick={() => setCurrentStep(4)} 
@@ -963,16 +759,16 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                    >
                      ← Back
                    </Button>
-                    <Button 
-                      variant="outline" 
-                      onClick={() => {
-                        onSubjectsAdded(); // Call when user finishes onboarding
-                        onClose();
-                      }} 
-                      className="px-6 py-3 text-base font-semibold"
-                    >
-                      Continue with Free Version
-                    </Button>
+                   <Button 
+                     variant="outline" 
+                     onClick={() => {
+                       onSubjectsAdded(); // Call when user finishes onboarding
+                       onClose();
+                     }} 
+                     className="px-6 py-3 text-base font-semibold"
+                   >
+                     Continue with Free Version
+                   </Button>
                  </div>
               </div>
             )}
