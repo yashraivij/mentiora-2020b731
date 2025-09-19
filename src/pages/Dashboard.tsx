@@ -1480,10 +1480,13 @@ const Dashboard = () => {
               <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-blue-400 rounded-2xl flex items-center justify-center">
+                      <Zap className="w-6 h-6 text-white" />
+                    </div>
                     <div>
                       <h3 className="text-xl font-bold text-gray-800">Daily Goal</h3>
                       <p className="text-gray-600">
-                        50 MP goal — {Math.min(todayEarnedMP || 0, 50)}/50 completed
+                        50 MP goal — {todayEarnedMP || 0}/50 completed
                       </p>
                     </div>
                   </div>
