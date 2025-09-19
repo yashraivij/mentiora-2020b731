@@ -130,10 +130,6 @@ const Pricing = () => {
               </span>{" "}
               grades!
             </h1>
-            
-            <p className="text-xl text-white/80 max-w-2xl mx-auto">
-              Join thousands of students who've transformed their academic performance with Mentiora Premium
-            </p>
           </div>
         </motion.div>
 
@@ -144,36 +140,35 @@ const Pricing = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center mb-12"
         >
-          <Card className="max-w-md mx-auto bg-white/10 backdrop-blur-xl border-white/20">
+          <Card className="max-w-sm mx-auto bg-white border-0 shadow-xl">
             <CardContent className="p-8">
               <div className="mb-6">
-                <div className="inline-flex items-center gap-2 bg-green-400/20 rounded-full px-4 py-2 mb-4">
-                  <Star className="h-4 w-4 text-green-400" />
-                  <span className="text-green-400 font-semibold text-sm">Best Deal</span>
+                <div className="inline-flex items-center gap-2 bg-green-50 rounded-full px-3 py-1 mb-4">
+                  <Star className="h-3 w-3 text-green-600" />
+                  <span className="text-green-600 font-medium text-xs">Best Deal</span>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">
+                <h3 className="text-xl font-bold text-slate-900 mb-3">
                   Premium
                 </h3>
-                <div className="text-4xl font-bold text-white mb-2">
+                <div className="text-3xl font-bold text-slate-900 mb-1">
                   Free
-                  <span className="text-lg text-white/60 ml-2">for 14 days</span>
+                  <span className="text-sm text-slate-600 ml-2">for 14 days</span>
                 </div>
-                <p className="text-white/80 text-sm">
+                <p className="text-slate-600 text-sm">
                   Then £4.99/month. Cancel anytime.
                 </p>
               </div>
               
               <Button
                 onClick={handleStartTrial}
-                className="w-full bg-gradient-to-r from-green-400 to-emerald-400 hover:from-green-500 hover:to-emerald-500 text-white font-bold py-4 px-6 rounded-2xl text-lg shadow-2xl transform hover:scale-105 transition-all duration-300 mb-4"
+                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 mb-3"
               >
-                <Flame className="h-5 w-5 mr-2" />
                 TRY 2 WEEKS FREE
               </Button>
               
               <button
                 onClick={handleNoThanks}
-                className="text-white/60 hover:text-white font-medium text-sm transition-all duration-300 hover:underline underline-offset-4"
+                className="text-slate-500 hover:text-slate-700 font-medium text-sm transition-colors duration-200"
               >
                 Maybe later
               </button>
