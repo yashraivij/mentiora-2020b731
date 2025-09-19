@@ -338,7 +338,9 @@ const Pricing = () => {
           >
             <div>
               <h3 className="text-3xl font-bold text-white mb-6">
-                Smart revision notebook
+                <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  ✨ Smart revision notebook
+                </span>
               </h3>
               <p className="text-xl text-white/80 mb-6">
                 Never lose track of important topics again. Get personalized revision notes that adapt to your learning style and exam requirements.
