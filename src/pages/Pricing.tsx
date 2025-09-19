@@ -161,7 +161,7 @@ const Pricing = () => {
               
               <Button
                 onClick={handleStartTrial}
-                className="w-full bg-white/10 backdrop-blur-xl border-white/20 hover:bg-white/15 text-white font-semibold py-4 px-6 rounded-xl text-base transition-all duration-300 mb-3 border"
+                className="w-full bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-slate-900 font-semibold py-4 px-6 rounded-xl text-base transition-all duration-300 mb-3 border-0"
               >
                 Get Mentiora Premium
               </Button>
