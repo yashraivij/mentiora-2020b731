@@ -174,28 +174,28 @@ const SubjectTopics = () => {
         {/* Topic Learning Path */}
         <div className="bg-card rounded-lg p-6 mb-8">
           <h2 className="text-xl font-semibold mb-6 text-center">Learning Path</h2>
-          <div className="relative overflow-x-auto">
-            <div className="flex items-start pb-32" style={{ minWidth: `${(subject.topics.length + 1) * 200}px` }}>
+          <div className="relative overflow-x-auto min-h-[300px] bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-950/30 dark:to-purple-950/30 rounded-xl p-4">
+            <div className="relative h-[250px]" style={{ minWidth: `${(subject.topics.length + 1) * 220}px` }}>
               {/* SVG for curved connecting lines */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
                 {subject.topics.map((_, index) => {
                   if (index === subject.topics.length - 1) return null;
                   
-                  const startX = 200 * index + 150;
-                  const endX = 200 * (index + 1) + 50;
-                  const startY = index % 2 === 0 ? 60 : 140;
-                  const endY = (index + 1) % 2 === 0 ? 60 : 140;
+                  const startX = 220 * index + 110;
+                  const endX = 220 * (index + 1) + 110;
+                  const startY = index % 2 === 0 ? 80 : 160;
+                  const endY = (index + 1) % 2 === 0 ? 80 : 160;
                   const midX = (startX + endX) / 2;
                   
                   return (
                     <path
                       key={index}
-                      d={`M ${startX} ${startY} Q ${midX} ${startY > endY ? startY - 40 : startY + 40} ${endX} ${endY}`}
-                      stroke="currentColor"
-                      strokeWidth="3"
+                      d={`M ${startX} ${startY} Q ${midX} ${startY > endY ? startY - 50 : startY + 50} ${endX} ${endY}`}
+                      stroke="#3B82F6"
+                      strokeWidth="4"
                       fill="none"
-                      className="text-border"
-                      opacity="0.5"
+                      opacity="0.6"
+                      strokeDasharray="5,5"
                     />
                   );
                 })}
@@ -203,37 +203,40 @@ const SubjectTopics = () => {
                 {/* Line to final exam node */}
                 {subject.topics.length > 0 && (
                   <path
-                    d={`M ${200 * (subject.topics.length - 1) + 150} ${(subject.topics.length - 1) % 2 === 0 ? 60 : 140} Q ${200 * subject.topics.length + 50} 100 ${200 * subject.topics.length + 100} 100`}
-                    stroke="currentColor"
-                    strokeWidth="3"
+                    d={`M ${220 * (subject.topics.length - 1) + 110} ${(subject.topics.length - 1) % 2 === 0 ? 80 : 160} Q ${220 * subject.topics.length + 50} 120 ${220 * subject.topics.length + 110} 120`}
+                    stroke="url(#examGradient)"
+                    strokeWidth="5"
                     fill="none"
-                    className="text-purple-400"
-                    opacity="0.7"
+                    opacity="0.8"
                   />
                 )}
+                
+                {/* Gradient definition for exam line */}
+                <defs>
+                  <linearGradient id="examGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style={{ stopColor: "#9333EA", stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: "#EC4899", stopOpacity: 1 }} />
+                  </linearGradient>
+                </defs>
               </svg>
 
               {/* Topic nodes */}
               {subject.topics.map((topic, index) => {
                 const progress = getTopicProgress(topic.id);
-                const isNew = progress.attempts === 0;
+                const isNew = true; // All topics unlocked
                 const isMastered = progress.averageScore >= 85;
                 const needsWork = progress.attempts > 0 && progress.averageScore < 60;
                 
                 // Alternating high/low positions for swinging effect
                 const isHigh = index % 2 === 0;
-                const topPosition = isHigh ? 'top-4' : 'top-20';
+                const topPosition = isHigh ? 40 : 120; // Pixel values for better control
                 
                 return (
-                  <div key={topic.id} className={`absolute ${topPosition}`} style={{ left: `${200 * index + 50}px`, zIndex: 10 }}>
+                  <div key={topic.id} className="absolute" style={{ left: `${220 * index + 60}px`, top: `${topPosition}px`, zIndex: 10 }}>
                     <div className="flex flex-col items-center">
                       {/* Topic circle */}
                       <div 
-                        className={`w-16 h-16 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 hover:scale-110 shadow-lg border-4 border-white ${
-                          isMastered ? 'bg-green-500 hover:bg-green-600' :
-                          needsWork ? 'bg-orange-500 hover:bg-orange-600' :
-                          'bg-blue-500 hover:bg-blue-600'
-                        }`}
+                        className="w-20 h-20 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 hover:scale-110 shadow-xl border-4 border-white bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
                         onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
                       >
                         {index + 1}
@@ -289,14 +292,14 @@ const SubjectTopics = () => {
               })}
               
               {/* 2026 Exam Final Node */}
-              <div className="absolute top-12" style={{ left: `${200 * subject.topics.length + 50}px`, zIndex: 10 }}>
+              <div className="absolute" style={{ left: `${220 * subject.topics.length + 60}px`, top: '80px', zIndex: 10 }}>
                 <div className="flex flex-col items-center">
                   {/* Special exam circle */}
                   <div 
-                    className="w-20 h-20 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 hover:scale-110 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 border-4 border-yellow-400 shadow-xl animate-pulse"
+                    className="w-24 h-24 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 hover:scale-110 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 border-4 border-yellow-400 shadow-2xl animate-pulse"
                     onClick={() => navigate(`/predicted-exam/${subjectId}`)}
                   >
-                    <span className="text-xs text-center leading-tight">2026<br/>EXAM</span>
+                    <span className="text-sm text-center leading-tight font-black">2026<br/>EXAM</span>
                   </div>
                   
                   {/* Exam info */}
