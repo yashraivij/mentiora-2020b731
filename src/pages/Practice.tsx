@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, Trophy, Award, BookOpenCheck, Zap, Target, X, StickyNote, Star, BookOpen, MessageSquare } from "lucide-react";
+import { ArrowLeft, Trophy, Award, BookOpenCheck, Zap, Target, X, StickyNote, Star, BookOpen } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -751,7 +751,7 @@ const Practice = () => {
                           <div className="flex items-start justify-between">
                             <div className="flex-1">
                               <h4 className="font-medium text-blue-800 dark:text-blue-300 mb-2 flex items-center">
-                                <Zap className="h-4 w-4 mr-2 text-indigo-600" />
+                                <Zap className="h-4 w-4 mr-2 text-yellow-600" />
                                 Hint
                               </h4>
                               <p className="text-blue-700 dark:text-blue-200 text-sm leading-relaxed">
@@ -825,7 +825,7 @@ const Practice = () => {
                   {/* Smart Feedback */}
                   <div>
                     <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <MessageSquare className="h-4 w-4 mr-2 text-orange-600 dark:text-orange-400" />
+                      <BookOpen className="h-4 w-4 mr-2 text-blue-600 dark:text-blue-400" />
                       Teacher's Notes
                     </h4>
                     <div className="bg-yellow-50 dark:bg-yellow-950/20 p-4 rounded-lg border-l-4 border-yellow-500">
