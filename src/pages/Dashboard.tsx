@@ -609,40 +609,36 @@ const Dashboard = () => {
           {activeTab === "notes" && (
             <div>
               <div className="text-center mb-8">
-                <h2 className="text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">
+                <h2 className="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-4">
                   Instant Grade 9 notes for every lost mark
                 </h2>
               </div>
 
               {/* Filters */}
-              <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-lg border border-slate-200 dark:border-slate-700 mb-8">
-                <div className="flex items-center justify-end">
-                  <div className="flex items-center space-x-4">
-                    <Select value={selectedNotebookSubject} onValueChange={setSelectedNotebookSubject}>
-                      <SelectTrigger className="w-44 bg-white/50 dark:bg-slate-800/50 border-slate-300/50 dark:border-slate-600/50 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-200">
-                        <SelectValue placeholder="All Subjects" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-slate-200/50 dark:border-slate-700/50">
-                        <SelectItem value="all">All Subjects</SelectItem>
-                        {getNotebookSubjects().map(subject => (
-                          <SelectItem key={subject} value={subject}>{subject}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    
-                    <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
-                      <SelectTrigger className="w-44 bg-white/50 dark:bg-slate-800/50 border-slate-300/50 dark:border-slate-600/50 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-200">
-                        <SelectValue placeholder="All Confidence" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-slate-200/50 dark:border-slate-700/50">
-                        <SelectItem value="all">All Confidence</SelectItem>
-                        <SelectItem value="low">Low Confidence</SelectItem>
-                        <SelectItem value="medium">Medium Confidence</SelectItem>
-                        <SelectItem value="high">High Confidence</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
+              <div className="flex items-center justify-end space-x-4 mb-8">
+                <Select value={selectedNotebookSubject} onValueChange={setSelectedNotebookSubject}>
+                  <SelectTrigger className="w-44 bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-200">
+                    <SelectValue placeholder="All Subjects" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white dark:bg-slate-800 z-50">
+                    <SelectItem value="all">All Subjects</SelectItem>
+                    {getNotebookSubjects().map(subject => (
+                      <SelectItem key={subject} value={subject}>{subject}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                
+                <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
+                  <SelectTrigger className="w-44 bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-200">
+                    <SelectValue placeholder="All Confidence" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white dark:bg-slate-800 z-50">
+                    <SelectItem value="all">All Confidence</SelectItem>
+                    <SelectItem value="low">Low Confidence</SelectItem>
+                    <SelectItem value="medium">Medium Confidence</SelectItem>
+                    <SelectItem value="high">High Confidence</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               {/* Notebook Entries */}
