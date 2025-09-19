@@ -153,9 +153,9 @@ const Pricing = () => {
           <Card className="max-w-sm mx-auto bg-white/10 backdrop-blur-xl border-white/20 shadow-lg rounded-2xl">
             <CardContent className="p-8">
               <div className="mb-6">
-                <div className="inline-flex items-center gap-2 bg-green-400/20 backdrop-blur-sm rounded-full px-3 py-1 mb-4">
-                  <Star className="h-3 w-3 text-green-400" />
-                  <span className="text-green-400 font-medium text-xs">Best Deal</span>
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 backdrop-blur-sm rounded-full px-3 py-1 mb-4">
+                  <Star className="h-3 w-3 text-yellow-400" />
+                  <span className="text-yellow-400 font-medium text-xs">Best Deal</span>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4 font-sans">
                   Pay monthly
@@ -248,6 +248,82 @@ const Pricing = () => {
                           <span className="text-white/70">Current: {item.current}</span>
                           <TrendingUp className={`h-4 w-4 ${item.iconColor}`} />
                           <span className="text-green-400 font-bold">Pred: {item.predicted}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </motion.div>
+
+          {/* Predicted 2026 Questions Feature */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="grid lg:grid-cols-2 gap-12 items-center"
+          >
+            <div className="lg:order-2">
+              <h3 className="text-3xl font-bold text-white mb-6">
+                Get predicted 2026 exam questions
+              </h3>
+              <p className="text-xl text-white/80 mb-6">
+                Stay ahead of the curve with AI-generated questions that mirror the style and content of upcoming 2026 exams across all subjects.
+              </p>
+              <div className="space-y-4">
+                {[
+                  "AI-powered question predictions for 2026 exams",
+                  "Subject-specific content aligned with new curriculum",
+                  "Practice with the latest question formats",
+                  "Stay prepared for exam board changes"
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <div className="w-6 h-6 rounded-full bg-purple-400 flex items-center justify-center flex-shrink-0">
+                      <Check className="h-4 w-4 text-white" />
+                    </div>
+                    <span className="text-white/90">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="lg:order-1 relative">
+              <Card className="bg-white/10 backdrop-blur-xl border-white/20">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Zap className="h-5 w-5 text-purple-400" />
+                    Predicted 2026 Questions
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {[
+                      { 
+                        subject: "Mathematics", 
+                        questions: "45 new questions", 
+                        confidence: "92%",
+                        iconColor: "text-purple-400" 
+                      },
+                      { 
+                        subject: "Physics", 
+                        questions: "38 new questions", 
+                        confidence: "89%",
+                        iconColor: "text-blue-400" 
+                      },
+                      { 
+                        subject: "Chemistry", 
+                        questions: "42 new questions", 
+                        confidence: "94%",
+                        iconColor: "text-green-400" 
+                      }
+                    ].map((item, index) => (
+                      <div key={index} className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                        <span className="text-white font-medium">{item.subject}</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-white/70">{item.questions}</span>
+                          <Zap className={`h-4 w-4 ${item.iconColor}`} />
+                          <span className="text-purple-400 font-bold">{item.confidence}</span>
                         </div>
                       </div>
                     ))}
