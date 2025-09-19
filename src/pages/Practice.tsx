@@ -7,7 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
 import { ArrowLeft, Trophy, Award, BookOpenCheck, Zap, Target, X, StickyNote, Star, BookOpen } from "lucide-react";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -591,7 +591,6 @@ const Practice = () => {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <ThemeToggle />
               <span className="text-sm text-muted-foreground">
                 Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
               </span>

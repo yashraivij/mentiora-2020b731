@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Crown, Target, CheckCircle, XCircle, BookOpen, Clock, RotateCcw, Book, Lightbulb, HelpCircle, User, StickyNote, Brain } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
@@ -540,7 +540,6 @@ const PredictedResults = () => {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <ThemeToggle />
               <div className="text-right">
                 <div className="text-2xl font-bold text-foreground">
                   {achievedMarks}/{examTotalMarks}

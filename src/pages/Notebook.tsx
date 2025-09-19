@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BookOpen, Crown, Brain, TrendingUp, Star, Filter, Calendar, Unlock } from "lucide-react";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+
 import { supabase } from "@/integrations/supabase/client";
 import { NotebookEntry } from "@/components/notebook/NotebookEntry";
 import { toast } from "sonner";
@@ -183,7 +183,6 @@ const Notebook = () => {
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              <ThemeToggle />
             </div>
           </div>
         </div>
