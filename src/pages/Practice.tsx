@@ -751,7 +751,7 @@ const Practice = () => {
                           <div className="flex items-start justify-between">
                             <div className="flex-1">
                               <h4 className="font-medium text-blue-800 dark:text-blue-300 mb-2 flex items-center">
-                                <Zap className="h-4 w-4 mr-2 text-yellow-600" />
+                                <Zap className="h-4 w-4 mr-2 text-indigo-600" />
                                 Hint
                               </h4>
                               <p className="text-blue-700 dark:text-blue-200 text-sm leading-relaxed">
@@ -812,7 +812,7 @@ const Practice = () => {
                   {/* Why This Gets Marks */}
                   <div>
                     <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <Award className="h-4 w-4 mr-2 text-green-600" />
+                      <Award className="h-4 w-4 mr-2 text-blue-600" />
                       Why This Gets Full Marks
                     </h4>
                     <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500">
