@@ -609,13 +609,13 @@ const Dashboard = () => {
           {activeTab === "notes" && (
             <div>
               <div className="text-center mb-8">
-                <h2 className="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-4">
+                <h2 className="text-5xl font-extrabold bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 dark:from-purple-400 dark:via-blue-400 dark:to-indigo-400 bg-clip-text text-transparent mb-4 tracking-tight">
                   Instant Grade 9 notes for every lost mark
                 </h2>
               </div>
 
               {/* Filters */}
-              <div className="flex items-center justify-end space-x-4 mb-8">
+              <div className="flex items-center justify-center space-x-4 mb-8">
                 <Select value={selectedNotebookSubject} onValueChange={setSelectedNotebookSubject}>
                   <SelectTrigger className="w-44 bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-200">
                     <SelectValue placeholder="All Subjects" />
