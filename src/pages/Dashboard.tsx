@@ -1317,13 +1317,20 @@ const Dashboard = () => {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-gray-800">Daily Goal</h3>
-                      <p className="text-gray-600">60 MP goal — 40/60 completed</p>
+                      <p className="text-gray-600">
+                        50 MP goal — {Math.min(userGems || 0, 50)}/50 completed
+                      </p>
                     </div>
                   </div>
-                  <div className="text-2xl font-bold text-blue-500">67%</div>
+                  <div className="text-2xl font-bold text-blue-500">
+                    {Math.round(((userGems || 0) / 50) * 100)}%
+                  </div>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-4">
-                  <div className="bg-blue-400 h-4 rounded-full transition-all duration-500" style={{width: '67%'}}></div>
+                  <div 
+                    className="bg-blue-400 h-4 rounded-full transition-all duration-500" 
+                    style={{width: `${Math.min(((userGems || 0) / 50) * 100, 100)}%`}}
+                  ></div>
                 </div>
               </div>
 
