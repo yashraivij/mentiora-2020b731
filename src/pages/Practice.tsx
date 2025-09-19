@@ -431,19 +431,13 @@ const Practice = () => {
     // Handle MP rewards for practice completion server-side
     if (user?.id && subjectId && topicId) {
       try {
-        const { data } = await supabase.functions.invoke('award-mp', {
-          body: { 
-            action: 'practice_completion', 
-            userId: user.id, 
-            subjectId, 
-            topicId 
-          }
-        });
+        const { MPPointsSystemClient } = await import('@/lib/mpPointsSystemClient');
+        const result = await MPPointsSystemClient.awardPracticeCompletion(user.id, subjectId, topicId);
         
-        if (data?.awarded > 0) {
-          console.log(`Practice completion rewards: +${data.awarded} MP`);
-          if (data.breakdown) {
-            console.log('MP Breakdown:', data.breakdown);
+        if (result.awarded > 0) {
+          console.log(`Practice completion rewards: +${result.awarded} MP`);
+          if (result.breakdown) {
+            console.log('MP Breakdown:', result.breakdown);
           }
         }
       } catch (error) {

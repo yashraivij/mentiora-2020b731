@@ -112,12 +112,11 @@ const refreshSubscription = async (userId?: string) => {
             // Handle daily login MP reward server-side
             if (event === 'SIGNED_IN') {
               try {
-                const response = await supabase.functions.invoke('award-mp', {
-                  body: { action: 'daily_login', userId: session.user.id }
-                });
+                const { MPPointsSystemClient } = await import('@/lib/mpPointsSystemClient');
+                const result = await MPPointsSystemClient.awardDailyLogin(session.user.id);
                 
-                if (response.data?.awarded > 0) {
-                  console.log(`Daily login bonus: +${response.data.awarded} MP`);
+                if (result.awarded > 0) {
+                  console.log(`Daily login bonus: +${result.awarded} MP`);
                 }
               } catch (error) {
                 console.error('Error awarding daily login MP:', error);

@@ -351,8 +351,8 @@ const Dashboard = () => {
     if (!user?.id) return;
     
     try {
-      const { MPPointsSystem } = await import('@/lib/mpPointsSystem');
-      const stats = await MPPointsSystem.getUserStats(user.id);
+      const { MPPointsSystemClient } = await import('@/lib/mpPointsSystemClient');
+      const stats = await MPPointsSystemClient.getUserStats(user.id);
       setUserStats(stats);
       setUserGems(stats.totalPoints);
       setCurrentStreak(stats.currentStreak);
