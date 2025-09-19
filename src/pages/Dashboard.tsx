@@ -98,6 +98,7 @@ const Dashboard = () => {
   const [userSubjectsWithGrades, setUserSubjectsWithGrades] = useState<any[]>([]);
   const [predictedGrades, setPredictedGrades] = useState<any[]>([]);
   const [userStats, setUserStats] = useState<any>(null);
+  const [activeLeaderboardTab, setActiveLeaderboardTab] = useState<'weekly' | 'alltime'>('weekly');
 
   // Notebook state
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
@@ -1056,21 +1057,26 @@ const Dashboard = () => {
               <div className="flex justify-center mb-8">
                 <div className="bg-white rounded-2xl p-2 shadow-lg border-2 border-gray-100">
                   <div className="flex space-x-2">
-                    <Button className="bg-yellow-400 hover:bg-yellow-500 text-yellow-800 font-bold py-2 px-4 rounded-xl">
+                    <Button 
+                      className={activeLeaderboardTab === 'weekly' ? "bg-yellow-400 hover:bg-yellow-500 text-yellow-800 font-bold py-2 px-4 rounded-xl" : "text-gray-600 font-bold py-2 px-4 rounded-xl"}
+                      variant={activeLeaderboardTab === 'weekly' ? "default" : "ghost"}
+                      onClick={() => setActiveLeaderboardTab('weekly')}
+                    >
                       This Week
                     </Button>
-                    <Button variant="ghost" className="text-gray-600 font-bold py-2 px-4 rounded-xl">
+                    <Button 
+                      className={activeLeaderboardTab === 'alltime' ? "bg-yellow-400 hover:bg-yellow-500 text-yellow-800 font-bold py-2 px-4 rounded-xl" : "text-gray-600 font-bold py-2 px-4 rounded-xl"}
+                      variant={activeLeaderboardTab === 'alltime' ? "default" : "ghost"}
+                      onClick={() => setActiveLeaderboardTab('alltime')}
+                    >
                       All Time
-                    </Button>
-                    <Button variant="ghost" className="text-gray-600 font-bold py-2 px-4 rounded-xl">
-                      Friends
                     </Button>
                   </div>
                 </div>
               </div>
 
                {/* Stats Overview Cards */}
-               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                  <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100 text-center">
                    <div className="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
                      <Trophy className="w-6 h-6 text-yellow-800" />
@@ -1078,7 +1084,7 @@ const Dashboard = () => {
                    <div className="text-2xl font-bold text-gray-800">
                      #{(() => {
                         // Calculate user's rank from leaderboard
-                        const players = [
+                        const weeklyPlayers = [
                           { name: "Alex Chen", mp: 1847, grade: 8.6, streak: 14, isCurrentUser: false },
                           { name: "Emma Wilson", mp: 1653, grade: 8.2, streak: 12, isCurrentUser: false },
                           { name: "Liam Parker", mp: 1512, grade: 7.9, streak: 9, isCurrentUser: false },
@@ -1088,6 +1094,26 @@ const Dashboard = () => {
                           { name: "Maya Patel", mp: 987, grade: 6.5, streak: 4, isCurrentUser: false },
                           { name: "Oliver Brown", mp: 876, grade: 6.2, streak: 3, isCurrentUser: false },
                         ];
+
+                        const allTimePlayers = [
+                          { name: "Marcus Thompson", mp: 15847, grade: 9.0, streak: 127, isCurrentUser: false },
+                          { name: "Sarah Chen", mp: 14653, grade: 8.9, streak: 98, isCurrentUser: false },
+                          { name: "David Rodriguez", mp: 13512, grade: 8.7, streak: 85, isCurrentUser: false },
+                          { name: "Emily Zhang", mp: 12344, grade: 8.5, streak: 72, isCurrentUser: false },
+                          { name: "Alex Chen", mp: 11847, grade: 8.6, streak: 65, isCurrentUser: false },
+                          { name: "Emma Wilson", mp: 10653, grade: 8.2, streak: 58, isCurrentUser: false },
+                          { name: "Liam Parker", mp: 9512, grade: 7.9, streak: 45, isCurrentUser: false },
+                          { name: "Sophia Lee", mp: 8344, grade: 7.5, streak: 38, isCurrentUser: false },
+                          { name: "You", mp: userGems, grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0, streak: currentStreak, isCurrentUser: true },
+                          { name: "James Smith", mp: 7098, grade: 6.8, streak: 32, isCurrentUser: false },
+                          { name: "Maya Patel", mp: 6987, grade: 6.5, streak: 28, isCurrentUser: false },
+                          { name: "Oliver Brown", mp: 6876, grade: 6.2, streak: 25, isCurrentUser: false },
+                          { name: "Isabella Garcia", mp: 6543, grade: 7.1, streak: 22, isCurrentUser: false },
+                          { name: "Noah Johnson", mp: 6321, grade: 6.9, streak: 19, isCurrentUser: false },
+                          { name: "Ava Williams", mp: 6198, grade: 6.7, streak: 16, isCurrentUser: false },
+                        ];
+
+                        const players = activeLeaderboardTab === 'weekly' ? weeklyPlayers : allTimePlayers;
 
                         const maxMP = Math.max(...players.map(p => p.mp));
                         const maxGrade = 9.0;
@@ -1119,13 +1145,6 @@ const Dashboard = () => {
                    <div className="text-sm text-gray-600">Total MP</div>
                  </div>
                  <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100 text-center">
-                   <div className="w-12 h-12 bg-green-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
-                     <BookOpen className="w-6 h-6 text-white" />
-                   </div>
-                   <div className="text-2xl font-bold text-gray-800">{userProgress.filter(p => p.averageScore >= 85).length}</div>
-                   <div className="text-sm text-gray-600">Topics Done</div>
-                 </div>
-                 <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100 text-center">
                    <div className="w-12 h-12 bg-orange-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
                      <TrendingUp className="w-6 h-6 text-white" />
                    </div>
@@ -1142,7 +1161,9 @@ const Dashboard = () => {
               {/* Main Leaderboard */}
               <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-100 overflow-hidden">
                 <div className="bg-gradient-to-r from-yellow-400 to-orange-400 px-6 py-4">
-                  <h3 className="text-xl font-bold text-white">Weekly League</h3>
+                  <h3 className="text-xl font-bold text-white">
+                    {activeLeaderboardTab === 'weekly' ? 'Weekly League' : 'All Time League'}
+                  </h3>
                 </div>
                 
                 <div className="p-6">
@@ -1155,20 +1176,40 @@ const Dashboard = () => {
                     <div>Streak</div>
                   </div>
 
-                  {/* Leaderboard Entries */}
-                  <div className="space-y-2">
-                    {(() => {
-                      // Define players with raw stats
-                      const players = [
-                        { name: "Alex Chen", mp: 1847, grade: 8.6, streak: 14, isCurrentUser: false },
-                        { name: "Emma Wilson", mp: 1653, grade: 8.2, streak: 12, isCurrentUser: false },
-                        { name: "Liam Parker", mp: 1512, grade: 7.9, streak: 9, isCurrentUser: false },
-                        { name: "Sophia Lee", mp: 1344, grade: 7.5, streak: 8, isCurrentUser: false },
-                        { name: "You", mp: userGems, grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0, streak: currentStreak, isCurrentUser: true },
-                        { name: "James Smith", mp: 1098, grade: 6.8, streak: 5, isCurrentUser: false },
-                        { name: "Maya Patel", mp: 987, grade: 6.5, streak: 4, isCurrentUser: false },
-                        { name: "Oliver Brown", mp: 876, grade: 6.2, streak: 3, isCurrentUser: false },
-                      ];
+                   {/* Leaderboard Entries */}
+                   <div className="space-y-2">
+                     {(() => {
+                       // Define players with raw stats
+                       const weeklyPlayers = [
+                         { name: "Alex Chen", mp: 1847, grade: 8.6, streak: 14, isCurrentUser: false },
+                         { name: "Emma Wilson", mp: 1653, grade: 8.2, streak: 12, isCurrentUser: false },
+                         { name: "Liam Parker", mp: 1512, grade: 7.9, streak: 9, isCurrentUser: false },
+                         { name: "Sophia Lee", mp: 1344, grade: 7.5, streak: 8, isCurrentUser: false },
+                         { name: "You", mp: userGems, grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0, streak: currentStreak, isCurrentUser: true },
+                         { name: "James Smith", mp: 1098, grade: 6.8, streak: 5, isCurrentUser: false },
+                         { name: "Maya Patel", mp: 987, grade: 6.5, streak: 4, isCurrentUser: false },
+                         { name: "Oliver Brown", mp: 876, grade: 6.2, streak: 3, isCurrentUser: false },
+                       ];
+
+                       const allTimePlayers = [
+                         { name: "Marcus Thompson", mp: 15847, grade: 9.0, streak: 127, isCurrentUser: false },
+                         { name: "Sarah Chen", mp: 14653, grade: 8.9, streak: 98, isCurrentUser: false },
+                         { name: "David Rodriguez", mp: 13512, grade: 8.7, streak: 85, isCurrentUser: false },
+                         { name: "Emily Zhang", mp: 12344, grade: 8.5, streak: 72, isCurrentUser: false },
+                         { name: "Alex Chen", mp: 11847, grade: 8.6, streak: 65, isCurrentUser: false },
+                         { name: "Emma Wilson", mp: 10653, grade: 8.2, streak: 58, isCurrentUser: false },
+                         { name: "Liam Parker", mp: 9512, grade: 7.9, streak: 45, isCurrentUser: false },
+                         { name: "Sophia Lee", mp: 8344, grade: 7.5, streak: 38, isCurrentUser: false },
+                         { name: "You", mp: userGems, grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0, streak: currentStreak, isCurrentUser: true },
+                         { name: "James Smith", mp: 7098, grade: 6.8, streak: 32, isCurrentUser: false },
+                         { name: "Maya Patel", mp: 6987, grade: 6.5, streak: 28, isCurrentUser: false },
+                         { name: "Oliver Brown", mp: 6876, grade: 6.2, streak: 25, isCurrentUser: false },
+                         { name: "Isabella Garcia", mp: 6543, grade: 7.1, streak: 22, isCurrentUser: false },
+                         { name: "Noah Johnson", mp: 6321, grade: 6.9, streak: 19, isCurrentUser: false },
+                         { name: "Ava Williams", mp: 6198, grade: 6.7, streak: 16, isCurrentUser: false },
+                       ];
+
+                       const players = activeLeaderboardTab === 'weekly' ? weeklyPlayers : allTimePlayers;
 
                       // Calculate composite scores and rank players
                       const maxMP = Math.max(...players.map(p => p.mp));
