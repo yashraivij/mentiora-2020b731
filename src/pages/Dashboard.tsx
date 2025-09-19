@@ -928,7 +928,185 @@ const Dashboard = () => {
             </div>
           )}
 
-          {activeTab !== "learn" && activeTab !== "notes" && activeTab !== "progress" && activeTab !== "profile" && activeTab !== "quests" && (
+          {activeTab === "leaderboards" && (
+            <div className="space-y-6">
+              {/* Header */}
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-800 mb-2">Leaderboards</h2>
+                <p className="text-lg text-gray-600">See how you rank against other students</p>
+              </div>
+
+              {/* Leaderboard Tabs */}
+              <div className="flex justify-center mb-8">
+                <div className="bg-white rounded-2xl p-2 shadow-lg border-2 border-gray-100">
+                  <div className="flex space-x-2">
+                    <Button className="bg-yellow-400 hover:bg-yellow-500 text-yellow-800 font-bold py-2 px-4 rounded-xl">
+                      This Week
+                    </Button>
+                    <Button variant="ghost" className="text-gray-600 font-bold py-2 px-4 rounded-xl">
+                      All Time
+                    </Button>
+                    <Button variant="ghost" className="text-gray-600 font-bold py-2 px-4 rounded-xl">
+                      Friends
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Stats Overview Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100 text-center">
+                  <div className="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                    <Trophy className="w-6 h-6 text-yellow-800" />
+                  </div>
+                  <div className="text-2xl font-bold text-gray-800">#5</div>
+                  <div className="text-sm text-gray-600">Your Rank</div>
+                </div>
+                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100 text-center">
+                  <div className="w-12 h-12 bg-cyan-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                    <Gem className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-2xl font-bold text-gray-800">{userGems}</div>
+                  <div className="text-sm text-gray-600">Total XP</div>
+                </div>
+                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100 text-center">
+                  <div className="w-12 h-12 bg-green-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                    <BookOpen className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-2xl font-bold text-gray-800">24</div>
+                  <div className="text-sm text-gray-600">Topics Done</div>
+                </div>
+                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100 text-center">
+                  <div className="w-12 h-12 bg-orange-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                    <TrendingUp className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-2xl font-bold text-gray-800">7.2</div>
+                  <div className="text-sm text-gray-600">Avg Grade</div>
+                </div>
+              </div>
+
+              {/* Main Leaderboard */}
+              <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-100 overflow-hidden">
+                <div className="bg-gradient-to-r from-yellow-400 to-orange-400 px-6 py-4">
+                  <h3 className="text-xl font-bold text-white">Weekly League</h3>
+                </div>
+                
+                <div className="p-6">
+                  {/* Column Headers */}
+                  <div className="grid grid-cols-6 gap-4 text-sm font-bold text-gray-600 uppercase tracking-wide mb-4 px-4">
+                    <div>Rank</div>
+                    <div>Student</div>
+                    <div>XP</div>
+                    <div>Topics</div>
+                    <div>Avg Grade</div>
+                    <div>Streak</div>
+                  </div>
+
+                  {/* Leaderboard Entries */}
+                  <div className="space-y-2">
+                    {[
+                      { rank: 1, name: "Alex Chen", xp: 1847, topics: 42, grade: 8.6, streak: 14, isCurrentUser: false },
+                      { rank: 2, name: "Emma Wilson", xp: 1653, topics: 38, grade: 8.2, streak: 12, isCurrentUser: false },
+                      { rank: 3, name: "Liam Parker", xp: 1512, topics: 35, grade: 7.9, streak: 9, isCurrentUser: false },
+                      { rank: 4, name: "Sophia Lee", xp: 1344, topics: 31, grade: 7.5, streak: 8, isCurrentUser: false },
+                      { rank: 5, name: "You", xp: userGems, topics: 24, grade: 7.2, streak: currentStreak, isCurrentUser: true },
+                      { rank: 6, name: "James Smith", xp: 1098, topics: 22, grade: 6.8, streak: 5, isCurrentUser: false },
+                      { rank: 7, name: "Maya Patel", xp: 987, topics: 19, grade: 6.5, streak: 4, isCurrentUser: false },
+                      { rank: 8, name: "Oliver Brown", xp: 876, topics: 17, grade: 6.2, streak: 3, isCurrentUser: false },
+                    ].map((player, index) => {
+                      const getRankIcon = (rank: number) => {
+                        if (rank === 1) return "🥇";
+                        if (rank === 2) return "🥈";
+                        if (rank === 3) return "🥉";
+                        return null;
+                      };
+
+                      const getGradeColor = (grade: number) => {
+                        if (grade >= 8) return "text-green-600 bg-green-50";
+                        if (grade >= 7) return "text-blue-600 bg-blue-50";
+                        if (grade >= 6) return "text-orange-600 bg-orange-50";
+                        return "text-red-600 bg-red-50";
+                      };
+
+                      return (
+                        <motion.div
+                          key={player.rank}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                          className={`grid grid-cols-6 gap-4 items-center p-4 rounded-xl hover:bg-gray-50 transition-colors ${
+                            player.isCurrentUser ? 'bg-blue-50 border-2 border-blue-200' : 'bg-gray-25'
+                          }`}
+                        >
+                          {/* Rank */}
+                          <div className="flex items-center space-x-2">
+                            <span className="text-2xl">{getRankIcon(player.rank)}</span>
+                            <span className={`text-lg font-bold ${player.isCurrentUser ? 'text-blue-600' : 'text-gray-700'}`}>
+                              #{player.rank}
+                            </span>
+                          </div>
+
+                          {/* Student Name */}
+                          <div className={`font-bold ${player.isCurrentUser ? 'text-blue-800' : 'text-gray-800'}`}>
+                            {player.name}
+                            {player.isCurrentUser && (
+                              <Badge className="ml-2 bg-blue-500 hover:bg-blue-600 text-white text-xs">You</Badge>
+                            )}
+                          </div>
+
+                          {/* XP */}
+                          <div className="flex items-center space-x-1">
+                            <Gem className="w-4 h-4 text-cyan-400" />
+                            <span className="font-bold text-gray-800">{player.xp.toLocaleString()}</span>
+                          </div>
+
+                          {/* Topics */}
+                          <div className="flex items-center space-x-1">
+                            <BookOpen className="w-4 h-4 text-green-400" />
+                            <span className="font-bold text-gray-800">{player.topics}</span>
+                          </div>
+
+                          {/* Average Grade */}
+                          <div>
+                            <span className={`px-3 py-1 rounded-full text-sm font-bold ${getGradeColor(player.grade)}`}>
+                              {player.grade}
+                            </span>
+                          </div>
+
+                          {/* Streak */}
+                          <div className="flex items-center space-x-1">
+                            <Flame className="w-4 h-4 text-orange-400" />
+                            <span className="font-bold text-gray-800">{player.streak}</span>
+                          </div>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* League Information */}
+              <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                <div className="flex items-center space-x-4 mb-4">
+                  <div className="w-12 h-12 bg-purple-400 rounded-2xl flex items-center justify-center">
+                    <Crown className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800">Bronze League</h3>
+                    <p className="text-gray-600">Top 3 advance to Silver League</p>
+                  </div>
+                </div>
+                <div className="bg-gray-100 rounded-full h-3 mb-2">
+                  <div className="bg-gradient-to-r from-purple-400 to-purple-500 h-3 rounded-full" style={{width: '60%'}}></div>
+                </div>
+                <p className="text-sm text-gray-600">
+                  Earn more XP to climb the rankings! Complete topics and maintain your streak to move up.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {activeTab !== "learn" && activeTab !== "notes" && activeTab !== "progress" && activeTab !== "profile" && activeTab !== "quests" && activeTab !== "leaderboards" && (
             <div className="text-center py-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-6 capitalize">
                 {activeTab}
