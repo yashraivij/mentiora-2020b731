@@ -45,6 +45,11 @@ const App: React.FC = () => (
                 <Dashboard />
               </ProtectedRoute>
             } />
+            <Route path="/subject/:subjectId" element={
+              <ProtectedRoute>
+                <SubjectTopics />
+              </ProtectedRoute>
+            } />
             <Route path="/practice/:subjectId/:topicId" element={
               <ProtectedRoute>
                 <Practice />
