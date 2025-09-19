@@ -1676,25 +1676,25 @@ const Dashboard = () => {
               </div>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
-                  <div className={`w-8 h-8 ${userStats?.loginToday ? 'bg-green-100' : 'bg-yellow-300'} rounded-lg flex items-center justify-center`}>
-                    {userStats?.loginToday ? (
+                  <div className={`w-8 h-8 ${userStats?.practiceToday ? 'bg-green-100' : 'bg-blue-400'} rounded-lg flex items-center justify-center`}>
+                    {userStats?.practiceToday ? (
                       <Check className="h-4 w-4 text-green-600" />
                     ) : (
-                      <Zap className="h-4 w-4 text-yellow-700" />
+                      <BookOpen className="h-4 w-4 text-white" />
                     )}
                   </div>
                   <div className="flex-1">
-                    <p className="font-bold text-gray-800">Log in today</p>
+                    <p className="font-bold text-gray-800">Complete 1 practice set</p>
                     <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
                       <div 
-                        className={`${userStats?.loginToday ? 'bg-green-400' : 'bg-yellow-300'} h-2 rounded-full`} 
-                        style={{width: userStats?.loginToday ? '100%' : '0%'}}
+                        className={`${userStats?.practiceToday ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full`} 
+                        style={{width: userStats?.practiceToday ? '100%' : '0%'}}
                       ></div>
                     </div>
                   </div>
-                  <div className={`${userStats?.loginToday ? 'bg-green-50' : 'bg-amber-50'} rounded-lg p-2`}>
-                    <span className={`text-xs font-bold ${userStats?.loginToday ? 'text-green-600' : 'text-amber-600'}`}>
-                      {userStats?.loginToday ? '+10 MP' : '10 MP'}
+                  <div className={`${userStats?.practiceToday ? 'bg-green-50' : 'bg-blue-50'} rounded-lg p-2`}>
+                    <span className={`text-xs font-bold ${userStats?.practiceToday ? 'text-green-600' : 'text-blue-600'}`}>
+                      {userStats?.practiceToday ? '+40 MP' : '40 MP'}
                     </span>
                   </div>
                 </div>
