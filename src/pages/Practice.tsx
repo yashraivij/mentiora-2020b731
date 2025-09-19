@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb, HelpCircle, X, StickyNote, User } from "lucide-react";
+import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb, HelpCircle, X, StickyNote, User, GraduationCap, Trophy, MessageSquare } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -775,29 +775,34 @@ const Practice = () => {
 
             {/* Feedback Panel */}
             {showFeedback && currentAttempt && (
-              <Card className="bg-card/80 backdrop-blur-sm border border-border">
+              <Card className="bg-gradient-to-br from-white/90 to-slate-50/90 backdrop-blur-xl border border-slate-200/50 shadow-2xl">
                 <CardHeader>
                   <CardTitle className="flex items-center text-foreground">
-                    <User className="h-5 w-5 mr-2 text-primary" />
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center mr-3">
+                      <User className="h-4 w-4 text-white" />
+                    </div>
                     Your Feedback
                   </CardTitle>
                   <div className="flex items-center space-x-2">
-                    <span className="text-2xl font-bold text-primary">
+                    <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                       {currentAttempt.score}/{currentQuestion.marks}
                     </span>
                     <span className="text-sm text-muted-foreground">marks</span>
-                    <Badge className={currentAttempt.score >= currentQuestion.marks * 0.85 ? "bg-green-500" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "bg-yellow-500" : "bg-red-500"}>
+                    <Badge className={`${currentAttempt.score >= currentQuestion.marks * 0.85 ? "bg-gradient-to-r from-green-500 to-emerald-500" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "bg-gradient-to-r from-yellow-500 to-orange-500" : "bg-gradient-to-r from-red-500 to-rose-500"} text-white border-0`}>
                       {currentAttempt.score >= currentQuestion.marks * 0.85 ? "Excellent" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "Good" : "Needs Work"}
                     </Badge>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-6">
+                  {/* Model Answer */}
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <Book className="h-4 w-4 mr-2 text-primary" />
+                    <h4 className="font-semibold text-foreground mb-3 flex items-center">
+                      <div className="w-6 h-6 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center mr-2">
+                        <GraduationCap className="h-3 w-3 text-white" />
+                      </div>
                       Model Answer
                     </h4>
-                    <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
+                    <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-4 rounded-xl border border-indigo-200/50 shadow-lg">
                       <div className="text-foreground space-y-2">
                         {currentAttempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).map((sentence, index) => (
                           <p key={index} className="leading-relaxed">{sentence.trim()}{index < currentAttempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).length - 1 ? '.' : ''}</p>
@@ -808,11 +813,13 @@ const Practice = () => {
 
                   {/* Why This Gets Marks */}
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
+                    <h4 className="font-semibold text-foreground mb-3 flex items-center">
+                      <div className="w-6 h-6 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center mr-2">
+                        <Trophy className="h-3 w-3 text-white" />
+                      </div>
                       Why This Gets Full Marks
                     </h4>
-                    <div className="bg-green-500/5 p-4 rounded-lg border border-green-500/20">
+                    <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-xl border border-green-200/50 shadow-lg">
                       <pre className="text-foreground whitespace-pre-wrap font-sans">
                         {currentAttempt.feedback.whyThisGetsMark}
                       </pre>
@@ -821,11 +828,13 @@ const Practice = () => {
 
                   {/* Smart Feedback */}
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <StickyNote className="h-4 w-4 mr-2 text-amber-600" />
+                    <h4 className="font-semibold text-foreground mb-3 flex items-center">
+                      <div className="w-6 h-6 rounded-lg bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center mr-2">
+                        <MessageSquare className="h-3 w-3 text-white" />
+                      </div>
                       Teacher's Notes
                     </h4>
-                    <div className="bg-amber-500/5 p-4 rounded-lg border border-amber-500/20">
+                    <div className="bg-gradient-to-r from-orange-50 to-red-50 p-4 rounded-xl border border-orange-200/50 shadow-lg">
                       <p className="text-foreground">{currentAttempt.feedback.whyYoursDidnt}</p>
                     </div>
                   </div>
