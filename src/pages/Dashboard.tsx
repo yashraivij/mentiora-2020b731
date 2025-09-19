@@ -151,6 +151,35 @@ const Dashboard = () => {
     return iconMap[subjectId] || BookOpen;
   };
 
+  // Map database subject_id to curriculum subject_id for consistent icons
+  const mapDatabaseSubjectToCurriculum = (dbSubjectId: string) => {
+    const subjectMapping: { [key: string]: string } = {
+      "Mathematics": "maths-edexcel",
+      "maths": "maths-edexcel", 
+      "mathematics": "maths-edexcel",
+      "Physics": "physics",
+      "physics": "physics",
+      "Chemistry": "chemistry-edexcel",
+      "chemistry": "chemistry-edexcel",
+      "Biology": "biology-edexcel", 
+      "biology": "biology-edexcel",
+      "English Language": "english-language",
+      "english-language": "english-language",
+      "English Literature": "english-literature", 
+      "english-literature": "english-literature",
+      "Geography": "geography",
+      "geography": "geography",
+      "History": "history",
+      "history": "history",
+      "Religious Studies": "religious-studies",
+      "religious-studies": "religious-studies",
+      "Business Studies": "business-edexcel-igcse",
+      "business": "business-edexcel-igcse",
+    };
+    
+    return subjectMapping[dbSubjectId] || dbSubjectId;
+  };
+
   // Load user's selected subjects
   const loadUserSubjects = async () => {
     if (!user?.id) return;
@@ -221,6 +250,9 @@ const Dashboard = () => {
         return acc;
       }, {});
 
+      console.log('Predicted grades from DB:', Object.values(latestGrades || {}));
+      console.log('User subjects from curriculum:', userSubjects);
+      
       setPredictedGrades(Object.values(latestGrades || {}));
     } catch (error) {
       console.error('Error loading predicted grades:', error);
@@ -774,11 +806,14 @@ const Dashboard = () => {
                   {/* Subject Cards */}
                   <div className="space-y-4">
                     {predictedGrades.map((prediction, index) => {
-                      // Find the matching curriculum subject to ensure consistent icon mapping
-                      const curriculumSubject = curriculum.find(s => s.id === prediction.subject_id);
-                      const subjectKey = curriculumSubject?.id || prediction.subject_id;
+                      // Map database subject_id to curriculum subject_id for consistent icons and colors
+                      const mappedSubjectId = mapDatabaseSubjectToCurriculum(prediction.subject_id);
+                      const curriculumSubject = curriculum.find(s => s.id === mappedSubjectId);
+                      const subjectKey = mappedSubjectId;
                       const colors = subjectColors[subjectKey] || subjectColors["physics"];
                       const subjectName = curriculumSubject?.name || prediction.subject_id;
+                      
+                      console.log('DB subject_id:', prediction.subject_id, 'Mapped to:', mappedSubjectId, 'Found curriculum:', !!curriculumSubject);
                       
                       const getGradeColor = (grade: string) => {
                         const gradeNum = parseInt(grade || '0');
@@ -816,7 +851,7 @@ const Dashboard = () => {
                           <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-200 border-2 border-gray-100">
                             <div className="flex items-center justify-between">
                               <div className="flex items-center space-x-4 flex-1">
-                                {/* Subject Icon - Using same logic as learn section */}
+                                {/* Subject Icon - Using mapped subject ID for consistency */}
                                 <div className={`w-14 h-14 ${colors.bg} rounded-2xl flex items-center justify-center shadow-md`}>
                                   {(() => {
                                     const IconComponent = getSubjectIcon(subjectKey);
