@@ -379,6 +379,15 @@ const Dashboard = () => {
     }
   }, [searchParams]);
 
+  // Handle URL parameters for subject selection
+  useEffect(() => {
+    const subjectParam = searchParams.get('subject');
+    if (subjectParam) {
+      setSelectedSubject(subjectParam);
+      window.scrollTo(0, 0);
+    }
+  }, [searchParams]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (user?.id) {

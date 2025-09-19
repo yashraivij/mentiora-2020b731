@@ -543,7 +543,7 @@ const Practice = () => {
             </div>
             
             <div className="flex flex-col space-y-2">
-              <Button onClick={() => navigate(`/subject/${subjectId}`)}>
+              <Button onClick={() => navigate(`/dashboard?subject=${subjectId}`)}>
                 Back to {subject?.name}
               </Button>
               <Button 
