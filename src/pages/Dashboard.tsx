@@ -661,7 +661,7 @@ const Dashboard = () => {
               {!selectedSubject ? (
                 <div>
                   <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-                    Choose your GCSE subject
+                    Let's Smash GCSEs, {getFirstName()}!
                   </h2>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
