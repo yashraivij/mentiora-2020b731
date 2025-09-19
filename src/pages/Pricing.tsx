@@ -190,10 +190,10 @@ const Pricing = () => {
           >
             <div>
               <h3 className="text-3xl font-bold text-white mb-6">
-                Get accurate grade predictions with AI
+                Get accurate grade predictions
               </h3>
               <p className="text-xl text-white/80 mb-6">
-                Know exactly where you stand and what you need to improve with our advanced AI analytics that track your progress across all subjects.
+                Know exactly where you stand and what you need to improve with our advanced analytics that track your progress across all subjects.
               </p>
               <div className="space-y-4">
                 {[
