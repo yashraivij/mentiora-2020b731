@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_notifications: {
+        Row: {
+          created_at: string
+          data: Json | null
+          id: string
+          message: string
+          read: boolean
+          title: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          data?: Json | null
+          id?: string
+          message: string
+          read?: boolean
+          title: string
+          type?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          data?: Json | null
+          id?: string
+          message?: string
+          read?: boolean
+          title?: string
+          type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       chat_conversations: {
         Row: {
           created_at: string | null
@@ -794,6 +827,45 @@ export type Database = {
         }
         Relationships: []
       }
+      reward_redemptions: {
+        Row: {
+          created_at: string
+          fulfilled: boolean
+          fulfilled_at: string | null
+          id: string
+          mp_cost: number
+          redeemed_at: string
+          reward_description: string
+          reward_title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          fulfilled?: boolean
+          fulfilled_at?: string | null
+          id?: string
+          mp_cost: number
+          redeemed_at?: string
+          reward_description: string
+          reward_title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          fulfilled?: boolean
+          fulfilled_at?: string | null
+          id?: string
+          mp_cost?: number
+          redeemed_at?: string
+          reward_description?: string
+          reward_title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       session_analytics: {
         Row: {
           avg_response_time: number | null
@@ -1097,6 +1169,30 @@ export type Database = {
           start_date?: string
           target_value?: number
           updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_points: {
+        Row: {
+          created_at: string
+          id: string
+          total_points: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          total_points?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          total_points?: number
+          updated_at?: string
           user_id?: string
         }
         Relationships: []
