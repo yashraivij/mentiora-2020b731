@@ -514,7 +514,7 @@ const Dashboard = () => {
               
               <div className="text-center mt-3">
                 <p className="text-sm font-bold text-foreground">
-                  Paper 1
+                  Predicted 2026 Exam Paper 1
                 </p>
               </div>
             </motion.div>
@@ -538,7 +538,7 @@ const Dashboard = () => {
               
               <div className="text-center mt-3">
                 <p className="text-sm font-bold text-foreground">
-                  Paper 2
+                  Predicted 2026 Exam Paper 2
                 </p>
               </div>
             </motion.div>
