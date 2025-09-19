@@ -336,7 +336,7 @@ const Pricing = () => {
             </div>
           </motion.div>
 
-          {/* Unlimited Practice Feature */}
+          {/* Smart Revision Notebook Feature */}
           <motion.div 
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -345,20 +345,20 @@ const Pricing = () => {
           >
             <div>
               <h3 className="text-3xl font-bold text-white mb-6">
-                Practice without limits
+                Smart revision notebook
               </h3>
               <p className="text-xl text-white/80 mb-6">
-                No more hearts, no more waiting. Practice as much as you want, whenever you want. The only limit is your ambition.
+                Never lose track of important topics again. Get personalized revision notes that adapt to your learning style and exam requirements.
               </p>
               <div className="space-y-4">
                 {[
-                  "Unlimited practice sessions across all subjects",
-                  "No daily limits or cooldown periods",
-                  "Access to premium question banks",
-                  "Instant feedback and explanations"
+                  "Auto-generated notes from your practice sessions",
+                  "Key concepts organized by subject and topic",
+                  "Personalized weak areas highlighted",
+                  "Export notes as PDFs for offline study"
                 ].map((item, index) => (
                   <div key={index} className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full bg-pink-400 flex items-center justify-center flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-indigo-400 flex items-center justify-center flex-shrink-0">
                       <Check className="h-4 w-4 text-white" />
                     </div>
                     <span className="text-white/90">{item}</span>
@@ -369,17 +369,32 @@ const Pricing = () => {
             
             <div className="relative">
               <Card className="bg-white/10 backdrop-blur-xl border-white/20">
-                <CardContent className="p-6 text-center">
-                  <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-pink-400 to-rose-400 flex items-center justify-center">
-                    <Heart className="h-10 w-10 text-white" />
+                <CardContent className="p-6">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-indigo-400 to-purple-400 flex items-center justify-center">
+                    <BookOpen className="h-8 w-8 text-white" />
                   </div>
-                  <h4 className="text-2xl font-bold text-white mb-2">Unlimited Hearts</h4>
-                  <p className="text-white/70 mb-4">Practice as much as you want!</p>
-                  <div className="flex justify-center gap-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Heart key={i} className="h-6 w-6 text-pink-400 fill-current" />
-                    ))}
-                    <span className="text-white/90 ml-2">∞</span>
+                  <h4 className="text-xl font-bold text-white mb-4 text-center">Revision Notebook</h4>
+                  
+                  <div className="space-y-3 mb-4">
+                    <div className="bg-white/5 rounded-lg p-3">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                        <span className="text-white font-medium text-sm">Mathematics</span>
+                      </div>
+                      <p className="text-white/70 text-xs">Quadratic equations: Remember to check discriminant...</p>
+                    </div>
+                    
+                    <div className="bg-white/5 rounded-lg p-3">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-3 h-3 rounded-full bg-blue-400"></div>
+                        <span className="text-white font-medium text-sm">Physics</span>
+                      </div>
+                      <p className="text-white/70 text-xs">Newton's laws: Force = mass × acceleration...</p>
+                    </div>
+                  </div>
+                  
+                  <div className="text-center">
+                    <span className="text-indigo-400 text-sm font-medium">Auto-updated daily</span>
                   </div>
                 </CardContent>
               </Card>
