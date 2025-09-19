@@ -4023,12 +4023,12 @@ Write a story about a moment of fear.
       };
 
     } catch (error) {
-      console.error('Error calling Smart marking function:', error);
+      console.error('Error calling Smart Marking function:', error);
       
       // Fallback to basic marking
       return {
         marksAwarded: answer.trim() ? Math.round(question.marks * 0.5) : 0,
-        feedback: "Smart marking temporarily unavailable. Answer has been given partial credit.",
+        feedback: "Smart Marking temporarily unavailable. Answer has been given partial credit.",
         assessment: "Needs Review"
       };
     }
