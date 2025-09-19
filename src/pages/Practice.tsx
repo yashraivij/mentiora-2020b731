@@ -792,13 +792,12 @@ const Practice = () => {
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  {/* Model Answer */}
                   <div>
                     <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <Book className="h-4 w-4 mr-2" />
+                      <Book className="h-4 w-4 mr-2 text-primary" />
                       Model Answer
                     </h4>
-                    <div className="bg-card p-4 rounded-lg border border-border">
+                    <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
                       <div className="text-foreground space-y-2">
                         {currentAttempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).map((sentence, index) => (
                           <p key={index} className="leading-relaxed">{sentence.trim()}{index < currentAttempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).length - 1 ? '.' : ''}</p>
@@ -810,10 +809,10 @@ const Practice = () => {
                   {/* Why This Gets Marks */}
                   <div>
                     <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <CheckCircle className="h-4 w-4 mr-2" />
+                      <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
                       Why This Gets Full Marks
                     </h4>
-                    <div className="bg-card p-4 rounded-lg border border-border">
+                    <div className="bg-green-500/5 p-4 rounded-lg border border-green-500/20">
                       <pre className="text-foreground whitespace-pre-wrap font-sans">
                         {currentAttempt.feedback.whyThisGetsMark}
                       </pre>
@@ -823,10 +822,10 @@ const Practice = () => {
                   {/* Smart Feedback */}
                   <div>
                     <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <StickyNote className="h-4 w-4 mr-2" />
+                      <StickyNote className="h-4 w-4 mr-2 text-amber-600" />
                       Teacher's Notes
                     </h4>
-                    <div className="bg-card p-4 rounded-lg border border-border">
+                    <div className="bg-amber-500/5 p-4 rounded-lg border border-amber-500/20">
                       <p className="text-foreground">{currentAttempt.feedback.whyYoursDidnt}</p>
                     </div>
                   </div>
