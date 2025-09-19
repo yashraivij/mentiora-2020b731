@@ -1466,7 +1466,7 @@ const Dashboard = () => {
                   {/* MP Balance */}
                   <div className="flex items-center space-x-2 bg-white rounded-2xl px-6 py-3 shadow-lg border-2 border-gray-100">
                     <Gem className="h-6 w-6 text-cyan-400" />
-                    <span className="text-xl font-bold text-gray-800">{userGems} MP</span>
+                    <span className="text-xl font-bold text-gray-800" data-mp-counter>{userGems} MP</span>
                   </div>
                   {/* Streak Chip */}
                   <div className="flex items-center space-x-2 bg-white rounded-2xl px-6 py-3 shadow-lg border-2 border-gray-100">
@@ -1490,7 +1490,7 @@ const Dashboard = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="text-2xl font-bold text-blue-500">
+                  <div className="text-2xl font-bold text-blue-500" data-mp-counter>
                     {Math.round((todayEarnedMP / 50) * 100)}%
                   </div>
                 </div>

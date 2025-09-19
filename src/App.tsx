@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { MPRewardsProvider } from "@/hooks/useMPRewards";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -34,69 +35,71 @@ const App: React.FC = () => (
         <Toaster />
         <Sonner />
         <AuthProvider>
-          <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/dashboard" element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="/subject/:subjectId" element={
-              <ProtectedRoute>
-                <SubjectTopics />
-              </ProtectedRoute>
-            } />
-            <Route path="/practice/:subjectId/:topicId" element={
-              <ProtectedRoute>
-                <Practice />
-              </ProtectedRoute>
-            } />
-            <Route path="/analytics" element={
-              <ProtectedRoute>
-                <Analytics />
-              </ProtectedRoute>
-            } />
-            <Route path="/predicted-questions" element={
-              <ProtectedRoute>
-                <PredictedQuestions />
-              </ProtectedRoute>
-            } />
-            <Route path="/predicted-exam/:subjectId" element={
-              <ProtectedRoute>
-                <PredictedExam />
-              </ProtectedRoute>
-            } />
-            <Route path="/predicted-results/:subjectId" element={
-              <ProtectedRoute>
-                <PredictedResults />
-              </ProtectedRoute>
-            } />
-            <Route path="/notebook" element={
-              <ProtectedRoute>
-                <Notebook />
-              </ProtectedRoute>
-            } />
-            <Route path="/payment-success" element={<PaymentSuccess />} />
-            <Route path="/pricing" element={
-              <ProtectedRoute>
-                <Pricing />
-              </ProtectedRoute>
-            } />
-            <Route path="/settings" element={
-              <ProtectedRoute>
-                <Settings />
-              </ProtectedRoute>
-            } />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
-    </TooltipProvider>
-  </ThemeProvider>
+          <MPRewardsProvider>
+            <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/dashboard" element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/subject/:subjectId" element={
+                <ProtectedRoute>
+                  <SubjectTopics />
+                </ProtectedRoute>
+              } />
+              <Route path="/practice/:subjectId/:topicId" element={
+                <ProtectedRoute>
+                  <Practice />
+                </ProtectedRoute>
+              } />
+              <Route path="/analytics" element={
+                <ProtectedRoute>
+                  <Analytics />
+                </ProtectedRoute>
+              } />
+              <Route path="/predicted-questions" element={
+                <ProtectedRoute>
+                  <PredictedQuestions />
+                </ProtectedRoute>
+              } />
+              <Route path="/predicted-exam/:subjectId" element={
+                <ProtectedRoute>
+                  <PredictedExam />
+                </ProtectedRoute>
+              } />
+              <Route path="/predicted-results/:subjectId" element={
+                <ProtectedRoute>
+                  <PredictedResults />
+                </ProtectedRoute>
+              } />
+              <Route path="/notebook" element={
+                <ProtectedRoute>
+                  <Notebook />
+                </ProtectedRoute>
+              } />
+              <Route path="/payment-success" element={<PaymentSuccess />} />
+              <Route path="/pricing" element={
+                <ProtectedRoute>
+                  <Pricing />
+                </ProtectedRoute>
+              } />
+              <Route path="/settings" element={
+                <ProtectedRoute>
+                  <Settings />
+                </ProtectedRoute>
+              } />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+          </MPRewardsProvider>
+        </AuthProvider>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 

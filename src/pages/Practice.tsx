@@ -15,6 +15,7 @@ import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
 import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
 import { playCelebratorySound } from "@/lib/celebratory-sound";
+import { useMPRewards } from "@/hooks/useMPRewards";
 
 interface QuestionAttempt {
   questionId: string;
@@ -75,6 +76,8 @@ const Practice = () => {
     hideNotification,
     clearNotification
   } = usePersonalizedNotifications();
+
+  const { showMPReward } = useMPRewards();
 
   const subject = curriculum.find(s => s.id === subjectId);
   const topic = subject?.topics.find(t => t.id === topicId);
@@ -436,8 +439,23 @@ const Practice = () => {
         
         if (result.awarded > 0) {
           console.log(`Practice completion rewards: +${result.awarded} MP`);
+          
+          // Show toast for practice completion
+          showMPReward(40, "Practice complete");
+          
           if (result.breakdown) {
             console.log('MP Breakdown:', result.breakdown);
+            
+            // Show additional toasts for weekly bonuses
+            if (result.breakdown.weeklyTopicsBonus) {
+              setTimeout(() => showMPReward(100, "Weekly bonus"), 500);
+            }
+            if (result.breakdown.weeklyPracticeBonus) {
+              setTimeout(() => showMPReward(250, "Weekly challenge"), 1000);
+            }
+            if (result.breakdown.streakBonus) {
+              setTimeout(() => showMPReward(500, "Streak achieved"), 1500);
+            }
           }
         }
       } catch (error) {
