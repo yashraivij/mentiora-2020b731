@@ -757,7 +757,7 @@ const Dashboard = () => {
                         </div>
                         <div>
                           <h3 className="text-2xl font-bold text-gray-800">
-                            Your average grade is {(predictedGrades.reduce((sum, grade) => sum + parseInt(grade.grade), 0) / predictedGrades.length).toFixed(0)}. Keep it up!
+                            Your average grade is {predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + parseInt(grade.grade || '0'), 0) / predictedGrades.length) : 0}. Keep it up!
                           </h3>
                           <p className="text-gray-600">You're making great progress</p>
                         </div>
@@ -773,13 +773,16 @@ const Dashboard = () => {
 
                   {/* Subject Cards */}
                   <div className="space-y-4">
-                    {predictedGrades.map((prediction, index) => {
+                    {userSubjects
+                      .map(subjectId => predictedGrades.find(grade => grade.subject_id === subjectId))
+                      .filter(Boolean)
+                      .map((prediction, index) => {
                       const subjectKey = prediction.subject_id;
                       const colors = subjectColors[subjectKey] || subjectColors["physics"];
                       const subjectName = curriculum.find(s => s.id === subjectKey)?.name || prediction.subject_id;
                       
                       const getGradeColor = (grade: string) => {
-                        const gradeNum = parseInt(grade);
+                        const gradeNum = parseInt(grade || '0');
                         if (gradeNum >= 7) return "text-green-600";
                         if (gradeNum >= 5) return "text-blue-600";
                         if (gradeNum >= 4) return "text-orange-600";
@@ -787,7 +790,7 @@ const Dashboard = () => {
                       };
 
                       const getProgressColor = (grade: string) => {
-                        const gradeNum = parseInt(grade);
+                        const gradeNum = parseInt(grade || '0');
                         if (gradeNum >= 7) return "bg-green-400";
                         if (gradeNum >= 5) return "bg-blue-400";
                         if (gradeNum >= 4) return "bg-orange-400";
@@ -795,7 +798,7 @@ const Dashboard = () => {
                       };
 
                       const getStatusChip = (grade: string, percentage: number) => {
-                        const gradeNum = parseInt(grade);
+                        const gradeNum = parseInt(grade || '0');
                         if (gradeNum >= 7 && percentage >= 80) return { text: "On track", color: "bg-green-100 text-green-700" };
                         if (gradeNum >= 5 && percentage >= 70) return { text: "Improving", color: "bg-blue-100 text-blue-700" };
                         if (gradeNum >= 4) return { text: "Needs work", color: "bg-orange-100 text-orange-700" };
@@ -837,12 +840,12 @@ const Dashboard = () => {
                                   <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
                                     <div
                                       className={`h-3 rounded-full ${getProgressColor(prediction.grade)} transition-all duration-700`}
-                                      style={{ width: `${prediction.percentage}%` }}
+                                      style={{ width: `${Math.min(prediction.percentage || 0, 100)}%` }}
                                     />
                                   </div>
                                   
                                   <p className="text-sm text-gray-600">
-                                    {prediction.percentage.toFixed(0)}% accuracy in practice
+                                    {Math.round(prediction.percentage || 0)}% accuracy in practice
                                   </p>
                                 </div>
                               </div>
@@ -850,7 +853,7 @@ const Dashboard = () => {
                               {/* Large Grade Display */}
                               <div className="text-center ml-6">
                                 <div className={`text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1`}>
-                                  {prediction.grade}
+                                  {prediction.grade || '0'}
                                 </div>
                                 <div className="text-sm text-gray-500 uppercase tracking-wide font-medium">
                                   Predicted
