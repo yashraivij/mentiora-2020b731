@@ -90,6 +90,7 @@ const Dashboard = () => {
   const [userXP, setUserXP] = useState(1122);
   const [userHearts, setUserHearts] = useState(5);
   const [userGems, setUserGems] = useState(850);
+  const [userSubjectsWithGrades, setUserSubjectsWithGrades] = useState<any[]>([]);
 
   // Notebook state
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
@@ -156,7 +157,7 @@ const Dashboard = () => {
     try {
       const { data, error } = await supabase
         .from("user_subjects")
-        .select("subject_name, exam_board")
+        .select("subject_name, exam_board, predicted_grade, target_grade")
         .eq("user_id", user.id);
 
       if (error) {
@@ -165,6 +166,9 @@ const Dashboard = () => {
       }
 
       if (data) {
+        // Store full subject data for progress tab
+        setUserSubjectsWithGrades(data);
+        
         const subjectIds = data
           .map((record) => {
             const examBoard = record.exam_board.toLowerCase();
@@ -677,7 +681,119 @@ const Dashboard = () => {
             </div>
           )}
 
-          {activeTab !== "learn" && activeTab !== "notes" && (
+          {/* Progress tab */}
+          {activeTab === "progress" && (
+            <div>
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+                  Your Predicted Grades
+                </h2>
+              </div>
+
+              {userSubjectsWithGrades.length === 0 ? (
+                <div className="text-center py-16">
+                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
+                    <TrendingUp className="h-12 w-12 text-gray-400" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                    No subjects found
+                  </h3>
+                  <p className="text-lg text-gray-600 mb-8">
+                    Add subjects to see your predicted grades
+                  </p>
+                  <Button
+                    onClick={() => navigate("/")}
+                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-2xl text-lg"
+                  >
+                    Browse Subjects
+                  </Button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {userSubjectsWithGrades.map((subject, index) => {
+                    const subjectKey = subject.subject_name.toLowerCase().replace(/\s+/g, '-');
+                    const colors = subjectColors[subjectKey] || subjectColors["physics"];
+                    
+                    const getGradeColor = (grade: string) => {
+                      const gradeNum = parseInt(grade);
+                      if (gradeNum >= 7) return "text-green-600 bg-green-50";
+                      if (gradeNum >= 5) return "text-yellow-600 bg-yellow-50";
+                      if (gradeNum >= 4) return "text-orange-600 bg-orange-50";
+                      return "text-red-600 bg-red-50";
+                    };
+
+                    return (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                          <CardContent className="p-6">
+                            <div className="flex items-center space-x-3 mb-4">
+                              <div className={`w-12 h-12 ${colors.bg} rounded-xl flex items-center justify-center`}>
+                                {(() => {
+                                  const IconComponent = getSubjectIcon(subjectKey);
+                                  return <IconComponent className="h-6 w-6 text-white" />;
+                                })()}
+                              </div>
+                              <div className="flex-1">
+                                <h3 className="text-lg font-bold text-gray-800">
+                                  {subject.subject_name}
+                                </h3>
+                                <p className="text-sm text-gray-500">
+                                  {subject.exam_board.toUpperCase()}
+                                </p>
+                              </div>
+                            </div>
+                            
+                            <div className="space-y-3">
+                              <div className="flex items-center justify-between">
+                                <span className="text-sm font-medium text-gray-600">Predicted Grade</span>
+                                <div className={`px-3 py-1 rounded-full text-sm font-bold ${getGradeColor(subject.predicted_grade)}`}>
+                                  Grade {subject.predicted_grade}
+                                </div>
+                              </div>
+                              
+                              {subject.target_grade && (
+                                <div className="flex items-center justify-between">
+                                  <span className="text-sm font-medium text-gray-600">Target Grade</span>
+                                  <div className="px-3 py-1 rounded-full text-sm font-bold bg-gray-100 text-gray-700">
+                                    Grade {subject.target_grade}
+                                  </div>
+                                </div>
+                              )}
+                              
+                              {subject.target_grade && subject.predicted_grade && (
+                                <div className="mt-4 pt-3 border-t border-gray-100">
+                                  {parseInt(subject.predicted_grade) >= parseInt(subject.target_grade) ? (
+                                    <div className="flex items-center space-x-2 text-green-600">
+                                      <Check className="h-4 w-4" />
+                                      <span className="text-sm font-medium">On track for target!</span>
+                                    </div>
+                                  ) : (
+                                    <div className="flex items-center space-x-2 text-amber-600">
+                                      <TrendingUp className="h-4 w-4" />
+                                      <span className="text-sm font-medium">
+                                        {parseInt(subject.target_grade) - parseInt(subject.predicted_grade)} grade{parseInt(subject.target_grade) - parseInt(subject.predicted_grade) > 1 ? 's' : ''} to go
+                                      </span>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeTab !== "learn" && activeTab !== "notes" && activeTab !== "progress" && (
             <div className="text-center py-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-6 capitalize">
                 {activeTab}
