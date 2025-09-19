@@ -171,150 +171,151 @@ const SubjectTopics = () => {
           </Card>
         </div>
 
-        {/* Topic Path */}
-        <div className="relative overflow-x-auto pb-8">
-          <div className="flex items-center space-x-8 min-w-fit px-4">
-            {/* Topic nodes */}
-            {subject.topics.map((topic, index) => {
-              const progress = getTopicProgress(topic.id);
-              const isNew = progress.attempts === 0;
-              const isMastered = progress.averageScore >= 85;
-              const needsWork = progress.attempts > 0 && progress.averageScore < 60;
-              const topicYear = subjectId === 'physics' ? getPhysicsTopicYear(topic.name) : null;
-              const mathsYears = subjectId === 'maths' ? getMathsTopicYears(topic.name) : null;
-              const geographyYear = subjectId === 'geography' ? getGeographyTopicYear(topic.name) : null;
-              
-              // Create swinging pattern - alternate high and low positions
-              const isEven = index % 2 === 0;
-              const yOffset = isEven ? 'top-0' : 'top-16';
-              
-              return (
-                <div key={topic.id} className={`relative ${yOffset}`}>
-                  {/* Connecting line to next topic */}
-                  {index < subject.topics.length && (
-                    <div className={`absolute ${isEven ? 'top-6' : 'top-6'} left-full w-8 h-0.5 bg-border z-0`}></div>
-                  )}
+        {/* Topic Learning Path */}
+        <div className="bg-card rounded-lg p-6 mb-8">
+          <h2 className="text-xl font-semibold mb-6 text-center">Learning Path</h2>
+          <div className="relative overflow-x-auto">
+            <div className="flex items-start pb-32" style={{ minWidth: `${(subject.topics.length + 1) * 200}px` }}>
+              {/* SVG for curved connecting lines */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
+                {subject.topics.map((_, index) => {
+                  if (index === subject.topics.length - 1) return null;
                   
-                  {/* Topic node */}
-                  <div className="relative z-10 flex flex-col items-center">
-                    {/* Topic circle */}
-                    <div 
-                      className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 hover:scale-110 ${
-                        isMastered ? 'bg-green-500 hover:bg-green-600' :
-                        needsWork ? 'bg-red-500 hover:bg-red-600' :
-                        isNew ? 'bg-blue-500 hover:bg-blue-600' : 
-                        'bg-yellow-500 hover:bg-yellow-600'
-                      }`}
-                      onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
-                    >
-                      {index + 1}
-                    </div>
-                    
-                    {/* Topic info card */}
-                    <Card className="mt-4 w-64 shadow-lg hover:shadow-xl transition-all duration-300">
-                      <CardHeader className="pb-2">
-                        <div className="flex items-center gap-2 mb-1">
-                          <CardTitle className="text-sm leading-tight">{topic.name}</CardTitle>
-                          {topicYear && (
-                            <Badge 
-                              className={`text-xs ${
-                                topicYear === 'Year 10' 
-                                  ? 'bg-blue-500 text-white hover:bg-blue-600' 
-                                  : 'bg-purple-500 text-white hover:bg-purple-600'
-                              }`}
-                            >
-                              {topicYear}
+                  const startX = 200 * index + 150;
+                  const endX = 200 * (index + 1) + 50;
+                  const startY = index % 2 === 0 ? 60 : 140;
+                  const endY = (index + 1) % 2 === 0 ? 60 : 140;
+                  const midX = (startX + endX) / 2;
+                  
+                  return (
+                    <path
+                      key={index}
+                      d={`M ${startX} ${startY} Q ${midX} ${startY > endY ? startY - 40 : startY + 40} ${endX} ${endY}`}
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      fill="none"
+                      className="text-border"
+                      opacity="0.5"
+                    />
+                  );
+                })}
+                
+                {/* Line to final exam node */}
+                {subject.topics.length > 0 && (
+                  <path
+                    d={`M ${200 * (subject.topics.length - 1) + 150} ${(subject.topics.length - 1) % 2 === 0 ? 60 : 140} Q ${200 * subject.topics.length + 50} 100 ${200 * subject.topics.length + 100} 100`}
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    fill="none"
+                    className="text-purple-400"
+                    opacity="0.7"
+                  />
+                )}
+              </svg>
+
+              {/* Topic nodes */}
+              {subject.topics.map((topic, index) => {
+                const progress = getTopicProgress(topic.id);
+                const isNew = progress.attempts === 0;
+                const isMastered = progress.averageScore >= 85;
+                const needsWork = progress.attempts > 0 && progress.averageScore < 60;
+                
+                // Alternating high/low positions for swinging effect
+                const isHigh = index % 2 === 0;
+                const topPosition = isHigh ? 'top-4' : 'top-20';
+                
+                return (
+                  <div key={topic.id} className={`absolute ${topPosition}`} style={{ left: `${200 * index + 50}px`, zIndex: 10 }}>
+                    <div className="flex flex-col items-center">
+                      {/* Topic circle */}
+                      <div 
+                        className={`w-16 h-16 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 hover:scale-110 shadow-lg border-4 border-white ${
+                          isMastered ? 'bg-green-500 hover:bg-green-600' :
+                          needsWork ? 'bg-orange-500 hover:bg-orange-600' :
+                          'bg-blue-500 hover:bg-blue-600'
+                        }`}
+                        onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
+                      >
+                        {index + 1}
+                      </div>
+                      
+                      {/* Topic name */}
+                      <div className="mt-3 text-center max-w-[120px]">
+                        <h3 className="text-sm font-medium leading-tight mb-1">{topic.name}</h3>
+                        
+                        {/* Year badges */}
+                        <div className="flex flex-wrap justify-center gap-1 mb-2">
+                          {subjectId === 'physics' && getPhysicsTopicYear(topic.name) && (
+                            <Badge className={`text-xs ${getPhysicsTopicYear(topic.name) === 'Year 10' ? 'bg-blue-500' : 'bg-purple-500'}`}>
+                              {getPhysicsTopicYear(topic.name)}
                             </Badge>
                           )}
-                          {mathsYears && mathsYears.map((year, yearIndex) => (
-                            <Badge 
-                              key={yearIndex}
-                              className={`text-xs ${
-                                year === 'Year 10' 
-                                  ? 'bg-blue-500 text-white hover:bg-blue-600' 
-                                  : 'bg-purple-500 text-white hover:bg-purple-600'
-                              }`}
-                            >
+                          {subjectId === 'maths' && getMathsTopicYears(topic.name).map((year, yearIndex) => (
+                            <Badge key={yearIndex} className={`text-xs ${year === 'Year 10' ? 'bg-blue-500' : 'bg-purple-500'}`}>
                               {year}
                             </Badge>
                           ))}
-                          {geographyYear && (
-                            <Badge 
-                              className={`text-xs ${
-                                geographyYear === 'Year 10' 
-                                  ? 'bg-blue-500 text-white hover:bg-blue-600' 
-                                  : 'bg-purple-500 text-white hover:bg-purple-600'
-                              }`}
-                            >
-                              {geographyYear}
+                          {subjectId === 'geography' && getGeographyTopicYear(topic.name) && (
+                            <Badge className={`text-xs ${getGeographyTopicYear(topic.name) === 'Year 10' ? 'bg-blue-500' : 'bg-purple-500'}`}>
+                              {getGeographyTopicYear(topic.name)}
                             </Badge>
                           )}
                         </div>
-                        <div className="flex space-x-1">
-                          {isNew && <Badge variant="outline" className="text-xs">New</Badge>}
-                          {isMastered && <Badge className="bg-green-500 hover:bg-green-600 text-xs">Mastered</Badge>}
-                          {needsWork && <Badge variant="destructive" className="text-xs">Needs Work</Badge>}
-                        </div>
-                      </CardHeader>
-                      <CardContent className="pt-0">
+                        
+                        {/* Progress indicator */}
                         {progress.attempts > 0 && (
-                          <div className="mb-3">
-                            <div className="flex justify-between text-xs mb-1">
-                              <span>Score</span>
-                              <span className="font-medium">{progress.averageScore}%</span>
-                            </div>
-                            <Progress value={progress.averageScore} className="mb-1" />
+                          <div className="text-xs text-muted-foreground mb-1">
+                            {progress.averageScore}% avg
                           </div>
                         )}
+                        
+                        {/* Status badge */}
+                        {isMastered && <Badge className="bg-green-500 text-xs mb-2">Mastered</Badge>}
+                        {needsWork && <Badge variant="destructive" className="text-xs mb-2">Needs Work</Badge>}
+                        {isNew && <Badge variant="outline" className="text-xs mb-2">New</Badge>}
+                        
+                        {/* Practice button */}
                         <Button 
-                          className="w-full text-xs py-1"
+                          size="sm" 
+                          className="text-xs px-3 py-1"
                           onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
                         >
-                          {isNew ? 'Start' : isMastered ? 'Practice' : 'Continue'}
+                          {isNew ? 'Start' : 'Practice'}
                         </Button>
-                      </CardContent>
-                    </Card>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-            
-            {/* 2026 Exam Final Node */}
-            <div className="relative top-8">
-              {/* Connecting line from last topic */}
-              <div className="absolute top-6 right-full w-8 h-0.5 bg-border z-0"></div>
+                );
+              })}
               
-              <div className="relative z-10 flex flex-col items-center">
-                {/* Special exam circle */}
-                <div 
-                  className="w-16 h-16 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 hover:scale-110 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 border-4 border-yellow-400 shadow-lg"
-                  onClick={() => navigate(`/predicted-exam/${subjectId}`)}
-                >
-                  <span className="text-xs text-center">2026<br/>EXAM</span>
-                </div>
-                
-                {/* Exam info card */}
-                <Card className="mt-4 w-64 shadow-xl border-2 border-yellow-400">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-sm text-center bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                      Predicted 2026 Exam
-                    </CardTitle>
-                    <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white mx-auto">
+              {/* 2026 Exam Final Node */}
+              <div className="absolute top-12" style={{ left: `${200 * subject.topics.length + 50}px`, zIndex: 10 }}>
+                <div className="flex flex-col items-center">
+                  {/* Special exam circle */}
+                  <div 
+                    className="w-20 h-20 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 hover:scale-110 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 border-4 border-yellow-400 shadow-xl animate-pulse"
+                    onClick={() => navigate(`/predicted-exam/${subjectId}`)}
+                  >
+                    <span className="text-xs text-center leading-tight">2026<br/>EXAM</span>
+                  </div>
+                  
+                  {/* Exam info */}
+                  <div className="mt-3 text-center max-w-[140px]">
+                    <h3 className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
                       Final Challenge
+                    </h3>
+                    <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs mb-2">
+                      Predicted Exam
                     </Badge>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <p className="text-xs text-muted-foreground mb-3 text-center">
-                      Complete predicted exam questions for {subject.name}
-                    </p>
                     <Button 
-                      className="w-full text-xs py-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                      size="sm" 
+                      className="text-xs px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
                       onClick={() => navigate(`/predicted-exam/${subjectId}`)}
                     >
                       Take Exam
                     </Button>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
