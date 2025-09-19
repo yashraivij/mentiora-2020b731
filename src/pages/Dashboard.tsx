@@ -1669,7 +1669,7 @@ const Dashboard = () => {
                 <h3 className="text-lg font-bold text-gray-800">Daily Quests</h3>
                 <button 
                   className="text-blue-500 font-bold text-sm hover:text-blue-600 cursor-pointer"
-                  onClick={() => setActiveTab("quest")}
+                  onClick={() => setActiveTab("quests")}
                 >
                   VIEW ALL
                 </button>
