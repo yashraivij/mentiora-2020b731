@@ -28,6 +28,8 @@ import {
   Building,
   Microscope,
   TestTube,
+  Leaf,
+  Dna,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -86,7 +88,10 @@ const Dashboard = () => {
     const iconMap: { [key: string]: any } = {
       "physics": Atom,
       "physics-edexcel": Atom,
+      "chemistry": FlaskConical,
       "chemistry-edexcel": FlaskConical,
+      "biology": Microscope,  
+      "biology-edexcel": Microscope,
       "mathematics": Calculator,
       "maths-edexcel": Calculator,
       "english-language": PenTool,
