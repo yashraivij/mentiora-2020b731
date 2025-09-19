@@ -805,20 +805,12 @@ const Dashboard = () => {
 
                   {/* Subject Cards */}
                   <div className="space-y-4">
-                    {userSubjects
-                      .map(subjectId => {
-                        // Find the predicted grade for this user's subject
-                        const prediction = predictedGrades.find(grade => {
-                          const mappedDbSubject = mapDatabaseSubjectToCurriculum(grade.subject_id);
-                          return mappedDbSubject === subjectId;
-                        });
-                        return prediction ? { ...prediction, mappedSubjectId: subjectId } : null;
-                      })
-                      .filter(Boolean)
-                      .map((prediction, index) => {
-                      const subjectKey = prediction.mappedSubjectId;
+                    {predictedGrades.map((prediction, index) => {
+                      // Try to map the database subject to a curriculum subject for better icons/names
+                      const mappedSubjectId = mapDatabaseSubjectToCurriculum(prediction.subject_id);
+                      const curriculumSubject = curriculum.find(s => s.id === mappedSubjectId);
+                      const subjectKey = mappedSubjectId;
                       const colors = subjectColors[subjectKey] || subjectColors["physics"];
-                      const curriculumSubject = curriculum.find(s => s.id === subjectKey);
                       const subjectName = curriculumSubject?.name || prediction.subject_id;
                       
                       const getGradeColor = (grade: string) => {
@@ -857,7 +849,7 @@ const Dashboard = () => {
                           <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-200 border-2 border-gray-100">
                             <div className="flex items-center justify-between">
                               <div className="flex items-center space-x-4 flex-1">
-                                {/* Subject Icon - Using curriculum subject ID for consistency */}
+                                {/* Subject Icon - Using mapped subject ID for consistency */}
                                 <div className={`w-14 h-14 ${colors.bg} rounded-2xl flex items-center justify-center shadow-md`}>
                                   {(() => {
                                     const IconComponent = getSubjectIcon(subjectKey);
