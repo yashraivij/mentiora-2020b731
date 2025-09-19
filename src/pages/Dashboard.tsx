@@ -40,6 +40,8 @@ import {
   Filter,
   Calendar,
   Unlock,
+  CreditCard,
+  Trash2,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -934,20 +936,132 @@ const Dashboard = () => {
           )}
 
           {activeTab === "profile" && (
-            <div className="text-center py-16">
-              <h2 className="text-3xl font-bold text-gray-800 mb-6">
-                Profile Settings
-              </h2>
-              <p className="text-lg text-gray-600 mb-8">
-                Manage your account preferences and settings.
-              </p>
-              <Button 
-                onClick={() => navigate('/settings')}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 text-lg"
-              >
-                <User className="w-5 h-5 mr-2" />
-                Go to Settings
-              </Button>
+            <div className="space-y-8">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="p-3 rounded-xl bg-gradient-to-br from-violet-500/30 to-purple-500/30 backdrop-blur-sm border border-violet-300/50 shadow-xl shadow-violet-500/20">
+                  <User className="w-8 h-8 text-violet-100 drop-shadow-lg" />
+                </div>
+                <div>
+                  <h1 className="text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 bg-clip-text text-transparent drop-shadow-sm">
+                    Profile Settings
+                  </h1>
+                  <p className="text-violet-700/80 mt-1 font-medium">Manage your account preferences</p>
+                </div>
+              </div>
+
+              {/* Account Information Card */}
+              <Card className="bg-gradient-to-br from-blue-50/80 via-cyan-50/60 to-teal-50/80 border-cyan-200/50 shadow-2xl shadow-cyan-500/20">
+                <CardHeader>
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-gradient-to-br from-cyan-500/30 to-blue-500/30 shadow-lg">
+                      <User className="w-5 h-5 text-cyan-100 drop-shadow-sm" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-xl bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                        Account Information
+                      </CardTitle>
+                      <CardDescription className="text-cyan-700/70">Your account details and status</CardDescription>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="p-4 rounded-lg bg-gradient-to-br from-emerald-100/80 to-teal-100/60 backdrop-blur-sm border border-emerald-200/50 shadow-lg">
+                      <p className="text-sm font-medium text-emerald-700 mb-1">Email Address</p>
+                      <p className="text-lg font-semibold text-emerald-800">{user?.email}</p>
+                    </div>
+                    <div className="p-4 rounded-lg bg-gradient-to-br from-purple-100/80 to-pink-100/60 backdrop-blur-sm border border-purple-200/50 shadow-lg">
+                      <p className="text-sm font-medium text-purple-700 mb-1">Account Type</p>
+                      <div className="flex items-center gap-2">
+                        <Crown className="w-4 h-4 text-purple-600 drop-shadow-sm" />
+                        <p className="text-lg font-semibold text-purple-800">
+                          {isPremium ? "Premium Account" : "Free Account"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Billing Management Card - Only for Premium Users */}
+              {isPremium && (
+                <Card className="bg-gradient-to-br from-amber-50/80 via-yellow-50/60 to-orange-50/80 border-amber-200/50 shadow-2xl shadow-amber-500/20">
+                  <CardHeader>
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-gradient-to-br from-amber-500/30 to-orange-500/30 shadow-lg">
+                        <CreditCard className="w-5 h-5 text-amber-100 drop-shadow-sm" />
+                      </div>
+                      <div>
+                        <CardTitle className="text-xl bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
+                          Billing Management
+                        </CardTitle>
+                        <CardDescription className="text-amber-700/70">Manage your subscription and billing</CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="p-6 rounded-lg bg-gradient-to-br from-emerald-50/80 to-cyan-50/60 backdrop-blur-sm border border-emerald-200/50 shadow-lg">
+                      <div className="flex items-start justify-between">
+                        <div className="space-y-2">
+                          <h3 className="text-lg font-semibold bg-gradient-to-r from-amber-700 to-orange-700 bg-clip-text text-transparent flex items-center gap-2">
+                            <Crown className="w-5 h-5 text-amber-600" />
+                            Premium Subscription
+                          </h3>
+                          <p className="text-sm text-amber-700/80 max-w-lg">
+                            Access your Stripe billing portal to manage your subscription, update payment methods, 
+                            view invoices, and modify your plan.
+                          </p>
+                        </div>
+                        
+                        <Button 
+                          onClick={openManageBilling}
+                          className="ml-4 bg-gradient-to-r from-amber-600 via-orange-600 to-yellow-600 hover:from-amber-700 hover:via-orange-700 hover:to-yellow-700 shadow-xl shadow-amber-500/30 hover:shadow-amber-500/40 transition-all duration-300 text-white"
+                        >
+                          <CreditCard className="w-4 h-4 mr-2" />
+                          Manage Billing
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Danger Zone */}
+              <Card className="bg-gradient-to-br from-red-50/80 via-orange-50/60 to-pink-50/80 border-red-200/50 shadow-2xl shadow-red-500/20">
+                <CardHeader>
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-gradient-to-br from-red-500/30 to-orange-500/30 shadow-lg">
+                      <Trash2 className="w-5 h-5 text-red-100 drop-shadow-sm" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-xl bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">Danger Zone</CardTitle>
+                      <CardDescription className="text-red-700/70">Permanent actions that cannot be undone</CardDescription>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="p-6 rounded-lg bg-gradient-to-br from-yellow-50/80 to-orange-50/60 backdrop-blur-sm border border-yellow-200/50 shadow-lg">
+                    <div className="flex items-start justify-between">
+                      <div className="space-y-2">
+                        <h3 className="text-lg font-semibold bg-gradient-to-r from-red-700 to-orange-700 bg-clip-text text-transparent">Delete Account</h3>
+                        <p className="text-sm text-red-700/80 max-w-lg">
+                          Permanently delete your account and all associated data. This action cannot be undone. 
+                          All your progress, notes, and achievements will be lost forever.
+                        </p>
+                      </div>
+                      
+                      <Button 
+                        onClick={() => navigate('/settings')}
+                        variant="destructive" 
+                        className="ml-4 bg-gradient-to-r from-red-600 via-orange-600 to-pink-600 hover:from-red-700 hover:via-orange-700 hover:to-pink-700 shadow-xl shadow-red-500/30 hover:shadow-red-500/40 transition-all duration-300"
+                      >
+                        <Trash2 className="w-4 h-4 mr-2" />
+                        Delete Account
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           )}
         </div>
