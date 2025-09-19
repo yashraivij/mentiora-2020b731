@@ -172,29 +172,28 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-7xl max-h-[98vh] overflow-hidden bg-card/95 border border-border/50">
-        {/* Animated background layers */}
-        <div className="absolute inset-0 bg-primary/5 animate-pulse" />
-        <div className="absolute inset-0 bg-accent/10" />
+      <DialogContent className="max-w-7xl max-h-[98vh] overflow-hidden bg-white border-0 shadow-2xl">
+        {/* Subtle background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-sky-50 via-purple-50 to-pink-50" />
         
         {/* Subtle border effect */}
-        <div className="absolute inset-0 rounded-lg bg-primary/20 p-0.5">
-          <div className="h-full w-full rounded-lg bg-card/95" />
+        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-sky-200 via-purple-200 to-pink-200 p-0.5">
+          <div className="h-full w-full rounded-lg bg-white" />
         </div>
 
         <DialogHeader className="relative z-10 pb-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-r from-sky-400 to-purple-400 rounded-3xl flex items-center justify-center shadow-lg">
                   <Sparkles className="h-8 w-8 text-white" />
                 </div>
               </div>
               <div>
-                <DialogTitle className="text-3xl font-bold text-gray-800">
+                <DialogTitle className="text-4xl font-bold text-gray-800">
                   Welcome to Mentiora!
                 </DialogTitle>
-                <DialogDescription className="text-lg text-gray-600 font-medium">
+                <DialogDescription className="text-xl text-gray-600 font-medium">
                   Let's personalize your learning experience
                 </DialogDescription>
               </div>
@@ -207,9 +206,9 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 {[1, 2, 3, 4, 5].map((step) => (
                   <div
                     key={step}
-                    className={`h-2 w-8 rounded-full transition-all duration-500 ${
+                    className={`h-3 w-12 rounded-full transition-all duration-500 ${
                       step <= currentStep 
-                        ? 'bg-gray-800' 
+                        ? 'bg-gradient-to-r from-sky-400 to-purple-400 shadow-lg' 
                         : 'bg-gray-200'
                     }`}
                   />
@@ -233,10 +232,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 className="space-y-6"
               >
                 <div className="text-center space-y-4 mb-8">
-                  <h3 className="text-2xl font-bold text-gray-800">
-                    What exams are you taking?
+                  <h3 className="text-3xl font-bold text-gray-800">
+                    What exams are you taking? 📚
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-lg text-gray-600">
                     Select all the subjects you're studying - we'll add them to your dashboard
                   </p>
                 </div>
@@ -254,13 +253,13 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       <Card 
                         className={`cursor-pointer transition-all duration-300 relative overflow-hidden ${
                           selectedSubjects.includes(subject.id)
-                            ? 'ring-2 ring-gray-800 bg-gray-50 shadow-lg'
-                            : 'hover:bg-gray-50 hover:shadow-md border border-gray-200'
+                            ? 'ring-4 ring-sky-400 bg-sky-50 shadow-xl transform scale-105'
+                            : 'hover:bg-gray-50 hover:shadow-lg hover:scale-102 border-2 border-gray-100'
                         }`}
                         onClick={() => handleSubjectToggle(subject.id)}
                       >
                         {selectedSubjects.includes(subject.id) && (
-                          <div className="absolute inset-0 bg-gray-800/5" />
+                          <div className="absolute inset-0 bg-gradient-to-br from-sky-100 to-purple-100 opacity-50" />
                         )}
                         
                         <CardContent className="p-5">
@@ -283,7 +282,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                                 variant="secondary" 
                                 className={`text-xs mt-1 ${
                                   selectedSubjects.includes(subject.id)
-                                    ? 'bg-gray-800 text-white'
+                                    ? 'bg-sky-400 text-white shadow-lg'
                                     : 'bg-gray-100 text-gray-700'
                                 }`}
                                >
@@ -300,13 +299,13 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 <div className="flex justify-between items-center pt-6 border-t border-gray-200">
                   <div>
                     <p className="font-bold text-lg text-gray-800">
-                      {selectedSubjects.length} subject{selectedSubjects.length !== 1 ? 's' : ''} selected
+                      {selectedSubjects.length} subject{selectedSubjects.length !== 1 ? 's' : ''} selected ✨
                     </p>
                   </div>
                   <Button 
                     onClick={handleNext} 
                     disabled={selectedSubjects.length === 0 || isLoading}
-                    className="bg-gray-800 hover:bg-gray-900 text-white font-bold px-8 py-3 disabled:opacity-50"
+                    className="bg-gradient-to-r from-sky-400 to-purple-400 hover:from-sky-500 hover:to-purple-500 text-white font-bold px-8 py-3 text-lg rounded-2xl shadow-lg disabled:opacity-50"
                   >
                     {isLoading ? (
                       <>
@@ -336,20 +335,20 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 className="space-y-6"
               >
                 <div className="text-center space-y-4 mb-8">
-                  <h3 className="text-2xl font-bold text-gray-800">
-                    What's your biggest struggle with revision?
+                  <h3 className="text-3xl font-bold text-gray-800">
+                    What's your biggest struggle with revision? 🤔
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-lg text-gray-600">
                     We'll personalize your experience based on your challenges
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-6">
                   {[
-                    { text: 'Staying motivated', icon: Heart },
-                    { text: 'Knowing what to revise', icon: Target },
-                    { text: 'Running out of time', icon: Timer },
-                    { text: 'Understanding content', icon: Brain }
+                    { text: 'Staying motivated', icon: Heart, color: 'from-pink-400 to-rose-400', bg: 'from-pink-50 to-rose-50' },
+                    { text: 'Knowing what to revise', icon: Target, color: 'from-green-400 to-emerald-400', bg: 'from-green-50 to-emerald-50' },
+                    { text: 'Running out of time', icon: Timer, color: 'from-orange-400 to-red-400', bg: 'from-orange-50 to-red-50' },
+                    { text: 'Understanding content', icon: Brain, color: 'from-blue-400 to-indigo-400', bg: 'from-blue-50 to-indigo-50' }
                   ].map((struggle, index) => {
                     const StruggleIcon = struggle.icon;
                     return (
@@ -362,25 +361,23 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         transition={{ delay: index * 0.1 }}
                       >
                         <Card 
-                          className={`cursor-pointer transition-all duration-300 relative overflow-hidden h-40 ${
+                          className={`cursor-pointer transition-all duration-300 relative overflow-hidden h-40 rounded-3xl border-2 ${
                             revisionStruggles.includes(struggle.text)
-                              ? 'ring-2 ring-gray-800 shadow-lg bg-gray-50'
-                              : 'hover:shadow-md hover:bg-gray-50 border border-gray-200'
+                              ? `ring-4 ring-current shadow-xl transform scale-105 bg-gradient-to-br ${struggle.bg}`
+                              : 'hover:shadow-lg hover:scale-102 border-gray-200 bg-white'
                           }`}
                           onClick={() => handleStruggleToggle(struggle.text)}
                         >
-                          {revisionStruggles.includes(struggle.text) && (
-                            <div className="absolute inset-0 bg-gray-800/5" />
-                          )}
-                          
                           <CardContent className="p-6 text-center h-full flex flex-col justify-center items-center relative">
-                            <div className="p-3 rounded-full mb-4 bg-gray-800 shadow-lg">
+                            <div className={`p-4 rounded-2xl mb-4 bg-gradient-to-r ${struggle.color} shadow-lg`}>
                               <StruggleIcon className="h-8 w-8 text-white" />
                             </div>
                             <p className="font-bold text-lg text-gray-800">{struggle.text}</p>
                             {revisionStruggles.includes(struggle.text) && (
                               <div className="absolute top-4 right-4">
-                                <Check className="h-5 w-5 text-gray-800" />
+                                <div className="bg-white rounded-full p-1 shadow-lg">
+                                  <Check className="h-4 w-4 text-green-500" />
+                                </div>
                               </div>
                             )}
                           </CardContent>
@@ -397,10 +394,11 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   <Button 
                     onClick={handleNext} 
                     disabled={revisionStruggles.length === 0}
-                    className="bg-gray-800 hover:bg-gray-900 text-white font-bold px-8 py-3"
+                    className="bg-gradient-to-r from-green-400 to-emerald-400 hover:from-green-500 hover:to-emerald-500 text-white font-bold px-8 py-3 text-lg rounded-2xl shadow-lg"
                   >
                   <div className="flex items-center gap-2">
-                    <span>Continue</span>
+                    <span>Continue Journey</span>
+                    <span>✨</span>
                     <ChevronRight className="h-4 w-4" />
                   </div>
                   </Button>
@@ -420,20 +418,20 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 className="space-y-6"
               >
                 <div className="text-center space-y-4 mb-8">
-                  <h3 className="text-2xl font-bold text-gray-800">
-                    How do you usually revise?
+                  <h3 className="text-3xl font-bold text-gray-800">
+                    How do you usually revise? 📖
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-lg text-gray-600">
                     We'll optimize your learning experience for your preferred methods
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-6">
                   {[
-                    { text: 'Flashcards', icon: Zap },
-                    { text: 'Practice questions', icon: Trophy },
-                    { text: 'Reading notes', icon: BookOpen },
-                    { text: 'Watching videos', icon: Users }
+                    { text: 'Flashcards', icon: Zap, color: 'from-yellow-400 to-orange-400', bg: 'from-yellow-50 to-orange-50' },
+                    { text: 'Practice questions', icon: Trophy, color: 'from-purple-400 to-pink-400', bg: 'from-purple-50 to-pink-50' },
+                    { text: 'Reading notes', icon: BookOpen, color: 'from-green-400 to-teal-400', bg: 'from-green-50 to-teal-50' },
+                    { text: 'Watching videos', icon: Users, color: 'from-blue-400 to-cyan-400', bg: 'from-blue-50 to-cyan-50' }
                   ].map((method, index) => {
                     const MethodIcon = method.icon;
                     return (
@@ -446,25 +444,23 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         transition={{ delay: index * 0.1 }}
                       >
                         <Card 
-                          className={`cursor-pointer transition-all duration-300 relative overflow-hidden h-40 ${
+                          className={`cursor-pointer transition-all duration-300 relative overflow-hidden h-40 rounded-3xl border-2 ${
                             revisionMethods.includes(method.text)
-                              ? 'ring-2 ring-gray-800 shadow-lg bg-gray-50'
-                              : 'hover:shadow-md hover:bg-gray-50 border border-gray-200'
+                              ? `ring-4 ring-current shadow-xl transform scale-105 bg-gradient-to-br ${method.bg}`
+                              : 'hover:shadow-lg hover:scale-102 border-gray-200 bg-white'
                           }`}
                           onClick={() => handleMethodToggle(method.text)}
                         >
-                          {revisionMethods.includes(method.text) && (
-                            <div className="absolute inset-0 bg-gray-800/5" />
-                          )}
-                          
                           <CardContent className="p-6 text-center h-full flex flex-col justify-center items-center relative">
-                            <div className="p-3 rounded-full mb-4 bg-gray-800 shadow-lg">
+                            <div className={`p-4 rounded-2xl mb-4 bg-gradient-to-r ${method.color} shadow-lg`}>
                               <MethodIcon className="h-8 w-8 text-white" />
                             </div>
                             <p className="font-bold text-lg text-gray-800">{method.text}</p>
                             {revisionMethods.includes(method.text) && (
                               <div className="absolute top-4 right-4">
-                                <Check className="h-5 w-5 text-gray-800" />
+                                <div className="bg-white rounded-full p-1 shadow-lg">
+                                  <Check className="h-4 w-4 text-green-500" />
+                                </div>
                               </div>
                             )}
                           </CardContent>
@@ -481,10 +477,11 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   <Button 
                     onClick={handleNext} 
                     disabled={revisionMethods.length === 0}
-                    className="bg-gray-800 hover:bg-gray-900 text-white font-bold px-8 py-3"
+                    className="bg-gradient-to-r from-blue-400 to-purple-400 hover:from-blue-500 hover:to-purple-500 text-white font-bold px-8 py-3 text-lg rounded-2xl shadow-lg"
                   >
                   <div className="flex items-center gap-2">
                     <span>Almost Done!</span>
+                    <span>🎯</span>
                     <ChevronRight className="h-4 w-4" />
                   </div>
                   </Button>
@@ -504,25 +501,25 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 className="space-y-8"
               >
                 <div className="text-center space-y-4 mb-8">
-                  <h3 className="text-2xl font-bold text-gray-800">
-                    Would you like us to share your progress?
+                  <h3 className="text-3xl font-bold text-gray-800">
+                    Would you like us to share your progress? 👨‍👩‍👧‍👦
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-lg text-gray-600">
                     Keep your parent/guardian informed about your academic journey (Optional)
                   </p>
                 </div>
 
                 <div className="max-w-2xl mx-auto space-y-6">
-                  <Card className={`cursor-pointer transition-all duration-300 ${
+                  <Card className={`cursor-pointer transition-all duration-300 rounded-3xl border-2 ${
                     showParentProgress 
-                      ? 'ring-2 ring-gray-800 bg-gray-50 shadow-lg' 
-                      : 'hover:shadow-md border border-gray-200'
+                      ? 'ring-4 ring-indigo-400 bg-gradient-to-br from-indigo-50 to-purple-50 shadow-xl transform scale-105' 
+                      : 'hover:shadow-lg hover:scale-102 border-gray-200 bg-white'
                   }`}
                   onClick={() => setShowParentProgress(!showParentProgress)}
                   >
                     <CardContent className="p-8 text-center">
                       <div className="flex items-center justify-center mb-4">
-                        <div className="bg-gray-800 p-4 rounded-2xl shadow-lg mr-4">
+                        <div className="bg-gradient-to-r from-indigo-400 to-purple-400 p-4 rounded-3xl shadow-lg mr-4">
                           <Users className="h-10 w-10 text-white" />
                         </div>
                         <div className="text-left">
@@ -531,7 +528,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         </div>
                         <div className="ml-auto">
                           <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                            showParentProgress ? 'bg-gray-800 border-gray-800' : 'border-gray-400'
+                            showParentProgress ? 'bg-indigo-400 border-indigo-400' : 'border-gray-400'
                           }`}>
                             {showParentProgress && <Check className="h-4 w-4 text-white" />}
                           </div>
@@ -551,10 +548,11 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   </Button>
                   <Button 
                     onClick={handleNext}
-                    className="bg-gray-800 hover:bg-gray-900 text-white font-bold px-8 py-3"
+                    className="bg-gradient-to-r from-indigo-400 to-purple-400 hover:from-indigo-500 hover:to-purple-500 text-white font-bold px-8 py-3 text-lg rounded-2xl shadow-lg"
                   >
                   <div className="flex items-center gap-2">
                     <span>Final Step!</span>
+                    <span>🚀</span>
                     <ChevronRight className="h-4 w-4" />
                   </div>
                   </Button>
@@ -566,17 +564,17 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             {currentStep === 5 && (
               <div className="space-y-2 max-h-[calc(98vh-140px)] overflow-hidden">
                 {/* Premium Header */}
-                <div className="text-center space-y-4 mb-8">
-                  <div className="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
-                    <Crown className="h-8 w-8 text-white" />
+                <div className="text-center space-y-6 mb-8">
+                  <div className="w-24 h-24 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl flex items-center justify-center mx-auto shadow-2xl">
+                    <Crown className="h-12 w-12 text-white" />
                   </div>
                   
-                  <h3 className="text-3xl font-bold text-gray-800">
-                    Unlock Your Academic Potential!
+                  <h3 className="text-4xl font-bold text-gray-800">
+                    🚀 Unlock Your Academic Superpower! ✨
                   </h3>
                   
-                  <p className="text-lg text-gray-600">
-                    Join thousands of students achieving top grades
+                  <p className="text-xl text-gray-600 font-medium">
+                    Join <span className="font-bold text-green-600">10,000+ students</span> getting <span className="font-bold text-purple-600">2+ grades higher</span>
                   </p>
                 </div>
 
@@ -588,7 +586,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 }}
                   >
-                    <Card className="relative bg-white border border-gray-200 opacity-75">
+                    <Card className="relative bg-white border-2 border-gray-200 opacity-75 rounded-2xl">
                       <CardHeader className="pb-2">
                         <CardTitle className="flex items-center gap-2 text-gray-600 text-lg">
                           <div className="bg-gray-500 p-1.5 rounded">
@@ -627,16 +625,16 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     transition={{ delay: 0.5, type: "spring" }}
                     className="relative"
                   >
-                     {/* Highlighted border */}
-                     <div className="absolute inset-0 bg-gray-800 rounded-xl blur-sm opacity-20" />
+                     {/* Colorful border */}
+                     <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-orange-400 via-pink-400 to-purple-400 rounded-2xl blur-md opacity-75" />
                      
-                     <Card className="relative bg-white border-0 shadow-xl">
+                     <Card className="relative bg-white border-0 shadow-2xl rounded-2xl">
                       {/* Premium badges */}
                       <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-50">
                         <motion.div
                           animate={{ y: [0, -3, 0] }}
                           transition={{ repeat: Infinity, duration: 2 }}
-                          className="bg-gray-800 text-white px-4 py-1 rounded-full font-black text-sm shadow-xl border-2 border-white"
+                          className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-4 py-1 rounded-full font-black text-sm shadow-xl border-2 border-white"
                         >
                           🏆 MOST POPULAR
                         </motion.div>
@@ -654,7 +652,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       
                       <CardHeader className="pb-2 relative z-10 pt-5">
                         <CardTitle className="flex items-center gap-2">
-                          <div className="bg-gray-800 p-2 rounded-lg shadow-lg">
+                          <div className="bg-gradient-to-r from-orange-400 to-red-400 p-2 rounded-lg shadow-lg">
                             <Crown className="h-5 w-5 text-white" />
                           </div>
                           <span className="text-lg font-black text-gray-800">
@@ -691,13 +689,13 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                          <div className="pt-2 border-t border-gray-200 space-y-1">
                            <div className="flex items-center gap-2">
                              <div className="text-xs text-gray-500 line-through">£19.99/mo</div>
-                             <div className="bg-red-500 text-white px-2 py-0.5 rounded-full text-xs font-bold">50% OFF!</div>
+                             <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-2 py-0.5 rounded-full text-xs font-bold">50% OFF!</div>
                            </div>
                            <div className="flex items-baseline gap-1">
-                             <div className="text-2xl font-black text-gray-800">£9.99</div>
+                             <div className="text-3xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">£9.99</div>
                              <div className="text-sm text-gray-600">/month</div>
                           </div>
-                          <div className="text-xs text-green-600 font-bold">⚡ LIMITED TIME ONLY</div>
+                           <div className="text-xs text-green-600 font-bold">⚡ LIMITED TIME ONLY</div>
                         </div>
                       </CardContent>
                     </Card>
@@ -712,16 +710,15 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   className="text-center space-y-3 pt-2"
                 >
                   {/* Social Proof */}
-                   <div className="bg-gray-50 rounded-lg p-2 border border-gray-200">
-                     <div className="flex items-center justify-center gap-3 text-xs">
-                       <div className="flex items-center gap-1">
-                         <Star className="h-3 w-3 text-yellow-500 fill-current" />
-                         <span className="font-bold">4.9/5</span>
+                   <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-4 border-2 border-green-200">
+                     <div className="flex items-center justify-center gap-4 text-sm">
+                       <div className="flex items-center gap-2">
+                         <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                         <span className="font-bold text-gray-800">4.9/5 rating</span>
                        </div>
-                       <div className="flex items-center gap-1">
-                         <Trophy className="h-3 w-3 text-orange-500" />
-                         <span className="font-bold">92%</span>
-                         <span className="text-gray-600">grade improvement</span>
+                       <div className="flex items-center gap-2">
+                         <Trophy className="h-4 w-4 text-orange-500" />
+                         <span className="font-bold text-gray-800">92% grade improvement</span>
                        </div>
                      </div>
                    </div>
@@ -733,29 +730,29 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   >
                      <Button 
                        onClick={handleUpgrade}
-                       className="relative bg-gray-800 hover:bg-gray-900 text-white font-black px-6 py-2.5 text-sm shadow-xl overflow-hidden group w-full max-w-md"
+                       className="relative bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 hover:from-yellow-500 hover:via-orange-500 hover:to-pink-500 text-white font-black px-8 py-4 text-lg rounded-2xl shadow-2xl overflow-hidden group w-full max-w-md"
                      >
-                       <div className="absolute inset-0 bg-gray-700 opacity-0 group-hover:opacity-20 transition-opacity" />
-                        <div className="flex items-center justify-center gap-2 relative z-10">
-                          <Rocket className="h-4 w-4" />
-                          <span>Start Your Academic Transformation!</span>
-                          <Sparkles className="h-4 w-4" />
+                       <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-pink-300 opacity-0 group-hover:opacity-30 transition-opacity" />
+                        <div className="flex items-center justify-center gap-3 relative z-10">
+                          <Rocket className="h-5 w-5" />
+                          <span>🚀 Start Your Academic Transformation! ✨</span>
+                          <Sparkles className="h-5 w-5" />
                         </div>
                     </Button>
                   </motion.div>
                   
                   {/* Guarantee & Benefits */}
-                   <p className="text-xs font-bold text-green-600">
+                   <p className="text-sm font-bold text-green-600">
                      ✅ 30-day money-back guarantee • 📱 Cancel anytime
                    </p>
                 </motion.div>
                 
                 {/* Action Buttons - Fixed at bottom */}
-                 <div className="flex justify-between items-center pt-4 border-t border-gray-200 mt-4 bg-white">
+                 <div className="flex justify-between items-center pt-6 border-t border-gray-200 mt-6 bg-white rounded-b-2xl">
                    <Button 
                      variant="outline" 
                      onClick={() => setCurrentStep(4)} 
-                     className="px-6 py-3 text-base font-semibold"
+                     className="px-6 py-3 text-base font-semibold rounded-2xl border-2"
                    >
                      ← Back
                    </Button>
@@ -765,7 +762,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                        onSubjectsAdded(); // Call when user finishes onboarding
                        onClose();
                      }} 
-                     className="px-6 py-3 text-base font-semibold"
+                     className="px-6 py-3 text-base font-semibold rounded-2xl border-2 border-sky-400 bg-sky-50 text-sky-700 hover:bg-sky-100"
                    >
                      Continue with Free Version
                    </Button>
