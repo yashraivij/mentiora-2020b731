@@ -611,16 +611,16 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="mt-6"
+                      className="mt-4"
                     >
-                      <Card className="border-2 border-indigo-200 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl shadow-lg">
-                        <CardContent className="p-6">
-                          <div className="space-y-4">
+                      <Card className="border-2 border-indigo-200 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl shadow-md">
+                        <CardContent className="p-4">
+                          <div className="space-y-3">
                             <Label 
                               htmlFor="parentEmail" 
-                              className="text-lg font-bold text-gray-800 flex items-center gap-2"
+                              className="text-base font-bold text-gray-800 flex items-center gap-2"
                             >
-                              <User className="h-5 w-5 text-indigo-500" />
+                              <User className="h-4 w-4 text-indigo-500" />
                               Parent/Guardian Email Address *
                             </Label>
                             <Input
@@ -629,11 +629,11 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                               value={parentEmail}
                               onChange={(e) => setParentEmail(e.target.value)}
                               placeholder="parent@example.com"
-                              className="text-lg p-4 rounded-xl border-2 border-indigo-200 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100"
+                              className="text-base p-3 rounded-lg border-2 border-indigo-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                               required
                             />
-                            <p className="text-sm text-gray-600 italic">
-                              This email will receive weekly progress reports with your study statistics and achievements.
+                            <p className="text-xs text-gray-600 italic">
+                              Weekly progress reports with study statistics and achievements.
                             </p>
                           </div>
                         </CardContent>
