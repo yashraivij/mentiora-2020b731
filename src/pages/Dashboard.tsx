@@ -1486,7 +1486,7 @@ const Dashboard = () => {
                     <div>
                       <h3 className="text-xl font-bold text-gray-800">Daily Goal</h3>
                       <p className="text-gray-600">
-                        50 MP goal — {todayEarnedMP || 0}/50 completed
+                        50 MP goal — {(userStats?.loginToday ? 10 : 0) + (userStats?.practiceToday ? 40 : 0)}/50 completed
                       </p>
                     </div>
                   </div>
@@ -1494,7 +1494,7 @@ const Dashboard = () => {
                 <div className="w-full bg-gray-200 rounded-full h-4">
                   <div 
                     className="bg-blue-400 h-4 rounded-full transition-all duration-500" 
-                    style={{width: `${Math.min((todayEarnedMP / 50) * 100, 100)}%`}}
+                    style={{width: `${Math.min((((userStats?.loginToday ? 10 : 0) + (userStats?.practiceToday ? 40 : 0)) / 50) * 100, 100)}%`}}
                   ></div>
                 </div>
               </div>
