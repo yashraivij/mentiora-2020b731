@@ -389,6 +389,69 @@ const Pricing = () => {
               </Card>
             </div>
           </motion.div>
+
+          {/* Recap and Final CTA Section */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.0 }}
+            className="grid lg:grid-cols-2 gap-12 items-center"
+          >
+            <div>
+              <h3 className="text-3xl font-bold text-white mb-6">
+                Everything you need to excel
+              </h3>
+              <div className="space-y-4">
+                {[
+                  "Unlimited practice sessions - no hearts needed",
+                  "Accurate grade predictions with advanced analytics", 
+                  "Predicted 2026 exam questions and papers",
+                  "Smart revision notebook with personalized notes",
+                  "Personalized weak spot analysis and targeting",
+                  "Advanced progress tracking across all subjects",
+                  "Priority question generation for your exams",
+                  "Ad-free learning experience with zero distractions"
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <div className="w-6 h-6 rounded-full bg-green-400 flex items-center justify-center flex-shrink-0">
+                      <Check className="h-4 w-4 text-white" />
+                    </div>
+                    <span className="text-white/90">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div>
+              <Card className="max-w-sm mx-auto bg-white/10 backdrop-blur-xl border-white/20 shadow-lg rounded-2xl">
+                <CardContent className="p-8">
+                  <div className="mb-6">
+                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 backdrop-blur-sm rounded-full px-3 py-1 mb-4">
+                      <Star className="h-3 w-3 text-yellow-400" />
+                      <span className="text-yellow-400 font-medium text-xs">Best Deal</span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4 font-sans">
+                      Pay monthly
+                    </h3>
+                    <p className="text-sm text-white/70 mb-2 font-sans">Amount billed today</p>
+                    <div className="text-4xl font-bold text-white mb-4 font-sans">
+                      £7.99<span className="text-lg font-medium text-white/80">/month</span>
+                    </div>
+                    <p className="text-white/70 text-sm font-sans">
+                      Recurring billing. Cancel any time.
+                    </p>
+                  </div>
+                  
+                  <Button
+                    onClick={handleStartTrial}
+                    className="w-full bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-slate-900 font-semibold py-4 px-6 rounded-xl text-base transition-all duration-300 mb-3 border-0"
+                  >
+                    Get Mentiora Premium
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </motion.div>
         </div>
 
       </div>
