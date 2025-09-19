@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import {
   BookOpen,
@@ -86,7 +86,6 @@ const Dashboard = () => {
   const { user, logout, isPremium } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
-  const location = useLocation();
   const [userSubjects, setUserSubjects] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<string>("learn");
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
@@ -369,15 +368,6 @@ const Dashboard = () => {
       }
     }
   }, [user?.id, activeTab]);
-
-  // Handle URL tab parameter
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const tabParam = searchParams.get('tab');
-    if (tabParam && tabParam !== activeTab) {
-      setActiveTab(tabParam);
-    }
-  }, [location.search, activeTab]);
 
   useEffect(() => {
     const interval = setInterval(() => {
