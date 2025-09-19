@@ -1149,11 +1149,10 @@ const Dashboard = () => {
                 
                 <div className="p-6">
                   {/* Column Headers */}
-                  <div className="grid grid-cols-6 gap-4 text-sm font-bold text-gray-600 uppercase tracking-wide mb-4 px-4">
+                  <div className="grid grid-cols-5 gap-4 text-sm font-bold text-gray-600 uppercase tracking-wide mb-4 px-4">
                     <div>Rank</div>
                     <div>Student</div>
                     <div>XP</div>
-                    <div>Topics</div>
                     <div>Avg Grade</div>
                     <div>Streak</div>
                   </div>
@@ -1163,31 +1162,29 @@ const Dashboard = () => {
                     {(() => {
                       // Define players with raw stats
                       const players = [
-                        { name: "Alex Chen", xp: 1847, topics: 42, grade: 8.6, streak: 14, isCurrentUser: false },
-                        { name: "Emma Wilson", xp: 1653, topics: 38, grade: 8.2, streak: 12, isCurrentUser: false },
-                        { name: "Liam Parker", xp: 1512, topics: 35, grade: 7.9, streak: 9, isCurrentUser: false },
-                        { name: "Sophia Lee", xp: 1344, topics: 31, grade: 7.5, streak: 8, isCurrentUser: false },
-                        { name: "You", xp: userXP, topics: 28, grade: 8.0, streak: currentStreak, isCurrentUser: true },
-                        { name: "James Smith", xp: 1098, topics: 22, grade: 6.8, streak: 5, isCurrentUser: false },
-                        { name: "Maya Patel", xp: 987, topics: 19, grade: 6.5, streak: 4, isCurrentUser: false },
-                        { name: "Oliver Brown", xp: 876, topics: 17, grade: 6.2, streak: 3, isCurrentUser: false },
+                        { name: "Alex Chen", xp: 1847, grade: 8.6, streak: 14, isCurrentUser: false },
+                        { name: "Emma Wilson", xp: 1653, grade: 8.2, streak: 12, isCurrentUser: false },
+                        { name: "Liam Parker", xp: 1512, grade: 7.9, streak: 9, isCurrentUser: false },
+                        { name: "Sophia Lee", xp: 1344, grade: 7.5, streak: 8, isCurrentUser: false },
+                        { name: "You", xp: userXP, grade: 8.0, streak: currentStreak, isCurrentUser: true },
+                        { name: "James Smith", xp: 1098, grade: 6.8, streak: 5, isCurrentUser: false },
+                        { name: "Maya Patel", xp: 987, grade: 6.5, streak: 4, isCurrentUser: false },
+                        { name: "Oliver Brown", xp: 876, grade: 6.2, streak: 3, isCurrentUser: false },
                       ];
 
                       // Calculate composite scores and rank players
                       const maxXP = Math.max(...players.map(p => p.xp));
-                      const maxTopics = Math.max(...players.map(p => p.topics));
                       const maxGrade = 9.0; // A* grade
                       const maxStreak = Math.max(...players.map(p => p.streak));
 
                       const playersWithScores = players.map(player => {
                         // Normalize each stat to 0-1 scale
                         const normalizedXP = player.xp / maxXP;
-                        const normalizedTopics = player.topics / maxTopics;
                         const normalizedGrade = player.grade / maxGrade;
                         const normalizedStreak = player.streak / maxStreak;
 
                         // Calculate composite score (average of all normalized stats)
-                        const compositeScore = (normalizedXP + normalizedTopics + normalizedGrade + normalizedStreak) / 4;
+                        const compositeScore = (normalizedXP + normalizedGrade + normalizedStreak) / 3;
                         
                         return {
                           ...player,
@@ -1226,7 +1223,7 @@ const Dashboard = () => {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          className={`grid grid-cols-6 gap-4 items-center p-4 rounded-xl hover:bg-gray-50 transition-colors ${
+                          className={`grid grid-cols-5 gap-4 items-center p-4 rounded-xl hover:bg-gray-50 transition-colors ${
                             player.isCurrentUser ? 'bg-blue-50 border-2 border-blue-200' : 'bg-gray-25'
                           }`}
                         >
@@ -1246,24 +1243,18 @@ const Dashboard = () => {
                             )}
                           </div>
 
-                          {/* XP */}
-                          <div className="flex items-center space-x-1">
-                            <Gem className="w-4 h-4 text-cyan-400" />
-                            <span className="font-bold text-gray-800">{player.xp.toLocaleString()}</span>
-                          </div>
-
-                          {/* Topics */}
-                          <div className="flex items-center space-x-1">
-                            <BookOpen className="w-4 h-4 text-green-400" />
-                            <span className="font-bold text-gray-800">{player.topics}</span>
-                          </div>
-
-                           {/* Average Grade */}
-                           <div>
-                             <span className={`px-3 py-1 rounded-full text-sm font-bold ${getGradeColor(player.grade)}`}>
-                               {player.grade === 0 ? '0.0' : player.grade}
-                             </span>
+                           {/* XP */}
+                           <div className="flex items-center space-x-1">
+                             <Gem className="w-4 h-4 text-cyan-400" />
+                             <span className="font-bold text-gray-800">{player.xp.toLocaleString()}</span>
                            </div>
+
+                            {/* Average Grade */}
+                            <div>
+                              <span className={`px-3 py-1 rounded-full text-sm font-bold ${getGradeColor(player.grade)}`}>
+                                {player.grade === 0 ? '0.0' : player.grade}
+                              </span>
+                            </div>
 
                           {/* Streak */}
                           <div className="flex items-center space-x-1">
