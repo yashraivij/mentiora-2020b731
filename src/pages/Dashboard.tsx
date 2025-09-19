@@ -91,6 +91,7 @@ const Dashboard = () => {
   const [userHearts, setUserHearts] = useState(5);
   const [userGems, setUserGems] = useState(850);
   const [userSubjectsWithGrades, setUserSubjectsWithGrades] = useState<any[]>([]);
+  const [predictedGrades, setPredictedGrades] = useState<any[]>([]);
 
   // Notebook state
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
@@ -169,6 +170,9 @@ const Dashboard = () => {
         // Store full subject data for progress tab
         setUserSubjectsWithGrades(data);
         
+        // Load predicted grades
+        loadPredictedGrades();
+        
         const subjectIds = data
           .map((record) => {
             const examBoard = record.exam_board.toLowerCase();
@@ -190,6 +194,36 @@ const Dashboard = () => {
       }
     } catch (error) {
       console.error("Error loading user subjects:", error);
+    }
+  };
+
+  // Load predicted grades from database
+  const loadPredictedGrades = async () => {
+    if (!user?.id) return;
+
+    try {
+      const { data, error } = await supabase
+        .from('predicted_exam_completions')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error loading predicted grades:', error);
+        return;
+      }
+
+      // Group by subject_id and get the latest prediction for each subject
+      const latestGrades = data?.reduce((acc: any, grade: any) => {
+        if (!acc[grade.subject_id] || new Date(grade.created_at) > new Date(acc[grade.subject_id].created_at)) {
+          acc[grade.subject_id] = grade;
+        }
+        return acc;
+      }, {});
+
+      setPredictedGrades(Object.values(latestGrades || {}));
+    } catch (error) {
+      console.error('Error loading predicted grades:', error);
     }
   };
 
@@ -684,110 +718,194 @@ const Dashboard = () => {
           {/* Progress tab */}
           {activeTab === "progress" && (
             <div>
-              <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">
                   Your Predicted Grades
                 </h2>
+                <p className="text-gray-600 text-lg">
+                  AI-powered grade predictions based on your performance
+                </p>
               </div>
 
-              {userSubjectsWithGrades.length === 0 ? (
+              {predictedGrades.length === 0 ? (
                 <div className="text-center py-16">
-                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
-                    <TrendingUp className="h-12 w-12 text-gray-400" />
+                  <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center">
+                    <TrendingUp className="h-16 w-16 text-purple-500" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                    No subjects found
+                    No Grade Predictions Yet
                   </h3>
-                  <p className="text-lg text-gray-600 mb-8">
-                    Add subjects to see your predicted grades
+                  <p className="text-lg text-gray-600 mb-8 max-w-md mx-auto">
+                    Complete some practice exams to generate AI-powered grade predictions for your subjects
                   </p>
                   <Button
-                    onClick={() => navigate("/")}
-                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-2xl text-lg"
+                    onClick={() => setActiveTab("learn")}
+                    className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-bold py-4 px-8 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all duration-200"
                   >
-                    Browse Subjects
+                    Start Practicing
                   </Button>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {userSubjectsWithGrades.map((subject, index) => {
-                    const subjectKey = subject.subject_name.toLowerCase().replace(/\s+/g, '-');
-                    const colors = subjectColors[subjectKey] || subjectColors["physics"];
+                <div className="space-y-8">
+                  {/* Overall Performance Summary */}
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-8 border border-blue-100">
+                    <div className="flex items-center justify-between mb-6">
+                      <div>
+                        <h3 className="text-2xl font-bold text-gray-800 mb-2">Performance Overview</h3>
+                        <p className="text-gray-600">Your latest AI predictions across all subjects</p>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-3xl font-bold text-blue-600 mb-1">
+                          {(predictedGrades.reduce((sum, grade) => sum + parseInt(grade.grade), 0) / predictedGrades.length).toFixed(1)}
+                        </div>
+                        <div className="text-sm text-gray-500">Average Grade</div>
+                      </div>
+                    </div>
                     
-                    const getGradeColor = (grade: string) => {
-                      const gradeNum = parseInt(grade);
-                      if (gradeNum >= 7) return "text-green-600 bg-green-50";
-                      if (gradeNum >= 5) return "text-yellow-600 bg-yellow-50";
-                      if (gradeNum >= 4) return "text-orange-600 bg-orange-50";
-                      return "text-red-600 bg-red-50";
-                    };
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <div className="text-center p-4 bg-white rounded-xl border border-gray-100">
+                        <div className="text-2xl font-bold text-green-600 mb-1">
+                          {predictedGrades.filter(g => parseInt(g.grade) >= 7).length}
+                        </div>
+                        <div className="text-sm text-gray-500">Grade 7-9</div>
+                      </div>
+                      <div className="text-center p-4 bg-white rounded-xl border border-gray-100">
+                        <div className="text-2xl font-bold text-blue-600 mb-1">
+                          {predictedGrades.filter(g => parseInt(g.grade) >= 5 && parseInt(g.grade) < 7).length}
+                        </div>
+                        <div className="text-sm text-gray-500">Grade 5-6</div>
+                      </div>
+                      <div className="text-center p-4 bg-white rounded-xl border border-gray-100">
+                        <div className="text-2xl font-bold text-orange-600 mb-1">
+                          {predictedGrades.filter(g => parseInt(g.grade) >= 4 && parseInt(g.grade) < 5).length}
+                        </div>
+                        <div className="text-sm text-gray-500">Grade 4</div>
+                      </div>
+                      <div className="text-center p-4 bg-white rounded-xl border border-gray-100">
+                        <div className="text-2xl font-bold text-purple-600 mb-1">
+                          {predictedGrades.length}
+                        </div>
+                        <div className="text-sm text-gray-500">Total Subjects</div>
+                      </div>
+                    </div>
+                  </div>
 
-                    return (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                      >
-                        <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                          <CardContent className="p-6">
-                            <div className="flex items-center space-x-3 mb-4">
-                              <div className={`w-12 h-12 ${colors.bg} rounded-xl flex items-center justify-center`}>
-                                {(() => {
-                                  const IconComponent = getSubjectIcon(subjectKey);
-                                  return <IconComponent className="h-6 w-6 text-white" />;
-                                })()}
-                              </div>
-                              <div className="flex-1">
-                                <h3 className="text-lg font-bold text-gray-800">
-                                  {subject.subject_name}
-                                </h3>
-                                <p className="text-sm text-gray-500">
-                                  {subject.exam_board.toUpperCase()}
-                                </p>
-                              </div>
-                            </div>
-                            
-                            <div className="space-y-3">
-                              <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium text-gray-600">Predicted Grade</span>
-                                <div className={`px-3 py-1 rounded-full text-sm font-bold ${getGradeColor(subject.predicted_grade)}`}>
-                                  Grade {subject.predicted_grade}
-                                </div>
-                              </div>
-                              
-                              {subject.target_grade && (
-                                <div className="flex items-center justify-between">
-                                  <span className="text-sm font-medium text-gray-600">Target Grade</span>
-                                  <div className="px-3 py-1 rounded-full text-sm font-bold bg-gray-100 text-gray-700">
-                                    Grade {subject.target_grade}
+                  {/* Individual Subject Cards */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    {predictedGrades.map((prediction, index) => {
+                      const subjectKey = prediction.subject_id;
+                      const colors = subjectColors[subjectKey] || subjectColors["physics"];
+                      const subjectName = curriculum.find(s => s.id === subjectKey)?.name || prediction.subject_id;
+                      
+                      const getGradeColor = (grade: string) => {
+                        const gradeNum = parseInt(grade);
+                        if (gradeNum >= 7) return "from-green-400 to-emerald-500";
+                        if (gradeNum >= 5) return "from-blue-400 to-cyan-500";
+                        if (gradeNum >= 4) return "from-orange-400 to-amber-500";
+                        return "from-red-400 to-rose-500";
+                      };
+
+                      const getGradeTextColor = (grade: string) => {
+                        const gradeNum = parseInt(grade);
+                        if (gradeNum >= 7) return "text-green-700";
+                        if (gradeNum >= 5) return "text-blue-700";
+                        if (gradeNum >= 4) return "text-orange-700";
+                        return "text-red-700";
+                      };
+
+                      const getGradeBgColor = (grade: string) => {
+                        const gradeNum = parseInt(grade);
+                        if (gradeNum >= 7) return "bg-green-50";
+                        if (gradeNum >= 5) return "bg-blue-50";
+                        if (gradeNum >= 4) return "bg-orange-50";
+                        return "bg-red-50";
+                      };
+
+                      return (
+                        <motion.div
+                          key={prediction.subject_id}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                        >
+                          <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                            <div className={`h-2 bg-gradient-to-r ${colors.bg.replace('bg-', 'from-')} to-${colors.bg.split('-')[1]}-600`}></div>
+                            <CardContent className="p-6">
+                              <div className="flex items-center justify-between mb-6">
+                                <div className="flex items-center space-x-3">
+                                  <div className={`w-12 h-12 ${colors.bg} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200`}>
+                                    {(() => {
+                                      const IconComponent = getSubjectIcon(subjectKey);
+                                      return <IconComponent className="h-6 w-6 text-white" />;
+                                    })()}
+                                  </div>
+                                  <div>
+                                    <h3 className="text-lg font-bold text-gray-800">
+                                      {subjectName}
+                                    </h3>
+                                    <p className="text-sm text-gray-500">
+                                      Latest Prediction
+                                    </p>
                                   </div>
                                 </div>
-                              )}
-                              
-                              {subject.target_grade && subject.predicted_grade && (
-                                <div className="mt-4 pt-3 border-t border-gray-100">
-                                  {parseInt(subject.predicted_grade) >= parseInt(subject.target_grade) ? (
-                                    <div className="flex items-center space-x-2 text-green-600">
-                                      <Check className="h-4 w-4" />
-                                      <span className="text-sm font-medium">On track for target!</span>
+                                
+                                <div className={`px-4 py-2 rounded-2xl ${getGradeBgColor(prediction.grade)} border-2 border-white shadow-lg`}>
+                                  <div className="text-center">
+                                    <div className={`text-2xl font-bold ${getGradeTextColor(prediction.grade)}`}>
+                                      {prediction.grade}
                                     </div>
-                                  ) : (
-                                    <div className="flex items-center space-x-2 text-amber-600">
-                                      <TrendingUp className="h-4 w-4" />
-                                      <span className="text-sm font-medium">
-                                        {parseInt(subject.target_grade) - parseInt(subject.predicted_grade)} grade{parseInt(subject.target_grade) - parseInt(subject.predicted_grade) > 1 ? 's' : ''} to go
-                                      </span>
+                                    <div className="text-xs text-gray-500 uppercase tracking-wide">
+                                      Grade
                                     </div>
-                                  )}
+                                  </div>
                                 </div>
-                              )}
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
-                    );
-                  })}
+                              </div>
+                              
+                              <div className="space-y-4">
+                                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                                  <span className="text-sm font-medium text-gray-600">Accuracy</span>
+                                  <div className="text-right">
+                                    <div className="text-lg font-bold text-gray-800">
+                                      {prediction.percentage.toFixed(1)}%
+                                    </div>
+                                    <div className="w-16 h-2 bg-gray-200 rounded-full mt-1">
+                                      <div 
+                                        className={`h-2 rounded-full bg-gradient-to-r ${getGradeColor(prediction.grade)}`}
+                                        style={{ width: `${prediction.percentage}%` }}
+                                      ></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                
+                                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                                  <span className="text-sm font-medium text-gray-600">Score</span>
+                                  <div className="text-lg font-bold text-gray-800">
+                                    {prediction.achieved_marks}/{prediction.total_marks}
+                                  </div>
+                                </div>
+                                
+                                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                                  <span className="text-sm font-medium text-gray-600">Exam Date</span>
+                                  <div className="text-sm font-medium text-gray-700">
+                                    {new Date(prediction.exam_date).toLocaleDateString()}
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div className="mt-6 pt-4 border-t border-gray-100">
+                                <div className="flex items-center space-x-2 text-gray-600">
+                                  <Star className="h-4 w-4" />
+                                  <span className="text-sm">
+                                    Prediction confidence: {prediction.percentage >= 80 ? 'High' : prediction.percentage >= 60 ? 'Medium' : 'Developing'}
+                                  </span>
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>
