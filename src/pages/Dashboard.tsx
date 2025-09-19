@@ -1214,12 +1214,12 @@ const Dashboard = () => {
                 
                 <div className="p-6">
                   {/* Column Headers */}
-                  <div className="grid grid-cols-5 gap-4 text-sm font-bold text-gray-600 uppercase tracking-wide mb-4 px-4">
-                    <div>Rank</div>
-                    <div>Student</div>
-                    <div>MP</div>
-                    <div>Avg Grade</div>
-                    <div>Streak</div>
+                  <div className="grid grid-cols-5 gap-4 text-sm font-bold text-gray-600 uppercase tracking-wide mb-4">
+                    <div className="text-left">Rank</div>
+                    <div className="text-left">Student</div>
+                    <div className="text-left">MP</div>
+                    <div className="text-left">Avg Grade</div>
+                    <div className="text-left">Streak</div>
                   </div>
 
                    {/* Leaderboard Entries */}
@@ -1296,7 +1296,7 @@ const Dashboard = () => {
                           </div>
 
                           {/* Student Name */}
-                          <div className={`font-bold ${player.isCurrentUser ? 'text-blue-800' : 'text-gray-800'}`}>
+                          <div className={`font-bold text-left ${player.isCurrentUser ? 'text-blue-800' : 'text-gray-800'}`}>
                             {player.name}
                             {player.isCurrentUser && (
                               <Badge className="ml-2 bg-blue-500 hover:bg-blue-600 text-white text-xs">You</Badge>
