@@ -25,30 +25,25 @@ const Pricing = () => {
     setIsLoading(false);
   }, [user?.id]);
 
-  // Dynamic subject rotation every 4 seconds with smooth scroll
+  // Dynamic subject rotation every 4 seconds
   const subjects = ["Math", "Science", "English", "History", "Physics", "Chemistry", "Biology"];
   const [currentSubjectIndex, setCurrentSubjectIndex] = useState(0);
-  const [nextSubjectIndex, setNextSubjectIndex] = useState(1);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const userName = user?.email?.split('@')[0] || "Student";
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsTransitioning(true);
-      
+      setIsAnimating(true);
       setTimeout(() => {
-        const newIndex = (currentSubjectIndex + 1) % subjects.length;
-        setCurrentSubjectIndex(newIndex);
-        setNextSubjectIndex((newIndex + 1) % subjects.length);
-        setTimeout(() => setIsTransitioning(false), 50);
-      }, 600);
+        setCurrentSubjectIndex((prev) => (prev + 1) % subjects.length);
+        setTimeout(() => setIsAnimating(false), 50);
+      }, 300);
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [currentSubjectIndex, subjects.length]);
+  }, [subjects.length]);
 
   const currentSubject = subjects[currentSubjectIndex];
-  const nextSubject = subjects[nextSubjectIndex];
 
   const handleStartTrial = () => {
     openPaymentLink();
@@ -71,23 +66,17 @@ const Pricing = () => {
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-8">
         {/* Dynamic Header */}
         <div className="text-center mb-8 max-w-lg animate-fade-in">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight flex items-center justify-center flex-wrap gap-2">
-            <span>Progress faster in your</span>
-            <div className="relative overflow-hidden inline-block min-w-[120px]">
-              <div 
-                className={`transition-transform duration-700 ease-in-out ${
-                  isTransitioning ? '-translate-y-full' : 'translate-y-0'
-                }`}
-              >
-                <span className="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent block text-center">
-                  {currentSubject}
-                </span>
-                <span className="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent block text-center">
-                  {nextSubject}
-                </span>
-              </div>
-            </div>
-            <span>studies with Super!</span>
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 leading-tight">
+            Progress faster in your
+          </h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+            <span 
+              className={`bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent transition-all duration-300 ease-in-out transform ${
+                isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+              }`}
+            >
+              {currentSubject}
+            </span> studies with Super!
           </h1>
           <p className="text-white/80 text-sm mt-2">
             Welcome back, {userName}! Ready to supercharge your learning?
