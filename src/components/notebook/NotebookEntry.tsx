@@ -4,9 +4,7 @@ import { Button } from "@/components/ui/button";
 import { BookOpen, Lightbulb, Target, Clock, ExternalLink, Brain, AlertCircle, Unlock, Crown } from "lucide-react";
 import { format } from "date-fns";
 import { useAuth } from "@/contexts/AuthContext";
-import { useSubscription } from "@/hooks/useSubscription";
-import { PremiumUpgradeModal } from "@/components/ui/premium-upgrade-modal";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Safe text formatting function to prevent XSS
 const formatBoldText = (text: string): React.ReactNode => {
@@ -44,8 +42,7 @@ interface NotebookEntryProps {
 
 export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
   const { isPremium } = useAuth();
-  const { openPaymentLink } = useSubscription();
-  const [showPromoModal, setShowPromoModal] = useState(false);
+  const navigate = useNavigate();
   
   const BlurSpan = ({ children }: { children: React.ReactNode }) => (
     <span className={!isPremium ? "blur-sm" : ""}>{children}</span>
@@ -150,7 +147,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
               Upgrade to Premium to access complete revision notes and unlock all study features
             </p>
             <Button 
-              onClick={() => setShowPromoModal(true)}
+              onClick={() => navigate("/pricing")}
               size="sm" 
               className="w-full bg-white text-blue-500 hover:bg-gray-100 font-bold py-3 rounded-2xl"
             >
@@ -198,12 +195,6 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
         </div>
 
       </CardContent>
-      
-      <PremiumUpgradeModal
-        isOpen={showPromoModal}
-        onClose={() => setShowPromoModal(false)}
-        onUpgrade={openPaymentLink}
-      />
     </Card>
   );
 };
