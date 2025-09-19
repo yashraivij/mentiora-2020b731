@@ -1754,7 +1754,7 @@ const Dashboard = () => {
                 <div className="bg-white/20 rounded-lg p-2">
                   <Crown className="h-6 w-6" />
                 </div>
-                <span className="font-bold text-lg">Upgrade to Premium</span>
+                <span className="font-bold text-lg">Go Premium</span>
               </div>
               <p className="text-white/90 mb-4">
                 Unlock exclusive study features and advanced analytics!
