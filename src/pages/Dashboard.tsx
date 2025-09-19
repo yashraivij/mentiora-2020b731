@@ -805,15 +805,21 @@ const Dashboard = () => {
 
                   {/* Subject Cards */}
                   <div className="space-y-4">
-                    {predictedGrades.map((prediction, index) => {
-                      // Map database subject_id to curriculum subject_id for consistent icons and colors
-                      const mappedSubjectId = mapDatabaseSubjectToCurriculum(prediction.subject_id);
-                      const curriculumSubject = curriculum.find(s => s.id === mappedSubjectId);
-                      const subjectKey = mappedSubjectId;
+                    {userSubjects
+                      .map(subjectId => {
+                        // Find the predicted grade for this user's subject
+                        const prediction = predictedGrades.find(grade => {
+                          const mappedDbSubject = mapDatabaseSubjectToCurriculum(grade.subject_id);
+                          return mappedDbSubject === subjectId;
+                        });
+                        return prediction ? { ...prediction, mappedSubjectId: subjectId } : null;
+                      })
+                      .filter(Boolean)
+                      .map((prediction, index) => {
+                      const subjectKey = prediction.mappedSubjectId;
                       const colors = subjectColors[subjectKey] || subjectColors["physics"];
+                      const curriculumSubject = curriculum.find(s => s.id === subjectKey);
                       const subjectName = curriculumSubject?.name || prediction.subject_id;
-                      
-                      console.log('DB subject_id:', prediction.subject_id, 'Mapped to:', mappedSubjectId, 'Found curriculum:', !!curriculumSubject);
                       
                       const getGradeColor = (grade: string) => {
                         const gradeNum = parseInt(grade || '0');
@@ -843,7 +849,7 @@ const Dashboard = () => {
 
                       return (
                         <motion.div
-                          key={prediction.subject_id}
+                          key={prediction.subject_id + '-' + index}
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 }}
@@ -851,7 +857,7 @@ const Dashboard = () => {
                           <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-200 border-2 border-gray-100">
                             <div className="flex items-center justify-between">
                               <div className="flex items-center space-x-4 flex-1">
-                                {/* Subject Icon - Using mapped subject ID for consistency */}
+                                {/* Subject Icon - Using curriculum subject ID for consistency */}
                                 <div className={`w-14 h-14 ${colors.bg} rounded-2xl flex items-center justify-center shadow-md`}>
                                   {(() => {
                                     const IconComponent = getSubjectIcon(subjectKey);
