@@ -1772,12 +1772,17 @@ const Dashboard = () => {
           <Card className="border-0 shadow-md">
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-gray-800">Weekly League</h3>
-                <span className="text-blue-500 font-bold text-sm">VIEW LEAGUE</span>
+                <h3 className="text-lg font-bold text-gray-800">Leaderboards</h3>
+                <button 
+                  className="text-blue-500 font-bold text-sm hover:text-blue-600 cursor-pointer"
+                  onClick={() => setActiveTab("leaderboards")}
+                >
+                  VIEW LEAGUE
+                </button>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                  <Calendar className="w-5 h-5 text-white" />
+                  <Trophy className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex-1">
                   <p className="text-sm text-gray-600">
