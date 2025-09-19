@@ -717,34 +717,62 @@ const Dashboard = () => {
 
           {/* Progress tab */}
           {activeTab === "progress" && (
-            <div>
-              <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+            <div className="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen -m-8 p-8">
+              {/* Header */}
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-800 mb-2">
                   Your Predicted Grades
                 </h2>
+                <p className="text-gray-600 text-lg">
+                  See where you stand — and how to improve.
+                </p>
               </div>
 
               {predictedGrades.length === 0 ? (
                 <div className="text-center py-16">
-                  <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center">
+                  <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-white shadow-lg flex items-center justify-center">
                     <TrendingUp className="h-16 w-16 text-purple-500" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                    No Grade Predictions Yet
+                    No predictions yet
                   </h3>
                   <p className="text-lg text-gray-600 mb-8 max-w-md mx-auto">
-                    Complete some practice exams to generate grade predictions for your subjects
+                    Complete some practice to see your predicted grades
                   </p>
                   <Button
                     onClick={() => setActiveTab("learn")}
-                    className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-bold py-4 px-8 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all duration-200"
+                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all duration-200"
                   >
-                    Start Practicing
+                    Start Practice
                   </Button>
                 </div>
               ) : (
-                <div className="max-w-4xl mx-auto">
-                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                <div className="max-w-4xl mx-auto space-y-6">
+                  {/* Overall Summary Card */}
+                  <div className="bg-white rounded-3xl p-8 shadow-lg border-4 border-yellow-200">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg">
+                          <Trophy className="h-8 w-8 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-2xl font-bold text-gray-800">
+                            Your average grade is {(predictedGrades.reduce((sum, grade) => sum + parseInt(grade.grade), 0) / predictedGrades.length).toFixed(0)}. Keep it up!
+                          </h3>
+                          <p className="text-gray-600">You're making great progress</p>
+                        </div>
+                      </div>
+                      <Button
+                        onClick={() => setActiveTab("learn")}
+                        className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200"
+                      >
+                        Start Practice
+                      </Button>
+                    </div>
+                  </div>
+
+                  {/* Subject Cards */}
+                  <div className="space-y-4">
                     {predictedGrades.map((prediction, index) => {
                       const subjectKey = prediction.subject_id;
                       const colors = subjectColors[subjectKey] || subjectColors["physics"];
@@ -752,64 +780,84 @@ const Dashboard = () => {
                       
                       const getGradeColor = (grade: string) => {
                         const gradeNum = parseInt(grade);
-                        if (gradeNum >= 7) return "from-green-400 to-emerald-500";
-                        if (gradeNum >= 5) return "from-blue-400 to-cyan-500";
-                        if (gradeNum >= 4) return "from-orange-400 to-amber-500";
-                        return "from-red-400 to-rose-500";
-                      };
-
-                      const getGradeTextColor = (grade: string) => {
-                        const gradeNum = parseInt(grade);
                         if (gradeNum >= 7) return "text-green-600";
                         if (gradeNum >= 5) return "text-blue-600";
                         if (gradeNum >= 4) return "text-orange-600";
                         return "text-red-600";
                       };
 
+                      const getProgressColor = (grade: string) => {
+                        const gradeNum = parseInt(grade);
+                        if (gradeNum >= 7) return "bg-green-400";
+                        if (gradeNum >= 5) return "bg-blue-400";
+                        if (gradeNum >= 4) return "bg-orange-400";
+                        return "bg-red-400";
+                      };
+
+                      const getStatusChip = (grade: string, percentage: number) => {
+                        const gradeNum = parseInt(grade);
+                        if (gradeNum >= 7 && percentage >= 80) return { text: "On track", color: "bg-green-100 text-green-700" };
+                        if (gradeNum >= 5 && percentage >= 70) return { text: "Improving", color: "bg-blue-100 text-blue-700" };
+                        if (gradeNum >= 4) return { text: "Needs work", color: "bg-orange-100 text-orange-700" };
+                        return { text: "Keep trying", color: "bg-red-100 text-red-700" };
+                      };
+
+                      const statusChip = getStatusChip(prediction.grade, prediction.percentage);
+
                       return (
                         <motion.div
                           key={prediction.subject_id}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 }}
                         >
-                          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group bg-white">
-                            <CardContent className="p-8 text-center">
-                              <div className="flex flex-col items-center space-y-6">
-                                <div className={`w-16 h-16 ${colors.bg} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200`}>
+                          <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-200 border-2 border-gray-100">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center space-x-4 flex-1">
+                                {/* Subject Icon */}
+                                <div className={`w-14 h-14 ${colors.bg} rounded-2xl flex items-center justify-center shadow-md`}>
                                   {(() => {
                                     const IconComponent = getSubjectIcon(subjectKey);
-                                    return <IconComponent className="h-8 w-8 text-white" />;
+                                    return <IconComponent className="h-7 w-7 text-white" />;
                                   })()}
                                 </div>
-                                
-                                <div>
-                                  <h3 className="text-xl font-bold text-gray-800 mb-2">
-                                    {subjectName}
-                                  </h3>
-                                  <p className="text-sm text-gray-500 uppercase tracking-wide">
-                                    GCSE Prediction
+
+                                {/* Subject Info */}
+                                <div className="flex-1">
+                                  <div className="flex items-center space-x-3 mb-2">
+                                    <h3 className="text-xl font-bold text-gray-800">
+                                      {subjectName}
+                                    </h3>
+                                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusChip.color}`}>
+                                      {statusChip.text}
+                                    </span>
+                                  </div>
+                                  
+                                  {/* Progress Bar */}
+                                  <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
+                                    <div
+                                      className={`h-3 rounded-full ${getProgressColor(prediction.grade)} transition-all duration-700`}
+                                      style={{ width: `${prediction.percentage}%` }}
+                                    />
+                                  </div>
+                                  
+                                  <p className="text-sm text-gray-600">
+                                    {prediction.percentage.toFixed(0)}% accuracy in practice
                                   </p>
                                 </div>
-                                
-                                <div className="relative">
-                                  <div className={`w-24 h-24 rounded-full bg-gradient-to-r ${getGradeColor(prediction.grade)} flex items-center justify-center shadow-lg`}>
-                                    <div className="text-center">
-                                      <div className="text-3xl font-bold text-white">
-                                        {prediction.grade}
-                                      </div>
-                                    </div>
-                                  </div>
+                              </div>
+
+                              {/* Large Grade Display */}
+                              <div className="text-center ml-6">
+                                <div className={`text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1`}>
+                                  {prediction.grade}
                                 </div>
-                                
-                                <div className="w-full pt-4 border-t border-gray-100">
-                                  <div className={`text-lg font-semibold ${getGradeTextColor(prediction.grade)}`}>
-                                    {prediction.percentage.toFixed(0)}% accuracy
-                                  </div>
+                                <div className="text-sm text-gray-500 uppercase tracking-wide font-medium">
+                                  Predicted
                                 </div>
                               </div>
-                            </CardContent>
-                          </Card>
+                            </div>
+                          </div>
                         </motion.div>
                       );
                     })}
