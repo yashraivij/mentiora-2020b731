@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb, HelpCircle, X, StickyNote, MessageSquare, GraduationCap } from "lucide-react";
+import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb, HelpCircle, X, StickyNote, Star, BookOpen } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -780,7 +780,7 @@ const Practice = () => {
               <Card className="bg-card/80 backdrop-blur-sm border border-border">
                 <CardHeader>
                   <CardTitle className="flex items-center text-foreground">
-                    <GraduationCap className="h-5 w-5 mr-2 text-blue-600 dark:text-blue-400" />
+                    <Star className="h-5 w-5 mr-2 text-yellow-600 dark:text-yellow-400" />
                     Your Feedback
                   </CardTitle>
                   <div className="flex items-center space-x-2">
@@ -825,7 +825,7 @@ const Practice = () => {
                   {/* Smart Feedback */}
                   <div>
                     <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <MessageSquare className="h-4 w-4 mr-2 text-purple-600 dark:text-purple-400" />
+                      <BookOpen className="h-4 w-4 mr-2 text-blue-600 dark:text-blue-400" />
                       Teacher's Notes
                     </h4>
                     <div className="bg-yellow-50 dark:bg-yellow-950/20 p-4 rounded-lg border-l-4 border-yellow-500">
