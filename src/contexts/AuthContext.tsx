@@ -109,10 +109,19 @@ const refreshSubscription = async (userId?: string) => {
         if (session?.user) {
           setTimeout(async () => {
             await refreshSubscription(session.user.id);
-            // Handle daily login MP reward
+            // Handle daily login MP reward server-side
             if (event === 'SIGNED_IN') {
-              const { MPPointsSystem } = await import('@/lib/mpPointsSystem');
-              await MPPointsSystem.handleDailyLogin(session.user.id);
+              try {
+                const response = await supabase.functions.invoke('award-mp', {
+                  body: { action: 'daily_login', userId: session.user.id }
+                });
+                
+                if (response.data?.awarded > 0) {
+                  console.log(`Daily login bonus: +${response.data.awarded} MP`);
+                }
+              } catch (error) {
+                console.error('Error awarding daily login MP:', error);
+              }
             }
           }, 0);
         } else if (event === 'SIGNED_OUT') {

@@ -428,10 +428,27 @@ const Practice = () => {
     // Clear the current session state since it's completed
     clearSessionState();
     
-    // Handle MP rewards for practice completion
+    // Handle MP rewards for practice completion server-side
     if (user?.id && subjectId && topicId) {
-      const { MPPointsSystem } = await import('@/lib/mpPointsSystem');
-      await MPPointsSystem.handlePracticeCompletion(user.id, subjectId, topicId);
+      try {
+        const { data } = await supabase.functions.invoke('award-mp', {
+          body: { 
+            action: 'practice_completion', 
+            userId: user.id, 
+            subjectId, 
+            topicId 
+          }
+        });
+        
+        if (data?.awarded > 0) {
+          console.log(`Practice completion rewards: +${data.awarded} MP`);
+          if (data.breakdown) {
+            console.log('MP Breakdown:', data.breakdown);
+          }
+        }
+      } catch (error) {
+        console.error('Error awarding practice completion MP:', error);
+      }
     }
     
     // Save progress
