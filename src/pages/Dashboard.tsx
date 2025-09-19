@@ -719,12 +719,9 @@ const Dashboard = () => {
           {activeTab === "progress" && (
             <div>
               <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">
+                <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
                   Your Predicted Grades
                 </h2>
-                <p className="text-gray-600 text-lg">
-                  AI-powered grade predictions based on your performance
-                </p>
               </div>
 
               {predictedGrades.length === 0 ? (
@@ -736,7 +733,7 @@ const Dashboard = () => {
                     No Grade Predictions Yet
                   </h3>
                   <p className="text-lg text-gray-600 mb-8 max-w-md mx-auto">
-                    Complete some practice exams to generate AI-powered grade predictions for your subjects
+                    Complete some practice exams to generate grade predictions for your subjects
                   </p>
                   <Button
                     onClick={() => setActiveTab("learn")}
@@ -746,52 +743,8 @@ const Dashboard = () => {
                   </Button>
                 </div>
               ) : (
-                <div className="space-y-8">
-                  {/* Overall Performance Summary */}
-                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-8 border border-blue-100">
-                    <div className="flex items-center justify-between mb-6">
-                      <div>
-                        <h3 className="text-2xl font-bold text-gray-800 mb-2">Performance Overview</h3>
-                        <p className="text-gray-600">Your latest AI predictions across all subjects</p>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-3xl font-bold text-blue-600 mb-1">
-                          {(predictedGrades.reduce((sum, grade) => sum + parseInt(grade.grade), 0) / predictedGrades.length).toFixed(1)}
-                        </div>
-                        <div className="text-sm text-gray-500">Average Grade</div>
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      <div className="text-center p-4 bg-white rounded-xl border border-gray-100">
-                        <div className="text-2xl font-bold text-green-600 mb-1">
-                          {predictedGrades.filter(g => parseInt(g.grade) >= 7).length}
-                        </div>
-                        <div className="text-sm text-gray-500">Grade 7-9</div>
-                      </div>
-                      <div className="text-center p-4 bg-white rounded-xl border border-gray-100">
-                        <div className="text-2xl font-bold text-blue-600 mb-1">
-                          {predictedGrades.filter(g => parseInt(g.grade) >= 5 && parseInt(g.grade) < 7).length}
-                        </div>
-                        <div className="text-sm text-gray-500">Grade 5-6</div>
-                      </div>
-                      <div className="text-center p-4 bg-white rounded-xl border border-gray-100">
-                        <div className="text-2xl font-bold text-orange-600 mb-1">
-                          {predictedGrades.filter(g => parseInt(g.grade) >= 4 && parseInt(g.grade) < 5).length}
-                        </div>
-                        <div className="text-sm text-gray-500">Grade 4</div>
-                      </div>
-                      <div className="text-center p-4 bg-white rounded-xl border border-gray-100">
-                        <div className="text-2xl font-bold text-purple-600 mb-1">
-                          {predictedGrades.length}
-                        </div>
-                        <div className="text-sm text-gray-500">Total Subjects</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Individual Subject Cards */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div className="max-w-4xl mx-auto">
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                     {predictedGrades.map((prediction, index) => {
                       const subjectKey = prediction.subject_id;
                       const colors = subjectColors[subjectKey] || subjectColors["physics"];
@@ -807,18 +760,10 @@ const Dashboard = () => {
 
                       const getGradeTextColor = (grade: string) => {
                         const gradeNum = parseInt(grade);
-                        if (gradeNum >= 7) return "text-green-700";
-                        if (gradeNum >= 5) return "text-blue-700";
-                        if (gradeNum >= 4) return "text-orange-700";
-                        return "text-red-700";
-                      };
-
-                      const getGradeBgColor = (grade: string) => {
-                        const gradeNum = parseInt(grade);
-                        if (gradeNum >= 7) return "bg-green-50";
-                        if (gradeNum >= 5) return "bg-blue-50";
-                        if (gradeNum >= 4) return "bg-orange-50";
-                        return "bg-red-50";
+                        if (gradeNum >= 7) return "text-green-600";
+                        if (gradeNum >= 5) return "text-blue-600";
+                        if (gradeNum >= 4) return "text-orange-600";
+                        return "text-red-600";
                       };
 
                       return (
@@ -828,76 +773,39 @@ const Dashboard = () => {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
                         >
-                          <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
-                            <div className={`h-2 bg-gradient-to-r ${colors.bg.replace('bg-', 'from-')} to-${colors.bg.split('-')[1]}-600`}></div>
-                            <CardContent className="p-6">
-                              <div className="flex items-center justify-between mb-6">
-                                <div className="flex items-center space-x-3">
-                                  <div className={`w-12 h-12 ${colors.bg} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200`}>
-                                    {(() => {
-                                      const IconComponent = getSubjectIcon(subjectKey);
-                                      return <IconComponent className="h-6 w-6 text-white" />;
-                                    })()}
-                                  </div>
-                                  <div>
-                                    <h3 className="text-lg font-bold text-gray-800">
-                                      {subjectName}
-                                    </h3>
-                                    <p className="text-sm text-gray-500">
-                                      Latest Prediction
-                                    </p>
-                                  </div>
+                          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group bg-white">
+                            <CardContent className="p-8 text-center">
+                              <div className="flex flex-col items-center space-y-6">
+                                <div className={`w-16 h-16 ${colors.bg} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200`}>
+                                  {(() => {
+                                    const IconComponent = getSubjectIcon(subjectKey);
+                                    return <IconComponent className="h-8 w-8 text-white" />;
+                                  })()}
                                 </div>
                                 
-                                <div className={`px-4 py-2 rounded-2xl ${getGradeBgColor(prediction.grade)} border-2 border-white shadow-lg`}>
-                                  <div className="text-center">
-                                    <div className={`text-2xl font-bold ${getGradeTextColor(prediction.grade)}`}>
-                                      {prediction.grade}
-                                    </div>
-                                    <div className="text-xs text-gray-500 uppercase tracking-wide">
-                                      Grade
-                                    </div>
-                                  </div>
+                                <div>
+                                  <h3 className="text-xl font-bold text-gray-800 mb-2">
+                                    {subjectName}
+                                  </h3>
+                                  <p className="text-sm text-gray-500 uppercase tracking-wide">
+                                    GCSE Prediction
+                                  </p>
                                 </div>
-                              </div>
-                              
-                              <div className="space-y-4">
-                                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
-                                  <span className="text-sm font-medium text-gray-600">Accuracy</span>
-                                  <div className="text-right">
-                                    <div className="text-lg font-bold text-gray-800">
-                                      {prediction.percentage.toFixed(1)}%
-                                    </div>
-                                    <div className="w-16 h-2 bg-gray-200 rounded-full mt-1">
-                                      <div 
-                                        className={`h-2 rounded-full bg-gradient-to-r ${getGradeColor(prediction.grade)}`}
-                                        style={{ width: `${prediction.percentage}%` }}
-                                      ></div>
+                                
+                                <div className="relative">
+                                  <div className={`w-24 h-24 rounded-full bg-gradient-to-r ${getGradeColor(prediction.grade)} flex items-center justify-center shadow-lg`}>
+                                    <div className="text-center">
+                                      <div className="text-3xl font-bold text-white">
+                                        {prediction.grade}
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
                                 
-                                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
-                                  <span className="text-sm font-medium text-gray-600">Score</span>
-                                  <div className="text-lg font-bold text-gray-800">
-                                    {prediction.achieved_marks}/{prediction.total_marks}
+                                <div className="w-full pt-4 border-t border-gray-100">
+                                  <div className={`text-lg font-semibold ${getGradeTextColor(prediction.grade)}`}>
+                                    {prediction.percentage.toFixed(0)}% accuracy
                                   </div>
-                                </div>
-                                
-                                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
-                                  <span className="text-sm font-medium text-gray-600">Exam Date</span>
-                                  <div className="text-sm font-medium text-gray-700">
-                                    {new Date(prediction.exam_date).toLocaleDateString()}
-                                  </div>
-                                </div>
-                              </div>
-                              
-                              <div className="mt-6 pt-4 border-t border-gray-100">
-                                <div className="flex items-center space-x-2 text-gray-600">
-                                  <Star className="h-4 w-4" />
-                                  <span className="text-sm">
-                                    Prediction confidence: {prediction.percentage >= 80 ? 'High' : prediction.percentage >= 60 ? 'Medium' : 'Developing'}
-                                  </span>
                                 </div>
                               </div>
                             </CardContent>
