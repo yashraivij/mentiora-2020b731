@@ -7,7 +7,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, User, Trash2, Settings as SettingsIcon, Crown, Sparkles, Shield, Zap } from "lucide-react";
+import { ArrowLeft, User, Trash2, Settings as SettingsIcon, Crown, Sparkles, Shield, Zap, CreditCard } from "lucide-react";
+import { openManageBilling } from "@/lib/manageBilling";
 
 const Settings = () => {
   const { user, logout, isPremium } = useAuth();
@@ -182,6 +183,67 @@ const Settings = () => {
             </CardContent>
           </Card>
         </motion.div>
+
+        {/* Billing Management Card - Only for Premium Users */}
+        {isPremium && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="mb-8"
+          >
+            <Card className="bg-gradient-to-br from-amber-50/80 via-yellow-50/60 to-orange-50/80 dark:from-amber-950/40 dark:via-yellow-950/30 dark:to-orange-950/40 backdrop-blur-sm border-amber-200/50 dark:border-amber-700/30 shadow-2xl shadow-amber-500/20">
+              <CardHeader>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-amber-500/30 to-orange-500/30 shadow-lg">
+                    <CreditCard className="w-5 h-5 text-amber-100 drop-shadow-sm" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-xl bg-gradient-to-r from-amber-600 to-orange-600 dark:from-amber-400 dark:to-orange-400 bg-clip-text text-transparent">
+                      Billing Management
+                    </CardTitle>
+                    <CardDescription className="text-amber-700/70 dark:text-amber-300/70">Manage your subscription and billing</CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="p-6 rounded-lg bg-gradient-to-br from-emerald-50/80 to-cyan-50/60 dark:from-emerald-950/40 dark:to-cyan-950/30 backdrop-blur-sm border border-emerald-200/50 dark:border-emerald-700/30 shadow-lg">
+                  <div className="flex items-start justify-between">
+                    <div className="space-y-2">
+                      <h3 className="text-lg font-semibold bg-gradient-to-r from-amber-700 to-orange-700 dark:from-amber-300 dark:to-orange-300 bg-clip-text text-transparent flex items-center gap-2">
+                        <Crown className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                        Premium Subscription
+                      </h3>
+                      <p className="text-sm text-amber-700/80 dark:text-amber-300/80 max-w-lg">
+                        Access your Stripe billing portal to manage your subscription, update payment methods, 
+                        view invoices, and modify your plan.
+                      </p>
+                      <div className="flex items-center gap-2 mt-3">
+                        <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 border border-emerald-300/30">
+                          <Shield className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                          <span className="text-xs font-medium text-emerald-700 dark:text-emerald-300">Secure Portal</span>
+                        </div>
+                        <div className="w-1 h-1 bg-amber-400 rounded-full" />
+                        <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-300/30">
+                          <Sparkles className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+                          <span className="text-xs font-medium text-amber-700 dark:text-amber-300">Full Control</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <Button 
+                      onClick={openManageBilling}
+                      className="ml-4 bg-gradient-to-r from-amber-600 via-orange-600 to-yellow-600 hover:from-amber-700 hover:via-orange-700 hover:to-yellow-700 shadow-xl shadow-amber-500/30 hover:shadow-amber-500/40 transition-all duration-300 text-white"
+                    >
+                      <CreditCard className="w-4 h-4 mr-2" />
+                      Manage Billing
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
 
         {/* Danger Zone */}
         <motion.div
