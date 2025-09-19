@@ -297,36 +297,36 @@ const Pricing = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
+                  <div className="text-center mb-6">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-purple-400 to-indigo-400 flex items-center justify-center">
+                      <BookOpen className="h-8 w-8 text-white" />
+                    </div>
+                    <h4 className="text-lg font-bold text-white mb-2">AI Question Bank</h4>
+                    <p className="text-white/70 text-sm">Premium questions for 2026 exams</p>
+                  </div>
+                  
+                  <div className="space-y-3">
                     {[
-                      { 
-                        subject: "Mathematics", 
-                        topic: "Integration by Parts", 
-                        status: "High Priority",
-                        iconColor: "text-red-400" 
-                      },
-                      { 
-                        subject: "Physics", 
-                        topic: "Quantum Mechanics", 
-                        status: "Likely Topic",
-                        iconColor: "text-yellow-400" 
-                      },
-                      { 
-                        subject: "Chemistry", 
-                        topic: "Organic Synthesis", 
-                        status: "Expected",
-                        iconColor: "text-green-400" 
-                      }
-                    ].map((item, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
-                        <span className="text-white font-medium">{item.subject}</span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-white/70">{item.topic}</span>
-                          <Zap className={`h-4 w-4 ${item.iconColor}`} />
-                          <span className={`font-bold ${item.iconColor}`}>{item.status}</span>
+                      "Advanced Calculus Applications",
+                      "Climate Change & Chemistry", 
+                      "Quantum Physics Fundamentals"
+                    ].map((topic, index) => (
+                      <div key={index} className="flex items-center gap-3 p-2 bg-white/5 rounded-lg">
+                        <div className="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></div>
+                        <span className="text-white/90 text-sm font-medium">{topic}</span>
+                        <div className="ml-auto">
+                          <span className="text-xs text-purple-400 bg-purple-400/20 px-2 py-1 rounded-full">
+                            New
+                          </span>
                         </div>
                       </div>
                     ))}
+                  </div>
+                  
+                  <div className="mt-4 pt-4 border-t border-white/10 text-center">
+                    <span className="text-white/70 text-sm">
+                      Updated weekly with latest predictions
+                    </span>
                   </div>
                 </CardContent>
               </Card>
