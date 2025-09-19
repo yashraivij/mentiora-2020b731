@@ -190,11 +190,6 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
       await addSubjectsToDatabase();
     }
     
-    // Save parent email when moving from step 4 to step 5
-    if (currentStep === 4 && showParentProgress && parentEmail) {
-      await saveParentEmail();
-    }
-    
     setCurrentStep(prev => prev + 1);
   };
 
@@ -264,9 +259,9 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             
             {/* Progress indicator */}
             <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-gray-600">Step {currentStep} of 5</span>
+              <span className="text-sm font-medium text-gray-600">Step {currentStep} of 4</span>
               <div className="flex items-center gap-2">
-                {[1, 2, 3, 4, 5].map((step) => (
+                {[1, 2, 3, 4].map((step) => (
                   <div
                     key={step}
                     className={`h-3 w-12 rounded-full transition-all duration-500 ${
@@ -647,228 +642,24 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     Back
                   </Button>
                   <Button 
-                    onClick={handleNext}
+                    onClick={() => {
+                      if (showParentProgress && parentEmail) {
+                        saveParentEmail();
+                      }
+                      onSubjectsAdded(); // Complete onboarding
+                      onClose();
+                    }}
                     disabled={showParentProgress && (!parentEmail.trim() || !isValidEmail(parentEmail))}
                     className="bg-gradient-to-r from-indigo-400 to-purple-400 hover:from-indigo-500 hover:to-purple-500 text-white font-bold px-8 py-3 text-lg rounded-2xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                   <div className="flex items-center gap-2">
-                    <span>Final Step!</span>
-                    <span>🚀</span>
-                    <ChevronRight className="h-4 w-4" />
+                    <span>Complete Setup!</span>
+                    <span>🎉</span>
+                    <Check className="h-4 w-4" />
                   </div>
                   </Button>
                 </div>
               </motion.div>
-            )}
-
-            {/* Step 5: Premium Upgrade - Ultra Premium Design */}
-            {currentStep === 5 && (
-              <div className="space-y-2 max-h-[calc(98vh-140px)] overflow-hidden">
-                {/* Premium Header */}
-                <div className="text-center space-y-6 mb-8">
-                  <div className="w-24 h-24 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl flex items-center justify-center mx-auto shadow-2xl">
-                    <Gem className="h-12 w-12 text-white" />
-                  </div>
-                  
-                  <h3 className="text-4xl font-bold text-gray-800">
-                    🚀 Unlock Your Academic Superpower! ✨
-                  </h3>
-                  
-                  <p className="text-xl text-gray-600 font-medium">
-                    Join <span className="font-bold text-green-600">10,000+ students</span> getting <span className="font-bold text-purple-600">2+ grades higher</span>
-                  </p>
-                </div>
-
-                {/* Revolutionary Comparison Cards - Larger */}
-                <div className="grid md:grid-cols-2 gap-4 mt-3">
-                  {/* Free Plan - Deliberately Limited */}
-                  <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    <Card className="relative bg-white border-2 border-gray-200 opacity-75 rounded-2xl">
-                      <CardHeader className="pb-2">
-                        <CardTitle className="flex items-center gap-2 text-gray-600 text-lg">
-                          <div className="bg-gray-500 p-1.5 rounded">
-                            <X className="h-4 w-4 text-white" />
-                          </div>
-                          <span className="font-bold">Free (Limited)</span>
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-2 pb-3">
-                        <div className="space-y-2">
-                           {[
-                             { text: 'Basic practice questions', limited: true },
-                             { text: 'No grade predictions', limited: true },
-                             { text: 'No advanced analytics', limited: true },
-                             { text: 'Basic progress tracking', limited: true }
-                           ].map((feature, index) => (
-                             <div key={index} className="flex items-center gap-2">
-                               <X className="h-4 w-4 text-red-500" />
-                               <span className="text-sm text-gray-600">
-                                 {feature.text}
-                               </span>
-                             </div>
-                           ))}
-                        </div>
-                         <div className="pt-2 border-t border-gray-200">
-                           <div className="text-xl font-black text-gray-600">FREE</div>
-                         </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-
-                  {/* Premium Plan - Ultra Desirable */}
-                  <motion.div
-                    initial={{ opacity: 0, x: 50, scale: 0.9 }}
-                    animate={{ opacity: 1, x: 0, scale: 1 }}
-                    transition={{ delay: 0.5, type: "spring" }}
-                    className="relative"
-                  >
-                     {/* Colorful border */}
-                     <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-orange-400 via-pink-400 to-purple-400 rounded-2xl blur-md opacity-75" />
-                     
-                     <Card className="relative bg-white border-0 shadow-2xl rounded-2xl">
-                      {/* Premium badges */}
-                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-50">
-                        <motion.div
-                          animate={{ y: [0, -3, 0] }}
-                          transition={{ repeat: Infinity, duration: 2 }}
-                          className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-4 py-1 rounded-full font-black text-sm shadow-xl border-2 border-white"
-                        >
-                          🏆 MOST POPULAR
-                        </motion.div>
-                      </div>
-                      
-                      <div className="absolute top-2 right-2 z-10">
-                        <motion.div
-                          animate={{ rotate: [0, 10, 0] }}
-                          transition={{ repeat: Infinity, duration: 3 }}
-                          className="bg-green-500 text-white px-2 py-0.5 rounded-full text-xs font-bold"
-                        >
-                          92% SUCCESS
-                        </motion.div>
-                      </div>
-                      
-                      <CardHeader className="pb-2 relative z-10 pt-5">
-                        <CardTitle className="flex items-center gap-2">
-                          <div className="bg-gradient-to-r from-orange-400 to-red-400 p-2 rounded-lg shadow-lg">
-                            <Gem className="h-5 w-5 text-white" />
-                          </div>
-                          <span className="text-lg font-black text-gray-800">
-                            Premium Features
-                          </span>
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-2 relative z-10 pb-3">
-                        <div className="space-y-2">
-                          {[
-                            { text: '🤖 Grade Predictor (99% accurate)', premium: true },
-                            { text: '🧠 Smart Study Plans', premium: true },
-                            { text: '♾️ Unlimited Everything', premium: true },
-                            { text: '📊 Advanced Analytics', premium: true },
-                            { text: '⚡ Weak Topic Detection', premium: true },
-                            { text: '🎯 Exam Predictions', premium: true }
-                          ].map((feature, index) => (
-                            <motion.div
-                              key={index}
-                              initial={{ opacity: 0, x: 20 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: 0.6 + (index * 0.05) }}
-                              className="flex items-center gap-2"
-                            >
-                               <div className="bg-green-500 rounded-full p-0.5">
-                                 <Check className="h-3 w-3 text-white" />
-                               </div>
-                              <span className="text-sm font-semibold text-gray-800">{feature.text}</span>
-                            </motion.div>
-                          ))}
-                        </div>
-                        
-                        {/* Pricing with massive discount */}
-                         <div className="pt-2 border-t border-gray-200 space-y-1">
-                           <div className="flex items-center gap-2">
-                             <div className="text-xs text-gray-500 line-through">£19.99/mo</div>
-                             <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-2 py-0.5 rounded-full text-xs font-bold">50% OFF!</div>
-                           </div>
-                           <div className="flex items-baseline gap-1">
-                             <div className="text-3xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">£9.99</div>
-                             <div className="text-sm text-gray-600">/month</div>
-                          </div>
-                           <div className="text-xs text-green-600 font-bold">⚡ LIMITED TIME ONLY</div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                </div>
-
-                {/* Social Proof & CTA Section - Compact */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 }}
-                  className="text-center space-y-3 pt-2"
-                >
-                  {/* Social Proof */}
-                   <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-4 border-2 border-green-200">
-                     <div className="flex items-center justify-center gap-4 text-sm">
-                       <div className="flex items-center gap-2">
-                         <Star className="h-4 w-4 text-yellow-500 fill-current" />
-                         <span className="font-bold text-gray-800">4.9/5 rating</span>
-                       </div>
-                       <div className="flex items-center gap-2">
-                         <Trophy className="h-4 w-4 text-orange-500" />
-                         <span className="font-bold text-gray-800">92% grade improvement</span>
-                       </div>
-                     </div>
-                   </div>
-
-                  {/* Main CTA Button */}
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                     <Button 
-                       onClick={handleUpgrade}
-                       className="relative bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 hover:from-yellow-500 hover:via-orange-500 hover:to-pink-500 text-white font-black px-8 py-4 text-lg rounded-2xl shadow-2xl overflow-hidden group w-full max-w-md"
-                     >
-                       <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-pink-300 opacity-0 group-hover:opacity-30 transition-opacity" />
-                        <div className="flex items-center justify-center gap-3 relative z-10">
-                          <Star className="h-5 w-5" />
-                          <span>🚀 Start Your Academic Transformation! ✨</span>
-                          <Star className="h-5 w-5" />
-                        </div>
-                    </Button>
-                  </motion.div>
-                  
-                  {/* Guarantee & Benefits */}
-                   <p className="text-sm font-bold text-green-600">
-                     ✅ 30-day money-back guarantee • 📱 Cancel anytime
-                   </p>
-                </motion.div>
-                
-                {/* Action Buttons - Fixed at bottom */}
-                 <div className="flex justify-between items-center pt-6 border-t border-gray-200 mt-6 bg-white rounded-b-2xl">
-                   <Button 
-                     variant="outline" 
-                     onClick={() => setCurrentStep(4)} 
-                     className="px-6 py-3 text-base font-semibold rounded-2xl border-2"
-                   >
-                     ← Back
-                   </Button>
-                   <Button 
-                     variant="outline" 
-                     onClick={() => {
-                       onSubjectsAdded(); // Call when user finishes onboarding
-                       onClose();
-                     }} 
-                     className="px-6 py-3 text-base font-semibold rounded-2xl border-2 border-sky-400 bg-sky-50 text-sky-700 hover:bg-sky-100"
-                   >
-                     Continue with Free Version
-                   </Button>
-                 </div>
-              </div>
             )}
           </AnimatePresence>
         </div>
