@@ -51,7 +51,6 @@ import { useToast } from "@/hooks/use-toast";
 import { openManageBilling } from "@/lib/manageBilling";
 import { NotebookEntry } from "@/components/notebook/NotebookEntry";
 import { toast } from "sonner";
-import { OnboardingPopup } from "@/components/ui/onboarding-popup";
 
 interface UserProgress {
   subjectId: string;
@@ -107,9 +106,6 @@ const Dashboard = () => {
   const [selectedNotebookSubject, setSelectedNotebookSubject] = useState<string>('all');
   const [selectedConfidence, setSelectedConfidence] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('recent');
-
-  // Test onboarding popup state
-  const [showOnboardingPopup, setShowOnboardingPopup] = useState(false);
 
   // Duolingo-style sidebar items with softer colors
   const sidebarItems = [
@@ -779,16 +775,6 @@ const Dashboard = () => {
                   <span className="text-xl font-bold text-cyan-500">{userGems}</span>
                 </div>
               </div>
-              
-              {/* Test Onboarding Button */}
-              <Button
-                onClick={() => setShowOnboardingPopup(true)}
-                variant="outline"
-                className="flex items-center gap-2"
-              >
-                <Settings className="h-4 w-4" />
-                Test Onboarding
-              </Button>
               </div>
 
               {/* Subject Selection or Subject Path */}
@@ -1833,16 +1819,6 @@ const Dashboard = () => {
           </Card>
         </div>
       </div>
-      
-      {/* Test Onboarding Popup */}
-      <OnboardingPopup
-        isOpen={showOnboardingPopup}
-        onClose={() => setShowOnboardingPopup(false)}
-        onSubjectsAdded={() => {
-          // Refresh subjects after onboarding
-          loadUserSubjects();
-        }}
-      />
     </div>
   );
 };
