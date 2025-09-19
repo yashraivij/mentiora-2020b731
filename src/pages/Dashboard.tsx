@@ -685,7 +685,7 @@ const Dashboard = () => {
                 </div>
                 <div className="flex items-center space-x-2">
                   <Zap className="h-6 w-6 text-blue-400" />
-                  <span className="text-xl font-bold text-blue-500">{userMP}</span>
+                  <span className="text-xl font-bold text-blue-500">{userGems}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Gem className="h-6 w-6 text-cyan-400" />
@@ -1083,7 +1083,7 @@ const Dashboard = () => {
                           { name: "Emma Wilson", mp: 1653, grade: 8.2, streak: 12, isCurrentUser: false },
                           { name: "Liam Parker", mp: 1512, grade: 7.9, streak: 9, isCurrentUser: false },
                           { name: "Sophia Lee", mp: 1344, grade: 7.5, streak: 8, isCurrentUser: false },
-                          { name: "You", mp: userMP, grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0, streak: currentStreak, isCurrentUser: true },
+                          { name: "You", mp: userGems, grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0, streak: currentStreak, isCurrentUser: true },
                           { name: "James Smith", mp: 1098, grade: 6.8, streak: 5, isCurrentUser: false },
                           { name: "Maya Patel", mp: 987, grade: 6.5, streak: 4, isCurrentUser: false },
                           { name: "Oliver Brown", mp: 876, grade: 6.2, streak: 3, isCurrentUser: false },
@@ -1164,7 +1164,7 @@ const Dashboard = () => {
                         { name: "Emma Wilson", mp: 1653, grade: 8.2, streak: 12, isCurrentUser: false },
                         { name: "Liam Parker", mp: 1512, grade: 7.9, streak: 9, isCurrentUser: false },
                         { name: "Sophia Lee", mp: 1344, grade: 7.5, streak: 8, isCurrentUser: false },
-                        { name: "You", mp: userMP, grade: 8.0, streak: currentStreak, isCurrentUser: true },
+                        { name: "You", mp: userGems, grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0, streak: currentStreak, isCurrentUser: true },
                         { name: "James Smith", mp: 1098, grade: 6.8, streak: 5, isCurrentUser: false },
                         { name: "Maya Patel", mp: 987, grade: 6.5, streak: 4, isCurrentUser: false },
                         { name: "Oliver Brown", mp: 876, grade: 6.2, streak: 3, isCurrentUser: false },
