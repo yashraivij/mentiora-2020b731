@@ -892,10 +892,16 @@ const Dashboard = () => {
             <div>
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">
-                  Smart Revision Notebook
+                  <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                    ✨ Smart Revision Notebook
+                  </span>
                 </h2>
-                <p className="text-lg text-gray-600 mb-8">
-                  Instant notes for every lost mark
+                <p className="text-lg text-gray-600 mb-8 font-medium">
+                  <span className="inline-flex items-center gap-2">
+                    <span className="w-2 h-2 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></span>
+                    Instant notes for every lost mark
+                    <span className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"></span>
+                  </span>
                 </p>
               </div>
 
