@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Check, Minus } from "lucide-react";
+import { Check, Minus, TrendingUp, BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useAuth } from "@/contexts/AuthContext";
@@ -25,25 +25,18 @@ const Pricing = () => {
     setIsLoading(false);
   }, [user?.id]);
 
-  // Dynamic subject rotation every 4 seconds
+  // Dynamic subject rotation every 3 seconds
   const subjects = ["Math", "Science", "English", "History", "Physics", "Chemistry", "Biology"];
   const [currentSubjectIndex, setCurrentSubjectIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
   const userName = user?.email?.split('@')[0] || "Student";
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsAnimating(true);
-      setTimeout(() => {
-        setCurrentSubjectIndex((prev) => (prev + 1) % subjects.length);
-        setTimeout(() => setIsAnimating(false), 50);
-      }, 300);
-    }, 4000);
+      setCurrentSubjectIndex((prev) => (prev + 1) % subjects.length);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [subjects.length]);
-
-  const currentSubject = subjects[currentSubjectIndex];
 
   const handleStartTrial = () => {
     openPaymentLink();
@@ -63,21 +56,48 @@ const Pricing = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-600 via-blue-600 to-purple-700 relative">
+      {/* Header with logo and navigation */}
+      <header className="absolute top-0 left-0 w-full z-20 p-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-8">
+            <h1 className="text-2xl font-bold text-black tracking-tight">MENTIORA</h1>
+            <nav className="flex items-center space-x-6">
+              <div className="flex items-center space-x-2 text-white/90 hover:text-white transition-colors cursor-pointer">
+                <TrendingUp className="h-4 w-4" />
+                <span className="text-sm font-medium uppercase tracking-wide">PROGRESS</span>
+              </div>
+              <div className="flex items-center space-x-2 text-white/90 hover:text-white transition-colors cursor-pointer">
+                <BookOpen className="h-4 w-4" />
+                <span className="text-sm font-medium uppercase tracking-wide">NOTES</span>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </header>
+
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-8">
         {/* Dynamic Header */}
         <div className="text-center mb-8 max-w-lg animate-fade-in">
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 leading-tight">
             Progress faster in your
           </h1>
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-            <span 
-              className={`bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent transition-all duration-300 ease-in-out transform ${
-                isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
-              }`}
+          <div className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight relative h-12 overflow-hidden">
+            <div 
+              className="absolute inset-0 flex flex-col transition-transform duration-700 ease-in-out"
+              style={{
+                transform: `translateY(-${currentSubjectIndex * 100}%)`,
+              }}
             >
-              {currentSubject}
-            </span> studies with Super!
-          </h1>
+              {subjects.map((subject, index) => (
+                <div key={index} className="h-12 flex items-center justify-center">
+                  <span className="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">
+                    {subject}
+                  </span>
+                  <span className="text-white ml-1">studies with Super!</span>
+                </div>
+              ))}
+            </div>
+          </div>
           <p className="text-white/80 text-sm mt-2">
             Welcome back, {userName}! Ready to supercharge your learning?
           </p>
