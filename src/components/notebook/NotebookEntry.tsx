@@ -140,7 +140,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             <div className="flex items-center justify-center gap-2 mb-2">
               <Unlock className="h-4 w-4 text-white" />
               <h4 className="font-semibold text-white">
-                🔓 Unlock Full Notes
+                Unlock Full Notes
               </h4>
             </div>
             <p className="text-white/90 text-xs mb-3">
@@ -151,7 +151,6 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
               size="sm" 
               className="w-full bg-white text-blue-500 hover:bg-gray-100 font-bold py-3 rounded-2xl"
             >
-              <Crown className="h-3 w-3 mr-1" />
               Upgrade to Premium
             </Button>
           </div>
