@@ -292,41 +292,44 @@ const Pricing = () => {
               <Card className="bg-white/10 backdrop-blur-xl border-white/20">
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
-                    <Zap className="h-5 w-5 text-purple-400" />
-                    Predicted 2026 Questions
+                    <BookOpen className="h-5 w-5 text-purple-400" />
+                    2026 Predicted Exam Paper
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-center mb-6">
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-purple-400 to-indigo-400 flex items-center justify-center">
-                      <BookOpen className="h-8 w-8 text-white" />
+                  <div className="bg-white/5 rounded-lg p-4 mb-4">
+                    <div className="text-center mb-3">
+                      <h4 className="text-white font-bold text-sm">Mathematics Paper 1 - Sample</h4>
+                      <p className="text-white/60 text-xs">Time: 1 hour 30 minutes</p>
                     </div>
-                    <h4 className="text-lg font-bold text-white mb-2">AI Question Bank</h4>
-                    <p className="text-white/70 text-sm">Premium questions for 2026 exams</p>
-                  </div>
-                  
-                  <div className="space-y-3">
-                    {[
-                      "Advanced Calculus Applications",
-                      "Climate Change & Chemistry", 
-                      "Quantum Physics Fundamentals"
-                    ].map((topic, index) => (
-                      <div key={index} className="flex items-center gap-3 p-2 bg-white/5 rounded-lg">
-                        <div className="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></div>
-                        <span className="text-white/90 text-sm font-medium">{topic}</span>
-                        <div className="ml-auto">
-                          <span className="text-xs text-purple-400 bg-purple-400/20 px-2 py-1 rounded-full">
-                            New
-                          </span>
-                        </div>
+                    
+                    <div className="space-y-3 text-xs">
+                      <div className="border-l-2 border-purple-400 pl-2">
+                        <p className="text-white/90 font-medium">Question 1.</p>
+                        <p className="text-white/70">Differentiate f(x) = 3x² + 2sin(x) with respect to x.</p>
+                        <span className="text-purple-400">[4 marks]</span>
                       </div>
-                    ))}
+                      
+                      <div className="border-l-2 border-purple-400 pl-2">
+                        <p className="text-white/90 font-medium">Question 2.</p>
+                        <p className="text-white/70">A particle moves such that its velocity v = 4t - 2...</p>
+                        <span className="text-purple-400">[6 marks]</span>
+                      </div>
+                      
+                      <div className="border-l-2 border-purple-400 pl-2">
+                        <p className="text-white/90 font-medium">Question 3.</p>
+                        <p className="text-white/70">Given that log₃(x + 1) = 2, find the value of x.</p>
+                        <span className="text-purple-400">[3 marks]</span>
+                      </div>
+                    </div>
                   </div>
                   
-                  <div className="mt-4 pt-4 border-t border-white/10 text-center">
-                    <span className="text-white/70 text-sm">
-                      Updated weekly with latest predictions
-                    </span>
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-white/70">Based on past papers + AI predictions</span>
+                    <div className="flex items-center gap-1">
+                      <Clock className="h-3 w-3 text-purple-400" />
+                      <span className="text-purple-400">Fresh weekly</span>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
