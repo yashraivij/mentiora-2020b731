@@ -1754,16 +1754,16 @@ const Dashboard = () => {
                 <div className="bg-white/20 rounded-lg p-2">
                   <Crown className="h-6 w-6" />
                 </div>
-                <span className="font-bold text-lg">Try Premium for free</span>
+                <span className="font-bold text-lg">Upgrade to Premium</span>
               </div>
               <p className="text-white/90 mb-4">
-                No ads, unlimited hearts, and exclusive features!
+                Unlock exclusive study features and advanced analytics!
               </p>
               <Button 
                 className="w-full bg-white text-blue-500 hover:bg-gray-100 font-bold py-3 rounded-2xl"
                 onClick={() => navigate("/pricing")}
               >
-                TRY 2 WEEKS FREE
+                START PREMIUM TRIAL
               </Button>
             </CardContent>
           </Card>
