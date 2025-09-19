@@ -609,67 +609,14 @@ const Dashboard = () => {
           {activeTab === "notes" && (
             <div>
               <div className="text-center mb-8">
-                <h2 className="text-4xl font-bold bg-gradient-to-r from-slate-800 via-purple-700 to-blue-700 dark:from-slate-200 dark:via-purple-300 dark:to-blue-300 bg-clip-text text-transparent mb-4">
-                  Smart Revision Notebook
+                <h2 className="text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">
+                  Instant Grade 9 notes for every lost mark
                 </h2>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                  Ultra-clear, Grade 9-level notes for every mark you've lost, powered by advanced Smart analysis
-                </p>
-                <div className="flex items-center justify-center space-x-2 mt-4">
-                  <div className="w-2 h-2 bg-violet-500 rounded-full animate-pulse"></div>
-                  <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse delay-75"></div>
-                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse delay-150"></div>
-                </div>
               </div>
 
-              {/* Premium Stats Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                <Card className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 dark:from-blue-950/50 dark:via-indigo-950/50 dark:to-blue-900/50 border-blue-200/50 dark:border-blue-800/30 shadow-xl shadow-blue-500/10 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-blue-400/20 to-transparent rounded-bl-full"></div>
-                  <CardContent className="p-6 text-center relative">
-                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
-                      <BookOpen className="h-6 w-6 text-white" />
-                    </div>
-                    <div className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-300 dark:to-indigo-300 bg-clip-text text-transparent mb-1"><BlurSpan>{notebookStats.totalEntries}</BlurSpan></div>
-                    <div className="text-sm font-medium text-blue-600 dark:text-blue-400">Total Notes</div>
-                    <div className="text-xs text-blue-500/70 dark:text-blue-400/70 mt-1">Smart Generated</div>
-                  </CardContent>
-                </Card>
-                <Card className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-100 dark:from-emerald-950/50 dark:via-teal-950/50 dark:to-emerald-900/50 border-emerald-200/50 dark:border-emerald-800/30 shadow-xl shadow-emerald-500/10 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300">
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-bl-full"></div>
-                  <CardContent className="p-6 text-center relative">
-                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
-                      <TrendingUp className="h-6 w-6 text-white" />
-                    </div>
-                    <div className="text-3xl font-bold bg-gradient-to-r from-emerald-700 to-teal-700 dark:from-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-1"><BlurSpan>{notebookStats.timeSavedHours}h</BlurSpan></div>
-                    <div className="text-sm font-medium text-emerald-600 dark:text-emerald-400">Time Saved</div>
-                    <div className="text-xs text-emerald-500/70 dark:text-emerald-400/70 mt-1">Auto Notes</div>
-                  </CardContent>
-                </Card>
-                <Card className="relative overflow-hidden bg-gradient-to-br from-violet-50 via-purple-50 to-violet-100 dark:from-violet-950/50 dark:via-purple-950/50 dark:to-violet-900/50 border-violet-200/50 dark:border-violet-800/30 shadow-xl shadow-violet-500/10 hover:shadow-2xl hover:shadow-violet-500/20 transition-all duration-300">
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-violet-400/20 to-transparent rounded-bl-full"></div>
-                  <CardContent className="p-6 text-center relative">
-                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
-                      <Brain className="h-6 w-6 text-white" />
-                    </div>
-                    <div className="text-3xl font-bold bg-gradient-to-r from-violet-700 to-purple-700 dark:from-violet-300 dark:to-purple-300 bg-clip-text text-transparent mb-1"><BlurSpan>{notebookStats.subjectsWithNotes}</BlurSpan></div>
-                    <div className="text-sm font-medium text-violet-600 dark:text-violet-400">Subjects</div>
-                    <div className="text-xs text-violet-500/70 dark:text-violet-400/70 mt-1">Covered</div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Enhanced Filters */}
-              <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-2xl p-6 shadow-2xl shadow-black/5 dark:shadow-black/20 border border-slate-200/50 dark:border-slate-700/50 mb-8">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-violet-600 rounded-lg flex items-center justify-center">
-                        <Filter className="h-4 w-4 text-white" />
-                      </div>
-                      <h3 className="text-xl font-bold bg-gradient-to-r from-slate-700 to-slate-600 dark:from-slate-200 dark:to-slate-300 bg-clip-text text-transparent">Revision Notes</h3>
-                    </div>
-                  </div>
+              {/* Filters */}
+              <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-lg border border-slate-200 dark:border-slate-700 mb-8">
+                <div className="flex items-center justify-end">
                   <div className="flex items-center space-x-4">
                     <Select value={selectedNotebookSubject} onValueChange={setSelectedNotebookSubject}>
                       <SelectTrigger className="w-44 bg-white/50 dark:bg-slate-800/50 border-slate-300/50 dark:border-slate-600/50 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-200">
@@ -702,7 +649,7 @@ const Dashboard = () => {
               {notebookLoading ? (
                 <div className="text-center py-16">
                   <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent mx-auto mb-6"></div>
-                  <p className="text-foreground font-medium text-lg">Loading your Smart Revision Notebook...</p>
+                  <p className="text-foreground font-medium text-lg">Loading your notes...</p>
                 </div>
               ) : sortedEntries.length === 0 ? (
                 <Card className="text-center py-16 bg-gradient-to-br from-white/80 to-slate-50/80 backdrop-blur-xl border border-slate-200/50 shadow-2xl">
