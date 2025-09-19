@@ -701,12 +701,15 @@ const Dashboard = () => {
           {activeTab === "notes" && (
             <div>
               <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+                <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">
                   Instant notes for every lost mark
                 </h2>
                 <p className="text-lg text-gray-600 mb-8">
                   Transform your mistakes into learning opportunities with AI-generated revision notes
                 </p>
+                <h3 className="text-2xl font-bold text-gray-800 mb-8 text-center">
+                  Your Smart Revision Notebook
+                </h3>
               </div>
 
               {/* Filters */}
