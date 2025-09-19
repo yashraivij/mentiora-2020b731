@@ -313,12 +313,12 @@ const Notebook = () => {
         {/* Premium Action Buttons */}
         <div className="flex justify-center space-x-6 mt-16">
           <Button 
-            onClick={() => navigate('/dashboard')} 
+            onClick={() => navigate(-1)} 
             variant="outline"
             className="px-8 py-3 rounded-xl border-2 border-slate-300 dark:border-slate-600 hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Dashboard
+            Back
           </Button>
           <Button 
             onClick={() => {

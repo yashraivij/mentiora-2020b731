@@ -305,11 +305,11 @@ const PredictedQuestions = () => {
             <div className="flex items-center space-x-4">
               <Button 
                 variant="ghost" 
-                onClick={() => navigate('/dashboard')} 
+                onClick={() => navigate(-1)} 
                 className="text-white/80 hover:text-white hover:bg-white/10 backdrop-blur-sm"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Dashboard
+                Back
               </Button>
               <div className="flex items-center space-x-3">
                 <div className="p-2 bg-gradient-to-br from-yellow-400/30 to-orange-400/30 rounded-xl border border-yellow-400/30 backdrop-blur-sm">

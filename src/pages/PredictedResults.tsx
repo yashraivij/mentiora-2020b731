@@ -71,10 +71,10 @@ const PredictedResults = () => {
                   Take a Predicted Exam
                 </Button>
                 <Button 
-                  onClick={() => navigate('/dashboard')} 
+                  onClick={() => navigate(-1)} 
                   variant="outline"
                 >
-                  Back to Dashboard
+                  Back
                 </Button>
               </CardContent>
             </Card>
@@ -769,11 +769,11 @@ const PredictedResults = () => {
               Try Another Subject
             </Button>
             <Button 
-              onClick={() => navigate('/dashboard')} 
+              onClick={() => navigate(-1)} 
               variant="outline"
             >
               <Target className="h-5 w-5 mr-2" />
-              Back to Dashboard
+              Back
             </Button>
           </div>
         </div>

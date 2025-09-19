@@ -564,8 +564,8 @@ const Practice = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4">No questions available</h2>
-          <Button onClick={() => navigate('/dashboard')}>
-            Back to Dashboard
+          <Button onClick={() => navigate(-1)}>
+            Back
           </Button>
         </div>
       </div>

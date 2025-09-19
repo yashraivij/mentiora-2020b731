@@ -87,9 +87,9 @@ const Analytics = () => {
       <header className="bg-card shadow-sm border-b border-border">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center space-x-4">
-            <Button variant="outline" onClick={() => navigate('/dashboard')}>
+            <Button variant="outline" onClick={() => navigate(-1)}>
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Dashboard
+              Back
             </Button>
             <h1 className="text-2xl font-bold text-foreground">Performance Analytics</h1>
           </div>

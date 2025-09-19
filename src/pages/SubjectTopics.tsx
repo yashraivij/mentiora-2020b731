@@ -56,8 +56,8 @@ const SubjectTopics = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Subject not found</h1>
-          <Button onClick={() => navigate('/dashboard')}>
-            Back to Dashboard
+          <Button onClick={() => navigate(-1)}>
+            Back
           </Button>
         </div>
       </div>
@@ -113,7 +113,7 @@ const SubjectTopics = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button variant="outline" onClick={() => navigate('/dashboard')}>
+              <Button variant="outline" onClick={() => navigate(-1)}>
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Button>

@@ -72,11 +72,11 @@ const Settings = () => {
         <div className="mb-8">
           <Button
             variant="ghost"
-            onClick={() => navigate("/dashboard")}
+            onClick={() => navigate(-1)}
             className="mb-4 text-gray-600 hover:text-gray-800"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Dashboard
+            Back
           </Button>
           
           <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
