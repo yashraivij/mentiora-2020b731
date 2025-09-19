@@ -325,10 +325,9 @@ const Pricing = () => {
                   </div>
                   
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-white/70">Based on past papers and predictions</span>
                     <div className="flex items-center gap-1">
                       <Clock className="h-3 w-3 text-purple-400" />
-                      <span className="text-purple-400">Fresh weekly</span>
+                      <span className="text-purple-400">Updated regularly</span>
                     </div>
                   </div>
                 </CardContent>
@@ -354,8 +353,7 @@ const Pricing = () => {
                 {[
                   "Auto-generated notes from your practice sessions",
                   "Key concepts organized by subject and topic",
-                  "Personalized weak areas highlighted",
-                  "Export notes as PDFs for offline study"
+                  "Personalized weak areas highlighted"
                 ].map((item, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <div className="w-6 h-6 rounded-full bg-indigo-400 flex items-center justify-center flex-shrink-0">
@@ -381,7 +379,7 @@ const Pricing = () => {
                         <div className="w-3 h-3 rounded-full bg-red-400"></div>
                         <span className="text-white font-medium text-sm">Mathematics</span>
                       </div>
-                      <p className="text-white/70 text-xs">Quadratic equations: Remember to check discriminant...</p>
+                      <p className="text-white/70 text-xs">Quadratic equations: Use the formula ax² + bx + c = 0</p>
                     </div>
                     
                     <div className="bg-white/5 rounded-lg p-3">
@@ -394,7 +392,7 @@ const Pricing = () => {
                   </div>
                   
                   <div className="text-center">
-                    <span className="text-indigo-400 text-sm font-medium">Auto-updated daily</span>
+                    <span className="text-indigo-400 text-sm font-medium">Personalized for you</span>
                   </div>
                 </CardContent>
               </Card>
