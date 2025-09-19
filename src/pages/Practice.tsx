@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, Trophy, Award, BookOpenCheck, Zap, Target, X, StickyNote, Star, BookOpen } from "lucide-react";
+import { ArrowLeft, Trophy, Award, BookOpenCheck, Zap, Target, X, StickyNote, Star, BookOpen, MessageSquare } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -812,7 +812,7 @@ const Practice = () => {
                   {/* Why This Gets Marks */}
                   <div>
                     <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <Award className="h-4 w-4 mr-2 text-blue-600" />
+                      <Award className="h-4 w-4 mr-2 text-green-600" />
                       Why This Gets Full Marks
                     </h4>
                     <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500">
@@ -825,7 +825,7 @@ const Practice = () => {
                   {/* Smart Feedback */}
                   <div>
                     <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <BookOpen className="h-4 w-4 mr-2 text-blue-600 dark:text-blue-400" />
+                      <MessageSquare className="h-4 w-4 mr-2 text-orange-600 dark:text-orange-400" />
                       Teacher's Notes
                     </h4>
                     <div className="bg-yellow-50 dark:bg-yellow-950/20 p-4 rounded-lg border-l-4 border-yellow-500">
