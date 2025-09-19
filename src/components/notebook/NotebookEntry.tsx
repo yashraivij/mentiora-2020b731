@@ -152,7 +152,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             <Button 
               onClick={() => setShowPromoModal(true)}
               size="sm" 
-              className="bg-white text-blue-500 hover:bg-gray-100 font-bold px-4 py-2 rounded-lg text-xs"
+              className="w-full bg-white text-blue-500 hover:bg-gray-100 font-bold py-3 rounded-2xl"
             >
               <Crown className="h-3 w-3 mr-1" />
               Upgrade to Premium
