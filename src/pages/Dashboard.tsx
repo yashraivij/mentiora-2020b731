@@ -1119,23 +1119,21 @@ useEffect(() => {
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              <Button
+              <span
                 onClick={() =>
                   window.open("https://discord.gg/Jq2YTZ3aMa", "_blank")
                 }
-                className="bg-gradient-to-r from-emerald-400 to-green-500 hover:from-emerald-500 hover:to-green-600 text-white border-2 border-emerald-300 shadow-2xl shadow-emerald-500/40 hover:shadow-emerald-500/60 transition-all duration-300 rounded-xl px-6 py-3 h-11 hover:scale-110 font-bold ring-2 ring-emerald-200/50"
+                className="text-foreground hover:text-primary cursor-pointer transition-colors text-sm"
               >
-                <Gamepad2 className="h-5 w-5 mr-2" />
-                <span className="text-sm font-extrabold">Join Community</span>
-              </Button>
+                Join Community
+              </span>
               {isPremium && (
-                <Button
+                <span
                   onClick={openManageBilling}
-                  className="bg-gradient-to-r from-purple-400 to-violet-500 hover:from-purple-500 hover:to-violet-600 text-white border-2 border-purple-300 shadow-2xl shadow-purple-500/40 hover:shadow-purple-500/60 transition-all duration-300 rounded-xl px-6 py-3 h-11 hover:scale-110 font-bold ring-2 ring-purple-200/50"
+                  className="text-foreground hover:text-primary cursor-pointer transition-colors text-sm"
                 >
-                  <Crown className="h-5 w-5 mr-2" />
-                  <span className="text-sm font-extrabold">Manage Billing</span>
-                </Button>
+                  Manage Billing
+                </span>
               )}
               <ThemeToggle />
               {getStudyStreak() >= 3 && <ColorThemeToggle />}
