@@ -63,7 +63,7 @@ const Pricing = () => {
   }, [user?.id]);
 
   // Dynamic grade animation
-  const grades = ["A*", "A", "B", "C"];
+  const grades = ["7", "8", "9"];
   const [currentGradeIndex, setCurrentGradeIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const userName = user?.email?.split('@')[0] || "Student";
@@ -116,7 +116,7 @@ const Pricing = () => {
           <div className="mb-6">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-2 mb-6">
               <Sparkles className="h-5 w-5 text-yellow-400" />
-              <span className="text-white/90 font-semibold">Premium students are</span>
+              <span className="text-white/90 font-semibold">Mentiora Premium</span>
             </div>
             
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
@@ -137,11 +137,55 @@ const Pricing = () => {
           </div>
         </motion.div>
 
-        {/* Stats Cards */}
+        {/* CTA Section */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-center mb-12"
+        >
+          <Card className="max-w-md mx-auto bg-white/10 backdrop-blur-xl border-white/20">
+            <CardContent className="p-8">
+              <div className="mb-6">
+                <div className="inline-flex items-center gap-2 bg-green-400/20 rounded-full px-4 py-2 mb-4">
+                  <Star className="h-4 w-4 text-green-400" />
+                  <span className="text-green-400 font-semibold text-sm">Best Deal</span>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  Premium
+                </h3>
+                <div className="text-4xl font-bold text-white mb-2">
+                  Free
+                  <span className="text-lg text-white/60 ml-2">for 14 days</span>
+                </div>
+                <p className="text-white/80 text-sm">
+                  Then £4.99/month. Cancel anytime.
+                </p>
+              </div>
+              
+              <Button
+                onClick={handleStartTrial}
+                className="w-full bg-gradient-to-r from-green-400 to-emerald-400 hover:from-green-500 hover:to-emerald-500 text-white font-bold py-4 px-6 rounded-2xl text-lg shadow-2xl transform hover:scale-105 transition-all duration-300 mb-4"
+              >
+                <Flame className="h-5 w-5 mr-2" />
+                TRY 2 WEEKS FREE
+              </Button>
+              
+              <button
+                onClick={handleNoThanks}
+                className="text-white/60 hover:text-white font-medium text-sm transition-all duration-300 hover:underline underline-offset-4"
+              >
+                Maybe later
+              </button>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Stats Cards */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
           className="grid md:grid-cols-3 gap-6 mb-16"
         >
           {statsData.map((stat, index) => (
@@ -152,44 +196,6 @@ const Pricing = () => {
               </CardContent>
             </Card>
           ))}
-        </motion.div>
-
-        {/* Premium Features Grid */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl font-bold text-white text-center mb-12">
-            Unlock Your Academic Potential
-          </h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {premiumFeatures.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.1 * index }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  className="group"
-                >
-                  <Card className="h-full bg-white/10 backdrop-blur-xl border-white/20 hover:bg-white/15 transition-all duration-300 hover:shadow-2xl">
-                    <CardContent className="p-6 text-center">
-                      <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300`}>
-                        <Icon className="h-8 w-8 text-white" />
-                      </div>
-                      <h3 className="text-lg font-bold text-white mb-2">{feature.title}</h3>
-                      <p className="text-white/70 text-sm">{feature.description}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </div>
         </motion.div>
 
         {/* Feature Showcase Sections */}
@@ -321,45 +327,6 @@ const Pricing = () => {
           </motion.div>
         </div>
 
-        {/* CTA Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.0 }}
-          className="text-center"
-        >
-          <Card className="max-w-lg mx-auto bg-white/10 backdrop-blur-xl border-white/20">
-            <CardContent className="p-8">
-              <div className="mb-6">
-                <div className="inline-flex items-center gap-2 bg-green-400/20 rounded-full px-4 py-2 mb-4">
-                  <Star className="h-4 w-4 text-green-400" />
-                  <span className="text-green-400 font-semibold text-sm">Limited Time Offer</span>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">
-                  Start Your Free Trial
-                </h3>
-                <p className="text-white/80">
-                  2 weeks of premium features, completely free. No commitment required.
-                </p>
-              </div>
-              
-              <Button
-                onClick={handleStartTrial}
-                className="w-full bg-gradient-to-r from-green-400 to-emerald-400 hover:from-green-500 hover:to-emerald-500 text-white font-bold py-4 px-6 rounded-2xl text-lg shadow-2xl transform hover:scale-105 transition-all duration-300 mb-4"
-              >
-                <Flame className="h-5 w-5 mr-2" />
-                TRY 2 WEEKS FREE
-              </Button>
-              
-              <button
-                onClick={handleNoThanks}
-                className="text-white/60 hover:text-white font-medium text-sm transition-all duration-300 hover:underline underline-offset-4"
-              >
-                Maybe later
-              </button>
-            </CardContent>
-          </Card>
-        </motion.div>
       </div>
     </div>
   );
