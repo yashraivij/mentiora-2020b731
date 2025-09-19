@@ -92,7 +92,7 @@ const Dashboard = () => {
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [currentStreak, setCurrentStreak] = useState(0);
-  const [userXP, setUserXP] = useState(0);
+  const [userMP, setUserMP] = useState(0);
   const [userHearts, setUserHearts] = useState(5);
   const [userGems, setUserGems] = useState(0);
   const [userSubjectsWithGrades, setUserSubjectsWithGrades] = useState<any[]>([]);
@@ -685,7 +685,7 @@ const Dashboard = () => {
                 </div>
                 <div className="flex items-center space-x-2">
                   <Zap className="h-6 w-6 text-blue-400" />
-                  <span className="text-xl font-bold text-blue-500">{userXP}</span>
+                  <span className="text-xl font-bold text-blue-500">{userMP}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Gem className="h-6 w-6 text-cyan-400" />
@@ -1077,31 +1077,29 @@ const Dashboard = () => {
                    </div>
                    <div className="text-2xl font-bold text-gray-800">
                      #{(() => {
-                       // Calculate user's rank from leaderboard
-                       const players = [
-                         { name: "Alex Chen", xp: 1847, topics: 42, grade: 8.6, streak: 14, isCurrentUser: false },
-                         { name: "Emma Wilson", xp: 1653, topics: 38, grade: 8.2, streak: 12, isCurrentUser: false },
-                         { name: "Liam Parker", xp: 1512, topics: 35, grade: 7.9, streak: 9, isCurrentUser: false },
-                         { name: "Sophia Lee", xp: 1344, topics: 31, grade: 7.5, streak: 8, isCurrentUser: false },
-                         { name: "You", xp: userXP, topics: userProgress.filter(p => p.averageScore >= 85).length, grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0, streak: currentStreak, isCurrentUser: true },
-                         { name: "James Smith", xp: 1098, topics: 22, grade: 6.8, streak: 5, isCurrentUser: false },
-                         { name: "Maya Patel", xp: 987, topics: 19, grade: 6.5, streak: 4, isCurrentUser: false },
-                         { name: "Oliver Brown", xp: 876, topics: 17, grade: 6.2, streak: 3, isCurrentUser: false },
-                       ];
+                        // Calculate user's rank from leaderboard
+                        const players = [
+                          { name: "Alex Chen", mp: 1847, grade: 8.6, streak: 14, isCurrentUser: false },
+                          { name: "Emma Wilson", mp: 1653, grade: 8.2, streak: 12, isCurrentUser: false },
+                          { name: "Liam Parker", mp: 1512, grade: 7.9, streak: 9, isCurrentUser: false },
+                          { name: "Sophia Lee", mp: 1344, grade: 7.5, streak: 8, isCurrentUser: false },
+                          { name: "You", mp: userMP, grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0, streak: currentStreak, isCurrentUser: true },
+                          { name: "James Smith", mp: 1098, grade: 6.8, streak: 5, isCurrentUser: false },
+                          { name: "Maya Patel", mp: 987, grade: 6.5, streak: 4, isCurrentUser: false },
+                          { name: "Oliver Brown", mp: 876, grade: 6.2, streak: 3, isCurrentUser: false },
+                        ];
 
-                       const maxXP = Math.max(...players.map(p => p.xp));
-                       const maxTopics = Math.max(...players.map(p => p.topics));
-                       const maxGrade = 9.0;
-                       const maxStreak = Math.max(...players.map(p => p.streak));
+                        const maxMP = Math.max(...players.map(p => p.mp));
+                        const maxGrade = 9.0;
+                        const maxStreak = Math.max(...players.map(p => p.streak));
 
-                       const playersWithScores = players.map(player => {
-                         const normalizedXP = player.xp / maxXP;
-                         const normalizedTopics = player.topics / maxTopics;
-                         const normalizedGrade = player.grade / maxGrade;
-                         const normalizedStreak = player.streak / maxStreak;
-                         const compositeScore = (normalizedXP + normalizedTopics + normalizedGrade + normalizedStreak) / 4;
-                         return { ...player, compositeScore };
-                       });
+                        const playersWithScores = players.map(player => {
+                          const normalizedMP = player.mp / maxMP;
+                          const normalizedGrade = player.grade / maxGrade;
+                          const normalizedStreak = player.streak / maxStreak;
+                          const compositeScore = (normalizedMP + normalizedGrade + normalizedStreak) / 3;
+                          return { ...player, compositeScore };
+                        });
 
                        const rankedPlayers = playersWithScores
                          .sort((a, b) => b.compositeScore - a.compositeScore)
@@ -1118,7 +1116,7 @@ const Dashboard = () => {
                      <Gem className="w-6 h-6 text-white" />
                    </div>
                    <div className="text-2xl font-bold text-gray-800">{userGems}</div>
-                   <div className="text-sm text-gray-600">Total XP</div>
+                   <div className="text-sm text-gray-600">Total MP</div>
                  </div>
                  <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100 text-center">
                    <div className="w-12 h-12 bg-green-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
@@ -1152,7 +1150,7 @@ const Dashboard = () => {
                   <div className="grid grid-cols-5 gap-4 text-sm font-bold text-gray-600 uppercase tracking-wide mb-4 px-4">
                     <div>Rank</div>
                     <div>Student</div>
-                    <div>XP</div>
+                    <div>MP</div>
                     <div>Avg Grade</div>
                     <div>Streak</div>
                   </div>
@@ -1162,29 +1160,29 @@ const Dashboard = () => {
                     {(() => {
                       // Define players with raw stats
                       const players = [
-                        { name: "Alex Chen", xp: 1847, grade: 8.6, streak: 14, isCurrentUser: false },
-                        { name: "Emma Wilson", xp: 1653, grade: 8.2, streak: 12, isCurrentUser: false },
-                        { name: "Liam Parker", xp: 1512, grade: 7.9, streak: 9, isCurrentUser: false },
-                        { name: "Sophia Lee", xp: 1344, grade: 7.5, streak: 8, isCurrentUser: false },
-                        { name: "You", xp: userXP, grade: 8.0, streak: currentStreak, isCurrentUser: true },
-                        { name: "James Smith", xp: 1098, grade: 6.8, streak: 5, isCurrentUser: false },
-                        { name: "Maya Patel", xp: 987, grade: 6.5, streak: 4, isCurrentUser: false },
-                        { name: "Oliver Brown", xp: 876, grade: 6.2, streak: 3, isCurrentUser: false },
+                        { name: "Alex Chen", mp: 1847, grade: 8.6, streak: 14, isCurrentUser: false },
+                        { name: "Emma Wilson", mp: 1653, grade: 8.2, streak: 12, isCurrentUser: false },
+                        { name: "Liam Parker", mp: 1512, grade: 7.9, streak: 9, isCurrentUser: false },
+                        { name: "Sophia Lee", mp: 1344, grade: 7.5, streak: 8, isCurrentUser: false },
+                        { name: "You", mp: userMP, grade: 8.0, streak: currentStreak, isCurrentUser: true },
+                        { name: "James Smith", mp: 1098, grade: 6.8, streak: 5, isCurrentUser: false },
+                        { name: "Maya Patel", mp: 987, grade: 6.5, streak: 4, isCurrentUser: false },
+                        { name: "Oliver Brown", mp: 876, grade: 6.2, streak: 3, isCurrentUser: false },
                       ];
 
                       // Calculate composite scores and rank players
-                      const maxXP = Math.max(...players.map(p => p.xp));
+                      const maxMP = Math.max(...players.map(p => p.mp));
                       const maxGrade = 9.0; // A* grade
                       const maxStreak = Math.max(...players.map(p => p.streak));
 
                       const playersWithScores = players.map(player => {
                         // Normalize each stat to 0-1 scale
-                        const normalizedXP = player.xp / maxXP;
+                        const normalizedMP = player.mp / maxMP;
                         const normalizedGrade = player.grade / maxGrade;
                         const normalizedStreak = player.streak / maxStreak;
 
                         // Calculate composite score (average of all normalized stats)
-                        const compositeScore = (normalizedXP + normalizedGrade + normalizedStreak) / 3;
+                        const compositeScore = (normalizedMP + normalizedGrade + normalizedStreak) / 3;
                         
                         return {
                           ...player,
@@ -1243,11 +1241,11 @@ const Dashboard = () => {
                             )}
                           </div>
 
-                           {/* XP */}
-                           <div className="flex items-center space-x-1">
-                             <Gem className="w-4 h-4 text-cyan-400" />
-                             <span className="font-bold text-gray-800">{player.xp.toLocaleString()}</span>
-                           </div>
+                          {/* MP */}
+                          <div className="flex items-center space-x-1">
+                            <Gem className="w-4 h-4 text-cyan-400" />
+                            <span className="font-bold text-gray-800">{player.mp.toLocaleString()}</span>
+                          </div>
 
                             {/* Average Grade */}
                             <div>
@@ -1283,7 +1281,7 @@ const Dashboard = () => {
                   <div className="bg-gradient-to-r from-purple-400 to-purple-500 h-3 rounded-full" style={{width: '60%'}}></div>
                 </div>
                 <p className="text-sm text-gray-600">
-                  Earn more XP to climb the rankings! Complete topics and maintain your streak to move up.
+                  Earn more MP to climb the rankings! Complete topics and maintain your streak to move up.
                 </p>
               </div>
             </div>
