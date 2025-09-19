@@ -71,24 +71,23 @@ const Pricing = () => {
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-8">
         {/* Dynamic Header */}
         <div className="text-center mb-8 max-w-lg animate-fade-in">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 leading-tight">
-            Progress faster in your
-          </h1>
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-            <div className="relative h-12 overflow-hidden inline-block">
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight flex items-center justify-center flex-wrap gap-2">
+            <span>Progress faster in your</span>
+            <div className="relative overflow-hidden inline-block min-w-[120px]">
               <div 
                 className={`transition-transform duration-700 ease-in-out ${
                   isTransitioning ? '-translate-y-full' : 'translate-y-0'
                 }`}
               >
-                <span className="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent block">
+                <span className="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent block text-center">
                   {currentSubject}
                 </span>
-                <span className="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent block">
+                <span className="bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent block text-center">
                   {nextSubject}
                 </span>
               </div>
-            </div> studies with Super!
+            </div>
+            <span>studies with Super!</span>
           </h1>
           <p className="text-white/80 text-sm mt-2">
             Welcome back, {userName}! Ready to supercharge your learning?
