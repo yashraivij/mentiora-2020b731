@@ -350,6 +350,9 @@ const Dashboard = () => {
     try {
       const { MPPointsSystemClient } = await import('@/lib/mpPointsSystemClient');
       const stats = await MPPointsSystemClient.getUserStats(user.id);
+      console.log('Loaded user stats:', stats);
+      console.log('Login today:', stats.loginToday);
+      console.log('Practice today:', stats.practiceToday);
       setUserStats(stats);
       setUserGems(stats.totalPoints);
       setCurrentStreak(stats.currentStreak);
@@ -1488,6 +1491,7 @@ const Dashboard = () => {
                       <p className="text-gray-600">
                         50 MP goal — {userStats ? ((userStats.loginToday ? 10 : 0) + (userStats.practiceToday ? 40 : 0)) : 0}/50 completed
                       </p>
+                      {userStats && <p className="text-xs text-gray-500">Debug: Login:{userStats.loginToday ? 'Yes' : 'No'} Practice:{userStats.practiceToday ? 'Yes' : 'No'}</p>}
                     </div>
                   </div>
                 </div>
