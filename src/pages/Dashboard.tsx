@@ -1084,34 +1084,34 @@ const Dashboard = () => {
                    <div className="text-2xl font-bold text-gray-800">
                      #{(() => {
                         // Calculate user's rank from leaderboard
-                        const weeklyPlayers = [
-                          { name: "Alex Chen", mp: 1847, grade: 8.6, streak: 14, isCurrentUser: false },
-                          { name: "Emma Wilson", mp: 1653, grade: 8.2, streak: 12, isCurrentUser: false },
-                          { name: "Liam Parker", mp: 1512, grade: 7.9, streak: 9, isCurrentUser: false },
-                          { name: "Sophia Lee", mp: 1344, grade: 7.5, streak: 8, isCurrentUser: false },
-                          { name: "You", mp: userGems, grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0, streak: currentStreak, isCurrentUser: true },
-                          { name: "James Smith", mp: 1098, grade: 6.8, streak: 5, isCurrentUser: false },
-                          { name: "Maya Patel", mp: 987, grade: 6.5, streak: 4, isCurrentUser: false },
-                          { name: "Oliver Brown", mp: 876, grade: 6.2, streak: 3, isCurrentUser: false },
-                        ];
+                       const weeklyPlayers = [
+                         { name: "Alex Chen", mp: 247, grade: 8.6, streak: 14, isCurrentUser: false },
+                         { name: "Emma Wilson", mp: 215, grade: 8.2, streak: 12, isCurrentUser: false },
+                         { name: "Liam Parker", mp: 188, grade: 7.9, streak: 9, isCurrentUser: false },
+                         { name: "Sophia Lee", mp: 164, grade: 7.5, streak: 8, isCurrentUser: false },
+                         { name: "You", mp: userGems, grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0, streak: currentStreak, isCurrentUser: true },
+                         { name: "James Smith", mp: 142, grade: 6.8, streak: 5, isCurrentUser: false },
+                         { name: "Maya Patel", mp: 127, grade: 6.5, streak: 4, isCurrentUser: false },
+                         { name: "Oliver Brown", mp: 108, grade: 6.2, streak: 3, isCurrentUser: false },
+                       ];
 
-                        const allTimePlayers = [
-                          { name: "Marcus Thompson", mp: 15847, grade: 9.0, streak: 127, isCurrentUser: false },
-                          { name: "Sarah Chen", mp: 14653, grade: 8.9, streak: 98, isCurrentUser: false },
-                          { name: "David Rodriguez", mp: 13512, grade: 8.7, streak: 85, isCurrentUser: false },
-                          { name: "Emily Zhang", mp: 12344, grade: 8.5, streak: 72, isCurrentUser: false },
-                          { name: "Alex Chen", mp: 11847, grade: 8.6, streak: 65, isCurrentUser: false },
-                          { name: "Emma Wilson", mp: 10653, grade: 8.2, streak: 58, isCurrentUser: false },
-                          { name: "Liam Parker", mp: 9512, grade: 7.9, streak: 45, isCurrentUser: false },
-                          { name: "Sophia Lee", mp: 8344, grade: 7.5, streak: 38, isCurrentUser: false },
-                          { name: "You", mp: userGems, grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0, streak: currentStreak, isCurrentUser: true },
-                          { name: "James Smith", mp: 7098, grade: 6.8, streak: 32, isCurrentUser: false },
-                          { name: "Maya Patel", mp: 6987, grade: 6.5, streak: 28, isCurrentUser: false },
-                          { name: "Oliver Brown", mp: 6876, grade: 6.2, streak: 25, isCurrentUser: false },
-                          { name: "Isabella Garcia", mp: 6543, grade: 7.1, streak: 22, isCurrentUser: false },
-                          { name: "Noah Johnson", mp: 6321, grade: 6.9, streak: 19, isCurrentUser: false },
-                          { name: "Ava Williams", mp: 6198, grade: 6.7, streak: 16, isCurrentUser: false },
-                        ];
+                       const allTimePlayers = [
+                         { name: "Marcus Thompson", mp: 4247, grade: 9.0, streak: 127, isCurrentUser: false },
+                         { name: "Sarah Chen", mp: 3815, grade: 8.9, streak: 98, isCurrentUser: false },
+                         { name: "David Rodriguez", mp: 3456, grade: 8.7, streak: 85, isCurrentUser: false },
+                         { name: "Emily Zhang", mp: 3124, grade: 8.5, streak: 72, isCurrentUser: false },
+                         { name: "Alex Chen", mp: 2947, grade: 8.6, streak: 65, isCurrentUser: false },
+                         { name: "Emma Wilson", mp: 2683, grade: 8.2, streak: 58, isCurrentUser: false },
+                         { name: "Liam Parker", mp: 2456, grade: 7.9, streak: 45, isCurrentUser: false },
+                         { name: "Sophia Lee", mp: 2234, grade: 7.5, streak: 38, isCurrentUser: false },
+                         { name: "You", mp: userGems, grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0, streak: currentStreak, isCurrentUser: true },
+                         { name: "James Smith", mp: 1998, grade: 6.8, streak: 32, isCurrentUser: false },
+                         { name: "Maya Patel", mp: 1867, grade: 6.5, streak: 28, isCurrentUser: false },
+                         { name: "Oliver Brown", mp: 1756, grade: 6.2, streak: 25, isCurrentUser: false },
+                         { name: "Isabella Garcia", mp: 1654, grade: 7.1, streak: 22, isCurrentUser: false },
+                         { name: "Noah Johnson", mp: 1532, grade: 6.9, streak: 19, isCurrentUser: false },
+                         { name: "Ava Williams", mp: 1423, grade: 6.7, streak: 16, isCurrentUser: false },
+                       ];
 
                         const players = activeLeaderboardTab === 'weekly' ? weeklyPlayers : allTimePlayers;
 
@@ -1181,32 +1181,32 @@ const Dashboard = () => {
                      {(() => {
                        // Define players with raw stats
                        const weeklyPlayers = [
-                         { name: "Alex Chen", mp: 1847, grade: 8.6, streak: 14, isCurrentUser: false },
-                         { name: "Emma Wilson", mp: 1653, grade: 8.2, streak: 12, isCurrentUser: false },
-                         { name: "Liam Parker", mp: 1512, grade: 7.9, streak: 9, isCurrentUser: false },
-                         { name: "Sophia Lee", mp: 1344, grade: 7.5, streak: 8, isCurrentUser: false },
+                         { name: "Alex Chen", mp: 247, grade: 8.6, streak: 14, isCurrentUser: false },
+                         { name: "Emma Wilson", mp: 215, grade: 8.2, streak: 12, isCurrentUser: false },
+                         { name: "Liam Parker", mp: 188, grade: 7.9, streak: 9, isCurrentUser: false },
+                         { name: "Sophia Lee", mp: 164, grade: 7.5, streak: 8, isCurrentUser: false },
                          { name: "You", mp: userGems, grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0, streak: currentStreak, isCurrentUser: true },
-                         { name: "James Smith", mp: 1098, grade: 6.8, streak: 5, isCurrentUser: false },
-                         { name: "Maya Patel", mp: 987, grade: 6.5, streak: 4, isCurrentUser: false },
-                         { name: "Oliver Brown", mp: 876, grade: 6.2, streak: 3, isCurrentUser: false },
+                         { name: "James Smith", mp: 142, grade: 6.8, streak: 5, isCurrentUser: false },
+                         { name: "Maya Patel", mp: 127, grade: 6.5, streak: 4, isCurrentUser: false },
+                         { name: "Oliver Brown", mp: 108, grade: 6.2, streak: 3, isCurrentUser: false },
                        ];
 
                        const allTimePlayers = [
-                         { name: "Marcus Thompson", mp: 15847, grade: 9.0, streak: 127, isCurrentUser: false },
-                         { name: "Sarah Chen", mp: 14653, grade: 8.9, streak: 98, isCurrentUser: false },
-                         { name: "David Rodriguez", mp: 13512, grade: 8.7, streak: 85, isCurrentUser: false },
-                         { name: "Emily Zhang", mp: 12344, grade: 8.5, streak: 72, isCurrentUser: false },
-                         { name: "Alex Chen", mp: 11847, grade: 8.6, streak: 65, isCurrentUser: false },
-                         { name: "Emma Wilson", mp: 10653, grade: 8.2, streak: 58, isCurrentUser: false },
-                         { name: "Liam Parker", mp: 9512, grade: 7.9, streak: 45, isCurrentUser: false },
-                         { name: "Sophia Lee", mp: 8344, grade: 7.5, streak: 38, isCurrentUser: false },
+                         { name: "Marcus Thompson", mp: 4247, grade: 9.0, streak: 127, isCurrentUser: false },
+                         { name: "Sarah Chen", mp: 3815, grade: 8.9, streak: 98, isCurrentUser: false },
+                         { name: "David Rodriguez", mp: 3456, grade: 8.7, streak: 85, isCurrentUser: false },
+                         { name: "Emily Zhang", mp: 3124, grade: 8.5, streak: 72, isCurrentUser: false },
+                         { name: "Alex Chen", mp: 2947, grade: 8.6, streak: 65, isCurrentUser: false },
+                         { name: "Emma Wilson", mp: 2683, grade: 8.2, streak: 58, isCurrentUser: false },
+                         { name: "Liam Parker", mp: 2456, grade: 7.9, streak: 45, isCurrentUser: false },
+                         { name: "Sophia Lee", mp: 2234, grade: 7.5, streak: 38, isCurrentUser: false },
                          { name: "You", mp: userGems, grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0, streak: currentStreak, isCurrentUser: true },
-                         { name: "James Smith", mp: 7098, grade: 6.8, streak: 32, isCurrentUser: false },
-                         { name: "Maya Patel", mp: 6987, grade: 6.5, streak: 28, isCurrentUser: false },
-                         { name: "Oliver Brown", mp: 6876, grade: 6.2, streak: 25, isCurrentUser: false },
-                         { name: "Isabella Garcia", mp: 6543, grade: 7.1, streak: 22, isCurrentUser: false },
-                         { name: "Noah Johnson", mp: 6321, grade: 6.9, streak: 19, isCurrentUser: false },
-                         { name: "Ava Williams", mp: 6198, grade: 6.7, streak: 16, isCurrentUser: false },
+                         { name: "James Smith", mp: 1998, grade: 6.8, streak: 32, isCurrentUser: false },
+                         { name: "Maya Patel", mp: 1867, grade: 6.5, streak: 28, isCurrentUser: false },
+                         { name: "Oliver Brown", mp: 1756, grade: 6.2, streak: 25, isCurrentUser: false },
+                         { name: "Isabella Garcia", mp: 1654, grade: 7.1, streak: 22, isCurrentUser: false },
+                         { name: "Noah Johnson", mp: 1532, grade: 6.9, streak: 19, isCurrentUser: false },
+                         { name: "Ava Williams", mp: 1423, grade: 6.7, streak: 16, isCurrentUser: false },
                        ];
 
                        const players = activeLeaderboardTab === 'weekly' ? weeklyPlayers : allTimePlayers;
