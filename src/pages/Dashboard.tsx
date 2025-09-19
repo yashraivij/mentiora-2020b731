@@ -774,9 +774,11 @@ const Dashboard = () => {
                   {/* Subject Cards */}
                   <div className="space-y-4">
                     {predictedGrades.map((prediction, index) => {
-                      const subjectKey = prediction.subject_id;
+                      // Find the matching curriculum subject to ensure consistent icon mapping
+                      const curriculumSubject = curriculum.find(s => s.id === prediction.subject_id);
+                      const subjectKey = curriculumSubject?.id || prediction.subject_id;
                       const colors = subjectColors[subjectKey] || subjectColors["physics"];
-                      const subjectName = curriculum.find(s => s.id === subjectKey)?.name || prediction.subject_id;
+                      const subjectName = curriculumSubject?.name || prediction.subject_id;
                       
                       const getGradeColor = (grade: string) => {
                         const gradeNum = parseInt(grade || '0');
@@ -814,7 +816,7 @@ const Dashboard = () => {
                           <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-200 border-2 border-gray-100">
                             <div className="flex items-center justify-between">
                               <div className="flex items-center space-x-4 flex-1">
-                                {/* Subject Icon */}
+                                {/* Subject Icon - Using same logic as learn section */}
                                 <div className={`w-14 h-14 ${colors.bg} rounded-2xl flex items-center justify-center shadow-md`}>
                                   {(() => {
                                     const IconComponent = getSubjectIcon(subjectKey);
