@@ -9,6 +9,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import {
   BookOpen,
+  BarChart3,
   Trophy,
   TrendingUp,
   ShoppingBag,
@@ -1772,16 +1773,16 @@ const Dashboard = () => {
           <Card className="border-0 shadow-md">
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-gray-800">Silver League</h3>
-                <span className="text-blue-500 font-bold text-sm">VIEW LEAGUE</span>
+                <h3 className="text-lg font-bold text-gray-800">Leaderboards</h3>
+                <span className="text-blue-500 font-bold text-sm">VIEW RANKINGS</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold">🏆</span>
+                  <BarChart3 className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex-1">
                   <p className="text-sm text-gray-600">
-                    Complete a lesson to join this week's leaderboard and compete against other learners
+                    Check your ranking on the weekly and all-time leaderboards
                   </p>
                 </div>
               </div>
