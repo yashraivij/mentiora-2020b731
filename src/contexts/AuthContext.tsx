@@ -109,23 +109,28 @@ const refreshSubscription = async (userId?: string) => {
         if (session?.user) {
           setTimeout(async () => {
             await refreshSubscription(session.user.id);
-            // Handle daily login MP reward server-side (with debouncing)
+            // Handle daily login MP reward server-side (only once per day)
             if (event === 'SIGNED_IN') {
               const userId = session.user.id;
-              const lastLoginKey = `lastDailyLoginAward_${userId}`;
-              const lastLoginTime = localStorage.getItem(lastLoginKey);
-              const now = Date.now();
+              const today = new Date().toDateString();
+              const lastLoginDateKey = `lastDailyLoginDate_${userId}`;
+              const lastLoginDate = localStorage.getItem(lastLoginDateKey);
               
-              // Only attempt daily login award if it hasn't been tried in the last 60 seconds
-              if (!lastLoginTime || (now - parseInt(lastLoginTime)) > 60000) {
-                localStorage.setItem(lastLoginKey, now.toString());
-                
+              // Only attempt daily login award if it hasn't been awarded today
+              if (lastLoginDate !== today) {
                 try {
                   const { MPPointsSystemClient } = await import('@/lib/mpPointsSystemClient');
                   const result = await MPPointsSystemClient.awardDailyLogin(userId);
                   
-                  if (result.awarded > 0) {
-                    console.log(`Daily login bonus: +${result.awarded} MP`);
+                  if (result.success) {
+                    // Mark today as the last login date regardless of whether points were awarded
+                    localStorage.setItem(lastLoginDateKey, today);
+                    
+                    if (result.awarded > 0) {
+                      console.log(`Daily login bonus: +${result.awarded} MP`);
+                    } else {
+                      console.log(`Daily login already awarded today`);
+                    }
                   }
                 } catch (error) {
                   console.error('Error awarding daily login MP:', error);
