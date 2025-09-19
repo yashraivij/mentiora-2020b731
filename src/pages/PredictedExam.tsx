@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Clock, AlertCircle, CheckCircle, Crown, Target } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
@@ -4022,12 +4023,12 @@ Write a story about a moment of fear.
       };
 
     } catch (error) {
-      console.error('Error calling Smart Marking function:', error);
+      console.error('Error calling Smart marking function:', error);
       
       // Fallback to basic marking
       return {
         marksAwarded: answer.trim() ? Math.round(question.marks * 0.5) : 0,
-        feedback: "Smart Marking temporarily unavailable. Answer has been given partial credit.",
+        feedback: "Smart marking temporarily unavailable. Answer has been given partial credit.",
         assessment: "Needs Review"
       };
     }
@@ -4140,10 +4141,11 @@ Write a story about a moment of fear.
         <header className="bg-card/90 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-lg">
           <div className="container mx-auto px-6 py-4">
             <div className="flex justify-between items-center">
-              <Button variant="ghost" onClick={() => navigate(-1)} className="text-muted-foreground hover:text-foreground">
+              <Button variant="ghost" onClick={() => navigate(`/subject/${subjectId}`)} className="text-muted-foreground hover:text-foreground">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Button>
+              <ThemeToggle />
             </div>
           </div>
         </header>
@@ -4260,6 +4262,7 @@ Write a story about a moment of fear.
                 <Target className="h-4 w-4 mr-2" />
                 Submit for Marking
               </Button>
+              <ThemeToggle />
             </div>
           </div>
           

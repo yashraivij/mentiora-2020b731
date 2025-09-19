@@ -6,7 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb, HelpCircle, X, StickyNote, User, GraduationCap, Trophy, MessageSquare } from "lucide-react";
+import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb, HelpCircle, X, StickyNote } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -580,7 +581,7 @@ const Practice = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button variant="outline" onClick={() => navigate(-1)}>
+              <Button variant="outline" onClick={() => navigate(`/subject/${subjectId}`)}>
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Button>
@@ -590,6 +591,7 @@ const Practice = () => {
               </div>
             </div>
             <div className="flex items-center space-x-4">
+              <ThemeToggle />
               <span className="text-sm text-muted-foreground">
                 Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
               </span>
@@ -775,20 +777,18 @@ const Practice = () => {
 
             {/* Feedback Panel */}
             {showFeedback && currentAttempt && (
-              <Card className="bg-gradient-to-br from-white/90 to-slate-50/90 backdrop-blur-xl border border-slate-200/50 shadow-2xl">
+              <Card className="bg-card/80 backdrop-blur-sm border border-border">
                 <CardHeader>
                   <CardTitle className="flex items-center text-foreground">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center mr-3">
-                      <User className="h-4 w-4 text-white" />
-                    </div>
-                    Your Feedback
+                    <CheckCircle className="h-5 w-5 mr-2 text-green-600 dark:text-green-400" />
+                    Smart Teacher Feedback
                   </CardTitle>
                   <div className="flex items-center space-x-2">
-                    <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    <span className="text-2xl font-bold text-green-600 dark:text-green-400">
                       {currentAttempt.score}/{currentQuestion.marks}
                     </span>
                     <span className="text-sm text-muted-foreground">marks</span>
-                    <Badge className={`${currentAttempt.score >= currentQuestion.marks * 0.85 ? "bg-gradient-to-r from-green-500 to-emerald-500" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "bg-gradient-to-r from-yellow-500 to-orange-500" : "bg-gradient-to-r from-red-500 to-rose-500"} text-white border-0`}>
+                    <Badge className={currentAttempt.score >= currentQuestion.marks * 0.85 ? "bg-green-500" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "bg-yellow-500" : "bg-red-500"}>
                       {currentAttempt.score >= currentQuestion.marks * 0.85 ? "Excellent" : currentAttempt.score >= currentQuestion.marks * 0.6 ? "Good" : "Needs Work"}
                     </Badge>
                   </div>
@@ -796,13 +796,11 @@ const Practice = () => {
                 <CardContent className="space-y-6">
                   {/* Model Answer */}
                   <div>
-                    <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                      <div className="w-6 h-6 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center mr-2">
-                        <GraduationCap className="h-3 w-3 text-white" />
-                      </div>
+                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                      <Book className="h-4 w-4 mr-2" />
                       Model Answer
                     </h4>
-                    <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-4 rounded-xl border border-indigo-200/50 shadow-lg">
+                    <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border-l-4 border-green-500">
                       <div className="text-foreground space-y-2">
                         {currentAttempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).map((sentence, index) => (
                           <p key={index} className="leading-relaxed">{sentence.trim()}{index < currentAttempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).length - 1 ? '.' : ''}</p>
@@ -813,13 +811,11 @@ const Practice = () => {
 
                   {/* Why This Gets Marks */}
                   <div>
-                    <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                      <div className="w-6 h-6 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center mr-2">
-                        <Trophy className="h-3 w-3 text-white" />
-                      </div>
+                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                      <CheckCircle className="h-4 w-4 mr-2" />
                       Why This Gets Full Marks
                     </h4>
-                    <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-xl border border-green-200/50 shadow-lg">
+                    <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500">
                       <pre className="text-foreground whitespace-pre-wrap font-sans">
                         {currentAttempt.feedback.whyThisGetsMark}
                       </pre>
@@ -828,13 +824,11 @@ const Practice = () => {
 
                   {/* Smart Feedback */}
                   <div>
-                    <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                      <div className="w-6 h-6 rounded-lg bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center mr-2">
-                        <MessageSquare className="h-3 w-3 text-white" />
-                      </div>
-                      Teacher's Notes
+                    <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                      <Lightbulb className="h-4 w-4 mr-2" />
+                      Smart Teacher Feedback
                     </h4>
-                    <div className="bg-gradient-to-r from-orange-50 to-red-50 p-4 rounded-xl border border-orange-200/50 shadow-lg">
+                    <div className="bg-yellow-50 dark:bg-yellow-950/20 p-4 rounded-lg border-l-4 border-yellow-500">
                       <p className="text-foreground">{currentAttempt.feedback.whyYoursDidnt}</p>
                     </div>
                   </div>
