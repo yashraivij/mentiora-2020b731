@@ -375,6 +375,7 @@ const Dashboard = () => {
     const tabParam = searchParams.get('tab');
     if (tabParam) {
       setActiveTab(tabParam);
+      window.scrollTo(0, 0); // Scroll to top when navigating via URL
     }
   }, [searchParams]);
 
