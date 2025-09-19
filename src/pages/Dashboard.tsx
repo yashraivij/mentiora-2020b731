@@ -1763,7 +1763,7 @@ const Dashboard = () => {
                 className="w-full bg-white text-blue-500 hover:bg-gray-100 font-bold py-3 rounded-2xl"
                 onClick={() => navigate("/pricing")}
               >
-                START PREMIUM TRIAL
+                UPGRADE TO PREMIUM
               </Button>
             </CardContent>
           </Card>
