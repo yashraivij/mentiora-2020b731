@@ -757,7 +757,7 @@ const Dashboard = () => {
                         </div>
                         <div>
                           <h3 className="text-2xl font-bold text-gray-800">
-                            Your average grade is {predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + parseInt(grade.grade || '0'), 0) / predictedGrades.length) : 0}. Keep it up!
+                            Your average grade is {predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0}. Keep it up!
                           </h3>
                           <p className="text-gray-600">You're making great progress</p>
                         </div>
@@ -773,10 +773,7 @@ const Dashboard = () => {
 
                   {/* Subject Cards */}
                   <div className="space-y-4">
-                    {userSubjects
-                      .map(subjectId => predictedGrades.find(grade => grade.subject_id === subjectId))
-                      .filter(Boolean)
-                      .map((prediction, index) => {
+                    {predictedGrades.map((prediction, index) => {
                       const subjectKey = prediction.subject_id;
                       const colors = subjectColors[subjectKey] || subjectColors["physics"];
                       const subjectName = curriculum.find(s => s.id === subjectKey)?.name || prediction.subject_id;
@@ -805,7 +802,7 @@ const Dashboard = () => {
                         return { text: "Keep trying", color: "bg-red-100 text-red-700" };
                       };
 
-                      const statusChip = getStatusChip(prediction.grade, prediction.percentage);
+                      const statusChip = getStatusChip(prediction.grade, prediction.percentage || 0);
 
                       return (
                         <motion.div
