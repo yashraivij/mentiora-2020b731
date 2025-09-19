@@ -502,7 +502,7 @@ const Dashboard = () => {
               transition={{ delay: subject.topics.length * 0.1 }}
             >
               <motion.button
-                onClick={() => navigate("/predicted-exam/geography-paper-1")}
+                onClick={() => navigate("/predicted-exam/geography")}
                 className="relative w-24 h-24 rounded-full border-4 border-orange-400 shadow-xl bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -526,7 +526,7 @@ const Dashboard = () => {
               transition={{ delay: (subject.topics.length * 0.1) + 0.1 }}
             >
               <motion.button
-                onClick={() => navigate("/predicted-exam/geography-paper-2")}
+                onClick={() => navigate("/predicted-exam/geography")}
                 className="relative w-24 h-24 rounded-full border-4 border-orange-400 shadow-xl bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
