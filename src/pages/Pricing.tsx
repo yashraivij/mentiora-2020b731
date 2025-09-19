@@ -301,29 +301,29 @@ const Pricing = () => {
                     {[
                       { 
                         subject: "Mathematics", 
-                        questions: "45 new questions", 
-                        confidence: "92%",
-                        iconColor: "text-purple-400" 
+                        topic: "Integration by Parts", 
+                        status: "High Priority",
+                        iconColor: "text-red-400" 
                       },
                       { 
                         subject: "Physics", 
-                        questions: "38 new questions", 
-                        confidence: "89%",
-                        iconColor: "text-blue-400" 
+                        topic: "Quantum Mechanics", 
+                        status: "Likely Topic",
+                        iconColor: "text-yellow-400" 
                       },
                       { 
                         subject: "Chemistry", 
-                        questions: "42 new questions", 
-                        confidence: "94%",
+                        topic: "Organic Synthesis", 
+                        status: "Expected",
                         iconColor: "text-green-400" 
                       }
                     ].map((item, index) => (
                       <div key={index} className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
                         <span className="text-white font-medium">{item.subject}</span>
                         <div className="flex items-center gap-2">
-                          <span className="text-white/70">{item.questions}</span>
+                          <span className="text-white/70">{item.topic}</span>
                           <Zap className={`h-4 w-4 ${item.iconColor}`} />
-                          <span className="text-purple-400 font-bold">{item.confidence}</span>
+                          <span className={`font-bold ${item.iconColor}`}>{item.status}</span>
                         </div>
                       </div>
                     ))}
@@ -340,7 +340,7 @@ const Pricing = () => {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="grid lg:grid-cols-2 gap-12 items-center"
           >
-            <div className="lg:order-2">
+            <div>
               <h3 className="text-3xl font-bold text-white mb-6">
                 Practice without limits
               </h3>
@@ -364,7 +364,7 @@ const Pricing = () => {
               </div>
             </div>
             
-            <div className="lg:order-1 relative">
+            <div className="relative">
               <Card className="bg-white/10 backdrop-blur-xl border-white/20">
                 <CardContent className="p-6 text-center">
                   <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-pink-400 to-rose-400 flex items-center justify-center">
