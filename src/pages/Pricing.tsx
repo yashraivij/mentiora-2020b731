@@ -105,7 +105,20 @@ const Pricing = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
       </div>
       
-      <div className="relative z-10 px-4 py-8 max-w-6xl mx-auto">
+      {/* Header with Logo */}
+      <div className="relative z-10 px-4 py-4">
+        <div className="max-w-6xl mx-auto">
+          <button
+            onClick={() => navigate("/dashboard")}
+            className="flex items-center gap-2 text-white/90 hover:text-white transition-colors duration-200"
+          >
+            <img src="/src/assets/mentiora-logo.png" alt="Mentiora" className="h-8 w-auto" />
+            <span className="font-semibold">Mentiora</span>
+          </button>
+        </div>
+      </div>
+      
+      <div className="relative z-10 px-4 py-4 max-w-6xl mx-auto">
         {/* Hero Section */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -165,32 +178,20 @@ const Pricing = () => {
               >
                 Get Mentiora Premium
               </Button>
-              
-              <button
-                onClick={handleNoThanks}
-                className="text-slate-500 hover:text-slate-700 font-medium text-sm transition-colors duration-200 font-sans"
-              >
-                Maybe later
-              </button>
             </CardContent>
           </Card>
         </motion.div>
 
-        {/* Stats Cards */}
+        {/* Benefits Heading */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="grid md:grid-cols-3 gap-6 mb-16"
+          className="text-center mb-16"
         >
-          {statsData.map((stat, index) => (
-            <Card key={index} className="bg-white/10 backdrop-blur-xl border-white/20 text-center hover:bg-white/15 transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="text-3xl font-bold text-green-400 mb-2">{stat.number}</div>
-                <div className="text-white/80">{stat.label}</div>
-              </CardContent>
-            </Card>
-          ))}
+          <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+            Benefits of upgrading to Mentiora Premium
+          </h2>
         </motion.div>
 
         {/* Feature Showcase Sections */}
