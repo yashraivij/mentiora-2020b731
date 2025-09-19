@@ -922,7 +922,7 @@ const Dashboard = () => {
             </div>
           )}
 
-          {activeTab !== "learn" && activeTab !== "notes" && activeTab !== "progress" && (
+          {activeTab !== "learn" && activeTab !== "notes" && activeTab !== "progress" && activeTab !== "profile" && (
             <div className="text-center py-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-6 capitalize">
                 {activeTab}
@@ -930,6 +930,24 @@ const Dashboard = () => {
               <p className="text-lg text-gray-600">
                 Coming soon! This feature is being developed.
               </p>
+            </div>
+          )}
+
+          {activeTab === "profile" && (
+            <div className="text-center py-16">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                Profile Settings
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Manage your account preferences and settings.
+              </p>
+              <Button 
+                onClick={() => navigate('/settings')}
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 text-lg"
+              >
+                <User className="w-5 h-5 mr-2" />
+                Go to Settings
+              </Button>
             </div>
           )}
         </div>
