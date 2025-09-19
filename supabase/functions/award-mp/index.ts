@@ -72,20 +72,31 @@ async function awardPoints(userId: string, points: number, reason: string): Prom
   try {
     console.log(`Awarding ${points} MP to user ${userId} for ${reason}`);
     
-    const currentPoints = await getUserPoints(userId);
-    const newTotal = currentPoints + points;
+    // Use atomic update to prevent race conditions
+    const { data, error } = await supabase.rpc('increment_user_points', {
+      p_user_id: userId,
+      p_points: points
+    });
     
-    const { error } = await supabase
-      .from('user_points')
-      .upsert({
-        user_id: userId,
-        total_points: newTotal,
-        updated_at: new Date().toISOString()
-      });
+    if (error) {
+      // Fallback to upsert if the RPC doesn't exist yet
+      const currentPoints = await getUserPoints(userId);
+      const newTotal = currentPoints + points;
+      
+      const { error: upsertError } = await supabase
+        .from('user_points')
+        .upsert({
+          user_id: userId,
+          total_points: newTotal,
+          updated_at: new Date().toISOString()
+        });
+      
+      if (upsertError) throw upsertError;
+      console.log(`Successfully awarded ${points} MP via upsert. New total: ${newTotal}`);
+    } else {
+      console.log(`Successfully awarded ${points} MP via RPC. New total: ${data}`);
+    }
     
-    if (error) throw error;
-    
-    console.log(`Successfully awarded ${points} MP. New total: ${newTotal}`);
     return true;
   } catch (error) {
     console.error('Error awarding points:', error);
