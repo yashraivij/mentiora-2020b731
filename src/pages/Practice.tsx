@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb, HelpCircle, X, StickyNote, Star, BookOpen } from "lucide-react";
+import { ArrowLeft, Trophy, Award, BookOpenCheck, Zap, Target, X, StickyNote, Star, BookOpen } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -515,7 +515,7 @@ const Practice = () => {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <Card className="max-w-md w-full">
           <CardHeader className="text-center">
-            <CheckCircle className="h-16 w-16 text-green-500 dark:text-green-400 mx-auto mb-4" />
+            <Trophy className="h-16 w-16 text-yellow-500 mx-auto mb-4" />
             <CardTitle className="text-foreground">Session Complete!</CardTitle>
             <CardDescription className="text-muted-foreground">
               {topic?.name} - {subject?.name}
@@ -653,7 +653,7 @@ const Practice = () => {
                         {/* Extract/Transcript Display */}
                         <div className="bg-muted/50 p-4 rounded-lg border-l-4 border-primary">
                           <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                            <Book className="h-4 w-4 mr-2" />
+                            <BookOpenCheck className="h-4 w-4 mr-2 text-emerald-600" />
                             {markerText.replace(':', '')}
                           </h4>
                           <div className="text-foreground font-mono text-sm leading-relaxed whitespace-pre-line bg-background/80 p-3 rounded">
@@ -682,7 +682,7 @@ const Practice = () => {
                               return (
                                 <div key={index} className="bg-muted/50 p-4 rounded-lg border-l-4 border-primary">
                                    <h4 className="font-mono font-semibold text-foreground mb-2 flex items-center">
-                                    <Book className="h-4 w-4 mr-2" />
+                                    <BookOpenCheck className="h-4 w-4 mr-2 text-emerald-600" />
                                     {section}
                                   </h4>
                                   <div className="text-foreground font-normal bg-background/80 p-3 rounded">
@@ -741,7 +741,7 @@ const Practice = () => {
                           onClick={() => setShowHint(!showHint)}
                           className="px-4"
                         >
-                          <HelpCircle className="h-4 w-4 mr-2" />
+                          <Target className="h-4 w-4 mr-2 text-purple-600" />
                           {showHint ? "Hide Hint" : "Hint"}
                         </Button>
                       </div>
@@ -751,7 +751,7 @@ const Practice = () => {
                           <div className="flex items-start justify-between">
                             <div className="flex-1">
                               <h4 className="font-medium text-blue-800 dark:text-blue-300 mb-2 flex items-center">
-                                <Lightbulb className="h-4 w-4 mr-2" />
+                                <Zap className="h-4 w-4 mr-2 text-yellow-600" />
                                 Hint
                               </h4>
                               <p className="text-blue-700 dark:text-blue-200 text-sm leading-relaxed">
@@ -780,7 +780,7 @@ const Practice = () => {
               <Card className="bg-card/80 backdrop-blur-sm border border-border">
                 <CardHeader>
                   <CardTitle className="flex items-center text-foreground">
-                    <Star className="h-5 w-5 mr-2 text-yellow-600 dark:text-yellow-400" />
+                    <Trophy className="h-5 w-5 mr-2 text-yellow-500" />
                     Your Feedback
                   </CardTitle>
                   <div className="flex items-center space-x-2">
@@ -797,7 +797,7 @@ const Practice = () => {
                   {/* Model Answer */}
                   <div>
                     <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <Book className="h-4 w-4 mr-2" />
+                      <BookOpenCheck className="h-4 w-4 mr-2 text-emerald-600" />
                       Model Answer
                     </h4>
                     <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border-l-4 border-green-500">
@@ -812,7 +812,7 @@ const Practice = () => {
                   {/* Why This Gets Marks */}
                   <div>
                     <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <CheckCircle className="h-4 w-4 mr-2" />
+                      <Award className="h-4 w-4 mr-2 text-blue-600" />
                       Why This Gets Full Marks
                     </h4>
                     <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500">
