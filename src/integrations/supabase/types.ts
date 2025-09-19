@@ -1307,6 +1307,14 @@ export type Database = {
           hours: number
         }[]
       }
+      increment_user_points: {
+        Args: { p_points: number; p_user_id: string }
+        Returns: number
+      }
+      reset_user_points_based_on_activities: {
+        Args: { p_user_id: string }
+        Returns: number
+      }
       update_flashcard_review: {
         Args: { flashcard_id: string; performance: number }
         Returns: undefined

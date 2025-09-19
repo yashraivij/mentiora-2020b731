@@ -109,17 +109,27 @@ const refreshSubscription = async (userId?: string) => {
         if (session?.user) {
           setTimeout(async () => {
             await refreshSubscription(session.user.id);
-            // Handle daily login MP reward server-side
+            // Handle daily login MP reward server-side (with debouncing)
             if (event === 'SIGNED_IN') {
-              try {
-                const { MPPointsSystemClient } = await import('@/lib/mpPointsSystemClient');
-                const result = await MPPointsSystemClient.awardDailyLogin(session.user.id);
+              const userId = session.user.id;
+              const lastLoginKey = `lastDailyLoginAward_${userId}`;
+              const lastLoginTime = localStorage.getItem(lastLoginKey);
+              const now = Date.now();
+              
+              // Only attempt daily login award if it hasn't been tried in the last 60 seconds
+              if (!lastLoginTime || (now - parseInt(lastLoginTime)) > 60000) {
+                localStorage.setItem(lastLoginKey, now.toString());
                 
-                if (result.awarded > 0) {
-                  console.log(`Daily login bonus: +${result.awarded} MP`);
+                try {
+                  const { MPPointsSystemClient } = await import('@/lib/mpPointsSystemClient');
+                  const result = await MPPointsSystemClient.awardDailyLogin(userId);
+                  
+                  if (result.awarded > 0) {
+                    console.log(`Daily login bonus: +${result.awarded} MP`);
+                  }
+                } catch (error) {
+                  console.error('Error awarding daily login MP:', error);
                 }
-              } catch (error) {
-                console.error('Error awarding daily login MP:', error);
               }
             }
           }, 0);
