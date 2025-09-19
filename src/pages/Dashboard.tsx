@@ -502,7 +502,10 @@ const Dashboard = () => {
               <p className="text-white/90 mb-4">
                 No ads, unlimited hearts, and exclusive features!
               </p>
-              <Button className="w-full bg-white text-blue-500 hover:bg-gray-100 font-bold py-3 rounded-2xl">
+              <Button 
+                className="w-full bg-white text-blue-500 hover:bg-gray-100 font-bold py-3 rounded-2xl"
+                onClick={() => navigate("/pricing")}
+              >
                 TRY 2 WEEKS FREE
               </Button>
             </CardContent>
