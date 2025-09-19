@@ -140,28 +140,28 @@ const Pricing = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center mb-12"
         >
-          <Card className="max-w-sm mx-auto bg-white border-0 shadow-lg rounded-2xl">
+          <Card className="max-w-sm mx-auto bg-white/10 backdrop-blur-xl border-white/20 shadow-lg rounded-2xl">
             <CardContent className="p-8">
               <div className="mb-6">
-                <div className="inline-flex items-center gap-2 bg-green-50 rounded-full px-3 py-1 mb-4">
-                  <Star className="h-3 w-3 text-green-600" />
-                  <span className="text-green-600 font-medium text-xs">Best Deal</span>
+                <div className="inline-flex items-center gap-2 bg-green-400/20 backdrop-blur-sm rounded-full px-3 py-1 mb-4">
+                  <Star className="h-3 w-3 text-green-400" />
+                  <span className="text-green-400 font-medium text-xs">Best Deal</span>
                 </div>
-                <h3 className="text-xl font-semibold text-slate-800 mb-3 font-sans">
+                <h3 className="text-2xl font-bold text-white mb-4 font-sans">
                   Pay monthly
                 </h3>
-                <p className="text-sm text-slate-600 mb-2 font-sans">Amount billed today</p>
-                <div className="text-3xl font-bold text-slate-900 mb-3 font-sans">
-                  £7.99<span className="text-base font-normal text-slate-600">/month</span>
+                <p className="text-sm text-white/70 mb-2 font-sans">Amount billed today</p>
+                <div className="text-4xl font-bold text-white mb-4 font-sans">
+                  £7.99<span className="text-lg font-medium text-white/80">/month</span>
                 </div>
-                <p className="text-slate-600 text-sm font-sans">
+                <p className="text-white/70 text-sm font-sans">
                   Recurring billing. Cancel any time.
                 </p>
               </div>
               
               <Button
                 onClick={handleStartTrial}
-                className="w-full bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-slate-900 font-semibold py-4 px-6 rounded-xl text-base transition-all duration-200 mb-3 border-0 font-sans"
+                className="w-full bg-white/10 backdrop-blur-xl border-white/20 hover:bg-white/15 text-white font-semibold py-4 px-6 rounded-xl text-base transition-all duration-300 mb-3 border"
               >
                 Get Mentiora Premium
               </Button>
