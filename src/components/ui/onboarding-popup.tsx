@@ -137,7 +137,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
           title: "Success! 🎉",
           description: `Added ${selectedSubjects.length} subject${selectedSubjects.length > 1 ? 's' : ''} to your list`,
         });
-        onSubjectsAdded();
+        // Don't call onSubjectsAdded() here - it should only be called when onboarding is complete
       }
     } catch (error) {
       console.error('Error adding subjects:', error);
@@ -160,6 +160,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
   const handleUpgrade = () => {
     openPaymentLink();
+    onSubjectsAdded(); // Call when user upgrades
     onClose();
   };
 
@@ -962,13 +963,16 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                    >
                      ← Back
                    </Button>
-                   <Button 
-                     variant="outline" 
-                     onClick={onClose} 
-                     className="px-6 py-3 text-base font-semibold"
-                   >
-                     Continue with Free Version
-                   </Button>
+                    <Button 
+                      variant="outline" 
+                      onClick={() => {
+                        onSubjectsAdded(); // Call when user finishes onboarding
+                        onClose();
+                      }} 
+                      className="px-6 py-3 text-base font-semibold"
+                    >
+                      Continue with Free Version
+                    </Button>
                  </div>
               </div>
             )}
