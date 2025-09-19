@@ -1,5 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
@@ -32,12 +35,19 @@ import {
   Leaf,
   Dna,
   NotebookPen,
+  Brain,
+  Star,
+  Filter,
+  Calendar,
+  Unlock,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { openManageBilling } from "@/lib/manageBilling";
+import { NotebookEntry } from "@/components/notebook/NotebookEntry";
+import { toast } from "sonner";
 
 interface UserProgress {
   subjectId: string;
@@ -45,6 +55,27 @@ interface UserProgress {
   attempts: number;
   averageScore: number;
   lastAttempt: Date;
+}
+
+interface NotebookEntryData {
+  id: string;
+  subject: string;
+  paper: string;
+  topic: string;
+  subtopic: string;
+  question_label: string;
+  confidence_level: string;
+  what_tripped_up: string;
+  fix_sentence: string;
+  bulletproof_notes: string[];
+  mini_example?: string;
+  keywords: string[];
+  spec_link: string;
+  next_step_suggestion: string;
+  skill_type: string;
+  bloom_level: string;
+  mark_loss: number;
+  created_at: string;
 }
 
 const Dashboard = () => {
@@ -59,6 +90,13 @@ const Dashboard = () => {
   const [userXP, setUserXP] = useState(1122);
   const [userHearts, setUserHearts] = useState(5);
   const [userGems, setUserGems] = useState(850);
+
+  // Notebook state
+  const [entries, setEntries] = useState<NotebookEntryData[]>([]);
+  const [notebookLoading, setNotebookLoading] = useState(false);
+  const [selectedNotebookSubject, setSelectedNotebookSubject] = useState<string>('all');
+  const [selectedConfidence, setSelectedConfidence] = useState<string>('all');
+  const [sortBy, setSortBy] = useState<string>('recent');
 
   // Duolingo-style sidebar items with softer colors
   const sidebarItems = [
@@ -161,6 +199,41 @@ const Dashboard = () => {
     }
   };
 
+  // Load notebook entries
+  const loadNotebookEntries = async () => {
+    if (!user?.id) return;
+
+    try {
+      setNotebookLoading(true);
+      const { data, error } = await supabase
+        .from('notebook_entries')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error loading notebook entries:', error);
+        toast({
+          title: "Error",
+          description: "Failed to load notebook entries",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      setEntries(data || []);
+    } catch (error) {
+      console.error('Error loading notebook entries:', error);
+      toast({
+        title: "Error", 
+        description: "Failed to load notebook entries",
+        variant: "destructive"
+      });
+    } finally {
+      setNotebookLoading(false);
+    }
+  };
+
   // Get topic completion status
   const getTopicStatus = (subjectId: string, topicIndex: number) => {
     const subject = curriculum.find(s => s.id === subjectId);
@@ -200,7 +273,10 @@ const Dashboard = () => {
   useEffect(() => {
     loadUserSubjects();
     loadUserProgress();
-  }, [user?.id]);
+    if (activeTab === "notes") {
+      loadNotebookEntries();
+    }
+  }, [user?.id, activeTab]);
 
   const handleLogout = () => {
     logout();
@@ -223,6 +299,56 @@ const Dashboard = () => {
   const filteredSubjects = userSubjects.length > 0
     ? curriculum.filter((subject) => userSubjects.includes(subject.id))
     : [];
+
+  // Notebook helper functions
+  const filteredEntries = entries.filter(entry => {
+    if (selectedNotebookSubject !== 'all' && entry.subject !== selectedNotebookSubject) return false;
+    if (selectedConfidence !== 'all' && entry.confidence_level.toLowerCase() !== selectedConfidence) return false;
+    return true;
+  });
+
+  const sortedEntries = [...filteredEntries].sort((a, b) => {
+    switch (sortBy) {
+      case 'recent':
+        const dateA = new Date(a.created_at).getTime();
+        const dateB = new Date(b.created_at).getTime();
+        return dateB - dateA;
+      case 'subject':
+        return a.subject.localeCompare(b.subject);
+      case 'confidence':
+        const confidenceOrder = { 'low': 0, 'medium': 1, 'high': 2 };
+        return confidenceOrder[a.confidence_level.toLowerCase() as keyof typeof confidenceOrder] - 
+               confidenceOrder[b.confidence_level.toLowerCase() as keyof typeof confidenceOrder];
+      case 'marks':
+        return b.mark_loss - a.mark_loss;
+      default:
+        const defaultDateA = new Date(a.created_at).getTime();
+        const defaultDateB = new Date(b.created_at).getTime();
+        return defaultDateB - defaultDateA;
+    }
+  });
+
+  const getNotebookSubjects = () => {
+    const subjects = Array.from(new Set(entries.map(entry => entry.subject)));
+    return subjects;
+  };
+
+  const getNotebookStats = () => {
+    const totalEntries = entries.length;
+    const totalMarksLost = entries.reduce((sum, entry) => sum + entry.mark_loss, 0);
+    const lowConfidence = entries.filter(entry => entry.confidence_level.toLowerCase() === 'low').length;
+    const timeSavedMinutes = totalEntries * 15;
+    const timeSavedHours = Math.round(timeSavedMinutes / 60 * 10) / 10;
+    const subjects = getNotebookSubjects();
+
+    return { totalEntries, totalMarksLost, lowConfidence, timeSavedHours, subjectsWithNotes: subjects.length };
+  };
+
+  const notebookStats = getNotebookStats();
+  
+  const BlurSpan = ({ children }: { children: React.ReactNode }) => (
+    <span className={!isPremium ? "blur-sm" : ""}>{children}</span>
+  );
 
   // Render topic nodes in Duolingo path style
   const renderTopicPath = (subject: any) => {
@@ -479,7 +605,7 @@ const Dashboard = () => {
             </div>
           )}
 
-          {/* Other tabs */}
+          {/* Notes tab with full notebook functionality */}
           {activeTab === "notes" && (
             <div>
               <div className="text-center mb-8">
@@ -489,25 +615,122 @@ const Dashboard = () => {
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                   Ultra-clear, Grade 9-level notes for every mark you've lost, powered by advanced Smart analysis
                 </p>
+                <div className="flex items-center justify-center space-x-2 mt-4">
+                  <div className="w-2 h-2 bg-violet-500 rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse delay-75"></div>
+                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse delay-150"></div>
+                </div>
               </div>
-              
-              <Card className="text-center py-16 bg-gradient-to-br from-white/80 to-slate-50/80 backdrop-blur-xl border border-slate-200/50 shadow-2xl">
-                <CardContent>
-                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-slate-200 to-slate-300 rounded-3xl flex items-center justify-center">
-                    <NotebookPen className="h-10 w-10 text-slate-500" />
+
+              {/* Premium Stats Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <Card className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 dark:from-blue-950/50 dark:via-indigo-950/50 dark:to-blue-900/50 border-blue-200/50 dark:border-blue-800/30 shadow-xl shadow-blue-500/10 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-blue-400/20 to-transparent rounded-bl-full"></div>
+                  <CardContent className="p-6 text-center relative">
+                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+                      <BookOpen className="h-6 w-6 text-white" />
+                    </div>
+                    <div className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-indigo-700 dark:from-blue-300 dark:to-indigo-300 bg-clip-text text-transparent mb-1"><BlurSpan>{notebookStats.totalEntries}</BlurSpan></div>
+                    <div className="text-sm font-medium text-blue-600 dark:text-blue-400">Total Notes</div>
+                    <div className="text-xs text-blue-500/70 dark:text-blue-400/70 mt-1">Smart Generated</div>
+                  </CardContent>
+                </Card>
+                <Card className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-100 dark:from-emerald-950/50 dark:via-teal-950/50 dark:to-emerald-900/50 border-emerald-200/50 dark:border-emerald-800/30 shadow-xl shadow-emerald-500/10 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300">
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-emerald-400/20 to-transparent rounded-bl-full"></div>
+                  <CardContent className="p-6 text-center relative">
+                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
+                      <TrendingUp className="h-6 w-6 text-white" />
+                    </div>
+                    <div className="text-3xl font-bold bg-gradient-to-r from-emerald-700 to-teal-700 dark:from-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-1"><BlurSpan>{notebookStats.timeSavedHours}h</BlurSpan></div>
+                    <div className="text-sm font-medium text-emerald-600 dark:text-emerald-400">Time Saved</div>
+                    <div className="text-xs text-emerald-500/70 dark:text-emerald-400/70 mt-1">Auto Notes</div>
+                  </CardContent>
+                </Card>
+                <Card className="relative overflow-hidden bg-gradient-to-br from-violet-50 via-purple-50 to-violet-100 dark:from-violet-950/50 dark:via-purple-950/50 dark:to-violet-900/50 border-violet-200/50 dark:border-violet-800/30 shadow-xl shadow-violet-500/10 hover:shadow-2xl hover:shadow-violet-500/20 transition-all duration-300">
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-violet-400/20 to-transparent rounded-bl-full"></div>
+                  <CardContent className="p-6 text-center relative">
+                    <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                      <Brain className="h-6 w-6 text-white" />
+                    </div>
+                    <div className="text-3xl font-bold bg-gradient-to-r from-violet-700 to-purple-700 dark:from-violet-300 dark:to-purple-300 bg-clip-text text-transparent mb-1"><BlurSpan>{notebookStats.subjectsWithNotes}</BlurSpan></div>
+                    <div className="text-sm font-medium text-violet-600 dark:text-violet-400">Subjects</div>
+                    <div className="text-xs text-violet-500/70 dark:text-violet-400/70 mt-1">Covered</div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Enhanced Filters */}
+              <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-2xl p-6 shadow-2xl shadow-black/5 dark:shadow-black/20 border border-slate-200/50 dark:border-slate-700/50 mb-8">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-violet-600 rounded-lg flex items-center justify-center">
+                        <Filter className="h-4 w-4 text-white" />
+                      </div>
+                      <h3 className="text-xl font-bold bg-gradient-to-r from-slate-700 to-slate-600 dark:from-slate-200 dark:to-slate-300 bg-clip-text text-transparent">Revision Notes</h3>
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-3">No Revision Notes Yet</h3>
-                  <p className="text-muted-foreground mb-8 max-w-md mx-auto text-lg">
-                    Start practicing questions to generate your personalized Smart revision notes!
-                  </p>
-                  <Button 
-                    onClick={() => setActiveTab("learn")} 
-                    className="bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
-                  >
-                    Start Practicing
-                  </Button>
-                </CardContent>
-              </Card>
+                  <div className="flex items-center space-x-4">
+                    <Select value={selectedNotebookSubject} onValueChange={setSelectedNotebookSubject}>
+                      <SelectTrigger className="w-44 bg-white/50 dark:bg-slate-800/50 border-slate-300/50 dark:border-slate-600/50 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-200">
+                        <SelectValue placeholder="All Subjects" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-slate-200/50 dark:border-slate-700/50">
+                        <SelectItem value="all">All Subjects</SelectItem>
+                        {getNotebookSubjects().map(subject => (
+                          <SelectItem key={subject} value={subject}>{subject}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    
+                    <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
+                      <SelectTrigger className="w-44 bg-white/50 dark:bg-slate-800/50 border-slate-300/50 dark:border-slate-600/50 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-200">
+                        <SelectValue placeholder="All Confidence" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-slate-200/50 dark:border-slate-700/50">
+                        <SelectItem value="all">All Confidence</SelectItem>
+                        <SelectItem value="low">Low Confidence</SelectItem>
+                        <SelectItem value="medium">Medium Confidence</SelectItem>
+                        <SelectItem value="high">High Confidence</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Notebook Entries */}
+              {notebookLoading ? (
+                <div className="text-center py-16">
+                  <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent mx-auto mb-6"></div>
+                  <p className="text-foreground font-medium text-lg">Loading your Smart Revision Notebook...</p>
+                </div>
+              ) : sortedEntries.length === 0 ? (
+                <Card className="text-center py-16 bg-gradient-to-br from-white/80 to-slate-50/80 backdrop-blur-xl border border-slate-200/50 shadow-2xl">
+                  <CardContent>
+                    <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-slate-200 to-slate-300 rounded-3xl flex items-center justify-center">
+                      <NotebookPen className="h-10 w-10 text-slate-500" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-foreground mb-3">No Revision Notes Yet</h3>
+                    <p className="text-muted-foreground mb-8 max-w-md mx-auto text-lg">
+                      Start practicing questions to generate your personalized Smart revision notes!
+                    </p>
+                    <Button 
+                      onClick={() => setActiveTab("learn")} 
+                      className="bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+                    >
+                      Start Practicing
+                    </Button>
+                  </CardContent>
+                </Card>
+              ) : (
+                <div className="space-y-8">
+                  {sortedEntries.map((entry, index) => (
+                    <div key={entry.id} className="transform hover:scale-[1.02] transition-all duration-200">
+                      <NotebookEntry entry={entry} />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
