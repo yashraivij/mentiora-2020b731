@@ -28,26 +28,22 @@ const Pricing = () => {
   // Dynamic subject rotation every 4 seconds
   const subjects = ["Math", "Science", "English", "History", "Physics", "Chemistry", "Biology"];
   const [currentSubjectIndex, setCurrentSubjectIndex] = useState(0);
-  const [nextSubjectIndex, setNextSubjectIndex] = useState(1);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const userName = user?.email?.split('@')[0] || "Student";
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsTransitioning(true);
-      
+      setIsAnimating(true);
       setTimeout(() => {
-        setCurrentSubjectIndex(nextSubjectIndex);
-        setNextSubjectIndex((nextSubjectIndex + 1) % subjects.length);
-        setIsTransitioning(false);
-      }, 600);
+        setCurrentSubjectIndex((prev) => (prev + 1) % subjects.length);
+        setTimeout(() => setIsAnimating(false), 50);
+      }, 300);
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [nextSubjectIndex, subjects.length]);
+  }, [subjects.length]);
 
   const currentSubject = subjects[currentSubjectIndex];
-  const nextSubject = subjects[nextSubjectIndex];
 
   const handleStartTrial = () => {
     openPaymentLink();
@@ -74,21 +70,12 @@ const Pricing = () => {
             Progress faster in your
           </h1>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-            <span className="relative inline-block h-12 overflow-hidden">
-              <span 
-                className={`absolute inset-0 bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent transition-all duration-700 ease-out transform ${
-                  isTransitioning ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'
-                }`}
-              >
-                {currentSubject}
-              </span>
-              <span 
-                className={`absolute inset-0 bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent transition-all duration-700 ease-out transform ${
-                  isTransitioning ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-                }`}
-              >
-                {nextSubject}
-              </span>
+            <span 
+              className={`bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent transition-all duration-300 ease-in-out transform ${
+                isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+              }`}
+            >
+              {currentSubject}
             </span> studies with Super!
           </h1>
           <p className="text-white/80 text-sm mt-2">
