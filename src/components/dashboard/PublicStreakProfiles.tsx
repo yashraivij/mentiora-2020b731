@@ -151,7 +151,7 @@ export function PublicStreakProfiles() {
           No weekly league leaders yet
         </p>
         <p className="text-xs text-muted-foreground/80">
-          Be the first to earn 100+ MP this week!
+          Be the first to earn 100+ Student MP this week!
         </p>
       </div>
     );
@@ -177,7 +177,7 @@ export function PublicStreakProfiles() {
                 <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">{profiles.length} Active</span>
               </div>
               <div className="w-1 h-1 bg-muted-foreground/30 rounded-full"></div>
-              <span className="text-xs text-muted-foreground">Top MP Earners</span>
+              <span className="text-xs text-muted-foreground">Top Student MP</span>
             </div>
           </div>
         </div>
@@ -267,7 +267,7 @@ export function PublicStreakProfiles() {
                         }`}>
                           {profile.mp_points}
                         </span>
-                        <span className="text-xs text-muted-foreground/70">MP</span>
+                        <span className="text-xs text-muted-foreground/70">Student MP</span>
                       </div>
                     </div>
                   </div>
