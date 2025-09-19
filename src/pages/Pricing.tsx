@@ -395,35 +395,30 @@ const Pricing = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.0 }}
-            className="grid lg:grid-cols-2 gap-12 items-center"
+            className="text-center mb-12"
           >
-            <div>
-              <h3 className="text-3xl font-bold text-white mb-6">
-                Everything you need to excel
-              </h3>
-              <div className="space-y-4">
-                {[
-                  "Unlimited practice sessions - no hearts needed",
-                  "Accurate grade predictions with advanced analytics", 
-                  "Predicted 2026 exam questions and papers",
-                  "Smart revision notebook with personalized notes",
-                  "Personalized weak spot analysis and targeting",
-                  "Advanced progress tracking across all subjects",
-                  "Priority question generation for your exams",
-                  "Ad-free learning experience with zero distractions"
-                ].map((item, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full bg-green-400 flex items-center justify-center flex-shrink-0">
-                      <Check className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="text-white/90">{item}</span>
+            <h3 className="text-3xl font-bold text-white mb-8">
+              Everything you need to excel
+            </h3>
+            <div className="max-w-2xl mx-auto space-y-4 mb-12">
+              {[
+                "Accurate grade predictions with advanced analytics", 
+                "Predicted 2026 exam questions and papers",
+                "Smart revision notebook with personalized notes",
+                "Personalized weak spot analysis and targeting",
+                "Advanced progress tracking across all subjects"
+              ].map((item, index) => (
+                <div key={index} className="flex items-center gap-3 justify-center">
+                  <div className="w-6 h-6 rounded-full bg-green-400 flex items-center justify-center flex-shrink-0">
+                    <Check className="h-4 w-4 text-white" />
                   </div>
-                ))}
-              </div>
+                  <span className="text-white/90">{item}</span>
+                </div>
+              ))}
             </div>
             
-            <div>
-              <Card className="max-w-sm mx-auto bg-white/10 backdrop-blur-xl border-white/20 shadow-lg rounded-2xl">
+            <div className="flex justify-center">
+              <Card className="max-w-sm bg-white/10 backdrop-blur-xl border-white/20 shadow-lg rounded-2xl">
                 <CardContent className="p-8">
                   <div className="mb-6">
                     <div className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 backdrop-blur-sm rounded-full px-3 py-1 mb-4">
