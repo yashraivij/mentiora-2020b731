@@ -72,7 +72,10 @@ const Dashboard = () => {
   const subjectColors = {
     "physics": { bg: "bg-blue-400", light: "bg-blue-50", text: "text-blue-700" },
     "physics-edexcel": { bg: "bg-blue-400", light: "bg-blue-50", text: "text-blue-700" },
+    "chemistry": { bg: "bg-green-400", light: "bg-green-50", text: "text-green-700" },
     "chemistry-edexcel": { bg: "bg-green-400", light: "bg-green-50", text: "text-green-700" },
+    "biology": { bg: "bg-orange-400", light: "bg-orange-50", text: "text-orange-700" },
+    "biology-edexcel": { bg: "bg-orange-400", light: "bg-orange-50", text: "text-orange-700" },
     "mathematics": { bg: "bg-purple-400", light: "bg-purple-50", text: "text-purple-700" },
     "maths-edexcel": { bg: "bg-purple-400", light: "bg-purple-50", text: "text-purple-700" },
     "english-language": { bg: "bg-pink-400", light: "bg-pink-50", text: "text-pink-700" },
