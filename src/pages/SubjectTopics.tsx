@@ -223,7 +223,7 @@ const SubjectTopics = () => {
               {/* Topic nodes */}
               {subject.topics.map((topic, index) => {
                 const progress = getTopicProgress(topic.id);
-                const isNew = true; // All topics unlocked
+                const isUnlocked = true; // All topics are always unlocked
                 const isMastered = progress.averageScore >= 85;
                 const needsWork = progress.attempts > 0 && progress.averageScore < 60;
                 
@@ -275,7 +275,7 @@ const SubjectTopics = () => {
                         {/* Status badge */}
                         {isMastered && <Badge className="bg-green-500 text-xs mb-2">Mastered</Badge>}
                         {needsWork && <Badge variant="destructive" className="text-xs mb-2">Needs Work</Badge>}
-                        {isNew && <Badge variant="outline" className="text-xs mb-2">New</Badge>}
+                        {isUnlocked && !isMastered && !needsWork && <Badge className="bg-blue-500 text-xs mb-2">Unlocked</Badge>}
                         
                         {/* Practice button */}
                         <Button 
@@ -283,7 +283,7 @@ const SubjectTopics = () => {
                           className="text-xs px-3 py-1"
                           onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
                         >
-                          {isNew ? 'Start' : 'Practice'}
+                          {progress.attempts === 0 ? 'Start' : 'Practice'}
                         </Button>
                       </div>
                     </div>
