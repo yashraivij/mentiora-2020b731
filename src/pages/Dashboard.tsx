@@ -609,7 +609,7 @@ const Dashboard = () => {
           {activeTab === "notes" && (
             <div>
               <div className="text-center mb-8">
-                <h2 className="text-5xl font-bold text-gray-800 dark:text-gray-200 mb-4 tracking-tight">
+                <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
                   Instant notes for every lost mark
                 </h2>
               </div>
