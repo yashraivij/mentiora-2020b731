@@ -148,22 +148,27 @@ const Pricing = () => {
                   <span className="text-green-600 font-medium text-xs">Best Deal</span>
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-3">
-                  Premium
+                  Pay monthly
                 </h3>
-                <div className="text-3xl font-bold text-slate-900 mb-1">
-                  Free
-                  <span className="text-sm text-slate-600 ml-2">for 14 days</span>
+                <p className="text-sm text-slate-600 mb-2">Amount billed today</p>
+                <div className="text-3xl font-bold text-slate-900 mb-3">
+                  £7.99/month
                 </div>
                 <p className="text-slate-600 text-sm">
-                  Then £4.99/month. Cancel anytime.
+                  Recurring billing. Cancel any time.
                 </p>
               </div>
               
               <Button
                 onClick={handleStartTrial}
-                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 mb-3"
+                className="w-full bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 hover:from-violet-700 hover:via-purple-700 hover:to-indigo-700 text-white font-bold py-4 px-6 rounded-xl text-base shadow-2xl transform hover:scale-[1.02] transition-all duration-300 mb-3 border-0 relative overflow-hidden"
+                style={{
+                  background: 'linear-gradient(135deg, #7c3aed 0%, #8b5cf6 25%, #a855f7 50%, #c084fc 75%, #e879f9 100%)',
+                  boxShadow: '0 20px 40px -12px rgba(124, 58, 237, 0.4), 0 8px 16px -8px rgba(124, 58, 237, 0.3)'
+                }}
               >
-                TRY 2 WEEKS FREE
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10">Get Mentiora Premium</span>
               </Button>
               
               <button
