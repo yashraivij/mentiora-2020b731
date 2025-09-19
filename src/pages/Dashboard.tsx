@@ -363,38 +363,7 @@ const Dashboard = () => {
 
   const loadLeaderboardData = async () => {
     try {
-      // Fetch real users with their points and profiles
-      const { data: realUsers, error } = await supabase
-        .from('public_profiles')
-        .select(`
-          user_id,
-          username,
-          display_name,
-          streak_days,
-          user_points (total_points)
-        `)
-        .limit(50);
-
-      if (error) {
-        console.error('Error loading leaderboard:', error);
-        setLeaderboardData([]);
-        return;
-      }
-
-      // Transform real users data
-      const transformedRealUsers = (realUsers || [])
-        .filter(user => user.user_points && Array.isArray(user.user_points) && user.user_points.length > 0)
-        .map(user => ({
-          name: user.display_name || user.username || 'Anonymous',
-          mp: Array.isArray(user.user_points) ? (user.user_points[0] as any)?.total_points || 0 : 0,
-          grade: Math.random() * 3 + 6, // Random grade between 6-9 for now
-          streak: user.streak_days || 0,
-          isCurrentUser: false,
-          isRealUser: true,
-          leaderboardType: 'both' // Real users show in both leaderboards
-        }));
-
-      // Weekly fake users (lower MP values for weekly competition)
+      // Always include fake users regardless of real user data
       const weeklyFakeUsers = [
         { name: "Alex Chen", mp: 247, grade: 8.6, streak: 14, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
         { name: "Emma Wilson", mp: 215, grade: 8.2, streak: 12, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
@@ -406,10 +375,6 @@ const Dashboard = () => {
         { name: "Zoe Davis", mp: 95, grade: 6.0, streak: 2, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
         { name: "Ryan Kim", mp: 82, grade: 5.8, streak: 1, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
         { name: "Lucy Martinez", mp: 67, grade: 5.5, streak: 0, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-        { name: "Tom Anderson", mp: 54, grade: 5.2, streak: 0, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-        { name: "Grace Liu", mp: 41, grade: 4.9, streak: 0, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-        { name: "Jake Foster", mp: 28, grade: 4.6, streak: 0, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-        { name: "Nina Shah", mp: 15, grade: 4.3, streak: 0, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
       ];
 
       // All-time fake users (higher MP values for all-time leaderboard)
@@ -424,25 +389,58 @@ const Dashboard = () => {
         { name: "Jessica Taylor", mp: 2067, grade: 7.7, streak: 44, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
         { name: "Brandon Martinez", mp: 1854, grade: 7.5, streak: 37, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
         { name: "Isabella Garcia", mp: 1654, grade: 7.3, streak: 30, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Noah Johnson", mp: 1532, grade: 7.1, streak: 25, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Ava Williams", mp: 1423, grade: 6.9, streak: 20, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Ethan Brown", mp: 1298, grade: 6.7, streak: 15, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Mia Davis", mp: 1187, grade: 6.5, streak: 12, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Logan Wilson", mp: 1089, grade: 6.3, streak: 8, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Chloe Miller", mp: 997, grade: 6.1, streak: 5, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Mason Jones", mp: 912, grade: 5.9, streak: 3, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Harper Smith", mp: 834, grade: 5.7, streak: 2, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Liam Thompson", mp: 763, grade: 5.5, streak: 1, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Amelia Garcia", mp: 698, grade: 5.3, streak: 0, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
       ];
 
-      // Combine all users (real users can overtake fake users dynamically)
+      // Try to fetch real users, but don't fail if it doesn't work
+      let transformedRealUsers = [];
+      try {
+        const { data: realUsers, error } = await supabase
+          .from('public_profiles')
+          .select(`
+            user_id,
+            username,
+            display_name,
+            streak_days,
+            user_points (total_points)
+          `)
+          .limit(50);
+
+        if (!error && realUsers) {
+          transformedRealUsers = realUsers
+            .filter(user => user.user_points && Array.isArray(user.user_points) && user.user_points.length > 0)
+            .map(user => ({
+              name: user.display_name || user.username || 'Anonymous',
+              mp: Array.isArray(user.user_points) ? (user.user_points[0] as any)?.total_points || 0 : 0,
+              grade: Math.random() * 3 + 6,
+              streak: user.streak_days || 0,
+              isCurrentUser: false,
+              isRealUser: true,
+              leaderboardType: 'both'
+            }));
+        }
+      } catch (realUserError) {
+        console.log('Could not load real users, using fake users only');
+      }
+
+      // Combine all users - fake users are always included
       const allUsers = [...transformedRealUsers, ...weeklyFakeUsers, ...allTimeFakeUsers];
+      
+      console.log('All users loaded:', allUsers.length, allUsers);
 
       setLeaderboardData(allUsers);
     } catch (error) {
       console.error('Error loading leaderboard:', error);
-      setLeaderboardData([]);
+      // Still set fake users even if there's an error
+      const weeklyFakeUsers = [
+        { name: "Alex Chen", mp: 247, grade: 8.6, streak: 14, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
+        { name: "Emma Wilson", mp: 215, grade: 8.2, streak: 12, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
+        { name: "Liam Parker", mp: 188, grade: 7.9, streak: 9, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
+      ];
+      const allTimeFakeUsers = [
+        { name: "Marcus Thompson", mp: 4247, grade: 9.0, streak: 127, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Sarah Chen", mp: 3815, grade: 8.9, streak: 98, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+      ];
+      setLeaderboardData([...weeklyFakeUsers, ...allTimeFakeUsers]);
     }
   };
 
@@ -1254,21 +1252,37 @@ const Dashboard = () => {
                     {/* Leaderboard Entries */}
                     <div className="space-y-2">
                       {(() => {
+                        console.log('=== LEADERBOARD DEBUG START ===');
+                        console.log('Full leaderboard data:', leaderboardData);
+                        console.log('Active tab:', activeLeaderboardTab);
+                        
                         // Filter users based on the active leaderboard tab
                         let players = leaderboardData.filter(p => {
+                          console.log('Checking player:', p.name, 'isRealUser:', p.isRealUser, 'leaderboardType:', p.leaderboardType);
+                          
                           // Real users appear in both leaderboards
-                          if (p.isRealUser) return true;
+                          if (p.isRealUser) {
+                            console.log('Including real user:', p.name);
+                            return true;
+                          }
                           
                           // Filter fake users based on leaderboard type
                           if (activeLeaderboardTab === 'weekly') {
-                            return p.leaderboardType === 'weekly';
+                            const include = p.leaderboardType === 'weekly';
+                            console.log('Weekly tab - including', p.name, '?', include);
+                            return include;
                           } else {
-                            return p.leaderboardType === 'alltime';
+                            const include = p.leaderboardType === 'alltime';
+                            console.log('All-time tab - including', p.name, '?', include);
+                            return include;
                           }
                         });
                         
+                        console.log('Filtered players:', players);
+                        
                         // Add current user to the leaderboard if not already present
                         const userExists = players.some(p => p.isCurrentUser);
+                        console.log('User exists in leaderboard:', userExists);
                         if (!userExists && user) {
                           const currentUserData = {
                             name: getFirstName(),
@@ -1279,6 +1293,7 @@ const Dashboard = () => {
                             isRealUser: true,
                             leaderboardType: 'both'
                           };
+                          console.log('Adding current user:', currentUserData);
                           players.push(currentUserData);
                         }
                         
@@ -1293,6 +1308,9 @@ const Dashboard = () => {
                         
                         // Show top 15 players
                         const displayPlayers = rankedPlayers.slice(0, 15);
+                        
+                        console.log('Final display players:', displayPlayers);
+                        console.log('=== LEADERBOARD DEBUG END ===');
 
                         return displayPlayers;
                      })().map((player, index) => {
