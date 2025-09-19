@@ -425,68 +425,103 @@ const Dashboard = () => {
     const colors = subjectColors[subject.id] || subjectColors["physics"];
     
     return (
-      <div className="flex flex-col items-center space-y-6 py-8">
-        {subject.topics.map((topic: any, index: number) => {
-          const status = getTopicStatus(subject.id, index);
-          const isLocked = status === "locked";
-          const isCompleted = status === "completed";
-          const isActive = status === "active";
-          const isAvailable = status === "available";
+      <div className="flex flex-col items-center space-y-8 py-8 max-w-6xl mx-auto">
+        <div className="relative w-full">
+          {/* Swinging path container */}
+          <div className="flex flex-wrap justify-center items-center gap-x-16 gap-y-12 relative">
+            {subject.topics.map((topic: any, index: number) => {
+              // Create a swinging pattern - alternating sides
+              const isLeft = index % 4 === 0 || index % 4 === 3;
+              const isTop = index % 4 === 0 || index % 4 === 1;
+              
+              // Calculate position offset for swinging effect
+              const xOffset = isLeft ? -100 : 100;
+              const yOffset = isTop ? -20 : 20;
+              
+              return (
+                <motion.div
+                  key={topic.id}
+                  className="relative flex flex-col items-center"
+                  style={{
+                    transform: `translate(${xOffset * (index % 2)}px, ${yOffset * Math.floor(index / 2)}px)`,
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <motion.button
+                    onClick={() => handleTopicClick(subject.id, topic.id)}
+                    className={`relative w-20 h-20 rounded-full border-4 shadow-lg transition-all duration-200 ${colors.bg} border-white hover:scale-105`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center border-2 border-white">
+                      <Crown className="h-4 w-4 text-yellow-700" />
+                    </div>
+                    <div className={`h-8 w-8 text-white absolute inset-0 m-auto`}>
+                      {(() => {
+                        const IconComponent = getSubjectIcon(subject.id);
+                        return <IconComponent className="h-full w-full" />;
+                      })()}
+                    </div>
+                  </motion.button>
+                  
+                  <div className="text-center mt-3">
+                    <p className="text-sm font-bold text-gray-700">
+                      {topic.name}
+                    </p>
+                  </div>
 
-          return (
+                  {/* Connecting line to next topic */}
+                  {index < subject.topics.length - 1 && (
+                    <div 
+                      className="absolute w-16 h-1 bg-gray-300"
+                      style={{
+                        top: '40px',
+                        left: isLeft ? '80px' : '-80px',
+                        transform: `rotate(${isLeft ? '45deg' : '-45deg'})`,
+                      }}
+                    />
+                  )}
+                </motion.div>
+              );
+            })}
+            
+            {/* Final 2026 Exam Node */}
             <motion.div
-              key={topic.id}
-              className="flex flex-col items-center"
+              className="relative flex flex-col items-center"
+              style={{
+                transform: `translate(0px, ${20 * Math.floor(subject.topics.length / 2)}px)`,
+              }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: subject.topics.length * 0.1 }}
             >
               <motion.button
-                onClick={() => !isLocked && handleTopicClick(subject.id, topic.id)}
-                disabled={isLocked}
-                className={`relative w-20 h-20 rounded-full border-4 shadow-lg transition-all duration-200 ${
-                  isCompleted 
-                    ? `${colors.bg} border-yellow-400 shadow-yellow-200` 
-                    : isActive
-                    ? `${colors.bg} border-white shadow-lg`
-                    : isAvailable
-                    ? `bg-white ${colors.text} border-gray-300 hover:border-gray-400`
-                    : "bg-gray-200 border-gray-300 cursor-not-allowed"
-                } ${!isLocked ? 'hover:scale-105' : ''}`}
-                whileHover={!isLocked ? { scale: 1.05 } : {}}
-                whileTap={!isLocked ? { scale: 0.95 } : {}}
+                onClick={() => navigate('/predicted-exam')}
+                className="relative w-24 h-24 rounded-full border-4 shadow-xl transition-all duration-200 bg-gradient-to-r from-purple-500 to-pink-500 border-yellow-400 hover:scale-105"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {isLocked && (
-                  <Lock className="h-8 w-8 text-gray-400 absolute inset-0 m-auto" />
-                )}
-                {isCompleted && (
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center border-2 border-white">
-                    <Crown className="h-4 w-4 text-yellow-700" />
-                  </div>
-                )}
-                {(isActive || isAvailable) && !isCompleted && (
-                  <div className={`h-8 w-8 ${isActive ? 'text-white' : colors.text} absolute inset-0 m-auto`}>
-                    {(() => {
-                      const IconComponent = getSubjectIcon(subject.id);
-                      return <IconComponent className="h-full w-full" />;
-                    })()}
-                  </div>
-                )}
+                <div className="absolute -top-3 -right-3 w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center border-2 border-white">
+                  <Star className="h-5 w-5 text-yellow-700" />
+                </div>
+                <div className="h-10 w-10 text-white absolute inset-0 m-auto">
+                  <Calendar className="h-full w-full" />
+                </div>
               </motion.button>
               
               <div className="text-center mt-3">
-                <p className={`text-sm font-bold ${isLocked ? 'text-gray-400' : 'text-gray-700'}`}>
-                  {topic.name}
+                <p className="text-sm font-bold text-purple-700">
+                  2026 Exam
+                </p>
+                <p className="text-xs text-gray-500">
+                  Final Test
                 </p>
               </div>
-
-              {/* Connecting line to next topic */}
-              {index < subject.topics.length - 1 && (
-                <div className="h-8 w-1 bg-gray-300 my-2"></div>
-              )}
             </motion.div>
-          );
-        })}
+          </div>
+        </div>
       </div>
     );
   };
