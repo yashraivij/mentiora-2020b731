@@ -38,6 +38,10 @@ import {
   Brain,
   Star,
   Filter,
+  Target,
+  Compass,
+  RotateCcw,
+  Users,
   Calendar,
   Unlock,
   CreditCard,
@@ -981,67 +985,106 @@ const Dashboard = () => {
               <div className="space-y-4">
                 <h3 className="text-xl font-bold text-gray-800">Today's Quests</h3>
                 
-                {/* Quest 1 - Login */}
-                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center">
-                        <Check className="w-6 h-6 text-green-600" />
+                {(() => {
+                  // Get UK time-based date for consistent daily quest rotation
+                  const ukDate = new Date().toLocaleDateString('en-GB', {timeZone: 'Europe/London'});
+                  const dayHash = ukDate.split('/').join('') + '';
+                  const questVariant = parseInt(dayHash.slice(-2)) % 7; // 7 different quest combinations
+                  
+                  const questVariations = [
+                    { // Monday style
+                      main: { text: "Complete 1 topic", desc: "Master any topic to earn MP", mp: 40, icon: BookOpen, color: "blue" },
+                      bonus: { text: "Perfect score challenge", desc: "Get 100% on any topic", mp: 75, icon: Target, color: "emerald" }
+                    },
+                    { // Tuesday style  
+                      main: { text: "Study 2 topics", desc: "Practice makes perfect", mp: 60, icon: Brain, color: "purple" },
+                      bonus: { text: "Speed demon", desc: "Complete a topic in under 5 minutes", mp: 50, icon: Zap, color: "yellow" }
+                    },
+                    { // Wednesday style
+                      main: { text: "Master 1 topic", desc: "Show your knowledge", mp: 45, icon: BookOpen, color: "blue" },
+                      bonus: { text: "Topic explorer", desc: "Try 3 different subjects today", mp: 90, icon: Compass, color: "teal" }
+                    },
+                    { // Thursday style
+                      main: { text: "Complete 1 topic", desc: "Keep your streak alive", mp: 40, icon: BookOpen, color: "blue" },
+                      bonus: { text: "Weak spot warrior", desc: "Practice your lowest scoring topic", mp: 80, icon: TrendingUp, color: "orange" }
+                    },
+                    { // Friday style
+                      main: { text: "Finish 2 topics", desc: "End the week strong", mp: 65, icon: Trophy, color: "gold" },
+                      bonus: { text: "Review master", desc: "Revisit a completed topic", mp: 35, icon: RotateCcw, color: "indigo" }
+                    },
+                    { // Saturday style
+                      main: { text: "Practice 1 topic", desc: "Weekend learning time", mp: 40, icon: BookOpen, color: "blue" },
+                      bonus: { text: "Marathon mode", desc: "Study for 30+ minutes straight", mp: 100, icon: Clock, color: "red" }
+                    },
+                    { // Sunday style
+                      main: { text: "Complete 1 topic", desc: "Sunday study session", mp: 40, icon: BookOpen, color: "blue" },
+                      bonus: { text: "Help others", desc: "Share a study tip in the community", mp: 60, icon: Users, color: "green" }
+                    }
+                  ];
+                  
+                  const todayQuests = questVariations[questVariant];
+                  
+                  return (
+                    <>
+                      {/* Quest 1 - Login (always same) */}
+                      <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-4">
+                            <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center">
+                              <Check className="w-6 h-6 text-green-600" />
+                            </div>
+                            <div>
+                              <h4 className="text-lg font-bold text-gray-800">Log in today</h4>
+                              <p className="text-gray-600">Complete ✓</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="text-lg font-bold text-green-600">+10 MP</span>
+                            <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                              <Check className="w-4 h-4 text-white" />
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="text-lg font-bold text-gray-800">Log in today</h4>
-                        <p className="text-gray-600">Complete ✓</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-lg font-bold text-green-600">+10 MP</span>
-                      <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                        <Check className="w-4 h-4 text-white" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
-                {/* Quest 2 - Practice */}
-                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-blue-400 rounded-2xl flex items-center justify-center">
-                        <BookOpen className="w-6 h-6 text-white" />
+                      {/* Quest 2 - Daily Main Quest (varies) */}
+                      <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-4">
+                            <div className={`w-12 h-12 bg-${todayQuests.main.color}-400 rounded-2xl flex items-center justify-center`}>
+                              <todayQuests.main.icon className="w-6 h-6 text-white" />
+                            </div>
+                            <div>
+                              <h4 className="text-lg font-bold text-gray-800">{todayQuests.main.text}</h4>
+                              <p className="text-gray-600">{todayQuests.main.desc}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className={`text-lg font-bold text-${todayQuests.main.color}-500`}>+{todayQuests.main.mp} MP</span>
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="text-lg font-bold text-gray-800">Complete 1 practice set</h4>
-                        <p className="text-gray-600">Answer questions to earn MP</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-lg font-bold text-blue-500">+40 MP</span>
-                    </div>
-                  </div>
-                </div>
 
-                {/* Quest 3 - Bonus Weekly */}
-                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-purple-200">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-purple-400 rounded-2xl flex items-center justify-center">
-                        <Star className="w-6 h-6 text-white" />
+                      {/* Quest 3 - Bonus Quest (varies) */}
+                      <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-purple-200">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-4">
+                            <div className={`w-12 h-12 bg-${todayQuests.bonus.color}-400 rounded-2xl flex items-center justify-center`}>
+                              <todayQuests.bonus.icon className="w-6 h-6 text-white" />
+                            </div>
+                            <div>
+                              <h4 className="text-lg font-bold text-gray-800">Bonus: {todayQuests.bonus.text}</h4>
+                              <p className="text-gray-600">{todayQuests.bonus.desc}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className={`text-lg font-bold text-${todayQuests.bonus.color}-500`}>+{todayQuests.bonus.mp} MP</span>
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="text-lg font-bold text-gray-800">Bonus: Do 3 topics</h4>
-                        <p className="text-gray-600">Weekly challenge — 1/3 completed</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-lg font-bold text-purple-500">+100 MP</span>
-                    </div>
-                  </div>
-                  <div className="mt-4">
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div className="bg-purple-400 h-2 rounded-full" style={{width: '33%'}}></div>
-                    </div>
-                  </div>
-                </div>
+                    </>
+                  );
+                })()}
               </div>
 
               {/* Weekly Quests */}
@@ -1055,7 +1098,7 @@ const Dashboard = () => {
                         <Trophy className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-gray-800">Complete 5 practice sets</h4>
+                        <h4 className="text-lg font-bold text-gray-800">Complete 5 topics</h4>
                         <p className="text-gray-600">2/5 completed this week</p>
                       </div>
                     </div>
