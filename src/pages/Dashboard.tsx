@@ -1667,21 +1667,35 @@ const Dashboard = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-bold text-gray-800">Daily Quests</h3>
-                <span className="text-blue-500 font-bold text-sm">VIEW ALL</span>
+                <button 
+                  className="text-blue-500 font-bold text-sm hover:text-blue-600 cursor-pointer"
+                  onClick={() => setActiveTab("quest")}
+                >
+                  VIEW ALL
+                </button>
               </div>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-yellow-300 rounded-lg flex items-center justify-center">
-                    <Zap className="h-4 w-4 text-yellow-700" />
+                  <div className={`w-8 h-8 ${userStats?.loginToday ? 'bg-green-100' : 'bg-yellow-300'} rounded-lg flex items-center justify-center`}>
+                    {userStats?.loginToday ? (
+                      <Check className="h-4 w-4 text-green-600" />
+                    ) : (
+                      <Zap className="h-4 w-4 text-yellow-700" />
+                    )}
                   </div>
                   <div className="flex-1">
-                    <p className="font-bold text-gray-800">Earn 10 XP</p>
+                    <p className="font-bold text-gray-800">Log in today</p>
                     <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
-                      <div className="bg-yellow-300 h-2 rounded-full" style={{width: '60%'}}></div>
+                      <div 
+                        className={`${userStats?.loginToday ? 'bg-green-400' : 'bg-yellow-300'} h-2 rounded-full`} 
+                        style={{width: userStats?.loginToday ? '100%' : '0%'}}
+                      ></div>
                     </div>
                   </div>
-                  <div className="bg-amber-50 rounded-lg p-2">
-                    <span className="text-xs font-bold text-amber-600">6/10</span>
+                  <div className={`${userStats?.loginToday ? 'bg-green-50' : 'bg-amber-50'} rounded-lg p-2`}>
+                    <span className={`text-xs font-bold ${userStats?.loginToday ? 'text-green-600' : 'text-amber-600'}`}>
+                      {userStats?.loginToday ? '+10 MP' : '10 MP'}
+                    </span>
                   </div>
                 </div>
               </div>
