@@ -890,46 +890,50 @@ const Dashboard = () => {
           {/* Notes tab with full notebook functionality */}
           {activeTab === "notes" && (
             <div>
-              <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">
-                  <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                    ✨ Smart Revision Notebook
+              <div className="text-center mb-12">
+                <h2 className="text-4xl font-bold mb-3">
+                  <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                    Smart Revision Notebook
                   </span>
                 </h2>
-                <p className="text-lg text-gray-600 mb-8 font-medium">
-                  <span className="inline-flex items-center gap-2">
-                    <span className="w-2 h-2 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></span>
-                    Instant notes for every lost mark
-                    <span className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"></span>
-                  </span>
+                <p className="text-xl text-gray-600 font-medium">
+                  Instant notes for every lost mark
                 </p>
               </div>
 
               {/* Filters */}
-              <div className="flex items-center justify-center space-x-4 mb-8">
-                <Select value={selectedNotebookSubject} onValueChange={setSelectedNotebookSubject}>
-                  <SelectTrigger className="w-44 bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-200">
-                    <SelectValue placeholder="All Subjects" />
-                  </SelectTrigger>
+              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-8">
+                <div className="flex items-center justify-center space-x-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-semibold text-gray-700 block">Subject</label>
+                    <Select value={selectedNotebookSubject} onValueChange={setSelectedNotebookSubject}>
+                      <SelectTrigger className="w-44 bg-white border-gray-200 hover:border-blue-300 focus:border-blue-400 transition-all duration-200">
+                        <SelectValue placeholder="All Subjects" />
+                      </SelectTrigger>
                   <SelectContent className="bg-white dark:bg-slate-800 z-50">
                     <SelectItem value="all">All Subjects</SelectItem>
                     {getNotebookSubjects().map(subject => (
                       <SelectItem key={subject} value={subject}>{subject}</SelectItem>
                     ))}
                   </SelectContent>
-                </Select>
-                
-                <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
-                  <SelectTrigger className="w-44 bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-200">
-                    <SelectValue placeholder="All Confidence" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white dark:bg-slate-800 z-50">
-                    <SelectItem value="all">All Confidence</SelectItem>
-                    <SelectItem value="low">Low Confidence</SelectItem>
-                    <SelectItem value="medium">Medium Confidence</SelectItem>
-                    <SelectItem value="high">High Confidence</SelectItem>
-                  </SelectContent>
-                </Select>
+                  </Select>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <label className="text-sm font-semibold text-gray-700 block">Confidence</label>
+                    <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
+                      <SelectTrigger className="w-44 bg-white border-gray-200 hover:border-blue-300 focus:border-blue-400 transition-all duration-200">
+                        <SelectValue placeholder="All Confidence" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white z-50">
+                        <SelectItem value="all">All Confidence</SelectItem>
+                        <SelectItem value="low">Low Confidence</SelectItem>
+                        <SelectItem value="medium">Medium Confidence</SelectItem>
+                        <SelectItem value="high">High Confidence</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
               </div>
 
               {/* Notebook Entries */}
