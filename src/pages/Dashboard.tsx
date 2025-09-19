@@ -1176,17 +1176,22 @@ const Dashboard = () => {
                      <Trophy className="w-6 h-6 text-yellow-800" />
                    </div>
                    <div className="text-2xl font-bold text-gray-800">
-                      #{(() => {
-                         // Calculate user's rank from dynamic leaderboard
-                         let players = [...leaderboardData];
-                         
-                         // Filter based on active tab
-                         if (activeLeaderboardTab === 'weekly') {
-                           players = players.filter(p => p.mp <= 500);
-                         }
-                         
-                         // Add current user if not present
-                         const userExists = players.some(p => p.isCurrentUser);
+                       #{(() => {
+                          // Calculate user's rank from dynamic leaderboard
+                          let players = leaderboardData.filter(p => {
+                            // Real users appear in both leaderboards
+                            if (p.isRealUser) return true;
+                            
+                            // Filter fake users based on leaderboard type
+                            if (activeLeaderboardTab === 'weekly') {
+                              return p.leaderboardType === 'weekly';
+                            } else {
+                              return p.leaderboardType === 'alltime';
+                            }
+                          });
+                          
+                          // Add current user if not present
+                          const userExists = players.some(p => p.isCurrentUser);
                          if (!userExists && user) {
                            const currentUserData = {
                              name: getFirstName(),
