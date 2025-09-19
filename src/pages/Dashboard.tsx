@@ -23,6 +23,8 @@ import {
   Target,
   BarChart3,
   Home,
+  Lock,
+  Star,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -180,6 +182,19 @@ const Dashboard = () => {
     );
   };
 
+  // Get topics completed count
+  const getTopicsCompleted = (subjectId: string) => {
+    const subject = curriculum.find(s => s.id === subjectId);
+    if (!subject) return { completed: 0, total: 0 };
+    
+    const totalTopics = subject.topics.length;
+    const completedTopics = userProgress.filter(
+      (p) => p.subjectId === subjectId && p.attempts > 0
+    ).length;
+    
+    return { completed: completedTopics, total: totalTopics };
+  };
+
   useEffect(() => {
     loadUserSubjects();
     loadUserProgress();
@@ -208,12 +223,12 @@ const Dashboard = () => {
     : [];
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen bg-slate-100 dark:bg-slate-900 flex">
       {/* Left Sidebar */}
-      <div className="w-64 bg-card border-r border-border flex flex-col">
+      <div className="w-64 bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 flex flex-col shadow-sm">
         {/* Header */}
-        <div className="p-6 border-b border-border">
-          <h1 className="text-2xl font-bold text-primary">Mentiora</h1>
+        <div className="p-6 border-b border-slate-200 dark:border-slate-700">
+          <h1 className="text-2xl font-bold text-green-500">Mentiora</h1>
         </div>
 
         {/* Navigation */}
@@ -242,18 +257,18 @@ const Dashboard = () => {
         </nav>
 
         {/* Bottom Section */}
-        <div className="p-4 border-t border-border space-y-2">
+        <div className="p-4 border-t border-slate-200 dark:border-slate-700 space-y-2">
           <div className="flex items-center justify-between text-sm">
             <button
               onClick={() => window.open("https://discord.gg/mentiora", "_blank")}
-              className="text-muted-foreground hover:text-foreground px-2 py-1 rounded transition-colors"
+              className="text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 px-2 py-1 rounded transition-colors"
             >
               Join Community
             </button>
             {isPremium && (
               <button
                 onClick={() => openManageBilling()}
-                className="text-muted-foreground hover:text-foreground px-2 py-1 rounded transition-colors"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 px-2 py-1 rounded transition-colors"
               >
                 Manage Billing
               </button>
@@ -262,7 +277,7 @@ const Dashboard = () => {
           <Button
             variant="ghost"
             onClick={handleLogout}
-            className="w-full justify-start text-muted-foreground hover:text-foreground"
+            className="w-full justify-start text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
           >
             <LogOut className="h-4 w-4 mr-3" />
             Sign Out
@@ -271,92 +286,124 @@ const Dashboard = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-8">
+      <div className="flex-1 p-8 max-w-4xl mx-auto">
         {activeTab === "learn" && (
           <div>
             {/* Welcome Header */}
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold text-foreground mb-2">
+            <div className="mb-12 text-center">
+              <h2 className="text-4xl font-bold text-slate-800 dark:text-slate-100 mb-4">
                 Welcome back, {getFirstName()}!
               </h2>
-              <p className="text-muted-foreground">
-                Continue your learning journey
+              <p className="text-xl text-slate-600 dark:text-slate-400">
+                Continue your learning journey 🎓
               </p>
             </div>
 
-            {/* Subjects Grid */}
+            {/* Subjects Section */}
             {filteredSubjects.length > 0 ? (
-              <div>
-                <h3 className="text-xl font-semibold text-foreground mb-6">
-                  Your Subjects
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {filteredSubjects.map((subject) => {
-                    const Icon = getSubjectIcon(subject.id);
-                    const progress = getSubjectProgress(subject.id);
-                    
-                    return (
-                      <motion.div
-                        key={subject.id}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <Card 
-                          className="cursor-pointer hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-gray-50/50 dark:from-gray-900 dark:to-gray-800/50 group hover:scale-105"
-                          onClick={() => handlePractice(subject.id)}
-                        >
-                          <CardHeader className="pb-4">
-                            <div className="flex items-center justify-center w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-400 to-blue-600 rounded-3xl shadow-lg group-hover:shadow-xl group-hover:shadow-blue-500/25 transition-all duration-300">
-                              <Icon className="h-10 w-10 text-white" />
-                            </div>
-                            <CardTitle className="text-center text-lg font-bold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 transition-colors">
-                              {subject.name}
-                            </CardTitle>
-                          </CardHeader>
-                          <CardContent className="pt-0">
-                            <div className="space-y-4">
-                              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
-                                <div
-                                  className="bg-gradient-to-r from-green-400 to-green-600 h-3 rounded-full transition-all duration-500 shadow-sm"
-                                  style={{ width: `${progress}%` }}
-                                />
-                              </div>
-                              <div className="text-center">
-                                <span className="text-base font-bold text-gray-700 dark:text-gray-300">
-                                  {progress}% Complete
+              <div className="space-y-8">
+                {filteredSubjects.map((subject, index) => {
+                  const Icon = getSubjectIcon(subject.id);
+                  const progress = getSubjectProgress(subject.id);
+                  const { completed, total } = getTopicsCompleted(subject.id);
+                  const isLocked = index > 0 && getSubjectProgress(filteredSubjects[index - 1].id) < 70;
+                  
+                  return (
+                    <motion.div
+                      key={subject.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+                        <CardContent className="p-8">
+                          <div className="flex items-center justify-between">
+                            <div className="flex-1">
+                              <div className="flex items-center space-x-3 mb-4">
+                                <span className="text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 px-3 py-1 rounded-full">
+                                  GCSE • SEE DETAILS
                                 </span>
                               </div>
-                              {progress > 0 && (
-                                <div className="flex justify-center">
-                                  <div className="px-3 py-1 bg-green-100 dark:bg-green-900/30 rounded-full">
+                              
+                              <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-4">
+                                {subject.name}
+                              </h3>
+                              
+                              <div className="flex items-center space-x-4 mb-6">
+                                <div className="flex items-center space-x-2">
+                                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                                  <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                                    {completed} / {total}
+                                  </span>
+                                </div>
+                                {progress > 0 && (
+                                  <div className="bg-green-100 dark:bg-green-900/30 px-3 py-1 rounded-full">
                                     <span className="text-sm font-semibold text-green-700 dark:text-green-400">
-                                      Keep going! 🎯
+                                      {progress}% Complete
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+
+                              {progress > 0 && (
+                                <div className="bg-white dark:bg-slate-600 rounded-xl p-3 mb-6 shadow-sm">
+                                  <div className="flex items-center space-x-2">
+                                    <span className="text-2xl">💬</span>
+                                    <span className="text-slate-700 dark:text-slate-300 font-medium">
+                                      Keep going! You're doing great!
                                     </span>
                                   </div>
                                 </div>
                               )}
+
+                              <Button
+                                onClick={() => !isLocked && handlePractice(subject.id)}
+                                disabled={isLocked}
+                                className={`${
+                                  isLocked 
+                                    ? "bg-gray-400 hover:bg-gray-400 cursor-not-allowed" 
+                                    : "bg-sky-500 hover:bg-sky-600"
+                                } text-white font-bold py-4 px-8 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all duration-200`}
+                              >
+                                {isLocked ? (
+                                  <>
+                                    <Lock className="h-5 w-5 mr-2" />
+                                    LOCKED
+                                  </>
+                                ) : completed === 0 ? (
+                                  "START"
+                                ) : (
+                                  "CONTINUE"
+                                )}
+                              </Button>
                             </div>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
-                    );
-                  })}
-                </div>
+
+                            <div className="flex-shrink-0 ml-8">
+                              <div className="w-32 h-32 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                                <Icon className="h-16 w-16 text-white" />
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  );
+                })}
               </div>
             ) : (
-              <div className="text-center py-12">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted/50 flex items-center justify-center">
-                  <BookOpen className="h-8 w-8 text-muted-foreground" />
+              <div className="text-center py-16">
+                <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center">
+                  <BookOpen className="h-12 w-12 text-slate-400" />
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">
+                <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-4">
                   No subjects selected yet
                 </h3>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-lg text-slate-600 dark:text-slate-400 mb-8">
                   Add subjects to your list to get started with personalized learning
                 </p>
                 <Button
                   onClick={() => navigate("/")}
-                  className="bg-primary hover:bg-primary/90"
+                  className="bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded-2xl text-lg"
                 >
                   Browse Subjects
                 </Button>
@@ -366,27 +413,27 @@ const Dashboard = () => {
         )}
 
         {activeTab === "progress" && (
-          <div>
-            <h2 className="text-3xl font-bold text-foreground mb-6">
+          <div className="text-center py-16">
+            <h2 className="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-6">
               Your Progress
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-lg text-slate-600 dark:text-slate-400">
               Track your learning progress across all subjects
             </p>
           </div>
         )}
 
         {activeTab === "2026-exams" && (
-          <div>
-            <h2 className="text-3xl font-bold text-foreground mb-6">
+          <div className="text-center py-16">
+            <h2 className="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-6">
               2026 Exams
             </h2>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-lg text-slate-600 dark:text-slate-400 mb-8">
               Practice with AI-predicted exam questions for 2026
             </p>
             <Button
               onClick={() => navigate("/predicted-questions")}
-              className="bg-primary hover:bg-primary/90"
+              className="bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded-2xl text-lg"
             >
               View Predicted Questions
             </Button>
@@ -394,22 +441,22 @@ const Dashboard = () => {
         )}
 
         {activeTab === "leaderboard" && (
-          <div>
-            <h2 className="text-3xl font-bold text-foreground mb-6">
+          <div className="text-center py-16">
+            <h2 className="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-6">
               Leaderboard
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-lg text-slate-600 dark:text-slate-400">
               See how you rank against other learners
             </p>
           </div>
         )}
 
         {activeTab === "profile" && (
-          <div>
-            <h2 className="text-3xl font-bold text-foreground mb-6">
+          <div className="text-center py-16">
+            <h2 className="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-6">
               Profile
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-lg text-slate-600 dark:text-slate-400">
               Manage your account settings and preferences
             </p>
           </div>
