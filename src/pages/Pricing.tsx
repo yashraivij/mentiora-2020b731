@@ -106,16 +106,13 @@ const Pricing = () => {
       </div>
       
       {/* Header with Logo */}
-      <div className="relative z-10 px-4 py-4">
-        <div className="max-w-6xl mx-auto">
-          <button
-            onClick={() => navigate("/dashboard")}
-            className="flex items-center gap-2 text-white/90 hover:text-white transition-colors duration-200"
-          >
-            <img src="/src/assets/mentiora-logo.png" alt="Mentiora" className="h-8 w-auto" />
-            <span className="font-semibold">Mentiora</span>
-          </button>
-        </div>
+      <div className="absolute top-4 left-4 z-20">
+        <button
+          onClick={() => navigate("/dashboard")}
+          className="text-white/90 hover:text-white transition-colors duration-200"
+        >
+          <img src="/src/assets/mentiora-logo.png" alt="Mentiora" className="h-12 w-auto" />
+        </button>
       </div>
       
       <div className="relative z-10 px-4 py-4 max-w-6xl mx-auto">
@@ -180,18 +177,6 @@ const Pricing = () => {
               </Button>
             </CardContent>
           </Card>
-        </motion.div>
-
-        {/* Benefits Heading */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
-            Benefits of upgrading to Mentiora Premium
-          </h2>
         </motion.div>
 
         {/* Feature Showcase Sections */}
