@@ -15,6 +15,7 @@ import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
 import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
 import { playCelebratorySound } from "@/lib/celebratory-sound";
+import { useMPRewards } from "@/hooks/useMPRewards";
 
 interface QuestionAttempt {
   questionId: string;
@@ -59,6 +60,7 @@ const Practice = () => {
   const { subjectId, topicId } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { showMPReward } = useMPRewards();
   
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
@@ -436,8 +438,29 @@ const Practice = () => {
         
         if (result.awarded > 0) {
           console.log(`Practice completion rewards: +${result.awarded} MP`);
+          
+          // Show MP reward toasts based on what was earned
           if (result.breakdown) {
             console.log('MP Breakdown:', result.breakdown);
+            // The breakdown will contain the different types of rewards earned
+            // We'll show individual toasts for each type to match the requirements
+            
+            // Practice completion base reward (always 40 MP)
+            showMPReward(40, 'practice_complete', 'Practice complete');
+            
+            // Check for bonus rewards in the breakdown
+            if (result.breakdown.weeklyTopicsBonus) {
+              setTimeout(() => showMPReward(100, 'weekly_bonus', 'Weekly bonus'), 500);
+            }
+            if (result.breakdown.weeklyPracticeBonus) {
+              setTimeout(() => showMPReward(250, 'weekly_challenge', 'Weekly challenge'), 1000);
+            }
+            if (result.breakdown.streakBonus) {
+              setTimeout(() => showMPReward(500, 'streak_achieved', 'Streak achieved'), 1500);
+            }
+          } else {
+            // Fallback: just show the practice completion reward
+            showMPReward(40, 'practice_complete', 'Practice complete');
           }
         }
       } catch (error) {
