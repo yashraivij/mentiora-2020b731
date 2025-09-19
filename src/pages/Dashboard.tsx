@@ -107,6 +107,7 @@ const Dashboard = () => {
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50", textColor: "text-sky-700", activeColor: "bg-sky-400" },
     { id: "leaderboards", label: "LEADERBOARDS", icon: Trophy, bgColor: "bg-yellow-50", textColor: "text-yellow-700", activeColor: "bg-yellow-400" },
     { id: "progress", label: "PROGRESS", icon: TrendingUp, bgColor: "bg-green-50", textColor: "text-green-700", activeColor: "bg-green-400" },
+    { id: "quests", label: "QUESTS", icon: Star, bgColor: "bg-orange-50", textColor: "text-orange-700", activeColor: "bg-orange-400" },
     { id: "notes", label: "NOTES", icon: NotebookPen, bgColor: "bg-blue-50", textColor: "text-blue-700", activeColor: "bg-blue-400" },
     { id: "shop", label: "SHOP", icon: ShoppingBag, bgColor: "bg-red-50", textColor: "text-red-700", activeColor: "bg-red-400" },
     { id: "profile", label: "PROFILE", icon: User, bgColor: "bg-gray-50", textColor: "text-gray-700", activeColor: "bg-gray-400" },
@@ -927,7 +928,7 @@ const Dashboard = () => {
             </div>
           )}
 
-          {activeTab !== "learn" && activeTab !== "notes" && activeTab !== "progress" && activeTab !== "profile" && (
+          {activeTab !== "learn" && activeTab !== "notes" && activeTab !== "progress" && activeTab !== "profile" && activeTab !== "quests" && (
             <div className="text-center py-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-6 capitalize">
                 {activeTab}
@@ -935,6 +936,80 @@ const Dashboard = () => {
               <p className="text-lg text-gray-600">
                 Coming soon! This feature is being developed.
               </p>
+            </div>
+          )}
+
+          {activeTab === "quests" && (
+            <div className="space-y-8">
+              <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+                Daily Quests
+              </h2>
+              <p className="text-lg text-gray-600 mb-8 text-center">
+                Complete challenges to earn XP and rewards
+              </p>
+
+              {/* Quest Cards */}
+              <div className="space-y-4">
+                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center">
+                        <Zap className="w-6 h-6 text-yellow-800" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-800">Earn 10 XP</h3>
+                        <p className="text-gray-600">Complete practice questions</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-gray-800">6/10</div>
+                      <div className="w-32 bg-gray-200 rounded-full h-2 mt-2">
+                        <div className="bg-yellow-400 h-2 rounded-full" style={{width: '60%'}}></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-blue-400 rounded-2xl flex items-center justify-center">
+                        <BookOpen className="w-6 h-6 text-blue-800" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-800">Study Streak</h3>
+                        <p className="text-gray-600">Maintain a 7-day streak</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-gray-800">{currentStreak}/7</div>
+                      <div className="w-32 bg-gray-200 rounded-full h-2 mt-2">
+                        <div className="bg-blue-400 h-2 rounded-full" style={{width: `${Math.min((currentStreak / 7) * 100, 100)}%`}}></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-green-400 rounded-2xl flex items-center justify-center">
+                        <Trophy className="w-6 h-6 text-green-800" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-800">Perfect Score</h3>
+                        <p className="text-gray-600">Get 100% on a practice session</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-gray-800">0/1</div>
+                      <div className="w-32 bg-gray-200 rounded-full h-2 mt-2">
+                        <div className="bg-green-400 h-2 rounded-full" style={{width: '0%'}}></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
