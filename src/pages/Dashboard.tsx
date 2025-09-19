@@ -50,7 +50,7 @@ const Dashboard = () => {
   const sidebarItems = [
     { id: "learn", label: "Learn", icon: Home },
     { id: "progress", label: "Progress", icon: BarChart3 },
-    { id: "practice", label: "Practice", icon: Target },
+    { id: "2026-exams", label: "2026 Exams", icon: Target },
     { id: "leaderboard", label: "Leaderboard", icon: Trophy },
     { id: "profile", label: "Profile", icon: User },
   ];
@@ -334,14 +334,20 @@ const Dashboard = () => {
           </div>
         )}
 
-        {activeTab === "practice" && (
+        {activeTab === "2026-exams" && (
           <div>
             <h2 className="text-3xl font-bold text-foreground mb-6">
-              Practice
+              2026 Exams
             </h2>
-            <p className="text-muted-foreground">
-              Practice questions and improve your skills
+            <p className="text-muted-foreground mb-6">
+              Practice with AI-predicted exam questions for 2026
             </p>
+            <Button
+              onClick={() => navigate("/predicted-questions")}
+              className="bg-primary hover:bg-primary/90"
+            >
+              View Predicted Questions
+            </Button>
           </div>
         )}
 
