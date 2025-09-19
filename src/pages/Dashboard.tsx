@@ -390,49 +390,50 @@ const Dashboard = () => {
           grade: Math.random() * 3 + 6, // Random grade between 6-9 for now
           streak: user.streak_days || 0,
           isCurrentUser: false,
-          isRealUser: true
+          isRealUser: true,
+          leaderboardType: 'both' // Real users show in both leaderboards
         }));
 
       // Weekly fake users (lower MP values for weekly competition)
       const weeklyFakeUsers = [
-        { name: "Alex Chen", mp: 247, grade: 8.6, streak: 14, isCurrentUser: false, isRealUser: false },
-        { name: "Emma Wilson", mp: 215, grade: 8.2, streak: 12, isCurrentUser: false, isRealUser: false },
-        { name: "Liam Parker", mp: 188, grade: 7.9, streak: 9, isCurrentUser: false, isRealUser: false },
-        { name: "Sophia Lee", mp: 164, grade: 7.5, streak: 8, isCurrentUser: false, isRealUser: false },
-        { name: "James Smith", mp: 142, grade: 6.8, streak: 5, isCurrentUser: false, isRealUser: false },
-        { name: "Maya Patel", mp: 127, grade: 6.5, streak: 4, isCurrentUser: false, isRealUser: false },
-        { name: "Oliver Brown", mp: 108, grade: 6.2, streak: 3, isCurrentUser: false, isRealUser: false },
-        { name: "Zoe Davis", mp: 95, grade: 6.0, streak: 2, isCurrentUser: false, isRealUser: false },
-        { name: "Ryan Kim", mp: 82, grade: 5.8, streak: 1, isCurrentUser: false, isRealUser: false },
-        { name: "Lucy Martinez", mp: 67, grade: 5.5, streak: 0, isCurrentUser: false, isRealUser: false },
-        { name: "Tom Anderson", mp: 54, grade: 5.2, streak: 0, isCurrentUser: false, isRealUser: false },
-        { name: "Grace Liu", mp: 41, grade: 4.9, streak: 0, isCurrentUser: false, isRealUser: false },
-        { name: "Jake Foster", mp: 28, grade: 4.6, streak: 0, isCurrentUser: false, isRealUser: false },
-        { name: "Nina Shah", mp: 15, grade: 4.3, streak: 0, isCurrentUser: false, isRealUser: false },
+        { name: "Alex Chen", mp: 247, grade: 8.6, streak: 14, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
+        { name: "Emma Wilson", mp: 215, grade: 8.2, streak: 12, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
+        { name: "Liam Parker", mp: 188, grade: 7.9, streak: 9, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
+        { name: "Sophia Lee", mp: 164, grade: 7.5, streak: 8, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
+        { name: "James Smith", mp: 142, grade: 6.8, streak: 5, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
+        { name: "Maya Patel", mp: 127, grade: 6.5, streak: 4, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
+        { name: "Oliver Brown", mp: 108, grade: 6.2, streak: 3, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
+        { name: "Zoe Davis", mp: 95, grade: 6.0, streak: 2, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
+        { name: "Ryan Kim", mp: 82, grade: 5.8, streak: 1, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
+        { name: "Lucy Martinez", mp: 67, grade: 5.5, streak: 0, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
+        { name: "Tom Anderson", mp: 54, grade: 5.2, streak: 0, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
+        { name: "Grace Liu", mp: 41, grade: 4.9, streak: 0, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
+        { name: "Jake Foster", mp: 28, grade: 4.6, streak: 0, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
+        { name: "Nina Shah", mp: 15, grade: 4.3, streak: 0, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
       ];
 
       // All-time fake users (higher MP values for all-time leaderboard)
       const allTimeFakeUsers = [
-        { name: "Marcus Thompson", mp: 4247, grade: 9.0, streak: 127, isCurrentUser: false, isRealUser: false },
-        { name: "Sarah Chen", mp: 3815, grade: 8.9, streak: 98, isCurrentUser: false, isRealUser: false },
-        { name: "David Rodriguez", mp: 3456, grade: 8.7, streak: 85, isCurrentUser: false, isRealUser: false },
-        { name: "Emily Zhang", mp: 3124, grade: 8.5, streak: 72, isCurrentUser: false, isRealUser: false },
-        { name: "Christopher Lee", mp: 2867, grade: 8.3, streak: 65, isCurrentUser: false, isRealUser: false },
-        { name: "Ashley Williams", mp: 2543, grade: 8.1, streak: 58, isCurrentUser: false, isRealUser: false },
-        { name: "Michael Chang", mp: 2298, grade: 7.9, streak: 51, isCurrentUser: false, isRealUser: false },
-        { name: "Jessica Taylor", mp: 2067, grade: 7.7, streak: 44, isCurrentUser: false, isRealUser: false },
-        { name: "Brandon Martinez", mp: 1854, grade: 7.5, streak: 37, isCurrentUser: false, isRealUser: false },
-        { name: "Isabella Garcia", mp: 1654, grade: 7.3, streak: 30, isCurrentUser: false, isRealUser: false },
-        { name: "Noah Johnson", mp: 1532, grade: 7.1, streak: 25, isCurrentUser: false, isRealUser: false },
-        { name: "Ava Williams", mp: 1423, grade: 6.9, streak: 20, isCurrentUser: false, isRealUser: false },
-        { name: "Ethan Brown", mp: 1298, grade: 6.7, streak: 15, isCurrentUser: false, isRealUser: false },
-        { name: "Mia Davis", mp: 1187, grade: 6.5, streak: 12, isCurrentUser: false, isRealUser: false },
-        { name: "Logan Wilson", mp: 1089, grade: 6.3, streak: 8, isCurrentUser: false, isRealUser: false },
-        { name: "Chloe Miller", mp: 997, grade: 6.1, streak: 5, isCurrentUser: false, isRealUser: false },
-        { name: "Mason Jones", mp: 912, grade: 5.9, streak: 3, isCurrentUser: false, isRealUser: false },
-        { name: "Harper Smith", mp: 834, grade: 5.7, streak: 2, isCurrentUser: false, isRealUser: false },
-        { name: "Liam Thompson", mp: 763, grade: 5.5, streak: 1, isCurrentUser: false, isRealUser: false },
-        { name: "Amelia Garcia", mp: 698, grade: 5.3, streak: 0, isCurrentUser: false, isRealUser: false },
+        { name: "Marcus Thompson", mp: 4247, grade: 9.0, streak: 127, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Sarah Chen", mp: 3815, grade: 8.9, streak: 98, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "David Rodriguez", mp: 3456, grade: 8.7, streak: 85, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Emily Zhang", mp: 3124, grade: 8.5, streak: 72, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Christopher Lee", mp: 2867, grade: 8.3, streak: 65, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Ashley Williams", mp: 2543, grade: 8.1, streak: 58, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Michael Chang", mp: 2298, grade: 7.9, streak: 51, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Jessica Taylor", mp: 2067, grade: 7.7, streak: 44, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Brandon Martinez", mp: 1854, grade: 7.5, streak: 37, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Isabella Garcia", mp: 1654, grade: 7.3, streak: 30, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Noah Johnson", mp: 1532, grade: 7.1, streak: 25, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Ava Williams", mp: 1423, grade: 6.9, streak: 20, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Ethan Brown", mp: 1298, grade: 6.7, streak: 15, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Mia Davis", mp: 1187, grade: 6.5, streak: 12, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Logan Wilson", mp: 1089, grade: 6.3, streak: 8, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Chloe Miller", mp: 997, grade: 6.1, streak: 5, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Mason Jones", mp: 912, grade: 5.9, streak: 3, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Harper Smith", mp: 834, grade: 5.7, streak: 2, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Liam Thompson", mp: 763, grade: 5.5, streak: 1, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
+        { name: "Amelia Garcia", mp: 698, grade: 5.3, streak: 0, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
       ];
 
       // Combine all users (real users can overtake fake users dynamically)
@@ -1248,21 +1249,18 @@ const Dashboard = () => {
                     {/* Leaderboard Entries */}
                     <div className="space-y-2">
                       {(() => {
-                        // Get real users and current user data
-                        const realUsers = leaderboardData.filter(p => p.isRealUser);
-                        
-                        // Get appropriate fake users based on the active tab
-                        let fakePlayers = [];
-                        if (activeLeaderboardTab === 'weekly') {
-                          // For weekly, use weekly fake users (lower MP values)
-                          fakePlayers = leaderboardData.filter(p => !p.isRealUser && p.mp <= 500);
-                        } else {
-                          // For all-time, use all-time fake users (higher MP values)
-                          fakePlayers = leaderboardData.filter(p => !p.isRealUser && p.mp > 500);
-                        }
-                        
-                        // Combine real users and appropriate fake users
-                        let players = [...realUsers, ...fakePlayers];
+                        // Filter users based on the active leaderboard tab
+                        let players = leaderboardData.filter(p => {
+                          // Real users appear in both leaderboards
+                          if (p.isRealUser) return true;
+                          
+                          // Filter fake users based on leaderboard type
+                          if (activeLeaderboardTab === 'weekly') {
+                            return p.leaderboardType === 'weekly';
+                          } else {
+                            return p.leaderboardType === 'alltime';
+                          }
+                        });
                         
                         // Add current user to the leaderboard if not already present
                         const userExists = players.some(p => p.isCurrentUser);
@@ -1273,7 +1271,8 @@ const Dashboard = () => {
                             grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0,
                             streak: currentStreak,
                             isCurrentUser: true,
-                            isRealUser: true
+                            isRealUser: true,
+                            leaderboardType: 'both'
                           };
                           players.push(currentUserData);
                         }
