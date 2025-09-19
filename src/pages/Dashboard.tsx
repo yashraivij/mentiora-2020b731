@@ -491,30 +491,84 @@ const Dashboard = () => {
           );
         })}
         
-        {/* 2026 Exam Final Node */}
-        <motion.div
-          className="flex flex-col items-center mt-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: subject.topics.length * 0.1 }}
-        >
-          <motion.button
-            onClick={() => navigate(`/predicted-exam/${subject.id}`)}
-            className="relative w-24 h-24 rounded-full border-4 border-orange-400 shadow-xl bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 transition-all duration-300"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <div className="h-8 w-8 text-white absolute inset-0 m-auto">
-              <Trophy className="h-full w-full" />
-            </div>
-          </motion.button>
-          
-          <div className="text-center mt-3">
-            <p className="text-sm font-bold text-foreground">
-              Predicted 2026 Exam
-            </p>
+        {/* 2026 Exam Final Node(s) */}
+        {subject.id === 'geography' ? (
+          // Geography has two papers
+          <div className="flex flex-col items-center mt-6 space-y-6">
+            <motion.div
+              className="flex flex-col items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: subject.topics.length * 0.1 }}
+            >
+              <motion.button
+                onClick={() => navigate(`/predicted-exam/geography-paper-1`)}
+                className="relative w-24 h-24 rounded-full border-4 border-orange-400 shadow-xl bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <div className="h-8 w-8 text-white absolute inset-0 m-auto">
+                  <Trophy className="h-full w-full" />
+                </div>
+              </motion.button>
+              
+              <div className="text-center mt-3">
+                <p className="text-sm font-bold text-foreground">
+                  Paper 1
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="flex flex-col items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: (subject.topics.length * 0.1) + 0.1 }}
+            >
+              <motion.button
+                onClick={() => navigate(`/predicted-exam/geography-paper-2`)}
+                className="relative w-24 h-24 rounded-full border-4 border-orange-400 shadow-xl bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <div className="h-8 w-8 text-white absolute inset-0 m-auto">
+                  <Trophy className="h-full w-full" />
+                </div>
+              </motion.button>
+              
+              <div className="text-center mt-3">
+                <p className="text-sm font-bold text-foreground">
+                  Paper 2
+                </p>
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
+        ) : (
+          // All other subjects have one exam
+          <motion.div
+            className="flex flex-col items-center mt-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: subject.topics.length * 0.1 }}
+          >
+            <motion.button
+              onClick={() => navigate(`/predicted-exam/${subject.id}`)}
+              className="relative w-24 h-24 rounded-full border-4 border-orange-400 shadow-xl bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className="h-8 w-8 text-white absolute inset-0 m-auto">
+                <Trophy className="h-full w-full" />
+              </div>
+            </motion.button>
+            
+            <div className="text-center mt-3">
+              <p className="text-sm font-bold text-foreground">
+                Predicted 2026 Exam
+              </p>
+            </div>
+          </motion.div>
+        )}
       </div>
     );
   };
