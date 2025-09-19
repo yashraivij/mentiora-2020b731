@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/contexts/AuthContext";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate } from "react-router-dom";
+import mentioraLogo from "@/assets/mentiora-logo.png";
 import {
   BookOpen,
   Trophy,
@@ -299,8 +300,9 @@ const Dashboard = () => {
       {/* Left Sidebar - Duolingo Style */}
       <div className="w-64 bg-white border-r-2 border-gray-100 flex flex-col py-6">
         {/* Logo */}
-        <div className="px-6 mb-8">
-          <h1 className="text-3xl font-bold text-black">Mentiora</h1>
+        <div className="px-6 mb-8 flex items-center space-x-3">
+          <img src={mentioraLogo} alt="Mentiora Logo" className="w-8 h-8" />
+          <h1 className="text-xl font-bold text-black">Mentiora</h1>
         </div>
 
         {/* Navigation */}
