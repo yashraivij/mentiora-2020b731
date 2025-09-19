@@ -190,7 +190,7 @@ const Pricing = () => {
           >
             <div>
               <h3 className="text-3xl font-bold text-white mb-6">
-                Get accurate grade predictions
+                Accurate grade predictions
               </h3>
               <p className="text-xl text-white/80 mb-6">
                 Know exactly where you stand and what you need to improve with our advanced analytics that track your progress across all subjects.
@@ -266,7 +266,7 @@ const Pricing = () => {
           >
             <div className="lg:order-2">
               <h3 className="text-3xl font-bold text-white mb-6">
-                Get predicted 2026 exam questions
+                Predicted 2026 exam questions
               </h3>
               <p className="text-xl text-white/80 mb-6">
                 Stay ahead of the curve with predicted questions that mirror the style and content of upcoming 2026 exams across all subjects.
@@ -324,12 +324,6 @@ const Pricing = () => {
                     </div>
                   </div>
                   
-                  <div className="flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-3 w-3 text-purple-400" />
-                      <span className="text-purple-400">Updated regularly</span>
-                    </div>
-                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -391,9 +385,6 @@ const Pricing = () => {
                     </div>
                   </div>
                   
-                  <div className="text-center">
-                    <span className="text-indigo-400 text-sm font-medium">Personalized for you</span>
-                  </div>
                 </CardContent>
               </Card>
             </div>
