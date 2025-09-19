@@ -307,10 +307,10 @@ const Dashboard = () => {
   // Get topic completion status
   const getTopicStatus = (subjectId: string, topicIndex: number) => {
     const subject = curriculum.find(s => s.id === subjectId);
-    if (!subject) return "locked";
+    if (!subject) return "available";
     
     const topic = subject.topics[topicIndex];
-    if (!topic) return "locked";
+    if (!topic) return "available";
 
     const progress = userProgress.find(p => p.subjectId === subjectId && p.topicId === topic.id);
     
@@ -318,13 +318,8 @@ const Dashboard = () => {
       return progress.averageScore >= 85 ? "completed" : "active";
     }
     
-    // First topic is always available, others need previous to be completed
-    if (topicIndex === 0) return "available";
-    
-    const prevTopic = subject.topics[topicIndex - 1];
-    const prevProgress = userProgress.find(p => p.subjectId === subjectId && p.topicId === prevTopic.id);
-    
-    return (prevProgress && prevProgress.averageScore >= 70) ? "available" : "locked";
+    // All topics are always available (unlocked)
+    return "available";
   };
 
   // Get subject progress
@@ -428,7 +423,7 @@ const Dashboard = () => {
       <div className="flex flex-col items-center space-y-6 py-8">
         {subject.topics.map((topic: any, index: number) => {
           const status = getTopicStatus(subject.id, index);
-          const isLocked = status === "locked";
+          const isLocked = false; // All topics are now unlocked
           const isCompleted = status === "completed";
           const isActive = status === "active";
           const isAvailable = status === "available";
