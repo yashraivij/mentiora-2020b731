@@ -482,6 +482,31 @@ const Dashboard = () => {
             </motion.div>
           );
         })}
+        
+        {/* 2026 Exam Final Node */}
+        <motion.div
+          className="flex flex-col items-center mt-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: subject.topics.length * 0.1 }}
+        >
+          <motion.button
+            onClick={() => navigate(`/predicted-exam/${subject.id}`)}
+            className="relative w-24 h-24 rounded-full border-4 border-yellow-400 shadow-2xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all duration-300 animate-pulse"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className="text-white font-black text-sm text-center leading-tight">
+              2026<br/>EXAM
+            </span>
+          </motion.button>
+          
+          <div className="text-center mt-3">
+            <p className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Final Challenge
+            </p>
+          </div>
+        </motion.div>
       </div>
     );
   };
