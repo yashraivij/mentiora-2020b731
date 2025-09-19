@@ -73,208 +73,184 @@ const Settings = () => {
           <Button
             variant="ghost"
             onClick={() => navigate("/dashboard")}
-            className="mb-4 text-muted-foreground hover:text-foreground"
+            className="mb-4 text-gray-600 hover:text-gray-800"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Dashboard
           </Button>
           
-          <div className="flex items-center gap-4 mb-2">
-            <div className="p-3 rounded-lg bg-blue-500 shadow-sm">
-              <SettingsIcon className="w-8 h-8 text-white" />
-            </div>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900">
-                Settings
-              </h1>
-              <p className="text-gray-600 mt-1">Manage your account preferences</p>
-            </div>
-          </div>
+          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+            Profile Settings
+          </h2>
         </div>
 
         {/* Account Information Card */}
         <div className="mb-8">
-          <Card className="border-0 shadow-md">
-            <CardHeader>
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-blue-100">
-                  <User className="w-5 h-5 text-blue-600" />
-                </div>
-                <div>
-                  <CardTitle className="text-xl text-gray-900">
-                    Account Information
-                  </CardTitle>
-                  <CardDescription className="text-gray-600">Your account details and status</CardDescription>
+          <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center">
+                <User className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-800">
+                  Account Information
+                </h3>
+                <p className="text-gray-600">Your account details and status</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
+                <p className="text-sm font-medium text-gray-600 mb-1">Email Address</p>
+                <p className="text-lg font-bold text-gray-800">{user?.email}</p>
+              </div>
+              <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
+                <p className="text-sm font-medium text-gray-600 mb-1">Account Type</p>
+                <div className="flex items-center gap-2">
+                  <Crown className="w-4 h-4 text-blue-500" />
+                  <p className="text-lg font-bold text-gray-800">
+                    {isPremium ? "Premium Account" : "Free Account"}
+                  </p>
                 </div>
               </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="p-4 rounded-lg bg-gray-50 border">
-                  <p className="text-sm font-medium text-gray-700 mb-1">Email Address</p>
-                  <p className="text-lg font-semibold text-gray-900">{user?.email}</p>
-                </div>
-                <div className="p-4 rounded-lg bg-gray-50 border">
-                  <p className="text-sm font-medium text-gray-700 mb-1">Account Type</p>
-                  <div className="flex items-center gap-2">
-                    <Crown className="w-4 h-4 text-blue-600" />
-                    <p className="text-lg font-semibold text-gray-900">
-                      {isPremium ? "Premium Account" : "Free Account"}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
 
         {/* Billing Management Card - Only for Premium Users */}
         {isPremium && (
           <div className="mb-8">
-            <Card className="border-0 shadow-md">
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-green-100">
-                    <CreditCard className="w-5 h-5 text-green-600" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-xl text-gray-900">
-                      Billing Management
-                    </CardTitle>
-                    <CardDescription className="text-gray-600">Manage your subscription and billing</CardDescription>
-                  </div>
+            <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-green-500 rounded-2xl flex items-center justify-center">
+                  <CreditCard className="w-6 h-6 text-white" />
                 </div>
-              </CardHeader>
-              <CardContent>
-                <div className="p-6 rounded-lg bg-green-50 border">
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-2">
-                      <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
-                        <Crown className="w-5 h-5 text-green-600" />
-                        Premium Subscription
-                      </h3>
-                      <p className="text-sm text-gray-600 max-w-lg">
-                        Access your Stripe billing portal to manage your subscription, update payment methods, 
-                        view invoices, and modify your plan.
-                      </p>
-                      <div className="flex items-center gap-2 mt-3">
-                        <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-green-100 border">
-                          <Shield className="w-4 h-4 text-green-600" />
-                          <span className="text-xs font-medium text-green-700">Secure Portal</span>
-                        </div>
-                        <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-blue-100 border">
-                          <Sparkles className="w-4 h-4 text-blue-600" />
-                          <span className="text-xs font-medium text-blue-700">Full Control</span>
-                        </div>
-                      </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800">
+                    Billing Management
+                  </h3>
+                  <p className="text-gray-600">Manage your subscription and billing</p>
+                </div>
+              </div>
+              <div className="p-6 rounded-lg bg-green-50 border border-green-200">
+                <div className="flex items-start justify-between">
+                  <div className="space-y-2">
+                    <h4 className="text-lg font-bold text-gray-800 flex items-center gap-2">
+                      <Crown className="w-5 h-5 text-green-500" />
+                      Premium Subscription
+                    </h4>
+                    <p className="text-gray-600 max-w-lg">
+                      Access your Stripe billing portal to manage your subscription, update payment methods, 
+                      view invoices, and modify your plan.
+                    </p>
+                    <div className="flex items-center gap-2 mt-3">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                        Secure Portal
+                      </span>
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                        Full Control
+                      </span>
                     </div>
-                    
-                    <Button 
-                      onClick={openManageBilling}
-                      className="ml-4 bg-green-600 hover:bg-green-700 text-white"
-                    >
-                      <CreditCard className="w-4 h-4 mr-2" />
-                      Manage Billing
-                    </Button>
                   </div>
+                  
+                  <Button 
+                    onClick={openManageBilling}
+                    className="ml-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-2xl"
+                  >
+                    <CreditCard className="w-4 h-4 mr-2" />
+                    Manage Billing
+                  </Button>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
         )}
 
         {/* Danger Zone */}
-        <Card className="border-0 shadow-md border-red-200">
-          <CardHeader>
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-red-100">
-                <Trash2 className="w-5 h-5 text-red-600" />
-              </div>
-              <div>
-                <CardTitle className="text-xl text-gray-900">Danger Zone</CardTitle>
-                <CardDescription className="text-gray-600">Permanent actions that cannot be undone</CardDescription>
-              </div>
+        <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-red-200">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-12 h-12 bg-red-500 rounded-2xl flex items-center justify-center">
+              <Trash2 className="w-6 h-6 text-white" />
             </div>
-          </CardHeader>
-          <CardContent>
-            <div className="p-6 rounded-lg bg-red-50 border border-red-200">
-              <div className="flex items-start justify-between">
-                <div className="space-y-2">
-                  <h3 className="text-lg font-semibold text-gray-900">Delete Account</h3>
-                  <p className="text-sm text-gray-600 max-w-lg">
-                    Permanently delete your account and all associated data. This action cannot be undone. 
-                    All your progress, notes, and achievements will be lost forever.
-                  </p>
-                  <div className="flex items-center gap-2 mt-3">
-                    <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-orange-100 border border-orange-300">
-                      <Zap className="w-4 h-4 text-orange-600" />
-                      <span className="text-xs font-medium text-orange-700">Immediate Effect</span>
-                    </div>
-                    <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-red-100 border border-red-300">
-                      <Shield className="w-4 h-4 text-red-600" />
-                      <span className="text-xs font-medium text-red-700">No Recovery</span>
-                    </div>
-                  </div>
+            <div>
+              <h3 className="text-xl font-bold text-gray-800">Danger Zone</h3>
+              <p className="text-gray-600">Permanent actions that cannot be undone</p>
+            </div>
+          </div>
+          <div className="p-6 rounded-lg bg-red-50 border border-red-200">
+            <div className="flex items-start justify-between">
+              <div className="space-y-2">
+                <h4 className="text-lg font-bold text-gray-800">Delete Account</h4>
+                <p className="text-gray-600 max-w-lg">
+                  Permanently delete your account and all associated data. This action cannot be undone. 
+                  All your progress, notes, and achievements will be lost forever.
+                </p>
+                <div className="flex items-center gap-2 mt-3">
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
+                    Immediate Effect
+                  </span>
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700">
+                    No Recovery
+                  </span>
                 </div>
-                
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button 
-                      variant="destructive" 
-                      className="ml-4"
-                      disabled={isDeleting}
-                    >
-                      <Trash2 className="w-4 h-4 mr-2" />
-                      Delete Account
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent className="bg-white border">
-                    <AlertDialogHeader>
-                      <AlertDialogTitle className="text-xl text-gray-900 flex items-center gap-2">
-                        <Trash2 className="w-5 h-5 text-red-600" />
-                        Permanently Delete Account?
-                      </AlertDialogTitle>
-                      <AlertDialogDescription className="text-base text-gray-600">
-                        This action will permanently delete your account and all associated data including:
-                        <ul className="list-disc list-inside mt-3 space-y-1 text-sm">
-                          <li>All study progress and achievements</li>
-                          <li>Generated notes and flashcards</li>
-                          <li>Practice history and performance data</li>
-                          <li>Subscription and billing information</li>
-                        </ul>
-                        <p className="mt-4 font-semibold text-red-600">
-                          This cannot be undone. Are you absolutely sure?
-                        </p>
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel className="bg-gray-100 hover:bg-gray-200 text-gray-900">
-                        Cancel
-                      </AlertDialogCancel>
-                      <AlertDialogAction
-                        onClick={handleDeleteAccount}
-                        disabled={isDeleting}
-                        className="bg-red-600 hover:bg-red-700 text-white"
-                      >
-                        {isDeleting ? (
-                          <div className="flex items-center gap-2">
-                            <div className="w-4 h-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                            Deleting...
-                          </div>
-                        ) : (
-                          <>
-                            <Trash2 className="w-4 h-4 mr-2" />
-                            Yes, Delete Forever
-                          </>
-                        )}
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
               </div>
+              
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button 
+                    variant="destructive" 
+                    className="ml-4 bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-2xl"
+                    disabled={isDeleting}
+                  >
+                    <Trash2 className="w-4 h-4 mr-2" />
+                    Delete Account
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent className="bg-white border border-gray-200">
+                  <AlertDialogHeader>
+                    <AlertDialogTitle className="text-xl text-gray-800 flex items-center gap-2">
+                      <Trash2 className="w-5 h-5 text-red-500" />
+                      Permanently Delete Account?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription className="text-base text-gray-600">
+                      This action will permanently delete your account and all associated data including:
+                      <ul className="list-disc list-inside mt-3 space-y-1 text-sm">
+                        <li>All study progress and achievements</li>
+                        <li>Generated notes and flashcards</li>
+                        <li>Practice history and performance data</li>
+                        <li>Subscription and billing information</li>
+                      </ul>
+                      <p className="mt-4 font-bold text-red-600">
+                        This cannot be undone. Are you absolutely sure?
+                      </p>
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel className="bg-gray-100 hover:bg-gray-200 text-gray-800">
+                      Cancel
+                    </AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={handleDeleteAccount}
+                      disabled={isDeleting}
+                      className="bg-red-500 hover:bg-red-600 text-white"
+                    >
+                      {isDeleting ? (
+                        <div className="flex items-center gap-2">
+                          <div className="w-4 h-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                          Deleting...
+                        </div>
+                      ) : (
+                        <>
+                          <Trash2 className="w-4 h-4 mr-2" />
+                          Yes, Delete Forever
+                        </>
+                      )}
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
