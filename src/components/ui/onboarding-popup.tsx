@@ -4,6 +4,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   BookOpen, 
@@ -74,6 +76,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   const [revisionStruggles, setRevisionStruggles] = useState<string[]>([]);
   const [revisionMethods, setRevisionMethods] = useState<string[]>([]);
   const [showParentProgress, setShowParentProgress] = useState(false);
+  const [parentEmail, setParentEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
   const { openPaymentLink } = useSubscription();
@@ -177,11 +180,45 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
     }
   };
 
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleNext = async () => {
     if (currentStep === 1 && selectedSubjects.length > 0) {
       await addSubjectsToDatabase();
     }
+    
+    // Save parent email when moving from step 4 to step 5
+    if (currentStep === 4 && showParentProgress && parentEmail) {
+      await saveParentEmail();
+    }
+    
     setCurrentStep(prev => prev + 1);
+  };
+
+  const saveParentEmail = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { error } = await supabase
+        .from('profiles')
+        .update({ parent_email: parentEmail })
+        .eq('id', user.id);
+
+      if (error) {
+        console.error('Error saving parent email:', error);
+        toast({
+          title: "Error",
+          description: "Failed to save parent email. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Error saving parent email:', error);
+    }
   };
 
   const handleUpgrade = () => {
@@ -531,7 +568,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     Would you like us to share your progress? 👨‍👩‍👧‍👦
                   </h3>
                   <p className="text-lg text-gray-600">
-                    Keep your parent/guardian informed about your academic journey (Optional)
+                    Keep your parent/guardian informed about your academic journey
                   </p>
                 </div>
 
@@ -566,6 +603,43 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       </p>
                     </CardContent>
                   </Card>
+                  
+                  {/* Parent Email Input - Show when opted in */}
+                  {showParentProgress && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-6"
+                    >
+                      <Card className="border-2 border-indigo-200 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl shadow-lg">
+                        <CardContent className="p-6">
+                          <div className="space-y-4">
+                            <Label 
+                              htmlFor="parentEmail" 
+                              className="text-lg font-bold text-gray-800 flex items-center gap-2"
+                            >
+                              <User className="h-5 w-5 text-indigo-500" />
+                              Parent/Guardian Email Address *
+                            </Label>
+                            <Input
+                              id="parentEmail"
+                              type="email"
+                              value={parentEmail}
+                              onChange={(e) => setParentEmail(e.target.value)}
+                              placeholder="parent@example.com"
+                              className="text-lg p-4 rounded-xl border-2 border-indigo-200 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100"
+                              required
+                            />
+                            <p className="text-sm text-gray-600 italic">
+                              This email will receive weekly progress reports with your study statistics and achievements.
+                            </p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  )}
                 </div>
 
                 <div className="flex justify-between items-center pt-6 border-t">
@@ -574,7 +648,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   </Button>
                   <Button 
                     onClick={handleNext}
-                    className="bg-gradient-to-r from-indigo-400 to-purple-400 hover:from-indigo-500 hover:to-purple-500 text-white font-bold px-8 py-3 text-lg rounded-2xl shadow-lg"
+                    disabled={showParentProgress && (!parentEmail.trim() || !isValidEmail(parentEmail))}
+                    className="bg-gradient-to-r from-indigo-400 to-purple-400 hover:from-indigo-500 hover:to-purple-500 text-white font-bold px-8 py-3 text-lg rounded-2xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                   <div className="flex items-center gap-2">
                     <span>Final Step!</span>

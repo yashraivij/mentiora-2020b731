@@ -689,6 +689,7 @@ export type Database = {
           full_name: string | null
           id: string
           is_premium: boolean | null
+          parent_email: string | null
           plan: string | null
           stripe_customer_id: string | null
           subscription_status: string | null
@@ -703,6 +704,7 @@ export type Database = {
           full_name?: string | null
           id: string
           is_premium?: boolean | null
+          parent_email?: string | null
           plan?: string | null
           stripe_customer_id?: string | null
           subscription_status?: string | null
@@ -717,6 +719,7 @@ export type Database = {
           full_name?: string | null
           id?: string
           is_premium?: boolean | null
+          parent_email?: string | null
           plan?: string | null
           stripe_customer_id?: string | null
           subscription_status?: string | null
