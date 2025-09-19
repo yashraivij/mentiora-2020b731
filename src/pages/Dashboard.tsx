@@ -1214,7 +1214,7 @@ const Dashboard = () => {
                 
                 <div className="p-6">
                   {/* Column Headers */}
-                  <div className="grid grid-cols-5 gap-4 text-sm font-bold text-gray-600 uppercase tracking-wide mb-4">
+                  <div className="grid grid-cols-5 gap-4 text-sm font-bold text-gray-600 uppercase tracking-wide mb-4 px-4">
                     <div className="text-left">Rank</div>
                     <div className="text-left">Student</div>
                     <div className="text-left">MP</div>
