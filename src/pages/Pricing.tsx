@@ -22,7 +22,7 @@ const Pricing = () => {
     },
     {
       icon: Brain,
-      title: "AI-Powered Grade Predictions",
+      title: "Advanced Grade Predictions",
       description: "Know exactly where you stand with advanced analytics",
       color: "from-purple-400 to-indigo-400"
     },
@@ -269,11 +269,11 @@ const Pricing = () => {
                 Get predicted 2026 exam questions
               </h3>
               <p className="text-xl text-white/80 mb-6">
-                Stay ahead of the curve with AI-generated questions that mirror the style and content of upcoming 2026 exams across all subjects.
+                Stay ahead of the curve with predicted questions that mirror the style and content of upcoming 2026 exams across all subjects.
               </p>
               <div className="space-y-4">
                 {[
-                  "AI-powered question predictions for 2026 exams",
+                  "Question predictions for 2026 exams",
                   "Subject-specific content aligned with new curriculum",
                   "Practice with the latest question formats",
                   "Stay prepared for exam board changes"
@@ -306,26 +306,26 @@ const Pricing = () => {
                     <div className="space-y-3 text-xs">
                       <div className="border-l-2 border-purple-400 pl-2">
                         <p className="text-white/90 font-medium">Question 1.</p>
-                        <p className="text-white/70">Differentiate f(x) = 3x² + 2sin(x) with respect to x.</p>
-                        <span className="text-purple-400">[4 marks]</span>
+                        <p className="text-white/70">Solve the equation 3x + 7 = 22</p>
+                        <span className="text-purple-400">[2 marks]</span>
                       </div>
                       
                       <div className="border-l-2 border-purple-400 pl-2">
                         <p className="text-white/90 font-medium">Question 2.</p>
-                        <p className="text-white/70">A particle moves such that its velocity v = 4t - 2...</p>
-                        <span className="text-purple-400">[6 marks]</span>
+                        <p className="text-white/70">Find the area of a circle with radius 5cm.</p>
+                        <span className="text-purple-400">[3 marks]</span>
                       </div>
                       
                       <div className="border-l-2 border-purple-400 pl-2">
                         <p className="text-white/90 font-medium">Question 3.</p>
-                        <p className="text-white/70">Given that log₃(x + 1) = 2, find the value of x.</p>
+                        <p className="text-white/70">Expand and simplify (x + 3)(x - 2)</p>
                         <span className="text-purple-400">[3 marks]</span>
                       </div>
                     </div>
                   </div>
                   
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-white/70">Based on past papers + AI predictions</span>
+                    <span className="text-white/70">Based on past papers and predictions</span>
                     <div className="flex items-center gap-1">
                       <Clock className="h-3 w-3 text-purple-400" />
                       <span className="text-purple-400">Fresh weekly</span>
