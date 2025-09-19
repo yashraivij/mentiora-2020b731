@@ -940,52 +940,132 @@ const Dashboard = () => {
           )}
 
           {activeTab === "quests" && (
-            <div className="space-y-8">
-              <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-                Daily Quests
-              </h2>
-              <p className="text-lg text-gray-600 mb-8 text-center">
-                Complete challenges to earn XP and rewards
-              </p>
+            <div className="space-y-6">
+              {/* Header Bar */}
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-3xl font-bold text-gray-800">Quests</h2>
+                <div className="flex items-center space-x-6">
+                  {/* MP Balance */}
+                  <div className="flex items-center space-x-2 bg-white rounded-2xl px-6 py-3 shadow-lg border-2 border-gray-100">
+                    <Gem className="h-6 w-6 text-cyan-400" />
+                    <span className="text-xl font-bold text-gray-800">{userGems} MP</span>
+                  </div>
+                  {/* Streak Chip */}
+                  <div className="flex items-center space-x-2 bg-white rounded-2xl px-6 py-3 shadow-lg border-2 border-gray-100">
+                    <Flame className="h-6 w-6 text-orange-400" />
+                    <span className="text-lg font-bold text-gray-800">{currentStreak} days in a row</span>
+                  </div>
+                </div>
+              </div>
 
-              {/* Quest Cards */}
+              {/* Daily Goal Card */}
+              <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-blue-400 rounded-2xl flex items-center justify-center">
+                      <Zap className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-800">Daily Goal</h3>
+                      <p className="text-gray-600">60 MP goal — 40/60 completed</p>
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold text-blue-500">67%</div>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-4">
+                  <div className="bg-blue-400 h-4 rounded-full transition-all duration-500" style={{width: '67%'}}></div>
+                </div>
+              </div>
+
+              {/* Daily Quests */}
               <div className="space-y-4">
+                <h3 className="text-xl font-bold text-gray-800">Today's Quests</h3>
+                
+                {/* Quest 1 - Login */}
                 <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center">
-                        <Zap className="w-6 h-6 text-yellow-800" />
+                      <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center">
+                        <Check className="w-6 h-6 text-green-600" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-gray-800">Earn 10 XP</h3>
-                        <p className="text-gray-600">Complete practice questions</p>
+                        <h4 className="text-lg font-bold text-gray-800">Log in today</h4>
+                        <p className="text-gray-600">Complete ✓</p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-gray-800">6/10</div>
-                      <div className="w-32 bg-gray-200 rounded-full h-2 mt-2">
-                        <div className="bg-yellow-400 h-2 rounded-full" style={{width: '60%'}}></div>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-lg font-bold text-green-600">+10 MP</span>
+                      <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                        <Check className="w-4 h-4 text-white" />
                       </div>
                     </div>
                   </div>
                 </div>
 
+                {/* Quest 2 - Practice */}
                 <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
                       <div className="w-12 h-12 bg-blue-400 rounded-2xl flex items-center justify-center">
-                        <BookOpen className="w-6 h-6 text-blue-800" />
+                        <BookOpen className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-gray-800">Study Streak</h3>
-                        <p className="text-gray-600">Maintain a 7-day streak</p>
+                        <h4 className="text-lg font-bold text-gray-800">Complete 1 practice set</h4>
+                        <p className="text-gray-600">Answer questions to earn MP</p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-gray-800">{currentStreak}/7</div>
-                      <div className="w-32 bg-gray-200 rounded-full h-2 mt-2">
-                        <div className="bg-blue-400 h-2 rounded-full" style={{width: `${Math.min((currentStreak / 7) * 100, 100)}%`}}></div>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-lg font-bold text-blue-500">+40 MP</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Quest 3 - Bonus Weekly */}
+                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-purple-200">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-purple-400 rounded-2xl flex items-center justify-center">
+                        <Star className="w-6 h-6 text-white" />
                       </div>
+                      <div>
+                        <h4 className="text-lg font-bold text-gray-800">Bonus: Do 3 topics</h4>
+                        <p className="text-gray-600">Weekly challenge — 1/3 completed</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-lg font-bold text-purple-500">+100 MP</span>
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="bg-purple-400 h-2 rounded-full" style={{width: '33%'}}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Weekly Quests */}
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-gray-800">This Week's Challenges</h3>
+                
+                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-orange-400 rounded-2xl flex items-center justify-center">
+                        <Trophy className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold text-gray-800">Complete 5 practice sets</h4>
+                        <p className="text-gray-600">2/5 completed this week</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-lg font-bold text-orange-500">+250 MP</span>
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <div className="w-full bg-gray-200 rounded-full h-3">
+                      <div className="bg-orange-400 h-3 rounded-full" style={{width: '40%'}}></div>
                     </div>
                   </div>
                 </div>
@@ -994,20 +1074,40 @@ const Dashboard = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
                       <div className="w-12 h-12 bg-green-400 rounded-2xl flex items-center justify-center">
-                        <Trophy className="w-6 h-6 text-green-800" />
+                        <Flame className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-gray-800">Perfect Score</h3>
-                        <p className="text-gray-600">Get 100% on a practice session</p>
+                        <h4 className="text-lg font-bold text-gray-800">Maintain 7-day streak</h4>
+                        <p className="text-gray-600">{currentStreak}/7 days completed</p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-gray-800">0/1</div>
-                      <div className="w-32 bg-gray-200 rounded-full h-2 mt-2">
-                        <div className="bg-green-400 h-2 rounded-full" style={{width: '0%'}}></div>
-                      </div>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-lg font-bold text-green-500">+500 MP</span>
                     </div>
                   </div>
+                  <div className="mt-4">
+                    <div className="w-full bg-gray-200 rounded-full h-3">
+                      <div className="bg-green-400 h-3 rounded-full" style={{width: `${Math.min((currentStreak / 7) * 100, 100)}%`}}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Leaderboard Preview */}
+              <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center">
+                      <Trophy className="w-6 h-6 text-yellow-800" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-800">Weekly Leaderboard</h3>
+                      <p className="text-gray-600">You're ranked #5 this week</p>
+                    </div>
+                  </div>
+                  <Button className="bg-yellow-400 hover:bg-yellow-500 text-yellow-800 font-bold py-3 px-6 rounded-2xl">
+                    View Leaderboard
+                  </Button>
                 </div>
               </div>
             </div>
