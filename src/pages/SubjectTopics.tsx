@@ -243,8 +243,8 @@ const SubjectTopics = () => {
                       </div>
                       
                       {/* Topic name */}
-                      <div className="mt-4 text-center max-w-[140px]">
-                        <h3 className="text-sm font-medium leading-tight mb-2 text-foreground">{topic.name}</h3>
+                      <div className="mt-3 text-center max-w-[120px]">
+                        <h3 className="text-sm font-medium leading-tight mb-1">{topic.name}</h3>
                         
                         {/* Year badges */}
                         <div className="flex flex-wrap justify-center gap-1 mb-2">
@@ -272,16 +272,18 @@ const SubjectTopics = () => {
                           </div>
                         )}
                         
-                        {/* Status badge - All unlocked */}
-                        <Badge className="bg-green-500 text-xs mb-2 animate-pulse">Unlocked</Badge>
+                        {/* Status badge */}
+                        {isMastered && <Badge className="bg-green-500 text-xs mb-2">Mastered</Badge>}
+                        {needsWork && <Badge variant="destructive" className="text-xs mb-2">Needs Work</Badge>}
+                        {isNew && <Badge variant="outline" className="text-xs mb-2">New</Badge>}
                         
                         {/* Practice button */}
                         <Button 
                           size="sm" 
-                          className="text-xs px-4 py-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-lg"
+                          className="text-xs px-3 py-1"
                           onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
                         >
-                          Start Learning
+                          {isNew ? 'Start' : 'Practice'}
                         </Button>
                       </div>
                     </div>

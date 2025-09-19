@@ -585,7 +585,7 @@ const Dashboard = () => {
                         >
                           <Card 
                             className="cursor-pointer border-0 shadow-lg hover:shadow-xl transition-all duration-300"
-                            onClick={() => navigate(`/subject/${subject.id}`)}
+                            onClick={() => setSelectedSubject(subject.id)}
                           >
                             <CardContent className="p-8">
                               <div className="flex items-center justify-between">
