@@ -492,11 +492,11 @@ const Dashboard = () => {
         >
           <motion.button
             onClick={() => navigate(`/predicted-exam/${subject.id}`)}
-            className="relative w-24 h-24 rounded-full border-4 border-accent shadow-xl bg-accent hover:bg-accent/90 transition-all duration-300"
+            className="relative w-24 h-24 rounded-full border-4 border-orange-400 shadow-xl bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 transition-all duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <div className="h-8 w-8 text-accent-foreground absolute inset-0 m-auto">
+            <div className="h-8 w-8 text-white absolute inset-0 m-auto">
               <Trophy className="h-full w-full" />
             </div>
           </motion.button>
