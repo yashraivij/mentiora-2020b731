@@ -564,7 +564,14 @@ const Practice = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4">No questions available</h2>
-          <Button onClick={() => window.history.back()}>
+          <Button onClick={() => {
+            console.log('Back button clicked (no questions)');
+            if (window.history.length > 1) {
+              window.history.back();
+            } else {
+              window.location.href = '/dashboard';
+            }
+          }}>
             Back
           </Button>
         </div>
@@ -581,7 +588,18 @@ const Practice = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button variant="outline" onClick={() => window.history.back()}>
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  console.log('Back button clicked');
+                  if (window.history.length > 1) {
+                    window.history.back();
+                  } else {
+                    // Fallback to dashboard if no history
+                    window.location.href = '/dashboard';
+                  }
+                }}
+              >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Button>
