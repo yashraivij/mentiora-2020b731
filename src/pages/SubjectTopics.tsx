@@ -171,47 +171,73 @@ const SubjectTopics = () => {
           </Card>
         </div>
 
-        {/* Topics Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {subject.topics.map((topic) => {
-            const progress = getTopicProgress(topic.id);
-            const isNew = progress.attempts === 0;
-            const isMastered = progress.averageScore >= 85;
-            const needsWork = progress.attempts > 0 && progress.averageScore < 60;
-            const topicYear = subjectId === 'physics' ? getPhysicsTopicYear(topic.name) : null;
-            const mathsYears = subjectId === 'maths' ? getMathsTopicYears(topic.name) : null;
-            const geographyYear = subjectId === 'geography' ? getGeographyTopicYear(topic.name) : null;
-
-            return (
-              <Card key={topic.id} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                       <div className="flex items-center gap-2 mb-1">
-                         <CardTitle className="text-lg leading-tight">{topic.name}</CardTitle>
-                         {topicYear && (
-                           <Badge 
-                             className={`text-xs ${
-                               topicYear === 'Year 10' 
-                                 ? 'bg-blue-500 text-white hover:bg-blue-600' 
-                                 : 'bg-purple-500 text-white hover:bg-purple-600'
-                             }`}
-                           >
-                             {topicYear}
-                           </Badge>
-                         )}
-                         {mathsYears && mathsYears.map((year, index) => (
-                           <Badge 
-                             key={index}
-                             className={`text-xs ${
-                               year === 'Year 10' 
-                                 ? 'bg-blue-500 text-white hover:bg-blue-600' 
-                                 : 'bg-purple-500 text-white hover:bg-purple-600'
-                             }`}
-                           >
-                             {year}
-                           </Badge>
-                         ))}
+        {/* Topic Path */}
+        <div className="relative overflow-x-auto pb-8">
+          <div className="flex items-center space-x-8 min-w-fit px-4">
+            {/* Topic nodes */}
+            {subject.topics.map((topic, index) => {
+              const progress = getTopicProgress(topic.id);
+              const isNew = progress.attempts === 0;
+              const isMastered = progress.averageScore >= 85;
+              const needsWork = progress.attempts > 0 && progress.averageScore < 60;
+              const topicYear = subjectId === 'physics' ? getPhysicsTopicYear(topic.name) : null;
+              const mathsYears = subjectId === 'maths' ? getMathsTopicYears(topic.name) : null;
+              const geographyYear = subjectId === 'geography' ? getGeographyTopicYear(topic.name) : null;
+              
+              // Create swinging pattern - alternate high and low positions
+              const isEven = index % 2 === 0;
+              const yOffset = isEven ? 'top-0' : 'top-16';
+              
+              return (
+                <div key={topic.id} className={`relative ${yOffset}`}>
+                  {/* Connecting line to next topic */}
+                  {index < subject.topics.length && (
+                    <div className={`absolute ${isEven ? 'top-6' : 'top-6'} left-full w-8 h-0.5 bg-border z-0`}></div>
+                  )}
+                  
+                  {/* Topic node */}
+                  <div className="relative z-10 flex flex-col items-center">
+                    {/* Topic circle */}
+                    <div 
+                      className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 hover:scale-110 ${
+                        isMastered ? 'bg-green-500 hover:bg-green-600' :
+                        needsWork ? 'bg-red-500 hover:bg-red-600' :
+                        isNew ? 'bg-blue-500 hover:bg-blue-600' : 
+                        'bg-yellow-500 hover:bg-yellow-600'
+                      }`}
+                      onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
+                    >
+                      {index + 1}
+                    </div>
+                    
+                    {/* Topic info card */}
+                    <Card className="mt-4 w-64 shadow-lg hover:shadow-xl transition-all duration-300">
+                      <CardHeader className="pb-2">
+                        <div className="flex items-center gap-2 mb-1">
+                          <CardTitle className="text-sm leading-tight">{topic.name}</CardTitle>
+                          {topicYear && (
+                            <Badge 
+                              className={`text-xs ${
+                                topicYear === 'Year 10' 
+                                  ? 'bg-blue-500 text-white hover:bg-blue-600' 
+                                  : 'bg-purple-500 text-white hover:bg-purple-600'
+                              }`}
+                            >
+                              {topicYear}
+                            </Badge>
+                          )}
+                          {mathsYears && mathsYears.map((year, yearIndex) => (
+                            <Badge 
+                              key={yearIndex}
+                              className={`text-xs ${
+                                year === 'Year 10' 
+                                  ? 'bg-blue-500 text-white hover:bg-blue-600' 
+                                  : 'bg-purple-500 text-white hover:bg-purple-600'
+                              }`}
+                            >
+                              {year}
+                            </Badge>
+                          ))}
                           {geographyYear && (
                             <Badge 
                               className={`text-xs ${
@@ -223,53 +249,75 @@ const SubjectTopics = () => {
                               {geographyYear}
                             </Badge>
                           )}
-                       </div>
-                    </div>
-                    <div className="flex flex-col items-end space-y-1">
-                      {isNew && (
-                        <Badge variant="outline">New</Badge>
-                      )}
-                      {isMastered && (
-                        <Badge className="bg-green-500 hover:bg-green-600">Mastered</Badge>
-                      )}
-                      {needsWork && (
-                        <Badge variant="destructive">Needs Work</Badge>
-                      )}
-                    </div>
+                        </div>
+                        <div className="flex space-x-1">
+                          {isNew && <Badge variant="outline" className="text-xs">New</Badge>}
+                          {isMastered && <Badge className="bg-green-500 hover:bg-green-600 text-xs">Mastered</Badge>}
+                          {needsWork && <Badge variant="destructive" className="text-xs">Needs Work</Badge>}
+                        </div>
+                      </CardHeader>
+                      <CardContent className="pt-0">
+                        {progress.attempts > 0 && (
+                          <div className="mb-3">
+                            <div className="flex justify-between text-xs mb-1">
+                              <span>Score</span>
+                              <span className="font-medium">{progress.averageScore}%</span>
+                            </div>
+                            <Progress value={progress.averageScore} className="mb-1" />
+                          </div>
+                        )}
+                        <Button 
+                          className="w-full text-xs py-1"
+                          onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
+                        >
+                          {isNew ? 'Start' : isMastered ? 'Practice' : 'Continue'}
+                        </Button>
+                      </CardContent>
+                    </Card>
                   </div>
-                  <CardDescription>
-                    {topic.questions.length} exam-style questions available
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {progress.attempts > 0 && (
-                    <div className="mb-4">
-                      <div className="flex justify-between text-sm mb-2">
-                        <span>Average Score</span>
-                        <span className="font-medium">{progress.averageScore}%</span>
-                      </div>
-                      <Progress value={progress.averageScore} className="mb-2" />
-                      <p className="text-xs text-muted-foreground">
-                        {progress.attempts} attempt{progress.attempts !== 1 ? 's' : ''}
-                      </p>
-                    </div>
-                  )}
-                  <Button 
-                    className={`w-full font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
-                      isMastered 
-                        ? 'bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground' 
-                        : 'bg-gradient-to-r from-emerald-400 to-cyan-500 hover:from-emerald-500 hover:to-cyan-600 text-white'
-                    }`}
-                    onClick={() => navigate(`/practice/${subjectId}/${topic.id}`)}
-                  >
-                    {isNew ? 'Start Practice' : 
-                     isMastered ? 'Practice More' : 
-                     'Continue Practice'}
-                  </Button>
-                </CardContent>
-              </Card>
-            );
-          })}
+                </div>
+              );
+            })}
+            
+            {/* 2026 Exam Final Node */}
+            <div className="relative top-8">
+              {/* Connecting line from last topic */}
+              <div className="absolute top-6 right-full w-8 h-0.5 bg-border z-0"></div>
+              
+              <div className="relative z-10 flex flex-col items-center">
+                {/* Special exam circle */}
+                <div 
+                  className="w-16 h-16 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 hover:scale-110 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 border-4 border-yellow-400 shadow-lg"
+                  onClick={() => navigate(`/predicted-exam/${subjectId}`)}
+                >
+                  <span className="text-xs text-center">2026<br/>EXAM</span>
+                </div>
+                
+                {/* Exam info card */}
+                <Card className="mt-4 w-64 shadow-xl border-2 border-yellow-400">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm text-center bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                      Predicted 2026 Exam
+                    </CardTitle>
+                    <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white mx-auto">
+                      Final Challenge
+                    </Badge>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <p className="text-xs text-muted-foreground mb-3 text-center">
+                      Complete predicted exam questions for {subject.name}
+                    </p>
+                    <Button 
+                      className="w-full text-xs py-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                      onClick={() => navigate(`/predicted-exam/${subjectId}`)}
+                    >
+                      Take Exam
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
