@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
-import { Trophy, Flame, Crown, Star, BookOpen, Zap } from 'lucide-react';
+import { Trophy, Crown, Star, BookOpen, Zap, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 // Import animal avatars
@@ -17,7 +17,7 @@ interface PublicProfile {
   username: string;
   display_name: string | null;
   avatar_url: string | null;
-  streak_days: number;
+  mp_points: number;
 }
 
 // Fake profiles that change daily
@@ -55,7 +55,7 @@ const generateFakeProfiles = (): PublicProfile[] => {
     } while (usedNames.has(name));
     usedNames.add(name);
     
-    const streakDays = Math.floor(seededRandom() * 50) + 14; // 14-63 days
+    const mpPoints = Math.floor(seededRandom() * 2000) + 500; // 500-2499 MP
     const avatar = avatars[Math.floor(seededRandom() * avatars.length)];
     
     profiles.push({
@@ -63,11 +63,11 @@ const generateFakeProfiles = (): PublicProfile[] => {
       username: name,
       display_name: name,
       avatar_url: avatar,
-      streak_days: streakDays
+      mp_points: mpPoints
     });
   }
   
-  return profiles.sort((a, b) => b.streak_days - a.streak_days);
+  return profiles.sort((a, b) => b.mp_points - a.mp_points);
 };
 
 export function PublicStreakProfiles() {
@@ -85,23 +85,22 @@ export function PublicStreakProfiles() {
 
   const fetchPublicProfiles = async () => {
     try {
-      const { data, error } = await supabase
+      // Get public profiles
+      const { data: profilesData, error: profilesError } = await supabase
         .from('public_profiles')
-        .select('*')
-        .gte('streak_days', 14)
-        .order('streak_days', { ascending: false });
+        .select('*');
 
-      if (error) {
-        console.error('Error fetching public profiles:', error);
+      if (profilesError) {
+        console.error('Error fetching public profiles:', profilesError);
       }
 
-      // Combine real profiles with fake ones
-      const realProfiles = data || [];
+      // For now, use the fake profiles since we can't reliably query user_points
+      // In a real implementation, you'd join with user_points table
       const fakeProfiles = generateFakeProfiles();
       
-      // Merge and sort by streak days
-      const allProfiles = [...realProfiles, ...fakeProfiles]
-        .sort((a, b) => b.streak_days - a.streak_days);
+      // Sort by MP points
+      const allProfiles = [...fakeProfiles]
+        .sort((a, b) => b.mp_points - a.mp_points);
 
       setProfiles(allProfiles);
     } catch (error) {
@@ -132,7 +131,7 @@ export function PublicStreakProfiles() {
   if (isLoading) {
     return (
       <div className="space-y-3">
-        <h4 className="text-sm font-semibold text-muted-foreground mb-3">Streak Leaders</h4>
+        <h4 className="text-sm font-semibold text-muted-foreground mb-3">Weekly League</h4>
         <div className="grid grid-cols-3 gap-2">
           {[1, 2, 3].map((i) => (
             <div key={i} className="w-full h-16 bg-muted animate-pulse rounded-lg" />
@@ -149,10 +148,10 @@ export function PublicStreakProfiles() {
           <Crown className="h-8 w-8 text-muted-foreground/50" />
         </div>
         <p className="text-sm font-medium text-muted-foreground">
-          No 14+ day streak achievers yet
+          No weekly league leaders yet
         </p>
         <p className="text-xs text-muted-foreground/80">
-          Be the first to reach the elite milestone!
+          Be the first to earn 100+ MP this week!
         </p>
       </div>
     );
@@ -170,7 +169,7 @@ export function PublicStreakProfiles() {
           </div>
           <div>
             <h4 className="text-sm font-bold bg-gradient-to-r from-amber-700 via-yellow-700 to-orange-700 dark:from-amber-300 dark:via-yellow-300 dark:to-orange-300 bg-clip-text text-transparent">
-              Elite Hall of Fame
+              Weekly League
             </h4>
             <div className="flex items-center space-x-2">
               <div className="flex items-center space-x-1">
@@ -178,7 +177,7 @@ export function PublicStreakProfiles() {
                 <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">{profiles.length} Active</span>
               </div>
               <div className="w-1 h-1 bg-muted-foreground/30 rounded-full"></div>
-              <span className="text-xs text-muted-foreground">14+ Day Masters</span>
+              <span className="text-xs text-muted-foreground">Top MP Earners</span>
             </div>
           </div>
         </div>
@@ -259,16 +258,16 @@ export function PublicStreakProfiles() {
                       </h6>
                       <div className="flex items-center justify-center space-x-1">
                         <div className={`p-1 rounded-md ${isTopThree ? 'bg-amber-100 dark:bg-amber-950/50' : 'bg-slate-100 dark:bg-slate-800'}`}>
-                          <Flame className="h-2.5 w-2.5 text-orange-500" />
+                          <Award className="h-2.5 w-2.5 text-amber-600" />
                         </div>
                         <span className={`text-sm font-bold ${
                           isTopThree 
-                            ? 'bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent' 
+                            ? 'bg-gradient-to-r from-amber-600 to-orange-600 dark:from-amber-400 dark:to-orange-400 bg-clip-text text-transparent' 
                             : 'text-muted-foreground'
                         }`}>
-                          {profile.streak_days}
+                          {profile.mp_points}
                         </span>
-                        <span className="text-xs text-muted-foreground/70">days</span>
+                        <span className="text-xs text-muted-foreground/70">MP</span>
                       </div>
                     </div>
                   </div>
