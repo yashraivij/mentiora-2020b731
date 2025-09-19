@@ -58,7 +58,6 @@ const AVAILABLE_SUBJECTS: Subject[] = [
   { id: 'english-literature', name: 'English Literature', examBoard: 'AQA' },
   { id: 'physics', name: 'Physics', examBoard: 'AQA' },
   { id: 'geography', name: 'Geography', examBoard: 'AQA' },
-  { id: 'geography-paper-2', name: 'Geography Paper 2', examBoard: 'AQA' },
   { id: 'maths', name: 'Mathematics', examBoard: 'AQA' },
   { id: 'maths-edexcel', name: 'Mathematics', examBoard: 'Edexcel' },
   { id: 'business-edexcel-igcse', name: 'Business', examBoard: 'Edexcel IGCSE' },
@@ -113,8 +112,31 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
       if (!user) return;
 
       // Convert subjects to the format expected by the database
-      const subjectEntries = selectedSubjects.map(subjectId => {
+      const subjectEntries = selectedSubjects.flatMap(subjectId => {
         const subject = AVAILABLE_SUBJECTS.find(s => s.id === subjectId);
+        
+        // Special handling for Geography - create separate entries for Paper 1 and Paper 2
+        if (subjectId === 'geography') {
+          return [
+            {
+              user_id: user.id,
+              subject_name: 'Geography Paper 1',
+              exam_board: subject?.examBoard || 'AQA',
+              predicted_grade: 'Not Set',
+              target_grade: null,
+              priority_level: 3
+            },
+            {
+              user_id: user.id,
+              subject_name: 'Geography Paper 2',
+              exam_board: subject?.examBoard || 'AQA',
+              predicted_grade: 'Not Set',
+              target_grade: null,
+              priority_level: 3
+            }
+          ];
+        }
+        
         return {
           user_id: user.id,
           subject_name: subject?.name || subjectId,
