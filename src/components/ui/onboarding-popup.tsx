@@ -171,37 +171,36 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-7xl max-h-[98vh] overflow-hidden bg-gradient-to-br from-violet-500/10 via-purple-500/5 to-fuchsia-500/10 border-0">
+      <DialogContent className="max-w-7xl max-h-[98vh] overflow-hidden bg-card/95 border border-border/50">
         {/* Animated background layers */}
-        <div className="absolute inset-0 bg-gradient-to-br from-violet-600/20 via-purple-600/10 to-fuchsia-600/20 animate-pulse" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 via-transparent to-cyan-500/10" />
-        <div className="absolute inset-0 bg-gradient-to-bl from-orange-500/10 via-transparent to-pink-500/10" />
+        <div className="absolute inset-0 bg-primary/5 animate-pulse" />
+        <div className="absolute inset-0 bg-accent/10" />
         
-        {/* Glowing border effect */}
-        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-violet-500 via-purple-500 via-fuchsia-500 via-pink-500 to-orange-500 p-0.5 animate-pulse">
-          <div className="h-full w-full rounded-lg bg-background/95" />
+        {/* Subtle border effect */}
+        <div className="absolute inset-0 rounded-lg bg-primary/20 p-0.5">
+          <div className="h-full w-full rounded-lg bg-card/95" />
         </div>
 
         <DialogHeader className="relative z-10 pb-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full blur-xl opacity-50 animate-pulse" />
-                <div className="relative bg-gradient-to-r from-violet-500 to-fuchsia-500 p-3 rounded-2xl shadow-2xl">
-                  <Sparkles className="h-8 w-8 text-white" />
+                <div className="absolute inset-0 bg-primary rounded-full blur-xl opacity-30 animate-pulse" />
+                <div className="relative bg-primary p-3 rounded-2xl shadow-lg">
+                  <Sparkles className="h-8 w-8 text-primary-foreground" />
                 </div>
               </div>
               <div>
                 <DialogTitle className="text-4xl font-black">
                   <div className="flex items-center gap-2">
-                    <span className="bg-gradient-to-r from-violet-600 via-purple-600 via-fuchsia-600 to-pink-600 bg-clip-text text-transparent">
+                    <span className="text-gradient-primary">
                       Welcome to Mentiora!
                     </span>
                     <div>👋</div>
                   </div>
                 </DialogTitle>
                 <DialogDescription className="text-xl text-muted-foreground font-medium">
-                  Let's personalize your <span className="font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">premium</span> learning experience
+                  Let's personalize your <span className="font-bold text-primary">premium</span> learning experience
                 </DialogDescription>
               </div>
             </div>
@@ -215,7 +214,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     key={step}
                     className={`h-3 w-12 rounded-full transition-all duration-500 ${
                       step <= currentStep 
-                        ? 'bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500 shadow-lg' 
+                        ? 'bg-primary shadow-lg' 
                         : 'bg-muted/50'
                     }`}
                   />
@@ -241,7 +240,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 <div className="text-center space-y-4 mb-8">
                   <div className="relative">
                     <div className="flex items-center justify-center gap-3">
-                      <h3 className="text-3xl font-black bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">
+                      <h3 className="text-3xl font-black text-gradient-primary">
                         What exams are you taking?
                       </h3>
                       <div className="text-3xl">📚</div>
@@ -265,13 +264,13 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       <Card 
                         className={`cursor-pointer transition-all duration-300 relative overflow-hidden ${
                           selectedSubjects.includes(subject.id)
-                            ? 'ring-2 ring-violet-500 bg-gradient-to-br from-violet-500/20 via-purple-500/10 to-fuchsia-500/20 shadow-lg shadow-violet-500/25'
-                            : 'hover:bg-gradient-to-br hover:from-violet-50 hover:to-fuchsia-50 dark:hover:from-violet-950/20 dark:hover:to-fuchsia-950/20 hover:shadow-md'
+                            ? 'ring-2 ring-primary bg-primary/10 shadow-lg'
+                            : 'hover:bg-accent/50 hover:shadow-md'
                         }`}
                         onClick={() => handleSubjectToggle(subject.id)}
                       >
                         {selectedSubjects.includes(subject.id) && (
-                          <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 via-purple-500/10 to-fuchsia-500/10 animate-pulse" />
+                          <div className="absolute inset-0 bg-primary/5 animate-pulse" />
                         )}
                         
                         <CardContent className="p-5">
@@ -294,14 +293,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                                 variant="secondary" 
                                 className={`text-xs mt-1 ${
                                   selectedSubjects.includes(subject.id)
-                                    ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white'
-                                    : subject.examBoard === 'AQA'
-                                    ? 'bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-500 text-white shadow-lg border border-cyan-300/50'
-                                    : subject.examBoard === 'Edexcel'
-                                    ? 'bg-gradient-to-r from-emerald-600 via-green-500 to-lime-500 text-white shadow-lg border border-green-300/50'
-                                    : subject.examBoard === 'OCR'
-                                    ? 'bg-gradient-to-r from-orange-600 via-amber-500 to-yellow-500 text-white shadow-lg border border-amber-300/50'
-                                    : 'bg-gradient-to-r from-purple-600 via-pink-500 to-rose-500 text-white shadow-lg border border-pink-300/50'
+                                    ? 'bg-primary text-primary-foreground'
+                                    : 'bg-secondary text-secondary-foreground'
                                 }`}
                                >
                                 {subject.examBoard}
@@ -314,10 +307,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   ))}
                 </div>
 
-                <div className="flex justify-between items-center pt-6 border-t border-gradient-to-r from-violet-200 to-fuchsia-200">
+                <div className="flex justify-between items-center pt-6 border-t border-border">
                   <div>
                     <div className="flex items-center justify-center gap-3">
-                      <p className="font-bold text-lg bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">
+                      <p className="font-bold text-lg text-gradient-primary">
                         {selectedSubjects.length} subject{selectedSubjects.length !== 1 ? 's' : ''} selected
                       </p>
                       <div className="text-lg">✨</div>
@@ -326,7 +319,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   <Button 
                     onClick={handleNext} 
                     disabled={selectedSubjects.length === 0 || isLoading}
-                    className="bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-700 hover:via-purple-700 hover:to-fuchsia-700 text-white font-bold px-8 py-3 text-lg shadow-lg shadow-violet-500/25 disabled:opacity-50"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-3 text-lg shadow-lg disabled:opacity-50"
                   >
                     {isLoading ? (
                       <>
@@ -358,7 +351,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 <div className="text-center space-y-4 mb-8">
                   <div className="relative">
                     <div className="flex items-center justify-center gap-3">
-                      <h3 className="text-3xl font-black bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">
+                      <h3 className="text-3xl font-black text-gradient-primary">
                         What's your biggest struggle with revision?
                       </h3>
                       <div className="text-3xl">🤔</div>
@@ -371,10 +364,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
                 <div className="grid grid-cols-2 gap-6">
                   {[
-                    { text: 'Staying motivated', icon: Heart, gradient: 'from-pink-500 to-rose-500', bg: 'from-pink-500/20 to-rose-500/20' },
-                    { text: 'Knowing what to revise', icon: Target, gradient: 'from-emerald-500 to-green-500', bg: 'from-emerald-500/20 to-green-500/20' },
-                    { text: 'Running out of time', icon: Timer, gradient: 'from-orange-500 to-red-500', bg: 'from-orange-500/20 to-red-500/20' },
-                    { text: 'Understanding content', icon: Brain, gradient: 'from-blue-500 to-indigo-500', bg: 'from-blue-500/20 to-indigo-500/20' }
+                    { text: 'Staying motivated', icon: Heart },
+                    { text: 'Knowing what to revise', icon: Target },
+                    { text: 'Running out of time', icon: Timer },
+                    { text: 'Understanding content', icon: Brain }
                   ].map((struggle, index) => {
                     const StruggleIcon = struggle.icon;
                     return (
@@ -389,23 +382,23 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         <Card 
                           className={`cursor-pointer transition-all duration-300 relative overflow-hidden h-40 ${
                             revisionStruggles.includes(struggle.text)
-                              ? `ring-2 ring-current shadow-lg bg-gradient-to-br ${struggle.bg}`
-                              : 'hover:shadow-md hover:bg-gradient-to-br hover:from-muted/50 hover:to-muted/30'
+                              ? 'ring-2 ring-primary shadow-lg bg-primary/10'
+                              : 'hover:shadow-md hover:bg-accent/50'
                           }`}
                           onClick={() => handleStruggleToggle(struggle.text)}
                         >
                           {revisionStruggles.includes(struggle.text) && (
-                            <div className={`absolute inset-0 bg-gradient-to-br ${struggle.bg} animate-pulse`} />
+                            <div className="absolute inset-0 bg-primary/5 animate-pulse" />
                           )}
                           
                           <CardContent className="p-6 text-center h-full flex flex-col justify-center items-center relative">
-                            <div className={`p-3 rounded-full mb-4 bg-gradient-to-r ${struggle.gradient} shadow-lg`}>
-                              <StruggleIcon className="h-8 w-8 text-white" />
+                            <div className="p-3 rounded-full mb-4 bg-primary shadow-lg">
+                              <StruggleIcon className="h-8 w-8 text-primary-foreground" />
                             </div>
                             <p className="font-bold text-lg">{struggle.text}</p>
                             {revisionStruggles.includes(struggle.text) && (
                               <div className="absolute top-4 right-4">
-                                <Check className="h-5 w-5 text-green-500" />
+                                <Check className="h-5 w-5 text-primary" />
                               </div>
                             )}
                           </CardContent>
@@ -422,7 +415,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   <Button 
                     onClick={handleNext} 
                     disabled={revisionStruggles.length === 0}
-                    className="bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-700 hover:to-cyan-700 text-white font-bold px-8 py-3 shadow-lg"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-3 shadow-lg"
                   >
                   <div className="flex items-center gap-2">
                     <span>Continue Journey</span>
@@ -448,7 +441,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 <div className="text-center space-y-4 mb-8">
                   <div className="relative">
                     <div className="flex items-center justify-center gap-3">
-                      <h3 className="text-3xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                      <h3 className="text-3xl font-black text-gradient-primary">
                         How do you usually revise?
                       </h3>
                       <div className="text-3xl">📖</div>
@@ -461,10 +454,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
                 <div className="grid grid-cols-2 gap-6">
                   {[
-                    { text: 'Flashcards', icon: Zap, gradient: 'from-yellow-500 to-orange-500', bg: 'from-yellow-500/20 to-orange-500/20' },
-                    { text: 'Practice questions', icon: Trophy, gradient: 'from-purple-500 to-pink-500', bg: 'from-purple-500/20 to-pink-500/20' },
-                    { text: 'Reading notes', icon: BookOpen, gradient: 'from-green-500 to-teal-500', bg: 'from-green-500/20 to-teal-500/20' },
-                    { text: 'Watching videos', icon: Users, gradient: 'from-blue-500 to-cyan-500', bg: 'from-blue-500/20 to-cyan-500/20' }
+                    { text: 'Flashcards', icon: Zap },
+                    { text: 'Practice questions', icon: Trophy },
+                    { text: 'Reading notes', icon: BookOpen },
+                    { text: 'Watching videos', icon: Users }
                   ].map((method, index) => {
                     const MethodIcon = method.icon;
                     return (
@@ -479,23 +472,23 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         <Card 
                           className={`cursor-pointer transition-all duration-300 relative overflow-hidden h-40 ${
                             revisionMethods.includes(method.text)
-                              ? `ring-2 ring-current shadow-lg bg-gradient-to-br ${method.bg}`
-                              : 'hover:shadow-md hover:bg-gradient-to-br hover:from-muted/50 hover:to-muted/30'
+                              ? 'ring-2 ring-primary shadow-lg bg-primary/10'
+                              : 'hover:shadow-md hover:bg-accent/50'
                           }`}
                           onClick={() => handleMethodToggle(method.text)}
                         >
                           {revisionMethods.includes(method.text) && (
-                            <div className={`absolute inset-0 bg-gradient-to-br ${method.bg} animate-pulse`} />
+                            <div className="absolute inset-0 bg-primary/5 animate-pulse" />
                           )}
                           
                           <CardContent className="p-6 text-center h-full flex flex-col justify-center items-center relative">
-                            <div className={`p-3 rounded-full mb-4 bg-gradient-to-r ${method.gradient} shadow-lg`}>
-                              <MethodIcon className="h-8 w-8 text-white" />
+                            <div className="p-3 rounded-full mb-4 bg-primary shadow-lg">
+                              <MethodIcon className="h-8 w-8 text-primary-foreground" />
                             </div>
                             <p className="font-bold text-lg">{method.text}</p>
                             {revisionMethods.includes(method.text) && (
                               <div className="absolute top-4 right-4">
-                                <Check className="h-5 w-5 text-green-500" />
+                                <Check className="h-5 w-5 text-primary" />
                               </div>
                             )}
                           </CardContent>
@@ -512,7 +505,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   <Button 
                     onClick={handleNext} 
                     disabled={revisionMethods.length === 0}
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold px-8 py-3 shadow-lg"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-3 shadow-lg"
                   >
                   <div className="flex items-center gap-2">
                     <span>Almost Done!</span>
@@ -538,7 +531,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 <div className="text-center space-y-4 mb-8">
                   <div className="relative">
                     <div className="flex items-center justify-center gap-3">
-                      <h3 className="text-3xl font-black bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                      <h3 className="text-3xl font-black text-gradient-primary">
                         Would you like us to share your progress?
                       </h3>
                       <div className="text-3xl">👨‍👩‍👧‍👦</div>
@@ -552,15 +545,15 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 <div className="max-w-2xl mx-auto space-y-6">
                   <Card className={`cursor-pointer transition-all duration-300 ${
                     showParentProgress 
-                      ? 'ring-2 ring-indigo-500 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 shadow-lg' 
+                      ? 'ring-2 ring-primary bg-primary/10 shadow-lg' 
                       : 'hover:shadow-md'
                   }`}
                   onClick={() => setShowParentProgress(!showParentProgress)}
                   >
                     <CardContent className="p-8 text-center">
                       <div className="flex items-center justify-center mb-4">
-                        <div className="bg-gradient-to-r from-indigo-500 to-purple-500 p-4 rounded-2xl shadow-lg mr-4">
-                          <Users className="h-10 w-10 text-white" />
+                        <div className="bg-primary p-4 rounded-2xl shadow-lg mr-4">
+                          <Users className="h-10 w-10 text-primary-foreground" />
                         </div>
                         <div className="text-left">
                           <h4 className="text-2xl font-bold">Share with Parent/Guardian</h4>
@@ -568,9 +561,9 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         </div>
                         <div className="ml-auto">
                           <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                            showParentProgress ? 'bg-indigo-500 border-indigo-500' : 'border-gray-300'
+                            showParentProgress ? 'bg-primary border-primary' : 'border-muted-foreground'
                           }`}>
-                            {showParentProgress && <Check className="h-4 w-4 text-white" />}
+                            {showParentProgress && <Check className="h-4 w-4 text-primary-foreground" />}
                           </div>
                         </div>
                       </div>
@@ -588,7 +581,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   </Button>
                   <Button 
                     onClick={handleNext}
-                    className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold px-8 py-3 shadow-lg"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-3 shadow-lg"
                   >
                   <div className="flex items-center gap-2">
                     <span>Final Step!</span>
@@ -617,7 +610,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         repeat: Infinity,
                         ease: "linear"
                       }}
-                      className="w-32 h-32 bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 rounded-full blur-3xl"
+                      className="w-32 h-32 bg-primary rounded-full blur-3xl"
                     />
                   </div>
                   
@@ -634,7 +627,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     }}
                     className="relative inline-block z-10"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 rounded-2xl blur-xl opacity-75">
+                    <div className="absolute inset-0 bg-primary rounded-2xl blur-xl opacity-75">
                       <motion.div
                         animate={{ scale: [1, 1.1, 1] }}
                         transition={{ 
@@ -642,10 +635,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                           repeat: Infinity,
                           ease: "easeInOut"
                         }}
-                        className="w-full h-full bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 rounded-2xl"
+                        className="w-full h-full bg-primary rounded-2xl"
                       />
                     </div>
-                    <div className="relative bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 p-4 rounded-2xl shadow-2xl">
+                    <div className="relative bg-primary p-4 rounded-2xl shadow-2xl">
                       <motion.div
                         animate={{ 
                           rotate: [0, -10, 10, 0],
@@ -657,7 +650,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                           ease: "easeInOut"
                         }}
                       >
-                        <Crown className="h-10 w-10 text-white drop-shadow-2xl" />
+                        <Crown className="h-10 w-10 text-primary-foreground drop-shadow-2xl" />
                       </motion.div>
                     </div>
                   </motion.div>
@@ -693,9 +686,9 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                      >
                        🚀
                      </motion.span>
-                     <span className="bg-gradient-to-r from-yellow-500 via-orange-500 via-pink-500 via-purple-500 to-violet-500 bg-clip-text text-transparent">
-                       Unlock Your Academic Superpower!
-                     </span>
+                      <span className="text-gradient-primary">
+                        Unlock Your Academic Superpower!
+                      </span>
                      <motion.span
                        animate={{ 
                          textShadow: [
@@ -735,30 +728,30 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       }}
                     >
                       Join{" "}
-                      <motion.span 
-                        className="font-black bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent"
-                        animate={{ scale: [1, 1.05, 1] }}
-                        transition={{ 
-                          duration: 2, 
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      >
-                        10,000+ students
-                      </motion.span>
-                      {" "}getting{" "}
-                      <motion.span 
-                        className="font-black bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent"
-                        animate={{ scale: [1, 1.1, 1] }}
-                        transition={{ 
-                          duration: 1.5, 
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: 0.5
-                        }}
-                      >
-                        2+ grades higher
-                      </motion.span>
+                       <motion.span 
+                         className="font-black text-primary"
+                         animate={{ scale: [1, 1.05, 1] }}
+                         transition={{ 
+                           duration: 2, 
+                           repeat: Infinity,
+                           ease: "easeInOut"
+                         }}
+                       >
+                         10,000+ students
+                       </motion.span>
+                       {" "}getting{" "}
+                       <motion.span 
+                         className="font-black text-primary"
+                         animate={{ scale: [1, 1.1, 1] }}
+                         transition={{ 
+                           duration: 1.5, 
+                           repeat: Infinity,
+                           ease: "easeInOut",
+                           delay: 0.5
+                         }}
+                       >
+                         2+ grades higher
+                       </motion.span>
                     </motion.span>
                   </motion.p>
                   
@@ -797,34 +790,34 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 }}
                   >
-                    <Card className="relative bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 border-2 border-gray-300 dark:border-gray-600 opacity-75">
+                    <Card className="relative bg-muted border-2 border-muted-foreground opacity-75">
                       <CardHeader className="pb-2">
-                        <CardTitle className="flex items-center gap-2 text-gray-600 dark:text-gray-400 text-lg">
-                          <div className="bg-gray-500 p-1.5 rounded">
-                            <Lock className="h-4 w-4 text-white" />
+                        <CardTitle className="flex items-center gap-2 text-muted-foreground text-lg">
+                          <div className="bg-muted-foreground p-1.5 rounded">
+                            <Lock className="h-4 w-4 text-background" />
                           </div>
                           <span className="font-bold">Free (Limited)</span>
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-2 pb-3">
                         <div className="space-y-2">
-                          {[
-                            { text: 'Basic practice questions', limited: true },
-                            { text: 'No grade predictions', limited: true },
-                            { text: 'No advanced analytics', limited: true },
-                            { text: 'Basic progress tracking', limited: true }
-                          ].map((feature, index) => (
-                            <div key={index} className="flex items-center gap-2">
-                              <Shield className="h-4 w-4 text-red-500" />
-                              <span className="text-sm text-gray-600 dark:text-gray-400">
-                                {feature.text}
-                              </span>
-                            </div>
-                          ))}
+                           {[
+                             { text: 'Basic practice questions', limited: true },
+                             { text: 'No grade predictions', limited: true },
+                             { text: 'No advanced analytics', limited: true },
+                             { text: 'Basic progress tracking', limited: true }
+                           ].map((feature, index) => (
+                             <div key={index} className="flex items-center gap-2">
+                               <Shield className="h-4 w-4 text-destructive" />
+                               <span className="text-sm text-muted-foreground">
+                                 {feature.text}
+                               </span>
+                             </div>
+                           ))}
                         </div>
-                        <div className="pt-2 border-t border-gray-300">
-                          <div className="text-xl font-black text-gray-600">FREE</div>
-                        </div>
+                         <div className="pt-2 border-t border-muted">
+                           <div className="text-xl font-black text-muted-foreground">FREE</div>
+                         </div>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -836,16 +829,16 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                     transition={{ delay: 0.5, type: "spring" }}
                     className="relative"
                   >
-                    {/* Glowing border effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 via-orange-500 via-pink-500 to-purple-500 rounded-xl blur-md opacity-75 animate-pulse" />
-                    
-                    <Card className="relative bg-gradient-to-br from-yellow-50 via-orange-50 via-pink-50 to-purple-50 dark:from-yellow-950/30 dark:via-orange-950/30 dark:via-pink-950/30 dark:to-purple-950/30 border-0 shadow-xl">
+                     {/* Glowing border effect */}
+                     <div className="absolute inset-0 bg-primary rounded-xl blur-md opacity-75 animate-pulse" />
+                     
+                     <Card className="relative bg-card border-0 shadow-xl">
                       {/* Premium badges */}
                       <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-50">
                         <motion.div
                           animate={{ y: [0, -3, 0] }}
                           transition={{ repeat: Infinity, duration: 2 }}
-                          className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-4 py-1 rounded-full font-black text-sm shadow-xl border-2 border-white"
+                          className="bg-primary text-primary-foreground px-4 py-1 rounded-full font-black text-sm shadow-xl border-2 border-background"
                         >
                           🏆 MOST POPULAR
                         </motion.div>
@@ -855,7 +848,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                         <motion.div
                           animate={{ rotate: [0, 10, 0] }}
                           transition={{ repeat: Infinity, duration: 3 }}
-                          className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-2 py-0.5 rounded-full text-xs font-bold"
+                          className="bg-accent text-accent-foreground px-2 py-0.5 rounded-full text-xs font-bold"
                         >
                           92% SUCCESS
                         </motion.div>
@@ -863,10 +856,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       
                       <CardHeader className="pb-2 relative z-10 pt-5">
                         <CardTitle className="flex items-center gap-2">
-                          <div className="bg-gradient-to-r from-yellow-500 to-orange-500 p-2 rounded-lg shadow-lg">
-                            <Crown className="h-5 w-5 text-white" />
+                          <div className="bg-primary p-2 rounded-lg shadow-lg">
+                            <Crown className="h-5 w-5 text-primary-foreground" />
                           </div>
-                          <span className="text-lg font-black bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
+                          <span className="text-lg font-black text-gradient-primary">
                             Premium Superpower
                           </span>
                         </CardTitle>
@@ -888,25 +881,25 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                               transition={{ delay: 0.6 + (index * 0.05) }}
                               className="flex items-center gap-2"
                             >
-                              <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-full p-0.5">
-                                <Check className="h-3 w-3 text-white" />
-                              </div>
+                               <div className="bg-accent rounded-full p-0.5">
+                                 <Check className="h-3 w-3 text-accent-foreground" />
+                               </div>
                               <span className="text-sm font-semibold">{feature.text}</span>
                             </motion.div>
                           ))}
                         </div>
                         
                         {/* Pricing with massive discount */}
-                        <div className="pt-2 border-t border-gradient-to-r from-yellow-200 to-orange-200 space-y-1">
-                          <div className="flex items-center gap-2">
-                            <div className="text-xs text-muted-foreground line-through">£19.99/mo</div>
-                            <div className="bg-red-500 text-white px-2 py-0.5 rounded-full text-xs font-bold">50% OFF!</div>
+                         <div className="pt-2 border-t border-border space-y-1">
+                           <div className="flex items-center gap-2">
+                             <div className="text-xs text-muted-foreground line-through">£19.99/mo</div>
+                             <div className="bg-destructive text-destructive-foreground px-2 py-0.5 rounded-full text-xs font-bold">50% OFF!</div>
+                           </div>
+                           <div className="flex items-baseline gap-1">
+                             <div className="text-2xl font-black text-gradient-primary">£9.99</div>
+                             <div className="text-sm text-muted-foreground">/month</div>
                           </div>
-                          <div className="flex items-baseline gap-1">
-                            <div className="text-2xl font-black bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">£9.99</div>
-                            <div className="text-sm text-muted-foreground">/month</div>
-                          </div>
-                          <div className="text-xs text-emerald-600 font-bold">⚡ LIMITED TIME ONLY</div>
+                          <div className="text-xs text-accent font-bold">⚡ LIMITED TIME ONLY</div>
                         </div>
                       </CardContent>
                     </Card>
@@ -921,30 +914,30 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   className="text-center space-y-3 pt-2"
                 >
                   {/* Social Proof */}
-                  <div className="bg-gradient-to-r from-emerald-50 to-cyan-50 dark:from-emerald-950/20 dark:to-cyan-950/20 rounded-lg p-2 border border-emerald-200 dark:border-emerald-800">
-                    <div className="flex items-center justify-center gap-3 text-xs">
-                      <div className="flex items-center gap-1">
-                        <Star className="h-3 w-3 text-yellow-500 fill-current" />
-                        <span className="font-bold">4.9/5</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Trophy className="h-3 w-3 text-orange-500" />
-                        <span className="font-bold">92%</span>
-                        <span className="text-muted-foreground">grade improvement</span>
-                      </div>
-                    </div>
-                  </div>
+                   <div className="bg-accent/10 rounded-lg p-2 border border-accent">
+                     <div className="flex items-center justify-center gap-3 text-xs">
+                       <div className="flex items-center gap-1">
+                         <Star className="h-3 w-3 text-primary fill-current" />
+                         <span className="font-bold">4.9/5</span>
+                       </div>
+                       <div className="flex items-center gap-1">
+                         <Trophy className="h-3 w-3 text-primary" />
+                         <span className="font-bold">92%</span>
+                         <span className="text-muted-foreground">grade improvement</span>
+                       </div>
+                     </div>
+                   </div>
 
                   {/* Main CTA Button */}
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Button 
-                      onClick={handleUpgrade}
-                      className="relative bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 hover:from-yellow-600 hover:via-orange-600 hover:to-pink-600 text-white font-black px-6 py-2.5 text-sm shadow-xl shadow-orange-500/50 overflow-hidden group w-full max-w-md"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-pink-400 opacity-0 group-hover:opacity-20 transition-opacity" />
+                     <Button 
+                       onClick={handleUpgrade}
+                       className="relative bg-primary hover:bg-primary/90 text-primary-foreground font-black px-6 py-2.5 text-sm shadow-xl overflow-hidden group w-full max-w-md"
+                     >
+                       <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-20 transition-opacity" />
                        <div className="flex items-center justify-center gap-2 relative z-10">
                          <Rocket className="h-4 w-4" />
                          <span style={{ fontSize: '1em' }}>🚀</span>
@@ -955,28 +948,28 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                   </motion.div>
                   
                   {/* Guarantee & Benefits */}
-                  <p className="text-xs font-bold text-emerald-600">
-                    <span style={{ fontSize: '1em' }}>✅</span> 30-day money-back guarantee • <span style={{ fontSize: '1em' }}>📱</span> Cancel anytime
-                  </p>
+                   <p className="text-xs font-bold text-accent">
+                     <span style={{ fontSize: '1em' }}>✅</span> 30-day money-back guarantee • <span style={{ fontSize: '1em' }}>📱</span> Cancel anytime
+                   </p>
                 </motion.div>
                 
                 {/* Action Buttons - Fixed at bottom */}
-                <div className="flex justify-between items-center pt-4 border-t border-gray-200 mt-4 bg-background">
-                  <Button 
-                    variant="outline" 
-                    onClick={() => setCurrentStep(4)} 
-                    className="px-6 py-3 text-base font-semibold border-2 border-gray-400 hover:bg-gray-100 shadow-lg"
-                  >
-                    ← Back
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    onClick={onClose} 
-                    className="px-6 py-3 text-base font-semibold border-2 border-blue-500 bg-blue-50 text-blue-700 hover:bg-blue-100 shadow-lg"
-                  >
-                    Continue with Free Version
-                  </Button>
-                </div>
+                 <div className="flex justify-between items-center pt-4 border-t border-border mt-4 bg-background">
+                   <Button 
+                     variant="outline" 
+                     onClick={() => setCurrentStep(4)} 
+                     className="px-6 py-3 text-base font-semibold"
+                   >
+                     ← Back
+                   </Button>
+                   <Button 
+                     variant="outline" 
+                     onClick={onClose} 
+                     className="px-6 py-3 text-base font-semibold"
+                   >
+                     Continue with Free Version
+                   </Button>
+                 </div>
               </div>
             )}
           </AnimatePresence>
