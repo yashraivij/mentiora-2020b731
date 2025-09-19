@@ -30,9 +30,6 @@ import {
   TestTube,
   Leaf,
   Dna,
-  Plus,
-  X,
-  Settings,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -56,7 +53,6 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState<string>("learn");
   const [userProgress, setUserProgress] = useState<UserProgress[]>([]);
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
-  const [showManageSubjects, setShowManageSubjects] = useState(false);
   const [currentStreak, setCurrentStreak] = useState(7);
   const [userXP, setUserXP] = useState(1122);
   const [userHearts, setUserHearts] = useState(5);
@@ -198,90 +194,10 @@ const Dashboard = () => {
     return { completed: completedTopics, total: subject.topics.length };
   };
 
-  // Add/remove subject from user's list
-  const toggleUserSubject = async (subjectId: string) => {
-    if (!user?.id) return;
-
-    const subject = curriculum.find((s) => s.id === subjectId);
-    if (!subject) return;
-
-    const isCurrentlySelected = userSubjects.includes(subjectId);
-    
-    try {
-      if (isCurrentlySelected) {
-        // Remove from database
-        const { error } = await supabase
-          .from("user_subjects")
-          .delete()
-          .eq("user_id", user.id)
-          .eq("subject_name", getSubjectName(subject))
-          .eq("exam_board", getExamBoard(subjectId));
-
-        if (error) {
-          console.error("Error removing subject:", error);
-          toast({
-            title: "Error",
-            description: `Failed to remove ${subject.name}`,
-            variant: "destructive",
-          });
-        } else {
-          setUserSubjects((prev) => prev.filter((id) => id !== subjectId));
-          toast({
-            title: "Subject removed",
-            description: `${subject.name} removed from your subjects`,
-          });
-        }
-      } else {
-        // Add to database
-        const { error } = await supabase.from("user_subjects").insert({
-          user_id: user.id,
-          subject_name: getSubjectName(subject),
-          exam_board: getExamBoard(subjectId),
-          predicted_grade: "U",
-          target_grade: null,
-          priority_level: 3,
-        });
-
-        if (error) {
-          console.error("Error adding subject:", error);
-          toast({
-            title: "Error", 
-            description: `Failed to add ${subject.name}`,
-            variant: "destructive",
-          });
-        } else {
-          setUserSubjects((prev) => [...prev, subjectId]);
-          toast({
-            title: "Subject added",
-            description: `${subject.name} added to your subjects!`,
-          });
-        }
-      }
-    } catch (error) {
-      console.error("Error toggling subject:", error);
-      toast({
-        title: "Error",
-        description: "An unexpected error occurred",
-        variant: "destructive",
-      });
-    }
-  };
-
-  // Helper functions for subject name and exam board mapping
-  const getSubjectName = (subject: any) => {
-    if (subject.name === "Mathematics") return "Mathematics";
-    if (subject.name === "Business (Edexcel IGCSE)") return "IGCSE Business";
-    if (subject.name === "Chemistry (Edexcel)") return "Chemistry";
-    if (subject.name === "Physics (Edexcel)") return "Physics";
-    if (subject.id === "physics-edexcel") return "Physics";
-    if (subject.id === "physics") return "Physics";
-    return subject.name;
-  };
-
-  const getExamBoard = (subjectId: string) => {
-    if (subjectId.includes("edexcel")) return "Edexcel";
-    return "AQA";
-  };
+  useEffect(() => {
+    loadUserSubjects();
+    loadUserProgress();
+  }, [user?.id]);
 
   const handleLogout = () => {
     logout();
@@ -450,20 +366,11 @@ const Dashboard = () => {
               </div>
 
               {/* Subject Selection or Subject Path */}
-              {!selectedSubject && !showManageSubjects ? (
+              {!selectedSubject ? (
                 <div>
-                  <div className="flex items-center justify-between mb-8">
-                    <h2 className="text-3xl font-bold text-gray-800">
-                      Choose your GCSE subject
-                    </h2>
-                    <Button
-                      onClick={() => setShowManageSubjects(true)}
-                      className="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-2xl flex items-center space-x-2"
-                    >
-                      <Settings className="h-4 w-4" />
-                      <span>Manage Subjects</span>
-                    </Button>
-                  </div>
+                  <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+                    Choose your GCSE subject
+                  </h2>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {filteredSubjects.map((subject) => {
@@ -512,73 +419,6 @@ const Dashboard = () => {
                                     const IconComponent = getSubjectIcon(subject.id);
                                     return <IconComponent className="h-10 w-10 text-white" />;
                                   })()}
-                                </div>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-                </div>
-              ) : showManageSubjects ? (
-                // Manage Subjects View
-                <div>
-                  <div className="flex items-center mb-8">
-                    <Button
-                      variant="ghost"
-                      onClick={() => setShowManageSubjects(false)}
-                      className="text-gray-600 hover:text-gray-800 mr-4"
-                    >
-                      ← Back
-                    </Button>
-                    <h2 className="text-3xl font-bold text-gray-800">
-                      Manage Your Subjects
-                    </h2>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {curriculum.map((subject) => {
-                      const colors = subjectColors[subject.id] || subjectColors["physics"];
-                      const isSelected = userSubjects.includes(subject.id);
-                      const IconComponent = getSubjectIcon(subject.id);
-                      
-                      return (
-                        <motion.div
-                          key={subject.id}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <Card 
-                            className={`cursor-pointer border-2 transition-all duration-200 ${
-                              isSelected 
-                                ? `${colors.light} border-green-400 shadow-lg` 
-                                : "bg-white border-gray-200 hover:border-gray-300 hover:shadow-md"
-                            }`}
-                            onClick={() => toggleUserSubject(subject.id)}
-                          >
-                            <CardContent className="p-6">
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-4">
-                                  <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center`}>
-                                    <IconComponent className="h-6 w-6 text-white" />
-                                  </div>
-                                  <div>
-                                    <h3 className="font-bold text-gray-800 text-lg">
-                                      {subject.name}
-                                    </h3>
-                                    <p className="text-sm text-gray-600">
-                                      {subject.topics.length} topics
-                                    </p>
-                                  </div>
-                                </div>
-                                
-                                <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center ${
-                                  isSelected 
-                                    ? "bg-green-400 border-green-400" 
-                                    : "border-gray-300"
-                                }`}>
-                                  {isSelected && <Check className="h-4 w-4 text-white" />}
                                 </div>
                               </div>
                             </CardContent>
