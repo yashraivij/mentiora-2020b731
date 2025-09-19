@@ -7,7 +7,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Clock, AlertCircle, CheckCircle, Crown, Target } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
@@ -4145,7 +4144,6 @@ Write a story about a moment of fear.
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Button>
-              <ThemeToggle />
             </div>
           </div>
         </header>
@@ -4262,7 +4260,6 @@ Write a story about a moment of fear.
                 <Target className="h-4 w-4 mr-2" />
                 Submit for Marking
               </Button>
-              <ThemeToggle />
             </div>
           </div>
           

@@ -5,7 +5,6 @@ import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum } from "@/data/curriculum";
 import { ArrowLeft, BookOpen, Clock, TrendingUp } from "lucide-react";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -122,7 +121,6 @@ const SubjectTopics = () => {
                 <h1 className="text-2xl font-bold text-foreground">{subject.name}</h1>
               </div>
             </div>
-            <ThemeToggle />
           </div>
         </div>
       </header>

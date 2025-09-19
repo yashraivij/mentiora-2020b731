@@ -6,8 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb, HelpCircle, X, StickyNote } from "lucide-react";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { ArrowLeft, CheckCircle, AlertCircle, Book, Lightbulb, HelpCircle, X, StickyNote, User } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -591,7 +590,6 @@ const Practice = () => {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <ThemeToggle />
               <span className="text-sm text-muted-foreground">
                 Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
               </span>
@@ -780,11 +778,11 @@ const Practice = () => {
               <Card className="bg-card/80 backdrop-blur-sm border border-border">
                 <CardHeader>
                   <CardTitle className="flex items-center text-foreground">
-                    <CheckCircle className="h-5 w-5 mr-2 text-green-600 dark:text-green-400" />
-                    Smart Teacher Feedback
+                    <User className="h-5 w-5 mr-2 text-primary" />
+                    Your Feedback
                   </CardTitle>
                   <div className="flex items-center space-x-2">
-                    <span className="text-2xl font-bold text-green-600 dark:text-green-400">
+                    <span className="text-2xl font-bold text-primary">
                       {currentAttempt.score}/{currentQuestion.marks}
                     </span>
                     <span className="text-sm text-muted-foreground">marks</span>
@@ -800,7 +798,7 @@ const Practice = () => {
                       <Book className="h-4 w-4 mr-2" />
                       Model Answer
                     </h4>
-                    <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border-l-4 border-green-500">
+                    <div className="bg-card p-4 rounded-lg border border-border">
                       <div className="text-foreground space-y-2">
                         {currentAttempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).map((sentence, index) => (
                           <p key={index} className="leading-relaxed">{sentence.trim()}{index < currentAttempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).length - 1 ? '.' : ''}</p>
@@ -815,7 +813,7 @@ const Practice = () => {
                       <CheckCircle className="h-4 w-4 mr-2" />
                       Why This Gets Full Marks
                     </h4>
-                    <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500">
+                    <div className="bg-card p-4 rounded-lg border border-border">
                       <pre className="text-foreground whitespace-pre-wrap font-sans">
                         {currentAttempt.feedback.whyThisGetsMark}
                       </pre>
@@ -825,10 +823,10 @@ const Practice = () => {
                   {/* Smart Feedback */}
                   <div>
                     <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                      <Lightbulb className="h-4 w-4 mr-2" />
-                      Smart Teacher Feedback
+                      <StickyNote className="h-4 w-4 mr-2" />
+                      Teacher's Notes
                     </h4>
-                    <div className="bg-yellow-50 dark:bg-yellow-950/20 p-4 rounded-lg border-l-4 border-yellow-500">
+                    <div className="bg-card p-4 rounded-lg border border-border">
                       <p className="text-foreground">{currentAttempt.feedback.whyYoursDidnt}</p>
                     </div>
                   </div>
