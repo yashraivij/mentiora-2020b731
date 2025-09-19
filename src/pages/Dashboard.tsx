@@ -609,8 +609,8 @@ const Dashboard = () => {
           {activeTab === "notes" && (
             <div>
               <div className="text-center mb-8">
-                <h2 className="text-5xl font-extrabold bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 dark:from-purple-400 dark:via-blue-400 dark:to-indigo-400 bg-clip-text text-transparent mb-4 tracking-tight">
-                  Instant Grade 9 notes for every lost mark
+                <h2 className="text-5xl font-bold text-gray-800 dark:text-gray-200 mb-4 tracking-tight">
+                  Instant notes for every lost mark
                 </h2>
               </div>
 
