@@ -2246,6 +2246,16 @@ const Dashboard = () => {
           </Card>
         </div>
       </div>
+      
+      {/* Floating Feedback Button */}
+      <button
+        data-feedback-fish
+        data-feedback-fish-userid={user?.email || ""}
+        className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 z-50 flex items-center justify-center"
+        title="Send Feedback"
+      >
+        <span className="text-xl">💬</span>
+      </button>
     </div>
   );
 };
