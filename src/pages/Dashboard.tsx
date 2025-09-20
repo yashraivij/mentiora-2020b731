@@ -958,7 +958,7 @@ const Dashboard = () => {
                   <NotebookPen className="h-8 w-8 text-white" />
                 </div>
                 <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                  smart Revision Notebook
+                  Smart Revision Notebook
                 </h1>
                 <p className="text-gray-600 text-lg max-w-md mx-auto">
                   Instant notes for every lost mark
