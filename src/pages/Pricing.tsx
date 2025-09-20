@@ -162,7 +162,7 @@ const Pricing = () => {
                 </h3>
                 <p className="text-sm text-white/70 mb-2 font-sans">Amount billed today</p>
                 <div className="text-4xl font-bold text-white mb-4 font-sans">
-                  £7.99<span className="text-lg font-medium text-white/80">/month</span>
+                  £9.99<span className="text-lg font-medium text-white/80">/month</span>
                 </div>
                 <p className="text-white/70 text-sm font-sans">
                   Recurring billing. Cancel any time.
@@ -432,7 +432,7 @@ const Pricing = () => {
                     </h3>
                     <p className="text-sm text-white/70 mb-2 font-sans">Amount billed today</p>
                     <div className="text-4xl font-bold text-white mb-4 font-sans">
-                      £7.99<span className="text-lg font-medium text-white/80">/month</span>
+                      £9.99<span className="text-lg font-medium text-white/80">/month</span>
                     </div>
                     <p className="text-white/70 text-sm font-sans">
                       Recurring billing. Cancel any time.
