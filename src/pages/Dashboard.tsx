@@ -439,82 +439,260 @@ const Dashboard = () => {
     }
   };
 
-  const loadLeaderboardData = async () => {
+  // Get UK week boundaries (Monday 00:00 → Sunday 23:59)
+  const getUKWeekBoundaries = () => {
+    const now = new Date();
+    
+    // Convert to UK time
+    const ukNow = new Date(now.toLocaleString("en-US", { timeZone: "Europe/London" }));
+    
+    // Get current day of week (0 = Sunday, 1 = Monday, etc.)
+    const dayOfWeek = ukNow.getDay();
+    
+    // Calculate days since Monday (Monday = 0, Sunday = 6)
+    const daysSinceMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+    
+    // Get Monday 00:00 UK time
+    const weekStart = new Date(ukNow);
+    weekStart.setDate(ukNow.getDate() - daysSinceMonday);
+    weekStart.setHours(0, 0, 0, 0);
+    
+    // Get Sunday 23:59 UK time
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekStart.getDate() + 6);
+    weekEnd.setHours(23, 59, 59, 999);
+    
+    return { weekStart, weekEnd };
+  };
+
+  const loadWeeklyLeaderboardData = async () => {
     try {
-      // Get real users with their MP points and calculate retroactive MP for users without it
-      const { data: allUsers, error: usersError } = await supabase
-        .from('public_profiles')
-        .select(`
-          user_id,
-          username,
-          display_name,
-          streak_days
-        `);
-
-      if (usersError) {
-        console.error('Error fetching users:', usersError);
-        setLeaderboardData([]);
-        return;
-      }
-
-      let transformedRealUsers = [];
+      const { weekStart, weekEnd } = getUKWeekBoundaries();
       
-      if (allUsers && allUsers.length > 0) {
-        // Get user points for all users
-        const userIds = allUsers.map(u => u.user_id);
-        const { data: userPoints, error: pointsError } = await supabase
-          .from('user_points')
-          .select('user_id, total_points')
-          .in('user_id', userIds);
-
-        const pointsMap = new Map((userPoints || []).map(p => [p.user_id, p.total_points]));
-
-        // For users without MP points, calculate retroactive MP
-        for (const user of allUsers) {
-          let mp = pointsMap.get(user.user_id) || 0;
+      console.log('Loading weekly leaderboard for week:', weekStart.toISOString(), 'to', weekEnd.toISOString());
+      
+      // Get all users with MP activities this week
+      const { data: weeklyActivities, error: activitiesError } = await supabase
+        .from('user_activities')
+        .select('user_id, activity_type, created_at')
+        .gte('created_at', weekStart.toISOString())
+        .lte('created_at', weekEnd.toISOString())
+        .in('activity_type', ['daily_login', 'practice_completed', 'weekly_3_topics_awarded', 'weekly_5_practice_awarded', 'streak_7_days_awarded']);
+      
+      if (activitiesError) {
+        console.error('Error fetching weekly activities:', activitiesError);
+        return [];
+      }
+      
+      // Calculate weekly MP for each user
+      const weeklyMPMap = new Map();
+      const activityTimestamps = new Map(); // Track when each user first achieved each activity type
+      
+      if (weeklyActivities) {
+        for (const activity of weeklyActivities) {
+          const userId = activity.user_id;
+          const activityType = activity.activity_type;
+          const timestamp = new Date(activity.created_at);
           
-          // If user has no MP but has been active, calculate retroactive MP
-          if (mp === 0) {
-            try {
-              const { data: retroMP } = await supabase.functions.invoke('calculate-retroactive-mp', {
-                body: { user_id: user.user_id }
-              });
-              
-              if (retroMP && !retroMP.error) {
-                mp = retroMP.total_mp || 0;
-                // Refresh points map for this user
-                pointsMap.set(user.user_id, mp);
-              }
-            } catch (error) {
-              console.log('Could not calculate retroactive MP for user:', user.user_id);
-            }
+          // Initialize user data
+          if (!weeklyMPMap.has(userId)) {
+            weeklyMPMap.set(userId, 0);
+            activityTimestamps.set(userId, new Map());
           }
-
-          // Only include users with MP > 0
-          if (mp > 0) {
-            transformedRealUsers.push({
-              name: user.display_name || user.username || 'Anonymous',
-              mp: mp,
-              streak: user.streak_days || 0,
-              isCurrentUser: user.user_id === (await supabase.auth.getUser()).data.user?.id,
-              isRealUser: true,
-              leaderboardType: 'both'
-            });
+          
+          const userTimestamps = activityTimestamps.get(userId);
+          
+          // Track earliest timestamp for tie-breaking
+          if (!userTimestamps.has(activityType) || timestamp < userTimestamps.get(activityType)) {
+            userTimestamps.set(activityType, timestamp);
+          }
+          
+          // Calculate MP based on activity type
+          let mp = 0;
+          switch (activityType) {
+            case 'daily_login':
+              mp = 10; // Only count once per day
+              break;
+            case 'practice_completed':
+              mp = 40;
+              break;
+            case 'weekly_3_topics_awarded':
+              mp = 100;
+              break;
+            case 'weekly_5_practice_awarded':
+              mp = 250;
+              break;
+            case 'streak_7_days_awarded':
+              mp = 500;
+              break;
+          }
+          
+          weeklyMPMap.set(userId, (weeklyMPMap.get(userId) || 0) + mp);
+        }
+        
+        // Handle daily login limit (max 1 per day)
+        const dailyLoginsByUser = new Map();
+        for (const activity of weeklyActivities.filter(a => a.activity_type === 'daily_login')) {
+          const userId = activity.user_id;
+          const date = new Date(activity.created_at).toDateString();
+          
+          if (!dailyLoginsByUser.has(userId)) {
+            dailyLoginsByUser.set(userId, new Set());
+          }
+          dailyLoginsByUser.get(userId).add(date);
+        }
+        
+        // Recalculate daily login MP (10 MP per unique day)
+        for (const [userId, dates] of dailyLoginsByUser.entries()) {
+          const practiceMP = weeklyMPMap.get(userId) || 0;
+          const otherMP = practiceMP - (weeklyActivities.filter(a => a.user_id === userId && a.activity_type === 'daily_login').length * 10);
+          const correctDailyMP = dates.size * 10;
+          weeklyMPMap.set(userId, otherMP + correctDailyMP);
+        }
+      }
+      
+      // Get user profile data for users with weekly MP
+      const userIds = Array.from(weeklyMPMap.keys());
+      let userProfiles = [];
+      
+      if (userIds.length > 0) {
+        const { data: profiles, error: profilesError } = await supabase
+          .from('public_profiles')
+          .select('user_id, username, display_name, streak_days')
+          .in('user_id', userIds);
+        
+        if (!profilesError && profiles) {
+          userProfiles = profiles;
+        }
+        
+        // Also check users without public profiles
+        const { data: allUsersWithMP, error: allUsersError } = await supabase
+          .from('user_points')
+          .select('user_id')
+          .in('user_id', userIds);
+        
+        if (!allUsersError && allUsersWithMP) {
+          for (const userPoint of allUsersWithMP) {
+            if (!userProfiles.find(p => p.user_id === userPoint.user_id)) {
+              userProfiles.push({
+                user_id: userPoint.user_id,
+                username: 'Anonymous',
+                display_name: 'Anonymous',
+                streak_days: 0
+              });
+            }
           }
         }
       }
-
-      // Sort by MP points
-      transformedRealUsers.sort((a, b) => b.mp - a.mp);
       
-      console.log('Real users loaded:', transformedRealUsers.length, transformedRealUsers);
+      // Transform to leaderboard format
+      const weeklyLeaderboard = [];
+      const currentUserId = (await supabase.auth.getUser()).data.user?.id;
+      
+      for (const profile of userProfiles) {
+        const weeklyMP = weeklyMPMap.get(profile.user_id) || 0;
+        const userTimestamps = activityTimestamps.get(profile.user_id);
+        const earliestTimestamp = userTimestamps && userTimestamps.size > 0 
+          ? Math.min(...Array.from(userTimestamps.values()).map(t => (t as Date).getTime())) 
+          : Date.now();
+        
+        weeklyLeaderboard.push({
+          user_id: profile.user_id,
+          name: profile.display_name || profile.username || 'Anonymous',
+          mp: weeklyMP,
+          streak: profile.streak_days || 0,
+          isCurrentUser: profile.user_id === currentUserId,
+          isRealUser: true,
+          leaderboardType: 'weekly',
+          earliestActivity: earliestTimestamp
+        });
+      }
+      
+      // Sort by weekly MP (desc), then by earliest activity (asc), then by user_id (asc)
+      weeklyLeaderboard.sort((a, b) => {
+        if (a.mp !== b.mp) return b.mp - a.mp;
+        if (a.earliestActivity !== b.earliestActivity) return a.earliestActivity - b.earliestActivity;
+        return a.user_id.localeCompare(b.user_id);
+      });
+      
+      console.log('Weekly leaderboard loaded:', weeklyLeaderboard);
+      
+      return weeklyLeaderboard;
+    } catch (error) {
+      console.error('Error loading weekly leaderboard:', error);
+      return [];
+    }
+  };
 
-      setLeaderboardData(transformedRealUsers);
+  const loadAllTimeLeaderboardData = async () => {
+    try {
+      // Get all users with total MP points
+      const { data: allUsers, error: usersError } = await supabase
+        .from('user_points')
+        .select('user_id, total_points')
+        .gt('total_points', 0);
+      
+      if (usersError || !allUsers) {
+        console.error('Error fetching users:', usersError);
+        return [];
+      }
+      
+      // Get profile data for these users
+      const userIds = allUsers.map(u => u.user_id);
+      const { data: profiles, error: profilesError } = await supabase
+        .from('public_profiles')
+        .select('user_id, username, display_name, streak_days')
+        .in('user_id', userIds);
+      
+      const profilesMap = new Map((profiles || []).map(p => [p.user_id, p]));
+      const currentUserId = (await supabase.auth.getUser()).data.user?.id;
+      
+      // Transform to leaderboard format
+      const allTimeLeaderboard = allUsers.map(user => {
+        const profile = profilesMap.get(user.user_id);
+        return {
+          user_id: user.user_id,
+          name: profile?.display_name || profile?.username || 'Anonymous',
+          mp: user.total_points,
+          streak: profile?.streak_days || 0,
+          isCurrentUser: user.user_id === currentUserId,
+          isRealUser: true,
+          leaderboardType: 'alltime'
+        };
+      });
+      
+      // Sort by total MP
+      allTimeLeaderboard.sort((a, b) => b.mp - a.mp);
+      
+      console.log('All-time leaderboard loaded:', allTimeLeaderboard);
+      
+      return allTimeLeaderboard;
+    } catch (error) {
+      console.error('Error loading all-time leaderboard:', error);
+      return [];
+    }
+  };
+
+  const loadLeaderboardData = async () => {
+    try {
+      if (activeLeaderboardTab === 'weekly') {
+        const weeklyData = await loadWeeklyLeaderboardData();
+        setLeaderboardData(weeklyData);
+      } else {
+        const allTimeData = await loadAllTimeLeaderboardData();
+        setLeaderboardData(allTimeData);
+      }
     } catch (error) {
       console.error('Error loading leaderboard:', error);
       setLeaderboardData([]);
     }
   };
+
+  useEffect(() => {
+    if (user?.id) {
+      loadLeaderboardData(); // Reload when tab changes
+    }
+  }, [user?.id, activeLeaderboardTab]);
 
   useEffect(() => {
     if (user?.id) {
@@ -1395,62 +1573,65 @@ const Dashboard = () => {
 
                     {/* Leaderboard Entries */}
                     <div className="space-y-2">
-                      {(() => {
+                     {(() => {
                         console.log('=== LEADERBOARD DEBUG START ===');
                         console.log('Full leaderboard data:', leaderboardData);
                         console.log('Active tab:', activeLeaderboardTab);
                         
-                        // Filter users based on the active leaderboard tab
-                        let players = leaderboardData.filter(p => {
-                          console.log('Checking player:', p.name, 'isRealUser:', p.isRealUser, 'leaderboardType:', p.leaderboardType);
-                          
-                          // Real users appear in both leaderboards
-                          if (p.isRealUser) {
-                            console.log('Including real user:', p.name);
-                            return true;
-                          }
-                          
-                          // Filter fake users based on leaderboard type
-                          if (activeLeaderboardTab === 'weekly') {
-                            const include = p.leaderboardType === 'weekly';
-                            console.log('Weekly tab - including', p.name, '?', include);
-                            return include;
-                          } else {
-                            const include = p.leaderboardType === 'alltime';
-                            console.log('All-time tab - including', p.name, '?', include);
-                            return include;
-                          }
-                        });
+                        let players = [...leaderboardData]; // Copy the data
                         
-                        console.log('Filtered players:', players);
-                        
-                        // Add current user to the leaderboard if not already present
+                        // Add current user if not already present and has activity
                         const userExists = players.some(p => p.isCurrentUser);
-                        console.log('User exists in leaderboard:', userExists);
-                        if (!userExists && user) {
+                        if (!userExists && user && (userGems > 0 || (activeLeaderboardTab === 'weekly' && userStats))) {
                            const currentUserData = {
+                             user_id: user.id,
                              name: getFirstName(),
-                             mp: userGems,
+                             mp: activeLeaderboardTab === 'weekly' ? 0 : userGems, // Weekly MP calculated separately
                              streak: currentStreak,
                              isCurrentUser: true,
                              isRealUser: true,
-                             leaderboardType: 'both'
+                             leaderboardType: activeLeaderboardTab,
+                             earliestActivity: Date.now()
                            };
-                          console.log('Adding current user:', currentUserData);
-                          players.push(currentUserData);
+                           console.log('Adding current user:', currentUserData);
+                           players.push(currentUserData);
+                           
+                           // Re-sort after adding current user
+                           if (activeLeaderboardTab === 'weekly') {
+                             players.sort((a, b) => {
+                               if (a.mp !== b.mp) return b.mp - a.mp;
+                               if (a.earliestActivity !== b.earliestActivity) return a.earliestActivity - b.earliestActivity;
+                               return (a.user_id || '').localeCompare(b.user_id || '');
+                             });
+                           } else {
+                             players.sort((a, b) => b.mp - a.mp);
+                           }
                         }
                         
-                        // Sort players by MP (highest first) - this allows real users to overtake fake users
-                        players.sort((a, b) => b.mp - a.mp);
-                        
-                        // Add rank to each player
+                        // Add rank to each player based on sorted order
                         const rankedPlayers = players.map((player, index) => ({
                           ...player,
                           rank: index + 1
                         }));
                         
-                        // Show top 15 players
-                        const displayPlayers = rankedPlayers.slice(0, 15);
+                        // For weekly: show top 10 + current user if not in top 10
+                        let displayPlayers;
+                        if (activeLeaderboardTab === 'weekly') {
+                          const top10 = rankedPlayers.slice(0, 10);
+                          const currentUserInTop10 = top10.find(p => p.isCurrentUser);
+                          
+                          if (currentUserInTop10) {
+                            // Current user is in top 10, just show top 10
+                            displayPlayers = top10;
+                          } else {
+                            // Current user is not in top 10, show top 10 + current user
+                            const currentUser = rankedPlayers.find(p => p.isCurrentUser);
+                            displayPlayers = currentUser ? [...top10, currentUser] : top10;
+                          }
+                        } else {
+                          // For all-time: show top 15 as before
+                          displayPlayers = rankedPlayers.slice(0, 15);
+                        }
                         
                         console.log('Final display players:', displayPlayers);
                         console.log('=== LEADERBOARD DEBUG END ===');
