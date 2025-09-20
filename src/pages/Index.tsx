@@ -446,44 +446,44 @@ const Index = () => {
                   <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl p-8 shadow-2xl">
                     <div className="bg-white rounded-2xl p-6 shadow-lg">
                       <div className="flex items-center justify-between mb-6">
-                        <h4 className="text-xl font-bold text-gray-900">Your Learning Path</h4>
-                        <div className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-sm font-semibold">87% Complete</div>
+                        <h4 className="text-xl font-bold text-gray-900">Smart Revision Notebook</h4>
+                        <div className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-sm font-semibold">Auto-Generated</div>
                       </div>
                       <div className="space-y-4">
-                        <div className="flex items-center gap-4">
-                          <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center">
-                            <CheckCircle className="h-5 w-5 text-white" />
-                          </div>
-                          <div className="flex-1">
-                            <div className="font-semibold text-gray-900">Atomic Structure</div>
-                            <div className="text-sm text-gray-500">Mastered • 15 questions</div>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-4">
-                          <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center animate-pulse">
-                            <Brain className="h-5 w-5 text-white" />
-                          </div>
-                          <div className="flex-1">
+                        <div className="bg-gray-50 rounded-xl p-4">
+                          <div className="flex items-center gap-2 mb-2">
+                            <BookOpen className="h-4 w-4 text-emerald-600" />
                             <div className="font-semibold text-gray-900">Chemical Bonding</div>
-                            <div className="text-sm text-blue-600">In Progress • 8/12 complete</div>
+                          </div>
+                          <div className="text-sm text-gray-700 leading-relaxed">
+                            <strong>Key Points:</strong> Ionic bonds form between metals and non-metals through electron transfer. The electrostatic attraction between oppositely charged ions creates the bond.
                           </div>
                         </div>
-                        <div className="flex items-center gap-4">
-                          <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                            <Target className="h-5 w-5 text-gray-400" />
+                        <div className="bg-blue-50 rounded-xl p-4 border border-blue-200">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Brain className="h-4 w-4 text-blue-600" />
+                            <div className="font-semibold text-blue-900">Your Learning Style</div>
                           </div>
-                          <div className="flex-1">
-                            <div className="font-semibold text-gray-500">Rate of Reaction</div>
-                            <div className="text-sm text-gray-400">Recommended next</div>
+                          <div className="text-sm text-blue-700">
+                            Visual diagrams and step-by-step examples work best for you
+                          </div>
+                        </div>
+                        <div className="bg-amber-50 rounded-xl p-4 border border-amber-200">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Target className="h-4 w-4 text-amber-600" />
+                            <div className="font-semibold text-amber-900">Exam Focus</div>
+                          </div>
+                          <div className="text-sm text-amber-700">
+                            Practice drawing dot-and-cross diagrams for ionic compounds
                           </div>
                         </div>
                       </div>
-                      <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border border-purple-100">
-                        <div className="flex items-center gap-2 text-purple-700 font-semibold mb-2">
+                      <div className="mt-6 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl border border-emerald-200">
+                        <div className="flex items-center gap-2 text-emerald-700 font-semibold mb-2">
                           <Sparkles className="h-5 w-5" />
-                          Smart Recommendation
+                          Updated for Your Progress
                         </div>
-                        <p className="text-sm text-purple-600">Focus on ionic bonding questions - you're 92% ready to master this topic!</p>
+                        <p className="text-sm text-emerald-600">Notes automatically updated based on your latest practice sessions and weak areas.</p>
                       </div>
                     </div>
                   </div>
@@ -493,21 +493,21 @@ const Index = () => {
                     className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight"
                     whileHover={{ scale: 1.02 }}
                   >
-                    Make studying{" "}
+                    Your{" "}
                     <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                      personal
+                      smart revision
                     </span>{" "}
-                    and effective
+                    notebook
                   </motion.h3>
                   <p className="text-xl text-gray-600 leading-relaxed">
-                    Our AI learns how you think and creates a unique learning path just for you. Focus on what matters most and stop wasting time on topics you've already mastered.
+                    Get automatically generated, personalized revision notes tailored to your learning style and exam board. Save hours of note-taking and focus on what matters most for your exams.
                   </p>
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                     <Button 
                       onClick={() => navigate('/register')} 
                       className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-4 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
                     >
-                      Get Your Learning Path
+                      Generate My Notes
                     </Button>
                   </motion.div>
                 </div>
