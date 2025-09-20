@@ -1096,7 +1096,7 @@ const Dashboard = () => {
                         </div>
                         <div>
                           <h3 className="text-2xl font-bold text-gray-800">
-                            Your average grade is <span className={!isPremium ? 'blur-md bg-gray-500 text-gray-500' : ''}>{predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0}</span>. Keep it up!
+                            Your average grade is {!isPremium ? "?" : (predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0)}. Keep it up!
                           </h3>
                           <p className="text-gray-600">You're making great progress</p>
                         </div>
@@ -1184,15 +1184,15 @@ const Dashboard = () => {
                                   </div>
                                   
                                   <p className="text-sm text-gray-600">
-                                    <span className={!isPremium ? 'blur-md bg-gray-500 text-gray-500' : ''}>{Math.round(prediction.percentage || 0)}%</span> accuracy in practice
+                                    {!isPremium ? "?" : Math.round(prediction.percentage || 0)}% accuracy in practice
                                   </p>
                                 </div>
                               </div>
 
                               {/* Large Grade Display */}
                               <div className="text-center ml-6">
-                                <div className={`text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1 ${!isPremium ? 'blur-md bg-gray-500 text-gray-500' : ''}`}>
-                                  {prediction.grade || '0'}
+                                <div className={`text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1`}>
+                                  {!isPremium ? "?" : (prediction.grade || '0')}
                                 </div>
                                 <div className="text-sm text-gray-500 uppercase tracking-wide font-medium">
                                   Predicted

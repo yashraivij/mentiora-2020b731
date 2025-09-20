@@ -176,7 +176,7 @@ const PredictedQuestions = () => {
           </CardTitle>
           <CardDescription className="text-white/80 text-sm">
             {isCompleted ? (
-              <>Last Grade: <span className={!isPremium ? 'blur-md bg-gray-300 text-gray-300' : ''}>{completion.grade}</span> (<span className={!isPremium ? 'blur-md bg-gray-300 text-gray-300' : ''}>{completion.percentage}%</span>)</>
+              <>Last Grade: {!isPremium ? "?" : completion.grade} ({!isPremium ? "?" : completion.percentage}%)</>
             ) : (
               subject.id === 'combined-science-aqa' ? 
                 'Biology topics 1–4: Cell Biology; Organisation; Infection and response; and Bioenergetics' : 
