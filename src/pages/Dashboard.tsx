@@ -1097,7 +1097,7 @@ const Dashboard = () => {
                     Let's Smash GCSEs, {getFirstName()}!
                   </h2>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     {filteredSubjects.map((subject) => {
                       const colors = subjectColors[subject.id] || subjectColors["physics"];
                       const progress = getSubjectProgress(subject.id);
@@ -1351,32 +1351,32 @@ const Dashboard = () => {
               ) : (
                 <div className="max-w-4xl mx-auto space-y-6">
                   {/* Overall Summary Card */}
-                  <div className="bg-white rounded-3xl p-8 shadow-lg border-4 border-yellow-200">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg">
-                          <Trophy className="h-8 w-8 text-white" />
+                  <div className="bg-white rounded-3xl p-4 sm:p-8 shadow-lg border-4 border-yellow-200">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between">
+                      <div className="flex items-center space-x-3 sm:space-x-4">
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg">
+                          <Trophy className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                         </div>
                         <div>
-                          <h3 className="text-2xl font-bold text-gray-800">
+                          <h3 className="text-xl sm:text-2xl font-bold text-gray-800">
                             Your average grade is {isPremium ? (predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0) : (
-                              <Lock size={24} className="inline text-gray-400" />
+                              <Lock size={20} className="sm:w-6 sm:h-6 inline text-gray-400" />
                             )}. Keep it up!
                           </h3>
-                          <p className="text-gray-600">You're making great progress</p>
+                          <p className="text-sm sm:text-base text-gray-600">You're making great progress</p>
                         </div>
                       </div>
                       <Button
                         onClick={isPremium ? () => setActiveTab("learn") : () => navigate("/pricing")}
                         className={isPremium 
-                          ? "bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200"
-                          : "bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200"
+                          ? "bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 sm:py-4 sm:px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 mt-4 sm:mt-0"
+                          : "bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-3 px-4 sm:py-4 sm:px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 mt-4 sm:mt-0"
                         }
                       >
                         {isPremium ? "Start Practice" : (
                           <div className="flex items-center space-x-2">
                             <Crown className="h-4 w-4" />
-                            <span>Upgrade to Premium</span>
+                            <span className="text-sm sm:text-base">Upgrade to Premium</span>
                           </div>
                         )}
                       </Button>
@@ -1426,25 +1426,25 @@ const Dashboard = () => {
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 }}
                         >
-                          <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-200 border-2 border-gray-100">
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center space-x-4 flex-1">
+                          <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-200 border-2 border-gray-100">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between">
+                              <div className="flex items-center space-x-3 sm:space-x-4 flex-1">
                                 {/* Subject Icon - Using mapped subject ID for consistency */}
-                                <div className={`w-14 h-14 ${colors.bg} rounded-2xl flex items-center justify-center shadow-md`}>
+                                <div className={`w-12 h-12 sm:w-14 sm:h-14 ${colors.bg} rounded-2xl flex items-center justify-center shadow-md`}>
                                   {(() => {
                                     const IconComponent = getSubjectIcon(subjectKey);
-                                    return <IconComponent className="h-7 w-7 text-white" />;
+                                    return <IconComponent className="h-6 w-6 sm:h-7 sm:w-7 text-white" />;
                                   })()}
                                 </div>
 
                                 {/* Subject Info */}
                                 <div className="flex-1">
-                                   <div className="flex items-center space-x-3 mb-2">
-                                     <h3 className="text-xl font-bold text-gray-800">
+                                   <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 mb-2">
+                                     <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-1 sm:mb-0">
                                        {subjectName}
                                      </h3>
                                      {isPremium && (
-                                       <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusChip.color}`}>
+                                       <span className={`px-2 py-1 sm:px-3 rounded-full text-xs sm:text-sm font-medium ${statusChip.color} self-start`}>
                                          {statusChip.text}
                                        </span>
                                      )}
@@ -1458,10 +1458,10 @@ const Dashboard = () => {
                                      />
                                    </div>
                                   
-                                    <p className="text-sm text-gray-600">
+                                    <p className="text-xs sm:text-sm text-gray-600">
                                       {isPremium ? `${Math.round(prediction.percentage || 0)}% accuracy in practice` : (
                                         <span className="flex items-center">
-                                          <Lock size={16} className="inline text-gray-400 mr-1" />% accuracy in practice
+                                          <Lock size={14} className="inline text-gray-400 mr-1" />% accuracy in practice
                                         </span>
                                       )}
                                     </p>
@@ -1469,13 +1469,13 @@ const Dashboard = () => {
                               </div>
 
                               {/* Large Grade Display */}
-                              <div className="text-center ml-6">
-                                <div className={`text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1`}>
+                              <div className="text-center mt-4 sm:mt-0 sm:ml-6">
+                                <div className={`text-3xl sm:text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1`}>
                                   {isPremium ? (prediction.grade || '0') : (
-                                    <Lock size={48} className="text-gray-400" />
+                                    <Lock size={36} className="sm:w-12 sm:h-12 text-gray-400 mx-auto" />
                                   )}
                                 </div>
-                                <div className="text-sm text-gray-500 uppercase tracking-wide font-medium">
+                                <div className="text-xs sm:text-sm text-gray-500 uppercase tracking-wide font-medium">
                                   Predicted
                                 </div>
                               </div>
