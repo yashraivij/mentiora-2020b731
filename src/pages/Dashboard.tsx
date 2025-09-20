@@ -538,9 +538,18 @@ const Dashboard = () => {
           console.log('Could not get streak for user:', user.user_id);
         }
         
+        // Generate random name if no display name or username
+        const generateRandomName = () => {
+          const firstNames = ['Alex', 'Jordan', 'Taylor', 'Morgan', 'Casey', 'Riley', 'Avery', 'Quinn', 'Sage', 'River'];
+          const lastNames = ['Smith', 'Johnson', 'Brown', 'Davis', 'Wilson', 'Miller', 'Moore', 'Taylor', 'Anderson', 'Thomas'];
+          const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+          const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+          return `${firstName} ${lastName}`;
+        };
+        
         weeklyLeaderboard.push({
           user_id: user.user_id,
-          name: profile?.display_name || profile?.username || 'Anonymous',
+          name: profile?.display_name || profile?.username || generateRandomName(),
           mp: user.total_points, // Using total MP as placeholder
           streak: userStreak,
           isCurrentUser: user.user_id === currentUserId,
@@ -631,9 +640,18 @@ const Dashboard = () => {
           console.log('Could not get streak for user:', user.user_id);
         }
         
+        // Generate random name if no display name or username
+        const generateRandomName = () => {
+          const firstNames = ['Alex', 'Jordan', 'Taylor', 'Morgan', 'Casey', 'Riley', 'Avery', 'Quinn', 'Sage', 'River'];
+          const lastNames = ['Smith', 'Johnson', 'Brown', 'Davis', 'Wilson', 'Miller', 'Moore', 'Taylor', 'Anderson', 'Thomas'];
+          const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+          const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+          return `${firstName} ${lastName}`;
+        };
+        
         allTimeLeaderboard.push({
           user_id: user.user_id,
-          name: profile?.display_name || profile?.username || 'Anonymous',
+          name: profile?.display_name || profile?.username || generateRandomName(),
           mp: user.total_points,
           streak: userStreak,
           isCurrentUser: user.user_id === currentUserId,
