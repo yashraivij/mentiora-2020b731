@@ -373,36 +373,47 @@ const Dashboard = () => {
     try {
       // Use user's timezone (default America/Los_Angeles as per requirements)
       const userTimezone = 'America/Los_Angeles';
-      const now = new Date();
       
-      // Get today's date boundaries in user's timezone
-      const todayStart = new Date(now.toLocaleString("en-US", { timeZone: userTimezone }));
-      todayStart.setHours(0, 0, 0, 0);
+      // Get current date in user's timezone
+      const nowInTimezone = new Date().toLocaleString("en-US", { timeZone: userTimezone });
+      const todayInTimezone = new Date(nowInTimezone);
       
-      const todayEnd = new Date(todayStart);
-      todayEnd.setHours(23, 59, 59, 999);
+      // Set to start of day in user's timezone
+      const startOfDay = new Date(todayInTimezone);
+      startOfDay.setHours(0, 0, 0, 0);
       
-      // Convert to UTC for database query
-      const utcTodayStart = new Date(todayStart.getTime() - (todayStart.getTimezoneOffset() * 60000));
-      const utcTodayEnd = new Date(todayEnd.getTime() - (todayEnd.getTimezoneOffset() * 60000));
+      // Set to end of day in user's timezone  
+      const endOfDay = new Date(todayInTimezone);
+      endOfDay.setHours(23, 59, 59, 999);
       
-      // Get today's activities
-      const { data: todayActivities } = await supabase
+      console.log('Calculating MP for date range:', startOfDay.toISOString(), 'to', endOfDay.toISOString());
+      
+      // Get today's activities (using a broader time range to ensure we catch all activities)
+      const { data: todayActivities, error } = await supabase
         .from('user_activities')
-        .select('activity_type')
+        .select('activity_type, created_at')
         .eq('user_id', user.id)
-        .gte('created_at', utcTodayStart.toISOString())
-        .lte('created_at', utcTodayEnd.toISOString());
+        .gte('created_at', startOfDay.toISOString())
+        .lte('created_at', endOfDay.toISOString());
+      
+      console.log('Today\'s activities found:', todayActivities);
+      
+      if (error) {
+        console.error('Error fetching activities:', error);
+        throw error;
+      }
       
       let earnedToday = 0;
       
-      if (todayActivities) {
+      if (todayActivities && todayActivities.length > 0) {
         // Count different activity types and calculate MP according to rules
         const dailyLoginCount = todayActivities.filter(a => a.activity_type === 'daily_login').length;
         const practiceCompletions = todayActivities.filter(a => a.activity_type === 'practice_completed').length;
         const weeklyTopicsAwards = todayActivities.filter(a => a.activity_type === 'weekly_3_topics_awarded').length;
         const weeklyPracticeAwards = todayActivities.filter(a => a.activity_type === 'weekly_5_practice_awarded').length;
         const streakAwards = todayActivities.filter(a => a.activity_type === 'streak_7_days_awarded').length;
+        
+        console.log('Activity counts:', { dailyLoginCount, practiceCompletions, weeklyTopicsAwards, weeklyPracticeAwards, streakAwards });
         
         // Calculate MP earned today
         earnedToday = 
@@ -413,12 +424,14 @@ const Dashboard = () => {
           (streakAwards * 500);                  // 500 MP for 7-day streak
       }
       
+      console.log('Total MP earned today:', earnedToday);
       setTodayEarnedMP(earnedToday);
     } catch (error) {
       console.error('Error calculating today\'s earned MP:', error);
       // Fallback to userStats calculation if database query fails
       if (userStats) {
         const fallbackMP = (userStats.loginToday ? 10 : 0) + (userStats.practiceToday ? 40 : 0);
+        console.log('Using fallback MP calculation:', fallbackMP);
         setTodayEarnedMP(fallbackMP);
       } else {
         setTodayEarnedMP(0);
