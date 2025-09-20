@@ -556,32 +556,49 @@ const Dashboard = () => {
       let userProfiles = [];
       
       if (userIds.length > 0) {
-        const { data: profiles, error: profilesError } = await supabase
+        // First, get public profiles
+        const { data: publicProfiles, error: publicProfilesError } = await supabase
           .from('public_profiles')
           .select('user_id, username, display_name, streak_days')
           .in('user_id', userIds);
         
-        if (!profilesError && profiles) {
-          userProfiles = profiles;
+        if (!publicProfilesError && publicProfiles) {
+          userProfiles = publicProfiles;
         }
         
-        // Also check users without public profiles
-        const { data: allUsersWithMP, error: allUsersError } = await supabase
-          .from('user_points')
-          .select('user_id')
-          .in('user_id', userIds);
+        // Get missing users from profiles table as fallback
+        const existingUserIds = userProfiles.map(p => p.user_id);
+        const missingUserIds = userIds.filter(id => !existingUserIds.includes(id));
         
-        if (!allUsersError && allUsersWithMP) {
-          for (const userPoint of allUsersWithMP) {
-            if (!userProfiles.find(p => p.user_id === userPoint.user_id)) {
+        if (missingUserIds.length > 0) {
+          const { data: fallbackProfiles, error: fallbackError } = await supabase
+            .from('profiles')
+            .select('id, full_name, username, email')
+            .in('id', missingUserIds);
+          
+          if (!fallbackError && fallbackProfiles) {
+            for (const profile of fallbackProfiles) {
               userProfiles.push({
-                user_id: userPoint.user_id,
-                username: 'Anonymous',
-                display_name: 'Anonymous',
+                user_id: profile.id,
+                username: profile.username || profile.full_name || profile.email?.split('@')[0] || 'Anonymous',
+                display_name: profile.full_name || profile.username || profile.email?.split('@')[0] || 'Anonymous',
                 streak_days: 0
               });
             }
           }
+        }
+        
+        // Final fallback for any remaining users
+        const finalExistingIds = userProfiles.map(p => p.user_id);
+        const stillMissingIds = userIds.filter(id => !finalExistingIds.includes(id));
+        
+        for (const userId of stillMissingIds) {
+          userProfiles.push({
+            user_id: userId,
+            username: 'Anonymous',
+            display_name: 'Anonymous',
+            streak_days: 0
+          });
         }
       }
       
@@ -639,12 +656,40 @@ const Dashboard = () => {
       
       // Get profile data for these users
       const userIds = allUsers.map(u => u.user_id);
-      const { data: profiles, error: profilesError } = await supabase
+      
+      // First, get public profiles
+      const { data: publicProfiles, error: publicProfilesError } = await supabase
         .from('public_profiles')
         .select('user_id, username, display_name, streak_days')
         .in('user_id', userIds);
       
-      const profilesMap = new Map((profiles || []).map(p => [p.user_id, p]));
+      const profilesMap = new Map();
+      
+      if (!publicProfilesError && publicProfiles) {
+        publicProfiles.forEach(p => profilesMap.set(p.user_id, p));
+      }
+      
+      // Get missing users from profiles table as fallback
+      const existingUserIds = Array.from(profilesMap.keys());
+      const missingUserIds = userIds.filter(id => !existingUserIds.includes(id));
+      
+      if (missingUserIds.length > 0) {
+        const { data: fallbackProfiles, error: fallbackError } = await supabase
+          .from('profiles')
+          .select('id, full_name, username, email')
+          .in('id', missingUserIds);
+        
+        if (!fallbackError && fallbackProfiles) {
+          for (const profile of fallbackProfiles) {
+            profilesMap.set(profile.id, {
+              user_id: profile.id,
+              username: profile.username || profile.full_name || profile.email?.split('@')[0] || 'Anonymous',
+              display_name: profile.full_name || profile.username || profile.email?.split('@')[0] || 'Anonymous',
+              streak_days: 0
+            });
+          }
+        }
+      }
       const currentUserId = (await supabase.auth.getUser()).data.user?.id;
       
       // Transform to leaderboard format
