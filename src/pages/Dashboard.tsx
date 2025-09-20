@@ -1941,8 +1941,8 @@ const Dashboard = () => {
                     <p className="font-bold text-gray-800">Complete 1 practice set</p>
                     <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
                       <div 
-                        className={`${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
-                        style={{width: (userStats?.practiceToday || todayEarnedMP >= 40) ? '100%' : '20%'}}
+                        className={`${(userStats?.practiceToday || userStats?.weeklyPracticeCount > 0) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
+                        style={{width: (userStats?.practiceToday || userStats?.weeklyPracticeCount > 0) ? '100%' : '20%'}}
                       ></div>
                     </div>
                   </div>
