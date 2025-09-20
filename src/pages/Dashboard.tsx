@@ -1472,7 +1472,7 @@ const Dashboard = () => {
                               <div className="text-center ml-6">
                                 <div className={`text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1`}>
                                   {isPremium ? (prediction.grade || '0') : (
-                                    <span className="bg-gray-300 text-gray-300 rounded px-1 select-none">8</span>
+                                    <Lock size={48} className="text-gray-400" />
                                   )}
                                 </div>
                                 <div className="text-sm text-gray-500 uppercase tracking-wide font-medium">
