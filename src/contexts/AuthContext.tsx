@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
@@ -121,16 +120,22 @@ const refreshSubscription = async (userId?: string) => {
             await refreshSubscription(session.user.id);
             // Handle daily login MP reward server-side (only once per day)
             if (event === 'SIGNED_IN') {
+              console.log('Session detected for user:', session.user.email);
               const userId = session.user.id;
               const today = new Date().toDateString();
               const lastLoginDateKey = `lastDailyLoginDate_${userId}`;
               const lastLoginDate = localStorage.getItem(lastLoginDateKey);
               
+              console.log('Daily login check:', { userId, today, lastLoginDate, shouldAward: lastLoginDate !== today });
+              
               // Only attempt daily login award if it hasn't been awarded today
               if (lastLoginDate !== today) {
                 try {
+                  console.log('Attempting to award daily login MP...');
                   const { MPPointsSystemClient } = await import('@/lib/mpPointsSystemClient');
                   const result = await MPPointsSystemClient.awardDailyLogin(userId);
+                  
+                  console.log('Daily login award result:', result);
                   
                   if (result.success) {
                     // Mark today as the last login date regardless of whether points were awarded
@@ -140,15 +145,19 @@ const refreshSubscription = async (userId?: string) => {
                       console.log(`Daily login bonus: +${result.awarded} MP`);
                       // Show MP reward toast for login
                       if (showMPReward) {
-                        showMPReward(result.awarded, "Quest complete: Log in today");
+                        showMPReward(result.awarded, "Daily quest complete: Sign in today");
                       }
                     } else {
-                      console.log(`Daily login already awarded today`);
+                      console.log('Daily login already awarded today');
                     }
+                  } else {
+                    console.error('Failed to award daily login:', result.message);
                   }
                 } catch (error) {
-                  console.error('Error awarding daily login MP:', error);
+                  console.error('Error awarding daily login:', error);
                 }
+              } else {
+                console.log('Daily login already awarded today (localStorage check)');
               }
             }
           }, 0);
