@@ -903,13 +903,17 @@ const Dashboard = () => {
               transition={{ delay: subject.topics.length * 0.1 }}
             >
               <motion.button
-                onClick={() => navigate("/predicted-exam/geography")}
-                className="relative w-24 h-24 rounded-full border-4 border-orange-400 shadow-xl bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 transition-all duration-300"
+                onClick={isPremium ? () => navigate("/predicted-exam/geography") : openPaymentLink}
+                className={`relative w-24 h-24 rounded-full border-4 shadow-xl transition-all duration-300 ${
+                  isPremium 
+                    ? "border-orange-400 bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600" 
+                    : "border-gray-300 bg-gradient-to-br from-gray-400 to-gray-500 cursor-pointer"
+                }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <div className="h-8 w-8 text-white absolute inset-0 m-auto">
-                  <Trophy className="h-full w-full" />
+                  {isPremium ? <Trophy className="h-full w-full" /> : <Lock className="h-full w-full" />}
                 </div>
               </motion.button>
               
@@ -917,6 +921,9 @@ const Dashboard = () => {
                 <p className="text-sm font-bold text-foreground">
                   Predicted 2026 Exam Paper 1
                 </p>
+                {!isPremium && (
+                  <p className="text-xs text-gray-500 mt-1">Premium Required</p>
+                )}
               </div>
             </motion.div>
 
@@ -927,13 +934,17 @@ const Dashboard = () => {
               transition={{ delay: (subject.topics.length * 0.1) + 0.1 }}
             >
               <motion.button
-                onClick={() => navigate("/predicted-exam/geography-paper-2")}
-                className="relative w-24 h-24 rounded-full border-4 border-orange-400 shadow-xl bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 transition-all duration-300"
+                onClick={isPremium ? () => navigate("/predicted-exam/geography-paper-2") : openPaymentLink}
+                className={`relative w-24 h-24 rounded-full border-4 shadow-xl transition-all duration-300 ${
+                  isPremium 
+                    ? "border-orange-400 bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600" 
+                    : "border-gray-300 bg-gradient-to-br from-gray-400 to-gray-500 cursor-pointer"
+                }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <div className="h-8 w-8 text-white absolute inset-0 m-auto">
-                  <Trophy className="h-full w-full" />
+                  {isPremium ? <Trophy className="h-full w-full" /> : <Lock className="h-full w-full" />}
                 </div>
               </motion.button>
               
@@ -941,6 +952,9 @@ const Dashboard = () => {
                 <p className="text-sm font-bold text-foreground">
                   Predicted 2026 Exam Paper 2
                 </p>
+                {!isPremium && (
+                  <p className="text-xs text-gray-500 mt-1">Premium Required</p>
+                )}
               </div>
             </motion.div>
           </div>
@@ -953,13 +967,17 @@ const Dashboard = () => {
             transition={{ delay: subject.topics.length * 0.1 }}
           >
             <motion.button
-              onClick={() => navigate(`/predicted-exam/${subject.id}`)}
-              className="relative w-24 h-24 rounded-full border-4 border-orange-400 shadow-xl bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 transition-all duration-300"
+              onClick={isPremium ? () => navigate(`/predicted-exam/${subject.id}`) : openPaymentLink}
+              className={`relative w-24 h-24 rounded-full border-4 shadow-xl transition-all duration-300 ${
+                isPremium 
+                  ? "border-orange-400 bg-gradient-to-br from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600" 
+                  : "border-gray-300 bg-gradient-to-br from-gray-400 to-gray-500 cursor-pointer"
+              }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <div className="h-8 w-8 text-white absolute inset-0 m-auto">
-                <Trophy className="h-full w-full" />
+                {isPremium ? <Trophy className="h-full w-full" /> : <Lock className="h-full w-full" />}
               </div>
             </motion.button>
             
@@ -967,6 +985,9 @@ const Dashboard = () => {
               <p className="text-sm font-bold text-foreground">
                 Predicted 2026 Exam
               </p>
+              {!isPremium && (
+                <p className="text-xs text-gray-500 mt-1">Premium Required</p>
+              )}
             </div>
           </motion.div>
         )}
