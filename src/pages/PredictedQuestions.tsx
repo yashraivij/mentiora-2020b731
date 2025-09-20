@@ -6,14 +6,13 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BookOpen, Clock, Crown, Target, Sparkles, Rocket, Zap, CheckCircle, RotateCcw } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
-import { useAuth } from "@/contexts/AuthContext";
+
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 const PredictedQuestions = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { isPremium } = useAuth();
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [completedExams, setCompletedExams] = useState<{[key: string]: any}>({});
   const [loading, setLoading] = useState(true);
@@ -175,13 +174,10 @@ const PredictedQuestions = () => {
             {getSubjectDisplayName(subject, examBoard)}
           </CardTitle>
           <CardDescription className="text-white/80 text-sm">
-            {isCompleted ? (
-              <>Last Grade: {!isPremium ? "?" : completion.grade} ({!isPremium ? "?" : completion.percentage}%)</>
-            ) : (
-              subject.id === 'combined-science-aqa' ? 
-                'Biology topics 1–4: Cell Biology; Organisation; Infection and response; and Bioenergetics' : 
-                'Full predicted paper practice'
-            )}
+            {isCompleted ? `Last Grade: ${completion.grade} (${completion.percentage}%)` : 
+             subject.id === 'combined-science-aqa' ? 
+               'Biology topics 1–4: Cell Biology; Organisation; Infection and response; and Bioenergetics' : 
+               'Full predicted paper practice'}
           </CardDescription>
         </CardHeader>
         

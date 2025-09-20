@@ -20,7 +20,7 @@ interface PredictivePerformanceCardProps {
 }
 
 export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanceCardProps) => {
-  const { user, isPremium } = useAuth();
+  const { user } = useAuth();
   const [predictedExamCompletions, setPredictedExamCompletions] = useState<any[]>([]);
 
   useEffect(() => {
@@ -197,7 +197,7 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
               <div className="flex justify-between text-xs text-muted-foreground">
                 <span>Average Grade</span>
                 <span className="font-semibold bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent">
-                  {!isPremium ? "?" : averageGrade.toFixed(1)}
+                  {averageGrade.toFixed(1)}
                 </span>
               </div>
               
@@ -217,9 +217,9 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
                       </div>
                     </div>
                     <div className="flex items-center gap-1">
-                      <span className="text-xs font-bold text-foreground">{!isPremium ? "?" : (subject.grade === 0 ? 'U' : subject.grade)}</span>
-                      {isPremium && subject.grade >= 8 && <Star className="h-3 w-3 text-yellow-500" />}
-                      {isPremium && subject.grade === 9 && <Trophy className="h-3 w-3 text-amber-500" />}
+                      <span className="text-xs font-bold text-foreground">{subject.grade === 0 ? 'U' : subject.grade}</span>
+                      {subject.grade >= 8 && <Star className="h-3 w-3 text-yellow-500" />}
+                      {subject.grade === 9 && <Trophy className="h-3 w-3 text-amber-500" />}
                     </div>
                   </div>
                 ))}
