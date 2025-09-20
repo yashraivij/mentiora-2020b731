@@ -1571,7 +1571,7 @@ const Dashboard = () => {
                 <div className="w-full bg-gray-200 rounded-full h-4">
                   <div 
                     className="bg-blue-400 h-4 rounded-full transition-all duration-500" 
-                    style={{width: `${userStats ? Math.min(((userStats.loginToday ? 10 : 0) + (userStats.practiceToday ? 40 : 0)) / 50 * 100, 100) : 0}%`}}
+                    style={{width: `${userStats ? Math.min((todayEarnedMP || ((userStats.loginToday ? 10 : 0) + (userStats.practiceToday ? 40 : 0))) / 50 * 100, 100) : 0}%`}}
                   ></div>
                 </div>
               </div>
