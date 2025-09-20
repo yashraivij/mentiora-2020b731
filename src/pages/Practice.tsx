@@ -442,7 +442,7 @@ const Practice = () => {
           
           // Show toast for practice completion (main reward)
           if (result.breakdown?.practice > 0) {
-            showMPReward(result.breakdown.practice, "Practice complete");
+            showMPReward(result.breakdown.practice, "Quest complete: Complete 1 practice set");
           }
           
           if (result.breakdown) {
@@ -450,13 +450,13 @@ const Practice = () => {
             
             // Show additional toasts for weekly bonuses with proper delays
             if (result.breakdown.weeklyTopics > 0) {
-              setTimeout(() => showMPReward(result.breakdown.weeklyTopics, "Weekly bonus"), 500);
+              setTimeout(() => showMPReward(result.breakdown.weeklyTopics, "Quest complete: Practice 3 topics this week"), 500);
             }
             if (result.breakdown.weeklyPractice > 0) {
-              setTimeout(() => showMPReward(result.breakdown.weeklyPractice, "Weekly challenge"), 1000);
+              setTimeout(() => showMPReward(result.breakdown.weeklyPractice, "Quest complete: Complete 5 practice sets this week"), 1000);
             }
             if (result.breakdown.streak > 0) {
-              setTimeout(() => showMPReward(result.breakdown.streak, "Streak achieved"), 1500);
+              setTimeout(() => showMPReward(result.breakdown.streak, "Quest complete: 7-day streak achieved"), 1500);
             }
           }
         }
