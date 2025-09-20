@@ -579,7 +579,7 @@ const Practice = () => {
               </Button>
               <Button 
                 onClick={() => window.location.reload()}
-                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 font-semibold border-0"
+                className="bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 font-semibold border-0"
               >
                 Practice More
               </Button>
