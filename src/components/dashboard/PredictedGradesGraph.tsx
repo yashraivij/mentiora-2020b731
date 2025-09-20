@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { TrendingUp, Crown, Target, Sparkles, Trophy, Zap, Lock } from "lucide-react";
+import { TrendingUp, Crown, Target, Sparkles, Trophy, Zap } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { curriculum } from "@/data/curriculum";
@@ -287,7 +287,6 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
       <span className={!isPremium ? "relative inline-block" : ""}>
         {!isPremium && (
           <span className="absolute inset-0 bg-white dark:bg-gray-900 rounded px-1 flex items-center justify-center text-gray-500 dark:text-gray-400 text-xs font-medium border border-gray-200 dark:border-gray-600 z-10">
-            <Lock className="w-3 h-3 mr-1" />
             Premium
           </span>
         )}
@@ -483,9 +482,8 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
                           {/* Enhanced Grade number */}
                           <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110 ${!isPremium ? 'relative' : ''}`}>
                             {!isPremium && (
-                              <div className="absolute inset-0 bg-white dark:bg-gray-900 rounded-3xl flex flex-col items-center justify-center z-20 border border-gray-200 dark:border-gray-700">
-                                <Lock className="h-8 w-8 text-gray-400 dark:text-gray-500 mb-2" />
-                                <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-full border border-gray-200 dark:border-gray-600">
+                              <div className="absolute inset-0 bg-white dark:bg-gray-900 rounded-3xl flex items-center justify-center z-20">
+                                <div className="text-sm font-semibold text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">
                                   Premium
                                 </div>
                               </div>
@@ -513,8 +511,8 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
                           {grade.finalGrade !== '–' && (
                             <div className="absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1 relative">
                               {!isPremium && (
-                                <div className="absolute inset-0 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center z-10 border border-gray-200 dark:border-gray-700">
-                                  <Lock className="w-3 h-3 text-gray-400 dark:text-gray-500" />
+                                <div className="absolute inset-0 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center z-10">
+                                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
                                 </div>
                               )}
                               <span className={`text-xs font-bold text-white ${!isPremium ? 'invisible' : ''}`}>{grade.finalPercentage}%</span>
@@ -528,9 +526,8 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
                           {grade.isGrade7Plus && (
                             <div className="mt-2 relative">
                               {!isPremium && (
-                                <div className="absolute inset-0 bg-white dark:bg-gray-900 rounded flex items-center justify-center z-10 border border-gray-200 dark:border-gray-700">
-                                  <div className="flex items-center gap-1 text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded border border-gray-200 dark:border-gray-600">
-                                    <Lock className="w-3 h-3" />
+                                <div className="absolute inset-0 bg-white dark:bg-gray-900 rounded flex items-center justify-center z-10">
+                                  <div className="text-xs font-medium text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 px-2 py-1 rounded border border-gray-200 dark:border-gray-600">
                                     Premium
                                   </div>
                                 </div>
