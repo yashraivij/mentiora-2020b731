@@ -1006,9 +1006,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white flex">
-      {/* Left Sidebar - Duolingo Style */}
-      <div className="w-64 bg-white border-r-2 border-gray-100 flex flex-col py-6">
+    <div className="min-h-screen bg-white flex flex-col md:flex-row">
+      {/* Left Sidebar - Duolingo Style - Hidden on mobile */}
+      <div className="hidden md:flex w-64 bg-white border-r-2 border-gray-100 flex-col py-6">
         {/* Logo */}
         <div className="px-6 mb-8 flex items-center space-x-3">
           <img src={mentioraLogo} alt="Mentiora Logo" className="w-8 h-8" />
@@ -1069,11 +1069,34 @@ const Dashboard = () => {
       {/* Main Content */}
       <div className="flex-1 flex">
         {/* Main Learning Area */}
-        <div className="flex-1 p-8 max-w-4xl mx-auto">
+        <div className="flex-1 p-3 sm:p-4 md:p-8 max-w-4xl mx-auto pb-20 md:pb-8">
+          {/* Mobile Header - Only visible on mobile */}
+          <div className="md:hidden mb-4 p-3 bg-white rounded-xl shadow-sm border border-gray-100">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <img src={mentioraLogo} alt="Mentiora Logo" className="w-6 h-6" />
+                <h1 className="text-lg font-bold text-black">Mentiora</h1>
+                {isPremium && (
+                  <Crown className="w-4 h-4 text-yellow-500" />
+                )}
+              </div>
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-1">
+                  <Flame className="h-4 w-4 text-orange-400" />
+                  <span className="text-sm font-bold text-orange-500">{currentStreak}</span>
+                </div>
+                <div className="flex items-center space-x-1">
+                  <Gem className="h-4 w-4 text-cyan-400" />
+                  <span className="text-sm font-bold text-cyan-500">{userGems}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {activeTab === "learn" && (
             <div>
-              {/* Header with stats */}
-              <div className="flex items-center justify-between mb-8">
+              {/* Header with stats - Desktop only */}
+              <div className="hidden md:flex items-center justify-between mb-8">
               <div className="flex items-center space-x-6">
                 <div className="flex items-center space-x-2">
                   <Flame className="h-6 w-6 text-orange-400" />
@@ -1093,7 +1116,7 @@ const Dashboard = () => {
               {/* Subject Selection or Subject Path */}
               {!selectedSubject ? (
                 <div>
-                  <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8 text-center px-4">
                     Let's Smash GCSEs, {getFirstName()}!
                   </h2>
                   
@@ -1164,7 +1187,7 @@ const Dashboard = () => {
                     >
                       ← Back
                     </Button>
-                    <h2 className="text-3xl font-bold text-gray-800">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
                       {curriculum.find(s => s.id === selectedSubject)?.name}
                     </h2>
                   </div>
@@ -1351,32 +1374,32 @@ const Dashboard = () => {
               ) : (
                 <div className="max-w-4xl mx-auto space-y-6">
                   {/* Overall Summary Card */}
-                  <div className="bg-white rounded-3xl p-4 sm:p-8 shadow-lg border-4 border-yellow-200">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between">
-                      <div className="flex items-center space-x-3 sm:space-x-4">
-                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg">
-                          <Trophy className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
+                  <div className="bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-4 md:p-8 shadow-lg border-2 sm:border-4 border-yellow-200">
+                    <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg">
+                          <Trophy className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 text-white" />
                         </div>
                         <div>
-                          <h3 className="text-xl sm:text-2xl font-bold text-gray-800">
+                          <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 leading-tight">
                             Your average grade is {isPremium ? (predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0) : (
-                              <Lock size={20} className="sm:w-6 sm:h-6 inline text-gray-400" />
+                              <Lock size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 inline text-gray-400" />
                             )}. Keep it up!
                           </h3>
-                          <p className="text-sm sm:text-base text-gray-600">You're making great progress</p>
+                          <p className="text-sm md:text-base text-gray-600 mt-1">You're making great progress</p>
                         </div>
                       </div>
                       <Button
                         onClick={isPremium ? () => setActiveTab("learn") : () => navigate("/pricing")}
                         className={isPremium 
-                          ? "bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 sm:py-4 sm:px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 mt-4 sm:mt-0"
-                          : "bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-3 px-4 sm:py-4 sm:px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 mt-4 sm:mt-0"
+                          ? "bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 sm:py-3 sm:px-4 md:py-4 md:px-6 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 w-full sm:w-auto text-sm sm:text-base"
+                          : "bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-2 px-3 sm:py-3 sm:px-4 md:py-4 md:px-6 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 w-full sm:w-auto text-sm sm:text-base"
                         }
                       >
                         {isPremium ? "Start Practice" : (
-                          <div className="flex items-center space-x-2">
-                            <Crown className="h-4 w-4" />
-                            <span className="text-sm sm:text-base">Upgrade to Premium</span>
+                          <div className="flex items-center justify-center space-x-2">
+                            <Crown className="h-3 w-3 sm:h-4 sm:w-4" />
+                            <span>Upgrade to Premium</span>
                           </div>
                         )}
                       </Button>
@@ -1426,34 +1449,34 @@ const Dashboard = () => {
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 }}
                         >
-                          <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-200 border-2 border-gray-100">
-                            <div className="flex flex-col sm:flex-row sm:items-center justify-between">
-                              <div className="flex items-center space-x-3 sm:space-x-4 flex-1">
+                          <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-200 border border-gray-100">
+                            <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center justify-between">
+                              <div className="flex items-center space-x-3">
                                 {/* Subject Icon - Using mapped subject ID for consistency */}
-                                <div className={`w-12 h-12 sm:w-14 sm:h-14 ${colors.bg} rounded-2xl flex items-center justify-center shadow-md`}>
+                                <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 ${colors.bg} rounded-xl sm:rounded-2xl flex items-center justify-center shadow-md shrink-0`}>
                                   {(() => {
                                     const IconComponent = getSubjectIcon(subjectKey);
-                                    return <IconComponent className="h-6 w-6 sm:h-7 sm:w-7 text-white" />;
+                                    return <IconComponent className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-white" />;
                                   })()}
                                 </div>
 
                                 {/* Subject Info */}
-                                <div className="flex-1">
-                                   <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 mb-2">
-                                     <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-1 sm:mb-0">
+                                <div className="flex-1 min-w-0">
+                                   <div className="flex flex-col space-y-1 sm:space-y-0 sm:flex-row sm:items-center sm:space-x-3 mb-2">
+                                     <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-800 truncate">
                                        {subjectName}
                                      </h3>
                                      {isPremium && (
-                                       <span className={`px-2 py-1 sm:px-3 rounded-full text-xs sm:text-sm font-medium ${statusChip.color} self-start`}>
+                                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusChip.color} self-start shrink-0`}>
                                          {statusChip.text}
                                        </span>
                                      )}
                                    </div>
                                   
                                    {/* Progress Bar */}
-                                   <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
+                                   <div className="w-full bg-gray-200 rounded-full h-2 sm:h-3 mb-2">
                                      <div
-                                       className={`h-3 rounded-full ${getProgressColor(prediction.grade)} transition-all duration-700`}
+                                       className={`h-2 sm:h-3 rounded-full ${getProgressColor(prediction.grade)} transition-all duration-700`}
                                        style={{ width: isPremium ? `${Math.min(prediction.percentage || 0, 100)}%` : '0%' }}
                                      />
                                    </div>
@@ -1461,7 +1484,7 @@ const Dashboard = () => {
                                     <p className="text-xs sm:text-sm text-gray-600">
                                       {isPremium ? `${Math.round(prediction.percentage || 0)}% accuracy in practice` : (
                                         <span className="flex items-center">
-                                          <Lock size={14} className="inline text-gray-400 mr-1" />% accuracy in practice
+                                          <Lock size={12} className="sm:w-3.5 sm:h-3.5 inline text-gray-400 mr-1" />% accuracy in practice
                                         </span>
                                       )}
                                     </p>
@@ -1469,10 +1492,10 @@ const Dashboard = () => {
                               </div>
 
                               {/* Large Grade Display */}
-                              <div className="text-center mt-4 sm:mt-0 sm:ml-6">
-                                <div className={`text-3xl sm:text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1`}>
+                              <div className="text-center sm:ml-4 md:ml-6 shrink-0">
+                                <div className={`text-2xl sm:text-3xl md:text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1`}>
                                   {isPremium ? (prediction.grade || '0') : (
-                                    <Lock size={36} className="sm:w-12 sm:h-12 text-gray-400 mx-auto" />
+                                    <Lock size={28} className="sm:w-8 sm:h-8 md:w-12 md:h-12 text-gray-400 mx-auto" />
                                   )}
                                 </div>
                                 <div className="text-xs sm:text-sm text-gray-500 uppercase tracking-wide font-medium">
@@ -1494,8 +1517,8 @@ const Dashboard = () => {
             <div className="space-y-6">
               {/* Header */}
               <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-gray-800 mb-2">Leaderboards</h2>
-                <p className="text-lg text-gray-600">See how you rank against other students</p>
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2 px-4">Leaderboards</h2>
+                <p className="text-base sm:text-lg text-gray-600 px-4">See how you rank against other students</p>
               </div>
 
                {/* Leaderboard Tabs */}
@@ -1747,7 +1770,7 @@ const Dashboard = () => {
             <div className="space-y-6">
               {/* Header Bar */}
               <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold text-gray-800">Quests</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Quests</h2>
                 <div className="flex items-center space-x-6">
                   {/* MP Balance */}
                   <div className="flex items-center space-x-2 bg-white rounded-2xl px-6 py-3 shadow-lg border-2 border-gray-100">
@@ -2014,7 +2037,7 @@ const Dashboard = () => {
 
           {activeTab === "profile" && (
             <div className="space-y-8">
-              <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8 text-center px-4">
                 Profile Settings
               </h2>
 
@@ -2247,14 +2270,38 @@ const Dashboard = () => {
         </div>
       </div>
       
+      {/* Mobile Bottom Navigation - Only visible on mobile */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-2 py-1 z-40">
+        <div className="flex justify-around items-center">
+          {sidebarItems.slice(0, 5).map((item) => {
+            const Icon = item.icon;
+            const isActive = activeTab === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveTab(item.id)}
+                className={`flex flex-col items-center p-2 rounded-lg transition-all ${
+                  isActive 
+                    ? 'text-blue-600 bg-blue-50' 
+                    : 'text-gray-600 hover:text-gray-800'
+                }`}
+              >
+                <Icon className="h-5 w-5 mb-1" />
+                <span className="text-xs font-medium">{item.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      
       {/* Floating Feedback Button */}
       <button
         data-feedback-fish
         data-feedback-fish-userid={user?.email || ""}
-        className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 z-50 flex items-center justify-center"
+        className="fixed bottom-20 md:bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 z-50 flex items-center justify-center"
         title="Send Feedback"
       >
-        <span className="text-xl">💬</span>
+        <span className="text-lg md:text-xl">💬</span>
       </button>
     </div>
   );
