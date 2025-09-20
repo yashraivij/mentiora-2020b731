@@ -574,14 +574,11 @@ const Practice = () => {
             </div>
             
             <div className="flex flex-col space-y-2">
-              <Button onClick={() => navigate(`/dashboard?subject=${subjectId}`)}>
-                Back to {subject?.name}
-              </Button>
               <Button 
-                onClick={() => window.location.reload()}
+                onClick={() => navigate(`/dashboard?subject=${subjectId}`)}
                 className="bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 font-semibold border-0"
               >
-                Practice More
+                Back to {subject?.name}
               </Button>
             </div>
           </CardContent>
