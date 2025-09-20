@@ -5,7 +5,6 @@ import { Lock, Crown, LineChart, Star, Trophy } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
-import { useSubscription } from "@/hooks/useSubscription";
 import { useEffect, useState } from "react";
 
 interface UserProgress {
@@ -22,7 +21,6 @@ interface PredictivePerformanceCardProps {
 
 export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanceCardProps) => {
   const { user } = useAuth();
-  const { isPremium, openPaymentLink } = useSubscription();
   const [predictedExamCompletions, setPredictedExamCompletions] = useState<any[]>([]);
 
   useEffect(() => {
@@ -199,14 +197,7 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
               <div className="flex justify-between text-xs text-muted-foreground">
                 <span>Average Grade</span>
                 <span className="font-semibold bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent">
-                  {isPremium ? (
-                    averageGrade.toFixed(1)
-                  ) : (
-                    <span className="relative inline-flex items-center">
-                      <span className="blur-sm select-none">7.5</span>
-                      <Lock className="absolute inset-0 h-2 w-2 text-muted-foreground m-auto" />
-                    </span>
-                  )}
+                  {averageGrade.toFixed(1)}
                 </span>
               </div>
               
@@ -226,37 +217,16 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
                       </div>
                     </div>
                     <div className="flex items-center gap-1">
-                      <span className="text-xs font-bold text-foreground">
-                        {isPremium ? (
-                          subject.grade === 0 ? 'U' : subject.grade
-                        ) : (
-                          <span className="relative inline-flex items-center">
-                            <span className="blur-sm select-none">8</span>
-                            <Lock className="absolute inset-0 h-2 w-2 text-muted-foreground m-auto" />
-                          </span>
-                        )}
-                      </span>
-                      {isPremium && subject.grade >= 8 && <Star className="h-3 w-3 text-yellow-500" />}
-                      {isPremium && subject.grade === 9 && <Trophy className="h-3 w-3 text-amber-500" />}
+                      <span className="text-xs font-bold text-foreground">{subject.grade === 0 ? 'U' : subject.grade}</span>
+                      {subject.grade >= 8 && <Star className="h-3 w-3 text-yellow-500" />}
+                      {subject.grade === 9 && <Trophy className="h-3 w-3 text-amber-500" />}
                     </div>
                   </div>
                 ))}
               </div>
               
               <div className="text-xs text-muted-foreground text-center pt-2 border-t border-muted/20">
-                {isPremium ? (
-                  subjects.length > 3 ? `+${subjects.length - 3} more subjects` : 'All subjects shown'
-                ) : (
-                  <Button 
-                    onClick={openPaymentLink}
-                    variant="ghost" 
-                    size="sm" 
-                    className="text-xs h-auto p-1 text-emerald-600 hover:text-emerald-700"
-                  >
-                    <Crown className="h-3 w-3 mr-1" />
-                    Upgrade to see all grades
-                  </Button>
-                )}
+                {subjects.length > 3 ? `+${subjects.length - 3} more subjects` : 'All subjects shown'}
               </div>
             </div>
           ) : (
