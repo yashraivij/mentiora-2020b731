@@ -5,6 +5,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
 
 interface PremiumPromoModalProps {
   isOpen: boolean;
@@ -13,9 +14,11 @@ interface PremiumPromoModalProps {
 }
 
 export const PremiumPromoModal = ({ isOpen, onClose, onUpgrade }: PremiumPromoModalProps) => {
+  const navigate = useNavigate();
+  
   const handleUpgrade = () => {
     onClose();
-    onUpgrade();
+    navigate('/pricing');
   };
 
   return (

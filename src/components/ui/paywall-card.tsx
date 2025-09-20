@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Lock, Crown, Sparkles, Star, Zap, Trophy, TrendingUp, Brain, Target, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 interface PaywallCardProps {
   title: string;
@@ -74,6 +75,12 @@ const getThemeConfig = (theme: 'grades' | 'questions' | 'notebook' = 'grades') =
 
 export const PaywallCard = ({ title, description, onUpgrade, children, theme = 'grades', benefits = [] }: PaywallCardProps) => {
   const config = getThemeConfig(theme);
+  const navigate = useNavigate();
+  
+  const handleUpgrade = () => {
+    navigate('/pricing');
+  };
+
   return (
     <Card className={`relative overflow-hidden border-0 bg-gradient-to-br ${config.gradients.main} shadow-2xl`}>
       {/* Animated background gradient */}
@@ -241,7 +248,7 @@ export const PaywallCard = ({ title, description, onUpgrade, children, theme = '
             whileTap={{ scale: 0.95 }}
           >
             <Button 
-              onClick={onUpgrade}
+              onClick={handleUpgrade}
               size="lg"
               className={`relative bg-gradient-to-r ${config.gradients.button} hover:${config.gradients.buttonHover} text-white font-bold px-8 py-4 rounded-xl shadow-2xl transition-all duration-300 text-lg overflow-hidden group`}
               style={{ 

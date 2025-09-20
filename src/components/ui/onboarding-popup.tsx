@@ -38,6 +38,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { curriculum } from "@/data/curriculum";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 interface OnboardingPopupProps {
   isOpen: boolean;
@@ -81,6 +82,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   
   const { openPaymentLink } = useSubscription();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSubjectToggle = (subjectId: string) => {
     setSelectedSubjects(prev => 
@@ -217,7 +219,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
   };
 
   const handleUpgrade = () => {
-    openPaymentLink();
+    navigate('/pricing');
     onSubjectsAdded(); // Call when user upgrades
     onClose();
   };

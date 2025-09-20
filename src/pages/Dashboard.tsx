@@ -1301,7 +1301,7 @@ const Dashboard = () => {
 
                         <div className="pt-4">
                           <Button
-                            onClick={isPremium ? () => setActiveTab("learn") : openPaymentLink}
+                            onClick={isPremium ? () => setActiveTab("learn") : () => navigate("/pricing")}
                             className={isPremium 
                               ? "bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
                               : "bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
@@ -1337,7 +1337,7 @@ const Dashboard = () => {
                         </div>
                       </div>
                       <Button
-                        onClick={isPremium ? () => setActiveTab("learn") : openPaymentLink}
+                        onClick={isPremium ? () => setActiveTab("learn") : () => navigate("/pricing")}
                         className={isPremium 
                           ? "bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200"
                           : "bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200"

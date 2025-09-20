@@ -12,6 +12,7 @@ import {
   Lock,
   Shield
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface PremiumUpgradeModalProps {
   isOpen: boolean;
@@ -20,9 +21,11 @@ interface PremiumUpgradeModalProps {
 }
 
 export const PremiumUpgradeModal = ({ isOpen, onClose, onUpgrade }: PremiumUpgradeModalProps) => {
+  const navigate = useNavigate();
+  
   const handleUpgrade = () => {
-    onUpgrade();
     onClose();
+    navigate('/pricing');
   };
 
   return (

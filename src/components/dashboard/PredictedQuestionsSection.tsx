@@ -16,8 +16,8 @@ export const PredictedQuestionsSection = ({ isPremium = false, onUpgrade }: Pred
   const handleStartPredicted = () => {
     if (isPremium) {
       navigate('/predicted-questions');
-    } else if (onUpgrade) {
-      onUpgrade();
+    } else {
+      navigate('/pricing');
     }
   };
 
