@@ -284,13 +284,13 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
 
   const getTooltipContent = (grade: GradeData, isPremium: boolean) => {
     const BlurSpan = ({ children }: { children: React.ReactNode }) => (
-      <span className={!isPremium ? "relative inline-block" : ""}>
+      <span className="relative inline-block">
         {!isPremium && (
-          <span className="absolute inset-0 bg-white dark:bg-gray-900 rounded px-1 flex items-center justify-center text-gray-500 dark:text-gray-400 text-xs font-medium border border-gray-200 dark:border-gray-600 z-10">
-            Premium
+          <span className="absolute inset-0 bg-white dark:bg-gray-900 rounded px-2 py-0.5 flex items-center justify-center text-gray-500 dark:text-gray-400 text-xs font-medium border border-gray-200 dark:border-gray-600 z-20 opacity-100 min-w-[60px]">
+            🔒
           </span>
         )}
-        <span className={!isPremium ? "invisible" : ""}>{children}</span>
+        <span className={!isPremium ? "invisible opacity-0" : ""}>{children}</span>
       </span>
     );
     
@@ -424,18 +424,34 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
           </div>
           <div className="flex items-center space-x-6">
             {averageGrade > 0 && (
-              <div className="text-center p-3 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl border border-purple-500/20">
-                <div className={`text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent`}>
-                  {isPremium && !subscriptionLoading ? averageGrade.toFixed(1) : '•.•'}
+              <div className="text-center p-3 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl border border-purple-500/20 relative">
+                {!isPremium && (
+                  <div className="absolute inset-0 bg-white dark:bg-gray-900 rounded-2xl flex items-center justify-center z-10 opacity-100">
+                    <div className="text-sm font-semibold text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">
+                      🔒 Premium
+                    </div>
+                  </div>
+                )}
+                <div className={`text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent ${!isPremium ? 'invisible' : ''}`}>
+                  {averageGrade.toFixed(1)}
                 </div>
-                <div className="text-xs text-muted-foreground font-semibold">Avg Grade</div>
+                <div className={`text-xs text-muted-foreground font-semibold ${!isPremium ? 'invisible' : ''}`}>Avg Grade</div>
               </div>
             )}
             {grade7PlusCount > 0 && (
-              <Badge className="bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-600 text-white border-0 px-4 py-2 text-sm font-bold shadow-lg shadow-emerald-500/25 animate-pulse">
-                <Trophy className="h-4 w-4 mr-2 animate-bounce" />
-                {grade7PlusCount} Grade 7+ 🎉
-              </Badge>
+              <div className="relative">
+                {!isPremium && (
+                  <div className="absolute inset-0 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center z-10 opacity-100">
+                    <div className="text-sm font-semibold text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">
+                      🔒 Premium
+                    </div>
+                  </div>
+                )}
+                <Badge className={`bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-600 text-white border-0 px-4 py-2 text-sm font-bold shadow-lg shadow-emerald-500/25 animate-pulse ${!isPremium ? 'invisible' : ''}`}>
+                  <Trophy className="h-4 w-4 mr-2 animate-bounce" />
+                  {grade7PlusCount} Grade 7+ 🎉
+                </Badge>
+              </div>
             )}
           </div>
         </div>
