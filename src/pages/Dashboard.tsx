@@ -503,8 +503,12 @@ const Dashboard = () => {
       loadUserSubjects();
       loadUserProgress();
       loadLeaderboardData();
+      loadPredictedGrades(); // Load predicted grades on user load
       if (activeTab === "notes") {
         loadNotebookEntries();
+      }
+      if (activeTab === "progress") {
+        loadPredictedGrades(); // Refresh predicted grades when viewing progress tab
       }
     }
   }, [user?.id, activeTab]);
@@ -533,9 +537,10 @@ const Dashboard = () => {
         loadUserStats(); // Refresh stats every 30 seconds
         calculateTodayEarnedMP(); // Refresh today's earned MP
         loadLeaderboardData(); // Refresh leaderboard every 30 seconds for live updates
+        loadPredictedGrades(); // Refresh predicted grades to catch new completions
       }
     }, 30000);
-    
+
     return () => clearInterval(interval);
   }, [user?.id]);
 
