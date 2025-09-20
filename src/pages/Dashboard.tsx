@@ -1023,34 +1023,50 @@ const Dashboard = () => {
 
           {/* Progress tab */}
           {activeTab === "progress" && (
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen -m-8 p-8">
+            <div className="bg-gradient-to-br from-background via-muted/20 to-primary/5 min-h-screen -m-8 p-8">
               {/* Header */}
-              <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-gray-800 mb-2">
+              <div className="text-center mb-12">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
+                  <TrendingUp className="h-8 w-8 text-primary" />
+                </div>
+                <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent mb-4">
                   Your Predicted Grades
-                </h2>
-                <p className="text-gray-600 text-lg">
+                </h1>
+                <p className="text-muted-foreground text-lg max-w-md mx-auto">
                   See where you stand — and how to improve.
                 </p>
               </div>
 
               {predictedGrades.length === 0 ? (
-                <div className="text-center py-16">
-                  <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-white shadow-lg flex items-center justify-center">
-                    <TrendingUp className="h-16 w-16 text-purple-500" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                    No predictions yet
-                  </h3>
-                  <p className="text-lg text-gray-600 mb-8 max-w-md mx-auto">
-                    Complete some practice to see your predicted grades
-                  </p>
-                  <Button
-                    onClick={() => setActiveTab("learn")}
-                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all duration-200"
-                  >
-                    Start Practice
-                  </Button>
+                <div className="max-w-2xl mx-auto">
+                  <Card className="text-center py-16 px-8 border-0 shadow-2xl bg-card/50 backdrop-blur-sm">
+                    <CardContent className="space-y-8">
+                      <div className="relative">
+                        <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center mb-6 shadow-lg animate-pulse">
+                          <TrendingUp className="h-16 w-16 text-primary" />
+                        </div>
+                        <div className="absolute inset-0 w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary/5 to-transparent animate-ping"></div>
+                      </div>
+                      
+                      <div className="space-y-4">
+                        <h3 className="text-3xl font-bold text-card-foreground">
+                          No predictions yet
+                        </h3>
+                        <p className="text-lg text-muted-foreground max-w-sm mx-auto leading-relaxed">
+                          Complete some practice sessions to unlock your personalized grade predictions
+                        </p>
+                      </div>
+
+                      <div className="pt-4">
+                        <Button
+                          onClick={() => setActiveTab("learn")}
+                          className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary font-semibold py-4 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                        >
+                          Start Practice
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
               ) : (
                 <div className="max-w-4xl mx-auto space-y-6">
