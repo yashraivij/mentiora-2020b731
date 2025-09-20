@@ -306,7 +306,7 @@ const Index = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-6xl lg:text-7xl font-bold mb-8 leading-tight tracking-tight"
           >
-            <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-green-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 via-purple-500 to-emerald-500 bg-clip-text text-transparent">
               The first personalised tutor for GCSEs.
             </span>
           </motion.h2>
@@ -317,7 +317,7 @@ const Index = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl text-gray-600 mb-16 max-w-3xl mx-auto leading-relaxed"
           >
-            Every <span className="bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent font-bold">question</span> powers a <span className="bg-gradient-to-r from-green-500 to-green-600 bg-clip-text text-transparent font-bold">personalised plan</span> for <span className="bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent font-bold">top grades</span>.
+            Every <span className="bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent font-bold">question</span> powers a <span className="bg-gradient-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent font-bold">personalised plan</span> for <span className="bg-gradient-to-r from-emerald-500 to-emerald-600 bg-clip-text text-transparent font-bold">top grades</span>.
           </motion.p>
           
           <motion.div
@@ -329,7 +329,7 @@ const Index = () => {
           >
             <Button 
               onClick={() => navigate('/register')} 
-              className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 rounded-2xl group"
+              className="bg-gradient-to-r from-purple-600 to-emerald-600 hover:from-purple-700 hover:to-emerald-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 rounded-2xl group"
             >
               Get Started Free
               <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
