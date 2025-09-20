@@ -1537,9 +1537,9 @@ const Dashboard = () => {
                       );
                     })}
                   </div>
-                </div>
-              </div>
-
+                 </div>
+               </div>
+            </div>
           )}
 
           {activeTab !== "learn" && activeTab !== "notes" && activeTab !== "progress" && activeTab !== "profile" && activeTab !== "quests" && activeTab !== "leaderboards" && (
