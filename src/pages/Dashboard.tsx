@@ -2000,12 +2000,12 @@ const Dashboard = () => {
                      </div>
                    </div>
                    <div className="mt-4">
-                     <div className="w-full bg-gray-200 rounded-full h-2">
-                       <div 
-                         className={`${(todayEarnedMP >= 10) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
-                         style={{width: (todayEarnedMP >= 10) ? '100%' : '20%'}}
-                       ></div>
-                     </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div 
+                          className={`${userStats?.loginToday ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
+                          style={{width: userStats?.loginToday ? '100%' : '0%'}}
+                        ></div>
+                      </div>
                    </div>
                  </div>
 
@@ -2037,12 +2037,12 @@ const Dashboard = () => {
                      </div>
                    </div>
                    <div className="mt-4">
-                     <div className="w-full bg-gray-200 rounded-full h-2">
-                       <div 
-                         className={`${(todayEarnedMP >= 40) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
-                         style={{width: (todayEarnedMP >= 40) ? '100%' : '20%'}}
-                       ></div>
-                     </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div 
+                          className={`${userStats?.practiceToday ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
+                          style={{width: userStats?.practiceToday ? '100%' : '0%'}}
+                        ></div>
+                      </div>
                    </div>
                  </div>
 
