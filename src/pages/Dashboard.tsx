@@ -842,16 +842,9 @@ const Dashboard = () => {
 
   const notebookStats = getNotebookStats();
   
-  const BlurSpan = ({ children }: { children: React.ReactNode }) => (
-    <span className="relative inline-block">
-      {!isPremium && (
-        <span className="absolute inset-0 bg-white dark:bg-gray-900 rounded px-2 py-0.5 flex items-center justify-center text-gray-500 dark:text-gray-400 text-xs font-medium border border-gray-200 dark:border-gray-600 z-20 opacity-100 min-w-[60px]">
-          🔒
-        </span>
-      )}
-      <span className={!isPremium ? "invisible opacity-0" : ""}>{children}</span>
-    </span>
-  );
+    const BlurSpan = ({ children }: { children: React.ReactNode }) => (
+      <span className={!isPremium ? "blur-sm select-none" : ""}>{children}</span>
+    );
 
   // Render topic nodes in Duolingo path style
   const renderTopicPath = (subject: any) => {

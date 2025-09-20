@@ -284,14 +284,7 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
 
   const getTooltipContent = (grade: GradeData, isPremium: boolean) => {
     const BlurSpan = ({ children }: { children: React.ReactNode }) => (
-      <span className="relative inline-block">
-        {!isPremium && (
-          <span className="absolute inset-0 bg-white dark:bg-gray-900 rounded px-2 py-0.5 flex items-center justify-center text-gray-500 dark:text-gray-400 text-xs font-medium border border-gray-200 dark:border-gray-600 z-20 opacity-100 min-w-[60px]">
-            🔒
-          </span>
-        )}
-        <span className={!isPremium ? "invisible opacity-0" : ""}>{children}</span>
-      </span>
+      <span className={!isPremium ? "blur-sm select-none" : ""}>{children}</span>
     );
     
     // For premium users, always show detailed information if there's any data
@@ -424,34 +417,18 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
           </div>
           <div className="flex items-center space-x-6">
             {averageGrade > 0 && (
-              <div className="text-center p-3 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl border border-purple-500/20 relative">
-                {!isPremium && (
-                  <div className="absolute inset-0 bg-white dark:bg-gray-900 rounded-2xl flex items-center justify-center z-10 opacity-100">
-                    <div className="text-sm font-semibold text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">
-                      🔒 Premium
-                    </div>
-                  </div>
-                )}
-                <div className={`text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent ${!isPremium ? 'invisible' : ''}`}>
+              <div className={`text-center p-3 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl border border-purple-500/20 ${!isPremium ? 'blur-sm' : ''}`}>
+                <div className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                   {averageGrade.toFixed(1)}
                 </div>
-                <div className={`text-xs text-muted-foreground font-semibold ${!isPremium ? 'invisible' : ''}`}>Avg Grade</div>
+                <div className="text-xs text-muted-foreground font-semibold">Avg Grade</div>
               </div>
             )}
             {grade7PlusCount > 0 && (
-              <div className="relative">
-                {!isPremium && (
-                  <div className="absolute inset-0 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center z-10 opacity-100">
-                    <div className="text-sm font-semibold text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">
-                      🔒 Premium
-                    </div>
-                  </div>
-                )}
-                <Badge className={`bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-600 text-white border-0 px-4 py-2 text-sm font-bold shadow-lg shadow-emerald-500/25 animate-pulse ${!isPremium ? 'invisible' : ''}`}>
-                  <Trophy className="h-4 w-4 mr-2 animate-bounce" />
-                  {grade7PlusCount} Grade 7+ 🎉
-                </Badge>
-              </div>
+              <Badge className={`bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-600 text-white border-0 px-4 py-2 text-sm font-bold shadow-lg shadow-emerald-500/25 animate-pulse ${!isPremium ? 'blur-sm' : ''}`}>
+                <Trophy className="h-4 w-4 mr-2 animate-bounce" />
+                {grade7PlusCount} Grade 7+ 🎉
+              </Badge>
             )}
           </div>
         </div>
@@ -496,15 +473,8 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
                           )}
                           
                           {/* Enhanced Grade number */}
-                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110`}>
-                            {!isPremium && (
-                              <div className="absolute inset-0 bg-white dark:bg-gray-900 rounded-3xl flex items-center justify-center z-20 opacity-100">
-                                <div className="text-sm font-semibold text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">
-                                  🔒 Premium
-                                </div>
-                              </div>
-                            )}
-                            {isPremium && <span>{grade.finalGrade}</span>}
+                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110 ${!isPremium ? 'blur-sm' : ''}`}>
+                            <span>{grade.finalGrade}</span>
                           </div>
 
                           {/* Premium celebration effects for grade 7+ */}
@@ -525,41 +495,20 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
                           
                           {/* Premium percentage indicator */}
                           {grade.finalGrade !== '–' && (
-                            <div className="absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1">
-                              {!isPremium && (
-                                <div className="absolute inset-0 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center z-10 opacity-100">
-                                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                                </div>
-                              )}
-                              {isPremium && <span className="text-xs font-bold text-white">{grade.finalPercentage}%</span>}
+                            <div className={`absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1 ${!isPremium ? 'blur-sm' : ''}`}>
+                              <span className="text-xs font-bold text-white">{grade.finalPercentage}%</span>
                             </div>
                           )}
                         </div>
 
                         {/* Premium Subject name */}
-                          <div className="mt-4 text-center relative">
-                          {!isPremium && (
-                            <div className="absolute inset-0 bg-white dark:bg-gray-900 rounded flex items-center justify-center z-10 opacity-100">
-                              <div className="text-xs font-medium text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 px-2 py-1 rounded border border-gray-200 dark:border-gray-600">
-                                🔒 Premium
-                              </div>
-                            </div>
-                          )}
-                          <div className={`text-sm font-bold text-foreground truncate mb-2 ${!isPremium ? 'invisible' : ''}`}>{grade.subjectName}</div>
+                          <div className={`mt-4 text-center ${!isPremium ? 'blur-sm' : ''}`}>
+                          <div className="text-sm font-bold text-foreground truncate mb-2">{grade.subjectName}</div>
                           {grade.isGrade7Plus && (
                             <div className="mt-2">
-                              {!isPremium && (
-                                <div className="bg-white dark:bg-gray-900 rounded flex items-center justify-center opacity-100 py-1">
-                                  <div className="text-xs font-medium text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 px-2 py-1 rounded border border-gray-200 dark:border-gray-600">
-                                    🔒 Premium
-                                  </div>
-                                </div>
-                              )}
-                              {isPremium && (
-                                <Badge className="bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse">
-                                  🎯 Target Hit!
-                                </Badge>
-                              )}
+                              <Badge className="bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse">
+                                🎯 Target Hit!
+                              </Badge>
                             </div>
                           )}
                         </div>
