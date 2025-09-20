@@ -520,18 +520,34 @@ const Dashboard = () => {
       const currentUserId = (await supabase.auth.getUser()).data.user?.id;
       
       // Transform to leaderboard format (using total MP as placeholder for weekly MP)
-      const weeklyLeaderboard = allUsers.map(user => {
+      const weeklyLeaderboard = [];
+      
+      for (const user of allUsers) {
         const profile = profilesMap.get(user.user_id);
-        return {
+        
+        // Get real-time streak for each user
+        let userStreak = 0;
+        try {
+          const { data: streakData, error: streakError } = await supabase
+            .rpc('get_user_streak', { user_uuid: user.user_id });
+          
+          if (!streakError && streakData !== null) {
+            userStreak = streakData;
+          }
+        } catch (error) {
+          console.log('Could not get streak for user:', user.user_id);
+        }
+        
+        weeklyLeaderboard.push({
           user_id: user.user_id,
           name: profile?.display_name || profile?.username || 'Anonymous',
           mp: user.total_points, // Using total MP as placeholder
-          streak: profile?.streak_days || 0,
+          streak: userStreak,
           isCurrentUser: user.user_id === currentUserId,
           isRealUser: true,
           leaderboardType: 'weekly'
-        };
-      });
+        });
+      }
       
       // Sort by MP
       weeklyLeaderboard.sort((a, b) => b.mp - a.mp);
@@ -597,18 +613,34 @@ const Dashboard = () => {
       const currentUserId = (await supabase.auth.getUser()).data.user?.id;
       
       // Transform to leaderboard format
-      const allTimeLeaderboard = allUsers.map(user => {
+      const allTimeLeaderboard = [];
+      
+      for (const user of allUsers) {
         const profile = profilesMap.get(user.user_id);
-        return {
+        
+        // Get real-time streak for each user
+        let userStreak = 0;
+        try {
+          const { data: streakData, error: streakError } = await supabase
+            .rpc('get_user_streak', { user_uuid: user.user_id });
+          
+          if (!streakError && streakData !== null) {
+            userStreak = streakData;
+          }
+        } catch (error) {
+          console.log('Could not get streak for user:', user.user_id);
+        }
+        
+        allTimeLeaderboard.push({
           user_id: user.user_id,
           name: profile?.display_name || profile?.username || 'Anonymous',
           mp: user.total_points,
-          streak: profile?.streak_days || 0,
+          streak: userStreak,
           isCurrentUser: user.user_id === currentUserId,
           isRealUser: true,
           leaderboardType: 'alltime'
-        };
-      });
+        });
+      }
       
       // Sort by total MP
       allTimeLeaderboard.sort((a, b) => b.mp - a.mp);
