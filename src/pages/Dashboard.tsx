@@ -538,18 +538,29 @@ const Dashboard = () => {
           console.log('Could not get streak for user:', user.user_id);
         }
         
-        // Generate random name if no display name or username
-        const generateRandomName = () => {
-          const firstNames = ['Alex', 'Jordan', 'Taylor', 'Morgan', 'Casey', 'Riley', 'Avery', 'Quinn', 'Sage', 'River'];
-          const lastNames = ['Smith', 'Johnson', 'Brown', 'Davis', 'Wilson', 'Miller', 'Moore', 'Taylor', 'Anderson', 'Thomas'];
-          const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-          const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-          return `${firstName} ${lastName}`;
+        // Generate unique name based on user ID for consistency
+        const generateUniqueNameFromUserId = (userId: string) => {
+          const firstNames = ['Alex', 'Jordan', 'Taylor', 'Morgan', 'Casey', 'Riley', 'Avery', 'Quinn', 'Sage', 'River', 'Blake', 'Drew', 'Ember', 'Finley', 'Haven', 'Indigo', 'Kai', 'Luna', 'Nova', 'Orion', 'Phoenix', 'Rowan', 'Sky', 'Tatum', 'Vale', 'Winter', 'Zara', 'Ash', 'Brook', 'Cedar'];
+          const lastNames = ['Smith', 'Johnson', 'Brown', 'Davis', 'Wilson', 'Miller', 'Moore', 'Taylor', 'Anderson', 'Thomas', 'Jackson', 'White', 'Harris', 'Martin', 'Garcia', 'Martinez', 'Robinson', 'Clark', 'Rodriguez', 'Lewis', 'Lee', 'Walker', 'Hall', 'Allen', 'Young', 'King', 'Wright', 'Lopez', 'Hill', 'Scott'];
+          
+          // Create a simple hash from user ID for deterministic selection
+          let hash = 0;
+          for (let i = 0; i < userId.length; i++) {
+            const char = userId.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash; // Convert to 32-bit integer
+          }
+          
+          // Use different parts of the hash for first and last name
+          const firstIndex = Math.abs(hash) % firstNames.length;
+          const lastIndex = Math.abs(hash >> 8) % lastNames.length;
+          
+          return `${firstNames[firstIndex]} ${lastNames[lastIndex]}`;
         };
         
         weeklyLeaderboard.push({
           user_id: user.user_id,
-          name: profile?.display_name || profile?.username || generateRandomName(),
+          name: profile?.display_name || profile?.username || generateUniqueNameFromUserId(user.user_id),
           mp: user.total_points, // Using total MP as placeholder
           streak: userStreak,
           isCurrentUser: user.user_id === currentUserId,
@@ -640,18 +651,29 @@ const Dashboard = () => {
           console.log('Could not get streak for user:', user.user_id);
         }
         
-        // Generate random name if no display name or username
-        const generateRandomName = () => {
-          const firstNames = ['Alex', 'Jordan', 'Taylor', 'Morgan', 'Casey', 'Riley', 'Avery', 'Quinn', 'Sage', 'River'];
-          const lastNames = ['Smith', 'Johnson', 'Brown', 'Davis', 'Wilson', 'Miller', 'Moore', 'Taylor', 'Anderson', 'Thomas'];
-          const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-          const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-          return `${firstName} ${lastName}`;
+        // Generate unique name based on user ID for consistency
+        const generateUniqueNameFromUserId = (userId: string) => {
+          const firstNames = ['Alex', 'Jordan', 'Taylor', 'Morgan', 'Casey', 'Riley', 'Avery', 'Quinn', 'Sage', 'River', 'Blake', 'Drew', 'Ember', 'Finley', 'Haven', 'Indigo', 'Kai', 'Luna', 'Nova', 'Orion', 'Phoenix', 'Rowan', 'Sky', 'Tatum', 'Vale', 'Winter', 'Zara', 'Ash', 'Brook', 'Cedar'];
+          const lastNames = ['Smith', 'Johnson', 'Brown', 'Davis', 'Wilson', 'Miller', 'Moore', 'Taylor', 'Anderson', 'Thomas', 'Jackson', 'White', 'Harris', 'Martin', 'Garcia', 'Martinez', 'Robinson', 'Clark', 'Rodriguez', 'Lewis', 'Lee', 'Walker', 'Hall', 'Allen', 'Young', 'King', 'Wright', 'Lopez', 'Hill', 'Scott'];
+          
+          // Create a simple hash from user ID for deterministic selection
+          let hash = 0;
+          for (let i = 0; i < userId.length; i++) {
+            const char = userId.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash; // Convert to 32-bit integer
+          }
+          
+          // Use different parts of the hash for first and last name
+          const firstIndex = Math.abs(hash) % firstNames.length;
+          const lastIndex = Math.abs(hash >> 8) % lastNames.length;
+          
+          return `${firstNames[firstIndex]} ${lastNames[lastIndex]}`;
         };
         
         allTimeLeaderboard.push({
           user_id: user.user_id,
-          name: profile?.display_name || profile?.username || generateRandomName(),
+          name: profile?.display_name || profile?.username || generateUniqueNameFromUserId(user.user_id),
           mp: user.total_points,
           streak: userStreak,
           isCurrentUser: user.user_id === currentUserId,
