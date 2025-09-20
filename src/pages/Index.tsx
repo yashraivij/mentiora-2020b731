@@ -529,6 +529,244 @@ const Index = () => {
         </div>
 
 
+        {/* Feature Showcase - Duolingo/Quizlet Style */}
+        <div className="mb-32">
+          {/* First Feature - Smart Practice */}
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="mb-24"
+          >
+            <div className="max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div className="space-y-8">
+                  <motion.h3 
+                    className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    Every question, every answer,{" "}
+                    <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                      one ultimate study experience
+                    </span>
+                  </motion.h3>
+                  <p className="text-xl text-gray-600 leading-relaxed">
+                    Practice with real exam questions from past papers, get instant feedback, and watch your understanding grow with every answer.
+                  </p>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button 
+                      onClick={() => navigate('/register')} 
+                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                    >
+                      Start Practicing Free
+                    </Button>
+                  </motion.div>
+                </div>
+                <motion.div 
+                  className="relative"
+                  whileHover={{ scale: 1.02, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl p-8 shadow-2xl">
+                    <div className="bg-white rounded-2xl p-6 shadow-lg">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+                        <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                        <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                        <div className="flex-1 bg-gray-100 rounded-full h-6 flex items-center px-4">
+                          <span className="text-sm text-gray-500">Chemistry Practice</span>
+                        </div>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="text-lg font-semibold text-gray-900">Question 1 of 12</div>
+                        <div className="bg-gray-50 rounded-xl p-4">
+                          <p className="text-gray-700">What is the formula for calculating the rate of reaction?</p>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="bg-emerald-50 border-2 border-emerald-200 rounded-lg p-3 text-emerald-800">
+                            ✓ Rate = Change in concentration / Time
+                          </div>
+                          <div className="bg-gray-50 border rounded-lg p-3 text-gray-600">Rate = Time / Change in concentration</div>
+                        </div>
+                        <div className="bg-emerald-100 border border-emerald-200 rounded-lg p-3">
+                          <div className="flex items-center gap-2 text-emerald-700 font-semibold mb-2">
+                            <CheckCircle className="h-5 w-5" />
+                            Correct! Well done.
+                          </div>
+                          <p className="text-sm text-emerald-600">You're mastering rate calculations. This type of question appears frequently in Paper 2.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Second Feature - Personalized Learning */}
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="mb-24"
+          >
+            <div className="max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <motion.div 
+                  className="relative lg:order-1"
+                  whileHover={{ scale: 1.02, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl p-8 shadow-2xl">
+                    <div className="bg-white rounded-2xl p-6 shadow-lg">
+                      <div className="flex items-center justify-between mb-6">
+                        <h4 className="text-xl font-bold text-gray-900">Your Learning Path</h4>
+                        <div className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-sm font-semibold">87% Complete</div>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-4">
+                          <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center">
+                            <CheckCircle className="h-5 w-5 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <div className="font-semibold text-gray-900">Atomic Structure</div>
+                            <div className="text-sm text-gray-500">Mastered • 15 questions</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-4">
+                          <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center animate-pulse">
+                            <Brain className="h-5 w-5 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <div className="font-semibold text-gray-900">Chemical Bonding</div>
+                            <div className="text-sm text-blue-600">In Progress • 8/12 complete</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-4">
+                          <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                            <Target className="h-5 w-5 text-gray-400" />
+                          </div>
+                          <div className="flex-1">
+                            <div className="font-semibold text-gray-500">Rate of Reaction</div>
+                            <div className="text-sm text-gray-400">Recommended next</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border border-purple-100">
+                        <div className="flex items-center gap-2 text-purple-700 font-semibold mb-2">
+                          <Sparkles className="h-5 w-5" />
+                          Smart Recommendation
+                        </div>
+                        <p className="text-sm text-purple-600">Focus on ionic bonding questions - you're 92% ready to master this topic!</p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+                <div className="space-y-8 lg:order-2">
+                  <motion.h3 
+                    className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    Make studying{" "}
+                    <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                      personal
+                    </span>{" "}
+                    and effective
+                  </motion.h3>
+                  <p className="text-xl text-gray-600 leading-relaxed">
+                    Our AI learns how you think and creates a unique learning path just for you. Focus on what matters most and stop wasting time on topics you've already mastered.
+                  </p>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button 
+                      onClick={() => navigate('/register')} 
+                      className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-4 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                    >
+                      Get Your Learning Path
+                    </Button>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Third Feature - Stay Motivated */}
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div className="space-y-8">
+                  <motion.h3 
+                    className="text-5xl lg:text-6xl font-bold leading-tight"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                      Stay motivated
+                    </span>{" "}
+                    with every question
+                  </motion.h3>
+                  <p className="text-xl text-gray-600 leading-relaxed">
+                    Track your progress, celebrate wins, and watch your grades improve with detailed analytics that show exactly how close you are to your target grades.
+                  </p>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button 
+                      onClick={() => navigate('/register')} 
+                      className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                    >
+                      Start Your Journey
+                    </Button>
+                  </motion.div>
+                </div>
+                <motion.div 
+                  className="relative"
+                  whileHover={{ scale: 1.02, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="bg-gradient-to-br from-purple-500 to-pink-600 rounded-3xl p-8 shadow-2xl">
+                    <div className="bg-white rounded-2xl p-6 shadow-lg">
+                      <div className="text-center mb-6">
+                        <div className="w-24 h-24 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                          <Trophy className="h-12 w-12 text-white" />
+                        </div>
+                        <h4 className="text-2xl font-bold text-gray-900 mb-2">Streak Master!</h4>
+                        <p className="text-gray-600">7 days in a row 🔥</p>
+                      </div>
+                      <div className="grid grid-cols-3 gap-4 mb-6">
+                        <div className="text-center p-3 bg-blue-50 rounded-xl">
+                          <div className="text-2xl font-bold text-blue-600">124</div>
+                          <div className="text-xs text-blue-500">Questions</div>
+                        </div>
+                        <div className="text-center p-3 bg-emerald-50 rounded-xl">
+                          <div className="text-2xl font-bold text-emerald-600">89%</div>
+                          <div className="text-xs text-emerald-500">Accuracy</div>
+                        </div>
+                        <div className="text-center p-3 bg-purple-50 rounded-xl">
+                          <div className="text-2xl font-bold text-purple-600">Grade 8</div>
+                          <div className="text-xs text-purple-500">Predicted</div>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-600">Progress to Grade 9</span>
+                          <span className="text-purple-600 font-semibold">87%</span>
+                        </div>
+                        <div className="w-full bg-gray-200 rounded-full h-3">
+                          <div className="bg-gradient-to-r from-purple-500 to-pink-500 h-3 rounded-full" style={{width: '87%'}}></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
         {/* Final CTA */}
         <motion.div 
           ref={ctaRef}
