@@ -843,7 +843,14 @@ const Dashboard = () => {
   const notebookStats = getNotebookStats();
   
   const BlurSpan = ({ children }: { children: React.ReactNode }) => (
-    <span className={!isPremium ? "blur-sm" : ""}>{children}</span>
+    <span className={!isPremium ? "relative inline-block" : ""}>
+      {!isPremium && (
+        <span className="absolute inset-0 bg-white dark:bg-gray-900 rounded px-1 flex items-center justify-center text-gray-500 dark:text-gray-400 text-xs font-medium border border-gray-200 dark:border-gray-600 z-10">
+          Premium
+        </span>
+      )}
+      <span className={!isPremium ? "invisible" : ""}>{children}</span>
+    </span>
   );
 
   // Render topic nodes in Duolingo path style
