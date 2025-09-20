@@ -495,7 +495,6 @@ const Dashboard = () => {
             transformedRealUsers.push({
               name: user.display_name || user.username || 'Anonymous',
               mp: mp,
-              grade: 6.0 + (Math.random() * 3), // Random grade between 6.0-9.0 for display
               streak: user.streak_days || 0,
               isCurrentUser: user.user_id === (await supabase.auth.getUser()).data.user?.id,
               isRealUser: true,
@@ -1401,11 +1400,10 @@ const Dashboard = () => {
                 
                 <div className="p-6">
                   {/* Column Headers */}
-                  <div className="grid grid-cols-5 gap-4 text-sm font-bold text-gray-600 uppercase tracking-wide mb-4 px-4">
+                  <div className="grid grid-cols-4 gap-4 text-sm font-bold text-gray-600 uppercase tracking-wide mb-4 px-4">
                     <div className="text-left">Rank</div>
                     <div className="text-left">Student</div>
                     <div className="text-left">MP</div>
-                    <div className="text-left">Avg Grade</div>
                     <div className="text-left">Streak</div>
                   </div>
 
@@ -1447,7 +1445,6 @@ const Dashboard = () => {
                            const currentUserData = {
                              name: getFirstName(),
                              mp: userGems,
-                             grade: isPremium ? (predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0) : 0.0,
                              streak: currentStreak,
                              isCurrentUser: true,
                              isRealUser: true,
@@ -1481,13 +1478,6 @@ const Dashboard = () => {
                         return null;
                       };
 
-                       const getGradeColor = (grade: number) => {
-                         if (grade === 0) return "text-gray-600 bg-gray-50";
-                         if (grade >= 8) return "text-green-600 bg-green-50";
-                         if (grade >= 7) return "text-blue-600 bg-blue-50";
-                         if (grade >= 6) return "text-orange-600 bg-orange-50";
-                         return "text-red-600 bg-red-50";
-                       };
 
                       return (
                         <motion.div
@@ -1495,7 +1485,7 @@ const Dashboard = () => {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          className={`grid grid-cols-5 gap-4 items-center p-4 rounded-xl hover:bg-gray-50 transition-colors ${
+                          className={`grid grid-cols-4 gap-4 items-center p-4 rounded-xl hover:bg-gray-50 transition-colors ${
                             player.isCurrentUser ? 'bg-blue-50 border-2 border-blue-200' : 'bg-gray-25'
                           }`}
                         >
@@ -1520,13 +1510,6 @@ const Dashboard = () => {
                             <Gem className="w-4 h-4 text-cyan-400" />
                             <span className="font-bold text-gray-800">{player.mp.toLocaleString()}</span>
                           </div>
-
-                            {/* Average Grade */}
-                            <div>
-                              <span className={`px-3 py-1 rounded-full text-sm font-bold ${getGradeColor(player.grade)}`}>
-                                {player.grade === 0 ? '0.0' : player.grade}
-                              </span>
-                            </div>
 
                           {/* Streak */}
                           <div className="flex items-center space-x-1">
