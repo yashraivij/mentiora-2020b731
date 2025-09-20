@@ -442,7 +442,7 @@ const Practice = () => {
           
           // Show toast for practice completion (main reward)
           if (result.breakdown?.practice > 0) {
-            showMPReward(result.breakdown.practice, "Practice complete");
+            showMPReward(result.breakdown.practice, "Quest complete: Complete 1 practice set");
           }
           
           if (result.breakdown) {
