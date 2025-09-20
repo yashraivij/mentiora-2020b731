@@ -1023,46 +1023,56 @@ const Dashboard = () => {
 
           {/* Progress tab */}
           {activeTab === "progress" && (
-            <div className="bg-gradient-to-br from-background via-muted/20 to-primary/5 min-h-screen -m-8 p-8">
+            <div className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 min-h-screen -m-8 p-8">
               {/* Header */}
               <div className="text-center mb-12">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
-                  <TrendingUp className="h-8 w-8 text-primary" />
+                <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 mb-6 shadow-xl">
+                  <TrendingUp className="h-10 w-10 text-white" />
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 animate-ping opacity-20"></div>
                 </div>
-                <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent mb-4">
+                <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
                   Your Predicted Grades
                 </h1>
-                <p className="text-muted-foreground text-lg max-w-md mx-auto">
+                <p className="text-gray-600 text-xl max-w-lg mx-auto font-medium">
                   See where you stand — and how to improve.
                 </p>
               </div>
 
               {predictedGrades.length === 0 ? (
-                <div className="max-w-2xl mx-auto">
-                  <Card className="text-center py-16 px-8 border-0 shadow-2xl bg-card/50 backdrop-blur-sm">
-                    <CardContent className="space-y-8">
+                <div className="max-w-3xl mx-auto">
+                  <Card className="text-center py-20 px-10 border-0 shadow-2xl bg-white/80 backdrop-blur-sm relative overflow-hidden">
+                    {/* Decorative background elements */}
+                    <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full -translate-x-16 -translate-y-16"></div>
+                    <div className="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-tl from-pink-400/20 to-orange-400/20 rounded-full translate-x-20 translate-y-20"></div>
+                    <div className="absolute top-1/2 left-1/4 w-6 h-6 bg-blue-400/30 rounded-full animate-bounce" style={{animationDelay: '0.5s'}}></div>
+                    <div className="absolute top-1/3 right-1/3 w-4 h-4 bg-purple-400/30 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
+                    <div className="absolute bottom-1/3 left-1/3 w-5 h-5 bg-pink-400/30 rounded-full animate-bounce" style={{animationDelay: '1.5s'}}></div>
+                    
+                    <CardContent className="space-y-10 relative z-10">
                       <div className="relative">
-                        <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center mb-6 shadow-lg animate-pulse">
-                          <TrendingUp className="h-16 w-16 text-primary" />
+                        <div className="w-40 h-40 mx-auto rounded-full bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center mb-8 shadow-lg relative">
+                          <TrendingUp className="h-20 w-20 text-transparent bg-gradient-to-br from-blue-500 to-purple-600 bg-clip-text" style={{WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}} />
+                          <TrendingUp className="h-20 w-20 text-blue-500 absolute" />
                         </div>
-                        <div className="absolute inset-0 w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary/5 to-transparent animate-ping"></div>
+                        <div className="absolute inset-0 w-40 h-40 mx-auto rounded-full bg-gradient-to-br from-blue-200/20 to-purple-200/20 animate-ping"></div>
                       </div>
                       
-                      <div className="space-y-4">
-                        <h3 className="text-3xl font-bold text-card-foreground">
+                      <div className="space-y-6">
+                        <h3 className="text-4xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
                           No predictions yet
                         </h3>
-                        <p className="text-lg text-muted-foreground max-w-sm mx-auto leading-relaxed">
-                          Complete some practice sessions to unlock your personalized grade predictions
+                        <p className="text-xl text-gray-600 max-w-lg mx-auto leading-relaxed">
+                          Complete some practice sessions to unlock your personalized grade predictions and watch your progress soar!
                         </p>
                       </div>
 
-                      <div className="pt-4">
+                      <div className="pt-6">
                         <Button
                           onClick={() => setActiveTab("learn")}
-                          className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary font-semibold py-4 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                          className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white font-bold py-5 px-10 rounded-2xl text-xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 relative overflow-hidden"
                         >
-                          Start Practice
+                          <span className="relative z-10">🚀 Start Practice</span>
+                          <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                         </Button>
                       </div>
                     </CardContent>
