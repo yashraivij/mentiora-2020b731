@@ -286,11 +286,11 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
     const BlurSpan = ({ children }: { children: React.ReactNode }) => (
       <span className={!isPremium ? "relative inline-block" : ""}>
         {!isPremium && (
-          <span className="absolute inset-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded px-1 flex items-center justify-center text-gray-500 dark:text-gray-400 text-xs font-medium border border-gray-200 dark:border-gray-600">
+          <span className="absolute inset-0 bg-white dark:bg-gray-800 backdrop-blur-xl rounded px-1 flex items-center justify-center text-gray-500 dark:text-gray-400 text-xs font-medium border border-gray-200 dark:border-gray-600">
             Premium
           </span>
         )}
-        <span className={!isPremium ? "blur-md opacity-30" : ""}>{children}</span>
+        <span className={!isPremium ? "blur-xl opacity-0" : ""}>{children}</span>
       </span>
     );
     
@@ -482,13 +482,13 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
                           {/* Enhanced Grade number */}
                           <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110 ${!isPremium ? 'relative' : ''}`}>
                             {!isPremium && (
-                              <div className="absolute inset-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-3xl flex items-center justify-center">
+                              <div className="absolute inset-0 bg-white dark:bg-gray-900 backdrop-blur-xl rounded-3xl flex items-center justify-center">
                                 <div className="text-sm font-semibold text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">
                                   Premium
                                 </div>
                               </div>
                             )}
-                            <span className={!isPremium ? 'blur-lg opacity-20' : ''}>{grade.finalGrade}</span>
+                            <span className={!isPremium ? 'blur-xl opacity-0' : ''}>{grade.finalGrade}</span>
                           </div>
 
                           {/* Premium celebration effects for grade 7+ */}
@@ -511,11 +511,11 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
                           {grade.finalGrade !== '–' && (
                             <div className="absolute bottom-2 right-2 bg-black/20 backdrop-blur-sm rounded-full px-2 py-1 relative">
                               {!isPremium && (
-                                <div className="absolute inset-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full flex items-center justify-center">
+                                <div className="absolute inset-0 bg-white dark:bg-gray-800 backdrop-blur-xl rounded-full flex items-center justify-center">
                                   <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
                                 </div>
                               )}
-                              <span className={`text-xs font-bold text-white ${!isPremium ? 'blur-sm opacity-30' : ''}`}>{grade.finalPercentage}%</span>
+                              <span className={`text-xs font-bold text-white ${!isPremium ? 'blur-xl opacity-0' : ''}`}>{grade.finalPercentage}%</span>
                             </div>
                           )}
                         </div>
@@ -526,13 +526,13 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
                           {grade.isGrade7Plus && (
                             <div className="mt-2 relative">
                               {!isPremium && (
-                                <div className="absolute inset-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded flex items-center justify-center z-10">
+                                <div className="absolute inset-0 bg-white dark:bg-gray-800 backdrop-blur-xl rounded flex items-center justify-center z-10">
                                   <div className="text-xs font-medium text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 px-2 py-1 rounded border border-gray-200 dark:border-gray-600">
                                     Premium
                                   </div>
                                 </div>
                               )}
-                              <Badge className={`bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse ${!isPremium ? 'blur-md opacity-30' : ''}`}>
+                              <Badge className={`bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-xs px-2 py-1 font-bold animate-pulse ${!isPremium ? 'blur-xl opacity-0' : ''}`}>
                                 🎯 Target Hit!
                               </Badge>
                             </div>
