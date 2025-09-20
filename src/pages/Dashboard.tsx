@@ -1107,7 +1107,7 @@ const Dashboard = () => {
                         <div>
                           <h3 className="text-2xl font-bold text-gray-800">
                             Your average grade is {isPremium ? (predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0) : (
-                              <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent blur-sm select-none">8</span>
+                              <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent blur-lg select-none">8</span>
                             )}. Keep it up!
                           </h3>
                           <p className="text-gray-600">You're making great progress</p>
@@ -1186,27 +1186,29 @@ const Dashboard = () => {
 
                                 {/* Subject Info */}
                                 <div className="flex-1">
-                                  <div className="flex items-center space-x-3 mb-2">
-                                    <h3 className="text-xl font-bold text-gray-800">
-                                      {subjectName}
-                                    </h3>
-                                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusChip.color}`}>
-                                      {statusChip.text}
-                                    </span>
-                                  </div>
+                                   <div className="flex items-center space-x-3 mb-2">
+                                     <h3 className="text-xl font-bold text-gray-800">
+                                       {subjectName}
+                                     </h3>
+                                     {isPremium && (
+                                       <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusChip.color}`}>
+                                         {statusChip.text}
+                                       </span>
+                                     )}
+                                   </div>
                                   
-                                  {/* Progress Bar */}
-                                  <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
-                                    <div
-                                      className={`h-3 rounded-full ${getProgressColor(prediction.grade)} transition-all duration-700`}
-                                      style={{ width: `${Math.min(prediction.percentage || 0, 100)}%` }}
-                                    />
-                                  </div>
+                                   {/* Progress Bar */}
+                                   <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
+                                     <div
+                                       className={`h-3 rounded-full ${getProgressColor(prediction.grade)} transition-all duration-700`}
+                                       style={{ width: isPremium ? `${Math.min(prediction.percentage || 0, 100)}%` : '0%' }}
+                                     />
+                                   </div>
                                   
                                   <p className="text-sm text-gray-600">
                                     {isPremium ? `${Math.round(prediction.percentage || 0)}% accuracy in practice` : (
                                       <span className="flex items-center">
-                                        <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent blur-sm select-none">85</span>
+                                        <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent blur-lg select-none">85</span>
                                         <span>% accuracy in practice</span>
                                       </span>
                                     )}
@@ -1218,7 +1220,7 @@ const Dashboard = () => {
                               <div className="text-center ml-6">
                                 <div className={`text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1`}>
                                   {isPremium ? (prediction.grade || '0') : (
-                                    <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent blur-sm select-none">8</span>
+                                    <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent blur-lg select-none">8</span>
                                   )}
                                 </div>
                                 <div className="text-sm text-gray-500 uppercase tracking-wide font-medium">
@@ -1332,7 +1334,7 @@ const Dashboard = () => {
                           ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10
                           : '0.0'
                       ) : (
-                        <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent blur-sm select-none">7.8</span>
+                        <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent blur-lg select-none">7.8</span>
                       )}
                     </div>
                    <div className="text-sm text-gray-600">Avg Grade</div>
