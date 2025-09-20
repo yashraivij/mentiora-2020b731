@@ -473,8 +473,12 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
                           )}
                           
                           {/* Enhanced Grade number */}
-                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110 ${!isPremium ? 'blur-sm' : ''}`}>
-                            <span>{grade.finalGrade}</span>
+                          <div className={`absolute inset-0 flex items-center justify-center font-black text-3xl ${getGradeColor(grade.finalGrade)} z-10 transition-transform duration-300 group-hover:scale-110`}>
+                            {isPremium ? (
+                              <span>{grade.finalGrade}</span>
+                            ) : (
+                              <span className="blur-md select-none">{grade.finalGrade}</span>
+                            )}
                           </div>
 
                           {/* Premium celebration effects for grade 7+ */}
