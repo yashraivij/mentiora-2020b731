@@ -374,19 +374,16 @@ const Dashboard = () => {
     if (!user?.id) return;
     
     try {
-      // Use user's timezone (default America/Los_Angeles as per requirements)
-      const userTimezone = 'America/Los_Angeles';
+      // Use UK timezone to match the MP points system
+      const ukDate = new Date().toLocaleString("en-US", { timeZone: "Europe/London" });
+      const todayInUK = new Date(ukDate);
       
-      // Get current date in user's timezone
-      const nowInTimezone = new Date().toLocaleString("en-US", { timeZone: userTimezone });
-      const todayInTimezone = new Date(nowInTimezone);
-      
-      // Set to start of day in user's timezone
-      const startOfDay = new Date(todayInTimezone);
+      // Set to start of day in UK timezone
+      const startOfDay = new Date(todayInUK);
       startOfDay.setHours(0, 0, 0, 0);
       
-      // Set to end of day in user's timezone  
-      const endOfDay = new Date(todayInTimezone);
+      // Set to end of day in UK timezone  
+      const endOfDay = new Date(todayInUK);
       endOfDay.setHours(23, 59, 59, 999);
       
       console.log('Calculating MP for date range:', startOfDay.toISOString(), 'to', endOfDay.toISOString());
