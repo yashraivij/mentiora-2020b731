@@ -240,6 +240,8 @@ const Dashboard = () => {
     if (!user?.id) return;
 
     try {
+      console.log('Loading predicted grades for user:', user.id);
+      
       const { data, error } = await supabase
         .from('predicted_exam_completions')
         .select('*')
@@ -250,6 +252,8 @@ const Dashboard = () => {
         console.error('Error loading predicted grades:', error);
         return;
       }
+
+      console.log('Raw predicted exam completions data:', data);
 
       // Group by subject_id and get the latest prediction for each subject
       const latestGrades = data?.reduce((acc: any, grade: any) => {
@@ -348,8 +352,13 @@ const Dashboard = () => {
     if (!user?.id) return;
     
     try {
+      console.log('Loading user stats for user:', user.id);
+      
       const { MPPointsSystemClient } = await import('@/lib/mpPointsSystemClient');
       const stats = await MPPointsSystemClient.getUserStats(user.id);
+      
+      console.log('Loaded user stats:', stats);
+      
       setUserStats(stats);
       setUserGems(stats.totalPoints);
       setCurrentStreak(stats.currentStreak);
