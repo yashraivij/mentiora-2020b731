@@ -1301,10 +1301,25 @@ const Dashboard = () => {
                          All Time
                        </Button>
                      </div>
-                     <div className="flex items-center space-x-1 text-green-500 text-sm font-medium">
-                       <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                       LIVE
-                     </div>
+                      <div className="flex items-center space-x-2 bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30 px-3 py-2 rounded-xl border border-emerald-200/50 dark:border-emerald-800/30 shadow-sm">
+                        <div className="relative flex items-center">
+                          {/* Main pulsing dot */}
+                          <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-lg shadow-emerald-500/30"></div>
+                          {/* Expanding ring */}
+                          <div className="absolute w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping opacity-75"></div>
+                          {/* Secondary smaller dot */}
+                          <div className="absolute w-1.5 h-1.5 bg-emerald-300 rounded-full animate-bounce left-0.5 top-0.5"></div>
+                        </div>
+                        <span className="text-sm font-bold bg-gradient-to-r from-emerald-600 to-green-600 dark:from-emerald-400 dark:to-green-400 bg-clip-text text-transparent animate-pulse">
+                          LIVE
+                        </span>
+                        {/* Sparkle animation */}
+                        <div className="flex space-x-0.5">
+                          <div className="w-1 h-1 bg-emerald-400 rounded-full animate-ping opacity-60" style={{ animationDelay: '0s' }}></div>
+                          <div className="w-1 h-1 bg-green-400 rounded-full animate-ping opacity-60" style={{ animationDelay: '0.2s' }}></div>
+                          <div className="w-1 h-1 bg-emerald-400 rounded-full animate-ping opacity-60" style={{ animationDelay: '0.4s' }}></div>
+                        </div>
+                      </div>
                    </div>
                  </div>
                </div>
