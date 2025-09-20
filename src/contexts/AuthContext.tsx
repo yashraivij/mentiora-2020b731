@@ -140,14 +140,10 @@ const refreshSubscription = async (userId?: string) => {
                       console.log(`Daily login bonus: +${result.awarded} MP`);
                       // Show MP reward toast for login
                       if (showMPReward) {
-                        showMPReward(result.awarded, "Quest complete: Log in today");
+                        showMPReward(result.awarded, "Daily check-in");
                       }
                     } else {
                       console.log(`Daily login already awarded today`);
-                      // Show completion notification even if no MP awarded
-                      if (showMPReward) {
-                        showMPReward(0, "Quest already complete: Log in today");
-                      }
                     }
                   }
                 } catch (error) {
