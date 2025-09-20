@@ -441,54 +441,74 @@ const Dashboard = () => {
 
   const loadLeaderboardData = async () => {
     try {
-      // Start with ALL users who have MP points, regardless of public profile status
-      const { data: allUserPoints, error: pointsError } = await supabase
-        .from('user_points')
-        .select('user_id, total_points')
-        .gt('total_points', 0);
+      // Get real users with their MP points and calculate retroactive MP for users without it
+      const { data: allUsers, error: usersError } = await supabase
+        .from('public_profiles')
+        .select(`
+          user_id,
+          username,
+          display_name,
+          streak_days
+        `);
 
-      if (pointsError) {
-        console.error('Error fetching user points:', pointsError);
+      if (usersError) {
+        console.error('Error fetching users:', usersError);
         setLeaderboardData([]);
         return;
       }
 
       let transformedRealUsers = [];
       
-      if (allUserPoints && allUserPoints.length > 0) {
-        // Get profile information for these users (if they have public profiles)
-        const userIds = allUserPoints.map(p => p.user_id);
-        const { data: profiles, error: profilesError } = await supabase
-          .from('public_profiles')
-          .select('user_id, username, display_name, streak_days')
+      if (allUsers && allUsers.length > 0) {
+        // Get user points for all users
+        const userIds = allUsers.map(u => u.user_id);
+        const { data: userPoints, error: pointsError } = await supabase
+          .from('user_points')
+          .select('user_id, total_points')
           .in('user_id', userIds);
 
-        const profilesMap = new Map((profiles || []).map(p => [p.user_id, p]));
+        const pointsMap = new Map((userPoints || []).map(p => [p.user_id, p.total_points]));
 
-        // Get current user ID for highlighting
-        const { data: currentUser } = await supabase.auth.getUser();
-        const currentUserId = currentUser?.user?.id;
-
-        // Create leaderboard entries for all users with MP
-        for (const userPoint of allUserPoints) {
-          const profile = profilesMap.get(userPoint.user_id);
+        // For users without MP points, calculate retroactive MP
+        for (const user of allUsers) {
+          let mp = pointsMap.get(user.user_id) || 0;
           
-          transformedRealUsers.push({
-            name: profile?.display_name || profile?.username || `User ${userPoint.user_id.slice(0, 8)}`,
-            mp: userPoint.total_points,
-            grade: 6.0 + (Math.random() * 3), // Random grade between 6.0-9.0 for display
-            streak: profile?.streak_days || 0,
-            isCurrentUser: userPoint.user_id === currentUserId,
-            isRealUser: true,
-            leaderboardType: 'both'
-          });
+          // If user has no MP but has been active, calculate retroactive MP
+          if (mp === 0) {
+            try {
+              const { data: retroMP } = await supabase.functions.invoke('calculate-retroactive-mp', {
+                body: { user_id: user.user_id }
+              });
+              
+              if (retroMP && !retroMP.error) {
+                mp = retroMP.total_mp || 0;
+                // Refresh points map for this user
+                pointsMap.set(user.user_id, mp);
+              }
+            } catch (error) {
+              console.log('Could not calculate retroactive MP for user:', user.user_id);
+            }
+          }
+
+          // Only include users with MP > 0
+          if (mp > 0) {
+            transformedRealUsers.push({
+              name: user.display_name || user.username || 'Anonymous',
+              mp: mp,
+              grade: 6.0 + (Math.random() * 3), // Random grade between 6.0-9.0 for display
+              streak: user.streak_days || 0,
+              isCurrentUser: user.user_id === (await supabase.auth.getUser()).data.user?.id,
+              isRealUser: true,
+              leaderboardType: 'both'
+            });
+          }
         }
       }
 
-      // Sort by MP points descending
+      // Sort by MP points
       transformedRealUsers.sort((a, b) => b.mp - a.mp);
       
-      console.log('All users with MP loaded:', transformedRealUsers.length, transformedRealUsers);
+      console.log('Real users loaded:', transformedRealUsers.length, transformedRealUsers);
 
       setLeaderboardData(transformedRealUsers);
     } catch (error) {
