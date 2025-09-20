@@ -140,7 +140,7 @@ const refreshSubscription = async (userId?: string) => {
                       console.log(`Daily login bonus: +${result.awarded} MP`);
                       // Show MP reward toast for login
                       if (showMPReward) {
-                        showMPReward(10, "Daily check-in");
+                        showMPReward(result.awarded, "Daily check-in");
                       }
                     } else {
                       console.log(`Daily login already awarded today`);

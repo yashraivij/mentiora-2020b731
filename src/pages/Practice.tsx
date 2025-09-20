@@ -440,21 +440,23 @@ const Practice = () => {
         if (result.awarded > 0) {
           console.log(`Practice completion rewards: +${result.awarded} MP`);
           
-          // Show toast for practice completion
-          showMPReward(40, "Practice complete");
+          // Show toast for practice completion (main reward)
+          if (result.breakdown?.practice > 0) {
+            showMPReward(result.breakdown.practice, "Practice complete");
+          }
           
           if (result.breakdown) {
             console.log('MP Breakdown:', result.breakdown);
             
-            // Show additional toasts for weekly bonuses
-            if (result.breakdown.weeklyTopicsBonus) {
-              setTimeout(() => showMPReward(100, "Weekly bonus"), 500);
+            // Show additional toasts for weekly bonuses with proper delays
+            if (result.breakdown.weeklyTopics > 0) {
+              setTimeout(() => showMPReward(result.breakdown.weeklyTopics, "Weekly bonus"), 500);
             }
-            if (result.breakdown.weeklyPracticeBonus) {
-              setTimeout(() => showMPReward(250, "Weekly challenge"), 1000);
+            if (result.breakdown.weeklyPractice > 0) {
+              setTimeout(() => showMPReward(result.breakdown.weeklyPractice, "Weekly challenge"), 1000);
             }
-            if (result.breakdown.streakBonus) {
-              setTimeout(() => showMPReward(500, "Streak achieved"), 1500);
+            if (result.breakdown.streak > 0) {
+              setTimeout(() => showMPReward(result.breakdown.streak, "Streak achieved"), 1500);
             }
           }
         }
