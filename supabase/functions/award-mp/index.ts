@@ -197,7 +197,7 @@ async function getUserStreak(userId: string): Promise<number> {
   return data || 0;
 }
 
-async function generatePredictedExamCompletion(userId: string, subjectId: string): Promise<void> {
+async function generatePredictedExamCompletion(userId: string, subjectId: string, practiceScore?: number, totalMarks?: number): Promise<void> {
   try {
     // Get user's recent performance for this subject to calculate predicted grade
     const { data: recentActivities } = await supabase
@@ -208,10 +208,41 @@ async function generatePredictedExamCompletion(userId: string, subjectId: string
       .order('created_at', { ascending: false })
       .limit(10);
     
-    // Calculate a basic predicted grade based on activity frequency
-    // More recent activity = better predicted performance
-    const baseGrade = Math.min(Math.max(1, (recentActivities?.length || 1) + 1), 9);
-    const percentage = Math.min(((baseGrade - 1) / 8) * 100, 90); // Convert grade 1-9 to percentage
+    let percentage = 0;
+    
+    if (practiceScore !== undefined && totalMarks !== undefined && totalMarks > 0) {
+      // Use actual practice performance if provided
+      percentage = Math.round((practiceScore / totalMarks) * 100);
+      console.log(`Using actual practice performance: ${practiceScore}/${totalMarks} = ${percentage}%`);
+    } else {
+      // Fallback: Get average performance from recent activities
+      const activitiesWithScores = recentActivities?.filter(activity => 
+        activity.metadata?.practice_score !== undefined && activity.metadata?.total_marks !== undefined
+      ) || [];
+      
+      if (activitiesWithScores.length > 0) {
+        const totalScore = activitiesWithScores.reduce((sum, activity) => sum + (activity.metadata.practice_score || 0), 0);
+        const totalPossible = activitiesWithScores.reduce((sum, activity) => sum + (activity.metadata.total_marks || 1), 0);
+        percentage = Math.round((totalScore / totalPossible) * 100);
+        console.log(`Calculated from recent activities: ${totalScore}/${totalPossible} = ${percentage}%`);
+      } else {
+        // Default to very low performance if no data
+        percentage = Math.max(10, Math.random() * 30); // 10-30% for new users
+        console.log(`No performance data available, using default: ${percentage}%`);
+      }
+    }
+    
+    // Convert percentage to grade (1-9 scale)
+    let baseGrade = 1;
+    if (percentage >= 90) baseGrade = 9;
+    else if (percentage >= 85) baseGrade = 8;
+    else if (percentage >= 80) baseGrade = 7;
+    else if (percentage >= 70) baseGrade = 6;
+    else if (percentage >= 60) baseGrade = 5;
+    else if (percentage >= 50) baseGrade = 4;
+    else if (percentage >= 40) baseGrade = 3;
+    else if (percentage >= 30) baseGrade = 2;
+    else baseGrade = 1;
     
     // Create mock exam data for the prediction
     const mockQuestions = [
@@ -220,7 +251,7 @@ async function generatePredictedExamCompletion(userId: string, subjectId: string
         questionNumber: 1,
         section: subjectId,
         text: `Practice-based prediction question for ${subjectId}`,
-        marks: 10
+        marks: 100
       }
     ];
     
@@ -234,9 +265,9 @@ async function generatePredictedExamCompletion(userId: string, subjectId: string
     const mockResults = [
       {
         questionId: `${subjectId}-prediction-q1`,
-        marks: Math.round(10 * (percentage / 100)),
-        totalMarks: 10,
-        feedback: "Based on recent practice performance"
+        marks: Math.round(percentage),
+        totalMarks: 100,
+        feedback: `Based on practice performance: ${percentage}%`
       }
     ];
     
@@ -250,8 +281,8 @@ async function generatePredictedExamCompletion(userId: string, subjectId: string
         questions: mockQuestions,
         answers: mockAnswers,
         results: mockResults,
-        total_marks: 10,
-        achieved_marks: Math.round(10 * (percentage / 100)),
+        total_marks: 100,
+        achieved_marks: Math.round(percentage),
         percentage: percentage,
         grade: baseGrade.toString(),
         time_taken_seconds: 300,
@@ -263,7 +294,7 @@ async function generatePredictedExamCompletion(userId: string, subjectId: string
     if (error) {
       console.error('Error creating predicted exam completion:', error);
     } else {
-      console.log(`Created predicted exam completion for ${subjectId} with grade ${baseGrade}`);
+      console.log(`Created predicted exam completion for ${subjectId} with grade ${baseGrade} (${percentage}%)`);
     }
   } catch (error) {
     console.error('Error in generatePredictedExamCompletion:', error);
@@ -277,7 +308,7 @@ serve(async (req) => {
   }
 
   try {
-    const { action, userId, subjectId, topicId } = await req.json();
+    const { action, userId, subjectId, topicId, practiceScore, totalMarks } = await req.json();
 
     if (!userId) {
       return new Response(JSON.stringify({ error: 'User ID required' }), {
@@ -313,11 +344,11 @@ serve(async (req) => {
         }
 
         // Always record topic practice and award MP for each completion
-        await recordActivity(userId, ACTIVITY_TYPES.TOPIC_PRACTICED, { subject_id: subjectId, topic_id: topicId });
+        await recordActivity(userId, ACTIVITY_TYPES.TOPIC_PRACTICED, { subject_id: subjectId, topic_id: topicId, practice_score: practiceScore, total_marks: totalMarks });
         await recordActivity(userId, ACTIVITY_TYPES.PRACTICE_COMPLETED);
         
-        // Generate predicted exam completion for grade prediction
-        await generatePredictedExamCompletion(userId, subjectId);
+        // Generate predicted exam completion for grade prediction using actual performance
+        await generatePredictedExamCompletion(userId, subjectId, practiceScore, totalMarks);
         
         const practiceAwarded = await awardPoints(userId, MP_REWARDS.PRACTICE_COMPLETION, 'Practice completion');
         let totalAwarded = practiceAwarded ? MP_REWARDS.PRACTICE_COMPLETION : 0;

@@ -141,14 +141,16 @@ export class MPPointsSystemClient {
     }
   }
 
-  static async awardPracticeCompletion(userId: string, subjectId: string, topicId: string): Promise<{ success: boolean; awarded: number; message: string; breakdown?: any }> {
+  static async awardPracticeCompletion(userId: string, subjectId: string, topicId: string, practiceScore?: number, totalMarks?: number): Promise<{ success: boolean; awarded: number; message: string; breakdown?: any }> {
     try {
       const { data } = await supabase.functions.invoke('award-mp', {
         body: { 
           action: 'practice_completion', 
           userId, 
           subjectId, 
-          topicId 
+          topicId,
+          practiceScore,
+          totalMarks
         }
       });
       

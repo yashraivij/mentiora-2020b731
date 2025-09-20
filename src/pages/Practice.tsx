@@ -435,7 +435,7 @@ const Practice = () => {
     if (user?.id && subjectId && topicId) {
       try {
         const { MPPointsSystemClient } = await import('@/lib/mpPointsSystemClient');
-        const result = await MPPointsSystemClient.awardPracticeCompletion(user.id, subjectId, topicId);
+        const result = await MPPointsSystemClient.awardPracticeCompletion(user.id, subjectId, topicId, marksEarned, totalMarks);
         
         if (result.awarded > 0) {
           console.log(`Practice completion rewards: +${result.awarded} MP`);
