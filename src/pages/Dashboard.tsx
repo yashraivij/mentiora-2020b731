@@ -397,6 +397,7 @@ const Dashboard = () => {
         .lte('created_at', endOfDay.toISOString());
       
       console.log('Today\'s activities found:', todayActivities);
+      console.log('Activities query error:', error);
       
       if (error) {
         console.error('Error fetching activities:', error);
@@ -422,6 +423,15 @@ const Dashboard = () => {
           (weeklyTopicsAwards * 100) +           // 100 MP for weekly 3 topics bonus
           (weeklyPracticeAwards * 250) +         // 250 MP for weekly 5 practice challenge
           (streakAwards * 500);                  // 500 MP for 7-day streak
+        
+        console.log('MP calculation breakdown:', {
+          dailyLogin: Math.min(dailyLoginCount, 1) * 10,
+          practice: practiceCompletions * 40,
+          weeklyTopics: weeklyTopicsAwards * 100,
+          weeklyPractice: weeklyPracticeAwards * 250,
+          streak: streakAwards * 500,
+          total: earnedToday
+        });
       }
       
       console.log('Total MP earned today:', earnedToday);
