@@ -2411,8 +2411,8 @@ const Dashboard = () => {
               </div>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
-                  <div className={`w-8 h-8 ${userStats?.practiceToday ? 'bg-green-100' : 'bg-blue-400'} rounded-lg flex items-center justify-center`}>
-                    {userStats?.practiceToday ? (
+                  <div className={`w-8 h-8 ${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'bg-green-100' : 'bg-blue-400'} rounded-lg flex items-center justify-center`}>
+                    {(userStats?.practiceToday || todayEarnedMP >= 40) ? (
                       <Check className="h-4 w-4 text-green-600" />
                     ) : (
                       <BookOpen className="h-4 w-4 text-white" />
@@ -2422,14 +2422,14 @@ const Dashboard = () => {
                     <p className="font-bold text-gray-800">Complete 1 practice set</p>
                     <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
                       <div 
-                        className={`${(userStats?.practiceToday || userStats?.weeklyPracticeCount > 0) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
-                        style={{width: (userStats?.practiceToday || userStats?.weeklyPracticeCount > 0) ? '100%' : '20%'}}
+                        className={`${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
+                        style={{width: (userStats?.practiceToday || todayEarnedMP >= 40) ? '100%' : '20%'}}
                       ></div>
                     </div>
                   </div>
-                  <div className={`${userStats?.practiceToday ? 'bg-green-50' : 'bg-blue-50'} rounded-lg p-2`}>
-                    <span className={`text-xs font-bold ${userStats?.practiceToday ? 'text-green-600' : 'text-blue-600'}`}>
-                      {userStats?.practiceToday ? '+40 MP' : '40 MP'}
+                  <div className={`${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'bg-green-50' : 'bg-blue-50'} rounded-lg p-2`}>
+                    <span className={`text-xs font-bold ${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'text-green-600' : 'text-blue-600'}`}>
+                      {(userStats?.practiceToday || todayEarnedMP >= 40) ? '+40 MP' : '40 MP'}
                     </span>
                   </div>
                 </div>
