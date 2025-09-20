@@ -477,6 +477,8 @@ const Dashboard = () => {
         .select('user_id, total_points')
         .gt('total_points', 0);
       
+      console.log('User points query result:', { allUsers, usersError });
+      
       if (usersError || !allUsers) {
         console.error('Error fetching users:', usersError);
         return [];
@@ -484,12 +486,15 @@ const Dashboard = () => {
       
       // Get profile data for these users  
       const userIds = allUsers.map(u => u.user_id);
+      console.log('User IDs from user_points:', userIds);
       
       // First, get public profiles
       const { data: publicProfiles, error: publicProfilesError } = await supabase
         .from('public_profiles')
         .select('user_id, username, display_name, streak_days')
         .in('user_id', userIds);
+      
+      console.log('Public profiles query result:', { publicProfiles, publicProfilesError });
       
       const profilesMap = new Map();
       
@@ -501,11 +506,15 @@ const Dashboard = () => {
       const existingUserIds = Array.from(profilesMap.keys());
       const missingUserIds = userIds.filter(id => !existingUserIds.includes(id));
       
+      console.log('Missing user IDs for profiles lookup:', missingUserIds);
+      
       if (missingUserIds.length > 0) {
         const { data: fallbackProfiles, error: fallbackError } = await supabase
           .from('profiles')
           .select('id, full_name, username, email')
           .in('id', missingUserIds);
+        
+        console.log('Profiles fallback query result:', { fallbackProfiles, fallbackError });
         
         if (!fallbackError && fallbackProfiles) {
           for (const profile of fallbackProfiles) {
@@ -520,6 +529,8 @@ const Dashboard = () => {
       }
       
       const currentUserId = (await supabase.auth.getUser()).data.user?.id;
+      
+      console.log('Final profiles map:', Object.fromEntries(profilesMap));
       
       // Transform to leaderboard format (using total MP as placeholder for weekly MP)
       const weeklyLeaderboard = allUsers.map(user => {
@@ -538,7 +549,7 @@ const Dashboard = () => {
       // Sort by MP
       weeklyLeaderboard.sort((a, b) => b.mp - a.mp);
       
-      console.log('Weekly leaderboard loaded:', weeklyLeaderboard);
+      console.log('Final weekly leaderboard:', weeklyLeaderboard);
       
       return weeklyLeaderboard;
     } catch (error) {
