@@ -1928,10 +1928,42 @@ const Dashboard = () => {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-gray-800">Weekly Leaderboard</h3>
-                      <p className="text-gray-600">You're ranked #5 this week</p>
+                      <p className="text-gray-600">
+                        You're ranked #{(() => {
+                          // Calculate user's rank from weekly leaderboard data
+                          let players = leaderboardData.filter(p => {
+                            // Real users appear in both leaderboards
+                            if (p.isRealUser) return true;
+                            
+                            // Filter fake users for weekly leaderboard
+                            return p.leaderboardType === 'weekly';
+                          });
+                          
+                          // Add current user if not present
+                          const userExists = players.some(p => p.isCurrentUser);
+                          if (!userExists && user) {
+                            const currentUserData = {
+                              name: getFirstName(),
+                              mp: userGems,
+                              streak: currentStreak,
+                              isCurrentUser: true,
+                              isRealUser: true
+                            };
+                            players.push(currentUserData);
+                          }
+                          
+                          // Sort and find user rank
+                          players.sort((a, b) => b.mp - a.mp);
+                          const userRank = players.findIndex(p => p.isCurrentUser) + 1;
+                          return userRank || players.length;
+                        })()} this week
+                      </p>
                     </div>
                   </div>
-                  <Button className="bg-yellow-400 hover:bg-yellow-500 text-yellow-800 font-bold py-3 px-6 rounded-2xl">
+                  <Button 
+                    className="bg-yellow-400 hover:bg-yellow-500 text-yellow-800 font-bold py-3 px-6 rounded-2xl"
+                    onClick={() => setActiveTab("leaderboards")}
+                  >
                     View Leaderboard
                   </Button>
                 </div>
