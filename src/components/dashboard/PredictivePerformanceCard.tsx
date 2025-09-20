@@ -201,21 +201,6 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
                 </span>
               </div>
               
-              {!isPremium && (
-                <div className="bg-gradient-to-r from-emerald-500/10 to-teal-600/10 border border-emerald-500/20 rounded-xl p-3 mb-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Lock className="h-4 w-4 text-emerald-600" />
-                      <span className="text-xs font-medium text-emerald-700">Unlock Predictions</span>
-                    </div>
-                    <Button size="sm" className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white text-xs px-3 py-1 h-7">
-                      <Crown className="h-3 w-3 mr-1" />
-                      Upgrade
-                    </Button>
-                  </div>
-                </div>
-              )}
-              
               {/* Mini Bar Chart */}
               <div className="space-y-2">
                 {subjects.slice(0, 3).map((subject, index) => (
