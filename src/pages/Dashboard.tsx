@@ -441,84 +441,79 @@ const Dashboard = () => {
 
   const loadLeaderboardData = async () => {
     try {
-      // Always include fake users regardless of real user data
-      const weeklyFakeUsers = [
-        { name: "Alex Chen", mp: 247, grade: 8.6, streak: 14, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-        { name: "Emma Wilson", mp: 215, grade: 8.2, streak: 12, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-        { name: "Liam Parker", mp: 188, grade: 7.9, streak: 9, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-        { name: "Sophia Lee", mp: 164, grade: 7.5, streak: 8, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-        { name: "James Smith", mp: 142, grade: 6.8, streak: 5, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-        { name: "Maya Patel", mp: 127, grade: 6.5, streak: 4, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-        { name: "Oliver Brown", mp: 108, grade: 6.2, streak: 3, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-        { name: "Zoe Davis", mp: 95, grade: 6.0, streak: 2, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-        { name: "Ryan Kim", mp: 82, grade: 5.8, streak: 1, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-        { name: "Lucy Martinez", mp: 67, grade: 5.5, streak: 0, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-      ];
+      // Get real users with their MP points and calculate retroactive MP for users without it
+      const { data: allUsers, error: usersError } = await supabase
+        .from('public_profiles')
+        .select(`
+          user_id,
+          username,
+          display_name,
+          streak_days
+        `);
 
-      // All-time fake users (higher MP values for all-time leaderboard)
-      const allTimeFakeUsers = [
-        { name: "Marcus Thompson", mp: 4247, grade: 9.0, streak: 127, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Sarah Chen", mp: 3815, grade: 8.9, streak: 98, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "David Rodriguez", mp: 3456, grade: 8.7, streak: 85, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Emily Zhang", mp: 3124, grade: 8.5, streak: 72, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Christopher Lee", mp: 2867, grade: 8.3, streak: 65, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Ashley Williams", mp: 2543, grade: 8.1, streak: 58, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Michael Chang", mp: 2298, grade: 7.9, streak: 51, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Jessica Taylor", mp: 2067, grade: 7.7, streak: 44, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Brandon Martinez", mp: 1854, grade: 7.5, streak: 37, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Isabella Garcia", mp: 1654, grade: 7.3, streak: 30, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-      ];
-
-      // Try to fetch real users, but don't fail if it doesn't work
-      let transformedRealUsers = [];
-      try {
-        const { data: realUsers, error } = await supabase
-          .from('public_profiles')
-          .select(`
-            user_id,
-            username,
-            display_name,
-            streak_days,
-            user_points (total_points)
-          `)
-          .limit(50);
-
-        if (!error && realUsers) {
-          transformedRealUsers = realUsers
-            .filter(user => user.user_points && Array.isArray(user.user_points) && user.user_points.length > 0)
-            .map(user => ({
-              name: user.display_name || user.username || 'Anonymous',
-              mp: Array.isArray(user.user_points) ? (user.user_points[0] as any)?.total_points || 0 : 0,
-              grade: Math.random() * 3 + 6,
-              streak: user.streak_days || 0,
-              isCurrentUser: false,
-              isRealUser: true,
-              leaderboardType: 'both'
-            }));
-        }
-      } catch (realUserError) {
-        console.log('Could not load real users, using fake users only');
+      if (usersError) {
+        console.error('Error fetching users:', usersError);
+        setLeaderboardData([]);
+        return;
       }
 
-      // Combine all users - fake users are always included
-      const allUsers = [...transformedRealUsers, ...weeklyFakeUsers, ...allTimeFakeUsers];
+      let transformedRealUsers = [];
       
-      console.log('All users loaded:', allUsers.length, allUsers);
+      if (allUsers && allUsers.length > 0) {
+        // Get user points for all users
+        const userIds = allUsers.map(u => u.user_id);
+        const { data: userPoints, error: pointsError } = await supabase
+          .from('user_points')
+          .select('user_id, total_points')
+          .in('user_id', userIds);
 
-      setLeaderboardData(allUsers);
+        const pointsMap = new Map((userPoints || []).map(p => [p.user_id, p.total_points]));
+
+        // For users without MP points, calculate retroactive MP
+        for (const user of allUsers) {
+          let mp = pointsMap.get(user.user_id) || 0;
+          
+          // If user has no MP but has been active, calculate retroactive MP
+          if (mp === 0) {
+            try {
+              const { data: retroMP } = await supabase.functions.invoke('calculate-retroactive-mp', {
+                body: { user_id: user.user_id }
+              });
+              
+              if (retroMP && !retroMP.error) {
+                mp = retroMP.total_mp || 0;
+                // Refresh points map for this user
+                pointsMap.set(user.user_id, mp);
+              }
+            } catch (error) {
+              console.log('Could not calculate retroactive MP for user:', user.user_id);
+            }
+          }
+
+          // Only include users with MP > 0
+          if (mp > 0) {
+            transformedRealUsers.push({
+              name: user.display_name || user.username || 'Anonymous',
+              mp: mp,
+              grade: 6.0 + (Math.random() * 3), // Random grade between 6.0-9.0 for display
+              streak: user.streak_days || 0,
+              isCurrentUser: user.user_id === (await supabase.auth.getUser()).data.user?.id,
+              isRealUser: true,
+              leaderboardType: 'both'
+            });
+          }
+        }
+      }
+
+      // Sort by MP points
+      transformedRealUsers.sort((a, b) => b.mp - a.mp);
+      
+      console.log('Real users loaded:', transformedRealUsers.length, transformedRealUsers);
+
+      setLeaderboardData(transformedRealUsers);
     } catch (error) {
       console.error('Error loading leaderboard:', error);
-      // Still set fake users even if there's an error
-      const weeklyFakeUsers = [
-        { name: "Alex Chen", mp: 247, grade: 8.6, streak: 14, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-        { name: "Emma Wilson", mp: 215, grade: 8.2, streak: 12, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-        { name: "Liam Parker", mp: 188, grade: 7.9, streak: 9, isCurrentUser: false, isRealUser: false, leaderboardType: 'weekly' },
-      ];
-      const allTimeFakeUsers = [
-        { name: "Marcus Thompson", mp: 4247, grade: 9.0, streak: 127, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-        { name: "Sarah Chen", mp: 3815, grade: 8.9, streak: 98, isCurrentUser: false, isRealUser: false, leaderboardType: 'alltime' },
-      ];
-      setLeaderboardData([...weeklyFakeUsers, ...allTimeFakeUsers]);
+      setLeaderboardData([]);
     }
   };
 

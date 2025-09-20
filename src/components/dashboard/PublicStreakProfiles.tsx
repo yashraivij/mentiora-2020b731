@@ -5,13 +5,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Trophy, Crown, Star, Zap, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-// Import animal avatars
-import catAvatar from '@/assets/avatars/cat-avatar.png';
-import dogAvatar from '@/assets/avatars/dog-avatar.png';
-import foxAvatar from '@/assets/avatars/fox-avatar.png';
-import rabbitAvatar from '@/assets/avatars/rabbit-avatar.png';
-import bearAvatar from '@/assets/avatars/bear-avatar.png';
-
 interface PublicProfile {
   id: string;
   username: string;
@@ -19,56 +12,6 @@ interface PublicProfile {
   avatar_url: string | null;
   mp_points: number;
 }
-
-// Fake profiles that change daily
-const generateFakeProfiles = (): PublicProfile[] => {
-  const names = [
-    'Emily Chen', 'studyqueen123', 'Marcus', 'sophia_a', 'Jake W', 
-    'aisha.p', 'Oliver Smith', 'maya_r', 'Ethan', 'zara_k',
-    'Lucas Davis', 'bella_g', 'noah_w', 'aria.t', 'Tyler', 
-    'chloe_lee', 'Ryan', 'mia.j', 'alex_t', 'Grace Miller'
-  ];
-  
-  const avatars = [catAvatar, dogAvatar, foxAvatar, rabbitAvatar, bearAvatar];
-  
-  // Use current date as seed for consistent daily changes
-  const today = new Date();
-  const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-  
-  // Simple seeded random function
-  let seedValue = seed;
-  const seededRandom = () => {
-    seedValue = (seedValue * 9301 + 49297) % 233280;
-    return seedValue / 233280;
-  };
-  
-  const profiles: PublicProfile[] = [];
-  const usedNames = new Set<string>();
-  
-  // Generate 8-12 fake profiles
-  const profileCount = Math.floor(seededRandom() * 5) + 8;
-  
-  for (let i = 0; i < profileCount; i++) {
-    let name;
-    do {
-      name = names[Math.floor(seededRandom() * names.length)];
-    } while (usedNames.has(name));
-    usedNames.add(name);
-    
-    const mpPoints = Math.floor(seededRandom() * 2000) + 500; // 500-2499 MP
-    const avatar = avatars[Math.floor(seededRandom() * avatars.length)];
-    
-    profiles.push({
-      id: `fake-${i}-${seed}`,
-      username: name,
-      display_name: name,
-      avatar_url: avatar,
-      mp_points: mpPoints
-    });
-  }
-  
-  return profiles.sort((a, b) => b.mp_points - a.mp_points);
-};
 
 export function PublicStreakProfiles() {
   const [profiles, setProfiles] = useState<PublicProfile[]>([]);
@@ -78,33 +21,69 @@ export function PublicStreakProfiles() {
 
   useEffect(() => {
     fetchPublicProfiles();
-    // Refresh every 30 seconds to show updated profiles
-    const interval = setInterval(fetchPublicProfiles, 30000);
+    // Refresh every 10 seconds for real-time updates
+    const interval = setInterval(fetchPublicProfiles, 10000);
     return () => clearInterval(interval);
   }, []);
 
   const fetchPublicProfiles = async () => {
     try {
-      // Get public profiles
+      // Get real user profiles with their MP points
       const { data: profilesData, error: profilesError } = await supabase
         .from('public_profiles')
-        .select('*');
+        .select(`
+          id,
+          user_id,
+          username,
+          display_name,
+          avatar_url,
+          streak_days
+        `);
 
       if (profilesError) {
         console.error('Error fetching public profiles:', profilesError);
+        setProfiles([]);
+        return;
       }
 
-      // For now, use the fake profiles since we can't reliably query user_points
-      // In a real implementation, you'd join with user_points table
-      const fakeProfiles = generateFakeProfiles();
+      // Get user points for each profile
+      const profilesWithMP = [];
       
-      // Sort by MP points
-      const allProfiles = [...fakeProfiles]
-        .sort((a, b) => b.mp_points - a.mp_points);
+      if (profilesData && profilesData.length > 0) {
+        const userIds = profilesData.map(p => p.user_id);
+        
+        const { data: userPoints, error: pointsError } = await supabase
+          .from('user_points')  
+          .select('user_id, total_points')
+          .in('user_id', userIds);
 
-      setProfiles(allProfiles);
+        if (!pointsError && userPoints) {
+          const pointsMap = new Map(userPoints.map(p => [p.user_id, p.total_points]));
+          
+          for (const profile of profilesData) {
+            const mp = pointsMap.get(profile.user_id) || 0;
+            
+            // Only include users with MP > 0 (users who have actually participated)
+            if (mp > 0) {
+              profilesWithMP.push({
+                id: profile.id,
+                username: profile.username,
+                display_name: profile.display_name,
+                avatar_url: profile.avatar_url,
+                mp_points: mp
+              });
+            }
+          }
+        }
+      }
+
+      // Sort by MP points descending
+      const sortedProfiles = profilesWithMP.sort((a, b) => b.mp_points - a.mp_points);
+      
+      setProfiles(sortedProfiles);
     } catch (error) {
       console.error('Error in fetchPublicProfiles:', error);
+      setProfiles([]);
     } finally {
       setIsLoading(false);
     }
