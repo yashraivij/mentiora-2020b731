@@ -1046,7 +1046,15 @@ const Dashboard = () => {
         </nav>
 
         {/* Bottom Section */}
-        <div className="px-4 pt-4 border-t border-gray-100">
+        <div className="px-4 pt-4 border-t border-gray-100 space-y-2">
+          <button
+            data-feedback-fish
+            data-feedback-fish-userid={user?.email || ""}
+            className="w-full flex items-center justify-start px-4 py-3 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-xl transition-all duration-200"
+          >
+            <span className="text-lg mr-3">💬</span>
+            <span className="font-medium">Feedback</span>
+          </button>
           <Button
             variant="ghost"
             onClick={handleLogout}
