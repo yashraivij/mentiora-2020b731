@@ -938,25 +938,26 @@ const Dashboard = () => {
 
           {/* Notes tab with full notebook functionality */}
           {activeTab === "notes" && (
-            <div>
+            <div className="bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 min-h-screen -m-8 p-8">
               <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold mb-3">
-                  <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-                    Smart Revision Notebook
-                  </span>
-                </h2>
-                <p className="text-xl text-gray-600 font-medium">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 mb-6 shadow-lg">
+                  <NotebookPen className="h-8 w-8 text-white" />
+                </div>
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                  Smart Revision Notebook
+                </h1>
+                <p className="text-gray-600 text-lg max-w-md mx-auto">
                   Instant notes for every lost mark
                 </p>
               </div>
 
               {/* Filters */}
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-8">
-                <div className="flex items-center justify-center space-x-6">
+              <div className="max-w-2xl mx-auto bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-violet-100 p-6 mb-8">
+                <div className="flex items-center justify-center space-x-8">
                   <div className="space-y-2">
                     <label className="text-sm font-semibold text-gray-700 block">Subject</label>
                     <Select value={selectedNotebookSubject} onValueChange={setSelectedNotebookSubject}>
-                      <SelectTrigger className="w-44 bg-white border-gray-200 hover:border-blue-300 focus:border-blue-400 transition-all duration-200">
+                      <SelectTrigger className="w-44 bg-white border-gray-200 hover:border-violet-300 focus:border-violet-400 transition-all duration-200">
                         <SelectValue placeholder="All Subjects" />
                       </SelectTrigger>
                   <SelectContent className="bg-white dark:bg-slate-800 z-50">
@@ -971,7 +972,7 @@ const Dashboard = () => {
                   <div className="space-y-2">
                     <label className="text-sm font-semibold text-gray-700 block">Confidence</label>
                     <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
-                      <SelectTrigger className="w-44 bg-white border-gray-200 hover:border-blue-300 focus:border-blue-400 transition-all duration-200">
+                      <SelectTrigger className="w-44 bg-white border-gray-200 hover:border-violet-300 focus:border-violet-400 transition-all duration-200">
                         <SelectValue placeholder="All Confidence" />
                       </SelectTrigger>
                       <SelectContent className="bg-white z-50">
@@ -988,27 +989,37 @@ const Dashboard = () => {
               {/* Notebook Entries */}
               {notebookLoading ? (
                 <div className="text-center py-16">
-                  <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent mx-auto mb-6"></div>
-                  <p className="text-foreground font-medium text-lg">Loading your notes...</p>
+                  <div className="animate-spin rounded-full h-12 w-12 border-4 border-violet-500 border-t-transparent mx-auto mb-6"></div>
+                  <p className="text-gray-700 font-medium text-lg">Loading your notes...</p>
                 </div>
               ) : sortedEntries.length === 0 ? (
-                <Card className="text-center py-16 bg-gradient-to-br from-white/80 to-slate-50/80 backdrop-blur-xl border border-slate-200/50 shadow-2xl">
-                  <CardContent>
-                    <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-slate-200 to-slate-300 rounded-3xl flex items-center justify-center">
-                      <NotebookPen className="h-10 w-10 text-slate-500" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-foreground mb-3">No Revision Notes Yet</h3>
-                    <p className="text-muted-foreground mb-8 max-w-md mx-auto text-lg">
-                      Start practicing questions to generate your personalized Smart revision notes!
-                    </p>
-                    <Button 
-                      onClick={() => setActiveTab("learn")} 
-                      className="bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
-                    >
-                      Start Practicing
-                    </Button>
-                  </CardContent>
-                </Card>
+                <div className="max-w-2xl mx-auto">
+                  <Card className="text-center py-16 px-8 border border-violet-100 shadow-xl bg-white/90 backdrop-blur-sm">
+                    <CardContent className="space-y-8">
+                      <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-violet-100 to-purple-100 flex items-center justify-center shadow-lg">
+                        <NotebookPen className="h-12 w-12 text-violet-600" />
+                      </div>
+                      
+                      <div className="space-y-4">
+                        <h3 className="text-2xl font-semibold text-gray-900">
+                          No Revision Notes Yet
+                        </h3>
+                        <p className="text-gray-600 max-w-sm mx-auto leading-relaxed">
+                          Start practicing questions to generate your personalized Smart revision notes!
+                        </p>
+                      </div>
+
+                      <div className="pt-4">
+                        <Button 
+                          onClick={() => setActiveTab("learn")} 
+                          className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+                        >
+                          Start Practicing
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               ) : (
                 <div className="space-y-8">
                   {sortedEntries.map((entry, index) => (
