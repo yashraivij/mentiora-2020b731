@@ -1323,8 +1323,9 @@ const Dashboard = () => {
                  </div>
                </div>
 
-               {/* Stats Overview Cards */}
-               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                {/* Stats Overview Cards */}
+                <div className="flex justify-center mb-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl w-full">
                  <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100 text-center">
                    <div className="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
                      <Trophy className="w-6 h-6 text-yellow-800" />
@@ -1372,6 +1373,7 @@ const Dashboard = () => {
                    <div className="text-2xl font-bold text-gray-800">{userGems}</div>
                    <div className="text-sm text-gray-600">Total MP</div>
                  </div>
+                  </div>
                 </div>
 
               {/* Main Leaderboard */}
