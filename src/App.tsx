@@ -25,7 +25,6 @@ import Pricing from "./pages/Pricing";
 import Settings from "./pages/Settings";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
-import FeedbackFish from "./components/ui/feedback-fish";
 
 const queryClient = new QueryClient();
 
@@ -37,7 +36,6 @@ const App: React.FC = () => (
         <Sonner />
         <AuthProvider>
           <MPRewardsProvider>
-            <FeedbackFish />
             <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
