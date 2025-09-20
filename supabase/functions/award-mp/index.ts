@@ -197,6 +197,79 @@ async function getUserStreak(userId: string): Promise<number> {
   return data || 0;
 }
 
+async function generatePredictedExamCompletion(userId: string, subjectId: string): Promise<void> {
+  try {
+    // Get user's recent performance for this subject to calculate predicted grade
+    const { data: recentActivities } = await supabase
+      .from('user_activities')
+      .select('created_at, metadata')
+      .eq('user_id', userId)
+      .eq('activity_type', ACTIVITY_TYPES.TOPIC_PRACTICED)
+      .order('created_at', { ascending: false })
+      .limit(10);
+    
+    // Calculate a basic predicted grade based on activity frequency
+    // More recent activity = better predicted performance
+    const baseGrade = Math.min(Math.max(1, (recentActivities?.length || 1) + 1), 9);
+    const percentage = Math.min(((baseGrade - 1) / 8) * 100, 90); // Convert grade 1-9 to percentage
+    
+    // Create mock exam data for the prediction
+    const mockQuestions = [
+      {
+        id: `${subjectId}-prediction-q1`,
+        questionNumber: 1,
+        section: subjectId,
+        text: `Practice-based prediction question for ${subjectId}`,
+        marks: 10
+      }
+    ];
+    
+    const mockAnswers = [
+      {
+        questionId: `${subjectId}-prediction-q1`,
+        answer: "Practice-based prediction answer"
+      }
+    ];
+    
+    const mockResults = [
+      {
+        questionId: `${subjectId}-prediction-q1`,
+        marks: Math.round(10 * (percentage / 100)),
+        totalMarks: 10,
+        feedback: "Based on recent practice performance"
+      }
+    ];
+    
+    // Insert predicted exam completion
+    const { error } = await supabase
+      .from('predicted_exam_completions')
+      .insert({
+        user_id: userId,
+        subject_id: subjectId,
+        exam_date: new Date().toISOString().split('T')[0],
+        questions: mockQuestions,
+        answers: mockAnswers,
+        results: mockResults,
+        total_marks: 10,
+        achieved_marks: Math.round(10 * (percentage / 100)),
+        percentage: percentage,
+        grade: baseGrade.toString(),
+        time_taken_seconds: 300,
+        completed_at: new Date().toISOString(),
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      });
+    
+    if (error) {
+      console.error('Error creating predicted exam completion:', error);
+    } else {
+      console.log(`Created predicted exam completion for ${subjectId} with grade ${baseGrade}`);
+    }
+  } catch (error) {
+    console.error('Error in generatePredictedExamCompletion:', error);
+  }
+}
+
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
@@ -242,6 +315,9 @@ serve(async (req) => {
         // Always record topic practice and award MP for each completion
         await recordActivity(userId, ACTIVITY_TYPES.TOPIC_PRACTICED, { subject_id: subjectId, topic_id: topicId });
         await recordActivity(userId, ACTIVITY_TYPES.PRACTICE_COMPLETED);
+        
+        // Generate predicted exam completion for grade prediction
+        await generatePredictedExamCompletion(userId, subjectId);
         
         const practiceAwarded = await awardPoints(userId, MP_REWARDS.PRACTICE_COMPLETION, 'Practice completion');
         let totalAwarded = practiceAwarded ? MP_REWARDS.PRACTICE_COMPLETION : 0;
