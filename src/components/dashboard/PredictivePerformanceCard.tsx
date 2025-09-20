@@ -5,7 +5,6 @@ import { Lock, Crown, LineChart, Star, Trophy } from "lucide-react";
 import { curriculum } from "@/data/curriculum";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
-import { useSubscription } from "@/hooks/useSubscription";
 import { useEffect, useState } from "react";
 
 interface UserProgress {
@@ -22,7 +21,6 @@ interface PredictivePerformanceCardProps {
 
 export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanceCardProps) => {
   const { user } = useAuth();
-  const { isPremium } = useSubscription();
   const [predictedExamCompletions, setPredictedExamCompletions] = useState<any[]>([]);
 
   useEffect(() => {
@@ -198,7 +196,7 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
             <div className="mt-6 space-y-4">
               <div className="flex justify-between text-xs text-muted-foreground">
                 <span>Average Grade</span>
-                <span className={`font-semibold bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent ${!isPremium ? 'blur-sm' : ''}`}>
+                <span className="font-semibold bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent">
                   {averageGrade.toFixed(1)}
                 </span>
               </div>
@@ -219,7 +217,7 @@ export const PredictivePerformanceCard = ({ userProgress }: PredictivePerformanc
                       </div>
                     </div>
                     <div className="flex items-center gap-1">
-                      <span className={`text-xs font-bold text-foreground ${!isPremium ? 'blur-sm' : ''}`}>{subject.grade === 0 ? 'U' : subject.grade}</span>
+                      <span className="text-xs font-bold text-foreground">{subject.grade === 0 ? 'U' : subject.grade}</span>
                       {subject.grade >= 8 && <Star className="h-3 w-3 text-yellow-500" />}
                       {subject.grade === 9 && <Trophy className="h-3 w-3 text-amber-500" />}
                     </div>
