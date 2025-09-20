@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/contexts/AuthContext";
+import { useSubscription } from "@/hooks/useSubscription";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import mentioraLogo from "@/assets/mentiora-logo.png";
@@ -80,7 +81,8 @@ interface NotebookEntryData {
 }
 
 const Dashboard = () => {
-  const { user, logout, isPremium } = useAuth();
+  const { user, logout } = useAuth();
+  const { isPremium, openPaymentLink } = useSubscription();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -1096,19 +1098,59 @@ const Dashboard = () => {
                         </div>
                         <div>
                           <h3 className="text-2xl font-bold text-gray-800">
-                            Your average grade is {predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0}. Keep it up!
+                            Your average grade is {isPremium ? (
+                              predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0
+                            ) : (
+                              <span className="relative inline-flex items-center">
+                                <span className="blur-sm select-none">7</span>
+                                <Lock className="absolute inset-0 h-4 w-4 text-gray-600 m-auto" />
+                              </span>
+                            )}. Keep it up!
                           </h3>
-                          <p className="text-gray-600">You're making great progress</p>
+                          <p className="text-gray-600">
+                            {isPremium ? "You're making great progress" : "Unlock detailed analytics with Premium"}
+                          </p>
                         </div>
                       </div>
                       <Button
-                        onClick={() => setActiveTab("learn")}
-                        className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200"
+                        onClick={isPremium ? () => setActiveTab("learn") : openPaymentLink}
+                        className={`font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 ${
+                          isPremium 
+                            ? "bg-green-500 hover:bg-green-600 text-white"
+                            : "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"
+                        }`}
                       >
-                        Start Practice
+                        {isPremium ? "Start Practice" : "Upgrade to Premium"}
                       </Button>
                     </div>
                   </div>
+
+                  {/* Premium CTA Banner for Free Users */}
+                  {!isPremium && (
+                    <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-3xl p-8 shadow-lg text-white mb-6">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                            <Crown className="h-8 w-8 text-white" />
+                          </div>
+                          <div>
+                            <h3 className="text-2xl font-bold mb-2">
+                              Unlock Your Predicted Grades
+                            </h3>
+                            <p className="text-blue-100">
+                              See detailed grade predictions and accuracy analytics for all your subjects
+                            </p>
+                          </div>
+                        </div>
+                        <Button
+                          onClick={openPaymentLink}
+                          className="bg-white text-blue-600 hover:bg-gray-100 font-bold py-4 px-8 rounded-2xl shadow-lg"
+                        >
+                          Get Premium
+                        </Button>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Subject Cards */}
                   <div className="space-y-4">
@@ -1184,7 +1226,15 @@ const Dashboard = () => {
                                   </div>
                                   
                                   <p className="text-sm text-gray-600">
-                                    {Math.round(prediction.percentage || 0)}% accuracy in practice
+                                    {isPremium ? (
+                                      `${Math.round(prediction.percentage || 0)}% accuracy in practice`
+                                    ) : (
+                                      <span className="inline-flex items-center">
+                                        <span className="blur-sm select-none">85</span>
+                                        <Lock className="h-3 w-3 text-gray-600 ml-1" />
+                                        <span className="ml-1">% accuracy in practice</span>
+                                      </span>
+                                    )}
                                   </p>
                                 </div>
                               </div>
@@ -1192,7 +1242,14 @@ const Dashboard = () => {
                               {/* Large Grade Display */}
                               <div className="text-center ml-6">
                                 <div className={`text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1`}>
-                                  {prediction.grade || '0'}
+                                  {isPremium ? (
+                                    prediction.grade || '0'
+                                  ) : (
+                                    <div className="relative inline-flex items-center justify-center">
+                                      <span className="blur-sm select-none">8</span>
+                                      <Lock className="absolute h-6 w-6 text-gray-600" />
+                                    </div>
+                                  )}
                                 </div>
                                 <div className="text-sm text-gray-500 uppercase tracking-wide font-medium">
                                   Predicted
@@ -1271,9 +1328,9 @@ const Dashboard = () => {
                          if (!userExists && user) {
                            const currentUserData = {
                              name: getFirstName(),
-                             mp: userGems,
-                             grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0,
-                             streak: currentStreak,
+                            mp: userGems,
+                            grade: isPremium && predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0,
+                            streak: currentStreak,
                              isCurrentUser: true,
                              isRealUser: true
                            };
@@ -1299,12 +1356,20 @@ const Dashboard = () => {
                    <div className="w-12 h-12 bg-orange-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
                      <TrendingUp className="w-6 h-6 text-white" />
                    </div>
-                   <div className="text-2xl font-bold text-gray-800">
-                     {predictedGrades.length > 0 
-                       ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10
-                       : '0.0'
-                     }
-                   </div>
+                    <div className="text-2xl font-bold text-gray-800">
+                      {isPremium ? (
+                        predictedGrades.length > 0 
+                          ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10
+                          : '0.0'
+                      ) : (
+                        <div className="relative inline-flex items-center">
+                          <span className="blur-sm select-none">8.5</span>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <Lock className="h-5 w-5 text-gray-600" />
+                          </div>
+                        </div>
+                      )}
+                    </div>
                    <div className="text-sm text-gray-600">Avg Grade</div>
                  </div>
                </div>
@@ -1363,10 +1428,10 @@ const Dashboard = () => {
                         console.log('User exists in leaderboard:', userExists);
                         if (!userExists && user) {
                           const currentUserData = {
-                            name: getFirstName(),
-                            mp: userGems,
-                            grade: predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0,
-                            streak: currentStreak,
+                             name: getFirstName(),
+                             mp: userGems,
+                             grade: isPremium && predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0,
+                             streak: currentStreak,
                             isCurrentUser: true,
                             isRealUser: true,
                             leaderboardType: 'both'
