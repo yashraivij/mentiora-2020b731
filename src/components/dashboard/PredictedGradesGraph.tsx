@@ -477,7 +477,7 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
                             {isPremium ? (
                               <span>{grade.finalGrade}</span>
                             ) : (
-                              <span className="blur-lg select-none opacity-50">{grade.finalGrade}</span>
+                              <span className="bg-gray-300 text-gray-300 rounded px-1 select-none">{grade.finalGrade}</span>
                             )}
                           </div>
 
