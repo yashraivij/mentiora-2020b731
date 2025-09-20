@@ -1360,7 +1360,7 @@ const Dashboard = () => {
                         <div>
                           <h3 className="text-2xl font-bold text-gray-800">
                             Your average grade is {isPremium ? (predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0) : (
-                              <span className="bg-gray-300 text-gray-300 rounded px-1 select-none">8</span>
+                              <Lock size={24} className="inline text-gray-400" />
                             )}. Keep it up!
                           </h3>
                           <p className="text-gray-600">You're making great progress</p>
@@ -1458,13 +1458,13 @@ const Dashboard = () => {
                                      />
                                    </div>
                                   
-                                   <p className="text-sm text-gray-600">
-                                     {isPremium ? `${Math.round(prediction.percentage || 0)}% accuracy in practice` : (
-                                       <span className="flex items-center">
-                                         <BlurSpan>85</BlurSpan>% accuracy in practice
-                                       </span>
-                                     )}
-                                   </p>
+                                    <p className="text-sm text-gray-600">
+                                      {isPremium ? `${Math.round(prediction.percentage || 0)}% accuracy in practice` : (
+                                        <span className="flex items-center">
+                                          <Lock size={16} className="inline text-gray-400 mr-1" />% accuracy in practice
+                                        </span>
+                                      )}
+                                    </p>
                                 </div>
                               </div>
 
