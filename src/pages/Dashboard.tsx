@@ -371,43 +371,58 @@ const Dashboard = () => {
     if (!user?.id) return;
     
     try {
-      // Get UK timezone date boundaries for today
-      const ukDate = new Date().toLocaleString("en-US", { timeZone: "Europe/London" });
-      const today = new Date(ukDate);
-      today.setHours(0, 0, 0, 0);
-      const todayEnd = new Date(today);
+      // Use user's timezone (default America/Los_Angeles as per requirements)
+      const userTimezone = 'America/Los_Angeles';
+      const now = new Date();
+      
+      // Get today's date boundaries in user's timezone
+      const todayStart = new Date(now.toLocaleString("en-US", { timeZone: userTimezone }));
+      todayStart.setHours(0, 0, 0, 0);
+      
+      const todayEnd = new Date(todayStart);
       todayEnd.setHours(23, 59, 59, 999);
+      
+      // Convert to UTC for database query
+      const utcTodayStart = new Date(todayStart.getTime() - (todayStart.getTimezoneOffset() * 60000));
+      const utcTodayEnd = new Date(todayEnd.getTime() - (todayEnd.getTimezoneOffset() * 60000));
       
       // Get today's activities
       const { data: todayActivities } = await supabase
         .from('user_activities')
         .select('activity_type')
         .eq('user_id', user.id)
-        .gte('created_at', today.toISOString())
-        .lte('created_at', todayEnd.toISOString());
+        .gte('created_at', utcTodayStart.toISOString())
+        .lte('created_at', utcTodayEnd.toISOString());
       
       let earnedToday = 0;
       
       if (todayActivities) {
-        // Count different activity types and calculate MP
-        const loginCount = todayActivities.filter(a => a.activity_type === 'daily_login').length;
-        const practiceCount = todayActivities.filter(a => a.activity_type === 'practice_completed').length;
+        // Count different activity types and calculate MP according to rules
+        const dailyLoginCount = todayActivities.filter(a => a.activity_type === 'daily_login').length;
+        const practiceCompletions = todayActivities.filter(a => a.activity_type === 'practice_completed').length;
         const weeklyTopicsAwards = todayActivities.filter(a => a.activity_type === 'weekly_3_topics_awarded').length;
         const weeklyPracticeAwards = todayActivities.filter(a => a.activity_type === 'weekly_5_practice_awarded').length;
         const streakAwards = todayActivities.filter(a => a.activity_type === 'streak_7_days_awarded').length;
         
+        // Calculate MP earned today
         earnedToday = 
-          (loginCount * 10) + 
-          (practiceCount * 40) + 
-          (weeklyTopicsAwards * 100) + 
-          (weeklyPracticeAwards * 250) + 
-          (streakAwards * 500);
+          (Math.min(dailyLoginCount, 1) * 10) +  // Max 1 daily login award per day
+          (practiceCompletions * 40) +           // 40 MP per practice completion
+          (weeklyTopicsAwards * 100) +           // 100 MP for weekly 3 topics bonus
+          (weeklyPracticeAwards * 250) +         // 250 MP for weekly 5 practice challenge
+          (streakAwards * 500);                  // 500 MP for 7-day streak
       }
       
       setTodayEarnedMP(earnedToday);
     } catch (error) {
       console.error('Error calculating today\'s earned MP:', error);
-      setTodayEarnedMP(0);
+      // Fallback to userStats calculation if database query fails
+      if (userStats) {
+        const fallbackMP = (userStats.loginToday ? 10 : 0) + (userStats.practiceToday ? 40 : 0);
+        setTodayEarnedMP(fallbackMP);
+      } else {
+        setTodayEarnedMP(0);
+      }
     }
   };
 
@@ -1563,7 +1578,7 @@ const Dashboard = () => {
                     <div>
                       <h3 className="text-xl font-bold text-gray-800">Daily Goal</h3>
                        <p className="text-gray-600">
-                         50 MP goal — {Math.min((todayEarnedMP > 0 ? todayEarnedMP : ((userStats?.loginToday ? 10 : 0) + (userStats?.practiceToday ? 40 : 0))), 50)}/50 completed
+                         50 MP goal — {Math.min(todayEarnedMP, 50)}/50 completed
                        </p>
                     </div>
                   </div>
@@ -1571,7 +1586,7 @@ const Dashboard = () => {
                 <div className="w-full bg-gray-200 rounded-full h-4">
                   <div 
                     className="bg-blue-400 h-4 rounded-full transition-all duration-500" 
-                    style={{width: `${Math.min((todayEarnedMP > 0 ? todayEarnedMP : ((userStats?.loginToday ? 10 : 0) + (userStats?.practiceToday ? 40 : 0))) / 50 * 100, 100)}%`}}
+                    style={{width: `${Math.min(todayEarnedMP / 50 * 100, 100)}%`}}
                   ></div>
                 </div>
               </div>
@@ -1617,12 +1632,12 @@ const Dashboard = () => {
                        <div>
                          <h4 className="text-lg font-bold text-gray-800">Complete 1 practice set</h4>
                          <p className="text-gray-600">
-                           {userStats?.practiceToday ? 'Complete ✓' : 'Answer questions to earn MP'}
+                           {(todayEarnedMP >= 40) ? 'Complete ✓' : 'Answer questions to earn MP'}
                          </p>
                          <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                            <div 
-                             className={`${(userStats?.practiceToday || userStats?.weeklyPracticeCount > 0) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
-                             style={{width: (userStats?.practiceToday || userStats?.weeklyPracticeCount > 0) ? '100%' : '20%'}}
+                             className={`${(todayEarnedMP >= 40) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
+                             style={{width: (todayEarnedMP >= 40) ? '100%' : '20%'}}
                            ></div>
                          </div>
                        </div>
