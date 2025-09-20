@@ -1540,25 +1540,6 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              {/* League Information */}
-              <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
-                <div className="flex items-center space-x-4 mb-4">
-                  <div className="w-12 h-12 bg-purple-400 rounded-2xl flex items-center justify-center">
-                    <Crown className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-800">Bronze League</h3>
-                    <p className="text-gray-600">Top 3 advance to Silver League</p>
-                  </div>
-                </div>
-                <div className="bg-gray-100 rounded-full h-3 mb-2">
-                  <div className="bg-gradient-to-r from-purple-400 to-purple-500 h-3 rounded-full" style={{width: '60%'}}></div>
-                </div>
-                <p className="text-sm text-gray-600">
-                  Earn more MP to climb the rankings! Complete topics and maintain your streak to move up.
-                </p>
-              </div>
-            </div>
           )}
 
           {activeTab !== "learn" && activeTab !== "notes" && activeTab !== "progress" && activeTab !== "profile" && activeTab !== "quests" && activeTab !== "leaderboards" && (
