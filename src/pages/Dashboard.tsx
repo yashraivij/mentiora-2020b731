@@ -1253,15 +1253,15 @@ const Dashboard = () => {
                           </Card>
                           
                           {/* Remove Subject Button */}
-                          <Button
+                          <button
                             onClick={(e) => {
                               e.stopPropagation();
                               removeSubject(subject.id);
                             }}
-                            className="absolute -top-1 -right-1 w-6 h-6 p-0 bg-gray-400 hover:bg-gray-500 text-white rounded-full shadow-sm opacity-60 hover:opacity-100 transition-opacity"
+                            className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 transition-colors"
                           >
                             <X className="h-3 w-3" />
-                          </Button>
+                          </button>
                         </motion.div>
                       );
                     })}
