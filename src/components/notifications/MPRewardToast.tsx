@@ -42,11 +42,11 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
           }}
           className="fixed top-6 right-6 z-50 max-w-sm"
         >
-          <Card className="relative overflow-hidden bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20 dark:from-primary/30 dark:via-primary/20 dark:to-accent/30 border-primary/30 dark:border-primary/40 shadow-2xl shadow-primary/25 backdrop-blur-xl">
+          <Card className="relative overflow-hidden bg-gradient-to-br from-cyan-400/20 via-blue-400/15 to-indigo-500/20 border-cyan-300/40 shadow-2xl shadow-cyan-400/30 backdrop-blur-xl">
             {/* Animated sparkles and gradient overlay */}
             <div className="absolute inset-0 overflow-hidden">
               {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/10 to-primary/10 dark:from-primary/20 dark:via-accent/20 dark:to-primary/20" />
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/15 via-blue-400/10 to-indigo-500/15" />
               
               {/* Multiple sparkles with different animations */}
               <motion.div
@@ -56,7 +56,7 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
                   opacity: [0.3, 0.7, 0.3]
                 }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-2 -right-2 w-6 h-6 text-primary/50 dark:text-primary/40"
+                className="absolute -top-2 -right-2 w-6 h-6 text-cyan-400"
               >
                 <Sparkles className="w-full h-full" />
               </motion.div>
@@ -67,7 +67,7 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
                   opacity: [0.4, 0.8, 0.4]
                 }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute top-1/2 -left-1 w-5 h-5 text-accent/50 dark:text-accent/40"
+                className="absolute top-1/2 -left-1 w-5 h-5 text-blue-400"
               >
                 <Sparkles className="w-full h-full" />
               </motion.div>
@@ -78,7 +78,7 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
                   opacity: [0.2, 0.6, 0.2]
                 }}
                 transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-1 right-1/3 w-4 h-4 text-primary/50 dark:text-primary/40"
+                className="absolute -bottom-1 right-1/3 w-4 h-4 text-indigo-400"
               >
                 <Sparkles className="w-full h-full" />
               </motion.div>
@@ -90,7 +90,7 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
                 variant="ghost"
                 size="sm"
                 onClick={handleClose}
-                className="absolute top-2 right-2 w-6 h-6 p-0 hover:bg-primary/20 dark:hover:bg-primary/30 text-primary dark:text-primary"
+                className="absolute top-2 right-2 w-6 h-6 p-0 hover:bg-cyan-400/20 text-cyan-600 hover:text-cyan-700"
               >
                 <X className="h-3 w-3" />
               </Button>
@@ -106,9 +106,9 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
                     duration: 0.6,
                     ease: "easeInOut"
                   }}
-                  className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center shadow-lg shadow-primary/30"
+                  className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-400/40"
                 >
-                  <Zap className="h-5 w-5 text-primary-foreground fill-current" />
+                  <Zap className="h-5 w-5 text-white fill-current" />
                 </motion.div>
                 
                 <div className="flex-1">
@@ -116,11 +116,11 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
                     initial={{ scale: 0.5 }}
                     animate={{ scale: 1 }}
                     transition={{ duration: 0.3, ease: "backOut" }}
-                    className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+                    className="text-2xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent"
                   >
                     +{amount} MP
                   </motion.div>
-                  <div className="text-sm text-muted-foreground leading-tight">
+                  <div className="text-sm text-gray-600 leading-tight font-medium">
                     {message}
                   </div>
                 </div>
