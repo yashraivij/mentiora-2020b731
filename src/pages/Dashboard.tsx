@@ -1608,71 +1608,75 @@ const Dashboard = () => {
               <div className="space-y-4">
                 <h3 className="text-xl font-bold text-gray-800">Today's Quests</h3>
                 
-                {/* Quest 1 - Login */}
-                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center">
-                        <Check className="w-6 h-6 text-green-600" />
-                      </div>
+                 {/* Quest 1 - Login */}
+                 <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                   <div className="flex items-center justify-between">
+                     <div className="flex items-center space-x-4">
+                       <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center">
+                         <Check className="w-6 h-6 text-green-600" />
+                       </div>
                        <div>
                          <h4 className="text-lg font-bold text-gray-800">Log in today</h4>
                          <p className="text-gray-600">{userStats?.loginToday ? 'Complete ✓' : 'Log in to earn MP'}</p>
-                         <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
-                           <div 
-                             className={`${(todayEarnedMP >= 10) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
-                             style={{width: (todayEarnedMP >= 10) ? '100%' : '20%'}}
-                           ></div>
-                         </div>
                        </div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-lg font-bold text-green-600">+10 MP</span>
-                      {userStats?.loginToday && (
-                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                          <Check className="w-4 h-4 text-white" />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
+                     </div>
+                     <div className="flex items-center space-x-2">
+                       <span className="text-lg font-bold text-green-600">+10 MP</span>
+                       {userStats?.loginToday && (
+                         <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                           <Check className="w-4 h-4 text-white" />
+                         </div>
+                       )}
+                     </div>
+                   </div>
+                   <div className="mt-4">
+                     <div className="w-full bg-gray-200 rounded-full h-2">
+                       <div 
+                         className={`${(todayEarnedMP >= 10) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
+                         style={{width: (todayEarnedMP >= 10) ? '100%' : '20%'}}
+                       ></div>
+                     </div>
+                   </div>
+                 </div>
 
-                {/* Quest 2 - Practice */}
-                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className={`w-12 h-12 ${userStats?.practiceToday ? 'bg-green-100' : 'bg-blue-400'} rounded-2xl flex items-center justify-center`}>
-                        {userStats?.practiceToday ? (
-                          <Check className="w-6 h-6 text-green-600" />
-                        ) : (
-                          <BookOpen className="w-6 h-6 text-white" />
-                        )}
-                      </div>
+                 {/* Quest 2 - Practice */}
+                 <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                   <div className="flex items-center justify-between">
+                     <div className="flex items-center space-x-4">
+                       <div className={`w-12 h-12 ${userStats?.practiceToday ? 'bg-green-100' : 'bg-blue-400'} rounded-2xl flex items-center justify-center`}>
+                         {userStats?.practiceToday ? (
+                           <Check className="w-6 h-6 text-green-600" />
+                         ) : (
+                           <BookOpen className="w-6 h-6 text-white" />
+                         )}
+                       </div>
                        <div>
                          <h4 className="text-lg font-bold text-gray-800">Complete 1 practice set</h4>
                          <p className="text-gray-600">
                            {(todayEarnedMP >= 40) ? 'Complete ✓' : 'Answer questions to earn MP'}
                          </p>
-                         <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
-                           <div 
-                             className={`${(todayEarnedMP >= 40) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
-                             style={{width: (todayEarnedMP >= 40) ? '100%' : '20%'}}
-                           ></div>
-                         </div>
                        </div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <span className={`text-lg font-bold ${userStats?.practiceToday ? 'text-green-600' : 'text-blue-500'}`}>
-                        +40 MP
-                      </span>
-                      {userStats?.practiceToday && (
-                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                          <Check className="w-4 h-4 text-white" />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
+                     </div>
+                     <div className="flex items-center space-x-2">
+                       <span className={`text-lg font-bold ${userStats?.practiceToday ? 'text-green-600' : 'text-blue-500'}`}>
+                         +40 MP
+                       </span>
+                       {userStats?.practiceToday && (
+                         <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                           <Check className="w-4 h-4 text-white" />
+                         </div>
+                       )}
+                     </div>
+                   </div>
+                   <div className="mt-4">
+                     <div className="w-full bg-gray-200 rounded-full h-2">
+                       <div 
+                         className={`${(todayEarnedMP >= 40) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
+                         style={{width: (todayEarnedMP >= 40) ? '100%' : '20%'}}
+                       ></div>
+                     </div>
+                   </div>
+                 </div>
 
                 {/* Quest 3 - Bonus Weekly */}
                 <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-purple-200">
