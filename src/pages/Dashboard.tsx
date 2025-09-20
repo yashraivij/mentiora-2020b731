@@ -1620,14 +1620,6 @@ const Dashboard = () => {
                       )}
                     </div>
                   </div>
-                  <div className="mt-4">
-                    <div className="w-full bg-gray-200 rounded-full h-3">
-                      <div 
-                        className={`h-3 rounded-full transition-all duration-500 ${userStats?.practiceToday ? 'bg-green-400' : 'bg-blue-400'}`}
-                        style={{width: `${userStats?.practiceToday ? 100 : 0}%`}}
-                      ></div>
-                    </div>
-                  </div>
                 </div>
 
                 {/* Quest 3 - Bonus Weekly */}
