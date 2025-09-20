@@ -2096,25 +2096,59 @@ const Dashboard = () => {
         {/* Right Sidebar - Premium & Stats */}
         <div className="w-80 bg-gray-50 p-6 space-y-6">
           {/* Premium Card */}
-          <Card className="border-0 bg-gradient-to-br from-blue-400 to-purple-500 text-white shadow-lg">
-            <CardContent className="p-6">
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="bg-white/20 rounded-lg p-2">
-                  <Crown className="h-6 w-6" />
+          {isPremium ? (
+            <Card className="border-0 bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-lg">
+              <CardContent className="p-6">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="bg-white/20 rounded-lg p-2">
+                    <Crown className="h-6 w-6" />
+                  </div>
+                  <span className="font-bold text-lg">Premium Active</span>
                 </div>
-                <span className="font-bold text-lg">Go Premium</span>
-              </div>
-              <p className="text-white/90 mb-4">
-                Unlock exclusive study features and advanced analytics!
-              </p>
-              <Button 
-                className="w-full bg-white text-blue-500 hover:bg-gray-100 font-bold py-3 rounded-2xl"
-                onClick={() => navigate("/pricing")}
-              >
-                UPGRADE TO PREMIUM
-              </Button>
-            </CardContent>
-          </Card>
+                <p className="text-white/90 mb-4">
+                  You're enjoying all premium benefits!
+                </p>
+                <div className="space-y-2 text-sm text-white/80">
+                  <div className="flex items-center space-x-2">
+                    <Check className="h-4 w-4" />
+                    <span>Unlimited practice sessions</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Check className="h-4 w-4" />
+                    <span>Advanced grade predictions</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Check className="h-4 w-4" />
+                    <span>Predicted 2026 exam access</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Check className="h-4 w-4" />
+                    <span>Personalized revision notes</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ) : (
+            <Card className="border-0 bg-gradient-to-br from-blue-400 to-purple-500 text-white shadow-lg">
+              <CardContent className="p-6">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="bg-white/20 rounded-lg p-2">
+                    <Crown className="h-6 w-6" />
+                  </div>
+                  <span className="font-bold text-lg">Go Premium</span>
+                </div>
+                <p className="text-white/90 mb-4">
+                  Unlock exclusive study features and advanced analytics!
+                </p>
+                <Button 
+                  className="w-full bg-white text-blue-500 hover:bg-gray-100 font-bold py-3 rounded-2xl"
+                  onClick={() => navigate("/pricing")}
+                >
+                  UPGRADE TO PREMIUM
+                </Button>
+              </CardContent>
+            </Card>
+          )}
 
           {/* League Card */}
           <Card className="border-0 shadow-md">
