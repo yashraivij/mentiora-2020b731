@@ -1097,11 +1097,15 @@ const Dashboard = () => {
                         <div>
                           <h3 className="text-2xl font-bold text-gray-800">
                             Your average grade is {!isPremium ? (
-                              <span className="inline-block relative">
-                                <span className="blur-sm select-none text-gray-400">
+                              <span className="inline-block relative px-2 py-0.5 rounded-lg bg-gradient-to-r from-gray-100 to-gray-200">
+                                <span className="blur-md select-none text-transparent bg-gradient-to-r from-gray-600 to-gray-700 bg-clip-text">
                                   {predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0}
                                 </span>
-                                <div className="absolute inset-0 bg-gray-300 rounded opacity-60"></div>
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 flex items-center justify-center">
+                                    <Lock className="w-3 h-3 text-white" />
+                                  </div>
+                                </div>
                               </span>
                             ) : (predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0)}. Keep it up!
                           </h3>
@@ -1192,11 +1196,13 @@ const Dashboard = () => {
                                   
                                   <p className="text-sm text-gray-600">
                                     {!isPremium ? (
-                                      <span className="inline-block relative">
-                                        <span className="blur-sm select-none text-gray-400">
+                                      <span className="inline-block relative px-1.5 py-0.5 rounded bg-gradient-to-r from-gray-100 to-gray-200">
+                                        <span className="blur-md select-none text-transparent bg-gradient-to-r from-gray-600 to-gray-700 bg-clip-text">
                                           {Math.round(prediction.percentage || 0)}
                                         </span>
-                                        <div className="absolute inset-0 bg-gray-300 rounded opacity-60"></div>
+                                        <div className="absolute inset-0 flex items-center justify-center">
+                                          <Lock className="w-3 h-3 text-gray-500" />
+                                        </div>
                                       </span>
                                     ) : Math.round(prediction.percentage || 0)}% accuracy in practice
                                   </p>
