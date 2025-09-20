@@ -467,170 +467,76 @@ const Dashboard = () => {
 
   const loadWeeklyLeaderboardData = async () => {
     try {
-      const { weekStart, weekEnd } = getUKWeekBoundaries();
+      // For now, show all users with MP points for weekly leaderboard
+      // TODO: Implement proper weekly MP calculation via Supabase function to bypass RLS
+      console.log('Loading weekly leaderboard (showing all users with MP)');
       
-      console.log('Loading weekly leaderboard for week:', weekStart.toISOString(), 'to', weekEnd.toISOString());
+      // Get all users with total MP points
+      const { data: allUsers, error: usersError } = await supabase
+        .from('user_points')
+        .select('user_id, total_points')
+        .gt('total_points', 0);
       
-      // Get all users with MP activities this week
-      const { data: weeklyActivities, error: activitiesError } = await supabase
-        .from('user_activities')
-        .select('user_id, activity_type, created_at')
-        .gte('created_at', weekStart.toISOString())
-        .lte('created_at', weekEnd.toISOString())
-        .in('activity_type', ['daily_login', 'practice_completed', 'weekly_3_topics_awarded', 'weekly_5_practice_awarded', 'streak_7_days_awarded']);
-      
-      if (activitiesError) {
-        console.error('Error fetching weekly activities:', activitiesError);
+      if (usersError || !allUsers) {
+        console.error('Error fetching users:', usersError);
         return [];
       }
       
-      // Calculate weekly MP for each user
-      const weeklyMPMap = new Map();
-      const activityTimestamps = new Map(); // Track when each user first achieved each activity type
+      // Get profile data for these users  
+      const userIds = allUsers.map(u => u.user_id);
       
-      if (weeklyActivities) {
-        for (const activity of weeklyActivities) {
-          const userId = activity.user_id;
-          const activityType = activity.activity_type;
-          const timestamp = new Date(activity.created_at);
-          
-          // Initialize user data
-          if (!weeklyMPMap.has(userId)) {
-            weeklyMPMap.set(userId, 0);
-            activityTimestamps.set(userId, new Map());
-          }
-          
-          const userTimestamps = activityTimestamps.get(userId);
-          
-          // Track earliest timestamp for tie-breaking
-          if (!userTimestamps.has(activityType) || timestamp < userTimestamps.get(activityType)) {
-            userTimestamps.set(activityType, timestamp);
-          }
-          
-          // Calculate MP based on activity type
-          let mp = 0;
-          switch (activityType) {
-            case 'daily_login':
-              mp = 10; // Only count once per day
-              break;
-            case 'practice_completed':
-              mp = 40;
-              break;
-            case 'weekly_3_topics_awarded':
-              mp = 100;
-              break;
-            case 'weekly_5_practice_awarded':
-              mp = 250;
-              break;
-            case 'streak_7_days_awarded':
-              mp = 500;
-              break;
-          }
-          
-          weeklyMPMap.set(userId, (weeklyMPMap.get(userId) || 0) + mp);
-        }
+      // First, get public profiles
+      const { data: publicProfiles, error: publicProfilesError } = await supabase
+        .from('public_profiles')
+        .select('user_id, username, display_name, streak_days')
+        .in('user_id', userIds);
+      
+      const profilesMap = new Map();
+      
+      if (!publicProfilesError && publicProfiles) {
+        publicProfiles.forEach(p => profilesMap.set(p.user_id, p));
+      }
+      
+      // Get missing users from profiles table as fallback
+      const existingUserIds = Array.from(profilesMap.keys());
+      const missingUserIds = userIds.filter(id => !existingUserIds.includes(id));
+      
+      if (missingUserIds.length > 0) {
+        const { data: fallbackProfiles, error: fallbackError } = await supabase
+          .from('profiles')
+          .select('id, full_name, username, email')
+          .in('id', missingUserIds);
         
-        // Handle daily login limit (max 1 per day)
-        const dailyLoginsByUser = new Map();
-        for (const activity of weeklyActivities.filter(a => a.activity_type === 'daily_login')) {
-          const userId = activity.user_id;
-          const date = new Date(activity.created_at).toDateString();
-          
-          if (!dailyLoginsByUser.has(userId)) {
-            dailyLoginsByUser.set(userId, new Set());
+        if (!fallbackError && fallbackProfiles) {
+          for (const profile of fallbackProfiles) {
+            profilesMap.set(profile.id, {
+              user_id: profile.id,
+              username: profile.username || profile.full_name || profile.email?.split('@')[0] || 'Anonymous',
+              display_name: profile.full_name || profile.username || profile.email?.split('@')[0] || 'Anonymous',
+              streak_days: 0
+            });
           }
-          dailyLoginsByUser.get(userId).add(date);
-        }
-        
-        // Recalculate daily login MP (10 MP per unique day)
-        for (const [userId, dates] of dailyLoginsByUser.entries()) {
-          const practiceMP = weeklyMPMap.get(userId) || 0;
-          const otherMP = practiceMP - (weeklyActivities.filter(a => a.user_id === userId && a.activity_type === 'daily_login').length * 10);
-          const correctDailyMP = dates.size * 10;
-          weeklyMPMap.set(userId, otherMP + correctDailyMP);
         }
       }
       
-      // Get user profile data for users with weekly MP
-      const userIds = Array.from(weeklyMPMap.keys());
-      let userProfiles = [];
-      
-      if (userIds.length > 0) {
-        // First, get public profiles
-        const { data: publicProfiles, error: publicProfilesError } = await supabase
-          .from('public_profiles')
-          .select('user_id, username, display_name, streak_days')
-          .in('user_id', userIds);
-        
-        if (!publicProfilesError && publicProfiles) {
-          userProfiles = publicProfiles;
-        }
-        
-        // Get missing users from profiles table as fallback
-        const existingUserIds = userProfiles.map(p => p.user_id);
-        const missingUserIds = userIds.filter(id => !existingUserIds.includes(id));
-        
-        if (missingUserIds.length > 0) {
-          const { data: fallbackProfiles, error: fallbackError } = await supabase
-            .from('profiles')
-            .select('id, full_name, username, email')
-            .in('id', missingUserIds);
-          
-          if (!fallbackError && fallbackProfiles) {
-            for (const profile of fallbackProfiles) {
-              userProfiles.push({
-                user_id: profile.id,
-                username: profile.username || profile.full_name || profile.email?.split('@')[0] || 'Anonymous',
-                display_name: profile.full_name || profile.username || profile.email?.split('@')[0] || 'Anonymous',
-                streak_days: 0
-              });
-            }
-          }
-        }
-        
-        // Final fallback for any remaining users
-        const finalExistingIds = userProfiles.map(p => p.user_id);
-        const stillMissingIds = userIds.filter(id => !finalExistingIds.includes(id));
-        
-        for (const userId of stillMissingIds) {
-          userProfiles.push({
-            user_id: userId,
-            username: 'Anonymous',
-            display_name: 'Anonymous',
-            streak_days: 0
-          });
-        }
-      }
-      
-      // Transform to leaderboard format
-      const weeklyLeaderboard = [];
       const currentUserId = (await supabase.auth.getUser()).data.user?.id;
       
-      for (const profile of userProfiles) {
-        const weeklyMP = weeklyMPMap.get(profile.user_id) || 0;
-        const userTimestamps = activityTimestamps.get(profile.user_id);
-        const earliestTimestamp = userTimestamps && userTimestamps.size > 0 
-          ? Math.min(...Array.from(userTimestamps.values()).map(t => (t as Date).getTime())) 
-          : Date.now();
-        
-        weeklyLeaderboard.push({
-          user_id: profile.user_id,
-          name: profile.display_name || profile.username || 'Anonymous',
-          mp: weeklyMP,
-          streak: profile.streak_days || 0,
-          isCurrentUser: profile.user_id === currentUserId,
+      // Transform to leaderboard format (using total MP as placeholder for weekly MP)
+      const weeklyLeaderboard = allUsers.map(user => {
+        const profile = profilesMap.get(user.user_id);
+        return {
+          user_id: user.user_id,
+          name: profile?.display_name || profile?.username || 'Anonymous',
+          mp: user.total_points, // Using total MP as placeholder
+          streak: profile?.streak_days || 0,
+          isCurrentUser: user.user_id === currentUserId,
           isRealUser: true,
-          leaderboardType: 'weekly',
-          earliestActivity: earliestTimestamp
-        });
-      }
-      
-      // Sort by weekly MP (desc), then by earliest activity (asc), then by user_id (asc)
-      weeklyLeaderboard.sort((a, b) => {
-        if (a.mp !== b.mp) return b.mp - a.mp;
-        if (a.earliestActivity !== b.earliestActivity) return a.earliestActivity - b.earliestActivity;
-        return a.user_id.localeCompare(b.user_id);
+          leaderboardType: 'weekly'
+        };
       });
+      
+      // Sort by MP
+      weeklyLeaderboard.sort((a, b) => b.mp - a.mp);
       
       console.log('Weekly leaderboard loaded:', weeklyLeaderboard);
       
