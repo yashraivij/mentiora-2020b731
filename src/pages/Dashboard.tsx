@@ -441,43 +441,66 @@ const Dashboard = () => {
 
   const loadLeaderboardData = async () => {
     try {
-      // First get all users with MP points (total_points > 0)
-      const { data: userPoints, error: pointsError } = await supabase
-        .from('user_points')
-        .select('user_id, total_points')
-        .gt('total_points', 0);
+      // Get real users with their MP points and calculate retroactive MP for users without it
+      const { data: allUsers, error: usersError } = await supabase
+        .from('public_profiles')
+        .select(`
+          user_id,
+          username,
+          display_name,
+          streak_days
+        `);
 
-      if (pointsError) {
-        console.error('Error fetching user points:', pointsError);
+      if (usersError) {
+        console.error('Error fetching users:', usersError);
         setLeaderboardData([]);
         return;
       }
 
       let transformedRealUsers = [];
       
-      if (userPoints && userPoints.length > 0) {
-        // Get profile information for all users with MP
-        const userIds = userPoints.map(p => p.user_id);
-        const { data: userProfiles, error: profilesError } = await supabase
-          .from('public_profiles')
-          .select('user_id, username, display_name, streak_days')
+      if (allUsers && allUsers.length > 0) {
+        // Get user points for all users
+        const userIds = allUsers.map(u => u.user_id);
+        const { data: userPoints, error: pointsError } = await supabase
+          .from('user_points')
+          .select('user_id, total_points')
           .in('user_id', userIds);
 
-        const profilesMap = new Map((userProfiles || []).map(p => [p.user_id, p]));
-        const currentUserId = (await supabase.auth.getUser()).data.user?.id;
+        const pointsMap = new Map((userPoints || []).map(p => [p.user_id, p.total_points]));
 
-        // Transform each user with MP points
-        for (const userPoint of userPoints) {
-          const profile = profilesMap.get(userPoint.user_id);
+        // For users without MP points, calculate retroactive MP
+        for (const user of allUsers) {
+          let mp = pointsMap.get(user.user_id) || 0;
           
-          transformedRealUsers.push({
-            name: profile?.display_name || profile?.username || 'Anonymous',
-            mp: userPoint.total_points,
-            streak: profile?.streak_days || 0,
-            isCurrentUser: userPoint.user_id === currentUserId,
-            isRealUser: true,
-            leaderboardType: 'both'
-          });
+          // If user has no MP but has been active, calculate retroactive MP
+          if (mp === 0) {
+            try {
+              const { data: retroMP } = await supabase.functions.invoke('calculate-retroactive-mp', {
+                body: { user_id: user.user_id }
+              });
+              
+              if (retroMP && !retroMP.error) {
+                mp = retroMP.total_mp || 0;
+                // Refresh points map for this user
+                pointsMap.set(user.user_id, mp);
+              }
+            } catch (error) {
+              console.log('Could not calculate retroactive MP for user:', user.user_id);
+            }
+          }
+
+          // Only include users with MP > 0
+          if (mp > 0) {
+            transformedRealUsers.push({
+              name: user.display_name || user.username || 'Anonymous',
+              mp: mp,
+              streak: user.streak_days || 0,
+              isCurrentUser: user.user_id === (await supabase.auth.getUser()).data.user?.id,
+              isRealUser: true,
+              leaderboardType: 'both'
+            });
+          }
         }
       }
 
