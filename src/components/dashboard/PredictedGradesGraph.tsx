@@ -537,8 +537,15 @@ export const PredictedGradesGraph = ({ userProgress, onUpgrade }: PredictedGrade
                         </div>
 
                         {/* Premium Subject name */}
-                          <div className="mt-4 text-center">
-                          <div className="text-sm font-bold text-foreground truncate mb-2">{grade.subjectName}</div>
+                          <div className="mt-4 text-center relative">
+                          {!isPremium && (
+                            <div className="absolute inset-0 bg-white dark:bg-gray-900 rounded flex items-center justify-center z-10 opacity-100">
+                              <div className="text-xs font-medium text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 px-2 py-1 rounded border border-gray-200 dark:border-gray-600">
+                                🔒 Premium
+                              </div>
+                            </div>
+                          )}
+                          <div className={`text-sm font-bold text-foreground truncate mb-2 ${!isPremium ? 'invisible' : ''}`}>{grade.subjectName}</div>
                           {grade.isGrade7Plus && (
                             <div className="mt-2">
                               {!isPremium && (
