@@ -1602,10 +1602,16 @@ const Dashboard = () => {
                       <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center">
                         <Check className="w-6 h-6 text-green-600" />
                       </div>
-                      <div>
-                        <h4 className="text-lg font-bold text-gray-800">Log in today</h4>
-                        <p className="text-gray-600">{userStats?.loginToday ? 'Complete ✓' : 'Log in to earn MP'}</p>
-                      </div>
+                       <div>
+                         <h4 className="text-lg font-bold text-gray-800">Log in today</h4>
+                         <p className="text-gray-600">{userStats?.loginToday ? 'Complete ✓' : 'Log in to earn MP'}</p>
+                         <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+                           <div 
+                             className={`${(todayEarnedMP >= 10) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
+                             style={{width: (todayEarnedMP >= 10) ? '100%' : '20%'}}
+                           ></div>
+                         </div>
+                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
                       <span className="text-lg font-bold text-green-600">+10 MP</span>
