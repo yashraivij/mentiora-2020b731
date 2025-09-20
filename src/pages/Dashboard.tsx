@@ -1258,9 +1258,9 @@ const Dashboard = () => {
                               e.stopPropagation();
                               removeSubject(subject.id);
                             }}
-                            className="absolute -top-2 -right-2 w-8 h-8 p-0 bg-red-500 hover:bg-red-600 text-white rounded-full shadow-lg"
+                            className="absolute -top-1 -right-1 w-6 h-6 p-0 bg-gray-400 hover:bg-gray-500 text-white rounded-full shadow-sm opacity-60 hover:opacity-100 transition-opacity"
                           >
-                            <X className="h-4 w-4" />
+                            <X className="h-3 w-3" />
                           </Button>
                         </motion.div>
                       );
