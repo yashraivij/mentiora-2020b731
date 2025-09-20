@@ -510,6 +510,18 @@ const Dashboard = () => {
     }
   }, [user?.id, activeTab]);
 
+  // Force refresh when dashboard becomes visible to catch completed practice
+  useEffect(() => {
+    const handleFocus = () => {
+      if (user?.id && document.hasFocus()) {
+        loadUserStats();
+      }
+    };
+
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
+  }, [user?.id]);
+
   // Handle URL parameters for tab navigation
   useEffect(() => {
     const tabParam = searchParams.get('tab');
