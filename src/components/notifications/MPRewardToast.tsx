@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 import { Zap, X, Sparkles } from "lucide-react";
 
 interface MPRewardToastProps {
@@ -12,14 +13,24 @@ interface MPRewardToastProps {
 
 export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     setIsVisible(true);
+    // Animate progress from 0 to 100 after the toast appears
+    const progressTimer = setTimeout(() => {
+      setProgress(100);
+    }, 300);
+    
     const timer = setTimeout(() => {
       setIsVisible(false);
       setTimeout(onClose, 300);
     }, 8000); // Last 8 seconds instead of 3
-    return () => clearTimeout(timer);
+    
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(progressTimer);
+    };
   }, [onClose]);
 
   const handleClose = () => {
@@ -122,6 +133,17 @@ export const MPRewardToast = ({ amount, message, onClose }: MPRewardToastProps) 
                   </motion.div>
                   <div className="text-sm text-gray-600 leading-tight font-medium">
                     {message}
+                  </div>
+                  
+                  {/* Progress bar */}
+                  <div className="mt-2">
+                    <Progress 
+                      value={progress} 
+                      className="h-2 bg-cyan-100/50"
+                    />
+                    <div className="text-xs text-gray-500 mt-1 font-medium">
+                      Quest Complete!
+                    </div>
                   </div>
                 </div>
               </div>
