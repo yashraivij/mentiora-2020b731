@@ -991,6 +991,9 @@ const Dashboard = () => {
         <div className="px-6 mb-8 flex items-center space-x-3">
           <img src={mentioraLogo} alt="Mentiora Logo" className="w-8 h-8" />
           <h1 className="text-xl font-bold text-black">Mentiora</h1>
+          {isPremium && (
+            <Crown className="w-5 h-5 text-yellow-500" />
+          )}
         </div>
 
         {/* Navigation */}
@@ -1327,7 +1330,7 @@ const Dashboard = () => {
                         <div>
                           <h3 className="text-2xl font-bold text-gray-800">
                             Your average grade is {isPremium ? (predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0) : (
-                              <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent blur-lg select-none">8</span>
+                              <BlurSpan>8</BlurSpan>
                             )}. Keep it up!
                           </h3>
                           <p className="text-gray-600">You're making great progress</p>
@@ -1425,14 +1428,13 @@ const Dashboard = () => {
                                      />
                                    </div>
                                   
-                                  <p className="text-sm text-gray-600">
-                                    {isPremium ? `${Math.round(prediction.percentage || 0)}% accuracy in practice` : (
-                                      <span className="flex items-center">
-                                        <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent blur-lg select-none">85</span>
-                                        <span>% accuracy in practice</span>
-                                      </span>
-                                    )}
-                                  </p>
+                                   <p className="text-sm text-gray-600">
+                                     {isPremium ? `${Math.round(prediction.percentage || 0)}% accuracy in practice` : (
+                                       <span className="flex items-center">
+                                         <BlurSpan>85</BlurSpan>% accuracy in practice
+                                       </span>
+                                     )}
+                                   </p>
                                 </div>
                               </div>
 
@@ -1440,7 +1442,7 @@ const Dashboard = () => {
                               <div className="text-center ml-6">
                                 <div className={`text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1`}>
                                   {isPremium ? (prediction.grade || '0') : (
-                                    <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent blur-lg select-none">8</span>
+                                    <BlurSpan>8</BlurSpan>
                                   )}
                                 </div>
                                 <div className="text-sm text-gray-500 uppercase tracking-wide font-medium">
