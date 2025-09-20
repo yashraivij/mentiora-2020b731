@@ -441,67 +441,53 @@ const Dashboard = () => {
 
   const loadLeaderboardData = async () => {
     try {
-      // Get real users with their MP points and calculate retroactive MP for users without it
-      const { data: allUsers, error: usersError } = await supabase
-        .from('public_profiles')
-        .select(`
-          user_id,
-          username,
-          display_name,
-          streak_days
-        `);
+      // First get all users who have MP points (>0)
+      const { data: userPointsData, error: pointsError } = await supabase
+        .from('user_points')
+        .select('user_id, total_points')
+        .gt('total_points', 0);
 
-      if (usersError) {
-        console.error('Error fetching users:', usersError);
+      if (pointsError) {
+        console.error('Error fetching user points:', pointsError);
         setLeaderboardData([]);
         return;
       }
 
-      let transformedRealUsers = [];
+      if (!userPointsData || userPointsData.length === 0) {
+        console.log('No users with MP points found');
+        setLeaderboardData([]);
+        return;
+      }
+
+      // Get profile information for these users (optional - some may not have profiles)
+      const userIds = userPointsData.map(p => p.user_id);
+      const { data: profiles, error: profilesError } = await supabase
+        .from('public_profiles')
+        .select('user_id, username, display_name, streak_days')
+        .in('user_id', userIds);
+
+      if (profilesError) {
+        console.log('Note: Could not fetch profiles, will use default names:', profilesError);
+      }
+
+      // Create a map for easy profile lookup
+      const profilesMap = new Map((profiles || []).map(p => [p.user_id, p]));
       
-      if (allUsers && allUsers.length > 0) {
-        // Get user points for all users
-        const userIds = allUsers.map(u => u.user_id);
-        const { data: userPoints, error: pointsError } = await supabase
-          .from('user_points')
-          .select('user_id, total_points')
-          .in('user_id', userIds);
+      const currentUser = (await supabase.auth.getUser()).data.user;
+      let transformedRealUsers = [];
 
-        const pointsMap = new Map((userPoints || []).map(p => [p.user_id, p.total_points]));
-
-        // For users without MP points, calculate retroactive MP
-        for (const user of allUsers) {
-          let mp = pointsMap.get(user.user_id) || 0;
-          
-          // If user has no MP but has been active, calculate retroactive MP
-          if (mp === 0) {
-            try {
-              const { data: retroMP } = await supabase.functions.invoke('calculate-retroactive-mp', {
-                body: { user_id: user.user_id }
-              });
-              
-              if (retroMP && !retroMP.error) {
-                mp = retroMP.total_mp || 0;
-                // Refresh points map for this user
-                pointsMap.set(user.user_id, mp);
-              }
-            } catch (error) {
-              console.log('Could not calculate retroactive MP for user:', user.user_id);
-            }
-          }
-
-          // Only include users with MP > 0
-          if (mp > 0) {
-            transformedRealUsers.push({
-              name: user.display_name || user.username || 'Anonymous',
-              mp: mp,
-              streak: user.streak_days || 0,
-              isCurrentUser: user.user_id === (await supabase.auth.getUser()).data.user?.id,
-              isRealUser: true,
-              leaderboardType: 'both'
-            });
-          }
-        }
+      // Transform user points data with optional profile info
+      for (const userPoint of userPointsData) {
+        const profile = profilesMap.get(userPoint.user_id);
+        
+        transformedRealUsers.push({
+          name: profile?.display_name || profile?.username || 'Anonymous Student',
+          mp: userPoint.total_points,
+          streak: profile?.streak_days || 0,
+          isCurrentUser: userPoint.user_id === currentUser?.id,
+          isRealUser: true,
+          leaderboardType: 'both'
+        });
       }
 
       // Sort by MP points
