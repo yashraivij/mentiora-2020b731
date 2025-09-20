@@ -358,6 +358,9 @@ const Dashboard = () => {
       const stats = await MPPointsSystemClient.getUserStats(user.id);
       
       console.log('Loaded user stats:', stats);
+      console.log('Login today flag:', stats.loginToday);
+      console.log('Practice today flag:', stats.practiceToday);
+      console.log('Total points:', stats.totalPoints);
       
       setUserStats(stats);
       setUserGems(stats.totalPoints);
@@ -2001,10 +2004,10 @@ const Dashboard = () => {
                    </div>
                    <div className="mt-4">
                       <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div 
-                          className={`${userStats?.loginToday ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
-                          style={{width: userStats?.loginToday ? '100%' : '0%'}}
-                        ></div>
+                         <div 
+                           className={`${(userStats?.loginToday || todayEarnedMP >= 10) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
+                           style={{width: (userStats?.loginToday || todayEarnedMP >= 10) ? '100%' : '0%'}}
+                         ></div>
                       </div>
                    </div>
                  </div>
@@ -2038,10 +2041,10 @@ const Dashboard = () => {
                    </div>
                    <div className="mt-4">
                       <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div 
-                          className={`${userStats?.practiceToday ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
-                          style={{width: userStats?.practiceToday ? '100%' : '0%'}}
-                        ></div>
+                         <div 
+                           className={`${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
+                           style={{width: (userStats?.practiceToday || todayEarnedMP >= 40) ? '100%' : '0%'}}
+                         ></div>
                       </div>
                    </div>
                  </div>
