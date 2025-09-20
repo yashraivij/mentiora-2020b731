@@ -42,6 +42,8 @@ import {
   CreditCard,
   Trash2,
   Settings,
+  Plus,
+  X,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -100,6 +102,7 @@ const Dashboard = () => {
   const [activeLeaderboardTab, setActiveLeaderboardTab] = useState<'weekly' | 'alltime'>('weekly');
   const [leaderboardData, setLeaderboardData] = useState<any[]>([]);
   const [todayEarnedMP, setTodayEarnedMP] = useState(0);
+  const [showAddSubjects, setShowAddSubjects] = useState(false);
 
   // Notebook state
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
@@ -796,6 +799,94 @@ const Dashboard = () => {
     ? curriculum.filter((subject) => userSubjects.includes(subject.id))
     : [];
 
+  const availableSubjects = curriculum.filter((subject) => !userSubjects.includes(subject.id));
+
+  // Add subject function
+  const addSubject = async (subjectId: string) => {
+    if (!user?.id) return;
+    
+    const subject = curriculum.find(s => s.id === subjectId);
+    if (!subject) return;
+
+    try {
+      const { error } = await supabase
+        .from("user_subjects")
+        .insert({
+          user_id: user.id,
+          subject_name: subject.name,
+          exam_board: "AQA", // Default exam board
+          predicted_grade: "5",
+          target_grade: "7"
+        });
+
+      if (error) {
+        console.error("Error adding subject:", error);
+        toast({
+          title: "Error",
+          description: "Failed to add subject",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      // Update local state
+      setUserSubjects(prev => [...prev, subjectId]);
+      toast({
+        title: "Success",
+        description: `${subject.name} added to your subjects`,
+      });
+      
+    } catch (error) {
+      console.error("Error adding subject:", error);
+      toast({
+        title: "Error", 
+        description: "Failed to add subject",
+        variant: "destructive"
+      });
+    }
+  };
+
+  // Remove subject function
+  const removeSubject = async (subjectId: string) => {
+    if (!user?.id) return;
+    
+    const subject = curriculum.find(s => s.id === subjectId);
+    if (!subject) return;
+
+    try {
+      const { error } = await supabase
+        .from("user_subjects")
+        .delete()
+        .eq("user_id", user.id)
+        .eq("subject_name", subject.name);
+
+      if (error) {
+        console.error("Error removing subject:", error);
+        toast({
+          title: "Error",
+          description: "Failed to remove subject",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      // Update local state
+      setUserSubjects(prev => prev.filter(id => id !== subjectId));
+      toast({
+        title: "Success",
+        description: `${subject.name} removed from your subjects`,
+      });
+      
+    } catch (error) {
+      console.error("Error removing subject:", error);
+      toast({
+        title: "Error",
+        description: "Failed to remove subject", 
+        variant: "destructive"
+      });
+    }
+  };
+
   // Notebook helper functions
   const filteredEntries = entries.filter(entry => {
     if (selectedNotebookSubject !== 'all' && entry.subject !== selectedNotebookSubject) return false;
@@ -1093,9 +1184,20 @@ const Dashboard = () => {
               {/* Subject Selection or Subject Path */}
               {!selectedSubject ? (
                 <div>
-                  <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-                    Let's Smash GCSEs, {getFirstName()}!
-                  </h2>
+                  <div className="flex items-center justify-between mb-8">
+                    <h2 className="text-3xl font-bold text-gray-800">
+                      Let's Smash GCSEs, {getFirstName()}!
+                    </h2>
+                    {filteredSubjects.length > 0 && (
+                      <Button
+                        onClick={() => setShowAddSubjects(true)}
+                        className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2"
+                      >
+                        <Plus className="h-4 w-4" />
+                        <span>Add Subject</span>
+                      </Button>
+                    )}
+                  </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {filteredSubjects.map((subject) => {
@@ -1107,6 +1209,7 @@ const Dashboard = () => {
                           key={subject.id}
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
+                          className="relative"
                         >
                           <Card 
                             className="cursor-pointer border-0 shadow-lg hover:shadow-xl transition-all duration-300"
@@ -1148,6 +1251,17 @@ const Dashboard = () => {
                               </div>
                             </CardContent>
                           </Card>
+                          
+                          {/* Remove Subject Button */}
+                          <Button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              removeSubject(subject.id);
+                            }}
+                            className="absolute -top-2 -right-2 w-8 h-8 p-0 bg-red-500 hover:bg-red-600 text-white rounded-full shadow-lg"
+                          >
+                            <X className="h-4 w-4" />
+                          </Button>
                         </motion.div>
                       );
                     })}
@@ -1190,11 +1304,79 @@ const Dashboard = () => {
                     Add subjects to your list to get started with GCSE revision
                   </p>
                   <Button
-                    onClick={() => navigate("/")}
-                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-2xl text-lg"
+                    onClick={() => setShowAddSubjects(true)}
+                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-2xl text-lg flex items-center space-x-2"
                   >
-                    Browse Subjects
+                    <Plus className="h-5 w-5" />
+                    <span>Add Subjects</span>
                   </Button>
+                </div>
+              )}
+
+              {/* Add Subjects Modal */}
+              {showAddSubjects && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                  <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
+                    <div className="p-6 border-b border-gray-200">
+                      <div className="flex items-center justify-between">
+                        <h2 className="text-2xl font-bold text-gray-800">Add Subjects</h2>
+                        <Button
+                          onClick={() => setShowAddSubjects(false)}
+                          className="w-8 h-8 p-0 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-full"
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    <div className="p-6 overflow-y-auto max-h-[60vh]">
+                      {availableSubjects.length === 0 ? (
+                        <div className="text-center py-8">
+                          <p className="text-lg text-gray-600">You've already added all available subjects!</p>
+                        </div>
+                      ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {availableSubjects.map((subject) => {
+                            const colors = subjectColors[subject.id] || subjectColors["physics"];
+                            const IconComponent = getSubjectIcon(subject.id);
+                            
+                            return (
+                              <motion.div
+                                key={subject.id}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                              >
+                                <Card 
+                                  className="cursor-pointer border-2 border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200"
+                                  onClick={() => {
+                                    addSubject(subject.id);
+                                    setShowAddSubjects(false);
+                                  }}
+                                >
+                                  <CardContent className="p-4">
+                                    <div className="flex items-center space-x-4">
+                                      <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center`}>
+                                        <IconComponent className="h-6 w-6 text-white" />
+                                      </div>
+                                      <div className="flex-1">
+                                        <h3 className="text-lg font-bold text-gray-800">
+                                          {subject.name}
+                                        </h3>
+                                        <p className="text-sm text-gray-600">
+                                          {subject.topics.length} topics available
+                                        </p>
+                                      </div>
+                                      <Plus className="h-5 w-5 text-gray-400" />
+                                    </div>
+                                  </CardContent>
+                                </Card>
+                              </motion.div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
