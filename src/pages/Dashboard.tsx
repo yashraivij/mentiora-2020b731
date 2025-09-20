@@ -1617,7 +1617,7 @@ const Dashboard = () => {
                        </div>
                        <div>
                          <h4 className="text-lg font-bold text-gray-800">Log in today</h4>
-                         <p className="text-gray-600">{userStats?.loginToday ? 'Complete ✓' : 'Log in to earn MP'}</p>
+                         <p className="text-gray-600">Log in to earn MP</p>
                        </div>
                      </div>
                      <div className="flex items-center space-x-2">
@@ -1652,9 +1652,7 @@ const Dashboard = () => {
                        </div>
                        <div>
                          <h4 className="text-lg font-bold text-gray-800">Complete 1 practice set</h4>
-                         <p className="text-gray-600">
-                           {(todayEarnedMP >= 40) ? 'Complete ✓' : 'Answer questions to earn MP'}
-                         </p>
+                          <p className="text-gray-600">Answer questions to earn MP</p>
                        </div>
                      </div>
                      <div className="flex items-center space-x-2">
