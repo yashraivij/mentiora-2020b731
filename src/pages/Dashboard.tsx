@@ -1350,7 +1350,6 @@ const Dashboard = () => {
                             const currentUserData = {
                               name: getFirstName(),
                               mp: userGems,
-                              grade: isPremium ? (predictedGrades.length > 0 ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10 : 0.0) : 0.0,
                               streak: currentStreak,
                               isCurrentUser: true,
                               isRealUser: true
@@ -1373,22 +1372,7 @@ const Dashboard = () => {
                    <div className="text-2xl font-bold text-gray-800">{userGems}</div>
                    <div className="text-sm text-gray-600">Total MP</div>
                  </div>
-                 <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100 text-center">
-                   <div className="w-12 h-12 bg-orange-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
-                     <TrendingUp className="w-6 h-6 text-white" />
-                   </div>
-                    <div className="text-2xl font-bold text-gray-800">
-                      {isPremium ? (
-                        predictedGrades.length > 0 
-                          ? Math.round((predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) * 10) / 10
-                          : '0.0'
-                      ) : (
-                        <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent blur-lg select-none">7.8</span>
-                      )}
-                    </div>
-                   <div className="text-sm text-gray-600">Avg Grade</div>
-                 </div>
-               </div>
+                </div>
 
               {/* Main Leaderboard */}
               <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-100 overflow-hidden">
