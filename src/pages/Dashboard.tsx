@@ -1360,7 +1360,7 @@ const Dashboard = () => {
                         <div>
                           <h3 className="text-2xl font-bold text-gray-800">
                             Your average grade is {isPremium ? (predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0) : (
-                              <BlurSpan>8</BlurSpan>
+                              <span className="blur-md select-none">8</span>
                             )}. Keep it up!
                           </h3>
                           <p className="text-gray-600">You're making great progress</p>
