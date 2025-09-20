@@ -1096,7 +1096,14 @@ const Dashboard = () => {
                         </div>
                         <div>
                           <h3 className="text-2xl font-bold text-gray-800">
-                            Your average grade is {!isPremium ? "?" : (predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0)}. Keep it up!
+                            Your average grade is {!isPremium ? (
+                              <span className="inline-block relative">
+                                <span className="blur-sm select-none text-gray-400">
+                                  {predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0}
+                                </span>
+                                <div className="absolute inset-0 bg-gray-300 rounded opacity-60"></div>
+                              </span>
+                            ) : (predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0)}. Keep it up!
                           </h3>
                           <p className="text-gray-600">You're making great progress</p>
                         </div>
@@ -1184,7 +1191,14 @@ const Dashboard = () => {
                                   </div>
                                   
                                   <p className="text-sm text-gray-600">
-                                    {!isPremium ? "?" : Math.round(prediction.percentage || 0)}% accuracy in practice
+                                    {!isPremium ? (
+                                      <span className="inline-block relative">
+                                        <span className="blur-sm select-none text-gray-400">
+                                          {Math.round(prediction.percentage || 0)}
+                                        </span>
+                                        <div className="absolute inset-0 bg-gray-300 rounded opacity-60"></div>
+                                      </span>
+                                    ) : Math.round(prediction.percentage || 0)}% accuracy in practice
                                   </p>
                                 </div>
                               </div>
