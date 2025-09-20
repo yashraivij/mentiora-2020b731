@@ -1562,9 +1562,9 @@ const Dashboard = () => {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-gray-800">Daily Goal</h3>
-                      <p className="text-gray-600">
-                        50 MP goal — {userStats ? ((userStats.loginToday ? 10 : 0) + (userStats.practiceToday ? 40 : 0)) : 0}/50 completed
-                      </p>
+                       <p className="text-gray-600">
+                         50 MP goal — {Math.min(todayEarnedMP || ((userStats?.loginToday ? 10 : 0) + (userStats?.practiceToday ? 40 : 0)), 50)}/50 completed
+                       </p>
                     </div>
                   </div>
                 </div>
