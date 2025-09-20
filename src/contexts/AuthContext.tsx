@@ -144,10 +144,6 @@ const refreshSubscription = async (userId?: string) => {
                       }
                     } else {
                       console.log(`Daily login already awarded today`);
-                      // Show quest completion notification even if no MP awarded
-                      if (showMPReward) {
-                        showMPReward(0, "Quest complete: Log in today");
-                      }
                     }
                   }
                 } catch (error) {
