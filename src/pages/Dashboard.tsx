@@ -1184,14 +1184,16 @@ const Dashboard = () => {
                                   </div>
                                   
                                   <p className="text-sm text-gray-600">
-                                    {Math.round(prediction.percentage || 0)}% accuracy in practice
+                                    <span className={!isPremium ? "blur-sm" : ""}>
+                                      {Math.round(prediction.percentage || 0)}% accuracy in practice
+                                    </span>
                                   </p>
                                 </div>
                               </div>
 
                               {/* Large Grade Display */}
                               <div className="text-center ml-6">
-                                <div className={`text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1`}>
+                                <div className={`text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1 ${!isPremium ? 'blur-md' : ''}`}>
                                   {prediction.grade || '0'}
                                 </div>
                                 <div className="text-sm text-gray-500 uppercase tracking-wide font-medium">
