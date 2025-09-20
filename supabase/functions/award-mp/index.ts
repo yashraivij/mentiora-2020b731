@@ -343,14 +343,21 @@ serve(async (req) => {
           });
         }
 
-        // Always record topic practice and award MP for each completion
+        // Always record topic practice for tracking
         await recordActivity(userId, ACTIVITY_TYPES.TOPIC_PRACTICED, { subject_id: subjectId, topic_id: topicId, practice_score: practiceScore, total_marks: totalMarks });
-        await recordActivity(userId, ACTIVITY_TYPES.PRACTICE_COMPLETED);
         
         // Generate predicted exam completion for grade prediction using actual performance
         await generatePredictedExamCompletion(userId, subjectId, practiceScore, totalMarks);
         
-        const practiceAwarded = await awardPoints(userId, MP_REWARDS.PRACTICE_COMPLETION, 'Practice completion');
+        // Only award +40 MP for the first practice completion today (like daily login)
+        let practiceAwarded = false;
+        if (await hasActivityToday(userId, ACTIVITY_TYPES.PRACTICE_COMPLETED)) {
+          console.log('Practice already completed today - no additional MP awarded');
+        } else {
+          await recordActivity(userId, ACTIVITY_TYPES.PRACTICE_COMPLETED);
+          practiceAwarded = await awardPoints(userId, MP_REWARDS.PRACTICE_COMPLETION, 'Practice completion');
+        }
+        
         let totalAwarded = practiceAwarded ? MP_REWARDS.PRACTICE_COMPLETION : 0;
         
         // Check weekly goals
@@ -382,7 +389,7 @@ serve(async (req) => {
         result = { 
           success: true, 
           awarded: totalAwarded, 
-          message: `Practice completed! Awarded ${totalAwarded} MP total`,
+          message: totalAwarded > 0 ? `Practice completed! Awarded ${totalAwarded} MP total` : 'Practice completed! No additional MP today.',
           breakdown: {
             practice: practiceAwarded ? MP_REWARDS.PRACTICE_COMPLETION : 0,
             weeklyTopics: weeklyTopics >= 3 && totalAwarded > MP_REWARDS.PRACTICE_COMPLETION ? MP_REWARDS.WEEKLY_3_TOPICS : 0,
