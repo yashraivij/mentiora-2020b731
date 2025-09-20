@@ -944,7 +944,7 @@ const Dashboard = () => {
                   <NotebookPen className="h-8 w-8 text-white" />
                 </div>
                 <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                  Smart Revision Notebook
+                  smart Revision Notebook
                 </h1>
                 <p className="text-gray-600 text-lg max-w-md mx-auto">
                   Instant notes for every lost mark
@@ -1002,7 +1002,7 @@ const Dashboard = () => {
                       
                       <div className="space-y-4">
                         <h3 className="text-2xl font-semibold text-gray-900">
-                          No Revision Notes Yet
+                          No revision notes yet
                         </h3>
                         <p className="text-gray-600 max-w-sm mx-auto leading-relaxed">
                           Start practicing questions to generate your personalized Smart revision notes!
