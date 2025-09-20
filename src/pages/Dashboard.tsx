@@ -1614,12 +1614,18 @@ const Dashboard = () => {
                           <BookOpen className="w-6 h-6 text-white" />
                         )}
                       </div>
-                      <div>
-                        <h4 className="text-lg font-bold text-gray-800">Complete 1 practice set</h4>
-                        <p className="text-gray-600">
-                          {userStats?.practiceToday ? 'Complete ✓' : 'Answer questions to earn MP'}
-                        </p>
-                      </div>
+                       <div>
+                         <h4 className="text-lg font-bold text-gray-800">Complete 1 practice set</h4>
+                         <p className="text-gray-600">
+                           {userStats?.practiceToday ? 'Complete ✓' : 'Answer questions to earn MP'}
+                         </p>
+                         <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+                           <div 
+                             className={`${(userStats?.practiceToday || userStats?.weeklyPracticeCount > 0) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
+                             style={{width: (userStats?.practiceToday || userStats?.weeklyPracticeCount > 0) ? '100%' : '20%'}}
+                           ></div>
+                         </div>
+                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
                       <span className={`text-lg font-bold ${userStats?.practiceToday ? 'text-green-600' : 'text-blue-500'}`}>
