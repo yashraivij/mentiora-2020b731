@@ -2679,6 +2679,31 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return combinedScienceBiologyQuestions;
     }
 
+    // Special format for Geography A (Edexcel) - Use curriculum predicted exam questions
+    if (subjectId === 'geography-a-edexcel') {
+      console.log('Loading Geography A (Edexcel) predicted exam questions...');
+      
+      // Find the predicted exam topic in the curriculum
+      const predictedExamTopic = subject.topics.find(topic => topic.id === 'predicted-exam-2026');
+      
+      if (predictedExamTopic && predictedExamTopic.questions) {
+        console.log('Found predicted exam topic with', predictedExamTopic.questions.length, 'questions');
+        
+        let questionNumber = 1;
+        predictedExamTopic.questions.forEach((curriculumQuestion, index) => {
+          questions.push({
+            id: curriculumQuestion.id,
+            questionNumber: questionNumber++,
+            text: curriculumQuestion.question,
+            marks: curriculumQuestion.marks
+          });
+        });
+        
+        console.log('Geography A (Edexcel) predicted exam questions loaded:', questions.length);
+        return questions;
+      }
+    }
+
     // Special format for Geography - AQA GCSE (88 marks total including 3 SPaG)
     if (subjectId === 'geography') {
       // Geography Paper 1
@@ -3828,7 +3853,7 @@ Write a story about a moment of fear.
     };
 
     // Use the new predicted question generator for subjects that don't have specific exam formats
-    if (subjectId !== 'physics' && subjectId !== 'geography' && subjectId !== 'english-literature' && subjectId !== 'history' && subjectId !== 'english-language' && subjectId !== 'religious-studies') {
+    if (subjectId !== 'physics' && subjectId !== 'geography' && subjectId !== 'geography-a-edexcel' && subjectId !== 'english-literature' && subjectId !== 'history' && subjectId !== 'english-language' && subjectId !== 'religious-studies') {
       const predictedQuestions = generatePredictedExamQuestions(subjectId, subject.topics);
       questions.push(...predictedQuestions);
     }
@@ -3868,6 +3893,7 @@ Write a story about a moment of fear.
       spanish: 120, // 2h
       german: 120, // 2h
       geography: 90, // 1h 30min
+      "geography-a-edexcel": 90, // 1h 30min
       "computer-science": 120, // 2h
       psychology: 135 // 2h 15min
     };
@@ -3895,6 +3921,9 @@ Write a story about a moment of fear.
     }
     if (subjectId === 'geography') {
       return 88; // Section A (30) + Section B (29) + Section C (29 including 3 SPaG) = 88 marks
+    }
+    if (subjectId === 'geography-a-edexcel') {
+      return 94; // Edexcel Geography A Paper 1: 94 marks total (including SPaG)
     }
     if (subjectId === 'history') {
       return 84; // History Paper 1: Section A (44 marks) + Section B (40 marks)
@@ -4247,6 +4276,7 @@ Write a story about a moment of fear.
                    {subjectId === 'history' ? 'History Paper 1' : 
                     subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
                     subjectId === 'geography' ? `Geography ${geographyPaperType}` : 
+                    subjectId === 'geography-a-edexcel' ? 'Geography A (Edexcel) Paper 1' :
                     subjectId === 'geography-paper-2' ? 'Geography Paper 2' :
                     subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' :
                     `${subject.name} Predicted Exam`}
