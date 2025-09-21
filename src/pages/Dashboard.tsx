@@ -1274,7 +1274,7 @@ const Dashboard = () => {
                             }}
                             className="absolute top-2 right-2 text-muted-foreground hover:text-foreground transition-colors"
                           >
-                            <X className="h-3 w-3" />
+                            <X className="h-4 w-4" />
                           </button>
                         </motion.div>
                       );
