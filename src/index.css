@@ -230,57 +230,57 @@
   }
 
   .dark {
-    /* Premium dark backgrounds - true dark palette */
-    --background: 220 13% 9%;
-    --foreground: 220 9% 96%;
+    /* True dark mode - consistent across entire app */
+    --background: 0 0% 7%;         /* #121212 - main background */
+    --foreground: 0 0% 100%;       /* #FFFFFF - primary text */
 
-    /* Cards with proper dark contrast */
-    --card: 220 13% 11%;
-    --card-foreground: 220 9% 96%;
+    /* Cards and content sections */
+    --card: 0 0% 12%;              /* #1E1E1E - content containers */
+    --card-foreground: 0 0% 100%;  /* #FFFFFF - card text */
 
-    --popover: 220 13% 11%;
-    --popover-foreground: 220 9% 96%;
+    --popover: 0 0% 12%;           /* #1E1E1E - popovers */
+    --popover-foreground: 0 0% 100%; /* #FFFFFF - popover text */
 
-    /* Primary uses enhanced brand accent for visibility */
+    /* Primary keeps Mentiora's gradient accent */
     --primary: 217 91% 60%;
-    --primary-foreground: 220 9% 96%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary elements with proper dark styling */
-    --secondary: 220 13% 15%;
-    --secondary-foreground: 220 9% 85%;
+    /* Secondary elements */
+    --secondary: 0 0% 15%;         /* Slightly lighter than cards */
+    --secondary-foreground: 0 0% 93%; /* #EDEDED - off-white */
 
-    /* Muted elements with enhanced contrast */
-    --muted: 220 13% 15%;
-    --muted-foreground: 220 9% 65%;
+    /* Muted elements */
+    --muted: 0 0% 15%;             /* Muted backgrounds */
+    --muted-foreground: 0 0% 63%;  /* #A0A0A0 - secondary text */
 
     /* Accent for interactive elements */
-    --accent: 220 13% 18%;
-    --accent-foreground: 220 9% 96%;
+    --accent: 0 0% 18%;            /* Hover states */
+    --accent-foreground: 0 0% 100%;
 
-    /* Destructive actions with proper contrast */
+    /* Destructive actions */
     --destructive: 0 78% 60%;
-    --destructive-foreground: 220 9% 96%;
+    --destructive-foreground: 0 0% 100%;
 
-    /* Borders and inputs with proper dark definition */
-    --border: 220 13% 18%;
-    --input: 220 13% 15%;
-    --ring: 217 91% 60%;
+    /* Borders and inputs */
+    --border: 0 0% 18%;            /* Subtle borders */
+    --input: 0 0% 15%;             /* Input backgrounds */
+    --ring: 217 91% 60%;           /* Focus rings keep brand color */
     
-    /* Sidebar with premium dark styling */
-    --sidebar-background: 220 13% 11%;
-    --sidebar-foreground: 220 9% 85%;
+    /* Sidebar consistent with main theme */
+    --sidebar-background: 0 0% 12%; /* #1E1E1E */
+    --sidebar-foreground: 0 0% 93%; /* #EDEDED */
     --sidebar-primary: 217 91% 60%;
-    --sidebar-primary-foreground: 220 9% 96%;
-    --sidebar-accent: 220 13% 18%;
-    --sidebar-accent-foreground: 220 9% 96%;
-    --sidebar-border: 220 13% 18%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 18%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 18%;
     --sidebar-ring: 217 91% 60%;
 
-    /* Enhanced premium gradients for dark mode */
+    /* Dark mode gradients - no light gradients */
     --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(220 70% 50%));
-    --gradient-secondary: linear-gradient(135deg, hsl(220 13% 11%), hsl(220 13% 15%));
+    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 12%), hsl(0 0% 15%));
     --gradient-accent: linear-gradient(135deg, hsl(217 91% 60%), hsl(210 85% 65%));
-    --gradient-background: linear-gradient(135deg, hsl(220 13% 9%), hsl(220 13% 11%));
+    --gradient-background: linear-gradient(135deg, hsl(0 0% 7%), hsl(0 0% 10%));
   }
 }
 
