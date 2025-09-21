@@ -134,7 +134,7 @@ const Settings = () => {
               <div className="p-6 rounded-lg bg-gradient-to-br from-secondary via-secondary to-accent/10 border border-border shadow-sm">
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
-                    <h4 className="text-lg font-bold text-foreground flex items-center gap-2">
+                    <h4 className="text-lg font-bold text-primary flex items-center gap-2">
                       <Crown className="w-5 h-5 text-accent" />
                       Premium Subscription
                     </h4>
