@@ -230,57 +230,57 @@
   }
 
   .dark {
-    /* Premium dark backgrounds - sophisticated charcoal palette */
-    --background: 215 32% 7%;
-    --foreground: 213 31% 93%;
+    /* Premium dark backgrounds - true dark palette */
+    --background: 220 13% 9%;
+    --foreground: 220 9% 96%;
 
-    /* Cards with elevated contrast for depth */
-    --card: 215 28% 10%;
-    --card-foreground: 213 31% 93%;
+    /* Cards with proper dark contrast */
+    --card: 220 13% 11%;
+    --card-foreground: 220 9% 96%;
 
-    --popover: 215 28% 10%;
-    --popover-foreground: 213 31% 93%;
+    --popover: 220 13% 11%;
+    --popover-foreground: 220 9% 96%;
 
     /* Primary uses enhanced brand accent for visibility */
-    --primary: 217 91% 65%;
-    --primary-foreground: 215 32% 7%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 220 9% 96%;
 
-    /* Secondary elements with improved readability */
-    --secondary: 215 25% 14%;
-    --secondary-foreground: 213 25% 85%;
+    /* Secondary elements with proper dark styling */
+    --secondary: 220 13% 15%;
+    --secondary-foreground: 220 9% 85%;
 
     /* Muted elements with enhanced contrast */
-    --muted: 215 25% 14%;
-    --muted-foreground: 215 20% 70%;
+    --muted: 220 13% 15%;
+    --muted-foreground: 220 9% 65%;
 
-    /* Accent for interactive elements with better visibility */
-    --accent: 215 25% 20%;
-    --accent-foreground: 213 31% 93%;
+    /* Accent for interactive elements */
+    --accent: 220 13% 18%;
+    --accent-foreground: 220 9% 96%;
 
     /* Destructive actions with proper contrast */
     --destructive: 0 78% 60%;
-    --destructive-foreground: 213 31% 93%;
+    --destructive-foreground: 220 9% 96%;
 
-    /* Borders and inputs with enhanced definition */
-    --border: 215 25% 20%;
-    --input: 215 25% 14%;
-    --ring: 217 91% 65%;
+    /* Borders and inputs with proper dark definition */
+    --border: 220 13% 18%;
+    --input: 220 13% 15%;
+    --ring: 217 91% 60%;
     
     /* Sidebar with premium dark styling */
-    --sidebar-background: 215 28% 10%;
-    --sidebar-foreground: 213 25% 85%;
-    --sidebar-primary: 217 91% 65%;
-    --sidebar-primary-foreground: 215 32% 7%;
-    --sidebar-accent: 215 25% 20%;
-    --sidebar-accent-foreground: 213 31% 93%;
-    --sidebar-border: 215 25% 20%;
-    --sidebar-ring: 217 91% 65%;
+    --sidebar-background: 220 13% 11%;
+    --sidebar-foreground: 220 9% 85%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 220 9% 96%;
+    --sidebar-accent: 220 13% 18%;
+    --sidebar-accent-foreground: 220 9% 96%;
+    --sidebar-border: 220 13% 18%;
+    --sidebar-ring: 217 91% 60%;
 
     /* Enhanced premium gradients for dark mode */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 65%), hsl(220 70% 55%));
-    --gradient-secondary: linear-gradient(135deg, hsl(215 28% 10%), hsl(215 25% 14%));
-    --gradient-accent: linear-gradient(135deg, hsl(217 91% 65%), hsl(210 85% 70%));
-    --gradient-background: linear-gradient(135deg, hsl(215 32% 7%), hsl(215 28% 9%));
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(220 70% 50%));
+    --gradient-secondary: linear-gradient(135deg, hsl(220 13% 11%), hsl(220 13% 15%));
+    --gradient-accent: linear-gradient(135deg, hsl(217 91% 60%), hsl(210 85% 65%));
+    --gradient-background: linear-gradient(135deg, hsl(220 13% 9%), hsl(220 13% 11%));
   }
 }
 
