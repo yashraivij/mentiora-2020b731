@@ -331,7 +331,7 @@ const Index = () => {
               onClick={() => navigate('/register')} 
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 rounded-2xl"
             >
-              Get Started Free
+              Try Now For Free
             </Button>
           </motion.div>
           
