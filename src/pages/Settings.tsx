@@ -121,8 +121,8 @@ const Settings = () => {
           <div className="mb-8">
             <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center">
-                  <CreditCard className="w-6 h-6 text-primary-foreground" />
+                <div className="w-12 h-12 bg-accent rounded-2xl flex items-center justify-center">
+                  <CreditCard className="w-6 h-6 text-accent-foreground" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-card-foreground">
@@ -135,7 +135,7 @@ const Settings = () => {
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
                     <h4 className="text-lg font-bold text-foreground flex items-center gap-2">
-                      <Crown className="w-5 h-5 text-primary" />
+                      <Crown className="w-5 h-5 text-accent" />
                       Premium Subscription
                     </h4>
                     <p className="text-muted-foreground max-w-lg">
@@ -143,10 +143,10 @@ const Settings = () => {
                       view invoices, and modify your plan.
                     </p>
                     <div className="flex items-center gap-2 mt-3">
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-accent/10 text-accent border border-accent/20">
                         Secure Portal
                       </span>
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-accent/20 text-accent-foreground border border-accent/30">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-muted text-muted-foreground border border-border">
                         Full Control
                       </span>
                     </div>
@@ -154,7 +154,7 @@ const Settings = () => {
                   
                   <Button 
                     onClick={openManageBilling}
-                    className="ml-4 bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8 rounded-2xl"
+                    className="ml-4 bg-accent hover:bg-accent/90 text-accent-foreground font-bold py-3 px-8 rounded-2xl"
                   >
                     <CreditCard className="w-4 h-4 mr-2" />
                     Manage Billing
@@ -166,17 +166,17 @@ const Settings = () => {
         )}
 
         {/* Danger Zone */}
-        <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-destructive/20">
+        <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-muted-foreground/20">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-destructive rounded-2xl flex items-center justify-center">
-              <Trash2 className="w-6 h-6 text-destructive-foreground" />
+            <div className="w-12 h-12 bg-muted-foreground/20 rounded-2xl flex items-center justify-center">
+              <Trash2 className="w-6 h-6 text-muted-foreground" />
             </div>
             <div>
               <h3 className="text-xl font-bold text-card-foreground">Danger Zone</h3>
               <p className="text-muted-foreground">Permanent actions that cannot be undone</p>
             </div>
           </div>
-          <div className="p-6 rounded-lg bg-destructive/10 border border-destructive/20">
+          <div className="p-6 rounded-lg bg-muted/30 border border-muted-foreground/20">
             <div className="flex items-start justify-between">
               <div className="space-y-2">
                 <h4 className="text-lg font-bold text-foreground">Delete Account</h4>
@@ -185,10 +185,10 @@ const Settings = () => {
                   All your progress, notes, and achievements will be lost forever.
                 </p>
                 <div className="flex items-center gap-2 mt-3">
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-muted text-muted-foreground">
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-muted text-muted-foreground border border-muted-foreground/30">
                     Immediate Effect
                   </span>
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-destructive/20 text-destructive">
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-muted-foreground/10 text-muted-foreground border border-muted-foreground/20">
                     No Recovery
                   </span>
                 </div>
@@ -197,8 +197,8 @@ const Settings = () => {
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <Button 
-                    variant="destructive" 
-                    className="ml-4 font-bold py-3 px-8 rounded-2xl"
+                    variant="outline" 
+                    className="ml-4 border-muted-foreground/30 hover:bg-muted-foreground/10 text-muted-foreground font-bold py-3 px-8 rounded-2xl"
                     disabled={isDeleting}
                   >
                     <Trash2 className="w-4 h-4 mr-2" />
@@ -208,7 +208,7 @@ const Settings = () => {
                 <AlertDialogContent className="bg-card border border-border">
                   <AlertDialogHeader>
                     <AlertDialogTitle className="text-xl text-foreground flex items-center gap-2">
-                      <Trash2 className="w-5 h-5 text-destructive" />
+                      <Trash2 className="w-5 h-5 text-muted-foreground" />
                       Permanently Delete Account?
                     </AlertDialogTitle>
                     <AlertDialogDescription className="text-base text-muted-foreground">
@@ -219,7 +219,7 @@ const Settings = () => {
                         <li>Practice history and performance data</li>
                         <li>Subscription and billing information</li>
                       </ul>
-                      <p className="mt-4 font-bold text-destructive">
+                      <p className="mt-4 font-bold text-muted-foreground">
                         This cannot be undone. Are you absolutely sure?
                       </p>
                     </AlertDialogDescription>
@@ -231,7 +231,7 @@ const Settings = () => {
                     <AlertDialogAction
                       onClick={handleDeleteAccount}
                       disabled={isDeleting}
-                      className="bg-destructive hover:bg-destructive/90 text-destructive-foreground"
+                      className="bg-muted-foreground/20 hover:bg-muted-foreground/30 text-foreground border border-muted-foreground/30"
                     >
                       {isDeleting ? (
                         <div className="flex items-center gap-2">
