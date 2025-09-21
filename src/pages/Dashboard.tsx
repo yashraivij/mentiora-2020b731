@@ -1634,9 +1634,9 @@ const Dashboard = () => {
                                 {/* Subject Info */}
                                 <div className="flex-1">
                                    <div className="flex items-center space-x-3 mb-2">
-                                     <h3 className="text-xl font-bold text-gray-800">
-                                       {subjectName}
-                                     </h3>
+                                      <h3 className="text-xl font-bold text-foreground">
+                                        {subjectName}
+                                      </h3>
                                      {isPremium && (
                                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusChip.color}`}>
                                          {statusChip.text}
