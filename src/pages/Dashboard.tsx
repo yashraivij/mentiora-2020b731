@@ -113,12 +113,12 @@ const Dashboard = () => {
   const [sortBy, setSortBy] = useState<string>('recent');
 
   const sidebarItems = [
-    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50", textColor: "text-sky-700", activeColor: "bg-sky-400" },
-    { id: "leaderboards", label: "LEADERBOARDS", icon: Trophy, bgColor: "bg-yellow-50", textColor: "text-yellow-700", activeColor: "bg-yellow-400" },
-    { id: "progress", label: "PROGRESS", icon: TrendingUp, bgColor: "bg-green-50", textColor: "text-green-700", activeColor: "bg-green-400" },
-    { id: "quests", label: "QUESTS", icon: Star, bgColor: "bg-orange-50", textColor: "text-orange-700", activeColor: "bg-orange-400" },
-    { id: "notes", label: "NOTES", icon: NotebookPen, bgColor: "bg-blue-50", textColor: "text-blue-700", activeColor: "bg-blue-400" },
-    { id: "profile", label: "PROFILE", icon: User, bgColor: "bg-muted", textColor: "text-muted-foreground", activeColor: "bg-primary" },
+    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-muted/50", textColor: "text-muted-foreground", activeColor: "bg-primary" },
+    { id: "leaderboards", label: "LEADERBOARDS", icon: Trophy, bgColor: "bg-muted/50", textColor: "text-muted-foreground", activeColor: "bg-primary" },
+    { id: "progress", label: "PROGRESS", icon: TrendingUp, bgColor: "bg-muted/50", textColor: "text-muted-foreground", activeColor: "bg-primary" },
+    { id: "quests", label: "QUESTS", icon: Star, bgColor: "bg-muted/50", textColor: "text-muted-foreground", activeColor: "bg-primary" },
+    { id: "notes", label: "NOTES", icon: NotebookPen, bgColor: "bg-muted/50", textColor: "text-muted-foreground", activeColor: "bg-primary" },
+    { id: "profile", label: "PROFILE", icon: User, bgColor: "bg-muted/50", textColor: "text-muted-foreground", activeColor: "bg-primary" },
   ];
 
   // Subject colors mapping (softer Duolingo-style)
