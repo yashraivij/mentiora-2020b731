@@ -119,10 +119,10 @@ const Settings = () => {
         {/* Billing Management Card - Only for Premium Users */}
         {isPremium && (
           <div className="mb-8">
-            <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
+            <div className="bg-card rounded-2xl p-6 shadow-lg border border-border">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-accent rounded-2xl flex items-center justify-center">
-                  <CreditCard className="w-6 h-6 text-accent-foreground" />
+                <div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center">
+                  <CreditCard className="w-6 h-6 text-primary-foreground" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-card-foreground">
@@ -131,11 +131,11 @@ const Settings = () => {
                   <p className="text-muted-foreground">Manage your subscription and billing</p>
                 </div>
               </div>
-              <div className="p-6 rounded-lg bg-gradient-to-br from-secondary via-secondary to-accent/10 border border-border shadow-sm">
+              <div className="p-6 rounded-lg bg-card border border-border">
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
                     <h4 className="text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
-                      <Crown className="w-5 h-5 text-accent" />
+                      <Crown className="w-5 h-5 text-primary" />
                       Premium Subscription
                     </h4>
                     <p className="text-slate-600 dark:text-slate-300 max-w-lg">
@@ -143,7 +143,7 @@ const Settings = () => {
                       view invoices, and modify your plan.
                     </p>
                     <div className="flex items-center gap-2 mt-3">
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-accent/10 text-accent border border-accent/20">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
                         Secure Portal
                       </span>
                       <span className="px-3 py-1 rounded-full text-xs font-medium bg-muted text-muted-foreground border border-border">
@@ -154,7 +154,7 @@ const Settings = () => {
                   
                   <Button 
                     onClick={openManageBilling}
-                    className="ml-4 bg-accent hover:bg-accent/90 text-accent-foreground font-bold py-3 px-8 rounded-2xl"
+                    className="ml-4 bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8 rounded-2xl"
                   >
                     <CreditCard className="w-4 h-4 mr-2" />
                     Manage Billing
@@ -166,9 +166,9 @@ const Settings = () => {
         )}
 
         {/* Danger Zone */}
-        <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-muted-foreground/20">
+        <div className="bg-card rounded-2xl p-6 shadow-lg border border-border">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-muted-foreground/20 rounded-2xl flex items-center justify-center">
+            <div className="w-12 h-12 bg-muted-foreground/10 rounded-2xl flex items-center justify-center">
               <Trash2 className="w-6 h-6 text-muted-foreground" />
             </div>
             <div>
@@ -176,7 +176,7 @@ const Settings = () => {
               <p className="text-muted-foreground">Permanent actions that cannot be undone</p>
             </div>
           </div>
-          <div className="p-6 rounded-lg bg-muted/30 border border-muted-foreground/20">
+          <div className="p-6 rounded-lg bg-card border border-border">
             <div className="flex items-start justify-between">
               <div className="space-y-2">
                 <h4 className="text-lg font-bold text-foreground">Delete Account</h4>
@@ -198,7 +198,7 @@ const Settings = () => {
                 <AlertDialogTrigger asChild>
                   <Button 
                     variant="outline" 
-                    className="ml-4 border-muted-foreground/30 hover:bg-muted-foreground/10 text-muted-foreground font-bold py-3 px-8 rounded-2xl"
+                    className="ml-4 border-muted-foreground/20 hover:bg-muted-foreground/5 text-muted-foreground font-bold py-3 px-8 rounded-2xl"
                     disabled={isDeleting}
                   >
                     <Trash2 className="w-4 h-4 mr-2" />
