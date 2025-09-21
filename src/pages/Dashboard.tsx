@@ -2246,8 +2246,8 @@ const Dashboard = () => {
               {isPremium && (
                 <div className="bg-card rounded-2xl p-6 shadow-lg border border-border">
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center">
-                      <CreditCard className="w-6 h-6 text-primary-foreground" />
+                    <div className="w-12 h-12 bg-emerald-500 rounded-2xl flex items-center justify-center">
+                      <CreditCard className="w-6 h-6 text-white" />
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-card-foreground">
@@ -2256,11 +2256,11 @@ const Dashboard = () => {
                       <p className="text-card-foreground/80">Manage your subscription and billing</p>
                     </div>
                   </div>
-                  <div className="p-6 rounded-lg bg-card border border-border shadow-sm">
+                  <div className="p-6 rounded-lg bg-emerald-50 dark:bg-card border border-emerald-200 dark:border-border shadow-sm">
                     <div className="flex items-start justify-between">
                       <div className="space-y-2">
                         <h4 className="text-lg font-bold text-card-foreground flex items-center gap-2">
-                          <Crown className="w-5 h-5 text-primary" />
+                          <Crown className="w-5 h-5 text-emerald-500" />
                           Premium Subscription
                         </h4>
                         <p className="text-card-foreground/90 max-w-lg">
@@ -2271,7 +2271,7 @@ const Dashboard = () => {
                       
                       <Button 
                         onClick={openManageBilling}
-                        className="ml-4 bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8 rounded-2xl"
+                        className="ml-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-8 rounded-2xl"
                       >
                         <CreditCard className="w-4 h-4 mr-2" />
                         Manage Billing
@@ -2284,15 +2284,15 @@ const Dashboard = () => {
               {/* Danger Zone */}
               <div className="bg-card rounded-2xl p-6 shadow-lg border border-border">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-muted-foreground/10 rounded-2xl flex items-center justify-center">
-                    <Trash2 className="w-6 h-6 text-muted-foreground" />
+                  <div className="w-12 h-12 bg-red-500 rounded-2xl flex items-center justify-center">
+                    <Trash2 className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-card-foreground">Danger Zone</h3>
                     <p className="text-card-foreground/80">Permanent actions that cannot be undone</p>
                   </div>
                 </div>
-                <div className="p-6 rounded-lg bg-card border border-border shadow-sm">
+                <div className="p-6 rounded-lg bg-red-50 dark:bg-card border border-red-200 dark:border-border shadow-sm">
                   <div className="flex items-start justify-between">
                     <div className="space-y-2">
                       <h4 className="text-lg font-bold text-card-foreground">Delete Account</h4>
@@ -2305,7 +2305,7 @@ const Dashboard = () => {
                     <Button 
                       onClick={() => navigate('/settings')}
                       variant="outline" 
-                      className="ml-4 border-destructive/40 hover:bg-destructive/10 text-destructive font-bold py-3 px-8 rounded-2xl"
+                      className="ml-4 border-red-300 hover:bg-red-50 dark:border-destructive/40 dark:hover:bg-destructive/10 text-red-600 dark:text-destructive font-bold py-3 px-8 rounded-2xl"
                     >
                       <Trash2 className="w-4 h-4 mr-2" />
                       Delete Account
