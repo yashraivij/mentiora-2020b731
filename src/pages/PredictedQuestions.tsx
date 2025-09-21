@@ -278,24 +278,24 @@ const PredictedQuestions = () => {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden bg-background">
       {/* Animated Background Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/5 opacity-50" />
-      <div className="absolute inset-0 bg-gradient-to-tr from-accent/10 via-primary/10 to-secondary/5 opacity-30 animate-pulse" />
-      <div className="absolute inset-0 bg-gradient-to-bl from-indigo-600 via-purple-500 to-pink-500 opacity-10" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/3 to-accent/3 opacity-30" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-accent/5 via-primary/5 to-secondary/3 opacity-20 animate-pulse" />
+      <div className="absolute inset-0 bg-gradient-to-bl from-muted/20 via-muted/10 to-muted/5 opacity-10" />
       
       {/* Floating Sparkles */}
       <div className="absolute top-20 left-10 animate-bounce">
-        <Sparkles className="h-8 w-8 text-yellow-300/60" />
+        <Sparkles className="h-8 w-8 text-muted-foreground/30" />
       </div>
       <div className="absolute top-40 right-20 animate-pulse">
-        <Crown className="h-10 w-10 text-yellow-400/70" />
+        <Crown className="h-10 w-10 text-muted-foreground/40" />
       </div>
       <div className="absolute bottom-40 left-20 animate-bounce delay-300">
-        <Rocket className="h-8 w-8 text-yellow-300/60" />
+        <Rocket className="h-8 w-8 text-muted-foreground/30" />
       </div>
       <div className="absolute top-60 right-40 animate-pulse delay-500">
-        <Zap className="h-6 w-6 text-yellow-400/50" />
+        <Zap className="h-6 w-6 text-muted-foreground/25" />
       </div>
       
       {/* Header */}
