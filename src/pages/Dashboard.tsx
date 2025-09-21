@@ -1552,12 +1552,12 @@ const Dashboard = () => {
                           <Trophy className="h-8 w-8 text-white" />
                         </div>
                         <div>
-                          <h3 className="text-2xl font-bold text-gray-800">
+                          <h3 className="text-2xl font-bold text-foreground">
                             Your average grade is {isPremium ? (predictedGrades.length > 0 ? Math.round(predictedGrades.reduce((sum, grade) => sum + (parseInt(grade.grade) || 0), 0) / predictedGrades.length) : 0) : (
-                              <Lock size={24} className="inline text-gray-400" />
+                              <Lock size={24} className="inline text-muted-foreground" />
                             )}. Keep it up!
                           </h3>
-                          <p className="text-gray-600">You're making great progress</p>
+                          <p className="text-muted-foreground">You're making great progress</p>
                         </div>
                       </div>
                       <Button
@@ -1605,10 +1605,10 @@ const Dashboard = () => {
 
                       const getStatusChip = (grade: string, percentage: number) => {
                         const gradeNum = parseInt(grade || '0');
-                        if (gradeNum >= 7 && percentage >= 80) return { text: "On track", color: "bg-green-100 text-green-700" };
-                        if (gradeNum >= 5 && percentage >= 70) return { text: "Improving", color: "bg-blue-100 text-blue-700" };
-                        if (gradeNum >= 4) return { text: "Needs work", color: "bg-orange-100 text-orange-700" };
-                        return { text: "Keep trying", color: "bg-red-100 text-red-700" };
+                        if (gradeNum >= 7 && percentage >= 80) return { text: "On track", color: "bg-emerald-100 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300" };
+                        if (gradeNum >= 5 && percentage >= 70) return { text: "Improving", color: "bg-blue-100 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300" };
+                        if (gradeNum >= 4) return { text: "Needs work", color: "bg-amber-100 dark:bg-amber-950/30 text-amber-700 dark:text-amber-300" };
+                        return { text: "Keep trying", color: "bg-red-100 dark:bg-red-950/30 text-red-700 dark:text-red-300" };
                       };
 
                       const statusChip = getStatusChip(prediction.grade, prediction.percentage || 0);
@@ -1652,13 +1652,13 @@ const Dashboard = () => {
                                      />
                                    </div>
                                   
-                                    <p className="text-sm text-gray-600">
-                                      {isPremium ? `${Math.round(prediction.percentage || 0)}% accuracy in practice` : (
-                                        <span className="flex items-center">
-                                          <Lock size={16} className="inline text-gray-400 mr-1" />% accuracy in practice
-                                        </span>
-                                      )}
-                                    </p>
+                                     <p className="text-sm text-muted-foreground">
+                                       {isPremium ? `${Math.round(prediction.percentage || 0)}% accuracy in practice` : (
+                                         <span className="flex items-center">
+                                           <Lock size={16} className="inline text-muted-foreground mr-1" />% accuracy in practice
+                                         </span>
+                                       )}
+                                     </p>
                                 </div>
                               </div>
 
