@@ -2282,30 +2282,38 @@ const Dashboard = () => {
               )}
 
               {/* Danger Zone */}
-              <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-red-200">
+              <div className="bg-card rounded-2xl p-6 shadow-lg border border-border">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-red-500 rounded-2xl flex items-center justify-center">
-                    <Trash2 className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 bg-muted-foreground/10 rounded-2xl flex items-center justify-center">
+                    <Trash2 className="w-6 h-6 text-muted-foreground" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-card-foreground">Danger Zone</h3>
-                    <p className="text-muted-foreground">Permanent actions that cannot be undone</p>
+                    <p className="text-card-foreground/80">Permanent actions that cannot be undone</p>
                   </div>
                 </div>
-                <div className="p-6 rounded-lg bg-red-50 border border-red-200">
+                <div className="p-6 rounded-lg bg-card border border-border shadow-sm">
                   <div className="flex items-start justify-between">
                     <div className="space-y-2">
                       <h4 className="text-lg font-bold text-card-foreground">Delete Account</h4>
-                      <p className="text-muted-foreground max-w-lg">
+                      <p className="text-card-foreground/90 max-w-lg">
                         Permanently delete your account and all associated data. This action cannot be undone. 
                         All your progress, notes, and achievements will be lost forever.
                       </p>
+                      <div className="flex items-center gap-2 mt-3">
+                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-destructive/10 text-destructive border border-destructive/30">
+                          Immediate Effect
+                        </span>
+                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-muted/50 text-card-foreground/80 border border-border">
+                          No Recovery
+                        </span>
+                      </div>
                     </div>
                     
                     <Button 
                       onClick={() => navigate('/settings')}
-                      variant="destructive" 
-                      className="ml-4 bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-2xl"
+                      variant="outline" 
+                      className="ml-4 border-destructive/40 hover:bg-destructive/10 text-destructive font-bold py-3 px-8 rounded-2xl"
                     >
                       <Trash2 className="w-4 h-4 mr-2" />
                       Delete Account
