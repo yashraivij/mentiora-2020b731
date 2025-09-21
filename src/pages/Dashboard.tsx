@@ -2259,11 +2259,11 @@ const Dashboard = () => {
                   <div className="p-6 rounded-lg bg-green-50 border border-green-200">
                     <div className="flex items-start justify-between">
                       <div className="space-y-2">
-                        <h4 className="text-lg font-bold text-black flex items-center gap-2">
+                        <h4 className="text-lg font-bold text-card-foreground flex items-center gap-2">
                           <Crown className="w-5 h-5 text-green-500" />
                           Premium Subscription
                         </h4>
-                        <p className="text-black/90 max-w-lg">
+                        <p className="text-muted-foreground max-w-lg">
                           Access your Stripe billing portal to manage your subscription, update payment methods, 
                           view invoices, and modify your plan.
                         </p>
