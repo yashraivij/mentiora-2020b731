@@ -180,7 +180,7 @@ const Settings = () => {
             <div className="flex items-start justify-between">
               <div className="space-y-2">
                 <h4 className="text-lg font-bold text-foreground">Delete Account</h4>
-                <p className="text-muted-foreground max-w-lg">
+                <p className="text-foreground/80 max-w-lg">
                   Permanently delete your account and all associated data. This action cannot be undone. 
                   All your progress, notes, and achievements will be lost forever.
                 </p>
