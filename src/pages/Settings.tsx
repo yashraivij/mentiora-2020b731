@@ -131,14 +131,14 @@ const Settings = () => {
                   <p className="text-muted-foreground">Manage your subscription and billing</p>
                 </div>
               </div>
-              <div className="p-6 rounded-lg bg-muted/20 border border-border/50">
+              <div className="p-6 rounded-lg bg-muted border border-border">
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
-                    <h4 className="text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
+                    <h4 className="text-lg font-bold text-card-foreground flex items-center gap-2">
                       <Crown className="w-5 h-5 text-primary" />
                       Premium Subscription
                     </h4>
-                    <p className="text-slate-600 dark:text-slate-300 max-w-lg">
+                    <p className="text-muted-foreground max-w-lg">
                       Access your Stripe billing portal to manage your subscription, update payment methods, 
                       view invoices, and modify your plan.
                     </p>
@@ -176,7 +176,7 @@ const Settings = () => {
               <p className="text-muted-foreground">Permanent actions that cannot be undone</p>
             </div>
           </div>
-          <div className="p-6 rounded-lg bg-card border border-border">
+          <div className="p-6 rounded-lg bg-muted border border-border">
             <div className="flex items-start justify-between">
               <div className="space-y-2">
                 <h4 className="text-lg font-bold text-foreground">Delete Account</h4>
