@@ -188,7 +188,7 @@ const Notebook = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8 max-w-7xl">
+      <div className="container mx-auto px-6 py-8 max-w-7xl bg-background">
         {/* Premium Welcome Section */}
         <div className="mb-8">
           <div className="text-center mb-8">

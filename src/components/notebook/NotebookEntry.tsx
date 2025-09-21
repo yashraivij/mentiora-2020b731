@@ -149,7 +149,7 @@ export const NotebookEntry = ({ entry }: NotebookEntryProps) => {
             <Button 
               onClick={() => navigate("/pricing")}
               size="sm" 
-              className="w-full bg-white text-blue-500 hover:bg-gray-100 font-bold py-3 rounded-2xl"
+              className="w-full bg-card text-foreground hover:bg-muted font-bold py-3 rounded-2xl border border-border"
             >
               Upgrade to Premium
             </Button>
