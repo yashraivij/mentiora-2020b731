@@ -1545,7 +1545,7 @@ const Dashboard = () => {
               ) : (
                 <div className="max-w-4xl mx-auto space-y-6">
                   {/* Overall Summary Card */}
-                  <div className="bg-card rounded-3xl p-8 shadow-lg border-4 border-yellow-200">
+                  <div className="bg-card rounded-3xl p-8 shadow-lg border-4 border-border">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-4">
                         <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg">
