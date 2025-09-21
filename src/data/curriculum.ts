@@ -16659,7 +16659,7 @@ export const curriculum: Subject[] = [
           questions: [
             {
               id: 'exam-q1a',
-              question: 'Section A: Question 1 (Compulsory Skills)\n\n1 (a) Which of the following statements about UK landscapes is correct?\nA. Steep contour lines indicate gentle slopes\nB. All rivers flow from north to south\nC. Hard rock areas are more resistant to erosion\nD. Grid references show elevation patterns',
+              question: 'Which of the following statements about UK landscapes is correct?\nA. Steep contour lines indicate gentle slopes\nB. All rivers flow from north to south\nC. Hard rock areas are more resistant to erosion\nD. Grid references show elevation patterns',
               marks: 1,
               difficulty: 'easy',
               modelAnswer: 'C. Hard rock areas are more resistant to erosion',
