@@ -345,7 +345,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                             </div>
                             <div className="flex-1 min-w-0">
                               <p className="font-bold text-sm truncate text-gray-900 dark:text-white">{subject.name}</p>
-                              <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">
+                              <p className="text-xs text-gray-600 dark:text-white mt-1">
                                 {subject.topicCount} topic{subject.topicCount !== 1 ? 's' : ''} available
                               </p>
                                <Badge 
