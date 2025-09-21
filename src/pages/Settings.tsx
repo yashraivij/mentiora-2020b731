@@ -121,8 +121,8 @@ const Settings = () => {
           <div className="mb-8">
             <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-emerald-500 rounded-2xl flex items-center justify-center">
-                  <CreditCard className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center">
+                  <CreditCard className="w-6 h-6 text-primary-foreground" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-card-foreground">
@@ -135,7 +135,7 @@ const Settings = () => {
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
                     <h4 className="text-lg font-bold text-foreground flex items-center gap-2">
-                      <Crown className="w-5 h-5 text-emerald-500" />
+                      <Crown className="w-5 h-5 text-primary" />
                       Premium Subscription
                     </h4>
                     <p className="text-muted-foreground max-w-lg">
@@ -154,7 +154,7 @@ const Settings = () => {
                   
                   <Button 
                     onClick={openManageBilling}
-                    className="ml-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-8 rounded-2xl"
+                    className="ml-4 bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8 rounded-2xl"
                   >
                     <CreditCard className="w-4 h-4 mr-2" />
                     Manage Billing
@@ -166,17 +166,17 @@ const Settings = () => {
         )}
 
         {/* Danger Zone */}
-        <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-red-200 dark:border-red-800">
+        <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-destructive/20">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-red-500 rounded-2xl flex items-center justify-center">
-              <Trash2 className="w-6 h-6 text-white" />
+            <div className="w-12 h-12 bg-destructive rounded-2xl flex items-center justify-center">
+              <Trash2 className="w-6 h-6 text-destructive-foreground" />
             </div>
             <div>
               <h3 className="text-xl font-bold text-card-foreground">Danger Zone</h3>
               <p className="text-muted-foreground">Permanent actions that cannot be undone</p>
             </div>
           </div>
-          <div className="p-6 rounded-lg bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800">
+          <div className="p-6 rounded-lg bg-destructive/10 border border-destructive/20">
             <div className="flex items-start justify-between">
               <div className="space-y-2">
                 <h4 className="text-lg font-bold text-foreground">Delete Account</h4>
@@ -185,10 +185,10 @@ const Settings = () => {
                   All your progress, notes, and achievements will be lost forever.
                 </p>
                 <div className="flex items-center gap-2 mt-3">
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300">
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-muted text-muted-foreground">
                     Immediate Effect
                   </span>
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300">
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-destructive/20 text-destructive">
                     No Recovery
                   </span>
                 </div>
@@ -198,7 +198,7 @@ const Settings = () => {
                 <AlertDialogTrigger asChild>
                   <Button 
                     variant="destructive" 
-                    className="ml-4 bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-2xl"
+                    className="ml-4 font-bold py-3 px-8 rounded-2xl"
                     disabled={isDeleting}
                   >
                     <Trash2 className="w-4 h-4 mr-2" />
@@ -208,7 +208,7 @@ const Settings = () => {
                 <AlertDialogContent className="bg-card border border-border">
                   <AlertDialogHeader>
                     <AlertDialogTitle className="text-xl text-foreground flex items-center gap-2">
-                      <Trash2 className="w-5 h-5 text-red-500" />
+                      <Trash2 className="w-5 h-5 text-destructive" />
                       Permanently Delete Account?
                     </AlertDialogTitle>
                     <AlertDialogDescription className="text-base text-muted-foreground">
@@ -219,7 +219,7 @@ const Settings = () => {
                         <li>Practice history and performance data</li>
                         <li>Subscription and billing information</li>
                       </ul>
-                      <p className="mt-4 font-bold text-red-600 dark:text-red-400">
+                      <p className="mt-4 font-bold text-destructive">
                         This cannot be undone. Are you absolutely sure?
                       </p>
                     </AlertDialogDescription>
@@ -231,7 +231,7 @@ const Settings = () => {
                     <AlertDialogAction
                       onClick={handleDeleteAccount}
                       disabled={isDeleting}
-                      className="bg-red-500 hover:bg-red-600 text-white"
+                      className="bg-destructive hover:bg-destructive/90 text-destructive-foreground"
                     >
                       {isDeleting ? (
                         <div className="flex items-center gap-2">
