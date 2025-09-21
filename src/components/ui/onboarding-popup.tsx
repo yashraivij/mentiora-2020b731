@@ -337,7 +337,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                               )}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="font-bold text-sm truncate text-foreground dark:text-foreground">{subject.name}</p>
+                              <p className="font-bold text-sm truncate text-gray-900 dark:text-white">{subject.name}</p>
                                <Badge 
                                 variant="secondary" 
                                 className={`text-xs mt-1 ${
