@@ -1108,13 +1108,13 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-background flex">
       {/* Left Sidebar - Duolingo Style */}
-      <div className="w-64 bg-white border-r-2 border-gray-100 flex flex-col py-6">
+      <div className="w-64 bg-background border-r-2 border-border flex flex-col py-6">
         {/* Logo */}
         <div className="px-6 mb-8 flex items-center space-x-3">
           <img src={mentioraLogo} alt="Mentiora Logo" className="w-8 h-8" />
-          <h1 className="text-xl font-bold text-black">Mentiora</h1>
+          <h1 className="text-xl font-bold text-foreground">Mentiora</h1>
           {isPremium && (
             <Crown className="w-5 h-5 text-yellow-500" />
           )}
@@ -1148,11 +1148,11 @@ const Dashboard = () => {
         </nav>
 
         {/* Bottom Section */}
-        <div className="px-4 pt-4 border-t border-gray-100 space-y-2">
+        <div className="px-4 pt-4 border-t border-border space-y-2">
           <button
             data-feedback-fish
             data-feedback-fish-userid={user?.email || ""}
-            className="w-full flex items-center justify-start px-4 py-3 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-xl transition-all duration-200"
+            className="w-full flex items-center justify-start px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-accent rounded-xl transition-all duration-200"
           >
             <span className="text-lg mr-3">💬</span>
             <span className="font-medium">Feedback</span>
@@ -1160,7 +1160,7 @@ const Dashboard = () => {
           <Button
             variant="ghost"
             onClick={handleLogout}
-            className="w-full justify-start text-gray-600 hover:text-gray-800 hover:bg-gray-100"
+            className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-accent"
           >
             <User className="h-4 w-4 mr-3" />
             Sign Out
@@ -1196,10 +1196,10 @@ const Dashboard = () => {
               {/* Subject Selection or Subject Path */}
               {!selectedSubject ? (
                 <div>
-                  <div className="flex items-center justify-between mb-8">
-                    <h2 className="text-3xl font-bold text-gray-800">
-                      Let's Smash GCSEs, {getFirstName()}!
-                    </h2>
+                   <div className="flex items-center justify-between mb-8">
+                     <h2 className="text-3xl font-bold text-foreground">
+                       Let's Smash GCSEs, {getFirstName()}!
+                     </h2>
                     {filteredSubjects.length > 0 && (
                       <Button
                         onClick={() => setShowAddSubjects(true)}
@@ -1236,7 +1236,7 @@ const Dashboard = () => {
                                     </span>
                                   </div>
                                   
-                                  <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                            <h3 className="text-2xl font-bold text-foreground mb-4">
                                     {subject.name}
                                   </h3>
                                   
@@ -1290,7 +1290,7 @@ const Dashboard = () => {
                     >
                       ← Back
                     </Button>
-                    <h2 className="text-3xl font-bold text-gray-800">
+                     <h2 className="text-3xl font-bold text-foreground">
                       {curriculum.find(s => s.id === selectedSubject)?.name}
                     </h2>
                   </div>
@@ -1309,10 +1309,10 @@ const Dashboard = () => {
                   <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
                     <BookOpen className="h-12 w-12 text-gray-400" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                  <h3 className="text-2xl font-bold text-foreground mb-4">
                     No subjects selected yet
                   </h3>
-                  <p className="text-lg text-gray-600 mb-8">
+                  <p className="text-lg text-muted-foreground mb-8">
                     Add subjects to your list to get started with GCSE revision
                   </p>
                   <Button
@@ -1328,10 +1328,10 @@ const Dashboard = () => {
               {/* Add Subjects Modal */}
               {showAddSubjects && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                  <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
-                    <div className="p-6 border-b border-gray-200">
+                   <div className="bg-background rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
+                     <div className="p-6 border-b border-border">
                       <div className="flex items-center justify-between">
-                        <h2 className="text-2xl font-bold text-gray-800">Add Subjects</h2>
+                        <h2 className="text-2xl font-bold text-foreground">Add Subjects</h2>
                         <Button
                           onClick={() => setShowAddSubjects(false)}
                           className="w-8 h-8 p-0 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-full"
@@ -1401,10 +1401,10 @@ const Dashboard = () => {
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 mb-6 shadow-lg">
                   <NotebookPen className="h-8 w-8 text-white" />
                 </div>
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                 <h1 className="text-4xl font-bold text-foreground mb-4">
                   Smart Revision Notebook
                 </h1>
-                <p className="text-gray-600 text-lg max-w-md mx-auto">
+                 <p className="text-muted-foreground text-lg max-w-md mx-auto">
                   Instant notes for every lost mark
                 </p>
               </div>
@@ -2208,33 +2208,33 @@ const Dashboard = () => {
 
           {activeTab === "profile" && (
             <div className="space-y-8">
-              <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+              <h2 className="text-3xl font-bold text-foreground mb-8 text-center">
                 Profile Settings
               </h2>
 
               {/* Account Information Card */}
-              <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+              <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center">
                     <User className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800">
+                    <h3 className="text-xl font-bold text-card-foreground">
                       Account Information
                     </h3>
-                    <p className="text-gray-600">Your account details and status</p>
+                    <p className="text-muted-foreground">Your account details and status</p>
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
-                    <p className="text-sm font-medium text-gray-600 mb-1">Email Address</p>
-                    <p className="text-lg font-bold text-gray-800">{user?.email}</p>
+                  <div className="p-4 rounded-lg bg-muted border border-border">
+                    <p className="text-sm font-medium text-muted-foreground mb-1">Email Address</p>
+                    <p className="text-lg font-bold text-foreground">{user?.email}</p>
                   </div>
-                  <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
-                    <p className="text-sm font-medium text-gray-600 mb-1">Account Type</p>
+                  <div className="p-4 rounded-lg bg-muted border border-border">
+                    <p className="text-sm font-medium text-muted-foreground mb-1">Account Type</p>
                     <div className="flex items-center gap-2">
                       <Crown className="w-4 h-4 text-blue-500" />
-                      <p className="text-lg font-bold text-gray-800">
+                      <p className="text-lg font-bold text-foreground">
                         {isPremium ? "Premium Account" : "Free Account"}
                       </p>
                     </div>
@@ -2244,22 +2244,22 @@ const Dashboard = () => {
 
               {/* Billing Management Card - Only for Premium Users */}
               {isPremium && (
-                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 bg-green-500 rounded-2xl flex items-center justify-center">
                       <CreditCard className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-800">
+                      <h3 className="text-xl font-bold text-card-foreground">
                         Billing Management
                       </h3>
-                      <p className="text-gray-600">Manage your subscription and billing</p>
+                      <p className="text-muted-foreground">Manage your subscription and billing</p>
                     </div>
                   </div>
                   <div className="p-6 rounded-lg bg-green-50 border border-green-200">
                     <div className="flex items-start justify-between">
                       <div className="space-y-2">
-                        <h4 className="text-lg font-bold text-gray-800 flex items-center gap-2">
+                        <h4 className="text-lg font-bold text-card-foreground flex items-center gap-2">
                           <Crown className="w-5 h-5 text-green-500" />
                           Premium Subscription
                         </h4>
@@ -2282,14 +2282,14 @@ const Dashboard = () => {
               )}
 
               {/* Danger Zone */}
-              <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-red-200">
+              <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-red-200">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 bg-red-500 rounded-2xl flex items-center justify-center">
                     <Trash2 className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800">Danger Zone</h3>
-                    <p className="text-gray-600">Permanent actions that cannot be undone</p>
+                    <h3 className="text-xl font-bold text-card-foreground">Danger Zone</h3>
+                    <p className="text-muted-foreground">Permanent actions that cannot be undone</p>
                   </div>
                 </div>
                 <div className="p-6 rounded-lg bg-red-50 border border-red-200">
