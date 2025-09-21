@@ -118,7 +118,7 @@ const Dashboard = () => {
     { id: "progress", label: "PROGRESS", icon: TrendingUp, bgColor: "bg-green-50", textColor: "text-green-700", activeColor: "bg-green-400" },
     { id: "quests", label: "QUESTS", icon: Star, bgColor: "bg-orange-50", textColor: "text-orange-700", activeColor: "bg-orange-400" },
     { id: "notes", label: "NOTES", icon: NotebookPen, bgColor: "bg-blue-50", textColor: "text-blue-700", activeColor: "bg-blue-400" },
-    { id: "profile", label: "PROFILE", icon: User, bgColor: "bg-gray-50", textColor: "text-gray-700", activeColor: "bg-gray-400" },
+    { id: "profile", label: "PROFILE", icon: User, bgColor: "bg-muted", textColor: "text-muted-foreground", activeColor: "bg-primary" },
   ];
 
   // Subject colors mapping (softer Duolingo-style)
@@ -978,14 +978,14 @@ const Dashboard = () => {
                     : isActive
                     ? `${colors.bg} border-white shadow-lg`
                     : isAvailable
-                    ? `bg-white ${colors.text} border-gray-300 hover:border-gray-400`
-                    : "bg-gray-200 border-gray-300 cursor-not-allowed"
+                     ? `bg-background ${colors.text} border-border hover:border-accent`
+                     : "bg-muted border-border cursor-not-allowed"
                 } ${!isLocked ? 'hover:scale-105' : ''}`}
                 whileHover={!isLocked ? { scale: 1.05 } : {}}
                 whileTap={!isLocked ? { scale: 0.95 } : {}}
               >
                 {isLocked && (
-                  <Lock className="h-8 w-8 text-gray-400 absolute inset-0 m-auto" />
+                  <Lock className="h-8 w-8 text-muted-foreground absolute inset-0 m-auto" />
                 )}
                 {isCompleted && (
                   <div className="absolute -top-2 -right-2 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center border-2 border-white">
@@ -1003,14 +1003,14 @@ const Dashboard = () => {
               </motion.button>
               
               <div className="text-center mt-3">
-                <p className={`text-sm font-bold ${isLocked ? 'text-gray-400' : 'text-gray-700'}`}>
+                <p className={`text-sm font-bold ${isLocked ? 'text-muted-foreground' : 'text-foreground'}`}>
                   {topic.name}
                 </p>
               </div>
 
               {/* Connecting line to next topic */}
               {index < subject.topics.length - 1 && (
-                <div className="h-8 w-1 bg-gray-300 my-2"></div>
+                <div className="h-8 w-1 bg-border my-2"></div>
               )}
             </motion.div>
           );
@@ -1042,7 +1042,7 @@ const Dashboard = () => {
                   Predicted 2026 Exam Paper 1
                 </p>
                 {!isPremium && (
-                  <p className="text-xs text-gray-500 mt-1">Premium Required</p>
+                  <p className="text-xs text-muted-foreground mt-1">Premium Required</p>
                 )}
               </div>
             </motion.div>
@@ -1069,7 +1069,7 @@ const Dashboard = () => {
                   Predicted 2026 Exam Paper 2
                 </p>
                 {!isPremium && (
-                  <p className="text-xs text-gray-500 mt-1">Premium Required</p>
+                  <p className="text-xs text-muted-foreground mt-1">Premium Required</p>
                 )}
               </div>
             </motion.div>
@@ -1098,7 +1098,7 @@ const Dashboard = () => {
                 Predicted 2026 Exam
               </p>
               {!isPremium && (
-                <p className="text-xs text-gray-500 mt-1">Premium Required</p>
+                <p className="text-xs text-muted-foreground mt-1">Premium Required</p>
               )}
             </div>
           </motion.div>
@@ -1137,7 +1137,7 @@ const Dashboard = () => {
                       : `${item.bgColor} ${item.textColor} hover:scale-105`
                   }`}
                 >
-                  <div className={`p-2 rounded-xl ${isActive ? 'bg-white/20' : 'bg-white'}`}>
+                  <div className={`p-2 rounded-xl ${isActive ? 'bg-primary/20' : 'bg-background'}`}>
                     <Icon className={`h-5 w-5 ${isActive ? 'text-white' : item.textColor}`} />
                   </div>
                   <span className="font-bold text-sm tracking-wide">{item.label}</span>
@@ -1231,7 +1231,7 @@ const Dashboard = () => {
                               <div className="flex items-center justify-between">
                                 <div className="flex-1">
                                   <div className="flex items-center space-x-2 mb-3">
-                                    <span className={`text-xs font-bold ${colors.text} bg-gray-100 px-3 py-1 rounded-full`}>
+                                    <span className={`text-xs font-bold ${colors.text} bg-muted px-3 py-1 rounded-full`}>
                                       {progress.completed} OF {progress.total} UNITS
                                     </span>
                                   </div>
@@ -1240,7 +1240,7 @@ const Dashboard = () => {
                                     {subject.name}
                                   </h3>
                                   
-                                  <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                  <div className="w-full bg-muted rounded-full h-3 mb-4">
                                     <div
                                       className={`${colors.bg} h-3 rounded-full transition-all duration-500`}
                                       style={{ width: `${(progress.completed / progress.total) * 100}%` }}
@@ -1306,8 +1306,8 @@ const Dashboard = () => {
               {/* No subjects message */}
               {filteredSubjects.length === 0 && !selectedSubject && (
                 <div className="text-center py-16">
-                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
-                    <BookOpen className="h-12 w-12 text-gray-400" />
+                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-muted flex items-center justify-center">
+                    <BookOpen className="h-12 w-12 text-muted-foreground" />
                   </div>
                   <h3 className="text-2xl font-bold text-foreground mb-4">
                     No subjects selected yet
@@ -1334,7 +1334,7 @@ const Dashboard = () => {
                         <h2 className="text-2xl font-bold text-foreground">Add Subjects</h2>
                         <Button
                           onClick={() => setShowAddSubjects(false)}
-                          className="w-8 h-8 p-0 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-full"
+                          className="w-8 h-8 p-0 bg-muted hover:bg-accent text-muted-foreground rounded-full"
                         >
                           <X className="h-4 w-4" />
                         </Button>
@@ -1410,15 +1410,15 @@ const Dashboard = () => {
               </div>
 
               {/* Filters */}
-              <div className="max-w-2xl mx-auto bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-violet-100 p-6 mb-8">
+              <div className="max-w-2xl mx-auto bg-card/90 backdrop-blur-sm rounded-2xl shadow-xl border border-border p-6 mb-8">
                 <div className="flex items-center justify-center space-x-8">
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-gray-700 block">Subject</label>
+                    <label className="text-sm font-semibold text-foreground block">Subject</label>
                     <Select value={selectedNotebookSubject} onValueChange={setSelectedNotebookSubject}>
-                      <SelectTrigger className="w-44 bg-white border-gray-200 hover:border-violet-300 focus:border-violet-400 transition-all duration-200">
+                      <SelectTrigger className="w-44 bg-background border-border hover:border-primary focus:border-primary transition-all duration-200">
                         <SelectValue placeholder="All Subjects" />
                       </SelectTrigger>
-                  <SelectContent className="bg-white dark:bg-slate-800 z-50">
+                  <SelectContent className="bg-popover z-50">
                     <SelectItem value="all">All Subjects</SelectItem>
                     {getNotebookSubjects().map(subject => (
                       <SelectItem key={subject} value={subject}>{subject}</SelectItem>
@@ -1428,12 +1428,12 @@ const Dashboard = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-gray-700 block">Confidence</label>
+                    <label className="text-sm font-semibold text-foreground block">Confidence</label>
                     <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
-                      <SelectTrigger className="w-44 bg-white border-gray-200 hover:border-violet-300 focus:border-violet-400 transition-all duration-200">
+                      <SelectTrigger className="w-44 bg-background border-border hover:border-primary focus:border-primary transition-all duration-200">
                         <SelectValue placeholder="All Confidence" />
                       </SelectTrigger>
-                      <SelectContent className="bg-white z-50">
+                      <SelectContent className="bg-popover z-50">
                         <SelectItem value="all">All Confidence</SelectItem>
                         <SelectItem value="low">Low Confidence</SelectItem>
                         <SelectItem value="medium">Medium Confidence</SelectItem>
@@ -1448,11 +1448,11 @@ const Dashboard = () => {
               {notebookLoading ? (
                 <div className="text-center py-16">
                   <div className="animate-spin rounded-full h-12 w-12 border-4 border-violet-500 border-t-transparent mx-auto mb-6"></div>
-                  <p className="text-gray-700 font-medium text-lg">Loading your notes...</p>
+                  <p className="text-foreground font-medium text-lg">Loading your notes...</p>
                 </div>
               ) : sortedEntries.length === 0 ? (
                 <div className="max-w-2xl mx-auto">
-                  <Card className="text-center py-16 px-8 border border-violet-100 shadow-xl bg-white/90 backdrop-blur-sm">
+                  <Card className="text-center py-16 px-8 border border-border shadow-xl bg-card/90 backdrop-blur-sm">
                     <CardContent className="space-y-8">
                       <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-violet-100 to-purple-100 flex items-center justify-center shadow-lg">
                         <NotebookPen className="h-12 w-12 text-violet-600" />
@@ -1645,7 +1645,7 @@ const Dashboard = () => {
                                    </div>
                                   
                                    {/* Progress Bar */}
-                                   <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
+                                   <div className="w-full bg-muted rounded-full h-3 mb-2">
                                      <div
                                        className={`h-3 rounded-full ${getProgressColor(prediction.grade)} transition-all duration-700`}
                                        style={{ width: isPremium ? `${Math.min(prediction.percentage || 0, 100)}%` : '0%' }}
@@ -1738,11 +1738,11 @@ const Dashboard = () => {
                 {/* Stats Overview Cards */}
                 <div className="flex justify-center mb-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl w-full">
-                 <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100 text-center">
+                 <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border text-center">
                    <div className="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
                      <Trophy className="w-6 h-6 text-yellow-800" />
                    </div>
-                   <div className="text-2xl font-bold text-gray-800">
+                   <div className="text-2xl font-bold text-card-foreground">
                        #{(() => {
                           // Calculate user's rank from dynamic leaderboard
                           let players = leaderboardData.filter(p => {
@@ -1776,13 +1776,13 @@ const Dashboard = () => {
                          return userRank || players.length;
                       })()}
                    </div>
-                   <div className="text-sm text-gray-600">Your Rank</div>
+                   <div className="text-sm text-muted-foreground">Your Rank</div>
                  </div>
-                 <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100 text-center">
+                 <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border text-center">
                    <div className="w-12 h-12 bg-cyan-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
                      <Gem className="w-6 h-6 text-white" />
                    </div>
-                   <div className="text-2xl font-bold text-gray-800">{userGems}</div>
+                   <div className="text-2xl font-bold text-card-foreground">{userGems}</div>
                    <div className="text-sm text-gray-600">Total MP</div>
                  </div>
                   </div>
@@ -1886,8 +1886,8 @@ const Dashboard = () => {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          className={`grid grid-cols-4 gap-4 items-center p-4 rounded-xl hover:bg-gray-50 transition-colors ${
-                            player.isCurrentUser ? 'bg-blue-50 border-2 border-blue-200' : 'bg-gray-25'
+                          className={`grid grid-cols-4 gap-4 items-center p-4 rounded-xl hover:bg-accent/50 transition-colors theme-transition ${
+                            player.isCurrentUser ? 'bg-primary/10 border-2 border-primary/20' : 'bg-card/50'
                           }`}
                         >
                           {/* Rank */}
@@ -1957,21 +1957,21 @@ const Dashboard = () => {
               </div>
 
               {/* Daily Goal Card */}
-              <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+              <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-3">
                     <div className="w-12 h-12 bg-blue-400 rounded-2xl flex items-center justify-center">
                       <Zap className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-800">Daily Goal</h3>
-                       <p className="text-gray-600">
+                      <h3 className="text-xl font-bold text-card-foreground">Daily Goal</h3>
+                       <p className="text-muted-foreground">
                          50 MP goal — {Math.min(todayEarnedMP, 50)}/50 completed
                        </p>
                     </div>
                   </div>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-4">
+                <div className="w-full bg-muted rounded-full h-4">
                   <div 
                     className="bg-blue-400 h-4 rounded-full transition-all duration-500" 
                     style={{width: `${Math.min(todayEarnedMP / 50 * 100, 100)}%`}}
@@ -1981,18 +1981,18 @@ const Dashboard = () => {
 
               {/* Daily Quests */}
               <div className="space-y-4">
-                <h3 className="text-xl font-bold text-gray-800">Today's Quests</h3>
+                <h3 className="text-xl font-bold text-card-foreground">Today's Quests</h3>
                 
                  {/* Quest 1 - Login */}
-                 <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                 <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
                    <div className="flex items-center justify-between">
                      <div className="flex items-center space-x-4">
                        <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center">
                          <Check className="w-6 h-6 text-green-600" />
                        </div>
                        <div>
-                         <h4 className="text-lg font-bold text-gray-800">Log in today</h4>
-                         <p className="text-gray-600">Log in to earn MP</p>
+                          <h4 className="text-lg font-bold text-card-foreground">Log in today</h4>
+                          <p className="text-muted-foreground">Log in to earn MP</p>
                        </div>
                      </div>
                      <div className="flex items-center space-x-2">
@@ -2005,7 +2005,7 @@ const Dashboard = () => {
                      </div>
                    </div>
                    <div className="mt-4">
-                      <div className="w-full bg-gray-200 rounded-full h-2">
+                       <div className="w-full bg-muted rounded-full h-2">
                          <div 
                            className={`${(userStats?.loginToday || todayEarnedMP >= 10) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
                            style={{width: (userStats?.loginToday || todayEarnedMP >= 10) ? '100%' : '0%'}}
@@ -2015,7 +2015,7 @@ const Dashboard = () => {
                  </div>
 
                  {/* Quest 2 - Practice */}
-                 <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                 <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
                    <div className="flex items-center justify-between">
                      <div className="flex items-center space-x-4">
                        <div className={`w-12 h-12 ${userStats?.practiceToday ? 'bg-green-100' : 'bg-blue-400'} rounded-2xl flex items-center justify-center`}>
@@ -2026,8 +2026,8 @@ const Dashboard = () => {
                          )}
                        </div>
                        <div>
-                         <h4 className="text-lg font-bold text-gray-800">Complete 1 practice set</h4>
-                          <p className="text-gray-600">Answer questions to earn MP</p>
+                          <h4 className="text-lg font-bold text-card-foreground">Complete 1 practice set</h4>
+                           <p className="text-muted-foreground">Answer questions to earn MP</p>
                        </div>
                      </div>
                      <div className="flex items-center space-x-2">
@@ -2042,7 +2042,7 @@ const Dashboard = () => {
                      </div>
                    </div>
                    <div className="mt-4">
-                      <div className="w-full bg-gray-200 rounded-full h-2">
+                       <div className="w-full bg-muted rounded-full h-2">
                          <div 
                            className={`${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
                            style={{width: (userStats?.practiceToday || todayEarnedMP >= 40) ? '100%' : '0%'}}
@@ -2059,10 +2059,10 @@ const Dashboard = () => {
                         <Star className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-gray-800">Bonus: Do 3 topics</h4>
-                        <p className="text-gray-600">
-                          Weekly challenge — {Math.min(userStats?.weeklyTopicsCount || 0, 3)}/3 completed
-                        </p>
+                         <h4 className="text-lg font-bold text-card-foreground">Bonus: Do 3 topics</h4>
+                         <p className="text-muted-foreground">
+                           Weekly challenge — {Math.min(userStats?.weeklyTopicsCount || 0, 3)}/3 completed
+                         </p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
@@ -2075,7 +2075,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <div className="mt-4">
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-muted rounded-full h-2">
                       <div 
                         className="bg-purple-400 h-2 rounded-full" 
                         style={{width: `${Math.min(((userStats?.weeklyTopicsCount || 0) / 3) * 100, 100)}%`}}
@@ -2087,17 +2087,17 @@ const Dashboard = () => {
 
               {/* Weekly Quests */}
               <div className="space-y-4">
-                <h3 className="text-xl font-bold text-gray-800">This Week's Challenges</h3>
+                <h3 className="text-xl font-bold text-card-foreground">This Week's Challenges</h3>
                 
-                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
                       <div className="w-12 h-12 bg-orange-400 rounded-2xl flex items-center justify-center">
                         <Trophy className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-gray-800">Complete 5 practice sets</h4>
-                        <p className="text-gray-600">
+                        <h4 className="text-lg font-bold text-card-foreground">Complete 5 practice sets</h4>
+                        <p className="text-muted-foreground">
                           {Math.min(userStats?.weeklyPracticeCount || 0, 5)}/5 completed this week
                         </p>
                       </div>
@@ -2112,7 +2112,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <div className="mt-4">
-                    <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div className="w-full bg-muted rounded-full h-3">
                       <div 
                         className="bg-orange-400 h-3 rounded-full" 
                         style={{width: `${Math.min(((userStats?.weeklyPracticeCount || 0) / 5) * 100, 100)}%`}}
@@ -2121,15 +2121,15 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
                       <div className="w-12 h-12 bg-green-400 rounded-2xl flex items-center justify-center">
                         <Flame className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-gray-800">Maintain 7-day streak</h4>
-                        <p className="text-gray-600">
+                        <h4 className="text-lg font-bold text-card-foreground">Maintain 7-day streak</h4>
+                        <p className="text-muted-foreground">
                           {Math.min(userStats?.currentStreak || 0, 7)}/7 days completed
                         </p>
                       </div>
@@ -2144,7 +2144,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <div className="mt-4">
-                    <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div className="w-full bg-muted rounded-full h-3">
                       <div 
                         className="bg-green-400 h-3 rounded-full" 
                         style={{width: `${Math.min(((userStats?.currentStreak || 0) / 7) * 100, 100)}%`}}
@@ -2155,15 +2155,15 @@ const Dashboard = () => {
               </div>
 
               {/* Leaderboard Preview */}
-              <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+              <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center">
                       <Trophy className="w-6 h-6 text-yellow-800" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-800">Weekly Leaderboard</h3>
-                      <p className="text-gray-600">
+                      <h3 className="text-xl font-bold text-card-foreground">Weekly Leaderboard</h3>
+                      <p className="text-muted-foreground">
                         You're ranked #{(() => {
                           // Calculate user's rank from weekly leaderboard data
                           let players = leaderboardData.filter(p => {
@@ -2318,7 +2318,7 @@ const Dashboard = () => {
         </div>
 
         {/* Right Sidebar - Premium & Stats */}
-        <div className="w-80 bg-gray-50 p-6 space-y-6">
+        <div className="w-80 bg-muted/30 p-6 space-y-6">
           {/* Premium Card */}
           {isPremium ? (
             <Card className="border-0 bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-lg">
@@ -2365,7 +2365,7 @@ const Dashboard = () => {
                   Unlock exclusive study features and advanced analytics!
                 </p>
                 <Button 
-                  className="w-full bg-white text-blue-500 hover:bg-gray-100 font-bold py-3 rounded-2xl"
+                  className="w-full bg-background text-primary hover:bg-accent font-bold py-3 rounded-2xl theme-transition"
                   onClick={() => navigate("/pricing")}
                 >
                   UPGRADE TO PREMIUM
@@ -2421,8 +2421,8 @@ const Dashboard = () => {
                     )}
                   </div>
                   <div className="flex-1">
-                    <p className="font-bold text-gray-800">Complete 1 practice set</p>
-                    <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
+                    <p className="font-bold text-card-foreground">Complete 1 practice set</p>
+                    <div className="w-full bg-muted rounded-full h-2 mt-1">
                       <div 
                         className={`${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
                         style={{width: (userStats?.practiceToday || todayEarnedMP >= 40) ? '100%' : '20%'}}
