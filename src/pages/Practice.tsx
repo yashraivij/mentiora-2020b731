@@ -510,9 +510,9 @@ const Practice = () => {
 
   if (!currentQuestion) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">No questions available</h2>
+          <h2 className="text-2xl font-bold mb-4 text-foreground">No questions available</h2>
           <Button onClick={() => {
             console.log('Back button clicked (no questions)');
             if (window.history.length > 1) {

@@ -1270,7 +1270,7 @@ const Dashboard = () => {
                               e.stopPropagation();
                               removeSubject(subject.id);
                             }}
-                            className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 transition-colors"
+                            className="absolute top-2 right-2 text-muted-foreground hover:text-foreground transition-colors"
                           >
                             <X className="h-3 w-3" />
                           </button>
@@ -1286,7 +1286,7 @@ const Dashboard = () => {
                     <Button
                       variant="ghost"
                       onClick={() => setSelectedSubject(null)}
-                      className="text-gray-600 hover:text-gray-800 mr-4"
+                      className="text-muted-foreground hover:text-foreground mr-4"
                     >
                       ← Back
                     </Button>
@@ -1327,7 +1327,7 @@ const Dashboard = () => {
 
               {/* Add Subjects Modal */}
               {showAddSubjects && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                    <div className="bg-background rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
                      <div className="p-6 border-b border-border">
                       <div className="flex items-center justify-between">
@@ -1344,7 +1344,7 @@ const Dashboard = () => {
                     <div className="p-6 overflow-y-auto max-h-[60vh]">
                       {availableSubjects.length === 0 ? (
                         <div className="text-center py-8">
-                          <p className="text-lg text-gray-600">You've already added all available subjects!</p>
+                          <p className="text-lg text-muted-foreground">You've already added all available subjects!</p>
                         </div>
                       ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1359,7 +1359,7 @@ const Dashboard = () => {
                                 whileTap={{ scale: 0.98 }}
                               >
                                 <Card 
-                                  className="cursor-pointer border-2 border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200"
+                                  className="cursor-pointer border-2 border-border hover:border-accent hover:shadow-md transition-all duration-200"
                                   onClick={() => {
                                     addSubject(subject.id);
                                     setShowAddSubjects(false);
@@ -1378,7 +1378,7 @@ const Dashboard = () => {
                                           {subject.topics.length} topics available
                                         </p>
                                       </div>
-                                      <Plus className="h-5 w-5 text-gray-400" />
+                                      <Plus className="h-5 w-5 text-muted-foreground" />
                                     </div>
                                   </CardContent>
                                 </Card>
@@ -1498,17 +1498,17 @@ const Dashboard = () => {
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mb-6 shadow-lg">
                   <TrendingUp className="h-8 w-8 text-white" />
                 </div>
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                <h1 className="text-4xl font-bold text-foreground mb-4">
                   Your Predicted Grades
                 </h1>
-                <p className="text-gray-600 text-lg max-w-md mx-auto">
+                <p className="text-muted-foreground text-lg max-w-md mx-auto">
                   See where you stand — and how to improve.
                 </p>
               </div>
 
               {predictedGrades.length === 0 ? (
                 <div className="max-w-2xl mx-auto">
-                  <Card className="text-center py-16 px-8 border border-blue-100 shadow-xl bg-white/90 backdrop-blur-sm">
+                  <Card className="text-center py-16 px-8 border border-border shadow-xl bg-card/90 backdrop-blur-sm">
                     <CardContent className="space-y-8">
                       <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center shadow-lg">
                         <Trophy className="h-12 w-12 text-blue-600" />
@@ -1545,7 +1545,7 @@ const Dashboard = () => {
               ) : (
                 <div className="max-w-4xl mx-auto space-y-6">
                   {/* Overall Summary Card */}
-                  <div className="bg-white rounded-3xl p-8 shadow-lg border-4 border-yellow-200">
+                  <div className="bg-card rounded-3xl p-8 shadow-lg border-4 border-yellow-200">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-4">
                         <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg">
@@ -1620,7 +1620,7 @@ const Dashboard = () => {
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 }}
                         >
-                          <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-200 border-2 border-gray-100">
+                          <div className="bg-card rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-200 border-2 border-border">
                             <div className="flex items-center justify-between">
                               <div className="flex items-center space-x-4 flex-1">
                                 {/* Subject Icon - Using mapped subject ID for consistency */}
@@ -1666,10 +1666,10 @@ const Dashboard = () => {
                               <div className="text-center ml-6">
                                 <div className={`text-5xl font-bold ${getGradeColor(prediction.grade)} mb-1`}>
                                   {isPremium ? (prediction.grade || '0') : (
-                                    <Lock size={48} className="text-gray-400" />
+                                    <Lock size={48} className="text-muted-foreground" />
                                   )}
                                 </div>
-                                <div className="text-sm text-gray-500 uppercase tracking-wide font-medium">
+                                <div className="text-sm text-muted-foreground uppercase tracking-wide font-medium">
                                   Predicted
                                 </div>
                               </div>
@@ -1688,24 +1688,24 @@ const Dashboard = () => {
             <div className="space-y-6">
               {/* Header */}
               <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-gray-800 mb-2">Leaderboards</h2>
-                <p className="text-lg text-gray-600">See how you rank against other students</p>
+                <h2 className="text-3xl font-bold text-foreground mb-2">Leaderboards</h2>
+                <p className="text-lg text-muted-foreground">See how you rank against other students</p>
               </div>
 
                {/* Leaderboard Tabs */}
                <div className="flex justify-center mb-8">
-                 <div className="bg-white rounded-2xl p-2 shadow-lg border-2 border-gray-100">
+                 <div className="bg-card rounded-2xl p-2 shadow-lg border-2 border-border">
                    <div className="flex items-center space-x-2">
                      <div className="flex space-x-2">
                        <Button 
-                         className={activeLeaderboardTab === 'weekly' ? "bg-yellow-400 hover:bg-yellow-500 text-yellow-800 font-bold py-2 px-4 rounded-xl" : "text-gray-600 font-bold py-2 px-4 rounded-xl"}
+                         className={activeLeaderboardTab === 'weekly' ? "bg-yellow-400 hover:bg-yellow-500 text-yellow-800 font-bold py-2 px-4 rounded-xl" : "text-muted-foreground font-bold py-2 px-4 rounded-xl hover:text-foreground"}
                          variant={activeLeaderboardTab === 'weekly' ? "default" : "ghost"}
                          onClick={() => setActiveLeaderboardTab('weekly')}
                        >
                          This Week
                        </Button>
                        <Button 
-                         className={activeLeaderboardTab === 'alltime' ? "bg-yellow-400 hover:bg-yellow-500 text-yellow-800 font-bold py-2 px-4 rounded-xl" : "text-gray-600 font-bold py-2 px-4 rounded-xl"}
+                         className={activeLeaderboardTab === 'alltime' ? "bg-yellow-400 hover:bg-yellow-500 text-yellow-800 font-bold py-2 px-4 rounded-xl" : "text-muted-foreground font-bold py-2 px-4 rounded-xl hover:text-foreground"}
                          variant={activeLeaderboardTab === 'alltime' ? "default" : "ghost"}
                          onClick={() => setActiveLeaderboardTab('alltime')}
                        >
@@ -1783,13 +1783,13 @@ const Dashboard = () => {
                      <Gem className="w-6 h-6 text-white" />
                    </div>
                    <div className="text-2xl font-bold text-card-foreground">{userGems}</div>
-                   <div className="text-sm text-gray-600">Total MP</div>
+                   <div className="text-sm text-muted-foreground">Total MP</div>
                  </div>
                   </div>
                 </div>
 
               {/* Main Leaderboard */}
-              <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-100 overflow-hidden">
+              <div className="bg-card rounded-2xl shadow-lg border-2 border-border overflow-hidden">
                 <div className="bg-gradient-to-r from-yellow-400 to-orange-400 px-6 py-4">
                   <h3 className="text-xl font-bold text-white">
                     {activeLeaderboardTab === 'weekly' ? 'Weekly League' : 'All Time League'}
@@ -1798,7 +1798,7 @@ const Dashboard = () => {
                 
                 <div className="p-6">
                   {/* Column Headers */}
-                  <div className="grid grid-cols-4 gap-4 text-sm font-bold text-gray-600 uppercase tracking-wide mb-4 px-4">
+                  <div className="grid grid-cols-4 gap-4 text-sm font-bold text-muted-foreground uppercase tracking-wide mb-4 px-4">
                     <div className="text-left">Rank</div>
                     <div className="text-left">Student</div>
                     <div className="text-left">MP</div>
@@ -1893,13 +1893,13 @@ const Dashboard = () => {
                           {/* Rank */}
                           <div className="flex items-center space-x-2">
                             <span className="text-2xl">{getRankIcon(player.rank)}</span>
-                            <span className={`text-lg font-bold ${player.isCurrentUser ? 'text-blue-600' : 'text-gray-700'}`}>
+                            <span className={`text-lg font-bold ${player.isCurrentUser ? 'text-primary' : 'text-foreground'}`}>
                               #{player.rank}
                             </span>
                           </div>
 
                           {/* Student Name */}
-                          <div className={`font-bold text-left ${player.isCurrentUser ? 'text-blue-800' : 'text-gray-800'}`}>
+                          <div className={`font-bold text-left ${player.isCurrentUser ? 'text-primary' : 'text-foreground'}`}>
                             {player.name}
                             {player.isCurrentUser && (
                               <Badge className="ml-2 bg-blue-500 hover:bg-blue-600 text-white text-xs">You</Badge>
@@ -1909,13 +1909,13 @@ const Dashboard = () => {
                           {/* MP */}
                           <div className="flex items-center space-x-1">
                             <Gem className="w-4 h-4 text-cyan-400" />
-                            <span className="font-bold text-gray-800">{player.mp.toLocaleString()}</span>
+                            <span className="font-bold text-foreground">{player.mp.toLocaleString()}</span>
                           </div>
 
                           {/* Streak */}
                           <div className="flex items-center space-x-1">
                             <Flame className="w-4 h-4 text-orange-400" />
-                            <span className="font-bold text-gray-800">{player.streak}</span>
+                            <span className="font-bold text-foreground">{player.streak}</span>
                           </div>
                         </motion.div>
                       );
@@ -1928,10 +1928,10 @@ const Dashboard = () => {
 
           {activeTab !== "learn" && activeTab !== "notes" && activeTab !== "progress" && activeTab !== "profile" && activeTab !== "quests" && activeTab !== "leaderboards" && (
             <div className="text-center py-16">
-              <h2 className="text-3xl font-bold text-gray-800 mb-6 capitalize">
+              <h2 className="text-3xl font-bold text-foreground mb-6 capitalize">
                 {activeTab}
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-muted-foreground">
                 Coming soon! This feature is being developed.
               </p>
             </div>
@@ -1941,17 +1941,17 @@ const Dashboard = () => {
             <div className="space-y-6">
               {/* Header Bar */}
               <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold text-gray-800">Quests</h2>
+                <h2 className="text-3xl font-bold text-foreground">Quests</h2>
                 <div className="flex items-center space-x-6">
                   {/* MP Balance */}
-                  <div className="flex items-center space-x-2 bg-white rounded-2xl px-6 py-3 shadow-lg border-2 border-gray-100">
+                  <div className="flex items-center space-x-2 bg-card rounded-2xl px-6 py-3 shadow-lg border-2 border-border">
                     <Gem className="h-6 w-6 text-cyan-400" />
-                    <span className="text-xl font-bold text-gray-800" data-mp-counter>{userGems} MP</span>
+                    <span className="text-xl font-bold text-foreground" data-mp-counter>{userGems} MP</span>
                   </div>
                   {/* Streak Chip */}
-                  <div className="flex items-center space-x-2 bg-white rounded-2xl px-6 py-3 shadow-lg border-2 border-gray-100">
+                  <div className="flex items-center space-x-2 bg-card rounded-2xl px-6 py-3 shadow-lg border-2 border-border">
                     <Flame className="h-6 w-6 text-orange-400" />
-                    <span className="text-lg font-bold text-gray-800">{currentStreak} days in a row</span>
+                    <span className="text-lg font-bold text-card-foreground">{currentStreak} days in a row</span>
                   </div>
                 </div>
               </div>
@@ -2052,7 +2052,7 @@ const Dashboard = () => {
                  </div>
 
                 {/* Quest 3 - Bonus Weekly */}
-                <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-purple-200">
+                <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-purple-200">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
                       <div className="w-12 h-12 bg-purple-400 rounded-2xl flex items-center justify-center">
@@ -2263,7 +2263,7 @@ const Dashboard = () => {
                           <Crown className="w-5 h-5 text-green-500" />
                           Premium Subscription
                         </h4>
-                        <p className="text-gray-600 max-w-lg">
+                        <p className="text-muted-foreground max-w-lg">
                           Access your Stripe billing portal to manage your subscription, update payment methods, 
                           view invoices, and modify your plan.
                         </p>
@@ -2295,8 +2295,8 @@ const Dashboard = () => {
                 <div className="p-6 rounded-lg bg-red-50 border border-red-200">
                   <div className="flex items-start justify-between">
                     <div className="space-y-2">
-                      <h4 className="text-lg font-bold text-gray-800">Delete Account</h4>
-                      <p className="text-gray-600 max-w-lg">
+                      <h4 className="text-lg font-bold text-card-foreground">Delete Account</h4>
+                      <p className="text-muted-foreground max-w-lg">
                         Permanently delete your account and all associated data. This action cannot be undone. 
                         All your progress, notes, and achievements will be lost forever.
                       </p>
@@ -2324,7 +2324,7 @@ const Dashboard = () => {
             <Card className="border-0 bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center space-x-3 mb-4">
-                  <div className="bg-white/20 rounded-lg p-2">
+                  <div className="bg-primary/20 rounded-lg p-2">
                     <Crown className="h-6 w-6" />
                   </div>
                   <span className="font-bold text-lg">Premium Active</span>
@@ -2356,7 +2356,7 @@ const Dashboard = () => {
             <Card className="border-0 bg-gradient-to-br from-blue-400 to-purple-500 text-white shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center space-x-3 mb-4">
-                  <div className="bg-white/20 rounded-lg p-2">
+                  <div className="bg-primary/20 rounded-lg p-2">
                     <Crown className="h-6 w-6" />
                   </div>
                   <span className="font-bold text-lg">Go Premium</span>
@@ -2378,7 +2378,7 @@ const Dashboard = () => {
           <Card className="border-0 shadow-md">
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-gray-800">Leaderboards</h3>
+                <h3 className="text-lg font-bold text-foreground">Leaderboards</h3>
                 <button 
                   className="text-blue-500 font-bold text-sm hover:text-blue-600 cursor-pointer"
                   onClick={() => setActiveTab("leaderboards")}
@@ -2391,7 +2391,7 @@ const Dashboard = () => {
                   <Trophy className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-muted-foreground">
                     Complete a lesson to join this week's leaderboard and compete against other learners
                   </p>
                 </div>
@@ -2403,7 +2403,7 @@ const Dashboard = () => {
           <Card className="border-0 shadow-md">
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-gray-800">Daily Quests</h3>
+                <h3 className="text-lg font-bold text-foreground">Daily Quests</h3>
                 <button 
                   className="text-blue-500 font-bold text-sm hover:text-blue-600 cursor-pointer"
                   onClick={() => setActiveTab("quests")}
