@@ -134,11 +134,11 @@ const Settings = () => {
               <div className="p-6 rounded-lg bg-gradient-to-br from-secondary via-secondary to-accent/10 border border-border shadow-sm">
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
-                    <h4 className="text-lg font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                    <h4 className="text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
                       <Crown className="w-5 h-5 text-accent" />
                       Premium Subscription
                     </h4>
-                    <p className="text-foreground/80 max-w-lg">
+                    <p className="text-slate-600 dark:text-slate-300 max-w-lg">
                       Access your Stripe billing portal to manage your subscription, update payment methods, 
                       view invoices, and modify your plan.
                     </p>
