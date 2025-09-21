@@ -16658,321 +16658,301 @@ export const curriculum: Subject[] = [
         name: 'Predicted 2026 Paper 1 Exam',
         questions: [
           {
-            id: 'exam-q1',
-            question: 'Section A: Question 1 (Compulsory Skills)\n\nWhich of the following statements about UK landscape interpretation is correct?\nA. Steep contour lines indicate gentle slopes\nB. Rivers always flow from high to low elevation\nC. All coastal areas experience the same rate of erosion\nD. Grid references are used to show climate patterns',
+            id: 'exam-q1-mcq',
+            question: 'Section A: Question 1 (Compulsory Skills)\n\nWhich rock type is most resistant to erosion?\nA. Sandstone\nB. Clay\nC. Granite\nD. Chalk',
             marks: 1,
             difficulty: 'easy',
-            modelAnswer: 'B. Rivers always flow from high to low elevation',
+            modelAnswer: 'C. Granite',
             markingCriteria: {
-              breakdown: ['Correct identification of river flow principle (1 mark)']
+              breakdown: ['Correct identification of granite as most resistant rock type (1 mark)']
+            },
+            specReference: 'Edexcel Geography A Paper 1 Skills'
+          },
+          {
+            id: 'exam-q1-short',
+            question: 'Section A: Question 1(b)\n\nGive two factors that influence the rate of coastal erosion.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Rock type/geology (1 mark) and wave energy/fetch (1 mark).',
+            markingCriteria: {
+              breakdown: ['One factor correctly identified (1 mark)', 'Second factor correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A Paper 1 Skills'
+          },
+          {
+            id: 'exam-q1-explain',
+            question: 'Section A: Question 1(c)\n\nExplain how headlands and bays form on discordant coastlines.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Discordant coastlines have alternating bands of hard and soft rock perpendicular to the coast. Soft rock erodes more quickly through hydraulic action and abrasion, forming bays. Hard rock is more resistant to erosion and remains as headlands. Differential erosion creates the distinctive headland and bay coastline pattern.',
+            markingCriteria: {
+              breakdown: [
+                'Reference to alternating hard and soft rock bands (1 mark)',
+                'Soft rock erodes faster to form bays (1 mark)',
+                'Hard rock remains as headlands (1 mark)',
+                'Differential erosion process explained (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A Paper 1 Skills'
+          },
+          {
+            id: 'exam-q1-assess',
+            question: 'Section A: Question 1(d)\n\nAssess the social and economic impacts of coastal erosion on people and places.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Social impacts include loss of homes and displacement of communities, particularly affecting vulnerable groups. Coastal erosion threatens historical and cultural sites, causing loss of heritage. People may experience psychological stress from uncertainty about their future. Economic impacts include property devaluation and insurance costs becoming prohibitive. Businesses may lose customers and trade routes. Tourism can decline if beaches and coastal attractions are lost. However, some areas may benefit from new business opportunities in coastal management. The costs of protection often outweigh benefits for less developed areas.',
+            markingCriteria: {
+              breakdown: [
+                'Social impacts clearly explained (3 marks)',
+                'Economic impacts clearly explained (3 marks)',
+                'Assessment showing understanding of varied impacts (2 marks)'
+              ]
             },
             specReference: 'Edexcel Geography A Paper 1 Skills'
           },
           {
             id: 'exam-q2a',
-            question: 'Question 2(a): Which of the following is an erosional landform?\nA. Spit\nB. Beach\nC. Wave-cut platform\nD. Sand dune',
+            question: 'Question 2(a): Which of the following is a depositional landform?\nA. Stack\nB. Spit\nC. Wave-cut platform\nD. Cave',
             marks: 1,
             difficulty: 'easy',
-            modelAnswer: 'C. Wave-cut platform',
+            modelAnswer: 'B. Spit',
             markingCriteria: {
-              breakdown: ['Correct identification of wave-cut platform as erosional landform (1 mark)']
+              breakdown: ['Correct identification of spit as depositional landform (1 mark)']
             },
             specReference: 'Edexcel Geography A Paper 1 2.1'
           },
           {
             id: 'exam-q2b',
-            question: 'Question 2(b): State two physical processes that lead to the formation of headlands and bays.',
+            question: 'Question 2(b): State two processes of coastal erosion.',
             marks: 2,
             difficulty: 'easy',
-            modelAnswer: 'Differential erosion (1 mark) and the resistance of different rock types (1 mark).',
+            modelAnswer: 'Hydraulic action (1 mark) and abrasion/corrasion (1 mark).',
             markingCriteria: {
-              breakdown: ['One process correctly identified (1 mark)', 'Second process correctly identified (1 mark)']
+              breakdown: ['One erosion process correctly identified (1 mark)', 'Second erosion process correctly identified (1 mark)']
             },
             specReference: 'Edexcel Geography A Paper 1 2.2'
           },
           {
             id: 'exam-q2c',
-            question: 'Question 2(c): Explain how longshore drift leads to the formation of a spit.',
+            question: 'Question 2(c): Explain how wave-cut platforms are formed.',
             marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'Longshore drift transports sediment along the coast at an angle due to prevailing winds. Waves approach the beach at an angle, carrying sediment up the beach. The backwash returns straight down the beach due to gravity. This creates a zigzag movement of sediment. Where the coastline changes direction, sediment continues to be deposited, extending into the sea to form a spit.',
+            modelAnswer: 'Waves attack the base of a cliff through hydraulic action and abrasion. The cliff base is undercut, creating a wave-cut notch. Continued erosion weakens the cliff above the notch. Eventually the overhanging cliff collapses due to gravity and weathering. This process repeats, causing the cliff to retreat inland, leaving behind a gently sloping rocky platform at the base.',
             markingCriteria: {
               breakdown: [
-                'Description of wave approach and backwash (1 mark)',
-                'Explanation of zigzag sediment movement (1 mark)',
-                'Link to coastline change in direction (1 mark)',
-                'Formation of spit through continued deposition (1 mark)'
+                'Wave erosion at cliff base (1 mark)',
+                'Formation of wave-cut notch (1 mark)',
+                'Cliff collapse due to undercutting (1 mark)',
+                'Platform left behind as cliff retreats (1 mark)'
               ]
             },
             specReference: 'Edexcel Geography A Paper 1 2.3'
           },
           {
             id: 'exam-q2d',
-            question: 'Question 2(d): Assess the costs and benefits of hard engineering strategies to protect the coast.',
+            question: 'Question 2(d): Evaluate the costs and benefits of managed retreat as a coastal strategy.',
             marks: 8,
             difficulty: 'hard',
-            modelAnswer: 'Benefits: Sea walls provide effective protection against wave erosion and flooding, protecting valuable coastal infrastructure. Rock armour dissipates wave energy effectively and is relatively flexible. Groynes can build up beaches which provide natural protection. Costs: High construction and maintenance costs. Sea walls can increase erosion elsewhere due to wave reflection. Hard defences can look unsightly and restrict coastal access. They may simply transfer the problem elsewhere along the coast. Environmental impacts include habitat destruction and interference with natural coastal processes.',
+            modelAnswer: 'Benefits: Managed retreat allows natural coastal processes to continue, which is sustainable long-term. It can be cost-effective compared to hard engineering defenses that require ongoing maintenance. Creates new habitats like salt marshes that provide natural flood protection. Reduces future risk by relocating people away from danger zones. Costs: Significant social disruption as communities are relocated. High compensation costs for property and businesses. Loss of agricultural land and infrastructure. Political difficulties in implementation due to public opposition. May only relocate the problem rather than solve it. Cultural and emotional costs of losing established communities.',
             markingCriteria: {
               breakdown: [
-                'Benefits of hard engineering strategies (3 marks)',
-                'Costs/disadvantages of hard engineering (3 marks)',
-                'Assessment and evaluation of overall effectiveness (2 marks)'
+                'Benefits clearly explained (3 marks)',
+                'Costs and challenges explained (3 marks)',
+                'Evaluation of overall effectiveness (2 marks)'
               ]
             },
             specReference: 'Edexcel Geography A Paper 1 2.4'
           },
           {
             id: 'exam-q3a',
-            question: 'Question 3(a): Name one river landform created by erosion and one created by deposition.',
+            question: 'Question 3(a): Name two landforms created by river deposition.',
             marks: 2,
             difficulty: 'easy',
-            modelAnswer: 'Erosion: Waterfall (1 mark). Deposition: Levee (1 mark).',
+            modelAnswer: 'Floodplains (1 mark) and deltas (1 mark).',
             markingCriteria: {
-              breakdown: ['One erosional landform correctly identified (1 mark)', 'One depositional landform correctly identified (1 mark)']
+              breakdown: ['One depositional landform correctly identified (1 mark)', 'Second depositional landform correctly identified (1 mark)']
             },
             specReference: 'Edexcel Geography A Paper 1 3.1'
           },
           {
             id: 'exam-q3b',
-            question: 'Question 3(b): Explain one physical cause of river flooding.',
+            question: 'Question 3(b): Explain how deforestation can increase flood risk.',
             marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'Prolonged heavy rainfall saturates the soil, reducing infiltration capacity. This increases surface runoff into rivers. When river discharge exceeds channel capacity, flooding occurs. The impermeable saturated ground cannot absorb additional rainfall, forcing more water into surface drainage systems.',
+            modelAnswer: 'Trees intercept rainfall, reducing the amount reaching the ground. Removal of trees reduces interception, allowing more water to reach the surface. Tree roots help water infiltrate into soil and reduce surface runoff. Without trees, surface runoff increases, leading to higher river discharge and increased flood risk. Soil compaction after deforestation further reduces infiltration.',
             markingCriteria: {
               breakdown: [
-                'Identification of prolonged heavy rainfall (1 mark)',
-                'Explanation of soil saturation effects (1 mark)',
-                'Link to increased surface runoff (1 mark)',
-                'Connection to flooding (1 mark)'
+                'Explanation of interception loss (1 mark)',
+                'Role of tree roots in infiltration (1 mark)',
+                'Increased surface runoff (1 mark)',
+                'Link to flood risk (1 mark)'
               ]
             },
             specReference: 'Edexcel Geography A Paper 1 3.2'
           },
           {
             id: 'exam-q3c',
-            question: 'Question 3(c): Explain how human activity has increased flood risk in the UK.',
+            question: 'Question 3(c): Explain how physical and human factors contribute to flooding.',
             marks: 6,
             difficulty: 'medium',
-            modelAnswer: 'Urbanisation increases impermeable surfaces, reducing infiltration and increasing surface runoff speed. This creates higher peak flows and shorter lag times. Deforestation reduces interception and transpiration, increasing runoff. Channel modifications like straightening increase flow velocity but may cause problems downstream. Climate change from human activities increases extreme weather frequency. Development on floodplains puts more people and property at risk.',
+            modelAnswer: 'Physical factors: Prolonged heavy rainfall saturates the soil, reducing infiltration and increasing surface runoff. Steep relief increases runoff speed and reduces lag time. Impermeable rock types prevent water absorption. Human factors: Urbanisation increases impermeable surfaces and surface runoff. Deforestation reduces interception and increases runoff. River channel modifications can increase flow speed but may cause downstream problems. Climate change intensifies extreme weather events.',
             markingCriteria: {
               breakdown: [
-                'Urbanisation effects explained (2 marks)',
-                'Deforestation impacts (1 mark)',
-                'Channel modifications (1 mark)',
-                'Climate change/floodplain development (2 marks)'
+                'Physical factors explained (3 marks)',
+                'Human factors explained (3 marks)'
               ]
             },
             specReference: 'Edexcel Geography A Paper 1 3.3'
           },
           {
             id: 'exam-q3d',
-            question: 'Question 3(d): Using a UK river basin case study, evaluate the effectiveness of flood management strategies.',
+            question: 'Question 3(d): Using a UK case study, assess the costs and benefits of hard engineering strategies.',
             marks: 8,
             difficulty: 'hard',
-            modelAnswer: 'River Thames case study: Hard engineering like the Thames Barrier has been highly effective in protecting London from storm surges and high tides, preventing billions in potential damage. However, these strategies are expensive to maintain and may increase flood risk upstream. Soft engineering approaches like the Jubilee River flood relief channel work with natural processes and provide wildlife habitats. Urban SuDS and green spaces help manage surface water. The integrated approach combining multiple strategies has been most effective, though climate change presents ongoing challenges requiring adaptive management.',
+            modelAnswer: 'River Thames Barrier case study: Benefits include highly effective protection of London from tidal surges, preventing estimated £30 billion in flood damage since 1984. Provides flood protection for 1.3 million people and critical infrastructure. Creates confidence for continued investment in the area. Costs include high construction costs (£534 million in 1984) and ongoing maintenance expenses. May increase flood risk upstream due to water backing up. Limited lifespan requiring eventual replacement. Environmental impacts on river ecology. Does not protect against fluvial flooding from heavy rainfall upstream.',
             markingCriteria: {
               breakdown: [
-                'Named UK river basin case study (1 mark)',
-                'Evaluation of hard engineering effectiveness (3 marks)',
-                'Evaluation of soft engineering effectiveness (2 marks)',
-                'Overall assessment and conclusion (2 marks)'
+                'Named UK case study (1 mark)',
+                'Benefits clearly explained with evidence (3 marks)',
+                'Costs and limitations explained (3 marks)',
+                'Assessment and evaluation (1 mark)'
               ]
             },
             specReference: 'Edexcel Geography A Paper 1 3.4'
           },
           {
-            id: 'exam-q4a',
-            question: 'Question 4(a): Which of the following is a glacial landform created by erosion?\nA. Drumlin\nB. Arete\nC. Moraine\nD. Outwash plain',
-            marks: 1,
-            difficulty: 'easy',
-            modelAnswer: 'B. Arete',
-            markingCriteria: {
-              breakdown: ['Correct identification of arete as erosional glacial landform (1 mark)']
-            },
-            specReference: 'Edexcel Geography A Paper 1 4.1'
-          },
-          {
-            id: 'exam-q4b',
-            question: 'Question 4(b): State two physical processes that lead to glacial erosion.',
-            marks: 2,
-            difficulty: 'easy',
-            modelAnswer: 'Plucking (1 mark) and abrasion (1 mark).',
-            markingCriteria: {
-              breakdown: ['One glacial erosion process correctly identified (1 mark)', 'Second glacial erosion process correctly identified (1 mark)']
-            },
-            specReference: 'Edexcel Geography A Paper 1 4.2'
-          },
-          {
-            id: 'exam-q4c',
-            question: 'Question 4(c): Explain how corries are formed by glacial processes.',
-            marks: 4,
-            difficulty: 'medium',
-            modelAnswer: 'Snow accumulates in mountain hollows and compacts to form ice. The glacier moves through rotational slip, eroding the back wall through plucking and the floor through abrasion. Freeze-thaw weathering steepens the back wall. When the ice melts, it leaves behind a deep, armchair-shaped hollow with a steep back wall and sometimes a tarn (lake).',
-            markingCriteria: {
-              breakdown: [
-                'Snow accumulation and ice formation (1 mark)',
-                'Rotational movement and erosion processes (1 mark)',
-                'Freeze-thaw weathering effects (1 mark)',
-                'Formation of final corrie shape (1 mark)'
-              ]
-            },
-            specReference: 'Edexcel Geography A Paper 1 4.3'
-          },
-          {
-            id: 'exam-q4d',
-            question: 'Question 4(d): Assess the impacts of tourism in glaciated upland areas of the UK.',
-            marks: 8,
-            difficulty: 'hard',
-            modelAnswer: 'Positive impacts: Tourism provides economic benefits to rural communities through employment in hotels, restaurants, and guiding services. It supports local businesses and helps maintain rural services. Tourism revenue can fund conservation projects and path maintenance. Negative impacts: Footpath erosion and vegetation damage from large numbers of visitors. Traffic congestion and parking problems in narrow valleys. Litter and disturbance to wildlife. House prices increase, displacing local residents. Seasonal employment may be unstable.',
-            markingCriteria: {
-              breakdown: [
-                'Economic benefits explained (2 marks)',
-                'Environmental negative impacts (3 marks)',
-                'Social impacts positive and negative (2 marks)',
-                'Assessment and evaluation (1 mark)'
-              ]
-            },
-            specReference: 'Edexcel Geography A Paper 1 4.4'
-          },
-          {
             id: 'exam-q5a',
-            question: 'Section B: Question 5(a): Which one of the following describes the global circulation system?\nA. The movement of tectonic plates\nB. The transfer of heat by winds and pressure belts\nC. The cycle of evaporation and precipitation\nD. The greenhouse effect',
+            question: 'Section B: Question 5(a): Which of the following is a secondary effect of a tropical storm?\nA. Flooding\nB. High winds\nC. Storm surge\nD. Heavy rainfall',
             marks: 1,
             difficulty: 'easy',
-            modelAnswer: 'B. The transfer of heat by winds and pressure belts',
+            modelAnswer: 'A. Flooding',
             markingCriteria: {
-              breakdown: ['Correct identification of global circulation system (1 mark)']
+              breakdown: ['Correct identification of flooding as secondary effect (1 mark)']
             },
             specReference: 'Edexcel Geography A Paper 1 5.1'
           },
           {
             id: 'exam-q5b',
-            question: 'Question 5(b): Describe the trend shown in tropical storm frequency 1980–2020.',
+            question: 'Question 5(b): Give two ways in which humans contribute to climate change.',
             marks: 2,
             difficulty: 'easy',
-            modelAnswer: 'Overall increasing trend (1 mark) with some annual variation/fluctuation (1 mark).',
+            modelAnswer: 'Burning fossil fuels (1 mark) and deforestation (1 mark).',
             markingCriteria: {
-              breakdown: ['Identification of increasing trend (1 mark)', 'Reference to variation/fluctuation (1 mark)']
+              breakdown: ['One human cause correctly identified (1 mark)', 'Second human cause correctly identified (1 mark)']
             },
             specReference: 'Edexcel Geography A Paper 1 5.2'
           },
           {
             id: 'exam-q5c',
-            question: 'Question 5(c): Explain two reasons why the UK is vulnerable to extreme weather events.',
+            question: 'Question 5(c): Explain two reasons why LICs are more vulnerable to tropical storms than HICs.',
             marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'Maritime climate: The UK\'s position surrounded by ocean means it experiences frequent weather systems from the Atlantic, bringing storms and heavy rainfall. Urban heat islands: Cities create microclimates with higher temperatures, increasing risk of heat waves and thunderstorms. Dense population means more people are exposed to weather risks.',
+            modelAnswer: 'Limited resources for preparation and response: LICs lack early warning systems and emergency services, making evacuation and rescue operations difficult. Poor infrastructure: Buildings are often poorly constructed and unable to withstand high winds, while inadequate drainage systems increase flooding risk. Limited insurance coverage means people cannot rebuild after disasters.',
             markingCriteria: {
               breakdown: [
-                'First reason explained (2 marks)',
-                'Second reason explained (2 marks)'
+                'First reason clearly explained (2 marks)',
+                'Second reason clearly explained (2 marks)'
               ]
             },
             specReference: 'Edexcel Geography A Paper 1 5.3'
           },
           {
             id: 'exam-q5d',
-            question: 'Question 5(d): Assess the social and economic impacts of a named tropical storm.',
+            question: 'Question 5(d): Using a named tropical storm, assess the environmental impacts.',
             marks: 6,
             difficulty: 'medium',
-            modelAnswer: 'Hurricane Katrina (2005): Social impacts included over 1,800 deaths and displacement of over 1 million people. Poor communities were disproportionately affected. Economic impacts included $125 billion in damage, destruction of the Port of New Orleans affecting trade, and long-term unemployment. Insurance costs increased nationally. Recovery took many years, with some areas never fully rebuilt.',
+            modelAnswer: 'Hurricane Katrina (2005): Destroyed 20% of New Orleans wetlands which provided natural storm protection. Oil spills contaminated water bodies and soil. Flooding led to sewage contamination of waterways. However, some positive impacts included creation of new wetland habitats as levees failed. Storm surge deposited sediment that helped rebuild some coastal areas. Wildlife populations were temporarily displaced but many recovered. Salt water intrusion damaged freshwater ecosystems but also created new brackish habitats.',
             markingCriteria: {
               breakdown: [
                 'Named tropical storm (1 mark)',
-                'Social impacts explained (2 marks)',
-                'Economic impacts explained (2 marks)',
-                'Assessment of severity/scale (1 mark)'
+                'Negative environmental impacts (3 marks)',
+                'Positive environmental impacts (1 mark)',
+                'Assessment of overall impact (1 mark)'
               ]
             },
             specReference: 'Edexcel Geography A Paper 1 5.4'
           },
           {
             id: 'exam-q5e',
-            question: 'Question 5(e): Evaluate the effectiveness of global strategies to manage climate change.',
+            question: 'Question 5(e): Evaluate the effectiveness of adaptation strategies compared with mitigation strategies.',
             marks: 9,
             difficulty: 'hard',
-            modelAnswer: 'International agreements like the Paris Agreement have created global frameworks for reducing emissions. However, enforcement mechanisms are weak and targets are often not legally binding. The Kyoto Protocol had limited success as major emitters like the USA withdrew. Carbon trading schemes provide economic incentives but can be manipulated. Technology transfer to LICs helps spread clean energy but progress is slow. Individual country commitments vary widely in ambition and implementation. Climate change requires immediate action but political cycles focus on short-term gains.',
+            modelAnswer: 'Mitigation strategies aim to reduce greenhouse gas emissions to prevent further climate change. Examples include renewable energy development, carbon taxes, and international agreements like the Paris Accord. These are essential for long-term global climate stability but take decades to show results. Adaptation strategies help people adjust to current and unavoidable climate change impacts. Examples include flood defenses, drought-resistant crops, and building codes for extreme weather. These provide immediate protection but do not address root causes. Both approaches are necessary: mitigation for long-term sustainability and adaptation for immediate protection. However, mitigation requires global cooperation while adaptation can be implemented locally. Cost-effectiveness varies by region and time scale.',
             markingCriteria: {
               breakdown: [
-                'Examples of global strategies (2 marks)',
-                'Evaluation of successes (3 marks)',
-                'Evaluation of limitations (3 marks)',
-                'Conclusion and overall assessment (1 mark)'
+                'Understanding of mitigation strategies (2 marks)',
+                'Understanding of adaptation strategies (2 marks)',
+                'Comparison of effectiveness (3 marks)',
+                'Evaluation and conclusion (2 marks)'
               ]
             },
             specReference: 'Edexcel Geography A Paper 1 5.5'
           },
           {
             id: 'exam-q6a',
-            question: 'Section C: Question 6(a): Which of the following is a characteristic of a tropical rainforest?\nA. Seasonal rainfall\nB. Nutrient-rich soil\nC. Emergent trees\nD. Cold winters',
+            question: 'Section C: Question 6(a): Which of the following is found in a deciduous woodland?\nA. Emergent trees\nB. Oak trees\nC. Lianas\nD. Buttress roots',
             marks: 1,
             difficulty: 'easy',
-            modelAnswer: 'C. Emergent trees',
+            modelAnswer: 'B. Oak trees',
             markingCriteria: {
-              breakdown: ['Correct identification of emergent trees as rainforest characteristic (1 mark)']
+              breakdown: ['Correct identification of oak trees in deciduous woodland (1 mark)']
             },
             specReference: 'Edexcel Geography A Paper 1 6.1'
           },
           {
             id: 'exam-q6b',
-            question: 'Question 6(b): State two ways humans use deciduous woodlands.',
+            question: 'Question 6(b): Give two examples of goods provided by ecosystems.',
             marks: 2,
             difficulty: 'easy',
-            modelAnswer: 'Timber production/forestry (1 mark) and recreation/tourism (1 mark).',
+            modelAnswer: 'Timber/wood (1 mark) and food/crops (1 mark).',
             markingCriteria: {
-              breakdown: ['One human use correctly identified (1 mark)', 'Second human use correctly identified (1 mark)']
+              breakdown: ['One ecosystem good correctly identified (1 mark)', 'Second ecosystem good correctly identified (1 mark)']
             },
             specReference: 'Edexcel Geography A Paper 1 6.2'
           },
           {
             id: 'exam-q6c',
-            question: 'Question 6(c): Explain how the nutrient cycle supports biodiversity in tropical rainforests.',
+            question: 'Question 6(c): Explain how human activity can damage tropical rainforests.',
             marks: 4,
             difficulty: 'medium',
-            modelAnswer: 'Rapid decomposition in hot, humid conditions quickly breaks down dead organic matter. Nutrients are rapidly recycled and taken up by plant roots through shallow root systems. This constant nutrient cycling supports the growth of diverse plant species. The variety of plant species provides different food sources and habitats, supporting diverse animal communities.',
+            modelAnswer: 'Deforestation for agriculture removes large areas of forest, destroying habitats and reducing biodiversity. Logging, both legal and illegal, removes valuable tree species faster than they can regenerate. Mining operations clear forest areas and pollute soil and water with chemicals. Road building fragments habitats and allows access for further exploitation.',
             markingCriteria: {
               breakdown: [
-                'Rapid decomposition explained (1 mark)',
-                'Quick nutrient uptake by plants (1 mark)',
-                'Support for plant diversity (1 mark)',
-                'Link to animal diversity (1 mark)'
+                'Deforestation impacts explained (1 mark)',
+                'Logging impacts explained (1 mark)',
+                'Mining impacts explained (1 mark)',
+                'Infrastructure development impacts (1 mark)'
               ]
             },
             specReference: 'Edexcel Geography A Paper 1 6.3'
           },
           {
             id: 'exam-q6d',
-            question: 'Question 6(d): Explain how sustainable management can reduce the impacts of deforestation.',
+            question: 'Question 6(d): Explain the social and economic benefits of sustainable forestry.',
             marks: 6,
             difficulty: 'medium',
-            modelAnswer: 'Selective logging removes only certain trees, maintaining forest structure and allowing regeneration. Replanting programs replace harvested trees with native species. Certification schemes like FSC ensure responsible forestry practices. Agroforestry combines agriculture with tree conservation. Protected areas preserve key habitats and biodiversity. Ecotourism provides alternative income reducing pressure for deforestation.',
+            modelAnswer: 'Social benefits: Provides long-term employment for local communities in forest management, harvesting, and processing. Maintains traditional ways of life for indigenous peoples. Provides education and training opportunities in sustainable practices. Protects cultural sites and recreational areas. Economic benefits: Creates sustainable income through certified timber sales. Develops ecotourism opportunities. Provides non-timber forest products like medicines and foods. Maintains ecosystem services that have economic value such as carbon storage and water regulation.',
             markingCriteria: {
               breakdown: [
-                'Selective logging explained (1 mark)',
-                'Replanting/regeneration strategies (1 mark)',
-                'Certification and monitoring (1 mark)',
-                'Alternative land uses (1 mark)',
-                'Protection strategies (1 mark)',
-                'Economic alternatives (1 mark)'
+                'Social benefits clearly explained (3 marks)',
+                'Economic benefits clearly explained (3 marks)'
               ]
             },
             specReference: 'Edexcel Geography A Paper 1 6.4'
           },
           {
             id: 'exam-q6e',
-            question: 'Question 6(e): Evaluate the view that ecosystems can be best managed by international agreements rather than local strategies. (12 + 3 SPaG)',
+            question: 'Question 6(e): Evaluate how far tropical rainforests can be managed sustainably. (12 + 3 SPaG)',
             marks: 15,
             difficulty: 'hard',
-            modelAnswer: 'International agreements provide coordinated global action essential for ecosystems that cross borders, like migratory species and climate regulation. The Convention on Biological Diversity creates binding commitments and funding mechanisms. CITES regulates international trade in endangered species effectively. However, local strategies often have better implementation and community support. Indigenous communities have traditional knowledge and direct incentives for conservation. Local projects can be adapted to specific conditions and monitored more easily. International agreements may lack enforcement mechanisms and suffer from free-rider problems. The most effective approach combines both levels: international frameworks with local implementation and community involvement. SPaG: Accurate spelling, punctuation and grammar throughout.',
+            modelAnswer: 'Sustainable management of tropical rainforests faces significant challenges but has shown some success. Successful approaches include selective logging that maintains forest structure, agroforestry that combines conservation with agriculture, and community-based management that involves local people. Economic incentives like carbon credits and certified timber schemes provide alternatives to destructive practices. However, challenges remain significant: global demand for agricultural land drives continued deforestation, weak governance in some countries prevents enforcement of protection laws, and short-term economic pressures often override long-term sustainability. International cooperation through REDD+ schemes shows promise but requires consistent funding and political commitment. Success depends on balancing conservation needs with economic development pressures, requiring integrated approaches that address both local and global factors.',
             markingCriteria: {
               breakdown: [
-                'Understanding of international agreements (2 marks)',
-                'Examples of international management (2 marks)',
-                'Advantages of international approach (2 marks)',
-                'Understanding of local strategies (2 marks)',
-                'Advantages of local approach (2 marks)',
-                'Evaluation and conclusion (2 marks)',
-                'Spelling, punctuation and grammar (3 marks)'
+                'Examples of sustainable management approaches (3 marks)',
+                'Evaluation of successes (3 marks)',
+                'Analysis of challenges and limitations (4 marks)',
+                'Conclusion showing balanced evaluation (2 marks)',
+                'SPaG (spelling, punctuation, grammar) (3 marks)'
               ]
             },
             specReference: 'Edexcel Geography A Paper 1 6.5'
