@@ -165,7 +165,12 @@ const Dashboard = () => {
   const getSubjectDisplayName = (subject: any) => {
     let name = subject.name;
     
-    // For Edexcel subjects, they already include the exam board info
+    // For subjects that already have exam board in their name, return as-is
+    if (name.includes('(AQA)') || name.includes('(Edexcel)')) {
+      return name;
+    }
+    
+    // For specific Edexcel subjects
     if (subject.id === 'maths-edexcel') {
       return `Mathematics (Edexcel)`;
     } else if (subject.id === 'business-edexcel-igcse') {
@@ -174,6 +179,8 @@ const Dashboard = () => {
       return `Chemistry (Edexcel)`;
     } else if (subject.id === 'physics-edexcel') {
       return `Physics (Edexcel)`;
+    } else if (subject.id === 'edexcel-english-language') {
+      return `English Language (Edexcel)`;
     }
     
     // For all other subjects (AQA), add (AQA)
