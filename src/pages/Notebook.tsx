@@ -160,11 +160,11 @@ const Notebook = () => {
               </Button>
               <div className="flex items-center space-x-4">
                 <div className="relative">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 via-purple-500 to-blue-500 flex items-center justify-center shadow-lg shadow-violet-500/25">
-                    <BookOpen className="h-6 w-6 text-white" />
+                  <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-lg">
+                    <BookOpen className="h-6 w-6 text-primary-foreground" />
                   </div>
-                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full flex items-center justify-center">
-                    <Crown className="h-2.5 w-2.5 text-white" />
+                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-accent rounded-full flex items-center justify-center">
+                    <Crown className="h-2.5 w-2.5 text-accent-foreground" />
                   </div>
                 </div>
                 <div>
@@ -188,7 +188,7 @@ const Notebook = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8 max-w-7xl bg-background">
+      <div className="container mx-auto px-6 py-8 max-w-7xl">
         {/* Premium Welcome Section */}
         <div className="mb-8">
           <div className="text-center mb-8">
@@ -248,8 +248,8 @@ const Notebook = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-violet-600 rounded-lg flex items-center justify-center">
-                    <Filter className="h-4 w-4 text-white" />
+                  <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                    <Filter className="h-4 w-4 text-primary-foreground" />
                   </div>
                   <h3 className="text-xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">Revision Notes</h3>
                 </div>
