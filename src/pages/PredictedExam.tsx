@@ -4256,9 +4256,9 @@ Write a story about a moment of fear.
             </div>
             
             <div className="flex items-center space-x-4">
-              <div className={`flex items-center space-x-2 px-4 py-2 rounded-xl border ${isTimeUp ? 'bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800' : 'bg-card border-border'}`}>
-                <Clock className={`h-4 w-4 ${isTimeUp ? 'text-red-600' : 'text-muted-foreground'}`} />
-                <span className={`font-mono font-bold ${isTimeUp ? 'text-red-600' : 'text-foreground'}`}>
+              <div className={`flex items-center space-x-2 px-4 py-2 rounded-xl border ${isTimeUp ? 'bg-destructive/10 dark:bg-destructive/5 border-destructive/50 dark:border-destructive/30' : 'bg-card border-border'}`}>
+                <Clock className={`h-4 w-4 ${isTimeUp ? 'text-destructive' : 'text-muted-foreground'}`} />
+                <span className={`font-mono font-bold ${isTimeUp ? 'text-destructive' : 'text-foreground'}`}>
                   {formatTime(timeLeft)}
                 </span>
               </div>
@@ -4299,12 +4299,12 @@ Write a story about a moment of fear.
                       variant={currentQuestion === index ? "default" : answers.find(a => a.questionId === q.id) ? "outline" : "ghost"}
                       size="sm"
                       className={`h-8 w-8 p-0 text-xs ${
-                        answers.find(a => a.questionId === q.id) ? 'border-green-300 bg-green-50 dark:bg-green-950/20' : ''
+                        answers.find(a => a.questionId === q.id) ? 'border-emerald-300 dark:border-emerald-600 bg-emerald-50 dark:bg-emerald-950/20' : ''
                       }`}
                       onClick={() => setCurrentQuestion(index)}
                     >
                       {answers.find(a => a.questionId === q.id) && (
-                        <CheckCircle className="h-3 w-3 text-green-600 absolute top-0 right-0 transform translate-x-1 -translate-y-1" />
+                        <CheckCircle className="h-3 w-3 text-emerald-600 dark:text-emerald-400 absolute top-0 right-0 transform translate-x-1 -translate-y-1" />
                       )}
                       {q.questionNumber}
                     </Button>
