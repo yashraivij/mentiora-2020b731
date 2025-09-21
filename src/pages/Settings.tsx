@@ -128,7 +128,7 @@ const Settings = () => {
                   <h3 className="text-xl font-bold text-card-foreground">
                     Billing Management
                   </h3>
-                  <p className="text-white">Manage your subscription and billing</p>
+                  <p className="text-slate-200">Manage your subscription and billing</p>
                 </div>
               </div>
               <div className="p-6 rounded-lg bg-muted border border-border">
@@ -138,7 +138,7 @@ const Settings = () => {
                       <Crown className="w-5 h-5 text-primary" />
                       Premium Subscription
                     </h4>
-                    <p className="text-white max-w-lg">
+                    <p className="text-slate-200 max-w-lg">
                       Access your Stripe billing portal to manage your subscription, update payment methods, 
                       view invoices, and modify your plan.
                     </p>
@@ -173,14 +173,14 @@ const Settings = () => {
             </div>
             <div>
               <h3 className="text-xl font-bold text-card-foreground">Danger Zone</h3>
-              <p className="text-white">Permanent actions that cannot be undone</p>
+              <p className="text-slate-200">Permanent actions that cannot be undone</p>
             </div>
           </div>
           <div className="p-6 rounded-lg bg-muted border border-border">
             <div className="flex items-start justify-between">
               <div className="space-y-2">
                 <h4 className="text-lg font-bold text-foreground">Delete Account</h4>
-                <p className="text-white max-w-lg">
+                <p className="text-slate-200 max-w-lg">
                   Permanently delete your account and all associated data. This action cannot be undone. 
                   All your progress, notes, and achievements will be lost forever.
                 </p>
