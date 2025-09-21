@@ -119,7 +119,7 @@ const Settings = () => {
         {/* Billing Management Card - Only for Premium Users */}
         {isPremium && (
           <div className="mb-8">
-            <div className="bg-card rounded-2xl p-6 shadow-lg border border-border dark:bg-[#1E1E1E]">
+            <div className="bg-card rounded-2xl p-6 shadow-lg border border-border dark:bg-[#1E1E1E] dark:border-[#333333]">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center">
                   <CreditCard className="w-6 h-6 text-primary-foreground" />
@@ -128,25 +128,25 @@ const Settings = () => {
                   <h3 className="text-xl font-bold text-card-foreground">
                     Billing Management
                   </h3>
-                  <p className="text-slate-200">Manage your subscription and billing</p>
+                  <p className="text-muted-foreground dark:text-[#EDEDED]">Manage your subscription and billing</p>
                 </div>
               </div>
-              <div className="p-6 rounded-lg bg-[#064E3B] border border-[#22C55E]/20 dark:bg-[#064E3B]">
+              <div className="p-6 rounded-lg bg-muted border border-border dark:bg-[#1E1E1E] dark:border-[#333333]">
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
-                    <h4 className="text-lg font-bold text-white flex items-center gap-2">
-                      <Crown className="w-5 h-5 text-[#22C55E]" />
+                    <h4 className="text-lg font-bold text-card-foreground dark:text-white flex items-center gap-2">
+                      <Crown className="w-5 h-5 text-primary dark:text-[#22C55E]" />
                       Premium Subscription
                     </h4>
-                    <p className="text-[#EDEDED] max-w-lg">
+                    <p className="text-muted-foreground dark:text-[#EDEDED] max-w-lg">
                       Access your Stripe billing portal to manage your subscription, update payment methods, 
                       view invoices, and modify your plan.
                     </p>
                     <div className="flex items-center gap-2 mt-3">
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#22C55E]/20 text-[#22C55E] border border-[#22C55E]/30">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20 dark:bg-[#22C55E]/20 dark:text-[#22C55E] dark:border-[#22C55E]/30">
                         Secure Portal
                       </span>
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#22C55E]/10 text-[#EDEDED] border border-[#22C55E]/20">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-muted text-muted-foreground border border-border dark:bg-[#22C55E]/10 dark:text-[#EDEDED] dark:border-[#22C55E]/20">
                         Full Control
                       </span>
                     </div>
@@ -166,29 +166,29 @@ const Settings = () => {
         )}
 
         {/* Danger Zone */}
-        <div className="bg-card rounded-2xl p-6 shadow-lg border border-border dark:bg-[#1E1E1E]">
+        <div className="bg-card rounded-2xl p-6 shadow-lg border border-border dark:bg-[#2A0F0F] dark:border-[#333333]">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-muted-foreground/10 rounded-2xl flex items-center justify-center">
               <Trash2 className="w-6 h-6 text-muted-foreground" />
             </div>
             <div>
               <h3 className="text-xl font-bold text-card-foreground">Danger Zone</h3>
-              <p className="text-slate-200">Permanent actions that cannot be undone</p>
+              <p className="text-muted-foreground dark:text-[#EDEDED]">Permanent actions that cannot be undone</p>
             </div>
           </div>
-          <div className="p-6 rounded-lg bg-[#3F0D0D] border border-[#EF4444]/20 dark:bg-[#3F0D0D]">
+          <div className="p-6 rounded-lg bg-muted border border-border dark:bg-[#2A0F0F] dark:border-[#333333]">
             <div className="flex items-start justify-between">
               <div className="space-y-2">
-                <h4 className="text-lg font-bold text-white">Delete Account</h4>
-                <p className="text-[#EDEDED] max-w-lg">
+                <h4 className="text-lg font-bold text-foreground dark:text-white">Delete Account</h4>
+                <p className="text-muted-foreground dark:text-[#EDEDED] max-w-lg">
                   Permanently delete your account and all associated data. This action cannot be undone. 
                   All your progress, notes, and achievements will be lost forever.
                 </p>
                 <div className="flex items-center gap-2 mt-3">
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#EF4444]/20 text-[#EF4444] border border-[#EF4444]/30">
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-muted text-muted-foreground border border-muted-foreground/30 dark:bg-[#EF4444]/20 dark:text-[#EF4444] dark:border-[#EF4444]/30">
                     Immediate Effect
                   </span>
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#EF4444]/10 text-[#EDEDED] border border-[#EF4444]/20">
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-muted-foreground/10 text-muted-foreground border border-muted-foreground/20 dark:bg-[#EF4444]/10 dark:text-[#EDEDED] dark:border-[#EF4444]/20">
                     No Recovery
                   </span>
                 </div>
@@ -198,7 +198,7 @@ const Settings = () => {
                 <AlertDialogTrigger asChild>
                   <Button 
                     variant="outline" 
-                    className="ml-4 border-[#EF4444]/40 hover:bg-[#EF4444]/10 text-[#EF4444] font-bold py-3 px-8 rounded-2xl"
+                    className="ml-4 border-muted-foreground/20 hover:bg-muted-foreground/5 text-muted-foreground font-bold py-3 px-8 rounded-2xl dark:border-[#EF4444]/40 dark:hover:bg-[#EF4444]/10 dark:text-[#EF4444]"
                     disabled={isDeleting}
                   >
                     <Trash2 className="w-4 h-4 mr-2" />
