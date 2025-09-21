@@ -131,7 +131,7 @@ const Settings = () => {
                   <p className="text-muted-foreground">Manage your subscription and billing</p>
                 </div>
               </div>
-              <div className="p-6 rounded-lg bg-muted border border-border">
+              <div className="p-6 rounded-lg bg-secondary border border-border">
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
                     <h4 className="text-lg font-bold text-foreground flex items-center gap-2">
