@@ -128,7 +128,7 @@ const Settings = () => {
                   <h3 className="text-xl font-bold text-card-foreground">
                     Billing Management
                   </h3>
-                  <p className="text-muted-foreground">Manage your subscription and billing</p>
+                  <p className="text-card-foreground/80">Manage your subscription and billing</p>
                 </div>
               </div>
               <div className="p-6 rounded-lg bg-muted border border-border">
@@ -173,7 +173,7 @@ const Settings = () => {
             </div>
             <div>
               <h3 className="text-xl font-bold text-card-foreground">Danger Zone</h3>
-              <p className="text-muted-foreground">Permanent actions that cannot be undone</p>
+              <p className="text-card-foreground/80">Permanent actions that cannot be undone</p>
             </div>
           </div>
           <div className="p-6 rounded-lg bg-muted border border-border">
