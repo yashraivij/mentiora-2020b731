@@ -566,149 +566,166 @@ const Practice = () => {
         <div className="max-w-4xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Question Panel */}
-            <Card className="bg-card/80 backdrop-blur-sm border border-border">
-              <CardHeader>
+            <Card className="bg-card shadow-sm">
+              <CardHeader className="border-b border-border/50 bg-muted/20">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg text-foreground">Question</CardTitle>
-                  <div className="flex items-center gap-2">
-                    <Badge variant="outline">{currentQuestion.marks} marks</Badge>
-                     {currentQuestion.calculatorGuidance && (
-                       <Badge 
-                         variant={currentQuestion.calculatorGuidance === 'calc-recommended' ? 'default' : 'secondary'}
-                         className={`text-xs ${
-                           currentQuestion.calculatorGuidance === 'calc-recommended' 
-                             ? 'bg-green-100 text-green-800 border-green-300 dark:bg-green-950/30 dark:text-green-300 dark:border-green-800/30' 
-                             : 'bg-red-100 text-red-800 border-red-300 dark:bg-red-950/30 dark:text-red-300 dark:border-red-800/30'
-                         }`}
-                       >
-                         {currentQuestion.calculatorGuidance === 'calc-recommended' ? '🟩 Calculator recommended' : '🚫 No calculator'}
-                       </Badge>
-                     )}
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm font-medium text-muted-foreground">
+                      {subject?.name} Question
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <span className="text-sm font-semibold text-foreground">
+                      {currentQuestion.marks} mark{currentQuestion.marks !== 1 ? 's' : ''}
+                    </span>
+                    <div className="text-xs text-muted-foreground bg-muted/30 px-2 py-1 rounded">
+                      Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
+                    </div>
                   </div>
                 </div>
               </CardHeader>
-              <CardContent>
-                {/* Question Text with Extract/Transcript Formatting */}
-                {(() => {
-                  const questionText = currentQuestion.question;
-                  
-                  // Check for transcript or extract sections
-                  const transcriptMatch = questionText.match(/(.*?)(Transcript:|Extract:|Text A:|Text B:)(.*)/s);
-                  
-                  if (transcriptMatch) {
-                    const [, beforeText, markerText, afterText] = transcriptMatch;
+              <CardContent className="p-8">
+                {/* Question Text with Professional Formatting */}
+                <div className="space-y-6">
+                  {(() => {
+                    const questionText = currentQuestion.question;
                     
-                    // Split the after text to separate the actual transcript/extract from any following text
-                    const parts = afterText.split(/\n(?=[A-Z][^:]*:)/);
-                    const extractContent = parts[0];
-                    const remainingText = parts.slice(1).join('\n');
+                    // Check for transcript or extract sections
+                    const transcriptMatch = questionText.match(/(.*?)(Transcript:|Extract:|Text A:|Text B:)(.*)/s);
                     
-                    return (
-                      <div className="space-y-4">
-                        {beforeText.trim() && (
-                          <p className="text-foreground leading-relaxed">
-                            {beforeText.trim()}
-                          </p>
-                        )}
-                        
-                        {/* Extract/Transcript Display */}
-                        <div className="bg-muted/50 p-4 rounded-lg border-l-4 border-primary">
-                          <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                            <BookOpenCheck className="h-4 w-4 mr-2 text-emerald-600" />
-                            {markerText.replace(':', '')}
-                          </h4>
-                          <div className="text-foreground font-mono text-sm leading-relaxed whitespace-pre-line bg-background/80 p-3 rounded">
-                            {extractContent.trim()}
+                    if (transcriptMatch) {
+                      const [, beforeText, markerText, afterText] = transcriptMatch;
+                      
+                      // Split the after text to separate the actual transcript/extract from any following text
+                      const parts = afterText.split(/\n(?=[A-Z][^:]*:)/);
+                      const extractContent = parts[0];
+                      const remainingText = parts.slice(1).join('\n');
+                      
+                      return (
+                        <>
+                          {beforeText.trim() && (
+                            <h2 className="text-xl font-semibold text-foreground leading-relaxed">
+                              {beforeText.trim()}
+                            </h2>
+                          )}
+                          
+                          {/* Extract/Transcript Display */}
+                          <div className="bg-muted/30 p-6 rounded-lg border border-border/50">
+                            <h4 className="font-medium text-foreground mb-4 text-sm text-muted-foreground uppercase tracking-wide">
+                              {markerText.replace(':', '')}
+                            </h4>
+                            <div className="text-foreground leading-relaxed whitespace-pre-line bg-background p-4 rounded border border-border/30 text-sm">
+                              {extractContent.trim()}
+                            </div>
                           </div>
-                        </div>
-                        
-                        {remainingText.trim() && (
-                          <p className="text-foreground leading-relaxed">
-                            {remainingText.trim()}
-                          </p>
-                        )}
-                      </div>
-                    );
-                  }
-                  
-                  // For questions with embedded texts (Text A: / Text B: format)
-                  const textSections = questionText.split(/(Text [A-Z]:)/);
-                  if (textSections.length > 1) {
-                    return (
-                      <div className="space-y-4">
-                        {textSections.map((section, index) => {
-                          if (section.match(/Text [A-Z]:/)) {
-                            const nextSection = textSections[index + 1];
-                            if (nextSection) {
-                              return (
-                                <div key={index} className="bg-muted/50 p-4 rounded-lg border-l-4 border-primary">
-                                   <h4 className="font-mono font-semibold text-foreground mb-2 flex items-center">
-                                    <BookOpenCheck className="h-4 w-4 mr-2 text-emerald-600" />
-                                    {section}
-                                  </h4>
-                                  <div className="text-foreground font-normal bg-background/80 p-3 rounded">
-                                    "{nextSection.trim()}"
+                          
+                          {remainingText.trim() && (
+                            <div className="text-foreground leading-relaxed space-y-3">
+                              {remainingText.trim().split('\n').map((line, idx) => (
+                                <p key={idx} className="leading-relaxed">{line}</p>
+                              ))}
+                            </div>
+                          )}
+                        </>
+                      );
+                    }
+                    
+                    // For questions with embedded texts (Text A: / Text B: format)
+                    const textSections = questionText.split(/(Text [A-Z]:)/);
+                    if (textSections.length > 1) {
+                      return (
+                        <div className="space-y-6">
+                          {textSections.map((section, index) => {
+                            if (section.match(/Text [A-Z]:/)) {
+                              const nextSection = textSections[index + 1];
+                              if (nextSection) {
+                                return (
+                                  <div key={index} className="bg-muted/30 p-6 rounded-lg border border-border/50">
+                                    <h4 className="font-medium text-muted-foreground mb-4 text-sm uppercase tracking-wide">
+                                      {section}
+                                    </h4>
+                                    <div className="text-foreground bg-background p-4 rounded border border-border/30 text-sm leading-relaxed">
+                                      "{nextSection.trim()}"
+                                    </div>
                                   </div>
-                                </div>
+                                );
+                              }
+                            } else if (index === 0 || !textSections[index - 1]?.match(/Text [A-Z]:/)) {
+                              return (
+                                <h2 key={index} className="text-xl font-semibold text-foreground leading-relaxed">
+                                  {section.trim()}
+                                </h2>
                               );
                             }
-                          } else if (index === 0 || !textSections[index - 1]?.match(/Text [A-Z]:/)) {
-                            return (
-                              <p key={index} className="text-foreground leading-relaxed">
-                                {section.trim()}
-                              </p>
-                            );
-                          }
-                          return null;
-                        })}
-                      </div>
+                            return null;
+                          })}
+                        </div>
+                      );
+                    }
+                    
+                    // Default rendering for simple questions
+                    return (
+                      <h2 className="text-xl font-semibold text-foreground leading-relaxed">
+                        {questionText}
+                      </h2>
                     );
-                  }
+                  })()}
                   
-                  // Default rendering for simple questions
-                  return (
-                    <p className="text-foreground mb-6 leading-relaxed">
-                      {questionText}
-                    </p>
-                  );
-                })()}
+                  {/* Calculator Guidance */}
+                  {currentQuestion.calculatorGuidance && (
+                    <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium ${
+                      currentQuestion.calculatorGuidance === 'calc-recommended' 
+                        ? 'bg-green-50 text-green-700 border border-green-200 dark:bg-green-950/30 dark:text-green-300 dark:border-green-800/30' 
+                        : 'bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/30 dark:text-red-300 dark:border-red-800/30'
+                    }`}>
+                      {currentQuestion.calculatorGuidance === 'calc-recommended' ? '🟩 Calculator recommended' : '🚫 No calculator'}
+                    </div>
+                  )}
+                </div>
                 
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Your Answer:
-                    </label>
-                    <Textarea
-                      value={userAnswer}
-                      onChange={(e) => setUserAnswer(e.target.value)}
-                      placeholder="Type your full answer here..."
-                      className="min-h-[200px]"
-                      disabled={showFeedback}
-                    />
-                  </div>
+                {/* Answer Input Section */}
+                <div className="space-y-4 mt-8">
+                  <Textarea
+                    value={userAnswer}
+                    onChange={(e) => setUserAnswer(e.target.value)}
+                    placeholder="Your answer"
+                    className="min-h-[140px] text-sm resize-none border-border/50 focus:border-primary"
+                    disabled={showFeedback}
+                  />
                   
-                   {!showFeedback && (
-                     <div className="space-y-3">
-                       <Button 
-                         onClick={handleSubmitAnswer}
-                         disabled={isSubmitting || !userAnswer.trim()}
-                         className="w-full"
-                       >
-                         {isSubmitting ? "Marking your answer..." : "Submit Answer"}
-                       </Button>
-                       
-                       <Button
-                         variant="outline"
-                         onClick={() => setShowChatAssistant(true)}
-                         className="w-full"
-                         disabled={showChatAssistant}
-                       >
-                         <MessageCircleQuestion className="h-4 w-4 mr-2 text-blue-600" />
-                         Help me solve this step-by-step
-                       </Button>
-                     </div>
-                   )}
-                 </div>
+                  {!showFeedback && (
+                    <div className="flex items-center justify-between pt-2">
+                      <Button
+                        variant="outline"
+                        onClick={() => setShowChatAssistant(true)}
+                        className="text-muted-foreground hover:text-foreground"
+                        disabled={showChatAssistant}
+                      >
+                        <MessageCircleQuestion className="h-4 w-4 mr-2" />
+                        Help me solve this step-by-step
+                      </Button>
+                      
+                      <Button 
+                        onClick={handleSubmitAnswer}
+                        disabled={isSubmitting || !userAnswer.trim()}
+                        className="px-6"
+                      >
+                        {isSubmitting ? "Marking..." : "Mark answer"}
+                      </Button>
+                    </div>
+                  )}
+                  
+                  {showFeedback && (
+                    <div className="flex justify-end pt-2">
+                      <Button 
+                        onClick={handleNextQuestion}
+                        className="px-6"
+                      >
+                        {currentQuestionIndex < shuffledQuestions.length - 1 ? "Next Question" : "Finish Session"}
+                      </Button>
+                    </div>
+                  )}
+                </div>
               </CardContent>
             </Card>
 
