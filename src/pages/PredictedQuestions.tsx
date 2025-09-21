@@ -69,19 +69,19 @@ const PredictedQuestions = () => {
 
   const getSubjectColor = (subjectId: string) => {
     const colors = {
-      chemistry: "from-green-500 to-emerald-600",
-      "chemistry-edexcel": "from-green-500 to-emerald-600",
-      biology: "from-emerald-500 to-green-600", 
-      physics: "from-blue-500 to-indigo-600",
-      mathematics: "from-purple-500 to-indigo-600",
-      "english-language": "from-rose-500 to-pink-600",
-      "english-literature": "from-pink-500 to-rose-600",
-      history: "from-amber-500 to-orange-600",
-      geography: "from-teal-500 to-cyan-600",
-      "computer-science": "from-slate-500 to-gray-600",
-      psychology: "from-violet-500 to-purple-600"
+      chemistry: "from-primary via-primary/80 to-primary/60",
+      "chemistry-edexcel": "from-primary via-primary/80 to-primary/60",
+      biology: "from-secondary via-secondary/80 to-secondary/60", 
+      physics: "from-accent via-accent/80 to-accent/60",
+      mathematics: "from-primary via-primary/80 to-primary/60",
+      "english-language": "from-secondary via-secondary/80 to-secondary/60",
+      "english-literature": "from-accent via-accent/80 to-accent/60",
+      history: "from-primary via-primary/80 to-primary/60",
+      geography: "from-secondary via-secondary/80 to-secondary/60",
+      "computer-science": "from-accent via-accent/80 to-accent/60",
+      psychology: "from-primary via-primary/80 to-primary/60"
     };
-    return colors[subjectId as keyof typeof colors] || "from-gray-500 to-slate-600";
+    return colors[subjectId as keyof typeof colors] || "from-muted via-muted/80 to-muted/60";
   };
 
   const getExamDuration = (subjectId: string) => {
@@ -147,7 +147,7 @@ const PredictedQuestions = () => {
     return (
       <Card 
         key={subject.id} 
-        className="group relative overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+        className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border border-border hover:bg-card/70 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
       >
         {/* Card Background Gradient */}
         <div className={`absolute inset-0 bg-gradient-to-br ${getSubjectColor(subject.id)} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
@@ -166,14 +166,14 @@ const PredictedQuestions = () => {
             <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${getSubjectColor(subject.id)} flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 border border-white/20`}>
               <BookOpen className="h-7 w-7 text-white" />
             </div>
-            <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm text-xs">
+            <Badge className="bg-primary/20 text-primary-foreground border-primary/30 backdrop-blur-sm text-xs">
               {getBadgeText(subject.id)}
             </Badge>
           </div>
-          <CardTitle className="text-xl font-bold text-white group-hover:text-yellow-200 transition-colors mt-3">
+          <CardTitle className="text-xl font-bold text-card-foreground group-hover:text-accent-foreground transition-colors mt-3">
             {getSubjectDisplayName(subject, examBoard)}
           </CardTitle>
-          <CardDescription className="text-white/80 text-sm">
+          <CardDescription className="text-muted-foreground text-sm">
             {isCompleted ? `Last Grade: ${completion.grade} (${completion.percentage}%)` : 
              subject.id === 'combined-science-aqa' ? 
                'Biology topics 1–4: Cell Biology; Organisation; Infection and response; and Bioenergetics' : 
@@ -184,30 +184,30 @@ const PredictedQuestions = () => {
         <CardContent className="relative pt-0">
           <div className="space-y-4">
             <div className="space-y-3">
-              <div className="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm border border-white/20">
-                <div className="p-1.5 bg-gradient-to-br from-blue-400/30 to-cyan-400/30 rounded-lg">
-                  <Clock className="h-4 w-4 text-white" />
+              <div className="flex items-center space-x-3 bg-muted/50 rounded-xl p-3 backdrop-blur-sm border border-border">
+                <div className="p-1.5 bg-primary/20 rounded-lg">
+                  <Clock className="h-4 w-4 text-primary" />
                 </div>
                 <div>
-                  <p className="text-white text-sm font-medium">Duration: {getExamDuration(subject.id)}</p>
-                  <p className="text-white/70 text-xs">Real exam timing</p>
+                  <p className="text-card-foreground text-sm font-medium">Duration: {getExamDuration(subject.id)}</p>
+                  <p className="text-muted-foreground text-xs">Real exam timing</p>
                 </div>
               </div>
               
-              <div className="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm border border-white/20">
-                <div className="p-1.5 bg-gradient-to-br from-green-400/30 to-emerald-400/30 rounded-lg">
-                  <Target className="h-4 w-4 text-white" />
+              <div className="flex items-center space-x-3 bg-muted/50 rounded-xl p-3 backdrop-blur-sm border border-border">
+                <div className="p-1.5 bg-secondary/20 rounded-lg">
+                  <Target className="h-4 w-4 text-secondary-foreground" />
                 </div>
                 <div>
                   {subject.id === 'combined-science-aqa' ? (
                     <>
-                      <p className="text-white text-sm font-medium">70 marks • 16.7% of GCSE</p>
-                      <p className="text-white/70 text-xs">Foundation and Higher Tier</p>
+                      <p className="text-card-foreground text-sm font-medium">70 marks • 16.7% of GCSE</p>
+                      <p className="text-muted-foreground text-xs">Foundation and Higher Tier</p>
                     </>
                   ) : (
                     <>
-                      <p className="text-white text-sm font-medium">{subject.topics.length} topics covered</p>
-                      <p className="text-white/70 text-xs">Full specification</p>
+                      <p className="text-card-foreground text-sm font-medium">{subject.topics.length} topics covered</p>
+                      <p className="text-muted-foreground text-xs">Full specification</p>
                     </>
                   )}
                 </div>
@@ -215,8 +215,8 @@ const PredictedQuestions = () => {
             </div>
             
             {isCompleted && (
-              <div className="bg-white/15 backdrop-blur-sm border border-white/30 rounded-xl p-3 mb-3">
-                <div className="flex items-center justify-between text-white text-sm">
+              <div className="bg-muted/50 backdrop-blur-sm border border-border rounded-xl p-3 mb-3">
+                <div className="flex items-center justify-between text-card-foreground text-sm">
                   <span>Questions refresh:</span>
                   <span className="font-bold">Next week</span>
                 </div>
@@ -227,7 +227,7 @@ const PredictedQuestions = () => {
               {isCompleted ? (
                 <>
                   <Button 
-                    className="w-full bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 hover:from-blue-300 hover:via-purple-300 hover:to-indigo-300 text-white font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-primary via-primary/80 to-primary/60 hover:from-primary/90 hover:via-primary/70 hover:to-primary/50 text-primary-foreground font-bold py-3 px-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
                     onClick={(e) => {
                       e.stopPropagation();
                       navigate(`/predicted-results/${subject.id}`, { 
@@ -280,8 +280,8 @@ const PredictedQuestions = () => {
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Animated Background Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 opacity-20" />
-      <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 opacity-15 animate-pulse" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/5 opacity-50" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-accent/10 via-primary/10 to-secondary/5 opacity-30 animate-pulse" />
       <div className="absolute inset-0 bg-gradient-to-bl from-indigo-600 via-purple-500 to-pink-500 opacity-10" />
       
       {/* Floating Sparkles */}
@@ -299,14 +299,14 @@ const PredictedQuestions = () => {
       </div>
       
       {/* Header */}
-      <header className="relative z-10 bg-white/10 backdrop-blur-xl border-b border-white/20 sticky top-0 shadow-2xl">
+      <header className="relative z-10 bg-card/70 backdrop-blur-xl border-b border-border sticky top-0 shadow-2xl">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <Button 
                 variant="ghost" 
                 onClick={() => navigate(-1)} 
-                className="text-white/80 hover:text-white hover:bg-white/10 backdrop-blur-sm"
+                className="text-muted-foreground hover:text-foreground hover:bg-muted/50 backdrop-blur-sm"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
@@ -334,7 +334,7 @@ const PredictedQuestions = () => {
               <Crown className="h-3 w-3 mr-1" />
               PREMIUM EXCLUSIVE
             </Badge>
-            <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
+            <Badge className="bg-primary/20 text-primary-foreground border-primary/30 backdrop-blur-sm">
               <Zap className="h-3 w-3 mr-1" />
               Weekly Updates
             </Badge>
@@ -350,12 +350,12 @@ const PredictedQuestions = () => {
 
         {/* Exam Board Tabs */}
         <Tabs value={selectedExamBoard} onValueChange={setSelectedExamBoard} className="mb-6">
-          <TabsList className="grid w-full grid-cols-5 max-w-md mx-auto bg-white/10 backdrop-blur-sm border border-white/20">
-            <TabsTrigger value="aqa" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">AQA</TabsTrigger>
-            <TabsTrigger value="edexcel" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">Edexcel</TabsTrigger>
-            <TabsTrigger value="ccea" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">CCEA</TabsTrigger>
-            <TabsTrigger value="ocr" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">OCR</TabsTrigger>
-            <TabsTrigger value="wjec" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">WJEC</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-5 max-w-md mx-auto bg-card/70 backdrop-blur-sm border border-border">
+            <TabsTrigger value="aqa" className="text-card-foreground data-[state=active]:bg-primary/20 data-[state=active]:text-primary-foreground">AQA</TabsTrigger>
+            <TabsTrigger value="edexcel" className="text-card-foreground data-[state=active]:bg-primary/20 data-[state=active]:text-primary-foreground">Edexcel</TabsTrigger>
+            <TabsTrigger value="ccea" className="text-card-foreground data-[state=active]:bg-primary/20 data-[state=active]:text-primary-foreground">CCEA</TabsTrigger>
+            <TabsTrigger value="ocr" className="text-card-foreground data-[state=active]:bg-primary/20 data-[state=active]:text-primary-foreground">OCR</TabsTrigger>
+            <TabsTrigger value="wjec" className="text-card-foreground data-[state=active]:bg-primary/20 data-[state=active]:text-primary-foreground">WJEC</TabsTrigger>
           </TabsList>
 
           <TabsContent value="aqa" className="mt-6">
@@ -407,7 +407,7 @@ const PredictedQuestions = () => {
                       return (
                         <Card 
                           key={subject.id} 
-                          className="group relative overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 opacity-60"
+                          className="group relative overflow-hidden bg-card/30 backdrop-blur-sm border border-border opacity-60"
                         >
                           <div className={`absolute inset-0 bg-gradient-to-br ${getSubjectColor(subject.id)} opacity-20`} />
                           <CardHeader className="relative pb-4">
@@ -415,7 +415,7 @@ const PredictedQuestions = () => {
                               <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${getSubjectColor(subject.id)} flex items-center justify-center shadow-2xl border border-white/20`}>
                                 <BookOpen className="h-7 w-7 text-white" />
                               </div>
-                              <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm text-xs">
+                              <Badge className="bg-muted/50 text-muted-foreground border-muted backdrop-blur-sm text-xs">
                                 Coming Soon
                               </Badge>
                             </div>
@@ -429,7 +429,7 @@ const PredictedQuestions = () => {
                           <CardContent className="relative pt-0">
                             <Button 
                               disabled
-                              className="w-full bg-white/10 text-white/50 font-bold py-3 px-6 rounded-xl cursor-not-allowed"
+                              className="w-full bg-muted/30 text-muted-foreground font-bold py-3 px-6 rounded-xl cursor-not-allowed"
                             >
                               Coming Soon
                             </Button>

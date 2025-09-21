@@ -66,7 +66,7 @@ const PredictedResults = () => {
               <CardContent className="text-center space-y-4">
                 <Button 
                   onClick={() => navigate('/predicted-questions')}
-                  className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700"
+                  className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary"
                 >
                   Take a Predicted Exam
                 </Button>
@@ -556,7 +556,7 @@ const PredictedResults = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Grade Display Banner */}
-          <Card className="bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white border-0">
+          <Card className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 text-primary-foreground border-0">
             <CardContent className="py-8">
               <div className="text-center space-y-4">
                 <div className="text-6xl font-bold">
@@ -736,7 +736,7 @@ const PredictedResults = () => {
                 </div>
                 <Button 
                   onClick={() => navigate('/notebook')}
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+                  className="bg-gradient-to-r from-accent via-accent/80 to-accent/60 hover:from-accent/90 hover:to-accent/70 text-accent-foreground font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
                   size="lg"
                 >
                   <Brain className="h-5 w-5 mr-2" />
@@ -755,14 +755,14 @@ const PredictedResults = () => {
                 const examSubjectId = subjectId === 'geography' ? 'geography-paper-2' : subjectId;
                 navigate(`/predicted-exam/${examSubjectId}`);
               }}
-              className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700"
+              className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary"
             >
               <RotateCcw className="h-5 w-5 mr-2" />
               Retake This Exam
             </Button>
             <Button 
               onClick={() => navigate('/predicted-questions')}
-              className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700"
+              className="bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-600 dark:to-emerald-700 hover:from-emerald-600 hover:to-emerald-700 text-white"
             >
               <BookOpen className="h-5 w-5 mr-2" />
               Try Another Subject
