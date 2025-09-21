@@ -50,25 +50,32 @@ interface Subject {
   id: string;
   name: string;
   examBoard: string;
+  topicCount: number;
 }
 
+// Get topic counts from curriculum data
+const getTopicCount = (subjectId: string): number => {
+  const subject = curriculum.find(s => s.id === subjectId);
+  return subject?.topics.length || 0;
+};
+
 const AVAILABLE_SUBJECTS: Subject[] = [
-  { id: 'physics-edexcel', name: 'Physics', examBoard: 'Edexcel' },
-  { id: 'chemistry-edexcel', name: 'Chemistry', examBoard: 'Edexcel' },
-  { id: 'english-language', name: 'English Language', examBoard: 'AQA' },
-  { id: 'religious-studies', name: 'Religious Studies', examBoard: 'AQA' },
-  { id: 'history', name: 'History', examBoard: 'AQA' },
-  { id: 'english-literature', name: 'English Literature', examBoard: 'AQA' },
-  { id: 'physics', name: 'Physics', examBoard: 'AQA' },
-  { id: 'geography', name: 'Geography', examBoard: 'AQA' },
-  { id: 'maths', name: 'Mathematics', examBoard: 'AQA' },
-  { id: 'maths-edexcel', name: 'Mathematics', examBoard: 'Edexcel' },
-  { id: 'business-edexcel-igcse', name: 'Business', examBoard: 'Edexcel IGCSE' },
-  { id: 'biology', name: 'Biology', examBoard: 'AQA' },
-  { id: 'chemistry', name: 'Chemistry', examBoard: 'AQA' },
-  { id: 'business', name: 'Business', examBoard: 'AQA' },
-  { id: 'combined-science-aqa', name: 'Combined Science', examBoard: 'AQA' },
-  { id: 'edexcel-english-language', name: 'English Language', examBoard: 'Edexcel' },
+  { id: 'physics-edexcel', name: 'Physics', examBoard: 'Edexcel', topicCount: getTopicCount('physics-edexcel') },
+  { id: 'chemistry-edexcel', name: 'Chemistry', examBoard: 'Edexcel', topicCount: getTopicCount('chemistry-edexcel') },
+  { id: 'english-language', name: 'English Language', examBoard: 'AQA', topicCount: getTopicCount('english-language') },
+  { id: 'religious-studies', name: 'Religious Studies', examBoard: 'AQA', topicCount: getTopicCount('religious-studies') },
+  { id: 'history', name: 'History', examBoard: 'AQA', topicCount: getTopicCount('history') },
+  { id: 'english-literature', name: 'English Literature', examBoard: 'AQA', topicCount: getTopicCount('english-literature') },
+  { id: 'physics', name: 'Physics', examBoard: 'AQA', topicCount: getTopicCount('physics') },
+  { id: 'geography', name: 'Geography', examBoard: 'AQA', topicCount: getTopicCount('geography') },
+  { id: 'maths', name: 'Mathematics', examBoard: 'AQA', topicCount: getTopicCount('maths') },
+  { id: 'maths-edexcel', name: 'Mathematics', examBoard: 'Edexcel', topicCount: getTopicCount('maths-edexcel') },
+  { id: 'business-edexcel-igcse', name: 'Business', examBoard: 'Edexcel IGCSE', topicCount: getTopicCount('business-edexcel-igcse') },
+  { id: 'biology', name: 'Biology', examBoard: 'AQA', topicCount: getTopicCount('biology') },
+  { id: 'chemistry', name: 'Chemistry', examBoard: 'AQA', topicCount: getTopicCount('chemistry') },
+  { id: 'business', name: 'Business', examBoard: 'AQA', topicCount: getTopicCount('business') },
+  { id: 'combined-science-aqa', name: 'Combined Science', examBoard: 'AQA', topicCount: getTopicCount('combined-science-aqa') },
+  { id: 'edexcel-english-language', name: 'English Language', examBoard: 'Edexcel', topicCount: getTopicCount('edexcel-english-language') },
 ];
 
 export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: OnboardingPopupProps) => {
@@ -338,6 +345,9 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                             </div>
                             <div className="flex-1 min-w-0">
                               <p className="font-bold text-sm truncate text-gray-900 dark:text-white">{subject.name}</p>
+                              <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">
+                                {subject.topicCount} topic{subject.topicCount !== 1 ? 's' : ''} available
+                              </p>
                                <Badge 
                                 variant="secondary" 
                                 className={`text-xs mt-1 ${
@@ -345,7 +355,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                                     ? 'bg-sky-400 text-white shadow-lg'
                                     : 'bg-muted dark:bg-muted text-muted-foreground dark:text-muted-foreground'
                                 }`}
-                               >
+                              >
                                 {subject.examBoard}
                               </Badge>
                             </div>
@@ -358,7 +368,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
                 <div className="flex justify-between items-center pt-6 border-t border-gray-200">
                   <div>
-                    <p className="font-bold text-lg text-foreground dark:text-foreground">
+                    <p className="font-bold text-lg text-gray-900 dark:text-white">
                       {selectedSubjects.length} subject{selectedSubjects.length !== 1 ? 's' : ''} selected ✨
                     </p>
                   </div>
