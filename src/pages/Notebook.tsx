@@ -131,10 +131,10 @@ const Notebook = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/50 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent mx-auto mb-6"></div>
-          <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl px-8 py-6 shadow-2xl shadow-primary/10">
+          <div className="bg-card/80 backdrop-blur-xl rounded-2xl px-8 py-6 shadow-2xl shadow-primary/10">
             <p className="text-foreground font-medium text-lg">Loading your Smart Revision Notebook...</p>
             <p className="text-muted-foreground text-sm mt-2">Preparing your Smart Study notes</p>
           </div>
@@ -144,16 +144,16 @@ const Notebook = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/50">
+    <div className="min-h-screen bg-background">
       {/* Premium Header */}
-      <header className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-700/50 sticky top-0 z-50 shadow-xl shadow-black/5 dark:shadow-black/20">
+      <header className="bg-card/90 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-xl">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <Button 
                 variant="ghost" 
                 onClick={() => navigate('/dashboard')}
-                className="text-muted-foreground hover:text-foreground hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200"
+                className="text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-200"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Dashboard
@@ -168,13 +168,13 @@ const Notebook = () => {
                   </div>
                 </div>
                 <div>
-                  <h1 className="text-3xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 dark:from-violet-400 dark:via-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
+                  <h1 className="text-3xl font-bold bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
                     Smart Revision Notebook
                   </h1>
                   <div className="flex items-center space-x-2">
                     <div className="flex items-center space-x-1">
                       <Crown className="h-3.5 w-3.5 text-amber-500" />
-                      <span className="text-sm font-semibold text-amber-600 dark:text-amber-400">Premium Smart Feature</span>
+                      <span className="text-sm font-semibold text-accent-foreground">Premium Smart Feature</span>
                     </div>
                     <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
                     <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">Auto-Generated</span>
@@ -192,16 +192,16 @@ const Notebook = () => {
         {/* Premium Welcome Section */}
         <div className="mb-8">
           <div className="text-center mb-8">
-            <h2 className="text-4xl font-bold bg-gradient-to-r from-slate-800 via-purple-700 to-blue-700 dark:from-slate-200 dark:via-purple-300 dark:to-blue-300 bg-clip-text text-transparent mb-4">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-foreground via-foreground/80 to-foreground/60 bg-clip-text text-transparent mb-4">
               Your Smart Revision Notes
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Ultra-clear, Grade 9-level notes for every mark you've lost, powered by advanced Smart analysis
             </p>
             <div className="flex items-center justify-center space-x-2 mt-4">
-              <div className="w-2 h-2 bg-violet-500 rounded-full animate-pulse"></div>
-              <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse delay-75"></div>
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse delay-150"></div>
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+              <div className="w-2 h-2 bg-secondary rounded-full animate-pulse delay-75"></div>
+              <div className="w-2 h-2 bg-accent rounded-full animate-pulse delay-150"></div>
             </div>
           </div>
 
@@ -244,22 +244,22 @@ const Notebook = () => {
 
 
           {/* Enhanced Filters */}
-          <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-2xl p-6 shadow-2xl shadow-black/5 dark:shadow-black/20 border border-slate-200/50 dark:border-slate-700/50 mb-8">
+          <div className="bg-card/80 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-border mb-8">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-3">
                   <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-violet-600 rounded-lg flex items-center justify-center">
                     <Filter className="h-4 w-4 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold bg-gradient-to-r from-slate-700 to-slate-600 dark:from-slate-200 dark:to-slate-300 bg-clip-text text-transparent">Revision Notes</h3>
+                  <h3 className="text-xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">Revision Notes</h3>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
                 <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-                  <SelectTrigger className="w-44 bg-white/50 dark:bg-slate-800/50 border-slate-300/50 dark:border-slate-600/50 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-200">
+                  <SelectTrigger className="w-44 bg-card/50 border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-200">
                     <SelectValue placeholder="All Subjects" />
                   </SelectTrigger>
-                  <SelectContent className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-slate-200/50 dark:border-slate-700/50">
+                  <SelectContent className="bg-card/95 backdrop-blur-xl border-border">
                     <SelectItem value="all">All Subjects</SelectItem>
                     {getSubjects().map(subject => (
                       <SelectItem key={subject} value={subject}>{subject}</SelectItem>
@@ -268,10 +268,10 @@ const Notebook = () => {
                 </Select>
                 
                 <Select value={selectedConfidence} onValueChange={setSelectedConfidence}>
-                  <SelectTrigger className="w-44 bg-white/50 dark:bg-slate-800/50 border-slate-300/50 dark:border-slate-600/50 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-200">
+                  <SelectTrigger className="w-44 bg-card/50 border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-200">
                     <SelectValue placeholder="All Confidence" />
                   </SelectTrigger>
-                  <SelectContent className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-slate-200/50 dark:border-slate-700/50">
+                  <SelectContent className="bg-card/95 backdrop-blur-xl border-border">
                     <SelectItem value="all">All Confidence</SelectItem>
                     <SelectItem value="low">Low Confidence</SelectItem>
                     <SelectItem value="medium">Medium Confidence</SelectItem>
@@ -285,16 +285,16 @@ const Notebook = () => {
 
         {/* Enhanced Notebook Entries */}
         {sortedEntries.length === 0 ? (
-          <Card className="text-center py-16 bg-gradient-to-br from-white/80 to-slate-50/80 dark:from-slate-900/80 dark:to-slate-800/80 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 shadow-2xl">
+          <Card className="text-center py-16 bg-card/80 backdrop-blur-xl border border-border shadow-2xl">
             <CardContent>
-              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-600 rounded-3xl flex items-center justify-center">
-                <BookOpen className="h-10 w-10 text-slate-500 dark:text-slate-400" />
+              <div className="w-20 h-20 mx-auto mb-6 bg-muted rounded-3xl flex items-center justify-center">
+                <BookOpen className="h-10 w-10 text-muted-foreground" />
               </div>
               <h3 className="text-2xl font-bold text-foreground mb-3">No Revision Notes Yet</h3>
               <p className="text-muted-foreground mb-8 max-w-md mx-auto text-lg">
                 Start practicing questions to generate your personalized Smart revision notes!
               </p>
-              <Button onClick={() => navigate('/dashboard')} className="bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
+              <Button onClick={() => navigate('/dashboard')} className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
                 Start Practicing
               </Button>
             </CardContent>
@@ -314,7 +314,7 @@ const Notebook = () => {
           <Button 
             onClick={() => navigate(-1)} 
             variant="outline"
-            className="px-8 py-3 rounded-xl border-2 border-slate-300 dark:border-slate-600 hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200"
+            className="px-8 py-3 rounded-xl border-2 border-border hover:border-primary hover:bg-muted transition-all duration-200"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back
@@ -324,7 +324,7 @@ const Notebook = () => {
               navigate('/dashboard');
               window.scrollTo(0, 0);
             }}
-            className="px-8 py-3 rounded-xl bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 hover:from-violet-600 hover:via-purple-600 hover:to-blue-600 text-white shadow-lg hover:shadow-xl transition-all duration-200"
+            className="px-8 py-3 rounded-xl bg-gradient-to-r from-primary via-primary/80 to-primary/60 hover:from-primary/90 hover:via-primary/70 hover:to-primary/50 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-200"
           >
             <BookOpen className="h-4 w-4 mr-2" />
             Practice More Questions
