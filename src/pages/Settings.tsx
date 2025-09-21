@@ -138,7 +138,7 @@ const Settings = () => {
                       <Crown className="w-5 h-5 text-primary" />
                       Premium Subscription
                     </h4>
-                    <p className="text-foreground max-w-lg">
+                    <p className="text-white max-w-lg">
                       Access your Stripe billing portal to manage your subscription, update payment methods, 
                       view invoices, and modify your plan.
                     </p>
