@@ -492,7 +492,7 @@ const PredictedResults = () => {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <Card className="max-w-md w-full">
           <CardHeader className="text-center">
-            <Clock className="h-16 w-16 text-blue-500 mx-auto mb-4 animate-pulse" />
+            <Clock className="h-16 w-16 text-primary mx-auto mb-4 animate-pulse" />
             <CardTitle className="text-foreground">Marking Your Predicted 2026 Exam</CardTitle>
             <CardDescription className="text-muted-foreground">
               Analyzing your answers with premium marking intelligence...
@@ -628,10 +628,10 @@ const PredictedResults = () => {
                 {/* Question */}
                 <div>
                   <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                    <HelpCircle className="h-4 w-4 mr-2 text-blue-600" />
+                    <HelpCircle className="h-4 w-4 mr-2 text-primary" />
                     Question
                   </h4>
-                  <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500">
+                  <div className="bg-primary/10 dark:bg-primary/5 p-4 rounded-lg border-l-4 border-primary">
                     <p className="text-foreground">{questions[index]?.text || questions[index]?.question}</p>
                   </div>
                 </div>
@@ -639,10 +639,10 @@ const PredictedResults = () => {
                 {/* Student Answer */}
                 <div>
                   <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                    <User className="h-4 w-4 mr-2 text-purple-600" />
+                    <User className="h-4 w-4 mr-2 text-accent-foreground" />
                     Your Answer
                   </h4>
-                  <div className="bg-purple-50 dark:bg-purple-950/20 p-4 rounded-lg border-l-4 border-purple-500">
+                  <div className="bg-accent/20 dark:bg-accent/10 p-4 rounded-lg border-l-4 border-accent">
                     <p className="text-foreground">{attempt.userAnswer}</p>
                   </div>
                 </div>
@@ -650,10 +650,10 @@ const PredictedResults = () => {
                 {/* Model Answer */}
                 <div>
                   <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                    <Book className="h-4 w-4 mr-2 text-green-600" />
+                    <Book className="h-4 w-4 mr-2 text-emerald-600 dark:text-emerald-400" />
                     ✅ Model Answer
                   </h4>
-                  <div className="bg-green-50 dark:bg-green-950/20 p-4 rounded-lg border-l-4 border-green-500">
+                  <div className="bg-emerald-50 dark:bg-emerald-950/20 p-4 rounded-lg border-l-4 border-emerald-500">
                     <div className="text-foreground space-y-2">
                       {attempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).map((sentence, index) => (
                         <p key={index} className="leading-relaxed">{sentence.trim()}{index < attempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).length - 1 ? '.' : ''}</p>
@@ -665,10 +665,10 @@ const PredictedResults = () => {
                 {/* Why This Gets Marks */}
                 <div>
                   <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                    <CheckCircle className="h-4 w-4 mr-2 text-blue-600" />
+                    <CheckCircle className="h-4 w-4 mr-2 text-primary" />
                     🎯 Why This Gets Full Marks
                   </h4>
-                  <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500">
+                  <div className="bg-primary/10 dark:bg-primary/5 p-4 rounded-lg border-l-4 border-primary">
                     <pre className="text-foreground whitespace-pre-wrap font-sans">
                       {attempt.feedback.whyThisGetsMark}
                     </pre>
@@ -680,7 +680,7 @@ const PredictedResults = () => {
                   <h4 className="font-semibold text-foreground mb-2 flex items-center">
                     {attempt.feedback.fullMarks ? (
                       <>
-                        <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
+                        <CheckCircle className="h-4 w-4 mr-2 text-emerald-600 dark:text-emerald-400" />
                         ✅ Teacher Feedback - Well Done!
                       </>
                     ) : (
@@ -692,8 +692,8 @@ const PredictedResults = () => {
                   </h4>
                   <div className={`p-4 rounded-lg border-l-4 ${
                     attempt.feedback.fullMarks 
-                      ? 'bg-green-50 dark:bg-green-950/20 border-green-500' 
-                      : 'bg-yellow-50 dark:bg-yellow-950/20 border-yellow-500'
+                      ? 'bg-emerald-50 dark:bg-emerald-950/20 border-emerald-500' 
+                      : 'bg-amber-50 dark:bg-amber-950/20 border-amber-500'
                   }`}>
                     <p className="text-foreground">{attempt.feedback.whyYoursDidnt}</p>
                   </div>
@@ -718,20 +718,20 @@ const PredictedResults = () => {
             const question = questions.find((q: ExamQuestion) => q.id === attempt.questionId);
             return question && attempt.score < question.marks;
           }) && (
-            <Card className="bg-gradient-to-br from-purple-50 via-indigo-50 to-pink-50 dark:from-purple-950/30 dark:via-indigo-950/30 dark:to-pink-950/30 border-purple-200 dark:border-purple-700/50 shadow-lg">
+            <Card className="bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 dark:from-violet-950/30 dark:via-purple-950/30 dark:to-indigo-950/30 border-violet-200 dark:border-violet-700/50 shadow-lg">
               <CardHeader className="text-center pb-4">
-                <CardTitle className="flex items-center justify-center gap-3 text-purple-800 dark:text-purple-200 text-xl">
-                  <div className="p-2 bg-purple-100 dark:bg-purple-900/50 rounded-full">
+                <CardTitle className="flex items-center justify-center gap-3 text-violet-800 dark:text-violet-200 text-xl">
+                  <div className="p-2 bg-violet-100 dark:bg-violet-900/50 rounded-full">
                     <Brain className="h-6 w-6" />
                   </div>
                   Smart Revision Notes Generated
                 </CardTitle>
-                <CardDescription className="text-purple-700 dark:text-purple-300 text-base">
+                <CardDescription className="text-violet-700 dark:text-violet-300 text-base">
                   Smart system has automatically created revision notes for topics where you lost marks
                 </CardDescription>
               </CardHeader>
               <CardContent className="text-center space-y-4">
-                <div className="text-purple-800 dark:text-purple-200 text-lg font-medium">
+                <div className="text-violet-800 dark:text-violet-200 text-lg font-medium">
                   Review personalized notes to strengthen weak areas and improve your Grade 9 performance
                 </div>
                 <Button 

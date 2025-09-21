@@ -101,60 +101,60 @@ const Analytics = () => {
         <div className="grid md:grid-cols-4 gap-6 mb-8">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center text-green-600">
-                <Target className="h-5 w-5 mr-2" />
-                Mastered Topics
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-green-600">
-                {masteredTopics.length}
-              </div>
+            <CardTitle className="flex items-center text-emerald-600 dark:text-emerald-400">
+              <Target className="h-5 w-5 mr-2" />
+              Mastered Topics
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">
+              {masteredTopics.length}
+            </div>
               <p className="text-sm text-muted-foreground">85%+ average score</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center text-red-600">
-                <AlertTriangle className="h-5 w-5 mr-2" />
-                Weak Topics
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-red-600">
-                {weakTopics.length}
-              </div>
+            <CardTitle className="flex items-center text-red-600 dark:text-red-400">
+              <AlertTriangle className="h-5 w-5 mr-2" />
+              Weak Topics
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-red-600 dark:text-red-400">
+              {weakTopics.length}
+            </div>
               <p className="text-sm text-muted-foreground">Need more practice</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center text-blue-600">
-                <TrendingUp className="h-5 w-5 mr-2" />
-                Total Attempts
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-blue-600">
-                {analyticsData.reduce((sum, d) => sum + d.attempts, 0)}
-              </div>
+            <CardTitle className="flex items-center text-blue-600 dark:text-blue-400">
+              <TrendingUp className="h-5 w-5 mr-2" />
+              Total Attempts
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+              {analyticsData.reduce((sum, d) => sum + d.attempts, 0)}
+            </div>
               <p className="text-sm text-muted-foreground">Questions practiced</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center text-purple-600">
-                <Calendar className="h-5 w-5 mr-2" />
-                Active Days
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-purple-600">
-                {analyticsData.length > 0 ? Math.ceil(analyticsData.length / 2) : 0}
-              </div>
+            <CardTitle className="flex items-center text-purple-600 dark:text-purple-400">
+              <Calendar className="h-5 w-5 mr-2" />
+              Active Days
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">
+              {analyticsData.length > 0 ? Math.ceil(analyticsData.length / 2) : 0}
+            </div>
               <p className="text-sm text-muted-foreground">Days with practice</p>
             </CardContent>
           </Card>
@@ -167,7 +167,7 @@ const Analytics = () => {
           {/* Weak Topics Focus */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-red-600">Topics Requiring Attention</CardTitle>
+              <CardTitle className="text-red-600 dark:text-red-400">Topics Requiring Attention</CardTitle>
               <CardDescription>
                 Focus your revision on these areas for maximum improvement
               </CardDescription>
@@ -252,10 +252,10 @@ const Analytics = () => {
                          <span className="text-muted-foreground">Topics Attempted:</span>
                          <span className="font-medium ml-2 text-foreground">{topicsAttempted}</span>
                        </div>
-                       <div>
-                         <span className="text-muted-foreground">Topics Mastered:</span>
-                         <span className="font-medium ml-2 text-green-600">{topicsMastered}</span>
-                       </div>
+                        <div>
+                          <span className="text-muted-foreground">Topics Mastered:</span>
+                          <span className="font-medium ml-2 text-emerald-600 dark:text-emerald-400">{topicsMastered}</span>
+                        </div>
                        <div>
                          <span className="text-muted-foreground">Total Attempts:</span>
                          <span className="font-medium ml-2 text-foreground">

@@ -66,48 +66,48 @@ const Settings = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <div className="p-6 max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <Button
             variant="ghost"
             onClick={() => navigate(-1)}
-            className="mb-4 text-gray-600 hover:text-gray-800"
+            className="mb-4 text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back
           </Button>
           
-          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+          <h2 className="text-3xl font-bold text-foreground mb-8 text-center">
             Profile Settings
           </h2>
         </div>
 
         {/* Account Information Card */}
         <div className="mb-8">
-          <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+          <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center">
-                <User className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center">
+                <User className="w-6 h-6 text-primary-foreground" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-800">
+                <h3 className="text-xl font-bold text-card-foreground">
                   Account Information
                 </h3>
-                <p className="text-gray-600">Your account details and status</p>
+                <p className="text-muted-foreground">Your account details and status</p>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
-                <p className="text-sm font-medium text-gray-600 mb-1">Email Address</p>
-                <p className="text-lg font-bold text-gray-800">{user?.email}</p>
+              <div className="p-4 rounded-lg bg-muted border border-border">
+                <p className="text-sm font-medium text-muted-foreground mb-1">Email Address</p>
+                <p className="text-lg font-bold text-foreground">{user?.email}</p>
               </div>
-              <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
-                <p className="text-sm font-medium text-gray-600 mb-1">Account Type</p>
+              <div className="p-4 rounded-lg bg-muted border border-border">
+                <p className="text-sm font-medium text-muted-foreground mb-1">Account Type</p>
                 <div className="flex items-center gap-2">
-                  <Crown className="w-4 h-4 text-blue-500" />
-                  <p className="text-lg font-bold text-gray-800">
+                  <Crown className="w-4 h-4 text-primary" />
+                  <p className="text-lg font-bold text-foreground">
                     {isPremium ? "Premium Account" : "Free Account"}
                   </p>
                 </div>
@@ -119,34 +119,34 @@ const Settings = () => {
         {/* Billing Management Card - Only for Premium Users */}
         {isPremium && (
           <div className="mb-8">
-            <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+            <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-green-500 rounded-2xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-emerald-500 rounded-2xl flex items-center justify-center">
                   <CreditCard className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-800">
+                  <h3 className="text-xl font-bold text-card-foreground">
                     Billing Management
                   </h3>
-                  <p className="text-gray-600">Manage your subscription and billing</p>
+                  <p className="text-muted-foreground">Manage your subscription and billing</p>
                 </div>
               </div>
-              <div className="p-6 rounded-lg bg-green-50 border border-green-200">
+              <div className="p-6 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800">
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
-                    <h4 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                      <Crown className="w-5 h-5 text-green-500" />
+                    <h4 className="text-lg font-bold text-foreground flex items-center gap-2">
+                      <Crown className="w-5 h-5 text-emerald-500" />
                       Premium Subscription
                     </h4>
-                    <p className="text-gray-600 max-w-lg">
+                    <p className="text-muted-foreground max-w-lg">
                       Access your Stripe billing portal to manage your subscription, update payment methods, 
                       view invoices, and modify your plan.
                     </p>
                     <div className="flex items-center gap-2 mt-3">
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300">
                         Secure Portal
                       </span>
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300">
                         Full Control
                       </span>
                     </div>
@@ -154,7 +154,7 @@ const Settings = () => {
                   
                   <Button 
                     onClick={openManageBilling}
-                    className="ml-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-2xl"
+                    className="ml-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-8 rounded-2xl"
                   >
                     <CreditCard className="w-4 h-4 mr-2" />
                     Manage Billing
@@ -166,29 +166,29 @@ const Settings = () => {
         )}
 
         {/* Danger Zone */}
-        <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-red-200">
+        <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-red-200 dark:border-red-800">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-red-500 rounded-2xl flex items-center justify-center">
               <Trash2 className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-gray-800">Danger Zone</h3>
-              <p className="text-gray-600">Permanent actions that cannot be undone</p>
+              <h3 className="text-xl font-bold text-card-foreground">Danger Zone</h3>
+              <p className="text-muted-foreground">Permanent actions that cannot be undone</p>
             </div>
           </div>
-          <div className="p-6 rounded-lg bg-red-50 border border-red-200">
+          <div className="p-6 rounded-lg bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800">
             <div className="flex items-start justify-between">
               <div className="space-y-2">
-                <h4 className="text-lg font-bold text-gray-800">Delete Account</h4>
-                <p className="text-gray-600 max-w-lg">
+                <h4 className="text-lg font-bold text-foreground">Delete Account</h4>
+                <p className="text-muted-foreground max-w-lg">
                   Permanently delete your account and all associated data. This action cannot be undone. 
                   All your progress, notes, and achievements will be lost forever.
                 </p>
                 <div className="flex items-center gap-2 mt-3">
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300">
                     Immediate Effect
                   </span>
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700">
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300">
                     No Recovery
                   </span>
                 </div>
@@ -205,13 +205,13 @@ const Settings = () => {
                     Delete Account
                   </Button>
                 </AlertDialogTrigger>
-                <AlertDialogContent className="bg-white border border-gray-200">
+                <AlertDialogContent className="bg-card border border-border">
                   <AlertDialogHeader>
-                    <AlertDialogTitle className="text-xl text-gray-800 flex items-center gap-2">
+                    <AlertDialogTitle className="text-xl text-foreground flex items-center gap-2">
                       <Trash2 className="w-5 h-5 text-red-500" />
                       Permanently Delete Account?
                     </AlertDialogTitle>
-                    <AlertDialogDescription className="text-base text-gray-600">
+                    <AlertDialogDescription className="text-base text-muted-foreground">
                       This action will permanently delete your account and all associated data including:
                       <ul className="list-disc list-inside mt-3 space-y-1 text-sm">
                         <li>All study progress and achievements</li>
@@ -219,13 +219,13 @@ const Settings = () => {
                         <li>Practice history and performance data</li>
                         <li>Subscription and billing information</li>
                       </ul>
-                      <p className="mt-4 font-bold text-red-600">
+                      <p className="mt-4 font-bold text-red-600 dark:text-red-400">
                         This cannot be undone. Are you absolutely sure?
                       </p>
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
-                    <AlertDialogCancel className="bg-gray-100 hover:bg-gray-200 text-gray-800">
+                    <AlertDialogCancel className="bg-muted hover:bg-muted/80 text-foreground">
                       Cancel
                     </AlertDialogCancel>
                     <AlertDialogAction
