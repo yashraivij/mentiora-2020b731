@@ -161,6 +161,25 @@ const Dashboard = () => {
     return iconMap[subjectId] || BookOpen;
   };
 
+  // Function to get subject display name with exam board
+  const getSubjectDisplayName = (subject: any) => {
+    let name = subject.name;
+    
+    // For Edexcel subjects, they already include the exam board info
+    if (subject.id === 'maths-edexcel') {
+      return `Mathematics (Edexcel)`;
+    } else if (subject.id === 'business-edexcel-igcse') {
+      return `IGCSE Business (Edexcel)`;
+    } else if (subject.id === 'chemistry-edexcel') {
+      return `Chemistry (Edexcel)`;
+    } else if (subject.id === 'physics-edexcel') {
+      return `Physics (Edexcel)`;
+    }
+    
+    // For all other subjects (AQA), add (AQA)
+    return `${name} (AQA)`;
+  };
+
   // Map database subject_id to curriculum subject_id for consistent icons
   const mapDatabaseSubjectToCurriculum = (dbSubjectId: string) => {
     const subjectMapping: { [key: string]: string } = {
@@ -1239,7 +1258,7 @@ const Dashboard = () => {
                                   </div>
                                   
                             <h3 className="text-2xl font-bold text-foreground mb-4">
-                                    {subject.name}
+                                    {getSubjectDisplayName(subject)}
                                   </h3>
                                   
                                   <div className="w-full bg-muted rounded-full h-3 mb-4">
@@ -1374,7 +1393,7 @@ const Dashboard = () => {
                                       </div>
                                       <div className="flex-1">
                                         <h3 className="text-lg font-bold text-gray-800">
-                                          {subject.name}
+                                          {getSubjectDisplayName(subject)}
                                         </h3>
                                         <p className="text-sm text-gray-600">
                                           {subject.topics.length} topics available
