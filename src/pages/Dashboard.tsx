@@ -113,12 +113,12 @@ const Dashboard = () => {
   const [sortBy, setSortBy] = useState<string>('recent');
 
   const sidebarItems = [
-    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-muted/50 dark:bg-muted/30", textColor: "text-muted-foreground dark:text-muted-foreground/90", activeColor: "bg-primary/20 dark:bg-primary/30" },
-    { id: "leaderboards", label: "LEADERBOARDS", icon: Trophy, bgColor: "bg-muted/50 dark:bg-muted/30", textColor: "text-muted-foreground dark:text-muted-foreground/90", activeColor: "bg-accent/30 dark:bg-accent/40" },
-    { id: "progress", label: "PROGRESS", icon: TrendingUp, bgColor: "bg-muted/50 dark:bg-muted/30", textColor: "text-muted-foreground dark:text-muted-foreground/90", activeColor: "bg-secondary/30 dark:bg-secondary/40" },
-    { id: "quests", label: "QUESTS", icon: Star, bgColor: "bg-muted/50 dark:bg-muted/30", textColor: "text-muted-foreground dark:text-muted-foreground/90", activeColor: "bg-accent/20 dark:bg-accent/30" },
-    { id: "notes", label: "NOTES", icon: NotebookPen, bgColor: "bg-muted/50 dark:bg-muted/30", textColor: "text-muted-foreground dark:text-muted-foreground/90", activeColor: "bg-primary/15 dark:bg-primary/25" },
-    { id: "profile", label: "PROFILE", icon: User, bgColor: "bg-muted/50 dark:bg-muted/30", textColor: "text-muted-foreground dark:text-muted-foreground/90", activeColor: "bg-primary/20 dark:bg-primary/30" },
+    { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
+    { id: "leaderboards", label: "LEADERBOARDS", icon: Trophy, bgColor: "bg-yellow-50 dark:bg-yellow-900/20", textColor: "text-yellow-700 dark:text-yellow-300", activeColor: "bg-yellow-400 dark:bg-yellow-600" },
+    { id: "progress", label: "PROGRESS", icon: TrendingUp, bgColor: "bg-green-50 dark:bg-green-900/20", textColor: "text-green-700 dark:text-green-300", activeColor: "bg-green-400 dark:bg-green-600" },
+    { id: "quests", label: "QUESTS", icon: Star, bgColor: "bg-orange-50 dark:bg-orange-900/20", textColor: "text-orange-700 dark:text-orange-300", activeColor: "bg-orange-400 dark:bg-orange-600" },
+    { id: "notes", label: "NOTES", icon: NotebookPen, bgColor: "bg-blue-50 dark:bg-blue-900/20", textColor: "text-blue-700 dark:text-blue-300", activeColor: "bg-blue-400 dark:bg-blue-600" },
+    { id: "profile", label: "PROFILE", icon: User, bgColor: "bg-muted dark:bg-muted/30", textColor: "text-muted-foreground dark:text-muted-foreground/90", activeColor: "bg-primary dark:bg-primary/70" },
   ];
 
   // Subject colors mapping (softer Duolingo-style)
