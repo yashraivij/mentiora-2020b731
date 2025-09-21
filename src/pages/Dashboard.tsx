@@ -1492,7 +1492,7 @@ const Dashboard = () => {
 
           {/* Progress tab */}
           {activeTab === "progress" && (
-            <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 min-h-screen -m-8 p-8">
+            <div className="bg-gradient-to-br from-background via-background to-muted/20 min-h-screen -m-8 p-8">
               {/* Header */}
               <div className="text-center mb-12">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mb-6 shadow-lg">
@@ -1515,10 +1515,10 @@ const Dashboard = () => {
                       </div>
                       
                       <div className="space-y-4">
-                        <h3 className="text-2xl font-semibold text-gray-900">
+                        <h3 className="text-2xl font-semibold text-foreground">
                           No predictions yet
                         </h3>
-                        <p className="text-gray-600 max-w-sm mx-auto leading-relaxed">
+                        <p className="text-muted-foreground max-w-sm mx-auto leading-relaxed">
                           Complete some practice sessions to see your predicted grades
                         </p>
                       </div>
