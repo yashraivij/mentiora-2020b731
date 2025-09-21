@@ -1396,7 +1396,7 @@ const Dashboard = () => {
 
           {/* Notes tab with full notebook functionality */}
           {activeTab === "notes" && (
-            <div className="bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 min-h-screen -m-8 p-8">
+            <div className="bg-gradient-to-br from-background via-background to-muted/20 min-h-screen -m-8 p-8">
               <div className="text-center mb-12">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 mb-6 shadow-lg">
                   <NotebookPen className="h-8 w-8 text-white" />

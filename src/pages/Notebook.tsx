@@ -173,11 +173,11 @@ const Notebook = () => {
                   </h1>
                   <div className="flex items-center space-x-2">
                     <div className="flex items-center space-x-1">
-                      <Crown className="h-3.5 w-3.5 text-amber-500" />
+                      <Crown className="h-3.5 w-3.5 text-primary" />
                       <span className="text-sm font-semibold text-accent-foreground">Premium Smart Feature</span>
                     </div>
                     <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
-                    <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">Auto-Generated</span>
+                    <span className="text-xs text-accent-foreground font-medium">Auto-Generated</span>
                   </div>
                 </div>
               </div>
