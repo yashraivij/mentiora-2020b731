@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, Trophy, Award, BookOpenCheck, Zap, Target, X, StickyNote, Star, BookOpen } from "lucide-react";
+import { ArrowLeft, Trophy, Award, BookOpenCheck, Zap, Target, X, StickyNote, Star, BookOpen, MessageCircleQuestion } from "lucide-react";
 
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -16,6 +16,7 @@ import { PersonalizedNotification } from "@/components/notifications/Personalize
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
 import { playCelebratorySound } from "@/lib/celebratory-sound";
 import { useMPRewards } from "@/hooks/useMPRewards";
+import { ChatAssistant } from "@/components/practice/ChatAssistant";
 
 interface QuestionAttempt {
   questionId: string;
@@ -69,6 +70,7 @@ const Practice = () => {
   const [sessionComplete, setSessionComplete] = useState(false);
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
   const [showHint, setShowHint] = useState(false);
+  const [showChatAssistant, setShowChatAssistant] = useState(false);
   
   const {
     notification,
@@ -338,6 +340,7 @@ const Practice = () => {
       setUserAnswer("");
       setShowFeedback(false);
       setShowHint(false);
+      setShowChatAssistant(false);
     } else {
       finishSession();
     }
@@ -766,25 +769,35 @@ const Practice = () => {
                     />
                   </div>
                   
-                  {!showFeedback && (
-                    <div className="space-y-3">
-                      <div className="flex gap-2">
-                        <Button 
-                          onClick={handleSubmitAnswer}
-                          disabled={isSubmitting || !userAnswer.trim()}
-                          className="flex-1"
-                        >
-                          {isSubmitting ? "Marking your answer..." : "Submit Answer"}
-                        </Button>
-                        <Button 
-                          variant="outline" 
-                          onClick={() => setShowHint(!showHint)}
-                          className="px-4"
-                        >
-                          <Target className="h-4 w-4 mr-2 text-purple-600" />
-                          {showHint ? "Hide Hint" : "Hint"}
-                        </Button>
-                      </div>
+                   {!showFeedback && (
+                     <div className="space-y-3">
+                       <div className="flex gap-2">
+                         <Button 
+                           onClick={handleSubmitAnswer}
+                           disabled={isSubmitting || !userAnswer.trim()}
+                           className="flex-1"
+                         >
+                           {isSubmitting ? "Marking your answer..." : "Submit Answer"}
+                         </Button>
+                         <Button 
+                           variant="outline" 
+                           onClick={() => setShowHint(!showHint)}
+                           className="px-4"
+                         >
+                           <Target className="h-4 w-4 mr-2 text-purple-600" />
+                           {showHint ? "Hide Hint" : "Hint"}
+                         </Button>
+                       </div>
+                       
+                       <Button
+                         variant="outline"
+                         onClick={() => setShowChatAssistant(true)}
+                         className="w-full"
+                         disabled={showChatAssistant}
+                       >
+                         <MessageCircleQuestion className="h-4 w-4 mr-2 text-blue-600" />
+                         Help me solve this step-by-step
+                       </Button>
                       
                       {showHint && (
                         <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500 border border-blue-200 dark:border-blue-800">
@@ -909,6 +922,14 @@ const Practice = () => {
           onClose={clearNotification}
         />
       )}
+
+      {/* Chat Assistant */}
+      <ChatAssistant
+        question={currentQuestion}
+        subject={subjectId || ''}
+        isOpen={showChatAssistant}
+        onClose={() => setShowChatAssistant(false)}
+      />
     </div>
   );
 };
