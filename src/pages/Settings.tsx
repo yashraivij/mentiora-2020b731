@@ -176,7 +176,7 @@ const Settings = () => {
               <p className="text-muted-foreground">Permanent actions that cannot be undone</p>
             </div>
           </div>
-          <div className="p-6 rounded-lg bg-destructive/10 border border-destructive/20">
+          <div className="p-6 rounded-lg bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800">
             <div className="flex items-start justify-between">
               <div className="space-y-2">
                 <h4 className="text-lg font-bold text-foreground">Delete Account</h4>
@@ -185,10 +185,10 @@ const Settings = () => {
                   All your progress, notes, and achievements will be lost forever.
                 </p>
                 <div className="flex items-center gap-2 mt-3">
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-secondary text-secondary-foreground">
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300">
                     Immediate Effect
                   </span>
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-destructive/20 text-destructive-foreground">
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300">
                     No Recovery
                   </span>
                 </div>
@@ -219,7 +219,7 @@ const Settings = () => {
                         <li>Practice history and performance data</li>
                         <li>Subscription and billing information</li>
                       </ul>
-                      <p className="mt-4 font-bold text-destructive-foreground">
+                      <p className="mt-4 font-bold text-red-600 dark:text-red-400">
                         This cannot be undone. Are you absolutely sure?
                       </p>
                     </AlertDialogDescription>
