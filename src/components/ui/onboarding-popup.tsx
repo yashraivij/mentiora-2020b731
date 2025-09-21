@@ -232,13 +232,13 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-7xl max-h-[98vh] overflow-hidden bg-white border-0 shadow-2xl">
+      <DialogContent className="max-w-7xl max-h-[98vh] overflow-hidden bg-background dark:bg-background border-0 shadow-2xl">
         {/* Subtle background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-sky-50 via-purple-50 to-pink-50" />
+        <div className="absolute inset-0 bg-gradient-to-br from-sky-50 via-purple-50 to-pink-50 dark:from-sky-950/20 dark:via-purple-950/20 dark:to-pink-950/20" />
         
         {/* Subtle border effect */}
-        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-sky-200 via-purple-200 to-pink-200 p-0.5">
-          <div className="h-full w-full rounded-lg bg-white" />
+        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-sky-200 via-purple-200 to-pink-200 dark:from-sky-800 dark:via-purple-800 dark:to-pink-800 p-0.5">
+          <div className="h-full w-full rounded-lg bg-background dark:bg-background" />
         </div>
 
         <DialogHeader className="relative z-10 pb-6">
@@ -250,10 +250,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 </div>
               </div>
               <div>
-                <DialogTitle className="text-4xl font-bold text-gray-800">
+                <DialogTitle className="text-4xl font-bold text-foreground dark:text-foreground">
                   Welcome to Mentiora!
                 </DialogTitle>
-                <DialogDescription className="text-xl text-gray-600 font-medium">
+                <DialogDescription className="text-xl text-muted-foreground dark:text-muted-foreground font-medium">
                   Let's personalize your learning experience
                 </DialogDescription>
               </div>
@@ -261,7 +261,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
             
             {/* Progress indicator */}
             <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-gray-600">Step {currentStep} of 4</span>
+              <span className="text-sm font-medium text-muted-foreground dark:text-muted-foreground">Step {currentStep} of 4</span>
               <div className="flex items-center gap-2">
                 {[1, 2, 3, 4].map((step) => (
                   <div
@@ -292,10 +292,10 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 className="space-y-6"
               >
                 <div className="text-center space-y-4 mb-8">
-                  <h3 className="text-3xl font-bold text-gray-800">
+                  <h3 className="text-3xl font-bold text-foreground dark:text-foreground">
                     What exams are you taking? 📚
                   </h3>
-                  <p className="text-lg text-gray-600">
+                  <p className="text-lg text-muted-foreground dark:text-muted-foreground">
                     Select all the subjects you're studying - we'll add them to your dashboard
                   </p>
                 </div>
@@ -313,8 +313,8 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                       <Card 
                         className={`cursor-pointer transition-all duration-300 relative overflow-hidden ${
                           selectedSubjects.includes(subject.id)
-                            ? 'ring-4 ring-sky-400 bg-sky-50 shadow-xl transform scale-105'
-                            : 'hover:bg-gray-50 hover:shadow-lg hover:scale-102 border-2 border-gray-100'
+                            ? 'ring-4 ring-sky-400 bg-sky-50 dark:bg-sky-950/30 shadow-xl transform scale-105'
+                            : 'hover:bg-muted/50 dark:hover:bg-muted/30 hover:shadow-lg hover:scale-102 border-2 border-border dark:border-border'
                         }`}
                         onClick={() => handleSubjectToggle(subject.id)}
                       >
@@ -337,13 +337,13 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                               )}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="font-bold text-sm truncate">{subject.name}</p>
+                              <p className="font-bold text-sm truncate text-foreground dark:text-foreground">{subject.name}</p>
                                <Badge 
                                 variant="secondary" 
                                 className={`text-xs mt-1 ${
                                   selectedSubjects.includes(subject.id)
                                     ? 'bg-sky-400 text-white shadow-lg'
-                                    : 'bg-gray-100 text-gray-700'
+                                    : 'bg-muted dark:bg-muted text-muted-foreground dark:text-muted-foreground'
                                 }`}
                                >
                                 {subject.examBoard}
@@ -358,7 +358,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
                 <div className="flex justify-between items-center pt-6 border-t border-gray-200">
                   <div>
-                    <p className="font-bold text-lg text-gray-800">
+                    <p className="font-bold text-lg text-foreground dark:text-foreground">
                       {selectedSubjects.length} subject{selectedSubjects.length !== 1 ? 's' : ''} selected ✨
                     </p>
                   </div>
