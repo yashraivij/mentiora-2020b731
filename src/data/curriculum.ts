@@ -16670,7 +16670,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q1b',
-              question: 'Question 1(b): Name two types of mass movement found on UK coastlines.',
+              question: 'Name two types of mass movement found on UK coastlines.',
               marks: 2,
               difficulty: 'easy',
               modelAnswer: 'Rockfall (1 mark) and landslides (1 mark).',
@@ -16681,7 +16681,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q1c',
-              question: 'Question 1(c): Explain how constructive waves lead to the build-up of beaches.',
+              question: 'Explain how constructive waves lead to the build-up of beaches.',
               marks: 4,
               difficulty: 'medium',
               modelAnswer: 'Constructive waves have low wave height and long wavelength. They have a strong swash that carries sediment up the beach. The backwash is weaker than the swash due to water percolating through the beach material. This results in a net movement of sediment up the beach, leading to deposition and beach building.',
@@ -16697,7 +16697,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q1d',
-              question: 'Question 1(d): Assess the effectiveness of soft engineering strategies at the coast.',
+              question: 'Assess the effectiveness of soft engineering strategies at the coast.',
               marks: 6,
               difficulty: 'medium',
               modelAnswer: 'Soft engineering works with natural processes and is more sustainable. Beach nourishment creates natural barriers that absorb wave energy effectively. Dune regeneration provides flexible protection that can adjust to changing conditions. Managed retreat allows natural coastal processes to continue. However, soft engineering requires ongoing maintenance and may not provide immediate protection against extreme events. Public acceptance can be challenging, especially for managed retreat.',
@@ -16712,7 +16712,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q2a',
-              question: 'Question 2(a): Which of the following is an erosional landform?\nA. Spit\nB. Beach\nC. Wave-cut platform\nD. Sand dune',
+              question: 'Which of the following is an erosional landform?\nA. Spit\nB. Beach\nC. Wave-cut platform\nD. Sand dune',
               marks: 1,
               difficulty: 'easy',
               modelAnswer: 'C. Wave-cut platform',
@@ -16723,7 +16723,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q2b',
-              question: 'Question 2(b): State two physical processes that lead to the formation of headlands and bays.',
+              question: 'State two physical processes that lead to the formation of headlands and bays.',
               marks: 2,
               difficulty: 'easy',
               modelAnswer: 'Differential erosion (1 mark) and the resistance of different rock types (1 mark).',
@@ -16734,7 +16734,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q2c',
-              question: 'Question 2(c): Explain how longshore drift leads to the formation of a spit.',
+              question: 'Explain how longshore drift leads to the formation of a spit.',
               marks: 4,
               difficulty: 'medium',
               modelAnswer: 'Longshore drift transports sediment along the coast at an angle due to prevailing winds. Waves approach the beach at an angle, carrying sediment up the beach. The backwash returns straight down the beach due to gravity. This creates a zigzag movement of sediment. Where the coastline changes direction, sediment continues to be deposited, extending into the sea to form a spit.',
@@ -16750,7 +16750,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q2d',
-              question: 'Question 2(d): Assess the costs and benefits of hard engineering strategies to protect the coast.',
+              question: 'Assess the costs and benefits of hard engineering strategies to protect the coast.',
               marks: 8,
               difficulty: 'hard',
               modelAnswer: 'Benefits: Sea walls provide effective protection against wave erosion and flooding, protecting valuable coastal infrastructure. Rock armour dissipates wave energy effectively and is relatively flexible. Groynes can build up beaches which provide natural protection. Costs: High construction and maintenance costs. Sea walls can increase erosion elsewhere due to wave reflection. Hard defences can look unsightly and restrict coastal access. They may simply transfer the problem elsewhere along the coast. Environmental impacts include habitat destruction and interference with natural coastal processes.',
@@ -16765,7 +16765,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q3a',
-              question: 'Question 3(a): Name one river landform created by erosion and one created by deposition.',
+              question: 'Name one river landform created by erosion and one created by deposition.',
               marks: 2,
               difficulty: 'easy',
               modelAnswer: 'Erosion: Waterfall (1 mark). Deposition: Levee (1 mark).',
@@ -16776,7 +16776,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q3b',
-              question: 'Question 3(b): Explain one physical cause of river flooding.',
+              question: 'Explain one physical cause of river flooding.',
               marks: 4,
               difficulty: 'medium',
               modelAnswer: 'Prolonged heavy rainfall saturates the soil, reducing infiltration capacity. This increases surface runoff into rivers. When river discharge exceeds channel capacity, flooding occurs. The impermeable saturated ground cannot absorb additional rainfall, forcing more water into surface drainage systems.',
@@ -16792,7 +16792,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q3c',
-              question: 'Question 3(c): Explain how human activity has increased flood risk in the UK.',
+              question: 'Explain how human activity has increased flood risk in the UK.',
               marks: 6,
               difficulty: 'medium',
               modelAnswer: 'Urbanisation increases impermeable surfaces, reducing infiltration and increasing surface runoff speed. This creates higher peak flows and shorter lag times. Deforestation reduces interception and transpiration, increasing runoff. Channel modifications like straightening increase flow velocity but may cause problems downstream. Climate change from human activities increases extreme weather frequency. Development on floodplains puts more people and property at risk.',
@@ -16808,7 +16808,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q3d',
-              question: 'Question 3(d): Using a UK river basin case study, evaluate the effectiveness of flood management strategies.',
+              question: 'Using a UK river basin case study, evaluate the effectiveness of flood management strategies.',
               marks: 8,
               difficulty: 'hard',
               modelAnswer: 'River Thames case study: Hard engineering like the Thames Barrier has been highly effective in protecting London from storm surges and high tides, preventing billions in potential damage. However, these strategies are expensive to maintain and may increase flood risk upstream. Soft engineering approaches like the Jubilee River flood relief channel work with natural processes and provide wildlife habitats. Urban SuDS and green spaces help manage surface water. The integrated approach combining multiple strategies has been most effective, though climate change presents ongoing challenges requiring adaptive management.',
@@ -16824,7 +16824,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q4a',
-              question: 'Question 4(a): Which of the following is a glacial landform created by erosion?\nA. Drumlin\nB. Arete\nC. Moraine\nD. Outwash plain',
+              question: 'Which of the following is a glacial landform created by erosion?\nA. Drumlin\nB. Arete\nC. Moraine\nD. Outwash plain',
               marks: 1,
               difficulty: 'easy',
               modelAnswer: 'B. Arete',
@@ -16835,7 +16835,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q4b',
-              question: 'Question 4(b): State two physical processes that lead to glacial erosion.',
+              question: 'State two physical processes that lead to glacial erosion.',
               marks: 2,
               difficulty: 'easy',
               modelAnswer: 'Plucking (1 mark) and abrasion (1 mark).',
@@ -16846,7 +16846,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q4c',
-              question: 'Question 4(c): Explain how corries are formed by glacial processes.',
+              question: 'Explain how corries are formed by glacial processes.',
               marks: 4,
               difficulty: 'medium',
               modelAnswer: 'Snow accumulates in mountain hollows and compacts to form ice. The glacier moves through rotational slip, eroding the back wall through plucking and the floor through abrasion. Freeze-thaw weathering steepens the back wall. When the ice melts, it leaves behind a deep, armchair-shaped hollow with a steep back wall and sometimes a tarn (lake).',
@@ -16862,7 +16862,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q4d',
-              question: 'Question 4(d): Assess the impacts of tourism in glaciated upland areas of the UK.',
+              question: 'Assess the impacts of tourism in glaciated upland areas of the UK.',
               marks: 8,
               difficulty: 'hard',
               modelAnswer: 'Positive impacts: Tourism provides economic benefits to rural communities through employment in hotels, restaurants, and guiding services. It supports local businesses and helps maintain rural services. Tourism revenue can fund conservation projects and path maintenance. Negative impacts: Footpath erosion and vegetation damage from large numbers of visitors. Traffic congestion and parking problems in narrow valleys. Litter and disturbance to wildlife. House prices increase, displacing local residents. Seasonal employment may be unstable.',
@@ -16878,7 +16878,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q5a',
-              question: 'Section B: Question 5(a): Which one of the following describes the global circulation system?\nA. The movement of tectonic plates\nB. The transfer of heat by winds and pressure belts\nC. The cycle of evaporation and precipitation\nD. The greenhouse effect',
+              question: 'Which one of the following describes the global circulation system?\nA. The movement of tectonic plates\nB. The transfer of heat by winds and pressure belts\nC. The cycle of evaporation and precipitation\nD. The greenhouse effect',
               marks: 1,
               difficulty: 'easy',
               modelAnswer: 'B. The transfer of heat by winds and pressure belts',
@@ -16889,7 +16889,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q5b',
-              question: 'Question 5(b): Describe the trend shown in Figure 3 (graph showing frequency of tropical storms 1980–2020).',
+              question: 'Describe the trend shown in Figure 3 (graph showing frequency of tropical storms 1980–2020).',
               marks: 2,
               difficulty: 'easy',
               modelAnswer: 'Overall increasing trend (1 mark) with some annual variation/fluctuation (1 mark).',
@@ -16900,7 +16900,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q5c',
-              question: 'Question 5(c): Explain two reasons why the UK is vulnerable to extreme weather events.',
+              question: 'Explain two reasons why the UK is vulnerable to extreme weather events.',
               marks: 4,
               difficulty: 'medium',
               modelAnswer: 'Maritime climate: The UK\'s position surrounded by ocean means it experiences frequent weather systems from the Atlantic, bringing storms and heavy rainfall. Urban heat islands: Cities create microclimates with higher temperatures, increasing risk of heat waves and thunderstorms. Dense population means more people are exposed to weather risks.',
@@ -16914,7 +16914,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q5d',
-              question: 'Question 5(d): Assess the social and economic impacts of a named tropical storm.',
+              question: 'Assess the social and economic impacts of a named tropical storm.',
               marks: 6,
               difficulty: 'medium',
               modelAnswer: 'Hurricane Katrina (2005): Social impacts included over 1,800 deaths and displacement of over 1 million people. Poor communities were disproportionately affected. Economic impacts included $125 billion in damage, destruction of the Port of New Orleans affecting trade, and long-term unemployment. Insurance costs increased nationally. Recovery took many years, with some areas never fully rebuilt.',
@@ -16930,7 +16930,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q5e',
-              question: 'Question 5(e): Evaluate the effectiveness of global strategies to manage climate change.',
+              question: 'Evaluate the effectiveness of global strategies to manage climate change.',
               marks: 9,
               difficulty: 'hard',
               modelAnswer: 'International agreements like the Paris Agreement have created global frameworks for reducing emissions. However, enforcement mechanisms are weak and targets are often not legally binding. The Kyoto Protocol had limited success as major emitters like the USA withdrew. Carbon trading schemes provide economic incentives but can be manipulated. Technology transfer to LICs helps spread clean energy but progress is slow. Individual country commitments vary widely in ambition and implementation. Climate change requires immediate action but political cycles focus on short-term gains.',
@@ -16946,7 +16946,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q6a',
-              question: 'Section C: Question 6(a): Which of the following is a characteristic of a tropical rainforest?\nA. Seasonal rainfall\nB. Nutrient-rich soil\nC. Emergent trees\nD. Cold winters',
+              question: 'Which of the following is a characteristic of a tropical rainforest?\nA. Seasonal rainfall\nB. Nutrient-rich soil\nC. Emergent trees\nD. Cold winters',
               marks: 1,
               difficulty: 'easy',
               modelAnswer: 'C. Emergent trees',
@@ -16957,7 +16957,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q6b',
-              question: 'Question 6(b): State two ways humans use deciduous woodlands.',
+              question: 'State two ways humans use deciduous woodlands.',
               marks: 2,
               difficulty: 'easy',
               modelAnswer: 'Timber production/forestry (1 mark) and recreation/tourism (1 mark).',
@@ -16968,7 +16968,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q6c',
-              question: 'Question 6(c): Explain how the nutrient cycle supports biodiversity in tropical rainforests.',
+              question: 'Explain how the nutrient cycle supports biodiversity in tropical rainforests.',
               marks: 4,
               difficulty: 'medium',
               modelAnswer: 'Rapid decomposition in hot, humid conditions quickly breaks down dead organic matter. Nutrients are rapidly recycled and taken up by plant roots through shallow root systems. This constant nutrient cycling supports the growth of diverse plant species. The variety of plant species provides different food sources and habitats, supporting diverse animal communities.',
@@ -16984,7 +16984,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q6d',
-              question: 'Question 6(d): Explain how sustainable management can reduce the impacts of deforestation.',
+              question: 'Explain how sustainable management can reduce the impacts of deforestation.',
               marks: 6,
               difficulty: 'medium',
               modelAnswer: 'Selective logging removes only mature trees, maintaining forest structure and allowing natural regeneration. Reforestation programs plant native species to restore cleared areas. Agroforestry combines farming with tree growing, providing income while maintaining forest cover. Protected areas preserve biodiversity and ecosystem services. Certification schemes like FSC ensure responsible forestry practices. Community involvement ensures local people benefit from conservation, reducing pressure for illegal logging.',
@@ -16999,7 +16999,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q6e',
-              question: 'Question 6(e): Evaluate the view that ecosystems can be best managed by international agreements rather than local strategies. (12 + 3 SPaG)',
+              question: 'Evaluate the view that ecosystems can be best managed by international agreements rather than local strategies. (12 + 3 SPaG)',
               marks: 15,
               difficulty: 'hard',
               modelAnswer: 'International agreements provide coordinated global action and funding for ecosystem protection. The Paris Agreement addresses climate change affecting all ecosystems, while CITES protects endangered species across borders. However, enforcement is often weak and depends on national cooperation. Local strategies can be more responsive to specific ecosystem needs and have greater community support. Indigenous communities often have traditional knowledge essential for sustainable management. Local people have direct incentives to protect ecosystems they depend on. However, local efforts may lack sufficient resources and can be undermined by global pressures like international trade. The most effective approach combines international frameworks with strong local implementation, ensuring global coordination while respecting local knowledge and needs.',
