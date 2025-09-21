@@ -1112,12 +1112,15 @@ const Dashboard = () => {
       {/* Left Sidebar - Duolingo Style */}
       <div className="w-64 bg-background border-r-2 border-border flex flex-col py-6">
         {/* Logo */}
-        <div className="px-6 mb-8 flex items-center space-x-3">
-          <img src={mentioraLogo} alt="Mentiora Logo" className="w-8 h-8" />
-          <h1 className="text-xl font-bold text-foreground">Mentiora</h1>
-          {isPremium && (
-            <Crown className="w-5 h-5 text-yellow-500" />
-          )}
+        <div className="px-6 mb-8 flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <img src={mentioraLogo} alt="Mentiora Logo" className="w-8 h-8" />
+            <h1 className="text-xl font-bold text-foreground">Mentiora</h1>
+            {isPremium && (
+              <Crown className="w-5 h-5 text-yellow-500" />
+            )}
+          </div>
+          <ThemeToggle />
         </div>
 
         {/* Navigation */}
@@ -1190,7 +1193,6 @@ const Dashboard = () => {
                   <span className="text-xl font-bold text-cyan-500">{userGems}</span>
                 </div>
               </div>
-              <ThemeToggle />
               </div>
 
               {/* Subject Selection or Subject Path */}

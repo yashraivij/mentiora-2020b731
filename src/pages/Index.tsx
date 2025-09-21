@@ -6,7 +6,6 @@ import { useAuth } from "@/contexts/AuthContext";
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
 import { DynamicTestimonials } from "@/components/ui/dynamic-testimonials";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -259,7 +258,6 @@ const Index = () => {
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Mentiora</h1>
           </motion.div>
           <div className="flex items-center gap-3 mt-6 sm:mt-0">
-            <ThemeToggle />
             {user ? (
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button 
