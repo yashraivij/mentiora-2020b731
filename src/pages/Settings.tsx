@@ -131,7 +131,7 @@ const Settings = () => {
                   <p className="text-muted-foreground">Manage your subscription and billing</p>
                 </div>
               </div>
-              <div className="p-6 rounded-lg bg-secondary border border-border">
+              <div className="p-6 rounded-lg bg-gradient-to-br from-secondary via-secondary to-accent/10 border border-border shadow-sm">
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
                     <h4 className="text-lg font-bold text-foreground flex items-center gap-2">
@@ -143,10 +143,10 @@ const Settings = () => {
                       view invoices, and modify your plan.
                     </p>
                     <div className="flex items-center gap-2 mt-3">
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-secondary text-secondary-foreground">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
                         Secure Portal
                       </span>
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-accent text-accent-foreground">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-accent/20 text-accent-foreground border border-accent/30">
                         Full Control
                       </span>
                     </div>
