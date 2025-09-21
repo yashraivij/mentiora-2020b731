@@ -2244,26 +2244,26 @@ const Dashboard = () => {
 
               {/* Billing Management Card - Only for Premium Users */}
               {isPremium && (
-                <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border">
+                <div className="bg-card rounded-2xl p-6 shadow-lg border border-border">
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 bg-green-500 rounded-2xl flex items-center justify-center">
-                      <CreditCard className="w-6 h-6 text-white" />
+                    <div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center">
+                      <CreditCard className="w-6 h-6 text-primary-foreground" />
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-card-foreground">
                         Billing Management
                       </h3>
-                      <p className="text-muted-foreground">Manage your subscription and billing</p>
+                      <p className="text-card-foreground/80">Manage your subscription and billing</p>
                     </div>
                   </div>
-                  <div className="p-6 rounded-lg bg-green-50 border border-green-200">
+                  <div className="p-6 rounded-lg bg-card border border-border shadow-sm">
                     <div className="flex items-start justify-between">
                       <div className="space-y-2">
                         <h4 className="text-lg font-bold text-card-foreground flex items-center gap-2">
-                          <Crown className="w-5 h-5 text-green-500" />
+                          <Crown className="w-5 h-5 text-primary" />
                           Premium Subscription
                         </h4>
-                        <p className="text-muted-foreground max-w-lg">
+                        <p className="text-card-foreground/90 max-w-lg">
                           Access your Stripe billing portal to manage your subscription, update payment methods, 
                           view invoices, and modify your plan.
                         </p>
@@ -2271,7 +2271,7 @@ const Dashboard = () => {
                       
                       <Button 
                         onClick={openManageBilling}
-                        className="ml-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-2xl"
+                        className="ml-4 bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8 rounded-2xl"
                       >
                         <CreditCard className="w-4 h-4 mr-2" />
                         Manage Billing
