@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useParams, useNavigate } from "react-router-dom";
 import { curriculum, Question } from "@/data/curriculum";
-import { ArrowLeft, Trophy, Award, BookOpenCheck, Zap, Target, X, StickyNote, Star, BookOpen, MessageCircleQuestion } from "lucide-react";
+import { ArrowLeft, Trophy, Award, BookOpenCheck, X, StickyNote, Star, BookOpen, MessageCircleQuestion } from "lucide-react";
 
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -69,7 +69,6 @@ const Practice = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [sessionComplete, setSessionComplete] = useState(false);
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
-  const [showHint, setShowHint] = useState(false);
   const [showChatAssistant, setShowChatAssistant] = useState(false);
   
   const {
@@ -339,90 +338,9 @@ const Practice = () => {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setUserAnswer("");
       setShowFeedback(false);
-      setShowHint(false);
       setShowChatAssistant(false);
     } else {
       finishSession();
-    }
-  };
-
-  const generateHint = (question: Question) => {
-    const questionText = question.question.toLowerCase();
-    const totalMarks = question.marks;
-    const subject = subjectId || '';
-    
-    // Detect command words and question types
-    const isDefine = questionText.includes('define') || questionText.includes('what is') || questionText.includes('meaning of');
-    const isExplain = questionText.includes('explain') || questionText.includes('describe') || questionText.includes('how does') || questionText.includes('why');
-    const isEvaluate = questionText.includes('evaluate') || questionText.includes('assess') || questionText.includes('how far') || questionText.includes('to what extent') || questionText.includes('discuss');
-    const isCompare = questionText.includes('compare') || questionText.includes('contrast') || questionText.includes('similarities') || questionText.includes('differences');
-    const isCalculate = questionText.includes('calculate') || questionText.includes('work out') || questionText.includes('find the') || questionText.includes('determine');
-    const isAnalyse = questionText.includes('analyse') || questionText.includes('analyze') || questionText.includes('examine');
-    const isList = questionText.includes('list') || questionText.includes('name') || questionText.includes('identify') || questionText.includes('state');
-    const isMethod = questionText.includes('method') || questionText.includes('procedure') || questionText.includes('how would you');
-    
-    // Detect subject areas for specialized hints
-    const isScience = ['biology', 'chemistry', 'physics'].includes(subject.toLowerCase());
-    const isHumanities = ['history', 'geography', 'rs', 'religious studies', 'english'].includes(subject.toLowerCase());
-    
-    // Generate appropriate hints based on question type and subject
-    
-    // High-value evaluative questions (8-12 marks)
-    if (isEvaluate && totalMarks >= 8) {
-      if (isHumanities) {
-        return "Plan both sides of the argument with specific evidence, then reach a clear judgement that links back to the question.";
-      }
-      return "Consider different viewpoints with evidence, then weigh them up to reach a balanced conclusion.";
-    }
-    
-    // Calculate/science questions
-    if (isCalculate) {
-      if (isScience) {
-        return "Identify the right formula, substitute the numbers clearly, and don't forget units in your final answer 📊";
-      }
-      return "Show your working step by step and check your units are correct.";
-    }
-    
-    // Method/practical questions
-    if (isMethod && isScience) {
-      return "Think about variables to control, clear steps in order, and how to make it accurate and safe.";
-    }
-    
-    // Definition questions
-    if (isDefine) {
-      return "Use keywords from the question in your definition and include what makes it unique or special.";
-    }
-    
-    // Explanation questions (medium length)
-    if (isExplain) {
-      if (totalMarks >= 4) {
-        return "Break it down into clear stages or reasons, and link each point back to the question.";
-      }
-      return "Think about cause and effect - what happens and why it happens.";
-    }
-    
-    // Analysis questions
-    if (isAnalyse) {
-      return "Look for patterns, links or deeper meaning rather than just describing what you see.";
-    }
-    
-    // Compare questions
-    if (isCompare) {
-      return "Point out both similarities and differences, and explain which are most important.";
-    }
-    
-    // List/identify questions
-    if (isList) {
-      return "Make each point distinct and specific - avoid overlap between your answers.";
-    }
-    
-    // Generic hints based on mark value
-    if (totalMarks >= 6) {
-      return "This needs developed points with evidence or examples - think quality over quantity.";
-    } else if (totalMarks >= 3) {
-      return "Remember to explain your points clearly and link to real examples where you can.";
-    } else {
-      return "Keep it focused and use the key terms from the question in your answer.";
     }
   };
 
@@ -771,23 +689,13 @@ const Practice = () => {
                   
                    {!showFeedback && (
                      <div className="space-y-3">
-                       <div className="flex gap-2">
-                         <Button 
-                           onClick={handleSubmitAnswer}
-                           disabled={isSubmitting || !userAnswer.trim()}
-                           className="flex-1"
-                         >
-                           {isSubmitting ? "Marking your answer..." : "Submit Answer"}
-                         </Button>
-                         <Button 
-                           variant="outline" 
-                           onClick={() => setShowHint(!showHint)}
-                           className="px-4"
-                         >
-                           <Target className="h-4 w-4 mr-2 text-purple-600" />
-                           {showHint ? "Hide Hint" : "Hint"}
-                         </Button>
-                       </div>
+                       <Button 
+                         onClick={handleSubmitAnswer}
+                         disabled={isSubmitting || !userAnswer.trim()}
+                         className="w-full"
+                       >
+                         {isSubmitting ? "Marking your answer..." : "Submit Answer"}
+                       </Button>
                        
                        <Button
                          variant="outline"
@@ -798,33 +706,9 @@ const Practice = () => {
                          <MessageCircleQuestion className="h-4 w-4 mr-2 text-blue-600" />
                          Help me solve this step-by-step
                        </Button>
-                      
-                      {showHint && (
-                        <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500 border border-blue-200 dark:border-blue-800">
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              <h4 className="font-medium text-blue-800 dark:text-blue-300 mb-2 flex items-center">
-                                <Zap className="h-4 w-4 mr-2 text-yellow-600" />
-                                Hint
-                              </h4>
-                              <p className="text-blue-700 dark:text-blue-200 text-sm leading-relaxed">
-                                {generateHint(currentQuestion)}
-                              </p>
-                            </div>
-                            <Button 
-                              variant="ghost" 
-                              size="sm" 
-                              onClick={() => setShowHint(false)}
-                              className="ml-2 h-8 w-8 p-0 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200"
-                            >
-                              <X className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
+                     </div>
+                   )}
+                 </div>
               </CardContent>
             </Card>
 
