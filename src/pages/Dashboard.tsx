@@ -2300,14 +2300,6 @@ const Dashboard = () => {
                         Permanently delete your account and all associated data. This action cannot be undone. 
                         All your progress, notes, and achievements will be lost forever.
                       </p>
-                      <div className="flex items-center gap-2 mt-3">
-                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-destructive/10 text-destructive border border-destructive/30">
-                          Immediate Effect
-                        </span>
-                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-muted/50 text-card-foreground/80 border border-border">
-                          No Recovery
-                        </span>
-                      </div>
                     </div>
                     
                     <Button 
