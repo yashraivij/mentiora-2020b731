@@ -45,6 +45,7 @@ import {
   Plus,
   X,
 } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -1189,6 +1190,7 @@ const Dashboard = () => {
                   <span className="text-xl font-bold text-cyan-500">{userGems}</span>
                 </div>
               </div>
+              <ThemeToggle />
               </div>
 
               {/* Subject Selection or Subject Path */}
