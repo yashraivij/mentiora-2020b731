@@ -185,25 +185,25 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssist
   if (!isOpen) return null;
 
   return (
-    <Card className="fixed right-4 top-4 bottom-4 w-96 z-50 shadow-2xl border-2 border-primary/20 bg-gradient-to-br from-background via-card to-accent/10 backdrop-blur-sm">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 border-b border-gradient-to-r from-primary/20 to-accent/20">
+    <Card className="fixed right-4 top-4 bottom-4 w-96 z-50 shadow-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 backdrop-blur-sm">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 border-b border-blue-200 bg-gradient-to-r from-blue-100 to-purple-100">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-            <MessageCircle className="h-4 w-4 text-primary-foreground" />
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg">
+            <MessageCircle className="h-4 w-4 text-white" />
           </div>
-          <CardTitle className="text-sm font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <CardTitle className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Study Helper
           </CardTitle>
         </div>
-        <Button variant="ghost" size="sm" onClick={onClose} className="hover:bg-destructive/10 hover:text-destructive">
+        <Button variant="ghost" size="sm" onClick={onClose} className="hover:bg-red-100 hover:text-red-600">
           <X className="h-4 w-4" />
         </Button>
       </CardHeader>
       
       <CardContent className="flex flex-col h-[calc(100vh-8rem)]">
-        <div className="text-xs text-muted-foreground mb-2 p-3 bg-gradient-to-r from-primary/5 to-accent/5 rounded-lg border border-primary/20">
-          <div className="flex items-center gap-2 font-medium text-primary">
-            <Bot className="h-4 w-4" />
+        <div className="text-xs mb-2 p-3 bg-gradient-to-r from-green-100 to-blue-100 rounded-lg border border-green-200">
+          <div className="flex items-center gap-2 font-medium text-green-700">
+            <Bot className="h-4 w-4 text-green-600" />
             Let's work through this question together step by step!
           </div>
         </div>
@@ -222,10 +222,10 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssist
                     message.role === 'user' ? 'flex-row-reverse' : 'flex-row'
                   }`}
                 >
-                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
+                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center shadow-lg ${
                     message.role === 'user' 
-                      ? 'bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-md' 
-                      : 'bg-gradient-to-br from-accent to-secondary text-accent-foreground shadow-md'
+                      ? 'bg-gradient-to-br from-orange-400 to-pink-500 text-white' 
+                      : 'bg-gradient-to-br from-emerald-400 to-blue-500 text-white'
                   }`}>
                     {message.role === 'user' ? (
                       <User className="h-4 w-4" />
@@ -236,8 +236,8 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssist
                   <div
                     className={`px-4 py-3 rounded-xl text-sm whitespace-pre-wrap shadow-sm ${
                       message.role === 'user'
-                        ? 'bg-gradient-to-br from-primary to-primary/90 text-primary-foreground border border-primary/20'
-                        : 'bg-gradient-to-br from-card to-accent/10 text-card-foreground border border-border'
+                        ? 'bg-gradient-to-br from-orange-100 to-pink-100 text-orange-800 border border-orange-200'
+                        : 'bg-gradient-to-br from-blue-50 to-indigo-100 text-blue-800 border border-blue-200'
                     }`}
                   >
                     {message.content}
@@ -248,14 +248,14 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssist
             {isLoading && (
               <div className="flex gap-3 justify-start">
                 <div className="flex gap-2">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-accent to-secondary text-accent-foreground flex items-center justify-center shadow-md">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-blue-500 text-white flex items-center justify-center shadow-lg">
                     <Bot className="h-4 w-4" />
                   </div>
-                  <div className="px-4 py-3 rounded-xl bg-gradient-to-br from-card to-accent/10 border border-border text-sm shadow-sm">
+                  <div className="px-4 py-3 rounded-xl bg-gradient-to-br from-purple-50 to-blue-50 border border-purple-200 text-sm shadow-sm">
                     <div className="flex gap-1">
-                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                      <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                      <div className="w-2 h-2 bg-indigo-500 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
                     </div>
                   </div>
                 </div>
@@ -264,16 +264,16 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssist
           </div>
         </ScrollArea>
 
-        <div className="border-t border-gradient-to-r from-primary/20 to-accent/20 pt-3 mt-3 space-y-3 bg-gradient-to-r from-background/50 to-accent/5 p-3 rounded-lg">
+        <div className="border-t border-purple-200 pt-3 mt-3 space-y-3 bg-gradient-to-r from-indigo-50 to-purple-50 p-3 rounded-lg">
           {stage !== 'final' && hintCount >= 2 && (
             <Button
               variant="outline"
               size="sm"
               onClick={showModelAnswer}
               disabled={isLoading}
-              className="w-full text-xs border-primary/30 hover:bg-primary/10 hover:border-primary/50 transition-all duration-200"
+              className="w-full text-xs border-emerald-300 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-400 text-emerald-700 transition-all duration-200"
             >
-              <Bot className="h-3 w-3 mr-1" />
+              <Bot className="h-3 w-3 mr-1 text-emerald-600" />
               Show me the answer
             </Button>
           )}
@@ -284,13 +284,13 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssist
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your answer or ask for help..."
               disabled={isLoading}
-              className="text-sm bg-background/80 border-primary/20 focus:border-primary/50 focus:ring-primary/20"
+              className="text-sm bg-white border-blue-200 focus:border-blue-400 focus:ring-blue-200"
             />
             <Button
               type="submit"
               size="sm"
               disabled={!input.trim() || isLoading}
-              className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-md"
+              className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white shadow-lg"
             >
               <Send className="h-4 w-4" />
             </Button>
