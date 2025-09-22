@@ -1179,10 +1179,61 @@ const Dashboard = () => {
               {/* Header with stats */}
               <div className="flex items-center justify-between mb-8">
               <div className="flex items-center space-x-6">
-                <div className="flex items-center space-x-2">
-                  <Flame className="h-6 w-6 text-orange-400" />
-                  <span className="text-xl font-bold text-orange-500">{currentStreak}</span>
-                </div>
+                <motion.div 
+                  className="relative flex items-center space-x-3 px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-200/50 dark:border-orange-800/50 backdrop-blur-sm"
+                  initial={{ scale: 1 }}
+                  animate={{ scale: [1, 1.02, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <motion.div
+                    className="relative"
+                    animate={{ 
+                      rotate: [0, 10, -10, 0],
+                      scale: [1, 1.1, 1]
+                    }}
+                    transition={{ 
+                      duration: 3, 
+                      repeat: Infinity, 
+                      ease: "easeInOut",
+                      delay: Math.random() * 2
+                    }}
+                  >
+                    <Flame className="h-7 w-7 text-orange-500 drop-shadow-lg" />
+                    <motion.div
+                      className="absolute inset-0 rounded-full bg-orange-400/30 blur-xl"
+                      animate={{ 
+                        opacity: [0.3, 0.6, 0.3],
+                        scale: [1, 1.2, 1]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity, 
+                        ease: "easeInOut" 
+                      }}
+                    />
+                  </motion.div>
+                  <motion.span 
+                    className="text-2xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent drop-shadow-sm"
+                    key={currentStreak}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ 
+                      type: "spring", 
+                      stiffness: 300, 
+                      damping: 20 
+                    }}
+                  >
+                    {currentStreak}
+                  </motion.span>
+                  <motion.div
+                    className="absolute -top-1 -right-1 text-xs font-bold text-orange-600 bg-orange-100 dark:bg-orange-900/50 px-2 py-1 rounded-full border border-orange-300 dark:border-orange-700"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    🔥 STREAK
+                  </motion.div>
+                </motion.div>
                 <div className="flex items-center space-x-2">
                   <Zap className="h-6 w-6 text-blue-400" />
                   <span className="text-xl font-bold text-blue-500">{userGems}</span>
