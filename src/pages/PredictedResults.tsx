@@ -520,9 +520,9 @@ const PredictedResults = () => {
   const grade = getGCSEGrade(percentage);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-accent/5">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-gradient-to-r from-blue-500/20 via-purple-500/15 to-blue-500/20 shadow-sm border-b border-border/50 backdrop-blur-sm">
+      <header className="bg-card shadow-sm border-b border-border">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -573,8 +573,8 @@ const PredictedResults = () => {
           </Card>
 
           {/* Results Summary */}
-          <Card className="bg-gradient-to-br from-emerald-500/20 via-blue-500/15 to-purple-500/20 border-emerald-200 dark:border-emerald-700/50 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-emerald-500/15 to-blue-500/15 rounded-t-lg border-b border-emerald-200/50 dark:border-emerald-700/30">
+          <Card>
+            <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Crown className="h-5 w-5 text-yellow-500" />
                 Detailed Results Breakdown
@@ -601,11 +601,11 @@ const PredictedResults = () => {
 
           {/* Question by Question Feedback */}
           {attempts.map((attempt, index) => (
-            <Card key={attempt.questionId} className="mb-6 bg-gradient-to-br from-violet-50/50 via-blue-50/30 to-emerald-50/50 dark:from-violet-950/20 dark:via-blue-950/15 dark:to-emerald-950/20 border-violet-200/50 dark:border-violet-700/30 shadow-md">
-              <CardHeader className="pb-4 bg-gradient-to-r from-violet-500/10 via-blue-500/8 to-emerald-500/10 rounded-t-lg border-b border-violet-200/30 dark:border-violet-700/20">
+            <Card key={attempt.questionId} className="mb-6">
+              <CardHeader className="pb-4">
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent text-primary-foreground text-sm font-semibold">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500 text-white text-sm font-semibold">
                       {index + 1}
                     </div>
                     Question {index + 1}
@@ -628,12 +628,12 @@ const PredictedResults = () => {
                 {/* Question */}
                 <div>
                   <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                    <div className="flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-r from-primary to-primary/80 mr-2">
-                      <HelpCircle className="h-4 w-4 text-primary-foreground" />
+                    <div className="flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 mr-2">
+                      <HelpCircle className="h-4 w-4 text-white" />
                     </div>
                     Question
                   </h4>
-                  <div className="bg-gradient-to-r from-blue-100/80 to-blue-200/60 dark:bg-gradient-to-r dark:from-blue-900/30 dark:to-blue-800/20 p-4 rounded-lg border-l-4 border-blue-500 shadow-sm">
+                  <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500 shadow-sm">
                     <p className="text-foreground">{questions[index]?.text || questions[index]?.question}</p>
                   </div>
                 </div>
@@ -641,12 +641,12 @@ const PredictedResults = () => {
                 {/* Student Answer */}
                 <div>
                   <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                    <div className="flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-r from-accent to-accent/80 mr-2">
-                      <User className="h-4 w-4 text-accent-foreground" />
+                    <div className="flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 mr-2">
+                      <User className="h-4 w-4 text-white" />
                     </div>
                     Your Answer
                   </h4>
-                  <div className="bg-gradient-to-r from-purple-100/80 to-purple-200/60 dark:bg-gradient-to-r dark:from-purple-900/30 dark:to-purple-800/20 p-4 rounded-lg border-l-4 border-purple-500 shadow-sm">
+                  <div className="bg-yellow-50 dark:bg-yellow-950/20 p-4 rounded-lg border-l-4 border-yellow-500 shadow-sm">
                     <p className="text-foreground">{attempt.userAnswer}</p>
                   </div>
                 </div>
@@ -669,12 +669,12 @@ const PredictedResults = () => {
                 {/* Why This Gets Marks */}
                 <div>
                   <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                    <div className="flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-r from-primary to-primary/80 mr-2">
-                      <CheckCircle className="h-4 w-4 text-primary-foreground" />
+                    <div className="flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 mr-2">
+                      <CheckCircle className="h-4 w-4 text-white" />
                     </div>
                     🎯 Why This Gets Full Marks
                   </h4>
-                  <div className="bg-gradient-to-r from-orange-100/80 to-orange-200/60 dark:bg-gradient-to-r dark:from-orange-900/30 dark:to-orange-800/20 p-4 rounded-lg border-l-4 border-orange-500 shadow-sm">
+                  <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border-l-4 border-blue-500 shadow-sm">
                     <pre className="text-foreground whitespace-pre-wrap font-sans">
                       {attempt.feedback.whyThisGetsMark}
                     </pre>
@@ -753,7 +753,7 @@ const PredictedResults = () => {
           )}
 
             {/* Action Buttons */}
-          <div className="flex justify-center space-x-6 mt-12 p-6 bg-gradient-to-r from-indigo-100/50 via-purple-100/30 to-pink-100/50 dark:from-indigo-950/20 dark:via-purple-950/15 dark:to-pink-950/20 rounded-lg border border-indigo-200/30 dark:border-indigo-700/20 shadow-lg">
+          <div className="flex justify-center space-x-6 mt-12">
             <Button 
               onClick={() => {
                 console.log('Retake button clicked for subject:', subjectId);
