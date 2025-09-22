@@ -20,33 +20,33 @@ export const PromotionalStrip = () => {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-[100] w-full bg-gradient-to-r from-green-600 to-green-500 text-white shadow-lg">
-      <div className="container mx-auto px-4 py-3">
+      <div className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 flex-1">
-            <span className="text-lg">🔥</span>
-            <span className="font-medium text-sm md:text-base">
+            <span className="text-sm">🔥</span>
+            <span className="font-medium text-xs md:text-sm">
               Premium is 50% off for a limited time — Upgrade Now!
             </span>
-            <span className="hidden md:inline-block bg-white/20 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium">
+            <span className="hidden md:inline-block bg-white/20 backdrop-blur-sm rounded-full px-2 py-0.5 text-xs font-medium">
               Ends Soon
             </span>
           </div>
           
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Button
               onClick={handleUpgradeClick}
               variant="secondary"
               size="sm"
-              className="bg-white text-green-600 hover:bg-white/90 font-medium"
+              className="bg-white text-green-600 hover:bg-white/90 font-medium text-xs px-3 py-1 h-auto"
             >
               Upgrade Now
             </Button>
             <button
               onClick={() => setIsVisible(false)}
-              className="p-1 hover:bg-white/10 rounded-full transition-colors"
+              className="p-0.5 hover:bg-white/10 rounded-full transition-colors"
               aria-label="Dismiss promotional banner"
             >
-              <X size={16} />
+              <X size={14} />
             </button>
           </div>
         </div>
