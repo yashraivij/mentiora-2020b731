@@ -167,18 +167,6 @@ const Practice = () => {
       return;
     }
     
-    // Block access to predicted exam topics for all geography subjects
-    if (subjectId?.includes('geography') && 
-        (topicId === 'predicted-exam-2026' || 
-         topic.name.toLowerCase().includes('predicted') ||
-         topic.name.toLowerCase().includes('2026') ||
-         topic.name.toLowerCase().includes('paper') ||
-         topic.name.toLowerCase().includes('exam'))) {
-      toast.error("This content is not available");
-      navigate(`/subject/${subjectId}`);
-      return;
-    }
-    
     // Try to load existing session first
     const sessionRestored = loadSessionState();
     
