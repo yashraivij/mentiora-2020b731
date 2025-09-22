@@ -175,7 +175,7 @@ const SubjectTopics = () => {
         <div className="bg-card rounded-lg p-6 mb-8">
           <h2 className="text-xl font-semibold mb-6 text-center">Learning Path</h2>
           <div className="relative overflow-x-auto min-h-[300px] bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-950/30 dark:to-purple-950/30 rounded-xl p-4">
-            <div className="relative h-[250px]" style={{ minWidth: `${(subject.topics.length + 1) * 220}px` }}>
+            <div className="relative h-[250px]" style={{ minWidth: `${subject.topics.length * 220}px` }}>
               {/* SVG for curved connecting lines */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
                 {subject.topics.map((_, index) => {
@@ -199,17 +199,6 @@ const SubjectTopics = () => {
                     />
                   );
                 })}
-                
-                {/* Line to final exam node */}
-                {subject.topics.length > 0 && (
-                  <path
-                    d={`M ${220 * (subject.topics.length - 1) + 110} ${(subject.topics.length - 1) % 2 === 0 ? 80 : 160} Q ${220 * subject.topics.length + 50} 120 ${220 * subject.topics.length + 110} 120`}
-                    stroke="url(#examGradient)"
-                    strokeWidth="5"
-                    fill="none"
-                    opacity="0.8"
-                  />
-                )}
                 
                 {/* Gradient definition for exam line */}
                 <defs>
@@ -290,36 +279,6 @@ const SubjectTopics = () => {
                   </div>
                 );
               })}
-              
-              {/* 2026 Exam Final Node */}
-              <div className="absolute" style={{ left: `${220 * subject.topics.length + 60}px`, top: '80px', zIndex: 10 }}>
-                <div className="flex flex-col items-center">
-                  {/* Special exam circle */}
-                  <div 
-                    className="w-24 h-24 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 hover:scale-110 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 border-4 border-yellow-400 shadow-2xl animate-pulse"
-                    onClick={() => navigate(`/predicted-exam/${subjectId}`)}
-                  >
-                    <span className="text-sm text-center leading-tight font-black">2026<br/>EXAM</span>
-                  </div>
-                  
-                  {/* Exam info */}
-                  <div className="mt-3 text-center max-w-[140px]">
-                    <h3 className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-                      Final Challenge
-                    </h3>
-                    <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs mb-2">
-                      Predicted Exam
-                    </Badge>
-                    <Button 
-                      size="sm" 
-                      className="text-xs px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-                      onClick={() => navigate(`/predicted-exam/${subjectId}`)}
-                    >
-                      Take Exam
-                    </Button>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
