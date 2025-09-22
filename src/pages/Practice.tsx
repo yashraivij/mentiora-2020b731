@@ -531,7 +531,7 @@ const Practice = () => {
   const currentAttempt = attempts.find(a => a.questionId === currentQuestion.id);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pt-12">
       {/* Header */}
       <header className="bg-card shadow-sm border-b border-border">
         <div className="container mx-auto px-4 py-4">
