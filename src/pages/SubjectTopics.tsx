@@ -81,23 +81,21 @@ const SubjectTopics = () => {
   ];
 
   const filteredTopics = subject.topics.filter(topic => {
-    // For all geography subjects (case-insensitive), be extra strict about filtering exam topics
+    // For all geography subjects (case-insensitive), completely remove all exam-related content
     if (subjectId?.toLowerCase().includes('geography')) {
-      // Remove any topic containing exam-related words (case-insensitive)
       const topicNameLower = topic.name.toLowerCase();
       const topicIdLower = topic.id.toLowerCase();
       
-      if (topicNameLower.includes('predicted') ||
-          topicNameLower.includes('2026') ||
-          topicNameLower.includes('paper') ||
-          topicNameLower.includes('exam') ||
-          topicIdLower.includes('predicted') ||
-          topicIdLower.includes('2026') ||
-          topicIdLower.includes('paper') ||
-          topicIdLower.includes('exam') ||
-          topic.id === 'predicted-exam-2026') {
+      // Block any topic with exam-related keywords
+      const examKeywords = ['predicted', '2026', 'paper', 'exam', 'test', 'assessment'];
+      const hasExamKeyword = examKeywords.some(keyword => 
+        topicNameLower.includes(keyword) || topicIdLower.includes(keyword)
+      );
+      
+      if (hasExamKeyword) {
         return false;
       }
+      
       // For the main geography subject, only show topics in the allowed list
       if (subjectId === 'geography') {
         return allowedGeographyTopics.includes(topic.name);
