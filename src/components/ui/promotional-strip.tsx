@@ -30,7 +30,10 @@ export const PromotionalStrip = () => {
             <span className="font-medium text-xs md:text-sm">
               Premium is 50% off for a limited time — Upgrade Now!
             </span>
-            <span className="hidden md:inline-block bg-white/20 backdrop-blur-sm rounded-full px-2 py-0.5 text-xs font-medium">
+            <span 
+              className="hidden md:inline-block bg-white/20 backdrop-blur-sm rounded-full px-2 py-0.5 text-xs font-medium cursor-pointer hover:bg-white/30 transition-colors"
+              onClick={handleUpgradeClick}
+            >
               Ends Soon
             </span>
           </div>
