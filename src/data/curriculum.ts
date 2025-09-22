@@ -17638,6 +17638,192 @@ export const curriculum: Subject[] = [
           ]
         },
         {
+          id: 'predicted-exam-2026',
+          name: 'Predicted Exam 2026',
+          questions: [
+            {
+              id: 'geo-pred-q1',
+              question: 'State one process of coastal erosion.',
+              marks: 1,
+              difficulty: 'easy',
+              modelAnswer: 'Hydraulic action',
+              markingCriteria: {
+                breakdown: [
+                  'Any one of: hydraulic action, abrasion/corrasion, attrition, chemical weathering (1 mark)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q2',
+              question: 'State the name of the global circulation cell found at the equator.',
+              marks: 1,
+              difficulty: 'easy',
+              modelAnswer: 'Hadley cell',
+              markingCriteria: {
+                breakdown: [
+                  'Hadley cell (1 mark)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q3',
+              question: 'Give two characteristics of a tropical cyclone.\n\n1. ................................................................................................................\n\n2. ................................................................................................................',
+              marks: 2,
+              difficulty: 'easy',
+              modelAnswer: '1. Low pressure system 2. Rotating winds around eye',
+              markingCriteria: {
+                breakdown: [
+                  'Any two characteristics such as: low pressure system, rotating winds, eye/eyewall, high wind speeds, heavy rainfall, seasonal occurrence (1 mark each)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q4',
+              question: 'Give two threats to tropical rainforests.\n\n1. ................................................................................................................\n\n2. ................................................................................................................',
+              marks: 2,
+              difficulty: 'easy',
+              modelAnswer: '1. Deforestation 2. Climate change',
+              markingCriteria: {
+                breakdown: [
+                  'Any two threats such as: deforestation, logging, agriculture, mining, climate change, urbanisation (1 mark each)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q5',
+              question: 'Explain how a waterfall is formed.',
+              marks: 4,
+              difficulty: 'medium',
+              modelAnswer: 'A waterfall forms where a river flows over bands of hard and soft rock. The soft rock erodes more quickly than the hard rock through processes like hydraulic action and abrasion. This creates a step in the river bed. As erosion continues, the step becomes higher, forming a waterfall. The plunge pool at the base deepens through continued erosion.',
+              markingCriteria: {
+                breakdown: [
+                  'Identification of hard and soft rock bands (1 mark)',
+                  'Explanation of differential erosion (1 mark)',
+                  'Formation of step in river bed (1 mark)',
+                  'Development into waterfall with plunge pool (1 mark)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q6',
+              question: 'Explain how global circulation creates areas of high and low pressure.',
+              marks: 4,
+              difficulty: 'medium',
+              modelAnswer: 'At the equator, warm air rises creating low pressure due to convection. This air moves towards the poles at high altitude. At around 30° latitude, the air cools and descends, creating high pressure areas. Air then moves along the surface back towards the equator, completing the circulation cell.',
+              markingCriteria: {
+                breakdown: [
+                  'Warm air rises at equator creating low pressure (1 mark)',
+                  'Air moves towards poles at high altitude (1 mark)',
+                  'Air descends at 30° creating high pressure (1 mark)',
+                  'Surface winds complete circulation (1 mark)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q7',
+              question: 'Assess the impacts of tropical cyclones on people and the environment.',
+              marks: 6,
+              difficulty: 'medium',
+              modelAnswer: 'Tropical cyclones have severe impacts on both people and environment. On people, they cause immediate threats through high winds destroying buildings and flooding causing displacement. Economic impacts include damage to infrastructure, loss of livelihoods, and high costs of rebuilding. Environmental impacts include coastal erosion, saltwater intrusion damaging freshwater supplies, and destruction of natural habitats like mangroves. However, cyclones can also bring positive impacts such as replenishing water supplies in drought areas.',
+              markingCriteria: {
+                breakdown: [
+                  'Social impacts on people (2 marks)',
+                  'Economic impacts (2 marks)', 
+                  'Environmental impacts (2 marks)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q8',
+              question: 'Assess the causes and impacts of climate change.',
+              marks: 6,
+              difficulty: 'medium',
+              modelAnswer: 'Climate change is caused by both natural and human factors. Human causes include greenhouse gas emissions from burning fossil fuels, deforestation reducing carbon absorption, and industrial processes. Natural causes include solar variation and volcanic eruptions. Impacts include rising sea levels threatening coastal areas, changing precipitation patterns affecting agriculture, extreme weather events becoming more frequent, and ecosystem disruption. These impacts disproportionately affect LICs who have contributed least to the problem.',
+              markingCriteria: {
+                breakdown: [
+                  'Human causes of climate change (2 marks)',
+                  'Natural causes (1 mark)',
+                  'Environmental and social impacts (3 marks)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q9',
+              question: 'Study Figure 1, which shows a tropical rainforest food web.\n\nEvaluate the importance of biodiversity in tropical rainforest ecosystems.',
+              marks: 8,
+              difficulty: 'hard',
+              modelAnswer: 'Biodiversity is crucial to tropical rainforest ecosystems for multiple interconnected reasons. High biodiversity creates complex food webs that provide stability - if one species declines, others can fill ecological niches. This interdependence means all organisms rely on each other for survival. Biodiversity supports nutrient cycling, with different species playing roles in decomposition and soil formation. Many species provide ecosystem services like pollination and seed dispersal. However, some argue that certain keystone species are more important than overall biodiversity numbers. Additionally, human needs may sometimes conflict with biodiversity conservation, requiring balanced management approaches.',
+              markingCriteria: {
+                breakdown: [
+                  'Explanation of ecosystem stability (2 marks)',
+                  'Role in nutrient cycling and ecosystem services (2 marks)',
+                  'Interdependence and food web complexity (2 marks)',
+                  'Evaluation of different viewpoints (2 marks)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q10',
+              question: 'Study Figure 2, which shows coastal management strategies at different locations.\n\nEvaluate the effectiveness of hard and soft engineering coastal management strategies.',
+              marks: 8,
+              difficulty: 'hard',
+              modelAnswer: 'Hard engineering strategies like sea walls and rock armour provide immediate, effective protection against coastal erosion and flooding. They offer long-term solutions that can protect valuable infrastructure and settlements. However, they are expensive to build and maintain, can disrupt natural coastal processes, and may increase erosion elsewhere along the coast. Soft engineering strategies like beach nourishment and dune restoration work with natural processes, providing sustainable long-term protection while maintaining ecosystem services. They can absorb wave energy effectively and provide recreational benefits. However, they require ongoing maintenance, may need large amounts of space, and can be less effective during extreme weather events. The most effective approach often combines both strategies based on local conditions and priorities.',
+              markingCriteria: {
+                breakdown: [
+                  'Advantages of hard engineering (2 marks)',
+                  'Disadvantages of hard engineering (2 marks)',
+                  'Advantages and disadvantages of soft engineering (2 marks)',
+                  'Evaluative conclusion about combined approaches (2 marks)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q11',
+              question: '"Ecosystem services are essential for human survival."\n\nUsing examples, evaluate this statement.',
+              marks: 9,
+              difficulty: 'hard',
+              modelAnswer: 'Ecosystem services are undoubtedly crucial for human survival and wellbeing. Provisioning services provide essential resources - forests supply timber and medicines, wetlands filter water, and agricultural ecosystems produce food. Regulating services are vital - forests absorb CO2 reducing climate change, wetlands prevent flooding, and insects provide pollination worth billions globally. Cultural services support human wellbeing through recreation and spiritual values. Supporting services like nutrient cycling underpin all other services. However, the statement could be challenged as humans have developed technology to replace some services - water treatment plants, artificial fertilizers, and indoor agriculture. Urban populations may feel disconnected from direct ecosystem dependence. Nevertheless, even with technology, the scale and cost of replacing ecosystem services would be enormous. Climate regulation and pollination, for example, cannot be easily substituted. The COVID-19 pandemic highlighted how ecosystem disruption can threaten human health. Overall, while technology provides some alternatives, ecosystem services remain fundamentally essential for sustainable human survival.',
+              markingCriteria: {
+                breakdown: [
+                  'Examples of different types of ecosystem services (3 marks)',
+                  'Argument supporting the statement (3 marks)',
+                  'Counter-arguments or limitations (2 marks)',
+                  'Evaluative conclusion (1 mark)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q12',
+              question: '"Climate change is the greatest threat facing the world today."\n\nEvaluate this statement.',
+              marks: 12,
+              difficulty: 'hard',
+              modelAnswer: 'Climate change represents an unprecedented global challenge that affects every aspect of human and environmental systems, supporting the view that it is the greatest threat today. The scale is truly global - rising sea levels threaten small island states and coastal cities, changing precipitation patterns affect food security, and extreme weather events are becoming more frequent and severe. The impacts are long-term and potentially irreversible, with tipping points that could trigger runaway climate change. Economic costs are enormous, with infrastructure damage, agricultural losses, and health impacts already costing billions annually. Climate change disproportionately affects the world\'s poorest populations who have contributed least to the problem, creating issues of climate justice.\n\nHowever, other threats could be considered equally significant. Nuclear war remains an existential threat that could end civilization rapidly. Biodiversity loss is occurring faster than climate change and undermines ecosystem services essential for human survival. Pandemics, as COVID-19 demonstrated, can rapidly disrupt global systems and economies. Poverty and inequality affect billions immediately, while climate impacts are often longer-term. Technological risks from artificial intelligence or biotechnology could pose new existential threats.\n\nNevertheless, climate change is unique in its combination of scale, timeframe, and irreversibility. It acts as a threat multiplier, worsening conflicts, poverty, and health issues. Unlike other threats, significant climate change is already locked in due to lag times in the climate system. The window for limiting warming to safe levels is rapidly closing. While other threats are serious, climate change\'s global reach and potential for triggering cascading failures across multiple systems make it arguably the greatest threat facing humanity today.',
+              markingCriteria: {
+                breakdown: [
+                  'Arguments supporting climate change as greatest threat (4 marks)',
+                  'Counter-arguments presenting other significant threats (4 marks)',
+                  'Use of examples and evidence (2 marks)',
+                  'Evaluative conclusion with justified reasoning (2 marks)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            }
+          ]
+        }
+    ]
+  },
+        {
           id: 'sustainable-management',
           name: 'Sustainable Management of Ecosystems',
           questions: [
@@ -17779,6 +17965,190 @@ export const curriculum: Subject[] = [
                 ]
               },
               specReference: 'Edexcel Geography A 13.5'
+            }
+          ]
+        },
+        {
+          id: 'predicted-exam-2026',
+          name: 'Predicted Exam 2026',
+          questions: [
+            {
+              id: 'geo-pred-q1',
+              question: 'State one process of coastal erosion.',
+              marks: 1,
+              difficulty: 'easy',
+              modelAnswer: 'Hydraulic action',
+              markingCriteria: {
+                breakdown: [
+                  'Any one of: hydraulic action, abrasion/corrasion, attrition, chemical weathering (1 mark)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q2',
+              question: 'State the name of the global circulation cell found at the equator.',
+              marks: 1,
+              difficulty: 'easy',
+              modelAnswer: 'Hadley cell',
+              markingCriteria: {
+                breakdown: [
+                  'Hadley cell (1 mark)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q3',
+              question: 'Give two characteristics of a tropical cyclone.\n\n1. ................................................................................................................\n\n2. ................................................................................................................',
+              marks: 2,
+              difficulty: 'easy',
+              modelAnswer: '1. Low pressure system 2. Rotating winds around eye',
+              markingCriteria: {
+                breakdown: [
+                  'Any two characteristics such as: low pressure system, rotating winds, eye/eyewall, high wind speeds, heavy rainfall, seasonal occurrence (1 mark each)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q4',
+              question: 'Give two threats to tropical rainforests.\n\n1. ................................................................................................................\n\n2. ................................................................................................................',
+              marks: 2,
+              difficulty: 'easy',
+              modelAnswer: '1. Deforestation 2. Climate change',
+              markingCriteria: {
+                breakdown: [
+                  'Any two threats such as: deforestation, logging, agriculture, mining, climate change, urbanisation (1 mark each)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q5',
+              question: 'Explain how a waterfall is formed.',
+              marks: 4,
+              difficulty: 'medium',
+              modelAnswer: 'A waterfall forms where a river flows over bands of hard and soft rock. The soft rock erodes more quickly than the hard rock through processes like hydraulic action and abrasion. This creates a step in the river bed. As erosion continues, the step becomes higher, forming a waterfall. The plunge pool at the base deepens through continued erosion.',
+              markingCriteria: {
+                breakdown: [
+                  'Identification of hard and soft rock bands (1 mark)',
+                  'Explanation of differential erosion (1 mark)',
+                  'Formation of step in river bed (1 mark)',
+                  'Development into waterfall with plunge pool (1 mark)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q6',
+              question: 'Explain how global circulation creates areas of high and low pressure.',
+              marks: 4,
+              difficulty: 'medium',
+              modelAnswer: 'At the equator, warm air rises creating low pressure due to convection. This air moves towards the poles at high altitude. At around 30° latitude, the air cools and descends, creating high pressure areas. Air then moves along the surface back towards the equator, completing the circulation cell.',
+              markingCriteria: {
+                breakdown: [
+                  'Warm air rises at equator creating low pressure (1 mark)',
+                  'Air moves towards poles at high altitude (1 mark)',
+                  'Air descends at 30° creating high pressure (1 mark)',
+                  'Surface winds complete circulation (1 mark)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q7',
+              question: 'Assess the impacts of tropical cyclones on people and the environment.',
+              marks: 6,
+              difficulty: 'medium',
+              modelAnswer: 'Tropical cyclones have severe impacts on both people and environment. On people, they cause immediate threats through high winds destroying buildings and flooding causing displacement. Economic impacts include damage to infrastructure, loss of livelihoods, and high costs of rebuilding. Environmental impacts include coastal erosion, saltwater intrusion damaging freshwater supplies, and destruction of natural habitats like mangroves. However, cyclones can also bring positive impacts such as replenishing water supplies in drought areas.',
+              markingCriteria: {
+                breakdown: [
+                  'Social impacts on people (2 marks)',
+                  'Economic impacts (2 marks)', 
+                  'Environmental impacts (2 marks)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q8',
+              question: 'Assess the causes and impacts of climate change.',
+              marks: 6,
+              difficulty: 'medium',
+              modelAnswer: 'Climate change is caused by both natural and human factors. Human causes include greenhouse gas emissions from burning fossil fuels, deforestation reducing carbon absorption, and industrial processes. Natural causes include solar variation and volcanic eruptions. Impacts include rising sea levels threatening coastal areas, changing precipitation patterns affecting agriculture, extreme weather events becoming more frequent, and ecosystem disruption. These impacts disproportionately affect LICs who have contributed least to the problem.',
+              markingCriteria: {
+                breakdown: [
+                  'Human causes of climate change (2 marks)',
+                  'Natural causes (1 mark)',
+                  'Environmental and social impacts (3 marks)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q9',
+              question: 'Study Figure 1, which shows a tropical rainforest food web.\n\nEvaluate the importance of biodiversity in tropical rainforest ecosystems.',
+              marks: 8,
+              difficulty: 'hard',
+              modelAnswer: 'Biodiversity is crucial to tropical rainforest ecosystems for multiple interconnected reasons. High biodiversity creates complex food webs that provide stability - if one species declines, others can fill ecological niches. This interdependence means all organisms rely on each other for survival. Biodiversity supports nutrient cycling, with different species playing roles in decomposition and soil formation. Many species provide ecosystem services like pollination and seed dispersal. However, some argue that certain keystone species are more important than overall biodiversity numbers. Additionally, human needs may sometimes conflict with biodiversity conservation, requiring balanced management approaches.',
+              markingCriteria: {
+                breakdown: [
+                  'Explanation of ecosystem stability (2 marks)',
+                  'Role in nutrient cycling and ecosystem services (2 marks)',
+                  'Interdependence and food web complexity (2 marks)',
+                  'Evaluation of different viewpoints (2 marks)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q10',
+              question: 'Study Figure 2, which shows coastal management strategies at different locations.\n\nEvaluate the effectiveness of hard and soft engineering coastal management strategies.',
+              marks: 8,
+              difficulty: 'hard',
+              modelAnswer: 'Hard engineering strategies like sea walls and rock armour provide immediate, effective protection against coastal erosion and flooding. They offer long-term solutions that can protect valuable infrastructure and settlements. However, they are expensive to build and maintain, can disrupt natural coastal processes, and may increase erosion elsewhere along the coast. Soft engineering strategies like beach nourishment and dune restoration work with natural processes, providing sustainable long-term protection while maintaining ecosystem services. They can absorb wave energy effectively and provide recreational benefits. However, they require ongoing maintenance, may need large amounts of space, and can be less effective during extreme weather events. The most effective approach often combines both strategies based on local conditions and priorities.',
+              markingCriteria: {
+                breakdown: [
+                  'Advantages of hard engineering (2 marks)',
+                  'Disadvantages of hard engineering (2 marks)',
+                  'Advantages and disadvantages of soft engineering (2 marks)',
+                  'Evaluative conclusion about combined approaches (2 marks)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q11',
+              question: '"Ecosystem services are essential for human survival."\n\nUsing examples, evaluate this statement.',
+              marks: 9,
+              difficulty: 'hard',
+              modelAnswer: 'Ecosystem services are undoubtedly crucial for human survival and wellbeing. Provisioning services provide essential resources - forests supply timber and medicines, wetlands filter water, and agricultural ecosystems produce food. Regulating services are vital - forests absorb CO2 reducing climate change, wetlands prevent flooding, and insects provide pollination worth billions globally. Cultural services support human wellbeing through recreation and spiritual values. Supporting services like nutrient cycling underpin all other services. However, the statement could be challenged as humans have developed technology to replace some services - water treatment plants, artificial fertilizers, and indoor agriculture. Urban populations may feel disconnected from direct ecosystem dependence. Nevertheless, even with technology, the scale and cost of replacing ecosystem services would be enormous. Climate regulation and pollination, for example, cannot be easily substituted. The COVID-19 pandemic highlighted how ecosystem disruption can threaten human health. Overall, while technology provides some alternatives, ecosystem services remain fundamentally essential for sustainable human survival.',
+              markingCriteria: {
+                breakdown: [
+                  'Examples of different types of ecosystem services (3 marks)',
+                  'Argument supporting the statement (3 marks)',
+                  'Counter-arguments or limitations (2 marks)',
+                  'Evaluative conclusion (1 mark)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
+            },
+            {
+              id: 'geo-pred-q12',
+              question: '"Climate change is the greatest threat facing the world today."\n\nEvaluate this statement.',
+              marks: 12,
+              difficulty: 'hard',
+              modelAnswer: 'Climate change represents an unprecedented global challenge that affects every aspect of human and environmental systems, supporting the view that it is the greatest threat today. The scale is truly global - rising sea levels threaten small island states and coastal cities, changing precipitation patterns affect food security, and extreme weather events are becoming more frequent and severe. The impacts are long-term and potentially irreversible, with tipping points that could trigger runaway climate change. Economic costs are enormous, with infrastructure damage, agricultural losses, and health impacts already costing billions annually. Climate change disproportionately affects the world\'s poorest populations who have contributed least to the problem, creating issues of climate justice.\n\nHowever, other threats could be considered equally significant. Nuclear war remains an existential threat that could end civilization rapidly. Biodiversity loss is occurring faster than climate change and undermines ecosystem services essential for human survival. Pandemics, as COVID-19 demonstrated, can rapidly disrupt global systems and economies. Poverty and inequality affect billions immediately, while climate impacts are often longer-term. Technological risks from artificial intelligence or biotechnology could pose new existential threats.\n\nNevertheless, climate change is unique in its combination of scale, timeframe, and irreversibility. It acts as a threat multiplier, worsening conflicts, poverty, and health issues. Unlike other threats, significant climate change is already locked in due to lag times in the climate system. The window for limiting warming to safe levels is rapidly closing. While other threats are serious, climate change\'s global reach and potential for triggering cascading failures across multiple systems make it arguably the greatest threat facing humanity today.',
+              markingCriteria: {
+                breakdown: [
+                  'Arguments supporting climate change as greatest threat (4 marks)',
+                  'Counter-arguments presenting other significant threats (4 marks)',
+                  'Use of examples and evidence (2 marks)',
+                  'Evaluative conclusion with justified reasoning (2 marks)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1'
             }
           ]
         }
