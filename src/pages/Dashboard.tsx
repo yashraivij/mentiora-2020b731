@@ -2397,8 +2397,8 @@ const Dashboard = () => {
           )}
         </div>
 
-        {/* Right Sidebar - Premium & Stats - Hidden on mobile */}
-        <div className={`${isMobile ? 'hidden' : 'w-80'} bg-muted/30 p-6 space-y-6`}>
+        {/* Right Sidebar - Premium & Stats - Hidden on mobile and tablet */}
+        <div className={`hidden lg:block w-80 bg-muted/30 p-6 space-y-6`}>
           {/* Premium Card */}
           {isPremium ? (
             <Card className="border-0 bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-lg">
