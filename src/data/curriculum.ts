@@ -16711,18 +16711,18 @@ export const curriculum: Subject[] = [
               specReference: 'Edexcel Geography A Paper 1 Q1'
             },
             {
-              id: 'exam-q2a',
-              question: 'Which of the following is an erosional landform?\nA. Spit\nB. Beach\nC. Wave-cut platform\nD. Sand dune',
+              id: 'exam-q2a-coastal',
+              question: 'Answer TWO questions from this section (choose 2 out of 3 topics)\n\nQuestion 2: Coastal Landscapes and Processes\n\nWhich of the following is an erosional landform?\nA. Spit\nB. Beach\nC. Wave-cut platform\nD. Sand dune',
               marks: 1,
               difficulty: 'easy',
               modelAnswer: 'C. Wave-cut platform',
               markingCriteria: {
                 breakdown: ['Correct identification of wave-cut platform as erosional landform (1 mark)']
               },
-              specReference: 'Edexcel Geography A Paper 1 Q2'
+              specReference: 'Edexcel Geography A Paper 1 Q2 Coastal'
             },
             {
-              id: 'exam-q2b',
+              id: 'exam-q2b-coastal',
               question: 'State two physical processes that lead to the formation of headlands and bays.',
               marks: 2,
               difficulty: 'easy',
@@ -16730,10 +16730,10 @@ export const curriculum: Subject[] = [
               markingCriteria: {
                 breakdown: ['One process correctly identified (1 mark)', 'Second process correctly identified (1 mark)']
               },
-              specReference: 'Edexcel Geography A Paper 1 Q2'
+              specReference: 'Edexcel Geography A Paper 1 Q2 Coastal'
             },
             {
-              id: 'exam-q2c',
+              id: 'exam-q2c-coastal',
               question: 'Explain how longshore drift leads to the formation of a spit.',
               marks: 4,
               difficulty: 'medium',
@@ -16746,10 +16746,10 @@ export const curriculum: Subject[] = [
                   'Formation of spit through continued deposition (1 mark)'
                 ]
               },
-              specReference: 'Edexcel Geography A Paper 1 Q2'
+              specReference: 'Edexcel Geography A Paper 1 Q2 Coastal'
             },
             {
-              id: 'exam-q2d',
+              id: 'exam-q2d-coastal',
               question: 'Assess the costs and benefits of hard engineering strategies to protect the coast.',
               marks: 8,
               difficulty: 'hard',
@@ -16761,21 +16761,21 @@ export const curriculum: Subject[] = [
                   'Assessment and evaluation of overall effectiveness (2 marks)'
                 ]
               },
-              specReference: 'Edexcel Geography A Paper 1 Q2'
+              specReference: 'Edexcel Geography A Paper 1 Q2 Coastal'
             },
             {
-              id: 'exam-q3a',
-              question: 'Name one river landform created by erosion and one created by deposition.',
+              id: 'exam-q3a-rivers',
+              question: 'Question 3: River Landscapes and Processes\n\nName one river landform created by erosion and one created by deposition.',
               marks: 2,
               difficulty: 'easy',
               modelAnswer: 'Erosion: Waterfall (1 mark). Deposition: Levee (1 mark).',
               markingCriteria: {
                 breakdown: ['One erosional landform correctly identified (1 mark)', 'One depositional landform correctly identified (1 mark)']
               },
-              specReference: 'Edexcel Geography A Paper 1 Q3'
+              specReference: 'Edexcel Geography A Paper 1 Q3 Rivers'
             },
             {
-              id: 'exam-q3b',
+              id: 'exam-q3b-rivers',
               question: 'Explain one physical cause of river flooding.',
               marks: 4,
               difficulty: 'medium',
@@ -16788,10 +16788,10 @@ export const curriculum: Subject[] = [
                   'Connection to flooding (1 mark)'
                 ]
               },
-              specReference: 'Edexcel Geography A Paper 1 Q3'
+              specReference: 'Edexcel Geography A Paper 1 Q3 Rivers'
             },
             {
-              id: 'exam-q3c',
+              id: 'exam-q3c-rivers',
               question: 'Explain how human activity has increased flood risk in the UK.',
               marks: 6,
               difficulty: 'medium',
@@ -16804,37 +16804,35 @@ export const curriculum: Subject[] = [
                   'Climate change/floodplain development (2 marks)'
                 ]
               },
-              specReference: 'Edexcel Geography A Paper 1 Q3'
+              specReference: 'Edexcel Geography A Paper 1 Q3 Rivers'
             },
             {
-              id: 'exam-q3d',
+              id: 'exam-q3d-rivers',
               question: 'Using a UK river basin case study, evaluate the effectiveness of flood management strategies.',
-              marks: 8,
+              marks: 3,
               difficulty: 'hard',
-              modelAnswer: 'River Thames case study: Hard engineering like the Thames Barrier has been highly effective in protecting London from storm surges and high tides, preventing billions in potential damage. However, these strategies are expensive to maintain and may increase flood risk upstream. Soft engineering approaches like the Jubilee River flood relief channel work with natural processes and provide wildlife habitats. Urban SuDS and green spaces help manage surface water. The integrated approach combining multiple strategies has been most effective, though climate change presents ongoing challenges requiring adaptive management.',
+              modelAnswer: 'River Thames case study: Hard engineering like the Thames Barrier has been highly effective in protecting London from storm surges. Soft engineering approaches like the Jubilee River flood relief channel work with natural processes. The integrated approach combining multiple strategies has been most effective.',
               markingCriteria: {
                 breakdown: [
                   'Named UK river basin case study (1 mark)',
-                  'Evaluation of hard engineering effectiveness (3 marks)',
-                  'Evaluation of soft engineering effectiveness (2 marks)',
-                  'Overall assessment and conclusion (2 marks)'
+                  'Evaluation of strategies (2 marks)'
                 ]
               },
-              specReference: 'Edexcel Geography A Paper 1 Q3'
+              specReference: 'Edexcel Geography A Paper 1 Q3 Rivers'
             },
             {
-              id: 'exam-q4a',
-              question: 'Which of the following is a glacial landform created by erosion?\nA. Drumlin\nB. Arete\nC. Moraine\nD. Outwash plain',
+              id: 'exam-q4a-glaciated',
+              question: 'Question 4: Glaciated Upland Landscapes and Processes\n\nWhich of the following is a glacial landform created by erosion?\nA. Drumlin\nB. Arete\nC. Moraine\nD. Outwash plain',
               marks: 1,
               difficulty: 'easy',
               modelAnswer: 'B. Arete',
               markingCriteria: {
                 breakdown: ['Correct identification of arete as erosional glacial landform (1 mark)']
               },
-              specReference: 'Edexcel Geography A Paper 1 Q4'
+              specReference: 'Edexcel Geography A Paper 1 Q4 Glaciated'
             },
             {
-              id: 'exam-q4b',
+              id: 'exam-q4b-glaciated',
               question: 'State two physical processes that lead to glacial erosion.',
               marks: 2,
               difficulty: 'easy',
@@ -16842,10 +16840,10 @@ export const curriculum: Subject[] = [
               markingCriteria: {
                 breakdown: ['One glacial erosion process correctly identified (1 mark)', 'Second glacial erosion process correctly identified (1 mark)']
               },
-              specReference: 'Edexcel Geography A Paper 1 Q4'
+              specReference: 'Edexcel Geography A Paper 1 Q4 Glaciated'
             },
             {
-              id: 'exam-q4c',
+              id: 'exam-q4c-glaciated',
               question: 'Explain how corries are formed by glacial processes.',
               marks: 4,
               difficulty: 'medium',
@@ -16858,10 +16856,10 @@ export const curriculum: Subject[] = [
                   'Formation of final corrie shape (1 mark)'
                 ]
               },
-              specReference: 'Edexcel Geography A Paper 1 Q4'
+              specReference: 'Edexcel Geography A Paper 1 Q4 Glaciated'
             },
             {
-              id: 'exam-q4d',
+              id: 'exam-q4d-glaciated',
               question: 'Assess the impacts of tourism in glaciated upland areas of the UK.',
               marks: 8,
               difficulty: 'hard',
@@ -16874,11 +16872,11 @@ export const curriculum: Subject[] = [
                   'Assessment and evaluation (1 mark)'
                 ]
               },
-              specReference: 'Edexcel Geography A Paper 1 Q4'
+              specReference: 'Edexcel Geography A Paper 1 Q4 Glaciated'
             },
             {
               id: 'exam-q5a',
-              question: 'Which one of the following describes the global circulation system?\nA. The movement of tectonic plates\nB. The transfer of heat by winds and pressure belts\nC. The cycle of evaporation and precipitation\nD. The greenhouse effect',
+              question: 'Section B: Weather Hazards and Climate Change\n\nWhich one of the following describes the global circulation system?\nA. The movement of tectonic plates\nB. The transfer of heat by winds and pressure belts\nC. The cycle of evaporation and precipitation\nD. The greenhouse effect',
               marks: 1,
               difficulty: 'easy',
               modelAnswer: 'B. The transfer of heat by winds and pressure belts',
@@ -16946,7 +16944,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q6a',
-              question: 'Which of the following is a characteristic of a tropical rainforest?\nA. Seasonal rainfall\nB. Nutrient-rich soil\nC. Emergent trees\nD. Cold winters',
+              question: 'Section C: Ecosystems, Biodiversity and Management\n\nWhich of the following is a characteristic of a tropical rainforest?\nA. Seasonal rainfall\nB. Nutrient-rich soil\nC. Emergent trees\nD. Cold winters',
               marks: 1,
               difficulty: 'easy',
               modelAnswer: 'C. Emergent trees',
