@@ -16800,6 +16800,1329 @@ export const curriculum: Subject[] = [
           }
         ]
       },
+      {
+        id: 'tropical-cyclones',
+        name: 'Tropical Cyclones',
+        questions: [
+          {
+            id: 'cyclone-q1',
+            question: 'At what sea temperature do tropical cyclones form?\nA. 22°C\nB. 25°C\nC. 27°C\nD. 30°C',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'C. 27°C',
+            markingCriteria: {
+              breakdown: ['Correct identification of 27°C threshold (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 2.2'
+          },
+          {
+            id: 'cyclone-q2',
+            question: 'State two primary effects of tropical cyclones.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Strong winds up to 200+ km/h (1 mark) and heavy rainfall causing flooding (1 mark).',
+            markingCriteria: {
+              breakdown: ['One primary effect correctly identified (1 mark)', 'Second primary effect correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 2.2'
+          },
+          {
+            id: 'cyclone-q3',
+            question: 'Explain how monitoring and prediction can reduce the impacts of tropical cyclones.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Satellite monitoring tracks storm development and movement, providing early warning. Weather stations collect real-time data on wind speed and pressure. Computer models predict storm paths and intensity. Early warnings allow evacuation of vulnerable areas and preparation of emergency services.',
+            markingCriteria: {
+              breakdown: [
+                'Satellite monitoring role (1 mark)',
+                'Data collection methods (1 mark)',
+                'Prediction modeling (1 mark)',
+                'Early warning benefits (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.2'
+          },
+          {
+            id: 'cyclone-q4',
+            question: 'Assess the impacts of a named tropical cyclone in an LIC/NEE.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Cyclone Nargis (Myanmar, 2008): 140,000+ deaths due to poor warning systems and vulnerable housing. 2.4 million people affected, many in poverty. Agricultural areas flooded, destroying rice crops. Limited infrastructure hampered rescue efforts. International aid was initially restricted by government. Long-term recovery was slow due to limited resources and political instability.',
+            markingCriteria: {
+              breakdown: [
+                'Named cyclone and location (1 mark)',
+                'Social impacts detailed (2 marks)',
+                'Economic impacts explained (1 mark)',
+                'Recovery challenges (1 mark)',
+                'Assessment of severity (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.2'
+          },
+          {
+            id: 'cyclone-q5',
+            question: 'Evaluate the effectiveness of cyclone management strategies in an HIC.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'USA (Hurricane Katrina, 2005): Prediction systems provided accurate forecasts, but evacuation was incomplete due to poverty and lack of transport. Engineering defenses like levees failed catastrophically. Emergency response was slow and poorly coordinated. However, building codes in Florida have improved storm resistance. Early warning systems are now more effective. FEMA has reformed its disaster response. Storm surge barriers protect some areas effectively. Overall, technical capabilities are high but social vulnerabilities remain, especially for poor communities.',
+            markingCriteria: {
+              breakdown: [
+                'Named HIC case study (1 mark)',
+                'Prediction and warning evaluation (2 marks)',
+                'Engineering defense evaluation (2 marks)',
+                'Emergency response assessment (2 marks)',
+                'Overall effectiveness judgment (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.2'
+          },
+          {
+            id: 'cyclone-q6',
+            question: 'Which of the following is NOT a condition for tropical cyclone formation?\nA. Warm ocean water\nB. Low wind shear\nC. High pressure system\nD. Coriolis effect',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'C. High pressure system',
+            markingCriteria: {
+              breakdown: ['Correct identification that high pressure prevents formation (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 2.2'
+          },
+          {
+            id: 'cyclone-q7',
+            question: 'State two secondary effects of tropical cyclones.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Disease outbreaks from contaminated water (1 mark) and unemployment from business closure (1 mark).',
+            markingCriteria: {
+              breakdown: ['One secondary effect correctly identified (1 mark)', 'Second secondary effect correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 2.2'
+          },
+          {
+            id: 'cyclone-q8',
+            question: 'Explain why tropical cyclones lose strength when they move over land.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Land surfaces are cooler than ocean water, removing the heat energy source. Increased friction from land features slows wind speeds. No moisture supply from ocean means the storm cannot maintain its structure. Mountains and hills disrupt the circulation pattern.',
+            markingCriteria: {
+              breakdown: [
+                'Loss of heat energy source (1 mark)',
+                'Increased friction effects (1 mark)',
+                'Loss of moisture supply (1 mark)',
+                'Terrain disruption (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.2'
+          },
+          {
+            id: 'cyclone-q9',
+            question: 'Describe the structure of a tropical cyclone.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The eye is a calm central area with clear skies and light winds. The eye wall surrounds the eye with the strongest winds and heaviest rainfall. Spiral bands of clouds extend outward from the eye wall. The whole system rotates around the low pressure center.',
+            markingCriteria: {
+              breakdown: [
+                'Eye characteristics (1 mark)',
+                'Eye wall description (1 mark)',
+                'Spiral bands (1 mark)',
+                'Overall rotation pattern (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.2'
+          },
+          {
+            id: 'cyclone-q10',
+            question: 'Assess the factors that determine tropical cyclone intensity.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Sea surface temperature is crucial - warmer water provides more energy for intensification. Wind shear can weaken storms by disrupting their structure. Atmospheric pressure differences drive the circulation - lower pressure allows stronger development. Ocean depth affects how quickly surface water cools. Upper-level atmospheric conditions either support or inhibit development. Climate patterns like El Niño influence cyclone seasons.',
+            markingCriteria: {
+              breakdown: [
+                'Sea surface temperature role (2 marks)',
+                'Wind shear effects (1 mark)',
+                'Pressure and atmospheric factors (2 marks)',
+                'Climate pattern influences (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.2'
+          }
+        ]
+      },
+      {
+        id: 'extreme-weather-uk',
+        name: 'Extreme Weather in the UK',
+        questions: [
+          {
+            id: 'extreme-q1',
+            question: 'Which of the following is an example of an extreme weather event in the UK?\nA. Daily rainfall\nB. Summer heatwave\nC. Light breeze\nD. Morning frost',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'B. Summer heatwave',
+            markingCriteria: {
+              breakdown: ['Correct identification of heatwave as extreme weather (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 2.3'
+          },
+          {
+            id: 'extreme-q2',
+            question: 'State two causes of extreme weather in the UK.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Climate change increasing temperature extremes (1 mark) and changes to the jet stream position (1 mark).',
+            markingCriteria: {
+              breakdown: ['One cause correctly identified (1 mark)', 'Second cause correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 2.3'
+          },
+          {
+            id: 'extreme-q3',
+            question: 'Explain how human activity can increase the risk of flooding in the UK.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Urbanization increases impermeable surfaces, reducing infiltration and increasing surface runoff. Deforestation reduces interception and increases runoff speeds. Building on floodplains puts more people and property at risk. Climate change from human activities increases extreme rainfall frequency.',
+            markingCriteria: {
+              breakdown: [
+                'Urbanization impacts (1 mark)',
+                'Deforestation effects (1 mark)',
+                'Floodplain development (1 mark)',
+                'Climate change link (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.3'
+          },
+          {
+            id: 'extreme-q4',
+            question: 'Assess the environmental impacts of a UK storm or flood event.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Storm Desmond (2015): Positive impacts included wetland creation providing new habitats and soil deposition enriching farmland. Negative impacts included soil erosion removing fertile topsoil, water pollution from sewage overflow, and habitat destruction in woodlands. River channel changes altered ecosystems permanently. Some wildlife benefited from new wetland areas while others lost established territories.',
+            markingCriteria: {
+              breakdown: [
+                'Named UK event (1 mark)',
+                'Positive environmental impacts (2 marks)',
+                'Negative environmental impacts (2 marks)',
+                'Assessment of overall impact (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.3'
+          },
+          {
+            id: 'extreme-q5',
+            question: 'Evaluate the responses to an extreme weather event in the UK.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Beast from the East (2018): Immediate responses included gritting roads and opening emergency shelters, which helped maintain transport links and protected vulnerable people. However, many schools and businesses closed, causing economic disruption. Long-term responses included reviewing winter preparedness and infrastructure resilience. The Met Office provided effective warnings, but some areas were still caught unprepared. Social media helped coordinate community responses. Overall, responses were generally effective but highlighted the need for better long-term adaptation to extreme weather.',
+            markingCriteria: {
+              breakdown: [
+                'Named UK extreme weather event (1 mark)',
+                'Immediate response evaluation (3 marks)',
+                'Long-term response assessment (2 marks)',
+                'Effectiveness of warnings/preparation (2 marks)',
+                'Overall evaluation and conclusion (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.3'
+          },
+          {
+            id: 'extreme-q6',
+            question: 'What is the main cause of urban heat islands in the UK?\nA. Industrial pollution\nB. Concrete and tarmac surfaces\nC. Car exhausts\nD. Air conditioning',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'B. Concrete and tarmac surfaces',
+            markingCriteria: {
+              breakdown: ['Correct identification of surface materials as main cause (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 2.3'
+          },
+          {
+            id: 'extreme-q7',
+            question: 'State two impacts of the UK summer heatwave of 2018.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Increased hospital admissions for heat-related illness (1 mark) and agricultural drought affecting crop yields (1 mark).',
+            markingCriteria: {
+              breakdown: ['One impact correctly identified (1 mark)', 'Second impact correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 2.3'
+          },
+          {
+            id: 'extreme-q8',
+            question: 'Explain how the jet stream affects UK weather patterns.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The jet stream is a fast-moving air current in the upper atmosphere that guides weather systems. When it moves south, it brings cold Arctic air to the UK. When it moves north, warm tropical air reaches the UK. A meandering jet stream can cause weather patterns to persist, leading to extended periods of hot, cold, wet, or dry conditions.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of jet stream (1 mark)',
+                'Effect of southward movement (1 mark)',
+                'Effect of northward movement (1 mark)',
+                'Meandering effects (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.3'
+          },
+          {
+            id: 'extreme-q9',
+            question: 'Describe the social impacts of extreme winter weather in the UK.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Transport disruption prevents people getting to work and school, affecting daily routines. Elderly and vulnerable people face increased health risks from cold temperatures. Energy costs increase as people heat homes more. Community spirit often improves as neighbors help each other during emergencies.',
+            markingCriteria: {
+              breakdown: [
+                'Transport disruption impacts (1 mark)',
+                'Health impacts on vulnerable groups (1 mark)',
+                'Economic impacts on households (1 mark)',
+                'Community/social cohesion effects (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.3'
+          },
+          {
+            id: 'extreme-q10',
+            question: 'Assess the effectiveness of UK early warning systems for extreme weather.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The Met Office provides color-coded weather warnings that effectively communicate risk levels to the public. Flood warnings from the Environment Agency help communities prepare and evacuate. Mobile phone alerts reach most people quickly. However, warnings sometimes lack specific local detail, and public response varies. Some people ignore warnings while others over-react. Integration between agencies has improved coordination and effectiveness.',
+            markingCriteria: {
+              breakdown: [
+                'Met Office warning system (2 marks)',
+                'Flood warning effectiveness (1 mark)',
+                'Communication methods (1 mark)',
+                'Limitations and public response (1 mark)',
+                'Overall assessment (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.3'
+          }
+        ]
+      },
+      {
+        id: 'climate-change',
+        name: 'Climate Change',
+        questions: [
+          {
+            id: 'climate-q1',
+            question: 'Which greenhouse gas is most responsible for global warming?\nA. Methane\nB. Carbon dioxide\nC. Nitrous oxide\nD. Water vapour',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'B. Carbon dioxide',
+            markingCriteria: {
+              breakdown: ['Correct identification of carbon dioxide (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 2.4'
+          },
+          {
+            id: 'climate-q2',
+            question: 'State two pieces of evidence that show the climate is changing.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Rising global temperatures (1 mark) and melting ice sheets/glaciers (1 mark).',
+            markingCriteria: {
+              breakdown: ['One piece of evidence correctly identified (1 mark)', 'Second piece of evidence correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 2.4'
+          },
+          {
+            id: 'climate-q3',
+            question: 'Explain one natural cause and one human cause of climate change.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Natural: Solar output variations affect the amount of energy reaching Earth, causing temperature changes over long periods. Human: Burning fossil fuels releases carbon dioxide, which traps heat in the atmosphere through the greenhouse effect.',
+            markingCriteria: {
+              breakdown: [
+                'Natural cause explained (2 marks)',
+                'Human cause explained (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.4'
+          },
+          {
+            id: 'climate-q4',
+            question: 'Assess the impacts of climate change on people in LICs.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Agriculture: Changed rainfall patterns and higher temperatures reduce crop yields, threatening food security for subsistence farmers. Water: Glacial melt and altered precipitation affect water supplies, while droughts become more common. Health: Heat stress and vector-borne diseases increase. Migration: Environmental refugees flee from areas affected by sea level rise and desertification. Limited adaptation capacity due to poverty makes impacts more severe.',
+            markingCriteria: {
+              breakdown: [
+                'Agricultural impacts explained (2 marks)',
+                'Water supply impacts (1 mark)',
+                'Health and migration impacts (2 marks)',
+                'Assessment of vulnerability (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.4'
+          },
+          {
+            id: 'climate-q5',
+            question: 'Evaluate how effective international agreements have been in tackling climate change.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'The Paris Agreement (2015) achieved unprecedented global participation with 195 countries committing to limit warming to 2°C. It allows national flexibility through NDCs. However, current commitments are insufficient to meet targets, and enforcement is weak. The Kyoto Protocol had limited success as major emitters like the USA withdrew. Carbon trading mechanisms have had mixed results. International funding for LIC adaptation remains inadequate. Progress is slow compared to the urgency of the problem, but agreements have raised awareness and created frameworks for future action.',
+            markingCriteria: {
+              breakdown: [
+                'Understanding of international agreements (2 marks)',
+                'Evaluation of successes (3 marks)',
+                'Analysis of limitations (3 marks)',
+                'Conclusion on overall effectiveness (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.5'
+          },
+          {
+            id: 'climate-q6',
+            question: 'What is the main natural greenhouse gas?\nA. Carbon dioxide\nB. Methane\nC. Water vapour\nD. Nitrous oxide',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'C. Water vapour',
+            markingCriteria: {
+              breakdown: ['Correct identification of water vapour as main natural greenhouse gas (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 2.4'
+          },
+          {
+            id: 'climate-q7',
+            question: 'State two effects of rising sea levels.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Coastal flooding and erosion (1 mark) and saltwater intrusion into freshwater supplies (1 mark).',
+            markingCriteria: {
+              breakdown: ['One effect correctly identified (1 mark)', 'Second effect correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 2.4'
+          },
+          {
+            id: 'climate-q8',
+            question: 'Explain how climate change affects ocean ecosystems.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Ocean acidification from CO2 absorption damages coral reefs and shell-forming organisms. Rising sea temperatures cause coral bleaching and alter fish migration patterns. Changed ocean currents affect nutrient distribution and marine food chains. Sea level rise destroys coastal breeding habitats.',
+            markingCriteria: {
+              breakdown: [
+                'Ocean acidification effects (1 mark)',
+                'Temperature change impacts (1 mark)',
+                'Current and nutrient changes (1 mark)',
+                'Habitat loss from sea level rise (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.4'
+          },
+          {
+            id: 'climate-q9',
+            question: 'Describe the difference between mitigation and adaptation strategies.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Mitigation strategies aim to reduce greenhouse gas emissions to limit future climate change, such as renewable energy and energy efficiency. Adaptation strategies help societies cope with climate change impacts that are already happening, such as flood defenses and drought-resistant crops.',
+            markingCriteria: {
+              breakdown: [
+                'Mitigation definition with example (2 marks)',
+                'Adaptation definition with example (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.5'
+          },
+          {
+            id: 'climate-q10',
+            question: 'Assess the role of carbon sinks in climate regulation.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Carbon sinks like forests and oceans absorb CO2 from the atmosphere, reducing greenhouse gas concentrations. Forests store carbon in biomass and soil. Oceans absorb CO2 but become more acidic. Peat bogs store ancient carbon. However, climate change may reduce sink effectiveness - forests may release carbon during droughts and fires. Protecting and expanding carbon sinks is crucial for climate mitigation.',
+            markingCriteria: {
+              breakdown: [
+                'Definition and examples of carbon sinks (2 marks)',
+                'How different sinks function (2 marks)',
+                'Climate change threats to sinks (1 mark)',
+                'Assessment of importance (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.4'
+          }
+        ]
+      },
+      {
+        id: 'ecosystems-structure',
+        name: 'Ecosystems: Scale, Structure & Processes',
+        questions: [
+          {
+            id: 'structure-q1',
+            question: 'Which of the following is a producer in an ecosystem?\nA. Rabbit\nB. Grass\nC. Fox\nD. Decomposer bacteria',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'B. Grass',
+            markingCriteria: {
+              breakdown: ['Correct identification of grass as producer (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.1'
+          },
+          {
+            id: 'structure-q2',
+            question: 'State two components of the nutrient cycle.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Decomposition of dead organic matter (1 mark) and uptake of nutrients by plant roots (1 mark).',
+            markingCriteria: {
+              breakdown: ['One component correctly identified (1 mark)', 'Second component correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.1'
+          },
+          {
+            id: 'structure-q3',
+            question: 'Explain how interdependence works in an ecosystem.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'All organisms depend on each other for survival through food webs. Plants need animals for pollination and seed dispersal. Animals need plants for food and shelter. Decomposers break down dead material, releasing nutrients for plants. Changes to one species affect the whole ecosystem.',
+            markingCriteria: {
+              breakdown: [
+                'Food web relationships (1 mark)',
+                'Plant-animal interdependence (1 mark)',
+                'Decomposer role (1 mark)',
+                'Knock-on effects (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.1'
+          },
+          {
+            id: 'structure-q4',
+            question: 'Assess how changes to ecosystems can have knock-on effects.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Removing predators can cause herbivore populations to explode, leading to overgrazing and habitat damage. Introduction of invasive species can outcompete native species and disrupt food chains. Climate change alters species distribution, affecting predator-prey relationships. Pollution can kill key species, causing cascade effects through the food web. These changes can lead to ecosystem collapse and loss of biodiversity.',
+            markingCriteria: {
+              breakdown: [
+                'Predator removal effects (2 marks)',
+                'Invasive species impacts (1 mark)',
+                'Climate change effects (1 mark)',
+                'Pollution impacts (1 mark)',
+                'Overall assessment of cascade effects (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.1'
+          },
+          {
+            id: 'structure-q5',
+            question: 'Evaluate the importance of ecosystem processes in supporting biodiversity.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Energy flow through trophic levels supports diverse food webs, with different species occupying various niches. Nutrient cycling ensures essential elements are available for all organisms. Decomposition recycles organic matter, supporting soil formation and plant growth. Pollination enables plant reproduction and genetic diversity. However, human activities disrupt these processes through pollution, habitat fragmentation, and species removal. Climate change alters natural cycles. Conservation must protect ecosystem processes, not just individual species, to maintain biodiversity effectively.',
+            markingCriteria: {
+              breakdown: [
+                'Energy flow and food webs (2 marks)',
+                'Nutrient cycling importance (2 marks)',
+                'Specific processes like pollination (1 mark)',
+                'Human disruption factors (2 marks)',
+                'Evaluation of conservation needs (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.1'
+          },
+          {
+            id: 'structure-q6',
+            question: 'What is a trophic level?\nA. A food chain\nB. A feeding position\nC. A habitat type\nD. An energy source',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'B. A feeding position',
+            markingCriteria: {
+              breakdown: ['Correct identification of trophic level as feeding position (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.1'
+          },
+          {
+            id: 'structure-q7',
+            question: 'State two factors that affect ecosystem productivity.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Temperature affecting photosynthesis rates (1 mark) and nutrient availability in soil (1 mark).',
+            markingCriteria: {
+              breakdown: ['One factor correctly identified (1 mark)', 'Second factor correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.1'
+          },
+          {
+            id: 'structure-q8',
+            question: 'Explain the role of decomposers in ecosystem functioning.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Decomposers break down dead plant and animal material through decay processes. They release nutrients like nitrogen and phosphorus back into the soil. This makes nutrients available for plant uptake and growth. Without decomposers, dead material would accumulate and nutrients would be locked away.',
+            markingCriteria: {
+              breakdown: [
+                'Breakdown of dead material (1 mark)',
+                'Nutrient release process (1 mark)',
+                'Making nutrients available to plants (1 mark)',
+                'Importance for ecosystem functioning (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.1'
+          },
+          {
+            id: 'structure-q9',
+            question: 'Describe how energy flows through an ecosystem.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Energy enters through photosynthesis by primary producers (plants). Primary consumers (herbivores) eat plants and gain energy. Secondary consumers (carnivores) eat herbivores. Energy is lost as heat at each trophic level, so energy pyramids get smaller at higher levels.',
+            markingCriteria: {
+              breakdown: [
+                'Energy entry through photosynthesis (1 mark)',
+                'Transfer through trophic levels (1 mark)',
+                'Energy loss as heat (1 mark)',
+                'Pyramid structure explanation (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.1'
+          },
+          {
+            id: 'structure-q10',
+            question: 'Assess the factors that determine ecosystem stability.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Biodiversity provides stability through species redundancy - if one species declines, others can fill its role. Complex food webs are more stable than simple chains. Keystone species have disproportionate importance for stability. Large ecosystems are generally more stable than small ones. However, human disturbance reduces stability through pollution, fragmentation, and species removal. Climate change creates new pressures that may exceed ecosystem resilience.',
+            markingCriteria: {
+              breakdown: [
+                'Biodiversity and species redundancy (2 marks)',
+                'Food web complexity (1 mark)',
+                'Keystone species role (1 mark)',
+                'Human disturbance factors (1 mark)',
+                'Assessment of overall stability (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.1'
+          }
+        ]
+      },
+      {
+        id: 'tropical-rainforests',
+        name: 'Tropical Rainforests',
+        questions: [
+          {
+            id: 'rainforest-q1',
+            question: 'Which adaptation helps rainforest trees capture sunlight?\nA. Thick bark\nB. Broad leaves\nC. Deep roots\nD. Waxy coating',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'B. Broad leaves',
+            markingCriteria: {
+              breakdown: ['Correct identification of broad leaves for light capture (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.2'
+          },
+          {
+            id: 'rainforest-q2',
+            question: 'State two threats to tropical rainforests.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Deforestation for agriculture (1 mark) and logging for timber (1 mark).',
+            markingCriteria: {
+              breakdown: ['One threat correctly identified (1 mark)', 'Second threat correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.2'
+          },
+          {
+            id: 'rainforest-q3',
+            question: 'Explain how nutrient cycling works in tropical rainforests.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'High temperatures and humidity cause rapid decomposition of fallen leaves and dead animals. Nutrients are quickly released into the soil but immediately taken up by shallow root systems. Most nutrients are stored in the biomass, not the soil. The cycle is very fast with minimal soil storage.',
+            markingCriteria: {
+              breakdown: [
+                'Rapid decomposition in hot, humid conditions (1 mark)',
+                'Quick nutrient release (1 mark)',
+                'Immediate uptake by roots (1 mark)',
+                'Storage in biomass not soil (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.2'
+          },
+          {
+            id: 'rainforest-q4',
+            question: 'Assess the social and economic impacts of deforestation.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Economic benefits include timber export income, agricultural land creation, and job opportunities in logging and farming. However, indigenous communities lose traditional lands and livelihoods. Ecotourism revenue is lost. Long-term costs include soil degradation reducing agricultural productivity. Loss of resources like medicines and food plants. Climate change impacts from increased carbon emissions affect everyone globally.',
+            markingCriteria: {
+              breakdown: [
+                'Economic benefits identified (2 marks)',
+                'Social impacts on communities (2 marks)',
+                'Long-term costs and consequences (1 mark)',
+                'Assessment of overall impact (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.2'
+          },
+          {
+            id: 'rainforest-q5',
+            question: 'Evaluate the effectiveness of strategies to manage tropical rainforests sustainably.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Selective logging allows forest regeneration while providing timber income, but requires careful monitoring. Protected areas preserve biodiversity but may displace local communities. Agroforestry combines conservation with farming but has limited scale. International agreements like REDD+ provide funding but implementation is challenging. Ecotourism generates revenue for conservation but must be carefully managed to prevent damage. Certification schemes improve practices but voluntary compliance is limited. Most effective when multiple strategies are combined with strong enforcement and community involvement.',
+            markingCriteria: {
+              breakdown: [
+                'Evaluation of selective logging (2 marks)',
+                'Assessment of protected areas (2 marks)',
+                'Analysis of other strategies (3 marks)',
+                'Evaluation of overall effectiveness (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.2'
+          },
+          {
+            id: 'rainforest-q6',
+            question: 'What percentage of global species live in tropical rainforests?\nA. 25%\nB. 50%\nC. 75%\nD. 90%',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'B. 50%',
+            markingCriteria: {
+              breakdown: ['Correct identification of 50% species in rainforests (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.2'
+          },
+          {
+            id: 'rainforest-q7',
+            question: 'State two adaptations of rainforest animals.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Camouflage for protection from predators (1 mark) and climbing abilities for canopy life (1 mark).',
+            markingCriteria: {
+              breakdown: ['One adaptation correctly identified (1 mark)', 'Second adaptation correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.2'
+          },
+          {
+            id: 'rainforest-q8',
+            question: 'Explain how rainforest layers create different habitats.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The emergent layer has strong sunlight and wind, supporting birds and insects. The canopy receives most sunlight and supports the highest biodiversity. The understory has filtered light and supports climbing plants and smaller animals. The forest floor is dark and humid, supporting decomposers and ground-dwelling species.',
+            markingCriteria: {
+              breakdown: [
+                'Emergent layer characteristics (1 mark)',
+                'Canopy layer biodiversity (1 mark)',
+                'Understory conditions (1 mark)',
+                'Forest floor environment (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.2'
+          },
+          {
+            id: 'rainforest-q9',
+            question: 'Describe the global distribution of tropical rainforests.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Located near the equator between 23.5°N and 23.5°S. Major areas include the Amazon Basin in South America, Congo Basin in Africa, and Southeast Asia including Indonesia and Malaysia. Found where temperatures are consistently high and rainfall exceeds 2000mm annually.',
+            markingCriteria: {
+              breakdown: [
+                'Latitude belt around equator (1 mark)',
+                'Amazon Basin location (1 mark)',
+                'African and Asian locations (1 mark)',
+                'Climate requirements (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.2'
+          },
+          {
+            id: 'rainforest-q10',
+            question: 'Assess the role of rainforests in global climate regulation.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Rainforests store vast amounts of carbon in biomass and soil, helping regulate atmospheric CO2 levels. They produce oxygen through photosynthesis. Evapotranspiration creates clouds and influences regional precipitation patterns. They help stabilize global weather patterns. However, deforestation releases stored carbon, contributing to climate change. Loss of rainforests reduces the planet\'s capacity to absorb CO2 and regulate temperature.',
+            markingCriteria: {
+              breakdown: [
+                'Carbon storage and CO2 regulation (2 marks)',
+                'Oxygen production (1 mark)',
+                'Water cycle influences (1 mark)',
+                'Deforestation impacts on climate (2 marks)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.2'
+          }
+        ]
+      },
+      {
+        id: 'deciduous-woodlands',
+        name: 'Deciduous Woodlands (UK focus)',
+        questions: [
+          {
+            id: 'deciduous-q1',
+            question: 'Which of the following is a characteristic of deciduous woodlands?\nA. Evergreen leaves\nB. Seasonal leaf fall\nC. No ground vegetation\nD. Single tree species',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'B. Seasonal leaf fall',
+            markingCriteria: {
+              breakdown: ['Correct identification of seasonal leaf fall (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.3'
+          },
+          {
+            id: 'deciduous-q2',
+            question: 'State two goods provided by deciduous woodlands.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Timber for construction and furniture (1 mark) and food products like nuts and berries (1 mark).',
+            markingCriteria: {
+              breakdown: ['One good correctly identified (1 mark)', 'Second good correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.3'
+          },
+          {
+            id: 'deciduous-q3',
+            question: 'Explain how humans use deciduous woodlands.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Forestry for timber and paper production provides economic benefits. Recreation and tourism include walking, cycling, and wildlife watching. Agriculture through agroforestry combines trees with livestock grazing. Conservation efforts protect wildlife habitats and maintain biodiversity.',
+            markingCriteria: {
+              breakdown: [
+                'Forestry uses (1 mark)',
+                'Recreation and tourism (1 mark)',
+                'Agricultural uses (1 mark)',
+                'Conservation purposes (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.3'
+          },
+          {
+            id: 'deciduous-q4',
+            question: 'Assess the impacts of deforestation in the UK.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Historical deforestation reduced UK forest cover from 90% to 13%, causing massive biodiversity loss. Many species became extinct or rare. Soil erosion increased on cleared hillsides. Carbon storage was reduced, contributing to climate change. However, recent reforestation efforts are restoring habitats. Ancient woodlands that remain have high conservation value but face pressure from development and recreation.',
+            markingCriteria: {
+              breakdown: [
+                'Historical extent of deforestation (1 mark)',
+                'Biodiversity impacts (2 marks)',
+                'Environmental consequences (1 mark)',
+                'Recent restoration efforts (1 mark)',
+                'Assessment of current situation (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.3'
+          },
+          {
+            id: 'deciduous-q5',
+            question: 'Evaluate the strategies used to sustainably manage UK deciduous woodlands.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Coppicing involves cutting trees to ground level, allowing regrowth while maintaining traditional management. This creates diverse habitats and provides sustainable timber. However, it requires skilled workers and markets for products. Ancient woodland protection prevents development but may limit economic uses. Certification schemes ensure responsible forestry but compliance is voluntary. Community forests provide recreation and education but require ongoing funding. Planning restrictions protect existing woodlands but may conflict with development needs. Integration with agriculture through agroforestry shows promise but adoption is limited.',
+            markingCriteria: {
+              breakdown: [
+                'Traditional management techniques (2 marks)',
+                'Protection and conservation strategies (2 marks)',
+                'Economic and certification approaches (2 marks)',
+                'Community and planning approaches (2 marks)',
+                'Overall evaluation of effectiveness (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.3'
+          },
+          {
+            id: 'deciduous-q6',
+            question: 'What is the main reason for seasonal changes in deciduous woodlands?\nA. Temperature variation\nB. Rainfall changes\nC. Wind patterns\nD. Soil conditions',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'A. Temperature variation',
+            markingCriteria: {
+              breakdown: ['Correct identification of temperature as main factor (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.3'
+          },
+          {
+            id: 'deciduous-q7',
+            question: 'State two services provided by UK woodlands.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Carbon storage helping climate regulation (1 mark) and water cycle regulation reducing flood risk (1 mark).',
+            markingCriteria: {
+              breakdown: ['One service correctly identified (1 mark)', 'Second service correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.3'
+          },
+          {
+            id: 'deciduous-q8',
+            question: 'Explain the structure of a deciduous woodland ecosystem.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The canopy layer contains mature trees like oak and beech that form the main leaf cover. The understory has smaller trees and saplings. The shrub layer includes bushes and young trees. The ground layer has grasses, ferns, and woodland flowers. Each layer provides different habitats and food sources.',
+            markingCriteria: {
+              breakdown: [
+                'Canopy layer description (1 mark)',
+                'Understory characteristics (1 mark)',
+                'Shrub and ground layers (1 mark)',
+                'Habitat diversity explanation (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.3'
+          },
+          {
+            id: 'deciduous-q9',
+            question: 'Describe the seasonal changes in deciduous woodlands.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Spring brings leaf emergence and ground flora blooming before canopy closure. Summer has full leaf cover creating shade and peak photosynthesis. Autumn sees leaves changing color and falling as temperatures drop. Winter has bare trees allowing more light to reach the ground.',
+            markingCriteria: {
+              breakdown: [
+                'Spring changes (1 mark)',
+                'Summer characteristics (1 mark)',
+                'Autumn leaf fall (1 mark)',
+                'Winter conditions (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.3'
+          },
+          {
+            id: 'deciduous-q10',
+            question: 'Assess the threats facing UK deciduous woodlands.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Development pressure threatens remaining woodlands, especially near urban areas where land values are high. Climate change may alter species composition and increase pest outbreaks. Air pollution from traffic and industry affects tree health. Recreational pressure causes soil compaction and disturbance to wildlife. Invasive species like rhododendron outcompete native plants. However, legal protection and conservation management help maintain many woodlands.',
+            markingCriteria: {
+              breakdown: [
+                'Development and land use pressures (2 marks)',
+                'Climate and pollution impacts (1 mark)',
+                'Recreation and invasive species (2 marks)',
+                'Assessment of protection measures (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.3'
+          }
+        ]
+      },
+      {
+        id: 'ecosystem-services',
+        name: 'Ecosystem Services',
+        questions: [
+          {
+            id: 'services-q1',
+            question: 'Which of the following is an ecosystem service?\nA. Mining\nB. Agriculture\nC. Water purification\nD. Manufacturing',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'C. Water purification',
+            markingCriteria: {
+              breakdown: ['Correct identification of water purification as ecosystem service (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.4'
+          },
+          {
+            id: 'services-q2',
+            question: 'Give two examples of regulating services.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Climate regulation through carbon storage (1 mark) and flood control by wetlands (1 mark).',
+            markingCriteria: {
+              breakdown: ['One regulating service correctly identified (1 mark)', 'Second regulating service correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.4'
+          },
+          {
+            id: 'services-q3',
+            question: 'Explain how ecosystems provide cultural services.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Recreation opportunities include hiking, birdwatching, and outdoor sports in natural areas. Spiritual and religious significance with many sacred sites located in natural environments. Educational value through fieldwork and learning about nature. Aesthetic beauty and inspiration for art, literature, and photography.',
+            markingCriteria: {
+              breakdown: [
+                'Recreation services (1 mark)',
+                'Spiritual/religious significance (1 mark)',
+                'Educational value (1 mark)',
+                'Aesthetic and inspirational value (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.4'
+          },
+          {
+            id: 'services-q4',
+            question: 'Assess the importance of ecosystem services to people.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Provisioning services provide essential resources: food from agriculture and fishing, fresh water from watersheds, and timber for construction. Regulating services are vital for human survival: climate regulation, water purification, and disease control. Cultural services enhance quality of life through recreation and spiritual connection. Supporting services underpin all others through soil formation and nutrient cycling. Economic value is estimated at $125 trillion globally.',
+            markingCriteria: {
+              breakdown: [
+                'Provisioning services importance (2 marks)',
+                'Regulating services vital role (2 marks)',
+                'Cultural and supporting services (1 mark)',
+                'Assessment of overall importance (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.4'
+          },
+          {
+            id: 'services-q5',
+            question: 'Evaluate how human activity threatens ecosystem services globally.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Habitat destruction reduces all ecosystem services - deforestation eliminates carbon storage, biodiversity, and climate regulation. Pollution degrades water purification and soil formation services. Overfishing and overhunting reduce provisioning services. Climate change alters ecosystem functioning globally, affecting food production and water supplies. Urbanization fragments ecosystems, reducing their effectiveness. However, sustainable practices can maintain services: agroforestry, marine protected areas, and green infrastructure. Payment for ecosystem services schemes provide economic incentives for conservation. Restoration projects can rebuild degraded services.',
+            markingCriteria: {
+              breakdown: [
+                'Habitat destruction impacts (2 marks)',
+                'Pollution and overexploitation (2 marks)',
+                'Climate change effects (1 mark)',
+                'Sustainable solutions (2 marks)',
+                'Evaluation of overall threat level (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.4'
+          },
+          {
+            id: 'services-q6',
+            question: 'What are the four main categories of ecosystem services?\nA. Food, water, air, soil\nB. Plants, animals, climate, landscape\nC. Provisioning, regulating, cultural, supporting\nD. Forest, marine, freshwater, grassland',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'C. Provisioning, regulating, cultural, supporting',
+            markingCriteria: {
+              breakdown: ['Correct identification of four main categories (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.4'
+          },
+          {
+            id: 'services-q7',
+            question: 'State two examples of provisioning services.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Food crops from agricultural ecosystems (1 mark) and fresh water from watersheds (1 mark).',
+            markingCriteria: {
+              breakdown: ['One provisioning service correctly identified (1 mark)', 'Second provisioning service correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.4'
+          },
+          {
+            id: 'services-q8',
+            question: 'Explain how wetlands provide multiple ecosystem services.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Wetlands purify water by filtering pollutants and sediments. They control floods by storing excess water during heavy rainfall. They support biodiversity by providing habitat for many species. They store carbon in peat and organic matter, helping climate regulation.',
+            markingCriteria: {
+              breakdown: [
+                'Water purification function (1 mark)',
+                'Flood control service (1 mark)',
+                'Biodiversity support (1 mark)',
+                'Carbon storage service (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.4'
+          },
+          {
+            id: 'services-q9',
+            question: 'Describe how payment for ecosystem services (PES) schemes work.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'PES schemes pay landowners for maintaining or restoring ecosystem services. Forest owners receive payments for carbon storage and biodiversity conservation. Farmers get payments for wildlife-friendly practices that support pollination. Watershed protection schemes pay for forest conservation that maintains water quality.',
+            markingCriteria: {
+              breakdown: [
+                'Basic PES concept (1 mark)',
+                'Forest conservation payments (1 mark)',
+                'Agricultural PES schemes (1 mark)',
+                'Watershed protection example (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.4'
+          },
+          {
+            id: 'services-q10',
+            question: 'Assess the challenges of valuing ecosystem services economically.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Difficulty quantifying non-market benefits like spiritual value and aesthetic beauty. Services are interconnected, making it hard to separate individual values. Different stakeholders value services differently - local vs global perspectives. Temporal scales vary - some benefits are immediate while others are long-term. Scientific uncertainty about ecosystem functioning affects valuation accuracy. However, economic valuation helps decision-makers understand trade-offs and justify conservation spending.',
+            markingCriteria: {
+              breakdown: [
+                'Non-market valuation challenges (2 marks)',
+                'Interconnection and stakeholder issues (2 marks)',
+                'Temporal and scientific uncertainties (1 mark)',
+                'Assessment of valuation benefits (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.4'
+          }
+        ]
+      },
+      {
+        id: 'biodiversity-threat',
+        name: 'Biodiversity Under Threat',
+        questions: [
+          {
+            id: 'biodiversity-q1',
+            question: 'Which of the following human activities reduces biodiversity?\nA. Wildlife photography\nB. Habitat restoration\nC. Agricultural intensification\nD. Ecotourism',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'C. Agricultural intensification',
+            markingCriteria: {
+              breakdown: ['Correct identification of agricultural intensification as threat (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.5'
+          },
+          {
+            id: 'biodiversity-q2',
+            question: 'State two reasons biodiversity is important.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Provides ecosystem stability and resilience (1 mark) and supplies resources like medicines and food (1 mark).',
+            markingCriteria: {
+              breakdown: ['One reason correctly identified (1 mark)', 'Second reason correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.5'
+          },
+          {
+            id: 'biodiversity-q3',
+            question: 'Explain how biodiversity loss can affect humans.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Loss of crop genetic diversity makes food systems more vulnerable to disease and climate change. Reduced ecosystem services like pollination threaten food production. Loss of medicinal plants limits pharmaceutical development. Ecosystem collapse can cause economic losses in sectors like fishing and tourism.',
+            markingCriteria: {
+              breakdown: [
+                'Food security impacts (1 mark)',
+                'Ecosystem service loss (1 mark)',
+                'Medical/pharmaceutical impacts (1 mark)',
+                'Economic consequences (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.5'
+          },
+          {
+            id: 'biodiversity-q4',
+            question: 'Assess the threats to biodiversity in tropical rainforests.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Deforestation for agriculture removes habitats and fragments remaining forest. Logging targets specific species, altering forest structure. Mining and infrastructure development destroy large areas. Climate change shifts suitable habitats faster than species can adapt. Hunting and poaching reduce animal populations. However, protected areas and sustainable management can reduce these threats. International agreements provide frameworks for conservation.',
+            markingCriteria: {
+              breakdown: [
+                'Habitat destruction and fragmentation (2 marks)',
+                'Direct exploitation threats (1 mark)',
+                'Climate change impacts (1 mark)',
+                'Conservation responses (1 mark)',
+                'Assessment of overall threat level (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.5'
+          },
+          {
+            id: 'biodiversity-q5',
+            question: 'Evaluate the strategies used to protect biodiversity at a national level.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Protected areas like national parks effectively preserve habitats and species, with examples like Yellowstone showing long-term success. However, they may displace local communities and can become isolated islands. Legislation such as endangered species acts provides legal protection but enforcement is often weak. Habitat restoration programs can rebuild degraded ecosystems but are expensive and time-consuming. Sustainable land use policies balance conservation with economic needs but may face resistance from industries. Captive breeding programs have saved species like the California condor but are costly. Most effective when strategies are combined with international cooperation and community involvement.',
+            markingCriteria: {
+              breakdown: [
+                'Protected areas evaluation (3 marks)',
+                'Legal protection assessment (2 marks)',
+                'Restoration and land use policies (2 marks)',
+                'Other strategies like captive breeding (1 mark)',
+                'Overall evaluation of effectiveness (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.5'
+          },
+          {
+            id: 'biodiversity-q6',
+            question: 'What is meant by a "biodiversity hotspot"?\nA. A warm climate region\nB. An area with high species richness and endemism\nC. A protected nature reserve\nD. A location of recent extinction',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'B. An area with high species richness and endemism',
+            markingCriteria: {
+              breakdown: ['Correct definition of biodiversity hotspot (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.5'
+          },
+          {
+            id: 'biodiversity-q7',
+            question: 'State two causes of species extinction.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Habitat destruction removing living space (1 mark) and overhunting reducing populations below viable levels (1 mark).',
+            markingCriteria: {
+              breakdown: ['One cause correctly identified (1 mark)', 'Second cause correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.5'
+          },
+          {
+            id: 'biodiversity-q8',
+            question: 'Explain how invasive species threaten native biodiversity.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Invasive species outcompete native species for resources like food and nesting sites. They may lack natural predators, allowing populations to grow unchecked. Some invasives prey on native species that have no evolutionary defenses. They can alter habitats, making them unsuitable for native species.',
+            markingCriteria: {
+              breakdown: [
+                'Competition for resources (1 mark)',
+                'Lack of natural predators (1 mark)',
+                'Predation on native species (1 mark)',
+                'Habitat modification (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.5'
+          },
+          {
+            id: 'biodiversity-q9',
+            question: 'Describe the main threats to marine biodiversity.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Overfishing depletes fish stocks and damages seafloor habitats through trawling. Pollution from plastics, chemicals, and oil spills harms marine life. Climate change causes ocean acidification and coral bleaching. Coastal development destroys important breeding and feeding areas.',
+            markingCriteria: {
+              breakdown: [
+                'Overfishing impacts (1 mark)',
+                'Pollution effects (1 mark)',
+                'Climate change impacts (1 mark)',
+                'Coastal development threats (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.5'
+          },
+          {
+            id: 'biodiversity-q10',
+            question: 'Assess the role of zoos and botanical gardens in biodiversity conservation.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Zoos and botanical gardens preserve genetic diversity through captive breeding programs for endangered species. They conduct important research on animal behavior and plant biology. Education programs raise public awareness about conservation needs. However, they can only maintain small populations, limiting genetic diversity. Reintroduction to the wild is often difficult and expensive. Some argue resources would be better spent on habitat protection. Most effective when integrated with in-situ conservation efforts.',
+            markingCriteria: {
+              breakdown: [
+                'Captive breeding and genetic preservation (2 marks)',
+                'Research and education roles (1 mark)',
+                'Limitations and criticisms (2 marks)',
+                'Assessment of overall effectiveness (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.5'
+          }
+        ]
+      },
+      {
+        id: 'sustainable-management',
+        name: 'Sustainable Management of Ecosystems',
+        questions: [
+          {
+            id: 'sustainable-q1',
+            question: 'Which of the following is an example of sustainable forestry?\nA. Clear-cutting entire forests\nB. Selective logging with replanting\nC. Converting forests to farmland\nD. Urban development in forests',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'B. Selective logging with replanting',
+            markingCriteria: {
+              breakdown: ['Correct identification of selective logging as sustainable practice (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.6'
+          },
+          {
+            id: 'sustainable-q2',
+            question: 'State two local strategies to manage ecosystems sustainably.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Community-based conservation involving local people (1 mark) and sustainable harvesting quotas for resources (1 mark).',
+            markingCriteria: {
+              breakdown: ['One local strategy correctly identified (1 mark)', 'Second local strategy correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.6'
+          },
+          {
+            id: 'sustainable-q3',
+            question: 'Explain how ecotourism supports sustainable management.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Ecotourism provides economic incentives for conservation by generating income from pristine environments. Local communities benefit from employment as guides and accommodation providers. Tourism revenue funds conservation projects and ranger salaries. Visitor education raises awareness about environmental issues.',
+            markingCriteria: {
+              breakdown: [
+                'Economic incentives for conservation (1 mark)',
+                'Local community benefits (1 mark)',
+                'Funding for conservation projects (1 mark)',
+                'Education and awareness raising (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.6'
+          },
+          {
+            id: 'sustainable-q4',
+            question: 'Assess the role of international agreements in protecting ecosystems.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'CITES regulates international trade in endangered species, reducing exploitation pressure. The Convention on Biological Diversity sets global targets for conservation. RAMSAR protects important wetlands internationally. However, enforcement is often weak and depends on national cooperation. Some countries prioritize economic development over conservation. Success varies - marine protected areas show promise but illegal fishing continues.',
+            markingCriteria: {
+              breakdown: [
+                'Examples of international agreements (2 marks)',
+                'Specific conservation mechanisms (1 mark)',
+                'Enforcement and cooperation challenges (2 marks)',
+                'Assessment of overall effectiveness (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.6'
+          },
+          {
+            id: 'sustainable-q5',
+            question: 'Evaluate whether local or global strategies are more effective at protecting ecosystems. (12 + 3 SPaG)',
+            marks: 15,
+            difficulty: 'hard',
+            modelAnswer: 'Local strategies have significant advantages in ecosystem protection. Community-based conservation ensures local people have incentives to protect resources they depend on. Traditional ecological knowledge provides sustainable management practices developed over generations. Local strategies can be adapted to specific ecosystem needs and conditions. Implementation is often more direct and accountable. However, local strategies may lack sufficient resources and technical expertise. They cannot address global threats like climate change or international trade in endangered species. Global strategies provide necessary coordination for migratory species and transboundary ecosystems. International agreements create frameworks and funding mechanisms that support local efforts. The Paris Agreement addresses climate change that affects all ecosystems globally. However, global strategies often lack effective enforcement and may not account for local conditions and needs. The most effective approach combines both levels: global frameworks that support and coordinate local implementation, ensuring resources and expertise flow to communities while respecting traditional knowledge and local autonomy.',
+            markingCriteria: {
+              breakdown: [
+                'Arguments for local strategies (3 marks)',
+                'Arguments for global strategies (3 marks)',
+                'Evaluation comparing effectiveness (4 marks)',
+                'Conclusion showing balanced judgment (2 marks)',
+                'SPaG (spelling, punctuation, grammar) (3 marks)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.6'
+          },
+          {
+            id: 'sustainable-q6',
+            question: 'What does "sustainable development" mean?\nA. Economic growth at any cost\nB. Meeting present needs without compromising future generations\nC. Protecting nature by stopping all development\nD. Focusing only on environmental protection',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'B. Meeting present needs without compromising future generations',
+            markingCriteria: {
+              breakdown: ['Correct definition of sustainable development (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.6'
+          },
+          {
+            id: 'sustainable-q7',
+            question: 'State two benefits of agroforestry systems.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Soil protection from erosion (1 mark) and providing multiple income sources from trees and crops (1 mark).',
+            markingCriteria: {
+              breakdown: ['One benefit correctly identified (1 mark)', 'Second benefit correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 3.6'
+          },
+          {
+            id: 'sustainable-q8',
+            question: 'Explain how certification schemes promote sustainable resource use.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Certification schemes like FSC set standards for sustainable practices that producers must meet. Independent auditing ensures compliance with environmental and social criteria. Consumer demand for certified products creates market incentives for sustainable practices. Premium prices for certified products provide economic rewards for sustainability.',
+            markingCriteria: {
+              breakdown: [
+                'Standards and criteria setting (1 mark)',
+                'Independent verification process (1 mark)',
+                'Market demand creation (1 mark)',
+                'Economic incentives (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.6'
+          },
+          {
+            id: 'sustainable-q9',
+            question: 'Describe the principles of sustainable fisheries management.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Setting catch quotas based on scientific stock assessments to prevent overfishing. Using selective fishing gear to reduce bycatch of non-target species. Establishing marine protected areas where fish can breed and recover. Seasonal fishing bans during breeding periods to allow population recovery.',
+            markingCriteria: {
+              breakdown: [
+                'Quota systems based on science (1 mark)',
+                'Selective fishing methods (1 mark)',
+                'Marine protected areas (1 mark)',
+                'Seasonal restrictions (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.6'
+          },
+          {
+            id: 'sustainable-q10',
+            question: 'Assess the challenges facing sustainable ecosystem management.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Economic pressures often prioritize short-term profits over long-term sustainability. Poverty may force communities to overexploit resources for survival. Scientific uncertainty makes it difficult to set safe limits for resource use. Conflicting stakeholder interests create management challenges. Climate change alters ecosystem conditions faster than management can adapt. However, successful examples show that sustainable management is possible with proper planning, community involvement, and adaptive strategies.',
+            markingCriteria: {
+              breakdown: [
+                'Economic and poverty pressures (2 marks)',
+                'Scientific and stakeholder challenges (2 marks)',
+                'Climate change impacts (1 mark)',
+                'Assessment of possibilities for success (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 3.6'
+          }
+        ]
+      },
         {
           id: 'predicted-exam-2026',
           name: 'Predicted 2026 Paper 1 Exam',
