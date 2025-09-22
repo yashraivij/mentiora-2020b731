@@ -526,7 +526,7 @@ const PredictedResults = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button variant="outline" onClick={() => navigate(`/subject-topics/${subjectId === 'geography-paper-2' ? 'geography' : subjectId}`)}>
+              <Button variant="outline" onClick={() => navigate('/dashboard')}>
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Button>
@@ -767,14 +767,14 @@ const PredictedResults = () => {
               Retake This Exam
             </Button>
             <Button 
-              onClick={() => navigate('/predicted-questions')}
+              onClick={() => navigate('/dashboard')}
               className="bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-600 dark:to-emerald-700 hover:from-emerald-600 hover:to-emerald-700 text-white"
             >
               <BookOpen className="h-5 w-5 mr-2" />
               Try Another Subject
             </Button>
             <Button 
-              onClick={() => navigate(-1)} 
+              onClick={() => navigate('/dashboard')} 
               variant="outline"
             >
               <Target className="h-5 w-5 mr-2" />
