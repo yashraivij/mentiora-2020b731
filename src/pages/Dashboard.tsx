@@ -1116,16 +1116,22 @@ const Dashboard = () => {
         <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border p-4">
           <div className="flex items-center justify-between">
             <MobileNav>
-              {sidebarItems.map((item) => (
-                <MobileNavItem
-                  key={item.id}
-                  onClick={() => setActiveTab(item.id)}
-                  className={activeTab === item.id ? "bg-accent text-accent-foreground" : ""}
-                >
-                  <item.icon className="h-5 w-5 mr-3" />
-                  {item.label}
-                </MobileNavItem>
-              ))}
+              {sidebarItems.map((item) => {
+                const isActive = activeTab === item.id;
+                return (
+                  <MobileNavItem
+                    key={item.id}
+                    onClick={() => setActiveTab(item.id)}
+                    className={isActive 
+                      ? `${item.activeColor} text-white shadow-lg` 
+                      : `${item.bgColor} ${item.textColor} hover:bg-opacity-80`
+                    }
+                  >
+                    <item.icon className={`h-5 w-5 mr-3 ${isActive ? 'text-white' : item.textColor}`} />
+                    <span className="font-bold text-sm tracking-wide">{item.label}</span>
+                  </MobileNavItem>
+                );
+              })}
             </MobileNav>
             
             <div className="flex items-center gap-2">
