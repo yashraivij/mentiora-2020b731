@@ -10,6 +10,7 @@ import { curriculum } from "@/data/curriculum";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
+import { useSubscription } from "@/hooks/useSubscription";
 
 interface ExamQuestion {
   id: string;
@@ -47,13 +48,14 @@ const PredictedResults = () => {
   const location = useLocation();
   const [attempts, setAttempts] = useState<QuestionAttempt[]>([]);
   const [isMarking, setIsMarking] = useState(true);
+  const { isPremium } = useSubscription();
   
   const { questions, answers, timeElapsed, isReview, completion, totalMarks } = location.state || {};
   
   // If no state is provided, show a message instead of redirecting
   if (!questions || !answers) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10 pt-12">
+      <div className={`min-h-screen bg-gradient-to-br from-background via-background to-muted/10 ${isPremium ? '' : 'pt-12'}`}>
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-4xl mx-auto">
             <Card>
@@ -489,7 +491,7 @@ const PredictedResults = () => {
 
   if (isMarking) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center pt-12">
+      <div className={`min-h-screen bg-background flex items-center justify-center ${isPremium ? '' : 'pt-12'}`}>
         <Card className="max-w-md w-full">
           <CardHeader className="text-center">
             <Clock className="h-16 w-16 text-primary mx-auto mb-4 animate-pulse" />
@@ -520,7 +522,7 @@ const PredictedResults = () => {
   const grade = getGCSEGrade(percentage);
 
   return (
-    <div className="min-h-screen bg-background pt-12">
+    <div className={`min-h-screen bg-background ${isPremium ? '' : 'pt-12'}`}>
       {/* Header */}
       <header className="bg-card shadow-sm border-b border-border">
         <div className="container mx-auto px-4 py-4">

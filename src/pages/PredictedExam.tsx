@@ -14,6 +14,7 @@ import { NotebookGenerator } from "@/components/notebook/NotebookGenerator";
 import { supabase } from "@/integrations/supabase/client";
 import { PersonalizedNotification } from "@/components/notifications/PersonalizedNotification";
 import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotifications";
+import { useSubscription } from "@/hooks/useSubscription";
 
 interface ExamQuestion {
   id: string;
@@ -33,6 +34,7 @@ const PredictedExam = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user } = useAuth();
+  const { isPremium } = useSubscription();
   
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTimeUp, setIsTimeUp] = useState(false);
@@ -4166,7 +4168,7 @@ Write a story about a moment of fear.
 
   if (!examStarted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10 pt-12">
+      <div className={`min-h-screen bg-gradient-to-br from-background via-background to-muted/10 ${isPremium ? '' : 'pt-12'}`}>
         <header className="bg-card/90 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-lg">
           <div className="container mx-auto px-6 py-4">
             <div className="flex justify-between items-center">
@@ -4264,7 +4266,7 @@ Write a story about a moment of fear.
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10 pt-12">
+    <div className={`min-h-screen bg-gradient-to-br from-background via-background to-muted/10 ${isPremium ? '' : 'pt-12'}`}>
       {/* Fixed Header with Timer */}
       <header className="bg-card/95 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-lg">
         <div className="container mx-auto px-6 py-4">
