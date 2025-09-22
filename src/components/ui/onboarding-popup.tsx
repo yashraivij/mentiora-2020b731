@@ -240,7 +240,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-7xl max-h-[98vh] overflow-hidden bg-background dark:bg-background border-0 shadow-2xl">
+      <DialogContent className="max-w-7xl sm:max-w-[95vw] max-h-[98vh] overflow-y-auto bg-background dark:bg-background border-0 shadow-2xl">
         {/* Subtle background */}
         <div className="absolute inset-0 bg-gradient-to-br from-sky-50 via-purple-50 to-pink-50 dark:from-sky-950/20 dark:via-purple-950/20 dark:to-pink-950/20" />
         
@@ -250,18 +250,18 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
         </div>
 
         <DialogHeader className="relative z-10 pb-6">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-r from-sky-400 to-purple-400 rounded-3xl flex items-center justify-center shadow-lg">
-                  <BookOpen className="h-8 w-8 text-white" />
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-sky-400 to-purple-400 rounded-3xl flex items-center justify-center shadow-lg">
+                  <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                 </div>
               </div>
               <div>
-                <DialogTitle className="text-4xl font-bold text-foreground dark:text-foreground">
+                <DialogTitle className="text-2xl sm:text-4xl font-bold text-foreground dark:text-foreground">
                   Welcome to Mentiora!
                 </DialogTitle>
-                <DialogDescription className="text-xl text-muted-foreground dark:text-muted-foreground font-medium">
+                <DialogDescription className="text-lg sm:text-xl text-muted-foreground dark:text-muted-foreground font-medium">
                   Let's personalize your learning experience
                 </DialogDescription>
               </div>
@@ -274,7 +274,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 {[1, 2, 3, 4].map((step) => (
                   <div
                     key={step}
-                    className={`h-3 w-12 rounded-full transition-all duration-500 ${
+                    className={`h-3 w-8 sm:w-12 rounded-full transition-all duration-500 ${
                       step <= currentStep 
                         ? 'bg-gradient-to-r from-sky-400 to-purple-400 shadow-lg' 
                         : 'bg-gray-200'
@@ -286,7 +286,7 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
           </div>
         </DialogHeader>
 
-        <div className="relative z-10 flex-1 overflow-hidden">
+        <div className="relative z-10 flex-1 overflow-y-auto">
           <AnimatePresence mode="wait">
             {/* Step 1: Subject Selection */}
             {currentStep === 1 && (
@@ -300,15 +300,15 @@ export const OnboardingPopup = ({ isOpen, onClose, onSubjectsAdded }: Onboarding
                 className="space-y-6"
               >
                 <div className="text-center space-y-4 mb-8">
-                  <h3 className="text-3xl font-bold text-foreground dark:text-foreground">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-foreground dark:text-foreground">
                     What exams are you taking? 📚
                   </h3>
-                  <p className="text-lg text-muted-foreground dark:text-muted-foreground">
+                  <p className="text-base sm:text-lg text-muted-foreground dark:text-muted-foreground">
                     Select all the subjects you're studying - we'll add them to your dashboard
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-h-72 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-primary/20">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-h-80 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-primary/20">
                   {AVAILABLE_SUBJECTS.map((subject, index) => (
                     <motion.div
                       key={subject.id}
