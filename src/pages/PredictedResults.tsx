@@ -556,16 +556,16 @@ const PredictedResults = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Grade Display Banner */}
-          <Card className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 text-primary-foreground border-0">
+          <Card className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 text-white border-0 shadow-xl">
             <CardContent className="py-8">
               <div className="text-center space-y-4">
-                <div className="text-6xl font-bold">
+                <div className="text-6xl font-bold drop-shadow-lg">
                   Grade {grade}
                 </div>
-                <div className="text-xl">
+                <div className="text-xl drop-shadow-md">
                   {achievedMarks}/{examTotalMarks} marks ({percentage}%)
                 </div>
-                <div className="text-lg opacity-90">
+                <div className="text-lg opacity-90 drop-shadow-md">
                   {subject?.name} Predicted 2026 Exam
                 </div>
               </div>
