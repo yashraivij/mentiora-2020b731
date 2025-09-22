@@ -221,7 +221,7 @@ const SubjectTopics = () => {
               </svg>
 
               {/* Topic nodes */}
-              {subject.topics.map((topic, index) => {
+              {subject.topics.filter(topic => topic.id !== 'predicted-exam-2026').map((topic, index) => {
                 const progress = getTopicProgress(topic.id);
                 const isUnlocked = true; // All topics are always unlocked
                 const isMastered = progress.averageScore >= 85;
