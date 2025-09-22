@@ -64,11 +64,38 @@ const SubjectTopics = () => {
     );
   }
 
-  const filteredTopics = subject.topics.filter(topic => 
-    topic.id !== 'predicted-exam-2026' && 
-    !topic.name.toLowerCase().includes('predicted') &&
-    !topic.name.toLowerCase().includes('paper 1 exam')
-  );
+  const allowedGeographyTopics = [
+    '1A: Coastal Landscapes and Processes',
+    '1B: River Landscapes and Processes', 
+    '1C: Glaciated Upland Landscapes and Processes',
+    'Global Circulation of the Atmosphere',
+    'Tropical Cyclones',
+    'Extreme Weather in the UK',
+    'Climate Change',
+    'Ecosystems: Scale, Structure & Processes',
+    'Tropical Rainforests',
+    'Deciduous Woodlands (UK focus)',
+    'Ecosystem Services',
+    'Biodiversity Under Threat',
+    'Sustainable Management of Ecosystems'
+  ];
+
+  const filteredTopics = subject.topics.filter(topic => {
+    // Always filter out predicted exam topics
+    if (topic.id === 'predicted-exam-2026' || 
+        topic.name.toLowerCase().includes('predicted') ||
+        topic.name.toLowerCase().includes('paper 1 exam')) {
+      return false;
+    }
+    
+    // For geography, only show allowed topics
+    if (subjectId === 'geography') {
+      return allowedGeographyTopics.includes(topic.name);
+    }
+    
+    // For other subjects, show all topics (except predicted exams)
+    return true;
+  });
 
   const getTopicProgress = (topicId: string) => {
     const progress = topicProgress.find(p => p.topicId === topicId);
