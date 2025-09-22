@@ -15921,6 +15921,120 @@ export const curriculum: Subject[] = [
       name: 'Geography A (Edexcel)',
       topics: [
         {
+          id: 'predicted-exam-2026',
+          name: 'Predicted Exam 2026',
+          questions: [
+            {
+              id: 'geo-pred-1',
+              question: 'Which of the following is a characteristic of a destructive plate margin?\nA. Volcanoes with gentle slopes\nB. Deep ocean trenches\nC. Mid-ocean ridges\nD. Transform faults',
+              marks: 1,
+              difficulty: 'easy',
+              modelAnswer: 'B. Deep ocean trenches are formed at destructive plate margins where oceanic plates subduct beneath other plates.',
+              markingCriteria: { breakdown: ['1 mark for correct answer B'] },
+              specReference: 'Edexcel GCSE Geography A Topic 1'
+            },
+            {
+              id: 'geo-pred-2',
+              question: 'State two processes of coastal erosion.',
+              marks: 2,
+              difficulty: 'easy',
+              modelAnswer: 'Two processes of coastal erosion are hydraulic action (the force of waves compressing air in rock cracks) and abrasion (waves picking up material and hurling it against the cliff).',
+              markingCriteria: { breakdown: ['1 mark for each correct process of coastal erosion (2 marks total)'] },
+              specReference: 'Edexcel GCSE Geography A Topic 2'
+            },
+            {
+              id: 'geo-pred-3',
+              question: 'Explain how a waterfall is formed.',
+              marks: 4,
+              difficulty: 'medium',
+              modelAnswer: 'A waterfall forms when a river flows from hard rock onto soft rock. The soft rock erodes more quickly than the hard rock through processes like hydraulic action and abrasion. This creates a step in the river channel. Over time, the soft rock continues to erode, creating an overhang of hard rock. Eventually, the overhang becomes unstable and collapses, creating a plunge pool below.',
+              markingCriteria: { breakdown: ['1 mark for identifying hard and soft rock', '1 mark for explaining differential erosion', '1 mark for describing overhang formation', '1 mark for explaining plunge pool creation'] },
+              specReference: 'Edexcel GCSE Geography A Topic 2'
+            },
+            {
+              id: 'geo-pred-4',
+              question: 'Assess the causes of tropical cyclone formation.',
+              marks: 6,
+              difficulty: 'hard',
+              modelAnswer: 'Tropical cyclones form due to several key conditions. Sea temperatures must exceed 26°C to provide energy through evaporation. Low wind shear allows the cyclone to develop vertically without disruption. The Coriolis effect (at least 5° from the equator) provides the spinning motion needed. High humidity and atmospheric instability create the initial disturbance. These conditions work together - warm seas provide energy, while atmospheric conditions allow the system to organize and intensify.',
+              markingCriteria: { breakdown: ['2 marks for sea temperature requirements', '1 mark for wind shear', '1 mark for Coriolis effect', '1 mark for humidity/instability', '1 mark for synthesis/evaluation'] },
+              specReference: 'Edexcel GCSE Geography A Topic 3'
+            },
+            {
+              id: 'geo-pred-5',
+              question: 'Evaluate the effectiveness of hard engineering strategies in managing coastal erosion.\n\nUse evidence from a named coastal location you have studied.',
+              marks: 8,
+              difficulty: 'hard',
+              modelAnswer: 'Hard engineering strategies like sea walls and rock armour can be highly effective at protecting specific locations but have significant limitations. At Mappleton, East Yorkshire, rock armour successfully protects the village from cliff collapse. The £2 million investment has prevented property loss and maintained the coastal road. However, these defenses cause increased erosion downdrift at Great Cowden, demonstrating how hard engineering can transfer rather than solve problems. Sea walls at Bridlington provide excellent protection for the town center and promenade, but require constant maintenance costing millions. While hard engineering offers immediate protection and economic benefits for urban areas, it is expensive, environmentally damaging, and often creates problems elsewhere. Sustainable approaches increasingly favor soft engineering or managed retreat.',
+              markingCriteria: { breakdown: ['2 marks for named location and evidence', '2 marks for advantages of hard engineering', '2 marks for disadvantages/limitations', '1 mark for evaluation/conclusion', '1 mark for use of geographical terminology'] },
+              specReference: 'Edexcel GCSE Geography A Topic 1'
+            },
+            {
+              id: 'geo-pred-6',
+              question: 'Explain how climate change may affect water supply in different parts of the world.',
+              marks: 6,
+              difficulty: 'medium',
+              modelAnswer: 'Climate change affects water supply through changing precipitation patterns and increased temperatures. In polar regions, melting ice sheets and glaciers initially increase freshwater availability but reduce long-term water security. Tropical regions may experience more intense but less frequent rainfall, leading to flooding followed by drought periods. Temperate regions like the UK may see wetter winters but drier summers, affecting seasonal water availability. Rising temperatures increase evaporation rates globally, reducing water storage in reservoirs and groundwater. Coastal areas face saltwater intrusion into freshwater aquifers due to sea level rise.',
+              markingCriteria: { breakdown: ['2 marks for effects on different regions', '2 marks for explanation of processes', '1 mark for temperature effects', '1 mark for long-term implications'] },
+              specReference: 'Edexcel GCSE Geography A Topic 4'
+            },
+            {
+              id: 'geo-pred-7',
+              question: 'Assess the importance of the water cycle in supporting ecosystems.',
+              marks: 6,
+              difficulty: 'medium',
+              modelAnswer: 'The water cycle is fundamental to ecosystem functioning through precipitation, evaporation, and transpiration. Precipitation provides essential water for plant photosynthesis and animal survival. Evaporation and transpiration regulate temperature and humidity, creating microclimates that support different species. The cycle distributes nutrients through watersheds, supporting food webs. Seasonal variations in the water cycle create migration patterns and breeding cycles for many species. Without the water cycle, ecosystems would lack the moisture needed for primary productivity, making it the foundation of all terrestrial and many aquatic ecosystems.',
+              markingCriteria: { breakdown: ['2 marks for explaining water cycle processes', '2 marks for links to ecosystem functions', '1 mark for nutrient distribution', '1 mark for seasonal/temporal effects'] },
+              specReference: 'Edexcel GCSE Geography A Topic 4'
+            },
+            {
+              id: 'geo-pred-8',
+              question: 'Explain the characteristics of tropical rainforest ecosystems.',
+              marks: 4,
+              difficulty: 'medium',
+              modelAnswer: 'Tropical rainforests have distinct structural layers including emergent trees, canopy, understory, and forest floor. They support incredibly high biodiversity with complex food webs and symbiotic relationships. The nutrient cycle is rapid with most nutrients stored in vegetation rather than soil. Climate characteristics include high temperatures (25-30°C) year-round, high humidity (80%+), and heavy rainfall (2000mm+ annually) with no distinct seasons.',
+              markingCriteria: { breakdown: ['1 mark for structure/layers', '1 mark for biodiversity', '1 mark for nutrient cycle', '1 mark for climate characteristics'] },
+              specReference: 'Edexcel GCSE Geography A Topic 5'
+            },
+            {
+              id: 'geo-pred-9',
+              question: 'Evaluate the sustainability of different strategies used to manage tropical rainforests.\n\nRefer to examples you have studied.',
+              marks: 9,
+              difficulty: 'hard',
+              modelAnswer: 'Sustainable rainforest management involves balancing economic, social, and environmental needs. In Costa Rica, ecotourism generates significant revenue while preserving biodiversity, with over 25% of the country protected in national parks. This creates jobs for local communities and funds conservation efforts. Selective logging in Brazil allows timber extraction while maintaining forest structure, though enforcement remains challenging. Debt-for-nature swaps, like Ecuador\'s proposed Yasuní-ITT initiative, offer international funding to preserve forests but depend on global cooperation. REDD+ schemes provide financial incentives for forest conservation but require robust monitoring systems. However, economic pressures from agriculture and mining continue to drive deforestation. The most sustainable approaches combine multiple strategies: strict protection of key areas, sustainable use zones with certified logging, community-based management involving indigenous peoples, and international funding mechanisms. Success depends on strong governance, local participation, and long-term economic alternatives to deforestation.',
+              markingCriteria: { breakdown: ['2 marks for named examples with evidence', '2 marks for economic strategies', '2 marks for environmental considerations', '2 marks for social factors', '1 mark for evaluation of sustainability'] },
+              specReference: 'Edexcel GCSE Geography A Topic 5'
+            },
+            {
+              id: 'geo-pred-10',
+              question: 'With reference to a case study, assess the impacts of urban growth in a lower income country (LIC) or newly emerging economy (NEE).',
+              marks: 9,
+              difficulty: 'hard',
+              modelAnswer: 'Mumbai, India exemplifies rapid urban growth impacts in an NEE. Economic opportunities attract millions of migrants, creating a megacity of over 20 million people. Positive impacts include job creation in Bollywood, finance, and manufacturing sectors, generating billions in GDP. The city serves as India\'s commercial capital with major ports and stock exchanges. However, rapid growth creates significant challenges. Housing shortages force millions into slums like Dharavi, where over 1 million people live in inadequate conditions with poor sanitation and limited services. Infrastructure struggles to cope with demand, leading to traffic congestion, air pollution, and unreliable water supply. Social inequality is stark, with luxury high-rises neighboring sprawling slums. Environmental degradation includes river pollution and waste management problems. Despite challenges, urban growth has lifted millions from poverty and positioned Mumbai as a global city. Successful management requires investment in affordable housing, infrastructure upgrades, and inclusive planning that addresses both formal and informal settlements.',
+              markingCriteria: { breakdown: ['2 marks for case study details', '2 marks for positive impacts', '2 marks for negative impacts', '2 marks for assessment/evaluation', '1 mark for geographical terminology'] },
+              specReference: 'Edexcel GCSE Geography A Topic 6'
+            },
+            {
+              id: 'geo-pred-11',
+              question: 'Explain how fair trade can help reduce development inequalities.',
+              marks: 4,
+              difficulty: 'medium',
+              modelAnswer: 'Fair trade guarantees minimum prices for producers, protecting them from market fluctuations and ensuring sustainable livelihoods. Premium payments fund community projects like schools and healthcare, improving social development. Direct trading relationships eliminate exploitative middlemen, ensuring more income reaches producers. Fair trade standards require safe working conditions and prohibit child labor, improving quality of life for workers and their families.',
+              markingCriteria: { breakdown: ['1 mark for minimum price guarantee', '1 mark for community development premium', '1 mark for direct trading relationships', '1 mark for labor standards'] },
+              specReference: 'Edexcel GCSE Geography A Topic 7'
+            },
+            {
+              id: 'geo-pred-12',
+              question: 'To what extent can renewable energy sources meet global energy demands sustainably?\n\nYou should consider:\n• The potential of different renewable energy sources\n• Challenges in renewable energy development\n• The role of technology and investment\n\nYou should also consider any other factors.',
+              marks: 12,
+              difficulty: 'hard',
+              modelAnswer: 'Renewable energy has significant potential to meet global energy demands sustainably, though challenges remain. Solar and wind power have experienced dramatic cost reductions and efficiency improvements, with solar now cheaper than fossil fuels in many regions. Countries like Denmark generate over 50% of electricity from wind, demonstrating feasibility. Hydroelectric power provides reliable baseload generation, while geothermal offers consistent output in suitable locations. However, intermittency challenges require storage solutions and grid flexibility. Battery technology is advancing rapidly but remains expensive for grid-scale applications. Geographic limitations mean some regions lack sufficient renewable resources, requiring international cooperation and transmission infrastructure. Investment requirements are substantial, particularly for developing countries lacking capital. Political and social challenges include resistance from fossil fuel industries and communities. Despite these challenges, technological advances, falling costs, and climate urgency are driving rapid renewable adoption. Countries like Costa Rica and Iceland demonstrate that 100% renewable electricity is achievable. With continued investment in storage, grid infrastructure, and international cooperation, renewable energy can largely meet global demands sustainably, though the transition requires coordinated effort and significant investment.',
+              markingCriteria: { breakdown: ['3 marks for renewable energy potential and examples', '3 marks for challenges and limitations', '3 marks for technology and investment factors', '2 marks for evaluation and conclusion', '1 mark for spelling, punctuation and grammar'] },
+              specReference: 'Edexcel GCSE Geography A Topic 8'
+            }
+          ]
+        },
+        {
           id: 'coastal-landscapes',
           name: 'Coastal Landscapes and Processes',
           questions: [
