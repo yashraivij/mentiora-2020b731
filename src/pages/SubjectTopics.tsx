@@ -81,13 +81,20 @@ const SubjectTopics = () => {
   ];
 
   const filteredTopics = subject.topics.filter(topic => {
-    // For all geography subjects, be extra strict about filtering exam topics
-    if (subjectId?.includes('geography')) {
-      // Remove any topic containing exam-related words
-      if (topic.name.toLowerCase().includes('predicted') ||
-          topic.name.toLowerCase().includes('2026') ||
-          topic.name.toLowerCase().includes('paper') ||
-          topic.name.toLowerCase().includes('exam') ||
+    // For all geography subjects (case-insensitive), be extra strict about filtering exam topics
+    if (subjectId?.toLowerCase().includes('geography')) {
+      // Remove any topic containing exam-related words (case-insensitive)
+      const topicNameLower = topic.name.toLowerCase();
+      const topicIdLower = topic.id.toLowerCase();
+      
+      if (topicNameLower.includes('predicted') ||
+          topicNameLower.includes('2026') ||
+          topicNameLower.includes('paper') ||
+          topicNameLower.includes('exam') ||
+          topicIdLower.includes('predicted') ||
+          topicIdLower.includes('2026') ||
+          topicIdLower.includes('paper') ||
+          topicIdLower.includes('exam') ||
           topic.id === 'predicted-exam-2026') {
         return false;
       }
