@@ -106,7 +106,7 @@ const Pricing = () => {
       </div>
       
       {/* Header with Logo */}
-      <div className="absolute top-4 left-4 z-20">
+      <div className="absolute top-16 left-4 z-20">
         <button
           onClick={() => navigate("/dashboard")}
           className="text-white/90 hover:text-white transition-colors duration-200"
