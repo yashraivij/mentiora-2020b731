@@ -81,8 +81,8 @@ const SubjectTopics = () => {
   ];
 
   const filteredTopics = subject.topics.filter(topic => {
-    // For geography, be extra strict about filtering exam topics
-    if (subjectId === 'geography') {
+    // For all geography subjects, be extra strict about filtering exam topics
+    if (subjectId?.includes('geography')) {
       // Remove any topic containing exam-related words
       if (topic.name.toLowerCase().includes('predicted') ||
           topic.name.toLowerCase().includes('2026') ||
@@ -91,8 +91,10 @@ const SubjectTopics = () => {
           topic.id === 'predicted-exam-2026') {
         return false;
       }
-      // Only show topics in the allowed list
-      return allowedGeographyTopics.includes(topic.name);
+      // For the main geography subject, only show topics in the allowed list
+      if (subjectId === 'geography') {
+        return allowedGeographyTopics.includes(topic.name);
+      }
     }
     
     // For other subjects, filter out predicted exam topics
@@ -242,7 +244,7 @@ const SubjectTopics = () => {
                 })}
                 
                 {/* Line to final exam node - only show for non-geography subjects */}
-                {filteredTopics.length > 0 && subjectId !== 'geography' && (
+                {filteredTopics.length > 0 && !subjectId?.includes('geography') && (
                   <path
                     d={`M ${220 * (filteredTopics.length - 1) + 110} ${(filteredTopics.length - 1) % 2 === 0 ? 80 : 160} Q ${220 * filteredTopics.length + 50} 120 ${220 * filteredTopics.length + 110} 120`}
                     stroke="url(#examGradient)"
@@ -333,7 +335,7 @@ const SubjectTopics = () => {
               })}
               
               {/* 2026 Exam Final Node - only show for non-geography subjects */}
-              {subjectId !== 'geography' && (
+              {!subjectId?.includes('geography') && (
                 <div className="absolute" style={{ left: `${220 * filteredTopics.length + 60}px`, top: '80px', zIndex: 10 }}>
                   <div className="flex flex-col items-center">
                     {/* Special exam circle */}
