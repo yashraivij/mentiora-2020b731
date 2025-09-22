@@ -233,8 +233,8 @@ const SubjectTopics = () => {
                   );
                 })}
                 
-                {/* Line to final exam node */}
-                {filteredTopics.length > 0 && (
+                {/* Line to final exam node - only show for non-geography subjects */}
+                {filteredTopics.length > 0 && subjectId !== 'geography' && (
                   <path
                     d={`M ${220 * (filteredTopics.length - 1) + 110} ${(filteredTopics.length - 1) % 2 === 0 ? 80 : 160} Q ${220 * filteredTopics.length + 50} 120 ${220 * filteredTopics.length + 110} 120`}
                     stroke="url(#examGradient)"
@@ -324,35 +324,37 @@ const SubjectTopics = () => {
                 );
               })}
               
-              {/* 2026 Exam Final Node */}
-              <div className="absolute" style={{ left: `${220 * filteredTopics.length + 60}px`, top: '80px', zIndex: 10 }}>
-                <div className="flex flex-col items-center">
-                  {/* Special exam circle */}
-                  <div 
-                    className="w-24 h-24 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 hover:scale-110 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 border-4 border-yellow-400 shadow-2xl animate-pulse"
-                    onClick={() => navigate(`/predicted-exam/${subjectId}`)}
-                  >
-                    <span className="text-sm text-center leading-tight font-black">2026<br/>EXAM</span>
-                  </div>
-                  
-                  {/* Exam info */}
-                  <div className="mt-3 text-center max-w-[140px]">
-                    <h3 className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-                      Final Challenge
-                    </h3>
-                    <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs mb-2">
-                      Predicted Exam
-                    </Badge>
-                    <Button 
-                      size="sm" 
-                      className="text-xs px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+              {/* 2026 Exam Final Node - only show for non-geography subjects */}
+              {subjectId !== 'geography' && (
+                <div className="absolute" style={{ left: `${220 * filteredTopics.length + 60}px`, top: '80px', zIndex: 10 }}>
+                  <div className="flex flex-col items-center">
+                    {/* Special exam circle */}
+                    <div 
+                      className="w-24 h-24 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 hover:scale-110 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 border-4 border-yellow-400 shadow-2xl animate-pulse"
                       onClick={() => navigate(`/predicted-exam/${subjectId}`)}
                     >
-                      Take Exam
-                    </Button>
+                      <span className="text-sm text-center leading-tight font-black">2026<br/>EXAM</span>
+                    </div>
+                    
+                    {/* Exam info */}
+                    <div className="mt-3 text-center max-w-[140px]">
+                      <h3 className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
+                        Final Challenge
+                      </h3>
+                      <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs mb-2">
+                        Predicted Exam
+                      </Badge>
+                      <Button 
+                        size="sm" 
+                        className="text-xs px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                        onClick={() => navigate(`/predicted-exam/${subjectId}`)}
+                      >
+                        Take Exam
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
