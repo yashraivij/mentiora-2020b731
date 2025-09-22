@@ -1217,10 +1217,10 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 flex">
-        {/* Main Learning Area */}
-        <div className="flex-1 p-8 max-w-4xl mx-auto">
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col lg:flex-row">
+          {/* Main Learning Area */}
+          <div className={`flex-1 ${isMobile ? 'p-4' : 'p-8'} ${isMobile ? 'max-w-full w-full' : 'max-w-4xl'} mx-auto overflow-hidden mobile-no-overflow`}>
           {activeTab === "learn" && (
             <div>
               {/* Header with stats */}
@@ -1271,20 +1271,20 @@ const Dashboard = () => {
                           whileTap={{ scale: 0.98 }}
                           className="relative"
                         >
-                          <Card 
-                            className="cursor-pointer border-0 shadow-lg hover:shadow-xl transition-all duration-300"
+                           <Card 
+                            className="cursor-pointer border-0 shadow-lg hover:shadow-xl transition-all duration-300 mobile-no-overflow"
                             onClick={() => setSelectedSubject(subject.id)}
                           >
-                            <CardContent className="p-8">
-                              <div className="flex items-center justify-between">
+                            <CardContent className={`${isMobile ? 'p-4' : 'p-8'}`}>
+                              <div className={`flex ${isMobile ? 'flex-col gap-4' : 'items-center justify-between'}`}>
                                 <div className="flex-1">
                                   <div className="flex items-center space-x-2 mb-3">
-                                    <span className={`text-xs font-bold ${colors.text} bg-muted px-3 py-1 rounded-full`}>
+                                    <span className={`text-xs font-bold ${colors.text} bg-muted px-3 py-1 rounded-full mobile-text-wrap`}>
                                       {progress.completed} OF {progress.total} UNITS
                                     </span>
                                   </div>
                                   
-                            <h3 className="text-2xl font-bold text-foreground mb-4">
+                                  <h3 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold text-foreground mb-4 mobile-text-wrap`}>
                                     {getSubjectDisplayName(subject)}
                                   </h3>
                                   
@@ -1296,16 +1296,16 @@ const Dashboard = () => {
                                   </div>
 
                                   <Button
-                                    className={`${colors.bg} hover:opacity-90 text-white font-bold py-3 px-8 rounded-2xl text-lg shadow-lg`}
+                                    className={`${colors.bg} hover:opacity-90 text-white font-bold py-3 px-6 sm:px-8 rounded-2xl ${isMobile ? 'text-base w-full' : 'text-lg'} shadow-lg mobile-touch-target`}
                                   >
                                     {progress.completed === 0 ? "START" : "CONTINUE"}
                                   </Button>
                                 </div>
 
-                                <div className={`w-20 h-20 ${colors.bg} rounded-full flex items-center justify-center ml-6`}>
+                                <div className={`${isMobile ? 'w-16 h-16 self-center' : 'w-20 h-20 ml-6'} ${colors.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
                                   {(() => {
                                     const IconComponent = getSubjectIcon(subject.id);
-                                    return <IconComponent className="h-10 w-10 text-white" />;
+                                    return <IconComponent className={`${isMobile ? 'h-8 w-8' : 'h-10 w-10'} text-white`} />;
                                   })()}
                                 </div>
                               </div>
@@ -1413,22 +1413,22 @@ const Dashboard = () => {
                                     setShowAddSubjects(false);
                                   }}
                                 >
-                                  <CardContent className="p-4">
-                                    <div className="flex items-center space-x-4">
-                                      <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center`}>
-                                        <IconComponent className="h-6 w-6 text-white" />
-                                      </div>
-                                      <div className="flex-1">
-                                        <h3 className="text-lg font-bold text-gray-800">
-                                          {getSubjectDisplayName(subject)}
-                                        </h3>
-                                        <p className="text-sm text-gray-600">
-                                          {subject.topics.length} topics available
-                                        </p>
-                                      </div>
-                                      <Plus className="h-5 w-5 text-muted-foreground" />
-                                    </div>
-                                  </CardContent>
+                                   <CardContent className="p-4">
+                                     <div className="flex items-center space-x-4">
+                                       <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center flex-shrink-0`}>
+                                         <IconComponent className="h-6 w-6 text-white" />
+                                       </div>
+                                       <div className="flex-1 min-w-0">
+                                         <h3 className="text-lg font-bold text-gray-800 mobile-text-wrap">
+                                           {getSubjectDisplayName(subject)}
+                                         </h3>
+                                         <p className="text-sm text-gray-600 mobile-text-wrap">
+                                           {subject.topics.length} topics available
+                                         </p>
+                                       </div>
+                                       <Plus className="h-5 w-5 text-muted-foreground flex-shrink-0" />
+                                     </div>
+                                   </CardContent>
                                 </Card>
                               </motion.div>
                             );
@@ -1783,9 +1783,9 @@ const Dashboard = () => {
                  </div>
                </div>
 
-                {/* Stats Overview Cards */}
-                <div className="flex justify-center mb-8">
-                  <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'} gap-6 max-w-2xl w-full`}>
+                 {/* Stats Overview Cards */}
+                <div className="flex justify-center mb-8 mobile-no-overflow">
+                  <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'} gap-4 sm:gap-6 max-w-2xl w-full px-2 sm:px-0`}>
                  <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border text-center">
                    <div className="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
                      <Trophy className="w-6 h-6 text-yellow-800" />
@@ -1836,10 +1836,10 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-              {/* Main Leaderboard */}
-              <div className="bg-card rounded-2xl shadow-lg border-2 border-border overflow-hidden">
-                <div className="bg-gradient-to-r from-yellow-400 to-orange-400 px-6 py-4">
-                  <h3 className="text-xl font-bold text-white">
+               {/* Main Leaderboard */}
+              <div className="bg-card rounded-2xl shadow-lg border-2 border-border overflow-hidden mobile-no-overflow">
+                <div className="bg-gradient-to-r from-yellow-400 to-orange-400 px-4 sm:px-6 py-4">
+                  <h3 className="text-lg sm:text-xl font-bold text-white mobile-text-wrap">
                     {activeLeaderboardTab === 'weekly' ? 'Weekly League' : 'All Time League'}
                   </h3>
                 </div>
@@ -2305,13 +2305,13 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <div className="p-6 rounded-lg bg-emerald-50 dark:bg-card border border-emerald-200 dark:border-border shadow-sm">
-                    <div className="flex items-start justify-between">
-                      <div className="space-y-2">
-                        <h4 className="text-lg font-bold text-card-foreground flex items-center gap-2">
-                          <Crown className="w-5 h-5 text-emerald-500" />
+                    <div className={`flex ${isMobile ? 'flex-col gap-4' : 'items-start justify-between'}`}>
+                      <div className="space-y-2 flex-1">
+                        <h4 className="text-lg font-bold text-card-foreground flex items-center gap-2 mobile-text-wrap">
+                          <Crown className="w-5 h-5 text-emerald-500 flex-shrink-0" />
                           Premium Subscription
                         </h4>
-                        <p className="text-card-foreground/90 max-w-lg">
+                        <p className="text-card-foreground/90 mobile-text-wrap">
                           Access your Stripe billing portal to manage your subscription, update payment methods, 
                           view invoices, and modify your plan.
                         </p>
@@ -2319,10 +2319,10 @@ const Dashboard = () => {
                       
                       <Button 
                         onClick={openManageBilling}
-                        className="ml-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-8 rounded-2xl"
+                        className={`${isMobile ? 'w-full' : 'ml-4'} bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 sm:px-8 rounded-2xl mobile-touch-target`}
                       >
                         <CreditCard className="w-4 h-4 mr-2" />
-                        Manage Billing
+                        <span className="truncate">Manage Billing</span>
                       </Button>
                     </div>
                   </div>
@@ -2341,10 +2341,10 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className="p-6 rounded-lg bg-red-50 dark:bg-card border border-red-200 dark:border-border shadow-sm">
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-2">
-                      <h4 className="text-lg font-bold text-card-foreground">Delete Account</h4>
-                      <p className="text-card-foreground/90 max-w-lg">
+                  <div className={`flex ${isMobile ? 'flex-col gap-4' : 'items-start justify-between'}`}>
+                    <div className="space-y-2 flex-1">
+                      <h4 className="text-lg font-bold text-card-foreground mobile-text-wrap">Delete Account</h4>
+                      <p className="text-card-foreground/90 mobile-text-wrap">
                         Permanently delete your account and all associated data. This action cannot be undone. 
                         All your progress, notes, and achievements will be lost forever.
                       </p>
@@ -2353,10 +2353,10 @@ const Dashboard = () => {
                     <Button 
                       onClick={() => navigate('/settings')}
                       variant="outline" 
-                      className="ml-4 border-red-300 hover:bg-red-50 dark:border-destructive/40 dark:hover:bg-destructive/10 text-red-600 dark:text-destructive font-bold py-3 px-8 rounded-2xl"
+                      className={`${isMobile ? 'w-full' : 'ml-4'} border-red-300 hover:bg-red-50 dark:border-destructive/40 dark:hover:bg-destructive/10 text-red-600 dark:text-destructive font-bold py-3 px-6 sm:px-8 rounded-2xl mobile-touch-target`}
                     >
                       <Trash2 className="w-4 h-4 mr-2" />
-                      Delete Account
+                      <span className="truncate">Delete Account</span>
                     </Button>
                   </div>
                 </div>
@@ -2365,8 +2365,8 @@ const Dashboard = () => {
           )}
         </div>
 
-        {/* Right Sidebar - Premium & Stats */}
-        <div className="w-80 bg-muted/30 p-6 space-y-6">
+        {/* Right Sidebar - Premium & Stats - Hidden on mobile */}
+        <div className={`${isMobile ? 'hidden' : 'w-80'} bg-muted/30 p-6 space-y-6`}>
           {/* Premium Card */}
           {isPremium ? (
             <Card className="border-0 bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-lg">
@@ -2409,14 +2409,14 @@ const Dashboard = () => {
                   </div>
                   <span className="font-bold text-lg">Go Premium</span>
                 </div>
-                <p className="text-white/90 mb-4">
+                <p className="text-white/90 mb-4 mobile-text-wrap">
                   Unlock exclusive study features and advanced analytics!
                 </p>
                 <Button 
-                  className="w-full bg-background text-primary hover:bg-accent font-bold py-3 rounded-2xl theme-transition"
+                  className="w-full bg-background text-primary hover:bg-accent font-bold py-3 rounded-2xl theme-transition mobile-text-wrap text-sm sm:text-base"
                   onClick={() => navigate("/pricing")}
                 >
-                  UPGRADE TO PREMIUM
+                  <span className="truncate">UPGRADE TO PREMIUM</span>
                 </Button>
               </CardContent>
             </Card>
@@ -2468,8 +2468,8 @@ const Dashboard = () => {
                       <BookOpen className="h-4 w-4 text-white" />
                     )}
                   </div>
-                  <div className="flex-1">
-                    <p className="font-bold text-card-foreground">Complete 1 practice set</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-card-foreground mobile-text-wrap">Complete 1 practice set</p>
                     <div className="w-full bg-muted rounded-full h-2 mt-1">
                       <div 
                         className={`${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'bg-green-400' : 'bg-blue-400'} h-2 rounded-full transition-all duration-300`} 
@@ -2477,7 +2477,7 @@ const Dashboard = () => {
                       ></div>
                     </div>
                   </div>
-                  <div className={`${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'bg-green-50' : 'bg-blue-50'} rounded-lg p-2`}>
+                  <div className={`${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'bg-green-50' : 'bg-blue-50'} rounded-lg p-2 flex-shrink-0`}>
                     <span className={`text-xs font-bold ${(userStats?.practiceToday || todayEarnedMP >= 40) ? 'text-green-600' : 'text-blue-600'}`}>
                       {(userStats?.practiceToday || todayEarnedMP >= 40) ? '+40 MP' : '40 MP'}
                     </span>
