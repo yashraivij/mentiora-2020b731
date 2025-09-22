@@ -90,6 +90,46 @@ const refreshSubscription = async (userId?: string) => {
   useEffect(() => {
     let mounted = true;
     
+    const checkDailyLoginReward = async (userId: string) => {
+      const today = new Date().toDateString();
+      const lastLoginDateKey = `lastDailyLoginDate_${userId}`;
+      const lastLoginDate = localStorage.getItem(lastLoginDateKey);
+      
+      console.log('Daily login check:', { userId, today, lastLoginDate, shouldAward: lastLoginDate !== today });
+      
+      // Only attempt daily login award if it hasn't been awarded today
+      if (lastLoginDate !== today) {
+        try {
+          console.log('Attempting to award daily login MP...');
+          const { MPPointsSystemClient } = await import('@/lib/mpPointsSystemClient');
+          const result = await MPPointsSystemClient.awardDailyLogin(userId);
+          
+          console.log('Daily login award result:', result);
+          
+          if (result.success) {
+            // Mark today as the last login date regardless of whether points were awarded
+            localStorage.setItem(lastLoginDateKey, today);
+            
+            if (result.awarded > 0) {
+              console.log(`Daily login bonus: +${result.awarded} MP`);
+              // Show MP reward toast for login
+              if (showMPReward) {
+                showMPReward(result.awarded, "Daily quest complete: Sign in today");
+              }
+            } else {
+              console.log('Daily login already awarded today');
+            }
+          } else {
+            console.error('Failed to award daily login:', result.message);
+          }
+        } catch (error) {
+          console.error('Error awarding daily login:', error);
+        }
+      } else {
+        console.log('Daily login already awarded today (localStorage check)');
+      }
+    };
+    
     const initializeAuth = async () => {
       // Check for existing session first
       const { data: { session } } = await supabase.auth.getSession();
@@ -101,6 +141,8 @@ const refreshSubscription = async (userId?: string) => {
       
       if (session?.user) {
         await refreshSubscription(session.user.id);
+        // Check for daily login reward on page load for existing sessions
+        await checkDailyLoginReward(session.user.id);
       }
       
       setIsLoading(false);
@@ -120,45 +162,8 @@ const refreshSubscription = async (userId?: string) => {
             await refreshSubscription(session.user.id);
             // Handle daily login MP reward server-side (only once per day)
             if (event === 'SIGNED_IN') {
-              console.log('Session detected for user:', session.user.email);
-              const userId = session.user.id;
-              const today = new Date().toDateString();
-              const lastLoginDateKey = `lastDailyLoginDate_${userId}`;
-              const lastLoginDate = localStorage.getItem(lastLoginDateKey);
-              
-              console.log('Daily login check:', { userId, today, lastLoginDate, shouldAward: lastLoginDate !== today });
-              
-              // Only attempt daily login award if it hasn't been awarded today
-              if (lastLoginDate !== today) {
-                try {
-                  console.log('Attempting to award daily login MP...');
-                  const { MPPointsSystemClient } = await import('@/lib/mpPointsSystemClient');
-                  const result = await MPPointsSystemClient.awardDailyLogin(userId);
-                  
-                  console.log('Daily login award result:', result);
-                  
-                  if (result.success) {
-                    // Mark today as the last login date regardless of whether points were awarded
-                    localStorage.setItem(lastLoginDateKey, today);
-                    
-                    if (result.awarded > 0) {
-                      console.log(`Daily login bonus: +${result.awarded} MP`);
-                      // Show MP reward toast for login
-                      if (showMPReward) {
-                        showMPReward(result.awarded, "Daily quest complete: Sign in today");
-                      }
-                    } else {
-                      console.log('Daily login already awarded today');
-                    }
-                  } else {
-                    console.error('Failed to award daily login:', result.message);
-                  }
-                } catch (error) {
-                  console.error('Error awarding daily login:', error);
-                }
-              } else {
-                console.log('Daily login already awarded today (localStorage check)');
-              }
+              console.log('New sign-in detected for user:', session.user.email);
+              await checkDailyLoginReward(session.user.id);
             }
           }, 0);
         } else if (event === 'SIGNED_OUT') {
