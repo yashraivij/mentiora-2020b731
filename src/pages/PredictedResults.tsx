@@ -556,7 +556,7 @@ const PredictedResults = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Grade Display Banner */}
-          <Card className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 text-white border-0 shadow-xl">
+          <Card className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 text-primary-foreground border-0 shadow-xl">
             <CardContent className="py-8">
               <div className="text-center space-y-4">
                 <div className="text-6xl font-bold drop-shadow-lg">
