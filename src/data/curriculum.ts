@@ -16712,167 +16712,56 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q2a-coastal',
-              question: 'Answer TWO questions from this section (choose 2 out of 3 topics)\n\nQuestion 2: Coastal Landscapes and Processes\n\nWhich of the following is an erosional landform?\nA. Spit\nB. Beach\nC. Wave-cut platform\nD. Sand dune',
+              question: 'Question 2a: Which of the following is an erosional landform?\n\nOption A (Coastal): Wave-cut platform\nOption B (Rivers): V-shaped valley\nOption C (Glaciated): Arete\n\nChoose the correct erosional landform for your chosen landscape type.',
               marks: 1,
               difficulty: 'easy',
-              modelAnswer: 'C. Wave-cut platform',
+              modelAnswer: 'Any correct erosional landform: Coastal - Wave-cut platform, Rivers - V-shaped valley, Glaciated - Arete',
               markingCriteria: {
-                breakdown: ['Correct identification of wave-cut platform as erosional landform (1 mark)']
+                breakdown: ['Correct identification of erosional landform for chosen landscape (1 mark)']
               },
-              specReference: 'Edexcel Geography A Paper 1 Q2 Coastal'
+              specReference: 'Edexcel Geography A Paper 1 Q2'
             },
             {
               id: 'exam-q2b-coastal',
-              question: 'State two physical processes that lead to the formation of headlands and bays.',
+              question: 'Question 2b: State two physical processes for your chosen landscape type.\n\nCoastal Landscapes: State two processes that lead to the formation of headlands and bays.\nRiver Landscapes: State two processes that lead to river valley formation.\nGlaciated Landscapes: State two processes that lead to glacial erosion.',
               marks: 2,
               difficulty: 'easy',
-              modelAnswer: 'Differential erosion (1 mark) and the resistance of different rock types (1 mark).',
+              modelAnswer: 'Coastal: Differential erosion and rock resistance. Rivers: Hydraulic action and abrasion. Glaciated: Plucking and abrasion.',
               markingCriteria: {
                 breakdown: ['One process correctly identified (1 mark)', 'Second process correctly identified (1 mark)']
               },
-              specReference: 'Edexcel Geography A Paper 1 Q2 Coastal'
+              specReference: 'Edexcel Geography A Paper 1 Q2'
             },
             {
               id: 'exam-q2c-coastal',
-              question: 'Explain how longshore drift leads to the formation of a spit.',
+              question: 'Question 2c: Explain landform formation for your chosen landscape type.\n\nCoastal: Explain how longshore drift leads to the formation of a spit.\nRivers: Explain how waterfalls are formed.\nGlaciated: Explain how corries are formed by glacial processes.',
               marks: 4,
               difficulty: 'medium',
-              modelAnswer: 'Longshore drift transports sediment along the coast at an angle due to prevailing winds. Waves approach the beach at an angle, carrying sediment up the beach. The backwash returns straight down the beach due to gravity. This creates a zigzag movement of sediment. Where the coastline changes direction, sediment continues to be deposited, extending into the sea to form a spit.',
+              modelAnswer: 'Coastal: Longshore drift transports sediment along the coast at an angle due to prevailing winds. Waves approach the beach at an angle, carrying sediment up the beach. The backwash returns straight down the beach due to gravity. This creates a zigzag movement of sediment. Where the coastline changes direction, sediment continues to be deposited, extending into the sea to form a spit.\n\nRivers: Rivers flow over alternating bands of hard and soft rock. The soft rock is eroded more quickly by hydraulic action and abrasion, creating a step. The hard rock forms the waterfall lip. Water plunges over creating a plunge pool below through hydraulic action. Undercutting occurs, causing the hard rock to collapse. The waterfall retreats upstream leaving a gorge.\n\nGlaciated: Snow accumulates in mountain hollows and compacts to form ice. The glacier moves through rotational slip, eroding the back wall through plucking and the floor through abrasion. Freeze-thaw weathering steepens the back wall. When the ice melts, it leaves behind a deep, armchair-shaped hollow with a steep back wall and sometimes a tarn (lake).',
               markingCriteria: {
                 breakdown: [
-                  'Description of wave approach and backwash (1 mark)',
-                  'Explanation of zigzag sediment movement (1 mark)',
-                  'Link to coastline change in direction (1 mark)',
-                  'Formation of spit through continued deposition (1 mark)'
+                  'Process explanation (1 mark)',
+                  'Sequence of formation (1 mark)',
+                  'Key mechanisms described (1 mark)',
+                  'Final landform characteristics (1 mark)'
                 ]
               },
-              specReference: 'Edexcel Geography A Paper 1 Q2 Coastal'
+              specReference: 'Edexcel Geography A Paper 1 Q2'
             },
             {
               id: 'exam-q2d-coastal',
-              question: 'Assess the costs and benefits of hard engineering strategies to protect the coast.',
+              question: 'Question 2d: Assess management strategies for your chosen landscape type.\n\nCoastal: Assess the costs and benefits of hard engineering strategies to protect the coast.\nRivers: Assess the effectiveness of flood management strategies in the UK.\nGlaciated: Assess the impacts of tourism in glaciated upland areas of the UK.',
               marks: 8,
               difficulty: 'hard',
-              modelAnswer: 'Benefits: Sea walls provide effective protection against wave erosion and flooding, protecting valuable coastal infrastructure. Rock armour dissipates wave energy effectively and is relatively flexible. Groynes can build up beaches which provide natural protection. Costs: High construction and maintenance costs. Sea walls can increase erosion elsewhere due to wave reflection. Hard defences can look unsightly and restrict coastal access. They may simply transfer the problem elsewhere along the coast. Environmental impacts include habitat destruction and interference with natural coastal processes.',
+              modelAnswer: 'Coastal: Benefits: Sea walls provide effective protection against wave erosion and flooding, protecting valuable coastal infrastructure. Rock armour dissipates wave energy effectively and is relatively flexible. Groynes can build up beaches which provide natural protection. Costs: High construction and maintenance costs. Sea walls can increase erosion elsewhere due to wave reflection. Hard defences can look unsightly and restrict coastal access. They may simply transfer the problem elsewhere along the coast. Environmental impacts include habitat destruction and interference with natural coastal processes.\n\nRivers: Hard engineering like flood barriers and channel straightening provides immediate protection but can be expensive and transfer problems downstream. Soft engineering like floodplain restoration and sustainable drainage systems work with natural processes but may require land use changes. Integrated approaches combining multiple strategies tend to be most effective, as seen with the Thames Estuary 2100 project.\n\nGlaciated: Positive impacts: Tourism provides economic benefits to rural communities through employment in hotels, restaurants, and guiding services. It supports local businesses and helps maintain rural services. Tourism revenue can fund conservation projects and path maintenance. Negative impacts: Footpath erosion and vegetation damage from large numbers of visitors. Traffic congestion and parking problems in narrow valleys. Litter and disturbance to wildlife. House prices increase, displacing local residents. Seasonal employment may be unstable.',
               markingCriteria: {
                 breakdown: [
-                  'Benefits of hard engineering strategies (3 marks)',
-                  'Costs/disadvantages of hard engineering (3 marks)',
-                  'Assessment and evaluation of overall effectiveness (2 marks)'
+                  'Benefits/positive impacts (3 marks)',
+                  'Costs/negative impacts (3 marks)',
+                  'Assessment and evaluation of effectiveness (2 marks)'
                 ]
               },
-              specReference: 'Edexcel Geography A Paper 1 Q2 Coastal'
-            },
-            {
-              id: 'exam-q3a-rivers',
-              question: 'Question 3: River Landscapes and Processes\n\nName one river landform created by erosion and one created by deposition.',
-              marks: 2,
-              difficulty: 'easy',
-              modelAnswer: 'Erosion: Waterfall (1 mark). Deposition: Levee (1 mark).',
-              markingCriteria: {
-                breakdown: ['One erosional landform correctly identified (1 mark)', 'One depositional landform correctly identified (1 mark)']
-              },
-              specReference: 'Edexcel Geography A Paper 1 Q3 Rivers'
-            },
-            {
-              id: 'exam-q3b-rivers',
-              question: 'Explain one physical cause of river flooding.',
-              marks: 4,
-              difficulty: 'medium',
-              modelAnswer: 'Prolonged heavy rainfall saturates the soil, reducing infiltration capacity. This increases surface runoff into rivers. When river discharge exceeds channel capacity, flooding occurs. The impermeable saturated ground cannot absorb additional rainfall, forcing more water into surface drainage systems.',
-              markingCriteria: {
-                breakdown: [
-                  'Identification of prolonged heavy rainfall (1 mark)',
-                  'Explanation of soil saturation effects (1 mark)',
-                  'Link to increased surface runoff (1 mark)',
-                  'Connection to flooding (1 mark)'
-                ]
-              },
-              specReference: 'Edexcel Geography A Paper 1 Q3 Rivers'
-            },
-            {
-              id: 'exam-q3c-rivers',
-              question: 'Explain how human activity has increased flood risk in the UK.',
-              marks: 6,
-              difficulty: 'medium',
-              modelAnswer: 'Urbanisation increases impermeable surfaces, reducing infiltration and increasing surface runoff speed. This creates higher peak flows and shorter lag times. Deforestation reduces interception and transpiration, increasing runoff. Channel modifications like straightening increase flow velocity but may cause problems downstream. Climate change from human activities increases extreme weather frequency. Development on floodplains puts more people and property at risk.',
-              markingCriteria: {
-                breakdown: [
-                  'Urbanisation effects explained (2 marks)',
-                  'Deforestation impacts (1 mark)',
-                  'Channel modifications (1 mark)',
-                  'Climate change/floodplain development (2 marks)'
-                ]
-              },
-              specReference: 'Edexcel Geography A Paper 1 Q3 Rivers'
-            },
-            {
-              id: 'exam-q3d-rivers',
-              question: 'Using a UK river basin case study, evaluate the effectiveness of flood management strategies.',
-              marks: 3,
-              difficulty: 'hard',
-              modelAnswer: 'River Thames case study: Hard engineering like the Thames Barrier has been highly effective in protecting London from storm surges. Soft engineering approaches like the Jubilee River flood relief channel work with natural processes. The integrated approach combining multiple strategies has been most effective.',
-              markingCriteria: {
-                breakdown: [
-                  'Named UK river basin case study (1 mark)',
-                  'Evaluation of strategies (2 marks)'
-                ]
-              },
-              specReference: 'Edexcel Geography A Paper 1 Q3 Rivers'
-            },
-            {
-              id: 'exam-q4a-glaciated',
-              question: 'Question 4: Glaciated Upland Landscapes and Processes\n\nWhich of the following is a glacial landform created by erosion?\nA. Drumlin\nB. Arete\nC. Moraine\nD. Outwash plain',
-              marks: 1,
-              difficulty: 'easy',
-              modelAnswer: 'B. Arete',
-              markingCriteria: {
-                breakdown: ['Correct identification of arete as erosional glacial landform (1 mark)']
-              },
-              specReference: 'Edexcel Geography A Paper 1 Q4 Glaciated'
-            },
-            {
-              id: 'exam-q4b-glaciated',
-              question: 'State two physical processes that lead to glacial erosion.',
-              marks: 2,
-              difficulty: 'easy',
-              modelAnswer: 'Plucking (1 mark) and abrasion (1 mark).',
-              markingCriteria: {
-                breakdown: ['One glacial erosion process correctly identified (1 mark)', 'Second glacial erosion process correctly identified (1 mark)']
-              },
-              specReference: 'Edexcel Geography A Paper 1 Q4 Glaciated'
-            },
-            {
-              id: 'exam-q4c-glaciated',
-              question: 'Explain how corries are formed by glacial processes.',
-              marks: 4,
-              difficulty: 'medium',
-              modelAnswer: 'Snow accumulates in mountain hollows and compacts to form ice. The glacier moves through rotational slip, eroding the back wall through plucking and the floor through abrasion. Freeze-thaw weathering steepens the back wall. When the ice melts, it leaves behind a deep, armchair-shaped hollow with a steep back wall and sometimes a tarn (lake).',
-              markingCriteria: {
-                breakdown: [
-                  'Snow accumulation and ice formation (1 mark)',
-                  'Rotational movement and erosion processes (1 mark)',
-                  'Freeze-thaw weathering effects (1 mark)',
-                  'Formation of final corrie shape (1 mark)'
-                ]
-              },
-              specReference: 'Edexcel Geography A Paper 1 Q4 Glaciated'
-            },
-            {
-              id: 'exam-q4d-glaciated',
-              question: 'Assess the impacts of tourism in glaciated upland areas of the UK.',
-              marks: 8,
-              difficulty: 'hard',
-              modelAnswer: 'Positive impacts: Tourism provides economic benefits to rural communities through employment in hotels, restaurants, and guiding services. It supports local businesses and helps maintain rural services. Tourism revenue can fund conservation projects and path maintenance. Negative impacts: Footpath erosion and vegetation damage from large numbers of visitors. Traffic congestion and parking problems in narrow valleys. Litter and disturbance to wildlife. House prices increase, displacing local residents. Seasonal employment may be unstable.',
-              markingCriteria: {
-                breakdown: [
-                  'Economic benefits explained (2 marks)',
-                  'Environmental negative impacts (3 marks)',
-                  'Social impacts positive and negative (2 marks)',
-                  'Assessment and evaluation (1 mark)'
-                ]
-              },
-              specReference: 'Edexcel Geography A Paper 1 Q4 Glaciated'
+              specReference: 'Edexcel Geography A Paper 1 Q2'
             },
             {
               id: 'exam-q5a',
