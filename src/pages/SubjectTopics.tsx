@@ -244,7 +244,7 @@ const SubjectTopics = () => {
                 })}
                 
                 {/* Line to final exam node - only show for non-geography subjects */}
-                {filteredTopics.length > 0 && !subjectId?.includes('geography') && (
+                {filteredTopics.length > 0 && !subjectId?.toLowerCase().includes('geography') && (
                   <path
                     d={`M ${220 * (filteredTopics.length - 1) + 110} ${(filteredTopics.length - 1) % 2 === 0 ? 80 : 160} Q ${220 * filteredTopics.length + 50} 120 ${220 * filteredTopics.length + 110} 120`}
                     stroke="url(#examGradient)"
@@ -335,7 +335,7 @@ const SubjectTopics = () => {
               })}
               
               {/* 2026 Exam Final Node - only show for non-geography subjects */}
-              {!subjectId?.includes('geography') && (
+              {!subjectId?.toLowerCase().includes('geography') && (
                 <div className="absolute" style={{ left: `${220 * filteredTopics.length + 60}px`, top: '80px', zIndex: 10 }}>
                   <div className="flex flex-col items-center">
                     {/* Special exam circle */}
