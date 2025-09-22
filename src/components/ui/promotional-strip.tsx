@@ -2,10 +2,20 @@ import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { Button } from './button';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 
 export const PromotionalStrip = () => {
   const [isVisible, setIsVisible] = useState(true);
   const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const handleUpgradeClick = () => {
+    if (user) {
+      navigate('/pricing');
+    } else {
+      navigate('/login');
+    }
+  };
 
   if (!isVisible) return null;
 
@@ -25,7 +35,7 @@ export const PromotionalStrip = () => {
           
           <div className="flex items-center gap-3">
             <Button
-              onClick={() => navigate('/pricing')}
+              onClick={handleUpgradeClick}
               variant="secondary"
               size="sm"
               className="bg-white text-green-600 hover:bg-white/90 font-medium"
