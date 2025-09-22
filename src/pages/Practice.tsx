@@ -17,6 +17,7 @@ import { usePersonalizedNotifications } from "@/hooks/usePersonalizedNotificatio
 import { playCelebratorySound } from "@/lib/celebratory-sound";
 import { useMPRewards } from "@/hooks/useMPRewards";
 import { ChatAssistant } from "@/components/practice/ChatAssistant";
+import { useSubscription } from "@/hooks/useSubscription";
 
 interface QuestionAttempt {
   questionId: string;
@@ -61,6 +62,7 @@ const Practice = () => {
   const { subjectId, topicId } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { isPremium } = useSubscription();
   
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
@@ -531,7 +533,7 @@ const Practice = () => {
   const currentAttempt = attempts.find(a => a.questionId === currentQuestion.id);
 
   return (
-    <div className="min-h-screen bg-background pt-12">
+    <div className={`min-h-screen bg-background ${isPremium ? '' : 'pt-12'}`}>
       {/* Header */}
       <header className="bg-card shadow-sm border-b border-border">
         <div className="container mx-auto px-4 py-4">
