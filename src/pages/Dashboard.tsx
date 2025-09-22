@@ -1276,8 +1276,8 @@ const Dashboard = () => {
               {/* Subject Selection or Subject Path */}
               {!selectedSubject ? (
                 <div>
-                   <div className="flex items-center justify-between mb-8">
-                     <h2 className="text-3xl font-bold text-foreground">
+                   <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
+                     <h2 className="text-2xl sm:text-3xl font-bold text-foreground break-words">
                        Let's Smash GCSEs, {getFirstName()}!
                      </h2>
                     {filteredSubjects.length > 0 && (
