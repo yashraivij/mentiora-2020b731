@@ -68,6 +68,7 @@ const AVAILABLE_SUBJECTS: Subject[] = [
   { id: 'english-literature', name: 'English Literature', examBoard: 'AQA', topicCount: getTopicCount('english-literature') },
   { id: 'physics', name: 'Physics', examBoard: 'AQA', topicCount: getTopicCount('physics') },
   { id: 'geography', name: 'Geography', examBoard: 'AQA', topicCount: getTopicCount('geography') },
+  { id: 'geography-edexcel', name: 'Geography', examBoard: 'Edexcel', topicCount: getTopicCount('geography-edexcel') },
   { id: 'maths', name: 'Mathematics', examBoard: 'AQA', topicCount: getTopicCount('maths') },
   { id: 'maths-edexcel', name: 'Mathematics', examBoard: 'Edexcel', topicCount: getTopicCount('maths-edexcel') },
   { id: 'business-edexcel-igcse', name: 'Business', examBoard: 'Edexcel IGCSE', topicCount: getTopicCount('business-edexcel-igcse') },
