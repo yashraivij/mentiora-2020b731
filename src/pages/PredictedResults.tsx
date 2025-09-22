@@ -741,7 +741,7 @@ const PredictedResults = () => {
                   Review personalized notes to strengthen weak areas and improve your Grade 9 performance
                 </div>
                 <Button 
-                  onClick={() => navigate('/notebook')}
+                  onClick={() => navigate('/notes')}
                   className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
                   size="lg"
                 >
