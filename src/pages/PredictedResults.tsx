@@ -522,7 +522,7 @@ const PredictedResults = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-card shadow-sm border-b border-border">
+      <header className="bg-gradient-to-r from-primary/10 via-accent/5 to-primary/10 shadow-sm border-b border-border/50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -573,8 +573,8 @@ const PredictedResults = () => {
           </Card>
 
           {/* Results Summary */}
-          <Card>
-            <CardHeader>
+          <Card className="bg-gradient-to-br from-accent/10 via-card to-primary/5 border-accent/20">
+            <CardHeader className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-t-lg">
               <CardTitle className="flex items-center gap-2">
                 <Crown className="h-5 w-5 text-yellow-500" />
                 Detailed Results Breakdown
@@ -601,11 +601,11 @@ const PredictedResults = () => {
 
           {/* Question by Question Feedback */}
           {attempts.map((attempt, index) => (
-            <Card key={attempt.questionId} className="mb-6">
-              <CardHeader className="pb-4">
+            <Card key={attempt.questionId} className="mb-6 bg-gradient-to-br from-card via-accent/5 to-primary/5 border-accent/20">
+              <CardHeader className="pb-4 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 rounded-t-lg">
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-semibold">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent text-primary-foreground text-sm font-semibold">
                       {index + 1}
                     </div>
                     Question {index + 1}
@@ -628,10 +628,12 @@ const PredictedResults = () => {
                 {/* Question */}
                 <div>
                   <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                    <HelpCircle className="h-4 w-4 mr-2 text-primary" />
+                    <div className="flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-r from-primary to-primary/80 mr-2">
+                      <HelpCircle className="h-4 w-4 text-primary-foreground" />
+                    </div>
                     Question
                   </h4>
-                  <div className="bg-primary/10 dark:bg-primary/5 p-4 rounded-lg border-l-4 border-primary">
+                  <div className="bg-gradient-to-r from-primary/10 to-primary/5 dark:bg-gradient-to-r dark:from-primary/8 dark:to-primary/4 p-4 rounded-lg border-l-4 border-primary">
                     <p className="text-foreground">{questions[index]?.text || questions[index]?.question}</p>
                   </div>
                 </div>
@@ -639,10 +641,12 @@ const PredictedResults = () => {
                 {/* Student Answer */}
                 <div>
                   <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                    <User className="h-4 w-4 mr-2 text-accent-foreground" />
+                    <div className="flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-r from-accent to-accent/80 mr-2">
+                      <User className="h-4 w-4 text-accent-foreground" />
+                    </div>
                     Your Answer
                   </h4>
-                  <div className="bg-accent/20 dark:bg-accent/10 p-4 rounded-lg border-l-4 border-accent">
+                  <div className="bg-gradient-to-r from-accent/20 to-accent/10 dark:bg-gradient-to-r dark:from-accent/15 dark:to-accent/8 p-4 rounded-lg border-l-4 border-accent">
                     <p className="text-foreground">{attempt.userAnswer}</p>
                   </div>
                 </div>
@@ -665,10 +669,12 @@ const PredictedResults = () => {
                 {/* Why This Gets Marks */}
                 <div>
                   <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                    <CheckCircle className="h-4 w-4 mr-2 text-primary" />
+                    <div className="flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-r from-primary to-primary/80 mr-2">
+                      <CheckCircle className="h-4 w-4 text-primary-foreground" />
+                    </div>
                     🎯 Why This Gets Full Marks
                   </h4>
-                  <div className="bg-primary/10 dark:bg-primary/5 p-4 rounded-lg border-l-4 border-primary">
+                  <div className="bg-gradient-to-r from-primary/10 to-primary/5 dark:bg-gradient-to-r dark:from-primary/8 dark:to-primary/4 p-4 rounded-lg border-l-4 border-primary">
                     <pre className="text-foreground whitespace-pre-wrap font-sans">
                       {attempt.feedback.whyThisGetsMark}
                     </pre>
@@ -746,8 +752,8 @@ const PredictedResults = () => {
             </Card>
           )}
 
-          {/* Action Buttons */}
-          <div className="flex justify-center space-x-6 mt-12">
+            {/* Action Buttons */}
+          <div className="flex justify-center space-x-6 mt-12 p-6 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 rounded-lg">
             <Button 
               onClick={() => {
                 console.log('Retake button clicked for subject:', subjectId);
