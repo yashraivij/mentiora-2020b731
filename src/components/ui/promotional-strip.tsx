@@ -1,10 +1,17 @@
 import React from 'react';
 import { Button } from './button';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useSubscription } from '@/hooks/useSubscription';
 
 export const PromotionalStrip = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { isPremium } = useSubscription();
+
+  // Don't show the strip for premium users
+  if (isPremium) {
+    return null;
+  }
 
   const handleUpgradeClick = () => {
     if (location.pathname === '/') {

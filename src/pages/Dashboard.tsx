@@ -1110,7 +1110,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background pt-12">
+    <div className={`min-h-screen bg-background ${isPremium ? '' : 'pt-12'}`}>
       {/* Mobile Header */}
       {isMobile && (
         <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border p-4">
