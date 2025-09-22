@@ -161,18 +161,18 @@ const Pricing = () => {
                   Pay monthly
                 </h3>
                 <p className="text-sm text-white/70 mb-2 font-sans">Amount billed today</p>
-                <div className="space-y-2">
-                  <div className="text-sm text-white/60 line-through font-sans">
-                    £19.99/month
+                <div className="space-y-2 mb-4">
+                  <div className="text-base text-white/70 line-through font-sans">
+                    Was £19.99/month
                   </div>
                   <div className="text-4xl font-bold text-white font-sans">
                     £9.99<span className="text-lg font-medium text-white/80">/month</span>
                   </div>
                   <div className="inline-flex items-center gap-1 bg-green-400/20 backdrop-blur-sm rounded-full px-2 py-1">
-                    <span className="text-green-400 font-medium text-xs">50% OFF</span>
+                    <span className="text-green-400 font-medium text-xs">50% OFF Limited Time</span>
                   </div>
                 </div>
-                <p className="text-white/70 text-sm font-sans">
+                <p className="text-white/70 text-sm font-sans mt-2">
                   Recurring billing. Cancel any time.
                 </p>
               </div>
