@@ -16765,12 +16765,12 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q5a',
-              question: 'Section B: Weather Hazards and Climate Change\n\nWhich one of the following describes the global circulation system?\nA. The movement of tectonic plates\nB. The transfer of heat by winds and pressure belts\nC. The cycle of evaporation and precipitation\nD. The greenhouse effect',
+              question: 'Section B: Weather Hazards and Climate Change\n\nState one characteristic of a tropical storm.',
               marks: 1,
               difficulty: 'easy',
-              modelAnswer: 'B. The transfer of heat by winds and pressure belts',
+              modelAnswer: 'Low pressure system, strong winds (over 119 km/h), heavy rainfall, eye/eyewall structure, or occurs over warm ocean water (any one correct characteristic)',
               markingCriteria: {
-                breakdown: ['Correct identification of global circulation system (1 mark)']
+                breakdown: ['Correct identification of one tropical storm characteristic (1 mark)']
               },
               specReference: 'Edexcel Geography A Paper 1 Q5'
             },
