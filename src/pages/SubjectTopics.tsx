@@ -23,6 +23,8 @@ const SubjectTopics = () => {
   const [topicProgress, setTopicProgress] = useState<TopicProgress[]>([]);
 
   const subject = curriculum.find(s => s.id === subjectId);
+  // Filter out predicted exam topic from all calculations
+  const filteredTopics = subject?.topics.filter(topic => topic.id !== 'predicted-exam-2026') || [];
 
   useEffect(() => {
     if (user?.id) {
@@ -138,7 +140,7 @@ const SubjectTopics = () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">{subject.topics.length}</div>
+              <div className="text-3xl font-bold">{filteredTopics.length}</div>
             </CardContent>
           </Card>
 
@@ -175,11 +177,11 @@ const SubjectTopics = () => {
         <div className="bg-card rounded-lg p-6 mb-8">
           <h2 className="text-xl font-semibold mb-6 text-center">Learning Path</h2>
           <div className="relative overflow-x-auto min-h-[300px] bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-950/30 dark:to-purple-950/30 rounded-xl p-4">
-            <div className="relative h-[250px]" style={{ minWidth: `${(subject.topics.length + 1) * 220}px` }}>
+            <div className="relative h-[250px]" style={{ minWidth: `${(filteredTopics.length + 1) * 220}px` }}>
               {/* SVG for curved connecting lines */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
-                {subject.topics.map((_, index) => {
-                  if (index === subject.topics.length - 1) return null;
+                {filteredTopics.map((_, index) => {
+                  if (index === filteredTopics.length - 1) return null;
                   
                   const startX = 220 * index + 110;
                   const endX = 220 * (index + 1) + 110;
@@ -201,9 +203,9 @@ const SubjectTopics = () => {
                 })}
                 
                 {/* Line to final exam node */}
-                {subject.topics.length > 0 && (
+                {filteredTopics.length > 0 && (
                   <path
-                    d={`M ${220 * (subject.topics.length - 1) + 110} ${(subject.topics.length - 1) % 2 === 0 ? 80 : 160} Q ${220 * subject.topics.length + 50} 120 ${220 * subject.topics.length + 110} 120`}
+                    d={`M ${220 * (filteredTopics.length - 1) + 110} ${(filteredTopics.length - 1) % 2 === 0 ? 80 : 160} Q ${220 * filteredTopics.length + 50} 120 ${220 * filteredTopics.length + 110} 120`}
                     stroke="url(#examGradient)"
                     strokeWidth="5"
                     fill="none"
@@ -221,7 +223,7 @@ const SubjectTopics = () => {
               </svg>
 
               {/* Topic nodes */}
-              {subject.topics.filter(topic => topic.id !== 'predicted-exam-2026').map((topic, index) => {
+              {filteredTopics.map((topic, index) => {
                 const progress = getTopicProgress(topic.id);
                 const isUnlocked = true; // All topics are always unlocked
                 const isMastered = progress.averageScore >= 85;
@@ -292,7 +294,7 @@ const SubjectTopics = () => {
               })}
               
               {/* 2026 Exam Final Node */}
-              <div className="absolute" style={{ left: `${220 * subject.topics.length + 60}px`, top: '80px', zIndex: 10 }}>
+              <div className="absolute" style={{ left: `${220 * filteredTopics.length + 60}px`, top: '80px', zIndex: 10 }}>
                 <div className="flex flex-col items-center">
                   {/* Special exam circle */}
                   <div 
