@@ -16712,12 +16712,12 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q2a-coastal',
-              question: 'Which of the following are examples of erosional landforms?\n\nA. Wave-cut platform (Coastal)\nB. V-shaped valley (Rivers) \nC. Arete (Glaciated)\nD. All of the above',
+              question: 'Name one erosional landform found in your chosen landscape type.',
               marks: 1,
               difficulty: 'easy',
-              modelAnswer: 'D. All of the above - Wave-cut platforms, V-shaped valleys, and aretes are all erosional landforms in their respective landscape types.',
+              modelAnswer: 'Coastal: Wave-cut platform, cliff, cave, arch, stack. Rivers: Waterfall, gorge, V-shaped valley, interlocking spurs. Glaciated: Corrie, arete, pyramidal peak, U-shaped valley. (Any one correct example for chosen landscape type)',
               markingCriteria: {
-                breakdown: ['Correct identification that all options are erosional landforms (1 mark)']
+                breakdown: ['Correct naming of one erosional landform (1 mark)']
               },
               specReference: 'Edexcel Geography A Paper 1 Q2'
             },
