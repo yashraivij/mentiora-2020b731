@@ -16776,12 +16776,12 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q5b',
-              question: 'Describe the trend shown in Figure 3 (graph showing frequency of tropical storms 1980–2020).',
+              question: 'Explain one reason why tropical storms are becoming more frequent.',
               marks: 2,
               difficulty: 'easy',
-              modelAnswer: 'Overall increasing trend (1 mark) with some annual variation/fluctuation (1 mark).',
+              modelAnswer: 'Rising sea temperatures due to climate change provide more energy for storm formation (1 mark) and allow storms to maintain intensity over larger areas (1 mark).',
               markingCriteria: {
-                breakdown: ['Identification of increasing trend (1 mark)', 'Reference to variation/fluctuation (1 mark)']
+                breakdown: ['Reason explained (1 mark)', 'Development/elaboration (1 mark)']
               },
               specReference: 'Edexcel Geography A Paper 1 Q5'
             },
