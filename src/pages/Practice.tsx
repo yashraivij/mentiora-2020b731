@@ -166,19 +166,6 @@ const Practice = () => {
       navigate('/dashboard');
       return;
     }
-
-    // Block access to predicted 2026 exam content for geography subjects
-    if (subjectId && subjectId.toLowerCase().includes('geography')) {
-      const topicName = topic?.name?.toLowerCase() || '';
-      const topicIdLower = topicId?.toLowerCase() || '';
-      
-      if (topicName.includes('predicted') && topicName.includes('2026') || 
-          topicIdLower.includes('predicted') && topicIdLower.includes('2026')) {
-        toast.error("This content is not available for geography subjects");
-        navigate(`/subject/${subjectId}`);
-        return;
-      }
-    }
     
     // Try to load existing session first
     const sessionRestored = loadSessionState();

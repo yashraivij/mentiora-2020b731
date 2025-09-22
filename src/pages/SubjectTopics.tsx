@@ -64,54 +64,6 @@ const SubjectTopics = () => {
     );
   }
 
-  const allowedGeographyTopics = [
-    '1A: Coastal Landscapes and Processes',
-    '1B: River Landscapes and Processes', 
-    '1C: Glaciated Upland Landscapes and Processes',
-    'Global Circulation of the Atmosphere',
-    'Tropical Cyclones',
-    'Extreme Weather in the UK',
-    'Climate Change',
-    'Ecosystems: Scale, Structure & Processes',
-    'Tropical Rainforests',
-    'Deciduous Woodlands (UK focus)',
-    'Ecosystem Services',
-    'Biodiversity Under Threat',
-    'Sustainable Management of Ecosystems'
-  ];
-
-  const filteredTopics = subject.topics.filter(topic => {
-    // For all geography subjects (case-insensitive), completely remove all exam-related content
-    if (subjectId?.toLowerCase().includes('geography')) {
-      const topicNameLower = topic.name.toLowerCase();
-      const topicIdLower = topic.id.toLowerCase();
-      
-      // Block any topic with exam-related keywords
-      const examKeywords = ['predicted', '2026', 'paper', 'exam', 'test', 'assessment'];
-      const hasExamKeyword = examKeywords.some(keyword => 
-        topicNameLower.includes(keyword) || topicIdLower.includes(keyword)
-      );
-      
-      if (hasExamKeyword) {
-        return false;
-      }
-      
-      // For the main geography subject, only show topics in the allowed list
-      if (subjectId === 'geography') {
-        return allowedGeographyTopics.includes(topic.name);
-      }
-    }
-    
-    // For other subjects, filter out predicted exam topics
-    if (topic.id === 'predicted-exam-2026' || 
-        topic.name.toLowerCase().includes('predicted') ||
-        topic.name.toLowerCase().includes('paper 1 exam')) {
-      return false;
-    }
-    
-    return true;
-  });
-
   const getTopicProgress = (topicId: string) => {
     const progress = topicProgress.find(p => p.topicId === topicId);
     return progress || { attempts: 0, averageScore: 0, lastAttempt: new Date() };
@@ -186,7 +138,7 @@ const SubjectTopics = () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">{filteredTopics.length}</div>
+              <div className="text-3xl font-bold">{subject.topics.length}</div>
             </CardContent>
           </Card>
 
@@ -223,11 +175,11 @@ const SubjectTopics = () => {
         <div className="bg-card rounded-lg p-6 mb-8">
           <h2 className="text-xl font-semibold mb-6 text-center">Learning Path</h2>
           <div className="relative overflow-x-auto min-h-[300px] bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-950/30 dark:to-purple-950/30 rounded-xl p-4">
-            <div className="relative h-[250px]" style={{ minWidth: `${(filteredTopics.length + 1) * 220}px` }}>
+            <div className="relative h-[250px]" style={{ minWidth: `${(subject.topics.length + 1) * 220}px` }}>
               {/* SVG for curved connecting lines */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
-                {filteredTopics.map((_, index) => {
-                  if (index === filteredTopics.length - 1) return null;
+                {subject.topics.map((_, index) => {
+                  if (index === subject.topics.length - 1) return null;
                   
                   const startX = 220 * index + 110;
                   const endX = 220 * (index + 1) + 110;
@@ -248,10 +200,10 @@ const SubjectTopics = () => {
                   );
                 })}
                 
-                {/* Line to final exam node - only show for non-geography subjects */}
-                {filteredTopics.length > 0 && !subjectId?.toLowerCase().includes('geography') && (
+                {/* Line to final exam node */}
+                {subject.topics.length > 0 && (
                   <path
-                    d={`M ${220 * (filteredTopics.length - 1) + 110} ${(filteredTopics.length - 1) % 2 === 0 ? 80 : 160} Q ${220 * filteredTopics.length + 50} 120 ${220 * filteredTopics.length + 110} 120`}
+                    d={`M ${220 * (subject.topics.length - 1) + 110} ${(subject.topics.length - 1) % 2 === 0 ? 80 : 160} Q ${220 * subject.topics.length + 50} 120 ${220 * subject.topics.length + 110} 120`}
                     stroke="url(#examGradient)"
                     strokeWidth="5"
                     fill="none"
@@ -269,7 +221,7 @@ const SubjectTopics = () => {
               </svg>
 
               {/* Topic nodes */}
-              {filteredTopics.map((topic, index) => {
+              {subject.topics.map((topic, index) => {
                 const progress = getTopicProgress(topic.id);
                 const isUnlocked = true; // All topics are always unlocked
                 const isMastered = progress.averageScore >= 85;
@@ -339,37 +291,35 @@ const SubjectTopics = () => {
                 );
               })}
               
-              {/* 2026 Exam Final Node - only show for non-geography subjects */}
-              {!subjectId?.toLowerCase().includes('geography') && (
-                <div className="absolute" style={{ left: `${220 * filteredTopics.length + 60}px`, top: '80px', zIndex: 10 }}>
-                  <div className="flex flex-col items-center">
-                    {/* Special exam circle */}
-                    <div 
-                      className="w-24 h-24 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 hover:scale-110 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 border-4 border-yellow-400 shadow-2xl animate-pulse"
+              {/* 2026 Exam Final Node */}
+              <div className="absolute" style={{ left: `${220 * subject.topics.length + 60}px`, top: '80px', zIndex: 10 }}>
+                <div className="flex flex-col items-center">
+                  {/* Special exam circle */}
+                  <div 
+                    className="w-24 h-24 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 hover:scale-110 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 border-4 border-yellow-400 shadow-2xl animate-pulse"
+                    onClick={() => navigate(`/predicted-exam/${subjectId}`)}
+                  >
+                    <span className="text-sm text-center leading-tight font-black">2026<br/>EXAM</span>
+                  </div>
+                  
+                  {/* Exam info */}
+                  <div className="mt-3 text-center max-w-[140px]">
+                    <h3 className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
+                      Final Challenge
+                    </h3>
+                    <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs mb-2">
+                      Predicted Exam
+                    </Badge>
+                    <Button 
+                      size="sm" 
+                      className="text-xs px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
                       onClick={() => navigate(`/predicted-exam/${subjectId}`)}
                     >
-                      <span className="text-sm text-center leading-tight font-black">2026<br/>EXAM</span>
-                    </div>
-                    
-                    {/* Exam info */}
-                    <div className="mt-3 text-center max-w-[140px]">
-                      <h3 className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-                        Final Challenge
-                      </h3>
-                      <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs mb-2">
-                        Predicted Exam
-                      </Badge>
-                      <Button 
-                        size="sm" 
-                        className="text-xs px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-                        onClick={() => navigate(`/predicted-exam/${subjectId}`)}
-                      >
-                        Take Exam
-                      </Button>
-                    </div>
+                      Take Exam
+                    </Button>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </div>
