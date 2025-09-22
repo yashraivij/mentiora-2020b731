@@ -556,20 +556,16 @@ const PredictedResults = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Grade Display Banner */}
-          <Card className="bg-gradient-to-br from-primary via-primary/80 to-accent/60 text-primary-foreground border-0 shadow-xl relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/20"></div>
-            <CardContent className="py-12 relative z-10">
-              <div className="text-center space-y-6">
-                <div className="relative">
-                  <div className="text-8xl font-black tracking-tight drop-shadow-lg">
-                    Grade {grade}
-                  </div>
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full animate-pulse"></div>
+          <Card className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 text-primary-foreground border-0">
+            <CardContent className="py-8">
+              <div className="text-center space-y-4">
+                <div className="text-6xl font-bold">
+                  Grade {grade}
                 </div>
-                <div className="text-2xl font-semibold bg-white/20 rounded-full px-6 py-2 backdrop-blur-sm">
+                <div className="text-xl">
                   {achievedMarks}/{examTotalMarks} marks ({percentage}%)
                 </div>
-                <div className="text-xl font-medium opacity-95 bg-black/10 rounded-lg px-4 py-2">
+                <div className="text-lg opacity-90">
                   {subject?.name} Predicted 2026 Exam
                 </div>
               </div>
@@ -577,59 +573,50 @@ const PredictedResults = () => {
           </Card>
 
           {/* Results Summary */}
-          <Card className="bg-gradient-to-br from-accent/10 via-primary/5 to-secondary/10 border-primary/20 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-t-lg">
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <div className="p-2 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full">
-                  <Crown className="h-5 w-5 text-white" />
-                </div>
+          <Card className="bg-gradient-to-br from-accent/10 via-primary/5 to-secondary/10">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Crown className="h-5 w-5 text-yellow-500" />
                 Detailed Results Breakdown
               </CardTitle>
             </CardHeader>
-            <CardContent className="pt-6">
-              <div className="grid grid-cols-3 gap-6">
-                <div className="text-center bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-950/30 dark:to-emerald-900/30 rounded-xl p-4 border border-emerald-200 dark:border-emerald-700/50">
-                  <div className="text-3xl font-bold text-emerald-700 dark:text-emerald-300">{achievedMarks}</div>
-                  <div className="text-sm text-emerald-600 dark:text-emerald-400 font-medium">Marks Achieved</div>
+            <CardContent>
+              <div className="grid grid-cols-3 gap-4">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-foreground">{achievedMarks}</div>
+                  <div className="text-sm text-muted-foreground">Marks Achieved</div>
                 </div>
-                <div className="text-center bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-900/30 rounded-xl p-4 border border-blue-200 dark:border-blue-700/50">
-                  <div className="text-3xl font-bold text-blue-700 dark:text-blue-300">{examTotalMarks}</div>
-                  <div className="text-sm text-blue-600 dark:text-blue-400 font-medium">Total Marks</div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-foreground">{examTotalMarks}</div>
+                  <div className="text-sm text-muted-foreground">Total Marks</div>
                 </div>
-                <div className="text-center bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/30 dark:to-purple-900/30 rounded-xl p-4 border border-purple-200 dark:border-purple-700/50">
-                  <div className="text-3xl font-bold text-purple-700 dark:text-purple-300">{percentage}%</div>
-                  <div className="text-sm text-purple-600 dark:text-purple-400 font-medium">Percentage</div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-foreground">{percentage}%</div>
+                  <div className="text-sm text-muted-foreground">Percentage</div>
                 </div>
               </div>
-              <Progress value={percentage} className="mt-6 h-3" />
+              <Progress value={percentage} className="mt-4" />
             </CardContent>
           </Card>
 
           {/* Question by Question Feedback */}
           {attempts.map((attempt, index) => (
-            <Card key={attempt.questionId} className="mb-6 bg-gradient-to-br from-background via-muted/5 to-accent/5 border-primary/20 shadow-lg hover:shadow-xl transition-all duration-200">
-              <CardHeader className="pb-4 bg-gradient-to-r from-primary/10 via-accent/5 to-secondary/10 rounded-t-lg border-b border-primary/20">
+            <Card key={attempt.questionId} className="mb-6 bg-gradient-to-br from-background via-muted/5 to-accent/5">
+              <CardHeader className="pb-4 bg-gradient-to-r from-primary/10 via-accent/5 to-secondary/10">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg flex items-center gap-3">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary/80 text-primary-foreground text-sm font-bold shadow-lg">
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary/80 text-primary-foreground text-sm font-semibold">
                       {index + 1}
                     </div>
-                    <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold">
-                      Question {index + 1}
-                    </span>
+                    Question {index + 1}
                   </CardTitle>
-                  <div className="flex items-center gap-3">
-                    <Badge variant="outline" className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-900/30 border-blue-200 dark:border-blue-700/50 text-blue-700 dark:text-blue-300 font-semibold">
+                  <div className="flex items-center gap-2">
+                    <Badge variant="outline">
                       {attempt.score}/{questions[index]?.marks || 5} marks
                     </Badge>
                     <Badge 
-                      className={
-                        attempt.score >= (questions[index]?.marks || 5) * 0.85 
-                          ? "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg" 
-                          : attempt.score >= (questions[index]?.marks || 5) * 0.6 
-                            ? "bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-lg" 
-                            : "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg"
-                      }
+                      variant={attempt.score >= (questions[index]?.marks || 5) * 0.85 ? "default" : 
+                             attempt.score >= (questions[index]?.marks || 5) * 0.6 ? "secondary" : "destructive"}
                     >
                       {attempt.score >= (questions[index]?.marks || 5) * 0.85 ? "Excellent" : 
                        attempt.score >= (questions[index]?.marks || 5) * 0.6 ? "Good" : "Needs Work"}
@@ -640,42 +627,36 @@ const PredictedResults = () => {
               <CardContent className="space-y-6">
                 {/* Question */}
                 <div>
-                  <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                    <div className="p-2 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full mr-3">
-                      <HelpCircle className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="text-lg">Question</span>
+                  <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                    <HelpCircle className="h-4 w-4 mr-2 text-primary" />
+                    Question
                   </h4>
-                  <div className="bg-gradient-to-br from-blue-50 via-blue-50 to-indigo-50 dark:from-blue-950/30 dark:via-blue-950/20 dark:to-indigo-950/30 p-5 rounded-xl border-l-4 border-blue-500 shadow-sm">
-                    <p className="text-foreground font-medium leading-relaxed">{questions[index]?.text || questions[index]?.question}</p>
+                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/20 dark:to-blue-900/20 p-4 rounded-lg border-l-4 border-blue-500">
+                    <p className="text-foreground">{questions[index]?.text || questions[index]?.question}</p>
                   </div>
                 </div>
 
                 {/* Student Answer */}
                 <div>
-                  <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                    <div className="p-2 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full mr-3">
-                      <User className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="text-lg">Your Answer</span>
+                  <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                    <User className="h-4 w-4 mr-2 text-accent-foreground" />
+                    Your Answer
                   </h4>
-                  <div className="bg-gradient-to-br from-purple-50 via-purple-50 to-violet-50 dark:from-purple-950/30 dark:via-purple-950/20 dark:to-violet-950/30 p-5 rounded-xl border-l-4 border-purple-500 shadow-sm">
-                    <p className="text-foreground leading-relaxed">{attempt.userAnswer}</p>
+                  <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/20 dark:to-purple-900/20 p-4 rounded-lg border-l-4 border-purple-500">
+                    <p className="text-foreground">{attempt.userAnswer}</p>
                   </div>
                 </div>
 
                 {/* Model Answer */}
                 <div>
-                  <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                    <div className="p-2 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full mr-3">
-                      <Book className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="text-lg">✅ Model Answer</span>
+                  <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                    <Book className="h-4 w-4 mr-2 text-emerald-600 dark:text-emerald-400" />
+                    ✅ Model Answer
                   </h4>
-                  <div className="bg-gradient-to-br from-emerald-50 via-emerald-50 to-green-50 dark:from-emerald-950/30 dark:via-emerald-950/20 dark:to-green-950/30 p-5 rounded-xl border-l-4 border-emerald-500 shadow-sm">
-                    <div className="text-foreground space-y-3">
-                      {attempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).map((sentence, sentenceIndex) => (
-                        <p key={sentenceIndex} className="leading-relaxed font-medium">{sentence.trim()}{sentenceIndex < attempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).length - 1 ? '.' : ''}</p>
+                  <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-950/20 dark:to-emerald-900/20 p-4 rounded-lg border-l-4 border-emerald-500">
+                    <div className="text-foreground space-y-2">
+                      {attempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).map((sentence, index) => (
+                        <p key={index} className="leading-relaxed">{sentence.trim()}{index < attempt.feedback.modelAnswer.split(/[.!?]+(?=\s+[A-Z]|\s*$)/).filter(sentence => sentence.trim()).length - 1 ? '.' : ''}</p>
                       ))}
                     </div>
                   </div>
@@ -683,14 +664,12 @@ const PredictedResults = () => {
 
                 {/* Why This Gets Marks */}
                 <div>
-                  <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                    <div className="p-2 bg-gradient-to-br from-primary to-primary/80 rounded-full mr-3">
-                      <CheckCircle className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="text-lg">🎯 Why This Gets Full Marks</span>
+                  <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                    <CheckCircle className="h-4 w-4 mr-2 text-primary" />
+                    🎯 Why This Gets Full Marks
                   </h4>
-                  <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 dark:from-primary/5 dark:via-primary/3 dark:to-accent/5 p-5 rounded-xl border-l-4 border-primary shadow-sm">
-                    <pre className="text-foreground whitespace-pre-wrap font-sans leading-relaxed font-medium">
+                  <div className="bg-gradient-to-br from-primary/10 to-primary/20 dark:from-primary/5 dark:to-primary/10 p-4 rounded-lg border-l-4 border-primary">
+                    <pre className="text-foreground whitespace-pre-wrap font-sans">
                       {attempt.feedback.whyThisGetsMark}
                     </pre>
                   </div>
@@ -698,41 +677,35 @@ const PredictedResults = () => {
 
                 {/* Smart Feedback - Conditional based on performance */}
                 <div>
-                  <h4 className="font-semibold text-foreground mb-3 flex items-center">
+                  <h4 className="font-semibold text-foreground mb-2 flex items-center">
                     {attempt.feedback.fullMarks ? (
                       <>
-                        <div className="p-2 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full mr-3">
-                          <CheckCircle className="h-4 w-4 text-white" />
-                        </div>
-                        <span className="text-lg">✅ Teacher Feedback - Well Done!</span>
+                        <CheckCircle className="h-4 w-4 mr-2 text-emerald-600 dark:text-emerald-400" />
+                        ✅ Teacher Feedback - Well Done!
                       </>
                     ) : (
                       <>
-                        <div className="p-2 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full mr-3">
-                          <Lightbulb className="h-4 w-4 text-white" />
-                        </div>
-                        <span className="text-lg">❌ Why Your Answer Didn't Get Full Marks</span>
+                        <Lightbulb className="h-4 w-4 mr-2 text-yellow-600" />
+                        ❌ Why Your Answer Didn't Get Full Marks
                       </>
                     )}
                   </h4>
-                  <div className={`p-5 rounded-xl border-l-4 shadow-sm ${
+                  <div className={`p-4 rounded-lg border-l-4 ${
                     attempt.feedback.fullMarks 
-                      ? 'bg-gradient-to-br from-emerald-50 via-emerald-50 to-green-50 dark:from-emerald-950/30 dark:via-emerald-950/20 dark:to-green-950/30 border-emerald-500' 
-                      : 'bg-gradient-to-br from-amber-50 via-amber-50 to-yellow-50 dark:from-amber-950/30 dark:via-amber-950/20 dark:to-yellow-950/30 border-amber-500'
+                      ? 'bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-950/20 dark:to-emerald-900/20 border-emerald-500' 
+                      : 'bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-950/20 dark:to-amber-900/20 border-amber-500'
                   }`}>
-                    <p className="text-foreground leading-relaxed font-medium">{attempt.feedback.whyYoursDidnt}</p>
+                    <p className="text-foreground">{attempt.feedback.whyYoursDidnt}</p>
                   </div>
                 </div>
 
                 {/* Spec Reference */}
                 <div>
-                  <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                    <div className="p-2 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full mr-3">
-                      <Book className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="text-lg">🔗 Specification Reference</span>
+                  <h4 className="font-semibold text-foreground mb-2 flex items-center">
+                    <Book className="h-4 w-4 mr-2 text-indigo-600" />
+                    🔗 Specification Reference
                   </h4>
-                  <Badge variant="outline" className="text-sm bg-gradient-to-r from-indigo-50 to-indigo-100 dark:from-indigo-950/30 dark:to-indigo-900/30 border-indigo-200 dark:border-indigo-700/50 text-indigo-700 dark:text-indigo-300 font-semibold px-4 py-2">
+                  <Badge variant="outline" className="text-sm bg-gradient-to-r from-indigo-50 to-indigo-100 dark:from-indigo-950/20 dark:to-indigo-900/20 border-indigo-300 dark:border-indigo-700">
                     {attempt.feedback.specLink}
                   </Badge>
                 </div>
@@ -774,39 +747,33 @@ const PredictedResults = () => {
           )}
 
           {/* Action Buttons */}
-          <div className="bg-gradient-to-br from-muted/50 via-accent/10 to-primary/5 rounded-2xl p-8 shadow-lg border border-primary/20">
-            <div className="flex justify-center space-x-6">
-              <Button 
-                onClick={() => {
-                  console.log('Retake button clicked for subject:', subjectId);
-                  // Handle geography-paper-2 case specifically
-                  const examSubjectId = subjectId === 'geography' ? 'geography-paper-2' : subjectId;
-                  navigate(`/predicted-exam/${examSubjectId}`);
-                }}
-                className="bg-gradient-to-r from-primary via-primary/90 to-accent/80 hover:from-primary/90 hover:to-accent/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 px-6 py-3"
-                size="lg"
-              >
-                <RotateCcw className="h-5 w-5 mr-2" />
-                Retake This Exam
-              </Button>
-              <Button 
-                onClick={() => navigate('/predicted-questions')}
-                className="bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 px-6 py-3"
-                size="lg"
-              >
-                <BookOpen className="h-5 w-5 mr-2" />
-                Try Another Subject
-              </Button>
-              <Button 
-                onClick={() => navigate(-1)} 
-                variant="outline"
-                className="border-2 border-primary/30 hover:border-primary/50 bg-gradient-to-r from-background to-muted/20 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 px-6 py-3"
-                size="lg"
-              >
-                <Target className="h-5 w-5 mr-2" />
-                Back
-              </Button>
-            </div>
+          <div className="flex justify-center space-x-6 mt-12">
+            <Button 
+              onClick={() => {
+                console.log('Retake button clicked for subject:', subjectId);
+                // Handle geography-paper-2 case specifically
+                const examSubjectId = subjectId === 'geography' ? 'geography-paper-2' : subjectId;
+                navigate(`/predicted-exam/${examSubjectId}`);
+              }}
+              className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary"
+            >
+              <RotateCcw className="h-5 w-5 mr-2" />
+              Retake This Exam
+            </Button>
+            <Button 
+              onClick={() => navigate('/predicted-questions')}
+              className="bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-600 dark:to-emerald-700 hover:from-emerald-600 hover:to-emerald-700 text-white"
+            >
+              <BookOpen className="h-5 w-5 mr-2" />
+              Try Another Subject
+            </Button>
+            <Button 
+              onClick={() => navigate(-1)} 
+              variant="outline"
+            >
+              <Target className="h-5 w-5 mr-2" />
+              Back
+            </Button>
           </div>
         </div>
       </div>
