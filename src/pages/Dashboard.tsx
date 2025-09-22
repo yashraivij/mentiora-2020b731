@@ -1132,6 +1132,36 @@ const Dashboard = () => {
                   </MobileNavItem>
                 );
               })}
+              
+              {/* Additional Navigation Items */}
+              <div className="border-t border-border mt-2 pt-2">
+                <MobileNavItem
+                  onClick={() => {
+                    const feedbackButton = document.querySelector('[data-feedback-fish]') as HTMLElement;
+                    if (feedbackButton) feedbackButton.click();
+                  }}
+                  className="text-muted-foreground hover:text-foreground hover:bg-accent"
+                >
+                  <span className="text-lg mr-3">💬</span>
+                  <span className="font-medium">Feedback</span>
+                </MobileNavItem>
+                
+                <MobileNavItem
+                  onClick={() => window.open('https://discord.gg/NUy3u3A65B', '_blank')}
+                  className="text-muted-foreground hover:text-foreground hover:bg-accent"
+                >
+                  <span className="text-lg mr-3">💬</span>
+                  <span className="font-medium">Join Discord</span>
+                </MobileNavItem>
+                
+                <MobileNavItem
+                  onClick={handleLogout}
+                  className="text-muted-foreground hover:text-foreground hover:bg-accent"
+                >
+                  <User className="h-4 w-4 mr-3" />
+                  <span className="font-medium">Sign Out</span>
+                </MobileNavItem>
+              </div>
             </MobileNav>
             
             <div className="flex items-center gap-2">
