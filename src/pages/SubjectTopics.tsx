@@ -81,19 +81,27 @@ const SubjectTopics = () => {
   ];
 
   const filteredTopics = subject.topics.filter(topic => {
-    // Always filter out predicted exam topics
+    // For geography, be extra strict about filtering exam topics
+    if (subjectId === 'geography') {
+      // Remove any topic containing exam-related words
+      if (topic.name.toLowerCase().includes('predicted') ||
+          topic.name.toLowerCase().includes('2026') ||
+          topic.name.toLowerCase().includes('paper') ||
+          topic.name.toLowerCase().includes('exam') ||
+          topic.id === 'predicted-exam-2026') {
+        return false;
+      }
+      // Only show topics in the allowed list
+      return allowedGeographyTopics.includes(topic.name);
+    }
+    
+    // For other subjects, filter out predicted exam topics
     if (topic.id === 'predicted-exam-2026' || 
         topic.name.toLowerCase().includes('predicted') ||
         topic.name.toLowerCase().includes('paper 1 exam')) {
       return false;
     }
     
-    // For geography, only show allowed topics
-    if (subjectId === 'geography') {
-      return allowedGeographyTopics.includes(topic.name);
-    }
-    
-    // For other subjects, show all topics (except predicted exams)
     return true;
   });
 
