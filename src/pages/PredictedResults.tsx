@@ -742,7 +742,7 @@ const PredictedResults = () => {
                 </div>
                 <Button 
                   onClick={() => navigate('/notebook')}
-                  className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+                  className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
                   size="lg"
                 >
                   <Brain className="h-5 w-5 mr-2" />
