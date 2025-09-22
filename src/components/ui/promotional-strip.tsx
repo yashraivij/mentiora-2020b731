@@ -8,8 +8,8 @@ export const PromotionalStrip = () => {
   const location = useLocation();
   const { isPremium } = useSubscription();
 
-  // Don't show the strip for premium users
-  if (isPremium) {
+  // Always show on landing page, hide on other pages for premium users
+  if (isPremium && location.pathname !== '/') {
     return null;
   }
 
