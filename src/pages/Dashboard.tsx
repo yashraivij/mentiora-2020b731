@@ -1179,29 +1179,10 @@ const Dashboard = () => {
               {/* Header with stats */}
               <div className="flex items-center justify-between mb-8">
               <div className="flex items-center space-x-6">
-                <motion.div 
-                  key={currentStreak}
-                  initial={{ scale: 1 }}
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 0.3 }}
-                  className="relative group"
-                >
-                  <div className="flex items-center space-x-3 bg-gradient-to-r from-orange-50 via-orange-100/50 to-yellow-50 dark:from-orange-900/30 dark:via-orange-800/20 dark:to-yellow-900/30 rounded-2xl px-6 py-3 shadow-lg border-2 border-orange-200/50 dark:border-orange-700/30 transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/20 dark:hover:shadow-orange-400/20">
-                    <div className="relative">
-                      <Flame className="h-7 w-7 text-orange-500 dark:text-orange-400 drop-shadow-lg" />
-                      <div className="absolute inset-0 bg-orange-400/20 rounded-full blur-md animate-pulse"></div>
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-yellow-600 dark:from-orange-400 dark:to-yellow-400 bg-clip-text text-transparent drop-shadow-sm">
-                        {currentStreak}
-                      </span>
-                      <span className="text-xs font-medium text-orange-600/80 dark:text-orange-400/80 -mt-1">
-                        day streak
-                      </span>
-                    </div>
-                  </div>
-                  <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-2xl blur opacity-30 group-hover:opacity-50 transition-opacity -z-10"></div>
-                </motion.div>
+                <div className="flex items-center space-x-2">
+                  <Flame className="h-6 w-6 text-orange-400" />
+                  <span className="text-xl font-bold text-orange-500">{currentStreak}</span>
+                </div>
                 <div className="flex items-center space-x-2">
                   <Zap className="h-6 w-6 text-blue-400" />
                   <span className="text-xl font-bold text-blue-500">{userGems}</span>
