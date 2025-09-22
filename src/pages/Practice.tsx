@@ -541,7 +541,7 @@ const Practice = () => {
                 variant="outline" 
                 onClick={() => {
                   console.log('Back button clicked');
-                  navigate(`/subject/${subjectId}`);
+                  navigate(`/dashboard?subject=${subjectId}`);
                 }}
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
