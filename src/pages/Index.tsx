@@ -233,13 +233,13 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 light">
-      <div className="container mx-auto px-6 lg:px-8 py-6">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
         {/* Header */}
         <motion.header 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col sm:flex-row justify-between items-center mb-20 lg:mb-24"
+          className="flex flex-col sm:flex-row justify-between items-center mb-12 sm:mb-16 lg:mb-24"
         >
           <motion.div 
             className="flex items-center space-x-4"
@@ -304,7 +304,7 @@ const Index = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-6xl lg:text-7xl font-bold mb-8 leading-tight tracking-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 leading-tight tracking-tight"
           >
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
               The GCSE Tutor Built For You.
@@ -315,7 +315,7 @@ const Index = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl text-gray-600 mb-16 max-w-3xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 sm:mb-12 lg:mb-16 max-w-3xl mx-auto leading-relaxed px-2 sm:px-0"
           >
             Every <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent font-bold">question</span> powers a <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent font-bold">personalised plan</span> for <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent font-bold">top grades</span>.
           </motion.p>
@@ -329,7 +329,7 @@ const Index = () => {
           >
             <Button 
               onClick={() => navigate('/register')} 
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-bold shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 rounded-2xl"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 sm:px-10 lg:px-12 py-3 sm:py-4 text-base sm:text-lg font-bold shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 rounded-2xl mobile-touch-target"
             >
               Try Now For Free
             </Button>
@@ -353,20 +353,20 @@ const Index = () => {
 
 
         {/* Feature Showcase - Duolingo/Quizlet Style */}
-        <div className="mb-32">
+        <div className="mb-16 sm:mb-24 lg:mb-32">
           {/* First Feature - Smart Practice */}
           <motion.div 
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="mb-24"
+            className="mb-12 sm:mb-16 lg:mb-24"
           >
             <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div className="space-y-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+                <div className="space-y-6 sm:space-y-8 px-2 sm:px-0">
                   <motion.h3 
-                    className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight"
+                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight"
                     whileHover={{ scale: 1.02 }}
                   >
                     Every question, every answer,{" "}
@@ -374,13 +374,13 @@ const Index = () => {
                       one ultimate study experience
                     </span>
                   </motion.h3>
-                  <p className="text-xl text-gray-600 leading-relaxed">
+                  <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed">
                     Practice with real exam questions from past papers, get instant feedback, and watch your understanding grow with every answer.
                   </p>
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                     <Button 
                       onClick={() => navigate('/register')} 
-                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 mobile-touch-target w-full sm:w-auto"
                     >
                       Start Practicing Free
                     </Button>

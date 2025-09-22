@@ -8,6 +8,8 @@ import { useSubscription } from "@/hooks/useSubscription";
 import { curriculum } from "@/data/curriculum";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import mentioraLogo from "@/assets/mentiora-logo.png";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { MobileNav, MobileNavItem } from "@/components/ui/mobile-nav";
 import {
   BookOpen,
   Trophy,
@@ -104,6 +106,7 @@ const Dashboard = () => {
   const [leaderboardData, setLeaderboardData] = useState<any[]>([]);
   const [todayEarnedMP, setTodayEarnedMP] = useState(0);
   const [showAddSubjects, setShowAddSubjects] = useState(false);
+  const isMobile = useIsMobile();
 
   // Notebook state
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
@@ -1107,9 +1110,53 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex">
-      {/* Left Sidebar - Duolingo Style */}
-      <div className="w-64 bg-background border-r-2 border-border flex flex-col py-6">
+    <div className="min-h-screen bg-background">
+      {/* Mobile Header */}
+      {isMobile && (
+        <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border p-4">
+          <div className="flex items-center justify-between">
+            <MobileNav>
+              {sidebarItems.map((item) => (
+                <MobileNavItem
+                  key={item.id}
+                  onClick={() => setActiveTab(item.id)}
+                  className={activeTab === item.id ? "bg-accent text-accent-foreground" : ""}
+                >
+                  <item.icon className="h-5 w-5 mr-3" />
+                  {item.label}
+                </MobileNavItem>
+              ))}
+            </MobileNav>
+            
+            <div className="flex items-center gap-2">
+              <img
+                src={mentioraLogo}
+                alt="Mentiora"
+                className="h-8 w-8"
+              />
+              <span className="font-bold text-lg text-foreground">Mentiora</span>
+              {isPremium && <Crown className="w-5 h-5 text-yellow-500" />}
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 rounded-lg px-2 py-1">
+                <Gem className="h-4 w-4" />
+                <span className="text-sm font-bold">{userGems || 0}</span>
+              </div>
+              <div className="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg px-2 py-1">
+                <Heart className="h-4 w-4" />
+                <span className="text-sm font-bold">{userHearts}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Desktop Layout */}
+      <div className={`flex h-screen ${isMobile ? 'pt-0' : ''}`}>
+        
+        {/* Desktop Sidebar - Hidden on mobile */}
+        <div className={`w-64 bg-background border-r-2 border-border flex flex-col py-6 ${isMobile ? 'hidden' : 'block'}`}>
         {/* Logo */}
         <div className="px-6 mb-8 flex items-center justify-between">
           <div className="flex items-center space-x-3">
@@ -1212,7 +1259,7 @@ const Dashboard = () => {
                     )}
                   </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'} gap-6`}>
                     {filteredSubjects.map((subject) => {
                       const colors = subjectColors[subject.id] || subjectColors["physics"];
                       const progress = getSubjectProgress(subject.id);
@@ -1738,7 +1785,7 @@ const Dashboard = () => {
 
                 {/* Stats Overview Cards */}
                 <div className="flex justify-center mb-8">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl w-full">
+                  <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'} gap-6 max-w-2xl w-full`}>
                  <div className="bg-card rounded-2xl p-6 shadow-lg border-2 border-border text-center">
                    <div className="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
                      <Trophy className="w-6 h-6 text-yellow-800" />
@@ -2226,7 +2273,7 @@ const Dashboard = () => {
                     <p className="text-muted-foreground">Your account details and status</p>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'} gap-4`}>
                   <div className="p-4 rounded-lg bg-muted border border-border">
                     <p className="text-sm font-medium text-muted-foreground mb-1">Email Address</p>
                     <p className="text-lg font-bold text-foreground">{user?.email}</p>
@@ -2439,17 +2486,18 @@ const Dashboard = () => {
               </div>
             </CardContent>
           </Card>
+          </div>
         </div>
       </div>
       
-      {/* Floating Feedback Button */}
+      {/* Floating Feedback Button - Repositioned for mobile */}
       <button
         data-feedback-fish
         data-feedback-fish-userid={user?.email || ""}
-        className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 z-50 flex items-center justify-center"
+        className={`fixed ${isMobile ? 'bottom-20 right-4' : 'bottom-6 right-6'} bg-blue-600 hover:bg-blue-700 text-white p-3 sm:p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 z-50 flex items-center justify-center mobile-touch-target`}
         title="Send Feedback"
       >
-        <span className="text-xl">💬</span>
+        <span className="text-lg sm:text-xl">💬</span>
       </button>
     </div>
   );
