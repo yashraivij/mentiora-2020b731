@@ -67,9 +67,7 @@ const SubjectTopics = () => {
   const filteredTopics = subject.topics.filter(topic => 
     topic.id !== 'predicted-exam-2026' && 
     !topic.name.toLowerCase().includes('predicted') && 
-    !topic.name.toLowerCase().includes('exam') &&
-    !topic.name.toLowerCase().includes('2026') &&
-    !topic.name.toLowerCase().includes('paper')
+    !topic.name.toLowerCase().includes('exam')
   );
 
   const getTopicProgress = (topicId: string) => {
