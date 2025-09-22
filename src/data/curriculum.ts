@@ -16712,7 +16712,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q2a-coastal',
-              question: 'Answer TWO questions from this section (choose 2 out of 3 topics)\n\nQuestion 2: Coastal Landscapes and Processes\n\nWhich of the following is an erosional landform?\nA. Spit\nB. Beach\nC. Wave-cut platform\nD. Sand dune',
+              question: 'SECTION A: LANDSCAPE PROCESSES - CHOOSE 2 OUT OF 3 TOPICS\n\nYou must answer TWO complete questions from this section only. Choose 2 topics from:\n• Question 2: Coastal Landscapes and Processes (15 marks)\n• Question 3: River Landscapes and Processes (15 marks) \n• Question 4: Glaciated Upland Landscapes and Processes (15 marks)\n\n═══════════════════════════════════════════════════════\n\nQuestion 2: Coastal Landscapes and Processes\n\nWhich of the following is an erosional landform?\nA. Spit\nB. Beach\nC. Wave-cut platform\nD. Sand dune',
               marks: 1,
               difficulty: 'easy',
               modelAnswer: 'C. Wave-cut platform',
@@ -16876,7 +16876,7 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q5a',
-              question: 'Section B: Weather Hazards and Climate Change\n\nWhich one of the following describes the global circulation system?\nA. The movement of tectonic plates\nB. The transfer of heat by winds and pressure belts\nC. The cycle of evaporation and precipitation\nD. The greenhouse effect',
+              question: '═══════════════════════════════════════════════════════\nEND OF SECTION A: LANDSCAPE PROCESSES\n(You should have answered 2 complete questions from the 3 topics above)\n═══════════════════════════════════════════════════════\n\nSection B: Weather Hazards and Climate Change\n\nWhich one of the following describes the global circulation system?\nA. The movement of tectonic plates\nB. The transfer of heat by winds and pressure belts\nC. The cycle of evaporation and precipitation\nD. The greenhouse effect',
               marks: 1,
               difficulty: 'easy',
               modelAnswer: 'B. The transfer of heat by winds and pressure belts',
