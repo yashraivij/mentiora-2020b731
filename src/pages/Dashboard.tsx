@@ -1212,6 +1212,13 @@ const Dashboard = () => {
             <span className="text-lg mr-3">💬</span>
             <span className="font-medium">Feedback</span>
           </button>
+          <button
+            onClick={() => window.open('https://discord.gg/NUy3u3A65B', '_blank')}
+            className="w-full flex items-center justify-start px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-accent rounded-xl transition-all duration-200"
+          >
+            <span className="text-lg mr-3">💬</span>
+            <span className="font-medium">Join Discord</span>
+          </button>
           <Button
             variant="ghost"
             onClick={handleLogout}
