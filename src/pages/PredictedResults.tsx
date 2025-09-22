@@ -724,25 +724,25 @@ const PredictedResults = () => {
             const question = questions.find((q: ExamQuestion) => q.id === attempt.questionId);
             return question && attempt.score < question.marks;
           }) && (
-            <Card className="bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 dark:from-violet-950/30 dark:via-purple-950/30 dark:to-indigo-950/30 border-violet-200 dark:border-violet-700/50 shadow-lg">
+            <Card className="bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50 dark:from-green-950/30 dark:via-blue-950/30 dark:to-emerald-950/30 border-green-200 dark:border-green-700/50 shadow-lg">
               <CardHeader className="text-center pb-4">
-                <CardTitle className="flex items-center justify-center gap-3 text-violet-800 dark:text-violet-200 text-xl">
-                  <div className="p-2 bg-violet-100 dark:bg-violet-900/50 rounded-full">
+                <CardTitle className="flex items-center justify-center gap-3 text-green-800 dark:text-green-200 text-xl">
+                  <div className="p-2 bg-green-100 dark:bg-green-900/50 rounded-full">
                     <Brain className="h-6 w-6" />
                   </div>
                   Smart Revision Notes Generated
                 </CardTitle>
-                <CardDescription className="text-violet-700 dark:text-violet-300 text-base">
+                <CardDescription className="text-green-700 dark:text-green-300 text-base">
                   Smart system has automatically created revision notes for topics where you lost marks
                 </CardDescription>
               </CardHeader>
               <CardContent className="text-center space-y-4">
-                <div className="text-violet-800 dark:text-violet-200 text-lg font-medium">
+                <div className="text-green-800 dark:text-green-200 text-lg font-medium">
                   Review personalized notes to strengthen weak areas and improve your Grade 9 performance
                 </div>
                 <Button 
                   onClick={() => navigate('/notebook')}
-                  className="bg-gradient-to-r from-accent via-accent/80 to-accent/60 hover:from-accent/90 hover:to-accent/70 text-accent-foreground font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+                  className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
                   size="lg"
                 >
                   <Brain className="h-5 w-5 mr-2" />
