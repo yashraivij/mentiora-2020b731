@@ -1291,7 +1291,7 @@ const Dashboard = () => {
                     )}
                   </div>
                   
-                  <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'} gap-6`}>
+                  <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2'} gap-6`}>
                     {filteredSubjects.map((subject) => {
                       const colors = subjectColors[subject.id] || subjectColors["physics"];
                       const progress = getSubjectProgress(subject.id);
