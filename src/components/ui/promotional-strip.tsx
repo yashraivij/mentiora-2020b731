@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import React from 'react';
 import { Button } from './button';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export const PromotionalStrip = () => {
-  const [isVisible, setIsVisible] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,8 +13,6 @@ export const PromotionalStrip = () => {
       navigate('/pricing');
     }
   };
-
-  if (!isVisible) return null;
 
   return (
     <div className="fixed top-0 left-0 right-0 z-[100] w-full bg-gradient-to-r from-green-600 to-green-500 text-white shadow-lg">
@@ -41,13 +37,6 @@ export const PromotionalStrip = () => {
             >
               Upgrade Now
             </Button>
-            <button
-              onClick={() => setIsVisible(false)}
-              className="p-0.5 hover:bg-white/10 rounded-full transition-colors"
-              aria-label="Dismiss promotional banner"
-            >
-              <X size={14} />
-            </button>
           </div>
         </div>
       </div>
