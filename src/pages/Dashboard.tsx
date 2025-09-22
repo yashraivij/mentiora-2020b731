@@ -1159,7 +1159,7 @@ const Dashboard = () => {
       )}
 
       {/* Desktop Layout */}
-      <div className={`flex h-screen ${isMobile ? 'pt-0' : ''}`}>
+      <div className={`flex ${isMobile ? 'min-h-screen flex-col pt-0' : 'h-screen'}`}>
         
         {/* Desktop Sidebar - Hidden on mobile */}
         <div className={`w-64 bg-background border-r-2 border-border flex flex-col py-6 ${isMobile ? 'hidden' : 'block'}`}>
@@ -1233,7 +1233,7 @@ const Dashboard = () => {
         {/* Main Content */}
         <div className="flex-1 flex flex-col lg:flex-row">
           {/* Main Learning Area */}
-          <div className={`flex-1 ${isMobile ? 'p-4' : 'p-8'} ${isMobile ? 'max-w-full w-full' : 'max-w-4xl'} mx-auto overflow-hidden mobile-no-overflow`}>
+          <div className={`flex-1 ${isMobile ? 'p-4' : 'p-8'} ${isMobile ? 'max-w-full w-full' : 'max-w-4xl'} mx-auto ${isMobile ? '' : 'overflow-hidden'}`}>
           {activeTab === "learn" && (
             <div>
               {/* Header with stats */}
