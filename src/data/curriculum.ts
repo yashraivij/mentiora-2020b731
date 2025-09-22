@@ -17823,7 +17823,257 @@ export const curriculum: Subject[] = [
             specReference: 'Edexcel Geography A 3.6'
           }
         ]
-      }
+      },
+        {
+          id: 'predicted-exam-2026',
+          name: 'Predicted 2026 Paper 1 Exam',
+          questions: [
+            {
+              id: 'exam-q1a',
+              question: 'Which of the following statements about UK landscapes is correct?\nA. Steep contour lines indicate gentle slopes\nB. All rivers flow from north to south\nC. Hard rock areas are more resistant to erosion\nD. Grid references show elevation patterns',
+              marks: 1,
+              difficulty: 'easy',
+              modelAnswer: 'C. Hard rock areas are more resistant to erosion',
+              markingCriteria: {
+                breakdown: ['Correct understanding of rock resistance to erosion (1 mark)']
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q1'
+            },
+            {
+              id: 'exam-q1b',
+              question: 'Name two types of mass movement found on UK coastlines.',
+              marks: 2,
+              difficulty: 'easy',
+              modelAnswer: 'Rockfall (1 mark) and landslides (1 mark).',
+              markingCriteria: {
+                breakdown: ['One type of mass movement correctly identified (1 mark)', 'Second type of mass movement correctly identified (1 mark)']
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q1'
+            },
+            {
+              id: 'exam-q1c',
+              question: 'Explain how constructive waves lead to the build-up of beaches.',
+              marks: 4,
+              difficulty: 'medium',
+              modelAnswer: 'Constructive waves have low wave height and long wavelength. They have a strong swash that carries sediment up the beach. The backwash is weaker than the swash due to water percolating through the beach material. This results in a net movement of sediment up the beach, leading to deposition and beach building.',
+              markingCriteria: {
+                breakdown: [
+                  'Characteristics of constructive waves (1 mark)',
+                  'Strong swash carries sediment up beach (1 mark)',
+                  'Weak backwash due to percolation (1 mark)',
+                  'Net deposition builds up beach (1 mark)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q1'
+            },
+            {
+              id: 'exam-q1d',
+              question: 'Assess the effectiveness of soft engineering strategies at the coast.',
+              marks: 6,
+              difficulty: 'medium',
+              modelAnswer: 'Soft engineering works with natural processes and is more sustainable. Beach nourishment creates natural barriers that absorb wave energy effectively. Dune regeneration provides flexible protection that can adjust to changing conditions. Managed retreat allows natural coastal processes to continue. However, soft engineering requires ongoing maintenance and may not provide immediate protection against extreme events. Public acceptance can be challenging, especially for managed retreat.',
+              markingCriteria: {
+                breakdown: [
+                  'Advantages of soft engineering approaches (2 marks)',
+                  'Disadvantages and limitations (2 marks)',
+                  'Overall assessment of effectiveness (2 marks)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q1'
+            },
+            {
+              id: 'exam-q2a-coastal',
+              question: 'Name one erosional landform found in your chosen landscape type.',
+              marks: 1,
+              difficulty: 'easy',
+              modelAnswer: 'Coastal: Wave-cut platform, cliff, cave, arch, stack. Rivers: Waterfall, gorge, V-shaped valley, interlocking spurs. Glaciated: Corrie, arete, pyramidal peak, U-shaped valley. (Any one correct example for chosen landscape type)',
+              markingCriteria: {
+                breakdown: ['Correct naming of one erosional landform (1 mark)']
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q2'
+            },
+            {
+              id: 'exam-q2b-coastal',
+              question: 'State two physical processes for your chosen landscape type.\n\nCoastal Landscapes: State two processes that lead to the formation of headlands and bays.\n\nRiver Landscapes: State two processes that lead to river valley formation.\n\nGlaciated Landscapes: State two processes that lead to glacial erosion.',
+              marks: 2,
+              difficulty: 'easy',
+              modelAnswer: 'Coastal: Differential erosion and rock resistance. Rivers: Hydraulic action and abrasion. Glaciated: Plucking and abrasion.',
+              markingCriteria: {
+                breakdown: ['One process correctly identified (1 mark)', 'Second process correctly identified (1 mark)']
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q2'
+            },
+            {
+              id: 'exam-q2c-coastal',
+              question: 'Explain landform formation for your chosen landscape type.\n\nCoastal: Explain how longshore drift leads to the formation of a spit.\n\nRivers: Explain how waterfalls are formed.\n\nGlaciated: Explain how corries are formed by glacial processes.',
+              marks: 4,
+              difficulty: 'medium',
+              modelAnswer: 'Coastal: Longshore drift transports sediment along the coast at an angle due to prevailing winds. Waves approach the beach at an angle, carrying sediment up the beach. The backwash returns straight down the beach due to gravity. This creates a zigzag movement of sediment. Where the coastline changes direction, sediment continues to be deposited, extending into the sea to form a spit.\n\nRivers: Rivers flow over alternating bands of hard and soft rock. The soft rock is eroded more quickly by hydraulic action and abrasion, creating a step. The hard rock forms the waterfall lip. Water plunges over creating a plunge pool below through hydraulic action. Undercutting occurs, causing the hard rock to collapse. The waterfall retreats upstream leaving a gorge.\n\nGlaciated: Snow accumulates in mountain hollows and compacts to form ice. The glacier moves through rotational slip, eroding the back wall through plucking and the floor through abrasion. Freeze-thaw weathering steepens the back wall. When the ice melts, it leaves behind a deep, armchair-shaped hollow with a steep back wall and sometimes a tarn (lake).',
+              markingCriteria: {
+                breakdown: [
+                  'Process explanation (1 mark)',
+                  'Sequence of formation (1 mark)',
+                  'Key mechanisms described (1 mark)',
+                  'Final landform characteristics (1 mark)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q2'
+            },
+            {
+              id: 'exam-q2d-coastal',
+              question: 'Assess management strategies for your chosen landscape type.\n\nCoastal: Assess the costs and benefits of hard engineering strategies to protect the coast.\n\nRivers: Assess the effectiveness of flood management strategies in the UK.\n\nGlaciated: Assess the impacts of tourism in glaciated upland areas of the UK.',
+              marks: 8,
+              difficulty: 'hard',
+              modelAnswer: 'Coastal: Benefits: Sea walls provide effective protection against wave erosion and flooding, protecting valuable coastal infrastructure. Rock armour dissipates wave energy effectively and is relatively flexible. Groynes can build up beaches which provide natural protection. Costs: High construction and maintenance costs. Sea walls can increase erosion elsewhere due to wave reflection. Hard defences can look unsightly and restrict coastal access. They may simply transfer the problem elsewhere along the coast. Environmental impacts include habitat destruction and interference with natural coastal processes.\n\nRivers: Hard engineering like flood barriers and channel straightening provides immediate protection but can be expensive and transfer problems downstream. Soft engineering like floodplain restoration and sustainable drainage systems work with natural processes but may require land use changes. Integrated approaches combining multiple strategies tend to be most effective, as seen with the Thames Estuary 2100 project.\n\nGlaciated: Positive impacts: Tourism provides economic benefits to rural communities through employment in hotels, restaurants, and guiding services. It supports local businesses and helps maintain rural services. Tourism revenue can fund conservation projects and path maintenance. Negative impacts: Footpath erosion and vegetation damage from large numbers of visitors. Traffic congestion and parking problems in narrow valleys. Litter and disturbance to wildlife. House prices increase, displacing local residents. Seasonal employment may be unstable.',
+              markingCriteria: {
+                breakdown: [
+                  'Benefits/positive impacts (3 marks)',
+                  'Costs/negative impacts (3 marks)',
+                  'Assessment and evaluation of effectiveness (2 marks)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q2'
+            },
+            {
+              id: 'exam-q5a',
+              question: 'Section B: Weather Hazards and Climate Change\n\nState one characteristic of a tropical storm.',
+              marks: 1,
+              difficulty: 'easy',
+              modelAnswer: 'Low pressure system, strong winds (over 119 km/h), heavy rainfall, eye/eyewall structure, or occurs over warm ocean water (any one correct characteristic)',
+              markingCriteria: {
+                breakdown: ['Correct identification of one tropical storm characteristic (1 mark)']
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q5'
+            },
+            {
+              id: 'exam-q5b',
+              question: 'Explain one reason why tropical storms are becoming more frequent.',
+              marks: 2,
+              difficulty: 'easy',
+              modelAnswer: 'Rising sea temperatures due to climate change provide more energy for storm formation (1 mark) and allow storms to maintain intensity over larger areas (1 mark).',
+              markingCriteria: {
+                breakdown: ['Reason explained (1 mark)', 'Development/elaboration (1 mark)']
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q5'
+            },
+            {
+              id: 'exam-q5c',
+              question: 'Explain two reasons why the UK is vulnerable to extreme weather events.',
+              marks: 4,
+              difficulty: 'medium',
+              modelAnswer: 'Maritime climate: The UK\'s position surrounded by ocean means it experiences frequent weather systems from the Atlantic, bringing storms and heavy rainfall. Urban heat islands: Cities create microclimates with higher temperatures, increasing risk of heat waves and thunderstorms. Dense population means more people are exposed to weather risks.',
+              markingCriteria: {
+                breakdown: [
+                  'First reason explained (2 marks)',
+                  'Second reason explained (2 marks)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q5'
+            },
+            {
+              id: 'exam-q5d',
+              question: 'Assess the social and economic impacts of a named tropical storm.',
+              marks: 6,
+              difficulty: 'medium',
+              modelAnswer: 'Hurricane Katrina (2005): Social impacts included over 1,800 deaths and displacement of over 1 million people. Poor communities were disproportionately affected. Economic impacts included $125 billion in damage, destruction of the Port of New Orleans affecting trade, and long-term unemployment. Insurance costs increased nationally. Recovery took many years, with some areas never fully rebuilt.',
+              markingCriteria: {
+                breakdown: [
+                  'Named tropical storm (1 mark)',
+                  'Social impacts explained (2 marks)',
+                  'Economic impacts explained (2 marks)',
+                  'Assessment of severity/scale (1 mark)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q5'
+            },
+            {
+              id: 'exam-q5e',
+              question: 'Evaluate the effectiveness of global strategies to manage climate change.',
+              marks: 9,
+              difficulty: 'hard',
+              modelAnswer: 'International agreements like the Paris Agreement have created global frameworks for reducing emissions. However, enforcement mechanisms are weak and targets are often not legally binding. The Kyoto Protocol had limited success as major emitters like the USA withdrew. Carbon trading schemes provide economic incentives but can be manipulated. Technology transfer to LICs helps spread clean energy but progress is slow. Individual country commitments vary widely in ambition and implementation. Climate change requires immediate action but political cycles focus on short-term gains.',
+              markingCriteria: {
+                breakdown: [
+                  'Examples of global strategies (2 marks)',
+                  'Evaluation of successes (3 marks)',
+                  'Evaluation of limitations (3 marks)',
+                  'Conclusion and overall assessment (1 mark)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q5'
+            },
+            {
+              id: 'exam-q6a',
+              question: 'Section C: Ecosystems, Biodiversity and Management\n\nWhich of the following is a characteristic of a tropical rainforest?\nA. Seasonal rainfall\nB. Nutrient-rich soil\nC. Emergent trees\nD. Cold winters',
+              marks: 1,
+              difficulty: 'easy',
+              modelAnswer: 'C. Emergent trees',
+              markingCriteria: {
+                breakdown: ['Correct identification of emergent trees as rainforest characteristic (1 mark)']
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q6'
+            },
+            {
+              id: 'exam-q6b',
+              question: 'State two ways humans use deciduous woodlands.',
+              marks: 2,
+              difficulty: 'easy',
+              modelAnswer: 'Timber production/forestry (1 mark) and recreation/tourism (1 mark).',
+              markingCriteria: {
+                breakdown: ['One human use correctly identified (1 mark)', 'Second human use correctly identified (1 mark)']
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q6'
+            },
+            {
+              id: 'exam-q6c',
+              question: 'Explain how the nutrient cycle supports biodiversity in tropical rainforests.',
+              marks: 4,
+              difficulty: 'medium',
+              modelAnswer: 'Rapid decomposition in hot, humid conditions quickly breaks down dead organic matter. Nutrients are rapidly recycled and taken up by plant roots through shallow root systems. This constant nutrient cycling supports the growth of diverse plant species. The variety of plant species provides different food sources and habitats, supporting diverse animal communities.',
+              markingCriteria: {
+                breakdown: [
+                  'Rapid decomposition explained (1 mark)',
+                  'Quick nutrient uptake by plants (1 mark)',
+                  'Support for plant diversity (1 mark)',
+                  'Link to animal diversity (1 mark)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q6'
+            },
+            {
+              id: 'exam-q6d',
+              question: 'Explain how sustainable management can reduce the impacts of deforestation.',
+              marks: 6,
+              difficulty: 'medium',
+              modelAnswer: 'Selective logging removes only mature trees, maintaining forest structure and allowing natural regeneration. Reforestation programs plant native species to restore cleared areas. Agroforestry combines farming with tree growing, providing income while maintaining forest cover. Protected areas preserve biodiversity and ecosystem services. Certification schemes like FSC ensure responsible forestry practices. Community involvement ensures local people benefit from conservation, reducing pressure for illegal logging.',
+              markingCriteria: {
+                breakdown: [
+                  'Sustainable forestry practices explained (2 marks)',
+                  'Conservation and restoration methods (2 marks)',
+                  'Community and economic approaches (2 marks)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q6'
+            },
+            {
+              id: 'exam-q6e',
+              question: 'Evaluate the view that ecosystems can be best managed by international agreements rather than local strategies. (12 + 3 SPaG)',
+              marks: 15,
+              difficulty: 'hard',
+              modelAnswer: 'International agreements provide coordinated global action and funding for ecosystem protection. The Paris Agreement addresses climate change affecting all ecosystems, while CITES protects endangered species across borders. However, enforcement is often weak and depends on national cooperation. Local strategies can be more responsive to specific ecosystem needs and have greater community support. Indigenous communities often have traditional knowledge essential for sustainable management. Local people have direct incentives to protect ecosystems they depend on. However, local efforts may lack sufficient resources and can be undermined by global pressures like international trade. The most effective approach combines international frameworks with strong local implementation, ensuring global coordination while respecting local knowledge and needs.',
+              markingCriteria: {
+                breakdown: [
+                  'Arguments for international agreements (3 marks)',
+                  'Arguments for local strategies (3 marks)',
+                  'Evaluation comparing both approaches (4 marks)',
+                  'Conclusion showing balanced judgment (2 marks)',
+                  'SPaG (spelling, punctuation, grammar) (3 marks)'
+                ]
+              },
+              specReference: 'Edexcel Geography A Paper 1 Q6'
+            }
+          ]
+        }
       ]
     }
   ];
