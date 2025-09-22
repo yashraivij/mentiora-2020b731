@@ -16653,6 +16653,153 @@ export const curriculum: Subject[] = [
           }
         ]
       },
+      {
+        id: 'global-circulation',
+        name: 'Global Circulation of the Atmosphere',
+        questions: [
+          {
+            id: 'global-q1',
+            question: 'At which latitude do trade winds converge?\nA. 0°\nB. 30°N/S\nC. 60°N/S\nD. 90°N/S',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'A. 0°',
+            markingCriteria: {
+              breakdown: ['Correct identification of trade wind convergence at equator (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 2.1'
+          },
+          {
+            id: 'global-q2',
+            question: 'State two reasons why the UK has a temperate climate.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Maritime influence from surrounding seas (1 mark) and latitude position between 50-60°N (1 mark).',
+            markingCriteria: {
+              breakdown: ['One reason correctly identified (1 mark)', 'Second reason correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 2.1'
+          },
+          {
+            id: 'global-q3',
+            question: 'Explain how the global circulation system creates areas of high and low pressure.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'At the equator, intense heating causes air to rise, creating low pressure. Rising air cools and spreads out at high altitude. At 30°N/S, cooled air descends, creating high pressure belts. The cycle continues with air rising again at 60°N/S creating low pressure.',
+            markingCriteria: {
+              breakdown: [
+                'Equatorial low pressure formation (1 mark)',
+                'Air circulation at altitude (1 mark)',
+                'Subtropical high pressure (1 mark)',
+                'Polar front low pressure (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.1'
+          },
+          {
+            id: 'global-q4',
+            question: 'Assess how global circulation influences tropical storm formation.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Global circulation creates the conditions needed for tropical storm formation. The ITCZ provides the initial low pressure area where storms can develop. Trade winds converging at the equator create instability. Ocean currents influenced by global circulation affect sea surface temperatures - storms need 27°C+ water. However, upper-level wind shear can prevent storm development.',
+            markingCriteria: {
+              breakdown: [
+                'ITCZ role in providing low pressure (2 marks)',
+                'Trade wind convergence effects (1 mark)',
+                'Sea surface temperature influence (2 marks)',
+                'Wind shear limiting factor (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.2'
+          },
+          {
+            id: 'global-q5',
+            question: 'Evaluate the importance of the global circulation system in influencing world climates.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'The global circulation system is fundamental in determining world climates through heat redistribution. It creates the major climate zones - equatorial low pressure brings high rainfall to tropical regions, while subtropical high pressure creates world\'s major deserts. Monsoon systems are driven by seasonal pressure changes. However, local factors like altitude, ocean currents, and continentality significantly modify the basic circulation patterns. Climate change may be altering traditional circulation patterns.',
+            markingCriteria: {
+              breakdown: [
+                'Heat redistribution role (2 marks)',
+                'Creation of climate zones (2 marks)',
+                'Monsoon systems (1 mark)',
+                'Local modifying factors (2 marks)',
+                'Climate change considerations (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.1'
+          },
+          {
+            id: 'global-q6',
+            question: 'What type of air pressure is found at the equator?\nA. High pressure\nB. Low pressure\nC. Variable pressure\nD. No pressure',
+            marks: 1,
+            difficulty: 'easy',
+            modelAnswer: 'B. Low pressure',
+            markingCriteria: {
+              breakdown: ['Correct identification of equatorial low pressure (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 2.1'
+          },
+          {
+            id: 'global-q7',
+            question: 'State two characteristics of the polar easterlies.',
+            marks: 2,
+            difficulty: 'easy',
+            modelAnswer: 'Blow from east to west (1 mark) and carry cold, dry air (1 mark).',
+            markingCriteria: {
+              breakdown: ['Wind direction correctly identified (1 mark)', 'Air characteristics correctly identified (1 mark)']
+            },
+            specReference: 'Edexcel Geography A 2.1'
+          },
+          {
+            id: 'global-q8',
+            question: 'Explain how the Coriolis effect influences global wind patterns.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The Coriolis effect is caused by Earth\'s rotation, deflecting moving air. In the Northern Hemisphere, winds are deflected to the right. In the Southern Hemisphere, winds are deflected to the left. This creates the characteristic curved paths of global wind systems like the trade winds and westerlies.',
+            markingCriteria: {
+              breakdown: [
+                'Link to Earth\'s rotation (1 mark)',
+                'Northern Hemisphere deflection (1 mark)',
+                'Southern Hemisphere deflection (1 mark)',
+                'Effect on wind patterns (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.1'
+          },
+          {
+            id: 'global-q9',
+            question: 'Describe the formation of the ITCZ (Intertropical Convergence Zone).',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The ITCZ forms where trade winds from both hemispheres converge near the equator. Intense solar heating causes air to rise rapidly, creating a band of low pressure. The rising air creates towering cumulonimbus clouds and heavy precipitation. The ITCZ migrates seasonally, following the overhead sun.',
+            markingCriteria: {
+              breakdown: [
+                'Trade wind convergence (1 mark)',
+                'Low pressure formation (1 mark)',
+                'Cloud formation and precipitation (1 mark)',
+                'Seasonal migration (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.1'
+          },
+          {
+            id: 'global-q10',
+            question: 'Assess the role of ocean currents in the global circulation system.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Ocean currents work with atmospheric circulation to redistribute heat globally. Warm currents like the Gulf Stream transfer heat poleward, moderating temperatures in western Europe. Cold currents like the Californian Current cool adjacent land areas. Surface currents are driven by prevailing winds, while deep currents are driven by temperature and salinity differences. This creates a global conveyor belt system essential for climate regulation.',
+            markingCriteria: {
+              breakdown: [
+                'Heat redistribution role (2 marks)',
+                'Examples of warm/cold current effects (2 marks)',
+                'Surface and deep current drivers (1 mark)',
+                'Global conveyor belt concept (1 mark)'
+              ]
+            },
+            specReference: 'Edexcel Geography A 2.1'
+          }
+        ]
+      },
         {
           id: 'predicted-exam-2026',
           name: 'Predicted 2026 Paper 1 Exam',
