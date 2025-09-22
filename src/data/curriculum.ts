@@ -16712,12 +16712,12 @@ export const curriculum: Subject[] = [
             },
             {
               id: 'exam-q2a-coastal',
-              question: 'Question 2a: Which of the following is an erosional landform?\n\nOption A (Coastal): Wave-cut platform\nOption B (Rivers): V-shaped valley\nOption C (Glaciated): Arete\n\nChoose the correct erosional landform for your chosen landscape type.',
+              question: 'Which of the following are examples of erosional landforms?\n\nA. Wave-cut platform (Coastal)\nB. V-shaped valley (Rivers) \nC. Arete (Glaciated)\nD. All of the above',
               marks: 1,
               difficulty: 'easy',
-              modelAnswer: 'Any correct erosional landform: Coastal - Wave-cut platform, Rivers - V-shaped valley, Glaciated - Arete',
+              modelAnswer: 'D. All of the above - Wave-cut platforms, V-shaped valleys, and aretes are all erosional landforms in their respective landscape types.',
               markingCriteria: {
-                breakdown: ['Correct identification of erosional landform for chosen landscape (1 mark)']
+                breakdown: ['Correct identification that all options are erosional landforms (1 mark)']
               },
               specReference: 'Edexcel Geography A Paper 1 Q2'
             },
