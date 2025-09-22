@@ -1252,7 +1252,7 @@ const Dashboard = () => {
         {/* Main Content */}
         <div className="flex-1 flex flex-col lg:flex-row">
           {/* Main Learning Area */}
-          <div className={`flex-1 ${isMobile ? 'p-4' : 'p-8'} ${isMobile ? 'max-w-full w-full' : 'max-w-4xl'} mx-auto ${isMobile ? '' : 'overflow-hidden'}`}>
+          <div className={`flex-1 overflow-y-auto ${isMobile ? 'p-4' : 'p-8'} ${isMobile ? 'max-w-full w-full' : 'max-w-4xl'} mx-auto`}>
           {activeTab === "learn" && (
             <div>
               {/* Header with stats */}
