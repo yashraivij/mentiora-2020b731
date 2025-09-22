@@ -1143,17 +1143,6 @@ const Dashboard = () => {
               <span className="font-bold text-lg text-foreground">Mentiora</span>
               {isPremium && <Crown className="w-5 h-5 text-yellow-500" />}
             </div>
-            
-            <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 rounded-lg px-2 py-1">
-                <Gem className="h-4 w-4" />
-                <span className="text-sm font-bold">{userGems || 0}</span>
-              </div>
-              <div className="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg px-2 py-1">
-                <Heart className="h-4 w-4" />
-                <span className="text-sm font-bold">{userHearts}</span>
-              </div>
-            </div>
           </div>
         </div>
       )}
