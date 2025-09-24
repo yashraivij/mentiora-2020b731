@@ -2157,30 +2157,6 @@ const Dashboard = () => {
           {activeTab === "flashcards" && !selectedSet && (
             <div className="min-h-screen bg-background">
               {/* Premium Header */}
-              <header className="bg-card/90 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-xl">
-                <div className="container mx-auto px-4 sm:px-6 py-4">
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
-                    <div className="flex items-center space-x-2 sm:space-x-4">
-                      <div className="flex items-center space-x-2 sm:space-x-4">
-                        <div className="relative">
-                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-primary flex items-center justify-center shadow-lg">
-                            <Brain className="h-5 w-5 sm:h-6 sm:w-6 text-primary-foreground" />
-                          </div>
-                          <div className="absolute -top-1 -right-1 w-4 h-4 bg-accent rounded-full flex items-center justify-center">
-                            <Crown className="h-2.5 w-2.5 text-accent-foreground" />
-                          </div>
-                        </div>
-                        <div>
-                          <h1 className="text-xl sm:text-3xl font-bold bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-                            Smart Flashcards
-                          </h1>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </header>
-
               <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-8 max-w-7xl">
                 {flashcardView === "create" && (
                   <div className="space-y-8">
