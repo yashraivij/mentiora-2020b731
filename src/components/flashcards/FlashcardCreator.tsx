@@ -102,11 +102,12 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
   const [isSaving, setIsSaving] = useState(false);
 
   const handleEnhanceToggle = (checked: boolean) => {
-    if (checked && !isPremium) {
-      // Navigate to pricing page for non-premium users
+    if (!isPremium) {
+      // Always redirect free users to pricing page, don't change toggle state
       navigate('/pricing');
       return;
     }
+    // Only premium users can actually toggle the feature
     setEnhance(checked);
   };
 
@@ -307,7 +308,7 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
           <div className={`p-3 rounded-xl transition-all duration-300 ${enhance ? 'bg-purple-400 shadow-lg' : 'bg-muted'}`}>
             <Switch
               id="enhance"
-              checked={enhance}
+              checked={enhance && isPremium}
               onCheckedChange={handleEnhanceToggle}
               className="data-[state=checked]:bg-purple-500"
             />
@@ -333,7 +334,7 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
           </div>
         </div>
         
-        {enhance && subject && examBoard && (
+        {enhance && isPremium && subject && examBoard && (
           <div className="mt-6 p-5 bg-purple-50/80 dark:bg-purple-950/30 backdrop-blur-sm rounded-xl border border-purple-200 dark:border-purple-800 shadow-sm">
             <h4 className="text-base font-bold text-purple-700 dark:text-purple-300 mb-3 flex items-center gap-2">
               <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
