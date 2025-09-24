@@ -11,6 +11,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useSubscription } from "@/hooks/useSubscription";
+import { useNavigate } from "react-router-dom";
 import { Brain, Sparkles, BookOpen, Zap } from "lucide-react";
 
 interface FlashcardCreatorProps {
@@ -88,7 +89,8 @@ const subjectExamples = {
 export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
   const { user } = useAuth();
   const { toast } = useToast();
-  const { isPremium, openPaymentLink } = useSubscription();
+  const { isPremium } = useSubscription();
+  const navigate = useNavigate();
   
   const [notes, setNotes] = useState("");
   const [subject, setSubject] = useState("");
@@ -101,8 +103,8 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
 
   const handleEnhanceToggle = (checked: boolean) => {
     if (checked && !isPremium) {
-      // Redirect to paywall for non-premium users
-      openPaymentLink();
+      // Navigate to pricing page for non-premium users
+      navigate('/pricing');
       return;
     }
     setEnhance(checked);
