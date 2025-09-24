@@ -2069,7 +2069,7 @@ const Dashboard = () => {
                   </CardHeader>
                   <CardContent>
                     <Button
-                      onClick={() => navigate("/flashcards")}
+                      onClick={() => navigate("/flashcards?tab=library")}
                       variant="outline"
                       className="w-full"
                       size="lg"

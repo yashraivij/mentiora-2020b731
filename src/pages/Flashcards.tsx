@@ -59,7 +59,11 @@ const Flashcards = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   
-  const [activeTab, setActiveTab] = useState("create");
+  const [activeTab, setActiveTab] = useState(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tab = urlParams.get('tab');
+    return tab === 'library' ? 'library' : 'create';
+  });
   const [flashcardSets, setFlashcardSets] = useState<FlashcardSet[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedSet, setSelectedSet] = useState<FlashcardSet | null>(null);
