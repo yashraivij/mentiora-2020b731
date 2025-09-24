@@ -387,101 +387,92 @@ const Flashcards = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         <main className="flex-1 p-6">
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full max-w-4xl mx-auto">
-            <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 border border-sky-200 dark:border-sky-700/50">
-              <TabsTrigger value="create" className="data-[state=active]:bg-sky-400 data-[state=active]:text-white text-sky-700 dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-800/30">Create</TabsTrigger>
-              <TabsTrigger value="library" className="data-[state=active]:bg-blue-400 data-[state=active]:text-white text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-800/30">My Collection</TabsTrigger>
-            </TabsList>
+          <div className="w-full max-w-4xl mx-auto">
+            <FlashcardCreator onSetCreated={handleSetCreated} />
+          </div>
 
-            <TabsContent value="create" className="mt-6">
-              <FlashcardCreator onSetCreated={handleSetCreated} />
-            </TabsContent>
-
-            <TabsContent value="library" className="mt-6">
-              <div className="space-y-6">
-                {loading ? (
-                  <div className="text-center py-12">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-                    <p className="text-muted-foreground mt-4">Loading your flashcard sets...</p>
+          <div className="space-y-6">
+            {loading ? (
+              <div className="text-center py-12">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+                <p className="text-muted-foreground mt-4">Loading your flashcard sets...</p>
+              </div>
+            ) : flashcardSets.length === 0 ? (
+              <Card className="bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 border border-sky-200 dark:border-sky-700/50 shadow-sm">
+                <CardContent className="text-center py-12">
+                  <div className="p-4 bg-sky-400 dark:bg-sky-600 rounded-full w-fit mx-auto mb-6 shadow-sm">
+                    <Brain className="h-16 w-16 text-white" />
                   </div>
-                ) : flashcardSets.length === 0 ? (
-                  <Card className="bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 border border-sky-200 dark:border-sky-700/50 shadow-sm">
-                    <CardContent className="text-center py-12">
-                      <div className="p-4 bg-sky-400 dark:bg-sky-600 rounded-full w-fit mx-auto mb-6 shadow-sm">
-                        <Brain className="h-16 w-16 text-white" />
+                  <h3 className="text-xl font-semibold mb-3 text-sky-700 dark:text-sky-300">No flashcard sets yet</h3>
+                  <p className="text-sky-600 dark:text-sky-400 mb-6 max-w-md mx-auto">
+                    Create your first set of flashcards from your notes to start studying more effectively!
+                  </p>
+                  <Button onClick={() => setActiveTab("create")} size="lg" className="bg-sky-400 hover:bg-sky-500 dark:bg-sky-600 dark:hover:bg-sky-700 text-white shadow-sm hover:shadow-md">
+                    <Plus className="h-5 w-5 mr-2" />
+                    Create Your First Set
+                  </Button>
+                </CardContent>
+              </Card>
+            ) : (
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {flashcardSets.map((set) => (
+                  <Card key={set.id} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                    <CardHeader>
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <CardTitle className="text-lg font-semibold">{set.title}</CardTitle>
+                          <CardDescription className="mt-1">
+                            {set.card_count} cards
+                          </CardDescription>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleDeleteSet(set.id)}
+                          className="text-muted-foreground hover:text-destructive"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
                       </div>
-                      <h3 className="text-xl font-semibold mb-3 text-sky-700 dark:text-sky-300">No flashcard sets yet</h3>
-                      <p className="text-sky-600 dark:text-sky-400 mb-6 max-w-md mx-auto">
-                        Create your first set of flashcards from your notes to start studying more effectively!
-                      </p>
-                      <Button onClick={() => setActiveTab("create")} size="lg" className="bg-sky-400 hover:bg-sky-500 dark:bg-sky-600 dark:hover:bg-sky-700 text-white shadow-sm hover:shadow-md">
-                        <Plus className="h-5 w-5 mr-2" />
-                        Create Your First Set
-                      </Button>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="mb-4">
+                        <Badge variant="secondary" className="mb-2">
+                          {set.subject_id}
+                        </Badge>
+                        <p className="text-sm text-muted-foreground">
+                          Created {formatDate(set.created_at)}
+                        </p>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        <Button
+                          variant="outline"
+                          onClick={() => {
+                            setSelectedSet(set);
+                            setViewMode("flashcards");
+                          }}
+                          className="w-full"
+                        >
+                          <Eye className="h-4 w-4 mr-2" />
+                          Review
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            setSelectedSet(set);
+                            setViewMode("learn");
+                          }}
+                          className="w-full"
+                        >
+                          <Play className="h-4 w-4 mr-2" />
+                          Learn
+                        </Button>
+                      </div>
                     </CardContent>
                   </Card>
-                ) : (
-                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {flashcardSets.map((set) => (
-                      <Card key={set.id} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                        <CardHeader>
-                          <div className="flex justify-between items-start">
-                            <div>
-                              <CardTitle className="text-lg font-semibold">{set.title}</CardTitle>
-                              <CardDescription className="mt-1">
-                                {set.card_count} cards
-                              </CardDescription>
-                            </div>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => handleDeleteSet(set.id)}
-                              className="text-muted-foreground hover:text-destructive"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="mb-4">
-                            <Badge variant="secondary" className="mb-2">
-                              {set.subject_id}
-                            </Badge>
-                            <p className="text-sm text-muted-foreground">
-                              Created {formatDate(set.created_at)}
-                            </p>
-                          </div>
-                          <div className="grid grid-cols-2 gap-3">
-                            <Button
-                              variant="outline"
-                              onClick={() => {
-                                setSelectedSet(set);
-                                setViewMode("flashcards");
-                              }}
-                              className="w-full"
-                            >
-                              <Eye className="h-4 w-4 mr-2" />
-                              Review
-                            </Button>
-                            <Button
-                              onClick={() => {
-                                setSelectedSet(set);
-                                setViewMode("learn");
-                              }}
-                              className="w-full"
-                            >
-                              <Play className="h-4 w-4 mr-2" />
-                              Learn
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                )}
+                ))}
               </div>
-            </TabsContent>
-          </Tabs>
+            )}
+          </div>
         </main>
       </div>
     </div>
