@@ -2534,7 +2534,7 @@ const Dashboard = () => {
                                            <Button
                                              variant="ghost"
                                              size="sm"
-                                             className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                                             className="h-6 w-6 p-0 transition-opacity"
                                              onClick={() => handleEditCard(card)}
                                            >
                                              <Edit3 className="h-3 w-3 text-blue-600" />
@@ -2542,7 +2542,7 @@ const Dashboard = () => {
                                            <Button
                                              variant="ghost"
                                              size="sm"
-                                             className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                                             className="h-6 w-6 p-0 transition-opacity"
                                              onClick={async () => {
                                                try {
                                                  const { error } = await supabase
