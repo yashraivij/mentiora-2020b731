@@ -46,6 +46,7 @@ import {
   Settings,
   Plus,
   X,
+  Eye,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { motion } from "framer-motion";
@@ -2021,6 +2022,102 @@ const Dashboard = () => {
               <p className="text-lg text-muted-foreground">
                 Coming soon! This feature is being developed.
               </p>
+            </div>
+          )}
+
+          {activeTab === "flashcards" && (
+            <div className="space-y-6">
+              {/* Header */}
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-foreground mb-2">Flashcards</h2>
+                <p className="text-lg text-muted-foreground">Create and study with AI-generated flashcards</p>
+              </div>
+
+              {/* Quick Actions */}
+              <div className="grid gap-6 md:grid-cols-2">
+                <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Brain className="h-5 w-5 text-purple-500" />
+                      Create Flashcards
+                    </CardTitle>
+                    <CardDescription>
+                      Turn your study notes into flashcards with AI
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Button
+                      onClick={() => navigate("/flashcards")}
+                      className="w-full"
+                      size="lg"
+                    >
+                      <Plus className="h-4 w-4 mr-2" />
+                      Get Started
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <BookOpen className="h-5 w-5 text-blue-500" />
+                      Study Mode
+                    </CardTitle>
+                    <CardDescription>
+                      Review your saved flashcard sets
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Button
+                      onClick={() => navigate("/flashcards")}
+                      variant="outline"
+                      className="w-full"
+                      size="lg"
+                    >
+                      <Eye className="h-4 w-4 mr-2" />
+                      View Library
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Feature Highlights */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>✨ What you can do with Flashcards</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-4 md:grid-cols-3">
+                    <div className="text-center p-4">
+                      <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <Brain className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                      </div>
+                      <h3 className="font-semibold mb-2">AI Generation</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Paste your notes and get instant flashcards
+                      </p>
+                    </div>
+                    <div className="text-center p-4">
+                      <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <Zap className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                      </div>
+                      <h3 className="font-semibold mb-2">Exam-Board Specific</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Enhanced with mark scheme language
+                      </p>
+                    </div>
+                    <div className="text-center p-4">
+                      <div className="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <BookOpen className="h-6 w-6 text-green-600 dark:text-green-400" />
+                      </div>
+                      <h3 className="font-semibold mb-2">Study Modes</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Flashcards, learning mode, and shuffle
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           )}
 
