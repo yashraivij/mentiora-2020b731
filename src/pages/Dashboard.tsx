@@ -2177,35 +2177,6 @@ const Dashboard = () => {
                         </div>
                       </div>
                     </div>
-
-                    {/* Tab Navigation */}
-                    <div className="bg-card/50 backdrop-blur-sm p-1 rounded-xl border border-border">
-                      <div className="flex space-x-1">
-                        <button
-                          onClick={() => setFlashcardView("create")}
-                          className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
-                            flashcardView === "create"
-                              ? 'bg-primary text-primary-foreground shadow-lg'
-                              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                          }`}
-                        >
-                          Create Flashcards
-                        </button>
-                        <button
-                          onClick={() => {
-                            setFlashcardView("library");
-                            loadFlashcardSets();
-                          }}
-                          className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
-                            flashcardView === "library"
-                              ? 'bg-primary text-primary-foreground shadow-lg'
-                              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                          }`}
-                        >
-                          My Collection
-                        </button>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </header>
