@@ -10,6 +10,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import mentioraLogo from "@/assets/mentiora-logo.png";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { MobileNav, MobileNavItem } from "@/components/ui/mobile-nav";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import {
   BookOpen,
   Trophy,
@@ -43,6 +45,7 @@ import {
   Unlock,
   CreditCard,
   Trash2,
+  Edit3,
   Settings,
   Plus,
   X,
@@ -142,6 +145,8 @@ const Dashboard = () => {
   const [viewMode, setViewMode] = useState<"flashcards" | "learn" | null>(null);
   const [individualFlashcards, setIndividualFlashcards] = useState<any[]>([]);
   const [cardsLoading, setCardsLoading] = useState(false);
+  const [editingCardId, setEditingCardId] = useState<string | null>(null);
+  const [editingCardData, setEditingCardData] = useState<{ front: string; back: string }>({ front: '', back: '' });
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
@@ -358,6 +363,57 @@ const Dashboard = () => {
         variant: "destructive"
       });
     }
+  };
+
+  // Edit flashcard functions
+  const handleEditCard = (card: any) => {
+    setEditingCardId(card.id);
+    setEditingCardData({ front: card.front, back: card.back });
+  };
+
+  const handleSaveEdit = async () => {
+    if (!editingCardId || !user?.id) return;
+
+    try {
+      const { error } = await supabase
+        .from('flashcards')
+        .update({
+          front: editingCardData.front,
+          back: editingCardData.back,
+        })
+        .eq('id', editingCardId)
+        .eq('user_id', user.id);
+
+      if (error) throw error;
+
+      setIndividualFlashcards(prev => 
+        prev.map(card => 
+          card.id === editingCardId 
+            ? { ...card, front: editingCardData.front, back: editingCardData.back }
+            : card
+        )
+      );
+
+      setEditingCardId(null);
+      setEditingCardData({ front: '', back: '' });
+
+      toast({
+        title: "Success",
+        description: "Flashcard updated successfully"
+      });
+    } catch (error) {
+      console.error('Error updating flashcard:', error);
+      toast({
+        title: "Error",
+        description: "Failed to update flashcard",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingCardId(null);
+    setEditingCardData({ front: '', back: '' });
   };
 
   const formatDate = (dateString: string) => {
@@ -2468,71 +2524,124 @@ const Dashboard = () => {
                                     key={card.id}
                                     className="group transition-all duration-300 hover:shadow-lg hover:scale-[1.02] bg-gradient-to-br from-card to-card/80 border-border/50"
                                   >
-                                    <CardHeader className="pb-3">
-                                      <div className="flex items-start justify-between">
-                                        <div className="flex items-center gap-2">
-                                          <BookOpen className="h-4 w-4 text-blue-600" />
-                                          <span className="text-xs font-medium text-muted-foreground">Question</span>
-                                        </div>
-                                        <Button
-                                          variant="ghost"
-                                          size="sm"
-                                          className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                                          onClick={async () => {
-                                            try {
-                                              const { error } = await supabase
-                                                .from('flashcards')
-                                                .delete()
-                                                .eq('id', card.id)
-                                                .eq('user_id', user?.id);
+                                     <CardHeader className="pb-3">
+                                       <div className="flex items-start justify-between">
+                                         <div className="flex items-center gap-2">
+                                           <BookOpen className="h-4 w-4 text-blue-600" />
+                                           <span className="text-xs font-medium text-muted-foreground">Question</span>
+                                         </div>
+                                         <div className="flex items-center gap-2">
+                                           <Button
+                                             variant="ghost"
+                                             size="sm"
+                                             className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                                             onClick={() => handleEditCard(card)}
+                                           >
+                                             <Edit3 className="h-3 w-3 text-blue-600" />
+                                           </Button>
+                                           <Button
+                                             variant="ghost"
+                                             size="sm"
+                                             className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                                             onClick={async () => {
+                                               try {
+                                                 const { error } = await supabase
+                                                   .from('flashcards')
+                                                   .delete()
+                                                   .eq('id', card.id)
+                                                   .eq('user_id', user?.id);
 
-                                              if (error) throw error;
+                                                 if (error) throw error;
 
-                                              setIndividualFlashcards(prev => prev.filter(c => c.id !== card.id));
-                                              toast({
-                                                title: "Success",
-                                                description: "Flashcard deleted successfully"
-                                              });
-                                            } catch (error) {
-                                              console.error('Error deleting flashcard:', error);
-                                              toast({
-                                                title: "Error",
-                                                description: "Failed to delete flashcard",
-                                                variant: "destructive"
-                                              });
-                                            }
-                                          }}
-                                        >
-                                          <Trash2 className="h-3 w-3 text-destructive" />
-                                        </Button>
-                                      </div>
-                                    </CardHeader>
-                                    <CardContent>
-                                      <div className="space-y-4">
-                                        <div>
-                                          <p className="text-sm font-medium leading-relaxed mb-3">
-                                            {card.front}
-                                          </p>
-                                        </div>
-                                        
-                                        <div className="border-t border-border/50 pt-3">
-                                          <div className="flex items-center gap-2 mb-2">
-                                            <Brain className="h-4 w-4 text-green-600" />
-                                            <span className="text-xs font-medium text-muted-foreground">Answer</span>
-                                          </div>
-                                          <p className="text-sm text-muted-foreground leading-relaxed">
-                                            {card.back}
-                                          </p>
-                                        </div>
-                                        
-                                        <div className="border-t border-border/50 pt-3 flex items-center justify-between text-xs text-muted-foreground">
-                                          <span>Created: {new Date(card.created_at).toLocaleDateString()}</span>
-                                          {card.review_count > 0 && (
-                                            <span>{card.review_count} reviews</span>
-                                          )}
-                                        </div>
-                                      </div>
-                                    </CardContent>
+                                                 setIndividualFlashcards(prev => prev.filter(c => c.id !== card.id));
+                                                 toast({
+                                                   title: "Success",
+                                                   description: "Flashcard deleted successfully"
+                                                 });
+                                               } catch (error) {
+                                                 console.error('Error deleting flashcard:', error);
+                                                 toast({
+                                                   title: "Error",
+                                                   description: "Failed to delete flashcard",
+                                                   variant: "destructive"
+                                                 });
+                                               }
+                                             }}
+                                           >
+                                             <Trash2 className="h-3 w-3 text-destructive" />
+                                           </Button>
+                                         </div>
+                                       </div>
+                                     </CardHeader>
+                                     <CardContent>
+                                       {editingCardId === card.id ? (
+                                         <div className="space-y-4">
+                                           <div>
+                                             <label className="text-xs font-medium text-muted-foreground mb-2 block">Question</label>
+                                             <Textarea
+                                               value={editingCardData.front}
+                                               onChange={(e) => setEditingCardData(prev => ({ ...prev, front: e.target.value }))}
+                                               placeholder="Enter the question..."
+                                               className="resize-none"
+                                               rows={3}
+                                             />
+                                           </div>
+                                           
+                                           <div>
+                                             <label className="text-xs font-medium text-muted-foreground mb-2 block">Answer</label>
+                                             <Textarea
+                                               value={editingCardData.back}
+                                               onChange={(e) => setEditingCardData(prev => ({ ...prev, back: e.target.value }))}
+                                               placeholder="Enter the answer..."
+                                               className="resize-none"
+                                               rows={3}
+                                             />
+                                           </div>
+                                           
+                                           <div className="flex items-center justify-end gap-2 pt-2">
+                                             <Button
+                                               variant="outline"
+                                               size="sm"
+                                               onClick={handleCancelEdit}
+                                             >
+                                               Cancel
+                                             </Button>
+                                             <Button
+                                               size="sm"
+                                               onClick={handleSaveEdit}
+                                               disabled={!editingCardData.front.trim() || !editingCardData.back.trim()}
+                                             >
+                                               Save
+                                             </Button>
+                                           </div>
+                                         </div>
+                                       ) : (
+                                         <div className="space-y-4">
+                                           <div>
+                                             <p className="text-sm font-medium leading-relaxed mb-3">
+                                               {card.front}
+                                             </p>
+                                           </div>
+                                           
+                                           <div className="border-t border-border/50 pt-3">
+                                             <div className="flex items-center gap-2 mb-2">
+                                               <Brain className="h-4 w-4 text-green-600" />
+                                               <span className="text-xs font-medium text-muted-foreground">Answer</span>
+                                             </div>
+                                             <p className="text-sm text-muted-foreground leading-relaxed">
+                                               {card.back}
+                                             </p>
+                                           </div>
+                                           
+                                           <div className="border-t border-border/50 pt-3 flex items-center justify-between text-xs text-muted-foreground">
+                                             <span>Created: {new Date(card.created_at).toLocaleDateString()}</span>
+                                             {card.review_count > 0 && (
+                                               <span>{card.review_count} reviews</span>
+                                             )}
+                                           </div>
+                                         </div>
+                                       )}
+                                     </CardContent>
                                   </Card>
                                 ))}
                               </div>
