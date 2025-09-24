@@ -38,18 +38,18 @@ CRITICAL REQUIREMENTS:
 7. Ensure questions are specific and testable
 
 ANSWER FORMATTING RULES:
-8. If an answer contains multiple points or examples, format them as bullet points
-9. Use "•" for bullet points and put each point on a new line
-10. Each point should be short, clear, and exam-ready (avoid long sentences)
-11. Start with an introductory phrase if needed, followed by bullet points
-12. Example format: "Key features include:\n• Point one with clear detail.\n• Point two with specific information.\n• Point three with precise terminology."
+8. Format answers naturally for readability and comprehension
+9. Use bullet points (•) ONLY when they genuinely help organize multiple distinct points or examples
+10. For single concepts, definitions, or explanations, use well-structured paragraphs with clear spacing
+11. Break up longer explanations into short, digestible sentences with line breaks for readability
+12. Choose the format that best suits the content: bullet points for lists/steps, paragraphs for explanations/definitions
 
 Response format must be valid JSON:
 {
   "flashcards": [
     {
       "front": "Clear, specific question",
-      "back": "Well-formatted answer with bullet points when multiple points exist"
+      "back": "Naturally formatted answer that's easy to read and understand"
     }
   ]
 }`;
