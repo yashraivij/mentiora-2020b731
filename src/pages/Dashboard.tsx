@@ -2355,27 +2355,96 @@ const Dashboard = () => {
                           <h2 className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-foreground via-foreground/80 to-foreground/60 bg-clip-text text-transparent mb-4">
                             Your Flashcard Collection
                           </h2>
-                          <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
-                            Review and study your AI-generated flashcard sets for effective revision
-                          </p>
-                          <div className="flex items-center justify-center space-x-2 mt-4">
-                            <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                            <div className="w-2 h-2 bg-secondary rounded-full animate-pulse delay-75"></div>
-                            <div className="w-2 h-2 bg-accent rounded-full animate-pulse delay-150"></div>
-                          </div>
+                           <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
+                             Review and study your AI-generated flashcard sets for effective revision
+                           </p>
                         </div>
 
-                        {/* Flashcard Sets Grid */}
-                        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                          {flashcardSets.map((set, index) => (
-                            <motion.div
-                              key={set.id}
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: 0.05 * index }}
-                            >
-                              <Card className="group bg-card/80 backdrop-blur-xl border border-border shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden">
-                                <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full -translate-y-12 translate-x-12"></div>
+                         {/* Flashcard Sets Grid */}
+                         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                           {flashcardSets.map((set, index) => {
+                             // Color gradients for different cards
+                             const gradients = [
+                               "bg-gradient-to-br from-blue-400/20 to-cyan-400/20 border-blue-200/50",
+                               "bg-gradient-to-br from-purple-400/20 to-pink-400/20 border-purple-200/50",
+                               "bg-gradient-to-br from-emerald-400/20 to-teal-400/20 border-emerald-200/50",
+                               "bg-gradient-to-br from-orange-400/20 to-red-400/20 border-orange-200/50",
+                               "bg-gradient-to-br from-indigo-400/20 to-blue-400/20 border-indigo-200/50",
+                               "bg-gradient-to-br from-green-400/20 to-lime-400/20 border-green-200/50"
+                             ];
+                             const cardGradient = gradients[index % gradients.length];
+                             
+                             return (
+                               <motion.div
+                                 key={set.id}
+                                 initial={{ opacity: 0, y: 20 }}
+                                 animate={{ opacity: 1, y: 0 }}
+                                 transition={{ delay: 0.05 * index }}
+                               >
+                                 <Card className={`group ${cardGradient} backdrop-blur-xl border shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden`}>
+                                   <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-12 translate-x-12"></div>
+                                   <CardHeader className="relative pb-3">
+                                     <div className="flex justify-between items-start mb-3">
+                                       <div className="flex-1">
+                                         <div className="flex items-center gap-3 mb-2">
+                                           <div className="p-2 bg-primary rounded-lg shadow-sm">
+                                             <Brain className="h-4 w-4 text-primary-foreground" />
+                                           </div>
+                                           <div>
+                                             <CardTitle className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+                                               {set.title}
+                                             </CardTitle>
+                                             <CardDescription className="text-muted-foreground text-sm">
+                                               {set.card_count} cards • {formatDate(set.created_at)}
+                                             </CardDescription>
+                                           </div>
+                                         </div>
+                                       </div>
+                                       <Button
+                                         variant="ghost"
+                                         size="sm"
+                                         onClick={(e) => {
+                                           e.stopPropagation();
+                                           handleDeleteSet(set.id);
+                                         }}
+                                         className="text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-full p-2"
+                                       >
+                                         <Trash2 className="h-3 w-3" />
+                                       </Button>
+                                     </div>
+                                   </CardHeader>
+                                   
+                                   <CardContent className="relative pt-0">
+                                     <div className="grid grid-cols-2 gap-2">
+                                       <Button
+                                         variant="outline"
+                                         size="sm"
+                                         onClick={() => {
+                                           setSelectedSet(set);
+                                           setViewMode("flashcards");
+                                         }}
+                                         className="w-full border-border text-foreground hover:bg-muted transition-all duration-200 text-xs"
+                                       >
+                                         <Eye className="h-3 w-3 mr-1" />
+                                         Review
+                                       </Button>
+                                       <Button
+                                         size="sm"
+                                         onClick={() => {
+                                           setSelectedSet(set);
+                                           setViewMode("learn");
+                                         }}
+                                         className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-200 text-xs"
+                                       >
+                                         <Play className="h-3 w-3 mr-1" />
+                                         Study
+                                       </Button>
+                                     </div>
+                                   </CardContent>
+                                 </Card>
+                               </motion.div>
+                             );
+                           })}
                                 <CardHeader className="relative pb-3">
                                   <div className="flex justify-between items-start mb-3">
                                     <div className="flex-1">
@@ -2653,17 +2722,16 @@ const Dashboard = () => {
                                            </div>
                                          </div>
                                        )}
-                                     </CardContent>
-                                  </Card>
-                                ))}
-                              </div>
-                            </div>
-                            );
-                          });
-                        })()}
-                      </>
-                    )}
-                  </div>
+                                      </CardContent>
+                                   </Card>
+                                 ))}
+                               </div>
+                             </div>
+                           });
+                         })()}
+                       </>
+                     )}
+                   </div>
                 )}
               </div>
             </div>
