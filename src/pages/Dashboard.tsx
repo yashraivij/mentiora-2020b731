@@ -1122,7 +1122,13 @@ const Dashboard = () => {
                 return (
                   <MobileNavItem
                     key={item.id}
-                    onClick={() => setActiveTab(item.id)}
+                    onClick={() => {
+                      if (item.id === "flashcards") {
+                        navigate("/flashcards");
+                      } else {
+                        setActiveTab(item.id);
+                      }
+                    }}
                     className={isActive 
                       ? `${item.activeColor} text-white shadow-lg` 
                       : `${item.bgColor} ${item.textColor} hover:bg-opacity-80`
