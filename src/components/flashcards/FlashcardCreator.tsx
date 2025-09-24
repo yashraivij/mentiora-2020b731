@@ -388,12 +388,9 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
                   Generated Flashcards ({generatedFlashcards.length})
                 </h2>
                 <div className="flex items-center gap-3 mt-2">
-                  <Badge className="bg-gradient-to-r from-sky-400 to-blue-400 text-white text-sm font-bold px-4 py-2 shadow-md">
-                    🎯 Smart Generated
-                  </Badge>
                   {enhance && (
                     <Badge className="bg-gradient-to-r from-purple-400 to-violet-400 text-white text-sm font-bold px-4 py-2 shadow-md">
-                      Enhanced for Marks
+                      Enhanced
                     </Badge>
                   )}
                 </div>
@@ -401,8 +398,8 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
             </div>
             <p className="text-muted-foreground font-medium text-lg mt-4">
               {enhance 
-                ? `🎓 These flashcards have been enhanced with ${examBoard} ${subjects.find(s => s.id === subject)?.name} mark scheme language and command words`
-                : "📚 Review your smart flashcards before saving them to your library"
+                ? `These flashcards have been enhanced with ${examBoard} ${subjects.find(s => s.id === subject)?.name} mark scheme language and command words`
+                : "Review your flashcards before saving them to your library"
               }
             </p>
           </div>
@@ -425,16 +422,16 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
 
             {/* Flashcard Preview Grid */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-emerald-700 dark:text-emerald-300 flex items-center gap-2">
-                <BookOpen className="h-5 w-5 text-emerald-600" />
-                Preview Your Smart Flashcards
+              <h3 className="text-lg font-semibold text-cyan-700 dark:text-cyan-300 flex items-center gap-2">
+                <BookOpen className="h-5 w-5 text-cyan-600" />
+                Preview Your Flashcards
               </h3>
-              <div className="grid gap-4 max-h-96 overflow-y-auto rounded-lg border border-emerald-200 dark:border-emerald-700/50 p-4 bg-emerald-50/30 dark:bg-emerald-900/10 backdrop-blur-sm">
+              <div className="grid gap-4 max-h-96 overflow-y-auto rounded-lg border border-cyan-200 dark:border-cyan-700/50 p-4 bg-cyan-50/30 dark:bg-cyan-900/10 backdrop-blur-sm">
                 {generatedFlashcards.map((flashcard, index) => (
                   <div key={index} className={`border rounded-xl p-4 transition-all duration-200 hover:shadow-lg hover:scale-[1.01] ${
                     enhance 
                       ? 'bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 border-purple-200 dark:border-purple-700/50 shadow-md' 
-                      : 'bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border-emerald-200 dark:border-emerald-700/50 shadow-sm'
+                      : 'bg-gradient-to-br from-cyan-50 to-cyan-100 dark:from-cyan-900/20 dark:to-cyan-800/20 border-cyan-200 dark:border-cyan-700/50 shadow-sm'
                   }`}>
                     {enhance && (
                       <div className="flex justify-end mb-2">
@@ -445,18 +442,16 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
                     )}
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <h4 className="font-semibold text-sm flex items-center gap-2 text-blue-700 dark:text-blue-300">
-                          <BookOpen className="h-4 w-4 text-blue-600" />
+                        <h4 className="font-semibold text-sm flex items-center gap-2 text-cyan-700 dark:text-cyan-300">
                           Question
                         </h4>
-                        <p className="text-sm bg-blue-50 dark:bg-blue-900/30 p-3 rounded border border-blue-200 dark:border-blue-700/50 font-medium">{flashcard.front}</p>
+                        <p className="text-sm bg-cyan-50 dark:bg-cyan-900/30 p-3 rounded border border-cyan-200 dark:border-cyan-700/50 font-medium">{flashcard.front}</p>
                       </div>
                       <div className="space-y-2">
-                        <h4 className="font-semibold text-sm flex items-center gap-2 text-green-700 dark:text-green-300">
-                          <Brain className="h-4 w-4 text-green-600" />
+                        <h4 className="font-semibold text-sm flex items-center gap-2 text-cyan-700 dark:text-cyan-300">
                           Answer
                         </h4>
-                        <p className="text-sm bg-green-50 dark:bg-green-900/30 p-3 rounded border border-green-200 dark:border-green-700/50 font-medium">{flashcard.back}</p>
+                        <p className="text-sm bg-cyan-50 dark:bg-cyan-900/30 p-3 rounded border border-cyan-200 dark:border-cyan-700/50 font-medium">{flashcard.back}</p>
                       </div>
                     </div>
                   </div>
@@ -465,11 +460,11 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
             </div>
 
             {/* Save Button */}
-            <div className="pt-4 border-t border-emerald-200 dark:border-emerald-700/50">
+            <div className="pt-4 border-t border-cyan-200 dark:border-cyan-700/50">
               <Button
                 onClick={handleSave}
                 disabled={isSaving}
-                className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold py-3 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.01] disabled:hover:scale-100"
+                className="w-full bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold py-3 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.01] disabled:hover:scale-100"
                 size="lg"
               >
                 {isSaving ? (
@@ -479,9 +474,7 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
                   </div>
                 ) : (
                   <div className="flex items-center gap-2">
-                    <BookOpen className="h-4 w-4" />
-                    <span>Save to Smart Library</span>
-                    <Sparkles className="h-4 w-4" />
+                    <span>Save to Library</span>
                   </div>
                  )}
                </Button>
