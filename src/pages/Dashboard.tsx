@@ -47,6 +47,7 @@ import {
   Plus,
   X,
   Eye,
+  Play,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { motion } from "framer-motion";
@@ -56,6 +57,7 @@ import { useToast } from "@/hooks/use-toast";
 import { openManageBilling } from "@/lib/manageBilling";
 import { NotebookEntry } from "@/components/notebook/NotebookEntry";
 import { FlashcardCreator } from "@/components/flashcards/FlashcardCreator";
+import { FlashcardViewer } from "@/components/flashcards/FlashcardViewer";
 import { toast } from "sonner";
 
 interface UserProgress {
@@ -64,6 +66,22 @@ interface UserProgress {
   attempts: number;
   averageScore: number;
   lastAttempt: Date;
+}
+
+interface Flashcard {
+  id: string;
+  front: string;
+  back: string;
+}
+
+interface FlashcardSet {
+  id: string;
+  title: string;
+  subject_id: string;
+  exam_board: string;
+  flashcards: Flashcard[];
+  created_at: string;
+  card_count: number;
 }
 
 interface NotebookEntryData {
@@ -110,12 +128,18 @@ const Dashboard = () => {
   const [showAddSubjects, setShowAddSubjects] = useState(false);
   const isMobile = useIsMobile();
 
-  // Notebook state
   const [entries, setEntries] = useState<NotebookEntryData[]>([]);
   const [notebookLoading, setNotebookLoading] = useState(false);
   const [selectedNotebookSubject, setSelectedNotebookSubject] = useState<string>('all');
   const [selectedConfidence, setSelectedConfidence] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('recent');
+  
+  // Flashcards state
+  const [flashcardView, setFlashcardView] = useState<"create" | "library">("create");
+  const [flashcardSets, setFlashcardSets] = useState<FlashcardSet[]>([]);
+  const [flashcardsLoading, setFlashcardsLoading] = useState(false);
+  const [selectedSet, setSelectedSet] = useState<FlashcardSet | null>(null);
+  const [viewMode, setViewMode] = useState<"flashcards" | "learn" | null>(null);
 
   const sidebarItems = [
     { id: "learn", label: "LEARN", icon: Home, bgColor: "bg-sky-50 dark:bg-sky-900/20", textColor: "text-sky-700 dark:text-sky-300", activeColor: "bg-sky-400 dark:bg-sky-600" },
@@ -222,7 +246,100 @@ const Dashboard = () => {
     return subjectMapping[dbSubjectId] || dbSubjectId;
   };
 
-  // Load user's selected subjects
+  // Load flashcard sets
+  const loadFlashcardSets = async () => {
+    if (!user?.id) return;
+
+    try {
+      setFlashcardsLoading(true);
+      const { data, error } = await supabase
+        .from('flashcards')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error loading flashcard sets:', error);
+        return;
+      }
+
+      // Group flashcards by subject and exam board to create sets
+      const setsMap = new Map<string, FlashcardSet>();
+      
+      data?.forEach(flashcard => {
+        const setKey = `${flashcard.subject_id}-${flashcard.exam_board}`;
+        const setTitle = `${flashcard.subject_id} (${flashcard.exam_board})`;
+        
+        if (!setsMap.has(setKey)) {
+          setsMap.set(setKey, {
+            id: setKey,
+            title: setTitle,
+            subject_id: flashcard.subject_id,
+            exam_board: flashcard.exam_board,
+            flashcards: [],
+            created_at: flashcard.created_at || new Date().toISOString(),
+            card_count: 0
+          });
+        }
+        
+        const set = setsMap.get(setKey)!;
+        set.flashcards.push({
+          id: flashcard.id,
+          front: flashcard.front,
+          back: flashcard.back
+        });
+        set.card_count = set.flashcards.length;
+        
+        // Update created_at to the earliest flashcard date
+        if (flashcard.created_at && flashcard.created_at < set.created_at) {
+          set.created_at = flashcard.created_at;
+        }
+      });
+
+      setFlashcardSets(Array.from(setsMap.values()));
+    } catch (error) {
+      console.error('Error loading flashcard sets:', error);
+    } finally {
+      setFlashcardsLoading(false);
+    }
+  };
+
+  const handleDeleteSet = async (setId: string) => {
+    const set = flashcardSets.find(s => s.id === setId);
+    if (!set) return;
+
+    try {
+      const { error } = await supabase
+        .from('flashcards')
+        .delete()
+        .eq('user_id', user?.id)
+        .eq('subject_id', set.subject_id)
+        .eq('exam_board', set.exam_board);
+
+      if (error) throw error;
+
+      setFlashcardSets(sets => sets.filter(s => s.id !== setId));
+      toast({
+        title: "Success",
+        description: "Flashcard set deleted",
+      });
+    } catch (error) {
+      console.error('Error deleting flashcard set:', error);
+      toast({
+        title: "Error",
+        description: "Failed to delete flashcard set",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    });
+  };
   const loadUserSubjects = async () => {
     if (!user?.id) return;
 
@@ -2026,9 +2143,20 @@ const Dashboard = () => {
             </div>
           )}
 
-          {activeTab === "flashcards" && (
+          {activeTab === "flashcards" && selectedSet && viewMode && (
+            <FlashcardViewer
+              flashcardSet={selectedSet}
+              mode={viewMode}
+              onBack={() => {
+                setSelectedSet(null);
+                setViewMode(null);
+              }}
+            />
+          )}
+
+          {activeTab === "flashcards" && !selectedSet && (
             <div className="bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 min-h-screen -m-8 p-8">
-              <div className="max-w-4xl mx-auto">
+              <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-8">
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-sky-400 dark:bg-sky-600 mb-6 shadow-lg">
                     <Brain className="h-8 w-8 text-white" />
@@ -2041,12 +2169,124 @@ const Dashboard = () => {
                   </p>
                 </div>
                 
-                <FlashcardCreator onSetCreated={() => {
-                  toast({
-                    title: "Success",
-                    description: "Flashcards created and saved!",
-                  });
-                }} />
+                {/* Tab Navigation */}
+                <div className="flex justify-center mb-8">
+                  <div className="bg-white dark:bg-gray-800 p-1 rounded-lg shadow-sm border border-sky-200 dark:border-sky-700/50">
+                    <button
+                      onClick={() => setFlashcardView("create")}
+                      className={`px-6 py-2 rounded-md font-medium transition-all duration-200 ${
+                        flashcardView === "create"
+                          ? "bg-sky-400 text-white shadow-sm"
+                          : "text-sky-700 dark:text-sky-300 hover:bg-sky-50 dark:hover:bg-sky-800/30"
+                      }`}
+                    >
+                      Create Flashcards
+                    </button>
+                    <button
+                      onClick={() => {
+                        setFlashcardView("library");
+                        loadFlashcardSets();
+                      }}
+                      className={`px-6 py-2 rounded-md font-medium transition-all duration-200 ${
+                        flashcardView === "library"
+                          ? "bg-blue-400 text-white shadow-sm"
+                          : "text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-800/30"
+                      }`}
+                    >
+                      My Flashcard Sets
+                    </button>
+                  </div>
+                </div>
+
+                {flashcardView === "create" && (
+                  <FlashcardCreator onSetCreated={() => {
+                    toast({
+                      title: "Success",
+                      description: "Flashcards created and saved!",
+                    });
+                    setFlashcardView("library");
+                    loadFlashcardSets();
+                  }} />
+                )}
+
+                {flashcardView === "library" && (
+                  <div className="space-y-6">
+                    {flashcardsLoading ? (
+                      <div className="text-center py-12">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sky-400 mx-auto"></div>
+                        <p className="text-sky-600 dark:text-sky-400 mt-4">Loading your flashcard sets...</p>
+                      </div>
+                    ) : flashcardSets.length === 0 ? (
+                      <Card className="bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 border border-sky-200 dark:border-sky-700/50 shadow-sm">
+                        <CardContent className="text-center py-12">
+                          <div className="p-4 bg-sky-400 dark:bg-sky-600 rounded-full w-fit mx-auto mb-6 shadow-sm">
+                            <Brain className="h-16 w-16 text-white" />
+                          </div>
+                          <h3 className="text-xl font-semibold mb-3 text-sky-700 dark:text-sky-300">No flashcard sets yet</h3>
+                          <p className="text-sky-600 dark:text-sky-400 mb-6 max-w-md mx-auto">
+                            Create your first set of flashcards from your notes to start studying more effectively!
+                          </p>
+                          <Button onClick={() => setFlashcardView("create")} size="lg" className="bg-sky-400 hover:bg-sky-500 dark:bg-sky-600 dark:hover:bg-sky-700 text-white shadow-sm hover:shadow-md">
+                            <Plus className="h-5 w-5 mr-2" />
+                            Create Your First Set
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    ) : (
+                      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        {flashcardSets.map((set) => (
+                          <Card key={set.id} className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700/50 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                            <CardHeader>
+                              <div className="flex justify-between items-start">
+                                <div>
+                                  <CardTitle className="text-lg font-semibold text-blue-700 dark:text-blue-300">{set.title}</CardTitle>
+                                  <CardDescription className="mt-1 text-blue-600 dark:text-blue-400">
+                                    {set.card_count} cards • Created {formatDate(set.created_at)}
+                                  </CardDescription>
+                                </div>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => handleDeleteSet(set.id)}
+                                  className="text-muted-foreground hover:text-destructive"
+                                >
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </div>
+                            </CardHeader>
+                            <CardContent>
+                              <div className="grid grid-cols-2 gap-2">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => {
+                                    setSelectedSet(set);
+                                    setViewMode("flashcards");
+                                  }}
+                                  className="w-full border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-800/30"
+                                >
+                                  <Eye className="h-4 w-4 mr-2" />
+                                  Review
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  onClick={() => {
+                                    setSelectedSet(set);
+                                    setViewMode("learn");
+                                  }}
+                                  className="w-full bg-blue-400 hover:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700 text-white"
+                                >
+                                  <Play className="h-4 w-4 mr-2" />
+                                  Learn
+                                </Button>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           )}
