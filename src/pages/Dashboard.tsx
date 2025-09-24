@@ -2363,14 +2363,14 @@ const Dashboard = () => {
                          {/* Flashcard Sets Grid */}
                          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                            {flashcardSets.map((set, index) => {
-                             // Color gradients for different cards
+                             // Color gradients for different cards - unified cyan theme
                              const gradients = [
-                               "bg-gradient-to-br from-blue-50 via-blue-100 to-cyan-50 dark:from-blue-900/30 dark:via-blue-800/20 dark:to-cyan-900/30 border-blue-300/60 dark:border-blue-600/30 shadow-blue-200/50 dark:shadow-blue-900/20",
-                               "bg-gradient-to-br from-purple-50 via-purple-100 to-pink-50 dark:from-purple-900/30 dark:via-purple-800/20 dark:to-pink-900/30 border-purple-300/60 dark:border-purple-600/30 shadow-purple-200/50 dark:shadow-purple-900/20",
-                               "bg-gradient-to-br from-emerald-50 via-emerald-100 to-teal-50 dark:from-emerald-900/30 dark:via-emerald-800/20 dark:to-teal-900/30 border-emerald-300/60 dark:border-emerald-600/30 shadow-emerald-200/50 dark:shadow-emerald-900/20",
-                               "bg-gradient-to-br from-orange-50 via-orange-100 to-red-50 dark:from-orange-900/30 dark:via-orange-800/20 dark:to-red-900/30 border-orange-300/60 dark:border-orange-600/30 shadow-orange-200/50 dark:shadow-orange-900/20",
-                               "bg-gradient-to-br from-indigo-50 via-indigo-100 to-violet-50 dark:from-indigo-900/30 dark:via-indigo-800/20 dark:to-violet-900/30 border-indigo-300/60 dark:border-indigo-600/30 shadow-indigo-200/50 dark:shadow-indigo-900/20",
-                               "bg-gradient-to-br from-green-50 via-green-100 to-lime-50 dark:from-green-900/30 dark:via-green-800/20 dark:to-lime-900/30 border-green-300/60 dark:border-green-600/30 shadow-green-200/50 dark:shadow-green-900/20"
+                               "bg-gradient-to-br from-cyan-50 via-cyan-100 to-teal-50 dark:from-cyan-900/30 dark:via-cyan-800/20 dark:to-teal-900/30 border-cyan-300/60 dark:border-cyan-600/30 shadow-cyan-200/50 dark:shadow-cyan-900/20",
+                               "bg-gradient-to-br from-teal-50 via-cyan-100 to-sky-50 dark:from-teal-900/30 dark:via-cyan-800/20 dark:to-sky-900/30 border-teal-300/60 dark:border-teal-600/30 shadow-teal-200/50 dark:shadow-teal-900/20",
+                               "bg-gradient-to-br from-sky-50 via-cyan-100 to-blue-50 dark:from-sky-900/30 dark:via-cyan-800/20 dark:to-blue-900/30 border-sky-300/60 dark:border-sky-600/30 shadow-sky-200/50 dark:shadow-sky-900/20",
+                               "bg-gradient-to-br from-cyan-50 via-sky-100 to-cyan-50 dark:from-cyan-900/30 dark:via-sky-800/20 dark:to-cyan-900/30 border-cyan-300/60 dark:border-cyan-600/30 shadow-cyan-200/50 dark:shadow-cyan-900/20",
+                               "bg-gradient-to-br from-blue-50 via-cyan-100 to-teal-50 dark:from-blue-900/30 dark:via-cyan-800/20 dark:to-teal-900/30 border-blue-300/60 dark:border-blue-600/30 shadow-blue-200/50 dark:shadow-blue-900/20",
+                               "bg-gradient-to-br from-teal-50 via-sky-100 to-cyan-50 dark:from-teal-900/30 dark:via-sky-800/20 dark:to-cyan-900/30 border-teal-300/60 dark:border-teal-600/30 shadow-teal-200/50 dark:shadow-teal-900/20"
                              ];
                              const cardGradient = gradients[index % gradients.length];
                              
@@ -2390,7 +2390,7 @@ const Dashboard = () => {
                                      <div className="flex justify-between items-start mb-3">
                                        <div className="flex-1">
                                          <div className="flex items-center gap-3 mb-2">
-                                            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg shadow-lg">
+                                            <div className="p-2 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-lg shadow-lg">
                                               <Brain className="h-4 w-4 text-white" />
                                             </div>
                                            <div>
@@ -2437,7 +2437,7 @@ const Dashboard = () => {
                                             setSelectedSet(set);
                                             setViewMode("learn");
                                           }}
-                                          className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 text-xs"
+                                          className="w-full bg-gradient-to-r from-cyan-500 to-teal-600 hover:from-cyan-600 hover:to-teal-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 text-xs"
                                         >
                                           <Play className="h-3 w-3 mr-1" />
                                           Study
@@ -2648,7 +2648,7 @@ const Dashboard = () => {
                                             
                                             <div className="border-t border-border/50 pt-3">
                                                <div className="flex items-center gap-2 mb-2">
-                                                 <Brain className="h-4 w-4 text-orange-500" />
+                                                 <Brain className="h-4 w-4 text-cyan-600" />
                                                  <span className="text-xs font-medium text-muted-foreground">Answer</span>
                                                </div>
                                               <p className="text-sm text-muted-foreground leading-relaxed">
