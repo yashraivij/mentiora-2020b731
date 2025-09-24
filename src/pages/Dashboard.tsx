@@ -2157,11 +2157,11 @@ const Dashboard = () => {
           {activeTab === "flashcards" && !selectedSet && (
             <div className="min-h-screen bg-background">
               {/* Premium Header */}
-              <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-8 max-w-7xl">
+              <div className="container mx-auto px-4 sm:px-6 py-2 max-w-7xl">
                 {flashcardView === "create" && (
                   <div className="space-y-8">
                     {/* Welcome Section */}
-                    <div className="p-8 text-center">
+                    <div className="p-4 text-center">
                       <div className="w-16 h-16 bg-gradient-to-r from-sky-400 to-blue-400 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
                         <BookOpen className="w-8 h-8 text-white" />
                       </div>
