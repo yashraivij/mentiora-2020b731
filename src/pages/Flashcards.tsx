@@ -386,9 +386,9 @@ const Flashcards = () => {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
-        <header className="bg-sky-50 dark:bg-sky-900/20 border-b border-sky-200 dark:border-sky-700/50 p-6">
+        <header className="bg-gradient-to-r from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 border-b border-sky-200 dark:border-sky-700/50 p-6">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-sky-400 rounded-lg shadow-sm">
+            <div className="p-2 bg-sky-400 dark:bg-sky-600 rounded-lg shadow-sm">
               <Brain className="h-6 w-6 text-white" />
             </div>
             <h1 className="text-2xl font-bold text-sky-700 dark:text-sky-300">Flashcards</h1>
@@ -398,9 +398,9 @@ const Flashcards = () => {
 
         <main className="flex-1 p-6">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full max-w-4xl mx-auto">
-            <TabsList className="grid w-full grid-cols-2 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700/50">
-              <TabsTrigger value="create" className="data-[state=active]:bg-orange-400 data-[state=active]:text-white text-orange-700 dark:text-orange-300">Create Flashcards</TabsTrigger>
-              <TabsTrigger value="library" className="data-[state=active]:bg-blue-400 data-[state=active]:text-white text-blue-700 dark:text-blue-300">My Flashcard Sets</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 border border-sky-200 dark:border-sky-700/50">
+              <TabsTrigger value="create" className="data-[state=active]:bg-sky-400 data-[state=active]:text-white text-sky-700 dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-800/30">Create Flashcards</TabsTrigger>
+              <TabsTrigger value="library" className="data-[state=active]:bg-blue-400 data-[state=active]:text-white text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-800/30">My Flashcard Sets</TabsTrigger>
             </TabsList>
 
             <TabsContent value="create" className="mt-6">
@@ -415,16 +415,16 @@ const Flashcards = () => {
                     <p className="text-muted-foreground mt-4">Loading your flashcard sets...</p>
                   </div>
                 ) : flashcardSets.length === 0 ? (
-                  <Card className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700/50">
+                  <Card className="bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 border border-sky-200 dark:border-sky-700/50 shadow-sm">
                     <CardContent className="text-center py-12">
-                      <div className="p-4 bg-blue-400 rounded-full w-fit mx-auto mb-6">
+                      <div className="p-4 bg-sky-400 dark:bg-sky-600 rounded-full w-fit mx-auto mb-6 shadow-sm">
                         <Brain className="h-16 w-16 text-white" />
                       </div>
-                      <h3 className="text-xl font-semibold mb-3 text-blue-700 dark:text-blue-300">No flashcard sets yet</h3>
-                      <p className="text-blue-600 dark:text-blue-400 mb-6 max-w-md mx-auto">
+                      <h3 className="text-xl font-semibold mb-3 text-sky-700 dark:text-sky-300">No flashcard sets yet</h3>
+                      <p className="text-sky-600 dark:text-sky-400 mb-6 max-w-md mx-auto">
                         Create your first set of flashcards from your notes to start studying more effectively!
                       </p>
-                      <Button onClick={() => setActiveTab("create")} size="lg" className="bg-blue-400 hover:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700 text-white">
+                      <Button onClick={() => setActiveTab("create")} size="lg" className="bg-sky-400 hover:bg-sky-500 dark:bg-sky-600 dark:hover:bg-sky-700 text-white shadow-sm hover:shadow-md">
                         <Plus className="h-5 w-5 mr-2" />
                         Create Your First Set
                       </Button>

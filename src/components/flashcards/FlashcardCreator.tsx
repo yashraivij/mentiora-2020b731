@@ -167,17 +167,17 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
   return (
     <div className="space-y-6">
       {/* Generation Form */}
-      <Card className="bg-orange-50 dark:bg-orange-900/20 border-2 border-orange-200 dark:border-orange-700/50 hover:shadow-lg transition-all duration-300">
-        <CardHeader className="bg-orange-100 dark:bg-orange-800/30 rounded-t-lg border-b border-orange-200 dark:border-orange-700/50">
-          <CardTitle className="flex items-center gap-3 text-orange-700 dark:text-orange-300">
-            <div className="p-2 bg-orange-400 rounded-lg shadow-sm">
+      <Card className="bg-sky-50 dark:bg-sky-900/20 border border-sky-200 dark:border-sky-700/50 shadow-sm hover:shadow-md transition-all duration-300">
+        <CardHeader className="bg-gradient-to-r from-sky-100 to-sky-50 dark:from-sky-800/30 dark:to-sky-900/20 rounded-t-lg border-b border-sky-200 dark:border-sky-700/50">
+          <CardTitle className="flex items-center gap-3 text-sky-700 dark:text-sky-300">
+            <div className="p-2 bg-sky-400 dark:bg-sky-600 rounded-lg shadow-sm">
               <Brain className="h-5 w-5 text-white" />
             </div>
             <span>
               Create Flashcards from Notes
             </span>
           </CardTitle>
-          <CardDescription className="text-orange-600 dark:text-orange-400">
+          <CardDescription className="text-sky-600 dark:text-sky-400">
             Paste your study notes and we'll automatically generate flashcards for effective revision
           </CardDescription>
         </CardHeader>
@@ -286,7 +286,7 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
           <Button
             onClick={handleGenerate}
             disabled={isGenerating || !notes.trim() || !subject || !examBoard || notes.length < 50}
-            className="w-full bg-orange-400 hover:bg-orange-500 dark:bg-orange-600 dark:hover:bg-orange-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+            className="w-full bg-sky-400 hover:bg-sky-500 dark:bg-sky-600 dark:hover:bg-sky-700 text-white shadow-sm hover:shadow-md transition-all duration-300"
             size="lg"
           >
             {isGenerating ? (
@@ -306,10 +306,10 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
 
       {/* Generated Flashcards Preview */}
       {generatedFlashcards.length > 0 && (
-        <Card className="bg-green-50 dark:bg-green-900/20 border-2 border-green-200 dark:border-green-700/50 hover:shadow-lg transition-all duration-300">
-          <CardHeader className="bg-green-100 dark:bg-green-800/30 rounded-t-lg border-b border-green-200 dark:border-green-700/50">
-            <CardTitle className="flex items-center gap-3 text-green-700 dark:text-green-300">
-              <div className="p-2 bg-green-400 rounded-lg shadow-sm">
+        <Card className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700/50 shadow-sm hover:shadow-md transition-all duration-300">
+          <CardHeader className="bg-gradient-to-r from-blue-100 to-blue-50 dark:from-blue-800/30 dark:to-blue-900/20 rounded-t-lg border-b border-blue-200 dark:border-blue-700/50">
+            <CardTitle className="flex items-center gap-3 text-blue-700 dark:text-blue-300">
+              <div className="p-2 bg-blue-400 dark:bg-blue-600 rounded-lg shadow-sm">
                 <BookOpen className="h-5 w-5 text-white" />
               </div>
               <span>
@@ -370,11 +370,11 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
             </div>
 
             {/* Save Button */}
-            <div className="pt-4 border-t border-green-200 dark:border-green-700/50">
+            <div className="pt-4 border-t border-blue-200 dark:border-blue-700/50">
               <Button
                 onClick={handleSave}
                 disabled={isSaving}
-                className="w-full bg-green-400 hover:bg-green-500 dark:bg-green-600 dark:hover:bg-green-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                className="w-full bg-blue-400 hover:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700 text-white shadow-sm hover:shadow-md transition-all duration-300"
                 size="lg"
               >
                 {isSaving ? (
