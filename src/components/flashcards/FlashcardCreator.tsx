@@ -339,11 +339,11 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
                 <BookOpen className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h2 className="text-3xl font-black text-slate-800 dark:text-slate-200 tracking-tight leading-tight">
-                  <span className="bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent font-extrabold">
+                <h2 className="text-3xl font-black tracking-tight leading-tight">
+                  <span className="text-sky-600 dark:text-sky-400 font-extrabold">
                     Premium Flashcards
                   </span>
-                  <span className="text-slate-600 dark:text-slate-400 font-bold text-xl ml-3">
+                  <span className="text-slate-500 dark:text-slate-400 font-bold text-xl ml-3">
                     ({generatedFlashcards.length})
                   </span>
                 </h2>
