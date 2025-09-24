@@ -2293,43 +2293,6 @@ const Dashboard = () => {
                           </div>
                         </div>
 
-                        {/* Premium Stats Cards */}
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-10">
-                          <Card className="relative overflow-hidden bg-card/80 border border-border shadow-xl hover:shadow-2xl transition-all duration-300">
-                            <div className="absolute top-0 right-0 w-20 h-20 bg-primary/10 rounded-bl-full"></div>
-                            <CardContent className="p-6 text-center relative">
-                              <div className="w-12 h-12 mx-auto mb-4 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
-                                <Brain className="h-6 w-6 text-primary-foreground" />
-                              </div>
-                              <div className="text-3xl font-bold text-foreground mb-1">{flashcardSets.length}</div>
-                              <div className="text-sm font-medium text-primary">Flashcard Sets</div>
-                              <div className="text-xs text-muted-foreground mt-1">AI Generated</div>
-                            </CardContent>
-                          </Card>
-                          <Card className="relative overflow-hidden bg-card/80 border border-border shadow-xl hover:shadow-2xl transition-all duration-300">
-                            <div className="absolute top-0 right-0 w-20 h-20 bg-secondary/10 rounded-bl-full"></div>
-                            <CardContent className="p-6 text-center relative">
-                              <div className="w-12 h-12 mx-auto mb-4 bg-secondary rounded-2xl flex items-center justify-center shadow-lg">
-                                <BookOpen className="h-6 w-6 text-secondary-foreground" />
-                              </div>
-                              <div className="text-3xl font-bold text-foreground mb-1">{flashcardSets.reduce((acc, set) => acc + set.card_count, 0)}</div>
-                              <div className="text-sm font-medium text-secondary-foreground">Total Cards</div>
-                              <div className="text-xs text-muted-foreground mt-1">Ready to Study</div>
-                            </CardContent>
-                          </Card>
-                          <Card className="relative overflow-hidden bg-card/80 border border-border shadow-xl hover:shadow-2xl transition-all duration-300">
-                            <div className="absolute top-0 right-0 w-20 h-20 bg-accent/10 rounded-bl-full"></div>
-                            <CardContent className="p-6 text-center relative">
-                              <div className="w-12 h-12 mx-auto mb-4 bg-accent rounded-2xl flex items-center justify-center shadow-lg">
-                                <BookOpen className="h-6 w-6 text-accent-foreground" />
-                              </div>
-                              <div className="text-3xl font-bold text-foreground mb-1">{new Set(flashcardSets.map(set => set.subject_id)).size}</div>
-                              <div className="text-sm font-medium text-accent-foreground">Subjects</div>
-                              <div className="text-xs text-muted-foreground mt-1">Covered</div>
-                            </CardContent>
-                          </Card>
-                        </div>
-
                         {/* Flashcard Sets Grid */}
                         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                           {flashcardSets.map((set, index) => (
