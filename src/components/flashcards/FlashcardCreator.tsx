@@ -166,205 +166,156 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Header Section */}
-      <div className="text-center mb-8">
-        <div className="flex items-center justify-center space-x-3 mb-4">
-          <div className="w-12 h-12 bg-gradient-to-r from-sky-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg">
-            <Brain className="h-6 w-6 text-white" />
-          </div>
-          <div className="text-left">
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
-              Smart Flashcards
-            </h1>
-            <p className="text-sky-600 dark:text-sky-400 font-medium">AI-Powered Study Tool</p>
-          </div>
-        </div>
-        <div className="flex items-center justify-center space-x-3 mb-6">
-          <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0 shadow-lg">
-            Exam-Board Specific
-          </Badge>
-          <Badge className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white border-0 shadow-lg">
-            AI Generated
-          </Badge>
-        </div>
-      </div>
-
+    <div className="space-y-8 max-w-4xl mx-auto">
       {/* Generation Form */}
-      <Card className="relative overflow-hidden bg-gradient-to-br from-sky-50/80 to-blue-50/80 dark:from-sky-900/20 dark:to-blue-900/20 border border-sky-200 dark:border-sky-700/50 shadow-xl hover:shadow-2xl transition-all duration-300">
-        <div className="absolute inset-0 bg-gradient-to-br from-sky-100/30 to-blue-100/30 dark:from-sky-900/10 dark:to-blue-900/10" />
-        
-        <CardHeader className="relative bg-gradient-to-r from-sky-100/70 to-blue-100/70 dark:from-sky-800/30 dark:to-blue-800/30 backdrop-blur-sm border-b border-sky-200 dark:border-sky-700/50">
-          <CardTitle className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-r from-sky-500 to-blue-500 rounded-xl shadow-lg">
-              <Brain className="h-5 w-5 text-white" />
-            </div>
-            <div>
-              <span className="text-xl font-bold bg-gradient-to-r from-sky-700 to-blue-700 bg-clip-text text-transparent">Create Smart Flashcards</span>
-              <div className="flex items-center gap-2 mt-1">
-                <Badge className="bg-gradient-to-r from-orange-400 to-red-400 text-white text-xs font-bold">
-                  AI-Powered
-                </Badge>
-                <Badge className="bg-gradient-to-r from-green-400 to-emerald-400 text-white text-xs font-bold">
-                  Exam-Board Specific
-                </Badge>
-              </div>
-            </div>
-          </CardTitle>
-          <CardDescription className="text-sky-700 dark:text-sky-300 font-medium">
-            Transform your study notes into powerful flashcards with AI analysis and exam-board optimization
-          </CardDescription>
-        </CardHeader>
-
-        <CardContent className="relative space-y-6 p-6">
-          {/* Subject and Exam Board Selection */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="subject" className="text-sm font-semibold text-sky-700 dark:text-sky-300">
-                Subject *
-              </Label>
-              <Select value={subject} onValueChange={setSubject}>
-                <SelectTrigger className="bg-sky-50/50 dark:bg-sky-900/30 border border-sky-200 dark:border-sky-700 hover:border-sky-300 dark:hover:border-sky-600 focus:border-sky-400 dark:focus:border-sky-500 transition-colors shadow-sm">
-                  <SelectValue placeholder="Select subject" />
-                </SelectTrigger>
-                <SelectContent className="bg-sky-50/90 dark:bg-sky-900/90 backdrop-blur-xl border border-sky-200 dark:border-sky-700">
-                  {subjects.map((subj) => (
-                    <SelectItem key={subj.id} value={subj.id} className="hover:bg-sky-100 dark:hover:bg-sky-800/50">
-                      {subj.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="examBoard" className="text-sm font-semibold text-blue-700 dark:text-blue-300">
-                Exam Board *
-              </Label>
-              <Select value={examBoard} onValueChange={setExamBoard}>
-                <SelectTrigger className="bg-blue-50/50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 hover:border-blue-300 dark:hover:border-blue-600 focus:border-blue-400 dark:focus:border-blue-500 transition-colors shadow-sm">
-                  <SelectValue placeholder="Select exam board" />
-                </SelectTrigger>
-                <SelectContent className="bg-blue-50/90 dark:bg-blue-900/90 backdrop-blur-xl border border-blue-200 dark:border-blue-700">
-                  {examBoards.map((board) => (
-                    <SelectItem key={board.id} value={board.id} className="hover:bg-blue-100 dark:hover:bg-blue-800/50">
-                      {board.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          {/* Enhance Toggle */}
-          <div className={`relative overflow-hidden p-4 rounded-xl border transition-all duration-300 ${
-            enhance 
-              ? 'bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 border-orange-200 dark:border-orange-700/50 shadow-lg' 
-              : 'bg-gradient-to-br from-gray-50 to-slate-50 dark:from-gray-800/30 dark:to-slate-800/30 border-gray-200 dark:border-gray-600/50 shadow-sm'
-          }`}>
-            <div className="flex items-center space-x-4">
-              <Switch
-                id="enhance"
-                checked={enhance}
-                onCheckedChange={setEnhance}
-                className="data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-orange-400 data-[state=checked]:to-red-400"
-              />
-              <div className="flex-1">
-                <Label htmlFor="enhance" className="flex items-center gap-2 font-semibold cursor-pointer">
-                  <Sparkles className={`h-4 w-4 ${enhance ? 'text-orange-500' : 'text-gray-400'}`} />
-                  <span className={enhance ? 'text-orange-700 dark:text-orange-300 font-bold' : 'text-foreground'}>
-                    Enhance for Marks
-                  </span>
-                  {enhance && (
-                    <Badge className="bg-gradient-to-r from-orange-400 to-red-400 text-white text-xs font-bold">
-                      ACTIVE
-                    </Badge>
-                  )}
-                </Label>
-                <p className={`text-sm mt-1 ${enhance ? 'text-orange-700 dark:text-orange-300 font-medium' : 'text-muted-foreground'}`}>
-                  {enhance 
-                    ? "Flashcards will use exam-board specific language and mark scheme terminology"
-                    : "Generate standard flashcards from your notes"
-                  }
-                </p>
-              </div>
-            </div>
-            
-            {enhance && subject && examBoard && (
-              <div className="mt-4 p-3 bg-orange-100/60 dark:bg-orange-900/30 backdrop-blur-sm rounded-lg border border-orange-200/70 dark:border-orange-700/50 shadow-sm">
-                <h4 className="text-sm font-semibold text-orange-700 dark:text-orange-300 mb-2">
-                  Enhanced Mode Preview ({subjects.find(s => s.id === subject)?.name} - {examBoard})
-                </h4>
-                <div className="space-y-2 text-xs">
-                  <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
-                    <span className="font-medium text-gray-600 dark:text-gray-400">Normal:</span> 
-                    <span className="ml-2">"What is photosynthesis?"</span>
-                  </div>
-                  <div className="p-2 bg-orange-200/60 dark:bg-orange-800/40 rounded border border-orange-300/70 dark:border-orange-600/70 shadow-sm">
-                    <span className="font-medium text-orange-700 dark:text-orange-300">Enhanced:</span> 
-                    <span className="ml-2 font-medium">"Explain the process of photosynthesis. (4 marks, {examBoard} Biology)"</span>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Notes Input */}
-          <div className="space-y-3">
-            <Label htmlFor="notes" className="text-sm font-semibold text-green-700 dark:text-green-300">
-              Your Study Notes *
+      <div className="space-y-6">
+        {/* Subject and Exam Board Selection */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="subject" className="text-sm font-semibold text-sky-700 dark:text-sky-300">
+              Subject *
             </Label>
-            <div className="relative">
-              <Textarea
-                id="notes"
-                placeholder="Paste your study notes here... (minimum 50 characters)"
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                className="min-h-32 bg-green-50/50 dark:bg-green-900/20 border border-green-200 dark:border-green-700/50 hover:border-green-300 dark:hover:border-green-600 focus:border-green-400 dark:focus:border-green-500 transition-colors shadow-sm"
-                maxLength={5000}
-              />
-              {notes.length >= 50 && (
-                <div className="absolute top-2 right-2 text-green-500">
-                  <Sparkles className="h-4 w-4" />
-                </div>
-              )}
-            </div>
-            <div className="flex justify-between items-center text-sm">
-              <span className={`px-3 py-1 rounded-full font-medium ${
-                notes.length < 50 
-                  ? 'bg-red-100 text-red-700 border border-red-200' 
-                  : 'bg-green-100 text-green-700 border border-green-200'
-              }`}>
-                {notes.length < 50 ? `Need ${50 - notes.length} more characters` : "Ready to generate!"}
-              </span>
-              <span className="text-sky-600 dark:text-sky-400 font-medium">
-                {notes.length}/5000
-              </span>
-            </div>
+            <Select value={subject} onValueChange={setSubject}>
+              <SelectTrigger className="bg-sky-50/50 dark:bg-sky-900/30 border border-sky-200 dark:border-sky-700 hover:border-sky-300 dark:hover:border-sky-600 focus:border-sky-400 dark:focus:border-sky-500 transition-colors shadow-sm">
+                <SelectValue placeholder="Select subject" />
+              </SelectTrigger>
+              <SelectContent className="bg-sky-50/90 dark:bg-sky-900/90 backdrop-blur-xl border border-sky-200 dark:border-sky-700">
+                {subjects.map((subj) => (
+                  <SelectItem key={subj.id} value={subj.id} className="hover:bg-sky-100 dark:hover:bg-sky-800/50">
+                    {subj.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
-          {/* Generate Button */}
-          <Button
-            onClick={handleGenerate}
-            disabled={isGenerating || !notes.trim() || !subject || !examBoard || notes.length < 50}
-            className="w-full bg-gradient-to-r from-sky-500 to-blue-500 hover:from-sky-400 hover:to-blue-400 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold py-3 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.01] disabled:hover:scale-100"
-            size="lg"
-          >
-            {isGenerating ? (
-              <div className="flex items-center gap-2">
-                <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent" />
-                <span>Generating Smart Flashcards...</span>
-              </div>
-            ) : (
-              <div className="flex items-center gap-2">
-                <Zap className="h-4 w-4" />
-                <span>Generate Smart Flashcards</span>
-                <Brain className="h-4 w-4" />
+          <div className="space-y-2">
+            <Label htmlFor="examBoard" className="text-sm font-semibold text-blue-700 dark:text-blue-300">
+              Exam Board *
+            </Label>
+            <Select value={examBoard} onValueChange={setExamBoard}>
+              <SelectTrigger className="bg-blue-50/50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 hover:border-blue-300 dark:hover:border-blue-600 focus:border-blue-400 dark:focus:border-blue-500 transition-colors shadow-sm">
+                <SelectValue placeholder="Select exam board" />
+              </SelectTrigger>
+              <SelectContent className="bg-blue-50/90 dark:bg-blue-900/90 backdrop-blur-xl border border-blue-200 dark:border-blue-700">
+                {examBoards.map((board) => (
+                  <SelectItem key={board.id} value={board.id} className="hover:bg-blue-100 dark:hover:bg-blue-800/50">
+                    {board.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        {/* Notes Input */}
+        <div className="space-y-3">
+          <Label htmlFor="notes" className="text-sm font-semibold text-green-700 dark:text-green-300">
+            Your Study Notes *
+          </Label>
+          <div className="relative">
+            <Textarea
+              id="notes"
+              placeholder="Paste your study notes here... (minimum 50 characters)"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              className="min-h-32 bg-green-50/50 dark:bg-green-900/20 border border-green-200 dark:border-green-700/50 hover:border-green-300 dark:hover:border-green-600 focus:border-green-400 dark:focus:border-green-500 transition-colors shadow-sm"
+              maxLength={5000}
+            />
+            {notes.length >= 50 && (
+              <div className="absolute top-2 right-2 text-green-500">
+                <Sparkles className="h-4 w-4" />
               </div>
             )}
-          </Button>
-        </CardContent>
-      </Card>
+          </div>
+          <div className="flex justify-between items-center text-sm">
+            <span className={`px-3 py-1 rounded-full font-medium ${
+              notes.length < 50 
+                ? 'bg-red-100 text-red-700 border border-red-200' 
+                : 'bg-green-100 text-green-700 border border-green-200'
+            }`}>
+              {notes.length < 50 ? `Need ${50 - notes.length} more characters` : "Ready to generate!"}
+            </span>
+            <span className="text-sky-600 dark:text-sky-400 font-medium">
+              {notes.length}/5000
+            </span>
+          </div>
+        </div>
+
+        {/* Enhance Toggle - Moved here for cleaner layout */}
+        <div className={`relative overflow-hidden p-4 rounded-xl border transition-all duration-300 ${
+          enhance 
+            ? 'bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 border-orange-200 dark:border-orange-700/50 shadow-lg' 
+            : 'bg-gradient-to-br from-gray-50 to-slate-50 dark:from-gray-800/30 dark:to-slate-800/30 border-gray-200 dark:border-gray-600/50 shadow-sm'
+        }`}>
+          <div className="flex items-center space-x-4">
+            <Switch
+              id="enhance"
+              checked={enhance}
+              onCheckedChange={setEnhance}
+              className="data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-orange-400 data-[state=checked]:to-red-400"
+            />
+            <div className="flex-1">
+              <Label htmlFor="enhance" className="flex items-center gap-2 font-semibold cursor-pointer">
+                <Sparkles className={`h-4 w-4 ${enhance ? 'text-orange-500' : 'text-gray-400'}`} />
+                <span className={enhance ? 'text-orange-700 dark:text-orange-300 font-bold' : 'text-foreground'}>
+                  Enhance for Marks
+                </span>
+                {enhance && (
+                  <Badge className="bg-gradient-to-r from-orange-400 to-red-400 text-white text-xs font-bold">
+                    ACTIVE
+                  </Badge>
+                )}
+              </Label>
+              <p className={`text-sm mt-1 ${enhance ? 'text-orange-700 dark:text-orange-300 font-medium' : 'text-muted-foreground'}`}>
+                {enhance 
+                  ? "Flashcards will use exam-board specific language and mark scheme terminology"
+                  : "Generate standard flashcards from your notes"
+                }
+              </p>
+            </div>
+          </div>
+          
+          {enhance && subject && examBoard && (
+            <div className="mt-4 p-3 bg-orange-100/60 dark:bg-orange-900/30 backdrop-blur-sm rounded-lg border border-orange-200/70 dark:border-orange-700/50 shadow-sm">
+              <h4 className="text-sm font-semibold text-orange-700 dark:text-orange-300 mb-2">
+                Enhanced Mode Preview ({subjects.find(s => s.id === subject)?.name} - {examBoard})
+              </h4>
+              <div className="space-y-2 text-xs">
+                <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
+                  <span className="font-medium text-gray-600 dark:text-gray-400">Normal:</span> 
+                  <span className="ml-2">"What is photosynthesis?"</span>
+                </div>
+                <div className="p-2 bg-orange-200/60 dark:bg-orange-800/40 rounded border border-orange-300/70 dark:border-orange-600/70 shadow-sm">
+                  <span className="font-medium text-orange-700 dark:text-orange-300">Enhanced:</span> 
+                  <span className="ml-2 font-medium">"Explain the process of photosynthesis. (4 marks, {examBoard} Biology)"</span>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Generate Button */}
+        <Button
+          onClick={handleGenerate}
+          disabled={isGenerating || !notes.trim() || !subject || !examBoard || notes.length < 50}
+          className="w-full bg-gradient-to-r from-sky-500 to-blue-500 hover:from-sky-400 hover:to-blue-400 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold py-3 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.01] disabled:hover:scale-100"
+          size="lg"
+        >
+          {isGenerating ? (
+            <div className="flex items-center gap-2">
+              <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent" />
+              <span>Generating Smart Flashcards...</span>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <Zap className="h-4 w-4" />
+              <span>Generate Smart Flashcards</span>
+              <Brain className="h-4 w-4" />
+            </div>
+          )}
+        </Button>
+      </div>
 
       {/* Generated Flashcards Preview */}
       {generatedFlashcards.length > 0 && (
