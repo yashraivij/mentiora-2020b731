@@ -2390,9 +2390,9 @@ const Dashboard = () => {
                                      <div className="flex justify-between items-start mb-3">
                                        <div className="flex-1">
                                          <div className="flex items-center gap-3 mb-2">
-                                           <div className="p-2 bg-primary rounded-lg shadow-sm">
-                                             <Brain className="h-4 w-4 text-primary-foreground" />
-                                           </div>
+                                            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg shadow-lg">
+                                              <Brain className="h-4 w-4 text-white" />
+                                            </div>
                                            <div>
                                              <CardTitle className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
                                                {set.title}
@@ -2431,17 +2431,17 @@ const Dashboard = () => {
                                          <Eye className="h-3 w-3 mr-1" />
                                          Review
                                        </Button>
-                                       <Button
-                                         size="sm"
-                                         onClick={() => {
-                                           setSelectedSet(set);
-                                           setViewMode("learn");
-                                         }}
-                                         className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-200 text-xs"
-                                       >
-                                         <Play className="h-3 w-3 mr-1" />
-                                         Study
-                                       </Button>
+                                        <Button
+                                          size="sm"
+                                          onClick={() => {
+                                            setSelectedSet(set);
+                                            setViewMode("learn");
+                                          }}
+                                          className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 text-xs"
+                                        >
+                                          <Play className="h-3 w-3 mr-1" />
+                                          Study
+                                        </Button>
                                      </div>
                                    </CardContent>
                                  </Card>
@@ -2647,10 +2647,10 @@ const Dashboard = () => {
                                             </div>
                                             
                                             <div className="border-t border-border/50 pt-3">
-                                              <div className="flex items-center gap-2 mb-2">
-                                                <Brain className="h-4 w-4 text-green-600" />
-                                                <span className="text-xs font-medium text-muted-foreground">Answer</span>
-                                              </div>
+                                               <div className="flex items-center gap-2 mb-2">
+                                                 <Brain className="h-4 w-4 text-orange-500" />
+                                                 <span className="text-xs font-medium text-muted-foreground">Answer</span>
+                                               </div>
                                               <p className="text-sm text-muted-foreground leading-relaxed">
                                                 {card.back}
                                               </p>
