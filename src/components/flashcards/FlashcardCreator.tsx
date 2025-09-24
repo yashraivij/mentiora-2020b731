@@ -214,21 +214,51 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
           </div>
 
           {/* Enhance Toggle */}
-          <div className="flex items-center space-x-3 p-4 bg-muted/50 rounded-lg">
-            <Switch
-              id="enhance"
-              checked={enhance}
-              onCheckedChange={setEnhance}
-            />
-            <div className="flex-1">
-              <Label htmlFor="enhance" className="flex items-center gap-2 font-medium">
-                <Sparkles className="h-4 w-4" />
-                Enhance for Marks
-              </Label>
-              <p className="text-sm text-muted-foreground mt-1">
-                Re-write flashcards using exam-board specific language and mark scheme terminology
-              </p>
+          <div className={`p-4 rounded-lg border-2 transition-all ${
+            enhance 
+              ? 'bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 border-purple-200 dark:border-purple-700' 
+              : 'bg-muted/50 border-transparent'
+          }`}>
+            <div className="flex items-center space-x-3">
+              <Switch
+                id="enhance"
+                checked={enhance}
+                onCheckedChange={setEnhance}
+              />
+              <div className="flex-1">
+                <Label htmlFor="enhance" className="flex items-center gap-2 font-medium">
+                  <Sparkles className={`h-4 w-4 ${enhance ? 'text-purple-600 dark:text-purple-400' : ''}`} />
+                  Enhance for Marks
+                  {enhance && (
+                    <span className="px-2 py-1 text-xs bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full">
+                      ACTIVE
+                    </span>
+                  )}
+                </Label>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {enhance 
+                    ? "✨ Flashcards will use exam-board specific language, command words, and mark scheme terminology"
+                    : "Generate standard flashcards from your notes"
+                  }
+                </p>
+              </div>
             </div>
+            
+            {enhance && subject && examBoard && (
+              <div className="mt-4 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg border border-purple-200 dark:border-purple-700">
+                <h4 className="text-sm font-medium text-purple-700 dark:text-purple-300 mb-2">
+                  Enhanced Mode Preview ({subjects.find(s => s.id === subject)?.name} - {examBoard})
+                </h4>
+                <div className="grid gap-2 text-xs">
+                  <div>
+                    <span className="font-medium">Normal:</span> "What is photosynthesis?"
+                  </div>
+                  <div>
+                    <span className="font-medium text-purple-600 dark:text-purple-400">Enhanced:</span> "Explain the process of photosynthesis. (4 marks, {examBoard} Biology)"
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Notes Input */}
@@ -277,9 +307,18 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
             <CardTitle className="flex items-center gap-2">
               <BookOpen className="h-5 w-5" />
               Generated Flashcards ({generatedFlashcards.length})
+              {enhance && (
+                <span className="px-2 py-1 text-xs bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full flex items-center gap-1">
+                  <Sparkles className="h-3 w-3" />
+                  Enhanced for Marks
+                </span>
+              )}
             </CardTitle>
             <CardDescription>
-              Review your flashcards before saving them to your library
+              {enhance 
+                ? `✨ These flashcards have been enhanced with ${examBoard} ${subjects.find(s => s.id === subject)?.name} mark scheme language and command words`
+                : "Review your flashcards before saving them to your library"
+              }
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -297,14 +336,24 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
             {/* Flashcard Preview Grid */}
             <div className="grid gap-3 max-h-96 overflow-y-auto">
               {generatedFlashcards.map((flashcard, index) => (
-                <div key={index} className="border border-border rounded-lg p-4">
+                <div key={index} className={`border rounded-lg p-4 ${
+                  enhance 
+                    ? 'border-purple-200 dark:border-purple-700 bg-gradient-to-r from-purple-50/50 to-blue-50/50 dark:from-purple-900/10 dark:to-blue-900/10' 
+                    : 'border-border'
+                }`}>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <h4 className="font-medium text-sm text-muted-foreground mb-2">Question</h4>
+                      <h4 className="font-medium text-sm text-muted-foreground mb-2 flex items-center gap-1">
+                        Question
+                        {enhance && <Sparkles className="h-3 w-3 text-purple-500" />}
+                      </h4>
                       <p className="text-sm">{flashcard.front}</p>
                     </div>
                     <div>
-                      <h4 className="font-medium text-sm text-muted-foreground mb-2">Answer</h4>
+                      <h4 className="font-medium text-sm text-muted-foreground mb-2 flex items-center gap-1">
+                        Answer
+                        {enhance && <Sparkles className="h-3 w-3 text-purple-500" />}
+                      </h4>
                       <p className="text-sm">{flashcard.back}</p>
                     </div>
                   </div>
