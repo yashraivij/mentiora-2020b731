@@ -2214,31 +2214,34 @@ const Dashboard = () => {
                 {flashcardView === "create" && (
                   <div className="space-y-8">
                     {/* Welcome Section */}
-                    <div className="text-center">
-                      <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight mb-6">
-                        <span className="text-sky-600 dark:text-sky-400">Premium</span>{" "}
-                        <span className="text-blue-600 dark:text-blue-400">Smart</span>{" "}
-                        <span className="text-indigo-600 dark:text-indigo-400">Flashcards</span>
+                    <div className="bg-card/80 backdrop-blur-xl rounded-2xl shadow-xl border border-border p-8 text-center">
+                      <div className="w-16 h-16 bg-gradient-to-r from-sky-400 to-blue-400 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <BookOpen className="w-8 h-8 text-white" />
+                      </div>
+                      <h2 className="text-2xl sm:text-4xl font-bold text-foreground mb-4">
+                        Smart Flashcards
                       </h2>
-                      <p className="text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed px-4 font-medium">
-                        Transform your study notes into premium flashcards with advanced AI analysis and exam-board optimization
+                      <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
+                        Transform your study notes into powerful flashcards with AI analysis and exam-board optimization
                       </p>
-                      <div className="flex items-center justify-center space-x-3 mt-6">
-                        <div className="w-3 h-3 bg-sky-500 rounded-full animate-pulse shadow-lg"></div>
-                        <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse delay-75 shadow-lg"></div>
-                        <div className="w-3 h-3 bg-indigo-500 rounded-full animate-pulse delay-150 shadow-lg"></div>
+                      <div className="flex items-center justify-center space-x-2 mt-6">
+                        <div className="w-2 h-2 bg-sky-400 rounded-full animate-pulse"></div>
+                        <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse delay-75"></div>
+                        <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse delay-150"></div>
                       </div>
                     </div>
 
                     {/* Creator Component */}
-                    <FlashcardCreator onSetCreated={() => {
-                      toast({
-                        title: "Success",
-                        description: "Flashcards created and saved!",
-                      });
-                      setFlashcardView("library");
-                      loadFlashcardSets();
-                    }} />
+                    <div className="bg-card/80 backdrop-blur-xl rounded-2xl shadow-xl border border-border p-8">
+                      <FlashcardCreator onSetCreated={() => {
+                        toast({
+                          title: "Success",
+                          description: "Flashcards created and saved!",
+                        });
+                        setFlashcardView("library");
+                        loadFlashcardSets();
+                      }} />
+                    </div>
                   </div>
                 )}
 
