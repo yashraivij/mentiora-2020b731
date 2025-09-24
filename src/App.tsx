@@ -23,6 +23,7 @@ import Notebook from "./pages/Notebook";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import Pricing from "./pages/Pricing";
 import Settings from "./pages/Settings";
+import Flashcards from "./pages/Flashcards";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 import { PromotionalStrip } from "./components/ui/promotional-strip";
@@ -93,6 +94,11 @@ const App: React.FC = () => (
               <Route path="/settings" element={
                 <ProtectedRoute>
                   <Settings />
+                </ProtectedRoute>
+              } />
+              <Route path="/flashcards" element={
+                <ProtectedRoute>
+                  <Flashcards />
                 </ProtectedRoute>
               } />
               <Route path="*" element={<NotFound />} />
