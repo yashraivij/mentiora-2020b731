@@ -2174,14 +2174,6 @@ const Dashboard = () => {
                           <h1 className="text-xl sm:text-3xl font-bold bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
                             Smart Flashcards
                           </h1>
-                          <div className="flex items-center space-x-1 sm:space-x-2 flex-wrap">
-                            <div className="flex items-center space-x-1">
-                              <Crown className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-primary" />
-                              <span className="text-xs sm:text-sm font-semibold text-accent-foreground">AI-Powered Study Tool</span>
-                            </div>
-                            <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
-                            <span className="text-xs text-accent-foreground font-medium">Exam-Board Specific</span>
-                          </div>
                         </div>
                       </div>
                     </div>
