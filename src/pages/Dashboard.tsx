@@ -2215,16 +2215,18 @@ const Dashboard = () => {
                   <div className="space-y-8">
                     {/* Welcome Section */}
                     <div className="text-center">
-                      <h2 className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-foreground via-foreground/80 to-foreground/60 bg-clip-text text-transparent mb-4">
-                        Create Smart Flashcards
+                      <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight mb-6">
+                        <span className="text-sky-600 dark:text-sky-400">Premium</span>{" "}
+                        <span className="text-blue-600 dark:text-blue-400">Smart</span>{" "}
+                        <span className="text-indigo-600 dark:text-indigo-400">Flashcards</span>
                       </h2>
-                      <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
-                        Transform your study notes into powerful flashcards with AI analysis and exam-board optimization
+                      <p className="text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed px-4 font-medium">
+                        Transform your study notes into premium flashcards with advanced AI analysis and exam-board optimization
                       </p>
-                      <div className="flex items-center justify-center space-x-2 mt-4">
-                        <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                        <div className="w-2 h-2 bg-secondary rounded-full animate-pulse delay-75"></div>
-                        <div className="w-2 h-2 bg-accent rounded-full animate-pulse delay-150"></div>
+                      <div className="flex items-center justify-center space-x-3 mt-6">
+                        <div className="w-3 h-3 bg-sky-500 rounded-full animate-pulse shadow-lg"></div>
+                        <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse delay-75 shadow-lg"></div>
+                        <div className="w-3 h-3 bg-indigo-500 rounded-full animate-pulse delay-150 shadow-lg"></div>
                       </div>
                     </div>
 
