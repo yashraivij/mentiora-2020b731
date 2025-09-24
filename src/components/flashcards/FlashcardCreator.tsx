@@ -167,17 +167,17 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
   return (
     <div className="space-y-6">
       {/* Generation Form */}
-      <Card className="bg-purple-50 dark:bg-purple-900/20 border-2 border-purple-200 dark:border-purple-700/50 hover:shadow-lg transition-all duration-300">
-        <CardHeader className="bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-800/30 dark:to-indigo-800/30 rounded-t-lg border-b border-purple-200 dark:border-purple-700/50">
-          <CardTitle className="flex items-center gap-3 text-purple-700 dark:text-purple-300">
-            <div className="p-2 bg-purple-200 dark:bg-purple-700 rounded-lg">
-              <Brain className="h-5 w-5 text-purple-600 dark:text-purple-300" />
+      <Card className="bg-orange-50 dark:bg-orange-900/20 border-2 border-orange-200 dark:border-orange-700/50 hover:shadow-lg transition-all duration-300">
+        <CardHeader className="bg-orange-100 dark:bg-orange-800/30 rounded-t-lg border-b border-orange-200 dark:border-orange-700/50">
+          <CardTitle className="flex items-center gap-3 text-orange-700 dark:text-orange-300">
+            <div className="p-2 bg-orange-400 rounded-lg shadow-sm">
+              <Brain className="h-5 w-5 text-white" />
             </div>
             <span>
               Create Flashcards from Notes
             </span>
           </CardTitle>
-          <CardDescription className="text-purple-600/80 dark:text-purple-400/80">
+          <CardDescription className="text-orange-600 dark:text-orange-400">
             Paste your study notes and we'll automatically generate flashcards for effective revision
           </CardDescription>
         </CardHeader>
@@ -286,7 +286,7 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
           <Button
             onClick={handleGenerate}
             disabled={isGenerating || !notes.trim() || !subject || !examBoard || notes.length < 50}
-            className="w-full bg-purple-400 hover:bg-purple-500 dark:bg-purple-600 dark:hover:bg-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+            className="w-full bg-orange-400 hover:bg-orange-500 dark:bg-orange-600 dark:hover:bg-orange-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
             size="lg"
           >
             {isGenerating ? (
@@ -306,17 +306,17 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
 
       {/* Generated Flashcards Preview */}
       {generatedFlashcards.length > 0 && (
-        <Card className="bg-indigo-50 dark:bg-indigo-900/20 border-2 border-indigo-200 dark:border-indigo-700/50 hover:shadow-lg transition-all duration-300">
-          <CardHeader className="bg-gradient-to-r from-indigo-100 to-violet-100 dark:from-indigo-800/30 dark:to-violet-800/30 rounded-t-lg border-b border-indigo-200 dark:border-indigo-700/50">
-            <CardTitle className="flex items-center gap-3 text-indigo-700 dark:text-indigo-300">
-              <div className="p-2 bg-indigo-200 dark:bg-indigo-700 rounded-lg">
-                <BookOpen className="h-5 w-5 text-indigo-600 dark:text-indigo-300" />
+        <Card className="bg-green-50 dark:bg-green-900/20 border-2 border-green-200 dark:border-green-700/50 hover:shadow-lg transition-all duration-300">
+          <CardHeader className="bg-green-100 dark:bg-green-800/30 rounded-t-lg border-b border-green-200 dark:border-green-700/50">
+            <CardTitle className="flex items-center gap-3 text-green-700 dark:text-green-300">
+              <div className="p-2 bg-green-400 rounded-lg shadow-sm">
+                <BookOpen className="h-5 w-5 text-white" />
               </div>
               <span>
                 Generated Flashcards ({generatedFlashcards.length})
               </span>
               {enhance && (
-                <span className="px-2 py-1 text-xs bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full flex items-center gap-1">
+                <span className="px-2 py-1 text-xs bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 rounded-full flex items-center gap-1">
                   <Sparkles className="h-3 w-3" />
                   Enhanced for Marks
                 </span>
@@ -370,11 +370,11 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
             </div>
 
             {/* Save Button */}
-            <div className="pt-4 border-t border-indigo-200 dark:border-indigo-700/50">
+            <div className="pt-4 border-t border-green-200 dark:border-green-700/50">
               <Button
                 onClick={handleSave}
                 disabled={isSaving}
-                className="w-full bg-indigo-400 hover:bg-indigo-500 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                className="w-full bg-green-400 hover:bg-green-500 dark:bg-green-600 dark:hover:bg-green-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
                 size="lg"
               >
                 {isSaving ? (
