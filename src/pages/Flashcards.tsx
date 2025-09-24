@@ -386,16 +386,6 @@ const Flashcards = () => {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
-        <header className="bg-gradient-to-r from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 border-b border-sky-200 dark:border-sky-700/50 p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-sky-400 dark:bg-sky-600 rounded-lg shadow-sm">
-              <Brain className="h-6 w-6 text-white" />
-            </div>
-            <h1 className="text-2xl font-bold text-sky-700 dark:text-sky-300">Flashcards</h1>
-          </div>
-          <p className="text-sky-600 dark:text-sky-400">Create and study with AI-generated flashcards</p>
-        </header>
-
         <main className="flex-1 p-6">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full max-w-4xl mx-auto">
             <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 border border-sky-200 dark:border-sky-700/50">
