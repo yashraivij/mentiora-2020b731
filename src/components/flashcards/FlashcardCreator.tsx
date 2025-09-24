@@ -314,7 +314,7 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
             <p className={`text-base mt-2 font-medium ${enhance ? 'text-purple-600 dark:text-purple-400' : 'text-muted-foreground'}`}>
               {enhance 
                 ? "Flashcards will use premium exam-board specific language and mark scheme terminology"
-                : "Generate standard flashcards from your notes"
+                : "Flashcards will use premium exam-board specific language and mark scheme terminology"
               }
             </p>
           </div>

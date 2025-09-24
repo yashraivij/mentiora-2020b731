@@ -2168,9 +2168,9 @@ const Dashboard = () => {
                       <h2 className="text-2xl sm:text-4xl font-bold text-foreground mb-4">
                         Smart Flashcards
                       </h2>
-                      <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
-                        Transform your study notes into powerful flashcards with AI analysis and exam-board optimization
-                      </p>
+                       <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
+                         Transform your study notes into powerful flashcards with analysis and exam-board optimization
+                       </p>
                     </div>
 
                     {/* Creator Component */}
