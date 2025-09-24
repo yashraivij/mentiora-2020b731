@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useSubscription } from "@/hooks/useSubscription";
 import { Brain, Sparkles, BookOpen, Zap } from "lucide-react";
 
 interface FlashcardCreatorProps {
@@ -87,6 +88,7 @@ const subjectExamples = {
 export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { isPremium, openPaymentLink } = useSubscription();
   
   const [notes, setNotes] = useState("");
   const [subject, setSubject] = useState("");
@@ -96,6 +98,15 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedFlashcards, setGeneratedFlashcards] = useState<GeneratedFlashcard[]>([]);
   const [isSaving, setIsSaving] = useState(false);
+
+  const handleEnhanceToggle = (checked: boolean) => {
+    if (checked && !isPremium) {
+      // Redirect to paywall for non-premium users
+      openPaymentLink();
+      return;
+    }
+    setEnhance(checked);
+  };
 
   const handleGenerate = async () => {
     if (!notes.trim() || !subject || !examBoard) {
@@ -295,7 +306,7 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
             <Switch
               id="enhance"
               checked={enhance}
-              onCheckedChange={setEnhance}
+              onCheckedChange={handleEnhanceToggle}
               className="data-[state=checked]:bg-purple-500"
             />
           </div>
