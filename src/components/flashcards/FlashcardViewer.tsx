@@ -22,6 +22,34 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Utility function to format flashcard text with proper line breaks and bullet points
+const formatFlashcardText = (text: string) => {
+  if (!text) return text;
+  
+  const lines = text.split('\n');
+  return lines.map((line, index) => {
+    const trimmedLine = line.trim();
+    if (!trimmedLine) return <br key={index} />;
+    
+    // Handle bullet points
+    if (trimmedLine.startsWith('•')) {
+      return (
+        <div key={index} className="flex items-start gap-2 mb-1">
+          <span className="text-primary mt-1">•</span>
+          <span>{trimmedLine.substring(1).trim()}</span>
+        </div>
+      );
+    }
+    
+    // Regular line
+    return (
+      <div key={index} className={index > 0 ? "mt-2" : ""}>
+        {trimmedLine}
+      </div>
+    );
+  });
+};
+
 interface Flashcard {
   id: string;
   front: string;
@@ -280,9 +308,9 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
                           {isFlipped ? "Answer" : "Question"}
                         </Badge>
                       </div>
-                      <p className="text-lg leading-relaxed">
-                        {isFlipped ? currentCard.back : currentCard.front}
-                      </p>
+                      <div className="text-lg leading-relaxed">
+                        {isFlipped ? formatFlashcardText(currentCard.back) : currentCard.front}
+                      </div>
                       {!isFlipped && (
                         <p className="text-xs text-muted-foreground mt-6">
                           Click to reveal answer • Space bar to flip
@@ -330,7 +358,7 @@ export const FlashcardViewer = ({ flashcardSet, mode, onBack }: FlashcardViewerP
                       </div>
                       <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
                         <p className="text-sm text-muted-foreground mb-2">Correct answer:</p>
-                        <p className="font-medium text-green-800 dark:text-green-200">{currentCard.back}</p>
+                        <div className="font-medium text-green-800 dark:text-green-200">{formatFlashcardText(currentCard.back)}</div>
                       </div>
                       <div className="flex gap-3">
                         <Button 
