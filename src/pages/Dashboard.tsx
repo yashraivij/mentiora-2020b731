@@ -55,6 +55,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { openManageBilling } from "@/lib/manageBilling";
 import { NotebookEntry } from "@/components/notebook/NotebookEntry";
+import { FlashcardCreator } from "@/components/flashcards/FlashcardCreator";
 import { toast } from "sonner";
 
 interface UserProgress {
@@ -1125,7 +1126,7 @@ const Dashboard = () => {
                     key={item.id}
                     onClick={() => {
                       if (item.id === "flashcards") {
-                        navigate("/flashcards");
+                        setActiveTab("flashcards");
                       } else {
                         setActiveTab(item.id);
                       }
@@ -2026,98 +2027,27 @@ const Dashboard = () => {
           )}
 
           {activeTab === "flashcards" && (
-            <div className="space-y-6">
-              {/* Header */}
-              <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-foreground mb-2">Flashcards</h2>
-                <p className="text-lg text-muted-foreground">Create and study with AI-generated flashcards</p>
-              </div>
-
-              {/* Quick Actions */}
-              <div className="grid gap-6 md:grid-cols-2">
-                <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Brain className="h-5 w-5 text-purple-500" />
-                      Create Flashcards
-                    </CardTitle>
-                    <CardDescription>
-                      Turn your study notes into flashcards with AI
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button
-                      onClick={() => navigate("/flashcards")}
-                      className="w-full"
-                      size="lg"
-                    >
-                      <Plus className="h-4 w-4 mr-2" />
-                      Get Started
-                    </Button>
-                  </CardContent>
-                </Card>
-
-                <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <BookOpen className="h-5 w-5 text-blue-500" />
-                      Study Mode
-                    </CardTitle>
-                    <CardDescription>
-                      Review your saved flashcard sets
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button
-                      onClick={() => navigate("/flashcards?tab=library")}
-                      variant="outline"
-                      className="w-full"
-                      size="lg"
-                    >
-                      <Eye className="h-4 w-4 mr-2" />
-                      View Library
-                    </Button>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Feature Highlights */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>✨ What you can do with Flashcards</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid gap-4 md:grid-cols-3">
-                    <div className="text-center p-4">
-                      <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center mx-auto mb-3">
-                        <Brain className="h-6 w-6 text-purple-600 dark:text-purple-400" />
-                      </div>
-                      <h3 className="font-semibold mb-2">AI Generation</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Paste your notes and get instant flashcards
-                      </p>
-                    </div>
-                    <div className="text-center p-4">
-                      <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center mx-auto mb-3">
-                        <Zap className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-                      </div>
-                      <h3 className="font-semibold mb-2">Exam-Board Specific</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Enhanced with mark scheme language
-                      </p>
-                    </div>
-                    <div className="text-center p-4">
-                      <div className="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center mx-auto mb-3">
-                        <BookOpen className="h-6 w-6 text-green-600 dark:text-green-400" />
-                      </div>
-                      <h3 className="font-semibold mb-2">Study Modes</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Flashcards, learning mode, and shuffle
-                      </p>
-                    </div>
+            <div className="bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 min-h-screen -m-8 p-8">
+              <div className="max-w-4xl mx-auto">
+                <div className="text-center mb-8">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-sky-400 dark:bg-sky-600 mb-6 shadow-lg">
+                    <Brain className="h-8 w-8 text-white" />
                   </div>
-                </CardContent>
-              </Card>
+                  <h1 className="text-4xl font-bold text-sky-700 dark:text-sky-300 mb-4">
+                    Flashcards
+                  </h1>
+                  <p className="text-sky-600 dark:text-sky-400 text-lg max-w-md mx-auto">
+                    Create and study with AI-generated flashcards
+                  </p>
+                </div>
+                
+                <FlashcardCreator onSetCreated={() => {
+                  toast({
+                    title: "Success",
+                    description: "Flashcards created and saved!",
+                  });
+                }} />
+              </div>
             </div>
           )}
 
