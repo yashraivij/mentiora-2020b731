@@ -41,6 +41,49 @@ const examBoards = [
   { id: "WJEC", name: "WJEC" },
 ];
 
+const subjectExamples = {
+  physics: {
+    normal: "What is Newton's first law?",
+    enhanced: "State and explain Newton's first law of motion. (3 marks)"
+  },
+  chemistry: {
+    normal: "What is a covalent bond?",
+    enhanced: "Describe the formation of a covalent bond and give an example. (4 marks)"
+  },
+  biology: {
+    normal: "What is photosynthesis?",
+    enhanced: "Explain the process of photosynthesis. (4 marks)"
+  },
+  mathematics: {
+    normal: "What is the quadratic formula?",
+    enhanced: "State the quadratic formula and solve: 2x² + 5x - 3 = 0. (6 marks)"
+  },
+  "english-language": {
+    normal: "What is a metaphor?",
+    enhanced: "Identify and analyze the effect of metaphors in the given text. (8 marks)"
+  },
+  "english-literature": {
+    normal: "Who wrote Romeo and Juliet?",
+    enhanced: "Analyze Shakespeare's use of dramatic irony in Romeo and Juliet. (10 marks)"
+  },
+  geography: {
+    normal: "What causes earthquakes?",
+    enhanced: "Explain the causes and effects of earthquakes using named examples. (9 marks)"
+  },
+  history: {
+    normal: "When did World War II end?",
+    enhanced: "Assess the significance of D-Day in ending World War II. (16 marks)"
+  },
+  "religious-studies": {
+    normal: "What is karma?",
+    enhanced: "Evaluate different Hindu beliefs about karma and reincarnation. (12 marks)"
+  },
+  business: {
+    normal: "What is supply and demand?",
+    enhanced: "Analyze how changes in supply and demand affect pricing strategies. (10 marks)"
+  }
+};
+
 export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
   const { user } = useAuth();
   const { toast } = useToast();
@@ -286,11 +329,11 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
             <div className="space-y-3">
               <div className="p-4 bg-background/80 rounded-lg border border-border shadow-sm">
                 <span className="font-bold text-muted-foreground">Normal:</span> 
-                <span className="ml-3 font-medium">"What is photosynthesis?"</span>
+                <span className="ml-3 font-medium">"{subjectExamples[subject]?.normal || "What is...?"}"</span>
               </div>
               <div className="p-4 bg-purple-100/80 dark:bg-purple-900/40 rounded-lg border border-purple-300 dark:border-purple-700 shadow-sm">
                 <span className="font-bold text-purple-700 dark:text-purple-300">Enhanced:</span> 
-                <span className="ml-3 font-bold">"Explain the process of photosynthesis. (4 marks, {examBoard} Biology)"</span>
+                <span className="ml-3 font-bold">"{subjectExamples[subject]?.enhanced.replace('(', `(${examBoard} ${subjects.find(s => s.id === subject)?.name}) (`).replace(' marks)', ' marks)') || `Explain... (4 marks, ${examBoard} ${subjects.find(s => s.id === subject)?.name})`}"</span>
               </div>
             </div>
           </div>
