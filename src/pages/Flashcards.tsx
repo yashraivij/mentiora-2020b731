@@ -389,8 +389,8 @@ const Flashcards = () => {
         <main className="flex-1 p-6">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full max-w-4xl mx-auto">
             <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 border border-sky-200 dark:border-sky-700/50">
-              <TabsTrigger value="create" className="data-[state=active]:bg-sky-400 data-[state=active]:text-white text-sky-700 dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-800/30">Create Flashcards</TabsTrigger>
-              <TabsTrigger value="library" className="data-[state=active]:bg-blue-400 data-[state=active]:text-white text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-800/30">My Flashcard Sets</TabsTrigger>
+              <TabsTrigger value="create" className="data-[state=active]:bg-sky-400 data-[state=active]:text-white text-sky-700 dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-800/30">Create</TabsTrigger>
+              <TabsTrigger value="library" className="data-[state=active]:bg-blue-400 data-[state=active]:text-white text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-800/30">My Collection</TabsTrigger>
             </TabsList>
 
             <TabsContent value="create" className="mt-6">
