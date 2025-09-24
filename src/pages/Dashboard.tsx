@@ -2356,7 +2356,7 @@ const Dashboard = () => {
                             Your Flashcard Collection
                           </h2>
                            <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
-                             Review and study your AI-generated flashcard sets for effective revision
+                             Review and study your flashcard sets for effective revision
                            </p>
                         </div>
 
@@ -2365,12 +2365,12 @@ const Dashboard = () => {
                            {flashcardSets.map((set, index) => {
                              // Color gradients for different cards
                              const gradients = [
-                               "bg-gradient-to-br from-blue-400/20 to-cyan-400/20 border-blue-200/50",
-                               "bg-gradient-to-br from-purple-400/20 to-pink-400/20 border-purple-200/50",
-                               "bg-gradient-to-br from-emerald-400/20 to-teal-400/20 border-emerald-200/50",
-                               "bg-gradient-to-br from-orange-400/20 to-red-400/20 border-orange-200/50",
-                               "bg-gradient-to-br from-indigo-400/20 to-blue-400/20 border-indigo-200/50",
-                               "bg-gradient-to-br from-green-400/20 to-lime-400/20 border-green-200/50"
+                               "bg-gradient-to-br from-blue-50 via-blue-100 to-cyan-50 dark:from-blue-900/30 dark:via-blue-800/20 dark:to-cyan-900/30 border-blue-300/60 dark:border-blue-600/30 shadow-blue-200/50 dark:shadow-blue-900/20",
+                               "bg-gradient-to-br from-purple-50 via-purple-100 to-pink-50 dark:from-purple-900/30 dark:via-purple-800/20 dark:to-pink-900/30 border-purple-300/60 dark:border-purple-600/30 shadow-purple-200/50 dark:shadow-purple-900/20",
+                               "bg-gradient-to-br from-emerald-50 via-emerald-100 to-teal-50 dark:from-emerald-900/30 dark:via-emerald-800/20 dark:to-teal-900/30 border-emerald-300/60 dark:border-emerald-600/30 shadow-emerald-200/50 dark:shadow-emerald-900/20",
+                               "bg-gradient-to-br from-orange-50 via-orange-100 to-red-50 dark:from-orange-900/30 dark:via-orange-800/20 dark:to-red-900/30 border-orange-300/60 dark:border-orange-600/30 shadow-orange-200/50 dark:shadow-orange-900/20",
+                               "bg-gradient-to-br from-indigo-50 via-indigo-100 to-violet-50 dark:from-indigo-900/30 dark:via-indigo-800/20 dark:to-violet-900/30 border-indigo-300/60 dark:border-indigo-600/30 shadow-indigo-200/50 dark:shadow-indigo-900/20",
+                               "bg-gradient-to-br from-green-50 via-green-100 to-lime-50 dark:from-green-900/30 dark:via-green-800/20 dark:to-lime-900/30 border-green-300/60 dark:border-green-600/30 shadow-green-200/50 dark:shadow-green-900/20"
                              ];
                              const cardGradient = gradients[index % gradients.length];
                              
@@ -2380,9 +2380,12 @@ const Dashboard = () => {
                                  initial={{ opacity: 0, y: 20 }}
                                  animate={{ opacity: 1, y: 0 }}
                                  transition={{ delay: 0.05 * index }}
+                                 className="group"
                                >
-                                 <Card className={`group ${cardGradient} backdrop-blur-xl border shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden`}>
-                                   <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-12 translate-x-12"></div>
+                                 <Card className={`${cardGradient} backdrop-blur-xl border-2 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] overflow-hidden relative`}>
+                                   {/* Decorative elements */}
+                                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/20 to-transparent dark:from-white/10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-110 transition-transform duration-500"></div>
+                                   <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-white/10 to-transparent dark:from-white/5 rounded-full translate-y-12 -translate-x-12 group-hover:scale-110 transition-transform duration-500"></div>
                                    <CardHeader className="relative pb-3">
                                      <div className="flex justify-between items-start mb-3">
                                        <div className="flex-1">
