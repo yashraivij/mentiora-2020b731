@@ -2155,88 +2155,88 @@ const Dashboard = () => {
           )}
 
           {activeTab === "flashcards" && !selectedSet && (
-            <div className="bg-gradient-to-br from-background via-background to-sky-50/30 dark:to-sky-900/10 min-h-screen -m-8">
-              {/* Compact Header */}
-              <div className="relative overflow-hidden bg-gradient-to-br from-sky-50 via-white to-blue-50 dark:from-sky-900/20 dark:via-background dark:to-blue-900/20 border-b border-sky-200/50 dark:border-sky-700/30">
-                <div className="absolute inset-0 bg-grid-sky-500/5 dark:bg-grid-sky-400/5"></div>
-                <div className="relative max-w-6xl mx-auto px-8 py-8">
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4 }}
-                    className="flex items-center justify-between"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-sky-400 to-blue-500 dark:from-sky-500 dark:to-blue-600 shadow-lg shadow-sky-500/25">
-                        <Brain className="h-6 w-6 text-white" />
+            <div className="min-h-screen bg-background">
+              {/* Premium Header */}
+              <header className="bg-card/90 backdrop-blur-xl border-b border-border sticky top-0 z-50 shadow-xl">
+                <div className="container mx-auto px-4 sm:px-6 py-4">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
+                    <div className="flex items-center space-x-2 sm:space-x-4">
+                      <div className="flex items-center space-x-2 sm:space-x-4">
+                        <div className="relative">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-primary flex items-center justify-center shadow-lg">
+                            <Brain className="h-5 w-5 sm:h-6 sm:w-6 text-primary-foreground" />
+                          </div>
+                          <div className="absolute -top-1 -right-1 w-4 h-4 bg-accent rounded-full flex items-center justify-center">
+                            <Crown className="h-2.5 w-2.5 text-accent-foreground" />
+                          </div>
+                        </div>
+                        <div>
+                          <h1 className="text-xl sm:text-3xl font-bold bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+                            Smart Flashcards
+                          </h1>
+                          <div className="flex items-center space-x-1 sm:space-x-2 flex-wrap">
+                            <div className="flex items-center space-x-1">
+                              <Crown className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-primary" />
+                              <span className="text-xs sm:text-sm font-semibold text-accent-foreground">AI-Powered Study Tool</span>
+                            </div>
+                            <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
+                            <span className="text-xs text-accent-foreground font-medium">Exam-Board Specific</span>
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <h1 className="text-3xl font-bold text-sky-700 dark:text-sky-300 mb-1">
-                          Flashcards
-                        </h1>
-                        <p className="text-sky-600/80 dark:text-sky-400/80 text-sm">
-                          Create and study with AI-generated flashcards
-                        </p>
-                      </div>
                     </div>
-                    
-                    {/* Inline Tab Navigation */}
-                    <div className="bg-white dark:bg-card/50 backdrop-blur-sm p-1 rounded-xl shadow-lg border border-sky-200/50 dark:border-sky-700/30">
-                      <button
-                        onClick={() => setFlashcardView("create")}
-                        className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center gap-2 ${
-                          flashcardView === "create"
-                            ? "bg-gradient-to-r from-sky-400 to-blue-500 text-white shadow-md"
-                            : "text-sky-700 dark:text-sky-300 hover:bg-sky-50 dark:hover:bg-sky-800/30"
-                        }`}
-                      >
-                        <Plus className="h-4 w-4" />
-                        Create
-                      </button>
-                      <button
-                        onClick={() => {
-                          setFlashcardView("library");
-                          loadFlashcardSets();
-                        }}
-                        className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center gap-2 ${
-                          flashcardView === "library"
-                            ? "bg-gradient-to-r from-blue-400 to-indigo-500 text-white shadow-md"
-                            : "text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-800/30"
-                        }`}
-                      >
-                        <BookOpen className="h-4 w-4" />
-                        Collection ({flashcardSets.length})
-                      </button>
-                    </div>
-                  </motion.div>
-                  
-                  {/* Feature Pills - Moved to be more compact */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="flex flex-wrap gap-2 mt-4"
-                  >
-                    <div className="px-3 py-1 bg-white/80 dark:bg-sky-900/30 backdrop-blur-sm rounded-full border border-sky-200 dark:border-sky-700/50 text-xs font-medium text-sky-700 dark:text-sky-300">
-                      ✨ AI-Powered
-                    </div>
-                    <div className="px-3 py-1 bg-white/80 dark:bg-blue-900/30 backdrop-blur-sm rounded-full border border-blue-200 dark:border-blue-700/50 text-xs font-medium text-blue-700 dark:text-blue-300">
-                      🎯 Exam-Board Specific
-                    </div>
-                    <div className="px-3 py-1 bg-white/80 dark:bg-indigo-900/30 backdrop-blur-sm rounded-full border border-indigo-200 dark:border-indigo-700/50 text-xs font-medium text-indigo-700 dark:text-indigo-300">
-                      🧠 Smart Study Modes
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
 
-              <div className="max-w-6xl mx-auto px-8 py-8">
+                    {/* Tab Navigation */}
+                    <div className="bg-card/50 backdrop-blur-sm p-1 rounded-xl border border-border">
+                      <div className="flex space-x-1">
+                        <button
+                          onClick={() => setFlashcardView("create")}
+                          className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                            flashcardView === "create"
+                              ? 'bg-primary text-primary-foreground shadow-lg'
+                              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                          }`}
+                        >
+                          Create Flashcards
+                        </button>
+                        <button
+                          onClick={() => {
+                            setFlashcardView("library");
+                            loadFlashcardSets();
+                          }}
+                          className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                            flashcardView === "library"
+                              ? 'bg-primary text-primary-foreground shadow-lg'
+                              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                          }`}
+                        >
+                          My Collection
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </header>
+
+              <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-8 max-w-7xl">
                 {flashcardView === "create" && (
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                  <div className="space-y-8">
+                    {/* Welcome Section */}
+                    <div className="text-center">
+                      <h2 className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-foreground via-foreground/80 to-foreground/60 bg-clip-text text-transparent mb-4">
+                        Create Smart Flashcards
+                      </h2>
+                      <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
+                        Transform your study notes into powerful flashcards with AI analysis and exam-board optimization
+                      </p>
+                      <div className="flex items-center justify-center space-x-2 mt-4">
+                        <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                        <div className="w-2 h-2 bg-secondary rounded-full animate-pulse delay-75"></div>
+                        <div className="w-2 h-2 bg-accent rounded-full animate-pulse delay-150"></div>
+                      </div>
+                    </div>
+
+                    {/* Creator Component */}
                     <FlashcardCreator onSetCreated={() => {
                       toast({
                         title: "Success",
@@ -2245,75 +2245,87 @@ const Dashboard = () => {
                       setFlashcardView("library");
                       loadFlashcardSets();
                     }} />
-                  </motion.div>
+                  </div>
                 )}
 
                 {flashcardView === "library" && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="space-y-6"
-                  >
+                  <div className="space-y-8">
                     {flashcardsLoading ? (
                       <div className="text-center py-16">
-                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-sky-400 to-blue-500 mb-4 animate-pulse">
-                          <Brain className="h-6 w-6 text-white" />
+                        <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent mx-auto mb-6"></div>
+                        <div className="bg-card/80 backdrop-blur-xl rounded-2xl px-8 py-6 shadow-2xl shadow-primary/10">
+                          <p className="text-foreground font-medium text-lg">Loading your collection...</p>
+                          <p className="text-muted-foreground text-sm mt-2">Preparing your flashcard sets</p>
                         </div>
-                        <div className="animate-spin rounded-full h-8 w-8 border-4 border-sky-200 border-t-sky-500 mx-auto mb-3"></div>
-                        <p className="text-sky-600 dark:text-sky-400 font-medium">Loading your collection...</p>
                       </div>
                     ) : flashcardSets.length === 0 ? (
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <Card className="bg-gradient-to-br from-white via-sky-50/30 to-blue-50/30 dark:from-card dark:via-sky-900/10 dark:to-blue-900/10 border-2 border-dashed border-sky-300/50 dark:border-sky-700/50 shadow-lg">
-                          <CardContent className="text-center py-16">
-                            <div className="relative mb-6">
-                              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-100 to-blue-100 dark:from-sky-900/30 dark:to-blue-900/30 mb-2">
-                                <Brain className="h-8 w-8 text-sky-500 dark:text-sky-400" />
-                              </div>
-                              <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xs shadow-md animate-pulse">
-                                ✨
-                              </div>
-                            </div>
-                            <h3 className="text-xl font-bold mb-3 text-sky-700 dark:text-sky-300">Ready to create your first flashcard set?</h3>
-                            <p className="text-sky-600 dark:text-sky-400 mb-6 max-w-md mx-auto">
-                              Transform your study notes into powerful flashcards with AI assistance.
-                            </p>
-                            <Button 
-                              onClick={() => setFlashcardView("create")} 
-                              size="lg" 
-                              className="bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white shadow-lg shadow-sky-500/25 px-6 py-3 font-semibold rounded-xl hover-scale"
-                            >
-                              <Plus className="h-5 w-5 mr-2" />
-                              Create Your First Set
-                            </Button>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
+                      <Card className="text-center py-16 bg-card/80 backdrop-blur-xl border border-border shadow-2xl">
+                        <CardContent>
+                          <div className="w-20 h-20 mx-auto mb-6 bg-muted rounded-3xl flex items-center justify-center">
+                            <Brain className="h-10 w-10 text-muted-foreground" />
+                          </div>
+                          <h3 className="text-2xl font-bold text-foreground mb-3">No Flashcard Sets Yet</h3>
+                          <p className="text-muted-foreground mb-8 max-w-md mx-auto text-lg">
+                            Start creating flashcards from your study notes to build your collection!
+                          </p>
+                          <Button 
+                            onClick={() => setFlashcardView("create")} 
+                            className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+                          >
+                            Create First Set
+                          </Button>
+                        </CardContent>
+                      </Card>
                     ) : (
                       <>
-                        {/* Compact Stats Bar */}
-                        <div className="grid grid-cols-3 gap-4 mb-6">
-                          <Card className="bg-gradient-to-br from-sky-50 to-sky-100 dark:from-sky-900/20 dark:to-sky-800/20 border-sky-200/50 dark:border-sky-700/30">
-                            <CardContent className="p-4 text-center">
-                              <div className="text-2xl font-bold text-sky-600 dark:text-sky-400 mb-1">{flashcardSets.length}</div>
-                              <div className="text-sky-700 dark:text-sky-300 text-sm font-medium">Sets</div>
+                        {/* Welcome Section for Library */}
+                        <div className="text-center mb-8">
+                          <h2 className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-foreground via-foreground/80 to-foreground/60 bg-clip-text text-transparent mb-4">
+                            Your Flashcard Collection
+                          </h2>
+                          <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
+                            Review and study your AI-generated flashcard sets for effective revision
+                          </p>
+                          <div className="flex items-center justify-center space-x-2 mt-4">
+                            <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                            <div className="w-2 h-2 bg-secondary rounded-full animate-pulse delay-75"></div>
+                            <div className="w-2 h-2 bg-accent rounded-full animate-pulse delay-150"></div>
+                          </div>
+                        </div>
+
+                        {/* Premium Stats Cards */}
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-10">
+                          <Card className="relative overflow-hidden bg-card/80 border border-border shadow-xl hover:shadow-2xl transition-all duration-300">
+                            <div className="absolute top-0 right-0 w-20 h-20 bg-primary/10 rounded-bl-full"></div>
+                            <CardContent className="p-6 text-center relative">
+                              <div className="w-12 h-12 mx-auto mb-4 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
+                                <Brain className="h-6 w-6 text-primary-foreground" />
+                              </div>
+                              <div className="text-3xl font-bold text-foreground mb-1">{flashcardSets.length}</div>
+                              <div className="text-sm font-medium text-primary">Flashcard Sets</div>
+                              <div className="text-xs text-muted-foreground mt-1">AI Generated</div>
                             </CardContent>
                           </Card>
-                          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-blue-200/50 dark:border-blue-700/30">
-                            <CardContent className="p-4 text-center">
-                              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-1">{flashcardSets.reduce((acc, set) => acc + set.card_count, 0)}</div>
-                              <div className="text-blue-700 dark:text-blue-300 text-sm font-medium">Cards</div>
+                          <Card className="relative overflow-hidden bg-card/80 border border-border shadow-xl hover:shadow-2xl transition-all duration-300">
+                            <div className="absolute top-0 right-0 w-20 h-20 bg-secondary/10 rounded-bl-full"></div>
+                            <CardContent className="p-6 text-center relative">
+                              <div className="w-12 h-12 mx-auto mb-4 bg-secondary rounded-2xl flex items-center justify-center shadow-lg">
+                                <BookOpen className="h-6 w-6 text-secondary-foreground" />
+                              </div>
+                              <div className="text-3xl font-bold text-foreground mb-1">{flashcardSets.reduce((acc, set) => acc + set.card_count, 0)}</div>
+                              <div className="text-sm font-medium text-secondary-foreground">Total Cards</div>
+                              <div className="text-xs text-muted-foreground mt-1">Ready to Study</div>
                             </CardContent>
                           </Card>
-                          <Card className="bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900/20 dark:to-indigo-800/20 border-indigo-200/50 dark:border-indigo-700/30">
-                            <CardContent className="p-4 text-center">
-                              <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400 mb-1">{new Set(flashcardSets.map(set => set.subject_id)).size}</div>
-                              <div className="text-indigo-700 dark:text-indigo-300 text-sm font-medium">Subjects</div>
+                          <Card className="relative overflow-hidden bg-card/80 border border-border shadow-xl hover:shadow-2xl transition-all duration-300">
+                            <div className="absolute top-0 right-0 w-20 h-20 bg-accent/10 rounded-bl-full"></div>
+                            <CardContent className="p-6 text-center relative">
+                              <div className="w-12 h-12 mx-auto mb-4 bg-accent rounded-2xl flex items-center justify-center shadow-lg">
+                                <BookOpen className="h-6 w-6 text-accent-foreground" />
+                              </div>
+                              <div className="text-3xl font-bold text-foreground mb-1">{new Set(flashcardSets.map(set => set.subject_id)).size}</div>
+                              <div className="text-sm font-medium text-accent-foreground">Subjects</div>
+                              <div className="text-xs text-muted-foreground mt-1">Covered</div>
                             </CardContent>
                           </Card>
                         </div>
@@ -2327,20 +2339,20 @@ const Dashboard = () => {
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.05 * index }}
                             >
-                              <Card className="group bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/30 dark:from-card dark:via-blue-900/10 dark:to-indigo-900/10 border border-blue-200/50 dark:border-blue-700/30 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden">
-                                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-full -translate-y-12 translate-x-12"></div>
+                              <Card className="group bg-card/80 backdrop-blur-xl border border-border shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                                <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full -translate-y-12 translate-x-12"></div>
                                 <CardHeader className="relative pb-3">
                                   <div className="flex justify-between items-start mb-3">
                                     <div className="flex-1">
                                       <div className="flex items-center gap-3 mb-2">
-                                        <div className="p-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg shadow-sm">
-                                          <Brain className="h-4 w-4 text-white" />
+                                        <div className="p-2 bg-primary rounded-lg shadow-sm">
+                                          <Brain className="h-4 w-4 text-primary-foreground" />
                                         </div>
                                         <div>
-                                          <CardTitle className="text-lg font-bold text-blue-700 dark:text-blue-300 group-hover:text-blue-600 dark:group-hover:text-blue-200 transition-colors">
+                                          <CardTitle className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
                                             {set.title}
                                           </CardTitle>
-                                          <CardDescription className="text-blue-600/80 dark:text-blue-400/80 text-sm">
+                                          <CardDescription className="text-muted-foreground text-sm">
                                             {set.card_count} cards • {formatDate(set.created_at)}
                                           </CardDescription>
                                         </div>
@@ -2353,7 +2365,7 @@ const Dashboard = () => {
                                         e.stopPropagation();
                                         handleDeleteSet(set.id);
                                       }}
-                                      className="text-muted-foreground hover:text-destructive hover:bg-red-50 dark:hover:bg-red-900/20 rounded-full p-2"
+                                      className="text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-full p-2"
                                     >
                                       <Trash2 className="h-3 w-3" />
                                     </Button>
@@ -2369,7 +2381,7 @@ const Dashboard = () => {
                                         setSelectedSet(set);
                                         setViewMode("flashcards");
                                       }}
-                                      className="w-full border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-800/30 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-200 text-xs"
+                                      className="w-full border-border text-foreground hover:bg-muted transition-all duration-200 text-xs"
                                     >
                                       <Eye className="h-3 w-3 mr-1" />
                                       Review
@@ -2380,7 +2392,7 @@ const Dashboard = () => {
                                         setSelectedSet(set);
                                         setViewMode("learn");
                                       }}
-                                      className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white shadow-sm hover:shadow-md transition-all duration-200 text-xs"
+                                      className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-sm hover:shadow-md transition-all duration-200 text-xs"
                                     >
                                       <Play className="h-3 w-3 mr-1" />
                                       Study
@@ -2393,7 +2405,7 @@ const Dashboard = () => {
                         </div>
                       </>
                     )}
-                  </motion.div>
+                  </div>
                 )}
               </div>
             </div>
