@@ -2155,31 +2155,77 @@ const Dashboard = () => {
           )}
 
           {activeTab === "flashcards" && !selectedSet && (
-            <div className="bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 min-h-screen -m-8 p-8">
-              <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-8">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-sky-400 dark:bg-sky-600 mb-6 shadow-lg">
-                    <Brain className="h-8 w-8 text-white" />
-                  </div>
-                  <h1 className="text-4xl font-bold text-sky-700 dark:text-sky-300 mb-4">
-                    Flashcards
-                  </h1>
-                  <p className="text-sky-600 dark:text-sky-400 text-lg max-w-md mx-auto">
-                    Create and study with AI-generated flashcards
-                  </p>
+            <div className="bg-gradient-to-br from-background via-background to-sky-50/30 dark:to-sky-900/10 min-h-screen -m-8">
+              {/* Hero Section */}
+              <div className="relative overflow-hidden bg-gradient-to-br from-sky-50 via-white to-blue-50 dark:from-sky-900/20 dark:via-background dark:to-blue-900/20 border-b border-sky-200/50 dark:border-sky-700/30">
+                <div className="absolute inset-0 bg-grid-sky-500/5 dark:bg-grid-sky-400/5"></div>
+                <div className="relative max-w-6xl mx-auto px-8 py-16">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="text-center"
+                  >
+                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-500 dark:from-sky-500 dark:to-blue-600 mb-8 shadow-lg shadow-sky-500/25 hover-scale">
+                      <Brain className="h-10 w-10 text-white" />
+                    </div>
+                    <h1 className="text-5xl font-bold bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 dark:from-sky-400 dark:via-blue-400 dark:to-indigo-400 bg-clip-text text-transparent mb-6">
+                      AI Flashcards Studio
+                    </h1>
+                    <p className="text-xl text-sky-600/80 dark:text-sky-400/80 max-w-2xl mx-auto mb-8 leading-relaxed">
+                      Transform your study notes into powerful, exam-board specific flashcards with AI. 
+                      Study smarter, remember better.
+                    </p>
+                    
+                    {/* Feature Pills */}
+                    <div className="flex flex-wrap justify-center gap-3 mb-8">
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.2 }}
+                        className="px-4 py-2 bg-white/80 dark:bg-sky-900/30 backdrop-blur-sm rounded-full border border-sky-200 dark:border-sky-700/50 text-sm font-medium text-sky-700 dark:text-sky-300"
+                      >
+                        ✨ AI-Powered Generation
+                      </motion.div>
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.3 }}
+                        className="px-4 py-2 bg-white/80 dark:bg-blue-900/30 backdrop-blur-sm rounded-full border border-blue-200 dark:border-blue-700/50 text-sm font-medium text-blue-700 dark:text-blue-300"
+                      >
+                        🎯 Exam-Board Specific
+                      </motion.div>
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.4 }}
+                        className="px-4 py-2 bg-white/80 dark:bg-indigo-900/30 backdrop-blur-sm rounded-full border border-indigo-200 dark:border-indigo-700/50 text-sm font-medium text-indigo-700 dark:text-indigo-300"
+                      >
+                        🧠 Smart Study Modes
+                      </motion.div>
+                    </div>
+                  </motion.div>
                 </div>
-                
+              </div>
+
+              <div className="max-w-6xl mx-auto px-8 py-12">
                 {/* Tab Navigation */}
-                <div className="flex justify-center mb-8">
-                  <div className="bg-white dark:bg-gray-800 p-1 rounded-lg shadow-sm border border-sky-200 dark:border-sky-700/50">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="flex justify-center mb-12"
+                >
+                  <div className="bg-white dark:bg-card/50 backdrop-blur-sm p-2 rounded-2xl shadow-lg border border-sky-200/50 dark:border-sky-700/30">
                     <button
                       onClick={() => setFlashcardView("create")}
-                      className={`px-6 py-2 rounded-md font-medium transition-all duration-200 ${
+                      className={`px-8 py-4 rounded-xl font-semibold transition-all duration-300 flex items-center gap-3 ${
                         flashcardView === "create"
-                          ? "bg-sky-400 text-white shadow-sm"
+                          ? "bg-gradient-to-r from-sky-400 to-blue-500 text-white shadow-lg shadow-sky-500/25 transform scale-105"
                           : "text-sky-700 dark:text-sky-300 hover:bg-sky-50 dark:hover:bg-sky-800/30"
                       }`}
                     >
+                      <Plus className="h-5 w-5" />
                       Create Flashcards
                     </button>
                     <button
@@ -2187,105 +2233,203 @@ const Dashboard = () => {
                         setFlashcardView("library");
                         loadFlashcardSets();
                       }}
-                      className={`px-6 py-2 rounded-md font-medium transition-all duration-200 ${
+                      className={`px-8 py-4 rounded-xl font-semibold transition-all duration-300 flex items-center gap-3 ${
                         flashcardView === "library"
-                          ? "bg-blue-400 text-white shadow-sm"
+                          ? "bg-gradient-to-r from-blue-400 to-indigo-500 text-white shadow-lg shadow-blue-500/25 transform scale-105"
                           : "text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-800/30"
                       }`}
                     >
-                      My Flashcard Sets
+                      <BookOpen className="h-5 w-5" />
+                      My Collection ({flashcardSets.length})
                     </button>
                   </div>
-                </div>
+                </motion.div>
 
                 {flashcardView === "create" && (
-                  <FlashcardCreator onSetCreated={() => {
-                    toast({
-                      title: "Success",
-                      description: "Flashcards created and saved!",
-                    });
-                    setFlashcardView("library");
-                    loadFlashcardSets();
-                  }} />
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <FlashcardCreator onSetCreated={() => {
+                      toast({
+                        title: "Success",
+                        description: "Flashcards created and saved!",
+                      });
+                      setFlashcardView("library");
+                      loadFlashcardSets();
+                    }} />
+                  </motion.div>
                 )}
 
                 {flashcardView === "library" && (
-                  <div className="space-y-6">
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="space-y-8"
+                  >
                     {flashcardsLoading ? (
-                      <div className="text-center py-12">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sky-400 mx-auto"></div>
-                        <p className="text-sky-600 dark:text-sky-400 mt-4">Loading your flashcard sets...</p>
+                      <div className="text-center py-20">
+                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-500 mb-6 animate-pulse">
+                          <Brain className="h-8 w-8 text-white" />
+                        </div>
+                        <div className="animate-spin rounded-full h-12 w-12 border-4 border-sky-200 border-t-sky-500 mx-auto mb-4"></div>
+                        <p className="text-sky-600 dark:text-sky-400 font-medium">Loading your flashcard collection...</p>
                       </div>
                     ) : flashcardSets.length === 0 ? (
-                      <Card className="bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 border border-sky-200 dark:border-sky-700/50 shadow-sm">
-                        <CardContent className="text-center py-12">
-                          <div className="p-4 bg-sky-400 dark:bg-sky-600 rounded-full w-fit mx-auto mb-6 shadow-sm">
-                            <Brain className="h-16 w-16 text-white" />
-                          </div>
-                          <h3 className="text-xl font-semibold mb-3 text-sky-700 dark:text-sky-300">No flashcard sets yet</h3>
-                          <p className="text-sky-600 dark:text-sky-400 mb-6 max-w-md mx-auto">
-                            Create your first set of flashcards from your notes to start studying more effectively!
-                          </p>
-                          <Button onClick={() => setFlashcardView("create")} size="lg" className="bg-sky-400 hover:bg-sky-500 dark:bg-sky-600 dark:hover:bg-sky-700 text-white shadow-sm hover:shadow-md">
-                            <Plus className="h-5 w-5 mr-2" />
-                            Create Your First Set
-                          </Button>
-                        </CardContent>
-                      </Card>
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.4 }}
+                      >
+                        <Card className="bg-gradient-to-br from-white via-sky-50/30 to-blue-50/30 dark:from-card dark:via-sky-900/10 dark:to-blue-900/10 border-2 border-dashed border-sky-300/50 dark:border-sky-700/50 shadow-xl">
+                          <CardContent className="text-center py-20">
+                            <div className="relative mb-8">
+                              <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-br from-sky-100 to-blue-100 dark:from-sky-900/30 dark:to-blue-900/30 mb-2">
+                                <Brain className="h-12 w-12 text-sky-500 dark:text-sky-400" />
+                              </div>
+                              <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg animate-pulse">
+                                ✨
+                              </div>
+                            </div>
+                            <h3 className="text-2xl font-bold mb-4 text-sky-700 dark:text-sky-300">Ready to create your first flashcard set?</h3>
+                            <p className="text-sky-600 dark:text-sky-400 mb-8 max-w-md mx-auto text-lg">
+                              Transform your study notes into powerful flashcards with AI assistance. Start building your knowledge library today!
+                            </p>
+                            <Button 
+                              onClick={() => setFlashcardView("create")} 
+                              size="lg" 
+                              className="bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white shadow-lg shadow-sky-500/25 px-8 py-4 text-lg font-semibold rounded-xl hover-scale"
+                            >
+                              <Plus className="h-6 w-6 mr-3" />
+                              Create Your First Set
+                            </Button>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
                     ) : (
-                      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {flashcardSets.map((set) => (
-                          <Card key={set.id} className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700/50 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
-                            <CardHeader>
-                              <div className="flex justify-between items-start">
-                                <div>
-                                  <CardTitle className="text-lg font-semibold text-blue-700 dark:text-blue-300">{set.title}</CardTitle>
-                                  <CardDescription className="mt-1 text-blue-600 dark:text-blue-400">
-                                    {set.card_count} cards • Created {formatDate(set.created_at)}
-                                  </CardDescription>
-                                </div>
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  onClick={() => handleDeleteSet(set.id)}
-                                  className="text-muted-foreground hover:text-destructive"
-                                >
-                                  <Trash2 className="h-4 w-4" />
-                                </Button>
-                              </div>
-                            </CardHeader>
-                            <CardContent>
-                              <div className="grid grid-cols-2 gap-2">
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => {
-                                    setSelectedSet(set);
-                                    setViewMode("flashcards");
-                                  }}
-                                  className="w-full border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-800/30"
-                                >
-                                  <Eye className="h-4 w-4 mr-2" />
-                                  Review
-                                </Button>
-                                <Button
-                                  size="sm"
-                                  onClick={() => {
-                                    setSelectedSet(set);
-                                    setViewMode("learn");
-                                  }}
-                                  className="w-full bg-blue-400 hover:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700 text-white"
-                                >
-                                  <Play className="h-4 w-4 mr-2" />
-                                  Learn
-                                </Button>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        ))}
-                      </div>
+                      <>
+                        {/* Stats Bar */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                          >
+                            <Card className="bg-gradient-to-br from-sky-50 to-sky-100 dark:from-sky-900/20 dark:to-sky-800/20 border-sky-200/50 dark:border-sky-700/30 hover-scale">
+                              <CardContent className="p-6 text-center">
+                                <div className="text-3xl font-bold text-sky-600 dark:text-sky-400 mb-2">{flashcardSets.length}</div>
+                                <div className="text-sky-700 dark:text-sky-300 font-medium">Flashcard Sets</div>
+                              </CardContent>
+                            </Card>
+                          </motion.div>
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                          >
+                            <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-blue-200/50 dark:border-blue-700/30 hover-scale">
+                              <CardContent className="p-6 text-center">
+                                <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">{flashcardSets.reduce((acc, set) => acc + set.card_count, 0)}</div>
+                                <div className="text-blue-700 dark:text-blue-300 font-medium">Total Cards</div>
+                              </CardContent>
+                            </Card>
+                          </motion.div>
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3 }}
+                          >
+                            <Card className="bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900/20 dark:to-indigo-800/20 border-indigo-200/50 dark:border-indigo-700/30 hover-scale">
+                              <CardContent className="p-6 text-center">
+                                <div className="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">{new Set(flashcardSets.map(set => set.subject_id)).size}</div>
+                                <div className="text-indigo-700 dark:text-indigo-300 font-medium">Subjects</div>
+                              </CardContent>
+                            </Card>
+                          </motion.div>
+                        </div>
+
+                        {/* Flashcard Sets Grid */}
+                        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                          {flashcardSets.map((set, index) => (
+                            <motion.div
+                              key={set.id}
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.1 * index }}
+                            >
+                              <Card className="group bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/30 dark:from-card dark:via-blue-900/10 dark:to-indigo-900/10 border border-blue-200/50 dark:border-blue-700/30 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-full -translate-y-16 translate-x-16"></div>
+                                <CardHeader className="relative">
+                                  <div className="flex justify-between items-start mb-4">
+                                    <div className="flex-1">
+                                      <div className="flex items-center gap-3 mb-3">
+                                        <div className="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl shadow-lg">
+                                          <Brain className="h-6 w-6 text-white" />
+                                        </div>
+                                        <div>
+                                          <CardTitle className="text-xl font-bold text-blue-700 dark:text-blue-300 group-hover:text-blue-600 dark:group-hover:text-blue-200 transition-colors">
+                                            {set.title}
+                                          </CardTitle>
+                                          <CardDescription className="text-blue-600/80 dark:text-blue-400/80 font-medium">
+                                            {set.card_count} cards
+                                          </CardDescription>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <Button
+                                      variant="ghost"
+                                      size="sm"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDeleteSet(set.id);
+                                      }}
+                                      className="text-muted-foreground hover:text-destructive hover:bg-red-50 dark:hover:bg-red-900/20 rounded-full"
+                                    >
+                                      <Trash2 className="h-4 w-4" />
+                                    </Button>
+                                  </div>
+                                  
+                                  <div className="text-sm text-blue-600/70 dark:text-blue-400/70 mb-4">
+                                    Created {formatDate(set.created_at)}
+                                  </div>
+                                </CardHeader>
+                                
+                                <CardContent className="relative pt-0">
+                                  <div className="grid grid-cols-2 gap-3">
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      onClick={() => {
+                                        setSelectedSet(set);
+                                        setViewMode("flashcards");
+                                      }}
+                                      className="w-full border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-800/30 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-200"
+                                    >
+                                      <Eye className="h-4 w-4 mr-2" />
+                                      Review
+                                    </Button>
+                                    <Button
+                                      size="sm"
+                                      onClick={() => {
+                                        setSelectedSet(set);
+                                        setViewMode("learn");
+                                      }}
+                                      className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white shadow-md hover:shadow-lg transition-all duration-200"
+                                    >
+                                      <Play className="h-4 w-4 mr-2" />
+                                      Study
+                                    </Button>
+                                  </div>
+                                </CardContent>
+                              </Card>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </>
                     )}
-                  </div>
+                  </motion.div>
                 )}
               </div>
             </div>
