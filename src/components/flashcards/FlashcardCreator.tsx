@@ -245,30 +245,30 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
 
       {/* Enhance Toggle */}
       <div className={`bg-card/60 backdrop-blur-sm rounded-xl shadow-md border border-border p-6 transition-all duration-300 ${
-        enhance ? 'border-orange-300 dark:border-orange-700/50' : ''
+        enhance ? 'border-purple-300 dark:border-purple-700/50' : ''
       }`}>
         <div className="flex items-center space-x-6">
-          <div className={`p-3 rounded-xl transition-all duration-300 ${enhance ? 'bg-orange-400 shadow-lg' : 'bg-muted'}`}>
+          <div className={`p-3 rounded-xl transition-all duration-300 ${enhance ? 'bg-purple-400 shadow-lg' : 'bg-muted'}`}>
             <Switch
               id="enhance"
               checked={enhance}
               onCheckedChange={setEnhance}
-              className="data-[state=checked]:bg-orange-500"
+              className="data-[state=checked]:bg-purple-500"
             />
           </div>
           <div className="flex-1">
             <Label htmlFor="enhance" className="flex items-center gap-3 font-bold cursor-pointer text-lg">
-              <Sparkles className={`h-6 w-6 transition-all duration-300 ${enhance ? 'text-orange-500' : 'text-muted-foreground'}`} />
-              <span className={enhance ? 'text-orange-600 dark:text-orange-400' : 'text-foreground'}>
+              <Sparkles className={`h-6 w-6 transition-all duration-300 ${enhance ? 'text-purple-500' : 'text-muted-foreground'}`} />
+              <span className={enhance ? 'text-purple-600 dark:text-purple-400' : 'text-foreground'}>
                 ✨ Enhance for Marks
               </span>
               {enhance && (
-                <Badge className="bg-orange-500 text-white text-sm font-bold px-3 py-1 shadow-md">
+                <Badge className="bg-purple-500 text-white text-sm font-bold px-3 py-1 shadow-md">
                   🔥 ACTIVE
                 </Badge>
               )}
             </Label>
-            <p className={`text-base mt-2 font-medium ${enhance ? 'text-orange-600 dark:text-orange-400' : 'text-muted-foreground'}`}>
+            <p className={`text-base mt-2 font-medium ${enhance ? 'text-purple-600 dark:text-purple-400' : 'text-muted-foreground'}`}>
               {enhance 
                 ? "✨ Flashcards will use premium exam-board specific language and mark scheme terminology"
                 : "Generate standard flashcards from your notes"
@@ -278,9 +278,9 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
         </div>
         
         {enhance && subject && examBoard && (
-          <div className="mt-6 p-5 bg-orange-50/80 dark:bg-orange-950/30 backdrop-blur-sm rounded-xl border border-orange-200 dark:border-orange-800 shadow-sm">
-            <h4 className="text-base font-bold text-orange-700 dark:text-orange-300 mb-3 flex items-center gap-2">
-              <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+          <div className="mt-6 p-5 bg-purple-50/80 dark:bg-purple-950/30 backdrop-blur-sm rounded-xl border border-purple-200 dark:border-purple-800 shadow-sm">
+            <h4 className="text-base font-bold text-purple-700 dark:text-purple-300 mb-3 flex items-center gap-2">
+              <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
               Enhanced Mode Preview ({subjects.find(s => s.id === subject)?.name} - {examBoard})
             </h4>
             <div className="space-y-3">
@@ -288,8 +288,8 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
                 <span className="font-bold text-muted-foreground">📝 Normal:</span> 
                 <span className="ml-3 font-medium">"What is photosynthesis?"</span>
               </div>
-              <div className="p-4 bg-orange-100/80 dark:bg-orange-900/40 rounded-lg border border-orange-300 dark:border-orange-700 shadow-sm">
-                <span className="font-bold text-orange-700 dark:text-orange-300">🚀 Enhanced:</span> 
+              <div className="p-4 bg-purple-100/80 dark:bg-purple-900/40 rounded-lg border border-purple-300 dark:border-purple-700 shadow-sm">
+                <span className="font-bold text-purple-700 dark:text-purple-300">🚀 Enhanced:</span> 
                 <span className="ml-3 font-bold">"Explain the process of photosynthesis. (4 marks, {examBoard} Biology)"</span>
               </div>
             </div>
@@ -335,7 +335,7 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
                     🎯 Smart Generated
                   </Badge>
                   {enhance && (
-                    <Badge className="bg-gradient-to-r from-orange-400 to-amber-400 text-white text-sm font-bold px-4 py-2 shadow-md">
+                    <Badge className="bg-gradient-to-r from-purple-400 to-violet-400 text-white text-sm font-bold px-4 py-2 shadow-md">
                       🚀 Enhanced for Marks
                     </Badge>
                   )}
@@ -376,12 +376,12 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
                 {generatedFlashcards.map((flashcard, index) => (
                   <div key={index} className={`border rounded-xl p-4 transition-all duration-200 hover:shadow-lg hover:scale-[1.01] ${
                     enhance 
-                      ? 'bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 border-orange-200 dark:border-orange-700/50 shadow-md' 
+                      ? 'bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 border-purple-200 dark:border-purple-700/50 shadow-md' 
                       : 'bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border-emerald-200 dark:border-emerald-700/50 shadow-sm'
                   }`}>
                     {enhance && (
                       <div className="flex justify-end mb-2">
-                        <Badge className="bg-gradient-to-r from-orange-400 to-red-400 text-white text-xs font-bold">
+                        <Badge className="bg-gradient-to-r from-purple-400 to-violet-400 text-white text-xs font-bold">
                           <Sparkles className="h-3 w-3 mr-1" />
                           Enhanced
                         </Badge>
