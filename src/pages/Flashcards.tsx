@@ -386,8 +386,13 @@ const Flashcards = () => {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
-        <header className="bg-card border-b border-border p-6">
-          <h1 className="text-2xl font-bold">Flashcards</h1>
+        <header className="bg-gradient-to-r from-primary/10 via-accent/10 to-secondary/10 border-b border-border p-6">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <Brain className="h-6 w-6 text-primary" />
+            </div>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">Flashcards</h1>
+          </div>
           <p className="text-muted-foreground">Create and study with AI-generated flashcards</p>
         </header>
 

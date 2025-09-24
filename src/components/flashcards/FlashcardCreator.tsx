@@ -167,13 +167,17 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
   return (
     <div className="space-y-6">
       {/* Generation Form */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Brain className="h-5 w-5" />
-            Create Flashcards from Notes
+      <Card className="border-2 border-primary/20 bg-gradient-to-br from-card to-primary/5">
+        <CardHeader className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-t-lg border-b border-primary/20">
+          <CardTitle className="flex items-center gap-3">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <Brain className="h-5 w-5 text-primary" />
+            </div>
+            <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+              Create Flashcards from Notes
+            </span>
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-muted-foreground/90">
             Paste your study notes and we'll automatically generate flashcards for effective revision
           </CardDescription>
         </CardHeader>
@@ -282,7 +286,7 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
           <Button
             onClick={handleGenerate}
             disabled={isGenerating || !notes.trim() || !subject || !examBoard || notes.length < 50}
-            className="w-full"
+            className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-300"
             size="lg"
           >
             {isGenerating ? (
@@ -302,11 +306,15 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
 
       {/* Generated Flashcards Preview */}
       {generatedFlashcards.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <BookOpen className="h-5 w-5" />
-              Generated Flashcards ({generatedFlashcards.length})
+        <Card className="border-2 border-accent/30 bg-gradient-to-br from-card to-accent/5">
+          <CardHeader className="bg-gradient-to-r from-accent/10 to-secondary/10 rounded-t-lg border-b border-accent/20">
+            <CardTitle className="flex items-center gap-3">
+              <div className="p-2 bg-accent/10 rounded-lg">
+                <BookOpen className="h-5 w-5 text-accent-foreground" />
+              </div>
+              <span className="bg-gradient-to-r from-accent-foreground to-accent-foreground/70 bg-clip-text text-transparent">
+                Generated Flashcards ({generatedFlashcards.length})
+              </span>
               {enhance && (
                 <span className="px-2 py-1 text-xs bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full flex items-center gap-1">
                   <Sparkles className="h-3 w-3" />
@@ -362,11 +370,11 @@ export const FlashcardCreator = ({ onSetCreated }: FlashcardCreatorProps) => {
             </div>
 
             {/* Save Button */}
-            <div className="pt-4 border-t border-border">
+            <div className="pt-4 border-t border-accent/20">
               <Button
                 onClick={handleSave}
                 disabled={isSaving}
-                className="w-full"
+                className="w-full bg-gradient-to-r from-accent to-accent/80 hover:from-accent/90 hover:to-accent/70 shadow-lg hover:shadow-xl transition-all duration-300"
                 size="lg"
               >
                 {isSaving ? (
