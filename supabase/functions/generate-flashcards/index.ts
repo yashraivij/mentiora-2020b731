@@ -49,13 +49,17 @@ Response format must be valid JSON:
 
     if (enhance) {
       systemPrompt += `\n\nENHANCED MODE - EXAM BOARD SPECIFIC:
-- Use ${examBoard} ${subject} specification language exactly
-- Include command words from mark schemes (explain, describe, evaluate, assess, etc.)
-- Focus on "what examiners want to see" in answers
-- Use precise terminology from the specification
-- Include grade boundaries language (e.g., "for full marks include...")
-- Reference case studies, examples, or specific content from ${examBoard} specification
-- Structure answers as examiners expect to see them`;
+CRITICAL: Stay 100% faithful to the user's notes content. Do NOT add unrelated information.
+
+Enhancement Rules:
+- Transform questions into exam-style command words (explain, describe, evaluate, state, etc.)
+- Add mark allocations where appropriate (e.g., "(2 marks)")
+- Use ${examBoard} ${subject} specification terminology for the SAME concepts in the notes
+- Expand abbreviated points from notes into clearer, mark-earning detail
+- Structure answers as examiners expect, but only using content from the provided notes
+- Add precision using mark scheme language for the topics actually covered in the notes
+
+FORBIDDEN: Adding new topics, case studies, or examples not mentioned in the user's notes`;
     }
 
     const userPrompt = `Subject: ${subject} (${examBoard})
