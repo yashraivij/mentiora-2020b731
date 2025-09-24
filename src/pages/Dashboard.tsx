@@ -2161,7 +2161,7 @@ const Dashboard = () => {
                 {flashcardView === "create" && (
                   <div className="space-y-8">
                     {/* Welcome Section */}
-                    <div className="bg-card/80 backdrop-blur-xl rounded-2xl shadow-xl border border-border p-8 text-center">
+                    <div className="p-8 text-center">
                       <div className="w-16 h-16 bg-gradient-to-r from-sky-400 to-blue-400 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
                         <BookOpen className="w-8 h-8 text-white" />
                       </div>
@@ -2171,11 +2171,6 @@ const Dashboard = () => {
                       <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
                         Transform your study notes into powerful flashcards with AI analysis and exam-board optimization
                       </p>
-                      <div className="flex items-center justify-center space-x-2 mt-6">
-                        <div className="w-2 h-2 bg-sky-400 rounded-full animate-pulse"></div>
-                        <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse delay-75"></div>
-                        <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse delay-150"></div>
-                      </div>
                     </div>
 
                     {/* Creator Component */}
