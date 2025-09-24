@@ -2013,7 +2013,7 @@ const Dashboard = () => {
             </div>
           )}
 
-          {activeTab !== "learn" && activeTab !== "notes" && activeTab !== "progress" && activeTab !== "profile" && activeTab !== "quests" && activeTab !== "leaderboards" && (
+          {activeTab !== "learn" && activeTab !== "notes" && activeTab !== "progress" && activeTab !== "profile" && activeTab !== "quests" && activeTab !== "leaderboards" && activeTab !== "flashcards" && (
             <div className="text-center py-16">
               <h2 className="text-3xl font-bold text-foreground mb-6 capitalize">
                 {activeTab}
