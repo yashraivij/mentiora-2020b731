@@ -1262,7 +1262,46 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      user_activity_analytics: {
+        Row: {
+          activities_count: number | null
+          activity_date: string | null
+          actual_study_minutes: number | null
+          chat_interactions: number | null
+          completed_study_sessions: number | null
+          daily_logins: number | null
+          email: string | null
+          engagement_level: string | null
+          flashcard_reviews: number | null
+          full_name: string | null
+          last_activity_time: string | null
+          notebook_entries: number | null
+          practice_sessions: number | null
+          study_modes: string[] | null
+          study_sessions: number | null
+          subscription_status: string | null
+          total_minutes: number | null
+        }
+        Relationships: []
+      }
+      weekly_user_analytics: {
+        Row: {
+          active_days: number | null
+          avg_daily_minutes: number | null
+          email: string | null
+          full_name: string | null
+          subscription_status: string | null
+          week_start: string | null
+          weekly_activities: number | null
+          weekly_engagement_level: string | null
+          weekly_flashcards: number | null
+          weekly_logins: number | null
+          weekly_minutes: number | null
+          weekly_practice: number | null
+          weekly_study_sessions: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       calculate_exam_duration: {
@@ -1284,6 +1323,19 @@ export type Database = {
       get_subscription_stats: {
         Args: Record<PropertyKey, never>
         Returns: Json
+      }
+      get_top_active_users: {
+        Args: { end_date?: string; limit_count?: number; start_date?: string }
+        Returns: {
+          active_days: number
+          avg_daily_minutes: number
+          email: string
+          full_name: string
+          primary_activities: string[]
+          subscription_status: string
+          total_activities: number
+          total_minutes: number
+        }[]
       }
       get_user_performance_summary: {
         Args: { days_back?: number; user_uuid: string }
