@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
-import { X, MessageCircle, Send, Bot, User } from "lucide-react";
+import { X, GraduationCap, Send, Sparkles, User, BookOpen, Target } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Question } from "@/data/curriculum";
@@ -185,61 +185,81 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssist
   if (!isOpen) return null;
 
   return (
-    <Card className="fixed right-4 top-4 bottom-4 w-96 z-50 shadow-2xl border-2 border-border bg-card/95 backdrop-blur-sm">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 border-b border-border" style={{ background: 'var(--gradient-primary)' }}>
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg border border-white/30">
-            <MessageCircle className="h-4 w-4 text-white" />
+    <Card className="fixed right-4 top-4 bottom-4 w-[420px] z-50 shadow-2xl border border-border/50 bg-card/95 backdrop-blur-lg overflow-hidden">
+      <CardHeader className="relative bg-gradient-to-br from-primary via-primary/90 to-accent p-6 border-b-0">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+        <div className="relative flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center shadow-lg border border-white/20">
+              <GraduationCap className="h-5 w-5 text-white" />
+            </div>
+            <div>
+              <CardTitle className="text-base font-bold text-white drop-shadow-sm">
+                AI Study Assistant
+              </CardTitle>
+              <p className="text-xs text-white/80 font-medium">
+                Interactive Learning Guide
+              </p>
+            </div>
           </div>
-          <CardTitle className="text-sm font-semibold text-white drop-shadow-sm">
-            Study Helper
-          </CardTitle>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            onClick={onClose} 
+            className="hover:bg-white/15 text-white/90 hover:text-white transition-all duration-200 w-8 h-8 p-0 rounded-lg"
+          >
+            <X className="h-4 w-4" />
+          </Button>
         </div>
-        <Button variant="ghost" size="sm" onClick={onClose} className="hover:bg-white/20 text-white">
-          <X className="h-4 w-4" />
-        </Button>
       </CardHeader>
       
-      <CardContent className="flex flex-col h-[calc(100vh-8rem)]">
-        <div className="text-xs mb-2 p-3 rounded-lg border border-border" style={{ background: 'var(--gradient-accent)' }}>
-          <div className="flex items-center gap-2 font-medium text-white drop-shadow-sm">
-            <Bot className="h-4 w-4 text-white" />
-            Let's work through this question together step by step!
+      <CardContent className="flex flex-col h-[calc(100vh-10rem)] p-0">
+        <div className="p-4 bg-gradient-to-r from-accent/10 via-primary/5 to-accent/10 border-b border-border/30">
+          <div className="flex items-start gap-3 p-3 rounded-xl bg-card/60 backdrop-blur-sm border border-border/30">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center shadow-sm">
+              <Target className="h-4 w-4 text-white" />
+            </div>
+            <div className="flex-1">
+              <p className="text-xs font-semibold text-foreground/90 mb-1">Learning Objective</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Master this concept through guided practice and personalized feedback
+              </p>
+            </div>
           </div>
         </div>
         
-        <ScrollArea className="flex-1 pr-4" ref={scrollAreaRef}>
-          <div className="space-y-4">
-            {messages.map((message) => (
+        <ScrollArea className="flex-1 px-4" ref={scrollAreaRef}>
+          <div className="space-y-6 py-4">
+            {messages.map((message, index) => (
               <div
                 key={message.id}
                 className={`flex gap-3 ${
                   message.role === 'user' ? 'justify-end' : 'justify-start'
-                }`}
+                } animate-in fade-in duration-300`}
+                style={{ animationDelay: `${index * 50}ms` }}
               >
                 <div
-                  className={`flex gap-2 max-w-[85%] ${
+                  className={`flex gap-3 max-w-[85%] ${
                     message.role === 'user' ? 'flex-row-reverse' : 'flex-row'
                   }`}
                 >
-                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center shadow-lg border-2 border-white/30 ${
+                  <div className={`flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center shadow-md border ${
                     message.role === 'user' 
-                      ? 'text-white' 
-                      : 'text-white'
-                  }`} style={{ background: message.role === 'user' ? 'var(--gradient-primary)' : 'var(--gradient-accent)' }}>
+                      ? 'bg-gradient-to-br from-primary to-primary/80 border-primary/20 text-white' 
+                      : 'bg-gradient-to-br from-accent to-accent/80 border-accent/20 text-white'
+                  }`}>
                     {message.role === 'user' ? (
                       <User className="h-4 w-4" />
                     ) : (
-                      <Bot className="h-4 w-4" />
+                      <Sparkles className="h-4 w-4" />
                     )}
                   </div>
                   <div
-                    className={`px-4 py-3 rounded-xl text-sm whitespace-pre-wrap shadow-lg border border-white/20 ${
+                    className={`px-4 py-3 rounded-2xl text-sm whitespace-pre-wrap shadow-sm border backdrop-blur-sm transition-all duration-200 hover:shadow-md ${
                       message.role === 'user'
-                        ? 'text-white'
-                        : 'text-card-foreground'
+                        ? 'bg-gradient-to-br from-primary/90 to-primary border-primary/20 text-white rounded-tr-md'
+                        : 'bg-card/80 border-border/30 text-card-foreground rounded-tl-md'
                     }`}
-                    style={{ background: message.role === 'user' ? 'var(--gradient-primary)' : 'var(--gradient-secondary)' }}
                   >
                     {message.content}
                   </div>
@@ -247,16 +267,19 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssist
               </div>
             ))}
             {isLoading && (
-              <div className="flex gap-3 justify-start">
-                <div className="flex gap-2">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center shadow-lg border-2 border-white/30 text-white" style={{ background: 'var(--gradient-accent)' }}>
-                    <Bot className="h-4 w-4" />
+              <div className="flex gap-3 justify-start animate-in fade-in duration-300">
+                <div className="flex gap-3">
+                  <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-accent/80 border border-accent/20 flex items-center justify-center shadow-md text-white">
+                    <Sparkles className="h-4 w-4" />
                   </div>
-                  <div className="px-4 py-3 rounded-xl text-sm shadow-lg border border-white/20 text-card-foreground" style={{ background: 'var(--gradient-secondary)' }}>
-                    <div className="flex gap-1">
-                      <div className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'hsl(217 91% 60%)' }}></div>
-                      <div className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'hsl(217 91% 60%)', animationDelay: '0.1s' }}></div>
-                      <div className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'hsl(217 91% 60%)', animationDelay: '0.2s' }}></div>
+                  <div className="px-4 py-3 rounded-2xl rounded-tl-md text-sm shadow-sm border border-border/30 bg-card/80 backdrop-blur-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="flex gap-1">
+                        <div className="w-2 h-2 rounded-full bg-primary animate-bounce"></div>
+                        <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                        <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      </div>
+                      <span className="text-xs text-muted-foreground">Thinking...</span>
                     </div>
                   </div>
                 </div>
@@ -265,35 +288,35 @@ export const ChatAssistant = ({ question, subject, isOpen, onClose }: ChatAssist
           </div>
         </ScrollArea>
 
-        <div className="border-t border-border pt-3 mt-3 space-y-3 p-3 rounded-lg" style={{ background: 'var(--gradient-background)' }}>
+        <div className="p-4 bg-gradient-to-t from-card via-card/95 to-card/80 backdrop-blur-sm border-t border-border/30 space-y-3">
           {stage !== 'final' && hintCount >= 2 && (
             <Button
               variant="outline"
               size="sm"
               onClick={showModelAnswer}
               disabled={isLoading}
-              className="w-full text-xs text-white border-white/30 hover:bg-white/20 transition-all duration-200"
-              style={{ background: 'var(--gradient-accent)' }}
+              className="w-full bg-gradient-to-r from-accent/10 to-accent/5 border-accent/30 text-accent hover:bg-accent/15 hover:border-accent/40 transition-all duration-200 font-medium"
             >
-              <Bot className="h-3 w-3 mr-1" />
-              Show me the answer
+              <BookOpen className="h-4 w-4 mr-2" />
+              View Model Answer
             </Button>
           )}
           
-          <form onSubmit={handleSubmit} className="flex gap-2">
-            <Input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Type your answer or ask for help..."
-              disabled={isLoading}
-              className="text-sm"
-            />
+          <form onSubmit={handleSubmit} className="flex gap-3">
+            <div className="flex-1 relative">
+              <Input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Share your thoughts or ask for guidance..."
+                disabled={isLoading}
+                className="pr-12 bg-card/50 backdrop-blur-sm border-border/40 focus:border-primary/40 focus:bg-card/80 transition-all duration-200 rounded-xl"
+              />
+            </div>
             <Button
               type="submit"
               size="sm"
               disabled={!input.trim() || isLoading}
-              className="shadow-lg text-white hover:opacity-90"
-              style={{ background: 'var(--gradient-primary)' }}
+              className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 text-white shadow-md hover:shadow-lg transition-all duration-200 px-4 rounded-xl border-0"
             >
               <Send className="h-4 w-4" />
             </Button>
