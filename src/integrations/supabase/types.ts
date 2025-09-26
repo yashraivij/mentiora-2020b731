@@ -1363,6 +1363,10 @@ export type Database = {
         Args: { p_points: number; p_user_id: string }
         Returns: number
       }
+      recalculate_daily_usage: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
       reset_user_points_based_on_activities: {
         Args: { p_user_id: string }
         Returns: number
