@@ -1284,6 +1284,40 @@ export type Database = {
         }
         Relationships: []
       }
+      user_login_summary: {
+        Row: {
+          active_weeks: number | null
+          avg_weekly_logins: number | null
+          email: string | null
+          first_login_ever: string | null
+          full_name: string | null
+          last_login_ever: string | null
+          max_weekly_logins: number | null
+          min_weekly_logins: number | null
+          subscription_status: string | null
+          total_lifetime_logins: number | null
+          unique_login_days: number | null
+          user_type: string | null
+        }
+        Relationships: []
+      }
+      weekly_login_analytics: {
+        Row: {
+          avg_days_between_logins: number | null
+          email: string | null
+          first_login_of_week: string | null
+          full_name: string | null
+          last_login_of_week: string | null
+          login_days: string[] | null
+          login_frequency_percentage: number | null
+          login_pattern: string | null
+          subscription_status: string | null
+          total_logins: number | null
+          unique_login_days: number | null
+          week_start: string | null
+        }
+        Relationships: []
+      }
       weekly_user_analytics: {
         Row: {
           active_days: number | null
