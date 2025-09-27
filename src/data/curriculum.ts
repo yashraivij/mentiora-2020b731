@@ -23710,6 +23710,150 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'empress-q2',
+            question: 'How does Gupta present the character of Lakshmibai in The Empress?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Lakshmibai is presented as both warrior and mother, embodying strength and vulnerability. Gupta shows her transformation from protected ruler to fierce resistance leader while exploring the personal costs of political leadership and colonial defiance.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and development (8 marks)',
+                'Warrior/mother duality examination (8 marks)',
+                'Leadership transformation understanding (7 marks)',
+                'Personal cost analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'empress-q3',
+            question: 'Analyse the presentation of colonialism and empire in The Empress.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Gupta critiques British imperialism through its impact on Indian society, showing cultural destruction and economic exploitation. The play explores how colonialism justified itself while revealing the violence and racism underlying imperial control.',
+            markingCriteria: {
+              breakdown: [
+                'Colonial critique analysis (8 marks)',
+                'Imperial justification examination (8 marks)',
+                'Cultural destruction understanding (7 marks)',
+                'Violence and racism analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'empress-q4',
+            question: 'How does Gupta explore themes of motherhood and duty in the play?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Motherhood creates both motivation and vulnerability for Lakshmibai, whose duty to her son conflicts with political obligations. Gupta shows how maternal instinct can drive political action while examining the impossible choices faced by women leaders.',
+            markingCriteria: {
+              breakdown: [
+                'Motherhood theme analysis (8 marks)',
+                'Duty conflict examination (8 marks)',
+                'Political motivation understanding (7 marks)',
+                'Women leaders analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'empress-q5',
+            question: 'Examine the role of cultural identity in The Empress.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Cultural identity becomes both strength and target under colonialism, with Indian traditions threatened by British dominance. Characters struggle to maintain cultural authenticity while adapting to colonial pressures and changing circumstances.',
+            markingCriteria: {
+              breakdown: [
+                'Cultural identity analysis (8 marks)',
+                'Colonial threat examination (8 marks)',
+                'Tradition preservation understanding (7 marks)',
+                'Adaptation struggle analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'empress-q6',
+            question: 'How does Gupta present the theme of sacrifice in The Empress?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Sacrifice operates on personal and political levels, with characters choosing between individual desires and collective needs. Lakshmibai\'s ultimate sacrifice demonstrates how resistance requires personal loss while questioning the value of such sacrifice.',
+            markingCriteria: {
+              breakdown: [
+                'Sacrifice theme analysis (8 marks)',
+                'Personal vs political examination (8 marks)',
+                'Individual/collective choice understanding (7 marks)',
+                'Resistance cost analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'empress-q7',
+            question: 'Analyse the dramatic techniques used in The Empress.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Gupta employs epic theatre techniques, flashbacks, and multiple perspectives to tell Lakshmibai\'s story. The episodic structure and direct address engage audiences while the blend of personal and political drama creates emotional and intellectual impact.',
+            markingCriteria: {
+              breakdown: [
+                'Dramatic technique analysis (8 marks)',
+                'Epic theatre examination (8 marks)',
+                'Structural device understanding (7 marks)',
+                'Audience engagement analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'empress-q8',
+            question: 'How does Gupta explore the theme of justice in The Empress?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Justice becomes contested concept between colonial law and traditional rights, with British legal systems undermining Indian sovereignty. The play questions who defines justice and explores how power determines moral authority.',
+            markingCriteria: {
+              breakdown: [
+                'Justice theme analysis (8 marks)',
+                'Colonial vs traditional law examination (8 marks)',
+                'Power and morality understanding (7 marks)',
+                'Sovereignty question analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'empress-q9',
+            question: 'Examine the presentation of gender in The Empress.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Gender expectations complicate Lakshmibai\'s leadership, with feminine roles conflicting with warrior identity. Gupta explores how women navigate patriarchal societies while challenging gender limitations through political action.',
+            markingCriteria: {
+              breakdown: [
+                'Gender presentation analysis (8 marks)',
+                'Role conflict examination (8 marks)',
+                'Patriarchal navigation understanding (7 marks)',
+                'Gender challenge analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'empress-q10',
+            question: 'How does Gupta create dramatic impact in The Empress?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Dramatic impact emerges through emotional investment in characters, historical significance, and contemporary relevance. Gupta balances personal tragedy with political commentary while using theatrical techniques to engage modern audiences with historical events.',
+            markingCriteria: {
+              breakdown: [
+                'Dramatic impact analysis (8 marks)',
+                'Emotional engagement examination (8 marks)',
+                'Historical/contemporary balance understanding (7 marks)',
+                'Theatrical technique effectiveness (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
           }
         ]
       },
@@ -23729,6 +23873,150 @@ export const curriculum: Subject[] = [
                 'Understanding of refugee experience (8 marks)',
                 'Character development and relationships (7 marks)',
                 'Social context and relevance (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'refugee-boy-q2',
+            question: 'Analyse the character of Alem and his development throughout the play.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Alem transforms from confused child torn between parents to resilient young man accepting his complex situation. His journey shows adaptation to British society while maintaining cultural connections, demonstrating the psychological strength required for refugee survival.',
+            markingCriteria: {
+              breakdown: [
+                'Character development analysis (8 marks)',
+                'Transformation examination (8 marks)',
+                'Cultural adaptation understanding (7 marks)',
+                'Psychological resilience analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'refugee-boy-q3',
+            question: 'How does the play present themes of family and separation?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Family separation creates the play\'s central trauma, with Alem caught between warring parents and abandoned by both. The adaptation explores how political conflict destroys families while examining different models of family support and care.',
+            markingCriteria: {
+              breakdown: [
+                'Family theme analysis (8 marks)',
+                'Separation trauma examination (8 marks)',
+                'Political conflict impact understanding (7 marks)',
+                'Support systems analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'refugee-boy-q4',
+            question: 'Examine how the play addresses racism and prejudice.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Racism appears in both institutional and personal forms, affecting Alem\'s daily experiences and opportunities. The play shows how prejudice compounds refugee trauma while exploring both hostile and welcoming responses to displaced people.',
+            markingCriteria: {
+              breakdown: [
+                'Racism presentation analysis (8 marks)',
+                'Institutional vs personal prejudice (8 marks)',
+                'Impact on refugee experience (7 marks)',
+                'Community response examination (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'refugee-boy-q5',
+            question: 'How does the play explore themes of identity and cultural heritage?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Identity becomes fluid as Alem navigates between Ethiopian, Eritrean, and British cultures. The play shows how cultural heritage provides strength while adaptation requires flexibility, creating complex multicultural identity.',
+            markingCriteria: {
+              breakdown: [
+                'Identity theme analysis (8 marks)',
+                'Cultural navigation examination (8 marks)',
+                'Heritage significance understanding (7 marks)',
+                'Multicultural identity analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'refugee-boy-q6',
+            question: 'Analyse the role of language in Refugee Boy.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Language barriers create isolation while linguistic adaptation enables integration. The play shows how language carries cultural identity while English fluency becomes essential for survival and belonging in British society.',
+            markingCriteria: {
+              breakdown: [
+                'Language role analysis (8 marks)',
+                'Barrier and bridge examination (8 marks)',
+                'Cultural identity connection (7 marks)',
+                'Integration necessity understanding (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'refugee-boy-q7',
+            question: 'How does the play present the British asylum system?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The asylum system appears both protective and threatening, offering safety while creating uncertainty and bureaucratic challenges. The play critiques system failures while showing individual kindness within institutional frameworks.',
+            markingCriteria: {
+              breakdown: [
+                'Asylum system presentation (8 marks)',
+                'Protection vs threat examination (8 marks)',
+                'Bureaucratic challenge analysis (7 marks)',
+                'Individual kindness within system (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'refugee-boy-q8',
+            question: 'Examine themes of hope and resilience in Refugee Boy.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Hope sustains Alem through traumatic experiences while resilience enables survival and growth. The play shows how young people adapt to impossible circumstances while maintaining optimism about future possibilities.',
+            markingCriteria: {
+              breakdown: [
+                'Hope theme analysis (8 marks)',
+                'Resilience examination (8 marks)',
+                'Youth adaptation understanding (7 marks)',
+                'Future optimism analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'refugee-boy-q9',
+            question: 'How does the play use dramatic techniques to engage audiences?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The adaptation employs direct address, flashbacks, and multiple character portrayal to create intimacy and understanding. Dramatic techniques help audiences empathize with refugee experience while maintaining theatrical engagement.',
+            markingCriteria: {
+              breakdown: [
+                'Dramatic technique analysis (8 marks)',
+                'Audience engagement examination (8 marks)',
+                'Empathy creation understanding (7 marks)',
+                'Theatrical effectiveness analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'refugee-boy-q10',
+            question: 'Analyse the contemporary relevance of Refugee Boy.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'The play\'s refugee themes resonate with current global displacement crises, making Alem\'s story universally relevant. Contemporary staging can emphasize ongoing refugee issues while challenging audience assumptions about displacement and belonging.',
+            markingCriteria: {
+              breakdown: [
+                'Contemporary relevance analysis (8 marks)',
+                'Global displacement connection (8 marks)',
+                'Universal story understanding (7 marks)',
+                'Audience challenge examination (7 marks)'
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
@@ -23754,6 +24042,150 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'coram-boy-q2',
+            question: 'How does Gavin present the character of Aaron and his transformation?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Aaron develops from vulnerable foundling to confident young man through education and opportunity. His musical talent and moral integrity contrast with his humble origins, demonstrating individual worth transcending social circumstance.',
+            markingCriteria: {
+              breakdown: [
+                'Character development analysis (8 marks)',
+                'Transformation examination (8 marks)',
+                'Talent and integrity themes (7 marks)',
+                'Social transcendence understanding (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'coram-boy-q3',
+            question: 'Examine the presentation of social class in Coram Boy.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Social class determines opportunities and treatment, with foundlings occupying society\'s lowest position. Gavin shows how class boundaries can be crossed through talent and education while exploring the cruelties of rigid social hierarchies.',
+            markingCriteria: {
+              breakdown: [
+                'Class presentation analysis (8 marks)',
+                'Social hierarchy examination (8 marks)',
+                'Boundary crossing understanding (7 marks)',
+                'Social cruelty analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'coram-boy-q4',
+            question: 'How does Gavin explore themes of identity and belonging in the novel?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Identity becomes complex for foundlings lacking family history, with characters creating new identities through relationships and achievements. Belonging must be earned rather than inherited, making personal connections crucial for psychological security.',
+            markingCriteria: {
+              breakdown: [
+                'Identity theme analysis (8 marks)',
+                'Belonging examination (8 marks)',
+                'Family history absence understanding (7 marks)',
+                'Personal connection significance (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'coram-boy-q5',
+            question: 'Analyse the role of music in Coram Boy.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Music represents beauty and transcendence in harsh circumstances, with Aaron\'s musical gift enabling social mobility. The novel shows how art can provide meaning and connection while offering escape from material limitations.',
+            markingCriteria: {
+              breakdown: [
+                'Music role analysis (8 marks)',
+                'Transcendence and beauty examination (8 marks)',
+                'Social mobility understanding (7 marks)',
+                'Art meaning analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'coram-boy-q6',
+            question: 'How does Gavin present the theme of sacrifice in Coram Boy?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Sacrifice operates throughout the novel from mothers abandoning children to characters giving up personal desires for others\' welfare. Gavin explores both noble self-sacrifice and tragic forced sacrifice within social constraints.',
+            markingCriteria: {
+              breakdown: [
+                'Sacrifice theme analysis (8 marks)',
+                'Different sacrifice types examination (8 marks)',
+                'Noble vs forced sacrifice understanding (7 marks)',
+                'Social constraint analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'coram-boy-q7',
+            question: 'Examine the presentation of education in Coram Boy.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Education becomes pathway to social advancement and personal development, transforming foundlings into capable individuals. The novel shows education\'s power to overcome social disadvantage while highlighting its unequal availability.',
+            markingCriteria: {
+              breakdown: [
+                'Education presentation analysis (8 marks)',
+                'Social advancement examination (8 marks)',
+                'Transformation power understanding (7 marks)',
+                'Inequality analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'coram-boy-q8',
+            question: 'How does Gavin explore themes of justice and injustice in the novel?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Justice often fails the powerless while protecting the privileged, with legal systems reflecting social biases. Characters seek personal justice when institutional justice proves inadequate, questioning societal fairness.',
+            markingCriteria: {
+              breakdown: [
+                'Justice theme analysis (8 marks)',
+                'Institutional failure examination (8 marks)',
+                'Personal vs institutional justice (7 marks)',
+                'Social fairness questioning (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'coram-boy-q9',
+            question: 'Analyse the historical context and its significance in Coram Boy.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'The 18th-century setting enables exploration of rigid social hierarchies and limited opportunities for advancement. Historical context illuminates contemporary social issues while showing progress and continuity in human relationships.',
+            markingCriteria: {
+              breakdown: [
+                'Historical context analysis (8 marks)',
+                'Social hierarchy examination (8 marks)',
+                'Contemporary relevance understanding (7 marks)',
+                'Progress and continuity analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'coram-boy-q10',
+            question: 'How does Gavin create emotional impact in Coram Boy?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Emotional impact emerges through character vulnerability, separated families, and social injustices affecting innocent people. Gavin balances tragedy with hope while creating reader investment in characters\' welfare and success.',
+            markingCriteria: {
+              breakdown: [
+                'Emotional impact creation (8 marks)',
+                'Character vulnerability examination (8 marks)',
+                'Tragedy and hope balance (7 marks)',
+                'Reader investment analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
           }
         ]
       },
@@ -23773,6 +24205,150 @@ export const curriculum: Subject[] = [
                 'Character development and psychology (8 marks)',
                 'Social commentary and relevance (7 marks)',
                 'Narrative technique and perspective (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'boys-cry-q2',
+            question: 'How does Blackman present the character of Dante and his development?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Dante transforms from emotionally restricted teenager to young man accepting vulnerability and emotional expression. His journey shows masculinity redefined through grief, challenging stereotypes about male strength and emotional capacity.',
+            markingCriteria: {
+              breakdown: [
+                'Character development analysis (8 marks)',
+                'Emotional transformation examination (8 marks)',
+                'Masculinity redefinition understanding (7 marks)',
+                'Stereotype challenge analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'boys-cry-q3',
+            question: 'Analyse the presentation of grief and loss in Boys Don\'t Cry.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Grief becomes transformative force revealing emotional truth beneath social facades. Blackman shows how loss can catalyze personal growth while exploring different ways people process trauma and find healing.',
+            markingCriteria: {
+              breakdown: [
+                'Grief presentation analysis (8 marks)',
+                'Transformative force examination (8 marks)',
+                'Personal growth understanding (7 marks)',
+                'Trauma processing analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'boys-cry-q4',
+            question: 'How does Blackman explore family relationships in the novel?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Family relationships reveal both support and dysfunction, with love complicated by emotional distance and communication failures. The novel shows how crisis can either strengthen or expose family weaknesses.',
+            markingCriteria: {
+              breakdown: [
+                'Family relationship analysis (8 marks)',
+                'Support vs dysfunction examination (8 marks)',
+                'Communication failure understanding (7 marks)',
+                'Crisis impact analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'boys-cry-q5',
+            question: 'Examine the role of friendship in Boys Don\'t Cry.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Friendship provides alternative support when family proves inadequate, offering acceptance and understanding that enables healing. The novel shows how peer relationships can either reinforce or challenge social expectations.',
+            markingCriteria: {
+              breakdown: [
+                'Friendship role analysis (8 marks)',
+                'Alternative support examination (8 marks)',
+                'Acceptance and healing understanding (7 marks)',
+                'Peer pressure analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'boys-cry-q6',
+            question: 'How does Blackman present mental health in Boys Don\'t Cry?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Mental health struggles are presented realistically without stigma, showing depression and anxiety as treatable conditions requiring support. The novel advocates for seeking help while challenging masculine reluctance to show weakness.',
+            markingCriteria: {
+              breakdown: [
+                'Mental health presentation (8 marks)',
+                'Realistic portrayal examination (8 marks)',
+                'Help-seeking advocacy understanding (7 marks)',
+                'Masculine reluctance challenge (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'boys-cry-q7',
+            question: 'Analyse the narrative techniques used in Boys Don\'t Cry.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'First-person narration creates intimacy with Dante\'s internal experience while stream-of-consciousness reflects emotional turbulence. Blackman uses accessible language to engage young readers with serious themes.',
+            markingCriteria: {
+              breakdown: [
+                'Narrative technique analysis (8 marks)',
+                'First-person intimacy examination (8 marks)',
+                'Stream-of-consciousness understanding (7 marks)',
+                'Language accessibility analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'boys-cry-q8',
+            question: 'How does Blackman explore themes of identity in the novel?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Identity becomes fluid as Dante questions previous assumptions about himself and masculinity. The novel shows identity formation as ongoing process requiring honest self-examination and acceptance of complexity.',
+            markingCriteria: {
+              breakdown: [
+                'Identity theme analysis (8 marks)',
+                'Assumption questioning examination (8 marks)',
+                'Formation process understanding (7 marks)',
+                'Complexity acceptance analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'boys-cry-q9',
+            question: 'Examine the contemporary relevance of Boys Don\'t Cry.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'The novel addresses current concerns about male suicide rates, toxic masculinity, and mental health stigma. Its themes resonate with ongoing discussions about emotional wellbeing and gender expectations in modern society.',
+            markingCriteria: {
+              breakdown: [
+                'Contemporary relevance analysis (8 marks)',
+                'Current social issues examination (8 marks)',
+                'Mental health discussion understanding (7 marks)',
+                'Gender expectation analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'boys-cry-q10',
+            question: 'How does Blackman create hope and resolution in Boys Don\'t Cry?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Hope emerges through character growth, supportive relationships, and acceptance of vulnerability. Resolution involves emotional honesty rather than problem elimination, showing healing as ongoing process requiring courage and support.',
+            markingCriteria: {
+              breakdown: [
+                'Hope creation analysis (8 marks)',
+                'Character growth examination (8 marks)',
+                'Resolution understanding (7 marks)',
+                'Healing process analysis (7 marks)'
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
