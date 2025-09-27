@@ -79,7 +79,9 @@ const PredictedQuestions = () => {
       history: "from-primary via-primary/80 to-primary/60",
       geography: "from-secondary via-secondary/80 to-secondary/60",
       "computer-science": "from-accent via-accent/80 to-accent/60",
-      psychology: "from-primary via-primary/80 to-primary/60"
+      psychology: "from-primary via-primary/80 to-primary/60",
+      "psychology-component-01": "from-primary via-primary/80 to-primary/60",
+      "psychology-component-02": "from-primary via-primary/80 to-primary/60"
     };
     return colors[subjectId as keyof typeof colors] || "from-muted via-muted/80 to-muted/60";
   };
@@ -96,7 +98,9 @@ const PredictedQuestions = () => {
       history: "1h 15min",
       geography: "1h 30min",
       "computer-science": "1h 30min",
-      psychology: "1h 45min",
+      psychology: "1h 30min",
+      "psychology-component-01": "1h 30min",
+      "psychology-component-02": "1h 30min",
       "combined-science-aqa": "1h 15min"
     };
     return durations[subjectId as keyof typeof durations] || "1h 30min";
@@ -106,7 +110,7 @@ const PredictedQuestions = () => {
     if (subjectId === 'maths-edexcel' || subjectId === 'business-edexcel-igcse' || subjectId === 'chemistry-edexcel' || subjectId === 'physics-edexcel') {
       return 'Edexcel GCSE';
     }
-    if (subjectId === 'computer-science') {
+    if (subjectId === 'computer-science' || subjectId === 'psychology-component-01' || subjectId === 'psychology-component-02') {
       return 'OCR GCSE';
     }
     return 'AQA GCSE';
@@ -606,11 +610,127 @@ const PredictedQuestions = () => {
                            </Button>
                          </div>
                        </CardContent>
-                     </Card>
-                   </>
-                 )}
+                      </Card>
 
-                 {curriculum
+                      {/* Psychology Component 01 */}
+                      <Card 
+                        className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border border-border hover:bg-card/70 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+                      >
+                        <div className={`absolute inset-0 bg-gradient-to-br from-primary via-primary/80 to-primary/60 opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
+                        
+                        <CardHeader className="relative pb-4">
+                          <div className="flex items-center justify-between">
+                            <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br from-primary via-primary/80 to-primary/60 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 border border-white/20`}>
+                              <BookOpen className="h-7 w-7 text-white" />
+                            </div>
+                            <Badge className="bg-primary/20 text-primary-foreground border-primary/30 backdrop-blur-sm text-xs">
+                              OCR GCSE
+                            </Badge>
+                          </div>
+                          <CardTitle className="text-xl font-bold text-card-foreground group-hover:text-accent-foreground transition-colors mt-3">
+                            Psychology Component 01
+                          </CardTitle>
+                          <CardDescription className="text-muted-foreground text-sm">
+                            Studies & applications in psychology 1 - Criminal Psychology, Development, Psychological Problems
+                          </CardDescription>
+                        </CardHeader>
+                        
+                        <CardContent className="relative pt-0">
+                          <div className="space-y-4">
+                            <div className="space-y-3">
+                              <div className="flex items-center space-x-3 bg-muted/50 rounded-xl p-3 backdrop-blur-sm border border-border">
+                                <div className="p-1.5 bg-primary/20 rounded-lg">
+                                  <Clock className="h-4 w-4 text-primary" />
+                                </div>
+                                <div>
+                                  <p className="text-card-foreground text-sm font-medium">Duration: 1h 30min</p>
+                                  <p className="text-muted-foreground text-xs">Real exam timing</p>
+                                </div>
+                              </div>
+                              
+                              <div className="flex items-center space-x-3 bg-muted/50 rounded-xl p-3 backdrop-blur-sm border border-border">
+                                <div className="p-1.5 bg-secondary/20 rounded-lg">
+                                  <Target className="h-4 w-4 text-secondary-foreground" />
+                                </div>
+                                <div>
+                                  <p className="text-card-foreground text-sm font-medium">90 marks</p>
+                                  <p className="text-muted-foreground text-xs">50% of total GCSE</p>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <Button 
+                              onClick={() => navigate('/predicted-exam/psychology-component-01')}
+                              className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-bold py-3 px-6 rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-[1.02] border border-primary/30 backdrop-blur-sm"
+                            >
+                              <Crown className="h-4 w-4 mr-2" />
+                              Start Premium Exam
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+
+                      {/* Psychology Component 02 */}
+                      <Card 
+                        className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border border-border hover:bg-card/70 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+                      >
+                        <div className={`absolute inset-0 bg-gradient-to-br from-primary via-primary/80 to-primary/60 opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
+                        
+                        <CardHeader className="relative pb-4">
+                          <div className="flex items-center justify-between">
+                            <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br from-primary via-primary/80 to-primary/60 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 border border-white/20`}>
+                              <BookOpen className="h-7 w-7 text-white" />
+                            </div>
+                            <Badge className="bg-primary/20 text-primary-foreground border-primary/30 backdrop-blur-sm text-xs">
+                              OCR GCSE
+                            </Badge>
+                          </div>
+                          <CardTitle className="text-xl font-bold text-card-foreground group-hover:text-accent-foreground transition-colors mt-3">
+                            Psychology Component 02
+                          </CardTitle>
+                          <CardDescription className="text-muted-foreground text-sm">
+                            Studies & applications in psychology 2 - Social Influence, Memory, Sleep & Dreaming
+                          </CardDescription>
+                        </CardHeader>
+                        
+                        <CardContent className="relative pt-0">
+                          <div className="space-y-4">
+                            <div className="space-y-3">
+                              <div className="flex items-center space-x-3 bg-muted/50 rounded-xl p-3 backdrop-blur-sm border border-border">
+                                <div className="p-1.5 bg-primary/20 rounded-lg">
+                                  <Clock className="h-4 w-4 text-primary" />
+                                </div>
+                                <div>
+                                  <p className="text-card-foreground text-sm font-medium">Duration: 1h 30min</p>
+                                  <p className="text-muted-foreground text-xs">Real exam timing</p>
+                                </div>
+                              </div>
+                              
+                              <div className="flex items-center space-x-3 bg-muted/50 rounded-xl p-3 backdrop-blur-sm border border-border">
+                                <div className="p-1.5 bg-secondary/20 rounded-lg">
+                                  <Target className="h-4 w-4 text-secondary-foreground" />
+                                </div>
+                                <div>
+                                  <p className="text-card-foreground text-sm font-medium">90 marks</p>
+                                  <p className="text-muted-foreground text-xs">50% of total GCSE</p>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <Button 
+                              onClick={() => navigate('/predicted-exam/psychology-component-02')}
+                              className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-bold py-3 px-6 rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-[1.02] border border-primary/30 backdrop-blur-sm"
+                            >
+                              <Crown className="h-4 w-4 mr-2" />
+                              Start Premium Exam
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </>
+                  )}
+
+                  {curriculum
                     .filter((subject) => {
                        // Show maths-edexcel, business-edexcel-igcse, chemistry-edexcel, and physics-edexcel only in edexcel tab
                        if (subject.id === 'maths-edexcel' || subject.id === 'business-edexcel-igcse' || subject.id === 'chemistry-edexcel' || subject.id === 'physics-edexcel') {
