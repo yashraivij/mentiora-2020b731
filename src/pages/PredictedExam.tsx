@@ -3418,7 +3418,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         {
           id: 'ocr-geo-5a',
           questionNumber: 22,
-          text: 'State one physical geography fieldwork question you investigated.',
+          text: 'Identify one method of primary data collection used in physical geography fieldwork.',
           marks: 1,
           section: 'Physical Geography Fieldwork'
         },
