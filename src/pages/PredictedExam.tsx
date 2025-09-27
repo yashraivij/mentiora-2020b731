@@ -65,6 +65,16 @@ const PredictedExam = () => {
       return '';
     }
     
+    // For Spanish AQA papers, use consistent tier labeling based on subjectId
+    if (subjectId === 'spanish-aqa' || subjectId?.startsWith('spanish-aqa-paper-')) {
+      if (subjectId?.includes('foundation')) {
+        return '[Foundation Tier]';
+      } else if (subjectId?.includes('higher')) {
+        return '[Higher Tier]';
+      }
+      return '';
+    }
+    
     // Get the original question data to check difficulty
     let difficulty = 'easy';
     let marks = question.marks;
@@ -1185,10 +1195,18 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         });
 
         questions.push({
-          id: `${subjectId}-text1-q5`,
+          id: `${subjectId}-text1-q5a`,
           questionNumber: questionNumber++,
-          text: `${text1Passage}\n\nTick True/False:\na) The shop will stay open later than usual.\nb) The guitar lessons are only for experts.\n\n[2 marks]`,
-          marks: 2,
+          text: `${text1Passage}\n\nAccording to the messages, will the shop stay open later than usual? Give a reason for your answer.\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text1-q5b`,
+          questionNumber: questionNumber++,
+          text: `${text1Passage}\n\nAre the guitar lessons only for experts? Give a reason for your answer.\n\n[1 mark]`,
+          marks: 1,
           section: 'A'
         });
 
@@ -1222,7 +1240,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text2-q4`,
           questionNumber: questionNumber++,
-          text: `${text2Passage}\n\nChoose the two correct statements:\nA) The writer now plays more video games.\nB) The writer cooks at home.\nC) The writer feels more stressed.\nD) The writer runs in the park.\n\n[2 marks]`,
+          text: `${text2Passage}\n\nWrite down two things the writer now does to maintain a healthy lifestyle.\n\n[2 marks]`,
           marks: 2,
           section: 'A'
         });
@@ -1300,8 +1318,40 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text4-q1`,
           questionNumber: questionNumber++,
-          text: `${text4Passage}\n\nMatch 1–4 to purposes A–F (two are extra):\nA meet local people B reduce waste C learn quick meals D improve exam grades E learn local history F safe tech use\n\n[6 marks]`,
-          marks: 6,
+          text: `${text4Passage}\n\nWhich announcement is about environmental education?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text4-q2`,
+          questionNumber: questionNumber++,
+          text: `${text4Passage}\n\nWhich announcement is about technology safety?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text4-q3`,
+          questionNumber: questionNumber++,
+          text: `${text4Passage}\n\nWhich announcement is about local heritage?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text4-q4`,
+          questionNumber: questionNumber++,
+          text: `${text4Passage}\n\nWhich announcement is about healthy cooking?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text4-q5`,
+          questionNumber: questionNumber++,
+          text: `${text4Passage}\n\nWrite down the main purpose of each announcement.\n\n[2 marks]`,
+          marks: 2,
           section: 'A'
         });
 
@@ -1488,8 +1538,40 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         questions.push({
           id: `${subjectId}-text4-q1`,
           questionNumber: questionNumber++,
-          text: `${text4Passage}\n\nMatch 1–4 to purposes A–F (two extra):\nA language practice B volunteering as tutors C donate clothes only D submit creative writing E fundraising sale F exam preparation\n\n[12 marks]`,
-          marks: 12,
+          text: `${text4Passage}\n\nWhich announcement is about helping primary school children?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text4-q2`,
+          questionNumber: questionNumber++,
+          text: `${text4Passage}\n\nWhich announcement is about a writing competition?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text4-q3`,
+          questionNumber: questionNumber++,
+          text: `${text4Passage}\n\nWhich announcement is about selling second-hand items?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text4-q4`,
+          questionNumber: questionNumber++,
+          text: `${text4Passage}\n\nWhich announcement is about language learning?\n\n[1 mark]`,
+          marks: 1,
+          section: 'A'
+        });
+
+        questions.push({
+          id: `${subjectId}-text4-q5`,
+          questionNumber: questionNumber++,
+          text: `${text4Passage}\n\nExplain the main purpose of each announcement.\n\n[8 marks]`,
+          marks: 8,
           section: 'A'
         });
 
