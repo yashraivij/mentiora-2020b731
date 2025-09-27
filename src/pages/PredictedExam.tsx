@@ -3425,7 +3425,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         {
           id: 'ocr-geo-5b',
           questionNumber: 23,
-          text: 'Explain how you collected and presented your data for this investigation.',
+          text: 'Explain two advantages of using secondary data in geographical investigations.',
           marks: 2,
           section: 'Physical Geography Fieldwork'
         }
