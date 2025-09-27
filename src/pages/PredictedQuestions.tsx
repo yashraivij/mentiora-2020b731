@@ -106,6 +106,9 @@ const PredictedQuestions = () => {
     if (subjectId === 'maths-edexcel' || subjectId === 'business-edexcel-igcse' || subjectId === 'chemistry-edexcel' || subjectId === 'physics-edexcel') {
       return 'Edexcel GCSE';
     }
+    if (subjectId === 'computer-science') {
+      return 'OCR GCSE';
+    }
     return 'AQA GCSE';
   };
 
