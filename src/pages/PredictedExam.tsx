@@ -3284,7 +3284,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         {
           id: 'ocr-geo-1d',
           questionNumber: 4,
-          text: 'Study Figure 1, a map showing global tropical storm tracks.\nDescribe the distribution of tropical storms.',
+          text: 'Describe the global distribution of tropical storms.',
           marks: 3,
           section: 'Global Hazards'
         },
@@ -3321,7 +3321,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         {
           id: 'ocr-geo-2c',
           questionNumber: 9,
-          text: 'Study Figure 2, a graph showing global CO₂ levels and temperature.\nDescribe the relationship between CO₂ levels and global temperatures.',
+          text: 'Describe the relationship between CO₂ levels and global temperatures.',
           marks: 3,
           section: 'Changing Climate'
         },
@@ -3365,7 +3365,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         {
           id: 'ocr-geo-3d',
           questionNumber: 15,
-          text: 'Study Figure 3, a photograph of a coastal landscape.\nDescribe two landforms shown and explain how they were formed.',
+          text: 'Describe two coastal landforms and explain how they are formed.',
           marks: 5,
           section: 'Distinctive Landscapes'
         },
@@ -3402,7 +3402,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         {
           id: 'ocr-geo-4d',
           questionNumber: 20,
-          text: 'Study Figure 4, an image showing deforestation in the Amazon Rainforest.\nDescribe the environmental impacts shown.',
+          text: 'Describe the environmental impacts of deforestation in tropical rainforests.',
           marks: 3,
           section: 'Sustaining Ecosystems'
         },
