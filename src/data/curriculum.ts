@@ -19752,32 +19752,807 @@ export const curriculum: Subject[] = [
       {
         id: 'global-hazards',
         name: 'Global Hazards',
-        questions: []
+        questions: [
+          {
+            id: 'gh-q1',
+            question: 'Define the term "global atmospheric circulation" and describe how it creates different climatic zones.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Global atmospheric circulation is the worldwide movement of air masses driven by temperature and pressure differences. It creates three main cells in each hemisphere (Hadley, Ferrel, and Polar cells) which produce distinct climatic zones: tropical (hot, wet), temperate (moderate temperatures, seasonal variation), and polar (cold, dry).',
+            markingCriteria: {
+              breakdown: [
+                'Definition of global atmospheric circulation (2 marks)',
+                'Description of how it creates climatic zones (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Global Hazards'
+          },
+          {
+            id: 'gh-q2',
+            question: 'Explain how high and low pressure systems create weather extremes.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'High pressure systems (anticyclones) create stable weather with clear skies, light winds, and extreme temperatures (hot in summer, cold in winter). Low pressure systems (depressions) create unstable weather with clouds, precipitation, and strong winds. These systems create extremes when they persist or intensify, leading to heatwaves, droughts (high pressure) or storms, flooding (low pressure).',
+            markingCriteria: {
+              breakdown: [
+                'High pressure system characteristics (2 marks)',
+                'Low pressure system characteristics (2 marks)',
+                'How they create weather extremes (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Global Hazards'
+          },
+          {
+            id: 'gh-q3',
+            question: 'Describe the distribution and frequency of tropical storms globally.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Tropical storms occur in tropical oceans (5-30°N/S) where sea temperatures exceed 27°C. Main regions include the Atlantic (hurricanes), Pacific (typhoons/cyclones), and Indian Ocean (cyclones). They avoid the equator due to lack of Coriolis effect. Peak season varies by region but generally occurs when sea temperatures are highest.',
+            markingCriteria: {
+              breakdown: [
+                'Global distribution described (3 marks)',
+                'Frequency patterns explained (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Global Hazards'
+          },
+          {
+            id: 'gh-q4',
+            question: 'Explain the causes of drought and its link to El Niño events.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Drought occurs when rainfall is significantly below average for extended periods. Causes include persistent high pressure systems, changes in ocean currents, and atmospheric circulation patterns. El Niño events disrupt normal weather patterns by warming Pacific waters, reducing rainfall in Australia, parts of Africa and South America, while increasing rainfall in other regions. This creates widespread drought conditions in affected areas.',
+            markingCriteria: {
+              breakdown: [
+                'Definition and causes of drought (4 marks)',
+                'El Niño explanation and drought link (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Global Hazards'
+          },
+          {
+            id: 'gh-q5',
+            question: 'Describe the structure of the Earth and explain how plate tectonics work.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'The Earth has four layers: inner core (solid iron/nickel), outer core (liquid iron/nickel), mantle (semi-molten rock), and crust (solid rock). Plate tectonics involves the movement of crustal plates driven by convection currents in the mantle. Heat from the core creates convection currents that cause plates to move via slab pull (dense oceanic crust sinks) and ridge push (new crust pushes plates apart).',
+            markingCriteria: {
+              breakdown: [
+                'Earth structure description (4 marks)',
+                'Plate tectonic processes explanation (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Global Hazards'
+          },
+          {
+            id: 'gh-q6',
+            question: 'Compare the processes occurring at constructive and destructive plate boundaries.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Constructive boundaries: plates move apart, magma rises to fill gaps, creating new oceanic crust and mid-ocean ridges, producing shield volcanoes and shallow earthquakes. Destructive boundaries: oceanic plate subducts beneath continental plate, creating deep ocean trenches, composite volcanoes, and deep-focus earthquakes. Destructive boundaries are more violent due to plate collision and subduction.',
+            markingCriteria: {
+              breakdown: [
+                'Constructive boundary processes (3 marks)',
+                'Destructive boundary processes (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Global Hazards'
+          },
+          {
+            id: 'gh-q7',
+            question: 'Explain how earthquakes are caused and why they vary in depth.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Earthquakes occur when stored energy in rocks is suddenly released due to plate movement. Friction causes plates to stick until stress overcomes resistance, causing sudden movement and seismic waves. Shallow-focus earthquakes (0-70km) occur at all plate boundaries. Deep-focus earthquakes (300-700km) only occur at destructive boundaries where subducting plates generate stress at depth.',
+            markingCriteria: {
+              breakdown: [
+                'Earthquake formation process (3 marks)',
+                'Explanation of depth variation (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Global Hazards'
+          },
+          {
+            id: 'gh-q8',
+            question: 'Describe the characteristics of shield and composite volcanoes.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Shield volcanoes: broad, gently sloping sides, formed from runny basaltic lava, frequent but gentle eruptions, found at constructive boundaries and hotspots (e.g., Hawaii). Composite volcanoes: steep-sided cone shape, formed from thick acidic lava and pyroclastic material, explosive eruptions, found at destructive boundaries (e.g., Mount Vesuvius).',
+            markingCriteria: {
+              breakdown: [
+                'Shield volcano characteristics (3 marks)',
+                'Composite volcano characteristics (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Global Hazards'
+          },
+          {
+            id: 'gh-q9',
+            question: 'Evaluate the effectiveness of technology in reducing tectonic hazard risks.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Technology is highly effective for earthquake monitoring through seismographs and GPS systems that detect ground movement. Building design improvements (base isolation, cross-bracing) significantly reduce earthquake damage. Early warning systems provide crucial seconds to minutes for people to take cover. However, prediction remains impossible for earthquakes, and volcanic prediction is only partially successful. Technology is expensive and may not be available in poorer countries most at risk.',
+            markingCriteria: {
+              breakdown: [
+                'Monitoring technology effectiveness (3 marks)',
+                'Building design improvements (3 marks)',
+                'Limitations and evaluation (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Global Hazards'
+          },
+          {
+            id: 'gh-q10',
+            question: 'Using a case study, explain the causes, consequences, and responses to a tectonic hazard event.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Case study: 2011 Tōhoku Earthquake, Japan. Causes: Magnitude 9.0 earthquake at destructive plate boundary where Pacific Plate subducts beneath North American Plate, 32km deep offshore. Consequences: 15,894 deaths, Fukushima nuclear disaster, 400,000 buildings destroyed, $235 billion damage, tsunami waves up to 40m high. Responses: Immediate - evacuation orders, international aid, search and rescue. Long-term - rebuilt sea walls, improved early warning systems, relocated communities to higher ground.',
+            markingCriteria: {
+              breakdown: [
+                'Specific causes identified (3 marks)',
+                'Social and economic consequences (4 marks)',
+                'Immediate and long-term responses (4 marks)',
+                'Case study specificity (1 mark)'
+              ]
+            },
+            specReference: 'OCR Geography B - Global Hazards'
+          }
+        ]
       },
       {
         id: 'changing-climate',
         name: 'Changing Climate',
-        questions: []
+        questions: [
+          {
+            id: 'cc-q1',
+            question: 'Describe the evidence for climate change from the Quaternary period to present.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Evidence includes: ice core data showing CO2 levels and temperatures over 800,000 years, sea-ice positions from satellite data since 1979, global temperature records from weather stations since 1880, tree ring data, historical paintings and diaries showing changes in landscapes and weather patterns. This evidence shows natural fluctuations but rapid warming since 1950s.',
+            markingCriteria: {
+              breakdown: [
+                'Ice core and temperature data (2 marks)',
+                'Sea-ice and satellite evidence (2 marks)',
+                'Historical sources and tree rings (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Changing Climate'
+          },
+          {
+            id: 'cc-q2',
+            question: 'Evaluate the reliability of different sources of climate change evidence.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Ice cores are highly reliable as they provide direct atmospheric samples over hundreds of thousands of years. Temperature records are reliable for recent periods but limited geographically before 1880. Satellite data is very accurate but only available since 1979. Historical sources like paintings and diaries are less reliable due to subjective interpretation and limited coverage. Tree rings provide good local data but may be affected by non-climate factors.',
+            markingCriteria: {
+              breakdown: [
+                'Assessment of scientific evidence reliability (4 marks)',
+                'Assessment of historical evidence limitations (2 marks)',
+                'Overall evaluation with examples (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Changing Climate'
+          },
+          {
+            id: 'cc-q3',
+            question: 'Explain the natural causes of climate change.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Natural causes include: solar variations (sunspot cycles affecting energy output), volcanic eruptions (ash and gases block sunlight, causing cooling), Milankovitch cycles (changes in Earth\'s orbit and tilt affecting solar radiation received over 100,000-year cycles). These factors have caused ice ages and warm periods throughout Earth\'s history.',
+            markingCriteria: {
+              breakdown: [
+                'Solar variations explanation (2 marks)',
+                'Volcanic activity effects (2 marks)',
+                'Milankovitch cycles description (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Changing Climate'
+          },
+          {
+            id: 'cc-q4',
+            question: 'Compare the natural greenhouse effect with the enhanced greenhouse effect.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Natural greenhouse effect: essential for life, involves water vapor, CO2, and methane trapping some solar radiation, maintaining Earth\'s temperature at 15°C instead of -18°C. Enhanced greenhouse effect: human activities increase greenhouse gas concentrations (burning fossil fuels, deforestation, agriculture), trapping more heat and causing global warming above natural levels.',
+            markingCriteria: {
+              breakdown: [
+                'Natural greenhouse effect explanation (3 marks)',
+                'Enhanced greenhouse effect and human causes (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Changing Climate'
+          },
+          {
+            id: 'cc-q5',
+            question: 'Describe the global impacts of climate change in the 21st century.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Environmental impacts: sea level rise (thermal expansion and ice melt), more frequent extreme weather events, changing precipitation patterns, ecosystem shifts. Social impacts: displacement of populations, food security threats, health issues from heat and disease. Economic impacts: infrastructure damage, agricultural losses, insurance costs, adaptation expenses. Arctic regions face ice loss and habitat destruction.',
+            markingCriteria: {
+              breakdown: [
+                'Environmental impacts described (3 marks)',
+                'Social impacts explained (2 marks)',
+                'Economic impacts identified (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Changing Climate'
+          },
+          {
+            id: 'cc-q6',
+            question: 'Explain how climate change is affecting the UK specifically.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'UK impacts include: warmer temperatures (especially winter), changing precipitation patterns (wetter winters, drier summers), more frequent extreme weather events (floods, heatwaves), earlier spring seasons affecting agriculture and wildlife, sea level rise threatening coastal areas, and changes to traditional industries like skiing and winter tourism.',
+            markingCriteria: {
+              breakdown: [
+                'Temperature and precipitation changes (3 marks)',
+                'Extreme weather and seasonal impacts (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Changing Climate'
+          },
+          {
+            id: 'cc-q7',
+            question: 'Assess why climate change is considered a global issue.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Climate change is global because: greenhouse gases mix throughout the atmosphere affecting all regions, impacts cross national boundaries (sea level rise, migration, extreme weather), solutions require international cooperation as emissions from one country affect others, developing countries are most vulnerable despite contributing least to the problem, and economic effects disrupt global trade and markets. No single country can solve it alone.',
+            markingCriteria: {
+              breakdown: [
+                'Atmospheric and physical global connections (3 marks)',
+                'Cross-boundary impacts and vulnerability (3 marks)',
+                'Need for international cooperation (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Changing Climate'
+          },
+          {
+            id: 'cc-q8',
+            question: 'Explain the role of human activities in increasing greenhouse gas concentrations.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Fossil fuel burning (coal, oil, gas) for energy and transport releases CO2. Deforestation reduces CO2 absorption and releases stored carbon. Agriculture produces methane from livestock and rice cultivation, plus N2O from fertilizers. Industrial processes release various greenhouse gases. Cement production and waste disposal also contribute. These activities have intensified since the Industrial Revolution.',
+            markingCriteria: {
+              breakdown: [
+                'Fossil fuel combustion impacts (3 marks)',
+                'Land use changes and agriculture (3 marks)',
+                'Industrial and other human activities (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Changing Climate'
+          },
+          {
+            id: 'cc-q9',
+            question: 'Describe how climate change affects extreme weather events.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Climate change increases the frequency and intensity of heatwaves, droughts, and heavy rainfall events. Warmer air holds more moisture, leading to more intense precipitation. Higher sea temperatures fuel stronger tropical storms. Changed atmospheric circulation patterns can cause weather systems to persist longer, intensifying their impacts. However, some regions may experience fewer but more severe storms.',
+            markingCriteria: {
+              breakdown: [
+                'Temperature-related extremes (2 marks)',
+                'Precipitation and storm changes (2 marks)',
+                'Atmospheric circulation effects (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Changing Climate'
+          },
+          {
+            id: 'cc-q10',
+            question: 'Evaluate the challenges of predicting future climate change impacts.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Challenges include: complex climate system interactions that are difficult to model, uncertainty about future human emissions and technological development, regional variations in impacts that are harder to predict than global trends, tipping points and feedback loops that could accelerate change, and the long timescales involved. However, models have successfully predicted observed warming trends, giving confidence in general projections.',
+            markingCriteria: {
+              breakdown: [
+                'Modeling and system complexity challenges (3 marks)',
+                'Uncertainty factors in predictions (3 marks)',
+                'Evaluation of prediction success and limitations (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Changing Climate'
+          }
+        ]
       },
       {
         id: 'distinctive-landscapes',
         name: 'Distinctive Landscapes',
-        questions: []
+        questions: [
+          {
+            id: 'dl-q1',
+            question: 'Define the term "landscape" and distinguish between built and natural landscapes.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'A landscape is the visible features of an area including physical elements (landforms, vegetation, water) and human elements (buildings, roads, fields). Natural landscapes are dominated by physical processes with minimal human influence (e.g., mountains, deserts). Built landscapes are created or significantly modified by human activity (e.g., cities, agricultural areas).',
+            markingCriteria: {
+              breakdown: [
+                'Definition of landscape (2 marks)',
+                'Distinction between built and natural (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Distinctive Landscapes'
+          },
+          {
+            id: 'dl-q2',
+            question: 'Describe the distribution of upland, lowland, and glaciated landscapes in the UK.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Upland landscapes (over 200m): Scottish Highlands, Lake District, Pennines, Welsh mountains, Dartmoor - mainly in north and west. Lowland landscapes (under 200m): East Anglia, Thames Basin, Severn Vale - mainly in south and east. Glaciated landscapes: Scottish Highlands, Lake District, Snowdonia, Yorkshire Dales - areas covered by ice during last ice age.',
+            markingCriteria: {
+              breakdown: [
+                'Upland distribution with examples (2 marks)',
+                'Lowland distribution with examples (2 marks)',
+                'Glaciated landscapes identified (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Distinctive Landscapes'
+          },
+          {
+            id: 'dl-q3',
+            question: 'Explain what makes landscapes distinctive.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Landscapes are made distinctive by: geology (rock type determines landforms and relief), climate (affects weathering processes and vegetation), and human activity (settlement patterns, land use, field boundaries). These factors interact to create unique combinations of physical features, vegetation patterns, and cultural elements that give each landscape its distinctive character.',
+            markingCriteria: {
+              breakdown: [
+                'Geological influences (2 marks)',
+                'Climate effects (2 marks)',
+                'Human activity impacts (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Distinctive Landscapes'
+          },
+          {
+            id: 'dl-q4',
+            question: 'Describe the main types of weathering and explain how they operate.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Mechanical weathering: freeze-thaw (water expands 9% when frozen, breaking rocks), salt crystallization (salt crystals grow in cracks). Chemical weathering: carbonation (CO2 + water forms weak acid attacking limestone), oxidation (oxygen reacts with iron minerals causing rust), hydrolysis (water reacts chemically with minerals). Biological weathering: tree roots growing in cracks, organic acids from plants.',
+            markingCriteria: {
+              breakdown: [
+                'Mechanical weathering processes (3 marks)',
+                'Chemical weathering processes (3 marks)',
+                'Biological weathering (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Distinctive Landscapes'
+          },
+          {
+            id: 'dl-q5',
+            question: 'Explain the different types of mass movement and their causes.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Sliding: rock or soil moves down slope along a slip plane, caused by saturation or undercutting. Slumping: rotational movement along curved slip plane, common in clay areas when saturated. Both occur when downward forces (gravity, water weight) exceed resistance forces (friction, cohesion). Heavy rainfall, steep slopes, and weak geology increase likelihood.',
+            markingCriteria: {
+              breakdown: [
+                'Sliding process and causes (3 marks)',
+                'Slumping process and causes (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Distinctive Landscapes'
+          },
+          {
+            id: 'dl-q6',
+            question: 'Describe the processes of coastal erosion.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Hydraulic action: wave water forces air into cracks, compressing and expanding it to break rocks. Abrasion: waves hurl rocks and sand against cliffs, wearing them away like sandpaper. Attrition: rocks and pebbles knock against each other, becoming smaller and rounder. Solution: weak acids in seawater dissolve rocks like limestone.',
+            markingCriteria: {
+              breakdown: [
+                'Hydraulic action explained (2 marks)',
+                'Abrasion described (2 marks)',
+                'Attrition and solution processes (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Distinctive Landscapes'
+          },
+          {
+            id: 'dl-q7',
+            question: 'Explain how headlands, bays, and coastal arches are formed.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Headlands and bays form when alternating hard and soft rocks meet the sea. Soft rocks (clay) erode faster, forming bays. Hard rocks (limestone) resist erosion, forming headlands. Coastal arches form when waves attack weaknesses in headlands, creating caves on both sides that eventually meet. The arch roof may collapse to form a stack.',
+            markingCriteria: {
+              breakdown: [
+                'Headland and bay formation (4 marks)',
+                'Cave, arch, and stack sequence (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Distinctive Landscapes'
+          },
+          {
+            id: 'dl-q8',
+            question: 'Describe how spits and beaches are formed by coastal deposition.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Beaches form when waves lose energy and deposit sediment, creating accumulations of sand, pebbles, and shingle. Spits form by longshore drift carrying sediment along the coast until reaching a river mouth or bay where deposition occurs. The spit grows out into the sea, often developing a curved end due to wave refraction.',
+            markingCriteria: {
+              breakdown: [
+                'Beach formation process (3 marks)',
+                'Spit formation and longshore drift (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Distinctive Landscapes'
+          },
+          {
+            id: 'dl-q9',
+            question: 'Explain the formation of waterfalls and gorges in river landscapes.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Waterfalls form when rivers flow from hard to soft rock. The soft rock erodes faster, creating a step. Water falls over the hard rock, creating a plunge pool below through hydraulic action and abrasion. The soft rock underneath is undercut, causing the hard rock to collapse. This process repeats, causing the waterfall to retreat upstream, leaving a steep-sided gorge.',
+            markingCriteria: {
+              breakdown: [
+                'Initial waterfall formation (3 marks)',
+                'Retreat process and gorge formation (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Distinctive Landscapes'
+          },
+          {
+            id: 'dl-q10',
+            question: 'Describe the formation of meanders and ox-bow lakes.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Meanders form in river\'s middle course where alternating pools and riffles create curved flow. Water moves faster on the outside bend (erosion) and slower on inside bend (deposition). This widens curves over time. Ox-bow lakes form when meander becomes very curved - river cuts through narrow neck during flood, abandoning the old meander loop which becomes isolated as a lake.',
+            markingCriteria: {
+              breakdown: [
+                'Meander formation process (4 marks)',
+                'Ox-bow lake formation sequence (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Distinctive Landscapes'
+          }
+        ]
       },
       {
         id: 'sustaining-ecosystems',
         name: 'Sustaining Ecosystems',
-        questions: []
+        questions: [
+          {
+            id: 'se-q1',
+            question: 'Define the term "ecosystem" and explain the concept of interdependence.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'An ecosystem is a community of living organisms (plants, animals) interacting with each other and their physical environment (climate, soil, water). Interdependence means all components depend on each other - changes to one component affect all others. For example, climate affects vegetation, which affects animal habitats and soil formation.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of ecosystem (2 marks)',
+                'Explanation of interdependence with example (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Sustaining Ecosystems'
+          },
+          {
+            id: 'se-q2',
+            question: 'Describe the global distribution of major ecosystems.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Polar regions: Arctic and Antarctic with ice and tundra. Tropical rainforests: Amazon, Congo Basin, Southeast Asia near equator. Hot deserts: Sahara, Australian outback, southwestern USA around 30°N/S. Temperate forests: Europe, eastern North America, eastern Asia in mid-latitudes. Grasslands: Great Plains, Pampas, African savanna in continental interiors.',
+            markingCriteria: {
+              breakdown: [
+                'Polar and tropical ecosystems (2 marks)',
+                'Desert and temperate ecosystems (2 marks)',
+                'Grassland distributions (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Sustaining Ecosystems'
+          },
+          {
+            id: 'se-q3',
+            question: 'Explain the characteristics of tropical rainforest climate.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Tropical rainforest climate features: high temperatures (25-30°C) year-round with little seasonal variation, high humidity (80-90%), high annual rainfall (2000mm+), convectional rainfall most afternoons, no dry season. This climate is caused by intense solar heating near the equator creating rising air, condensation, and precipitation.',
+            markingCriteria: {
+              breakdown: [
+                'Temperature characteristics (2 marks)',
+                'Precipitation patterns (2 marks)',
+                'Humidity and causes (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Sustaining Ecosystems'
+          },
+          {
+            id: 'se-q4',
+            question: 'Describe the tropical rainforest nutrient cycle.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Tropical rainforests have rapid nutrient cycling: most nutrients stored in vegetation biomass, little in soil. Dead leaves decompose quickly in hot, humid conditions, releasing nutrients rapidly absorbed by shallow roots. Leaching removes nutrients from soil quickly due to heavy rainfall. This creates a closed cycle where nutrients cycle rapidly between vegetation and soil.',
+            markingCriteria: {
+              breakdown: [
+                'Nutrient storage patterns (2 marks)',
+                'Rapid decomposition process (2 marks)',
+                'Leaching and cycling speed (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Sustaining Ecosystems'
+          },
+          {
+            id: 'se-q5',
+            question: 'Explain the goods and services provided by tropical rainforests.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Goods: timber for construction, medicines from plants, food products (fruits, nuts), rubber and other raw materials. Services: carbon storage reducing climate change, oxygen production, water cycle regulation, biodiversity conservation, soil protection from erosion, climate regulation at local and global scales, cultural and spiritual values for indigenous peoples.',
+            markingCriteria: {
+              breakdown: [
+                'Tangible goods identified (4 marks)',
+                'Environmental services explained (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Sustaining Ecosystems'
+          },
+          {
+            id: 'se-q6',
+            question: 'Describe the human impacts on tropical rainforests.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Logging: clear-felling for timber and paper removes forest cover. Agriculture: slash-and-burn farming and cattle ranching clear large areas. Mining: extraction of minerals destroys habitat and pollutes waterways. Tourism: infrastructure development and visitor pressure damage ecosystems. These activities cause deforestation, habitat loss, species extinction, and disruption of water and carbon cycles.',
+            markingCriteria: {
+              breakdown: [
+                'Logging and agriculture impacts (3 marks)',
+                'Mining and tourism effects (3 marks)',
+                'Overall environmental consequences (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Sustaining Ecosystems'
+          },
+          {
+            id: 'se-q7',
+            question: 'Explain sustainable management strategies for tropical rainforests.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Sustainable strategies include: selective logging instead of clear-felling, ecotourism providing income while preserving forest, agroforestry combining trees with crops, community conservation programs involving local people, biosphere reserves protecting core areas, international agreements reducing demand for forest products, debt-for-nature swaps, and sustainable forestry certification schemes.',
+            markingCriteria: {
+              breakdown: [
+                'Sustainable forestry practices (3 marks)',
+                'Community-based conservation (3 marks)',
+                'International and policy approaches (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Sustaining Ecosystems'
+          },
+          {
+            id: 'se-q8',
+            question: 'Describe the characteristics of polar environments.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Antarctica: ice-covered landmass, extremely cold (-40°C average), dry conditions (desert), 24-hour darkness/light, katabatic winds. Arctic: mix of sea ice and land, cold but warmer than Antarctica (-10°C average), seasonal ice, polar bears, indigenous communities. Both have limited vegetation, specialized wildlife, and extreme seasonal light variations.',
+            markingCriteria: {
+              breakdown: [
+                'Antarctic characteristics (3 marks)',
+                'Arctic characteristics and differences (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Sustaining Ecosystems'
+          },
+          {
+            id: 'se-q9',
+            question: 'Explain the human impacts on polar environments.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Research activities: scientific stations and infrastructure development. Indigenous peoples: traditional hunting and modern lifestyle changes. Tourism: increasing visitor numbers causing disturbance and pollution. Fishing and whaling: overexploitation of marine resources. Mining potential: interest in oil and mineral extraction. Climate change: global warming causing ice loss and ecosystem disruption.',
+            markingCriteria: {
+              breakdown: [
+                'Research and indigenous impacts (3 marks)',
+                'Tourism and resource extraction (3 marks)',
+                'Climate change effects (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Sustaining Ecosystems'
+          },
+          {
+            id: 'se-q10',
+            question: 'Evaluate sustainable management approaches for polar environments.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Small-scale: sustainable tourism with visitor limits and guidelines, whale watching replacing whaling, community-based conservation with indigenous people. Global: Antarctic Treaty System protecting Antarctica from mining, International Whaling Commission regulating whaling, Paris Climate Agreement addressing global warming. Success varies - Antarctica well-protected but Arctic faces more pressure from development and climate change.',
+            markingCriteria: {
+              breakdown: [
+                'Small-scale sustainable approaches (3 marks)',
+                'Global protection measures (3 marks)',
+                'Evaluation of effectiveness (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Sustaining Ecosystems'
+          }
+        ]
       },
       {
         id: 'physical-geography-fieldwork',
         name: 'Physical Geography Fieldwork',
-        questions: []
+        questions: [
+          {
+            id: 'pgf-q1',
+            question: 'Explain the importance of formulating clear enquiry questions for fieldwork investigations.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Clear enquiry questions provide focus and direction for investigations, determine what data needs to be collected, guide selection of appropriate methods and locations, enable hypotheses to be tested, and ensure results can answer the original question. Questions should be specific, measurable, and geographically relevant.',
+            markingCriteria: {
+              breakdown: [
+                'Purpose and benefits of clear questions (2 marks)',
+                'Characteristics of good enquiry questions (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Physical Geography Fieldwork'
+          },
+          {
+            id: 'pgf-q2',
+            question: 'Describe appropriate data collection techniques for investigating coastal erosion.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Cliff height measurement using clinometer and tape measure, cliff retreat measurement using historical maps and GPS, rock hardness testing with geological hammer, wave energy measurement using ranging poles in water, beach profile surveys using tapes and ranging poles, photography for visual evidence, and sediment analysis collecting samples for size/shape analysis.',
+            markingCriteria: {
+              breakdown: [
+                'Cliff measurement techniques (2 marks)',
+                'Wave and beach measurements (2 marks)',
+                'Sampling and recording methods (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Physical Geography Fieldwork'
+          },
+          {
+            id: 'pgf-q3',
+            question: 'Explain how to ensure accuracy in river flow measurements.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Measure velocity using flow meter or float method at multiple points across channel, measure depth at regular intervals, calculate cross-sectional area accurately, repeat measurements to check consistency, choose representative river sections avoiding obstacles, calibrate equipment beforehand, record weather conditions affecting flow, and use multiple people to reduce human error.',
+            markingCriteria: {
+              breakdown: [
+                'Velocity measurement techniques (2 marks)',
+                'Depth and area measurements (2 marks)',
+                'Quality control measures (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Physical Geography Fieldwork'
+          },
+          {
+            id: 'pgf-q4',
+            question: 'Describe appropriate sampling strategies for fieldwork investigations.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Random sampling: using random number tables or coordinates to avoid bias. Systematic sampling: regular intervals (every 10m) for consistent coverage. Stratified sampling: ensuring all sub-areas are represented proportionally. Sample size should be large enough for reliability but manageable in time available. Pilot studies help determine optimal sample size and identify practical issues.',
+            markingCriteria: {
+              breakdown: [
+                'Random and systematic sampling (2 marks)',
+                'Stratified sampling approach (2 marks)',
+                'Sample size considerations (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Physical Geography Fieldwork'
+          },
+          {
+            id: 'pgf-q5',
+            question: 'Explain the importance of risk assessment in geographical fieldwork.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Risk assessment identifies potential hazards (water, weather, terrain, equipment), evaluates likelihood and severity of harm, enables appropriate safety measures to be planned, ensures legal compliance and insurance coverage, protects participants and leaders, and allows emergency procedures to be established. Regular review during fieldwork is essential.',
+            markingCriteria: {
+              breakdown: [
+                'Hazard identification and evaluation (3 marks)',
+                'Safety planning and legal aspects (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Physical Geography Fieldwork'
+          },
+          {
+            id: 'pgf-q6',
+            question: 'Describe how to present geographical data using appropriate graphical techniques.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Line graphs for continuous data over time/distance, bar charts for categorical data, scatter graphs for relationships between variables, pie charts for proportions, flow diagrams for processes, cross-sections for relief, maps with symbols/shading for spatial patterns. Choose appropriate scales, include clear titles and labels, use consistent formatting, and select techniques that best show patterns in data.',
+            markingCriteria: {
+              breakdown: [
+                'Appropriate graph types for different data (4 marks)',
+                'Presentation quality and clarity (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Physical Geography Fieldwork'
+          },
+          {
+            id: 'pgf-q7',
+            question: 'Explain how to analyze geographical data to identify patterns and relationships.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Calculate statistical measures: mean, median, mode for central tendency; range and standard deviation for spread. Use correlation analysis for relationships between variables. Apply statistical tests (Spearman\'s rank) to determine significance. Identify trends, anomalies, and spatial patterns. Compare results with geographical theory and case studies. Consider reliability, validity, and limitations of data and methods used.',
+            markingCriteria: {
+              breakdown: [
+                'Statistical analysis techniques (4 marks)',
+                'Pattern identification and theory links (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Physical Geography Fieldwork'
+          },
+          {
+            id: 'pgf-q8',
+            question: 'Describe how to draw valid conclusions from fieldwork investigations.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Conclusions should directly answer original enquiry questions, be supported by evidence from data analysis, acknowledge limitations and uncertainties, consider alternative explanations, relate findings to geographical theory, suggest further research needed, and be proportionate to the strength of evidence. Avoid over-generalizing from limited data.',
+            markingCriteria: {
+              breakdown: [
+                'Evidence-based conclusions (3 marks)',
+                'Limitations and theory connections (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Physical Geography Fieldwork'
+          },
+          {
+            id: 'pgf-q9',
+            question: 'Evaluate the reliability and validity of fieldwork data and methods.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Reliability: consistency of measurements, equipment accuracy, weather effects, human error, sample size adequacy. Validity: whether methods measure what they claim to, representativeness of study sites, time of year effects, external influences. Improvements: larger samples, repeat measurements, calibrated equipment, multiple sites, different seasons. Triangulation using multiple methods increases confidence.',
+            markingCriteria: {
+              breakdown: [
+                'Reliability assessment factors (3 marks)',
+                'Validity considerations (3 marks)',
+                'Improvement suggestions (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Physical Geography Fieldwork'
+          },
+          {
+            id: 'pgf-q10',
+            question: 'Explain how fieldwork findings can be used to support or challenge geographical theory.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Compare fieldwork results with established models and theories (e.g., Hjulström curve for river transport), identify where findings support or contradict theory, consider local factors that might explain differences, use quantitative data to test theoretical predictions, acknowledge scale and context limitations, suggest modifications to theory if appropriate, and recognize that single studies rarely definitively prove or disprove theory.',
+            markingCriteria: {
+              breakdown: [
+                'Theory-data comparison methods (4 marks)',
+                'Critical evaluation and limitations (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Physical Geography Fieldwork'
+          }
+        ]
       },
       {
         id: 'urban-futures',
         name: 'Urban Futures',
-        questions: []
+        questions: [
+          {
+            id: 'uf-q1',
+            question: 'Explain why over 50% of the world\'s population now lives in urban areas.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Urbanization has accelerated due to: rural-urban migration (push factors: agricultural mechanization, rural poverty, limited services; pull factors: job opportunities, better healthcare, education), natural increase (young migrants have children in cities), economic development (industrialization creates urban jobs), globalization (cities become economic hubs).',
+            markingCriteria: {
+              breakdown: [
+                'Push and pull factors (3 marks)',
+                'Natural increase and economic factors (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Urban Futures'
+          },
+          {
+            id: 'uf-q2',
+            question: 'Describe the characteristics and distribution of world cities and megacities.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'World cities (e.g., London, New York, Tokyo) are global centers of finance, politics, and culture with international influence. Megacities have populations over 10 million (e.g., Mumbai, São Paulo, Delhi). Most new megacities are in Asia and developing countries. They concentrate economic power but face challenges of rapid growth.',
+            markingCriteria: {
+              breakdown: [
+                'World city characteristics (3 marks)',
+                'Megacity definition and distribution (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Urban Futures'
+          },
+          {
+            id: 'uf-q3',
+            question: 'Compare urbanization trends in developed and developing countries.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Developed countries: slower urbanization, suburbanization, counter-urbanization to rural areas, re-urbanization of city centers. Developing countries: rapid urbanization, massive rural-urban migration, growth of informal settlements, limited infrastructure development. Developed countries experienced urbanization earlier during industrialization, while developing countries face more rapid, recent urbanization.',
+            markingCriteria: {
+              breakdown: [
+                'Developed country trends (4 marks)',
+                'Developing country patterns (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Urban Futures'
+          }
+        ]
       },
       {
         id: 'dynamic-development',
