@@ -4810,13 +4810,13 @@ Write a story about a moment of fear.
     };
 
     // Use the new predicted question generator for subjects that don't have specific exam formats
-    if (subjectId !== 'physics' && subjectId !== 'geography' && subjectId !== 'geography-a-edexcel' && subjectId !== 'english-literature' && subjectId !== 'history' && subjectId !== 'english-language' && subjectId !== 'religious-studies' && subjectId !== 'psychology-ocr') {
+    if (subjectId !== 'physics' && subjectId !== 'geography' && subjectId !== 'geography-a-edexcel' && subjectId !== 'english-literature' && subjectId !== 'history' && subjectId !== 'english-language' && subjectId !== 'religious-studies' && subjectId !== 'psychology-component-01') {
       const predictedQuestions = generatePredictedExamQuestions(subjectId, subject.topics);
       questions.push(...predictedQuestions);
     }
     
     // Special handling for OCR GCSE Psychology Paper 1 predicted exam format
-    if (subjectId === 'psychology-ocr') {
+    if (subjectId === 'psychology-component-01') {
       console.log('🧠 GENERATING OCR PSYCHOLOGY PAPER 1 QUESTIONS');
       const psychologyQuestions: ExamQuestion[] = [
         // Section A - Criminal Psychology (24 marks) - Multiple Choice (3 marks)
@@ -5077,7 +5077,7 @@ Write a story about a moment of fear.
       geography: 90, // 1h 30min
       "geography-a-edexcel": 90, // 1h 30min
       "computer-science": 120, // 2h
-      "psychology-ocr": 90, // 1h 30min
+      "psychology-component-01": 90, // 1h 30min
       psychology: 135 // 2h 15min
     };
     return durations[subjectId as keyof typeof durations] || 90;
@@ -5132,7 +5132,7 @@ Write a story about a moment of fear.
     if (subjectId === 'physics-edexcel') {
       return 100; // Edexcel GCSE Physics Paper 1: 100 marks
     }
-    if (subjectId === 'psychology-ocr') {
+    if (subjectId === 'psychology-component-01') {
       return 90; // OCR GCSE Psychology Paper 1: 90 marks
     }
     return examQuestions.reduce((total, q) => total + q.marks, 0);
@@ -5513,7 +5513,7 @@ Write a story about a moment of fear.
                      subjectId === 'geography-paper-2' ? 'Geography Paper 2' :
                       subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' :
                       subjectId === 'computer-science' ? 'Computer Science Paper 1' :
-                      subjectId === 'psychology-ocr' ? 'Studies and applications in psychology 1 (01)' :
+                      subjectId === 'psychology-component-01' ? 'Studies and applications in psychology 1 (01)' :
                       `${subject.name} Predicted Exam`}
                   </h1>
                 <p className="text-sm text-muted-foreground">Question {currentQuestion + 1} of {examQuestions.length}</p>
