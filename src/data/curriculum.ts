@@ -3897,6 +3897,144 @@ export const curriculum: Subject[] = [
             specReference: 'AQA GCSE History 8145'
           }
         ]
+      },
+      {
+        id: 'britain-health-people',
+        name: 'AA: Britain: Health and the people: c1000 to the present day',
+        questions: [
+          {
+            id: 'health-q1',
+            question: 'Describe the main approaches to medicine in medieval times.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Medieval medicine used natural approaches (herbs, bleeding), supernatural beliefs (prayer, pilgrimage), and followed Hippocratic and Galenic methods including the theory of the four humours.',
+            markingCriteria: {
+              breakdown: ['Natural approaches mentioned (1 mark)', 'Supernatural beliefs (1 mark)', 'Reference to Hippocratic/Galenic methods (1 mark)', 'Four humours theory (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'health-q2',
+            question: 'How did Christianity contribute to medical progress in medieval times?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Christianity established hospitals for care of the sick, preserved medical texts in monasteries, promoted the idea of caring for the poor and sick as a Christian duty, but also hindered progress by discouraging dissection.',
+            markingCriteria: {
+              breakdown: ['Established hospitals (2 marks)', 'Preserved medical texts (1 mark)', 'Christian duty to care for sick (2 marks)', 'Hindered dissection (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'health-q3',
+            question: 'What impact did the Black Death have on medieval Britain?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The Black Death killed about one-third of Britain\'s population, exposed the limitations of medieval medicine, led to various ineffective treatments, and caused social and economic upheaval.',
+            markingCriteria: {
+              breakdown: ['Population impact (1 mark)', 'Exposed medical limitations (1 mark)', 'Ineffective treatments tried (1 mark)', 'Social/economic effects (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'health-q4',
+            question: 'How did Andreas Vesalius challenge medical authority during the Renaissance?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Vesalius performed human dissections and discovered errors in Galen\'s work, published detailed anatomical drawings in "The Fabric of the Human Body," and proved Galen had used animals, not humans.',
+            markingCriteria: {
+              breakdown: ['Human dissections performed (2 marks)', 'Discovered Galen\'s errors (2 marks)', 'Published anatomical work (1 mark)', 'Proved Galen used animals (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'health-q5',
+            question: 'What was the significance of William Harvey\'s work on blood circulation?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Harvey proved that blood circulates around the body and is pumped by the heart, disproving Galen\'s theory that blood was made in the liver and consumed by organs.',
+            markingCriteria: {
+              breakdown: ['Proved blood circulation (2 marks)', 'Heart pumps blood (1 mark)', 'Disproved Galen\'s liver theory (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'health-q6',
+            question: 'How did Edward Jenner develop vaccination and what opposition did he face?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Jenner observed that milkmaids with cowpox didn\'t get smallpox, tested this by infecting James Phipps with cowpox then smallpox. He faced opposition from the Church, doctors who feared lost income, and those who feared vaccination.',
+            markingCriteria: {
+              breakdown: ['Milkmaid observation (1 mark)', 'James Phipps experiment (2 marks)', 'Church opposition (1 mark)', 'Doctor/financial opposition (1 mark)', 'Public fear (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'health-q7',
+            question: 'What was the importance of Pasteur\'s Germ Theory for medicine?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Germ Theory proved that germs cause disease, leading to better hygiene practices, development of vaccines, and understanding that disease wasn\'t caused by miasma or bad air.',
+            markingCriteria: {
+              breakdown: ['Germs cause disease (1 mark)', 'Better hygiene practices (1 mark)', 'Development of vaccines (1 mark)', 'Disproved miasma theory (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'health-q8',
+            question: 'How did Joseph Lister improve surgical safety?',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Lister used carbolic acid as an antiseptic to kill germs during surgery, reducing infection rates dramatically. He applied Pasteur\'s Germ Theory to surgery, proving that germs caused post-operative infections.',
+            markingCriteria: {
+              breakdown: ['Used carbolic acid antiseptic (2 marks)', 'Killed germs during surgery (2 marks)', 'Applied Germ Theory to surgery (1 mark)', 'Reduced infection rates (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'health-q9',
+            question: 'What were the main public health problems in industrial Britain?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Overcrowded housing, poor sanitation, contaminated water supplies, air pollution from factories, and lack of proper sewage systems led to disease outbreaks like cholera.',
+            markingCriteria: {
+              breakdown: ['Overcrowded housing (1 mark)', 'Poor sanitation/sewage (1 mark)', 'Contaminated water (1 mark)', 'Disease outbreaks (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'health-q10',
+            question: 'How did Alexander Fleming\'s discovery of penicillin revolutionize medicine?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Fleming accidentally discovered penicillin killed bacteria in 1928. During WWII, it was mass-produced and saved millions of lives by effectively treating bacterial infections that were previously often fatal.',
+            markingCriteria: {
+              breakdown: ['Accidental discovery 1928 (1 mark)', 'Killed bacteria (1 mark)', 'Mass production in WWII (2 marks)', 'Saved millions of lives (1 mark)', 'Treated fatal infections (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'health-q11',
+            question: 'What was the significance of the creation of the National Health Service in 1948?',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'The NHS provided free healthcare at the point of use for all British citizens, funded by taxation. It removed financial barriers to medical treatment and represented the government taking responsibility for public health.',
+            markingCriteria: {
+              breakdown: ['Free healthcare for all (2 marks)', 'Funded by taxation (1 mark)', 'Removed financial barriers (2 marks)', 'Government responsibility (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          },
+          {
+            id: 'health-q12',
+            question: 'How did the two World Wars impact medical development?',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The wars accelerated development of plastic surgery, blood transfusions, X-rays, and prosthetics. The need to treat wounded soldiers drove rapid medical innovation and government investment in healthcare.',
+            markingCriteria: {
+              breakdown: ['Plastic surgery development (1 mark)', 'Blood transfusions/X-rays (1 mark)', 'Prosthetics advancement (1 mark)', 'Government investment (1 mark)']
+            },
+            specReference: 'AQA GCSE History 8145'
+          }
+        ]
       }
     ]
   },
