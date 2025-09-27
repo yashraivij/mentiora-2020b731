@@ -5276,16 +5276,17 @@ Write a story about a moment of fear.
             <div className="flex items-center space-x-4">
               <Crown className="h-6 w-6 text-amber-500" />
               <div>
-                 <h1 className="text-lg font-bold text-foreground">
-                   {subjectId === 'history' ? 'History Paper 1' : 
-                    subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
-                    subjectId === 'geography' ? `Geography ${geographyPaperType}` : 
-                    subjectId === 'geography-a-edexcel' ? 'Geography A (Edexcel) Paper 1' :
-                    subjectId === 'geography-paper-2' ? 'Geography Paper 2' :
-                     subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' :
-                     subjectId === 'computer-science' ? 'Computer Science Paper 1' :
-                     `${subject.name} Predicted Exam`}
-                 </h1>
+                  <h1 className="text-lg font-bold text-foreground">
+                    {subjectId === 'history' ? 'History Paper 1' : 
+                     subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
+                     subjectId === 'geography' ? `Geography ${geographyPaperType}` : 
+                     subjectId === 'geography-a-edexcel' ? 'Geography A (Edexcel) Paper 1' :
+                     subjectId === 'geography-paper-2' ? 'Geography Paper 2' :
+                      subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' :
+                      subjectId === 'computer-science' ? 'Computer Science Paper 1' :
+                      subjectId === 'psychology-ocr' ? 'Studies and applications in psychology 1 (01)' :
+                      `${subject.name} Predicted Exam`}
+                  </h1>
                 <p className="text-sm text-muted-foreground">Question {currentQuestion + 1} of {examQuestions.length}</p>
               </div>
             </div>
