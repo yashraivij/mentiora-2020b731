@@ -1152,7 +1152,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         
         questions.push({
           id: `${subjectId}-header`,
-          questionNumber: 0,
+          questionNumber: -1,
           text: `Paper 3: Reading – ${tier === 'foundation' ? 'Foundation' : 'Higher'} Tier\n\nTime: ${timeLimit} minutes\nTotal marks: ${totalMarks}\n\nSection A: Reading comprehension questions in English (40 marks)\nSection B: Translation from Spanish into English (10 marks)`,
           marks: 0,
           section: 'Header'
@@ -1198,7 +1198,7 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
         
         questions.push({
           id: `${subjectId}-header`,
-          questionNumber: 0,
+          questionNumber: -1,
           text: `Paper 4: Writing – ${tier === 'foundation' ? 'Foundation' : 'Higher'} Tier\n\nTime: ${timeLimit} minutes\nTotal marks: ${totalMarks}`,
           marks: 0,
           section: 'Header'
@@ -4513,7 +4513,10 @@ Write a story about a moment of fear.
                   <div>
                     <div className="flex items-center gap-2 mb-1">
                       <CardTitle className="text-xl">
-                        Question {examQuestions[currentQuestion].questionNumber}
+                        {examQuestions[currentQuestion].questionNumber > 0 
+                          ? `Question ${examQuestions[currentQuestion].questionNumber}`
+                          : 'Exam Information'
+                        }
                       </CardTitle>
                       <Badge variant={getTierLabel(examQuestions[currentQuestion]).includes('Higher') ? "destructive" : "secondary"} className="text-xs">
                         {getTierLabel(examQuestions[currentQuestion])}
