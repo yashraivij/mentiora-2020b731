@@ -22548,6 +22548,150 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'hobsons-choice-q2',
+            question: 'Analyse the character of Maggie Hobson in the play.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Maggie embodies the "New Woman" challenging Victorian gender expectations through business acumen and determination. Her dominance over Will and defiance of her father demonstrate female empowerment, while her practical nature contrasts with romantic idealism.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and development (8 marks)',
+                'Understanding of gender themes (8 marks)',
+                'Social and historical context (7 marks)',
+                'Dramatic function examination (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'hobsons-choice-q3',
+            question: 'How does Brighouse present the transformation of Will Mossop?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Will transforms from subservient craftsman to confident businessman under Maggie\'s guidance. His development challenges class expectations while showing how education and opportunity can overcome social disadvantage, though questions remain about agency versus manipulation.',
+            markingCriteria: {
+              breakdown: [
+                'Character development analysis (8 marks)',
+                'Understanding of class themes (8 marks)',
+                'Relationship dynamics examination (7 marks)',
+                'Social commentary analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'hobsons-choice-q4',
+            question: 'Examine the role of alcohol in Hobson\'s downfall.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Alcohol symbolizes Hobson\'s inability to adapt to changing times, with his drinking representing escape from reality rather than confronting business and family challenges. His intoxication enables others to assume control, accelerating his decline.',
+            markingCriteria: {
+              breakdown: [
+                'Thematic analysis of alcohol (8 marks)',
+                'Character psychology examination (7 marks)',
+                'Symbolic significance analysis (7 marks)',
+                'Plot development function (8 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'hobsons-choice-q5',
+            question: 'How does Brighouse present working-class life in the play?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Working-class characters display dignity and skill despite social subordination, with Will\'s craftsmanship valued over Hobson\'s inherited privilege. The play suggests working-class potential when given opportunity, challenging assumptions about natural hierarchy.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of class representation (8 marks)',
+                'Character portrayal examination (8 marks)',
+                'Social commentary analysis (7 marks)',
+                'Historical context understanding (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'hobsons-choice-q6',
+            question: 'Analyse the comedy in Hobson\'s Choice.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Comedy emerges from character reversals, verbal wit, and situational irony, particularly Hobson\'s pompous authority undermined by circumstances. Physical comedy and dialogue create humor while reinforcing serious themes about social change.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of comedic techniques (8 marks)',
+                'Understanding of character humor (8 marks)',
+                'Dramatic structure examination (7 marks)',
+                'Balance of comedy and seriousness (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'hobsons-choice-q7',
+            question: 'How does Brighouse explore marriage and relationships in the play?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Marriage functions as business partnership rather than romantic ideal, with Maggie and Will\'s practical union contrasting with her sisters\' conventional courtships. The play questions traditional romantic expectations while showing alternative relationship models.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of marriage themes (8 marks)',
+                'Character relationship comparison (8 marks)',
+                'Social convention examination (7 marks)',
+                'Understanding of gender dynamics (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'hobsons-choice-q8',
+            question: 'Examine the significance of the shop setting in Hobson\'s Choice.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The shop represents traditional business values threatened by modern competition and changing social attitudes. Its domestic/commercial dual function reflects gender role tensions while providing a microcosm of broader social transformation.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of setting significance (8 marks)',
+                'Symbolic function examination (8 marks)',
+                'Understanding of social context (7 marks)',
+                'Dramatic function analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'hobsons-choice-q9',
+            question: 'How does Brighouse present generational conflict in the play?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Generational tension drives plot through daughters challenging paternal authority and embracing modern values. The conflict reflects broader social change with younger characters representing progress while Hobson embodies outdated traditions.',
+            markingCriteria: {
+              breakdown: [
+                'Thematic analysis of generational conflict (8 marks)',
+                'Character representation examination (8 marks)',
+                'Social change context (7 marks)',
+                'Dramatic development analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'hobsons-choice-q10',
+            question: 'Analyse the resolution and its effectiveness in Hobson\'s Choice.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Resolution achieves poetic justice with competent characters assuming control while maintaining family harmony. The ending suggests progressive values triumphing over tradition, though questions remain about the completeness of social transformation.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of dramatic resolution (8 marks)',
+                'Character outcome examination (8 marks)',
+                'Thematic closure assessment (7 marks)',
+                'Understanding of dramatic effectiveness (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
           }
         ]
       },
@@ -22567,6 +22711,150 @@ export const curriculum: Subject[] = [
                 'Understanding of dramatic structure and genre (8 marks)',
                 'Character comparison and development (7 marks)',
                 'Social commentary and context (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'blood-brothers-q2',
+            question: 'How does Russell present the character of Mrs Johnstone?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Mrs Johnstone embodies working-class resilience and maternal love despite poverty and difficult circumstances. Her superstitious nature and vulnerability to manipulation highlight her disadvantaged position, while her ultimate tragedy evokes audience sympathy.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and development (8 marks)',
+                'Understanding of class themes (8 marks)',
+                'Maternal role examination (7 marks)',
+                'Dramatic function analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'blood-brothers-q3',
+            question: 'Analyse the role of fate and superstition in Blood Brothers.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Superstition reinforces the tragic structure while reflecting working-class culture and powerlessness. The "curse" becomes self-fulfilling prophecy, suggesting that social inequality, not supernatural forces, determines the brothers\' tragic fate.',
+            markingCriteria: {
+              breakdown: [
+                'Thematic analysis of fate/superstition (8 marks)',
+                'Understanding of tragic structure (8 marks)',
+                'Cultural context examination (7 marks)',
+                'Social commentary analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'blood-brothers-q4',
+            question: 'How does Russell use music and song in Blood Brothers?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Music heightens emotional impact and provides narrative commentary, with recurring songs reinforcing themes of class and fate. The musical format enables broader social commentary while creating theatrical spectacle that enhances tragic elements.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of musical elements (8 marks)',
+                'Understanding of dramatic function (8 marks)',
+                'Thematic reinforcement examination (7 marks)',
+                'Genre convention analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'blood-brothers-q5',
+            question: 'Examine the presentation of Mrs Lyons in Blood Brothers.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Mrs Lyons represents middle-class privilege and paranoia, with her desperation for a child leading to manipulation and cruelty. Her fear and guilt transform her from sympathetic figure to antagonist, highlighting class-based moral corruption.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and development (8 marks)',
+                'Understanding of class representation (8 marks)',
+                'Psychological examination (7 marks)',
+                'Moral implications analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'blood-brothers-q6',
+            question: 'How does Russell present childhood and growing up in the play?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Childhood innocence gradually erodes through social pressures and class differences. The brothers\' friendship survives until adult responsibilities and class consciousness create division, showing how society corrupts natural relationships.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of childhood themes (8 marks)',
+                'Character development examination (8 marks)',
+                'Social pressure analysis (7 marks)',
+                'Understanding of dramatic structure (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'blood-brothers-q7',
+            question: 'Analyse the role of education in Blood Brothers.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Education becomes a class divider, with Edward\'s university opportunities contrasting with Mickey\'s limited prospects. The play shows how educational privilege perpetuates social inequality while limiting working-class advancement.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of education themes (8 marks)',
+                'Class difference examination (8 marks)',
+                'Character opportunity comparison (7 marks)',
+                'Social commentary analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'blood-brothers-q8',
+            question: 'How does Russell present violence in Blood Brothers?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Violence escalates from childhood games to adult tragedy, reflecting social frustration and limited opportunities. The final shooting represents the ultimate cost of social inequality, with violence as inevitable outcome of class conflict.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of violence themes (8 marks)',
+                'Understanding of social causes (8 marks)',
+                'Character development examination (7 marks)',
+                'Tragic structure analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'blood-brothers-q9',
+            question: 'Examine the role of the Narrator in Blood Brothers.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The Narrator provides omniscient commentary and foreboding, functioning as Greek chorus figure who guides audience interpretation. His presence reinforces the play\'s fatalistic themes while maintaining theatrical self-consciousness.',
+            markingCriteria: {
+              breakdown: [
+                'Character function analysis (8 marks)',
+                'Understanding of dramatic technique (8 marks)',
+                'Thematic significance examination (7 marks)',
+                'Theatrical convention analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'blood-brothers-q10',
+            question: 'How does Russell create tragedy in Blood Brothers?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Russell creates modern tragedy through social rather than personal flaws, with class inequality driving inevitable destruction. The musical format and recurring motifs build tragic inevitability while maintaining audience sympathy for victims of circumstances.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of tragic elements (8 marks)',
+                'Understanding of social tragedy (8 marks)',
+                'Dramatic technique examination (7 marks)',
+                'Genre convention analysis (7 marks)'
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
@@ -22592,6 +22880,150 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'journeys-end-q2',
+            question: 'How does Sherriff present the character of Stanhope?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Stanhope embodies war\'s psychological toll through alcoholism and emotional instability masked by military duty. His relationship with Raleigh reveals vulnerability beneath command authority, while his breakdown demonstrates even capable leaders\' susceptibility to trauma.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and development (8 marks)',
+                'Understanding of psychological themes (8 marks)',
+                'Military leadership examination (7 marks)',
+                'Relationship dynamics analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'journeys-end-q3',
+            question: 'Examine the significance of the trench setting in Journey\'s End.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The confined trench creates claustrophobic atmosphere reflecting psychological entrapment, while the dugout becomes both refuge and prison. The setting\'s realism emphasizes authenticity while symbolizing the inescapable nature of war\'s psychological damage.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of setting significance (8 marks)',
+                'Understanding of dramatic atmosphere (8 marks)',
+                'Symbolic function examination (7 marks)',
+                'Realistic presentation analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'journeys-end-q4',
+            question: 'How does Sherriff present different attitudes to war and duty?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Characters represent various responses to war: Stanhope\'s dutiful alcoholism, Osborne\'s paternal stoicism, Raleigh\'s naive heroism, and Hibbert\'s honest cowardice. These contrasts reveal war\'s complex psychological effects on different personality types.',
+            markingCriteria: {
+              breakdown: [
+                'Character comparison and contrast (8 marks)',
+                'Understanding of duty themes (8 marks)',
+                'Psychological analysis (7 marks)',
+                'Attitude representation examination (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'journeys-end-q5',
+            question: 'Analyse the role of Osborne in Journey\'s End.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Osborne functions as father figure providing stability and wisdom amid chaos. His civilian identity contrasts with military necessity, while his death represents the war\'s waste of valuable lives and the loss of civilizing influences.',
+            markingCriteria: {
+              breakdown: [
+                'Character function analysis (8 marks)',
+                'Understanding of paternal role (8 marks)',
+                'Civilian/military contrast examination (7 marks)',
+                'Symbolic significance analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'journeys-end-q6',
+            question: 'How does Sherriff create dramatic tension in Journey\'s End?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Tension builds through anticipated attack, character conflicts, and psychological pressure. The countdown to battle creates temporal urgency while interpersonal tensions and military uncertainty maintain dramatic suspense throughout.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of dramatic techniques (8 marks)',
+                'Understanding of tension creation (8 marks)',
+                'Temporal structure examination (7 marks)',
+                'Conflict development analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'journeys-end-q7',
+            question: 'Examine the presentation of friendship and loyalty in the play.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Friendship provides crucial support amid horror, with bonds like Stanhope and Osborne\'s relationship offering emotional anchor. However, war strains loyalties and creates tragic conflicts between personal affection and military duty.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of friendship themes (8 marks)',
+                'Character relationship examination (8 marks)',
+                'Understanding of loyalty conflicts (7 marks)',
+                'Dramatic function analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'journeys-end-q8',
+            question: 'How does Sherriff present the theme of sacrifice in Journey\'s End?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Sacrifice operates on multiple levels from individual lives to collective innocence. Osborne\'s death exemplifies pointless waste while characters sacrifice psychological health for duty, questioning whether such sacrifice serves meaningful purpose.',
+            markingCriteria: {
+              breakdown: [
+                'Thematic analysis of sacrifice (8 marks)',
+                'Character sacrifice examination (8 marks)',
+                'Understanding of war\'s costs (7 marks)',
+                'Moral implications analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'journeys-end-q9',
+            question: 'Analyse the role of class and hierarchy in Journey\'s End.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Military hierarchy reflects social class distinctions, yet shared danger creates unusual intimacy between ranks. The play shows how extreme circumstances can both reinforce and temporarily dissolve traditional class barriers.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of class themes (8 marks)',
+                'Understanding of military hierarchy (8 marks)',
+                'Social relationship examination (7 marks)',
+                'Historical context analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'journeys-end-q10',
+            question: 'How does Sherriff achieve authenticity in his presentation of war?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Sherriff\'s personal war experience enables realistic detail and psychological accuracy. The play\'s restraint in avoiding sensational violence while focusing on emotional truth creates powerful authenticity that influenced later war literature.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of realistic presentation (8 marks)',
+                'Understanding of authorial experience (8 marks)',
+                'Dramatic technique examination (7 marks)',
+                'Literary influence assessment (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
           }
         ]
       },
@@ -22611,6 +23043,150 @@ export const curriculum: Subject[] = [
                 'Analysis of political themes (8 marks)',
                 'Character representation and development (7 marks)',
                 'Historical context and relevance (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'animal-farm-q2',
+            question: 'Analyse the character of Napoleon in Animal Farm.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Napoleon represents Stalin\'s ruthless rise to power through manipulation, violence, and propaganda. His transformation from revolutionary to dictator demonstrates how power corrupts while his methods reveal totalitarian tactics of control and oppression.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and development (8 marks)',
+                'Historical allegory understanding (8 marks)',
+                'Political methods examination (7 marks)',
+                'Power corruption themes (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'animal-farm-q3',
+            question: 'How does Orwell present the role of propaganda in Animal Farm?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Propaganda operates through Squealer\'s manipulation of language and facts to justify Napoleon\'s actions. The changing commandments and rewriting of history show how totalitarian regimes control truth and manipulate popular memory to maintain power.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of propaganda techniques (8 marks)',
+                'Language manipulation examination (8 marks)',
+                'Understanding of totalitarian methods (7 marks)',
+                'Historical truth distortion analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'animal-farm-q4',
+            question: 'Examine the significance of the windmill in Animal Farm.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The windmill symbolizes progress and hope corrupted by political manipulation. Its repeated destruction and reconstruction represent the futility of revolutionary dreams when power serves personal rather than collective interests.',
+            markingCriteria: {
+              breakdown: [
+                'Symbolic analysis (8 marks)',
+                'Understanding of political manipulation (8 marks)',
+                'Revolutionary ideals examination (7 marks)',
+                'Progress and corruption themes (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'animal-farm-q5',
+            question: 'How does Orwell present the character of Boxer in Animal Farm?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Boxer represents the loyal working class whose dedication and strength are exploited by corrupt leadership. His tragic fate demonstrates how totalitarian regimes betray those who serve them most faithfully, highlighting the vulnerability of trusting populations.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and representation (8 marks)',
+                'Working class symbolism examination (8 marks)',
+                'Exploitation themes analysis (7 marks)',
+                'Tragic significance understanding (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'animal-farm-q6',
+            question: 'Analyse the role of education and literacy in Animal Farm.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Education becomes a tool of control, with the pigs\' literacy enabling manipulation while other animals\' ignorance makes them vulnerable. The restriction of learning maintains class divisions and prevents challenge to authority.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of education themes (8 marks)',
+                'Understanding of knowledge as power (8 marks)',
+                'Class division examination (7 marks)',
+                'Control mechanism analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'animal-farm-q7',
+            question: 'How does Orwell present the corruption of revolutionary ideals?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Revolutionary ideals of equality and freedom gradually erode through compromise and self-interest. The pigs\' adoption of human behaviors and privileges shows how power corrupts noble intentions, creating new forms of oppression.',
+            markingCriteria: {
+              breakdown: [
+                'Thematic analysis of corruption (8 marks)',
+                'Revolutionary ideals examination (8 marks)',
+                'Character transformation analysis (7 marks)',
+                'Political commentary understanding (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'animal-farm-q8',
+            question: 'Examine the ending of Animal Farm and its significance.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'The ending\'s ambiguity between pigs and humans reveals complete revolutionary failure. The animals\' inability to distinguish oppressors demonstrates how power structures remain unchanged despite surface transformation, showing revolution\'s potential futility.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of ending significance (8 marks)',
+                'Understanding of revolutionary failure (8 marks)',
+                'Symbolic interpretation (7 marks)',
+                'Political pessimism examination (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'animal-farm-q9',
+            question: 'How does Orwell use satire in Animal Farm?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Satirical technique exposes political hypocrisy through animal behavior that mirrors human corruption. The ironic gap between revolutionary rhetoric and actual practice creates humor while delivering serious critique of totalitarian systems.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of satirical techniques (8 marks)',
+                'Understanding of political satire (8 marks)',
+                'Irony and humor examination (7 marks)',
+                'Critique effectiveness analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'animal-farm-q10',
+            question: 'Analyse the presentation of different social classes in Animal Farm.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Animals represent various social classes: pigs as intellectual elite, horses as working class, sheep as masses. The hierarchy\'s maintenance despite revolutionary change shows how class systems persist regardless of political transformation.',
+            markingCriteria: {
+              breakdown: [
+                'Class representation analysis (8 marks)',
+                'Social hierarchy examination (8 marks)',
+                'Revolutionary change assessment (7 marks)',
+                'Political continuity understanding (7 marks)'
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
@@ -22636,6 +23212,150 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'lord-flies-q2',
+            question: 'How does Golding present the character of Ralph in Lord of the Flies?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Ralph represents civilized leadership and democratic values, struggling to maintain order against primitive impulses. His gradual understanding of human nature\'s darkness parallels the reader\'s journey, while his final breakdown shows civilization\'s vulnerability.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and development (8 marks)',
+                'Leadership themes examination (8 marks)',
+                'Civilization representation analysis (7 marks)',
+                'Character transformation understanding (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'lord-flies-q3',
+            question: 'Analyse the significance of the conch shell in Lord of the Flies.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The conch symbolizes democratic order and civilized discourse, giving power to speech and assembly. Its gradual loss of authority and final destruction parallel the breakdown of social order and the triumph of primitive force over reason.',
+            markingCriteria: {
+              breakdown: [
+                'Symbolic analysis (8 marks)',
+                'Democratic themes examination (8 marks)',
+                'Civilization breakdown analysis (7 marks)',
+                'Authority and power understanding (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'lord-flies-q4',
+            question: 'How does Golding present the character of Jack and his transformation?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Jack embodies primitive impulses toward violence and dominance, transforming from choir boy to savage chief. His painted face and tribal behavior represent the thin veneer of civilization, while his appeal to followers reveals humanity\'s attraction to authoritarianism.',
+            markingCriteria: {
+              breakdown: [
+                'Character transformation analysis (8 marks)',
+                'Savagery themes examination (8 marks)',
+                'Authoritarian leadership analysis (7 marks)',
+                'Primitive impulse understanding (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'lord-flies-q5',
+            question: 'Examine the role of the beast in Lord of the Flies.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'The beast exists primarily in the boys\' imagination, representing their internal fears and capacity for evil. Simon\'s recognition that "the beast is us" reveals Golding\'s central insight about human nature\'s inherent darkness and capacity for violence.',
+            markingCriteria: {
+              breakdown: [
+                'Symbolic interpretation analysis (8 marks)',
+                'Fear and evil themes examination (8 marks)',
+                'Human nature understanding (7 marks)',
+                'Philosophical implications analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'lord-flies-q6',
+            question: 'How does Golding present the character of Piggy in Lord of the Flies?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Piggy represents intellect and scientific rationalism, offering logical solutions ignored by others. His physical vulnerability and social isolation demonstrate how civilization fails to protect the weak, while his death symbolizes reason\'s defeat by violence.',
+            markingCriteria: {
+              breakdown: [
+                'Character analysis and representation (8 marks)',
+                'Intellect and reason themes (8 marks)',
+                'Vulnerability and isolation examination (7 marks)',
+                'Symbolic death significance (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'lord-flies-q7',
+            question: 'Analyse the significance of fire in Lord of the Flies.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Fire represents hope and rescue when controlled, but destruction when uncontrolled. The signal fire\'s neglect shows priorities shifting from civilization to savagery, while the final destructive blaze ironically enables rescue through its very chaos.',
+            markingCriteria: {
+              breakdown: [
+                'Symbolic fire analysis (8 marks)',
+                'Hope and destruction themes (8 marks)',
+                'Civilization priorities examination (7 marks)',
+                'Ironic rescue understanding (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'lord-flies-q8',
+            question: 'How does Golding explore the loss of innocence in Lord of the Flies?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Innocence erodes gradually through exposure to violence and moral corruption. The boys\' transformation from civilized children to savage hunters reflects humanity\'s capacity for evil, while their final rescue cannot restore lost innocence.',
+            markingCriteria: {
+              breakdown: [
+                'Innocence loss theme analysis (8 marks)',
+                'Character transformation examination (8 marks)',
+                'Moral corruption understanding (7 marks)',
+                'Irreversible change analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'lord-flies-q9',
+            question: 'Examine the role of Simon in Lord of the Flies.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Simon functions as prophetic figure who alone understands the beast\'s true nature as human evil. His Christ-like qualities and martyrdom reveal truth that others cannot accept, while his death represents the destruction of moral insight by collective fear.',
+            markingCriteria: {
+              breakdown: [
+                'Character function analysis (8 marks)',
+                'Prophetic and Christ-like qualities (8 marks)',
+                'Truth and insight themes (7 marks)',
+                'Martyrdom significance understanding (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'lord-flies-q10',
+            question: 'How does Golding create a sense of increasing darkness in Lord of the Flies?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Darkness increases through escalating violence, deteriorating civilization, and growing fear. Golding uses imagery, symbolism, and character development to chart the descent from order to chaos, culminating in complete moral breakdown.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of darkness progression (8 marks)',
+                'Literary technique examination (8 marks)',
+                'Violence escalation understanding (7 marks)',
+                'Moral breakdown analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
           }
         ]
       },
@@ -22658,6 +23378,150 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'anita-me-q2',
+            question: 'Analyse the character of Meena and her development in Anita and Me.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Meena develops from confused child torn between cultures to young person accepting her complex identity. Her friendship with Anita, family relationships, and encounters with racism shape her understanding of belonging in multicultural Britain.',
+            markingCriteria: {
+              breakdown: [
+                'Character development analysis (8 marks)',
+                'Identity formation examination (8 marks)',
+                'Cultural conflict understanding (7 marks)',
+                'Narrative voice analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'anita-me-q3',
+            question: 'How does Syal present the relationship between Meena and Anita?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The friendship represents cross-cultural connection but also reveals class and cultural differences. Anita\'s influence on Meena shows both positive companionship and problematic peer pressure, reflecting complexities of adolescent relationships across cultural divides.',
+            markingCriteria: {
+              breakdown: [
+                'Relationship analysis (8 marks)',
+                'Cross-cultural friendship examination (8 marks)',
+                'Character influence understanding (7 marks)',
+                'Cultural difference analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'anita-me-q4',
+            question: 'Examine how Syal presents racism and prejudice in the novel.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Racism appears in both overt discrimination and subtle prejudice, affecting the immigrant community\'s daily life. Syal shows how children internalize racial attitudes while exploring the psychological impact of being "other" in British society.',
+            markingCriteria: {
+              breakdown: [
+                'Racism presentation analysis (8 marks)',
+                'Social context examination (8 marks)',
+                'Psychological impact understanding (7 marks)',
+                'Character response analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'anita-me-q5',
+            question: 'How does Syal present family relationships in Anita and Me?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Family represents cultural continuity and traditional values while adapting to British life. Generational tensions emerge as parents maintain Indian customs while children embrace British culture, creating loving but complex family dynamics.',
+            markingCriteria: {
+              breakdown: [
+                'Family relationship analysis (8 marks)',
+                'Generational conflict examination (8 marks)',
+                'Cultural adaptation understanding (7 marks)',
+                'Love and tension balance analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'anita-me-q6',
+            question: 'Analyse the significance of the village setting in Anita and Me.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The village represents traditional English life that the immigrant family must navigate. Its close-knit community offers both acceptance and exclusion, while rural setting contrasts with urban multicultural environments.',
+            markingCriteria: {
+              breakdown: [
+                'Setting significance analysis (8 marks)',
+                'Community dynamics examination (8 marks)',
+                'Cultural integration understanding (7 marks)',
+                'Rural/urban contrast analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'anita-me-q7',
+            question: 'How does Syal use humor in Anita and Me?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Humor emerges from cultural misunderstandings, childhood perspectives, and family interactions. Syal uses comedy to address serious themes of racism and belonging while creating warmth and accessibility in cross-cultural storytelling.',
+            markingCriteria: {
+              breakdown: [
+                'Humor technique analysis (8 marks)',
+                'Cultural comedy examination (8 marks)',
+                'Serious theme balance understanding (7 marks)',
+                'Narrative accessibility analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'anita-me-q8',
+            question: 'Examine the role of language in Anita and Me.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Language reflects cultural identity with English, Punjabi, and local dialect creating linguistic landscape. Code-switching shows characters navigating multiple identities while language barriers and fluency affect social integration.',
+            markingCriteria: {
+              breakdown: [
+                'Language use analysis (8 marks)',
+                'Cultural identity examination (8 marks)',
+                'Social integration understanding (7 marks)',
+                'Linguistic technique analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'anita-me-q9',
+            question: 'How does Syal present the theme of growing up in Anita and Me?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Growing up involves accepting cultural complexity rather than choosing single identity. Meena\'s maturation includes understanding family sacrifice, confronting racism, and embracing her multicultural heritage as strength rather than burden.',
+            markingCriteria: {
+              breakdown: [
+                'Coming-of-age theme analysis (8 marks)',
+                'Cultural acceptance examination (8 marks)',
+                'Character maturation understanding (7 marks)',
+                'Identity resolution analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'anita-me-q10',
+            question: 'Analyse the ending of Anita and Me and its significance.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The ending shows Meena\'s acceptance of her complex identity and family loyalty over peer pressure. Moving away represents new beginnings while maintaining cultural roots, suggesting positive resolution to identity conflicts.',
+            markingCriteria: {
+              breakdown: [
+                'Ending significance analysis (8 marks)',
+                'Identity resolution examination (8 marks)',
+                'Character choice understanding (7 marks)',
+                'Thematic closure analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
           }
         ]
       },
@@ -22677,6 +23541,150 @@ export const curriculum: Subject[] = [
                 'Examination of narrative structure (8 marks)',
                 'Setting and atmosphere creation (7 marks)',
                 'Character psychology and development (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'woman-black-q2',
+            question: 'How does Hill present the character of Arthur Kipps?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Arthur develops from skeptical rationalist to traumatized believer through supernatural encounters. His frame narrative perspective shows lasting psychological damage while his initial confidence contrasts with eventual vulnerability and fear.',
+            markingCriteria: {
+              breakdown: [
+                'Character development analysis (8 marks)',
+                'Rational to believer transformation (8 marks)',
+                'Narrative perspective examination (7 marks)',
+                'Psychological impact understanding (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'woman-black-q3',
+            question: 'Examine the role of the Woman in Black as a supernatural figure.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The Woman in Black embodies vengeful motherhood and unresolved grief, seeking retribution for her son\'s death. Her appearances herald tragedy while her persistent presence demonstrates how past traumas refuse to remain buried.',
+            markingCriteria: {
+              breakdown: [
+                'Supernatural character analysis (8 marks)',
+                'Revenge and grief themes (8 marks)',
+                'Tragic herald function (7 marks)',
+                'Past trauma significance (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'woman-black-q4',
+            question: 'How does Hill use setting to enhance the Gothic atmosphere?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Eel Marsh House\'s isolation and accessibility only at low tide creates perfect Gothic setting. The desolate landscape, fog, and marshland reflect psychological states while the house itself becomes character embodying past secrets.',
+            markingCriteria: {
+              breakdown: [
+                'Gothic setting analysis (8 marks)',
+                'Isolation and landscape examination (8 marks)',
+                'Psychological reflection understanding (7 marks)',
+                'House as character analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'woman-black-q5',
+            question: 'Analyse the theme of past and present in The Woman in Black.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The past intrudes violently into present through supernatural manifestation, showing how unresolved trauma persists across time. Arthur\'s investigation uncovers buried secrets while his own past trauma shapes narrative telling.',
+            markingCriteria: {
+              breakdown: [
+                'Past/present theme analysis (8 marks)',
+                'Unresolved trauma examination (8 marks)',
+                'Supernatural intrusion understanding (7 marks)',
+                'Narrative structure analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'woman-black-q6',
+            question: 'How does Hill explore themes of guilt and responsibility?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Guilt permeates characters who failed to prevent tragedy, while responsibility extends beyond individual actions to community silence. Arthur\'s guilt over his family\'s fate connects to broader themes of moral accountability.',
+            markingCriteria: {
+              breakdown: [
+                'Guilt theme analysis (8 marks)',
+                'Responsibility examination (8 marks)',
+                'Community accountability understanding (7 marks)',
+                'Moral implications analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'woman-black-q7',
+            question: 'Examine the use of narrative frame in The Woman in Black.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The frame narrative allows reflection on traumatic events while creating distance and immediacy simultaneously. Arthur\'s older perspective provides wisdom while his younger self experiences terror, enhancing psychological complexity.',
+            markingCriteria: {
+              breakdown: [
+                'Narrative technique analysis (8 marks)',
+                'Temporal perspective examination (8 marks)',
+                'Psychological distance understanding (7 marks)',
+                'Storytelling complexity analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'woman-black-q8',
+            question: 'How does Hill present themes of motherhood and loss?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Motherhood becomes destructive force when corrupted by loss, with the Woman in Black\'s grief transforming love into vengeance. The cycle of child deaths explores how maternal loss creates ongoing tragedy.',
+            markingCriteria: {
+              breakdown: [
+                'Motherhood theme analysis (8 marks)',
+                'Loss and grief examination (8 marks)',
+                'Destructive love understanding (7 marks)',
+                'Cyclical tragedy analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'woman-black-q9',
+            question: 'Analyse Hill\'s use of Gothic conventions in The Woman in Black.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Hill employs classic Gothic elements including haunted houses, supernatural apparitions, and psychological terror while updating conventions for modern readers. Traditional elements serve contemporary exploration of trauma and memory.',
+            markingCriteria: {
+              breakdown: [
+                'Gothic convention analysis (8 marks)',
+                'Traditional element examination (8 marks)',
+                'Modern adaptation understanding (7 marks)',
+                'Literary tradition analysis (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'woman-black-q10',
+            question: 'How does Hill create a sense of inevitability in The Woman in Black?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Inevitability emerges through repeated patterns of tragedy, prophetic warnings ignored, and supernatural determinism. Arthur\'s attempts to escape fate prove futile, suggesting some tragedies cannot be prevented or resolved.',
+            markingCriteria: {
+              breakdown: [
+                'Inevitability theme analysis (8 marks)',
+                'Tragic pattern examination (8 marks)',
+                'Fate and determinism understanding (7 marks)',
+                'Dramatic irony analysis (7 marks)'
               ]
             },
             specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
