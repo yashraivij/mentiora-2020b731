@@ -1178,6 +1178,64 @@ Write about:
         },
         
         {
+          id: 'much-ado-2026',
+          questionNumber: 1,
+          text: `🎭 SECTION A - SHAKESPEARE (40 marks)
+Answer ONE question on the play you have studied.
+
+📚 MUCH ADO ABOUT NOTHING
+
+Starting with this extract, explore how Shakespeare presents appearances and deception in Much Ado About Nothing.
+
+📖 EXTRACT:
+${getShakespeareExtract('much-ado-about-nothing')}
+
+Write about:
+• how deception is shown in this extract
+• how deception is shown in the play as a whole
+
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section A - Shakespeare'
+        },
+        
+        {
+          id: 'twelfth-night-2026',
+          questionNumber: 1,
+          text: `🎭 SECTION A - SHAKESPEARE (40 marks)
+Answer ONE question on the play you have studied.
+
+📚 TWELFTH NIGHT
+
+Starting with this extract, explore how Shakespeare presents love and identity in Twelfth Night.
+
+📖 EXTRACT:
+"If music be the food of love, play on,
+Give me excess of it, that surfeiting,
+The appetite may sicken and so die.
+That strain again, it had a dying fall.
+O, it came o'er my ear like the sweet sound
+That breathes upon a bank of violets,
+Stealing and giving odour. Enough, no more,
+'Tis not so sweet now as it was before.
+O spirit of love, how quick and fresh art thou,
+That notwithstanding thy capacity
+Receiveth as the sea, nought enters there,
+Of what validity and pitch soe'er,
+But falls into abatement and low price
+Even in a minute. So full of shapes is fancy
+That it alone is high fantastical."
+
+Write about:
+• how love and identity are shown in this extract
+• how they are shown in the play as a whole
+
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section A - Shakespeare'
+        },
+        
+        {
           id: 'merchant-venice-2026',
           questionNumber: 1,
           text: `🎭 SECTION A - SHAKESPEARE (40 marks)
@@ -1199,28 +1257,7 @@ Write about:
           section: 'Section A - Shakespeare'
         },
         
-        // Section B - Post-1914 British Literature (40 marks)
-        {
-          id: 'boys-dont-cry-2026',
-          questionNumber: 2,
-          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
-Answer ONE question on the modern text you have studied.
-
-📖 BOYS DON'T CRY - Malorie Blackman
-
-How does Blackman present gender and identity in Boys Don't Cry?
-
-Write about:
-• how traditional masculine identity is challenged in the novel
-• the impact of teenage pregnancy on gender expectations
-• how characters navigate societal pressures about gender roles
-• the relationship between identity and responsibility
-
-[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
-          marks: 34,
-          section: 'Section B - Post-1914 Literature'
-        },
-
+        // Section B - Post-1914 British Literature (40 marks) - Students choose ONE question
         {
           id: 'inspector-calls-2026',
           questionNumber: 2,
@@ -1231,11 +1268,20 @@ Answer ONE question on the modern text you have studied.
 
 How does Priestley present responsibility and social class in An Inspector Calls?
 
-Write about:
-• how different characters respond to their social responsibilities
-• the presentation of class divisions and privilege
-• how the Inspector challenges the family's attitudes
-• the relevance of these themes to 1945 and 1912
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section B - Post-1914 Literature'
+        },
+
+        {
+          id: 'hobsons-choice-2026',
+          questionNumber: 2,
+          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+Answer ONE question on the modern text you have studied.
+
+📖 HOBSON'S CHOICE - Harold Brighouse
+
+How does Brighouse present independence and family expectations in Hobson's Choice?
 
 [30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
           marks: 34,
@@ -1252,11 +1298,20 @@ Answer ONE question on the modern text you have studied.
 
 How does Russell present class inequality and fate in Blood Brothers?
 
-Write about:
-• how class differences affect the characters' lives
-• the role of fate and superstition in the play
-• how social expectations limit the characters
-• the impact of these themes on the tragic ending
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section B - Post-1914 Literature'
+        },
+
+        {
+          id: 'journeys-end-2026',
+          questionNumber: 2,
+          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+Answer ONE question on the modern text you have studied.
+
+📖 JOURNEY'S END - R.C. Sherriff
+
+How does Sherriff present the effects of war on soldiers in Journey's End?
 
 [30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
           marks: 34,
@@ -1273,11 +1328,110 @@ Answer ONE question on the modern text you have studied.
 
 How does Orwell present corruption and power in Animal Farm?
 
-Write about:
-• how power corrupts the leaders on the farm
-• the methods used to control the other animals
-• how the original ideals are betrayed
-• the relevance of these themes to human society
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section B - Post-1914 Literature'
+        },
+
+        {
+          id: 'lord-flies-2026',
+          questionNumber: 2,
+          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+Answer ONE question on the modern text you have studied.
+
+📖 LORD OF THE FLIES - William Golding
+
+How does Golding present human nature and civilisation in Lord of the Flies?
+
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section B - Post-1914 Literature'
+        },
+
+        {
+          id: 'anita-me-2026',
+          questionNumber: 2,
+          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+Answer ONE question on the modern text you have studied.
+
+📖 ANITA AND ME - Meera Syal
+
+How does Syal present identity and belonging in Anita and Me?
+
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section B - Post-1914 Literature'
+        },
+
+        {
+          id: 'woman-black-2026',
+          questionNumber: 2,
+          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+Answer ONE question on the modern text you have studied.
+
+📖 THE WOMAN IN BLACK - Susan Hill
+
+How does Hill create fear and suspense in The Woman in Black?
+
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section B - Post-1914 Literature'
+        },
+
+        {
+          id: 'empress-2026',
+          questionNumber: 2,
+          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+Answer ONE question on the modern text you have studied.
+
+📖 THE EMPRESS - Tanika Gupta
+
+How does Gupta present race and power in the British Empire in The Empress?
+
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section B - Post-1914 Literature'
+        },
+
+        {
+          id: 'refugee-boy-2026',
+          questionNumber: 2,
+          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+Answer ONE question on the modern text you have studied.
+
+📖 REFUGEE BOY - Benjamin Zephaniah (adapted by Lemn Sissay)
+
+How does Zephaniah present conflict and belonging in Refugee Boy?
+
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section B - Post-1914 Literature'
+        },
+
+        {
+          id: 'coram-boy-2026',
+          questionNumber: 2,
+          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+Answer ONE question on the modern text you have studied.
+
+📖 CORAM BOY - Jamila Gavin
+
+How does Gavin present social injustice and morality in Coram Boy?
+
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section B - Post-1914 Literature'
+        },
+
+        {
+          id: 'boys-dont-cry-2026',
+          questionNumber: 2,
+          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+Answer ONE question on the modern text you have studied.
+
+📖 BOYS DON'T CRY - Malorie Blackman
+
+How does Blackman present gender and identity in Boys Don't Cry?
 
 [30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
           marks: 34,
