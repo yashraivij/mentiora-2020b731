@@ -19481,5 +19481,268 @@ export const curriculum: Subject[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'psychology',
+    name: 'Psychology',
+    topics: [
+      {
+        id: 'criminal-psychology',
+        name: 'Criminal Psychology',
+        questions: [
+          {
+            id: 'cp-q1',
+            question: 'Explain what is meant by crime as a social construct.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'Crime as a social construct means that what is considered criminal behaviour is defined by society\'s norms and culture, rather than being inherently wrong. Different societies may have different definitions of criminal acts, and these definitions can change over time.',
+            markingCriteria: {
+              breakdown: [
+                'Definition related to social/cultural norms (1 mark)',
+                'Recognition that definitions vary across societies (1 mark)', 
+                'Recognition that definitions can change over time (1 mark)'
+              ]
+            },
+            specReference: 'OCR Psychology Component 01 - Criminal Psychology'
+          },
+          {
+            id: 'cp-q2',
+            question: 'Describe the main features of Eysenck\'s Criminal Personality theory.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Eysenck proposed that criminal personality involves high levels of extraversion, neuroticism, and psychoticism. Extraverts seek stimulation and may engage in risky behaviour. High neuroticism leads to emotional instability and poor impulse control. High psychoticism is associated with aggressive and antisocial behaviour. The theory suggests these traits are biologically based, involving differences in brain structure and nervous system arousal.',
+            markingCriteria: {
+              breakdown: [
+                'Extraversion described (2 marks)',
+                'Neuroticism described (2 marks)',
+                'Psychoticism described (2 marks)'
+              ]
+            },
+            specReference: 'OCR Psychology Component 01 - Criminal Psychology'
+          }
+        ]
+      },
+      {
+        id: 'development',
+        name: 'Development',
+        questions: [
+          {
+            id: 'd-q1',
+            question: 'Outline Piaget\'s four stages of cognitive development.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Sensorimotor stage (0-2 years): develops object permanence, learns through senses and motor actions. Pre-operational stage (2-7 years): symbolic thinking develops but shows egocentrism and animism. Concrete operational stage (7-11 years): logical thinking about concrete objects, understands conservation and reversibility. Formal operational stage (11+ years): abstract and hypothetical thinking develops.',
+            markingCriteria: {
+              breakdown: [
+                'Sensorimotor stage with key features (2 marks)',
+                'Pre-operational stage with key features (2 marks)',
+                'Concrete operational stage with key features (2 marks)',
+                'Formal operational stage with key features (2 marks)'
+              ]
+            },
+            specReference: 'OCR Psychology Component 01 - Development'
+          },
+          {
+            id: 'd-q2',
+            question: 'Explain Dweck\'s theory of growth mindset versus fixed mindset.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Fixed mindset is the belief that abilities are static and cannot be significantly developed. Growth mindset is the belief that abilities can be developed through effort and learning. Dweck found that praising effort rather than ability promotes growth mindset, leading to better academic performance and resilience when facing challenges.',
+            markingCriteria: {
+              breakdown: [
+                'Fixed mindset definition (2 marks)',
+                'Growth mindset definition (2 marks)',
+                'Impact of praise on mindset development (2 marks)'
+              ]
+            },
+            specReference: 'OCR Psychology Component 01 - Development'
+          }
+        ]
+      },
+      {
+        id: 'psychological-problems',
+        name: 'Psychological Problems',
+        questions: [
+          {
+            id: 'pp-q1',
+            question: 'Describe the dopamine hypothesis of schizophrenia.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The dopamine hypothesis suggests that schizophrenia is caused by excessive dopamine activity in certain brain areas, particularly the mesolimbic pathway. This excess dopamine activity is associated with positive symptoms like hallucinations and delusions. The hypothesis is supported by the effectiveness of antipsychotic drugs that block dopamine receptors.',
+            markingCriteria: {
+              breakdown: [
+                'Excessive dopamine activity described (2 marks)',
+                'Link to positive symptoms (1 mark)',
+                'Supporting evidence from drug treatments (1 mark)'
+              ]
+            },
+            specReference: 'OCR Psychology Component 01 - Psychological Problems'
+          },
+          {
+            id: 'pp-q2',
+            question: 'Explain the ABC model of depression.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The ABC model (Ellis) suggests depression results from irrational thinking patterns. A = Activating event (trigger), B = Beliefs (rational or irrational thoughts about the event), C = Consequences (emotional and behavioural responses). Depression occurs when irrational beliefs lead to negative emotional consequences. Treatment involves challenging these irrational beliefs.',
+            markingCriteria: {
+              breakdown: [
+                'A - Activating event explained (2 marks)',
+                'B - Beliefs (rational vs irrational) explained (2 marks)',
+                'C - Consequences explained (2 marks)'
+              ]
+            },
+            specReference: 'OCR Psychology Component 01 - Psychological Problems'
+          }
+        ]
+      },
+      {
+        id: 'social-influence',
+        name: 'Social Influence',
+        questions: [
+          {
+            id: 'si-q1',
+            question: 'Distinguish between conformity and obedience, giving an example of each.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Conformity is changing behaviour or attitudes to match those of a majority group. Example: wearing similar clothes to fit in with peers. Obedience is following direct orders or commands from an authority figure. Example: following instructions from a teacher or police officer.',
+            markingCriteria: {
+              breakdown: [
+                'Conformity definition with example (2 marks)',
+                'Obedience definition with example (2 marks)'
+              ]
+            },
+            specReference: 'OCR Psychology Component 02 - Social Influence'
+          },
+          {
+            id: 'si-q2',
+            question: 'Explain how deindividuation can lead to antisocial behaviour.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Deindividuation occurs when individuals lose their sense of personal identity in group situations. This can happen due to anonymity, reduced self-awareness, and diffusion of responsibility. When deindividuated, people may engage in antisocial behaviour they wouldn\'t normally consider, as they feel less personally accountable for their actions.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of deindividuation (2 marks)',
+                'Factors that cause deindividuation (2 marks)',
+                'Link to antisocial behaviour (2 marks)'
+              ]
+            },
+            specReference: 'OCR Psychology Component 02 - Social Influence'
+          }
+        ]
+      },
+      {
+        id: 'memory',
+        name: 'Memory',
+        questions: [
+          {
+            id: 'm-q1',
+            question: 'Describe the Multi-Store Model of memory.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The Multi-Store Model (Atkinson & Shiffrin) proposes three separate memory stores: Sensory memory (brief storage of sensory information), Short-term memory (limited capacity ~7 items, duration ~30 seconds), and Long-term memory (unlimited capacity and duration). Information flows between stores through attention and rehearsal.',
+            markingCriteria: {
+              breakdown: [
+                'Three stores identified (3 marks)',
+                'Key features of each store (2 marks)',
+                'Information flow between stores (1 mark)'
+              ]
+            },
+            specReference: 'OCR Psychology Component 02 - Memory'
+          },
+          {
+            id: 'm-q2',
+            question: 'Explain reconstructive memory and its implications for eyewitness testimony.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Reconstructive memory (Bartlett) suggests we don\'t store exact copies of events but reconstruct memories using schemas (mental frameworks). During reconstruction, memories can be altered by expectations, leading questions, and new information. This has serious implications for eyewitness testimony as witnesses may unknowingly alter their memories, making them unreliable evidence in court.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of reconstructive memory (2 marks)',
+                'Role of schemas (2 marks)',
+                'Factors affecting reconstruction (2 marks)',
+                'Implications for eyewitness testimony (2 marks)'
+              ]
+            },
+            specReference: 'OCR Psychology Component 02 - Memory'
+          }
+        ]
+      },
+      {
+        id: 'sleep-dreaming',
+        name: 'Sleep & Dreaming',
+        questions: [
+          {
+            id: 'sd-q1',
+            question: 'Describe the main functions of sleep.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Sleep serves several important functions: Physical restoration (tissue repair, immune system strengthening), Brain maintenance (removal of waste products, memory consolidation), Cognitive function (maintaining attention and decision-making abilities), and Emotional regulation (processing emotions and maintaining mental health).',
+            markingCriteria: {
+              breakdown: [
+                'Physical restoration function (2 marks)',
+                'Brain maintenance function (2 marks)',
+                'Cognitive/emotional functions (2 marks)'
+              ]
+            },
+            specReference: 'OCR Psychology Component 02 - Sleep & Dreaming'
+          },
+          {
+            id: 'sd-q2',
+            question: 'Compare Freud\'s theory with the Activation-Synthesis theory of dreaming.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Freud\'s theory suggests dreams represent unconscious wishes and repressed desires, with manifest content (what we remember) hiding latent content (true meaning). Activation-Synthesis theory proposes dreams result from the brain trying to make sense of random neural activity during REM sleep. Freud emphasizes psychological meaning, while Activation-Synthesis sees dreams as largely meaningless biological processes.',
+            markingCriteria: {
+              breakdown: [
+                'Freud\'s theory - unconscious wishes/repression (2 marks)',
+                'Freud\'s theory - manifest vs latent content (2 marks)',
+                'Activation-Synthesis - random neural activity (2 marks)',
+                'Comparison of the two approaches (2 marks)'
+              ]
+            },
+            specReference: 'OCR Psychology Component 02 - Sleep & Dreaming'
+          }
+        ]
+      },
+      {
+        id: 'research-methods',
+        name: 'Research Methods',
+        questions: [
+          {
+            id: 'rm-q1',
+            question: 'Explain the difference between a null hypothesis and an alternative hypothesis.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'A null hypothesis states there will be no significant difference or relationship between variables - any difference found is due to chance. An alternative hypothesis predicts there will be a significant difference or relationship between variables. Research aims to either support or reject the null hypothesis.',
+            markingCriteria: {
+              breakdown: [
+                'Null hypothesis definition (2 marks)',
+                'Alternative hypothesis definition (2 marks)'
+              ]
+            },
+            specReference: 'OCR Psychology Research Methods'
+          },
+          {
+            id: 'rm-q2',
+            question: 'Describe the ethical considerations researchers must follow when conducting psychological research.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Key ethical considerations include: Informed consent (participants understand the study), Protection from harm (physical and psychological), Right to withdraw (can leave at any time), Confidentiality (personal data protected), Deception (minimized and justified), and Debriefing (full explanation after the study). These are outlined in the BPS Code of Ethics.',
+            markingCriteria: {
+              breakdown: [
+                'Informed consent (1 mark)',
+                'Protection from harm (1 mark)',
+                'Right to withdraw (1 mark)',
+                'Confidentiality (1 mark)',
+                'Deception considerations (2 marks)',
+                'Debriefing (1 mark)',
+                'Reference to BPS Code (1 mark)'
+              ]
+            },
+            specReference: 'OCR Psychology Research Methods'
+          }
+        ]
+      }
+    ]
   }
   ];
