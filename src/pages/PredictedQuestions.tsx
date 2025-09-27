@@ -360,9 +360,135 @@ const PredictedQuestions = () => {
 
           <TabsContent value="aqa" className="mt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+               {/* Special handling for OCR Computer Science - show 2 separate papers in AQA tab as well */}
                {curriculum
-                 .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language')
-                 .map((subject) => renderSubjectCard(subject))}
+                 .filter(subject => subject.id === 'computer-science')
+                 .map((subject) => (
+                   <>
+                     {/* Computer Science Paper 1 - J277/01 */}
+                     <Card 
+                       key="computer-science-paper-1"
+                       className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border border-border hover:bg-card/70 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+                     >
+                       <div className={`absolute inset-0 bg-gradient-to-br from-accent via-accent/80 to-accent/60 opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
+                       
+                       <CardHeader className="relative pb-4">
+                         <div className="flex items-center justify-between">
+                           <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br from-accent via-accent/80 to-accent/60 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 border border-white/20`}>
+                             <BookOpen className="h-7 w-7 text-white" />
+                           </div>
+                           <Badge className="bg-primary/20 text-primary-foreground border-primary/30 backdrop-blur-sm text-xs">
+                             OCR GCSE
+                           </Badge>
+                         </div>
+                         <CardTitle className="text-xl font-bold text-card-foreground group-hover:text-accent-foreground transition-colors mt-3">
+                           Computer Science Paper 1
+                         </CardTitle>
+                         <CardDescription className="text-muted-foreground text-sm">
+                           J277/01: Computer systems - Systems architecture, Memory and storage, Networks, Security
+                         </CardDescription>
+                       </CardHeader>
+                       
+                       <CardContent className="relative pt-0">
+                         <div className="space-y-4">
+                           <div className="space-y-3">
+                             <div className="flex items-center space-x-3 bg-muted/50 rounded-xl p-3 backdrop-blur-sm border border-border">
+                               <div className="p-1.5 bg-primary/20 rounded-lg">
+                                 <Clock className="h-4 w-4 text-primary" />
+                               </div>
+                               <div>
+                                 <p className="text-card-foreground text-sm font-medium">Duration: 1h 30min</p>
+                                 <p className="text-muted-foreground text-xs">Real exam timing</p>
+                               </div>
+                             </div>
+                             
+                             <div className="flex items-center space-x-3 bg-muted/50 rounded-xl p-3 backdrop-blur-sm border border-border">
+                               <div className="p-1.5 bg-secondary/20 rounded-lg">
+                                 <Target className="h-4 w-4 text-secondary-foreground" />
+                               </div>
+                               <div>
+                                 <p className="text-card-foreground text-sm font-medium">80 marks</p>
+                                 <p className="text-muted-foreground text-xs">50% of total GCSE</p>
+                               </div>
+                             </div>
+                           </div>
+                           
+                           <Button 
+                             onClick={() => navigate('/predicted-exam/computer-science?paper=1')}
+                             className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-bold py-3 px-6 rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-[1.02] border border-primary/30 backdrop-blur-sm"
+                           >
+                             <Crown className="h-4 w-4 mr-2" />
+                             Start Premium Exam
+                           </Button>
+                         </div>
+                       </CardContent>
+                     </Card>
+
+                     {/* Computer Science Paper 2 - J277/02 */}
+                     <Card 
+                       key="computer-science-paper-2"
+                       className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border border-border hover:bg-card/70 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+                     >
+                       <div className={`absolute inset-0 bg-gradient-to-br from-accent via-accent/80 to-accent/60 opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
+                       
+                       <CardHeader className="relative pb-4">
+                         <div className="flex items-center justify-between">
+                           <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br from-accent via-accent/80 to-accent/60 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300 border border-white/20`}>
+                             <BookOpen className="h-7 w-7 text-white" />
+                           </div>
+                           <Badge className="bg-primary/20 text-primary-foreground border-primary/30 backdrop-blur-sm text-xs">
+                             OCR GCSE
+                           </Badge>
+                         </div>
+                         <CardTitle className="text-xl font-bold text-card-foreground group-hover:text-accent-foreground transition-colors mt-3">
+                           Computer Science Paper 2
+                         </CardTitle>
+                         <CardDescription className="text-muted-foreground text-sm">
+                           J277/02: Computational thinking, algorithms and programming - Algorithms, Programming, Boolean logic
+                         </CardDescription>
+                       </CardHeader>
+                       
+                       <CardContent className="relative pt-0">
+                         <div className="space-y-4">
+                           <div className="space-y-3">
+                             <div className="flex items-center space-x-3 bg-muted/50 rounded-xl p-3 backdrop-blur-sm border border-border">
+                               <div className="p-1.5 bg-primary/20 rounded-lg">
+                                 <Clock className="h-4 w-4 text-primary" />
+                               </div>
+                               <div>
+                                 <p className="text-card-foreground text-sm font-medium">Duration: 1h 30min</p>
+                                 <p className="text-muted-foreground text-xs">Real exam timing</p>
+                               </div>
+                             </div>
+                             
+                             <div className="flex items-center space-x-3 bg-muted/50 rounded-xl p-3 backdrop-blur-sm border border-border">
+                               <div className="p-1.5 bg-secondary/20 rounded-lg">
+                                 <Target className="h-4 w-4 text-secondary-foreground" />
+                               </div>
+                               <div>
+                                 <p className="text-card-foreground text-sm font-medium">80 marks</p>
+                                 <p className="text-muted-foreground text-xs">50% of total GCSE</p>
+                               </div>
+                             </div>
+                           </div>
+                           
+                           <Button 
+                             onClick={() => navigate('/predicted-exam/computer-science?paper=2')}
+                             className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-bold py-3 px-6 rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-[1.02] border border-primary/30 backdrop-blur-sm"
+                           >
+                             <Crown className="h-4 w-4 mr-2" />
+                             Start Premium Exam
+                           </Button>
+                         </div>
+                       </CardContent>
+                     </Card>
+                   </>
+                 ))
+               }
+
+               {curriculum
+                  .filter(subject => subject.id !== 'maths-edexcel' && subject.id !== 'business-edexcel-igcse' && subject.id !== 'chemistry-edexcel' && subject.id !== 'physics-edexcel' && subject.id !== 'edexcel-english-language' && subject.id !== 'computer-science')
+                  .map((subject) => renderSubjectCard(subject))}
             </div>
           </TabsContent>
 
