@@ -21362,5 +21362,311 @@ export const curriculum: Subject[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'english-literature-edexcel',
+    name: 'English Literature (Edexcel)',
+    topics: [
+      {
+        id: 'shakespeare-texts',
+        name: 'Shakespeare Texts',
+        questions: [
+          {
+            id: 'shakespeare-q1',
+            question: 'Analyse how Shakespeare presents the theme of ambition in Macbeth.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Shakespeare presents ambition as a corrupting force through Macbeth\'s transformation from noble warrior to tyrant. The metaphor of ill-fitting clothes suggests his stolen position, while Lady Macbeth\'s manipulation reveals how unchecked ambition destroys relationships and morality.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of ambition as central theme (8 marks)',
+                'Use of textual evidence and quotations (8 marks)',
+                'Language and structural techniques (7 marks)',
+                'Context and interpretation (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'shakespeare-q2',
+            question: 'Explore the significance of the storm in The Tempest.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'The storm serves as both literal plot device and symbolic representation of Prospero\'s emotional turmoil and power. It demonstrates themes of control versus chaos, nature versus nurture, and sets up the play\'s exploration of forgiveness and reconciliation.',
+            markingCriteria: {
+              breakdown: [
+                'Understanding of storm\'s literal and symbolic significance (8 marks)',
+                'Analysis of dramatic techniques (8 marks)',
+                'Connection to broader themes (7 marks)',
+                'Textual support and context (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'shakespeare-q3',
+            question: 'How does Shakespeare present the relationship between Romeo and Juliet?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Shakespeare presents their relationship as passionate but doomed, using religious imagery and light/dark symbolism to show pure love corrupted by family hatred. Their rapid courtship reflects youthful impulsiveness while their deaths achieve reconciliation.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of relationship development (8 marks)',
+                'Language and imagery analysis (8 marks)',
+                'Understanding of dramatic irony and tragedy (7 marks)',
+                'Contextual awareness (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'shakespeare-q4',
+            question: 'Analyse the role of deception in Much Ado About Nothing.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Deception operates on multiple levels - benevolent tricks that unite Beatrice and Benedick contrast with Don John\'s malicious plot against Hero. Shakespeare shows how deception can both create and destroy relationships, questioning the nature of truth and appearance.',
+            markingCriteria: {
+              breakdown: [
+                'Understanding of different types of deception (8 marks)',
+                'Analysis of dramatic techniques (8 marks)',
+                'Character analysis and development (7 marks)',
+                'Thematic exploration (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'shakespeare-q5',
+            question: 'How does Shakespeare explore themes of love and identity in Twelfth Night?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Shakespeare uses Viola\'s disguise to explore fluid gender identity and different forms of love - romantic, platonic, and self-love. The confusion created by mistaken identity reveals the arbitrary nature of social roles and the complexity of human emotion.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of love in its various forms (8 marks)',
+                'Exploration of identity and disguise (8 marks)',
+                'Understanding of comedy conventions (7 marks)',
+                'Textual analysis and context (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          },
+          {
+            id: 'shakespeare-q6',
+            question: 'Examine how Shakespeare presents the character of Shylock in The Merchant of Venice.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Shylock is presented as both villain and victim, embodying antisemitic stereotypes while revealing the humanity beneath prejudice. His famous "Hath not a Jew eyes?" speech challenges audience assumptions about justice, mercy, and religious tolerance in Venetian society.',
+            markingCriteria: {
+              breakdown: [
+                'Complex character analysis (8 marks)',
+                'Understanding of historical context (8 marks)',
+                'Analysis of key speeches and scenes (7 marks)',
+                'Exploration of themes of prejudice and justice (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 1 - Shakespeare'
+          }
+        ]
+      },
+      {
+        id: 'post-1914-british-literature',
+        name: 'Post-1914 British Play or Novel',
+        questions: [
+          {
+            id: 'british-lit-q1',
+            question: 'Analyse how Priestley presents social responsibility in An Inspector Calls.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Priestley uses the Inspector as a moral voice to expose the Birling family\'s exploitation of Eva Smith, representing broader social inequality. The circular structure emphasizes collective responsibility, while dramatic irony about future events reinforces socialist messages about caring for others.',
+            markingCriteria: {
+              breakdown: [
+                'Understanding of social responsibility theme (8 marks)',
+                'Analysis of dramatic techniques (8 marks)',
+                'Character analysis and class representation (7 marks)',
+                'Historical and social context (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'british-lit-q2',
+            question: 'How does Brighouse explore themes of tradition versus progress in Hobson\'s Choice?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Brighouse contrasts Hobson\'s old-fashioned attitudes with Maggie\'s modern independence and business acumen. The play shows generational change through Maggie\'s transformation of Will Mossop and her challenge to patriarchal authority, reflecting early 20th-century social shifts.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of generational conflict (8 marks)',
+                'Character development and relationships (8 marks)',
+                'Social and historical context (7 marks)',
+                'Language and dramatic techniques (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'british-lit-q3',
+            question: 'Examine how Russell presents class differences in Blood Brothers.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Russell uses the parallel lives of Mickey and Edward to expose how class determines destiny. The musical format emphasizes tragic inevitability while contrasting working-class struggle with middle-class privilege, culminating in the brothers\' deaths as victims of social inequality.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of class representation (8 marks)',
+                'Understanding of dramatic structure and genre (8 marks)',
+                'Character comparison and development (7 marks)',
+                'Social commentary and context (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'british-lit-q4',
+            question: 'Analyse how Sherriff presents the horror of war in Journey\'s End.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Sherriff exposes war\'s psychological impact through Stanhope\'s alcoholism and breakdown, contrasting with Raleigh\'s naive enthusiasm. The claustrophobic trench setting and mounting tension before the final attack reveal the dehumanizing effects of prolonged warfare on officers and men.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of war\'s psychological effects (8 marks)',
+                'Character analysis and relationships (8 marks)',
+                'Dramatic techniques and setting (7 marks)',
+                'Historical context and anti-war message (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'british-lit-q5',
+            question: 'How does Orwell use allegory to critique totalitarianism in Animal Farm?',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Orwell\'s animal allegory traces the Russian Revolution\'s corruption, with Napoleon representing Stalin\'s tyranny. The gradual changing of commandments and the pigs\' human transformation illustrate how revolutionary ideals become corrupted by power, warning against totalitarian manipulation.',
+            markingCriteria: {
+              breakdown: [
+                'Understanding of allegorical technique (8 marks)',
+                'Analysis of political themes (8 marks)',
+                'Character representation and development (7 marks)',
+                'Historical context and relevance (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'british-lit-q6',
+            question: 'Examine how Golding explores the theme of civilization versus savagery in Lord of the Flies.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Golding shows civilization\'s fragility through the boys\' descent from democratic cooperation to tribal violence. Symbols like the conch and the beast represent order versus chaos, while characters like Ralph and Jack embody competing human impulses toward civility and savagery.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of central theme (8 marks)',
+                'Symbolism and allegory (8 marks)',
+                'Character analysis and development (7 marks)',
+                'Social and philosophical context (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'british-lit-q7',
+            question: 'How does Syal explore themes of identity and belonging in Anita and Me?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Syal presents Meena\'s struggle between British and Indian identities through her relationships with family and friends. The novel explores cultural assimilation, racism, and the complexity of multicultural identity in 1970s Britain, showing how young people navigate between different worlds.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of identity themes (8 marks)',
+                'Cultural and social context (8 marks)',
+                'Character development and relationships (7 marks)',
+                'Narrative technique and perspective (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'british-lit-q8',
+            question: 'Analyse how Hill creates atmosphere and tension in The Woman in Black.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Hill uses Gothic conventions including isolated settings, supernatural elements, and first-person narration to create mounting dread. The contrast between rational Arthur and mysterious Alice Drablow builds tension, while weather and landscape reflect psychological states.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of Gothic techniques (8 marks)',
+                'Examination of narrative structure (8 marks)',
+                'Setting and atmosphere creation (7 marks)',
+                'Character psychology and development (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'british-lit-q9',
+            question: 'Examine how Gupta presents themes of power and resistance in The Empress.',
+            marks: 30,
+            difficulty: 'hard',
+            modelAnswer: 'Gupta explores colonial power structures through the Rani\'s resistance to British rule, presenting both personal and political rebellion. The play examines how individual courage can challenge imperial authority while highlighting the costs of resistance for colonized peoples.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of power dynamics (8 marks)',
+                'Understanding of colonial context (8 marks)',
+                'Character analysis and motivation (7 marks)',
+                'Dramatic techniques and structure (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'british-lit-q10',
+            question: 'How does the adaptation of Refugee Boy explore themes of displacement and belonging?',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'The adaptation presents Alem\'s forced migration and cultural dislocation, exploring how refugees navigate new societies while maintaining cultural identity. The play examines prejudice, family separation, and the resilience required to rebuild life in unfamiliar circumstances.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of displacement themes (8 marks)',
+                'Understanding of refugee experience (8 marks)',
+                'Character development and relationships (7 marks)',
+                'Social context and relevance (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Drama'
+          },
+          {
+            id: 'british-lit-q11',
+            question: 'Analyse how Gavin explores themes of friendship and loyalty in Coram Boy.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Gavin presents contrasting relationships between characters like Toby and Aaron, showing how genuine friendship transcends social barriers. The novel explores how loyalty can be both protective and destructive, particularly in the context of 18th-century social hierarchies.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of friendship dynamics (8 marks)',
+                'Understanding of social context (8 marks)',
+                'Character development and relationships (7 marks)',
+                'Thematic exploration and relevance (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          },
+          {
+            id: 'british-lit-q12',
+            question: 'Examine how Blackman addresses themes of masculinity and emotional expression in Boys Don\'t Cry.',
+            marks: 30,
+            difficulty: 'medium',
+            modelAnswer: 'Blackman challenges traditional masculine stereotypes through Dante\'s emotional journey following his father\'s death. The novel explores how societal expectations about male behavior can be harmful, advocating for emotional openness and vulnerability as signs of strength.',
+            markingCriteria: {
+              breakdown: [
+                'Analysis of masculinity themes (8 marks)',
+                'Character development and psychology (8 marks)',
+                'Social commentary and relevance (7 marks)',
+                'Narrative technique and perspective (7 marks)'
+              ]
+            },
+            specReference: 'Edexcel English Literature Paper 2 - Modern Fiction'
+          }
+        ]
+      }
+    ]
   }
   ];
