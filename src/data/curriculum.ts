@@ -19747,7 +19747,7 @@ export const curriculum: Subject[] = [
   },
   {
     id: 'geography-b-ocr',
-    name: 'Geography B (Geography for Enquiring Minds)',
+    name: 'Geography B (OCR)',
     topics: [
       {
         id: 'paper-01-our-natural-world',
