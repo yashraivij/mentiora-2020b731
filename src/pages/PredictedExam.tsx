@@ -4126,6 +4126,388 @@ Write a story about a moment of fear.
       return questions;
     }
     
+    // OCR GCSE Computer Science (J277) - Two Predicted 2026 Exam Papers
+    if (subjectId === 'computer-science') {
+      let questionNumber = 1;
+      
+      // Determine which paper to generate based on URL parameter or default to Paper 1
+      const paperType = window.location.search.includes('paper=2') ? 'paper2' : 'paper1';
+      
+      if (paperType === 'paper1') {
+        // Paper 1 – J277/01: Computer systems (1h 30min, 80 marks)
+        
+        // Multiple Choice Questions (8 × 1 mark = 8 marks)
+        questions.push({
+          id: 'cs-j277-01-q1',
+          questionNumber: questionNumber++,
+          text: 'Which of the following is NOT a component of the CPU?\nA. ALU\nB. Control Unit\nC. Hard Drive\nD. Cache',
+          marks: 1,
+          section: 'A'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q2',
+          questionNumber: questionNumber++,
+          text: 'What type of memory is volatile?\nA. ROM\nB. RAM\nC. Flash memory\nD. Hard disk',
+          marks: 1,
+          section: 'A'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q3',
+          questionNumber: questionNumber++,
+          text: 'Which protocol is used for secure web browsing?\nA. HTTP\nB. FTP\nC. HTTPS\nD. SMTP',
+          marks: 1,
+          section: 'A'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q4',
+          questionNumber: questionNumber++,
+          text: 'What does LAN stand for?\nA. Large Area Network\nB. Local Access Network\nC. Local Area Network\nD. Limited Access Network',
+          marks: 1,
+          section: 'A'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q5',
+          questionNumber: questionNumber++,
+          text: 'Which storage device has the fastest access time?\nA. Hard disk drive\nB. Solid state drive\nC. Optical disk\nD. Magnetic tape',
+          marks: 1,
+          section: 'A'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q6',
+          questionNumber: questionNumber++,
+          text: 'What is malware?\nA. Broken hardware\nB. Malicious software\nC. Memory allocation software\nD. Main software',
+          marks: 1,
+          section: 'A'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q7',
+          questionNumber: questionNumber++,
+          text: 'Which of these is an example of an embedded system?\nA. Desktop computer\nB. Laptop\nC. Washing machine control system\nD. Server',
+          marks: 1,
+          section: 'A'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q8',
+          questionNumber: questionNumber++,
+          text: 'What does CPU stand for?\nA. Computer Processing Unit\nB. Central Processing Unit\nC. Central Program Unit\nD. Computer Program Unit',
+          marks: 1,
+          section: 'A'
+        });
+        
+        // Short Answer Questions (15 × 2-4 marks = 40 marks)
+        questions.push({
+          id: 'cs-j277-01-q9',
+          questionNumber: questionNumber++,
+          text: 'State two characteristics of ROM.',
+          marks: 2,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q10',
+          questionNumber: questionNumber++,
+          text: 'Explain what is meant by virtual memory.',
+          marks: 3,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q11',
+          questionNumber: questionNumber++,
+          text: 'Convert the binary number 11010110 to hexadecimal.',
+          marks: 2,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q12',
+          questionNumber: questionNumber++,
+          text: 'Calculate the file size in bytes for an image that is 800 pixels wide, 600 pixels high, with a colour depth of 24 bits.',
+          marks: 3,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q13',
+          questionNumber: questionNumber++,
+          text: 'State two advantages of using cloud storage.',
+          marks: 2,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q14',
+          questionNumber: questionNumber++,
+          text: 'Explain the difference between a virus and a worm.',
+          marks: 4,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q15',
+          questionNumber: questionNumber++,
+          text: 'Describe how a firewall protects a network.',
+          marks: 3,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q16',
+          questionNumber: questionNumber++,
+          text: 'State the purpose of the fetch-execute cycle.',
+          marks: 2,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q17',
+          questionNumber: questionNumber++,
+          text: 'Explain how increasing the number of cores affects CPU performance.',
+          marks: 3,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q18',
+          questionNumber: questionNumber++,
+          text: 'Give two examples of utility software and explain their purpose.',
+          marks: 4,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q19',
+          questionNumber: questionNumber++,
+          text: 'Describe the difference between lossy and lossless compression.',
+          marks: 4,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q20',
+          questionNumber: questionNumber++,
+          text: 'State two factors that affect network performance.',
+          marks: 2,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q21',
+          questionNumber: questionNumber++,
+          text: 'Explain what is meant by encryption and why it is important.',
+          marks: 4,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q22',
+          questionNumber: questionNumber++,
+          text: 'Compare the advantages and disadvantages of star and mesh network topologies.',
+          marks: 4,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q23',
+          questionNumber: questionNumber++,
+          text: 'Describe two ways that organizations can reduce the environmental impact of computing.',
+          marks: 4,
+          section: 'B'
+        });
+        
+        // Extended Response Questions (4 × 8 marks = 32 marks)
+        questions.push({
+          id: 'cs-j277-01-q24',
+          questionNumber: questionNumber++,
+          text: 'A school is planning to upgrade its computer network. Evaluate the advantages and disadvantages of using a client-server network compared to a peer-to-peer network for this school environment.\n\nIn your answer, you should consider:\n• Security\n• Performance\n• Cost\n• Maintenance requirements',
+          marks: 8,
+          section: 'C'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q25',
+          questionNumber: questionNumber++,
+          text: 'Discuss the ethical and legal issues surrounding the collection and use of personal data by social media companies.\n\nIn your answer, you should consider:\n• Data protection legislation\n• User consent\n• Data security\n• Privacy concerns',
+          marks: 8,
+          section: 'C'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q26',
+          questionNumber: questionNumber++,
+          text: 'Analyze the impact of different types of secondary storage on system performance and user experience.\n\nIn your answer, you should consider:\n• Speed of access\n• Capacity\n• Reliability\n• Cost per gigabyte',
+          marks: 8,
+          section: 'C'
+        });
+        
+        questions.push({
+          id: 'cs-j277-01-q27',
+          questionNumber: questionNumber++,
+          text: 'Evaluate the benefits and drawbacks of using embedded systems in modern vehicles.\n\nIn your answer, you should consider:\n• Safety features\n• User convenience\n• System reliability\n• Security vulnerabilities',
+          marks: 8,
+          section: 'C'
+        });
+        
+      } else {
+        // Paper 2 – J277/02: Computational thinking, algorithms and programming (1h 30min, 80 marks)
+        
+        // Section A: Computational thinking and algorithms (40 marks)
+        questions.push({
+          id: 'cs-j277-02-q1',
+          questionNumber: questionNumber++,
+          text: 'Define the term "algorithm".',
+          marks: 2,
+          section: 'A'
+        });
+        
+        questions.push({
+          id: 'cs-j277-02-q2',
+          questionNumber: questionNumber++,
+          text: 'Explain what is meant by "decomposition" in computational thinking.',
+          marks: 3,
+          section: 'A'
+        });
+        
+        questions.push({
+          id: 'cs-j277-02-q3',
+          questionNumber: questionNumber++,
+          text: 'Write pseudocode for a linear search algorithm to find a target value in an array called "numbers".',
+          marks: 5,
+          section: 'A'
+        });
+        
+        questions.push({
+          id: 'cs-j277-02-q4',
+          questionNumber: questionNumber++,
+          text: 'Complete the trace table for the following algorithm:\n\nBEGIN\n  x = 5\n  y = 3\n  FOR i = 1 TO 3\n    x = x + y\n    y = y + 1\n  ENDFOR\n  OUTPUT x, y\nEND\n\nTrace Table:\ni | x | y\n--|---|---\n  | 5 | 3\n1 |   |   \n2 |   |   \n3 |   |   ',
+          marks: 4,
+          section: 'A'
+        });
+        
+        questions.push({
+          id: 'cs-j277-02-q5',
+          questionNumber: questionNumber++,
+          text: 'Describe the main steps of the bubble sort algorithm.',
+          marks: 4,
+          section: 'A'
+        });
+        
+        questions.push({
+          id: 'cs-j277-02-q6',
+          questionNumber: questionNumber++,
+          text: 'State two advantages of using functions in programming.',
+          marks: 2,
+          section: 'A'
+        });
+        
+        questions.push({
+          id: 'cs-j277-02-q7',
+          questionNumber: questionNumber++,
+          text: 'Explain the difference between a syntax error and a logic error, giving an example of each.',
+          marks: 4,
+          section: 'A'
+        });
+        
+        questions.push({
+          id: 'cs-j277-02-q8',
+          questionNumber: questionNumber++,
+          text: 'What is meant by "validation" in programming? Give two examples of validation checks.',
+          marks: 4,
+          section: 'A'
+        });
+        
+        questions.push({
+          id: 'cs-j277-02-q9',
+          questionNumber: questionNumber++,
+          text: 'Complete the truth table for the Boolean expression: A AND (NOT B OR C)\n\nA | B | C | NOT B | NOT B OR C | A AND (NOT B OR C)\n--|---|---|-------|-------------|------------------\n0 | 0 | 0 |       |             |\n0 | 0 | 1 |       |             |\n0 | 1 | 0 |       |             |\n0 | 1 | 1 |       |             |\n1 | 0 | 0 |       |             |\n1 | 0 | 1 |       |             |\n1 | 1 | 0 |       |             |\n1 | 1 | 1 |       |             |',
+          marks: 6,
+          section: 'A'
+        });
+        
+        questions.push({
+          id: 'cs-j277-02-q10',
+          questionNumber: questionNumber++,
+          text: 'Write an algorithm using the OCR Exam Reference Language or a high-level programming language to calculate the average of numbers stored in an array called "scores".',
+          marks: 6,
+          section: 'A'
+        });
+        
+        // Section B: Programming and robust programs (40 marks)
+        questions.push({
+          id: 'cs-j277-02-q11',
+          questionNumber: questionNumber++,
+          text: 'Explain the difference between a compiler and an interpreter.',
+          marks: 4,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-02-q12',
+          questionNumber: questionNumber++,
+          text: 'State three features that you would expect to find in an Integrated Development Environment (IDE).',
+          marks: 3,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-02-q13',
+          questionNumber: questionNumber++,
+          text: 'Write a program using the OCR Exam Reference Language or a high-level programming language that:\n• Asks the user to enter a password\n• Checks if the password is at least 8 characters long\n• If valid, outputs "Password accepted"\n• If invalid, outputs "Password too short" and asks again\n• Continues until a valid password is entered',
+          marks: 8,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-02-q14',
+          questionNumber: questionNumber++,
+          text: 'Explain what is meant by "casting" in programming and give an example.',
+          marks: 3,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-02-q15',
+          questionNumber: questionNumber++,
+          text: 'A program stores student records with the following fields:\n• Name (string)\n• Age (integer)\n• Grade (character)\n• Average_mark (real)\n\nWrite an SQL query to select all students who have a grade of "A" and are aged 16 or over.',
+          marks: 4,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-02-q16',
+          questionNumber: questionNumber++,
+          text: 'Describe three defensive design techniques that programmers can use to make their code more robust.',
+          marks: 6,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-02-q17',
+          questionNumber: questionNumber++,
+          text: 'Write a program using the OCR Exam Reference Language or a high-level programming language that:\n• Creates a 2D array to store a 3x3 grid of numbers\n• Fills the array with random numbers between 1 and 10\n• Calculates and outputs the sum of all numbers in the array',
+          marks: 8,
+          section: 'B'
+        });
+        
+        questions.push({
+          id: 'cs-j277-02-q18',
+          questionNumber: questionNumber++,
+          text: 'Explain why it is important to test programs thoroughly. Describe three different types of test data that should be used.',
+          marks: 4,
+          section: 'B'
+        });
+      }
+      
+      return questions;
+    }
+    
     // Generate realistic GCSE predicted exam questions - DIFFERENT from practice questions
     const generatePredictedExamQuestions = (subjectId: string, topics: any[]) => {
       const predictedQuestions: ExamQuestion[] = [];

@@ -18447,5 +18447,269 @@ export const curriculum: Subject[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'computer-science',
+    name: 'Computer Science',
+    topics: [
+      {
+        id: 'systems-architecture',
+        name: 'Systems Architecture',
+        questions: [
+          {
+            id: 'cs-q1',
+            question: 'State the purpose of the CPU and describe the main stages of the fetch-execute cycle.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'The CPU processes instructions and data. Fetch-execute cycle: 1) Fetch - instruction retrieved from memory using program counter address 2) Decode - instruction interpreted by control unit 3) Execute - instruction carried out by ALU or other components 4) Program counter incremented to next instruction.',
+            markingCriteria: {
+              breakdown: [
+                'Purpose of CPU stated (1 mark)',
+                'Four stages of fetch-execute cycle described (4 marks)',
+                'Clear explanation of each stage (1 mark)'
+              ]
+            },
+            specReference: 'OCR J277 1.1.1'
+          },
+          {
+            id: 'cs-q2',
+            question: 'Explain how clock speed, cache size, and number of cores affect CPU performance.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Clock speed determines how many instructions per second the CPU can execute - higher clock speed means faster processing. Cache size affects how much frequently used data can be stored close to the CPU - larger cache reduces memory access time. Number of cores allows parallel processing - more cores enable multiple tasks simultaneously.',
+            markingCriteria: {
+              breakdown: [
+                'Clock speed effect explained (2 marks)',
+                'Cache size effect explained (2 marks)',
+                'Number of cores effect explained (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.1.2'
+          },
+          {
+            id: 'cs-q3',
+            question: 'Define embedded systems and give three examples with their characteristics.',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: 'Embedded systems are computer systems built into other devices to perform specific functions. Examples: washing machine (dedicated controls, limited user interface), car engine management (real-time processing, reliable operation), digital camera (specialized image processing, compact design).',
+            markingCriteria: {
+              breakdown: [
+                'Definition of embedded systems (2 marks)',
+                'Three appropriate examples (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.1.3'
+          }
+        ]
+      },
+      {
+        id: 'memory-storage',
+        name: 'Memory and Storage',
+        questions: [
+          {
+            id: 'cs-q4',
+            question: 'Compare RAM and ROM, explaining their purpose and characteristics.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'RAM (Random Access Memory): volatile memory that stores currently running programs and data, can be read and written to, loses data when power off. ROM (Read Only Memory): non-volatile memory that stores permanent instructions like BIOS, cannot be changed during normal operation, retains data when power off.',
+            markingCriteria: {
+              breakdown: [
+                'RAM characteristics and purpose (3 marks)',
+                'ROM characteristics and purpose (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.2.1'
+          },
+          {
+            id: 'cs-q5',
+            question: 'Calculate the file size in bytes for a 5-minute song sampled at 44,100 Hz with 16-bit depth.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'File size = sample rate × duration × bit depth. Duration = 5 minutes = 300 seconds. Size = 44,100 × 300 × 16 = 211,680,000 bits. Convert to bytes: 211,680,000 ÷ 8 = 26,460,000 bytes.',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula identified (1 mark)',
+                'Correct conversion of time to seconds (1 mark)',
+                'Correct calculation in bits (1 mark)',
+                'Correct conversion to bytes (1 mark)'
+              ]
+            },
+            specReference: 'OCR J277 1.2.3'
+          },
+          {
+            id: 'cs-q6',
+            question: 'Convert the denary number 147 to binary and then to hexadecimal.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: '147 in binary: 147 ÷ 2 = 73 remainder 1, 73 ÷ 2 = 36 remainder 1, 36 ÷ 2 = 18 remainder 0, 18 ÷ 2 = 9 remainder 0, 9 ÷ 2 = 4 remainder 1, 4 ÷ 2 = 2 remainder 0, 2 ÷ 2 = 1 remainder 0, 1 ÷ 2 = 0 remainder 1. Binary = 10010011. Hexadecimal: 1001 = 9, 0011 = 3, so hex = 93.',
+            markingCriteria: {
+              breakdown: [
+                'Correct binary conversion (2 marks)',
+                'Correct grouping for hex (1 mark)',
+                'Correct hexadecimal result (1 mark)'
+              ]
+            },
+            specReference: 'OCR J277 1.2.4'
+          }
+        ]
+      },
+      {
+        id: 'networks-protocols',
+        name: 'Computer Networks and Protocols',
+        questions: [
+          {
+            id: 'cs-q7',
+            question: 'Explain the difference between LAN and WAN networks, giving examples of each.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'LAN (Local Area Network) covers a small geographical area like a school or office building, typically owned by one organization. Example: school computer network. WAN (Wide Area Network) covers large geographical areas, often connecting multiple LANs across cities or countries. Example: the Internet.',
+            markingCriteria: {
+              breakdown: [
+                'LAN definition and example (2 marks)',
+                'WAN definition and example (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.3.1'
+          },
+          {
+            id: 'cs-q8',
+            question: 'Describe the purpose of IP addresses and MAC addresses in networking.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'IP addresses are logical addresses used to identify devices on a network and route data between networks. They can change and are assigned by network administrators. MAC addresses are physical addresses built into network interface cards, unique to each device and cannot be changed.',
+            markingCriteria: {
+              breakdown: [
+                'IP address purpose and characteristics (2 marks)',
+                'MAC address purpose and characteristics (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.3.2'
+          }
+        ]
+      },
+      {
+        id: 'network-security',
+        name: 'Network Security',
+        questions: [
+          {
+            id: 'cs-q9',
+            question: 'Describe three types of malware and explain how each one attacks computer systems.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Virus: attaches to other programs and spreads when infected programs are run, can corrupt or delete files. Worm: self-replicating program that spreads across networks without user intervention, consumes bandwidth and system resources. Trojan: disguises itself as legitimate software but contains malicious code, often creates backdoors for unauthorized access.',
+            markingCriteria: {
+              breakdown: [
+                'Three types of malware identified (3 marks)',
+                'Attack methods explained for each (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.4.1'
+          },
+          {
+            id: 'cs-q10',
+            question: 'Explain how firewalls and encryption help prevent network security threats.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Firewalls monitor and control incoming and outgoing network traffic based on predetermined security rules, blocking unauthorized access attempts. Encryption converts data into coded format that can only be read with the correct decryption key, protecting data during transmission from interception.',
+            markingCriteria: {
+              breakdown: [
+                'Firewall function explained (2 marks)',
+                'Encryption function explained (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.4.2'
+          }
+        ]
+      },
+      {
+        id: 'algorithms-programming',
+        name: 'Algorithms and Programming',
+        questions: [
+          {
+            id: 'cs-q11',
+            question: 'Write pseudocode for a linear search algorithm to find a target value in an array.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'BEGIN\n  INPUT target, array\n  found = false\n  FOR i = 0 TO length(array) - 1\n    IF array[i] = target THEN\n      OUTPUT "Found at position " + i\n      found = true\n      BREAK\n    ENDIF\n  ENDFOR\n  IF found = false THEN\n    OUTPUT "Not found"\n  ENDIF\nEND',
+            markingCriteria: {
+              breakdown: [
+                'Correct loop structure (2 marks)',
+                'Correct comparison logic (2 marks)',
+                'Appropriate output statements (1 mark)'
+              ]
+            },
+            specReference: 'OCR J277 2.1.3'
+          },
+          {
+            id: 'cs-q12',
+            question: 'Explain the difference between a compiler and an interpreter.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Compiler translates entire source code into machine code before execution, creates executable file, faster execution but slower initial compilation. Interpreter translates and executes code line by line during runtime, no executable file created, slower execution but faster to start and easier to debug.',
+            markingCriteria: {
+              breakdown: [
+                'Compiler characteristics explained (2 marks)',
+                'Interpreter characteristics explained (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 2.5.1'
+          }
+        ]
+      },
+      {
+        id: 'boolean-logic',
+        name: 'Boolean Logic',
+        questions: [
+          {
+            id: 'cs-q13',
+            question: 'Complete the truth table for the logic expression: A AND (B OR C)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'A | B | C | B OR C | A AND (B OR C)\n0 | 0 | 0 |   0    |       0\n0 | 0 | 1 |   1    |       0\n0 | 1 | 0 |   1    |       0\n0 | 1 | 1 |   1    |       0\n1 | 0 | 0 |   0    |       0\n1 | 0 | 1 |   1    |       1\n1 | 1 | 0 |   1    |       1\n1 | 1 | 1 |   1    |       1',
+            markingCriteria: {
+              breakdown: [
+                'Correct B OR C column (2 marks)',
+                'Correct final result column (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 2.4'
+          }
+        ]
+      },
+      {
+        id: 'ethical-legal-environmental',
+        name: 'Ethical, Legal and Environmental Impacts',
+        questions: [
+          {
+            id: 'cs-q14',
+            question: 'Explain the purpose of the Data Protection Act 2018 and give two examples of how it protects personal data.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The Data Protection Act 2018 protects individuals rights regarding their personal data and regulates how organizations collect, store and use personal information. Examples: individuals have the right to access their personal data held by organizations, organizations must obtain consent before collecting personal data and can only use it for specified purposes.',
+            markingCriteria: {
+              breakdown: [
+                'Purpose of DPA 2018 explained (2 marks)',
+                'Two examples of protection provided (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.6'
+          },
+          {
+            id: 'cs-q15',
+            question: 'Compare open source and proprietary software licenses, giving advantages of each.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Open source: source code is freely available, can be modified and redistributed, usually free to use, community support. Advantages: customizable, no licensing costs, transparency. Proprietary: source code is private, cannot be modified, requires license to use, commercial support. Advantages: professional support, guaranteed updates, user-friendly interfaces.',
+            markingCriteria: {
+              breakdown: [
+                'Open source characteristics and advantages (3 marks)',
+                'Proprietary characteristics and advantages (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.6'
+          }
+        ]
+      }
+    ]
   }
   ];
