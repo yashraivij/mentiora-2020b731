@@ -3254,6 +3254,40 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return combinedScienceBiologyQuestions;
     }
 
+    // Special format for Geography B (OCR) - Use curriculum predicted exam questions
+    if (subjectId === 'geography-b-ocr') {
+      console.log('Loading Geography B (OCR) predicted exam questions...');
+      
+      // Determine which paper based on subjectId suffix or default to Paper 01
+      let paperName = 'Paper 01: Our Natural World';
+      if (subjectId.includes('paper-02')) {
+        paperName = 'Paper 02: People and Society';
+      } else if (subjectId.includes('paper-03')) {
+        paperName = 'Paper 03: Geographical Exploration';
+      }
+      
+      // Find the specific paper topic in the curriculum
+      const paperTopic = subject.topics.find(topic => 
+        topic.name.includes(paperName)
+      );
+      
+      if (paperTopic) {
+        const questions = paperTopic.questions.map((q, index) => ({
+          id: q.id,
+          questionNumber: index + 1,
+          text: q.question,
+          marks: q.marks,
+          section: q.question.includes('DECISION MAKING EXERCISE') ? 'Decision Making Exercise' : 
+                   paperName === 'Paper 01: Our Natural World' ? 'Physical Geography' :
+                   paperName === 'Paper 02: People and Society' ? 'Human Geography' : 
+                   'Geographical Skills'
+        }));
+        
+        console.log(`Geography B (OCR) ${paperName} questions loaded:`, questions.length);
+        return questions;
+      }
+    }
+
     // Special format for Geography A (Edexcel) - Use curriculum predicted exam questions
     if (subjectId === 'geography-a-edexcel') {
       console.log('Loading Geography A (Edexcel) predicted exam questions...');
@@ -4810,7 +4844,7 @@ Write a story about a moment of fear.
     };
 
     // Use the new predicted question generator for subjects that don't have specific exam formats
-    if (subjectId !== 'physics' && subjectId !== 'geography' && subjectId !== 'geography-a-edexcel' && subjectId !== 'english-literature' && subjectId !== 'history' && subjectId !== 'english-language' && subjectId !== 'religious-studies' && subjectId !== 'psychology') {
+    if (subjectId !== 'physics' && subjectId !== 'geography' && subjectId !== 'geography-a-edexcel' && subjectId !== 'geography-b-ocr' && subjectId !== 'english-literature' && subjectId !== 'history' && subjectId !== 'english-language' && subjectId !== 'religious-studies' && subjectId !== 'psychology') {
       const predictedQuestions = generatePredictedExamQuestions(subjectId, subject.topics);
       questions.push(...predictedQuestions);
     }
@@ -5077,6 +5111,7 @@ Write a story about a moment of fear.
       german: 120, // 2h
       geography: 90, // 1h 30min
       "geography-a-edexcel": 90, // 1h 30min
+      "geography-b-ocr": 90, // 1h 30min
       "computer-science": 120, // 2h
       psychology: 90, // 1h 30min
     };
@@ -5107,6 +5142,9 @@ Write a story about a moment of fear.
     }
     if (subjectId === 'geography-a-edexcel') {
       return 94; // Edexcel Geography A Paper 1: 94 marks total (including SPaG)
+    }
+    if (subjectId === 'geography-b-ocr') {
+      return 70; // OCR Geography B Papers 01/02: 70 marks each, Paper 03: 60 marks
     }
     if (subjectId === 'history') {
       return 84; // History Paper 1: Section A (44 marks) + Section B (40 marks)
@@ -5506,11 +5544,12 @@ Write a story about a moment of fear.
               <Crown className="h-6 w-6 text-amber-500" />
               <div>
                   <h1 className="text-lg font-bold text-foreground">
-                    {subjectId === 'history' ? 'History Paper 1' : 
-                     subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
-                     subjectId === 'geography' ? `Geography ${geographyPaperType}` : 
-                     subjectId === 'geography-a-edexcel' ? 'Geography A (Edexcel) Paper 1' :
-                     subjectId === 'geography-paper-2' ? 'Geography Paper 2' :
+                     {subjectId === 'history' ? 'History Paper 1' : 
+                      subjectId === 'religious-studies' ? 'Religious Studies Component 1' : 
+                      subjectId === 'geography' ? `Geography ${geographyPaperType}` : 
+                      subjectId === 'geography-a-edexcel' ? 'Geography A (Edexcel) Paper 1' :
+                      subjectId === 'geography-b-ocr' ? 'Geography B (Geography for Enquiring Minds)' :
+                      subjectId === 'geography-paper-2' ? 'Geography Paper 2' :
                       subjectId === 'maths' ? 'AQA Maths Paper 1 (Non-Calculator)' :
                        subjectId === 'computer-science' ? 'Computer Science Paper 1' :
                        subjectId === 'psychology' ? 'Studies and Applications in Psychology 1 (Component 01)' :
