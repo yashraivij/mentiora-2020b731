@@ -115,6 +115,11 @@ const PredictedQuestions = () => {
   const getSubjectDisplayName = (subject: any, examBoard?: string) => {
     let name = subject.name;
     
+    // Handle psychology specifically - change from AQA to OCR
+    if (subject.id === 'psychology') {
+      name = name.replace('(AQA)', '(OCR)');
+    }
+    
     // Remove brackets from Edexcel subjects and update Business to IGCSE Business
     if (subject.id === 'maths-edexcel') {
       name = 'Mathematics';
