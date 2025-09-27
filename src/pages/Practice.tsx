@@ -169,13 +169,33 @@ const Practice = () => {
       return;
     }
     
+    // Debug logging for Macbeth specifically
+    if (topicId === 'macbeth') {
+      console.log('DEBUG: Macbeth topic data:', topic);
+      console.log('DEBUG: Raw questions count:', topic.questions?.length || 0);
+      console.log('DEBUG: All questions:', topic.questions?.map(q => q.id) || []);
+    }
+    
     // Try to load existing session first
     const sessionRestored = loadSessionState();
     
     // Only shuffle questions if no session was restored
     if (!sessionRestored) {
       const filteredQuestions = filterNonDiagramQuestions(topic.questions || []);
+      
+      // More debug logging for Macbeth
+      if (topicId === 'macbeth') {
+        console.log('DEBUG: Filtered questions count:', filteredQuestions.length);
+        console.log('DEBUG: Filtered questions:', filteredQuestions.map(q => q.id));
+      }
+      
       const shuffled = shuffleArray(filteredQuestions);
+      
+      if (topicId === 'macbeth') {
+        console.log('DEBUG: Shuffled questions count:', shuffled.length);
+        console.log('DEBUG: Final shuffled questions:', shuffled.map(q => q.id));
+      }
+      
       setShuffledQuestions(shuffled);
     }
   }, [subject, topic, navigate, topicId, user?.id]);
