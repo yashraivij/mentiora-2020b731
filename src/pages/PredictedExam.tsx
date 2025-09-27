@@ -1138,6 +1138,102 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
       return questions;
     }
     
+    // Special format for Spanish AQA GCSE - 4 papers (Foundation/Higher Reading & Writing)
+    if (subjectId === 'spanish-aqa') {
+      const papers = [
+        {
+          id: 'paper-3-foundation',
+          title: 'Paper 3: Reading – Foundation',
+          timeLimit: 45,
+          totalMarks: 50,
+          sections: [
+            { name: 'Section A', description: 'Reading comprehension questions in English (40 marks)', marks: 40 },
+            { name: 'Section B', description: 'Translation from Spanish into English (10 marks)', marks: 10 }
+          ]
+        },
+        {
+          id: 'paper-3-higher', 
+          title: 'Paper 3: Reading – Higher',
+          timeLimit: 60,
+          totalMarks: 50,
+          sections: [
+            { name: 'Section A', description: 'Reading comprehension questions in English (40 marks)', marks: 40 },
+            { name: 'Section B', description: 'Translation from Spanish into English (10 marks)', marks: 10 }
+          ]
+        },
+        {
+          id: 'paper-4-foundation',
+          title: 'Paper 4: Writing – Foundation', 
+          timeLimit: 70,
+          totalMarks: 50,
+          sections: [
+            { name: 'Q1', description: 'Five short sentences in response to text prompt (10 marks)', marks: 10 },
+            { name: 'Q2', description: 'Short piece of writing - five bullet points, ~50 words (10 marks)', marks: 10 },
+            { name: 'Q3', description: 'Five short grammar tasks (5 marks)', marks: 5 },
+            { name: 'Q4', description: 'Translation English to Spanish, minimum 35 words (10 marks)', marks: 10 },
+            { name: 'Q5', description: 'Writing task - three bullet points, ~90 words (15 marks)', marks: 15 }
+          ]
+        },
+        {
+          id: 'paper-4-higher',
+          title: 'Paper 4: Writing – Higher',
+          timeLimit: 75, 
+          totalMarks: 50,
+          sections: [
+            { name: 'Q1', description: 'Translation English to Spanish, minimum 50 words (10 marks)', marks: 10 },
+            { name: 'Q2', description: 'Writing task - three bullet points, ~90 words (15 marks)', marks: 15 },
+            { name: 'Q3', description: 'Open-ended writing task - two bullets, ~150 words (25 marks)', marks: 25 }
+          ]
+        }
+      ];
+
+      // Generate sample questions for each paper
+      papers.forEach(paper => {
+        // Add paper as section header
+        questions.push({
+          id: `${paper.id}-header`,
+          questionNumber: questions.length + 1,
+          text: `${paper.title}\n\nTime: ${paper.timeLimit} minutes\nTotal marks: ${paper.totalMarks}\n\n${paper.sections.map(s => `${s.name}: ${s.description}`).join('\n')}`,
+          marks: 0,
+          section: paper.id
+        });
+
+        if (paper.id.includes('reading')) {
+          // Reading paper questions - sample from curriculum
+          const sampleQuestions = subject.topics.slice(0, 3).flatMap(topic => 
+            topic.questions.filter(q => q.question.includes('read') || q.question.includes('translate')).slice(0, 2)
+          );
+          
+          sampleQuestions.forEach(q => {
+            questions.push({
+              id: `${paper.id}-${q.id}`,
+              questionNumber: questions.length + 1,
+              text: q.question,
+              marks: q.marks,
+              section: paper.id
+            });
+          });
+        } else {
+          // Writing paper questions - sample from curriculum  
+          const sampleQuestions = subject.topics.slice(0, 3).flatMap(topic =>
+            topic.questions.filter(q => q.question.includes('write') || q.question.includes('translate')).slice(0, 2)
+          );
+          
+          sampleQuestions.forEach(q => {
+            questions.push({
+              id: `${paper.id}-${q.id}`,
+              questionNumber: questions.length + 1, 
+              text: q.question,
+              marks: q.marks,
+              section: paper.id
+            });
+          });
+        }
+      });
+
+      return questions;
+    }
+    
     // Special format for Physics - AQA GCSE Paper 1 (100 marks total, 23 questions)
     if (subjectId === 'physics') {
       let questionNumber = 1;

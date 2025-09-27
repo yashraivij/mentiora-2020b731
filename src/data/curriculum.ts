@@ -17825,5 +17825,627 @@ export const curriculum: Subject[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'spanish-aqa',
+    name: 'Spanish (AQA GCSE)',
+    topics: [
+      {
+        id: 'identity-relationships',
+        name: 'Identity and relationships with others',
+        questions: [
+          {
+            id: 'ir-q1',
+            question: 'You read this email from your Spanish friend Ana:\n\n"¡Hola! Me llamo Ana y tengo dieciséis años. Vivo con mi familia en Madrid. Mi padre es médico y mi madre es profesora. Tengo un hermano mayor que se llama Carlos. En mi tiempo libre me gusta leer libros y escuchar música. También toco la guitarra. ¿Y tú? ¿Tienes hermanos? ¿Qué te gusta hacer en tu tiempo libre?"\n\nAnswer the following questions in English:\n(a) How old is Ana?\n(b) What is her father\'s job?\n(c) Name two activities Ana likes to do in her free time.',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: '(a) Sixteen/16 years old (1 mark)\n(b) Doctor (1 mark)\n(c) Any two from: reading books, listening to music, playing guitar (2 marks)\nTotal: 4 marks',
+            markingCriteria: {
+              breakdown: [
+                'Age correctly identified (1 mark)',
+                'Father\'s job correctly identified (1 mark)', 
+                'Two free time activities correctly identified (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Foundation'
+          },
+          {
+            id: 'ir-q2',
+            question: 'Translate the following passage from Spanish into English:\n\n"Mi mejor amigo se llama Miguel. Es muy simpático y divertido. Siempre me ayuda con los deberes. Los fines de semana salimos juntos al cine o al parque."\n\n(Minimum 35 words)',
+            marks: 10,
+            difficulty: 'easy',
+            modelAnswer: 'My best friend is called Miguel. He is very nice/kind and funny/fun. He always helps me with homework. At weekends we go out together to the cinema or to the park.',
+            markingCriteria: {
+              breakdown: [
+                'Accurate translation of key vocabulary (5 marks)',
+                'Correct grammatical structures (3 marks)',
+                'Natural English expression (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Foundation'
+          },
+          {
+            id: 'ir-q3',
+            question: 'Write about your family and relationships. You should describe five things you can see or experience in your family life.\n\nWrite approximately 50 words in Spanish.',
+            marks: 10,
+            difficulty: 'easy',
+            modelAnswer: 'En mi familia somos cuatro personas: mis padres, mi hermana y yo. Mi padre trabaja en una oficina y mi madre es enfermera. Mi hermana menor tiene doce años. Los domingos comemos juntos y hablamos de la semana. Me gusta mi familia porque siempre me apoyan.',
+            markingCriteria: {
+              breakdown: [
+                'Content: Five relevant points about family life (5 marks)',
+                'Language: Basic vocabulary and structures (3 marks)',
+                'Accuracy: Grammar and spelling (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Foundation'
+          },
+          {
+            id: 'ir-q4',
+            question: 'You read this text about Spanish teenagers and their relationships:\n\n"Los jóvenes españoles de hoy en día pasan mucho tiempo con sus amigos. Prefieren salir en grupos grandes y van a centros comerciales, parques o cafeterías. Las redes sociales son muy importantes para mantener contacto. Sin embargo, muchos padres están preocupados porque sus hijos pasan demasiado tiempo en internet y no dedican suficiente tiempo a los estudios."\n\nAnswer in English:\n(a) Where do Spanish teenagers like to go with their friends? (Give two places)\n(b) Why are parents worried?\n(c) According to the text, what do social media help teenagers to do?',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: '(a) Any two from: shopping centres/malls, parks, cafes/cafeterias (2 marks)\n(b) Because their children spend too much time on the internet/don\'t spend enough time studying (2 marks)\n(c) Keep/maintain contact (2 marks)',
+            markingCriteria: {
+              breakdown: [
+                'Two locations correctly identified (2 marks)',
+                'Parents\' concern correctly identified (2 marks)',
+                'Purpose of social media correctly identified (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Higher'
+          },
+          {
+            id: 'ir-q5',
+            question: 'Translate the following from English into Spanish:\n\n"My family is very important to me. I have two younger sisters and we get along well. My parents are quite strict but fair. At weekends we often visit our grandparents who live nearby."\n\n(Minimum 50 words)',
+            marks: 10,
+            difficulty: 'medium',
+            modelAnswer: 'Mi familia es muy importante para mí. Tengo dos hermanas menores y nos llevamos bien. Mis padres son bastante estrictos pero justos. Los fines de semana visitamos a menudo a nuestros abuelos que viven cerca.',
+            markingCriteria: {
+              breakdown: [
+                'Accurate vocabulary and key concepts (4 marks)',
+                'Correct grammatical structures (4 marks)',
+                'Natural Spanish expression (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Higher'
+          }
+        ]
+      },
+      {
+        id: 'healthy-living-lifestyle',
+        name: 'Healthy living and lifestyle',
+        questions: [
+          {
+            id: 'hll-q1',
+            question: 'Read this advertisement for a Spanish sports center:\n\n"¡Centro Deportivo Sevilla! Abierto todos los días de 6:00 a 22:00. Ofrecemos clases de natación, yoga y aeróbicos. También tenemos un gimnasio moderno con máquinas nuevas. Los precios son muy económicos: 25 euros al mes. ¡Ven a mantenerte en forma con nosotros!"\n\nAnswer in English:\n(a) What are the opening hours?\n(b) Name two types of classes offered.\n(c) How much does membership cost per month?',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: '(a) 6:00 to 22:00 / 6am to 10pm (1 mark)\n(b) Any two from: swimming, yoga, aerobics (2 marks)\n(c) 25 euros (1 mark)',
+            markingCriteria: {
+              breakdown: [
+                'Opening hours correctly identified (1 mark)',
+                'Two types of classes correctly identified (2 marks)',
+                'Monthly cost correctly identified (1 mark)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Foundation'
+          },
+          {
+            id: 'hll-q2',
+            question: 'Write five short sentences in Spanish about healthy activities you can do at a fitness center in Seville.\n\nExample: "Puedo nadar en la piscina."\n\nWrite approximately 50 words total.',
+            marks: 10,
+            difficulty: 'easy',
+            modelAnswer: 'Puedo nadar en la piscina. Hago yoga para relajarme. Levanto pesas en el gimnasio. Participo en clases de baile. Corro en la cinta de correr.',
+            markingCriteria: {
+              breakdown: [
+                'Five relevant activities mentioned (5 marks)',
+                'Correct use of "puedo/hago" structures (3 marks)',
+                'Accurate vocabulary and spelling (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Foundation'
+          },
+          {
+            id: 'hll-q3',
+            question: 'You are writing about healthy living. Write approximately 90 words in Spanish covering these points:\n• What sports you do and why\n• What you eat to stay healthy\n• One change you would like to make to your lifestyle',
+            marks: 15,
+            difficulty: 'medium',
+            modelAnswer: 'Practico varios deportes para mantenerme en forma. Juego al fútbol dos veces por semana porque es divertido y me ayuda a estar activo. También nado los domingos en la piscina local.\n\nPara estar sano, como muchas frutas y verduras cada día. Bebo mucha agua y evito la comida basura. Mi desayuno típico incluye cereales, yogur y fruta fresca.\n\nMe gustaría hacer más ejercicio durante la semana. Quiero ir al gimnasio después del colegio para mejorar mi condición física y sentirme más energético.',
+            markingCriteria: {
+              breakdown: [
+                'Content: All three bullet points addressed (9 marks)',
+                'Range of language: Variety of structures and vocabulary (3 marks)',
+                'Accuracy: Grammar, spelling and syntax (3 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Foundation/Higher'
+          },
+          {
+            id: 'hll-q4',
+            question: 'Read this text about diet trends among Spanish young people:\n\n"Una encuesta reciente revela que los jóvenes españoles están cambiando sus hábitos alimentarios. Cada vez más adolescentes optan por dietas vegetarianas o veganas, principalmente por razones medioambientales. Sin embargo, los nutricionistas advierten que es esencial planificar estas dietas cuidadosamente para evitar deficiencias nutricionales. Recomiendan consultar con profesionales antes de hacer cambios drásticos en la alimentación."\n\nAnswer in English:\n(a) What dietary changes are Spanish teenagers making?\n(b) What is the main reason for these changes?\n(c) What do nutritionists warn about?\n(d) What do they recommend?',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: '(a) They are choosing vegetarian or vegan diets (2 marks)\n(b) Environmental reasons (2 marks)\n(c) It\'s essential to plan these diets carefully to avoid nutritional deficiencies (2 marks)\n(d) Consult with professionals before making drastic changes to diet (2 marks)',
+            markingCriteria: {
+              breakdown: [
+                'Dietary changes correctly identified (2 marks)',
+                'Main reason correctly identified (2 marks)',
+                'Nutritionists\' warning correctly identified (2 marks)',
+                'Recommendation correctly identified (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Higher'
+          }
+        ]
+      },
+      {
+        id: 'education-work',
+        name: 'Education and work',
+        questions: [
+          {
+            id: 'ew-q1',
+            question: 'Read this message from a Spanish student about their school:\n\n"Mi instituto se llama IES Cervantes. Las clases empiezan a las ocho y media y terminan a las dos y media. Tengo siete asignaturas: matemáticas, inglés, historia, ciencias, educación física, arte y español. Mi asignatura favorita es el arte porque el profesor es muy creativo. Después del colegio hago los deberes y estudio para los exámenes."\n\nComplete these sentences in English:\n(a) School starts at ___________\n(b) The student studies ___________ subjects\n(c) Their favourite subject is ___________ because ___________',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: '(a) half past eight / 8:30 (1 mark)\n(b) seven (1 mark)\n(c) art because the teacher is very creative (2 marks)',
+            markingCriteria: {
+              breakdown: [
+                'School start time correctly identified (1 mark)',
+                'Number of subjects correctly identified (1 mark)',
+                'Favourite subject and reason correctly identified (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Foundation'
+          },
+          {
+            id: 'ew-q2',
+            question: 'Write about your school and studies. Write approximately 50 words in Spanish covering:\n• Your school subjects\n• Your favourite and least favourite subjects\n• Your plans for next year',
+            marks: 10,
+            difficulty: 'easy',
+            modelAnswer: 'Estudio ocho asignaturas en mi instituto: matemáticas, inglés, ciencias, historia, geografía, educación física, arte y francés. Mi asignatura favorita es el inglés porque me gusta hablar otros idiomas. No me gusta mucho las matemáticas porque son difíciles. El año que viene quiero estudiar español también.',
+            markingCriteria: {
+              breakdown: [
+                'Content: All three points addressed (5 marks)',
+                'Language: Appropriate vocabulary and structures (3 marks)',
+                'Accuracy: Grammar and spelling (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Foundation'
+          },
+          {
+            id: 'ew-q3',
+            question: 'Translate from Spanish to English:\n\n"En el futuro me gustaría ser profesora de idiomas. Creo que es una profesión muy importante porque ayudas a los jóvenes a comunicarse con personas de otros países. Para conseguir este trabajo necesito estudiar en la universidad durante cuatro años."\n\n(Minimum 35 words)',
+            marks: 10,
+            difficulty: 'medium',
+            modelAnswer: 'In the future I would like to be a languages teacher. I think it is a very important profession because you help young people to communicate with people from other countries. To get this job I need to study at university for four years.',
+            markingCriteria: {
+              breakdown: [
+                'Accurate translation of key vocabulary (4 marks)',
+                'Correct rendering of conditional and subjunctive ideas (3 marks)',
+                'Natural English expression (3 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Higher'
+          },
+          {
+            id: 'ew-q4',
+            question: 'You are discussing career plans. Write approximately 150 words in Spanish about:\n• What job you would like to do in the future and why\n• What qualifications and skills you think you need\n• How you think work will change in the next 20 years\n\nYou should give your opinion and justify your points of view.',
+            marks: 25,
+            difficulty: 'hard',
+            modelAnswer: 'En el futuro me gustaría trabajar como ingeniero informático porque me fascina la tecnología y creo que es un sector con muchas oportunidades de empleo. Este trabajo me permitiría resolver problemas complejos y crear soluciones innovadoras que podrían mejorar la vida de las personas.\n\nPara conseguir este puesto, necesitaría estudiar ingeniería en la universidad y obtener un título universitario. También sería esencial desarrollar habilidades en programación, matemáticas avanzadas y trabajo en equipo. Además, como la tecnología cambia constantemente, tendría que seguir aprendiendo durante toda mi carrera profesional.\n\nEn mi opinión, el trabajo cambiará significativamente en los próximos veinte años. Creo que habrá más empleos remotos porque la pandemia ha demostrado que muchas tareas se pueden hacer desde casa. También pienso que la inteligencia artificial reemplazará algunos trabajos rutinarios, pero creará nuevas oportunidades en campos como la ciberseguridad y el análisis de datos.',
+            markingCriteria: {
+              breakdown: [
+                'Content: All bullet points fully addressed with developed ideas (15 marks)',
+                'Range of language: Complex structures, variety of tenses (5 marks)', 
+                'Accuracy: Grammar, vocabulary, spelling (5 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Higher'
+          }
+        ]
+      },
+      {
+        id: 'free-time-activities',
+        name: 'Free-time activities',
+        questions: [
+          {
+            id: 'fta-q1',
+            question: 'Read these descriptions of weekend activities:\n\n"Los sábados por la mañana voy al mercado con mi madre. Compramos fruta fresca y verduras. Por la tarde juego al tenis con mis amigos en el parque. Los domingos me quedo en casa y leo libros o veo películas en la televisión. También ayudo a mi padre en el jardín."\n\nAnswer True, False or Not mentioned:\n(a) She goes shopping on Saturday mornings\n(b) She plays tennis on Sunday afternoons\n(c) She helps in the garden\n(d) She goes to the cinema on Sundays',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: '(a) True (1 mark)\n(b) False - she plays tennis on Saturday afternoons (1 mark)\n(c) True (1 mark)\n(d) False - she watches films on television, not at cinema (1 mark)',
+            markingCriteria: {
+              breakdown: [
+                'Each correct True/False/Not mentioned response (1 mark each)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Foundation'
+          },
+          {
+            id: 'fta-q2',
+            question: 'Complete the following grammar tasks in Spanish:\n(a) Write the correct form of "gustar": A mí _______ gusta la música clásica.\n(b) Fill in the preposition: Voy _______ cine los viernes.\n(c) Choose the correct adjective: La película es muy (aburrido/aburrida)\n(d) Write the plural: El deporte → Los _______\n(e) Complete with correct verb: Ayer _______ (ir - preterite) al teatro.',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: '(a) me (1 mark)\n(b) al (1 mark)\n(c) aburrida (1 mark)\n(d) deportes (1 mark)\n(e) fui (1 mark)',
+            markingCriteria: {
+              breakdown: [
+                'Each correct grammatical form (1 mark each)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Foundation'
+          },
+          {
+            id: 'fta-q3',
+            question: 'Write about your hobbies and interests. Write approximately 90 words in Spanish covering:\n• What you like to do in your free time and why\n• An activity you did last weekend\n• Something you would like to try in the future',
+            marks: 15,
+            difficulty: 'medium',
+            modelAnswer: 'En mi tiempo libre me gusta escuchar música y tocar la guitarra porque me relaja después de un día difícil en el colegio. También disfruto jugando videojuegos con mis amigos online los fines de semana.\n\nEl sábado pasado fui al centro comercial con mi familia. Compramos ropa nueva y almorzamos en un restaurante italiano. Por la tarde vimos una película de aventuras en el cine.\n\nEn el futuro me gustaría aprender a tocar el piano porque creo que sería interesante poder tocar diferentes instrumentos musicales.',
+            markingCriteria: {
+              breakdown: [
+                'Content: All three bullet points addressed (9 marks)',
+                'Range of language: Variety of tenses and structures (3 marks)',
+                'Accuracy: Grammar, vocabulary and spelling (3 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Foundation/Higher'
+          },
+          {
+            id: 'fta-q4',
+            question: 'Read this article about Spanish young people and leisure:\n\n"Los jóvenes españoles de entre 16 y 25 años dedican una media de tres horas diarias a actividades de ocio. Según una encuesta nacional, las actividades más populares son navegar por internet, escuchar música y ver series de televisión. Sorprendentemente, solo el 30% practica deporte regularmente, a pesar de que España tiene excelentes instalaciones deportivas. Los expertos recomiendan equilibrar mejor el tiempo entre actividades sedentarias y físicas para mejorar la salud mental y física."\n\nAnswer in English:\n(a) How much time do Spanish youth spend on leisure daily?\n(b) What are the three most popular activities?\n(c) What percentage regularly does sport?\n(d) What do experts recommend?',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: '(a) An average of three hours daily (2 marks)\n(b) Surfing the internet, listening to music, watching TV series (2 marks)\n(c) 30% / Only 30% (2 marks)\n(d) Better balance between sedentary and physical activities to improve mental and physical health (2 marks)',
+            markingCriteria: {
+              breakdown: [
+                'Daily leisure time correctly identified (2 marks)',
+                'Three most popular activities correctly identified (2 marks)',
+                'Sport percentage correctly identified (2 marks)',
+                'Experts\' recommendation correctly identified (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Higher'
+          }
+        ]
+      },
+      {
+        id: 'customs-festivals-celebrations',
+        name: 'Customs, festivals and celebrations',
+        questions: [
+          {
+            id: 'cfc-q1',
+            question: 'Read this description of a Spanish festival:\n\n"La Tomatina es una fiesta muy famosa que se celebra en Buñol, Valencia, el último miércoles de agosto. Miles de personas vienen de todo el mundo para participar en esta batalla de tomates. La fiesta empieza a las once de la mañana y dura exactamente una hora. Después, los bomberos limpian las calles con mangueras."\n\nAnswer in English:\n(a) Where does La Tomatina take place?\n(b) When is it celebrated?\n(c) How long does the festival last?\n(d) Who cleans the streets afterwards?',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: '(a) Buñol, Valencia (1 mark)\n(b) The last Wednesday of August (1 mark)\n(c) Exactly one hour (1 mark)\n(d) The firefighters/fire brigade (1 mark)',
+            markingCriteria: {
+              breakdown: [
+                'Location correctly identified (1 mark)',
+                'Date correctly identified (1 mark)',
+                'Duration correctly identified (1 mark)',
+                'Who cleans up correctly identified (1 mark)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Foundation'
+          },
+          {
+            id: 'cfc-q2',
+            question: 'Translate from English to Spanish:\n\n"Christmas is my favourite celebration. My family always eats together on Christmas Eve. We exchange gifts and sing traditional songs. The children are very excited because they receive many presents."\n\n(Minimum 35 words)',
+            marks: 10,
+            difficulty: 'easy',
+            modelAnswer: 'La Navidad es mi celebración favorita. Mi familia siempre come junta en Nochebuena. Intercambiamos regalos y cantamos canciones tradicionales. Los niños están muy emocionados porque reciben muchos regalos.',
+            markingCriteria: {
+              breakdown: [
+                'Accurate vocabulary and key concepts (4 marks)',
+                'Correct grammatical structures (4 marks)',
+                'Natural Spanish expression (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Foundation'
+          },
+          {
+            id: 'cfc-q3',
+            question: 'Write about a festival or celebration. Write approximately 90 words in Spanish covering:\n• A festival you have attended or would like to attend\n• What happens during this celebration\n• Why this festival is important to you or the community',
+            marks: 15,
+            difficulty: 'medium',
+            modelAnswer: 'Me gustaría asistir a la Feria de Abril en Sevilla porque es una de las celebraciones más coloridas y alegres de España. Durante esta feria la gente se viste con trajes tradicionales flamencos y baila sevillanas en las casetas decoradas.\n\nLa celebración dura una semana entera en abril. Hay muchas actividades como espectáculos de baile, música en vivo y comida típica andaluza. Los caballos y las carreras también forman parte importante de la tradición.\n\nEste festival es importante porque preserva las tradiciones culturales andaluzas y une a toda la comunidad en una celebración de su patrimonio histórico.',
+            markingCriteria: {
+              breakdown: [
+                'Content: All three bullet points addressed (9 marks)',
+                'Range of language: Variety of structures and vocabulary (3 marks)',
+                'Accuracy: Grammar, spelling and syntax (3 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Foundation/Higher'
+          },
+          {
+            id: 'cfc-q4',
+            question: 'Read this text about changing Christmas traditions in Spain:\n\n"Las tradiciones navideñas en España están evolucionando. Mientras que las familias tradicionalmente se reunían solo el 24 de diciembre para la cena de Nochebuena, ahora muchas celebran durante varios días. La influencia de otras culturas ha introducido nuevas costumbres como el árbol de Navidad, que compete con el belén tradicional. Los jóvenes españoles a menudo prefieren intercambiar regalos el 25 de diciembre en lugar de esperar hasta el Día de Reyes el 6 de enero. Sin embargo, muchas familias mantienen las tradiciones culinarias, preparando platos típicos como el turrón y los polvorones."\n\nAnswer in English:\n(a) How have Christmas gatherings changed?\n(b) What new tradition competes with the traditional nativity scene?\n(c) When do young Spaniards prefer to exchange gifts?\n(d) What culinary traditions are maintained?',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: '(a) Families now celebrate for several days instead of just December 24th (2 marks)\n(b) The Christmas tree (2 marks)\n(c) December 25th instead of waiting until January 6th (Kings\' Day) (2 marks)\n(d) Preparing typical dishes like turrón and polvorones (2 marks)',
+            markingCriteria: {
+              breakdown: [
+                'Change in gatherings correctly identified (2 marks)',
+                'New competing tradition correctly identified (2 marks)',
+                'Gift exchange preference correctly identified (2 marks)',
+                'Maintained culinary traditions correctly identified (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Higher'
+          }
+        ]
+      },
+      {
+        id: 'celebrity-culture',
+        name: 'Celebrity culture',
+        questions: [
+          {
+            id: 'cc-q1',
+            question: 'Read this text about a Spanish celebrity:\n\n"Penélope Cruz es una actriz española muy famosa. Nació en Madrid en 1974 y empezó su carrera artística cuando tenía dieciséis años. Ha actuado en películas españolas e internacionales. Ganó un Oscar por su papel en la película \'Vicky Cristina Barcelona\'. Está casada con el actor Javier Bardem y tienen dos hijos."\n\nComplete these sentences in English:\n(a) Penélope Cruz was born in _______ in _______\n(b) She started her career at age _______\n(c) She won an Oscar for her role in _______\n(d) She is married to _______',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: '(a) Madrid, 1974 (1 mark)\n(b) sixteen/16 (1 mark)\n(c) Vicky Cristina Barcelona (1 mark)\n(d) Javier Bardem (1 mark)',
+            markingCriteria: {
+              breakdown: [
+                'Birth place and year correctly identified (1 mark)',
+                'Starting age correctly identified (1 mark)',
+                'Oscar-winning film correctly identified (1 mark)',
+                'Husband\'s name correctly identified (1 mark)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Foundation'
+          },
+          {
+            id: 'cc-q2',
+            question: 'Write five short sentences in Spanish about celebrities and fame. Use the prompts given:\n\nExample: "Los famosos aparecen en programas de televisión."\n\nWrite about:\n• Where celebrities appear\n• What they do\n• How people follow them\n• Their influence\n• Your opinion about fame',
+            marks: 10,
+            difficulty: 'easy',
+            modelAnswer: 'Los famosos aparecen en programas de televisión. Actúan en películas y cantan canciones. La gente los sigue en las redes sociales. Tienen mucha influencia sobre los jóvenes. Creo que la fama puede ser difícil.',
+            markingCriteria: {
+              breakdown: [
+                'Five relevant points about celebrities (5 marks)',
+                'Correct use of present tense verbs (3 marks)',
+                'Accurate vocabulary and spelling (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Foundation'
+          },
+          {
+            id: 'cc-q3',
+            question: 'Translate from Spanish to English:\n\n"Las redes sociales han cambiado la forma en que seguimos a los famosos. Ahora podemos ver su vida privada todos los días. Algunos críticos dicen que esto ha creado una obsesión poco saludable con la fama entre los jóvenes."\n\n(Minimum 35 words)',
+            marks: 10,
+            difficulty: 'medium',
+            modelAnswer: 'Social media has changed the way we follow celebrities. Now we can see their private life every day. Some critics say this has created an unhealthy obsession with fame among young people.',
+            markingCriteria: {
+              breakdown: [
+                'Accurate translation of key vocabulary (4 marks)',
+                'Correct rendering of perfect tense and complex structures (3 marks)',
+                'Natural English expression (3 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Higher'
+          },
+          {
+            id: 'cc-q4',
+            question: 'Read this opinion piece about celebrity influence:\n\n"La influencia de los famosos en la sociedad actual es innegable. Muchos jóvenes copian la ropa, el peinado y hasta las opiniones de sus ídolos. Esto puede ser positivo cuando las celebridades promueven causas benéficas o estilos de vida saludables. Sin embargo, también existe el peligro de que los jóvenes desarrollen expectativas irreales sobre el éxito y la belleza. Los padres y educadores deben ayudar a los adolescentes a desarrollar un pensamiento crítico sobre los mensajes que reciben de los medios de comunicación."\n\nAnswer in English:\n(a) What do young people copy from celebrities? (Give three things)\n(b) When can celebrity influence be positive?\n(c) What danger exists for young people?\n(d) What should parents and educators do?',
+            marks: 10,
+            difficulty: 'hard',
+            modelAnswer: '(a) Clothes, hairstyles, opinions (3 marks)\n(b) When celebrities promote charitable causes or healthy lifestyles (2 marks)\n(c) They might develop unrealistic expectations about success and beauty (2 marks)\n(d) Help teenagers develop critical thinking about media messages (3 marks)',
+            markingCriteria: {
+              breakdown: [
+                'Three things young people copy correctly identified (3 marks)',
+                'Positive influence correctly identified (2 marks)',
+                'Danger correctly identified (2 marks)',
+                'Parents\' and educators\' role correctly identified (3 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Higher'
+          }
+        ]
+      },
+      {
+        id: 'travel-tourism-places',
+        name: 'Travel and tourism, including places of interest',
+        questions: [
+          {
+            id: 'ttp-q1',
+            question: 'Read this tourist information about Barcelona:\n\n"Barcelona es una ciudad fascinante en el noreste de España. Tiene playas hermosas y arquitectura impresionante como la Sagrada Familia de Gaudí. El transporte público es excelente: hay metro, autobuses y tranvías. Los turistas pueden visitar el Barrio Gótico, las Ramblas y el Parque Güell. La comida típica incluye paella, tapas y sangría."\n\nAnswer True, False or Not mentioned:\n(a) Barcelona is in northeast Spain\n(b) The Sagrada Familia was designed by Gaudí\n(c) There is no metro system\n(d) Paella is a typical food\n(e) The city has mountains nearby',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: '(a) True (1 mark)\n(b) True (1 mark)\n(c) False - there is metro (1 mark)\n(d) True (1 mark)\n(e) Not mentioned (1 mark)',
+            markingCriteria: {
+              breakdown: [
+                'Each correct True/False/Not mentioned response (1 mark each)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Foundation'
+          },
+          {
+            id: 'ttp-q2',
+            question: 'Write about a holiday destination. Write approximately 50 words in Spanish covering:\n• Where you went or would like to go\n• What you can see and do there\n• Why you recommend this place',
+            marks: 10,
+            difficulty: 'easy',
+            modelAnswer: 'Me gustaría visitar Granada en Andalucía. Allí puedes ver la Alhambra, que es un palacio árabe muy famoso. También puedes pasear por los jardines del Generalife y explorar el barrio del Albaicín. Recomiendo Granada porque combina historia, cultura y arquitectura espectacular en una ciudad preciosa.',
+            markingCriteria: {
+              breakdown: [
+                'Content: All three points addressed (5 marks)',
+                'Language: Appropriate vocabulary and structures (3 marks)',
+                'Accuracy: Grammar and spelling (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Foundation'
+          },
+          {
+            id: 'ttp-q3',
+            question: 'You are planning a trip to Spain. Write approximately 90 words in Spanish covering:\n• Which city you want to visit and why\n• What transport you will use to get there\n• Three things you plan to do during your stay',
+            marks: 15,
+            difficulty: 'medium',
+            modelAnswer: 'Quiero visitar Sevilla porque es famosa por su arquitectura andaluza y sus tradiciones flamencas. La Catedral de Sevilla y la Giralda son monumentos impresionantes que me gustaría fotografiar.\n\nViajaré en avión desde Londres hasta el aeropuerto de Sevilla porque es la forma más rápida de llegar. Desde el aeropuerto tomaré un autobús hasta el centro de la ciudad.\n\nDurante mi estancia planeo visitar el Real Alcázar con sus jardines magníficos, pasear por el barrio de Santa Cruz con sus calles estrechas, y ver un espectáculo de flamenco auténtico en un tablao tradicional.',
+            markingCriteria: {
+              breakdown: [
+                'Content: All bullet points addressed with detail (9 marks)',
+                'Range of language: Variety of structures and tenses (3 marks)',
+                'Accuracy: Grammar, vocabulary and spelling (3 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Foundation/Higher'
+          },
+          {
+            id: 'ttp-q4',
+            question: 'Read this article about sustainable tourism in Spain:\n\n"El turismo sostenible está ganando popularidad en España. Muchos destinos están implementando medidas para proteger el medio ambiente y preservar la cultura local. Por ejemplo, las Islas Baleares han limitado el número de cruceros que pueden atracar en sus puertos para reducir la contaminación marina. Asimismo, varios parques naturales han introducido sistemas de reserva online para controlar el número de visitantes diarios. Los hoteles ecológicos que utilizan energía renovable y productos locales también están en aumento. Estas iniciativas buscan equilibrar los beneficios económicos del turismo con la protección del patrimonio natural y cultural español."\n\nAnswer in English:\n(a) What measures have the Balearic Islands implemented?\n(b) How do natural parks control visitor numbers?\n(c) What two features characterize ecological hotels?\n(d) What is the main goal of these sustainable tourism initiatives?',
+            marks: 10,
+            difficulty: 'hard',
+            modelAnswer: '(a) They have limited the number of cruise ships that can dock in their ports to reduce marine pollution (3 marks)\n(b) They have introduced online booking systems to control daily visitor numbers (2 marks)\n(c) They use renewable energy and local products (2 marks)\n(d) To balance the economic benefits of tourism with the protection of Spanish natural and cultural heritage (3 marks)',
+            markingCriteria: {
+              breakdown: [
+                'Balearic Islands measures correctly identified (3 marks)',
+                'Natural parks control method correctly identified (2 marks)',
+                'Two hotel features correctly identified (2 marks)',
+                'Main goal correctly identified (3 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Higher'
+          }
+        ]
+      },
+      {
+        id: 'media-technology',
+        name: 'Media and technology',
+        questions: [
+          {
+            id: 'mt-q1',
+            question: 'Read this message about technology use:\n\n"¡Hola! Uso mi teléfono móvil todos los días para hablar con mis amigos y familiares. También navego por internet y escucho música. Mi aplicación favorita es Instagram porque puedo ver fotos de mis amigos. Sin embargo, mis padres dicen que paso demasiado tiempo con la tecnología y que debería leer más libros."\n\nAnswer these questions in English:\n(a) What does she use her phone for? (Give three things)\n(b) What is her favourite app?\n(c) What do her parents think?\n(d) What do they suggest she should do more of?',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: '(a) Any three from: talking to friends and family, surfing the internet, listening to music (3 marks)\n(b) Instagram (1 mark)\n(c) She spends too much time with technology (1 mark)\n(d) Read more books (1 mark)',
+            markingCriteria: {
+              breakdown: [
+                'Three phone uses correctly identified (3 marks)',
+                'Favourite app correctly identified (1 mark)',
+                'Parents\' opinion correctly identified (1 mark)',
+                'Parents\' suggestion correctly identified (1 mark)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Foundation'
+          },
+          {
+            id: 'mt-q2',
+            question: 'Translate from English to Spanish:\n\n"I use social media every day to stay in touch with my friends. I share photos and videos of my daily life. Sometimes I watch TV programs online instead of on traditional television."\n\n(Minimum 35 words)',
+            marks: 10,
+            difficulty: 'easy',
+            modelAnswer: 'Uso las redes sociales todos los días para mantenerme en contacto con mis amigos. Comparto fotos y videos de mi vida diaria. A veces veo programas de televisión online en lugar de en la televisión tradicional.',
+            markingCriteria: {
+              breakdown: [
+                'Accurate vocabulary and key concepts (4 marks)',
+                'Correct grammatical structures (4 marks)',
+                'Natural Spanish expression (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Foundation'
+          },
+          {
+            id: 'mt-q3',
+            question: 'Write about technology in your life. Write approximately 90 words in Spanish covering:\n• How you use technology in your daily life\n• The advantages and disadvantages of social media\n• How you think technology will change in the future',
+            marks: 15,
+            difficulty: 'medium',
+            modelAnswer: 'Uso la tecnología constantemente en mi vida diaria. Mi móvil me ayuda a comunicarme con amigos mediante WhatsApp y redes sociales. También uso mi ordenador portátil para hacer los deberes y ver películas en Netflix.\n\nLas redes sociales tienen ventajas como mantener contacto con gente de todo el mundo, pero también desventajas como la pérdida de privacidad y el ciberacoso. Algunos jóvenes desarrollan adicción a sus teléfonos.\n\nEn el futuro creo que la tecnología será aún más avanzada. Los coches se conducirán solos y la inteligencia artificial será parte normal de nuestras vidas cotidianas.',
+            markingCriteria: {
+              breakdown: [
+                'Content: All three bullet points addressed (9 marks)',
+                'Range of language: Variety of structures and vocabulary (3 marks)',
+                'Accuracy: Grammar, spelling and syntax (3 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Foundation/Higher'
+          },
+          {
+            id: 'mt-q4',
+            question: 'Read this opinion article about digital natives:\n\n"Los jóvenes de hoy, conocidos como \'nativos digitales\', han crecido rodeados de tecnología. Esto les da ventajas significativas: son expertos en multitarea, aprenden rápidamente nuevas aplicaciones y se adaptan fácilmente a los cambios tecnológicos. Sin embargo, los psicólogos advierten sobre posibles consecuencias negativas. Algunos estudios sugieren que la atención constante a las pantallas puede reducir la capacidad de concentración y afectar las habilidades de comunicación cara a cara. Además, la dependencia excesiva de la tecnología puede crear ansiedad cuando no tienen acceso a sus dispositivos."\n\nAnswer in English:\n(a) What are \'digital natives\'?\n(b) Give two advantages mentioned.\n(c) What do psychologists warn about?\n(d) What two negative consequences are mentioned?\n(e) What can excessive dependence on technology create?',
+            marks: 10,
+            difficulty: 'hard',
+            modelAnswer: '(a) Young people who have grown up surrounded by technology (2 marks)\n(b) Any two from: experts at multitasking, learn new apps quickly, adapt easily to technological changes (2 marks)\n(c) Possible negative consequences (1 mark)\n(d) Any two from: reduced concentration ability, affected face-to-face communication skills (2 marks)\n(e) Anxiety when they don\'t have access to their devices (3 marks)',
+            markingCriteria: {
+              breakdown: [
+                'Definition of digital natives correctly identified (2 marks)',
+                'Two advantages correctly identified (2 marks)',
+                'Psychologists\' warning correctly identified (1 mark)',
+                'Two negative consequences correctly identified (2 marks)',
+                'Anxiety consequence correctly identified (3 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Higher'
+          }
+        ]
+      },
+      {
+        id: 'environment-where-people-live',
+        name: 'The environment and where people live',
+        questions: [
+          {
+            id: 'ewpl-q1',
+            question: 'Read this description of environmental problems:\n\n"En mi ciudad hay varios problemas medioambientales. El tráfico produce mucha contaminación del aire. También hay demasiada basura en las calles porque algunas personas no usan las papeleras. El ruido de los coches y autobuses es molesto, especialmente por la noche. Sin embargo, el ayuntamiento está plantando más árboles y creando más zonas verdes."\n\nAnswer in English:\n(a) What does traffic produce?\n(b) Why is there rubbish in the streets?\n(c) When is noise particularly annoying?\n(d) What two things is the council doing to help?',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: '(a) A lot of air pollution (1 mark)\n(b) Because some people don\'t use bins/rubbish bins (2 marks)\n(c) At night/during the night (1 mark)\n(d) Planting more trees and creating more green areas (2 marks)',
+            markingCriteria: {
+              breakdown: [
+                'Traffic pollution correctly identified (1 mark)',
+                'Reason for street rubbish correctly identified (2 marks)',
+                'Time when noise is annoying correctly identified (1 mark)',
+                'Two council actions correctly identified (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Foundation'
+          },
+          {
+            id: 'ewpl-q2',
+            question: 'Write five short sentences in Spanish about environmental actions. Use the prompts:\n\nExample: "Reciclo botellas de plástico."\n\nWrite about:\n• Recycling\n• Saving water\n• Using public transport\n• Planting trees\n• Reducing plastic use',
+            marks: 10,
+            difficulty: 'easy',
+            modelAnswer: 'Reciclo botellas de plástico. Ahorro agua cuando me ducho. Uso el transporte público para ir al colegio. Plantamos árboles en el jardín. Reduzco el uso de bolsas de plástico.',
+            markingCriteria: {
+              breakdown: [
+                'Five relevant environmental actions (5 marks)',
+                'Correct use of present tense verbs (3 marks)',
+                'Accurate vocabulary and spelling (2 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Foundation'
+          },
+          {
+            id: 'ewpl-q3',
+            question: 'You are discussing where you live and environmental issues. Write approximately 90 words in Spanish covering:\n• A description of your local area\n• One environmental problem in your area\n• What you personally do to help the environment',
+            marks: 15,
+            difficulty: 'medium',
+            modelAnswer: 'Vivo en una ciudad mediana en el norte de Inglaterra. Mi barrio es bastante tranquilo con muchas casas familiares y varios parques pequeños. Hay tiendas locales, un supermercado y buenas conexiones de transporte público al centro.\n\nUn problema medioambiental importante en mi zona es la contaminación del aire causada por el tráfico intenso durante las horas punta. También hay demasiados envases de plástico en las calles.\n\nPersonalmente trato de ayudar al medio ambiente reciclando toda mi basura correctamente, usando mi bicicleta en lugar del coche cuando es posible, y comprando productos locales para reducir mi huella de carbono.',
+            markingCriteria: {
+              breakdown: [
+                'Content: All three bullet points addressed with detail (9 marks)',
+                'Range of language: Variety of structures and vocabulary (3 marks)',
+                'Accuracy: Grammar, spelling and syntax (3 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 4 Writing Foundation/Higher'
+          },
+          {
+            id: 'ewpl-q4',
+            question: 'Read this article about urban planning and sustainability:\n\n"Las ciudades españolas están adoptando nuevos enfoques para combatir el cambio climático. Madrid ha implementado una zona de bajas emisiones que restringe el acceso de vehículos contaminantes al centro. Barcelona está creando \'supermanzanas\' que priorizan a peatones y ciclistas sobre los coches. Estas iniciativas no solo reducen la contaminación, sino que también mejoran la calidad de vida de los residentes. Sin embargo, algunos comerciantes se quejan de que las restricciones de tráfico afectan negativamente a sus negocios. Los urbanistas argumentan que, a largo plazo, las ciudades más verdes atraerán más turismo y inversión, compensando cualquier pérdida inicial."\n\nAnswer in English:\n(a) What has Madrid implemented to combat climate change?\n(b) What does Barcelona\'s \'superblocks\' initiative prioritize?\n(c) What two benefits do these initiatives provide?\n(d) What complaint do some shopkeepers have?\n(e) What do urban planners argue about long-term benefits?',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: '(a) A low emissions zone that restricts access of polluting vehicles to the center (3 marks)\n(b) Pedestrians and cyclists over cars (2 marks)\n(c) Reduce pollution and improve residents\' quality of life (2 marks)\n(d) Traffic restrictions negatively affect their businesses (2 marks)\n(e) Greener cities will attract more tourism and investment, compensating for any initial losses (3 marks)',
+            markingCriteria: {
+              breakdown: [
+                'Madrid\'s initiative correctly identified (3 marks)',
+                'Barcelona\'s priority correctly identified (2 marks)',
+                'Two benefits correctly identified (2 marks)',
+                'Shopkeepers\' complaint correctly identified (2 marks)',
+                'Long-term argument correctly identified (3 marks)'
+              ]
+            },
+            specReference: 'AQA Spanish GCSE Paper 3 Reading Higher'
+          }
+        ]
+      }
+    ]
   }
   ];
