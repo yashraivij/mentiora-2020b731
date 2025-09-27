@@ -221,7 +221,7 @@ const Dashboard = () => {
     }
     
     // For OCR subjects
-    if (subject.id === 'computer-science') {
+    if (subject.id === 'computer-science' || subject.id === 'psychology') {
       return `${name} (OCR)`;
     }
     
