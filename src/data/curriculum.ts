@@ -20551,33 +20551,858 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'OCR Geography B - Urban Futures'
+          },
+          {
+            id: 'uf-q4',
+            question: 'Describe the challenges facing cities in developing countries.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Housing: informal settlements/slums with poor conditions. Health: inadequate healthcare, disease spread, pollution. Waste: insufficient collection and disposal systems. Transport: traffic congestion, limited public transport. Employment: large informal economy, unemployment. Services: inadequate water, electricity, education. Infrastructure cannot keep pace with rapid population growth.',
+            markingCriteria: {
+              breakdown: [
+                'Housing and health challenges (4 marks)',
+                'Infrastructure and service problems (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Urban Futures'
+          },
+          {
+            id: 'uf-q5',
+            question: 'Explain the challenges facing cities in developed countries.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Housing: high property prices, homelessness, urban decay in some areas. Transport: traffic congestion, air pollution from vehicles. Inequality: gap between rich and poor areas. Services: pressure on healthcare and education. Environment: air quality, waste management, heat island effect. Aging infrastructure requiring costly maintenance and upgrading.',
+            markingCriteria: {
+              breakdown: [
+                'Housing and transport issues (3 marks)',
+                'Social and environmental challenges (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Urban Futures'
+          },
+          {
+            id: 'uf-q6',
+            question: 'Describe ways of life in contrasting urban areas.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Developed city centers: high-rise apartments, diverse cultural activities, public transport use, professional jobs, expensive lifestyle. Developing city slums: overcrowded informal housing, limited access to services, informal employment, strong community networks, lower incomes. Suburbs in developed countries: larger houses, car dependence, shopping malls, family-oriented lifestyle.',
+            markingCriteria: {
+              breakdown: [
+                'Developed urban lifestyles (4 marks)',
+                'Developing country urban conditions (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Urban Futures'
+          },
+          {
+            id: 'uf-q7',
+            question: 'Explain migration patterns in cities.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Rural-urban migration brings people seeking economic opportunities. International migration creates ethnic enclaves and cultural diversity. Within cities: suburbanization (wealthy move to suburbs), gentrification (wealthy move to inner areas), student migration to university areas. Counter-urbanization sees some people leave cities for rural areas seeking better quality of life.',
+            markingCriteria: {
+              breakdown: [
+                'Rural-urban and international migration (3 marks)',
+                'Intra-urban movement patterns (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Urban Futures'
+          },
+          {
+            id: 'uf-q8',
+            question: 'Describe sustainable urban initiatives and their benefits.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Brownfield development: reusing previously developed land reduces urban sprawl and protects countryside. Recycling programs: reduce waste and resource consumption. Public transport improvements: reduce car use and emissions. Green spaces: improve air quality and recreation. Energy-efficient buildings: reduce carbon footprint. These initiatives improve environmental quality and residents\' wellbeing.',
+            markingCriteria: {
+              breakdown: [
+                'Land use and transport sustainability (4 marks)',
+                'Environmental improvements and benefits (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Urban Futures'
+          },
+          {
+            id: 'uf-q9',
+            question: 'Evaluate the effectiveness of urban sustainability initiatives.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Successes: reduced pollution in cities with congestion charging, increased recycling rates, brownfield development protecting countryside. Limitations: high costs, resistance from residents/businesses, long implementation times. Some initiatives benefit wealthy areas more than poor. Need for political commitment and funding. Overall progress but still major challenges in rapidly growing cities.',
+            markingCriteria: {
+              breakdown: [
+                'Successful examples with evidence (3 marks)',
+                'Limitations and barriers (3 marks)',
+                'Overall evaluation (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Urban Futures'
+          },
+          {
+            id: 'uf-q10',
+            question: 'Using case studies, compare urban challenges and responses in developed and developing countries.',
+            marks: 12,
+            difficulty: 'hard',
+            modelAnswer: 'Developed country example (London): challenges include housing affordability, air pollution, inequality. Responses: congestion charging, affordable housing schemes, transport improvements. Developing country example (Mumbai): challenges include slum conditions, inadequate infrastructure, rapid growth. Responses: slum upgrading programs, new transport systems, economic development initiatives. Both face sustainability challenges but developing cities have greater resource constraints.',
+            markingCriteria: {
+              breakdown: [
+                'Developed country case study (4 marks)',
+                'Developing country case study (4 marks)',
+                'Comparison of challenges and responses (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Urban Futures'
           }
         ]
       },
       {
         id: 'dynamic-development',
         name: 'Dynamic Development',
-        questions: []
+        questions: [
+          {
+            id: 'dd-q1',
+            question: 'Define development and explain how countries are classified.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Development is improvement in people\'s standard of living through economic growth, better healthcare, education, and infrastructure. Countries classified as: Advanced Countries (ACs) - high income, developed infrastructure; Emerging and Developing Countries (EDCs) - middle income, developing rapidly; Low Income Developing Countries (LIDCs) - low income, limited development.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of development (2 marks)',
+                'Country classification system (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Dynamic Development'
+          },
+          {
+            id: 'dd-q2',
+            question: 'Compare GNI per capita and HDI as measures of development.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'GNI per capita measures average income but ignores inequality and non-economic factors. HDI combines income, life expectancy, and education for broader view. GNI shows economic development only; HDI shows human development. Oil-rich countries may have high GNI but lower HDI if wealth not shared. HDI better reflects quality of life but both measures useful together.',
+            markingCriteria: {
+              breakdown: [
+                'GNI per capita strengths and limitations (4 marks)',
+                'HDI advantages and comparison (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Dynamic Development'
+          },
+          {
+            id: 'dd-q3',
+            question: 'Explain the global distribution of development levels.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'ACs concentrated in North America, Europe, East Asia (Japan, South Korea), Australia. EDCs include China, India, Brazil, Russia, Mexico. LIDCs mainly in sub-Saharan Africa, parts of Asia (Afghanistan, Nepal), some island states. Generally north-south divide but with exceptions like Australia and developing countries in Asia.',
+            markingCriteria: {
+              breakdown: [
+                'AC distribution with examples (2 marks)',
+                'EDC and LIDC patterns (2 marks)',
+                'North-south divide and exceptions (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Dynamic Development'
+          },
+          {
+            id: 'dd-q4',
+            question: 'Describe the human factors affecting uneven development.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Education: higher literacy and skills drive economic growth. Healthcare: healthy populations are more productive. Political stability: good governance attracts investment, corruption hinders development. Historical factors: colonial legacy affects current development patterns. Cultural attitudes to work, entrepreneurship, and change. Population structure: aging populations vs young populations have different development needs.',
+            markingCriteria: {
+              breakdown: [
+                'Education and health factors (3 marks)',
+                'Political and historical influences (3 marks)',
+                'Cultural and demographic factors (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Dynamic Development'
+          },
+          {
+            id: 'dd-q5',
+            question: 'Explain the physical factors affecting uneven development.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Climate: tropical diseases, extreme weather affect productivity. Natural resources: oil, minerals provide export income but can create dependency. Topography: mountainous terrain hinders transport and agriculture. Landlocked countries face trade barriers. Natural hazards: earthquakes, floods damage infrastructure and economy. Fertile soils support agriculture and food security.',
+            markingCriteria: {
+              breakdown: [
+                'Climate and natural hazard impacts (3 marks)',
+                'Resources and topography effects (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Dynamic Development'
+          },
+          {
+            id: 'dd-q6',
+            question: 'Describe the barriers to development in LIDCs.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Debt: high interest payments reduce funds for development. Unfair trade: export primary products at low prices, import manufactured goods at high prices. Political unrest: war and instability deter investment and destroy infrastructure. Brain drain: educated people migrate to developed countries. Corruption: resources diverted from development projects.',
+            markingCriteria: {
+              breakdown: [
+                'Economic barriers (debt and trade) (4 marks)',
+                'Political and social barriers (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Dynamic Development'
+          },
+          {
+            id: 'dd-q7',
+            question: 'Explain how economic development has occurred in your chosen LIDC case study.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Case study: Bangladesh. Economic changes: shift from agriculture to manufacturing (textiles), growth in services sector, increased exports. Social progress: improved literacy rates, reduced infant mortality, women\'s empowerment through employment. Technology: mobile phone expansion, digital banking. However, challenges remain with inequality and environmental issues.',
+            markingCriteria: {
+              breakdown: [
+                'Economic sector changes (4 marks)',
+                'Social and technological progress (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Dynamic Development'
+          },
+          {
+            id: 'dd-q8',
+            question: 'Assess the role of trade in your chosen LIDC\'s development.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Bangladesh relies heavily on textile exports (80% of exports) providing employment and foreign currency. However, commodity dependence creates vulnerability to price fluctuations and competition. Trade relationships mainly with developed countries. Fair trade initiatives help some producers. Need to diversify exports and add value to raw materials for sustainable development.',
+            markingCriteria: {
+              breakdown: [
+                'Export patterns and importance (3 marks)',
+                'Benefits and problems of trade dependence (3 marks)',
+                'Assessment of sustainability (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Dynamic Development'
+          },
+          {
+            id: 'dd-q9',
+            question: 'Evaluate the impacts of TNC investment in your chosen LIDC.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Positive impacts: job creation in factories, technology transfer, infrastructure development, foreign currency earnings. Negative impacts: low wages, poor working conditions, profit repatriation, environmental damage, exploitation of workers. TNCs bring development but also dependency. Need for regulation to maximize benefits and minimize costs.',
+            markingCriteria: {
+              breakdown: [
+                'Positive economic and social impacts (3 marks)',
+                'Negative consequences (3 marks)',
+                'Overall evaluation of TNC role (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Dynamic Development'
+          },
+          {
+            id: 'dd-q10',
+            question: 'Compare top-down and bottom-up development strategies.',
+            marks: 10,
+            difficulty: 'hard',
+            modelAnswer: 'Top-down: large-scale government/international projects (dams, industrial zones), high investment, quick results but may not help poorest. Bottom-up: community-led, small-scale projects (microfinance, local cooperatives), appropriate technology, sustainable but slow impact. Most effective approach combines both: top-down for infrastructure, bottom-up for community needs.',
+            markingCriteria: {
+              breakdown: [
+                'Top-down characteristics and examples (3 marks)',
+                'Bottom-up features and benefits (3 marks)',
+                'Comparison and evaluation (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Dynamic Development'
+          }
+        ]
       },
       {
         id: 'uk-in-21st-century',
         name: 'UK in the 21st Century',
-        questions: []
+        questions: [
+          {
+            id: 'uk21-q1',
+            question: 'Describe the physical characteristics of the UK.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Relief: uplands in Scotland (Highlands), Wales (Snowdonia), northern England (Lake District, Pennines); lowlands in East Anglia, Thames Valley. Climate: temperate maritime with mild winters, cool summers. Rainfall: higher in west and uplands (over 1000mm), lower in east (under 600mm). Surrounded by sea, influenced by Gulf Stream.',
+            markingCriteria: {
+              breakdown: [
+                'Relief patterns described (2 marks)',
+                'Climate characteristics (2 marks)',
+                'Rainfall distribution (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - UK in 21st Century'
+          },
+          {
+            id: 'uk21-q2',
+            question: 'Explain the distribution of population density in the UK.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'High density: London and Southeast, Birmingham, Manchester, Leeds, Glasgow - urban areas with employment opportunities. Medium density: market towns and smaller cities. Low density: Scottish Highlands, Welsh mountains, rural areas - limited employment, difficult terrain, harsh climate. Overall population concentrated in England, especially the south.',
+            markingCriteria: {
+              breakdown: [
+                'High density areas with reasons (3 marks)',
+                'Low density areas with explanations (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - UK in 21st Century'
+          },
+          {
+            id: 'uk21-q3',
+            question: 'Describe the main land use patterns in the UK.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Agriculture: pastoral farming in uplands (sheep, cattle), arable farming in lowlands (wheat, barley). Urban: concentrated around major cities. Industry: declining heavy industry, growth in services and technology parks. Recreation: National Parks in uplands. Forestry: mainly coniferous in Scotland. Transport: dense network in populated areas.',
+            markingCriteria: {
+              breakdown: [
+                'Agricultural land use patterns (2 marks)',
+                'Urban and industrial uses (2 marks)',
+                'Recreation and other uses (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - UK in 21st Century'
+          },
+          {
+            id: 'uk21-q4',
+            question: 'Explain the issues of water stress and housing shortages in the UK.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Water stress: Southeast has high population but low rainfall, increasing demand exceeds supply. Solutions include water transfer schemes, reservoirs, desalination. Housing shortages: high demand especially in London/Southeast, limited land supply, planning restrictions, high prices. Government promotes new towns and housing developments but faces opposition.',
+            markingCriteria: {
+              breakdown: [
+                'Water stress causes and distribution (4 marks)',
+                'Housing shortage factors and responses (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - UK in 21st Century'
+          },
+          {
+            id: 'uk21-q5',
+            question: 'Describe UK population changes since 2001 using population pyramids.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Aging population: wider top of pyramid due to longer life expectancy, post-war baby boom generation aging. Declining birth rates: narrower base of pyramid. Immigration: working-age bulge from EU and other migration. Overall trend toward more balanced pyramid but still aging society with implications for healthcare, pensions, and workforce.',
+            markingCriteria: {
+              breakdown: [
+                'Aging population evidence (2 marks)',
+                'Birth rate and migration impacts (2 marks)',
+                'Overall demographic transition (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - UK in 21st Century'
+          },
+          {
+            id: 'uk21-q6',
+            question: 'Explain the causes and effects of the UK\'s aging population.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Causes: improved healthcare increasing life expectancy, declining birth rates, post-war baby boom generation aging. Effects: increased healthcare costs, pension pressures, labor shortages, changing housing needs. Economic burden on working population. Responses: immigration to fill jobs, raising retirement age, encouraging private pensions.',
+            markingCriteria: {
+              breakdown: [
+                'Causes of population aging (4 marks)',
+                'Economic and social effects (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - UK in 21st Century'
+          },
+          {
+            id: 'uk21-q7',
+            question: 'Describe how the UK economy has changed since 2001.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Sector changes: decline in manufacturing, growth in services (finance, retail, tourism). Job market: more part-time and flexible working, gig economy growth. Regional shifts: London dominance in finance, tech hubs in cities. Priorities: shift toward knowledge economy, renewable energy, digital technology. Working patterns: remote working, longer hours in some sectors.',
+            markingCriteria: {
+              breakdown: [
+                'Sectoral economic changes (4 marks)',
+                'Employment and working pattern changes (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - UK in 21st Century'
+          },
+          {
+            id: 'uk21-q8',
+            question: 'Explain the pattern and significance of core economic hubs in the UK.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'London: global financial center, highest GDP contribution. Birmingham: manufacturing and services hub for Midlands. Manchester: media, technology, and finance center for Northwest. Edinburgh: financial services in Scotland. These hubs concentrate economic activity, employment, and investment, creating regional inequalities but driving national growth.',
+            markingCriteria: {
+              breakdown: [
+                'Major economic hubs identified (3 marks)',
+                'Their economic significance (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - UK in 21st Century'
+          },
+          {
+            id: 'uk21-q9',
+            question: 'Assess the UK\'s political role in global conflicts.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'UN Security Council permanent member gives global influence. NATO membership provides military alliance. Iraq/Afghanistan involvement controversial but demonstrated military capability. Brexit affects EU relationships. \"Special relationship\" with USA. Diplomatic mediation in various conflicts. Soft power through aid, peacekeeping. However, reduced military spending limits capabilities.',
+            markingCriteria: {
+              breakdown: [
+                'International organization roles (3 marks)',
+                'Military involvement examples (3 marks)',
+                'Assessment of influence and limitations (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - UK in 21st Century'
+          },
+          {
+            id: 'uk21-q10',
+            question: 'Evaluate the UK\'s cultural influence globally.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Media exports: BBC, films, TV shows (Doctor Who, Downton Abbey) watched globally. Music: British artists dominate charts worldwide. Language: English as global lingua franca gives UK advantage. Education: British universities attract international students. Fashion: London Fashion Week, British designers. Sports: Premier League, Wimbledon. However, competition from other countries and changing global preferences.',
+            markingCriteria: {
+              breakdown: [
+                'Media and entertainment influence (3 marks)',
+                'Language, education, and other cultural exports (3 marks)',
+                'Evaluation of extent and limitations (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - UK in 21st Century'
+          }
+        ]
       },
       {
         id: 'resource-reliance',
         name: 'Resource Reliance',
-        questions: []
+        questions: [
+          {
+            id: 'rr-q1',
+            question: 'Explain why global demand for resources is increasing.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Population growth increases total demand for food, water, and energy. Economic development in emerging countries raises per capita consumption. Urbanization concentrates demand and changes consumption patterns. Climate change affects resource availability. Technological advancement requires more materials. Changing lifestyles in developed countries increase resource use.',
+            markingCriteria: {
+              breakdown: [
+                'Population and development factors (3 marks)',
+                'Urbanization and lifestyle changes (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Resource Reliance'
+          },
+          {
+            id: 'rr-q2',
+            question: 'Describe how humans modify environments for food production.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Mechanized farming: tractors, combines, irrigation systems increase productivity. Deforestation: clearing land for agriculture, especially cattle ranching. Terracing: creating flat areas on slopes for cultivation. Greenhouses: controlling growing conditions. Fertilizers and pesticides: enhancing soil and protecting crops. Selective breeding: developing higher-yielding varieties.',
+            markingCriteria: {
+              breakdown: [
+                'Mechanization and land clearance (3 marks)',
+                'Agricultural techniques and technology (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Resource Reliance'
+          },
+          {
+            id: 'rr-q3',
+            question: 'Explain how humans modify environments for energy production.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Mining: extracting coal, oil, gas requiring land clearance and infrastructure. Hydroelectric dams: flooding valleys, altering river systems. Wind farms: installing turbines affecting landscapes. Solar farms: covering large areas with panels. Nuclear power: requiring cooling water and waste storage. Deforestation for biofuels: palm oil plantations replacing forests.',
+            markingCriteria: {
+              breakdown: [
+                'Fossil fuel extraction impacts (3 marks)',
+                'Renewable energy modifications (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Resource Reliance'
+          },
+          {
+            id: 'rr-q4',
+            question: 'Describe how humans modify environments for water supply.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Reservoirs: damming rivers and flooding valleys for water storage. Water transfer: building canals and pipelines to move water long distances. Desalination: processing seawater requiring energy and infrastructure. Groundwater extraction: drilling wells, potentially causing subsidence. River management: straightening channels, flood defenses. Water treatment: facilities for cleaning and purifying water.',
+            markingCriteria: {
+              breakdown: [
+                'Water storage and transfer systems (3 marks)',
+                'Processing and management techniques (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Resource Reliance'
+          },
+          {
+            id: 'rr-q5',
+            question: 'Define food security and explain the factors affecting it.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Food security: reliable access to sufficient, safe, nutritious food. Human factors: income levels, political stability, distribution systems, population growth. Physical factors: climate, soil quality, water availability, natural disasters. Global trade affects local food security. Conflict disrupts production and distribution. Technology can increase production but requires investment.',
+            markingCriteria: {
+              breakdown: [
+                'Definition of food security (2 marks)',
+                'Human factors affecting security (3 marks)',
+                'Physical and other factors (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Resource Reliance'
+          },
+          {
+            id: 'rr-q6',
+            question: 'Describe global patterns of food security using appropriate measures.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'World Hunger Index shows highest food insecurity in sub-Saharan Africa, parts of Asia. Average daily calories: over 3000 in developed countries, under 2000 in some African countries. Malnutrition highest in conflict zones, rural areas of LIDCs. Food surplus in developed countries contrasts with deficits in developing regions. Climate change increasingly affects vulnerable areas.',
+            markingCriteria: {
+              breakdown: [
+                'Regional patterns of food insecurity (3 marks)',
+                'Specific measures and data (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Resource Reliance'
+          },
+          {
+            id: 'rr-q7',
+            question: 'Compare Malthus and Boserup theories about population and food supply.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Malthus (1798): population grows exponentially, food supply arithmetically, leading to crisis. Predicts famine, war, disease as checks. Boserup (1965): population pressure stimulates agricultural innovation, increasing food production. Technology and intensification can support larger populations. Malthus proved wrong so far due to Green Revolution, but debate continues with climate change.',
+            markingCriteria: {
+              breakdown: [
+                'Malthus theory explanation (3 marks)',
+                'Boserup theory and differences (3 marks)',
+                'Evaluation of theories (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Resource Reliance'
+          },
+          {
+            id: 'rr-q8',
+            question: 'Using a country case study, evaluate attempts to ensure food security.',
+            marks: 10,
+            difficulty: 'hard',
+            modelAnswer: 'Case study: India. Local attempts: food banks in cities, urban gardens increasing. National strategies: Public Distribution System providing subsidized food, Green Revolution increasing yields, recent focus on sustainable agriculture. Success: significant reduction in famines, increased production. Limitations: continuing malnutrition, environmental costs, inequitable distribution. Need for continued innovation and better distribution.',
+            markingCriteria: {
+              breakdown: [
+                'Local food security attempts (3 marks)',
+                'National strategies described (3 marks)',
+                'Evaluation of success and limitations (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Resource Reliance'
+          },
+          {
+            id: 'rr-q9',
+            question: 'Assess the sustainability of different food production strategies.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Intensive farming: high yields but environmental damage, soil depletion, chemical pollution. Organic farming: sustainable but lower yields, higher costs. GM crops: potential for higher yields but unknown long-term effects. Hydroponics: efficient water use but high energy requirements. Urban agriculture: reduces transport but limited scale. Most sustainable approach combines methods.',
+            markingCriteria: {
+              breakdown: [
+                'Intensive vs organic approaches (3 marks)',
+                'Technology solutions assessment (3 marks)',
+                'Overall sustainability evaluation (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Resource Reliance'
+          },
+          {
+            id: 'rr-q10',
+            question: 'Evaluate the role of ethical consumerism in sustainable food systems.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Fair trade: ensures farmers receive fair prices, improves working conditions, but limited market share. Food waste reduction: significant potential impact as 30% food wasted globally, but requires behavior change. Local sourcing: reduces transport emissions but may not always be more sustainable overall. Consumer power growing but needs education and policy support to maximize impact.',
+            markingCriteria: {
+              breakdown: [
+                'Fair trade benefits and limitations (3 marks)',
+                'Food waste and local sourcing issues (3 marks)',
+                'Overall evaluation of consumer role (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Resource Reliance'
+          }
+        ]
       },
       {
         id: 'human-geography-fieldwork',
         name: 'Human Geography Fieldwork',
-        questions: []
+        questions: [
+          {
+            id: 'hgf-q1',
+            question: 'Explain the importance of selecting appropriate study locations for human geography fieldwork.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Study locations should be representative of the research question, accessible and safe, provide sufficient data opportunities, allow for comparisons if needed. Urban studies require diverse areas (CBD, suburbs, inner city), retail studies need contrasting shopping areas. Location choice affects data quality, reliability, and generalizability of findings.',
+            markingCriteria: {
+              breakdown: [
+                'Criteria for location selection (3 marks)',
+                'Impact on research quality (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Human Geography Fieldwork'
+          },
+          {
+            id: 'hgf-q2',
+            question: 'Describe appropriate data collection methods for investigating urban land use.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Land use surveys: systematic mapping of different building types and functions. Building height measurements: for CBD analysis. Pedestrian counts: measuring footfall at different times/locations. Environmental quality surveys: scoring noise, cleanliness, safety. Questionnaires: asking residents about area perceptions. Photography: visual evidence of changes. GIS analysis: comparing current with historical maps.',
+            markingCriteria: {
+              breakdown: [
+                'Survey and measurement techniques (4 marks)',
+                'Data recording and analysis methods (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Human Geography Fieldwork'
+          },
+          {
+            id: 'hgf-q3',
+            question: 'Explain how to design effective questionnaires for geographical research.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Questions should be clear, unbiased, and relevant to research aims. Mix closed questions (easy to analyze) with open questions (detailed insights). Avoid leading questions, double questions, and complex terminology. Pilot test to identify problems. Consider cultural sensitivity and ethics. Keep length manageable to maintain response rates.',
+            markingCriteria: {
+              breakdown: [
+                'Question design principles (3 marks)',
+                'Testing and practical considerations (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Human Geography Fieldwork'
+          },
+          {
+            id: 'hgf-q4',
+            question: 'Describe sampling strategies for human geography investigations.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Random sampling: every person has equal chance, avoids bias but may miss important groups. Systematic sampling: every nth person, easier to implement. Stratified sampling: ensuring different groups represented (age, gender, income). Opportunistic sampling: convenient but potentially biased. Sample size should balance statistical reliability with practical constraints.',
+            markingCriteria: {
+              breakdown: [
+                'Random and systematic sampling (2 marks)',
+                'Stratified and opportunistic methods (2 marks)',
+                'Sample size considerations (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Human Geography Fieldwork'
+          },
+          {
+            id: 'hgf-q5',
+            question: 'Explain ethical considerations in human geography fieldwork.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Informed consent: explaining research purpose and getting permission. Confidentiality: protecting participant identity and personal information. Right to withdraw: participants can stop at any time. Cultural sensitivity: respecting local customs and beliefs. Avoiding harm: ensuring research doesn\'t negatively impact communities. Data protection: secure storage and appropriate use.',
+            markingCriteria: {
+              breakdown: [
+                'Consent and confidentiality (3 marks)',
+                'Cultural sensitivity and harm prevention (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Human Geography Fieldwork'
+          },
+          {
+            id: 'hgf-q6',
+            question: 'Describe methods for investigating retail patterns and shopping behavior.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Shop type surveys: categorizing different retail functions (comparison, convenience). Pedestrian flow counts: measuring footfall at different locations/times. Customer interviews: understanding shopping patterns, travel distance. Rent/property price analysis: identifying prime locations. Parking surveys: assessing accessibility. Sphere of influence mapping: plotting customer origins.',
+            markingCriteria: {
+              breakdown: [
+                'Survey and counting methods (4 marks)',
+                'Customer behavior and influence analysis (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Human Geography Fieldwork'
+          },
+          {
+            id: 'hgf-q7',
+            question: 'Explain how to measure and analyze urban environmental quality.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Environmental indicators: noise levels (decibel meter), air quality (visibility, smell), litter (counting/scoring), graffiti presence, building condition. Scoring systems: standardized 1-5 scales for comparison. Multiple site comparison: ensuring same times/conditions. Photographic evidence: documenting conditions. Statistical analysis: calculating means, identifying patterns.',
+            markingCriteria: {
+              breakdown: [
+                'Environmental measurement techniques (4 marks)',
+                'Scoring and analysis methods (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Human Geography Fieldwork'
+          },
+          {
+            id: 'hgf-q8',
+            question: 'Describe how to investigate housing quality and residential segregation.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Housing surveys: property type, age, condition, price data from estate agents. Demographic data: census information on ethnicity, income, education levels. Environmental quality: scoring neighborhood conditions. Deprivation indices: using official statistics. Mapping: GIS to show spatial patterns. Interviews: resident experiences of area. Need sensitivity around social issues.',
+            markingCriteria: {
+              breakdown: [
+                'Housing quality measurement (4 marks)',
+                'Demographic and social analysis (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Human Geography Fieldwork'
+          },
+          {
+            id: 'hgf-q9',
+            question: 'Evaluate the challenges of conducting fieldwork in urban environments.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Safety issues: traffic, crime, busy areas requiring careful planning. Access problems: private property, restricted areas, permission needed. Weather: affecting data collection and participant willingness. Time constraints: matching people\'s availability, business hours. Bias: non-response, unrepresentative samples. Data quality: distractions, noise affecting interviews. Need backup plans and flexible approaches.',
+            markingCriteria: {
+              breakdown: [
+                'Safety and access challenges (3 marks)',
+                'Data collection difficulties (3 marks)',
+                'Solutions and adaptations (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Human Geography Fieldwork'
+          },
+          {
+            id: 'hgf-q10',
+            question: 'Explain how human geography fieldwork can test urban models and theories.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Burgess model: testing concentric zones through land use surveys, rent analysis. Hoyt model: examining sectoral patterns along transport routes. CBD characteristics: measuring building heights, pedestrian flows, land values. Retail models: testing gravity model through customer travel distances. Results often show modifications needed due to local factors, planning policies, and historical development.',
+            markingCriteria: {
+              breakdown: [
+                'Urban model testing methods (4 marks)',
+                'Theory evaluation and limitations (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Human Geography Fieldwork'
+          }
+        ]
       },
       {
         id: 'geographical-skills',
         name: 'Geographical Skills',
-        questions: []
+        questions: [
+          {
+            id: 'gs-q1',
+            question: 'Explain how to select and construct appropriate maps for geographical data.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Choose map type based on data: choropleth for area data, dot maps for quantities, flow maps for movement. Consider scale appropriate for data detail and purpose. Include clear legend, north arrow, scale bar. Use appropriate color schemes avoiding bias. Ensure base map shows relevant features. Annotation should explain patterns without cluttering.',
+            markingCriteria: {
+              breakdown: [
+                'Map type selection criteria (3 marks)',
+                'Design and presentation elements (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Geographical Skills'
+          },
+          {
+            id: 'gs-q2',
+            question: 'Describe how to interpret and analyze cross-sections and contour maps.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Contour interpretation: close contours = steep slopes, wide spacing = gentle slopes, concentric circles = hills/depressions. Cross-sections: draw vertical profile showing height changes along a line. Calculate gradient using rise over run formula. Identify landforms: valleys (V-shapes pointing uphill), ridges, spurs. Use for route planning, flood risk assessment.',
+            markingCriteria: {
+              breakdown: [
+                'Contour interpretation techniques (4 marks)',
+                'Cross-section construction and analysis (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Geographical Skills'
+          },
+          {
+            id: 'gs-q3',
+            question: 'Explain how to use coordinates, scale, and distance on maps.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Grid references: 4-figure for 1km squares, 6-figure for 100m accuracy, eastings first then northings. Scale: representative fraction (1:50,000), linear scale bar, or statement. Distance: use string method or dividers for curved routes, straight-line measurement for direct distance. Consider map projection distortions for large areas.',
+            markingCriteria: {
+              breakdown: [
+                'Coordinate systems and grid references (3 marks)',
+                'Scale types and distance measurement (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Geographical Skills'
+          },
+          {
+            id: 'gs-q4',
+            question: 'Describe how to construct and interpret different types of graphs.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Bar charts: categorical data with clear categories. Histograms: continuous data with equal class intervals. Line graphs: time series or continuous relationships. Scatter graphs: relationships between variables, add best-fit line. Population pyramids: age-sex structure. Climate graphs: combining temperature lines with precipitation bars. Choose appropriate scales and labels.',
+            markingCriteria: {
+              breakdown: [
+                'Graph type selection and construction (4 marks)',
+                'Interpretation and analysis techniques (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Geographical Skills'
+          },
+          {
+            id: 'gs-q5',
+            question: 'Explain statistical techniques for analyzing geographical data.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Measures of central tendency: mean (affected by extremes), median (middle value), mode (most frequent). Measures of dispersion: range (difference between highest and lowest), quartiles and IQR (spread of middle 50%), standard deviation (average distance from mean). Percentage change formula: (new-old)/old × 100. Choose appropriate measure for data type.',
+            markingCriteria: {
+              breakdown: [
+                'Central tendency measures (3 marks)',
+                'Dispersion measures (3 marks)',
+                'Application and selection criteria (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Geographical Skills'
+          },
+          {
+            id: 'gs-q6',
+            question: 'Describe how to design effective fieldwork data collection sheets.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Clear layout: organized sections, adequate space for responses. Standardized recording: consistent units, scales, categories. Pre-coded options: tick boxes, rating scales for quick recording. Include: date, time, location, weather conditions. Instructions: clear guidance for consistent data collection. Pilot test: identify problems before main study. Consider digital vs paper options.',
+            markingCriteria: {
+              breakdown: [
+                'Design principles and layout (3 marks)',
+                'Standardization and testing (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Geographical Skills'
+          },
+          {
+            id: 'gs-q7',
+            question: 'Explain how to ensure accuracy and reliability in geographical measurements.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Calibrate equipment: check instruments before use. Repeat measurements: take multiple readings and calculate averages. Standardize methods: same technique, timing, conditions. Large sample sizes: reduce random error effects. Train team members: ensure consistent application. Record environmental conditions: note factors affecting measurements. Quality control: check for outliers and errors.',
+            markingCriteria: {
+              breakdown: [
+                'Equipment and measurement techniques (4 marks)',
+                'Quality control and error reduction (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Geographical Skills'
+          },
+          {
+            id: 'gs-q8',
+            question: 'Describe how to analyze relationships between geographical variables.',
+            marks: 8,
+            difficulty: 'hard',
+            modelAnswer: 'Scatter graphs: plot variables to visualize relationships. Correlation: positive (both increase), negative (one increases, other decreases), or no relationship. Best-fit lines: show trend direction and strength. Spearman\'s rank correlation: statistical test for relationship strength. Consider causation vs correlation: relationships don\'t prove cause and effect. Identify anomalies and explain outliers.',
+            markingCriteria: {
+              breakdown: [
+                'Visual analysis techniques (4 marks)',
+                'Statistical testing and interpretation (4 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Geographical Skills'
+          },
+          {
+            id: 'gs-q9',
+            question: 'Explain how to critically evaluate geographical data sources and methods.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Data source evaluation: consider accuracy, completeness, bias, date, scale. Primary data: you control collection but limited time/resources. Secondary data: broader coverage but may not fit purpose exactly. Method limitations: sampling bias, measurement errors, external factors. Reliability: consistency of results. Validity: measuring what intended. Suggest improvements for future studies.',
+            markingCriteria: {
+              breakdown: [
+                'Source evaluation criteria (3 marks)',
+                'Method limitations assessment (3 marks)',
+                'Improvement suggestions (3 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Geographical Skills'
+          },
+          {
+            id: 'gs-q10',
+            question: 'Evaluate the use of GIS in geographical analysis.',
+            marks: 9,
+            difficulty: 'hard',
+            modelAnswer: 'Advantages: multiple data layers, spatial analysis, quick updates, professional presentation. Can model scenarios, analyze patterns, measure distances/areas accurately. Useful for land use planning, hazard management, transport analysis. Limitations: expensive software, requires training, data quality issues, oversimplification of complex relationships. Not suitable for all geographical questions.',
+            markingCriteria: {
+              breakdown: [
+                'GIS capabilities and applications (4 marks)',
+                'Limitations and challenges (3 marks)',
+                'Overall evaluation (2 marks)'
+              ]
+            },
+            specReference: 'OCR Geography B - Geographical Skills'
+          }
+        ]
       }
     ]
   }
