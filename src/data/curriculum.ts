@@ -18499,6 +18499,106 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'OCR J277 1.1.3'
+          },
+          {
+            id: 'cs-q4',
+            question: 'Describe the components of Von Neumann architecture and explain their functions.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Von Neumann architecture components: Memory Address Register (MAR) - stores address of memory location to be accessed; Memory Data Register (MDR) - stores data being transferred to/from memory; Program Counter (PC) - stores address of next instruction; Accumulator - temporarily stores results of calculations performed by ALU.',
+            markingCriteria: {
+              breakdown: [
+                'Four components identified (4 marks)',
+                'Functions correctly explained (4 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.1.1'
+          },
+          {
+            id: 'cs-q5',
+            question: 'Explain what happens at each stage of the fetch-execute cycle in detail.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Fetch: Program Counter value copied to MAR, instruction at that address copied to MDR, then to Current Instruction Register. Decode: Control Unit interprets instruction and determines what needs to be done. Execute: Instruction carried out - data may be loaded to registers, ALU performs calculations, results stored. Program Counter incremented to point to next instruction.',
+            markingCriteria: {
+              breakdown: [
+                'Fetch stage detailed (2 marks)',
+                'Decode stage detailed (2 marks)',
+                'Execute stage detailed (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.1.1'
+          },
+          {
+            id: 'cs-q6',
+            question: 'Compare the performance impact of different cache sizes with examples.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Larger cache stores more frequently accessed data close to CPU, reducing memory access time. Small cache (e.g., 256KB) may require frequent memory access, slowing performance. Large cache (e.g., 8MB) allows more data to be readily available, significantly improving performance for complex applications.',
+            markingCriteria: {
+              breakdown: [
+                'Cache size impact explained (2 marks)',
+                'Appropriate examples given (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.1.2'
+          },
+          {
+            id: 'cs-q7',
+            question: 'Analyze how multi-core processors improve system performance.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Multi-core processors allow parallel processing where different cores can execute separate threads simultaneously. This improves multitasking capability, reduces processing time for complex calculations, and enables better performance in applications designed for parallel execution. However, not all software can take advantage of multiple cores.',
+            markingCriteria: {
+              breakdown: [
+                'Parallel processing concept explained (2 marks)',
+                'Performance benefits identified (2 marks)',
+                'Limitations mentioned (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.1.2'
+          },
+          {
+            id: 'cs-q8',
+            question: 'Evaluate the advantages and disadvantages of embedded systems.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Advantages: Dedicated function means optimized performance, low power consumption, cost-effective for mass production, reliable operation. Disadvantages: Limited functionality, difficult to upgrade, may be hard to repair, specialized knowledge required for programming.',
+            markingCriteria: {
+              breakdown: [
+                'Three advantages identified and explained (3 marks)',
+                'Three disadvantages identified and explained (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.1.3'
+          },
+          {
+            id: 'cs-q9',
+            question: 'Describe three different types of embedded systems found in modern cars.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Engine Management System: controls fuel injection, ignition timing, monitors engine performance. Anti-lock Braking System (ABS): prevents wheel lockup during braking, improves safety. Entertainment System: manages radio, navigation, climate control, provides user interface.',
+            markingCriteria: {
+              breakdown: [
+                'Three different embedded systems identified (3 marks)',
+                'Functions correctly described (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.1.3'
+          },
+          {
+            id: 'cs-q10',
+            question: 'Explain how clock speed affects CPU performance and give typical examples.',
+            marks: 4,
+            difficulty: 'easy',
+            modelAnswer: 'Clock speed determines how many instruction cycles per second the CPU can complete. Higher clock speed means more instructions processed per second, leading to faster performance. Example: 2.4 GHz processor can complete 2.4 billion cycles per second, while 3.2 GHz can complete 3.2 billion cycles per second.',
+            markingCriteria: {
+              breakdown: [
+                'Clock speed impact explained (2 marks)',
+                'Appropriate examples with units (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.1.2'
           }
         ]
       },
@@ -18507,7 +18607,7 @@ export const curriculum: Subject[] = [
         name: 'Memory and Storage',
         questions: [
           {
-            id: 'cs-q4',
+            id: 'cs-q11',
             question: 'Compare RAM and ROM, explaining their purpose and characteristics.',
             marks: 6,
             difficulty: 'medium',
@@ -18521,7 +18621,7 @@ export const curriculum: Subject[] = [
             specReference: 'OCR J277 1.2.1'
           },
           {
-            id: 'cs-q5',
+            id: 'cs-q12',
             question: 'Calculate the file size in bytes for a 5-minute song sampled at 44,100 Hz with 16-bit depth.',
             marks: 4,
             difficulty: 'medium',
@@ -18537,7 +18637,7 @@ export const curriculum: Subject[] = [
             specReference: 'OCR J277 1.2.3'
           },
           {
-            id: 'cs-q6',
+            id: 'cs-q13',
             question: 'Convert the denary number 147 to binary and then to hexadecimal.',
             marks: 4,
             difficulty: 'medium',
@@ -18550,6 +18650,104 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'OCR J277 1.2.4'
+          },
+          {
+            id: 'cs-q14',
+            question: 'Explain the purpose of virtual memory and how it works.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Virtual memory extends available RAM by using secondary storage (hard drive) as additional memory space. When RAM is full, least recently used data is moved to virtual memory on the hard drive. When that data is needed again, it is moved back to RAM. This allows running of larger programs than physical RAM would normally allow.',
+            markingCriteria: {
+              breakdown: [
+                'Purpose of virtual memory explained (2 marks)',
+                'How virtual memory works (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.2.1'
+          },
+          {
+            id: 'cs-q15',
+            question: 'Describe three types of secondary storage and their typical uses.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Hard Disk Drive (HDD): magnetic storage, large capacity, used for long-term file storage. Solid State Drive (SSD): flash memory, fast access, used for operating systems and frequently accessed programs. Optical disc (CD/DVD/Blu-ray): laser-read storage, portable, used for software distribution and media storage.',
+            markingCriteria: {
+              breakdown: [
+                'Three storage types identified (3 marks)',
+                'Appropriate uses described (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.2.2'
+          },
+          {
+            id: 'cs-q16',
+            question: 'Calculate the storage requirement for a digital image that is 1920 pixels wide, 1080 pixels high, with 24-bit colour depth.',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'Image size = width × height × colour depth = 1920 × 1080 × 24 = 49,766,400 bits. Convert to bytes: 49,766,400 ÷ 8 = 6,220,800 bytes or approximately 6.2 MB.',
+            markingCriteria: {
+              breakdown: [
+                'Correct formula and calculation (2 marks)',
+                'Correct conversion to bytes (1 mark)'
+              ]
+            },
+            specReference: 'OCR J277 1.2.3'
+          },
+          {
+            id: 'cs-q17',
+            question: 'Explain the difference between lossy and lossless compression with examples.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Lossy compression reduces file size by permanently removing some data, resulting in quality loss but smaller files. Examples: JPEG images, MP3 audio. Lossless compression reduces file size without losing any data, allowing perfect reconstruction. Examples: ZIP files, PNG images.',
+            markingCriteria: {
+              breakdown: [
+                'Lossy compression explained with example (3 marks)',
+                'Lossless compression explained with example (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.2.5'
+          },
+          {
+            id: 'cs-q18',
+            question: 'Convert 1101011 binary to decimal and then to hexadecimal.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Binary 1101011 = (1×64) + (1×32) + (0×16) + (1×8) + (0×4) + (1×2) + (1×1) = 64 + 32 + 8 + 2 + 1 = 107 decimal. 107 ÷ 16 = 6 remainder 11. 6 ÷ 16 = 0 remainder 6. Hexadecimal = 6B.',
+            markingCriteria: {
+              breakdown: [
+                'Correct binary to decimal conversion (2 marks)',
+                'Correct decimal to hexadecimal conversion (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.2.4'
+          },
+          {
+            id: 'cs-q19',
+            question: 'Explain how cache memory improves system performance.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Cache memory stores frequently accessed data close to the CPU, reducing the time needed to fetch data from main memory. When the CPU needs data, it first checks cache - if found (cache hit), data is retrieved quickly. If not found (cache miss), data is retrieved from slower main memory and copied to cache for future use.',
+            markingCriteria: {
+              breakdown: [
+                'Cache purpose explained (2 marks)',
+                'Cache hit/miss process described (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.2.1'
+          },
+          {
+            id: 'cs-q20',
+            question: 'Compare the advantages and disadvantages of SSD versus HDD storage.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'SSD advantages: faster access times, no moving parts (more reliable), lower power consumption, silent operation. SSD disadvantages: higher cost per GB, limited write cycles. HDD advantages: lower cost per GB, higher capacity available, unlimited write cycles. HDD disadvantages: slower access, mechanical parts can fail, higher power consumption, noise.',
+            markingCriteria: {
+              breakdown: [
+                'SSD advantages and disadvantages (4 marks)',
+                'HDD advantages and disadvantages (4 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.2.2'
           }
         ]
       },
@@ -18558,7 +18756,7 @@ export const curriculum: Subject[] = [
         name: 'Computer Networks and Protocols',
         questions: [
           {
-            id: 'cs-q7',
+            id: 'cs-q21',
             question: 'Explain the difference between LAN and WAN networks, giving examples of each.',
             marks: 4,
             difficulty: 'easy',
@@ -18572,7 +18770,7 @@ export const curriculum: Subject[] = [
             specReference: 'OCR J277 1.3.1'
           },
           {
-            id: 'cs-q8',
+            id: 'cs-q22',
             question: 'Describe the purpose of IP addresses and MAC addresses in networking.',
             marks: 4,
             difficulty: 'medium',
@@ -18584,6 +18782,117 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'OCR J277 1.3.2'
+          },
+          {
+            id: 'cs-q23',
+            question: 'Compare client-server and peer-to-peer network models.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Client-server: central server provides resources and services to client computers, easier to manage security and backups, single point of failure. Peer-to-peer: all computers are equal, can share resources directly, no central control, harder to manage security.',
+            markingCriteria: {
+              breakdown: [
+                'Client-server characteristics (3 marks)',
+                'Peer-to-peer characteristics (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.3.1'
+          },
+          {
+            id: 'cs-q24',
+            question: 'Describe three network hardware components and their functions.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Router: connects different networks together and routes data between them. Switch: connects devices within a network and manages data flow between them. Network Interface Card (NIC): allows devices to connect to a network and handles network communication.',
+            markingCriteria: {
+              breakdown: [
+                'Three hardware components identified (3 marks)',
+                'Functions correctly explained (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.3.1'
+          },
+          {
+            id: 'cs-q25',
+            question: 'Explain how DNS (Domain Name System) works.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'DNS translates human-readable domain names (like www.example.com) into IP addresses that computers can understand. When you enter a URL, your computer queries DNS servers to find the corresponding IP address, then connects to that IP address to access the website.',
+            markingCriteria: {
+              breakdown: [
+                'DNS purpose explained (2 marks)',
+                'DNS process described (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.3.1'
+          },
+          {
+            id: 'cs-q26',
+            question: 'Compare wired and wireless network connections.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Wired connections (Ethernet): faster data transfer, more secure, more reliable, requires physical cables. Wireless connections (Wi-Fi): convenient mobility, easier installation, slower than wired, less secure, can suffer interference.',
+            markingCriteria: {
+              breakdown: [
+                'Wired connection advantages and disadvantages (3 marks)',
+                'Wireless connection advantages and disadvantages (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.3.2'
+          },
+          {
+            id: 'cs-q27',
+            question: 'Describe the purpose of common network protocols: HTTP, HTTPS, FTP, SMTP.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'HTTP (HyperText Transfer Protocol): transfers web pages between web servers and browsers. HTTPS: secure version of HTTP using encryption. FTP (File Transfer Protocol): transfers files between computers over a network. SMTP (Simple Mail Transfer Protocol): sends email messages between servers.',
+            markingCriteria: {
+              breakdown: [
+                'Four protocols identified and explained (8 marks - 2 each)'
+              ]
+            },
+            specReference: 'OCR J277 1.3.2'
+          },
+          {
+            id: 'cs-q28',
+            question: 'Explain the benefits of using network layers and protocols.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Network layers allow complex networking to be broken down into manageable sections. Each layer has specific functions and can be developed independently. This modular approach makes networks easier to troubleshoot, update, and maintain. Protocols ensure different devices can communicate effectively.',
+            markingCriteria: {
+              breakdown: [
+                'Modular approach benefits (2 marks)',
+                'Protocol benefits (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.3.2'
+          },
+          {
+            id: 'cs-q29',
+            question: 'Describe star and mesh network topologies with their advantages and disadvantages.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Star topology: all devices connect to a central hub/switch. Advantages: easy to add devices, central management, if one connection fails others continue. Disadvantages: single point of failure at center, requires more cable. Mesh topology: every device connects to every other device. Advantages: no single point of failure, multiple paths for data. Disadvantages: expensive, complex to set up.',
+            markingCriteria: {
+              breakdown: [
+                'Star topology description and pros/cons (4 marks)',
+                'Mesh topology description and pros/cons (4 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.3.1'
+          },
+          {
+            id: 'cs-q30',
+            question: 'Explain what factors affect network performance and how to improve it.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Factors affecting performance: bandwidth (data transfer capacity), number of users (more users = slower speeds), type of network traffic, hardware quality. Improvements: increase bandwidth, use quality network hardware, implement Quality of Service (QoS), reduce network congestion through traffic management.',
+            markingCriteria: {
+              breakdown: [
+                'Factors affecting performance identified (3 marks)',
+                'Improvement methods described (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.3.1'
           }
         ]
       },
@@ -18592,7 +18901,7 @@ export const curriculum: Subject[] = [
         name: 'Network Security',
         questions: [
           {
-            id: 'cs-q9',
+            id: 'cs-q31',
             question: 'Describe three types of malware and explain how each one attacks computer systems.',
             marks: 6,
             difficulty: 'medium',
@@ -18606,7 +18915,7 @@ export const curriculum: Subject[] = [
             specReference: 'OCR J277 1.4.1'
           },
           {
-            id: 'cs-q10',
+            id: 'cs-q32',
             question: 'Explain how firewalls and encryption help prevent network security threats.',
             marks: 4,
             difficulty: 'medium',
@@ -18618,6 +18927,118 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'OCR J277 1.4.2'
+          },
+          {
+            id: 'cs-q33',
+            question: 'Describe what social engineering is and give three examples of social engineering attacks.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Social engineering manipulates people to reveal confidential information or perform actions that compromise security. Examples: Phishing - fake emails requesting personal information; Pretexting - creating false scenarios to gain trust; Baiting - offering something enticing to trick users into downloading malware.',
+            markingCriteria: {
+              breakdown: [
+                'Social engineering defined (2 marks)',
+                'Three examples with explanations (4 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.4.1'
+          },
+          {
+            id: 'cs-q34',
+            question: 'Explain what a brute-force attack is and how to prevent it.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Brute-force attack systematically tries all possible combinations of passwords until the correct one is found. Prevention methods: use strong, complex passwords; implement account lockout after failed attempts; use two-factor authentication; limit login attempts per time period.',
+            markingCriteria: {
+              breakdown: [
+                'Brute-force attack explained (2 marks)',
+                'Prevention methods described (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.4.1'
+          },
+          {
+            id: 'cs-q35',
+            question: 'Describe what a Denial of Service (DoS) attack is and its impact.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'DoS attack floods a network or server with traffic to make it unavailable to legitimate users. Impact includes service disruption, loss of business revenue, damage to reputation, and potential data loss during system recovery.',
+            markingCriteria: {
+              breakdown: [
+                'DoS attack explained (2 marks)',
+                'Impact described (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.4.1'
+          },
+          {
+            id: 'cs-q36',
+            question: 'Explain what SQL injection is and how it can be prevented.',
+            marks: 5,
+            difficulty: 'hard',
+            modelAnswer: 'SQL injection involves inserting malicious SQL code into input fields to gain unauthorized access to databases. Attackers can view, modify, or delete data. Prevention: use parameterized queries, validate user input, limit database permissions, use stored procedures.',
+            markingCriteria: {
+              breakdown: [
+                'SQL injection explained (2 marks)',
+                'Prevention methods described (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.4.1'
+          },
+          {
+            id: 'cs-q37',
+            question: 'Describe penetration testing and explain its importance.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Penetration testing involves authorized simulated attacks on computer systems to identify security vulnerabilities. Importance: finds weaknesses before real attackers do, helps improve security measures, ensures compliance with security standards, protects sensitive data.',
+            markingCriteria: {
+              breakdown: [
+                'Penetration testing defined (2 marks)',
+                'Importance explained (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.4.2'
+          },
+          {
+            id: 'cs-q38',
+            question: 'Explain the importance of user access levels and authentication in network security.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'User access levels ensure users only access resources they need for their role, reducing security risks. Authentication verifies user identity before granting access. This prevents unauthorized access, protects sensitive data, maintains audit trails, and follows principle of least privilege.',
+            markingCriteria: {
+              breakdown: [
+                'User access levels explained (3 marks)',
+                'Authentication importance explained (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.4.2'
+          },
+          {
+            id: 'cs-q39',
+            question: 'Describe what physical security measures are and why they are important for computer systems.',
+            marks: 5,
+            difficulty: 'easy',
+            modelAnswer: 'Physical security protects computer hardware and facilities from physical threats. Measures include locks, security cameras, access cards, secure server rooms. Important because: prevents theft of equipment, stops unauthorized physical access to systems, protects against environmental damage, maintains data center security.',
+            markingCriteria: {
+              breakdown: [
+                'Physical security measures described (2 marks)',
+                'Importance explained (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.4.2'
+          },
+          {
+            id: 'cs-q40',
+            question: 'Compare different types of network security software and their functions.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Anti-malware software: detects and removes viruses, worms, trojans and other malicious programs. Firewall software: controls network traffic based on security rules. VPN software: creates secure encrypted connections over public networks. Each provides different layers of protection for comprehensive security.',
+            markingCriteria: {
+              breakdown: [
+                'Three types of security software identified (3 marks)',
+                'Functions correctly explained (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.4.2'
           }
         ]
       },
@@ -18626,7 +19047,7 @@ export const curriculum: Subject[] = [
         name: 'Algorithms and Programming',
         questions: [
           {
-            id: 'cs-q11',
+            id: 'cs-q41',
             question: 'Write pseudocode for a linear search algorithm to find a target value in an array.',
             marks: 5,
             difficulty: 'medium',
@@ -18641,7 +19062,7 @@ export const curriculum: Subject[] = [
             specReference: 'OCR J277 2.1.3'
           },
           {
-            id: 'cs-q12',
+            id: 'cs-q42',
             question: 'Explain the difference between a compiler and an interpreter.',
             marks: 4,
             difficulty: 'medium',
@@ -18653,6 +19074,117 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'OCR J277 2.5.1'
+          },
+          {
+            id: 'cs-q43',
+            question: 'Write pseudocode for a bubble sort algorithm to sort an array in ascending order.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'BEGIN\n  INPUT array\n  FOR i = 0 TO length(array) - 2\n    FOR j = 0 TO length(array) - 2 - i\n      IF array[j] > array[j+1] THEN\n        temp = array[j]\n        array[j] = array[j+1]\n        array[j+1] = temp\n      ENDIF\n    ENDFOR\n  ENDFOR\n  OUTPUT array\nEND',
+            markingCriteria: {
+              breakdown: [
+                'Correct nested loop structure (3 marks)',
+                'Correct comparison and swap logic (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 2.1.3'
+          },
+          {
+            id: 'cs-q44',
+            question: 'Explain the principles of computational thinking: decomposition, abstraction, and algorithmic thinking.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Decomposition: breaking down complex problems into smaller, manageable parts. Abstraction: focusing on essential features while ignoring unnecessary details. Algorithmic thinking: developing step-by-step solutions that can be implemented as computer programs.',
+            markingCriteria: {
+              breakdown: [
+                'Decomposition explained (2 marks)',
+                'Abstraction explained (2 marks)',
+                'Algorithmic thinking explained (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 2.1.1'
+          },
+          {
+            id: 'cs-q45',
+            question: 'Compare binary search and linear search algorithms.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Binary search: requires sorted data, divides search space in half each time, faster for large datasets (O(log n)). Linear search: works with unsorted data, checks each element sequentially, slower for large datasets (O(n)), simpler to implement.',
+            markingCriteria: {
+              breakdown: [
+                'Binary search characteristics (3 marks)',
+                'Linear search characteristics (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 2.1.3'
+          },
+          {
+            id: 'cs-q46',
+            question: 'Describe the different data types used in programming and give examples.',
+            marks: 8,
+            difficulty: 'easy',
+            modelAnswer: 'Integer: whole numbers (e.g., 42, -15). Real/Float: decimal numbers (e.g., 3.14, -2.5). Boolean: true/false values (e.g., true, false). Character: single characters (e.g., "A", "z"). String: sequences of characters (e.g., "Hello", "Computer Science").',
+            markingCriteria: {
+              breakdown: [
+                'Five data types identified with examples (8 marks - 1.6 each rounded)'
+              ]
+            },
+            specReference: 'OCR J277 2.2.2'
+          },
+          {
+            id: 'cs-q47',
+            question: 'Explain what validation and verification are in programming.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Validation: checking that input data is reasonable and acceptable (e.g., age cannot be negative). Verification: checking that data has been entered accurately (e.g., asking user to confirm password by typing it twice).',
+            markingCriteria: {
+              breakdown: [
+                'Validation explained with example (2 marks)',
+                'Verification explained with example (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 2.3.1'
+          },
+          {
+            id: 'cs-q48',
+            question: 'Describe three types of programming errors and how to identify them.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Syntax errors: incorrect program structure (e.g., missing semicolon), identified by compiler/interpreter. Logic errors: program runs but produces wrong results, identified by testing with known inputs. Runtime errors: program crashes during execution, identified when program stops working.',
+            markingCriteria: {
+              breakdown: [
+                'Three error types identified and explained (6 marks - 2 each)'
+              ]
+            },
+            specReference: 'OCR J277 2.3.2'
+          },
+          {
+            id: 'cs-q49',
+            question: 'Explain the difference between high-level and low-level programming languages.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'High-level languages: closer to human language, easier to read and write, portable across different systems, require translation (e.g., Python, Java). Low-level languages: closer to machine code, more efficient execution, hardware-specific, harder to write (e.g., Assembly, Machine Code).',
+            markingCriteria: {
+              breakdown: [
+                'High-level language characteristics with examples (3 marks)',
+                'Low-level language characteristics with examples (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 2.5.1'
+          },
+          {
+            id: 'cs-q50',
+            question: 'Describe the features of an Integrated Development Environment (IDE) and explain their benefits.',
+            marks: 6,
+            difficulty: 'easy',
+            modelAnswer: 'Code editor: provides syntax highlighting and auto-completion for easier coding. Debugger: helps find and fix errors by stepping through code. Compiler/Interpreter: translates code into executable form. Project management: organizes files and resources. These features improve productivity and reduce development time.',
+            markingCriteria: {
+              breakdown: [
+                'Four IDE features identified (4 marks)',
+                'Benefits explained (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 2.5.2'
           }
         ]
       },
@@ -18661,7 +19193,7 @@ export const curriculum: Subject[] = [
         name: 'Boolean Logic',
         questions: [
           {
-            id: 'cs-q13',
+            id: 'cs-q51',
             question: 'Complete the truth table for the logic expression: A AND (B OR C)',
             marks: 4,
             difficulty: 'medium',
@@ -18673,6 +19205,135 @@ export const curriculum: Subject[] = [
               ]
             },
             specReference: 'OCR J277 2.4'
+          },
+          {
+            id: 'cs-q52',
+            question: 'Draw logic gate symbols for AND, OR, and NOT gates.',
+            marks: 3,
+            difficulty: 'easy',
+            modelAnswer: 'AND gate: D-shaped symbol with flat left side and curved right side. OR gate: Shield-shaped symbol with curved left and right sides. NOT gate: Triangle with small circle at output.',
+            markingCriteria: {
+              breakdown: [
+                'Correct AND gate symbol (1 mark)',
+                'Correct OR gate symbol (1 mark)',
+                'Correct NOT gate symbol (1 mark)'
+              ]
+            },
+            specReference: 'OCR J277 2.4'
+          },
+          {
+            id: 'cs-q53',
+            question: 'Complete the truth table for: (A OR B) AND (NOT C)',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'A | B | C | A OR B | NOT C | (A OR B) AND (NOT C)\n0 | 0 | 0 |   0    |   1   |        0\n0 | 0 | 1 |   0    |   0   |        0\n0 | 1 | 0 |   1    |   1   |        1\n0 | 1 | 1 |   1    |   0   |        0\n1 | 0 | 0 |   1    |   1   |        1\n1 | 0 | 1 |   1    |   0   |        0\n1 | 1 | 0 |   1    |   1   |        1\n1 | 1 | 1 |   1    |   0   |        0',
+            markingCriteria: {
+              breakdown: [
+                'Correct A OR B column (2 marks)',
+                'Correct NOT C column (1 mark)',
+                'Correct final result column (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 2.4'
+          },
+          {
+            id: 'cs-q54',
+            question: 'Create a logic circuit diagram for the expression: A AND (B OR C)',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Circuit should show: inputs B and C connected to an OR gate, output of OR gate and input A connected to an AND gate, with final output from the AND gate.',
+            markingCriteria: {
+              breakdown: [
+                'Correct OR gate for (B OR C) (2 marks)',
+                'Correct AND gate for final expression (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 2.4'
+          },
+          {
+            id: 'cs-q55',
+            question: 'Explain how Boolean logic is used in programming with IF statements.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'Boolean logic in programming uses TRUE/FALSE conditions to control program flow. IF statements evaluate Boolean expressions: if condition is TRUE, code executes; if FALSE, code is skipped. Multiple conditions can be combined using AND, OR operators.',
+            markingCriteria: {
+              breakdown: [
+                'Boolean logic in programming explained (2 marks)',
+                'IF statement usage explained (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 2.4'
+          },
+          {
+            id: 'cs-q56',
+            question: 'Complete the truth table for: NOT (A AND B)',
+            marks: 3,
+            difficulty: 'medium',
+            modelAnswer: 'A | B | A AND B | NOT (A AND B)\n0 | 0 |    0    |      1\n0 | 1 |    0    |      1\n1 | 0 |    0    |      1\n1 | 1 |    1    |      0',
+            markingCriteria: {
+              breakdown: [
+                'Correct A AND B column (1 mark)',
+                'Correct NOT (A AND B) column (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 2.4'
+          },
+          {
+            id: 'cs-q57',
+            question: 'Design a logic circuit that outputs 1 only when exactly two out of three inputs (A, B, C) are 1.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Circuit needs: (A AND B AND NOT C) OR (A AND NOT B AND C) OR (NOT A AND B AND C). This requires three AND gates with appropriate NOT gates, connected to a final OR gate.',
+            markingCriteria: {
+              breakdown: [
+                'Correct Boolean expression identified (3 marks)',
+                'Correct circuit design described (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 2.4'
+          },
+          {
+            id: 'cs-q58',
+            question: 'Explain the relationship between Boolean algebra and computer circuits.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Boolean algebra provides mathematical foundation for digital circuits. Logic gates implement Boolean operations (AND, OR, NOT). Binary digits (0,1) represent FALSE/TRUE values. Complex circuits combine simple gates to perform calculations and make decisions in computers.',
+            markingCriteria: {
+              breakdown: [
+                'Boolean algebra foundation explained (2 marks)',
+                'Gate implementation described (2 marks)',
+                'Binary representation mentioned (1 mark)'
+              ]
+            },
+            specReference: 'OCR J277 2.4'
+          },
+          {
+            id: 'cs-q59',
+            question: 'Create a truth table for a three-input majority gate (output is 1 when majority of inputs are 1).',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'A | B | C | Output\n0 | 0 | 0 |   0\n0 | 0 | 1 |   0\n0 | 1 | 0 |   0\n0 | 1 | 1 |   1\n1 | 0 | 0 |   0\n1 | 0 | 1 |   1\n1 | 1 | 0 |   1\n1 | 1 | 1 |   1',
+            markingCriteria: {
+              breakdown: [
+                'Correct truth table structure (2 marks)',
+                'Correct output values (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 2.4'
+          },
+          {
+            id: 'cs-q60',
+            question: 'Simplify the Boolean expression: A AND (A OR B)',
+            marks: 3,
+            difficulty: 'hard',
+            modelAnswer: 'A AND (A OR B) simplifies to A. This is because if A is TRUE, then (A OR B) is always TRUE, so result is TRUE. If A is FALSE, then regardless of B, the AND operation with FALSE gives FALSE.',
+            markingCriteria: {
+              breakdown: [
+                'Correct simplified result (1 mark)',
+                'Correct explanation (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 2.4'
           }
         ]
       },
@@ -18681,7 +19342,7 @@ export const curriculum: Subject[] = [
         name: 'Ethical, Legal and Environmental Impacts',
         questions: [
           {
-            id: 'cs-q14',
+            id: 'cs-q61',
             question: 'Explain the purpose of the Data Protection Act 2018 and give two examples of how it protects personal data.',
             marks: 4,
             difficulty: 'medium',
@@ -18695,7 +19356,7 @@ export const curriculum: Subject[] = [
             specReference: 'OCR J277 1.6'
           },
           {
-            id: 'cs-q15',
+            id: 'cs-q62',
             question: 'Compare open source and proprietary software licenses, giving advantages of each.',
             marks: 6,
             difficulty: 'medium',
@@ -18704,6 +19365,115 @@ export const curriculum: Subject[] = [
               breakdown: [
                 'Open source characteristics and advantages (3 marks)',
                 'Proprietary characteristics and advantages (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.6'
+          },
+          {
+            id: 'cs-q63',
+            question: 'Describe the ethical issues surrounding artificial intelligence in decision-making.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Ethical issues include: bias in AI algorithms leading to unfair decisions, lack of transparency in how AI makes decisions, job displacement as AI replaces human workers, privacy concerns with data collection, accountability questions when AI makes mistakes.',
+            markingCriteria: {
+              breakdown: [
+                'Three ethical issues identified and explained (6 marks - 2 each)'
+              ]
+            },
+            specReference: 'OCR J277 1.6'
+          },
+          {
+            id: 'cs-q64',
+            question: 'Explain the Computer Misuse Act 1990 and give examples of offenses it covers.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'The Computer Misuse Act 1990 makes computer hacking and related activities illegal. Offenses include: unauthorized access to computer systems, unauthorized modification of computer data, creating or distributing malware.',
+            markingCriteria: {
+              breakdown: [
+                'Purpose of Computer Misuse Act explained (2 marks)',
+                'Three offenses identified (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.6'
+          },
+          {
+            id: 'cs-q65',
+            question: 'Describe environmental impacts of computing and suggest solutions.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Environmental impacts: high energy consumption by data centers, electronic waste from disposed devices, carbon emissions from manufacturing. Solutions: use renewable energy, improve device efficiency, promote recycling and repair, extend device lifespan.',
+            markingCriteria: {
+              breakdown: [
+                'Environmental impacts identified (3 marks)',
+                'Solutions suggested (3 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.6'
+          },
+          {
+            id: 'cs-q66',
+            question: 'Explain the Copyright, Designs and Patents Act 1988 and its relevance to software.',
+            marks: 4,
+            difficulty: 'medium',
+            modelAnswer: 'The Act protects intellectual property including software code, preventing unauthorized copying or distribution. It gives creators exclusive rights to their work and allows legal action against copyright infringement.',
+            markingCriteria: {
+              breakdown: [
+                'Act purpose explained (2 marks)',
+                'Software relevance explained (2 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.6'
+          },
+          {
+            id: 'cs-q67',
+            question: 'Discuss privacy concerns with social media and data collection.',
+            marks: 5,
+            difficulty: 'medium',
+            modelAnswer: 'Privacy concerns include: companies collecting personal data without clear consent, data being sold to third parties, location tracking, behavioral profiling for advertising, data breaches exposing personal information.',
+            markingCriteria: {
+              breakdown: [
+                'Five privacy concerns identified and explained (5 marks - 1 each)'
+              ]
+            },
+            specReference: 'OCR J277 1.6'
+          },
+          {
+            id: 'cs-q68',
+            question: 'Analyze the cultural impacts of digital technology on society.',
+            marks: 6,
+            difficulty: 'hard',
+            modelAnswer: 'Cultural impacts include: changes in communication patterns through social media, digital divide creating inequality, online communities forming new cultural groups, traditional media being replaced by digital platforms, changes in how people consume entertainment and news.',
+            markingCriteria: {
+              breakdown: [
+                'Three cultural impacts analyzed with examples (6 marks - 2 each)'
+              ]
+            },
+            specReference: 'OCR J277 1.6'
+          },
+          {
+            id: 'cs-q69',
+            question: 'Evaluate the pros and cons of cloud computing for businesses.',
+            marks: 8,
+            difficulty: 'medium',
+            modelAnswer: 'Pros: reduced IT costs, scalability, accessibility from anywhere, automatic updates, backup services. Cons: internet dependency, security concerns, loss of control over data, potential vendor lock-in, ongoing subscription costs.',
+            markingCriteria: {
+              breakdown: [
+                'Advantages identified and explained (4 marks)',
+                'Disadvantages identified and explained (4 marks)'
+              ]
+            },
+            specReference: 'OCR J277 1.6'
+          },
+          {
+            id: 'cs-q70',
+            question: 'Discuss the digital divide and its impact on society.',
+            marks: 6,
+            difficulty: 'medium',
+            modelAnswer: 'Digital divide is the gap between those with access to modern technology and those without. Impacts include: educational disadvantages for students without internet access, employment barriers for those lacking digital skills, healthcare disparities in telemedicine access, social isolation from digital communication.',
+            markingCriteria: {
+              breakdown: [
+                'Digital divide defined (2 marks)',
+                'Four impacts explained (4 marks)'
               ]
             },
             specReference: 'OCR J277 1.6'
