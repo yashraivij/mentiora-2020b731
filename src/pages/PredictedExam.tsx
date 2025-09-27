@@ -1107,6 +1107,185 @@ I was still silent. I am not naturally a deceitful person, but I thought it bett
     console.log('subject name:', subject?.name);
     const questions: ExamQuestion[] = [];
     
+    // Special handling for English Literature Edexcel 2026 Predicted Exam
+    if (subjectId === 'english-literature-edexcel') {
+      return [
+        // Section A - Shakespeare (40 marks) - Students choose ONE question
+        {
+          id: 'macbeth-2026',
+          questionNumber: 1,
+          text: `🎭 SECTION A - SHAKESPEARE (40 marks)
+Answer ONE question on the play you have studied.
+
+📚 MACBETH
+
+Starting with this extract, explore how Shakespeare presents ambition and its consequences in Macbeth.
+
+📖 EXTRACT:
+${getShakespeareExtract('macbeth')}
+
+Write about:
+• how ambition is shown in this extract
+• how ambition is shown in the play as a whole
+
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section A - Shakespeare'
+        },
+        
+        {
+          id: 'romeo-juliet-2026',
+          questionNumber: 1,
+          text: `🎭 SECTION A - SHAKESPEARE (40 marks)
+Answer ONE question on the play you have studied.
+
+📚 ROMEO AND JULIET
+
+Starting with this extract, explore how Shakespeare presents love as a powerful force in Romeo and Juliet.
+
+📖 EXTRACT:
+${getShakespeareExtract('romeo-and-juliet')}
+
+Write about:
+• how love is shown in this extract
+• how love is shown in the play as a whole
+
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section A - Shakespeare'
+        },
+        
+        {
+          id: 'tempest-2026',
+          questionNumber: 1,
+          text: `🎭 SECTION A - SHAKESPEARE (40 marks)
+Answer ONE question on the play you have studied.
+
+📚 THE TEMPEST
+
+Starting with this extract, explore how Shakespeare presents the theme of power and control in The Tempest.
+
+📖 EXTRACT:
+${getShakespeareExtract('the-tempest')}
+
+Write about:
+• how power is shown in this extract
+• how power is shown in the play as a whole
+
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section A - Shakespeare'
+        },
+        
+        {
+          id: 'merchant-venice-2026',
+          questionNumber: 1,
+          text: `🎭 SECTION A - SHAKESPEARE (40 marks)
+Answer ONE question on the play you have studied.
+
+📚 THE MERCHANT OF VENICE
+
+Starting with this extract, explore how Shakespeare presents justice and mercy in The Merchant of Venice.
+
+📖 EXTRACT:
+${getShakespeareExtract('merchant-of-venice')}
+
+Write about:
+• how justice and mercy are shown in this extract
+• how they are shown in the play as a whole
+
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section A - Shakespeare'
+        },
+        
+        // Section B - Post-1914 British Literature (40 marks)
+        {
+          id: 'boys-dont-cry-2026',
+          questionNumber: 2,
+          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+Answer ONE question on the modern text you have studied.
+
+📖 BOYS DON'T CRY - Malorie Blackman
+
+How does Blackman present gender and identity in Boys Don't Cry?
+
+Write about:
+• how traditional masculine identity is challenged in the novel
+• the impact of teenage pregnancy on gender expectations
+• how characters navigate societal pressures about gender roles
+• the relationship between identity and responsibility
+
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section B - Post-1914 Literature'
+        },
+
+        {
+          id: 'inspector-calls-2026',
+          questionNumber: 2,
+          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+Answer ONE question on the modern text you have studied.
+
+📖 AN INSPECTOR CALLS - J.B. Priestley
+
+How does Priestley present responsibility and social class in An Inspector Calls?
+
+Write about:
+• how different characters respond to their social responsibilities
+• the presentation of class divisions and privilege
+• how the Inspector challenges the family's attitudes
+• the relevance of these themes to 1945 and 1912
+
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section B - Post-1914 Literature'
+        },
+
+        {
+          id: 'blood-brothers-2026',
+          questionNumber: 2,
+          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+Answer ONE question on the modern text you have studied.
+
+📖 BLOOD BROTHERS - Willy Russell
+
+How does Russell present class inequality and fate in Blood Brothers?
+
+Write about:
+• how class differences affect the characters' lives
+• the role of fate and superstition in the play
+• how social expectations limit the characters
+• the impact of these themes on the tragic ending
+
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section B - Post-1914 Literature'
+        },
+
+        {
+          id: 'animal-farm-2026',
+          questionNumber: 2,
+          text: `📚 SECTION B - POST-1914 BRITISH LITERATURE (40 marks)
+Answer ONE question on the modern text you have studied.
+
+📖 ANIMAL FARM - George Orwell
+
+How does Orwell present corruption and power in Animal Farm?
+
+Write about:
+• how power corrupts the leaders on the farm
+• the methods used to control the other animals
+• how the original ideals are betrayed
+• the relevance of these themes to human society
+
+[30 marks AO1, AO2, AO3 + 4 marks AO4 SPaG]`,
+          marks: 34,
+          section: 'Section B - Post-1914 Literature'
+        }
+      ];
+    }
+    
     // Special handling for English Literature premium exam format
     if (subjectId === 'english-literature') {
       // Section A: Shakespeare plays
