@@ -17828,7 +17828,7 @@ export const curriculum: Subject[] = [
   },
   {
     id: 'spanish-aqa',
-    name: 'Spanish (AQA GCSE)',
+    name: 'Spanish (AQA)',
     topics: [
       {
         id: 'identity-relationships',
